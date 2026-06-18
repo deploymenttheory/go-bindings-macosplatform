@@ -5,8 +5,8 @@ package config
 import (
 	"testing"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/examples/lulu/rules"
-	"github.com/deploymenttheory/go-bindings-macosplatform/examples/lulu/shared"
+	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/rules"
+	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/shared"
 )
 
 const yamlDoc = `

@@ -10,7 +10,7 @@ import (
 )
 
 // ActivateExtension submits an OSSystemExtensionRequest to install/activate the
-// network system extension with the given bundle identifier, mirroring LuLu's
+// network system extension with the given bundle identifier, mirroring Warden's
 // extension activation. The system presents its own approval UI; a full app
 // would also set a request delegate to observe completion.
 //

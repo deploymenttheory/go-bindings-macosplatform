@@ -1,8 +1,8 @@
 //go:build darwin
 
 // Package shared holds the models, constants, and XPC protocol descriptors used
-// by both the LuLu network-extension daemon and the controlling app — mirroring
-// LuLu's Shared/ directory (Rule, consts, XPCDaemonProto, XPCUserProto).
+// by both the Warden network-extension daemon and the controlling app — mirroring
+// Warden's Shared/ directory (Rule, consts, XPCDaemonProto, XPCUserProto).
 package shared
 
 // Rule states: the verdict a rule encodes for a flow.
@@ -32,10 +32,10 @@ const (
 // DaemonMachServiceName is the registered mach service the daemon vends and the
 // app connects to. A real deployment uses a team-prefixed name matching the
 // extension's NEMachServiceName entitlement.
-const DaemonMachServiceName = "com.example.lulu.daemon"
+const DaemonMachServiceName = "com.example.warden.daemon"
 
 // Protocol names for the runtime-built ObjC protocols used over NSXPCConnection.
 const (
-	DaemonProtocolName = "LuLuDaemonProtocol"
-	UserProtocolName   = "LuLuUserProtocol"
+	DaemonProtocolName = "WardenDaemonProtocol"
+	UserProtocolName   = "WardenUserProtocol"
 )

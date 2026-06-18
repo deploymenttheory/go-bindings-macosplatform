@@ -4,7 +4,7 @@ package shared
 
 import rt "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 
-// DaemonProtocol describes the daemon-side XPC interface (LuLu's XPCDaemonProto):
+// DaemonProtocol describes the daemon-side XPC interface (Warden's XPCDaemonProto):
 // the app sends these to the extension's remote-object proxy. Reply-bearing
 // methods carry their result in a reply block; fire-and-forget mutators do not.
 func DaemonProtocol() rt.XPCProtocol {
@@ -24,7 +24,7 @@ func DaemonProtocol() rt.XPCProtocol {
 	}
 }
 
-// UserProtocol describes the app-side XPC interface (LuLu's XPCUserProto): the
+// UserProtocol describes the app-side XPC interface (Warden's XPCUserProto): the
 // daemon sends these to the app's exported object — a rules-changed notification
 // and an alert that expects the user's decision in its reply.
 func UserProtocol() rt.XPCProtocol {

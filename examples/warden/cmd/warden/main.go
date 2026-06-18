@@ -1,19 +1,19 @@
 //go:build darwin
 
-// Command lulu is the LuLu controlling app (CLI form): it activates/deactivates
+// Command warden is the Warden controlling app (CLI form): it activates/deactivates
 // the network system extension and manages firewall rules over XPC. Mirrors the
-// control surface of LuLu's App/ target.
+// control surface of Warden's App/ target.
 //
 // Usage:
 //
-//	lulu activate                 # submit the system-extension activation request
-//	lulu deactivate               # submit the deactivation request
-//	lulu list                     # list rules from the daemon
-//	lulu allow <path> [host]      # add an allow rule for a process (+ optional endpoint)
-//	lulu block <path> [host]      # add a block rule
-//	lulu delete <key> <uuid>      # delete a rule
-//	lulu apply <file.yaml|json>   # declaratively reconcile the firewall to a config
-//	lulu export <file.yaml|json>  # write the current rules as a config document
+//	warden activate                 # submit the system-extension activation request
+//	warden deactivate               # submit the deactivation request
+//	warden list                     # list rules from the daemon
+//	warden allow <path> [host]      # add an allow rule for a process (+ optional endpoint)
+//	warden block <path> [host]      # add a block rule
+//	warden delete <key> <uuid>      # delete a rule
+//	warden apply <file.yaml|json>   # declaratively reconcile the firewall to a config
+//	warden export <file.yaml|json>  # write the current rules as a config document
 package main
 
 import (
@@ -24,14 +24,14 @@ import (
 	"strings"
 	"time"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/examples/lulu/app"
-	"github.com/deploymenttheory/go-bindings-macosplatform/examples/lulu/config"
-	"github.com/deploymenttheory/go-bindings-macosplatform/examples/lulu/shared"
+	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/app"
+	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/config"
+	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/shared"
 )
 
 // extensionBundleID is the network extension's bundle identifier. A real build
 // uses the team-prefixed identifier embedded in the signed app.
-const extensionBundleID = "com.example.lulu.extension"
+const extensionBundleID = "com.example.warden.extension"
 
 func main() {
 	if len(os.Args) < 2 {
@@ -197,7 +197,7 @@ func newUUID() string {
 }
 
 func usage() {
-	fmt.Fprint(os.Stderr, `usage: lulu <command>
+	fmt.Fprint(os.Stderr, `usage: warden <command>
 
   activate                 submit the system-extension activation request
   deactivate               submit the deactivation request

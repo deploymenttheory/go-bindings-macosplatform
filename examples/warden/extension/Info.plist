@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Info.plist for the LuLu network system extension.
+  Info.plist for the Warden network system extension.
 
   The system instantiates NSExtensionPrincipalClass to filter flows. Our Go
   daemon registers an Objective-C class of this exact name at startup
-  (extension.ProviderClassName = "LuLuFilterDataProvider"), subclassing
-  NEFilterDataProvider. The extension binary (cmd/luludaemon) must be embedded in
+  (extension.ProviderClassName = "WardenFilterDataProvider"), subclassing
+  NEFilterDataProvider. The extension binary (cmd/wardend) must be embedded in
   the host app at Contents/Library/SystemExtensions/<bundleid>.systemextension
   and code-signed.
 -->
 <plist version="1.0">
 <dict>
     <key>CFBundleIdentifier</key>
-    <string>com.example.lulu.extension</string>
+    <string>com.example.warden.extension</string>
     <key>CFBundleName</key>
-    <string>LuLuExtension</string>
+    <string>WardenExtension</string>
     <key>CFBundlePackageType</key>
     <string>SYSX</string>
     <key>CFBundleExecutable</key>
-    <string>luludaemon</string>
+    <string>wardend</string>
     <key>NSSystemExtensionUsageDescription</key>
-    <string>LuLu filters network traffic to enforce your firewall rules.</string>
+    <string>Warden filters network traffic to enforce your firewall rules.</string>
     <key>NSExtension</key>
     <dict>
         <key>NSExtensionPointIdentifier</key>
         <string>com.apple.networkextension.filter-data</string>
         <key>NSExtensionPrincipalClass</key>
-        <string>LuLuFilterDataProvider</string>
+        <string>WardenFilterDataProvider</string>
     </dict>
 </dict>
 </plist>

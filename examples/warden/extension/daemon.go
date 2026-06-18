@@ -9,14 +9,14 @@ import (
 	"sync/atomic"
 
 	rt "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/deploymenttheory/go-bindings-macosplatform/examples/lulu/rules"
-	"github.com/deploymenttheory/go-bindings-macosplatform/examples/lulu/shared"
+	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/rules"
+	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/shared"
 )
 
 var daemonExportCounter atomic.Uint64
 
 // StartDaemon vends the daemon XPC service over the mach service the app
-// connects to, dispatching each request to the rule engine. Mirrors LuLu's
+// connects to, dispatching each request to the rule engine. Mirrors Warden's
 // XPCListener + XPCDaemon.
 //
 // When managed is true the daemon is governed by a declarative config: rule
@@ -26,7 +26,7 @@ var daemonExportCounter atomic.Uint64
 func StartDaemon(eng *rules.Engine, managed bool) error {
 	listener := rt.NewMachServiceListener(shared.DaemonMachServiceName)
 	err := listener.HandleNewConnections(func(c rt.XPCConn) bool {
-		className := fmt.Sprintf("LuLuDaemonExport_%d", daemonExportCounter.Add(1))
+		className := fmt.Sprintf("WardenDaemonExport_%d", daemonExportCounter.Add(1))
 		obj, err := rt.NewExportedObject(className, rt.XPCExport{
 			Protocol: shared.DaemonProtocol(),
 			Handlers: daemonHandlers(eng, managed),
@@ -55,7 +55,7 @@ func daemonHandlers(eng *rules.Engine, managed bool) map[string]any {
 	// rejectMutation logs and no-ops a policy change attempt under managed mode.
 	rejectMutation := func(selector string) bool {
 		if managed {
-			log.Printf("daemon: rejected %s — firewall is governed by a declarative config (LULU_CONFIG); edit the config to change policy", selector)
+			log.Printf("daemon: rejected %s — firewall is governed by a declarative config (WARDEN_CONFIG); edit the config to change policy", selector)
 			return true
 		}
 		return false

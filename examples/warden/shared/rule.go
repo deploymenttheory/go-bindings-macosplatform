@@ -4,9 +4,9 @@ package shared
 
 import "time"
 
-// Rule is a firewall rule, mirroring LuLu's Shared/Rule. It is JSON-serializable
+// Rule is a firewall rule, mirroring Warden's Shared/Rule. It is JSON-serializable
 // so the daemon can persist the rule set to disk and ship it to the app over XPC
-// (LuLu uses NSData / NSKeyedArchiver; a Go port uses JSON for the same purpose).
+// (Warden uses NSData / NSKeyedArchiver; a Go port uses JSON for the same purpose).
 type Rule struct {
 	UUID string `json:"uuid"`
 	// Key is the process identity the rule is filed under — the signing identifier
