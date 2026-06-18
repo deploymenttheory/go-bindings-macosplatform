@@ -1,0 +1,864 @@
+{
+  "schema_version": 1,
+  "framework": "FileProvider",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "NSFileProviderDomain": {
+      "doc": "A File Provider extension’s domain.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomain"
+    },
+    "NSFileProviderDomainVersion": {
+      "doc": "An opaque object that identifies a specific version of a domain.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomainversion"
+    },
+    "NSFileProviderExtension": {
+      "doc": "The principal class for the nonreplicated File Provider extension.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension"
+    },
+    "NSFileProviderItemVersion": {
+      "doc": "The version of the item’s content and its metadata.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemversion"
+    },
+    "NSFileProviderKnownFolderLocations": {
+      "doc": "A class for working with known-folder locations.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderknownfolderlocations"
+    },
+    "NSFileProviderManager": {
+      "doc": "A manager object that you use to communicate with the file provider from either your app or your File Provider extension.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager"
+    },
+    "NSFileProviderRequest": {
+      "doc": "An object that provides information about the application requesting data from the File Provider extension.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderrequest"
+    },
+    "NSFileProviderStringSearchRequest": {
+      "doc": "A type that contains details of a string-based search request.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderstringsearchrequest"
+    }
+  },
+  "protocols": {
+    "NSFileProviderChangeObserver": {
+      "doc": "An observer that receives changes and deletions during enumeration.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderchangeobserver"
+    },
+    "NSFileProviderCustomAction": {
+      "doc": "Support for custom actions.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidercustomaction"
+    },
+    "NSFileProviderDomainState": {
+      "doc": "An object that contains global state data about the domain.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomainstate"
+    },
+    "NSFileProviderEnumerating": {
+      "doc": "Support for enumerating the file provider’s contents.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderenumerating"
+    },
+    "NSFileProviderEnumerationObserver": {
+      "doc": "An observer that receives batches of items during enumeration.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderenumerationobserver"
+    },
+    "NSFileProviderEnumerator": {
+      "doc": "A protocol for enumerating items and changes.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderenumerator"
+    },
+    "NSFileProviderExternalVolumeHandling": {
+      "doc": "A protocol that defines the interface for handling external volumes.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderexternalvolumehandling"
+    },
+    "NSFileProviderIncrementalContentFetching": {
+      "doc": "Support for fetching changes to the item’s content.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderincrementalcontentfetching"
+    },
+    "NSFileProviderItem": {
+      "doc": "An item the File Provider extension manages.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritem"
+    },
+    "NSFileProviderItemDecorating": {
+      "doc": "Support for decorating items.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemdecorating"
+    },
+    "NSFileProviderKnownFolderSupporting": {
+      "doc": "A protocol that defines the interface for sharing known-folder locations with the system.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderknownfoldersupporting"
+    },
+    "NSFileProviderPartialContentFetching": {
+      "doc": "Support for fetching part of a file’s content.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderpartialcontentfetching"
+    },
+    "NSFileProviderPendingSetEnumerator": {
+      "doc": "A protocol for enumerating pending items.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderpendingsetenumerator"
+    },
+    "NSFileProviderReplicatedExtension": {
+      "doc": "A File Provider extension in which the system replicates the contents on disk.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderreplicatedextension"
+    },
+    "NSFileProviderSearchEnumerationObserver": {
+      "doc": "A protocol that defines a type that receives enumerations of search results from your extension.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidersearchenumerationobserver"
+    },
+    "NSFileProviderSearchEnumerator": {
+      "doc": "A protocol that defines methods for providing search results and canceling searches.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidersearchenumerator"
+    },
+    "NSFileProviderSearchResult": {
+      "doc": "A protocol that defines properties of a search result.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidersearchresult"
+    },
+    "NSFileProviderSearching": {
+      "doc": "A protocol you implement to support searching in your file provider.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidersearching"
+    },
+    "NSFileProviderServiceSource": {
+      "doc": "A service that provides a custom communication channel between the host app and the File Provider extension.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderservicesource"
+    },
+    "NSFileProviderServicing": {
+      "doc": "Support for providing a custom service source.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderservicing"
+    },
+    "NSFileProviderTestingChildrenEnumeration": {
+      "doc": "An operation that lists a directory’s content.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingchildrenenumeration"
+    },
+    "NSFileProviderTestingCollisionResolution": {
+      "doc": "An operation that resolves a collision by renaming the new item.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingcollisionresolution"
+    },
+    "NSFileProviderTestingContentFetch": {
+      "doc": "An operation that fetches an item’s content.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingcontentfetch"
+    },
+    "NSFileProviderTestingCreation": {
+      "doc": "An operation that syncs the creation of the source item to the target location.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingcreation"
+    },
+    "NSFileProviderTestingDeletion": {
+      "doc": "An operation that syncs the deletion of the source item to the target location.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingdeletion"
+    },
+    "NSFileProviderTestingIngestion": {
+      "doc": "An operation that alerts the system to either local or remote storage changes.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingingestion"
+    },
+    "NSFileProviderTestingLookup": {
+      "doc": "An operation that looks up an item.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestinglookup"
+    },
+    "NSFileProviderTestingModification": {
+      "doc": "An operation that syncs the modification of the source item to the target location.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingmodification"
+    },
+    "NSFileProviderTestingOperation": {
+      "doc": "An operation that the system can schedule.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingoperation"
+    },
+    "NSFileProviderThumbnailing": {
+      "doc": "Support for item thumbnails.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderthumbnailing"
+    },
+    "NSFileProviderUserInteractionSuppressing": {
+      "doc": "Support for suppressing user-interaction alerts.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideruserinteractionsuppressing"
+    }
+  },
+  "enums": {
+    "NSFileProviderContentPolicy": {
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidercontentpolicy"
+    },
+    "NSFileProviderCreateItemOptions": {
+      "doc": "Options for creating items.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidercreateitemoptions",
+      "members": {
+        "NSFileProviderCreateItemDeletionConflicted": {
+          "doc": "A value indicating a conflict for a deleted item.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidercreateitemoptions/deletionconflicted"
+        },
+        "NSFileProviderCreateItemMayAlreadyExist": {
+          "doc": "An option indicating that the item may already exist in your remote storage.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidercreateitemoptions/mayalreadyexist"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates an option instance from the raw value.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidercreateitemoptions/init(rawvalue:)"
+        }
+      }
+    },
+    "NSFileProviderDeleteItemOptions": {
+      "doc": "Options for deleting items.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdeleteitemoptions",
+      "members": {
+        "NSFileProviderDeleteItemRecursive": {
+          "doc": "A value indicating that the delete operation removes the item and all of its children.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdeleteitemoptions/recursive"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates an option instance from the raw value.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdeleteitemoptions/init(rawvalue:)"
+        }
+      }
+    },
+    "NSFileProviderDomainRemovalMode": {
+      "doc": "A mode indicating how the system handles user data when removing a domain.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomainremovalmode"
+    },
+    "NSFileProviderDomainTestingModes": {
+      "doc": "Modes that modify the system’s behavior while testing.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomaintestingmodes"
+    },
+    "NSFileProviderErrorCode": {
+      "doc": "The error codes for the File Provider extension.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidererrorcode",
+      "members": {
+        "NSFileProviderErrorPageExpired": {
+          "doc": "An error indicating that the page is too old, and that the system must restart the enumeration operation from the beginning.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidererrorcode/nsfileprovidererrorpageexpired"
+        }
+      }
+    },
+    "NSFileProviderFetchContentsOptions": {
+      "doc": "Options for fetching a range of data from a file.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderfetchcontentsoptions",
+      "members": {
+        "NSFileProviderFetchContentsOptionsStrictVersioning": {
+          "doc": "An option that indicates the system requires an exact match of the requested item’s version.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderfetchcontentsoptions/strictversioning"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates an option instance from the raw value.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderfetchcontentsoptions/init(rawvalue:)"
+        }
+      }
+    },
+    "NSFileProviderFileSystemFlags": {
+      "doc": "Flags that define an item’s on-disk properties and its appearance in the user interface.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderfilesystemflags",
+      "members": {
+        "NSFileProviderFileSystemHidden": {
+          "doc": "By default, the system hides the item when the user views the file system.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderfilesystemflags/hidden"
+        },
+        "NSFileProviderFileSystemPathExtensionHidden": {
+          "doc": "By default, the system hides the item’s extension when showing its filename.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderfilesystemflags/pathextensionhidden"
+        },
+        "NSFileProviderFileSystemUserExecutable": {
+          "doc": "The user can execute the item.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderfilesystemflags/userexecutable"
+        },
+        "NSFileProviderFileSystemUserReadable": {
+          "doc": "The user can read the item.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderfilesystemflags/userreadable"
+        },
+        "NSFileProviderFileSystemUserWritable": {
+          "doc": "The user can modify the item.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderfilesystemflags/userwritable"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new file system flag from the provided value.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderfilesystemflags/init(rawvalue:)"
+        }
+      }
+    },
+    "NSFileProviderItemCapabilities": {
+      "doc": "An item’s capabilities, which define the actions that the user can perform in the document browser.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemcapabilities",
+      "members": {
+        "NSFileProviderItemCapabilitiesAllowsAddingSubItems": {
+          "doc": "A value indicating that the user can add subitems.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemcapabilities/allowsaddingsubitems"
+        },
+        "NSFileProviderItemCapabilitiesAllowsAll": {
+          "doc": "A convenience value for enabling all capabilities.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemcapabilities/allowsall"
+        },
+        "NSFileProviderItemCapabilitiesAllowsContentEnumerating": {
+          "doc": "A value indicating that the item’s contents can be enumerated.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemcapabilities/allowscontentenumerating"
+        },
+        "NSFileProviderItemCapabilitiesAllowsDeleting": {
+          "doc": "A value indicating that the item can be deleted.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemcapabilities/allowsdeleting"
+        },
+        "NSFileProviderItemCapabilitiesAllowsEvicting": {
+          "doc": "A value indicating that the system can delete the local copy of the item.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemcapabilities/allowsevicting"
+        },
+        "NSFileProviderItemCapabilitiesAllowsExcludingFromSync": {
+          "doc": "A value indicating that the user can exclude the item from sync operations.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemcapabilities/allowsexcludingfromsync"
+        },
+        "NSFileProviderItemCapabilitiesAllowsReading": {
+          "doc": "A value indicating that the value can be read from.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemcapabilities/allowsreading"
+        },
+        "NSFileProviderItemCapabilitiesAllowsRenaming": {
+          "doc": "A value indicating that the item can be renamed.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemcapabilities/allowsrenaming"
+        },
+        "NSFileProviderItemCapabilitiesAllowsReparenting": {
+          "doc": "A value indicating that the item can be moved.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemcapabilities/allowsreparenting"
+        },
+        "NSFileProviderItemCapabilitiesAllowsTrashing": {
+          "doc": "A value indicating that the item can be moved to the trash.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemcapabilities/allowstrashing"
+        },
+        "NSFileProviderItemCapabilitiesAllowsWriting": {
+          "doc": "A value indicating that the item can be written to.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemcapabilities/allowswriting"
+        },
+        "init(rawValue:)": {
+          "doc": "Returns a newly created item capabilities value.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemcapabilities/init(rawvalue:)"
+        }
+      }
+    },
+    "NSFileProviderItemFields": {
+      "doc": "Fields that specify which of the item’s properties have changed.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemfields",
+      "members": {
+        "NSFileProviderItemContentModificationDate": {
+          "doc": "The item’s modification date.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemfields/contentmodificationdate"
+        },
+        "NSFileProviderItemContents": {
+          "doc": "The item’s content.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemfields/contents"
+        },
+        "NSFileProviderItemCreationDate": {
+          "doc": "The item’s creation date.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemfields/creationdate"
+        },
+        "NSFileProviderItemExtendedAttributes": {
+          "doc": "The item’s extended attributes.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemfields/extendedattributes"
+        },
+        "NSFileProviderItemFavoriteRank": {
+          "doc": "The item’s favorite rank.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemfields/favoriterank"
+        },
+        "NSFileProviderItemFileSystemFlags": {
+          "doc": "The flags describing the item’s on-disk representation.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemfields/filesystemflags"
+        },
+        "NSFileProviderItemFilename": {
+          "doc": "The item’s filename.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemfields/filename"
+        },
+        "NSFileProviderItemLastUsedDate": {
+          "doc": "The date the item was last used.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemfields/lastuseddate"
+        },
+        "NSFileProviderItemParentItemIdentifier": {
+          "doc": "The identity of the directory that contains the item.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemfields/parentitemidentifier"
+        },
+        "NSFileProviderItemTagData": {
+          "doc": "The tags for the item.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemfields/tagdata"
+        },
+        "NSFileProviderItemTypeAndCreator": {
+          "doc": "The file type and creator codes for the item.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemfields/typeandcreator"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates an option instance from the raw value.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemfields/init(rawvalue:)"
+        }
+      }
+    },
+    "NSFileProviderKnownFolders": {
+      "doc": "Constants that identify known folders.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderknownfolders"
+    },
+    "NSFileProviderManagerDisconnectionOptions": {
+      "doc": "Options for disconnecting a domain from the extension.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanagerdisconnectionoptions"
+    },
+    "NSFileProviderMaterializationFlags": {
+      "doc": "Flags that provides additional information about the provided content.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermaterializationflags",
+      "members": {
+        "NSFileProviderMaterializationFlagsKnownSparseRanges": {
+          "doc": "A flag indicating that the system should consider the file fully materialized, even if it’s a sparse file.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermaterializationflags/knownsparseranges"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new materialization flag.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermaterializationflags/init(rawvalue:)"
+        }
+      }
+    },
+    "NSFileProviderModifyItemOptions": {
+      "doc": "Options for modifying items.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermodifyitemoptions",
+      "members": {
+        "NSFileProviderModifyItemFailOnConflict": {
+          "doc": "An option to fail an upload in the event of a version conflict.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermodifyitemoptions/failonconflict"
+        },
+        "NSFileProviderModifyItemIsImmediateUploadRequestByPresentingApplication": {
+          "doc": "An option to require the upload to complete before calling the completion handler.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermodifyitemoptions/isimmediateuploadrequestbypresentingapplication"
+        },
+        "NSFileProviderModifyItemMayAlreadyExist": {
+          "doc": "An option that indicates the changes may already exist in your remote storage.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermodifyitemoptions/mayalreadyexist"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates an option instance from the raw value.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermodifyitemoptions/init(rawvalue:)"
+        }
+      }
+    },
+    "NSFileProviderTestingOperationSide": {
+      "doc": "The location where the operation takes place.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingoperationside",
+      "members": {
+        "NSFileProviderTestingOperationSideDisk": {
+          "doc": "The File Provider extension’s local storage.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingoperationside/disk"
+        },
+        "NSFileProviderTestingOperationSideFileProvider": {
+          "doc": "The File Provider extension’s remote storage.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingoperationside/fileprovider"
+        }
+      }
+    },
+    "NSFileProviderTestingOperationType": {
+      "doc": "The action that an operation performs.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingoperationtype",
+      "members": {
+        "NSFileProviderTestingOperationTypeChildrenEnumeration": {
+          "doc": "Lists an item’s content.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingoperationtype/childrenenumeration"
+        },
+        "NSFileProviderTestingOperationTypeCollisionResolution": {
+          "doc": "Resolves a collision by renaming the new item.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingoperationtype/collisionresolution"
+        },
+        "NSFileProviderTestingOperationTypeContentFetch": {
+          "doc": "Fetches an item’s content.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingoperationtype/contentfetch"
+        },
+        "NSFileProviderTestingOperationTypeCreation": {
+          "doc": "Propagates the creation of a source item to the target location.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingoperationtype/creation"
+        },
+        "NSFileProviderTestingOperationTypeDeletion": {
+          "doc": "Propagates the deletion of the source item from the target location.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingoperationtype/deletion"
+        },
+        "NSFileProviderTestingOperationTypeIngestion": {
+          "doc": "Alerts the system to changes to either the local or remote storage.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingoperationtype/ingestion"
+        },
+        "NSFileProviderTestingOperationTypeLookup": {
+          "doc": "Looks up an item.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingoperationtype/lookup"
+        },
+        "NSFileProviderTestingOperationTypeModification": {
+          "doc": "Propagates a change from the source item to the target location.",
+          "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertestingoperationtype/modification"
+        }
+      }
+    },
+    "NSFileProviderVolumeUnsupportedReason": {
+      "doc": "Constants that describe why an external volume might not be eligible for storing a domain.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidervolumeunsupportedreason"
+    }
+  },
+  "structs": {
+    "NSFileProviderTypeAndCreator": {
+      "doc": "A structure that contains the file type and file creator codes for an item.",
+      "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidertypeandcreator"
+    }
+  },
+  "methods": {
+    "NSFileProviderDomain": {
+      "-initWithDisplayName:userInfo:volumeURL:": {
+        "doc": "Creates a new file provider domain with the specified URL and display name.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomain/init(displayname:userinfo:volumeurl:)"
+      },
+      "-initWithIdentifier:displayName:": {
+        "doc": "Creates a new file provider domain with the specified identifier and display name.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomain/init(identifier:displayname:)"
+      },
+      "-initWithIdentifier:displayName:pathRelativeToDocumentStorage:": {
+        "doc": "Returns a newly instantiated domain.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomain/init(identifier:displayname:pathrelativetodocumentstorage:)"
+      }
+    },
+    "NSFileProviderDomainVersion": {
+      "-compare:": {
+        "doc": "Compares another domain version with this one.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomainversion/compare:"
+      },
+      "-next": {
+        "doc": "Creates a new version that supersedes the current version.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomainversion/next()"
+      }
+    },
+    "NSFileProviderExtension": {
+      "+placeholderURLForURL:": {
+        "doc": "Returns a placeholder URL for a given document URL.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/placeholderurl(for:)"
+      },
+      "+writePlaceholderAtURL:withMetadata:error:": {
+        "doc": "Writes a document placeholder with the provided metadata.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/writeplaceholder(at:withmetadata:)"
+      },
+      "-URLForItemWithPersistentIdentifier:": {
+        "doc": "Returns the URL for a given persistent identifier.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/urlforitem(withpersistentidentifier:)"
+      },
+      "-createDirectoryWithName:inParentItemIdentifier:completionHandler:": {
+        "doc": "Creates a directory with the given name inside the given parent directory.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/createdirectory(withname:inparentitemidentifier:completionhandler:)"
+      },
+      "-deleteItemWithIdentifier:completionHandler:": {
+        "doc": "Permanently deletes an item from the trash.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/deleteitem(withidentifier:completionhandler:)"
+      },
+      "-enumeratorForContainerItemIdentifier:error:": {
+        "doc": "Returns an enumerator for the specified item.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/enumerator(for:)"
+      },
+      "-fetchThumbnailsForItemIdentifiers:requestedSize:perThumbnailCompletionHandler:completionHandler:": {
+        "doc": "Fetches the thumbnails for items that have been enumerated by the file provider.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/fetchthumbnails(for:requestedsize:perthumbnailcompletionhandler:completionhandler:)"
+      },
+      "-importDocumentAtURL:toParentItemIdentifier:completionHandler:": {
+        "doc": "Imports a file or package into the given parent directory.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/importdocument(at:toparentitemidentifier:completionhandler:)"
+      },
+      "-itemChangedAtURL:": {
+        "doc": "Tells the File Provider extension that a document has changed.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/itemchanged(at:)"
+      },
+      "-itemForIdentifier:error:": {
+        "doc": "Returns a description of the item associated with the persistent identifier.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/item(for:)"
+      },
+      "-persistentIdentifierForItemAtURL:": {
+        "doc": "Returns a unique identifier for the given URL.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/persistentidentifierforitem(at:)"
+      },
+      "-providePlaceholderAtURL:completionHandler:": {
+        "doc": "Triggers the creation of a placeholder for the given URL.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/provideplaceholder(at:completionhandler:)"
+      },
+      "-renameItemWithIdentifier:toName:completionHandler:": {
+        "doc": "Renames a document or directory.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/renameitem(withidentifier:toname:completionhandler:)"
+      },
+      "-reparentItemWithIdentifier:toParentItemWithIdentifier:newName:completionHandler:": {
+        "doc": "Moves the specified item into the given parent directory.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/reparentitem(withidentifier:toparentitemwithidentifier:newname:completionhandler:)"
+      },
+      "-setFavoriteRank:forItemIdentifier:completionHandler:": {
+        "doc": "Marks a directory as a favorite and sets its relative order in the Favorites list.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/setfavoriterank(_:foritemidentifier:completionhandler:)"
+      },
+      "-setLastUsedDate:forItemIdentifier:completionHandler:": {
+        "doc": "Marks an item as recently used and sets its relative order in the Recents list.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/setlastuseddate(_:foritemidentifier:completionhandler:)"
+      },
+      "-setTagData:forItemIdentifier:completionHandler:": {
+        "doc": "Tags an item.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/settagdata(_:foritemidentifier:completionhandler:)"
+      },
+      "-startProvidingItemAtURL:completionHandler:": {
+        "doc": "Provides an actual file on disk for a placeholder.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/startprovidingitem(at:completionhandler:)"
+      },
+      "-stopProvidingItemAtURL:": {
+        "doc": "Tells the File Provider extension that a given document is no longer being accessed.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/stopprovidingitem(at:)"
+      },
+      "-supportedServiceSourcesForItemIdentifier:error:": {
+        "doc": "Return an array of service sources that let the host app perform actions associated with the specified item.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/supportedservicesources(for:)"
+      },
+      "-trashItemWithIdentifier:completionHandler:": {
+        "doc": "Moves an item into the trash.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/trashitem(withidentifier:completionhandler:)"
+      },
+      "-untrashItemWithIdentifier:toParentItemIdentifier:completionHandler:": {
+        "doc": "Moves an item out of the trash.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/untrashitem(withidentifier:toparentitemidentifier:completionhandler:)"
+      }
+    },
+    "NSFileProviderItemVersion": {
+      "-initWithContentVersion:metadataVersion:": {
+        "doc": "Creates a new version object.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemversion/init(contentversion:metadataversion:)"
+      }
+    },
+    "NSFileProviderManager": {
+      "+addDomain:completionHandler:": {
+        "doc": "Adds a domain to the File Provider extension.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/add(_:completionhandler:)"
+      },
+      "+checkDomainsCanBeStored:onVolumeAtURL:unsupportedReason:error:": {
+        "doc": "Check if a URL is eligible for storing a domain.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/checkdomainscanbestored:onvolumeaturl:unsupportedreason:error:"
+      },
+      "+getDomainsWithCompletionHandler:": {
+        "doc": "Returns all of the File Provider extension’s domains.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/getdomainswithcompletionhandler(_:)"
+      },
+      "+getIdentifierForUserVisibleFileAtURL:completionHandler:": {
+        "doc": "Returns the identifier and domain for a user-visible URL.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/getidentifierforuservisiblefile(at:completionhandler:)"
+      },
+      "+importDomain:fromDirectoryAtURL:completionHandler:": {
+        "doc": "Creates a new domain that takes ownership of on-disk data that your app previously managed without a file provider.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/import(_:fromdirectoryat:completionhandler:)"
+      },
+      "+managerForDomain:": {
+        "doc": "Returns a newly created file provider manager for the specified domain.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/init(for:)"
+      },
+      "+placeholderURLForURL:": {
+        "doc": "Returns a placeholder URL for a given document URL.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/placeholderurl(for:)"
+      },
+      "+removeAllDomainsWithCompletionHandler:": {
+        "doc": "Removes all domains from the File Provider extension.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/removealldomains(completionhandler:)"
+      },
+      "+removeDomain:completionHandler:": {
+        "doc": "Removes a domain from the File Provider extension.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/remove(_:completionhandler:)"
+      },
+      "+removeDomain:mode:completionHandler:": {
+        "doc": "Removes a domain from the File Provider extension using the specified options.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/remove(_:mode:completionhandler:)"
+      },
+      "+writePlaceholderAtURL:withMetadata:error:": {
+        "doc": "Writes a document placeholder with the provided metadata.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/writeplaceholder(at:withmetadata:)"
+      },
+      "-claimKnownFolders:localizedReason:completionHandler:": {
+        "doc": "Asks the domain to sync the specified known folders.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/claimknownfolders(_:localizedreason:completionhandler:)"
+      },
+      "-disconnectWithReason:options:completionHandler:": {
+        "doc": "Disconnects the domain from the extension.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/disconnect(reason:options:completionhandler:)"
+      },
+      "-enumeratorForMaterializedItems": {
+        "doc": "Returns an enumerator for all the items the system currently stores on disk.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/enumeratorformaterializeditems()"
+      },
+      "-enumeratorForPendingItems": {
+        "doc": "Returns an enumerator for the set of pending items.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/enumeratorforpendingitems()"
+      },
+      "-evictItemWithIdentifier:completionHandler:": {
+        "doc": "Asks the system to remove an item from its cache.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/evictitem(identifier:completionhandler:)"
+      },
+      "-getUserVisibleURLForItemIdentifier:completionHandler:": {
+        "doc": "Returns the user-visible URL for an item.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/getuservisibleurl(for:completionhandler:)"
+      },
+      "-globalProgressForKind:": {
+        "doc": "Returns a progress object that tracks either the uploading or downloading of items from the File Provider extension’s remote storage.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/globalprogress(for:)"
+      },
+      "-listAvailableTestingOperationsWithError:": {
+        "doc": "Lists all the operations that are ready for scheduling.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/listavailabletestingoperations()"
+      },
+      "-reconnectWithCompletionHandler:": {
+        "doc": "Reconnects the domain with the extension.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/reconnect(completionhandler:)"
+      },
+      "-registerURLSessionTask:forItemWithIdentifier:completionHandler:": {
+        "doc": "Registers the URL session task responsible for the specified item.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/register(_:foritemwithidentifier:completionhandler:)"
+      },
+      "-reimportItemsBelowItemWithIdentifier:completionHandler:": {
+        "doc": "Tells the system to reimport the item and its content recursively.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/reimportitems(below:completionhandler:)"
+      },
+      "-releaseKnownFolders:localizedReason:completionHandler:": {
+        "doc": "Asks the system to stop replicating the specified known folders in the domain.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/releaseknownfolders(_:localizedreason:completionhandler:)"
+      },
+      "-requestDiagnosticCollectionForItemWithIdentifier:errorReason:completionHandler:": {
+        "doc": "Requests a diagnostics collection for use when working directly with Apple to improve sync behavior.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/requestdiagnosticcollection(for:errorreason:completionhandler:)"
+      },
+      "-runTestingOperations:error:": {
+        "doc": "Asks the system to schedule and execute the specified operations.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/run(_:)"
+      },
+      "-signalEnumeratorForContainerItemIdentifier:completionHandler:": {
+        "doc": "Alerts the system to changes in the specified folder’s content.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/signalenumerator(for:completionhandler:)"
+      },
+      "-signalErrorResolved:completionHandler:": {
+        "doc": "Indicates a resolved error.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/signalerrorresolved(_:completionhandler:)"
+      },
+      "-stateDirectoryURLWithError:": {
+        "doc": "Returns a URL for a directory for storing state information for the domain.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/statedirectoryurl()"
+      },
+      "-temporaryDirectoryURLWithError:": {
+        "doc": "Returns the URL of a directory that the File Provider extension can use to temporarily store files before passing them to the system.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/temporarydirectoryurl()"
+      },
+      "-waitForChangesOnItemsBelowItemWithIdentifier:completionHandler:": {
+        "doc": "Requests a notification after the system completes all the specified changes.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/waitforchanges(below:completionhandler:)"
+      },
+      "-waitForStabilizationWithCompletionHandler:": {
+        "doc": "Requests a notification after the domain stabilizes.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/waitforstabilization(completionhandler:)"
+      }
+    }
+  },
+  "properties": {
+    "NSFileProviderDomain": {
+      "NSFileProviderDomainTestingModes": {
+        "doc": "Modes that modify the system’s behavior while testing.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomain/testingmodes-swift.struct"
+      },
+      "backingStoreIdentity": {
+        "doc": "A unique identifier for the backing store used by the system.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomain/backingstoreidentity"
+      },
+      "disconnected": {
+        "doc": "A Boolean value indicating that the domain is present, but disconnected from the file extension.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomain/isdisconnected"
+      },
+      "displayName": {
+        "doc": "The name of the domain displayed in the user interface.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomain/displayname"
+      },
+      "hidden": {
+        "doc": "A Boolean value that determines whether the domain is visible to users.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomain/ishidden"
+      },
+      "identifier": {
+        "doc": "The domain’s unique identifier.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomain/identifier"
+      },
+      "pathRelativeToDocumentStorage": {
+        "doc": "The path of the domain’s subdirectory relative to the file provider’s shared container.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomain/pathrelativetodocumentstorage"
+      },
+      "replicatedKnownFolders": {
+        "doc": "A list of known folders that the domain currently replicates.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomain/replicatedknownfolders"
+      },
+      "supportedKnownFolders": {
+        "doc": "A list of known folders that the domain can replicate.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomain/supportedknownfolders"
+      },
+      "supportsStringSearchRequest": {
+        "doc": "A Boolean value that indicates whether the provider supports search.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomain/supportsstringsearchrequest"
+      },
+      "testingModes": {
+        "doc": "A mode that gives the File Provider extension more control over the system’s behavior during testing.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomain/testingmodes-swift.property"
+      },
+      "userEnabled": {
+        "doc": "A Boolean value that indicates whether the user has enabled or disabled the domain.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderdomain/userenabled"
+      }
+    },
+    "NSFileProviderExtension": {
+      "documentStorageURL": {
+        "doc": "The root URL for all shared documents.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/documentstorageurl"
+      },
+      "domain": {
+        "doc": "The domain managed by this file provider object.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/domain"
+      },
+      "providerIdentifier": {
+        "doc": "A purpose identifier for coordinated reads and writes.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderextension/provideridentifier"
+      }
+    },
+    "NSFileProviderItemVersion": {
+      "beforeFirstSyncComponent": {
+        "doc": "A Boolean value indicating that this version predates the version returned by the file provider extension.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemversion/beforefirstsynccomponent"
+      },
+      "contentVersion": {
+        "doc": "An opaque object used to track versions of the item’s content.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemversion/contentversion"
+      },
+      "metadataVersion": {
+        "doc": "An opaque object used to track versions of the item’s metadata.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovideritemversion/metadataversion"
+      }
+    },
+    "NSFileProviderManager": {
+      "NSFileProviderDomainRemovalMode": {
+        "doc": "A mode indicating how the system handles user data when removing a domain.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/domainremovalmode"
+      },
+      "NSFileProviderManager.EligibilityResult": {
+        "doc": "Constants that specify whether a URL is eligible for storing a domain.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/eligibilityresult"
+      },
+      "NSFileProviderManagerDisconnectionOptions": {
+        "doc": "Options for disconnecting a domain from the extension.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/disconnectionoptions"
+      },
+      "checkDomainsCanBeStoredOnVolume(at:)": {
+        "doc": "Checks whether the specified URL is eligible for storing a domain.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/checkdomainscanbestoredonvolume(at:)"
+      },
+      "defaultManager": {
+        "doc": "A property that returns the shared file provider manager object.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/default"
+      },
+      "documentStorageURL": {
+        "doc": "The root URL for all shared documents.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/documentstorageurl"
+      },
+      "providerIdentifier": {
+        "doc": "A purpose identifier for coordinated reads and writes.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager/provideridentifier"
+      }
+    },
+    "NSFileProviderRequest": {
+      "domainVersion": {
+        "doc": "The version of the domain for the request.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderrequest/domainversion"
+      },
+      "isFileViewerRequest": {
+        "doc": "A Boolean value that indicates whether the request came from Finder or related system file browsers.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderrequest/isfileviewerrequest"
+      },
+      "isSystemRequest": {
+        "doc": "A Boolean value that indicates whether the request came from a system process.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderrequest/issystemrequest"
+      },
+      "requestingExecutable": {
+        "doc": "The URL of the requesting executable.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderrequest/requestingexecutable"
+      }
+    },
+    "NSFileProviderStringSearchRequest": {
+      "desiredNumberOfResults": {
+        "doc": "How many results the system is requesting. This is a hint to the extension, to help avoid unnecessary work. The extension may return more results than this.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderstringsearchrequest/desirednumberofresults"
+      },
+      "query": {
+        "doc": "A plaintext string, representing the query a person entered into the system search UI.",
+        "url": "https://developer.apple.com/documentation/fileprovider/nsfileproviderstringsearchrequest/query"
+      }
+    }
+  }
+}

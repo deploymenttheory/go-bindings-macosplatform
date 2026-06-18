@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "framework": "ScriptingBridge",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "SBApplication": {
+      "doc": "The SBApplication class provides a mechanism enabling an Objective-C program to send Apple events to a scriptable application and receive Apple events in response. It thereby makes it possible for that program to control the application and exchange data with it. Scripting Bridge works by bridging data types between Apple event descriptors and Cocoa objects.",
+      "url": "https://developer.apple.com/documentation/scriptingbridge/sbapplication"
+    },
+    "SBElementArray": {
+      "doc": "SBElementArray is subclass of NSMutableArray that manages collections of related SBObject objects. For example, when you ask the Finder for a list of disks, or ask iTunes for a list of playlists, you get the result back as an SBElementArray containing Scripting Bridge objects representing those items.",
+      "url": "https://developer.apple.com/documentation/scriptingbridge/sbelementarray"
+    },
+    "SBObject": {
+      "doc": "The SBObject class declares methods that can be invoked on any object in a scriptable application. It defines methods for getting elements and properties of an object, as well as setting a given object to a new value.",
+      "url": "https://developer.apple.com/documentation/scriptingbridge/sbobject"
+    }
+  },
+  "protocols": {
+    "SBApplicationDelegate": {
+      "doc": "This informal protocol defines a delegation method for handling Apple event errors that are sent from a target application to an SBApplication object.",
+      "url": "https://developer.apple.com/documentation/scriptingbridge/sbapplicationdelegate"
+    }
+  },
+  "methods": {
+    "SBApplication": {
+      "+applicationWithBundleIdentifier:": {
+        "doc": "Returns the shared instance representing the target application specified by its bundle identifier.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbapplication/applicationwithbundleidentifier:"
+      },
+      "+applicationWithProcessIdentifier:": {
+        "doc": "Returns the shared instance representing a target application specified by its process identifier.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbapplication/applicationwithprocessidentifier:"
+      },
+      "+applicationWithURL:": {
+        "doc": "Returns the shared instance representing a target application specified by the given URL.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbapplication/applicationwithurl:"
+      },
+      "-activate": {
+        "doc": "Moves the target application to the foreground immediately.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbapplication/activate()"
+      },
+      "-classForScriptingClass:": {
+        "doc": "Returns a class object that represents a particular class in the target application.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbapplication/class(forscriptingclass:)"
+      },
+      "-initWithBundleIdentifier:": {
+        "doc": "Returns an instance of an SBApplication subclass that represents the target application identified by the given bundle identifier.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbapplication/init(bundleidentifier:)"
+      },
+      "-initWithProcessIdentifier:": {
+        "doc": "Returns an instance of an SBApplication subclass that represents the target application identified by the given process identifier.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbapplication/init(processidentifier:)"
+      },
+      "-initWithURL:": {
+        "doc": "Returns an instance of an SBApplication subclass that represents the target application identified by the given URL.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbapplication/init(url:)-6xbe5"
+      }
+    },
+    "SBElementArray": {
+      "-arrayByApplyingSelector:": {
+        "doc": "Returns an array containing the results of sending the specified message to each object in the receiver.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbelementarray/array(byapplying:)"
+      },
+      "-arrayByApplyingSelector:withObject:": {
+        "doc": "Returns an array containing the results of sending the specified message to each object in the receiver.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbelementarray/array(byapplying:with:)"
+      },
+      "-get": {
+        "doc": "Forces evaluation of the receiver, causing the real object to be returned immediately.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbelementarray/get()"
+      },
+      "-objectAtLocation:": {
+        "doc": "Returns the object at the given location in the receiver.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbelementarray/object(atlocation:)"
+      },
+      "-objectWithID:": {
+        "doc": "Returns the object in the array with the given identifier.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbelementarray/object(withid:)"
+      },
+      "-objectWithName:": {
+        "doc": "Returns the object in the array with the given name.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbelementarray/object(withname:)"
+      }
+    },
+    "SBObject": {
+      "-elementArrayWithCode:": {
+        "doc": "Returns an array containing every child of the receiver with the given class-type code.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbobject/elementarray(withcode:)"
+      },
+      "-get": {
+        "doc": "Forces evaluation of the receiver, causing the real object to be returned immediately.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbobject/get()"
+      },
+      "-init": {
+        "doc": "Initializes and returns an instance of an SBObject subclass.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbobject/init()"
+      },
+      "-initWithData:": {
+        "doc": "Returns an instance of an SBObject subclass initialized with the given data.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbobject/init(data:)"
+      },
+      "-initWithElementCode:properties:data:": {
+        "doc": "Returns an instance of an SBObject subclass initialized with the specified properties and data and added to the designated element array.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbobject/init(elementcode:properties:data:)"
+      },
+      "-initWithProperties:": {
+        "doc": "Returns an instance of an SBObject subclass initialized with the specified properties.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbobject/init(properties:)"
+      },
+      "-lastError": {
+        "doc": "The error from the last event this object sent, or nil if it succeeded.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbobject/lasterror()"
+      },
+      "-propertyWithClass:code:": {
+        "doc": "Returns an object of the designated scripting class representing the specified property of the receiver",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbobject/property(with:code:)"
+      },
+      "-propertyWithCode:": {
+        "doc": "Returns an object representing the specified property of the receiver.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbobject/property(withcode:)"
+      },
+      "-sendEvent:id:parameters:": {
+        "doc": "Sends an Apple event with the given event class, event ID, and format to the target application.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbobject/sendevent:id:parameters:"
+      },
+      "-setTo:": {
+        "doc": "Sets the receiver to a specified value.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbobject/setto(_:)"
+      }
+    }
+  },
+  "properties": {
+    "SBApplication": {
+      "delegate": {
+        "doc": "The error-handling delegate of the receiver.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbapplication/delegate"
+      },
+      "launchFlags": {
+        "doc": "The launch flags for the application represented by the receiver.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbapplication/launchflags"
+      },
+      "running": {
+        "doc": "A Boolean that indicates whether the target application represented by the receiver is running.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbapplication/isrunning"
+      },
+      "sendMode": {
+        "doc": "The mode for sending Apple events to the target application.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbapplication/sendmode"
+      },
+      "timeout": {
+        "doc": "The period the application will wait to receive reply Apple events.",
+        "url": "https://developer.apple.com/documentation/scriptingbridge/sbapplication/timeout"
+      }
+    }
+  }
+}
