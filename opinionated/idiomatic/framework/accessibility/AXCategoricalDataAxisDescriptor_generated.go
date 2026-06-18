@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents an axis of categorical data.
+//
 // CategoricalDataAxisDescriptor wraps [raw.AXCategoricalDataAxisDescriptor] with a fluent Go API.
 type CategoricalDataAxisDescriptor struct {
 	inner *raw.AXCategoricalDataAxisDescriptor
@@ -32,6 +34,8 @@ func CategoricalDataAxisDescriptorFromID(id objc.ID) *CategoricalDataAxisDescrip
 	return &CategoricalDataAxisDescriptor{inner: raw.AXCategoricalDataAxisDescriptorFromID(id)}
 }
 
+// Creates a categorical data axis with the specified title and an array of categories in the specified order.
+//
 // NewCategoricalDataAxisDescriptorWithTitleCategoryOrder creates a new [CategoricalDataAxisDescriptor].
 func NewCategoricalDataAxisDescriptorWithTitleCategoryOrder(title string, categoryOrder *foundation.NSArray[*foundation.NSString]) *CategoricalDataAxisDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXCategoricalDataAxisDescriptor")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewCategoricalDataAxisDescriptorWithTitleCategoryOrder(title string, catego
 	return &CategoricalDataAxisDescriptor{inner: raw.AXCategoricalDataAxisDescriptorFromID(_id)}
 }
 
+// Creates a categorical data axis with the specified attributed title and an array of categories in the specified order.
+//
 // NewCategoricalDataAxisDescriptorWithAttributedTitleCategoryOrder creates a new [CategoricalDataAxisDescriptor].
 func NewCategoricalDataAxisDescriptorWithAttributedTitleCategoryOrder(attributedTitle *foundation.NSAttributedString, categoryOrder *foundation.NSArray[*foundation.NSString]) *CategoricalDataAxisDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXCategoricalDataAxisDescriptor")), objc.RegisterName("alloc"))
@@ -46,7 +52,7 @@ func NewCategoricalDataAxisDescriptorWithAttributedTitleCategoryOrder(attributed
 	return &CategoricalDataAxisDescriptor{inner: raw.AXCategoricalDataAxisDescriptorFromID(_id)}
 }
 
-// The order of the category values for this axis. This list should contain every possible category value for this axis, in the order they are displayed visually in the graph or legend. For example, if your categorical axis represented 'blood type', and the legend contained 'AB, A, B, O' in that order, you would provide an array containing "AB", "A", "B" and "O" in the same order.
+// A list of every category value for the axis in the order they appear visually in the graph or legend.
 //
 // WithCategoryOrder sets the collection, converting the Go slice to an NSArray.
 func (x *CategoricalDataAxisDescriptor) WithCategoryOrder(items ...*foundation.NSString) *CategoricalDataAxisDescriptor {

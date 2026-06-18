@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a data type.
+//
 // Type wraps [raw.MTLType] with a fluent Go API.
 type Type struct {
 	inner *raw.MTLType

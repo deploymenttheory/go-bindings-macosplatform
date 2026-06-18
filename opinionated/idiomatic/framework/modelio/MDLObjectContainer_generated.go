@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A default implementation for handling object hierarchy relationships in a 3D asset.
+//
 // ObjectContainer wraps [raw.MDLObjectContainer] with a fluent Go API.
 type ObjectContainer struct {
 	inner *raw.MDLObjectContainer

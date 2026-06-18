@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that uses a delegate object to render an image from a custom format.
+//
 // CustomImageRep wraps [raw.NSCustomImageRep] with a fluent Go API.
 type CustomImageRep struct {
 	inner *raw.NSCustomImageRep
@@ -31,6 +33,8 @@ func CustomImageRepFromID(id objc.ID) *CustomImageRep {
 	return &CustomImageRep{inner: raw.NSCustomImageRepFromID(id)}
 }
 
+// Initializes a representation of an image of the specified size and flipped status, using a block to draw its content.
+//
 // NewCustomImageRepWithSizeFlippedDrawingHandler creates a new [CustomImageRep].
 func NewCustomImageRepWithSizeFlippedDrawingHandler(size corefoundation.CGSize, drawingHandlerShouldBeCalledWithFlippedContext bool, drawingHandler objc.Block) *CustomImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCustomImageRep")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewCustomImageRepWithSizeFlippedDrawingHandler(size corefoundation.CGSize, 
 	return &CustomImageRep{inner: raw.NSCustomImageRepFromID(_id)}
 }
 
+// Returns a representation of an image initialized with the specified delegate information.
+//
 // NewCustomImageRepWithDrawSelectorDelegate creates a new [CustomImageRep].
 func NewCustomImageRepWithDrawSelectorDelegate(selector objc.SEL, delegate objc.ID) *CustomImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCustomImageRep")), objc.RegisterName("alloc"))
@@ -45,48 +51,64 @@ func NewCustomImageRepWithDrawSelectorDelegate(selector objc.SEL, delegate objc.
 	return &CustomImageRep{inner: raw.NSCustomImageRepFromID(_id)}
 }
 
+// The size of the image representation, measured in points in the user coordinate space.
+//
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *CustomImageRep) WithSize(size corefoundation.CGSize) *CustomImageRep {
 	x.inner.NSImageRep.SetSize(size)
 	return x
 }
 
+// A Boolean value that indicates whether the image data has an alpha channel.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *CustomImageRep) WithAlpha(alpha bool) *CustomImageRep {
 	x.inner.NSImageRep.SetAlpha(alpha)
 	return x
 }
 
+// A Boolean value that indicates whether the image is opaque.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *CustomImageRep) WithOpaque(opaque bool) *CustomImageRep {
 	x.inner.NSImageRep.SetOpaque(opaque)
 	return x
 }
 
+// The name of the color space used by the image data.
+//
 // WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
 func (x *CustomImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *CustomImageRep {
 	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
 	return x
 }
 
+// The number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
+//
 // WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
 func (x *CustomImageRep) WithBitsPerSample(bitsPerSample int) *CustomImageRep {
 	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
 	return x
 }
 
+// The width of the image, measured in pixels.
+//
 // WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
 func (x *CustomImageRep) WithPixelsWide(pixelsWide int) *CustomImageRep {
 	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
 	return x
 }
 
+// The height of the image, measured in pixels.
+//
 // WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
 func (x *CustomImageRep) WithPixelsHigh(pixelsHigh int) *CustomImageRep {
 	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
 	return x
 }
 
+// The layout direction for the image.
+//
 // WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
 func (x *CustomImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *CustomImageRep {
 	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that encapsulates output for various WebAuthn extensions during passkey assertion.
+//
 // PasskeyAssertionCredentialExtensionOutput wraps [raw.ASPasskeyAssertionCredentialExtensionOutput] with a fluent Go API.
 type PasskeyAssertionCredentialExtensionOutput struct {
 	inner *raw.ASPasskeyAssertionCredentialExtensionOutput

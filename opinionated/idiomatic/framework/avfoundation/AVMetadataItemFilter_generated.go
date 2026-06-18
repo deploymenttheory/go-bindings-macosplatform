@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that filters selected information from a metadata item.
+//
 // MetadataItemFilter wraps [raw.AVMetadataItemFilter] with a fluent Go API.
 type MetadataItemFilter struct {
 	inner *raw.AVMetadataItemFilter

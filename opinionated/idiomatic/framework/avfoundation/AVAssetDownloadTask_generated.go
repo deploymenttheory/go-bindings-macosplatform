@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A session used to download HTTP Live Streaming assets.
+//
 // AssetDownloadTask wraps [raw.AVAssetDownloadTask] with a fluent Go API.
 type AssetDownloadTask struct {
 	inner *raw.AVAssetDownloadTask

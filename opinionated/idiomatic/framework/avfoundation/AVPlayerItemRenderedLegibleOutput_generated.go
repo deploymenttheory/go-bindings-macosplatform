@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A player item output that vends media with a legible characteristic as rendered pixel buffers.
+//
 // PlayerItemRenderedLegibleOutput wraps [raw.AVPlayerItemRenderedLegibleOutput] with a fluent Go API.
 type PlayerItemRenderedLegibleOutput struct {
 	inner *raw.AVPlayerItemRenderedLegibleOutput
@@ -33,7 +35,7 @@ func PlayerItemRenderedLegibleOutputFromID(id objc.ID) *PlayerItemRenderedLegibl
 	return &PlayerItemRenderedLegibleOutput{inner: raw.AVPlayerItemRenderedLegibleOutputFromID(id)}
 }
 
-// @method			initWithVideoDisplaySize: @abstract		Creates an instance of AVPlayerItemRenderedLegibleOutput. @param			videoDisplaySize CGSize for the video display area @discussion This is the only available initializer for AVPlayerItemRenderedLegibleOutput. The client can also choose to reset videoDisplaySize after initialization or during playback. Initializing and resetting videoDisplaySize with a zero height or width will result in an exception being thrown.
+// Creates a rendered legible output object.
 //
 // NewPlayerItemRenderedLegibleOutputWithVideoDisplaySize creates a new [PlayerItemRenderedLegibleOutput].
 func NewPlayerItemRenderedLegibleOutputWithVideoDisplaySize(videoDisplaySize corefoundation.CGSize) *PlayerItemRenderedLegibleOutput {
@@ -42,7 +44,7 @@ func NewPlayerItemRenderedLegibleOutputWithVideoDisplaySize(videoDisplaySize cor
 	return &PlayerItemRenderedLegibleOutput{inner: raw.AVPlayerItemRenderedLegibleOutputFromID(_id)}
 }
 
-// @property		advanceIntervalForDelegateInvocation @abstract		Permits advance invocation of the associated delegate, if any. @discussion If it is possible, an AVPlayerItemRenderedLegibleOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemRenderedLegibleOutput is prepared to act on them, the delegate will be invoked as soon as possible.
+// Permits advance invocation of the associated delegate, if any.
 //
 // WithAdvanceIntervalForDelegateInvocation sets the advanceIntervalForDelegateInvocation property and returns the receiver for chaining.
 func (x *PlayerItemRenderedLegibleOutput) WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemRenderedLegibleOutput {
@@ -50,7 +52,7 @@ func (x *PlayerItemRenderedLegibleOutput) WithAdvanceIntervalForDelegateInvocati
 	return x
 }
 
-// @property		videoDisplaySize @abstract		Permits rendering of pixel buffers according to the set width and height @discussion		The client is expected to set videodisplay size during init and may also set it again during playback. The pixel buffers will be rendered according to the set width and height of display area. If this property is set during the presentation time of a vended caption image, a new caption image rendered according to new videoDisplaySize, will be vended out. Setting this property with a zero height or width will result in an exception being thrown and it is client's responsibility to handle it using appropriate catch block.
+// Set the video display size to use for rendering of pixel buffers.
 //
 // WithVideoDisplaySize sets the videoDisplaySize property and returns the receiver for chaining.
 func (x *PlayerItemRenderedLegibleOutput) WithVideoDisplaySize(videoDisplaySize corefoundation.CGSize) *PlayerItemRenderedLegibleOutput {
@@ -58,7 +60,7 @@ func (x *PlayerItemRenderedLegibleOutput) WithVideoDisplaySize(videoDisplaySize 
 	return x
 }
 
-// @property		suppressesPlayerRendering @abstract		Indicates whether the output, when added to an AVPlayerItem, will be used in addition to normal rendering of media data by the player or instead of normal rendering. @discussion The default value is NO, indicating that the output will be used in addition to normal rendering. If you want to render the media data provided by the output yourself instead of allowing it to be rendered as in normally would be by AVPlayer, set suppressesPlayerRendering to YES. Whenever any output is added to an AVPlayerItem that has suppressesPlayerRendering set to YES, the media data supplied to the output will not be rendered by AVPlayer. Other media data associated with the item but not provided to such an output is not affected. For example, if an output of class AVPlayerItemVideoOutput with a value of YES for suppressesPlayerRendering is added to an AVPlayerItem, video media for that item will not be rendered by the AVPlayer, while audio media, subtitle media, and other kinds of media, if present, will be rendered.
+// A Boolean value that indicates whether the player object renders the receiver’s output.
 //
 // WithSuppressesPlayerRendering sets the suppressesPlayerRendering property and returns the receiver for chaining.
 func (x *PlayerItemRenderedLegibleOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemRenderedLegibleOutput {
@@ -66,7 +68,7 @@ func (x *PlayerItemRenderedLegibleOutput) WithSuppressesPlayerRendering(suppress
 	return x
 }
 
-// @method			setDelegate:queue: @abstract		Sets the receiver's delegate and a dispatch queue on which the delegate will be called. @param			delegate An object conforming to AVPlayerItemRenderedLegibleOutputPushDelegate protocol. @param			delegateQueue A dispatch queue on which all delegate methods will be called. @discussion The delegate is held using a zeroing-weak reference, so it is safe to deallocate the delegate while the receiver still has a reference to it.
+// Sets the delegate object and the queue on which it’s invoked.
 //
 // SetDelegateQueue calls the underlying SetDelegateQueue.
 func (x *PlayerItemRenderedLegibleOutput) SetDelegateQueue(delegate raw.AVPlayerItemRenderedLegibleOutputPushDelegate, delegateQueue *foundation.NSObject) {

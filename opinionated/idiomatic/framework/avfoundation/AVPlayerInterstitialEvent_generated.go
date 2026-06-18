@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that provides instructions for how a player presents interstitial content.
+//
 // PlayerInterstitialEvent wraps [raw.AVPlayerInterstitialEvent] with a fluent Go API.
 type PlayerInterstitialEvent struct {
 	inner *raw.AVPlayerInterstitialEvent
@@ -39,7 +41,7 @@ func NewPlayerInterstitialEvent() *PlayerInterstitialEvent {
 	return &PlayerInterstitialEvent{inner: raw.AVPlayerInterstitialEventFromID(_id)}
 }
 
-// An AVPlayerItem representing the primary content during the playback of which the interstitial event should occur. The primaryItem must have an AVAsset that provides an intrinsic mapping from its timeline to real-time dates.
+// The player item that represents the primary content.
 //
 // WithPrimaryItem sets the primaryItem property and returns the receiver for chaining.
 func (x *PlayerInterstitialEvent) WithPrimaryItem(primaryItem *PlayerItem) *PlayerInterstitialEvent {
@@ -47,7 +49,7 @@ func (x *PlayerInterstitialEvent) WithPrimaryItem(primaryItem *PlayerItem) *Play
 	return x
 }
 
-// An external identifier for the event. If an event is set on an AVPlayerInterstitialEventController that already has an event with the same identifier, the old event will be replaced by the new one.
+// An identifier for the event.
 //
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *PlayerInterstitialEvent) WithIdentifier(identifier string) *PlayerInterstitialEvent {
@@ -55,7 +57,7 @@ func (x *PlayerInterstitialEvent) WithIdentifier(identifier string) *PlayerInter
 	return x
 }
 
-// The time within the duration of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played. Will have a value equal to kCMTimeInvalid if the event was initialized with a date instead of a time.
+// A time within the timeline of the primary content that playback of interstitial content begins.
 //
 // WithTime sets the time_ property and returns the receiver for chaining.
 func (x *PlayerInterstitialEvent) WithTime(time_ coremedia.CMTime) *PlayerInterstitialEvent {
@@ -63,7 +65,7 @@ func (x *PlayerInterstitialEvent) WithTime(time_ coremedia.CMTime) *PlayerInters
 	return x
 }
 
-// The date within the date range of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played. Will have a value of nil if the event was initialized with a time instead of a date.
+// A date within the date range of the primary content that playback of interstitial content begins.
 //
 // WithDate sets the date property and returns the receiver for chaining.
 func (x *PlayerInterstitialEvent) WithDate(date *foundation.NSDate) *PlayerInterstitialEvent {
@@ -71,7 +73,7 @@ func (x *PlayerInterstitialEvent) WithDate(date *foundation.NSDate) *PlayerInter
 	return x
 }
 
-// An array of AVPlayerItems with configurations that will be reproduced for the playback of interstitial content. If you want the instances of AVURLAsset used during interstitial playback to be identical to the ones you specify for templateItems in AVPlayerInterstitialEvents that you set on an AVPlayerInterstitialEventController, rather than equivalent AVURLAssets with the same URL, you must create them with a value for the key AVURLAssetPrimarySessionIdentifierKey that's equal to the httpSessionIdentifier of the primary AVPlayerItem's asset. See AVAsset.h. This is especially useful if you require the use of a custom AVAssetResourceLoader delegate for interstitial assets. An NSInvalidArgumentException will be raised if any of the template items employs an AVAsset that lacks a URL, such as an AVComposition.
+// An array of player item configurations to use as templates for player items that play interstitial content.
 //
 // WithTemplateItems sets the collection, converting the Go slice to an NSArray.
 func (x *PlayerInterstitialEvent) WithTemplateItems(items ...*raw.AVPlayerItem) *PlayerInterstitialEvent {
@@ -91,7 +93,7 @@ func (x *PlayerInterstitialEvent) WithTemplateItems(items ...*raw.AVPlayerItem) 
 	return x
 }
 
-// Indicates restrictions on the use of end user playback controls that are imposed by the event.
+// The restrictions the event imposes on the playback of interstitial content.
 //
 // WithRestrictions sets the restrictions property and returns the receiver for chaining.
 func (x *PlayerInterstitialEvent) WithRestrictions(restrictions AVPlayerInterstitialEventRestrictions) *PlayerInterstitialEvent {
@@ -99,7 +101,7 @@ func (x *PlayerInterstitialEvent) WithRestrictions(restrictions AVPlayerIntersti
 	return x
 }
 
-// Specifies the offset in time at which playback of the primary item should resume after interstitial playback has finished. Definite numeric values are supported. The value kCMTimeIndefinite can also be used, in order to specify that the effective resumption time offset should accord with the wallclock time elapsed during interstitial playback; this value is typically suitable for live broadcasts. The default value is kCMTimeZero.
+// A time offset at which playback of primary content resumes after interstitial content finishes.
 //
 // WithResumptionOffset sets the resumptionOffset property and returns the receiver for chaining.
 func (x *PlayerInterstitialEvent) WithResumptionOffset(resumptionOffset coremedia.CMTime) *PlayerInterstitialEvent {
@@ -107,7 +109,7 @@ func (x *PlayerInterstitialEvent) WithResumptionOffset(resumptionOffset coremedi
 	return x
 }
 
-// Specifies the offset in time at which playback of the interstitial event should end. Can be any positive numeric value, or invalid. The default value is kCMTimeInvalid, which means there is no limit.
+// The time offset at which playback of the interstitial ends.
 //
 // WithPlayoutLimit sets the playoutLimit property and returns the receiver for chaining.
 func (x *PlayerInterstitialEvent) WithPlayoutLimit(playoutLimit coremedia.CMTime) *PlayerInterstitialEvent {
@@ -115,7 +117,7 @@ func (x *PlayerInterstitialEvent) WithPlayoutLimit(playoutLimit coremedia.CMTime
 	return x
 }
 
-// Specifies that the start time of interstitial playback should be snapped to a segment boundary of the primary asset If true, the start time or date of the interstitial will be adjusted to the nearest segment boundary when the primary player is playing an HTTP Live Streaming asset.
+// A Boolean value that indicates whether the start time of interstitial playback should snap to a segment boundary of the primary asset.
 //
 // WithAlignsStartWithPrimarySegmentBoundary sets the alignsStartWithPrimarySegmentBoundary property and returns the receiver for chaining.
 func (x *PlayerInterstitialEvent) WithAlignsStartWithPrimarySegmentBoundary(alignsStartWithPrimarySegmentBoundary bool) *PlayerInterstitialEvent {
@@ -123,7 +125,7 @@ func (x *PlayerInterstitialEvent) WithAlignsStartWithPrimarySegmentBoundary(alig
 	return x
 }
 
-// Specifies that the resumption time of primary playback should be snapped to a segment boundary of the primary asset If true, the resumption time of primary playback following an interstitial will be adjusted to the nearest segment boundary when the primary player is playing an HTTP Live Streaming asset.
+// A Boolean value that indicates whether the resumption time of primary playback should snap to a segment boundary of the primary asset.
 //
 // WithAlignsResumptionWithPrimarySegmentBoundary sets the alignsResumptionWithPrimarySegmentBoundary property and returns the receiver for chaining.
 func (x *PlayerInterstitialEvent) WithAlignsResumptionWithPrimarySegmentBoundary(alignsResumptionWithPrimarySegmentBoundary bool) *PlayerInterstitialEvent {
@@ -131,7 +133,7 @@ func (x *PlayerInterstitialEvent) WithAlignsResumptionWithPrimarySegmentBoundary
 	return x
 }
 
-// The cue property is used to schedule event playback at a predefined position of primary playback.
+// A cue to schedule interstitial event playback at a predefined position during primary playback.
 //
 // WithCue sets the cue property and returns the receiver for chaining.
 func (x *PlayerInterstitialEvent) WithCue(cue *foundation.NSString) *PlayerInterstitialEvent {
@@ -139,7 +141,7 @@ func (x *PlayerInterstitialEvent) WithCue(cue *foundation.NSString) *PlayerInter
 	return x
 }
 
-// Specifies that the interstitial should be scheduled for playback once only, and suppressed for subsequent replay. The "once" provision takes effect at the start of interstitial playback. The interstitial will not be scheduled again even if the first playback is canceled before completion.
+// A Boolean value that indicates whether to schedule this event one time only and suppress subsequent replay.
 //
 // WithWillPlayOnce sets the willPlayOnce property and returns the receiver for chaining.
 func (x *PlayerInterstitialEvent) WithWillPlayOnce(willPlayOnce bool) *PlayerInterstitialEvent {
@@ -147,7 +149,7 @@ func (x *PlayerInterstitialEvent) WithWillPlayOnce(willPlayOnce bool) *PlayerInt
 	return x
 }
 
-// Attributes of the event defined by the content vendor or the client. Dictionary keys are attribute names. Dictionary values are attribute values.
+// Attributes of the event that the vendor or app defines.
 //
 // WithUserDefinedAttributes sets the userDefinedAttributes property and returns the receiver for chaining.
 func (x *PlayerInterstitialEvent) WithUserDefinedAttributes(userDefinedAttributes *foundation.NSDictionary[objc.ID, objc.ID]) *PlayerInterstitialEvent {
@@ -155,7 +157,7 @@ func (x *PlayerInterstitialEvent) WithUserDefinedAttributes(userDefinedAttribute
 	return x
 }
 
-// Indicates this event's occupancy on AVPlayerItemIntegratedTimeline. The default value is AVPlayerInterstitialEventTimelineSinglePointOccupancy.
+// An event’s occupancy on the integrated timeline.
 //
 // WithTimelineOccupancy sets the timelineOccupancy property and returns the receiver for chaining.
 func (x *PlayerInterstitialEvent) WithTimelineOccupancy(timelineOccupancy AVPlayerInterstitialEventTimelineOccupancy) *PlayerInterstitialEvent {
@@ -163,7 +165,7 @@ func (x *PlayerInterstitialEvent) WithTimelineOccupancy(timelineOccupancy AVPlay
 	return x
 }
 
-// Indicates this event will supplement the primary content and should be presented unified with the primary item. The default value is NO.
+// A Boolean value that indicates whether an event supplements the primary content and should present with the primary item.
 //
 // WithSupplementsPrimaryContent sets the supplementsPrimaryContent property and returns the receiver for chaining.
 func (x *PlayerInterstitialEvent) WithSupplementsPrimaryContent(supplementsPrimaryContent bool) *PlayerInterstitialEvent {
@@ -171,7 +173,7 @@ func (x *PlayerInterstitialEvent) WithSupplementsPrimaryContent(supplementsPrima
 	return x
 }
 
-// Indicates this event's content is dynamic and server may respond with different interstitial assets for other particpants in coordinated playback. Indicates this event's content is dynamic and server may respond with different interstitial assets for other particpants in coordinated playback. If this value is set to NO and the primary asset is particpating in coordinated playback, this event will participate in coordinated playback as well. The default value is YES.
+// A Boolean value that indicates whether an event’s content is dynamic and the server may respond with different interstitial assets for other participants in a coordinated playback session.
 //
 // WithContentMayVary sets the contentMayVary property and returns the receiver for chaining.
 func (x *PlayerInterstitialEvent) WithContentMayVary(contentMayVary bool) *PlayerInterstitialEvent {
@@ -179,7 +181,7 @@ func (x *PlayerInterstitialEvent) WithContentMayVary(contentMayVary bool) *Playe
 	return x
 }
 
-// The time range within the duration of the interstitial event for which a skip button should be displayed. The start of the time range should indicate at which point the skip button should appear. The duration of the time range should indicate how long the skip button should be available. If this value is set to kCMTimePositiveInfinity, then the skip button will be available for the remainder of the interstitial's duration after appearing. If either the start or duration of the time range is kCMTimeInvalid, then the interstitial will NOT be eligible to be skipped.
+// The time range within the duration of the interstitial event for which a skip button should be displayed.
 //
 // WithSkipControlTimeRange sets the skipControlTimeRange property and returns the receiver for chaining.
 func (x *PlayerInterstitialEvent) WithSkipControlTimeRange(skipControlTimeRange coremedia.CMTimeRange) *PlayerInterstitialEvent {
@@ -187,7 +189,7 @@ func (x *PlayerInterstitialEvent) WithSkipControlTimeRange(skipControlTimeRange 
 	return x
 }
 
-// The key defined in the AVPlayerInterstitialEventController's localizedStringsBundle that points to the localized label for the skip button. If the value of the property is nil, the skip button may contain a generic label depending on the implementation of the UI that's in use. To ensure the best available user experience in various playback configurations, including external playback, set a value for this property that provides localized translations of skip control labels.
+// The key defined in the AVPlayerInterstitialEventController’s localizedStringsBundle that points to the localized label for the skip button.
 //
 // WithSkipControlLocalizedLabelBundleKey sets the skipControlLocalizedLabelBundleKey property and returns the receiver for chaining.
 func (x *PlayerInterstitialEvent) WithSkipControlLocalizedLabelBundleKey(skipControlLocalizedLabelBundleKey string) *PlayerInterstitialEvent {
@@ -195,7 +197,7 @@ func (x *PlayerInterstitialEvent) WithSkipControlLocalizedLabelBundleKey(skipCon
 	return x
 }
 
-// Indicates the event's planned duration. The default value is kCMTimeInvalid.
+// The planned duration of the event.
 //
 // WithPlannedDuration sets the plannedDuration property and returns the receiver for chaining.
 func (x *PlayerInterstitialEvent) WithPlannedDuration(plannedDuration coremedia.CMTime) *PlayerInterstitialEvent {

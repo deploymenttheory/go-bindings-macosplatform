@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that vends collections of metadata items that a player item’s tracks carry.
+//
 // PlayerItemMetadataOutput wraps [raw.AVPlayerItemMetadataOutput] with a fluent Go API.
 type PlayerItemMetadataOutput struct {
 	inner *raw.AVPlayerItemMetadataOutput
@@ -30,7 +32,7 @@ func PlayerItemMetadataOutputFromID(id objc.ID) *PlayerItemMetadataOutput {
 	return &PlayerItemMetadataOutput{inner: raw.AVPlayerItemMetadataOutputFromID(id)}
 }
 
-// @method			initWithIdentifiers: @abstract		Creates an instance of AVPlayerItemMetadataOutput. @param			identifiers A array of metadata identifiers indicating the metadata items that the output should provide. @discussion See AVMetadataIdentifiers.h for publicly defined metadata identifiers. Pass nil to receive all of the timed metadata from all enabled AVPlayerItemTracks that carry timed metadata.
+// Creates an instance of AVPlayerItemMetadataOutput.
 //
 // NewPlayerItemMetadataOutputWithIdentifiers creates a new [PlayerItemMetadataOutput].
 func NewPlayerItemMetadataOutputWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) *PlayerItemMetadataOutput {
@@ -39,7 +41,7 @@ func NewPlayerItemMetadataOutputWithIdentifiers(identifiers *foundation.NSArray[
 	return &PlayerItemMetadataOutput{inner: raw.AVPlayerItemMetadataOutputFromID(_id)}
 }
 
-// @property		advanceIntervalForDelegateInvocation @abstract		Permits advance invocation of the associated delegate, if any. @discussion If it is possible, an AVPlayerItemMetadataOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemMetadataOutput is prepared to act on them, the delegate will be invoked as soon as possible.
+// The time interval, in seconds, the player item metadata output object messages its delegate earlier than normal.
 //
 // WithAdvanceIntervalForDelegateInvocation sets the advanceIntervalForDelegateInvocation property and returns the receiver for chaining.
 func (x *PlayerItemMetadataOutput) WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemMetadataOutput {
@@ -47,7 +49,7 @@ func (x *PlayerItemMetadataOutput) WithAdvanceIntervalForDelegateInvocation(adva
 	return x
 }
 
-// @property		suppressesPlayerRendering @abstract		Indicates whether the output, when added to an AVPlayerItem, will be used in addition to normal rendering of media data by the player or instead of normal rendering. @discussion The default value is NO, indicating that the output will be used in addition to normal rendering. If you want to render the media data provided by the output yourself instead of allowing it to be rendered as in normally would be by AVPlayer, set suppressesPlayerRendering to YES. Whenever any output is added to an AVPlayerItem that has suppressesPlayerRendering set to YES, the media data supplied to the output will not be rendered by AVPlayer. Other media data associated with the item but not provided to such an output is not affected. For example, if an output of class AVPlayerItemVideoOutput with a value of YES for suppressesPlayerRendering is added to an AVPlayerItem, video media for that item will not be rendered by the AVPlayer, while audio media, subtitle media, and other kinds of media, if present, will be rendered.
+// A Boolean value that indicates whether the player object renders the receiver’s output.
 //
 // WithSuppressesPlayerRendering sets the suppressesPlayerRendering property and returns the receiver for chaining.
 func (x *PlayerItemMetadataOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemMetadataOutput {
@@ -55,7 +57,7 @@ func (x *PlayerItemMetadataOutput) WithSuppressesPlayerRendering(suppressesPlaye
 	return x
 }
 
-// @method			setDelegate:queue: @abstract		Sets the receiver's delegate and a dispatch queue on which the delegate will be called. @param			delegate An object conforming to AVPlayerItemMetadataOutputPushDelegate protocol. @param			delegateQueue A dispatch queue on which all delegate methods will be called.
+// Sets the delegate and a dispatch queue on which the delegate is called.
 //
 // SetDelegateQueue calls the underlying SetDelegateQueue.
 func (x *PlayerItemMetadataOutput) SetDelegateQueue(delegate raw.AVPlayerItemMetadataOutputPushDelegate, delegateQueue *foundation.NSObject) {

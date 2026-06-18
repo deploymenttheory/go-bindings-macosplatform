@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// Object representing an OBEX connection to a remote target.
+//
 // OBEXSession wraps [raw.OBEXSession] with a fluent Go API.
 type OBEXSession struct {
 	inner *raw.OBEXSession
@@ -36,126 +38,176 @@ func NewOBEXSession() *OBEXSession {
 	return &OBEXSession{inner: raw.OBEXSessionFromID(_id)}
 }
 
+// Initiate an OBEX connection to a device. Causes underlying transport (Bluetooth, et al) to attempt to connect to a remote device. After success, an OBEX connect packet is sent to establish the OBEX Connection.
+//
 // OBEXConnectMaxPacketLengthOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXConnectMaxPacketLengthOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
 func (x *OBEXSession) OBEXConnectMaxPacketLengthOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inFlags uint8, inMaxPacketLength uint16, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
 	return x.inner.OBEXConnectMaxPacketLengthOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inFlags, inMaxPacketLength, inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
 }
 
+// Send an OBEX Disconnect command to the session’s target. THIS DOES NOT necessarily close the underlying transport connection. Deleting the session will ensure that closure.
+//
 // OBEXDisconnectOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXDisconnectOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
 func (x *OBEXSession) OBEXDisconnectOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
 	return x.inner.OBEXDisconnectOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
 }
 
+// Send an OBEX Put command to the session’s target.
+//
 // OBEXPutHeadersDataHeadersDataLengthBodyDataBodyDataLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXPutHeadersDataHeadersDataLengthBodyDataBodyDataLengthEventSelectorSelectorTargetRefCon.
 func (x *OBEXSession) OBEXPutHeadersDataHeadersDataLengthBodyDataBodyDataLengthEventSelectorSelectorTargetRefCon(isFinalChunk uint8, inHeadersData unsafe.Pointer, inHeadersDataLength uint, inBodyData unsafe.Pointer, inBodyDataLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
 	return x.inner.OBEXPutHeadersDataHeadersDataLengthBodyDataBodyDataLengthEventSelectorSelectorTargetRefCon(isFinalChunk, inHeadersData, inHeadersDataLength, inBodyData, inBodyDataLength, inSelector, inTarget, inUserRefCon)
 }
 
+// Send an OBEX Get command to the session’s target.
+//
 // OBEXGetHeadersHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXGetHeadersHeadersLengthEventSelectorSelectorTargetRefCon.
 func (x *OBEXSession) OBEXGetHeadersHeadersLengthEventSelectorSelectorTargetRefCon(isFinalChunk uint8, inHeaders unsafe.Pointer, inHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
 	return x.inner.OBEXGetHeadersHeadersLengthEventSelectorSelectorTargetRefCon(isFinalChunk, inHeaders, inHeadersLength, inSelector, inTarget, inUserRefCon)
 }
 
+// Send an OBEX Abort command to the session’s target.
+//
 // OBEXAbortOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXAbortOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
 func (x *OBEXSession) OBEXAbortOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
 	return x.inner.OBEXAbortOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
 }
 
+// Send an OBEX SetPath command to the session’s target.
+//
 // OBEXSetPathConstantsOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXSetPathConstantsOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
 func (x *OBEXSession) OBEXSetPathConstantsOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inFlags uint8, inConstants uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
 	return x.inner.OBEXSetPathConstantsOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inFlags, inConstants, inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
 }
 
+// Send a connect response to a session’s target.
+//
 // OBEXConnectResponseFlagsMaxPacketLengthOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXConnectResponseFlagsMaxPacketLengthOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
 func (x *OBEXSession) OBEXConnectResponseFlagsMaxPacketLengthOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode uint8, inFlags uint8, inMaxPacketLength uint16, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
 	return x.inner.OBEXConnectResponseFlagsMaxPacketLengthOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode, inFlags, inMaxPacketLength, inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
 }
 
+// Send a disconnect response to a session’s target.
+//
 // OBEXDisconnectResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXDisconnectResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
 func (x *OBEXSession) OBEXDisconnectResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
 	return x.inner.OBEXDisconnectResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode, inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
 }
 
+// Send a put response to a session’s target.
+//
 // OBEXPutResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXPutResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
 func (x *OBEXSession) OBEXPutResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
 	return x.inner.OBEXPutResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode, inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
 }
 
+// Send a get response to a session’s target.
+//
 // OBEXGetResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXGetResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
 func (x *OBEXSession) OBEXGetResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
 	return x.inner.OBEXGetResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode, inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
 }
 
+// Send an abort response to a session’s target.
+//
 // OBEXAbortResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXAbortResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
 func (x *OBEXSession) OBEXAbortResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
 	return x.inner.OBEXAbortResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode, inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
 }
 
+// Send a set path response to a session’s target.
+//
 // OBEXSetPathResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon calls the underlying OBEXSetPathResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon.
 func (x *OBEXSession) OBEXSetPathResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
 	return x.inner.OBEXSetPathResponseOptionalHeadersOptionalHeadersLengthEventSelectorSelectorTargetRefCon(inResponseOpCode, inOptionalHeaders, inOptionalHeadersLength, inSelector, inTarget, inUserRefCon)
 }
 
+// Determine the maximum amount of data you can send in a particular command as an OBEX client session.
+//
 // GetAvailableCommandPayloadLength calls the underlying GetAvailableCommandPayloadLength.
 func (x *OBEXSession) GetAvailableCommandPayloadLength(inOpCode uint8) uint16 {
 	return x.inner.GetAvailableCommandPayloadLength(inOpCode)
 }
 
+// Determine the maximum amount of data you can send in a particular command response as an OBEX server session.
+//
 // GetAvailableCommandResponsePayloadLength calls the underlying GetAvailableCommandResponsePayloadLength.
 func (x *OBEXSession) GetAvailableCommandResponsePayloadLength(inOpCode uint8) uint16 {
 	return x.inner.GetAvailableCommandResponsePayloadLength(inOpCode)
 }
 
+// Gets current max packet length.
+//
 // GetMaxPacketLength calls the underlying GetMaxPacketLength.
 func (x *OBEXSession) GetMaxPacketLength() uint16 {
 	return x.inner.GetMaxPacketLength()
 }
 
+// Has a successful connect packet been sent and received? This API tells you so.
+//
 // HasOpenOBEXConnection calls the underlying HasOpenOBEXConnection.
 func (x *OBEXSession) HasOpenOBEXConnection() bool {
 	return x.inner.HasOpenOBEXConnection()
 }
 
+// Sets the C-API callback used when the session recieves data.
+//
 // SetEventCallback calls the underlying SetEventCallback.
 func (x *OBEXSession) SetEventCallback(inEventCallback unsafe.Pointer) {
 	x.inner.SetEventCallback(inEventCallback)
 }
 
+// Sets the C-API callback refCon used when the session recieves data.
+//
 // SetEventRefCon calls the underlying SetEventRefCon.
 func (x *OBEXSession) SetEventRefCon(inRefCon unsafe.Pointer) {
 	x.inner.SetEventRefCon(inRefCon)
 }
 
+// Allow you to set a selector to be called when events occur on the OBEX session.
+//
 // SetEventSelectorTargetRefCon calls the underlying SetEventSelectorTargetRefCon.
 func (x *OBEXSession) SetEventSelectorTargetRefCon(inEventSelector objc.SEL, inEventSelectorTarget objc.ID, inUserRefCon unsafe.Pointer) {
 	x.inner.SetEventSelectorTargetRefCon(inEventSelector, inEventSelectorTarget, inUserRefCon)
 }
 
+// Tranport subclasses need to invoke this from their own data-receive handlers. For example, when data is received over a Bluetooth RFCOMM channel in the IOBluetoothOBEXSession, it in turn calls this to dispatch the data. If you do not handle this case, your server session will not work, guaranteed.
+//
 // ServerHandleIncomingData calls the underlying ServerHandleIncomingData.
 func (x *OBEXSession) ServerHandleIncomingData(event *raw.OBEXTransportEvent) {
 	x.inner.ServerHandleIncomingData(event)
 }
 
+// Tranport subclasses need to invoke this from their own data-receive handlers. For example, when data is received over a Bluetooth RFCOMM channel in the IOBluetoothOBEXSession, it in turn calls this to dispatch the data. If you do not handle this case, your server session will not work, guaranteed.
+//
 // ClientHandleIncomingData calls the underlying ClientHandleIncomingData.
 func (x *OBEXSession) ClientHandleIncomingData(event *raw.OBEXTransportEvent) {
 	x.inner.ClientHandleIncomingData(event)
 }
 
+// You must override this to send data over your transport. This does nothing by default, it will return a kOBEXUnsupportedError.
+//
 // SendDataToTransportDataLength calls the underlying SendDataToTransportDataLength.
 func (x *OBEXSession) SendDataToTransportDataLength(inDataToSend unsafe.Pointer, inDataLength uint) int32 {
 	return x.inner.SendDataToTransportDataLength(inDataToSend, inDataLength)
 }
 
+// Opens a transport connection to a device. A Bluetooth connection is one example of a transport.
+//
 // OpenTransportConnectionSelectorTargetRefCon calls the underlying OpenTransportConnectionSelectorTargetRefCon.
 func (x *OBEXSession) OpenTransportConnectionSelectorTargetRefCon(inSelector objc.SEL, inTarget objc.ID, inUserRefCon unsafe.Pointer) int32 {
 	return x.inner.OpenTransportConnectionSelectorTargetRefCon(inSelector, inTarget, inUserRefCon)
 }
 
+// You must override this - it will be called periodically to determine if a transport connection is open or not.
+//
 // HasOpenTransportConnection calls the underlying HasOpenTransportConnection.
 func (x *OBEXSession) HasOpenTransportConnection() uint8 {
 	return x.inner.HasOpenTransportConnection()
 }
 
+// You must override this - it will be called when the transport connection should be shutdown.
+//
 // CloseTransportConnection calls the underlying CloseTransportConnection.
 func (x *OBEXSession) CloseTransportConnection() int32 {
 	return x.inner.CloseTransportConnection()

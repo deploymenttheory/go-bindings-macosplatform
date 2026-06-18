@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The common behavior for subclasses that trigger the delivery of a local or remote notification.
+//
 // NotificationTrigger wraps [raw.UNNotificationTrigger] with a fluent Go API.
 type NotificationTrigger struct {
 	inner *raw.UNNotificationTrigger

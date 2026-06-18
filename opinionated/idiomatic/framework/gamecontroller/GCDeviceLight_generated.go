@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The colored light on a device.
+//
 // DeviceLight wraps [raw.GCDeviceLight] with a fluent Go API.
 type DeviceLight struct {
 	inner *raw.GCDeviceLight
@@ -35,6 +37,8 @@ func NewDeviceLight() *DeviceLight {
 	return &DeviceLight{inner: raw.GCDeviceLightFromID(_id)}
 }
 
+// The color of a device’s light.
+//
 // WithColor sets the color property and returns the receiver for chaining.
 func (x *DeviceLight) WithColor(color *Color) *DeviceLight {
 	x.inner.SetColor(color.Unwrap())

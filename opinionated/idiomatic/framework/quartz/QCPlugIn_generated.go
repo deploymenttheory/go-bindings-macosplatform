@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A base class to subclass for writing custom patches.
+//
 // QCPlugIn wraps [raw.QCPlugIn] with a fluent Go API.
 type QCPlugIn struct {
 	inner *raw.QCPlugIn
@@ -36,11 +38,15 @@ func NewQCPlugIn() *QCPlugIn {
 	return &QCPlugIn{inner: raw.QCPlugInFromID(_id)}
 }
 
+// Allows you to perform custom setup tasks before the Quartz Composer engine starts rendering.
+//
 // StartExecution calls the underlying StartExecution.
 func (x *QCPlugIn) StartExecution(context_ objc.ID) bool {
 	return x.inner.StartExecution(context_)
 }
 
+// Allows you to perform custom tasks when the execution of the QCPlugIn object is resumed.
+//
 // EnableExecution calls the underlying EnableExecution.
 func (x *QCPlugIn) EnableExecution(context_ objc.ID) {
 	x.inner.EnableExecution(context_)
@@ -51,26 +57,36 @@ func (x *QCPlugIn) ExecutionTimeForContextAtTimeWithArguments(context_ objc.ID, 
 	return x.inner.ExecutionTimeForContextAtTimeWithArguments(context_, time_, arguments)
 }
 
+// Performs the processing or rendering tasks appropriate for the custom patch.
+//
 // ExecuteAtTimeWithArguments calls the underlying ExecuteAtTimeWithArguments.
 func (x *QCPlugIn) ExecuteAtTimeWithArguments(context_ objc.ID, time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool {
 	return x.inner.ExecuteAtTimeWithArguments(context_, time_, arguments)
 }
 
+// Allows you to perform custom tasks when the execution of the QCPlugIn object is paused.
+//
 // DisableExecution calls the underlying DisableExecution.
 func (x *QCPlugIn) DisableExecution(context_ objc.ID) {
 	x.inner.DisableExecution(context_)
 }
 
+// Allows you to perform custom tasks when the QCPlugIn object stops executing.
+//
 // StopExecution calls the underlying StopExecution.
 func (x *QCPlugIn) StopExecution(context_ objc.ID) {
 	x.inner.StopExecution(context_)
 }
 
+// A method implemented to override serialization.
+//
 // SerializedValueForKey calls the underlying SerializedValueForKey.
 func (x *QCPlugIn) SerializedValueForKey(key string) objc.ID {
 	return x.inner.SerializedValueForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Provides custom deserialization for patch internal settings that were previously serialized using the method serializedValueForKey:.
+//
 // SetSerializedValueForKey calls the underlying SetSerializedValueForKey.
 func (x *QCPlugIn) SetSerializedValueForKey(serializedValue objc.ID, key string) {
 	x.inner.SetSerializedValueForKey(serializedValue, foundation.NSStringStringWithUTF8String(key))

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A session that your app uses to protect an assessment.
+//
 // AssessmentSession wraps [raw.AEAssessmentSession] with a fluent Go API.
 type AssessmentSession struct {
 	inner *raw.AEAssessmentSession
@@ -29,6 +31,8 @@ func AssessmentSessionFromID(id objc.ID) *AssessmentSession {
 	return &AssessmentSession{inner: raw.AEAssessmentSessionFromID(id)}
 }
 
+// Creates a new assessment session.
+//
 // NewAssessmentSessionWithConfiguration creates a new [AssessmentSession].
 func NewAssessmentSessionWithConfiguration(configuration *raw.AEAssessmentConfiguration) *AssessmentSession {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AEAssessmentSession")), objc.RegisterName("alloc"))
@@ -36,22 +40,30 @@ func NewAssessmentSessionWithConfiguration(configuration *raw.AEAssessmentConfig
 	return &AssessmentSession{inner: raw.AEAssessmentSessionFromID(_id)}
 }
 
+// A delegate to which the session provides state change updates.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *AssessmentSession) WithDelegate(delegate raw.AEAssessmentSessionDelegate) *AssessmentSession {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Starts an assessment session.
+//
 // Begin calls the underlying Begin.
 func (x *AssessmentSession) Begin() {
 	x.inner.Begin()
 }
 
+// Ends an assessment session.
+//
 // End calls the underlying End.
 func (x *AssessmentSession) End() {
 	x.inner.End()
 }
 
+// Changes the session to use the specified configuration.
+//
 // UpdateToConfiguration calls the underlying UpdateToConfiguration.
 func (x *AssessmentSession) UpdateToConfiguration(configuration *raw.AEAssessmentConfiguration) {
 	x.inner.UpdateToConfiguration(configuration)

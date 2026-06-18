@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The Core Image class that defines a vector object.
+//
 // Vector wraps [raw.CIVector] with a fluent Go API.
 type Vector struct {
 	inner *raw.CIVector
@@ -32,7 +34,7 @@ func VectorFromID(id objc.ID) *Vector {
 	return &Vector{inner: raw.CIVectorFromID(id)}
 }
 
-// Initialize a Core Image vector object with the specified the values. - Parameters: - values: A pointer `CGFloat` values for vector. - count: The number of `CGFloats` specified by the `values` parameter. - Returns: An initialized “CIVector“ object of length `count`.
+// Initialize a Core Image vector object with the specified the values.
 //
 // NewVectorWithValuesCount creates a new [Vector].
 func NewVectorWithValuesCount(values *float64, count uint) *Vector {
@@ -41,7 +43,7 @@ func NewVectorWithValuesCount(values *float64, count uint) *Vector {
 	return &Vector{inner: raw.CIVectorFromID(_id)}
 }
 
-// Initialize a Core Image vector object with one value. - Parameters: - x: The value for the first position in the vector. - Returns: An initialized “CIVector“ object of length 1.
+// Initialize a Core Image vector object with one value.
 //
 // NewVectorWithX creates a new [Vector].
 func NewVectorWithX(x float64) *Vector {
@@ -50,7 +52,7 @@ func NewVectorWithX(x float64) *Vector {
 	return &Vector{inner: raw.CIVectorFromID(_id)}
 }
 
-// Initialize a Core Image vector object with two values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - Returns: An initialized “CIVector“ object of length 2.
+// Initialize a Core Image vector object with two values.
 //
 // NewVectorWithXY creates a new [Vector].
 func NewVectorWithXY(x float64, y float64) *Vector {
@@ -59,7 +61,7 @@ func NewVectorWithXY(x float64, y float64) *Vector {
 	return &Vector{inner: raw.CIVectorFromID(_id)}
 }
 
-// Initialize a Core Image vector object with three values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - z: The value for the third position in the vector. - Returns: An initialized “CIVector“ object of length 3.
+// Initialize a Core Image vector object with three values.
 //
 // NewVectorWithXYZ creates a new [Vector].
 func NewVectorWithXYZ(x float64, y float64, z float64) *Vector {
@@ -68,7 +70,7 @@ func NewVectorWithXYZ(x float64, y float64, z float64) *Vector {
 	return &Vector{inner: raw.CIVectorFromID(_id)}
 }
 
-// Initialize a Core Image vector object with four values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - z: The value for the third position in the vector. - w: The value for the forth position in the vector. - Returns: An initialized “CIVector“ object of length 4.
+// Initialize a Core Image vector object with four values.
 //
 // NewVectorWithXYZW creates a new [Vector].
 func NewVectorWithXYZW(x float64, y float64, z float64, w float64) *Vector {
@@ -77,7 +79,7 @@ func NewVectorWithXYZW(x float64, y float64, z float64, w float64) *Vector {
 	return &Vector{inner: raw.CIVectorFromID(_id)}
 }
 
-// Initialize a Core Image vector object with two values provided by a `CGPoint` structure. The `CGRect` structure’s `y` and `y` values are stored in the vector’s two values. - Parameters: - p: The `CGPoint` structure. - Returns: An initialized “CIVector“ object of length 2.
+// Initialize a Core Image vector object with two values provided by a CGPoint structure.
 //
 // NewVectorWithCGPoint creates a new [Vector].
 func NewVectorWithCGPoint(p corefoundation.CGPoint) *Vector {
@@ -86,7 +88,7 @@ func NewVectorWithCGPoint(p corefoundation.CGPoint) *Vector {
 	return &Vector{inner: raw.CIVectorFromID(_id)}
 }
 
-// Initialize a Core Image vector object with four values provided by a `CGRect` structure. The `CGRect` structure’s `x`, `y`, `height` and `width` values are stored in the vector’s four values. - Parameters: - r: The `CGRect` structure. - Returns: An initialized “CIVector“ object of length 4.
+// Initialize a Core Image vector object with four values provided by a CGRect structure.
 //
 // NewVectorWithCGRect creates a new [Vector].
 func NewVectorWithCGRect(r corefoundation.CGRect) *Vector {
@@ -95,7 +97,7 @@ func NewVectorWithCGRect(r corefoundation.CGRect) *Vector {
 	return &Vector{inner: raw.CIVectorFromID(_id)}
 }
 
-// Initialize a Core Image vector object with six values provided by a `CGAffineTransform` structure. The `CGAffineTransform` structure’s `a`, `b`, `c`, `c`, `tx` and `ty` values are stored in the vector’s six values. - Parameters: - t: The `CGAffineTransform` structure. - Returns: An initialized “CIVector“ object of length 6.
+// Initialize a Core Image vector object with six values provided by a CGAffineTransform structure.
 //
 // NewVectorWithCGAffineTransform creates a new [Vector].
 func NewVectorWithCGAffineTransform(t corefoundation.CGAffineTransform) *Vector {
@@ -104,7 +106,7 @@ func NewVectorWithCGAffineTransform(t corefoundation.CGAffineTransform) *Vector 
 	return &Vector{inner: raw.CIVectorFromID(_id)}
 }
 
-// Initialize a Core Image vector object with values provided in a string representation. - Parameters: - representation: A string that is in one of the formats returned by the `stringRepresentation` method. - Returns: An initialized “CIVector“ object.
+// Initialize a Core Image vector object with values provided in a string representation.
 //
 // NewVectorWithString creates a new [Vector].
 func NewVectorWithString(representation string) *Vector {
@@ -113,7 +115,7 @@ func NewVectorWithString(representation string) *Vector {
 	return &Vector{inner: raw.CIVectorFromID(_id)}
 }
 
-// Returns a value from a specific position in the vector. The numbering of elements in a vector begins with zero. - Parameters: - index: The position in the vector of the value that you want to retrieve. - Returns: The value retrieved from the vector or `0` if the position is undefined.
+// Returns a value from a specific position in the vector.
 //
 // ValueAtIndex calls the underlying ValueAtIndex.
 func (x *Vector) ValueAtIndex(index uint) float64 {

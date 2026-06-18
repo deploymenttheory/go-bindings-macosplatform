@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Encapsulates an IEEE 802.11 channel.
+//
 // Channel wraps [raw.CWChannel] with a fluent Go API.
 type Channel struct {
 	inner *raw.CWChannel
@@ -35,7 +37,7 @@ func NewChannel() *Channel {
 	return &Channel{inner: raw.CWChannelFromID(_id)}
 }
 
-// @method @param channel The CWChannel with which to compare the receiver. @result YES if the objects are equal, otherwise NO. @abstract Determine CWChannel equality. @discussion CWChannel objects are considered equal if all their corresponding properties are equal.
+// Determine CWChannel object equality.
 //
 // IsEqualToChannel calls the underlying IsEqualToChannel.
 func (x *Channel) IsEqualToChannel(channel *raw.CWChannel) bool {

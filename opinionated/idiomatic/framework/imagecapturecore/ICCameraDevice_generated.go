@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a camera.
+//
 // CameraDevice wraps [raw.ICCameraDevice] with a fluent Go API.
 type CameraDevice struct {
 	inner *raw.ICCameraDevice
@@ -47,7 +49,7 @@ func (x *CameraDevice) WithMediaPresentation(mediaPresentation ICMediaPresentati
 	return x
 }
 
-// @property ptpEventHandler @abstract As an alternative to setting up an object to handle PTP event packets, a handler can be set.  The handler will always be called in place of the delegate if non-nil.  If the handler is not present, the delegate will be called if present. It is guaranteed only one of the methods will be called if both are implemented.
+// A closure for handling PTP event packets.
 //
 // WithPtpEventHandler sets the ptpEventHandler property and returns the receiver for chaining.
 func (x *CameraDevice) WithPtpEventHandler(ptpEventHandler func(*foundation.NSData)) *CameraDevice {
@@ -55,7 +57,7 @@ func (x *CameraDevice) WithPtpEventHandler(ptpEventHandler func(*foundation.NSDa
 	return x
 }
 
-// @property delegate @abstract The delegate to receive messages once a session is opened on the device. @discussion The delegate must conform ICDeviceDelegate protocol. In addition it should respond to selectors defined in ICCameraDeviceDelegate protocol in order to effectively interact with the device object. The messages this delegate can expect to receive are described by these protocols.
+// The delegate to receive messages once a session is opened on the device.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *CameraDevice) WithDelegate(delegate raw.ICDeviceDelegate) *CameraDevice {
@@ -63,35 +65,35 @@ func (x *CameraDevice) WithDelegate(delegate raw.ICDeviceDelegate) *CameraDevice
 	return x
 }
 
-// @method filesOfType: @abstract This method returns an array of files on the camera of type fileType. @discussion The fileType string is one of the following Uniform Type Identifier strings: kUTTypeImage, kUTTypeMovie, kUTTypeAudio, or kUTTypeData.
+// Returns an array of files of the selected type on the camera.
 //
 // FilesOfType calls the underlying FilesOfType.
 func (x *CameraDevice) FilesOfType(fileUTType string) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.FilesOfType(foundation.NSStringStringWithUTF8String(fileUTType))
 }
 
-// @method requestReadDataFromFile:atOffset:length:readDelegate:didReadDataSelector:contextInfo: @abstract This method asynchronously reads data of a specified length from a specified offset. @discussion The readDelegate passed must not be nil. When this request is completed, the didReadDataSelector of the readDelegate object is called. The didReadDataSelector should have the same signature as: - (void)didReadData:(NSData*)data fromFile:(ICCameraFile*)file error:(NSError*)error contextInfo:(void*)contextInfo. The content of error returned should be examined to determine if the request completed successfully.
+// Asynchronously reads data of a specified length from a specified offset.
 //
 // RequestReadDataFromFileAtOffsetLengthReadDelegateDidReadDataSelectorContextInfo calls the underlying RequestReadDataFromFileAtOffsetLengthReadDelegateDidReadDataSelectorContextInfo.
 func (x *CameraDevice) RequestReadDataFromFileAtOffsetLengthReadDelegateDidReadDataSelectorContextInfo(file *raw.ICCameraFile, offset int64, length int64, readDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.RequestReadDataFromFileAtOffsetLengthReadDelegateDidReadDataSelectorContextInfo(file, offset, length, readDelegate, selector, contextInfo)
 }
 
-// @method requestDownloadFile:options:downloadDelegate:didDownloadSelector:contextInfo: @abstract Download a file from the camera. Please refer to the top of this header for information about the options. @discussion The downloadDelegate passed must not be nil. When this request is completed, the didDownloadSelector of the downloadDelegate object is called.The didDownloadSelector should have the same signature as: - (void)didDownloadFile:(ICCameraFile*)file error:(NSError*)error options:(NSDictionary*)options contextInfo:(void*)contextInfo. The content of error returned should be examined to determine if the request completed successfully.
+// Downloads a file from the camera.
 //
 // RequestDownloadFileOptionsDownloadDelegateDidDownloadSelectorContextInfo calls the underlying RequestDownloadFileOptionsDownloadDelegateDidDownloadSelectorContextInfo.
 func (x *CameraDevice) RequestDownloadFileOptionsDownloadDelegateDidDownloadSelectorContextInfo(file *raw.ICCameraFile, options *foundation.NSDictionary[*foundation.NSString, objc.ID], downloadDelegate raw.ICCameraDeviceDownloadDelegate, selector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.RequestDownloadFileOptionsDownloadDelegateDidDownloadSelectorContextInfo(file, options, downloadDelegate, selector, contextInfo)
 }
 
-// @method cancelDownload @abstract Cancels the current download operation if supported
+// Cancels a download from the camera.
 //
 // CancelDownload calls the underlying CancelDownload.
 func (x *CameraDevice) CancelDownload() {
 	x.inner.CancelDownload()
 }
 
-// @method requestDeleteFiles @abstract Deletes files.
+// Deletes files from the camera.
 //
 // RequestDeleteFiles calls the underlying RequestDeleteFiles.
 func (x *CameraDevice) RequestDeleteFiles(files ...CameraItemProvider) {
@@ -107,63 +109,63 @@ func (x *CameraDevice) RequestDeleteFiles(files ...CameraItemProvider) {
 	x.inner.RequestDeleteFiles(_arg0)
 }
 
-// @method requestDeleteFiles:deleteFailed:completion @abstract Allows for deletion of an array of ICCameraItem objects, with the added ability to catch delete failures using the 'deleteFailed' block, and a completion block that will return the overall state of the request. The deleteFailed block will return: - NSDictionary<ICDeleteError, ICCameraItem*>* The completion block will return: — error: - nil if successful - NSError* with an code set to ICReturnDeleteFilesFailed if any file failed. - result: NSDictionary<ICDeleteResult, NSArray<ICCameraItem*>*>* result - ICDeleteSuccessful: NSArray<ICCameraItem*>* success - ICDeleteFailed: NSArray<ICCameraItem*>* failed
+// Deletes files from the camera, with the ability to catch failures and execute a completion block.
 //
 // RequestDeleteFilesDeleteFailedCompletion calls the underlying RequestDeleteFilesDeleteFailedCompletion.
 func (x *CameraDevice) RequestDeleteFilesDeleteFailedCompletion(files *foundation.NSArray[*raw.ICCameraItem], deleteFailed objc.Block, completion objc.Block) *foundation.NSProgress {
 	return x.inner.RequestDeleteFilesDeleteFailedCompletion(files, deleteFailed, completion)
 }
 
-// @method cancelDelete @abstract Cancels the current delete operation started by sending a 'requestDeleteFiles:'. This will only cancel operations in flight when a batch of files have been requested for deletion.
+// Cancels the current delete operation.
 //
 // CancelDelete calls the underlying CancelDelete.
 func (x *CameraDevice) CancelDelete() {
 	x.inner.CancelDelete()
 }
 
-// @method requestSyncClock @abstract Synchronize camera's clock with the computer's clock. You should send this request only if the camera has the 'ICCameraDeviceCanSyncClock' capability.
+// Synchronizes the camera’s clock with the computer’s clock.
 //
 // RequestSyncClock calls the underlying RequestSyncClock.
 func (x *CameraDevice) RequestSyncClock() {
 	x.inner.RequestSyncClock()
 }
 
-// @method requestUploadFile:options:uploadDelegate:didUploadSelector:contextInfo: @abstract Upload a file at fileURL to the camera. The options dictionary is not used in this version. @discussion The uploadDelegate passed must not be nil. When this request is completed, the didUploadSelector of the uploadDelegate object is called. The didUploadSelector should have the same signature as: - (void)didUploadFile:(NSURL*)fileURL error:(NSError*)error contextInfo:(void*)contextInfo. The content of error returned should be examined to determine if the request completed successfully.
+// Uploads a file to the camera.
 //
 // RequestUploadFileOptionsUploadDelegateDidUploadSelectorContextInfo calls the underlying RequestUploadFileOptionsUploadDelegateDidUploadSelectorContextInfo.
 func (x *CameraDevice) RequestUploadFileOptionsUploadDelegateDidUploadSelectorContextInfo(fileURL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID], uploadDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.RequestUploadFileOptionsUploadDelegateDidUploadSelectorContextInfo(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), options, uploadDelegate, selector, contextInfo)
 }
 
-// @method requestTakePicture @abstract Capture a new image using the camera, the camera capabilities include 'ICCameraDeviceCanTakePicture'.
+// Captures a new image using the camera.
 //
 // RequestTakePicture calls the underlying RequestTakePicture.
 func (x *CameraDevice) RequestTakePicture() {
 	x.inner.RequestTakePicture()
 }
 
-// @method requestEnableTethering @abstract Send this message to enable tethered capture on the camera device if the camera has the 'ICCameraDeviceCanTakePicture' capability.
+// Enables tethered capture if the camera has the capability to take pictures while connected.
 //
 // RequestEnableTethering calls the underlying RequestEnableTethering.
 func (x *CameraDevice) RequestEnableTethering() {
 	x.inner.RequestEnableTethering()
 }
 
-// @method requestDisableTethering @abstract Send this message to disable tethered capture on the camera device if the camera has the 'ICCameraDeviceCanTakePicture' capability and if your process has already sent a 'requestEnableTethering' to it.
+// Disables tethered capture on the camera.
 //
 // RequestDisableTethering calls the underlying RequestDisableTethering.
 func (x *CameraDevice) RequestDisableTethering() {
 	x.inner.RequestDisableTethering()
 }
 
-// @method requestSendPTPCommand:outData:sendCommandDelegate:sendCommandDelegate:contextInfo: @abstract This method asynchronously sends a PTP command to a camera. @discussion This should be sent only if the 'capabilities' property contains 'ICCameraDeviceCanAcceptPTPCommands'. All PTP cameras have this capability. The response to this command will be delivered using didSendCommandSelector of sendCommandDelegate. The didSendCommandSelector should have the same signature as: - (void)didSendPTPCommand:(NSData*)command inData:(NSData*)data response:(NSData*)response error:(NSError*)error contextInfo:(void*)contextInfo. The content of error returned should be examined to determine if the request completed successfully.
+// Sends a Picture Transfer Protocol (PTP) command to a camera asynchronously.
 //
 // RequestSendPTPCommandOutDataSendCommandDelegateDidSendCommandSelectorContextInfo calls the underlying RequestSendPTPCommandOutDataSendCommandDelegateDidSendCommandSelectorContextInfo.
 func (x *CameraDevice) RequestSendPTPCommandOutDataSendCommandDelegateDidSendCommandSelectorContextInfo(command *foundation.NSData, data *foundation.NSData, sendCommandDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.RequestSendPTPCommandOutDataSendCommandDelegateDidSendCommandSelectorContextInfo(command, data, sendCommandDelegate, selector, contextInfo)
 }
 
-// @method requestSendPTPCommand:outData:completion @abstract This method asynchronously sends a PTP command to a camera. @discussion The response, data, and any error message will be returned the block.
+// Sends a Picture Transfer Protocol (PTP) command to a camera asynchronously.
 //
 // RequestSendPTPCommandOutDataCompletion calls the underlying RequestSendPTPCommandOutDataCompletion.
 func (x *CameraDevice) RequestSendPTPCommandOutDataCompletion(ptpCommand *foundation.NSData, ptpData *foundation.NSData, completion func(*foundation.NSData, *foundation.NSData, unsafe.Pointer)) {

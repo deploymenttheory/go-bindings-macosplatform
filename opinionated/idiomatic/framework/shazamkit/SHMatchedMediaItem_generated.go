@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the metadata for a matched reference signature.
+//
 // MatchedMediaItem wraps [raw.SHMatchedMediaItem] with a fluent Go API.
 type MatchedMediaItem struct {
 	inner *raw.SHMatchedMediaItem

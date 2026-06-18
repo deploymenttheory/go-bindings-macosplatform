@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the first action sent to an app when the user shares a collaboration.
+//
 // StartCollaborationAction wraps [raw.SWStartCollaborationAction] with a fluent Go API.
 type StartCollaborationAction struct {
 	inner *raw.SWStartCollaborationAction
@@ -36,6 +38,8 @@ func NewStartCollaborationAction() *StartCollaborationAction {
 	return &StartCollaborationAction{inner: raw.SWStartCollaborationActionFromID(_id)}
 }
 
+// Informs an app to set up the universal link and device independent identifier to provide to the system.
+//
 // FulfillUsingURLCollaborationIdentifier calls the underlying FulfillUsingURLCollaborationIdentifier.
 func (x *StartCollaborationAction) FulfillUsingURLCollaborationIdentifier(url string, collaborationIdentifier *foundation.NSString) {
 	x.inner.FulfillUsingURLCollaborationIdentifier(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), collaborationIdentifier)

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Represents the result of authorizing a payment request and contains payment information, encrypted in the payment token.
+//
 // Payment wraps [raw.PKPayment] with a fluent Go API.
 type Payment struct {
 	inner *raw.PKPayment

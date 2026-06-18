@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// The most general programmatic interface for objects that manage text.
+//
 // Text wraps [raw.NSText] with a fluent Go API.
 type Text struct {
 	inner *raw.NSText
@@ -49,114 +51,152 @@ func NewTextWithCoder(coder *foundation.NSCoder) *Text {
 	return &Text{inner: raw.NSTextFromID(_id)}
 }
 
+// The characters of the receiver’s text.
+//
 // WithString sets the string_ property and returns the receiver for chaining.
 func (x *Text) WithString(string_ string) *Text {
 	x.inner.SetString(foundation.NSStringStringWithUTF8String(string_))
 	return x
 }
 
+// The receiver’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Text) WithDelegate(delegate raw.NSTextDelegate) *Text {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// A Boolean that controls whether the receiver allows the user to edit its text.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *Text) WithEditable(editable bool) *Text {
 	x.inner.SetEditable(editable)
 	return x
 }
 
+// A Boolean that controls whether the receiver allows the user to select its text.
+//
 // WithSelectable sets the selectable property and returns the receiver for chaining.
 func (x *Text) WithSelectable(selectable bool) *Text {
 	x.inner.SetSelectable(selectable)
 	return x
 }
 
+// A Boolean that controls whether the receiver allows the user to apply attributes to specific ranges of the text.
+//
 // WithRichText sets the richText property and returns the receiver for chaining.
 func (x *Text) WithRichText(richText bool) *Text {
 	x.inner.SetRichText(richText)
 	return x
 }
 
+// A Boolean that controls whether the receiver allows the user to import files by dragging.
+//
 // WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
 func (x *Text) WithImportsGraphics(importsGraphics bool) *Text {
 	x.inner.SetImportsGraphics(importsGraphics)
 	return x
 }
 
+// A Boolean that controls whether the receiver interprets Tab, Shift-Tab, and Return (Enter) as cues to end editing and possibly to change the first responder.
+//
 // WithFieldEditor sets the fieldEditor property and returns the receiver for chaining.
 func (x *Text) WithFieldEditor(fieldEditor bool) *Text {
 	x.inner.SetFieldEditor(fieldEditor)
 	return x
 }
 
+// A Boolean that controls whether the receiver uses the Font panel and Font menu.
+//
 // WithUsesFontPanel sets the usesFontPanel property and returns the receiver for chaining.
 func (x *Text) WithUsesFontPanel(usesFontPanel bool) *Text {
 	x.inner.SetUsesFontPanel(usesFontPanel)
 	return x
 }
 
+// A Boolean that controls whether the receiver draws its background.
+//
 // WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
 func (x *Text) WithDrawsBackground(drawsBackground bool) *Text {
 	x.inner.SetDrawsBackground(drawsBackground)
 	return x
 }
 
+// The receiver’s background color to a given color.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *Text) WithBackgroundColor(backgroundColor *Color) *Text {
 	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// The receiver’s characters within aRange.
+//
 // WithSelectedRange sets the selectedRange property and returns the receiver for chaining.
 func (x *Text) WithSelectedRange(selectedRange foundation.NSRange) *Text {
 	x.inner.SetSelectedRange(selectedRange)
 	return x
 }
 
+// The font of all the receiver’s text.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *Text) WithFont(font *Font) *Text {
 	x.inner.SetFont(font.Unwrap())
 	return x
 }
 
+// The text color of all characters in the receiver.
+//
 // WithTextColor sets the textColor property and returns the receiver for chaining.
 func (x *Text) WithTextColor(textColor *Color) *Text {
 	x.inner.SetTextColor(textColor.Unwrap())
 	return x
 }
 
+// The alignment of all the receiver’s text.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *Text) WithAlignment(alignment NSTextAlignment) *Text {
 	x.inner.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *Text) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Text {
 	x.inner.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// The receiver’s maximum size.
+//
 // WithMaxSize sets the maxSize property and returns the receiver for chaining.
 func (x *Text) WithMaxSize(maxSize corefoundation.CGSize) *Text {
 	x.inner.SetMaxSize(maxSize)
 	return x
 }
 
+// The receiver’s minimum size.
+//
 // WithMinSize sets the minSize property and returns the receiver for chaining.
 func (x *Text) WithMinSize(minSize corefoundation.CGSize) *Text {
 	x.inner.SetMinSize(minSize)
 	return x
 }
 
+// A Boolean that controls whether the receiver changes its width to fit the width of its text.
+//
 // WithHorizontallyResizable sets the horizontallyResizable property and returns the receiver for chaining.
 func (x *Text) WithHorizontallyResizable(horizontallyResizable bool) *Text {
 	x.inner.SetHorizontallyResizable(horizontallyResizable)
 	return x
 }
 
+// A Boolean that controls whether the receiver changes its height to fit the height of its text.
+//
 // WithVerticallyResizable sets the verticallyResizable property and returns the receiver for chaining.
 func (x *Text) WithVerticallyResizable(verticallyResizable bool) *Text {
 	x.inner.SetVerticallyResizable(verticallyResizable)
@@ -205,6 +245,8 @@ func (x *Text) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) 
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *Text) WithFrame(frame corefoundation.CGRect) *Text {
 	x.inner.NSView.SetFrame(frame)
@@ -229,6 +271,8 @@ func (x *Text) WithBoundsRotation(boundsRotation float64) *Text {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *Text) WithBounds(bounds corefoundation.CGRect) *Text {
 	x.inner.NSView.SetBounds(bounds)
@@ -241,6 +285,8 @@ func (x *Text) WithCanDrawConcurrently(canDrawConcurrently bool) *Text {
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *Text) WithNeedsDisplay(needsDisplay bool) *Text {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -427,7 +473,7 @@ func (x *Text) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *Text) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Text {
@@ -483,180 +529,250 @@ func (x *Text) WithPressureConfiguration(pressureConfiguration *PressureConfigur
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *Text) WithNextResponder(nextResponder ResponderProvider) *Text {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *Text) WithMenu(menu *Menu) *Text {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *Text) WithUserActivity(userActivity *foundation.NSUserActivity) *Text {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *Text) WithTouchBar(touchBar *TouchBar) *Text {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Replaces the characters in the given range with those in the given string.
+//
 // ReplaceCharactersInRangeWithString calls the underlying ReplaceCharactersInRangeWithString.
 func (x *Text) ReplaceCharactersInRangeWithString(range_ foundation.NSRange, string_ string) {
 	x.inner.ReplaceCharactersInRangeWithString(range_, foundation.NSStringStringWithUTF8String(string_))
 }
 
+// Replaces the characters in the given range with RTF text interpreted from the given RTF data.
+//
 // ReplaceCharactersInRangeWithRTF calls the underlying ReplaceCharactersInRangeWithRTF.
 func (x *Text) ReplaceCharactersInRangeWithRTF(range_ foundation.NSRange, rtfData *foundation.NSData) {
 	x.inner.ReplaceCharactersInRangeWithRTF(range_, rtfData)
 }
 
+// Replaces the characters in the given range with RTFD text interpreted from the given RTFD data.
+//
 // ReplaceCharactersInRangeWithRTFD calls the underlying ReplaceCharactersInRangeWithRTFD.
 func (x *Text) ReplaceCharactersInRangeWithRTFD(range_ foundation.NSRange, rtfdData *foundation.NSData) {
 	x.inner.ReplaceCharactersInRangeWithRTFD(range_, rtfdData)
 }
 
+// Returns an NSData object that contains an RTF stream corresponding to the characters and attributes within aRange, omitting any attachment characters and attributes.
+//
 // RTFFromRange calls the underlying RTFFromRange.
 func (x *Text) RTFFromRange(range_ foundation.NSRange) *foundation.NSData {
 	return x.inner.RTFFromRange(range_)
 }
 
+// Returns an NSData object that contains an RTFD stream corresponding to the characters and attributes within aRange.
+//
 // RTFDFromRange calls the underlying RTFDFromRange.
 func (x *Text) RTFDFromRange(range_ foundation.NSRange) *foundation.NSData {
 	return x.inner.RTFDFromRange(range_)
 }
 
+// Writes the receiver’s text as RTF with attachments to a file or directory at path.
+//
 // WriteRTFDToFileAtomically calls the underlying WriteRTFDToFileAtomically.
 func (x *Text) WriteRTFDToFileAtomically(path string, flag bool) bool {
 	return x.inner.WriteRTFDToFileAtomically(foundation.NSStringStringWithUTF8String(path), flag)
 }
 
+// Attempts to read the RTFD file at the specified path.
+//
 // ReadRTFDFromFile calls the underlying ReadRTFDFromFile.
 func (x *Text) ReadRTFDFromFile(path string) bool {
 	return x.inner.ReadRTFDFromFile(foundation.NSStringStringWithUTF8String(path))
 }
 
+// Scrolls the receiver in its enclosing scroll view so the first characters of aRange are visible.
+//
 // ScrollRangeToVisible calls the underlying ScrollRangeToVisible.
 func (x *Text) ScrollRangeToVisible(range_ foundation.NSRange) {
 	x.inner.ScrollRangeToVisible(range_)
 }
 
+// Sets the text color of characters within the specified range to the specified color.
+//
 // SetTextColorRange calls the underlying SetTextColorRange.
 func (x *Text) SetTextColorRange(color *raw.NSColor, range_ foundation.NSRange) {
 	x.inner.SetTextColorRange(color, range_)
 }
 
+// Sets the font of characters within aRange to aFont.
+//
 // SetFontRange calls the underlying SetFontRange.
 func (x *Text) SetFontRange(font *raw.NSFont, range_ foundation.NSRange) {
 	x.inner.SetFontRange(font, range_)
 }
 
+// Resizes the receiver to fit its text.
+//
 // SizeToFit calls the underlying SizeToFit.
 func (x *Text) SizeToFit() {
 	x.inner.SizeToFit()
 }
 
+// This action method copies the selected text onto the general pasteboard, in as many formats as the receiver supports.
+//
 // Copy calls the underlying Copy.
 func (x *Text) Copy(sender objc.ID) {
 	x.inner.Copy(sender)
 }
 
+// This action method copies the font information for the first character of the selection (or for the insertion point) onto the font pasteboard, as NSFontPboardType.
+//
 // CopyFont calls the underlying CopyFont.
 func (x *Text) CopyFont(sender objc.ID) {
 	x.inner.CopyFont(sender)
 }
 
+// This action method copies the paragraph style information for first selected paragraph onto the ruler pasteboard, as NSRulerPboardType, and expands the selection to paragraph boundaries.
+//
 // CopyRuler calls the underlying CopyRuler.
 func (x *Text) CopyRuler(sender objc.ID) {
 	x.inner.CopyRuler(sender)
 }
 
+// This action method deletes the selected text and places it onto the general pasteboard, in as many formats as the receiver supports.
+//
 // Cut calls the underlying Cut.
 func (x *Text) Cut(sender objc.ID) {
 	x.inner.Cut(sender)
 }
 
+// This action method deletes the selected text.
+//
 // Delete calls the underlying Delete.
 func (x *Text) Delete(sender objc.ID) {
 	x.inner.Delete(sender)
 }
 
+// This action method pastes text from the general pasteboard at the insertion point or over the selection.
+//
 // Paste calls the underlying Paste.
 func (x *Text) Paste(sender objc.ID) {
 	x.inner.Paste(sender)
 }
 
+// This action method pastes font information from the font pasteboard onto the selected text or insertion point of a rich text object, or over all text of a plain text object.
+//
 // PasteFont calls the underlying PasteFont.
 func (x *Text) PasteFont(sender objc.ID) {
 	x.inner.PasteFont(sender)
 }
 
+// This action method pastes paragraph style information from the ruler pasteboard onto the selected paragraphs of a rich text object.
+//
 // PasteRuler calls the underlying PasteRuler.
 func (x *Text) PasteRuler(sender objc.ID) {
 	x.inner.PasteRuler(sender)
 }
 
+// This action method selects all of the receiver’s text.
+//
 // SelectAll calls the underlying SelectAll.
 func (x *Text) SelectAll(sender objc.ID) {
 	x.inner.SelectAll(sender)
 }
 
+// This action method changes the font of the selection for a rich text object, or of all text for a plain text object.
+//
 // ChangeFont calls the underlying ChangeFont.
 func (x *Text) ChangeFont(sender objc.ID) {
 	x.inner.ChangeFont(sender)
 }
 
+// This action method applies left alignment to selected paragraphs (or all text if the receiver is a plain text object).
+//
 // AlignLeft calls the underlying AlignLeft.
 func (x *Text) AlignLeft(sender objc.ID) {
 	x.inner.AlignLeft(sender)
 }
 
+// This action method applies right alignment to selected paragraphs (or all text if the receiver is a plain text object).
+//
 // AlignRight calls the underlying AlignRight.
 func (x *Text) AlignRight(sender objc.ID) {
 	x.inner.AlignRight(sender)
 }
 
+// This action method applies center alignment to selected paragraphs (or all text if the receiver is a plain text object).
+//
 // AlignCenter calls the underlying AlignCenter.
 func (x *Text) AlignCenter(sender objc.ID) {
 	x.inner.AlignCenter(sender)
 }
 
+// This action method applies a subscript attribute to selected text (or all text if the receiver is a plain text object), lowering its baseline offset by a predefined amount.
+//
 // Subscript calls the underlying Subscript.
 func (x *Text) Subscript(sender objc.ID) {
 	x.inner.Subscript(sender)
 }
 
+// This action method applies a superscript attribute to selected text (or all text if the receiver is a plain text object), raising its baseline offset by a predefined amount.
+//
 // Superscript calls the underlying Superscript.
 func (x *Text) Superscript(sender objc.ID) {
 	x.inner.Superscript(sender)
 }
 
+// Adds the underline attribute to the selected text attributes if absent; removes the attribute if present.
+//
 // Underline calls the underlying Underline.
 func (x *Text) Underline(sender objc.ID) {
 	x.inner.Underline(sender)
 }
 
+// This action method removes any superscripting or subscripting from selected text (or all text if the receiver is a plain text object).
+//
 // Unscript calls the underlying Unscript.
 func (x *Text) Unscript(sender objc.ID) {
 	x.inner.Unscript(sender)
 }
 
+// This action method opens the Spelling panel, allowing the user to make a correction during spell checking.
+//
 // ShowGuessPanel calls the underlying ShowGuessPanel.
 func (x *Text) ShowGuessPanel(sender objc.ID) {
 	x.inner.ShowGuessPanel(sender)
 }
 
+// This action method searches for a misspelled word in the receiver’s text.
+//
 // CheckSpelling calls the underlying CheckSpelling.
 func (x *Text) CheckSpelling(sender objc.ID) {
 	x.inner.CheckSpelling(sender)
 }
 
+// This action method shows or hides the ruler, if the receiver is enclosed in a scroll view.
+//
 // ToggleRuler calls the underlying ToggleRuler.
 func (x *Text) ToggleRuler(sender objc.ID) {
 	x.inner.ToggleRuler(sender)

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a participant in a coordinated playback session.
+//
 // CoordinatedPlaybackParticipant wraps [raw.AVCoordinatedPlaybackParticipant] with a fluent Go API.
 type CoordinatedPlaybackParticipant struct {
 	inner *raw.AVCoordinatedPlaybackParticipant

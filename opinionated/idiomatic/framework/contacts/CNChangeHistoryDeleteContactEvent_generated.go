@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a user deleting a contact.
+//
 // ChangeHistoryDeleteContactEvent wraps [raw.CNChangeHistoryDeleteContactEvent] with a fluent Go API.
 type ChangeHistoryDeleteContactEvent struct {
 	inner *raw.CNChangeHistoryDeleteContactEvent

@@ -8,14 +8,20 @@ import (
 	"fmt"
 )
 
+// The possible values for controller player indices.
 type GCControllerPlayerIndex int64
 
 const (
+	// The default index for a player on a controller.
 	GCControllerPlayerIndexUnset GCControllerPlayerIndex = -1
-	GCControllerPlayerIndex1     GCControllerPlayerIndex = 0
-	GCControllerPlayerIndex2     GCControllerPlayerIndex = 1
-	GCControllerPlayerIndex3     GCControllerPlayerIndex = 2
-	GCControllerPlayerIndex4     GCControllerPlayerIndex = 3
+	// Player one is using the controller.
+	GCControllerPlayerIndex1 GCControllerPlayerIndex = 0
+	// Player two is using the controller.
+	GCControllerPlayerIndex2 GCControllerPlayerIndex = 1
+	// Player three is using the controller.
+	GCControllerPlayerIndex3 GCControllerPlayerIndex = 2
+	// Player four is using the controller.
+	GCControllerPlayerIndex4 GCControllerPlayerIndex = 3
 )
 
 func (e GCControllerPlayerIndex) String() string {
@@ -35,6 +41,7 @@ func (e GCControllerPlayerIndex) String() string {
 	}
 }
 
+// A state that indicates whether a device’s battery has power and is charging.
 type GCDeviceBatteryState int64
 
 const (
@@ -59,6 +66,7 @@ func (e GCDeviceBatteryState) String() string {
 	}
 }
 
+// The possible modes of an adaptive trigger.
 type GCDualSenseAdaptiveTriggerMode int64
 
 const (
@@ -91,6 +99,7 @@ func (e GCDualSenseAdaptiveTriggerMode) String() string {
 	}
 }
 
+// The possible states of an adaptive trigger.
 type GCDualSenseAdaptiveTriggerStatus int64
 
 const (
@@ -147,6 +156,7 @@ func (e GCDualSenseAdaptiveTriggerStatus) String() string {
 	}
 }
 
+// A state for handling input when an element is part of a system gesture.
 type GCSystemGestureState int64
 
 const (
@@ -171,6 +181,7 @@ func (e GCSystemGestureState) String() string {
 	}
 }
 
+// The possible states of the user’s touch.
 type GCTouchState int64
 
 const (

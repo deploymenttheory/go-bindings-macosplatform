@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A discrete part of an entire transcription, as identified by the speech recognizer.
+//
 // TranscriptionSegment wraps [raw.SFTranscriptionSegment] with a fluent Go API.
 type TranscriptionSegment struct {
 	inner *raw.SFTranscriptionSegment

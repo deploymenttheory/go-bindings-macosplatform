@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that manages a collection of status items displayed within the system-wide menu bar.
+//
 // StatusBar wraps [raw.NSStatusBar] with a fluent Go API.
 type StatusBar struct {
 	inner *raw.NSStatusBar
@@ -35,6 +37,8 @@ func NewStatusBar() *StatusBar {
 	return &StatusBar{inner: raw.NSStatusBarFromID(_id)}
 }
 
+// Returns a newly created status item that has been allotted a specified space within the status bar.
+//
 // StatusItemWithLength calls the underlying StatusItemWithLength.
 func (x *StatusBar) StatusItemWithLength(length float64) *StatusItem {
 	_r := x.inner.StatusItemWithLength(length)
@@ -44,6 +48,8 @@ func (x *StatusBar) StatusItemWithLength(length float64) *StatusItem {
 	return &StatusItem{inner: _r}
 }
 
+// Removes the specified status item from the receiver.
+//
 // RemoveStatusItem calls the underlying RemoveStatusItem.
 func (x *StatusBar) RemoveStatusItem(item *raw.NSStatusItem) {
 	x.inner.RemoveStatusItem(item)

@@ -9,18 +9,26 @@ import (
 	"strings"
 )
 
+// The flags used to specify authorization options.
 // Bitmask — values may be combined with |.
 type AuthorizationFlags int64
 
 const (
-	KAuthorizationFlagDefaults           AuthorizationFlags = 0
+	// An empty flag set that you use as a placeholder when you don’t want any of the other flags.
+	KAuthorizationFlagDefaults AuthorizationFlags = 0
+	// A flag that permits user interaction as needed.
 	KAuthorizationFlagInteractionAllowed AuthorizationFlags = 1
-	KAuthorizationFlagExtendRights       AuthorizationFlags = 2
-	KAuthorizationFlagPartialRights      AuthorizationFlags = 4
-	KAuthorizationFlagDestroyRights      AuthorizationFlags = 8
-	KAuthorizationFlagPreAuthorize       AuthorizationFlags = 16
-	KAuthorizationFlagSkipInternalAuth   AuthorizationFlags = 512
-	KAuthorizationFlagNoData             AuthorizationFlags = 1048576
+	// A flag that permits the Security Server to attempt to grant the rights requested.
+	KAuthorizationFlagExtendRights AuthorizationFlags = 2
+	// A flag that permits the Security Server to grant rights on an individual basis.
+	KAuthorizationFlagPartialRights AuthorizationFlags = 4
+	// A flag that instructs the Security Server to revoke authorization.
+	KAuthorizationFlagDestroyRights AuthorizationFlags = 8
+	// A flag that instructs the Security Server to preauthorize the rights requested.
+	KAuthorizationFlagPreAuthorize     AuthorizationFlags = 16
+	KAuthorizationFlagSkipInternalAuth AuthorizationFlags = 512
+	// Private flag. Do not use.
+	KAuthorizationFlagNoData AuthorizationFlags = 1048576
 )
 
 func (e AuthorizationFlags) String() string {
@@ -52,12 +60,17 @@ func (e AuthorizationFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that can be set to specify what certificates to include in a signed message.
 type CMSCertificateChainMode int64
 
 const (
-	KCMSCertificateNone                CMSCertificateChainMode = 0
-	KCMSCertificateSignerOnly          CMSCertificateChainMode = 1
-	KCMSCertificateChain               CMSCertificateChainMode = 2
+	// Don’t include any certificates.
+	KCMSCertificateNone CMSCertificateChainMode = 0
+	// Only include signer certificates.
+	KCMSCertificateSignerOnly CMSCertificateChainMode = 1
+	// Include the signer certificate chain up to but not including the root certificate.
+	KCMSCertificateChain CMSCertificateChainMode = 2
+	// Include the entire signer certificate chain, including the root certificate.
 	KCMSCertificateChainWithRoot       CMSCertificateChainMode = 3
 	KCMSCertificateChainWithRootOrFail CMSCertificateChainMode = 4
 )
@@ -79,18 +92,27 @@ func (e CMSCertificateChainMode) String() string {
 	}
 }
 
+// Optional attributes you can add to a signed message.
 // Bitmask — values may be combined with |.
 type CMSSignedAttributes int64
 
 const (
-	KCMSAttrNone                          CMSSignedAttributes = 0
-	KCMSAttrSmimeCapabilities             CMSSignedAttributes = 1
-	KCMSAttrSmimeEncryptionKeyPrefs       CMSSignedAttributes = 2
-	KCMSAttrSmimeMSEncryptionKeyPrefs     CMSSignedAttributes = 4
-	KCMSAttrSigningTime                   CMSSignedAttributes = 8
-	KCMSAttrAppleCodesigningHashAgility   CMSSignedAttributes = 16
+	// No attributes.
+	KCMSAttrNone CMSSignedAttributes = 0
+	// Identify signature, encryption, and digest algorithms supported by the encoder.
+	KCMSAttrSmimeCapabilities CMSSignedAttributes = 1
+	// Indicate that the signing certificate included with the message is the preferred one for S/MIME encryption.
+	KCMSAttrSmimeEncryptionKeyPrefs CMSSignedAttributes = 2
+	// Indicate that the signing certificate included with the message is the preferred one for S/MIME encryption, but using an attribute object identifier (OID) preferred by Microsoft.
+	KCMSAttrSmimeMSEncryptionKeyPrefs CMSSignedAttributes = 4
+	// Include the signing time.
+	KCMSAttrSigningTime CMSSignedAttributes = 8
+	// Include Apple codesigning hash agility.
+	KCMSAttrAppleCodesigningHashAgility CMSSignedAttributes = 16
+	// Include Apple codesigning hash agility, version 2.
 	KCMSAttrAppleCodesigningHashAgilityV2 CMSSignedAttributes = 32
-	KCMSAttrAppleExpirationTime           CMSSignedAttributes = 64
+	// Include the expiration time.
+	KCMSAttrAppleExpirationTime CMSSignedAttributes = 64
 )
 
 func (e CMSSignedAttributes) String() string {
@@ -122,15 +144,22 @@ func (e CMSSignedAttributes) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The constants that indicate the status of the signature and signer information in a signed message.
 type CMSSignerStatus int64
 
 const (
-	KCMSSignerUnsigned             CMSSignerStatus = 0
-	KCMSSignerValid                CMSSignerStatus = 1
+	// The message was not signed.
+	KCMSSignerUnsigned CMSSignerStatus = 0
+	// The message was signed and both the signature and the signer certificate have been verified.
+	KCMSSignerValid CMSSignerStatus = 1
+	// The message was signed but has detached content. You must call the CMSDecoderSetDetachedContent function before ascertaining the signature status.
 	KCMSSignerNeedsDetachedContent CMSSignerStatus = 2
-	KCMSSignerInvalidSignature     CMSSignerStatus = 3
-	KCMSSignerInvalidCert          CMSSignerStatus = 4
-	KCMSSignerInvalidIndex         CMSSignerStatus = 5
+	// The message was signed but the signature is invalid.
+	KCMSSignerInvalidSignature CMSSignerStatus = 3
+	// The message was signed but the signer’s certificate could not be verified.
+	KCMSSignerInvalidCert CMSSignerStatus = 4
+	// The specified value for the signer index (signerIndex parameter) is greater than the number of signers of the message minus one (signerIndex > (numSigners – 1)).
+	KCMSSignerInvalidIndex CMSSignerStatus = 5
 )
 
 func (e CMSSignerStatus) String() string {
@@ -152,12 +181,16 @@ func (e CMSSignerStatus) String() string {
 	}
 }
 
+// The flags that represent the requirements for client-side authentication.
 type SSLAuthenticate int32
 
 const (
-	KNeverAuthenticate  SSLAuthenticate = 0
+	// Indicates that client-side authentication is not required. (Default.)
+	KNeverAuthenticate SSLAuthenticate = 0
+	// Indicates that client-side authentication is required.
 	KAlwaysAuthenticate SSLAuthenticate = 1
-	KTryAuthenticate    SSLAuthenticate = 2
+	// Indicates that client-side authentication should be attempted. There is no error if the client doesn’t have a certificate.
+	KTryAuthenticate SSLAuthenticate = 2
 )
 
 func (e SSLAuthenticate) String() string {
@@ -173,6 +206,7 @@ func (e SSLAuthenticate) String() string {
 	}
 }
 
+// A mechanism for grouping related cipher suites.
 type SSLCiphersuiteGroup int32
 
 const (
@@ -203,13 +237,18 @@ func (e SSLCiphersuiteGroup) String() string {
 	}
 }
 
+// An enumeration of the states of client certificate exchange.
 type SSLClientCertificateState int32
 
 const (
-	KSSLClientCertNone      SSLClientCertificateState = 0
+	// Indicates that the server hasn’t asked for a certificate and that the client hasn’t sent one.
+	KSSLClientCertNone SSLClientCertificateState = 0
+	// Indicates that the server has asked for a certificate, but the client has not sent it.
 	KSSLClientCertRequested SSLClientCertificateState = 1
-	KSSLClientCertSent      SSLClientCertificateState = 2
-	KSSLClientCertRejected  SSLClientCertificateState = 3
+	// Indicates that the server asked for a certificate, the client sent one, and the server validated it. The application can inspect the certificate using the function SSLGetPeerCertificates.
+	KSSLClientCertSent SSLClientCertificateState = 2
+	// Indicates that the client sent a certificate but the certificate failed validation. This value is seen only on the server side. The server application can inspect the certificate using the function SSLGetPeerCertificates.
+	KSSLClientCertRejected SSLClientCertificateState = 3
 )
 
 func (e SSLClientCertificateState) String() string {
@@ -227,10 +266,13 @@ func (e SSLClientCertificateState) String() string {
 	}
 }
 
+// The flags that indicate whether a context is to be used for streaming or datagram-based communication.
 type SSLConnectionType int32
 
 const (
-	KSSLStreamType   SSLConnectionType = 0
+	// Stream-based communication (TCP).
+	KSSLStreamType SSLConnectionType = 0
+	// Datagram-based communication (UDP).
 	KSSLDatagramType SSLConnectionType = 1
 )
 
@@ -245,22 +287,36 @@ func (e SSLConnectionType) String() string {
 	}
 }
 
+// An enumeration of valid SSL protocol versions.
 type SSLProtocol int32
 
 const (
-	KSSLProtocolUnknown      SSLProtocol = 0
-	KTLSProtocol1            SSLProtocol = 4
-	KTLSProtocol11           SSLProtocol = 7
-	KTLSProtocol12           SSLProtocol = 8
-	KDTLSProtocol1           SSLProtocol = 9
-	KTLSProtocol13           SSLProtocol = 10
-	KDTLSProtocol12          SSLProtocol = 11
+	// Specifies that no protocol has been or should be negotiated or specified; use default.
+	KSSLProtocolUnknown SSLProtocol = 0
+	// Specifies that the TLS 1.0 protocol is preferred but lower versions may be negotiated.
+	KTLSProtocol1 SSLProtocol = 4
+	// Specifies that the TLS 1.1 protocol is preferred but lower versions may be negotiated.
+	KTLSProtocol11 SSLProtocol = 7
+	// Specifies that the TLS 1.2 protocol is preferred but lower versions may be negotiated.
+	KTLSProtocol12 SSLProtocol = 8
+	// Specifies the DTLS 1.0 protocol.
+	KDTLSProtocol1 SSLProtocol = 9
+	// Specifies that the TLS 1.3 protocol is preferred but lower versions may be negotiated.
+	KTLSProtocol13 SSLProtocol = 10
+	// Specifies the DTLS 1.2 protocol.
+	KDTLSProtocol12 SSLProtocol = 11
+	// The maximum system supported version.
 	KTLSProtocolMaxSupported SSLProtocol = 999
-	KSSLProtocol2            SSLProtocol = 1
-	KSSLProtocol3            SSLProtocol = 2
-	KSSLProtocol3Only        SSLProtocol = 3
-	KTLSProtocol1Only        SSLProtocol = 5
-	KSSLProtocolAll          SSLProtocol = 6
+	// Specifies that only the SSL 2.0 protocol may be negotiated. Deprecated in iOS.
+	KSSLProtocol2 SSLProtocol = 1
+	// Specifies that the SSL 3.0 protocol is preferred; the SSL 2.0 protocol may be negotiated if the peer cannot use the SSL 3.0 protocol.
+	KSSLProtocol3 SSLProtocol = 2
+	// Specifies that only the SSL 3.0 protocol may be negotiated; fails if the peer tries to negotiate the SSL 2.0 protocol. Deprecated in iOS.
+	KSSLProtocol3Only SSLProtocol = 3
+	// Specifies that only the TLS 1.0 protocol may be negotiated. Deprecated in iOS.
+	KTLSProtocol1Only SSLProtocol = 5
+	// Specifies all supported versions. Deprecated in iOS.
+	KSSLProtocolAll SSLProtocol = 6
 )
 
 func (e SSLProtocol) String() string {
@@ -296,10 +352,13 @@ func (e SSLProtocol) String() string {
 	}
 }
 
+// The flags that indicate whether a context is for the server or client side of a connection.
 type SSLProtocolSide int32
 
 const (
+	// Server side.
 	KSSLServerSide SSLProtocolSide = 0
+	// Client side.
 	KSSLClientSide SSLProtocolSide = 1
 )
 
@@ -314,19 +373,30 @@ func (e SSLProtocolSide) String() string {
 	}
 }
 
+// The options that can be set for an SSL session.
 type SSLSessionOption int32
 
 const (
-	KSSLSessionOptionBreakOnServerAuth         SSLSessionOption = 0
-	KSSLSessionOptionBreakOnCertRequested      SSLSessionOption = 1
-	KSSLSessionOptionBreakOnClientAuth         SSLSessionOption = 2
-	KSSLSessionOptionFalseStart                SSLSessionOption = 3
-	KSSLSessionOptionSendOneByteRecord         SSLSessionOption = 4
+	// Enables returning from SSLHandshake (with a result of errSSLServerAuthCompleted) when the server authentication portion of the handshake is complete to allow your application to perform its own certificate verification.
+	KSSLSessionOptionBreakOnServerAuth SSLSessionOption = 0
+	// Enables returning from SSLHandshake (with a result of errSSLClientCertRequested) when the server requests a client certificate.
+	KSSLSessionOptionBreakOnCertRequested SSLSessionOption = 1
+	// Enables returning from SSLHandshake (with a result of errSSLClientAuthCompleted) when the client authentication portion of the handshake is complete to allow your application to perform its own certificate verification.
+	KSSLSessionOptionBreakOnClientAuth SSLSessionOption = 2
+	// When enabled, TLS False Start is used if an adequate cipher-suite is negotiated.
+	KSSLSessionOptionFalseStart SSLSessionOption = 3
+	// Enables 1/n-1 record splitting for BEAST attack mitigation.
+	KSSLSessionOptionSendOneByteRecord SSLSessionOption = 4
+	// Allow server identity change on renegotiation.
 	KSSLSessionOptionAllowServerIdentityChange SSLSessionOption = 5
-	KSSLSessionOptionFallback                  SSLSessionOption = 6
-	KSSLSessionOptionBreakOnClientHello        SSLSessionOption = 7
-	KSSLSessionOptionAllowRenegotiation        SSLSessionOption = 8
-	KSSLSessionOptionEnableSessionTickets      SSLSessionOption = 9
+	// Enable fallback countermeasures.
+	KSSLSessionOptionFallback SSLSessionOption = 6
+	// Break from a client hello in order to check for SNI.
+	KSSLSessionOptionBreakOnClientHello SSLSessionOption = 7
+	// Allow renegotiation.
+	KSSLSessionOptionAllowRenegotiation SSLSessionOption = 8
+	// Enable session tickets.
+	KSSLSessionOptionEnableSessionTickets SSLSessionOption = 9
 )
 
 func (e SSLSessionOption) String() string {
@@ -356,14 +426,20 @@ func (e SSLSessionOption) String() string {
 	}
 }
 
+// The flags that represent the state of an SSL session.
 type SSLSessionState int32
 
 const (
-	KSSLIdle      SSLSessionState = 0
+	// No I/O has been performed yet.
+	KSSLIdle SSLSessionState = 0
+	// The SSL handshake is in progress.
 	KSSLHandshake SSLSessionState = 1
+	// The SSL handshake is complete; the connection is ready for normal I/O.
 	KSSLConnected SSLSessionState = 2
-	KSSLClosed    SSLSessionState = 3
-	KSSLAborted   SSLSessionState = 4
+	// The connection closed normally.
+	KSSLClosed SSLSessionState = 3
+	// The connection aborted.
+	KSSLAborted SSLSessionState = 4
 )
 
 func (e SSLSessionState) String() string {
@@ -383,24 +459,39 @@ func (e SSLSessionState) String() string {
 	}
 }
 
+// Access control constants that dictate how a keychain item may be used.
 // Bitmask — values may be combined with |.
 type SecAccessControlCreateFlags int64
 
 const (
+	// Constraint to access an item with either biometry or passcode.
 	KSecAccessControlUserPresence SecAccessControlCreateFlags = 1
-	KSecAccessControlBiometryAny  SecAccessControlCreateFlags = 2
+	// Constraint to access an item with Touch ID for any enrolled fingers, or Face ID.
+	KSecAccessControlBiometryAny SecAccessControlCreateFlags = 2
+	// Constraint to access an item with Touch ID for any enrolled fingers.
+	//
 	// Deprecated: since macOS 10.13.4.
-	KSecAccessControlTouchIDAny         SecAccessControlCreateFlags = 2
+	KSecAccessControlTouchIDAny SecAccessControlCreateFlags = 2
+	// Constraint to access an item with Touch ID for currently enrolled fingers, or from Face ID with the currently enrolled user.
 	KSecAccessControlBiometryCurrentSet SecAccessControlCreateFlags = 8
+	// Constraint to access an item with Touch ID for currently enrolled fingers.
+	//
 	// Deprecated: since macOS 10.13.4.
 	KSecAccessControlTouchIDCurrentSet SecAccessControlCreateFlags = 8
-	KSecAccessControlDevicePasscode    SecAccessControlCreateFlags = 16
+	// Constraint to access an item with a passcode.
+	KSecAccessControlDevicePasscode SecAccessControlCreateFlags = 16
+	// Constraint to access an item with a watch.
+	//
 	// Deprecated: since macOS 15.0.
-	KSecAccessControlWatch               SecAccessControlCreateFlags = 32
-	KSecAccessControlCompanion           SecAccessControlCreateFlags = 32
-	KSecAccessControlOr                  SecAccessControlCreateFlags = 16384
-	KSecAccessControlAnd                 SecAccessControlCreateFlags = 32768
-	KSecAccessControlPrivateKeyUsage     SecAccessControlCreateFlags = 1073741824
+	KSecAccessControlWatch     SecAccessControlCreateFlags = 32
+	KSecAccessControlCompanion SecAccessControlCreateFlags = 32
+	// Indicates that at least one constraint must be satisfied.
+	KSecAccessControlOr SecAccessControlCreateFlags = 16384
+	// Indicates that all constraints must be satisfied.
+	KSecAccessControlAnd SecAccessControlCreateFlags = 32768
+	// Enable a private key to be used in signing a block of data or verifying a signed block.
+	KSecAccessControlPrivateKeyUsage SecAccessControlCreateFlags = 1073741824
+	// Option to use an application-provided password for data encryption key generation.
 	KSecAccessControlApplicationPassword SecAccessControlCreateFlags = 2147483648
 )
 
@@ -448,18 +539,28 @@ func (e SecAccessControlCreateFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The authentication type to use for an Internet password.
 type SecAuthenticationType int64
 
 const (
-	KSecAuthenticationTypeNTLM       SecAuthenticationType = 1835824238
-	KSecAuthenticationTypeMSN        SecAuthenticationType = 1634628461
-	KSecAuthenticationTypeDPA        SecAuthenticationType = 1633775716
-	KSecAuthenticationTypeRPA        SecAuthenticationType = 1633775730
-	KSecAuthenticationTypeHTTPBasic  SecAuthenticationType = 1886680168
+	// Specifies Windows NT LAN Manager authentication.
+	KSecAuthenticationTypeNTLM SecAuthenticationType = 1835824238
+	// Specifies Microsoft Network default authentication.
+	KSecAuthenticationTypeMSN SecAuthenticationType = 1634628461
+	// Specifies Distributed Password authentication.
+	KSecAuthenticationTypeDPA SecAuthenticationType = 1633775716
+	// Specifies Remote Password authentication.
+	KSecAuthenticationTypeRPA SecAuthenticationType = 1633775730
+	// Specifies HTTP Basic authentication.
+	KSecAuthenticationTypeHTTPBasic SecAuthenticationType = 1886680168
+	// Specifies HTTP Digest Access authentication.
 	KSecAuthenticationTypeHTTPDigest SecAuthenticationType = 1685353576
-	KSecAuthenticationTypeHTMLForm   SecAuthenticationType = 1836216166
-	KSecAuthenticationTypeDefault    SecAuthenticationType = 1953261156
-	KSecAuthenticationTypeAny        SecAuthenticationType = 0
+	// Specifies HTML form based authentication.
+	KSecAuthenticationTypeHTMLForm SecAuthenticationType = 1836216166
+	// Specifies the default authentication type.
+	KSecAuthenticationTypeDefault SecAuthenticationType = 1953261156
+	// Specifies that any authentication type is acceptable.
+	KSecAuthenticationTypeAny SecAuthenticationType = 0
 )
 
 func (e SecAuthenticationType) String() string {
@@ -487,11 +588,14 @@ func (e SecAuthenticationType) String() string {
 	}
 }
 
+// Values that can be used in the flags parameter to most code signing functions.
 // Bitmask — values may be combined with |.
 type SecCSFlags int64
 
 const (
-	KSecCSDefaultFlags                  SecCSFlags = 0
+	// No flags (use the default behavior).
+	KSecCSDefaultFlags SecCSFlags = 0
+	// Consider expired certificates invalid.
 	KSecCSConsiderExpiration            SecCSFlags = 2147483648
 	KSecCSEnforceRevocationChecks       SecCSFlags = 1073741824
 	KSecCSNoNetworkAccess               SecCSFlags = 536870912
@@ -538,13 +642,18 @@ func (e SecCSFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The credential type to be returned by SecKeyGetCredentials.
+//
 // Deprecated: No longer supported
 type SecCredentialType int64
 
 const (
+	// The default setting for determining whether to present UI is used.
 	KSecCredentialTypeDefault SecCredentialType = 0
-	KSecCredentialTypeWithUI  SecCredentialType = 1
-	KSecCredentialTypeNoUI    SecCredentialType = 2
+	// Keychain operations on keys that have this credential are allowed to present UI if required.
+	KSecCredentialTypeWithUI SecCredentialType = 1
+	// Keychain operations on keys that have this credential are not allowed to present UI, and will fail if UI is required.
+	KSecCredentialTypeNoUI SecCredentialType = 2
 )
 
 func (e SecCredentialType) String() string {
@@ -560,24 +669,39 @@ func (e SecCredentialType) String() string {
 	}
 }
 
+// The external format of a keychain item.
 type SecExternalFormat int64
 
 const (
-	KSecFormatUnknown              SecExternalFormat = 0
-	KSecFormatOpenSSL              SecExternalFormat = 1
-	KSecFormatSSH                  SecExternalFormat = 2
-	KSecFormatBSAFE                SecExternalFormat = 3
-	KSecFormatRawKey               SecExternalFormat = 4
-	KSecFormatWrappedPKCS8         SecExternalFormat = 5
-	KSecFormatWrappedOpenSSL       SecExternalFormat = 6
-	KSecFormatWrappedSSH           SecExternalFormat = 7
-	KSecFormatWrappedLSH           SecExternalFormat = 8
-	KSecFormatX509Cert             SecExternalFormat = 9
-	KSecFormatPEMSequence          SecExternalFormat = 10
-	KSecFormatPKCS7                SecExternalFormat = 11
-	KSecFormatPKCS12               SecExternalFormat = 12
+	KSecFormatUnknown SecExternalFormat = 0
+	// Format for asymmetric (public/private) keys. OpenSSL is an open source toolkit for Secure Sockets Layer (SSL) and Transport Layer Security (TLS). Also known as X.509 for public keys.
+	KSecFormatOpenSSL SecExternalFormat = 1
+	// OpenSSH 1 format for asymmetric (public/private) keys. OpenSSH is an OpenBSD implementation of the Secure Shell (SSH) protocol.
+	KSecFormatSSH SecExternalFormat = 2
+	// Format for asymmetric keys. BSAFE is a standard from RSA Security for encryption, digital signatures, and privacy.
+	KSecFormatBSAFE SecExternalFormat = 3
+	// Format for symmetric keys. Raw, unformatted key bits. This is the default for symmetric keys.
+	KSecFormatRawKey SecExternalFormat = 4
+	// Format for wrapped symmetric and private keys. PKCS8 is the Private-Key Information Syntax Standard from RSA Security.
+	KSecFormatWrappedPKCS8 SecExternalFormat = 5
+	// Format for wrapped symmetric and private keys. OpenSSL is an open-source toolkit for Secure Sockets Layer (SSL) and Transport Layer Security (TLS).
+	KSecFormatWrappedOpenSSL SecExternalFormat = 6
+	// OpenSSH 1 format for wrapped symmetric and private keys. OpenSSH is an OpenBSD implementation of the Secure Shell (SSH) protocol.
+	KSecFormatWrappedSSH SecExternalFormat = 7
+	// Not supported.
+	KSecFormatWrappedLSH SecExternalFormat = 8
+	// Format for certificates. DER (distinguished encoding rules) encoded. X.509 is a standard for digital certificates from the International Telecommunication Union (ITU). This is the default for certificates.
+	KSecFormatX509Cert SecExternalFormat = 9
+	// Sequence of certificates and keys with PEM armor. PEM armor refers to a way of expressing binary data as an ASCII string so that it can be transferred over text-only channels such as email. This is the default format for multiple items.
+	KSecFormatPEMSequence SecExternalFormat = 10
+	// Sequence of certificates, no PEM armor. PKCS7 is the Cryptographic Message Syntax Standard from RSA Security, Inc.
+	KSecFormatPKCS7 SecExternalFormat = 11
+	// Set of certificates and private keys. PKCS12 is the Personal Information Exchange Syntax from RSA Security, Inc.
+	KSecFormatPKCS12 SecExternalFormat = 12
+	// Set of certificates in the Netscape Certificate Sequence format.
 	KSecFormatNetscapeCertSequence SecExternalFormat = 13
-	KSecFormatSSHv2                SecExternalFormat = 14
+	// OpenSSH 2 format for public keys. OpenSSH version 2 private keys are in format kSecFormatOpenSSL or kSecFormatWrappedOpenSSL. OpenSSH is an OpenBSD implementation of the Secure Shell (SSH) protocol.
+	KSecFormatSSHv2 SecExternalFormat = 14
 )
 
 func (e SecExternalFormat) String() string {
@@ -617,15 +741,22 @@ func (e SecExternalFormat) String() string {
 	}
 }
 
+// The import item type.
 type SecExternalItemType int64
 
 const (
-	KSecItemTypeUnknown     SecExternalItemType = 0
-	KSecItemTypePrivateKey  SecExternalItemType = 1
-	KSecItemTypePublicKey   SecExternalItemType = 2
-	KSecItemTypeSessionKey  SecExternalItemType = 3
+	// Indicates that the caller does not know the type of information being imported or exported.
+	KSecItemTypeUnknown SecExternalItemType = 0
+	// Indicates a private key.
+	KSecItemTypePrivateKey SecExternalItemType = 1
+	// Indicates a public key.
+	KSecItemTypePublicKey SecExternalItemType = 2
+	// Indicates a session key.
+	KSecItemTypeSessionKey SecExternalItemType = 3
+	// Indicates a certificate.
 	KSecItemTypeCertificate SecExternalItemType = 4
-	KSecItemTypeAggregate   SecExternalItemType = 5
+	// Indicates a set of certificates or certificates and private keys.
+	KSecItemTypeAggregate SecExternalItemType = 5
 )
 
 func (e SecExternalItemType) String() string {
@@ -647,16 +778,24 @@ func (e SecExternalItemType) String() string {
 	}
 }
 
+// Specifies a keychain item’s class code.
 type SecItemClass int64
 
 const (
-	KSecInternetPasswordItemClass   SecItemClass = 1768842612
-	KSecGenericPasswordItemClass    SecItemClass = 1734700656
+	// Indicates that the item is an Internet password.
+	KSecInternetPasswordItemClass SecItemClass = 1768842612
+	// Indicates that the item is a generic password.
+	KSecGenericPasswordItemClass SecItemClass = 1734700656
+	// Indicates that the item is an AppleShare password.
 	KSecAppleSharePasswordItemClass SecItemClass = 1634953328
-	KSecCertificateItemClass        SecItemClass = 2147487744
-	KSecPublicKeyItemClass          SecItemClass = 15
-	KSecPrivateKeyItemClass         SecItemClass = 16
-	KSecSymmetricKeyItemClass       SecItemClass = 17
+	// Indicates that the item is an X509 certificate.
+	KSecCertificateItemClass SecItemClass = 2147487744
+	// Indicates that the item is a public key of a public-private pair.
+	KSecPublicKeyItemClass SecItemClass = 15
+	// Indicates that the item is a private key of a public-private pair.
+	KSecPrivateKeyItemClass SecItemClass = 16
+	// Indicates that the item is a private key used for symmetric-key encryption.
+	KSecSymmetricKeyItemClass SecItemClass = 17
 )
 
 func (e SecItemClass) String() string {
@@ -680,10 +819,12 @@ func (e SecItemClass) String() string {
 	}
 }
 
+// The import and export function flags.
 // Bitmask — values may be combined with |.
 type SecItemImportExportFlags int64
 
 const (
+	// A flag that indicates the exported data should have PEM armor.
 	KSecItemPemArmour SecItemImportExportFlags = 1
 )
 
@@ -698,6 +839,7 @@ func (e SecItemImportExportFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The types of operations that you can use a cryptographic key to perform.
 type SecKeyOperationType int64
 
 const (
@@ -725,23 +867,39 @@ func (e SecKeyOperationType) String() string {
 	}
 }
 
+// Bit masks corresponding to the events that can trigger a keychain callback.
 // Bitmask — values may be combined with |.
 type SecKeychainEventMask int64
 
 const (
-	KSecLockEventMask            SecKeychainEventMask = 2
-	KSecUnlockEventMask          SecKeychainEventMask = 4
-	KSecAddEventMask             SecKeychainEventMask = 8
-	KSecDeleteEventMask          SecKeychainEventMask = 16
-	KSecUpdateEventMask          SecKeychainEventMask = 32
+	// If the bit specified by this mask is set, your callback function is invoked when a keychain is locked.
+	KSecLockEventMask SecKeychainEventMask = 2
+	// If the bit specified by this mask is set, your callback function is invoked when a keychain is unlocked.
+	KSecUnlockEventMask SecKeychainEventMask = 4
+	// If the bit specified by this mask is set, your callback function is invoked when an item is added to a keychain.
+	KSecAddEventMask SecKeychainEventMask = 8
+	// If the bit specified by this mask is set, your callback function is invoked when an item is deleted from a keychain.
+	KSecDeleteEventMask SecKeychainEventMask = 16
+	// If the bit specified by this mask is set, your callback function is invoked when a keychain item is updated.
+	KSecUpdateEventMask SecKeychainEventMask = 32
+	// If the bit specified by this mask is set, your callback function is invoked when the keychain password is changed.
 	KSecPasswordChangedEventMask SecKeychainEventMask = 64
-	KSecDefaultChangedEventMask  SecKeychainEventMask = 512
+	// If the bit specified by this mask is set, your callback function is invoked when a different keychain is specified as the default.
+	KSecDefaultChangedEventMask SecKeychainEventMask = 512
+	// If the bit specified by this mask is set, your callback function is invoked when a process accesses a keychain item’s data.
+	//
 	// Deprecated: Read events are no longer posted
 	KSecDataAccessEventMask SecKeychainEventMask = 1024
+	// If the bit specified by this mask is set, your callback function is invoked when a keychain list is changed.
+	//
 	// Deprecated: Read events are no longer posted
 	KSecKeychainListChangedMask SecKeychainEventMask = 2048
+	// If the bit specified by this mask is set, your callback function is invoked when there is a change in certificate trust settings.
+	//
 	// Deprecated: Read events are no longer posted
 	KSecTrustSettingsChangedEventMask SecKeychainEventMask = 4096
+	// If all the bits are set, your callback function is invoked whenever any event occurs.
+	//
 	// Deprecated: Read events are no longer posted
 	KSecEveryEventMask SecKeychainEventMask = 4294967295
 )
@@ -787,15 +945,21 @@ func (e SecKeychainEventMask) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Bits that define when a keychain should require a passphrase.
 // Bitmask — values may be combined with |.
 type SecKeychainPromptSelector int64
 
 const (
+	// Indicates that a passphrase should be required for every access.
 	KSecKeychainPromptRequirePassphase SecKeychainPromptSelector = 1
-	KSecKeychainPromptUnsigned         SecKeychainPromptSelector = 16
-	KSecKeychainPromptUnsignedAct      SecKeychainPromptSelector = 32
-	KSecKeychainPromptInvalid          SecKeychainPromptSelector = 64
-	KSecKeychainPromptInvalidAct       SecKeychainPromptSelector = 128
+	// Indicates that a passphrase should be required when an unsigned application attempts to use the keychain, overriding the system default.
+	KSecKeychainPromptUnsigned SecKeychainPromptSelector = 16
+	// Indicates that a passphrase should be required when an unsigned application attempts to use the keychain.
+	KSecKeychainPromptUnsignedAct SecKeychainPromptSelector = 32
+	// Indicates that a passphrase should be required when an application with an invalid signature attempts to use the keychain, overriding the system default.
+	KSecKeychainPromptInvalid SecKeychainPromptSelector = 64
+	// Indicates that a passphrase should be required when an application with an invalid signature attempts to use the keychain.
+	KSecKeychainPromptInvalidAct SecKeychainPromptSelector = 128
 )
 
 func (e SecKeychainPromptSelector) String() string {
@@ -821,12 +985,17 @@ func (e SecKeychainPromptSelector) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The keychain preference domains.
 type SecPreferencesDomain int32
 
 const (
-	KSecPreferencesDomainUser    SecPreferencesDomain = 0
-	KSecPreferencesDomainSystem  SecPreferencesDomain = 1
-	KSecPreferencesDomainCommon  SecPreferencesDomain = 2
+	// Indicates the user preference domain preferences.
+	KSecPreferencesDomainUser SecPreferencesDomain = 0
+	// Indicates the system or daemon preference domain preferences.
+	KSecPreferencesDomainSystem SecPreferencesDomain = 1
+	// Indicates the preferences are common to everyone.
+	KSecPreferencesDomainCommon SecPreferencesDomain = 2
+	// Indicates a dynamic search list (typically provided by removable keychains such as smart cards).
 	KSecPreferencesDomainDynamic SecPreferencesDomain = 3
 )
 
@@ -845,44 +1014,80 @@ func (e SecPreferencesDomain) String() string {
 	}
 }
 
+// The protocol type associated with an Internet password.
 type SecProtocolType int64
 
 const (
-	KSecProtocolTypeFTP        SecProtocolType = 1718906912
+	// Indicates FTP.
+	KSecProtocolTypeFTP SecProtocolType = 1718906912
+	// Indicates a client side FTP account. The usage of this constant is deprecated as of macOS 10.3.
 	KSecProtocolTypeFTPAccount SecProtocolType = 1718906977
-	KSecProtocolTypeHTTP       SecProtocolType = 1752462448
-	KSecProtocolTypeIRC        SecProtocolType = 1769104160
-	KSecProtocolTypeNNTP       SecProtocolType = 1852732528
-	KSecProtocolTypePOP3       SecProtocolType = 1886351411
-	KSecProtocolTypeSMTP       SecProtocolType = 1936553072
-	KSecProtocolTypeSOCKS      SecProtocolType = 1936685088
-	KSecProtocolTypeIMAP       SecProtocolType = 1768776048
-	KSecProtocolTypeLDAP       SecProtocolType = 1818517872
-	KSecProtocolTypeAppleTalk  SecProtocolType = 1635019883
-	KSecProtocolTypeAFP        SecProtocolType = 1634103328
-	KSecProtocolTypeTelnet     SecProtocolType = 1952803950
-	KSecProtocolTypeSSH        SecProtocolType = 1936943136
-	KSecProtocolTypeFTPS       SecProtocolType = 1718906995
-	KSecProtocolTypeHTTPS      SecProtocolType = 1752461427
-	KSecProtocolTypeHTTPProxy  SecProtocolType = 1752461432
+	// Indicates HTTP.
+	KSecProtocolTypeHTTP SecProtocolType = 1752462448
+	// Indicates IRC.
+	KSecProtocolTypeIRC SecProtocolType = 1769104160
+	// Indicates NNTP.
+	KSecProtocolTypeNNTP SecProtocolType = 1852732528
+	// Indicates POP3.
+	KSecProtocolTypePOP3 SecProtocolType = 1886351411
+	// Indicates SMTP.
+	KSecProtocolTypeSMTP SecProtocolType = 1936553072
+	// Indicates SOCKS.
+	KSecProtocolTypeSOCKS SecProtocolType = 1936685088
+	// Indicates IMAP.
+	KSecProtocolTypeIMAP SecProtocolType = 1768776048
+	// Indicates LDAP.
+	KSecProtocolTypeLDAP SecProtocolType = 1818517872
+	// Indicates AFP over AppleTalk.
+	KSecProtocolTypeAppleTalk SecProtocolType = 1635019883
+	// Indicates AFP over TCP.
+	KSecProtocolTypeAFP SecProtocolType = 1634103328
+	// Indicates Telnet.
+	KSecProtocolTypeTelnet SecProtocolType = 1952803950
+	// Indicates SSH.
+	KSecProtocolTypeSSH SecProtocolType = 1936943136
+	// Indicates FTP over TLS/SSL.
+	KSecProtocolTypeFTPS SecProtocolType = 1718906995
+	// Indicates HTTP over TLS/SSL.
+	KSecProtocolTypeHTTPS SecProtocolType = 1752461427
+	// Indicates HTTP proxy.
+	KSecProtocolTypeHTTPProxy SecProtocolType = 1752461432
+	// Indicates HTTPS proxy.
 	KSecProtocolTypeHTTPSProxy SecProtocolType = 1752462200
-	KSecProtocolTypeFTPProxy   SecProtocolType = 1718907000
-	KSecProtocolTypeCIFS       SecProtocolType = 1667851891
-	KSecProtocolTypeSMB        SecProtocolType = 1936548384
-	KSecProtocolTypeRTSP       SecProtocolType = 1920234352
-	KSecProtocolTypeRTSPProxy  SecProtocolType = 1920234360
-	KSecProtocolTypeDAAP       SecProtocolType = 1684103536
-	KSecProtocolTypeEPPC       SecProtocolType = 1701867619
-	KSecProtocolTypeIPP        SecProtocolType = 1768976416
-	KSecProtocolTypeNNTPS      SecProtocolType = 1853124723
-	KSecProtocolTypeLDAPS      SecProtocolType = 1818521715
-	KSecProtocolTypeTelnetS    SecProtocolType = 1952803955
-	KSecProtocolTypeIMAPS      SecProtocolType = 1768779891
-	KSecProtocolTypeIRCS       SecProtocolType = 1769104243
-	KSecProtocolTypePOP3S      SecProtocolType = 1886351475
+	// Indicates FTP proxy.
+	KSecProtocolTypeFTPProxy SecProtocolType = 1718907000
+	// Indicates CIFS.
+	KSecProtocolTypeCIFS SecProtocolType = 1667851891
+	// Indicates SMB.
+	KSecProtocolTypeSMB SecProtocolType = 1936548384
+	// Indicates RTSP.
+	KSecProtocolTypeRTSP SecProtocolType = 1920234352
+	// Indicates RTSP proxy.
+	KSecProtocolTypeRTSPProxy SecProtocolType = 1920234360
+	// Indicates DAAP.
+	KSecProtocolTypeDAAP SecProtocolType = 1684103536
+	// Indicates Remote Apple Events.
+	KSecProtocolTypeEPPC SecProtocolType = 1701867619
+	// Indicates IPP.
+	KSecProtocolTypeIPP SecProtocolType = 1768976416
+	// Indicates NNTP over TLS/SSL.
+	KSecProtocolTypeNNTPS SecProtocolType = 1853124723
+	// Indicates LDAP over TLS/SSL.
+	KSecProtocolTypeLDAPS SecProtocolType = 1818521715
+	// Indicates Telnet over TLS/SSL.
+	KSecProtocolTypeTelnetS SecProtocolType = 1952803955
+	// Indicates IMAP4 over TLS/SSL.
+	KSecProtocolTypeIMAPS SecProtocolType = 1768779891
+	// Indicates IRC over TLS/SSL.
+	KSecProtocolTypeIRCS SecProtocolType = 1769104243
+	// Indicates POP3 over TLS/SSL.
+	KSecProtocolTypePOP3S SecProtocolType = 1886351475
+	// Indicates CVS pserver.
 	KSecProtocolTypeCVSpserver SecProtocolType = 1668707184
-	KSecProtocolTypeSVN        SecProtocolType = 1937141280
-	KSecProtocolTypeAny        SecProtocolType = 0
+	// Indicates Subversion.
+	KSecProtocolTypeSVN SecProtocolType = 1937141280
+	// Indicates that any protocol is acceptable.
+	KSecProtocolTypeAny SecProtocolType = 0
 )
 
 func (e SecProtocolType) String() string {
@@ -962,21 +1167,34 @@ func (e SecProtocolType) String() string {
 	}
 }
 
+// The keys that describe the metadata attributes of transform attributes.
+//
 // Deprecated: SecTransform is no longer supported
 type SecTransformMetaAttributeType int64
 
 const (
-	KSecTransformMetaAttributeValue                      SecTransformMetaAttributeType = 0
-	KSecTransformMetaAttributeName                       SecTransformMetaAttributeType = 1
-	KSecTransformMetaAttributeRef                        SecTransformMetaAttributeType = 2
-	KSecTransformMetaAttributeRequired                   SecTransformMetaAttributeType = 3
+	// The actual value of the attribute.
+	KSecTransformMetaAttributeValue SecTransformMetaAttributeType = 0
+	// The name of the attribute.
+	KSecTransformMetaAttributeName SecTransformMetaAttributeType = 1
+	// A direct reference to an attribute’s value.
+	KSecTransformMetaAttributeRef SecTransformMetaAttributeType = 2
+	// Indicates whether the attribute value is optional.
+	KSecTransformMetaAttributeRequired SecTransformMetaAttributeType = 3
+	// The attribute requires an outbound connection.
 	KSecTransformMetaAttributeRequiresOutboundConnection SecTransformMetaAttributeType = 4
-	KSecTransformMetaAttributeDeferred                   SecTransformMetaAttributeType = 5
-	KSecTransformMetaAttributeStream                     SecTransformMetaAttributeType = 6
-	KSecTransformMetaAttributeCanCycle                   SecTransformMetaAttributeType = 7
-	KSecTransformMetaAttributeExternalize                SecTransformMetaAttributeType = 8
-	KSecTransformMetaAttributeHasOutboundConnections     SecTransformMetaAttributeType = 9
-	KSecTransformMetaAttributeHasInboundConnection       SecTransformMetaAttributeType = 10
+	// The attribute defers notifications.
+	KSecTransformMetaAttributeDeferred SecTransformMetaAttributeType = 5
+	// The attribute expects stream operation.
+	KSecTransformMetaAttributeStream SecTransformMetaAttributeType = 6
+	// The transform allows cyclic behavior.
+	KSecTransformMetaAttributeCanCycle SecTransformMetaAttributeType = 7
+	// The attribute is exportable.
+	KSecTransformMetaAttributeExternalize SecTransformMetaAttributeType = 8
+	// The attribute has an outbound connection.
+	KSecTransformMetaAttributeHasOutboundConnections SecTransformMetaAttributeType = 9
+	// The attribute has an inbound connection.
+	KSecTransformMetaAttributeHasInboundConnection SecTransformMetaAttributeType = 10
 )
 
 func (e SecTransformMetaAttributeType) String() string {
@@ -1008,17 +1226,25 @@ func (e SecTransformMetaAttributeType) String() string {
 	}
 }
 
+// The option flags used to condition a trust evaluation.
 // Bitmask — values may be combined with |.
 type SecTrustOptionFlags int64
 
 const (
-	KSecTrustOptionAllowExpired       SecTrustOptionFlags = 1
-	KSecTrustOptionLeafIsCA           SecTrustOptionFlags = 2
+	// Allow expired certificates (except for the root certificate).
+	KSecTrustOptionAllowExpired SecTrustOptionFlags = 1
+	// Allow CA certificates as leaf certificates.
+	KSecTrustOptionLeafIsCA SecTrustOptionFlags = 2
+	// Allow network downloads of CA certificates.
 	KSecTrustOptionFetchIssuerFromNet SecTrustOptionFlags = 4
-	KSecTrustOptionAllowExpiredRoot   SecTrustOptionFlags = 8
-	KSecTrustOptionRequireRevPerCert  SecTrustOptionFlags = 16
-	KSecTrustOptionUseTrustSettings   SecTrustOptionFlags = 32
-	KSecTrustOptionImplicitAnchors    SecTrustOptionFlags = 64
+	// Allow expired root certificates.
+	KSecTrustOptionAllowExpiredRoot SecTrustOptionFlags = 8
+	// Require a positive revocation check for each certificate.
+	KSecTrustOptionRequireRevPerCert SecTrustOptionFlags = 16
+	// Use TrustSettings instead of anchors.
+	KSecTrustOptionUseTrustSettings SecTrustOptionFlags = 32
+	// Treat properly self-signed certificates as anchors implicitly.
+	KSecTrustOptionImplicitAnchors SecTrustOptionFlags = 64
 )
 
 func (e SecTrustOptionFlags) String() string {
@@ -1050,17 +1276,26 @@ func (e SecTrustOptionFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Trust evaluation result codes.
 type SecTrustResultType int64
 
 const (
-	KSecTrustResultInvalid                 SecTrustResultType = 0
-	KSecTrustResultProceed                 SecTrustResultType = 1
-	KSecTrustResultConfirm                 SecTrustResultType = 2
-	KSecTrustResultDeny                    SecTrustResultType = 3
-	KSecTrustResultUnspecified             SecTrustResultType = 4
+	// An indication of an invalid setting or result.
+	KSecTrustResultInvalid SecTrustResultType = 0
+	// The user granted permission to trust the certificate for the purposes designated in the specified policies.
+	KSecTrustResultProceed SecTrustResultType = 1
+	// User confirmation is required before proceeding.
+	KSecTrustResultConfirm SecTrustResultType = 2
+	// The user specified that the certificate should not be trusted.
+	KSecTrustResultDeny SecTrustResultType = 3
+	// The user did not specify a trust setting.
+	KSecTrustResultUnspecified SecTrustResultType = 4
+	// Trust is denied, but recovery may be possible.
 	KSecTrustResultRecoverableTrustFailure SecTrustResultType = 5
-	KSecTrustResultFatalTrustFailure       SecTrustResultType = 6
-	KSecTrustResultOtherError              SecTrustResultType = 7
+	// Trust is denied and no simple fix is available.
+	KSecTrustResultFatalTrustFailure SecTrustResultType = 6
+	// A value that indicates a failure other than trust evaluation.
+	KSecTrustResultOtherError SecTrustResultType = 7
 )
 
 func (e SecTrustResultType) String() string {
@@ -1086,11 +1321,15 @@ func (e SecTrustResultType) String() string {
 	}
 }
 
+// The trust settings domains.
 type SecTrustSettingsDomain int64
 
 const (
-	KSecTrustSettingsDomainUser   SecTrustSettingsDomain = 0
-	KSecTrustSettingsDomainAdmin  SecTrustSettingsDomain = 1
+	// Per-user trust settings.
+	KSecTrustSettingsDomainUser SecTrustSettingsDomain = 0
+	// Locally administered, system-wide trust settings.
+	KSecTrustSettingsDomainAdmin SecTrustSettingsDomain = 1
+	// System trust settings.
 	KSecTrustSettingsDomainSystem SecTrustSettingsDomain = 2
 )
 
@@ -1107,14 +1346,19 @@ func (e SecTrustSettingsDomain) String() string {
 	}
 }
 
+// The attributes of a security session.
 // Bitmask — values may be combined with |.
 type SessionAttributeBits int64
 
 const (
-	SessionIsRoot           SessionAttributeBits = 1
+	// A bit that indicates the session is the root session.
+	SessionIsRoot SessionAttributeBits = 1
+	// A bit that indicates a graphic subsystem is available.
 	SessionHasGraphicAccess SessionAttributeBits = 16
-	SessionHasTTY           SessionAttributeBits = 32
-	SessionIsRemote         SessionAttributeBits = 4096
+	// A bit that indicates /dev/tty is available.
+	SessionHasTTY SessionAttributeBits = 32
+	// A bit that indicates the session was initiated over the network.
+	SessionIsRemote SessionAttributeBits = 4096
 )
 
 func (e SessionAttributeBits) String() string {
@@ -1137,10 +1381,12 @@ func (e SessionAttributeBits) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The flags that affect the creation of a security session.
 // Bitmask — values may be combined with |.
 type SessionCreationFlags int64
 
 const (
+	// The caller has allocated sub-bootstrap.
 	SessionKeepCurrentBootstrap SessionCreationFlags = 32768
 )
 
@@ -1155,6 +1401,7 @@ func (e SessionCreationFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Groups that collect ciphersuites of comparable security properties.
 type Tls_ciphersuite_group_t int64
 
 const (
@@ -1185,6 +1432,7 @@ func (e Tls_ciphersuite_group_t) String() string {
 	}
 }
 
+// The collection of valid ciphersuites.
 type Tls_ciphersuite_t int64
 
 const (
@@ -1275,19 +1523,32 @@ func (e Tls_ciphersuite_t) String() string {
 	}
 }
 
+// The collection of supported TLS and DTLS versions.
 type Tls_protocol_version_t int64
 
 const (
+	// The TLS 1.0 protocol.
+	//
 	// Deprecated: Use tls_protocol_version_TLSv12 or tls_protocol_version_TLSv13 instead.
 	Tls_protocol_version_TLSv10 Tls_protocol_version_t = 769
+	// The TLS 1.1 protocol.
+	//
 	// Deprecated: Use tls_protocol_version_TLSv12 or tls_protocol_version_TLSv13 instead.
 	Tls_protocol_version_TLSv11 Tls_protocol_version_t = 770
+	// The TLS 1.2 protocol.
+	//
 	// Deprecated: Use tls_protocol_version_TLSv12 or tls_protocol_version_TLSv13 instead.
 	Tls_protocol_version_TLSv12 Tls_protocol_version_t = 771
+	// The TLS 1.3 protocol.
+	//
 	// Deprecated: Use tls_protocol_version_TLSv12 or tls_protocol_version_TLSv13 instead.
 	Tls_protocol_version_TLSv13 Tls_protocol_version_t = 772
+	// The DTLS 1.0 protocol.
+	//
 	// Deprecated: Use tls_protocol_version_DTLSv12 instead.
 	Tls_protocol_version_DTLSv10 Tls_protocol_version_t = 65279
+	// The DTLS 1.2 protocol.
+	//
 	// Deprecated: Use tls_protocol_version_DTLSv12 instead.
 	Tls_protocol_version_DTLSv12 Tls_protocol_version_t = 65277
 )

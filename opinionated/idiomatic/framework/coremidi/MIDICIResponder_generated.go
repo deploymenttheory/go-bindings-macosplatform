@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that responds to MIDI-CI inquiries from an initiator on behalf of a MIDI client, and handles profile and property exchange operations.
+//
 // CIResponder wraps [raw.MIDICIResponder] with a fluent Go API.
 type CIResponder struct {
 	inner *raw.MIDICIResponder
@@ -37,6 +39,8 @@ func NewCIResponder() *CIResponder {
 	return &CIResponder{inner: raw.MIDICIResponderFromID(_id)}
 }
 
+// Creates a new responder.
+//
 // NewCIResponderWithDeviceInfoProfileDelegateProfileStatesSupportProperties creates a new [CIResponder].
 func NewCIResponderWithDeviceInfoProfileDelegateProfileStatesSupportProperties(deviceInfo *raw.MIDICIDeviceInfo, delegate raw.MIDICIProfileResponderDelegate, profileList unsafe.Pointer, propertiesSupported bool) *CIResponder {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICIResponder")), objc.RegisterName("alloc"))
@@ -44,21 +48,29 @@ func NewCIResponderWithDeviceInfoProfileDelegateProfileStatesSupportProperties(d
 	return &CIResponder{inner: raw.MIDICIResponderFromID(_id)}
 }
 
+// Enables or disables a profile and notifies all connected initiators.
+//
 // NotifyProfileOnChannelIsEnabled calls the underlying NotifyProfileOnChannelIsEnabled.
 func (x *CIResponder) NotifyProfileOnChannelIsEnabled(aProfile *raw.MIDICIProfile, channel uint8, enabledState bool) bool {
 	return x.inner.NotifyProfileOnChannelIsEnabled(aProfile, channel, enabledState)
 }
 
+// Sends profile-specific data to all connected initiators.
+//
 // SendProfileOnChannelProfileData calls the underlying SendProfileOnChannelProfileData.
 func (x *CIResponder) SendProfileOnChannelProfileData(aProfile *raw.MIDICIProfile, channel uint8, profileSpecificData *foundation.NSData) bool {
 	return x.inner.SendProfileOnChannelProfileData(aProfile, channel, profileSpecificData)
 }
 
+// Starts receiving initiator requests.
+//
 // Start calls the underlying Start.
 func (x *CIResponder) Start() bool {
 	return x.inner.Start()
 }
 
+// Stops receiving initiator requests and disconnects all connected initiators.
+//
 // Stop calls the underlying Stop.
 func (x *CIResponder) Stop() {
 	x.inner.Stop()

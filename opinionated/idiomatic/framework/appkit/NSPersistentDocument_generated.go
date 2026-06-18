@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A document object that can integrate with Core Data.
+//
 // PersistentDocument wraps [raw.NSPersistentDocument] with a fluent Go API.
 type PersistentDocument struct {
 	inner *raw.NSPersistentDocument
@@ -38,83 +40,111 @@ func NewPersistentDocument() *PersistentDocument {
 	return &PersistentDocument{inner: raw.NSPersistentDocumentFromID(_id)}
 }
 
+// The managed object context for the document.
+//
 // WithManagedObjectContext sets the managedObjectContext property and returns the receiver for chaining.
 func (x *PersistentDocument) WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *PersistentDocument {
 	x.inner.SetManagedObjectContext(managedObjectContext)
 	return x
 }
 
+// The name of the document type, as specified in the app’s information property-list file.
+//
 // WithFileType sets the fileType property and returns the receiver for chaining.
 func (x *PersistentDocument) WithFileType(fileType string) *PersistentDocument {
 	x.inner.NSDocument.SetFileType(foundation.NSStringStringWithUTF8String(fileType))
 	return x
 }
 
+// The location of the document’s on-disk representation.
+//
 // WithFileURL sets the fileURL property and returns the receiver for chaining.
 func (x *PersistentDocument) WithFileURL(fileURL string) *PersistentDocument {
 	x.inner.NSDocument.SetFileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
 	return x
 }
 
+// The last-known modification date of the document’s on-disk representation.
+//
 // WithFileModificationDate sets the fileModificationDate property and returns the receiver for chaining.
 func (x *PersistentDocument) WithFileModificationDate(fileModificationDate *foundation.NSDate) *PersistentDocument {
 	x.inner.NSDocument.SetFileModificationDate(fileModificationDate)
 	return x
 }
 
+// A Boolean value that indicates whether the document is a draft that the user has not yet saved.
+//
 // WithDraft sets the draft property and returns the receiver for chaining.
 func (x *PersistentDocument) WithDraft(draft bool) *PersistentDocument {
 	x.inner.NSDocument.SetDraft(draft)
 	return x
 }
 
+// The location of the most recently autosaved document contents.
+//
 // WithAutosavedContentsFileURL sets the autosavedContentsFileURL property and returns the receiver for chaining.
 func (x *PersistentDocument) WithAutosavedContentsFileURL(autosavedContentsFileURL string) *PersistentDocument {
 	x.inner.NSDocument.SetAutosavedContentsFileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(autosavedContentsFileURL)))
 	return x
 }
 
+// The printing information associated with the document.
+//
 // WithPrintInfo sets the printInfo property and returns the receiver for chaining.
 func (x *PersistentDocument) WithPrintInfo(printInfo *PrintInfo) *PersistentDocument {
 	x.inner.NSDocument.SetPrintInfo(printInfo.Unwrap())
 	return x
 }
 
+// The object that the document uses to support undo/redo operations.
+//
 // WithUndoManager sets the undoManager property and returns the receiver for chaining.
 func (x *PersistentDocument) WithUndoManager(undoManager *foundation.NSUndoManager) *PersistentDocument {
 	x.inner.NSDocument.SetUndoManager(undoManager)
 	return x
 }
 
+// A Boolean value that indicates whether the document owns an undo manager object.
+//
 // WithHasUndoManager sets the hasUndoManager property and returns the receiver for chaining.
 func (x *PersistentDocument) WithHasUndoManager(hasUndoManager bool) *PersistentDocument {
 	x.inner.NSDocument.SetHasUndoManager(hasUndoManager)
 	return x
 }
 
+// The name of the document as displayed in the title bars of the document’s windows and in alert dialogs related to the document.
+//
 // WithDisplayName sets the displayName property and returns the receiver for chaining.
 func (x *PersistentDocument) WithDisplayName(displayName string) *PersistentDocument {
 	x.inner.NSDocument.SetDisplayName(foundation.NSStringStringWithUTF8String(displayName))
 	return x
 }
 
+// An object that encapsulates a user activity the document supports.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *PersistentDocument) WithUserActivity(userActivity *foundation.NSUserActivity) *PersistentDocument {
 	x.inner.NSDocument.SetUserActivity(userActivity)
 	return x
 }
 
+// The name of the document seen by the user in AppleScript.
+//
 // WithLastComponentOfFileName sets the lastComponentOfFileName property and returns the receiver for chaining.
 func (x *PersistentDocument) WithLastComponentOfFileName(lastComponentOfFileName string) *PersistentDocument {
 	x.inner.NSDocument.SetLastComponentOfFileName(foundation.NSStringStringWithUTF8String(lastComponentOfFileName))
 	return x
 }
 
+// Configures the receiver’s persistent store coordinator with the appropriate stores for a given URL.
+//
 // ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError calls the underlying ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError.
 func (x *PersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError(url string, fileType string, configuration string, storeOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(fileType), foundation.NSStringStringWithUTF8String(configuration), storeOptions)
 }
 
+// Returns the type of persistent store associated with the specified file type.
+//
 // PersistentStoreTypeForFileType calls the underlying PersistentStoreTypeForFileType.
 func (x *PersistentDocument) PersistentStoreTypeForFileType(fileType string) string {
 	_r := x.inner.PersistentStoreTypeForFileType(foundation.NSStringStringWithUTF8String(fileType))
@@ -139,6 +169,8 @@ func (x *PersistentDocument) ManagedObjectModel() *coredata.NSManagedObjectModel
 	return x.inner.ManagedObjectModel()
 }
 
+// Configures the receiver’s persistent store coordinator for a given URL and document type.
+//
 // ConfigurePersistentStoreCoordinatorForURLOfTypeError calls the underlying ConfigurePersistentStoreCoordinatorForURLOfTypeError.
 func (x *PersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfTypeError(url string, fileType string) (bool, error) {
 	return x.inner.ConfigurePersistentStoreCoordinatorForURLOfTypeError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(fileType))

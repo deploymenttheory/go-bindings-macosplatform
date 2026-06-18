@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Geometry data for a specific keyframe to use in a moving instance.
+//
 // MotionKeyframeData wraps [raw.MTLMotionKeyframeData] with a fluent Go API.
 type MotionKeyframeData struct {
 	inner *raw.MTLMotionKeyframeData
@@ -35,7 +37,7 @@ func NewMotionKeyframeData() *MotionKeyframeData {
 	return &MotionKeyframeData{inner: raw.MTLMotionKeyframeDataFromID(_id)}
 }
 
-// @brief Buffer containing the data of a single keyframe. Multiple keyframes can be interleaved in one MTLBuffer.
+// The buffer that holds the geometry data.
 //
 // WithBuffer sets the buffer property and returns the receiver for chaining.
 func (x *MotionKeyframeData) WithBuffer(buffer raw.MTLBuffer) *MotionKeyframeData {
@@ -43,7 +45,7 @@ func (x *MotionKeyframeData) WithBuffer(buffer raw.MTLBuffer) *MotionKeyframeDat
 	return x
 }
 
-// @brief Buffer offset. Must be a multiple of 4 bytes.
+// The offset, in bytes, to the keyframe data.
 //
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *MotionKeyframeData) WithOffset(offset uint) *MotionKeyframeData {

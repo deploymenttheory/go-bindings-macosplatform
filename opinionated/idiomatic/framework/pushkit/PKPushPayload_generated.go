@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains information about a received PushKit notification.
+//
 // PushPayload wraps [raw.PKPushPayload] with a fluent Go API.
 type PushPayload struct {
 	inner *raw.PKPushPayload

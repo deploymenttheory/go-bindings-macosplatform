@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A structure representing the bounds of the predicted subject.
+//
 // BoundsPrediction wraps [raw.CNBoundsPrediction] with a fluent Go API.
 type BoundsPrediction struct {
 	inner *raw.CNBoundsPrediction

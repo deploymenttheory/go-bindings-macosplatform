@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents Automator actions whose runtime behavior is driven by an AppleScript script.
+//
 // AppleScriptAction wraps [raw.AMAppleScriptAction] with a fluent Go API.
 type AppleScriptAction struct {
 	inner *raw.AMAppleScriptAction
@@ -37,18 +39,24 @@ func NewAppleScriptAction() *AppleScriptAction {
 	return &AppleScriptAction{inner: raw.AMAppleScriptActionFromID(_id)}
 }
 
+// An OSAScript object representing the receiver’s script containing the on run command handler.
+//
 // WithScript sets the script property and returns the receiver for chaining.
 func (x *AppleScriptAction) WithScript(script *osakit.OSAScript) *AppleScriptAction {
 	x.inner.SetScript(script)
 	return x
 }
 
+// The action’s parameters.
+//
 // WithParameters sets the parameters property and returns the receiver for chaining.
 func (x *AppleScriptAction) WithParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) *AppleScriptAction {
 	x.inner.AMBundleAction.SetParameters(parameters)
 	return x
 }
 
+// A float value between 0 and 1, which indicates how far along the action is while processing.
+//
 // WithProgressValue sets the progressValue property and returns the receiver for chaining.
 func (x *AppleScriptAction) WithProgressValue(progressValue float64) *AppleScriptAction {
 	x.inner.AMBundleAction.AMAction.SetProgressValue(progressValue)

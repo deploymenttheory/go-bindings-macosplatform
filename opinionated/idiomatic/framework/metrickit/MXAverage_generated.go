@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for an average.
+//
 // Average wraps [raw.MXAverage] with a fluent Go API.
 type Average struct {
 	inner *raw.MXAverage[objc.ID]

@@ -46,7 +46,7 @@ func (x *GraphRandomOpDescriptor) WithDistribution(distribution MPSGraphRandomDi
 	return x
 }
 
-// The data type of the generated result values. When sampling from the uniform distribution, valid types are MPSDataTypeFloat16, MPSDataTypeFloat32, and MPSDataTypeInt32. When sampling from the normal or truncated normal distribution, valid types are MPSDataTypeFloat16 and MPSDataTypeFloat32.
+// The data type of the generated result values.
 //
 // WithDataType sets the dataType property and returns the receiver for chaining.
 func (x *GraphRandomOpDescriptor) WithDataType(dataType mpscore.MPSDataType) *GraphRandomOpDescriptor {
@@ -54,7 +54,7 @@ func (x *GraphRandomOpDescriptor) WithDataType(dataType mpscore.MPSDataType) *Gr
 	return x
 }
 
-// The lower range of the distribution. This value is used for Uniform distributions with float data types and Truncated Normal disributions. Defaults to 0 for uniform distributions and -2 for normal distributions.
+// The lower range of the distribution.
 //
 // WithMin sets the min property and returns the receiver for chaining.
 func (x *GraphRandomOpDescriptor) WithMin(min float32) *GraphRandomOpDescriptor {
@@ -62,7 +62,7 @@ func (x *GraphRandomOpDescriptor) WithMin(min float32) *GraphRandomOpDescriptor 
 	return x
 }
 
-// The upper range of the distribution. This value is used for Uniform distributions with float data types and Truncated Normal disributions. Defaults to 1 for uniform distributions and 2 for normal distributions.
+// The upper range of the distribution.
 //
 // WithMax sets the max property and returns the receiver for chaining.
 func (x *GraphRandomOpDescriptor) WithMax(max float32) *GraphRandomOpDescriptor {
@@ -70,7 +70,7 @@ func (x *GraphRandomOpDescriptor) WithMax(max float32) *GraphRandomOpDescriptor 
 	return x
 }
 
-// The lower range of the distribution. This value is used for Uniform with integer data types Defaults to 0.
+// The lower range of the distribution.
 //
 // WithMinInteger sets the minInteger property and returns the receiver for chaining.
 func (x *GraphRandomOpDescriptor) WithMinInteger(minInteger int) *GraphRandomOpDescriptor {
@@ -78,7 +78,7 @@ func (x *GraphRandomOpDescriptor) WithMinInteger(minInteger int) *GraphRandomOpD
 	return x
 }
 
-// The upper range of the distribution. This value is used for Uniform with integer data types Defaults to INT32_MAX for uniform distributions and 0 for normal distributions.
+// The upper range of the distribution.
 //
 // WithMaxInteger sets the maxInteger property and returns the receiver for chaining.
 func (x *GraphRandomOpDescriptor) WithMaxInteger(maxInteger int) *GraphRandomOpDescriptor {
@@ -86,7 +86,7 @@ func (x *GraphRandomOpDescriptor) WithMaxInteger(maxInteger int) *GraphRandomOpD
 	return x
 }
 
-// The mean of the distribution. This value is used for Normal and Truncated Normal disributions. Defaults to 0.
+// The mean of the distribution.
 //
 // WithMean sets the mean property and returns the receiver for chaining.
 func (x *GraphRandomOpDescriptor) WithMean(mean float32) *GraphRandomOpDescriptor {
@@ -94,7 +94,7 @@ func (x *GraphRandomOpDescriptor) WithMean(mean float32) *GraphRandomOpDescripto
 	return x
 }
 
-// The standard deviation of the distribution. This value is used for Normal and Truncated Normal disributions. For Truncated Normal distribution this defines the standard deviation parameter of the underlying Normal distribution, that is the width of the Gaussian, not the true standard deviation of the truncated distribution which typically differs from the standard deviation of the original Normal distribution. Defaults to 0 for uniform distributions and 1 for normal distributions.
+// The standard deviation of the distribution.
 //
 // WithStandardDeviation sets the standardDeviation property and returns the receiver for chaining.
 func (x *GraphRandomOpDescriptor) WithStandardDeviation(standardDeviation float32) *GraphRandomOpDescriptor {
@@ -102,7 +102,7 @@ func (x *GraphRandomOpDescriptor) WithStandardDeviation(standardDeviation float3
 	return x
 }
 
-// The sampling method of the distribution. This value is used for Normal and Truncated Normal disributions. See MPSGraphRandomNormalSamplingMethod. Defaults to MPSGraphRandomNormalSamplingInvCDF.
+// The sampling method of the distribution.
 //
 // WithSamplingMethod sets the samplingMethod property and returns the receiver for chaining.
 func (x *GraphRandomOpDescriptor) WithSamplingMethod(samplingMethod MPSGraphRandomNormalSamplingMethod) *GraphRandomOpDescriptor {

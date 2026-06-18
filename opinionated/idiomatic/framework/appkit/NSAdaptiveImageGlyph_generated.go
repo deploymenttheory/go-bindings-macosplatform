@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A data object for an emoji-like image that can appear in attributed text.
+//
 // AdaptiveImageGlyph wraps [raw.NSAdaptiveImageGlyph] with a fluent Go API.
 type AdaptiveImageGlyph struct {
 	inner *raw.NSAdaptiveImageGlyph
@@ -31,6 +33,8 @@ func AdaptiveImageGlyphFromID(id objc.ID) *AdaptiveImageGlyph {
 	return &AdaptiveImageGlyph{inner: raw.NSAdaptiveImageGlyphFromID(id)}
 }
 
+// Create an adaptive image glyph from the previously saved data.
+//
 // NewAdaptiveImageGlyphWithImageContent creates a new [AdaptiveImageGlyph].
 func NewAdaptiveImageGlyphWithImageContent(imageContent *foundation.NSData) *AdaptiveImageGlyph {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAdaptiveImageGlyph")), objc.RegisterName("alloc"))

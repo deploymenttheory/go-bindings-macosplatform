@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that stores information associated with the creation of a PDF file, such as its URL, tag names, page orientation, and paper size.
+//
 // PDFInfo wraps [raw.NSPDFInfo] with a fluent Go API.
 type PDFInfo struct {
 	inner *raw.NSPDFInfo
@@ -39,18 +41,24 @@ func NewPDFInfo() *PDFInfo {
 	return &PDFInfo{inner: raw.NSPDFInfoFromID(_id)}
 }
 
+// The URL identifying the location at which the PDF file will be created.
+//
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *PDFInfo) WithURL(uRL string) *PDFInfo {
 	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 	return x
 }
 
+// A Boolean value that indicates whether the file extension should appear after the filename.
+//
 // WithFileExtensionHidden sets the fileExtensionHidden property and returns the receiver for chaining.
 func (x *PDFInfo) WithFileExtensionHidden(fileExtensionHidden bool) *PDFInfo {
 	x.inner.SetFileExtensionHidden(fileExtensionHidden)
 	return x
 }
 
+// An array of tag names that should be applied to the PDF file after it’s created.
+//
 // WithTagNames sets the collection, converting the Go slice to an NSArray.
 func (x *PDFInfo) WithTagNames(items ...*foundation.NSString) *PDFInfo {
 	if len(items) == 0 {
@@ -69,12 +77,16 @@ func (x *PDFInfo) WithTagNames(items ...*foundation.NSString) *PDFInfo {
 	return x
 }
 
+// The paper orientation to use when exporting content as a PDF file.
+//
 // WithOrientation sets the orientation property and returns the receiver for chaining.
 func (x *PDFInfo) WithOrientation(orientation NSPaperOrientation) *PDFInfo {
 	x.inner.SetOrientation(raw.NSPaperOrientation(orientation))
 	return x
 }
 
+// The paper size to use when exporting content as a PDF file.
+//
 // WithPaperSize sets the paperSize property and returns the receiver for chaining.
 func (x *PDFInfo) WithPaperSize(paperSize corefoundation.CGSize) *PDFInfo {
 	x.inner.SetPaperSize(paperSize)

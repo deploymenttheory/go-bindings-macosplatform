@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The message arguments for a particular entry.
+//
 // LogMessageComponent wraps [raw.OSLogMessageComponent] with a fluent Go API.
 type LogMessageComponent struct {
 	inner *raw.OSLogMessageComponent

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that you use to request access to a person’s passkeys in a web browser, and that reports on the access status.
+//
 // AuthorizationWebBrowserPublicKeyCredentialManager wraps [raw.ASAuthorizationWebBrowserPublicKeyCredentialManager] with a fluent Go API.
 type AuthorizationWebBrowserPublicKeyCredentialManager struct {
 	inner *raw.ASAuthorizationWebBrowserPublicKeyCredentialManager
@@ -39,6 +41,8 @@ func NewAuthorizationWebBrowserPublicKeyCredentialManager() *AuthorizationWebBro
 	return &AuthorizationWebBrowserPublicKeyCredentialManager{inner: raw.ASAuthorizationWebBrowserPublicKeyCredentialManagerFromID(_id)}
 }
 
+// Requests a person’s permission to use their passkeys.
+//
 // RequestAuthorizationForPublicKeyCredentials calls the underlying RequestAuthorizationForPublicKeyCredentials.
 func (x *AuthorizationWebBrowserPublicKeyCredentialManager) RequestAuthorizationForPublicKeyCredentials(completionHandler func(ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState)) {
 	x.inner.RequestAuthorizationForPublicKeyCredentials(func(_a0 raw.ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState) {
@@ -46,6 +50,8 @@ func (x *AuthorizationWebBrowserPublicKeyCredentialManager) RequestAuthorization
 	})
 }
 
+// Gets a list of passkeys available for authenticating with the given relying party.
+//
 // PlatformCredentialsForRelyingParty blocks until the operation completes or ctx is cancelled.
 func (x *AuthorizationWebBrowserPublicKeyCredentialManager) PlatformCredentialsForRelyingParty(ctx context.Context, relyingParty string) (*foundation.NSArray[*raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential], error) {
 	type _result struct {

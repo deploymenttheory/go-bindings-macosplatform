@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing a diagnostic report for an app crash.
+//
 // CrashDiagnostic wraps [raw.MXCrashDiagnostic] with a fluent Go API.
 type CrashDiagnostic struct {
 	inner *raw.MXCrashDiagnostic

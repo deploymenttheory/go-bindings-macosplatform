@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A window controller that displays nearby Bluetooth-based MIDI peripherals.
+//
 // CABTLEMIDIWindowController wraps [raw.CABTLEMIDIWindowController] with a fluent Go API.
 type CABTLEMIDIWindowController struct {
 	inner *raw.CABTLEMIDIWindowController

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A mutable track in a composition that you use to insert, remove, and scale track segments without affecting their low-level representation.
+//
 // MutableCompositionTrack wraps [raw.AVMutableCompositionTrack] with a fluent Go API.
 type MutableCompositionTrack struct {
 	inner *raw.AVMutableCompositionTrack
@@ -39,7 +41,7 @@ func NewMutableCompositionTrack() *MutableCompositionTrack {
 	return &MutableCompositionTrack{inner: raw.AVMutableCompositionTrackFromID(_id)}
 }
 
-// @property       enabled @abstract       Specifies whether the track is enabled or disabled.  Default is YES.
+// A Boolean value that indicates whether the tracks is in an enabled state.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *MutableCompositionTrack) WithEnabled(enabled bool) *MutableCompositionTrack {
@@ -47,7 +49,7 @@ func (x *MutableCompositionTrack) WithEnabled(enabled bool) *MutableCompositionT
 	return x
 }
 
-// @property       naturalTimeScale @abstract       Indicates a timescale in which time values for the track can be operated upon without extraneous numerical conversion. @discussion If not set, the value is the naturalTimeScale of the first non-empty edit, or 600 if there are no non-empty edits. Set to 0 to revert to default behavior.
+// The time scale in which you can perform time-based operations without extra numerical conversion.
 //
 // WithNaturalTimeScale sets the naturalTimeScale property and returns the receiver for chaining.
 func (x *MutableCompositionTrack) WithNaturalTimeScale(naturalTimeScale int32) *MutableCompositionTrack {
@@ -55,7 +57,7 @@ func (x *MutableCompositionTrack) WithNaturalTimeScale(naturalTimeScale int32) *
 	return x
 }
 
-// @property       languageCode @abstract       Indicates the language associated with the track, as an ISO 639-2/T language code. @discussion The default value is nil.
+// The language associated with the track, as an ISO 639-2/T language code.
 //
 // WithLanguageCode sets the languageCode property and returns the receiver for chaining.
 func (x *MutableCompositionTrack) WithLanguageCode(languageCode string) *MutableCompositionTrack {
@@ -63,7 +65,7 @@ func (x *MutableCompositionTrack) WithLanguageCode(languageCode string) *Mutable
 	return x
 }
 
-// @property       extendedLanguageTag @abstract       Indicates the language tag associated with the track, as an IETF BCP 47 (RFC 4646) language identifier. @discussion The default value is nil.
+// The language tag associated with the track, as an RFC 4646 language tag.
 //
 // WithExtendedLanguageTag sets the extendedLanguageTag property and returns the receiver for chaining.
 func (x *MutableCompositionTrack) WithExtendedLanguageTag(extendedLanguageTag string) *MutableCompositionTrack {
@@ -71,7 +73,7 @@ func (x *MutableCompositionTrack) WithExtendedLanguageTag(extendedLanguageTag st
 	return x
 }
 
-// @property       preferredTransform @abstract       The preferred transformation of the visual media data for display purposes. @discussion The default value is CGAffineTransformIdentity.
+// The preferred transformation of the visual media data for display purposes.
 //
 // WithPreferredTransform sets the preferredTransform property and returns the receiver for chaining.
 func (x *MutableCompositionTrack) WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *MutableCompositionTrack {
@@ -79,7 +81,7 @@ func (x *MutableCompositionTrack) WithPreferredTransform(preferredTransform core
 	return x
 }
 
-// @property       preferredVolume @abstract       The preferred volume of the audible media data. @discussion The default value is 1.0.
+// The volume the track prefers for its audible media data.
 //
 // WithPreferredVolume sets the preferredVolume property and returns the receiver for chaining.
 func (x *MutableCompositionTrack) WithPreferredVolume(preferredVolume float32) *MutableCompositionTrack {
@@ -87,7 +89,7 @@ func (x *MutableCompositionTrack) WithPreferredVolume(preferredVolume float32) *
 	return x
 }
 
-// @property       segments @abstract       Provides read/write access to the array of track segments, each an instance of AVCompositionTrackSegment. @discussion Note that timeMapping.target.start of the first AVCompositionTrackSegment must be kCMTimeZero, and the timeMapping.target.start of each subsequent AVCompositionTrackSegment must equal CMTimeRangeGetEnd(the previous AVCompositionTrackSegment's timeMapping.target). Use -validateTrackSegments:error: to perform a test to ensure that an array of AVCompositionTrackSegments conforms to this rule.
+// The track segments that a composition track contains.
 //
 // WithSegments sets the collection, converting the Go slice to an NSArray.
 func (x *MutableCompositionTrack) WithSegments(items ...*raw.AVCompositionTrackSegment) *MutableCompositionTrack {
@@ -107,56 +109,56 @@ func (x *MutableCompositionTrack) WithSegments(items ...*raw.AVCompositionTrackS
 	return x
 }
 
-// @method         insertTimeRange:ofTrack:atTime:error: @abstract       Inserts a timeRange of a source track into a track of a composition. @param          timeRange Specifies the timeRange of the track to be inserted. @param          track Specifies the source track to be inserted. Only AVAssetTracks of AVURLAssets and AVCompositions are supported (AVCompositions starting in macOS 10.10 and iOS 8.0). @param          startTime Specifies the time at which the inserted track is to be presented by the composition track. You may pass kCMTimeInvalid for startTime to indicate that the timeRange should be appended to the end of the track. @param          error Describes failures that may be reported to the user, e.g. the asset that was selected for insertion in the composition is restricted by copy-protection. @result         A BOOL value indicating the success of the insertion. @discussion You provide a reference to an AVAssetTrack and the timeRange within it that you want to insert. You specify the start time in the target composition track at which the timeRange should be inserted. Note that the inserted track timeRange will be presented at its natural duration and rate. It can be scaled to a different duration (and presented at a different rate) via -scaleTimeRange:toDuration:.
+// Inserts a time range of media from a source track into a composition track.
 //
 // InsertTimeRangeOfTrackAtTimeError calls the underlying InsertTimeRangeOfTrackAtTimeError.
 func (x *MutableCompositionTrack) InsertTimeRangeOfTrackAtTimeError(timeRange coremedia.CMTimeRange, track *raw.AVAssetTrack, startTime coremedia.CMTime) (bool, error) {
 	return x.inner.InsertTimeRangeOfTrackAtTimeError(timeRange, track, startTime)
 }
 
-// @method         insertTimeRanges:ofTracks:atTime:error: @abstract       Inserts the timeRanges of multiple source tracks into a track of a composition. @param          timeRanges Specifies the timeRanges to be inserted. An NSArray of NSValues containing CMTimeRange. (See +[NSValue valueWithCMTimeRange:] in AVTime.h.) @param          tracks Specifies the source tracks to be inserted. Only AVAssetTracks of AVURLAssets and AVCompositions are supported (AVCompositions starting in macOS 10.10 and iOS 8.0). @param          startTime Specifies the time at which the inserted tracks are to be presented by the composition track. You may pass kCMTimeInvalid for startTime to indicate that the timeRanges should be appended to the end of the track. @param          error Describes failures that may be reported to the user, e.g. the asset that was selected for insertion in the composition is restricted by copy-protection. @result         A BOOL value indicating the success of the insertion. @discussion This method is equivalent to (but more efficient than) calling -insertTimeRange:ofTrack:atTime:error: for each timeRange/track pair. If this method returns an error, none of the time ranges will be inserted into the composition track. To specify an empty time range, pass NSNull for the track and a time range of starting at kCMTimeInvalid with a duration of the desired empty edit. This method throws an exception if time ranges and tracks to not have the same array count.
+// Inserts the time ranges of multiple source tracks into a track of a composition.
 //
 // InsertTimeRangesOfTracksAtTimeError calls the underlying InsertTimeRangesOfTracksAtTimeError.
 func (x *MutableCompositionTrack) InsertTimeRangesOfTracksAtTimeError(timeRanges *foundation.NSArray[*foundation.NSValue], tracks *foundation.NSArray[*raw.AVAssetTrack], startTime coremedia.CMTime) (bool, error) {
 	return x.inner.InsertTimeRangesOfTracksAtTimeError(timeRanges, tracks, startTime)
 }
 
-// @method         insertEmptyTimeRange: @abstract       Adds or extends an empty timeRange within the composition track. @param          timeRange Specifies the empty timeRange to be inserted. @discussion If you insert an empty timeRange into the track, any media that was presented during that interval prior to the insertion will be presented instead immediately afterward. The exact meaning of the term "empty timeRange" depends upon the mediaType of the track. For example, an empty timeRange in a sound track presents silence. Note that you cannot add empty time ranges to the end of a composition track.
+// Adds or extends an empty time range within the track.
 //
 // InsertEmptyTimeRange calls the underlying InsertEmptyTimeRange.
 func (x *MutableCompositionTrack) InsertEmptyTimeRange(timeRange coremedia.CMTimeRange) {
 	x.inner.InsertEmptyTimeRange(timeRange)
 }
 
-// @method         removeTimeRange: @abstract       Removes a specified timeRange from the track. @param          timeRange Specifies the timeRange to be removed. @discussion Removal of a timeRange does not cause the track to be removed from the composition. Instead it removes or truncates track segments that intersect with the timeRange.
+// Removes a time range of media from a composition track.
 //
 // RemoveTimeRange calls the underlying RemoveTimeRange.
 func (x *MutableCompositionTrack) RemoveTimeRange(timeRange coremedia.CMTimeRange) {
 	x.inner.RemoveTimeRange(timeRange)
 }
 
-// @method         scaleTimeRange:toDuration: @abstract       Changes the duration of a timeRange of the track. @param          timeRange Specifies the timeRange of the track to be scaled. @param          duration Specifies the new duration of the timeRange. @discussion Each trackSegment affected by the scaling operation will be presented at a rate equal to source.duration / target.duration of its resulting timeMapping.
+// Changes the duration of a time range of the track.
 //
 // ScaleTimeRangeToDuration calls the underlying ScaleTimeRangeToDuration.
 func (x *MutableCompositionTrack) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime) {
 	x.inner.ScaleTimeRangeToDuration(timeRange, duration)
 }
 
-// @method         validateTrackSegments:error: @abstract       Tests an array of AVCompositionTrackSegments to determine whether they conform to the timing rules noted above (see the property key @"trackSegments"). @param          trackSegments The array of AVCompositionTrackSegments to be validated. @param          error If validation fais, returns information about the failure. @result         YES if validation suceeds, otherwise NO. @discussion The array is tested for suitability for setting as the value of the trackSegments property. If a portion of an existing trackSegments array is to be modified, the modification can be made via an instance of NSMutableArray, and the resulting array can be tested via -validateTrackSegments:error:.
+// Returns a Boolean value that indicates whether a given array of track segments conform to the timing rules for a composition track.
 //
 // ValidateTrackSegmentsError calls the underlying ValidateTrackSegmentsError.
 func (x *MutableCompositionTrack) ValidateTrackSegmentsError(trackSegments *foundation.NSArray[*raw.AVCompositionTrackSegment]) (bool, error) {
 	return x.inner.ValidateTrackSegmentsError(trackSegments)
 }
 
-// @method			addTrackAssociationToTrack:type: @abstract		Establishes a track association of a specific type between two tracks. @param			compositionTrack An AVCompositionTrack object that is to be associated with the receiver. @param			trackAssociationType The type of track association to add between the receiver and the specified compositionTrack (for instance, AVTrackAssociationTypeChapterList).
+// Establishes a track association of a specific type between two tracks.
 //
 // AddTrackAssociationToTrackType calls the underlying AddTrackAssociationToTrackType.
 func (x *MutableCompositionTrack) AddTrackAssociationToTrackType(compositionTrack *raw.AVCompositionTrack, trackAssociationType *foundation.NSString) {
 	x.inner.AddTrackAssociationToTrackType(compositionTrack, trackAssociationType)
 }
 
-// @method			removeTrackAssociationToTrack:type: @abstract		Removes a track association of a specific type between two tracks. @param			compositionTrack An AVCompositionTrack object that is associated with the receiver. @param			trackAssociationType The type of track association to remove between the receiver and the specified compositionTrack (for instance, AVTrackAssociationTypeChapterList).
+// Removes an association from a composition track.
 //
 // RemoveTrackAssociationToTrackType calls the underlying RemoveTrackAssociationToTrackType.
 func (x *MutableCompositionTrack) RemoveTrackAssociationToTrackType(compositionTrack *raw.AVCompositionTrack, trackAssociationType *foundation.NSString) {
@@ -198,7 +200,7 @@ func (x *MutableCompositionTrack) SetSegments(segments *foundation.NSArray[*raw.
 	x.inner.SetSegments(segments)
 }
 
-// @method			replaceFormatDescription:withFormatDescription: @abstract		Replaces one of the receiver's format descriptions with another format description or cancels a previous replacement. @param			originalFormatDescription A CMFormatDescription occurring in the underlying asset track. @param			replacementFormatDescription A CMFormatDescription to replace the specified format description or NULL to indicate that a previous replacement of originalFormatDescription should be cancelled. @discussion     You can use this method to make surgical changes to a track's format descriptions, such as adding format description extensions to a format description or changing the audio channel layout of an audio track. You should note that a format description can have extensions of type kCMFormatDescriptionExtension_VerbatimSampleDescription and kCMFormatDescriptionExtension_VerbatimISOSampleEntry; if you modify a copy of a format description, you should delete those extensions from the copy or your changes might be ignored. Also note that format description replacements are not transferred when performing editing operations on AVMutableCompositionTrack objects; for instance, inserting a range of a composition track into another composition track does not transfer any replacement format descriptions. This method throws an exception if the media type of the replacement does not match the original format description.
+// Replaces a format description with another or cancels a previous replacement.
 //
 // ReplaceFormatDescriptionWithFormatDescription calls the underlying ReplaceFormatDescriptionWithFormatDescription.
 func (x *MutableCompositionTrack) ReplaceFormatDescriptionWithFormatDescription(originalFormatDescription unsafe.Pointer, replacementFormatDescription unsafe.Pointer) {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides required parameters for the credential during registration.
+//
 // AuthorizationPublicKeyCredentialParameters wraps [raw.ASAuthorizationPublicKeyCredentialParameters] with a fluent Go API.
 type AuthorizationPublicKeyCredentialParameters struct {
 	inner *raw.ASAuthorizationPublicKeyCredentialParameters
@@ -31,6 +33,8 @@ func AuthorizationPublicKeyCredentialParametersFromID(id objc.ID) *Authorization
 	return &AuthorizationPublicKeyCredentialParameters{inner: raw.ASAuthorizationPublicKeyCredentialParametersFromID(id)}
 }
 
+// Creates the object with an algorithm.
+//
 // NewAuthorizationPublicKeyCredentialParametersWithAlgorithm creates a new [AuthorizationPublicKeyCredentialParameters].
 func NewAuthorizationPublicKeyCredentialParametersWithAlgorithm(algorithm int) *AuthorizationPublicKeyCredentialParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationPublicKeyCredentialParameters")), objc.RegisterName("alloc"))

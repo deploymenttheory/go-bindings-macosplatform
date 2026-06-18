@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Groups together properties you use to create a mesh render pipeline state object.
+//
 // MTL4MeshRenderPipelineDescriptor wraps [raw.MTL4MeshRenderPipelineDescriptor] with a fluent Go API.
 type MTL4MeshRenderPipelineDescriptor struct {
 	inner *raw.MTL4MeshRenderPipelineDescriptor
@@ -38,7 +40,7 @@ func NewMTL4MeshRenderPipelineDescriptor() *MTL4MeshRenderPipelineDescriptor {
 	return &MTL4MeshRenderPipelineDescriptor{inner: raw.MTL4MeshRenderPipelineDescriptorFromID(_id)}
 }
 
-// Assigns a function descriptor representing the function this pipeline executes for each *object* in the object shader stage.
+// Assigns a function descriptor representing the function this pipeline executes for each object in the object shader stage.
 //
 // WithObjectFunctionDescriptor sets the objectFunctionDescriptor property and returns the receiver for chaining.
 func (x *MTL4MeshRenderPipelineDescriptor) WithObjectFunctionDescriptor(objectFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4MeshRenderPipelineDescriptor {
@@ -62,7 +64,7 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithFragmentFunctionDescriptor(fragme
 	return x
 }
 
-// Controls the largest number of threads the pipeline state can execute in a single object shader threadgroup dispatch. This number represents the maximum size of the product of the components of parameter `threadsPerObjectThreadgroup` that Metal can use when drawing with this pipeline in mesh shader dispatch methods, such as “MTL4RenderCommandEncoder/drawMeshThreadgroups:threadsPerObjectThreadgroup:threadsPerMeshThreadgroup:“. The compiler's optimizer can use the value of this property to generate more efficient code, specifically when the value doesn't exceed the thread execution width of the underlying GPU. The default value of this property is `0`, which indicates that the number you pass to attribute `[[max_total_threads_per_threadgroup(N)]]` of the pipeline's object function determines the maximum total threads per threadgroup. When you specify both the `[[max_total_threads_per_threadgroup(N)]]` attribute and this property, you are responsible for making sure these values match. Additionally, you are responsible for ensuring this value doesn't exceed the "maximum threads per threadgroup" device limit documented in the "Metal Feature Set Tables" PDF: <https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf>.
+// Controls the largest number of threads the pipeline state can execute in a single object shader threadgroup dispatch.
 //
 // WithMaxTotalThreadsPerObjectThreadgroup sets the maxTotalThreadsPerObjectThreadgroup property and returns the receiver for chaining.
 func (x *MTL4MeshRenderPipelineDescriptor) WithMaxTotalThreadsPerObjectThreadgroup(maxTotalThreadsPerObjectThreadgroup uint) *MTL4MeshRenderPipelineDescriptor {
@@ -70,7 +72,7 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithMaxTotalThreadsPerObjectThreadgro
 	return x
 }
 
-// Controls the largest number of threads the pipeline state can execute in a single mesh shader threadgroup dispatch. This number represents the maximum size of the product of the components of parameter `threadsPerMeshThreadgroup` that Metal can use when drawing with this pipeline in mesh shader dispatch methods, such as “MTL4RenderCommandEncoder/drawMeshThreadgroups:threadsPerObjectThreadgroup:threadsPerMeshThreadgroup:“. The compiler's optimizer can use the value of this property to generate more efficient code, specifically when the value doesn't exceed the thread execution width of the underlying GPU. The default value of this property is `0`, thish indicates that the Metal Shader Language attribute `[[max_total_threads_per_threadgroup]]` you attache to the pipeline's mesh shader function determines the value of this property. When you specify both the `[[max_total_threads_per_threadgroup(N)]]` attribute and this property, you are responsible for making sure these values match. Additionally, you are responsible for ensuring this value doesn't exceed the "maximum threads per threadgroup" device limit documented in the "Metal Feature Set Tables" PDF: <https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf>.
+// Controls the largest number of threads the pipeline state can execute in a single mesh shader threadgroup dispatch.
 //
 // WithMaxTotalThreadsPerMeshThreadgroup sets the maxTotalThreadsPerMeshThreadgroup property and returns the receiver for chaining.
 func (x *MTL4MeshRenderPipelineDescriptor) WithMaxTotalThreadsPerMeshThreadgroup(maxTotalThreadsPerMeshThreadgroup uint) *MTL4MeshRenderPipelineDescriptor {
@@ -78,7 +80,7 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithMaxTotalThreadsPerMeshThreadgroup
 	return x
 }
 
-// Controls the required number of object threads-per-threadgroup when drawing with a mesh shader pipeline you create from this descriptor. This argument is optional, unless this pipeline uses `CooperativeTensors`, in which case you are responsible for providing it. When this value is set to non-zero, you are responsible for ensuring the parameter `threadsPerObjectThreadgroup` in any mesh dispatch draw calls that use this mesh render pipeline, such as “MTL4RenderCommandEncoder/drawMeshThreadgroups:threadsPerObjectThreadgroup:threadsPerMeshThreadgroup:“, match it. Setting this value to a size of 0 in every dimension disables this property.
+// Controls the required number of object threads-per-threadgroup when drawing with a mesh shader pipeline you create from this descriptor.
 //
 // WithRequiredThreadsPerObjectThreadgroup sets the requiredThreadsPerObjectThreadgroup property and returns the receiver for chaining.
 func (x *MTL4MeshRenderPipelineDescriptor) WithRequiredThreadsPerObjectThreadgroup(requiredThreadsPerObjectThreadgroup raw.MTLSize) *MTL4MeshRenderPipelineDescriptor {
@@ -86,7 +88,7 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithRequiredThreadsPerObjectThreadgro
 	return x
 }
 
-// Controls the required number of mesh threads-per-threadgroup when drawing with a mesh shader pipeline you create from this descriptor. This argument is optional, unless this pipeline uses `CooperativeTensors`, in which case you are responsible for providing it. When this value is set to non-zero, you are responsible for ensuring the parameter `threadsPerMeshThreadgroup` in any mesh dispatch draw calls that use this mesh render pipeline, such as “MTL4RenderCommandEncoder/drawMeshThreadgroups:threadsPerObjectThreadgroup:threadsPerMeshThreadgroup:“, match it. Setting this value to a size of 0 in every dimension disables this property.
+// Controls the required number of mesh threads-per-threadgroup when drawing with a mesh shader pipeline you create from this descriptor.
 //
 // WithRequiredThreadsPerMeshThreadgroup sets the requiredThreadsPerMeshThreadgroup property and returns the receiver for chaining.
 func (x *MTL4MeshRenderPipelineDescriptor) WithRequiredThreadsPerMeshThreadgroup(requiredThreadsPerMeshThreadgroup raw.MTLSize) *MTL4MeshRenderPipelineDescriptor {
@@ -94,7 +96,7 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithRequiredThreadsPerMeshThreadgroup
 	return x
 }
 
-// Provides a guarantee to Metal regarding the number of threadgroup threads for the object stage of a pipeline you create from this descriptor. If you set this property to <doc://com.apple.documentation/documentation/swift/true>, you state to Metal that when you use a mesh render pipeline you create from this descriptor, the number of threadgroup threads you dispatch for the object stage is a multiple of its “MTLRenderPipelineState/objectThreadExecutionWidth“. The compiler's optimizer can use this guarantee to generate more efficient code. This property's default value is <doc://com.apple.documentation/documentation/swift/false>.
+// Provides a guarantee to Metal regarding the number of threadgroup threads for the object stage of a pipeline you create from this descriptor.
 //
 // WithObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth sets the objectThreadgroupSizeIsMultipleOfThreadExecutionWidth property and returns the receiver for chaining.
 func (x *MTL4MeshRenderPipelineDescriptor) WithObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth(objectThreadgroupSizeIsMultipleOfThreadExecutionWidth bool) *MTL4MeshRenderPipelineDescriptor {
@@ -102,7 +104,7 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithObjectThreadgroupSizeIsMultipleOf
 	return x
 }
 
-// Provides a guarantee to Metal regarding the number of threadgroup threads for the mesh stage of a pipeline you create from this descriptor. If you set this property to <doc://com.apple.documentation/documentation/swift/true>, you state to Metal that when you use a mesh render pipeline you create from this descriptor, the number of threadgroup threads you dispatch for the mesh stage is a multiple of its “MTLRenderPipelineState/meshThreadExecutionWidth“. The compiler's optimizer can use this guarantee to generate more efficient code. This property's default value is <doc://com.apple.documentation/documentation/swift/false>.
+// Provides a guarantee to Metal regarding the number of threadgroup threads for the mesh stage of a pipeline you create from this descriptor.
 //
 // WithMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth sets the meshThreadgroupSizeIsMultipleOfThreadExecutionWidth property and returns the receiver for chaining.
 func (x *MTL4MeshRenderPipelineDescriptor) WithMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth(meshThreadgroupSizeIsMultipleOfThreadExecutionWidth bool) *MTL4MeshRenderPipelineDescriptor {
@@ -110,7 +112,7 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithMeshThreadgroupSizeIsMultipleOfTh
 	return x
 }
 
-// Reserves storage for the object-to-mesh stage payload. This property determines the size, in bytes, of the buffer you indicate via the Metal Shading Language `[[payload]]` attribute in the object and mesh shader functions of the mesh render pipeline. If this value is `0`, Metal derives the size from the (dereferenced) type you declare for the payload in the object shader function. If the type is a pointer, Metal reserves space for a single element. The default value is `0`.
+// Reserves storage for the object-to-mesh stage payload.
 //
 // WithPayloadMemoryLength sets the payloadMemoryLength property and returns the receiver for chaining.
 func (x *MTL4MeshRenderPipelineDescriptor) WithPayloadMemoryLength(payloadMemoryLength uint) *MTL4MeshRenderPipelineDescriptor {
@@ -118,7 +120,7 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithPayloadMemoryLength(payloadMemory
 	return x
 }
 
-// Controls the largest number of threads the pipeline state can execute when the object stage of a mesh render pipeline you create from this descriptor dispatches its mesh stage. This number represents the maximum size of the product of the components of the parameter you pass to Metal Shading Language's built-in function `mesh_grid_properties::set_threadgroups_per_grid`. The default value of this property is `0`, which indicates that the Metal Shading Language attribute `[[max_total_threadgroups_per_mesh_grid(N)]]` you attach to the pipeline's mesh shader function determines the value of this property. When you specify both the `[[max_total_threadgroups_per_mesh_grid(N)]]` attribute and this property, you are responsible for making sure these values match. Additionally, you are responsible for ensuring this value doesn't exceed the "maximum threads per mesh grid" device limit documented in the "Metal Feature Set Tables" PDF: <https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf>.
+// Controls the largest number of threads the pipeline state can execute when the object stage of a mesh render pipeline you create from this descriptor dispatches its mesh stage.
 //
 // WithMaxTotalThreadgroupsPerMeshGrid sets the maxTotalThreadgroupsPerMeshGrid property and returns the receiver for chaining.
 func (x *MTL4MeshRenderPipelineDescriptor) WithMaxTotalThreadgroupsPerMeshGrid(maxTotalThreadgroupsPerMeshGrid uint) *MTL4MeshRenderPipelineDescriptor {
@@ -150,7 +152,7 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithAlphaToOneState(alphaToOneState M
 	return x
 }
 
-// Determines whether the pipeline rasterizes primitives. By default, this value is <doc://com.apple.documentation/documentation/swift/true>, specifying that this pipeline rasterizes primitives. Set this property to <doc://com.apple.documentation/documentation/swift/false> when you don't provide a fragment shader function via function “fragmentFunctionDescriptor“.
+// Determines whether the pipeline rasterizes primitives.
 //
 // WithRasterizationEnabled sets the rasterizationEnabled property and returns the receiver for chaining.
 func (x *MTL4MeshRenderPipelineDescriptor) WithRasterizationEnabled(rasterizationEnabled bool) *MTL4MeshRenderPipelineDescriptor {
@@ -158,7 +160,7 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithRasterizationEnabled(rasterizatio
 	return x
 }
 
-// Determines the maximum value that can you can pass as the pipeline's amplification count. This property controls the maximum count you pass to “MTL4RenderCommandEncoder/setVertexAmplificationCount:viewMappings:“ when using vertex amplification with this pipeline.
+// Determines the maximum value that can you can pass as the pipeline’s amplification count.
 //
 // WithMaxVertexAmplificationCount sets the maxVertexAmplificationCount property and returns the receiver for chaining.
 func (x *MTL4MeshRenderPipelineDescriptor) WithMaxVertexAmplificationCount(maxVertexAmplificationCount uint) *MTL4MeshRenderPipelineDescriptor {
@@ -166,7 +168,7 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithMaxVertexAmplificationCount(maxVe
 	return x
 }
 
-// Provides static linking information for the object stage of the render pipeline. Use this property to link extra shader functions to the object stage of the render pipeline.
+// Provides static linking information for the object stage of the render pipeline.
 //
 // WithObjectStaticLinkingDescriptor sets the objectStaticLinkingDescriptor property and returns the receiver for chaining.
 func (x *MTL4MeshRenderPipelineDescriptor) WithObjectStaticLinkingDescriptor(objectStaticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4MeshRenderPipelineDescriptor {
@@ -174,7 +176,7 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithObjectStaticLinkingDescriptor(obj
 	return x
 }
 
-// Provides static linking information for the mesh stage of the render pipeline. Use this property to link extra shader functions to the mesh stage of the render pipeline.
+// Provides static linking information for the mesh stage of the render pipeline.
 //
 // WithMeshStaticLinkingDescriptor sets the meshStaticLinkingDescriptor property and returns the receiver for chaining.
 func (x *MTL4MeshRenderPipelineDescriptor) WithMeshStaticLinkingDescriptor(meshStaticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4MeshRenderPipelineDescriptor {
@@ -182,7 +184,7 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithMeshStaticLinkingDescriptor(meshS
 	return x
 }
 
-// Provides static linking information for the fragment stage of the render pipeline. Use this property to link extra shader functions to the fragment stage of the render pipeline.
+// Provides static linking information for the fragment stage of the render pipeline.
 //
 // WithFragmentStaticLinkingDescriptor sets the fragmentStaticLinkingDescriptor property and returns the receiver for chaining.
 func (x *MTL4MeshRenderPipelineDescriptor) WithFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4MeshRenderPipelineDescriptor {
@@ -214,7 +216,7 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithSupportFragmentBinaryLinking(supp
 	return x
 }
 
-// Sets the logical-to-physical rendering remap state. Use this property to assign how a “MTL4RenderCommandEncoder“ instance maps the output of your fragment shader to physical color attachments.
+// Sets the logical-to-physical rendering remap state.
 //
 // WithColorAttachmentMappingState sets the colorAttachmentMappingState property and returns the receiver for chaining.
 func (x *MTL4MeshRenderPipelineDescriptor) WithColorAttachmentMappingState(colorAttachmentMappingState MTL4LogicalToPhysicalColorAttachmentMappingState) *MTL4MeshRenderPipelineDescriptor {
@@ -230,7 +232,7 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithSupportIndirectCommandBuffers(sup
 	return x
 }
 
-// Assigns an optional string that uniquely identifies a pipeline descriptor. After you provide this label, you can use it to look up a pipeline state object by name in a binary archive.
+// Assigns an optional string that uniquely identifies a pipeline descriptor.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MTL4MeshRenderPipelineDescriptor) WithLabel(label string) *MTL4MeshRenderPipelineDescriptor {

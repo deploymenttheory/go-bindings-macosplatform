@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An OpenID authorization request that provides single sign-on (SSO) functionality.
+//
 // AuthorizationSingleSignOnRequest wraps [raw.ASAuthorizationSingleSignOnRequest] with a fluent Go API.
 type AuthorizationSingleSignOnRequest struct {
 	inner *raw.ASAuthorizationSingleSignOnRequest
@@ -40,7 +42,7 @@ func NewAuthorizationSingleSignOnRequest() *AuthorizationSingleSignOnRequest {
 	return &AuthorizationSingleSignOnRequest{inner: raw.ASAuthorizationSingleSignOnRequestFromID(_id)}
 }
 
-// @abstract Parameters required by the specific Authorization Server which should be used by the selected Authorization Services extension for authorization.
+// Options that control the authorization process.
 //
 // WithAuthorizationOptions sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationSingleSignOnRequest) WithAuthorizationOptions(items ...*foundation.NSURLQueryItem) *AuthorizationSingleSignOnRequest {
@@ -68,7 +70,7 @@ func (x *AuthorizationSingleSignOnRequest) WithUserInterfaceEnabled(userInterfac
 	return x
 }
 
-// @abstract The contact information to be requested from the user.  Only scopes for which this app was authorized for will be returned.
+// The contact information to be requested from the user during authentication.
 //
 // WithRequestedScopes sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationSingleSignOnRequest) WithRequestedScopes(items ...*foundation.NSString) *AuthorizationSingleSignOnRequest {
@@ -88,7 +90,7 @@ func (x *AuthorizationSingleSignOnRequest) WithRequestedScopes(items ...*foundat
 	return x
 }
 
-// @abstract State to be passed to the identity provider.  This value will be returned as a part of successful ASAuthorization response. @note The state size may depend on the actual technology used and an error might be returned by the request execution.
+// Data that’s returned to you unmodified in the corresponding credential after a successful authentication.
 //
 // WithState sets the state property and returns the receiver for chaining.
 func (x *AuthorizationSingleSignOnRequest) WithState(state string) *AuthorizationSingleSignOnRequest {
@@ -96,7 +98,7 @@ func (x *AuthorizationSingleSignOnRequest) WithState(state string) *Authorizatio
 	return x
 }
 
-// @abstract Nonce to be passed to the identity provider.  This value can be verified with the identity token provided as a part of successful ASAuthorization response. @note The nonce size may depend on the actual technology used and an error might be returned by the request execution.
+// A string value to pass to the identity provider.
 //
 // WithNonce sets the nonce property and returns the receiver for chaining.
 func (x *AuthorizationSingleSignOnRequest) WithNonce(nonce string) *AuthorizationSingleSignOnRequest {
@@ -104,7 +106,7 @@ func (x *AuthorizationSingleSignOnRequest) WithNonce(nonce string) *Authorizatio
 	return x
 }
 
-// @abstract Operation to be executed by the request. The ASAuthorizationOperationImplicit operation interpretation depends on the credential provider implementation.
+// The OpenID authentication operation you want this request to perform.
 //
 // WithRequestedOperation sets the requestedOperation property and returns the receiver for chaining.
 func (x *AuthorizationSingleSignOnRequest) WithRequestedOperation(requestedOperation *foundation.NSString) *AuthorizationSingleSignOnRequest {

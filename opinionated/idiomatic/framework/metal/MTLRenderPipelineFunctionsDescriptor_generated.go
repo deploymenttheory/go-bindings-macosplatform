@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A collection of functions for updating a render pipeline.
+//
 // RenderPipelineFunctionsDescriptor wraps [raw.MTLRenderPipelineFunctionsDescriptor] with a fluent Go API.
 type RenderPipelineFunctionsDescriptor struct {
 	inner *raw.MTLRenderPipelineFunctionsDescriptor

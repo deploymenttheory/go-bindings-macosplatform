@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes a sample buffer creation request.
+//
 // SampleBufferRequest wraps [raw.AVSampleBufferRequest] with a fluent Go API.
 type SampleBufferRequest struct {
 	inner *raw.AVSampleBufferRequest
@@ -30,6 +32,8 @@ func SampleBufferRequestFromID(id objc.ID) *SampleBufferRequest {
 	return &SampleBufferRequest{inner: raw.AVSampleBufferRequestFromID(id)}
 }
 
+// Creates a newly allocated sample buffer request with the specified sample cursor.
+//
 // NewSampleBufferRequestWithStartCursor creates a new [SampleBufferRequest].
 func NewSampleBufferRequestWithStartCursor(startCursor *raw.AVSampleCursor) *SampleBufferRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSampleBufferRequest")), objc.RegisterName("alloc"))
@@ -37,36 +41,48 @@ func NewSampleBufferRequestWithStartCursor(startCursor *raw.AVSampleCursor) *Sam
 	return &SampleBufferRequest{inner: raw.AVSampleBufferRequestFromID(_id)}
 }
 
+// The buffer sample direction.
+//
 // WithDirection sets the direction property and returns the receiver for chaining.
 func (x *SampleBufferRequest) WithDirection(direction AVSampleBufferRequestDirection) *SampleBufferRequest {
 	x.inner.SetDirection(raw.AVSampleBufferRequestDirection(direction))
 	return x
 }
 
+// The limiting position for sample loading.
+//
 // WithLimitCursor sets the limitCursor property and returns the receiver for chaining.
 func (x *SampleBufferRequest) WithLimitCursor(limitCursor *SampleCursor) *SampleBufferRequest {
 	x.inner.SetLimitCursor(limitCursor.Unwrap())
 	return x
 }
 
+// The preferred minimum number of samples to load.
+//
 // WithPreferredMinSampleCount sets the preferredMinSampleCount property and returns the receiver for chaining.
 func (x *SampleBufferRequest) WithPreferredMinSampleCount(preferredMinSampleCount int) *SampleBufferRequest {
 	x.inner.SetPreferredMinSampleCount(preferredMinSampleCount)
 	return x
 }
 
+// The maximum number of samples to load.
+//
 // WithMaxSampleCount sets the maxSampleCount property and returns the receiver for chaining.
 func (x *SampleBufferRequest) WithMaxSampleCount(maxSampleCount int) *SampleBufferRequest {
 	x.inner.SetMaxSampleCount(maxSampleCount)
 	return x
 }
 
+// The sample buffer request mode.
+//
 // WithMode sets the mode property and returns the receiver for chaining.
 func (x *SampleBufferRequest) WithMode(mode AVSampleBufferRequestMode) *SampleBufferRequest {
 	x.inner.SetMode(raw.AVSampleBufferRequestMode(mode))
 	return x
 }
 
+// The deadline for sample data and output PTS for the sample buffer.
+//
 // WithOverrideTime sets the overrideTime property and returns the receiver for chaining.
 func (x *SampleBufferRequest) WithOverrideTime(overrideTime coremedia.CMTime) *SampleBufferRequest {
 	x.inner.SetOverrideTime(overrideTime)

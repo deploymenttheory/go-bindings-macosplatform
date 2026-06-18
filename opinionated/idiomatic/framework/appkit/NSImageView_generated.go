@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A display of image data in a frame.
+//
 // ImageView wraps [raw.NSImageView] with a fluent Go API.
 type ImageView struct {
 	inner *raw.NSImageView
@@ -41,37 +43,47 @@ func NewImageView() *ImageView {
 	return &ImageView{inner: raw.NSImageViewFromID(_id)}
 }
 
+// The image displayed by the image view.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *ImageView) WithImage(image *Image) *ImageView {
 	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
+// A Boolean value indicating whether the user can drag a new image into the image view.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *ImageView) WithEditable(editable bool) *ImageView {
 	x.inner.SetEditable(editable)
 	return x
 }
 
+// The alignment of the cell’s image inside the image view.
+//
 // WithImageAlignment sets the imageAlignment property and returns the receiver for chaining.
 func (x *ImageView) WithImageAlignment(imageAlignment NSImageAlignment) *ImageView {
 	x.inner.SetImageAlignment(raw.NSImageAlignment(imageAlignment))
 	return x
 }
 
+// The scaling mode applied to make the cell’s image fit the frame of the image view.
+//
 // WithImageScaling sets the imageScaling property and returns the receiver for chaining.
 func (x *ImageView) WithImageScaling(imageScaling NSImageScaling) *ImageView {
 	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
 	return x
 }
 
+// The style of frame that appears around the image.
+//
 // WithImageFrameStyle sets the imageFrameStyle property and returns the receiver for chaining.
 func (x *ImageView) WithImageFrameStyle(imageFrameStyle NSImageFrameStyle) *ImageView {
 	x.inner.SetImageFrameStyle(raw.NSImageFrameStyle(imageFrameStyle))
 	return x
 }
 
-// Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the image view uses a default size, weight, and scale provided by the system. The default value is `nil`.
+// Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images.
 //
 // WithSymbolConfiguration sets the symbolConfiguration property and returns the receiver for chaining.
 func (x *ImageView) WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *ImageView {
@@ -79,7 +91,7 @@ func (x *ImageView) WithSymbolConfiguration(symbolConfiguration *ImageSymbolConf
 	return x
 }
 
-// A tint color to be used when rendering template image content. This color may be combined with other effects to produce a theme-appropriate rendition of the template image. A `nil` value indicates the standard set of effects without color modification. The default value is `nil`.
+// A tint color to be used when rendering template image content.
 //
 // WithContentTintColor sets the contentTintColor property and returns the receiver for chaining.
 func (x *ImageView) WithContentTintColor(contentTintColor *Color) *ImageView {
@@ -87,19 +99,23 @@ func (x *ImageView) WithContentTintColor(contentTintColor *Color) *ImageView {
 	return x
 }
 
+// A Boolean value indicating whether the image view automatically plays animated images.
+//
 // WithAnimates sets the animates property and returns the receiver for chaining.
 func (x *ImageView) WithAnimates(animates bool) *ImageView {
 	x.inner.SetAnimates(animates)
 	return x
 }
 
+// A Boolean value indicating whether the image view lets the user cut, copy, and paste the image contents.
+//
 // WithAllowsCutCopyPaste sets the allowsCutCopyPaste property and returns the receiver for chaining.
 func (x *ImageView) WithAllowsCutCopyPaste(allowsCutCopyPaste bool) *ImageView {
 	x.inner.SetAllowsCutCopyPaste(allowsCutCopyPaste)
 	return x
 }
 
-// Preferred dynamic range when displaying an image in the receiving image view.
+// The preferred dynamic range when displaying an image in the receiving image view.
 //
 // WithPreferredImageDynamicRange sets the preferredImageDynamicRange property and returns the receiver for chaining.
 func (x *ImageView) WithPreferredImageDynamicRange(preferredImageDynamicRange NSImageDynamicRange) *ImageView {
@@ -107,138 +123,184 @@ func (x *ImageView) WithPreferredImageDynamicRange(preferredImageDynamicRange NS
 	return x
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *ImageView) WithTarget(target objc.ID) *ImageView {
 	x.inner.NSControl.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *ImageView) WithAction(action objc.SEL) *ImageView {
 	x.inner.NSControl.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *ImageView) WithTag(tag int) *ImageView {
 	x.inner.NSControl.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *ImageView) WithIgnoresMultiClick(ignoresMultiClick bool) *ImageView {
 	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *ImageView) WithContinuous(continuous bool) *ImageView {
 	x.inner.NSControl.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *ImageView) WithEnabled(enabled bool) *ImageView {
 	x.inner.NSControl.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *ImageView) WithRefusesFirstResponder(refusesFirstResponder bool) *ImageView {
 	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *ImageView) WithHighlighted(highlighted bool) *ImageView {
 	x.inner.NSControl.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *ImageView) WithControlSize(controlSize NSControlSize) *ImageView {
 	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *ImageView) WithFormatter(formatter *foundation.NSFormatter) *ImageView {
 	x.inner.NSControl.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *ImageView) WithObjectValue(objectValue objc.ID) *ImageView {
 	x.inner.NSControl.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *ImageView) WithStringValue(stringValue string) *ImageView {
 	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *ImageView) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ImageView {
 	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *ImageView) WithIntValue(intValue int) *ImageView {
 	x.inner.NSControl.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *ImageView) WithIntegerValue(integerValue int) *ImageView {
 	x.inner.NSControl.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *ImageView) WithFloatValue(floatValue float32) *ImageView {
 	x.inner.NSControl.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *ImageView) WithDoubleValue(doubleValue float64) *ImageView {
 	x.inner.NSControl.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *ImageView) WithFont(font *Font) *ImageView {
 	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *ImageView) WithUsesSingleLineMode(usesSingleLineMode bool) *ImageView {
 	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *ImageView) WithLineBreakMode(lineBreakMode NSLineBreakMode) *ImageView {
 	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *ImageView) WithAlignment(alignment NSTextAlignment) *ImageView {
 	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *ImageView) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ImageView {
 	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *ImageView) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ImageView {
 	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -293,6 +355,8 @@ func (x *ImageView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOpti
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *ImageView) WithFrame(frame corefoundation.CGRect) *ImageView {
 	x.inner.NSControl.NSView.SetFrame(frame)
@@ -317,6 +381,8 @@ func (x *ImageView) WithBoundsRotation(boundsRotation float64) *ImageView {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *ImageView) WithBounds(bounds corefoundation.CGRect) *ImageView {
 	x.inner.NSControl.NSView.SetBounds(bounds)
@@ -329,6 +395,8 @@ func (x *ImageView) WithCanDrawConcurrently(canDrawConcurrently bool) *ImageView
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *ImageView) WithNeedsDisplay(needsDisplay bool) *ImageView {
 	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
@@ -515,7 +583,7 @@ func (x *ImageView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets founda
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *ImageView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ImageView {
@@ -571,24 +639,32 @@ func (x *ImageView) WithPressureConfiguration(pressureConfiguration *PressureCon
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *ImageView) WithNextResponder(nextResponder ResponderProvider) *ImageView {
 	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *ImageView) WithMenu(menu *Menu) *ImageView {
 	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *ImageView) WithUserActivity(userActivity *foundation.NSUserActivity) *ImageView {
 	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *ImageView) WithTouchBar(touchBar *TouchBar) *ImageView {
 	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
@@ -733,70 +809,70 @@ func (x *ImageView) AddSymbolEffect(symbolEffect *symbols.NSSymbolEffect) {
 	x.inner.AddSymbolEffect(symbolEffect)
 }
 
-// Adds a symbol effect to the image view with specified options and default animation.
+// Adds a symbol effect to the image view with the specified options and default animation.
 //
 // AddSymbolEffectOptions calls the underlying AddSymbolEffectOptions.
 func (x *ImageView) AddSymbolEffectOptions(symbolEffect *symbols.NSSymbolEffect, options *symbols.NSSymbolEffectOptions) {
 	x.inner.AddSymbolEffectOptions(symbolEffect, options)
 }
 
-// Adds a symbol effect to the image view with specified options and animation.
+// Adds a symbol effect to the image view with the specified options and animation.
 //
 // AddSymbolEffectOptionsAnimated calls the underlying AddSymbolEffectOptionsAnimated.
 func (x *ImageView) AddSymbolEffectOptionsAnimated(symbolEffect *symbols.NSSymbolEffect, options *symbols.NSSymbolEffectOptions, animated bool) {
 	x.inner.AddSymbolEffectOptionsAnimated(symbolEffect, options, animated)
 }
 
-// Removes from the image view the symbol effect matching the type of effect passed in, with default options and animation.
+// Removes the symbol effect that matches the specified effect type.
 //
 // RemoveSymbolEffectOfType calls the underlying RemoveSymbolEffectOfType.
 func (x *ImageView) RemoveSymbolEffectOfType(symbolEffect *symbols.NSSymbolEffect) {
 	x.inner.RemoveSymbolEffectOfType(symbolEffect)
 }
 
-// Removes from the image view the symbol effect matching the type of effect passed in, with specified options and default animation.
+// Removes the symbol effect that matches the specified effect type, using the specified options.
 //
 // RemoveSymbolEffectOfTypeOptions calls the underlying RemoveSymbolEffectOfTypeOptions.
 func (x *ImageView) RemoveSymbolEffectOfTypeOptions(symbolEffect *symbols.NSSymbolEffect, options *symbols.NSSymbolEffectOptions) {
 	x.inner.RemoveSymbolEffectOfTypeOptions(symbolEffect, options)
 }
 
-// Removes from the image view the symbol effect matching the type of effect passed in, with specified options and animation.
+// Removes the symbol effect that matches the specified effect type, using the specified options and animation setting.
 //
 // RemoveSymbolEffectOfTypeOptionsAnimated calls the underlying RemoveSymbolEffectOfTypeOptionsAnimated.
 func (x *ImageView) RemoveSymbolEffectOfTypeOptionsAnimated(symbolEffect *symbols.NSSymbolEffect, options *symbols.NSSymbolEffectOptions, animated bool) {
 	x.inner.RemoveSymbolEffectOfTypeOptionsAnimated(symbolEffect, options, animated)
 }
 
-// Removes all symbol effects from the image view with default options and animation.
+// Removes all symbol effects from the image view.
 //
 // RemoveAllSymbolEffects calls the underlying RemoveAllSymbolEffects.
 func (x *ImageView) RemoveAllSymbolEffects() {
 	x.inner.RemoveAllSymbolEffects()
 }
 
-// Removes all symbol effects from the image view with specified options and default animation.
+// Removes all symbol effects from the image view, using the specified options.
 //
 // RemoveAllSymbolEffectsWithOptions calls the underlying RemoveAllSymbolEffectsWithOptions.
 func (x *ImageView) RemoveAllSymbolEffectsWithOptions(options *symbols.NSSymbolEffectOptions) {
 	x.inner.RemoveAllSymbolEffectsWithOptions(options)
 }
 
-// Removes all symbol effects from the image view with specified options and animation.
+// Removes all symbol effects from the image view, using the specified options and animation setting.
 //
 // RemoveAllSymbolEffectsWithOptionsAnimated calls the underlying RemoveAllSymbolEffectsWithOptionsAnimated.
 func (x *ImageView) RemoveAllSymbolEffectsWithOptionsAnimated(options *symbols.NSSymbolEffectOptions, animated bool) {
 	x.inner.RemoveAllSymbolEffectsWithOptionsAnimated(options, animated)
 }
 
-// Sets the symbol image on the image view with a symbol content transition and default options. Passing in a non-symbol image will result in undefined behavior.
+// Sets a symbol image using the specified content-transition effect.
 //
 // SetSymbolImageWithContentTransition calls the underlying SetSymbolImageWithContentTransition.
 func (x *ImageView) SetSymbolImageWithContentTransition(symbolImage *raw.NSImage, transition *symbols.NSSymbolContentTransition) {
 	x.inner.SetSymbolImageWithContentTransition(symbolImage, transition)
 }
 
-// Sets the symbol image on the image view with a symbol content transition and specified options. Passing in a non-symbol image will result in undefined behavior.
+// Sets a symbol image using the specified content-transition effect and options.
 //
 // SetSymbolImageWithContentTransitionOptions calls the underlying SetSymbolImageWithContentTransitionOptions.
 func (x *ImageView) SetSymbolImageWithContentTransitionOptions(symbolImage *raw.NSImage, transition *symbols.NSSymbolContentTransition, options *symbols.NSSymbolEffectOptions) {

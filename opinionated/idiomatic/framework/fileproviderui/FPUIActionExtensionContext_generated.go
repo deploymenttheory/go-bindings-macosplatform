@@ -38,7 +38,7 @@ func NewActionExtensionContext() *ActionExtensionContext {
 	return &ActionExtensionContext{inner: raw.FPUIActionExtensionContextFromID(_id)}
 }
 
-// Marks the action as complete. Call this method when the action completes successfully.
+// Marks the action as complete.
 //
 // CompleteRequest calls the underlying CompleteRequest.
 func (x *ActionExtensionContext) CompleteRequest() {

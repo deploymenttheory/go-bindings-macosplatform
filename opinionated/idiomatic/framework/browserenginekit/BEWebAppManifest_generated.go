@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a web app manifest.
+//
 // WebAppManifest wraps [raw.BEWebAppManifest] with a fluent Go API.
 type WebAppManifest struct {
 	inner *raw.BEWebAppManifest

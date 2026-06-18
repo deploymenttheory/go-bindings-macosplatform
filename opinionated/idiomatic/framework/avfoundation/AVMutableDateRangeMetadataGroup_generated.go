@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A mutable collection of metadata items that are valid for use within a specific range of dates.
+//
 // MutableDateRangeMetadataGroup wraps [raw.AVMutableDateRangeMetadataGroup] with a fluent Go API.
 type MutableDateRangeMetadataGroup struct {
 	inner *raw.AVMutableDateRangeMetadataGroup
@@ -37,18 +39,24 @@ func NewMutableDateRangeMetadataGroup() *MutableDateRangeMetadataGroup {
 	return &MutableDateRangeMetadataGroup{inner: raw.AVMutableDateRangeMetadataGroupFromID(_id)}
 }
 
+// The start date for the metadata date range group.
+//
 // WithStartDate sets the startDate property and returns the receiver for chaining.
 func (x *MutableDateRangeMetadataGroup) WithStartDate(startDate *foundation.NSDate) *MutableDateRangeMetadataGroup {
 	x.inner.SetStartDate(startDate)
 	return x
 }
 
+// The end date for the metadata date range group.
+//
 // WithEndDate sets the endDate property and returns the receiver for chaining.
 func (x *MutableDateRangeMetadataGroup) WithEndDate(endDate *foundation.NSDate) *MutableDateRangeMetadataGroup {
 	x.inner.SetEndDate(endDate)
 	return x
 }
 
+// An array of associated metadata items.
+//
 // WithItems sets the collection, converting the Go slice to an NSArray.
 func (x *MutableDateRangeMetadataGroup) WithItems(items ...MetadataItemProvider) *MutableDateRangeMetadataGroup {
 	if len(items) == 0 {

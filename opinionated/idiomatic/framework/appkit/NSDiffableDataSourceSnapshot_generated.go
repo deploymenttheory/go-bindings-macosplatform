@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of the state of the data in a view at a specific point in time.
+//
 // DiffableDataSourceSnapshot wraps [raw.NSDiffableDataSourceSnapshot] with a fluent Go API.
 type DiffableDataSourceSnapshot struct {
 	inner *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID]

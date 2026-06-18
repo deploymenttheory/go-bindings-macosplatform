@@ -8,6 +8,7 @@ import (
 	"fmt"
 )
 
+// Constants that describe the registration or authorization status of a helper executable.
 type SMAppServiceStatus int64
 
 const (

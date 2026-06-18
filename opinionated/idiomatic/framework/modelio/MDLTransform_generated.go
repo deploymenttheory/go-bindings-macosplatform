@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A description of the local coordinate space transformations for a 3D object.
+//
 // Transform wraps [raw.MDLTransform] with a fluent Go API.
 type Transform struct {
 	inner *raw.MDLTransform
@@ -36,6 +38,8 @@ func NewTransform() *Transform {
 	return &Transform{inner: raw.MDLTransformFromID(_id)}
 }
 
+// Initializes a transform object to match the specified transform component.
+//
 // NewTransformWithTransformComponent creates a new [Transform].
 func NewTransformWithTransformComponent(component raw.MDLTransformComponent) *Transform {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTransform")), objc.RegisterName("alloc"))
@@ -50,7 +54,7 @@ func NewTransformWithTransformComponentResetsTransform(component raw.MDLTransfor
 	return &Transform{inner: raw.MDLTransformFromID(_id)}
 }
 
-// Initialization with a matrix assumes the matrix is an invertible, homogeneous affine transform matrix. Retrieving transform components after initialization with a non-affine matrix will yield those of the identity transform.
+// Initializes a transform object with the specified transform matrix.
 //
 // NewTransformWithMatrix creates a new [Transform].
 func NewTransformWithMatrix(matrix unsafe.Pointer) *Transform {
@@ -66,28 +70,36 @@ func NewTransformWithMatrixResetsTransform(matrix unsafe.Pointer, resetsTransfor
 	return &Transform{inner: raw.MDLTransformFromID(_id)}
 }
 
-// Set all transform components to identity
+// Sets all factors of the transform to those of the identity transformation.
 //
 // SetIdentity calls the underlying SetIdentity.
 func (x *Transform) SetIdentity() {
 	x.inner.SetIdentity()
 }
 
+// Returns the x-, y-, and z-axis offsets of the transform relative to its parent coordinate space, as of the specified time sample.
+//
 // TranslationAtTime calls the underlying TranslationAtTime.
 func (x *Transform) TranslationAtTime(time_ float64) unsafe.Pointer {
 	return x.inner.TranslationAtTime(time_)
 }
 
+// Returns the orientation of the transform relative to its parent coordinate space, as of the specified time sample.
+//
 // RotationAtTime calls the underlying RotationAtTime.
 func (x *Transform) RotationAtTime(time_ float64) unsafe.Pointer {
 	return x.inner.RotationAtTime(time_)
 }
 
+// Returns the x-, y-, and z-axis shear factors of the transform relative to its parent coordinate space, as of the specified time sample.
+//
 // ShearAtTime calls the underlying ShearAtTime.
 func (x *Transform) ShearAtTime(time_ float64) unsafe.Pointer {
 	return x.inner.ShearAtTime(time_)
 }
 
+// Returns the x-, y-, and z-axis scale factors of the transform relative to its parent coordinate space, as of the specified time sample.
+//
 // ScaleAtTime calls the underlying ScaleAtTime.
 func (x *Transform) ScaleAtTime(time_ float64) unsafe.Pointer {
 	return x.inner.ScaleAtTime(time_)
@@ -98,27 +110,35 @@ func (x *Transform) SetMatrixForTime(matrix unsafe.Pointer, time_ float64) {
 	x.inner.SetMatrixForTime(matrix, time_)
 }
 
+// Sets the x-, y-, and z-axis offsets of the transform for the specified time sample.
+//
 // SetTranslationForTime calls the underlying SetTranslationForTime.
 func (x *Transform) SetTranslationForTime(translation unsafe.Pointer, time_ float64) {
 	x.inner.SetTranslationForTime(translation, time_)
 }
 
+// Sets the orientation of the transform for the specified time sample.
+//
 // SetRotationForTime calls the underlying SetRotationForTime.
 func (x *Transform) SetRotationForTime(rotation unsafe.Pointer, time_ float64) {
 	x.inner.SetRotationForTime(rotation, time_)
 }
 
+// Sets the x-, y-, and z-axis shear factors of the transform for the specified time sample.
+//
 // SetShearForTime calls the underlying SetShearForTime.
 func (x *Transform) SetShearForTime(shear unsafe.Pointer, time_ float64) {
 	x.inner.SetShearForTime(shear, time_)
 }
 
+// Sets the x-, y-, and z-axis scale factors of the transform for the specified time sample.
+//
 // SetScaleForTime calls the underlying SetScaleForTime.
 func (x *Transform) SetScaleForTime(scale unsafe.Pointer, time_ float64) {
 	x.inner.SetScaleForTime(scale, time_)
 }
 
-// Construct a right handed rotation matrix at the specified time
+// Returns the orientation of the transform as a rotation matrix, as of the specified time sample.
 //
 // RotationMatrixAtTime calls the underlying RotationMatrixAtTime.
 func (x *Transform) RotationMatrixAtTime(time_ float64) unsafe.Pointer {

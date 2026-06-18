@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The values to use as inputs to the salts for deriving the symmetric key.
+//
 // AuthorizationPublicKeyCredentialPRFAssertionInputValues wraps [raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputValues] with a fluent Go API.
 type AuthorizationPublicKeyCredentialPRFAssertionInputValues struct {
 	inner *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputValues
@@ -32,6 +34,8 @@ func AuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(id objc.ID) *
 	return &AuthorizationPublicKeyCredentialPRFAssertionInputValues{inner: raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(id)}
 }
 
+// Initializes an input values object with the given salts.
+//
 // NewAuthorizationPublicKeyCredentialPRFAssertionInputValuesWithSaltInput1SaltInput2 creates a new [AuthorizationPublicKeyCredentialPRFAssertionInputValues].
 func NewAuthorizationPublicKeyCredentialPRFAssertionInputValuesWithSaltInput1SaltInput2(saltInput1 *foundation.NSData, saltInput2 *foundation.NSData) *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationPublicKeyCredentialPRFAssertionInputValues")), objc.RegisterName("alloc"))

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A description of an acceleration structure that derives from instances of primitive acceleration structures.
+//
 // InstanceAccelerationStructureDescriptor wraps [raw.MTLInstanceAccelerationStructureDescriptor] with a fluent Go API.
 type InstanceAccelerationStructureDescriptor struct {
 	inner *raw.MTLInstanceAccelerationStructureDescriptor
@@ -40,7 +42,7 @@ func NewInstanceAccelerationStructureDescriptor() *InstanceAccelerationStructure
 	return &InstanceAccelerationStructureDescriptor{inner: raw.MTLInstanceAccelerationStructureDescriptorFromID(_id)}
 }
 
-// @brief Buffer containing instance descriptors of the type specified by the instanceDescriptorType property
+// A buffer that contains descriptions of each instance in the acceleration structure.
 //
 // WithInstanceDescriptorBuffer sets the instanceDescriptorBuffer property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructureDescriptor) WithInstanceDescriptorBuffer(instanceDescriptorBuffer raw.MTLBuffer) *InstanceAccelerationStructureDescriptor {
@@ -48,7 +50,7 @@ func (x *InstanceAccelerationStructureDescriptor) WithInstanceDescriptorBuffer(i
 	return x
 }
 
-// @brief Offset into the instance descriptor buffer. Must be a multiple of 64 bytes and must be aligned to the platform's buffer offset alignment.
+// The offset, in bytes, to the descripton of the first instance.
 //
 // WithInstanceDescriptorBufferOffset sets the instanceDescriptorBufferOffset property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructureDescriptor) WithInstanceDescriptorBufferOffset(instanceDescriptorBufferOffset uint) *InstanceAccelerationStructureDescriptor {
@@ -56,7 +58,7 @@ func (x *InstanceAccelerationStructureDescriptor) WithInstanceDescriptorBufferOf
 	return x
 }
 
-// @brief Stride, in bytes, between instance descriptors in the instance descriptor buffer. Must be at least the size of the instance descriptor type and must be a multiple of 4 bytes. Defaults to the size of the instance descriptor type.
+// The stride, in bytes, between instance descriptions.
 //
 // WithInstanceDescriptorStride sets the instanceDescriptorStride property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructureDescriptor) WithInstanceDescriptorStride(instanceDescriptorStride uint) *InstanceAccelerationStructureDescriptor {
@@ -64,7 +66,7 @@ func (x *InstanceAccelerationStructureDescriptor) WithInstanceDescriptorStride(i
 	return x
 }
 
-// @brief Number of instance descriptors
+// The number of instances in the instance descriptor buffer.
 //
 // WithInstanceCount sets the instanceCount property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructureDescriptor) WithInstanceCount(instanceCount uint) *InstanceAccelerationStructureDescriptor {
@@ -72,7 +74,7 @@ func (x *InstanceAccelerationStructureDescriptor) WithInstanceCount(instanceCoun
 	return x
 }
 
-// @brief Type of instance descriptor in the instance descriptor buffer. Defaults to MTLAccelerationStructureInstanceDescriptorTypeDefault.
+// The format of the instance data in the descriptor buffer.
 //
 // WithInstanceDescriptorType sets the instanceDescriptorType property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructureDescriptor) WithInstanceDescriptorType(instanceDescriptorType MTLAccelerationStructureInstanceDescriptorType) *InstanceAccelerationStructureDescriptor {
@@ -80,7 +82,7 @@ func (x *InstanceAccelerationStructureDescriptor) WithInstanceDescriptorType(ins
 	return x
 }
 
-// @brief Buffer containing transformation information for motion
+// A buffer that contains descriptions of each motion transform in the acceleration structure.
 //
 // WithMotionTransformBuffer sets the motionTransformBuffer property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructureDescriptor) WithMotionTransformBuffer(motionTransformBuffer raw.MTLBuffer) *InstanceAccelerationStructureDescriptor {
@@ -88,7 +90,7 @@ func (x *InstanceAccelerationStructureDescriptor) WithMotionTransformBuffer(moti
 	return x
 }
 
-// @brief Offset into the instance motion descriptor buffer. Must be a multiple of 64 bytes and must be aligned to the platform's buffer offset alignment.
+// The offset, in bytes, to the descripton of the first motion transform.
 //
 // WithMotionTransformBufferOffset sets the motionTransformBufferOffset property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructureDescriptor) WithMotionTransformBufferOffset(motionTransformBufferOffset uint) *InstanceAccelerationStructureDescriptor {
@@ -96,7 +98,7 @@ func (x *InstanceAccelerationStructureDescriptor) WithMotionTransformBufferOffse
 	return x
 }
 
-// @brief Number of motion transforms
+// The number of motion transforms in the motion transform buffer.
 //
 // WithMotionTransformCount sets the motionTransformCount property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructureDescriptor) WithMotionTransformCount(motionTransformCount uint) *InstanceAccelerationStructureDescriptor {
@@ -128,6 +130,8 @@ func (x *InstanceAccelerationStructureDescriptor) WithMotionTransformStride(moti
 	return x
 }
 
+// The options that describe how you intend to use the acceleration structure.
+//
 // WithUsage sets the usage property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructureDescriptor) WithUsage(usage MTLAccelerationStructureUsage) *InstanceAccelerationStructureDescriptor {
 	x.inner.MTLAccelerationStructureDescriptor.SetUsage(raw.MTLAccelerationStructureUsage(usage))

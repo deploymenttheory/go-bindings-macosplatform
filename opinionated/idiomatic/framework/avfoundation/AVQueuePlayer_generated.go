@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that plays a sequence of player items.
+//
 // QueuePlayer wraps [raw.AVQueuePlayer] with a fluent Go API.
 type QueuePlayer struct {
 	inner *raw.AVQueuePlayer
@@ -31,7 +33,7 @@ func QueuePlayerFromID(id objc.ID) *QueuePlayer {
 	return &QueuePlayer{inner: raw.AVQueuePlayerFromID(id)}
 }
 
-// Initializes an instance of AVQueuePlayer by enqueueing the AVPlayerItems from the specified array. This method throws an exception if items contains duplicated values or values associated with another AVPlayer. - Parameter items: An NSArray of AVPlayerItems with which to populate the player's queue initially. - Returns: An instance of AVQueuePlayer.
+// Creates an object that plays a queue of items.
 //
 // NewQueuePlayerWithItems creates a new [QueuePlayer].
 func NewQueuePlayerWithItems(items *foundation.NSArray[*raw.AVPlayerItem]) *QueuePlayer {
@@ -40,7 +42,7 @@ func NewQueuePlayerWithItems(items *foundation.NSArray[*raw.AVPlayerItem]) *Queu
 	return &QueuePlayer{inner: raw.AVQueuePlayerFromID(_id)}
 }
 
-// Indicates the desired rate of playback; 0.0 means "paused", 1.0 indicates a desire to play at the natural rate of the current item. Setting the value of rate to 0.0 pauses playback, causing the value of timeControlStatus to change to AVPlayerTimeControlStatusPaused. Setting the rate to a non-zero value causes the value of timeControlStatus to become either AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate or AVPlayerTimeControlStatusPlaying, depending on whether sufficient media data has been buffered for playback to occur and whether the player's default behavior of waiting in order to minimize stalling is permitted. See discussion of AVPlayerTimeControlStatus for more details. AVPlayer can reset the desired rate to 0.0 when a change in overall state requires playback to be halted, such as when an interruption occurs on iOS, as announced by AVAudioSession, or when the playback buffer becomes empty and playback stalls while automaticallyWaitsToMinimizeStalling is NO. The effective rate of playback may differ from the desired rate even while timeControlStatus is AVPlayerTimeControlStatusPlaying, if the processing algorithm in use for managing audio pitch requires quantization of playback rate. For information about quantization of rates for audio processing, see AVAudioProcessingSettings.h. You can always obtain the effective rate of playback from the currentItem's timebase; see the timebase property of AVPlayerItem. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+// The current playback rate.
 //
 // WithRate sets the rate property and returns the receiver for chaining.
 func (x *QueuePlayer) WithRate(rate float32) *QueuePlayer {
@@ -48,7 +50,7 @@ func (x *QueuePlayer) WithRate(rate float32) *QueuePlayer {
 	return x
 }
 
-// Indicates the rate at which to start playback when play is called; defaults to 1.0. Setting this property does not imply playback starts automatically at this rate. Clients still have to kick off playback using `play`. Note that using setRate to start playback will skip using the value in this property nor would it update this property. Therefore, `setRate:1.0` is no longer recommended as a means to start playback. Use `play` instead. Use `setRate` for operations like scanning where the rate is to be updated instantaneously. Invoking `play` again would restore playback at the rate set in this property. The effective rate of playback may still differ from the default rate subject to restrictions imposed by the system. See documentation for the rate property for a discussion on when the desired rate does not translate to effective rate.
+// A default rate at which to begin playback.
 //
 // WithDefaultRate sets the defaultRate property and returns the receiver for chaining.
 func (x *QueuePlayer) WithDefaultRate(defaultRate float32) *QueuePlayer {
@@ -56,7 +58,7 @@ func (x *QueuePlayer) WithDefaultRate(defaultRate float32) *QueuePlayer {
 	return x
 }
 
-// Indicates the action that the player should perform when playback of an item reaches its end time. This property throws an exception if set to AVPlayerActionAtItemEndAdvance on an AVPlayer which is not an AVQueuePlayer.
+// The action to perform when the current player item has finished playing.
 //
 // WithActionAtItemEnd sets the actionAtItemEnd property and returns the receiver for chaining.
 func (x *QueuePlayer) WithActionAtItemEnd(actionAtItemEnd AVPlayerActionAtItemEnd) *QueuePlayer {
@@ -64,7 +66,7 @@ func (x *QueuePlayer) WithActionAtItemEnd(actionAtItemEnd AVPlayerActionAtItemEn
 	return x
 }
 
-// Indicates that the player is allowed to delay playback at the specified rate in order to minimize stalling When this property is YES, whenever 1) the rate is set from zero to non-zero or 2) the playback buffer becomes empty and playback stalls, the player will attempt to determine if, at the specified rate, its currentItem will play to the end without interruptions. Should it determine that such interruptions would occur and these interruptions can be avoided by delaying the start or resumption of playback, the value of timeControlStatus will become AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate and playback will start automatically when the likelihood of stalling has been minimized. You may want to set this property to NO when you need precise control over playback start times, e.g., when synchronizing multiple instances of AVPlayer, and you should set it to NO if you use an AVAssetResourceLoader delegate to load media data (more on this below). If the value of this property is NO, reasonForWaitingToPlay cannot assume a value of AVPlayerWaitingToMinimizeStallsReason. This implies that setting rate to a non-zero value in AVPlayerTimeControlStatusPaused will cause playback to start immediately as long as the playback buffer is not empty. When the playback buffer becomes empty during AVPlayerTimeControlStatusPlaying and playback stalls, playback state will switch to AVPlayerTimeControlStatusPaused and the rate will become 0.0. Changing the value of this property to NO while the value of timeControlStatus is AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate with a reasonForWaitingToPlay of AVPlayerWaitingToMinimizeStallsReason will cause the player to attempt playback at the specified rate immediately. For clients linked against iOS 10.0 and running on that version or later or linked against macOS 10.12 and running on that version or later, the default value of this property is YES. In versions of iOS prior to iOS 10.0 and versions of macOS prior to 10.12, this property is unavailable, and the behavior of the AVPlayer corresponds to the type of content being played. For streaming content, including HTTP Live Streaming, the AVPlayer acts as if automaticallyWaitsToMinimizeStalling is YES. For file-based content, including file-based content accessed via progressive http download, the AVPlayer acts as if automaticallyWaitsToMinimizeStalling is NO. If you employ an AVAssetResourceLoader delegate that loads media data for playback, you should set the value of your AVPlayer’s automaticallyWaitsToMinimizeStalling property to NO. Allowing the value of automaticallyWaitsToMinimizeStalling to remain YES when an AVAssetResourceLoader delegate is used for the loading of media data can result in poor start-up times for playback and poor recovery from stalls, because the behaviors provided by AVPlayer when automaticallyWaitsToMinimizeStalling has a value of YES depend on predictions of the future availability of media data that that do not function as expected when data is loaded via a client-controlled means, using the AVAssetResourceLoader delegate interface. You can allow the value of automaticallyWaitsToMinimizeStalling to remain YES if you use an AVAssetResourceLoader delegate to manage content keys for FairPlay Streaming, to provide dynamically-generated master playlists for HTTP Live Streaming, or to respond to authentication challenges, but not to load media data for playback. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+// A Boolean value that indicates whether the player should automatically delay playback in order to minimize stalling.
 //
 // WithAutomaticallyWaitsToMinimizeStalling sets the automaticallyWaitsToMinimizeStalling property and returns the receiver for chaining.
 func (x *QueuePlayer) WithAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling bool) *QueuePlayer {
@@ -72,7 +74,7 @@ func (x *QueuePlayer) WithAutomaticallyWaitsToMinimizeStalling(automaticallyWait
 	return x
 }
 
-// Indicates the current audio volume of the player; 0.0 means "silence all audio", 1.0 means "play at the full volume of the current item". iOS note: Do not use this property to implement a volume slider for media playback. For that purpose, use MPVolumeView, which is customizable in appearance and provides standard media playback behaviors that users expect. This property is most useful on iOS to control the volume of the AVPlayer relative to other audio output, not for volume control by end users.
+// The audio playback volume for the player.
 //
 // WithVolume sets the volume property and returns the receiver for chaining.
 func (x *QueuePlayer) WithVolume(volume float32) *QueuePlayer {
@@ -80,7 +82,7 @@ func (x *QueuePlayer) WithVolume(volume float32) *QueuePlayer {
 	return x
 }
 
-// Indicates whether or not audio output of the player is muted. Only affects audio muting for the player instance and not for the device.
+// A Boolean value that indicates whether the audio output of the player is muted.
 //
 // WithMuted sets the muted property and returns the receiver for chaining.
 func (x *QueuePlayer) WithMuted(muted bool) *QueuePlayer {
@@ -88,7 +90,7 @@ func (x *QueuePlayer) WithMuted(muted bool) *QueuePlayer {
 	return x
 }
 
-// Indicates whether the receiver should apply the current selection criteria automatically to AVPlayerItems. For clients linked against the iOS 7 SDK or later or against the macOS 10.9 SDK or later, the default is YES. For all others, the default is NO. By default, AVPlayer applies selection criteria based on system preferences. To override the default criteria for any media selection group, use -[AVPlayer setMediaSelectionCriteria:forMediaCharacteristic:].
+// A Boolean value that indicates whether the receiver should apply the current selection criteria automatically to player items.
 //
 // WithAppliesMediaSelectionCriteriaAutomatically sets the appliesMediaSelectionCriteriaAutomatically property and returns the receiver for chaining.
 func (x *QueuePlayer) WithAppliesMediaSelectionCriteriaAutomatically(appliesMediaSelectionCriteriaAutomatically bool) *QueuePlayer {
@@ -96,7 +98,7 @@ func (x *QueuePlayer) WithAppliesMediaSelectionCriteriaAutomatically(appliesMedi
 	return x
 }
 
-// Specifies the unique ID of the Core Audio output device used to play audio. By default, the value of this property is nil, indicating that the default audio output device is used. Otherwise the value of this property is an NSString containing the unique ID of the Core Audio output device to be used for audio output. Core Audio's kAudioDevicePropertyDeviceUID is a suitable source of audio output device unique IDs.
+// Specifies the unique ID of the Core Audio output device used to play audio.
 //
 // WithAudioOutputDeviceUniqueID sets the audioOutputDeviceUniqueID property and returns the receiver for chaining.
 func (x *QueuePlayer) WithAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) *QueuePlayer {
@@ -104,7 +106,7 @@ func (x *QueuePlayer) WithAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID st
 	return x
 }
 
-// Indicates whether the player allows switching to "external playback" mode. The default value is YES.
+// A Boolean value that indicates whether the player allows switching to external playback mode.
 //
 // WithAllowsExternalPlayback sets the allowsExternalPlayback property and returns the receiver for chaining.
 func (x *QueuePlayer) WithAllowsExternalPlayback(allowsExternalPlayback bool) *QueuePlayer {
@@ -112,7 +114,7 @@ func (x *QueuePlayer) WithAllowsExternalPlayback(allowsExternalPlayback bool) *Q
 	return x
 }
 
-// Specifies a registryID associated with a GPU that should be used for video decode. By default, whenever possible, video decode will be performed on the GPU associated with the display on which the presenting CALayer is located. Decode will be transitioned to a new GPU if appropriate when the CALayer moves to a new display. This property overrides this default behavior, forcing decode to prefer an affinity to the GPU specified regardless of which GPU is being used to display the associated CALayer. The GPU registryID can be obtained from the GPU MTLDevice using [MTLDevice registryID] or can be obtained from OpenGL or OpenCL.
+// The registry identifier for the GPU used for video decoding.
 //
 // WithPreferredVideoDecoderGPURegistryID sets the preferredVideoDecoderGPURegistryID property and returns the receiver for chaining.
 func (x *QueuePlayer) WithPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64) *QueuePlayer {
@@ -120,7 +122,7 @@ func (x *QueuePlayer) WithPreferredVideoDecoderGPURegistryID(preferredVideoDecod
 	return x
 }
 
-// Indicates whether video playback prevents display and device sleep. Default is YES on iOS, tvOS and in Mac Catalyst apps. Default is NO on macOS. Setting this property to NO does not force the display to sleep, it simply stops preventing display sleep. Other apps or frameworks within your app may still be preventing display sleep for various reasons. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+// A Boolean value that indicates whether video playback prevents display and device sleep.
 //
 // WithPreventsDisplaySleepDuringVideoPlayback sets the preventsDisplaySleepDuringVideoPlayback property and returns the receiver for chaining.
 func (x *QueuePlayer) WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *QueuePlayer {
@@ -128,7 +130,7 @@ func (x *QueuePlayer) WithPreventsDisplaySleepDuringVideoPlayback(preventsDispla
 	return x
 }
 
-// Controls the policy to be used in deciding how playback of audiovisual content should continue while the application transitions to background. By default, the system is free to decide the background playback policy (AVPlayerAudiovisualBackgroundPlaybackPolicyAutomatic). If set to AVPlayerAudiovisualBackgroundPlaybackPolicyPauses, player will be paused on entering background. If set to AVPlayerAudiovisualBackgroundPlaybackPolicyContinuesIfPossible, the system makes the best effort to continue playback but the app also needs appropriate UIBackgroundModes for the system to let it continue running in the background. Note that this policy only applies to items with enabled video.
+// A policy that determines how playback of audiovisual media continues when the app transitions to the background.
 //
 // WithAudiovisualBackgroundPlaybackPolicy sets the audiovisualBackgroundPlaybackPolicy property and returns the receiver for chaining.
 func (x *QueuePlayer) WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy AVPlayerAudiovisualBackgroundPlaybackPolicy) *QueuePlayer {
@@ -136,7 +138,7 @@ func (x *QueuePlayer) WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgro
 	return x
 }
 
-// The video output for this player, if one was set. When an AVPlayerVideoOutput is associated with an AVPlayer, the AVPlayerVideoOutput can then be used to receive video-related samples during playback. - NOTE: If an output is set while AVPlayer has a current item it may cause different data channels to be selected for that item, which can have a performance impact. As a result, when possible, it is best to set an output before setting items on an AVPlayer.
+// The video output for this player.
 //
 // WithVideoOutput sets the videoOutput property and returns the receiver for chaining.
 func (x *QueuePlayer) WithVideoOutput(videoOutput *PlayerVideoOutput) *QueuePlayer {
@@ -144,7 +146,7 @@ func (x *QueuePlayer) WithVideoOutput(videoOutput *PlayerVideoOutput) *QueuePlay
 	return x
 }
 
-// Indicates the priority of this player for network bandwidth resource distribution. This value determines the priority of the player during network resource allocation among all other players within the same application process. The default value for this is AVPlayerNetworkResourcePriorityDefault.
+// Indicates the priority of this player for network bandwidth resource distribution.
 //
 // WithNetworkResourcePriority sets the networkResourcePriority property and returns the receiver for chaining.
 func (x *QueuePlayer) WithNetworkResourcePriority(networkResourcePriority AVPlayerNetworkResourcePriority) *QueuePlayer {
@@ -152,13 +154,15 @@ func (x *QueuePlayer) WithNetworkResourcePriority(networkResourcePriority AVPlay
 	return x
 }
 
+// Indicates whether the video output of ClearKey Encrypted Video can be captured
+//
 // WithAllowsCaptureOfClearKeyVideo sets the allowsCaptureOfClearKeyVideo property and returns the receiver for chaining.
 func (x *QueuePlayer) WithAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool) *QueuePlayer {
 	x.inner.AVPlayer.SetAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo)
 	return x
 }
 
-// Indicates whether display of closed captions is enabled. This property is deprecated. When the value of appliesMediaSelectionCriteriaAutomatically is YES, the receiver will enable closed captions automatically either according to user preferences or, if you provide them, according to AVPlayerMediaSelectionCriteria for the media characteristic AVMediaCharacteristicLegible. If you want to determine whether closed captions may be available for a given AVPlayerItem, you can examine the AVMediaSelectionOptions in the AVMediaSelectionGroup for the characteristic AVMediaCharacteristicLegible, as vended by -[AVAsset mediaSelectionGroupForMediaCharacteristic:]. See AVMediaCharacteristicTranscribesSpokenDialogForAccessibility and AVMediaCharacteristicDescribesMusicAndSoundForAccessibility as documented in AVMediaFormat.h for information about how to identify legible media selection options that offer the features of closed captions for accessibility purposes. You can select or deselect a specific AVMediaSelectionOption via -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:]. For further information about Media Accessibility preferences, see MediaAccessibility framework documentation.
+// A Boolean value that indicates whether the player uses closed captioning.
 //
 // WithClosedCaptionDisplayEnabled sets the closedCaptionDisplayEnabled property and returns the receiver for chaining.
 func (x *QueuePlayer) WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool) *QueuePlayer {
@@ -166,7 +170,7 @@ func (x *QueuePlayer) WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnable
 	return x
 }
 
-// Provides an array of the currently enqueued items. - Returns: An NSArray containing the enqueued AVPlayerItems.
+// Returns an array of the currently enqueued items.
 //
 // Items returns the collection as a Go slice.
 func (x *QueuePlayer) Items() []*PlayerItem {
@@ -179,35 +183,35 @@ func (x *QueuePlayer) Items() []*PlayerItem {
 	})
 }
 
-// Ends playback of the current item and initiates playback of the next item in the player's queue. Removes the current item from the play queue.
+// Ends playback of the current item and starts playback of the next item in the player’s queue.
 //
 // AdvanceToNextItem calls the underlying AdvanceToNextItem.
 func (x *QueuePlayer) AdvanceToNextItem() {
 	x.inner.AdvanceToNextItem()
 }
 
-// Tests whether an AVPlayerItem can be inserted into the player's queue. Note that adding the same AVPlayerItem to an AVQueuePlayer at more than one position in the queue is not supported. - Parameter item: The AVPlayerItem to be tested. - Parameter afterItem: The item that the item to be tested is to follow in the queue. Pass nil to test whether the item can be appended to the queue. - Returns: An indication of whether the item can be inserted into the queue after the specified item.
+// Returns a Boolean value that indicates whether you can insert a player item into the player’s queue.
 //
 // CanInsertItemAfterItem calls the underlying CanInsertItemAfterItem.
 func (x *QueuePlayer) CanInsertItemAfterItem(item *raw.AVPlayerItem, afterItem *raw.AVPlayerItem) bool {
 	return x.inner.CanInsertItemAfterItem(item, afterItem)
 }
 
-// Places an AVPlayerItem after the specified item in the queue. This method throws an exception if item already exists in the queue. - Parameter item: The item to be inserted. - Parameter afterItem: The item that the newly inserted item should follow in the queue. Pass nil to append the item to the queue.
+// Inserts a player item after another player item in the queue.
 //
 // InsertItemAfterItem calls the underlying InsertItemAfterItem.
 func (x *QueuePlayer) InsertItemAfterItem(item *raw.AVPlayerItem, afterItem *raw.AVPlayerItem) {
 	x.inner.InsertItemAfterItem(item, afterItem)
 }
 
-// Removes an AVPlayerItem from the queue. If the item to be removed is currently playing, has the same effect as -advanceToNextItem. - Parameter item: The item to be removed.
+// Removes a given player item from the queue.
 //
 // RemoveItem calls the underlying RemoveItem.
 func (x *QueuePlayer) RemoveItem(item *raw.AVPlayerItem) {
 	x.inner.RemoveItem(item)
 }
 
-// Removes all items from the queue. Stops playback by the target.
+// Removes all player items from the queue.
 //
 // RemoveAllItems calls the underlying RemoveAllItems.
 func (x *QueuePlayer) RemoveAllItems() {

@@ -11,7 +11,7 @@ import (
 	"unsafe"
 )
 
-// Frame-specific information required to render a frame in a rendering session.
+// Creates an object with the per frame attributes that control the appearance of a single frame of the Cinematic movie.
 //
 // RenderingSessionFrameAttributes wraps [raw.CNRenderingSessionFrameAttributes] with a fluent Go API.
 type RenderingSessionFrameAttributes struct {
@@ -35,7 +35,7 @@ func RenderingSessionFrameAttributesFromID(id objc.ID) *RenderingSessionFrameAtt
 	return &RenderingSessionFrameAttributes{inner: raw.CNRenderingSessionFrameAttributesFromID(id)}
 }
 
-// Initialize rendering frame attributes from a sample buffer read from a cinematic metadata track. - Parameters: - sampleBuffer: A sample buffer read from the timed cinematic metadata track of a cinematic asset. - sessionAttributes: Rendering session attributes loaded from a cinematic asset.
+// Initializes the rendering frame attributes from a sample buffer read from a Cinematic metadata track.
 //
 // NewRenderingSessionFrameAttributesWithSampleBufferSessionAttributes creates a new [RenderingSessionFrameAttributes].
 func NewRenderingSessionFrameAttributesWithSampleBufferSessionAttributes(sampleBuffer unsafe.Pointer, sessionAttributes *raw.CNRenderingSessionAttributes) *RenderingSessionFrameAttributes {
@@ -44,7 +44,7 @@ func NewRenderingSessionFrameAttributesWithSampleBufferSessionAttributes(sampleB
 	return &RenderingSessionFrameAttributes{inner: raw.CNRenderingSessionFrameAttributesFromID(_id)}
 }
 
-// Initialize rendering frame attributes from a timed metadata group read from a cinematic metadata track. - Parameters: - metadataGroup: An AVTimedMetadataGroup read from the timed cinematic metadata track of a cinematic asset. - sessionAttributes: Rendering session attributes loaded from a cinematic asset.
+// Initializes the rendering frame attributes from a timed metadata group read from a Cinematic metadata track.
 //
 // NewRenderingSessionFrameAttributesWithTimedMetadataGroupSessionAttributes creates a new [RenderingSessionFrameAttributes].
 func NewRenderingSessionFrameAttributesWithTimedMetadataGroupSessionAttributes(metadataGroup *avfoundation.AVTimedMetadataGroup, sessionAttributes *raw.CNRenderingSessionAttributes) *RenderingSessionFrameAttributes {
@@ -53,7 +53,7 @@ func NewRenderingSessionFrameAttributesWithTimedMetadataGroupSessionAttributes(m
 	return &RenderingSessionFrameAttributes{inner: raw.CNRenderingSessionFrameAttributesFromID(_id)}
 }
 
-// The disparity value which represents the focus plane at which the rendered image should be in focus. A larger disparity results in the focus plane being closer to the camera. The scale and offset of disparity is not defined. It is best practice to obtain disparity values from detections or by interpolation between known disparity values.
+// Represents the focus plane at which the rendered image should be in focus.
 //
 // WithFocusDisparity sets the focusDisparity property and returns the receiver for chaining.
 func (x *RenderingSessionFrameAttributes) WithFocusDisparity(focusDisparity float32) *RenderingSessionFrameAttributes {
@@ -61,7 +61,7 @@ func (x *RenderingSessionFrameAttributes) WithFocusDisparity(focusDisparity floa
 	return x
 }
 
-// The f-stop value which inversely affects the aperture used to render the image. A smaller f/ number results in larger bokeh and a shallower depth of field in the rendered image.
+// The f-stop value that inversely affects the aperture used to render the Cinematic image.
 //
 // WithFNumber sets the fNumber property and returns the receiver for chaining.
 func (x *RenderingSessionFrameAttributes) WithFNumber(fNumber float32) *RenderingSessionFrameAttributes {

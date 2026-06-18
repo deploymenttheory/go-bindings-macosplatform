@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines the audio attributes for an asset variant.
+//
 // AssetVariantAudioAttributes wraps [raw.AVAssetVariantAudioAttributes] with a fluent Go API.
 type AssetVariantAudioAttributes struct {
 	inner *raw.AVAssetVariantAudioAttributes

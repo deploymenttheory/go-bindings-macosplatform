@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that contains details of a string-based search request.
+//
 // FileProviderStringSearchRequest wraps [raw.NSFileProviderStringSearchRequest] with a fluent Go API.
 type FileProviderStringSearchRequest struct {
 	inner *raw.NSFileProviderStringSearchRequest

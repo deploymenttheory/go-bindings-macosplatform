@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that manages standard appearance attributes for UI elements in an app.
+//
 // Appearance wraps [raw.NSAppearance] with a fluent Go API.
 type Appearance struct {
 	inner *raw.NSAppearance
@@ -32,6 +34,8 @@ func AppearanceFromID(id objc.ID) *Appearance {
 	return &Appearance{inner: raw.NSAppearanceFromID(id)}
 }
 
+// Creates an appearance object from the named appearance file located in the specified bundle.
+//
 // NewAppearanceWithAppearanceNamedBundle creates a new [Appearance].
 func NewAppearanceWithAppearanceNamedBundle(name *foundation.NSString, bundle *foundation.NSBundle) *Appearance {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAppearance")), objc.RegisterName("alloc"))
@@ -46,6 +50,8 @@ func NewAppearanceWithCoder(coder *foundation.NSCoder) *Appearance {
 	return &Appearance{inner: raw.NSAppearanceFromID(_id)}
 }
 
+// Sets the appearance to be the active drawing appearance and perform the specified block.
+//
 // PerformAsCurrentDrawingAppearance blocks until the operation completes or ctx is cancelled.
 func (x *Appearance) PerformAsCurrentDrawingAppearance(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -60,6 +66,8 @@ func (x *Appearance) PerformAsCurrentDrawingAppearance(ctx context.Context) erro
 	}
 }
 
+// Returns the appearance name that most closely matches the current appearance object.
+//
 // BestMatchFromAppearancesWithNames calls the underlying BestMatchFromAppearancesWithNames.
 func (x *Appearance) BestMatchFromAppearancesWithNames(appearances *foundation.NSArray[*foundation.NSString]) string {
 	_r := x.inner.BestMatchFromAppearancesWithNames(appearances)

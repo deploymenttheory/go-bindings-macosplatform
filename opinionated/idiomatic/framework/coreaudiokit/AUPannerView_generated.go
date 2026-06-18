@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A view that provides a specialized user interface for a Cocoa-based panner audio unit.
+//
 // AUPannerView wraps [raw.AUPannerView] with a fluent Go API.
 type AUPannerView struct {
 	inner *raw.AUPannerView

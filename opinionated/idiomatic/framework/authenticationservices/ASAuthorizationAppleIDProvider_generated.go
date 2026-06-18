@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A mechanism for generating requests to authenticate users based on their Apple ID.
+//
 // AuthorizationAppleIDProvider wraps [raw.ASAuthorizationAppleIDProvider] with a fluent Go API.
 type AuthorizationAppleIDProvider struct {
 	inner *raw.ASAuthorizationAppleIDProvider
@@ -37,7 +39,7 @@ func NewAuthorizationAppleIDProvider() *AuthorizationAppleIDProvider {
 	return &AuthorizationAppleIDProvider{inner: raw.ASAuthorizationAppleIDProviderFromID(_id)}
 }
 
-// @abstract This method initializes and returns an instance of @see ASAuthorizationAppleIDRequest to be serviced by @see ASAuthorizationController.
+// Creates a new Apple ID authorization request.
 //
 // CreateRequest calls the underlying CreateRequest.
 func (x *AuthorizationAppleIDProvider) CreateRequest() *AuthorizationAppleIDRequest {
@@ -48,7 +50,7 @@ func (x *AuthorizationAppleIDProvider) CreateRequest() *AuthorizationAppleIDRequ
 	return &AuthorizationAppleIDRequest{inner: _r}
 }
 
-// @abstract This method can be used to get the current state of an opaque user ID previously given. @param userID Opaque user identifier that will be checked for state. @param completion A completion block that will return one of 3 possible states @see ASAuthorizationAppleIDProviderCredentialState. @note If credentialState is @see ASAuthorizationAppleIDProviderCredentialNotFound, an error will also be passed in the completion block.
+// Returns the credential state for the given user in a completion handler.
 //
 // GetCredentialStateForUserIDCompletion calls the underlying GetCredentialStateForUserIDCompletion.
 func (x *AuthorizationAppleIDProvider) GetCredentialStateForUserIDCompletion(userID string, completion func(ASAuthorizationAppleIDProviderCredentialState, unsafe.Pointer)) {

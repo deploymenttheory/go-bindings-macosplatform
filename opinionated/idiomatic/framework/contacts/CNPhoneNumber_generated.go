@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An immutable object representing a phone number for a contact.
+//
 // PhoneNumber wraps [raw.CNPhoneNumber] with a fluent Go API.
 type PhoneNumber struct {
 	inner *raw.CNPhoneNumber
@@ -37,6 +39,8 @@ func NewPhoneNumber() *PhoneNumber {
 	return &PhoneNumber{inner: raw.CNPhoneNumberFromID(_id)}
 }
 
+// Returns a new phone number object initialized with the specified phone number string.
+//
 // NewPhoneNumberWithStringValue creates a new [PhoneNumber].
 func NewPhoneNumberWithStringValue(string_ string) *PhoneNumber {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNPhoneNumber")), objc.RegisterName("alloc"))

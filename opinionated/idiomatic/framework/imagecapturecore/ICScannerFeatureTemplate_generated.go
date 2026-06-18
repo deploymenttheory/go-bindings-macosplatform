@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A group of one or more rectangular scan areas that can be used with a scanner functional unit.
+//
 // ScannerFeatureTemplate wraps [raw.ICScannerFeatureTemplate] with a fluent Go API.
 type ScannerFeatureTemplate struct {
 	inner *raw.ICScannerFeatureTemplate

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that transfers data to and from the pasteboard server.
+//
 // Pasteboard wraps [raw.NSPasteboard] with a fluent Go API.
 type Pasteboard struct {
 	inner *raw.NSPasteboard
@@ -38,21 +40,29 @@ func NewPasteboard() *Pasteboard {
 	return &Pasteboard{inner: raw.NSPasteboardFromID(_id)}
 }
 
+// Releases the receiver’s resources in the pasteboard server.
+//
 // ReleaseGlobally calls the underlying ReleaseGlobally.
 func (x *Pasteboard) ReleaseGlobally() {
 	x.inner.ReleaseGlobally()
 }
 
+// Prepares the pasteboard to receive new contents, removing the existing pasteboard contents.
+//
 // PrepareForNewContentsWithOptions calls the underlying PrepareForNewContentsWithOptions.
 func (x *Pasteboard) PrepareForNewContentsWithOptions(options NSPasteboardContentsOptions) int {
 	return x.inner.PrepareForNewContentsWithOptions(raw.NSPasteboardContentsOptions(options))
 }
 
+// Clears the existing contents of the pasteboard.
+//
 // ClearContents calls the underlying ClearContents.
 func (x *Pasteboard) ClearContents() int {
 	return x.inner.ClearContents()
 }
 
+// Writes an array of objects to the receiver.
+//
 // WriteObjects calls the underlying WriteObjects.
 func (x *Pasteboard) WriteObjects(objects ...purego.IDer) bool {
 	_ptrs := make([]objc.ID, len(objects))
@@ -67,36 +77,50 @@ func (x *Pasteboard) WriteObjects(objects ...purego.IDer) bool {
 	return x.inner.WriteObjects(_arg0)
 }
 
+// Reads from the receiver objects that best match the specified array of classes.
+//
 // ReadObjectsForClassesOptions calls the underlying ReadObjectsForClassesOptions.
 func (x *Pasteboard) ReadObjectsForClassesOptions(classArray *foundation.NSArray[objc.Class], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[objc.ID] {
 	return x.inner.ReadObjectsForClassesOptions(classArray, options)
 }
 
+// Returns the index of the specified pasteboard item.
+//
 // IndexOfPasteboardItem calls the underlying IndexOfPasteboardItem.
 func (x *Pasteboard) IndexOfPasteboardItem(pasteboardItem *raw.NSPasteboardItem) uint {
 	return x.inner.IndexOfPasteboardItem(pasteboardItem)
 }
 
+// Returns a Boolean value that indicates whether the receiver contains any items that conform to the specified UTIs.
+//
 // CanReadItemWithDataConformingToTypes calls the underlying CanReadItemWithDataConformingToTypes.
 func (x *Pasteboard) CanReadItemWithDataConformingToTypes(types *foundation.NSArray[*foundation.NSString]) bool {
 	return x.inner.CanReadItemWithDataConformingToTypes(types)
 }
 
+// Returns a Boolean value that indicates whether the receiver contains any items that can be represented as an instance of any class in a given array.
+//
 // CanReadObjectForClassesOptions calls the underlying CanReadObjectForClassesOptions.
 func (x *Pasteboard) CanReadObjectForClassesOptions(classArray *foundation.NSArray[objc.Class], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
 	return x.inner.CanReadObjectForClassesOptions(classArray, options)
 }
 
+// Prepares the receiver for a change in its contents by declaring the new types of data it will contain and a new owner.
+//
 // DeclareTypesOwner calls the underlying DeclareTypesOwner.
 func (x *Pasteboard) DeclareTypesOwner(newTypes *foundation.NSArray[*foundation.NSString], newOwner objc.ID) int {
 	return x.inner.DeclareTypesOwner(newTypes, newOwner)
 }
 
+// Adds promises for the specified types to the first pasteboard item.
+//
 // AddTypesOwner calls the underlying AddTypesOwner.
 func (x *Pasteboard) AddTypesOwner(newTypes *foundation.NSArray[*foundation.NSString], newOwner objc.ID) int {
 	return x.inner.AddTypesOwner(newTypes, newOwner)
 }
 
+// Scans the specified types for a type that the receiver supports.
+//
 // AvailableTypeFromArray calls the underlying AvailableTypeFromArray.
 func (x *Pasteboard) AvailableTypeFromArray(types *foundation.NSArray[*foundation.NSString]) string {
 	_r := x.inner.AvailableTypeFromArray(types)
@@ -106,31 +130,43 @@ func (x *Pasteboard) AvailableTypeFromArray(types *foundation.NSArray[*foundatio
 	return purego.GoString(_r.Ptr())
 }
 
+// Sets the data as the representation for the specified type for the first item on the receiver.
+//
 // SetDataForType calls the underlying SetDataForType.
 func (x *Pasteboard) SetDataForType(data *foundation.NSData, dataType *foundation.NSString) bool {
 	return x.inner.SetDataForType(data, dataType)
 }
 
+// Sets the given property list as the representation for the specified type for the first item on the receiver.
+//
 // SetPropertyListForType calls the underlying SetPropertyListForType.
 func (x *Pasteboard) SetPropertyListForType(plist objc.ID, dataType *foundation.NSString) bool {
 	return x.inner.SetPropertyListForType(plist, dataType)
 }
 
+// Sets the given string as the representation for the specified type for the first item on the receiver.
+//
 // SetStringForType calls the underlying SetStringForType.
 func (x *Pasteboard) SetStringForType(string_ string, dataType *foundation.NSString) bool {
 	return x.inner.SetStringForType(foundation.NSStringStringWithUTF8String(string_), dataType)
 }
 
+// Returns the data for the specified type from the first item in the receiver that contains the type.
+//
 // DataForType calls the underlying DataForType.
 func (x *Pasteboard) DataForType(dataType *foundation.NSString) *foundation.NSData {
 	return x.inner.DataForType(dataType)
 }
 
+// Returns the property list for the specified type from the first item in the receiver that contains the type.
+//
 // PropertyListForType calls the underlying PropertyListForType.
 func (x *Pasteboard) PropertyListForType(dataType *foundation.NSString) objc.ID {
 	return x.inner.PropertyListForType(dataType)
 }
 
+// Returns a concatenation of the strings for the specified type from all the items in the receiver that contain the type.
+//
 // StringForType calls the underlying StringForType.
 func (x *Pasteboard) StringForType(dataType *foundation.NSString) string {
 	_r := x.inner.StringForType(dataType)
@@ -140,21 +176,21 @@ func (x *Pasteboard) StringForType(dataType *foundation.NSString) string {
 	return purego.GoString(_r.Ptr())
 }
 
-// Determines whether the first pasteboard item matches the specified patterns, without notifying the person using the app. This method only gives an indication of whether the first pasteboard item matches a particular pattern, and doesn’t allow the app to access the item's contents. As a result, the system doesn’t notify the person using the app about reading the contents of the pasteboard. The following example shows how to use this method to find email and postal addresses in the first pasteboard item: ```obj-c [NSPasteboard.generalPasteboard detectPatternsForPatterns:[NSSet setWithArray:@[NSPasteboardDetectionPatternEmailAddress, NSPasteboardDetectionPatternPostalAddress]] completionHandler:^(NSSet<NSPasteboardDetectionPattern> *matchedPatterns, NSError *error) { if (error) { NSLog(@"Error: %@", error); return; } BOOL matchedEmail = [matchedPatterns containsObject:NSPasteboardDetectionPatternEmailAddress]; BOOL matchedPostal = [matchedPatterns containsObject: NSPasteboardDetectionPatternPostalAddress]; if (matchedEmail) { NSLog(@"Email address(es) detected"); } if (matchedPostal) { NSLog(@"Postal address(es) detected"); } if (!matchedEmail && !matchedPostal) { NSLog(@"Matched neither email nor postal addresses."); } }]; ``` - Parameters: - patterns: The patterns to detect on the pasteboard. - completionHandler: A block the system invokes after detecting patterns on the pasteboard. The block receives either a set with the patterns the system finds on the pasteboard or an error if detection fails.
+// Determines whether the first pasteboard item matches the specified patterns, without notifying the person using the app.
 //
 // DetectPatternsForPatternsCompletionHandler calls the underlying DetectPatternsForPatternsCompletionHandler.
 func (x *Pasteboard) DetectPatternsForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler objc.Block) {
 	x.inner.DetectPatternsForPatternsCompletionHandler(patterns, completionHandler)
 }
 
-// Determines whether the first pasteboard item matches the specified patterns, reading the contents if it finds a match. For details about the types returned for each pattern, see “NSPasteboardDetectionPattern“. The following example shows how to use this method to find web URLs and web search terms in the first pasteboard item: ```obj-c [NSPasteboard.generalPasteboard detectValuesForPatterns:[NSSet setWithArray:@[NSPasteboardDetectionPatternProbableWebSearch, NSPasteboardDetectionPatternProbableWebURL]] completionHandler:^(NSDictionary<NSPasteboardDetectionPattern, id> *patternValues, NSError *error) { if (error) { NSLog(@"Error: %@", error); return; } NSString *searchString = (NSString*)patternValues[NSPasteboardDetectionPatternProbableWebSearch]; NSString *urlString = (NSString*)patternValues[NSPasteboardDetectionPatternProbableWebURL] ; if (searchString != nil) { NSLog(@"Web search retrieved: %@", searchString); } if (urlString != nil) { NSLog(@"Web URL retrieved: %@", urlString); } if (searchString == nil && urlString == nil) { NSLog(@"No web patterns retrieved."); } }]; ``` > Important: If the system finds a match when calling this method, the system informs the person using the app that the app is trying to read the contents of the pasteboard. If the person denies access to the pasteboard, the completion handler receives an error. - Parameters: - patterns: The patterns to detect on the pasteboard. - completionHandler: A block the system invokes after detecting patterns on the pasteboard. The block returns either a dictionary with the patterns the system finds on the pasteboard or an error if detection fails. The dictionary keys specify the matched patterns and the values specify the corresponding content of the pasteboard.
+// Determines whether the first pasteboard item matches the specified patterns, reading the contents if it finds a match.
 //
 // DetectValuesForPatternsCompletionHandler calls the underlying DetectValuesForPatternsCompletionHandler.
 func (x *Pasteboard) DetectValuesForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler objc.Block) {
 	x.inner.DetectValuesForPatternsCompletionHandler(patterns, completionHandler)
 }
 
-// Determines available metadata from the specified metadata types for the first pasteboard item, without notifying the person using the app. This method only gives access to limited types of metadata and doesn’t allow the app to access the contents. As a result, the system doesn’t notify the person using the app about reading the contents of the pasteboard. For details about the metadata returned for each type, see “NSPasteboardMetadataType“. The following example shows how to use this method to find the content type of a file reference in the first item on the pasteboard: ```obj-c [NSPasteboard.generalPasteboard detectMetadataForTypes:[NSSet setWithArray:@[NSPasteboardMetadataTypeContentType]] completionHandler:^(NSDictionary<NSPasteboardMetadataType, id> *metadata, NSError *error) { if (error) { NSLog(@"Error: %@", error); return; } UTType *contentType = (UTType*)metadata[NSPasteboardMetadataTypeContentType]; if (contentType) { NSLog(@"Content type is: %@", contentType.identifier); } else { NSLog(@"Couldn't get content type"); } }]; ``` - Parameters: - types: The metadata types to detect on the pasteboard. - completionHandler: A block the system invokes after detecting metadata on the pasteboard. The block receives either a dictionary with the metadata types the system finds on the pasteboard or an error if detection fails. The dictionary keys specify the matched metadata types and the values specify the corresponding metadata.
+// Determines available metadata from the specified metadata types for the first pasteboard item, without notifying the person using the app.
 //
 // DetectMetadataForTypesCompletionHandler calls the underlying DetectMetadataForTypesCompletionHandler.
 func (x *Pasteboard) DetectMetadataForTypesCompletionHandler(types *foundation.NSSet[*foundation.NSString], completionHandler objc.Block) {
@@ -204,11 +240,15 @@ func (x *Pasteboard) Types() []*foundation.NSString {
 	})
 }
 
+// Writes the contents of the specified file to the pasteboard.
+//
 // WriteFileContents calls the underlying WriteFileContents.
 func (x *Pasteboard) WriteFileContents(filename string) bool {
 	return x.inner.WriteFileContents(foundation.NSStringStringWithUTF8String(filename))
 }
 
+// Reads data representing a file’s contents from the receiver and writes it to the specified file.
+//
 // ReadFileContentsTypeToFile calls the underlying ReadFileContentsTypeToFile.
 func (x *Pasteboard) ReadFileContentsTypeToFile(type_ *foundation.NSString, filename string) string {
 	_r := x.inner.ReadFileContentsTypeToFile(type_, foundation.NSStringStringWithUTF8String(filename))
@@ -218,11 +258,15 @@ func (x *Pasteboard) ReadFileContentsTypeToFile(type_ *foundation.NSString, file
 	return purego.GoString(_r.Ptr())
 }
 
+// Writes the serialized contents of the specified file wrapper to the pasteboard.
+//
 // WriteFileWrapper calls the underlying WriteFileWrapper.
 func (x *Pasteboard) WriteFileWrapper(wrapper *foundation.NSFileWrapper) bool {
 	return x.inner.WriteFileWrapper(wrapper)
 }
 
+// Reads data representing a file’s contents from the receiver and returns it as a file wrapper.
+//
 // ReadFileWrapper calls the underlying ReadFileWrapper.
 func (x *Pasteboard) ReadFileWrapper() *foundation.NSFileWrapper {
 	return x.inner.ReadFileWrapper()

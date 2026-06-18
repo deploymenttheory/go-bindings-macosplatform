@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A point of view for rendering a 3D scene, along with a set of parameters describing an intended appearance for rendering.
+//
 // Camera wraps [raw.MDLCamera] with a fluent Go API.
 type Camera struct {
 	inner *raw.MDLCamera
@@ -36,13 +38,15 @@ func NewCamera() *Camera {
 	return &Camera{inner: raw.MDLCameraFromID(_id)}
 }
 
+// The style of projection transform used by the camera.
+//
 // WithProjection sets the projection property and returns the receiver for chaining.
 func (x *Camera) WithProjection(projection MDLCameraProjection) *Camera {
 	x.inner.SetProjection(raw.MDLCameraProjection(projection))
 	return x
 }
 
-// Bounding distance for visible objects
+// The camera’s near depth limit.
 //
 // WithNearVisibilityDistance sets the nearVisibilityDistance property and returns the receiver for chaining.
 func (x *Camera) WithNearVisibilityDistance(nearVisibilityDistance float32) *Camera {
@@ -50,13 +54,15 @@ func (x *Camera) WithNearVisibilityDistance(nearVisibilityDistance float32) *Cam
 	return x
 }
 
+// The camera’s far depth limit.
+//
 // WithFarVisibilityDistance sets the farVisibilityDistance property and returns the receiver for chaining.
 func (x *Camera) WithFarVisibilityDistance(farVisibilityDistance float32) *Camera {
 	x.inner.SetFarVisibilityDistance(farVisibilityDistance)
 	return x
 }
 
-// World to meters conversion scale. Required for certain calculations.
+// The scale factor to meters from the world coordinate system containing the camera.
 //
 // WithWorldToMetersConversionScale sets the worldToMetersConversionScale property and returns the receiver for chaining.
 func (x *Camera) WithWorldToMetersConversionScale(worldToMetersConversionScale float32) *Camera {
@@ -64,7 +70,7 @@ func (x *Camera) WithWorldToMetersConversionScale(worldToMetersConversionScale f
 	return x
 }
 
-// Radial distortion of the lens, second order term
+// The first coefficient for determining the radial distortion applied to pixels rendered using the camera.
 //
 // WithBarrelDistortion sets the barrelDistortion property and returns the receiver for chaining.
 func (x *Camera) WithBarrelDistortion(barrelDistortion float32) *Camera {
@@ -72,7 +78,7 @@ func (x *Camera) WithBarrelDistortion(barrelDistortion float32) *Camera {
 	return x
 }
 
-// Radial distortion of the lens, fourth order term
+// The second coefficient for determining the radial distortion applied to pixels rendered using the camera.
 //
 // WithFisheyeDistortion sets the fisheyeDistortion property and returns the receiver for chaining.
 func (x *Camera) WithFisheyeDistortion(fisheyeDistortion float32) *Camera {
@@ -80,7 +86,7 @@ func (x *Camera) WithFisheyeDistortion(fisheyeDistortion float32) *Camera {
 	return x
 }
 
-// Amount of optical vignetting, rom zero to one.
+// The amount of radial light attenuation around the edges of an image rendered using the camera.
 //
 // WithOpticalVignetting sets the opticalVignetting property and returns the receiver for chaining.
 func (x *Camera) WithOpticalVignetting(opticalVignetting float32) *Camera {
@@ -88,7 +94,7 @@ func (x *Camera) WithOpticalVignetting(opticalVignetting float32) *Camera {
 	return x
 }
 
-// Amount of chromatic abberation, from zero to one.
+// The amount of radial color shift around the edges of an image rendered using the camera.
 //
 // WithChromaticAberration sets the chromaticAberration property and returns the receiver for chaining.
 func (x *Camera) WithChromaticAberration(chromaticAberration float32) *Camera {
@@ -96,7 +102,7 @@ func (x *Camera) WithChromaticAberration(chromaticAberration float32) *Camera {
 	return x
 }
 
-// Lens focal length in mm. @see fieldOfView
+// The focal length, in millimeters, of the camera’s simulated lens.
 //
 // WithFocalLength sets the focalLength property and returns the receiver for chaining.
 func (x *Camera) WithFocalLength(focalLength float32) *Camera {
@@ -104,7 +110,7 @@ func (x *Camera) WithFocalLength(focalLength float32) *Camera {
 	return x
 }
 
-// Focus distance
+// The distance, in meters, at which the lens is focused.
 //
 // WithFocusDistance sets the focusDistance property and returns the receiver for chaining.
 func (x *Camera) WithFocusDistance(focusDistance float32) *Camera {
@@ -112,7 +118,7 @@ func (x *Camera) WithFocusDistance(focusDistance float32) *Camera {
 	return x
 }
 
-// The field of view, in degrees. @see focalLength
+// The camera’s field of view, in degrees.
 //
 // WithFieldOfView sets the fieldOfView property and returns the receiver for chaining.
 func (x *Camera) WithFieldOfView(fieldOfView float32) *Camera {
@@ -120,7 +126,7 @@ func (x *Camera) WithFieldOfView(fieldOfView float32) *Camera {
 	return x
 }
 
-// f-stop, default is 5.6
+// The relative aperture ratio of the camera’s simulated lens.
 //
 // WithFStop sets the fStop property and returns the receiver for chaining.
 func (x *Camera) WithFStop(fStop float32) *Camera {
@@ -128,7 +134,7 @@ func (x *Camera) WithFStop(fStop float32) *Camera {
 	return x
 }
 
-// Aperture blade count, where zero indicates a circle.
+// The number of blades in the camera’s simulated aperture.
 //
 // WithApertureBladeCount sets the apertureBladeCount property and returns the receiver for chaining.
 func (x *Camera) WithApertureBladeCount(apertureBladeCount uint) *Camera {
@@ -136,7 +142,7 @@ func (x *Camera) WithApertureBladeCount(apertureBladeCount uint) *Camera {
 	return x
 }
 
-// Maximum circle of confusion size in mm on the image plane
+// The maximum diameter, in millimeters on the imaging plane, at which light from a point source should appear in an image rendered using the camera.
 //
 // WithMaximumCircleOfConfusion sets the maximumCircleOfConfusion property and returns the receiver for chaining.
 func (x *Camera) WithMaximumCircleOfConfusion(maximumCircleOfConfusion float32) *Camera {
@@ -144,7 +150,7 @@ func (x *Camera) WithMaximumCircleOfConfusion(maximumCircleOfConfusion float32) 
 	return x
 }
 
-// Shutter open interval, in seconds
+// The duration, in seconds, for which the camera’s simulated shutter is open during each frame.
 //
 // WithShutterOpenInterval sets the shutterOpenInterval property and returns the receiver for chaining.
 func (x *Camera) WithShutterOpenInterval(shutterOpenInterval float64) *Camera {
@@ -152,7 +158,7 @@ func (x *Camera) WithShutterOpenInterval(shutterOpenInterval float64) *Camera {
 	return x
 }
 
-// vertical aperture of the sensor or film gate, default is 24mm @see sensorAspect
+// The height, in millimeters, of the camera’s simulated imaging surface.
 //
 // WithSensorVerticalAperture sets the sensorVerticalAperture property and returns the receiver for chaining.
 func (x *Camera) WithSensorVerticalAperture(sensorVerticalAperture float32) *Camera {
@@ -160,7 +166,7 @@ func (x *Camera) WithSensorVerticalAperture(sensorVerticalAperture float32) *Cam
 	return x
 }
 
-// Sensor or film gate aperture aspect ratio, default is 1.5 @see sensorVerticalAperture
+// The ratio of width to height for the camera’s simulated imaging surface.
 //
 // WithSensorAspect sets the sensorAspect property and returns the receiver for chaining.
 func (x *Camera) WithSensorAspect(sensorAspect float32) *Camera {
@@ -168,7 +174,7 @@ func (x *Camera) WithSensorAspect(sensorAspect float32) *Camera {
 	return x
 }
 
-// @property parent @abstract Parent object. Nil if no parent. @discussion Set to nil when you remove this from an object container inside the parent object.
+// The parent object that contains this object.
 //
 // WithParent sets the parent property and returns the receiver for chaining.
 func (x *Camera) WithParent(parent ObjectProvider) *Camera {
@@ -176,7 +182,7 @@ func (x *Camera) WithParent(parent ObjectProvider) *Camera {
 	return x
 }
 
-// @property instance @abstract Instance object @discussion nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
+// The primary object, if applicable, of which this object is an instance.
 //
 // WithInstance sets the instance property and returns the receiver for chaining.
 func (x *Camera) WithInstance(instance ObjectProvider) *Camera {
@@ -184,7 +190,7 @@ func (x *Camera) WithInstance(instance ObjectProvider) *Camera {
 	return x
 }
 
-// @property transform @abstract Short hand property for the MDLTransformComponent. @discussion The default value is nil @see MDLTransformComponent
+// A component that manages this object’s spatial transform and its changes over time.
 //
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *Camera) WithTransform(transform raw.MDLTransformComponent) *Camera {
@@ -192,7 +198,7 @@ func (x *Camera) WithTransform(transform raw.MDLTransformComponent) *Camera {
 	return x
 }
 
-// @property children @abstract Short hand property for the MDLObjectContainerComponent. @discussion The default value is an empty MDLObjectContainer @see MDLObjectContainerComponent
+// A component that manages this object’s collection of children.
 //
 // WithChildren sets the children property and returns the receiver for chaining.
 func (x *Camera) WithChildren(children raw.MDLObjectContainerComponent) *Camera {
@@ -200,41 +206,43 @@ func (x *Camera) WithChildren(children raw.MDLObjectContainerComponent) *Camera 
 	return x
 }
 
+// A Boolean value indicating whether this object should be used in rendering.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *Camera) WithHidden(hidden bool) *Camera {
 	x.inner.MDLObject.SetHidden(hidden)
 	return x
 }
 
-// Move the camera back and orient the camera so that a bounding box is framed within the current field of view. Uses the Y axis as up. If setNearAndFar is YES, the near and far visibility distances will be set.
+// Moves the camera such that the specified bounding box lies entirely within the camera’s field of view.
 //
 // FrameBoundingBoxSetNearAndFar calls the underlying FrameBoundingBoxSetNearAndFar.
 func (x *Camera) FrameBoundingBoxSetNearAndFar(boundingBox raw.MDLAxisAlignedBoundingBox, setNearAndFar bool) {
 	x.inner.FrameBoundingBoxSetNearAndFar(boundingBox, setNearAndFar)
 }
 
-// Orient the camera so that the camera points at focusPosition. Assumes that the Y axis is up.
+// Orients the camera to face toward the specified point.
 //
 // LookAt calls the underlying LookAt.
 func (x *Camera) LookAt(focusPosition unsafe.Pointer) {
 	x.inner.LookAt(focusPosition)
 }
 
-// Set the position of the camera and orient it so that it points at focusPosition. Assumes that the Y axis is up.
+// Sets the camera’s position and orients the camera to face toward the specified point.
 //
 // LookAtFrom calls the underlying LookAtFrom.
 func (x *Camera) LookAtFrom(focusPosition unsafe.Pointer, cameraPosition unsafe.Pointer) {
 	x.inner.LookAtFrom(focusPosition, cameraPosition)
 }
 
-// A convenience function to calculate a ray from the camera to a pixel in a viewport of a given size
+// Returns a point, in 3D world coordinates, corresponding to the specified 2D view coordinates.
 //
 // RayToForViewPort calls the underlying RayToForViewPort.
 func (x *Camera) RayToForViewPort(pixel unsafe.Pointer, size unsafe.Pointer) unsafe.Pointer {
 	return x.inner.RayToForViewPort(pixel, size)
 }
 
-// Create a bokeh kernel corresponding to the apertureBladeCount
+// Creates and returns a texture, based on the camera’s aperture blade count, to be used in rendering out-of-focus highlights in a scene.
 //
 // BokehKernelWithSize calls the underlying BokehKernelWithSize.
 func (x *Camera) BokehKernelWithSize(size unsafe.Pointer) *Texture {

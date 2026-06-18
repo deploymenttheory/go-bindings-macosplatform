@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing a single detected dog body in a picture.
+//
 // MetadataDogBodyObject wraps [raw.AVMetadataDogBodyObject] with a fluent Go API.
 type MetadataDogBodyObject struct {
 	inner *raw.AVMetadataDogBodyObject

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The shared object that registers you to receive metrics, creates logs for custom metrics, and gives access to past reports.
+//
 // MetricManager wraps [raw.MXMetricManager] with a fluent Go API.
 type MetricManager struct {
 	inner *raw.MXMetricManager
@@ -36,14 +38,14 @@ func NewMetricManager() *MetricManager {
 	return &MetricManager{inner: raw.MXMetricManagerFromID(_id)}
 }
 
-// @method        addSubscriber:subscriber @abstract      Adds a subscriber to the metric manager. @param         subscriber An object that conforms to the MXMetricManagerSubscriber protocol. @discussion    Subscribers can receive metric payloads by conforming to the MXMetricManagerSubscriber protocol.
+// Registers to receive a daily report of app metrics from the metrics manager.
 //
 // AddSubscriber calls the underlying AddSubscriber.
 func (x *MetricManager) AddSubscriber(subscriber raw.MXMetricManagerSubscriber) {
 	x.inner.AddSubscriber(subscriber)
 }
 
-// @method        removeSubscriber:subscriber @abstract      Removes a subscriber from the metric manager. @param         subscriber An object that conforms to the MXMetricManagerSubscriber protocol. @discussion    The subscriber indicated, if previously registered, will no longer receive metric payloads.
+// Unsubscribes from daily reports of app metrics.
 //
 // RemoveSubscriber calls the underlying RemoveSubscriber.
 func (x *MetricManager) RemoveSubscriber(subscriber raw.MXMetricManagerSubscriber) {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event that represents when the playback rate changes.
+//
 // MetricPlayerItemRateChangeEvent wraps [raw.AVMetricPlayerItemRateChangeEvent] with a fluent Go API.
 type MetricPlayerItemRateChangeEvent struct {
 	inner *raw.AVMetricPlayerItemRateChangeEvent

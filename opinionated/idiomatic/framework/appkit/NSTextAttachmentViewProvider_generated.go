@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A container object that associates a text attachment at a particular document location with a view object.
+//
 // TextAttachmentViewProvider wraps [raw.NSTextAttachmentViewProvider] with a fluent Go API.
 type TextAttachmentViewProvider struct {
 	inner *raw.NSTextAttachmentViewProvider
@@ -31,6 +33,8 @@ func TextAttachmentViewProviderFromID(id objc.ID) *TextAttachmentViewProvider {
 	return &TextAttachmentViewProvider{inner: raw.NSTextAttachmentViewProviderFromID(id)}
 }
 
+// Creates a new text attachment view whose content starts at the location you provide.
+//
 // NewTextAttachmentViewProviderWithTextAttachmentParentViewTextLayoutManagerLocation creates a new [TextAttachmentViewProvider].
 func NewTextAttachmentViewProviderWithTextAttachmentParentViewTextLayoutManagerLocation(textAttachment *raw.NSTextAttachment, parentView *raw.NSView, textLayoutManager *raw.NSTextLayoutManager, location raw.NSTextLocation) *TextAttachmentViewProvider {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextAttachmentViewProvider")), objc.RegisterName("alloc"))
@@ -38,23 +42,31 @@ func NewTextAttachmentViewProviderWithTextAttachmentParentViewTextLayoutManagerL
 	return &TextAttachmentViewProvider{inner: raw.NSTextAttachmentViewProviderFromID(_id)}
 }
 
+// The text attachment’s view.
+//
 // WithView sets the view property and returns the receiver for chaining.
 func (x *TextAttachmentViewProvider) WithView(view ViewProvider) *TextAttachmentViewProvider {
 	x.inner.SetView(view.asView())
 	return x
 }
 
+// A Boolean value that determines the text attachment’s bounds policy.
+//
 // WithTracksTextAttachmentViewBounds sets the tracksTextAttachmentViewBounds property and returns the receiver for chaining.
 func (x *TextAttachmentViewProvider) WithTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds bool) *TextAttachmentViewProvider {
 	x.inner.SetTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds)
 	return x
 }
 
+// Draws the custom view hierarchy that text attachment view subclasses implement.
+//
 // LoadView calls the underlying LoadView.
 func (x *TextAttachmentViewProvider) LoadView() {
 	x.inner.LoadView()
 }
 
+// Returns the layout bounds for an attachment at a specific text location that contains the text attributes you specify.
+//
 // AttachmentBoundsForAttributesLocationTextContainerProposedLineFragmentPosition calls the underlying AttachmentBoundsForAttributesLocationTextContainerProposedLineFragmentPosition.
 func (x *TextAttachmentViewProvider) AttachmentBoundsForAttributesLocationTextContainerProposedLineFragmentPosition(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], location raw.NSTextLocation, textContainer *raw.NSTextContainer, proposedLineFragment corefoundation.CGRect, position corefoundation.CGPoint) corefoundation.CGRect {
 	return x.inner.AttachmentBoundsForAttributesLocationTextContainerProposedLineFragmentPosition(attributes, location, textContainer, proposedLineFragment, position)

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that describes the properties of a create sparse operation.
+//
 // GraphCreateSparseOpDescriptor wraps [raw.MPSGraphCreateSparseOpDescriptor] with a fluent Go API.
 type GraphCreateSparseOpDescriptor struct {
 	inner *raw.MPSGraphCreateSparseOpDescriptor

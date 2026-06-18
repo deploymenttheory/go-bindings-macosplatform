@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents an updated group event.
+//
 // ChangeHistoryUpdateGroupEvent wraps [raw.CNChangeHistoryUpdateGroupEvent] with a fluent Go API.
 type ChangeHistoryUpdateGroupEvent struct {
 	inner *raw.CNChangeHistoryUpdateGroupEvent

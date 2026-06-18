@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An array of buffer layout descriptor objects.
+//
 // BufferLayoutDescriptorArray wraps [raw.MTLBufferLayoutDescriptorArray] with a fluent Go API.
 type BufferLayoutDescriptorArray struct {
 	inner *raw.MTLBufferLayoutDescriptorArray
@@ -35,6 +37,8 @@ func NewBufferLayoutDescriptorArray() *BufferLayoutDescriptorArray {
 	return &BufferLayoutDescriptorArray{inner: raw.MTLBufferLayoutDescriptorArrayFromID(_id)}
 }
 
+// Returns the state of the specified buffer layout.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *BufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index uint) *BufferLayoutDescriptor {
 	_r := x.inner.ObjectAtIndexedSubscript(index)
@@ -44,6 +48,8 @@ func (x *BufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index uint) *Buff
 	return &BufferLayoutDescriptor{inner: _r}
 }
 
+// Sets the state of the specified buffer layout.
+//
 // SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
 func (x *BufferLayoutDescriptorArray) SetObjectAtIndexedSubscript(bufferDesc *raw.MTLBufferLayoutDescriptor, index uint) {
 	x.inner.SetObjectAtIndexedSubscript(bufferDesc, index)

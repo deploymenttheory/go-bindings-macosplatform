@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A proxy for a Safari window.
+//
 // SafariWindow wraps [raw.SFSafariWindow] with a fluent Go API.
 type SafariWindow struct {
 	inner *raw.SFSafariWindow
@@ -37,7 +39,7 @@ func NewSafariWindow() *SafariWindow {
 	return &SafariWindow{inner: raw.SFSafariWindowFromID(_id)}
 }
 
-// Calls the completion handler with the active tab in the window.
+// Calls the completion handler with the active tab in the target window.
 //
 // GetActiveTab blocks until the operation completes or ctx is cancelled.
 func (x *SafariWindow) GetActiveTab(ctx context.Context) (*SafariTab, error) {
@@ -85,7 +87,7 @@ func (x *SafariWindow) GetAllTabs(ctx context.Context) (*foundation.NSArray[*raw
 	}
 }
 
-// This will open a tab at the end of the tab list. The completion handler is called when the tab has been opened.
+// Opens a tab at the end of the tab bar.
 //
 // OpenTabWithURLMakeActiveIfPossible blocks until the operation completes or ctx is cancelled.
 func (x *SafariWindow) OpenTabWithURLMakeActiveIfPossible(ctx context.Context, url string, activateTab bool) (*SafariTab, error) {
@@ -110,7 +112,7 @@ func (x *SafariWindow) OpenTabWithURLMakeActiveIfPossible(ctx context.Context, u
 	}
 }
 
-// Gets the extension’s toolbar item in this window.
+// Gets the extension’s toolbar item from the target window.
 //
 // GetToolbarItem blocks until the operation completes or ctx is cancelled.
 func (x *SafariWindow) GetToolbarItem(ctx context.Context) (*SafariToolbarItem, error) {

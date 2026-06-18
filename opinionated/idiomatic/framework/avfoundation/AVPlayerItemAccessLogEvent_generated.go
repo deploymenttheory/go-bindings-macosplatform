@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A single entry in a player item’s access log.
+//
 // PlayerItemAccessLogEvent wraps [raw.AVPlayerItemAccessLogEvent] with a fluent Go API.
 type PlayerItemAccessLogEvent struct {
 	inner *raw.AVPlayerItemAccessLogEvent

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A textual representation of the specified speech in its entirety, as recognized by the speech recognizer.
+//
 // Transcription wraps [raw.SFTranscription] with a fluent Go API.
 type Transcription struct {
 	inner *raw.SFTranscription

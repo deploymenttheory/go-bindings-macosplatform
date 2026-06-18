@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A view that embeds its content view in a dynamic glass effect.
+//
 // GlassEffectView wraps [raw.NSGlassEffectView] with a fluent Go API.
 type GlassEffectView struct {
 	inner *raw.NSGlassEffectView
@@ -40,7 +42,7 @@ func NewGlassEffectView() *GlassEffectView {
 	return &GlassEffectView{inner: raw.NSGlassEffectViewFromID(_id)}
 }
 
-// The view to embed in glass. - Important: `NSGlassEffectView` only guarantees the `contentView` will be placed inside the glass effect; arbitrary subviews aren't guaranteed specific behavior with regard to z-order in relation to the content view or glass effect.
+// The view to embed in glass.
 //
 // WithContentView sets the contentView property and returns the receiver for chaining.
 func (x *GlassEffectView) WithContentView(contentView ViewProvider) *GlassEffectView {
@@ -114,6 +116,8 @@ func (x *GlassEffectView) WithAutoresizingMask(autoresizingMask NSAutoresizingMa
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *GlassEffectView) WithFrame(frame corefoundation.CGRect) *GlassEffectView {
 	x.inner.NSView.SetFrame(frame)
@@ -138,6 +142,8 @@ func (x *GlassEffectView) WithBoundsRotation(boundsRotation float64) *GlassEffec
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *GlassEffectView) WithBounds(bounds corefoundation.CGRect) *GlassEffectView {
 	x.inner.NSView.SetBounds(bounds)
@@ -150,6 +156,8 @@ func (x *GlassEffectView) WithCanDrawConcurrently(canDrawConcurrently bool) *Gla
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *GlassEffectView) WithNeedsDisplay(needsDisplay bool) *GlassEffectView {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -336,7 +344,7 @@ func (x *GlassEffectView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets 
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *GlassEffectView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GlassEffectView {
@@ -392,24 +400,32 @@ func (x *GlassEffectView) WithPressureConfiguration(pressureConfiguration *Press
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *GlassEffectView) WithNextResponder(nextResponder ResponderProvider) *GlassEffectView {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *GlassEffectView) WithMenu(menu *Menu) *GlassEffectView {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *GlassEffectView) WithUserActivity(userActivity *foundation.NSUserActivity) *GlassEffectView {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *GlassEffectView) WithTouchBar(touchBar *TouchBar) *GlassEffectView {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())

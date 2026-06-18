@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes the characteristics of a physical surface.
+//
 // ShapeElement wraps [raw.PHASEShapeElement] with a fluent Go API.
 type ShapeElement struct {
 	inner *raw.PHASEShapeElement

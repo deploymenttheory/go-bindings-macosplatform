@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object of the CBGroupIdentity class represents a group identity and is used for viewing the attributes of group identities from an identity authority. The principal attributes of a CBGroupIdentity object are a POSIX group identifier (GID) and a list of members.
+//
 // GroupIdentity wraps [raw.CBGroupIdentity] with a fluent Go API.
 type GroupIdentity struct {
 	inner *raw.CBGroupIdentity

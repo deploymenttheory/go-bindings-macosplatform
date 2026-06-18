@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A bar item that, along with its delegate, provides a list of objects eligible for sharing.
+//
 // SharingServicePickerTouchBarItem wraps [raw.NSSharingServicePickerTouchBarItem] with a fluent Go API.
 type SharingServicePickerTouchBarItem struct {
 	inner *raw.NSSharingServicePickerTouchBarItem
@@ -39,30 +41,40 @@ func NewSharingServicePickerTouchBarItem() *SharingServicePickerTouchBarItem {
 	return &SharingServicePickerTouchBarItem{inner: raw.NSSharingServicePickerTouchBarItemFromID(_id)}
 }
 
+// The object that acts as the delegate of the sharing service picker bar item.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SharingServicePickerTouchBarItem) WithDelegate(delegate raw.NSSharingServicePickerTouchBarItemDelegate) *SharingServicePickerTouchBarItem {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// A Boolean value that specifies whether the sharing service picker item is enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *SharingServicePickerTouchBarItem) WithEnabled(enabled bool) *SharingServicePickerTouchBarItem {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// The text displayed in the sharing service picker item button.
+//
 // WithButtonTitle sets the buttonTitle property and returns the receiver for chaining.
 func (x *SharingServicePickerTouchBarItem) WithButtonTitle(buttonTitle string) *SharingServicePickerTouchBarItem {
 	x.inner.SetButtonTitle(foundation.NSStringStringWithUTF8String(buttonTitle))
 	return x
 }
 
+// The image displayed in the sharing service picker item button.
+//
 // WithButtonImage sets the buttonImage property and returns the receiver for chaining.
 func (x *SharingServicePickerTouchBarItem) WithButtonImage(buttonImage *Image) *SharingServicePickerTouchBarItem {
 	x.inner.SetButtonImage(buttonImage.Unwrap())
 	return x
 }
 
+// Determines which items are shown in a bar when space is limited.
+//
 // WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
 func (x *SharingServicePickerTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *SharingServicePickerTouchBarItem {
 	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)

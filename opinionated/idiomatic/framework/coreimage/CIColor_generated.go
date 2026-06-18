@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// The Core Image class that defines a color object.
+//
 // Color wraps [raw.CIColor] with a fluent Go API.
 type Color struct {
 	inner *raw.CIColor
@@ -31,7 +33,7 @@ func ColorFromID(id objc.ID) *Color {
 	return &Color{inner: raw.CIColorFromID(id)}
 }
 
-// Create a Core Image color object with a Core Graphics color object. - Returns: An initialized “CIColor“ instance.
+// Create a Core Image color object with a Core Graphics color object.
 //
 // NewColorWithCGColor creates a new [Color].
 func NewColorWithCGColor(color unsafe.Pointer) *Color {
@@ -40,7 +42,7 @@ func NewColorWithCGColor(color unsafe.Pointer) *Color {
 	return &Color{inner: raw.CIColorFromID(_id)}
 }
 
-// Initialize a Core Image color object in the sRGB color space with the specified red, green, blue, and alpha component values. On macOS before 10.10, the CIColor's color space will be Generic RGB. - Parameters: - red: The color's unpremultiplied red component value between 0 and 1. - green: The color's unpremultiplied green component value between 0 and 1. - blue: The color's unpremultiplied blue component value between 0 and 1. - alpha: The color's alpha (opacity) value between 0 and 1. - Returns: An initialized “CIColor“ instance.
+// Initialize a Core Image color object in the sRGB color space with the specified red, green, blue, and alpha component values.
 //
 // NewColorWithRedGreenBlueAlpha creates a new [Color].
 func NewColorWithRedGreenBlueAlpha(red float64, green float64, blue float64, alpha float64) *Color {
@@ -49,7 +51,7 @@ func NewColorWithRedGreenBlueAlpha(red float64, green float64, blue float64, alp
 	return &Color{inner: raw.CIColorFromID(_id)}
 }
 
-// Initialize a Core Image color object in the sRGB color space with the specified red, green, and blue component values. On macOS before 10.10, the CIColor's color space will be Generic RGB. - Parameters: - red: The color's unpremultiplied red component value between 0 and 1. - green: The color's unpremultiplied green component value between 0 and 1. - blue: The color's unpremultiplied blue component value between 0 and 1. - Returns: An initialized “CIColor“ instance.
+// Initialize a Core Image color object in the sRGB color space with the specified red, green, and blue component values.
 //
 // NewColorWithRedGreenBlue creates a new [Color].
 func NewColorWithRedGreenBlue(red float64, green float64, blue float64) *Color {
@@ -58,7 +60,7 @@ func NewColorWithRedGreenBlue(red float64, green float64, blue float64) *Color {
 	return &Color{inner: raw.CIColorFromID(_id)}
 }
 
-// Initialize a Core Image color object with the specified red, green, and blue component values as measured in the specified color space. This will return null if the `CGColorSpace` is not `kCGColorSpaceModelRGB`. The RGB values can be outside the `0...1` range if the `CGColorSpace` is unclamped. - Parameters: - red: The color's unpremultiplied red component value. - green: The color's unpremultiplied green component value. - blue: The color's unpremultiplied blue component value. - alpha: The color's alpha (opacity) value between 0 and 1. - colorSpace: The color's `CGColorSpace` which must have `kCGColorSpaceModelRGB`. - Returns: An initialized “CIColor“ instance.
+// Initialize a Core Image color object with the specified red, green, and blue component values as measured in the specified color space.
 //
 // NewColorWithRedGreenBlueAlphaColorSpace creates a new [Color].
 func NewColorWithRedGreenBlueAlphaColorSpace(red float64, green float64, blue float64, alpha float64, colorSpace unsafe.Pointer) *Color {
@@ -67,7 +69,7 @@ func NewColorWithRedGreenBlueAlphaColorSpace(red float64, green float64, blue fl
 	return &Color{inner: raw.CIColorFromID(_id)}
 }
 
-// Initialize a Core Image color object with the specified red, green, and blue component values as measured in the specified color space. This will return null if the `CGColorSpace` is not `kCGColorSpaceModelRGB`. The RGB values can be outside the `0...1` range if the `CGColorSpace` is unclamped. - Parameters: - red: The color's unpremultiplied red component value. - green: The color's unpremultiplied green component value. - blue: The color's unpremultiplied blue component value. - colorSpace: The color's `CGColorSpace` which must have `kCGColorSpaceModelRGB`. - Returns: An initialized “CIColor“ instance.
+// Initialize a Core Image color object with the specified red, green, and blue component values as measured in the specified color space.
 //
 // NewColorWithRedGreenBlueColorSpace creates a new [Color].
 func NewColorWithRedGreenBlueColorSpace(red float64, green float64, blue float64, colorSpace unsafe.Pointer) *Color {

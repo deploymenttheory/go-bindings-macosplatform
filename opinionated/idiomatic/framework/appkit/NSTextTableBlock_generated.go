@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A text block that appears as a cell in a text table.
+//
 // TextTableBlock wraps [raw.NSTextTableBlock] with a fluent Go API.
 type TextTableBlock struct {
 	inner *raw.NSTextTableBlock
@@ -29,6 +31,8 @@ func TextTableBlockFromID(id objc.ID) *TextTableBlock {
 	return &TextTableBlock{inner: raw.NSTextTableBlockFromID(id)}
 }
 
+// Returns an initialized text table block.
+//
 // NewTextTableBlockWithTableStartingRowRowSpanStartingColumnColumnSpan creates a new [TextTableBlock].
 func NewTextTableBlockWithTableStartingRowRowSpanStartingColumnColumnSpan(table *raw.NSTextTable, row int, rowSpan int, col int, colSpan int) *TextTableBlock {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextTableBlock")), objc.RegisterName("alloc"))
@@ -36,12 +40,16 @@ func NewTextTableBlockWithTableStartingRowRowSpanStartingColumnColumnSpan(table 
 	return &TextTableBlock{inner: raw.NSTextTableBlockFromID(_id)}
 }
 
+// The vertical alignment of the text block.
+//
 // WithVerticalAlignment sets the verticalAlignment property and returns the receiver for chaining.
 func (x *TextTableBlock) WithVerticalAlignment(verticalAlignment NSTextBlockVerticalAlignment) *TextTableBlock {
 	x.inner.NSTextBlock.SetVerticalAlignment(raw.NSTextBlockVerticalAlignment(verticalAlignment))
 	return x
 }
 
+// The background color of the text block.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *TextTableBlock) WithBackgroundColor(backgroundColor *Color) *TextTableBlock {
 	x.inner.NSTextBlock.SetBackgroundColor(backgroundColor.Unwrap())

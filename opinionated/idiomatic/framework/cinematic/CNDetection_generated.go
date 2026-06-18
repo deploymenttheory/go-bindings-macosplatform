@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A structure that represents a detected subject, face, torso or pet at a particular time.
+//
 // Detection wraps [raw.CNDetection] with a fluent Go API.
 type Detection struct {
 	inner *raw.CNDetection

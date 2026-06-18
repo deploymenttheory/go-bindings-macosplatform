@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A control for selecting from a set of mutually exclusive values by index.
+//
 // CaptureIndexPicker wraps [raw.AVCaptureIndexPicker] with a fluent Go API.
 type CaptureIndexPicker struct {
 	inner *raw.AVCaptureIndexPicker
@@ -31,7 +33,7 @@ func CaptureIndexPickerFromID(id objc.ID) *CaptureIndexPicker {
 	return &CaptureIndexPicker{inner: raw.AVCaptureIndexPickerFromID(id)}
 }
 
-// @method initWithLocalizedTitle:symbolName:numberOfIndexes: @abstract Initializes an `AVCaptureIndexPicker` to pick between `numberOfIndexes` values. @param localizedTitle A localized string that describes the picker's `action`. @param symbolName The name of a symbol to represent the picker. @param numberOfIndexes The number of indexes to pick between. `numberOfIndexes` must be greater than 0, otherwise an `NSInvalidArgumentException` is thrown. @result An `AVCaptureIndexPicker` instance that picks between `numberOfIndexes` values. @discussion Suitable when your picked values don't need titles.
+// Creates a control to pick a value from the specified number of indexes.
 //
 // NewCaptureIndexPickerWithLocalizedTitleSymbolNameNumberOfIndexes creates a new [CaptureIndexPicker].
 func NewCaptureIndexPickerWithLocalizedTitleSymbolNameNumberOfIndexes(localizedTitle string, symbolName string, numberOfIndexes int) *CaptureIndexPicker {
@@ -40,7 +42,7 @@ func NewCaptureIndexPickerWithLocalizedTitleSymbolNameNumberOfIndexes(localizedT
 	return &CaptureIndexPicker{inner: raw.AVCaptureIndexPickerFromID(_id)}
 }
 
-// @method initWithLocalizedTitle:symbolName:numberOfIndexes:localizedTitleTransform: @abstract Initializes an `AVCaptureIndexPicker` to pick between `numberOfIndexes` values. @param localizedTitle A localized string that describes the picker's `action`. @param symbolName The name of a symbol to represent the picker. @param numberOfIndexes The number of indexes to pick between. `numberOfIndexes` must be greater than 0, otherwise an `NSInvalidArgumentException` is thrown. @param localizedTitleTransform A transformation from index to localized title. @result An `AVCaptureIndexPicker` instance that picks between `numberOfIndexes` values with a transformation from index to localized title. @discussion Suitable when you want to provide a title for each picked value lazily.
+// Creates a control to pick a value from the specified number of indices.
 //
 // NewCaptureIndexPickerWithLocalizedTitleSymbolNameNumberOfIndexesLocalizedTitleTransform creates a new [CaptureIndexPicker].
 func NewCaptureIndexPickerWithLocalizedTitleSymbolNameNumberOfIndexesLocalizedTitleTransform(localizedTitle string, symbolName string, numberOfIndexes int, localizedTitleTransform objc.Block) *CaptureIndexPicker {
@@ -49,7 +51,7 @@ func NewCaptureIndexPickerWithLocalizedTitleSymbolNameNumberOfIndexesLocalizedTi
 	return &CaptureIndexPicker{inner: raw.AVCaptureIndexPickerFromID(_id)}
 }
 
-// @method initWithLocalizedTitle:symbolName:localizedIndexTitles: @abstract Initializes an `AVCaptureIndexPicker` to pick between `localizedIndexTitles.count` values. @param localizedTitle A localized string that describes the picker's `action`. @param symbolName The name of a symbol to represent the picker. @param localizedIndexTitles The titles to use for each index. `localizedIndexTitles` must be greater than 0, otherwise an `NSInvalidArgumentException` is thrown. @result An `AVCaptureIndexPicker` instance that picks between `localizedIndexTitles.count` values. @discussion Suitable when you already have an array containing a title for each picked value.
+// Creates an object to select an index from a set of values.
 //
 // NewCaptureIndexPickerWithLocalizedTitleSymbolNameLocalizedIndexTitles creates a new [CaptureIndexPicker].
 func NewCaptureIndexPickerWithLocalizedTitleSymbolNameLocalizedIndexTitles(localizedTitle string, symbolName string, localizedIndexTitles *foundation.NSArray[*foundation.NSString]) *CaptureIndexPicker {
@@ -58,7 +60,7 @@ func NewCaptureIndexPickerWithLocalizedTitleSymbolNameLocalizedIndexTitles(local
 	return &CaptureIndexPicker{inner: raw.AVCaptureIndexPickerFromID(_id)}
 }
 
-// @property selectedIndex @abstract The currently selected index. @discussion Because the camera system may be independent from the main thread or `@MainActor`, `selectedIndex` must be changed on `actionQueue` – the queue provided to `setActionQueue:action:`. The default value is 0. An index may only be set if it is greater than 0 or less than `numberOfIndexes`, otherwise an `NSInvalidArgumentException` is thrown.
+// The currently selected index.
 //
 // WithSelectedIndex sets the selectedIndex property and returns the receiver for chaining.
 func (x *CaptureIndexPicker) WithSelectedIndex(selectedIndex int) *CaptureIndexPicker {
@@ -66,7 +68,7 @@ func (x *CaptureIndexPicker) WithSelectedIndex(selectedIndex int) *CaptureIndexP
 	return x
 }
 
-// @property accessibilityIdentifier @abstract A string that identifies the picker.
+// A string identifier for this control.
 //
 // WithAccessibilityIdentifier sets the accessibilityIdentifier property and returns the receiver for chaining.
 func (x *CaptureIndexPicker) WithAccessibilityIdentifier(accessibilityIdentifier string) *CaptureIndexPicker {
@@ -74,7 +76,7 @@ func (x *CaptureIndexPicker) WithAccessibilityIdentifier(accessibilityIdentifier
 	return x
 }
 
-// @property enabled @abstract Indicates whether the control should be enabled for user interaction. @discussion The value of this property is a `BOOL` that determines whether the control should be enabled for user interaction. Clients can set this property to keep a control added to an `AVCaptureSession` but prevent it from being interacted with by the user. A control's value may still be changed while it is disabled. The default value is `YES`.
+// A Boolean value that indicates whether this control supports user interaction.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *CaptureIndexPicker) WithEnabled(enabled bool) *CaptureIndexPicker {
@@ -82,7 +84,7 @@ func (x *CaptureIndexPicker) WithEnabled(enabled bool) *CaptureIndexPicker {
 	return x
 }
 
-// @method setActionQueue:action: @abstract Configures the picker's `action` which is called on `actionQueue` whenever the index of the picker is changed. @param actionQueue A queue for the `action` to be called. @param action An action called on `actionQueue` whenever the selected index of the picker is changed. @discussion Because the camera system may be independent from the main thread or `@MainActor`, `action` is always called on an internal `DispatchSerialQueue` targeted at `actionQueue`. If `action` modifies a property of the camera system, `actionQueue` must represent the same exclusive execution context as the camera system (see `isSameExclusiveExecutionContext`).
+// Sets the action to perform on the specified dispatch queue when the control’s value changes.
 //
 // SetActionQueueAction calls the underlying SetActionQueueAction.
 func (x *CaptureIndexPicker) SetActionQueueAction(actionQueue *foundation.NSObject, action func(int)) {

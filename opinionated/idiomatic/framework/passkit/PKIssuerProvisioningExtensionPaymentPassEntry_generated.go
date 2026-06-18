@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a payment card available to add as a payment pass.
+//
 // IssuerProvisioningExtensionPaymentPassEntry wraps [raw.PKIssuerProvisioningExtensionPaymentPassEntry] with a fluent Go API.
 type IssuerProvisioningExtensionPaymentPassEntry struct {
 	inner *raw.PKIssuerProvisioningExtensionPaymentPassEntry
@@ -33,6 +35,8 @@ func IssuerProvisioningExtensionPaymentPassEntryFromID(id objc.ID) *IssuerProvis
 	return &IssuerProvisioningExtensionPaymentPassEntry{inner: raw.PKIssuerProvisioningExtensionPaymentPassEntryFromID(id)}
 }
 
+// Creates a new entry for a payment pass that a user adds to Wallet.
+//
 // NewIssuerProvisioningExtensionPaymentPassEntryWithIdentifierTitleArtAddRequestConfiguration creates a new [IssuerProvisioningExtensionPaymentPassEntry].
 func NewIssuerProvisioningExtensionPaymentPassEntryWithIdentifierTitleArtAddRequestConfiguration(identifier string, title string, art unsafe.Pointer, configuration *raw.PKAddPaymentPassRequestConfiguration) *IssuerProvisioningExtensionPaymentPassEntry {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKIssuerProvisioningExtensionPaymentPassEntry")), objc.RegisterName("alloc"))

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The locations of haptic actuators on a game controller.
+//
 // DeviceHaptics wraps [raw.GCDeviceHaptics] with a fluent Go API.
 type DeviceHaptics struct {
 	inner *raw.GCDeviceHaptics
@@ -37,7 +39,7 @@ func NewDeviceHaptics() *DeviceHaptics {
 	return &DeviceHaptics{inner: raw.GCDeviceHapticsFromID(_id)}
 }
 
-// Creates and returns a new instance of CHHapticEngine with a given GCHapticsLocality. Any patterns you send to this engine will play on all specified actuators. @note Often times, it is best to use GCHapticsLocalityDefault. Engines created with the default locality will give users an expected haptic experience. On most game controllers, this will cause your haptic patterns to play on the handles. If you want to play different experiences on different actuators (for example, using the left handle actuator as a woofer and the right actuator as a tweeter), you can create multiple engines (for example, one with a GCHapticsLocalityLeftHandle locality and another with a GCHapticsLocalityRightHandle locality). @see CHHapticEngine @see GCHapticsLocality
+// Creates a haptics engine with the specified locality.
 //
 // CreateEngineWithLocality calls the underlying CreateEngineWithLocality.
 func (x *DeviceHaptics) CreateEngineWithLocality(locality *foundation.NSString) *corehaptics.CHHapticEngine {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of the input and output data of a function.
+//
 // StageInputOutputDescriptor wraps [raw.MTLStageInputOutputDescriptor] with a fluent Go API.
 type StageInputOutputDescriptor struct {
 	inner *raw.MTLStageInputOutputDescriptor
@@ -35,18 +37,24 @@ func NewStageInputOutputDescriptor() *StageInputOutputDescriptor {
 	return &StageInputOutputDescriptor{inner: raw.MTLStageInputOutputDescriptorFromID(_id)}
 }
 
+// The data type of the indices stored in the index buffer.
+//
 // WithIndexType sets the indexType property and returns the receiver for chaining.
 func (x *StageInputOutputDescriptor) WithIndexType(indexType MTLIndexType) *StageInputOutputDescriptor {
 	x.inner.SetIndexType(raw.MTLIndexType(indexType))
 	return x
 }
 
+// The location of the index buffer for a compute function using indexed thread addressing.
+//
 // WithIndexBufferIndex sets the indexBufferIndex property and returns the receiver for chaining.
 func (x *StageInputOutputDescriptor) WithIndexBufferIndex(indexBufferIndex uint) *StageInputOutputDescriptor {
 	x.inner.SetIndexBufferIndex(indexBufferIndex)
 	return x
 }
 
+// Resets the default state for the descriptor.
+//
 // Reset calls the underlying Reset.
 func (x *StageInputOutputDescriptor) Reset() {
 	x.inner.Reset()

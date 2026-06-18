@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An interface for configuring platform single sign-on.
+//
 // AuthorizationProviderExtensionLoginConfiguration wraps [raw.ASAuthorizationProviderExtensionLoginConfiguration] with a fluent Go API.
 type AuthorizationProviderExtensionLoginConfiguration struct {
 	inner *raw.ASAuthorizationProviderExtensionLoginConfiguration
@@ -34,7 +36,7 @@ func AuthorizationProviderExtensionLoginConfigurationFromID(id objc.ID) *Authori
 	return &AuthorizationProviderExtensionLoginConfiguration{inner: raw.ASAuthorizationProviderExtensionLoginConfigurationFromID(id)}
 }
 
-// @abstract Initializes an ASAuthorizationProviderExtensionLoginConfiguration class with the required values. @param clientID The client_id for the Apple platform SSO login at the identity provider. @param issuer The issuer for the requests, used to validate responses. @param tokenEndpointURL The token endpoint at the idP for login. @param jwksEndpointURL The JWKS URL at the idP for validating tokens. @param audience The audience used for signed assertions.  This should be the tenent at the idP. @return An instance of a ASAuthorizationProviderExtensionLoginConfiguration.
+// Creates a configuration with the required values.
 //
 // NewAuthorizationProviderExtensionLoginConfigurationWithClientIDIssuerTokenEndpointURLJwksEndpointURLAudience creates a new [AuthorizationProviderExtensionLoginConfiguration].
 func NewAuthorizationProviderExtensionLoginConfigurationWithClientIDIssuerTokenEndpointURLJwksEndpointURLAudience(clientID string, issuer string, tokenEndpointURL string, jwksEndpointURL string, audience string) *AuthorizationProviderExtensionLoginConfiguration {
@@ -43,7 +45,7 @@ func NewAuthorizationProviderExtensionLoginConfigurationWithClientIDIssuerTokenE
 	return &AuthorizationProviderExtensionLoginConfiguration{inner: raw.ASAuthorizationProviderExtensionLoginConfigurationFromID(_id)}
 }
 
-// @abstract Predicate string used to identify invalid credential errors. @discussion If there is an HTTP 400 or HTTP 401 error when authenticating, this predicate will be used on the response body JSON to determine if the error is due to an invalid password or something else.  If nil, then only an HTTP 401 will be used for an invalid credential.
+// The predicate string that identifies invalid credential errors.
 //
 // WithInvalidCredentialPredicate sets the invalidCredentialPredicate property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithInvalidCredentialPredicate(invalidCredentialPredicate string) *AuthorizationProviderExtensionLoginConfiguration {
@@ -51,7 +53,7 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithInvalidCredential
 	return x
 }
 
-// @abstract The display name for the account.  Used for notifications and login prompts.
+// The display name for the account.
 //
 // WithAccountDisplayName sets the accountDisplayName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithAccountDisplayName(accountDisplayName string) *AuthorizationProviderExtensionLoginConfiguration {
@@ -59,7 +61,7 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithAccountDisplayNam
 	return x
 }
 
-// @abstract The audience for validation and requests.
+// The audience for validation and requests.
 //
 // WithAudience sets the audience property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithAudience(audience string) *AuthorizationProviderExtensionLoginConfiguration {
@@ -67,7 +69,7 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithAudience(audience
 	return x
 }
 
-// @abstract Token Endpoint URL for login request.
+// The token endpoint URL for login requests.
 //
 // WithTokenEndpointURL sets the tokenEndpointURL property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithTokenEndpointURL(tokenEndpointURL string) *AuthorizationProviderExtensionLoginConfiguration {
@@ -75,7 +77,7 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithTokenEndpointURL(
 	return x
 }
 
-// @abstract JWKS Endpoint URL for keys.
+// The JSON Web Key Set endpoint URL for keys.
 //
 // WithJwksEndpointURL sets the jwksEndpointURL property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithJwksEndpointURL(jwksEndpointURL string) *AuthorizationProviderExtensionLoginConfiguration {
@@ -99,7 +101,7 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithUserSecureEnclave
 	return x
 }
 
-// @abstract Nonce Endpoint URL, defaults to token tokenEndpointURL.
+// The URL to retrieve a one-time use value from the server.
 //
 // WithNonceEndpointURL sets the nonceEndpointURL property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithNonceEndpointURL(nonceEndpointURL string) *AuthorizationProviderExtensionLoginConfiguration {
@@ -107,7 +109,7 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithNonceEndpointURL(
 	return x
 }
 
-// @abstract The keypath in the nonce response that contains the nonce value.
+// The keypath in the response that contains the one-time use value.
 //
 // WithNonceResponseKeypath sets the nonceResponseKeypath property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithNonceResponseKeypath(nonceResponseKeypath string) *AuthorizationProviderExtensionLoginConfiguration {
@@ -115,7 +117,7 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithNonceResponseKeyp
 	return x
 }
 
-// @abstract The name of the server nonce claim when included in authentication requests.
+// The name of the claim to include in authentication requests.
 //
 // WithServerNonceClaimName sets the serverNonceClaimName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithServerNonceClaimName(serverNonceClaimName string) *AuthorizationProviderExtensionLoginConfiguration {
@@ -123,7 +125,7 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithServerNonceClaimN
 	return x
 }
 
-// @abstract Custom values added to the server nonce POST request body.
+// Custom values to add to the server nonce POST request body.
 //
 // WithCustomNonceRequestValues sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomNonceRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration {
@@ -143,7 +145,7 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomNonceReques
 	return x
 }
 
-// @abstract Additional login scopes.
+// A set of extra scopes to add to the base for the authentication request.
 //
 // WithAdditionalScopes sets the additionalScopes property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithAdditionalScopes(additionalScopes string) *AuthorizationProviderExtensionLoginConfiguration {
@@ -159,7 +161,7 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithAdditionalAuthori
 	return x
 }
 
-// @abstract If true and there is a refresh token for the user in the SSO tokens, it will be included in the login request.
+// A Boolean value that indicates whether to include the previous refresh token in the authentation request.
 //
 // WithIncludePreviousRefreshTokenInLoginRequest sets the includePreviousRefreshTokenInLoginRequest property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithIncludePreviousRefreshTokenInLoginRequest(includePreviousRefreshTokenInLoginRequest bool) *AuthorizationProviderExtensionLoginConfiguration {
@@ -167,7 +169,7 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithIncludePreviousRe
 	return x
 }
 
-// @abstract The claim name for the previous SSO token value in the login request.
+// The claim name for the previous single sign-on token value in the authentication request.
 //
 // WithPreviousRefreshTokenClaimName sets the previousRefreshTokenClaimName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithPreviousRefreshTokenClaimName(previousRefreshTokenClaimName string) *AuthorizationProviderExtensionLoginConfiguration {
@@ -183,7 +185,7 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomRequestJWTP
 	return x
 }
 
-// @abstract Custom values added to the login POST request body.
+// Provider-supplied values to add to the login POST request body.
 //
 // WithCustomLoginRequestValues sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomLoginRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration {
@@ -227,7 +229,7 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithGroupResponseClai
 	return x
 }
 
-// @abstract The Kerberos ticket mappings to use.
+// The set of ticket mappings the system uses to import Kerberos tickets from the single sign-on token.
 //
 // WithKerberosTicketMappings sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithKerberosTicketMappings(items ...*raw.ASAuthorizationProviderExtensionKerberosMapping) *AuthorizationProviderExtensionLoginConfiguration {
@@ -439,28 +441,28 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithHpkePreSharedKeyI
 	return x
 }
 
-// @abstract Sets custom claims to be added to the embedded assertion request header. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+// Adds the custom claims to the embedded assertion request header.
 //
 // SetCustomAssertionRequestHeaderClaimsReturningError calls the underlying SetCustomAssertionRequestHeaderClaimsReturningError.
 func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomAssertionRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.SetCustomAssertionRequestHeaderClaimsReturningError(claims)
 }
 
-// @abstract Sets custom claims to be added to the embedded assertion request body. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+// Adds the custom claims to the embedded assertion request body.
 //
 // SetCustomAssertionRequestBodyClaimsReturningError calls the underlying SetCustomAssertionRequestBodyClaimsReturningError.
 func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomAssertionRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.SetCustomAssertionRequestBodyClaimsReturningError(claims)
 }
 
-// @abstract Sets custom claims to be added to the login request header. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+// Adds the custom claims to the login request header.
 //
 // SetCustomLoginRequestHeaderClaimsReturningError calls the underlying SetCustomLoginRequestHeaderClaimsReturningError.
 func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomLoginRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.SetCustomLoginRequestHeaderClaimsReturningError(claims)
 }
 
-// @abstract Sets custom claims to be added to the login request body. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+// Adds the custom claims to the login request body.
 //
 // SetCustomLoginRequestBodyClaimsReturningError calls the underlying SetCustomLoginRequestBodyClaimsReturningError.
 func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomLoginRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {

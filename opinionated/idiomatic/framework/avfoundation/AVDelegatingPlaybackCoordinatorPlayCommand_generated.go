@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A command that indicates to play at a specific rate and time.
+//
 // DelegatingPlaybackCoordinatorPlayCommand wraps [raw.AVDelegatingPlaybackCoordinatorPlayCommand] with a fluent Go API.
 type DelegatingPlaybackCoordinatorPlayCommand struct {
 	inner *raw.AVDelegatingPlaybackCoordinatorPlayCommand

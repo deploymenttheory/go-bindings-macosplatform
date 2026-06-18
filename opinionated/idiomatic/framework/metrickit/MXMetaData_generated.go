@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object containing system-level information about the device.
+//
 // MetaData wraps [raw.MXMetaData] with a fluent Go API.
 type MetaData struct {
 	inner *raw.MXMetaData
@@ -37,14 +39,14 @@ func NewMetaData() *MetaData {
 	return &MetaData{inner: raw.MXMetaDataFromID(_id)}
 }
 
-// @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this metadata. @result        An NSData object containing the JSON representation
+// Returns the contents of the metadata in JSON format.
 //
 // JSONRepresentation calls the underlying JSONRepresentation.
 func (x *MetaData) JSONRepresentation() *foundation.NSData {
 	return x.inner.JSONRepresentation()
 }
 
-// @method        dictionaryRepresentation @abstract      Convenience method to return a NSDictionary representation of this metadata. @result        An NSDictionary object containing the dictionary representation
+// Returns the contents of the metadata as a dictionary.
 //
 // DictionaryRepresentation calls the underlying DictionaryRepresentation.
 func (x *MetaData) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {

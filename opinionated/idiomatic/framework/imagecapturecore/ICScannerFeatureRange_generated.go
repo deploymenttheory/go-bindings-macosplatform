@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A feature with a value that lies within a range.
+//
 // ScannerFeatureRange wraps [raw.ICScannerFeatureRange] with a fluent Go API.
 type ScannerFeatureRange struct {
 	inner *raw.ICScannerFeatureRange

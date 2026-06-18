@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A view that arranges an array of views horizontally or vertically and updates their placement and sizing when the window size changes.
+//
 // StackView wraps [raw.NSStackView] with a fluent Go API.
 type StackView struct {
 	inner *raw.NSStackView
@@ -41,13 +43,15 @@ func NewStackView() *StackView {
 	return &StackView{inner: raw.NSStackViewFromID(_id)}
 }
 
+// The delegate object for the stack view.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *StackView) WithDelegate(delegate raw.NSStackViewDelegate) *StackView {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
-// Orientation of the StackView, defaults to NSUserInterfaceLayoutOrientationHorizontal
+// The horizontal or vertical layout direction of the stack view.
 //
 // WithOrientation sets the orientation property and returns the receiver for chaining.
 func (x *StackView) WithOrientation(orientation NSUserInterfaceLayoutOrientation) *StackView {
@@ -55,7 +59,7 @@ func (x *StackView) WithOrientation(orientation NSUserInterfaceLayoutOrientation
 	return x
 }
 
-// Describes how subviews are aligned within the StackView, defaults to `NSLayoutAttributeCenterY` for horizontal stacks, `NSLayoutAttributeCenterX` for vertical stacks. Setting `NSLayoutAttributeNotAnAttribute` will cause the internal alignment constraints to not be created, and could result in an ambiguous layout. Setting an inapplicable attribute for the set orientation will result in the alignment being ignored (similar to its handling with NSLayoutAttributeNotAnAttribute). The alignment constraints are established at a priority of `NSLayoutPriorityDefaultLow` and are overridable for individual views using external constraints.
+// The view alignment within the stack view.
 //
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *StackView) WithAlignment(alignment NSLayoutAttribute) *StackView {
@@ -63,7 +67,7 @@ func (x *StackView) WithAlignment(alignment NSLayoutAttribute) *StackView {
 	return x
 }
 
-// Default padding inside the StackView, around all of the subviews.
+// The geometric padding, in points, inside the stack view, surrounding its views.
 //
 // WithEdgeInsets sets the edgeInsets property and returns the receiver for chaining.
 func (x *StackView) WithEdgeInsets(edgeInsets foundation.NSEdgeInsets) *StackView {
@@ -71,7 +75,7 @@ func (x *StackView) WithEdgeInsets(edgeInsets foundation.NSEdgeInsets) *StackVie
 	return x
 }
 
-// The spacing and sizing distribution of stacked views along the primary axis. The default value is `gravityAreas`.
+// The spacing and sizing distribution of stacked views along the primary axis.
 //
 // WithDistribution sets the distribution property and returns the receiver for chaining.
 func (x *StackView) WithDistribution(distribution NSStackViewDistribution) *StackView {
@@ -79,7 +83,7 @@ func (x *StackView) WithDistribution(distribution NSStackViewDistribution) *Stac
 	return x
 }
 
-// Default (minimum) spacing between each view
+// The minimum spacing, in points, between adjacent views in the stack view.
 //
 // WithSpacing sets the spacing property and returns the receiver for chaining.
 func (x *StackView) WithSpacing(spacing float64) *StackView {
@@ -87,7 +91,7 @@ func (x *StackView) WithSpacing(spacing float64) *StackView {
 	return x
 }
 
-// If YES, when a stacked view's `hidden` property is set to YES, the view will be detached from the stack and reattached when set to NO. Similarly, if the view has a lowered visibility priority and is detached from the stack view, it will be set as `hidden` rather than removed from the view hierarchy. Defaults to YES for apps linked on the 10.11 SDK or later.
+// A Boolean value that indicates whether the stack view removes hidden views from its view hierarchy.
 //
 // WithDetachesHiddenViews sets the detachesHiddenViews property and returns the receiver for chaining.
 func (x *StackView) WithDetachesHiddenViews(detachesHiddenViews bool) *StackView {
@@ -95,6 +99,8 @@ func (x *StackView) WithDetachesHiddenViews(detachesHiddenViews bool) *StackView
 	return x
 }
 
+// A Boolean value that indicates whether the spacing between adjacent views should be equal to each other.
+//
 // WithHasEqualSpacing sets the hasEqualSpacing property and returns the receiver for chaining.
 func (x *StackView) WithHasEqualSpacing(hasEqualSpacing bool) *StackView {
 	x.inner.SetHasEqualSpacing(hasEqualSpacing)
@@ -143,6 +149,8 @@ func (x *StackView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOpti
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *StackView) WithFrame(frame corefoundation.CGRect) *StackView {
 	x.inner.NSView.SetFrame(frame)
@@ -167,6 +175,8 @@ func (x *StackView) WithBoundsRotation(boundsRotation float64) *StackView {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *StackView) WithBounds(bounds corefoundation.CGRect) *StackView {
 	x.inner.NSView.SetBounds(bounds)
@@ -179,6 +189,8 @@ func (x *StackView) WithCanDrawConcurrently(canDrawConcurrently bool) *StackView
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *StackView) WithNeedsDisplay(needsDisplay bool) *StackView {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -365,7 +377,7 @@ func (x *StackView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets founda
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *StackView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *StackView {
@@ -421,86 +433,110 @@ func (x *StackView) WithPressureConfiguration(pressureConfiguration *PressureCon
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *StackView) WithNextResponder(nextResponder ResponderProvider) *StackView {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *StackView) WithMenu(menu *Menu) *StackView {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *StackView) WithUserActivity(userActivity *foundation.NSUserActivity) *StackView {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *StackView) WithTouchBar(touchBar *TouchBar) *StackView {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Specifies the custom spacing, in points, between a specified view and the view that follows it in the stack view.
+//
 // SetCustomSpacingAfterView calls the underlying SetCustomSpacingAfterView.
 func (x *StackView) SetCustomSpacingAfterView(spacing float64, view *raw.NSView) {
 	x.inner.SetCustomSpacingAfterView(spacing, view)
 }
 
+// Returns the custom spacing, in points, between a specified view in the stack view and the view that follows it.
+//
 // CustomSpacingAfterView calls the underlying CustomSpacingAfterView.
 func (x *StackView) CustomSpacingAfterView(view *raw.NSView) float64 {
 	return x.inner.CustomSpacingAfterView(view)
 }
 
-// Adds a view to the end of the arrangedSubviews list. If the view is not a subview of the receiver, it will be added as one.
+// Adds the specified view to the end of the arranged subviews list.
 //
 // AddArrangedSubview calls the underlying AddArrangedSubview.
 func (x *StackView) AddArrangedSubview(view *raw.NSView) {
 	x.inner.AddArrangedSubview(view)
 }
 
-// Adds a view to the arrangedSubviews list at a specific index. If the view is already in the arrangedSubviews list, it will move the view to the specified index (but not change the subview index). If the view is not a subview of the receiver, it will be added as one (not necessarily at the same index).
+// Adds the provided view to the array of arranged subviews at the specified index.
 //
 // InsertArrangedSubviewAtIndex calls the underlying InsertArrangedSubviewAtIndex.
 func (x *StackView) InsertArrangedSubviewAtIndex(view *raw.NSView, index int) {
 	x.inner.InsertArrangedSubviewAtIndex(view, index)
 }
 
-// Removes a subview from the list of arranged subviews without removing it as a subview of the receiver. Removing the view as a subview (either by -[view removeFromSuperview] or setting the receiver's subviews) will automatically remove it as an arranged subview.
+// Removes the provided view from the stack’s array of arranged subviews.
 //
 // RemoveArrangedSubview calls the underlying RemoveArrangedSubview.
 func (x *StackView) RemoveArrangedSubview(view *raw.NSView) {
 	x.inner.RemoveArrangedSubview(view)
 }
 
+// Sets the Auto Layout priority for a view to remain attached to the stack view when Auto Layout reduces the stack view’s size.
+//
 // SetVisibilityPriorityForView calls the underlying SetVisibilityPriorityForView.
 func (x *StackView) SetVisibilityPriorityForView(priority float32, view *raw.NSView) {
 	x.inner.SetVisibilityPriorityForView(priority, view)
 }
 
+// Returns the visibility priority for a specified view in the stack view.
+//
 // VisibilityPriorityForView calls the underlying VisibilityPriorityForView.
 func (x *StackView) VisibilityPriorityForView(view *raw.NSView) float32 {
 	return x.inner.VisibilityPriorityForView(view)
 }
 
+// Returns the Auto Layout priority for resisting clipping of views in the stack view when Auto Layout attempts to reduce the stack view’s size.
+//
 // ClippingResistancePriorityForOrientation calls the underlying ClippingResistancePriorityForOrientation.
 func (x *StackView) ClippingResistancePriorityForOrientation(orientation NSLayoutConstraintOrientation) float32 {
 	return x.inner.ClippingResistancePriorityForOrientation(raw.NSLayoutConstraintOrientation(orientation))
 }
 
+// Sets the Auto Layout priority for resisting clipping of views in the stack view when Auto Layout attempts to reduce the stack view’s size.
+//
 // SetClippingResistancePriorityForOrientation calls the underlying SetClippingResistancePriorityForOrientation.
 func (x *StackView) SetClippingResistancePriorityForOrientation(clippingResistancePriority float32, orientation NSLayoutConstraintOrientation) {
 	x.inner.SetClippingResistancePriorityForOrientation(clippingResistancePriority, raw.NSLayoutConstraintOrientation(orientation))
 }
 
+// Returns the Auto Layout priority for the stack view to minimize its size to fit its contained views as closely as possible, for a specified user interface axis.
+//
 // HuggingPriorityForOrientation calls the underlying HuggingPriorityForOrientation.
 func (x *StackView) HuggingPriorityForOrientation(orientation NSLayoutConstraintOrientation) float32 {
 	return x.inner.HuggingPriorityForOrientation(raw.NSLayoutConstraintOrientation(orientation))
 }
 
+// Sets the Auto Layout priority for the stack view to minimize its size, for a specified user interface axis.
+//
 // SetHuggingPriorityForOrientation calls the underlying SetHuggingPriorityForOrientation.
 func (x *StackView) SetHuggingPriorityForOrientation(huggingPriority float32, orientation NSLayoutConstraintOrientation) {
 	x.inner.SetHuggingPriorityForOrientation(huggingPriority, raw.NSLayoutConstraintOrientation(orientation))
@@ -626,26 +662,36 @@ func (x *StackView) DetachedViews() []*View {
 	})
 }
 
+// Adds a view to the end of the stack view gravity area.
+//
 // AddViewInGravity calls the underlying AddViewInGravity.
 func (x *StackView) AddViewInGravity(view *raw.NSView, gravity NSStackViewGravity) {
 	x.inner.AddViewInGravity(view, raw.NSStackViewGravity(gravity))
 }
 
+// Adds a view to a stack view gravity area at a specified index position.
+//
 // InsertViewAtIndexInGravity calls the underlying InsertViewAtIndexInGravity.
 func (x *StackView) InsertViewAtIndexInGravity(view *raw.NSView, index uint, gravity NSStackViewGravity) {
 	x.inner.InsertViewAtIndexInGravity(view, index, raw.NSStackViewGravity(gravity))
 }
 
+// Removes a specified view from the stack view.
+//
 // RemoveView calls the underlying RemoveView.
 func (x *StackView) RemoveView(view *raw.NSView) {
 	x.inner.RemoveView(view)
 }
 
+// Returns the array of views in the specified gravity area in the stack view.
+//
 // ViewsInGravity calls the underlying ViewsInGravity.
 func (x *StackView) ViewsInGravity(gravity NSStackViewGravity) *foundation.NSArray[*raw.NSView] {
 	return x.inner.ViewsInGravity(raw.NSStackViewGravity(gravity))
 }
 
+// Specifies an array of views for a specified gravity area in the stack view, replacing any previous views in that area.
+//
 // SetViewsInGravity calls the underlying SetViewsInGravity.
 func (x *StackView) SetViewsInGravity(views *foundation.NSArray[*raw.NSView], gravity NSStackViewGravity) {
 	x.inner.SetViewsInGravity(views, raw.NSStackViewGravity(gravity))

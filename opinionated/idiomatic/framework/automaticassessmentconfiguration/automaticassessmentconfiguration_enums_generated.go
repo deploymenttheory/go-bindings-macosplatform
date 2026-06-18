@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// The set of autocorrect features that you can enable during an assessment.
 // Bitmask — values may be combined with |.
 type AEAutocorrectMode uint64
 

@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that updates the payment request after the shipping method changed.
+//
 // PaymentRequestShippingMethodUpdate wraps [raw.PKPaymentRequestShippingMethodUpdate] with a fluent Go API.
 type PaymentRequestShippingMethodUpdate struct {
 	inner *raw.PKPaymentRequestShippingMethodUpdate
@@ -39,12 +41,16 @@ func NewPaymentRequestShippingMethodUpdate() *PaymentRequestShippingMethodUpdate
 	return &PaymentRequestShippingMethodUpdate{inner: raw.PKPaymentRequestShippingMethodUpdateFromID(_id)}
 }
 
+// The status of the payment request that indicates whether authorization succeeds or fails.
+//
 // WithStatus sets the status property and returns the receiver for chaining.
 func (x *PaymentRequestShippingMethodUpdate) WithStatus(status PKPaymentAuthorizationStatus) *PaymentRequestShippingMethodUpdate {
 	x.inner.PKPaymentRequestUpdate.SetStatus(raw.PKPaymentAuthorizationStatus(status))
 	return x
 }
 
+// The list of payment summary items for the instance.
+//
 // WithPaymentSummaryItems sets the collection, converting the Go slice to an NSArray.
 func (x *PaymentRequestShippingMethodUpdate) WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestShippingMethodUpdate {
 	if len(items) == 0 {
@@ -63,6 +69,8 @@ func (x *PaymentRequestShippingMethodUpdate) WithPaymentSummaryItems(items ...Pa
 	return x
 }
 
+// The list of shipping methods available for a payment request.
+//
 // WithShippingMethods sets the collection, converting the Go slice to an NSArray.
 func (x *PaymentRequestShippingMethodUpdate) WithShippingMethods(items ...*raw.PKShippingMethod) *PaymentRequestShippingMethodUpdate {
 	if len(items) == 0 {
@@ -81,6 +89,8 @@ func (x *PaymentRequestShippingMethodUpdate) WithShippingMethods(items ...*raw.P
 	return x
 }
 
+// An optional array of payment token contexts to request multiple payment tokens with one payment token per context.
+//
 // WithMultiTokenContexts sets the collection, converting the Go slice to an NSArray.
 func (x *PaymentRequestShippingMethodUpdate) WithMultiTokenContexts(items ...*raw.PKPaymentTokenContext) *PaymentRequestShippingMethodUpdate {
 	if len(items) == 0 {
@@ -99,18 +109,24 @@ func (x *PaymentRequestShippingMethodUpdate) WithMultiTokenContexts(items ...*ra
 	return x
 }
 
+// The recurring payment request to update the payment request with.
+//
 // WithRecurringPaymentRequest sets the recurringPaymentRequest property and returns the receiver for chaining.
 func (x *PaymentRequestShippingMethodUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestShippingMethodUpdate {
 	x.inner.PKPaymentRequestUpdate.SetRecurringPaymentRequest(recurringPaymentRequest.Unwrap())
 	return x
 }
 
+// The automatic reload payment request to update the payment request with.
+//
 // WithAutomaticReloadPaymentRequest sets the automaticReloadPaymentRequest property and returns the receiver for chaining.
 func (x *PaymentRequestShippingMethodUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestShippingMethodUpdate {
 	x.inner.PKPaymentRequestUpdate.SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest.Unwrap())
 	return x
 }
 
+// The deferred payment request to update the payment request with.
+//
 // WithDeferredPaymentRequest sets the deferredPaymentRequest property and returns the receiver for chaining.
 func (x *PaymentRequestShippingMethodUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestShippingMethodUpdate {
 	x.inner.PKPaymentRequestUpdate.SetDeferredPaymentRequest(deferredPaymentRequest.Unwrap())

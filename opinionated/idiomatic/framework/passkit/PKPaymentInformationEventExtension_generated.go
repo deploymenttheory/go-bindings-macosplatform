@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract superclass for an extension to collect payment information and sign transaction data in a QR code purchase.
+//
 // PaymentInformationEventExtension wraps [raw.PKPaymentInformationEventExtension] with a fluent Go API.
 type PaymentInformationEventExtension struct {
 	inner *raw.PKPaymentInformationEventExtension

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The class that defines the parameters for a gated recurrent unit (GRU) operation.
+//
 // GraphGRUDescriptor wraps [raw.MPSGraphGRUDescriptor] with a fluent Go API.
 type GraphGRUDescriptor struct {
 	inner *raw.MPSGraphGRUDescriptor
@@ -35,7 +37,7 @@ func NewGraphGRUDescriptor() *GraphGRUDescriptor {
 	return &GraphGRUDescriptor{inner: raw.MPSGraphGRUDescriptorFromID(_id)}
 }
 
-// A parameter that defines the time direction of the input sequence. If set to `YES` then the input sequence is passed in reverse time order to the layer. Note: Ignored when `bidirectional = YES`. Default value: `NO`.
+// A parameter that defines the time direction of the input sequence.
 //
 // WithReverse sets the reverse property and returns the receiver for chaining.
 func (x *GraphGRUDescriptor) WithReverse(reverse bool) *GraphGRUDescriptor {
@@ -43,7 +45,7 @@ func (x *GraphGRUDescriptor) WithReverse(reverse bool) *GraphGRUDescriptor {
 	return x
 }
 
-// A parameter that defines a bidirectional GRU layer. If set to `YES` then the input sequence is traversed in both directions and the two results are concatenated together on the channel-axis. Default value: `NO`.
+// A parameter that defines a bidirectional GRU layer.
 //
 // WithBidirectional sets the bidirectional property and returns the receiver for chaining.
 func (x *GraphGRUDescriptor) WithBidirectional(bidirectional bool) *GraphGRUDescriptor {
@@ -51,7 +53,7 @@ func (x *GraphGRUDescriptor) WithBidirectional(bidirectional bool) *GraphGRUDesc
 	return x
 }
 
-// A parameter that enables the GRU layer to support training. If set to `YES` then the layer will produce training state tensor as a secondary output. Default value: `NO`.
+// A parameter that enables the GRU layer to support training.
 //
 // WithTraining sets the training property and returns the receiver for chaining.
 func (x *GraphGRUDescriptor) WithTraining(training bool) *GraphGRUDescriptor {
@@ -59,7 +61,7 @@ func (x *GraphGRUDescriptor) WithTraining(training bool) *GraphGRUDescriptor {
 	return x
 }
 
-// A parameter that controls the internal order of the GRU gates. If set to `YES` then the layer will use the gate-ordering `[ r, z, o ]` instead of default `[ z, r, o ]`. Default value: `NO`.
+// A parameter that controls the internal order of the GRU gates.
 //
 // WithResetGateFirst sets the resetGateFirst property and returns the receiver for chaining.
 func (x *GraphGRUDescriptor) WithResetGateFirst(resetGateFirst bool) *GraphGRUDescriptor {
@@ -67,7 +69,7 @@ func (x *GraphGRUDescriptor) WithResetGateFirst(resetGateFirst bool) *GraphGRUDe
 	return x
 }
 
-// A parameter that chooses between two variants for the reset gate computation. If set to `YES` then the layer will compute the intermediate value as `c[t] = ( b + (h[t-1] m ) R^T) r[t]`. Otherwise it's computed as `c[t] = (h[t-1] r[t] m) R^T`. Default value: `NO`.
+// A parameter that chooses between two variants for the reset gate computation.
 //
 // WithResetAfter sets the resetAfter property and returns the receiver for chaining.
 func (x *GraphGRUDescriptor) WithResetAfter(resetAfter bool) *GraphGRUDescriptor {
@@ -75,7 +77,7 @@ func (x *GraphGRUDescriptor) WithResetAfter(resetAfter bool) *GraphGRUDescriptor
 	return x
 }
 
-// A parameter that chooses between two variants for the final output computation. If set to `YES` then the layer will compute the final value as `h[t] = z[t] h[t-1] + (1-z[t]) o[t]`. Otherwise it's computed as `h[t] = (1-z[t]) h[t-1] + z[t] o[t]`. Default value: `NO`.
+// A parameter that chooses between two variants for the final output computation.
 //
 // WithFlipZ sets the flipZ property and returns the receiver for chaining.
 func (x *GraphGRUDescriptor) WithFlipZ(flipZ bool) *GraphGRUDescriptor {
@@ -83,7 +85,7 @@ func (x *GraphGRUDescriptor) WithFlipZ(flipZ bool) *GraphGRUDescriptor {
 	return x
 }
 
-// A parameter that defines the activation function to use with the update-gate of the GRU operation. Default value: `MPSGraphRNNActivationSigmoid`.
+// A parameter that defines the activation function to use with the update-gate of the GRU operation.
 //
 // WithUpdateGateActivation sets the updateGateActivation property and returns the receiver for chaining.
 func (x *GraphGRUDescriptor) WithUpdateGateActivation(updateGateActivation MPSGraphRNNActivation) *GraphGRUDescriptor {
@@ -91,7 +93,7 @@ func (x *GraphGRUDescriptor) WithUpdateGateActivation(updateGateActivation MPSGr
 	return x
 }
 
-// A parameter that defines the activation function to use with the reset-gate of the GRU operation. Default value: `MPSGraphRNNActivationSigmoid`.
+// A parameter that defines the activation function to use with the reset-gate of the GRU operation.
 //
 // WithResetGateActivation sets the resetGateActivation property and returns the receiver for chaining.
 func (x *GraphGRUDescriptor) WithResetGateActivation(resetGateActivation MPSGraphRNNActivation) *GraphGRUDescriptor {
@@ -99,7 +101,7 @@ func (x *GraphGRUDescriptor) WithResetGateActivation(resetGateActivation MPSGrap
 	return x
 }
 
-// A parameter that defines the activation function to use with the output-gate of the GRU operation. Default value: `MPSGraphRNNActivationTanh`.
+// A parameter that defines the activation function to use with the output-gate of the GRU operation.
 //
 // WithOutputGateActivation sets the outputGateActivation property and returns the receiver for chaining.
 func (x *GraphGRUDescriptor) WithOutputGateActivation(outputGateActivation MPSGraphRNNActivation) *GraphGRUDescriptor {

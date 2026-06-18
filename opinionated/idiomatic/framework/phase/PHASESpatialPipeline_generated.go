@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that specifies the volume of optional environmental effects.
+//
 // SpatialPipeline wraps [raw.PHASESpatialPipeline] with a fluent Go API.
 type SpatialPipeline struct {
 	inner *raw.PHASESpatialPipeline
@@ -30,7 +32,7 @@ func SpatialPipelineFromID(id objc.ID) *SpatialPipeline {
 	return &SpatialPipeline{inner: raw.PHASESpatialPipelineFromID(id)}
 }
 
-// @method initWithFlags @abstract Initialize a Spatial Pipeline with the provided flags. @discussion It's invalid to pass flags == 0 to this function. Doing so will return nil. @param flags Options for direct path transmission, early reflections, late reverb, etc.
+// Creates a spatial pipeline with the specified flags.
 //
 // NewSpatialPipelineWithFlags creates a new [SpatialPipeline].
 func NewSpatialPipelineWithFlags(flags PHASESpatialPipelineFlags) *SpatialPipeline {

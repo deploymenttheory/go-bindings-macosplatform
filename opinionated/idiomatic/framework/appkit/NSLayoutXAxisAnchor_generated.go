@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A factory class for creating horizontal layout constraint objects using a fluent API.
+//
 // LayoutXAxisAnchor wraps [raw.NSLayoutXAxisAnchor] with a fluent Go API.
 type LayoutXAxisAnchor struct {
 	inner *raw.NSLayoutXAxisAnchor
@@ -35,6 +37,8 @@ func NewLayoutXAxisAnchor() *LayoutXAxisAnchor {
 	return &LayoutXAxisAnchor{inner: raw.NSLayoutXAxisAnchorFromID(_id)}
 }
 
+// Creates a layout dimension object from two anchors.
+//
 // AnchorWithOffsetToAnchor calls the underlying AnchorWithOffsetToAnchor.
 func (x *LayoutXAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *raw.NSLayoutXAxisAnchor) *LayoutDimension {
 	_r := x.inner.AnchorWithOffsetToAnchor(otherAnchor)
@@ -44,6 +48,8 @@ func (x *LayoutXAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *raw.NSLayoutXA
 	return &LayoutDimension{inner: _r}
 }
 
+// Returns a constraint that defines by how much the current anchor trails the specified anchor.
+//
 // ConstraintEqualToSystemSpacingAfterAnchorMultiplier calls the underlying ConstraintEqualToSystemSpacingAfterAnchorMultiplier.
 func (x *LayoutXAxisAnchor) ConstraintEqualToSystemSpacingAfterAnchorMultiplier(anchor *raw.NSLayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
 	_r := x.inner.ConstraintEqualToSystemSpacingAfterAnchorMultiplier(anchor, multiplier)
@@ -53,6 +59,8 @@ func (x *LayoutXAxisAnchor) ConstraintEqualToSystemSpacingAfterAnchorMultiplier(
 	return &LayoutConstraint{inner: _r}
 }
 
+// Returns a constraint that defines the minimum amount by which the current anchor trails the specified anchor.
+//
 // ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier calls the underlying ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier.
 func (x *LayoutXAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *raw.NSLayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
 	_r := x.inner.ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor, multiplier)
@@ -62,6 +70,8 @@ func (x *LayoutXAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingAfterAnch
 	return &LayoutConstraint{inner: _r}
 }
 
+// Returns a constraint that defines the maximum amount by which the current anchor trails the specified anchor.
+//
 // ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier calls the underlying ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier.
 func (x *LayoutXAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *raw.NSLayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
 	_r := x.inner.ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor, multiplier)

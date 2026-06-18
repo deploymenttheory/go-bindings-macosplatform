@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A specialized view, such as a button or text field, that notifies your app of relevant events using the target-action design pattern.
+//
 // Control wraps [raw.NSControl] with a fluent Go API.
 type Control struct {
 	inner *raw.NSControl
@@ -35,6 +37,8 @@ func ControlFromID(id objc.ID) *Control {
 	return &Control{inner: raw.NSControlFromID(id)}
 }
 
+// Initializes a control with the specified frame rectangle.
+//
 // NewControlWithFrame creates a new [Control].
 func NewControlWithFrame(frameRect corefoundation.CGRect) *Control {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSControl")), objc.RegisterName("alloc"))
@@ -42,6 +46,8 @@ func NewControlWithFrame(frameRect corefoundation.CGRect) *Control {
 	return &Control{inner: raw.NSControlFromID(_id)}
 }
 
+// Initializes a control with data in an unarchiver.
+//
 // NewControlWithCoder creates a new [Control].
 func NewControlWithCoder(coder *foundation.NSCoder) *Control {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSControl")), objc.RegisterName("alloc"))
@@ -49,138 +55,184 @@ func NewControlWithCoder(coder *foundation.NSCoder) *Control {
 	return &Control{inner: raw.NSControlFromID(_id)}
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *Control) WithTarget(target objc.ID) *Control {
 	x.inner.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *Control) WithAction(action objc.SEL) *Control {
 	x.inner.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *Control) WithTag(tag int) *Control {
 	x.inner.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *Control) WithIgnoresMultiClick(ignoresMultiClick bool) *Control {
 	x.inner.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *Control) WithContinuous(continuous bool) *Control {
 	x.inner.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *Control) WithEnabled(enabled bool) *Control {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *Control) WithRefusesFirstResponder(refusesFirstResponder bool) *Control {
 	x.inner.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *Control) WithHighlighted(highlighted bool) *Control {
 	x.inner.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *Control) WithControlSize(controlSize NSControlSize) *Control {
 	x.inner.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *Control) WithFormatter(formatter *foundation.NSFormatter) *Control {
 	x.inner.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *Control) WithObjectValue(objectValue objc.ID) *Control {
 	x.inner.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *Control) WithStringValue(stringValue string) *Control {
 	x.inner.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *Control) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Control {
 	x.inner.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *Control) WithIntValue(intValue int) *Control {
 	x.inner.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *Control) WithIntegerValue(integerValue int) *Control {
 	x.inner.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *Control) WithFloatValue(floatValue float32) *Control {
 	x.inner.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *Control) WithDoubleValue(doubleValue float64) *Control {
 	x.inner.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *Control) WithFont(font *Font) *Control {
 	x.inner.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *Control) WithUsesSingleLineMode(usesSingleLineMode bool) *Control {
 	x.inner.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *Control) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Control {
 	x.inner.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *Control) WithAlignment(alignment NSTextAlignment) *Control {
 	x.inner.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *Control) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Control {
 	x.inner.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *Control) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Control {
 	x.inner.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -235,6 +287,8 @@ func (x *Control) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOption
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *Control) WithFrame(frame corefoundation.CGRect) *Control {
 	x.inner.NSView.SetFrame(frame)
@@ -259,6 +313,8 @@ func (x *Control) WithBoundsRotation(boundsRotation float64) *Control {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *Control) WithBounds(bounds corefoundation.CGRect) *Control {
 	x.inner.NSView.SetBounds(bounds)
@@ -271,6 +327,8 @@ func (x *Control) WithCanDrawConcurrently(canDrawConcurrently bool) *Control {
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *Control) WithNeedsDisplay(needsDisplay bool) *Control {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -457,7 +515,7 @@ func (x *Control) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundati
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *Control) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Control {
@@ -513,90 +571,124 @@ func (x *Control) WithPressureConfiguration(pressureConfiguration *PressureConfi
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *Control) WithNextResponder(nextResponder ResponderProvider) *Control {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *Control) WithMenu(menu *Menu) *Control {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *Control) WithUserActivity(userActivity *foundation.NSUserActivity) *Control {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *Control) WithTouchBar(touchBar *TouchBar) *Control {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Asks the control to calculate and return the size that best fits the specified size.
+//
 // SizeThatFits calls the underlying SizeThatFits.
 func (x *Control) SizeThatFits(size corefoundation.CGSize) corefoundation.CGSize {
 	return x.inner.SizeThatFits(size)
 }
 
+// Resizes the receiver’s frame so that it’s the minimum size needed to contain its cell.
+//
 // SizeToFit calls the underlying SizeToFit.
 func (x *Control) SizeToFit() {
 	x.inner.SizeToFit()
 }
 
+// Sets the conditions on which the receiver sends action messages to its target.
+//
 // SendActionOn calls the underlying SendActionOn.
 func (x *Control) SendActionOn(mask NSEventMask) int {
 	return x.inner.SendActionOn(raw.NSEventMask(mask))
 }
 
+// Causes the specified action to be sent to the target.
+//
 // SendActionTo calls the underlying SendActionTo.
 func (x *Control) SendActionTo(action objc.SEL, target objc.ID) bool {
 	return x.inner.SendActionTo(action, target)
 }
 
+// Sets the value of the receiver’s cell to an integer value obtained from the specified object.
+//
 // TakeIntValueFrom calls the underlying TakeIntValueFrom.
 func (x *Control) TakeIntValueFrom(sender objc.ID) {
 	x.inner.TakeIntValueFrom(sender)
 }
 
+// Sets the value of the receiver’s cell to a single-precision floating-point value obtained from the specified object.
+//
 // TakeFloatValueFrom calls the underlying TakeFloatValueFrom.
 func (x *Control) TakeFloatValueFrom(sender objc.ID) {
 	x.inner.TakeFloatValueFrom(sender)
 }
 
+// Sets the value of the receiver’s cell to a double-precision floating-point value obtained from the specified object.
+//
 // TakeDoubleValueFrom calls the underlying TakeDoubleValueFrom.
 func (x *Control) TakeDoubleValueFrom(sender objc.ID) {
 	x.inner.TakeDoubleValueFrom(sender)
 }
 
+// Sets the value of the receiver’s cell to the string value obtained from the specified object.
+//
 // TakeStringValueFrom calls the underlying TakeStringValueFrom.
 func (x *Control) TakeStringValueFrom(sender objc.ID) {
 	x.inner.TakeStringValueFrom(sender)
 }
 
+// Sets the value of the receiver’s cell to the object value obtained from the specified object.
+//
 // TakeObjectValueFrom calls the underlying TakeObjectValueFrom.
 func (x *Control) TakeObjectValueFrom(sender objc.ID) {
 	x.inner.TakeObjectValueFrom(sender)
 }
 
+// Sets the value of the receiver’s cell to an NSInteger value obtained from the specified object.
+//
 // TakeIntegerValueFrom calls the underlying TakeIntegerValueFrom.
 func (x *Control) TakeIntegerValueFrom(sender objc.ID) {
 	x.inner.TakeIntegerValueFrom(sender)
 }
 
+// Simulates a single mouse click on the receiver.
+//
 // PerformClick calls the underlying PerformClick.
 func (x *Control) PerformClick(sender objc.ID) {
 	x.inner.PerformClick(sender)
 }
 
+// The frame in which a tool tip can be displayed, if needed.
+//
 // ExpansionFrameWithFrame calls the underlying ExpansionFrameWithFrame.
 func (x *Control) ExpansionFrameWithFrame(contentFrame corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.ExpansionFrameWithFrame(contentFrame)
 }
 
+// Performs custom expansion tool tip drawing.
+//
 // DrawWithExpansionFrameInView calls the underlying DrawWithExpansionFrameInView.
 func (x *Control) DrawWithExpansionFrameInView(contentFrame corefoundation.CGRect, view *raw.NSView) {
 	x.inner.DrawWithExpansionFrameInView(contentFrame, view)
@@ -835,6 +927,8 @@ func (x *Control) SetAllowsExpansionToolTips(allowsExpansionToolTips bool) {
 	x.inner.SetAllowsExpansionToolTips(allowsExpansionToolTips)
 }
 
+// Returns the current field editor for the control.
+//
 // CurrentEditor calls the underlying CurrentEditor.
 func (x *Control) CurrentEditor() *Text {
 	_r := x.inner.CurrentEditor()
@@ -844,31 +938,43 @@ func (x *Control) CurrentEditor() *Text {
 	return &Text{inner: _r}
 }
 
+// Terminates the current editing operation and discards any edited text.
+//
 // AbortEditing calls the underlying AbortEditing.
 func (x *Control) AbortEditing() bool {
 	return x.inner.AbortEditing()
 }
 
+// Validates changes to any user-typed text.
+//
 // ValidateEditing calls the underlying ValidateEditing.
 func (x *Control) ValidateEditing() {
 	x.inner.ValidateEditing()
 }
 
+// Begins editing of the receiver’s text using the specified field editor.
+//
 // EditWithFrameEditorDelegateEvent calls the underlying EditWithFrameEditorDelegateEvent.
 func (x *Control) EditWithFrameEditorDelegateEvent(rect corefoundation.CGRect, textObj *raw.NSText, delegate objc.ID, event *raw.NSEvent) {
 	x.inner.EditWithFrameEditorDelegateEvent(rect, textObj, delegate, event)
 }
 
+// Selects the specified text range in the receiver’s field editor.
+//
 // SelectWithFrameEditorDelegateStartLength calls the underlying SelectWithFrameEditorDelegateStartLength.
 func (x *Control) SelectWithFrameEditorDelegateStartLength(rect corefoundation.CGRect, textObj *raw.NSText, delegate objc.ID, selStart int, selLength int) {
 	x.inner.SelectWithFrameEditorDelegateStartLength(rect, textObj, delegate, selStart, selLength)
 }
 
+// Ends the editing of text in the receiver using the specified field editor.
+//
 // EndEditing calls the underlying EndEditing.
 func (x *Control) EndEditing(textObj *raw.NSText) {
 	x.inner.EndEditing(textObj)
 }
 
+// Sets the auto-ranging and floating point number format of the receiver’s cell.
+//
 // SetFloatingPointFormatLeftRight calls the underlying SetFloatingPointFormatLeftRight.
 func (x *Control) SetFloatingPointFormatLeftRight(autoRange bool, leftDigits uint, rightDigits uint) {
 	x.inner.SetFloatingPointFormatLeftRight(autoRange, leftDigits, rightDigits)
@@ -937,6 +1043,8 @@ func (x *Control) SetCell(cell *raw.NSCell) {
 	x.inner.SetCell(cell)
 }
 
+// Notifies the control that the intrinsic content size for its cell is no longer valid.
+//
 // InvalidateIntrinsicContentSizeForCell calls the underlying InvalidateIntrinsicContentSizeForCell.
 func (x *Control) InvalidateIntrinsicContentSizeForCell(cell *raw.NSCell) {
 	x.inner.InvalidateIntrinsicContentSizeForCell(cell)

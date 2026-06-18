@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of the bounding shape of a filter and the domain of definition for a filter operation.
+//
 // FilterShape wraps [raw.CIFilterShape] with a fluent Go API.
 type FilterShape struct {
 	inner *raw.CIFilterShape
@@ -30,6 +32,8 @@ func FilterShapeFromID(id objc.ID) *FilterShape {
 	return &FilterShape{inner: raw.CIFilterShapeFromID(id)}
 }
 
+// Initializes a filter shape object with a rectangle.
+//
 // NewFilterShapeWithRect creates a new [FilterShape].
 func NewFilterShapeWithRect(r corefoundation.CGRect) *FilterShape {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIFilterShape")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewFilterShapeWithRect(r corefoundation.CGRect) *FilterShape {
 	return &FilterShape{inner: raw.CIFilterShapeFromID(_id)}
 }
 
+// Creates a filter shape that results from applying a transform to the current filter shape.
+//
 // TransformByInterior calls the underlying TransformByInterior.
 func (x *FilterShape) TransformByInterior(m corefoundation.CGAffineTransform, flag bool) *FilterShape {
 	_r := x.inner.TransformByInterior(m, flag)
@@ -46,6 +52,8 @@ func (x *FilterShape) TransformByInterior(m corefoundation.CGAffineTransform, fl
 	return &FilterShape{inner: _r}
 }
 
+// Modifies a filter shape object so that it is inset by the specified x and y values.
+//
 // InsetByXY calls the underlying InsetByXY.
 func (x *FilterShape) InsetByXY(dx int, dy int) *FilterShape {
 	_r := x.inner.InsetByXY(dx, dy)
@@ -55,6 +63,8 @@ func (x *FilterShape) InsetByXY(dx int, dy int) *FilterShape {
 	return &FilterShape{inner: _r}
 }
 
+// Creates a filter shape that results from the union of the current filter shape and another filter shape object.
+//
 // UnionWith calls the underlying UnionWith.
 func (x *FilterShape) UnionWith(s2 *raw.CIFilterShape) *FilterShape {
 	_r := x.inner.UnionWith(s2)
@@ -64,6 +74,8 @@ func (x *FilterShape) UnionWith(s2 *raw.CIFilterShape) *FilterShape {
 	return &FilterShape{inner: _r}
 }
 
+// Creates a filter shape that results from the union of the current filter shape and a rectangle.
+//
 // UnionWithRect calls the underlying UnionWithRect.
 func (x *FilterShape) UnionWithRect(r corefoundation.CGRect) *FilterShape {
 	_r := x.inner.UnionWithRect(r)
@@ -73,6 +85,8 @@ func (x *FilterShape) UnionWithRect(r corefoundation.CGRect) *FilterShape {
 	return &FilterShape{inner: _r}
 }
 
+// Creates a filter shape object that represents the intersection of the current filter shape and the specified filter shape object.
+//
 // IntersectWith calls the underlying IntersectWith.
 func (x *FilterShape) IntersectWith(s2 *raw.CIFilterShape) *FilterShape {
 	_r := x.inner.IntersectWith(s2)
@@ -82,6 +96,8 @@ func (x *FilterShape) IntersectWith(s2 *raw.CIFilterShape) *FilterShape {
 	return &FilterShape{inner: _r}
 }
 
+// Creates a filter shape that represents the intersection of the current filter shape and a rectangle.
+//
 // IntersectWithRect calls the underlying IntersectWithRect.
 func (x *FilterShape) IntersectWithRect(r corefoundation.CGRect) *FilterShape {
 	_r := x.inner.IntersectWithRect(r)

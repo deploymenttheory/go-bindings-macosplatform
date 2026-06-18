@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An enum representing the structure of a model.
+//
 // ModelStructure wraps [raw.MLModelStructure] with a fluent Go API.
 type ModelStructure struct {
 	inner *raw.MLModelStructure

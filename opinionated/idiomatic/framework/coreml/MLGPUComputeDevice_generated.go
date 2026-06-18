@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a GPU compute device.
+//
 // GPUComputeDevice wraps [raw.MLGPUComputeDevice] with a fluent Go API.
 type GPUComputeDevice struct {
 	inner *raw.MLGPUComputeDevice

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An array of vertex attribute descriptor instances.
+//
 // VertexAttributeDescriptorArray wraps [raw.MTLVertexAttributeDescriptorArray] with a fluent Go API.
 type VertexAttributeDescriptorArray struct {
 	inner *raw.MTLVertexAttributeDescriptorArray
@@ -37,6 +39,8 @@ func NewVertexAttributeDescriptorArray() *VertexAttributeDescriptorArray {
 	return &VertexAttributeDescriptorArray{inner: raw.MTLVertexAttributeDescriptorArrayFromID(_id)}
 }
 
+// Returns the state of the specified vertex attribute.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *VertexAttributeDescriptorArray) ObjectAtIndexedSubscript(index uint) *VertexAttributeDescriptor {
 	_r := x.inner.ObjectAtIndexedSubscript(index)
@@ -46,6 +50,8 @@ func (x *VertexAttributeDescriptorArray) ObjectAtIndexedSubscript(index uint) *V
 	return &VertexAttributeDescriptor{inner: _r}
 }
 
+// Sets state for the specified vertex attribute.
+//
 // SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
 func (x *VertexAttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *raw.MTLVertexAttributeDescriptor, index uint) {
 	x.inner.SetObjectAtIndexedSubscript(attributeDesc, index)

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type of notification your app supports and the custom actions that the system displays.
+//
 // NotificationCategory wraps [raw.UNNotificationCategory] with a fluent Go API.
 type NotificationCategory struct {
 	inner *raw.UNNotificationCategory

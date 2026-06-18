@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A layer that loads, plays, and controls Quartz Composer compositions in a Core Animation layer hierarchy.
+//
 // QCCompositionLayer wraps [raw.QCCompositionLayer] with a fluent Go API.
 type QCCompositionLayer struct {
 	inner *raw.QCCompositionLayer
@@ -30,6 +32,8 @@ func QCCompositionLayerFromID(id objc.ID) *QCCompositionLayer {
 	return &QCCompositionLayer{inner: raw.QCCompositionLayerFromID(id)}
 }
 
+// Initializes and returns a composition layer using the Quartz Composer composition in the specified file.
+//
 // NewQCCompositionLayerWithFile creates a new [QCCompositionLayer].
 func NewQCCompositionLayerWithFile(path string) *QCCompositionLayer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QCCompositionLayer")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewQCCompositionLayerWithFile(path string) *QCCompositionLayer {
 	return &QCCompositionLayer{inner: raw.QCCompositionLayerFromID(_id)}
 }
 
+// Initializes and returns a composition layer using the provided Quartz Composer composition.
+//
 // NewQCCompositionLayerWithComposition creates a new [QCCompositionLayer].
 func NewQCCompositionLayerWithComposition(composition *raw.QCComposition) *QCCompositionLayer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QCCompositionLayer")), objc.RegisterName("alloc"))
@@ -44,6 +50,8 @@ func NewQCCompositionLayerWithComposition(composition *raw.QCComposition) *QCCom
 	return &QCCompositionLayer{inner: raw.QCCompositionLayerFromID(_id)}
 }
 
+// Returns the composition associated with the layer.
+//
 // Composition calls the underlying Composition.
 func (x *QCCompositionLayer) Composition() *QCComposition {
 	_r := x.inner.Composition()

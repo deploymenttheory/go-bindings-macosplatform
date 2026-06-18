@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a track in a fragmented movie.
+//
 // FragmentedMovieTrack wraps [raw.AVFragmentedMovieTrack] with a fluent Go API.
 type FragmentedMovieTrack struct {
 	inner *raw.AVFragmentedMovieTrack

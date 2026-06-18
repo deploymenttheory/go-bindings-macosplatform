@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The object you use to manage data and provide items for a table view.
+//
 // TableViewDiffableDataSource wraps [raw.NSTableViewDiffableDataSource] with a fluent Go API.
 type TableViewDiffableDataSource struct {
 	inner *raw.NSTableViewDiffableDataSource[objc.ID, objc.ID]

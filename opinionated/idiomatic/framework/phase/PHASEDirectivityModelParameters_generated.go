@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A base class for objects that direct sound.
+//
 // DirectivityModelParameters wraps [raw.PHASEDirectivityModelParameters] with a fluent Go API.
 type DirectivityModelParameters struct {
 	inner *raw.PHASEDirectivityModelParameters

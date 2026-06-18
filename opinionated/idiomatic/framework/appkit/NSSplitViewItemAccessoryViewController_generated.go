@@ -56,7 +56,7 @@ func (x *SplitViewItemAccessoryViewController) WithAutomaticallyAppliesContentIn
 	return x
 }
 
-// The split view item accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the interior edge of a titlebar accessory: splitViewItemAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
+// The split view item accessory’s preferred effect for content scrolling behind it.
 //
 // WithPreferredScrollEdgeEffectStyle sets the preferredScrollEdgeEffectStyle property and returns the receiver for chaining.
 func (x *SplitViewItemAccessoryViewController) WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *ScrollEdgeEffectStyle) *SplitViewItemAccessoryViewController {
@@ -64,30 +64,40 @@ func (x *SplitViewItemAccessoryViewController) WithPreferredScrollEdgeEffectStyl
 	return x
 }
 
+// The object whose value is presented in the receiver’s primary view.
+//
 // WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
 func (x *SplitViewItemAccessoryViewController) WithRepresentedObject(representedObject objc.ID) *SplitViewItemAccessoryViewController {
 	x.inner.NSViewController.SetRepresentedObject(representedObject)
 	return x
 }
 
+// The localized title of the receiver’s primary view.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *SplitViewItemAccessoryViewController) WithTitle(title string) *SplitViewItemAccessoryViewController {
 	x.inner.NSViewController.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The view controller’s primary view.
+//
 // WithView sets the view property and returns the receiver for chaining.
 func (x *SplitViewItemAccessoryViewController) WithView(view ViewProvider) *SplitViewItemAccessoryViewController {
 	x.inner.NSViewController.SetView(view.asView())
 	return x
 }
 
+// The desired size of the view controller’s view, in screen units.
+//
 // WithPreferredContentSize sets the preferredContentSize property and returns the receiver for chaining.
 func (x *SplitViewItemAccessoryViewController) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *SplitViewItemAccessoryViewController {
 	x.inner.NSViewController.SetPreferredContentSize(preferredContentSize)
 	return x
 }
 
+// An array of view controllers that are hierarchical children of the view controller.
+//
 // WithChildViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *SplitViewItemAccessoryViewController) WithChildViewControllers(items ...ViewControllerProvider) *SplitViewItemAccessoryViewController {
 	if len(items) == 0 {
@@ -112,30 +122,40 @@ func (x *SplitViewItemAccessoryViewController) WithSourceItemView(sourceItemView
 	return x
 }
 
+// For a view controller that is part of an app extension, the preferred screen origin.
+//
 // WithPreferredScreenOrigin sets the preferredScreenOrigin property and returns the receiver for chaining.
 func (x *SplitViewItemAccessoryViewController) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *SplitViewItemAccessoryViewController {
 	x.inner.NSViewController.SetPreferredScreenOrigin(preferredScreenOrigin)
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *SplitViewItemAccessoryViewController) WithNextResponder(nextResponder ResponderProvider) *SplitViewItemAccessoryViewController {
 	x.inner.NSViewController.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *SplitViewItemAccessoryViewController) WithMenu(menu *Menu) *SplitViewItemAccessoryViewController {
 	x.inner.NSViewController.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *SplitViewItemAccessoryViewController) WithUserActivity(userActivity *foundation.NSUserActivity) *SplitViewItemAccessoryViewController {
 	x.inner.NSViewController.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *SplitViewItemAccessoryViewController) WithTouchBar(touchBar *TouchBar) *SplitViewItemAccessoryViewController {
 	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar.Unwrap())

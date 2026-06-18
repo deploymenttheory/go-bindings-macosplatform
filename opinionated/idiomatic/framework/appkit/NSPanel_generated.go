@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A special kind of window that typically performs a function that is auxiliary to the main window.
+//
 // Panel wraps [raw.NSPanel] with a fluent Go API.
 type Panel struct {
 	inner *raw.NSPanel
@@ -38,31 +40,39 @@ func NewPanel() *Panel {
 	return &Panel{inner: raw.NSPanelFromID(_id)}
 }
 
+// A Boolean value that indicates whether the receiver is a floating panel.
+//
 // WithFloatingPanel sets the floatingPanel property and returns the receiver for chaining.
 func (x *Panel) WithFloatingPanel(floatingPanel bool) *Panel {
 	x.inner.SetFloatingPanel(floatingPanel)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver becomes the key window only when needed.
+//
 // WithBecomesKeyOnlyIfNeeded sets the becomesKeyOnlyIfNeeded property and returns the receiver for chaining.
 func (x *Panel) WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *Panel {
 	x.inner.SetBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded)
 	return x
 }
 
+// A Boolean value that indicates whether the panel receives keyboard and mouse events even when some other window is being run modally.
+//
 // WithWorksWhenModal sets the worksWhenModal property and returns the receiver for chaining.
 func (x *Panel) WithWorksWhenModal(worksWhenModal bool) *Panel {
 	x.inner.SetWorksWhenModal(worksWhenModal)
 	return x
 }
 
+// The string that appears in the title bar of the window or the path to the represented file.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *Panel) WithTitle(title string) *Panel {
 	x.inner.NSWindow.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
-// Secondary text that may be displayed adjacent to or below the primary title depending on the configuration of the window. A value of empty string will remove the subtitle from the window layout.
+// A secondary line of text that appears in the title bar of the window.
 //
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *Panel) WithSubtitle(subtitle string) *Panel {
@@ -70,7 +80,7 @@ func (x *Panel) WithSubtitle(subtitle string) *Panel {
 	return x
 }
 
-// See the enum values for how this property works.
+// A value that indicates the visibility of the window’s title and title bar buttons.
 //
 // WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
 func (x *Panel) WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *Panel {
@@ -78,7 +88,7 @@ func (x *Panel) WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *Pa
 	return x
 }
 
-// When \c YES, the titlebar doesn't draw its background, allowing all buttons to show through, and "click through" to happen. In general, this is only useful when \c NSFullSizeContentViewWindowMask is set.
+// A Boolean value that indicates whether the title bar draws its background.
 //
 // WithTitlebarAppearsTransparent sets the titlebarAppearsTransparent property and returns the receiver for chaining.
 func (x *Panel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *Panel {
@@ -86,7 +96,7 @@ func (x *Panel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) 
 	return x
 }
 
-// Specifies how the titlebar area of the window should appear when the window displays an NSToolbar
+// The style that determines the appearance and location of the toolbar in relation to the title bar.
 //
 // WithToolbarStyle sets the toolbarStyle property and returns the receiver for chaining.
 func (x *Panel) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *Panel {
@@ -94,6 +104,8 @@ func (x *Panel) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *Panel {
 	return x
 }
 
+// An array of title bar accessory view controllers that are currently added to the window.
+//
 // WithTitlebarAccessoryViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *Panel) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *Panel {
 	if len(items) == 0 {
@@ -112,7 +124,7 @@ func (x *Panel) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAcc
 	return x
 }
 
-// If url is not nil and its path is not empty, the window will show a document icon in the titlebar. If the url represents a filename or other resource with a known icon, that icon will be used as the document icon.  Otherwise the default document icon will be used.  The icon can be customized using `-[[NSWindow standardWindowButton:NSWindowDocumentIconButton] setImage:customImage]`.  If url is not nil and its path is not empty, the window will have a pop-up menu which can be shown via command-click on the area containing the document icon and title.  By default, this menu will display the path components of the url.  The presence and contents of this menu can be controlled by the delegate method `-[window:shouldPopUpDocumentPathMenu:]` If the url is nil or has an empty path, the window will not show a document icon and will not have a pop-up menu available via command-click.
+// The URL of the file the window represents.
 //
 // WithRepresentedURL sets the representedURL property and returns the receiver for chaining.
 func (x *Panel) WithRepresentedURL(representedURL string) *Panel {
@@ -120,31 +132,39 @@ func (x *Panel) WithRepresentedURL(representedURL string) *Panel {
 	return x
 }
 
+// The path to the file of the window’s represented file.
+//
 // WithRepresentedFilename sets the representedFilename property and returns the receiver for chaining.
 func (x *Panel) WithRepresentedFilename(representedFilename string) *Panel {
 	x.inner.NSWindow.SetRepresentedFilename(foundation.NSStringStringWithUTF8String(representedFilename))
 	return x
 }
 
+// A Boolean value that indicates whether the window is excluded from the application’s Windows menu.
+//
 // WithExcludedFromWindowsMenu sets the excludedFromWindowsMenu property and returns the receiver for chaining.
 func (x *Panel) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *Panel {
 	x.inner.NSWindow.SetExcludedFromWindowsMenu(excludedFromWindowsMenu)
 	return x
 }
 
+// The window’s content view, the highest accessible view object in the window’s view hierarchy.
+//
 // WithContentView sets the contentView property and returns the receiver for chaining.
 func (x *Panel) WithContentView(contentView ViewProvider) *Panel {
 	x.inner.NSWindow.SetContentView(contentView.asView())
 	return x
 }
 
+// The window’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Panel) WithDelegate(delegate raw.NSWindowDelegate) *Panel {
 	x.inner.NSWindow.SetDelegate(delegate)
 	return x
 }
 
-// @note The styleMask can only be set on macOS 10.6 and later. Valid \c styleMask settings have the same restrictions as the \c styleMask passed to `-initWithContentRect:styleMask:backing:defer:`.  Some \c styleMask changes will cause the view hierarchy to be rebuilt, since there is a different subclass for the top level view of a borderless window than for the top level view of a titled window.
+// Flags that describe the window’s current style, such as if it’s resizable or in full-screen mode.
 //
 // WithStyleMask sets the styleMask property and returns the receiver for chaining.
 func (x *Panel) WithStyleMask(styleMask NSWindowStyleMask) *Panel {
@@ -152,73 +172,95 @@ func (x *Panel) WithStyleMask(styleMask NSWindowStyleMask) *Panel {
 	return x
 }
 
+// The window’s resizing increments.
+//
 // WithResizeIncrements sets the resizeIncrements property and returns the receiver for chaining.
 func (x *Panel) WithResizeIncrements(resizeIncrements corefoundation.CGSize) *Panel {
 	x.inner.NSWindow.SetResizeIncrements(resizeIncrements)
 	return x
 }
 
+// The window’s aspect ratio, which constrains the size of its frame rectangle to integral multiples of this ratio when the user resizes it.
+//
 // WithAspectRatio sets the aspectRatio property and returns the receiver for chaining.
 func (x *Panel) WithAspectRatio(aspectRatio corefoundation.CGSize) *Panel {
 	x.inner.NSWindow.SetAspectRatio(aspectRatio)
 	return x
 }
 
+// The window’s content-view resizing increments.
+//
 // WithContentResizeIncrements sets the contentResizeIncrements property and returns the receiver for chaining.
 func (x *Panel) WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *Panel {
 	x.inner.NSWindow.SetContentResizeIncrements(contentResizeIncrements)
 	return x
 }
 
+// The window’s content aspect ratio.
+//
 // WithContentAspectRatio sets the contentAspectRatio property and returns the receiver for chaining.
 func (x *Panel) WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *Panel {
 	x.inner.NSWindow.SetContentAspectRatio(contentAspectRatio)
 	return x
 }
 
+// A Boolean value that indicates whether any of the window’s views need to be displayed.
+//
 // WithViewsNeedDisplay sets the viewsNeedDisplay property and returns the receiver for chaining.
 func (x *Panel) WithViewsNeedDisplay(viewsNeedDisplay bool) *Panel {
 	x.inner.NSWindow.SetViewsNeedDisplay(viewsNeedDisplay)
 	return x
 }
 
+// A Boolean value that indicates whether the window tries to optimize user-initiated resize operations by preserving the content of views that have not changed.
+//
 // WithPreservesContentDuringLiveResize sets the preservesContentDuringLiveResize property and returns the receiver for chaining.
 func (x *Panel) WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *Panel {
 	x.inner.NSWindow.SetPreservesContentDuringLiveResize(preservesContentDuringLiveResize)
 	return x
 }
 
+// A Boolean value that indicates whether the window is released when it receives the close message.
+//
 // WithReleasedWhenClosed sets the releasedWhenClosed property and returns the receiver for chaining.
 func (x *Panel) WithReleasedWhenClosed(releasedWhenClosed bool) *Panel {
 	x.inner.NSWindow.SetReleasedWhenClosed(releasedWhenClosed)
 	return x
 }
 
+// The color of the window’s background.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *Panel) WithBackgroundColor(backgroundColor *Color) *Panel {
 	x.inner.NSWindow.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the window can be dragged by clicking in its title bar or background.
+//
 // WithMovable sets the movable property and returns the receiver for chaining.
 func (x *Panel) WithMovable(movable bool) *Panel {
 	x.inner.NSWindow.SetMovable(movable)
 	return x
 }
 
+// A Boolean value that indicates whether the window is movable by clicking and dragging anywhere in its background.
+//
 // WithMovableByWindowBackground sets the movableByWindowBackground property and returns the receiver for chaining.
 func (x *Panel) WithMovableByWindowBackground(movableByWindowBackground bool) *Panel {
 	x.inner.NSWindow.SetMovableByWindowBackground(movableByWindowBackground)
 	return x
 }
 
+// A Boolean value that indicates whether the window is removed from the screen when its application becomes inactive.
+//
 // WithHidesOnDeactivate sets the hidesOnDeactivate property and returns the receiver for chaining.
 func (x *Panel) WithHidesOnDeactivate(hidesOnDeactivate bool) *Panel {
 	x.inner.NSWindow.SetHidesOnDeactivate(hidesOnDeactivate)
 	return x
 }
 
-// Indicates whether a window can be hidden during `-[NSApplication hide:]`.  Default is \c YES.
+// A Boolean value that indicates whether the window can hide when its application becomes hidden.
 //
 // WithCanHide sets the canHide property and returns the receiver for chaining.
 func (x *Panel) WithCanHide(canHide bool) *Panel {
@@ -226,25 +268,31 @@ func (x *Panel) WithCanHide(canHide bool) *Panel {
 	return x
 }
 
+// The custom miniaturized window image of the window.
+//
 // WithMiniwindowImage sets the miniwindowImage property and returns the receiver for chaining.
 func (x *Panel) WithMiniwindowImage(miniwindowImage *Image) *Panel {
 	x.inner.NSWindow.SetMiniwindowImage(miniwindowImage.Unwrap())
 	return x
 }
 
+// The title displayed in the window’s minimized window.
+//
 // WithMiniwindowTitle sets the miniwindowTitle property and returns the receiver for chaining.
 func (x *Panel) WithMiniwindowTitle(miniwindowTitle string) *Panel {
 	x.inner.NSWindow.SetMiniwindowTitle(foundation.NSStringStringWithUTF8String(miniwindowTitle))
 	return x
 }
 
+// A Boolean value that indicates whether the window’s document has been edited.
+//
 // WithDocumentEdited sets the documentEdited property and returns the receiver for chaining.
 func (x *Panel) WithDocumentEdited(documentEdited bool) *Panel {
 	x.inner.NSWindow.SetDocumentEdited(documentEdited)
 	return x
 }
 
-// A Boolean value that indicates whether or not to prevent application termination when the receiving window is presented modally. The value of this property is `YES` if the window should prevent application termination when modal; otherwise, `NO`. The default value is `YES`. However, note that some window subclasses and some windows created indirectly (like those created by UI frameworks like AppKit and SwiftUI), may have different default values. For example, the Open panel and toolbar customization sheets should not prevent application termination, so those windows have `preventsApplicationTerminationWhenModal` set to `NO`. Some `NSAlert`s, like those that are simply informational, have windows that do not prevent application termination by default. Setting this property overrides the default behavior.
+// A Boolean value that indicates whether the window prevents application termination when modal.
 //
 // WithPreventsApplicationTerminationWhenModal sets the preventsApplicationTerminationWhenModal property and returns the receiver for chaining.
 func (x *Panel) WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *Panel {
@@ -252,7 +300,7 @@ func (x *Panel) WithPreventsApplicationTerminationWhenModal(preventsApplicationT
 	return x
 }
 
-// Default is \c NO. Set to \c YES to allow a window to display tooltips even when the application is in the background.  Note that, enabling tooltips in an inactive application will cause the app to do work any time the mouse passes over the window.  This can degrade system performance. Returns \c YES if this window displays tooltips even when the application is in the background.  To configure this setting you should call `-setAllowsToolTipsWhenApplicationIsInactive:` instead of overriding `-allowsToolTipsWhenApplicationIsInactive`.
+// A Boolean value that indicates whether the window can display tooltips even when the application is in the background.
 //
 // WithAllowsToolTipsWhenApplicationIsInactive sets the allowsToolTipsWhenApplicationIsInactive property and returns the receiver for chaining.
 func (x *Panel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *Panel {
@@ -260,43 +308,55 @@ func (x *Panel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenAp
 	return x
 }
 
+// The window’s backing store type.
+//
 // WithBackingType sets the backingType property and returns the receiver for chaining.
 func (x *Panel) WithBackingType(backingType NSBackingStoreType) *Panel {
 	x.inner.NSWindow.SetBackingType(raw.NSBackingStoreType(backingType))
 	return x
 }
 
+// The window level of the window.
+//
 // WithLevel sets the level property and returns the receiver for chaining.
 func (x *Panel) WithLevel(level int) *Panel {
 	x.inner.NSWindow.SetLevel(level)
 	return x
 }
 
+// The depth limit of the window.
+//
 // WithDepthLimit sets the depthLimit property and returns the receiver for chaining.
 func (x *Panel) WithDepthLimit(depthLimit NSWindowDepth) *Panel {
 	x.inner.NSWindow.SetDepthLimit(raw.NSWindowDepth(depthLimit))
 	return x
 }
 
+// A Boolean value that indicates whether the window has a shadow.
+//
 // WithHasShadow sets the hasShadow property and returns the receiver for chaining.
 func (x *Panel) WithHasShadow(hasShadow bool) *Panel {
 	x.inner.NSWindow.SetHasShadow(hasShadow)
 	return x
 }
 
+// The window’s alpha value.
+//
 // WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
 func (x *Panel) WithAlphaValue(alphaValue float64) *Panel {
 	x.inner.NSWindow.SetAlphaValue(alphaValue)
 	return x
 }
 
+// A Boolean value that indicates whether the window is opaque.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *Panel) WithOpaque(opaque bool) *Panel {
 	x.inner.NSWindow.SetOpaque(opaque)
 	return x
 }
 
-// `-setSharingType:` specifies whether the window content can be read from another process.  The default sharing type is \c NSWindowSharingReadOnly, which means other processes can read the window content (eg. for window capture) but cannot modify it.  If you set your window sharing type to \c NSWindowSharingNone, so that the content cannot be captured, your window will also not be able to participate in a number of system services, so this setting should be used with caution.
+// A Boolean value that indicates the level of access other processes have to the window’s content.
 //
 // WithSharingType sets the sharingType property and returns the receiver for chaining.
 func (x *Panel) WithSharingType(sharingType NSWindowSharingType) *Panel {
@@ -304,7 +364,7 @@ func (x *Panel) WithSharingType(sharingType NSWindowSharingType) *Panel {
 	return x
 }
 
-// Controls whether threading of view drawing should be enabled for this window.  Defaults to \c YES.  When this is set to \c YES, AppKit's view system is allowed to perform `-drawRect:` activity for the window's views on threads other than the main thread, for views that have `canDrawConcurrently == YES`.  When this is set to \c NO, the window's views will be drawn serially as on 10.5 and earlier, even though some of the views may have `canDrawConcurrently == YES`.
+// A Boolean value that indicates whether the window allows multithreaded view drawing.
 //
 // WithAllowsConcurrentViewDrawing sets the allowsConcurrentViewDrawing property and returns the receiver for chaining.
 func (x *Panel) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *Panel {
@@ -312,13 +372,15 @@ func (x *Panel) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool
 	return x
 }
 
+// A Boolean value that indicates whether the window context should be updated when the screen profile changes or when the window moves to a different screen.
+//
 // WithDisplaysWhenScreenProfileChanges sets the displaysWhenScreenProfileChanges property and returns the receiver for chaining.
 func (x *Panel) WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *Panel {
 	x.inner.NSWindow.SetDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges)
 	return x
 }
 
-// This API controls whether the receiver is permitted onscreen before the user has logged in.  This property is off by default.  Alert panels and windows presented by input managers are examples of windows which should have this property set.
+// A Boolean value that indicates whether the window can be displayed at the login window.
 //
 // WithCanBecomeVisibleWithoutLogin sets the canBecomeVisibleWithoutLogin property and returns the receiver for chaining.
 func (x *Panel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *Panel {
@@ -326,13 +388,15 @@ func (x *Panel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bo
 	return x
 }
 
+// A value that identifies the window’s behavior in window collections.
+//
 // WithCollectionBehavior sets the collectionBehavior property and returns the receiver for chaining.
 func (x *Panel) WithCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) *Panel {
 	x.inner.NSWindow.SetCollectionBehavior(raw.NSWindowCollectionBehavior(collectionBehavior))
 	return x
 }
 
-// Provides for per-window control over automatic orderFront/orderOut animation behaviors added in 10.7.  Can be set to \c NSWindowAnimationBehaviorNone to disable Appkit's automatic animations for a given window, or to one of the other non-Default \c NSWindowAnimationBehavior values to override AppKit's automatic inference of appropriate animation behavior based on the window's apparent type.
+// The window’s automatic animation behavior.
 //
 // WithAnimationBehavior sets the animationBehavior property and returns the receiver for chaining.
 func (x *Panel) WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *Panel {
@@ -340,61 +404,79 @@ func (x *Panel) WithAnimationBehavior(animationBehavior NSWindowAnimationBehavio
 	return x
 }
 
+// The name used to automatically save the window’s frame rectangle data in the defaults system.
+//
 // WithFrameAutosaveName sets the frameAutosaveName property and returns the receiver for chaining.
 func (x *Panel) WithFrameAutosaveName(frameAutosaveName *foundation.NSString) *Panel {
 	x.inner.NSWindow.SetFrameAutosaveName(frameAutosaveName)
 	return x
 }
 
+// The minimum size to which the window’s frame (including its title bar) can be sized.
+//
 // WithMinSize sets the minSize property and returns the receiver for chaining.
 func (x *Panel) WithMinSize(minSize corefoundation.CGSize) *Panel {
 	x.inner.NSWindow.SetMinSize(minSize)
 	return x
 }
 
+// The maximum size to which the window’s frame (including its title bar) can be sized.
+//
 // WithMaxSize sets the maxSize property and returns the receiver for chaining.
 func (x *Panel) WithMaxSize(maxSize corefoundation.CGSize) *Panel {
 	x.inner.NSWindow.SetMaxSize(maxSize)
 	return x
 }
 
+// The minimum size of the window’s content view in the window’s base coordinate system.
+//
 // WithContentMinSize sets the contentMinSize property and returns the receiver for chaining.
 func (x *Panel) WithContentMinSize(contentMinSize corefoundation.CGSize) *Panel {
 	x.inner.NSWindow.SetContentMinSize(contentMinSize)
 	return x
 }
 
+// The maximum size of the window’s content view in the window’s base coordinate system.
+//
 // WithContentMaxSize sets the contentMaxSize property and returns the receiver for chaining.
 func (x *Panel) WithContentMaxSize(contentMaxSize corefoundation.CGSize) *Panel {
 	x.inner.NSWindow.SetContentMaxSize(contentMaxSize)
 	return x
 }
 
+// A minimum size that is used to determine if a window can fit when it is in full screen in a tile.
+//
 // WithMinFullScreenContentSize sets the minFullScreenContentSize property and returns the receiver for chaining.
 func (x *Panel) WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *Panel {
 	x.inner.NSWindow.SetMinFullScreenContentSize(minFullScreenContentSize)
 	return x
 }
 
+// A maximum size that is used to determine if a window can fit when it is in full screen in a tile.
+//
 // WithMaxFullScreenContentSize sets the maxFullScreenContentSize property and returns the receiver for chaining.
 func (x *Panel) WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *Panel {
 	x.inner.NSWindow.SetMaxFullScreenContentSize(maxFullScreenContentSize)
 	return x
 }
 
+// The window’s window controller.
+//
 // WithWindowController sets the windowController property and returns the receiver for chaining.
 func (x *Panel) WithWindowController(windowController *WindowController) *Panel {
 	x.inner.NSWindow.SetWindowController(windowController.Unwrap())
 	return x
 }
 
+// The parent window to which the window is attached as a child.
+//
 // WithParentWindow sets the parentWindow property and returns the receiver for chaining.
 func (x *Panel) WithParentWindow(parentWindow WindowProvider) *Panel {
 	x.inner.NSWindow.SetParentWindow(parentWindow.asWindow())
 	return x
 }
 
-// If set, the receiver will inherit the appearance of that object, as well as use KVO to observe its effectiveAppearance for changes. Typically this is used for child windows that are shown from a parent window or specific view. Defaults to NSApp.
+// An object that the window inherits its appearance from.
 //
 // WithAppearanceSource sets the appearanceSource property and returns the receiver for chaining.
 func (x *Panel) WithAppearanceSource(appearanceSource *foundation.NSObject) *Panel {
@@ -402,13 +484,15 @@ func (x *Panel) WithAppearanceSource(appearanceSource *foundation.NSObject) *Pan
 	return x
 }
 
+// The window’s color space.
+//
 // WithColorSpace sets the colorSpace property and returns the receiver for chaining.
 func (x *Panel) WithColorSpace(colorSpace *ColorSpace) *Panel {
 	x.inner.NSWindow.SetColorSpace(colorSpace.Unwrap())
 	return x
 }
 
-// Specifies the style of separator displayed between the window's titlebar and content. The default value is NSTitlebarSeparatorStyleAutomatic. Changing this value will override any preference made by `NSSplitViewItem`.
+// The type of separator that the app displays between the title bar and content of a window.
 //
 // WithTitlebarSeparatorStyle sets the titlebarSeparatorStyle property and returns the receiver for chaining.
 func (x *Panel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *Panel {
@@ -416,7 +500,7 @@ func (x *Panel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSepa
 	return x
 }
 
-// The main content view controller for the window. This provides the contentView of the window. Assigning this value will remove the existing contentView and will make the contentViewController.view the main contentView for the window. The default value is nil. The contentViewController only controls the contentView, and not the title of the window. The window title can easily be bound to the contentViewController with the following: [window bind:NSTitleBinding toObject:contentViewController withKeyPath:@"title" options:nil]. Setting the contentViewController will cause the window to resize based on the current size of the contentViewController. Autolayout should be used to restrict the size of the window. The value of the contentViewController is encoded in the NIB. Directly assigning a contentView will clear out the contentViewController.
+// The main content view controller for the window.
 //
 // WithContentViewController sets the contentViewController property and returns the receiver for chaining.
 func (x *Panel) WithContentViewController(contentViewController ViewControllerProvider) *Panel {
@@ -424,37 +508,47 @@ func (x *Panel) WithContentViewController(contentViewController ViewControllerPr
 	return x
 }
 
+// The view that’s made first responder (also called the key view) the first time the window is placed onscreen.
+//
 // WithInitialFirstResponder sets the initialFirstResponder property and returns the receiver for chaining.
 func (x *Panel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *Panel {
 	x.inner.NSWindow.SetInitialFirstResponder(initialFirstResponder.asView())
 	return x
 }
 
+// The button cell that performs as if clicked when the window receives a Return (or Enter) key event.
+//
 // WithDefaultButtonCell sets the defaultButtonCell property and returns the receiver for chaining.
 func (x *Panel) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *Panel {
 	x.inner.NSWindow.SetDefaultButtonCell(defaultButtonCell.asButtonCell())
 	return x
 }
 
+// A Boolean value that indicates whether the window automatically recalculates the key view loop when views are added.
+//
 // WithAutorecalculatesKeyViewLoop sets the autorecalculatesKeyViewLoop property and returns the receiver for chaining.
 func (x *Panel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *Panel {
 	x.inner.NSWindow.SetAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop)
 	return x
 }
 
+// The window’s toolbar.
+//
 // WithToolbar sets the toolbar property and returns the receiver for chaining.
 func (x *Panel) WithToolbar(toolbar *Toolbar) *Panel {
 	x.inner.NSWindow.SetToolbar(toolbar.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the toolbar control button is currently displayed.
+//
 // WithShowsToolbarButton sets the showsToolbarButton property and returns the receiver for chaining.
 func (x *Panel) WithShowsToolbarButton(showsToolbarButton bool) *Panel {
 	x.inner.NSWindow.SetShowsToolbarButton(showsToolbarButton)
 	return x
 }
 
-// Get and set the tabbing mode for this window. This should be set before a window is shown. The default value is \c NSWindowTabbingModeAutomatic. When the value is \c NSWindowTabbingModeAutomatic, the system will look at the \c userTabbingPreference and automatically tab windows together based on the tabbingIdentifier, when it is appropriate to do so.
+// A value that indicates when a window displays tabs.
 //
 // WithTabbingMode sets the tabbingMode property and returns the receiver for chaining.
 func (x *Panel) WithTabbingMode(tabbingMode NSWindowTabbingMode) *Panel {
@@ -462,7 +556,7 @@ func (x *Panel) WithTabbingMode(tabbingMode NSWindowTabbingMode) *Panel {
 	return x
 }
 
-// Windows with the same \c tabbingIdentifier will have the ability to be tabbed together when a window is being shown. This allows aggregation of similar windows. By default, the \c tabbingIdentifier will be generated based on inherent window properties, such as the window class name, the delegate class name, the window controller class name, and some additional state. Windows can be explicitly made to group together by using the same \c tabbingIdentifier.
+// A value that allows a group of related windows.
 //
 // WithTabbingIdentifier sets the tabbingIdentifier property and returns the receiver for chaining.
 func (x *Panel) WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *Panel {
@@ -470,12 +564,16 @@ func (x *Panel) WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *P
 	return x
 }
 
+// A Boolean value that indicates whether the window accepts mouse-moved events.
+//
 // WithAcceptsMouseMovedEvents sets the acceptsMouseMovedEvents property and returns the receiver for chaining.
 func (x *Panel) WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *Panel {
 	x.inner.NSWindow.SetAcceptsMouseMovedEvents(acceptsMouseMovedEvents)
 	return x
 }
 
+// A Boolean value that indicates whether the window is transparent to mouse events.
+//
 // WithIgnoresMouseEvents sets the ignoresMouseEvents property and returns the receiver for chaining.
 func (x *Panel) WithIgnoresMouseEvents(ignoresMouseEvents bool) *Panel {
 	x.inner.NSWindow.SetIgnoresMouseEvents(ignoresMouseEvents)
@@ -506,36 +604,48 @@ func (x *Panel) WithShowsResizeIndicator(showsResizeIndicator bool) *Panel {
 	return x
 }
 
+// The zero-based position of the window, based on its order from front to back among all visible application windows.
+//
 // WithOrderedIndex sets the orderedIndex property and returns the receiver for chaining.
 func (x *Panel) WithOrderedIndex(orderedIndex int) *Panel {
 	x.inner.NSWindow.SetOrderedIndex(orderedIndex)
 	return x
 }
 
+// A Boolean value indicating whether the window configuration is preserved between application launches.
+//
 // WithRestorable sets the restorable property and returns the receiver for chaining.
 func (x *Panel) WithRestorable(restorable bool) *Panel {
 	x.inner.NSWindow.SetRestorable(restorable)
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *Panel) WithNextResponder(nextResponder ResponderProvider) *Panel {
 	x.inner.NSWindow.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *Panel) WithMenu(menu *Menu) *Panel {
 	x.inner.NSWindow.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *Panel) WithUserActivity(userActivity *foundation.NSUserActivity) *Panel {
 	x.inner.NSWindow.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *Panel) WithTouchBar(touchBar *TouchBar) *Panel {
 	x.inner.NSWindow.NSResponder.SetTouchBar(touchBar.Unwrap())

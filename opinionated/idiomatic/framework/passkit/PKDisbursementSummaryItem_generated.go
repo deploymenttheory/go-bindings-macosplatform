@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A summary item that represents a disbursement.
+//
 // DisbursementSummaryItem wraps [raw.PKDisbursementSummaryItem] with a fluent Go API.
 type DisbursementSummaryItem struct {
 	inner *raw.PKDisbursementSummaryItem
@@ -36,18 +38,24 @@ func NewDisbursementSummaryItem() *DisbursementSummaryItem {
 	return &DisbursementSummaryItem{inner: raw.PKDisbursementSummaryItemFromID(_id)}
 }
 
+// A short, localized description of the item.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *DisbursementSummaryItem) WithLabel(label string) *DisbursementSummaryItem {
 	x.inner.PKPaymentSummaryItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// The summary item’s amount.
+//
 // WithAmount sets the amount property and returns the receiver for chaining.
 func (x *DisbursementSummaryItem) WithAmount(amount *foundation.NSDecimalNumber) *DisbursementSummaryItem {
 	x.inner.PKPaymentSummaryItem.SetAmount(amount)
 	return x
 }
 
+// The summary item’s type that indicates whether the amount is final.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *DisbursementSummaryItem) WithType(type_ PKPaymentSummaryItemType) *DisbursementSummaryItem {
 	x.inner.PKPaymentSummaryItem.SetType(raw.PKPaymentSummaryItemType(type_))

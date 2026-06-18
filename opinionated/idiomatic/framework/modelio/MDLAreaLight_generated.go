@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A light source that illuminates a 3D scene from an area with a specific shape.
+//
 // AreaLight wraps [raw.MDLAreaLight] with a fluent Go API.
 type AreaLight struct {
 	inner *raw.MDLAreaLight
@@ -37,61 +39,79 @@ func NewAreaLight() *AreaLight {
 	return &AreaLight{inner: raw.MDLAreaLightFromID(_id)}
 }
 
+// The radius, in units of local coordinate space, of the area from which light emanates.
+//
 // WithAreaRadius sets the areaRadius property and returns the receiver for chaining.
 func (x *AreaLight) WithAreaRadius(areaRadius float32) *AreaLight {
 	x.inner.SetAreaRadius(areaRadius)
 	return x
 }
 
+// The aspect ratio of the light’s shape.
+//
 // WithAspect sets the aspect property and returns the receiver for chaining.
 func (x *AreaLight) WithAspect(aspect float32) *AreaLight {
 	x.inner.SetAspect(aspect)
 	return x
 }
 
+// The total visible intensity of the light source, in lumens.
+//
 // WithLumens sets the lumens property and returns the receiver for chaining.
 func (x *AreaLight) WithLumens(lumens float32) *AreaLight {
 	x.inner.MDLPhysicallyPlausibleLight.SetLumens(lumens)
 	return x
 }
 
+// The radial angle, in degrees, of the area fully illuminated by the light.
+//
 // WithInnerConeAngle sets the innerConeAngle property and returns the receiver for chaining.
 func (x *AreaLight) WithInnerConeAngle(innerConeAngle float32) *AreaLight {
 	x.inner.MDLPhysicallyPlausibleLight.SetInnerConeAngle(innerConeAngle)
 	return x
 }
 
+// The radial angle, in degrees, at which the illumination from a spotlight becomes zero.
+//
 // WithOuterConeAngle sets the outerConeAngle property and returns the receiver for chaining.
 func (x *AreaLight) WithOuterConeAngle(outerConeAngle float32) *AreaLight {
 	x.inner.MDLPhysicallyPlausibleLight.SetOuterConeAngle(outerConeAngle)
 	return x
 }
 
+// The distance from the light source, in units of local coordinate space, at which its illumination begins to diminish.
+//
 // WithAttenuationStartDistance sets the attenuationStartDistance property and returns the receiver for chaining.
 func (x *AreaLight) WithAttenuationStartDistance(attenuationStartDistance float32) *AreaLight {
 	x.inner.MDLPhysicallyPlausibleLight.SetAttenuationStartDistance(attenuationStartDistance)
 	return x
 }
 
+// The distance from the light source, in units of local coordinate space, at which its illumination becomes zero.
+//
 // WithAttenuationEndDistance sets the attenuationEndDistance property and returns the receiver for chaining.
 func (x *AreaLight) WithAttenuationEndDistance(attenuationEndDistance float32) *AreaLight {
 	x.inner.MDLPhysicallyPlausibleLight.SetAttenuationEndDistance(attenuationEndDistance)
 	return x
 }
 
+// The type of the light.
+//
 // WithLightType sets the lightType property and returns the receiver for chaining.
 func (x *AreaLight) WithLightType(lightType MDLLightType) *AreaLight {
 	x.inner.MDLPhysicallyPlausibleLight.MDLLight.SetLightType(raw.MDLLightType(lightType))
 	return x
 }
 
+// The name of the Core Graphics color space to be used for interpreting the light’s color information.
+//
 // WithColorSpace sets the colorSpace property and returns the receiver for chaining.
 func (x *AreaLight) WithColorSpace(colorSpace string) *AreaLight {
 	x.inner.MDLPhysicallyPlausibleLight.MDLLight.SetColorSpace(foundation.NSStringStringWithUTF8String(colorSpace))
 	return x
 }
 
-// @property parent @abstract Parent object. Nil if no parent. @discussion Set to nil when you remove this from an object container inside the parent object.
+// The parent object that contains this object.
 //
 // WithParent sets the parent property and returns the receiver for chaining.
 func (x *AreaLight) WithParent(parent ObjectProvider) *AreaLight {
@@ -99,7 +119,7 @@ func (x *AreaLight) WithParent(parent ObjectProvider) *AreaLight {
 	return x
 }
 
-// @property instance @abstract Instance object @discussion nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
+// The primary object, if applicable, of which this object is an instance.
 //
 // WithInstance sets the instance property and returns the receiver for chaining.
 func (x *AreaLight) WithInstance(instance ObjectProvider) *AreaLight {
@@ -107,7 +127,7 @@ func (x *AreaLight) WithInstance(instance ObjectProvider) *AreaLight {
 	return x
 }
 
-// @property transform @abstract Short hand property for the MDLTransformComponent. @discussion The default value is nil @see MDLTransformComponent
+// A component that manages this object’s spatial transform and its changes over time.
 //
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *AreaLight) WithTransform(transform raw.MDLTransformComponent) *AreaLight {
@@ -115,7 +135,7 @@ func (x *AreaLight) WithTransform(transform raw.MDLTransformComponent) *AreaLigh
 	return x
 }
 
-// @property children @abstract Short hand property for the MDLObjectContainerComponent. @discussion The default value is an empty MDLObjectContainer @see MDLObjectContainerComponent
+// A component that manages this object’s collection of children.
 //
 // WithChildren sets the children property and returns the receiver for chaining.
 func (x *AreaLight) WithChildren(children raw.MDLObjectContainerComponent) *AreaLight {
@@ -123,6 +143,8 @@ func (x *AreaLight) WithChildren(children raw.MDLObjectContainerComponent) *Area
 	return x
 }
 
+// A Boolean value indicating whether this object should be used in rendering.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *AreaLight) WithHidden(hidden bool) *AreaLight {
 	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetHidden(hidden)

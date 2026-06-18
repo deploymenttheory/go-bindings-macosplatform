@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The constraint on the keys for a dictionary feature.
+//
 // DictionaryConstraint wraps [raw.MLDictionaryConstraint] with a fluent Go API.
 type DictionaryConstraint struct {
 	inner *raw.MLDictionaryConstraint

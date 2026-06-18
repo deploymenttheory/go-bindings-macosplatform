@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A CBIdentityPicker object allows a user to select identities—for example, user or group objects—that it wants one or more services or shared resources to have access to. An identity picker can be displayed either as an application-modal dialog or as a sheet attached to a document window. An identity picker returns the selected records to be added to access control lists using Collaboration. If a selected record is not a user or group identity, then an identity picker prompts the user for additional information—such as a password—to promote that record to a sharing account.
+//
 // IdentityPicker wraps [raw.CBIdentityPicker] with a fluent Go API.
 type IdentityPicker struct {
 	inner *raw.CBIdentityPicker
@@ -39,7 +41,7 @@ func NewIdentityPicker() *IdentityPicker {
 	return &IdentityPicker{inner: raw.CBIdentityPickerFromID(_id)}
 }
 
-// The title of the identity picker. The value of this property is the title text that appears at the top of the panel. By default, the title is "Select a person to share with:".
+// The title of the identity picker.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *IdentityPicker) WithTitle(title string) *IdentityPicker {
@@ -47,7 +49,7 @@ func (x *IdentityPicker) WithTitle(title string) *IdentityPicker {
 	return x
 }
 
-// A Boolean value indicating whether the user is allowed to select multiple identities. The value of this property is <doc://com.apple.documentation/documentation/objectivec/yes> if the user can select multiple records; otherwise, <doc://com.apple.documentation/documentation/objectivec/no>. The default value is <doc://com.apple.documentation/documentation/objectivec/no>.
+// A Boolean value indicating whether the user is allowed to select multiple identities.
 //
 // WithAllowsMultipleSelection sets the allowsMultipleSelection property and returns the receiver for chaining.
 func (x *IdentityPicker) WithAllowsMultipleSelection(allowsMultipleSelection bool) *IdentityPicker {
@@ -55,21 +57,21 @@ func (x *IdentityPicker) WithAllowsMultipleSelection(allowsMultipleSelection boo
 	return x
 }
 
-// Runs the receiver as an application-modal dialog. The receiver may create identities for selected records if necessary. - Returns: `NSOKButton` if the user selected OK; otherwise, `NSCancelButton`.
+// Runs the receiver as an application-modal dialog.
 //
 // RunModal calls the underlying RunModal.
 func (x *IdentityPicker) RunModal() int {
 	return x.inner.RunModal()
 }
 
-// Runs the receiver modally as a sheet attached to a specified window. The `didEndSelector` parameter is a selector that takes three arguments. The corresponding method should have a declaration modeled on the following example: ```swift - (void)identityPickerDidEnd:(CBIdentityPicker *)identityPicker returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo; ``` where the `identityPicker` argument is the identity picker object, the `returnCode` argument is the button the user clicked, and `contextInfo` is the same `contextInfo` argument that was passed in the original message. - Parameters: - window: The parent window for the sheet. - delegate: The delegate for the modal session. - didEndSelector: A message sent to the delegate after the user responds but before the sheet is dismissed. - contextInfo: Contextual data passed to the delegate in the `didEndSelector` message.
+// Runs the receiver modally as a sheet attached to a specified window.
 //
 // RunModalForWindowModalDelegateDidEndSelectorContextInfo calls the underlying RunModalForWindowModalDelegateDidEndSelectorContextInfo.
 func (x *IdentityPicker) RunModalForWindowModalDelegateDidEndSelectorContextInfo(window *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.RunModalForWindowModalDelegateDidEndSelectorContextInfo(window, delegate, didEndSelector, contextInfo)
 }
 
-// Runs the identity picker modally as a sheet attached to a specified window. - Parameters: - window: The parent window for the sheet. - completionHandler: The handler to run after the return value is known, but before the sheet is dismissed.
+// Runs the identity picker modally as a sheet attached to a specified window.
 //
 // RunModalForWindowCompletionHandler calls the underlying RunModalForWindowCompletionHandler.
 func (x *IdentityPicker) RunModalForWindowCompletionHandler(window *appkit.NSWindow, completionHandler func(int)) {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A collection of vocal analysis metrics.
+//
 // VoiceAnalytics wraps [raw.SFVoiceAnalytics] with a fluent Go API.
 type VoiceAnalytics struct {
 	inner *raw.SFVoiceAnalytics

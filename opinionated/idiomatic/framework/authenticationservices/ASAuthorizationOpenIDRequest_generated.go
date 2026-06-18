@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An OpenID authorization request.
+//
 // AuthorizationOpenIDRequest wraps [raw.ASAuthorizationOpenIDRequest] with a fluent Go API.
 type AuthorizationOpenIDRequest struct {
 	inner *raw.ASAuthorizationOpenIDRequest
@@ -38,7 +40,7 @@ func NewAuthorizationOpenIDRequest() *AuthorizationOpenIDRequest {
 	return &AuthorizationOpenIDRequest{inner: raw.ASAuthorizationOpenIDRequestFromID(_id)}
 }
 
-// @abstract The contact information to be requested from the user.  Only scopes for which this app was authorized for will be returned.
+// The contact information to be requested from the user during authentication.
 //
 // WithRequestedScopes sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationOpenIDRequest) WithRequestedScopes(items ...*foundation.NSString) *AuthorizationOpenIDRequest {
@@ -58,7 +60,7 @@ func (x *AuthorizationOpenIDRequest) WithRequestedScopes(items ...*foundation.NS
 	return x
 }
 
-// @abstract State to be passed to the identity provider.  This value will be returned as a part of successful ASAuthorization response. @note The state size may depend on the actual technology used and an error might be returned by the request execution.
+// Data that’s returned to you unmodified in the corresponding credential after a successful authentication.
 //
 // WithState sets the state property and returns the receiver for chaining.
 func (x *AuthorizationOpenIDRequest) WithState(state string) *AuthorizationOpenIDRequest {
@@ -66,7 +68,7 @@ func (x *AuthorizationOpenIDRequest) WithState(state string) *AuthorizationOpenI
 	return x
 }
 
-// @abstract Nonce to be passed to the identity provider.  This value can be verified with the identity token provided as a part of successful ASAuthorization response. @note The nonce size may depend on the actual technology used and an error might be returned by the request execution.
+// A string value to pass to the identity provider.
 //
 // WithNonce sets the nonce property and returns the receiver for chaining.
 func (x *AuthorizationOpenIDRequest) WithNonce(nonce string) *AuthorizationOpenIDRequest {
@@ -74,7 +76,7 @@ func (x *AuthorizationOpenIDRequest) WithNonce(nonce string) *AuthorizationOpenI
 	return x
 }
 
-// @abstract Operation to be executed by the request. The ASAuthorizationOperationImplicit operation interpretation depends on the credential provider implementation.
+// The OpenID authentication operation you want this request to perform.
 //
 // WithRequestedOperation sets the requestedOperation property and returns the receiver for chaining.
 func (x *AuthorizationOpenIDRequest) WithRequestedOperation(requestedOperation *foundation.NSString) *AuthorizationOpenIDRequest {

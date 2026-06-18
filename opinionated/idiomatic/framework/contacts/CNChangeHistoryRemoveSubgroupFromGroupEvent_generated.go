@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a user removing a subgroup from a group.
+//
 // ChangeHistoryRemoveSubgroupFromGroupEvent wraps [raw.CNChangeHistoryRemoveSubgroupFromGroupEvent] with a fluent Go API.
 type ChangeHistoryRemoveSubgroupFromGroupEvent struct {
 	inner *raw.CNChangeHistoryRemoveSubgroupFromGroupEvent

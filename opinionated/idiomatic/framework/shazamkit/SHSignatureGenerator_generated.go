@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object for converting audio data into a signature.
+//
 // SignatureGenerator wraps [raw.SHSignatureGenerator] with a fluent Go API.
 type SignatureGenerator struct {
 	inner *raw.SHSignatureGenerator
@@ -36,14 +38,14 @@ func NewSignatureGenerator() *SignatureGenerator {
 	return &SignatureGenerator{inner: raw.SHSignatureGeneratorFromID(_id)}
 }
 
-// Adds audio to the generator. Using noncontiguous audio may result in a lower-quality signature. The audio must be PCM at one of these rates: - `48000` hertz - `44100` hertz - `32000` hertz - `16000` hertz - Parameters: - buffer: The audio data to append to the signature generator. - time: The time position of the start of the audio buffer in the full audio you use to generate the signature. - error: The error that occurs; otherwise, `nil`.
+// Adds audio to the generator.
 //
 // AppendBufferAtTimeError calls the underlying AppendBufferAtTimeError.
 func (x *SignatureGenerator) AppendBufferAtTimeError(buffer *avfaudio.AVAudioPCMBuffer, time_ *avfaudio.AVAudioTime) (bool, error) {
 	return x.inner.AppendBufferAtTimeError(buffer, time_)
 }
 
-// Converts the audio buffer into a signature. - Returns: A signature that ShazamKit generates from the audio buffer.
+// Converts the audio buffer into a signature.
 //
 // Signature calls the underlying Signature.
 func (x *SignatureGenerator) Signature() *Signature {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A single action to present when the user swipes horizontally on a table row.
+//
 // TableViewRowAction wraps [raw.NSTableViewRowAction] with a fluent Go API.
 type TableViewRowAction struct {
 	inner *raw.NSTableViewRowAction
@@ -37,12 +39,16 @@ func NewTableViewRowAction() *TableViewRowAction {
 	return &TableViewRowAction{inner: raw.NSTableViewRowActionFromID(_id)}
 }
 
+// The title of the action button.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *TableViewRowAction) WithTitle(title string) *TableViewRowAction {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The background color of the action button.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *TableViewRowAction) WithBackgroundColor(backgroundColor *Color) *TableViewRowAction {
 	x.inner.SetBackgroundColor(backgroundColor.Unwrap())

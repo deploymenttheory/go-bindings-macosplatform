@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An analyzer that runs sound classification requests on an audio file.
+//
 // AudioFileAnalyzer wraps [raw.SNAudioFileAnalyzer] with a fluent Go API.
 type AudioFileAnalyzer struct {
 	inner *raw.SNAudioFileAnalyzer
@@ -32,7 +34,7 @@ func AudioFileAnalyzerFromID(id objc.ID) *AudioFileAnalyzer {
 	return &AudioFileAnalyzer{inner: raw.SNAudioFileAnalyzerFromID(id)}
 }
 
-// Creates a new analyzer - Parameters: - url: The url for the audio file to be analyzed - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify nil for this parameter if you do not want the error information.
+// Creates a new audio file analyzer.
 //
 // NewAudioFileAnalyzerWithURLError creates a new [AudioFileAnalyzer].
 func NewAudioFileAnalyzerWithURLError(url string) (*AudioFileAnalyzer, error) {
@@ -45,42 +47,42 @@ func NewAudioFileAnalyzerWithURLError(url string) (*AudioFileAnalyzer, error) {
 	return &AudioFileAnalyzer{inner: raw.SNAudioFileAnalyzerFromID(_id)}, nil
 }
 
-// Adds a new analysis request to the analyzer - Parameters: - request: An audio analysis request to be performed on the audio stream - observer: The object that will receive the analysis results for the supplied request. The observer is weakly retained by the analyzer. - error On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify nil for this parameter if you do not want the error information. - Returns: YES if the request was successfully added, and NO otherwise. If addRequest is called while the file is being processed, an error will be returned.
+// Adds a new analysis request to the audio file analyzer.
 //
 // AddRequestWithObserverError calls the underlying AddRequestWithObserverError.
 func (x *AudioFileAnalyzer) AddRequestWithObserverError(request raw.SNRequest, observer raw.SNResultsObserving) (bool, error) {
 	return x.inner.AddRequestWithObserverError(request, observer)
 }
 
-// Removes an existing analysis request from the analyzer - Parameter request: An audio analysis request to be removed Requests can be removed while analysis is in progress. Once the removeRequest method returns, the previously registered observer will not receive any more callbacks.
+// Removes an existing request from the audio file analyzer.
 //
 // RemoveRequest calls the underlying RemoveRequest.
 func (x *AudioFileAnalyzer) RemoveRequest(request raw.SNRequest) {
 	x.inner.RemoveRequest(request)
 }
 
-// Removes all requests from the analyzer
+// Removes all the sound analysis requests from the audio file analyzer.
 //
 // RemoveAllRequests calls the underlying RemoveAllRequests.
 func (x *AudioFileAnalyzer) RemoveAllRequests() {
 	x.inner.RemoveAllRequests()
 }
 
-// Analyzes the audio file synchronously This function executes synchronously. Any errors produced during analysis will flow downstream to the request observers. This method may block for a long period of time, so be careful to ensure this call does not block UI or other important tasks.
+// Analyzes the audio file synchronously.
 //
 // Analyze calls the underlying Analyze.
 func (x *AudioFileAnalyzer) Analyze() {
 	x.inner.Analyze()
 }
 
-// Analyzes the audio file asynchronously This function executes asynchronously, calling the completion after the entire file has completed analysis. Any errors produced during analysis will flow downstream to the request observers. If the cancelAnalysis method is called, the completionHandler will still be called, but with didReachEndOfFile set to NO.
+// Analyzes the audio file asynchronously.
 //
 // AnalyzeWithCompletionHandler calls the underlying AnalyzeWithCompletionHandler.
 func (x *AudioFileAnalyzer) AnalyzeWithCompletionHandler(completionHandler func(bool)) {
 	x.inner.AnalyzeWithCompletionHandler(completionHandler)
 }
 
-// Cancels any in-progress analysis of the audio file This function executes asynchronously, and will trigger the completion handler provided in the analyzeWithCompletionHandler method after the cancellation is complete.
+// Cancels all the asynchronous sound analysis requests the analyzer is currently processing.
 //
 // CancelAnalysis calls the underlying CancelAnalysis.
 func (x *AudioFileAnalyzer) CancelAnalysis() {

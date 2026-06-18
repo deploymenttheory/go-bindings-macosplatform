@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// The user interface of a path control object.
+//
 // PathCell wraps [raw.NSPathCell] with a fluent Go API.
 type PathCell struct {
 	inner *raw.NSPathCell
@@ -39,18 +41,24 @@ func NewPathCell() *PathCell {
 	return &PathCell{inner: raw.NSPathCellFromID(_id)}
 }
 
+// Sets the receiver’s path style.
+//
 // WithPathStyle sets the pathStyle property and returns the receiver for chaining.
 func (x *PathCell) WithPathStyle(pathStyle NSPathStyle) *PathCell {
 	x.inner.SetPathStyle(raw.NSPathStyle(pathStyle))
 	return x
 }
 
+// Returns the path displayed by the receiver.
+//
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *PathCell) WithURL(uRL string) *PathCell {
 	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 	return x
 }
 
+// Sets the component types allowed in the path when the cell is editable.
+//
 // WithAllowedTypes sets the collection, converting the Go slice to an NSArray.
 func (x *PathCell) WithAllowedTypes(items ...*foundation.NSString) *PathCell {
 	if len(items) == 0 {
@@ -69,12 +77,16 @@ func (x *PathCell) WithAllowedTypes(items ...*foundation.NSString) *PathCell {
 	return x
 }
 
+// Sets the receiver’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PathCell) WithDelegate(delegate raw.NSPathCellDelegate) *PathCell {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Sets the array of NSPathComponentCell objects currently being displayed.
+//
 // WithPathComponentCells sets the collection, converting the Go slice to an NSArray.
 func (x *PathCell) WithPathComponentCells(items ...*raw.NSPathComponentCell) *PathCell {
 	if len(items) == 0 {
@@ -93,305 +105,407 @@ func (x *PathCell) WithPathComponentCells(items ...*raw.NSPathComponentCell) *Pa
 	return x
 }
 
+// Sets the receiver’s double-click action.
+//
 // WithDoubleAction sets the doubleAction property and returns the receiver for chaining.
 func (x *PathCell) WithDoubleAction(doubleAction objc.SEL) *PathCell {
 	x.inner.SetDoubleAction(doubleAction)
 	return x
 }
 
+// Returns the current background color of the receiver.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *PathCell) WithBackgroundColor(backgroundColor *Color) *PathCell {
 	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// Returns the placeholder string.
+//
 // WithPlaceholderString sets the placeholderString property and returns the receiver for chaining.
 func (x *PathCell) WithPlaceholderString(placeholderString string) *PathCell {
 	x.inner.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
 	return x
 }
 
+// Sets the value of the placeholder attributed string.
+//
 // WithPlaceholderAttributedString sets the placeholderAttributedString property and returns the receiver for chaining.
 func (x *PathCell) WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *PathCell {
 	x.inner.SetPlaceholderAttributedString(placeholderAttributedString)
 	return x
 }
 
+// The view associated with the cell.
+//
 // WithControlView sets the controlView property and returns the receiver for chaining.
 func (x *PathCell) WithControlView(controlView ViewProvider) *PathCell {
 	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
 	return x
 }
 
+// The type of the cell.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *PathCell) WithType(type_ NSCellType) *PathCell {
 	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
+// The cell’s current state.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *PathCell) WithState(state int) *PathCell {
 	x.inner.NSActionCell.NSCell.SetState(state)
 	return x
 }
 
+// The object that receives the cell’s action messages.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *PathCell) WithTarget(target objc.ID) *PathCell {
 	x.inner.NSActionCell.NSCell.SetTarget(target)
 	return x
 }
 
+// The action performed by the cell.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *PathCell) WithAction(action objc.SEL) *PathCell {
 	x.inner.NSActionCell.NSCell.SetAction(action)
 	return x
 }
 
+// A tag for identifying the cell.
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *PathCell) WithTag(tag int) *PathCell {
 	x.inner.NSActionCell.NSCell.SetTag(tag)
 	return x
 }
 
+// The cell’s title text.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *PathCell) WithTitle(title string) *PathCell {
 	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// A Boolean value indicating whether the cell is currently enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *PathCell) WithEnabled(enabled bool) *PathCell {
 	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *PathCell) WithContinuous(continuous bool) *PathCell {
 	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value indicating whether the cell is editable.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *PathCell) WithEditable(editable bool) *PathCell {
 	x.inner.NSActionCell.NSCell.SetEditable(editable)
 	return x
 }
 
+// A Boolean value indicating whether the cell’s text can be selected.
+//
 // WithSelectable sets the selectable property and returns the receiver for chaining.
 func (x *PathCell) WithSelectable(selectable bool) *PathCell {
 	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
 	return x
 }
 
+// A Boolean value indicating whether the cell draws itself outlined with a plain border.
+//
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *PathCell) WithBordered(bordered bool) *PathCell {
 	x.inner.NSActionCell.NSCell.SetBordered(bordered)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a bezeled border.
+//
 // WithBezeled sets the bezeled property and returns the receiver for chaining.
 func (x *PathCell) WithBezeled(bezeled bool) *PathCell {
 	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
 	return x
 }
 
+// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
+//
 // WithScrollable sets the scrollable property and returns the receiver for chaining.
 func (x *PathCell) WithScrollable(scrollable bool) *PathCell {
 	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a highlighted appearance.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *PathCell) WithHighlighted(highlighted bool) *PathCell {
 	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
 	return x
 }
 
+// The alignment of the cell’s text.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *PathCell) WithAlignment(alignment NSTextAlignment) *PathCell {
 	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+//
 // WithWraps sets the wraps property and returns the receiver for chaining.
 func (x *PathCell) WithWraps(wraps bool) *PathCell {
 	x.inner.NSActionCell.NSCell.SetWraps(wraps)
 	return x
 }
 
+// The font that the cell uses to display text.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *PathCell) WithFont(font *Font) *PathCell {
 	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
+// The cell’s formatter object.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *PathCell) WithFormatter(formatter *foundation.NSFormatter) *PathCell {
 	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
 	return x
 }
 
+// The cell’s value as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *PathCell) WithObjectValue(objectValue objc.ID) *PathCell {
 	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
 	return x
 }
 
+// The cell’s value as a string.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *PathCell) WithStringValue(stringValue string) *PathCell {
 	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The cell’s value as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *PathCell) WithIntValue(intValue int) *PathCell {
 	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
 	return x
 }
 
+// The cell’s value as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *PathCell) WithFloatValue(floatValue float32) *PathCell {
 	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
 	return x
 }
 
+// The cell’s value as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *PathCell) WithDoubleValue(doubleValue float64) *PathCell {
 	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The cell’s value as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *PathCell) WithIntegerValue(integerValue int) *PathCell {
 	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
 	return x
 }
 
+// The image displayed by the cell, if any.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *PathCell) WithImage(image *Image) *PathCell {
 	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
+// The size of the cell.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *PathCell) WithControlSize(controlSize NSControlSize) *PathCell {
 	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The object represented by the cell.
+//
 // WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
 func (x *PathCell) WithRepresentedObject(representedObject objc.ID) *PathCell {
 	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
 	return x
 }
 
+// The cell’s contextual menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *PathCell) WithMenu(menu *Menu) *PathCell {
 	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
+// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+//
 // WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
 func (x *PathCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *PathCell {
 	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *PathCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *PathCell {
 	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// The line break mode to use when drawing text in the cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *PathCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *PathCell {
 	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// A Boolean value indicating whether the cell assumes responsibility for undo operations.
+//
 // WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
 func (x *PathCell) WithAllowsUndo(allowsUndo bool) *PathCell {
 	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
 	return x
 }
 
+// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+//
 // WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
 func (x *PathCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *PathCell {
 	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
 	return x
 }
 
+// The layout direction of the user interface.
+//
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
 func (x *PathCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *PathCell {
 	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
+// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *PathCell) WithUsesSingleLineMode(usesSingleLineMode bool) *PathCell {
 	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// A Boolean value indicating whether the cell refuses the first responder status.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *PathCell) WithRefusesFirstResponder(refusesFirstResponder bool) *PathCell {
 	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+//
 // WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
 func (x *PathCell) WithShowsFirstResponder(showsFirstResponder bool) *PathCell {
 	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
 	return x
 }
 
+// The type of focus ring to use with the associated view.
+//
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
 func (x *PathCell) WithFocusRingType(focusRingType NSFocusRingType) *PathCell {
 	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
+// The cell’s value as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *PathCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *PathCell {
 	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+//
 // WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
 func (x *PathCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *PathCell {
 	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports the importation of images into its text.
+//
 // WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
 func (x *PathCell) WithImportsGraphics(importsGraphics bool) *PathCell {
 	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports three states instead of two.
+//
 // WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
 func (x *PathCell) WithAllowsMixedState(allowsMixedState bool) *PathCell {
 	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
 	return x
 }
 
+// The cell’s background style.
+//
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
 func (x *PathCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *PathCell {
 	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
+// The cell’s control tint.
+//
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
 func (x *PathCell) WithControlTint(controlTint NSControlTint) *PathCell {
 	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
+// Returns the current rectangle being displayed for a given path component cell, with respect to a given frame in a given view.
+//
 // RectOfPathComponentCellWithFrameInView calls the underlying RectOfPathComponentCellWithFrameInView.
 func (x *PathCell) RectOfPathComponentCellWithFrameInView(cell *raw.NSPathComponentCell, frame corefoundation.CGRect, view *raw.NSView) corefoundation.CGRect {
 	return x.inner.RectOfPathComponentCellWithFrameInView(cell, frame, view)
 }
 
+// Returns the cell located at the given point within the given frame of the given view.
+//
 // PathComponentCellAtPointWithFrameInView calls the underlying PathComponentCellAtPointWithFrameInView.
 func (x *PathCell) PathComponentCellAtPointWithFrameInView(point corefoundation.CGPoint, frame corefoundation.CGRect, view *raw.NSView) *PathComponentCell {
 	_r := x.inner.PathComponentCellAtPointWithFrameInView(point, frame, view)
@@ -401,11 +515,15 @@ func (x *PathCell) PathComponentCellAtPointWithFrameInView(point corefoundation.
 	return &PathComponentCell{inner: _r}
 }
 
+// Displays the cell component over which the mouse is hovering.
+//
 // MouseEnteredWithFrameInView calls the underlying MouseEnteredWithFrameInView.
 func (x *PathCell) MouseEnteredWithFrameInView(event *raw.NSEvent, frame corefoundation.CGRect, view *raw.NSView) {
 	x.inner.MouseEnteredWithFrameInView(event, frame, view)
 }
 
+// Hides the cell component over which the mouse is hovering.
+//
 // MouseExitedWithFrameInView calls the underlying MouseExitedWithFrameInView.
 func (x *PathCell) MouseExitedWithFrameInView(event *raw.NSEvent, frame corefoundation.CGRect, view *raw.NSView) {
 	x.inner.MouseExitedWithFrameInView(event, frame, view)

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the catalog media items that match a query.
+//
 // Match wraps [raw.SHMatch] with a fluent Go API.
 type Match struct {
 	inner *raw.SHMatch

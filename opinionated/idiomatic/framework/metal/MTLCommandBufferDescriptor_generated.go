@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration that customizes the behavior for a new command buffer.
+//
 // CommandBufferDescriptor wraps [raw.MTLCommandBufferDescriptor] with a fluent Go API.
 type CommandBufferDescriptor struct {
 	inner *raw.MTLCommandBufferDescriptor
@@ -35,7 +37,7 @@ func NewCommandBufferDescriptor() *CommandBufferDescriptor {
 	return &CommandBufferDescriptor{inner: raw.MTLCommandBufferDescriptorFromID(_id)}
 }
 
-// @property retainedReferences @abstract If YES, the created command buffer holds strong references to objects needed for it to execute. If NO, the created command buffer does not hold strong references to objects needed for it to execute.
+// A Boolean value that indicates whether the command buffer the descriptor creates maintains strong references to the resources it uses.
 //
 // WithRetainedReferences sets the retainedReferences property and returns the receiver for chaining.
 func (x *CommandBufferDescriptor) WithRetainedReferences(retainedReferences bool) *CommandBufferDescriptor {
@@ -43,7 +45,7 @@ func (x *CommandBufferDescriptor) WithRetainedReferences(retainedReferences bool
 	return x
 }
 
-// @property errorOptions @abstract A set of options to influence the error reporting of the created command buffer. See MTLCommandBufferErrorOption.
+// The reporting configuration that indicates which information the GPU driver stores in a command buffer’s error property.
 //
 // WithErrorOptions sets the errorOptions property and returns the receiver for chaining.
 func (x *CommandBufferDescriptor) WithErrorOptions(errorOptions MTLCommandBufferErrorOption) *CommandBufferDescriptor {
@@ -51,7 +53,7 @@ func (x *CommandBufferDescriptor) WithErrorOptions(errorOptions MTLCommandBuffer
 	return x
 }
 
-// @property logState @abstract Contains information related to shader logging.
+// The shader logging configuration that the command buffer uses.
 //
 // WithLogState sets the logState property and returns the receiver for chaining.
 func (x *CommandBufferDescriptor) WithLogState(logState raw.MTLLogState) *CommandBufferDescriptor {

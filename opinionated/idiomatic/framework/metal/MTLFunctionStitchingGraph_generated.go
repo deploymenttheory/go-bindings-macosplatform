@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A description of a new stitched function.
+//
 // FunctionStitchingGraph wraps [raw.MTLFunctionStitchingGraph] with a fluent Go API.
 type FunctionStitchingGraph struct {
 	inner *raw.MTLFunctionStitchingGraph
@@ -32,6 +34,8 @@ func FunctionStitchingGraphFromID(id objc.ID) *FunctionStitchingGraph {
 	return &FunctionStitchingGraph{inner: raw.MTLFunctionStitchingGraphFromID(id)}
 }
 
+// Creates a description of a new function call graph.
+//
 // NewFunctionStitchingGraphWithFunctionNameNodesOutputNodeAttributes creates a new [FunctionStitchingGraph].
 func NewFunctionStitchingGraphWithFunctionNameNodesOutputNodeAttributes(functionName string, nodes *foundation.NSArray[*raw.MTLFunctionStitchingFunctionNode], outputNode *raw.MTLFunctionStitchingFunctionNode, attributes ...purego.IDer) *FunctionStitchingGraph {
 	_ptrs := make([]objc.ID, len(attributes))
@@ -48,12 +52,16 @@ func NewFunctionStitchingGraphWithFunctionNameNodesOutputNodeAttributes(function
 	return &FunctionStitchingGraph{inner: raw.MTLFunctionStitchingGraphFromID(_id)}
 }
 
+// The name of the new stitched function.
+//
 // WithFunctionName sets the functionName property and returns the receiver for chaining.
 func (x *FunctionStitchingGraph) WithFunctionName(functionName string) *FunctionStitchingGraph {
 	x.inner.SetFunctionName(foundation.NSStringStringWithUTF8String(functionName))
 	return x
 }
 
+// The nodes in the function’s call graph.
+//
 // WithNodes sets the collection, converting the Go slice to an NSArray.
 func (x *FunctionStitchingGraph) WithNodes(items ...*raw.MTLFunctionStitchingFunctionNode) *FunctionStitchingGraph {
 	if len(items) == 0 {
@@ -72,6 +80,8 @@ func (x *FunctionStitchingGraph) WithNodes(items ...*raw.MTLFunctionStitchingFun
 	return x
 }
 
+// The node with the output that’s the output of the new stitched function.
+//
 // WithOutputNode sets the outputNode property and returns the receiver for chaining.
 func (x *FunctionStitchingGraph) WithOutputNode(outputNode *FunctionStitchingFunctionNode) *FunctionStitchingGraph {
 	x.inner.SetOutputNode(outputNode.Unwrap())

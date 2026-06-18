@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that dissipates sound frequencies over distance.
+//
 // GeometricSpreadingDistanceModelParameters wraps [raw.PHASEGeometricSpreadingDistanceModelParameters] with a fluent Go API.
 type GeometricSpreadingDistanceModelParameters struct {
 	inner *raw.PHASEGeometricSpreadingDistanceModelParameters
@@ -37,7 +39,7 @@ func NewGeometricSpreadingDistanceModelParameters() *GeometricSpreadingDistanceM
 	return &GeometricSpreadingDistanceModelParameters{inner: raw.PHASEGeometricSpreadingDistanceModelParametersFromID(_id)}
 }
 
-// @property rolloffFactor @abstract Rolloff factor. @note Values are clamped to the range [0.0, DBL_MAX]. Default value is 1.0. 0.0 is no effect. 0.5 is half the effect. 1.0 is normal. 2.0 is double the effect.
+// A value that fades specific frequencies over a distance.
 //
 // WithRolloffFactor sets the rolloffFactor property and returns the receiver for chaining.
 func (x *GeometricSpreadingDistanceModelParameters) WithRolloffFactor(rolloffFactor float64) *GeometricSpreadingDistanceModelParameters {
@@ -45,7 +47,7 @@ func (x *GeometricSpreadingDistanceModelParameters) WithRolloffFactor(rolloffFac
 	return x
 }
 
-// @property fadeOutParameters @abstract Fade out parameters (optional).
+// A distance over which the framework fades out the mixer’s sound.
 //
 // WithFadeOutParameters sets the fadeOutParameters property and returns the receiver for chaining.
 func (x *GeometricSpreadingDistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *GeometricSpreadingDistanceModelParameters {

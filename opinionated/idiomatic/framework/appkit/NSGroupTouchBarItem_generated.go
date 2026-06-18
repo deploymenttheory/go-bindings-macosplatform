@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A bar item that provides a bar to contain other items.
+//
 // GroupTouchBarItem wraps [raw.NSGroupTouchBarItem] with a fluent Go API.
 type GroupTouchBarItem struct {
 	inner *raw.NSGroupTouchBarItem
@@ -38,36 +40,48 @@ func NewGroupTouchBarItem() *GroupTouchBarItem {
 	return &GroupTouchBarItem{inner: raw.NSGroupTouchBarItemFromID(_id)}
 }
 
+// A bar that holds this group’s items.
+//
 // WithGroupTouchBar sets the groupTouchBar property and returns the receiver for chaining.
 func (x *GroupTouchBarItem) WithGroupTouchBar(groupTouchBar *TouchBar) *GroupTouchBarItem {
 	x.inner.SetGroupTouchBar(groupTouchBar.Unwrap())
 	return x
 }
 
+// The user-visible string identifying this item during bar customization.
+//
 // WithCustomizationLabel sets the customizationLabel property and returns the receiver for chaining.
 func (x *GroupTouchBarItem) WithCustomizationLabel(customizationLabel string) *GroupTouchBarItem {
 	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
 	return x
 }
 
+// The user interface direction that controls the layout order of the items.
+//
 // WithGroupUserInterfaceLayoutDirection sets the groupUserInterfaceLayoutDirection property and returns the receiver for chaining.
 func (x *GroupTouchBarItem) WithGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *GroupTouchBarItem {
 	x.inner.SetGroupUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection))
 	return x
 }
 
+// A Boolean value that specifies that items should have equal widths when possible.
+//
 // WithPrefersEqualWidths sets the prefersEqualWidths property and returns the receiver for chaining.
 func (x *GroupTouchBarItem) WithPrefersEqualWidths(prefersEqualWidths bool) *GroupTouchBarItem {
 	x.inner.SetPrefersEqualWidths(prefersEqualWidths)
 	return x
 }
 
+// The preferred width for items in the group.
+//
 // WithPreferredItemWidth sets the preferredItemWidth property and returns the receiver for chaining.
 func (x *GroupTouchBarItem) WithPreferredItemWidth(preferredItemWidth float64) *GroupTouchBarItem {
 	x.inner.SetPreferredItemWidth(preferredItemWidth)
 	return x
 }
 
+// The allowed compression options, in the order they should be applied.
+//
 // WithPrioritizedCompressionOptions sets the collection, converting the Go slice to an NSArray.
 func (x *GroupTouchBarItem) WithPrioritizedCompressionOptions(items ...*raw.NSUserInterfaceCompressionOptions) *GroupTouchBarItem {
 	if len(items) == 0 {
@@ -86,6 +100,8 @@ func (x *GroupTouchBarItem) WithPrioritizedCompressionOptions(items ...*raw.NSUs
 	return x
 }
 
+// Determines which items are shown in a bar when space is limited.
+//
 // WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
 func (x *GroupTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *GroupTouchBarItem {
 	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)

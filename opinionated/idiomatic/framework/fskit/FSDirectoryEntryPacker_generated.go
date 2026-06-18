@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object used to provide items during a directory enumeration.
+//
 // DirectoryEntryPacker wraps [raw.FSDirectoryEntryPacker] with a fluent Go API.
 type DirectoryEntryPacker struct {
 	inner *raw.FSDirectoryEntryPacker
@@ -35,7 +37,7 @@ func NewDirectoryEntryPacker() *DirectoryEntryPacker {
 	return &DirectoryEntryPacker{inner: raw.FSDirectoryEntryPackerFromID(_id)}
 }
 
-// Provides a directory entry during enumeration. You call this method in your implementation of “FSVolume/Operations/enumerateDirectory(_:startingAt:verifier:attributes:packer:replyHandler:)“, for each directory entry you want to provide to the enumeration. - Parameters: - name: The item's name. - itemType: The type of the item. - itemID: The item's identifier. Typically this is an inode number, or one of the constants defined by “FSItem/Identifier“ like “FSItem/Identifier/rootDirectory“. - nextCookie: A value to indicate the next entry in the directory to enumerate. FSKit passes this value as the `cookie` parameter on the next call to “FSVolume/Operations/enumerateDirectory(_:startingAt:verifier:attributes:packer:replyHandler:)“. Use whatever value is appropriate for your implementation; the value is opaque to FSKit. - attributes: The item's attributes. Pass `nil` if the enumeration call didn't request attributes. - Returns: `true` (Swift) or `YES` (Objective-C) if packing was successful and enumeration can continue with the next directory entry. If the value is `false` (Swift) or `NO` (Objective-C), stop enumerating. This result can happen when the entry is too big for the remaining space in the buffer.
+// Provides a directory entry during enumeration.
 //
 // PackEntryWithNameItemTypeItemIDNextCookieAttributes calls the underlying PackEntryWithNameItemTypeItemIDNextCookieAttributes.
 func (x *DirectoryEntryPacker) PackEntryWithNameItemTypeItemIDNextCookieAttributes(name *raw.FSFileName, itemType FSItemType, itemID FSItemID, nextCookie uint64, attributes *raw.FSItemAttributes) bool {

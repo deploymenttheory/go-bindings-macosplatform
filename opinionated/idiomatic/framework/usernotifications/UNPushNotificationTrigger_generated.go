@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A trigger condition that indicates Apple Push Notification Service (APNs) has sent the notification.
+//
 // PushNotificationTrigger wraps [raw.UNPushNotificationTrigger] with a fluent Go API.
 type PushNotificationTrigger struct {
 	inner *raw.UNPushNotificationTrigger

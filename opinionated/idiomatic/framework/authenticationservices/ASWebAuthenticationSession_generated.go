@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A session that an app uses to authenticate a user through a web service.
+//
 // WebAuthenticationSession wraps [raw.ASWebAuthenticationSession] with a fluent Go API.
 type WebAuthenticationSession struct {
 	inner *raw.ASWebAuthenticationSession
@@ -31,7 +33,7 @@ func WebAuthenticationSessionFromID(id objc.ID) *WebAuthenticationSession {
 	return &WebAuthenticationSession{inner: raw.ASWebAuthenticationSessionFromID(id)}
 }
 
-// @abstract Returns an ASWebAuthenticationSession object. @param URL the initial URL pointing to the authentication webpage. Only supports URLs with http:// or https:// schemes. @param callbackURLScheme the custom URL scheme that the app expects in the callback URL. @param completionHandler the completion handler which is called when the session is completed successfully or canceled by user.
+// Creates a web authentication session instance.
 //
 // NewWebAuthenticationSessionWithURLCallbackURLSchemeCompletionHandler creates a new [WebAuthenticationSession].
 func NewWebAuthenticationSessionWithURLCallbackURLSchemeCompletionHandler(uRL string, callbackURLScheme string, completionHandler func(*foundation.NSURL, unsafe.Pointer)) *WebAuthenticationSession {
@@ -40,6 +42,8 @@ func NewWebAuthenticationSessionWithURLCallbackURLSchemeCompletionHandler(uRL st
 	return &WebAuthenticationSession{inner: raw.ASWebAuthenticationSessionFromID(_id)}
 }
 
+// Creates a web authentication session instance that uses a callback to evaluate a redirection URL.
+//
 // NewWebAuthenticationSessionWithURLCallbackCompletionHandler creates a new [WebAuthenticationSession].
 func NewWebAuthenticationSessionWithURLCallbackCompletionHandler(uRL string, callback *raw.ASWebAuthenticationSessionCallback, completionHandler func(*foundation.NSURL, unsafe.Pointer)) *WebAuthenticationSession {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASWebAuthenticationSession")), objc.RegisterName("alloc"))
@@ -47,7 +51,7 @@ func NewWebAuthenticationSessionWithURLCallbackCompletionHandler(uRL string, cal
 	return &WebAuthenticationSession{inner: raw.ASWebAuthenticationSessionFromID(_id)}
 }
 
-// @abstract Provides context to target where in an application's UI the authorization view should be shown. A provider must be set prior to calling -start, otherwise the authorization view cannot be displayed. If deploying to iOS prior to 13.0, the desired window is inferred by the application's key window.
+// A delegate that provides a display context in which the system can present an authentication session to the user.
 //
 // WithPresentationContextProvider sets the presentationContextProvider property and returns the receiver for chaining.
 func (x *WebAuthenticationSession) WithPresentationContextProvider(presentationContextProvider raw.ASWebAuthenticationPresentationContextProviding) *WebAuthenticationSession {
@@ -55,7 +59,7 @@ func (x *WebAuthenticationSession) WithPresentationContextProvider(presentationC
 	return x
 }
 
-// @abstract Indicates whether this session should ask the browser for an ephemeral session. @discussion Ephemeral web browser sessions do not not share cookies or other browsing data with a user's normal browser session. This value is NO by default. Setting this property after calling -[ASWebAuthenticationSession start] has no effect.
+// A Boolean value that indicates whether the session should ask the browser for a private authentication session.
 //
 // WithPrefersEphemeralWebBrowserSession sets the prefersEphemeralWebBrowserSession property and returns the receiver for chaining.
 func (x *WebAuthenticationSession) WithPrefersEphemeralWebBrowserSession(prefersEphemeralWebBrowserSession bool) *WebAuthenticationSession {
@@ -63,7 +67,7 @@ func (x *WebAuthenticationSession) WithPrefersEphemeralWebBrowserSession(prefers
 	return x
 }
 
-// Any additional header fields to be set when loading the initial URL. All header field names must start with the "X-" prefix.
+// Any additional header fields to set when loading the initial URL.
 //
 // WithAdditionalHeaderFields sets the additionalHeaderFields property and returns the receiver for chaining.
 func (x *WebAuthenticationSession) WithAdditionalHeaderFields(additionalHeaderFields *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *WebAuthenticationSession {
@@ -71,14 +75,14 @@ func (x *WebAuthenticationSession) WithAdditionalHeaderFields(additionalHeaderFi
 	return x
 }
 
-// @abstract Starts the ASWebAuthenticationSession instance after it is instantiated. @discussion start can only be called once for an ASWebAuthenticationSession instance. This also means calling start on a canceled session will fail. @result Returns YES if the session starts successfully.
+// Starts a web authentication session.
 //
 // Start calls the underlying Start.
 func (x *WebAuthenticationSession) Start() bool {
 	return x.inner.Start()
 }
 
-// @abstract Cancel an ASWebAuthenticationSession. If the view controller is already presented to load the webpage for authentication, it will be dismissed. Calling cancel on an already canceled session will have no effect.
+// Cancels a web authentication session.
 //
 // Cancel calls the underlying Cancel.
 func (x *WebAuthenticationSession) Cancel() {

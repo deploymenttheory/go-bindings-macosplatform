@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A source of texel data to be used in rendering material surface appearances.
+//
 // Texture wraps [raw.MDLTexture] with a fluent Go API.
 type Texture struct {
 	inner *raw.MDLTexture
@@ -37,6 +39,8 @@ func NewTexture() *Texture {
 	return &Texture{inner: raw.MDLTextureFromID(_id)}
 }
 
+// Initializes a texture object with the specified image data and properties.
+//
 // NewTextureWithDataTopLeftOriginNameDimensionsRowStrideChannelCountChannelEncodingIsCube creates a new [Texture].
 func NewTextureWithDataTopLeftOriginNameDimensionsRowStrideChannelCountChannelEncodingIsCube(pixelData *foundation.NSData, topLeftOrigin bool, name string, dimensions unsafe.Pointer, rowStride int, channelCount uint, channelEncoding MDLTextureChannelEncoding, isCube bool) *Texture {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTexture")), objc.RegisterName("alloc"))
@@ -44,6 +48,8 @@ func NewTextureWithDataTopLeftOriginNameDimensionsRowStrideChannelCountChannelEn
 	return &Texture{inner: raw.MDLTextureFromID(_id)}
 }
 
+// A Boolean value that indicates whether the texture is a cube textures.
+//
 // WithIsCube sets the isCube property and returns the receiver for chaining.
 func (x *Texture) WithIsCube(isCube bool) *Texture {
 	x.inner.SetIsCube(isCube)
@@ -58,7 +64,7 @@ func (x *Texture) WithHasAlphaValues(hasAlphaValues bool) *Texture {
 	return x
 }
 
-// write a texture to URL, deducing type from path extension
+// Exports the texture data to an image file at the specified URL.
 //
 // WriteToURL calls the underlying WriteToURL.
 func (x *Texture) WriteToURL(uRL string) bool {
@@ -72,7 +78,7 @@ func (x *Texture) WriteToURLLevel(uRL string, level uint) bool {
 	return x.inner.WriteToURLLevel(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), level)
 }
 
-// write a texture to URL, using a specific UT type
+// Exports the texture data to an image file at the specified URL, of the specified type.
 //
 // WriteToURLType calls the underlying WriteToURLType.
 func (x *Texture) WriteToURLType(nsurl string, type_ unsafe.Pointer) bool {
@@ -86,6 +92,8 @@ func (x *Texture) WriteToURLTypeLevel(nsurl string, type_ unsafe.Pointer, level 
 	return x.inner.WriteToURLTypeLevel(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(nsurl)), type_, level)
 }
 
+// Exports the texture data as a CoreGraphics image.
+//
 // ImageFromTexture calls the underlying ImageFromTexture.
 func (x *Texture) ImageFromTexture() unsafe.Pointer {
 	return x.inner.ImageFromTexture()
@@ -96,21 +104,29 @@ func (x *Texture) ImageFromTextureAtLevel(level uint) unsafe.Pointer {
 	return x.inner.ImageFromTextureAtLevel(level)
 }
 
+// Returns the texture’s image data, organized such that its first pixel represents the top-left corner of the image.
+//
 // TexelDataWithTopLeftOrigin calls the underlying TexelDataWithTopLeftOrigin.
 func (x *Texture) TexelDataWithTopLeftOrigin() *foundation.NSData {
 	return x.inner.TexelDataWithTopLeftOrigin()
 }
 
+// Returns the texture’s image data, organized such that its first pixel represents the bottom-left corner of the image.
+//
 // TexelDataWithBottomLeftOrigin calls the underlying TexelDataWithBottomLeftOrigin.
 func (x *Texture) TexelDataWithBottomLeftOrigin() *foundation.NSData {
 	return x.inner.TexelDataWithBottomLeftOrigin()
 }
 
+// Returns the texture’s image data for the specified mipmap level, organized such that its first pixel represents the top-left corner of the image.
+//
 // TexelDataWithTopLeftOriginAtMipLevelCreate calls the underlying TexelDataWithTopLeftOriginAtMipLevelCreate.
 func (x *Texture) TexelDataWithTopLeftOriginAtMipLevelCreate(level int, create bool) *foundation.NSData {
 	return x.inner.TexelDataWithTopLeftOriginAtMipLevelCreate(level, create)
 }
 
+// Returns the texture’s image data for the specified mipmap level, organized such that its first pixel represents the bottom-left corner of the image.
+//
 // TexelDataWithBottomLeftOriginAtMipLevelCreate calls the underlying TexelDataWithBottomLeftOriginAtMipLevelCreate.
 func (x *Texture) TexelDataWithBottomLeftOriginAtMipLevelCreate(level int, create bool) *foundation.NSData {
 	return x.inner.TexelDataWithBottomLeftOriginAtMipLevelCreate(level, create)

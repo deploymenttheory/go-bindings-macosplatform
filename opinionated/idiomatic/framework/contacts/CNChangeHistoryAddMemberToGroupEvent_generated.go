@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a user adding a contact to a group.
+//
 // ChangeHistoryAddMemberToGroupEvent wraps [raw.CNChangeHistoryAddMemberToGroupEvent] with a fluent Go API.
 type ChangeHistoryAddMemberToGroupEvent struct {
 	inner *raw.CNChangeHistoryAddMemberToGroupEvent

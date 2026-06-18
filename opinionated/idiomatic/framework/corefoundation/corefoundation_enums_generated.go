@@ -9,26 +9,44 @@ import (
 	"strings"
 )
 
+// CFCalendarUnit constants are used to specify calendrical units, such as day or month, in various calendar calculations.
 // Bitmask — values may be combined with |.
 type CFCalendarUnit int64
 
 const (
-	KCFCalendarUnitEra    CFCalendarUnit = 2
-	KCFCalendarUnitYear   CFCalendarUnit = 4
-	KCFCalendarUnitMonth  CFCalendarUnit = 8
-	KCFCalendarUnitDay    CFCalendarUnit = 16
-	KCFCalendarUnitHour   CFCalendarUnit = 32
+	// Specifies the era unit.
+	KCFCalendarUnitEra CFCalendarUnit = 2
+	// Specifies the year unit.
+	KCFCalendarUnitYear CFCalendarUnit = 4
+	// Specifies the month unit.
+	KCFCalendarUnitMonth CFCalendarUnit = 8
+	// Specifies the day unit.
+	KCFCalendarUnitDay CFCalendarUnit = 16
+	// Specifies the hour unit.
+	KCFCalendarUnitHour CFCalendarUnit = 32
+	// Specifies the minute unit.
 	KCFCalendarUnitMinute CFCalendarUnit = 64
+	// Specifies the second unit.
 	KCFCalendarUnitSecond CFCalendarUnit = 128
+	// Specifies the week unit.
+	//
 	// Deprecated: Use kCFCalendarUnitWeekOfYear or kCFCalendarUnitWeekOfMonth instead
 	KCFCalendarUnitWeek CFCalendarUnit = 256
+	// Specifies the weekday unit.
+	//
 	// Deprecated: Use kCFCalendarUnitWeekOfYear or kCFCalendarUnitWeekOfMonth instead
 	KCFCalendarUnitWeekday CFCalendarUnit = 512
+	// Specifies the ordinal weekday unit.
+	//
 	// Deprecated: Use kCFCalendarUnitWeekOfYear or kCFCalendarUnitWeekOfMonth instead
-	KCFCalendarUnitWeekdayOrdinal    CFCalendarUnit = 1024
-	KCFCalendarUnitQuarter           CFCalendarUnit = 2048
-	KCFCalendarUnitWeekOfMonth       CFCalendarUnit = 4096
-	KCFCalendarUnitWeekOfYear        CFCalendarUnit = 8192
+	KCFCalendarUnitWeekdayOrdinal CFCalendarUnit = 1024
+	// Specifies the quarter-year unit.
+	KCFCalendarUnitQuarter CFCalendarUnit = 2048
+	// Specifies the original week of a month calendar unit.
+	KCFCalendarUnitWeekOfMonth CFCalendarUnit = 4096
+	// Specifies the original week of the year calendar unit.
+	KCFCalendarUnitWeekOfYear CFCalendarUnit = 8192
+	// Specifies the relative year for a week within a year calendar unit.
 	KCFCalendarUnitYearForWeekOfYear CFCalendarUnit = 16384
 	KCFCalendarUnitDayOfYear         CFCalendarUnit = 65536
 )
@@ -86,24 +104,40 @@ func (e CFCalendarUnit) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Defines a predefined character set.
 type CFCharacterSetPredefinedSet int64
 
 const (
-	KCFCharacterSetControl              CFCharacterSetPredefinedSet = 1
-	KCFCharacterSetWhitespace           CFCharacterSetPredefinedSet = 2
+	// Control character set (Unicode General Category Cc and Cf).
+	KCFCharacterSetControl CFCharacterSetPredefinedSet = 1
+	// Whitespace character set (Unicode General Category Zs and U0009 CHARACTER TABULATION).
+	KCFCharacterSetWhitespace CFCharacterSetPredefinedSet = 2
+	// Whitespace and Newline character set (Unicode General Category Z*, U000A ~ U000D, and U0085).
 	KCFCharacterSetWhitespaceAndNewline CFCharacterSetPredefinedSet = 3
-	KCFCharacterSetDecimalDigit         CFCharacterSetPredefinedSet = 4
-	KCFCharacterSetLetter               CFCharacterSetPredefinedSet = 5
-	KCFCharacterSetLowercaseLetter      CFCharacterSetPredefinedSet = 6
-	KCFCharacterSetUppercaseLetter      CFCharacterSetPredefinedSet = 7
-	KCFCharacterSetNonBase              CFCharacterSetPredefinedSet = 8
-	KCFCharacterSetDecomposable         CFCharacterSetPredefinedSet = 9
-	KCFCharacterSetAlphaNumeric         CFCharacterSetPredefinedSet = 10
-	KCFCharacterSetPunctuation          CFCharacterSetPredefinedSet = 11
-	KCFCharacterSetCapitalizedLetter    CFCharacterSetPredefinedSet = 13
-	KCFCharacterSetSymbol               CFCharacterSetPredefinedSet = 14
-	KCFCharacterSetNewline              CFCharacterSetPredefinedSet = 15
-	KCFCharacterSetIllegal              CFCharacterSetPredefinedSet = 12
+	// Decimal digit character set.
+	KCFCharacterSetDecimalDigit CFCharacterSetPredefinedSet = 4
+	// Letter character set (Unicode General Category L* & M*).
+	KCFCharacterSetLetter CFCharacterSetPredefinedSet = 5
+	// Lowercase character set (Unicode General Category Ll).
+	KCFCharacterSetLowercaseLetter CFCharacterSetPredefinedSet = 6
+	// Uppercase character set (Unicode General Category Lu and Lt).
+	KCFCharacterSetUppercaseLetter CFCharacterSetPredefinedSet = 7
+	// Non-base character set (Unicode General Category M*).
+	KCFCharacterSetNonBase CFCharacterSetPredefinedSet = 8
+	// Canonically decomposable character set.
+	KCFCharacterSetDecomposable CFCharacterSetPredefinedSet = 9
+	// Alpha Numeric character set (Unicode General Category L*, M*, & N*).
+	KCFCharacterSetAlphaNumeric CFCharacterSetPredefinedSet = 10
+	// Punctuation character set (Unicode General Category P*).
+	KCFCharacterSetPunctuation CFCharacterSetPredefinedSet = 11
+	// Titlecase character set (Unicode General Category Lt).
+	KCFCharacterSetCapitalizedLetter CFCharacterSetPredefinedSet = 13
+	// Symbol character set (Unicode General Category S*).
+	KCFCharacterSetSymbol CFCharacterSetPredefinedSet = 14
+	// Newline character set (U000A ~ U000D, U0085, U2028, and U2029).
+	KCFCharacterSetNewline CFCharacterSetPredefinedSet = 15
+	// Illegal character set.
+	KCFCharacterSetIllegal CFCharacterSetPredefinedSet = 12
 )
 
 func (e CFCharacterSetPredefinedSet) String() string {
@@ -143,11 +177,15 @@ func (e CFCharacterSetPredefinedSet) String() string {
 	}
 }
 
+// Constants returned by comparison functions, indicating whether a value is equal to, less than, or greater than another value.
 type CFComparisonResult int64
 
 const (
-	KCFCompareLessThan    CFComparisonResult = -1
-	KCFCompareEqualTo     CFComparisonResult = 0
+	// Returned by a comparison function if the first value is less than the second value.
+	KCFCompareLessThan CFComparisonResult = -1
+	// Returned by a comparison function if the first value is equal to the second value.
+	KCFCompareEqualTo CFComparisonResult = 0
+	// Returned by a comparison function if the first value is greater than the second value.
 	KCFCompareGreaterThan CFComparisonResult = 1
 )
 
@@ -164,6 +202,7 @@ func (e CFComparisonResult) String() string {
 	}
 }
 
+// A CFOptionFlags type for specifying options for searching.
 // Bitmask — values may be combined with |.
 type CFDataSearchFlags int64
 
@@ -186,14 +225,20 @@ func (e CFDataSearchFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Data type for predefined date and time format styles.
 type CFDateFormatterStyle int64
 
 const (
-	KCFDateFormatterNoStyle     CFDateFormatterStyle = 0
-	KCFDateFormatterShortStyle  CFDateFormatterStyle = 1
+	// Specifies no output.
+	KCFDateFormatterNoStyle CFDateFormatterStyle = 0
+	// Specifies a short style, typically numeric only, such as “11/23/37” or “3:30pm”.
+	KCFDateFormatterShortStyle CFDateFormatterStyle = 1
+	// Specifies a medium style, typically with abbreviated text, such as “Nov 23, 1937”.
 	KCFDateFormatterMediumStyle CFDateFormatterStyle = 2
-	KCFDateFormatterLongStyle   CFDateFormatterStyle = 3
-	KCFDateFormatterFullStyle   CFDateFormatterStyle = 4
+	// Specifies a long style, typically with full text, such as “November 23, 1937” or “3:30:32pm”.
+	KCFDateFormatterLongStyle CFDateFormatterStyle = 3
+	// Specifies a full style with complete details, such as “Tuesday, April 12, 1952 AD” or “3:30:42pm PST”.
+	KCFDateFormatterFullStyle CFDateFormatterStyle = 4
 )
 
 func (e CFDateFormatterStyle) String() string {
@@ -217,11 +262,17 @@ func (e CFDateFormatterStyle) String() string {
 type CFFileSecurityClearOptions int64
 
 const (
-	KCFFileSecurityClearOwner             CFFileSecurityClearOptions = 1
-	KCFFileSecurityClearGroup             CFFileSecurityClearOptions = 2
-	KCFFileSecurityClearMode              CFFileSecurityClearOptions = 4
-	KCFFileSecurityClearOwnerUUID         CFFileSecurityClearOptions = 8
-	KCFFileSecurityClearGroupUUID         CFFileSecurityClearOptions = 16
+	// Clear the (POSIX) owner ID.
+	KCFFileSecurityClearOwner CFFileSecurityClearOptions = 1
+	// Clear the (POSIX) group ID.
+	KCFFileSecurityClearGroup CFFileSecurityClearOptions = 2
+	// Clear the file’s mode (POSIX permissions).
+	KCFFileSecurityClearMode CFFileSecurityClearOptions = 4
+	// Clear the owner UUID (for the access control list).
+	KCFFileSecurityClearOwnerUUID CFFileSecurityClearOptions = 8
+	// Clear the group UUID (for the access control list).
+	KCFFileSecurityClearGroupUUID CFFileSecurityClearOptions = 16
+	// Clear the access control list.
 	KCFFileSecurityClearAccessControlList CFFileSecurityClearOptions = 32
 )
 
@@ -321,6 +372,7 @@ func (e CFISO8601DateFormatOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// These constants describe the text direction for a language. They are returned by the functions CFLocaleGetLanguageCharacterDirection and CFLocaleGetLanguageLineDirection.
 type CFLocaleLanguageDirection int64
 
 const (
@@ -348,12 +400,17 @@ func (e CFLocaleLanguageDirection) String() string {
 	}
 }
 
+// Suspension flags that indicate how distributed notifications should be handled when the receiving application is in the background.
 type CFNotificationSuspensionBehavior int64
 
 const (
-	CFNotificationSuspensionBehaviorDrop               CFNotificationSuspensionBehavior = 1
-	CFNotificationSuspensionBehaviorCoalesce           CFNotificationSuspensionBehavior = 2
-	CFNotificationSuspensionBehaviorHold               CFNotificationSuspensionBehavior = 3
+	// The server will not queue any notifications of the specified name and object while the receiving application is in the background.
+	CFNotificationSuspensionBehaviorDrop CFNotificationSuspensionBehavior = 1
+	// The server will only queue the last notification of the specified name and object; earlier notifications are dropped.
+	CFNotificationSuspensionBehaviorCoalesce CFNotificationSuspensionBehavior = 2
+	// The server will hold all matching notifications until the queue has been filled (queue size determined by the server) at which point the server may flush queued notifications.
+	CFNotificationSuspensionBehaviorHold CFNotificationSuspensionBehavior = 3
+	// The server will deliver notifications of the specified name and object whether or not the application is in the background. When a notification with this suspension behavior is matched, it has the effect of first flushing any queued notifications.
 	CFNotificationSuspensionBehaviorDeliverImmediately CFNotificationSuspensionBehavior = 4
 )
 
@@ -372,14 +429,21 @@ func (e CFNotificationSuspensionBehavior) String() string {
 	}
 }
 
+// Type for constants specifying a formatter style.
 type CFNumberFormatterStyle int64
 
 const (
-	KCFNumberFormatterNoStyle                 CFNumberFormatterStyle = 0
-	KCFNumberFormatterDecimalStyle            CFNumberFormatterStyle = 1
-	KCFNumberFormatterCurrencyStyle           CFNumberFormatterStyle = 2
-	KCFNumberFormatterPercentStyle            CFNumberFormatterStyle = 3
-	KCFNumberFormatterScientificStyle         CFNumberFormatterStyle = 4
+	// Specifies no style.
+	KCFNumberFormatterNoStyle CFNumberFormatterStyle = 0
+	// Specifies a decimal style format.
+	KCFNumberFormatterDecimalStyle CFNumberFormatterStyle = 1
+	// Specifies a currency style format.
+	KCFNumberFormatterCurrencyStyle CFNumberFormatterStyle = 2
+	// Specifies a percent style format.
+	KCFNumberFormatterPercentStyle CFNumberFormatterStyle = 3
+	// Specifies a scientific style format.
+	KCFNumberFormatterScientificStyle CFNumberFormatterStyle = 4
+	// Specifies a spelled out format.
 	KCFNumberFormatterSpellOutStyle           CFNumberFormatterStyle = 5
 	KCFNumberFormatterOrdinalStyle            CFNumberFormatterStyle = 6
 	KCFNumberFormatterCurrencyISOCodeStyle    CFNumberFormatterStyle = 8
@@ -414,26 +478,44 @@ func (e CFNumberFormatterStyle) String() string {
 	}
 }
 
+// Flags used by CFNumber to indicate the data type of a value.
 type CFNumberType int64
 
 const (
-	KCFNumberSInt8Type     CFNumberType = 1
-	KCFNumberSInt16Type    CFNumberType = 2
-	KCFNumberSInt32Type    CFNumberType = 3
-	KCFNumberSInt64Type    CFNumberType = 4
-	KCFNumberFloat32Type   CFNumberType = 5
-	KCFNumberFloat64Type   CFNumberType = 6
-	KCFNumberCharType      CFNumberType = 7
-	KCFNumberShortType     CFNumberType = 8
-	KCFNumberIntType       CFNumberType = 9
-	KCFNumberLongType      CFNumberType = 10
-	KCFNumberLongLongType  CFNumberType = 11
-	KCFNumberFloatType     CFNumberType = 12
-	KCFNumberDoubleType    CFNumberType = 13
-	KCFNumberCFIndexType   CFNumberType = 14
+	// Eight-bit, signed integer. The SInt8 data type is defined in MacTypes.h.
+	KCFNumberSInt8Type CFNumberType = 1
+	// Sixteen-bit, signed integer. The SInt16 data type is defined in MacTypes.h.
+	KCFNumberSInt16Type CFNumberType = 2
+	// Thirty-two-bit, signed integer. The SInt32 data type is defined in MacTypes.h.
+	KCFNumberSInt32Type CFNumberType = 3
+	// Sixty-four-bit, signed integer. The SInt64 data type is defined in MacTypes.h.
+	KCFNumberSInt64Type CFNumberType = 4
+	// Thirty-two-bit real. The Float32 data type is defined in MacTypes.h.
+	KCFNumberFloat32Type CFNumberType = 5
+	// Sixty-four-bit real. The Float64 data type is defined in MacTypes.h and conforms to the 64-bit IEEE 754 standard.
+	KCFNumberFloat64Type CFNumberType = 6
+	// Basic C char type.
+	KCFNumberCharType CFNumberType = 7
+	// Basic C short type.
+	KCFNumberShortType CFNumberType = 8
+	// Basic C int type.
+	KCFNumberIntType CFNumberType = 9
+	// Basic C long type.
+	KCFNumberLongType CFNumberType = 10
+	// Basic C long long type.
+	KCFNumberLongLongType CFNumberType = 11
+	// Basic C float type.
+	KCFNumberFloatType CFNumberType = 12
+	// Basic C double type.
+	KCFNumberDoubleType CFNumberType = 13
+	// CFIndex value.
+	KCFNumberCFIndexType CFNumberType = 14
+	// NSInteger value.
 	KCFNumberNSIntegerType CFNumberType = 15
-	KCFNumberCGFloatType   CFNumberType = 16
-	KCFNumberMaxType       CFNumberType = 16
+	// CGFloat value.
+	KCFNumberCGFloatType CFNumberType = 16
+	// Same as kCFNumberCGFloatType.
+	KCFNumberMaxType CFNumberType = 16
 )
 
 func (e CFNumberType) String() string {
@@ -475,11 +557,15 @@ func (e CFNumberType) String() string {
 	}
 }
 
+// Specifies the format of a property list.
 type CFPropertyListFormat int64
 
 const (
-	KCFPropertyListOpenStepFormat    CFPropertyListFormat = 1
-	KCFPropertyListXMLFormat_v1_0    CFPropertyListFormat = 100
+	// OpenStep format (use of this format is discouraged).
+	KCFPropertyListOpenStepFormat CFPropertyListFormat = 1
+	// XML format version 1.0.
+	KCFPropertyListXMLFormat_v1_0 CFPropertyListFormat = 100
+	// Binary format version 1.0.
 	KCFPropertyListBinaryFormat_v1_0 CFPropertyListFormat = 200
 )
 
@@ -496,16 +582,23 @@ func (e CFPropertyListFormat) String() string {
 	}
 }
 
+// Run loop activity stages in which run loop observers can be scheduled.
 // Bitmask — values may be combined with |.
 type CFRunLoopActivity int64
 
 const (
-	KCFRunLoopEntry         CFRunLoopActivity = 1
-	KCFRunLoopBeforeTimers  CFRunLoopActivity = 2
+	// The entrance of the run loop, before entering the event processing loop. This activity occurs once for each call to CFRunLoopRun and CFRunLoopRunInMode.
+	KCFRunLoopEntry CFRunLoopActivity = 1
+	// Inside the event processing loop before any timers are processed.
+	KCFRunLoopBeforeTimers CFRunLoopActivity = 2
+	// Inside the event processing loop before any sources are processed.
 	KCFRunLoopBeforeSources CFRunLoopActivity = 4
 	KCFRunLoopBeforeWaiting CFRunLoopActivity = 32
-	KCFRunLoopAfterWaiting  CFRunLoopActivity = 64
-	KCFRunLoopExit          CFRunLoopActivity = 128
+	// Inside the event processing loop after the run loop wakes up, but before processing the event that woke it up. This activity occurs only if the run loop did in fact go to sleep during the current loop.
+	KCFRunLoopAfterWaiting CFRunLoopActivity = 64
+	// The exit of the run loop, after exiting the event processing loop. This activity occurs once for each call to CFRunLoopRun and CFRunLoopRunInMode.
+	KCFRunLoopExit CFRunLoopActivity = 128
+	// A combination of all the preceding stages.
 	KCFRunLoopAllActivities CFRunLoopActivity = 268435455
 )
 
@@ -541,9 +634,13 @@ func (e CFRunLoopActivity) String() string {
 type CFRunLoopRunResult int64
 
 const (
-	KCFRunLoopRunFinished      CFRunLoopRunResult = 1
-	KCFRunLoopRunStopped       CFRunLoopRunResult = 2
-	KCFRunLoopRunTimedOut      CFRunLoopRunResult = 3
+	// The running run loop mode has no sources or timers to process.
+	KCFRunLoopRunFinished CFRunLoopRunResult = 1
+	// CFRunLoopStop was called on the run loop.
+	KCFRunLoopRunStopped CFRunLoopRunResult = 2
+	// The specified time interval for running the run loop has passed.
+	KCFRunLoopRunTimedOut CFRunLoopRunResult = 3
+	// A source has been processed. This value is returned only if the run loop was told to run only until a source was processed.
 	KCFRunLoopRunHandledSource CFRunLoopRunResult = 4
 )
 
@@ -562,11 +659,15 @@ func (e CFRunLoopRunResult) String() string {
 	}
 }
 
+// Error codes for many CFSocket functions.
 type CFSocketError int64
 
 const (
+	// The socket operation succeeded.
 	KCFSocketSuccess CFSocketError = 0
-	KCFSocketError   CFSocketError = -1
+	// The socket operation failed.
+	KCFSocketError CFSocketError = -1
+	// The socket operation timed out.
 	KCFSocketTimeout CFSocketError = -2
 )
 
@@ -583,17 +684,26 @@ func (e CFSocketError) String() string {
 	}
 }
 
+// Constants that describe the status of a stream.
 type CFStreamStatus int64
 
 const (
+	// The stream is not open for reading or writing.
 	KCFStreamStatusNotOpen CFStreamStatus = 0
+	// The stream is being opened for reading or for writing.
 	KCFStreamStatusOpening CFStreamStatus = 1
-	KCFStreamStatusOpen    CFStreamStatus = 2
+	// The stream is open.
+	KCFStreamStatusOpen CFStreamStatus = 2
+	// The stream is being read from.
 	KCFStreamStatusReading CFStreamStatus = 3
+	// The stream is being written to.
 	KCFStreamStatusWriting CFStreamStatus = 4
-	KCFStreamStatusAtEnd   CFStreamStatus = 5
-	KCFStreamStatusClosed  CFStreamStatus = 6
-	KCFStreamStatusError   CFStreamStatus = 7
+	// There is no more data to read, or no more data can be written.
+	KCFStreamStatusAtEnd CFStreamStatus = 5
+	// The stream is closed.
+	KCFStreamStatusClosed CFStreamStatus = 6
+	// An error occurred on the stream.
+	KCFStreamStatusError CFStreamStatus = 7
 )
 
 func (e CFStreamStatus) String() string {
@@ -619,19 +729,29 @@ func (e CFStreamStatus) String() string {
 	}
 }
 
+// A CFOptionFlags type for specifying options for string comparison .
 // Bitmask — values may be combined with |.
 type CFStringCompareFlags int64
 
 const (
-	KCFCompareCaseInsensitive      CFStringCompareFlags = 1
-	KCFCompareBackwards            CFStringCompareFlags = 4
-	KCFCompareAnchored             CFStringCompareFlags = 8
-	KCFCompareNonliteral           CFStringCompareFlags = 16
-	KCFCompareLocalized            CFStringCompareFlags = 32
-	KCFCompareNumerically          CFStringCompareFlags = 64
+	// Specifies that the comparison should ignore differences in case between alphabetical characters.
+	KCFCompareCaseInsensitive CFStringCompareFlags = 1
+	// Specifies that the comparison should start at the last elements of the entities being compared (for example, strings or arrays).
+	KCFCompareBackwards CFStringCompareFlags = 4
+	// Performs searching only on characters at the beginning or end of the range.
+	KCFCompareAnchored CFStringCompareFlags = 8
+	// Specifies that loose equivalence is acceptable, especially as pertains to diacritical marks.
+	KCFCompareNonliteral CFStringCompareFlags = 16
+	// Specifies that the comparison should take into account differences related to locale, such as the thousands separator character.
+	KCFCompareLocalized CFStringCompareFlags = 32
+	// Specifies that represented numeric values should be used as the basis for comparison and not the actual character values.
+	KCFCompareNumerically CFStringCompareFlags = 64
+	// Specifies that the comparison should ignore diacritic markers.
 	KCFCompareDiacriticInsensitive CFStringCompareFlags = 128
-	KCFCompareWidthInsensitive     CFStringCompareFlags = 256
-	KCFCompareForcedOrdering       CFStringCompareFlags = 512
+	// Specifies that the comparison should ignore width differences.
+	KCFCompareWidthInsensitive CFStringCompareFlags = 256
+	// Specifies that the comparison is forced to return either kCFCompareLessThan or kCFCompareGreaterThan if the strings are equivalent but not strictly equal.
+	KCFCompareForcedOrdering CFStringCompareFlags = 512
 )
 
 func (e CFStringCompareFlags) String() string {
@@ -669,12 +789,17 @@ func (e CFStringCompareFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Unicode normalization forms as described in Unicode Technical Report #15.
 type CFStringNormalizationForm int64
 
 const (
-	KCFStringNormalizationFormD  CFStringNormalizationForm = 0
+	// Canonical decomposition.
+	KCFStringNormalizationFormD CFStringNormalizationForm = 0
+	// Compatibility decomposition.
 	KCFStringNormalizationFormKD CFStringNormalizationForm = 1
-	KCFStringNormalizationFormC  CFStringNormalizationForm = 2
+	// Canonical decomposition followed by canonical composition.
+	KCFStringNormalizationFormC CFStringNormalizationForm = 2
+	// Compatibility decomposition followed by canonical composition.
 	KCFStringNormalizationFormKC CFStringNormalizationForm = 3
 )
 
@@ -693,19 +818,25 @@ func (e CFStringNormalizationForm) String() string {
 	}
 }
 
+// Token types returned by CFStringTokenizerGoToTokenAtIndex and CFStringTokenizerAdvanceToNextToken.
 // Bitmask — values may be combined with |.
 type CFStringTokenizerTokenType int64
 
 const (
-	KCFStringTokenizerTokenNone   CFStringTokenizerTokenType = 0
+	// Has no token.
+	KCFStringTokenizerTokenNone CFStringTokenizerTokenType = 0
+	// Has a normal token.
 	KCFStringTokenizerTokenNormal CFStringTokenizerTokenType = 1
-	// Compound token which may contain subtokens but with no derived subtokens. Its subtokens can be obtained by calling CFStringTokenizerGetCurrentSubTokens.
+	// Compound token which may contain subtokens but with no derived subtokens.
 	KCFStringTokenizerTokenHasSubTokensMask CFStringTokenizerTokenType = 2
-	// Compound token which may contain derived subtokens. Its subtokens and derived subtokens can be obtained by calling CFStringTokenizerGetCurrentSubTokens.
+	// Compound token which may contain derived subtokens.
 	KCFStringTokenizerTokenHasDerivedSubTokensMask CFStringTokenizerTokenType = 4
-	KCFStringTokenizerTokenHasHasNumbersMask       CFStringTokenizerTokenType = 8
-	KCFStringTokenizerTokenHasNonLettersMask       CFStringTokenizerTokenType = 16
-	KCFStringTokenizerTokenIsCJWordMask            CFStringTokenizerTokenType = 32
+	// Appears to contain a number.
+	KCFStringTokenizerTokenHasHasNumbersMask CFStringTokenizerTokenType = 8
+	// Contains punctuation, symbols, and so on.
+	KCFStringTokenizerTokenHasNonLettersMask CFStringTokenizerTokenType = 16
+	// Contains kana and/or ideographs.
+	KCFStringTokenizerTokenIsCJWordMask CFStringTokenizerTokenType = 32
 )
 
 func (e CFStringTokenizerTokenType) String() string {
@@ -734,15 +865,22 @@ func (e CFStringTokenizerTokenType) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Index type for constants used to specify styles of time zone names.
 type CFTimeZoneNameStyle int64
 
 const (
-	KCFTimeZoneNameStyleStandard            CFTimeZoneNameStyle = 0
-	KCFTimeZoneNameStyleShortStandard       CFTimeZoneNameStyle = 1
-	KCFTimeZoneNameStyleDaylightSaving      CFTimeZoneNameStyle = 2
+	// Specifies the standard name style; for example, “Central Standard Time” for the Central time zone.
+	KCFTimeZoneNameStyleStandard CFTimeZoneNameStyle = 0
+	// Specifies the short standard name style; for example, “CST” for the Central time zone.
+	KCFTimeZoneNameStyleShortStandard CFTimeZoneNameStyle = 1
+	// Specifies the daylight saving name style; for example, “Central Daylight Time” for the Central time zone.
+	KCFTimeZoneNameStyleDaylightSaving CFTimeZoneNameStyle = 2
+	// Specifies the short daylight saving name style; for example, “CDT” for the Central time zone.
 	KCFTimeZoneNameStyleShortDaylightSaving CFTimeZoneNameStyle = 3
-	KCFTimeZoneNameStyleGeneric             CFTimeZoneNameStyle = 4
-	KCFTimeZoneNameStyleShortGeneric        CFTimeZoneNameStyle = 5
+	// Specifies the generic name style, which does not distinguish between daylight saving and standard time; for example, “Central Time” for the Central time zone.
+	KCFTimeZoneNameStyleGeneric CFTimeZoneNameStyle = 4
+	// Specifies the short generic name style, which does not distinguish between daylight saving and standard time; for example, “CT” for the Central time zone.
+	KCFTimeZoneNameStyleShortGeneric CFTimeZoneNameStyle = 5
 )
 
 func (e CFTimeZoneNameStyle) String() string {
@@ -764,15 +902,22 @@ func (e CFTimeZoneNameStyle) String() string {
 	}
 }
 
+// Type for bookmark data creation options.
 // Bitmask — values may be combined with |.
 type CFURLBookmarkCreationOptions int64
 
 const (
-	KCFURLBookmarkCreationMinimalBookmarkMask              CFURLBookmarkCreationOptions = 512
-	KCFURLBookmarkCreationSuitableForBookmarkFile          CFURLBookmarkCreationOptions = 1024
-	KCFURLBookmarkCreationWithSecurityScope                CFURLBookmarkCreationOptions = 2048
+	// Specifies that an alias created with the bookmark data be created with minimal information, which may make it smaller but still able to resolve in certain ways.
+	KCFURLBookmarkCreationMinimalBookmarkMask CFURLBookmarkCreationOptions = 512
+	// Specifies that the bookmark data include properties required to create Finder alias files.
+	KCFURLBookmarkCreationSuitableForBookmarkFile CFURLBookmarkCreationOptions = 1024
+	// Specifies that you want to create a security-scoped bookmark that, when resolved, provides a security-scoped URL allowing read/write access to a file-system resource; for use in an app that adopts App Sandbox.
+	KCFURLBookmarkCreationWithSecurityScope CFURLBookmarkCreationOptions = 2048
+	// When combined with the kCFURLBookmarkCreationWithSecurityScope option, specifies that you want to create a security-scoped bookmark that, when resolved, provides a security-scoped URL allowing read-only access to a file-system resource; for use in an app that adopts App Sandbox.
 	KCFURLBookmarkCreationSecurityScopeAllowOnlyReadAccess CFURLBookmarkCreationOptions = 4096
 	KCFURLBookmarkCreationWithoutImplicitSecurityScope     CFURLBookmarkCreationOptions = 536870912
+	// Specifies that an alias created with the bookmark data prefers resolving with its embedded file ID.
+	//
 	// Deprecated: kCFURLBookmarkCreationPreferFileIDResolutionMask does nothing and has no effect on bookmark resolution
 	KCFURLBookmarkCreationPreferFileIDResolutionMask CFURLBookmarkCreationOptions = 256
 )
@@ -803,16 +948,20 @@ func (e CFURLBookmarkCreationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Type for bookmark data resolution options.
 // Bitmask — values may be combined with |.
 type CFURLBookmarkResolutionOptions int64
 
 const (
-	KCFURLBookmarkResolutionWithoutUIMask                 CFURLBookmarkResolutionOptions = 256
-	KCFURLBookmarkResolutionWithoutMountingMask           CFURLBookmarkResolutionOptions = 512
+	KCFURLBookmarkResolutionWithoutUIMask       CFURLBookmarkResolutionOptions = 256
+	KCFURLBookmarkResolutionWithoutMountingMask CFURLBookmarkResolutionOptions = 512
+	// Specifies that the security scope, applied to the bookmark when it was created, should be used during resolution of the bookmark data.
 	KCFURLBookmarkResolutionWithSecurityScope             CFURLBookmarkResolutionOptions = 1024
 	KCFURLBookmarkResolutionWithoutImplicitStartAccessing CFURLBookmarkResolutionOptions = 32768
-	KCFBookmarkResolutionWithoutUIMask                    CFURLBookmarkResolutionOptions = 256
-	KCFBookmarkResolutionWithoutMountingMask              CFURLBookmarkResolutionOptions = 512
+	// Specifies that no UI feedback accompany resolution of the bookmark data.
+	KCFBookmarkResolutionWithoutUIMask CFURLBookmarkResolutionOptions = 256
+	// Specifies that no volume should be mounted during resolution of the bookmark data.
+	KCFBookmarkResolutionWithoutMountingMask CFURLBookmarkResolutionOptions = 512
 )
 
 func (e CFURLBookmarkResolutionOptions) String() string {
@@ -841,21 +990,34 @@ func (e CFURLBookmarkResolutionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The types of components in a URL.
 type CFURLComponentType int64
 
 const (
-	KCFURLComponentScheme            CFURLComponentType = 1
-	KCFURLComponentNetLocation       CFURLComponentType = 2
-	KCFURLComponentPath              CFURLComponentType = 3
+	// The URL’s scheme.
+	KCFURLComponentScheme CFURLComponentType = 1
+	// The URL’s network location.
+	KCFURLComponentNetLocation CFURLComponentType = 2
+	// The URL’s path component.
+	KCFURLComponentPath CFURLComponentType = 3
+	// The URL’s resource specifier.
 	KCFURLComponentResourceSpecifier CFURLComponentType = 4
-	KCFURLComponentUser              CFURLComponentType = 5
-	KCFURLComponentPassword          CFURLComponentType = 6
-	KCFURLComponentUserInfo          CFURLComponentType = 7
-	KCFURLComponentHost              CFURLComponentType = 8
-	KCFURLComponentPort              CFURLComponentType = 9
-	KCFURLComponentParameterString   CFURLComponentType = 10
-	KCFURLComponentQuery             CFURLComponentType = 11
-	KCFURLComponentFragment          CFURLComponentType = 12
+	// The URL’s user.
+	KCFURLComponentUser CFURLComponentType = 5
+	// The user’s password.
+	KCFURLComponentPassword CFURLComponentType = 6
+	// The user’s information.
+	KCFURLComponentUserInfo CFURLComponentType = 7
+	// The URL’s host.
+	KCFURLComponentHost CFURLComponentType = 8
+	// The URL’s port.
+	KCFURLComponentPort CFURLComponentType = 9
+	// The URL’s parameter string.
+	KCFURLComponentParameterString CFURLComponentType = 10
+	// The URL’s query.
+	KCFURLComponentQuery CFURLComponentType = 11
+	// The URL’s fragment.
+	KCFURLComponentFragment CFURLComponentType = 12
 )
 
 func (e CFURLComponentType) String() string {
@@ -889,16 +1051,24 @@ func (e CFURLComponentType) String() string {
 	}
 }
 
+// Options for controlling enumerator behavior.
 // Bitmask — values may be combined with |.
 type CFURLEnumeratorOptions int64
 
 const (
-	KCFURLEnumeratorDefaultBehavior             CFURLEnumeratorOptions = 0
-	KCFURLEnumeratorDescendRecursively          CFURLEnumeratorOptions = 1
-	KCFURLEnumeratorSkipInvisibles              CFURLEnumeratorOptions = 2
-	KCFURLEnumeratorGenerateFileReferenceURLs   CFURLEnumeratorOptions = 4
-	KCFURLEnumeratorSkipPackageContents         CFURLEnumeratorOptions = 8
-	KCFURLEnumeratorIncludeDirectoriesPreOrder  CFURLEnumeratorOptions = 16
+	// The enumerator performs its default behavior.
+	KCFURLEnumeratorDefaultBehavior CFURLEnumeratorOptions = 0
+	// The enumerator recurses into each subdirectory enumerated.
+	KCFURLEnumeratorDescendRecursively CFURLEnumeratorOptions = 1
+	// The enumerator skips “hidden” or “invisible” objects.
+	KCFURLEnumeratorSkipInvisibles CFURLEnumeratorOptions = 2
+	// The enumerator generates file reference URLs instead of file path URLs.
+	KCFURLEnumeratorGenerateFileReferenceURLs CFURLEnumeratorOptions = 4
+	// The enumerator skips package directory contents.
+	KCFURLEnumeratorSkipPackageContents CFURLEnumeratorOptions = 8
+	// If provided along with the kCFURLEnumeratorDescendRecursively option, the recursive enumerator returns a directory’s URL before returning the URLs of the directory’s descendents.
+	KCFURLEnumeratorIncludeDirectoriesPreOrder CFURLEnumeratorOptions = 16
+	// If provided along with the kCFURLEnumeratorDescendRecursively option, the recursive enumerator returns a directory’s URL after returning the URLs of the directory’s descendents.
 	KCFURLEnumeratorIncludeDirectoriesPostOrder CFURLEnumeratorOptions = 32
 	KCFURLEnumeratorGenerateRelativePathURLs    CFURLEnumeratorOptions = 64
 )
@@ -932,12 +1102,18 @@ func (e CFURLEnumeratorOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options you can use to determine how CFURL functions parse a file system path name.
 type CFURLPathStyle int64
 
 const (
+	// Indicates a POSIX style path name. Components are slash delimited. A leading slash indicates an absolute path; a trailing slash is not significant.
 	KCFURLPOSIXPathStyle CFURLPathStyle = 0
+	// Indicates a HFS style path name. Components are colon delimited. A leading colon indicates a relative path, otherwise the first path component denotes the volume.
+	//
 	// Deprecated: Carbon File Manager is deprecated, use kCFURLPOSIXPathStyle where possible
 	KCFURLHFSPathStyle CFURLPathStyle = 1
+	// Indicates a Windows style path name.
+	//
 	// Deprecated: Carbon File Manager is deprecated, use kCFURLPOSIXPathStyle where possible
 	KCFURLWindowsPathStyle CFURLPathStyle = 2
 )
@@ -955,23 +1131,39 @@ func (e CFURLPathStyle) String() string {
 	}
 }
 
+// The various XML data type identification codes that the parser uses to describe XML structures.
 type CFXMLNodeTypeCode int64
 
 const (
-	KCFXMLNodeTypeDocument                 CFXMLNodeTypeCode = 1
-	KCFXMLNodeTypeElement                  CFXMLNodeTypeCode = 2
-	KCFXMLNodeTypeAttribute                CFXMLNodeTypeCode = 3
-	KCFXMLNodeTypeProcessingInstruction    CFXMLNodeTypeCode = 4
-	KCFXMLNodeTypeComment                  CFXMLNodeTypeCode = 5
-	KCFXMLNodeTypeText                     CFXMLNodeTypeCode = 6
-	KCFXMLNodeTypeCDATASection             CFXMLNodeTypeCode = 7
-	KCFXMLNodeTypeDocumentFragment         CFXMLNodeTypeCode = 8
-	KCFXMLNodeTypeEntity                   CFXMLNodeTypeCode = 9
-	KCFXMLNodeTypeEntityReference          CFXMLNodeTypeCode = 10
-	KCFXMLNodeTypeDocumentType             CFXMLNodeTypeCode = 11
-	KCFXMLNodeTypeWhitespace               CFXMLNodeTypeCode = 12
-	KCFXMLNodeTypeNotation                 CFXMLNodeTypeCode = 13
-	KCFXMLNodeTypeElementTypeDeclaration   CFXMLNodeTypeCode = 14
+	// Indicates a document where the data string is NULL and the additional information is a pointer to a CFXMLDocumentInfo structure.
+	KCFXMLNodeTypeDocument CFXMLNodeTypeCode = 1
+	// Indicates an element where the data string is the name of the tag and the additional information is a pointer to a CFXMLElementInfo structure.
+	KCFXMLNodeTypeElement CFXMLNodeTypeCode = 2
+	// Currently not used.
+	KCFXMLNodeTypeAttribute CFXMLNodeTypeCode = 3
+	// Indicates a processing instruction where the data string is the name of the target and the additional information is a pointer to a CFXMLProcessingInstructionInfo structure.
+	KCFXMLNodeTypeProcessingInstruction CFXMLNodeTypeCode = 4
+	// Indicates a comment section where the data string is the text of the comment and the additional information is NULL.
+	KCFXMLNodeTypeComment CFXMLNodeTypeCode = 5
+	// Indicates a text section where the data string is the text’s contents and the additional information is NULL.
+	KCFXMLNodeTypeText CFXMLNodeTypeCode = 6
+	// Indicates a CDATA section where the data string is the text of the CDATA and the additional information is NULL.
+	KCFXMLNodeTypeCDATASection CFXMLNodeTypeCode = 7
+	// Currently not used.
+	KCFXMLNodeTypeDocumentFragment CFXMLNodeTypeCode = 8
+	// Indicates an entity where the data string is the name of the entity and the additional information is a pointer to a CFXMLEntityInfo structure.
+	KCFXMLNodeTypeEntity CFXMLNodeTypeCode = 9
+	// Indicates an entity reference where the data string is the name of the referenced entity and the additional information is a pointer to a CFXMLEntityReferenceInfo structure.
+	KCFXMLNodeTypeEntityReference CFXMLNodeTypeCode = 10
+	// Indicates a document type where the data string is the name given to the top-level element and the additional information is a pointer to a CFXMLDocumentTypeInfo structure.
+	KCFXMLNodeTypeDocumentType CFXMLNodeTypeCode = 11
+	// Indicates white space where the data string is the text of the white space and the additional information is NULL.
+	KCFXMLNodeTypeWhitespace CFXMLNodeTypeCode = 12
+	// Indicates a notation where the data string is the notation name and the additional information is a pointer to a CFXMLNotationInfo structure.
+	KCFXMLNodeTypeNotation CFXMLNodeTypeCode = 13
+	// Indicates an element type declaration where the data string is the tag name and the additional information is a pointer to a CFXMLElementTypeDeclarationInfo structure.
+	KCFXMLNodeTypeElementTypeDeclaration CFXMLNodeTypeCode = 14
+	// Indicates an attribute list declaration where the data string is the tag name and the additional information is a pointer to a CFXMLAttributeListDeclarationInfo structure.
 	KCFXMLNodeTypeAttributeListDeclaration CFXMLNodeTypeCode = 15
 )
 
@@ -1012,28 +1204,47 @@ func (e CFXMLNodeTypeCode) String() string {
 	}
 }
 
+// The various status and error flags that can be returned by the parser.
 // Bitmask — values may be combined with |.
 type CFXMLParserStatusCode int64
 
 const (
-	KCFXMLStatusParseNotBegun                 CFXMLParserStatusCode = -2
-	KCFXMLStatusParseInProgress               CFXMLParserStatusCode = -1
-	KCFXMLStatusParseSuccessful               CFXMLParserStatusCode = 0
-	KCFXMLErrorUnexpectedEOF                  CFXMLParserStatusCode = 1
-	KCFXMLErrorUnknownEncoding                CFXMLParserStatusCode = 2
-	KCFXMLErrorEncodingConversionFailure      CFXMLParserStatusCode = 3
+	// Indicates the parser has not begun.
+	KCFXMLStatusParseNotBegun CFXMLParserStatusCode = -2
+	// Indicates the parser is in progress.
+	KCFXMLStatusParseInProgress CFXMLParserStatusCode = -1
+	// Indicates the parser was successful.
+	KCFXMLStatusParseSuccessful CFXMLParserStatusCode = 0
+	// Indicates an unexpected EOF occurred.
+	KCFXMLErrorUnexpectedEOF CFXMLParserStatusCode = 1
+	// Indicates an unknown encoding error.
+	KCFXMLErrorUnknownEncoding CFXMLParserStatusCode = 2
+	// Indicates an encoding conversion error.
+	KCFXMLErrorEncodingConversionFailure CFXMLParserStatusCode = 3
+	// Indicates a malformed processing instruction.
 	KCFXMLErrorMalformedProcessingInstruction CFXMLParserStatusCode = 4
-	KCFXMLErrorMalformedDTD                   CFXMLParserStatusCode = 5
-	KCFXMLErrorMalformedName                  CFXMLParserStatusCode = 6
-	KCFXMLErrorMalformedCDSect                CFXMLParserStatusCode = 7
-	KCFXMLErrorMalformedCloseTag              CFXMLParserStatusCode = 8
-	KCFXMLErrorMalformedStartTag              CFXMLParserStatusCode = 9
-	KCFXMLErrorMalformedDocument              CFXMLParserStatusCode = 10
-	KCFXMLErrorElementlessDocument            CFXMLParserStatusCode = 11
-	KCFXMLErrorMalformedComment               CFXMLParserStatusCode = 12
-	KCFXMLErrorMalformedCharacterReference    CFXMLParserStatusCode = 13
-	KCFXMLErrorMalformedParsedCharacterData   CFXMLParserStatusCode = 14
-	KCFXMLErrorNoData                         CFXMLParserStatusCode = 15
+	// Indicates a malformed DTD.
+	KCFXMLErrorMalformedDTD CFXMLParserStatusCode = 5
+	// Indicates a malformed name.
+	KCFXMLErrorMalformedName CFXMLParserStatusCode = 6
+	// Indicates a malformed CDATA section.
+	KCFXMLErrorMalformedCDSect CFXMLParserStatusCode = 7
+	// Indicates a malformed close tag.
+	KCFXMLErrorMalformedCloseTag CFXMLParserStatusCode = 8
+	// Indicates a malformed start tag.
+	KCFXMLErrorMalformedStartTag CFXMLParserStatusCode = 9
+	// Indicates a malformed document.
+	KCFXMLErrorMalformedDocument CFXMLParserStatusCode = 10
+	// Indicates a document containing no elements.
+	KCFXMLErrorElementlessDocument CFXMLParserStatusCode = 11
+	// Indicates a malformed comment.
+	KCFXMLErrorMalformedComment CFXMLParserStatusCode = 12
+	// Indicates a malformed character reference.
+	KCFXMLErrorMalformedCharacterReference CFXMLParserStatusCode = 13
+	// Indicates malformed character data.
+	KCFXMLErrorMalformedParsedCharacterData CFXMLParserStatusCode = 14
+	// Indicates a no data error.
+	KCFXMLErrorNoData CFXMLParserStatusCode = 15
 )
 
 func (e CFXMLParserStatusCode) String() string {

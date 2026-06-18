@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the content key decryptor.
+//
 // ContentKey wraps [raw.AVContentKey] with a fluent Go API.
 type ContentKey struct {
 	inner *raw.AVContentKey

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An array of sample buffer attachments for a render pass.
+//
 // RenderPassSampleBufferAttachmentDescriptorArray wraps [raw.MTLRenderPassSampleBufferAttachmentDescriptorArray] with a fluent Go API.
 type RenderPassSampleBufferAttachmentDescriptorArray struct {
 	inner *raw.MTLRenderPassSampleBufferAttachmentDescriptorArray
@@ -37,6 +39,8 @@ func NewRenderPassSampleBufferAttachmentDescriptorArray() *RenderPassSampleBuffe
 	return &RenderPassSampleBufferAttachmentDescriptorArray{inner: raw.MTLRenderPassSampleBufferAttachmentDescriptorArrayFromID(_id)}
 }
 
+// Returns the descriptor object for the specified sample buffer attachment.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *RenderPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *RenderPassSampleBufferAttachmentDescriptor {
 	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
@@ -46,6 +50,8 @@ func (x *RenderPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscri
 	return &RenderPassSampleBufferAttachmentDescriptor{inner: _r}
 }
 
+// Sets the descriptor object for the specified sample buffer attachment.
+//
 // SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
 func (x *RenderPassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLRenderPassSampleBufferAttachmentDescriptor, attachmentIndex uint) {
 	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)

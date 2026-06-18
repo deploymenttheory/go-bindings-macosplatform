@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A GPU-based image-processing routine used to create custom Core Image filters.
+//
 // Kernel wraps [raw.CIKernel] with a fluent Go API.
 type Kernel struct {
 	inner *raw.CIKernel
@@ -38,11 +40,15 @@ func NewKernel() *Kernel {
 	return &Kernel{inner: raw.CIKernelFromID(_id)}
 }
 
+// Sets the selector Core Image uses to query the region of interest for image processing with the kernel.
+//
 // SetROISelector calls the underlying SetROISelector.
 func (x *Kernel) SetROISelector(method objc.SEL) {
 	x.inner.SetROISelector(method)
 }
 
+// Creates a new image using the kernel and specified arguments.
+//
 // ApplyWithExtentRoiCallbackArguments calls the underlying ApplyWithExtentRoiCallbackArguments.
 func (x *Kernel) ApplyWithExtentRoiCallbackArguments(extent corefoundation.CGRect, callback objc.Block, args *foundation.NSArray[objc.ID]) *Image {
 	_r := x.inner.ApplyWithExtentRoiCallbackArguments(extent, callback, args)

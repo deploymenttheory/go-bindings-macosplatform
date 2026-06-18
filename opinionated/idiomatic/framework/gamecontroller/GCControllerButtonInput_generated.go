@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A control element that represents a button touch or press.
+//
 // ControllerButtonInput wraps [raw.GCControllerButtonInput] with a fluent Go API.
 type ControllerButtonInput struct {
 	inner *raw.GCControllerButtonInput
@@ -36,13 +38,15 @@ func NewControllerButtonInput() *ControllerButtonInput {
 	return &ControllerButtonInput{inner: raw.GCControllerButtonInputFromID(_id)}
 }
 
+// The block that the element calls when the user changes the level of pressure on the button.
+//
 // WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
 func (x *ControllerButtonInput) WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *ControllerButtonInput {
 	x.inner.SetValueChangedHandler(valueChangedHandler)
 	return x
 }
 
-// Set this block if you want to be notified when only the pressed state on this button changes. This will get called less often than the valueChangedHandler with the additional feature of the pressed state being different to the last time it was called.
+// The block that the element calls when the user presses or releases the button.
 //
 // WithPressedChangedHandler sets the pressedChangedHandler property and returns the receiver for chaining.
 func (x *ControllerButtonInput) WithPressedChangedHandler(pressedChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *ControllerButtonInput {
@@ -50,13 +54,15 @@ func (x *ControllerButtonInput) WithPressedChangedHandler(pressedChangedHandler 
 	return x
 }
 
+// The block that the element calls when the user touches the button.
+//
 // WithTouchedChangedHandler sets the touchedChangedHandler property and returns the receiver for chaining.
 func (x *ControllerButtonInput) WithTouchedChangedHandler(touchedChangedHandler func(*raw.GCControllerButtonInput, float32, bool, bool)) *ControllerButtonInput {
 	x.inner.SetTouchedChangedHandler(touchedChangedHandler)
 	return x
 }
 
-// A normalized value for the input. Between 0 and 1 for button inputs. Values are saturated and thus never exceed the range of [0, 1]. @see valueChangedHandler @see pressed
+// The level of pressure the user is applying to the button.
 //
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *ControllerButtonInput) WithValue(value float32) *ControllerButtonInput {
@@ -64,7 +70,7 @@ func (x *ControllerButtonInput) WithValue(value float32) *ControllerButtonInput 
 	return x
 }
 
-// The preferred system gesture state for this element. Defaults to GCSystemGestureStateEnabled for most elements @note This is merely the preferred system gesture state - it is not guaranteed to be respected by the system. @note It is highly recommended to leave this set to the default value, however there may be situations (for example, game streaming apps) where it is preferrable to disable system gestures. @see boundToSystemGesture
+// The preferred state for handling input when the user binds the element to a system gesture.
 //
 // WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
 func (x *ControllerButtonInput) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerButtonInput {
@@ -72,7 +78,7 @@ func (x *ControllerButtonInput) WithPreferredSystemGestureState(preferredSystemG
 	return x
 }
 
-// The element's SF Symbols name, taking input remapping into account. @note In almost all instances, you should use this over unmappedSfSymbolsName in your UI.
+// A system symbol for the element or the remapped element.
 //
 // WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
 func (x *ControllerButtonInput) WithSfSymbolsName(sfSymbolsName string) *ControllerButtonInput {
@@ -80,7 +86,7 @@ func (x *ControllerButtonInput) WithSfSymbolsName(sfSymbolsName string) *Control
 	return x
 }
 
-// The element's localized name, taking input remapping into account. @note In almost all instances, you should use this over unmappedLocalizedName in your UI.
+// The localized name for the element or the remapped element.
 //
 // WithLocalizedName sets the localizedName property and returns the receiver for chaining.
 func (x *ControllerButtonInput) WithLocalizedName(localizedName string) *ControllerButtonInput {
@@ -88,7 +94,7 @@ func (x *ControllerButtonInput) WithLocalizedName(localizedName string) *Control
 	return x
 }
 
-// The element's SF Symbols name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (sfSymbolsName is nil).
+// The element’s system symbol, not the remapped symbol.
 //
 // WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
 func (x *ControllerButtonInput) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerButtonInput {
@@ -96,7 +102,7 @@ func (x *ControllerButtonInput) WithUnmappedSfSymbolsName(unmappedSfSymbolsName 
 	return x
 }
 
-// The element's localized name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (localizedName is nil).
+// The element’s localized name, not the remapped name.
 //
 // WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
 func (x *ControllerButtonInput) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerButtonInput {
@@ -104,7 +110,7 @@ func (x *ControllerButtonInput) WithUnmappedLocalizedName(unmappedLocalizedName 
 	return x
 }
 
-// Sets the normalized value for the button input. Will update the pressed state of the button. @param value the value to set the input to. @note If the controller's snapshot flag is set to NO, this method has no effect. @see value
+// Sets the pressure value of a snapshot of a button.
 //
 // SetValue calls the underlying SetValue.
 func (x *ControllerButtonInput) SetValue(value float32) {

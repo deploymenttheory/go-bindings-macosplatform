@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents an input state for gamepads and arcade sticks.
+//
 // ControllerInputState wraps [raw.GCControllerInputState] with a fluent Go API.
 type ControllerInputState struct {
 	inner *raw.GCControllerInputState

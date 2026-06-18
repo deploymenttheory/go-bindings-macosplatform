@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Provides options controlling how to compile a pipeline state.
+//
 // MTL4PipelineOptions wraps [raw.MTL4PipelineOptions] with a fluent Go API.
 type MTL4PipelineOptions struct {
 	inner *raw.MTL4PipelineOptions

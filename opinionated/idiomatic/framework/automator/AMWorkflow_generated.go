@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that lets you use an Automator workflow in your app.
+//
 // Workflow wraps [raw.AMWorkflow] with a fluent Go API.
 type Workflow struct {
 	inner *raw.AMWorkflow
@@ -38,6 +40,8 @@ func NewWorkflow() *Workflow {
 	return &Workflow{inner: raw.AMWorkflowFromID(_id)}
 }
 
+// Creates and initializes a workflow based on the contents of the specified file.
+//
 // NewWorkflowWithContentsOfURLError creates a new [Workflow].
 func NewWorkflowWithContentsOfURLError(fileURL string) (*Workflow, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AMWorkflow")), objc.RegisterName("alloc"))
@@ -49,42 +53,58 @@ func NewWorkflowWithContentsOfURLError(fileURL string) (*Workflow, error) {
 	return &Workflow{inner: raw.AMWorkflowFromID(_id)}, nil
 }
 
+// The input data that is passed to the first action in the workflow.
+//
 // WithInput sets the input property and returns the receiver for chaining.
 func (x *Workflow) WithInput(input objc.ID) *Workflow {
 	x.inner.SetInput(input)
 	return x
 }
 
+// Writes the workflow to the specified file.
+//
 // WriteToURLError calls the underlying WriteToURLError.
 func (x *Workflow) WriteToURLError(fileURL string) (bool, error) {
 	return x.inner.WriteToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
 }
 
+// Sets the value of the workflow variable with the specified name.
+//
 // SetValueForVariableWithName calls the underlying SetValueForVariableWithName.
 func (x *Workflow) SetValueForVariableWithName(value objc.ID, variableName string) bool {
 	return x.inner.SetValueForVariableWithName(value, foundation.NSStringStringWithUTF8String(variableName))
 }
 
+// Returns the value of the workflow variable with the specified name.
+//
 // ValueForVariableWithName calls the underlying ValueForVariableWithName.
 func (x *Workflow) ValueForVariableWithName(variableName string) objc.ID {
 	return x.inner.ValueForVariableWithName(foundation.NSStringStringWithUTF8String(variableName))
 }
 
+// Adds the specified action at the end of the receiving workflow.
+//
 // AddAction calls the underlying AddAction.
 func (x *Workflow) AddAction(action *raw.AMAction) {
 	x.inner.AddAction(action)
 }
 
+// Removes the specified action from the workflow.
+//
 // RemoveAction calls the underlying RemoveAction.
 func (x *Workflow) RemoveAction(action *raw.AMAction) {
 	x.inner.RemoveAction(action)
 }
 
+// Inserts the specified action at the specified position of the receiving workflow.
+//
 // InsertActionAtIndex calls the underlying InsertActionAtIndex.
 func (x *Workflow) InsertActionAtIndex(action *raw.AMAction, index uint) {
 	x.inner.InsertActionAtIndex(action, index)
 }
 
+// Moves the action from the specified start position to the specified end position in the receiving workflow.
+//
 // MoveActionAtIndexToIndex calls the underlying MoveActionAtIndexToIndex.
 func (x *Workflow) MoveActionAtIndexToIndex(startIndex uint, endIndex uint) {
 	x.inner.MoveActionAtIndexToIndex(startIndex, endIndex)

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A semiabstract superclass that provides subclasses that you use to draw an image from a particular type of source data.
+//
 // ImageRep wraps [raw.NSImageRep] with a fluent Go API.
 type ImageRep struct {
 	inner *raw.NSImageRep
@@ -39,6 +41,8 @@ func NewImageRep() *ImageRep {
 	return &ImageRep{inner: raw.NSImageRepFromID(_id)}
 }
 
+// Creates and returns an image representation object from data in an unarchiver.
+//
 // NewImageRepWithCoder creates a new [ImageRep].
 func NewImageRepWithCoder(coder *foundation.NSCoder) *ImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSImageRep")), objc.RegisterName("alloc"))
@@ -46,74 +50,100 @@ func NewImageRepWithCoder(coder *foundation.NSCoder) *ImageRep {
 	return &ImageRep{inner: raw.NSImageRepFromID(_id)}
 }
 
+// The size of the image representation, measured in points in the user coordinate space.
+//
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *ImageRep) WithSize(size corefoundation.CGSize) *ImageRep {
 	x.inner.SetSize(size)
 	return x
 }
 
+// A Boolean value that indicates whether the image data has an alpha channel.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *ImageRep) WithAlpha(alpha bool) *ImageRep {
 	x.inner.SetAlpha(alpha)
 	return x
 }
 
+// A Boolean value that indicates whether the image is opaque.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *ImageRep) WithOpaque(opaque bool) *ImageRep {
 	x.inner.SetOpaque(opaque)
 	return x
 }
 
+// The name of the color space used by the image data.
+//
 // WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
 func (x *ImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *ImageRep {
 	x.inner.SetColorSpaceName(colorSpaceName)
 	return x
 }
 
+// The number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
+//
 // WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
 func (x *ImageRep) WithBitsPerSample(bitsPerSample int) *ImageRep {
 	x.inner.SetBitsPerSample(bitsPerSample)
 	return x
 }
 
+// The width of the image, measured in pixels.
+//
 // WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
 func (x *ImageRep) WithPixelsWide(pixelsWide int) *ImageRep {
 	x.inner.SetPixelsWide(pixelsWide)
 	return x
 }
 
+// The height of the image, measured in pixels.
+//
 // WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
 func (x *ImageRep) WithPixelsHigh(pixelsHigh int) *ImageRep {
 	x.inner.SetPixelsHigh(pixelsHigh)
 	return x
 }
 
+// The layout direction for the image.
+//
 // WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
 func (x *ImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *ImageRep {
 	x.inner.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))
 	return x
 }
 
+// Implemented by subclasses to draw the image in the current coordinate system.
+//
 // Draw calls the underlying Draw.
 func (x *ImageRep) Draw() bool {
 	return x.inner.Draw()
 }
 
+// Draws the image representation’s image data at the specified point in the current coordinate system.
+//
 // DrawAtPoint calls the underlying DrawAtPoint.
 func (x *ImageRep) DrawAtPoint(point corefoundation.CGPoint) bool {
 	return x.inner.DrawAtPoint(point)
 }
 
+// Draws the image, scaling it (as needed) to fit the specified rectangle.
+//
 // DrawInRect calls the underlying DrawInRect.
 func (x *ImageRep) DrawInRect(rect corefoundation.CGRect) bool {
 	return x.inner.DrawInRect(rect)
 }
 
+// Draws all or part of the image in the specified rectangle in the current coordinate system.
+//
 // DrawInRectFromRectOperationFractionRespectFlippedHints calls the underlying DrawInRectFromRectOperationFractionRespectFlippedHints.
 func (x *ImageRep) DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect corefoundation.CGRect, srcSpacePortionRect corefoundation.CGRect, op NSCompositingOperation, requestedAlpha float64, respectContextIsFlipped bool, hints *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
 	return x.inner.DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect, srcSpacePortionRect, raw.NSCompositingOperation(op), requestedAlpha, respectContextIsFlipped, hints)
 }
 
+// Returns a Core Graphics image object that captures the drawing of the image.
+//
 // CGImageForProposedRectContextHints calls the underlying CGImageForProposedRectContextHints.
 func (x *ImageRep) CGImageForProposedRectContextHints(proposedDestRect *corefoundation.CGRect, context_ *raw.NSGraphicsContext, hints *foundation.NSDictionary[*foundation.NSString, objc.ID]) unsafe.Pointer {
 	return x.inner.CGImageForProposedRectContextHints(proposedDestRect, context_, hints)

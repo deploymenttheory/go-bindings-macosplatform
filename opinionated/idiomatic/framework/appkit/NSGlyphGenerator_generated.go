@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that performs the initial, nominal glyph generation phase in the layout process.
+//
 // GlyphGenerator wraps [raw.NSGlyphGenerator] with a fluent Go API.
 type GlyphGenerator struct {
 	inner *raw.NSGlyphGenerator
@@ -35,6 +37,8 @@ func NewGlyphGenerator() *GlyphGenerator {
 	return &GlyphGenerator{inner: raw.NSGlyphGeneratorFromID(_id)}
 }
 
+// Generates glyphs for the specified glyph storage object (NSLayoutManager by default).
+//
 // GenerateGlyphsForGlyphStorageDesiredNumberOfCharactersGlyphIndexCharacterIndex calls the underlying GenerateGlyphsForGlyphStorageDesiredNumberOfCharactersGlyphIndexCharacterIndex.
 func (x *GlyphGenerator) GenerateGlyphsForGlyphStorageDesiredNumberOfCharactersGlyphIndexCharacterIndex(glyphStorage raw.NSGlyphStorage, nChars uint, glyphIndex *uint, charIndex *uint) {
 	x.inner.GenerateGlyphsForGlyphStorageDesiredNumberOfCharactersGlyphIndexCharacterIndex(glyphStorage, nChars, glyphIndex, charIndex)

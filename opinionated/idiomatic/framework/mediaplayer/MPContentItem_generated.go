@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains the information for a displayed media item.
+//
 // ContentItem wraps [raw.MPContentItem] with a fluent Go API.
 type ContentItem struct {
 	inner *raw.MPContentItem
@@ -31,7 +33,7 @@ func ContentItemFromID(id objc.ID) *ContentItem {
 	return &ContentItem{inner: raw.MPContentItemFromID(id)}
 }
 
-// Designated initializer. A unique identifier is required to identify the item for later use.
+// Sets the identifier for a media item.
 //
 // NewContentItemWithIdentifier creates a new [ContentItem].
 func NewContentItemWithIdentifier(identifier string) *ContentItem {
@@ -40,7 +42,7 @@ func NewContentItemWithIdentifier(identifier string) *ContentItem {
 	return &ContentItem{inner: raw.MPContentItemFromID(_id)}
 }
 
-// A title for this item. Usually this would be the track name, if representing a song, the episode name of a podcast, etc.
+// The public name of the media item.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *ContentItem) WithTitle(title string) *ContentItem {
@@ -48,7 +50,7 @@ func (x *ContentItem) WithTitle(title string) *ContentItem {
 	return x
 }
 
-// A subtitle for this item. If this were representing a song, this would usually be the artist or composer.
+// A secondary designator for the media item.
 //
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *ContentItem) WithSubtitle(subtitle string) *ContentItem {
@@ -56,7 +58,7 @@ func (x *ContentItem) WithSubtitle(subtitle string) *ContentItem {
 	return x
 }
 
-// Artwork for this item. Examples of artwork for a content item are the album cover for a song, or a movie poster for a movie.
+// A single image that’s associated with the media item.
 //
 // WithArtwork sets the artwork property and returns the receiver for chaining.
 func (x *ContentItem) WithArtwork(artwork *MediaItemArtwork) *ContentItem {
@@ -64,7 +66,7 @@ func (x *ContentItem) WithArtwork(artwork *MediaItemArtwork) *ContentItem {
 	return x
 }
 
-// Represents the current playback progress of the item. 0.0 = not watched/listened/viewed, 1.0 = fully watched/listened/viewed Default is -1.0 (no progress indicator shown)
+// The amount of content played for the media item.
 //
 // WithPlaybackProgress sets the playbackProgress property and returns the receiver for chaining.
 func (x *ContentItem) WithPlaybackProgress(playbackProgress float32) *ContentItem {
@@ -72,7 +74,7 @@ func (x *ContentItem) WithPlaybackProgress(playbackProgress float32) *ContentIte
 	return x
 }
 
-// Represents whether this content item is streaming content, i.e. from the cloud where the content is not stored locally.
+// A Boolean value that indicates whether the content item is streaming content.
 //
 // WithStreamingContent sets the streamingContent property and returns the receiver for chaining.
 func (x *ContentItem) WithStreamingContent(streamingContent bool) *ContentItem {
@@ -80,7 +82,7 @@ func (x *ContentItem) WithStreamingContent(streamingContent bool) *ContentItem {
 	return x
 }
 
-// Represents whether this content item is explicit content
+// A Boolean value that indicates whether the media item contains explicit content.
 //
 // WithExplicitContent sets the explicitContent property and returns the receiver for chaining.
 func (x *ContentItem) WithExplicitContent(explicitContent bool) *ContentItem {
@@ -88,7 +90,7 @@ func (x *ContentItem) WithExplicitContent(explicitContent bool) *ContentItem {
 	return x
 }
 
-// Represents whether the content item is a container that may contain other content items, e.g. an album or a playlist.
+// A Boolean value that indicates whether a media item is container of other items.
 //
 // WithContainer sets the container property and returns the receiver for chaining.
 func (x *ContentItem) WithContainer(container bool) *ContentItem {
@@ -96,7 +98,7 @@ func (x *ContentItem) WithContainer(container bool) *ContentItem {
 	return x
 }
 
-// Represents whether the content item is actionable from a playback perspective. Albums are playable, for example, because selecting an album for playback means the app should play each song in the album in order. An example of a content item that may not be playable is a genre, since an app experience typically doesn't involve selecting an entire genre for playback.
+// A Boolean value that indicates whether a media item is able to be played.
 //
 // WithPlayable sets the playable property and returns the receiver for chaining.
 func (x *ContentItem) WithPlayable(playable bool) *ContentItem {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a collection of mutually exclusive options for the presentation of media within an asset.
+//
 // MediaSelectionGroup wraps [raw.AVMediaSelectionGroup] with a fluent Go API.
 type MediaSelectionGroup struct {
 	inner *raw.AVMediaSelectionGroup
@@ -36,7 +38,7 @@ func NewMediaSelectionGroup() *MediaSelectionGroup {
 	return &MediaSelectionGroup{inner: raw.AVMediaSelectionGroupFromID(_id)}
 }
 
-// Returns the instance of AVMediaSelectionOption with properties that match the specified property list. - Parameter plist: A property list previously obtained from an option in the group via -[AVMediaSelectionOption propertyList]. - Returns: If the specified properties match those of an option in the group, an instance of AVMediaSelectionOption. Otherwise nil.
+// Returns the media selection options that match the given property list.
 //
 // MediaSelectionOptionWithPropertyList calls the underlying MediaSelectionOptionWithPropertyList.
 func (x *MediaSelectionGroup) MediaSelectionOptionWithPropertyList(plist objc.ID) *MediaSelectionOption {

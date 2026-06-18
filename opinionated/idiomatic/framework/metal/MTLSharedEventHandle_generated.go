@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An instance you use to recreate a shareable event.
+//
 // SharedEventHandle wraps [raw.MTLSharedEventHandle] with a fluent Go API.
 type SharedEventHandle struct {
 	inner *raw.MTLSharedEventHandle

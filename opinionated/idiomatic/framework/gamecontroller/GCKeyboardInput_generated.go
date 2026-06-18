@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A controller profile that uses the keyboard as the input device.
+//
 // KeyboardInput wraps [raw.GCKeyboardInput] with a fluent Go API.
 type KeyboardInput struct {
 	inner *raw.GCKeyboardInput
@@ -35,13 +37,15 @@ func NewKeyboardInput() *KeyboardInput {
 	return &KeyboardInput{inner: raw.GCKeyboardInputFromID(_id)}
 }
 
+// The block that the profile calls when the user presses a key.
+//
 // WithKeyChangedHandler sets the keyChangedHandler property and returns the receiver for chaining.
 func (x *KeyboardInput) WithKeyChangedHandler(keyChangedHandler func(*raw.GCKeyboardInput, *raw.GCControllerButtonInput, int, bool)) *KeyboardInput {
 	x.inner.SetKeyChangedHandler(keyChangedHandler)
 	return x
 }
 
-// Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called for each element that changed. @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons. @param element the element that has been modified.
+// The block that the profile calls when an element’s value changes.
 //
 // WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
 func (x *KeyboardInput) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *KeyboardInput {
@@ -49,7 +53,7 @@ func (x *KeyboardInput) WithValueDidChangeHandler(valueDidChangeHandler func(*ra
 	return x
 }
 
-// Alongside general subscript notation of GCPhysicalInputProfile keys can be accessed using this method. @example [keyboard buttonForKey:GCKeyCode.UpArrow] == keyboard[GCKeyUpArrow] @param code is a low level key code that can be used for accessing a keyboard button. @note Full list of supported key constants can be found in GCKeyCodes.h and GCKeyNames.h
+// Returns the button element for the specified key code.
 //
 // ButtonForKeyCode calls the underlying ButtonForKeyCode.
 func (x *KeyboardInput) ButtonForKeyCode(code int) *ControllerButtonInput {

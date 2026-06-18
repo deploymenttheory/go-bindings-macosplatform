@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides alternative text suggestions for a person’s text selection.
+//
 // TextAlternatives wraps [raw.BETextAlternatives] with a fluent Go API.
 type TextAlternatives struct {
 	inner *raw.BETextAlternatives

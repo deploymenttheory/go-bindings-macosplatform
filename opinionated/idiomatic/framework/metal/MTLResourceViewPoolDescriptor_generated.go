@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Provides parameters for creating a resource view pool.
+//
 // ResourceViewPoolDescriptor wraps [raw.MTLResourceViewPoolDescriptor] with a fluent Go API.
 type ResourceViewPoolDescriptor struct {
 	inner *raw.MTLResourceViewPoolDescriptor

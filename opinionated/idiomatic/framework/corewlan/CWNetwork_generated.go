@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Encapsulates an IEEE 802.11 network, providing read-only accessors to various properties of the network.
+//
 // Network wraps [raw.CWNetwork] with a fluent Go API.
 type Network struct {
 	inner *raw.CWNetwork
@@ -37,21 +39,21 @@ func NewNetwork() *Network {
 	return &Network{inner: raw.CWNetworkFromID(_id)}
 }
 
-// @method @param network A CWNetwork object. @result YES if the objects are equal, NO otherwise. @abstract Determine CWNetwork equality. @discussion CWNetwork objects are considered equal if their corresponding <i>ssidData</i> and <i>bssid</i> properties are equal.
+// Method for determining CWNetwork object equality.
 //
 // IsEqualToNetwork calls the underlying IsEqualToNetwork.
 func (x *Network) IsEqualToNetwork(network *raw.CWNetwork) bool {
 	return x.inner.IsEqualToNetwork(network)
 }
 
-// @method @param security A CWSecurity type value. @result <i>YES</i> if the Wi-Fi device supports the specified security type, <i>NO</i> otherwise. @abstract Determine which security types a Wi-Fi device supports.
+// Method for determining which security types a network supports.
 //
 // SupportsSecurity calls the underlying SupportsSecurity.
 func (x *Network) SupportsSecurity(security CWSecurity) bool {
 	return x.inner.SupportsSecurity(raw.CWSecurity(security))
 }
 
-// @method @param phyMode A CWPHYMode type value. @result YES if the Wi-Fi device supports the specified PHY mode, NO otherwise. @abstract Determine which PHY modes a Wi-Fi device supports.
+// Method for determining which PHY modes a network supports.
 //
 // SupportsPHYMode calls the underlying SupportsPHYMode.
 func (x *Network) SupportsPHYMode(phyMode CWPHYMode) bool {

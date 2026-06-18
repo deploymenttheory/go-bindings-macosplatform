@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that contains all the semantic information about an accessible chart.
+//
 // ChartDescriptor wraps [raw.AXChartDescriptor] with a fluent Go API.
 type ChartDescriptor struct {
 	inner *raw.AXChartDescriptor
@@ -33,6 +35,8 @@ func ChartDescriptorFromID(id objc.ID) *ChartDescriptor {
 	return &ChartDescriptor{inner: raw.AXChartDescriptorFromID(id)}
 }
 
+// Creates a chart descriptor with the specified title, summary, x-axis descriptor, y-axis descriptor, descriptors for additional axes, and array of data series.
+//
 // NewChartDescriptorWithTitleSummaryXAxisDescriptorYAxisDescriptorSeries creates a new [ChartDescriptor].
 func NewChartDescriptorWithTitleSummaryXAxisDescriptorYAxisDescriptorSeries(title string, summary string, xAxis raw.AXDataAxisDescriptor, yAxis *raw.AXNumericDataAxisDescriptor, series *foundation.NSArray[*raw.AXDataSeriesDescriptor]) *ChartDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXChartDescriptor")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewChartDescriptorWithTitleSummaryXAxisDescriptorYAxisDescriptorSeries(titl
 	return &ChartDescriptor{inner: raw.AXChartDescriptorFromID(_id)}
 }
 
+// Creates a chart descriptor with the specified attributed title, summary, x-axis descriptor, y-axis descriptor, and array of data series.
+//
 // NewChartDescriptorWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorSeries creates a new [ChartDescriptor].
 func NewChartDescriptorWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorSeries(attributedTitle *foundation.NSAttributedString, summary string, xAxis raw.AXDataAxisDescriptor, yAxis *raw.AXNumericDataAxisDescriptor, series *foundation.NSArray[*raw.AXDataSeriesDescriptor]) *ChartDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXChartDescriptor")), objc.RegisterName("alloc"))
@@ -47,6 +53,8 @@ func NewChartDescriptorWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorS
 	return &ChartDescriptor{inner: raw.AXChartDescriptorFromID(_id)}
 }
 
+// Creates a chart descriptor with the specified title, summary, x-axis descriptor, y-axis descriptor, descriptors for additional axes, and array of data series.
+//
 // NewChartDescriptorWithTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalAxesSeries creates a new [ChartDescriptor].
 func NewChartDescriptorWithTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalAxesSeries(title string, summary string, xAxis raw.AXDataAxisDescriptor, yAxis *raw.AXNumericDataAxisDescriptor, additionalAxes *foundation.NSArray[raw.AXDataAxisDescriptor], series *foundation.NSArray[*raw.AXDataSeriesDescriptor]) *ChartDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXChartDescriptor")), objc.RegisterName("alloc"))
@@ -54,6 +62,8 @@ func NewChartDescriptorWithTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalA
 	return &ChartDescriptor{inner: raw.AXChartDescriptorFromID(_id)}
 }
 
+// Creates a chart descriptor with the specified attributed title, summary, x-axis descriptor, y-axis descriptor, descriptors for additional axes, and array of data series.
+//
 // NewChartDescriptorWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalAxesSeries creates a new [ChartDescriptor].
 func NewChartDescriptorWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalAxesSeries(attributedTitle *foundation.NSAttributedString, summary string, xAxis raw.AXDataAxisDescriptor, yAxis *raw.AXNumericDataAxisDescriptor, additionalAxes *foundation.NSArray[raw.AXDataAxisDescriptor], series *foundation.NSArray[*raw.AXDataSeriesDescriptor]) *ChartDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXChartDescriptor")), objc.RegisterName("alloc"))
@@ -69,7 +79,7 @@ func (x *ChartDescriptor) WithTitle(title string) *ChartDescriptor {
 	return x
 }
 
-// An attributed version of the title of the chart. When set, this will be used instead of `title`.
+// An attributed version of the chart title.
 //
 // WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
 func (x *ChartDescriptor) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *ChartDescriptor {
@@ -77,7 +87,7 @@ func (x *ChartDescriptor) WithAttributedTitle(attributedTitle *foundation.NSAttr
 	return x
 }
 
-// A natural language summary of the key message or features of the chart. e.g. "The chart shows that fuel efficiency decreases as vehicle weight increases."
+// A description of the key takeaways or features of the chart.
 //
 // WithSummary sets the summary property and returns the receiver for chaining.
 func (x *ChartDescriptor) WithSummary(summary string) *ChartDescriptor {
@@ -85,7 +95,7 @@ func (x *ChartDescriptor) WithSummary(summary string) *ChartDescriptor {
 	return x
 }
 
-// The direction of the chart's X axis.
+// The direction of the content in the chart.
 //
 // WithContentDirection sets the contentDirection property and returns the receiver for chaining.
 func (x *ChartDescriptor) WithContentDirection(contentDirection AXChartDescriptorContentDirection) *ChartDescriptor {
@@ -93,7 +103,7 @@ func (x *ChartDescriptor) WithContentDirection(contentDirection AXChartDescripto
 	return x
 }
 
-// The bounds of the view area for visually rendering data values if applicable, provided in superview coordinates.
+// The bounds of the view, in screen coordinates, for visually rendering data values.
 //
 // WithContentFrame sets the contentFrame property and returns the receiver for chaining.
 func (x *ChartDescriptor) WithContentFrame(contentFrame corefoundation.CGRect) *ChartDescriptor {
@@ -101,7 +111,7 @@ func (x *ChartDescriptor) WithContentFrame(contentFrame corefoundation.CGRect) *
 	return x
 }
 
-// A set of data series descriptors describing each series in the chart.
+// The descriptors for each data series in the chart.
 //
 // WithSeries sets the collection, converting the Go slice to an NSArray.
 func (x *ChartDescriptor) WithSeries(items ...*raw.AXDataSeriesDescriptor) *ChartDescriptor {
@@ -121,7 +131,7 @@ func (x *ChartDescriptor) WithSeries(items ...*raw.AXDataSeriesDescriptor) *Char
 	return x
 }
 
-// The axis descriptor for the chart's X axis.
+// The axis descriptor for the chart’s x-axis.
 //
 // WithXAxis sets the xAxis property and returns the receiver for chaining.
 func (x *ChartDescriptor) WithXAxis(xAxis raw.AXDataAxisDescriptor) *ChartDescriptor {
@@ -129,7 +139,7 @@ func (x *ChartDescriptor) WithXAxis(xAxis raw.AXDataAxisDescriptor) *ChartDescri
 	return x
 }
 
-// The axis descriptor for the chart's Y axis.
+// The axis descriptor for the chart’s y-axis.
 //
 // WithYAxis sets the yAxis property and returns the receiver for chaining.
 func (x *ChartDescriptor) WithYAxis(yAxis *NumericDataAxisDescriptor) *ChartDescriptor {

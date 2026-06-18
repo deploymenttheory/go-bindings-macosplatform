@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of an app that users can access during an assessment.
+//
 // AssessmentApplication wraps [raw.AEAssessmentApplication] with a fluent Go API.
 type AssessmentApplication struct {
 	inner *raw.AEAssessmentApplication
@@ -31,6 +33,8 @@ func AssessmentApplicationFromID(id objc.ID) *AssessmentApplication {
 	return &AssessmentApplication{inner: raw.AEAssessmentApplicationFromID(id)}
 }
 
+// Creates a representation of an app using its bundle identifier.
+//
 // NewAssessmentApplicationWithBundleIdentifier creates a new [AssessmentApplication].
 func NewAssessmentApplicationWithBundleIdentifier(bundleIdentifier string) *AssessmentApplication {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AEAssessmentApplication")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewAssessmentApplicationWithBundleIdentifier(bundleIdentifier string) *Asse
 	return &AssessmentApplication{inner: raw.AEAssessmentApplicationFromID(_id)}
 }
 
+// Creates a representation of an app using its bundle and team identifiers.
+//
 // NewAssessmentApplicationWithBundleIdentifierTeamIdentifier creates a new [AssessmentApplication].
 func NewAssessmentApplicationWithBundleIdentifierTeamIdentifier(bundleIdentifier string, teamIdentifier string) *AssessmentApplication {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AEAssessmentApplication")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewAssessmentApplicationWithBundleIdentifierTeamIdentifier(bundleIdentifier
 	return &AssessmentApplication{inner: raw.AEAssessmentApplicationFromID(_id)}
 }
 
+// A Boolean that indicates whether the session requires the app to have a valid code signature to run.
+//
 // WithRequiresSignatureValidation sets the requiresSignatureValidation property and returns the receiver for chaining.
 func (x *AssessmentApplication) WithRequiresSignatureValidation(requiresSignatureValidation bool) *AssessmentApplication {
 	x.inner.SetRequiresSignatureValidation(requiresSignatureValidation)

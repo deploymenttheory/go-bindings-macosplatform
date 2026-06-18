@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A view controller object that displays iOS devices that support inter-device audio.
+//
 // CAInterDeviceAudioViewController wraps [raw.CAInterDeviceAudioViewController] with a fluent Go API.
 type CAInterDeviceAudioViewController struct {
 	inner *raw.CAInterDeviceAudioViewController

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing a histogram of data values of the same type of unit.
+//
 // Histogram wraps [raw.MXHistogram] with a fluent Go API.
 type Histogram struct {
 	inner *raw.MXHistogram[objc.ID]

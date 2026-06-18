@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines a summary item for a payment that occurs at a later date, such as a pre-order.
+//
 // DeferredPaymentSummaryItem wraps [raw.PKDeferredPaymentSummaryItem] with a fluent Go API.
 type DeferredPaymentSummaryItem struct {
 	inner *raw.PKDeferredPaymentSummaryItem
@@ -36,24 +38,32 @@ func NewDeferredPaymentSummaryItem() *DeferredPaymentSummaryItem {
 	return &DeferredPaymentSummaryItem{inner: raw.PKDeferredPaymentSummaryItemFromID(_id)}
 }
 
+// The date, in the future, of the payment.
+//
 // WithDeferredDate sets the deferredDate property and returns the receiver for chaining.
 func (x *DeferredPaymentSummaryItem) WithDeferredDate(deferredDate *foundation.NSDate) *DeferredPaymentSummaryItem {
 	x.inner.SetDeferredDate(deferredDate)
 	return x
 }
 
+// A short, localized description of the item.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *DeferredPaymentSummaryItem) WithLabel(label string) *DeferredPaymentSummaryItem {
 	x.inner.PKPaymentSummaryItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// The summary item’s amount.
+//
 // WithAmount sets the amount property and returns the receiver for chaining.
 func (x *DeferredPaymentSummaryItem) WithAmount(amount *foundation.NSDecimalNumber) *DeferredPaymentSummaryItem {
 	x.inner.PKPaymentSummaryItem.SetAmount(amount)
 	return x
 }
 
+// The summary item’s type that indicates whether the amount is final.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *DeferredPaymentSummaryItem) WithType(type_ PKPaymentSummaryItemType) *DeferredPaymentSummaryItem {
 	x.inner.PKPaymentSummaryItem.SetType(raw.PKPaymentSummaryItemType(type_))

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A base type that identifies containers and volumes.
+//
 // EntityIdentifier wraps [raw.FSEntityIdentifier] with a fluent Go API.
 type EntityIdentifier struct {
 	inner *raw.FSEntityIdentifier
@@ -36,7 +38,7 @@ func NewEntityIdentifier() *EntityIdentifier {
 	return &EntityIdentifier{inner: raw.FSEntityIdentifierFromID(_id)}
 }
 
-// Creates an entity identifier with the given UUID. - Parameter uuid: The UUID to use for this identifier.
+// Creates an entity identifier with the given UUID.
 //
 // NewEntityIdentifierWithUUID creates a new [EntityIdentifier].
 func NewEntityIdentifierWithUUID(uuid *foundation.NSUUID) *EntityIdentifier {
@@ -45,7 +47,7 @@ func NewEntityIdentifierWithUUID(uuid *foundation.NSUUID) *EntityIdentifier {
 	return &EntityIdentifier{inner: raw.FSEntityIdentifierFromID(_id)}
 }
 
-// Creates an entity identifier with the given UUID and qualifier data as a 64-bit unsigned integer. - Parameters: - uuid: The UUID to use for this identifier. - qualifier: The data to distinguish entities that otherwise share the same UUID.
+// Creates an entity identifier with the given UUID and qualifier data as a 64-bit unsigned integer.
 //
 // NewEntityIdentifierWithUUIDQualifier creates a new [EntityIdentifier].
 func NewEntityIdentifierWithUUIDQualifier(uuid *foundation.NSUUID, qualifier uint64) *EntityIdentifier {
@@ -54,7 +56,7 @@ func NewEntityIdentifierWithUUIDQualifier(uuid *foundation.NSUUID, qualifier uin
 	return &EntityIdentifier{inner: raw.FSEntityIdentifierFromID(_id)}
 }
 
-// Creates an entity identifier with the given UUID and qualifier data. - Parameters: - uuid: The UUID to use for this identifier. - qualifierData: The data to distinguish entities that otherwise share the same UUID.
+// Creates an entity identifier with the given UUID and qualifier data.
 //
 // NewEntityIdentifierWithUUIDData creates a new [EntityIdentifier].
 func NewEntityIdentifierWithUUIDData(uuid *foundation.NSUUID, qualifierData *foundation.NSData) *EntityIdentifier {

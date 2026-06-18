@@ -52,7 +52,7 @@ func (x *TextureViewDescriptor) WithTextureType(textureType MTLTextureType) *Tex
 	return x
 }
 
-// @property levelRange @abstract A desired range of mip levels of a texture view.
+// A desired range of mip levels of a texture view.
 //
 // WithLevelRange sets the levelRange property and returns the receiver for chaining.
 func (x *TextureViewDescriptor) WithLevelRange(levelRange foundation.NSRange) *TextureViewDescriptor {
@@ -60,7 +60,7 @@ func (x *TextureViewDescriptor) WithLevelRange(levelRange foundation.NSRange) *T
 	return x
 }
 
-// @property sliceRange @abstract A desired range of slices of a texture view.
+// A desired range of slices of a texture view.
 //
 // WithSliceRange sets the sliceRange property and returns the receiver for chaining.
 func (x *TextureViewDescriptor) WithSliceRange(sliceRange foundation.NSRange) *TextureViewDescriptor {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A single data value.
+//
 // DataPointValue wraps [raw.AXDataPointValue] with a fluent Go API.
 type DataPointValue struct {
 	inner *raw.AXDataPointValue
@@ -37,12 +39,16 @@ func NewDataPointValue() *DataPointValue {
 	return &DataPointValue{inner: raw.AXDataPointValueFromID(_id)}
 }
 
+// A number that represents the numeric data value.
+//
 // WithNumber sets the number property and returns the receiver for chaining.
 func (x *DataPointValue) WithNumber(number float64) *DataPointValue {
 	x.inner.SetNumber(number)
 	return x
 }
 
+// A string that represents the categorical data value.
+//
 // WithCategory sets the category property and returns the receiver for chaining.
 func (x *DataPointValue) WithCategory(category string) *DataPointValue {
 	x.inner.SetCategory(foundation.NSStringStringWithUTF8String(category))

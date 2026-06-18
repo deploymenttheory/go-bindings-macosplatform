@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The basic infrastructure necessary for interacting with an assistive app.
+//
 // AccessibilityElement wraps [raw.NSAccessibilityElement] with a fluent Go API.
 type AccessibilityElement struct {
 	inner *raw.NSAccessibilityElement

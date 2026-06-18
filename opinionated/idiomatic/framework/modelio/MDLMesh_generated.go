@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A container for vertex buffer data to be used in rendering a 3D object.
+//
 // Mesh wraps [raw.MDLMesh] with a fluent Go API.
 type Mesh struct {
 	inner *raw.MDLMesh
@@ -39,7 +41,7 @@ func NewMeshWithBufferAllocator(bufferAllocator raw.MDLMeshBufferAllocator) *Mes
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
-// @method initWithVertexBuffer:vertexCount:descriptor:submeshes: @abstract Initialize object with a vertex buffer and a collection of submeshes @return Initialized mesh or nil if descriptor's layout array does not describe a single buffer @param vertexBuffer MDLMeshBuffer object containing all vertex data for the mesh @param vertexCount Number of vertices in the vertexBuffer @param descriptor VertexDescriptor specifying how to interpret vertex data @param submeshes Array of submeshes with index buffers referencing vertex data and/or materials to be applied to mesh
+// Creates a mesh from a single vertex buffer with the specified parameters.
 //
 // NewMeshWithVertexBufferVertexCountDescriptorSubmeshes creates a new [Mesh].
 func NewMeshWithVertexBufferVertexCountDescriptorSubmeshes(vertexBuffer raw.MDLMeshBuffer, vertexCount uint, descriptor *raw.MDLVertexDescriptor, submeshes *foundation.NSArray[*raw.MDLSubmesh]) *Mesh {
@@ -48,7 +50,7 @@ func NewMeshWithVertexBufferVertexCountDescriptorSubmeshes(vertexBuffer raw.MDLM
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
-// @method initWithVertexBuffer:vertexCount:descriptor:submeshes: @abstract Initialize object with an array of vertex buffers (Structure of Arrays) and a collection of submeshes @return Initialized mesh or nil if descriptor's layout array is incompatible with vertexBuffers array @param vertexCount Number of vertices in vertexBuffers @param descriptor VertexDescriptor specifying how to interpret vertex data @param submeshes Array of submeshes with index buffers referencing vertex data and/or materials to be applied to mesh @discussion Allows initialization with the layout of the vertexBuffers in a structure-of-arrays form, in other words, non-interleaved vertex attributes
+// Creates a mesh by unifying vertex data from multiple sources with the specified parameters.
 //
 // NewMeshWithVertexBuffersVertexCountDescriptorSubmeshes creates a new [Mesh].
 func NewMeshWithVertexBuffersVertexCountDescriptorSubmeshes(vertexBuffers *foundation.NSArray[raw.MDLMeshBuffer], vertexCount uint, descriptor *raw.MDLVertexDescriptor, submeshes *foundation.NSArray[*raw.MDLSubmesh]) *Mesh {
@@ -136,7 +138,7 @@ func NewMeshMeshBySubdividingMeshSubmeshIndexSubdivisionLevelsAllocator(mesh *ra
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
-// @property vertexDescriptor @abstract Immutable vertex descriptor for interpreting data in vertexBuffers @discussion Setting this applies the new layout in 'vertexBuffers' thus is a heavyweight operation as structured copies of almost all vertex buffer data could be made.  Additionally, if the new vertexDescriptor does not have an attribute in the original vertexDescriptor, that attribute will be deleted.  If the original vertexDescriptor does not have an attribute in the new vertexDescriptor, the data for the added attribute set as the added attribute's initializationValue property. The allocator associated with each original meshbuffer is used to reallocate the corresponding resultant meshbuffer.
+// A description of the format and layout of the mesh’s vertex buffers.
 //
 // WithVertexDescriptor sets the vertexDescriptor property and returns the receiver for chaining.
 func (x *Mesh) WithVertexDescriptor(vertexDescriptor *VertexDescriptor) *Mesh {
@@ -144,7 +146,7 @@ func (x *Mesh) WithVertexDescriptor(vertexDescriptor *VertexDescriptor) *Mesh {
 	return x
 }
 
-// @property vertexCount @abstract Number of vertices in the vertexBuffers @discussion The size of vertex data in each buffer can be computed by multiplying this value with the stride of the buffer in the vertexDescriptor's layout
+// The number of vertices in the mesh.
 //
 // WithVertexCount sets the vertexCount property and returns the receiver for chaining.
 func (x *Mesh) WithVertexCount(vertexCount uint) *Mesh {
@@ -152,7 +154,7 @@ func (x *Mesh) WithVertexCount(vertexCount uint) *Mesh {
 	return x
 }
 
-// @property submeshes @abstract Array of submeshes containing an indexbuffer referencing the vertex data and material to be applied when the mesh is rendered
+// The array of submeshes to be used in rendering the mesh.
 //
 // WithSubmeshes sets the collection, converting the Go slice to an NSMutableArray.
 func (x *Mesh) WithSubmeshes(items ...*raw.MDLSubmesh) *Mesh {
@@ -172,7 +174,7 @@ func (x *Mesh) WithSubmeshes(items ...*raw.MDLSubmesh) *Mesh {
 	return x
 }
 
-// @property parent @abstract Parent object. Nil if no parent. @discussion Set to nil when you remove this from an object container inside the parent object.
+// The parent object that contains this object.
 //
 // WithParent sets the parent property and returns the receiver for chaining.
 func (x *Mesh) WithParent(parent ObjectProvider) *Mesh {
@@ -180,7 +182,7 @@ func (x *Mesh) WithParent(parent ObjectProvider) *Mesh {
 	return x
 }
 
-// @property instance @abstract Instance object @discussion nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
+// The primary object, if applicable, of which this object is an instance.
 //
 // WithInstance sets the instance property and returns the receiver for chaining.
 func (x *Mesh) WithInstance(instance ObjectProvider) *Mesh {
@@ -188,7 +190,7 @@ func (x *Mesh) WithInstance(instance ObjectProvider) *Mesh {
 	return x
 }
 
-// @property transform @abstract Short hand property for the MDLTransformComponent. @discussion The default value is nil @see MDLTransformComponent
+// A component that manages this object’s spatial transform and its changes over time.
 //
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *Mesh) WithTransform(transform raw.MDLTransformComponent) *Mesh {
@@ -196,7 +198,7 @@ func (x *Mesh) WithTransform(transform raw.MDLTransformComponent) *Mesh {
 	return x
 }
 
-// @property children @abstract Short hand property for the MDLObjectContainerComponent. @discussion The default value is an empty MDLObjectContainer @see MDLObjectContainerComponent
+// A component that manages this object’s collection of children.
 //
 // WithChildren sets the children property and returns the receiver for chaining.
 func (x *Mesh) WithChildren(children raw.MDLObjectContainerComponent) *Mesh {
@@ -204,13 +206,15 @@ func (x *Mesh) WithChildren(children raw.MDLObjectContainerComponent) *Mesh {
 	return x
 }
 
+// A Boolean value indicating whether this object should be used in rendering.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *Mesh) WithHidden(hidden bool) *Mesh {
 	x.inner.MDLObject.SetHidden(hidden)
 	return x
 }
 
-// @method vertexAttributeDataForAttributeNamed: @abstract convenience selector to get quick access to vertex attribute data @discussion the vertex buffer will remain mapped until the MDLVertexAttributeData is freed.
+// Returns the vertex data for the specified attribute.
 //
 // VertexAttributeDataForAttributeNamed calls the underlying VertexAttributeDataForAttributeNamed.
 func (x *Mesh) VertexAttributeDataForAttributeNamed(name string) *VertexAttributeData {
@@ -313,7 +317,7 @@ func (x *Mesh) Allocator() raw.MDLMeshBufferAllocator {
 	return x.inner.Allocator()
 }
 
-// @method addAttributeWithName:format @abstract Convenience method to add an attribute @discussion The mesh's allocator will be used to create storage for the new attribute.
+// Adds a vertex attribute to the mesh and creates a new, empty corresponding vertex buffer.
 //
 // AddAttributeWithNameFormat calls the underlying AddAttributeWithNameFormat.
 func (x *Mesh) AddAttributeWithNameFormat(name string, format MDLVertexFormat) {
@@ -334,21 +338,21 @@ func (x *Mesh) AddAttributeWithNameFormatTypeDataStrideTime(name string, format 
 	x.inner.AddAttributeWithNameFormatTypeDataStrideTime(foundation.NSStringStringWithUTF8String(name), raw.MDLVertexFormat(format), foundation.NSStringStringWithUTF8String(type_), data, stride, time_)
 }
 
-// @method addNormalsWithAttributeNamed:creaseThreshold: @abstract Calculate and add vertex normal data @param attributeName Name is the attribute name of vertex normal attribute.  If nil, vertex normals will be added with the MDLVertexAttributeNormal name string @param creaseThreshold Threshold of the dot product between the 2 triangles after which their face normal will be smoothed out. Therefore, a threshold of 0 will smooth everything and a threshold of 1 won't smooth anything. @discussion Uses the attribute named MDLVertexAttributePosition to calculate vertex normals. If the mesh does not have an attribute with 'attributeName', it will be added, otherwise the attribute name will be overwritten with vertex normal data. 'vertexDescriptor' will be updated to reflect the new attribute.
+// Generates surface normal data for the mesh based on its vertex position data.
 //
 // AddNormalsWithAttributeNamedCreaseThreshold calls the underlying AddNormalsWithAttributeNamedCreaseThreshold.
 func (x *Mesh) AddNormalsWithAttributeNamedCreaseThreshold(attributeName string, creaseThreshold float32) {
 	x.inner.AddNormalsWithAttributeNamedCreaseThreshold(foundation.NSStringStringWithUTF8String(attributeName), creaseThreshold)
 }
 
-// @method addTangentBasisForTextureCoordinateAttributeNamed:tangentAttributeNamed:bitangentAttributeNamed @abstract Create a shader basis where the tangent and bitangent span the uv -> object space transform @param textureCoordinateAttributeName Name of texture coordinates to use in calculations @param tangentAttributeName Name of vertex tangent attribute. @param bitangentAttributeName Name of vertex bitangent attribute. @discussion Uses the attribute named MDLVertexAttributePosition and textureCoordinateAttributeName to calculate tangent and bitangent attributes. The mesh's vertexDescriptor will be updated to reflect the new attributes if necessary. The basis may not be orthogonal; to guarantee an orthogonal tangent basis please use addOrthTanBasisForTextureCoordinateAttributeNamed selector.
+// Generates surface tangent and bitangent data for the mesh based on its vertex position and texture coordinate data.
 //
 // AddTangentBasisForTextureCoordinateAttributeNamedTangentAttributeNamedBitangentAttributeNamed calls the underlying AddTangentBasisForTextureCoordinateAttributeNamedTangentAttributeNamedBitangentAttributeNamed.
 func (x *Mesh) AddTangentBasisForTextureCoordinateAttributeNamedTangentAttributeNamedBitangentAttributeNamed(textureCoordinateAttributeName string, tangentAttributeName string, bitangentAttributeName string) {
 	x.inner.AddTangentBasisForTextureCoordinateAttributeNamedTangentAttributeNamedBitangentAttributeNamed(foundation.NSStringStringWithUTF8String(textureCoordinateAttributeName), foundation.NSStringStringWithUTF8String(tangentAttributeName), foundation.NSStringStringWithUTF8String(bitangentAttributeName))
 }
 
-// @method addTangentBasisForTextureCoordinateAttributeNamed:normalAttributeNamed:tangentAttributeNamed @abstract Create tangents which are orthogonal to the normal @param textureCoordinateAttributeName texture coordinates to use in calculations @param normalAttributeName normals to use in calculations @param tangentAttributeName Name of a four component vertex tangent attribute. @discussion Uses the attribute named MDLVertexAttributePosition and textureCoordinateAttributeName and the specified normals to calculate tangent information. The mesh's vertexDescriptor will be updated to reflect the new attribute if necessary. Note that this method does NOT produce a T.w component which is used in B = (N x T) * T.w Please use addOrthTanBasisForTextureCoordinateAttributeNamed.
+// Generates surface tangent data for the mesh based on its vertex position, surface normal, and texture coordinate data.
 //
 // AddTangentBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed calls the underlying AddTangentBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed.
 func (x *Mesh) AddTangentBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed(textureCoordinateAttributeName string, normalAttributeName string, tangentAttributeName string) {
@@ -374,7 +378,7 @@ func (x *Mesh) FlipTextureCoordinatesInAttributeNamed(textureCoordinateAttribute
 	x.inner.FlipTextureCoordinatesInAttributeNamed(foundation.NSStringStringWithUTF8String(textureCoordinateAttributeName))
 }
 
-// @method makeVerticesUnique: @abstract Deindexes the vertex array @discussion If any vertices are shared on multiple faces, duplicate those vertices so faces do not share vertices. The vertex buffer and index buffers on submeshes may grow to accommodate any vertices added.
+// Modifies the mesh’s vertex buffers so that no vertices are shared by multiple faces.
 //
 // MakeVerticesUnique calls the underlying MakeVerticesUnique.
 func (x *Mesh) MakeVerticesUnique() {
@@ -410,40 +414,50 @@ func (x *Mesh) RemoveAttributeNamed(name string) {
 	x.inner.RemoveAttributeNamed(foundation.NSStringStringWithUTF8String(name))
 }
 
-// @method generateAmbientOcclusionTextureWithSize: @abstract Creates an Ambient Occlusion texture, returns true upon success, false upon failure @param textureSize Texture Size in which to bake the ambient occlusion @param raysPerSample Number of rays to be sent out of every texture texel against the object for potential occlusion. @param attenuationFactor Float between 0 to 1 that defines how to attenuate the AO value. 0 doesn't change it, and at 1, all AO values are white except if they are originally completely black. Quadratic attenuation in between. @param objectsToConsider NSArray of MDLMeshes containing the objects to raytrace against @param vertexAttributeName NSString of the MDLVertexAttribute where the vertex texture UVs will be stored. Creates it if it doesn't exist, otherwise overwrites current values. @param materialPropertyName NSString of the MDLMaterialProperty that will store the texture in the Mesh. @result Success or failure of the baking process.
+// Calculates ambient occlusion (AO) information for the mesh and saves it in the mesh as a material property texture of the specified size.
 //
 // GenerateAmbientOcclusionTextureWithSizeRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed calls the underlying GenerateAmbientOcclusionTextureWithSizeRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed.
 func (x *Mesh) GenerateAmbientOcclusionTextureWithSizeRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(textureSize unsafe.Pointer, raysPerSample int, attenuationFactor float32, objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string, materialPropertyName string) bool {
 	return x.inner.GenerateAmbientOcclusionTextureWithSizeRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(textureSize, raysPerSample, attenuationFactor, objectsToConsider, foundation.NSStringStringWithUTF8String(vertexAttributeName), foundation.NSStringStringWithUTF8String(materialPropertyName))
 }
 
-// @method generateAmbientOcclusionTextureWithQuality: @abstract Creates an Ambient Occlusion texture, returns true upon success, false upon failure @param bakeQuality Float between 0 and 1 that defines quality of the bake process. 0 is of lower quality but bakes faster and uses less memory, where 1 is of higher quality. @param attenuationFactor Float between 0 to 1 that defines how to attenuate the AO value. 0 doesn't change it, and at 1, all AO values are white except if they are originally completely black. Quadratic attenuation in between. @param objectsToConsider NSArray of MDLMeshes containing the objects to raytrace against @param vertexAttributeName NSString of the MDLVertexAttribute where the vertex texture UVs will be stored. Creates it if it doesn't exist, otherwise overwrites current values. @param materialPropertyName NSString of the MDLMaterialProperty that will store the texture in the Mesh. @result Success or failure of the baking process.
+// Calculates ambient occlusion (AO) information for the mesh and saves it in the mesh as a material property texture.
 //
 // GenerateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed calls the underlying GenerateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed.
 func (x *Mesh) GenerateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(bakeQuality float32, attenuationFactor float32, objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string, materialPropertyName string) bool {
 	return x.inner.GenerateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(bakeQuality, attenuationFactor, objectsToConsider, foundation.NSStringStringWithUTF8String(vertexAttributeName), foundation.NSStringStringWithUTF8String(materialPropertyName))
 }
 
+// Calculates ambient occlusion (AO) information for the mesh, using the specified number of rays per sample, and saves it in the mesh as a vertex color attribute.
+//
 // GenerateAmbientOcclusionVertexColorsWithRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamed calls the underlying GenerateAmbientOcclusionVertexColorsWithRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamed.
 func (x *Mesh) GenerateAmbientOcclusionVertexColorsWithRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamed(raysPerSample int, attenuationFactor float32, objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string) bool {
 	return x.inner.GenerateAmbientOcclusionVertexColorsWithRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamed(raysPerSample, attenuationFactor, objectsToConsider, foundation.NSStringStringWithUTF8String(vertexAttributeName))
 }
 
+// Calculates ambient occlusion (AO) information for the mesh and saves it in the mesh as a vertex color attribute.
+//
 // GenerateAmbientOcclusionVertexColorsWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamed calls the underlying GenerateAmbientOcclusionVertexColorsWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamed.
 func (x *Mesh) GenerateAmbientOcclusionVertexColorsWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamed(bakeQuality float32, attenuationFactor float32, objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string) bool {
 	return x.inner.GenerateAmbientOcclusionVertexColorsWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamed(bakeQuality, attenuationFactor, objectsToConsider, foundation.NSStringStringWithUTF8String(vertexAttributeName))
 }
 
+// Calculates static lighting information for the mesh and saves it in the mesh as a material property texture of the specified size.
+//
 // GenerateLightMapTextureWithTextureSizeLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed calls the underlying GenerateLightMapTextureWithTextureSizeLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed.
 func (x *Mesh) GenerateLightMapTextureWithTextureSizeLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(textureSize unsafe.Pointer, lightsToConsider *foundation.NSArray[*raw.MDLLight], objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string, materialPropertyName string) bool {
 	return x.inner.GenerateLightMapTextureWithTextureSizeLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(textureSize, lightsToConsider, objectsToConsider, foundation.NSStringStringWithUTF8String(vertexAttributeName), foundation.NSStringStringWithUTF8String(materialPropertyName))
 }
 
+// Calculates static lighting information for the mesh and saves it in the mesh as a material property texture.
+//
 // GenerateLightMapTextureWithQualityLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed calls the underlying GenerateLightMapTextureWithQualityLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed.
 func (x *Mesh) GenerateLightMapTextureWithQualityLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(bakeQuality float32, lightsToConsider *foundation.NSArray[*raw.MDLLight], objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string, materialPropertyName string) bool {
 	return x.inner.GenerateLightMapTextureWithQualityLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(bakeQuality, lightsToConsider, objectsToConsider, foundation.NSStringStringWithUTF8String(vertexAttributeName), foundation.NSStringStringWithUTF8String(materialPropertyName))
 }
 
+// Calculates static lighting information for the mesh and saves it in the mesh as a vertex color attribute.
+//
 // GenerateLightMapVertexColorsWithLightsToConsiderObjectsToConsiderVertexAttributeNamed calls the underlying GenerateLightMapVertexColorsWithLightsToConsiderObjectsToConsiderVertexAttributeNamed.
 func (x *Mesh) GenerateLightMapVertexColorsWithLightsToConsiderObjectsToConsiderVertexAttributeNamed(lightsToConsider *foundation.NSArray[*raw.MDLLight], objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string) bool {
 	return x.inner.GenerateLightMapVertexColorsWithLightsToConsiderObjectsToConsiderVertexAttributeNamed(lightsToConsider, objectsToConsider, foundation.NSStringStringWithUTF8String(vertexAttributeName))

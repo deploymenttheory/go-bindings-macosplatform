@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing a diagnostic report for a fatal or nonfatal CPU exception.
+//
 // CPUExceptionDiagnostic wraps [raw.MXCPUExceptionDiagnostic] with a fluent Go API.
 type CPUExceptionDiagnostic struct {
 	inner *raw.MXCPUExceptionDiagnostic

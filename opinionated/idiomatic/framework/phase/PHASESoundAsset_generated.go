@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A sound resource stored in the asset registry.
+//
 // SoundAsset wraps [raw.PHASESoundAsset] with a fluent Go API.
 type SoundAsset struct {
 	inner *raw.PHASESoundAsset

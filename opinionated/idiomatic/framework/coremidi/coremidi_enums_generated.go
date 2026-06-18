@@ -57,6 +57,7 @@ func (e MIDICIProfileType) String() string {
 	}
 }
 
+// Supported MIDI message types.
 type MIDIMessageType uint32
 
 const (
@@ -118,6 +119,7 @@ func (e MIDINetworkConnectionPolicy) String() string {
 	}
 }
 
+// Specifies a MIDI protocol variant.
 type MIDIProtocolID int64
 
 const (

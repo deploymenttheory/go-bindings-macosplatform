@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A definition for one specific aspect of the rendering parameters for a material.
+//
 // MaterialProperty wraps [raw.MDLMaterialProperty] with a fluent Go API.
 type MaterialProperty struct {
 	inner *raw.MDLMaterialProperty
@@ -32,6 +34,8 @@ func MaterialPropertyFromID(id objc.ID) *MaterialProperty {
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(id)}
 }
 
+// Initializes a material property without a value.
+//
 // NewMaterialPropertyWithNameSemantic creates a new [MaterialProperty].
 func NewMaterialPropertyWithNameSemantic(name string, semantic MDLMaterialSemantic) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewMaterialPropertyWithNameSemantic(name string, semantic MDLMaterialSemant
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
+// Initializes a material property with a scalar value.
+//
 // NewMaterialPropertyWithNameSemanticFloat creates a new [MaterialProperty].
 func NewMaterialPropertyWithNameSemanticFloat(name string, semantic MDLMaterialSemantic, value float32) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
@@ -46,6 +52,8 @@ func NewMaterialPropertyWithNameSemanticFloat(name string, semantic MDLMaterialS
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
+// Initializes a material property with a 2-component vector value.
+//
 // NewMaterialPropertyWithNameSemanticFloat2 creates a new [MaterialProperty].
 func NewMaterialPropertyWithNameSemanticFloat2(name string, semantic MDLMaterialSemantic, value unsafe.Pointer) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
@@ -53,6 +61,8 @@ func NewMaterialPropertyWithNameSemanticFloat2(name string, semantic MDLMaterial
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
+// Initializes a material property with a 3-component vector value.
+//
 // NewMaterialPropertyWithNameSemanticFloat3 creates a new [MaterialProperty].
 func NewMaterialPropertyWithNameSemanticFloat3(name string, semantic MDLMaterialSemantic, value unsafe.Pointer) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
@@ -60,6 +70,8 @@ func NewMaterialPropertyWithNameSemanticFloat3(name string, semantic MDLMaterial
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
+// Initializes a material property with a 4-component vector value.
+//
 // NewMaterialPropertyWithNameSemanticFloat4 creates a new [MaterialProperty].
 func NewMaterialPropertyWithNameSemanticFloat4(name string, semantic MDLMaterialSemantic, value unsafe.Pointer) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
@@ -67,6 +79,8 @@ func NewMaterialPropertyWithNameSemanticFloat4(name string, semantic MDLMaterial
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
+// Initializes a material property with a 4 x 4 matrix value.
+//
 // NewMaterialPropertyWithNameSemanticMatrix4x4 creates a new [MaterialProperty].
 func NewMaterialPropertyWithNameSemanticMatrix4x4(name string, semantic MDLMaterialSemantic, value unsafe.Pointer) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
@@ -74,6 +88,8 @@ func NewMaterialPropertyWithNameSemanticMatrix4x4(name string, semantic MDLMater
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
+// Initializes a material property with a URL value.
+//
 // NewMaterialPropertyWithNameSemanticURL creates a new [MaterialProperty].
 func NewMaterialPropertyWithNameSemanticURL(name string, semantic MDLMaterialSemantic, uRL string) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
@@ -81,6 +97,8 @@ func NewMaterialPropertyWithNameSemanticURL(name string, semantic MDLMaterialSem
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
+// Initializes a material property with a string value.
+//
 // NewMaterialPropertyWithNameSemanticString creates a new [MaterialProperty].
 func NewMaterialPropertyWithNameSemanticString(name string, semantic MDLMaterialSemantic, string_ string) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
@@ -88,6 +106,8 @@ func NewMaterialPropertyWithNameSemanticString(name string, semantic MDLMaterial
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
+// Initializes a material property with a texture sampler object.
+//
 // NewMaterialPropertyWithNameSemanticTextureSampler creates a new [MaterialProperty].
 func NewMaterialPropertyWithNameSemanticTextureSampler(name string, semantic MDLMaterialSemantic, textureSampler *raw.MDLTextureSampler) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
@@ -95,6 +115,8 @@ func NewMaterialPropertyWithNameSemanticTextureSampler(name string, semantic MDL
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
+// Initializes a material property with a color value.
+//
 // NewMaterialPropertyWithNameSemanticColor creates a new [MaterialProperty].
 func NewMaterialPropertyWithNameSemanticColor(name string, semantic MDLMaterialSemantic, color unsafe.Pointer) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
@@ -102,19 +124,23 @@ func NewMaterialPropertyWithNameSemanticColor(name string, semantic MDLMaterialS
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
+// The semantic meaning for the material property’s value.
+//
 // WithSemantic sets the semantic property and returns the receiver for chaining.
 func (x *MaterialProperty) WithSemantic(semantic MDLMaterialSemantic) *MaterialProperty {
 	x.inner.SetSemantic(raw.MDLMaterialSemantic(semantic))
 	return x
 }
 
+// The data type stored in the material property’s value.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *MaterialProperty) WithType(type_ MDLMaterialPropertyType) *MaterialProperty {
 	x.inner.SetType(raw.MDLMaterialPropertyType(type_))
 	return x
 }
 
-// @see MDLNamed
+// A descriptive name for the material property.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *MaterialProperty) WithName(name string) *MaterialProperty {
@@ -122,24 +148,32 @@ func (x *MaterialProperty) WithName(name string) *MaterialProperty {
 	return x
 }
 
+// The string value for the material.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *MaterialProperty) WithStringValue(stringValue string) *MaterialProperty {
 	x.inner.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The URL value for the material property—typically, the URL to a texture image.
+//
 // WithURLValue sets the uRLValue property and returns the receiver for chaining.
 func (x *MaterialProperty) WithURLValue(uRLValue string) *MaterialProperty {
 	x.inner.SetURLValue(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRLValue)))
 	return x
 }
 
+// A texture sampler object that provides the texture image value for the material property.
+//
 // WithTextureSamplerValue sets the textureSamplerValue property and returns the receiver for chaining.
 func (x *MaterialProperty) WithTextureSamplerValue(textureSamplerValue *TextureSampler) *MaterialProperty {
 	x.inner.SetTextureSamplerValue(textureSamplerValue.Unwrap())
 	return x
 }
 
+// The scalar floating-point value for the material property.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *MaterialProperty) WithFloatValue(floatValue float32) *MaterialProperty {
 	x.inner.SetFloatValue(floatValue)
@@ -152,6 +186,8 @@ func (x *MaterialProperty) WithLuminance(luminance float32) *MaterialProperty {
 	return x
 }
 
+// Sets the material property’s attributes to those of the specified material property.
+//
 // SetProperties calls the underlying SetProperties.
 func (x *MaterialProperty) SetProperties(property *raw.MDLMaterialProperty) {
 	x.inner.SetProperties(property)

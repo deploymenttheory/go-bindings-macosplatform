@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing metrics about the responsiveness of the app to user interaction.
+//
 // AppResponsivenessMetric wraps [raw.MXAppResponsivenessMetric] with a fluent Go API.
 type AppResponsivenessMetric struct {
 	inner *raw.MXAppResponsivenessMetric

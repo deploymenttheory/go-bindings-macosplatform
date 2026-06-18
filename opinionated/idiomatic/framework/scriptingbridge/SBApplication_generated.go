@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The SBApplication class provides a mechanism enabling an Objective-C program to send Apple events to a scriptable application and receive Apple events in response. It thereby makes it possible for that program to control the application and exchange data with it. Scripting Bridge works by bridging data types between Apple event descriptors and Cocoa objects.
+//
 // Application wraps [raw.SBApplication] with a fluent Go API.
 type Application struct {
 	inner *raw.SBApplication
@@ -31,7 +33,7 @@ func ApplicationFromID(id objc.ID) *Application {
 	return &Application{inner: raw.SBApplicationFromID(id)}
 }
 
-// Returns an instance of an `SBApplication` subclass that represents the target application identified by the given bundle identifier. If you must initialize an `SBApplication` object explictly, you should use this initializer if possible; unlike “SBApplication/initWithProcessIdentifier:“ and “SBApplication/initWithURL:“, this method is not dependent on changeable factors such as the target application's path or process ID. Even so, you should rarely have to initialize an `SBApplication` object yourself; instead, you should initialize an application-specific subclass such as `iTunesApplication`. Note that this method does not check whether an application with the given bundle identifier actually exists. - Parameters: - ident: A bundle identifier specifying an application that is OSA-compliant. - Returns: An initialized shared instance of an `SBApplication` subclass that represents a target application with the bundle identifier of `ident`. Returns `nil` if no such application can be found or if the application does not have a scripting interface.
+// Returns an instance of an SBApplication subclass that represents the target application identified by the given bundle identifier.
 //
 // NewApplicationWithBundleIdentifier creates a new [Application].
 func NewApplicationWithBundleIdentifier(ident string) *Application {
@@ -40,7 +42,7 @@ func NewApplicationWithBundleIdentifier(ident string) *Application {
 	return &Application{inner: raw.SBApplicationFromID(_id)}
 }
 
-// Returns an instance of an `SBApplication` subclass that represents the target application identified by the given URL. This approach to initializing `SBApplication` objects should be used only if you know for certain the URL of the target application. In most cases, it is better to use “SBApplication/applicationWithBundleIdentifier:“ which dynamically locates the target application at runtime. Even so, you should rarely have to initialize an `SBApplication` yourself. This method currently supports file URLs (`file:`) and remote application URLs (`eppc:`). It checks whether a file exists at the specified path, but it does not check whether an application identified via `eppc:` exists. - Parameters: - url: A Universal Resource Locator (URL) specifying an application that is OSA-compliant. - Returns: An initialized `SBApplication` that you can use to communicate with the target application specified by the process ID. Returns `nil` if an application could not be found or if the application does not have a scripting interface.
+// Returns an instance of an SBApplication subclass that represents the target application identified by the given URL.
 //
 // NewApplicationWithURL creates a new [Application].
 func NewApplicationWithURL(url string) *Application {
@@ -49,7 +51,7 @@ func NewApplicationWithURL(url string) *Application {
 	return &Application{inner: raw.SBApplicationFromID(_id)}
 }
 
-// Returns an instance of an `SBApplication` subclass that represents the target application identified by the given process identifier. You should avoid using this method unless you know nothing about an external application but its PID. In most cases, it is better to use “SBApplication/initWithBundleIdentifier:“, which will dynamically locate the external application's path at runtime, or “SBApplication/initWithURL:“, which is not dependent on the external application being open at the time the method is called. - Parameters: - pid: A BSD process ID specifying an application that is OSA-compliant. Often you can get the process ID of a process using the <doc://com.apple.documentation/documentation/Foundation/Process/processIdentifier> method of `NSTask`. - Returns: An initialized `SBApplication` that you can use to communicate with the target application specified by the process ID. Returns `nil` if no such application can be found or if the application does not have a scripting interface.
+// Returns an instance of an SBApplication subclass that represents the target application identified by the given process identifier.
 //
 // NewApplicationWithProcessIdentifier creates a new [Application].
 func NewApplicationWithProcessIdentifier(pid int) *Application {
@@ -58,7 +60,7 @@ func NewApplicationWithProcessIdentifier(pid int) *Application {
 	return &Application{inner: raw.SBApplicationFromID(_id)}
 }
 
-// The error-handling delegate of the receiver. The delegate should implement the “SBApplicationDelegate/eventDidFail:withError:“ method of the “SBApplicationDelegate“ informal protocol.
+// The error-handling delegate of the receiver.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Application) WithDelegate(delegate raw.SBApplicationDelegate) *Application {
@@ -66,7 +68,7 @@ func (x *Application) WithDelegate(delegate raw.SBApplicationDelegate) *Applicat
 	return x
 }
 
-// The launch flags for the application represented by the receiver. For more information, see <doc://com.apple.documentation/documentation/coreservices/launch_services>.
+// The launch flags for the application represented by the receiver.
 //
 // WithLaunchFlags sets the launchFlags property and returns the receiver for chaining.
 func (x *Application) WithLaunchFlags(launchFlags launchservices.LSLaunchFlags) *Application {
@@ -74,7 +76,7 @@ func (x *Application) WithLaunchFlags(launchFlags launchservices.LSLaunchFlags) 
 	return x
 }
 
-// The mode for sending Apple events to the target application. For more information, see <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager>. The default send mode is <doc://com.apple.documentation/documentation/coreservices/1542914-anonymous/kaewaitreply>. If the send mode is something other than `kAEWaitReply`, the receiver might not correctly handle reply events from the target application.
+// The mode for sending Apple events to the target application.
 //
 // WithSendMode sets the sendMode property and returns the receiver for chaining.
 func (x *Application) WithSendMode(sendMode int) *Application {
@@ -82,7 +84,7 @@ func (x *Application) WithSendMode(sendMode int) *Application {
 	return x
 }
 
-// The period the application will wait to receive reply Apple events. For more information, see <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager>. The default timeout value is <doc://com.apple.documentation/documentation/coreservices/1542814-timeout_constants/kaedefaulttimeout>, which is about a minute. If you want the receiver to wait indefinitely for reply Apple events, use <doc://com.apple.documentation/documentation/coreservices/1542814-timeout_constants/knotimeout>. For more information, see <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager>.
+// The period the application will wait to receive reply Apple events.
 //
 // WithTimeout sets the timeout property and returns the receiver for chaining.
 func (x *Application) WithTimeout(timeout int) *Application {
@@ -90,14 +92,14 @@ func (x *Application) WithTimeout(timeout int) *Application {
 	return x
 }
 
-// Returns a class object that represents a particular class in the target application. You invoke this method on an instance of a scriptable application. Once you have the class object, you may allocate an instance of the class and appropriately the raw instance. Or you may use it in a call to <doc://com.apple.documentation/documentation/ObjectiveC/NSObjectProtocol/isKind(of:)> to determine the class type of an object. - Parameters: - className: The name of the scripting class, as it appears in the scripting interface. For example, "document". - Returns: A `Class` object representing the scripting class.
+// Returns a class object that represents a particular class in the target application.
 //
 // ClassForScriptingClass calls the underlying ClassForScriptingClass.
 func (x *Application) ClassForScriptingClass(className string) objc.Class {
 	return x.inner.ClassForScriptingClass(foundation.NSStringStringWithUTF8String(className))
 }
 
-// Moves the target application to the foreground immediately. If the target application is not already running, this method launches it.
+// Moves the target application to the foreground immediately.
 //
 // Activate calls the underlying Activate.
 func (x *Application) Activate() {

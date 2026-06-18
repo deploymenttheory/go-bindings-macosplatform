@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A collection of physical input elements.
+//
 // PhysicalInputElementCollection wraps [raw.GCPhysicalInputElementCollection] with a fluent Go API.
 type PhysicalInputElementCollection struct {
 	inner *raw.GCPhysicalInputElementCollection[objc.ID, objc.ID]

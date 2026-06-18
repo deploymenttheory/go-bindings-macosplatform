@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Defines the time duration windows the request’s underlying sound classifier accepts with a range, or an array, of durations.
+//
 // TimeDurationConstraint wraps [raw.SNTimeDurationConstraint] with a fluent Go API.
 type TimeDurationConstraint struct {
 	inner *raw.SNTimeDurationConstraint

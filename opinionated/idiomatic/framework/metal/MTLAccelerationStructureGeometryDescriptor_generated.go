@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A base class for descriptors that contain geometry data to convert into a ray-tracing acceleration structure.
+//
 // AccelerationStructureGeometryDescriptor wraps [raw.MTLAccelerationStructureGeometryDescriptor] with a fluent Go API.
 type AccelerationStructureGeometryDescriptor struct {
 	inner *raw.MTLAccelerationStructureGeometryDescriptor
@@ -39,13 +41,15 @@ func NewAccelerationStructureGeometryDescriptor() *AccelerationStructureGeometry
 	return &AccelerationStructureGeometryDescriptor{inner: raw.MTLAccelerationStructureGeometryDescriptorFromID(_id)}
 }
 
+// An index into the intersection table for determining which intersection function Metal calls when it intersects a ray with the acceleration structure.
+//
 // WithIntersectionFunctionTableOffset sets the intersectionFunctionTableOffset property and returns the receiver for chaining.
 func (x *AccelerationStructureGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *AccelerationStructureGeometryDescriptor {
 	x.inner.SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset)
 	return x
 }
 
-// @brief Whether the geometry is opaque
+// A Boolean value that determines whether the geometry data in the acceleration structure needs to skip triangle-intersection tests.
 //
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *AccelerationStructureGeometryDescriptor) WithOpaque(opaque bool) *AccelerationStructureGeometryDescriptor {
@@ -53,7 +57,7 @@ func (x *AccelerationStructureGeometryDescriptor) WithOpaque(opaque bool) *Accel
 	return x
 }
 
-// @brief Whether intersection functions may be invoked more than once per ray/primitive intersection. Defaults to YES.
+// A Boolean value that indicates whether Metal calls the ray-intersection test more than once per primitive on the structure.
 //
 // WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
 func (x *AccelerationStructureGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureGeometryDescriptor {
@@ -61,7 +65,7 @@ func (x *AccelerationStructureGeometryDescriptor) WithAllowDuplicateIntersection
 	return x
 }
 
-// @brief Label
+// A label for the geometry structure, suitable for debugging.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *AccelerationStructureGeometryDescriptor) WithLabel(label string) *AccelerationStructureGeometryDescriptor {

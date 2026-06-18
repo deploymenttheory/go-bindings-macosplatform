@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A task that downloads multiple media selections for an asset.
+//
 // AggregateAssetDownloadTask wraps [raw.AVAggregateAssetDownloadTask] with a fluent Go API.
 type AggregateAssetDownloadTask struct {
 	inner *raw.AVAggregateAssetDownloadTask

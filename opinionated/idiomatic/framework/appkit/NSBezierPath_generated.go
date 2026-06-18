@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that can create paths using PostScript-style commands.
+//
 // BezierPath wraps [raw.NSBezierPath] with a fluent Go API.
 type BezierPath struct {
 	inner *raw.NSBezierPath
@@ -38,52 +40,70 @@ func NewBezierPath() *BezierPath {
 	return &BezierPath{inner: raw.NSBezierPathFromID(_id)}
 }
 
+// The width of stroked path lines.
+//
 // WithLineWidth sets the lineWidth property and returns the receiver for chaining.
 func (x *BezierPath) WithLineWidth(lineWidth float64) *BezierPath {
 	x.inner.SetLineWidth(lineWidth)
 	return x
 }
 
+// The line cap style for the path.
+//
 // WithLineCapStyle sets the lineCapStyle property and returns the receiver for chaining.
 func (x *BezierPath) WithLineCapStyle(lineCapStyle NSLineCapStyle) *BezierPath {
 	x.inner.SetLineCapStyle(raw.NSLineCapStyle(lineCapStyle))
 	return x
 }
 
+// The line join style for the path.
+//
 // WithLineJoinStyle sets the lineJoinStyle property and returns the receiver for chaining.
 func (x *BezierPath) WithLineJoinStyle(lineJoinStyle NSLineJoinStyle) *BezierPath {
 	x.inner.SetLineJoinStyle(raw.NSLineJoinStyle(lineJoinStyle))
 	return x
 }
 
+// The winding rule used to fill the path.
+//
 // WithWindingRule sets the windingRule property and returns the receiver for chaining.
 func (x *BezierPath) WithWindingRule(windingRule NSWindingRule) *BezierPath {
 	x.inner.SetWindingRule(raw.NSWindingRule(windingRule))
 	return x
 }
 
+// The limit at which miter joins are converted to bevel joins.
+//
 // WithMiterLimit sets the miterLimit property and returns the receiver for chaining.
 func (x *BezierPath) WithMiterLimit(miterLimit float64) *BezierPath {
 	x.inner.SetMiterLimit(miterLimit)
 	return x
 }
 
+// The accuracy with which curves are rendered.
+//
 // WithFlatness sets the flatness property and returns the receiver for chaining.
 func (x *BezierPath) WithFlatness(flatness float64) *BezierPath {
 	x.inner.SetFlatness(flatness)
 	return x
 }
 
+// Moves the path’s current point to the specified location.
+//
 // MoveToPoint calls the underlying MoveToPoint.
 func (x *BezierPath) MoveToPoint(point corefoundation.CGPoint) {
 	x.inner.MoveToPoint(point)
 }
 
+// Appends a straight line to the path.
+//
 // LineToPoint calls the underlying LineToPoint.
 func (x *BezierPath) LineToPoint(point corefoundation.CGPoint) {
 	x.inner.LineToPoint(point)
 }
 
+// Adds a Bezier cubic curve to the path.
+//
 // CurveToPointControlPoint1ControlPoint2 calls the underlying CurveToPointControlPoint1ControlPoint2.
 func (x *BezierPath) CurveToPointControlPoint1ControlPoint2(endPoint corefoundation.CGPoint, controlPoint1 corefoundation.CGPoint, controlPoint2 corefoundation.CGPoint) {
 	x.inner.CurveToPointControlPoint1ControlPoint2(endPoint, controlPoint1, controlPoint2)
@@ -94,26 +114,36 @@ func (x *BezierPath) CurveToPointControlPoint(endPoint corefoundation.CGPoint, c
 	x.inner.CurveToPointControlPoint(endPoint, controlPoint)
 }
 
+// Closes the most recently added subpath.
+//
 // ClosePath calls the underlying ClosePath.
 func (x *BezierPath) ClosePath() {
 	x.inner.ClosePath()
 }
 
+// Removes all path elements from the path, effectively clearing the path.
+//
 // RemoveAllPoints calls the underlying RemoveAllPoints.
 func (x *BezierPath) RemoveAllPoints() {
 	x.inner.RemoveAllPoints()
 }
 
+// Moves the path’s current point to a new point whose location is the specified distance from the current point.
+//
 // RelativeMoveToPoint calls the underlying RelativeMoveToPoint.
 func (x *BezierPath) RelativeMoveToPoint(point corefoundation.CGPoint) {
 	x.inner.RelativeMoveToPoint(point)
 }
 
+// Appends a straight line segment to the path starting at the current point and moving towards the specified point, relative to the current location.
+//
 // RelativeLineToPoint calls the underlying RelativeLineToPoint.
 func (x *BezierPath) RelativeLineToPoint(point corefoundation.CGPoint) {
 	x.inner.RelativeLineToPoint(point)
 }
 
+// Adds a Bezier cubic curve to the path from the current point to a new location, which is specified as a relative distance from the current point.
+//
 // RelativeCurveToPointControlPoint1ControlPoint2 calls the underlying RelativeCurveToPointControlPoint1ControlPoint2.
 func (x *BezierPath) RelativeCurveToPointControlPoint1ControlPoint2(endPoint corefoundation.CGPoint, controlPoint1 corefoundation.CGPoint, controlPoint2 corefoundation.CGPoint) {
 	x.inner.RelativeCurveToPointControlPoint1ControlPoint2(endPoint, controlPoint1, controlPoint2)
@@ -124,106 +154,148 @@ func (x *BezierPath) RelativeCurveToPointControlPoint(endPoint corefoundation.CG
 	x.inner.RelativeCurveToPointControlPoint(endPoint, controlPoint)
 }
 
+// Returns the line-stroking pattern for the receiver.
+//
 // GetLineDashCountPhase calls the underlying GetLineDashCountPhase.
 func (x *BezierPath) GetLineDashCountPhase(pattern *float64, count *int64, phase *float64) {
 	x.inner.GetLineDashCountPhase(pattern, count, phase)
 }
 
+// Sets the line-stroking pattern for the path.
+//
 // SetLineDashCountPhase calls the underlying SetLineDashCountPhase.
 func (x *BezierPath) SetLineDashCountPhase(pattern *float64, count int, phase float64) {
 	x.inner.SetLineDashCountPhase(pattern, count, phase)
 }
 
+// Draws a line along the path using the current stroke color and drawing attributes.
+//
 // Stroke calls the underlying Stroke.
 func (x *BezierPath) Stroke() {
 	x.inner.Stroke()
 }
 
+// Paints the region enclosed by the path.
+//
 // Fill calls the underlying Fill.
 func (x *BezierPath) Fill() {
 	x.inner.Fill()
 }
 
+// Intersects the area enclosed by the path with the clipping path of the current graphics context and makes the resulting shape the current clipping path.
+//
 // AddClip calls the underlying AddClip.
 func (x *BezierPath) AddClip() {
 	x.inner.AddClip()
 }
 
+// Replaces the clipping path of the current graphics context with the area inside the path.
+//
 // SetClip calls the underlying SetClip.
 func (x *BezierPath) SetClip() {
 	x.inner.SetClip()
 }
 
+// Transforms all points in the path using the specified transform.
+//
 // TransformUsingAffineTransform calls the underlying TransformUsingAffineTransform.
 func (x *BezierPath) TransformUsingAffineTransform(transform *foundation.NSAffineTransform) {
 	x.inner.TransformUsingAffineTransform(transform)
 }
 
+// Gets the element type and (and optionally) the associated points for the path element at the specified index.
+//
 // ElementAtIndexAssociatedPoints calls the underlying ElementAtIndexAssociatedPoints.
 func (x *BezierPath) ElementAtIndexAssociatedPoints(index int, points *corefoundation.CGPoint) NSBezierPathElement {
 	return NSBezierPathElement(x.inner.ElementAtIndexAssociatedPoints(index, points))
 }
 
+// Returns the type of path element at the specified index.
+//
 // ElementAtIndex calls the underlying ElementAtIndex.
 func (x *BezierPath) ElementAtIndex(index int) NSBezierPathElement {
 	return NSBezierPathElement(x.inner.ElementAtIndex(index))
 }
 
+// Changes the points associated with the specified path element.
+//
 // SetAssociatedPointsAtIndex calls the underlying SetAssociatedPointsAtIndex.
 func (x *BezierPath) SetAssociatedPointsAtIndex(points *corefoundation.CGPoint, index int) {
 	x.inner.SetAssociatedPointsAtIndex(points, index)
 }
 
+// Appends the contents of the specified path object to the path.
+//
 // AppendBezierPath calls the underlying AppendBezierPath.
 func (x *BezierPath) AppendBezierPath(path *raw.NSBezierPath) {
 	x.inner.AppendBezierPath(path)
 }
 
+// Appends a rectangular path to the path.
+//
 // AppendBezierPathWithRect calls the underlying AppendBezierPathWithRect.
 func (x *BezierPath) AppendBezierPathWithRect(rect corefoundation.CGRect) {
 	x.inner.AppendBezierPathWithRect(rect)
 }
 
+// Appends a series of line segments to the path.
+//
 // AppendBezierPathWithPointsCount calls the underlying AppendBezierPathWithPointsCount.
 func (x *BezierPath) AppendBezierPathWithPointsCount(points *corefoundation.CGPoint, count int) {
 	x.inner.AppendBezierPathWithPointsCount(points, count)
 }
 
+// Appends an oval path to the path, inscribing the oval in the specified rectangle.
+//
 // AppendBezierPathWithOvalInRect calls the underlying AppendBezierPathWithOvalInRect.
 func (x *BezierPath) AppendBezierPathWithOvalInRect(rect corefoundation.CGRect) {
 	x.inner.AppendBezierPathWithOvalInRect(rect)
 }
 
+// Appends an arc of a circle to the path.
+//
 // AppendBezierPathWithArcWithCenterRadiusStartAngleEndAngleClockwise calls the underlying AppendBezierPathWithArcWithCenterRadiusStartAngleEndAngleClockwise.
 func (x *BezierPath) AppendBezierPathWithArcWithCenterRadiusStartAngleEndAngleClockwise(center corefoundation.CGPoint, radius float64, startAngle float64, endAngle float64, clockwise bool) {
 	x.inner.AppendBezierPathWithArcWithCenterRadiusStartAngleEndAngleClockwise(center, radius, startAngle, endAngle, clockwise)
 }
 
+// Appends an arc of a circle to the path.
+//
 // AppendBezierPathWithArcWithCenterRadiusStartAngleEndAngle calls the underlying AppendBezierPathWithArcWithCenterRadiusStartAngleEndAngle.
 func (x *BezierPath) AppendBezierPathWithArcWithCenterRadiusStartAngleEndAngle(center corefoundation.CGPoint, radius float64, startAngle float64, endAngle float64) {
 	x.inner.AppendBezierPathWithArcWithCenterRadiusStartAngleEndAngle(center, radius, startAngle, endAngle)
 }
 
+// Appends an arc to the path.
+//
 // AppendBezierPathWithArcFromPointToPointRadius calls the underlying AppendBezierPathWithArcFromPointToPointRadius.
 func (x *BezierPath) AppendBezierPathWithArcFromPointToPointRadius(point1 corefoundation.CGPoint, point2 corefoundation.CGPoint, radius float64) {
 	x.inner.AppendBezierPathWithArcFromPointToPointRadius(point1, point2, radius)
 }
 
+// Appends an outline of the specified glyph to the path.
+//
 // AppendBezierPathWithCGGlyphInFont calls the underlying AppendBezierPathWithCGGlyphInFont.
 func (x *BezierPath) AppendBezierPathWithCGGlyphInFont(glyph uint16, font *raw.NSFont) {
 	x.inner.AppendBezierPathWithCGGlyphInFont(glyph, font)
 }
 
+// Appends the outlines of the specified glyphs to the path.
+//
 // AppendBezierPathWithCGGlyphsCountInFont calls the underlying AppendBezierPathWithCGGlyphsCountInFont.
 func (x *BezierPath) AppendBezierPathWithCGGlyphsCountInFont(glyphs *uint16, count int, font *raw.NSFont) {
 	x.inner.AppendBezierPathWithCGGlyphsCountInFont(glyphs, count, font)
 }
 
+// Appends a rounded rectangular path to the path.
+//
 // AppendBezierPathWithRoundedRectXRadiusYRadius calls the underlying AppendBezierPathWithRoundedRectXRadiusYRadius.
 func (x *BezierPath) AppendBezierPathWithRoundedRectXRadiusYRadius(rect corefoundation.CGRect, xRadius float64, yRadius float64) {
 	x.inner.AppendBezierPathWithRoundedRectXRadiusYRadius(rect, xRadius, yRadius)
 }
 
+// Returns a Boolean value that indicates whether the path contains the specified point.
+//
 // ContainsPoint calls the underlying ContainsPoint.
 func (x *BezierPath) ContainsPoint(point corefoundation.CGPoint) bool {
 	return x.inner.ContainsPoint(point)
@@ -342,26 +414,36 @@ func (x *BezierPath) ElementCount() int {
 	return x.inner.ElementCount()
 }
 
+// Returns a Boolean value that indicates whether this object maintains a cached image of its path.
+//
 // CachesBezierPath calls the underlying CachesBezierPath.
 func (x *BezierPath) CachesBezierPath() bool {
 	return x.inner.CachesBezierPath()
 }
 
+// Sets whether the path should cache its path information.
+//
 // SetCachesBezierPath calls the underlying SetCachesBezierPath.
 func (x *BezierPath) SetCachesBezierPath(flag bool) {
 	x.inner.SetCachesBezierPath(flag)
 }
 
+// Appends an outline of the specified glyph to the path.
+//
 // AppendBezierPathWithGlyphInFont calls the underlying AppendBezierPathWithGlyphInFont.
 func (x *BezierPath) AppendBezierPathWithGlyphInFont(glyph uint, font *raw.NSFont) {
 	x.inner.AppendBezierPathWithGlyphInFont(glyph, font)
 }
 
+// Appends the outlines of the specified glyphs to the path.
+//
 // AppendBezierPathWithGlyphsCountInFont calls the underlying AppendBezierPathWithGlyphsCountInFont.
 func (x *BezierPath) AppendBezierPathWithGlyphsCountInFont(glyphs *uint, count int, font *raw.NSFont) {
 	x.inner.AppendBezierPathWithGlyphsCountInFont(glyphs, count, font)
 }
 
+// Appends an array of packed glyphs to the path.
+//
 // AppendBezierPathWithPackedGlyphs calls the underlying AppendBezierPathWithPackedGlyphs.
 func (x *BezierPath) AppendBezierPathWithPackedGlyphs(packedGlyphs string) {
 	x.inner.AppendBezierPathWithPackedGlyphs(packedGlyphs)

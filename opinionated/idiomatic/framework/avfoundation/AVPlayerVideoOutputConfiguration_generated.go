@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides configuration information for the related player item.
+//
 // PlayerVideoOutputConfiguration wraps [raw.AVPlayerVideoOutputConfiguration] with a fluent Go API.
 type PlayerVideoOutputConfiguration struct {
 	inner *raw.AVPlayerVideoOutputConfiguration

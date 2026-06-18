@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The uneditable content of a notification.
+//
 // NotificationContent wraps [raw.UNNotificationContent] with a fluent Go API.
 type NotificationContent struct {
 	inner *raw.UNNotificationContent
@@ -37,7 +39,7 @@ func NewNotificationContent() *NotificationContent {
 	return &NotificationContent{inner: raw.UNNotificationContentFromID(_id)}
 }
 
-// Contextualizes your UNNotificationContent object with other Apple SDK objects conforming to UNNotificationContentProviding. This will specialize the notification and decorate its look and behavior accordingly. For example, the notification will be treated as a message with an avatar and be promoted to the top of notification center if the object passed in is a valid INSendMessageIntent<UNNotificationContentProviding>. This throws an error with a UNErrorCode found in UNError.h if the UNNotificationContentProviding object is invalid. A valid UNNotificationContent result should not be mutated and be passed directly to UNUserNotificationCenter. This should be called in the UNNotificationServiceExtension in didReceiveNotificationRequest:withContentHandler: and the returned UNNotificationContent should be passed to the contentHandler for incoming push notifications.
+// Returns a copy of the notification that includes content from the specified provider.
 //
 // ContentByUpdatingWithProviderError calls the underlying ContentByUpdatingWithProviderError.
 func (x *NotificationContent) ContentByUpdatingWithProviderError(provider raw.UNNotificationContentProviding) (*NotificationContent, error) {

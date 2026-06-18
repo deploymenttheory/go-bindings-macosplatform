@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Contains the configuration data for a view controller that lets the user add a payment pass.
+//
 // AddPaymentPassRequestConfiguration wraps [raw.PKAddPaymentPassRequestConfiguration] with a fluent Go API.
 type AddPaymentPassRequestConfiguration struct {
 	inner *raw.PKAddPaymentPassRequestConfiguration
@@ -34,6 +36,8 @@ func AddPaymentPassRequestConfigurationFromID(id objc.ID) *AddPaymentPassRequest
 	return &AddPaymentPassRequestConfiguration{inner: raw.PKAddPaymentPassRequestConfigurationFromID(id)}
 }
 
+// Instantiates a new request configuration with the given encryption scheme.
+//
 // NewAddPaymentPassRequestConfigurationWithEncryptionScheme creates a new [AddPaymentPassRequestConfiguration].
 func NewAddPaymentPassRequestConfigurationWithEncryptionScheme(encryptionScheme *foundation.NSString) *AddPaymentPassRequestConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKAddPaymentPassRequestConfiguration")), objc.RegisterName("alloc"))
@@ -41,24 +45,32 @@ func NewAddPaymentPassRequestConfigurationWithEncryptionScheme(encryptionScheme 
 	return &AddPaymentPassRequestConfiguration{inner: raw.PKAddPaymentPassRequestConfigurationFromID(_id)}
 }
 
+// A value that indicates whether a pass is for access or for payment use.
+//
 // WithStyle sets the style property and returns the receiver for chaining.
 func (x *AddPaymentPassRequestConfiguration) WithStyle(style PKAddPaymentPassStyle) *AddPaymentPassRequestConfiguration {
 	x.inner.SetStyle(raw.PKAddPaymentPassStyle(style))
 	return x
 }
 
+// The name of the person as shown on the card.
+//
 // WithCardholderName sets the cardholderName property and returns the receiver for chaining.
 func (x *AddPaymentPassRequestConfiguration) WithCardholderName(cardholderName string) *AddPaymentPassRequestConfiguration {
 	x.inner.SetCardholderName(foundation.NSStringStringWithUTF8String(cardholderName))
 	return x
 }
 
+// The last four or five digits of the card’s number.
+//
 // WithPrimaryAccountSuffix sets the primaryAccountSuffix property and returns the receiver for chaining.
 func (x *AddPaymentPassRequestConfiguration) WithPrimaryAccountSuffix(primaryAccountSuffix string) *AddPaymentPassRequestConfiguration {
 	x.inner.SetPrimaryAccountSuffix(foundation.NSStringStringWithUTF8String(primaryAccountSuffix))
 	return x
 }
 
+// An array of labeled values that describe a card.
+//
 // WithCardDetails sets the collection, converting the Go slice to an NSArray.
 func (x *AddPaymentPassRequestConfiguration) WithCardDetails(items ...*raw.PKLabeledValue) *AddPaymentPassRequestConfiguration {
 	if len(items) == 0 {
@@ -77,18 +89,24 @@ func (x *AddPaymentPassRequestConfiguration) WithCardDetails(items ...*raw.PKLab
 	return x
 }
 
+// A short description of the card.
+//
 // WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
 func (x *AddPaymentPassRequestConfiguration) WithLocalizedDescription(localizedDescription string) *AddPaymentPassRequestConfiguration {
 	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
 	return x
 }
 
+// A primary account identifier, used to filter out pass libraries.
+//
 // WithPrimaryAccountIdentifier sets the primaryAccountIdentifier property and returns the receiver for chaining.
 func (x *AddPaymentPassRequestConfiguration) WithPrimaryAccountIdentifier(primaryAccountIdentifier string) *AddPaymentPassRequestConfiguration {
 	x.inner.SetPrimaryAccountIdentifier(foundation.NSStringStringWithUTF8String(primaryAccountIdentifier))
 	return x
 }
 
+// The payment network.
+//
 // WithPaymentNetwork sets the paymentNetwork property and returns the receiver for chaining.
 func (x *AddPaymentPassRequestConfiguration) WithPaymentNetwork(paymentNetwork *foundation.NSString) *AddPaymentPassRequestConfiguration {
 	x.inner.SetPaymentNetwork(paymentNetwork)
@@ -101,6 +119,8 @@ func (x *AddPaymentPassRequestConfiguration) WithProductIdentifiers(productIdent
 	return x
 }
 
+// A Boolean value that indicates whether the payment pass requires the Felica Secure Element.
+//
 // WithRequiresFelicaSecureElement sets the requiresFelicaSecureElement property and returns the receiver for chaining.
 func (x *AddPaymentPassRequestConfiguration) WithRequiresFelicaSecureElement(requiresFelicaSecureElement bool) *AddPaymentPassRequestConfiguration {
 	x.inner.SetRequiresFelicaSecureElement(requiresFelicaSecureElement)

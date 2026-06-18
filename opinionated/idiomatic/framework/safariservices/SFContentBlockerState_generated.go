@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The state of a content blocker extension.
+//
 // ContentBlockerState wraps [raw.SFContentBlockerState] with a fluent Go API.
 type ContentBlockerState struct {
 	inner *raw.SFContentBlockerState

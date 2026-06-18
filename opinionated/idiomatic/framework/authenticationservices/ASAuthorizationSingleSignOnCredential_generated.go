@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A credential that results from a successful single sign-on (SSO) authentication.
+//
 // AuthorizationSingleSignOnCredential wraps [raw.ASAuthorizationSingleSignOnCredential] with a fluent Go API.
 type AuthorizationSingleSignOnCredential struct {
 	inner *raw.ASAuthorizationSingleSignOnCredential

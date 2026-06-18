@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that specifies the criteria for fetching change history.
+//
 // ChangeHistoryFetchRequest wraps [raw.CNChangeHistoryFetchRequest] with a fluent Go API.
 type ChangeHistoryFetchRequest struct {
 	inner *raw.CNChangeHistoryFetchRequest
@@ -38,7 +40,7 @@ func NewChangeHistoryFetchRequest() *ChangeHistoryFetchRequest {
 	return &ChangeHistoryFetchRequest{inner: raw.CNChangeHistoryFetchRequestFromID(_id)}
 }
 
-// @abstract    Request changes made after a certain point. @discussion  If non-nil, only changes made after this point in history will be returned. If nil, a @c CNChangeHistoryDropEverythingEvent will be returned, followed by an add event for every contact and group currently in the contacts database.
+// An opaque token that indicates a point in history in the user’s Contacts database.
 //
 // WithStartingToken sets the startingToken property and returns the receiver for chaining.
 func (x *ChangeHistoryFetchRequest) WithStartingToken(startingToken *foundation.NSData) *ChangeHistoryFetchRequest {
@@ -46,7 +48,7 @@ func (x *ChangeHistoryFetchRequest) WithStartingToken(startingToken *foundation.
 	return x
 }
 
-// @abstract    Returns contact changes as unified contacts. @discussion  If @c YES, returns unified contact history. Otherwise returns individual contact history. Default is @c YES. @note        A unified contact is the aggregation of properties from a set of linked individual contacts. If an individual contact is not linked then the unified contact is simply that individual contact.
+// A Boolean value that indicates whether the fetch should return contact changes as unified contacts.
 //
 // WithShouldUnifyResults sets the shouldUnifyResults property and returns the receiver for chaining.
 func (x *ChangeHistoryFetchRequest) WithShouldUnifyResults(shouldUnifyResults bool) *ChangeHistoryFetchRequest {
@@ -54,7 +56,7 @@ func (x *ChangeHistoryFetchRequest) WithShouldUnifyResults(shouldUnifyResults bo
 	return x
 }
 
-// @abstract    To return mutable contacts and groups. @discussion  If @c YES returns mutable contacts and groups. Default is @c NO.
+// A Boolean value that indicates whether the fetch should return mutable contacts and groups.
 //
 // WithMutableObjects sets the mutableObjects property and returns the receiver for chaining.
 func (x *ChangeHistoryFetchRequest) WithMutableObjects(mutableObjects bool) *ChangeHistoryFetchRequest {
@@ -62,7 +64,7 @@ func (x *ChangeHistoryFetchRequest) WithMutableObjects(mutableObjects bool) *Cha
 	return x
 }
 
-// @abstract    Set to @c YES to also fetch group changes. Default is @c NO.
+// A Boolean value that indicates whether the fetch should also return group changes.
 //
 // WithIncludeGroupChanges sets the includeGroupChanges property and returns the receiver for chaining.
 func (x *ChangeHistoryFetchRequest) WithIncludeGroupChanges(includeGroupChanges bool) *ChangeHistoryFetchRequest {
@@ -70,7 +72,7 @@ func (x *ChangeHistoryFetchRequest) WithIncludeGroupChanges(includeGroupChanges 
 	return x
 }
 
-// @abstract    Exclude changes made by certain authors. @discussion  If set, transactions made by the specified authors will be excluded from the results. Use this, in conjunction with @c CNSaveRequest.transactionAuthor, to suppress processing of changes you already know about.
+// An array of strings that identify transaction authors to exclude from the fetch results.
 //
 // WithExcludedTransactionAuthors sets the collection, converting the Go slice to an NSArray.
 func (x *ChangeHistoryFetchRequest) WithExcludedTransactionAuthors(items ...*foundation.NSString) *ChangeHistoryFetchRequest {

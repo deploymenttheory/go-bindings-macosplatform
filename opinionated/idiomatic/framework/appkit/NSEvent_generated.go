@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that contains information about an input action, such as a mouse click or a key press.
+//
 // Event wraps [raw.NSEvent] with a fluent Go API.
 type Event struct {
 	inner *raw.NSEvent
@@ -39,6 +41,8 @@ func NewEvent() *Event {
 	return &Event{inner: raw.NSEventFromID(_id)}
 }
 
+// Returns the new characters that result if you apply the specified modifier keys to the event.
+//
 // CharactersByApplyingModifiers calls the underlying CharactersByApplyingModifiers.
 func (x *Event) CharactersByApplyingModifiers(modifiers NSEventModifierFlags) string {
 	_r := x.inner.CharactersByApplyingModifiers(raw.NSEventModifierFlags(modifiers))
@@ -48,26 +52,36 @@ func (x *Event) CharactersByApplyingModifiers(modifiers NSEventModifierFlags) st
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns the touch objects associated with the specified phase.
+//
 // TouchesMatchingPhaseInView calls the underlying TouchesMatchingPhaseInView.
 func (x *Event) TouchesMatchingPhaseInView(phase NSTouchPhase, view *raw.NSView) *foundation.NSSet[*raw.NSTouch] {
 	return x.inner.TouchesMatchingPhaseInView(raw.NSTouchPhase(phase), view)
 }
 
+// Returns all touch objects associated with the event.
+//
 // AllTouches calls the underlying AllTouches.
 func (x *Event) AllTouches() *foundation.NSSet[*raw.NSTouch] {
 	return x.inner.AllTouches()
 }
 
+// Returns the touch objects from the event that belong to the specified view.
+//
 // TouchesForView calls the underlying TouchesForView.
 func (x *Event) TouchesForView(view *raw.NSView) *foundation.NSSet[*raw.NSTouch] {
 	return x.inner.TouchesForView(view)
 }
 
+// Returns all of the touch objects associated with the specified main touch.
+//
 // CoalescedTouchesForTouch calls the underlying CoalescedTouchesForTouch.
 func (x *Event) CoalescedTouchesForTouch(touch *raw.NSTouch) *foundation.NSArray[*raw.NSTouch] {
 	return x.inner.CoalescedTouchesForTouch(touch)
 }
 
+// Allows tracking and user interface feedback of scroll wheel events.
+//
 // TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler calls the underlying TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler.
 func (x *Event) TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler(options NSEventSwipeTrackingOptions, minDampenThreshold float64, maxDampenThreshold float64, trackingHandler func(float64, NSEventPhase, bool, *bool)) {
 	x.inner.TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler(raw.NSEventSwipeTrackingOptions(options), minDampenThreshold, maxDampenThreshold, func(_a0 float64, _a1 raw.NSEventPhase, _a2 bool, _a3 *bool) {

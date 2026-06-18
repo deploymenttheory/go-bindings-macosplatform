@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A description of an acceleration structure that contains geometry primitives.
+//
 // PrimitiveAccelerationStructureDescriptor wraps [raw.MTLPrimitiveAccelerationStructureDescriptor] with a fluent Go API.
 type PrimitiveAccelerationStructureDescriptor struct {
 	inner *raw.MTLPrimitiveAccelerationStructureDescriptor
@@ -40,7 +42,7 @@ func NewPrimitiveAccelerationStructureDescriptor() *PrimitiveAccelerationStructu
 	return &PrimitiveAccelerationStructureDescriptor{inner: raw.MTLPrimitiveAccelerationStructureDescriptorFromID(_id)}
 }
 
-// @brief Array of geometry descriptors. If motionKeyframeCount is greater than one all geometryDescriptors must be motion versions and have motionKeyframeCount of primitive buffers.
+// An array that contains the individual pieces of geometry that compose the acceleration structure.
 //
 // WithGeometryDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *PrimitiveAccelerationStructureDescriptor) WithGeometryDescriptors(items ...AccelerationStructureGeometryDescriptorProvider) *PrimitiveAccelerationStructureDescriptor {
@@ -60,7 +62,7 @@ func (x *PrimitiveAccelerationStructureDescriptor) WithGeometryDescriptors(items
 	return x
 }
 
-// @brief Motion border mode describing what happens if acceleration structure is sampled before motionStartTime. If not set defaults to MTLMotionBorderModeClamp.
+// The mode to use when handling timestamps before the start time.
 //
 // WithMotionStartBorderMode sets the motionStartBorderMode property and returns the receiver for chaining.
 func (x *PrimitiveAccelerationStructureDescriptor) WithMotionStartBorderMode(motionStartBorderMode MTLMotionBorderMode) *PrimitiveAccelerationStructureDescriptor {
@@ -68,7 +70,7 @@ func (x *PrimitiveAccelerationStructureDescriptor) WithMotionStartBorderMode(mot
 	return x
 }
 
-// @brief Motion border mode describing what happens if acceleration structure is sampled after motionEndTime. If not set defaults to MTLMotionBorderModeClamp.
+// The mode to use when handling timestamps after the end time.
 //
 // WithMotionEndBorderMode sets the motionEndBorderMode property and returns the receiver for chaining.
 func (x *PrimitiveAccelerationStructureDescriptor) WithMotionEndBorderMode(motionEndBorderMode MTLMotionBorderMode) *PrimitiveAccelerationStructureDescriptor {
@@ -76,7 +78,7 @@ func (x *PrimitiveAccelerationStructureDescriptor) WithMotionEndBorderMode(motio
 	return x
 }
 
-// @brief Motion start time of this geometry. If not set defaults to 0.0f.
+// The start time for the range of motion that the keyframe data describes.
 //
 // WithMotionStartTime sets the motionStartTime property and returns the receiver for chaining.
 func (x *PrimitiveAccelerationStructureDescriptor) WithMotionStartTime(motionStartTime float32) *PrimitiveAccelerationStructureDescriptor {
@@ -84,7 +86,7 @@ func (x *PrimitiveAccelerationStructureDescriptor) WithMotionStartTime(motionSta
 	return x
 }
 
-// @brief Motion end time of this geometry. If not set defaults to 1.0f.
+// The end time for the range of motion that the keyframe data describes.
 //
 // WithMotionEndTime sets the motionEndTime property and returns the receiver for chaining.
 func (x *PrimitiveAccelerationStructureDescriptor) WithMotionEndTime(motionEndTime float32) *PrimitiveAccelerationStructureDescriptor {
@@ -92,7 +94,7 @@ func (x *PrimitiveAccelerationStructureDescriptor) WithMotionEndTime(motionEndTi
 	return x
 }
 
-// @brief Motion keyframe count. Is 1 by default which means no motion.
+// The number of keyframes in the geometry data.
 //
 // WithMotionKeyframeCount sets the motionKeyframeCount property and returns the receiver for chaining.
 func (x *PrimitiveAccelerationStructureDescriptor) WithMotionKeyframeCount(motionKeyframeCount uint) *PrimitiveAccelerationStructureDescriptor {
@@ -100,6 +102,8 @@ func (x *PrimitiveAccelerationStructureDescriptor) WithMotionKeyframeCount(motio
 	return x
 }
 
+// The options that describe how you intend to use the acceleration structure.
+//
 // WithUsage sets the usage property and returns the receiver for chaining.
 func (x *PrimitiveAccelerationStructureDescriptor) WithUsage(usage MTLAccelerationStructureUsage) *PrimitiveAccelerationStructureDescriptor {
 	x.inner.MTLAccelerationStructureDescriptor.SetUsage(raw.MTLAccelerationStructureUsage(usage))

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object representing the context in which rendering occurs.
+//
 // RenderingSession wraps [raw.CNRenderingSession] with a fluent Go API.
 type RenderingSession struct {
 	inner *raw.CNRenderingSession

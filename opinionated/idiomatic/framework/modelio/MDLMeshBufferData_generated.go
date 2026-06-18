@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A memory buffer that stores vertex or index data for a Model I/O mesh.
+//
 // MeshBufferData wraps [raw.MDLMeshBufferData] with a fluent Go API.
 type MeshBufferData struct {
 	inner *raw.MDLMeshBufferData
@@ -30,7 +32,7 @@ func MeshBufferDataFromID(id objc.ID) *MeshBufferData {
 	return &MeshBufferData{inner: raw.MDLMeshBufferDataFromID(id)}
 }
 
-// @method initWithType:length @abstract instantiate a new data backed mesh buffer @param type the intended use of the buffer @param length the size of buffer to allocate, in bytes
+// Initializes a buffer of the specified length.
 //
 // NewMeshBufferDataWithTypeLength creates a new [MeshBufferData].
 func NewMeshBufferDataWithTypeLength(type_ MDLMeshBufferType, length uint) *MeshBufferData {
@@ -39,7 +41,7 @@ func NewMeshBufferDataWithTypeLength(type_ MDLMeshBufferType, length uint) *Mesh
 	return &MeshBufferData{inner: raw.MDLMeshBufferDataFromID(_id)}
 }
 
-// @method initWithType:data @abstract instantiate a new data backed mesh buffer @param type the intended use of the buffer @param data the data to be used as a mesh buffer. It will be copied.
+// Initializes a buffer containing the specified data.
 //
 // NewMeshBufferDataWithTypeData creates a new [MeshBufferData].
 func NewMeshBufferDataWithTypeData(type_ MDLMeshBufferType, data *foundation.NSData) *MeshBufferData {

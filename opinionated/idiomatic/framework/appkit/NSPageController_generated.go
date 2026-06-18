@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that controls swipe navigation and animations between views or view content.
+//
 // PageController wraps [raw.NSPageController] with a fluent Go API.
 type PageController struct {
 	inner *raw.NSPageController
@@ -38,48 +40,64 @@ func NewPageController() *PageController {
 	return &PageController{inner: raw.NSPageControllerFromID(_id)}
 }
 
+// The page controller’s delegate object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PageController) WithDelegate(delegate raw.NSPageControllerDelegate) *PageController {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The transition style the page controller uses when changing pages.
+//
 // WithTransitionStyle sets the transitionStyle property and returns the receiver for chaining.
 func (x *PageController) WithTransitionStyle(transitionStyle NSPageControllerTransitionStyle) *PageController {
 	x.inner.SetTransitionStyle(raw.NSPageControllerTransitionStyle(transitionStyle))
 	return x
 }
 
+// The currently selected object in the arranged objects array.
+//
 // WithSelectedIndex sets the selectedIndex property and returns the receiver for chaining.
 func (x *PageController) WithSelectedIndex(selectedIndex int) *PageController {
 	x.inner.SetSelectedIndex(selectedIndex)
 	return x
 }
 
+// The object whose value is presented in the receiver’s primary view.
+//
 // WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
 func (x *PageController) WithRepresentedObject(representedObject objc.ID) *PageController {
 	x.inner.NSViewController.SetRepresentedObject(representedObject)
 	return x
 }
 
+// The localized title of the receiver’s primary view.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *PageController) WithTitle(title string) *PageController {
 	x.inner.NSViewController.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The view controller’s primary view.
+//
 // WithView sets the view property and returns the receiver for chaining.
 func (x *PageController) WithView(view ViewProvider) *PageController {
 	x.inner.NSViewController.SetView(view.asView())
 	return x
 }
 
+// The desired size of the view controller’s view, in screen units.
+//
 // WithPreferredContentSize sets the preferredContentSize property and returns the receiver for chaining.
 func (x *PageController) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *PageController {
 	x.inner.NSViewController.SetPreferredContentSize(preferredContentSize)
 	return x
 }
 
+// An array of view controllers that are hierarchical children of the view controller.
+//
 // WithChildViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *PageController) WithChildViewControllers(items ...ViewControllerProvider) *PageController {
 	if len(items) == 0 {
@@ -104,56 +122,76 @@ func (x *PageController) WithSourceItemView(sourceItemView ViewProvider) *PageCo
 	return x
 }
 
+// For a view controller that is part of an app extension, the preferred screen origin.
+//
 // WithPreferredScreenOrigin sets the preferredScreenOrigin property and returns the receiver for chaining.
 func (x *PageController) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *PageController {
 	x.inner.NSViewController.SetPreferredScreenOrigin(preferredScreenOrigin)
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *PageController) WithNextResponder(nextResponder ResponderProvider) *PageController {
 	x.inner.NSViewController.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *PageController) WithMenu(menu *Menu) *PageController {
 	x.inner.NSViewController.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *PageController) WithUserActivity(userActivity *foundation.NSUserActivity) *PageController {
 	x.inner.NSViewController.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *PageController) WithTouchBar(touchBar *TouchBar) *PageController {
 	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Navigates to the specific object.
+//
 // NavigateForwardToObject calls the underlying NavigateForwardToObject.
 func (x *PageController) NavigateForwardToObject(object objc.ID) {
 	x.inner.NavigateForwardToObject(object)
 }
 
+// Invoked when the page transition is completed.
+//
 // CompleteTransition calls the underlying CompleteTransition.
 func (x *PageController) CompleteTransition() {
 	x.inner.CompleteTransition()
 }
 
+// Navigates backwards in the page controller’s arranged objects array.
+//
 // NavigateBack calls the underlying NavigateBack.
 func (x *PageController) NavigateBack(sender objc.ID) {
 	x.inner.NavigateBack(sender)
 }
 
+// Navigates to the next object in the page controller’s arranged objects array, if appropriate.
+//
 // NavigateForward calls the underlying NavigateForward.
 func (x *PageController) NavigateForward(sender objc.ID) {
 	x.inner.NavigateForward(sender)
 }
 
+// Navigates to the selected index, which is taken from the sender.
+//
 // TakeSelectedIndexFrom calls the underlying TakeSelectedIndexFrom.
 func (x *PageController) TakeSelectedIndexFrom(sender objc.ID) {
 	x.inner.TakeSelectedIndexFrom(sender)

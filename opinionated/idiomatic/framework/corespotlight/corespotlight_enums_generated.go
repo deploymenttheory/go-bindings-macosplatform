@@ -9,10 +9,12 @@ import (
 	"strings"
 )
 
+// The query source options to allow or deny Mail messages in the search.
 // Bitmask — values may be combined with |.
 type CSSearchQuerySourceOptions uint64
 
 const (
+	// The query uses the default search option that excludes Mail messages.
 	CSSearchQuerySourceOptionDefault   CSSearchQuerySourceOptions = 0
 	CSSearchQuerySourceOptionAllowMail CSSearchQuerySourceOptions = 1
 )
@@ -51,6 +53,7 @@ func (e CSSearchableItemUpdateListenerOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The suggestion type that determines how the system handles a suggestion.
 type CSSuggestionKind int64
 
 const (

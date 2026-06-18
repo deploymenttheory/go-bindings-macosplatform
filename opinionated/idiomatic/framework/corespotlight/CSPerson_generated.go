@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a person in the context of search results.
+//
 // Person wraps [raw.CSPerson] with a fluent Go API.
 type Person struct {
 	inner *raw.CSPerson
@@ -31,6 +33,8 @@ func PersonFromID(id objc.ID) *Person {
 	return &Person{inner: raw.CSPersonFromID(id)}
 }
 
+// Returns a new CSPerson object initialized with the specified display name and contact attributes.
+//
 // NewPersonWithDisplayNameHandlesHandleIdentifier creates a new [Person].
 func NewPersonWithDisplayNameHandlesHandleIdentifier(displayName string, handles *foundation.NSArray[*foundation.NSString], handleIdentifier string) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CSPerson")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewPersonWithDisplayNameHandlesHandleIdentifier(displayName string, handles
 	return &Person{inner: raw.CSPersonFromID(_id)}
 }
 
+// The identifier for the contact associated with the person.
+//
 // WithContactIdentifier sets the contactIdentifier property and returns the receiver for chaining.
 func (x *Person) WithContactIdentifier(contactIdentifier string) *Person {
 	x.inner.SetContactIdentifier(foundation.NSStringStringWithUTF8String(contactIdentifier))

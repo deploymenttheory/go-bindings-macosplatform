@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a balance that’s available for transactions, such as points or money.
+//
 // StoredValuePassBalance wraps [raw.PKStoredValuePassBalance] with a fluent Go API.
 type StoredValuePassBalance struct {
 	inner *raw.PKStoredValuePassBalance
@@ -37,6 +39,8 @@ func NewStoredValuePassBalance() *StoredValuePassBalance {
 	return &StoredValuePassBalance{inner: raw.PKStoredValuePassBalanceFromID(_id)}
 }
 
+// Returns a Boolean value that indicates whether two pass balance objects contain the same values.
+//
 // IsEqualToBalance calls the underlying IsEqualToBalance.
 func (x *StoredValuePassBalance) IsEqualToBalance(balance *raw.PKStoredValuePassBalance) bool {
 	return x.inner.IsEqualToBalance(balance)

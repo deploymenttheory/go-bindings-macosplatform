@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides browsers with the ability to discover associations between an app and a website.
+//
 // UniversalLink wraps [raw.SFUniversalLink] with a fluent Go API.
 type UniversalLink struct {
 	inner *raw.SFUniversalLink
@@ -30,7 +32,7 @@ func UniversalLinkFromID(id objc.ID) *UniversalLink {
 	return &UniversalLink{inner: raw.SFUniversalLinkFromID(id)}
 }
 
-// Initialize the receiver with a web URL that may or may not be a universal link.
+// Creates a universal link object with the URL.
 //
 // NewUniversalLinkWithWebpageURL creates a new [UniversalLink].
 func NewUniversalLinkWithWebpageURL(url string) *UniversalLink {
@@ -39,7 +41,7 @@ func NewUniversalLinkWithWebpageURL(url string) *UniversalLink {
 	return &UniversalLink{inner: raw.SFUniversalLinkFromID(_id)}
 }
 
-// Whether or not this universal link is enabled. If it is enabled, the URL will open in the application instead of the browser. Set this property when the user indicates they wish to enable or disable this universal link.
+// A flag that indicates whether the universal link is enabled.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *UniversalLink) WithEnabled(enabled bool) *UniversalLink {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that gives you the ability to choose from system-provided tinting behaviors.
+//
 // TintConfiguration wraps [raw.NSTintConfiguration] with a fluent Go API.
 type TintConfiguration struct {
 	inner *raw.NSTintConfiguration

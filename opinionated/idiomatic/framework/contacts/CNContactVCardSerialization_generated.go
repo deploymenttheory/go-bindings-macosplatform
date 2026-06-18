@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object you use to convert to and from a vCard representation of the user’s contacts.
+//
 // ContactVCardSerialization wraps [raw.CNContactVCardSerialization] with a fluent Go API.
 type ContactVCardSerialization struct {
 	inner *raw.CNContactVCardSerialization

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that encapsulates input for PRF extensions during registration.
+//
 // AuthorizationPublicKeyCredentialPRFRegistrationInput wraps [raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput] with a fluent Go API.
 type AuthorizationPublicKeyCredentialPRFRegistrationInput struct {
 	inner *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput

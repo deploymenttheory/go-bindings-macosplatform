@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An interface to maintain platform single sign-on (SSO) during authentication and registration.
+//
 // AuthorizationProviderExtensionLoginManager wraps [raw.ASAuthorizationProviderExtensionLoginManager] with a fluent Go API.
 type AuthorizationProviderExtensionLoginManager struct {
 	inner *raw.ASAuthorizationProviderExtensionLoginManager
@@ -41,7 +43,7 @@ func NewAuthorizationProviderExtensionLoginManager() *AuthorizationProviderExten
 	return &AuthorizationProviderExtensionLoginManager{inner: raw.ASAuthorizationProviderExtensionLoginManagerFromID(_id)}
 }
 
-// @abstract Retrieves or sets the current SSO tokens response for the current user and extension.
+// The single sign-on response tokens for the current user and extension.
 //
 // WithSsoTokens sets the ssoTokens property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginManager) WithSsoTokens(ssoTokens *foundation.NSDictionary[objc.ID, objc.ID]) *AuthorizationProviderExtensionLoginManager {
@@ -56,28 +58,28 @@ func (x *AuthorizationProviderExtensionLoginManager) SaveUserLoginConfigurationE
 	return x.inner.SaveUserLoginConfigurationError(userLoginConfiguration)
 }
 
-// Saves or replaces the login configration. @param loginConfiguration The login configration to use. @param error The error when there are validation errors or nil.
+// Saves or replaces the login configuration.
 //
 // SaveLoginConfigurationError calls the underlying SaveLoginConfigurationError.
 func (x *AuthorizationProviderExtensionLoginManager) SaveLoginConfigurationError(loginConfiguration *raw.ASAuthorizationProviderExtensionLoginConfiguration) (bool, error) {
 	return x.inner.SaveLoginConfigurationError(loginConfiguration)
 }
 
-// @abstract Saves the provided certificate for the key type. @param certificate The certificate to save. @param keyType The key type for the certificate.
+// Saves the provided certificate for the key type.
 //
 // SaveCertificateKeyType calls the underlying SaveCertificateKeyType.
 func (x *AuthorizationProviderExtensionLoginManager) SaveCertificateKeyType(certificate unsafe.Pointer, keyType ASAuthorizationProviderExtensionKeyType) {
 	x.inner.SaveCertificateKeyType(certificate, raw.ASAuthorizationProviderExtensionKeyType(keyType))
 }
 
-// @abstract Retrieves the key for the specified platform SSO key type. @param keyType The key type to retrieve.
+// Retrieves the key for the specified platform single sign-on key type.
 //
 // CopyKeyForKeyType calls the underlying CopyKeyForKeyType.
 func (x *AuthorizationProviderExtensionLoginManager) CopyKeyForKeyType(keyType ASAuthorizationProviderExtensionKeyType) unsafe.Pointer {
 	return x.inner.CopyKeyForKeyType(raw.ASAuthorizationProviderExtensionKeyType(keyType))
 }
 
-// @abstract Retrieves the identity for the specified platform SSO key type. @param keyType The key type to retrieve.
+// Retrieves the identity for the specified platform single sign-on key type.
 //
 // CopyIdentityForKeyType calls the underlying CopyIdentityForKeyType.
 func (x *AuthorizationProviderExtensionLoginManager) CopyIdentityForKeyType(keyType ASAuthorizationProviderExtensionKeyType) unsafe.Pointer {
@@ -98,7 +100,7 @@ func (x *AuthorizationProviderExtensionLoginManager) CompleteKeyRotationForKeyTy
 	x.inner.CompleteKeyRotationForKeyType(raw.ASAuthorizationProviderExtensionKeyType(keyType))
 }
 
-// @abstract Requests AppSSOAgent reauthenticate the current user for the current extension.  This is used when the tokens are revoked, or expired and need to be requested again.
+// Requests platform single sign-on to reauthenticate the current user.
 //
 // UserNeedsReauthenticationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *AuthorizationProviderExtensionLoginManager) UserNeedsReauthenticationWithCompletion(ctx context.Context) error {
@@ -118,14 +120,14 @@ func (x *AuthorizationProviderExtensionLoginManager) UserNeedsReauthenticationWi
 	}
 }
 
-// @abstract Requests that the device registration be run again to repair it.
+// Invokes the device registration to run again so the current user can repair it.
 //
 // DeviceRegistrationsNeedsRepair calls the underlying DeviceRegistrationsNeedsRepair.
 func (x *AuthorizationProviderExtensionLoginManager) DeviceRegistrationsNeedsRepair() {
 	x.inner.DeviceRegistrationsNeedsRepair()
 }
 
-// @abstract Requests that user registration be run again for the current user to repair it.
+// Invokes the user registration to run again so the current user can repair it.
 //
 // UserRegistrationsNeedsRepair calls the underlying UserRegistrationsNeedsRepair.
 func (x *AuthorizationProviderExtensionLoginManager) UserRegistrationsNeedsRepair() {
@@ -139,7 +141,7 @@ func (x *AuthorizationProviderExtensionLoginManager) DecryptionKeysNeedRepair() 
 	x.inner.DecryptionKeysNeedRepair()
 }
 
-// @abstract Creates new Encryption, Signing, and Secure Enclave keys for the user.  The old keys will be destroyed.
+// Creates new encryption, signing, and Secure Enclave keys for the user.
 //
 // ResetKeys calls the underlying ResetKeys.
 func (x *AuthorizationProviderExtensionLoginManager) ResetKeys() {
@@ -174,7 +176,7 @@ func (x *AuthorizationProviderExtensionLoginManager) AttestPendingKeyClientDataH
 	x.inner.AttestPendingKeyClientDataHashCompletion(raw.ASAuthorizationProviderExtensionKeyType(keyType), clientDataHash, completion)
 }
 
-// @abstract Asks authorization service to show extension view controller for registration. If the controller cannot be shown an error is returned.  This is only valid during registration.
+// Requests platform single sign-on to show the extension’s view controller to the user.
 //
 // PresentRegistrationViewControllerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *AuthorizationProviderExtensionLoginManager) PresentRegistrationViewControllerWithCompletion(ctx context.Context) error {

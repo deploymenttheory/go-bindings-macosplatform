@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Manages the layout process inside the viewport interacting with its delegate.
+//
 // TextViewportLayoutController wraps [raw.NSTextViewportLayoutController] with a fluent Go API.
 type TextViewportLayoutController struct {
 	inner *raw.NSTextViewportLayoutController
@@ -30,6 +32,8 @@ func TextViewportLayoutControllerFromID(id objc.ID) *TextViewportLayoutControlle
 	return &TextViewportLayoutController{inner: raw.NSTextViewportLayoutControllerFromID(id)}
 }
 
+// Creates a new instance with the text layout manager you provide.
+//
 // NewTextViewportLayoutControllerWithTextLayoutManager creates a new [TextViewportLayoutController].
 func NewTextViewportLayoutControllerWithTextLayoutManager(textLayoutManager *raw.NSTextLayoutManager) *TextViewportLayoutController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextViewportLayoutController")), objc.RegisterName("alloc"))
@@ -37,22 +41,30 @@ func NewTextViewportLayoutControllerWithTextLayoutManager(textLayoutManager *raw
 	return &TextViewportLayoutController{inner: raw.NSTextViewportLayoutControllerFromID(_id)}
 }
 
+// The delegate for the text layout manager object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *TextViewportLayoutController) WithDelegate(delegate raw.NSTextViewportLayoutControllerDelegate) *TextViewportLayoutController {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Performs layout in the viewport.
+//
 // LayoutViewport calls the underlying LayoutViewport.
 func (x *TextViewportLayoutController) LayoutViewport() {
 	x.inner.LayoutViewport()
 }
 
+// Relocates the viewport to the location you specify.
+//
 // RelocateViewportToTextLocation calls the underlying RelocateViewportToTextLocation.
 func (x *TextViewportLayoutController) RelocateViewportToTextLocation(textLocation raw.NSTextLocation) float64 {
 	return x.inner.RelocateViewportToTextLocation(textLocation)
 }
 
+// Adjusts the viewport rect by the specified offset if needed.
+//
 // AdjustViewportByVerticalOffset calls the underlying AdjustViewportByVerticalOffset.
 func (x *TextViewportLayoutController) AdjustViewportByVerticalOffset(verticalOffset float64) {
 	x.inner.AdjustViewportByVerticalOffset(verticalOffset)

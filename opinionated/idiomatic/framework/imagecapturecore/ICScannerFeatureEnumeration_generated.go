@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A feature that can have one of several discrete values, strings or numbers.
+//
 // ScannerFeatureEnumeration wraps [raw.ICScannerFeatureEnumeration] with a fluent Go API.
 type ScannerFeatureEnumeration struct {
 	inner *raw.ICScannerFeatureEnumeration

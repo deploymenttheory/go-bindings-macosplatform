@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of where to store GPU counter information at the start and end of a render pass.
+//
 // RenderPassSampleBufferAttachmentDescriptor wraps [raw.MTLRenderPassSampleBufferAttachmentDescriptor] with a fluent Go API.
 type RenderPassSampleBufferAttachmentDescriptor struct {
 	inner *raw.MTLRenderPassSampleBufferAttachmentDescriptor
@@ -37,7 +39,7 @@ func NewRenderPassSampleBufferAttachmentDescriptor() *RenderPassSampleBufferAtta
 	return &RenderPassSampleBufferAttachmentDescriptor{inner: raw.MTLRenderPassSampleBufferAttachmentDescriptorFromID(_id)}
 }
 
-// @property sampleBuffer @abstract The sample buffer to store samples for the render-pass defined samples. If sampleBuffer is non-nil, the sample indices will be used to store samples into the sample buffer.  If no sample buffer is provided, no samples will be taken. If any of the sample indices are specified as MTLCounterDontSample, no sample will be taken for that action.
+// A specialized memory buffer that the GPU uses to store its counter data during the render pass.
 //
 // WithSampleBuffer sets the sampleBuffer property and returns the receiver for chaining.
 func (x *RenderPassSampleBufferAttachmentDescriptor) WithSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer) *RenderPassSampleBufferAttachmentDescriptor {
@@ -45,7 +47,7 @@ func (x *RenderPassSampleBufferAttachmentDescriptor) WithSampleBuffer(sampleBuff
 	return x
 }
 
-// @property startOfVertexSampleIndex @abstract The sample index to use to store the sample taken at the start of vertex processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+// The index the Metal device object should use to store GPU counters when starting the render pass’s vertex stage.
 //
 // WithStartOfVertexSampleIndex sets the startOfVertexSampleIndex property and returns the receiver for chaining.
 func (x *RenderPassSampleBufferAttachmentDescriptor) WithStartOfVertexSampleIndex(startOfVertexSampleIndex uint) *RenderPassSampleBufferAttachmentDescriptor {
@@ -53,7 +55,7 @@ func (x *RenderPassSampleBufferAttachmentDescriptor) WithStartOfVertexSampleInde
 	return x
 }
 
-// @property endOfVertexSampleIndex @abstract The sample index to use to store the sample taken at the end of vertex processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+// The index the Metal device object should use to store GPU counters when ending the render pass’s vertex stage.
 //
 // WithEndOfVertexSampleIndex sets the endOfVertexSampleIndex property and returns the receiver for chaining.
 func (x *RenderPassSampleBufferAttachmentDescriptor) WithEndOfVertexSampleIndex(endOfVertexSampleIndex uint) *RenderPassSampleBufferAttachmentDescriptor {
@@ -61,7 +63,7 @@ func (x *RenderPassSampleBufferAttachmentDescriptor) WithEndOfVertexSampleIndex(
 	return x
 }
 
-// @property startOfFragmentSampleIndex @abstract The sample index to use to store the sample taken at the start of fragment processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+// The index the Metal device object should use to store GPU counters when starting the render pass’s fragment stage.
 //
 // WithStartOfFragmentSampleIndex sets the startOfFragmentSampleIndex property and returns the receiver for chaining.
 func (x *RenderPassSampleBufferAttachmentDescriptor) WithStartOfFragmentSampleIndex(startOfFragmentSampleIndex uint) *RenderPassSampleBufferAttachmentDescriptor {
@@ -69,7 +71,7 @@ func (x *RenderPassSampleBufferAttachmentDescriptor) WithStartOfFragmentSampleIn
 	return x
 }
 
-// @property endOfFragmentSampleIndex @abstract The sample index to use to store the sample taken at the end of fragment processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+// The index the Metal device object should use to store GPU counters when ending the render pass’s fragment stage.
 //
 // WithEndOfFragmentSampleIndex sets the endOfFragmentSampleIndex property and returns the receiver for chaining.
 func (x *RenderPassSampleBufferAttachmentDescriptor) WithEndOfFragmentSampleIndex(endOfFragmentSampleIndex uint) *RenderPassSampleBufferAttachmentDescriptor {

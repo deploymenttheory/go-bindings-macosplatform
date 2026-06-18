@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The AVPlaybackCoordinationMedium passes states and messages between its connected playback coordinators.
+//
 // PlaybackCoordinationMedium wraps [raw.AVPlaybackCoordinationMedium] with a fluent Go API.
 type PlaybackCoordinationMedium struct {
 	inner *raw.AVPlaybackCoordinationMedium

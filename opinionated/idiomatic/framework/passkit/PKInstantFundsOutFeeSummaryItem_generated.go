@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A summary item that represents a fee for an instant funds out transfer.
+//
 // InstantFundsOutFeeSummaryItem wraps [raw.PKInstantFundsOutFeeSummaryItem] with a fluent Go API.
 type InstantFundsOutFeeSummaryItem struct {
 	inner *raw.PKInstantFundsOutFeeSummaryItem
@@ -36,18 +38,24 @@ func NewInstantFundsOutFeeSummaryItem() *InstantFundsOutFeeSummaryItem {
 	return &InstantFundsOutFeeSummaryItem{inner: raw.PKInstantFundsOutFeeSummaryItemFromID(_id)}
 }
 
+// A short, localized description of the item.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *InstantFundsOutFeeSummaryItem) WithLabel(label string) *InstantFundsOutFeeSummaryItem {
 	x.inner.PKPaymentSummaryItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// The summary item’s amount.
+//
 // WithAmount sets the amount property and returns the receiver for chaining.
 func (x *InstantFundsOutFeeSummaryItem) WithAmount(amount *foundation.NSDecimalNumber) *InstantFundsOutFeeSummaryItem {
 	x.inner.PKPaymentSummaryItem.SetAmount(amount)
 	return x
 }
 
+// The summary item’s type that indicates whether the amount is final.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *InstantFundsOutFeeSummaryItem) WithType(type_ PKPaymentSummaryItemType) *InstantFundsOutFeeSummaryItem {
 	x.inner.PKPaymentSummaryItem.SetType(raw.PKPaymentSummaryItemType(type_))

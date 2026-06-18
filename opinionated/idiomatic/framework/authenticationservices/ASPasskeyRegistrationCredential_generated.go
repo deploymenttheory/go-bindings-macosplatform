@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A passkey registration credential.
+//
 // PasskeyRegistrationCredential wraps [raw.ASPasskeyRegistrationCredential] with a fluent Go API.
 type PasskeyRegistrationCredential struct {
 	inner *raw.ASPasskeyRegistrationCredential
@@ -31,7 +33,7 @@ func PasskeyRegistrationCredentialFromID(id objc.ID) *PasskeyRegistrationCredent
 	return &PasskeyRegistrationCredential{inner: raw.ASPasskeyRegistrationCredentialFromID(id)}
 }
 
-// @abstract Initializes an ASPasskeyRegistrationCredential object. @param relyingParty The relying party identifier associated with this passkey. @param clientDataHash The JSON encoded client data for this registration result. @param credentialID The unique identifier for this passkey. @param attestationObject The attestation object for this passkey registration result.
+// Initializes a passkey registration credential object.
 //
 // NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject creates a new [PasskeyRegistrationCredential].
 func NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject(relyingParty string, clientDataHash *foundation.NSData, credentialID *foundation.NSData, attestationObject *foundation.NSData) *PasskeyRegistrationCredential {
@@ -40,7 +42,7 @@ func NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDA
 	return &PasskeyRegistrationCredential{inner: raw.ASPasskeyRegistrationCredentialFromID(_id)}
 }
 
-// @abstract Initializes an ASPasskeyRegistrationCredential object. @param relyingParty The relying party identifier associated with this passkey. @param clientDataHash The JSON encoded client data for this registration result. @param credentialID The unique identifier for this passkey. @param attestationObject The attestation object for this passkey registration result. @param extensionOutput The output of WebAuthn extensions processed by the credential provider.
+// Initializes a passkey registration credential object.
 //
 // NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObjectExtensionOutput creates a new [PasskeyRegistrationCredential].
 func NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObjectExtensionOutput(relyingParty string, clientDataHash *foundation.NSData, credentialID *foundation.NSData, attestationObject *foundation.NSData, extensionOutput *raw.ASPasskeyRegistrationCredentialExtensionOutput) *PasskeyRegistrationCredential {
@@ -49,7 +51,7 @@ func NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDA
 	return &PasskeyRegistrationCredential{inner: raw.ASPasskeyRegistrationCredentialFromID(_id)}
 }
 
-// @abstract The outputs for WebAuthn extensions processed by the credential provider.
+// An output from WebAuthn extensions.
 //
 // WithExtensionOutput sets the extensionOutput property and returns the receiver for chaining.
 func (x *PasskeyRegistrationCredential) WithExtensionOutput(extensionOutput *PasskeyRegistrationCredentialExtensionOutput) *PasskeyRegistrationCredential {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A texture handle that can be shared across process address space boundaries.
+//
 // SharedTextureHandle wraps [raw.MTLSharedTextureHandle] with a fluent Go API.
 type SharedTextureHandle struct {
 	inner *raw.MTLSharedTextureHandle

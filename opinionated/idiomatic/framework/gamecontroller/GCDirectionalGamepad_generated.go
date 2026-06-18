@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A profile that supports only the directional pad, without motion or rotation.
+//
 // DirectionalGamepad wraps [raw.GCDirectionalGamepad] with a fluent Go API.
 type DirectionalGamepad struct {
 	inner *raw.GCDirectionalGamepad
@@ -35,13 +37,15 @@ func NewDirectionalGamepad() *DirectionalGamepad {
 	return &DirectionalGamepad{inner: raw.GCDirectionalGamepadFromID(_id)}
 }
 
+// The block that this profile calls when an element’s value changes.
+//
 // WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
 func (x *DirectionalGamepad) WithValueChangedHandler(valueChangedHandler func(*raw.GCMicroGamepad, *raw.GCControllerElement)) *DirectionalGamepad {
 	x.inner.GCMicroGamepad.SetValueChangedHandler(valueChangedHandler)
 	return x
 }
 
-// The Micro profile can use the raw position values of the touchpad on the remote as D-pad values, or it can create a virtual dpad centered around the first contact point with the surface. If NO; a smaller sliding window is created around the initial touch point and subsequent movement is relative to that center. Movement outside the window will slide the window with it to re-center it. This is great for surfaces where there is no clear sense of a middle and drift over time is an issue. If YES; the absolute values are used and any drift will have to managed manually either through user traning or by a developer using the dpad. The default value for this property is NO, meaning a sliding window is used for the dpad.
+// A Boolean value that indicates whether the directional pad reports absolute or relative values.
 //
 // WithReportsAbsoluteDpadValues sets the reportsAbsoluteDpadValues property and returns the receiver for chaining.
 func (x *DirectionalGamepad) WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *DirectionalGamepad {
@@ -49,7 +53,7 @@ func (x *DirectionalGamepad) WithReportsAbsoluteDpadValues(reportsAbsoluteDpadVa
 	return x
 }
 
-// Allows the Micro profile to monitor the orientation of the controller, if the controller is positioned in landscape orientation, D-pad input values will be transposed 90 degrees to match the new orientation. The default value for this property is NO.
+// A Boolean value that indicates whether the profile reports the directional pad values relative to its current orientation.
 //
 // WithAllowsRotation sets the allowsRotation property and returns the receiver for chaining.
 func (x *DirectionalGamepad) WithAllowsRotation(allowsRotation bool) *DirectionalGamepad {
@@ -57,7 +61,7 @@ func (x *DirectionalGamepad) WithAllowsRotation(allowsRotation bool) *Directiona
 	return x
 }
 
-// Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called for each element that changed. @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons. @param element the element that has been modified.
+// The block that the profile calls when an element’s value changes.
 //
 // WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
 func (x *DirectionalGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *DirectionalGamepad {

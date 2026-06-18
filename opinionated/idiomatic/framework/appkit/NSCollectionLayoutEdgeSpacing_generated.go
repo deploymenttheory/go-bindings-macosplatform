@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines the space around the edges of items in a collection view.
+//
 // CollectionLayoutEdgeSpacing wraps [raw.NSCollectionLayoutEdgeSpacing] with a fluent Go API.
 type CollectionLayoutEdgeSpacing struct {
 	inner *raw.NSCollectionLayoutEdgeSpacing

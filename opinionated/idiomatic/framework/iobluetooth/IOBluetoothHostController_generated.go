@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// This class is a representation of a Bluetooth Host Controller Interface that is present on the local computer (either plugged in externally or available internally).
+//
 // IOBluetoothHostController wraps [raw.IOBluetoothHostController] with a fluent Go API.
 type IOBluetoothHostController struct {
 	inner *raw.IOBluetoothHostController
@@ -43,16 +45,22 @@ func (x *IOBluetoothHostController) WithDelegate(delegate objc.ID) *IOBluetoothH
 	return x
 }
 
+// Gets the current class of device value.
+//
 // ClassOfDevice calls the underlying ClassOfDevice.
 func (x *IOBluetoothHostController) ClassOfDevice() uint32 {
 	return x.inner.ClassOfDevice()
 }
 
+// Sets the current class of device value, for the specified amount of time. Note that the time interval must be set and valid. The range of acceptable values is 30-120 seconds. Anything above or below will be rounded up, or down, as appropriate.
+//
 // SetClassOfDeviceForTimeInterval calls the underlying SetClassOfDeviceForTimeInterval.
 func (x *IOBluetoothHostController) SetClassOfDeviceForTimeInterval(classOfDevice uint32, seconds float64) int {
 	return x.inner.SetClassOfDeviceForTimeInterval(classOfDevice, seconds)
 }
 
+// Convience routine to get the HCI controller’s Bluetooth address as an NSString object.
+//
 // AddressAsString calls the underlying AddressAsString.
 func (x *IOBluetoothHostController) AddressAsString() string {
 	_r := x.inner.AddressAsString()
@@ -62,6 +70,8 @@ func (x *IOBluetoothHostController) AddressAsString() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Gets the “friendly” name of HCI controller.
+//
 // NameAsString calls the underlying NameAsString.
 func (x *IOBluetoothHostController) NameAsString() string {
 	_r := x.inner.NameAsString()

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a binary shader archive that you want to create.
+//
 // BinaryArchiveDescriptor wraps [raw.MTLBinaryArchiveDescriptor] with a fluent Go API.
 type BinaryArchiveDescriptor struct {
 	inner *raw.MTLBinaryArchiveDescriptor
@@ -36,7 +38,7 @@ func NewBinaryArchiveDescriptor() *BinaryArchiveDescriptor {
 	return &BinaryArchiveDescriptor{inner: raw.MTLBinaryArchiveDescriptorFromID(_id)}
 }
 
-// @property url @abstract The file URL from which to open a MTLBinaryArchive, or nil to create an empty MTLBinaryArchive.
+// A URL to a Metal binary archive file.
 //
 // WithUrl sets the url property and returns the receiver for chaining.
 func (x *BinaryArchiveDescriptor) WithUrl(url string) *BinaryArchiveDescriptor {

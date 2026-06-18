@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration template you use to create a new input/output command queue.
+//
 // IOCommandQueueDescriptor wraps [raw.MTLIOCommandQueueDescriptor] with a fluent Go API.
 type IOCommandQueueDescriptor struct {
 	inner *raw.MTLIOCommandQueueDescriptor
@@ -35,7 +37,7 @@ func NewIOCommandQueueDescriptor() *IOCommandQueueDescriptor {
 	return &IOCommandQueueDescriptor{inner: raw.MTLIOCommandQueueDescriptorFromID(_id)}
 }
 
-// @property maxCommandBufferCount @abstract The maximum number of commandBuffers that can be in flight at a given time for the queue.
+// Sets the largest number of outstanding input/output command buffers a queue can have at any point in time.
 //
 // WithMaxCommandBufferCount sets the maxCommandBufferCount property and returns the receiver for chaining.
 func (x *IOCommandQueueDescriptor) WithMaxCommandBufferCount(maxCommandBufferCount uint) *IOCommandQueueDescriptor {
@@ -43,7 +45,7 @@ func (x *IOCommandQueueDescriptor) WithMaxCommandBufferCount(maxCommandBufferCou
 	return x
 }
 
-// @property priority @abstract The priority of the commands executed by this queue.
+// Configures the priority for a new input/output command queue.
 //
 // WithPriority sets the priority property and returns the receiver for chaining.
 func (x *IOCommandQueueDescriptor) WithPriority(priority MTLIOPriority) *IOCommandQueueDescriptor {
@@ -51,7 +53,7 @@ func (x *IOCommandQueueDescriptor) WithPriority(priority MTLIOPriority) *IOComma
 	return x
 }
 
-// @property type @abstract The type (serial or concurrent) of the queue.
+// Configures the queue type for a new input/output command queue.
 //
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *IOCommandQueueDescriptor) WithType(type_ MTLIOCommandQueueType) *IOCommandQueueDescriptor {
@@ -59,7 +61,7 @@ func (x *IOCommandQueueDescriptor) WithType(type_ MTLIOCommandQueueType) *IOComm
 	return x
 }
 
-// @property maxCommandsInFlight @abstract The maximum number of IO commands that can be in flight at a given time for the queue. @discussion A zero value defaults to the system dependent maximum value, a smaller number can be provided to bound the utilization of the storage device.
+// Sets the largest number of individual commands that an input/output command queue can run at a time.
 //
 // WithMaxCommandsInFlight sets the maxCommandsInFlight property and returns the receiver for chaining.
 func (x *IOCommandQueueDescriptor) WithMaxCommandsInFlight(maxCommandsInFlight uint) *IOCommandQueueDescriptor {
@@ -67,7 +69,7 @@ func (x *IOCommandQueueDescriptor) WithMaxCommandsInFlight(maxCommandsInFlight u
 	return x
 }
 
-// @property scratchBufferAllocator @abstract An optional property that allows setting a custom allocator for scratch buffers by the queue. @discussion An application can manage scratch buffers manually by implemeting a class  conforming to the MTLIOScratchBufferAllocator protocol and creating an instance that is passed in here.
+// An optional memory allocator that you implement to manage the scratch memory that an input/output command queue requests.
 //
 // WithScratchBufferAllocator sets the scratchBufferAllocator property and returns the receiver for chaining.
 func (x *IOCommandQueueDescriptor) WithScratchBufferAllocator(scratchBufferAllocator raw.MTLIOScratchBufferAllocator) *IOCommandQueueDescriptor {

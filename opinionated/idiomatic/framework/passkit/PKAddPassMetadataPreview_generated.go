@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A preview object that contains information representing the pass you add to Wallet.
+//
 // AddPassMetadataPreview wraps [raw.PKAddPassMetadataPreview] with a fluent Go API.
 type AddPassMetadataPreview struct {
 	inner *raw.PKAddPassMetadataPreview
@@ -32,7 +34,7 @@ func AddPassMetadataPreviewFromID(id objc.ID) *AddPassMetadataPreview {
 	return &AddPassMetadataPreview{inner: raw.PKAddPassMetadataPreviewFromID(id)}
 }
 
-// Initializer preview object to represent the pass being added to Wallet.which requires a CGImage of the pass's card art and a localized description. - Properties: - passThumbnail: CGImage representing the card artwork of the pass to be presented during provisioning. - localizedDescription: Localized description of the pass.
+// Provides a preview of an image object that represents the pass you add to Wallet.
 //
 // NewAddPassMetadataPreviewWithPassThumbnailLocalizedDescription creates a new [AddPassMetadataPreview].
 func NewAddPassMetadataPreviewWithPassThumbnailLocalizedDescription(passThumbnail unsafe.Pointer, description string) *AddPassMetadataPreview {

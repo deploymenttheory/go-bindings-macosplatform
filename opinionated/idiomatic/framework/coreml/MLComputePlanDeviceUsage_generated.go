@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The anticipated compute devices to use for executing a layer or operation.
+//
 // ComputePlanDeviceUsage wraps [raw.MLComputePlanDeviceUsage] with a fluent Go API.
 type ComputePlanDeviceUsage struct {
 	inner *raw.MLComputePlanDeviceUsage

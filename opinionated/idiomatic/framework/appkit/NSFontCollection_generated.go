@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A font collection, which is a group of font descriptors taken together as a single object.
+//
 // FontCollection wraps [raw.NSFontCollection] with a fluent Go API.
 type FontCollection struct {
 	inner *raw.NSFontCollection
@@ -37,16 +39,22 @@ func NewFontCollection() *FontCollection {
 	return &FontCollection{inner: raw.NSFontCollectionFromID(_id)}
 }
 
+// Returns an array of font descriptors matching the logical descriptors with the given options.
+//
 // MatchingDescriptorsWithOptions calls the underlying MatchingDescriptorsWithOptions.
 func (x *FontCollection) MatchingDescriptorsWithOptions(options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) *foundation.NSArray[*raw.NSFontDescriptor] {
 	return x.inner.MatchingDescriptorsWithOptions(options)
 }
 
+// Returns an array of font descriptors matching the logical descriptors for the given font family.
+//
 // MatchingDescriptorsForFamily calls the underlying MatchingDescriptorsForFamily.
 func (x *FontCollection) MatchingDescriptorsForFamily(family string) *foundation.NSArray[*raw.NSFontDescriptor] {
 	return x.inner.MatchingDescriptorsForFamily(foundation.NSStringStringWithUTF8String(family))
 }
 
+// Returns an array of font descriptors matching the logical descriptors for the given font family and options.
+//
 // MatchingDescriptorsForFamilyOptions calls the underlying MatchingDescriptorsForFamilyOptions.
 func (x *FontCollection) MatchingDescriptorsForFamilyOptions(family string, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) *foundation.NSArray[*raw.NSFontDescriptor] {
 	return x.inner.MatchingDescriptorsForFamilyOptions(foundation.NSStringStringWithUTF8String(family), options)

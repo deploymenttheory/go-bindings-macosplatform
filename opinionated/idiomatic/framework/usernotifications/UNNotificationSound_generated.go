@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The sound played upon delivery of a notification.
+//
 // NotificationSound wraps [raw.UNNotificationSound] with a fluent Go API.
 type NotificationSound struct {
 	inner *raw.UNNotificationSound

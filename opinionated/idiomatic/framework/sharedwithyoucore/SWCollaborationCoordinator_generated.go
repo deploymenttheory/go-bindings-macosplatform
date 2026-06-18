@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains the shared collaboration coordinator.
+//
 // CollaborationCoordinator wraps [raw.SWCollaborationCoordinator] with a fluent Go API.
 type CollaborationCoordinator struct {
 	inner *raw.SWCollaborationCoordinator
@@ -35,6 +37,8 @@ func NewCollaborationCoordinator() *CollaborationCoordinator {
 	return &CollaborationCoordinator{inner: raw.SWCollaborationCoordinatorFromID(_id)}
 }
 
+// The collaboration action handler.
+//
 // WithActionHandler sets the actionHandler property and returns the receiver for chaining.
 func (x *CollaborationCoordinator) WithActionHandler(actionHandler raw.SWCollaborationActionHandler) *CollaborationCoordinator {
 	x.inner.SetActionHandler(actionHandler)

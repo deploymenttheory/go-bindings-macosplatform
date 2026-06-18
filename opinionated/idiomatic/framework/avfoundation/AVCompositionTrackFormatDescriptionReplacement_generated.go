@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a format description and its replacement.
+//
 // CompositionTrackFormatDescriptionReplacement wraps [raw.AVCompositionTrackFormatDescriptionReplacement] with a fluent Go API.
 type CompositionTrackFormatDescriptionReplacement struct {
 	inner *raw.AVCompositionTrackFormatDescriptionReplacement

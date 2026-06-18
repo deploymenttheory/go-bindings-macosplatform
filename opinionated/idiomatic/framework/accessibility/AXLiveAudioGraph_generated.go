@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents an audio graph for a live-updating, continuous data series for VoiceOver.
+//
 // LiveAudioGraph wraps [raw.AXLiveAudioGraph] with a fluent Go API.
 type LiveAudioGraph struct {
 	inner *raw.AXLiveAudioGraph

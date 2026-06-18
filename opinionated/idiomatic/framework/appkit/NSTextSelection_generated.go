@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents a single logical selection context that corresponds to an insertion point.
+//
 // TextSelection wraps [raw.NSTextSelection] with a fluent Go API.
 type TextSelection struct {
 	inner *raw.NSTextSelection
@@ -31,6 +33,8 @@ func TextSelectionFromID(id objc.ID) *TextSelection {
 	return &TextSelection{inner: raw.NSTextSelectionFromID(id)}
 }
 
+// Creates a new text selection with the ranges, selection affinity, and granularity you provide.
+//
 // NewTextSelectionWithRangesAffinityGranularity creates a new [TextSelection].
 func NewTextSelectionWithRangesAffinityGranularity(textRanges *foundation.NSArray[*raw.NSTextRange], affinity NSTextSelectionAffinity, granularity NSTextSelectionGranularity) *TextSelection {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextSelection")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewTextSelectionWithRangesAffinityGranularity(textRanges *foundation.NSArra
 	return &TextSelection{inner: raw.NSTextSelectionFromID(_id)}
 }
 
+// Creates a test selection from data in an unarchiver.
+//
 // NewTextSelectionWithCoder creates a new [TextSelection].
 func NewTextSelectionWithCoder(coder *foundation.NSCoder) *TextSelection {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextSelection")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewTextSelectionWithCoder(coder *foundation.NSCoder) *TextSelection {
 	return &TextSelection{inner: raw.NSTextSelectionFromID(_id)}
 }
 
+// Creates a new text selection with the range, selection affinity, and granularity you provide.
+//
 // NewTextSelectionWithRangeAffinityGranularity creates a new [TextSelection].
 func NewTextSelectionWithRangeAffinityGranularity(range_ *raw.NSTextRange, affinity NSTextSelectionAffinity, granularity NSTextSelectionGranularity) *TextSelection {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextSelection")), objc.RegisterName("alloc"))
@@ -52,6 +60,8 @@ func NewTextSelectionWithRangeAffinityGranularity(range_ *raw.NSTextRange, affin
 	return &TextSelection{inner: raw.NSTextSelectionFromID(_id)}
 }
 
+// Creates a new text selection with the location and selection affinity you provide.
+//
 // NewTextSelectionWithLocationAffinity creates a new [TextSelection].
 func NewTextSelectionWithLocationAffinity(location raw.NSTextLocation, affinity NSTextSelectionAffinity) *TextSelection {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextSelection")), objc.RegisterName("alloc"))
@@ -59,30 +69,40 @@ func NewTextSelectionWithLocationAffinity(location raw.NSTextLocation, affinity 
 	return &TextSelection{inner: raw.NSTextSelectionFromID(_id)}
 }
 
+// Represents the anchor position offset from the beginning of a line fragment in the visual order for the initial tap or click location.
+//
 // WithAnchorPositionOffset sets the anchorPositionOffset property and returns the receiver for chaining.
 func (x *TextSelection) WithAnchorPositionOffset(anchorPositionOffset float64) *TextSelection {
 	x.inner.SetAnchorPositionOffset(anchorPositionOffset)
 	return x
 }
 
+// A Boolean value that indicates whether the framework interprets the selection as logical or visual.
+//
 // WithLogical sets the logical property and returns the receiver for chaining.
 func (x *TextSelection) WithLogical(logical bool) *TextSelection {
 	x.inner.SetLogical(logical)
 	return x
 }
 
+// Specifies the secondary character location when user taps or clicks at a directional boundary.
+//
 // WithSecondarySelectionLocation sets the secondarySelectionLocation property and returns the receiver for chaining.
 func (x *TextSelection) WithSecondarySelectionLocation(secondarySelectionLocation raw.NSTextLocation) *TextSelection {
 	x.inner.SetSecondarySelectionLocation(secondarySelectionLocation)
 	return x
 }
 
+// The template attributes the framework uses for characters that replace the contents of this selection.
+//
 // WithTypingAttributes sets the typingAttributes property and returns the receiver for chaining.
 func (x *TextSelection) WithTypingAttributes(typingAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextSelection {
 	x.inner.SetTypingAttributes(typingAttributes)
 	return x
 }
 
+// Creates a subselection of the current text selection with the ranges you specify.
+//
 // TextSelectionWithTextRanges calls the underlying TextSelectionWithTextRanges.
 func (x *TextSelection) TextSelectionWithTextRanges(textRanges *foundation.NSArray[*raw.NSTextRange]) *TextSelection {
 	_r := x.inner.TextSelectionWithTextRanges(textRanges)

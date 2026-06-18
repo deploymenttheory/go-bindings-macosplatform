@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A command item in an app menu.
+//
 // MenuItem wraps [raw.NSMenuItem] with a fluent Go API.
 type MenuItem struct {
 	inner *raw.NSMenuItem
@@ -31,6 +33,8 @@ func MenuItemFromID(id objc.ID) *MenuItem {
 	return &MenuItem{inner: raw.NSMenuItemFromID(id)}
 }
 
+// Returns an initialized instance of NSMenuItem.
+//
 // NewMenuItemWithTitleActionKeyEquivalent creates a new [MenuItem].
 func NewMenuItemWithTitleActionKeyEquivalent(string_ string, selector objc.SEL, charCode string) *MenuItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMenuItem")), objc.RegisterName("alloc"))
@@ -45,7 +49,7 @@ func NewMenuItemWithCoder(coder *foundation.NSCoder) *MenuItem {
 	return &MenuItem{inner: raw.NSMenuItemFromID(_id)}
 }
 
-// @note Never call the setter method directly: it is there only for subclassers.
+// The menu item’s menu.
 //
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *MenuItem) WithMenu(menu *Menu) *MenuItem {
@@ -53,18 +57,24 @@ func (x *MenuItem) WithMenu(menu *Menu) *MenuItem {
 	return x
 }
 
+// The submenu of the menu item.
+//
 // WithSubmenu sets the submenu property and returns the receiver for chaining.
 func (x *MenuItem) WithSubmenu(submenu *Menu) *MenuItem {
 	x.inner.SetSubmenu(submenu.Unwrap())
 	return x
 }
 
+// The menu item’s title.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *MenuItem) WithTitle(title string) *MenuItem {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// A custom string for a menu item.
+//
 // WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
 func (x *MenuItem) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *MenuItem {
 	x.inner.SetAttributedTitle(attributedTitle)
@@ -79,12 +89,16 @@ func (x *MenuItem) WithSubtitle(subtitle string) *MenuItem {
 	return x
 }
 
+// The menu item’s unmodified key equivalent.
+//
 // WithKeyEquivalent sets the keyEquivalent property and returns the receiver for chaining.
 func (x *MenuItem) WithKeyEquivalent(keyEquivalent string) *MenuItem {
 	x.inner.SetKeyEquivalent(foundation.NSStringStringWithUTF8String(keyEquivalent))
 	return x
 }
 
+// The menu item’s keyboard equivalent modifiers.
+//
 // WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
 func (x *MenuItem) WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *MenuItem {
 	x.inner.SetKeyEquivalentModifierMask(raw.NSEventModifierFlags(keyEquivalentModifierMask))
@@ -97,109 +111,143 @@ func (x *MenuItem) WithAllowsKeyEquivalentWhenHidden(allowsKeyEquivalentWhenHidd
 	return x
 }
 
+// A Boolean value that determines whether the system automatically remaps the keyboard shortcut to support localized keyboards.
+//
 // WithAllowsAutomaticKeyEquivalentLocalization sets the allowsAutomaticKeyEquivalentLocalization property and returns the receiver for chaining.
 func (x *MenuItem) WithAllowsAutomaticKeyEquivalentLocalization(allowsAutomaticKeyEquivalentLocalization bool) *MenuItem {
 	x.inner.SetAllowsAutomaticKeyEquivalentLocalization(allowsAutomaticKeyEquivalentLocalization)
 	return x
 }
 
+// A Boolean value that determines whether the system automatically swaps input strings for some keyboard shortcuts when the interface direction changes.
+//
 // WithAllowsAutomaticKeyEquivalentMirroring sets the allowsAutomaticKeyEquivalentMirroring property and returns the receiver for chaining.
 func (x *MenuItem) WithAllowsAutomaticKeyEquivalentMirroring(allowsAutomaticKeyEquivalentMirroring bool) *MenuItem {
 	x.inner.SetAllowsAutomaticKeyEquivalentMirroring(allowsAutomaticKeyEquivalentMirroring)
 	return x
 }
 
+// The menu item’s image.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *MenuItem) WithImage(image *Image) *MenuItem {
 	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
+// The state of the menu item.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *MenuItem) WithState(state int) *MenuItem {
 	x.inner.SetState(state)
 	return x
 }
 
+// The image of the menu item that indicates an “on” state.
+//
 // WithOnStateImage sets the onStateImage property and returns the receiver for chaining.
 func (x *MenuItem) WithOnStateImage(onStateImage *Image) *MenuItem {
 	x.inner.SetOnStateImage(onStateImage.Unwrap())
 	return x
 }
 
+// The image of the menu item that indicates an “off” state.
+//
 // WithOffStateImage sets the offStateImage property and returns the receiver for chaining.
 func (x *MenuItem) WithOffStateImage(offStateImage *Image) *MenuItem {
 	x.inner.SetOffStateImage(offStateImage.Unwrap())
 	return x
 }
 
+// The image of the menu item that indicates a “mixed” state, that is, a state neither “on” nor “off.”
+//
 // WithMixedStateImage sets the mixedStateImage property and returns the receiver for chaining.
 func (x *MenuItem) WithMixedStateImage(mixedStateImage *Image) *MenuItem {
 	x.inner.SetMixedStateImage(mixedStateImage.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the menu item is enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *MenuItem) WithEnabled(enabled bool) *MenuItem {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value that marks the menu item as an alternate to the previous menu item.
+//
 // WithAlternate sets the alternate property and returns the receiver for chaining.
 func (x *MenuItem) WithAlternate(alternate bool) *MenuItem {
 	x.inner.SetAlternate(alternate)
 	return x
 }
 
+// The menu item indentation level for the menu item.
+//
 // WithIndentationLevel sets the indentationLevel property and returns the receiver for chaining.
 func (x *MenuItem) WithIndentationLevel(indentationLevel int) *MenuItem {
 	x.inner.SetIndentationLevel(indentationLevel)
 	return x
 }
 
+// The menu item’s target.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *MenuItem) WithTarget(target objc.ID) *MenuItem {
 	x.inner.SetTarget(target)
 	return x
 }
 
+// The menu item’s action-method selector.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *MenuItem) WithAction(action objc.SEL) *MenuItem {
 	x.inner.SetAction(action)
 	return x
 }
 
+// The menu item’s tag.
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *MenuItem) WithTag(tag int) *MenuItem {
 	x.inner.SetTag(tag)
 	return x
 }
 
+// The object represented by the menu item.
+//
 // WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
 func (x *MenuItem) WithRepresentedObject(representedObject objc.ID) *MenuItem {
 	x.inner.SetRepresentedObject(representedObject)
 	return x
 }
 
+// The content view for the menu item.
+//
 // WithView sets the view property and returns the receiver for chaining.
 func (x *MenuItem) WithView(view ViewProvider) *MenuItem {
 	x.inner.SetView(view.asView())
 	return x
 }
 
+// A Boolean value that indicates whether the menu item is hidden.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *MenuItem) WithHidden(hidden bool) *MenuItem {
 	x.inner.SetHidden(hidden)
 	return x
 }
 
+// A help tag for the menu item.
+//
 // WithToolTip sets the toolTip property and returns the receiver for chaining.
 func (x *MenuItem) WithToolTip(toolTip string) *MenuItem {
 	x.inner.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
 	return x
 }
 
-// A badge used to provide additional quantitative information specific to the menu item, such as the number of available updates. The default value of this property is `nil`.
+// A badge used to provide additional quantitative information specific to the menu item, such as the number of available updates.
 //
 // WithBadge sets the badge property and returns the receiver for chaining.
 func (x *MenuItem) WithBadge(badge *MenuItemBadge) *MenuItem {
@@ -574,16 +622,22 @@ func (x *MenuItem) SetBadge(badge *raw.NSMenuItemBadge) {
 	x.inner.SetBadge(badge)
 }
 
+// Sets the character of the menu item title at location that is to be underlined.
+//
 // SetMnemonicLocation calls the underlying SetMnemonicLocation.
 func (x *MenuItem) SetMnemonicLocation(location uint) {
 	x.inner.SetMnemonicLocation(location)
 }
 
+// Returns the position of the underlined character in the menu item title used as a mnemonic.
+//
 // MnemonicLocation calls the underlying MnemonicLocation.
 func (x *MenuItem) MnemonicLocation() uint {
 	return x.inner.MnemonicLocation()
 }
 
+// Returns the character in the menu item title that appears underlined for use as a mnemonic.
+//
 // Mnemonic calls the underlying Mnemonic.
 func (x *MenuItem) Mnemonic() string {
 	_r := x.inner.Mnemonic()
@@ -593,6 +647,8 @@ func (x *MenuItem) Mnemonic() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Sets the title of a menu item with a character denoting an access key.
+//
 // SetTitleWithMnemonic calls the underlying SetTitleWithMnemonic.
 func (x *MenuItem) SetTitleWithMnemonic(stringWithAmpersand string) {
 	x.inner.SetTitleWithMnemonic(foundation.NSStringStringWithUTF8String(stringWithAmpersand))

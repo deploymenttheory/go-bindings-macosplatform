@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An ordered pair that defines a bounding box for an envelope.
+//
 // NumericPair wraps [raw.PHASENumericPair] with a fluent Go API.
 type NumericPair struct {
 	inner *raw.PHASENumericPair
@@ -29,7 +31,7 @@ func NumericPairFromID(id objc.ID) *NumericPair {
 	return &NumericPair{inner: raw.PHASENumericPairFromID(id)}
 }
 
-// @method initWithFirstValue:secondValue @abstract Initialize a numeric pair with a first and second value. @param first The first value in the pair. @param second The second value in the pair. @return A new pair.
+// Creates a pair of numbers with the given values.
 //
 // NewNumericPairWithFirstValueSecondValue creates a new [NumericPair].
 func NewNumericPairWithFirstValueSecondValue(first float64, second float64) *NumericPair {
@@ -38,7 +40,7 @@ func NewNumericPairWithFirstValueSecondValue(first float64, second float64) *Num
 	return &NumericPair{inner: raw.PHASENumericPairFromID(_id)}
 }
 
-// @property first @abstract The first value in the numeric pair. @discussion The default value is 0.0.
+// The first value in the pair.
 //
 // WithFirst sets the first property and returns the receiver for chaining.
 func (x *NumericPair) WithFirst(first float64) *NumericPair {
@@ -46,7 +48,7 @@ func (x *NumericPair) WithFirst(first float64) *NumericPair {
 	return x
 }
 
-// @property second @abstract The second value in the numeric pair. @discussion The default value is 0.0.
+// The second value in the pair.
 //
 // WithSecond sets the second property and returns the receiver for chaining.
 func (x *NumericPair) WithSecond(second float64) *NumericPair {

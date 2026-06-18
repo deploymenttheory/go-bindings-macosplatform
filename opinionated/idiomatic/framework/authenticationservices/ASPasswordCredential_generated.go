@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A password credential.
+//
 // PasswordCredential wraps [raw.ASPasswordCredential] with a fluent Go API.
 type PasswordCredential struct {
 	inner *raw.ASPasswordCredential
@@ -31,7 +33,7 @@ func PasswordCredentialFromID(id objc.ID) *PasswordCredential {
 	return &PasswordCredential{inner: raw.ASPasswordCredentialFromID(id)}
 }
 
-// @abstract Initializes an ASPasswordCredential object. @param user the user. @param password the password.
+// Initializes a password credential.
 //
 // NewPasswordCredentialWithUserPassword creates a new [PasswordCredential].
 func NewPasswordCredentialWithUserPassword(user string, password string) *PasswordCredential {

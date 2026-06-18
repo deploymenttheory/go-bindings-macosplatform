@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An immutable object representing an instant message address for the contact.
+//
 // InstantMessageAddress wraps [raw.CNInstantMessageAddress] with a fluent Go API.
 type InstantMessageAddress struct {
 	inner *raw.CNInstantMessageAddress
@@ -31,6 +33,8 @@ func InstantMessageAddressFromID(id objc.ID) *InstantMessageAddress {
 	return &InstantMessageAddress{inner: raw.CNInstantMessageAddressFromID(id)}
 }
 
+// Returns a CNInstantMessageAddress object initialized with the specified user name and service.
+//
 // NewInstantMessageAddressWithUsernameService creates a new [InstantMessageAddress].
 func NewInstantMessageAddressWithUsernameService(username string, service string) *InstantMessageAddress {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNInstantMessageAddress")), objc.RegisterName("alloc"))

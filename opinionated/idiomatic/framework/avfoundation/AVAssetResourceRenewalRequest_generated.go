@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that encapsulates information about a resource request from a resource loader to renew a previously issued request.
+//
 // AssetResourceRenewalRequest wraps [raw.AVAssetResourceRenewalRequest] with a fluent Go API.
 type AssetResourceRenewalRequest struct {
 	inner *raw.AVAssetResourceRenewalRequest
@@ -36,7 +38,7 @@ func NewAssetResourceRenewalRequest() *AssetResourceRenewalRequest {
 	return &AssetResourceRenewalRequest{inner: raw.AVAssetResourceRenewalRequestFromID(_id)}
 }
 
-// @property 		response @abstract		Set the value of this property to an instance of NSURLResponse indicating a response to the loading request. If no response is needed, leave the value of this property set to nil.
+// The URL response for the loading request.
 //
 // WithResponse sets the response property and returns the receiver for chaining.
 func (x *AssetResourceRenewalRequest) WithResponse(response *foundation.NSURLResponse) *AssetResourceRenewalRequest {
@@ -44,7 +46,7 @@ func (x *AssetResourceRenewalRequest) WithResponse(response *foundation.NSURLRes
 	return x
 }
 
-// @property 		redirect @abstract		Set the value of this property to an instance of NSURLRequest indicating a redirection of the loading request to another URL. If no redirection is needed, leave the value of this property set to nil. @discussion	AVAssetResourceLoader supports redirects to HTTP URLs only. Redirects to other URLs will result in a loading failure.
+// An URL request instance if the loading request was redirected.
 //
 // WithRedirect sets the redirect property and returns the receiver for chaining.
 func (x *AssetResourceRenewalRequest) WithRedirect(redirect *foundation.NSURLRequest) *AssetResourceRenewalRequest {

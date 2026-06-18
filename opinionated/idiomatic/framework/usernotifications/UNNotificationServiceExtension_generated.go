@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that modifies the content of a remote notification before it’s delivered to the user.
+//
 // NotificationServiceExtension wraps [raw.UNNotificationServiceExtension] with a fluent Go API.
 type NotificationServiceExtension struct {
 	inner *raw.UNNotificationServiceExtension
@@ -36,6 +38,8 @@ func NewNotificationServiceExtension() *NotificationServiceExtension {
 	return &NotificationServiceExtension{inner: raw.UNNotificationServiceExtensionFromID(_id)}
 }
 
+// Asks you to make any needed changes to the notification and notify the system when you’re done.
+//
 // DidReceiveNotificationRequestWithContentHandler blocks until the operation completes or ctx is cancelled.
 func (x *NotificationServiceExtension) DidReceiveNotificationRequestWithContentHandler(ctx context.Context, request *raw.UNNotificationRequest) (*NotificationContent, error) {
 	type _result struct {
@@ -59,6 +63,8 @@ func (x *NotificationServiceExtension) DidReceiveNotificationRequestWithContentH
 	}
 }
 
+// Tells you that the system is terminating your extension.
+//
 // ServiceExtensionTimeWillExpire calls the underlying ServiceExtensionTimeWillExpire.
 func (x *NotificationServiceExtension) ServiceExtensionTimeWillExpire() {
 	x.inner.ServiceExtensionTimeWillExpire()

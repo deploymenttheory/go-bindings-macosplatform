@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An entry containing a signpost.
+//
 // LogEntrySignpost wraps [raw.OSLogEntrySignpost] with a fluent Go API.
 type LogEntrySignpost struct {
 	inner *raw.OSLogEntrySignpost

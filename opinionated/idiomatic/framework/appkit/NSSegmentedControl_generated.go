@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// Display one or more buttons in a single horizontal group.
+//
 // SegmentedControl wraps [raw.NSSegmentedControl] with a fluent Go API.
 type SegmentedControl struct {
 	inner *raw.NSSegmentedControl
@@ -41,36 +43,48 @@ func NewSegmentedControl() *SegmentedControl {
 	return &SegmentedControl{inner: raw.NSSegmentedControlFromID(_id)}
 }
 
+// The number of segments in the control.
+//
 // WithSegmentCount sets the segmentCount property and returns the receiver for chaining.
 func (x *SegmentedControl) WithSegmentCount(segmentCount int) *SegmentedControl {
 	x.inner.SetSegmentCount(segmentCount)
 	return x
 }
 
+// The index of the selected segment of the control, or -1 if no segment is selected.
+//
 // WithSelectedSegment sets the selectedSegment property and returns the receiver for chaining.
 func (x *SegmentedControl) WithSelectedSegment(selectedSegment int) *SegmentedControl {
 	x.inner.SetSelectedSegment(selectedSegment)
 	return x
 }
 
+// The visual style used to display the control.
+//
 // WithSegmentStyle sets the segmentStyle property and returns the receiver for chaining.
 func (x *SegmentedControl) WithSegmentStyle(segmentStyle NSSegmentStyle) *SegmentedControl {
 	x.inner.SetSegmentStyle(raw.NSSegmentStyle(segmentStyle))
 	return x
 }
 
+// A Boolean value that indicates whether spring loading is enabled for the control.
+//
 // WithSpringLoaded sets the springLoaded property and returns the receiver for chaining.
 func (x *SegmentedControl) WithSpringLoaded(springLoaded bool) *SegmentedControl {
 	x.inner.SetSpringLoaded(springLoaded)
 	return x
 }
 
+// The type of tracking behavior the control exhibits.
+//
 // WithTrackingMode sets the trackingMode property and returns the receiver for chaining.
 func (x *SegmentedControl) WithTrackingMode(trackingMode NSSegmentSwitchTracking) *SegmentedControl {
 	x.inner.SetTrackingMode(raw.NSSegmentSwitchTracking(trackingMode))
 	return x
 }
 
+// The color of the selected segment’s bezel, in appearances that support it.
+//
 // WithSelectedSegmentBezelColor sets the selectedSegmentBezelColor property and returns the receiver for chaining.
 func (x *SegmentedControl) WithSelectedSegmentBezelColor(selectedSegmentBezelColor *Color) *SegmentedControl {
 	x.inner.SetSelectedSegmentBezelColor(selectedSegmentBezelColor.Unwrap())
@@ -89,138 +103,184 @@ func (x *SegmentedControl) WithBorderShape(borderShape NSControlBorderShape) *Se
 	return x
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *SegmentedControl) WithTarget(target objc.ID) *SegmentedControl {
 	x.inner.NSControl.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *SegmentedControl) WithAction(action objc.SEL) *SegmentedControl {
 	x.inner.NSControl.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *SegmentedControl) WithTag(tag int) *SegmentedControl {
 	x.inner.NSControl.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *SegmentedControl) WithIgnoresMultiClick(ignoresMultiClick bool) *SegmentedControl {
 	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *SegmentedControl) WithContinuous(continuous bool) *SegmentedControl {
 	x.inner.NSControl.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *SegmentedControl) WithEnabled(enabled bool) *SegmentedControl {
 	x.inner.NSControl.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *SegmentedControl) WithRefusesFirstResponder(refusesFirstResponder bool) *SegmentedControl {
 	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *SegmentedControl) WithHighlighted(highlighted bool) *SegmentedControl {
 	x.inner.NSControl.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *SegmentedControl) WithControlSize(controlSize NSControlSize) *SegmentedControl {
 	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *SegmentedControl) WithFormatter(formatter *foundation.NSFormatter) *SegmentedControl {
 	x.inner.NSControl.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *SegmentedControl) WithObjectValue(objectValue objc.ID) *SegmentedControl {
 	x.inner.NSControl.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *SegmentedControl) WithStringValue(stringValue string) *SegmentedControl {
 	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *SegmentedControl) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SegmentedControl {
 	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *SegmentedControl) WithIntValue(intValue int) *SegmentedControl {
 	x.inner.NSControl.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *SegmentedControl) WithIntegerValue(integerValue int) *SegmentedControl {
 	x.inner.NSControl.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *SegmentedControl) WithFloatValue(floatValue float32) *SegmentedControl {
 	x.inner.NSControl.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *SegmentedControl) WithDoubleValue(doubleValue float64) *SegmentedControl {
 	x.inner.NSControl.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *SegmentedControl) WithFont(font *Font) *SegmentedControl {
 	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *SegmentedControl) WithUsesSingleLineMode(usesSingleLineMode bool) *SegmentedControl {
 	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *SegmentedControl) WithLineBreakMode(lineBreakMode NSLineBreakMode) *SegmentedControl {
 	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *SegmentedControl) WithAlignment(alignment NSTextAlignment) *SegmentedControl {
 	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *SegmentedControl) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SegmentedControl {
 	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *SegmentedControl) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *SegmentedControl {
 	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -275,6 +335,8 @@ func (x *SegmentedControl) WithAutoresizingMask(autoresizingMask NSAutoresizingM
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *SegmentedControl) WithFrame(frame corefoundation.CGRect) *SegmentedControl {
 	x.inner.NSControl.NSView.SetFrame(frame)
@@ -299,6 +361,8 @@ func (x *SegmentedControl) WithBoundsRotation(boundsRotation float64) *Segmented
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *SegmentedControl) WithBounds(bounds corefoundation.CGRect) *SegmentedControl {
 	x.inner.NSControl.NSView.SetBounds(bounds)
@@ -311,6 +375,8 @@ func (x *SegmentedControl) WithCanDrawConcurrently(canDrawConcurrently bool) *Se
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *SegmentedControl) WithNeedsDisplay(needsDisplay bool) *SegmentedControl {
 	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
@@ -497,7 +563,7 @@ func (x *SegmentedControl) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *SegmentedControl) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SegmentedControl {
@@ -553,50 +619,68 @@ func (x *SegmentedControl) WithPressureConfiguration(pressureConfiguration *Pres
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *SegmentedControl) WithNextResponder(nextResponder ResponderProvider) *SegmentedControl {
 	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *SegmentedControl) WithMenu(menu *Menu) *SegmentedControl {
 	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *SegmentedControl) WithUserActivity(userActivity *foundation.NSUserActivity) *SegmentedControl {
 	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *SegmentedControl) WithTouchBar(touchBar *TouchBar) *SegmentedControl {
 	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Selects the segment with the specified tag.
+//
 // SelectSegmentWithTag calls the underlying SelectSegmentWithTag.
 func (x *SegmentedControl) SelectSegmentWithTag(tag int) bool {
 	return x.inner.SelectSegmentWithTag(tag)
 }
 
+// Sets the width of the specified segment.
+//
 // SetWidthForSegment calls the underlying SetWidthForSegment.
 func (x *SegmentedControl) SetWidthForSegment(width float64, segment int) {
 	x.inner.SetWidthForSegment(width, segment)
 }
 
+// Returns the width of the specified segment.
+//
 // WidthForSegment calls the underlying WidthForSegment.
 func (x *SegmentedControl) WidthForSegment(segment int) float64 {
 	return x.inner.WidthForSegment(segment)
 }
 
+// Sets the image for the specified segment.
+//
 // SetImageForSegment calls the underlying SetImageForSegment.
 func (x *SegmentedControl) SetImageForSegment(image *raw.NSImage, segment int) {
 	x.inner.SetImageForSegment(image, segment)
 }
 
+// Returns the image associated with the specified segment.
+//
 // ImageForSegment calls the underlying ImageForSegment.
 func (x *SegmentedControl) ImageForSegment(segment int) *Image {
 	_r := x.inner.ImageForSegment(segment)
@@ -606,21 +690,29 @@ func (x *SegmentedControl) ImageForSegment(segment int) *Image {
 	return &Image{inner: _r}
 }
 
+// Sets the scaling mode used to display the specified segment’s image.
+//
 // SetImageScalingForSegment calls the underlying SetImageScalingForSegment.
 func (x *SegmentedControl) SetImageScalingForSegment(scaling NSImageScaling, segment int) {
 	x.inner.SetImageScalingForSegment(raw.NSImageScaling(scaling), segment)
 }
 
+// Returns the scaling mode used to display the specified segment’s image.
+//
 // ImageScalingForSegment calls the underlying ImageScalingForSegment.
 func (x *SegmentedControl) ImageScalingForSegment(segment int) NSImageScaling {
 	return NSImageScaling(x.inner.ImageScalingForSegment(segment))
 }
 
+// Sets the label for the specified segment.
+//
 // SetLabelForSegment calls the underlying SetLabelForSegment.
 func (x *SegmentedControl) SetLabelForSegment(label string, segment int) {
 	x.inner.SetLabelForSegment(foundation.NSStringStringWithUTF8String(label), segment)
 }
 
+// Returns the label of the specified segment.
+//
 // LabelForSegment calls the underlying LabelForSegment.
 func (x *SegmentedControl) LabelForSegment(segment int) string {
 	_r := x.inner.LabelForSegment(segment)
@@ -630,11 +722,15 @@ func (x *SegmentedControl) LabelForSegment(segment int) string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Sets the menu for the specified segment.
+//
 // SetMenuForSegment calls the underlying SetMenuForSegment.
 func (x *SegmentedControl) SetMenuForSegment(menu *raw.NSMenu, segment int) {
 	x.inner.SetMenuForSegment(menu, segment)
 }
 
+// Returns the menu for the specified segment.
+//
 // MenuForSegment calls the underlying MenuForSegment.
 func (x *SegmentedControl) MenuForSegment(segment int) *Menu {
 	_r := x.inner.MenuForSegment(segment)
@@ -644,21 +740,29 @@ func (x *SegmentedControl) MenuForSegment(segment int) *Menu {
 	return &Menu{inner: _r}
 }
 
+// Sets the selection state of the specified segment.
+//
 // SetSelectedForSegment calls the underlying SetSelectedForSegment.
 func (x *SegmentedControl) SetSelectedForSegment(selected bool, segment int) {
 	x.inner.SetSelectedForSegment(selected, segment)
 }
 
+// Returns a Boolean value indicating whether the specified segment is selected.
+//
 // IsSelectedForSegment calls the underlying IsSelectedForSegment.
 func (x *SegmentedControl) IsSelectedForSegment(segment int) bool {
 	return x.inner.IsSelectedForSegment(segment)
 }
 
+// Sets the enabled state of the specified segment
+//
 // SetEnabledForSegment calls the underlying SetEnabledForSegment.
 func (x *SegmentedControl) SetEnabledForSegment(enabled bool, segment int) {
 	x.inner.SetEnabledForSegment(enabled, segment)
 }
 
+// Returns a Boolean value indicating whether the specified segment is enabled.
+//
 // IsEnabledForSegment calls the underlying IsEnabledForSegment.
 func (x *SegmentedControl) IsEnabledForSegment(segment int) bool {
 	return x.inner.IsEnabledForSegment(segment)

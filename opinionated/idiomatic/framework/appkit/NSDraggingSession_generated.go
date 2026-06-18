@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that encapsulates a drag-and-drop action.
+//
 // DraggingSession wraps [raw.NSDraggingSession] with a fluent Go API.
 type DraggingSession struct {
 	inner *raw.NSDraggingSession
@@ -37,24 +39,32 @@ func NewDraggingSession() *DraggingSession {
 	return &DraggingSession{inner: raw.NSDraggingSessionFromID(_id)}
 }
 
+// Controls the dragging formation when the drag is not over the source or a valid destination.
+//
 // WithDraggingFormation sets the draggingFormation property and returns the receiver for chaining.
 func (x *DraggingSession) WithDraggingFormation(draggingFormation NSDraggingFormation) *DraggingSession {
 	x.inner.SetDraggingFormation(raw.NSDraggingFormation(draggingFormation))
 	return x
 }
 
+// Controls whether the dragging image animates back to its starting point on a cancelled or failed drag.
+//
 // WithAnimatesToStartingPositionsOnCancelOrFail sets the animatesToStartingPositionsOnCancelOrFail property and returns the receiver for chaining.
 func (x *DraggingSession) WithAnimatesToStartingPositionsOnCancelOrFail(animatesToStartingPositionsOnCancelOrFail bool) *DraggingSession {
 	x.inner.SetAnimatesToStartingPositionsOnCancelOrFail(animatesToStartingPositionsOnCancelOrFail)
 	return x
 }
 
+// The index of the dragging item under the cursor.
+//
 // WithDraggingLeaderIndex sets the draggingLeaderIndex property and returns the receiver for chaining.
 func (x *DraggingSession) WithDraggingLeaderIndex(draggingLeaderIndex int) *DraggingSession {
 	x.inner.SetDraggingLeaderIndex(draggingLeaderIndex)
 	return x
 }
 
+// Enumerates through each dragging item.
+//
 // EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing calls the underlying EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing.
 func (x *DraggingSession) EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing(enumOpts NSDraggingItemEnumerationOptions, view *raw.NSView, classArray *foundation.NSArray[objc.Class], searchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID], block func(*raw.NSDraggingItem, int, *bool)) {
 	x.inner.EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing(raw.NSDraggingItemEnumerationOptions(enumOpts), view, classArray, searchOptions, block)

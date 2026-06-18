@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that combines and arranges media from multiple assets into a single composite asset that you can play or process.
+//
 // Composition wraps [raw.AVComposition] with a fluent Go API.
 type Composition struct {
 	inner *raw.AVComposition

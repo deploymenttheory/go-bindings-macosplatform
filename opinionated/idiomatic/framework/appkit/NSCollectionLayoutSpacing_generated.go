@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines the space between or around items in a collection view.
+//
 // CollectionLayoutSpacing wraps [raw.NSCollectionLayoutSpacing] with a fluent Go API.
 type CollectionLayoutSpacing struct {
 	inner *raw.NSCollectionLayoutSpacing

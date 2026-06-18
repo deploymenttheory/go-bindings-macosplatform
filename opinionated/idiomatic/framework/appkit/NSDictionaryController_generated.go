@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A bindings-compatible controller that manages the display and editing of a dictionary of key-value pairs.
+//
 // DictionaryController wraps [raw.NSDictionaryController] with a fluent Go API.
 type DictionaryController struct {
 	inner *raw.NSDictionaryController
@@ -39,18 +41,24 @@ func NewDictionaryController() *DictionaryController {
 	return &DictionaryController{inner: raw.NSDictionaryControllerFromID(_id)}
 }
 
+// The string used as the initial key name for a newly inserted item.
+//
 // WithInitialKey sets the initialKey property and returns the receiver for chaining.
 func (x *DictionaryController) WithInitialKey(initialKey string) *DictionaryController {
 	x.inner.SetInitialKey(foundation.NSStringStringWithUTF8String(initialKey))
 	return x
 }
 
+// The string used as the initial value for a newly inserted item.
+//
 // WithInitialValue sets the initialValue property and returns the receiver for chaining.
 func (x *DictionaryController) WithInitialValue(initialValue objc.ID) *DictionaryController {
 	x.inner.SetInitialValue(initialValue)
 	return x
 }
 
+// The key names that are represented by a key-value pair, even if they are not present in the receiver’s content dictionary.
+//
 // WithIncludedKeys sets the collection, converting the Go slice to an NSArray.
 func (x *DictionaryController) WithIncludedKeys(items ...*foundation.NSString) *DictionaryController {
 	if len(items) == 0 {
@@ -69,6 +77,8 @@ func (x *DictionaryController) WithIncludedKeys(items ...*foundation.NSString) *
 	return x
 }
 
+// The key names that are never displayed in the user interface items bound to the receiver.
+//
 // WithExcludedKeys sets the collection, converting the Go slice to an NSArray.
 func (x *DictionaryController) WithExcludedKeys(items ...*foundation.NSString) *DictionaryController {
 	if len(items) == 0 {
@@ -87,24 +97,32 @@ func (x *DictionaryController) WithExcludedKeys(items ...*foundation.NSString) *
 	return x
 }
 
+// The localized key names that are displayed by the receiver in place of the key names.
+//
 // WithLocalizedKeyDictionary sets the localizedKeyDictionary property and returns the receiver for chaining.
 func (x *DictionaryController) WithLocalizedKeyDictionary(localizedKeyDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *DictionaryController {
 	x.inner.SetLocalizedKeyDictionary(localizedKeyDictionary)
 	return x
 }
 
+// the strings file used to localize key names.
+//
 // WithLocalizedKeyTable sets the localizedKeyTable property and returns the receiver for chaining.
 func (x *DictionaryController) WithLocalizedKeyTable(localizedKeyTable string) *DictionaryController {
 	x.inner.SetLocalizedKeyTable(foundation.NSStringStringWithUTF8String(localizedKeyTable))
 	return x
 }
 
+// A Boolean that indicates if the receiver automatically rearranges its content to correspond to the current sort descriptors and filter predicates
+//
 // WithAutomaticallyRearrangesObjects sets the automaticallyRearrangesObjects property and returns the receiver for chaining.
 func (x *DictionaryController) WithAutomaticallyRearrangesObjects(automaticallyRearrangesObjects bool) *DictionaryController {
 	x.inner.NSArrayController.SetAutomaticallyRearrangesObjects(automaticallyRearrangesObjects)
 	return x
 }
 
+// An array of sort descriptor objects, used by the receiver to arrange its content.
+//
 // WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *DictionaryController) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *DictionaryController {
 	if len(items) == 0 {
@@ -123,96 +141,128 @@ func (x *DictionaryController) WithSortDescriptors(items ...*foundation.NSSortDe
 	return x
 }
 
+// A predicate used by the receiver to filter the array controller contents
+//
 // WithFilterPredicate sets the filterPredicate property and returns the receiver for chaining.
 func (x *DictionaryController) WithFilterPredicate(filterPredicate *foundation.NSPredicate) *DictionaryController {
 	x.inner.NSArrayController.SetFilterPredicate(filterPredicate)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver automatically clears an existing filter predicate when new items are inserted or added to the content
+//
 // WithClearsFilterPredicateOnInsertion sets the clearsFilterPredicateOnInsertion property and returns the receiver for chaining.
 func (x *DictionaryController) WithClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion bool) *DictionaryController {
 	x.inner.NSArrayController.SetClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver requires that the content array attempt to maintain a selection
+//
 // WithAvoidsEmptySelection sets the avoidsEmptySelection property and returns the receiver for chaining.
 func (x *DictionaryController) WithAvoidsEmptySelection(avoidsEmptySelection bool) *DictionaryController {
 	x.inner.NSArrayController.SetAvoidsEmptySelection(avoidsEmptySelection)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver will attempt to preserve the current selection when the content changes
+//
 // WithPreservesSelection sets the preservesSelection property and returns the receiver for chaining.
 func (x *DictionaryController) WithPreservesSelection(preservesSelection bool) *DictionaryController {
 	x.inner.NSArrayController.SetPreservesSelection(preservesSelection)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver automatically selects inserted objects
+//
 // WithSelectsInsertedObjects sets the selectsInsertedObjects property and returns the receiver for chaining.
 func (x *DictionaryController) WithSelectsInsertedObjects(selectsInsertedObjects bool) *DictionaryController {
 	x.inner.NSArrayController.SetSelectsInsertedObjects(selectsInsertedObjects)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver always returns the multiple values marker when multiple objects are selected
+//
 // WithAlwaysUsesMultipleValuesMarker sets the alwaysUsesMultipleValuesMarker property and returns the receiver for chaining.
 func (x *DictionaryController) WithAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) *DictionaryController {
 	x.inner.NSArrayController.SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker)
 	return x
 }
 
+// An index set containing the indexes of the receiver’s currently selected objects in the content array
+//
 // WithSelectionIndexes sets the selectionIndexes property and returns the receiver for chaining.
 func (x *DictionaryController) WithSelectionIndexes(selectionIndexes *foundation.NSIndexSet) *DictionaryController {
 	x.inner.NSArrayController.SetSelectionIndexes(selectionIndexes)
 	return x
 }
 
+// The index of the first object in the receiver’s selection
+//
 // WithSelectionIndex sets the selectionIndex property and returns the receiver for chaining.
 func (x *DictionaryController) WithSelectionIndex(selectionIndex uint) *DictionaryController {
 	x.inner.NSArrayController.SetSelectionIndex(selectionIndex)
 	return x
 }
 
+// The receiver’s content object.
+//
 // WithContent sets the content property and returns the receiver for chaining.
 func (x *DictionaryController) WithContent(content objc.ID) *DictionaryController {
 	x.inner.NSArrayController.NSObjectController.SetContent(content)
 	return x
 }
 
+// A Boolean that shows whether the receiver automatically creates and inserts new content objects automatically when loading from a nib file.
+//
 // WithAutomaticallyPreparesContent sets the automaticallyPreparesContent property and returns the receiver for chaining.
 func (x *DictionaryController) WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *DictionaryController {
 	x.inner.NSArrayController.NSObjectController.SetAutomaticallyPreparesContent(automaticallyPreparesContent)
 	return x
 }
 
+// The object class to use when creating new objects.
+//
 // WithObjectClass sets the objectClass property and returns the receiver for chaining.
 func (x *DictionaryController) WithObjectClass(objectClass objc.Class) *DictionaryController {
 	x.inner.NSArrayController.NSObjectController.SetObjectClass(objectClass)
 	return x
 }
 
+// A Boolean that indicates whether the receiver allows adding and removing objects.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *DictionaryController) WithEditable(editable bool) *DictionaryController {
 	x.inner.NSArrayController.NSObjectController.SetEditable(editable)
 	return x
 }
 
+// The receiver’s managed object context.
+//
 // WithManagedObjectContext sets the managedObjectContext property and returns the receiver for chaining.
 func (x *DictionaryController) WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *DictionaryController {
 	x.inner.NSArrayController.NSObjectController.SetManagedObjectContext(managedObjectContext)
 	return x
 }
 
+// The entity name used by the receiver to create new objects.
+//
 // WithEntityName sets the entityName property and returns the receiver for chaining.
 func (x *DictionaryController) WithEntityName(entityName string) *DictionaryController {
 	x.inner.NSArrayController.NSObjectController.SetEntityName(foundation.NSStringStringWithUTF8String(entityName))
 	return x
 }
 
+// The receiver’s fetch predicate.
+//
 // WithFetchPredicate sets the fetchPredicate property and returns the receiver for chaining.
 func (x *DictionaryController) WithFetchPredicate(fetchPredicate *foundation.NSPredicate) *DictionaryController {
 	x.inner.NSArrayController.NSObjectController.SetFetchPredicate(fetchPredicate)
 	return x
 }
 
+// A Boolean that indicates whether the receiver uses lazy fetching.
+//
 // WithUsesLazyFetching sets the usesLazyFetching property and returns the receiver for chaining.
 func (x *DictionaryController) WithUsesLazyFetching(usesLazyFetching bool) *DictionaryController {
 	x.inner.NSArrayController.NSObjectController.SetUsesLazyFetching(usesLazyFetching)

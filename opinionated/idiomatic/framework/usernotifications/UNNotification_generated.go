@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The data for a local or remote notification the system delivers to your app.
+//
 // Notification wraps [raw.UNNotification] with a fluent Go API.
 type Notification struct {
 	inner *raw.UNNotification

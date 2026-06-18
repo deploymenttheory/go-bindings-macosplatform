@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Groups together properties that describe a shader function suitable for stitching.
+//
 // MTL4StitchedFunctionDescriptor wraps [raw.MTL4StitchedFunctionDescriptor] with a fluent Go API.
 type MTL4StitchedFunctionDescriptor struct {
 	inner *raw.MTL4StitchedFunctionDescriptor

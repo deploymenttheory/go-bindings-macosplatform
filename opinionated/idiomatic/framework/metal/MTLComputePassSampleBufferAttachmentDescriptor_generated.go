@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration that instructs the GPU where to store counter data from the beginning and end of a compute pass.
+//
 // ComputePassSampleBufferAttachmentDescriptor wraps [raw.MTLComputePassSampleBufferAttachmentDescriptor] with a fluent Go API.
 type ComputePassSampleBufferAttachmentDescriptor struct {
 	inner *raw.MTLComputePassSampleBufferAttachmentDescriptor
@@ -37,7 +39,7 @@ func NewComputePassSampleBufferAttachmentDescriptor() *ComputePassSampleBufferAt
 	return &ComputePassSampleBufferAttachmentDescriptor{inner: raw.MTLComputePassSampleBufferAttachmentDescriptorFromID(_id)}
 }
 
-// @property sampleBuffer @abstract The sample buffer to store samples for the compute-pass defined samples. If sampleBuffer is non-nil, the sample indices will be used to store samples into the sample buffer.  If no sample buffer is provided, no samples will be taken. If any of the sample indices are specified as MTLCounterDontSample, no sample will be taken for that action.
+// A specialized memory buffer that the GPU uses to store its counter data during a compute pass.
 //
 // WithSampleBuffer sets the sampleBuffer property and returns the receiver for chaining.
 func (x *ComputePassSampleBufferAttachmentDescriptor) WithSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer) *ComputePassSampleBufferAttachmentDescriptor {
@@ -45,7 +47,7 @@ func (x *ComputePassSampleBufferAttachmentDescriptor) WithSampleBuffer(sampleBuf
 	return x
 }
 
-// @property startOfEncoderSampleIndex @abstract The sample index to use to store the sample taken at the start of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a compute pass will fail.
+// An index within a counter sample buffer that tells the GPU where to store counter data from the start of a compute pass.
 //
 // WithStartOfEncoderSampleIndex sets the startOfEncoderSampleIndex property and returns the receiver for chaining.
 func (x *ComputePassSampleBufferAttachmentDescriptor) WithStartOfEncoderSampleIndex(startOfEncoderSampleIndex uint) *ComputePassSampleBufferAttachmentDescriptor {
@@ -53,7 +55,7 @@ func (x *ComputePassSampleBufferAttachmentDescriptor) WithStartOfEncoderSampleIn
 	return x
 }
 
-// @property endOfEncoderSampleIndex @abstract The sample index to use to store the sample taken at the end of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a compute pass will fail.
+// An index within a counter sample buffer that tells the GPU where to store counter data from the end of a compute pass.
 //
 // WithEndOfEncoderSampleIndex sets the endOfEncoderSampleIndex property and returns the receiver for chaining.
 func (x *ComputePassSampleBufferAttachmentDescriptor) WithEndOfEncoderSampleIndex(endOfEncoderSampleIndex uint) *ComputePassSampleBufferAttachmentDescriptor {

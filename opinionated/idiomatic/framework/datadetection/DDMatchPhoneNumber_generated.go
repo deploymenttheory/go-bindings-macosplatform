@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains a phone number that the data detection system matches. The DataDetection framework returns a phone number match in a `DDMatchPhoneNumber` object, which contains a phone number, and optionally a label that categorizes the phone number.
+// An object that contains a phone number that the data detection system matches.
 //
 // MatchPhoneNumber wraps [raw.DDMatchPhoneNumber] with a fluent Go API.
 type MatchPhoneNumber struct {

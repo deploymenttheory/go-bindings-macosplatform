@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that combines multiple audio signals into a single signal.
+//
 // Mixer wraps [raw.PHASEMixer] with a fluent Go API.
 type Mixer struct {
 	inner *raw.PHASEMixer

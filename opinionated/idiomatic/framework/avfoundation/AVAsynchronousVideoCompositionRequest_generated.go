@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that contains information a video compositor needs to render an output pixel buffer.
+//
 // AsynchronousVideoCompositionRequest wraps [raw.AVAsynchronousVideoCompositionRequest] with a fluent Go API.
 type AsynchronousVideoCompositionRequest struct {
 	inner *raw.AVAsynchronousVideoCompositionRequest
@@ -41,21 +43,21 @@ func NewAsynchronousVideoCompositionRequest() *AsynchronousVideoCompositionReque
 	return &AsynchronousVideoCompositionRequest{inner: raw.AVAsynchronousVideoCompositionRequestFromID(_id)}
 }
 
-// Returns the source CVPixelBufferRef for the given track ID If the track contains tagged buffers, a pixel buffer from one of the tagged buffers will be returned. - Parameter trackID: The track ID for the requested source frame
+// Returns a source pixel buffer for the track that contains the specified identifier.
 //
 // SourceFrameByTrackID calls the underlying SourceFrameByTrackID.
 func (x *AsynchronousVideoCompositionRequest) SourceFrameByTrackID(trackID int32) unsafe.Pointer {
 	return x.inner.SourceFrameByTrackID(trackID)
 }
 
-// Returns the source CMSampleBufferRef for the given track ID - Parameter trackID: The track ID for the requested source sample buffer
+// Returns a source sample buffer for the track that contains the specified identifier.
 //
 // SourceSampleBufferByTrackID calls the underlying SourceSampleBufferByTrackID.
 func (x *AsynchronousVideoCompositionRequest) SourceSampleBufferByTrackID(trackID int32) unsafe.Pointer {
 	return x.inner.SourceSampleBufferByTrackID(trackID)
 }
 
-// Returns the source AVTimedMetadataGroup * for the given track ID - Parameter trackID: The track ID for the requested source timed metadata group.
+// Returns a source timed metadata group for the track that contains the specified identifier.
 //
 // SourceTimedMetadataByTrackID calls the underlying SourceTimedMetadataByTrackID.
 func (x *AsynchronousVideoCompositionRequest) SourceTimedMetadataByTrackID(trackID int32) *TimedMetadataGroup {
@@ -66,42 +68,42 @@ func (x *AsynchronousVideoCompositionRequest) SourceTimedMetadataByTrackID(track
 	return &TimedMetadataGroup{inner: _r}
 }
 
-// The method that the custom compositor calls when composition succeeds. - Parameter composedVideoFrame: The video frame to finish with. Call finishWithComposedTaggedBufferGroup: instead if outputBufferDescription is non-nil.
+// Finishes the request to compose the frame.
 //
 // FinishWithComposedVideoFrame calls the underlying FinishWithComposedVideoFrame.
 func (x *AsynchronousVideoCompositionRequest) FinishWithComposedVideoFrame(composedVideoFrame unsafe.Pointer) {
 	x.inner.FinishWithComposedVideoFrame(composedVideoFrame)
 }
 
-// callback the custom compositor should call when composition failed. The error parameter should describe the actual error.
+// Finishes the request with an error.
 //
 // FinishWithError calls the underlying FinishWithError.
 func (x *AsynchronousVideoCompositionRequest) FinishWithError(error_ unsafe.Pointer) {
 	x.inner.FinishWithError(error_)
 }
 
-// callback the custom compositor should call for a request that has been cancelled.
+// Cancels the request to compose a video frame.
 //
 // FinishCancelledRequest calls the underlying FinishCancelledRequest.
 func (x *AsynchronousVideoCompositionRequest) FinishCancelledRequest() {
 	x.inner.FinishCancelledRequest()
 }
 
-// Returns the source CMTaggedBufferGroupRef for the given track ID. Returns nil if the video track does not contain tagged buffers. Returns nil if the track does not contain video. This function should only be called when supportsSourceTaggedBuffers is YES. - Parameter trackID: The track ID for the requested source tagged buffer group.
+// Returns the source CMTaggedBufferGroupRef for the given track ID.
 //
 // SourceTaggedBufferGroupByTrackID calls the underlying SourceTaggedBufferGroupByTrackID.
 func (x *AsynchronousVideoCompositionRequest) SourceTaggedBufferGroupByTrackID(trackID int32) unsafe.Pointer {
 	return x.inner.SourceTaggedBufferGroupByTrackID(trackID)
 }
 
-// The method that the custom compositor calls when composition succeeds. - Parameter taggedBufferGroup: The tagged buffer group containing the composed tagged buffers. The tagged buffers must be compatible with the outputBufferDescription specified in the video composition. The outputBufferDescription must not be nil when calling this function. NOTE: If “AVVideoComposition/spatialConfigurations“ is not empty, then “attach(spatialVideoConfiguration:to:)“ must be called with one of the spatial configurations. An exception will be thrown otherwise. Also, all pixel buffers must be associated with the same spatial configuration. An exception will be thrown otherwise.
+// The method that the custom compositor calls when composition succeeds.
 //
 // FinishWithComposedTaggedBufferGroup calls the underlying FinishWithComposedTaggedBufferGroup.
 func (x *AsynchronousVideoCompositionRequest) FinishWithComposedTaggedBufferGroup(taggedBufferGroup unsafe.Pointer) {
 	x.inner.FinishWithComposedTaggedBufferGroup(taggedBufferGroup)
 }
 
-// Associates the pixel buffer with the specified spatial configuration. - Parameters: - spatialVideoConfiguration: The spatial configuration to associate with the pixel buffer. - pixelBuffer: The pixel buffer to associate with the spatial configuration. NOTE: The spatial configuration must be one of the spatial configurations specified in the “AVVideoComposition/spatialConfigurations“ property. An exception will be thrown otherwise. NOTE: All pixel buffers from the custom compositor must be associated with the same spatial configuration. An exception will be thrown otherwise. A spatial configuration with all nil values indicates the video is not spatial. A nil spatial configuration also indicates the video is not spatial. The value can be nil, which indicates the output will not be spatial, but a spatial configuration with all nil values must be in the “AVVideoComposition/spatialConfigurations“ property or an exception will be thrown.
+// Associates the pixel buffer with the specified spatial configuration.
 //
 // AttachSpatialVideoConfigurationToPixelBuffer calls the underlying AttachSpatialVideoConfigurationToPixelBuffer.
 func (x *AsynchronousVideoCompositionRequest) AttachSpatialVideoConfigurationToPixelBuffer(spatialVideoConfiguration *raw.AVSpatialVideoConfiguration, pixelBuffer unsafe.Pointer) {

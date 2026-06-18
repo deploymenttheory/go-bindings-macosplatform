@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A reference to a registered metaparameter that the app can share with multiple sound events or sources.
+//
 // GlobalMetaParameterAsset wraps [raw.PHASEGlobalMetaParameterAsset] with a fluent Go API.
 type GlobalMetaParameterAsset struct {
 	inner *raw.PHASEGlobalMetaParameterAsset

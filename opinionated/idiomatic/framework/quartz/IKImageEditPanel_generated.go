@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The IKImageEditPanel class provides a panel, that is, a utility window that floats on top of document windows, optimized for image editing.
+//
 // IKImageEditPanel wraps [raw.IKImageEditPanel] with a fluent Go API.
 type IKImageEditPanel struct {
 	inner *raw.IKImageEditPanel
@@ -36,7 +38,7 @@ func NewIKImageEditPanel() *IKImageEditPanel {
 	return &IKImageEditPanel{inner: raw.IKImageEditPanelFromID(_id)}
 }
 
-// @property dataSource @abstract Data source associated with an image editing panel
+// Specifies the edit panel’s dataSource.
 //
 // WithDataSource sets the dataSource property and returns the receiver for chaining.
 func (x *IKImageEditPanel) WithDataSource(dataSource objc.ID) *IKImageEditPanel {
@@ -44,7 +46,7 @@ func (x *IKImageEditPanel) WithDataSource(dataSource objc.ID) *IKImageEditPanel 
 	return x
 }
 
-// @method reloadData @abstract Reloads the data from the data associated with an image editing panel.
+// Reloads the data from the data associated with an image editing panel.
 //
 // ReloadData calls the underlying ReloadData.
 func (x *IKImageEditPanel) ReloadData() {

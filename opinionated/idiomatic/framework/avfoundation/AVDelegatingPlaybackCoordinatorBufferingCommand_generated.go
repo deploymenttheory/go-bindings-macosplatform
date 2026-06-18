@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A command that indicates to start buffering data in preparation for playback.
+//
 // DelegatingPlaybackCoordinatorBufferingCommand wraps [raw.AVDelegatingPlaybackCoordinatorBufferingCommand] with a fluent Go API.
 type DelegatingPlaybackCoordinatorBufferingCommand struct {
 	inner *raw.AVDelegatingPlaybackCoordinatorBufferingCommand

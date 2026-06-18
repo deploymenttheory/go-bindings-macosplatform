@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that you use to format a contact’s postal addresses.
+//
 // PostalAddressFormatter wraps [raw.CNPostalAddressFormatter] with a fluent Go API.
 type PostalAddressFormatter struct {
 	inner *raw.CNPostalAddressFormatter
@@ -37,7 +39,7 @@ func NewPostalAddressFormatter() *PostalAddressFormatter {
 	return &PostalAddressFormatter{inner: raw.CNPostalAddressFormatterFromID(_id)}
 }
 
-// @abstract The style for a postal address formatter instance. @discussion The default value is CNPostalAddressFormatterStyleMailingAddress.
+// The style to apply when formatting strings.
 //
 // WithStyle sets the style property and returns the receiver for chaining.
 func (x *PostalAddressFormatter) WithStyle(style CNPostalAddressFormatterStyle) *PostalAddressFormatter {
@@ -45,7 +47,7 @@ func (x *PostalAddressFormatter) WithStyle(style CNPostalAddressFormatterStyle) 
 	return x
 }
 
-// @abstract Formats the postal address. @param postalAddress The postal address to be formatted. @return The formatted postal address.
+// Returns a formatted postal address.
 //
 // StringFromPostalAddress calls the underlying StringFromPostalAddress.
 func (x *PostalAddressFormatter) StringFromPostalAddress(postalAddress *raw.CNPostalAddress) string {
@@ -56,7 +58,7 @@ func (x *PostalAddressFormatter) StringFromPostalAddress(postalAddress *raw.CNPo
 	return purego.GoString(_r.Ptr())
 }
 
-// @abstract Formats the postal address returning an attributed string. @discussion This behaves like +stringFromPostalAddress: except it returns an attributed string. Includes attribute keys CNPostalAddressPropertyAttribute and CNPostalAddressLocalizedPropertyNameAttribute. @param postalAddress The postal address to be formatted. @param attributes The default attributes to use. See NSFormatter for details. @return The formatted postal address as an attributed string.
+// Returns a formatted postal address as an attributed string.
 //
 // AttributedStringFromPostalAddressWithDefaultAttributes calls the underlying AttributedStringFromPostalAddressWithDefaultAttributes.
 func (x *PostalAddressFormatter) AttributedStringFromPostalAddressWithDefaultAttributes(postalAddress *raw.CNPostalAddress, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {

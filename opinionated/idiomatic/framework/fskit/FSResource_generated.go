@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract resource a file system uses to provide data for a volume.
+//
 // Resource wraps [raw.FSResource] with a fluent Go API.
 type Resource struct {
 	inner *raw.FSResource
@@ -35,7 +37,7 @@ func NewResource() *Resource {
 	return &Resource{inner: raw.FSResourceFromID(_id)}
 }
 
-// Creates a proxy object of this resource. If you create a proxy from a proxy resource, this method returns a copy of the proxy.
+// Creates a proxy object of this resource.
 //
 // MakeProxy calls the underlying MakeProxy.
 func (x *Resource) MakeProxy() *Resource {
@@ -46,7 +48,7 @@ func (x *Resource) MakeProxy() *Resource {
 	return &Resource{inner: _r}
 }
 
-// Revokes the resource. This method works by stripping away any underlying privileges associated with the resource. This effectively disconnects this object from its underlying resource.
+// Revokes the resource.
 //
 // Revoke calls the underlying Revoke.
 func (x *Resource) Revoke() {

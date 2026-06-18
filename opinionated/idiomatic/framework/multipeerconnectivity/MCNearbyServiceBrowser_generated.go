@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Searches (by service type) for services offered by nearby devices using infrastructure Wi-Fi, peer-to-peer Wi-Fi, and Bluetooth (in iOS) or Ethernet (in macOS and tvOS), and provides the ability to easily invite those devices to a Multipeer Connectivity session (MCSession).
+//
 // NearbyServiceBrowser wraps [raw.MCNearbyServiceBrowser] with a fluent Go API.
 type NearbyServiceBrowser struct {
 	inner *raw.MCNearbyServiceBrowser
@@ -31,6 +33,8 @@ func NearbyServiceBrowserFromID(id objc.ID) *NearbyServiceBrowser {
 	return &NearbyServiceBrowser{inner: raw.MCNearbyServiceBrowserFromID(id)}
 }
 
+// Initializes the nearby service browser object.
+//
 // NewNearbyServiceBrowserWithPeerServiceType creates a new [NearbyServiceBrowser].
 func NewNearbyServiceBrowserWithPeerServiceType(myPeerID *raw.MCPeerID, serviceType string) *NearbyServiceBrowser {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MCNearbyServiceBrowser")), objc.RegisterName("alloc"))
@@ -38,22 +42,30 @@ func NewNearbyServiceBrowserWithPeerServiceType(myPeerID *raw.MCPeerID, serviceT
 	return &NearbyServiceBrowser{inner: raw.MCNearbyServiceBrowserFromID(_id)}
 }
 
+// The delegate object that handles browser-related events.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *NearbyServiceBrowser) WithDelegate(delegate raw.MCNearbyServiceBrowserDelegate) *NearbyServiceBrowser {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Starts browsing for peers.
+//
 // StartBrowsingForPeers calls the underlying StartBrowsingForPeers.
 func (x *NearbyServiceBrowser) StartBrowsingForPeers() {
 	x.inner.StartBrowsingForPeers()
 }
 
+// Stops browsing for peers.
+//
 // StopBrowsingForPeers calls the underlying StopBrowsingForPeers.
 func (x *NearbyServiceBrowser) StopBrowsingForPeers() {
 	x.inner.StopBrowsingForPeers()
 }
 
+// Invites a discovered peer to join a Multipeer Connectivity session.
+//
 // InvitePeerToSessionWithContextTimeout calls the underlying InvitePeerToSessionWithContextTimeout.
 func (x *NearbyServiceBrowser) InvitePeerToSessionWithContextTimeout(peerID *raw.MCPeerID, session *raw.MCSession, context_ *foundation.NSData, timeout float64) {
 	x.inner.InvitePeerToSessionWithContextTimeout(peerID, session, context_, timeout)

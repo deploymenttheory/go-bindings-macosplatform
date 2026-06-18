@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event requesting a change in the playback rate.
+//
 // ChangePlaybackRateCommandEvent wraps [raw.MPChangePlaybackRateCommandEvent] with a fluent Go API.
 type ChangePlaybackRateCommandEvent struct {
 	inner *raw.MPChangePlaybackRateCommandEvent

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the source of the content to present in Picture in Picture.
+//
 // PictureInPictureControllerContentSource wraps [raw.AVPictureInPictureControllerContentSource] with a fluent Go API.
 type PictureInPictureControllerContentSource struct {
 	inner *raw.AVPictureInPictureControllerContentSource

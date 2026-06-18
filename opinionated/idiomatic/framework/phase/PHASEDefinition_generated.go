@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A base class that adds a name to framework definitions.
+//
 // Definition wraps [raw.PHASEDefinition] with a fluent Go API.
 type Definition struct {
 	inner *raw.PHASEDefinition

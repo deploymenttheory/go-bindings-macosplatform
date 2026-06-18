@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// An object that models timed audiovisual media.
+//
 // Asset wraps [raw.AVAsset] with a fluent Go API.
 type Asset struct {
 	inner *raw.AVAsset
@@ -83,7 +85,7 @@ func (x *Asset) MinimumTimeOffsetFromLive() coremedia.CMTime {
 	return x.inner.MinimumTimeOffsetFromLive()
 }
 
-// Cancels the loading of all values for all observers. Deallocation or finalization of an instance of AVAsset will implicitly cancel loading if any loading requests are still outstanding.
+// Cancels all pending requests to asynchronously load property values.
 //
 // CancelLoading calls the underlying CancelLoading.
 func (x *Asset) CancelLoading() {
@@ -102,7 +104,7 @@ func (x *Asset) ReferenceRestrictions() AVAssetReferenceRestrictions {
 	return AVAssetReferenceRestrictions(x.inner.ReferenceRestrictions())
 }
 
-// Provides an instance of AVAssetTrack that represents the track of the specified trackID. Becomes callable without blocking when the key @"tracks" has been loaded - Parameter trackID: The trackID of the requested AVAssetTrack. - Returns: An instance of AVAssetTrack; may be nil if no track of the specified trackID is available.
+// Returns a track that contains the specified identifier.
 //
 // TrackWithTrackID calls the underlying TrackWithTrackID.
 func (x *Asset) TrackWithTrackID(trackID int32) *AssetTrack {
@@ -113,21 +115,21 @@ func (x *Asset) TrackWithTrackID(trackID int32) *AssetTrack {
 	return &AssetTrack{inner: _r}
 }
 
-// Loads an instance of AVAssetTrack that represents the track of the specified trackID. - Parameter trackID: The trackID of the requested AVAssetTrack. - Parameter completionHandler: A block that is called when the loading is finished, with either the loaded track (which may be nil if no track of the specified trackID is available) or an error.
+// Loads a track that contains the specified identifier.
 //
 // LoadTrackWithTrackIDCompletionHandler calls the underlying LoadTrackWithTrackIDCompletionHandler.
 func (x *Asset) LoadTrackWithTrackIDCompletionHandler(trackID int32, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	x.inner.LoadTrackWithTrackIDCompletionHandler(trackID, completionHandler)
 }
 
-// Provides an array of AVAssetTracks of the asset that present media of the specified media type. Becomes callable without blocking when the key @"tracks" has been loaded - Parameter mediaType: The media type according to which AVAsset filters its AVAssetTracks. (Media types are defined in AVMediaFormat.h.) - Returns: An NSArray of AVAssetTracks; may be empty if no tracks of the specified media type are available.
+// Returns tracks that contain media of a specified type.
 //
 // TracksWithMediaType calls the underlying TracksWithMediaType.
 func (x *Asset) TracksWithMediaType(mediaType *foundation.NSString) *foundation.NSArray[*raw.AVAssetTrack] {
 	return x.inner.TracksWithMediaType(mediaType)
 }
 
-// Loads an array of AVAssetTracks of the asset that present media of the specified media type. - Parameter mediaType: The media type according to which AVAsset filters its AVAssetTracks. (Media types are defined in AVMediaFormat.h.) - Parameter completionHandler: A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks of the specified media type are available) or an error.
+// Loads tracks that contain media of a specified type.
 //
 // LoadTracksWithMediaType blocks until the operation completes or ctx is cancelled.
 func (x *Asset) LoadTracksWithMediaType(ctx context.Context, mediaType *foundation.NSString) (*foundation.NSArray[*raw.AVAssetTrack], error) {
@@ -153,14 +155,14 @@ func (x *Asset) LoadTracksWithMediaType(ctx context.Context, mediaType *foundati
 	}
 }
 
-// Provides an array of AVAssetTracks of the asset that present media with the specified characteristic. Becomes callable without blocking when the key @"tracks" has been loaded - Parameter mediaCharacteristic: The media characteristic according to which AVAsset filters its AVAssetTracks. (Media characteristics are defined in AVMediaFormat.h.) - Returns: An NSArray of AVAssetTracks; may be empty if no tracks with the specified characteristic are available.
+// Returns an array of asset tracks matching the specified media characteristic.
 //
 // TracksWithMediaCharacteristic calls the underlying TracksWithMediaCharacteristic.
 func (x *Asset) TracksWithMediaCharacteristic(mediaCharacteristic *foundation.NSString) *foundation.NSArray[*raw.AVAssetTrack] {
 	return x.inner.TracksWithMediaCharacteristic(mediaCharacteristic)
 }
 
-// Loads an array of AVAssetTracks of the asset that present media with the specified characteristic. - Parameter mediaCharacteristic: The media characteristic according to which AVAsset filters its AVAssetTracks. (Media characteristics are defined in AVMediaFormat.h.) - Parameter completionHandler: A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks with the specified characteristic are available) or an error.
+// Loads tracks that contain media of a specified characteristic.
 //
 // LoadTracksWithMediaCharacteristic blocks until the operation completes or ctx is cancelled.
 func (x *Asset) LoadTracksWithMediaCharacteristic(ctx context.Context, mediaCharacteristic *foundation.NSString) (*foundation.NSArray[*raw.AVAssetTrack], error) {
@@ -212,14 +214,14 @@ func (x *Asset) TrackGroups() []*AssetTrackGroup {
 	})
 }
 
-// Provides an NSArray of AVMetadataItems, one for each metadata item in the container of the specified format; can subsequently be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:], according to locale via +[AVMetadataItem metadataItemsFromArray:withLocale:], or according to key via +[AVMetadataItem metadataItemsFromArray:withKey:keySpace:]. Becomes callable without blocking when the key @"availableMetadataFormats" has been loaded - Parameter format: The metadata format for which items are requested. - Returns: An NSArray containing AVMetadataItems; may be empty if there is no metadata of the specified format.
+// Returns an array of metadata items from the container with the specified format.
 //
 // MetadataForFormat calls the underlying MetadataForFormat.
 func (x *Asset) MetadataForFormat(format *foundation.NSString) *foundation.NSArray[*raw.AVMetadataItem] {
 	return x.inner.MetadataForFormat(format)
 }
 
-// Loads an NSArray of AVMetadataItems, one for each metadata item in the container of the specified format; can subsequently be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:], according to locale via +[AVMetadataItem metadataItemsFromArray:withLocale:], or according to key via +[AVMetadataItem metadataItemsFromArray:withKey:keySpace:]. - Parameter format: The metadata format for which items are requested. - Parameter completionHandler: A block that is invoked when loading is complete, vending the array of metadata items (which may be empty if there is no metadata of the specified format) or an error.
+// Loads an array of metadata items that the asset contains for the specified format.
 //
 // LoadMetadataForFormat blocks until the operation completes or ctx is cancelled.
 func (x *Asset) LoadMetadataForFormat(ctx context.Context, format *foundation.NSString) (*foundation.NSArray[*raw.AVMetadataItem], error) {
@@ -306,14 +308,14 @@ func (x *Asset) AvailableMetadataFormats() []*foundation.NSString {
 	})
 }
 
-// Provides an array of chapters. This method returns an array of AVTimedMetadataGroup objects. Each object in the array always contains an AVMetadataItem representing the chapter title; the timeRange property of the AVTimedMetadataGroup object is equal to the time range of the chapter title item. An AVMetadataItem with the specified common key will be added to an existing AVTimedMetadataGroup object if the time range (timestamp and duration) of the metadata item and the metadata group overlaps. The locale of items not carrying chapter titles need not match the specified locale parameter. Further filtering of the metadata items in AVTimedMetadataGroups according to language can be accomplished using +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:]; filtering of the metadata items according to locale can be accomplished using +[AVMetadataItem metadataItemsFromArray:withLocale:]. - Parameter locale: Locale of the metadata items carrying chapter titles to be returned (supports the IETF BCP 47 specification). - Parameter commonKeys: Array of common keys of AVMetadataItem to be included; can be nil. AVMetadataCommonKeyArtwork is the only supported key for now. - Returns: An NSArray of AVTimedMetadataGroup.
+// Returns an array of chapters that contain the specified title locale and common keys.
 //
 // ChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys calls the underlying ChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys.
 func (x *Asset) ChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys(locale *foundation.NSLocale, commonKeys *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*raw.AVTimedMetadataGroup] {
 	return x.inner.ChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys(locale, commonKeys)
 }
 
-// Loads an array of chapters. This method vends an array of AVTimedMetadataGroup objects. Each object in the array always contains an AVMetadataItem representing the chapter title; the timeRange property of the AVTimedMetadataGroup object is equal to the time range of the chapter title item. An AVMetadataItem with the specified common key will be added to an existing AVTimedMetadataGroup object if the time range (timestamp and duration) of the metadata item and the metadata group overlaps. The locale of items not carrying chapter titles need not match the specified locale parameter. Further filtering of the metadata items in AVTimedMetadataGroups according to language can be accomplished using +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:]; filtering of the metadata items according to locale can be accomplished using +[AVMetadataItem metadataItemsFromArray:withLocale:]. - Parameter locale: Locale of the metadata items carrying chapter titles to be returned (supports the IETF BCP 47 specification). - Parameter commonKeys: Array of common keys of AVMetadataItem to be included; if no common keys are required, send an empty list. AVMetadataCommonKeyArtwork is the only supported key for now. - Parameter completionHandler: A block that is invoked when loading is complete, vending the array of timed metadata groups or an error.
+// Loads chapter metadata that contains the specified title locale and common keys.
 //
 // LoadChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys blocks until the operation completes or ctx is cancelled.
 func (x *Asset) LoadChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys(ctx context.Context, locale *foundation.NSLocale, commonKeys *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.AVTimedMetadataGroup], error) {
@@ -339,14 +341,14 @@ func (x *Asset) LoadChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommo
 	}
 }
 
-// Tests, in order of preference, for a match between language identifiers in the specified array of preferred languages and the available chapter locales, and returns the array of chapters corresponding to the first match that's found. Safe to call without blocking when the AVAsset key availableChapterLocales has status AVKeyValueStatusLoaded. Returns an array of AVTimedMetadataGroup objects. Each object in the array always contains an AVMetadataItem representing the chapter title; the timeRange property of the AVTimedMetadataGroup object is equal to the time range of the chapter title item. All of the available chapter metadata is included in the metadata groups, including items with the common key AVMetadataCommonKeyArtwork, if such items are present. Items not carrying chapter titles will be added to an existing AVTimedMetadataGroup object if the time range (timestamp and duration) of the metadata item and that of the metadata group overlaps. The locale of such items need not match the locale of the chapter titles. Further filtering of the metadata items in AVTimedMetadataGroups according to language can be accomplished using +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:]; filtering of the metadata items according to locale can be accomplished using +[AVMetadataItem metadataItemsFromArray:withLocale:]. - Parameter preferredLanguages: An array of language identifiers in order of preference, each of which is an IETF BCP 47 (RFC 4646) language identifier. If your goal is to provide the best match for the end user's preferred languages without consideration of your app's available localizations, pass [NSLocale preferredLanguages] as the value of preferredLanguages. However, if you want to filter the available choices in order to obtain the best match among the localizations that are available for your app, pass [NSBundle preferredLocalizationsFromArray:[[NSBundle mainBundle] localizations] forPreferences:[NSLocale preferredLanguages]] instead. The latter choice is normally more appropriate for strings intended for display as part of the app's UI. - Returns: An NSArray of AVTimedMetadataGroup.
+// Returns an array of chapters with a locale that best matches the list of preferred languages.
 //
 // ChapterMetadataGroupsBestMatchingPreferredLanguages calls the underlying ChapterMetadataGroupsBestMatchingPreferredLanguages.
 func (x *Asset) ChapterMetadataGroupsBestMatchingPreferredLanguages(preferredLanguages *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*raw.AVTimedMetadataGroup] {
 	return x.inner.ChapterMetadataGroupsBestMatchingPreferredLanguages(preferredLanguages)
 }
 
-// Tests, in order of preference, for a match between language identifiers in the specified array of preferred languages and the available chapter locales, and loads the array of chapters corresponding to the first match that's found. Returns an array of AVTimedMetadataGroup objects. Each object in the array always contains an AVMetadataItem representing the chapter title; the timeRange property of the AVTimedMetadataGroup object is equal to the time range of the chapter title item. All of the available chapter metadata is included in the metadata groups, including items with the common key AVMetadataCommonKeyArtwork, if such items are present. Items not carrying chapter titles will be added to an existing AVTimedMetadataGroup object if the time range (timestamp and duration) of the metadata item and that of the metadata group overlaps. The locale of such items need not match the locale of the chapter titles. Further filtering of the metadata items in AVTimedMetadataGroups according to language can be accomplished using +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:]; filtering of the metadata items according to locale can be accomplished using +[AVMetadataItem metadataItemsFromArray:withLocale:]. - Parameter preferredLanguages: An array of language identifiers in order of preference, each of which is an IETF BCP 47 (RFC 4646) language identifier. If your goal is to provide the best match for the end user's preferred languages without consideration of your app's available localizations, pass [NSLocale preferredLanguages] as the value of preferredLanguages. However, if you want to filter the available choices in order to obtain the best match among the localizations that are available for your app, pass [NSBundle preferredLocalizationsFromArray:[[NSBundle mainBundle] localizations] forPreferences:[NSLocale preferredLanguages]] instead. The latter choice is normally more appropriate for strings intended for display as part of the app's UI. - Parameter completionHandler: A block that is invoked when loading is complete, vending the array of timed metadata groups or an error.
+// Loads chapter metadata with a locale that best matches the list of preferred languages.
 //
 // LoadChapterMetadataGroupsBestMatchingPreferredLanguages blocks until the operation completes or ctx is cancelled.
 func (x *Asset) LoadChapterMetadataGroupsBestMatchingPreferredLanguages(ctx context.Context, preferredLanguages *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.AVTimedMetadataGroup], error) {
@@ -385,7 +387,7 @@ func (x *Asset) AvailableChapterLocales() []*foundation.NSLocale {
 	})
 }
 
-// Provides an instance of AVMediaSelectionGroup that contains one or more options with the specified media characteristic. Becomes callable without blocking when the key @"availableMediaCharacteristicsWithMediaSelectionOptions" has been loaded. If the asset has no AVMediaSelectionGroup containing options with the specified media characteristic, the return value will be nil. Filtering of the options in the returned AVMediaSelectionGroup according to playability, locale, and additional media characteristics can be accomplished using the category AVMediaSelectionOptionFiltering defined on AVMediaSelectionGroup. - Parameter mediaCharacteristic: A media characteristic for which you wish to obtain the available media selection options. AVMediaCharacteristicAudible, AVMediaCharacteristicLegible, and AVMediaCharacteristicVisual are currently supported. Pass AVMediaCharacteristicAudible to obtain the group of available options for audio media in various languages and for various purposes, such as descriptive audio. Pass AVMediaCharacteristicLegible to obtain the group of available options for subtitles in various languages and for various purposes. Pass AVMediaCharacteristicVisual to obtain the group of available options for video media. - Returns: An instance of AVMediaSelectionGroup. May be nil.
+// Returns a media selection group that contains one or more options with the specified media characteristic.
 //
 // MediaSelectionGroupForMediaCharacteristic calls the underlying MediaSelectionGroupForMediaCharacteristic.
 func (x *Asset) MediaSelectionGroupForMediaCharacteristic(mediaCharacteristic *foundation.NSString) *MediaSelectionGroup {
@@ -396,7 +398,7 @@ func (x *Asset) MediaSelectionGroupForMediaCharacteristic(mediaCharacteristic *f
 	return &MediaSelectionGroup{inner: _r}
 }
 
-// Loads an instance of AVMediaSelectionGroup that contains one or more options with the specified media characteristic. If the asset has no AVMediaSelectionGroup containing options with the specified media characteristic, the return value will be nil. Filtering of the options in the returned AVMediaSelectionGroup according to playability, locale, and additional media characteristics can be accomplished using the category AVMediaSelectionOptionFiltering defined on AVMediaSelectionGroup. - Parameter mediaCharacteristic: A media characteristic for which you wish to obtain the available media selection options. AVMediaCharacteristicAudible, AVMediaCharacteristicLegible, and AVMediaCharacteristicVisual are currently supported. Pass AVMediaCharacteristicAudible to obtain the group of available options for audio media in various languages and for various purposes, such as descriptive audio. Pass AVMediaCharacteristicLegible to obtain the group of available options for subtitles in various languages and for various purposes Pass AVMediaCharacteristicVisual to obtain the group of available options for video media. - Parameter completionHandler: A block that is invoked when loading is complete, vending an instance of AVMediaSelectionGroup (which may be nil) or an error.
+// Loads a media selection group that contains one or more options with the specified media characteristic.
 //
 // LoadMediaSelectionGroupForMediaCharacteristicCompletionHandler calls the underlying LoadMediaSelectionGroupForMediaCharacteristicCompletionHandler.
 func (x *Asset) LoadMediaSelectionGroupForMediaCharacteristicCompletionHandler(mediaCharacteristic *foundation.NSString, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
@@ -503,12 +505,14 @@ func (x *Asset) IsCompatibleWithAirPlayVideo() bool {
 	return x.inner.IsCompatibleWithAirPlayVideo()
 }
 
+// Returns an identifier that no other tracks in the asset use.
+//
 // UnusedTrackID calls the underlying UnusedTrackID.
 func (x *Asset) UnusedTrackID() int32 {
 	return x.inner.UnusedTrackID()
 }
 
-// Loads a track ID that will not collide with any existing track - Parameter completionHandler: A block that is invoked when loading is complete, vending the track ID or an error.
+// Loads an identifier that no other track in the asset uses.
 //
 // FindUnusedTrackIDWithCompletionHandler calls the underlying FindUnusedTrackIDWithCompletionHandler.
 func (x *Asset) FindUnusedTrackIDWithCompletionHandler(completionHandler func(int32, unsafe.Pointer)) {

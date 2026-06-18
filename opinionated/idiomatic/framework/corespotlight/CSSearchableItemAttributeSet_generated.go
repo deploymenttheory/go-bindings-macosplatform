@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// The detailed metadata for a searchable item.
+//
 // SearchableItemAttributeSet wraps [raw.CSSearchableItemAttributeSet] with a fluent Go API.
 type SearchableItemAttributeSet struct {
 	inner *raw.CSSearchableItemAttributeSet
@@ -33,6 +35,8 @@ func SearchableItemAttributeSetFromID(id objc.ID) *SearchableItemAttributeSet {
 	return &SearchableItemAttributeSet{inner: raw.CSSearchableItemAttributeSetFromID(id)}
 }
 
+// Creates an attribute set for the specified content type.
+//
 // NewSearchableItemAttributeSetWithItemContentType creates a new [SearchableItemAttributeSet].
 func NewSearchableItemAttributeSetWithItemContentType(itemContentType string) *SearchableItemAttributeSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CSSearchableItemAttributeSet")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewSearchableItemAttributeSetWithItemContentType(itemContentType string) *S
 	return &SearchableItemAttributeSet{inner: raw.CSSearchableItemAttributeSetFromID(_id)}
 }
 
+// Creates an attribute set for the specified content type.
+//
 // NewSearchableItemAttributeSetWithContentType creates a new [SearchableItemAttributeSet].
 func NewSearchableItemAttributeSetWithContentType(contentType *uniformtypeidentifiers.UTType) *SearchableItemAttributeSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CSSearchableItemAttributeSet")), objc.RegisterName("alloc"))
@@ -47,12 +53,16 @@ func NewSearchableItemAttributeSetWithContentType(contentType *uniformtypeidenti
 	return &SearchableItemAttributeSet{inner: raw.CSSearchableItemAttributeSetFromID(_id)}
 }
 
+// A localized string that contains the name of the item, suitable to display in the user interface.
+//
 // WithDisplayName sets the displayName property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithDisplayName(displayName string) *SearchableItemAttributeSet {
 	x.inner.SetDisplayName(foundation.NSStringStringWithUTF8String(displayName))
 	return x
 }
 
+// An array of localized strings that represent alternate display names for the item.
+//
 // WithAlternateNames sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithAlternateNames(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -71,54 +81,72 @@ func (x *SearchableItemAttributeSet) WithAlternateNames(items ...*foundation.NSS
 	return x
 }
 
+// The complete path to the item.
+//
 // WithPath sets the path property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithPath(path string) *SearchableItemAttributeSet {
 	x.inner.SetPath(foundation.NSStringStringWithUTF8String(path))
 	return x
 }
 
+// The file URL of the content to index.
+//
 // WithContentURL sets the contentURL property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithContentURL(contentURL string) *SearchableItemAttributeSet {
 	x.inner.SetContentURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(contentURL)))
 	return x
 }
 
+// The local file URL of the thumbnail image for the item.
+//
 // WithThumbnailURL sets the thumbnailURL property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithThumbnailURL(thumbnailURL string) *SearchableItemAttributeSet {
 	x.inner.SetThumbnailURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(thumbnailURL)))
 	return x
 }
 
+// Image data that represents the thumbnail of the item.
+//
 // WithThumbnailData sets the thumbnailData property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithThumbnailData(thumbnailData *foundation.NSData) *SearchableItemAttributeSet {
 	x.inner.SetThumbnailData(thumbnailData)
 	return x
 }
 
+// The local file URL of the thumbnail image for the item when Dark Mode is active.
+//
 // WithDarkThumbnailURL sets the darkThumbnailURL property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithDarkThumbnailURL(darkThumbnailURL string) *SearchableItemAttributeSet {
 	x.inner.SetDarkThumbnailURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(darkThumbnailURL)))
 	return x
 }
 
+// The unique identifier for the item to which the activity is related.
+//
 // WithRelatedUniqueIdentifier sets the relatedUniqueIdentifier property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithRelatedUniqueIdentifier(relatedUniqueIdentifier string) *SearchableItemAttributeSet {
 	x.inner.SetRelatedUniqueIdentifier(foundation.NSStringStringWithUTF8String(relatedUniqueIdentifier))
 	return x
 }
 
+// The date on which the last metadata attribute was changed.
+//
 // WithMetadataModificationDate sets the metadataModificationDate property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithMetadataModificationDate(metadataModificationDate *foundation.NSDate) *SearchableItemAttributeSet {
 	x.inner.SetMetadataModificationDate(metadataModificationDate)
 	return x
 }
 
+// The uniform type identifier (UTI) of the item.
+//
 // WithContentType sets the contentType property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithContentType(contentType string) *SearchableItemAttributeSet {
 	x.inner.SetContentType(foundation.NSStringStringWithUTF8String(contentType))
 	return x
 }
 
+// An attribute type that identifies a custom hierarchy of types to describe the attributes of your item.
+//
 // WithContentTypeTree sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithContentTypeTree(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -137,6 +165,8 @@ func (x *SearchableItemAttributeSet) WithContentTypeTree(items ...*foundation.NS
 	return x
 }
 
+// An array of keywords associated with the item, such as work, birthday, important, and so on.
+//
 // WithKeywords sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithKeywords(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -155,55 +185,71 @@ func (x *SearchableItemAttributeSet) WithKeywords(items ...*foundation.NSString)
 	return x
 }
 
+// The title of the item.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithTitle(title string) *SearchableItemAttributeSet {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// A string that represents the text the system transcribed.
+//
 // WithTranscribedTextContent sets the transcribedTextContent property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithTranscribedTextContent(transcribedTextContent string) *SearchableItemAttributeSet {
 	x.inner.SetTranscribedTextContent(foundation.NSStringStringWithUTF8String(transcribedTextContent))
 	return x
 }
 
+// A value that indicates whether the item contains information sufficient to allow a phone call to a number associated with the item.
+//
 // WithSupportsPhoneCall sets the supportsPhoneCall property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithSupportsPhoneCall(supportsPhoneCall *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetSupportsPhoneCall(supportsPhoneCall)
 	return x
 }
 
+// A value that indicates whether the item contains information sufficient to provide navigation to the location it represents.
+//
 // WithSupportsNavigation sets the supportsNavigation property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithSupportsNavigation(supportsNavigation *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetSupportsNavigation(supportsNavigation)
 	return x
 }
 
+// The title of the container to which the item belongs.
+//
 // WithContainerTitle sets the containerTitle property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithContainerTitle(containerTitle string) *SearchableItemAttributeSet {
 	x.inner.SetContainerTitle(foundation.NSStringStringWithUTF8String(containerTitle))
 	return x
 }
 
+// A localized string that specifies the name of a container to which the item belongs, suitable to display in the user interface.
+//
 // WithContainerDisplayName sets the containerDisplayName property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithContainerDisplayName(containerDisplayName string) *SearchableItemAttributeSet {
 	x.inner.SetContainerDisplayName(foundation.NSStringStringWithUTF8String(containerDisplayName))
 	return x
 }
 
+// The identifier of the container to which the item belongs.
+//
 // WithContainerIdentifier sets the containerIdentifier property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithContainerIdentifier(containerIdentifier string) *SearchableItemAttributeSet {
 	x.inner.SetContainerIdentifier(foundation.NSStringStringWithUTF8String(containerIdentifier))
 	return x
 }
 
+// The order of the item within the container.
+//
 // WithContainerOrder sets the containerOrder property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithContainerOrder(containerOrder *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetContainerOrder(containerOrder)
 	return x
 }
 
-// Subject of the this item.
+// The subject of the document.
 //
 // WithSubject sets the subject property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithSubject(subject string) *SearchableItemAttributeSet {
@@ -211,24 +257,32 @@ func (x *SearchableItemAttributeSet) WithSubject(subject string) *SearchableItem
 	return x
 }
 
+// The theme of the document.
+//
 // WithTheme sets the theme property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithTheme(theme string) *SearchableItemAttributeSet {
 	x.inner.SetTheme(foundation.NSStringStringWithUTF8String(theme))
 	return x
 }
 
+// A description of the item’s content.
+//
 // WithContentDescription sets the contentDescription property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithContentDescription(contentDescription string) *SearchableItemAttributeSet {
 	x.inner.SetContentDescription(foundation.NSStringStringWithUTF8String(contentDescription))
 	return x
 }
 
+// A formal identifier that references the document the item represents.
+//
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithIdentifier(identifier string) *SearchableItemAttributeSet {
 	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
 	return x
 }
 
+// A class of entity for which the item is intended or useful.
+//
 // WithAudiences sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithAudiences(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -247,42 +301,56 @@ func (x *SearchableItemAttributeSet) WithAudiences(items ...*foundation.NSString
 	return x
 }
 
+// The size of the document file.
+//
 // WithFileSize sets the fileSize property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithFileSize(fileSize *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetFileSize(fileSize)
 	return x
 }
 
+// The number of pages in the document.
+//
 // WithPageCount sets the pageCount property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithPageCount(pageCount *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetPageCount(pageCount)
 	return x
 }
 
+// The width of the document page, in points (72 points per inch).
+//
 // WithPageWidth sets the pageWidth property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithPageWidth(pageWidth *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetPageWidth(pageWidth)
 	return x
 }
 
+// The height of the document page, in points (72 points per inch).
+//
 // WithPageHeight sets the pageHeight property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithPageHeight(pageHeight *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetPageHeight(pageHeight)
 	return x
 }
 
+// The security method (a type of encryption) that protects the document file.
+//
 // WithSecurityMethod sets the securityMethod property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithSecurityMethod(securityMethod string) *SearchableItemAttributeSet {
 	x.inner.SetSecurityMethod(foundation.NSStringStringWithUTF8String(securityMethod))
 	return x
 }
 
+// The name of the app that created the content.
+//
 // WithCreator sets the creator property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithCreator(creator string) *SearchableItemAttributeSet {
 	x.inner.SetCreator(foundation.NSStringStringWithUTF8String(creator))
 	return x
 }
 
+// The name of the apps that converted the original content into a PDF stream.
+//
 // WithEncodingApplications sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithEncodingApplications(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -301,12 +369,16 @@ func (x *SearchableItemAttributeSet) WithEncodingApplications(items ...*foundati
 	return x
 }
 
+// A description of the kind of document the item represents.
+//
 // WithKind sets the kind property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithKind(kind string) *SearchableItemAttributeSet {
 	x.inner.SetKind(foundation.NSStringStringWithUTF8String(kind))
 	return x
 }
 
+// An array of font names the document uses.
+//
 // WithFontNames sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithFontNames(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -325,30 +397,40 @@ func (x *SearchableItemAttributeSet) WithFontNames(items ...*foundation.NSString
 	return x
 }
 
+// The date on which the item is due.
+//
 // WithDueDate sets the dueDate property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithDueDate(dueDate *foundation.NSDate) *SearchableItemAttributeSet {
 	x.inner.SetDueDate(dueDate)
 	return x
 }
 
+// The date on which the item was completed.
+//
 // WithCompletionDate sets the completionDate property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithCompletionDate(completionDate *foundation.NSDate) *SearchableItemAttributeSet {
 	x.inner.SetCompletionDate(completionDate)
 	return x
 }
 
+// The start date for the item.
+//
 // WithStartDate sets the startDate property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithStartDate(startDate *foundation.NSDate) *SearchableItemAttributeSet {
 	x.inner.SetStartDate(startDate)
 	return x
 }
 
+// The end date for the item.
+//
 // WithEndDate sets the endDate property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithEndDate(endDate *foundation.NSDate) *SearchableItemAttributeSet {
 	x.inner.SetEndDate(endDate)
 	return x
 }
 
+// An array of important dates associated with the item.
+//
 // WithImportantDates sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithImportantDates(items ...*foundation.NSDate) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -367,18 +449,24 @@ func (x *SearchableItemAttributeSet) WithImportantDates(items ...*foundation.NSD
 	return x
 }
 
+// A value that indicates if the event covers an entire day.
+//
 // WithAllDay sets the allDay property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithAllDay(allDay *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetAllDay(allDay)
 	return x
 }
 
+// The unique identifier for the account with which the message is associated, if any.
+//
 // WithAccountIdentifier sets the accountIdentifier property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithAccountIdentifier(accountIdentifier string) *SearchableItemAttributeSet {
 	x.inner.SetAccountIdentifier(foundation.NSStringStringWithUTF8String(accountIdentifier))
 	return x
 }
 
+// An array of the canonical handles for the account with which the message is associated.
+//
 // WithAccountHandles sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithAccountHandles(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -397,18 +485,24 @@ func (x *SearchableItemAttributeSet) WithAccountHandles(items ...*foundation.NSS
 	return x
 }
 
+// The HTML content of the document encoded as an NSData object representing a UTF-8 encoded string.
+//
 // WithHTMLContentData sets the hTMLContentData property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithHTMLContentData(hTMLContentData *foundation.NSData) *SearchableItemAttributeSet {
 	x.inner.SetHTMLContentData(hTMLContentData)
 	return x
 }
 
+// The textual content of the message.
+//
 // WithTextContent sets the textContent property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithTextContent(textContent string) *SearchableItemAttributeSet {
 	x.inner.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
 	return x
 }
 
+// An array of CSPerson objects representing the content of the From: field in an item.
+//
 // WithAuthors sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithAuthors(items ...*raw.CSPerson) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -427,6 +521,8 @@ func (x *SearchableItemAttributeSet) WithAuthors(items ...*raw.CSPerson) *Search
 	return x
 }
 
+// An array of CSPerson objects representing the content of the To: field in an email message.
+//
 // WithPrimaryRecipients sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithPrimaryRecipients(items ...*raw.CSPerson) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -445,6 +541,8 @@ func (x *SearchableItemAttributeSet) WithPrimaryRecipients(items ...*raw.CSPerso
 	return x
 }
 
+// An array of CSPerson objects representing the content of the Cc: field in an email message.
+//
 // WithAdditionalRecipients sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithAdditionalRecipients(items ...*raw.CSPerson) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -463,6 +561,8 @@ func (x *SearchableItemAttributeSet) WithAdditionalRecipients(items ...*raw.CSPe
 	return x
 }
 
+// An array of CSPerson objects representing the content of the Bcc: field in an email message.
+//
 // WithHiddenAdditionalRecipients sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithHiddenAdditionalRecipients(items ...*raw.CSPerson) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -481,12 +581,16 @@ func (x *SearchableItemAttributeSet) WithHiddenAdditionalRecipients(items ...*ra
 	return x
 }
 
+// A dictionary that contains all the headers of the message.
+//
 // WithEmailHeaders sets the emailHeaders property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithEmailHeaders(emailHeaders *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SearchableItemAttributeSet {
 	x.inner.SetEmailHeaders(emailHeaders)
 	return x
 }
 
+// An array of mailbox identifiers associated with the message.
+//
 // WithMailboxIdentifiers sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithMailboxIdentifiers(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -505,6 +609,8 @@ func (x *SearchableItemAttributeSet) WithMailboxIdentifiers(items ...*foundation
 	return x
 }
 
+// An array of names representing the authors who have worked on the message.
+//
 // WithAuthorNames sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithAuthorNames(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -523,6 +629,8 @@ func (x *SearchableItemAttributeSet) WithAuthorNames(items ...*foundation.NSStri
 	return x
 }
 
+// An array of names representing the recipients of this message.
+//
 // WithRecipientNames sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithRecipientNames(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -541,6 +649,8 @@ func (x *SearchableItemAttributeSet) WithRecipientNames(items ...*foundation.NSS
 	return x
 }
 
+// An array of email addresses associated with the author of the message.
+//
 // WithAuthorEmailAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithAuthorEmailAddresses(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -559,6 +669,8 @@ func (x *SearchableItemAttributeSet) WithAuthorEmailAddresses(items ...*foundati
 	return x
 }
 
+// An array of email addresses associated with the recipient.
+//
 // WithRecipientEmailAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithRecipientEmailAddresses(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -577,6 +689,8 @@ func (x *SearchableItemAttributeSet) WithRecipientEmailAddresses(items ...*found
 	return x
 }
 
+// An array of addresses associated with the author of the message.
+//
 // WithAuthorAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithAuthorAddresses(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -595,6 +709,8 @@ func (x *SearchableItemAttributeSet) WithAuthorAddresses(items ...*foundation.NS
 	return x
 }
 
+// An array of addresses associated with the recipients of the message.
+//
 // WithRecipientAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithRecipientAddresses(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -613,6 +729,8 @@ func (x *SearchableItemAttributeSet) WithRecipientAddresses(items ...*foundation
 	return x
 }
 
+// An array of phone numbers associated with the message.
+//
 // WithPhoneNumbers sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithPhoneNumbers(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -631,6 +749,8 @@ func (x *SearchableItemAttributeSet) WithPhoneNumbers(items ...*foundation.NSStr
 	return x
 }
 
+// An array of email addresses associated with the message.
+//
 // WithEmailAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithEmailAddresses(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -649,6 +769,8 @@ func (x *SearchableItemAttributeSet) WithEmailAddresses(items ...*foundation.NSS
 	return x
 }
 
+// An array of instant message addresses for the message.
+//
 // WithInstantMessageAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithInstantMessageAddresses(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -667,12 +789,16 @@ func (x *SearchableItemAttributeSet) WithInstantMessageAddresses(items ...*found
 	return x
 }
 
+// A value that indicates if the message is likely to be considered junk.
+//
 // WithLikelyJunk sets the likelyJunk property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithLikelyJunk(likelyJunk *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetLikelyJunk(likelyJunk)
 	return x
 }
 
+// A list of editors who have worked on the file.
+//
 // WithEditors sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithEditors(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -691,6 +817,8 @@ func (x *SearchableItemAttributeSet) WithEditors(items ...*foundation.NSString) 
 	return x
 }
 
+// A list of people who are visible in an image or movie or written about in a document.
+//
 // WithParticipants sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithParticipants(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -709,6 +837,8 @@ func (x *SearchableItemAttributeSet) WithParticipants(items ...*foundation.NSStr
 	return x
 }
 
+// A list of projects of which this file is a part.
+//
 // WithProjects sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithProjects(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -727,6 +857,8 @@ func (x *SearchableItemAttributeSet) WithProjects(items ...*foundation.NSString)
 	return x
 }
 
+// An array of sources from which the media was obtained.
+//
 // WithContentSources sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithContentSources(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -745,54 +877,72 @@ func (x *SearchableItemAttributeSet) WithContentSources(items ...*foundation.NSS
 	return x
 }
 
+// A comment related to the media file.
+//
 // WithComment sets the comment property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithComment(comment string) *SearchableItemAttributeSet {
 	x.inner.SetComment(foundation.NSStringStringWithUTF8String(comment))
 	return x
 }
 
+// The copyright date of the content.
+//
 // WithCopyright sets the copyright property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithCopyright(copyright string) *SearchableItemAttributeSet {
 	x.inner.SetCopyright(foundation.NSStringStringWithUTF8String(copyright))
 	return x
 }
 
+// The date on which the file was last used.
+//
 // WithLastUsedDate sets the lastUsedDate property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithLastUsedDate(lastUsedDate *foundation.NSDate) *SearchableItemAttributeSet {
 	x.inner.SetLastUsedDate(lastUsedDate)
 	return x
 }
 
+// The creation date of an edited or optimized version of the song or composition.
+//
 // WithContentCreationDate sets the contentCreationDate property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithContentCreationDate(contentCreationDate *foundation.NSDate) *SearchableItemAttributeSet {
 	x.inner.SetContentCreationDate(contentCreationDate)
 	return x
 }
 
+// The date on which the contents of the file was last modified.
+//
 // WithContentModificationDate sets the contentModificationDate property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithContentModificationDate(contentModificationDate *foundation.NSDate) *SearchableItemAttributeSet {
 	x.inner.SetContentModificationDate(contentModificationDate)
 	return x
 }
 
+// The date on which the item was moved into its current location.
+//
 // WithAddedDate sets the addedDate property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithAddedDate(addedDate *foundation.NSDate) *SearchableItemAttributeSet {
 	x.inner.SetAddedDate(addedDate)
 	return x
 }
 
+// The most recent date on which the file was downloaded or received.
+//
 // WithDownloadedDate sets the downloadedDate property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithDownloadedDate(downloadedDate *foundation.NSDate) *SearchableItemAttributeSet {
 	x.inner.SetDownloadedDate(downloadedDate)
 	return x
 }
 
+// The duration (if appropriate) of the content of the file, in seconds.
+//
 // WithDuration sets the duration property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithDuration(duration *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetDuration(duration)
 	return x
 }
 
+// A list of contacts who are associated with the content in some way, not including the author.
+//
 // WithContactKeywords sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithContactKeywords(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -811,6 +961,8 @@ func (x *SearchableItemAttributeSet) WithContactKeywords(items ...*foundation.NS
 	return x
 }
 
+// The codecs used to encode/decode the media.
+//
 // WithCodecs sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithCodecs(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -829,6 +981,8 @@ func (x *SearchableItemAttributeSet) WithCodecs(items ...*foundation.NSString) *
 	return x
 }
 
+// The media types present in the content.
+//
 // WithMediaTypes sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithMediaTypes(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -847,36 +1001,48 @@ func (x *SearchableItemAttributeSet) WithMediaTypes(items ...*foundation.NSStrin
 	return x
 }
 
+// A value that indicates if the content is prepared for streaming.
+//
 // WithStreamable sets the streamable property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithStreamable(streamable *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetStreamable(streamable)
 	return x
 }
 
+// The total bit rate of the media, combining audio and video.
+//
 // WithTotalBitRate sets the totalBitRate property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithTotalBitRate(totalBitRate *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetTotalBitRate(totalBitRate)
 	return x
 }
 
+// The video bit rate of the media.
+//
 // WithVideoBitRate sets the videoBitRate property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithVideoBitRate(videoBitRate *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetVideoBitRate(videoBitRate)
 	return x
 }
 
+// The audio bit rate of the media.
+//
 // WithAudioBitRate sets the audioBitRate property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithAudioBitRate(audioBitRate *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetAudioBitRate(audioBitRate)
 	return x
 }
 
+// The delivery type of the file.
+//
 // WithDeliveryType sets the deliveryType property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithDeliveryType(deliveryType *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetDeliveryType(deliveryType)
 	return x
 }
 
+// A list of companies or organizations that created the content.
+//
 // WithOrganizations sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithOrganizations(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -895,12 +1061,16 @@ func (x *SearchableItemAttributeSet) WithOrganizations(items ...*foundation.NSSt
 	return x
 }
 
+// Indicates the role of the content creator.
+//
 // WithRole sets the role property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithRole(role string) *SearchableItemAttributeSet {
 	x.inner.SetRole(foundation.NSStringStringWithUTF8String(role))
 	return x
 }
 
+// A list of the included languages for the intellectual content of the media.
+//
 // WithLanguages sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithLanguages(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -919,12 +1089,16 @@ func (x *SearchableItemAttributeSet) WithLanguages(items ...*foundation.NSString
 	return x
 }
 
+// A link to information about the rights held in and over the media.
+//
 // WithRights sets the rights property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithRights(rights string) *SearchableItemAttributeSet {
 	x.inner.SetRights(foundation.NSStringStringWithUTF8String(rights))
 	return x
 }
 
+// A list of people, organizations, services, or other entities responsible for making the media available.
+//
 // WithPublishers sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithPublishers(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -943,6 +1117,8 @@ func (x *SearchableItemAttributeSet) WithPublishers(items ...*foundation.NSStrin
 	return x
 }
 
+// A list of people, organizations, or services that made contributions to the media content.
+//
 // WithContributors sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithContributors(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -961,6 +1137,8 @@ func (x *SearchableItemAttributeSet) WithContributors(items ...*foundation.NSStr
 	return x
 }
 
+// A list of descriptors that specify the extent or scope of the media.
+//
 // WithCoverage sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithCoverage(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -979,48 +1157,64 @@ func (x *SearchableItemAttributeSet) WithCoverage(items ...*foundation.NSString)
 	return x
 }
 
+// The user-supplied rating of the media.
+//
 // WithRating sets the rating property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithRating(rating *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetRating(rating)
 	return x
 }
 
+// A description of the rating.
+//
 // WithRatingDescription sets the ratingDescription property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithRatingDescription(ratingDescription string) *SearchableItemAttributeSet {
 	x.inner.SetRatingDescription(foundation.NSStringStringWithUTF8String(ratingDescription))
 	return x
 }
 
+// A user-supplied play count for the media.
+//
 // WithPlayCount sets the playCount property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithPlayCount(playCount *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetPlayCount(playCount)
 	return x
 }
 
+// Information about the media.
+//
 // WithInformation sets the information property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithInformation(information string) *SearchableItemAttributeSet {
 	x.inner.SetInformation(foundation.NSStringStringWithUTF8String(information))
 	return x
 }
 
+// The name of the director of the media (for example, a movie director).
+//
 // WithDirector sets the director property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithDirector(director string) *SearchableItemAttributeSet {
 	x.inner.SetDirector(foundation.NSStringStringWithUTF8String(director))
 	return x
 }
 
+// The producer of the content.
+//
 // WithProducer sets the producer property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithProducer(producer string) *SearchableItemAttributeSet {
 	x.inner.SetProducer(foundation.NSStringStringWithUTF8String(producer))
 	return x
 }
 
+// The genre of the media.
+//
 // WithGenre sets the genre property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithGenre(genre string) *SearchableItemAttributeSet {
 	x.inner.SetGenre(foundation.NSStringStringWithUTF8String(genre))
 	return x
 }
 
+// A list of performers in the media.
+//
 // WithPerformers sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithPerformers(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -1039,216 +1233,288 @@ func (x *SearchableItemAttributeSet) WithPerformers(items ...*foundation.NSStrin
 	return x
 }
 
+// The original format of the media.
+//
 // WithOriginalFormat sets the originalFormat property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithOriginalFormat(originalFormat string) *SearchableItemAttributeSet {
 	x.inner.SetOriginalFormat(foundation.NSStringStringWithUTF8String(originalFormat))
 	return x
 }
 
+// The original source of the media.
+//
 // WithOriginalSource sets the originalSource property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithOriginalSource(originalSource string) *SearchableItemAttributeSet {
 	x.inner.SetOriginalSource(foundation.NSStringStringWithUTF8String(originalSource))
 	return x
 }
 
+// A value that indicates if the media is local.
+//
 // WithLocal sets the local property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithLocal(local *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetLocal(local)
 	return x
 }
 
+// A value that indicates if the media contains explicit content.
+//
 // WithContentRating sets the contentRating property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithContentRating(contentRating *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetContentRating(contentRating)
 	return x
 }
 
+// The URL associated with the media.
+//
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithURL(uRL string) *SearchableItemAttributeSet {
 	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 	return x
 }
 
+// The sample rate of the audio data the file contains, as a float value representing Hz (audio frames per second), such as 44100.0 or 22254.54.
+//
 // WithAudioSampleRate sets the audioSampleRate property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithAudioSampleRate(audioSampleRate *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetAudioSampleRate(audioSampleRate)
 	return x
 }
 
+// The number of channels in the audio data that the file contains.
+//
 // WithAudioChannelCount sets the audioChannelCount property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithAudioChannelCount(audioChannelCount *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetAudioChannelCount(audioChannelCount)
 	return x
 }
 
+// The tempo of the music that the audio file contains, in beats per minute.
+//
 // WithTempo sets the tempo property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithTempo(tempo *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetTempo(tempo)
 	return x
 }
 
+// The musical key of the song or audio composition that the file contains, such as C, Dm, or F#m.
+//
 // WithKeySignature sets the keySignature property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithKeySignature(keySignature string) *SearchableItemAttributeSet {
 	x.inner.SetKeySignature(foundation.NSStringStringWithUTF8String(keySignature))
 	return x
 }
 
+// The time signature of the musical composition that the audio or MIDI file contains, in a string, such as “4/4” or “7/8”.
+//
 // WithTimeSignature sets the timeSignature property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithTimeSignature(timeSignature string) *SearchableItemAttributeSet {
 	x.inner.SetTimeSignature(foundation.NSStringStringWithUTF8String(timeSignature))
 	return x
 }
 
+// The name of the application that encoded the data the audio file contains.
+//
 // WithAudioEncodingApplication sets the audioEncodingApplication property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithAudioEncodingApplication(audioEncodingApplication string) *SearchableItemAttributeSet {
 	x.inner.SetAudioEncodingApplication(foundation.NSStringStringWithUTF8String(audioEncodingApplication))
 	return x
 }
 
+// The composer of the song or audio composition that the audio file contains.
+//
 // WithComposer sets the composer property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithComposer(composer string) *SearchableItemAttributeSet {
 	x.inner.SetComposer(foundation.NSStringStringWithUTF8String(composer))
 	return x
 }
 
+// The lyricist or text writer for the song or audio composition that the file contains.
+//
 // WithLyricist sets the lyricist property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithLyricist(lyricist string) *SearchableItemAttributeSet {
 	x.inner.SetLyricist(foundation.NSStringStringWithUTF8String(lyricist))
 	return x
 }
 
+// The title for a collection of audio media.
+//
 // WithAlbum sets the album property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithAlbum(album string) *SearchableItemAttributeSet {
 	x.inner.SetAlbum(foundation.NSStringStringWithUTF8String(album))
 	return x
 }
 
+// The artist associated with the media.
+//
 // WithArtist sets the artist property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithArtist(artist string) *SearchableItemAttributeSet {
 	x.inner.SetArtist(foundation.NSStringStringWithUTF8String(artist))
 	return x
 }
 
+// The track number of a song or audio composition when part of an album.
+//
 // WithAudioTrackNumber sets the audioTrackNumber property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithAudioTrackNumber(audioTrackNumber *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetAudioTrackNumber(audioTrackNumber)
 	return x
 }
 
+// The recording date of the song or composition.
+//
 // WithRecordingDate sets the recordingDate property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithRecordingDate(recordingDate *foundation.NSDate) *SearchableItemAttributeSet {
 	x.inner.SetRecordingDate(recordingDate)
 	return x
 }
 
+// The musical genre of the song or audio composition that the file contains, such as jazz, pop, rock, or classical.
+//
 // WithMusicalGenre sets the musicalGenre property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithMusicalGenre(musicalGenre string) *SearchableItemAttributeSet {
 	x.inner.SetMusicalGenre(foundation.NSStringStringWithUTF8String(musicalGenre))
 	return x
 }
 
+// A value that indicates whether the MIDI sequence the file contains is set up for use with a general MIDI device.
+//
 // WithGeneralMIDISequence sets the generalMIDISequence property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithGeneralMIDISequence(generalMIDISequence *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetGeneralMIDISequence(generalMIDISequence)
 	return x
 }
 
+// The category of the instrument associated with the audio file.
+//
 // WithMusicalInstrumentCategory sets the musicalInstrumentCategory property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithMusicalInstrumentCategory(musicalInstrumentCategory string) *SearchableItemAttributeSet {
 	x.inner.SetMusicalInstrumentCategory(foundation.NSStringStringWithUTF8String(musicalInstrumentCategory))
 	return x
 }
 
+// The name of an instrument within the context of an instrument category.
+//
 // WithMusicalInstrumentName sets the musicalInstrumentName property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithMusicalInstrumentName(musicalInstrumentName string) *SearchableItemAttributeSet {
 	x.inner.SetMusicalInstrumentName(foundation.NSStringStringWithUTF8String(musicalInstrumentName))
 	return x
 }
 
+// The height of the item, such as image or video frame height, in pixels.
+//
 // WithPixelHeight sets the pixelHeight property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithPixelHeight(pixelHeight *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetPixelHeight(pixelHeight)
 	return x
 }
 
+// The width of the item, such as image or video frame width, in pixels.
+//
 // WithPixelWidth sets the pixelWidth property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithPixelWidth(pixelWidth *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetPixelWidth(pixelWidth)
 	return x
 }
 
+// The total number of pixels in the image.
+//
 // WithPixelCount sets the pixelCount property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithPixelCount(pixelCount *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetPixelCount(pixelCount)
 	return x
 }
 
+// The color space model the image uses, such as RGB, CMYK, YUV, or YCbCr.
+//
 // WithColorSpace sets the colorSpace property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithColorSpace(colorSpace string) *SearchableItemAttributeSet {
 	x.inner.SetColorSpace(foundation.NSStringStringWithUTF8String(colorSpace))
 	return x
 }
 
+// The number of bits per sample.
+//
 // WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithBitsPerSample(bitsPerSample *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetBitsPerSample(bitsPerSample)
 	return x
 }
 
+// A value that indicates if the camera used a flash to capture the image.
+//
 // WithFlashOn sets the flashOn property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithFlashOn(flashOn *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetFlashOn(flashOn)
 	return x
 }
 
+// The actual focal length of the lens, in millimeters.
+//
 // WithFocalLength sets the focalLength property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithFocalLength(focalLength *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetFocalLength(focalLength)
 	return x
 }
 
+// A value that indicates if the focal length is 35mm.
+//
 // WithFocalLength35mm sets the focalLength35mm property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithFocalLength35mm(focalLength35mm *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetFocalLength35mm(focalLength35mm)
 	return x
 }
 
+// The manufacturer of the device that captured the image.
+//
 // WithAcquisitionMake sets the acquisitionMake property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithAcquisitionMake(acquisitionMake string) *SearchableItemAttributeSet {
 	x.inner.SetAcquisitionMake(foundation.NSStringStringWithUTF8String(acquisitionMake))
 	return x
 }
 
+// The model of the device that captured the image.
+//
 // WithAcquisitionModel sets the acquisitionModel property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithAcquisitionModel(acquisitionModel string) *SearchableItemAttributeSet {
 	x.inner.SetAcquisitionModel(foundation.NSStringStringWithUTF8String(acquisitionModel))
 	return x
 }
 
+// The owner of the camera that captured the image.
+//
 // WithCameraOwner sets the cameraOwner property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithCameraOwner(cameraOwner string) *SearchableItemAttributeSet {
 	x.inner.SetCameraOwner(foundation.NSStringStringWithUTF8String(cameraOwner))
 	return x
 }
 
+// The model of the lens that captured the image.
+//
 // WithLensModel sets the lensModel property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithLensModel(lensModel string) *SearchableItemAttributeSet {
 	x.inner.SetLensModel(foundation.NSStringStringWithUTF8String(lensModel))
 	return x
 }
 
+// The ISO speed setting at the time the camera captured the image.
+//
 // WithISOSpeed sets the iSOSpeed property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithISOSpeed(iSOSpeed *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetISOSpeed(iSOSpeed)
 	return x
 }
 
+// The orientation of the data.
+//
 // WithOrientation sets the orientation property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithOrientation(orientation *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetOrientation(orientation)
 	return x
 }
 
+// An array that contains the names of the various layers in the file.
+//
 // WithLayerNames sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithLayerNames(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
@@ -1267,281 +1533,375 @@ func (x *SearchableItemAttributeSet) WithLayerNames(items ...*foundation.NSStrin
 	return x
 }
 
+// The white balance setting when the camera captured the image.
+//
 // WithWhiteBalance sets the whiteBalance property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithWhiteBalance(whiteBalance *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetWhiteBalance(whiteBalance)
 	return x
 }
 
+// The size of the lens aperture at the time the camera captured the image, as a log-scale APEX value.
+//
 // WithAperture sets the aperture property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithAperture(aperture *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetAperture(aperture)
 	return x
 }
 
+// The name of the color profile the camera used for the image.
+//
 // WithProfileName sets the profileName property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithProfileName(profileName string) *SearchableItemAttributeSet {
 	x.inner.SetProfileName(foundation.NSStringStringWithUTF8String(profileName))
 	return x
 }
 
+// The resolution width of the image, in DPI.
+//
 // WithResolutionWidthDPI sets the resolutionWidthDPI property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithResolutionWidthDPI(resolutionWidthDPI *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetResolutionWidthDPI(resolutionWidthDPI)
 	return x
 }
 
+// The resolution height of the image, in DPI.
+//
 // WithResolutionHeightDPI sets the resolutionHeightDPI property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithResolutionHeightDPI(resolutionHeightDPI *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetResolutionHeightDPI(resolutionHeightDPI)
 	return x
 }
 
+// The mode the camera used for the exposure of the image.
+//
 // WithExposureMode sets the exposureMode property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithExposureMode(exposureMode *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetExposureMode(exposureMode)
 	return x
 }
 
+// The time that the lens was open during exposure, in seconds.
+//
 // WithExposureTime sets the exposureTime property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithExposureTime(exposureTime *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetExposureTime(exposureTime)
 	return x
 }
 
+// The version of the EXIF header that was used to generate the metadata for the image.
+//
 // WithEXIFVersion sets the eXIFVersion property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithEXIFVersion(eXIFVersion string) *SearchableItemAttributeSet {
 	x.inner.SetEXIFVersion(foundation.NSStringStringWithUTF8String(eXIFVersion))
 	return x
 }
 
+// The version of GPS Info IFD header that was used to generate the metadata for the image.
+//
 // WithEXIFGPSVersion sets the eXIFGPSVersion property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithEXIFGPSVersion(eXIFGPSVersion string) *SearchableItemAttributeSet {
 	x.inner.SetEXIFGPSVersion(foundation.NSStringStringWithUTF8String(eXIFGPSVersion))
 	return x
 }
 
+// Indicates if the image file has an alpha channel.
+//
 // WithHasAlphaChannel sets the hasAlphaChannel property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithHasAlphaChannel(hasAlphaChannel *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetHasAlphaChannel(hasAlphaChannel)
 	return x
 }
 
+// A value that indicates if the camera used red-eye reduction when capturing the image.
+//
 // WithRedEyeOn sets the redEyeOn property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithRedEyeOn(redEyeOn *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetRedEyeOn(redEyeOn)
 	return x
 }
 
+// The metering mode.
+//
 // WithMeteringMode sets the meteringMode property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithMeteringMode(meteringMode string) *SearchableItemAttributeSet {
 	x.inner.SetMeteringMode(foundation.NSStringStringWithUTF8String(meteringMode))
 	return x
 }
 
+// The smallest F number of the lens.
+//
 // WithMaxAperture sets the maxAperture property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithMaxAperture(maxAperture *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetMaxAperture(maxAperture)
 	return x
 }
 
+// The focal length of the lens, divided by the diameter of the aperture when the camera captured the image.
+//
 // WithFNumber sets the fNumber property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithFNumber(fNumber *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetFNumber(fNumber)
 	return x
 }
 
+// The class of the program the camera used to set exposure when capturing the image.
+//
 // WithExposureProgram sets the exposureProgram property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithExposureProgram(exposureProgram string) *SearchableItemAttributeSet {
 	x.inner.SetExposureProgram(foundation.NSStringStringWithUTF8String(exposureProgram))
 	return x
 }
 
+// The time that the lens was open during exposure, in a string, such as “1/250 seconds”.
+//
 // WithExposureTimeString sets the exposureTimeString property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithExposureTimeString(exposureTimeString string) *SearchableItemAttributeSet {
 	x.inner.SetExposureTimeString(foundation.NSStringStringWithUTF8String(exposureTimeString))
 	return x
 }
 
+// A publishable string that provides a synopsis of the contents of the item.
+//
 // WithHeadline sets the headline property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithHeadline(headline string) *SearchableItemAttributeSet {
 	x.inner.SetHeadline(foundation.NSStringStringWithUTF8String(headline))
 	return x
 }
 
+// Instructions that concern the use of the item, such as an embargo or warning.
+//
 // WithInstructions sets the instructions property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithInstructions(instructions string) *SearchableItemAttributeSet {
 	x.inner.SetInstructions(foundation.NSStringStringWithUTF8String(instructions))
 	return x
 }
 
+// The thoroughfare, such as a street name, associated with the location for the item according to guidelines the provider establishes.
+//
 // WithThoroughfare sets the thoroughfare property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithThoroughfare(thoroughfare string) *SearchableItemAttributeSet {
 	x.inner.SetThoroughfare(foundation.NSStringStringWithUTF8String(thoroughfare))
 	return x
 }
 
+// The sublocation, such as a street number, for the item according to guidelines the provider establishes.
+//
 // WithSubThoroughfare sets the subThoroughfare property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithSubThoroughfare(subThoroughfare string) *SearchableItemAttributeSet {
 	x.inner.SetSubThoroughfare(foundation.NSStringStringWithUTF8String(subThoroughfare))
 	return x
 }
 
+// The postal code for the item according to guidelines the provider establishes.
+//
 // WithPostalCode sets the postalCode property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithPostalCode(postalCode string) *SearchableItemAttributeSet {
 	x.inner.SetPostalCode(foundation.NSStringStringWithUTF8String(postalCode))
 	return x
 }
 
+// The city of the item’s origin according to guidelines that the provider establishes.
+//
 // WithCity sets the city property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithCity(city string) *SearchableItemAttributeSet {
 	x.inner.SetCity(foundation.NSStringStringWithUTF8String(city))
 	return x
 }
 
+// The province or state of origin according to guidelines the provider establishes.
+//
 // WithStateOrProvince sets the stateOrProvince property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithStateOrProvince(stateOrProvince string) *SearchableItemAttributeSet {
 	x.inner.SetStateOrProvince(foundation.NSStringStringWithUTF8String(stateOrProvince))
 	return x
 }
 
+// The full, publishable name of the country or region in which the intellectual property of the item was created, according to guidelines the provider establishes.
+//
 // WithCountry sets the country property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithCountry(country string) *SearchableItemAttributeSet {
 	x.inner.SetCountry(foundation.NSStringStringWithUTF8String(country))
 	return x
 }
 
+// The fully formatted address of the item, received from MapKit.
+//
 // WithFullyFormattedAddress sets the fullyFormattedAddress property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithFullyFormattedAddress(fullyFormattedAddress string) *SearchableItemAttributeSet {
 	x.inner.SetFullyFormattedAddress(foundation.NSStringStringWithUTF8String(fullyFormattedAddress))
 	return x
 }
 
+// The altitude of the item in meters above sea level, expressed using the WGS84 datum.
+//
 // WithAltitude sets the altitude property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithAltitude(altitude *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetAltitude(altitude)
 	return x
 }
 
+// The latitude of the item, in degrees north of the equator, expressed using the WGS84 datum.
+//
 // WithLatitude sets the latitude property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithLatitude(latitude *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetLatitude(latitude)
 	return x
 }
 
+// The longitude of the item, in degrees east of the prime meridian, expressed using the WGS84 datum.
+//
 // WithLongitude sets the longitude property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithLongitude(longitude *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetLongitude(longitude)
 	return x
 }
 
+// The speed of the item, in kilometers per hour.
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithSpeed(speed *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetSpeed(speed)
 	return x
 }
 
+// The timestamp on the item.
+//
 // WithTimestamp sets the timestamp property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithTimestamp(timestamp *foundation.NSDate) *SearchableItemAttributeSet {
 	x.inner.SetTimestamp(timestamp)
 	return x
 }
 
+// The direction of the item’s image in degrees from true north.
+//
 // WithImageDirection sets the imageDirection property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithImageDirection(imageDirection *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetImageDirection(imageDirection)
 	return x
 }
 
+// The name of the location or point of interest associated with the item.
+//
 // WithNamedLocation sets the namedLocation property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithNamedLocation(namedLocation string) *SearchableItemAttributeSet {
 	x.inner.SetNamedLocation(foundation.NSStringStringWithUTF8String(namedLocation))
 	return x
 }
 
+// The direction of travel of the item in degrees from true north.
+//
 // WithGPSTrack sets the gPSTrack property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithGPSTrack(gPSTrack *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetGPSTrack(gPSTrack)
 	return x
 }
 
+// The status of the GPS receiver.
+//
 // WithGPSStatus sets the gPSStatus property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithGPSStatus(gPSStatus string) *SearchableItemAttributeSet {
 	x.inner.SetGPSStatus(foundation.NSStringStringWithUTF8String(gPSStatus))
 	return x
 }
 
+// The measurement precision mode in use by the GPS receiver.
+//
 // WithGPSMeasureMode sets the gPSMeasureMode property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithGPSMeasureMode(gPSMeasureMode string) *SearchableItemAttributeSet {
 	x.inner.SetGPSMeasureMode(foundation.NSStringStringWithUTF8String(gPSMeasureMode))
 	return x
 }
 
+// The GPS dilution of precision value.
+//
 // WithGPSDOP sets the gPSDOP property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithGPSDOP(gPSDOP *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetGPSDOP(gPSDOP)
 	return x
 }
 
+// The geodetic data that the GPS receiver uses.
+//
 // WithGPSMapDatum sets the gPSMapDatum property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithGPSMapDatum(gPSMapDatum string) *SearchableItemAttributeSet {
 	x.inner.SetGPSMapDatum(foundation.NSStringStringWithUTF8String(gPSMapDatum))
 	return x
 }
 
+// The latitude of the destination point.
+//
 // WithGPSDestLatitude sets the gPSDestLatitude property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithGPSDestLatitude(gPSDestLatitude *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetGPSDestLatitude(gPSDestLatitude)
 	return x
 }
 
+// The longitude of the destination point.
+//
 // WithGPSDestLongitude sets the gPSDestLongitude property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithGPSDestLongitude(gPSDestLongitude *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetGPSDestLongitude(gPSDestLongitude)
 	return x
 }
 
+// The bearing to the destination point.
+//
 // WithGPSDestBearing sets the gPSDestBearing property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithGPSDestBearing(gPSDestBearing *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetGPSDestBearing(gPSDestBearing)
 	return x
 }
 
+// The distance to the destination point.
+//
 // WithGPSDestDistance sets the gPSDestDistance property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithGPSDestDistance(gPSDestDistance *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetGPSDestDistance(gPSDestDistance)
 	return x
 }
 
+// The location finding method that the GPS receiver uses.
+//
 // WithGPSProcessingMethod sets the gPSProcessingMethod property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithGPSProcessingMethod(gPSProcessingMethod string) *SearchableItemAttributeSet {
 	x.inner.SetGPSProcessingMethod(foundation.NSStringStringWithUTF8String(gPSProcessingMethod))
 	return x
 }
 
+// Information about the GPS area.
+//
 // WithGPSAreaInformation sets the gPSAreaInformation property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithGPSAreaInformation(gPSAreaInformation string) *SearchableItemAttributeSet {
 	x.inner.SetGPSAreaInformation(foundation.NSStringStringWithUTF8String(gPSAreaInformation))
 	return x
 }
 
+// The date and time related to the GPS value.
+//
 // WithGPSDateStamp sets the gPSDateStamp property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithGPSDateStamp(gPSDateStamp *foundation.NSDate) *SearchableItemAttributeSet {
 	x.inner.SetGPSDateStamp(gPSDateStamp)
 	return x
 }
 
+// The differential correction applied to the GPS receiver.
+//
 // WithGPSDifferental sets the gPSDifferental property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithGPSDifferental(gPSDifferental *foundation.NSNumber) *SearchableItemAttributeSet {
 	x.inner.SetGPSDifferental(gPSDifferental)
 	return x
 }
 
+// Sets the value for a custom attribute key.
+//
 // SetValueForCustomKey calls the underlying SetValueForCustomKey.
 func (x *SearchableItemAttributeSet) SetValueForCustomKey(value foundation.NSSecureCoding, key *raw.CSCustomAttributeKey) {
 	x.inner.SetValueForCustomKey(value, key)
 }
 
+// Returns the value associated with the specified custom attribute key.
+//
 // ValueForCustomKey calls the underlying ValueForCustomKey.
 func (x *SearchableItemAttributeSet) ValueForCustomKey(key *raw.CSCustomAttributeKey) foundation.NSSecureCoding {
 	return x.inner.ValueForCustomKey(key)

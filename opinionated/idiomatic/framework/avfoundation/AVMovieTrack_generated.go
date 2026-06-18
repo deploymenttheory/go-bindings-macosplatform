@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A track in a movie that conforms to the QuickTime or ISO base media file format.
+//
 // MovieTrack wraps [raw.AVMovieTrack] with a fluent Go API.
 type MovieTrack struct {
 	inner *raw.AVMovieTrack

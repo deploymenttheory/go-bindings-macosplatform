@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A view that draws text and handles user interactions with that text.
+//
 // TextView wraps [raw.NSTextView] with a fluent Go API.
 type TextView struct {
 	inner *raw.NSTextView
@@ -35,6 +37,8 @@ func TextViewFromID(id objc.ID) *TextView {
 	return &TextView{inner: raw.NSTextViewFromID(id)}
 }
 
+// Initializes a text view.
+//
 // NewTextViewWithFrameTextContainer creates a new [TextView].
 func NewTextViewWithFrameTextContainer(frameRect corefoundation.CGRect, container *raw.NSTextContainer) *TextView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextView")), objc.RegisterName("alloc"))
@@ -42,6 +46,8 @@ func NewTextViewWithFrameTextContainer(frameRect corefoundation.CGRect, containe
 	return &TextView{inner: raw.NSTextViewFromID(_id)}
 }
 
+// Initializes a text view with data in an unarchiver.
+//
 // NewTextViewWithCoder creates a new [TextView].
 func NewTextViewWithCoder(coder *foundation.NSCoder) *TextView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextView")), objc.RegisterName("alloc"))
@@ -49,6 +55,8 @@ func NewTextViewWithCoder(coder *foundation.NSCoder) *TextView {
 	return &TextView{inner: raw.NSTextViewFromID(_id)}
 }
 
+// Initializes a text view.
+//
 // NewTextViewWithFrame creates a new [TextView].
 func NewTextViewWithFrame(frameRect corefoundation.CGRect) *TextView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextView")), objc.RegisterName("alloc"))
@@ -63,24 +71,32 @@ func NewTextViewUsingTextLayoutManager(usingTextLayoutManager bool) *TextView {
 	return &TextView{inner: raw.NSTextViewFromID(_id)}
 }
 
+// The receiver’s text container.
+//
 // WithTextContainer sets the textContainer property and returns the receiver for chaining.
 func (x *TextView) WithTextContainer(textContainer *TextContainer) *TextView {
 	x.inner.SetTextContainer(textContainer.Unwrap())
 	return x
 }
 
+// The empty space the receiver leaves around its associated text container.
+//
 // WithTextContainerInset sets the textContainerInset property and returns the receiver for chaining.
 func (x *TextView) WithTextContainerInset(textContainerInset corefoundation.CGSize) *TextView {
 	x.inner.SetTextContainerInset(textContainerInset)
 	return x
 }
 
+// A Boolean value that indicates whether the framework should use adaptive color mapping for dark appearance.
+//
 // WithUsesAdaptiveColorMappingForDarkAppearance sets the usesAdaptiveColorMappingForDarkAppearance property and returns the receiver for chaining.
 func (x *TextView) WithUsesAdaptiveColorMappingForDarkAppearance(usesAdaptiveColorMappingForDarkAppearance bool) *TextView {
 	x.inner.SetUsesAdaptiveColorMappingForDarkAppearance(usesAdaptiveColorMappingForDarkAppearance)
 	return x
 }
 
+// An array containing the ranges of characters selected in the receiver’s layout manager.
+//
 // WithSelectedRanges sets the collection, converting the Go slice to an NSArray.
 func (x *TextView) WithSelectedRanges(items ...*foundation.NSValue) *TextView {
 	if len(items) == 0 {
@@ -99,96 +115,128 @@ func (x *TextView) WithSelectedRanges(items ...*foundation.NSValue) *TextView {
 	return x
 }
 
+// The selection granularity for subsequent extension of a selection.
+//
 // WithSelectionGranularity sets the selectionGranularity property and returns the receiver for chaining.
 func (x *TextView) WithSelectionGranularity(selectionGranularity NSSelectionGranularity) *TextView {
 	x.inner.SetSelectionGranularity(raw.NSSelectionGranularity(selectionGranularity))
 	return x
 }
 
+// The attributes used to indicate the selection.
+//
 // WithSelectedTextAttributes sets the selectedTextAttributes property and returns the receiver for chaining.
 func (x *TextView) WithSelectedTextAttributes(selectedTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextView {
 	x.inner.SetSelectedTextAttributes(selectedTextAttributes)
 	return x
 }
 
+// The color of the insertion point.
+//
 // WithInsertionPointColor sets the insertionPointColor property and returns the receiver for chaining.
 func (x *TextView) WithInsertionPointColor(insertionPointColor *Color) *TextView {
 	x.inner.SetInsertionPointColor(insertionPointColor.Unwrap())
 	return x
 }
 
+// The attributes used to draw marked text.
+//
 // WithMarkedTextAttributes sets the markedTextAttributes property and returns the receiver for chaining.
 func (x *TextView) WithMarkedTextAttributes(markedTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextView {
 	x.inner.SetMarkedTextAttributes(markedTextAttributes)
 	return x
 }
 
+// The attributes used to draw the onscreen presentation of link text.
+//
 // WithLinkTextAttributes sets the linkTextAttributes property and returns the receiver for chaining.
 func (x *TextView) WithLinkTextAttributes(linkTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextView {
 	x.inner.SetLinkTextAttributes(linkTextAttributes)
 	return x
 }
 
+// A Boolean value that indicates whether the text view automatically supplies the destination of a link as a tooltip for text that has a link attribute.
+//
 // WithDisplaysLinkToolTips sets the displaysLinkToolTips property and returns the receiver for chaining.
 func (x *TextView) WithDisplaysLinkToolTips(displaysLinkToolTips bool) *TextView {
 	x.inner.SetDisplaysLinkToolTips(displaysLinkToolTips)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver accepts the glyph info attribute.
+//
 // WithAcceptsGlyphInfo sets the acceptsGlyphInfo property and returns the receiver for chaining.
 func (x *TextView) WithAcceptsGlyphInfo(acceptsGlyphInfo bool) *TextView {
 	x.inner.SetAcceptsGlyphInfo(acceptsGlyphInfo)
 	return x
 }
 
+// A Boolean value that controls whether the text views sharing the receiver’s layout manager use a ruler.
+//
 // WithUsesRuler sets the usesRuler property and returns the receiver for chaining.
 func (x *TextView) WithUsesRuler(usesRuler bool) *TextView {
 	x.inner.SetUsesRuler(usesRuler)
 	return x
 }
 
+// A Boolean value that indicates whether this text view uses the inspector bar.
+//
 // WithUsesInspectorBar sets the usesInspectorBar property and returns the receiver for chaining.
 func (x *TextView) WithUsesInspectorBar(usesInspectorBar bool) *TextView {
 	x.inner.SetUsesInspectorBar(usesInspectorBar)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver has continuous spell checking enabled.
+//
 // WithContinuousSpellCheckingEnabled sets the continuousSpellCheckingEnabled property and returns the receiver for chaining.
 func (x *TextView) WithContinuousSpellCheckingEnabled(continuousSpellCheckingEnabled bool) *TextView {
 	x.inner.SetContinuousSpellCheckingEnabled(continuousSpellCheckingEnabled)
 	return x
 }
 
+// Enables and disables grammar checking.
+//
 // WithGrammarCheckingEnabled sets the grammarCheckingEnabled property and returns the receiver for chaining.
 func (x *TextView) WithGrammarCheckingEnabled(grammarCheckingEnabled bool) *TextView {
 	x.inner.SetGrammarCheckingEnabled(grammarCheckingEnabled)
 	return x
 }
 
+// The receiver’s typing attributes.
+//
 // WithTypingAttributes sets the typingAttributes property and returns the receiver for chaining.
 func (x *TextView) WithTypingAttributes(typingAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextView {
 	x.inner.SetTypingAttributes(typingAttributes)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver allows its background color to change.
+//
 // WithAllowsDocumentBackgroundColorChange sets the allowsDocumentBackgroundColorChange property and returns the receiver for chaining.
 func (x *TextView) WithAllowsDocumentBackgroundColorChange(allowsDocumentBackgroundColorChange bool) *TextView {
 	x.inner.SetAllowsDocumentBackgroundColorChange(allowsDocumentBackgroundColorChange)
 	return x
 }
 
+// The receiver’s default paragraph style.
+//
 // WithDefaultParagraphStyle sets the defaultParagraphStyle property and returns the receiver for chaining.
 func (x *TextView) WithDefaultParagraphStyle(defaultParagraphStyle ParagraphStyleProvider) *TextView {
 	x.inner.SetDefaultParagraphStyle(defaultParagraphStyle.asParagraphStyle())
 	return x
 }
 
+// A Boolean value that indicates whether the receiver allows undo.
+//
 // WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
 func (x *TextView) WithAllowsUndo(allowsUndo bool) *TextView {
 	x.inner.SetAllowsUndo(allowsUndo)
 	return x
 }
 
+// Indicates whether image attachments should permit editing of their images.
+//
 // WithAllowsImageEditing sets the allowsImageEditing property and returns the receiver for chaining.
 func (x *TextView) WithAllowsImageEditing(allowsImageEditing bool) *TextView {
 	x.inner.SetAllowsImageEditing(allowsImageEditing)
@@ -201,12 +249,16 @@ func (x *TextView) WithUsesRolloverButtonForSelection(usesRolloverButtonForSelec
 	return x
 }
 
+// A Boolean value that controls whether the scroll view enclosing text views sharing the receiver’s layout manager displays the ruler.
+//
 // WithRulerVisible sets the rulerVisible property and returns the receiver for chaining.
 func (x *TextView) WithRulerVisible(rulerVisible bool) *TextView {
 	x.inner.SetRulerVisible(rulerVisible)
 	return x
 }
 
+// An array of locale identifiers representing input sources that are allowed to be enabled when the receiver has the keyboard focus.
+//
 // WithAllowedInputSourceLocales sets the collection, converting the Go slice to an NSArray.
 func (x *TextView) WithAllowedInputSourceLocales(items ...*foundation.NSString) *TextView {
 	if len(items) == 0 {
@@ -237,66 +289,88 @@ func (x *TextView) WithAllowedWritingToolsResultOptions(allowedWritingToolsResul
 	return x
 }
 
+// A Boolean value that controls whether the receiver inserts or deletes space around selected words so as to preserve proper spacing and punctuation.
+//
 // WithSmartInsertDeleteEnabled sets the smartInsertDeleteEnabled property and returns the receiver for chaining.
 func (x *TextView) WithSmartInsertDeleteEnabled(smartInsertDeleteEnabled bool) *TextView {
 	x.inner.SetSmartInsertDeleteEnabled(smartInsertDeleteEnabled)
 	return x
 }
 
+// A Boolean value that enables and disables automatic quotation mark substitution.
+//
 // WithAutomaticQuoteSubstitutionEnabled sets the automaticQuoteSubstitutionEnabled property and returns the receiver for chaining.
 func (x *TextView) WithAutomaticQuoteSubstitutionEnabled(automaticQuoteSubstitutionEnabled bool) *TextView {
 	x.inner.SetAutomaticQuoteSubstitutionEnabled(automaticQuoteSubstitutionEnabled)
 	return x
 }
 
+// A Boolean value that enables or disables automatic link detection.
+//
 // WithAutomaticLinkDetectionEnabled sets the automaticLinkDetectionEnabled property and returns the receiver for chaining.
 func (x *TextView) WithAutomaticLinkDetectionEnabled(automaticLinkDetectionEnabled bool) *TextView {
 	x.inner.SetAutomaticLinkDetectionEnabled(automaticLinkDetectionEnabled)
 	return x
 }
 
+// A Boolean value that indicates whether automatic data detection is enabled.
+//
 // WithAutomaticDataDetectionEnabled sets the automaticDataDetectionEnabled property and returns the receiver for chaining.
 func (x *TextView) WithAutomaticDataDetectionEnabled(automaticDataDetectionEnabled bool) *TextView {
 	x.inner.SetAutomaticDataDetectionEnabled(automaticDataDetectionEnabled)
 	return x
 }
 
+// A Boolean value that indicates whether automatic dash substitution is enabled.
+//
 // WithAutomaticDashSubstitutionEnabled sets the automaticDashSubstitutionEnabled property and returns the receiver for chaining.
 func (x *TextView) WithAutomaticDashSubstitutionEnabled(automaticDashSubstitutionEnabled bool) *TextView {
 	x.inner.SetAutomaticDashSubstitutionEnabled(automaticDashSubstitutionEnabled)
 	return x
 }
 
+// A Boolean value that indicates whether automatic text replacement is enabled.
+//
 // WithAutomaticTextReplacementEnabled sets the automaticTextReplacementEnabled property and returns the receiver for chaining.
 func (x *TextView) WithAutomaticTextReplacementEnabled(automaticTextReplacementEnabled bool) *TextView {
 	x.inner.SetAutomaticTextReplacementEnabled(automaticTextReplacementEnabled)
 	return x
 }
 
+// A Boolean value that indicates whether automatic spelling correction is enabled.
+//
 // WithAutomaticSpellingCorrectionEnabled sets the automaticSpellingCorrectionEnabled property and returns the receiver for chaining.
 func (x *TextView) WithAutomaticSpellingCorrectionEnabled(automaticSpellingCorrectionEnabled bool) *TextView {
 	x.inner.SetAutomaticSpellingCorrectionEnabled(automaticSpellingCorrectionEnabled)
 	return x
 }
 
+// The default text checking types.
+//
 // WithEnabledTextCheckingTypes sets the enabledTextCheckingTypes property and returns the receiver for chaining.
 func (x *TextView) WithEnabledTextCheckingTypes(enabledTextCheckingTypes uint64) *TextView {
 	x.inner.SetEnabledTextCheckingTypes(enabledTextCheckingTypes)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver allows for a find panel.
+//
 // WithUsesFindPanel sets the usesFindPanel property and returns the receiver for chaining.
 func (x *TextView) WithUsesFindPanel(usesFindPanel bool) *TextView {
 	x.inner.SetUsesFindPanel(usesFindPanel)
 	return x
 }
 
+// A Boolean value that indicates whether to use the find bar for this text view.
+//
 // WithUsesFindBar sets the usesFindBar property and returns the receiver for chaining.
 func (x *TextView) WithUsesFindBar(usesFindBar bool) *TextView {
 	x.inner.SetUsesFindBar(usesFindBar)
 	return x
 }
 
+// A Boolean value that indicates whether incremental searching is enabled.
+//
 // WithIncrementalSearchingEnabled sets the incrementalSearchingEnabled property and returns the receiver for chaining.
 func (x *TextView) WithIncrementalSearchingEnabled(incrementalSearchingEnabled bool) *TextView {
 	x.inner.SetIncrementalSearchingEnabled(incrementalSearchingEnabled)
@@ -315,6 +389,8 @@ func (x *TextView) WithMathExpressionCompletionType(mathExpressionCompletionType
 	return x
 }
 
+// A Boolean value that indicates whether the text view supplies autocompletion suggestions as the user types.
+//
 // WithAutomaticTextCompletionEnabled sets the automaticTextCompletionEnabled property and returns the receiver for chaining.
 func (x *TextView) WithAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) *TextView {
 	x.inner.SetAutomaticTextCompletionEnabled(automaticTextCompletionEnabled)
@@ -327,120 +403,160 @@ func (x *TextView) WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTo
 	return x
 }
 
+// ************************* Text Highlight support **************************
+//
 // WithTextHighlightAttributes sets the textHighlightAttributes property and returns the receiver for chaining.
 func (x *TextView) WithTextHighlightAttributes(textHighlightAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextView {
 	x.inner.SetTextHighlightAttributes(textHighlightAttributes)
 	return x
 }
 
+// The characters of the receiver’s text.
+//
 // WithString sets the string_ property and returns the receiver for chaining.
 func (x *TextView) WithString(string_ string) *TextView {
 	x.inner.NSText.SetString(foundation.NSStringStringWithUTF8String(string_))
 	return x
 }
 
+// The receiver’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *TextView) WithDelegate(delegate raw.NSTextDelegate) *TextView {
 	x.inner.NSText.SetDelegate(delegate)
 	return x
 }
 
+// A Boolean that controls whether the receiver allows the user to edit its text.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *TextView) WithEditable(editable bool) *TextView {
 	x.inner.NSText.SetEditable(editable)
 	return x
 }
 
+// A Boolean that controls whether the receiver allows the user to select its text.
+//
 // WithSelectable sets the selectable property and returns the receiver for chaining.
 func (x *TextView) WithSelectable(selectable bool) *TextView {
 	x.inner.NSText.SetSelectable(selectable)
 	return x
 }
 
+// A Boolean that controls whether the receiver allows the user to apply attributes to specific ranges of the text.
+//
 // WithRichText sets the richText property and returns the receiver for chaining.
 func (x *TextView) WithRichText(richText bool) *TextView {
 	x.inner.NSText.SetRichText(richText)
 	return x
 }
 
+// A Boolean that controls whether the receiver allows the user to import files by dragging.
+//
 // WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
 func (x *TextView) WithImportsGraphics(importsGraphics bool) *TextView {
 	x.inner.NSText.SetImportsGraphics(importsGraphics)
 	return x
 }
 
+// A Boolean that controls whether the receiver interprets Tab, Shift-Tab, and Return (Enter) as cues to end editing and possibly to change the first responder.
+//
 // WithFieldEditor sets the fieldEditor property and returns the receiver for chaining.
 func (x *TextView) WithFieldEditor(fieldEditor bool) *TextView {
 	x.inner.NSText.SetFieldEditor(fieldEditor)
 	return x
 }
 
+// A Boolean that controls whether the receiver uses the Font panel and Font menu.
+//
 // WithUsesFontPanel sets the usesFontPanel property and returns the receiver for chaining.
 func (x *TextView) WithUsesFontPanel(usesFontPanel bool) *TextView {
 	x.inner.NSText.SetUsesFontPanel(usesFontPanel)
 	return x
 }
 
+// A Boolean that controls whether the receiver draws its background.
+//
 // WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
 func (x *TextView) WithDrawsBackground(drawsBackground bool) *TextView {
 	x.inner.NSText.SetDrawsBackground(drawsBackground)
 	return x
 }
 
+// The receiver’s background color to a given color.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *TextView) WithBackgroundColor(backgroundColor *Color) *TextView {
 	x.inner.NSText.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// The receiver’s characters within aRange.
+//
 // WithSelectedRange sets the selectedRange property and returns the receiver for chaining.
 func (x *TextView) WithSelectedRange(selectedRange foundation.NSRange) *TextView {
 	x.inner.NSText.SetSelectedRange(selectedRange)
 	return x
 }
 
+// The font of all the receiver’s text.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *TextView) WithFont(font *Font) *TextView {
 	x.inner.NSText.SetFont(font.Unwrap())
 	return x
 }
 
+// The text color of all characters in the receiver.
+//
 // WithTextColor sets the textColor property and returns the receiver for chaining.
 func (x *TextView) WithTextColor(textColor *Color) *TextView {
 	x.inner.NSText.SetTextColor(textColor.Unwrap())
 	return x
 }
 
+// The alignment of all the receiver’s text.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *TextView) WithAlignment(alignment NSTextAlignment) *TextView {
 	x.inner.NSText.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *TextView) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TextView {
 	x.inner.NSText.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// The receiver’s maximum size.
+//
 // WithMaxSize sets the maxSize property and returns the receiver for chaining.
 func (x *TextView) WithMaxSize(maxSize corefoundation.CGSize) *TextView {
 	x.inner.NSText.SetMaxSize(maxSize)
 	return x
 }
 
+// The receiver’s minimum size.
+//
 // WithMinSize sets the minSize property and returns the receiver for chaining.
 func (x *TextView) WithMinSize(minSize corefoundation.CGSize) *TextView {
 	x.inner.NSText.SetMinSize(minSize)
 	return x
 }
 
+// A Boolean that controls whether the receiver changes its width to fit the width of its text.
+//
 // WithHorizontallyResizable sets the horizontallyResizable property and returns the receiver for chaining.
 func (x *TextView) WithHorizontallyResizable(horizontallyResizable bool) *TextView {
 	x.inner.NSText.SetHorizontallyResizable(horizontallyResizable)
 	return x
 }
 
+// A Boolean that controls whether the receiver changes its height to fit the height of its text.
+//
 // WithVerticallyResizable sets the verticallyResizable property and returns the receiver for chaining.
 func (x *TextView) WithVerticallyResizable(verticallyResizable bool) *TextView {
 	x.inner.NSText.SetVerticallyResizable(verticallyResizable)
@@ -489,6 +605,8 @@ func (x *TextView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptio
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *TextView) WithFrame(frame corefoundation.CGRect) *TextView {
 	x.inner.NSText.NSView.SetFrame(frame)
@@ -513,6 +631,8 @@ func (x *TextView) WithBoundsRotation(boundsRotation float64) *TextView {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *TextView) WithBounds(bounds corefoundation.CGRect) *TextView {
 	x.inner.NSText.NSView.SetBounds(bounds)
@@ -525,6 +645,8 @@ func (x *TextView) WithCanDrawConcurrently(canDrawConcurrently bool) *TextView {
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *TextView) WithNeedsDisplay(needsDisplay bool) *TextView {
 	x.inner.NSText.NSView.SetNeedsDisplay(needsDisplay)
@@ -711,7 +833,7 @@ func (x *TextView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundat
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *TextView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextView {
@@ -767,225 +889,313 @@ func (x *TextView) WithPressureConfiguration(pressureConfiguration *PressureConf
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *TextView) WithNextResponder(nextResponder ResponderProvider) *TextView {
 	x.inner.NSText.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *TextView) WithMenu(menu *Menu) *TextView {
 	x.inner.NSText.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *TextView) WithUserActivity(userActivity *foundation.NSUserActivity) *TextView {
 	x.inner.NSText.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *TextView) WithTouchBar(touchBar *TouchBar) *TextView {
 	x.inner.NSText.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Replaces the text container for the group of text system objects containing the receiver, keeping the association between the receiver and its layout manager intact.
+//
 // ReplaceTextContainer calls the underlying ReplaceTextContainer.
 func (x *TextView) ReplaceTextContainer(newContainer *raw.NSTextContainer) {
 	x.inner.ReplaceTextContainer(newContainer)
 }
 
+// Invalidates the calculated origin of the text container.
+//
 // InvalidateTextContainerOrigin calls the underlying InvalidateTextContainerOrigin.
 func (x *TextView) InvalidateTextContainerOrigin() {
 	x.inner.InvalidateTextContainerOrigin()
 }
 
+// Inserts aString into the receiver’s text at the insertion point if there is one, otherwise replacing the selection.
+//
 // InsertText calls the underlying InsertText.
 func (x *TextView) InsertText(insertString objc.ID) {
 	x.inner.InsertText(insertString)
 }
 
+// Attempts to set the frame size as if by user action.
+//
 // SetConstrainedFrameSize calls the underlying SetConstrainedFrameSize.
 func (x *TextView) SetConstrainedFrameSize(desiredSize corefoundation.CGSize) {
 	x.inner.SetConstrainedFrameSize(desiredSize)
 }
 
+// Sets the alignment of the paragraphs containing characters in the specified range.
+//
 // SetAlignmentRange calls the underlying SetAlignmentRange.
 func (x *TextView) SetAlignmentRange(alignment NSTextAlignment, range_ foundation.NSRange) {
 	x.inner.SetAlignmentRange(raw.NSTextAlignment(alignment), range_)
 }
 
+// Sets the base writing direction of a range of text.
+//
 // SetBaseWritingDirectionRange calls the underlying SetBaseWritingDirectionRange.
 func (x *TextView) SetBaseWritingDirectionRange(writingDirection NSWritingDirection, range_ foundation.NSRange) {
 	x.inner.SetBaseWritingDirectionRange(raw.NSWritingDirection(writingDirection), range_)
 }
 
+// Sets the receiver to use nominal glyph spacing for the glyphs in its selection, or for all glyphs if the receiver is a plain text view.
+//
 // TurnOffKerning calls the underlying TurnOffKerning.
 func (x *TextView) TurnOffKerning(sender objc.ID) {
 	x.inner.TurnOffKerning(sender)
 }
 
+// Decreases the space between glyphs in the receiver’s selection, or for all glyphs if the receiver is a plain text view.
+//
 // TightenKerning calls the underlying TightenKerning.
 func (x *TextView) TightenKerning(sender objc.ID) {
 	x.inner.TightenKerning(sender)
 }
 
+// Increases the space between glyphs in the receiver’s selection, or in all text if the receiver is a plain text view.
+//
 // LoosenKerning calls the underlying LoosenKerning.
 func (x *TextView) LoosenKerning(sender objc.ID) {
 	x.inner.LoosenKerning(sender)
 }
 
+// Set the receiver to use pair kerning data for the glyphs in its selection, or for all glyphs if the receiver is a plain text view.
+//
 // UseStandardKerning calls the underlying UseStandardKerning.
 func (x *TextView) UseStandardKerning(sender objc.ID) {
 	x.inner.UseStandardKerning(sender)
 }
 
+// Sets the receiver to use only required ligatures when setting text, for the glyphs in the selection if the receiver is a rich text view, or for all glyphs if it’s a plain text view.
+//
 // TurnOffLigatures calls the underlying TurnOffLigatures.
 func (x *TextView) TurnOffLigatures(sender objc.ID) {
 	x.inner.TurnOffLigatures(sender)
 }
 
+// Sets the receiver to use the standard ligatures available for the fonts and languages used when setting text, for the glyphs in the selection if the receiver is a rich text view, or for all glyphs if it’s a plain text view.
+//
 // UseStandardLigatures calls the underlying UseStandardLigatures.
 func (x *TextView) UseStandardLigatures(sender objc.ID) {
 	x.inner.UseStandardLigatures(sender)
 }
 
+// Sets the receiver to use all ligatures available for the fonts and languages used when setting text, for the glyphs in the selection if the receiver is a rich text view, or for all glyphs if it’s a plain text view.
+//
 // UseAllLigatures calls the underlying UseAllLigatures.
 func (x *TextView) UseAllLigatures(sender objc.ID) {
 	x.inner.UseAllLigatures(sender)
 }
 
+// Raises the baseline offset of selected text by 1 point, or of all text if the receiver is a plain text view.
+//
 // RaiseBaseline calls the underlying RaiseBaseline.
 func (x *TextView) RaiseBaseline(sender objc.ID) {
 	x.inner.RaiseBaseline(sender)
 }
 
+// Lowers the baseline offset of selected text by 1 point, or of all text if the receiver is a plain text view.
+//
 // LowerBaseline calls the underlying LowerBaseline.
 func (x *TextView) LowerBaseline(sender objc.ID) {
 	x.inner.LowerBaseline(sender)
 }
 
+// Toggles the NSCharacterShapeAttributeName attribute at the current selection.
+//
 // ToggleTraditionalCharacterShape calls the underlying ToggleTraditionalCharacterShape.
 func (x *TextView) ToggleTraditionalCharacterShape(sender objc.ID) {
 	x.inner.ToggleTraditionalCharacterShape(sender)
 }
 
+// Adds the outline attribute to the selected text attributes if absent; removes the attribute if present.
+//
 // Outline calls the underlying Outline.
 func (x *TextView) Outline(sender objc.ID) {
 	x.inner.Outline(sender)
 }
 
+// Performs a find panel action specified by the sender’s tag.
+//
 // PerformFindPanelAction calls the underlying PerformFindPanelAction.
 func (x *TextView) PerformFindPanelAction(sender objc.ID) {
 	x.inner.PerformFindPanelAction(sender)
 }
 
+// Applies full justification to selected paragraphs (or all text, if the receiver is a plain text object).
+//
 // AlignJustified calls the underlying AlignJustified.
 func (x *TextView) AlignJustified(sender objc.ID) {
 	x.inner.AlignJustified(sender)
 }
 
+// Sets the color of the selected text.
+//
 // ChangeColor calls the underlying ChangeColor.
 func (x *TextView) ChangeColor(sender objc.ID) {
 	x.inner.ChangeColor(sender)
 }
 
+// Changes the attributes of the current selection.
+//
 // ChangeAttributes calls the underlying ChangeAttributes.
 func (x *TextView) ChangeAttributes(sender objc.ID) {
 	x.inner.ChangeAttributes(sender)
 }
 
+// An action method used to set the background color.
+//
 // ChangeDocumentBackgroundColor calls the underlying ChangeDocumentBackgroundColor.
 func (x *TextView) ChangeDocumentBackgroundColor(sender objc.ID) {
 	x.inner.ChangeDocumentBackgroundColor(sender)
 }
 
+// Brings forward a panel allowing the user to manipulate text line heights, interline spacing, and paragraph spacing, in the text view.
+//
 // OrderFrontSpacingPanel calls the underlying OrderFrontSpacingPanel.
 func (x *TextView) OrderFrontSpacingPanel(sender objc.ID) {
 	x.inner.OrderFrontSpacingPanel(sender)
 }
 
+// Brings forward a panel allowing the user to manipulate links in the text view.
+//
 // OrderFrontLinkPanel calls the underlying OrderFrontLinkPanel.
 func (x *TextView) OrderFrontLinkPanel(sender objc.ID) {
 	x.inner.OrderFrontLinkPanel(sender)
 }
 
+// Brings forward a panel allowing the user to manipulate text lists in the text view.
+//
 // OrderFrontListPanel calls the underlying OrderFrontListPanel.
 func (x *TextView) OrderFrontListPanel(sender objc.ID) {
 	x.inner.OrderFrontListPanel(sender)
 }
 
+// Brings forward a panel allowing the user to manipulate text tables in the text view.
+//
 // OrderFrontTablePanel calls the underlying OrderFrontTablePanel.
 func (x *TextView) OrderFrontTablePanel(sender objc.ID) {
 	x.inner.OrderFrontTablePanel(sender)
 }
 
+// Marks the receiver as requiring display.
+//
 // SetNeedsDisplayInRectAvoidAdditionalLayout calls the underlying SetNeedsDisplayInRectAvoidAdditionalLayout.
 func (x *TextView) SetNeedsDisplayInRectAvoidAdditionalLayout(rect corefoundation.CGRect, flag bool) {
 	x.inner.SetNeedsDisplayInRectAvoidAdditionalLayout(rect, flag)
 }
 
+// Draws or erases the insertion point.
+//
 // DrawInsertionPointInRectColorTurnedOn calls the underlying DrawInsertionPointInRectColorTurnedOn.
 func (x *TextView) DrawInsertionPointInRectColorTurnedOn(rect corefoundation.CGRect, color *raw.NSColor, flag bool) {
 	x.inner.DrawInsertionPointInRectColorTurnedOn(rect, color, flag)
 }
 
+// Draws the background of the text view.
+//
 // DrawViewBackgroundInRect calls the underlying DrawViewBackgroundInRect.
 func (x *TextView) DrawViewBackgroundInRect(rect corefoundation.CGRect) {
 	x.inner.DrawViewBackgroundInRect(rect)
 }
 
+// Updates the ruler view in the receiver’s enclosing scroll view to reflect the selection’s paragraph and marker attributes.
+//
 // UpdateRuler calls the underlying UpdateRuler.
 func (x *TextView) UpdateRuler() {
 	x.inner.UpdateRuler()
 }
 
+// Updates the Font panel to contain the font attributes of the selection.
+//
 // UpdateFontPanel calls the underlying UpdateFontPanel.
 func (x *TextView) UpdateFontPanel() {
 	x.inner.UpdateFontPanel()
 }
 
+// Updates the acceptable drag types of all text views associated with the receiver’s layout manager.
+//
 // UpdateDragTypeRegistration calls the underlying UpdateDragTypeRegistration.
 func (x *TextView) UpdateDragTypeRegistration() {
 	x.inner.UpdateDragTypeRegistration()
 }
 
+// Returns an adjusted selected range based on the selection granularity.
+//
 // SelectionRangeForProposedRangeGranularity calls the underlying SelectionRangeForProposedRangeGranularity.
 func (x *TextView) SelectionRangeForProposedRangeGranularity(proposedCharRange foundation.NSRange, granularity NSSelectionGranularity) foundation.NSRange {
 	return x.inner.SelectionRangeForProposedRangeGranularity(proposedCharRange, raw.NSSelectionGranularity(granularity))
 }
 
+// Causes the text view to act as if the user clicked on some text with the given link as the value of a link attribute associated with the text.
+//
 // ClickedOnLinkAtIndex calls the underlying ClickedOnLinkAtIndex.
 func (x *TextView) ClickedOnLinkAtIndex(link objc.ID, charIndex uint) {
 	x.inner.ClickedOnLinkAtIndex(link, charIndex)
 }
 
+// Speaks the selected text, or all text if no selection.
+//
 // StartSpeaking calls the underlying StartSpeaking.
 func (x *TextView) StartSpeaking(sender objc.ID) {
 	x.inner.StartSpeaking(sender)
 }
 
+// Stops the speaking of text.
+//
 // StopSpeaking calls the underlying StopSpeaking.
 func (x *TextView) StopSpeaking(sender objc.ID) {
 	x.inner.StopSpeaking(sender)
 }
 
+// Changes the receiver’s layout orientation and invalidates the contents.
+//
 // SetLayoutOrientation calls the underlying SetLayoutOrientation.
 func (x *TextView) SetLayoutOrientation(orientation NSTextLayoutOrientation) {
 	x.inner.SetLayoutOrientation(raw.NSTextLayoutOrientation(orientation))
 }
 
+// An action method that sets the layout orientation of the text.
+//
 // ChangeLayoutOrientation calls the underlying ChangeLayoutOrientation.
 func (x *TextView) ChangeLayoutOrientation(sender objc.ID) {
 	x.inner.ChangeLayoutOrientation(sender)
 }
 
+// Returns a character index appropriate for placing a zero-length selection for an insertion point associated with the mouse at the given point.
+//
 // CharacterIndexForInsertionAtPoint calls the underlying CharacterIndexForInsertionAtPoint.
 func (x *TextView) CharacterIndexForInsertionAtPoint(point corefoundation.CGPoint) uint {
 	return x.inner.CharacterIndexForInsertionAtPoint(point)
 }
 
+// Replaces text in the range you specify with the attributed string you provide.
+//
 // PerformValidatedReplacementInRangeWithAttributedString calls the underlying PerformValidatedReplacementInRangeWithAttributedString.
 func (x *TextView) PerformValidatedReplacementInRangeWithAttributedString(range_ foundation.NSRange, attributedString *foundation.NSAttributedString) bool {
 	return x.inner.PerformValidatedReplacementInRangeWithAttributedString(range_, attributedString)
@@ -1071,16 +1281,22 @@ func (x *TextView) SetUsesAdaptiveColorMappingForDarkAppearance(usesAdaptiveColo
 	x.inner.SetUsesAdaptiveColorMappingForDarkAppearance(usesAdaptiveColorMappingForDarkAppearance)
 }
 
+// Invokes completion in a text view.
+//
 // Complete calls the underlying Complete.
 func (x *TextView) Complete(sender objc.ID) {
 	x.inner.Complete(sender)
 }
 
+// Returns an array of potential completions, in the order to be presented, representing possible word completions available from a partial word.
+//
 // CompletionsForPartialWordRangeIndexOfSelectedItem calls the underlying CompletionsForPartialWordRangeIndexOfSelectedItem.
 func (x *TextView) CompletionsForPartialWordRangeIndexOfSelectedItem(charRange foundation.NSRange, index *int64) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.CompletionsForPartialWordRangeIndexOfSelectedItem(charRange, index)
 }
 
+// Inserts the selected completion into the text at the appropriate location.
+//
 // InsertCompletionForPartialWordRangeMovementIsFinal calls the underlying InsertCompletionForPartialWordRangeMovementIsFinal.
 func (x *TextView) InsertCompletionForPartialWordRangeMovementIsFinal(word string, charRange foundation.NSRange, movement int, flag bool) {
 	x.inner.InsertCompletionForPartialWordRangeMovementIsFinal(foundation.NSStringStringWithUTF8String(word), charRange, movement, flag)
@@ -1091,16 +1307,22 @@ func (x *TextView) RangeForUserCompletion() foundation.NSRange {
 	return x.inner.RangeForUserCompletion()
 }
 
+// Writes the current selection to the specified pasteboard using the given type.
+//
 // WriteSelectionToPasteboardType calls the underlying WriteSelectionToPasteboardType.
 func (x *TextView) WriteSelectionToPasteboardType(pboard *raw.NSPasteboard, type_ *foundation.NSString) bool {
 	return x.inner.WriteSelectionToPasteboardType(pboard, type_)
 }
 
+// Writes the current selection to the specified pasteboard under each given type.
+//
 // WriteSelectionToPasteboardTypes calls the underlying WriteSelectionToPasteboardTypes.
 func (x *TextView) WriteSelectionToPasteboardTypes(pboard *raw.NSPasteboard, types *foundation.NSArray[*foundation.NSString]) bool {
 	return x.inner.WriteSelectionToPasteboardTypes(pboard, types)
 }
 
+// Returns whatever type on the pasteboard would be most preferred for copying data.
+//
 // PreferredPasteboardTypeFromArrayRestrictedToTypesFromArray calls the underlying PreferredPasteboardTypeFromArrayRestrictedToTypesFromArray.
 func (x *TextView) PreferredPasteboardTypeFromArrayRestrictedToTypesFromArray(availableTypes *foundation.NSArray[*foundation.NSString], allowedTypes *foundation.NSArray[*foundation.NSString]) string {
 	_r := x.inner.PreferredPasteboardTypeFromArrayRestrictedToTypesFromArray(availableTypes, allowedTypes)
@@ -1110,21 +1332,29 @@ func (x *TextView) PreferredPasteboardTypeFromArrayRestrictedToTypesFromArray(av
 	return purego.GoString(_r.Ptr())
 }
 
+// Reads data of the given type from the specified pasteboard.
+//
 // ReadSelectionFromPasteboardType calls the underlying ReadSelectionFromPasteboardType.
 func (x *TextView) ReadSelectionFromPasteboardType(pboard *raw.NSPasteboard, type_ *foundation.NSString) bool {
 	return x.inner.ReadSelectionFromPasteboardType(pboard, type_)
 }
 
+// Reads the text view’s preferred type of data from the specified pasteboard.
+//
 // ReadSelectionFromPasteboard calls the underlying ReadSelectionFromPasteboard.
 func (x *TextView) ReadSelectionFromPasteboard(pboard *raw.NSPasteboard) bool {
 	return x.inner.ReadSelectionFromPasteboard(pboard)
 }
 
+// Inserts the contents of the pasteboard into the receiver’s text as plain text.
+//
 // PasteAsPlainText calls the underlying PasteAsPlainText.
 func (x *TextView) PasteAsPlainText(sender objc.ID) {
 	x.inner.PasteAsPlainText(sender)
 }
 
+// This action method inserts the contents of the pasteboard into the receiver’s text as rich text, maintaining its attributes.
+//
 // PasteAsRichText calls the underlying PasteAsRichText.
 func (x *TextView) PasteAsRichText(sender objc.ID) {
 	x.inner.PasteAsRichText(sender)
@@ -1152,11 +1382,15 @@ func (x *TextView) ReadablePasteboardTypes() []*foundation.NSString {
 	})
 }
 
+// Begins dragging the current selected text range.
+//
 // DragSelectionWithEventOffsetSlideBack calls the underlying DragSelectionWithEventOffsetSlideBack.
 func (x *TextView) DragSelectionWithEventOffsetSlideBack(event *raw.NSEvent, mouseOffset corefoundation.CGSize, slideBack bool) bool {
 	return x.inner.DragSelectionWithEventOffsetSlideBack(event, mouseOffset, slideBack)
 }
 
+// Returns an appropriate drag image for the drag initiated by the specified event.
+//
 // DragImageForSelectionWithEventOrigin calls the underlying DragImageForSelectionWithEventOrigin.
 func (x *TextView) DragImageForSelectionWithEventOrigin(event *raw.NSEvent, origin *corefoundation.CGPoint) *Image {
 	_r := x.inner.DragImageForSelectionWithEventOrigin(event, origin)
@@ -1166,11 +1400,15 @@ func (x *TextView) DragImageForSelectionWithEventOrigin(event *raw.NSEvent, orig
 	return &Image{inner: _r}
 }
 
+// Returns the type of drag operation that should be performed if the image were released now.
+//
 // DragOperationForDraggingInfoType calls the underlying DragOperationForDraggingInfoType.
 func (x *TextView) DragOperationForDraggingInfoType(dragInfo raw.NSDraggingInfo, type_ *foundation.NSString) NSDragOperation {
 	return NSDragOperation(x.inner.DragOperationForDraggingInfoType(dragInfo, type_))
 }
 
+// Releases the drag information still existing after the dragging session has completed.
+//
 // CleanUpAfterDragOperation calls the underlying CleanUpAfterDragOperation.
 func (x *TextView) CleanUpAfterDragOperation() {
 	x.inner.CleanUpAfterDragOperation()
@@ -1187,56 +1425,78 @@ func (x *TextView) AcceptableDragTypes() []*foundation.NSString {
 	})
 }
 
+// Sets the selection to the characters in an array of ranges in response to user action.
+//
 // SetSelectedRangesAffinityStillSelecting calls the underlying SetSelectedRangesAffinityStillSelecting.
 func (x *TextView) SetSelectedRangesAffinityStillSelecting(ranges *foundation.NSArray[*foundation.NSValue], affinity NSSelectionAffinity, stillSelectingFlag bool) {
 	x.inner.SetSelectedRangesAffinityStillSelecting(ranges, raw.NSSelectionAffinity(affinity), stillSelectingFlag)
 }
 
+// Sets the selection to a range of characters in response to user action.
+//
 // SetSelectedRangeAffinityStillSelecting calls the underlying SetSelectedRangeAffinityStillSelecting.
 func (x *TextView) SetSelectedRangeAffinityStillSelecting(charRange foundation.NSRange, affinity NSSelectionAffinity, stillSelectingFlag bool) {
 	x.inner.SetSelectedRangeAffinityStillSelecting(charRange, raw.NSSelectionAffinity(affinity), stillSelectingFlag)
 }
 
+// Updates the insertion point’s location and optionally restarts the blinking cursor timer.
+//
 // UpdateInsertionPointStateAndRestartTimer calls the underlying UpdateInsertionPointStateAndRestartTimer.
 func (x *TextView) UpdateInsertionPointStateAndRestartTimer(restartFlag bool) {
 	x.inner.UpdateInsertionPointStateAndRestartTimer(restartFlag)
 }
 
+// Toggles whether continuous spell checking is enabled for the receiver.
+//
 // ToggleContinuousSpellChecking calls the underlying ToggleContinuousSpellChecking.
 func (x *TextView) ToggleContinuousSpellChecking(sender objc.ID) {
 	x.inner.ToggleContinuousSpellChecking(sender)
 }
 
+// Changes the state of grammar checking from enabled to disabled and vice versa.
+//
 // ToggleGrammarChecking calls the underlying ToggleGrammarChecking.
 func (x *TextView) ToggleGrammarChecking(sender objc.ID) {
 	x.inner.ToggleGrammarChecking(sender)
 }
 
+// Sets the spelling state, which controls the display of the spelling and grammar indicators on the given text range.
+//
 // SetSpellingStateRange calls the underlying SetSpellingStateRange.
 func (x *TextView) SetSpellingStateRange(value int, charRange foundation.NSRange) {
 	x.inner.SetSpellingStateRange(value, charRange)
 }
 
+// Initiates a series of delegate messages (and general notifications) to determine whether modifications can be made to the characters and attributes of the receiver’s text.
+//
 // ShouldChangeTextInRangesReplacementStrings calls the underlying ShouldChangeTextInRangesReplacementStrings.
 func (x *TextView) ShouldChangeTextInRangesReplacementStrings(affectedRanges *foundation.NSArray[*foundation.NSValue], replacementStrings *foundation.NSArray[*foundation.NSString]) bool {
 	return x.inner.ShouldChangeTextInRangesReplacementStrings(affectedRanges, replacementStrings)
 }
 
+// Initiates a series of delegate messages (and general notifications) to determine whether modifications can be made to the characters and attributes of the receiver’s text.
+//
 // ShouldChangeTextInRangeReplacementString calls the underlying ShouldChangeTextInRangeReplacementString.
 func (x *TextView) ShouldChangeTextInRangeReplacementString(affectedCharRange foundation.NSRange, replacementString string) bool {
 	return x.inner.ShouldChangeTextInRangeReplacementString(affectedCharRange, foundation.NSStringStringWithUTF8String(replacementString))
 }
 
+// Sends out necessary notifications when a text change completes.
+//
 // DidChangeText calls the underlying DidChangeText.
 func (x *TextView) DidChangeText() {
 	x.inner.DidChangeText()
 }
 
+// Informs the receiver that it should begin coalescing successive typing operations in a new undo grouping.
+//
 // BreakUndoCoalescing calls the underlying BreakUndoCoalescing.
 func (x *TextView) BreakUndoCoalescing() {
 	x.inner.BreakUndoCoalescing()
 }
 
+// Causes a temporary highlighting effect to appear around the visible portion (or portions) of the specified range.
+//
 // ShowFindIndicatorForRange calls the underlying ShowFindIndicatorForRange.
 func (x *TextView) ShowFindIndicatorForRange(charRange foundation.NSRange) {
 	x.inner.ShowFindIndicatorForRange(charRange)
@@ -1545,21 +1805,29 @@ func (x *TextView) SetAllowedWritingToolsResultOptions(allowedWritingToolsResult
 	x.inner.SetAllowedWritingToolsResultOptions(raw.NSWritingToolsResultOptions(allowedWritingToolsResultOptions))
 }
 
+// Returns an extended range that includes adjacent whitespace that should be deleted along with the proposed range in order to preserve proper spacing and punctuation.
+//
 // SmartDeleteRangeForProposedRange calls the underlying SmartDeleteRangeForProposedRange.
 func (x *TextView) SmartDeleteRangeForProposedRange(proposedCharRange foundation.NSRange) foundation.NSRange {
 	return x.inner.SmartDeleteRangeForProposedRange(proposedCharRange)
 }
 
+// Changes the state of smart insert and delete from enabled to disabled and vice versa.
+//
 // ToggleSmartInsertDelete calls the underlying ToggleSmartInsertDelete.
 func (x *TextView) ToggleSmartInsertDelete(sender objc.ID) {
 	x.inner.ToggleSmartInsertDelete(sender)
 }
 
+// Determines whether whitespace needs to be added around the string to preserve proper spacing and punctuation when it replaces the characters in the specified range.
+//
 // SmartInsertForStringReplacingRangeBeforeStringAfterString calls the underlying SmartInsertForStringReplacingRangeBeforeStringAfterString.
 func (x *TextView) SmartInsertForStringReplacingRangeBeforeStringAfterString(pasteString string, charRangeToReplace foundation.NSRange, beforeString string, afterString string) {
 	x.inner.SmartInsertForStringReplacingRangeBeforeStringAfterString(foundation.NSStringStringWithUTF8String(pasteString), charRangeToReplace, foundation.NSStringStringWithUTF8String(beforeString), foundation.NSStringStringWithUTF8String(afterString))
 }
 
+// Returns any whitespace that needs to be added before the string to preserve proper spacing and punctuation when the string replaces the characters in the specified range.
+//
 // SmartInsertBeforeStringForStringReplacingRange calls the underlying SmartInsertBeforeStringForStringReplacingRange.
 func (x *TextView) SmartInsertBeforeStringForStringReplacingRange(pasteString string, charRangeToReplace foundation.NSRange) string {
 	_r := x.inner.SmartInsertBeforeStringForStringReplacingRange(foundation.NSStringStringWithUTF8String(pasteString), charRangeToReplace)
@@ -1569,6 +1837,8 @@ func (x *TextView) SmartInsertBeforeStringForStringReplacingRange(pasteString st
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns any whitespace that needs to be added after the string to preserve proper spacing and punctuation when the string replaces the characters in the specified range.
+//
 // SmartInsertAfterStringForStringReplacingRange calls the underlying SmartInsertAfterStringForStringReplacingRange.
 func (x *TextView) SmartInsertAfterStringForStringReplacingRange(pasteString string, charRangeToReplace foundation.NSRange) string {
 	_r := x.inner.SmartInsertAfterStringForStringReplacingRange(foundation.NSStringStringWithUTF8String(pasteString), charRangeToReplace)
@@ -1578,56 +1848,78 @@ func (x *TextView) SmartInsertAfterStringForStringReplacingRange(pasteString str
 	return purego.GoString(_r.Ptr())
 }
 
+// Changes the state of automatic quotation mark substitution from enabled to disabled and vice versa.
+//
 // ToggleAutomaticQuoteSubstitution calls the underlying ToggleAutomaticQuoteSubstitution.
 func (x *TextView) ToggleAutomaticQuoteSubstitution(sender objc.ID) {
 	x.inner.ToggleAutomaticQuoteSubstitution(sender)
 }
 
+// Changes the state of automatic link detection from enabled to disabled and vice versa.
+//
 // ToggleAutomaticLinkDetection calls the underlying ToggleAutomaticLinkDetection.
 func (x *TextView) ToggleAutomaticLinkDetection(sender objc.ID) {
 	x.inner.ToggleAutomaticLinkDetection(sender)
 }
 
+// Toggles the state of the automatic data detection.
+//
 // ToggleAutomaticDataDetection calls the underlying ToggleAutomaticDataDetection.
 func (x *TextView) ToggleAutomaticDataDetection(sender objc.ID) {
 	x.inner.ToggleAutomaticDataDetection(sender)
 }
 
+// Toggles the state of the automatic dash substitution.
+//
 // ToggleAutomaticDashSubstitution calls the underlying ToggleAutomaticDashSubstitution.
 func (x *TextView) ToggleAutomaticDashSubstitution(sender objc.ID) {
 	x.inner.ToggleAutomaticDashSubstitution(sender)
 }
 
+// Toggles the state of the automatic text replacement.
+//
 // ToggleAutomaticTextReplacement calls the underlying ToggleAutomaticTextReplacement.
 func (x *TextView) ToggleAutomaticTextReplacement(sender objc.ID) {
 	x.inner.ToggleAutomaticTextReplacement(sender)
 }
 
+// Toggles the state of the automatic spelling correction.
+//
 // ToggleAutomaticSpellingCorrection calls the underlying ToggleAutomaticSpellingCorrection.
 func (x *TextView) ToggleAutomaticSpellingCorrection(sender objc.ID) {
 	x.inner.ToggleAutomaticSpellingCorrection(sender)
 }
 
+// Check and replace the text in the range using the specified checking types and options.
+//
 // CheckTextInRangeTypesOptions calls the underlying CheckTextInRangeTypesOptions.
 func (x *TextView) CheckTextInRangeTypesOptions(range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.CheckTextInRangeTypesOptions(range_, checkingTypes, options)
 }
 
+// Handles the text checking results returned by the text view
+//
 // HandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount calls the underlying HandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount.
 func (x *TextView) HandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount(results *foundation.NSArray[*foundation.NSTextCheckingResult], range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], orthography *foundation.NSOrthography, wordCount int) {
 	x.inner.HandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount(results, range_, checkingTypes, options, orthography, wordCount)
 }
 
+// Brings forward a panel allowing the user to specify string substitutions in the text view.
+//
 // OrderFrontSubstitutionsPanel calls the underlying OrderFrontSubstitutionsPanel.
 func (x *TextView) OrderFrontSubstitutionsPanel(sender objc.ID) {
 	x.inner.OrderFrontSubstitutionsPanel(sender)
 }
 
+// Performs the default text checking on the current selection.
+//
 // CheckTextInSelection calls the underlying CheckTextInSelection.
 func (x *TextView) CheckTextInSelection(sender objc.ID) {
 	x.inner.CheckTextInSelection(sender)
 }
 
+// Performs the default text checking on the entire document.
+//
 // CheckTextInDocument calls the underlying CheckTextInDocument.
 func (x *TextView) CheckTextInDocument(sender objc.ID) {
 	x.inner.CheckTextInDocument(sender)
@@ -1763,21 +2055,29 @@ func (x *TextView) SetMathExpressionCompletionType(mathExpressionCompletionType 
 	x.inner.SetMathExpressionCompletionType(raw.NSTextInputTraitType(mathExpressionCompletionType))
 }
 
+// An action message that toggles the visibility state of the Quick Look preview panel.
+//
 // ToggleQuickLookPreviewPanel calls the underlying ToggleQuickLookPreviewPanel.
 func (x *TextView) ToggleQuickLookPreviewPanel(sender objc.ID) {
 	x.inner.ToggleQuickLookPreviewPanel(sender)
 }
 
+// Returns an array of URLs for items that can be displayed by QuickLook in the specified ranges.
+//
 // QuickLookPreviewableItemsInRanges calls the underlying QuickLookPreviewableItemsInRanges.
 func (x *TextView) QuickLookPreviewableItemsInRanges(ranges *foundation.NSArray[*foundation.NSValue]) *foundation.NSArray[objc.ID] {
 	return x.inner.QuickLookPreviewableItemsInRanges(ranges)
 }
 
+// Notifies the QuickLook panel that an update may be required.
+//
 // UpdateQuickLookPreviewPanel calls the underlying UpdateQuickLookPreviewPanel.
 func (x *TextView) UpdateQuickLookPreviewPanel() {
 	x.inner.UpdateQuickLookPreviewPanel()
 }
 
+// Creates and displays a new instance of the sharing service picker.
+//
 // OrderFrontSharingServicePicker calls the underlying OrderFrontSharingServicePicker.
 func (x *TextView) OrderFrontSharingServicePicker(sender objc.ID) {
 	x.inner.OrderFrontSharingServicePicker(sender)
@@ -1828,7 +2128,7 @@ func (x *TextView) DrawTextHighlightBackgroundForTextRangeOrigin(textRange *raw.
 	x.inner.DrawTextHighlightBackgroundForTextRangeOrigin(textRange, origin)
 }
 
-// An action for toggling `NSTextHighlightStyleAttributeName` in the receiver’s selected range. The sender should be a menu item with a `representedObject` of type (`NSTextHighlightColorScheme`).
+// An action for toggling NSTextHighlightStyleAttributeName in the receiver’s selected range. The sender should be a menu item with a representedObject of type (NSTextHighlightColorScheme).
 //
 // Highlight calls the underlying Highlight.
 func (x *TextView) Highlight(sender objc.ID) {
@@ -1845,6 +2145,8 @@ func (x *TextView) SetTextHighlightAttributes(textHighlightAttributes *foundatio
 	x.inner.SetTextHighlightAttributes(textHighlightAttributes)
 }
 
+// Changes the base writing direction of a paragraph between left-to-right and right-to-left.
+//
 // ToggleBaseWritingDirection calls the underlying ToggleBaseWritingDirection.
 func (x *TextView) ToggleBaseWritingDirection(sender objc.ID) {
 	x.inner.ToggleBaseWritingDirection(sender)

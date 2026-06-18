@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that specifies how user interface elements resize themselves when space is constrained.
+//
 // UserInterfaceCompressionOptions wraps [raw.NSUserInterfaceCompressionOptions] with a fluent Go API.
 type UserInterfaceCompressionOptions struct {
 	inner *raw.NSUserInterfaceCompressionOptions
@@ -38,6 +40,8 @@ func NewUserInterfaceCompressionOptions() *UserInterfaceCompressionOptions {
 	return &UserInterfaceCompressionOptions{inner: raw.NSUserInterfaceCompressionOptionsFromID(_id)}
 }
 
+// Creates an option object from data in an unarchiver.
+//
 // NewUserInterfaceCompressionOptionsWithCoder creates a new [UserInterfaceCompressionOptions].
 func NewUserInterfaceCompressionOptionsWithCoder(coder *foundation.NSCoder) *UserInterfaceCompressionOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUserInterfaceCompressionOptions")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewUserInterfaceCompressionOptionsWithCoder(coder *foundation.NSCoder) *Use
 	return &UserInterfaceCompressionOptions{inner: raw.NSUserInterfaceCompressionOptionsFromID(_id)}
 }
 
+// Creates an option object with the given identifier string.
+//
 // NewUserInterfaceCompressionOptionsWithIdentifier creates a new [UserInterfaceCompressionOptions].
 func NewUserInterfaceCompressionOptionsWithIdentifier(identifier string) *UserInterfaceCompressionOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUserInterfaceCompressionOptions")), objc.RegisterName("alloc"))
@@ -52,6 +58,8 @@ func NewUserInterfaceCompressionOptionsWithIdentifier(identifier string) *UserIn
 	return &UserInterfaceCompressionOptions{inner: raw.NSUserInterfaceCompressionOptionsFromID(_id)}
 }
 
+// Creates an option object that represents the union of the supplied options.
+//
 // NewUserInterfaceCompressionOptionsWithCompressionOptions creates a new [UserInterfaceCompressionOptions].
 func NewUserInterfaceCompressionOptionsWithCompressionOptions(options *foundation.NSSet[*raw.NSUserInterfaceCompressionOptions]) *UserInterfaceCompressionOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUserInterfaceCompressionOptions")), objc.RegisterName("alloc"))
@@ -59,16 +67,22 @@ func NewUserInterfaceCompressionOptionsWithCompressionOptions(options *foundatio
 	return &UserInterfaceCompressionOptions{inner: raw.NSUserInterfaceCompressionOptionsFromID(_id)}
 }
 
+// Determines whether the supplied compression options are all present in the current instance.
+//
 // ContainsOptions calls the underlying ContainsOptions.
 func (x *UserInterfaceCompressionOptions) ContainsOptions(options *raw.NSUserInterfaceCompressionOptions) bool {
 	return x.inner.ContainsOptions(options)
 }
 
+// Determines whether the supplied compression options intersect with the current instance’s options.
+//
 // IntersectsOptions calls the underlying IntersectsOptions.
 func (x *UserInterfaceCompressionOptions) IntersectsOptions(options *raw.NSUserInterfaceCompressionOptions) bool {
 	return x.inner.IntersectsOptions(options)
 }
 
+// Creates a new compression options object representing the union with the provided options.
+//
 // OptionsByAddingOptions calls the underlying OptionsByAddingOptions.
 func (x *UserInterfaceCompressionOptions) OptionsByAddingOptions(options *raw.NSUserInterfaceCompressionOptions) *UserInterfaceCompressionOptions {
 	_r := x.inner.OptionsByAddingOptions(options)
@@ -78,6 +92,8 @@ func (x *UserInterfaceCompressionOptions) OptionsByAddingOptions(options *raw.NS
 	return &UserInterfaceCompressionOptions{inner: _r}
 }
 
+// Creates a new compression options object with the supplied options removed.
+//
 // OptionsByRemovingOptions calls the underlying OptionsByRemovingOptions.
 func (x *UserInterfaceCompressionOptions) OptionsByRemovingOptions(options *raw.NSUserInterfaceCompressionOptions) *UserInterfaceCompressionOptions {
 	_r := x.inner.OptionsByRemovingOptions(options)

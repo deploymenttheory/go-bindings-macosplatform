@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a custom color space.
+//
 // ColorSpace wraps [raw.NSColorSpace] with a fluent Go API.
 type ColorSpace struct {
 	inner *raw.NSColorSpace
@@ -32,6 +34,8 @@ func ColorSpaceFromID(id objc.ID) *ColorSpace {
 	return &ColorSpace{inner: raw.NSColorSpaceFromID(id)}
 }
 
+// Initializes and returns a color space object from the specified ICC profile.
+//
 // NewColorSpaceWithICCProfileData creates a new [ColorSpace].
 func NewColorSpaceWithICCProfileData(iccData *foundation.NSData) *ColorSpace {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSColorSpace")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewColorSpaceWithICCProfileData(iccData *foundation.NSData) *ColorSpace {
 	return &ColorSpace{inner: raw.NSColorSpaceFromID(_id)}
 }
 
+// Initializes and returns a color space object from the specified ColorSync profile.
+//
 // NewColorSpaceWithColorSyncProfile creates a new [ColorSpace].
 func NewColorSpaceWithColorSyncProfile(prof unsafe.Pointer) *ColorSpace {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSColorSpace")), objc.RegisterName("alloc"))
@@ -46,6 +52,8 @@ func NewColorSpaceWithColorSyncProfile(prof unsafe.Pointer) *ColorSpace {
 	return &ColorSpace{inner: raw.NSColorSpaceFromID(_id)}
 }
 
+// Initializes and returns a color space object initialized from a Core Graphics color-space object.
+//
 // NewColorSpaceWithCGColorSpace creates a new [ColorSpace].
 func NewColorSpaceWithCGColorSpace(cgColorSpace unsafe.Pointer) *ColorSpace {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSColorSpace")), objc.RegisterName("alloc"))

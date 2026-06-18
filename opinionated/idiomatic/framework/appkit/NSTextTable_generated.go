@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a text table as a whole.
+//
 // TextTable wraps [raw.NSTextTable] with a fluent Go API.
 type TextTable struct {
 	inner *raw.NSTextTable
@@ -37,52 +39,70 @@ func NewTextTable() *TextTable {
 	return &TextTable{inner: raw.NSTextTableFromID(_id)}
 }
 
+// The number of columns in the text table.
+//
 // WithNumberOfColumns sets the numberOfColumns property and returns the receiver for chaining.
 func (x *TextTable) WithNumberOfColumns(numberOfColumns uint) *TextTable {
 	x.inner.SetNumberOfColumns(numberOfColumns)
 	return x
 }
 
+// The text table layout algorithm.
+//
 // WithLayoutAlgorithm sets the layoutAlgorithm property and returns the receiver for chaining.
 func (x *TextTable) WithLayoutAlgorithm(layoutAlgorithm NSTextTableLayoutAlgorithm) *TextTable {
 	x.inner.SetLayoutAlgorithm(raw.NSTextTableLayoutAlgorithm(layoutAlgorithm))
 	return x
 }
 
+// A Boolean value indicating whether the text table borders are collapsible.
+//
 // WithCollapsesBorders sets the collapsesBorders property and returns the receiver for chaining.
 func (x *TextTable) WithCollapsesBorders(collapsesBorders bool) *TextTable {
 	x.inner.SetCollapsesBorders(collapsesBorders)
 	return x
 }
 
+// A Boolean value indicating whether the text table hides empty cells.
+//
 // WithHidesEmptyCells sets the hidesEmptyCells property and returns the receiver for chaining.
 func (x *TextTable) WithHidesEmptyCells(hidesEmptyCells bool) *TextTable {
 	x.inner.SetHidesEmptyCells(hidesEmptyCells)
 	return x
 }
 
+// The vertical alignment of the text block.
+//
 // WithVerticalAlignment sets the verticalAlignment property and returns the receiver for chaining.
 func (x *TextTable) WithVerticalAlignment(verticalAlignment NSTextBlockVerticalAlignment) *TextTable {
 	x.inner.NSTextBlock.SetVerticalAlignment(raw.NSTextBlockVerticalAlignment(verticalAlignment))
 	return x
 }
 
+// The background color of the text block.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *TextTable) WithBackgroundColor(backgroundColor *Color) *TextTable {
 	x.inner.NSTextBlock.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// Returns the rectangle within which glyphs should be laid out for a text table block.
+//
 // RectForBlockLayoutAtPointInRectTextContainerCharacterRange calls the underlying RectForBlockLayoutAtPointInRectTextContainerCharacterRange.
 func (x *TextTable) RectForBlockLayoutAtPointInRectTextContainerCharacterRange(block *raw.NSTextTableBlock, startingPoint corefoundation.CGPoint, rect corefoundation.CGRect, textContainer *raw.NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect {
 	return x.inner.RectForBlockLayoutAtPointInRectTextContainerCharacterRange(block, startingPoint, rect, textContainer, charRange)
 }
 
+// Returns the rectangle the text table block actually occupies, including padding, borders, and margins.
+//
 // BoundsRectForBlockContentRectInRectTextContainerCharacterRange calls the underlying BoundsRectForBlockContentRectInRectTextContainerCharacterRange.
 func (x *TextTable) BoundsRectForBlockContentRectInRectTextContainerCharacterRange(block *raw.NSTextTableBlock, contentRect corefoundation.CGRect, rect corefoundation.CGRect, textContainer *raw.NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect {
 	return x.inner.BoundsRectForBlockContentRectInRectTextContainerCharacterRange(block, contentRect, rect, textContainer, charRange)
 }
 
+// Draws any colors and other decorations for a text table block.
+//
 // DrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager calls the underlying DrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager.
 func (x *TextTable) DrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager(block *raw.NSTextTableBlock, frameRect corefoundation.CGRect, controlView *raw.NSView, charRange foundation.NSRange, layoutManager *raw.NSLayoutManager) {
 	x.inner.DrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager(block, frameRect, controlView, charRange, layoutManager)

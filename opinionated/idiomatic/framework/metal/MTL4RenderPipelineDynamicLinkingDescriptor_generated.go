@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Groups together properties that provide linking properties for render pipelines.
+//
 // MTL4RenderPipelineDynamicLinkingDescriptor wraps [raw.MTL4RenderPipelineDynamicLinkingDescriptor] with a fluent Go API.
 type MTL4RenderPipelineDynamicLinkingDescriptor struct {
 	inner *raw.MTL4RenderPipelineDynamicLinkingDescriptor

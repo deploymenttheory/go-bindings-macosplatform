@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The parent class that the framework uses to request a token.
+//
 // Attribution wraps [raw.AAAttribution] with a fluent Go API.
 type Attribution struct {
 	inner *raw.AAAttribution

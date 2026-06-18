@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A type you use to programmatically search the indexed app content.
+//
 // SearchQuery wraps [raw.CSSearchQuery] with a fluent Go API.
 type SearchQuery struct {
 	inner *raw.CSSearchQuery
@@ -33,6 +35,8 @@ func SearchQueryFromID(id objc.ID) *SearchQuery {
 	return &SearchQuery{inner: raw.CSSearchQueryFromID(id)}
 }
 
+// Initializes and returns a query object with the specified query string and query context.
+//
 // NewSearchQueryWithQueryStringQueryContext creates a new [SearchQuery].
 func NewSearchQueryWithQueryStringQueryContext(queryString string, queryContext *raw.CSSearchQueryContext) *SearchQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CSSearchQuery")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewSearchQueryWithQueryStringQueryContext(queryString string, queryContext 
 	return &SearchQuery{inner: raw.CSSearchQueryFromID(_id)}
 }
 
+// Initializes and returns a query object with the specified query string and item attributes.
+//
 // NewSearchQueryWithQueryStringAttributes creates a new [SearchQuery].
 func NewSearchQueryWithQueryStringAttributes(queryString string, attributes *foundation.NSArray[*foundation.NSString]) *SearchQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CSSearchQuery")), objc.RegisterName("alloc"))
@@ -47,18 +53,24 @@ func NewSearchQueryWithQueryStringAttributes(queryString string, attributes *fou
 	return &SearchQuery{inner: raw.CSSearchQueryFromID(_id)}
 }
 
+// The block to execute when the query delivers a new batch of matching items.
+//
 // WithFoundItemsHandler sets the foundItemsHandler property and returns the receiver for chaining.
 func (x *SearchQuery) WithFoundItemsHandler(foundItemsHandler func(*foundation.NSArray[*raw.CSSearchableItem])) *SearchQuery {
 	x.inner.SetFoundItemsHandler(foundItemsHandler)
 	return x
 }
 
+// The block to execute when the query finishes delivering all results.
+//
 // WithCompletionHandler sets the completionHandler property and returns the receiver for chaining.
 func (x *SearchQuery) WithCompletionHandler(completionHandler func(unsafe.Pointer)) *SearchQuery {
 	x.inner.SetCompletionHandler(completionHandler)
 	return x
 }
 
+// The protection types of the indexes you want to search.
+//
 // WithProtectionClasses sets the collection, converting the Go slice to an NSArray.
 func (x *SearchQuery) WithProtectionClasses(items ...*foundation.NSString) *SearchQuery {
 	if len(items) == 0 {
@@ -77,11 +89,15 @@ func (x *SearchQuery) WithProtectionClasses(items ...*foundation.NSString) *Sear
 	return x
 }
 
+// Starts searching the index for items that match the current query string and parameters.
+//
 // Start calls the underlying Start.
 func (x *SearchQuery) Start() {
 	x.inner.Start()
 }
 
+// Cancels the current query operation.
+//
 // Cancel calls the underlying Cancel.
 func (x *SearchQuery) Cancel() {
 	x.inner.Cancel()

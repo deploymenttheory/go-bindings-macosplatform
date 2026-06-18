@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @brief NSAccessibilityCustomRotorItemResults are the objects returned to assistive technologies that match a search parameter criteria.
+// A target accessibility element that a custom rotor references.
 //
 // AccessibilityCustomRotorItemResult wraps [raw.NSAccessibilityCustomRotorItemResult] with a fluent Go API.
 type AccessibilityCustomRotorItemResult struct {

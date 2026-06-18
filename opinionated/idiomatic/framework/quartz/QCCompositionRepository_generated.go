@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The QCCompositionRepository class represents a system-wide centralized repository of built-in and installed Quartz Composer compositions (/Library/Compositions and ~/Library/Compositions). The QCCompositionRepository class cannot be subclassed.
+//
 // QCCompositionRepository wraps [raw.QCCompositionRepository] with a fluent Go API.
 type QCCompositionRepository struct {
 	inner *raw.QCCompositionRepository
@@ -36,6 +38,8 @@ func NewQCCompositionRepository() *QCCompositionRepository {
 	return &QCCompositionRepository{inner: raw.QCCompositionRepositoryFromID(_id)}
 }
 
+// Returns the composition that corresponds to the identifier.
+//
 // CompositionWithIdentifier calls the underlying CompositionWithIdentifier.
 func (x *QCCompositionRepository) CompositionWithIdentifier(identifier string) *QCComposition {
 	_r := x.inner.CompositionWithIdentifier(foundation.NSStringStringWithUTF8String(identifier))
@@ -45,11 +49,15 @@ func (x *QCCompositionRepository) CompositionWithIdentifier(identifier string) *
 	return &QCComposition{inner: _r}
 }
 
+// Returns an array of compositions that match a set of criteria.
+//
 // CompositionsWithProtocolsAndAttributes calls the underlying CompositionsWithProtocolsAndAttributes.
 func (x *QCCompositionRepository) CompositionsWithProtocolsAndAttributes(protocols *foundation.NSArray[objc.ID], attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSArray[objc.ID] {
 	return x.inner.CompositionsWithProtocolsAndAttributes(protocols, attributes)
 }
 
+// Returns an array that contains all compositions currently in the composition repository.
+//
 // AllCompositions calls the underlying AllCompositions.
 func (x *QCCompositionRepository) AllCompositions() *foundation.NSArray[objc.ID] {
 	return x.inner.AllCompositions()

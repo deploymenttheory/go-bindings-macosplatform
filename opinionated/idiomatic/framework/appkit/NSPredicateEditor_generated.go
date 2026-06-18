@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A defined set of rules that allows the editing of predicate objects.
+//
 // PredicateEditor wraps [raw.NSPredicateEditor] with a fluent Go API.
 type PredicateEditor struct {
 	inner *raw.NSPredicateEditor
@@ -41,6 +43,8 @@ func NewPredicateEditor() *PredicateEditor {
 	return &PredicateEditor{inner: raw.NSPredicateEditorFromID(_id)}
 }
 
+// The row templates for the receiver.
+//
 // WithRowTemplates sets the collection, converting the Go slice to an NSArray.
 func (x *PredicateEditor) WithRowTemplates(items ...*raw.NSPredicateEditorRowTemplate) *PredicateEditor {
 	if len(items) == 0 {
@@ -59,210 +63,280 @@ func (x *PredicateEditor) WithRowTemplates(items ...*raw.NSPredicateEditorRowTem
 	return x
 }
 
+// The rule editor’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PredicateEditor) WithDelegate(delegate raw.NSRuleEditorDelegate) *PredicateEditor {
 	x.inner.NSRuleEditor.SetDelegate(delegate)
 	return x
 }
 
+// The name of the rule editor’s strings file.
+//
 // WithFormattingStringsFilename sets the formattingStringsFilename property and returns the receiver for chaining.
 func (x *PredicateEditor) WithFormattingStringsFilename(formattingStringsFilename string) *PredicateEditor {
 	x.inner.NSRuleEditor.SetFormattingStringsFilename(foundation.NSStringStringWithUTF8String(formattingStringsFilename))
 	return x
 }
 
+// The formatting dictionary for the rule editor.
+//
 // WithFormattingDictionary sets the formattingDictionary property and returns the receiver for chaining.
 func (x *PredicateEditor) WithFormattingDictionary(formattingDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *PredicateEditor {
 	x.inner.NSRuleEditor.SetFormattingDictionary(formattingDictionary)
 	return x
 }
 
+// The rule editor’s nesting mode.
+//
 // WithNestingMode sets the nestingMode property and returns the receiver for chaining.
 func (x *PredicateEditor) WithNestingMode(nestingMode NSRuleEditorNestingMode) *PredicateEditor {
 	x.inner.NSRuleEditor.SetNestingMode(raw.NSRuleEditorNestingMode(nestingMode))
 	return x
 }
 
+// The rule editor’s row height.
+//
 // WithRowHeight sets the rowHeight property and returns the receiver for chaining.
 func (x *PredicateEditor) WithRowHeight(rowHeight float64) *PredicateEditor {
 	x.inner.NSRuleEditor.SetRowHeight(rowHeight)
 	return x
 }
 
+// A Boolean value that determines whether the rule editor is editable.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *PredicateEditor) WithEditable(editable bool) *PredicateEditor {
 	x.inner.NSRuleEditor.SetEditable(editable)
 	return x
 }
 
+// A Boolean value that indicates whether all the rows can be removed.
+//
 // WithCanRemoveAllRows sets the canRemoveAllRows property and returns the receiver for chaining.
 func (x *PredicateEditor) WithCanRemoveAllRows(canRemoveAllRows bool) *PredicateEditor {
 	x.inner.NSRuleEditor.SetCanRemoveAllRows(canRemoveAllRows)
 	return x
 }
 
+// The class used to create a new row in the “rows” binding.
+//
 // WithRowClass sets the rowClass property and returns the receiver for chaining.
 func (x *PredicateEditor) WithRowClass(rowClass objc.Class) *PredicateEditor {
 	x.inner.NSRuleEditor.SetRowClass(rowClass)
 	return x
 }
 
+// The key path for the row type.
+//
 // WithRowTypeKeyPath sets the rowTypeKeyPath property and returns the receiver for chaining.
 func (x *PredicateEditor) WithRowTypeKeyPath(rowTypeKeyPath string) *PredicateEditor {
 	x.inner.NSRuleEditor.SetRowTypeKeyPath(foundation.NSStringStringWithUTF8String(rowTypeKeyPath))
 	return x
 }
 
+// The key path for the subrows.
+//
 // WithSubrowsKeyPath sets the subrowsKeyPath property and returns the receiver for chaining.
 func (x *PredicateEditor) WithSubrowsKeyPath(subrowsKeyPath string) *PredicateEditor {
 	x.inner.NSRuleEditor.SetSubrowsKeyPath(foundation.NSStringStringWithUTF8String(subrowsKeyPath))
 	return x
 }
 
+// The criteria key path.
+//
 // WithCriteriaKeyPath sets the criteriaKeyPath property and returns the receiver for chaining.
 func (x *PredicateEditor) WithCriteriaKeyPath(criteriaKeyPath string) *PredicateEditor {
 	x.inner.NSRuleEditor.SetCriteriaKeyPath(foundation.NSStringStringWithUTF8String(criteriaKeyPath))
 	return x
 }
 
+// The display values key path.
+//
 // WithDisplayValuesKeyPath sets the displayValuesKeyPath property and returns the receiver for chaining.
 func (x *PredicateEditor) WithDisplayValuesKeyPath(displayValuesKeyPath string) *PredicateEditor {
 	x.inner.NSRuleEditor.SetDisplayValuesKeyPath(foundation.NSStringStringWithUTF8String(displayValuesKeyPath))
 	return x
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *PredicateEditor) WithTarget(target objc.ID) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *PredicateEditor) WithAction(action objc.SEL) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *PredicateEditor) WithTag(tag int) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *PredicateEditor) WithIgnoresMultiClick(ignoresMultiClick bool) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *PredicateEditor) WithContinuous(continuous bool) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *PredicateEditor) WithEnabled(enabled bool) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *PredicateEditor) WithRefusesFirstResponder(refusesFirstResponder bool) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *PredicateEditor) WithHighlighted(highlighted bool) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *PredicateEditor) WithControlSize(controlSize NSControlSize) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *PredicateEditor) WithFormatter(formatter *foundation.NSFormatter) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *PredicateEditor) WithObjectValue(objectValue objc.ID) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *PredicateEditor) WithStringValue(stringValue string) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *PredicateEditor) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *PredicateEditor) WithIntValue(intValue int) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *PredicateEditor) WithIntegerValue(integerValue int) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *PredicateEditor) WithFloatValue(floatValue float32) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *PredicateEditor) WithDoubleValue(doubleValue float64) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *PredicateEditor) WithFont(font *Font) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *PredicateEditor) WithUsesSingleLineMode(usesSingleLineMode bool) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *PredicateEditor) WithLineBreakMode(lineBreakMode NSLineBreakMode) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *PredicateEditor) WithAlignment(alignment NSTextAlignment) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *PredicateEditor) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *PredicateEditor) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -317,6 +391,8 @@ func (x *PredicateEditor) WithAutoresizingMask(autoresizingMask NSAutoresizingMa
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *PredicateEditor) WithFrame(frame corefoundation.CGRect) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.NSView.SetFrame(frame)
@@ -341,6 +417,8 @@ func (x *PredicateEditor) WithBoundsRotation(boundsRotation float64) *PredicateE
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *PredicateEditor) WithBounds(bounds corefoundation.CGRect) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.NSView.SetBounds(bounds)
@@ -353,6 +431,8 @@ func (x *PredicateEditor) WithCanDrawConcurrently(canDrawConcurrently bool) *Pre
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *PredicateEditor) WithNeedsDisplay(needsDisplay bool) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.NSView.SetNeedsDisplay(needsDisplay)
@@ -539,7 +619,7 @@ func (x *PredicateEditor) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets 
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *PredicateEditor) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PredicateEditor {
@@ -595,24 +675,32 @@ func (x *PredicateEditor) WithPressureConfiguration(pressureConfiguration *Press
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *PredicateEditor) WithNextResponder(nextResponder ResponderProvider) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *PredicateEditor) WithMenu(menu *Menu) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *PredicateEditor) WithUserActivity(userActivity *foundation.NSUserActivity) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *PredicateEditor) WithTouchBar(touchBar *TouchBar) *PredicateEditor {
 	x.inner.NSRuleEditor.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())

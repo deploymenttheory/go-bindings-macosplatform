@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines a summary item for an automatic reload or refill payment, such as a store card top-up.
+//
 // AutomaticReloadPaymentSummaryItem wraps [raw.PKAutomaticReloadPaymentSummaryItem] with a fluent Go API.
 type AutomaticReloadPaymentSummaryItem struct {
 	inner *raw.PKAutomaticReloadPaymentSummaryItem
@@ -38,24 +40,32 @@ func NewAutomaticReloadPaymentSummaryItem() *AutomaticReloadPaymentSummaryItem {
 	return &AutomaticReloadPaymentSummaryItem{inner: raw.PKAutomaticReloadPaymentSummaryItemFromID(_id)}
 }
 
+// The balance an account reaches before you apply the automatic reload amount.
+//
 // WithThresholdAmount sets the thresholdAmount property and returns the receiver for chaining.
 func (x *AutomaticReloadPaymentSummaryItem) WithThresholdAmount(thresholdAmount *foundation.NSDecimalNumber) *AutomaticReloadPaymentSummaryItem {
 	x.inner.SetThresholdAmount(thresholdAmount)
 	return x
 }
 
+// A short, localized description of the item.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *AutomaticReloadPaymentSummaryItem) WithLabel(label string) *AutomaticReloadPaymentSummaryItem {
 	x.inner.PKPaymentSummaryItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// The summary item’s amount.
+//
 // WithAmount sets the amount property and returns the receiver for chaining.
 func (x *AutomaticReloadPaymentSummaryItem) WithAmount(amount *foundation.NSDecimalNumber) *AutomaticReloadPaymentSummaryItem {
 	x.inner.PKPaymentSummaryItem.SetAmount(amount)
 	return x
 }
 
+// The summary item’s type that indicates whether the amount is final.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *AutomaticReloadPaymentSummaryItem) WithType(type_ PKPaymentSummaryItemType) *AutomaticReloadPaymentSummaryItem {
 	x.inner.PKPaymentSummaryItem.SetType(raw.PKPaymentSummaryItemType(type_))

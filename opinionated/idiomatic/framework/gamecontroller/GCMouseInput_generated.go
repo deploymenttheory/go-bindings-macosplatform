@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A controller profile that tracks input from a mouse.
+//
 // MouseInput wraps [raw.GCMouseInput] with a fluent Go API.
 type MouseInput struct {
 	inner *raw.GCMouseInput
@@ -36,13 +38,15 @@ func NewMouseInput() *MouseInput {
 	return &MouseInput{inner: raw.GCMouseInputFromID(_id)}
 }
 
+// The block that the profile calls when the mouse moves.
+//
 // WithMouseMovedHandler sets the mouseMovedHandler property and returns the receiver for chaining.
 func (x *MouseInput) WithMouseMovedHandler(mouseMovedHandler func(*raw.GCMouseInput, float32, float32)) *MouseInput {
 	x.inner.SetMouseMovedHandler(mouseMovedHandler)
 	return x
 }
 
-// Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called for each element that changed. @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons. @param element the element that has been modified.
+// The block that the profile calls when an element’s value changes.
 //
 // WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
 func (x *MouseInput) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *MouseInput {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The MCNearbyServiceAdvertiser class publishes an advertisement for a specific service that your app provides through the Multipeer Connectivity framework and notifies its delegate about invitations from nearby peers.
+//
 // NearbyServiceAdvertiser wraps [raw.MCNearbyServiceAdvertiser] with a fluent Go API.
 type NearbyServiceAdvertiser struct {
 	inner *raw.MCNearbyServiceAdvertiser
@@ -31,6 +33,8 @@ func NearbyServiceAdvertiserFromID(id objc.ID) *NearbyServiceAdvertiser {
 	return &NearbyServiceAdvertiser{inner: raw.MCNearbyServiceAdvertiserFromID(id)}
 }
 
+// Initializes an advertiser object.
+//
 // NewNearbyServiceAdvertiserWithPeerDiscoveryInfoServiceType creates a new [NearbyServiceAdvertiser].
 func NewNearbyServiceAdvertiserWithPeerDiscoveryInfoServiceType(myPeerID *raw.MCPeerID, info *foundation.NSDictionary[*foundation.NSString, *foundation.NSString], serviceType string) *NearbyServiceAdvertiser {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MCNearbyServiceAdvertiser")), objc.RegisterName("alloc"))
@@ -38,17 +42,23 @@ func NewNearbyServiceAdvertiserWithPeerDiscoveryInfoServiceType(myPeerID *raw.MC
 	return &NearbyServiceAdvertiser{inner: raw.MCNearbyServiceAdvertiserFromID(_id)}
 }
 
+// The delegate object that handles advertising-related events.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *NearbyServiceAdvertiser) WithDelegate(delegate raw.MCNearbyServiceAdvertiserDelegate) *NearbyServiceAdvertiser {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Begins advertising the service provided by a local peer.
+//
 // StartAdvertisingPeer calls the underlying StartAdvertisingPeer.
 func (x *NearbyServiceAdvertiser) StartAdvertisingPeer() {
 	x.inner.StartAdvertisingPeer()
 }
 
+// Stops advertising the service provided by a local peer.
+//
 // StopAdvertisingPeer calls the underlying StopAdvertisingPeer.
 func (x *NearbyServiceAdvertiser) StopAdvertisingPeer() {
 	x.inner.StopAdvertisingPeer()

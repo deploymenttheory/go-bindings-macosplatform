@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An immutable type that represents a range of valid frame rates.
+//
 // FrameRateRange wraps [raw.AVFrameRateRange] with a fluent Go API.
 type FrameRateRange struct {
 	inner *raw.AVFrameRateRange

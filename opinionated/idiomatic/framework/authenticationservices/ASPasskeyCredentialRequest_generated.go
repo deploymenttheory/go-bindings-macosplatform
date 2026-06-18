@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents a request to supply a passkey credential.
+//
 // PasskeyCredentialRequest wraps [raw.ASPasskeyCredentialRequest] with a fluent Go API.
 type PasskeyCredentialRequest struct {
 	inner *raw.ASPasskeyCredentialRequest
@@ -31,7 +33,7 @@ func PasskeyCredentialRequestFromID(id objc.ID) *PasskeyCredentialRequest {
 	return &PasskeyCredentialRequest{inner: raw.ASPasskeyCredentialRequestFromID(id)}
 }
 
-// @abstract Initializes an instance of ASPasskeyCredentialRequest. @param credentialIdentity credential identity to used for this request. @param clientDataHash the client data to be signed for this assertion request. @param userVerificationPreference user verification preference setting of this assertion request.
+// Initializes a passkey credential request.
 //
 // NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms creates a new [PasskeyCredentialRequest].
 func NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms(credentialIdentity *raw.ASPasskeyCredentialIdentity, clientDataHash *foundation.NSData, userVerificationPreference *foundation.NSString, supportedAlgorithms *foundation.NSArray[*foundation.NSNumber]) *PasskeyCredentialRequest {
@@ -40,7 +42,7 @@ func NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerifica
 	return &PasskeyCredentialRequest{inner: raw.ASPasskeyCredentialRequestFromID(_id)}
 }
 
-// Initializes an instance of ASPasskeyCredentialRequest. @param credentialIdentity credential identity to used for this request. @param clientDataHash the client data to be signed for this assertion request. @param userVerificationPreference user verification preference setting of this assertion request. @param supportedAlgorithms the set of support algorithms for the credential's key. @param assertionExtensionInput input for any requested passkey extensions.
+// Initializes a passkey credential request, providing additional passkey registration data.
 //
 // NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsAssertionExtensionInput creates a new [PasskeyCredentialRequest].
 func NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsAssertionExtensionInput(credentialIdentity *raw.ASPasskeyCredentialIdentity, clientDataHash *foundation.NSData, userVerificationPreference *foundation.NSString, supportedAlgorithms *foundation.NSArray[*foundation.NSNumber], assertionExtensionInput *raw.ASPasskeyAssertionCredentialExtensionInput) *PasskeyCredentialRequest {
@@ -49,7 +51,7 @@ func NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerifica
 	return &PasskeyCredentialRequest{inner: raw.ASPasskeyCredentialRequestFromID(_id)}
 }
 
-// Initializes an instance of ASPasskeyCredentialRequest. @param credentialIdentity credential identity to used for this request. @param clientDataHash the client data to be signed for this assertion request. @param userVerificationPreference user verification preference setting of this assertion request. @param supportedAlgorithms the set of support algorithms for the credential's key. @param registrationExtensionInput input for any requested passkey extensions.
+// Initializes a passkey credential request, providing additional passkey registration data.
 //
 // NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsRegistrationExtensionInput creates a new [PasskeyCredentialRequest].
 func NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsRegistrationExtensionInput(credentialIdentity *raw.ASPasskeyCredentialIdentity, clientDataHash *foundation.NSData, userVerificationPreference *foundation.NSString, supportedAlgorithms *foundation.NSArray[*foundation.NSNumber], registrationExtensionInput *raw.ASPasskeyRegistrationCredentialExtensionInput) *PasskeyCredentialRequest {
@@ -58,7 +60,7 @@ func NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerifica
 	return &PasskeyCredentialRequest{inner: raw.ASPasskeyCredentialRequestFromID(_id)}
 }
 
-// @abstract A preference for whether the authenticator should attempt to verify that it is being used by its owner, such as through a PIN or biometrics.
+// The relying party’s user verification preference.
 //
 // WithUserVerificationPreference sets the userVerificationPreference property and returns the receiver for chaining.
 func (x *PasskeyCredentialRequest) WithUserVerificationPreference(userVerificationPreference *foundation.NSString) *PasskeyCredentialRequest {

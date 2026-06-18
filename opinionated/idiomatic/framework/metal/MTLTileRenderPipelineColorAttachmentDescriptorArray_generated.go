@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An array of color attachment descriptors for the tile render pipeline.
+//
 // TileRenderPipelineColorAttachmentDescriptorArray wraps [raw.MTLTileRenderPipelineColorAttachmentDescriptorArray] with a fluent Go API.
 type TileRenderPipelineColorAttachmentDescriptorArray struct {
 	inner *raw.MTLTileRenderPipelineColorAttachmentDescriptorArray
@@ -37,6 +39,8 @@ func NewTileRenderPipelineColorAttachmentDescriptorArray() *TileRenderPipelineCo
 	return &TileRenderPipelineColorAttachmentDescriptorArray{inner: raw.MTLTileRenderPipelineColorAttachmentDescriptorArrayFromID(_id)}
 }
 
+// Returns the render pipeline state for the specified color attachment.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *TileRenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *TileRenderPipelineColorAttachmentDescriptor {
 	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
@@ -46,6 +50,8 @@ func (x *TileRenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscr
 	return &TileRenderPipelineColorAttachmentDescriptor{inner: _r}
 }
 
+// Sets the render pipeline state for a specified color attachment.
+//
 // SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
 func (x *TileRenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLTileRenderPipelineColorAttachmentDescriptor, attachmentIndex uint) {
 	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)

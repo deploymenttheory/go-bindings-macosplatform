@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An animation of an app’s views, limited to changes in frame location and size, and to fade-in and fade-out effects.
+//
 // ViewAnimation wraps [raw.NSViewAnimation] with a fluent Go API.
 type ViewAnimation struct {
 	inner *raw.NSViewAnimation
@@ -31,6 +33,8 @@ func ViewAnimationFromID(id objc.ID) *ViewAnimation {
 	return &ViewAnimation{inner: raw.NSViewAnimationFromID(id)}
 }
 
+// Returns an NSViewAnimation object initialized with the supplied information.
+//
 // NewViewAnimationWithViewAnimations creates a new [ViewAnimation].
 func NewViewAnimationWithViewAnimations(viewAnimations *foundation.NSArray[objc.ID]) *ViewAnimation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSViewAnimation")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewViewAnimationWithViewAnimations(viewAnimations *foundation.NSArray[objc.
 	return &ViewAnimation{inner: raw.NSViewAnimationFromID(_id)}
 }
 
+// The dictionaries defining the objects to animate.
+//
 // WithViewAnimations sets the collection, converting the Go slice to an NSArray.
 func (x *ViewAnimation) WithViewAnimations(items ...*foundation.NSDictionary[*foundation.NSString, objc.ID]) *ViewAnimation {
 	if len(items) == 0 {
@@ -56,42 +62,56 @@ func (x *ViewAnimation) WithViewAnimations(items ...*foundation.NSDictionary[*fo
 	return x
 }
 
+// The current progress of the animation.
+//
 // WithCurrentProgress sets the currentProgress property and returns the receiver for chaining.
 func (x *ViewAnimation) WithCurrentProgress(currentProgress float32) *ViewAnimation {
 	x.inner.NSAnimation.SetCurrentProgress(currentProgress)
 	return x
 }
 
+// The duration of the animation, in seconds.
+//
 // WithDuration sets the duration property and returns the receiver for chaining.
 func (x *ViewAnimation) WithDuration(duration float64) *ViewAnimation {
 	x.inner.NSAnimation.SetDuration(duration)
 	return x
 }
 
+// The blocking mode of the animation.
+//
 // WithAnimationBlockingMode sets the animationBlockingMode property and returns the receiver for chaining.
 func (x *ViewAnimation) WithAnimationBlockingMode(animationBlockingMode NSAnimationBlockingMode) *ViewAnimation {
 	x.inner.NSAnimation.SetAnimationBlockingMode(raw.NSAnimationBlockingMode(animationBlockingMode))
 	return x
 }
 
+// The number of frame updates per second to generate for the animation.
+//
 // WithFrameRate sets the frameRate property and returns the receiver for chaining.
 func (x *ViewAnimation) WithFrameRate(frameRate float32) *ViewAnimation {
 	x.inner.NSAnimation.SetFrameRate(frameRate)
 	return x
 }
 
+// The timing curve for the animation.
+//
 // WithAnimationCurve sets the animationCurve property and returns the receiver for chaining.
 func (x *ViewAnimation) WithAnimationCurve(animationCurve NSAnimationCurve) *ViewAnimation {
 	x.inner.NSAnimation.SetAnimationCurve(raw.NSAnimationCurve(animationCurve))
 	return x
 }
 
+// The animation delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *ViewAnimation) WithDelegate(delegate raw.NSAnimationDelegate) *ViewAnimation {
 	x.inner.NSAnimation.SetDelegate(delegate)
 	return x
 }
 
+// An array of floating-point numbers representing current progress marks.
+//
 // WithProgressMarks sets the collection, converting the Go slice to an NSArray.
 func (x *ViewAnimation) WithProgressMarks(items ...*foundation.NSNumber) *ViewAnimation {
 	if len(items) == 0 {

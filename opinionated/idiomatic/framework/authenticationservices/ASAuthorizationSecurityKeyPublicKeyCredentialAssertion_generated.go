@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents the security key credential assertion type.
+//
 // AuthorizationSecurityKeyPublicKeyCredentialAssertion wraps [raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertion] with a fluent Go API.
 type AuthorizationSecurityKeyPublicKeyCredentialAssertion struct {
 	inner *raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertion

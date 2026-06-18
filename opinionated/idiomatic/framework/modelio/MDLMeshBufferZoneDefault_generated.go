@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A standard implementation of the MDLMeshBufferZone protocol.
+//
 // MeshBufferZoneDefault wraps [raw.MDLMeshBufferZoneDefault] with a fluent Go API.
 type MeshBufferZoneDefault struct {
 	inner *raw.MDLMeshBufferZoneDefault

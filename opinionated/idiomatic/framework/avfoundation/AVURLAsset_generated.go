@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An asset that represents media at a local or remote URL.
+//
 // URLAsset wraps [raw.AVURLAsset] with a fluent Go API.
 type URLAsset struct {
 	inner *raw.AVURLAsset
@@ -32,7 +34,7 @@ func URLAssetFromID(id objc.ID) *URLAsset {
 	return &URLAsset{inner: raw.AVURLAssetFromID(id)}
 }
 
-// Initializes an instance of AVURLAsset for inspection of a media resource. - Parameter URL: An instance of NSURL that references a media resource. - Parameter options: An instance of NSDictionary that contains keys for specifying options for the initialization of the AVURLAsset. See AVURLAssetPreferPreciseDurationAndTimingKey and AVURLAssetReferenceRestrictionsKey above. - Returns: An instance of AVURLAsset.
+// Creates an asset that models the media resource at the specified URL.
 //
 // NewURLAssetWithURLOptions creates a new [URLAsset].
 func NewURLAssetWithURLOptions(uRL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *URLAsset {
@@ -73,7 +75,7 @@ func (x *URLAsset) AssetCache() *AssetCache {
 	return &AssetCache{inner: _r}
 }
 
-// Provides a reference to an AVAssetTrack of the target from which any timeRange can be inserted into a mutable composition track (via -[AVMutableCompositionTrack insertTimeRange:ofTrack:atTime:error:]). Finds a track of the target with content that can be accommodated by the specified composition track. The logical complement of -[AVMutableComposition mutableTrackCompatibleWithTrack:]. - Parameter compositionTrack: The composition track for which a compatible AVAssetTrack is requested. - Returns: an instance of AVAssetTrack
+// Returns an asset track from which you can insert any time range into a given composition track.
 //
 // CompatibleTrackForCompositionTrack calls the underlying CompatibleTrackForCompositionTrack.
 func (x *URLAsset) CompatibleTrackForCompositionTrack(compositionTrack *raw.AVCompositionTrack) *AssetTrack {
@@ -84,7 +86,7 @@ func (x *URLAsset) CompatibleTrackForCompositionTrack(compositionTrack *raw.AVCo
 	return &AssetTrack{inner: _r}
 }
 
-// Loads a reference to an AVAssetTrack of the target from which any timeRange can be inserted into a mutable composition track (via -[AVMutableCompositionTrack insertTimeRange:ofTrack:atTime:error:]). Finds a track of the target with content that can be accommodated by the specified composition track. The logical complement of -[AVMutableComposition mutableTrackCompatibleWithTrack:]. - Parameter compositionTrack: The composition track for which a compatible AVAssetTrack is requested. - Parameter completionHandler: A block that is invoked when loading is complete, vending an instance of AVAssetTrack or an error.
+// Loads an asset track from which you can insert any time range into the composition track.
 //
 // FindCompatibleTrackForCompositionTrackCompletionHandler calls the underlying FindCompatibleTrackForCompositionTrackCompletionHandler.
 func (x *URLAsset) FindCompatibleTrackForCompositionTrackCompletionHandler(compositionTrack *raw.AVCompositionTrack, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {

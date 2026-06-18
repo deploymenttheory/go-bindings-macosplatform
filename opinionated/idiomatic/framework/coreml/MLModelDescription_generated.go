@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information about a model, primarily the input and output format for each feature the model expects, and optional metadata.
+//
 // ModelDescription wraps [raw.MLModelDescription] with a fluent Go API.
 type ModelDescription struct {
 	inner *raw.MLModelDescription

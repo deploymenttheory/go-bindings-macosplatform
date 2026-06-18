@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A constant that specializes the behavior of a shader.
+//
 // FunctionConstant wraps [raw.MTLFunctionConstant] with a fluent Go API.
 type FunctionConstant struct {
 	inner *raw.MTLFunctionConstant

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A light source whose shape, direction, and intensity of illumination are determined by a photometric profile.
+//
 // PhotometricLight wraps [raw.MDLPhotometricLight] with a fluent Go API.
 type PhotometricLight struct {
 	inner *raw.MDLPhotometricLight
@@ -30,6 +32,8 @@ func PhotometricLightFromID(id objc.ID) *PhotometricLight {
 	return &PhotometricLight{inner: raw.MDLPhotometricLightFromID(id)}
 }
 
+// Initializes a light from photometry data in the file at the specified URL.
+//
 // NewPhotometricLightWithIESProfile creates a new [PhotometricLight].
 func NewPhotometricLightWithIESProfile(uRL string) *PhotometricLight {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLPhotometricLight")), objc.RegisterName("alloc"))
@@ -37,49 +41,63 @@ func NewPhotometricLightWithIESProfile(uRL string) *PhotometricLight {
 	return &PhotometricLight{inner: raw.MDLPhotometricLightFromID(_id)}
 }
 
+// The total visible intensity of the light source, in lumens.
+//
 // WithLumens sets the lumens property and returns the receiver for chaining.
 func (x *PhotometricLight) WithLumens(lumens float32) *PhotometricLight {
 	x.inner.MDLPhysicallyPlausibleLight.SetLumens(lumens)
 	return x
 }
 
+// The radial angle, in degrees, of the area fully illuminated by the light.
+//
 // WithInnerConeAngle sets the innerConeAngle property and returns the receiver for chaining.
 func (x *PhotometricLight) WithInnerConeAngle(innerConeAngle float32) *PhotometricLight {
 	x.inner.MDLPhysicallyPlausibleLight.SetInnerConeAngle(innerConeAngle)
 	return x
 }
 
+// The radial angle, in degrees, at which the illumination from a spotlight becomes zero.
+//
 // WithOuterConeAngle sets the outerConeAngle property and returns the receiver for chaining.
 func (x *PhotometricLight) WithOuterConeAngle(outerConeAngle float32) *PhotometricLight {
 	x.inner.MDLPhysicallyPlausibleLight.SetOuterConeAngle(outerConeAngle)
 	return x
 }
 
+// The distance from the light source, in units of local coordinate space, at which its illumination begins to diminish.
+//
 // WithAttenuationStartDistance sets the attenuationStartDistance property and returns the receiver for chaining.
 func (x *PhotometricLight) WithAttenuationStartDistance(attenuationStartDistance float32) *PhotometricLight {
 	x.inner.MDLPhysicallyPlausibleLight.SetAttenuationStartDistance(attenuationStartDistance)
 	return x
 }
 
+// The distance from the light source, in units of local coordinate space, at which its illumination becomes zero.
+//
 // WithAttenuationEndDistance sets the attenuationEndDistance property and returns the receiver for chaining.
 func (x *PhotometricLight) WithAttenuationEndDistance(attenuationEndDistance float32) *PhotometricLight {
 	x.inner.MDLPhysicallyPlausibleLight.SetAttenuationEndDistance(attenuationEndDistance)
 	return x
 }
 
+// The type of the light.
+//
 // WithLightType sets the lightType property and returns the receiver for chaining.
 func (x *PhotometricLight) WithLightType(lightType MDLLightType) *PhotometricLight {
 	x.inner.MDLPhysicallyPlausibleLight.MDLLight.SetLightType(raw.MDLLightType(lightType))
 	return x
 }
 
+// The name of the Core Graphics color space to be used for interpreting the light’s color information.
+//
 // WithColorSpace sets the colorSpace property and returns the receiver for chaining.
 func (x *PhotometricLight) WithColorSpace(colorSpace string) *PhotometricLight {
 	x.inner.MDLPhysicallyPlausibleLight.MDLLight.SetColorSpace(foundation.NSStringStringWithUTF8String(colorSpace))
 	return x
 }
 
-// @property parent @abstract Parent object. Nil if no parent. @discussion Set to nil when you remove this from an object container inside the parent object.
+// The parent object that contains this object.
 //
 // WithParent sets the parent property and returns the receiver for chaining.
 func (x *PhotometricLight) WithParent(parent ObjectProvider) *PhotometricLight {
@@ -87,7 +105,7 @@ func (x *PhotometricLight) WithParent(parent ObjectProvider) *PhotometricLight {
 	return x
 }
 
-// @property instance @abstract Instance object @discussion nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
+// The primary object, if applicable, of which this object is an instance.
 //
 // WithInstance sets the instance property and returns the receiver for chaining.
 func (x *PhotometricLight) WithInstance(instance ObjectProvider) *PhotometricLight {
@@ -95,7 +113,7 @@ func (x *PhotometricLight) WithInstance(instance ObjectProvider) *PhotometricLig
 	return x
 }
 
-// @property transform @abstract Short hand property for the MDLTransformComponent. @discussion The default value is nil @see MDLTransformComponent
+// A component that manages this object’s spatial transform and its changes over time.
 //
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *PhotometricLight) WithTransform(transform raw.MDLTransformComponent) *PhotometricLight {
@@ -103,7 +121,7 @@ func (x *PhotometricLight) WithTransform(transform raw.MDLTransformComponent) *P
 	return x
 }
 
-// @property children @abstract Short hand property for the MDLObjectContainerComponent. @discussion The default value is an empty MDLObjectContainer @see MDLObjectContainerComponent
+// A component that manages this object’s collection of children.
 //
 // WithChildren sets the children property and returns the receiver for chaining.
 func (x *PhotometricLight) WithChildren(children raw.MDLObjectContainerComponent) *PhotometricLight {
@@ -111,17 +129,23 @@ func (x *PhotometricLight) WithChildren(children raw.MDLObjectContainerComponent
 	return x
 }
 
+// A Boolean value indicating whether this object should be used in rendering.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *PhotometricLight) WithHidden(hidden bool) *PhotometricLight {
 	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetHidden(hidden)
 	return x
 }
 
+// Generates spherical harmonics information based on the light’s photometry data.
+//
 // GenerateSphericalHarmonicsFromLight calls the underlying GenerateSphericalHarmonicsFromLight.
 func (x *PhotometricLight) GenerateSphericalHarmonicsFromLight(sphericalHarmonicsLevel uint) {
 	x.inner.GenerateSphericalHarmonicsFromLight(sphericalHarmonicsLevel)
 }
 
+// Generates a cube map texture from the light’s photometry data.
+//
 // GenerateCubemapFromLight calls the underlying GenerateCubemapFromLight.
 func (x *PhotometricLight) GenerateCubemapFromLight(textureSize uint) {
 	x.inner.GenerateCubemapFromLight(textureSize)

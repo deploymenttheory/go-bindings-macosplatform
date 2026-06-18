@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event that represents when a playback seek occurs.
+//
 // MetricPlayerItemSeekEvent wraps [raw.AVMetricPlayerItemSeekEvent] with a fluent Go API.
 type MetricPlayerItemSeekEvent struct {
 	inner *raw.AVMetricPlayerItemSeekEvent

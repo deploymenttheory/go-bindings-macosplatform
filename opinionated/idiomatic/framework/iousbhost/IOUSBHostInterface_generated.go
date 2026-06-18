@@ -11,7 +11,7 @@ import (
 	"unsafe"
 )
 
-// @class       IOUSBHostInterface @brief       The IOUSBHostObject representing a USB interface @discussion  This class provides functionality to send control requests to the default control endpoint, as well as create IOUSBHostPipe objects to transfer data.
+// The class for accessing USB-related services.
 //
 // HostInterface wraps [raw.IOUSBHostInterface] with a fluent Go API.
 type HostInterface struct {
@@ -42,21 +42,21 @@ func NewHostInterfaceWithIOServiceOptionsQueueErrorInterestHandler(ioService uin
 	return &HostInterface{inner: raw.IOUSBHostInterfaceFromID(_id)}
 }
 
-// @brief       Sets the desired idle suspend timeout for the interface @discussion  Once the interface is considered idle, it will defer electrical suspend of the device for the specified duration. @param       idleTimeout The amount of time after all pipes are idle to wait before suspending the device. @return      YES on success. An IOReturn error code will be reported on failure.
+// Sets the desired idle suspend timeout for the interface.
 //
 // SetIdleTimeoutError calls the underlying SetIdleTimeoutError.
 func (x *HostInterface) SetIdleTimeoutError(idleTimeout float64) (bool, error) {
 	return x.inner.SetIdleTimeoutError(idleTimeout)
 }
 
-// @brief       Select an alternate setting for this interface @discussion  This method is used to select an alternate setting for the interface. All pending IO on the interface's pipes will be aborted, and the open pipes will be closed. The IOUSBHostPipe objects already created will no longer be valid. The new alternate setting will be selected via SET_INTERFACE control request (USB 2.0 9.4.10). @param       alternateSetting Alternate interface number to activate @return      YES on success, an IOReturn error code will be reported on failure.
+// Selects an alternative setting for the interface.
 //
 // SelectAlternateSettingError calls the underlying SelectAlternateSettingError.
 func (x *HostInterface) SelectAlternateSettingError(alternateSetting uint) (bool, error) {
 	return x.inner.SelectAlternateSettingError(alternateSetting)
 }
 
-// @brief       Return the pipe whose <code>bEndpointAddress</code> matches <code>address</code> @discussion  This method will return the pipe whose <code>bEndpointAddress</code> matches <code>address</code>. If the pipe is returned successfully, it will maintain a reference to the IOUSBHostInterface. @param       address Endpoint address of the pipe @return      Pointer to an IOUSBHostPipe object or nil. The IOUSBHostPipe is to be released by the caller. An IOReturn error code will be reported on failure.
+// Copies a pipe for a specific endpoint address.
 //
 // CopyPipeWithAddressError calls the underlying CopyPipeWithAddressError.
 func (x *HostInterface) CopyPipeWithAddressError(address uint) (*HostPipe, error) {

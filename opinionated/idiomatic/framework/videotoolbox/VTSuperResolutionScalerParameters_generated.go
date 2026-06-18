@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains both input and output parameters that the super-resolution processor needs to run on a frame.
+//
 // SuperResolutionScalerParameters wraps [raw.VTSuperResolutionScalerParameters] with a fluent Go API.
 type SuperResolutionScalerParameters struct {
 	inner *raw.VTSuperResolutionScalerParameters
@@ -31,7 +33,7 @@ func SuperResolutionScalerParametersFromID(id objc.ID) *SuperResolutionScalerPar
 	return &SuperResolutionScalerParameters{inner: raw.VTSuperResolutionScalerParametersFromID(id)}
 }
 
-// Creates a new super-resolution scaler parameters instance. Returns `nil` if `sourceFrame` or `destinationFrame` is `nil`, or if `sourceFrame` and reference frames have different pixel formats. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - previousFrame: The previous source frame in presentation time order. For the first frame you can set this to `nil`. - previousOutputFrame: The previous output frame in presentation time order. For the first frame you can set this to `nil`. - opticalFlow: Optional `VTFrameProcessorOpticalFlow` object that contains forward and backward optical flow between the `sourceFrame` and `previousFrame`. You only need this if optical flow is pre-computed. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presentation sequence. For more information about supported modes see “VTSuperResolutionScalerParametersSubmissionMode“. - destinationFrame: User-allocated pixel buffer that receives the results.
+// Creates a new super-resolution scaler parameters instance.
 //
 // NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame creates a new [SuperResolutionScalerParameters].
 func NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame(sourceFrame *raw.VTFrameProcessorFrame, previousFrame *raw.VTFrameProcessorFrame, previousOutputFrame *raw.VTFrameProcessorFrame, opticalFlow *raw.VTFrameProcessorOpticalFlow, submissionMode VTSuperResolutionScalerParametersSubmissionMode, destinationFrame *raw.VTFrameProcessorFrame) *SuperResolutionScalerParameters {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A listener for shareable event notifications.
+//
 // SharedEventListener wraps [raw.MTLSharedEventListener] with a fluent Go API.
 type SharedEventListener struct {
 	inner *raw.MTLSharedEventListener
@@ -36,6 +38,8 @@ func NewSharedEventListener() *SharedEventListener {
 	return &SharedEventListener{inner: raw.MTLSharedEventListenerFromID(_id)}
 }
 
+// Creates a new shareable event listener with a specific dispatch queue.
+//
 // NewSharedEventListenerWithDispatchQueue creates a new [SharedEventListener].
 func NewSharedEventListenerWithDispatchQueue(dispatchQueue *foundation.NSObject) *SharedEventListener {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLSharedEventListener")), objc.RegisterName("alloc"))

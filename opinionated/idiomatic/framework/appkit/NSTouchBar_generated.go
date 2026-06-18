@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that provides dynamic contextual controls in the Touch Bar of supported models of MacBook Pro.
+//
 // TouchBar wraps [raw.NSTouchBar] with a fluent Go API.
 type TouchBar struct {
 	inner *raw.NSTouchBar
@@ -38,6 +40,8 @@ func NewTouchBar() *TouchBar {
 	return &TouchBar{inner: raw.NSTouchBarFromID(_id)}
 }
 
+// Creates a Touch Bar object from a coder object provided by a storyboard or NIB file.
+//
 // NewTouchBarWithCoder creates a new [TouchBar].
 func NewTouchBarWithCoder(coder *foundation.NSCoder) *TouchBar {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTouchBar")), objc.RegisterName("alloc"))
@@ -45,12 +49,16 @@ func NewTouchBarWithCoder(coder *foundation.NSCoder) *TouchBar {
 	return &TouchBar{inner: raw.NSTouchBarFromID(_id)}
 }
 
+// A globally unique string that makes the Touch Bar eligible for user customization.
+//
 // WithCustomizationIdentifier sets the customizationIdentifier property and returns the receiver for chaining.
 func (x *TouchBar) WithCustomizationIdentifier(customizationIdentifier *foundation.NSString) *TouchBar {
 	x.inner.SetCustomizationIdentifier(customizationIdentifier)
 	return x
 }
 
+// A list of identifiers for items to show in the Touch Bar’s customization UI.
+//
 // WithCustomizationAllowedItemIdentifiers sets the collection, converting the Go slice to an NSArray.
 func (x *TouchBar) WithCustomizationAllowedItemIdentifiers(items ...*foundation.NSString) *TouchBar {
 	if len(items) == 0 {
@@ -69,6 +77,8 @@ func (x *TouchBar) WithCustomizationAllowedItemIdentifiers(items ...*foundation.
 	return x
 }
 
+// An optional list of identifiers for items you want to always appear in the Touch Bar and which the user can’t remove during customization.
+//
 // WithCustomizationRequiredItemIdentifiers sets the collection, converting the Go slice to an NSArray.
 func (x *TouchBar) WithCustomizationRequiredItemIdentifiers(items ...*foundation.NSString) *TouchBar {
 	if len(items) == 0 {
@@ -87,6 +97,8 @@ func (x *TouchBar) WithCustomizationRequiredItemIdentifiers(items ...*foundation
 	return x
 }
 
+// A required list of identifiers for items that you want to appear in the Touch Bar after instantiating it.
+//
 // WithDefaultItemIdentifiers sets the collection, converting the Go slice to an NSArray.
 func (x *TouchBar) WithDefaultItemIdentifiers(items ...*foundation.NSString) *TouchBar {
 	if len(items) == 0 {
@@ -105,30 +117,40 @@ func (x *TouchBar) WithDefaultItemIdentifiers(items ...*foundation.NSString) *To
 	return x
 }
 
+// The identifier of an item you want the system to center in the Touch Bar.
+//
 // WithPrincipalItemIdentifier sets the principalItemIdentifier property and returns the receiver for chaining.
 func (x *TouchBar) WithPrincipalItemIdentifier(principalItemIdentifier *foundation.NSString) *TouchBar {
 	x.inner.SetPrincipalItemIdentifier(principalItemIdentifier)
 	return x
 }
 
+// The identifier of an item that replaces the system-provided button in the Touch Bar.
+//
 // WithEscapeKeyReplacementItemIdentifier sets the escapeKeyReplacementItemIdentifier property and returns the receiver for chaining.
 func (x *TouchBar) WithEscapeKeyReplacementItemIdentifier(escapeKeyReplacementItemIdentifier *foundation.NSString) *TouchBar {
 	x.inner.SetEscapeKeyReplacementItemIdentifier(escapeKeyReplacementItemIdentifier)
 	return x
 }
 
+// The primary source of items that the Touch Bar uses to fill its private items array, unless you provide items using a delegate.
+//
 // WithTemplateItems sets the templateItems property and returns the receiver for chaining.
 func (x *TouchBar) WithTemplateItems(templateItems *foundation.NSSet[*raw.NSTouchBarItem]) *TouchBar {
 	x.inner.SetTemplateItems(templateItems)
 	return x
 }
 
+// The delegate that provides items to the Touch Bar.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *TouchBar) WithDelegate(delegate raw.NSTouchBarDelegate) *TouchBar {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Returns the Touch Bar item that corresponds to a given identifier.
+//
 // ItemForIdentifier calls the underlying ItemForIdentifier.
 func (x *TouchBar) ItemForIdentifier(identifier *foundation.NSString) *TouchBarItem {
 	_r := x.inner.ItemForIdentifier(identifier)

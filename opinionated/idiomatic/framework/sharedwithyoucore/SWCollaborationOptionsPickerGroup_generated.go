@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a group of collaboration options that the system displays together with mutually exclusive options.
+//
 // CollaborationOptionsPickerGroup wraps [raw.SWCollaborationOptionsPickerGroup] with a fluent Go API.
 type CollaborationOptionsPickerGroup struct {
 	inner *raw.SWCollaborationOptionsPickerGroup
@@ -40,7 +42,7 @@ func NewCollaborationOptionsPickerGroup() *CollaborationOptionsPickerGroup {
 	return &CollaborationOptionsPickerGroup{inner: raw.SWCollaborationOptionsPickerGroupFromID(_id)}
 }
 
-// @abstract The identifier of the selected option in the group. Defaults to the first SWCollaborationOption's identifier.
+// The identifier of the selected option in the group.
 //
 // WithSelectedOptionIdentifier sets the selectedOptionIdentifier property and returns the receiver for chaining.
 func (x *CollaborationOptionsPickerGroup) WithSelectedOptionIdentifier(selectedOptionIdentifier string) *CollaborationOptionsPickerGroup {
@@ -48,7 +50,7 @@ func (x *CollaborationOptionsPickerGroup) WithSelectedOptionIdentifier(selectedO
 	return x
 }
 
-// @abstract Localized string used to title the section
+// A localized string the system displays as the title of the group section.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *CollaborationOptionsPickerGroup) WithTitle(title string) *CollaborationOptionsPickerGroup {
@@ -56,7 +58,7 @@ func (x *CollaborationOptionsPickerGroup) WithTitle(title string) *Collaboration
 	return x
 }
 
-// @abstract Localized string to describe or provide additional information about the group of options
+// A localized string that provides additional information for the group of options.
 //
 // WithFooter sets the footer property and returns the receiver for chaining.
 func (x *CollaborationOptionsPickerGroup) WithFooter(footer string) *CollaborationOptionsPickerGroup {
@@ -64,7 +66,7 @@ func (x *CollaborationOptionsPickerGroup) WithFooter(footer string) *Collaborati
 	return x
 }
 
-// @abstract SWCollaborationOptions to be displayed in the group
+// An array of collaboration options the system displays as a group.
 //
 // WithOptions sets the collection, converting the Go slice to an NSArray.
 func (x *CollaborationOptionsPickerGroup) WithOptions(items ...*raw.SWCollaborationOption) *CollaborationOptionsPickerGroup {

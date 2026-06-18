@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that displays a button either to trigger payments through Apple Pay or to prompt the user to set up a card.
+//
 // PaymentButton wraps [raw.PKPaymentButton] with a fluent Go API.
 type PaymentButton struct {
 	inner *raw.PKPaymentButton
@@ -29,6 +31,8 @@ func PaymentButtonFromID(id objc.ID) *PaymentButton {
 	return &PaymentButton{inner: raw.PKPaymentButtonFromID(id)}
 }
 
+// Creates a new payment button with the specified type and style.
+//
 // NewPaymentButtonWithPaymentButtonTypePaymentButtonStyle creates a new [PaymentButton].
 func NewPaymentButtonWithPaymentButtonTypePaymentButtonStyle(type_ PKPaymentButtonType, style PKPaymentButtonStyle) *PaymentButton {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentButton")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewPaymentButtonWithPaymentButtonTypePaymentButtonStyle(type_ PKPaymentButt
 	return &PaymentButton{inner: raw.PKPaymentButtonFromID(_id)}
 }
 
+// The radius, in points, for the rounded corners on the button.
+//
 // WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
 func (x *PaymentButton) WithCornerRadius(cornerRadius float64) *PaymentButton {
 	x.inner.SetCornerRadius(cornerRadius)

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A base class that you subclass to handle events in your Safari app extension.
+//
 // SafariExtensionHandler wraps [raw.SFSafariExtensionHandler] with a fluent Go API.
 type SafariExtensionHandler struct {
 	inner *raw.SFSafariExtensionHandler

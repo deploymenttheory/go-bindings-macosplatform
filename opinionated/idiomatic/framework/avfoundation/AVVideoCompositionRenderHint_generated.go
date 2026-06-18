@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information about upcoming composition requests, such as composition start time and end time.
+//
 // VideoCompositionRenderHint wraps [raw.AVVideoCompositionRenderHint] with a fluent Go API.
 type VideoCompositionRenderHint struct {
 	inner *raw.AVVideoCompositionRenderHint

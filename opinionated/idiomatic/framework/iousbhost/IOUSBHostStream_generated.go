@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// The class responsible for sending stream data for function drivers.
+//
 // HostStream wraps [raw.IOUSBHostStream] with a fluent Go API.
 type HostStream struct {
 	inner *raw.IOUSBHostStream
@@ -37,14 +39,14 @@ func NewHostStream() *HostStream {
 	return &HostStream{inner: raw.IOUSBHostStreamFromID(_id)}
 }
 
-// @brief       Abort pending I/O requests. @discussion  A stream context must be set as non-active on the device via an out-of-band (class-defined) mechanism before this method is called (USB 3.1 8.12.1.4). A non-active stream will not be selected by the device to become the current stream on the endpoint. @param       option IOUSBHostAbortOption by default IOUSBHostAbortOptionSynchronous is used @return      YES on success, an IOReturn error code will be reported on failure
+// Aborts pending input/output requests.
 //
 // AbortWithOptionError calls the underlying AbortWithOptionError.
 func (x *HostStream) AbortWithOptionError(option IOUSBHostAbortOption) (bool, error) {
 	return x.inner.AbortWithOptionError(raw.IOUSBHostAbortOption(option))
 }
 
-// @brief       Abort pending I/O requests. @discussion  A stream context must be set as non-active on the device via an out-of-band (class-defined) mechanism before this method is called (USB 3.1 8.12.1.4). A non-active stream will not be selected by the device to become the current stream on the endpoint. @return      YES on success, an IOReturn error code will be reported on failure
+// Aborts pending input/output requests synchronously.
 //
 // Abort returns any validation error.
 func (x *HostStream) Abort() error {
@@ -52,14 +54,14 @@ func (x *HostStream) Abort() error {
 	return err
 }
 
-// @brief       Send an IO request on the source @discussion  This method will send a synchronous request on the IO source, and will not return until the request is complete. CompletionTimeouts are not applicable to streams. @param       data NSData* pointer containing the buffer to use for the transfer @param       bytesTransferred NSUInteger reference which will be updated with the bytes transferred during the request @return      YES on success, an IOReturn error code will be reported on failure
+// Sends an input/output request on the stream.
 //
 // SendIORequestWithDataBytesTransferredError calls the underlying SendIORequestWithDataBytesTransferredError.
 func (x *HostStream) SendIORequestWithDataBytesTransferredError(data *foundation.NSMutableData, bytesTransferred *uint) (bool, error) {
 	return x.inner.SendIORequestWithDataBytesTransferredError(data, bytesTransferred)
 }
 
-// @brief       Enqueue an IO request on the source @discussion  This method is used to issue an asynchronous I/O request on the IO source. CompletionTimeouts are not applicable to streams. @param       data pointer containing the buffer to use for the transfer @return      YES on success, an IOReturn error code will be reported on failure
+// Enqueues an input/output request on the stream.
 //
 // EnqueueIORequestWithDataErrorCompletionHandler calls the underlying EnqueueIORequestWithDataErrorCompletionHandler.
 func (x *HostStream) EnqueueIORequestWithDataErrorCompletionHandler(data *foundation.NSMutableData, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {

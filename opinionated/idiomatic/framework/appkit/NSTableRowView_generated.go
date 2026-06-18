@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// The view shown for a row in a table view.
+//
 // TableRowView wraps [raw.NSTableRowView] with a fluent Go API.
 type TableRowView struct {
 	inner *raw.NSTableRowView
@@ -40,24 +42,32 @@ func NewTableRowView() *TableRowView {
 	return &TableRowView{inner: raw.NSTableRowViewFromID(_id)}
 }
 
+// Specifies the selection highlight style.
+//
 // WithSelectionHighlightStyle sets the selectionHighlightStyle property and returns the receiver for chaining.
 func (x *TableRowView) WithSelectionHighlightStyle(selectionHighlightStyle NSTableViewSelectionHighlightStyle) *TableRowView {
 	x.inner.SetSelectionHighlightStyle(raw.NSTableViewSelectionHighlightStyle(selectionHighlightStyle))
 	return x
 }
 
+// Determines whether the row will draw with the alternate or secondary color (unless overridden).
+//
 // WithEmphasized sets the emphasized property and returns the receiver for chaining.
 func (x *TableRowView) WithEmphasized(emphasized bool) *TableRowView {
 	x.inner.SetEmphasized(emphasized)
 	return x
 }
 
+// Specifies whether this row view is a group row.
+//
 // WithGroupRowStyle sets the groupRowStyle property and returns the receiver for chaining.
 func (x *TableRowView) WithGroupRowStyle(groupRowStyle bool) *TableRowView {
 	x.inner.SetGroupRowStyle(groupRowStyle)
 	return x
 }
 
+// Determines whether the row is selected.
+//
 // WithSelected sets the selected property and returns the receiver for chaining.
 func (x *TableRowView) WithSelected(selected bool) *TableRowView {
 	x.inner.SetSelected(selected)
@@ -76,30 +86,40 @@ func (x *TableRowView) WithNextRowSelected(nextRowSelected bool) *TableRowView {
 	return x
 }
 
+// Specifies whether the row is drawn using the floating style.
+//
 // WithFloating sets the floating property and returns the receiver for chaining.
 func (x *TableRowView) WithFloating(floating bool) *TableRowView {
 	x.inner.SetFloating(floating)
 	return x
 }
 
+// Specifies whether this row will draw a drop indicator based on the current dragging feedback style.
+//
 // WithTargetForDropOperation sets the targetForDropOperation property and returns the receiver for chaining.
 func (x *TableRowView) WithTargetForDropOperation(targetForDropOperation bool) *TableRowView {
 	x.inner.SetTargetForDropOperation(targetForDropOperation)
 	return x
 }
 
+// Specifies the dragging destination feedback style.
+//
 // WithDraggingDestinationFeedbackStyle sets the draggingDestinationFeedbackStyle property and returns the receiver for chaining.
 func (x *TableRowView) WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle NSTableViewDraggingDestinationFeedbackStyle) *TableRowView {
 	x.inner.SetDraggingDestinationFeedbackStyle(raw.NSTableViewDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle))
 	return x
 }
 
+// Defines the amount the drag target for a row should be indented.
+//
 // WithIndentationForDropOperation sets the indentationForDropOperation property and returns the receiver for chaining.
 func (x *TableRowView) WithIndentationForDropOperation(indentationForDropOperation float64) *TableRowView {
 	x.inner.SetIndentationForDropOperation(indentationForDropOperation)
 	return x
 }
 
+// The background color of the row.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *TableRowView) WithBackgroundColor(backgroundColor *Color) *TableRowView {
 	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
@@ -148,6 +168,8 @@ func (x *TableRowView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskO
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *TableRowView) WithFrame(frame corefoundation.CGRect) *TableRowView {
 	x.inner.NSView.SetFrame(frame)
@@ -172,6 +194,8 @@ func (x *TableRowView) WithBoundsRotation(boundsRotation float64) *TableRowView 
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *TableRowView) WithBounds(bounds corefoundation.CGRect) *TableRowView {
 	x.inner.NSView.SetBounds(bounds)
@@ -184,6 +208,8 @@ func (x *TableRowView) WithCanDrawConcurrently(canDrawConcurrently bool) *TableR
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *TableRowView) WithNeedsDisplay(needsDisplay bool) *TableRowView {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -370,7 +396,7 @@ func (x *TableRowView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets fou
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *TableRowView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableRowView {
@@ -426,50 +452,68 @@ func (x *TableRowView) WithPressureConfiguration(pressureConfiguration *Pressure
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *TableRowView) WithNextResponder(nextResponder ResponderProvider) *TableRowView {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *TableRowView) WithMenu(menu *Menu) *TableRowView {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *TableRowView) WithUserActivity(userActivity *foundation.NSUserActivity) *TableRowView {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *TableRowView) WithTouchBar(touchBar *TouchBar) *TableRowView {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Draws the background of the row in the rectangle.
+//
 // DrawBackgroundInRect calls the underlying DrawBackgroundInRect.
 func (x *TableRowView) DrawBackgroundInRect(dirtyRect corefoundation.CGRect) {
 	x.inner.DrawBackgroundInRect(dirtyRect)
 }
 
+// Draws the selected row.
+//
 // DrawSelectionInRect calls the underlying DrawSelectionInRect.
 func (x *TableRowView) DrawSelectionInRect(dirtyRect corefoundation.CGRect) {
 	x.inner.DrawSelectionInRect(dirtyRect)
 }
 
+// Draws the horizontal separator between table rows.
+//
 // DrawSeparatorInRect calls the underlying DrawSeparatorInRect.
 func (x *TableRowView) DrawSeparatorInRect(dirtyRect corefoundation.CGRect) {
 	x.inner.DrawSeparatorInRect(dirtyRect)
 }
 
+// Draws the row’s dragging destination feedback when the entire row is a drop target.
+//
 // DrawDraggingDestinationFeedbackInRect calls the underlying DrawDraggingDestinationFeedbackInRect.
 func (x *TableRowView) DrawDraggingDestinationFeedbackInRect(dirtyRect corefoundation.CGRect) {
 	x.inner.DrawDraggingDestinationFeedbackInRect(dirtyRect)
 }
 
+// Provides access to the given view at a particular column.
+//
 // ViewAtColumn calls the underlying ViewAtColumn.
 func (x *TableRowView) ViewAtColumn(column int) objc.ID {
 	return x.inner.ViewAtColumn(column)

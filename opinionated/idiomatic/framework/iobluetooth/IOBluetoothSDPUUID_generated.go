@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An NSData subclass that represents a UUID as defined in the Bluetooth SDP spec.
+//
 // IOBluetoothSDPUUID wraps [raw.IOBluetoothSDPUUID] with a fluent Go API.
 type IOBluetoothSDPUUID struct {
 	inner *raw.IOBluetoothSDPUUID
@@ -30,6 +32,8 @@ func IOBluetoothSDPUUIDFromID(id objc.ID) *IOBluetoothSDPUUID {
 	return &IOBluetoothSDPUUID{inner: raw.IOBluetoothSDPUUIDFromID(id)}
 }
 
+// Initializes a new 16-bit IOBluetoothSDPUUID with the given UUID16
+//
 // NewIOBluetoothSDPUUIDWithUUID16 creates a new [IOBluetoothSDPUUID].
 func NewIOBluetoothSDPUUIDWithUUID16(uuid16 uint16) *IOBluetoothSDPUUID {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothSDPUUID")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewIOBluetoothSDPUUIDWithUUID16(uuid16 uint16) *IOBluetoothSDPUUID {
 	return &IOBluetoothSDPUUID{inner: raw.IOBluetoothSDPUUIDFromID(_id)}
 }
 
+// Creates a new 32-bit IOBluetoothSDPUUID with the given UUID32
+//
 // NewIOBluetoothSDPUUIDWithUUID32 creates a new [IOBluetoothSDPUUID].
 func NewIOBluetoothSDPUUIDWithUUID32(uuid32 uint32) *IOBluetoothSDPUUID {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothSDPUUID")), objc.RegisterName("alloc"))
@@ -44,13 +50,15 @@ func NewIOBluetoothSDPUUIDWithUUID32(uuid32 uint32) *IOBluetoothSDPUUID {
 	return &IOBluetoothSDPUUID{inner: raw.IOBluetoothSDPUUIDFromID(_id)}
 }
 
-// @method	getSDPUUIDRef @abstract	Returns an IOBluetoothSDPUUIDRef representation of the target IOBluetoothSDPUUID object. @result		Returns an IOBluetoothSDPUUIDRef representation of the target IOBluetoothSDPUUID object.
+// Returns an IOBluetoothSDPUUIDRef representation of the target IOBluetoothSDPUUID object.
 //
 // GetSDPUUIDRef calls the underlying GetSDPUUIDRef.
 func (x *IOBluetoothSDPUUID) GetSDPUUIDRef() unsafe.Pointer {
 	return x.inner.GetSDPUUIDRef()
 }
 
+// Returns an IOBluetoothSDPUUID object matching the target UUID, but with the given number of bytes.
+//
 // GetUUIDWithLength calls the underlying GetUUIDWithLength.
 func (x *IOBluetoothSDPUUID) GetUUIDWithLength(newLength uint) *IOBluetoothSDPUUID {
 	_r := x.inner.GetUUIDWithLength(newLength)
@@ -60,6 +68,8 @@ func (x *IOBluetoothSDPUUID) GetUUIDWithLength(newLength uint) *IOBluetoothSDPUU
 	return &IOBluetoothSDPUUID{inner: _r}
 }
 
+// Compares the target IOBluetoothSDPUUID object with the given otherUUID object.
+//
 // IsEqualToUUID calls the underlying IsEqualToUUID.
 func (x *IOBluetoothSDPUUID) IsEqualToUUID(otherUUID *raw.IOBluetoothSDPUUID) bool {
 	return x.inner.IsEqualToUUID(otherUUID)

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mutable caption region subclass that you use to create new caption regions.
+//
 // MutableCaptionRegion wraps [raw.AVMutableCaptionRegion] with a fluent Go API.
 type MutableCaptionRegion struct {
 	inner *raw.AVMutableCaptionRegion
@@ -36,7 +38,7 @@ func NewMutableCaptionRegion() *MutableCaptionRegion {
 	return &MutableCaptionRegion{inner: raw.AVMutableCaptionRegionFromID(_id)}
 }
 
-// @method initWithIdentifier: @abstract Create a region object with the identifier.
+// Creates a caption region that has an identifier.
 //
 // NewMutableCaptionRegionWithIdentifier creates a new [MutableCaptionRegion].
 func NewMutableCaptionRegionWithIdentifier(identifier string) *MutableCaptionRegion {
@@ -45,7 +47,7 @@ func NewMutableCaptionRegionWithIdentifier(identifier string) *MutableCaptionReg
 	return &MutableCaptionRegion{inner: raw.AVMutableCaptionRegionFromID(_id)}
 }
 
-// @property origin @abstract The position of the top-left of the region.
+// The region’s top-left position.
 //
 // WithOrigin sets the origin property and returns the receiver for chaining.
 func (x *MutableCaptionRegion) WithOrigin(origin raw.AVCaptionPoint) *MutableCaptionRegion {
@@ -53,7 +55,7 @@ func (x *MutableCaptionRegion) WithOrigin(origin raw.AVCaptionPoint) *MutableCap
 	return x
 }
 
-// @property size @abstract The width and height of the region, potentally with unspecified fields.
+// The height and width of the region.
 //
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *MutableCaptionRegion) WithSize(size raw.AVCaptionSize) *MutableCaptionRegion {
@@ -61,7 +63,7 @@ func (x *MutableCaptionRegion) WithSize(size raw.AVCaptionSize) *MutableCaptionR
 	return x
 }
 
-// @property scroll @abstract Region scroll mode.
+// The scroll mode of the region.
 //
 // WithScroll sets the scroll property and returns the receiver for chaining.
 func (x *MutableCaptionRegion) WithScroll(scroll AVCaptionRegionScroll) *MutableCaptionRegion {
@@ -69,7 +71,7 @@ func (x *MutableCaptionRegion) WithScroll(scroll AVCaptionRegionScroll) *Mutable
 	return x
 }
 
-// @property displayAlignment @abstract Alignment of lines in the region.
+// The alignment of lines for the region.
 //
 // WithDisplayAlignment sets the displayAlignment property and returns the receiver for chaining.
 func (x *MutableCaptionRegion) WithDisplayAlignment(displayAlignment AVCaptionRegionDisplayAlignment) *MutableCaptionRegion {
@@ -77,7 +79,7 @@ func (x *MutableCaptionRegion) WithDisplayAlignment(displayAlignment AVCaptionRe
 	return x
 }
 
-// @property writingMode @abstract The block and inline progression direction of the region.
+// The block and inline progression direction of the region.
 //
 // WithWritingMode sets the writingMode property and returns the receiver for chaining.
 func (x *MutableCaptionRegion) WithWritingMode(writingMode AVCaptionRegionWritingMode) *MutableCaptionRegion {

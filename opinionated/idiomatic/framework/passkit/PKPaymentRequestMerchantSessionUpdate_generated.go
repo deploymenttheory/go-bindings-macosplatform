@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that updates a payment request with a merchant validation.
+//
 // PaymentRequestMerchantSessionUpdate wraps [raw.PKPaymentRequestMerchantSessionUpdate] with a fluent Go API.
 type PaymentRequestMerchantSessionUpdate struct {
 	inner *raw.PKPaymentRequestMerchantSessionUpdate
@@ -31,6 +33,8 @@ func PaymentRequestMerchantSessionUpdateFromID(id objc.ID) *PaymentRequestMercha
 	return &PaymentRequestMerchantSessionUpdate{inner: raw.PKPaymentRequestMerchantSessionUpdateFromID(id)}
 }
 
+// Creates a payment method update with the specified status and merchant session.
+//
 // NewPaymentRequestMerchantSessionUpdateWithStatusMerchantSession creates a new [PaymentRequestMerchantSessionUpdate].
 func NewPaymentRequestMerchantSessionUpdateWithStatusMerchantSession(status PKPaymentAuthorizationStatus, session *raw.PKPaymentMerchantSession) *PaymentRequestMerchantSessionUpdate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentRequestMerchantSessionUpdate")), objc.RegisterName("alloc"))
@@ -38,12 +42,16 @@ func NewPaymentRequestMerchantSessionUpdateWithStatusMerchantSession(status PKPa
 	return &PaymentRequestMerchantSessionUpdate{inner: raw.PKPaymentRequestMerchantSessionUpdateFromID(_id)}
 }
 
+// The current authorization status for the payment.
+//
 // WithStatus sets the status property and returns the receiver for chaining.
 func (x *PaymentRequestMerchantSessionUpdate) WithStatus(status PKPaymentAuthorizationStatus) *PaymentRequestMerchantSessionUpdate {
 	x.inner.SetStatus(raw.PKPaymentAuthorizationStatus(status))
 	return x
 }
 
+// An object that validates the identity of a merchant for the payment request.
+//
 // WithSession sets the session property and returns the receiver for chaining.
 func (x *PaymentRequestMerchantSessionUpdate) WithSession(session *PaymentMerchantSession) *PaymentRequestMerchantSessionUpdate {
 	x.inner.SetSession(session.Unwrap())

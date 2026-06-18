@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that controls operations that generate Encapsulated PostScript (EPS) code, Portable Document Format (PDF) code, or print jobs.
+//
 // PrintOperation wraps [raw.NSPrintOperation] with a fluent Go API.
 type PrintOperation struct {
 	inner *raw.NSPrintOperation
@@ -38,64 +40,86 @@ func NewPrintOperation() *PrintOperation {
 	return &PrintOperation{inner: raw.NSPrintOperationFromID(_id)}
 }
 
+// The custom title of the print job.
+//
 // WithJobTitle sets the jobTitle property and returns the receiver for chaining.
 func (x *PrintOperation) WithJobTitle(jobTitle string) *PrintOperation {
 	x.inner.SetJobTitle(foundation.NSStringStringWithUTF8String(jobTitle))
 	return x
 }
 
+// A Boolean value that determines whether the print operation displays a print panel.
+//
 // WithShowsPrintPanel sets the showsPrintPanel property and returns the receiver for chaining.
 func (x *PrintOperation) WithShowsPrintPanel(showsPrintPanel bool) *PrintOperation {
 	x.inner.SetShowsPrintPanel(showsPrintPanel)
 	return x
 }
 
+// A Boolean value that determines whether the print operation displays a progress panel.
+//
 // WithShowsProgressPanel sets the showsProgressPanel property and returns the receiver for chaining.
 func (x *PrintOperation) WithShowsProgressPanel(showsProgressPanel bool) *PrintOperation {
 	x.inner.SetShowsProgressPanel(showsProgressPanel)
 	return x
 }
 
+// The print panel object to use during the operation.
+//
 // WithPrintPanel sets the printPanel property and returns the receiver for chaining.
 func (x *PrintOperation) WithPrintPanel(printPanel *PrintPanel) *PrintOperation {
 	x.inner.SetPrintPanel(printPanel.Unwrap())
 	return x
 }
 
+// The PDF panel object to use during the operation.
+//
 // WithPDFPanel sets the pDFPanel property and returns the receiver for chaining.
 func (x *PrintOperation) WithPDFPanel(pDFPanel *PDFPanel) *PrintOperation {
 	x.inner.SetPDFPanel(pDFPanel.Unwrap())
 	return x
 }
 
+// A Boolean value that determines whether the print operation is allowed to spawn a separate printing thread.
+//
 // WithCanSpawnSeparateThread sets the canSpawnSeparateThread property and returns the receiver for chaining.
 func (x *PrintOperation) WithCanSpawnSeparateThread(canSpawnSeparateThread bool) *PrintOperation {
 	x.inner.SetCanSpawnSeparateThread(canSpawnSeparateThread)
 	return x
 }
 
+// The print order for the pages of the operation.
+//
 // WithPageOrder sets the pageOrder property and returns the receiver for chaining.
 func (x *PrintOperation) WithPageOrder(pageOrder NSPrintingPageOrder) *PrintOperation {
 	x.inner.SetPageOrder(raw.NSPrintingPageOrder(pageOrder))
 	return x
 }
 
+// The printing information associated with the print operation.
+//
 // WithPrintInfo sets the printInfo property and returns the receiver for chaining.
 func (x *PrintOperation) WithPrintInfo(printInfo *PrintInfo) *PrintOperation {
 	x.inner.SetPrintInfo(printInfo.Unwrap())
 	return x
 }
 
+// Runs the print operation, calling your custom delegate method upon completion.
+//
 // RunOperationModalForWindowDelegateDidRunSelectorContextInfo calls the underlying RunOperationModalForWindowDelegateDidRunSelectorContextInfo.
 func (x *PrintOperation) RunOperationModalForWindowDelegateDidRunSelectorContextInfo(docWindow *raw.NSWindow, delegate objc.ID, didRunSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.RunOperationModalForWindowDelegateDidRunSelectorContextInfo(docWindow, delegate, didRunSelector, contextInfo)
 }
 
+// Runs the print operation on the current thread.
+//
 // RunOperation calls the underlying RunOperation.
 func (x *PrintOperation) RunOperation() bool {
 	return x.inner.RunOperation()
 }
 
+// Creates the graphics context object used for drawing during the operation.
+//
 // CreateContext calls the underlying CreateContext.
 func (x *PrintOperation) CreateContext() *GraphicsContext {
 	_r := x.inner.CreateContext()
@@ -105,16 +129,22 @@ func (x *PrintOperation) CreateContext() *GraphicsContext {
 	return &GraphicsContext{inner: _r}
 }
 
+// Destroys the print operation’s graphics context.
+//
 // DestroyContext calls the underlying DestroyContext.
 func (x *PrintOperation) DestroyContext() {
 	x.inner.DestroyContext()
 }
 
+// Delivers the results of the print operation to the intended destination.
+//
 // DeliverResult calls the underlying DeliverResult.
 func (x *PrintOperation) DeliverResult() bool {
 	return x.inner.DeliverResult()
 }
 
+// Called at the end of a print operation to remove the print operation as the current operation.
+//
 // CleanUpOperation calls the underlying CleanUpOperation.
 func (x *PrintOperation) CleanUpOperation() {
 	x.inner.CleanUpOperation()
@@ -254,11 +284,15 @@ func (x *PrintOperation) CurrentPage() int {
 	return x.inner.CurrentPage()
 }
 
+// Sets the custom accessory view to be displayed by the print operation’s print panel.
+//
 // SetAccessoryView calls the underlying SetAccessoryView.
 func (x *PrintOperation) SetAccessoryView(view *raw.NSView) {
 	x.inner.SetAccessoryView(view)
 }
 
+// Returns the accessory view used by the print operation’s print panel.
+//
 // AccessoryView calls the underlying AccessoryView.
 func (x *PrintOperation) AccessoryView() *View {
 	_r := x.inner.AccessoryView()
@@ -268,11 +302,15 @@ func (x *PrintOperation) AccessoryView() *View {
 	return &View{inner: _r}
 }
 
+// Sets the type of content that the print job is printing.
+//
 // SetJobStyleHint calls the underlying SetJobStyleHint.
 func (x *PrintOperation) SetJobStyleHint(hint string) {
 	x.inner.SetJobStyleHint(foundation.NSStringStringWithUTF8String(hint))
 }
 
+// The type of content that the print job is printing.
+//
 // JobStyleHint calls the underlying JobStyleHint.
 func (x *PrintOperation) JobStyleHint() string {
 	_r := x.inner.JobStyleHint()
@@ -282,11 +320,15 @@ func (x *PrintOperation) JobStyleHint() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Sets whether the print operation should display a print panel.
+//
 // SetShowPanels calls the underlying SetShowPanels.
 func (x *PrintOperation) SetShowPanels(flag bool) {
 	x.inner.SetShowPanels(flag)
 }
 
+// Returns a Boolean value that indicates whether the print panel is to be displayed.
+//
 // ShowPanels calls the underlying ShowPanels.
 func (x *PrintOperation) ShowPanels() bool {
 	return x.inner.ShowPanels()

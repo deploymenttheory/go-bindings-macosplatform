@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of an array.
+//
 // ArrayType wraps [raw.MTLArrayType] with a fluent Go API.
 type ArrayType struct {
 	inner *raw.MTLArrayType
@@ -35,6 +37,8 @@ func NewArrayType() *ArrayType {
 	return &ArrayType{inner: raw.MTLArrayTypeFromID(_id)}
 }
 
+// Provides a description of the underlying struct type when an array holds structs as its elements.
+//
 // ElementStructType calls the underlying ElementStructType.
 func (x *ArrayType) ElementStructType() *StructType {
 	_r := x.inner.ElementStructType()
@@ -44,6 +48,8 @@ func (x *ArrayType) ElementStructType() *StructType {
 	return &StructType{inner: _r}
 }
 
+// Provides a description of the underlying type when an array holds other arrays as its elements.
+//
 // ElementArrayType calls the underlying ElementArrayType.
 func (x *ArrayType) ElementArrayType() *ArrayType {
 	_r := x.inner.ElementArrayType()
@@ -53,6 +59,8 @@ func (x *ArrayType) ElementArrayType() *ArrayType {
 	return &ArrayType{inner: _r}
 }
 
+// Provides a description of the underlying texture type when an array holds textures as its elements.
+//
 // ElementTextureReferenceType calls the underlying ElementTextureReferenceType.
 func (x *ArrayType) ElementTextureReferenceType() *TextureReferenceType {
 	_r := x.inner.ElementTextureReferenceType()
@@ -62,6 +70,8 @@ func (x *ArrayType) ElementTextureReferenceType() *TextureReferenceType {
 	return &TextureReferenceType{inner: _r}
 }
 
+// Provides a description of the underlying pointer type when an array holds pointers as its elements.
+//
 // ElementPointerType calls the underlying ElementPointerType.
 func (x *ArrayType) ElementPointerType() *PointerType {
 	_r := x.inner.ElementPointerType()
@@ -71,7 +81,7 @@ func (x *ArrayType) ElementPointerType() *PointerType {
 	return &PointerType{inner: _r}
 }
 
-// Provides a description of the underlying tensor type when this array holds tensors as its elements. - Returns: A description of the tensor type that this array holds, or `nil` if this struct member doesn't hold a tensor.
+// Provides a description of the underlying tensor type when this array holds tensors as its elements.
 //
 // ElementTensorReferenceType calls the underlying ElementTensorReferenceType.
 func (x *ArrayType) ElementTensorReferenceType() *TensorReferenceType {

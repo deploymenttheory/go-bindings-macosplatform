@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the document feeder unit on a scanner.
+//
 // ScannerFunctionalUnitDocumentFeeder wraps [raw.ICScannerFunctionalUnitDocumentFeeder] with a fluent Go API.
 type ScannerFunctionalUnitDocumentFeeder struct {
 	inner *raw.ICScannerFunctionalUnitDocumentFeeder

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents a contiguous range between two locations inside document contents.
+//
 // TextRange wraps [raw.NSTextRange] with a fluent Go API.
 type TextRange struct {
 	inner *raw.NSTextRange
@@ -29,7 +31,7 @@ func TextRangeFromID(id objc.ID) *TextRange {
 	return &TextRange{inner: raw.NSTextRangeFromID(id)}
 }
 
-// Creates a new text range with the starting and ending locations you specify. - Parameters: - location: The starting location. - endLocation: The ending location.
+// Creates a new text range with the starting and ending locations you specify.
 //
 // NewTextRangeWithLocationEndLocation creates a new [TextRange].
 func NewTextRangeWithLocationEndLocation(location raw.NSTextLocation, endLocation raw.NSTextLocation) *TextRange {
@@ -38,7 +40,7 @@ func NewTextRangeWithLocationEndLocation(location raw.NSTextLocation, endLocatio
 	return &TextRange{inner: raw.NSTextRangeFromID(_id)}
 }
 
-// Creates a new text range at the location you specify. - Parameters: - location: An “NSTextLocation“.
+// Creates a new text range at the location you specify.
 //
 // NewTextRangeWithLocation creates a new [TextRange].
 func NewTextRangeWithLocation(location raw.NSTextLocation) *TextRange {
@@ -47,35 +49,35 @@ func NewTextRangeWithLocation(location raw.NSTextLocation) *TextRange {
 	return &TextRange{inner: raw.NSTextRangeFromID(_id)}
 }
 
-// Compares two text ranges. - Parameters: - textRange: The range used to compare against the current range to evaluate for differences. - Returns: Returns `true` if the ranges are equal.
+// Compares two text ranges.
 //
 // IsEqualToTextRange calls the underlying IsEqualToTextRange.
 func (x *TextRange) IsEqualToTextRange(textRange *raw.NSTextRange) bool {
 	return x.inner.IsEqualToTextRange(textRange)
 }
 
-// Determines if the text location you specify is in the current text range. - Parameters: - location: An “NSTextLocation“. - Returns: Returns `true` if the location is in the range otherwise `false` .
+// Determines if the text location you specify is in the current text range.
 //
 // ContainsLocation calls the underlying ContainsLocation.
 func (x *TextRange) ContainsLocation(location raw.NSTextLocation) bool {
 	return x.inner.ContainsLocation(location)
 }
 
-// Determines if the text range you specify is in the current text range. - Parameters: - textRange: An “NSTextRange“. - Returns: Returns `true` if the range you provide is in the current range; otherwise `false`.
+// Determines if the text range you specify is in the current text range.
 //
 // ContainsRange calls the underlying ContainsRange.
 func (x *TextRange) ContainsRange(textRange *raw.NSTextRange) bool {
 	return x.inner.ContainsRange(textRange)
 }
 
-// Determines if two ranges intersect. - Parameters: - textRange: The range used to compare against the current range to evaluate for differences. - Returns: Returns `true` if the ranges intersect.
+// Determines if two ranges intersect.
 //
 // IntersectsWithTextRange calls the underlying IntersectsWithTextRange.
 func (x *TextRange) IntersectsWithTextRange(textRange *raw.NSTextRange) bool {
 	return x.inner.IntersectsWithTextRange(textRange)
 }
 
-// Returns the range, if any, where two text ranges intersect. - Parameters: - textRange: The range used to compare against the current range to evaluate for differences. - Returns: An <doc://com.apple.documentation/documentation/foundation/nsrange> that represents the intersection of the ranges, or `nil` if they don't intersect.
+// Returns the range, if any, where two text ranges intersect.
 //
 // TextRangeByIntersectingWithTextRange calls the underlying TextRangeByIntersectingWithTextRange.
 func (x *TextRange) TextRangeByIntersectingWithTextRange(textRange *raw.NSTextRange) *TextRange {
@@ -86,7 +88,7 @@ func (x *TextRange) TextRangeByIntersectingWithTextRange(textRange *raw.NSTextRa
 	return &TextRange{inner: _r}
 }
 
-// Returns a new text range by forming the union with the text range you provide. - Parameters: - textRange: The range to use to create the union. - Returns: An “NSTextRange“ that represent the union of the two ranges.
+// Returns a new text range by forming the union with the text range you provide.
 //
 // TextRangeByFormingUnionWithTextRange calls the underlying TextRangeByFormingUnionWithTextRange.
 func (x *TextRange) TextRangeByFormingUnionWithTextRange(textRange *raw.NSTextRange) *TextRange {

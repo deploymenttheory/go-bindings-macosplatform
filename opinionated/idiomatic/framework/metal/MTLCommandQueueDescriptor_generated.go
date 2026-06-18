@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration that customizes the behavior for a new command queue.
+//
 // CommandQueueDescriptor wraps [raw.MTLCommandQueueDescriptor] with a fluent Go API.
 type CommandQueueDescriptor struct {
 	inner *raw.MTLCommandQueueDescriptor
@@ -35,7 +37,7 @@ func NewCommandQueueDescriptor() *CommandQueueDescriptor {
 	return &CommandQueueDescriptor{inner: raw.MTLCommandQueueDescriptorFromID(_id)}
 }
 
-// @property maxCommandBufferCount @ Specify upper bound on uncompleted command buffers that may be enqueued on this queue
+// An integer that sets the maximum number of uncompleted command buffers the queue can allow.
 //
 // WithMaxCommandBufferCount sets the maxCommandBufferCount property and returns the receiver for chaining.
 func (x *CommandQueueDescriptor) WithMaxCommandBufferCount(maxCommandBufferCount uint) *CommandQueueDescriptor {
@@ -43,7 +45,7 @@ func (x *CommandQueueDescriptor) WithMaxCommandBufferCount(maxCommandBufferCount
 	return x
 }
 
-// @property logState @ Specify the MTLLogState to enable shader logging
+// The shader logging configuration that the command queue uses.
 //
 // WithLogState sets the logState property and returns the receiver for chaining.
 func (x *CommandQueueDescriptor) WithLogState(logState raw.MTLLogState) *CommandQueueDescriptor {

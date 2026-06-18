@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Generates and synchronizes timecode data from various sources for precise video and audio synchronization.
+//
 // CaptureTimecodeGenerator wraps [raw.AVCaptureTimecodeGenerator] with a fluent Go API.
 type CaptureTimecodeGenerator struct {
 	inner *raw.AVCaptureTimecodeGenerator
@@ -38,7 +40,7 @@ func NewCaptureTimecodeGenerator() *CaptureTimecodeGenerator {
 	return &CaptureTimecodeGenerator{inner: raw.AVCaptureTimecodeGeneratorFromID(_id)}
 }
 
-// The maximum time interval allowed for source synchronization attempts before timing out. This property specifies the duration, in seconds, that the “AVCaptureTimecodeGenerator“ will attempt to synchronize with a timecode source before timing out if synchronization cannot be achieved. If this threshold is exceeded, the synchronization status updates to reflect a timeout, and your “AVCaptureTimecodeGeneratorDelegate/timecodeGenerator:transitionedToSynchronizationStatus:forSource:“ delegate method fires, informing you of the event. The default value is 15 seconds.
+// The maximum time interval allowed for source synchronization attempts before timing out.
 //
 // WithSynchronizationTimeout sets the synchronizationTimeout property and returns the receiver for chaining.
 func (x *CaptureTimecodeGenerator) WithSynchronizationTimeout(synchronizationTimeout float64) *CaptureTimecodeGenerator {
@@ -46,7 +48,7 @@ func (x *CaptureTimecodeGenerator) WithSynchronizationTimeout(synchronizationTim
 	return x
 }
 
-// The time offset, in seconds, applied to the generated timecode. This offset allows fine-tuning of time alignment for synchronization with external sources or to accommodate any intentional delay. The default value is 0 seconds.
+// The time offset, in seconds, applied to the generated timecode.
 //
 // WithTimecodeAlignmentOffset sets the timecodeAlignmentOffset property and returns the receiver for chaining.
 func (x *CaptureTimecodeGenerator) WithTimecodeAlignmentOffset(timecodeAlignmentOffset float64) *CaptureTimecodeGenerator {
@@ -62,21 +64,21 @@ func (x *CaptureTimecodeGenerator) WithTimecodeFrameDuration(timecodeFrameDurati
 	return x
 }
 
-// Assigns a delegate to receive real-time timecode updates and specifies a queue for callbacks. - Parameter delegate: An object conforming to the “AVCaptureTimecodeGeneratorDelegate“ protocol. - Parameter callbackQueue: The dispatch queue on which the delegate methods are invoked. The `callbackQueue` parameter may not be `nil`, except when setting the “AVCaptureTimecodeGeneratorDelegate“ to `nil`, otherwise “setDelegate:queue:“ throws an `NSInvalidArgumentException`. Use this method to configure a delegate that handles timecode updates. The specified `queue` ensures thread-safe invocation of delegate methods.
+// Assigns a delegate to receive real-time timecode updates and specifies a queue for callbacks.
 //
 // SetDelegateQueue calls the underlying SetDelegateQueue.
 func (x *CaptureTimecodeGenerator) SetDelegateQueue(delegate raw.AVCaptureTimecodeGeneratorDelegate, callbackQueue *foundation.NSObject) {
 	x.inner.SetDelegateQueue(delegate, callbackQueue)
 }
 
-// Synchronizes the generator with the specified timecode source. - Parameter source: The timecode source for synchronization.
+// Synchronizes the generator with the specified timecode source.
 //
 // StartSynchronizationWithTimecodeSource calls the underlying StartSynchronizationWithTimecodeSource.
 func (x *CaptureTimecodeGenerator) StartSynchronizationWithTimecodeSource(source *raw.AVCaptureTimecodeSource) {
 	x.inner.StartSynchronizationWithTimecodeSource(source)
 }
 
-// Generates an initial timecode intended to be the first in a sequence. - Returns: A populated “AVCaptureTimecode“ structure.
+// Generates an initial timecode intended to be the first in a sequence.
 //
 // GenerateInitialTimecode calls the underlying GenerateInitialTimecode.
 func (x *CaptureTimecodeGenerator) GenerateInitialTimecode() raw.AVCaptureTimecode {

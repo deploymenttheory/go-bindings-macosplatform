@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that allows clients to add publishers and then subscribe to specific metric event classes from those publishers.
+//
 // MetricEventStream wraps [raw.AVMetricEventStream] with a fluent Go API.
 type MetricEventStream struct {
 	inner *raw.AVMetricEventStream

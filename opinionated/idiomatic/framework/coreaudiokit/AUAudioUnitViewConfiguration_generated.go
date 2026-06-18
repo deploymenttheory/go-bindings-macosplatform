@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration object that describes how to present the audio unit’s user interface.
+//
 // AUAudioUnitViewConfiguration wraps [raw.AUAudioUnitViewConfiguration] with a fluent Go API.
 type AUAudioUnitViewConfiguration struct {
 	inner *raw.AUAudioUnitViewConfiguration
@@ -29,7 +31,7 @@ func AUAudioUnitViewConfigurationFromID(id objc.ID) *AUAudioUnitViewConfiguratio
 	return &AUAudioUnitViewConfiguration{inner: raw.AUAudioUnitViewConfigurationFromID(id)}
 }
 
-// @method		initWithWidth @brief		Designated initializer. @param		width The width associated with this view configuration. @param		height The height associated with this view configuration. @param		hostHasController This property controls whether the host shows its own control surface in this view configuration. @return		Returns the newly created view configuration object.
+// Creates a new configuration object.
 //
 // NewAUAudioUnitViewConfigurationWithWidthHeightHostHasController creates a new [AUAudioUnitViewConfiguration].
 func NewAUAudioUnitViewConfigurationWithWidthHeightHostHasController(width float64, height float64, hostHasController bool) *AUAudioUnitViewConfiguration {

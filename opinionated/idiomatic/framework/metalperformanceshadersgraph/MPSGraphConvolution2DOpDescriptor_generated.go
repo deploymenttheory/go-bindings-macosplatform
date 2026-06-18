@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that describes the properties of a 2D-convolution operator.
+//
 // GraphConvolution2DOpDescriptor wraps [raw.MPSGraphConvolution2DOpDescriptor] with a fluent Go API.
 type GraphConvolution2DOpDescriptor struct {
 	inner *raw.MPSGraphConvolution2DOpDescriptor
@@ -37,7 +39,7 @@ func NewGraphConvolution2DOpDescriptor() *GraphConvolution2DOpDescriptor {
 	return &GraphConvolution2DOpDescriptor{inner: raw.MPSGraphConvolution2DOpDescriptorFromID(_id)}
 }
 
-// The scale that maps `x`-coordinate of the destination to `x`-coordinate of the source. Source `x`-coordinate, `sx` is computed from destination `x`-coordinate, `dx` as `sx = strideInX*dx`. Default value is 1.
+// The scale that maps x-coordinate of the destination to x-coordinate of the source.
 //
 // WithStrideInX sets the strideInX property and returns the receiver for chaining.
 func (x *GraphConvolution2DOpDescriptor) WithStrideInX(strideInX uint) *GraphConvolution2DOpDescriptor {
@@ -45,7 +47,7 @@ func (x *GraphConvolution2DOpDescriptor) WithStrideInX(strideInX uint) *GraphCon
 	return x
 }
 
-// The scale that maps `y`-coordinate of the destination to `y`-coordinate of the source. Source `y`-coordinate, `sy` is computed from destination `y`-coordinate, `dy` as `sy = strideInY*dy`. Default value is 1.
+// The scale that maps y-coordinate of the destination to y-coordinate of the source.
 //
 // WithStrideInY sets the strideInY property and returns the receiver for chaining.
 func (x *GraphConvolution2DOpDescriptor) WithStrideInY(strideInY uint) *GraphConvolution2DOpDescriptor {
@@ -53,7 +55,7 @@ func (x *GraphConvolution2DOpDescriptor) WithStrideInY(strideInY uint) *GraphCon
 	return x
 }
 
-// The amount by which the weights tensor expands in the `x`-direction. The weights tensor is dilated by inserting `dilationRateInX-1` zeros between consecutive values in `x`-dimension. Dilated weights tensor width is `(dilationRateInX-1)*kernelWidth+1`. Default value is 1.
+// The amount by which the weights tensor expands in the x-direction.
 //
 // WithDilationRateInX sets the dilationRateInX property and returns the receiver for chaining.
 func (x *GraphConvolution2DOpDescriptor) WithDilationRateInX(dilationRateInX uint) *GraphConvolution2DOpDescriptor {
@@ -61,7 +63,7 @@ func (x *GraphConvolution2DOpDescriptor) WithDilationRateInX(dilationRateInX uin
 	return x
 }
 
-// The amount by which the weights tensor expands in the `y`-direction. The weights tensor is dilated by inserting `dilationRateInY-1` zeros between consecutive values in `y`-dimension. Dilated weights tensor width is `(dilationRateInY-1)*kernelHeight+1`. Default value is 1.
+// The amount by which the weights tensor expands in the y-direction.
 //
 // WithDilationRateInY sets the dilationRateInY property and returns the receiver for chaining.
 func (x *GraphConvolution2DOpDescriptor) WithDilationRateInY(dilationRateInY uint) *GraphConvolution2DOpDescriptor {
@@ -101,7 +103,7 @@ func (x *GraphConvolution2DOpDescriptor) WithPaddingBottom(paddingBottom uint) *
 	return x
 }
 
-// The type of padding applied to the source tensor. If paddingStyle is `MPSGraphPaddingStyleExplicit`, `paddingLeft`, `laddingRight`, `paddingTop`, and `paddingBottom` must to be specified. For all other padding styles, framework compute these values so you dont need to provide these values.
+// The type of padding applied to the source tensor.
 //
 // WithPaddingStyle sets the paddingStyle property and returns the receiver for chaining.
 func (x *GraphConvolution2DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphConvolution2DOpDescriptor {
@@ -109,7 +111,7 @@ func (x *GraphConvolution2DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphP
 	return x
 }
 
-// The named layout of data in the source tensor. It defines the order of named dimensions (Batch, Channel, Height, Width). The convolution operation uses this to interpret data in the source tensor. For example, if `dataLayout` is `MPSGraphTensorNamedDataLayoutNCHW`, frameork interprets data in source tensor as `batch x channels x height x width` with `width` as fastest moving dimension.
+// The named layout of data in the source tensor.
 //
 // WithDataLayout sets the dataLayout property and returns the receiver for chaining.
 func (x *GraphConvolution2DOpDescriptor) WithDataLayout(dataLayout MPSGraphTensorNamedDataLayout) *GraphConvolution2DOpDescriptor {
@@ -117,7 +119,7 @@ func (x *GraphConvolution2DOpDescriptor) WithDataLayout(dataLayout MPSGraphTenso
 	return x
 }
 
-// The named layout of data in the weights tensor. It defines the order of named dimensions (Output channels, Input channels, Kernel height, Kernel width). The convolution operation uses this to interpret data in the weights tensor. For example, if `weightsLayout` is `MPSGraphTensorNamedDataLayoutOIHW`, frameork interprets data in weights tensor as `outputChannels x inputChannels x kernelHeight x kernelWidth` with `kernelWidth` as fastest moving dimension.
+// The named layout of data in the weights tensor.
 //
 // WithWeightsLayout sets the weightsLayout property and returns the receiver for chaining.
 func (x *GraphConvolution2DOpDescriptor) WithWeightsLayout(weightsLayout MPSGraphTensorNamedDataLayout) *GraphConvolution2DOpDescriptor {
@@ -125,7 +127,7 @@ func (x *GraphConvolution2DOpDescriptor) WithWeightsLayout(weightsLayout MPSGrap
 	return x
 }
 
-// The number of partitions of the input and output channels. The convolution operation divides input and output channels in `groups` partitions. input channels in a group or partition are only connected to output channels in corresponding group. Number of weights the convolution needs is `outputFeatureChannels x inputFeatureChannels/groups x kernelWidth x kernelHeight`
+// The number of partitions of the input and output channels.
 //
 // WithGroups sets the groups property and returns the receiver for chaining.
 func (x *GraphConvolution2DOpDescriptor) WithGroups(groups uint) *GraphConvolution2DOpDescriptor {
@@ -133,7 +135,7 @@ func (x *GraphConvolution2DOpDescriptor) WithGroups(groups uint) *GraphConvoluti
 	return x
 }
 
-// Sets the left, right, top, and bottom padding values. - Parameters: - paddingLeft: See “paddingLeft“ property. - paddingRight: See “paddingRight“ property. - paddingTop: See “paddingTop“ property. - paddingBottom: See “paddingBottom“ property.
+// Sets the left, right, top, and bottom padding values.
 //
 // SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom calls the underlying SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom.
 func (x *GraphConvolution2DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint) {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A session manager that mediates sharing data between an app and a web browser.
+//
 // WebAuthenticationSessionWebBrowserSessionManager wraps [raw.ASWebAuthenticationSessionWebBrowserSessionManager] with a fluent Go API.
 type WebAuthenticationSessionWebBrowserSessionManager struct {
 	inner *raw.ASWebAuthenticationSessionWebBrowserSessionManager
@@ -37,6 +39,8 @@ func NewWebAuthenticationSessionWebBrowserSessionManager() *WebAuthenticationSes
 	return &WebAuthenticationSessionWebBrowserSessionManager{inner: raw.ASWebAuthenticationSessionWebBrowserSessionManagerFromID(_id)}
 }
 
+// A handler that a web browser provides to handle session requests from an app.
+//
 // WithSessionHandler sets the sessionHandler property and returns the receiver for chaining.
 func (x *WebAuthenticationSessionWebBrowserSessionManager) WithSessionHandler(sessionHandler raw.ASWebAuthenticationSessionWebBrowserSessionHandling) *WebAuthenticationSessionWebBrowserSessionManager {
 	x.inner.SetSessionHandler(sessionHandler)

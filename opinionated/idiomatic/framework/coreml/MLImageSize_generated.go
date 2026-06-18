@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The width and height of an image feature size.
+//
 // ImageSize wraps [raw.MLImageSize] with a fluent Go API.
 type ImageSize struct {
 	inner *raw.MLImageSize

@@ -9,6 +9,7 @@ import (
 	"strings"
 )
 
+// Constants that indicate the axis and direction to use for a perspective projection matrix.
 type Cp_axis_direction_convention int64
 
 const (
@@ -33,6 +34,7 @@ func (e Cp_axis_direction_convention) String() string {
 	}
 }
 
+// The state of ownership for the drawable.
 type Cp_drawable_state int64
 
 const (
@@ -77,6 +79,7 @@ func (e Cp_drawable_target) String() string {
 	}
 }
 
+// Constants that specify the organization of the textures you use for drawing.
 type Cp_layer_renderer_layout int64
 
 const (
@@ -101,6 +104,7 @@ func (e Cp_layer_renderer_layout) String() string {
 	}
 }
 
+// The states of the layer renderer, which tell you how to proceed with drawing operations.
 type Cp_layer_renderer_state int64
 
 const (
@@ -125,6 +129,7 @@ func (e Cp_layer_renderer_state) String() string {
 	}
 }
 
+// The options to provide when calling cp_layer_renderer_capabilities_supported_color_formats and cp_layer_renderer_capabilities_supported_color_formats_count
 // Bitmask — values may be combined with |.
 type Cp_supported_color_formats_options int64
 
@@ -144,6 +149,7 @@ func (e Cp_supported_color_formats_options) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The options you can pass to functions that relate to rendering capabilities and layout support.
 // Bitmask — values may be combined with |.
 type Cp_supported_layouts_options int64
 

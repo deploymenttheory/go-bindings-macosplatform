@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A mutable track that conforms to the QuickTime or ISO base media file format.
+//
 // MutableMovieTrack wraps [raw.AVMutableMovieTrack] with a fluent Go API.
 type MutableMovieTrack struct {
 	inner *raw.AVMutableMovieTrack
@@ -39,7 +41,7 @@ func NewMutableMovieTrack() *MutableMovieTrack {
 	return &MutableMovieTrack{inner: raw.AVMutableMovieTrackFromID(_id)}
 }
 
-// @property       mediaDataStorage @abstract       The storage container for media data added to a track. @discussion     The value of this property is an AVMediaDataStorage object that indicates the location at which media data inserted or appended to the track will be written.
+// A storage container for the media data to be added to a track.
 //
 // WithMediaDataStorage sets the mediaDataStorage property and returns the receiver for chaining.
 func (x *MutableMovieTrack) WithMediaDataStorage(mediaDataStorage *MediaDataStorage) *MutableMovieTrack {
@@ -47,7 +49,7 @@ func (x *MutableMovieTrack) WithMediaDataStorage(mediaDataStorage *MediaDataStor
 	return x
 }
 
-// @property       sampleReferenceBaseURL @abstract       For file types that support writing sample references, such as QuickTime Movie files, specifies the base URL that sample references are relative to; may be nil. @discussion     If the value of this property can be resolved as an absolute URL, the sample locations written to the file when appending sample references to this track will be relative to this URL. The URL must point to a location contained by any common parent directory of the locations that will be referenced. For example, setting the sampleReferenceBaseURL property to "file:///Users/johnappleseed/Movies/" and appending sample buffers that refer to "file:///Users/johnappleseed/Movies/data/movie1.mov" will cause the sample reference "data/movie1.mov" to be written to the movie file. If the value of the property cannot be resolved as an absolute URL or if it points to a location that is not contained by any common parent directory of the locations that will be referenced, the location will be written unmodified. The default value is nil, which means that the location will be written unmodified.
+// The base URL for sample references.
 //
 // WithSampleReferenceBaseURL sets the sampleReferenceBaseURL property and returns the receiver for chaining.
 func (x *MutableMovieTrack) WithSampleReferenceBaseURL(sampleReferenceBaseURL string) *MutableMovieTrack {
@@ -55,7 +57,7 @@ func (x *MutableMovieTrack) WithSampleReferenceBaseURL(sampleReferenceBaseURL st
 	return x
 }
 
-// @property       enabled @abstract       A BOOL value indicating whether the track is enabled by default for presentation.
+// A Boolean value that indicates whether the track’s container enables it.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *MutableMovieTrack) WithEnabled(enabled bool) *MutableMovieTrack {
@@ -63,7 +65,7 @@ func (x *MutableMovieTrack) WithEnabled(enabled bool) *MutableMovieTrack {
 	return x
 }
 
-// @property       alternateGroupID @abstract       An integer indicating the track as a member of a particular alternate group.
+// A number that identifies the track as a member of a particular alternate group.
 //
 // WithAlternateGroupID sets the alternateGroupID property and returns the receiver for chaining.
 func (x *MutableMovieTrack) WithAlternateGroupID(alternateGroupID int) *MutableMovieTrack {
@@ -71,7 +73,7 @@ func (x *MutableMovieTrack) WithAlternateGroupID(alternateGroupID int) *MutableM
 	return x
 }
 
-// @property       modified @abstract       Whether a track has been modified. @discussion     The value of this property is a BOOL that indicates whether the AVMutableMovieTrack object has been modified since it was created, was last written, or had its modified state cleared via a call to setModified:NO.
+// A Boolean value that indicates whether a track is in a modified state.
 //
 // WithModified sets the modified property and returns the receiver for chaining.
 func (x *MutableMovieTrack) WithModified(modified bool) *MutableMovieTrack {
@@ -79,7 +81,7 @@ func (x *MutableMovieTrack) WithModified(modified bool) *MutableMovieTrack {
 	return x
 }
 
-// @property       timescale @abstract       For file types that contain a 'moov' atom, such as QuickTime Movie files, specifies the time scale of the track's media. @discussion		The default media time scale is 0. This property should be set on a new empty track before any edits are performed on the track.
+// The time scale for tracks that contain the moov atom.
 //
 // WithTimescale sets the timescale property and returns the receiver for chaining.
 func (x *MutableMovieTrack) WithTimescale(timescale int32) *MutableMovieTrack {
@@ -87,7 +89,7 @@ func (x *MutableMovieTrack) WithTimescale(timescale int32) *MutableMovieTrack {
 	return x
 }
 
-// @property       languageCode @abstract       The language associated with the track. @discussion     The value of this property is an ISO 639-2/T language code indicating the language associated with the track; may be nil if no language is indicated.
+// The language code of the track.
 //
 // WithLanguageCode sets the languageCode property and returns the receiver for chaining.
 func (x *MutableMovieTrack) WithLanguageCode(languageCode string) *MutableMovieTrack {
@@ -95,7 +97,7 @@ func (x *MutableMovieTrack) WithLanguageCode(languageCode string) *MutableMovieT
 	return x
 }
 
-// @property       extendedLanguageTag @abstract       The language tag associated with the track. @discussion     The value of this property is an IETF BCP 47 (RFC 4646) language identifier indicating the language tag associated with the track; may be nil if no language tag is indicated.
+// The language tag of the track.
 //
 // WithExtendedLanguageTag sets the extendedLanguageTag property and returns the receiver for chaining.
 func (x *MutableMovieTrack) WithExtendedLanguageTag(extendedLanguageTag string) *MutableMovieTrack {
@@ -103,7 +105,7 @@ func (x *MutableMovieTrack) WithExtendedLanguageTag(extendedLanguageTag string) 
 	return x
 }
 
-// @property       naturalSize @abstract       A CGSize indicating the dimensions at which the visual media data of the track should be displayed.
+// The dimensions used to display the visual media data for the track.
 //
 // WithNaturalSize sets the naturalSize property and returns the receiver for chaining.
 func (x *MutableMovieTrack) WithNaturalSize(naturalSize corefoundation.CGSize) *MutableMovieTrack {
@@ -111,7 +113,7 @@ func (x *MutableMovieTrack) WithNaturalSize(naturalSize corefoundation.CGSize) *
 	return x
 }
 
-// @property       preferredTransform @abstract       A CGAffineTransform indicating the transform specified in the track's storage container as the preferred transformation of the visual media data for display purposes; the value is often but not always CGAffineTransformIdentity.
+// The transform performed on the visual media data of the track for display purposes.
 //
 // WithPreferredTransform sets the preferredTransform property and returns the receiver for chaining.
 func (x *MutableMovieTrack) WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *MutableMovieTrack {
@@ -119,7 +121,7 @@ func (x *MutableMovieTrack) WithPreferredTransform(preferredTransform corefounda
 	return x
 }
 
-// @property       layer @abstract       The layer level of the visual media data of the track.
+// The layer level for the visual media of the track.
 //
 // WithLayer sets the layer property and returns the receiver for chaining.
 func (x *MutableMovieTrack) WithLayer(layer int) *MutableMovieTrack {
@@ -127,7 +129,7 @@ func (x *MutableMovieTrack) WithLayer(layer int) *MutableMovieTrack {
 	return x
 }
 
-// @property       cleanApertureDimensions @abstract       A CGSize indicating the clean aperture dimensions of the track.
+// The clean aperture dimension of the track.
 //
 // WithCleanApertureDimensions sets the cleanApertureDimensions property and returns the receiver for chaining.
 func (x *MutableMovieTrack) WithCleanApertureDimensions(cleanApertureDimensions corefoundation.CGSize) *MutableMovieTrack {
@@ -135,7 +137,7 @@ func (x *MutableMovieTrack) WithCleanApertureDimensions(cleanApertureDimensions 
 	return x
 }
 
-// @property       productionApertureDimensions @abstract       A CGSize indicating the production aperture dimensions of the track.
+// The production aperture dimensions of the track.
 //
 // WithProductionApertureDimensions sets the productionApertureDimensions property and returns the receiver for chaining.
 func (x *MutableMovieTrack) WithProductionApertureDimensions(productionApertureDimensions corefoundation.CGSize) *MutableMovieTrack {
@@ -143,7 +145,7 @@ func (x *MutableMovieTrack) WithProductionApertureDimensions(productionApertureD
 	return x
 }
 
-// @property       encodedPixelsDimensions @abstract       A CGSize indicating the dimensions encoded pixels dimensions of the track.
+// The encoded pixels dimensions of the track.
 //
 // WithEncodedPixelsDimensions sets the encodedPixelsDimensions property and returns the receiver for chaining.
 func (x *MutableMovieTrack) WithEncodedPixelsDimensions(encodedPixelsDimensions corefoundation.CGSize) *MutableMovieTrack {
@@ -151,7 +153,7 @@ func (x *MutableMovieTrack) WithEncodedPixelsDimensions(encodedPixelsDimensions 
 	return x
 }
 
-// @property       preferredVolume @abstract       The preferred volume of the audible media data of the track; often but not always 1.0.
+// The preferred volume for the audible medata data of the track.
 //
 // WithPreferredVolume sets the preferredVolume property and returns the receiver for chaining.
 func (x *MutableMovieTrack) WithPreferredVolume(preferredVolume float32) *MutableMovieTrack {
@@ -159,7 +161,7 @@ func (x *MutableMovieTrack) WithPreferredVolume(preferredVolume float32) *Mutabl
 	return x
 }
 
-// @property       preferredMediaChunkSize @abstract       For file types that support media chunk sizes, the maximum size (in bytes) to be used for each chunk of sample data written to the file. @discussion		The total size of the samples in a chunk will be no larger than this preferred chunk size, or the size of a single sample if the sample is larger than this preferred chunk size. The default media chunk size is 1024 * 1024 bytes. It is an error to set a negative chunk size.
+// The maximum size to use for each chunk of sample data written to the file for file types that support media chunk duration.
 //
 // WithPreferredMediaChunkSize sets the preferredMediaChunkSize property and returns the receiver for chaining.
 func (x *MutableMovieTrack) WithPreferredMediaChunkSize(preferredMediaChunkSize int) *MutableMovieTrack {
@@ -167,7 +169,7 @@ func (x *MutableMovieTrack) WithPreferredMediaChunkSize(preferredMediaChunkSize 
 	return x
 }
 
-// @property		preferredMediaChunkDuration @abstract		For file types that support media chunk durations, the maximum duration to be used for each chunk of sample data written to the file. @discussion		The total duration of the samples in a chunk will be no greater than this preferred chunk duration, or the duration of a single sample if the sample's duration is greater than this preferred chunk duration. The default media chunk duration is 1.0 second. It is an error to set a chunk duration that is negative or non-numeric.
+// The maximum duration to use for each chunk of sample data written to the file for file types that support media chunk duration.
 //
 // WithPreferredMediaChunkDuration sets the preferredMediaChunkDuration property and returns the receiver for chaining.
 func (x *MutableMovieTrack) WithPreferredMediaChunkDuration(preferredMediaChunkDuration coremedia.CMTime) *MutableMovieTrack {
@@ -175,7 +177,7 @@ func (x *MutableMovieTrack) WithPreferredMediaChunkDuration(preferredMediaChunkD
 	return x
 }
 
-// @property		preferredMediaChunkAlignment @abstract		For file types that support media chunk alignment, the boundary for media chunk alignment (in bytes). @discussion		The default value is 0, which means that no padding should be used to achieve chunk alignment. It is an error to set a negative value for chunk alignment.
+// The boundary for media chunk alignment for file types that support media chunk alignment.
 //
 // WithPreferredMediaChunkAlignment sets the preferredMediaChunkAlignment property and returns the receiver for chaining.
 func (x *MutableMovieTrack) WithPreferredMediaChunkAlignment(preferredMediaChunkAlignment int) *MutableMovieTrack {
@@ -183,7 +185,7 @@ func (x *MutableMovieTrack) WithPreferredMediaChunkAlignment(preferredMediaChunk
 	return x
 }
 
-// @property       metadata @abstract       A collection of metadata stored by the track. @discussion     The value of this property is an array of AVMetadataItem objects representing the collection of metadata stored by the track.
+// An array of metadata stored by the track.
 //
 // WithMetadata sets the collection, converting the Go slice to an NSArray.
 func (x *MutableMovieTrack) WithMetadata(items ...MetadataItemProvider) *MutableMovieTrack {
@@ -370,28 +372,28 @@ func (x *MutableMovieTrack) SetPreferredMediaChunkAlignment(preferredMediaChunkA
 	x.inner.SetPreferredMediaChunkAlignment(preferredMediaChunkAlignment)
 }
 
-// @method			insertTimeRange:ofTrack:atTime:copySampleData:error: @abstract		Inserts a portion of an AVAssetTrack object into the target movie. @param			timeRange The time range from the track from which media is to be inserted. @param			track An AVAssetTrack object indicating the source of the inserted media. Only AVAssetTracks of AVURLAssets and AVCompositions are supported. Must not be nil. @param			startTime The time in the target track at which the media is to be inserted. @param			copySampleData A BOOL value that indicates whether sample data is to be copied from the source to the destination during edits. If YES, the sample data is written to the file specified by the track property mediaDataStorage if non-nil, or else by the movie property defaultMediaDataStorage if non-nil; if both are nil, the method will fail and return NO. If NO, sample data will not be written and sample references to the samples in their original container will be added as necessary. Note that in this case, this method will fail if the original samples are fragmented. @param			outError If the insertion fails, describes the nature of the failure. @result			A BOOL value that indicates the success of the insertion.
+// Inserts a portion of an asset track into the target movie.
 //
 // InsertTimeRangeOfTrackAtTimeCopySampleDataError calls the underlying InsertTimeRangeOfTrackAtTimeCopySampleDataError.
 func (x *MutableMovieTrack) InsertTimeRangeOfTrackAtTimeCopySampleDataError(timeRange coremedia.CMTimeRange, track *raw.AVAssetTrack, startTime coremedia.CMTime, copySampleData bool) (bool, error) {
 	return x.inner.InsertTimeRangeOfTrackAtTimeCopySampleDataError(timeRange, track, startTime, copySampleData)
 }
 
-// @method			insertEmptyTimeRange: @abstract		Adds an empty time range to the target track. @param			timeRange The time range to be made empty. Note that you cannot add empty time ranges to the end of a track.
+// Adds an empty time range to a track.
 //
 // InsertEmptyTimeRange calls the underlying InsertEmptyTimeRange.
 func (x *MutableMovieTrack) InsertEmptyTimeRange(timeRange coremedia.CMTimeRange) {
 	x.inner.InsertEmptyTimeRange(timeRange)
 }
 
-// @method			removeTimeRange: @abstract		Removes a specified time range from a track. @param			timeRange The time range to be removed.
+// Removes the specified time range from a track.
 //
 // RemoveTimeRange calls the underlying RemoveTimeRange.
 func (x *MutableMovieTrack) RemoveTimeRange(timeRange coremedia.CMTimeRange) {
 	x.inner.RemoveTimeRange(timeRange)
 }
 
-// @method			scaleTimeRange:toDuration: @abstract		Changes the duration of a time range of a track. @param			timeRange The time range to be scaled. @param			duration The new duration of the time range.
+// Changes the duration of a time range in a track.
 //
 // ScaleTimeRangeToDuration calls the underlying ScaleTimeRangeToDuration.
 func (x *MutableMovieTrack) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime) {
@@ -412,35 +414,35 @@ func (x *MutableMovieTrack) SetMetadata(metadata ...MetadataItemProvider) {
 	x.inner.SetMetadata(_arg0)
 }
 
-// @method			addTrackAssociationToTrack:type: @abstract		Establishes a track association of a specific type between two tracks. @param			movieTrack An AVMovieTrack object that is to be associated with the receiver. @param			trackAssociationType The type of track association to add between the receiver and the specified movieTrack (for instance, AVTrackAssociationTypeChapterList). @discussion		This method throws an exception if the movie track belongs to a different movie.
+// Creates a specific type of track association between two tracks.
 //
 // AddTrackAssociationToTrackType calls the underlying AddTrackAssociationToTrackType.
 func (x *MutableMovieTrack) AddTrackAssociationToTrackType(movieTrack *raw.AVMovieTrack, trackAssociationType *foundation.NSString) {
 	x.inner.AddTrackAssociationToTrackType(movieTrack, trackAssociationType)
 }
 
-// @method			removeTrackAssociationToTrack:type: @abstract		Removes a track association of a specific type between two tracks. @param			movieTrack An AVMovieTrack object that is associated with the receiver. @param			trackAssociationType The type of track association to remove between the receiver and the specified movieTrack (for instance, AVTrackAssociationTypeChapterList). @discussion		This method throws an exception if the movie track belongs to a different movie.
+// Removes a specific type of track association between two tracks.
 //
 // RemoveTrackAssociationToTrackType calls the underlying RemoveTrackAssociationToTrackType.
 func (x *MutableMovieTrack) RemoveTrackAssociationToTrackType(movieTrack *raw.AVMovieTrack, trackAssociationType *foundation.NSString) {
 	x.inner.RemoveTrackAssociationToTrackType(movieTrack, trackAssociationType)
 }
 
-// @method			replaceFormatDescription:withFormatDescription: @abstract		Replaces one of the receiver's format descriptions with another format description @param			formatDescription A CMFormatDescription occurring in the array returned by the -formatDescriptions method. @param			newFormatDescription A CMFormatDescription to replace the specified format description. @discussion     You can use this method to make surgical changes to a track's format descriptions, such as adding format description extensions to a format description or changing the audio channel layout of an audio track. You should note that a format description can have extensions of type kCMFormatDescriptionExtension_VerbatimSampleDescription and kCMFormatDescriptionExtension_VerbatimISOSampleEntry; if you modify a copy of a format description, you should delete those extensions from the copy or your changes might be ignored. This method throws an exception if the media type of the new format description does not match the media type of the receiver.
+// Replaces the track’s format description with a new format description.
 //
 // ReplaceFormatDescriptionWithFormatDescription calls the underlying ReplaceFormatDescriptionWithFormatDescription.
 func (x *MutableMovieTrack) ReplaceFormatDescriptionWithFormatDescription(formatDescription unsafe.Pointer, newFormatDescription unsafe.Pointer) {
 	x.inner.ReplaceFormatDescriptionWithFormatDescription(formatDescription, newFormatDescription)
 }
 
-// @method			appendSampleBuffer:decodeTime:presentationTime:error: @abstract		Appends sample data to a media file and adds sample references for the added data to a track's media sample tables. @param			sampleBuffer The CMSampleBuffer to be appended; this may be obtained from an instance of AVAssetReader. @param			outDecodeTime A pointer to a CMTime structure to receive the decode time in the media of the first sample appended from the sample buffer. Pass NULL if you do not need this information. @param			outPresentationTime A pointer to a CMTime structure to receive the presentation time in the media of the first sample appended from the sample buffer. Pass NULL if you do not need this information. @param			outError If the appending fails, describes the nature of the failure. For example, if the device containing the track's media data storage is full, AVErrorDiskFull is returned. @result			A BOOL value indicating the success of the operation. @discussion If the sample buffer carries sample data, the sample data is written to the container specified by the track property mediaDataStorage if non-nil, or else by the movie property defaultMediaDataStorage if non-nil, and sample references will be appended to the track's media. If both media data storage properties are nil, the method will fail and return NO. If the sample buffer carries sample references only, sample data will not be written and sample references to the samples in their original container will be appended to the track's media as necessary. Note regarding sample timing: in a track's media, the first sample's decode timestamp must always be zero. For an audio track, each sample buffer's duration is used as the sample decode duration. For other track types, difference between a sample's decode timestamp and the following sample's decode timestamp is used as the first sample's decode duration, so as to preserve the relative timing. Note that this method does not modify the track's sourceTimeMappings but only appends sample references and sample data to the track's media. To make the new samples appear in the track's timeline, invoke -insertMediaTimeRange:intoTimeRange:. You can retrieve the mediaPresentationTimeRange property before and after appending a sequence of samples, using CMTimeRangeGetEnd on each to calculate the media TimeRange for -insertMediaTimeRange:intoTimeRange:. It's safe for multiple threads to call this method on different tracks at once. This method throws an exception for any of the following reasons: - the sample buffer's media type does not match the track's media type - the sample buffer contains image buffers (must contain encoded video) - the sample buffer contains caption groups (must contain encoded media data)
+// Appends sample data to a media file and adds sample references for the added data to a track’s media sample tables.
 //
 // AppendSampleBufferDecodeTimePresentationTimeError calls the underlying AppendSampleBufferDecodeTimePresentationTimeError.
 func (x *MutableMovieTrack) AppendSampleBufferDecodeTimePresentationTimeError(sampleBuffer unsafe.Pointer, outDecodeTime *coremedia.CMTime, outPresentationTime *coremedia.CMTime) (bool, error) {
 	return x.inner.AppendSampleBufferDecodeTimePresentationTimeError(sampleBuffer, outDecodeTime, outPresentationTime)
 }
 
-// @method			insertMediaTimeRange:intoTimeRange: @abstract		Inserts a reference to a media time range into a track. @param			mediaTimeRange The presentation time range of the media to be inserted. @param			trackTimeRange The time range of the track into which the media is to be inserted. @result			A BOOL value indicating the success of the operation. @discussion Use this method after you have appended samples or sample references to a track's media. To specify that the media time range be played at its natural rate, pass mediaTimeRange.duration == trackTimeRange.duration; otherwise, the ratio between these is used to determine the playback rate. Pass kCMTimeInvalid for trackTimeRange.start to indicate that the segment should be appended to the end of the track.
+// Inserts a reference to a media time range into a track.
 //
 // InsertMediaTimeRangeIntoTimeRange calls the underlying InsertMediaTimeRangeIntoTimeRange.
 func (x *MutableMovieTrack) InsertMediaTimeRangeIntoTimeRange(mediaTimeRange coremedia.CMTimeRange, trackTimeRange coremedia.CMTimeRange) bool {

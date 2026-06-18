@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Information about the camera characteristics used to capture images and depth data.
+//
 // CameraCalibrationData wraps [raw.AVCameraCalibrationData] with a fluent Go API.
 type CameraCalibrationData struct {
 	inner *raw.AVCameraCalibrationData

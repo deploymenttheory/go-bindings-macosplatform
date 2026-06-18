@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that stores image data in a form that can be readily transferred to the screen.
+//
 // CachedImageRep wraps [raw.NSCachedImageRep] with a fluent Go API.
 type CachedImageRep struct {
 	inner *raw.NSCachedImageRep
@@ -31,6 +33,8 @@ func CachedImageRepFromID(id objc.ID) *CachedImageRep {
 	return &CachedImageRep{inner: raw.NSCachedImageRepFromID(id)}
 }
 
+// Returns a cached image representation initialized for drawing in the specified window.
+//
 // NewCachedImageRepWithWindowRect creates a new [CachedImageRep].
 func NewCachedImageRepWithWindowRect(win *raw.NSWindow, rect corefoundation.CGRect) *CachedImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCachedImageRep")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewCachedImageRepWithWindowRect(win *raw.NSWindow, rect corefoundation.CGRe
 	return &CachedImageRep{inner: raw.NSCachedImageRepFromID(_id)}
 }
 
+// Returns a cached image representation initialized with the specified image characteristics.
+//
 // NewCachedImageRepWithSizeDepthSeparateAlpha creates a new [CachedImageRep].
 func NewCachedImageRepWithSizeDepthSeparateAlpha(size corefoundation.CGSize, depth NSWindowDepth, flag bool, alpha bool) *CachedImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCachedImageRep")), objc.RegisterName("alloc"))
@@ -45,54 +51,72 @@ func NewCachedImageRepWithSizeDepthSeparateAlpha(size corefoundation.CGSize, dep
 	return &CachedImageRep{inner: raw.NSCachedImageRepFromID(_id)}
 }
 
+// The size of the image representation, measured in points in the user coordinate space.
+//
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *CachedImageRep) WithSize(size corefoundation.CGSize) *CachedImageRep {
 	x.inner.NSImageRep.SetSize(size)
 	return x
 }
 
+// A Boolean value that indicates whether the image data has an alpha channel.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *CachedImageRep) WithAlpha(alpha bool) *CachedImageRep {
 	x.inner.NSImageRep.SetAlpha(alpha)
 	return x
 }
 
+// A Boolean value that indicates whether the image is opaque.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *CachedImageRep) WithOpaque(opaque bool) *CachedImageRep {
 	x.inner.NSImageRep.SetOpaque(opaque)
 	return x
 }
 
+// The name of the color space used by the image data.
+//
 // WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
 func (x *CachedImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *CachedImageRep {
 	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
 	return x
 }
 
+// The number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
+//
 // WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
 func (x *CachedImageRep) WithBitsPerSample(bitsPerSample int) *CachedImageRep {
 	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
 	return x
 }
 
+// The width of the image, measured in pixels.
+//
 // WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
 func (x *CachedImageRep) WithPixelsWide(pixelsWide int) *CachedImageRep {
 	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
 	return x
 }
 
+// The height of the image, measured in pixels.
+//
 // WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
 func (x *CachedImageRep) WithPixelsHigh(pixelsHigh int) *CachedImageRep {
 	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
 	return x
 }
 
+// The layout direction for the image.
+//
 // WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
 func (x *CachedImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *CachedImageRep {
 	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))
 	return x
 }
 
+// Returns the window where the representation is cached.
+//
 // Window calls the underlying Window.
 func (x *CachedImageRep) Window() *Window {
 	_r := x.inner.Window()
@@ -102,6 +126,8 @@ func (x *CachedImageRep) Window() *Window {
 	return &Window{inner: _r}
 }
 
+// Returns the rectangle where the representation is cached.
+//
 // Rect calls the underlying Rect.
 func (x *CachedImageRep) Rect() corefoundation.CGRect {
 	return x.inner.Rect()

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The fundamental storage mechanism of TextKit that contains the text managed by the system.
+//
 // TextStorage wraps [raw.NSTextStorage] with a fluent Go API.
 type TextStorage struct {
 	inner *raw.NSTextStorage
@@ -38,18 +40,24 @@ func NewTextStorage() *TextStorage {
 	return &TextStorage{inner: raw.NSTextStorageFromID(_id)}
 }
 
+// The delegate for the text storage object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *TextStorage) WithDelegate(delegate raw.NSTextStorageDelegate) *TextStorage {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The observer for the text storage object.
+//
 // WithTextStorageObserver sets the textStorageObserver property and returns the receiver for chaining.
 func (x *TextStorage) WithTextStorageObserver(textStorageObserver raw.NSTextStorageObserving) *TextStorage {
 	x.inner.SetTextStorageObserver(textStorageObserver)
 	return x
 }
 
+// The text storage contents as an array of attribute runs.
+//
 // WithAttributeRuns sets the collection, converting the Go slice to an NSArray.
 func (x *TextStorage) WithAttributeRuns(items ...*raw.NSTextStorage) *TextStorage {
 	if len(items) == 0 {
@@ -68,6 +76,8 @@ func (x *TextStorage) WithAttributeRuns(items ...*raw.NSTextStorage) *TextStorag
 	return x
 }
 
+// The text storage contents as an array of paragraphs.
+//
 // WithParagraphs sets the collection, converting the Go slice to an NSArray.
 func (x *TextStorage) WithParagraphs(items ...*raw.NSTextStorage) *TextStorage {
 	if len(items) == 0 {
@@ -86,6 +96,8 @@ func (x *TextStorage) WithParagraphs(items ...*raw.NSTextStorage) *TextStorage {
 	return x
 }
 
+// The text storage contents as an array of words.
+//
 // WithWords sets the collection, converting the Go slice to an NSArray.
 func (x *TextStorage) WithWords(items ...*raw.NSTextStorage) *TextStorage {
 	if len(items) == 0 {
@@ -104,6 +116,8 @@ func (x *TextStorage) WithWords(items ...*raw.NSTextStorage) *TextStorage {
 	return x
 }
 
+// The text storage contents as an array of characters.
+//
 // WithCharacters sets the collection, converting the Go slice to an NSArray.
 func (x *TextStorage) WithCharacters(items ...*raw.NSTextStorage) *TextStorage {
 	if len(items) == 0 {
@@ -122,43 +136,59 @@ func (x *TextStorage) WithCharacters(items ...*raw.NSTextStorage) *TextStorage {
 	return x
 }
 
+// The font for the text storage.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *TextStorage) WithFont(font *Font) *TextStorage {
 	x.inner.SetFont(font.Unwrap())
 	return x
 }
 
+// The color for the text.
+//
 // WithForegroundColor sets the foregroundColor property and returns the receiver for chaining.
 func (x *TextStorage) WithForegroundColor(foregroundColor *Color) *TextStorage {
 	x.inner.SetForegroundColor(foregroundColor.Unwrap())
 	return x
 }
 
+// Adds a layout manager to the text storage object’s set of layout managers.
+//
 // AddLayoutManager calls the underlying AddLayoutManager.
 func (x *TextStorage) AddLayoutManager(aLayoutManager *raw.NSLayoutManager) {
 	x.inner.AddLayoutManager(aLayoutManager)
 }
 
+// Removes a layout manager from the text storage object’s set of layout managers.
+//
 // RemoveLayoutManager calls the underlying RemoveLayoutManager.
 func (x *TextStorage) RemoveLayoutManager(aLayoutManager *raw.NSLayoutManager) {
 	x.inner.RemoveLayoutManager(aLayoutManager)
 }
 
+// Tracks changes made to the text storage object, allowing the text storage to record the full extent of changes.
+//
 // EditedRangeChangeInLength calls the underlying EditedRangeChangeInLength.
 func (x *TextStorage) EditedRangeChangeInLength(editedMask NSTextStorageEditActions, editedRange foundation.NSRange, delta int) {
 	x.inner.EditedRangeChangeInLength(raw.NSTextStorageEditActions(editedMask), editedRange, delta)
 }
 
+// Cleans up changes to the text storage object and notifies its delegate and layout managers of changes.
+//
 // ProcessEditing calls the underlying ProcessEditing.
 func (x *TextStorage) ProcessEditing() {
 	x.inner.ProcessEditing()
 }
 
+// Invalidates attributes in the specified range.
+//
 // InvalidateAttributesInRange calls the underlying InvalidateAttributesInRange.
 func (x *TextStorage) InvalidateAttributesInRange(range_ foundation.NSRange) {
 	x.inner.InvalidateAttributesInRange(range_)
 }
 
+// Ensures that attribute fixing occurs in the specified range.
+//
 // EnsureAttributesAreFixedInRange calls the underlying EnsureAttributesAreFixedInRange.
 func (x *TextStorage) EnsureAttributesAreFixedInRange(range_ foundation.NSRange) {
 	x.inner.EnsureAttributesAreFixedInRange(range_)

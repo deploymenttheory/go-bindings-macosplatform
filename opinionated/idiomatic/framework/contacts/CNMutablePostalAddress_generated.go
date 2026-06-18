@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mutable representation of the postal address for a contact.
+//
 // MutablePostalAddress wraps [raw.CNMutablePostalAddress] with a fluent Go API.
 type MutablePostalAddress struct {
 	inner *raw.CNMutablePostalAddress
@@ -36,7 +38,7 @@ func NewMutablePostalAddress() *MutablePostalAddress {
 	return &MutablePostalAddress{inner: raw.CNMutablePostalAddressFromID(_id)}
 }
 
-// multi-street address is delimited with carriage returns “\n”
+// The street name of the address.
 //
 // WithStreet sets the street property and returns the receiver for chaining.
 func (x *MutablePostalAddress) WithStreet(street string) *MutablePostalAddress {
@@ -44,42 +46,56 @@ func (x *MutablePostalAddress) WithStreet(street string) *MutablePostalAddress {
 	return x
 }
 
+// Additional information associated with the location, typically defined at the city or town level, in a postal address.
+//
 // WithSubLocality sets the subLocality property and returns the receiver for chaining.
 func (x *MutablePostalAddress) WithSubLocality(subLocality string) *MutablePostalAddress {
 	x.inner.SetSubLocality(foundation.NSStringStringWithUTF8String(subLocality))
 	return x
 }
 
+// The city name of the address.
+//
 // WithCity sets the city property and returns the receiver for chaining.
 func (x *MutablePostalAddress) WithCity(city string) *MutablePostalAddress {
 	x.inner.SetCity(foundation.NSStringStringWithUTF8String(city))
 	return x
 }
 
+// The subadministrative area (such as a county or other region) in a postal address.
+//
 // WithSubAdministrativeArea sets the subAdministrativeArea property and returns the receiver for chaining.
 func (x *MutablePostalAddress) WithSubAdministrativeArea(subAdministrativeArea string) *MutablePostalAddress {
 	x.inner.SetSubAdministrativeArea(foundation.NSStringStringWithUTF8String(subAdministrativeArea))
 	return x
 }
 
+// The state name of the address.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *MutablePostalAddress) WithState(state string) *MutablePostalAddress {
 	x.inner.SetState(foundation.NSStringStringWithUTF8String(state))
 	return x
 }
 
+// The postal code of the address.
+//
 // WithPostalCode sets the postalCode property and returns the receiver for chaining.
 func (x *MutablePostalAddress) WithPostalCode(postalCode string) *MutablePostalAddress {
 	x.inner.SetPostalCode(foundation.NSStringStringWithUTF8String(postalCode))
 	return x
 }
 
+// The country or region name of the address.
+//
 // WithCountry sets the country property and returns the receiver for chaining.
 func (x *MutablePostalAddress) WithCountry(country string) *MutablePostalAddress {
 	x.inner.SetCountry(foundation.NSStringStringWithUTF8String(country))
 	return x
 }
 
+// The ISO country code, using the ISO 3166-1 alpha-2 standard.
+//
 // WithISOCountryCode sets the iSOCountryCode property and returns the receiver for chaining.
 func (x *MutablePostalAddress) WithISOCountryCode(iSOCountryCode string) *MutablePostalAddress {
 	x.inner.SetISOCountryCode(foundation.NSStringStringWithUTF8String(iSOCountryCode))

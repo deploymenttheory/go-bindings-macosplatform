@@ -38,7 +38,7 @@ func NewPackedJointAnimationWithNameJointPaths(name string, jointPaths *foundati
 	return &PackedJointAnimation{inner: raw.MDLPackedJointAnimationFromID(_id)}
 }
 
-// @property parent @abstract Parent object. Nil if no parent. @discussion Set to nil when you remove this from an object container inside the parent object.
+// The parent object that contains this object.
 //
 // WithParent sets the parent property and returns the receiver for chaining.
 func (x *PackedJointAnimation) WithParent(parent ObjectProvider) *PackedJointAnimation {
@@ -46,7 +46,7 @@ func (x *PackedJointAnimation) WithParent(parent ObjectProvider) *PackedJointAni
 	return x
 }
 
-// @property instance @abstract Instance object @discussion nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
+// The primary object, if applicable, of which this object is an instance.
 //
 // WithInstance sets the instance property and returns the receiver for chaining.
 func (x *PackedJointAnimation) WithInstance(instance ObjectProvider) *PackedJointAnimation {
@@ -54,7 +54,7 @@ func (x *PackedJointAnimation) WithInstance(instance ObjectProvider) *PackedJoin
 	return x
 }
 
-// @property transform @abstract Short hand property for the MDLTransformComponent. @discussion The default value is nil @see MDLTransformComponent
+// A component that manages this object’s spatial transform and its changes over time.
 //
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *PackedJointAnimation) WithTransform(transform raw.MDLTransformComponent) *PackedJointAnimation {
@@ -62,7 +62,7 @@ func (x *PackedJointAnimation) WithTransform(transform raw.MDLTransformComponent
 	return x
 }
 
-// @property children @abstract Short hand property for the MDLObjectContainerComponent. @discussion The default value is an empty MDLObjectContainer @see MDLObjectContainerComponent
+// A component that manages this object’s collection of children.
 //
 // WithChildren sets the children property and returns the receiver for chaining.
 func (x *PackedJointAnimation) WithChildren(children raw.MDLObjectContainerComponent) *PackedJointAnimation {
@@ -70,6 +70,8 @@ func (x *PackedJointAnimation) WithChildren(children raw.MDLObjectContainerCompo
 	return x
 }
 
+// A Boolean value indicating whether this object should be used in rendering.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *PackedJointAnimation) WithHidden(hidden bool) *PackedJointAnimation {
 	x.inner.MDLObject.SetHidden(hidden)

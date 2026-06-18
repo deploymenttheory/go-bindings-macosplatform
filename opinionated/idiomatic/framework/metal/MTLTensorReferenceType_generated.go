@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a tensor in the shading language in a struct or array.
+//
 // TensorReferenceType wraps [raw.MTLTensorReferenceType] with a fluent Go API.
 type TensorReferenceType struct {
 	inner *raw.MTLTensorReferenceType

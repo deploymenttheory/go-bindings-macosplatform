@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event requesting a change in the playback position.
+//
 // ChangePlaybackPositionCommandEvent wraps [raw.MPChangePlaybackPositionCommandEvent] with a fluent Go API.
 type ChangePlaybackPositionCommandEvent struct {
 	inner *raw.MPChangePlaybackPositionCommandEvent

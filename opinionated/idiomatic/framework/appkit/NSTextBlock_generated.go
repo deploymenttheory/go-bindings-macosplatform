@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A block of text laid out in a subregion of the text container.
+//
 // TextBlock wraps [raw.NSTextBlock] with a fluent Go API.
 type TextBlock struct {
 	inner *raw.NSTextBlock
@@ -37,63 +39,87 @@ func NewTextBlock() *TextBlock {
 	return &TextBlock{inner: raw.NSTextBlockFromID(_id)}
 }
 
+// The vertical alignment of the text block.
+//
 // WithVerticalAlignment sets the verticalAlignment property and returns the receiver for chaining.
 func (x *TextBlock) WithVerticalAlignment(verticalAlignment NSTextBlockVerticalAlignment) *TextBlock {
 	x.inner.SetVerticalAlignment(raw.NSTextBlockVerticalAlignment(verticalAlignment))
 	return x
 }
 
+// The background color of the text block.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *TextBlock) WithBackgroundColor(backgroundColor *Color) *TextBlock {
 	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// Sets a dimension of the text block.
+//
 // SetValueTypeForDimension calls the underlying SetValueTypeForDimension.
 func (x *TextBlock) SetValueTypeForDimension(val float64, type_ NSTextBlockValueType, dimension NSTextBlockDimension) {
 	x.inner.SetValueTypeForDimension(val, raw.NSTextBlockValueType(type_), raw.NSTextBlockDimension(dimension))
 }
 
+// Returns the value of the specified text block dimension.
+//
 // ValueForDimension calls the underlying ValueForDimension.
 func (x *TextBlock) ValueForDimension(dimension NSTextBlockDimension) float64 {
 	return x.inner.ValueForDimension(raw.NSTextBlockDimension(dimension))
 }
 
+// Returns the value type of the specified text block dimension.
+//
 // ValueTypeForDimension calls the underlying ValueTypeForDimension.
 func (x *TextBlock) ValueTypeForDimension(dimension NSTextBlockDimension) NSTextBlockValueType {
 	return NSTextBlockValueType(x.inner.ValueTypeForDimension(raw.NSTextBlockDimension(dimension)))
 }
 
+// Sets the width of the text block.
+//
 // SetContentWidthType calls the underlying SetContentWidthType.
 func (x *TextBlock) SetContentWidthType(val float64, type_ NSTextBlockValueType) {
 	x.inner.SetContentWidthType(val, raw.NSTextBlockValueType(type_))
 }
 
+// Sets the width of a specified edge of a specified layer of the text block.
+//
 // SetWidthTypeForLayerEdge calls the underlying SetWidthTypeForLayerEdge.
 func (x *TextBlock) SetWidthTypeForLayerEdge(val float64, type_ NSTextBlockValueType, layer NSTextBlockLayer, edge foundation.NSRectEdge) {
 	x.inner.SetWidthTypeForLayerEdge(val, raw.NSTextBlockValueType(type_), raw.NSTextBlockLayer(layer), edge)
 }
 
+// Sets the width of all edges of a specified layer of the text block.
+//
 // SetWidthTypeForLayer calls the underlying SetWidthTypeForLayer.
 func (x *TextBlock) SetWidthTypeForLayer(val float64, type_ NSTextBlockValueType, layer NSTextBlockLayer) {
 	x.inner.SetWidthTypeForLayer(val, raw.NSTextBlockValueType(type_), raw.NSTextBlockLayer(layer))
 }
 
+// Returns the width of an edge of a specified layer of the text block.
+//
 // WidthForLayerEdge calls the underlying WidthForLayerEdge.
 func (x *TextBlock) WidthForLayerEdge(layer NSTextBlockLayer, edge foundation.NSRectEdge) float64 {
 	return x.inner.WidthForLayerEdge(raw.NSTextBlockLayer(layer), edge)
 }
 
+// Returns the value type of an edge of a specified layer of the text block.
+//
 // WidthValueTypeForLayerEdge calls the underlying WidthValueTypeForLayerEdge.
 func (x *TextBlock) WidthValueTypeForLayerEdge(layer NSTextBlockLayer, edge foundation.NSRectEdge) NSTextBlockValueType {
 	return NSTextBlockValueType(x.inner.WidthValueTypeForLayerEdge(raw.NSTextBlockLayer(layer), edge))
 }
 
+// Sets the border color of the specified edge of the text block.
+//
 // SetBorderColorForEdge calls the underlying SetBorderColorForEdge.
 func (x *TextBlock) SetBorderColorForEdge(color *raw.NSColor, edge foundation.NSRectEdge) {
 	x.inner.SetBorderColorForEdge(color, edge)
 }
 
+// Sets the color of all borders of the text block.
+//
 // SetBorderColor calls the underlying SetBorderColor.
 func (x *TextBlock) SetBorderColor(color *raw.NSColor) {
 	x.inner.SetBorderColor(color)
@@ -108,16 +134,22 @@ func (x *TextBlock) BorderColorForEdge(edge foundation.NSRectEdge) *Color {
 	return &Color{inner: _r}
 }
 
+// Returns the rectangle within which glyphs should be laid out for the specified arguments.
+//
 // RectForLayoutAtPointInRectTextContainerCharacterRange calls the underlying RectForLayoutAtPointInRectTextContainerCharacterRange.
 func (x *TextBlock) RectForLayoutAtPointInRectTextContainerCharacterRange(startingPoint corefoundation.CGPoint, rect corefoundation.CGRect, textContainer *raw.NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect {
 	return x.inner.RectForLayoutAtPointInRectTextContainerCharacterRange(startingPoint, rect, textContainer, charRange)
 }
 
+// Returns the rectangle the text in the block actually occupies, including padding, borders, and margins.
+//
 // BoundsRectForContentRectInRectTextContainerCharacterRange calls the underlying BoundsRectForContentRectInRectTextContainerCharacterRange.
 func (x *TextBlock) BoundsRectForContentRectInRectTextContainerCharacterRange(contentRect corefoundation.CGRect, rect corefoundation.CGRect, textContainer *raw.NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect {
 	return x.inner.BoundsRectForContentRectInRectTextContainerCharacterRange(contentRect, rect, textContainer, charRange)
 }
 
+// Called by the layout manager to draw any colors and other decorations before the text is drawn.
+//
 // DrawBackgroundWithFrameInViewCharacterRangeLayoutManager calls the underlying DrawBackgroundWithFrameInViewCharacterRangeLayoutManager.
 func (x *TextBlock) DrawBackgroundWithFrameInViewCharacterRangeLayoutManager(frameRect corefoundation.CGRect, controlView *raw.NSView, charRange foundation.NSRange, layoutManager *raw.NSLayoutManager) {
 	x.inner.DrawBackgroundWithFrameInViewCharacterRangeLayoutManager(frameRect, controlView, charRange, layoutManager)

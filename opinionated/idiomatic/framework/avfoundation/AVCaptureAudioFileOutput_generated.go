@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A capture output that records audio and saves the recorded audio to a file.
+//
 // CaptureAudioFileOutput wraps [raw.AVCaptureAudioFileOutput] with a fluent Go API.
 type CaptureAudioFileOutput struct {
 	inner *raw.AVCaptureAudioFileOutput
@@ -39,7 +41,7 @@ func NewCaptureAudioFileOutput() *CaptureAudioFileOutput {
 	return &CaptureAudioFileOutput{inner: raw.AVCaptureAudioFileOutputFromID(_id)}
 }
 
-// @property metadata @abstract A collection of metadata to be written to the receiver's output files. @discussion The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to be written in each output file. Only ID3 v2.2, v2.3, or v2.4 style metadata items are supported.
+// A collection of metadata to be written to the receiver’s output files.
 //
 // WithMetadata sets the collection, converting the Go slice to an NSArray.
 func (x *CaptureAudioFileOutput) WithMetadata(items ...MetadataItemProvider) *CaptureAudioFileOutput {
@@ -59,7 +61,7 @@ func (x *CaptureAudioFileOutput) WithMetadata(items ...MetadataItemProvider) *Ca
 	return x
 }
 
-// @property audioSettings @abstract Specifies the options the receiver uses to re-encode audio as it is being recorded. @discussion The output settings dictionary can contain values for keys from AVAudioSettings.h. A value of nil indicates that the format of the audio should not be changed before being written to the file.
+// The settings used to decode or re-encode audio before it is output by the receiver.
 //
 // WithAudioSettings sets the audioSettings property and returns the receiver for chaining.
 func (x *CaptureAudioFileOutput) WithAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptureAudioFileOutput {
@@ -67,7 +69,7 @@ func (x *CaptureAudioFileOutput) WithAudioSettings(audioSettings *foundation.NSD
 	return x
 }
 
-// @property delegate @abstract The receiver's delegate. @discussion The value of this property is an object conforming to the AVCaptureFileOutputDelegate protocol that will be able to monitor and control recording along exact sample boundaries.
+// The delegate object for the capture file output.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *CaptureAudioFileOutput) WithDelegate(delegate raw.AVCaptureFileOutputDelegate) *CaptureAudioFileOutput {
@@ -75,7 +77,7 @@ func (x *CaptureAudioFileOutput) WithDelegate(delegate raw.AVCaptureFileOutputDe
 	return x
 }
 
-// @property maxRecordedDuration @abstract Specifies the maximum duration of the media that should be recorded by the receiver. @discussion This property specifies a hard limit on the duration of recorded files. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error. The default value of this property is kCMTimeInvalid, which indicates no limit.
+// The longest duration allowed for the recording.
 //
 // WithMaxRecordedDuration sets the maxRecordedDuration property and returns the receiver for chaining.
 func (x *CaptureAudioFileOutput) WithMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) *CaptureAudioFileOutput {
@@ -83,7 +85,7 @@ func (x *CaptureAudioFileOutput) WithMaxRecordedDuration(maxRecordedDuration cor
 	return x
 }
 
-// @property maxRecordedFileSize @abstract Specifies the maximum size, in bytes, of the data that should be recorded by the receiver. @discussion This property specifies a hard limit on the data size of recorded files. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error. The default value of this property is 0, which indicates no limit.
+// The maximum size, in bytes, of the data that should be recorded by the receiver.
 //
 // WithMaxRecordedFileSize sets the maxRecordedFileSize property and returns the receiver for chaining.
 func (x *CaptureAudioFileOutput) WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureAudioFileOutput {
@@ -91,7 +93,7 @@ func (x *CaptureAudioFileOutput) WithMaxRecordedFileSize(maxRecordedFileSize int
 	return x
 }
 
-// @property minFreeDiskSpaceLimit @abstract Specifies the minimum amount of free space, in bytes, required for recording to continue on a given volume. @discussion This property specifies a hard lower limit on the amount of free space that must remain on a target volume for recording to continue. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error.
+// The minimum amount of free space, in bytes, required for recording to continue on a given volume.
 //
 // WithMinFreeDiskSpaceLimit sets the minFreeDiskSpaceLimit property and returns the receiver for chaining.
 func (x *CaptureAudioFileOutput) WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureAudioFileOutput {
@@ -99,7 +101,7 @@ func (x *CaptureAudioFileOutput) WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit
 	return x
 }
 
-// A `BOOL` value that indicates whether to defer starting this capture output. When this value is `true`, the session does not prepare the output's resources until some time after “AVCaptureSession/startRunning“ returns. You can start the visual parts of your user interface (e.g. preview) prior to other parts (e.g. photo/movie capture, metadata output, etc..) to improve startup performance. Set this value to `false` for outputs that your app needs for startup, and `true` for the ones it does not need to start immediately. For example, an “AVCaptureVideoDataOutput“ that you intend to use for displaying preview should set this value to `false`, so that the frames are available as soon as possible. By default, for apps that are linked on or after iOS 26, this property value is `true` for “AVCapturePhotoOutput“ and “AVCaptureFileOutput“ subclasses if supported, and `false` otherwise. When set to `true` for “AVCapturePhotoOutput“, if you want to support multiple capture requests before running deferred start, set “AVCapturePhotoOutput/responsiveCaptureEnabled“ to `true` on that output. If “deferredStartSupported“ is `false`, setting this property value to `true` results in the system throwing an `NSInvalidArgumentException`. - Note: Set this value before calling “AVCaptureSession/commitConfiguration“ as it requires a lengthy reconfiguration of the capture render pipeline.
+// A Boolean value that indicates whether to defer starting this capture output.
 //
 // WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
 func (x *CaptureAudioFileOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioFileOutput {
@@ -107,7 +109,7 @@ func (x *CaptureAudioFileOutput) WithDeferredStartEnabled(deferredStartEnabled b
 	return x
 }
 
-// @method startRecordingToOutputFileURL:outputFileType:recordingDelegate: @abstract Tells the receiver to start recording to a new file of the specified format, and specifies a delegate that will be notified when recording is finished. @param outputFileURL An NSURL object containing the URL of the output file. This method throws an NSInvalidArgumentException if the URL is not a valid file URL. @param fileType A UTI indicating the format of the file to be written. @param delegate An object conforming to the AVCaptureFileOutputRecordingDelegate protocol. Clients must specify a delegate so that they can be notified when recording to the given URL is finished. @discussion The method sets the file URL to which the receiver is currently writing output media. If a file at the given URL already exists when capturing starts, recording to the new file will fail. The fileType argument is a UTI corresponding to the audio file format that should be written. UTIs for common audio file types are declared in AVMediaFormat.h. Clients need not call stopRecording before calling this method while another recording is in progress. If this method is invoked while an existing output file was already being recorded, no media samples will be discarded between the old file and the new file. When recording is stopped either by calling stopRecording, by changing files using this method, or because of an error, the remaining data that needs to be included to the file will be written in the background. Therefore, clients must specify a delegate that will be notified when all data has been written to the file using the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: method. The recording delegate can also optionally implement methods that inform it when data starts being written, when recording is paused and resumed, and when recording is about to be finished. On macOS, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the first samples written to the new file are guaranteed to be those contained in the sample buffer passed to that method.
+// Tells the receiver to start recording to a new file of the specified format, and specifies a delegate that will be notified when recording is finished.
 //
 // StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate calls the underlying StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate.
 func (x *CaptureAudioFileOutput) StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate(outputFileURL string, fileType *foundation.NSString, delegate raw.AVCaptureFileOutputRecordingDelegate) {

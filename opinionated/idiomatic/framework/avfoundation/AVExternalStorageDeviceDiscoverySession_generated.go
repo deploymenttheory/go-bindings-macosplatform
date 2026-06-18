@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Informs your app when the external storage devices connect to and disconnect from the system.
+//
 // ExternalStorageDeviceDiscoverySession wraps [raw.AVExternalStorageDeviceDiscoverySession] with a fluent Go API.
 type ExternalStorageDeviceDiscoverySession struct {
 	inner *raw.AVExternalStorageDeviceDiscoverySession

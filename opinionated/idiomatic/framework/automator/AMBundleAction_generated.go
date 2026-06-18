@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents an Automator action that’s a loadable bundle.
+//
 // BundleAction wraps [raw.AMBundleAction] with a fluent Go API.
 type BundleAction struct {
 	inner *raw.AMBundleAction
@@ -37,18 +39,24 @@ func NewBundleAction() *BundleAction {
 	return &BundleAction{inner: raw.AMBundleActionFromID(_id)}
 }
 
+// The action’s parameters.
+//
 // WithParameters sets the parameters property and returns the receiver for chaining.
 func (x *BundleAction) WithParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) *BundleAction {
 	x.inner.SetParameters(parameters)
 	return x
 }
 
+// A float value between 0 and 1, which indicates how far along the action is while processing.
+//
 // WithProgressValue sets the progressValue property and returns the receiver for chaining.
 func (x *BundleAction) WithProgressValue(progressValue float64) *BundleAction {
 	x.inner.AMAction.SetProgressValue(progressValue)
 	return x
 }
 
+// Allows the action object to perform setup tasks requiring the presence of all bundle objects.
+//
 // AwakeFromBundle calls the underlying AwakeFromBundle.
 func (x *BundleAction) AwakeFromBundle() {
 	x.inner.AwakeFromBundle()

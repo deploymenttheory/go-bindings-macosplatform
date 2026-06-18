@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes the configuration of a secure element payment pass.
+//
 // AddSecureElementPassConfiguration wraps [raw.PKAddSecureElementPassConfiguration] with a fluent Go API.
 type AddSecureElementPassConfiguration struct {
 	inner *raw.PKAddSecureElementPassConfiguration
@@ -39,12 +41,16 @@ func NewAddSecureElementPassConfiguration() *AddSecureElementPassConfiguration {
 	return &AddSecureElementPassConfiguration{inner: raw.PKAddSecureElementPassConfigurationFromID(_id)}
 }
 
+// An opaque value for the configuration.
+//
 // WithIssuerIdentifier sets the issuerIdentifier property and returns the receiver for chaining.
 func (x *AddSecureElementPassConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddSecureElementPassConfiguration {
 	x.inner.SetIssuerIdentifier(foundation.NSStringStringWithUTF8String(issuerIdentifier))
 	return x
 }
 
+// The configuration’s localized description.
+//
 // WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
 func (x *AddSecureElementPassConfiguration) WithLocalizedDescription(localizedDescription string) *AddSecureElementPassConfiguration {
 	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))

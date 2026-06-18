@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration that customizes the behavior for a residency set.
+//
 // ResidencySetDescriptor wraps [raw.MTLResidencySetDescriptor] with a fluent Go API.
 type ResidencySetDescriptor struct {
 	inner *raw.MTLResidencySetDescriptor
@@ -37,7 +39,7 @@ func NewResidencySetDescriptor() *ResidencySetDescriptor {
 	return &ResidencySetDescriptor{inner: raw.MTLResidencySetDescriptorFromID(_id)}
 }
 
-// @property label @abstract An optional label for the MTLResidencySet.
+// An optional name that can help you identify a residency set you create with the descriptor.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ResidencySetDescriptor) WithLabel(label string) *ResidencySetDescriptor {
@@ -45,7 +47,7 @@ func (x *ResidencySetDescriptor) WithLabel(label string) *ResidencySetDescriptor
 	return x
 }
 
-// @property initialCapacity @abstract If non-zero, defines the number of allocations for which to initialize the internal arrays. Defaults to zero.
+// The number of allocations a new residency set can store without reallocating memory.
 //
 // WithInitialCapacity sets the initialCapacity property and returns the receiver for chaining.
 func (x *ResidencySetDescriptor) WithInitialCapacity(initialCapacity uint) *ResidencySetDescriptor {

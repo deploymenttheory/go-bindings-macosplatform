@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that connects a session to a host.
+//
 // NetworkConnection wraps [raw.MIDINetworkConnection] with a fluent Go API.
 type NetworkConnection struct {
 	inner *raw.MIDINetworkConnection

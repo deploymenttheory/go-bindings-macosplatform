@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A Save or Export as PDF panel that’s consistent with the macOS user interface.
+//
 // PDFPanel wraps [raw.NSPDFPanel] with a fluent Go API.
 type PDFPanel struct {
 	inner *raw.NSPDFPanel
@@ -37,24 +39,32 @@ func NewPDFPanel() *PDFPanel {
 	return &PDFPanel{inner: raw.NSPDFPanelFromID(_id)}
 }
 
+// A view controller for the accessory view that the panel can present.
+//
 // WithAccessoryController sets the accessoryController property and returns the receiver for chaining.
 func (x *PDFPanel) WithAccessoryController(accessoryController ViewControllerProvider) *PDFPanel {
 	x.inner.SetAccessoryController(accessoryController.asViewController())
 	return x
 }
 
+// A set of configuration options that determine the accessory views the PDF panel should display.
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *PDFPanel) WithOptions(options NSPDFPanelOptions) *PDFPanel {
 	x.inner.SetOptions(raw.NSPDFPanelOptions(options))
 	return x
 }
 
+// The initial value for the user-editable filename shown in the name field of the PDF panel.
+//
 // WithDefaultFileName sets the defaultFileName property and returns the receiver for chaining.
 func (x *PDFPanel) WithDefaultFileName(defaultFileName string) *PDFPanel {
 	x.inner.SetDefaultFileName(foundation.NSStringStringWithUTF8String(defaultFileName))
 	return x
 }
 
+// Presents a document-modal PDF panel.
+//
 // BeginSheetWithPDFInfoModalForWindowCompletionHandler calls the underlying BeginSheetWithPDFInfoModalForWindowCompletionHandler.
 func (x *PDFPanel) BeginSheetWithPDFInfoModalForWindowCompletionHandler(pdfInfo *raw.NSPDFInfo, docWindow *raw.NSWindow, completionHandler func(int)) {
 	x.inner.BeginSheetWithPDFInfoModalForWindowCompletionHandler(pdfInfo, docWindow, completionHandler)

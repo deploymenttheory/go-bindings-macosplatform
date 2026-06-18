@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that provides a rendered pixel buffer and its position in pixels.
+//
 // RenderedCaptionImage wraps [raw.AVRenderedCaptionImage] with a fluent Go API.
 type RenderedCaptionImage struct {
 	inner *raw.AVRenderedCaptionImage

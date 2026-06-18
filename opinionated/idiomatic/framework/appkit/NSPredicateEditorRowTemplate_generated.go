@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A template that describes available predicates and how to display them.
+//
 // PredicateEditorRowTemplate wraps [raw.NSPredicateEditorRowTemplate] with a fluent Go API.
 type PredicateEditorRowTemplate struct {
 	inner *raw.NSPredicateEditorRowTemplate
@@ -32,6 +34,8 @@ func PredicateEditorRowTemplateFromID(id objc.ID) *PredicateEditorRowTemplate {
 	return &PredicateEditorRowTemplate{inner: raw.NSPredicateEditorRowTemplateFromID(id)}
 }
 
+// Initializes and returns a “pop-up-pop-up-pop-up”–style row template.
+//
 // NewPredicateEditorRowTemplateWithLeftExpressionsRightExpressionsModifierOperatorsOptions creates a new [PredicateEditorRowTemplate].
 func NewPredicateEditorRowTemplateWithLeftExpressionsRightExpressionsModifierOperatorsOptions(leftExpressions *foundation.NSArray[*foundation.NSExpression], rightExpressions *foundation.NSArray[*foundation.NSExpression], modifier foundation.NSComparisonPredicateModifier, operators *foundation.NSArray[*foundation.NSNumber], options uint) *PredicateEditorRowTemplate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPredicateEditorRowTemplate")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewPredicateEditorRowTemplateWithLeftExpressionsRightExpressionsModifierOpe
 	return &PredicateEditorRowTemplate{inner: raw.NSPredicateEditorRowTemplateFromID(_id)}
 }
 
+// Initializes and returns a “pop-up-pop-up-view”–style row template.
+//
 // NewPredicateEditorRowTemplateWithLeftExpressionsRightExpressionAttributeTypeModifierOperatorsOptions creates a new [PredicateEditorRowTemplate].
 func NewPredicateEditorRowTemplateWithLeftExpressionsRightExpressionAttributeTypeModifierOperatorsOptions(leftExpressions *foundation.NSArray[*foundation.NSExpression], attributeType coredata.NSAttributeType, modifier foundation.NSComparisonPredicateModifier, operators *foundation.NSArray[*foundation.NSNumber], options uint) *PredicateEditorRowTemplate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPredicateEditorRowTemplate")), objc.RegisterName("alloc"))
@@ -46,6 +52,8 @@ func NewPredicateEditorRowTemplateWithLeftExpressionsRightExpressionAttributeTyp
 	return &PredicateEditorRowTemplate{inner: raw.NSPredicateEditorRowTemplateFromID(_id)}
 }
 
+// Initializes and returns a row template suitable for displaying compound predicates.
+//
 // NewPredicateEditorRowTemplateWithCompoundTypes creates a new [PredicateEditorRowTemplate].
 func NewPredicateEditorRowTemplateWithCompoundTypes(compoundTypes *foundation.NSArray[*foundation.NSNumber]) *PredicateEditorRowTemplate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPredicateEditorRowTemplate")), objc.RegisterName("alloc"))
@@ -53,21 +61,29 @@ func NewPredicateEditorRowTemplateWithCompoundTypes(compoundTypes *foundation.NS
 	return &PredicateEditorRowTemplate{inner: raw.NSPredicateEditorRowTemplateFromID(_id)}
 }
 
+// Returns a positive number if the receiver can represent a given predicate, and 0 if it cannot.
+//
 // MatchForPredicate calls the underlying MatchForPredicate.
 func (x *PredicateEditorRowTemplate) MatchForPredicate(predicate *foundation.NSPredicate) float64 {
 	return x.inner.MatchForPredicate(predicate)
 }
 
+// Sets the value of the views according to the given predicate.
+//
 // SetPredicate calls the underlying SetPredicate.
 func (x *PredicateEditorRowTemplate) SetPredicate(predicate *foundation.NSPredicate) {
 	x.inner.SetPredicate(predicate)
 }
 
+// Returns the predicate represented by the receiver’s views’ values and the given sub-predicates.
+//
 // PredicateWithSubpredicates calls the underlying PredicateWithSubpredicates.
 func (x *PredicateEditorRowTemplate) PredicateWithSubpredicates(subpredicates *foundation.NSArray[*foundation.NSPredicate]) *foundation.NSPredicate {
 	return x.inner.PredicateWithSubpredicates(subpredicates)
 }
 
+// Returns the subpredicates that should be made sub-rows of a given predicate.
+//
 // DisplayableSubpredicatesOfPredicate calls the underlying DisplayableSubpredicatesOfPredicate.
 func (x *PredicateEditorRowTemplate) DisplayableSubpredicatesOfPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[*foundation.NSPredicate] {
 	return x.inner.DisplayableSubpredicatesOfPredicate(predicate)

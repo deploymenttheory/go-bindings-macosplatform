@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing a single detected cat body in a picture.
+//
 // MetadataCatBodyObject wraps [raw.AVMetadataCatBodyObject] with a fluent Go API.
 type MetadataCatBodyObject struct {
 	inner *raw.AVMetadataCatBodyObject

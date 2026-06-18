@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A bar item that provides a stepper control for incrementing or decrementing a value.
+//
 // StepperTouchBarItem wraps [raw.NSStepperTouchBarItem] with a fluent Go API.
 type StepperTouchBarItem struct {
 	inner *raw.NSStepperTouchBarItem
@@ -36,7 +38,7 @@ func NewStepperTouchBarItem() *StepperTouchBarItem {
 	return &StepperTouchBarItem{inner: raw.NSStepperTouchBarItemFromID(_id)}
 }
 
-// The stepper's maximum value. The default is `59.0`.
+// The stepper’s maximum value.
 //
 // WithMaxValue sets the maxValue property and returns the receiver for chaining.
 func (x *StepperTouchBarItem) WithMaxValue(maxValue float64) *StepperTouchBarItem {
@@ -44,7 +46,7 @@ func (x *StepperTouchBarItem) WithMaxValue(maxValue float64) *StepperTouchBarIte
 	return x
 }
 
-// The stepper's minimum value. The default is `0.0`.
+// The stepper’s minimum value.
 //
 // WithMinValue sets the minValue property and returns the receiver for chaining.
 func (x *StepperTouchBarItem) WithMinValue(minValue float64) *StepperTouchBarItem {
@@ -52,7 +54,7 @@ func (x *StepperTouchBarItem) WithMinValue(minValue float64) *StepperTouchBarIte
 	return x
 }
 
-// The stepper's increment value. The default value is `1.0`.
+// The stepper’s increment value.
 //
 // WithIncrement sets the increment property and returns the receiver for chaining.
 func (x *StepperTouchBarItem) WithIncrement(increment float64) *StepperTouchBarItem {
@@ -84,7 +86,7 @@ func (x *StepperTouchBarItem) WithAction(action objc.SEL) *StepperTouchBarItem {
 	return x
 }
 
-// The localized string labeling this item during user customization. The default value is empty string.
+// The localized string labeling this item during user customization.
 //
 // WithCustomizationLabel sets the customizationLabel property and returns the receiver for chaining.
 func (x *StepperTouchBarItem) WithCustomizationLabel(customizationLabel string) *StepperTouchBarItem {
@@ -92,6 +94,8 @@ func (x *StepperTouchBarItem) WithCustomizationLabel(customizationLabel string) 
 	return x
 }
 
+// Determines which items are shown in a bar when space is limited.
+//
 // WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
 func (x *StepperTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *StepperTouchBarItem {
 	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)

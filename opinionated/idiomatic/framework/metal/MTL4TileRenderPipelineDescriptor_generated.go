@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Groups together properties you use to create a tile render pipeline state object.
+//
 // MTL4TileRenderPipelineDescriptor wraps [raw.MTL4TileRenderPipelineDescriptor] with a fluent Go API.
 type MTL4TileRenderPipelineDescriptor struct {
 	inner *raw.MTL4TileRenderPipelineDescriptor
@@ -70,7 +72,7 @@ func (x *MTL4TileRenderPipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(max
 	return x
 }
 
-// Sets the required number of threads per threadgroup for tile dispatches. This value is typically optional, except in the cases where the tile function that “tileFunctionDescriptor“ references uses `CooperativeTensors`. In this case, you need to provide a non-zero value to this property. Additionally, when you set this value, the `threadsPerTile` argument of any tile dispatch needs to match it. Setting this value to a size of 0 in every dimension disables this property.
+// Sets the required number of threads per threadgroup for tile dispatches.
 //
 // WithRequiredThreadsPerThreadgroup sets the requiredThreadsPerThreadgroup property and returns the receiver for chaining.
 func (x *MTL4TileRenderPipelineDescriptor) WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) *MTL4TileRenderPipelineDescriptor {
@@ -94,7 +96,7 @@ func (x *MTL4TileRenderPipelineDescriptor) WithSupportBinaryLinking(supportBinar
 	return x
 }
 
-// Assigns an optional string that uniquely identifies a pipeline descriptor. After you provide this label, you can use it to look up a pipeline state object by name in a binary archive.
+// Assigns an optional string that uniquely identifies a pipeline descriptor.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MTL4TileRenderPipelineDescriptor) WithLabel(label string) *MTL4TileRenderPipelineDescriptor {

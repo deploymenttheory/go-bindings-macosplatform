@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Descriptor for an “indirect” instance acceleration structure that allows providing the instance count and motion transform count indirectly, through buffer references.
+//
 // MTL4IndirectInstanceAccelerationStructureDescriptor wraps [raw.MTL4IndirectInstanceAccelerationStructureDescriptor] with a fluent Go API.
 type MTL4IndirectInstanceAccelerationStructureDescriptor struct {
 	inner *raw.MTL4IndirectInstanceAccelerationStructureDescriptor
@@ -37,7 +39,7 @@ func NewMTL4IndirectInstanceAccelerationStructureDescriptor() *MTL4IndirectInsta
 	return &MTL4IndirectInstanceAccelerationStructureDescriptor{inner: raw.MTL4IndirectInstanceAccelerationStructureDescriptorFromID(_id)}
 }
 
-// Assigns a reference to a buffer containing instance descriptors for acceleration structures to reference. This buffer conceptually represents an array of instance data. The specific format for the structs that comprise each entry depends on the value of the  “instanceDescriptorType“ property. You are responsible for ensuring the buffer address the range contains is not zero.
+// Assigns a reference to a buffer containing instance descriptors for acceleration structures to reference.
 //
 // WithInstanceDescriptorBuffer sets the instanceDescriptorBuffer property and returns the receiver for chaining.
 func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithInstanceDescriptorBuffer(instanceDescriptorBuffer raw.MTL4BufferRange) *MTL4IndirectInstanceAccelerationStructureDescriptor {
@@ -45,7 +47,7 @@ func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithInstanceDescri
 	return x
 }
 
-// Sets the stride, in bytes, between instance descriptors in the instance descriptor buffer. You are responsible for ensuring this stride is at least the size of the structure type corresponding to the instance descriptor type and a multiple of 4 bytes. Defaults to `0`, indicating the instance descriptors are tightly packed.
+// Sets the stride, in bytes, between instance descriptors in the instance descriptor buffer.
 //
 // WithInstanceDescriptorStride sets the instanceDescriptorStride property and returns the receiver for chaining.
 func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithInstanceDescriptorStride(instanceDescriptorStride uint) *MTL4IndirectInstanceAccelerationStructureDescriptor {
@@ -53,7 +55,7 @@ func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithInstanceDescri
 	return x
 }
 
-// Controls the maximum number of instance descriptors the instance descriptor buffer can reference. You are responsible for ensuring that the final number of instances at build time, which you provide indirectly via a buffer reference in “instanceCountBuffer“, is less than or equal to this number.
+// Controls the maximum number of instance descriptors the instance descriptor buffer can reference.
 //
 // WithMaxInstanceCount sets the maxInstanceCount property and returns the receiver for chaining.
 func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithMaxInstanceCount(maxInstanceCount uint) *MTL4IndirectInstanceAccelerationStructureDescriptor {
@@ -61,7 +63,7 @@ func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithMaxInstanceCou
 	return x
 }
 
-// Provides a reference to a buffer containing the number of instances in the instance descriptor buffer, formatted as a 32-bit unsigned integer. You are responsible for ensuring that the final number of instances at build time, which you provide indirectly via this buffer reference , is less than or equal to the value of property “maxInstanceCount“.
+// Provides a reference to a buffer containing the number of instances in the instance descriptor buffer, formatted as a 32-bit unsigned integer.
 //
 // WithInstanceCountBuffer sets the instanceCountBuffer property and returns the receiver for chaining.
 func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithInstanceCountBuffer(instanceCountBuffer raw.MTL4BufferRange) *MTL4IndirectInstanceAccelerationStructureDescriptor {
@@ -69,7 +71,7 @@ func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithInstanceCountB
 	return x
 }
 
-// Controls the type of instance descriptor that the instance descriptor buffer references. This value determines the layout Metal expects for the structs the instance descriptor buffer contains. Defaults to `MTLAccelerationStructureInstanceDescriptorTypeIndirect`. Valid values for this property are `MTLAccelerationStructureInstanceDescriptorTypeIndirect` or `MTLAccelerationStructureInstanceDescriptorTypeIndirectMotion`.
+// Controls the type of instance descriptor that the instance descriptor buffer references.
 //
 // WithInstanceDescriptorType sets the instanceDescriptorType property and returns the receiver for chaining.
 func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithInstanceDescriptorType(instanceDescriptorType MTLAccelerationStructureInstanceDescriptorType) *MTL4IndirectInstanceAccelerationStructureDescriptor {
@@ -77,7 +79,7 @@ func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithInstanceDescri
 	return x
 }
 
-// A buffer containing transformation information for instance motion keyframes, formatted according to the motion transform type. Each instance can have a different number of keyframes that you configure via individual instance descriptors. You are responsible for ensuring the buffer address the range references is not zero when using motion instance descriptors.
+// A buffer containing transformation information for instance motion keyframes, formatted according to the motion transform type.
 //
 // WithMotionTransformBuffer sets the motionTransformBuffer property and returns the receiver for chaining.
 func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformBuffer(motionTransformBuffer raw.MTL4BufferRange) *MTL4IndirectInstanceAccelerationStructureDescriptor {
@@ -85,7 +87,7 @@ func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithMotionTransfor
 	return x
 }
 
-// Controls the maximum number of motion transforms in the motion transform buffer. You are responsible for ensuring that final number of motion transforms at build time that the buffer “motionTransformCountBuffer“ references is less than or equal to this number.
+// Controls the maximum number of motion transforms in the motion transform buffer.
 //
 // WithMaxMotionTransformCount sets the maxMotionTransformCount property and returns the receiver for chaining.
 func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithMaxMotionTransformCount(maxMotionTransformCount uint) *MTL4IndirectInstanceAccelerationStructureDescriptor {
@@ -93,7 +95,7 @@ func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithMaxMotionTrans
 	return x
 }
 
-// Associates a buffer reference containing the number of motion transforms in the motion transform buffer, formatted as a 32-bit unsigned integer. You are responsible for ensuring that the final number of motion transforms at build time in the buffer this property references is less than or equal to the value of property “maxMotionTransformCount“.
+// Associates a buffer reference containing the number of motion transforms in the motion transform buffer, formatted as a 32-bit unsigned integer.
 //
 // WithMotionTransformCountBuffer sets the motionTransformCountBuffer property and returns the receiver for chaining.
 func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformCountBuffer(motionTransformCountBuffer raw.MTL4BufferRange) *MTL4IndirectInstanceAccelerationStructureDescriptor {
@@ -101,7 +103,7 @@ func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithMotionTransfor
 	return x
 }
 
-// Specifies the layout for the transformation matrices in the instance descriptor buffer and the motion transformation matrix buffer. Metal interprets the value of this property as the layout for the buffers that both “instanceDescriptorBuffer“ and “motionTransformBuffer“ reference. Defaults to `MTLMatrixLayoutColumnMajor`.
+// Specifies the layout for the transformation matrices in the instance descriptor buffer and the motion transformation matrix buffer.
 //
 // WithInstanceTransformationMatrixLayout sets the instanceTransformationMatrixLayout property and returns the receiver for chaining.
 func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithInstanceTransformationMatrixLayout(instanceTransformationMatrixLayout MTLMatrixLayout) *MTL4IndirectInstanceAccelerationStructureDescriptor {
@@ -109,7 +111,7 @@ func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithInstanceTransf
 	return x
 }
 
-// Sets the type of motion transforms, either as a matrix or individual components. Defaults to `MTLTransformTypePackedFloat4x3`. Using a `MTLTransformTypeComponent` allows you to represent the rotation by a quaternion (instead as of part of the matrix), allowing for correct motion interpolation.
+// Sets the type of motion transforms, either as a matrix or individual components.
 //
 // WithMotionTransformType sets the motionTransformType property and returns the receiver for chaining.
 func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformType(motionTransformType MTLTransformType) *MTL4IndirectInstanceAccelerationStructureDescriptor {
@@ -117,7 +119,7 @@ func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithMotionTransfor
 	return x
 }
 
-// Sets the stride for motion transform. Defaults to `0`, indicating that transforms are tightly packed according to the motion transform type.
+// Sets the stride for motion transform.
 //
 // WithMotionTransformStride sets the motionTransformStride property and returns the receiver for chaining.
 func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformStride(motionTransformStride uint) *MTL4IndirectInstanceAccelerationStructureDescriptor {
@@ -125,6 +127,8 @@ func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithMotionTransfor
 	return x
 }
 
+// The options that describe how you intend to use the acceleration structure.
+//
 // WithUsage sets the usage property and returns the receiver for chaining.
 func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) WithUsage(usage MTLAccelerationStructureUsage) *MTL4IndirectInstanceAccelerationStructureDescriptor {
 	x.inner.MTL4AccelerationStructureDescriptor.MTLAccelerationStructureDescriptor.SetUsage(raw.MTLAccelerationStructureUsage(usage))

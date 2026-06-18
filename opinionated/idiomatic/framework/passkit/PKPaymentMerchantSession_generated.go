@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that validates the identity of a merchant for a payment request.
+//
 // PaymentMerchantSession wraps [raw.PKPaymentMerchantSession] with a fluent Go API.
 type PaymentMerchantSession struct {
 	inner *raw.PKPaymentMerchantSession
@@ -30,6 +32,8 @@ func PaymentMerchantSessionFromID(id objc.ID) *PaymentMerchantSession {
 	return &PaymentMerchantSession{inner: raw.PKPaymentMerchantSessionFromID(id)}
 }
 
+// Creates an object that validates the identity of a merchant for a payment request.
+//
 // NewPaymentMerchantSessionWithDictionary creates a new [PaymentMerchantSession].
 func NewPaymentMerchantSessionWithDictionary(dictionary *foundation.NSDictionary[objc.ID, objc.ID]) *PaymentMerchantSession {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentMerchantSession")), objc.RegisterName("alloc"))

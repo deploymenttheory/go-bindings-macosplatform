@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Groups together properties to drive a static linking process.
+//
 // MTL4StaticLinkingDescriptor wraps [raw.MTL4StaticLinkingDescriptor] with a fluent Go API.
 type MTL4StaticLinkingDescriptor struct {
 	inner *raw.MTL4StaticLinkingDescriptor
@@ -58,7 +60,7 @@ func (x *MTL4StaticLinkingDescriptor) WithFunctionDescriptors(items ...MTL4Funct
 	return x
 }
 
-// Provides an array of private functions to link at the Metal IR level. You specify private functions to link separately from “functionDescriptors“ because pipelines don't export private functions as “MTLFunctionHandle“ instances. - Note: You can link private functions even when your “MTLDevice“ doesn't support function pointers.
+// Provides an array of private functions to link at the Metal IR level.
 //
 // WithPrivateFunctionDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *MTL4StaticLinkingDescriptor) WithPrivateFunctionDescriptors(items ...MTL4FunctionDescriptorProvider) *MTL4StaticLinkingDescriptor {
@@ -78,7 +80,7 @@ func (x *MTL4StaticLinkingDescriptor) WithPrivateFunctionDescriptors(items ...MT
 	return x
 }
 
-// Assigns groups of functions to match call-site attributes in shader code. Function groups help the compiler reduce the number of candidate functions it needs to evaluate for shader function calls, potentially increasing runtime performance.
+// Assigns groups of functions to match call-site attributes in shader code.
 //
 // WithGroups sets the groups property and returns the receiver for chaining.
 func (x *MTL4StaticLinkingDescriptor) WithGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTL4StaticLinkingDescriptor {

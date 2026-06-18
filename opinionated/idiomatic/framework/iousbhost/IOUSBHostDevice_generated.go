@@ -10,7 +10,7 @@ import (
 	"unsafe"
 )
 
-// @class       IOUSBHostDevice @brief       The IOUSBHostObject representing a USB device @discussion  This class provides functionality to send control requests to the default control endpoint
+// The class that claims and configures devices, retrieves descriptors, and sends device requests.
 //
 // HostDevice wraps [raw.IOUSBHostDevice] with a fluent Go API.
 type HostDevice struct {
@@ -38,21 +38,21 @@ func NewHostDevice() *HostDevice {
 	return &HostDevice{inner: raw.IOUSBHostDeviceFromID(_id)}
 }
 
-// @brief       Select a new configuration for the device @discussion  This method will select a new configuration for a device. If the device was previously configured all child interfaces will be terminated prior to setting the new configuration.  This method will send the SET_CONFIGURATION control request (USB 2.0 9.4.7) to the device. The interfaces will be registered for matching by default. After the completion of this call, the interfaces are not guaranteed to be immediately available. @param       value Configuration value to select @param       matchInterfaces If YES, any interfaces within the new configuration will be registered for matching. By default this is set to YES. @return      YES on success, an IOReturn error code will be reported on failure.
+// Selects a new configuration for the device.
 //
 // ConfigureWithValueMatchInterfacesError calls the underlying ConfigureWithValueMatchInterfacesError.
 func (x *HostDevice) ConfigureWithValueMatchInterfacesError(value uint, matchInterfaces bool) (bool, error) {
 	return x.inner.ConfigureWithValueMatchInterfacesError(value, matchInterfaces)
 }
 
-// @brief       Select a new configuration for the device @discussion  This method will select a new configuration for a device.  If the device was previously configured all child interfaces will be terminated prior to setting the new configuration.  This method will send the SET_CONFIGURATION control request (USB 2.0 9.4.7) to the device. The interfaces will be registered for matching by default. After the completion of this call, the interfaces are not guaranteed to be immediately available. @param       value Configuration value to select @return      YES on success, an IOReturn error code will be reported on failure.
+// Selects a new configuration for the device and registers the interfaces for matching.
 //
 // ConfigureWithValueError calls the underlying ConfigureWithValueError.
 func (x *HostDevice) ConfigureWithValueError(value uint) (bool, error) {
 	return x.inner.ConfigureWithValueError(value)
 }
 
-// @brief       Terminate the device and attempt to reenumerate it @discussion  This function will reset and attempt to reenumerate the USB device. The current IOUSBHostDevice object and all of its children will be terminated. A new IOUSBHostDevice IOService object will be created and registered if the reset is successful and the previous object has finished terminating. The framework IOUSBHostDevice will no longer have a valid connection with IOService userclient after the call returns successfully. A new framework client will need to be created to use the re-enumerated device. @return      YES on success, an IOReturn error code will be reported on failure.
+// Terminates the device and attempts to re-enumerate it.
 //
 // Reset returns any validation error.
 func (x *HostDevice) Reset() error {

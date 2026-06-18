@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents the state of the collaboration options for the document.
+//
 // CollaborationShareOptions wraps [raw.SWCollaborationShareOptions] with a fluent Go API.
 type CollaborationShareOptions struct {
 	inner *raw.SWCollaborationShareOptions
@@ -32,7 +34,7 @@ func CollaborationShareOptionsFromID(id objc.ID) *CollaborationShareOptions {
 	return &CollaborationShareOptions{inner: raw.SWCollaborationShareOptionsFromID(id)}
 }
 
-// @abstract Initializes a shareOptions object to represent the available collaboration options for the document and a summary of the selected options @param optionsGroups SWCollaborationOptionsGroups to customize how the collaboration will be shared @param summary localized string to summarize the selected collaboration options
+// Creates and initializes a collaboration share options object the array of groups and a summary string.
 //
 // NewCollaborationShareOptionsWithOptionsGroupsSummary creates a new [CollaborationShareOptions].
 func NewCollaborationShareOptionsWithOptionsGroupsSummary(optionsGroups *foundation.NSArray[*raw.SWCollaborationOptionsGroup], summary string) *CollaborationShareOptions {
@@ -41,7 +43,7 @@ func NewCollaborationShareOptionsWithOptionsGroupsSummary(optionsGroups *foundat
 	return &CollaborationShareOptions{inner: raw.SWCollaborationShareOptionsFromID(_id)}
 }
 
-// @abstract Initializes a shareOptions object to represent the available collaboration options for the document and the default summary string "Share Options" @param optionsGroups SWCollaborationOptionsGroups to customize how the collaboration will be shared
+// Creates and initializes a collaboration share options object with the array of groups.
 //
 // NewCollaborationShareOptionsWithOptionsGroups creates a new [CollaborationShareOptions].
 func NewCollaborationShareOptionsWithOptionsGroups(optionsGroups ...CollaborationOptionsGroupProvider) *CollaborationShareOptions {
@@ -59,6 +61,8 @@ func NewCollaborationShareOptionsWithOptionsGroups(optionsGroups ...Collaboratio
 	return &CollaborationShareOptions{inner: raw.SWCollaborationShareOptionsFromID(_id)}
 }
 
+// Creates and initializes a collaboration share options object.
+//
 // NewCollaborationShareOptionsWithCoder creates a new [CollaborationShareOptions].
 func NewCollaborationShareOptionsWithCoder(coder *foundation.NSCoder) *CollaborationShareOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWCollaborationShareOptions")), objc.RegisterName("alloc"))
@@ -66,7 +70,7 @@ func NewCollaborationShareOptionsWithCoder(coder *foundation.NSCoder) *Collabora
 	return &CollaborationShareOptions{inner: raw.SWCollaborationShareOptionsFromID(_id)}
 }
 
-// @abstract SWCollaborationOptionsGroups to customize how the collaboration will be shared
+// An array of options group objects to customize how the system shares the collaboration.
 //
 // WithOptionsGroups sets the collection, converting the Go slice to an NSArray.
 func (x *CollaborationShareOptions) WithOptionsGroups(items ...CollaborationOptionsGroupProvider) *CollaborationShareOptions {
@@ -86,7 +90,7 @@ func (x *CollaborationShareOptions) WithOptionsGroups(items ...CollaborationOpti
 	return x
 }
 
-// @abstract Localized string to summarize the selected collaboration options. If nil, "Share Options" will be displayed by default.
+// A localized string to summarize the collaboration options.
 //
 // WithSummary sets the summary property and returns the receiver for chaining.
 func (x *CollaborationShareOptions) WithSummary(summary string) *CollaborationShareOptions {

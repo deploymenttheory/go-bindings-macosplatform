@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A mutable collection of metadata items that are valid for use during a specific time range.
+//
 // MutableTimedMetadataGroup wraps [raw.AVMutableTimedMetadataGroup] with a fluent Go API.
 type MutableTimedMetadataGroup struct {
 	inner *raw.AVMutableTimedMetadataGroup
@@ -38,12 +40,16 @@ func NewMutableTimedMetadataGroup() *MutableTimedMetadataGroup {
 	return &MutableTimedMetadataGroup{inner: raw.AVMutableTimedMetadataGroupFromID(_id)}
 }
 
+// The time range of the timed metadata.
+//
 // WithTimeRange sets the timeRange property and returns the receiver for chaining.
 func (x *MutableTimedMetadataGroup) WithTimeRange(timeRange coremedia.CMTimeRange) *MutableTimedMetadataGroup {
 	x.inner.SetTimeRange(timeRange)
 	return x
 }
 
+// An array of metadata items in the timed metadata group.
+//
 // WithItems sets the collection, converting the Go slice to an NSArray.
 func (x *MutableTimedMetadataGroup) WithItems(items ...MetadataItemProvider) *MutableTimedMetadataGroup {
 	if len(items) == 0 {

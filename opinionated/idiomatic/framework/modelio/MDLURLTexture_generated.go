@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A lightweight reference to a URL from which to load texture data.
+//
 // URLTexture wraps [raw.MDLURLTexture] with a fluent Go API.
 type URLTexture struct {
 	inner *raw.MDLURLTexture
@@ -30,6 +32,8 @@ func URLTextureFromID(id objc.ID) *URLTexture {
 	return &URLTexture{inner: raw.MDLURLTextureFromID(id)}
 }
 
+// Initializes a texture that loads its texel data from a file at the specified URL.
+//
 // NewURLTextureWithURLName creates a new [URLTexture].
 func NewURLTextureWithURLName(uRL string, name string) *URLTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLURLTexture")), objc.RegisterName("alloc"))
@@ -37,12 +41,16 @@ func NewURLTextureWithURLName(uRL string, name string) *URLTexture {
 	return &URLTexture{inner: raw.MDLURLTextureFromID(_id)}
 }
 
+// The URL from which to load texture data.
+//
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *URLTexture) WithURL(uRL string) *URLTexture {
 	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 	return x
 }
 
+// A Boolean value that indicates whether the texture is a cube textures.
+//
 // WithIsCube sets the isCube property and returns the receiver for chaining.
 func (x *URLTexture) WithIsCube(isCube bool) *URLTexture {
 	x.inner.MDLTexture.SetIsCube(isCube)

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event requesting a change in the repeat mode.
+//
 // ChangeRepeatModeCommandEvent wraps [raw.MPChangeRepeatModeCommandEvent] with a fluent Go API.
 type ChangeRepeatModeCommandEvent struct {
 	inner *raw.MPChangeRepeatModeCommandEvent

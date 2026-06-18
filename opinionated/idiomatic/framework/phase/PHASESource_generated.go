@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that plays audio from a 3D location and orientation in a scene.
+//
 // Source wraps [raw.PHASESource] with a fluent Go API.
 type Source struct {
 	inner *raw.PHASESource
@@ -31,7 +33,7 @@ func SourceFromID(id objc.ID) *Source {
 	return &Source{inner: raw.PHASESourceFromID(id)}
 }
 
-// @method initWithEngine: @abstract Initialize a new point source.
+// Creates a single point in the environment from which sound emanates.
 //
 // NewSourceWithEngine creates a new [Source].
 func NewSourceWithEngine(engine *raw.PHASEEngine) *Source {
@@ -40,7 +42,7 @@ func NewSourceWithEngine(engine *raw.PHASEEngine) *Source {
 	return &Source{inner: raw.PHASESourceFromID(_id)}
 }
 
-// @method initWithEngine:shapes: @abstract Initialize a new volumetric source with shapes. @param shapes The shape(s) of the source within the world @discussion The shapes array cannot be empty, otherwise an exception is thrown. @note This function is thread-safe. Clients can safely run this function to create multiple sources from multiple threads, if required.
+// Creates a voluminous area in the environment from which sound emanates.
 //
 // NewSourceWithEngineShapes creates a new [Source].
 func NewSourceWithEngineShapes(engine *raw.PHASEEngine, shapes *foundation.NSArray[*raw.PHASEShape]) *Source {
@@ -49,7 +51,7 @@ func NewSourceWithEngineShapes(engine *raw.PHASEEngine, shapes *foundation.NSArr
 	return &Source{inner: raw.PHASESourceFromID(_id)}
 }
 
-// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+// The amount of sound the source emanates.
 //
 // WithGain sets the gain property and returns the receiver for chaining.
 func (x *Source) WithGain(gain float64) *Source {

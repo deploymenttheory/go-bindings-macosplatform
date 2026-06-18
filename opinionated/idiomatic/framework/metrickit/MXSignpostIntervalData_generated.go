@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A data object representing the captured data for a custom metric.
+//
 // SignpostIntervalData wraps [raw.MXSignpostIntervalData] with a fluent Go API.
 type SignpostIntervalData struct {
 	inner *raw.MXSignpostIntervalData

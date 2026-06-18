@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A controller that manages authorization requests that a provider creates.
+//
 // AuthorizationController wraps [raw.ASAuthorizationController] with a fluent Go API.
 type AuthorizationController struct {
 	inner *raw.ASAuthorizationController
@@ -32,7 +34,7 @@ func AuthorizationControllerFromID(id objc.ID) *AuthorizationController {
 	return &AuthorizationController{inner: raw.ASAuthorizationControllerFromID(id)}
 }
 
-// @abstract Initialize the controller with authorization requests. @param authorizationRequests At least one request should be provided. Requests of same type maybe honored in first in first out order
+// Creates a controller from a collection of authorization requests.
 //
 // NewAuthorizationControllerWithAuthorizationRequests creates a new [AuthorizationController].
 func NewAuthorizationControllerWithAuthorizationRequests(authorizationRequests ...AuthorizationRequestProvider) *AuthorizationController {
@@ -50,7 +52,7 @@ func NewAuthorizationControllerWithAuthorizationRequests(authorizationRequests .
 	return &AuthorizationController{inner: raw.ASAuthorizationControllerFromID(_id)}
 }
 
-// @abstract This delegate will be invoked upon completion of the authorization indicating success or failure. Delegate is required to receive the results of authorization.
+// A delegate that the authorization controller informs about the success or failure of an authorization attempt.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *AuthorizationController) WithDelegate(delegate raw.ASAuthorizationControllerDelegate) *AuthorizationController {
@@ -58,7 +60,7 @@ func (x *AuthorizationController) WithDelegate(delegate raw.ASAuthorizationContr
 	return x
 }
 
-// @abstract This delegate will be invoked upon needing a presentation context to display authorization UI.
+// A delegate that provides a display context in which the system can present an authorization interface to the user.
 //
 // WithPresentationContextProvider sets the presentationContextProvider property and returns the receiver for chaining.
 func (x *AuthorizationController) WithPresentationContextProvider(presentationContextProvider raw.ASAuthorizationControllerPresentationContextProviding) *AuthorizationController {
@@ -66,21 +68,21 @@ func (x *AuthorizationController) WithPresentationContextProvider(presentationCo
 	return x
 }
 
-// @abstract Initiate the authorization flows. Upon completion, the delegate will be called with either success or failure. Certain authorization flows may require a presentation context. The @c presentationContextProvider will be called to provide it. The instance will remain retained until the flow is either completed or canceled, and the delegate callback is made.
+// Starts the specified authorization flows during controller initialization.
 //
 // PerformRequests calls the underlying PerformRequests.
 func (x *AuthorizationController) PerformRequests() {
 	x.inner.PerformRequests()
 }
 
-// @abstract Initiate the authorization flows. Upon completion, the delegate will be called with either success or failure. Certain authorization flows may require a presentation context. The @c presentationContextProvider will be called to provide it. Calling this method with no options is the same as calling @c performRequests. The instance will remain retained until the flow is either completed or canceled, and the delegate callback is made.
+// Starts the specified authorization flows during controller initialization.
 //
 // PerformRequestsWithOptions calls the underlying PerformRequestsWithOptions.
 func (x *AuthorizationController) PerformRequestsWithOptions(options ASAuthorizationControllerRequestOptions) {
 	x.inner.PerformRequestsWithOptions(raw.ASAuthorizationControllerRequestOptions(options))
 }
 
-// @abstract Cancel the running authorization flows, if there are any. If a flow is canceled, the delegate callback will be made indicating the cancel.
+// Cancels any active authorization requests.
 //
 // Cancel calls the underlying Cancel.
 func (x *AuthorizationController) Cancel() {

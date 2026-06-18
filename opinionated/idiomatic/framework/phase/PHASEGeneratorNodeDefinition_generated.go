@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A base class for nodes that provide audio data to generate sound.
+//
 // GeneratorNodeDefinition wraps [raw.PHASEGeneratorNodeDefinition] with a fluent Go API.
 type GeneratorNodeDefinition struct {
 	inner *raw.PHASEGeneratorNodeDefinition
@@ -35,7 +37,7 @@ func NewGeneratorNodeDefinition() *GeneratorNodeDefinition {
 	return &GeneratorNodeDefinition{inner: raw.PHASEGeneratorNodeDefinitionFromID(_id)}
 }
 
-// @property rate @abstract Linear rate scalar. @note Values are clamped to the range [0.25, 4]. Default value is 1.
+// A playback speed for the node’s audio.
 //
 // WithRate sets the rate property and returns the receiver for chaining.
 func (x *GeneratorNodeDefinition) WithRate(rate float64) *GeneratorNodeDefinition {
@@ -43,7 +45,7 @@ func (x *GeneratorNodeDefinition) WithRate(rate float64) *GeneratorNodeDefinitio
 	return x
 }
 
-// @property group @abstract The PHASEGroup object this generator should be associated with for gain and rate control.
+// A group this node conforms to for gain and rate control.
 //
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *GeneratorNodeDefinition) WithGroup(group *Group) *GeneratorNodeDefinition {
@@ -51,7 +53,7 @@ func (x *GeneratorNodeDefinition) WithGroup(group *Group) *GeneratorNodeDefiniti
 	return x
 }
 
-// @property gainMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable dynamic control of the gain during playback.
+// A meta parameter that dynamically changes the audio’s loudness.
 //
 // WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
 func (x *GeneratorNodeDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *GeneratorNodeDefinition {
@@ -59,7 +61,7 @@ func (x *GeneratorNodeDefinition) WithGainMetaParameterDefinition(gainMetaParame
 	return x
 }
 
-// @property rateMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable dynamic control of the rate during playback.
+// A meta parameter that dynamically changes the audio’s rate.
 //
 // WithRateMetaParameterDefinition sets the rateMetaParameterDefinition property and returns the receiver for chaining.
 func (x *GeneratorNodeDefinition) WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *GeneratorNodeDefinition {
@@ -67,7 +69,7 @@ func (x *GeneratorNodeDefinition) WithRateMetaParameterDefinition(rateMetaParame
 	return x
 }
 
-// @method setCalibrationMode:level @abstract Set the generator's calibration mode and level. @param calibrationMode The calibration mode. @param level The level. @note The level, including its underlying unit and range, are dependent on the calibration mode.
+// Selects a loudness correction strategy and reference level.
 //
 // SetCalibrationModeLevel calls the underlying SetCalibrationModeLevel.
 func (x *GeneratorNodeDefinition) SetCalibrationModeLevel(calibrationMode PHASECalibrationMode, level float64) {

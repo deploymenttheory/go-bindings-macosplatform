@@ -8,17 +8,26 @@ import (
 	"fmt"
 )
 
+// Constants that indicate the XMP type for a metadata tag.
 type CGImageMetadataType int64
 
 const (
-	KCGImageMetadataTypeInvalid        CGImageMetadataType = -1
-	KCGImageMetadataTypeDefault        CGImageMetadataType = 0
-	KCGImageMetadataTypeString         CGImageMetadataType = 1
+	// An invalid metadata type.
+	KCGImageMetadataTypeInvalid CGImageMetadataType = -1
+	// The default type for new tags.
+	KCGImageMetadataTypeDefault CGImageMetadataType = 0
+	// A string value.
+	KCGImageMetadataTypeString CGImageMetadataType = 1
+	// An array that doesn’t preserve the order of items.
 	KCGImageMetadataTypeArrayUnordered CGImageMetadataType = 2
-	KCGImageMetadataTypeArrayOrdered   CGImageMetadataType = 3
+	// An array that preserves the order of items.
+	KCGImageMetadataTypeArrayOrdered CGImageMetadataType = 3
+	// An ordered array, in which all elements are alternates for the same value.
 	KCGImageMetadataTypeAlternateArray CGImageMetadataType = 4
-	KCGImageMetadataTypeAlternateText  CGImageMetadataType = 5
-	KCGImageMetadataTypeStructure      CGImageMetadataType = 6
+	// An alternate array, in which all elements are localized strings for the same value.
+	KCGImageMetadataTypeAlternateText CGImageMetadataType = 5
+	// A collection of keys and values.
+	KCGImageMetadataTypeStructure CGImageMetadataType = 6
 )
 
 func (e CGImageMetadataType) String() string {
@@ -44,15 +53,22 @@ func (e CGImageMetadataType) String() string {
 	}
 }
 
+// The set of status values for images and image sources.
 type CGImageSourceStatus int64
 
 const (
+	// The end of the file occurred unexpectedly.
 	KCGImageStatusUnexpectedEOF CGImageSourceStatus = -5
-	KCGImageStatusInvalidData   CGImageSourceStatus = -4
-	KCGImageStatusUnknownType   CGImageSourceStatus = -3
+	// The data is not valid.
+	KCGImageStatusInvalidData CGImageSourceStatus = -4
+	// The image is an unknown type.
+	KCGImageStatusUnknownType CGImageSourceStatus = -3
+	// The image source is reading the header.
 	KCGImageStatusReadingHeader CGImageSourceStatus = -2
-	KCGImageStatusIncomplete    CGImageSourceStatus = -1
-	KCGImageStatusComplete      CGImageSourceStatus = 0
+	// The operation is not complete
+	KCGImageStatusIncomplete CGImageSourceStatus = -1
+	// The operation is complete.
+	KCGImageStatusComplete CGImageSourceStatus = 0
 )
 
 func (e CGImageSourceStatus) String() string {

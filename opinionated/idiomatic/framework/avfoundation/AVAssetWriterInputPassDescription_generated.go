@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines the interface to query for the requirements of the current pass.
+//
 // AssetWriterInputPassDescription wraps [raw.AVAssetWriterInputPassDescription] with a fluent Go API.
 type AssetWriterInputPassDescription struct {
 	inner *raw.AVAssetWriterInputPassDescription

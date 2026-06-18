@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object used to incorporate Core Animation into a video composition.
+//
 // VideoCompositionCoreAnimationTool wraps [raw.AVVideoCompositionCoreAnimationTool] with a fluent Go API.
 type VideoCompositionCoreAnimationTool struct {
 	inner *raw.AVVideoCompositionCoreAnimationTool

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that configures new render pipeline state objects for mesh shading.
+//
 // MeshRenderPipelineDescriptor wraps [raw.MTLMeshRenderPipelineDescriptor] with a fluent Go API.
 type MeshRenderPipelineDescriptor struct {
 	inner *raw.MTLMeshRenderPipelineDescriptor
@@ -206,7 +208,7 @@ func (x *MeshRenderPipelineDescriptor) WithFragmentLinkedFunctions(fragmentLinke
 	return x
 }
 
-// @property shaderValidation @abstract Toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. @discussion The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
+// A value that enables or disables shader validation for the pipeline.
 //
 // WithShaderValidation sets the shaderValidation property and returns the receiver for chaining.
 func (x *MeshRenderPipelineDescriptor) WithShaderValidation(shaderValidation MTLShaderValidation) *MeshRenderPipelineDescriptor {

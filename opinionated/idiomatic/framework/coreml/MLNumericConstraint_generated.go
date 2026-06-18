@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The value limitations of a number.
+//
 // NumericConstraint wraps [raw.MLNumericConstraint] with a fluent Go API.
 type NumericConstraint struct {
 	inner *raw.MLNumericConstraint

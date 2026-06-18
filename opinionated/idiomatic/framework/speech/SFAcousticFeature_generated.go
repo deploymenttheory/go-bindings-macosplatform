@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The value of a voice analysis metric.
+//
 // AcousticFeature wraps [raw.SFAcousticFeature] with a fluent Go API.
 type AcousticFeature struct {
 	inner *raw.SFAcousticFeature

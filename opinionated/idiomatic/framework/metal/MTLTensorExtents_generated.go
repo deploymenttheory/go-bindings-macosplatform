@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An array of length matching the rank, holding the dimensions of a tensor.
+//
 // TensorExtents wraps [raw.MTLTensorExtents] with a fluent Go API.
 type TensorExtents struct {
 	inner *raw.MTLTensorExtents
@@ -29,7 +31,7 @@ func TensorExtentsFromID(id objc.ID) *TensorExtents {
 	return &TensorExtents{inner: raw.MTLTensorExtentsFromID(id)}
 }
 
-// Creates a new tensor extents with the rank and extent values you provide. Zero rank extents represent scalars. `values` can only be `nil`if `rank` is 0. - Parameters: - rank: the number of dimensions. - values: an array of length `rank` that specifies the size of each dimension. The first dimension is the innermost dimension. - Returns: Tensor extents with the rank and extent values you provide. Returns `nil` if `rank` exceeds 0 and `values` is nil or if `rank` exceeds “MTL_TENSOR_MAX_RANK“.
+// Creates a new tensor extents with the rank and extent values you provide.
 //
 // NewTensorExtentsWithRankValues creates a new [TensorExtents].
 func NewTensorExtentsWithRankValues(rank uint, values *int64) *TensorExtents {
@@ -38,7 +40,7 @@ func NewTensorExtentsWithRankValues(rank uint, values *int64) *TensorExtents {
 	return &TensorExtents{inner: raw.MTLTensorExtentsFromID(_id)}
 }
 
-// Returns the extent at an index. - Parameters: - dimensionIndex: the index of the dimension. The first dimension is the innermost dimension. - Returns: the extent at `dimensionIndex`. This method returns -1 if `dimensionIndex` is greater than or equal to `rank`.
+// Returns the extent at an index.
 //
 // ExtentAtDimensionIndex calls the underlying ExtentAtDimensionIndex.
 func (x *TensorExtents) ExtentAtDimensionIndex(dimensionIndex uint) int {

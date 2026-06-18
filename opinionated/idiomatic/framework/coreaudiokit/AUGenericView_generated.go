@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A view that provides a generic user interface for a Cocoa audio unit.
+//
 // AUGenericView wraps [raw.AUGenericView] with a fluent Go API.
 type AUGenericView struct {
 	inner *raw.AUGenericView
@@ -30,7 +32,7 @@ func AUGenericViewFromID(id objc.ID) *AUGenericView {
 	return &AUGenericView{inner: raw.AUGenericViewFromID(id)}
 }
 
-// @method initWithAudioUnit: @abstract initializer used to create the view for a specific audio unit @param au  The Audio Unit associated with the view @result  Returns the newly created view object
+// Creates a generic view for an audio unit, setting all display flags.
 //
 // NewAUGenericViewWithAudioUnit creates a new [AUGenericView].
 func NewAUGenericViewWithAudioUnit(au *carboncore.ComponentInstanceRecord) *AUGenericView {
@@ -39,7 +41,7 @@ func NewAUGenericViewWithAudioUnit(au *carboncore.ComponentInstanceRecord) *AUGe
 	return &AUGenericView{inner: raw.AUGenericViewFromID(_id)}
 }
 
-// @method initWithAudioUnit:displayFlags: @abstract initializer used to create the view for a specific audio unit with a parameter for view flags @param au  The Audio Unit associated with the view @param inFlags  The flags specifying display properties (multiple flags can be combined using the or '|' operator) @result  Returns the newly created view object
+// Initializes a generic view for an audio unit, setting specific display flags.
 //
 // NewAUGenericViewWithAudioUnitDisplayFlags creates a new [AUGenericView].
 func NewAUGenericViewWithAudioUnitDisplayFlags(inAudioUnit *carboncore.ComponentInstanceRecord, inFlags AUGenericViewDisplayFlags) *AUGenericView {
@@ -48,6 +50,8 @@ func NewAUGenericViewWithAudioUnitDisplayFlags(inAudioUnit *carboncore.Component
 	return &AUGenericView{inner: raw.AUGenericViewFromID(_id)}
 }
 
+// Indicates whether or not controls for expert audio unit parameters are displayed in the generic view.
+//
 // WithShowsExpertParameters sets the showsExpertParameters property and returns the receiver for chaining.
 func (x *AUGenericView) WithShowsExpertParameters(showsExpertParameters bool) *AUGenericView {
 	x.inner.SetShowsExpertParameters(showsExpertParameters)

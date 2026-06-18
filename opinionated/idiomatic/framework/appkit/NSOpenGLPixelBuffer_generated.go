@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object that provides access to accelerated offscreen rendering.
+//
 // OpenGLPixelBuffer wraps [raw.NSOpenGLPixelBuffer] with a fluent Go API.
 type OpenGLPixelBuffer struct {
 	inner *raw.NSOpenGLPixelBuffer
@@ -30,6 +32,8 @@ func OpenGLPixelBufferFromID(id objc.ID) *OpenGLPixelBuffer {
 	return &OpenGLPixelBuffer{inner: raw.NSOpenGLPixelBufferFromID(id)}
 }
 
+// Returns an NSOpenGLPixelBuffer object initialized with the specified parameters.
+//
 // NewOpenGLPixelBufferWithTextureTargetTextureInternalFormatTextureMaxMipMapLevelPixelsWidePixelsHigh creates a new [OpenGLPixelBuffer].
 func NewOpenGLPixelBufferWithTextureTargetTextureInternalFormatTextureMaxMipMapLevelPixelsWidePixelsHigh(target uint32, format uint32, maxLevel int32, pixelsWide int32, pixelsHigh int32) *OpenGLPixelBuffer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOpenGLPixelBuffer")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewOpenGLPixelBufferWithTextureTargetTextureInternalFormatTextureMaxMipMapL
 	return &OpenGLPixelBuffer{inner: raw.NSOpenGLPixelBufferFromID(_id)}
 }
 
+// Initializes and returns an OpenGL pixel buffer object that encapsulates an existing CGL pixel buffer object.
+//
 // NewOpenGLPixelBufferWithCGLPBufferObj creates a new [OpenGLPixelBuffer].
 func NewOpenGLPixelBufferWithCGLPBufferObj(pbuffer unsafe.Pointer) *OpenGLPixelBuffer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOpenGLPixelBuffer")), objc.RegisterName("alloc"))

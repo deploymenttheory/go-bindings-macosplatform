@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The result of an authorization request.
+//
 // AuthorizationProviderExtensionAuthorizationResult wraps [raw.ASAuthorizationProviderExtensionAuthorizationResult] with a fluent Go API.
 type AuthorizationProviderExtensionAuthorizationResult struct {
 	inner *raw.ASAuthorizationProviderExtensionAuthorizationResult
@@ -32,7 +34,7 @@ func AuthorizationProviderExtensionAuthorizationResultFromID(id objc.ID) *Author
 	return &AuthorizationProviderExtensionAuthorizationResult{inner: raw.ASAuthorizationProviderExtensionAuthorizationResultFromID(id)}
 }
 
-// @abstract Authorization succeeded with an authorization tokens stored in HTTP headers.
+// Initializes an authorization with tokens stored in HTTP headers.
 //
 // NewAuthorizationProviderExtensionAuthorizationResultWithHTTPAuthorizationHeaders creates a new [AuthorizationProviderExtensionAuthorizationResult].
 func NewAuthorizationProviderExtensionAuthorizationResultWithHTTPAuthorizationHeaders(httpAuthorizationHeaders *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *AuthorizationProviderExtensionAuthorizationResult {
@@ -41,7 +43,7 @@ func NewAuthorizationProviderExtensionAuthorizationResultWithHTTPAuthorizationHe
 	return &AuthorizationProviderExtensionAuthorizationResult{inner: raw.ASAuthorizationProviderExtensionAuthorizationResultFromID(_id)}
 }
 
-// @abstract Authorization succeeded with a HTTP response.
+// Initializes an authorization with a HTTP response and body.
 //
 // NewAuthorizationProviderExtensionAuthorizationResultWithHTTPResponseHttpBody creates a new [AuthorizationProviderExtensionAuthorizationResult].
 func NewAuthorizationProviderExtensionAuthorizationResultWithHTTPResponseHttpBody(httpResponse *foundation.NSHTTPURLResponse, httpBody *foundation.NSData) *AuthorizationProviderExtensionAuthorizationResult {
@@ -50,7 +52,7 @@ func NewAuthorizationProviderExtensionAuthorizationResultWithHTTPResponseHttpBod
 	return &AuthorizationProviderExtensionAuthorizationResult{inner: raw.ASAuthorizationProviderExtensionAuthorizationResultFromID(_id)}
 }
 
-// @abstract HTTP extra headers for addition with credentials.
+// A dictionary of authorization HTTP headers.
 //
 // WithHttpAuthorizationHeaders sets the httpAuthorizationHeaders property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionAuthorizationResult) WithHttpAuthorizationHeaders(httpAuthorizationHeaders *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *AuthorizationProviderExtensionAuthorizationResult {
@@ -58,7 +60,7 @@ func (x *AuthorizationProviderExtensionAuthorizationResult) WithHttpAuthorizatio
 	return x
 }
 
-// @abstract HTTP response for OAUth and SAML based authentications.
+// The HTTP response for authentications.
 //
 // WithHttpResponse sets the httpResponse property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionAuthorizationResult) WithHttpResponse(httpResponse *foundation.NSHTTPURLResponse) *AuthorizationProviderExtensionAuthorizationResult {
@@ -66,7 +68,7 @@ func (x *AuthorizationProviderExtensionAuthorizationResult) WithHttpResponse(htt
 	return x
 }
 
-// @abstract HTTP response body for OAUth and SAML based authentications.
+// The HTTP response body.
 //
 // WithHttpBody sets the httpBody property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionAuthorizationResult) WithHttpBody(httpBody *foundation.NSData) *AuthorizationProviderExtensionAuthorizationResult {

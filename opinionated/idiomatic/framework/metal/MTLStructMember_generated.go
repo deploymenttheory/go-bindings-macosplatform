@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An instance that provides information about a field in a structure.
+//
 // StructMember wraps [raw.MTLStructMember] with a fluent Go API.
 type StructMember struct {
 	inner *raw.MTLStructMember
@@ -36,6 +38,8 @@ func NewStructMember() *StructMember {
 	return &StructMember{inner: raw.MTLStructMemberFromID(_id)}
 }
 
+// Provides a description of the underlying struct when the struct member holds a struct.
+//
 // StructType calls the underlying StructType.
 func (x *StructMember) StructType() *StructType {
 	_r := x.inner.StructType()
@@ -45,6 +49,8 @@ func (x *StructMember) StructType() *StructType {
 	return &StructType{inner: _r}
 }
 
+// Provides a description of the underlying array when the struct member holds an array.
+//
 // ArrayType calls the underlying ArrayType.
 func (x *StructMember) ArrayType() *ArrayType {
 	_r := x.inner.ArrayType()
@@ -54,6 +60,8 @@ func (x *StructMember) ArrayType() *ArrayType {
 	return &ArrayType{inner: _r}
 }
 
+// Provides a description of the underlying texture when the struct member holds a texture.
+//
 // TextureReferenceType calls the underlying TextureReferenceType.
 func (x *StructMember) TextureReferenceType() *TextureReferenceType {
 	_r := x.inner.TextureReferenceType()
@@ -63,6 +71,8 @@ func (x *StructMember) TextureReferenceType() *TextureReferenceType {
 	return &TextureReferenceType{inner: _r}
 }
 
+// Provides a description of the underlying pointer when the struct member holds a pointer.
+//
 // PointerType calls the underlying PointerType.
 func (x *StructMember) PointerType() *PointerType {
 	_r := x.inner.PointerType()
@@ -72,7 +82,7 @@ func (x *StructMember) PointerType() *PointerType {
 	return &PointerType{inner: _r}
 }
 
-// Provides a description of the underlying tensor type when this struct member holds a tensor. - Returns: A description of the tensor type that this struct member holds, or `nil` if this struct member doesn't hold a tensor.
+// Provides a description of the underlying tensor type when this struct member holds a tensor.
 //
 // TensorReferenceType calls the underlying TensorReferenceType.
 func (x *StructMember) TensorReferenceType() *TensorReferenceType {

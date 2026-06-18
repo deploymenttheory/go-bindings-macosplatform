@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The user’s response to an actionable notification, including any custom text that the user typed or dictated.
+//
 // TextInputNotificationResponse wraps [raw.UNTextInputNotificationResponse] with a fluent Go API.
 type TextInputNotificationResponse struct {
 	inner *raw.UNTextInputNotificationResponse

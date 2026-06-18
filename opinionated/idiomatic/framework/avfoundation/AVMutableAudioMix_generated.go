@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that manages the input parameters for mixing audio tracks.
+//
 // MutableAudioMix wraps [raw.AVMutableAudioMix] with a fluent Go API.
 type MutableAudioMix struct {
 	inner *raw.AVMutableAudioMix
@@ -37,7 +39,7 @@ func NewMutableAudioMix() *MutableAudioMix {
 	return &MutableAudioMix{inner: raw.AVMutableAudioMixFromID(_id)}
 }
 
-// @property		inputParameters @abstract		Indicates parameters for inputs to the mix; an NSArray of instances of AVAudioMixInputParameters. @discussion	Note that an instance of AVAudioMixInputParameters is not required for each audio track that contributes to the mix; audio for those without associated AVAudioMixInputParameters will be included in the mix, processed according to default behavior.
+// An array of input parameters for the mix.
 //
 // WithInputParameters sets the collection, converting the Go slice to an NSArray.
 func (x *MutableAudioMix) WithInputParameters(items ...AudioMixInputParametersProvider) *MutableAudioMix {

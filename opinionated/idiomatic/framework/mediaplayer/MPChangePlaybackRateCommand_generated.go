@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that responds to requests to change the playback rate of the playing item.
+//
 // ChangePlaybackRateCommand wraps [raw.MPChangePlaybackRateCommand] with a fluent Go API.
 type ChangePlaybackRateCommand struct {
 	inner *raw.MPChangePlaybackRateCommand
@@ -38,7 +40,7 @@ func NewChangePlaybackRateCommand() *ChangePlaybackRateCommand {
 	return &ChangePlaybackRateCommand{inner: raw.MPChangePlaybackRateCommandFromID(_id)}
 }
 
-// An array of NSNumbers (floats) that contain supported playback rates that the command can send.
+// The supported playback rates for a media item.
 //
 // WithSupportedPlaybackRates sets the collection, converting the Go slice to an NSArray.
 func (x *ChangePlaybackRateCommand) WithSupportedPlaybackRates(items ...*foundation.NSNumber) *ChangePlaybackRateCommand {
@@ -58,7 +60,7 @@ func (x *ChangePlaybackRateCommand) WithSupportedPlaybackRates(items ...*foundat
 	return x
 }
 
-// Whether a button (for example) should be enabled and tappable for this particular command.
+// A Boolean value that indicates whether a user can interact with the displayed element.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *ChangePlaybackRateCommand) WithEnabled(enabled bool) *ChangePlaybackRateCommand {

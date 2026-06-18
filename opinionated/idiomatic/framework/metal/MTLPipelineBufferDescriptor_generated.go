@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The mutability options for a buffer that a render or compute pipeline uses.
+//
 // PipelineBufferDescriptor wraps [raw.MTLPipelineBufferDescriptor] with a fluent Go API.
 type PipelineBufferDescriptor struct {
 	inner *raw.MTLPipelineBufferDescriptor
@@ -35,7 +37,7 @@ func NewPipelineBufferDescriptor() *PipelineBufferDescriptor {
 	return &PipelineBufferDescriptor{inner: raw.MTLPipelineBufferDescriptorFromID(_id)}
 }
 
-// Buffer mutability. Defaults to MTLMutabilityDefault: mutable for standard buffers, immutable for argument buffers
+// A mutability option that determines whether you can update a buffer’s contents before related commands use the buffer.
 //
 // WithMutability sets the mutability property and returns the receiver for chaining.
 func (x *PipelineBufferDescriptor) WithMutability(mutability MTLMutability) *PipelineBufferDescriptor {

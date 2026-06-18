@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A dictionary of attributes that describe a font.
+//
 // FontDescriptor wraps [raw.NSFontDescriptor] with a fluent Go API.
 type FontDescriptor struct {
 	inner *raw.NSFontDescriptor
@@ -31,6 +33,8 @@ func FontDescriptorFromID(id objc.ID) *FontDescriptor {
 	return &FontDescriptor{inner: raw.NSFontDescriptorFromID(id)}
 }
 
+// Initializes and returns a new font descriptor with the specified attributes.
+//
 // NewFontDescriptorWithFontAttributes creates a new [FontDescriptor].
 func NewFontDescriptorWithFontAttributes(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *FontDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFontDescriptor")), objc.RegisterName("alloc"))
@@ -38,16 +42,22 @@ func NewFontDescriptorWithFontAttributes(attributes *foundation.NSDictionary[*fo
 	return &FontDescriptor{inner: raw.NSFontDescriptorFromID(_id)}
 }
 
+// Returns the font attribute specified by the given key.
+//
 // ObjectForKey calls the underlying ObjectForKey.
 func (x *FontDescriptor) ObjectForKey(attribute *foundation.NSString) objc.ID {
 	return x.inner.ObjectForKey(attribute)
 }
 
+// Returns all the fonts available on the system whose specified attributes match those of the receiver.
+//
 // MatchingFontDescriptorsWithMandatoryKeys calls the underlying MatchingFontDescriptorsWithMandatoryKeys.
 func (x *FontDescriptor) MatchingFontDescriptorsWithMandatoryKeys(mandatoryKeys *foundation.NSSet[*foundation.NSString]) *foundation.NSArray[*raw.NSFontDescriptor] {
 	return x.inner.MatchingFontDescriptorsWithMandatoryKeys(mandatoryKeys)
 }
 
+// Returns a normalized font descriptor whose specified attributes match those of the receiver.
+//
 // MatchingFontDescriptorWithMandatoryKeys calls the underlying MatchingFontDescriptorWithMandatoryKeys.
 func (x *FontDescriptor) MatchingFontDescriptorWithMandatoryKeys(mandatoryKeys *foundation.NSSet[*foundation.NSString]) *FontDescriptor {
 	_r := x.inner.MatchingFontDescriptorWithMandatoryKeys(mandatoryKeys)
@@ -57,6 +67,8 @@ func (x *FontDescriptor) MatchingFontDescriptorWithMandatoryKeys(mandatoryKeys *
 	return &FontDescriptor{inner: _r}
 }
 
+// Returns a new font descriptor based on the current object, but with the specified attributes taking precedence over the existing ones.
+//
 // FontDescriptorByAddingAttributes calls the underlying FontDescriptorByAddingAttributes.
 func (x *FontDescriptor) FontDescriptorByAddingAttributes(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *FontDescriptor {
 	_r := x.inner.FontDescriptorByAddingAttributes(attributes)
@@ -66,6 +78,8 @@ func (x *FontDescriptor) FontDescriptorByAddingAttributes(attributes *foundation
 	return &FontDescriptor{inner: _r}
 }
 
+// Returns a new font descriptor based on the current object, but with the specified symbolic traits taking precedence over the existing ones.
+//
 // FontDescriptorWithSymbolicTraits calls the underlying FontDescriptorWithSymbolicTraits.
 func (x *FontDescriptor) FontDescriptorWithSymbolicTraits(symbolicTraits NSFontDescriptorSymbolicTraits) *FontDescriptor {
 	_r := x.inner.FontDescriptorWithSymbolicTraits(raw.NSFontDescriptorSymbolicTraits(symbolicTraits))
@@ -75,6 +89,8 @@ func (x *FontDescriptor) FontDescriptorWithSymbolicTraits(symbolicTraits NSFontD
 	return &FontDescriptor{inner: _r}
 }
 
+// Returns a new font descriptor based on the current object, but with the specified point size.
+//
 // FontDescriptorWithSize calls the underlying FontDescriptorWithSize.
 func (x *FontDescriptor) FontDescriptorWithSize(newPointSize float64) *FontDescriptor {
 	_r := x.inner.FontDescriptorWithSize(newPointSize)
@@ -84,6 +100,8 @@ func (x *FontDescriptor) FontDescriptorWithSize(newPointSize float64) *FontDescr
 	return &FontDescriptor{inner: _r}
 }
 
+// Returns a new font descriptor based on the current object, but with the specified font matrix.
+//
 // FontDescriptorWithMatrix calls the underlying FontDescriptorWithMatrix.
 func (x *FontDescriptor) FontDescriptorWithMatrix(matrix *foundation.NSAffineTransform) *FontDescriptor {
 	_r := x.inner.FontDescriptorWithMatrix(matrix)
@@ -93,6 +111,8 @@ func (x *FontDescriptor) FontDescriptorWithMatrix(matrix *foundation.NSAffineTra
 	return &FontDescriptor{inner: _r}
 }
 
+// Returns a new font descriptor based on the current object, but with the specified face.
+//
 // FontDescriptorWithFace calls the underlying FontDescriptorWithFace.
 func (x *FontDescriptor) FontDescriptorWithFace(newFace string) *FontDescriptor {
 	_r := x.inner.FontDescriptorWithFace(foundation.NSStringStringWithUTF8String(newFace))
@@ -102,6 +122,8 @@ func (x *FontDescriptor) FontDescriptorWithFace(newFace string) *FontDescriptor 
 	return &FontDescriptor{inner: _r}
 }
 
+// Returns a new font descriptor based on the current object, but with the specified font family.
+//
 // FontDescriptorWithFamily calls the underlying FontDescriptorWithFamily.
 func (x *FontDescriptor) FontDescriptorWithFamily(newFamily string) *FontDescriptor {
 	_r := x.inner.FontDescriptorWithFamily(foundation.NSStringStringWithUTF8String(newFamily))
@@ -111,6 +133,8 @@ func (x *FontDescriptor) FontDescriptorWithFamily(newFamily string) *FontDescrip
 	return &FontDescriptor{inner: _r}
 }
 
+// Returns a new font descriptor based on the current object, but with the specified design style.
+//
 // FontDescriptorWithDesign calls the underlying FontDescriptorWithDesign.
 func (x *FontDescriptor) FontDescriptorWithDesign(design *foundation.NSString) *FontDescriptor {
 	_r := x.inner.FontDescriptorWithDesign(design)

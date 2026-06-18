@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A single entry from the unified logging system.
+//
 // LogEntry wraps [raw.OSLogEntry] with a fluent Go API.
 type LogEntry struct {
 	inner *raw.OSLogEntry

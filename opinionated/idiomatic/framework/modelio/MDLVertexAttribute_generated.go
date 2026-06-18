@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A description of the format of per-vertex data for a single vertex attribute in a mesh object.
+//
 // VertexAttribute wraps [raw.MDLVertexAttribute] with a fluent Go API.
 type VertexAttribute struct {
 	inner *raw.MDLVertexAttribute
@@ -38,7 +40,7 @@ func NewVertexAttribute() *VertexAttribute {
 	return &VertexAttribute{inner: raw.MDLVertexAttributeFromID(_id)}
 }
 
-// @method initWithName:format:offset:bufferIndex @abstract Initialize attribute object with all properties
+// Initializes a vertex attribute object with the specified property values.
 //
 // NewVertexAttributeWithNameFormatOffsetBufferIndex creates a new [VertexAttribute].
 func NewVertexAttributeWithNameFormatOffsetBufferIndex(name string, format MDLVertexFormat, offset uint, bufferIndex uint) *VertexAttribute {
@@ -47,7 +49,7 @@ func NewVertexAttributeWithNameFormatOffsetBufferIndex(name string, format MDLVe
 	return &VertexAttribute{inner: raw.MDLVertexAttributeFromID(_id)}
 }
 
-// @property name @abstract Identifying name of the attribute derived from model file, or one of the predefined MDLVertexAttribute strings
+// An identifier for the semantic use of the vertex attribute.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *VertexAttribute) WithName(name string) *VertexAttribute {
@@ -55,7 +57,7 @@ func (x *VertexAttribute) WithName(name string) *VertexAttribute {
 	return x
 }
 
-// @property format @abstract Format (including number of components) of the attribute @discussion If the value is MDLVertexFormatInvalid.   Other values of this object will be ignored when setting the MDLVertexDescriptor object in a Mesh. The initial value is MDLVertexFormatInvalid.
+// The format of per-vertex data for the attribute.
 //
 // WithFormat sets the format property and returns the receiver for chaining.
 func (x *VertexAttribute) WithFormat(format MDLVertexFormat) *VertexAttribute {
@@ -63,7 +65,7 @@ func (x *VertexAttribute) WithFormat(format MDLVertexFormat) *VertexAttribute {
 	return x
 }
 
-// @property offset @abstract offset in bytes of the attrbute in each element of the vertex buffer
+// The offset, in bytes, of vertex data for the attribute in a vertex buffer, relative to the start of data for each vertex.
 //
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *VertexAttribute) WithOffset(offset uint) *VertexAttribute {
@@ -71,7 +73,7 @@ func (x *VertexAttribute) WithOffset(offset uint) *VertexAttribute {
 	return x
 }
 
-// @property bufferIndex @abstract index of the buffer in mesh's vertexBuffer array in which this attribute resides
+// The index of the vertex buffer containing data for this attribute in a mesh’s vertexBuffers array.
 //
 // WithBufferIndex sets the bufferIndex property and returns the receiver for chaining.
 func (x *VertexAttribute) WithBufferIndex(bufferIndex uint) *VertexAttribute {

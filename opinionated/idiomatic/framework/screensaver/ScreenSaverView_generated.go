@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that defines the interface for subclassers to interact with the screen saver infrastructure. “ScreenSaverView“ provides the interface for your screen saver, including the content you animate onscreen and an optional configuration sheet. Create your own custom subclass and add it to your screen saver bundle. Use your subclass to create the animations that you want to appear onscreen, and to specify additional animation details. - Note: When someone previews your screen saver in System Preferences, the system instantiates your “ScreenSaverView“ subclass. You can draw from your view’s “ScreenSaverView/drawRect:“ method, or you can draw directly from the “ScreenSaverView/animateOneFrame“ method. If you prefer to use the “ScreenSaverView/drawRect:“ method, use the “ScreenSaverView/animateOneFrame“ method to call the <doc://com.apple.documentation/documentation/appkit/nsview/1483475-setneedsdisplayinrect> method and specify the portions of your view that require updates.
+// An abstract class that defines the interface for subclassers to interact with the screen saver infrastructure.
 //
 // ScreenSaverView wraps [raw.ScreenSaverView] with a fluent Go API.
 type ScreenSaverView struct {
@@ -33,7 +33,7 @@ func ScreenSaverViewFromID(id objc.ID) *ScreenSaverView {
 	return &ScreenSaverView{inner: raw.ScreenSaverViewFromID(id)}
 }
 
-// Creates a newly allocated screen saver view with the specified frame rectangle and preview information. ## Overview The screen saver application installs the new view object into the view hierarchy of an <doc://com.apple.documentation/documentation/appkit/nswindow> before the animation begins. This method is the designated initializer for the “ScreenSaver/ScreenSaverView“ class. Returns `self`. - Parameters: - frame: The frame rectangle for the view. - isPreview: <doc://com.apple.documentation/documentation/objectivec/yes> if this view provides a preview for system settings, or <doc://com.apple.documentation/documentation/objectivec/no> if the system fills the screen with your view’s contents.
+// Creates a newly allocated screen saver view with the specified frame rectangle and preview information.
 //
 // NewScreenSaverViewWithFrameIsPreview creates a new [ScreenSaverView].
 func NewScreenSaverViewWithFrameIsPreview(frame corefoundation.CGRect, isPreview bool) *ScreenSaverView {
@@ -42,7 +42,7 @@ func NewScreenSaverViewWithFrameIsPreview(frame corefoundation.CGRect, isPreview
 	return &ScreenSaverView{inner: raw.ScreenSaverViewFromID(_id)}
 }
 
-// The time interval between animation frames. If your screen saver has particular requirements for time between animation frames, call this method to set the animation rate to a reasonable value.
+// The time interval between animation frames.
 //
 // WithAnimationTimeInterval sets the animationTimeInterval property and returns the receiver for chaining.
 func (x *ScreenSaverView) WithAnimationTimeInterval(animationTimeInterval float64) *ScreenSaverView {
@@ -50,21 +50,21 @@ func (x *ScreenSaverView) WithAnimationTimeInterval(animationTimeInterval float6
 	return x
 }
 
-// Activates the periodic timer that animates the screen saver. ## Overview The system calls this method when it’s time for you to start animating your screen saver’s content. The system calls this method only once at the start of animations. Use this method to set up any initial state information you require or to allocate expensive resources. If you override this method, you must call the inherited implementation at some point. ## See also - “ScreenSaver/ScreenSaverView/stopAnimation“
+// Activates the periodic timer that animates the screen saver.
 //
 // StartAnimation calls the underlying StartAnimation.
 func (x *ScreenSaverView) StartAnimation() {
 	x.inner.StartAnimation()
 }
 
-// Deactivates the timer that advances the animation. ## Overview The system calls this method when it’s time for you to stop animating your screen saver’s content. The system calls this method only once at the end of animations. Use this method to unload expensive resources or to reset your screen saver to a known state. If you override this method, you must call the inherited implementation at some point. ## See also - “ScreenSaver/ScreenSaverView/startAnimation“
+// Deactivates the timer that advances the animation.
 //
 // StopAnimation calls the underlying StopAnimation.
 func (x *ScreenSaverView) StopAnimation() {
 	x.inner.StopAnimation()
 }
 
-// Advances the screen saver’s animation by a single frame. ## Overview The system calls this method each time the timer animating the screen saver fires. The time between calls to this method is always at least “ScreenSaver/ScreenSaverView/animationTimeInterval“. The system locks focus on your view before it calls this method, so you can use this method to draw content. You can also let “ScreenSaver/ScreenSaverView/drawRect:“ perform the drawing, in which case you use this method to call <doc://com.apple.documentation/documentation/appkit/nsview/1483475-setneedsdisplayinrect> to mark your view as dirty. The default implementation of this method does nothing. ## See also - “ScreenSaver/ScreenSaverView/drawRect:“
+// Advances the screen saver’s animation by a single frame.
 //
 // AnimateOneFrame calls the underlying AnimateOneFrame.
 func (x *ScreenSaverView) AnimateOneFrame() {

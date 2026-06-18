@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A collection of segments that connect to graph a complex curve over a linear input.
+//
 // Envelope wraps [raw.PHASEEnvelope] with a fluent Go API.
 type Envelope struct {
 	inner *raw.PHASEEnvelope
@@ -32,7 +34,7 @@ func EnvelopeFromID(id objc.ID) *Envelope {
 	return &Envelope{inner: raw.PHASEEnvelopeFromID(id)}
 }
 
-// @method initWithStartPoint:segments @abstract Initialize an envelope from a start point and an array of segments. @discussion If the segment array is empty (i.e., count == 0), the envelope will internally create a single segment with an end point matching the start point. If the segment array has more than one segment, segments will be sorted internally in ascending order of x value. Note that the startPoint.x value must be <= the segment with the lowest x value provided in segments. Failure to do so will cause this function to return nil. @param startPoint The start point of the envelope. @param segments An array of segments. @return A new envelope.
+// Creates an envelope with a start point and segments.
 //
 // NewEnvelopeWithStartPointSegments creates a new [Envelope].
 func NewEnvelopeWithStartPointSegments(startPoint unsafe.Pointer, segments *foundation.NSArray[*raw.PHASEEnvelopeSegment]) *Envelope {
@@ -41,7 +43,7 @@ func NewEnvelopeWithStartPointSegments(startPoint unsafe.Pointer, segments *foun
 	return &Envelope{inner: raw.PHASEEnvelopeFromID(_id)}
 }
 
-// @method evaluateForValue @abstract Evaluates the envelope. @discussion If required, x will be clamped to the envelope's domain. @param x The input along the x-axis. @return The output along the y-axis.
+// Provides the height of the envelope for an input value.
 //
 // EvaluateForValue calls the underlying EvaluateForValue.
 func (x *Envelope) EvaluateForValue(x_ float64) float64 {

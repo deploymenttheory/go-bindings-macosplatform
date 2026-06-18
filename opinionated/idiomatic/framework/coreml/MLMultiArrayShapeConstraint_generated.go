@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The lists of shapes or ranges of shapes that constrain a multiarray feature.
+//
 // MultiArrayShapeConstraint wraps [raw.MLMultiArrayShapeConstraint] with a fluent Go API.
 type MultiArrayShapeConstraint struct {
 	inner *raw.MLMultiArrayShapeConstraint

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A class that defines media formats and capture settings that capture devices support.
+//
 // CaptureDeviceFormat wraps [raw.AVCaptureDeviceFormat] with a fluent Go API.
 type CaptureDeviceFormat struct {
 	inner *raw.AVCaptureDeviceFormat

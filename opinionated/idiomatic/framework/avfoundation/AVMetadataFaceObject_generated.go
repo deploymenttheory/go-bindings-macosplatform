@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Face information detected by a metadata capture output.
+//
 // MetadataFaceObject wraps [raw.AVMetadataFaceObject] with a fluent Go API.
 type MetadataFaceObject struct {
 	inner *raw.AVMetadataFaceObject

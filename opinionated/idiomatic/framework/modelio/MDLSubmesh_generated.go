@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A container for index buffer data and material information to be used in rendering all or part of a 3D object.
+//
 // Submesh wraps [raw.MDLSubmesh] with a fluent Go API.
 type Submesh struct {
 	inner *raw.MDLSubmesh
@@ -31,7 +33,7 @@ func SubmeshFromID(id objc.ID) *Submesh {
 	return &Submesh{inner: raw.MDLSubmeshFromID(id)}
 }
 
-// @method initWithName:indexBuffer:indexCount:indexType:geometryType:material: @abstract Initialize submesh with all data necessary to make properties valid
+// Initializes a named submesh with an index buffer and the specified properties.
 //
 // NewSubmeshWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterial creates a new [Submesh].
 func NewSubmeshWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterial(name string, indexBuffer raw.MDLMeshBuffer, indexCount uint, indexType MDLIndexBitDepth, geometryType MDLGeometryType, material *raw.MDLMaterial) *Submesh {
@@ -40,7 +42,7 @@ func NewSubmeshWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterial(name s
 	return &Submesh{inner: raw.MDLSubmeshFromID(_id)}
 }
 
-// @method initWithIndexBuffer:indexCount:indexType:geometryType:material: @abstract Initialize submesh with all data necessary to make properties valid
+// Initializes a submesh with an index buffer and the specified properties.
 //
 // NewSubmeshWithIndexBufferIndexCountIndexTypeGeometryTypeMaterial creates a new [Submesh].
 func NewSubmeshWithIndexBufferIndexCountIndexTypeGeometryTypeMaterial(indexBuffer raw.MDLMeshBuffer, indexCount uint, indexType MDLIndexBitDepth, geometryType MDLGeometryType, material *raw.MDLMaterial) *Submesh {
@@ -49,7 +51,7 @@ func NewSubmeshWithIndexBufferIndexCountIndexTypeGeometryTypeMaterial(indexBuffe
 	return &Submesh{inner: raw.MDLSubmeshFromID(_id)}
 }
 
-// @method initWithIndexBuffer:indexCount:indexType:faceTopologyBuffer:geometryType:material: @abstract Initialize submesh with all data necessary to make properties valid @discussion The geometry type will typically be MDLGeometryTypeVariableTopology, if other types are used the faceTopologyBuffer contents should reflect that.
+// Initializes a named submesh with a specific topology.
 //
 // NewSubmeshWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterialTopology creates a new [Submesh].
 func NewSubmeshWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterialTopology(name string, indexBuffer raw.MDLMeshBuffer, indexCount uint, indexType MDLIndexBitDepth, geometryType MDLGeometryType, material *raw.MDLMaterial, topology *raw.MDLSubmeshTopology) *Submesh {
@@ -58,7 +60,7 @@ func NewSubmeshWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterialTopolog
 	return &Submesh{inner: raw.MDLSubmeshFromID(_id)}
 }
 
-// @method initWithMDLSubmesh:indexType:geometryType: @abstract Initialize submesh using another submesh as input. @discussion the resulting submesh will have a new index type if necessary. If a conversion from the source submesh's geometry type to the requested geometry type is possible, conversion will be performed. Otherwise nil will be returned.
+// Initializes a submesh by copying or converting another submesh.
 //
 // NewSubmeshWithMDLSubmeshIndexTypeGeometryType creates a new [Submesh].
 func NewSubmeshWithMDLSubmeshIndexTypeGeometryType(submesh *raw.MDLSubmesh, indexType MDLIndexBitDepth, geometryType MDLGeometryType) *Submesh {
@@ -67,7 +69,7 @@ func NewSubmeshWithMDLSubmeshIndexTypeGeometryType(submesh *raw.MDLSubmesh, inde
 	return &Submesh{inner: raw.MDLSubmeshFromID(_id)}
 }
 
-// @property material @abstract Material to apply when rendering this object
+// An object that describes the intended surface appearance of the submesh for rendering.
 //
 // WithMaterial sets the material property and returns the receiver for chaining.
 func (x *Submesh) WithMaterial(material *Material) *Submesh {
@@ -75,7 +77,7 @@ func (x *Submesh) WithMaterial(material *Material) *Submesh {
 	return x
 }
 
-// @property topology @abstract Topology data structure for use with MDLGeometryTypeVariableTopology @discussion ignored for geometry types other than MDLGeometryTypeVariableTopology. A submesh of type MDLGeometryTypeVariableTopology with no topology data is an empty submesh.
+// A description of how the non-uniform layout of the submesh’s index buffer defines the shape of the mesh.
 //
 // WithTopology sets the topology property and returns the receiver for chaining.
 func (x *Submesh) WithTopology(topology *SubmeshTopology) *Submesh {
@@ -83,7 +85,7 @@ func (x *Submesh) WithTopology(topology *SubmeshTopology) *Submesh {
 	return x
 }
 
-// @property name @abstract Identifying name for this object
+// A descriptive name for the submesh.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Submesh) WithName(name string) *Submesh {

@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// The infrastructure for drawing, printing, and handling events in an app.
+//
 // View wraps [raw.NSView] with a fluent Go API.
 type View struct {
 	inner *raw.NSView
@@ -35,6 +37,8 @@ func ViewFromID(id objc.ID) *View {
 	return &View{inner: raw.NSViewFromID(id)}
 }
 
+// Initializes and returns a newly allocated NSView object with a specified frame rectangle.
+//
 // NewViewWithFrame creates a new [View].
 func NewViewWithFrame(frameRect corefoundation.CGRect) *View {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSView")), objc.RegisterName("alloc"))
@@ -42,6 +46,8 @@ func NewViewWithFrame(frameRect corefoundation.CGRect) *View {
 	return &View{inner: raw.NSViewFromID(_id)}
 }
 
+// Initializes a view using from data in the specified coder object.
+//
 // NewViewWithCoder creates a new [View].
 func NewViewWithCoder(coder *foundation.NSCoder) *View {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSView")), objc.RegisterName("alloc"))
@@ -91,6 +97,8 @@ func (x *View) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) 
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *View) WithFrame(frame corefoundation.CGRect) *View {
 	x.inner.SetFrame(frame)
@@ -115,6 +123,8 @@ func (x *View) WithBoundsRotation(boundsRotation float64) *View {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *View) WithBounds(bounds corefoundation.CGRect) *View {
 	x.inner.SetBounds(bounds)
@@ -127,6 +137,8 @@ func (x *View) WithCanDrawConcurrently(canDrawConcurrently bool) *View {
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *View) WithNeedsDisplay(needsDisplay bool) *View {
 	x.inner.SetNeedsDisplay(needsDisplay)
@@ -313,7 +325,7 @@ func (x *View) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *View) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *View {
@@ -369,24 +381,32 @@ func (x *View) WithPressureConfiguration(pressureConfiguration *PressureConfigur
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *View) WithNextResponder(nextResponder ResponderProvider) *View {
 	x.inner.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *View) WithMenu(menu *Menu) *View {
 	x.inner.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *View) WithUserActivity(userActivity *foundation.NSUserActivity) *View {
 	x.inner.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *View) WithTouchBar(touchBar *TouchBar) *View {
 	x.inner.NSResponder.SetTouchBar(touchBar.Unwrap())
@@ -697,6 +717,8 @@ func (x *View) DisplayIfNeededInRectIgnoringOpacity(rect corefoundation.CGRect) 
 	x.inner.DisplayIfNeededInRectIgnoringOpacity(rect)
 }
 
+// Overridden by subclasses to draw the view’s image within the specified rectangle.
+//
 // DrawRect calls the underlying DrawRect.
 func (x *View) DrawRect(dirtyRect corefoundation.CGRect) {
 	x.inner.DrawRect(dirtyRect)
@@ -794,6 +816,8 @@ func (x *View) MakeBackingLayer() *quartzcore.CALayer {
 	return x.inner.MakeBackingLayer()
 }
 
+// Updates the view’s content by modifying its underlying layer.
+//
 // UpdateLayer calls the underlying UpdateLayer.
 func (x *View) UpdateLayer() {
 	x.inner.UpdateLayer()
@@ -809,6 +833,8 @@ func (x *View) Layout() {
 	x.inner.Layout()
 }
 
+// Overridden by subclasses to return a context-sensitive pop-up menu for a given mouse-down event.
+//
 // MenuForEvent calls the underlying MenuForEvent.
 func (x *View) MenuForEvent(event *raw.NSEvent) *Menu {
 	_r := x.inner.MenuForEvent(event)
@@ -867,6 +893,8 @@ func (x *View) RectForSmartMagnificationAtPointInRect(location corefoundation.CG
 	return x.inner.RectForSmartMagnificationAtPointInRect(location, visibleRect)
 }
 
+// Restores the view to an initial state so that it can be reused.
+//
 // PrepareForReuse calls the underlying PrepareForReuse.
 func (x *View) PrepareForReuse() {
 	x.inner.PrepareForReuse()

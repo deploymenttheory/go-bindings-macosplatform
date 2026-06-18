@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The object you use to manage data and provide items for a collection view.
+//
 // CollectionViewDiffableDataSource wraps [raw.NSCollectionViewDiffableDataSource] with a fluent Go API.
 type CollectionViewDiffableDataSource struct {
 	inner *raw.NSCollectionViewDiffableDataSource[objc.ID, objc.ID]

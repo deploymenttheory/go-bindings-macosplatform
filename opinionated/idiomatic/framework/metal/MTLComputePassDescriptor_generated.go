@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of how to dispatch execution of pass commands and GPU performance sampling.
+//
 // ComputePassDescriptor wraps [raw.MTLComputePassDescriptor] with a fluent Go API.
 type ComputePassDescriptor struct {
 	inner *raw.MTLComputePassDescriptor
@@ -35,7 +37,7 @@ func NewComputePassDescriptor() *ComputePassDescriptor {
 	return &ComputePassDescriptor{inner: raw.MTLComputePassDescriptorFromID(_id)}
 }
 
-// @property dispatchType @abstract The dispatch type of the compute command encoder.
+// The strategy for dispatching any compute commands encoded in the compute pass.
 //
 // WithDispatchType sets the dispatchType property and returns the receiver for chaining.
 func (x *ComputePassDescriptor) WithDispatchType(dispatchType MTLDispatchType) *ComputePassDescriptor {

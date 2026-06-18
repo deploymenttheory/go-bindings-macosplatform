@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that loops media content using a queue player.
+//
 // PlayerLooper wraps [raw.AVPlayerLooper] with a fluent Go API.
 type PlayerLooper struct {
 	inner *raw.AVPlayerLooper
@@ -32,7 +34,7 @@ func PlayerLooperFromID(id objc.ID) *PlayerLooper {
 	return &PlayerLooper{inner: raw.AVPlayerLooperFromID(id)}
 }
 
-// @method initWithPlayer:templateItem:timeRange: @abstract Initializes an instance of AVPlayerLooper to loop specified AVPlayerItem within specified time range with specified AVQueuePlayer. @param player Must not be nil @param itemToLoop Must not be nil @param loopRange Playback time range in [0, itemToLoop's duration]. kCMTimeRangeInvalid means [0, itemToLoop's duration]. @result An initialized AVPlayerLooper. @discussion Equivalent to -initWithPlayer:templateItem:timeRange:existingItemsOrdering: and passing AVPlayerLooperItemOrderingLoopingItemsPrecedeExistingItems as the beforeOrAfter parameter.
+// Creates a player looper that continuously plays the specified time range of a player item.
 //
 // NewPlayerLooperWithPlayerTemplateItemTimeRange creates a new [PlayerLooper].
 func NewPlayerLooperWithPlayerTemplateItemTimeRange(player *raw.AVQueuePlayer, itemToLoop *raw.AVPlayerItem, loopRange coremedia.CMTimeRange) *PlayerLooper {
@@ -41,7 +43,7 @@ func NewPlayerLooperWithPlayerTemplateItemTimeRange(player *raw.AVQueuePlayer, i
 	return &PlayerLooper{inner: raw.AVPlayerLooperFromID(_id)}
 }
 
-// @method initWithPlayer:templateItem:timeRange:existingItemsOrdering: @abstract Initializes an instance of AVPlayerLooper to loop specified AVPlayerItem within specified time range with specified AVQueuePlayer and adhering to specified ordering of existing items in the play queue. @param player Must not be nil @param itemToLoop Must not be nil @param loopRange Playback time range in [0, itemToLoop's duration]. kCMTimeRangeInvalid means [0, itemToLoop's duration]. @param itemOrdering Specifes if replica items are to be inserted before or after existing items in the specified AVQueuePlayer. @result An initialized AVPlayerLooper. @discussion The specified AVPlayerItem will be used as a template to generate at least 3 AVPlayerItem replicas and the replicas will be inserted into specified AVQueuePlayer's play queue to accomplish the looping playback. The specified AVPlayerItem should have its asset's duration property loaded beforehand so looping setup work would not be blocked until the duration value is known. Otherwise, AVPlayerLooper's status property is  AVPlayerLooperStatusUnknown until the duration property is loaded. The specified AVPlayerItem will not be used in the actual looping playback. Furthermore, AVPlayerItem replicas will be generated at initialization time so any changes made to the specified AVPlayerItem's property afterwards will not be reflected in the replicas used for looping playback. Specified CMTimeRange will limit each item loop iteration to playing within the specified time range. To play from beginning and the whole duration of the item, specify kCMTimeRangeInvalid for the range parameter. Time range will be accomplished by seeking to range start time and setting AVPlayerItem's forwardPlaybackEndTime property on the looping item replicas. Client should not modify AVQueuePlayer's play queue while AVPlayerLooper is performing the looping. AVPlayerLooper will insert the replica items in the specified AVQueuePlayer's play queue before or after existing equeued items according to the specified AVPlayerLooperItemOrdering. The looper will change the actionAtItemEnd to AVPlayerActionAtItemEndAdvance if required. AVQueuePlayer's play queue and actionAtItemEnd will be restored when -disableLooping method is called and then current looping item replicas completes playback or when AVPlayerLooper is destroyed. While AVPlayerLooper is being initialized, the specified AVQueuePlayer will be paused (rate of 0.0) if necessary and the original player rate will be restored after initialization completes. The client shall set the specified AVQueuePlayer's rate to 0 beforehand if additional set-up work needs to be performed after AVPlayerLooper initialization and before starting looping playback. An NSInvalidArgumentException will be raised if the player and template item are not specified or the template item has a 0 duration. An NSInvalidArgumentException will be raised if a valid time range has a duration of 0 or is not contained within time 0 and duration of the templateItem.
+// Creates a player looper that continuously plays the full duration of a player item while adhering to the specified ordering of existing items in the queue.
 //
 // NewPlayerLooperWithPlayerTemplateItemTimeRangeExistingItemsOrdering creates a new [PlayerLooper].
 func NewPlayerLooperWithPlayerTemplateItemTimeRangeExistingItemsOrdering(player *raw.AVQueuePlayer, itemToLoop *raw.AVPlayerItem, loopRange coremedia.CMTimeRange, itemOrdering AVPlayerLooperItemOrdering) *PlayerLooper {
@@ -50,7 +52,7 @@ func NewPlayerLooperWithPlayerTemplateItemTimeRangeExistingItemsOrdering(player 
 	return &PlayerLooper{inner: raw.AVPlayerLooperFromID(_id)}
 }
 
-// @method disableLooping @abstract Disables the item looping @discussion AVPlayerLooper will stop performing player queue operations for looping and let the current looping item replica play to the end. The player's original actionAtItemEnd property will be restored afterwards. After this method is called, the value of the receiver's status property will be AVPlayerLooperStatusCancelled.
+// Disables looping for the player queue.
 //
 // DisableLooping calls the underlying DisableLooping.
 func (x *PlayerLooper) DisableLooping() {

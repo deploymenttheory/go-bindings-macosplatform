@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The properties of a pass used as a ticket for the Suica transportation system.
+//
 // SuicaPassProperties wraps [raw.PKSuicaPassProperties] with a fluent Go API.
 type SuicaPassProperties struct {
 	inner *raw.PKSuicaPassProperties

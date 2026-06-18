@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An image processor that identifies notable features, such as faces and barcodes, in a still image or video.
+//
 // Detector wraps [raw.CIDetector] with a fluent Go API.
 type Detector struct {
 	inner *raw.CIDetector
@@ -36,14 +38,14 @@ func NewDetector() *Detector {
 	return &Detector{inner: raw.CIDetectorFromID(_id)}
 }
 
-// Returns an array of CIFeature instances in the given image. The array is sorted by confidence, highest confidence first.
+// Searches for features in an image.
 //
 // FeaturesInImage calls the underlying FeaturesInImage.
 func (x *Detector) FeaturesInImage(image *raw.CIImage) *foundation.NSArray[*raw.CIFeature] {
 	return x.inner.FeaturesInImage(image)
 }
 
-// Returns an array of CIFeature instances in the given image. The array is sorted by confidence, highest confidence first. The options dictionary can contain a CIDetectorImageOrientation key value.
+// Searches for features in an image based on the specified image orientation.
 //
 // FeaturesInImageOptions calls the underlying FeaturesInImageOptions.
 func (x *Detector) FeaturesInImageOptions(image *raw.CIImage, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.CIFeature] {

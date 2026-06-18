@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mechanism for generating requests to authenticate users with third-party providers.
+//
 // AuthorizationSingleSignOnProvider wraps [raw.ASAuthorizationSingleSignOnProvider] with a fluent Go API.
 type AuthorizationSingleSignOnProvider struct {
 	inner *raw.ASAuthorizationSingleSignOnProvider
@@ -38,6 +40,8 @@ func NewAuthorizationSingleSignOnProvider() *AuthorizationSingleSignOnProvider {
 	return &AuthorizationSingleSignOnProvider{inner: raw.ASAuthorizationSingleSignOnProviderFromID(_id)}
 }
 
+// Creates a single sign-on (SSO) authorization request.
+//
 // CreateRequest calls the underlying CreateRequest.
 func (x *AuthorizationSingleSignOnProvider) CreateRequest() *AuthorizationSingleSignOnRequest {
 	_r := x.inner.CreateRequest()

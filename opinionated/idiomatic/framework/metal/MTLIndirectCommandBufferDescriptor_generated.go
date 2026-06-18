@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration you create to customize an indirect command buffer.
+//
 // IndirectCommandBufferDescriptor wraps [raw.MTLIndirectCommandBufferDescriptor] with a fluent Go API.
 type IndirectCommandBufferDescriptor struct {
 	inner *raw.MTLIndirectCommandBufferDescriptor
@@ -37,7 +39,7 @@ func NewIndirectCommandBufferDescriptor() *IndirectCommandBufferDescriptor {
 	return &IndirectCommandBufferDescriptor{inner: raw.MTLIndirectCommandBufferDescriptorFromID(_id)}
 }
 
-// @abstract A bitfield of the command types that be encoded. @discussion MTLCommandTypeDispatch cannot be mixed with any other command type.
+// The set of command types that you can encode into the indirect command buffer.
 //
 // WithCommandTypes sets the commandTypes property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithCommandTypes(commandTypes MTLIndirectCommandType) *IndirectCommandBufferDescriptor {
@@ -45,7 +47,7 @@ func (x *IndirectCommandBufferDescriptor) WithCommandTypes(commandTypes MTLIndir
 	return x
 }
 
-// @abstract Whether the render or compute pipeline are inherited from the encoder
+// A Boolean value that determines where commands in the indirect command buffer get their pipeline state from when you execute them.
 //
 // WithInheritPipelineState sets the inheritPipelineState property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithInheritPipelineState(inheritPipelineState bool) *IndirectCommandBufferDescriptor {
@@ -53,7 +55,7 @@ func (x *IndirectCommandBufferDescriptor) WithInheritPipelineState(inheritPipeli
 	return x
 }
 
-// @abstract Whether the render or compute pipeline can set arguments.
+// A Boolean value that determines where commands in the indirect command buffer get their buffer arguments from when you execute them.
 //
 // WithInheritBuffers sets the inheritBuffers property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithInheritBuffers(inheritBuffers bool) *IndirectCommandBufferDescriptor {
@@ -61,7 +63,7 @@ func (x *IndirectCommandBufferDescriptor) WithInheritBuffers(inheritBuffers bool
 	return x
 }
 
-// Configures whether the indirect command buffer inherits the depth stencil state from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+// Configures whether the indirect command buffer inherits the depth stencil state from the encoder.
 //
 // WithInheritDepthStencilState sets the inheritDepthStencilState property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithInheritDepthStencilState(inheritDepthStencilState bool) *IndirectCommandBufferDescriptor {
@@ -69,7 +71,7 @@ func (x *IndirectCommandBufferDescriptor) WithInheritDepthStencilState(inheritDe
 	return x
 }
 
-// Configures whether the indirect command buffer inherits the depth bias from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+// Configures whether the indirect command buffer inherits the depth bias from the encoder.
 //
 // WithInheritDepthBias sets the inheritDepthBias property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithInheritDepthBias(inheritDepthBias bool) *IndirectCommandBufferDescriptor {
@@ -77,7 +79,7 @@ func (x *IndirectCommandBufferDescriptor) WithInheritDepthBias(inheritDepthBias 
 	return x
 }
 
-// Configures whether the indirect command buffer inherits the depth clip mode from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+// Configures whether the indirect command buffer inherits the depth clip mode from the encoder.
 //
 // WithInheritDepthClipMode sets the inheritDepthClipMode property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithInheritDepthClipMode(inheritDepthClipMode bool) *IndirectCommandBufferDescriptor {
@@ -85,7 +87,7 @@ func (x *IndirectCommandBufferDescriptor) WithInheritDepthClipMode(inheritDepthC
 	return x
 }
 
-// Configures whether the indirect command buffer inherits the cull mode from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+// Configures whether the indirect command buffer inherits the cull mode from the encoder.
 //
 // WithInheritCullMode sets the inheritCullMode property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithInheritCullMode(inheritCullMode bool) *IndirectCommandBufferDescriptor {
@@ -93,7 +95,7 @@ func (x *IndirectCommandBufferDescriptor) WithInheritCullMode(inheritCullMode bo
 	return x
 }
 
-// Configures whether the indirect command buffer inherits the front facing winding from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+// Configures whether the indirect command buffer inherits the front facing winding from the encoder.
 //
 // WithInheritFrontFacingWinding sets the inheritFrontFacingWinding property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithInheritFrontFacingWinding(inheritFrontFacingWinding bool) *IndirectCommandBufferDescriptor {
@@ -101,7 +103,7 @@ func (x *IndirectCommandBufferDescriptor) WithInheritFrontFacingWinding(inheritF
 	return x
 }
 
-// Configures whether the indirect command buffer inherits the triangle fill mode from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+// Configures whether the indirect command buffer inherits the triangle fill mode from the encoder.
 //
 // WithInheritTriangleFillMode sets the inheritTriangleFillMode property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithInheritTriangleFillMode(inheritTriangleFillMode bool) *IndirectCommandBufferDescriptor {
@@ -109,7 +111,7 @@ func (x *IndirectCommandBufferDescriptor) WithInheritTriangleFillMode(inheritTri
 	return x
 }
 
-// @abstract The maximum bind index of vertex argument buffers that can be set per command.
+// The maximum number of buffers that you can set per command for the vertex stage.
 //
 // WithMaxVertexBufferBindCount sets the maxVertexBufferBindCount property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithMaxVertexBufferBindCount(maxVertexBufferBindCount uint) *IndirectCommandBufferDescriptor {
@@ -117,7 +119,7 @@ func (x *IndirectCommandBufferDescriptor) WithMaxVertexBufferBindCount(maxVertex
 	return x
 }
 
-// @abstract The maximum bind index of fragment argument buffers that can be set per command.
+// The maximum number of buffers that you can set per command for the fragment stage.
 //
 // WithMaxFragmentBufferBindCount sets the maxFragmentBufferBindCount property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithMaxFragmentBufferBindCount(maxFragmentBufferBindCount uint) *IndirectCommandBufferDescriptor {
@@ -125,7 +127,7 @@ func (x *IndirectCommandBufferDescriptor) WithMaxFragmentBufferBindCount(maxFrag
 	return x
 }
 
-// @abstract The maximum bind index of kernel (or tile) argument buffers that can be set per command.
+// The maximum number of buffers that you can set per command for the compute kernel.
 //
 // WithMaxKernelBufferBindCount sets the maxKernelBufferBindCount property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithMaxKernelBufferBindCount(maxKernelBufferBindCount uint) *IndirectCommandBufferDescriptor {

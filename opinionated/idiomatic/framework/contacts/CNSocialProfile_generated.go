@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An immutable object that represents one of the user’s social profiles.
+//
 // SocialProfile wraps [raw.CNSocialProfile] with a fluent Go API.
 type SocialProfile struct {
 	inner *raw.CNSocialProfile
@@ -31,6 +33,8 @@ func SocialProfileFromID(id objc.ID) *SocialProfile {
 	return &SocialProfile{inner: raw.CNSocialProfileFromID(id)}
 }
 
+// Initializes a new social profile object with the specified URL.
+//
 // NewSocialProfileWithUrlStringUsernameUserIdentifierService creates a new [SocialProfile].
 func NewSocialProfileWithUrlStringUsernameUserIdentifierService(urlString string, username string, userIdentifier string, service string) *SocialProfile {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNSocialProfile")), objc.RegisterName("alloc"))

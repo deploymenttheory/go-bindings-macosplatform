@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A symbolic representation of a compute operation.
+//
 // GraphOperation wraps [raw.MPSGraphOperation] with a fluent Go API.
 type GraphOperation struct {
 	inner *raw.MPSGraphOperation

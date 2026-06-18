@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A container that shares audio parameters with a collection of sounds.
+//
 // Group wraps [raw.PHASEGroup] with a fluent Go API.
 type Group struct {
 	inner *raw.PHASEGroup
@@ -31,7 +33,7 @@ func GroupFromID(id objc.ID) *Group {
 	return &Group{inner: raw.PHASEGroupFromID(id)}
 }
 
-// @method initWithIdentifier: @abstract Create a new group. @param identifier The identifier that uniquely represents this group.
+// Creates a group with a unique name.
 //
 // NewGroupWithIdentifier creates a new [Group].
 func NewGroupWithIdentifier(identifier string) *Group {
@@ -40,7 +42,7 @@ func NewGroupWithIdentifier(identifier string) *Group {
 	return &Group{inner: raw.PHASEGroupFromID(_id)}
 }
 
-// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+// Modifies the volume of the group’s sounds.
 //
 // WithGain sets the gain property and returns the receiver for chaining.
 func (x *Group) WithGain(gain float64) *Group {
@@ -48,7 +50,7 @@ func (x *Group) WithGain(gain float64) *Group {
 	return x
 }
 
-// @property rate @abstract Linear rate scalar. @note Values are clamped to the range [0.25, 4]. Default value is 1.
+// The group’s playback speed.
 //
 // WithRate sets the rate property and returns the receiver for chaining.
 func (x *Group) WithRate(rate float64) *Group {
@@ -56,56 +58,56 @@ func (x *Group) WithRate(rate float64) *Group {
 	return x
 }
 
-// @method registerWithEngine @abstract Registers a group with a particular engine so that referenced assets can find it. @note An exception will be thrown if the engine is invalid or the group already exists. @param engine An engine object to associate this group with.
+// Adds the group to the engine’s dictionary.
 //
 // RegisterWithEngine calls the underlying RegisterWithEngine.
 func (x *Group) RegisterWithEngine(engine *raw.PHASEEngine) {
 	x.inner.RegisterWithEngine(engine)
 }
 
-// @method unregisterFromEngine @abstract Unregister the group from a particular engine.
+// Removes the group from the engine’s dictionary.
 //
 // UnregisterFromEngine calls the underlying UnregisterFromEngine.
 func (x *Group) UnregisterFromEngine() {
 	x.inner.UnregisterFromEngine()
 }
 
-// @method fadeGain:duration:curveType: @abstract Fade the gain of this group over a specified duration and curve. @note The fade gain is applied on top of the base gain of the group. @param gain A target linear gain scalar. Values are clamped to the range [0, 1]. @param duration The duration over which to ramp to the target linear gain scalar. Values must be >= 0. The duration is scaled by unitsPerSecond internally, so can be provided at the client's native time scale. @param curveType The type of curve function that is applied during the fade.
+// Adjusts the volume of the sounds in a group gradually.
 //
 // FadeGainDurationCurveType calls the underlying FadeGainDurationCurveType.
 func (x *Group) FadeGainDurationCurveType(gain float64, duration float64, curveType PHASECurveType) {
 	x.inner.FadeGainDurationCurveType(gain, duration, raw.PHASECurveType(curveType))
 }
 
-// @method fadeRate:duration:curveType: @abstract Fade the playback rate of this group over a specified duration and curve. @note The fade gain is applied on top of the base gain of the group. @param rate A target linear rate scalar. Values are clamped to the range [0.25, 4.0]. @param duration The duration over which to ramp to the target linear rate scalar. Values must be >= 0. The duration is scaled by unitsPerSecond internally, so can be provided at the client's native time scale. @param curveType The type of curve function that is applied during the fade.
+// Adjusts the playback speed of the sounds in a group gradually.
 //
 // FadeRateDurationCurveType calls the underlying FadeRateDurationCurveType.
 func (x *Group) FadeRateDurationCurveType(rate float64, duration float64, curveType PHASECurveType) {
 	x.inner.FadeRateDurationCurveType(rate, duration, raw.PHASECurveType(curveType))
 }
 
-// @method mute @abstract Mute the group.
+// Silences the group.
 //
 // Mute calls the underlying Mute.
 func (x *Group) Mute() {
 	x.inner.Mute()
 }
 
-// @method unmute @abstract Unmute the group.
+// Restores the group’s volume.
 //
 // Unmute calls the underlying Unmute.
 func (x *Group) Unmute() {
 	x.inner.Unmute()
 }
 
-// @method solo @abstract Solo the group.
+// Silences all other groups.
 //
 // Solo calls the underlying Solo.
 func (x *Group) Solo() {
 	x.inner.Solo()
 }
 
-// @method unsolo @abstract Unsolo the group.
+// Restores the other groups’ volume.
 //
 // Unsolo calls the underlying Unsolo.
 func (x *Group) Unsolo() {

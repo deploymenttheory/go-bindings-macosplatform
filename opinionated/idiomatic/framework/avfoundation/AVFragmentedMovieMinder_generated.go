@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that checks whether a fragmented movie appends additional movie fragments.
+//
 // FragmentedMovieMinder wraps [raw.AVFragmentedMovieMinder] with a fluent Go API.
 type FragmentedMovieMinder struct {
 	inner *raw.AVFragmentedMovieMinder
@@ -30,7 +32,7 @@ func FragmentedMovieMinderFromID(id objc.ID) *FragmentedMovieMinder {
 	return &FragmentedMovieMinder{inner: raw.AVFragmentedMovieMinderFromID(id)}
 }
 
-// @method			initWithMovie:mindingInterval: @abstract       Creates an AVFragmentedMovieMinder, adds the specified movie to it, and sets the mindingInterval to the specified value. @param			movie An instance of AVFragmentedMovie to add to the AVFragmentedMovieMinder @param			mindingInterval The initial minding interval of the AVFragmentedMovieMinder. @result			A new instance of AVFragmentedMovieMinder.
+// Creates a movie minder and adds a movie with a minding interval.
 //
 // NewFragmentedMovieMinderWithMovieMindingInterval creates a new [FragmentedMovieMinder].
 func NewFragmentedMovieMinderWithMovieMindingInterval(movie *raw.AVFragmentedMovie, mindingInterval float64) *FragmentedMovieMinder {
@@ -39,7 +41,7 @@ func NewFragmentedMovieMinderWithMovieMindingInterval(movie *raw.AVFragmentedMov
 	return &FragmentedMovieMinder{inner: raw.AVFragmentedMovieMinderFromID(_id)}
 }
 
-// An NSTimeInterval indicating how often a check for additional fragments should be performed. The default interval is 10.0. This property throws an excepion if a value is set less than one millisecond (0.001) in duration.
+// An interval that specifies when to perform a check for additional fragments.
 //
 // WithMindingInterval sets the mindingInterval property and returns the receiver for chaining.
 func (x *FragmentedMovieMinder) WithMindingInterval(mindingInterval float64) *FragmentedMovieMinder {
@@ -47,14 +49,14 @@ func (x *FragmentedMovieMinder) WithMindingInterval(mindingInterval float64) *Fr
 	return x
 }
 
-// @method			addFragmentedMovie: @abstract		Adds a fragmented movie to the array of movies being minded. @param			movie The fragmented movie to add to the minder.
+// Adds a fragmented movie to the array of movies being minded.
 //
 // AddFragmentedMovie calls the underlying AddFragmentedMovie.
 func (x *FragmentedMovieMinder) AddFragmentedMovie(movie *raw.AVFragmentedMovie) {
 	x.inner.AddFragmentedMovie(movie)
 }
 
-// @method			removeFragmentedMovie: @abstract		Removes a fragmented movie from the array of movies being minded. @param			movie The fragmented movie to remove from the minder.
+// Removes a fragmented movie from the array of movies being minded.
 //
 // RemoveFragmentedMovie calls the underlying RemoveFragmentedMovie.
 func (x *FragmentedMovieMinder) RemoveFragmentedMovie(movie *raw.AVFragmentedMovie) {

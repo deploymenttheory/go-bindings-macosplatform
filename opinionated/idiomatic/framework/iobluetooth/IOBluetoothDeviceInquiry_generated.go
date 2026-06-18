@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Object representing a device inquiry that finds Bluetooth devices in-range of the computer, and (optionally) retrieves name information for them.
+//
 // IOBluetoothDeviceInquiry wraps [raw.IOBluetoothDeviceInquiry] with a fluent Go API.
 type IOBluetoothDeviceInquiry struct {
 	inner *raw.IOBluetoothDeviceInquiry
@@ -30,6 +32,8 @@ func IOBluetoothDeviceInquiryFromID(id objc.ID) *IOBluetoothDeviceInquiry {
 	return &IOBluetoothDeviceInquiry{inner: raw.IOBluetoothDeviceInquiryFromID(id)}
 }
 
+// Initializes an alloc’d inquiry object, and sets the delegate object, as if -setDelegate: were called on it.
+//
 // NewIOBluetoothDeviceInquiryWithDelegate creates a new [IOBluetoothDeviceInquiry].
 func NewIOBluetoothDeviceInquiryWithDelegate(delegate objc.ID) *IOBluetoothDeviceInquiry {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothDeviceInquiry")), objc.RegisterName("alloc"))
@@ -43,44 +47,60 @@ func (x *IOBluetoothDeviceInquiry) WithDelegate(delegate objc.ID) *IOBluetoothDe
 	return x
 }
 
+// Set the length of the inquiry that is performed each time -start is used on an inquiry object.
+//
 // WithInquiryLength sets the inquiryLength property and returns the receiver for chaining.
 func (x *IOBluetoothDeviceInquiry) WithInquiryLength(inquiryLength uint8) *IOBluetoothDeviceInquiry {
 	x.inner.SetInquiryLength(inquiryLength)
 	return x
 }
 
+// Set the devices that are found.
+//
 // WithSearchType sets the searchType property and returns the receiver for chaining.
 func (x *IOBluetoothDeviceInquiry) WithSearchType(searchType uint) *IOBluetoothDeviceInquiry {
 	x.inner.SetSearchType(searchType)
 	return x
 }
 
+// Sets whether or not the inquiry object will retrieve the names of devices found during the search.
+//
 // WithUpdateNewDeviceNames sets the updateNewDeviceNames property and returns the receiver for chaining.
 func (x *IOBluetoothDeviceInquiry) WithUpdateNewDeviceNames(updateNewDeviceNames bool) *IOBluetoothDeviceInquiry {
 	x.inner.SetUpdateNewDeviceNames(updateNewDeviceNames)
 	return x
 }
 
+// Tells inquiry object to begin the inquiry and name updating process, if specified.
+//
 // Start calls the underlying Start.
 func (x *IOBluetoothDeviceInquiry) Start() int {
 	return x.inner.Start()
 }
 
+// Halts the inquiry object. Could either stop the search for new devices, or the updating of found device names.
+//
 // Stop calls the underlying Stop.
 func (x *IOBluetoothDeviceInquiry) Stop() int {
 	return x.inner.Stop()
 }
 
+// Returns found IOBluetoothDevice objects as an array.
+//
 // FoundDevices calls the underlying FoundDevices.
 func (x *IOBluetoothDeviceInquiry) FoundDevices() *foundation.NSArray[objc.ID] {
 	return x.inner.FoundDevices()
 }
 
+// Removes all found devices from the inquiry object.
+//
 // ClearFoundDevices calls the underlying ClearFoundDevices.
 func (x *IOBluetoothDeviceInquiry) ClearFoundDevices() {
 	x.inner.ClearFoundDevices()
 }
 
+// Use this method to set the criteria for the device search.
+//
 // SetSearchCriteriaMajorDeviceClassMinorDeviceClass calls the underlying SetSearchCriteriaMajorDeviceClassMinorDeviceClass.
 func (x *IOBluetoothDeviceInquiry) SetSearchCriteriaMajorDeviceClassMinorDeviceClass(inServiceClassMajor uint32, inMajorDeviceClass uint32, inMinorDeviceClass uint32) {
 	x.inner.SetSearchCriteriaMajorDeviceClassMinorDeviceClass(inServiceClassMajor, inMajorDeviceClass, inMinorDeviceClass)

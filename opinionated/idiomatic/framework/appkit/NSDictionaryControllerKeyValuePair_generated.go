@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A set of methods implemented by arranged objects to give access to information about those objects.
+//
 // DictionaryControllerKeyValuePair wraps [raw.NSDictionaryControllerKeyValuePair] with a fluent Go API.
 type DictionaryControllerKeyValuePair struct {
 	inner *raw.NSDictionaryControllerKeyValuePair

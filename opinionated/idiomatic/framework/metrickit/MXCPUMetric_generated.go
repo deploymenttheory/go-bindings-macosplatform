@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing metrics about the use of the CPU.
+//
 // CPUMetric wraps [raw.MXCPUMetric] with a fluent Go API.
 type CPUMetric struct {
 	inner *raw.MXCPUMetric

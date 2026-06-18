@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing metrics about the condition of the cellular network.
+//
 // CellularConditionMetric wraps [raw.MXCellularConditionMetric] with a fluent Go API.
 type CellularConditionMetric struct {
 	inner *raw.MXCellularConditionMetric

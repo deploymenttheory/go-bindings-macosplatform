@@ -8,12 +8,13 @@ import (
 	"fmt"
 )
 
+// The entities that can make a network request.
 type Nw_parameters_attribution_t int64
 
 const (
-	// @const nw_parameters_attribution_developer Developer chosen content.
+	// A developer-initiated network request.
 	Nw_parameters_attribution_developer Nw_parameters_attribution_t = 1
-	// @const nw_parameters_attribution_user User chosen content.
+	// The user explicitly directs the app to make a network request.
 	Nw_parameters_attribution_user Nw_parameters_attribution_t = 2
 )
 

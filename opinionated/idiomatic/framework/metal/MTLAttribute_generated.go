@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes an attribute defined in the stage-in argument for a shader.
+//
 // Attribute wraps [raw.MTLAttribute] with a fluent Go API.
 type Attribute struct {
 	inner *raw.MTLAttribute

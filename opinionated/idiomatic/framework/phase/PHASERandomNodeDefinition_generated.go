@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A sound event node that invokes one of its child nodes at random.
+//
 // RandomNodeDefinition wraps [raw.PHASERandomNodeDefinition] with a fluent Go API.
 type RandomNodeDefinition struct {
 	inner *raw.PHASERandomNodeDefinition
@@ -36,7 +38,7 @@ func NewRandomNodeDefinition() *RandomNodeDefinition {
 	return &RandomNodeDefinition{inner: raw.PHASERandomNodeDefinitionFromID(_id)}
 }
 
-// @method initWithIdentifier @abstract Create a random node definition @param identifier An optional custom identifier to give to this object @return A new PHASERandomNodeDefinition object
+// Creates a random node with the name you specify.
 //
 // NewRandomNodeDefinitionWithIdentifier creates a new [RandomNodeDefinition].
 func NewRandomNodeDefinitionWithIdentifier(identifier string) *RandomNodeDefinition {
@@ -45,7 +47,7 @@ func NewRandomNodeDefinitionWithIdentifier(identifier string) *RandomNodeDefinit
 	return &RandomNodeDefinition{inner: raw.PHASERandomNodeDefinitionFromID(_id)}
 }
 
-// @property uniqueSelectionQueueLength @abstract Subtrees will not be repeated until after this random node is activated uniqueSelectionQueueLength number of times.
+// The length of the unique selection queue.
 //
 // WithUniqueSelectionQueueLength sets the uniqueSelectionQueueLength property and returns the receiver for chaining.
 func (x *RandomNodeDefinition) WithUniqueSelectionQueueLength(uniqueSelectionQueueLength int) *RandomNodeDefinition {
@@ -53,7 +55,7 @@ func (x *RandomNodeDefinition) WithUniqueSelectionQueueLength(uniqueSelectionQue
 	return x
 }
 
-// @method addSubtree @abstract Add a subtree to a random node @param subtree A PHASESoundEventNodeDefinition that will be a child node of this random node @param weight The probability weight of this subtree.  Higher numbers compared to other subtree weights will increase the likelihood of being chosen. This value must be greater than or equal to 1, and is clamped otherwise.
+// Adds a node tree that’s one of the random-selection options.
 //
 // AddSubtreeWeight calls the underlying AddSubtreeWeight.
 func (x *RandomNodeDefinition) AddSubtreeWeight(subtree *raw.PHASESoundEventNodeDefinition, weight *foundation.NSNumber) {

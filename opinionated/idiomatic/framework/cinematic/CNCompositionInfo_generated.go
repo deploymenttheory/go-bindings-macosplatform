@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about composition tracks added to an AVComposition for a cinematic asset.
+// An object that enables you to add the appropriate number of tracks for a Cinematic asset.
 //
 // CompositionInfo wraps [raw.CNCompositionInfo] with a fluent Go API.
 type CompositionInfo struct {

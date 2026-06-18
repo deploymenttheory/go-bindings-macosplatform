@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A specification for configuring all attributes of a render task’s destination and issuing asynchronous render tasks.
+//
 // RenderDestination wraps [raw.CIRenderDestination] with a fluent Go API.
 type RenderDestination struct {
 	inner *raw.CIRenderDestination
@@ -32,6 +34,8 @@ func RenderDestinationFromID(id objc.ID) *RenderDestination {
 	return &RenderDestination{inner: raw.CIRenderDestinationFromID(id)}
 }
 
+// Creates a render destination based on a Core Video pixel buffer.
+//
 // NewRenderDestinationWithPixelBuffer creates a new [RenderDestination].
 func NewRenderDestinationWithPixelBuffer(pixelBuffer unsafe.Pointer) *RenderDestination {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIRenderDestination")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewRenderDestinationWithPixelBuffer(pixelBuffer unsafe.Pointer) *RenderDest
 	return &RenderDestination{inner: raw.CIRenderDestinationFromID(_id)}
 }
 
+// Creates a render destination based on an IOSurface object.
+//
 // NewRenderDestinationWithIOSurface creates a new [RenderDestination].
 func NewRenderDestinationWithIOSurface(surface unsafe.Pointer) *RenderDestination {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIRenderDestination")), objc.RegisterName("alloc"))
@@ -46,6 +52,8 @@ func NewRenderDestinationWithIOSurface(surface unsafe.Pointer) *RenderDestinatio
 	return &RenderDestination{inner: raw.CIRenderDestinationFromID(_id)}
 }
 
+// Creates a render destination based on a Metal texture.
+//
 // NewRenderDestinationWithMTLTextureCommandBuffer creates a new [RenderDestination].
 func NewRenderDestinationWithMTLTextureCommandBuffer(texture metal.MTLTexture, commandBuffer metal.MTLCommandBuffer) *RenderDestination {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIRenderDestination")), objc.RegisterName("alloc"))
@@ -53,6 +61,8 @@ func NewRenderDestinationWithMTLTextureCommandBuffer(texture metal.MTLTexture, c
 	return &RenderDestination{inner: raw.CIRenderDestinationFromID(_id)}
 }
 
+// Creates a render destination based on a Metal texture with specified pixel format.
+//
 // NewRenderDestinationWithWidthHeightPixelFormatCommandBufferMtlTextureProvider creates a new [RenderDestination].
 func NewRenderDestinationWithWidthHeightPixelFormatCommandBufferMtlTextureProvider(width uint, height uint, pixelFormat metal.MTLPixelFormat, commandBuffer metal.MTLCommandBuffer, block objc.Block) *RenderDestination {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIRenderDestination")), objc.RegisterName("alloc"))
@@ -60,6 +70,8 @@ func NewRenderDestinationWithWidthHeightPixelFormatCommandBufferMtlTextureProvid
 	return &RenderDestination{inner: raw.CIRenderDestinationFromID(_id)}
 }
 
+// Creates a render destination based on an OpenGL texture.
+//
 // NewRenderDestinationWithGLTextureTargetWidthHeight creates a new [RenderDestination].
 func NewRenderDestinationWithGLTextureTargetWidthHeight(texture uint, target uint, width uint, height uint) *RenderDestination {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIRenderDestination")), objc.RegisterName("alloc"))
@@ -67,6 +79,8 @@ func NewRenderDestinationWithGLTextureTargetWidthHeight(texture uint, target uin
 	return &RenderDestination{inner: raw.CIRenderDestinationFromID(_id)}
 }
 
+// Creates a render destination based on a client-managed buffer.
+//
 // NewRenderDestinationWithBitmapDataWidthHeightBytesPerRowFormat creates a new [RenderDestination].
 func NewRenderDestinationWithBitmapDataWidthHeightBytesPerRowFormat(data unsafe.Pointer, width uint, height uint, bytesPerRow uint, format int) *RenderDestination {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIRenderDestination")), objc.RegisterName("alloc"))
@@ -74,43 +88,55 @@ func NewRenderDestinationWithBitmapDataWidthHeightBytesPerRowFormat(data unsafe.
 	return &RenderDestination{inner: raw.CIRenderDestinationFromID(_id)}
 }
 
+// The render destination’s representation of alpha (transparency) values.
+//
 // WithAlphaMode sets the alphaMode property and returns the receiver for chaining.
 func (x *RenderDestination) WithAlphaMode(alphaMode CIRenderDestinationAlphaMode) *RenderDestination {
 	x.inner.SetAlphaMode(raw.CIRenderDestinationAlphaMode(alphaMode))
 	return x
 }
 
+// Indicator of whether the destination is flipped.
+//
 // WithFlipped sets the flipped property and returns the receiver for chaining.
 func (x *RenderDestination) WithFlipped(flipped bool) *RenderDestination {
 	x.inner.SetFlipped(flipped)
 	return x
 }
 
+// Indicator of whether or not the destination dithers.
+//
 // WithDithered sets the dithered property and returns the receiver for chaining.
 func (x *RenderDestination) WithDithered(dithered bool) *RenderDestination {
 	x.inner.SetDithered(dithered)
 	return x
 }
 
+// Indicator of whether or not the destination clamps.
+//
 // WithClamped sets the clamped property and returns the receiver for chaining.
 func (x *RenderDestination) WithClamped(clamped bool) *RenderDestination {
 	x.inner.SetClamped(clamped)
 	return x
 }
 
+// The destination’s blend kernel.
+//
 // WithBlendKernel sets the blendKernel property and returns the receiver for chaining.
 func (x *RenderDestination) WithBlendKernel(blendKernel *BlendKernel) *RenderDestination {
 	x.inner.SetBlendKernel(blendKernel.Unwrap())
 	return x
 }
 
+// Indicator of whether to blend in the destination’s color space.
+//
 // WithBlendsInDestinationColorSpace sets the blendsInDestinationColorSpace property and returns the receiver for chaining.
 func (x *RenderDestination) WithBlendsInDestinationColorSpace(blendsInDestinationColorSpace bool) *RenderDestination {
 	x.inner.SetBlendsInDestinationColorSpace(blendsInDestinationColorSpace)
 	return x
 }
 
-// Tell the next render using this destination to capture a Metal trace. If this property is set to a file-based URL, then the next render using this destination will capture a Metal trace, deleting any existing file if present. This property is nil by default.
+// Tell the next render using this destination to capture a Metal trace.
 //
 // WithCaptureTraceURL sets the captureTraceURL property and returns the receiver for chaining.
 func (x *RenderDestination) WithCaptureTraceURL(captureTraceURL string) *RenderDestination {

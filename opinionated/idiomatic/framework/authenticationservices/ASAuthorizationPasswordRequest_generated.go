@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An authorization request that uses credentials stored in the keychain.
+//
 // AuthorizationPasswordRequest wraps [raw.ASAuthorizationPasswordRequest] with a fluent Go API.
 type AuthorizationPasswordRequest struct {
 	inner *raw.ASAuthorizationPasswordRequest

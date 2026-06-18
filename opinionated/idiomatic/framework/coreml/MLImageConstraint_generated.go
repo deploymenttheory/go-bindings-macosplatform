@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The width, height, and pixel format constraints of an image feature.
+//
 // ImageConstraint wraps [raw.MLImageConstraint] with a fluent Go API.
 type ImageConstraint struct {
 	inner *raw.MLImageConstraint

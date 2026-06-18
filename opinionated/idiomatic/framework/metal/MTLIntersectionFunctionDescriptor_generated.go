@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of an intersection function that performs an intersection test.
+//
 // IntersectionFunctionDescriptor wraps [raw.MTLIntersectionFunctionDescriptor] with a fluent Go API.
 type IntersectionFunctionDescriptor struct {
 	inner *raw.MTLIntersectionFunctionDescriptor
@@ -38,7 +40,7 @@ func NewIntersectionFunctionDescriptor() *IntersectionFunctionDescriptor {
 	return &IntersectionFunctionDescriptor{inner: raw.MTLIntersectionFunctionDescriptorFromID(_id)}
 }
 
-// @property name @abstract The name of the `visible` function to find.
+// The name of the function to fetch from the library.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *IntersectionFunctionDescriptor) WithName(name string) *IntersectionFunctionDescriptor {
@@ -46,7 +48,7 @@ func (x *IntersectionFunctionDescriptor) WithName(name string) *IntersectionFunc
 	return x
 }
 
-// @property specializedName @abstract An optional new name for a `visible` function to allow reuse with different specializations.
+// A new name for the created function object.
 //
 // WithSpecializedName sets the specializedName property and returns the receiver for chaining.
 func (x *IntersectionFunctionDescriptor) WithSpecializedName(specializedName string) *IntersectionFunctionDescriptor {
@@ -54,7 +56,7 @@ func (x *IntersectionFunctionDescriptor) WithSpecializedName(specializedName str
 	return x
 }
 
-// @property constantValues @abstract The set of constant values assigned to the function constants. Compilation fails if you do not provide valid constant values for all required function constants.
+// The set of constant values assigned to the function constants.
 //
 // WithConstantValues sets the constantValues property and returns the receiver for chaining.
 func (x *IntersectionFunctionDescriptor) WithConstantValues(constantValues *FunctionConstantValues) *IntersectionFunctionDescriptor {
@@ -62,7 +64,7 @@ func (x *IntersectionFunctionDescriptor) WithConstantValues(constantValues *Func
 	return x
 }
 
-// @property options @abstract The options to use for this new `MTLFunction`.
+// Flags specifying how Metal should create the new function object.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *IntersectionFunctionDescriptor) WithOptions(options MTLFunctionOptions) *IntersectionFunctionDescriptor {

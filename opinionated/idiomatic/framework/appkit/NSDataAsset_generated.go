@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object from a data set type stored in an asset catalog.
+//
 // DataAsset wraps [raw.NSDataAsset] with a fluent Go API.
 type DataAsset struct {
 	inner *raw.NSDataAsset
@@ -31,7 +33,7 @@ func DataAssetFromID(id objc.ID) *DataAsset {
 	return &DataAsset{inner: raw.NSDataAssetFromID(id)}
 }
 
-// Equivalent to -initWithName:name bundle:[NSBundle mainBundle];
+// Initializes and returns an object with a reference to the named data asset in an asset catalog.
 //
 // NewDataAssetWithName creates a new [DataAsset].
 func NewDataAssetWithName(name *foundation.NSString) *DataAsset {
@@ -40,7 +42,7 @@ func NewDataAssetWithName(name *foundation.NSString) *DataAsset {
 	return &DataAsset{inner: raw.NSDataAssetFromID(_id)}
 }
 
-// Create a data asset with the given name from the given bundle. Returns nil if the asset was not found.
+// Initializes and returns an object with a reference to the named data asset that’s in an asset catalog in the specified bundle.
 //
 // NewDataAssetWithNameBundle creates a new [DataAsset].
 func NewDataAssetWithNameBundle(name *foundation.NSString, bundle *foundation.NSBundle) *DataAsset {

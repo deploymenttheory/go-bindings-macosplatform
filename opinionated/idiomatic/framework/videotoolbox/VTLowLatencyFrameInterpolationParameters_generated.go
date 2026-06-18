@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains both input and output parameters that the low-latency frame interpolation processor needs.
+//
 // LowLatencyFrameInterpolationParameters wraps [raw.VTLowLatencyFrameInterpolationParameters] with a fluent Go API.
 type LowLatencyFrameInterpolationParameters struct {
 	inner *raw.VTLowLatencyFrameInterpolationParameters
@@ -33,7 +35,7 @@ func LowLatencyFrameInterpolationParametersFromID(id objc.ID) *LowLatencyFrameIn
 	return &LowLatencyFrameInterpolationParameters{inner: raw.VTLowLatencyFrameInterpolationParametersFromID(id)}
 }
 
-// Creates a new low-latency frame interpolation parameters object. - Parameters: - sourceFrame: Current frame to use for interpolation; must be non `nil`. - previousFrame: Previous frame used for interpolation; must be non `nil`. - interpolationPhase: Array of float numbers that indicate interpolation phase locations at which the processor interpolates the frames. Must be greater than 0 and less than 1.0; for example 0.5 is midway between the previous frame and the source frame. If you enable spatial scaling, the only supported interpolation phase is 0.5. - destinationFrames: Caller-allocated array of `VTFrameProcessorFrame` to receive the interpolated frames. This must have the same number of elements as the the `interpolationPhase`. If you enable spatial scaling, it must also contain an element to hold the scaled version of sourceFrame.
+// Creates a new low-latency frame interpolation parameters object.
 //
 // NewLowLatencyFrameInterpolationParametersWithSourceFramePreviousFrameInterpolationPhaseDestinationFrames creates a new [LowLatencyFrameInterpolationParameters].
 func NewLowLatencyFrameInterpolationParametersWithSourceFramePreviousFrameInterpolationPhaseDestinationFrames(sourceFrame *raw.VTFrameProcessorFrame, previousFrame *raw.VTFrameProcessorFrame, interpolationPhase *foundation.NSArray[*foundation.NSNumber], destinationFrames *foundation.NSArray[*raw.VTFrameProcessorFrame]) *LowLatencyFrameInterpolationParameters {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that specifies the start and end dates for a range of time.
+//
 // DateComponentsRange wraps [raw.PKDateComponentsRange] with a fluent Go API.
 type DateComponentsRange struct {
 	inner *raw.PKDateComponentsRange
@@ -30,6 +32,8 @@ func DateComponentsRangeFromID(id objc.ID) *DateComponentsRange {
 	return &DateComponentsRange{inner: raw.PKDateComponentsRangeFromID(id)}
 }
 
+// Creates a new time range with the start and end dates and times that you specify.
+//
 // NewDateComponentsRangeWithStartDateComponentsEndDateComponents creates a new [DateComponentsRange].
 func NewDateComponentsRangeWithStartDateComponentsEndDateComponents(startDateComponents *foundation.NSDateComponents, endDateComponents *foundation.NSDateComponents) *DateComponentsRange {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKDateComponentsRange")), objc.RegisterName("alloc"))

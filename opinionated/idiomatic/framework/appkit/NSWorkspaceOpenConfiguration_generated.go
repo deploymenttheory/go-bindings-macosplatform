@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The configuration options for opening URLs or launching apps.
+//
 // WorkspaceOpenConfiguration wraps [raw.NSWorkspaceOpenConfiguration] with a fluent Go API.
 type WorkspaceOpenConfiguration struct {
 	inner *raw.NSWorkspaceOpenConfiguration

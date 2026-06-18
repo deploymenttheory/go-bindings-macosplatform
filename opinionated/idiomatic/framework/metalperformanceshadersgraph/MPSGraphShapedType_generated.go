@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// The shaped type class for types on tensors with a shape and data type.
+//
 // GraphShapedType wraps [raw.MPSGraphShapedType] with a fluent Go API.
 type GraphShapedType struct {
 	inner *raw.MPSGraphShapedType
@@ -31,7 +33,7 @@ func GraphShapedTypeFromID(id objc.ID) *GraphShapedType {
 	return &GraphShapedType{inner: raw.MPSGraphShapedTypeFromID(id)}
 }
 
-// Initializes a shaped type. - Parameters: - shape: The shape of the shaped type. - dataType: The dataType of the shaped type. - Returns: A valid MPSGraphShapedType, or nil if allocation failure.
+// Initializes a shaped type.
 //
 // NewGraphShapedTypeWithShapeDataType creates a new [GraphShapedType].
 func NewGraphShapedTypeWithShapeDataType(shape unsafe.Pointer, dataType mpscore.MPSDataType) *GraphShapedType {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract superclass for objects that provide input data to a capture session.
+//
 // CaptureInput wraps [raw.AVCaptureInput] with a fluent Go API.
 type CaptureInput struct {
 	inner *raw.AVCaptureInput

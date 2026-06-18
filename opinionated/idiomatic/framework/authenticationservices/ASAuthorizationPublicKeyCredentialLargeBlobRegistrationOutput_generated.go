@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The result of the large binary object support check, resulting from a passkey registration response.
+//
 // AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput wraps [raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput] with a fluent Go API.
 type AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput struct {
 	inner *raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput

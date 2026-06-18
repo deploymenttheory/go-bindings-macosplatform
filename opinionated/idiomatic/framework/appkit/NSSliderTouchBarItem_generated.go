@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A bar item that provides a slider control for choosing a value in a range.
+//
 // SliderTouchBarItem wraps [raw.NSSliderTouchBarItem] with a fluent Go API.
 type SliderTouchBarItem struct {
 	inner *raw.NSSliderTouchBarItem
@@ -37,7 +39,7 @@ func NewSliderTouchBarItem() *SliderTouchBarItem {
 	return &SliderTouchBarItem{inner: raw.NSSliderTouchBarItemFromID(_id)}
 }
 
-// The slider displayed by the bar item. It is automatically created, but can be set to a custom subclass. doubleValue, minValue, maxValue, etc can all be read and set through the slider.
+// The slider displayed by the bar item.
 //
 // WithSlider sets the slider property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithSlider(slider *Slider) *SliderTouchBarItem {
@@ -45,7 +47,7 @@ func (x *SliderTouchBarItem) WithSlider(slider *Slider) *SliderTouchBarItem {
 	return x
 }
 
-// The double value of the control
+// The double value of the slider.
 //
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithDoubleValue(doubleValue float64) *SliderTouchBarItem {
@@ -53,7 +55,7 @@ func (x *SliderTouchBarItem) WithDoubleValue(doubleValue float64) *SliderTouchBa
 	return x
 }
 
-// The width boundaries of the slider track of this item. The system defines the default minimum. The maximum defaults to MAXFLOAT
+// The minimum width of the slider’s track.
 //
 // WithMinimumSliderWidth sets the minimumSliderWidth property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithMinimumSliderWidth(minimumSliderWidth float64) *SliderTouchBarItem {
@@ -61,13 +63,15 @@ func (x *SliderTouchBarItem) WithMinimumSliderWidth(minimumSliderWidth float64) 
 	return x
 }
 
+// The maximum width of the slider’s track.
+//
 // WithMaximumSliderWidth sets the maximumSliderWidth property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithMaximumSliderWidth(maximumSliderWidth float64) *SliderTouchBarItem {
 	x.inner.SetMaximumSliderWidth(maximumSliderWidth)
 	return x
 }
 
-// The text label displayed along with the slider. If set to nil, the label will not have space reserved in the item.
+// The text displayed alongside the slider.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithLabel(label string) *SliderTouchBarItem {
@@ -75,7 +79,7 @@ func (x *SliderTouchBarItem) WithLabel(label string) *SliderTouchBarItem {
 	return x
 }
 
-// The accessory that appears on the end of the slider with the minimum value
+// The accessory that appears at the end of the slider with the minimum value.
 //
 // WithMinimumValueAccessory sets the minimumValueAccessory property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithMinimumValueAccessory(minimumValueAccessory *SliderAccessory) *SliderTouchBarItem {
@@ -83,7 +87,7 @@ func (x *SliderTouchBarItem) WithMinimumValueAccessory(minimumValueAccessory *Sl
 	return x
 }
 
-// The accessory that appears on the end of the slider with the maximum value
+// The accessory that appears at the end of the slider with the maximum value.
 //
 // WithMaximumValueAccessory sets the maximumValueAccessory property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithMaximumValueAccessory(maximumValueAccessory *SliderAccessory) *SliderTouchBarItem {
@@ -91,7 +95,7 @@ func (x *SliderTouchBarItem) WithMaximumValueAccessory(maximumValueAccessory *Sl
 	return x
 }
 
-// The width of the value accessories. Defaults to `.default`, but can be set to `.wide` or a custom value.
+// The width of the value accessories that appear at either end of the slider.
 //
 // WithValueAccessoryWidth sets the valueAccessoryWidth property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithValueAccessoryWidth(valueAccessoryWidth float64) *SliderTouchBarItem {
@@ -99,7 +103,7 @@ func (x *SliderTouchBarItem) WithValueAccessoryWidth(valueAccessoryWidth float64
 	return x
 }
 
-// The target of the item, notified when the slider or accessories receive user interaction.
+// An object that is notified when a user interacts with the slider or either of the accessories.
 //
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithTarget(target objc.ID) *SliderTouchBarItem {
@@ -107,7 +111,7 @@ func (x *SliderTouchBarItem) WithTarget(target objc.ID) *SliderTouchBarItem {
 	return x
 }
 
-// The action of the item, called when the slider or accessories receive user interaction.
+// The selector on the target object that is invoked when a user interacts with the slider or either of the accessories.
 //
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithAction(action objc.SEL) *SliderTouchBarItem {
@@ -115,7 +119,7 @@ func (x *SliderTouchBarItem) WithAction(action objc.SEL) *SliderTouchBarItem {
 	return x
 }
 
-// The localized string labeling this item during user customization. The default value is empty string.
+// The user-visible string identifying this item during bar customization.
 //
 // WithCustomizationLabel sets the customizationLabel property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithCustomizationLabel(customizationLabel string) *SliderTouchBarItem {
@@ -123,6 +127,8 @@ func (x *SliderTouchBarItem) WithCustomizationLabel(customizationLabel string) *
 	return x
 }
 
+// Determines which items are shown in a bar when space is limited.
+//
 // WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *SliderTouchBarItem {
 	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An NSImageCell object displays a single image (encapsulated in an NSImage object) in a frame. This class provides methods for choosing the frame and for aligning and scaling the image to fit the frame.
+//
 // ImageCell wraps [raw.NSImageCell] with a fluent Go API.
 type ImageCell struct {
 	inner *raw.NSImageCell
@@ -36,288 +38,384 @@ func NewImageCell() *ImageCell {
 	return &ImageCell{inner: raw.NSImageCellFromID(_id)}
 }
 
+// The alignment of the receiver’s image relative to its frame.
+//
 // WithImageAlignment sets the imageAlignment property and returns the receiver for chaining.
 func (x *ImageCell) WithImageAlignment(imageAlignment NSImageAlignment) *ImageCell {
 	x.inner.SetImageAlignment(raw.NSImageAlignment(imageAlignment))
 	return x
 }
 
+// The scaling mode used to fit the receiver’s image into the frame.
+//
 // WithImageScaling sets the imageScaling property and returns the receiver for chaining.
 func (x *ImageCell) WithImageScaling(imageScaling NSImageScaling) *ImageCell {
 	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
 	return x
 }
 
+// The style of the frame that borders the image.
+//
 // WithImageFrameStyle sets the imageFrameStyle property and returns the receiver for chaining.
 func (x *ImageCell) WithImageFrameStyle(imageFrameStyle NSImageFrameStyle) *ImageCell {
 	x.inner.SetImageFrameStyle(raw.NSImageFrameStyle(imageFrameStyle))
 	return x
 }
 
+// The view associated with the cell.
+//
 // WithControlView sets the controlView property and returns the receiver for chaining.
 func (x *ImageCell) WithControlView(controlView ViewProvider) *ImageCell {
 	x.inner.NSCell.SetControlView(controlView.asView())
 	return x
 }
 
+// The type of the cell.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *ImageCell) WithType(type_ NSCellType) *ImageCell {
 	x.inner.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
+// The cell’s current state.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *ImageCell) WithState(state int) *ImageCell {
 	x.inner.NSCell.SetState(state)
 	return x
 }
 
+// The object that receives the cell’s action messages.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *ImageCell) WithTarget(target objc.ID) *ImageCell {
 	x.inner.NSCell.SetTarget(target)
 	return x
 }
 
+// The action performed by the cell.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *ImageCell) WithAction(action objc.SEL) *ImageCell {
 	x.inner.NSCell.SetAction(action)
 	return x
 }
 
+// A tag for identifying the cell.
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *ImageCell) WithTag(tag int) *ImageCell {
 	x.inner.NSCell.SetTag(tag)
 	return x
 }
 
+// The cell’s title text.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *ImageCell) WithTitle(title string) *ImageCell {
 	x.inner.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// A Boolean value indicating whether the cell is currently enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *ImageCell) WithEnabled(enabled bool) *ImageCell {
 	x.inner.NSCell.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *ImageCell) WithContinuous(continuous bool) *ImageCell {
 	x.inner.NSCell.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value indicating whether the cell is editable.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *ImageCell) WithEditable(editable bool) *ImageCell {
 	x.inner.NSCell.SetEditable(editable)
 	return x
 }
 
+// A Boolean value indicating whether the cell’s text can be selected.
+//
 // WithSelectable sets the selectable property and returns the receiver for chaining.
 func (x *ImageCell) WithSelectable(selectable bool) *ImageCell {
 	x.inner.NSCell.SetSelectable(selectable)
 	return x
 }
 
+// A Boolean value indicating whether the cell draws itself outlined with a plain border.
+//
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *ImageCell) WithBordered(bordered bool) *ImageCell {
 	x.inner.NSCell.SetBordered(bordered)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a bezeled border.
+//
 // WithBezeled sets the bezeled property and returns the receiver for chaining.
 func (x *ImageCell) WithBezeled(bezeled bool) *ImageCell {
 	x.inner.NSCell.SetBezeled(bezeled)
 	return x
 }
 
+// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
+//
 // WithScrollable sets the scrollable property and returns the receiver for chaining.
 func (x *ImageCell) WithScrollable(scrollable bool) *ImageCell {
 	x.inner.NSCell.SetScrollable(scrollable)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a highlighted appearance.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *ImageCell) WithHighlighted(highlighted bool) *ImageCell {
 	x.inner.NSCell.SetHighlighted(highlighted)
 	return x
 }
 
+// The alignment of the cell’s text.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *ImageCell) WithAlignment(alignment NSTextAlignment) *ImageCell {
 	x.inner.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+//
 // WithWraps sets the wraps property and returns the receiver for chaining.
 func (x *ImageCell) WithWraps(wraps bool) *ImageCell {
 	x.inner.NSCell.SetWraps(wraps)
 	return x
 }
 
+// The font that the cell uses to display text.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *ImageCell) WithFont(font *Font) *ImageCell {
 	x.inner.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
+// The cell’s formatter object.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *ImageCell) WithFormatter(formatter *foundation.NSFormatter) *ImageCell {
 	x.inner.NSCell.SetFormatter(formatter)
 	return x
 }
 
+// The cell’s value as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *ImageCell) WithObjectValue(objectValue objc.ID) *ImageCell {
 	x.inner.NSCell.SetObjectValue(objectValue)
 	return x
 }
 
+// The cell’s value as a string.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *ImageCell) WithStringValue(stringValue string) *ImageCell {
 	x.inner.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The cell’s value as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *ImageCell) WithIntValue(intValue int) *ImageCell {
 	x.inner.NSCell.SetIntValue(intValue)
 	return x
 }
 
+// The cell’s value as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *ImageCell) WithFloatValue(floatValue float32) *ImageCell {
 	x.inner.NSCell.SetFloatValue(floatValue)
 	return x
 }
 
+// The cell’s value as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *ImageCell) WithDoubleValue(doubleValue float64) *ImageCell {
 	x.inner.NSCell.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The cell’s value as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *ImageCell) WithIntegerValue(integerValue int) *ImageCell {
 	x.inner.NSCell.SetIntegerValue(integerValue)
 	return x
 }
 
+// The image displayed by the cell, if any.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *ImageCell) WithImage(image *Image) *ImageCell {
 	x.inner.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
+// The size of the cell.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *ImageCell) WithControlSize(controlSize NSControlSize) *ImageCell {
 	x.inner.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The object represented by the cell.
+//
 // WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
 func (x *ImageCell) WithRepresentedObject(representedObject objc.ID) *ImageCell {
 	x.inner.NSCell.SetRepresentedObject(representedObject)
 	return x
 }
 
+// The cell’s contextual menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *ImageCell) WithMenu(menu *Menu) *ImageCell {
 	x.inner.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
+// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+//
 // WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
 func (x *ImageCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ImageCell {
 	x.inner.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *ImageCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ImageCell {
 	x.inner.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// The line break mode to use when drawing text in the cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *ImageCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *ImageCell {
 	x.inner.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// A Boolean value indicating whether the cell assumes responsibility for undo operations.
+//
 // WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
 func (x *ImageCell) WithAllowsUndo(allowsUndo bool) *ImageCell {
 	x.inner.NSCell.SetAllowsUndo(allowsUndo)
 	return x
 }
 
+// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+//
 // WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
 func (x *ImageCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ImageCell {
 	x.inner.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
 	return x
 }
 
+// The layout direction of the user interface.
+//
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
 func (x *ImageCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ImageCell {
 	x.inner.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
+// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *ImageCell) WithUsesSingleLineMode(usesSingleLineMode bool) *ImageCell {
 	x.inner.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// A Boolean value indicating whether the cell refuses the first responder status.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *ImageCell) WithRefusesFirstResponder(refusesFirstResponder bool) *ImageCell {
 	x.inner.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+//
 // WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
 func (x *ImageCell) WithShowsFirstResponder(showsFirstResponder bool) *ImageCell {
 	x.inner.NSCell.SetShowsFirstResponder(showsFirstResponder)
 	return x
 }
 
+// The type of focus ring to use with the associated view.
+//
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
 func (x *ImageCell) WithFocusRingType(focusRingType NSFocusRingType) *ImageCell {
 	x.inner.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
+// The cell’s value as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *ImageCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ImageCell {
 	x.inner.NSCell.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+//
 // WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
 func (x *ImageCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ImageCell {
 	x.inner.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports the importation of images into its text.
+//
 // WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
 func (x *ImageCell) WithImportsGraphics(importsGraphics bool) *ImageCell {
 	x.inner.NSCell.SetImportsGraphics(importsGraphics)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports three states instead of two.
+//
 // WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
 func (x *ImageCell) WithAllowsMixedState(allowsMixedState bool) *ImageCell {
 	x.inner.NSCell.SetAllowsMixedState(allowsMixedState)
 	return x
 }
 
+// The cell’s background style.
+//
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
 func (x *ImageCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *ImageCell {
 	x.inner.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
+// The cell’s control tint.
+//
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
 func (x *ImageCell) WithControlTint(controlTint NSControlTint) *ImageCell {
 	x.inner.NSCell.SetControlTint(raw.NSControlTint(controlTint))

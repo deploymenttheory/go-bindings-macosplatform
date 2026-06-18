@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A stylized rectangular box with an optional title.
+//
 // Box wraps [raw.NSBox] with a fluent Go API.
 type Box struct {
 	inner *raw.NSBox
@@ -41,72 +43,96 @@ func NewBox() *Box {
 	return &Box{inner: raw.NSBoxFromID(_id)}
 }
 
+// The receiver’s box type.
+//
 // WithBoxType sets the boxType property and returns the receiver for chaining.
 func (x *Box) WithBoxType(boxType NSBoxType) *Box {
 	x.inner.SetBoxType(raw.NSBoxType(boxType))
 	return x
 }
 
+// A constant representing the title position.
+//
 // WithTitlePosition sets the titlePosition property and returns the receiver for chaining.
 func (x *Box) WithTitlePosition(titlePosition NSTitlePosition) *Box {
 	x.inner.SetTitlePosition(raw.NSTitlePosition(titlePosition))
 	return x
 }
 
+// The receiver’s title.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *Box) WithTitle(title string) *Box {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The font object used to draw the receiver’s title.
+//
 // WithTitleFont sets the titleFont property and returns the receiver for chaining.
 func (x *Box) WithTitleFont(titleFont *Font) *Box {
 	x.inner.SetTitleFont(titleFont.Unwrap())
 	return x
 }
 
+// The distances between the border and the content view.
+//
 // WithContentViewMargins sets the contentViewMargins property and returns the receiver for chaining.
 func (x *Box) WithContentViewMargins(contentViewMargins corefoundation.CGSize) *Box {
 	x.inner.SetContentViewMargins(contentViewMargins)
 	return x
 }
 
+// The receiver’s content view.
+//
 // WithContentView sets the contentView property and returns the receiver for chaining.
 func (x *Box) WithContentView(contentView ViewProvider) *Box {
 	x.inner.SetContentView(contentView.asView())
 	return x
 }
 
+// A Boolean value that indicates whether the receiver is transparent.
+//
 // WithTransparent sets the transparent property and returns the receiver for chaining.
 func (x *Box) WithTransparent(transparent bool) *Box {
 	x.inner.SetTransparent(transparent)
 	return x
 }
 
+// The width of the receiver’s border when the receiver is a custom box with a simple line border.
+//
 // WithBorderWidth sets the borderWidth property and returns the receiver for chaining.
 func (x *Box) WithBorderWidth(borderWidth float64) *Box {
 	x.inner.SetBorderWidth(borderWidth)
 	return x
 }
 
+// The radius of the receiver’s corners when the receiver is a custom box with a simple line border.
+//
 // WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
 func (x *Box) WithCornerRadius(cornerRadius float64) *Box {
 	x.inner.SetCornerRadius(cornerRadius)
 	return x
 }
 
+// The color of the receiver’s border when the receiver is a custom box with a simple line border.
+//
 // WithBorderColor sets the borderColor property and returns the receiver for chaining.
 func (x *Box) WithBorderColor(borderColor *Color) *Box {
 	x.inner.SetBorderColor(borderColor.Unwrap())
 	return x
 }
 
+// The color of the receiver’s background when the receiver is a custom box with a simple line border.
+//
 // WithFillColor sets the fillColor property and returns the receiver for chaining.
 func (x *Box) WithFillColor(fillColor *Color) *Box {
 	x.inner.SetFillColor(fillColor.Unwrap())
 	return x
 }
 
+// The receiver’s border type.
+//
 // WithBorderType sets the borderType property and returns the receiver for chaining.
 func (x *Box) WithBorderType(borderType NSBorderType) *Box {
 	x.inner.SetBorderType(raw.NSBorderType(borderType))
@@ -155,6 +181,8 @@ func (x *Box) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *Box) WithFrame(frame corefoundation.CGRect) *Box {
 	x.inner.NSView.SetFrame(frame)
@@ -179,6 +207,8 @@ func (x *Box) WithBoundsRotation(boundsRotation float64) *Box {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *Box) WithBounds(bounds corefoundation.CGRect) *Box {
 	x.inner.NSView.SetBounds(bounds)
@@ -191,6 +221,8 @@ func (x *Box) WithCanDrawConcurrently(canDrawConcurrently bool) *Box {
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *Box) WithNeedsDisplay(needsDisplay bool) *Box {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -377,7 +409,7 @@ func (x *Box) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.N
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *Box) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Box {
@@ -433,35 +465,47 @@ func (x *Box) WithPressureConfiguration(pressureConfiguration *PressureConfigura
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *Box) WithNextResponder(nextResponder ResponderProvider) *Box {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *Box) WithMenu(menu *Menu) *Box {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *Box) WithUserActivity(userActivity *foundation.NSUserActivity) *Box {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *Box) WithTouchBar(touchBar *TouchBar) *Box {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Resizes and moves the receiver’s content view so it just encloses its subviews.
+//
 // SizeToFit calls the underlying SizeToFit.
 func (x *Box) SizeToFit() {
 	x.inner.SizeToFit()
 }
 
+// Places the receiver so its content view lies on the specified frame.
+//
 // SetFrameFromContentFrame calls the underlying SetFrameFromContentFrame.
 func (x *Box) SetFrameFromContentFrame(contentFrame corefoundation.CGRect) {
 	x.inner.SetFrameFromContentFrame(contentFrame)
@@ -612,6 +656,8 @@ func (x *Box) SetFillColor(fillColor *raw.NSColor) {
 	x.inner.SetFillColor(fillColor)
 }
 
+// Sets the title of the receiver with a character denoted as an access key.
+//
 // SetTitleWithMnemonic calls the underlying SetTitleWithMnemonic.
 func (x *Box) SetTitleWithMnemonic(stringWithAmpersand string) {
 	x.inner.SetTitleWithMnemonic(foundation.NSStringStringWithUTF8String(stringWithAmpersand))

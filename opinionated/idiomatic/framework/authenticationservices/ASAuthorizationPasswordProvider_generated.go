@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mechanism for generating requests to perform keychain credential sharing.
+//
 // AuthorizationPasswordProvider wraps [raw.ASAuthorizationPasswordProvider] with a fluent Go API.
 type AuthorizationPasswordProvider struct {
 	inner *raw.ASAuthorizationPasswordProvider
@@ -35,6 +37,8 @@ func NewAuthorizationPasswordProvider() *AuthorizationPasswordProvider {
 	return &AuthorizationPasswordProvider{inner: raw.ASAuthorizationPasswordProviderFromID(_id)}
 }
 
+// Creates a new password authorization request.
+//
 // CreateRequest calls the underlying CreateRequest.
 func (x *AuthorizationPasswordProvider) CreateRequest() *AuthorizationPasswordRequest {
 	_r := x.inner.CreateRequest()

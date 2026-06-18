@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that can render an image from a Core Image object.
+//
 // CIImageRep wraps [raw.NSCIImageRep] with a fluent Go API.
 type CIImageRep struct {
 	inner *raw.NSCIImageRep
@@ -32,6 +34,8 @@ func CIImageRepFromID(id objc.ID) *CIImageRep {
 	return &CIImageRep{inner: raw.NSCIImageRepFromID(id)}
 }
 
+// Returns a representation of an image initialized to the specified Core Image instance.
+//
 // NewCIImageRepWithCIImage creates a new [CIImageRep].
 func NewCIImageRepWithCIImage(image *coreimage.CIImage) *CIImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCIImageRep")), objc.RegisterName("alloc"))
@@ -39,48 +43,64 @@ func NewCIImageRepWithCIImage(image *coreimage.CIImage) *CIImageRep {
 	return &CIImageRep{inner: raw.NSCIImageRepFromID(_id)}
 }
 
+// The size of the image representation, measured in points in the user coordinate space.
+//
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *CIImageRep) WithSize(size corefoundation.CGSize) *CIImageRep {
 	x.inner.NSImageRep.SetSize(size)
 	return x
 }
 
+// A Boolean value that indicates whether the image data has an alpha channel.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *CIImageRep) WithAlpha(alpha bool) *CIImageRep {
 	x.inner.NSImageRep.SetAlpha(alpha)
 	return x
 }
 
+// A Boolean value that indicates whether the image is opaque.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *CIImageRep) WithOpaque(opaque bool) *CIImageRep {
 	x.inner.NSImageRep.SetOpaque(opaque)
 	return x
 }
 
+// The name of the color space used by the image data.
+//
 // WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
 func (x *CIImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *CIImageRep {
 	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
 	return x
 }
 
+// The number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
+//
 // WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
 func (x *CIImageRep) WithBitsPerSample(bitsPerSample int) *CIImageRep {
 	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
 	return x
 }
 
+// The width of the image, measured in pixels.
+//
 // WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
 func (x *CIImageRep) WithPixelsWide(pixelsWide int) *CIImageRep {
 	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
 	return x
 }
 
+// The height of the image, measured in pixels.
+//
 // WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
 func (x *CIImageRep) WithPixelsHigh(pixelsHigh int) *CIImageRep {
 	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
 	return x
 }
 
+// The layout direction for the image.
+//
 // WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
 func (x *CIImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *CIImageRep {
 	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))

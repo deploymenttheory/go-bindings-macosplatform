@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An archive of assets that the system downloads together.
+//
 // AssetPack wraps [raw.BAAssetPack] with a fluent Go API.
 type AssetPack struct {
 	inner *raw.BAAssetPack
@@ -37,7 +39,7 @@ func NewAssetPack() *AssetPack {
 	return &AssetPack{inner: raw.BAAssetPackFromID(_id)}
 }
 
-// Creates a download object for the asset pack that you schedule using a download manager. - Remark: Use this method in your main app; use “BAAssetPack/downloadForContentRequest:“ instead in your downloader extension.
+// Creates a download object for the asset pack that you schedule using a download manager.
 //
 // Download calls the underlying Download.
 func (x *AssetPack) Download() *Download {
@@ -48,7 +50,7 @@ func (x *AssetPack) Download() *Download {
 	return &Download{inner: _r}
 }
 
-// Creates a download object for the asset pack that you schedule using a download manager. - Parameter contentRequest: The content request for the current extension invocation. - Returns: A download object. - Remark: Use this method in your downloader extension; use “BAAssetPack/download“ instead in your main app.
+// Creates a download object for the asset pack that you schedule using a download manager.
 //
 // DownloadForContentRequest calls the underlying DownloadForContentRequest.
 func (x *AssetPack) DownloadForContentRequest(contentRequest BAContentRequest) *Download {

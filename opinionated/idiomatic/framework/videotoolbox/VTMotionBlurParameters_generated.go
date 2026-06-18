@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// This object contains both input and output parameters necessary to run the motion blur processor on a frame.
+//
 // MotionBlurParameters wraps [raw.VTMotionBlurParameters] with a fluent Go API.
 type MotionBlurParameters struct {
 	inner *raw.VTMotionBlurParameters

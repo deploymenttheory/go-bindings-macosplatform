@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// The symbolic representation of a compute data type.
+//
 // GraphTensor wraps [raw.MPSGraphTensor] with a fluent Go API.
 type GraphTensor struct {
 	inner *raw.MPSGraphTensor

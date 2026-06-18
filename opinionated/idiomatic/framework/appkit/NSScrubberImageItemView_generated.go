@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A concrete view subclass for displaying images in a scrubber items.
+//
 // ScrubberImageItemView wraps [raw.NSScrubberImageItemView] with a fluent Go API.
 type ScrubberImageItemView struct {
 	inner *raw.NSScrubberImageItemView
@@ -40,24 +42,32 @@ func NewScrubberImageItemView() *ScrubberImageItemView {
 	return &ScrubberImageItemView{inner: raw.NSScrubberImageItemViewFromID(_id)}
 }
 
+// The image displayed by the scrubber item.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *ScrubberImageItemView) WithImage(image *Image) *ScrubberImageItemView {
 	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
+// The alignment of the image within the scrubber item.
+//
 // WithImageAlignment sets the imageAlignment property and returns the receiver for chaining.
 func (x *ScrubberImageItemView) WithImageAlignment(imageAlignment NSImageAlignment) *ScrubberImageItemView {
 	x.inner.SetImageAlignment(raw.NSImageAlignment(imageAlignment))
 	return x
 }
 
+// A Boolean value that specifies whether the current view is selected.
+//
 // WithSelected sets the selected property and returns the receiver for chaining.
 func (x *ScrubberImageItemView) WithSelected(selected bool) *ScrubberImageItemView {
 	x.inner.NSScrubberItemView.NSScrubberArrangedView.SetSelected(selected)
 	return x
 }
 
+// A Boolean value that specifies whether the view is currently highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *ScrubberImageItemView) WithHighlighted(highlighted bool) *ScrubberImageItemView {
 	x.inner.NSScrubberItemView.NSScrubberArrangedView.SetHighlighted(highlighted)
@@ -106,6 +116,8 @@ func (x *ScrubberImageItemView) WithAutoresizingMask(autoresizingMask NSAutoresi
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *ScrubberImageItemView) WithFrame(frame corefoundation.CGRect) *ScrubberImageItemView {
 	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetFrame(frame)
@@ -130,6 +142,8 @@ func (x *ScrubberImageItemView) WithBoundsRotation(boundsRotation float64) *Scru
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *ScrubberImageItemView) WithBounds(bounds corefoundation.CGRect) *ScrubberImageItemView {
 	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetBounds(bounds)
@@ -142,6 +156,8 @@ func (x *ScrubberImageItemView) WithCanDrawConcurrently(canDrawConcurrently bool
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *ScrubberImageItemView) WithNeedsDisplay(needsDisplay bool) *ScrubberImageItemView {
 	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetNeedsDisplay(needsDisplay)
@@ -328,7 +344,7 @@ func (x *ScrubberImageItemView) WithAdditionalSafeAreaInsets(additionalSafeAreaI
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *ScrubberImageItemView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrubberImageItemView {
@@ -384,24 +400,32 @@ func (x *ScrubberImageItemView) WithPressureConfiguration(pressureConfiguration 
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *ScrubberImageItemView) WithNextResponder(nextResponder ResponderProvider) *ScrubberImageItemView {
 	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *ScrubberImageItemView) WithMenu(menu *Menu) *ScrubberImageItemView {
 	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *ScrubberImageItemView) WithUserActivity(userActivity *foundation.NSUserActivity) *ScrubberImageItemView {
 	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *ScrubberImageItemView) WithTouchBar(touchBar *TouchBar) *ScrubberImageItemView {
 	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())

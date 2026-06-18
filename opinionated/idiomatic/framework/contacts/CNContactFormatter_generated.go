@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that you use to format contact information before displaying it to the user.
+//
 // ContactFormatter wraps [raw.CNContactFormatter] with a fluent Go API.
 type ContactFormatter struct {
 	inner *raw.CNContactFormatter
@@ -37,7 +39,7 @@ func NewContactFormatter() *ContactFormatter {
 	return &ContactFormatter{inner: raw.CNContactFormatterFromID(_id)}
 }
 
-// @abstract The style for a contact formatter instance. @discussion The default value is CNContactFormatterStyleFullName.
+// The formatting style for the contact name.
 //
 // WithStyle sets the style property and returns the receiver for chaining.
 func (x *ContactFormatter) WithStyle(style CNContactFormatterStyle) *ContactFormatter {
@@ -45,7 +47,7 @@ func (x *ContactFormatter) WithStyle(style CNContactFormatterStyle) *ContactForm
 	return x
 }
 
-// @abstract Formats the contact name. @param contact The contact whose name is to be formatted. @return The formatted contact name.
+// Formats the contact name.
 //
 // StringFromContact calls the underlying StringFromContact.
 func (x *ContactFormatter) StringFromContact(contact *raw.CNContact) string {
@@ -56,7 +58,7 @@ func (x *ContactFormatter) StringFromContact(contact *raw.CNContact) string {
 	return purego.GoString(_r.Ptr())
 }
 
-// @abstract Formats the contact name returning an attributed string. @discussion This behaves like -stringFromContact:style: except it returns an attributed string. CNContactPropertyAttribute key has the value of a CNContact name property key. @param contact The contact whose name is to be formatted. @param attributes The default attributes to use. See NSFormatter for details. @return The formatted contact name as an attributed string.
+// Formats the contact name as an attributed string.
 //
 // AttributedStringFromContactDefaultAttributes calls the underlying AttributedStringFromContactDefaultAttributes.
 func (x *ContactFormatter) AttributedStringFromContactDefaultAttributes(contact *raw.CNContact, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {

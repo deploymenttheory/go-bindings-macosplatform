@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A custom action to perform on an accessible object.
+//
 // AccessibilityCustomAction wraps [raw.NSAccessibilityCustomAction] with a fluent Go API.
 type AccessibilityCustomAction struct {
 	inner *raw.NSAccessibilityCustomAction
@@ -31,6 +33,8 @@ func AccessibilityCustomActionFromID(id objc.ID) *AccessibilityCustomAction {
 	return &AccessibilityCustomAction{inner: raw.NSAccessibilityCustomActionFromID(id)}
 }
 
+// Creates a custom action object with the specified name and handler.
+//
 // NewAccessibilityCustomActionWithNameHandler creates a new [AccessibilityCustomAction].
 func NewAccessibilityCustomActionWithNameHandler(name string, handler func() bool) *AccessibilityCustomAction {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAccessibilityCustomAction")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewAccessibilityCustomActionWithNameHandler(name string, handler func() boo
 	return &AccessibilityCustomAction{inner: raw.NSAccessibilityCustomActionFromID(_id)}
 }
 
+// Creates a custom action object with the specified name, target, and selector.
+//
 // NewAccessibilityCustomActionWithNameTargetSelector creates a new [AccessibilityCustomAction].
 func NewAccessibilityCustomActionWithNameTargetSelector(name string, target foundation.NSObjectProtocol, selector objc.SEL) *AccessibilityCustomAction {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAccessibilityCustomAction")), objc.RegisterName("alloc"))
@@ -45,24 +51,32 @@ func NewAccessibilityCustomActionWithNameTargetSelector(name string, target foun
 	return &AccessibilityCustomAction{inner: raw.NSAccessibilityCustomActionFromID(_id)}
 }
 
+// A localized name that describes the action.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *AccessibilityCustomAction) WithName(name string) *AccessibilityCustomAction {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// The closure that handles the execution of the action.
+//
 // WithHandler sets the handler property and returns the receiver for chaining.
 func (x *AccessibilityCustomAction) WithHandler(handler func() bool) *AccessibilityCustomAction {
 	x.inner.SetHandler(handler)
 	return x
 }
 
+// The object that performs the action through a selector.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *AccessibilityCustomAction) WithTarget(target foundation.NSObjectProtocol) *AccessibilityCustomAction {
 	x.inner.SetTarget(target)
 	return x
 }
 
+// The method to call on the target to perform the action.
+//
 // WithSelector sets the selector property and returns the receiver for chaining.
 func (x *AccessibilityCustomAction) WithSelector(selector objc.SEL) *AccessibilityCustomAction {
 	x.inner.SetSelector(selector)

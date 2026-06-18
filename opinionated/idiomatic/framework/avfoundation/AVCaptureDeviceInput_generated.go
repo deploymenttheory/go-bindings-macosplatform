@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that provides media input from a capture device to a capture session.
+//
 // CaptureDeviceInput wraps [raw.AVCaptureDeviceInput] with a fluent Go API.
 type CaptureDeviceInput struct {
 	inner *raw.AVCaptureDeviceInput
@@ -32,7 +34,7 @@ func CaptureDeviceInputFromID(id objc.ID) *CaptureDeviceInput {
 	return &CaptureDeviceInput{inner: raw.AVCaptureDeviceInputFromID(id)}
 }
 
-// @method initWithDevice:error: @abstract Creates an AVCaptureDeviceInput instance that provides media data from the given device. @param device An AVCaptureDevice instance to be used for capture. @param outError On return, if the given device cannot be used for capture, points to an NSError describing the problem. @result An AVCaptureDeviceInput instance that provides data from the given device, or nil, if the device could not be used for capture. @discussion This method creates an instance of AVCaptureDeviceInput that can be used to capture data from an AVCaptureDevice in an AVCaptureSession. This method attempts to open the device for capture, taking exclusive control of it if necessary. If the device cannot be opened because it is no longer available or because it is in use, for example, this method returns nil, and the optional outError parameter points to an NSError describing the problem.
+// Creates an input for the specified capture device.
 //
 // NewCaptureDeviceInputWithDeviceError creates a new [CaptureDeviceInput].
 func NewCaptureDeviceInputWithDeviceError(device *raw.AVCaptureDevice) (*CaptureDeviceInput, error) {
@@ -45,7 +47,7 @@ func NewCaptureDeviceInputWithDeviceError(device *raw.AVCaptureDevice) (*Capture
 	return &CaptureDeviceInput{inner: raw.AVCaptureDeviceInputFromID(_id)}, nil
 }
 
-// The receiver's locked frame duration (the reciprocal of its frame rate). Setting this property guarantees the intra-frame duration delivered by the device input is precisely the frame duration you request. Set this property to run the receiver's associated “AVCaptureDevice“ at precisely your provided frame rate (expressed as a duration). Query “AVCaptureDevice/minSupportedLockedVideoFrameDuration“ to find the minimum value supported by this “AVCaptureDeviceInput“. In order to disable locked video frame duration, set this property to `kCMTimeInvalid`. This property resets itself to `kCMTimeInvalid` when the receiver's attached “AVCaptureDevice/activeFormat“ changes. When you set this property, its value is also reflected in the receiver's “AVCaptureDevice/activeVideoMinFrameDuration“ and “AVCaptureDevice/activeVideoMaxFrameDuration“. - Note: Locked frame duration availability may change depending on the device configuration. For example, locked frame duration is unsupported when “AVCaptureDevice/autoVideoFrameRateEnabled“ or “AVCaptureMovieFileOutput/spatialVideoCaptureEnabled“ is set to `true`. - Note: Only one “AVCaptureDeviceInput“ added to an “AVCaptureMultiCamSession“ can follow an external sync device or run at a locked frame duration. - Note: Setting this property may cause a lengthy reconfiguration of the receiver, similar to setting “AVCaptureDevice/activeFormat“ or “AVCaptureSession/sessionPreset“. - Note: When using this property, set the exposure duration with “AVCaptureDevice/setExposureModeCustomWithDuration:ISO:completionHandler:“ to one half the frame duration (or less) to maintain full dynamic range. - Important: If you set this property to a valid value while the receiver's “AVCaptureDevice/minSupportedLockedVideoFrameDuration“ is `kCMTimeInvalid`, it throws an `NSInvalidArgumentException`. - Important: If you set this property while the receiver's  “lockedVideoFrameDurationSupported“ property returns `false`, it throws an `NSInvalidArgumentException`.
+// The receiver’s locked frame duration (the reciprocal of its frame rate). Setting this property guarantees the intra-frame duration delivered by the device input is precisely the frame duration you request.
 //
 // WithActiveLockedVideoFrameDuration sets the activeLockedVideoFrameDuration property and returns the receiver for chaining.
 func (x *CaptureDeviceInput) WithActiveLockedVideoFrameDuration(activeLockedVideoFrameDuration coremedia.CMTime) *CaptureDeviceInput {
@@ -53,7 +55,7 @@ func (x *CaptureDeviceInput) WithActiveLockedVideoFrameDuration(activeLockedVide
 	return x
 }
 
-// Indicates the multichannel audio mode to apply when recording audio. This property only takes effect when audio is being routed through the built-in microphone, and is ignored if an external microphone is in use. The default value is “AVCaptureMultichannelAudioModeNone“, in which case the default single channel audio recording is used. In an “AVCaptureMultiCamSession“, when audio mode is set to any value other than “AVCaptureMultichannelAudioModeNone“, only one “sourceDevicePosition“ is allowed for audio ports.
+// The multichannel audio mode to apply when recording audio.
 //
 // WithMultichannelAudioMode sets the multichannelAudioMode property and returns the receiver for chaining.
 func (x *CaptureDeviceInput) WithMultichannelAudioMode(multichannelAudioMode AVCaptureMultichannelAudioMode) *CaptureDeviceInput {
@@ -69,7 +71,7 @@ func (x *CaptureDeviceInput) WithWindNoiseRemovalEnabled(windNoiseRemovalEnabled
 	return x
 }
 
-// Whether or not audio zoom is enabled. Setting this property to `true` throws an exception if “isAudioZoomSupported“ is `false`. Default is `true` when supported. When enabled, the sound field narrows or expands to match the field of view of the video device's zoom factor. Set this property to `false` if you want to capture the full sound field regardless of video zoom. This property only takes effect when added to a session with a video device, and “AVCaptureMultichannelAudioMode“ is set to any value other than “AVCaptureMultichannelAudioModeNone“. When using multiple cameras in “AVCaptureMultiCamSession“, audio zoom is determined by the zoom factor of the preferred camera. The preferred camera is selected to match the mic position, either front or back. If more than one camera is available in that position, the camera with the widest field of view is chosen with virtual cameras preferred over single camera ones. If no camera is found to match the mic position, audio zoom is unavailable.
+// Whether or not audio zoom is enabled.
 //
 // WithAudioZoomEnabled sets the audioZoomEnabled property and returns the receiver for chaining.
 func (x *CaptureDeviceInput) WithAudioZoomEnabled(audioZoomEnabled bool) *CaptureDeviceInput {
@@ -77,7 +79,7 @@ func (x *CaptureDeviceInput) WithAudioZoomEnabled(audioZoomEnabled bool) *Captur
 	return x
 }
 
-// A BOOL value specifying whether the Cinematic Video effect is being applied to any movie file output, video data output, metadata output, or video preview layer added to the capture session. Default is `false`. Set to `true` to enable support for Cinematic Video capture. When you set this property to `true`, your input's associated “AVCaptureDevice/focusMode“ changes to “AVCaptureFocusModeContinuousAutoFocus“. While Cinematic Video capture is enabled, you are not permitted to change your device's focus mode, and any attempt to do so results in an `NSInvalidArgumentException`. You may only set this property to `true` if “cinematicVideoCaptureSupported“ is `true`. - Note: Enabling Cinematic Video capture requires a lengthy reconfiguration of the capture render pipeline, so if you intend to capture Cinematic Video, you should set this property to `true` before calling “AVCaptureSession/startRunning“ or within “AVCaptureSession/beginConfiguration“ and “AVCaptureSession/commitConfiguration“ while running.
+// A BOOL value specifying whether the Cinematic Video effect is being applied to any movie file output, video data output, metadata output, or video preview layer added to the capture session.
 //
 // WithCinematicVideoCaptureEnabled sets the cinematicVideoCaptureEnabled property and returns the receiver for chaining.
 func (x *CaptureDeviceInput) WithCinematicVideoCaptureEnabled(cinematicVideoCaptureEnabled bool) *CaptureDeviceInput {
@@ -85,7 +87,7 @@ func (x *CaptureDeviceInput) WithCinematicVideoCaptureEnabled(cinematicVideoCapt
 	return x
 }
 
-// Shallow depth of field simulated aperture. When capturing a Cinematic Video, use this property to control the amount of blur in the simulated depth of field effect. This property only takes effect when “cinematicVideoCaptureEnabled“ is set to `true`. - Important: Setting this property to a value less than the “AVCaptureDevice/activeFormat/minSimulatedAperture“ or greater than the “AVCaptureDevice/activeFormat/maxSimulatedAperture“ throws an `NSRangeException`. you may only set this property if “AVCaptureDevice/activeFormat/minSimulatedAperture“ returns a non-zero value, otherwise an `NSInvalidArgumentException` is thrown. You must set this property before starting a Cinematic Video capture. If you attempt to set it while a recording is in progress, an `NSInvalidArgumentException` is thrown. This property is initialized to the associated “AVCaptureDevice/activeFormat/defaultSimulatedAperture“. This property is key-value observable.
+// Shallow depth of field simulated aperture.
 //
 // WithSimulatedAperture sets the simulatedAperture property and returns the receiver for chaining.
 func (x *CaptureDeviceInput) WithSimulatedAperture(simulatedAperture float32) *CaptureDeviceInput {
@@ -93,21 +95,21 @@ func (x *CaptureDeviceInput) WithSimulatedAperture(simulatedAperture float32) *C
 	return x
 }
 
-// Configures the the device input to follow an external sync device at the given frame duration. - Parameter externalSyncDevice: The “AVExternalSyncDevice“ hardware to follow. - Parameter videoFrameDuration: The frame duration to which the “AVExternalSyncDevice“ is calibrated. - Parameter delegate: The delegate to notify when the connection status changes, or an error occurs. Call this method to direct your “AVCaptureDeviceInput“ to follow the external sync pulse from a sync device at the given frame duration. Your provided `videoFrameDuration` value must match the sync pulse duration of the external sync device. If it does not, the request times out, the external sync device's status returns to “AVExternalSyncDeviceStatusReady“, and your session stops running, posting a “AVCaptureSessionRuntimeErrorNotification“ with “AVErrorFollowExternalSyncDeviceTimedOut“. The ability to follow an external sync device may change depending on the device configuration. For example, “followExternalSyncDevice:videoFrameDuration:delegate:“ cannot be used when “AVCaptureDevice/autoVideoFrameRateEnabled“ is `true`. To stop following an external pulse, call “unfollowExternalSyncDevice“. External sync device following is also disabled when your device's “AVCaptureDeviceFormat“ changes. Your provided delegate's “AVExternalSyncDeviceDelegate/externalSyncDeviceStatusDidChange:“ method is called with a status of “AVExternalSyncDeviceStatusReady“ if the external pulse signal is not close enough to the provided `videoFrameDuration` for successful calibration. Once your “AVExternalSyncDevice/status“ changes to “AVExternalSyncDeviceStatusActiveSync“, your input's  “AVCaptureInput/activeExternalSyncVideoFrameDuration“ property reports the up-to-date frame duration. “AVCaptureInput/activeExternalSyncVideoFrameDuration“ is also reflected in the “AVCaptureDevice/activeVideoMinFrameDuration“ and “AVCaptureDevice/activeVideoMaxFrameDuration“ of your input's associated device. - Note: Calling this method may cause a lengthy reconfiguration of the receiver, similar to setting a new active format or “AVCaptureSession/sessionPreset“. - Note: When using this property, set the exposure duration with “AVCaptureDevice/setExposureModeCustomWithDuration:ISO:completionHandler:“ to one half the frame duration (or less) to maintain full dynamic range. - Important: Calling this method throws an `NSInvalidArgumentException` if “AVCaptureDeviceInput/externalSyncSupported“ returns `false`. - Important: The provided external sync device's “status“ must be “AVExternalSyncDeviceStatusReady“ when you call this method, otherwise an `NSInvalidArgumentException` is thrown.
+// Configures the the device input to follow an external sync device at the given frame duration.
 //
 // FollowExternalSyncDeviceVideoFrameDurationDelegate calls the underlying FollowExternalSyncDeviceVideoFrameDurationDelegate.
 func (x *CaptureDeviceInput) FollowExternalSyncDeviceVideoFrameDurationDelegate(externalSyncDevice *raw.AVExternalSyncDevice, frameDuration coremedia.CMTime, delegate raw.AVExternalSyncDeviceDelegate) {
 	x.inner.FollowExternalSyncDeviceVideoFrameDurationDelegate(externalSyncDevice, frameDuration, delegate)
 }
 
-// Discontinues external sync. This method stops your input from syncing to the external sync device you specified in “followExternalSyncDevice:videoFrameDuration:delegate:“.
+// Discontinues external sync.
 //
 // UnfollowExternalSyncDevice calls the underlying UnfollowExternalSyncDevice.
 func (x *CaptureDeviceInput) UnfollowExternalSyncDevice() {
 	x.inner.UnfollowExternalSyncDevice()
 }
 
-// @method isMultichannelAudioModeSupported: @abstract Returns whether the receiver supports the given multichannel audio mode. @param multichannelAudioMode An AVCaptureMultichannelAudioMode to be checked. @result YES if the receiver supports the given multichannel audio mode, NO otherwise. @discussion The receiver's multichannelAudioMode property can only be set to a certain mode if this method returns YES for that mode.
+// A Boolean value that indicates whether the input supports the specified multichannel audio mode.
 //
 // IsMultichannelAudioModeSupported calls the underlying IsMultichannelAudioModeSupported.
 func (x *CaptureDeviceInput) IsMultichannelAudioModeSupported(multichannelAudioMode AVCaptureMultichannelAudioMode) bool {

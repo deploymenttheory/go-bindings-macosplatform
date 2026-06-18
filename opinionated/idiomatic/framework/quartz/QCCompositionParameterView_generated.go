@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that allows users to edit the input parameters of a composition in real time. The composition can be rendering in any of the following objects: QCRenderer, QCView, or QCCompositionLayer.
+//
 // QCCompositionParameterView wraps [raw.QCCompositionParameterView] with a fluent Go API.
 type QCCompositionParameterView struct {
 	inner *raw.QCCompositionParameterView
@@ -36,46 +38,64 @@ func NewQCCompositionParameterView() *QCCompositionParameterView {
 	return &QCCompositionParameterView{inner: raw.QCCompositionParameterViewFromID(_id)}
 }
 
+// Sets the composition parameter view for editing the input parameters of the provided renderer object.
+//
 // SetCompositionRenderer calls the underlying SetCompositionRenderer.
 func (x *QCCompositionParameterView) SetCompositionRenderer(renderer objc.ID) {
 	x.inner.SetCompositionRenderer(renderer)
 }
 
+// Returns the renderer object associated with the composition parameter view.
+//
 // CompositionRenderer calls the underlying CompositionRenderer.
 func (x *QCCompositionParameterView) CompositionRenderer() objc.ID {
 	return x.inner.CompositionRenderer()
 }
 
+// Checks whether the composition that is currently edited by the composition parameter view has any input parameters.
+//
 // HasParameters calls the underlying HasParameters.
 func (x *QCCompositionParameterView) HasParameters() bool {
 	return x.inner.HasParameters()
 }
 
+// Sets the background color of the composition parameter view.
+//
 // SetBackgroundColor calls the underlying SetBackgroundColor.
 func (x *QCCompositionParameterView) SetBackgroundColor(color *appkit.NSColor) {
 	x.inner.SetBackgroundColor(color)
 }
 
+// Retrieves the background color of the composition parameter view.
+//
 // BackgroundColor calls the underlying BackgroundColor.
 func (x *QCCompositionParameterView) BackgroundColor() *appkit.NSColor {
 	return x.inner.BackgroundColor()
 }
 
+// Sets whether the composition parameter view draws its background.
+//
 // SetDrawsBackground calls the underlying SetDrawsBackground.
 func (x *QCCompositionParameterView) SetDrawsBackground(flag bool) {
 	x.inner.SetDrawsBackground(flag)
 }
 
+// Returns whether the composition parameter view draws its background.
+//
 // DrawsBackground calls the underlying DrawsBackground.
 func (x *QCCompositionParameterView) DrawsBackground() bool {
 	return x.inner.DrawsBackground()
 }
 
+// Sets the composition parameter view delegate.
+//
 // SetDelegate calls the underlying SetDelegate.
 func (x *QCCompositionParameterView) SetDelegate(delegate objc.ID) {
 	x.inner.SetDelegate(delegate)
 }
 
+// Returns the composition parameter view delegate.
+//
 // Delegate calls the underlying Delegate.
 func (x *QCCompositionParameterView) Delegate() objc.ID {
 	return x.inner.Delegate()

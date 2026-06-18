@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains information about the originator of a resource-loading request.
+//
 // AssetResourceLoadingRequestor wraps [raw.AVAssetResourceLoadingRequestor] with a fluent Go API.
 type AssetResourceLoadingRequestor struct {
 	inner *raw.AVAssetResourceLoadingRequestor

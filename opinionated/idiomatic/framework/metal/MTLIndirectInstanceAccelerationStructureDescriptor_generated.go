@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of an acceleration structure that Metal derives from instances of primitive acceleration structures that the GPU can populate.
+//
 // IndirectInstanceAccelerationStructureDescriptor wraps [raw.MTLIndirectInstanceAccelerationStructureDescriptor] with a fluent Go API.
 type IndirectInstanceAccelerationStructureDescriptor struct {
 	inner *raw.MTLIndirectInstanceAccelerationStructureDescriptor
@@ -101,7 +103,7 @@ func (x *IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformBuf
 	return x
 }
 
-// @brief Offset into the instance motion descriptor buffer. Must be a multiple of 64 bytes and must be aligned to the platform's buffer offset alignment.
+// The offset, in bytes, to the descripton of the first motion transform.
 //
 // WithMotionTransformBufferOffset sets the motionTransformBufferOffset property and returns the receiver for chaining.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformBufferOffset(motionTransformBufferOffset uint) *IndirectInstanceAccelerationStructureDescriptor {
@@ -157,6 +159,8 @@ func (x *IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformStr
 	return x
 }
 
+// The options that describe how you intend to use the acceleration structure.
+//
 // WithUsage sets the usage property and returns the receiver for chaining.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithUsage(usage MTLAccelerationStructureUsage) *IndirectInstanceAccelerationStructureDescriptor {
 	x.inner.MTLAccelerationStructureDescriptor.SetUsage(raw.MTLAccelerationStructureUsage(usage))

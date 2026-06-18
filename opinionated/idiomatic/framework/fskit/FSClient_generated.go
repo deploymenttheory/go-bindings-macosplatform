@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An interface for apps and daemons to interact with FSKit.
+//
 // Client wraps [raw.FSClient] with a fluent Go API.
 type Client struct {
 	inner *raw.FSClient
@@ -39,7 +41,7 @@ func NewClient() *Client {
 	return &Client{inner: raw.FSClientFromID(_id)}
 }
 
-// Asynchronously retrieves an list of installed file system modules. In Swift, you can either call this method and pass a completion handler closure, or get the value of the `installedExtensions` property with the `async` keyword. - Parameter completionHandler: A block or closure that executes when FSKit finishes its fetch process. If the fetch succeeds, the first parameter contains an array of “FSModuleIdentity“ instances that identify installed modules. If the fetch fails, the second parameter contains an error detailing the failure.
+// Asynchronously retrieves an list of installed file system modules.
 //
 // FetchInstalledExtensions blocks until the operation completes or ctx is cancelled.
 func (x *Client) FetchInstalledExtensions(ctx context.Context) (*foundation.NSArray[*raw.FSModuleIdentity], error) {

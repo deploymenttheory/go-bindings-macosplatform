@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specialized configuration object that PassKit uses when it creates a digital car key.
+//
 // AddCarKeyPassConfiguration wraps [raw.PKAddCarKeyPassConfiguration] with a fluent Go API.
 type AddCarKeyPassConfiguration struct {
 	inner *raw.PKAddCarKeyPassConfiguration
@@ -37,12 +39,16 @@ func NewAddCarKeyPassConfiguration() *AddCarKeyPassConfiguration {
 	return &AddCarKeyPassConfiguration{inner: raw.PKAddCarKeyPassConfigurationFromID(_id)}
 }
 
+// A one-time password that the vehicle manufacturer provides.
+//
 // WithPassword sets the password property and returns the receiver for chaining.
 func (x *AddCarKeyPassConfiguration) WithPassword(password string) *AddCarKeyPassConfiguration {
 	x.inner.SetPassword(foundation.NSStringStringWithUTF8String(password))
 	return x
 }
 
+// The wireless radio technology that the key uses.
+//
 // WithSupportedRadioTechnologies sets the supportedRadioTechnologies property and returns the receiver for chaining.
 func (x *AddCarKeyPassConfiguration) WithSupportedRadioTechnologies(supportedRadioTechnologies PKRadioTechnology) *AddCarKeyPassConfiguration {
 	x.inner.SetSupportedRadioTechnologies(raw.PKRadioTechnology(supportedRadioTechnologies))
@@ -61,18 +67,24 @@ func (x *AddCarKeyPassConfiguration) WithProvisioningTemplateIdentifier(provisio
 	return x
 }
 
+// The product plan identifier (PPID) supplied by the vehicle’s original equipment manufacturer (OEM).
+//
 // WithProductPlanIdentifier sets the productPlanIdentifier property and returns the receiver for chaining.
 func (x *AddCarKeyPassConfiguration) WithProductPlanIdentifier(productPlanIdentifier string) *AddCarKeyPassConfiguration {
 	x.inner.SetProductPlanIdentifier(foundation.NSStringStringWithUTF8String(productPlanIdentifier))
 	return x
 }
 
+// An opaque value for the configuration.
+//
 // WithIssuerIdentifier sets the issuerIdentifier property and returns the receiver for chaining.
 func (x *AddCarKeyPassConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddCarKeyPassConfiguration {
 	x.inner.PKAddSecureElementPassConfiguration.SetIssuerIdentifier(foundation.NSStringStringWithUTF8String(issuerIdentifier))
 	return x
 }
 
+// The configuration’s localized description.
+//
 // WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
 func (x *AddCarKeyPassConfiguration) WithLocalizedDescription(localizedDescription string) *AddCarKeyPassConfiguration {
 	x.inner.PKAddSecureElementPassConfiguration.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))

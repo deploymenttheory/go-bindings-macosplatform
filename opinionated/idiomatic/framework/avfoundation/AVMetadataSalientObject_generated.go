@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing a single salient area in a picture.
+//
 // MetadataSalientObject wraps [raw.AVMetadataSalientObject] with a fluent Go API.
 type MetadataSalientObject struct {
 	inner *raw.AVMetadataSalientObject

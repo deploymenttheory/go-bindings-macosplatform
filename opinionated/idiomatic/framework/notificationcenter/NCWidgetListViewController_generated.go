@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides a list view for displaying content in a macOS Today widget.
+//
 // WidgetListViewController wraps [raw.NCWidgetListViewController] with a fluent Go API.
 type WidgetListViewController struct {
 	inner *raw.NCWidgetListViewController
@@ -37,41 +39,55 @@ func NewWidgetListViewController() *WidgetListViewController {
 	return &WidgetListViewController{inner: raw.NCWidgetListViewControllerFromID(_id)}
 }
 
+// The list view controller’s delegate or nil if the receiver doesn’t have a delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *WidgetListViewController) WithDelegate(delegate raw.NCWidgetListViewDelegate) *WidgetListViewController {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The minimum number of visible rows to display.
+//
 // WithMinimumVisibleRowCount sets the minimumVisibleRowCount property and returns the receiver for chaining.
 func (x *WidgetListViewController) WithMinimumVisibleRowCount(minimumVisibleRowCount uint) *WidgetListViewController {
 	x.inner.SetMinimumVisibleRowCount(minimumVisibleRowCount)
 	return x
 }
 
+// A Boolean value that indicates whether list displays divider lines between rows.
+//
 // WithHasDividerLines sets the hasDividerLines property and returns the receiver for chaining.
 func (x *WidgetListViewController) WithHasDividerLines(hasDividerLines bool) *WidgetListViewController {
 	x.inner.SetHasDividerLines(hasDividerLines)
 	return x
 }
 
+// A Boolean value that indicates whether the list is in editing mode.
+//
 // WithEditing sets the editing property and returns the receiver for chaining.
 func (x *WidgetListViewController) WithEditing(editing bool) *WidgetListViewController {
 	x.inner.SetEditing(editing)
 	return x
 }
 
+// A Boolean value that indicates whether an Add (+) button is displayed while the list is in editing mode.
+//
 // WithShowsAddButtonWhenEditing sets the showsAddButtonWhenEditing property and returns the receiver for chaining.
 func (x *WidgetListViewController) WithShowsAddButtonWhenEditing(showsAddButtonWhenEditing bool) *WidgetListViewController {
 	x.inner.SetShowsAddButtonWhenEditing(showsAddButtonWhenEditing)
 	return x
 }
 
+// Returns the content view controller associated with the specified row, or a new content view controller if desired.
+//
 // ViewControllerAtRowMakeIfNecessary calls the underlying ViewControllerAtRowMakeIfNecessary.
 func (x *WidgetListViewController) ViewControllerAtRowMakeIfNecessary(row uint, makeIfNecesary bool) *appkit.NSViewController {
 	return x.inner.ViewControllerAtRowMakeIfNecessary(row, makeIfNecesary)
 }
 
+// Returns the row represented by the specified content view controller.
+//
 // RowForViewController calls the underlying RowForViewController.
 func (x *WidgetListViewController) RowForViewController(viewController *appkit.NSViewController) uint {
 	return x.inner.RowForViewController(viewController)

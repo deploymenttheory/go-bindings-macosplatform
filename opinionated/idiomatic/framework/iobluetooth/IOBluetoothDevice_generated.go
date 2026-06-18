@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An instance of IOBluetoothDevice represents a single remote Bluetooth device.
+//
 // IOBluetoothDevice wraps [raw.IOBluetoothDevice] with a fluent Go API.
 type IOBluetoothDevice struct {
 	inner *raw.IOBluetoothDevice
@@ -38,6 +40,8 @@ func NewIOBluetoothDevice() *IOBluetoothDevice {
 	return &IOBluetoothDevice{inner: raw.IOBluetoothDeviceFromID(_id)}
 }
 
+// Allows a client to register for device disconnect notification.
+//
 // RegisterForDisconnectNotificationSelector calls the underlying RegisterForDisconnectNotificationSelector.
 func (x *IOBluetoothDevice) RegisterForDisconnectNotificationSelector(observer objc.ID, inSelector objc.SEL) *IOBluetoothUserNotification {
 	_r := x.inner.RegisterForDisconnectNotificationSelector(observer, inSelector)
@@ -47,66 +51,92 @@ func (x *IOBluetoothDevice) RegisterForDisconnectNotificationSelector(observer o
 	return &IOBluetoothUserNotification{inner: _r}
 }
 
+// Returns an IOBluetoothDeviceRef representation of the target IOBluetoothDevice object.
+//
 // GetDeviceRef calls the underlying GetDeviceRef.
 func (x *IOBluetoothDevice) GetDeviceRef() unsafe.Pointer {
 	return x.inner.GetDeviceRef()
 }
 
+// Opens a new L2CAP channel to the target device. Returns only after the channel is opened.
+//
 // OpenL2CAPChannelSyncWithPSMDelegate calls the underlying OpenL2CAPChannelSyncWithPSMDelegate.
 func (x *IOBluetoothDevice) OpenL2CAPChannelSyncWithPSMDelegate(newChannel *raw.IOBluetoothL2CAPChannel, psm uint16, channelDelegate objc.ID) int {
 	return x.inner.OpenL2CAPChannelSyncWithPSMDelegate(newChannel, psm, channelDelegate)
 }
 
+// Opens a new L2CAP channel to the target device. Returns immediately after starting the opening process.
+//
 // OpenL2CAPChannelAsyncWithPSMDelegate calls the underlying OpenL2CAPChannelAsyncWithPSMDelegate.
 func (x *IOBluetoothDevice) OpenL2CAPChannelAsyncWithPSMDelegate(newChannel *raw.IOBluetoothL2CAPChannel, psm uint16, channelDelegate objc.ID) int {
 	return x.inner.OpenL2CAPChannelAsyncWithPSMDelegate(newChannel, psm, channelDelegate)
 }
 
+// Opens a new L2CAP channel to the target device. Returns immedialty after starting the opening process.
+//
 // OpenL2CAPChannelFindExistingNewChannel calls the underlying OpenL2CAPChannelFindExistingNewChannel.
 func (x *IOBluetoothDevice) OpenL2CAPChannelFindExistingNewChannel(psm uint16, findExisting bool, newChannel *raw.IOBluetoothL2CAPChannel) int {
 	return x.inner.OpenL2CAPChannelFindExistingNewChannel(psm, findExisting, newChannel)
 }
 
+// Send an echo request over the L2CAP connection to a remote device.
+//
 // SendL2CAPEchoRequestLength calls the underlying SendL2CAPEchoRequestLength.
 func (x *IOBluetoothDevice) SendL2CAPEchoRequestLength(data unsafe.Pointer, length uint16) int {
 	return x.inner.SendL2CAPEchoRequestLength(data, length)
 }
 
+// Opens a new RFCOMM channel to the target device. Returns only once the channel is open or failed to open.
+//
 // OpenRFCOMMChannelChannel calls the underlying OpenRFCOMMChannelChannel.
 func (x *IOBluetoothDevice) OpenRFCOMMChannelChannel(channelID uint8, rfcommChannel *raw.IOBluetoothRFCOMMChannel) int {
 	return x.inner.OpenRFCOMMChannelChannel(channelID, rfcommChannel)
 }
 
+// Opens a new RFCOMM channel to the target device. Returns only once the channel is open or failed to open.
+//
 // OpenRFCOMMChannelSyncWithChannelIDDelegate calls the underlying OpenRFCOMMChannelSyncWithChannelIDDelegate.
 func (x *IOBluetoothDevice) OpenRFCOMMChannelSyncWithChannelIDDelegate(rfcommChannel *raw.IOBluetoothRFCOMMChannel, channelID uint8, channelDelegate objc.ID) int {
 	return x.inner.OpenRFCOMMChannelSyncWithChannelIDDelegate(rfcommChannel, channelID, channelDelegate)
 }
 
+// Opens a new RFCOMM channel to the target device. Returns immediately.
+//
 // OpenRFCOMMChannelAsyncWithChannelIDDelegate calls the underlying OpenRFCOMMChannelAsyncWithChannelIDDelegate.
 func (x *IOBluetoothDevice) OpenRFCOMMChannelAsyncWithChannelIDDelegate(rfcommChannel *raw.IOBluetoothRFCOMMChannel, channelID uint8, channelDelegate objc.ID) int {
 	return x.inner.OpenRFCOMMChannelAsyncWithChannelIDDelegate(rfcommChannel, channelID, channelDelegate)
 }
 
+// Gets the full class of device value for the remote device.
+//
 // GetClassOfDevice calls the underlying GetClassOfDevice.
 func (x *IOBluetoothDevice) GetClassOfDevice() uint32 {
 	return x.inner.GetClassOfDevice()
 }
 
+// Get the major service class of the device.
+//
 // GetServiceClassMajor calls the underlying GetServiceClassMajor.
 func (x *IOBluetoothDevice) GetServiceClassMajor() uint32 {
 	return x.inner.GetServiceClassMajor()
 }
 
+// Get the major device class of the device.
+//
 // GetDeviceClassMajor calls the underlying GetDeviceClassMajor.
 func (x *IOBluetoothDevice) GetDeviceClassMajor() uint32 {
 	return x.inner.GetDeviceClassMajor()
 }
 
+// Get the minor service class of the device.
+//
 // GetDeviceClassMinor calls the underlying GetDeviceClassMinor.
 func (x *IOBluetoothDevice) GetDeviceClassMinor() uint32 {
 	return x.inner.GetDeviceClassMinor()
 }
 
+// Get the human readable name of the remote device.
+//
 // GetName calls the underlying GetName.
 func (x *IOBluetoothDevice) GetName() string {
 	_r := x.inner.GetName()
@@ -116,6 +146,8 @@ func (x *IOBluetoothDevice) GetName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Get the human readable name of the remote device. If the name is not present, it will return a string containing the device’s address.
+//
 // GetNameOrAddress calls the underlying GetNameOrAddress.
 func (x *IOBluetoothDevice) GetNameOrAddress() string {
 	_r := x.inner.GetNameOrAddress()
@@ -125,16 +157,22 @@ func (x *IOBluetoothDevice) GetNameOrAddress() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Get the date/time of the last successful remote name request.
+//
 // GetLastNameUpdate calls the underlying GetLastNameUpdate.
 func (x *IOBluetoothDevice) GetLastNameUpdate() *foundation.NSDate {
 	return x.inner.GetLastNameUpdate()
 }
 
+// Get the Bluetooth device address for the target device.
+//
 // GetAddress calls the underlying GetAddress.
 func (x *IOBluetoothDevice) GetAddress() *raw.BluetoothDeviceAddress {
 	return x.inner.GetAddress()
 }
 
+// Get a string representation of the Bluetooth device address for the target device. The format of the string is the same as returned by IOBluetoothNSStringFromDeviceAddress().
+//
 // GetAddressString calls the underlying GetAddressString.
 func (x *IOBluetoothDevice) GetAddressString() string {
 	_r := x.inner.GetAddressString()
@@ -144,108 +182,148 @@ func (x *IOBluetoothDevice) GetAddressString() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Get the value of the page scan repetition mode for the device.
+//
 // GetPageScanRepetitionMode calls the underlying GetPageScanRepetitionMode.
 func (x *IOBluetoothDevice) GetPageScanRepetitionMode() uint8 {
 	return x.inner.GetPageScanRepetitionMode()
 }
 
+// Get the value of the page scan period mode for the device.
+//
 // GetPageScanPeriodMode calls the underlying GetPageScanPeriodMode.
 func (x *IOBluetoothDevice) GetPageScanPeriodMode() uint8 {
 	return x.inner.GetPageScanPeriodMode()
 }
 
+// Get the page scan mode for the device.
+//
 // GetPageScanMode calls the underlying GetPageScanMode.
 func (x *IOBluetoothDevice) GetPageScanMode() uint8 {
 	return x.inner.GetPageScanMode()
 }
 
+// Get the clock offset value of the device.
+//
 // GetClockOffset calls the underlying GetClockOffset.
 func (x *IOBluetoothDevice) GetClockOffset() uint16 {
 	return x.inner.GetClockOffset()
 }
 
+// Get the date/time of the last time the device was returned during an inquiry.
+//
 // GetLastInquiryUpdate calls the underlying GetLastInquiryUpdate.
 func (x *IOBluetoothDevice) GetLastInquiryUpdate() *foundation.NSDate {
 	return x.inner.GetLastInquiryUpdate()
 }
 
+// Get the RSSI device (if connected), above or below the golden range. If the RSSI is within the golden range, a value of 0 is returned. For the actual RSSI value, use getRawRSSI. For more information, see the Bluetooth 4.0 Core Specification.
+//
 // RSSI calls the underlying RSSI.
 func (x *IOBluetoothDevice) RSSI() int8 {
 	return x.inner.RSSI()
 }
 
+// Get the raw RSSI device (if connected).
+//
 // RawRSSI calls the underlying RawRSSI.
 func (x *IOBluetoothDevice) RawRSSI() int8 {
 	return x.inner.RawRSSI()
 }
 
+// Indicates whether a baseband connection to the device exists.
+//
 // IsConnected calls the underlying IsConnected.
 func (x *IOBluetoothDevice) IsConnected() bool {
 	return x.inner.IsConnected()
 }
 
+// Create a baseband connection to the device.
+//
 // OpenConnection calls the underlying OpenConnection.
 func (x *IOBluetoothDevice) OpenConnection() int {
 	return x.inner.OpenConnection()
 }
 
+// Create a baseband connection to the device.
+//
 // OpenConnection2 calls the underlying OpenConnection2.
 func (x *IOBluetoothDevice) OpenConnection2(target objc.ID) int {
 	return x.inner.OpenConnection2(target)
 }
 
-// @property	openConnection:withPageTimeout:authenticationRequired: @abstract	Create a baseband connection to the device. @discussion	If a target is specified, the open connection call is asynchronous and on completion of the CREATE_CONNECTION command, the method -connectionComplete:status: will be called on the specified target. If no target is specified, the call is synchronous and will not return until the connection is open or the CREATE_CONNECTION call has failed. NOTE: This method is only available in Mac OS X 10.2.7 (Bluetooth v1.3) or later. As of Mac OS X 10.7, this method will no longer mask out "Connection Exists" 'errors' with a success result code; your code must account for the cases where the baseband connection is already open. @param		target The target to message when the create connection call is complete @param		pageTimeoutValue The page timeout value to use for this call @param		authenticationRequired BOOL value to indicate whether authentication should be required for the connection @result		Returns kIOReturnSuccess if the connection was successfully created (or if asynchronous, if the CREATE_CONNECTION command was successfully issued).
+// Create a baseband connection to the device.
 //
 // OpenConnectionWithPageTimeoutAuthenticationRequired calls the underlying OpenConnectionWithPageTimeoutAuthenticationRequired.
 func (x *IOBluetoothDevice) OpenConnectionWithPageTimeoutAuthenticationRequired(target objc.ID, pageTimeoutValue uint16, authenticationRequired bool) int {
 	return x.inner.OpenConnectionWithPageTimeoutAuthenticationRequired(target, pageTimeoutValue, authenticationRequired)
 }
 
+// Close down the baseband connection to the device.
+//
 // CloseConnection calls the underlying CloseConnection.
 func (x *IOBluetoothDevice) CloseConnection() int {
 	return x.inner.CloseConnection()
 }
 
+// Issues a remote name request to the target device.
+//
 // RemoteNameRequest calls the underlying RemoteNameRequest.
 func (x *IOBluetoothDevice) RemoteNameRequest(target objc.ID) int {
 	return x.inner.RemoteNameRequest(target)
 }
 
+// Issues a remote name request to the target device.
+//
 // RemoteNameRequestWithPageTimeout calls the underlying RemoteNameRequestWithPageTimeout.
 func (x *IOBluetoothDevice) RemoteNameRequestWithPageTimeout(target objc.ID, pageTimeoutValue uint16) int {
 	return x.inner.RemoteNameRequestWithPageTimeout(target, pageTimeoutValue)
 }
 
+// Requests that the existing baseband connection be authenticated.
+//
 // RequestAuthentication calls the underlying RequestAuthentication.
 func (x *IOBluetoothDevice) RequestAuthentication() int {
 	return x.inner.RequestAuthentication()
 }
 
+// Get the connection handle for the baseband connection.
+//
 // GetConnectionHandle calls the underlying GetConnectionHandle.
 func (x *IOBluetoothDevice) GetConnectionHandle() uint16 {
 	return x.inner.GetConnectionHandle()
 }
 
+// Returns TRUE if the device connection was generated by the remote host.
+//
 // IsIncoming calls the underlying IsIncoming.
 func (x *IOBluetoothDevice) IsIncoming() bool {
 	return x.inner.IsIncoming()
 }
 
+// Get the link type for the baseband connection.
+//
 // GetLinkType calls the underlying GetLinkType.
 func (x *IOBluetoothDevice) GetLinkType() uint8 {
 	return x.inner.GetLinkType()
 }
 
+// Get the encryption mode for the baseband connection.
+//
 // GetEncryptionMode calls the underlying GetEncryptionMode.
 func (x *IOBluetoothDevice) GetEncryptionMode() uint8 {
 	return x.inner.GetEncryptionMode()
 }
 
+// Performs an SDP query on the target device.
+//
 // PerformSDPQuery calls the underlying PerformSDPQuery.
 func (x *IOBluetoothDevice) PerformSDPQuery(target objc.ID) int {
 	return x.inner.PerformSDPQuery(target)
 }
 
+// Performs an SDP query on the target device with the specified service UUIDs.
+//
 // PerformSDPQueryUuids calls the underlying PerformSDPQueryUuids.
 func (x *IOBluetoothDevice) PerformSDPQueryUuids(target objc.ID, uuidArray *foundation.NSArray[objc.ID]) int {
 	return x.inner.PerformSDPQueryUuids(target, uuidArray)
@@ -256,11 +334,15 @@ func (x *IOBluetoothDevice) GetServices() *foundation.NSArray[objc.ID] {
 	return x.inner.GetServices()
 }
 
+// Get the date/time of the last SDP query.
+//
 // GetLastServicesUpdate calls the underlying GetLastServicesUpdate.
 func (x *IOBluetoothDevice) GetLastServicesUpdate() *foundation.NSDate {
 	return x.inner.GetLastServicesUpdate()
 }
 
+// Search for a service record containing the given UUID.
+//
 // GetServiceRecordForUUID calls the underlying GetServiceRecordForUUID.
 func (x *IOBluetoothDevice) GetServiceRecordForUUID(sdpUUID *raw.IOBluetoothSDPUUID) *IOBluetoothSDPServiceRecord {
 	_r := x.inner.GetServiceRecordForUUID(sdpUUID)
@@ -270,41 +352,57 @@ func (x *IOBluetoothDevice) GetServiceRecordForUUID(sdpUUID *raw.IOBluetoothSDPU
 	return &IOBluetoothSDPServiceRecord{inner: _r}
 }
 
+// Reports whether the target device is a favorite for the user.
+//
 // IsFavorite calls the underlying IsFavorite.
 func (x *IOBluetoothDevice) IsFavorite() bool {
 	return x.inner.IsFavorite()
 }
 
+// Adds the target device to the user’s favorite devices list.
+//
 // AddToFavorites calls the underlying AddToFavorites.
 func (x *IOBluetoothDevice) AddToFavorites() int {
 	return x.inner.AddToFavorites()
 }
 
+// Removes the target device from the user’s favorite devices list.
+//
 // RemoveFromFavorites calls the underlying RemoveFromFavorites.
 func (x *IOBluetoothDevice) RemoveFromFavorites() int {
 	return x.inner.RemoveFromFavorites()
 }
 
+// Returns the date/time of the most recent access of the target device.
+//
 // RecentAccessDate calls the underlying RecentAccessDate.
 func (x *IOBluetoothDevice) RecentAccessDate() *foundation.NSDate {
 	return x.inner.RecentAccessDate()
 }
 
+// Returns whether the target device is paired.
+//
 // IsPaired calls the underlying IsPaired.
 func (x *IOBluetoothDevice) IsPaired() bool {
 	return x.inner.IsPaired()
 }
 
+// Sets the connection supervision timeout.
+//
 // SetSupervisionTimeout calls the underlying SetSupervisionTimeout.
 func (x *IOBluetoothDevice) SetSupervisionTimeout(timeout uint16) int {
 	return x.inner.SetSupervisionTimeout(timeout)
 }
 
+// Opens a new L2CAP channel to the target device. Returns only after the channel is opened.
+//
 // OpenL2CAPChannelSyncWithPSMWithConfigurationDelegate calls the underlying OpenL2CAPChannelSyncWithPSMWithConfigurationDelegate.
 func (x *IOBluetoothDevice) OpenL2CAPChannelSyncWithPSMWithConfigurationDelegate(newChannel *raw.IOBluetoothL2CAPChannel, psm uint16, channelConfiguration *foundation.NSDictionary[objc.ID, objc.ID], channelDelegate objc.ID) int {
 	return x.inner.OpenL2CAPChannelSyncWithPSMWithConfigurationDelegate(newChannel, psm, channelConfiguration, channelDelegate)
 }
 
+// Opens a new L2CAP channel to the target device. Returns immediately after starting the opening process.
+//
 // OpenL2CAPChannelAsyncWithPSMWithConfigurationDelegate calls the underlying OpenL2CAPChannelAsyncWithPSMWithConfigurationDelegate.
 func (x *IOBluetoothDevice) OpenL2CAPChannelAsyncWithPSMWithConfigurationDelegate(newChannel *raw.IOBluetoothL2CAPChannel, psm uint16, channelConfiguration *foundation.NSDictionary[objc.ID, objc.ID], channelDelegate objc.ID) int {
 	return x.inner.OpenL2CAPChannelAsyncWithPSMWithConfigurationDelegate(newChannel, psm, channelConfiguration, channelDelegate)

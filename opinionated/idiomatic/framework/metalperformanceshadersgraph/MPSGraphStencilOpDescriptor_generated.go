@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// The class that defines the parameters for a stencil operation.
+//
 // GraphStencilOpDescriptor wraps [raw.MPSGraphStencilOpDescriptor] with a fluent Go API.
 type GraphStencilOpDescriptor struct {
 	inner *raw.MPSGraphStencilOpDescriptor
@@ -36,7 +38,7 @@ func NewGraphStencilOpDescriptor() *GraphStencilOpDescriptor {
 	return &GraphStencilOpDescriptor{inner: raw.MPSGraphStencilOpDescriptorFromID(_id)}
 }
 
-// The reduction mode to use within the stencil window. Default value: `MPSGraphReductionModeSum`.
+// The reduction mode to use within the stencil window.
 //
 // WithReductionMode sets the reductionMode property and returns the receiver for chaining.
 func (x *GraphStencilOpDescriptor) WithReductionMode(reductionMode MPSGraphReductionMode) *GraphStencilOpDescriptor {
@@ -44,7 +46,7 @@ func (x *GraphStencilOpDescriptor) WithReductionMode(reductionMode MPSGraphReduc
 	return x
 }
 
-// The property that determines which values to use for padding the input tensor. Default value: `MPSGraphPaddingModeZero`.
+// The property that determines which values to use for padding the input tensor.
 //
 // WithBoundaryMode sets the boundaryMode property and returns the receiver for chaining.
 func (x *GraphStencilOpDescriptor) WithBoundaryMode(boundaryMode MPSGraphPaddingMode) *GraphStencilOpDescriptor {
@@ -52,7 +54,7 @@ func (x *GraphStencilOpDescriptor) WithBoundaryMode(boundaryMode MPSGraphPadding
 	return x
 }
 
-// The property that defines what kind of padding to apply to the stencil operation. Default value: `MPSGraphPaddingStyleExplicit`.
+// The property that defines what kind of padding to apply to the stencil operation.
 //
 // WithPaddingStyle sets the paddingStyle property and returns the receiver for chaining.
 func (x *GraphStencilOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphStencilOpDescriptor {
@@ -60,7 +62,7 @@ func (x *GraphStencilOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPadding
 	return x
 }
 
-// The padding value for `boundaryMode = MPSGraphPaddingModeConstant`. Default value: 0.
+// The padding value for boundaryMode = MPSGraphPaddingModeConstant.
 //
 // WithPaddingConstant sets the paddingConstant property and returns the receiver for chaining.
 func (x *GraphStencilOpDescriptor) WithPaddingConstant(paddingConstant float32) *GraphStencilOpDescriptor {

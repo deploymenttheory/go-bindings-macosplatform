@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that reads media data from an asset.
+//
 // AssetReader wraps [raw.AVAssetReader] with a fluent Go API.
 type AssetReader struct {
 	inner *raw.AVAssetReader
@@ -32,7 +34,7 @@ func AssetReaderFromID(id objc.ID) *AssetReader {
 	return &AssetReader{inner: raw.AVAssetReaderFromID(id)}
 }
 
-// @method initWithAsset:error: @abstract Creates an instance of AVAssetReader for reading media data from the specified asset. @param asset The asset from which media data is to be read. @param outError On return, if initialization of the AVAssetReader fails, points to an NSError describing the nature of the failure. @result An instance of AVAssetReader. @discussion If the specified asset belongs to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie, the results of any asset reading operation are undefined if you mutate the asset after invoking -startReading.
+// Creates an object to read media data from an asset.
 //
 // NewAssetReaderWithAssetError creates a new [AssetReader].
 func NewAssetReaderWithAssetError(asset *raw.AVAsset) (*AssetReader, error) {
@@ -45,7 +47,7 @@ func NewAssetReaderWithAssetError(asset *raw.AVAsset) (*AssetReader, error) {
 	return &AssetReader{inner: raw.AVAssetReaderFromID(_id)}, nil
 }
 
-// @property timeRange @abstract Specifies a range of time that may limit the temporal portion of the receiver's asset from which media data will be read. @discussion The intersection of the value of timeRange and CMTimeRangeMake(kCMTimeZero, asset.duration) will determine the time range of the asset from which media data will be read. The default value of timeRange is CMTimeRangeMake(kCMTimeZero, kCMTimePositiveInfinity). This property throws an exception if a value is set after reading has started.
+// The time range within the asset to read.
 //
 // WithTimeRange sets the timeRange property and returns the receiver for chaining.
 func (x *AssetReader) WithTimeRange(timeRange coremedia.CMTimeRange) *AssetReader {
@@ -53,28 +55,28 @@ func (x *AssetReader) WithTimeRange(timeRange coremedia.CMTimeRange) *AssetReade
 	return x
 }
 
-// @method canAddOutput: @abstract Tests whether an output can be added to the receiver. @param output The AVAssetReaderOutput object to be tested. @result A BOOL indicating whether the output can be added to the receiver. @discussion An output that reads from a track of an asset other than the asset used to initialize the receiver cannot be added.
+// Determines whether you can add the output to the asset reader.
 //
 // CanAddOutput calls the underlying CanAddOutput.
 func (x *AssetReader) CanAddOutput(output *raw.AVAssetReaderOutput) bool {
 	return x.inner.CanAddOutput(output)
 }
 
-// @method addOutput: @abstract Adds an output to the receiver. @param output The AVAssetReaderOutput object to be added. @discussion Outputs are created with a reference to one or more AVAssetTrack objects. These tracks must be owned by the asset returned by the receiver's asset property. This method throws an exception if the output has already been added to an AVAssetReader or if reading has started (`status` has progressed beyond AVAssetReaderStatusUnknown).
+// Adds an output to the reader.
 //
 // AddOutput calls the underlying AddOutput.
 func (x *AssetReader) AddOutput(output *raw.AVAssetReaderOutput) {
 	x.inner.AddOutput(output)
 }
 
-// @method startReading @abstract Prepares the receiver for reading sample buffers from the asset. @result A BOOL indicating whether reading could be started. @discussion This method validates the entire collection of settings for outputs for tracks, for audio mixing, and for video composition and initiates reading from the receiver's asset. If this method returns NO, clients can determine the nature of the failure by checking the value of the status and error properties. This method throws an exception if reading has already started (`status` has progressed beyond AVAssetReaderStatusUnknown).
+// Prepares the asset reader to start reading sample buffers from the asset.
 //
 // StartReading calls the underlying StartReading.
 func (x *AssetReader) StartReading() bool {
 	return x.inner.StartReading()
 }
 
-// @method cancelReading @abstract Cancels any background work and prevents the receiver's outputs from reading more samples. @discussion Clients that want to stop reading samples from the receiver before reaching the end of its time range should call this method to stop any background read ahead operations that the may have been in progress. This method should not be called concurrently with any calls to -[AVAssetReaderOutput copyNextSampleBuffer].
+// Cancels any background work and stops the reader’s outputs from reading more samples.
 //
 // CancelReading calls the underlying CancelReading.
 func (x *AssetReader) CancelReading() {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that holds a time range and an associated state which indicates when the renderer draws output.
+//
 // CaptionRendererScene wraps [raw.AVCaptionRendererScene] with a fluent Go API.
 type CaptionRendererScene struct {
 	inner *raw.AVCaptionRendererScene

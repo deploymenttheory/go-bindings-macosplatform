@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the data and action for a shared copy of pass.
+//
 // AddShareablePassConfiguration wraps [raw.PKAddShareablePassConfiguration] with a fluent Go API.
 type AddShareablePassConfiguration struct {
 	inner *raw.PKAddShareablePassConfiguration
@@ -37,12 +39,16 @@ func NewAddShareablePassConfiguration() *AddShareablePassConfiguration {
 	return &AddShareablePassConfiguration{inner: raw.PKAddShareablePassConfigurationFromID(_id)}
 }
 
+// An opaque value for the configuration.
+//
 // WithIssuerIdentifier sets the issuerIdentifier property and returns the receiver for chaining.
 func (x *AddShareablePassConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddShareablePassConfiguration {
 	x.inner.PKAddSecureElementPassConfiguration.SetIssuerIdentifier(foundation.NSStringStringWithUTF8String(issuerIdentifier))
 	return x
 }
 
+// The configuration’s localized description.
+//
 // WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
 func (x *AddShareablePassConfiguration) WithLocalizedDescription(localizedDescription string) *AddShareablePassConfiguration {
 	x.inner.PKAddSecureElementPassConfiguration.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))

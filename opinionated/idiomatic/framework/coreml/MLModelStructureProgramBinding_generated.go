@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class representing a binding in the Program
+//
 // ModelStructureProgramBinding wraps [raw.MLModelStructureProgramBinding] with a fluent Go API.
 type ModelStructureProgramBinding struct {
 	inner *raw.MLModelStructureProgramBinding

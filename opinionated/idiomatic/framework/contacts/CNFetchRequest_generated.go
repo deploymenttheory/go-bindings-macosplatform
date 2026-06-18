@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class for contact fetch requests.
+//
 // FetchRequest wraps [raw.CNFetchRequest] with a fluent Go API.
 type FetchRequest struct {
 	inner *raw.CNFetchRequest

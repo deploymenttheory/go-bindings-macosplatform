@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A group of properties that configures the counter sample buffers you create with it.
+//
 // CounterSampleBufferDescriptor wraps [raw.MTLCounterSampleBufferDescriptor] with a fluent Go API.
 type CounterSampleBufferDescriptor struct {
 	inner *raw.MTLCounterSampleBufferDescriptor
@@ -39,7 +41,7 @@ func NewCounterSampleBufferDescriptor() *CounterSampleBufferDescriptor {
 	return &CounterSampleBufferDescriptor{inner: raw.MTLCounterSampleBufferDescriptorFromID(_id)}
 }
 
-// @property counterSet The counterset to be sampled for this counter sample buffer
+// A GPU device’s counter set instance that you want to sample.
 //
 // WithCounterSet sets the counterSet property and returns the receiver for chaining.
 func (x *CounterSampleBufferDescriptor) WithCounterSet(counterSet raw.MTLCounterSet) *CounterSampleBufferDescriptor {
@@ -47,7 +49,7 @@ func (x *CounterSampleBufferDescriptor) WithCounterSet(counterSet raw.MTLCounter
 	return x
 }
 
-// @property label A label to identify the sample buffer in debugging tools.
+// The name for the counter sample buffer you create with the descriptor.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CounterSampleBufferDescriptor) WithLabel(label string) *CounterSampleBufferDescriptor {
@@ -55,7 +57,7 @@ func (x *CounterSampleBufferDescriptor) WithLabel(label string) *CounterSampleBu
 	return x
 }
 
-// @property storageMode The storage mode for the sample buffer.  Only MTLStorageModeShared and MTLStorageModePrivate may be used.
+// The memory storage mode for the counter sample buffers you create with the descriptor.
 //
 // WithStorageMode sets the storageMode property and returns the receiver for chaining.
 func (x *CounterSampleBufferDescriptor) WithStorageMode(storageMode MTLStorageMode) *CounterSampleBufferDescriptor {
@@ -63,7 +65,7 @@ func (x *CounterSampleBufferDescriptor) WithStorageMode(storageMode MTLStorageMo
 	return x
 }
 
-// @property sampleCount The number of samples that may be stored in the counter sample buffer.
+// The number of instances of a counter set’s data that a counter sample buffer can store.
 //
 // WithSampleCount sets the sampleCount property and returns the receiver for chaining.
 func (x *CounterSampleBufferDescriptor) WithSampleCount(sampleCount uint) *CounterSampleBufferDescriptor {

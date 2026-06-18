@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A collection of metadata items that are valid for use during a specific time range.
+//
 // TimedMetadataGroup wraps [raw.AVTimedMetadataGroup] with a fluent Go API.
 type TimedMetadataGroup struct {
 	inner *raw.AVTimedMetadataGroup
@@ -32,7 +34,7 @@ func TimedMetadataGroupFromID(id objc.ID) *TimedMetadataGroup {
 	return &TimedMetadataGroup{inner: raw.AVTimedMetadataGroupFromID(id)}
 }
 
-// @method		initWithItems:timeRange: @abstract	Initializes an instance of AVTimedMetadataGroup with a collection of metadata items. @param		items An NSArray of AVMetadataItems. @param		timeRange The timeRange of the collection of AVMetadataItems. @result		An instance of AVTimedMetadataGroup.
+// Creates a timed metadata group initialized with the given metadata items.
 //
 // NewTimedMetadataGroupWithItemsTimeRange creates a new [TimedMetadataGroup].
 func NewTimedMetadataGroupWithItemsTimeRange(items *foundation.NSArray[*raw.AVMetadataItem], timeRange coremedia.CMTimeRange) *TimedMetadataGroup {
@@ -55,7 +57,7 @@ func (x *TimedMetadataGroup) TimeRange() coremedia.CMTimeRange {
 	return x.inner.TimeRange()
 }
 
-// @method		copyFormatDescription @abstract	Creates a format description based on the receiver's items. @result		An instance of CMMetadataFormatDescription sufficient to describe the contents of all the items referenced by the receiver. @discussion The returned format description is suitable for use as the format hint parameter when creating an instance of AVAssetWriterInput. Each item referenced by the receiver must carry a non-nil value for its dataType property.  An exception will be thrown if any item does not have a data type.
+// Creates a format description based on the receiver’s items.
 //
 // CopyFormatDescription calls the underlying CopyFormatDescription.
 func (x *TimedMetadataGroup) CopyFormatDescription() unsafe.Pointer {

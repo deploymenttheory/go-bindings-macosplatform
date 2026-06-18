@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Describes triangle geometry suitable for ray tracing.
+//
 // MTL4AccelerationStructureTriangleGeometryDescriptor wraps [raw.MTL4AccelerationStructureTriangleGeometryDescriptor] with a fluent Go API.
 type MTL4AccelerationStructureTriangleGeometryDescriptor struct {
 	inner *raw.MTL4AccelerationStructureTriangleGeometryDescriptor
@@ -38,7 +40,7 @@ func NewMTL4AccelerationStructureTriangleGeometryDescriptor() *MTL4AccelerationS
 	return &MTL4AccelerationStructureTriangleGeometryDescriptor{inner: raw.MTL4AccelerationStructureTriangleGeometryDescriptorFromID(_id)}
 }
 
-// Associates a vertex buffer containing triangle vertices. You are responsible for ensuring that the format of all vertex positions match the “vertexFormat“ property, and that the buffer address for the buffer range is not zero.
+// Associates a vertex buffer containing triangle vertices.
 //
 // WithVertexBuffer sets the vertexBuffer property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithVertexBuffer(vertexBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureTriangleGeometryDescriptor {
@@ -46,7 +48,7 @@ func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithVertexBuffer(v
 	return x
 }
 
-// Describes the format of the vertices in the vertex buffer. This property controls the format of the position attribute of the vertices the “vertexBuffer“ references. The format defaults to `MTLAttributeFormatFloat3`, corresponding to three packed floating point numbers.
+// Describes the format of the vertices in the vertex buffer.
 //
 // WithVertexFormat sets the vertexFormat property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithVertexFormat(vertexFormat MTLAttributeFormat) *MTL4AccelerationStructureTriangleGeometryDescriptor {
@@ -54,7 +56,7 @@ func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithVertexFormat(v
 	return x
 }
 
-// Sets the stride, in bytes, between vertices in the vertex buffer. The stride you specify needs to be a multiple of the size of the vertex format you provide in the “vertexFormat“ property. Similarly, you are responsible for ensuring this stride matches the vertex format data type's alignment. Defaults to `0`, which signals the stride matches the size of the “vertexFormat“ data.
+// Sets the stride, in bytes, between vertices in the vertex buffer.
 //
 // WithVertexStride sets the vertexStride property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithVertexStride(vertexStride uint) *MTL4AccelerationStructureTriangleGeometryDescriptor {
@@ -62,7 +64,7 @@ func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithVertexStride(v
 	return x
 }
 
-// Sets an optional index buffer containing references to vertices in the `vertexBuffer`. You can set this property to `0`, the default, to avoid specifying an index buffer.
+// Sets an optional index buffer containing references to vertices in the vertexBuffer.
 //
 // WithIndexBuffer sets the indexBuffer property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithIndexBuffer(indexBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureTriangleGeometryDescriptor {
@@ -70,7 +72,7 @@ func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithIndexBuffer(in
 	return x
 }
 
-// Configures the size of the indices the `indexBuffer` contains, which is typically either 16 or 32-bits for each index.
+// Configures the size of the indices the indexBuffer contains, which is typically either 16 or 32-bits for each index.
 //
 // WithIndexType sets the indexType property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithIndexType(indexType MTLIndexType) *MTL4AccelerationStructureTriangleGeometryDescriptor {
@@ -86,7 +88,7 @@ func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithTriangleCount(
 	return x
 }
 
-// Assigns an optional reference to a buffer containing a `float4x3` transformation matrix. When the buffer address is non-zero, Metal applies this transform to the vertex data positions when building the acceleration structure. Building an acceleration structure with a descriptor that specifies this property doesn't modify the contents of the input `vertexBuffer`.
+// Assigns an optional reference to a buffer containing a float4x3 transformation matrix.
 //
 // WithTransformationMatrixBuffer sets the transformationMatrixBuffer property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatrixBuffer(transformationMatrixBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureTriangleGeometryDescriptor {
@@ -94,7 +96,7 @@ func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithTransformation
 	return x
 }
 
-// Configures the layout for the transformation matrix in the transformation matrix buffer. You can provide matrices in column-major or row-major form, and this property allows you to control how Metal interprets them. Defaults to `MTLMatrixLayoutColumnMajor`.
+// Configures the layout for the transformation matrix in the transformation matrix buffer.
 //
 // WithTransformationMatrixLayout sets the transformationMatrixLayout property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatrixLayout(transformationMatrixLayout MTLMatrixLayout) *MTL4AccelerationStructureTriangleGeometryDescriptor {
@@ -102,7 +104,7 @@ func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithTransformation
 	return x
 }
 
-// Sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it. When you perform a ray tracing operation in the Metal Shading Language, and provide the ray intersector object with an instance of “MTLIntersectionFunctionTable“, Metal adds this offset to the instance offset from structs such as: - “MTLAccelerationStructureInstanceDescriptor“ - “MTLAccelerationStructureUserIDInstanceDescriptor“ - “MTLAccelerationStructureMotionInstanceDescriptor“ - “MTLIndirectAccelerationStructureInstanceDescriptor“ - “MTLIndirectAccelerationStructureMotionInstanceDescriptor“ The sum of these offsets provides an index into the intersection function table that the ray tracing system uses to retrieve and invoke the function at this index, allowing you to customize the intersection evaluation process.
+// Sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it.
 //
 // WithIntersectionFunctionTableOffset sets the intersectionFunctionTableOffset property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *MTL4AccelerationStructureTriangleGeometryDescriptor {
@@ -118,7 +120,7 @@ func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithOpaque(opaque 
 	return x
 }
 
-// A boolean value that indicates whether the ray-tracing system in Metal allows the invocation of intersection functions more than once per ray-primitive intersection. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+// A boolean value that indicates whether the ray-tracing system in Metal allows the invocation of intersection functions more than once per ray-primitive intersection.
 //
 // WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureTriangleGeometryDescriptor {
@@ -134,7 +136,7 @@ func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithLabel(label st
 	return x
 }
 
-// Assigns optional buffer containing data to associate with each primitive in this geometry. You can use zero as the buffer address in this buffer range.
+// Assigns optional buffer containing data to associate with each primitive in this geometry.
 //
 // WithPrimitiveDataBuffer sets the primitiveDataBuffer property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureTriangleGeometryDescriptor {
@@ -142,7 +144,7 @@ func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataB
 	return x
 }
 
-// Defines the stride, in bytes, between each primitive's data in the primitive data buffer “primitiveDataBuffer“ references. You are responsible for ensuring the stride is at least “primitiveDataElementSize“ in size and a multiple of 4 bytes. This property defaults to `0` bytes,  which indicates the stride is equal to “primitiveDataElementSize“.
+// Defines the stride, in bytes, between each primitive’s data in the primitive data buffer primitiveDataBuffer references.
 //
 // WithPrimitiveDataStride sets the primitiveDataStride property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride uint) *MTL4AccelerationStructureTriangleGeometryDescriptor {
@@ -150,7 +152,7 @@ func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataS
 	return x
 }
 
-// Sets the size, in bytes, of the data for each primitive in the primitive data buffer “primitiveDataBuffer“ references. This size needs to be at most “primitiveDataStride“ in size and a multiple of 4 bytes. This property defaults to 0 bytes.
+// Sets the size, in bytes, of the data for each primitive in the primitive data buffer primitiveDataBuffer references.
 //
 // WithPrimitiveDataElementSize sets the primitiveDataElementSize property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize uint) *MTL4AccelerationStructureTriangleGeometryDescriptor {

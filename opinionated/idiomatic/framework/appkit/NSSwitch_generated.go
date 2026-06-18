@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A control that offers a binary choice.
+//
 // Switch wraps [raw.NSSwitch] with a fluent Go API.
 type Switch struct {
 	inner *raw.NSSwitch
@@ -40,144 +42,192 @@ func NewSwitch() *Switch {
 	return &Switch{inner: raw.NSSwitchFromID(_id)}
 }
 
+// The current position of the switch.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *Switch) WithState(state int) *Switch {
 	x.inner.SetState(state)
 	return x
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *Switch) WithTarget(target objc.ID) *Switch {
 	x.inner.NSControl.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *Switch) WithAction(action objc.SEL) *Switch {
 	x.inner.NSControl.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *Switch) WithTag(tag int) *Switch {
 	x.inner.NSControl.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *Switch) WithIgnoresMultiClick(ignoresMultiClick bool) *Switch {
 	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *Switch) WithContinuous(continuous bool) *Switch {
 	x.inner.NSControl.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *Switch) WithEnabled(enabled bool) *Switch {
 	x.inner.NSControl.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *Switch) WithRefusesFirstResponder(refusesFirstResponder bool) *Switch {
 	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *Switch) WithHighlighted(highlighted bool) *Switch {
 	x.inner.NSControl.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *Switch) WithControlSize(controlSize NSControlSize) *Switch {
 	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *Switch) WithFormatter(formatter *foundation.NSFormatter) *Switch {
 	x.inner.NSControl.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *Switch) WithObjectValue(objectValue objc.ID) *Switch {
 	x.inner.NSControl.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *Switch) WithStringValue(stringValue string) *Switch {
 	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *Switch) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Switch {
 	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *Switch) WithIntValue(intValue int) *Switch {
 	x.inner.NSControl.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *Switch) WithIntegerValue(integerValue int) *Switch {
 	x.inner.NSControl.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *Switch) WithFloatValue(floatValue float32) *Switch {
 	x.inner.NSControl.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *Switch) WithDoubleValue(doubleValue float64) *Switch {
 	x.inner.NSControl.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *Switch) WithFont(font *Font) *Switch {
 	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *Switch) WithUsesSingleLineMode(usesSingleLineMode bool) *Switch {
 	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *Switch) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Switch {
 	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *Switch) WithAlignment(alignment NSTextAlignment) *Switch {
 	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *Switch) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Switch {
 	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *Switch) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Switch {
 	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -232,6 +282,8 @@ func (x *Switch) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *Switch) WithFrame(frame corefoundation.CGRect) *Switch {
 	x.inner.NSControl.NSView.SetFrame(frame)
@@ -256,6 +308,8 @@ func (x *Switch) WithBoundsRotation(boundsRotation float64) *Switch {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *Switch) WithBounds(bounds corefoundation.CGRect) *Switch {
 	x.inner.NSControl.NSView.SetBounds(bounds)
@@ -268,6 +322,8 @@ func (x *Switch) WithCanDrawConcurrently(canDrawConcurrently bool) *Switch {
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *Switch) WithNeedsDisplay(needsDisplay bool) *Switch {
 	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
@@ -454,7 +510,7 @@ func (x *Switch) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundatio
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *Switch) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Switch {
@@ -510,24 +566,32 @@ func (x *Switch) WithPressureConfiguration(pressureConfiguration *PressureConfig
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *Switch) WithNextResponder(nextResponder ResponderProvider) *Switch {
 	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *Switch) WithMenu(menu *Menu) *Switch {
 	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *Switch) WithUserActivity(userActivity *foundation.NSUserActivity) *Switch {
 	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *Switch) WithTouchBar(touchBar *TouchBar) *Switch {
 	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())

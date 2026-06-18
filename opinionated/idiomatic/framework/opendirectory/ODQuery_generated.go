@@ -12,7 +12,7 @@ import (
 	"unsafe"
 )
 
-// @class       ODQuery @abstract    Class used for querying OpenDirectory. @discussion  OpenDirectory queries may be used to search for different types of records, e.g. users, groups.
+// An ODQuery object serves as a Cocoa wrapper for an Open Directory query.
 //
 // Query wraps [raw.ODQuery] with a fluent Go API.
 type Query struct {
@@ -34,7 +34,7 @@ func QueryFromID(id objc.ID) *Query {
 	return &Query{inner: raw.ODQueryFromID(id)}
 }
 
-// @method     initWithNode:forRecordTypes:attribute:matchType:queryValues:returnAttributes:maximumResults:error: @abstract   Creates a query with the node using the parameters provided @discussion Creates a query with the node using the supplied query parameters.  Some parameters can either be NSString or NSData or an NSArray of either NSString or NSData.  Passing nil for returnAttributes is equivalent to passing kODAttributeTypeStandardOnly. outError is optional parameter, nil can be passed if error details are not needed.
+// Creates a query object with provided parameters.
 //
 // NewQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError creates a new [Query].
 func NewQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError(inNode *raw.ODNode, inRecordTypeOrList objc.ID, inAttribute *foundation.NSString, inMatchType uint32, inQueryValueOrList objc.ID, inReturnAttributeOrList objc.ID, inMaximumResults int) (*Query, error) {
@@ -47,7 +47,7 @@ func NewQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributes
 	return &Query{inner: raw.ODQueryFromID(_id)}, nil
 }
 
-// @property   delegate @abstract   The currently set delegate @discussion The query delegate which will receive asynchronous query results.
+// The query’s delegate.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Query) WithDelegate(delegate raw.ODQueryDelegate) *Query {
@@ -55,7 +55,7 @@ func (x *Query) WithDelegate(delegate raw.ODQueryDelegate) *Query {
 	return x
 }
 
-// @property   operationQueue @abstract   The NSOperationQueue on which asynchronous results are delivered to the delegate. @discussion The NSOperationQueue on which asynchronous results are delivered to the delegate.
+// The queue on which asynchronous results are delivered to the delegate.
 //
 // WithOperationQueue sets the operationQueue property and returns the receiver for chaining.
 func (x *Query) WithOperationQueue(operationQueue *foundation.NSOperationQueue) *Query {
@@ -63,28 +63,28 @@ func (x *Query) WithOperationQueue(operationQueue *foundation.NSOperationQueue) 
 	return x
 }
 
-// @method     resultsAllowingPartial:error: @abstract   Returns results from a provided ODQuery synchronously @discussion Returns results from a provided ODQuery synchronously.  Passing NO to inAllowPartialResults will block the call until all results are returned or an error occurs.  YES can be passed at any time even if previous calls were made with NO.  outError is optional parameter, nil can be passed if error details are not needed.
+// Returns results from a query synchronously.
 //
 // ResultsAllowingPartialError calls the underlying ResultsAllowingPartialError.
 func (x *Query) ResultsAllowingPartialError(inAllowPartialResults bool) (*foundation.NSArray[objc.ID], error) {
 	return x.inner.ResultsAllowingPartialError(inAllowPartialResults)
 }
 
-// @method     scheduleInRunLoop:forMode: @abstract   Adds the query object to the specified NSRunLoop to receive asynchronous results @discussion Adds the query object to the specified NSRunLoop to receive asynchronous results.  A delegate must be set in advance otherwise results may be lost due to the lack of a receiver.
+// Retrieves results from a query asynchronously by scheduling the query in a run loop.
 //
 // ScheduleInRunLoopForMode calls the underlying ScheduleInRunLoopForMode.
 func (x *Query) ScheduleInRunLoopForMode(inRunLoop *foundation.NSRunLoop, inMode string) {
 	x.inner.ScheduleInRunLoopForMode(inRunLoop, foundation.NSStringStringWithUTF8String(inMode))
 }
 
-// @method     removeFromRunLoop:forMode: @abstract   Removes the query object from the specified NSRunLoop @discussion Removes the query object from the specified NSRunLoop.
+// Removes the query from a specified run loop.
 //
 // RemoveFromRunLoopForMode calls the underlying RemoveFromRunLoopForMode.
 func (x *Query) RemoveFromRunLoopForMode(inRunLoop *foundation.NSRunLoop, inMode string) {
 	x.inner.RemoveFromRunLoopForMode(inRunLoop, foundation.NSStringStringWithUTF8String(inMode))
 }
 
-// @method     synchronize @abstract   Will dispose of any results and restart the query. @discussion Will dispose of any results and restart the query for subsequent resultsAllowingPartial: calls.  If the query is currently scheduled on a RunLoop, then the delegate will be called with inResults == nil and [inError code] == kODErrorQuerySynchronize and [inError domain] == ODFrameworkErrorDomain, signifying that all existing results should be thrown away in preparation for new results.
+// Restarts a query, disposing of any results it has obtained.
 //
 // Synchronize calls the underlying Synchronize.
 func (x *Query) Synchronize() {

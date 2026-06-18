@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents Automator actions whose runtime behavior is driven by a shell script or by a Perl or Python script.
+//
 // ShellScriptAction wraps [raw.AMShellScriptAction] with a fluent Go API.
 type ShellScriptAction struct {
 	inner *raw.AMShellScriptAction
@@ -37,12 +39,16 @@ func NewShellScriptAction() *ShellScriptAction {
 	return &ShellScriptAction{inner: raw.AMShellScriptActionFromID(_id)}
 }
 
+// The action’s parameters.
+//
 // WithParameters sets the parameters property and returns the receiver for chaining.
 func (x *ShellScriptAction) WithParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) *ShellScriptAction {
 	x.inner.AMBundleAction.SetParameters(parameters)
 	return x
 }
 
+// A float value between 0 and 1, which indicates how far along the action is while processing.
+//
 // WithProgressValue sets the progressValue property and returns the receiver for chaining.
 func (x *ShellScriptAction) WithProgressValue(progressValue float64) *ShellScriptAction {
 	x.inner.AMBundleAction.AMAction.SetProgressValue(progressValue)

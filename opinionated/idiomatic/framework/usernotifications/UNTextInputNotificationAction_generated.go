@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An action that accepts user-typed text.
+//
 // TextInputNotificationAction wraps [raw.UNTextInputNotificationAction] with a fluent Go API.
 type TextInputNotificationAction struct {
 	inner *raw.UNTextInputNotificationAction

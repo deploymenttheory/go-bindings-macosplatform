@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the region in which the system presents a caption.
+//
 // CaptionRegion wraps [raw.AVCaptionRegion] with a fluent Go API.
 type CaptionRegion struct {
 	inner *raw.AVCaptionRegion
@@ -37,13 +39,15 @@ func NewCaptionRegion() *CaptionRegion {
 	return &CaptionRegion{inner: raw.AVCaptionRegionFromID(_id)}
 }
 
-// @method encodeWithCoder: @abstract NSCoding protocol method override @discussion This method throws an exception if the caption region's size has different units for width and height, or if the units are unrecognizeable.
+// Encodes the region using the specified encoder.
 //
 // EncodeWithCoder calls the underlying EncodeWithCoder.
 func (x *CaptionRegion) EncodeWithCoder(encoder *foundation.NSCoder) {
 	x.inner.EncodeWithCoder(encoder)
 }
 
+// Returns a Boolean value that indicates whether an object equals another.
+//
 // IsEqual calls the underlying IsEqual.
 func (x *CaptionRegion) IsEqual(object objc.ID) bool {
 	return x.inner.IsEqual(object)

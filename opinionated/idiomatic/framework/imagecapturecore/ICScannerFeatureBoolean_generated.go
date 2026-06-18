@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A feature with a value of YES or NO.
+//
 // ScannerFeatureBoolean wraps [raw.ICScannerFeatureBoolean] with a fluent Go API.
 type ScannerFeatureBoolean struct {
 	inner *raw.ICScannerFeatureBoolean

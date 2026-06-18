@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides a default search view within a macOS Today widget.
+//
 // WidgetSearchViewController wraps [raw.NCWidgetSearchViewController] with a fluent Go API.
 type WidgetSearchViewController struct {
 	inner *raw.NCWidgetSearchViewController
@@ -37,24 +39,32 @@ func NewWidgetSearchViewController() *WidgetSearchViewController {
 	return &WidgetSearchViewController{inner: raw.NCWidgetSearchViewControllerFromID(_id)}
 }
 
+// The search view controller’s delegate or nil if the receiver doesn’t have a delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *WidgetSearchViewController) WithDelegate(delegate raw.NCWidgetSearchViewDelegate) *WidgetSearchViewController {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// A localized description of the nature of the search.
+//
 // WithSearchDescription sets the searchDescription property and returns the receiver for chaining.
 func (x *WidgetSearchViewController) WithSearchDescription(searchDescription string) *WidgetSearchViewController {
 	x.inner.SetSearchDescription(foundation.NSStringStringWithUTF8String(searchDescription))
 	return x
 }
 
+// A localized phrase displayed in the results list when no search results are available.
+//
 // WithSearchResultsPlaceholderString sets the searchResultsPlaceholderString property and returns the receiver for chaining.
 func (x *WidgetSearchViewController) WithSearchResultsPlaceholderString(searchResultsPlaceholderString string) *WidgetSearchViewController {
 	x.inner.SetSearchResultsPlaceholderString(foundation.NSStringStringWithUTF8String(searchResultsPlaceholderString))
 	return x
 }
 
+// A key path for the string property to display for each object in the search results array.
+//
 // WithSearchResultKeyPath sets the searchResultKeyPath property and returns the receiver for chaining.
 func (x *WidgetSearchViewController) WithSearchResultKeyPath(searchResultKeyPath string) *WidgetSearchViewController {
 	x.inner.SetSearchResultKeyPath(foundation.NSStringStringWithUTF8String(searchResultKeyPath))

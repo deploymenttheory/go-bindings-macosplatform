@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A singleton object that performs systemwide MIDI-CI discovery.
+//
 // CIDiscoveryManager wraps [raw.MIDICIDiscoveryManager] with a fluent Go API.
 type CIDiscoveryManager struct {
 	inner *raw.MIDICIDiscoveryManager
@@ -36,6 +38,8 @@ func NewCIDiscoveryManager() *CIDiscoveryManager {
 	return &CIDiscoveryManager{inner: raw.MIDICIDiscoveryManagerFromID(_id)}
 }
 
+// Discovers the available MIDI-CI nodes.
+//
 // DiscoverWithHandler calls the underlying DiscoverWithHandler.
 func (x *CIDiscoveryManager) DiscoverWithHandler(completedHandler func(*foundation.NSArray[*raw.MIDICIDiscoveredNode])) {
 	x.inner.DiscoverWithHandler(completedHandler)

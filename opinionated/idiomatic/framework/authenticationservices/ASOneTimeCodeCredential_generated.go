@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A one-time passcode (OTP) credential.
+//
 // OneTimeCodeCredential wraps [raw.ASOneTimeCodeCredential] with a fluent Go API.
 type OneTimeCodeCredential struct {
 	inner *raw.ASOneTimeCodeCredential
@@ -31,7 +33,7 @@ func OneTimeCodeCredentialFromID(id objc.ID) *OneTimeCodeCredential {
 	return &OneTimeCodeCredential{inner: raw.ASOneTimeCodeCredentialFromID(id)}
 }
 
-// @abstract Initializes an ASOneTimeCodeCredential object. @param code the one time code.
+// Creates a one-time passcode (OTP) credential.
 //
 // NewOneTimeCodeCredentialWithCode creates a new [OneTimeCodeCredential].
 func NewOneTimeCodeCredentialWithCode(code string) *OneTimeCodeCredential {

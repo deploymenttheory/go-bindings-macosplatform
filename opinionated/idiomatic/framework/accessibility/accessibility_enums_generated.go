@@ -8,6 +8,7 @@ import (
 	"fmt"
 )
 
+// A constant that describes the content direction of the chart.
 type AXChartDescriptorContentDirection int64
 
 const (
@@ -38,6 +39,7 @@ func (e AXChartDescriptorContentDirection) String() string {
 	}
 }
 
+// Objects that control the timing of content output.
 type AXCustomContentImportance uint64
 
 const (
@@ -56,6 +58,7 @@ func (e AXCustomContentImportance) String() string {
 	}
 }
 
+// Constants that describe the scale of a numeric axis.
 type AXNumericDataAxisDescriptorScale int64
 
 const (

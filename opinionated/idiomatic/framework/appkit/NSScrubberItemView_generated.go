@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An item at a specific index position in the scrubber.
+//
 // ScrubberItemView wraps [raw.NSScrubberItemView] with a fluent Go API.
 type ScrubberItemView struct {
 	inner *raw.NSScrubberItemView
@@ -40,12 +42,16 @@ func NewScrubberItemView() *ScrubberItemView {
 	return &ScrubberItemView{inner: raw.NSScrubberItemViewFromID(_id)}
 }
 
+// A Boolean value that specifies whether the current view is selected.
+//
 // WithSelected sets the selected property and returns the receiver for chaining.
 func (x *ScrubberItemView) WithSelected(selected bool) *ScrubberItemView {
 	x.inner.NSScrubberArrangedView.SetSelected(selected)
 	return x
 }
 
+// A Boolean value that specifies whether the view is currently highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *ScrubberItemView) WithHighlighted(highlighted bool) *ScrubberItemView {
 	x.inner.NSScrubberArrangedView.SetHighlighted(highlighted)
@@ -94,6 +100,8 @@ func (x *ScrubberItemView) WithAutoresizingMask(autoresizingMask NSAutoresizingM
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *ScrubberItemView) WithFrame(frame corefoundation.CGRect) *ScrubberItemView {
 	x.inner.NSScrubberArrangedView.NSView.SetFrame(frame)
@@ -118,6 +126,8 @@ func (x *ScrubberItemView) WithBoundsRotation(boundsRotation float64) *ScrubberI
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *ScrubberItemView) WithBounds(bounds corefoundation.CGRect) *ScrubberItemView {
 	x.inner.NSScrubberArrangedView.NSView.SetBounds(bounds)
@@ -130,6 +140,8 @@ func (x *ScrubberItemView) WithCanDrawConcurrently(canDrawConcurrently bool) *Sc
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *ScrubberItemView) WithNeedsDisplay(needsDisplay bool) *ScrubberItemView {
 	x.inner.NSScrubberArrangedView.NSView.SetNeedsDisplay(needsDisplay)
@@ -316,7 +328,7 @@ func (x *ScrubberItemView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *ScrubberItemView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrubberItemView {
@@ -372,24 +384,32 @@ func (x *ScrubberItemView) WithPressureConfiguration(pressureConfiguration *Pres
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *ScrubberItemView) WithNextResponder(nextResponder ResponderProvider) *ScrubberItemView {
 	x.inner.NSScrubberArrangedView.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *ScrubberItemView) WithMenu(menu *Menu) *ScrubberItemView {
 	x.inner.NSScrubberArrangedView.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *ScrubberItemView) WithUserActivity(userActivity *foundation.NSUserActivity) *ScrubberItemView {
 	x.inner.NSScrubberArrangedView.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *ScrubberItemView) WithTouchBar(touchBar *TouchBar) *ScrubberItemView {
 	x.inner.NSScrubberArrangedView.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())

@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// The class that defines the parameters for a variable.
+//
 // GraphVariableOp wraps [raw.MPSGraphVariableOp] with a fluent Go API.
 type GraphVariableOp struct {
 	inner *raw.MPSGraphVariableOp

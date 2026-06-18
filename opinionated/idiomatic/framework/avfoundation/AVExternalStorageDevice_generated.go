@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Represents a physical external storage device that stores media assets.
+//
 // ExternalStorageDevice wraps [raw.AVExternalStorageDevice] with a fluent Go API.
 type ExternalStorageDevice struct {
 	inner *raw.AVExternalStorageDevice
@@ -37,7 +39,7 @@ func NewExternalStorageDevice() *ExternalStorageDevice {
 	return &ExternalStorageDevice{inner: raw.AVExternalStorageDeviceFromID(_id)}
 }
 
-// @method nextAvailableURLsWithPathExtensions:error: @abstract Next available security-scoped, DCF compliant URL array with different path extensions. @param extensionArray An array of path extensions for the next available URL requested. @param outError An out parameter with error information indicating why the URL could not be provided. If this method is successful, error will be nil. @result An array of DCF compliant security-scoped URL with all the path extensions requested. @discussion Configures the folder structure (create a DCIM folder if there isn't one already) on the external storage device to provide the next available unique DCF compliant security-scoped URL array with different path extensions. Security-scoped URL requires the use of startAccessingSecurityScopedResource, and stopAccessingSecurityScopedResource for access. [nextAvailableURL startAccessingSecurityScopedResource]; . . . // your code to capture image / video . . . [nextAvailableURL stopAccessingSecurityScopedResource]; Use the +requestAccessWithCompletionHandler: method to request access to external storage device before getting the next available URL array else an error will be thrown.
+// Generates an array of security scoped URLs that are compliant for digital camera formats, where each element has a different path extension.
 //
 // NextAvailableURLsWithPathExtensionsError calls the underlying NextAvailableURLsWithPathExtensionsError.
 func (x *ExternalStorageDevice) NextAvailableURLsWithPathExtensionsError(extensionArray *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*foundation.NSURL], error) {

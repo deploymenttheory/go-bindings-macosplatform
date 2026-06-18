@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A controller that accesses user preference information for your app from the user’s defaults database.
+//
 // UserDefaultsController wraps [raw.NSUserDefaultsController] with a fluent Go API.
 type UserDefaultsController struct {
 	inner *raw.NSUserDefaultsController
@@ -36,6 +38,8 @@ func NewUserDefaultsController() *UserDefaultsController {
 	return &UserDefaultsController{inner: raw.NSUserDefaultsControllerFromID(_id)}
 }
 
+// Returns an initialized NSUserDefaultsController object using the NSUserDefaults instance specified in defaults and the initial default values contained in the initialValues dictionary.
+//
 // NewUserDefaultsControllerWithDefaultsInitialValues creates a new [UserDefaultsController].
 func NewUserDefaultsControllerWithDefaultsInitialValues(defaults *foundation.NSUserDefaults, initialValues *foundation.NSDictionary[*foundation.NSString, objc.ID]) *UserDefaultsController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUserDefaultsController")), objc.RegisterName("alloc"))
@@ -50,28 +54,38 @@ func NewUserDefaultsControllerWithCoder(coder *foundation.NSCoder) *UserDefaults
 	return &UserDefaultsController{inner: raw.NSUserDefaultsControllerFromID(_id)}
 }
 
+// Returns a dictionary containing the receiver’s initial default values.
+//
 // WithInitialValues sets the initialValues property and returns the receiver for chaining.
 func (x *UserDefaultsController) WithInitialValues(initialValues *foundation.NSDictionary[*foundation.NSString, objc.ID]) *UserDefaultsController {
 	x.inner.SetInitialValues(initialValues)
 	return x
 }
 
+// Returns whether any changes made to bound user default properties are saved immediately.
+//
 // WithAppliesImmediately sets the appliesImmediately property and returns the receiver for chaining.
 func (x *UserDefaultsController) WithAppliesImmediately(appliesImmediately bool) *UserDefaultsController {
 	x.inner.SetAppliesImmediately(appliesImmediately)
 	return x
 }
 
+// Causes the receiver to discard any unsaved changes to bound user default properties, restoring their previous values.
+//
 // Revert calls the underlying Revert.
 func (x *UserDefaultsController) Revert(sender objc.ID) {
 	x.inner.Revert(sender)
 }
 
+// Saves the values of the receiver’s user default properties.
+//
 // Save calls the underlying Save.
 func (x *UserDefaultsController) Save(sender objc.ID) {
 	x.inner.Save(sender)
 }
 
+// Causes the receiver to discard all edits and replace the values of all the user default properties with any corresponding values in the initialValues dictionary.
+//
 // RevertToInitialValues calls the underlying RevertToInitialValues.
 func (x *UserDefaultsController) RevertToInitialValues(sender objc.ID) {
 	x.inner.RevertToInitialValues(sender)

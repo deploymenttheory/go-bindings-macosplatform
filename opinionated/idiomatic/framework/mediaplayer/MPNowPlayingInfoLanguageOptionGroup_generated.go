@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A grouped set of language options where only a single language option can be active at a time.
+//
 // NowPlayingInfoLanguageOptionGroup wraps [raw.MPNowPlayingInfoLanguageOptionGroup] with a fluent Go API.
 type NowPlayingInfoLanguageOptionGroup struct {
 	inner *raw.MPNowPlayingInfoLanguageOptionGroup
@@ -33,6 +35,8 @@ func NowPlayingInfoLanguageOptionGroupFromID(id objc.ID) *NowPlayingInfoLanguage
 	return &NowPlayingInfoLanguageOptionGroup{inner: raw.MPNowPlayingInfoLanguageOptionGroupFromID(id)}
 }
 
+// Creates a new language option group with the supplied language options.
+//
 // NewNowPlayingInfoLanguageOptionGroupWithLanguageOptionsDefaultLanguageOptionAllowEmptySelection creates a new [NowPlayingInfoLanguageOptionGroup].
 func NewNowPlayingInfoLanguageOptionGroupWithLanguageOptionsDefaultLanguageOptionAllowEmptySelection(languageOptions *foundation.NSArray[*raw.MPNowPlayingInfoLanguageOption], defaultLanguageOption *raw.MPNowPlayingInfoLanguageOption, allowEmptySelection bool) *NowPlayingInfoLanguageOptionGroup {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPNowPlayingInfoLanguageOptionGroup")), objc.RegisterName("alloc"))

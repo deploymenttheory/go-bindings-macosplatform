@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides the enabled and disabled profiles for a MIDI channel or port on a device.
+//
 // CIProfileState wraps [raw.MIDICIProfileState] with a fluent Go API.
 type CIProfileState struct {
 	inner *raw.MIDICIProfileState
@@ -31,6 +33,8 @@ func CIProfileStateFromID(id objc.ID) *CIProfileState {
 	return &CIProfileState{inner: raw.MIDICIProfileStateFromID(id)}
 }
 
+// Creates a new profile state object for the specified MIDI channel and profiles.
+//
 // NewCIProfileStateWithChannelEnabledProfilesDisabledProfiles creates a new [CIProfileState].
 func NewCIProfileStateWithChannelEnabledProfilesDisabledProfiles(midiChannelNum uint8, enabled *foundation.NSArray[*raw.MIDICIProfile], disabled *foundation.NSArray[*raw.MIDICIProfile]) *CIProfileState {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICIProfileState")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewCIProfileStateWithChannelEnabledProfilesDisabledProfiles(midiChannelNum 
 	return &CIProfileState{inner: raw.MIDICIProfileStateFromID(_id)}
 }
 
+// Creates a new profile state object for the specified profiles.
+//
 // NewCIProfileStateWithEnabledProfilesDisabledProfiles creates a new [CIProfileState].
 func NewCIProfileStateWithEnabledProfilesDisabledProfiles(enabled *foundation.NSArray[*raw.MIDICIProfile], disabled *foundation.NSArray[*raw.MIDICIProfile]) *CIProfileState {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICIProfileState")), objc.RegisterName("alloc"))

@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A control that defines an area on the screen that a user clicks to trigger an action.
+//
 // Button wraps [raw.NSButton] with a fluent Go API.
 type Button struct {
 	inner *raw.NSButton
@@ -41,7 +43,7 @@ func NewButton() *Button {
 	return &Button{inner: raw.NSButtonFromID(_id)}
 }
 
-// The title displayed on the button when it’s in an off state, or an empty string if the button does not display a title. By default, a button's title is "Button".
+// The title displayed on the button when it’s in an off state.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *Button) WithTitle(title string) *Button {
@@ -49,7 +51,7 @@ func (x *Button) WithTitle(title string) *Button {
 	return x
 }
 
-// The button's title, expressed as an attributed string.
+// The title that the button displays in an off state, as an attributed string.
 //
 // WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
 func (x *Button) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *Button {
@@ -57,7 +59,7 @@ func (x *Button) WithAttributedTitle(attributedTitle *foundation.NSAttributedStr
 	return x
 }
 
-// The title that the button displays when the button is in an on state, or an empty string if there is no such title. Note that some button types do not display an alternate title.
+// The title that the button displays when the button is in an on state.
 //
 // WithAlternateTitle sets the alternateTitle property and returns the receiver for chaining.
 func (x *Button) WithAlternateTitle(alternateTitle string) *Button {
@@ -65,7 +67,7 @@ func (x *Button) WithAlternateTitle(alternateTitle string) *Button {
 	return x
 }
 
-// The alternate title, expressed as an attributed string.
+// The title that the button displays as an attributed string when the button is in an on state.
 //
 // WithAttributedAlternateTitle sets the attributedAlternateTitle property and returns the receiver for chaining.
 func (x *Button) WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *Button {
@@ -73,7 +75,7 @@ func (x *Button) WithAttributedAlternateTitle(attributedAlternateTitle *foundati
 	return x
 }
 
-// Indicates whether the button's action has a destructive effect on user data.  AppKit may guard a destructive-actioned button against accidental presses, and may give the button a special appearance in certain contexts to caution against unintentional use.  Defaults to NO.
+// A Boolean value that defines whether a button’s action has a destructive effect.
 //
 // WithHasDestructiveAction sets the hasDestructiveAction property and returns the receiver for chaining.
 func (x *Button) WithHasDestructiveAction(hasDestructiveAction bool) *Button {
@@ -81,7 +83,7 @@ func (x *Button) WithHasDestructiveAction(hasDestructiveAction bool) *Button {
 	return x
 }
 
-// The sound that plays when the user clicks the button, or nil if the button should not play a sound. The default value is nil.
+// The sound that plays when the user clicks the button.
 //
 // WithSound sets the sound property and returns the receiver for chaining.
 func (x *Button) WithSound(sound *Sound) *Button {
@@ -89,7 +91,7 @@ func (x *Button) WithSound(sound *Sound) *Button {
 	return x
 }
 
-// Sends action on deep-press or extended hover while dragging. Defaults to NO.
+// A Boolean value that indicates whether spring loading is enabled for the button.
 //
 // WithSpringLoaded sets the springLoaded property and returns the receiver for chaining.
 func (x *Button) WithSpringLoaded(springLoaded bool) *Button {
@@ -97,7 +99,7 @@ func (x *Button) WithSpringLoaded(springLoaded bool) *Button {
 	return x
 }
 
-// Configures the maximum allowed level for an NSMultiLevelAcceleratorButton, allowed values range from [1,5]. Defaults to 2.
+// An integer value indicating the maximum pressure level for a button of type NSMultiLevelAcceleratorButton.
 //
 // WithMaxAcceleratorLevel sets the maxAcceleratorLevel property and returns the receiver for chaining.
 func (x *Button) WithMaxAcceleratorLevel(maxAcceleratorLevel int) *Button {
@@ -105,7 +107,7 @@ func (x *Button) WithMaxAcceleratorLevel(maxAcceleratorLevel int) *Button {
 	return x
 }
 
-// The bezel style of the button, which provides a set of bezel artwork, layout metrics, and content styling from a set of system-provided styles. See the NSBezelStyle enumeration for a list of available styles. The bezel style is not used if the `bordered` property is set to `NO`.
+// The appearance of the button’s border.
 //
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
 func (x *Button) WithBezelStyle(bezelStyle NSBezelStyle) *Button {
@@ -113,7 +115,7 @@ func (x *Button) WithBezelStyle(bezelStyle NSBezelStyle) *Button {
 	return x
 }
 
-// A Boolean value that determines whether the button draws a border.
+// A Boolean value that determines whether the button has a border.
 //
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *Button) WithBordered(bordered bool) *Button {
@@ -121,7 +123,7 @@ func (x *Button) WithBordered(bordered bool) *Button {
 	return x
 }
 
-// A Boolean value that indicates whether the button is transparent. A transparent button never draws itself, but it receives mouse events, sends its action, and tracks the mouse properly.
+// A Boolean value that indicates whether the button is transparent.
 //
 // WithTransparent sets the transparent property and returns the receiver for chaining.
 func (x *Button) WithTransparent(transparent bool) *Button {
@@ -129,13 +131,15 @@ func (x *Button) WithTransparent(transparent bool) *Button {
 	return x
 }
 
+// A Boolean value that determines whether the button displays its border only when the pointer is over it.
+//
 // WithShowsBorderOnlyWhileMouseInside sets the showsBorderOnlyWhileMouseInside property and returns the receiver for chaining.
 func (x *Button) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *Button {
 	x.inner.SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside)
 	return x
 }
 
-// Applies a custom color to the button's bezel, in appearances that support it. A nil value indicates an unmodified button appearance. The default value is nil.
+// The color of the button’s bezel, in appearances that support it.
 //
 // WithBezelColor sets the bezelColor property and returns the receiver for chaining.
 func (x *Button) WithBezelColor(bezelColor *Color) *Button {
@@ -143,7 +147,7 @@ func (x *Button) WithBezelColor(bezelColor *Color) *Button {
 	return x
 }
 
-// Applies a tint color to template image and text content, in combination with other theme-appropriate effects. Only applicable to borderless buttons. A nil value indicates the standard set of effects without color modification. The default value is nil. Non-template images and attributed string values are not affected by the contentTintColor.
+// A tint color to use for the template image and text content.
 //
 // WithContentTintColor sets the contentTintColor property and returns the receiver for chaining.
 func (x *Button) WithContentTintColor(contentTintColor *Color) *Button {
@@ -151,7 +155,7 @@ func (x *Button) WithContentTintColor(contentTintColor *Color) *Button {
 	return x
 }
 
-// The tint prominence of the button. Use tint prominence to gently suggest a hierarchy when multiple buttons perform similar actions. A button with primary tint prominence suggests the most preferred option, while secondary prominence indicates a reasonable alternative. See “NSTintProminence“ for a list of possible values.
+// The tint prominence of the button. Use tint prominence to gently suggest a hierarchy when multiple buttons perform similar actions. A button with primary tint prominence suggests the most preferred option, while secondary prominence indicates a reasonable alternative. See NSTintProminence for a list of possible values.
 //
 // WithTintProminence sets the tintProminence property and returns the receiver for chaining.
 func (x *Button) WithTintProminence(tintProminence NSTintProminence) *Button {
@@ -167,7 +171,7 @@ func (x *Button) WithImage(image *Image) *Button {
 	return x
 }
 
-// An alternate image that appears on the button when the button is in an on state, or nil if there is no such image. Note that some button types do not display an alternate image.
+// An alternate image that appears on the button when the button is in an on state.
 //
 // WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
 func (x *Button) WithAlternateImage(alternateImage *Image) *Button {
@@ -175,7 +179,7 @@ func (x *Button) WithAlternateImage(alternateImage *Image) *Button {
 	return x
 }
 
-// The position of the button's image relative to its title. See the NSCellImagePosition enumeration for possible values.
+// The position of the button’s image relative to its title.
 //
 // WithImagePosition sets the imagePosition property and returns the receiver for chaining.
 func (x *Button) WithImagePosition(imagePosition NSCellImagePosition) *Button {
@@ -183,7 +187,7 @@ func (x *Button) WithImagePosition(imagePosition NSCellImagePosition) *Button {
 	return x
 }
 
-// The scaling mode applied to make the button's image fit within its bounds.
+// The scaling mode applied to make the cell’s image fit the frame of the image view.
 //
 // WithImageScaling sets the imageScaling property and returns the receiver for chaining.
 func (x *Button) WithImageScaling(imageScaling NSImageScaling) *Button {
@@ -191,7 +195,7 @@ func (x *Button) WithImageScaling(imageScaling NSImageScaling) *Button {
 	return x
 }
 
-// A Boolean value that determines how the button's image and title are positioned together within the button bezel. If false, the image is positioned according to the imagePosition property at the edge of the button bezel, and the title is positioned within the remaining space. If true, the button’s image is positioned directly adjacent to the title based on the imagePosition property, and the image and title are positioned within the button bezel as a single unit.
+// A Boolean value that determines how the button’s image and title are positioned together within the button bezel.
 //
 // WithImageHugsTitle sets the imageHugsTitle property and returns the receiver for chaining.
 func (x *Button) WithImageHugsTitle(imageHugsTitle bool) *Button {
@@ -199,7 +203,7 @@ func (x *Button) WithImageHugsTitle(imageHugsTitle bool) *Button {
 	return x
 }
 
-// Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the symbol is matched to the button's `font` property. The default value is nil.
+// The combination of point size, weight, and scale to use when sizing and displaying symbol images.
 //
 // WithSymbolConfiguration sets the symbolConfiguration property and returns the receiver for chaining.
 func (x *Button) WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *Button {
@@ -207,7 +211,7 @@ func (x *Button) WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfigu
 	return x
 }
 
-// The button's state. Buttons support the off and on states, and an additional mixed state depending on the value of the `allowsMixedState` property.
+// The button’s state.
 //
 // WithState sets the state property and returns the receiver for chaining.
 func (x *Button) WithState(state int) *Button {
@@ -215,7 +219,7 @@ func (x *Button) WithState(state int) *Button {
 	return x
 }
 
-// A Boolean value that indicates whether the button allows a mixed state. If NO, the button has two states (on and off), and if YES, the button has three states (on, off, and mixed). The mixed state is commonly used with checkboxes and radio buttons to indicate a value which is partially on.
+// A Boolean value that indicates whether the button allows a mixed state.
 //
 // WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
 func (x *Button) WithAllowsMixedState(allowsMixedState bool) *Button {
@@ -223,7 +227,7 @@ func (x *Button) WithAllowsMixedState(allowsMixedState bool) *Button {
 	return x
 }
 
-// This property contains the button's key equivalent, or the empty string if no equivalent has been defined. Buttons don’t have a default key equivalent. Setting the key equivalent to the Return character causes it to act as the default button for its window.
+// The key-equivalent character of the button.
 //
 // WithKeyEquivalent sets the keyEquivalent property and returns the receiver for chaining.
 func (x *Button) WithKeyEquivalent(keyEquivalent string) *Button {
@@ -231,7 +235,7 @@ func (x *Button) WithKeyEquivalent(keyEquivalent string) *Button {
 	return x
 }
 
-// A bitmask specifying the modifier keys that are applied to the button's key equivalent. Mask bits are defined by the NSEventModifierFlags option set. The only mask bits relevant in button key-equivalent modifier masks are NSEventModifierFlagControl, NSEventModifierFlagOption, and NSEventModifierFlagCommand.
+// The mask specifying the modifier keys for the button’s key equivalent.
 //
 // WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
 func (x *Button) WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *Button {
@@ -245,138 +249,184 @@ func (x *Button) WithBorderShape(borderShape NSControlBorderShape) *Button {
 	return x
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *Button) WithTarget(target objc.ID) *Button {
 	x.inner.NSControl.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *Button) WithAction(action objc.SEL) *Button {
 	x.inner.NSControl.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *Button) WithTag(tag int) *Button {
 	x.inner.NSControl.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *Button) WithIgnoresMultiClick(ignoresMultiClick bool) *Button {
 	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *Button) WithContinuous(continuous bool) *Button {
 	x.inner.NSControl.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *Button) WithEnabled(enabled bool) *Button {
 	x.inner.NSControl.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *Button) WithRefusesFirstResponder(refusesFirstResponder bool) *Button {
 	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *Button) WithHighlighted(highlighted bool) *Button {
 	x.inner.NSControl.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *Button) WithControlSize(controlSize NSControlSize) *Button {
 	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *Button) WithFormatter(formatter *foundation.NSFormatter) *Button {
 	x.inner.NSControl.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *Button) WithObjectValue(objectValue objc.ID) *Button {
 	x.inner.NSControl.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *Button) WithStringValue(stringValue string) *Button {
 	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *Button) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Button {
 	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *Button) WithIntValue(intValue int) *Button {
 	x.inner.NSControl.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *Button) WithIntegerValue(integerValue int) *Button {
 	x.inner.NSControl.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *Button) WithFloatValue(floatValue float32) *Button {
 	x.inner.NSControl.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *Button) WithDoubleValue(doubleValue float64) *Button {
 	x.inner.NSControl.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *Button) WithFont(font *Font) *Button {
 	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *Button) WithUsesSingleLineMode(usesSingleLineMode bool) *Button {
 	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *Button) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Button {
 	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *Button) WithAlignment(alignment NSTextAlignment) *Button {
 	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *Button) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Button {
 	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *Button) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Button {
 	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -431,6 +481,8 @@ func (x *Button) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *Button) WithFrame(frame corefoundation.CGRect) *Button {
 	x.inner.NSControl.NSView.SetFrame(frame)
@@ -455,6 +507,8 @@ func (x *Button) WithBoundsRotation(boundsRotation float64) *Button {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *Button) WithBounds(bounds corefoundation.CGRect) *Button {
 	x.inner.NSControl.NSView.SetBounds(bounds)
@@ -467,6 +521,8 @@ func (x *Button) WithCanDrawConcurrently(canDrawConcurrently bool) *Button {
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *Button) WithNeedsDisplay(needsDisplay bool) *Button {
 	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
@@ -653,7 +709,7 @@ func (x *Button) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundatio
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *Button) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Button {
@@ -709,70 +765,82 @@ func (x *Button) WithPressureConfiguration(pressureConfiguration *PressureConfig
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *Button) WithNextResponder(nextResponder ResponderProvider) *Button {
 	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *Button) WithMenu(menu *Menu) *Button {
 	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *Button) WithUserActivity(userActivity *foundation.NSUserActivity) *Button {
 	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *Button) WithTouchBar(touchBar *TouchBar) *Button {
 	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
-// Sets the button’s type, which affects its user interface and behavior when clicked. See the NSButtonType enumeration for possible options and their behaviors.
+// Sets the button’s type, which affects its user interface and behavior when clicked.
 //
 // SetButtonType calls the underlying SetButtonType.
 func (x *Button) SetButtonType(type_ NSButtonType) {
 	x.inner.SetButtonType(raw.NSButtonType(type_))
 }
 
-// Sets the initial delay and repeat interval, in seconds, for repeated action messages sent when `continuous` is YES.
+// Sets the message delay and interval periods for a continuous button.
 //
 // SetPeriodicDelayInterval calls the underlying SetPeriodicDelayInterval.
 func (x *Button) SetPeriodicDelayInterval(delay float32, interval float32) {
 	x.inner.SetPeriodicDelayInterval(delay, interval)
 }
 
-// Gets the initial delay and repeat interval, in seconds, for repeated action messages sent when `continuous` is YES. Both parameters to this method must not be NULL.
+// Returns by reference the delay and interval periods for a continuous button.
 //
 // GetPeriodicDelayInterval calls the underlying GetPeriodicDelayInterval.
 func (x *Button) GetPeriodicDelayInterval(delay *float32, interval *float32) {
 	x.inner.GetPeriodicDelayInterval(delay, interval)
 }
 
-// Sets the button to its next eligible state. If the button allows mixed state, this cycles through the states in the order: on, off, mixed, on, etc. If the button does not allow mixed state, it toggles between off and on.
+// Sets the button to its next state.
 //
 // SetNextState calls the underlying SetNextState.
 func (x *Button) SetNextState() {
 	x.inner.SetNextState()
 }
 
-// Highlights, or un-highlights, the button. Highlighting makes the button appear "pressed", which may include showing an illuminated bezel, or showing the alternate image or title, depending on the type of button.
+// Highlights (or unhighlights) the button.
 //
 // Highlight calls the underlying Highlight.
 func (x *Button) Highlight(flag bool) {
 	x.inner.Highlight(flag)
 }
 
+// Sets the priority compression options for this button.
+//
 // CompressWithPrioritizedCompressionOptions calls the underlying CompressWithPrioritizedCompressionOptions.
 func (x *Button) CompressWithPrioritizedCompressionOptions(prioritizedOptions *foundation.NSArray[*raw.NSUserInterfaceCompressionOptions]) {
 	x.inner.CompressWithPrioritizedCompressionOptions(prioritizedOptions)
 }
 
+// Returns the minimum size of the button by using the compression options.
+//
 // MinimumSizeWithPrioritizedCompressionOptions calls the underlying MinimumSizeWithPrioritizedCompressionOptions.
 func (x *Button) MinimumSizeWithPrioritizedCompressionOptions(prioritizedOptions *foundation.NSArray[*raw.NSUserInterfaceCompressionOptions]) corefoundation.CGSize {
 	return x.inner.MinimumSizeWithPrioritizedCompressionOptions(prioritizedOptions)
@@ -1179,6 +1247,8 @@ func (x *Button) SetBorderShape(borderShape NSControlBorderShape) {
 	x.inner.SetBorderShape(raw.NSControlBorderShape(borderShape))
 }
 
+// Sets the title of a button with a character denoting an access key.
+//
 // SetTitleWithMnemonic calls the underlying SetTitleWithMnemonic.
 func (x *Button) SetTitleWithMnemonic(stringWithAmpersand string) {
 	x.inner.SetTitleWithMnemonic(foundation.NSStringStringWithUTF8String(stringWithAmpersand))

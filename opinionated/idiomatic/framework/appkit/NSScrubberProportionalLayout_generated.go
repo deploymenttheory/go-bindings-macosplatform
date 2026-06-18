@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A concrete layout object that sizes each item to some fraction of the scrubber’s visible size.
+//
 // ScrubberProportionalLayout wraps [raw.NSScrubberProportionalLayout] with a fluent Go API.
 type ScrubberProportionalLayout struct {
 	inner *raw.NSScrubberProportionalLayout
@@ -30,6 +32,8 @@ func ScrubberProportionalLayoutFromID(id objc.ID) *ScrubberProportionalLayout {
 	return &ScrubberProportionalLayout{inner: raw.NSScrubberProportionalLayoutFromID(id)}
 }
 
+// Initializes and returns a newly allocated proportional layout, configured to display the given number of items.
+//
 // NewScrubberProportionalLayoutWithNumberOfVisibleItems creates a new [ScrubberProportionalLayout].
 func NewScrubberProportionalLayoutWithNumberOfVisibleItems(numberOfVisibleItems int) *ScrubberProportionalLayout {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScrubberProportionalLayout")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewScrubberProportionalLayoutWithNumberOfVisibleItems(numberOfVisibleItems 
 	return &ScrubberProportionalLayout{inner: raw.NSScrubberProportionalLayoutFromID(_id)}
 }
 
+// Initializes and returns a newly allocated proprotional layout object from a storyboard or nib file.
+//
 // NewScrubberProportionalLayoutWithCoder creates a new [ScrubberProportionalLayout].
 func NewScrubberProportionalLayoutWithCoder(coder *foundation.NSCoder) *ScrubberProportionalLayout {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScrubberProportionalLayout")), objc.RegisterName("alloc"))
@@ -44,7 +50,7 @@ func NewScrubberProportionalLayoutWithCoder(coder *foundation.NSCoder) *Scrubber
 	return &ScrubberProportionalLayout{inner: raw.NSScrubberProportionalLayoutFromID(_id)}
 }
 
-// The number of items that should fit within the scrubber's viewport at once.
+// The number of items visible in the scrubber at once.
 //
 // WithNumberOfVisibleItems sets the numberOfVisibleItems property and returns the receiver for chaining.
 func (x *ScrubberProportionalLayout) WithNumberOfVisibleItems(numberOfVisibleItems int) *ScrubberProportionalLayout {

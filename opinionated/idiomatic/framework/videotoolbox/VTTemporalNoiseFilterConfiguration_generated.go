@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration object to initiate a frame processor and use temporal noise-filter processor.
+//
 // TemporalNoiseFilterConfiguration wraps [raw.VTTemporalNoiseFilterConfiguration] with a fluent Go API.
 type TemporalNoiseFilterConfiguration struct {
 	inner *raw.VTTemporalNoiseFilterConfiguration
@@ -33,7 +35,7 @@ func TemporalNoiseFilterConfigurationFromID(id objc.ID) *TemporalNoiseFilterConf
 	return &TemporalNoiseFilterConfiguration{inner: raw.VTTemporalNoiseFilterConfigurationFromID(id)}
 }
 
-// Creates a new temporal noise-processor configuration. Returns nil if frameWidth, frameHeight, or sourcePixelFormat is unsupported. - Parameters: - frameWidth: Width of source frame in pixels. - frameHeight: Height of source frame in pixels.
+// Creates a new temporal noise-processor configuration.
 //
 // NewTemporalNoiseFilterConfigurationWithFrameWidthFrameHeightSourcePixelFormat creates a new [TemporalNoiseFilterConfiguration].
 func NewTemporalNoiseFilterConfigurationWithFrameWidthFrameHeightSourcePixelFormat(frameWidth int, frameHeight int, sourcePixelFormat uint) *TemporalNoiseFilterConfiguration {

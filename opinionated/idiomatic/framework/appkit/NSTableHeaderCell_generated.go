@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that a table header view uses to draw the content of the column headers.
+//
 // TableHeaderCell wraps [raw.NSTableHeaderCell] with a fluent Go API.
 type TableHeaderCell struct {
 	inner *raw.NSTableHeaderCell
@@ -38,42 +40,56 @@ func NewTableHeaderCell() *TableHeaderCell {
 	return &TableHeaderCell{inner: raw.NSTableHeaderCellFromID(_id)}
 }
 
+// The color of the cell’s background.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithBackgroundColor(backgroundColor *Color) *TableHeaderCell {
 	x.inner.NSTextFieldCell.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the cell draws its background color.
+//
 // WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithDrawsBackground(drawsBackground bool) *TableHeaderCell {
 	x.inner.NSTextFieldCell.SetDrawsBackground(drawsBackground)
 	return x
 }
 
+// The color to use to draw the cell’s text.
+//
 // WithTextColor sets the textColor property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithTextColor(textColor *Color) *TableHeaderCell {
 	x.inner.NSTextFieldCell.SetTextColor(textColor.Unwrap())
 	return x
 }
 
+// The bezel style to use when drawing the text field.
+//
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *TableHeaderCell {
 	x.inner.NSTextFieldCell.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
 	return x
 }
 
+// The placeholder text for the cell, specified as a plain text string.
+//
 // WithPlaceholderString sets the placeholderString property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithPlaceholderString(placeholderString string) *TableHeaderCell {
 	x.inner.NSTextFieldCell.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
 	return x
 }
 
+// The placeholder text for the cell, specified as an attributed string.
+//
 // WithPlaceholderAttributedString sets the placeholderAttributedString property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *TableHeaderCell {
 	x.inner.NSTextFieldCell.SetPlaceholderAttributedString(placeholderAttributedString)
 	return x
 }
 
+// An array of locale identifiers that represent the allowed input sources when the text field has the keyboard focus.
+//
 // WithAllowedInputSourceLocales sets the collection, converting the Go slice to an NSArray.
 func (x *TableHeaderCell) WithAllowedInputSourceLocales(items ...*foundation.NSString) *TableHeaderCell {
 	if len(items) == 0 {
@@ -92,281 +108,375 @@ func (x *TableHeaderCell) WithAllowedInputSourceLocales(items ...*foundation.NSS
 	return x
 }
 
+// The view associated with the cell.
+//
 // WithControlView sets the controlView property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithControlView(controlView ViewProvider) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlView(controlView.asView())
 	return x
 }
 
+// The type of the cell.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithType(type_ NSCellType) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
+// The cell’s current state.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithState(state int) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetState(state)
 	return x
 }
 
+// The object that receives the cell’s action messages.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithTarget(target objc.ID) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTarget(target)
 	return x
 }
 
+// The action performed by the cell.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithAction(action objc.SEL) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAction(action)
 	return x
 }
 
+// A tag for identifying the cell.
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithTag(tag int) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTag(tag)
 	return x
 }
 
+// The cell’s title text.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithTitle(title string) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// A Boolean value indicating whether the cell is currently enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithEnabled(enabled bool) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithContinuous(continuous bool) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value indicating whether the cell is editable.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithEditable(editable bool) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetEditable(editable)
 	return x
 }
 
+// A Boolean value indicating whether the cell’s text can be selected.
+//
 // WithSelectable sets the selectable property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithSelectable(selectable bool) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetSelectable(selectable)
 	return x
 }
 
+// A Boolean value indicating whether the cell draws itself outlined with a plain border.
+//
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithBordered(bordered bool) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBordered(bordered)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a bezeled border.
+//
 // WithBezeled sets the bezeled property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithBezeled(bezeled bool) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBezeled(bezeled)
 	return x
 }
 
+// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
+//
 // WithScrollable sets the scrollable property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithScrollable(scrollable bool) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetScrollable(scrollable)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a highlighted appearance.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithHighlighted(highlighted bool) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetHighlighted(highlighted)
 	return x
 }
 
+// The alignment of the cell’s text.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithAlignment(alignment NSTextAlignment) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+//
 // WithWraps sets the wraps property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithWraps(wraps bool) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetWraps(wraps)
 	return x
 }
 
+// The font that the cell uses to display text.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithFont(font *Font) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
+// The cell’s formatter object.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithFormatter(formatter *foundation.NSFormatter) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFormatter(formatter)
 	return x
 }
 
+// The cell’s value as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithObjectValue(objectValue objc.ID) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetObjectValue(objectValue)
 	return x
 }
 
+// The cell’s value as a string.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithStringValue(stringValue string) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The cell’s value as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithIntValue(intValue int) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetIntValue(intValue)
 	return x
 }
 
+// The cell’s value as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithFloatValue(floatValue float32) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFloatValue(floatValue)
 	return x
 }
 
+// The cell’s value as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithDoubleValue(doubleValue float64) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The cell’s value as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithIntegerValue(integerValue int) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetIntegerValue(integerValue)
 	return x
 }
 
+// The image displayed by the cell, if any.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithImage(image *Image) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
+// The size of the cell.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithControlSize(controlSize NSControlSize) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The object represented by the cell.
+//
 // WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithRepresentedObject(representedObject objc.ID) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetRepresentedObject(representedObject)
 	return x
 }
 
+// The cell’s contextual menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithMenu(menu *Menu) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
+// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+//
 // WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// The line break mode to use when drawing text in the cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// A Boolean value indicating whether the cell assumes responsibility for undo operations.
+//
 // WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithAllowsUndo(allowsUndo bool) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
 	return x
 }
 
+// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+//
 // WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
 	return x
 }
 
+// The layout direction of the user interface.
+//
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
+// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithUsesSingleLineMode(usesSingleLineMode bool) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// A Boolean value indicating whether the cell refuses the first responder status.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithRefusesFirstResponder(refusesFirstResponder bool) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+//
 // WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithShowsFirstResponder(showsFirstResponder bool) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
 	return x
 }
 
+// The type of focus ring to use with the associated view.
+//
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithFocusRingType(focusRingType NSFocusRingType) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
+// The cell’s value as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+//
 // WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports the importation of images into its text.
+//
 // WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithImportsGraphics(importsGraphics bool) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports three states instead of two.
+//
 // WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithAllowsMixedState(allowsMixedState bool) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
 	return x
 }
 
+// The cell’s background style.
+//
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
+// The cell’s control tint.
+//
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
 func (x *TableHeaderCell) WithControlTint(controlTint NSControlTint) *TableHeaderCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
+// Draws a sorting indicator given a cell frame contained inside a view.
+//
 // DrawSortIndicatorWithFrameInViewAscendingPriority calls the underlying DrawSortIndicatorWithFrameInViewAscendingPriority.
 func (x *TableHeaderCell) DrawSortIndicatorWithFrameInViewAscendingPriority(cellFrame corefoundation.CGRect, controlView *raw.NSView, ascending bool, priority int) {
 	x.inner.DrawSortIndicatorWithFrameInViewAscendingPriority(cellFrame, controlView, ascending, priority)
 }
 
+// Returns the location to display the sorting indicator given theRect.
+//
 // SortIndicatorRectForBounds calls the underlying SortIndicatorRectForBounds.
 func (x *TableHeaderCell) SortIndicatorRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.SortIndicatorRectForBounds(rect)

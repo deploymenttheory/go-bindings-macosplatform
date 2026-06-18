@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a conversion warning produced by a validator.
+//
 // CaptionConversionWarning wraps [raw.AVCaptionConversionWarning] with a fluent Go API.
 type CaptionConversionWarning struct {
 	inner *raw.AVCaptionConversionWarning

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that encapsulates information about a content decryption key request issued from a content key session object.
+//
 // ContentKeyRequest wraps [raw.AVContentKeyRequest] with a fluent Go API.
 type ContentKeyRequest struct {
 	inner *raw.AVContentKeyRequest
@@ -39,7 +41,7 @@ func NewContentKeyRequest() *ContentKeyRequest {
 	return &ContentKeyRequest{inner: raw.AVContentKeyRequestFromID(_id)}
 }
 
-// Obtains a content key request data for a specific combination of application and content. If option AVContentKeyRequestProtocolVersionsKey is not specified the default protocol version of 1 is assumed. - Parameter appIdentifier: An opaque identifier for the application. The value of this identifier depends on the particular system used to provide the content key. - Parameter contentIdentifier: An optional opaque identifier for the content. The value of this identifier depends on the particular system used to provide the content key. - Parameter options: Additional information necessary to obtain the key, or nil if none. See AVContentKeyRequest*Key below. - Parameter handler: Once the streaming content key request is prepared, this block will be called with the request data or an error describing the failure.
+// Obtains encrypted key request data for a specific combination of app and content.
 //
 // MakeStreamingContentKeyRequestDataForAppContentIdentifierOptions blocks until the operation completes or ctx is cancelled.
 func (x *ContentKeyRequest) MakeStreamingContentKeyRequestDataForAppContentIdentifierOptions(ctx context.Context, appIdentifier *foundation.NSData, contentIdentifier *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
@@ -65,21 +67,21 @@ func (x *ContentKeyRequest) MakeStreamingContentKeyRequestDataForAppContentIdent
 	}
 }
 
-// Informs the receiver to process the specified content key response. After you receive an AVContentKeyRequest via -contentKeySession:didProvideContentKeyRequest: and after you invoke -[AVContentKeyRequest makeStreamingContentKeyRequestDataForApp:contentIdentifier:options:completionHandler:] on that request, you must obtain a response to the request in accordance with the protocol in use by the entity that controls the use of the media data. This is the method you use to provide the content key response to make protected content available for processing. If obtaining the content key response fails, use -processContentKeyResponseError:. - Parameter keyResponse: An instance of AVContentKeyResponse carrying a response to a content key request.
+// Sends the specified content key response to the receiver for processing.
 //
 // ProcessContentKeyResponse calls the underlying ProcessContentKeyResponse.
 func (x *ContentKeyRequest) ProcessContentKeyResponse(keyResponse *raw.AVContentKeyResponse) {
 	x.inner.ProcessContentKeyResponse(keyResponse)
 }
 
-// Informs the receiver that obtaining a content key response has failed, resulting in failure handling. - Parameter error: An instance of NSError that describes the specific failure that occurred.
+// Tells the receiver that the app was unable to obtain a content key response.
 //
 // ProcessContentKeyResponseError calls the underlying ProcessContentKeyResponseError.
 func (x *ContentKeyRequest) ProcessContentKeyResponseError(error_ unsafe.Pointer) {
 	x.inner.ProcessContentKeyResponseError(error_)
 }
 
-// Informs the receiver to process a persistable content key request. When you receive an AVContentKeyRequest via -contentKeySession:didProvideContentKeyRequest: and you want the resulting key response to produce a key that can persist across multiple playback sessions, you must invoke -respondByRequestingPersistableContentKeyRequest on that AVContentKeyRequest in order to signal that you want to process an AVPersistableContentKeyRequest instead. If the underlying protocol supports persistable content keys, in response your delegate will receive an AVPersistableContentKeyRequest via -contentKeySession:didProvidePersistableContentKeyRequest:. NSInternalInconsistencyException will be raised, if you are attempting to create and use a persistable key but your AVContentKeySession delegate does not respond to contentKeySession:didProvidePersistableContentKeyRequest:. - Parameter outError: The error returned if a persistable content key request cannot be requested. - Returns: YES if sucessful. If NO, this request should be responded to via processContentKeyResponse: or processContentKeyResponseError:.
+// Tells the receiver that the app requires a persistable content key request object for processing.
 //
 // RespondByRequestingPersistableContentKeyRequestAndReturnError returns any validation error.
 func (x *ContentKeyRequest) RespondByRequestingPersistableContentKeyRequestAndReturnError() error {

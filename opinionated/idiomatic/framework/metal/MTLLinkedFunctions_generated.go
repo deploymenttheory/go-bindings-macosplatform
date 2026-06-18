@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A set of related functions that Metal links to when necessary to create the function instance.
+//
 // LinkedFunctions wraps [raw.MTLLinkedFunctions] with a fluent Go API.
 type LinkedFunctions struct {
 	inner *raw.MTLLinkedFunctions
@@ -38,7 +40,7 @@ func NewLinkedFunctions() *LinkedFunctions {
 	return &LinkedFunctions{inner: raw.MTLLinkedFunctionsFromID(_id)}
 }
 
-// @property groups @abstract Groups of functions, grouped to match callsites in the shader code.
+// An optional list of groups specifying which functions your shader can call at each call site.
 //
 // WithGroups sets the groups property and returns the receiver for chaining.
 func (x *LinkedFunctions) WithGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID]) *LinkedFunctions {

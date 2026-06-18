@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that enables the frame rate conversion on a frame processing session.
+//
 // FrameRateConversionConfiguration wraps [raw.VTFrameRateConversionConfiguration] with a fluent Go API.
 type FrameRateConversionConfiguration struct {
 	inner *raw.VTFrameRateConversionConfiguration
@@ -33,7 +35,7 @@ func FrameRateConversionConfigurationFromID(id objc.ID) *FrameRateConversionConf
 	return &FrameRateConversionConfiguration{inner: raw.VTFrameRateConversionConfigurationFromID(id)}
 }
 
-// Creates a new frame-rate conversion configuration. Returns `nil` if dimensions are out of range or revision is unsupported. - Parameters: - frameWidth: Width of source frame in pixels; the maximum value is 8192 for macOS, and 4096 for iOS. - frameHeight: Height of source frame in pixels; the maximum value is 4320 for macOS, and 2160 for iOS. - usePrecomputedFlow: A Boolean value that indicates whether you are providing Optical Flow. If false, optical flow is computed on the fly. - qualityPrioritization: A level you use to prioritize quality or performance; for more information about supported levels, see “VTFrameRateConversionConfigurationQualityPrioritization“. - revision: The specific algorithm or configuration revision you use to perform the request.
+// Creates a new frame rate conversion configuration with specified flow width and height.
 //
 // NewFrameRateConversionConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision creates a new [FrameRateConversionConfiguration].
 func NewFrameRateConversionConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, usePrecomputedFlow bool, qualityPrioritization VTFrameRateConversionConfigurationQualityPrioritization, revision VTFrameRateConversionConfigurationRevision) *FrameRateConversionConfiguration {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A workspace for running an Automator workflow.
+//
 // Workspace wraps [raw.AMWorkspace] with a fluent Go API.
 type Workspace struct {
 	inner *raw.AMWorkspace
@@ -36,6 +38,8 @@ func NewWorkspace() *Workspace {
 	return &Workspace{inner: raw.AMWorkspaceFromID(_id)}
 }
 
+// Loads and runs the specified workflow file.
+//
 // RunWorkflowAtPathWithInputError calls the underlying RunWorkflowAtPathWithInputError.
 func (x *Workspace) RunWorkflowAtPathWithInputError(path string, input objc.ID) (objc.ID, error) {
 	return x.inner.RunWorkflowAtPathWithInputError(foundation.NSStringStringWithUTF8String(path), input)

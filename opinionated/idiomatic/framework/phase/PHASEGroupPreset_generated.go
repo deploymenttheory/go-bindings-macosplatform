@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A collection of settings for groups.
+//
 // GroupPreset wraps [raw.PHASEGroupPreset] with a fluent Go API.
 type GroupPreset struct {
 	inner *raw.PHASEGroupPreset
@@ -30,7 +32,7 @@ func GroupPresetFromID(id objc.ID) *GroupPreset {
 	return &GroupPreset{inner: raw.PHASEGroupPresetFromID(id)}
 }
 
-// @method initWithEngine @abstract Create a new PHASEGroupPreset object with a given PHASEEngine object. @param engine The PHASEEngine object to register this preset with. @param settings A dictionary containing PHASEGroupPresetSetting objects paired with PHASEGroup objects as keys. @param timeToTarget The time interval that all group settings in this preset will take to gradually fade to the new value @param timeToReset The time interval that all group settings in this preset will take to gradually fade to the unity value @note The timeToTarget and timeToReset are scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
+// Creates a group preset with the designated engine, settings, and fade parameters.
 //
 // NewGroupPresetWithEngineSettingsTimeToTargetTimeToReset creates a new [GroupPreset].
 func NewGroupPresetWithEngineSettingsTimeToTargetTimeToReset(engine *raw.PHASEEngine, settings *foundation.NSDictionary[*foundation.NSString, *raw.PHASEGroupPresetSetting], timeToTarget float64, timeToReset float64) *GroupPreset {
@@ -39,28 +41,28 @@ func NewGroupPresetWithEngineSettingsTimeToTargetTimeToReset(engine *raw.PHASEEn
 	return &GroupPreset{inner: raw.PHASEGroupPresetFromID(_id)}
 }
 
-// @method activate @abstract Activate this preset in the PHASEEngine object it was initialized with. The internal timeToTarget value is used. The current preset will be deactivated automatically.
+// Applies settings to the designated groups.
 //
 // Activate calls the underlying Activate.
 func (x *GroupPreset) Activate() {
 	x.inner.Activate()
 }
 
-// @method activateWithTimeToTargetOverride @abstract Activate this preset in the PHASEEngine object it was initialized with. The current preset will be deactivated automatically. @param timeToTargetOverride Override the timeToTarget value in the preset with this value. @note The timeToTargetOverride is scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
+// Applies settings with an overriden fade duration.
 //
 // ActivateWithTimeToTargetOverride calls the underlying ActivateWithTimeToTargetOverride.
 func (x *GroupPreset) ActivateWithTimeToTargetOverride(timeToTargetOverride float64) {
 	x.inner.ActivateWithTimeToTargetOverride(timeToTargetOverride)
 }
 
-// @method deactivate @abstract Deactivate this preset and return the system to default unity values. The internal timeToReset value is used.
+// Reverts settings for the preset’s groups.
 //
 // Deactivate calls the underlying Deactivate.
 func (x *GroupPreset) Deactivate() {
 	x.inner.Deactivate()
 }
 
-// @method deactivateWithTimeToResetOverride @abstract Deactivate this preset and return the system to default unity values. @param timeToResetOverride Override the timeToReset value in the preset with this value. @note The timeToResetOverride is scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
+// Reverts settings for the preset’s groups using a timed adjustment.
 //
 // DeactivateWithTimeToResetOverride calls the underlying DeactivateWithTimeToResetOverride.
 func (x *GroupPreset) DeactivateWithTimeToResetOverride(timeToResetOverride float64) {

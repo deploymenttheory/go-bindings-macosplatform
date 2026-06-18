@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A metaparameter that graphs an input value on a set of mathematical curves.
+//
 // MappedMetaParameterDefinition wraps [raw.PHASEMappedMetaParameterDefinition] with a fluent Go API.
 type MappedMetaParameterDefinition struct {
 	inner *raw.PHASEMappedMetaParameterDefinition
@@ -32,7 +34,7 @@ func MappedMetaParameterDefinitionFromID(id objc.ID) *MappedMetaParameterDefinit
 	return &MappedMetaParameterDefinition{inner: raw.PHASEMappedMetaParameterDefinitionFromID(id)}
 }
 
-// @method initWithInputMetaParameterDefinition:identifier @abstract Create a new mapped range metaparameter definition @param inputMetaParameterDefinition The metaparameter that will provide an input for this mapped metaparameter @param envelope The envelope to use. @param identifier An optional custom identifier to give to this object @return The new PHASEMappedMetaParameterDefinition object
+// Creates a specification for a named metaparameter that the app plots on a graph defined by the given set of curves.
 //
 // NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelopeIdentifier creates a new [MappedMetaParameterDefinition].
 func NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelopeIdentifier(inputMetaParameterDefinition *raw.PHASENumberMetaParameterDefinition, envelope *raw.PHASEEnvelope, identifier string) *MappedMetaParameterDefinition {
@@ -41,7 +43,7 @@ func NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelopeIde
 	return &MappedMetaParameterDefinition{inner: raw.PHASEMappedMetaParameterDefinitionFromID(_id)}
 }
 
-// @method initWithInputMetaParameterDefinition @abstract Create a new mapped range metaparameter definition @param inputMetaParameterDefinition The metaparameter that will provide an input for this mapped metaparameter @param envelope The envelope to use. @return The new PHASEMappedMetaParameterDefinition object
+// Creates a specification for a metaparameter that the app plots on a graph defined by the given set of curves.
 //
 // NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelope creates a new [MappedMetaParameterDefinition].
 func NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelope(inputMetaParameterDefinition *raw.PHASENumberMetaParameterDefinition, envelope *raw.PHASEEnvelope) *MappedMetaParameterDefinition {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that determines how to store attribute data in memory and map it to the arguments of a vertex function.
+//
 // VertexAttributeDescriptor wraps [raw.MTLVertexAttributeDescriptor] with a fluent Go API.
 type VertexAttributeDescriptor struct {
 	inner *raw.MTLVertexAttributeDescriptor
@@ -35,18 +37,24 @@ func NewVertexAttributeDescriptor() *VertexAttributeDescriptor {
 	return &VertexAttributeDescriptor{inner: raw.MTLVertexAttributeDescriptorFromID(_id)}
 }
 
+// The format of the vertex attribute.
+//
 // WithFormat sets the format property and returns the receiver for chaining.
 func (x *VertexAttributeDescriptor) WithFormat(format MTLVertexFormat) *VertexAttributeDescriptor {
 	x.inner.SetFormat(raw.MTLVertexFormat(format))
 	return x
 }
 
+// The location of an attribute in vertex data, determined by the byte offset from the start of the vertex data.
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *VertexAttributeDescriptor) WithOffset(offset uint) *VertexAttributeDescriptor {
 	x.inner.SetOffset(offset)
 	return x
 }
 
+// The index in the argument table for the associated vertex buffer.
+//
 // WithBufferIndex sets the bufferIndex property and returns the receiver for chaining.
 func (x *VertexAttributeDescriptor) WithBufferIndex(bufferIndex uint) *VertexAttributeDescriptor {
 	x.inner.SetBufferIndex(bufferIndex)

@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A view that displays standard user interface controls for capturing media data.
+//
 // CaptureView wraps [raw.AVCaptureView] with a fluent Go API.
 type CaptureView struct {
 	inner *raw.AVCaptureView
@@ -38,7 +40,7 @@ func NewCaptureView() *CaptureView {
 	return &CaptureView{inner: raw.AVCaptureViewFromID(_id)}
 }
 
-// @property	delegate @abstract	The capture view's delegate. @discussion	The start recording button will be disabled if the delegate is not set.
+// The capture view’s delegate object.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *CaptureView) WithDelegate(delegate raw.AVCaptureViewDelegate) *CaptureView {
@@ -46,7 +48,7 @@ func (x *CaptureView) WithDelegate(delegate raw.AVCaptureViewDelegate) *CaptureV
 	return x
 }
 
-// @property	controlsStyle @abstract	The style of the capture controls pane associated with the view.
+// The style of the capture controls presented by the view.
 //
 // WithControlsStyle sets the controlsStyle property and returns the receiver for chaining.
 func (x *CaptureView) WithControlsStyle(controlsStyle AVCaptureViewControlsStyle) *CaptureView {
@@ -54,7 +56,7 @@ func (x *CaptureView) WithControlsStyle(controlsStyle AVCaptureViewControlsStyle
 	return x
 }
 
-// @property	videoGravity @abstract	A string defining how the video is displayed within the views bounds rect. @discussion	Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default.
+// A string value that defines how the capture view displays video within its bounds.
 //
 // WithVideoGravity sets the videoGravity property and returns the receiver for chaining.
 func (x *CaptureView) WithVideoGravity(videoGravity *foundation.NSString) *CaptureView {
@@ -62,7 +64,7 @@ func (x *CaptureView) WithVideoGravity(videoGravity *foundation.NSString) *Captu
 	return x
 }
 
-// @method		setSession:allowVideoSourceSelection:allowAudioSourceSelection: @abstract	Sets the session represented by this view. @param		session The session to be represented. @param		showVideoPreview Whether or not video preview should be shown. If YES, capture inputs for video media data will be added, removed, or modified depending on device availability and user selection. @param		showAudioPreview Whether or not audio preview should be shown. If YES, capture inputs for audio media data will be added, removed, or modified depending on device availability and user selection. @discussion The view must either show audio preview or video preview or both. Furthermore, the view may modify the capture session, for example, to access media data for preview or when the user select a new capture source. Only the default session is started and stopped automatically. The provided session must be manually started and stopped.
+// Sets the view’s capture session.
 //
 // SetSessionShowVideoPreviewShowAudioPreview calls the underlying SetSessionShowVideoPreviewShowAudioPreview.
 func (x *CaptureView) SetSessionShowVideoPreviewShowAudioPreview(session *avfoundation.AVCaptureSession, showVideoPreview bool, showAudioPreview bool) {

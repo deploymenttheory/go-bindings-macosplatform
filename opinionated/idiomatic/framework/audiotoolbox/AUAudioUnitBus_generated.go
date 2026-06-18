@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A class that defines an input or output connection point on an audio unit.
+//
 // AudioUnitBus wraps [raw.AUAudioUnitBus] with a fluent Go API.
 type AudioUnitBus struct {
 	inner *raw.AUAudioUnitBus
@@ -33,7 +35,7 @@ func AudioUnitBusFromID(id objc.ID) *AudioUnitBus {
 	return &AudioUnitBus{inner: raw.AUAudioUnitBusFromID(id)}
 }
 
-// @method		initWithFormat:error: @brief		initialize with a default format. @param format	The initial format for the bus. @param outError	An error if the format is unsupported for the bus.
+// Initializes a bus object with a specific format.
 //
 // NewAudioUnitBusWithFormatError creates a new [AudioUnitBus].
 func NewAudioUnitBusWithFormatError(format *avfaudio.AVAudioFormat) (*AudioUnitBus, error) {
@@ -54,7 +56,7 @@ func (x *AudioUnitBus) WithShouldAllocateBuffer(shouldAllocateBuffer bool) *Audi
 	return x
 }
 
-// @property	enabled @brief		Whether the bus is active. @discussion Hosts must enable input busses before using them. The reason for this is to allow a unit such as a mixer to be prepared to render a large number of inputs, but avoid the work of preparing to pull inputs which are not in use. Bridged to the v2 properties kAudioUnitProperty_MakeConnection and kAudioUnitProperty_SetRenderCallback.
+// Determines whether the bus is active.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *AudioUnitBus) WithEnabled(enabled bool) *AudioUnitBus {
@@ -62,7 +64,7 @@ func (x *AudioUnitBus) WithEnabled(enabled bool) *AudioUnitBus {
 	return x
 }
 
-// @property	name @brief		A name for the bus. Can be set by host.
+// A name for the bus.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *AudioUnitBus) WithName(name string) *AudioUnitBus {
@@ -70,7 +72,7 @@ func (x *AudioUnitBus) WithName(name string) *AudioUnitBus {
 	return x
 }
 
-// @property	contextPresentationLatency @brief		Information about latency in the audio unit's processing context. @discussion This should not be confused with the audio unit's latency property, where the audio unit describes to the host any processing latency it introduces between its input and its output. A host may set this property to describe to the audio unit the presentation latency of its input and/or output audio data. Latency is described in seconds. A value of zero means either no latency or an unknown latency. A host should set this property on each active bus, since, for example, the audio routing path to each of multiple output busses may differ. For input busses: Describes how long ago the audio arriving on this bus was acquired. For instance, when reading from a file to the first audio unit in a chain, the input presentation latency is zero. For audio input from a device, this initial input latency is the presentation latency of the device itself, i.e. the device's safety offset and latency. A second chained audio unit's input presentation latency will be the input presentation latency of the first unit, plus the processing latency of the first unit. For output busses: Describes how long it will be before the output audio of an audio unit is presented. For instance, when writing to a file, the output presentation latency of the last audio unit in a chain is zero. When the audio from that audio unit is to be played to a device, then that initial presentation latency will be the presentation latency of the device itself, which is the I/O buffer size, plus the device's safety offset and latency A previous chained audio unit's output presentation latency is the last unit's presentation latency plus its processing latency. So, for a given audio unit anywhere within a mixing graph, the input and output presentation latencies describe to that unit how long from the moment of generation it has taken for its input to arrive, and how long it will take for its output to be presented. Bridged to the v2 property kAudioUnitProperty_PresentationLatency.
+// Information about latency in the audio unit’s processing context.
 //
 // WithContextPresentationLatency sets the contextPresentationLatency property and returns the receiver for chaining.
 func (x *AudioUnitBus) WithContextPresentationLatency(contextPresentationLatency float64) *AudioUnitBus {
@@ -78,7 +80,7 @@ func (x *AudioUnitBus) WithContextPresentationLatency(contextPresentationLatency
 	return x
 }
 
-// @property	supportedChannelCounts @brief		An array of numbers giving the supported numbers of channels for this bus. @discussion If supportedChannelCounts is nil, then any number less than or equal to maximumChannelCount is supported. If setting supportedChannelCounts makes the current format unsupported, then format will be set to nil. The default value is nil.
+// An array of numbers indicating the supported number of channels for this bus.
 //
 // WithSupportedChannelCounts sets the collection, converting the Go slice to an NSArray.
 func (x *AudioUnitBus) WithSupportedChannelCounts(items ...*foundation.NSNumber) *AudioUnitBus {
@@ -98,7 +100,7 @@ func (x *AudioUnitBus) WithSupportedChannelCounts(items ...*foundation.NSNumber)
 	return x
 }
 
-// @property	maximumChannelCount @brief		The maximum numbers of channels supported for this bus. @discussion If supportedChannelCounts is set, then this value is derived from supportedChannelCounts. If setting maximumChannelCount makes the current format unsupported, then format will be set to nil. The default value is UINT_MAX.
+// The maximum number of channels supported for this bus.
 //
 // WithMaximumChannelCount sets the maximumChannelCount property and returns the receiver for chaining.
 func (x *AudioUnitBus) WithMaximumChannelCount(maximumChannelCount uint32) *AudioUnitBus {
@@ -106,7 +108,7 @@ func (x *AudioUnitBus) WithMaximumChannelCount(maximumChannelCount uint32) *Audi
 	return x
 }
 
-// @property	setFormat:error: @brief		Sets the bus's audio format. @discussion Audio units can generally be expected to support AVAudioFormat's standard format (deinterleaved 32-bit float), at any sample rate. Channel counts can be more complex; see AUAudioUnit.channelCapabilities.
+// Sets the bus’s audio format.
 //
 // SetFormatError calls the underlying SetFormatError.
 func (x *AudioUnitBus) SetFormatError(format *avfaudio.AVAudioFormat) (bool, error) {

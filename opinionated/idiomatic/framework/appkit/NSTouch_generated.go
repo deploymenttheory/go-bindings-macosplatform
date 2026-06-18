@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A snapshot of a particular touch at an instant in time.
+//
 // Touch wraps [raw.NSTouch] with a fluent Go API.
 type Touch struct {
 	inner *raw.NSTouch
@@ -66,11 +68,15 @@ func (x *Touch) DeviceSize() corefoundation.CGSize {
 	return x.inner.DeviceSize()
 }
 
+// Indicates the location of the touch in the view’s coordinates.
+//
 // LocationInView calls the underlying LocationInView.
 func (x *Touch) LocationInView(view *raw.NSView) corefoundation.CGPoint {
 	return x.inner.LocationInView(view)
 }
 
+// Indicates the previous location of the touch in the view’s coordinates.
+//
 // PreviousLocationInView calls the underlying PreviousLocationInView.
 func (x *Touch) PreviousLocationInView(view *raw.NSView) corefoundation.CGPoint {
 	return x.inner.PreviousLocationInView(view)

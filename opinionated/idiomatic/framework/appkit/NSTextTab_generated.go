@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A tab in a paragraph.
+//
 // TextTab wraps [raw.NSTextTab] with a fluent Go API.
 type TextTab struct {
 	inner *raw.NSTextTab
@@ -30,6 +32,8 @@ func TextTabFromID(id objc.ID) *TextTab {
 	return &TextTab{inner: raw.NSTextTabFromID(id)}
 }
 
+// Initializes a text tab with the specified text alignment, location, and options.
+//
 // NewTextTabWithTextAlignmentLocationOptions creates a new [TextTab].
 func NewTextTabWithTextAlignmentLocationOptions(alignment NSTextAlignment, loc float64, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextTab {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextTab")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewTextTabWithTextAlignmentLocationOptions(alignment NSTextAlignment, loc f
 	return &TextTab{inner: raw.NSTextTabFromID(_id)}
 }
 
+// Initializes a newly allocated text tab with the specified alignment and location.
+//
 // NewTextTabWithTypeLocation creates a new [TextTab].
 func NewTextTabWithTypeLocation(type_ NSTextTabType, loc float64) *TextTab {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextTab")), objc.RegisterName("alloc"))

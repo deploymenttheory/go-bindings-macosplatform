@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The input for the wheel of a racing wheel controller.
+//
 // RacingWheelInputState wraps [raw.GCRacingWheelInputState] with a fluent Go API.
 type RacingWheelInputState struct {
 	inner *raw.GCRacingWheelInputState

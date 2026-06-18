@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A node that plays complete audio data.
+//
 // SamplerNodeDefinition wraps [raw.PHASESamplerNodeDefinition] with a fluent Go API.
 type SamplerNodeDefinition struct {
 	inner *raw.PHASESamplerNodeDefinition
@@ -31,7 +33,7 @@ func SamplerNodeDefinitionFromID(id objc.ID) *SamplerNodeDefinition {
 	return &SamplerNodeDefinition{inner: raw.PHASESamplerNodeDefinitionFromID(id)}
 }
 
-// @method initWithSoundAssetIdentifier:mixerDefinition:identifier @abstract Create a sampler node definition @param soundAssetIdentifier The identifier of the registered sound asset this sampler will play @param mixerDefinition The mixer definition this sampler will be assigned to @param identifier An optional custom identifier to give to this object @return A new PHASESamplerNodeDefinition object
+// Creates a named sampler node with the given sound asset and mixer.
 //
 // NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinitionIdentifier creates a new [SamplerNodeDefinition].
 func NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinitionIdentifier(soundAssetIdentifier string, mixerDefinition *raw.PHASEMixerDefinition, identifier string) *SamplerNodeDefinition {
@@ -40,7 +42,7 @@ func NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinitionIdentifier(s
 	return &SamplerNodeDefinition{inner: raw.PHASESamplerNodeDefinitionFromID(_id)}
 }
 
-// @method initWithSoundAssetIdentifier:mixerDefinition @abstract Create a sampler node definition @param soundAssetIdentifier The identifier of the registered sound asset this sampler will play @param mixerDefinition The mixer definition this sampler will be assigned to @return A new PHASESamplerNodeDefinition object
+// Creates a sampler node with the given sound asset and mixer.
 //
 // NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinition creates a new [SamplerNodeDefinition].
 func NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinition(soundAssetIdentifier string, mixerDefinition *raw.PHASEMixerDefinition) *SamplerNodeDefinition {
@@ -49,7 +51,7 @@ func NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinition(soundAssetI
 	return &SamplerNodeDefinition{inner: raw.PHASESamplerNodeDefinitionFromID(_id)}
 }
 
-// @property cullOption @abstract The cull option for the sampler. @discussion The default value is PHASECullOptionTerminate.
+// The action the engine performs after it temporarily removes the node’s sound from the audio output.
 //
 // WithCullOption sets the cullOption property and returns the receiver for chaining.
 func (x *SamplerNodeDefinition) WithCullOption(cullOption PHASECullOption) *SamplerNodeDefinition {
@@ -57,7 +59,7 @@ func (x *SamplerNodeDefinition) WithCullOption(cullOption PHASECullOption) *Samp
 	return x
 }
 
-// @property playbackMode @abstract The playback mode for the sampler. @discussion If the playback mode is set to PHASEPlaybackModeOneShot, you need to make sure the the audio data in the registered sound asset associated with this sampler begins and ends at zero crossings. Otherwise, you'll hear a click when beginning playback and / or ending playback. If the playback mode is set to PHASEPlaybackModeLooping, you need to make sure the audio data in the registered sound asset associated with this sampler loops smoothly from the end sample to the start sample. Please verify this during authoring. Failing to do so will result in audible clicks at loop boundaries. The default value is PHASEPlaybackModeOneShot.
+// An option that determines whether the node’s audio plays in a loop.
 //
 // WithPlaybackMode sets the playbackMode property and returns the receiver for chaining.
 func (x *SamplerNodeDefinition) WithPlaybackMode(playbackMode PHASEPlaybackMode) *SamplerNodeDefinition {
@@ -65,7 +67,7 @@ func (x *SamplerNodeDefinition) WithPlaybackMode(playbackMode PHASEPlaybackMode)
 	return x
 }
 
-// @property rate @abstract Linear rate scalar. @note Values are clamped to the range [0.25, 4]. Default value is 1.
+// A playback speed for the node’s audio.
 //
 // WithRate sets the rate property and returns the receiver for chaining.
 func (x *SamplerNodeDefinition) WithRate(rate float64) *SamplerNodeDefinition {
@@ -73,7 +75,7 @@ func (x *SamplerNodeDefinition) WithRate(rate float64) *SamplerNodeDefinition {
 	return x
 }
 
-// @property group @abstract The PHASEGroup object this generator should be associated with for gain and rate control.
+// A group this node conforms to for gain and rate control.
 //
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *SamplerNodeDefinition) WithGroup(group *Group) *SamplerNodeDefinition {
@@ -81,7 +83,7 @@ func (x *SamplerNodeDefinition) WithGroup(group *Group) *SamplerNodeDefinition {
 	return x
 }
 
-// @property gainMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable dynamic control of the gain during playback.
+// A meta parameter that dynamically changes the audio’s loudness.
 //
 // WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
 func (x *SamplerNodeDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SamplerNodeDefinition {
@@ -89,7 +91,7 @@ func (x *SamplerNodeDefinition) WithGainMetaParameterDefinition(gainMetaParamete
 	return x
 }
 
-// @property rateMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable dynamic control of the rate during playback.
+// A meta parameter that dynamically changes the audio’s rate.
 //
 // WithRateMetaParameterDefinition sets the rateMetaParameterDefinition property and returns the receiver for chaining.
 func (x *SamplerNodeDefinition) WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SamplerNodeDefinition {

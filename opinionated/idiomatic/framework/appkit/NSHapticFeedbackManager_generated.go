@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides access to the haptic feedback management attributes on a system with a Force Touch trackpad.
+//
 // HapticFeedbackManager wraps [raw.NSHapticFeedbackManager] with a fluent Go API.
 type HapticFeedbackManager struct {
 	inner *raw.NSHapticFeedbackManager

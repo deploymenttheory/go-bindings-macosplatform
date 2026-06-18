@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A discrete gesture recognizer that tracks a specified number of mouse clicks.
+//
 // ClickGestureRecognizer wraps [raw.NSClickGestureRecognizer] with a fluent Go API.
 type ClickGestureRecognizer struct {
 	inner *raw.NSClickGestureRecognizer
@@ -36,90 +38,120 @@ func NewClickGestureRecognizer() *ClickGestureRecognizer {
 	return &ClickGestureRecognizer{inner: raw.NSClickGestureRecognizerFromID(_id)}
 }
 
+// A bit mask of the button (or buttons) required to recognize this click.
+//
 // WithButtonMask sets the buttonMask property and returns the receiver for chaining.
 func (x *ClickGestureRecognizer) WithButtonMask(buttonMask uint) *ClickGestureRecognizer {
 	x.inner.SetButtonMask(buttonMask)
 	return x
 }
 
+// The number of clicks required to match.
+//
 // WithNumberOfClicksRequired sets the numberOfClicksRequired property and returns the receiver for chaining.
 func (x *ClickGestureRecognizer) WithNumberOfClicksRequired(numberOfClicksRequired int) *ClickGestureRecognizer {
 	x.inner.SetNumberOfClicksRequired(numberOfClicksRequired)
 	return x
 }
 
+// The number of touches required in an NSTouchBar object for the gesture recognizer to match.
+//
 // WithNumberOfTouchesRequired sets the numberOfTouchesRequired property and returns the receiver for chaining.
 func (x *ClickGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequired int) *ClickGestureRecognizer {
 	x.inner.SetNumberOfTouchesRequired(numberOfTouchesRequired)
 	return x
 }
 
+// The object that implements the action method.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *ClickGestureRecognizer) WithTarget(target objc.ID) *ClickGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetTarget(target)
 	return x
 }
 
+// The action method to call when the gesture is recognized.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *ClickGestureRecognizer) WithAction(action objc.SEL) *ClickGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetAction(action)
 	return x
 }
 
+// The current state of the gesture recognizer.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *ClickGestureRecognizer) WithState(state NSGestureRecognizerState) *ClickGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetState(raw.NSGestureRecognizerState(state))
 	return x
 }
 
+// The delegate of the gesture recognizer.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *ClickGestureRecognizer) WithDelegate(delegate raw.NSGestureRecognizerDelegate) *ClickGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelegate(delegate)
 	return x
 }
 
+// A Boolean value indicating whether the gesture recognizer is able to handle events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *ClickGestureRecognizer) WithEnabled(enabled bool) *ClickGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetEnabled(enabled)
 	return x
 }
 
+// Configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
+//
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
 func (x *ClickGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ClickGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
+//
 // WithDelaysPrimaryMouseButtonEvents sets the delaysPrimaryMouseButtonEvents property and returns the receiver for chaining.
 func (x *ClickGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *ClickGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents)
 	return x
 }
 
+// A Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
+//
 // WithDelaysSecondaryMouseButtonEvents sets the delaysSecondaryMouseButtonEvents property and returns the receiver for chaining.
 func (x *ClickGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *ClickGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents)
 	return x
 }
 
+// A Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
+//
 // WithDelaysOtherMouseButtonEvents sets the delaysOtherMouseButtonEvents property and returns the receiver for chaining.
 func (x *ClickGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *ClickGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents)
 	return x
 }
 
+// A Boolean value that indicates whether key events are delivered only after gesture recognition fails.
+//
 // WithDelaysKeyEvents sets the delaysKeyEvents property and returns the receiver for chaining.
 func (x *ClickGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *ClickGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysKeyEvents(delaysKeyEvents)
 	return x
 }
 
+// A Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
+//
 // WithDelaysMagnificationEvents sets the delaysMagnificationEvents property and returns the receiver for chaining.
 func (x *ClickGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *ClickGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysMagnificationEvents(delaysMagnificationEvents)
 	return x
 }
 
+// A Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
+//
 // WithDelaysRotationEvents sets the delaysRotationEvents property and returns the receiver for chaining.
 func (x *ClickGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *ClickGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysRotationEvents(delaysRotationEvents)

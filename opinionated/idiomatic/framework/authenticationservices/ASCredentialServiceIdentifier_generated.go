@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An identifier representing a particular service for which the user needs a credential, like a web site.
+//
 // CredentialServiceIdentifier wraps [raw.ASCredentialServiceIdentifier] with a fluent Go API.
 type CredentialServiceIdentifier struct {
 	inner *raw.ASCredentialServiceIdentifier
@@ -31,7 +33,7 @@ func CredentialServiceIdentifierFromID(id objc.ID) *CredentialServiceIdentifier 
 	return &CredentialServiceIdentifier{inner: raw.ASCredentialServiceIdentifierFromID(id)}
 }
 
-// @abstract Initializes an ASCredentialServiceIdentifier object. @param identifier string value for the service identifier. @param type the type that the service identifier string represents.
+// Initializes a credential service identifier instance.
 //
 // NewCredentialServiceIdentifierWithIdentifierType creates a new [CredentialServiceIdentifier].
 func NewCredentialServiceIdentifierWithIdentifierType(identifier string, type_ ASCredentialServiceIdentifierType) *CredentialServiceIdentifier {
@@ -40,7 +42,7 @@ func NewCredentialServiceIdentifierWithIdentifierType(identifier string, type_ A
 	return &CredentialServiceIdentifier{inner: raw.ASCredentialServiceIdentifierFromID(_id)}
 }
 
-// Initializes an ASCredentialServiceIdentifier object. - Parameters: - identifier: The string value for the service identifier. - type: The type that the service identifier string represents. - displayName: A user visible name that describes the service.
+// Initializes an ASCredentialServiceIdentifier object.
 //
 // NewCredentialServiceIdentifierWithIdentifierTypeDisplayName creates a new [CredentialServiceIdentifier].
 func NewCredentialServiceIdentifierWithIdentifierTypeDisplayName(identifier string, type_ ASCredentialServiceIdentifierType, displayName string) *CredentialServiceIdentifier {

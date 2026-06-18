@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A result that contains the highest-ranking classifications in a time range.
+//
 // ClassificationResult wraps [raw.SNClassificationResult] with a fluent Go API.
 type ClassificationResult struct {
 	inner *raw.SNClassificationResult
@@ -38,7 +40,7 @@ func NewClassificationResult() *ClassificationResult {
 	return &ClassificationResult{inner: raw.SNClassificationResultFromID(_id)}
 }
 
-// Retrieves the classification candidate with the specified identifier. - Parameter identifier: An identifier on which to query for a particular classification candidate. The query will match to any classification candidate whose `identifier` property (see `identifier` property of `SNClassification`) contains a value equal to the provided argument. - Returns: The classification candidate which has the specified identifier, if it exists. If no such candidate exists, `nil` will be returned.
+// Returns the classification for an identifier.
 //
 // ClassificationForIdentifier calls the underlying ClassificationForIdentifier.
 func (x *ClassificationResult) ClassificationForIdentifier(identifier string) *Classification {

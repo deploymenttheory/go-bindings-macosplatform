@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that collects the changes you want to save to the user’s contacts database.
+//
 // SaveRequest wraps [raw.CNSaveRequest] with a fluent Go API.
 type SaveRequest struct {
 	inner *raw.CNSaveRequest
@@ -37,7 +39,7 @@ func NewSaveRequest() *SaveRequest {
 	return &SaveRequest{inner: raw.CNSaveRequestFromID(_id)}
 }
 
-// @abstract    The author of this transaction. @discussion  Use this, in conjunction with @c CNChangeHistoryFetchRequest.excludedTransactionAuthors, to suppress fetching of changes the author already knows about.
+// A string that identifies the author of the transaction.
 //
 // WithTransactionAuthor sets the transactionAuthor property and returns the receiver for chaining.
 func (x *SaveRequest) WithTransactionAuthor(transactionAuthor string) *SaveRequest {
@@ -45,7 +47,7 @@ func (x *SaveRequest) WithTransactionAuthor(transactionAuthor string) *SaveReque
 	return x
 }
 
-// @abstract    Should the contacts be refetched as part of executing the save request. @discussion  Default is `YES` where added and updated contacts are refetched by the executing save request. Set to `NO` to suppress this refetch behavior and reduce the execution time of the save request. @note        If set to `NO` do not use the contacts after the executed save request as they may not be in a current state.
+// A Boolean value that indicates whether to refetch the added and updated contacts after the save request executes.
 //
 // WithShouldRefetchContacts sets the shouldRefetchContacts property and returns the receiver for chaining.
 func (x *SaveRequest) WithShouldRefetchContacts(shouldRefetchContacts bool) *SaveRequest {
@@ -53,70 +55,70 @@ func (x *SaveRequest) WithShouldRefetchContacts(shouldRefetchContacts bool) *Sav
 	return x
 }
 
-// @abstract Add a new contact to the contact store. @discussion The contact may be modified by the executing save request. If the contact was previously specified to be deleted in the save request that will no longer occur. @param contact The new contact to add. @param identifier The container identifier to add the new contact to. Set to nil for the default container.
+// Adds the specified contact to the contact store.
 //
 // AddContactToContainerWithIdentifier calls the underlying AddContactToContainerWithIdentifier.
 func (x *SaveRequest) AddContactToContainerWithIdentifier(contact *raw.CNMutableContact, identifier string) {
 	x.inner.AddContactToContainerWithIdentifier(contact, foundation.NSStringStringWithUTF8String(identifier))
 }
 
-// @abstract Update an existing contact in the contact store. @discussion The contact must already exist in the contact store. The contact may be modified by the executing save request.
+// Updates an existing contact in the contact store.
 //
 // UpdateContact calls the underlying UpdateContact.
 func (x *SaveRequest) UpdateContact(contact *raw.CNMutableContact) {
 	x.inner.UpdateContact(contact)
 }
 
-// @abstract Delete a contact from the contact store. @discussion If the contact was previously specified to be added in the save request that will no longer occur.
+// Deletes a contact from the contact store.
 //
 // DeleteContact calls the underlying DeleteContact.
 func (x *SaveRequest) DeleteContact(contact *raw.CNMutableContact) {
 	x.inner.DeleteContact(contact)
 }
 
-// @abstract Add a new group to the contact store. @discussion If the group was previously specified to be deleted in the save request that will no longer occur. @param group The new group to add. @param identifier The container identifier to add the new group to. Set to nil for the default container.
+// Adds a group to the contact store.
 //
 // AddGroupToContainerWithIdentifier calls the underlying AddGroupToContainerWithIdentifier.
 func (x *SaveRequest) AddGroupToContainerWithIdentifier(group *raw.CNMutableGroup, identifier string) {
 	x.inner.AddGroupToContainerWithIdentifier(group, foundation.NSStringStringWithUTF8String(identifier))
 }
 
-// @abstract Update an existing group in the contact store. @discussion The group must already exist in the contact store.
+// Updates an existing group in the contact store.
 //
 // UpdateGroup calls the underlying UpdateGroup.
 func (x *SaveRequest) UpdateGroup(group *raw.CNMutableGroup) {
 	x.inner.UpdateGroup(group)
 }
 
-// @abstract Delete a group from the contact store. @discussion The contacts in the group are not deleted. If the group was previously specified to be added in the save request that will no longer occur.
+// Deletes a group from the contact store.
 //
 // DeleteGroup calls the underlying DeleteGroup.
 func (x *SaveRequest) DeleteGroup(group *raw.CNMutableGroup) {
 	x.inner.DeleteGroup(group)
 }
 
-// @abstract Add a new subgroup to a group. @discussion If the subgroup was previously specified to be deleted in the save request that will no longer occur. @param subgroup The new group to add. @param group The group to add the subgroup to.
+// Add the specified group to a parent group.
 //
 // AddSubgroupToGroup calls the underlying AddSubgroupToGroup.
 func (x *SaveRequest) AddSubgroupToGroup(subgroup *raw.CNGroup, group *raw.CNGroup) {
 	x.inner.AddSubgroupToGroup(subgroup, group)
 }
 
-// @abstract Remove a subgroup from a group. @discussion The contacts in the subgroup's membership are not affected. If the subgroup was previously specified to be added in the save request that will no longer occur. @param subgroup The new group to add. @param group The group to add the subgroup to.
+// Remove a subgroup from the specified parent group.
 //
 // RemoveSubgroupFromGroup calls the underlying RemoveSubgroupFromGroup.
 func (x *SaveRequest) RemoveSubgroupFromGroup(subgroup *raw.CNGroup, group *raw.CNGroup) {
 	x.inner.RemoveSubgroupFromGroup(subgroup, group)
 }
 
-// @abstract Add a new member to a group. @discussion If the membership was previously specified to be deleted in the save request that will no longer occur. @param contact The new member to add to the group. @param group The group to add the member to.
+// Adds a contact as a member of a group.
 //
 // AddMemberToGroup calls the underlying AddMemberToGroup.
 func (x *SaveRequest) AddMemberToGroup(contact *raw.CNContact, group *raw.CNGroup) {
 	x.inner.AddMemberToGroup(contact, group)
 }
 
-// @abstract Remove a member from a group. @discussion The contact is not deleted. It is only removed as a member of the group. If the membership was previously specified to be added in the save request that will no longer occur. @param contact The member to remove from the group. @param group The group to remove the member from.
+// Removes a contact as a member of a group.
 //
 // RemoveMemberFromGroup calls the underlying RemoveMemberFromGroup.
 func (x *SaveRequest) RemoveMemberFromGroup(contact *raw.CNContact, group *raw.CNGroup) {

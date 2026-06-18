@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A concrete metadata object subclass representing a dog head.
+//
 // MetadataDogHeadObject wraps [raw.AVMetadataDogHeadObject] with a fluent Go API.
 type MetadataDogHeadObject struct {
 	inner *raw.AVMetadataDogHeadObject

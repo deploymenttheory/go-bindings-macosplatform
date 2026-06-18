@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A container that combines a set of groups into distinct visual groupings.
+//
 // CollectionLayoutSection wraps [raw.NSCollectionLayoutSection] with a fluent Go API.
 type CollectionLayoutSection struct {
 	inner *raw.NSCollectionLayoutSection
@@ -38,24 +40,32 @@ func NewCollectionLayoutSection() *CollectionLayoutSection {
 	return &CollectionLayoutSection{inner: raw.NSCollectionLayoutSectionFromID(_id)}
 }
 
+// The amount of space between the content of the section and its boundaries.
+//
 // WithContentInsets sets the contentInsets property and returns the receiver for chaining.
 func (x *CollectionLayoutSection) WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutSection {
 	x.inner.SetContentInsets(contentInsets)
 	return x
 }
 
+// The amount of space between the groups in the section.
+//
 // WithInterGroupSpacing sets the interGroupSpacing property and returns the receiver for chaining.
 func (x *CollectionLayoutSection) WithInterGroupSpacing(interGroupSpacing float64) *CollectionLayoutSection {
 	x.inner.SetInterGroupSpacing(interGroupSpacing)
 	return x
 }
 
+// The section’s scrolling behavior in relation to the main layout axis.
+//
 // WithOrthogonalScrollingBehavior sets the orthogonalScrollingBehavior property and returns the receiver for chaining.
 func (x *CollectionLayoutSection) WithOrthogonalScrollingBehavior(orthogonalScrollingBehavior NSCollectionLayoutSectionOrthogonalScrollingBehavior) *CollectionLayoutSection {
 	x.inner.SetOrthogonalScrollingBehavior(raw.NSCollectionLayoutSectionOrthogonalScrollingBehavior(orthogonalScrollingBehavior))
 	return x
 }
 
+// An array of the supplementary items that are associated with the boundary edges of the section, such as headers and footers.
+//
 // WithBoundarySupplementaryItems sets the collection, converting the Go slice to an NSArray.
 func (x *CollectionLayoutSection) WithBoundarySupplementaryItems(items ...*raw.NSCollectionLayoutBoundarySupplementaryItem) *CollectionLayoutSection {
 	if len(items) == 0 {
@@ -74,18 +84,24 @@ func (x *CollectionLayoutSection) WithBoundarySupplementaryItems(items ...*raw.N
 	return x
 }
 
+// A Boolean value that indicates whether the section’s supplementary items follow the specified content insets for the section.
+//
 // WithSupplementariesFollowContentInsets sets the supplementariesFollowContentInsets property and returns the receiver for chaining.
 func (x *CollectionLayoutSection) WithSupplementariesFollowContentInsets(supplementariesFollowContentInsets bool) *CollectionLayoutSection {
 	x.inner.SetSupplementariesFollowContentInsets(supplementariesFollowContentInsets)
 	return x
 }
 
+// A closure called before each layout cycle to allow modification of the items in the section immediately before they’re displayed.
+//
 // WithVisibleItemsInvalidationHandler sets the visibleItemsInvalidationHandler property and returns the receiver for chaining.
 func (x *CollectionLayoutSection) WithVisibleItemsInvalidationHandler(visibleItemsInvalidationHandler objc.Block) *CollectionLayoutSection {
 	x.inner.SetVisibleItemsInvalidationHandler(visibleItemsInvalidationHandler)
 	return x
 }
 
+// An array of the decoration items that are anchored to the section, such as background decoration views.
+//
 // WithDecorationItems sets the collection, converting the Go slice to an NSArray.
 func (x *CollectionLayoutSection) WithDecorationItems(items ...*raw.NSCollectionLayoutDecorationItem) *CollectionLayoutSection {
 	if len(items) == 0 {

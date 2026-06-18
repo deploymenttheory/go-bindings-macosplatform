@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A capture output for still image, Live Photos, and other photography workflows.
+//
 // CapturePhotoOutput wraps [raw.AVCapturePhotoOutput] with a fluent Go API.
 type CapturePhotoOutput struct {
 	inner *raw.AVCapturePhotoOutput
@@ -38,7 +40,7 @@ func NewCapturePhotoOutput() *CapturePhotoOutput {
 	return &CapturePhotoOutput{inner: raw.AVCapturePhotoOutputFromID(_id)}
 }
 
-// @property maxPhotoQualityPrioritization @abstract Indicates the highest quality the receiver should be prepared to output on a capture-by-capture basis. @discussion Default value is AVCapturePhotoQualityPrioritizationBalanced when attached to an AVCaptureSession, and AVCapturePhotoQualityPrioritizationSpeed when attached to an AVCaptureMultiCamSession. The AVCapturePhotoOutput is capable of applying a variety of techniques to improve photo quality (reduce noise, preserve detail in low light, freeze motion, etc). Some techniques improve image quality at the expense of speed (shot-to-shot time). Before starting your session, you may set this property to indicate the highest quality prioritization you intend to request when calling -capturePhotoWithSettings:delegate:. When configuring an AVCapturePhotoSettings object, you may not exceed this quality prioritization level, but you may select a lower (speedier) prioritization level. Changing the maxPhotoQualityPrioritization while the session is running can result in a lengthy rebuild of the session in which video preview is disrupted. Setting the maxPhotoQualityPrioritization to .quality will turn on optical image stabilization if the -isHighPhotoQualitySupported of the source device's -activeFormat is true.
+// The highest quality the photo output should prepare to deliver on a capture-by-capture basis.
 //
 // WithMaxPhotoQualityPrioritization sets the maxPhotoQualityPrioritization property and returns the receiver for chaining.
 func (x *CapturePhotoOutput) WithMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization AVCapturePhotoQualityPrioritization) *CapturePhotoOutput {
@@ -46,7 +48,7 @@ func (x *CapturePhotoOutput) WithMaxPhotoQualityPrioritization(maxPhotoQualityPr
 	return x
 }
 
-// @property fastCapturePrioritizationSupported @abstract Specifies whether fast capture prioritization is supported. @discussion Fast capture prioritization allows capture quality to be automatically reduced from the selected AVCapturePhotoQualityPrioritization to ensure the photo output can keep up when captures are requested in rapid succession. Fast capture prioritization is only supported for certain AVCaptureSession sessionPresets and AVCaptureDevice activeFormats and only when responsiveCaptureEnabled is YES. When switching cameras or formats this property may change. When this property changes from YES to NO, fastCapturePrioritizationEnabled also reverts to NO. If you've previously opted in for fast capture prioritization and then change configurations, you may need to set fastCapturePrioritizationEnabled = YES again.
+// A Boolean value that indicates whether the photo output supports fast capture prioritization.
 //
 // WithFastCapturePrioritizationSupported sets the fastCapturePrioritizationSupported property and returns the receiver for chaining.
 func (x *CapturePhotoOutput) WithFastCapturePrioritizationSupported(fastCapturePrioritizationSupported bool) *CapturePhotoOutput {
@@ -54,7 +56,7 @@ func (x *CapturePhotoOutput) WithFastCapturePrioritizationSupported(fastCaptureP
 	return x
 }
 
-// @property fastCapturePrioritizationEnabled @abstract Specifies whether fast capture prioritization is enabled. @discussion This property defaults to NO. This property may only be set to YES if fastCapturePrioritizationSupported is YES, otherwise an NSInvalidArgumentException is thrown. By setting this property to YES, the photo output prepares itself to automatically reduce capture quality from the selected AVCapturePhotoQualityPrioritization when needed to keep up with rapid capture requests. In many cases the slightly reduced quality is preferable to missing the moment entirely. If you intend to use fast capture prioritization, you should set this property to YES before calling -[AVCaptureSession startRunning] or within -[AVCaptureSession beginConfiguration] and -[AVCaptureSession commitConfiguration] while running.
+// A Boolean value that indicates whether the output enables fast capture prioritization.
 //
 // WithFastCapturePrioritizationEnabled sets the fastCapturePrioritizationEnabled property and returns the receiver for chaining.
 func (x *CapturePhotoOutput) WithFastCapturePrioritizationEnabled(fastCapturePrioritizationEnabled bool) *CapturePhotoOutput {
@@ -62,7 +64,7 @@ func (x *CapturePhotoOutput) WithFastCapturePrioritizationEnabled(fastCapturePri
 	return x
 }
 
-// @property highResolutionCaptureEnabled @abstract Indicates whether the photo render pipeline should be configured to deliver high resolution still images. @discussion Some AVCaptureDeviceFormats support outputting higher resolution stills than their streaming resolution (See AVCaptureDeviceFormat.highResolutionStillImageDimensions). Under some conditions, AVCaptureSession needs to set up the photo render pipeline differently to support high resolution still image capture. If you intend to take high resolution still images at all, you should set this property to YES before calling -[AVCaptureSession startRunning]. Once you've opted in for high resolution capture, you are free to issue photo capture requests with or without highResolutionCaptureEnabled in the AVCapturePhotoSettings. If you have not set this property to YES and call capturePhotoWithSettings:delegate: with settings.highResolutionCaptureEnabled set to YES, an NSInvalidArgumentException will be thrown.
+// A Boolean value that specifies whether to configure the capture pipeline for high resolution still image capture.
 //
 // WithHighResolutionCaptureEnabled sets the highResolutionCaptureEnabled property and returns the receiver for chaining.
 func (x *CapturePhotoOutput) WithHighResolutionCaptureEnabled(highResolutionCaptureEnabled bool) *CapturePhotoOutput {
@@ -70,7 +72,7 @@ func (x *CapturePhotoOutput) WithHighResolutionCaptureEnabled(highResolutionCapt
 	return x
 }
 
-// @property maxPhotoDimensions @abstract Indicates the maximum resolution of the requested photo. @discussion Set this property to enable requesting of images up to as large as the specified dimensions. Images returned by AVCapturePhotoOutput may be smaller than these dimensions but will never be larger. Once set, images can be requested with any valid maximum photo dimensions by setting AVCapturePhotoSettings.maxPhotoDimensions on a per photo basis. The dimensions set must match one of the dimensions returned by AVCaptureDeviceFormat.supportedMaxPhotoDimensions for the current active format. Changing this property may trigger a lengthy reconfiguration of the capture render pipeline so it is recommended that this is set before calling -[AVCaptureSession startRunning]. Note: When supported, the 24MP setting (5712, 4284) is only serviced as 24MP when opted-in to autoDeferredPhotoDeliveryEnabled.
+// The maximum resolution of the requested photo.
 //
 // WithMaxPhotoDimensions sets the maxPhotoDimensions property and returns the receiver for chaining.
 func (x *CapturePhotoOutput) WithMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions) *CapturePhotoOutput {
@@ -78,7 +80,7 @@ func (x *CapturePhotoOutput) WithMaxPhotoDimensions(maxPhotoDimensions coremedia
 	return x
 }
 
-// @property preservesLivePhotoCaptureSuspendedOnSessionStop @abstract By default, Live Photo capture is resumed when the session stops. This property allows clients to opt out of this and preserve the value of livePhotoCaptureSuspended. @discussion Defaults to NO.
+// A Boolean value that indicates whether to preserve the suspended state of Live Photo capture when the session stops.
 //
 // WithPreservesLivePhotoCaptureSuspendedOnSessionStop sets the preservesLivePhotoCaptureSuspendedOnSessionStop property and returns the receiver for chaining.
 func (x *CapturePhotoOutput) WithPreservesLivePhotoCaptureSuspendedOnSessionStop(preservesLivePhotoCaptureSuspendedOnSessionStop bool) *CapturePhotoOutput {
@@ -86,7 +88,7 @@ func (x *CapturePhotoOutput) WithPreservesLivePhotoCaptureSuspendedOnSessionStop
 	return x
 }
 
-// @property zeroShutterLagEnabled @abstract A BOOL value specifying whether the output is set up to support zero shutter lag. @discussion This property may only be set to YES if zeroShutterLagSupported is YES, otherwise an NSInvalidArgumentException is thrown. For apps linked on or after iOS 17 zero shutter lag is automatically enabled when supported. Enabling zero shutter lag reduces or eliminates shutter lag when using AVCapturePhotoQualityPrioritizationBalanced or Quality at the cost of additional memory usage by the photo output. The timestamp of the AVCapturePhoto may be slightly earlier than when -capturePhotoWithSettings:delegate: was called. To minimize camera shake from the user's tapping gesture it is recommended that -capturePhotoWithSettings:delegate: be called as early as possible when handling the touch down event. Zero shutter lag isn't available when using manual exposure or bracketed capture. Changing this property requires a lengthy reconfiguration of the capture render pipeline, so you should set this property to YES before calling -[AVCaptureSession startRunning] or within -[AVCaptureSession beginConfiguration] and -[AVCaptureSession commitConfiguration] while running.
+// A Boolean value that indicates whether the photo output configuration enables zero shutter lag.
 //
 // WithZeroShutterLagEnabled sets the zeroShutterLagEnabled property and returns the receiver for chaining.
 func (x *CapturePhotoOutput) WithZeroShutterLagEnabled(zeroShutterLagEnabled bool) *CapturePhotoOutput {
@@ -94,7 +96,7 @@ func (x *CapturePhotoOutput) WithZeroShutterLagEnabled(zeroShutterLagEnabled boo
 	return x
 }
 
-// @property responsiveCaptureEnabled @abstract A BOOL value specifying whether the photo output is set up to support responsive capture. @discussion This property may only be set to YES if responsiveCaptureSupported is YES, otherwise an NSInvalidArgumentException is thrown. When responsiveCaptureEnabled is YES the captureReadiness property should be used to determine whether new capture requests can be serviced in a reasonable time and whether the shutter control should be available to the user. Responsive capture adds buffering between the capture and photo processing stages which allows a new capture to start before processing has completed for the previous capture, so be prepared to handle -captureOutput:willBeginCaptureForResolvedSettings: being called before the -captureOutput:didFinishProcessingPhoto: for the prior requests. Processed photos continue to be delivered in the order they were captured. To minimize camera shake from the user's tapping gesture it is recommended that -capturePhotoWithSettings:delegate: be called as early as possible when handling the touch down event. Enabling responsive capture allows the fast capture prioritization feature to be used, which further increases capture rates and reduces preview and recording disruptions. See the fastCapturePrioritizationEnabled property. When requesting uncompressed output using kCVPixelBufferPixelFormatTypeKey in AVCapturePhotoSetting.format the AVCapturePhoto's pixelBuffer is allocated from a pool with enough capacity for that request only, and overlap between capture and processing is disabled. The client must release the AVCapturePhoto and references to the pixelBuffer before capturing again and the pixelBuffer's IOSurface must also no longer be in use. Changing this property requires a lengthy reconfiguration of the capture render pipeline, so you should set this property to YES before calling -[AVCaptureSession startRunning] or within -[AVCaptureSession beginConfiguration] and -[AVCaptureSession commitConfiguration] while running.
+// A Boolean value that indicates whether the photo output configuration enables responsive capture.
 //
 // WithResponsiveCaptureEnabled sets the responsiveCaptureEnabled property and returns the receiver for chaining.
 func (x *CapturePhotoOutput) WithResponsiveCaptureEnabled(responsiveCaptureEnabled bool) *CapturePhotoOutput {
@@ -102,7 +104,7 @@ func (x *CapturePhotoOutput) WithResponsiveCaptureEnabled(responsiveCaptureEnabl
 	return x
 }
 
-// @property constantColorEnabled @abstract A BOOL value specifying whether the photo render pipeline is set up to perform constant color captures. @discussion Default is NO. Set to YES to enable support for taking constant color photos. This property may only be set to YES if constantColorSupported is YES. Enabling constant color requires a lengthy reconfiguration of the capture render pipeline, so if you intend to capture constant color photos, you should set this property to YES before calling -[AVCaptureSession startRunning] or within -[AVCaptureSession beginConfiguration] and -[AVCaptureSession commitConfiguration] while running.
+// A Boolean value that indicates whether the photo output configures the render pipeline to perform constant color capture.
 //
 // WithConstantColorEnabled sets the constantColorEnabled property and returns the receiver for chaining.
 func (x *CapturePhotoOutput) WithConstantColorEnabled(constantColorEnabled bool) *CapturePhotoOutput {
@@ -110,7 +112,7 @@ func (x *CapturePhotoOutput) WithConstantColorEnabled(constantColorEnabled bool)
 	return x
 }
 
-// A `BOOL` value that indicates whether to defer starting this capture output. When this value is `true`, the session does not prepare the output's resources until some time after “AVCaptureSession/startRunning“ returns. You can start the visual parts of your user interface (e.g. preview) prior to other parts (e.g. photo/movie capture, metadata output, etc..) to improve startup performance. Set this value to `false` for outputs that your app needs for startup, and `true` for the ones it does not need to start immediately. For example, an “AVCaptureVideoDataOutput“ that you intend to use for displaying preview should set this value to `false`, so that the frames are available as soon as possible. By default, for apps that are linked on or after iOS 26, this property value is `true` for “AVCapturePhotoOutput“ and “AVCaptureFileOutput“ subclasses if supported, and `false` otherwise. When set to `true` for “AVCapturePhotoOutput“, if you want to support multiple capture requests before running deferred start, set “AVCapturePhotoOutput/responsiveCaptureEnabled“ to `true` on that output. If “deferredStartSupported“ is `false`, setting this property value to `true` results in the system throwing an `NSInvalidArgumentException`. - Note: Set this value before calling “AVCaptureSession/commitConfiguration“ as it requires a lengthy reconfiguration of the capture render pipeline.
+// A Boolean value that indicates whether to defer starting this capture output.
 //
 // WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
 func (x *CapturePhotoOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CapturePhotoOutput {
@@ -118,21 +120,21 @@ func (x *CapturePhotoOutput) WithDeferredStartEnabled(deferredStartEnabled bool)
 	return x
 }
 
-// @method capturePhotoWithSettings:delegate: @abstract Method for initiating a photo capture request with progress monitoring through the supplied delegate. @param settings An AVCapturePhotoSettings object you have configured. May not be nil. @param delegate An object conforming to the AVCapturePhotoCaptureDelegate protocol. This object's delegate methods are called back as the photo advances from capture to processing to finished delivery. May not be nil. @discussion This method initiates a photo capture. The receiver copies your provided settings to prevent unintentional mutation. It is illegal to re-use settings. The receiver throws an NSInvalidArgumentException if your settings.uniqueID matches that of any previously used settings. This method is used to initiate all flavors of photo capture: single photo, RAW capture with or without a processed image (such as a JPEG), bracketed capture, and Live Photo. Clients need not wait for a capture photo request to complete before issuing another request. This is true for single photo captures as well as Live Photos, where movie complements of adjacent photo captures are allowed to overlap. This method validates your settings and enforces the following rules in order to ensure deterministic behavior. If any of these rules are violated, a NSInvalidArgumentException is thrown. RAW rules: See +isBayerRAWPixelFormat: and +isAppleProRAWPixelFormat: on the difference between Bayer RAW and Apple ProRAW pixel formats. Common RAW rules: - If rawPhotoPixelFormatType is non-zero, it must be present in the receiver's -availableRawPhotoPixelFormatTypes array. - If rawPhotoPixelFormatType is non-zero, your delegate must respond to -captureOutput:didFinishProcessingRawPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error:. - If rawPhotoPixelFormatType is non-zero, highResolutionPhotoEnabled may be YES or NO, but the setting only applies to the processed image, if you've specified one. - If rawPhotoPixelFormatType is non-zero, constantColorEnabled must be set to NO. - If rawFileType is specified, it must be present in -availableRawPhotoFileTypes and must support the rawPhotoPixelFormatType specified using -supportedRawPhotoPixelFormatTypesForFileType:. Bayer RAW rules (isBayerRAWPixelFormat: returns yes for rawPhotoPixelFormatType): - photoQualityPrioritization must be set to AVCapturePhotoQualityPrioritizationSpeed (deprecated autoStillImageStabilizationEnabled must be set to NO). - the videoZoomFactor of the source device and the videoScaleAndCropFactor of the photo output's video connection must both be 1.0. Ensure no zoom is applied before requesting a RAW capture, and don't change the zoom during RAW capture. Apple ProRAW rules (isAppleProRAWPixelFormat: returns yes for rawPhotoPixelFormatType): - livePhotoMovieFileURL must be nil in AVCapturePhotoSettings settings - autoContentAwareDistortionCorrectionEnabled will automatically be disabled in AVCapturePhotoSettings - autoRedEyeReductionEnabled will automatically be disabled in AVCapturePhotoSettings - portraitEffectsMatteDeliveryEnabled will automatically be disabled in AVCapturePhotoSettings - enabledSemanticSegmentationMatteTypes will automatically be cleared in AVCapturePhotoSettings Processed Format rules: - If format is non-nil, a kCVPixelBufferPixelFormatTypeKey or AVVideoCodecKey must be present. You cannot specify both. - If format has a kCVPixelBufferPixelFormatTypeKey, its value must be present in the receiver's -availablePhotoPixelFormatTypes array. - If format has an AVVideoCodecKey, its value must be present in the receiver's -availablePhotoCodecTypes array. - If format is non-nil, your delegate must respond to -captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error:. - If processedFileType is specified, it must be present in -availablePhotoFileTypes and must support the format's specified kCVPixelBufferPixelFormatTypeKey (using -supportedPhotoPixelFormatTypesForFileType:) or AVVideoCodecKey (using -supportedPhotoCodecTypesForFileType:). - The photoQualityPrioritization you specify may not be a greater number than the photo output's maxPhotoQualityPrioritization. You must set your AVCapturePhotoOutput maxPhotoQualityPrioritization up front. Flash rules: - The specified flashMode must be present in the receiver's -supportedFlashModes array. Live Photo rules: - The receiver's livePhotoCaptureEnabled must be YES if settings.livePhotoMovieURL is non-nil. - If settings.livePhotoMovieURL is non-nil, the receiver's livePhotoCaptureSuspended property must be set to NO. - If settings.livePhotoMovieURL is non-nil, it must be a file URL that's accessible to your app's sandbox. - If settings.livePhotoMovieURL is non-nil, your delegate must respond to -captureOutput:didFinishProcessingLivePhotoToMovieFileAtURL:duration:photoDisplayTime:resolvedSettings:error:. Bracketed capture rules: - bracketedSettings.count must be <= the receiver's maxBracketedCapturePhotoCount property. - For manual exposure brackets, ISO value must be within the source device activeFormat's minISO and maxISO values. - For manual exposure brackets, exposureDuration value must be within the source device activeFormat's minExposureDuration and maxExposureDuration values. - For auto exposure brackets, exposureTargetBias value must be within the source device's minExposureTargetBias and maxExposureTargetBias values. Deferred Photo Delivery rules: - If the receiver's autoDeferredPhotoDeliveryEnabled is YES, your delegate must respond to -captureOutput:didFinishCapturingDeferredPhotoProxy:error:. - The maxPhotoDimensions setting for 24MP (5712, 4284), when supported, is only serviced as 24MP via deferred photo delivery. Color space rules: - Photo capture is not supported when AVCaptureDevice has selected AVCaptureColorSpace_AppleLog or AVCaptureColorSpace_AppleLog2 as color space.
+// Initiates a photo capture using the specified settings.
 //
 // CapturePhotoWithSettingsDelegate calls the underlying CapturePhotoWithSettingsDelegate.
 func (x *CapturePhotoOutput) CapturePhotoWithSettingsDelegate(settings *raw.AVCapturePhotoSettings, delegate raw.AVCapturePhotoCaptureDelegate) {
 	x.inner.CapturePhotoWithSettingsDelegate(settings, delegate)
 }
 
-// @method supportedPhotoPixelFormatTypesForFileType: @abstract An array of pixel format type values that are currently supported by the receiver for a particular file container. @param fileType The AVFileType container type intended for storage of a photo. @result An array of CVPixelBufferPixelFormatTypeKey values supported by the receiver for the file type in question. @discussion If you wish to capture a photo for storage in a particular file container, such as TIFF, you must ensure that the photo pixel format type you request is valid for that file type. If no pixel format types are supported for a given fileType, an empty array is returned. If you've not yet added your receiver to an AVCaptureSession with a video source, no pixel format types are supported.
+// Returns the list of uncompressed pixel formats supported for photo data in the specified file type.
 //
 // SupportedPhotoPixelFormatTypesForFileType calls the underlying SupportedPhotoPixelFormatTypesForFileType.
 func (x *CapturePhotoOutput) SupportedPhotoPixelFormatTypesForFileType(fileType *foundation.NSString) *foundation.NSArray[*foundation.NSNumber] {
 	return x.inner.SupportedPhotoPixelFormatTypesForFileType(fileType)
 }
 
-// @method supportedPhotoCodecTypesForFileType: @abstract An array of AVVideoCodecKey values that are currently supported by the receiver for a particular file container. @param fileType The AVFileType container type intended for storage of a photo. @result An array of AVVideoCodecKey values supported by the receiver for the file type in question. @discussion If you wish to capture a photo for storage in a particular file container, such as HEIF, you must ensure that the photo codec type you request is valid for that file type. If no codec types are supported for a given fileType, an empty array is returned. If you've not yet added your receiver to an AVCaptureSession with a video source, no codec types are supported.
+// Returns the list of photo codecs (such as JPEG or HEVC) supported for photo data in the specified file type.
 //
 // SupportedPhotoCodecTypesForFileType calls the underlying SupportedPhotoCodecTypesForFileType.
 func (x *CapturePhotoOutput) SupportedPhotoCodecTypesForFileType(fileType *foundation.NSString) *foundation.NSArray[*foundation.NSString] {

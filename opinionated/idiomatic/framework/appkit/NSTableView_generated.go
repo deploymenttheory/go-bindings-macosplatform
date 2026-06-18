@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A set of related records, displayed in rows that represent individual records and columns that represent the attributes of those records.
+//
 // TableView wraps [raw.NSTableView] with a fluent Go API.
 type TableView struct {
 	inner *raw.NSTableView
@@ -49,96 +51,128 @@ func NewTableViewWithCoder(coder *foundation.NSCoder) *TableView {
 	return &TableView{inner: raw.NSTableViewFromID(_id)}
 }
 
+// The object that provides the data displayed by the table view.
+//
 // WithDataSource sets the dataSource property and returns the receiver for chaining.
 func (x *TableView) WithDataSource(dataSource raw.NSTableViewDataSource) *TableView {
 	x.inner.SetDataSource(dataSource)
 	return x
 }
 
+// The table view’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *TableView) WithDelegate(delegate raw.NSTableViewDelegate) *TableView {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The view object used to draw headers over columns.
+//
 // WithHeaderView sets the headerView property and returns the receiver for chaining.
 func (x *TableView) WithHeaderView(headerView *TableHeaderView) *TableView {
 	x.inner.SetHeaderView(headerView.Unwrap())
 	return x
 }
 
+// The view used to draw the area to the right of the column headers and above the vertical scroller of the enclosing scroll view.
+//
 // WithCornerView sets the cornerView property and returns the receiver for chaining.
 func (x *TableView) WithCornerView(cornerView ViewProvider) *TableView {
 	x.inner.SetCornerView(cornerView.asView())
 	return x
 }
 
+// A Boolean value indicating whether the table view allows the user to rearrange columns by dragging their headers.
+//
 // WithAllowsColumnReordering sets the allowsColumnReordering property and returns the receiver for chaining.
 func (x *TableView) WithAllowsColumnReordering(allowsColumnReordering bool) *TableView {
 	x.inner.SetAllowsColumnReordering(allowsColumnReordering)
 	return x
 }
 
+// A Boolean value indicating whether the table view allows the user to resize columns by dragging between their headers.
+//
 // WithAllowsColumnResizing sets the allowsColumnResizing property and returns the receiver for chaining.
 func (x *TableView) WithAllowsColumnResizing(allowsColumnResizing bool) *TableView {
 	x.inner.SetAllowsColumnResizing(allowsColumnResizing)
 	return x
 }
 
+// The table view’s column autoresizing style.
+//
 // WithColumnAutoresizingStyle sets the columnAutoresizingStyle property and returns the receiver for chaining.
 func (x *TableView) WithColumnAutoresizingStyle(columnAutoresizingStyle NSTableViewColumnAutoresizingStyle) *TableView {
 	x.inner.SetColumnAutoresizingStyle(raw.NSTableViewColumnAutoresizingStyle(columnAutoresizingStyle))
 	return x
 }
 
+// The grid lines drawn by the table view.
+//
 // WithGridStyleMask sets the gridStyleMask property and returns the receiver for chaining.
 func (x *TableView) WithGridStyleMask(gridStyleMask NSTableViewGridLineStyle) *TableView {
 	x.inner.SetGridStyleMask(raw.NSTableViewGridLineStyle(gridStyleMask))
 	return x
 }
 
+// The horizontal and vertical spacing between cells.
+//
 // WithIntercellSpacing sets the intercellSpacing property and returns the receiver for chaining.
 func (x *TableView) WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *TableView {
 	x.inner.SetIntercellSpacing(intercellSpacing)
 	return x
 }
 
+// A Boolean value indicating whether the table view uses alternating row colors for its background.
+//
 // WithUsesAlternatingRowBackgroundColors sets the usesAlternatingRowBackgroundColors property and returns the receiver for chaining.
 func (x *TableView) WithUsesAlternatingRowBackgroundColors(usesAlternatingRowBackgroundColors bool) *TableView {
 	x.inner.SetUsesAlternatingRowBackgroundColors(usesAlternatingRowBackgroundColors)
 	return x
 }
 
+// The color used to draw the background of the table.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *TableView) WithBackgroundColor(backgroundColor *Color) *TableView {
 	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// The color used to draw grid lines.
+//
 // WithGridColor sets the gridColor property and returns the receiver for chaining.
 func (x *TableView) WithGridColor(gridColor *Color) *TableView {
 	x.inner.SetGridColor(gridColor.Unwrap())
 	return x
 }
 
+// The row size style (small, medium, large, or custom) used by the table view.
+//
 // WithRowSizeStyle sets the rowSizeStyle property and returns the receiver for chaining.
 func (x *TableView) WithRowSizeStyle(rowSizeStyle NSTableViewRowSizeStyle) *TableView {
 	x.inner.SetRowSizeStyle(raw.NSTableViewRowSizeStyle(rowSizeStyle))
 	return x
 }
 
+// The height of each row in the table.
+//
 // WithRowHeight sets the rowHeight property and returns the receiver for chaining.
 func (x *TableView) WithRowHeight(rowHeight float64) *TableView {
 	x.inner.SetRowHeight(rowHeight)
 	return x
 }
 
+// The message sent to the table view’s target when the user double-clicks a cell or column header.
+//
 // WithDoubleAction sets the doubleAction property and returns the receiver for chaining.
 func (x *TableView) WithDoubleAction(doubleAction objc.SEL) *TableView {
 	x.inner.SetDoubleAction(doubleAction)
 	return x
 }
 
+// The table view’s sort descriptors.
+//
 // WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *TableView) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *TableView {
 	if len(items) == 0 {
@@ -157,228 +191,304 @@ func (x *TableView) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *
 	return x
 }
 
+// The column highlighted in the table.
+//
 // WithHighlightedTableColumn sets the highlightedTableColumn property and returns the receiver for chaining.
 func (x *TableView) WithHighlightedTableColumn(highlightedTableColumn *TableColumn) *TableView {
 	x.inner.SetHighlightedTableColumn(highlightedTableColumn.Unwrap())
 	return x
 }
 
+// A Boolean value indicating whether vertical motion is treated as a drag or selection change.
+//
 // WithVerticalMotionCanBeginDrag sets the verticalMotionCanBeginDrag property and returns the receiver for chaining.
 func (x *TableView) WithVerticalMotionCanBeginDrag(verticalMotionCanBeginDrag bool) *TableView {
 	x.inner.SetVerticalMotionCanBeginDrag(verticalMotionCanBeginDrag)
 	return x
 }
 
+// A Boolean value indicating whether the table view allows the user to select more than one column or row at a time.
+//
 // WithAllowsMultipleSelection sets the allowsMultipleSelection property and returns the receiver for chaining.
 func (x *TableView) WithAllowsMultipleSelection(allowsMultipleSelection bool) *TableView {
 	x.inner.SetAllowsMultipleSelection(allowsMultipleSelection)
 	return x
 }
 
+// A Boolean value indicating whether the table view allows the user to select zero columns or rows.
+//
 // WithAllowsEmptySelection sets the allowsEmptySelection property and returns the receiver for chaining.
 func (x *TableView) WithAllowsEmptySelection(allowsEmptySelection bool) *TableView {
 	x.inner.SetAllowsEmptySelection(allowsEmptySelection)
 	return x
 }
 
+// A Boolean value indicating whether the table view allows the user to select columns by clicking their headers.
+//
 // WithAllowsColumnSelection sets the allowsColumnSelection property and returns the receiver for chaining.
 func (x *TableView) WithAllowsColumnSelection(allowsColumnSelection bool) *TableView {
 	x.inner.SetAllowsColumnSelection(allowsColumnSelection)
 	return x
 }
 
+// A Boolean value indicating whether the table view allows the user to type characters to select rows.
+//
 // WithAllowsTypeSelect sets the allowsTypeSelect property and returns the receiver for chaining.
 func (x *TableView) WithAllowsTypeSelect(allowsTypeSelect bool) *TableView {
 	x.inner.SetAllowsTypeSelect(allowsTypeSelect)
 	return x
 }
 
+// The style that the table view uses.
+//
 // WithStyle sets the style property and returns the receiver for chaining.
 func (x *TableView) WithStyle(style NSTableViewStyle) *TableView {
 	x.inner.SetStyle(raw.NSTableViewStyle(style))
 	return x
 }
 
+// The selection highlight style used by the table view to indicate row and column selection.
+//
 // WithSelectionHighlightStyle sets the selectionHighlightStyle property and returns the receiver for chaining.
 func (x *TableView) WithSelectionHighlightStyle(selectionHighlightStyle NSTableViewSelectionHighlightStyle) *TableView {
 	x.inner.SetSelectionHighlightStyle(raw.NSTableViewSelectionHighlightStyle(selectionHighlightStyle))
 	return x
 }
 
+// The feedback style displayed when the user drags over the table view.
+//
 // WithDraggingDestinationFeedbackStyle sets the draggingDestinationFeedbackStyle property and returns the receiver for chaining.
 func (x *TableView) WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle NSTableViewDraggingDestinationFeedbackStyle) *TableView {
 	x.inner.SetDraggingDestinationFeedbackStyle(raw.NSTableViewDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle))
 	return x
 }
 
+// The name under which table information is automatically saved.
+//
 // WithAutosaveName sets the autosaveName property and returns the receiver for chaining.
 func (x *TableView) WithAutosaveName(autosaveName *foundation.NSString) *TableView {
 	x.inner.SetAutosaveName(autosaveName)
 	return x
 }
 
+// A Boolean value indicating whether the order and width of the table view’s columns are automatically saved.
+//
 // WithAutosaveTableColumns sets the autosaveTableColumns property and returns the receiver for chaining.
 func (x *TableView) WithAutosaveTableColumns(autosaveTableColumns bool) *TableView {
 	x.inner.SetAutosaveTableColumns(autosaveTableColumns)
 	return x
 }
 
+// A Boolean value indicating whether the table view draws grouped rows as if they are floating.
+//
 // WithFloatsGroupRows sets the floatsGroupRows property and returns the receiver for chaining.
 func (x *TableView) WithFloatsGroupRows(floatsGroupRows bool) *TableView {
 	x.inner.SetFloatsGroupRows(floatsGroupRows)
 	return x
 }
 
+// A Boolean value indicating whether a table row’s actions are visible.
+//
 // WithRowActionsVisible sets the rowActionsVisible property and returns the receiver for chaining.
 func (x *TableView) WithRowActionsVisible(rowActionsVisible bool) *TableView {
 	x.inner.SetRowActionsVisible(rowActionsVisible)
 	return x
 }
 
+// A Boolean value indicating whether the table uses static data.
+//
 // WithUsesStaticContents sets the usesStaticContents property and returns the receiver for chaining.
 func (x *TableView) WithUsesStaticContents(usesStaticContents bool) *TableView {
 	x.inner.SetUsesStaticContents(usesStaticContents)
 	return x
 }
 
+// A Boolean value that indicates whether the table view uses autolayout to calculate the height of rows.
+//
 // WithUsesAutomaticRowHeights sets the usesAutomaticRowHeights property and returns the receiver for chaining.
 func (x *TableView) WithUsesAutomaticRowHeights(usesAutomaticRowHeights bool) *TableView {
 	x.inner.SetUsesAutomaticRowHeights(usesAutomaticRowHeights)
 	return x
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *TableView) WithTarget(target objc.ID) *TableView {
 	x.inner.NSControl.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *TableView) WithAction(action objc.SEL) *TableView {
 	x.inner.NSControl.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *TableView) WithTag(tag int) *TableView {
 	x.inner.NSControl.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *TableView) WithIgnoresMultiClick(ignoresMultiClick bool) *TableView {
 	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *TableView) WithContinuous(continuous bool) *TableView {
 	x.inner.NSControl.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *TableView) WithEnabled(enabled bool) *TableView {
 	x.inner.NSControl.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *TableView) WithRefusesFirstResponder(refusesFirstResponder bool) *TableView {
 	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *TableView) WithHighlighted(highlighted bool) *TableView {
 	x.inner.NSControl.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *TableView) WithControlSize(controlSize NSControlSize) *TableView {
 	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *TableView) WithFormatter(formatter *foundation.NSFormatter) *TableView {
 	x.inner.NSControl.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *TableView) WithObjectValue(objectValue objc.ID) *TableView {
 	x.inner.NSControl.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *TableView) WithStringValue(stringValue string) *TableView {
 	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *TableView) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TableView {
 	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *TableView) WithIntValue(intValue int) *TableView {
 	x.inner.NSControl.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *TableView) WithIntegerValue(integerValue int) *TableView {
 	x.inner.NSControl.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *TableView) WithFloatValue(floatValue float32) *TableView {
 	x.inner.NSControl.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *TableView) WithDoubleValue(doubleValue float64) *TableView {
 	x.inner.NSControl.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *TableView) WithFont(font *Font) *TableView {
 	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *TableView) WithUsesSingleLineMode(usesSingleLineMode bool) *TableView {
 	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *TableView) WithLineBreakMode(lineBreakMode NSLineBreakMode) *TableView {
 	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *TableView) WithAlignment(alignment NSTextAlignment) *TableView {
 	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *TableView) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TableView {
 	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *TableView) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *TableView {
 	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -433,6 +543,8 @@ func (x *TableView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOpti
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *TableView) WithFrame(frame corefoundation.CGRect) *TableView {
 	x.inner.NSControl.NSView.SetFrame(frame)
@@ -457,6 +569,8 @@ func (x *TableView) WithBoundsRotation(boundsRotation float64) *TableView {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *TableView) WithBounds(bounds corefoundation.CGRect) *TableView {
 	x.inner.NSControl.NSView.SetBounds(bounds)
@@ -469,6 +583,8 @@ func (x *TableView) WithCanDrawConcurrently(canDrawConcurrently bool) *TableView
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *TableView) WithNeedsDisplay(needsDisplay bool) *TableView {
 	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
@@ -655,7 +771,7 @@ func (x *TableView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets founda
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *TableView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableView {
@@ -711,55 +827,75 @@ func (x *TableView) WithPressureConfiguration(pressureConfiguration *PressureCon
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *TableView) WithNextResponder(nextResponder ResponderProvider) *TableView {
 	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *TableView) WithMenu(menu *Menu) *TableView {
 	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *TableView) WithUserActivity(userActivity *foundation.NSUserActivity) *TableView {
 	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *TableView) WithTouchBar(touchBar *TouchBar) *TableView {
 	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Informs the table view that the rows specified in indexSet have changed height.
+//
 // NoteHeightOfRowsWithIndexesChanged calls the underlying NoteHeightOfRowsWithIndexesChanged.
 func (x *TableView) NoteHeightOfRowsWithIndexesChanged(indexSet *foundation.NSIndexSet) {
 	x.inner.NoteHeightOfRowsWithIndexesChanged(indexSet)
 }
 
+// Adds the specified column as the last column of the table view.
+//
 // AddTableColumn calls the underlying AddTableColumn.
 func (x *TableView) AddTableColumn(tableColumn *raw.NSTableColumn) {
 	x.inner.AddTableColumn(tableColumn)
 }
 
+// Removes the specified column from the table view.
+//
 // RemoveTableColumn calls the underlying RemoveTableColumn.
 func (x *TableView) RemoveTableColumn(tableColumn *raw.NSTableColumn) {
 	x.inner.RemoveTableColumn(tableColumn)
 }
 
+// Moves the column and heading at the specified index to the new specified index.
+//
 // MoveColumnToColumn calls the underlying MoveColumnToColumn.
 func (x *TableView) MoveColumnToColumn(oldIndex int, newIndex int) {
 	x.inner.MoveColumnToColumn(oldIndex, newIndex)
 }
 
+// Returns the index of the first column in the table view whose identifier is equal to the specified identifier.
+//
 // ColumnWithIdentifier calls the underlying ColumnWithIdentifier.
 func (x *TableView) ColumnWithIdentifier(identifier *foundation.NSString) int {
 	return x.inner.ColumnWithIdentifier(identifier)
 }
 
+// Returns the NSTableColumn object for the first column whose identifier is equal to the specified object.
+//
 // TableColumnWithIdentifier calls the underlying TableColumnWithIdentifier.
 func (x *TableView) TableColumnWithIdentifier(identifier *foundation.NSString) *TableColumn {
 	_r := x.inner.TableColumnWithIdentifier(identifier)
@@ -769,46 +905,64 @@ func (x *TableView) TableColumnWithIdentifier(identifier *foundation.NSString) *
 	return &TableColumn{inner: _r}
 }
 
+// Properly sizes the table view and its header view and marks it as needing display.
+//
 // Tile calls the underlying Tile.
 func (x *TableView) Tile() {
 	x.inner.Tile()
 }
 
+// Resizes the last column so the table view fits exactly within its enclosing clip view.
+//
 // SizeLastColumnToFit calls the underlying SizeLastColumnToFit.
 func (x *TableView) SizeLastColumnToFit() {
 	x.inner.SizeLastColumnToFit()
 }
 
+// Scrolls the view so the specified row is visible.
+//
 // ScrollRowToVisible calls the underlying ScrollRowToVisible.
 func (x *TableView) ScrollRowToVisible(row int) {
 	x.inner.ScrollRowToVisible(row)
 }
 
+// Scrolls the view so the specified column is visible.
+//
 // ScrollColumnToVisible calls the underlying ScrollColumnToVisible.
 func (x *TableView) ScrollColumnToVisible(column int) {
 	x.inner.ScrollColumnToVisible(column)
 }
 
+// Marks the table view as needing redisplay, so it will reload the data for visible cells and draw the new values.
+//
 // ReloadData calls the underlying ReloadData.
 func (x *TableView) ReloadData() {
 	x.inner.ReloadData()
 }
 
+// Informs the table view that the number of records in its data source has changed.
+//
 // NoteNumberOfRowsChanged calls the underlying NoteNumberOfRowsChanged.
 func (x *TableView) NoteNumberOfRowsChanged() {
 	x.inner.NoteNumberOfRowsChanged()
 }
 
+// Reloads the data for only the specified rows and columns.
+//
 // ReloadDataForRowIndexesColumnIndexes calls the underlying ReloadDataForRowIndexesColumnIndexes.
 func (x *TableView) ReloadDataForRowIndexesColumnIndexes(rowIndexes *foundation.NSIndexSet, columnIndexes *foundation.NSIndexSet) {
 	x.inner.ReloadDataForRowIndexesColumnIndexes(rowIndexes, columnIndexes)
 }
 
+// Sets the indicator image of the specified column.
+//
 // SetIndicatorImageInTableColumn calls the underlying SetIndicatorImageInTableColumn.
 func (x *TableView) SetIndicatorImageInTableColumn(image *raw.NSImage, tableColumn *raw.NSTableColumn) {
 	x.inner.SetIndicatorImageInTableColumn(image, tableColumn)
 }
 
+// Returns the indicator image of the specified table column.
+//
 // IndicatorImageInTableColumn calls the underlying IndicatorImageInTableColumn.
 func (x *TableView) IndicatorImageInTableColumn(tableColumn *raw.NSTableColumn) *Image {
 	_r := x.inner.IndicatorImageInTableColumn(tableColumn)
@@ -818,11 +972,15 @@ func (x *TableView) IndicatorImageInTableColumn(tableColumn *raw.NSTableColumn) 
 	return &Image{inner: _r}
 }
 
+// Returns a Boolean value indicating whether the table view allows dragging the rows with the drag initiated at the specified point.
+//
 // CanDragRowsWithIndexesAtPoint calls the underlying CanDragRowsWithIndexesAtPoint.
 func (x *TableView) CanDragRowsWithIndexesAtPoint(rowIndexes *foundation.NSIndexSet, mouseDownPoint corefoundation.CGPoint) bool {
 	return x.inner.CanDragRowsWithIndexesAtPoint(rowIndexes, mouseDownPoint)
 }
 
+// Computes and returns an image to use for dragging.
+//
 // DragImageForRowsWithIndexesTableColumnsEventOffset calls the underlying DragImageForRowsWithIndexesTableColumnsEventOffset.
 func (x *TableView) DragImageForRowsWithIndexesTableColumnsEventOffset(dragRows *foundation.NSIndexSet, tableColumns *foundation.NSArray[*raw.NSTableColumn], dragEvent *raw.NSEvent, dragImageOffset *corefoundation.CGPoint) *Image {
 	_r := x.inner.DragImageForRowsWithIndexesTableColumnsEventOffset(dragRows, tableColumns, dragEvent, dragImageOffset)
@@ -832,116 +990,162 @@ func (x *TableView) DragImageForRowsWithIndexesTableColumnsEventOffset(dragRows 
 	return &Image{inner: _r}
 }
 
+// Sets the default operation mask returned by draggingSourceOperationMaskForLocal: to mask.
+//
 // SetDraggingSourceOperationMaskForLocal calls the underlying SetDraggingSourceOperationMaskForLocal.
 func (x *TableView) SetDraggingSourceOperationMaskForLocal(mask NSDragOperation, isLocal bool) {
 	x.inner.SetDraggingSourceOperationMaskForLocal(raw.NSDragOperation(mask), isLocal)
 }
 
+// Retargets the proposed drop operation.
+//
 // SetDropRowDropOperation calls the underlying SetDropRowDropOperation.
 func (x *TableView) SetDropRowDropOperation(row int, dropOperation NSTableViewDropOperation) {
 	x.inner.SetDropRowDropOperation(row, raw.NSTableViewDropOperation(dropOperation))
 }
 
+// Selects all rows or all columns, according to whether rows or columns were most recently selected.
+//
 // SelectAll calls the underlying SelectAll.
 func (x *TableView) SelectAll(sender objc.ID) {
 	x.inner.SelectAll(sender)
 }
 
+// Deselects all selected rows or columns if empty selection is allowed; otherwise does nothing.
+//
 // DeselectAll calls the underlying DeselectAll.
 func (x *TableView) DeselectAll(sender objc.ID) {
 	x.inner.DeselectAll(sender)
 }
 
+// Sets the column selection using indexes possibly extending the selection.
+//
 // SelectColumnIndexesByExtendingSelection calls the underlying SelectColumnIndexesByExtendingSelection.
 func (x *TableView) SelectColumnIndexesByExtendingSelection(indexes *foundation.NSIndexSet, extend bool) {
 	x.inner.SelectColumnIndexesByExtendingSelection(indexes, extend)
 }
 
+// Sets the row selection using indexes extending the selection if specified.
+//
 // SelectRowIndexesByExtendingSelection calls the underlying SelectRowIndexesByExtendingSelection.
 func (x *TableView) SelectRowIndexesByExtendingSelection(indexes *foundation.NSIndexSet, extend bool) {
 	x.inner.SelectRowIndexesByExtendingSelection(indexes, extend)
 }
 
+// Deselects the column at the specified index if it’s selected.
+//
 // DeselectColumn calls the underlying DeselectColumn.
 func (x *TableView) DeselectColumn(column int) {
 	x.inner.DeselectColumn(column)
 }
 
+// Deselects the row at the specified index if it’s selected.
+//
 // DeselectRow calls the underlying DeselectRow.
 func (x *TableView) DeselectRow(row int) {
 	x.inner.DeselectRow(row)
 }
 
+// Returns a Boolean value that indicates whether the column at the specified index is selected.
+//
 // IsColumnSelected calls the underlying IsColumnSelected.
 func (x *TableView) IsColumnSelected(column int) bool {
 	return x.inner.IsColumnSelected(column)
 }
 
+// Returns a Boolean value that indicates whether the row at the specified index is selected.
+//
 // IsRowSelected calls the underlying IsRowSelected.
 func (x *TableView) IsRowSelected(row int) bool {
 	return x.inner.IsRowSelected(row)
 }
 
+// Returns the rectangle containing the column at the specified index.
+//
 // RectOfColumn calls the underlying RectOfColumn.
 func (x *TableView) RectOfColumn(column int) corefoundation.CGRect {
 	return x.inner.RectOfColumn(column)
 }
 
+// Returns the rectangle containing the row at the specified index.
+//
 // RectOfRow calls the underlying RectOfRow.
 func (x *TableView) RectOfRow(row int) corefoundation.CGRect {
 	return x.inner.RectOfRow(row)
 }
 
+// Returns the indexes of the table view’s columns that intersect the specified rectangle.
+//
 // ColumnIndexesInRect calls the underlying ColumnIndexesInRect.
 func (x *TableView) ColumnIndexesInRect(rect corefoundation.CGRect) *foundation.NSIndexSet {
 	return x.inner.ColumnIndexesInRect(rect)
 }
 
+// Returns a range of indexes for the rows that lie wholly or partially within the vertical boundaries of the specified rectangle.
+//
 // RowsInRect calls the underlying RowsInRect.
 func (x *TableView) RowsInRect(rect corefoundation.CGRect) foundation.NSRange {
 	return x.inner.RowsInRect(rect)
 }
 
+// Returns the index of the column the specified point lies in.
+//
 // ColumnAtPoint calls the underlying ColumnAtPoint.
 func (x *TableView) ColumnAtPoint(point corefoundation.CGPoint) int {
 	return x.inner.ColumnAtPoint(point)
 }
 
+// Returns the index of the row the specified point lies in.
+//
 // RowAtPoint calls the underlying RowAtPoint.
 func (x *TableView) RowAtPoint(point corefoundation.CGPoint) int {
 	return x.inner.RowAtPoint(point)
 }
 
+// Returns a rectangle locating the cell that lies at the intersection of the specified column and row.
+//
 // FrameOfCellAtColumnRow calls the underlying FrameOfCellAtColumnRow.
 func (x *TableView) FrameOfCellAtColumnRow(column int, row int) corefoundation.CGRect {
 	return x.inner.FrameOfCellAtColumnRow(column, row)
 }
 
+// Edits the cell at the specified column and row using the specified event and selection behavior.
+//
 // EditColumnRowWithEventSelect calls the underlying EditColumnRowWithEventSelect.
 func (x *TableView) EditColumnRowWithEventSelect(column int, row int, event *raw.NSEvent, select_ bool) {
 	x.inner.EditColumnRowWithEventSelect(column, row, event, select_)
 }
 
+// Draws the cells for the row at rowIndex in the columns that intersect clipRect.
+//
 // DrawRowClipRect calls the underlying DrawRowClipRect.
 func (x *TableView) DrawRowClipRect(row int, clipRect corefoundation.CGRect) {
 	x.inner.DrawRowClipRect(row, clipRect)
 }
 
+// Highlights the region of the table view in the specified rectangle.
+//
 // HighlightSelectionInClipRect calls the underlying HighlightSelectionInClipRect.
 func (x *TableView) HighlightSelectionInClipRect(clipRect corefoundation.CGRect) {
 	x.inner.HighlightSelectionInClipRect(clipRect)
 }
 
+// Draws the grid lines within the supplied rectangle.
+//
 // DrawGridInClipRect calls the underlying DrawGridInClipRect.
 func (x *TableView) DrawGridInClipRect(clipRect corefoundation.CGRect) {
 	x.inner.DrawGridInClipRect(clipRect)
 }
 
+// Draws the background of the table view in the clip rect specified by the rectangle.
+//
 // DrawBackgroundInClipRect calls the underlying DrawBackgroundInClipRect.
 func (x *TableView) DrawBackgroundInClipRect(clipRect corefoundation.CGRect) {
 	x.inner.DrawBackgroundInClipRect(clipRect)
 }
 
+// Returns a view at the specified row and column indexes, creating one if necessary.
+//
 // ViewAtColumnRowMakeIfNecessary calls the underlying ViewAtColumnRowMakeIfNecessary.
 func (x *TableView) ViewAtColumnRowMakeIfNecessary(column int, row int, makeIfNecessary bool) *View {
 	_r := x.inner.ViewAtColumnRowMakeIfNecessary(column, row, makeIfNecessary)
@@ -951,6 +1155,8 @@ func (x *TableView) ViewAtColumnRowMakeIfNecessary(column int, row int, makeIfNe
 	return &View{inner: _r}
 }
 
+// Returns a row view at the specified index, creating one if necessary.
+//
 // RowViewAtRowMakeIfNecessary calls the underlying RowViewAtRowMakeIfNecessary.
 func (x *TableView) RowViewAtRowMakeIfNecessary(row int, makeIfNecessary bool) *TableRowView {
 	_r := x.inner.RowViewAtRowMakeIfNecessary(row, makeIfNecessary)
@@ -960,16 +1166,22 @@ func (x *TableView) RowViewAtRowMakeIfNecessary(row int, makeIfNecessary bool) *
 	return &TableRowView{inner: _r}
 }
 
+// Returns the index of the row for the specified view.
+//
 // RowForView calls the underlying RowForView.
 func (x *TableView) RowForView(view *raw.NSView) int {
 	return x.inner.RowForView(view)
 }
 
+// Returns the column index for the specified view.
+//
 // ColumnForView calls the underlying ColumnForView.
 func (x *TableView) ColumnForView(view *raw.NSView) int {
 	return x.inner.ColumnForView(view)
 }
 
+// Returns a new or existing view with the specified identifier.
+//
 // MakeViewWithIdentifierOwner calls the underlying MakeViewWithIdentifierOwner.
 func (x *TableView) MakeViewWithIdentifierOwner(identifier *foundation.NSString, owner objc.ID) *View {
 	_r := x.inner.MakeViewWithIdentifierOwner(identifier, owner)
@@ -979,56 +1191,78 @@ func (x *TableView) MakeViewWithIdentifierOwner(identifier *foundation.NSString,
 	return &View{inner: _r}
 }
 
+// Allows the enumeration of all the table rows that are known to the table view.
+//
 // EnumerateAvailableRowViewsUsing calls the underlying EnumerateAvailableRowViewsUsing.
 func (x *TableView) EnumerateAvailableRowViewsUsing(handler func(*raw.NSTableRowView, int)) {
 	x.inner.EnumerateAvailableRowViewsUsing(handler)
 }
 
+// Begins a group of updates for the table view.
+//
 // BeginUpdates calls the underlying BeginUpdates.
 func (x *TableView) BeginUpdates() {
 	x.inner.BeginUpdates()
 }
 
+// Ends the group of updates for the table view.
+//
 // EndUpdates calls the underlying EndUpdates.
 func (x *TableView) EndUpdates() {
 	x.inner.EndUpdates()
 }
 
+// Inserts the rows using the specified animation.
+//
 // InsertRowsAtIndexesWithAnimation calls the underlying InsertRowsAtIndexesWithAnimation.
 func (x *TableView) InsertRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, animationOptions NSTableViewAnimationOptions) {
 	x.inner.InsertRowsAtIndexesWithAnimation(indexes, raw.NSTableViewAnimationOptions(animationOptions))
 }
 
+// Removes the rows using the specified animation.
+//
 // RemoveRowsAtIndexesWithAnimation calls the underlying RemoveRowsAtIndexesWithAnimation.
 func (x *TableView) RemoveRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, animationOptions NSTableViewAnimationOptions) {
 	x.inner.RemoveRowsAtIndexesWithAnimation(indexes, raw.NSTableViewAnimationOptions(animationOptions))
 }
 
+// Moves the specified row to the new row location using animation.
+//
 // MoveRowAtIndexToIndex calls the underlying MoveRowAtIndexToIndex.
 func (x *TableView) MoveRowAtIndexToIndex(oldIndex int, newIndex int) {
 	x.inner.MoveRowAtIndexToIndex(oldIndex, newIndex)
 }
 
+// Hides the specified table rows.
+//
 // HideRowsAtIndexesWithAnimation calls the underlying HideRowsAtIndexesWithAnimation.
 func (x *TableView) HideRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, rowAnimation NSTableViewAnimationOptions) {
 	x.inner.HideRowsAtIndexesWithAnimation(indexes, raw.NSTableViewAnimationOptions(rowAnimation))
 }
 
+// Unhides the specified table rows.
+//
 // UnhideRowsAtIndexesWithAnimation calls the underlying UnhideRowsAtIndexesWithAnimation.
 func (x *TableView) UnhideRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, rowAnimation NSTableViewAnimationOptions) {
 	x.inner.UnhideRowsAtIndexesWithAnimation(indexes, raw.NSTableViewAnimationOptions(rowAnimation))
 }
 
+// Registers a NIB for the specified identifier, so that view-based table views can use it to instantiate views.
+//
 // RegisterNibForIdentifier calls the underlying RegisterNibForIdentifier.
 func (x *TableView) RegisterNibForIdentifier(nib *raw.NSNib, identifier *foundation.NSString) {
 	x.inner.RegisterNibForIdentifier(nib, identifier)
 }
 
+// Invoked when a row view is added to the table.
+//
 // DidAddRowViewForRow calls the underlying DidAddRowViewForRow.
 func (x *TableView) DidAddRowViewForRow(rowView *raw.NSTableRowView, row int) {
 	x.inner.DidAddRowViewForRow(rowView, row)
 }
 
+// Invoked when a row view is removed from the table.
+//
 // DidRemoveRowViewForRow calls the underlying DidRemoveRowViewForRow.
 func (x *TableView) DidRemoveRowViewForRow(rowView *raw.NSTableRowView, row int) {
 	x.inner.DidRemoveRowViewForRow(rowView, row)
@@ -1465,36 +1699,50 @@ func (x *TableView) SetUsesAutomaticRowHeights(usesAutomaticRowHeights bool) {
 	x.inner.SetUsesAutomaticRowHeights(usesAutomaticRowHeights)
 }
 
+// Sets whether the table view draws a grid.
+//
 // SetDrawsGrid calls the underlying SetDrawsGrid.
 func (x *TableView) SetDrawsGrid(flag bool) {
 	x.inner.SetDrawsGrid(flag)
 }
 
+// Returns a Boolean value that indicates whether the table view draws a grid.
+//
 // DrawsGrid calls the underlying DrawsGrid.
 func (x *TableView) DrawsGrid() bool {
 	return x.inner.DrawsGrid()
 }
 
+// Selects the column at the specified index, optionally extending any existing selection.
+//
 // SelectColumnByExtendingSelection calls the underlying SelectColumnByExtendingSelection.
 func (x *TableView) SelectColumnByExtendingSelection(column int, extend bool) {
 	x.inner.SelectColumnByExtendingSelection(column, extend)
 }
 
+// Selects a row at the specified index, optionally extending any existing selection.
+//
 // SelectRowByExtendingSelection calls the underlying SelectRowByExtendingSelection.
 func (x *TableView) SelectRowByExtendingSelection(row int, extend bool) {
 	x.inner.SelectRowByExtendingSelection(row, extend)
 }
 
+// This method has been deprecated.
+//
 // SelectedColumnEnumerator calls the underlying SelectedColumnEnumerator.
 func (x *TableView) SelectedColumnEnumerator() *foundation.NSEnumerator[objc.ID] {
 	return x.inner.SelectedColumnEnumerator()
 }
 
+// This method has been deprecated.
+//
 // SelectedRowEnumerator calls the underlying SelectedRowEnumerator.
 func (x *TableView) SelectedRowEnumerator() *foundation.NSEnumerator[objc.ID] {
 	return x.inner.SelectedRowEnumerator()
 }
 
+// Computes and returns an image to use for dragging.
+//
 // DragImageForRowsEventDragImageOffset calls the underlying DragImageForRowsEventDragImageOffset.
 func (x *TableView) DragImageForRowsEventDragImageOffset(dragRows *foundation.NSArray[objc.ID], dragEvent *raw.NSEvent, dragImageOffset *corefoundation.CGPoint) *Image {
 	_r := x.inner.DragImageForRowsEventDragImageOffset(dragRows, dragEvent, dragImageOffset)
@@ -1504,21 +1752,29 @@ func (x *TableView) DragImageForRowsEventDragImageOffset(dragRows *foundation.NS
 	return &Image{inner: _r}
 }
 
+// Controls whether the table view proportionally resizes its columns to fit when its superview’s frame changes.
+//
 // SetAutoresizesAllColumnsToFit calls the underlying SetAutoresizesAllColumnsToFit.
 func (x *TableView) SetAutoresizesAllColumnsToFit(flag bool) {
 	x.inner.SetAutoresizesAllColumnsToFit(flag)
 }
 
+// Returns a Boolean value that indicates if the table view proportionally resizes its columns to fit when its superview’s frame changes.
+//
 // AutoresizesAllColumnsToFit calls the underlying AutoresizesAllColumnsToFit.
 func (x *TableView) AutoresizesAllColumnsToFit() bool {
 	return x.inner.AutoresizesAllColumnsToFit()
 }
 
+// Returns a range of indexes for the table view’s columns that lie wholly or partially within the horizontal boundaries of the specified rectangle.
+//
 // ColumnsInRect calls the underlying ColumnsInRect.
 func (x *TableView) ColumnsInRect(rect corefoundation.CGRect) foundation.NSRange {
 	return x.inner.ColumnsInRect(rect)
 }
 
+// Returns the fully prepared cell that the table view will use for drawing or processing of the specified row and column.
+//
 // PreparedCellAtColumnRow calls the underlying PreparedCellAtColumnRow.
 func (x *TableView) PreparedCellAtColumnRow(column int, row int) *Cell {
 	_r := x.inner.PreparedCellAtColumnRow(column, row)
@@ -1528,46 +1784,64 @@ func (x *TableView) PreparedCellAtColumnRow(column int, row int) *Cell {
 	return &Cell{inner: _r}
 }
 
+// Queries the delegate to determine if the text should begin editing.
+//
 // TextShouldBeginEditing calls the underlying TextShouldBeginEditing.
 func (x *TableView) TextShouldBeginEditing(textObject *raw.NSText) bool {
 	return x.inner.TextShouldBeginEditing(textObject)
 }
 
+// Validates the text object for the cell being edited by querying the delegate.queries the delegate using control:textShouldEndEditing:, returning the delegate’s response if it responds to that method.
+//
 // TextShouldEndEditing calls the underlying TextShouldEndEditing.
 func (x *TableView) TextShouldEndEditing(textObject *raw.NSText) bool {
 	return x.inner.TextShouldEndEditing(textObject)
 }
 
+// Posts an NSControlTextDidBeginEditingNotification to the default notification center.
+//
 // TextDidBeginEditing calls the underlying TextDidBeginEditing.
 func (x *TableView) TextDidBeginEditing(notification *foundation.NSNotification) {
 	x.inner.TextDidBeginEditing(notification)
 }
 
+// Updates the data source based on the newly edited value and selects another cell for editing if possible according to the character that ended editing (Return, Tab, Backtab).
+//
 // TextDidEndEditing calls the underlying TextDidEndEditing.
 func (x *TableView) TextDidEndEditing(notification *foundation.NSNotification) {
 	x.inner.TextDidEndEditing(notification)
 }
 
+// Sends textDidChange: to the edited cell and posts an NSControlTextDidChangeNotification to the default notification center.
+//
 // TextDidChange calls the underlying TextDidChange.
 func (x *TableView) TextDidChange(notification *foundation.NSNotification) {
 	x.inner.TextDidChange(notification)
 }
 
+// Returns whether the fully prepared cell at the specified row and column can be made the focused cell.
+//
 // ShouldFocusCellAtColumnRow calls the underlying ShouldFocusCellAtColumnRow.
 func (x *TableView) ShouldFocusCellAtColumnRow(cell *raw.NSCell, column int, row int) bool {
 	return x.inner.ShouldFocusCellAtColumnRow(cell, column, row)
 }
 
+// Returns the currently focused column.
+//
 // FocusedColumn calls the underlying FocusedColumn.
 func (x *TableView) FocusedColumn() int {
 	return x.inner.FocusedColumn()
 }
 
+// Sets the currently focused column to the specified index.
+//
 // SetFocusedColumn calls the underlying SetFocusedColumn.
 func (x *TableView) SetFocusedColumn(focusedColumn int) {
 	x.inner.SetFocusedColumn(focusedColumn)
 }
 
+// Performs a click action on the cell at the specified row and column.
+//
 // PerformClickOnCellAtColumnRow calls the underlying PerformClickOnCellAtColumnRow.
 func (x *TableView) PerformClickOnCellAtColumnRow(column int, row int) {
 	x.inner.PerformClickOnCellAtColumnRow(column, row)

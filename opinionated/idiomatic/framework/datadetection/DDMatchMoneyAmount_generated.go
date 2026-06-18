@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains an amount of money that the data detection system matches. The DataDetection framework returns a match for an amount of money in a `DDMatchMoneyAmount` object, which contains an amount of money and an ISO currency code.
+// An object that contains an amount of money that the data detection system matches.
 //
 // MatchMoneyAmount wraps [raw.DDMatchMoneyAmount] with a fluent Go API.
 type MatchMoneyAmount struct {

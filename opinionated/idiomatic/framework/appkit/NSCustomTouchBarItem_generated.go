@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A bar item that contains a responder of your choice, such as a view, a button, or a scrubber.
+//
 // CustomTouchBarItem wraps [raw.NSCustomTouchBarItem] with a fluent Go API.
 type CustomTouchBarItem struct {
 	inner *raw.NSCustomTouchBarItem
@@ -36,24 +38,32 @@ func NewCustomTouchBarItem() *CustomTouchBarItem {
 	return &CustomTouchBarItem{inner: raw.NSCustomTouchBarItemFromID(_id)}
 }
 
+// The view displayed in the bar to represent this item.
+//
 // WithView sets the view property and returns the receiver for chaining.
 func (x *CustomTouchBarItem) WithView(view ViewProvider) *CustomTouchBarItem {
 	x.inner.SetView(view.asView())
 	return x
 }
 
+// A view controller whose view is displayed in the bar to represent this item.
+//
 // WithViewController sets the viewController property and returns the receiver for chaining.
 func (x *CustomTouchBarItem) WithViewController(viewController ViewControllerProvider) *CustomTouchBarItem {
 	x.inner.SetViewController(viewController.asViewController())
 	return x
 }
 
+// The user-visible string identifying this item during bar customization.
+//
 // WithCustomizationLabel sets the customizationLabel property and returns the receiver for chaining.
 func (x *CustomTouchBarItem) WithCustomizationLabel(customizationLabel string) *CustomTouchBarItem {
 	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
 	return x
 }
 
+// Determines which items are shown in a bar when space is limited.
+//
 // WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
 func (x *CustomTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *CustomTouchBarItem {
 	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)

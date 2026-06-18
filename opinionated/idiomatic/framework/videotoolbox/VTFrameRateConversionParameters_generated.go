@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains the required input and output parameters to run a frame rate conversion processor on a frame.
+//
 // FrameRateConversionParameters wraps [raw.VTFrameRateConversionParameters] with a fluent Go API.
 type FrameRateConversionParameters struct {
 	inner *raw.VTFrameRateConversionParameters
@@ -31,7 +33,7 @@ func FrameRateConversionParametersFromID(id objc.ID) *FrameRateConversionParamet
 	return &FrameRateConversionParameters{inner: raw.VTFrameRateConversionParametersFromID(id)}
 }
 
-// Creates new frame rate conversion parameters. Returns `nil` if `sourceFrame` or `nextFrame` is `nil`, if `sourceFrame` and reference frames don't have the same pixel format, or if `interpolationPhase` array count does not match `destinationFrames` array count. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrame: Next source frame in presentation time order; must be non `nil`. - opticalFlow: Optional “VTFrameProcessorOpticalFlow“ object that contains forward and backward optical flow with next frame. You only need to use this if the optical flow is pre-computed. For the first frame this is always `nil`. - interpolationPhase: Array of float numbers that indicate intervals at which the processor inserts a frame between current and next frame. The array size indicates how many frames to interpolate and this size must match `destinationFrames` size, with one interval for each destination frame. Use float number values between 0 and 1, for example, to insert one frame in the middle use a value of 0.5. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presentation sequence. For more information about supported modes see “VTFrameRateConversionParametersSubmissionMode“. - destinationFrames: Caller-allocated array of “VTFrameProcessorFrame“ that contains pixel buffers to receive the results. Must contain the same number of elements as `interpolationPhase`.
+// Creates a new frame rate conversion parameters object.
 //
 // NewFrameRateConversionParametersWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames creates a new [FrameRateConversionParameters].
 func NewFrameRateConversionParametersWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames(sourceFrame *raw.VTFrameProcessorFrame, nextFrame *raw.VTFrameProcessorFrame, opticalFlow *raw.VTFrameProcessorOpticalFlow, interpolationPhase *foundation.NSArray[*foundation.NSNumber], submissionMode VTFrameRateConversionParametersSubmissionMode, destinationFrame *foundation.NSArray[*raw.VTFrameProcessorFrame]) *FrameRateConversionParameters {

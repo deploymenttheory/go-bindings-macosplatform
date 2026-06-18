@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A region where text layout occurs.
+//
 // TextContainer wraps [raw.NSTextContainer] with a fluent Go API.
 type TextContainer struct {
 	inner *raw.NSTextContainer
@@ -33,6 +35,8 @@ func TextContainerFromID(id objc.ID) *TextContainer {
 	return &TextContainer{inner: raw.NSTextContainerFromID(id)}
 }
 
+// Initializes a text container with a specified bounding rectangle.
+//
 // NewTextContainerWithSize creates a new [TextContainer].
 func NewTextContainerWithSize(size corefoundation.CGSize) *TextContainer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextContainer")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewTextContainerWithSize(size corefoundation.CGSize) *TextContainer {
 	return &TextContainer{inner: raw.NSTextContainerFromID(_id)}
 }
 
+// Creates a text container from data in an unarchiver.
+//
 // NewTextContainerWithCoder creates a new [TextContainer].
 func NewTextContainerWithCoder(coder *foundation.NSCoder) *TextContainer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextContainer")), objc.RegisterName("alloc"))
@@ -47,6 +53,8 @@ func NewTextContainerWithCoder(coder *foundation.NSCoder) *TextContainer {
 	return &TextContainer{inner: raw.NSTextContainerFromID(_id)}
 }
 
+// Initializes a text container with a specified bounding rectangle.
+//
 // NewTextContainerWithContainerSize creates a new [TextContainer].
 func NewTextContainerWithContainerSize(aContainerSize corefoundation.CGSize) *TextContainer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextContainer")), objc.RegisterName("alloc"))
@@ -54,48 +62,64 @@ func NewTextContainerWithContainerSize(aContainerSize corefoundation.CGSize) *Te
 	return &TextContainer{inner: raw.NSTextContainerFromID(_id)}
 }
 
+// The size of the text container’s bounding rectangle.
+//
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *TextContainer) WithSize(size corefoundation.CGSize) *TextContainer {
 	x.inner.SetSize(size)
 	return x
 }
 
+// The behavior of the last line inside the text container.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *TextContainer) WithLineBreakMode(lineBreakMode NSLineBreakMode) *TextContainer {
 	x.inner.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The value for the text inset within line fragment rectangles.
+//
 // WithLineFragmentPadding sets the lineFragmentPadding property and returns the receiver for chaining.
 func (x *TextContainer) WithLineFragmentPadding(lineFragmentPadding float64) *TextContainer {
 	x.inner.SetLineFragmentPadding(lineFragmentPadding)
 	return x
 }
 
+// The maximum number of lines that the text container can store.
+//
 // WithMaximumNumberOfLines sets the maximumNumberOfLines property and returns the receiver for chaining.
 func (x *TextContainer) WithMaximumNumberOfLines(maximumNumberOfLines uint) *TextContainer {
 	x.inner.SetMaximumNumberOfLines(maximumNumberOfLines)
 	return x
 }
 
+// A Boolean that controls whether the text container adjusts the width of its bounding rectangle when its text view resizes.
+//
 // WithWidthTracksTextView sets the widthTracksTextView property and returns the receiver for chaining.
 func (x *TextContainer) WithWidthTracksTextView(widthTracksTextView bool) *TextContainer {
 	x.inner.SetWidthTracksTextView(widthTracksTextView)
 	return x
 }
 
+// A Boolean that controls whether the text container adjusts the height of its bounding rectangle when its text view resizes.
+//
 // WithHeightTracksTextView sets the heightTracksTextView property and returns the receiver for chaining.
 func (x *TextContainer) WithHeightTracksTextView(heightTracksTextView bool) *TextContainer {
 	x.inner.SetHeightTracksTextView(heightTracksTextView)
 	return x
 }
 
+// The text container’s layout manager.
+//
 // WithLayoutManager sets the layoutManager property and returns the receiver for chaining.
 func (x *TextContainer) WithLayoutManager(layoutManager *LayoutManager) *TextContainer {
 	x.inner.SetLayoutManager(layoutManager.Unwrap())
 	return x
 }
 
+// An array of path objects that represents the regions where text doesn’t display in the text container.
+//
 // WithExclusionPaths sets the collection, converting the Go slice to an NSArray.
 func (x *TextContainer) WithExclusionPaths(items ...*raw.NSBezierPath) *TextContainer {
 	if len(items) == 0 {
@@ -114,18 +138,24 @@ func (x *TextContainer) WithExclusionPaths(items ...*raw.NSBezierPath) *TextCont
 	return x
 }
 
+// The text container’s text view.
+//
 // WithTextView sets the textView property and returns the receiver for chaining.
 func (x *TextContainer) WithTextView(textView *TextView) *TextContainer {
 	x.inner.SetTextView(textView.Unwrap())
 	return x
 }
 
+// The size of the text container’s bounding rectangle.
+//
 // WithContainerSize sets the containerSize property and returns the receiver for chaining.
 func (x *TextContainer) WithContainerSize(containerSize corefoundation.CGSize) *TextContainer {
 	x.inner.SetContainerSize(containerSize)
 	return x
 }
 
+// Returns the bounds of a line fragment rectangle inside the text container for the proposed rectangle.
+//
 // LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect calls the underlying LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect.
 func (x *TextContainer) LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect(proposedRect corefoundation.CGRect, characterIndex uint, baseWritingDirection NSWritingDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect(proposedRect, characterIndex, raw.NSWritingDirection(baseWritingDirection), remainingRect)
@@ -219,6 +249,8 @@ func (x *TextContainer) SetLayoutManager(layoutManager *raw.NSLayoutManager) {
 	x.inner.SetLayoutManager(layoutManager)
 }
 
+// Replaces the layout manager for the group of text system objects that contains the text container.
+//
 // ReplaceLayoutManager calls the underlying ReplaceLayoutManager.
 func (x *TextContainer) ReplaceLayoutManager(newLayoutManager *raw.NSLayoutManager) {
 	x.inner.ReplaceLayoutManager(newLayoutManager)
@@ -254,11 +286,15 @@ func (x *TextContainer) SetTextView(textView *raw.NSTextView) {
 	x.inner.SetTextView(textView)
 }
 
+// Calculates and returns the longest rectangle available in the proposed rectangle for displaying text.
+//
 // LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect calls the underlying LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect.
 func (x *TextContainer) LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect(proposedRect corefoundation.CGRect, sweepDirection NSLineSweepDirection, movementDirection NSLineMovementDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect(proposedRect, raw.NSLineSweepDirection(sweepDirection), raw.NSLineMovementDirection(movementDirection), remainingRect)
 }
 
+// Queries whether a point lies within the text container’s region or on the region’s edge—not simply within its bounding rectangle.
+//
 // ContainsPoint calls the underlying ContainsPoint.
 func (x *TextContainer) ContainsPoint(point corefoundation.CGPoint) bool {
 	return x.inner.ContainsPoint(point)

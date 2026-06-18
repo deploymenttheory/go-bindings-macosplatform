@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A container that stores an array of sample buffer attachments for a compute pass.
+//
 // ComputePassSampleBufferAttachmentDescriptorArray wraps [raw.MTLComputePassSampleBufferAttachmentDescriptorArray] with a fluent Go API.
 type ComputePassSampleBufferAttachmentDescriptorArray struct {
 	inner *raw.MTLComputePassSampleBufferAttachmentDescriptorArray
@@ -37,6 +39,8 @@ func NewComputePassSampleBufferAttachmentDescriptorArray() *ComputePassSampleBuf
 	return &ComputePassSampleBufferAttachmentDescriptorArray{inner: raw.MTLComputePassSampleBufferAttachmentDescriptorArrayFromID(_id)}
 }
 
+// Returns the descriptor object for the specified sample buffer attachment.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *ComputePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *ComputePassSampleBufferAttachmentDescriptor {
 	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
@@ -46,6 +50,8 @@ func (x *ComputePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscr
 	return &ComputePassSampleBufferAttachmentDescriptor{inner: _r}
 }
 
+// Sets the descriptor object for the specified sample buffer attachment.
+//
 // SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
 func (x *ComputePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLComputePassSampleBufferAttachmentDescriptor, attachmentIndex uint) {
 	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)

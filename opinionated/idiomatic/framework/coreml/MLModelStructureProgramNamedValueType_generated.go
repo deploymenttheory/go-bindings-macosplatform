@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class representing a named value type in a Program.
+//
 // ModelStructureProgramNamedValueType wraps [raw.MLModelStructureProgramNamedValueType] with a fluent Go API.
 type ModelStructureProgramNamedValueType struct {
 	inner *raw.MLModelStructureProgramNamedValueType

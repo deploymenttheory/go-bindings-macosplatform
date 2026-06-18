@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A node in a tree of nodes.
+//
 // TreeNode wraps [raw.NSTreeNode] with a fluent Go API.
 type TreeNode struct {
 	inner *raw.NSTreeNode
@@ -31,6 +33,8 @@ func TreeNodeFromID(id objc.ID) *TreeNode {
 	return &TreeNode{inner: raw.NSTreeNodeFromID(id)}
 }
 
+// Initializes a newly allocated tree node that represents the specified object.
+//
 // NewTreeNodeWithRepresentedObject creates a new [TreeNode].
 func NewTreeNodeWithRepresentedObject(modelObject objc.ID) *TreeNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTreeNode")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewTreeNodeWithRepresentedObject(modelObject objc.ID) *TreeNode {
 	return &TreeNode{inner: raw.NSTreeNodeFromID(_id)}
 }
 
+// Returns the receiver’s descendant at the specified index path.
+//
 // DescendantNodeAtIndexPath calls the underlying DescendantNodeAtIndexPath.
 func (x *TreeNode) DescendantNodeAtIndexPath(indexPath *foundation.NSIndexPath) *TreeNode {
 	_r := x.inner.DescendantNodeAtIndexPath(indexPath)
@@ -47,6 +53,8 @@ func (x *TreeNode) DescendantNodeAtIndexPath(indexPath *foundation.NSIndexPath) 
 	return &TreeNode{inner: _r}
 }
 
+// Sorts the receiver’s subtree using the values of the represented objects with the specified sort descriptors.
+//
 // SortWithSortDescriptorsRecursively calls the underlying SortWithSortDescriptorsRecursively.
 func (x *TreeNode) SortWithSortDescriptorsRecursively(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor], recursively bool) {
 	x.inner.SortWithSortDescriptorsRecursively(sortDescriptors, recursively)

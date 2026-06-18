@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An audio-layering object that routes sound directly to the device’s output.
+//
 // ChannelMixerDefinition wraps [raw.PHASEChannelMixerDefinition] with a fluent Go API.
 type ChannelMixerDefinition struct {
 	inner *raw.PHASEChannelMixerDefinition
@@ -31,7 +33,7 @@ func ChannelMixerDefinitionFromID(id objc.ID) *ChannelMixerDefinition {
 	return &ChannelMixerDefinition{inner: raw.PHASEChannelMixerDefinitionFromID(id)}
 }
 
-// @method initWithChannelLayout:identifier @abstract Create a new PHASEChannelMixerDefinition @note Any connected sampler must match this channel layout. @param layout The input channel layout. @param identifier An optional custom identifier to give to this object @return A new PHASEChannelMixerDefinition object
+// Creates a named channel mixer with the given channel layout.
 //
 // NewChannelMixerDefinitionWithChannelLayoutIdentifier creates a new [ChannelMixerDefinition].
 func NewChannelMixerDefinitionWithChannelLayoutIdentifier(layout *avfaudio.AVAudioChannelLayout, identifier string) *ChannelMixerDefinition {
@@ -40,7 +42,7 @@ func NewChannelMixerDefinitionWithChannelLayoutIdentifier(layout *avfaudio.AVAud
 	return &ChannelMixerDefinition{inner: raw.PHASEChannelMixerDefinitionFromID(_id)}
 }
 
-// @method initWithChannelLayout @abstract Create a new PHASEChannelMixerDefinition @note Any connected sampler must match this channel layout. @param layout The input channel layout. Any connected sampler must match this channel layout. @return A new PHASEChannelMixerDefinition object
+// Creates a channel mixer with the given channel layout.
 //
 // NewChannelMixerDefinitionWithChannelLayout creates a new [ChannelMixerDefinition].
 func NewChannelMixerDefinitionWithChannelLayout(layout *avfaudio.AVAudioChannelLayout) *ChannelMixerDefinition {
@@ -49,7 +51,7 @@ func NewChannelMixerDefinitionWithChannelLayout(layout *avfaudio.AVAudioChannelL
 	return &ChannelMixerDefinition{inner: raw.PHASEChannelMixerDefinitionFromID(_id)}
 }
 
-// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+// The mixer’s volume.
 //
 // WithGain sets the gain property and returns the receiver for chaining.
 func (x *ChannelMixerDefinition) WithGain(gain float64) *ChannelMixerDefinition {
@@ -57,7 +59,7 @@ func (x *ChannelMixerDefinition) WithGain(gain float64) *ChannelMixerDefinition 
 	return x
 }
 
-// @property gainMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable real-time control of the gain during playback.
+// A template for a parameter that changes the mixer’s volume gradually over a period of time.
 //
 // WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
 func (x *ChannelMixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *ChannelMixerDefinition {

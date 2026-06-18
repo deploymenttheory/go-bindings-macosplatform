@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An abstract class that forms the basis of event and command processing in AppKit.
+//
 // Responder wraps [raw.NSResponder] with a fluent Go API.
 type Responder struct {
 	inner *raw.NSResponder
@@ -37,6 +39,8 @@ func NewResponder() *Responder {
 	return &Responder{inner: raw.NSResponderFromID(_id)}
 }
 
+// Creates a new responder object with data in an unarchiver.
+//
 // NewResponderWithCoder creates a new [Responder].
 func NewResponderWithCoder(coder *foundation.NSCoder) *Responder {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSResponder")), objc.RegisterName("alloc"))
@@ -44,80 +48,110 @@ func NewResponderWithCoder(coder *foundation.NSCoder) *Responder {
 	return &Responder{inner: raw.NSResponderFromID(_id)}
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *Responder) WithNextResponder(nextResponder ResponderProvider) *Responder {
 	x.inner.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *Responder) WithMenu(menu *Menu) *Responder {
 	x.inner.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *Responder) WithUserActivity(userActivity *foundation.NSUserActivity) *Responder {
 	x.inner.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *Responder) WithTouchBar(touchBar *TouchBar) *Responder {
 	x.inner.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Attempts to perform the method indicated by an action with a specified argument.
+//
 // TryToPerformWith calls the underlying TryToPerformWith.
 func (x *Responder) TryToPerformWith(action objc.SEL, object objc.ID) bool {
 	return x.inner.TryToPerformWith(action, object)
 }
 
+// Handle a key equivalent.
+//
 // PerformKeyEquivalent calls the underlying PerformKeyEquivalent.
 func (x *Responder) PerformKeyEquivalent(event *raw.NSEvent) bool {
 	return x.inner.PerformKeyEquivalent(event)
 }
 
+// Overridden by subclasses to determine what services are available.
+//
 // ValidRequestorForSendTypeReturnType calls the underlying ValidRequestorForSendTypeReturnType.
 func (x *Responder) ValidRequestorForSendTypeReturnType(sendType *foundation.NSString, returnType *foundation.NSString) objc.ID {
 	return x.inner.ValidRequestorForSendTypeReturnType(sendType, returnType)
 }
 
+// Informs the receiver that the user has pressed the left mouse button.
+//
 // MouseDown calls the underlying MouseDown.
 func (x *Responder) MouseDown(event *raw.NSEvent) {
 	x.inner.MouseDown(event)
 }
 
+// Informs the receiver that the user has pressed the right mouse button.
+//
 // RightMouseDown calls the underlying RightMouseDown.
 func (x *Responder) RightMouseDown(event *raw.NSEvent) {
 	x.inner.RightMouseDown(event)
 }
 
+// Informs the receiver that the user has pressed a mouse button other than the left or right one.
+//
 // OtherMouseDown calls the underlying OtherMouseDown.
 func (x *Responder) OtherMouseDown(event *raw.NSEvent) {
 	x.inner.OtherMouseDown(event)
 }
 
+// Informs the receiver that the user has released the left mouse button.
+//
 // MouseUp calls the underlying MouseUp.
 func (x *Responder) MouseUp(event *raw.NSEvent) {
 	x.inner.MouseUp(event)
 }
 
+// Informs the receiver that the user has released the right mouse button.
+//
 // RightMouseUp calls the underlying RightMouseUp.
 func (x *Responder) RightMouseUp(event *raw.NSEvent) {
 	x.inner.RightMouseUp(event)
 }
 
+// Informs the receiver that the user has released a mouse button other than the left or right button.
+//
 // OtherMouseUp calls the underlying OtherMouseUp.
 func (x *Responder) OtherMouseUp(event *raw.NSEvent) {
 	x.inner.OtherMouseUp(event)
 }
 
+// Informs the receiver that the mouse has moved.
+//
 // MouseMoved calls the underlying MouseMoved.
 func (x *Responder) MouseMoved(event *raw.NSEvent) {
 	x.inner.MouseMoved(event)
 }
 
+// Informs the receiver that the user has moved the mouse with the left button pressed.
+//
 // MouseDragged calls the underlying MouseDragged.
 func (x *Responder) MouseDragged(event *raw.NSEvent) {
 	x.inner.MouseDragged(event)
@@ -128,121 +162,169 @@ func (x *Responder) MouseCancelled(event *raw.NSEvent) {
 	x.inner.MouseCancelled(event)
 }
 
+// Informs the receiver that the mouse’s scroll wheel has moved.
+//
 // ScrollWheel calls the underlying ScrollWheel.
 func (x *Responder) ScrollWheel(event *raw.NSEvent) {
 	x.inner.ScrollWheel(event)
 }
 
+// Informs the receiver that the user has moved the mouse with the right button pressed.
+//
 // RightMouseDragged calls the underlying RightMouseDragged.
 func (x *Responder) RightMouseDragged(event *raw.NSEvent) {
 	x.inner.RightMouseDragged(event)
 }
 
+// Informs the receiver that the user has moved the mouse with a button other than the left or right button pressed.
+//
 // OtherMouseDragged calls the underlying OtherMouseDragged.
 func (x *Responder) OtherMouseDragged(event *raw.NSEvent) {
 	x.inner.OtherMouseDragged(event)
 }
 
+// Informs the receiver that the cursor has entered a tracking rectangle.
+//
 // MouseEntered calls the underlying MouseEntered.
 func (x *Responder) MouseEntered(event *raw.NSEvent) {
 	x.inner.MouseEntered(event)
 }
 
+// Informs the receiver that the cursor has exited a tracking rectangle.
+//
 // MouseExited calls the underlying MouseExited.
 func (x *Responder) MouseExited(event *raw.NSEvent) {
 	x.inner.MouseExited(event)
 }
 
+// Informs the receiver that the user has pressed a key.
+//
 // KeyDown calls the underlying KeyDown.
 func (x *Responder) KeyDown(event *raw.NSEvent) {
 	x.inner.KeyDown(event)
 }
 
+// Informs the receiver that the user has released a key.
+//
 // KeyUp calls the underlying KeyUp.
 func (x *Responder) KeyUp(event *raw.NSEvent) {
 	x.inner.KeyUp(event)
 }
 
+// Informs the receiver that the user has pressed or released a modifier key (Shift, Control, and so on).
+//
 // FlagsChanged calls the underlying FlagsChanged.
 func (x *Responder) FlagsChanged(event *raw.NSEvent) {
 	x.inner.FlagsChanged(event)
 }
 
+// Informs the receiver that a tablet-point event has occurred.
+//
 // TabletPoint calls the underlying TabletPoint.
 func (x *Responder) TabletPoint(event *raw.NSEvent) {
 	x.inner.TabletPoint(event)
 }
 
+// Informs the receiver that a tablet-proximity event has occurred.
+//
 // TabletProximity calls the underlying TabletProximity.
 func (x *Responder) TabletProximity(event *raw.NSEvent) {
 	x.inner.TabletProximity(event)
 }
 
+// Informs the receiver that the mouse cursor has moved into a cursor rectangle.
+//
 // CursorUpdate calls the underlying CursorUpdate.
 func (x *Responder) CursorUpdate(event *raw.NSEvent) {
 	x.inner.CursorUpdate(event)
 }
 
+// Informs the receiver that the user has begun a pinch gesture.
+//
 // MagnifyWithEvent calls the underlying MagnifyWithEvent.
 func (x *Responder) MagnifyWithEvent(event *raw.NSEvent) {
 	x.inner.MagnifyWithEvent(event)
 }
 
+// Informs the receiver that the user has begun a rotation gesture.
+//
 // RotateWithEvent calls the underlying RotateWithEvent.
 func (x *Responder) RotateWithEvent(event *raw.NSEvent) {
 	x.inner.RotateWithEvent(event)
 }
 
+// Informs the receiver that the user has begun a swipe gesture.
+//
 // SwipeWithEvent calls the underlying SwipeWithEvent.
 func (x *Responder) SwipeWithEvent(event *raw.NSEvent) {
 	x.inner.SwipeWithEvent(event)
 }
 
+// Informs the receiver that the user has begun a touch gesture.
+//
 // BeginGestureWithEvent calls the underlying BeginGestureWithEvent.
 func (x *Responder) BeginGestureWithEvent(event *raw.NSEvent) {
 	x.inner.BeginGestureWithEvent(event)
 }
 
+// Informs the receiver that the user has ended a touch gesture.
+//
 // EndGestureWithEvent calls the underlying EndGestureWithEvent.
 func (x *Responder) EndGestureWithEvent(event *raw.NSEvent) {
 	x.inner.EndGestureWithEvent(event)
 }
 
+// Informs the receiver that the user performed a smart zoom gesture.
+//
 // SmartMagnifyWithEvent calls the underlying SmartMagnifyWithEvent.
 func (x *Responder) SmartMagnifyWithEvent(event *raw.NSEvent) {
 	x.inner.SmartMagnifyWithEvent(event)
 }
 
+// Informs the responder that performed a double-tap on the side of an Apple Pencil.
+//
 // ChangeModeWithEvent calls the underlying ChangeModeWithEvent.
 func (x *Responder) ChangeModeWithEvent(event *raw.NSEvent) {
 	x.inner.ChangeModeWithEvent(event)
 }
 
+// Informs the receiver that new set of touches has been recognized.
+//
 // TouchesBeganWithEvent calls the underlying TouchesBeganWithEvent.
 func (x *Responder) TouchesBeganWithEvent(event *raw.NSEvent) {
 	x.inner.TouchesBeganWithEvent(event)
 }
 
+// Informs the receiver that one or more touches has moved.
+//
 // TouchesMovedWithEvent calls the underlying TouchesMovedWithEvent.
 func (x *Responder) TouchesMovedWithEvent(event *raw.NSEvent) {
 	x.inner.TouchesMovedWithEvent(event)
 }
 
+// Returns that a set of touches have been removed.
+//
 // TouchesEndedWithEvent calls the underlying TouchesEndedWithEvent.
 func (x *Responder) TouchesEndedWithEvent(event *raw.NSEvent) {
 	x.inner.TouchesEndedWithEvent(event)
 }
 
+// Informs the receiver that tracking of touches has been cancelled for any reason.
+//
 // TouchesCancelledWithEvent calls the underlying TouchesCancelledWithEvent.
 func (x *Responder) TouchesCancelledWithEvent(event *raw.NSEvent) {
 	x.inner.TouchesCancelledWithEvent(event)
 }
 
+// Performs a Quick Look on the content at the location specified by the supplied event.
+//
 // QuickLookWithEvent calls the underlying QuickLookWithEvent.
 func (x *Responder) QuickLookWithEvent(event *raw.NSEvent) {
 	x.inner.QuickLookWithEvent(event)
 }
 
+// Indicates a pressure change as the result of a user input event on a system that supports pressure sensitivity.
+//
 // PressureChangeWithEvent calls the underlying PressureChangeWithEvent.
 func (x *Responder) PressureChangeWithEvent(event *raw.NSEvent) {
 	x.inner.PressureChangeWithEvent(event)
@@ -255,26 +337,36 @@ func (x *Responder) ContextMenuKeyDown(event *raw.NSEvent) {
 	x.inner.ContextMenuKeyDown(event)
 }
 
+// Handles the case where an event or action message falls off the end of the responder chain.
+//
 // NoResponderFor calls the underlying NoResponderFor.
 func (x *Responder) NoResponderFor(eventSelector objc.SEL) {
 	x.inner.NoResponderFor(eventSelector)
 }
 
+// Notifies the receiver that it’s about to become first responder in its NSWindow.
+//
 // BecomeFirstResponder calls the underlying BecomeFirstResponder.
 func (x *Responder) BecomeFirstResponder() bool {
 	return x.inner.BecomeFirstResponder()
 }
 
+// Notifies the receiver that it’s been asked to relinquish its status as first responder in its window.
+//
 // ResignFirstResponder calls the underlying ResignFirstResponder.
 func (x *Responder) ResignFirstResponder() bool {
 	return x.inner.ResignFirstResponder()
 }
 
+// Handles a series of key events.
+//
 // InterpretKeyEvents calls the underlying InterpretKeyEvents.
 func (x *Responder) InterpretKeyEvents(eventArray *foundation.NSArray[*raw.NSEvent]) {
 	x.inner.InterpretKeyEvents(eventArray)
 }
 
+// Clears any unprocessed key events when overridden by subclasses.
+//
 // FlushBufferedKeyEvents calls the underlying FlushBufferedKeyEvents.
 func (x *Responder) FlushBufferedKeyEvents() {
 	x.inner.FlushBufferedKeyEvents()
@@ -285,26 +377,36 @@ func (x *Responder) ShowContextHelp(sender objc.ID) {
 	x.inner.ShowContextHelp(sender)
 }
 
+// Displays context-sensitive help for the receiver if help has been registered.
+//
 // HelpRequested calls the underlying HelpRequested.
 func (x *Responder) HelpRequested(eventPtr *raw.NSEvent) {
 	x.inner.HelpRequested(eventPtr)
 }
 
+// Indicates whether a pen-down event should be treated as an ink event.
+//
 // ShouldBeTreatedAsInkEvent calls the underlying ShouldBeTreatedAsInkEvent.
 func (x *Responder) ShouldBeTreatedAsInkEvent(event *raw.NSEvent) bool {
 	return x.inner.ShouldBeTreatedAsInkEvent(event)
 }
 
+// Implement this method to track gesture scroll events such as a swipe.
+//
 // WantsScrollEventsForSwipeTrackingOnAxis calls the underlying WantsScrollEventsForSwipeTrackingOnAxis.
 func (x *Responder) WantsScrollEventsForSwipeTrackingOnAxis(axis NSEventGestureAxis) bool {
 	return x.inner.WantsScrollEventsForSwipeTrackingOnAxis(raw.NSEventGestureAxis(axis))
 }
 
+// Returns whether to forward elastic scrolling gesture events up the responder.
+//
 // WantsForwardedScrollEventsForAxis calls the underlying WantsForwardedScrollEventsForAxis.
 func (x *Responder) WantsForwardedScrollEventsForAxis(axis NSEventGestureAxis) bool {
 	return x.inner.WantsForwardedScrollEventsForAxis(raw.NSEventGestureAxis(axis))
 }
 
+// Finds a target for an action method.
+//
 // SupplementalTargetForActionSender calls the underlying SupplementalTargetForActionSender.
 func (x *Responder) SupplementalTargetForActionSender(action objc.SEL, sender objc.ID) objc.ID {
 	return x.inner.SupplementalTargetForActionSender(action, sender)
@@ -348,31 +450,43 @@ func (x *Responder) UndoManager() *foundation.NSUndoManager {
 	return x.inner.UndoManager()
 }
 
+// Allows controls to determine when they should become first responder.
+//
 // ValidateProposedFirstResponderForEvent calls the underlying ValidateProposedFirstResponderForEvent.
 func (x *Responder) ValidateProposedFirstResponderForEvent(responder *raw.NSResponder, event *raw.NSEvent) bool {
 	return x.inner.ValidateProposedFirstResponderForEvent(responder, event)
 }
 
+// Presents an error alert to the user as a document-modal sheet attached to document window.
+//
 // PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo calls the underlying PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo.
 func (x *Responder) PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo(error_ unsafe.Pointer, window *raw.NSWindow, delegate objc.ID, didPresentSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo(error_, window, delegate, didPresentSelector, contextInfo)
 }
 
+// Presents an error alert to the user as an application-modal dialog.
+//
 // PresentError calls the underlying PresentError.
 func (x *Responder) PresentError(error_ unsafe.Pointer) bool {
 	return x.inner.PresentError(error_)
 }
 
+// Returns a custom version of the supplied error object that’s more suitable for presentation in alert sheets and dialogs.
+//
 // WillPresentError calls the underlying WillPresentError.
 func (x *Responder) WillPresentError(error_ unsafe.Pointer) unsafe.Pointer {
 	return x.inner.WillPresentError(error_)
 }
 
+// Performs all find oriented actions.
+//
 // PerformTextFinderAction calls the underlying PerformTextFinderAction.
 func (x *Responder) PerformTextFinderAction(sender objc.ID) {
 	x.inner.PerformTextFinderAction(sender)
 }
 
+// Creates a new window to show as a tab in a tabbed window.
+//
 // NewWindowForTab calls the underlying NewWindowForTab.
 func (x *Responder) NewWindowForTab(sender objc.ID) {
 	x.inner.NewWindowForTab(sender)
@@ -383,11 +497,15 @@ func (x *Responder) ShowWritingTools(sender objc.ID) {
 	x.inner.ShowWritingTools(sender)
 }
 
+// Handle a mnemonic.
+//
 // PerformMnemonic calls the underlying PerformMnemonic.
 func (x *Responder) PerformMnemonic(string_ string) bool {
 	return x.inner.PerformMnemonic(foundation.NSStringStringWithUTF8String(string_))
 }
 
+// Updates the state of the given user activity.
+//
 // UpdateUserActivityState calls the underlying UpdateUserActivityState.
 func (x *Responder) UpdateUserActivityState(userActivity *foundation.NSUserActivity) {
 	x.inner.UpdateUserActivityState(userActivity)
@@ -403,6 +521,8 @@ func (x *Responder) SetUserActivity(userActivity *foundation.NSUserActivity) {
 	x.inner.SetUserActivity(userActivity)
 }
 
+// Your custom subclass of the NSResponder class should override this method to create and configure your subclass’s default NSTouchBar object.
+//
 // MakeTouchBar calls the underlying MakeTouchBar.
 func (x *Responder) MakeTouchBar() *TouchBar {
 	_r := x.inner.MakeTouchBar()
@@ -426,31 +546,43 @@ func (x *Responder) SetTouchBar(touchBar *raw.NSTouchBar) {
 	x.inner.SetTouchBar(touchBar)
 }
 
+// Returns the receiver’s interface style.
+//
 // InterfaceStyle calls the underlying InterfaceStyle.
 func (x *Responder) InterfaceStyle() uint {
 	return x.inner.InterfaceStyle()
 }
 
+// Sets the receiver’s style to the style specified by interfaceStyle, such as NSMacintoshInterfaceStyle or NSWindows95InterfaceStyle.
+//
 // SetInterfaceStyle calls the underlying SetInterfaceStyle.
 func (x *Responder) SetInterfaceStyle(interfaceStyle uint) {
 	x.inner.SetInterfaceStyle(interfaceStyle)
 }
 
+// Saves the interface-related state of the responder.
+//
 // EncodeRestorableStateWithCoder calls the underlying EncodeRestorableStateWithCoder.
 func (x *Responder) EncodeRestorableStateWithCoder(coder *foundation.NSCoder) {
 	x.inner.EncodeRestorableStateWithCoder(coder)
 }
 
+// Saves the interface-related state of the responder to a keyed archiver either synchronously or asynchronously on the given operation queue.
+//
 // EncodeRestorableStateWithCoderBackgroundQueue calls the underlying EncodeRestorableStateWithCoderBackgroundQueue.
 func (x *Responder) EncodeRestorableStateWithCoderBackgroundQueue(coder *foundation.NSCoder, queue *foundation.NSOperationQueue) {
 	x.inner.EncodeRestorableStateWithCoderBackgroundQueue(coder, queue)
 }
 
+// Restores the interface-related state of the responder.
+//
 // RestoreStateWithCoder calls the underlying RestoreStateWithCoder.
 func (x *Responder) RestoreStateWithCoder(coder *foundation.NSCoder) {
 	x.inner.RestoreStateWithCoder(coder)
 }
 
+// Marks the responder’s interface-related state as dirty.
+//
 // InvalidateRestorableState calls the underlying InvalidateRestorableState.
 func (x *Responder) InvalidateRestorableState() {
 	x.inner.InvalidateRestorableState()

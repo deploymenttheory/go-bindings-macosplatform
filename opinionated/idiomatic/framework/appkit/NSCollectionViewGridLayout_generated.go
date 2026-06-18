@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A layout that displays a single section of items in a row and column grid.
+//
 // CollectionViewGridLayout wraps [raw.NSCollectionViewGridLayout] with a fluent Go API.
 type CollectionViewGridLayout struct {
 	inner *raw.NSCollectionViewGridLayout
@@ -39,48 +41,64 @@ func NewCollectionViewGridLayout() *CollectionViewGridLayout {
 	return &CollectionViewGridLayout{inner: raw.NSCollectionViewGridLayoutFromID(_id)}
 }
 
+// The amount of empty space (in points) around the grid’s content.
+//
 // WithMargins sets the margins property and returns the receiver for chaining.
 func (x *CollectionViewGridLayout) WithMargins(margins foundation.NSEdgeInsets) *CollectionViewGridLayout {
 	x.inner.SetMargins(margins)
 	return x
 }
 
+// The minimum spacing (in points) to use between items in the same row or column.
+//
 // WithMinimumInteritemSpacing sets the minimumInteritemSpacing property and returns the receiver for chaining.
 func (x *CollectionViewGridLayout) WithMinimumInteritemSpacing(minimumInteritemSpacing float64) *CollectionViewGridLayout {
 	x.inner.SetMinimumInteritemSpacing(minimumInteritemSpacing)
 	return x
 }
 
+// The minimum spacing (in points) to use between rows or columns.
+//
 // WithMinimumLineSpacing sets the minimumLineSpacing property and returns the receiver for chaining.
 func (x *CollectionViewGridLayout) WithMinimumLineSpacing(minimumLineSpacing float64) *CollectionViewGridLayout {
 	x.inner.SetMinimumLineSpacing(minimumLineSpacing)
 	return x
 }
 
+// The maximum number of rows to display in the collection view’s visible area.
+//
 // WithMaximumNumberOfRows sets the maximumNumberOfRows property and returns the receiver for chaining.
 func (x *CollectionViewGridLayout) WithMaximumNumberOfRows(maximumNumberOfRows uint) *CollectionViewGridLayout {
 	x.inner.SetMaximumNumberOfRows(maximumNumberOfRows)
 	return x
 }
 
+// The maximum number of columns to display in the collection view’s visible area.
+//
 // WithMaximumNumberOfColumns sets the maximumNumberOfColumns property and returns the receiver for chaining.
 func (x *CollectionViewGridLayout) WithMaximumNumberOfColumns(maximumNumberOfColumns uint) *CollectionViewGridLayout {
 	x.inner.SetMaximumNumberOfColumns(maximumNumberOfColumns)
 	return x
 }
 
+// The smallest allowable size for an item’s view.
+//
 // WithMinimumItemSize sets the minimumItemSize property and returns the receiver for chaining.
 func (x *CollectionViewGridLayout) WithMinimumItemSize(minimumItemSize corefoundation.CGSize) *CollectionViewGridLayout {
 	x.inner.SetMinimumItemSize(minimumItemSize)
 	return x
 }
 
+// The largest allowable size for an item’s view.
+//
 // WithMaximumItemSize sets the maximumItemSize property and returns the receiver for chaining.
 func (x *CollectionViewGridLayout) WithMaximumItemSize(maximumItemSize corefoundation.CGSize) *CollectionViewGridLayout {
 	x.inner.SetMaximumItemSize(maximumItemSize)
 	return x
 }
 
+// The array of background colors to use when drawing the grid.
+//
 // WithBackgroundColors sets the collection, converting the Go slice to an NSArray.
 func (x *CollectionViewGridLayout) WithBackgroundColors(items ...*raw.NSColor) *CollectionViewGridLayout {
 	if len(items) == 0 {

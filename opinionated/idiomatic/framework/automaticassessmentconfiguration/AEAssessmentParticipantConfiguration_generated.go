@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Configuration information for an app that’s available during an assessment.
+//
 // AssessmentParticipantConfiguration wraps [raw.AEAssessmentParticipantConfiguration] with a fluent Go API.
 type AssessmentParticipantConfiguration struct {
 	inner *raw.AEAssessmentParticipantConfiguration
@@ -38,6 +40,8 @@ func NewAssessmentParticipantConfiguration() *AssessmentParticipantConfiguration
 	return &AssessmentParticipantConfiguration{inner: raw.AEAssessmentParticipantConfigurationFromID(_id)}
 }
 
+// A Boolean that indicates whether an app can access network resources during an assessment.
+//
 // WithAllowsNetworkAccess sets the allowsNetworkAccess property and returns the receiver for chaining.
 func (x *AssessmentParticipantConfiguration) WithAllowsNetworkAccess(allowsNetworkAccess bool) *AssessmentParticipantConfiguration {
 	x.inner.SetAllowsNetworkAccess(allowsNetworkAccess)

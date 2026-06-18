@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event that represents a live streaming media segment resource request.
+//
 // MetricHLSMediaSegmentRequestEvent wraps [raw.AVMetricHLSMediaSegmentRequestEvent] with a fluent Go API.
 type MetricHLSMediaSegmentRequestEvent struct {
 	inner *raw.AVMetricHLSMediaSegmentRequestEvent

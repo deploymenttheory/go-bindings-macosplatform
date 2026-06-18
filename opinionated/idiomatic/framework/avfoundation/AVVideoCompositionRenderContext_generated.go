@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that defines the context in which custom compositors render pixel buffers.
+//
 // VideoCompositionRenderContext wraps [raw.AVVideoCompositionRenderContext] with a fluent Go API.
 type VideoCompositionRenderContext struct {
 	inner *raw.AVVideoCompositionRenderContext
@@ -37,7 +39,7 @@ func NewVideoCompositionRenderContext() *VideoCompositionRenderContext {
 	return &VideoCompositionRenderContext{inner: raw.AVVideoCompositionRenderContextFromID(_id)}
 }
 
-// Vends a CVPixelBuffer to use for rendering The buffer will have its kCVImageBufferCleanApertureKey and kCVImageBufferPixelAspectRatioKey attachments set to match the current composition processor properties.
+// Returns a pixel buffer to use for rendering.
 //
 // NewPixelBuffer calls the underlying NewPixelBuffer.
 func (x *VideoCompositionRenderContext) NewPixelBuffer() unsafe.Pointer {

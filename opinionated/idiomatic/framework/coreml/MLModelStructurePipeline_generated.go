@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class representing the structure of a Pipeline model.
+//
 // ModelStructurePipeline wraps [raw.MLModelStructurePipeline] with a fluent Go API.
 type ModelStructurePipeline struct {
 	inner *raw.MLModelStructurePipeline

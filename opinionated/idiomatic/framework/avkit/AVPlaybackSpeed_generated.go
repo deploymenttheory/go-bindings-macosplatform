@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a user-selectable playback speed in a playback user interface.
+//
 // PlaybackSpeed wraps [raw.AVPlaybackSpeed] with a fluent Go API.
 type PlaybackSpeed struct {
 	inner *raw.AVPlaybackSpeed
@@ -31,7 +33,7 @@ func PlaybackSpeedFromID(id objc.ID) *PlaybackSpeed {
 	return &PlaybackSpeed{inner: raw.AVPlaybackSpeedFromID(id)}
 }
 
-// @method         initWithRate:localizedName: @param         rate The rate to be used when this playback speed is selected. @param         localizedName A localized name to be displayed representing this playback speed in a UI. @abstract      Initializes an AVPlaybackSpeed.
+// Creates a playback speed with a rate and localized name.
 //
 // NewPlaybackSpeedWithRateLocalizedName creates a new [PlaybackSpeed].
 func NewPlaybackSpeedWithRateLocalizedName(rate float32, localizedName string) *PlaybackSpeed {

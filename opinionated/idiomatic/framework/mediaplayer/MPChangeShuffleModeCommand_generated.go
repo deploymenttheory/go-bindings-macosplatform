@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that responds to requests to change the current shuffle mode used during playback.
+//
 // ChangeShuffleModeCommand wraps [raw.MPChangeShuffleModeCommand] with a fluent Go API.
 type ChangeShuffleModeCommand struct {
 	inner *raw.MPChangeShuffleModeCommand
@@ -35,7 +37,7 @@ func NewChangeShuffleModeCommand() *ChangeShuffleModeCommand {
 	return &ChangeShuffleModeCommand{inner: raw.MPChangeShuffleModeCommandFromID(_id)}
 }
 
-// The app's current shuffle type.
+// The current shuffle mode for a media item.
 //
 // WithCurrentShuffleType sets the currentShuffleType property and returns the receiver for chaining.
 func (x *ChangeShuffleModeCommand) WithCurrentShuffleType(currentShuffleType MPShuffleType) *ChangeShuffleModeCommand {
@@ -43,7 +45,7 @@ func (x *ChangeShuffleModeCommand) WithCurrentShuffleType(currentShuffleType MPS
 	return x
 }
 
-// Whether a button (for example) should be enabled and tappable for this particular command.
+// A Boolean value that indicates whether a user can interact with the displayed element.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *ChangeShuffleModeCommand) WithEnabled(enabled bool) *ChangeShuffleModeCommand {

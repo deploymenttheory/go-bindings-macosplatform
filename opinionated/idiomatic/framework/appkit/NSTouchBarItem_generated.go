@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A UI control shown in the Touch Bar on supported models of MacBook Pro.
+//
 // TouchBarItem wraps [raw.NSTouchBarItem] with a fluent Go API.
 type TouchBarItem struct {
 	inner *raw.NSTouchBarItem
@@ -31,6 +33,8 @@ func TouchBarItemFromID(id objc.ID) *TouchBarItem {
 	return &TouchBarItem{inner: raw.NSTouchBarItemFromID(id)}
 }
 
+// Creates a new item with the specified identifier.
+//
 // NewTouchBarItemWithIdentifier creates a new [TouchBarItem].
 func NewTouchBarItemWithIdentifier(identifier *foundation.NSString) *TouchBarItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTouchBarItem")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewTouchBarItemWithIdentifier(identifier *foundation.NSString) *TouchBarIte
 	return &TouchBarItem{inner: raw.NSTouchBarItemFromID(_id)}
 }
 
+// Initializes and returns a new item from a storyboard or nib file.
+//
 // NewTouchBarItemWithCoder creates a new [TouchBarItem].
 func NewTouchBarItemWithCoder(coder *foundation.NSCoder) *TouchBarItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTouchBarItem")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewTouchBarItemWithCoder(coder *foundation.NSCoder) *TouchBarItem {
 	return &TouchBarItem{inner: raw.NSTouchBarItemFromID(_id)}
 }
 
+// Determines which items are shown in a bar when space is limited.
+//
 // WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
 func (x *TouchBarItem) WithVisibilityPriority(visibilityPriority float32) *TouchBarItem {
 	x.inner.SetVisibilityPriority(visibilityPriority)

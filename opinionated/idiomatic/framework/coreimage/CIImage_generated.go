@@ -16,6 +16,8 @@ import (
 	"unsafe"
 )
 
+// A representation of an image to be processed or produced by Core Image filters.
+//
 // Image wraps [raw.CIImage] with a fluent Go API.
 type Image struct {
 	inner *raw.CIImage
@@ -36,6 +38,8 @@ func ImageFromID(id objc.ID) *Image {
 	return &Image{inner: raw.CIImageFromID(id)}
 }
 
+// Initializes an image object with a Quartz 2D image.
+//
 // NewImageWithCGImage creates a new [Image].
 func NewImageWithCGImage(image unsafe.Pointer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -43,6 +47,8 @@ func NewImageWithCGImage(image unsafe.Pointer) *Image {
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Initializes an image object with a Quartz 2D image, using the specified options.
+//
 // NewImageWithCGImageOptions creates a new [Image].
 func NewImageWithCGImageOptions(image unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -57,6 +63,8 @@ func NewImageWithCGImageSourceIndexOptions(source unsafe.Pointer, index uint, di
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Initializes an image object from the contents supplied by a CGLayer object.
+//
 // NewImageWithCGLayer creates a new [Image].
 func NewImageWithCGLayer(layer unsafe.Pointer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -64,6 +72,8 @@ func NewImageWithCGLayer(layer unsafe.Pointer) *Image {
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Initializes an image object from the contents supplied by a CGLayer object, using the specified options.
+//
 // NewImageWithCGLayerOptions creates a new [Image].
 func NewImageWithCGLayerOptions(layer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -71,6 +81,8 @@ func NewImageWithCGLayerOptions(layer unsafe.Pointer, options *foundation.NSDict
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Initializes an image object with the supplied image data.
+//
 // NewImageWithData creates a new [Image].
 func NewImageWithData(data *foundation.NSData) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -78,6 +90,8 @@ func NewImageWithData(data *foundation.NSData) *Image {
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Initializes an image object with the supplied image data, using the specified options.
+//
 // NewImageWithDataOptions creates a new [Image].
 func NewImageWithDataOptions(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -85,6 +99,8 @@ func NewImageWithDataOptions(data *foundation.NSData, options *foundation.NSDict
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Initializes an image object with bitmap data.
+//
 // NewImageWithBitmapDataBytesPerRowSizeFormatColorSpace creates a new [Image].
 func NewImageWithBitmapDataBytesPerRowSizeFormatColorSpace(data *foundation.NSData, bytesPerRow uint, size corefoundation.CGSize, format int, colorSpace unsafe.Pointer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -92,6 +108,8 @@ func NewImageWithBitmapDataBytesPerRowSizeFormatColorSpace(data *foundation.NSDa
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Initializes an image object with data supplied by an OpenGL texture.
+//
 // NewImageWithTextureSizeFlippedColorSpace creates a new [Image].
 func NewImageWithTextureSizeFlippedColorSpace(name uint, size corefoundation.CGSize, flipped bool, colorSpace unsafe.Pointer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -99,6 +117,8 @@ func NewImageWithTextureSizeFlippedColorSpace(name uint, size corefoundation.CGS
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Initializes an image object with data supplied by an OpenGL texture.
+//
 // NewImageWithTextureSizeFlippedOptions creates a new [Image].
 func NewImageWithTextureSizeFlippedOptions(name uint, size corefoundation.CGSize, flipped bool, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -106,6 +126,8 @@ func NewImageWithTextureSizeFlippedOptions(name uint, size corefoundation.CGSize
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Initializes an image object with data supplied by a Metal texture.
+//
 // NewImageWithMTLTextureOptions creates a new [Image].
 func NewImageWithMTLTextureOptions(texture metal.MTLTexture, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -113,6 +135,8 @@ func NewImageWithMTLTextureOptions(texture metal.MTLTexture, options *foundation
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Initializes an image object by reading an image from a URL.
+//
 // NewImageWithContentsOfURL creates a new [Image].
 func NewImageWithContentsOfURL(url string) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -120,6 +144,8 @@ func NewImageWithContentsOfURL(url string) *Image {
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Initializes an image object by reading an image from a URL, using the specified options.
+//
 // NewImageWithContentsOfURLOptions creates a new [Image].
 func NewImageWithContentsOfURLOptions(url string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -127,6 +153,8 @@ func NewImageWithContentsOfURLOptions(url string, options *foundation.NSDictiona
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Initializes an image with the contents of an IOSurface.
+//
 // NewImageWithIOSurface creates a new [Image].
 func NewImageWithIOSurface(surface unsafe.Pointer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -134,6 +162,8 @@ func NewImageWithIOSurface(surface unsafe.Pointer) *Image {
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Initializes, using the specified options, an image with the contents of an IOSurface.
+//
 // NewImageWithIOSurfaceOptions creates a new [Image].
 func NewImageWithIOSurfaceOptions(surface unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -141,6 +171,8 @@ func NewImageWithIOSurfaceOptions(surface unsafe.Pointer, options *foundation.NS
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Initializes, using the specified format and options, an image with the contents of a specific data plane in an IOSurface.
+//
 // NewImageWithIOSurfacePlaneFormatOptions creates a new [Image].
 func NewImageWithIOSurfacePlaneFormatOptions(surface unsafe.Pointer, plane uint, format int, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -148,6 +180,8 @@ func NewImageWithIOSurfacePlaneFormatOptions(surface unsafe.Pointer, plane uint,
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Initializes an image object from the contents of a Core Video image buffer.
+//
 // NewImageWithCVImageBuffer creates a new [Image].
 func NewImageWithCVImageBuffer(imageBuffer unsafe.Pointer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -155,6 +189,8 @@ func NewImageWithCVImageBuffer(imageBuffer unsafe.Pointer) *Image {
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Initializes an image object from the contents of a Core Video image buffer, using the specified options.
+//
 // NewImageWithCVImageBufferOptions creates a new [Image].
 func NewImageWithCVImageBufferOptions(imageBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -162,6 +198,8 @@ func NewImageWithCVImageBufferOptions(imageBuffer unsafe.Pointer, options *found
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Initializes an image object from the contents of a Core Video pixel buffer.
+//
 // NewImageWithCVPixelBuffer creates a new [Image].
 func NewImageWithCVPixelBuffer(pixelBuffer unsafe.Pointer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -169,6 +207,8 @@ func NewImageWithCVPixelBuffer(pixelBuffer unsafe.Pointer) *Image {
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Initializes an image object from the contents of a Core Video pixel buffer using the specified options.
+//
 // NewImageWithCVPixelBufferOptions creates a new [Image].
 func NewImageWithCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -176,6 +216,8 @@ func NewImageWithCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options *found
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Initializes an image of infinite extent whose entire content is the specified color.
+//
 // NewImageWithColor creates a new [Image].
 func NewImageWithColor(color *raw.CIColor) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
@@ -225,7 +267,7 @@ func NewImageWithSemanticSegmentationMatte(matte *avfoundation.AVSemanticSegment
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
-// Initializes an image object based on pixels from an image provider object. Core Image retains the provider object until the image is deallocated. The image provider object will not be called until the image is rendered. - Parameters: - provider: An object that implements the `CIImageProvider` protocol. - width: The width of the image. - height: The height of the image. - format: The “CIFormat“ of the provided pixels. - colorSpace: The color space that the image is defined in. If `nil`, then the pixels will not be is not color matched to the Core Image working color space. - options: A dictionary that contains various “CIImageOption“ keys that affect the resulting “CIImage“. The option “kCIImageProviderTileSize“ controls if and how the provider object is called in tiles. The option “kCIImageProviderUserInfo“ allows additional state to be passed to the provider object. - Returns: An initialized “CIImage“ object based on the data provider.
+// Initializes an image object based on pixels from an image provider object.
 //
 // NewImageWithImageProviderSizeFormatColorSpaceOptions creates a new [Image].
 func NewImageWithImageProviderSizeFormatColorSpaceOptions(provider objc.ID, width uint, height uint, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
@@ -234,6 +276,8 @@ func NewImageWithImageProviderSizeFormatColorSpaceOptions(provider objc.ID, widt
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// Returns a new image that represents the original image after applying an affine transform.
+//
 // ImageByApplyingTransform calls the underlying ImageByApplyingTransform.
 func (x *Image) ImageByApplyingTransform(matrix corefoundation.CGAffineTransform) *Image {
 	_r := x.inner.ImageByApplyingTransform(matrix)
@@ -252,6 +296,8 @@ func (x *Image) ImageByApplyingTransformHighQualityDownsample(matrix corefoundat
 	return &Image{inner: _r}
 }
 
+// Returns a new image created by transforming the original image to the specified EXIF orientation.
+//
 // ImageByApplyingOrientation calls the underlying ImageByApplyingOrientation.
 func (x *Image) ImageByApplyingOrientation(orientation int) *Image {
 	_r := x.inner.ImageByApplyingOrientation(orientation)
@@ -261,11 +307,15 @@ func (x *Image) ImageByApplyingOrientation(orientation int) *Image {
 	return &Image{inner: _r}
 }
 
+// Returns the transformation needed to reorient the image to the specified orientation.
+//
 // ImageTransformForOrientation calls the underlying ImageTransformForOrientation.
 func (x *Image) ImageTransformForOrientation(orientation int) corefoundation.CGAffineTransform {
 	return x.inner.ImageTransformForOrientation(orientation)
 }
 
+// Transforms the original image by a given orientation.
+//
 // ImageByApplyingCGOrientation calls the underlying ImageByApplyingCGOrientation.
 func (x *Image) ImageByApplyingCGOrientation(orientation imageio.CGImagePropertyOrientation) *Image {
 	_r := x.inner.ImageByApplyingCGOrientation(orientation)
@@ -275,11 +325,15 @@ func (x *Image) ImageByApplyingCGOrientation(orientation imageio.CGImageProperty
 	return &Image{inner: _r}
 }
 
+// The affine transform for changing the image to the given orientation.
+//
 // ImageTransformForCGOrientation calls the underlying ImageTransformForCGOrientation.
 func (x *Image) ImageTransformForCGOrientation(orientation imageio.CGImagePropertyOrientation) corefoundation.CGAffineTransform {
 	return x.inner.ImageTransformForCGOrientation(orientation)
 }
 
+// Returns a new image created by compositing the original image over the specified destination image.
+//
 // ImageByCompositingOverImage calls the underlying ImageByCompositingOverImage.
 func (x *Image) ImageByCompositingOverImage(dest *raw.CIImage) *Image {
 	_r := x.inner.ImageByCompositingOverImage(dest)
@@ -289,6 +343,8 @@ func (x *Image) ImageByCompositingOverImage(dest *raw.CIImage) *Image {
 	return &Image{inner: _r}
 }
 
+// Returns a new image with a cropped portion of the original image.
+//
 // ImageByCroppingToRect calls the underlying ImageByCroppingToRect.
 func (x *Image) ImageByCroppingToRect(rect corefoundation.CGRect) *Image {
 	_r := x.inner.ImageByCroppingToRect(rect)
@@ -298,6 +354,8 @@ func (x *Image) ImageByCroppingToRect(rect corefoundation.CGRect) *Image {
 	return &Image{inner: _r}
 }
 
+// Returns a new image created by making the pixel colors along its edges extend infinitely in all directions.
+//
 // ImageByClampingToExtent calls the underlying ImageByClampingToExtent.
 func (x *Image) ImageByClampingToExtent() *Image {
 	_r := x.inner.ImageByClampingToExtent()
@@ -307,6 +365,8 @@ func (x *Image) ImageByClampingToExtent() *Image {
 	return &Image{inner: _r}
 }
 
+// Returns a new image created by cropping to a specified area, then making the pixel colors along the edges of the cropped image extend infinitely in all directions.
+//
 // ImageByClampingToRect calls the underlying ImageByClampingToRect.
 func (x *Image) ImageByClampingToRect(rect corefoundation.CGRect) *Image {
 	_r := x.inner.ImageByClampingToRect(rect)
@@ -316,6 +376,8 @@ func (x *Image) ImageByClampingToRect(rect corefoundation.CGRect) *Image {
 	return &Image{inner: _r}
 }
 
+// Returns a new image created by applying a filter to the original image with the specified name and parameters.
+//
 // ImageByApplyingFilterWithInputParameters calls the underlying ImageByApplyingFilterWithInputParameters.
 func (x *Image) ImageByApplyingFilterWithInputParameters(filterName string, params *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
 	_r := x.inner.ImageByApplyingFilterWithInputParameters(foundation.NSStringStringWithUTF8String(filterName), params)
@@ -325,6 +387,8 @@ func (x *Image) ImageByApplyingFilterWithInputParameters(filterName string, para
 	return &Image{inner: _r}
 }
 
+// Applies the filter to an image and returns the output.
+//
 // ImageByApplyingFilter calls the underlying ImageByApplyingFilter.
 func (x *Image) ImageByApplyingFilter(filterName string) *Image {
 	_r := x.inner.ImageByApplyingFilter(foundation.NSStringStringWithUTF8String(filterName))
@@ -334,6 +398,8 @@ func (x *Image) ImageByApplyingFilter(filterName string) *Image {
 	return &Image{inner: _r}
 }
 
+// Returns a new image created by color matching from the specified color space to the context’s working color space.
+//
 // ImageByColorMatchingColorSpaceToWorkingSpace calls the underlying ImageByColorMatchingColorSpaceToWorkingSpace.
 func (x *Image) ImageByColorMatchingColorSpaceToWorkingSpace(colorSpace unsafe.Pointer) *Image {
 	_r := x.inner.ImageByColorMatchingColorSpaceToWorkingSpace(colorSpace)
@@ -343,6 +409,8 @@ func (x *Image) ImageByColorMatchingColorSpaceToWorkingSpace(colorSpace unsafe.P
 	return &Image{inner: _r}
 }
 
+// Returns a new image created by color matching from the context’s working color space to the specified color space.
+//
 // ImageByColorMatchingWorkingSpaceToColorSpace calls the underlying ImageByColorMatchingWorkingSpaceToColorSpace.
 func (x *Image) ImageByColorMatchingWorkingSpaceToColorSpace(colorSpace unsafe.Pointer) *Image {
 	_r := x.inner.ImageByColorMatchingWorkingSpaceToColorSpace(colorSpace)
@@ -352,6 +420,8 @@ func (x *Image) ImageByColorMatchingWorkingSpaceToColorSpace(colorSpace unsafe.P
 	return &Image{inner: _r}
 }
 
+// Returns a new image created by multiplying the image’s RGB values by its alpha values.
+//
 // ImageByPremultiplyingAlpha calls the underlying ImageByPremultiplyingAlpha.
 func (x *Image) ImageByPremultiplyingAlpha() *Image {
 	_r := x.inner.ImageByPremultiplyingAlpha()
@@ -361,6 +431,8 @@ func (x *Image) ImageByPremultiplyingAlpha() *Image {
 	return &Image{inner: _r}
 }
 
+// Returns a new image created by dividing the image’s RGB values by its alpha values.
+//
 // ImageByUnpremultiplyingAlpha calls the underlying ImageByUnpremultiplyingAlpha.
 func (x *Image) ImageByUnpremultiplyingAlpha() *Image {
 	_r := x.inner.ImageByUnpremultiplyingAlpha()
@@ -370,6 +442,8 @@ func (x *Image) ImageByUnpremultiplyingAlpha() *Image {
 	return &Image{inner: _r}
 }
 
+// Returns a new image created by setting all alpha values to 1.0 within the specified rectangle and to 0.0 outside of that area.
+//
 // ImageBySettingAlphaOneInExtent calls the underlying ImageBySettingAlphaOneInExtent.
 func (x *Image) ImageBySettingAlphaOneInExtent(extent corefoundation.CGRect) *Image {
 	_r := x.inner.ImageBySettingAlphaOneInExtent(extent)
@@ -379,7 +453,7 @@ func (x *Image) ImageBySettingAlphaOneInExtent(extent corefoundation.CGRect) *Im
 	return &Image{inner: _r}
 }
 
-// Create an image by applying a gaussian blur to the receiver. - Parameters: - sigma: The sigma of the gaussian blur to apply to the receiver. If the sigma is very small (less than `0.16`) then the receiver is returned. - Returns: An autoreleased “CIImage“ instance or the received image.
+// Create an image by applying a gaussian blur to the receiver.
 //
 // ImageByApplyingGaussianBlurWithSigma calls the underlying ImageByApplyingGaussianBlurWithSigma.
 func (x *Image) ImageByApplyingGaussianBlurWithSigma(sigma float64) *Image {
@@ -390,7 +464,7 @@ func (x *Image) ImageByApplyingGaussianBlurWithSigma(sigma float64) *Image {
 	return &Image{inner: _r}
 }
 
-// Return a new image by changing the receiver's metadata properties. When you create an image, Core Image sets an image’s properties to a metadata dictionary as described here: “properties“. Use this method to override an image’s metadata properties with new values. - Parameters: - properties: A dictionary of metadata properties akin to the `CGImageSourceCopyPropertiesAtIndex()` function. - Returns: An autoreleased “CIImage“ instance with a copy of the new properties.
+// Return a new image by changing the receiver’s metadata properties.
 //
 // ImageBySettingProperties calls the underlying ImageBySettingProperties.
 func (x *Image) ImageBySettingProperties(properties *foundation.NSDictionary[objc.ID, objc.ID]) *Image {
@@ -401,7 +475,7 @@ func (x *Image) ImageBySettingProperties(properties *foundation.NSDictionary[obj
 	return &Image{inner: _r}
 }
 
-// Create an image by changing the receiver's sample mode to bilinear interpolation. - Returns: An autoreleased “CIImage“ instance with a bilinear sampling.
+// Create an image by changing the receiver’s sample mode to bilinear interpolation.
 //
 // ImageBySamplingLinear calls the underlying ImageBySamplingLinear.
 func (x *Image) ImageBySamplingLinear() *Image {
@@ -412,7 +486,7 @@ func (x *Image) ImageBySamplingLinear() *Image {
 	return &Image{inner: _r}
 }
 
-// Create an image by changing the receiver's sample mode to nearest neighbor. - Returns: An autoreleased “CIImage“ instance with a nearest sampling.
+// Create an image by changing the receiver’s sample mode to nearest neighbor.
 //
 // ImageBySamplingNearest calls the underlying ImageBySamplingNearest.
 func (x *Image) ImageBySamplingNearest() *Image {
@@ -423,7 +497,7 @@ func (x *Image) ImageBySamplingNearest() *Image {
 	return &Image{inner: _r}
 }
 
-// Create an image that inserts a intermediate that is cacheable This intermediate will be not be cached if “kCIContextCacheIntermediates“ is false. - Returns: An autoreleased “CIImage“.
+// Create an image that inserts a intermediate that is cacheable
 //
 // ImageByInsertingIntermediate calls the underlying ImageByInsertingIntermediate.
 func (x *Image) ImageByInsertingIntermediate() *Image {
@@ -434,7 +508,7 @@ func (x *Image) ImageByInsertingIntermediate() *Image {
 	return &Image{inner: _r}
 }
 
-// Create an image that inserts a intermediate that is cacheable. - Parameters: - cache: Controls if Core Image caches the returned image. * `YES` : This intermediate will be cacheable even if “kCIContextCacheIntermediates“ is false. * `NO`  : the intermediate will be not be cached if “kCIContextCacheIntermediates“ is false. - Returns: An autoreleased “CIImage“.
+// Create an image that inserts a intermediate that is cacheable.
 //
 // ImageByInsertingIntermediate2 calls the underlying ImageByInsertingIntermediate2.
 func (x *Image) ImageByInsertingIntermediate2(cache bool) *Image {
@@ -445,7 +519,7 @@ func (x *Image) ImageByInsertingIntermediate2(cache bool) *Image {
 	return &Image{inner: _r}
 }
 
-// Create an image that inserts a intermediate that is cached in tiles This intermediate will be cacheable even if “kCIContextCacheIntermediates“ is false. - Returns: An autoreleased “CIImage“.
+// Create an image that inserts a intermediate that is cached in tiles
 //
 // ImageByInsertingTiledIntermediate calls the underlying ImageByInsertingTiledIntermediate.
 func (x *Image) ImageByInsertingTiledIntermediate() *Image {
@@ -456,7 +530,7 @@ func (x *Image) ImageByInsertingTiledIntermediate() *Image {
 	return &Image{inner: _r}
 }
 
-// Create an image that applies a gain map Core Image image to the received Core Image image. The gain map image can be obtained by creating a “CIImage“ instance from `NSURL`/`NSData` and setting the “kCIImageAuxiliaryHDRGainMap“ option set to `@YES`. If the gain map “CIImage“ instance doesn't have the needed “properties“ metadata, the received image will be returned as-is. - Returns: An autoreleased “CIImage“ instance or the received image.
+// Create an image that applies a gain map Core Image image to the received Core Image image.
 //
 // ImageByApplyingGainMap calls the underlying ImageByApplyingGainMap.
 func (x *Image) ImageByApplyingGainMap(gainmap *raw.CIImage) *Image {
@@ -467,7 +541,7 @@ func (x *Image) ImageByApplyingGainMap(gainmap *raw.CIImage) *Image {
 	return &Image{inner: _r}
 }
 
-// Create an image that applies a gain map Core Image image with a specified headroom to the received Core Image image. - Parameters: - gainmap: The gain map “CIImage“ instance to apply to the receiver. - headroom: a float value that specify how much headroom the resulting image should have. The headroom value will be limited to between 1.0 (i.e. SDR) and the full headroom allowed by the gain map. - Returns: An autoreleased “CIImage“ instance or the received image.
+// Create an image that applies a gain map Core Image image with a specified headroom to the received Core Image image.
 //
 // ImageByApplyingGainMapHeadroom calls the underlying ImageByApplyingGainMapHeadroom.
 func (x *Image) ImageByApplyingGainMapHeadroom(gainmap *raw.CIImage, headroom float32) *Image {
@@ -478,7 +552,7 @@ func (x *Image) ImageByApplyingGainMapHeadroom(gainmap *raw.CIImage, headroom fl
 	return &Image{inner: _r}
 }
 
-// Create an image by changing the receiver's contentHeadroom property. Changing this value will alter the behavior of the `CIToneMapHeadroom` and `CISystemToneMap` filters. * If the value is set to 0.0 then the returned image's headroom is unknown. * If the value is set to 1.0 then the returned image is SDR. * If the value is set to greater 1.0 then the returned image is HDR. * Otherwise the returned image's headroom is unknown. - Returns: An autoreleased “CIImage“.
+// Create an image by changing the receiver’s contentHeadroom property.
 //
 // ImageBySettingContentHeadroom calls the underlying ImageBySettingContentHeadroom.
 func (x *Image) ImageBySettingContentHeadroom(headroom float32) *Image {
@@ -489,7 +563,7 @@ func (x *Image) ImageBySettingContentHeadroom(headroom float32) *Image {
 	return &Image{inner: _r}
 }
 
-// Create an image by changing the receiver's contentAverageLightLevel property. Changing this value will alter the behavior of the `CIToneMapHeadroom` and `CISystemToneMap` filters. * If the value is set to 0.0 or less then the returned image's “contentAverageLightLevel“ is unknown. - Returns: An autoreleased “CIImage“.
+// Create an image by changing the receiver’s contentAverageLightLevel property.
 //
 // ImageBySettingContentAverageLightLevel calls the underlying ImageBySettingContentAverageLightLevel.
 func (x *Image) ImageBySettingContentAverageLightLevel(average float32) *Image {
@@ -500,6 +574,8 @@ func (x *Image) ImageBySettingContentAverageLightLevel(average float32) *Image {
 	return &Image{inner: _r}
 }
 
+// Returns the region of interest for the filter chain that generates the image.
+//
 // RegionOfInterestForImageInRect calls the underlying RegionOfInterestForImageInRect.
 func (x *Image) RegionOfInterestForImageInRect(image *raw.CIImage, rect corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.RegionOfInterestForImageInRect(image, rect)
@@ -576,6 +652,8 @@ func (x *Image) MetalTexture() metal.MTLTexture {
 	return x.inner.MetalTexture()
 }
 
+// Returns all possible automatically selected and configured filters for adjusting the image.
+//
 // AutoAdjustmentFilters returns the collection as a Go slice.
 func (x *Image) AutoAdjustmentFilters() []*Filter {
 	arr := x.inner.AutoAdjustmentFilters()
@@ -587,6 +665,8 @@ func (x *Image) AutoAdjustmentFilters() []*Filter {
 	})
 }
 
+// Returns a subset of automatically selected and configured filters for adjusting the image.
+//
 // AutoAdjustmentFiltersWithOptions calls the underlying AutoAdjustmentFiltersWithOptions.
 func (x *Image) AutoAdjustmentFiltersWithOptions(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.CIFilter] {
 	return x.inner.AutoAdjustmentFiltersWithOptions(options)

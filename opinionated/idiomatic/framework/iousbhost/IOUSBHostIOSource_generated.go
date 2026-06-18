@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @class   IOUSBHostIOSource @brief   The abstract class IOUSBHostPipe and IOUSBHostStream derive from. @details Defines common methods that are shared between IOUSBHostPipe and IOUSBHostStream.
+// This class provides basic functionality for deriving pipe and stream classes.
 //
 // HostIOSource wraps [raw.IOUSBHostIOSource] with a fluent Go API.
 type HostIOSource struct {

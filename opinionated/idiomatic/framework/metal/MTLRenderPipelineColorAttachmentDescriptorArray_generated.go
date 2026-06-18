@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An array of render pipeline color attachment descriptor objects.
+//
 // RenderPipelineColorAttachmentDescriptorArray wraps [raw.MTLRenderPipelineColorAttachmentDescriptorArray] with a fluent Go API.
 type RenderPipelineColorAttachmentDescriptorArray struct {
 	inner *raw.MTLRenderPipelineColorAttachmentDescriptorArray
@@ -37,6 +39,8 @@ func NewRenderPipelineColorAttachmentDescriptorArray() *RenderPipelineColorAttac
 	return &RenderPipelineColorAttachmentDescriptorArray{inner: raw.MTLRenderPipelineColorAttachmentDescriptorArrayFromID(_id)}
 }
 
+// Returns the render pipeline state for the specified color attachment.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *RenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *RenderPipelineColorAttachmentDescriptor {
 	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
@@ -46,6 +50,8 @@ func (x *RenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(
 	return &RenderPipelineColorAttachmentDescriptor{inner: _r}
 }
 
+// Sets the render pipeline state for a specified color attachment.
+//
 // SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
 func (x *RenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLRenderPipelineColorAttachmentDescriptor, attachmentIndex uint) {
 	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)

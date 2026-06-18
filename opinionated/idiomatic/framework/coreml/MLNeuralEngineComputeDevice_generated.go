@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a Neural Engine compute device.
+//
 // NeuralEngineComputeDevice wraps [raw.MLNeuralEngineComputeDevice] with a fluent Go API.
 type NeuralEngineComputeDevice struct {
 	inner *raw.MLNeuralEngineComputeDevice

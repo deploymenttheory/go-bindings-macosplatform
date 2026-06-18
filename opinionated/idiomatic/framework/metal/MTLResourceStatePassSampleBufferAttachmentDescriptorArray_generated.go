@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An array of sample buffer attachments for a resource state pass.
+//
 // ResourceStatePassSampleBufferAttachmentDescriptorArray wraps [raw.MTLResourceStatePassSampleBufferAttachmentDescriptorArray] with a fluent Go API.
 type ResourceStatePassSampleBufferAttachmentDescriptorArray struct {
 	inner *raw.MTLResourceStatePassSampleBufferAttachmentDescriptorArray
@@ -37,6 +39,8 @@ func NewResourceStatePassSampleBufferAttachmentDescriptorArray() *ResourceStateP
 	return &ResourceStatePassSampleBufferAttachmentDescriptorArray{inner: raw.MTLResourceStatePassSampleBufferAttachmentDescriptorArrayFromID(_id)}
 }
 
+// Returns the descriptor object for the specified sample buffer attachment.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *ResourceStatePassSampleBufferAttachmentDescriptor {
 	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
@@ -46,6 +50,8 @@ func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexed
 	return &ResourceStatePassSampleBufferAttachmentDescriptor{inner: _r}
 }
 
+// Sets the descriptor object for the specified sample buffer attachment.
+//
 // SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
 func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLResourceStatePassSampleBufferAttachmentDescriptor, attachmentIndex uint) {
 	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)

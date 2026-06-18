@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object for setting the Now Playing information for media that your app plays.
+//
 // NowPlayingInfoCenter wraps [raw.MPNowPlayingInfoCenter] with a fluent Go API.
 type NowPlayingInfoCenter struct {
 	inner *raw.MPNowPlayingInfoCenter
@@ -36,7 +38,7 @@ func NewNowPlayingInfoCenter() *NowPlayingInfoCenter {
 	return &NowPlayingInfoCenter{inner: raw.MPNowPlayingInfoCenterFromID(_id)}
 }
 
-// The current now playing info for the center. Setting the info to nil will clear it.
+// The current Now Playing information for the default Now Playing info center.
 //
 // WithNowPlayingInfo sets the nowPlayingInfo property and returns the receiver for chaining.
 func (x *NowPlayingInfoCenter) WithNowPlayingInfo(nowPlayingInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NowPlayingInfoCenter {
@@ -44,7 +46,7 @@ func (x *NowPlayingInfoCenter) WithNowPlayingInfo(nowPlayingInfo *foundation.NSD
 	return x
 }
 
-// The current playback state of the app. This only applies on macOS, where playback state cannot be determined by the application's audio session. This property must be set every time the app begins or halts playback, otherwise remote control functionality may not work as expected.
+// The current playback state of the app.
 //
 // WithPlaybackState sets the playbackState property and returns the receiver for chaining.
 func (x *NowPlayingInfoCenter) WithPlaybackState(playbackState MPNowPlayingPlaybackState) *NowPlayingInfoCenter {

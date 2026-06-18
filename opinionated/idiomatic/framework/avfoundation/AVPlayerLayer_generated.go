@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that presents the visual contents of a player object.
+//
 // PlayerLayer wraps [raw.AVPlayerLayer] with a fluent Go API.
 type PlayerLayer struct {
 	inner *raw.AVPlayerLayer
@@ -39,7 +41,7 @@ func NewPlayerLayer() *PlayerLayer {
 	return &PlayerLayer{inner: raw.AVPlayerLayerFromID(_id)}
 }
 
-// @property		player @abstract		Indicates the instance of AVPlayer for which the AVPlayerLayer displays visual output
+// The player whose visual content the layer displays.
 //
 // WithPlayer sets the player property and returns the receiver for chaining.
 func (x *PlayerLayer) WithPlayer(player PlayerProvider) *PlayerLayer {
@@ -47,7 +49,7 @@ func (x *PlayerLayer) WithPlayer(player PlayerProvider) *PlayerLayer {
 	return x
 }
 
-// @property		videoGravity @abstract		A string defining how the video is displayed within an AVPlayerLayer bounds rect. @discusssion	Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default. See <AVFoundation/AVAnimation.h> for a description of these options.
+// A value that specifies how the layer displays the player’s visual content within the layer’s bounds.
 //
 // WithVideoGravity sets the videoGravity property and returns the receiver for chaining.
 func (x *PlayerLayer) WithVideoGravity(videoGravity *foundation.NSString) *PlayerLayer {
@@ -55,7 +57,7 @@ func (x *PlayerLayer) WithVideoGravity(videoGravity *foundation.NSString) *Playe
 	return x
 }
 
-// @property		pixelBufferAttributes @abstract		The client requirements for the visual output displayed in AVPlayerLayer during playback. @discussion		Pixel buffer attribute keys are defined in <CoreVideo/CVPixelBuffer.h> This property is key-value observable.
+// The attributes of the visual output that displays in the player layer during playback.
 //
 // WithPixelBufferAttributes sets the pixelBufferAttributes property and returns the receiver for chaining.
 func (x *PlayerLayer) WithPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PlayerLayer {
@@ -63,21 +65,21 @@ func (x *PlayerLayer) WithPixelBufferAttributes(pixelBufferAttributes *foundatio
 	return x
 }
 
-// @method			copyDisplayedPixelBuffer @abstract		Returns a retained reference to the pixel buffer currently displayed in this AVPlayerLayer. This will return NULL if the displayed pixel buffer is protected, no image is currently being displayed, if the current player's rate is non-zero or if the image is unavailable. @discussion		This will only return the current image while the media is paused, otherwise this will return nil. Clients must release the pixel buffer after use. Do not write to the returned CVPixelBuffer's attachments or pixel data.
+// Returns the pixel buffer that the player layer currently displays.
 //
 // CopyDisplayedPixelBuffer calls the underlying CopyDisplayedPixelBuffer.
 func (x *PlayerLayer) CopyDisplayedPixelBuffer() unsafe.Pointer {
 	return x.inner.CopyDisplayedPixelBuffer()
 }
 
-// Starts displaying a caption preview with the specified accessibility profile. This method enables a preview mode that displays sample caption text using the visual appearance settings from the specified accessibility profile. The preview replaces any currently active subtitles and/or closed captions while active. The sample caption text position can be specified to avoid UI controls. - Parameters: - profileID: The identifier of the accessibility profile to use for caption appearance. Profile IDs can be obtained from `MACaptionAppearanceCopyProfileIDs()`. This determines font, color, background, and other visual characteristics. - position: A CGPoint that defines the position (in points) of the caption preview relative to the default positioning of content captions (centered near the bottom of the video). Position values can be negative. (0, 0) represents the default positioning. - text: Optional custom text to display in the preview. If `nil`, a standard localized preview message will be shown. - Note: You must call “stopShowingCaptionPreview“ to exit the preview.
+// Starts displaying a caption preview with the specified accessibility profile.
 //
 // SetCaptionPreviewProfileIDPositionText calls the underlying SetCaptionPreviewProfileIDPositionText.
 func (x *PlayerLayer) SetCaptionPreviewProfileIDPositionText(profileID string, position corefoundation.CGPoint, text string) {
 	x.inner.SetCaptionPreviewProfileIDPositionText(foundation.NSStringStringWithUTF8String(profileID), position, foundation.NSStringStringWithUTF8String(text))
 }
 
-// Stops showing the caption preview. This method stops the caption preview and restores any currently active subtitles and/or closed captions.
+// Stops showing the caption preview.
 //
 // StopShowingCaptionPreview calls the underlying StopShowingCaptionPreview.
 func (x *PlayerLayer) StopShowingCaptionPreview() {

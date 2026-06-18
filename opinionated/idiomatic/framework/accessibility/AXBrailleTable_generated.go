@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A rule for translating print text to Braille, and back-translating Braille to print text.
+//
 // BrailleTable wraps [raw.AXBrailleTable] with a fluent Go API.
 type BrailleTable struct {
 	inner *raw.AXBrailleTable

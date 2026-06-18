@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A control for selecting an item from a list.
+//
 // PopUpButton wraps [raw.NSPopUpButton] with a fluent Go API.
 type PopUpButton struct {
 	inner *raw.NSPopUpButton
@@ -35,6 +37,8 @@ func PopUpButtonFromID(id objc.ID) *PopUpButton {
 	return &PopUpButton{inner: raw.NSPopUpButtonFromID(id)}
 }
 
+// Returns an NSPopUpButton object initialized to the specified dimensions.
+//
 // NewPopUpButtonWithFramePullsDown creates a new [PopUpButton].
 func NewPopUpButtonWithFramePullsDown(buttonFrame corefoundation.CGRect, flag bool) *PopUpButton {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPopUpButton")), objc.RegisterName("alloc"))
@@ -42,7 +46,7 @@ func NewPopUpButtonWithFramePullsDown(buttonFrame corefoundation.CGRect, flag bo
 	return &PopUpButton{inner: raw.NSPopUpButtonFromID(_id)}
 }
 
-// When the value of this property is `YES` the button adopts 'pull-down' behavior, displaying static button contents and presenting its menu at the edge of the button. When the value of this property is `NO` the button behaves as a popup, displaying the currently-selected menu item and presenting its menu above the button, positioning the selected menu item to match the button's contents.
+// A Boolean value indicating whether the button displays a pull-down or pop-up menu.
 //
 // WithPullsDown sets the pullsDown property and returns the receiver for chaining.
 func (x *PopUpButton) WithPullsDown(pullsDown bool) *PopUpButton {
@@ -50,7 +54,7 @@ func (x *PopUpButton) WithPullsDown(pullsDown bool) *PopUpButton {
 	return x
 }
 
-// When the value of this property is `YES`, the popup button automatically enables and disables its menu items according to the `NSMenuValidation` protocol prior to user interaction.
+// A Boolean value indicating whether the button enables and disables its items every time a user event occurs.
 //
 // WithAutoenablesItems sets the autoenablesItems property and returns the receiver for chaining.
 func (x *PopUpButton) WithAutoenablesItems(autoenablesItems bool) *PopUpButton {
@@ -58,7 +62,7 @@ func (x *PopUpButton) WithAutoenablesItems(autoenablesItems bool) *PopUpButton {
 	return x
 }
 
-// For pull-down buttons and for popups under severe screen position restrictions, this property specifies the edge of the control that the menu should present from.
+// The edge of the button on which to display the menu when screen space is constrained.
 //
 // WithPreferredEdge sets the preferredEdge property and returns the receiver for chaining.
 func (x *PopUpButton) WithPreferredEdge(preferredEdge foundation.NSRectEdge) *PopUpButton {
@@ -66,7 +70,7 @@ func (x *PopUpButton) WithPreferredEdge(preferredEdge foundation.NSRectEdge) *Po
 	return x
 }
 
-// When `usesItemFromMenu` is `YES`, a pull-down button uses the title of the first menu item and hides the first menu item. A pop-up button uses the title of the currently selected menu. The default value is `YES`.
+// When usesItemFromMenu is YES, a pull-down button uses the title of the first menu item and hides the first menu item. A pop-up button uses the title of the currently selected menu. The default value is YES.
 //
 // WithUsesItemFromMenu sets the usesItemFromMenu property and returns the receiver for chaining.
 func (x *PopUpButton) WithUsesItemFromMenu(usesItemFromMenu bool) *PopUpButton {
@@ -74,7 +78,7 @@ func (x *PopUpButton) WithUsesItemFromMenu(usesItemFromMenu bool) *PopUpButton {
 	return x
 }
 
-// When the value of this property is `YES`, the selected menu item's `state` is set to `NSControlStateValueOn`. When the value of this property is `NO`, the menu item's `state` is not changed. When this property changes, the `state` of the currently selected item is updated appropriately. This property is ignored for pull-down buttons.
+// When the value of this property is YES, the selected menu item’s state is set to NSControlStateValueOn. When the value of this property is NO, the menu item’s state is not changed. When this property changes, the state of the currently selected item is updated appropriately. This property is ignored for pull-down buttons.
 //
 // WithAltersStateOfSelectedItem sets the altersStateOfSelectedItem property and returns the receiver for chaining.
 func (x *PopUpButton) WithAltersStateOfSelectedItem(altersStateOfSelectedItem bool) *PopUpButton {
@@ -82,7 +86,7 @@ func (x *PopUpButton) WithAltersStateOfSelectedItem(altersStateOfSelectedItem bo
 	return x
 }
 
-// The title displayed on the button when it’s in an off state, or an empty string if the button does not display a title. By default, a button's title is "Button".
+// The title displayed on the button when it’s in an off state.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *PopUpButton) WithTitle(title string) *PopUpButton {
@@ -90,7 +94,7 @@ func (x *PopUpButton) WithTitle(title string) *PopUpButton {
 	return x
 }
 
-// The button's title, expressed as an attributed string.
+// The title that the button displays in an off state, as an attributed string.
 //
 // WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
 func (x *PopUpButton) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *PopUpButton {
@@ -98,7 +102,7 @@ func (x *PopUpButton) WithAttributedTitle(attributedTitle *foundation.NSAttribut
 	return x
 }
 
-// The title that the button displays when the button is in an on state, or an empty string if there is no such title. Note that some button types do not display an alternate title.
+// The title that the button displays when the button is in an on state.
 //
 // WithAlternateTitle sets the alternateTitle property and returns the receiver for chaining.
 func (x *PopUpButton) WithAlternateTitle(alternateTitle string) *PopUpButton {
@@ -106,7 +110,7 @@ func (x *PopUpButton) WithAlternateTitle(alternateTitle string) *PopUpButton {
 	return x
 }
 
-// The alternate title, expressed as an attributed string.
+// The title that the button displays as an attributed string when the button is in an on state.
 //
 // WithAttributedAlternateTitle sets the attributedAlternateTitle property and returns the receiver for chaining.
 func (x *PopUpButton) WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *PopUpButton {
@@ -114,7 +118,7 @@ func (x *PopUpButton) WithAttributedAlternateTitle(attributedAlternateTitle *fou
 	return x
 }
 
-// Indicates whether the button's action has a destructive effect on user data.  AppKit may guard a destructive-actioned button against accidental presses, and may give the button a special appearance in certain contexts to caution against unintentional use.  Defaults to NO.
+// A Boolean value that defines whether a button’s action has a destructive effect.
 //
 // WithHasDestructiveAction sets the hasDestructiveAction property and returns the receiver for chaining.
 func (x *PopUpButton) WithHasDestructiveAction(hasDestructiveAction bool) *PopUpButton {
@@ -122,7 +126,7 @@ func (x *PopUpButton) WithHasDestructiveAction(hasDestructiveAction bool) *PopUp
 	return x
 }
 
-// The sound that plays when the user clicks the button, or nil if the button should not play a sound. The default value is nil.
+// The sound that plays when the user clicks the button.
 //
 // WithSound sets the sound property and returns the receiver for chaining.
 func (x *PopUpButton) WithSound(sound *Sound) *PopUpButton {
@@ -130,7 +134,7 @@ func (x *PopUpButton) WithSound(sound *Sound) *PopUpButton {
 	return x
 }
 
-// Sends action on deep-press or extended hover while dragging. Defaults to NO.
+// A Boolean value that indicates whether spring loading is enabled for the button.
 //
 // WithSpringLoaded sets the springLoaded property and returns the receiver for chaining.
 func (x *PopUpButton) WithSpringLoaded(springLoaded bool) *PopUpButton {
@@ -138,7 +142,7 @@ func (x *PopUpButton) WithSpringLoaded(springLoaded bool) *PopUpButton {
 	return x
 }
 
-// Configures the maximum allowed level for an NSMultiLevelAcceleratorButton, allowed values range from [1,5]. Defaults to 2.
+// An integer value indicating the maximum pressure level for a button of type NSMultiLevelAcceleratorButton.
 //
 // WithMaxAcceleratorLevel sets the maxAcceleratorLevel property and returns the receiver for chaining.
 func (x *PopUpButton) WithMaxAcceleratorLevel(maxAcceleratorLevel int) *PopUpButton {
@@ -146,7 +150,7 @@ func (x *PopUpButton) WithMaxAcceleratorLevel(maxAcceleratorLevel int) *PopUpBut
 	return x
 }
 
-// The bezel style of the button, which provides a set of bezel artwork, layout metrics, and content styling from a set of system-provided styles. See the NSBezelStyle enumeration for a list of available styles. The bezel style is not used if the `bordered` property is set to `NO`.
+// The appearance of the button’s border.
 //
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
 func (x *PopUpButton) WithBezelStyle(bezelStyle NSBezelStyle) *PopUpButton {
@@ -154,7 +158,7 @@ func (x *PopUpButton) WithBezelStyle(bezelStyle NSBezelStyle) *PopUpButton {
 	return x
 }
 
-// A Boolean value that determines whether the button draws a border.
+// A Boolean value that determines whether the button has a border.
 //
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *PopUpButton) WithBordered(bordered bool) *PopUpButton {
@@ -162,7 +166,7 @@ func (x *PopUpButton) WithBordered(bordered bool) *PopUpButton {
 	return x
 }
 
-// A Boolean value that indicates whether the button is transparent. A transparent button never draws itself, but it receives mouse events, sends its action, and tracks the mouse properly.
+// A Boolean value that indicates whether the button is transparent.
 //
 // WithTransparent sets the transparent property and returns the receiver for chaining.
 func (x *PopUpButton) WithTransparent(transparent bool) *PopUpButton {
@@ -170,13 +174,15 @@ func (x *PopUpButton) WithTransparent(transparent bool) *PopUpButton {
 	return x
 }
 
+// A Boolean value that determines whether the button displays its border only when the pointer is over it.
+//
 // WithShowsBorderOnlyWhileMouseInside sets the showsBorderOnlyWhileMouseInside property and returns the receiver for chaining.
 func (x *PopUpButton) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *PopUpButton {
 	x.inner.NSButton.SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside)
 	return x
 }
 
-// Applies a custom color to the button's bezel, in appearances that support it. A nil value indicates an unmodified button appearance. The default value is nil.
+// The color of the button’s bezel, in appearances that support it.
 //
 // WithBezelColor sets the bezelColor property and returns the receiver for chaining.
 func (x *PopUpButton) WithBezelColor(bezelColor *Color) *PopUpButton {
@@ -184,7 +190,7 @@ func (x *PopUpButton) WithBezelColor(bezelColor *Color) *PopUpButton {
 	return x
 }
 
-// Applies a tint color to template image and text content, in combination with other theme-appropriate effects. Only applicable to borderless buttons. A nil value indicates the standard set of effects without color modification. The default value is nil. Non-template images and attributed string values are not affected by the contentTintColor.
+// A tint color to use for the template image and text content.
 //
 // WithContentTintColor sets the contentTintColor property and returns the receiver for chaining.
 func (x *PopUpButton) WithContentTintColor(contentTintColor *Color) *PopUpButton {
@@ -192,7 +198,7 @@ func (x *PopUpButton) WithContentTintColor(contentTintColor *Color) *PopUpButton
 	return x
 }
 
-// The tint prominence of the button. Use tint prominence to gently suggest a hierarchy when multiple buttons perform similar actions. A button with primary tint prominence suggests the most preferred option, while secondary prominence indicates a reasonable alternative. See “NSTintProminence“ for a list of possible values.
+// The tint prominence of the button. Use tint prominence to gently suggest a hierarchy when multiple buttons perform similar actions. A button with primary tint prominence suggests the most preferred option, while secondary prominence indicates a reasonable alternative. See NSTintProminence for a list of possible values.
 //
 // WithTintProminence sets the tintProminence property and returns the receiver for chaining.
 func (x *PopUpButton) WithTintProminence(tintProminence NSTintProminence) *PopUpButton {
@@ -208,7 +214,7 @@ func (x *PopUpButton) WithImage(image *Image) *PopUpButton {
 	return x
 }
 
-// An alternate image that appears on the button when the button is in an on state, or nil if there is no such image. Note that some button types do not display an alternate image.
+// An alternate image that appears on the button when the button is in an on state.
 //
 // WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
 func (x *PopUpButton) WithAlternateImage(alternateImage *Image) *PopUpButton {
@@ -216,7 +222,7 @@ func (x *PopUpButton) WithAlternateImage(alternateImage *Image) *PopUpButton {
 	return x
 }
 
-// The position of the button's image relative to its title. See the NSCellImagePosition enumeration for possible values.
+// The position of the button’s image relative to its title.
 //
 // WithImagePosition sets the imagePosition property and returns the receiver for chaining.
 func (x *PopUpButton) WithImagePosition(imagePosition NSCellImagePosition) *PopUpButton {
@@ -224,7 +230,7 @@ func (x *PopUpButton) WithImagePosition(imagePosition NSCellImagePosition) *PopU
 	return x
 }
 
-// The scaling mode applied to make the button's image fit within its bounds.
+// The scaling mode applied to make the cell’s image fit the frame of the image view.
 //
 // WithImageScaling sets the imageScaling property and returns the receiver for chaining.
 func (x *PopUpButton) WithImageScaling(imageScaling NSImageScaling) *PopUpButton {
@@ -232,7 +238,7 @@ func (x *PopUpButton) WithImageScaling(imageScaling NSImageScaling) *PopUpButton
 	return x
 }
 
-// A Boolean value that determines how the button's image and title are positioned together within the button bezel. If false, the image is positioned according to the imagePosition property at the edge of the button bezel, and the title is positioned within the remaining space. If true, the button’s image is positioned directly adjacent to the title based on the imagePosition property, and the image and title are positioned within the button bezel as a single unit.
+// A Boolean value that determines how the button’s image and title are positioned together within the button bezel.
 //
 // WithImageHugsTitle sets the imageHugsTitle property and returns the receiver for chaining.
 func (x *PopUpButton) WithImageHugsTitle(imageHugsTitle bool) *PopUpButton {
@@ -240,7 +246,7 @@ func (x *PopUpButton) WithImageHugsTitle(imageHugsTitle bool) *PopUpButton {
 	return x
 }
 
-// Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the symbol is matched to the button's `font` property. The default value is nil.
+// The combination of point size, weight, and scale to use when sizing and displaying symbol images.
 //
 // WithSymbolConfiguration sets the symbolConfiguration property and returns the receiver for chaining.
 func (x *PopUpButton) WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *PopUpButton {
@@ -248,7 +254,7 @@ func (x *PopUpButton) WithSymbolConfiguration(symbolConfiguration *ImageSymbolCo
 	return x
 }
 
-// The button's state. Buttons support the off and on states, and an additional mixed state depending on the value of the `allowsMixedState` property.
+// The button’s state.
 //
 // WithState sets the state property and returns the receiver for chaining.
 func (x *PopUpButton) WithState(state int) *PopUpButton {
@@ -256,7 +262,7 @@ func (x *PopUpButton) WithState(state int) *PopUpButton {
 	return x
 }
 
-// A Boolean value that indicates whether the button allows a mixed state. If NO, the button has two states (on and off), and if YES, the button has three states (on, off, and mixed). The mixed state is commonly used with checkboxes and radio buttons to indicate a value which is partially on.
+// A Boolean value that indicates whether the button allows a mixed state.
 //
 // WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
 func (x *PopUpButton) WithAllowsMixedState(allowsMixedState bool) *PopUpButton {
@@ -264,7 +270,7 @@ func (x *PopUpButton) WithAllowsMixedState(allowsMixedState bool) *PopUpButton {
 	return x
 }
 
-// This property contains the button's key equivalent, or the empty string if no equivalent has been defined. Buttons don’t have a default key equivalent. Setting the key equivalent to the Return character causes it to act as the default button for its window.
+// The key-equivalent character of the button.
 //
 // WithKeyEquivalent sets the keyEquivalent property and returns the receiver for chaining.
 func (x *PopUpButton) WithKeyEquivalent(keyEquivalent string) *PopUpButton {
@@ -272,7 +278,7 @@ func (x *PopUpButton) WithKeyEquivalent(keyEquivalent string) *PopUpButton {
 	return x
 }
 
-// A bitmask specifying the modifier keys that are applied to the button's key equivalent. Mask bits are defined by the NSEventModifierFlags option set. The only mask bits relevant in button key-equivalent modifier masks are NSEventModifierFlagControl, NSEventModifierFlagOption, and NSEventModifierFlagCommand.
+// The mask specifying the modifier keys for the button’s key equivalent.
 //
 // WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
 func (x *PopUpButton) WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *PopUpButton {
@@ -286,138 +292,184 @@ func (x *PopUpButton) WithBorderShape(borderShape NSControlBorderShape) *PopUpBu
 	return x
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *PopUpButton) WithTarget(target objc.ID) *PopUpButton {
 	x.inner.NSButton.NSControl.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *PopUpButton) WithAction(action objc.SEL) *PopUpButton {
 	x.inner.NSButton.NSControl.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *PopUpButton) WithTag(tag int) *PopUpButton {
 	x.inner.NSButton.NSControl.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *PopUpButton) WithIgnoresMultiClick(ignoresMultiClick bool) *PopUpButton {
 	x.inner.NSButton.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *PopUpButton) WithContinuous(continuous bool) *PopUpButton {
 	x.inner.NSButton.NSControl.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *PopUpButton) WithEnabled(enabled bool) *PopUpButton {
 	x.inner.NSButton.NSControl.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *PopUpButton) WithRefusesFirstResponder(refusesFirstResponder bool) *PopUpButton {
 	x.inner.NSButton.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *PopUpButton) WithHighlighted(highlighted bool) *PopUpButton {
 	x.inner.NSButton.NSControl.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *PopUpButton) WithControlSize(controlSize NSControlSize) *PopUpButton {
 	x.inner.NSButton.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *PopUpButton) WithFormatter(formatter *foundation.NSFormatter) *PopUpButton {
 	x.inner.NSButton.NSControl.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *PopUpButton) WithObjectValue(objectValue objc.ID) *PopUpButton {
 	x.inner.NSButton.NSControl.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *PopUpButton) WithStringValue(stringValue string) *PopUpButton {
 	x.inner.NSButton.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *PopUpButton) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *PopUpButton {
 	x.inner.NSButton.NSControl.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *PopUpButton) WithIntValue(intValue int) *PopUpButton {
 	x.inner.NSButton.NSControl.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *PopUpButton) WithIntegerValue(integerValue int) *PopUpButton {
 	x.inner.NSButton.NSControl.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *PopUpButton) WithFloatValue(floatValue float32) *PopUpButton {
 	x.inner.NSButton.NSControl.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *PopUpButton) WithDoubleValue(doubleValue float64) *PopUpButton {
 	x.inner.NSButton.NSControl.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *PopUpButton) WithFont(font *Font) *PopUpButton {
 	x.inner.NSButton.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *PopUpButton) WithUsesSingleLineMode(usesSingleLineMode bool) *PopUpButton {
 	x.inner.NSButton.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *PopUpButton) WithLineBreakMode(lineBreakMode NSLineBreakMode) *PopUpButton {
 	x.inner.NSButton.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *PopUpButton) WithAlignment(alignment NSTextAlignment) *PopUpButton {
 	x.inner.NSButton.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *PopUpButton) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *PopUpButton {
 	x.inner.NSButton.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *PopUpButton) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PopUpButton {
 	x.inner.NSButton.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -472,6 +524,8 @@ func (x *PopUpButton) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOp
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *PopUpButton) WithFrame(frame corefoundation.CGRect) *PopUpButton {
 	x.inner.NSButton.NSControl.NSView.SetFrame(frame)
@@ -496,6 +550,8 @@ func (x *PopUpButton) WithBoundsRotation(boundsRotation float64) *PopUpButton {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *PopUpButton) WithBounds(bounds corefoundation.CGRect) *PopUpButton {
 	x.inner.NSButton.NSControl.NSView.SetBounds(bounds)
@@ -508,6 +564,8 @@ func (x *PopUpButton) WithCanDrawConcurrently(canDrawConcurrently bool) *PopUpBu
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *PopUpButton) WithNeedsDisplay(needsDisplay bool) *PopUpButton {
 	x.inner.NSButton.NSControl.NSView.SetNeedsDisplay(needsDisplay)
@@ -694,7 +752,7 @@ func (x *PopUpButton) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foun
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *PopUpButton) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PopUpButton {
@@ -750,85 +808,117 @@ func (x *PopUpButton) WithPressureConfiguration(pressureConfiguration *PressureC
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *PopUpButton) WithNextResponder(nextResponder ResponderProvider) *PopUpButton {
 	x.inner.NSButton.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *PopUpButton) WithMenu(menu *Menu) *PopUpButton {
 	x.inner.NSButton.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *PopUpButton) WithUserActivity(userActivity *foundation.NSUserActivity) *PopUpButton {
 	x.inner.NSButton.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *PopUpButton) WithTouchBar(touchBar *TouchBar) *PopUpButton {
 	x.inner.NSButton.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Adds an item with the specified title to the end of the menu.
+//
 // AddItemWithTitle calls the underlying AddItemWithTitle.
 func (x *PopUpButton) AddItemWithTitle(title string) {
 	x.inner.AddItemWithTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// Adds multiple items to the end of the menu.
+//
 // AddItemsWithTitles calls the underlying AddItemsWithTitles.
 func (x *PopUpButton) AddItemsWithTitles(itemTitles *foundation.NSArray[*foundation.NSString]) {
 	x.inner.AddItemsWithTitles(itemTitles)
 }
 
+// Inserts an item at the specified position in the menu.
+//
 // InsertItemWithTitleAtIndex calls the underlying InsertItemWithTitleAtIndex.
 func (x *PopUpButton) InsertItemWithTitleAtIndex(title string, index int) {
 	x.inner.InsertItemWithTitleAtIndex(foundation.NSStringStringWithUTF8String(title), index)
 }
 
+// Removes the item with the specified title from the menu.
+//
 // RemoveItemWithTitle calls the underlying RemoveItemWithTitle.
 func (x *PopUpButton) RemoveItemWithTitle(title string) {
 	x.inner.RemoveItemWithTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// Removes the item at the specified index.
+//
 // RemoveItemAtIndex calls the underlying RemoveItemAtIndex.
 func (x *PopUpButton) RemoveItemAtIndex(index int) {
 	x.inner.RemoveItemAtIndex(index)
 }
 
+// Removes all items in the receiver’s item menu.
+//
 // RemoveAllItems calls the underlying RemoveAllItems.
 func (x *PopUpButton) RemoveAllItems() {
 	x.inner.RemoveAllItems()
 }
 
+// Returns the index of the specified menu item.
+//
 // IndexOfItem calls the underlying IndexOfItem.
 func (x *PopUpButton) IndexOfItem(item *raw.NSMenuItem) int {
 	return x.inner.IndexOfItem(item)
 }
 
+// Returns the index of the item with the specified title.
+//
 // IndexOfItemWithTitle calls the underlying IndexOfItemWithTitle.
 func (x *PopUpButton) IndexOfItemWithTitle(title string) int {
 	return x.inner.IndexOfItemWithTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// Returns the index of the menu item with the specified tag.
+//
 // IndexOfItemWithTag calls the underlying IndexOfItemWithTag.
 func (x *PopUpButton) IndexOfItemWithTag(tag int) int {
 	return x.inner.IndexOfItemWithTag(tag)
 }
 
+// Returns the index of the menu item that holds the specified represented object.
+//
 // IndexOfItemWithRepresentedObject calls the underlying IndexOfItemWithRepresentedObject.
 func (x *PopUpButton) IndexOfItemWithRepresentedObject(obj objc.ID) int {
 	return x.inner.IndexOfItemWithRepresentedObject(obj)
 }
 
+// Returns the index of the menu item with the specified target and action.
+//
 // IndexOfItemWithTargetAndAction calls the underlying IndexOfItemWithTargetAndAction.
 func (x *PopUpButton) IndexOfItemWithTargetAndAction(target objc.ID, actionSelector objc.SEL) int {
 	return x.inner.IndexOfItemWithTargetAndAction(target, actionSelector)
 }
 
+// Returns the menu item at the specified index.
+//
 // ItemAtIndex calls the underlying ItemAtIndex.
 func (x *PopUpButton) ItemAtIndex(index int) *MenuItem {
 	_r := x.inner.ItemAtIndex(index)
@@ -838,6 +928,8 @@ func (x *PopUpButton) ItemAtIndex(index int) *MenuItem {
 	return &MenuItem{inner: _r}
 }
 
+// Returns the menu item with the specified title.
+//
 // ItemWithTitle calls the underlying ItemWithTitle.
 func (x *PopUpButton) ItemWithTitle(title string) *MenuItem {
 	_r := x.inner.ItemWithTitle(foundation.NSStringStringWithUTF8String(title))
@@ -847,31 +939,43 @@ func (x *PopUpButton) ItemWithTitle(title string) *MenuItem {
 	return &MenuItem{inner: _r}
 }
 
+// Selects the specified menu item.
+//
 // SelectItem calls the underlying SelectItem.
 func (x *PopUpButton) SelectItem(item *raw.NSMenuItem) {
 	x.inner.SelectItem(item)
 }
 
+// Selects the item in the menu at the specified index.
+//
 // SelectItemAtIndex calls the underlying SelectItemAtIndex.
 func (x *PopUpButton) SelectItemAtIndex(index int) {
 	x.inner.SelectItemAtIndex(index)
 }
 
+// Selects the item with the specified title.
+//
 // SelectItemWithTitle calls the underlying SelectItemWithTitle.
 func (x *PopUpButton) SelectItemWithTitle(title string) {
 	x.inner.SelectItemWithTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// Selects the menu item with the specified tag.
+//
 // SelectItemWithTag calls the underlying SelectItemWithTag.
 func (x *PopUpButton) SelectItemWithTag(tag int) bool {
 	return x.inner.SelectItemWithTag(tag)
 }
 
+// Ensures that the item being displayed by the receiver agrees with the selected item.
+//
 // SynchronizeTitleAndSelectedItem calls the underlying SynchronizeTitleAndSelectedItem.
 func (x *PopUpButton) SynchronizeTitleAndSelectedItem() {
 	x.inner.SynchronizeTitleAndSelectedItem()
 }
 
+// Returns the title of the item at the specified index.
+//
 // ItemTitleAtIndex calls the underlying ItemTitleAtIndex.
 func (x *PopUpButton) ItemTitleAtIndex(index int) string {
 	_r := x.inner.ItemTitleAtIndex(index)

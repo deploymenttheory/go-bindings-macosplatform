@@ -12,7 +12,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Database of focus decisions with methods to change them. Knows what has been detected in each frame and which detection is being focused on. All operations are executed in a thread-safe manner, but that also means that a long-running update can stall a lookup. Best practice is to lookup what you need up front (outside your critical code) and pass the immutable results to where it's needed. That way, you're not blocked when you access the information, say inside the rendering portion of your code.
+// A collection of focus decisions, focus transitions, detections, and detection tracks associated with a movie captured in Cinematic mode and methods to change them.
 //
 // Script wraps [raw.CNScript] with a fluent Go API.
 type Script struct {

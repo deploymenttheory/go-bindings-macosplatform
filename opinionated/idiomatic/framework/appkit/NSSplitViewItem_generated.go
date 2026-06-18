@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An item in a split view controller.
+//
 // SplitViewItem wraps [raw.NSSplitViewItem] with a fluent Go API.
 type SplitViewItem struct {
 	inner *raw.NSSplitViewItem
@@ -38,7 +40,7 @@ func NewSplitViewItem() *SplitViewItem {
 	return &SplitViewItem{inner: raw.NSSplitViewItemFromID(_id)}
 }
 
-// The view controller represented by the SplitViewItem. An exception will be thrown if a new viewController is set while the receiving SplitViewItem is added to a SplitViewController.
+// The view controller that the split view item represents.
 //
 // WithViewController sets the viewController property and returns the receiver for chaining.
 func (x *SplitViewItem) WithViewController(viewController ViewControllerProvider) *SplitViewItem {
@@ -46,7 +48,7 @@ func (x *SplitViewItem) WithViewController(viewController ViewControllerProvider
 	return x
 }
 
-// Whether or not the child ViewController corresponding to the SplitViewItem is collapsed in the SplitViewController. The default is \c NO. This can be set with the animator proxy to animate the collapse or uncollapse. The exact animation used can be customized by setting it in the -animations dictionary with a key of "collapsed". If this is set to YES before it is added to the SplitViewController, it will be initially collapsed and the SplitViewController will not cause the view to be loaded until it is uncollapsed. This is KVC/KVO compliant and will be updated if the value changes from user interaction.
+// A Boolean value that determines whether the child view controller that corresponds to the split view item is in a collapsed state in the split view controller.
 //
 // WithCollapsed sets the collapsed property and returns the receiver for chaining.
 func (x *SplitViewItem) WithCollapsed(collapsed bool) *SplitViewItem {
@@ -54,7 +56,7 @@ func (x *SplitViewItem) WithCollapsed(collapsed bool) *SplitViewItem {
 	return x
 }
 
-// Whether or not the child view controller is collapsible from user interaction - whether by dragging or double clicking a divider. The default is \c NO.
+// A Boolean value that determines whether a user interaction can collapse the child view controller that corresponds to the split view item.
 //
 // WithCanCollapse sets the canCollapse property and returns the receiver for chaining.
 func (x *SplitViewItem) WithCanCollapse(canCollapse bool) *SplitViewItem {
@@ -62,7 +64,7 @@ func (x *SplitViewItem) WithCanCollapse(canCollapse bool) *SplitViewItem {
 	return x
 }
 
-// The resize behavior when the receiver toggles its `collapsed` state programmatically, both animatedly and not. Defaults to `.Default`.
+// The resizing behavior when the split view item toggles its collapsed state.
 //
 // WithCollapseBehavior sets the collapseBehavior property and returns the receiver for chaining.
 func (x *SplitViewItem) WithCollapseBehavior(collapseBehavior NSSplitViewItemCollapseBehavior) *SplitViewItem {
@@ -70,7 +72,7 @@ func (x *SplitViewItem) WithCollapseBehavior(collapseBehavior NSSplitViewItemCol
 	return x
 }
 
-// A convenience to set the minimum thickness of the split view item -- width for "vertical" split views, height otherwise. If NSSplitViewItemUnspecifiedDimension, no minimum size is enforced by the SplitViewItem, although constraints in the contained view hierarchy might have constraints specify some minimum size on their own. Defaults to NSSplitViewItemUnspecifiedDimension.
+// The minimum thickness of the split view item.
 //
 // WithMinimumThickness sets the minimumThickness property and returns the receiver for chaining.
 func (x *SplitViewItem) WithMinimumThickness(minimumThickness float64) *SplitViewItem {
@@ -78,7 +80,7 @@ func (x *SplitViewItem) WithMinimumThickness(minimumThickness float64) *SplitVie
 	return x
 }
 
-// A convenience to set the maximum thickness of the split view item -- width for "vertical" split views, height otherwise. If NSSplitViewItemUnspecifiedDimension, no maximum size is enforced by the SplitViewItem, although constraints in the contained view hierarchy might have constraints specify some maximum size on their own. Defaults to NSSplitViewItemUnspecifiedDimension.
+// The maximum thickness of the split view item.
 //
 // WithMaximumThickness sets the maximumThickness property and returns the receiver for chaining.
 func (x *SplitViewItem) WithMaximumThickness(maximumThickness float64) *SplitViewItem {
@@ -86,7 +88,7 @@ func (x *SplitViewItem) WithMaximumThickness(maximumThickness float64) *SplitVie
 	return x
 }
 
-// The percentage of the contained NSSplitView that the NSSplitViewItem prefers to encompass. This is used when double-clicking on a neighbor divider to return to that standard ratio. As well as after entering fullscreen to determine the initial size of the receiver. Defaults to NSSplitViewItemUnspecifiedDimension, which means no resize will occur on double-clicks, and the absolute size is preserved when entering fullscreen.
+// The preferred thickness of the split view item relative to the split view.
 //
 // WithPreferredThicknessFraction sets the preferredThicknessFraction property and returns the receiver for chaining.
 func (x *SplitViewItem) WithPreferredThicknessFraction(preferredThicknessFraction float64) *SplitViewItem {
@@ -94,7 +96,7 @@ func (x *SplitViewItem) WithPreferredThicknessFraction(preferredThicknessFractio
 	return x
 }
 
-// Sets the priority under which a SplitViewItem will hold its width (for a vertical split view) or height (for a horizontal split view). The view with the lowest priority will be the first to take on additional width if the split view grows or shrinks. The default is \c NSLayoutPriorityDefaultLow.
+// The priority for a split view item to hold its size.
 //
 // WithHoldingPriority sets the holdingPriority property and returns the receiver for chaining.
 func (x *SplitViewItem) WithHoldingPriority(holdingPriority float32) *SplitViewItem {
@@ -102,7 +104,7 @@ func (x *SplitViewItem) WithHoldingPriority(holdingPriority float32) *SplitViewI
 	return x
 }
 
-// The maximum thickness of the split view item when resizing due to automatic sizing, such as entering fullscreen with a set preferredThicknessFraction or proportional sizing. The user can still resize up to the absolute maximum size by dragging the divider or otherwise. If NSSplitViewItemUnspecifiedDimension, no automatic maximum is enforced. Defaults to NSSplitViewItemUnspecifiedDimension.
+// The maximum thickness of the split view item when it resizes due to automatic sizing.
 //
 // WithAutomaticMaximumThickness sets the automaticMaximumThickness property and returns the receiver for chaining.
 func (x *SplitViewItem) WithAutomaticMaximumThickness(automaticMaximumThickness float64) *SplitViewItem {
@@ -110,7 +112,7 @@ func (x *SplitViewItem) WithAutomaticMaximumThickness(automaticMaximumThickness 
 	return x
 }
 
-// If YES, the split view item can be temporarily uncollapsed during a drag by hovering or deep clicking on its neighboring divider. Defaults to NO.
+// A Boolean value that determines whether the split view item can temporarily expand during a drag.
 //
 // WithSpringLoaded sets the springLoaded property and returns the receiver for chaining.
 func (x *SplitViewItem) WithSpringLoaded(springLoaded bool) *SplitViewItem {
@@ -118,7 +120,7 @@ func (x *SplitViewItem) WithSpringLoaded(springLoaded bool) *SplitViewItem {
 	return x
 }
 
-// If YES, the item can be collapsed from a window resize. This can differ from `canCollapse`, to allow divider collapsing but not window resize collapsing or vice versa. Defaults to YES for Sidebars and NO for Inspectors. - Note: Setting `canCollapse` for sidebars will reset this value to that new value.
+// A Boolean value that determines whether a window resize can collapse the child view controller that corresponds to the split view item.
 //
 // WithCanCollapseFromWindowResize sets the canCollapseFromWindowResize property and returns the receiver for chaining.
 func (x *SplitViewItem) WithCanCollapseFromWindowResize(canCollapseFromWindowResize bool) *SplitViewItem {
@@ -126,7 +128,7 @@ func (x *SplitViewItem) WithCanCollapseFromWindowResize(canCollapseFromWindowRes
 	return x
 }
 
-// Whether or not a sidebar or inspector is allowed to be full height in the window when the `NSFullSizeContentViewWindowMask` style mask is also set. Only applies to NSSplitViewItemBehaviorSidebar and NSSplitViewItemBehaviorInspector. Defaults to YES.
+// A Boolean value that indicates whether full-height sidebars appear in the window after you set a style mask.
 //
 // WithAllowsFullHeightLayout sets the allowsFullHeightLayout property and returns the receiver for chaining.
 func (x *SplitViewItem) WithAllowsFullHeightLayout(allowsFullHeightLayout bool) *SplitViewItem {
@@ -134,7 +136,7 @@ func (x *SplitViewItem) WithAllowsFullHeightLayout(allowsFullHeightLayout bool) 
 	return x
 }
 
-// Specifies a preference for the style of separator displayed between the titlebar and the content of the split view item. For this value to be applicable, the item's view must be associated with its own titlebar section (see `NSTrackingSeparatorToolbarItem` for more info). The default value is NSTitlebarSeparatorStyleAutomatic. This value is subject to the containing window's preference and can be overridden.
+// The type of separator that the app displays between the title bar and content of a window.
 //
 // WithTitlebarSeparatorStyle sets the titlebarSeparatorStyle property and returns the receiver for chaining.
 func (x *SplitViewItem) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *SplitViewItem {
@@ -142,7 +144,7 @@ func (x *SplitViewItem) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitl
 	return x
 }
 
-// When YES, other items such as sidebars or inspectors may appear overlaid on top of this item's `viewController` and this item's `safeAreaInsets` will be adjusted with respect to overlaid content. Defaults to `NO`.
+// When YES, other items such as sidebars or inspectors may appear overlaid on top of this item’s viewController and this item’s safeAreaInsets will be adjusted with respect to overlaid content. Defaults to NO.
 //
 // WithAutomaticallyAdjustsSafeAreaInsets sets the automaticallyAdjustsSafeAreaInsets property and returns the receiver for chaining.
 func (x *SplitViewItem) WithAutomaticallyAdjustsSafeAreaInsets(automaticallyAdjustsSafeAreaInsets bool) *SplitViewItem {
@@ -150,7 +152,7 @@ func (x *SplitViewItem) WithAutomaticallyAdjustsSafeAreaInsets(automaticallyAdju
 	return x
 }
 
-// The following methods allow you to add accessory views to the top/bottom of this splitViewItem. See `NSSplitViewItemAccessoryViewController` for more details.
+// The following methods allow you to add accessory views to the top/bottom of this splitViewItem. See NSSplitViewItemAccessoryViewController for more details.
 //
 // WithTopAlignedAccessoryViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *SplitViewItem) WithTopAlignedAccessoryViewControllers(items ...*raw.NSSplitViewItemAccessoryViewController) *SplitViewItem {
@@ -198,7 +200,7 @@ func (x *SplitViewItem) InsertTopAlignedAccessoryViewControllerAtIndex(childView
 	x.inner.InsertTopAlignedAccessoryViewControllerAtIndex(childViewController, index)
 }
 
-// NOTE: you can use this method, or `-removeFromParentViewController:`, whichever is easier.
+// NOTE: you can use this method, or -removeFromParentViewController:, whichever is easier.
 //
 // RemoveTopAlignedAccessoryViewControllerAtIndex calls the underlying RemoveTopAlignedAccessoryViewControllerAtIndex.
 func (x *SplitViewItem) RemoveTopAlignedAccessoryViewControllerAtIndex(index int) {
@@ -215,7 +217,7 @@ func (x *SplitViewItem) InsertBottomAlignedAccessoryViewControllerAtIndex(childV
 	x.inner.InsertBottomAlignedAccessoryViewControllerAtIndex(childViewController, index)
 }
 
-// NOTE: you can use this method, or `-removeFromParentViewController:`, whichever is easier.
+// NOTE: you can use this method, or -removeFromParentViewController:, whichever is easier.
 //
 // RemoveBottomAlignedAccessoryViewControllerAtIndex calls the underlying RemoveBottomAlignedAccessoryViewControllerAtIndex.
 func (x *SplitViewItem) RemoveBottomAlignedAccessoryViewControllerAtIndex(index int) {

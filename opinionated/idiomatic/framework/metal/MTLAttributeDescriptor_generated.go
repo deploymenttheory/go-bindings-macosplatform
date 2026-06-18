@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A descriptor of an argument’s format and where its data is in memory.
+//
 // AttributeDescriptor wraps [raw.MTLAttributeDescriptor] with a fluent Go API.
 type AttributeDescriptor struct {
 	inner *raw.MTLAttributeDescriptor
@@ -35,18 +37,24 @@ func NewAttributeDescriptor() *AttributeDescriptor {
 	return &AttributeDescriptor{inner: raw.MTLAttributeDescriptorFromID(_id)}
 }
 
+// The format of the attribute’s data.
+//
 // WithFormat sets the format property and returns the receiver for chaining.
 func (x *AttributeDescriptor) WithFormat(format MTLAttributeFormat) *AttributeDescriptor {
 	x.inner.SetFormat(raw.MTLAttributeFormat(format))
 	return x
 }
 
+// The offset, in bytes, from the start of the buffer that contains the attribute data to the start of the data itself.
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *AttributeDescriptor) WithOffset(offset uint) *AttributeDescriptor {
 	x.inner.SetOffset(offset)
 	return x
 }
 
+// The index in the buffer argument table for the buffer that contains the data for this attribute.
+//
 // WithBufferIndex sets the bufferIndex property and returns the receiver for chaining.
 func (x *AttributeDescriptor) WithBufferIndex(bufferIndex uint) *AttributeDescriptor {
 	x.inner.SetBufferIndex(bufferIndex)

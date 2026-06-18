@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The QCView class is a custom NSView class that loads, plays, and controls Quartz Composer compositions. It is an autonomous view that is driven by an internal timer running on the main thread.
+//
 // QCView wraps [raw.QCView] with a fluent Go API.
 type QCView struct {
 	inner *raw.QCView
@@ -37,16 +39,22 @@ func NewQCView() *QCView {
 	return &QCView{inner: raw.QCViewFromID(_id)}
 }
 
+// Loads the composition file located at the specified path.
+//
 // LoadCompositionFromFile calls the underlying LoadCompositionFromFile.
 func (x *QCView) LoadCompositionFromFile(path string) bool {
 	return x.inner.LoadCompositionFromFile(foundation.NSStringStringWithUTF8String(path))
 }
 
+// Loads a QCComposition object into the view.
+//
 // LoadComposition calls the underlying LoadComposition.
 func (x *QCView) LoadComposition(composition *raw.QCComposition) bool {
 	return x.inner.LoadComposition(composition)
 }
 
+// Returns the composition loaded in the view.
+//
 // LoadedComposition calls the underlying LoadedComposition.
 func (x *QCView) LoadedComposition() *QCComposition {
 	_r := x.inner.LoadedComposition()
@@ -56,106 +64,148 @@ func (x *QCView) LoadedComposition() *QCComposition {
 	return &QCComposition{inner: _r}
 }
 
+// Unloads the composition from the view.
+//
 // UnloadComposition calls the underlying UnloadComposition.
 func (x *QCView) UnloadComposition() {
 	x.inner.UnloadComposition()
 }
 
+// Sets whether the composition that is in the view starts rendering automatically when the view is put on the screen.
+//
 // SetAutostartsRendering calls the underlying SetAutostartsRendering.
 func (x *QCView) SetAutostartsRendering(flag bool) {
 	x.inner.SetAutostartsRendering(flag)
 }
 
+// Checks whether the view is set to start rendering automatically.
+//
 // AutostartsRendering calls the underlying AutostartsRendering.
 func (x *QCView) AutostartsRendering() bool {
 	return x.inner.AutostartsRendering()
 }
 
+// Sets the color used to erase the view.
+//
 // SetEraseColor calls the underlying SetEraseColor.
 func (x *QCView) SetEraseColor(color *appkit.NSColor) {
 	x.inner.SetEraseColor(color)
 }
 
+// Retrieves the current color used to erase the view.
+//
 // EraseColor calls the underlying EraseColor.
 func (x *QCView) EraseColor() *appkit.NSColor {
 	return x.inner.EraseColor()
 }
 
+// Sets the mask used to filter which types of events are forwarded from the view to the composition during rendering.
+//
 // SetEventForwardingMask calls the underlying SetEventForwardingMask.
 func (x *QCView) SetEventForwardingMask(mask uint) {
 	x.inner.SetEventForwardingMask(mask)
 }
 
+// Retrieves the mask used to filter which types of events are forwarded from the view to the composition during rendering.
+//
 // EventForwardingMask calls the underlying EventForwardingMask.
 func (x *QCView) EventForwardingMask() uint {
 	return x.inner.EventForwardingMask()
 }
 
+// Sets the maximum rendering frame rate.
+//
 // SetMaxRenderingFrameRate calls the underlying SetMaxRenderingFrameRate.
 func (x *QCView) SetMaxRenderingFrameRate(maxFPS float32) {
 	x.inner.SetMaxRenderingFrameRate(maxFPS)
 }
 
+// Returns the maximum frame rate for rendering.
+//
 // MaxRenderingFrameRate calls the underlying MaxRenderingFrameRate.
 func (x *QCView) MaxRenderingFrameRate() float32 {
 	return x.inner.MaxRenderingFrameRate()
 }
 
+// Clears the view using the current erase color.
+//
 // Erase calls the underlying Erase.
 func (x *QCView) Erase() {
 	x.inner.Erase()
 }
 
+// Starts rendering the composition that is in the view.
+//
 // StartRendering calls the underlying StartRendering.
 func (x *QCView) StartRendering() bool {
 	return x.inner.StartRendering()
 }
 
+// Overrides to perform your custom operations prior to or after rendering a frame of a composition.
+//
 // RenderAtTimeArguments calls the underlying RenderAtTimeArguments.
 func (x *QCView) RenderAtTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool {
 	return x.inner.RenderAtTimeArguments(time_, arguments)
 }
 
+// Pauses rendering in the view.
+//
 // PauseRendering calls the underlying PauseRendering.
 func (x *QCView) PauseRendering() {
 	x.inner.PauseRendering()
 }
 
+// Returns whether or not the rendering in the view is paused.
+//
 // IsPausedRendering calls the underlying IsPausedRendering.
 func (x *QCView) IsPausedRendering() bool {
 	return x.inner.IsPausedRendering()
 }
 
+// Resumes rendering a paused composition.
+//
 // ResumeRendering calls the underlying ResumeRendering.
 func (x *QCView) ResumeRendering() {
 	x.inner.ResumeRendering()
 }
 
+// Stops rendering the composition that is in the view.
+//
 // StopRendering calls the underlying StopRendering.
 func (x *QCView) StopRendering() {
 	x.inner.StopRendering()
 }
 
+// Checks whether a composition is rendering in the view.
+//
 // IsRendering calls the underlying IsRendering.
 func (x *QCView) IsRendering() bool {
 	return x.inner.IsRendering()
 }
 
+// Returns an NSImage object of the current image in the view.
+//
 // SnapshotImage calls the underlying SnapshotImage.
 func (x *QCView) SnapshotImage() *appkit.NSImage {
 	return x.inner.SnapshotImage()
 }
 
+// Returns the current image in the view as an image object of the provided image type.
+//
 // CreateSnapshotImageOfType calls the underlying CreateSnapshotImageOfType.
 func (x *QCView) CreateSnapshotImageOfType(type_ string) objc.ID {
 	return x.inner.CreateSnapshotImageOfType(foundation.NSStringStringWithUTF8String(type_))
 }
 
+// Returns the OpenGL context used by the view.
+//
 // OpenGLContext calls the underlying OpenGLContext.
 func (x *QCView) OpenGLContext() *appkit.NSOpenGLContext {
 	return x.inner.OpenGLContext()
 }
 
+// Returns the OpenGL pixel format used by the view.
+//
 // OpenGLPixelFormat calls the underlying OpenGLPixelFormat.
 func (x *QCView) OpenGLPixelFormat() *appkit.NSOpenGLPixelFormat {
 	return x.inner.OpenGLPixelFormat()

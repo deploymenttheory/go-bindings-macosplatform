@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A description of the structure, format, and layout for vertex data buffers associated with a mesh.
+//
 // VertexDescriptor wraps [raw.MDLVertexDescriptor] with a fluent Go API.
 type VertexDescriptor struct {
 	inner *raw.MDLVertexDescriptor
@@ -32,7 +34,7 @@ func VertexDescriptorFromID(id objc.ID) *VertexDescriptor {
 	return &VertexDescriptor{inner: raw.MDLVertexDescriptorFromID(id)}
 }
 
-// @method initVertexDescriptor: @abstract Initializes the object with values from supplied vertexDescriptor @discussion This performs a deep copy of all data in the supplied descriptor.
+// Creates a new vertex descriptor by performing a deep copy of the specified vertex descriptor.
 //
 // NewVertexDescriptorWithVertexDescriptor creates a new [VertexDescriptor].
 func NewVertexDescriptorWithVertexDescriptor(vertexDescriptor *raw.MDLVertexDescriptor) *VertexDescriptor {
@@ -41,7 +43,7 @@ func NewVertexDescriptorWithVertexDescriptor(vertexDescriptor *raw.MDLVertexDesc
 	return &VertexDescriptor{inner: raw.MDLVertexDescriptorFromID(_id)}
 }
 
-// @property attributes @abstract An array of MDLVertexAttribute objects @discussion ay describing the current attribute state of vertex buffers in an MDLMesh mesh
+// The list of vertex attributes described by the vertex descriptor.
 //
 // WithAttributes sets the collection, converting the Go slice to an NSMutableArray.
 func (x *VertexDescriptor) WithAttributes(items ...*raw.MDLVertexAttribute) *VertexDescriptor {
@@ -61,7 +63,7 @@ func (x *VertexDescriptor) WithAttributes(items ...*raw.MDLVertexAttribute) *Ver
 	return x
 }
 
-// @property layouts @abstract An array of MDLVertexBufferLayout @discussion An array describing the current layout state of vertex buffers in an MDLMesh mesh
+// The list of vertex buffer layouts described by the vertex descriptor.
 //
 // WithLayouts sets the collection, converting the Go slice to an NSMutableArray.
 func (x *VertexDescriptor) WithLayouts(items ...*raw.MDLVertexBufferLayout) *VertexDescriptor {
@@ -81,7 +83,7 @@ func (x *VertexDescriptor) WithLayouts(items ...*raw.MDLVertexBufferLayout) *Ver
 	return x
 }
 
-// @method attributeNamed: @abstract Retrieves the attribute with the given name @return The attribute with the supplied name or nil if attribute with the given name does not exist in the descriptor object
+// Returns the vertex attribute with the specified name in the vertex descriptor.
 //
 // AttributeNamed calls the underlying AttributeNamed.
 func (x *VertexDescriptor) AttributeNamed(name string) *VertexAttribute {
@@ -92,7 +94,7 @@ func (x *VertexDescriptor) AttributeNamed(name string) *VertexAttribute {
 	return &VertexAttribute{inner: _r}
 }
 
-// @method addOrReplaceAttribute: @abstract Replace any attribute with the same name and time, or add it if it does not already exist.
+// Adds the specified vertex attribute to the vertex descriptor, replacing any existing attribute with the same name.
 //
 // AddOrReplaceAttribute calls the underlying AddOrReplaceAttribute.
 func (x *VertexDescriptor) AddOrReplaceAttribute(attribute *raw.MDLVertexAttribute) {
@@ -106,21 +108,21 @@ func (x *VertexDescriptor) RemoveAttributeNamed(name string) {
 	x.inner.RemoveAttributeNamed(foundation.NSStringStringWithUTF8String(name))
 }
 
-// @method reset @abstract Tesets the descriptor to initial values
+// Resets a vertex descriptor to its default state.
 //
 // Reset calls the underlying Reset.
 func (x *VertexDescriptor) Reset() {
 	x.inner.Reset()
 }
 
-// @method setPackedStrides @abstract Sets the stride in each VertexBufferLout in the layouts array to the minimum value encompassing all attributes in the vertex buffer
+// Sets the stride for each vertex layout to the minimum value to pack vertex data together in a single buffer.
 //
 // SetPackedStrides calls the underlying SetPackedStrides.
 func (x *VertexDescriptor) SetPackedStrides() {
 	x.inner.SetPackedStrides()
 }
 
-// @method setPackedOffsets @abstract Sets the stride in each VertexAttribute in the attributes array to the minimum value to pack each attribute next to each other in its vertexbuffer
+// Sets the offset for each vertex attribute to the minimum value to pack vertex data together in a single buffer.
 //
 // SetPackedOffsets calls the underlying SetPackedOffsets.
 func (x *VertexDescriptor) SetPackedOffsets() {

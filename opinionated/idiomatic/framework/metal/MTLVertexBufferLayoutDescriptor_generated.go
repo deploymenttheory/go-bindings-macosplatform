@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that configures how a render pipeline fetches data to send to the vertex function.
+//
 // VertexBufferLayoutDescriptor wraps [raw.MTLVertexBufferLayoutDescriptor] with a fluent Go API.
 type VertexBufferLayoutDescriptor struct {
 	inner *raw.MTLVertexBufferLayoutDescriptor
@@ -35,18 +37,24 @@ func NewVertexBufferLayoutDescriptor() *VertexBufferLayoutDescriptor {
 	return &VertexBufferLayoutDescriptor{inner: raw.MTLVertexBufferLayoutDescriptorFromID(_id)}
 }
 
+// The number of bytes between the first byte of two consecutive vertices in a buffer.
+//
 // WithStride sets the stride property and returns the receiver for chaining.
 func (x *VertexBufferLayoutDescriptor) WithStride(stride uint) *VertexBufferLayoutDescriptor {
 	x.inner.SetStride(stride)
 	return x
 }
 
+// The circumstances under which the vertex and its attributes are presented to the vertex function.
+//
 // WithStepFunction sets the stepFunction property and returns the receiver for chaining.
 func (x *VertexBufferLayoutDescriptor) WithStepFunction(stepFunction MTLVertexStepFunction) *VertexBufferLayoutDescriptor {
 	x.inner.SetStepFunction(raw.MTLVertexStepFunction(stepFunction))
 	return x
 }
 
+// The interval at which the vertex and its attributes are presented to the vertex function.
+//
 // WithStepRate sets the stepRate property and returns the receiver for chaining.
 func (x *VertexBufferLayoutDescriptor) WithStepRate(stepRate uint) *VertexBufferLayoutDescriptor {
 	x.inner.SetStepRate(stepRate)

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a provisioned payment card for in-app payments.
+//
 // PaymentPass wraps [raw.PKPaymentPass] with a fluent Go API.
 type PaymentPass struct {
 	inner *raw.PKPaymentPass

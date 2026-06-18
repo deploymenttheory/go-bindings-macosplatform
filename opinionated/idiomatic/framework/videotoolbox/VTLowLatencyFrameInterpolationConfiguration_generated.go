@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Configuration that you use to program Video Toolbox frame processor for low-latency frame interpolation.
+//
 // LowLatencyFrameInterpolationConfiguration wraps [raw.VTLowLatencyFrameInterpolationConfiguration] with a fluent Go API.
 type LowLatencyFrameInterpolationConfiguration struct {
 	inner *raw.VTLowLatencyFrameInterpolationConfiguration
@@ -33,7 +35,7 @@ func LowLatencyFrameInterpolationConfigurationFromID(id objc.ID) *LowLatencyFram
 	return &LowLatencyFrameInterpolationConfiguration{inner: raw.VTLowLatencyFrameInterpolationConfigurationFromID(id)}
 }
 
-// Creates a new low-latency frame interpolation configuration for frame-rate conversion. The available interpolation points are the equal to the value of (2^x - 1), where x is equal to `numberOfInterpolatedFrames`. For example, - If you request 1 interpolated frame, 1 interpolation point at 0.5 is available. - If you request 2 interpolated frames, 3 interpolation points at 0.25, 0.5 and 0.75 are available. You don't need to use all available interpolation points. Setting a higher `numberOfInterpolatedFrames` increases the resolution of interpolation in some cases, but also increases latency. - Parameters: - frameWidth: Width of source frame in pixels. - frameHeight: Height of source frame in pixels. - numberOfInterpolatedFrames: The number of uniformly spaced frames that you want to be used for interpolation.
+// Creates a new low-latency frame interpolation configuration for frame-rate conversion.
 //
 // NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightNumberOfInterpolatedFrames creates a new [LowLatencyFrameInterpolationConfiguration].
 func NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightNumberOfInterpolatedFrames(frameWidth int, frameHeight int, numberOfInterpolatedFrames int) *LowLatencyFrameInterpolationConfiguration {
@@ -42,7 +44,7 @@ func NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightNumber
 	return &LowLatencyFrameInterpolationConfiguration{inner: raw.VTLowLatencyFrameInterpolationConfigurationFromID(_id)}
 }
 
-// Creates a new low-latency frame interpolation configuration for spatial scaling and temporal scaling. When you configure the processor for spatial scaling, the low-latency frame interpolation processor only supports 2x spatial upscaling and a single frame of temporal interpolation at a 0.5 interpolation phase. - Parameters: - frameWidth: Width of source frame in pixels. - frameHeight: Height of source frame in pixels. - spatialScaleFactor: The requested spatial scale factor as an integer. Currently, the processor supports only 2x spatial scaling.
+// Creates a new low-latency frame interpolation configuration for spatial scaling and temporal scaling.
 //
 // NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightSpatialScaleFactor creates a new [LowLatencyFrameInterpolationConfiguration].
 func NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightSpatialScaleFactor(frameWidth int, frameHeight int, spatialScaleFactor int) *LowLatencyFrameInterpolationConfiguration {

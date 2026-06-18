@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Information that you use to configure the sharing sheet for a pass.
+//
 // ShareablePassMetadata wraps [raw.PKShareablePassMetadata] with a fluent Go API.
 type ShareablePassMetadata struct {
 	inner *raw.PKShareablePassMetadata
@@ -32,6 +34,8 @@ func ShareablePassMetadataFromID(id objc.ID) *ShareablePassMetadata {
 	return &ShareablePassMetadata{inner: raw.PKShareablePassMetadataFromID(id)}
 }
 
+// Creates a shareable pass metadata object.
+//
 // NewShareablePassMetadataWithProvisioningCredentialIdentifierCardConfigurationIdentifierSharingInstanceIdentifierPassThumbnailImageOwnerDisplayNameLocalizedDescription creates a new [ShareablePassMetadata].
 func NewShareablePassMetadataWithProvisioningCredentialIdentifierCardConfigurationIdentifierSharingInstanceIdentifierPassThumbnailImageOwnerDisplayNameLocalizedDescription(credentialIdentifier string, cardConfigurationIdentifier string, sharingInstanceIdentifier string, passThumbnailImage unsafe.Pointer, ownerDisplayName string, localizedDescription string) *ShareablePassMetadata {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKShareablePassMetadata")), objc.RegisterName("alloc"))
@@ -72,12 +76,16 @@ func (x *ShareablePassMetadata) WithServerEnvironmentIdentifier(serverEnvironmen
 	return x
 }
 
+// An Apple Push Notification push token.
+//
 // WithAccountHash sets the accountHash property and returns the receiver for chaining.
 func (x *ShareablePassMetadata) WithAccountHash(accountHash string) *ShareablePassMetadata {
 	x.inner.SetAccountHash(foundation.NSStringStringWithUTF8String(accountHash))
 	return x
 }
 
+// An identifier used in push notifications.
+//
 // WithRelyingPartyIdentifier sets the relyingPartyIdentifier property and returns the receiver for chaining.
 func (x *ShareablePassMetadata) WithRelyingPartyIdentifier(relyingPartyIdentifier string) *ShareablePassMetadata {
 	x.inner.SetRelyingPartyIdentifier(foundation.NSStringStringWithUTF8String(relyingPartyIdentifier))

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A login session request that a web browser receives from an app.
+//
 // WebAuthenticationSessionRequest wraps [raw.ASWebAuthenticationSessionRequest] with a fluent Go API.
 type WebAuthenticationSessionRequest struct {
 	inner *raw.ASWebAuthenticationSessionRequest
@@ -40,17 +42,23 @@ func NewWebAuthenticationSessionRequest() *WebAuthenticationSessionRequest {
 	return &WebAuthenticationSessionRequest{inner: raw.ASWebAuthenticationSessionRequestFromID(_id)}
 }
 
+// A delegate that the session request instance informs about authentication completion.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *WebAuthenticationSessionRequest) WithDelegate(delegate raw.ASWebAuthenticationSessionRequestDelegate) *WebAuthenticationSessionRequest {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Indicates that the browser canceled the authentication attempt.
+//
 // CancelWithError calls the underlying CancelWithError.
 func (x *WebAuthenticationSessionRequest) CancelWithError(error_ unsafe.Pointer) {
 	x.inner.CancelWithError(error_)
 }
 
+// Indicates that the browser successfully completed the authentication attempt.
+//
 // CompleteWithCallbackURL calls the underlying CompleteWithCallbackURL.
 func (x *WebAuthenticationSessionRequest) CompleteWithCallbackURL(url string) {
 	x.inner.CompleteWithCallbackURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))

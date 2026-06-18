@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An array of attribute descriptor objects.
+//
 // AttributeDescriptorArray wraps [raw.MTLAttributeDescriptorArray] with a fluent Go API.
 type AttributeDescriptorArray struct {
 	inner *raw.MTLAttributeDescriptorArray
@@ -35,6 +37,8 @@ func NewAttributeDescriptorArray() *AttributeDescriptorArray {
 	return &AttributeDescriptorArray{inner: raw.MTLAttributeDescriptorArrayFromID(_id)}
 }
 
+// Returns the state of the specified attribute.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *AttributeDescriptorArray) ObjectAtIndexedSubscript(index uint) *AttributeDescriptor {
 	_r := x.inner.ObjectAtIndexedSubscript(index)
@@ -44,6 +48,8 @@ func (x *AttributeDescriptorArray) ObjectAtIndexedSubscript(index uint) *Attribu
 	return &AttributeDescriptor{inner: _r}
 }
 
+// Sets state for the specified attribute.
+//
 // SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
 func (x *AttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *raw.MTLAttributeDescriptor, index uint) {
 	x.inner.SetObjectAtIndexedSubscript(attributeDesc, index)

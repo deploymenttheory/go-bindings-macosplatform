@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The context an update task provides to your app’s completion and update progress handlers.
+//
 // UpdateContext wraps [raw.MLUpdateContext] with a fluent Go API.
 type UpdateContext struct {
 	inner *raw.MLUpdateContext

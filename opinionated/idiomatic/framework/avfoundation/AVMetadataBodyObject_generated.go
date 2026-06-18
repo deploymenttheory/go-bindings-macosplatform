@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class that defines the interface for a metadata body object.
+//
 // MetadataBodyObject wraps [raw.AVMetadataBodyObject] with a fluent Go API.
 type MetadataBodyObject struct {
 	inner *raw.AVMetadataBodyObject

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A Core Animation layer that derives its timing from a player item so that you can synchronize layer animations with media playback.
+//
 // SynchronizedLayer wraps [raw.AVSynchronizedLayer] with a fluent Go API.
 type SynchronizedLayer struct {
 	inner *raw.AVSynchronizedLayer
@@ -35,7 +37,7 @@ func NewSynchronizedLayer() *SynchronizedLayer {
 	return &SynchronizedLayer{inner: raw.AVSynchronizedLayerFromID(_id)}
 }
 
-// @property		playerItem @abstract		Indicates the instance of AVPlayerItem to which the timing of the AVSynchronizedLayer is synchronized. @discussion		Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+// The player item to which the timing of the layer is synchronized.
 //
 // WithPlayerItem sets the playerItem property and returns the receiver for chaining.
 func (x *SynchronizedLayer) WithPlayerItem(playerItem *PlayerItem) *SynchronizedLayer {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Describes a render pass.
+//
 // MTL4RenderPassDescriptor wraps [raw.MTL4RenderPassDescriptor] with a fluent Go API.
 type MTL4RenderPassDescriptor struct {
 	inner *raw.MTL4RenderPassDescriptor
@@ -75,7 +77,7 @@ func (x *MTL4RenderPassDescriptor) WithThreadgroupMemoryLength(threadgroupMemory
 	return x
 }
 
-// The width of the tiles, in pixels, a render pass you create with this descriptor applies to its attachments. For tile-based rendering, Metal divides each render attachment into smaller regions, or _tiles_. The property's default is `0`, which tells Metal to select a size that fits in tile memory. See <doc:tailor-your-apps-for-apple-gpus-and-tile-based-deferred-rendering> for more information about tiles, tile memory, and deferred rendering.
+// The width of the tiles, in pixels, a render pass you create with this descriptor applies to its attachments.
 //
 // WithTileWidth sets the tileWidth property and returns the receiver for chaining.
 func (x *MTL4RenderPassDescriptor) WithTileWidth(tileWidth uint) *MTL4RenderPassDescriptor {
@@ -83,7 +85,7 @@ func (x *MTL4RenderPassDescriptor) WithTileWidth(tileWidth uint) *MTL4RenderPass
 	return x
 }
 
-// The height of the tiles, in pixels, a render pass you create with this descriptor applies to its attachments. For tile-based rendering, Metal divides each render attachment into smaller regions, or _tiles_. The property's default is `0`, which tells Metal to select a size that fits in tile memory. See <doc:tailor-your-apps-for-apple-gpus-and-tile-based-deferred-rendering> for more information about tiles, tile memory, and deferred rendering.
+// The height of the tiles, in pixels, a render pass you create with this descriptor applies to its attachments.
 //
 // WithTileHeight sets the tileHeight property and returns the receiver for chaining.
 func (x *MTL4RenderPassDescriptor) WithTileHeight(tileHeight uint) *MTL4RenderPassDescriptor {
@@ -99,7 +101,7 @@ func (x *MTL4RenderPassDescriptor) WithDefaultRasterSampleCount(defaultRasterSam
 	return x
 }
 
-// Sets the width, in pixels, to which Metal constrains the render target. When this value is non-zero, you need to assign it to be smaller than or equal to the minimum width of all attachments. The default value of this property is `0`.
+// Sets the width, in pixels, to which Metal constrains the render target.
 //
 // WithRenderTargetWidth sets the renderTargetWidth property and returns the receiver for chaining.
 func (x *MTL4RenderPassDescriptor) WithRenderTargetWidth(renderTargetWidth uint) *MTL4RenderPassDescriptor {
@@ -107,7 +109,7 @@ func (x *MTL4RenderPassDescriptor) WithRenderTargetWidth(renderTargetWidth uint)
 	return x
 }
 
-// Sets the height, in pixels, to which Metal constrains the render target. When this value is non-zero, you need to assign it to be smaller than or equal to the minimum height of all attachments. The default value of this property is `0`.
+// Sets the height, in pixels, to which Metal constrains the render target.
 //
 // WithRenderTargetHeight sets the renderTargetHeight property and returns the receiver for chaining.
 func (x *MTL4RenderPassDescriptor) WithRenderTargetHeight(renderTargetHeight uint) *MTL4RenderPassDescriptor {
@@ -115,7 +117,7 @@ func (x *MTL4RenderPassDescriptor) WithRenderTargetHeight(renderTargetHeight uin
 	return x
 }
 
-// Assigns an optional variable rasterization rate map that Metal uses in the render pass. Enabling variable rasterization rate allows Metal to decrease the rasterization rate, typically in unimportant regions of color attachments, to accelerate processing. When set to `nil`, the default, Metal doesn't use variable rasterization rate.
+// Assigns an optional variable rasterization rate map that Metal uses in the render pass.
 //
 // WithRasterizationRateMap sets the rasterizationRateMap property and returns the receiver for chaining.
 func (x *MTL4RenderPassDescriptor) WithRasterizationRateMap(rasterizationRateMap raw.MTLRasterizationRateMap) *MTL4RenderPassDescriptor {
@@ -147,14 +149,14 @@ func (x *MTL4RenderPassDescriptor) WithSupportColorAttachmentMapping(supportColo
 	return x
 }
 
-// Configures the custom sample positions to use in MSAA rendering. - Parameters: - positions: Array of “MTLSamplePosition“ instances. - count:     Number of “MTLSamplePosition“ instances in the array. This value needs to be a valid sample count, or `0` to disable custom sample positions.
+// Configures the custom sample positions to use in MSAA rendering.
 //
 // SetSamplePositionsCount calls the underlying SetSamplePositionsCount.
 func (x *MTL4RenderPassDescriptor) SetSamplePositionsCount(positions *raw.MTLSamplePosition, count uint) {
 	x.inner.SetSamplePositionsCount(positions, count)
 }
 
-// Retrieves the previously-configured custom sample positions. This method stores the app's last set custom sample positions into an output array. Metal only modifies the array when the `count` parameter consists of a length sufficient to store the number of sample positions. - Parameters: - positions: The destination array where Metal stores “MTLSamplePosition“ instances. - count:     Number of “MTLSamplePosition“ instances in the array. This array needs to be large enough to store all sample positions. - Returns: The number of previously-configured custom sample positions.
+// Retrieves the previously-configured custom sample positions.
 //
 // GetSamplePositionsCount calls the underlying GetSamplePositionsCount.
 func (x *MTL4RenderPassDescriptor) GetSamplePositionsCount(positions *raw.MTLSamplePosition, count uint) uint {

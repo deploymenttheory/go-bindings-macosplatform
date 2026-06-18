@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration that instructs the GPU where to store counter data from the beginning and end of a blit pass.
+//
 // BlitPassSampleBufferAttachmentDescriptor wraps [raw.MTLBlitPassSampleBufferAttachmentDescriptor] with a fluent Go API.
 type BlitPassSampleBufferAttachmentDescriptor struct {
 	inner *raw.MTLBlitPassSampleBufferAttachmentDescriptor
@@ -37,7 +39,7 @@ func NewBlitPassSampleBufferAttachmentDescriptor() *BlitPassSampleBufferAttachme
 	return &BlitPassSampleBufferAttachmentDescriptor{inner: raw.MTLBlitPassSampleBufferAttachmentDescriptorFromID(_id)}
 }
 
-// @property sampleBuffer @abstract The sample buffer to store samples for the blit-pass defined samples. If sampleBuffer is non-nil, the sample indices will be used to store samples into the sample buffer.  If no sample buffer is provided, no samples will be taken. If any of the sample indices are specified as MTLCounterDontSample, no sample will be taken for that action.
+// A specialized memory buffer that the GPU uses to store its counter data during the blit pass.
 //
 // WithSampleBuffer sets the sampleBuffer property and returns the receiver for chaining.
 func (x *BlitPassSampleBufferAttachmentDescriptor) WithSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer) *BlitPassSampleBufferAttachmentDescriptor {
@@ -45,7 +47,7 @@ func (x *BlitPassSampleBufferAttachmentDescriptor) WithSampleBuffer(sampleBuffer
 	return x
 }
 
-// @property startOfEncoderSampleIndex @abstract The sample index to use to store the sample taken at the start of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a blit pass will fail.
+// An index within a counter sample buffer that tells the GPU where to store counter data from the start of a blit pass.
 //
 // WithStartOfEncoderSampleIndex sets the startOfEncoderSampleIndex property and returns the receiver for chaining.
 func (x *BlitPassSampleBufferAttachmentDescriptor) WithStartOfEncoderSampleIndex(startOfEncoderSampleIndex uint) *BlitPassSampleBufferAttachmentDescriptor {
@@ -53,7 +55,7 @@ func (x *BlitPassSampleBufferAttachmentDescriptor) WithStartOfEncoderSampleIndex
 	return x
 }
 
-// @property endOfEncoderSampleIndex @abstract The sample index to use to store the sample taken at the end of Command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a blit pass will fail.
+// An index within a counter sample buffer that tells the GPU where to store counter data from the end of a blit pass.
 //
 // WithEndOfEncoderSampleIndex sets the endOfEncoderSampleIndex property and returns the receiver for chaining.
 func (x *BlitPassSampleBufferAttachmentDescriptor) WithEndOfEncoderSampleIndex(endOfEncoderSampleIndex uint) *BlitPassSampleBufferAttachmentDescriptor {

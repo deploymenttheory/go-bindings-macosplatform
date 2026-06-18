@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Descriptor for a primitive acceleration structure that directly references geometric shapes, such as triangles and bounding boxes.
+//
 // MTL4PrimitiveAccelerationStructureDescriptor wraps [raw.MTL4PrimitiveAccelerationStructureDescriptor] with a fluent Go API.
 type MTL4PrimitiveAccelerationStructureDescriptor struct {
 	inner *raw.MTL4PrimitiveAccelerationStructureDescriptor
@@ -40,7 +42,7 @@ func NewMTL4PrimitiveAccelerationStructureDescriptor() *MTL4PrimitiveAcceleratio
 	return &MTL4PrimitiveAccelerationStructureDescriptor{inner: raw.MTL4PrimitiveAccelerationStructureDescriptorFromID(_id)}
 }
 
-// Associates the array of geometry descriptors that comprise this primitive acceleration structure. If you enable keyframe motion by setting property “motionKeyframeCount“ to a value greater than `1`, then all geometry descriptors this array references need to be motion geometry descriptors and have a number of primitive buffers equals to “motionKeyframeCount“. Example of motion geometry descriptors include: “MTL4AccelerationStructureMotionTriangleGeometryDescriptor“, “MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor“, “MTL4AccelerationStructureMotionCurveGeometryDescriptor“.
+// Associates the array of geometry descriptors that comprise this primitive acceleration structure.
 //
 // WithGeometryDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithGeometryDescriptors(items ...MTL4AccelerationStructureGeometryDescriptorProvider) *MTL4PrimitiveAccelerationStructureDescriptor {
@@ -60,7 +62,7 @@ func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithGeometryDescriptors(i
 	return x
 }
 
-// Configures the behavior when the ray-tracing system samples the acceleration structure before the motion start time. Use this property to control the behavior when the ray-tracing system samples the acceleration structure at a time prior to the one you set for “motionStartTime“. The default value of this property is `MTLMotionBorderModeClamp`.
+// Configures the behavior when the ray-tracing system samples the acceleration structure before the motion start time.
 //
 // WithMotionStartBorderMode sets the motionStartBorderMode property and returns the receiver for chaining.
 func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithMotionStartBorderMode(motionStartBorderMode MTLMotionBorderMode) *MTL4PrimitiveAccelerationStructureDescriptor {
@@ -68,7 +70,7 @@ func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithMotionStartBorderMode
 	return x
 }
 
-// Configures the motion border mode. This property controls what happens if Metal samples the acceleration structure after “motionEndTime“. Its default value is `MTLMotionBorderModeClamp`.
+// Configures the motion border mode.
 //
 // WithMotionEndBorderMode sets the motionEndBorderMode property and returns the receiver for chaining.
 func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithMotionEndBorderMode(motionEndBorderMode MTLMotionBorderMode) *MTL4PrimitiveAccelerationStructureDescriptor {
@@ -76,7 +78,7 @@ func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithMotionEndBorderMode(m
 	return x
 }
 
-// Configures the motion start time for this geometry. The default value of this property is `0.0f`.
+// Configures the motion start time for this geometry.
 //
 // WithMotionStartTime sets the motionStartTime property and returns the receiver for chaining.
 func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithMotionStartTime(motionStartTime float32) *MTL4PrimitiveAccelerationStructureDescriptor {
@@ -84,7 +86,7 @@ func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithMotionStartTime(motio
 	return x
 }
 
-// Configures the motion end time for this geometry. The default value of this property is `1.0f`.
+// Configures the motion end time for this geometry.
 //
 // WithMotionEndTime sets the motionEndTime property and returns the receiver for chaining.
 func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithMotionEndTime(motionEndTime float32) *MTL4PrimitiveAccelerationStructureDescriptor {
@@ -92,7 +94,7 @@ func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithMotionEndTime(motionE
 	return x
 }
 
-// Sets the motion keyframe count. This property's default is `1`, indicating no motion.
+// Sets the motion keyframe count.
 //
 // WithMotionKeyframeCount sets the motionKeyframeCount property and returns the receiver for chaining.
 func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithMotionKeyframeCount(motionKeyframeCount uint) *MTL4PrimitiveAccelerationStructureDescriptor {
@@ -100,6 +102,8 @@ func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithMotionKeyframeCount(m
 	return x
 }
 
+// The options that describe how you intend to use the acceleration structure.
+//
 // WithUsage sets the usage property and returns the receiver for chaining.
 func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithUsage(usage MTLAccelerationStructureUsage) *MTL4PrimitiveAccelerationStructureDescriptor {
 	x.inner.MTL4AccelerationStructureDescriptor.MTLAccelerationStructureDescriptor.SetUsage(raw.MTLAccelerationStructureUsage(usage))

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A newly created security key credential that results from a credential registration request.
+//
 // AuthorizationSecurityKeyPublicKeyCredentialRegistration wraps [raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistration] with a fluent Go API.
 type AuthorizationSecurityKeyPublicKeyCredentialRegistration struct {
 	inner *raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistration

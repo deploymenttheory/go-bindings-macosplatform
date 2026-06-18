@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Represents a registered notification.
+//
 // IOBluetoothUserNotification wraps [raw.IOBluetoothUserNotification] with a fluent Go API.
 type IOBluetoothUserNotification struct {
 	inner *raw.IOBluetoothUserNotification
@@ -35,6 +37,8 @@ func NewIOBluetoothUserNotification() *IOBluetoothUserNotification {
 	return &IOBluetoothUserNotification{inner: raw.IOBluetoothUserNotificationFromID(_id)}
 }
 
+// Called to unregister the target notification.
+//
 // Unregister calls the underlying Unregister.
 func (x *IOBluetoothUserNotification) Unregister() {
 	x.inner.Unregister()

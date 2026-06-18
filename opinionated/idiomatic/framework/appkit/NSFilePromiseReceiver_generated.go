@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that receives a file promise from the pasteboard.
+//
 // FilePromiseReceiver wraps [raw.NSFilePromiseReceiver] with a fluent Go API.
 type FilePromiseReceiver struct {
 	inner *raw.NSFilePromiseReceiver
@@ -39,6 +41,8 @@ func NewFilePromiseReceiver() *FilePromiseReceiver {
 	return &FilePromiseReceiver{inner: raw.NSFilePromiseReceiverFromID(_id)}
 }
 
+// Fulfills the promises at the specified destination.
+//
 // ReceivePromisedFilesAtDestinationOptionsOperationQueueReader blocks until the operation completes or ctx is cancelled.
 func (x *FilePromiseReceiver) ReceivePromisedFilesAtDestinationOptionsOperationQueueReader(ctx context.Context, destinationDir string, options *foundation.NSDictionary[objc.ID, objc.ID], operationQueue *foundation.NSOperationQueue) (*foundation.NSURL, error) {
 	type _result struct {

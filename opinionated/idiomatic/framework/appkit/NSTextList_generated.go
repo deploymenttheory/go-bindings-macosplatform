@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A section of text that forms a single list.
+//
 // TextList wraps [raw.NSTextList] with a fluent Go API.
 type TextList struct {
 	inner *raw.NSTextList
@@ -31,6 +33,8 @@ func TextListFromID(id objc.ID) *TextList {
 	return &TextList{inner: raw.NSTextListFromID(id)}
 }
 
+// Returns a new text list with the format, options, and starting item number you provide.
+//
 // NewTextListWithMarkerFormatOptionsStartingItemNumber creates a new [TextList].
 func NewTextListWithMarkerFormatOptionsStartingItemNumber(markerFormat *foundation.NSString, options NSTextListOptions, startingItemNumber int) *TextList {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextList")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewTextListWithMarkerFormatOptionsStartingItemNumber(markerFormat *foundati
 	return &TextList{inner: raw.NSTextListFromID(_id)}
 }
 
+// Returns an initialized text list.
+//
 // NewTextListWithMarkerFormatOptions creates a new [TextList].
 func NewTextListWithMarkerFormatOptions(markerFormat *foundation.NSString, options uint) *TextList {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextList")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewTextListWithMarkerFormatOptions(markerFormat *foundation.NSString, optio
 	return &TextList{inner: raw.NSTextListFromID(_id)}
 }
 
+// Initializes and returns a newly allocated text list item.
+//
 // NewTextListWithCoder creates a new [TextList].
 func NewTextListWithCoder(coder *foundation.NSCoder) *TextList {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextList")), objc.RegisterName("alloc"))
@@ -52,12 +60,16 @@ func NewTextListWithCoder(coder *foundation.NSCoder) *TextList {
 	return &TextList{inner: raw.NSTextListFromID(_id)}
 }
 
+// Sets the starting item number for the text list.
+//
 // WithStartingItemNumber sets the startingItemNumber property and returns the receiver for chaining.
 func (x *TextList) WithStartingItemNumber(startingItemNumber int) *TextList {
 	x.inner.SetStartingItemNumber(startingItemNumber)
 	return x
 }
 
+// Returns the computed value for a specific ordinal position in the list.
+//
 // MarkerForItemNumber calls the underlying MarkerForItemNumber.
 func (x *TextList) MarkerForItemNumber(itemNumber int) string {
 	_r := x.inner.MarkerForItemNumber(itemNumber)

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A task that updates a model with additional training data.
+//
 // UpdateTask wraps [raw.MLUpdateTask] with a fluent Go API.
 type UpdateTask struct {
 	inner *raw.MLUpdateTask
@@ -36,6 +38,8 @@ func NewUpdateTask() *UpdateTask {
 	return &UpdateTask{inner: raw.MLUpdateTaskFromID(_id)}
 }
 
+// Resumes a model update with updated parameter values.
+//
 // ResumeWithParameters calls the underlying ResumeWithParameters.
 func (x *UpdateTask) ResumeWithParameters(updateParameters *foundation.NSDictionary[*raw.MLParameterKey, objc.ID]) {
 	x.inner.ResumeWithParameters(updateParameters)

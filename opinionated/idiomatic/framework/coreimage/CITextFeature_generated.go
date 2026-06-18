@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information about a text that was detected in a still or video image.
+//
 // TextFeature wraps [raw.CITextFeature] with a fluent Go API.
 type TextFeature struct {
 	inner *raw.CITextFeature

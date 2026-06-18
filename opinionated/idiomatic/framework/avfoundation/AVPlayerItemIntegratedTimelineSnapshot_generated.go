@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An immutable representation of inspectable details of an integrated timeline object.
+//
 // PlayerItemIntegratedTimelineSnapshot wraps [raw.AVPlayerItemIntegratedTimelineSnapshot] with a fluent Go API.
 type PlayerItemIntegratedTimelineSnapshot struct {
 	inner *raw.AVPlayerItemIntegratedTimelineSnapshot

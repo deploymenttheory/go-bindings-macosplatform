@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that supports using Core Image filters to process an individual video frame in a video composition.
+//
 // AsynchronousCIImageFilteringRequest wraps [raw.AVAsynchronousCIImageFilteringRequest] with a fluent Go API.
 type AsynchronousCIImageFilteringRequest struct {
 	inner *raw.AVAsynchronousCIImageFilteringRequest
@@ -40,14 +42,14 @@ func NewAsynchronousCIImageFilteringRequest() *AsynchronousCIImageFilteringReque
 	return &AsynchronousCIImageFilteringRequest{inner: raw.AVAsynchronousCIImageFilteringRequestFromID(_id)}
 }
 
-// Callback the filter should call when filtering succeeded. If context is nil then a default context will be used, GPU-accelerated if possible. It is safe to pass in the sourceImage in which case the filter will appear to have no effect, essentially functioning as a pass-through.
+// Provides the filtered video frame image to AVFoundation for further processing or display.
 //
 // FinishWithImageContext calls the underlying FinishWithImageContext.
 func (x *AsynchronousCIImageFilteringRequest) FinishWithImageContext(filteredImage objc.ID, context_ objc.ID) {
 	x.inner.FinishWithImageContext(filteredImage, context_)
 }
 
-// Callback the filter should call when filtering failed. The error parameter should describe the actual error.
+// Notifies AVFoundation that you cannot fulfill the image filtering request.
 //
 // FinishWithError calls the underlying FinishWithError.
 func (x *AsynchronousCIImageFilteringRequest) FinishWithError(error_ unsafe.Pointer) {

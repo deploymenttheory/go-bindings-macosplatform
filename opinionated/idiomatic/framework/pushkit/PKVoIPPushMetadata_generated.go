@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains metadata about a received PushKit VoIP notification.
+//
 // VoIPPushMetadata wraps [raw.PKVoIPPushMetadata] with a fluent Go API.
 type VoIPPushMetadata struct {
 	inner *raw.PKVoIPPushMetadata

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that displays localized text in search results related to your app.
+//
 // LocalizedString wraps [raw.CSLocalizedString] with a fluent Go API.
 type LocalizedString struct {
 	inner *raw.CSLocalizedString
@@ -31,6 +33,8 @@ func LocalizedStringFromID(id objc.ID) *LocalizedString {
 	return &LocalizedString{inner: raw.CSLocalizedStringFromID(id)}
 }
 
+// Initializes a CSLocalizedString object with the specified dictionary of localized strings.
+//
 // NewLocalizedStringWithLocalizedStrings creates a new [LocalizedString].
 func NewLocalizedStringWithLocalizedStrings(localizedStrings *foundation.NSDictionary[objc.ID, objc.ID]) *LocalizedString {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CSLocalizedString")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewLocalizedStringWithLocalizedStrings(localizedStrings *foundation.NSDicti
 	return &LocalizedString{inner: raw.CSLocalizedStringFromID(_id)}
 }
 
+// Returns the localized string for the current language.
+//
 // LocalizedString calls the underlying LocalizedString.
 func (x *LocalizedString) LocalizedString() string {
 	_r := x.inner.LocalizedString()

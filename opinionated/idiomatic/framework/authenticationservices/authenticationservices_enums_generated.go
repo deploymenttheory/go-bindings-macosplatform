@@ -9,6 +9,7 @@ import (
 	"strings"
 )
 
+// A style for the authorization button.
 type ASAuthorizationAppleIDButtonStyle int64
 
 const (
@@ -30,6 +31,7 @@ func (e ASAuthorizationAppleIDButtonStyle) String() string {
 	}
 }
 
+// A type for the authorization button.
 type ASAuthorizationAppleIDButtonType int64
 
 const (
@@ -52,6 +54,7 @@ func (e ASAuthorizationAppleIDButtonType) String() string {
 	}
 }
 
+// Possible values for the credential state of a user.
 type ASAuthorizationAppleIDProviderCredentialState int64
 
 const (
@@ -76,6 +79,7 @@ func (e ASAuthorizationAppleIDProviderCredentialState) String() string {
 	}
 }
 
+// Options that modify how a controller performs authorization requests.
 // Bitmask — values may be combined with |.
 type ASAuthorizationControllerRequestOptions uint64
 
@@ -115,10 +119,13 @@ func (e ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) Stri
 	}
 }
 
+// The platform single sign-on method for the user.
 type ASAuthorizationProviderExtensionAuthenticationMethod int64
 
 const (
-	ASAuthorizationProviderExtensionAuthenticationMethodPassword             ASAuthorizationProviderExtensionAuthenticationMethod = 1
+	// Password authentication.
+	ASAuthorizationProviderExtensionAuthenticationMethodPassword ASAuthorizationProviderExtensionAuthenticationMethod = 1
+	// Secure Enclave key authentication.
 	ASAuthorizationProviderExtensionAuthenticationMethodUserSecureEnclaveKey ASAuthorizationProviderExtensionAuthenticationMethod = 2
 	ASAuthorizationProviderExtensionAuthenticationMethodSmartCard            ASAuthorizationProviderExtensionAuthenticationMethod = 3
 )
@@ -157,14 +164,15 @@ func (e ASAuthorizationProviderExtensionFederationType) String() string {
 	}
 }
 
+// The key types for platform single sign-on.
 type ASAuthorizationProviderExtensionKeyType int64
 
 const (
-	// The user's device signing key.
+	// The user device signing key.
 	ASAuthorizationProviderExtensionKeyTypeUserDeviceSigning ASAuthorizationProviderExtensionKeyType = 1
-	// The user's device encryption key.
+	// The user device encryption key.
 	ASAuthorizationProviderExtensionKeyTypeUserDeviceEncryption ASAuthorizationProviderExtensionKeyType = 2
-	// The user's Secure Enclave backed key.
+	// The user Secure Enclave key.
 	ASAuthorizationProviderExtensionKeyTypeUserSecureEnclaveKey ASAuthorizationProviderExtensionKeyType = 3
 	// The shared device signing key.
 	ASAuthorizationProviderExtensionKeyTypeSharedDeviceSigning ASAuthorizationProviderExtensionKeyType = 4
@@ -248,10 +256,13 @@ func (e ASAuthorizationPublicKeyCredentialAttachment) String() string {
 	}
 }
 
+// A type that represents the operation of the large blob assertion.
 type ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation int64
 
 const (
-	ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperationRead  ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation = 0
+	// An operation to read data from the blob.
+	ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperationRead ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation = 0
+	// An operation to write data to the blob.
 	ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperationWrite ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation = 1
 )
 
@@ -266,10 +277,13 @@ func (e ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation) String() 
 	}
 }
 
+// An enumeration of large binary object support requirement values.
 type ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement int64
 
 const (
-	ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirementRequired  ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement = 0
+	// A value that indicates the app requires large binary object support.
+	ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirementRequired ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement = 0
+	// A value that indicates the app needs large binary object support.
 	ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirementPreferred ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement = 1
 )
 
@@ -284,6 +298,7 @@ func (e ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement) String() 
 	}
 }
 
+// An enumeration of values that indicate whether the browser app has access to a person’s passkeys.
 type ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState int64
 
 const (
@@ -305,10 +320,12 @@ func (e ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState) S
 	}
 }
 
+// The defined identity types for use in retrieving credentials.
 // Bitmask — values may be combined with |.
 type ASCredentialIdentityTypes uint64
 
 const (
+	// A value that matches all identity types.
 	ASCredentialIdentityTypesAll         ASCredentialIdentityTypes = 0
 	ASCredentialIdentityTypesPassword    ASCredentialIdentityTypes = 1
 	ASCredentialIdentityTypesPasskey     ASCredentialIdentityTypes = 2
@@ -332,6 +349,7 @@ func (e ASCredentialIdentityTypes) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Possible values for the service identifier type.
 type ASCredentialServiceIdentifierType int64
 
 const (
@@ -396,12 +414,16 @@ func (e ASUserAgeRange) String() string {
 	}
 }
 
+// Possible values for the real user indicator.
 type ASUserDetectionStatus int64
 
 const (
+	// The system can’t determine this user’s status as a real person.
 	ASUserDetectionStatusUnsupported ASUserDetectionStatus = 0
-	ASUserDetectionStatusUnknown     ASUserDetectionStatus = 1
-	ASUserDetectionStatusLikelyReal  ASUserDetectionStatus = 2
+	// The system hasn’t determined whether the user might be a real person.
+	ASUserDetectionStatusUnknown ASUserDetectionStatus = 1
+	// The user appears to be a real person.
+	ASUserDetectionStatusLikelyReal ASUserDetectionStatus = 2
 )
 
 func (e ASUserDetectionStatus) String() string {

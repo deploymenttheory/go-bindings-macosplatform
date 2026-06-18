@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides searchable attributes for file types that the app supports.
+//
 // ImportExtension wraps [raw.CSImportExtension] with a fluent Go API.
 type ImportExtension struct {
 	inner *raw.CSImportExtension
@@ -36,6 +38,8 @@ func NewImportExtension() *ImportExtension {
 	return &ImportExtension{inner: raw.CSImportExtensionFromID(_id)}
 }
 
+// Provides searchable attributes for a file at the specified URL.
+//
 // UpdateAttributesForFileAtURLError calls the underlying UpdateAttributesForFileAtURLError.
 func (x *ImportExtension) UpdateAttributesForFileAtURLError(attributes *raw.CSSearchableItemAttributeSet, contentURL string) (bool, error) {
 	return x.inner.UpdateAttributesForFileAtURLError(attributes, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(contentURL)))

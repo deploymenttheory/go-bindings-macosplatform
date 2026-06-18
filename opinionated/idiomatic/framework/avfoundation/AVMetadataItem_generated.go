@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A metadata item for an audiovisual asset or one of its tracks.
+//
 // MetadataItem wraps [raw.AVMetadataItem] with a fluent Go API.
 type MetadataItem struct {
 	inner *raw.AVMetadataItem
@@ -120,6 +122,8 @@ func (x *MetadataItem) DataValue() *foundation.NSData {
 	return x.inner.DataValue()
 }
 
+// Reports whether the value for a given key is immediately available without blocking.
+//
 // StatusOfValueForKeyError calls the underlying StatusOfValueForKeyError.
 func (x *MetadataItem) StatusOfValueForKeyError(key string) (AVKeyValueStatus, error) {
 	_r, _err := x.inner.StatusOfValueForKeyError(foundation.NSStringStringWithUTF8String(key))
@@ -130,6 +134,8 @@ func (x *MetadataItem) StatusOfValueForKeyError(key string) (AVKeyValueStatus, e
 	return AVKeyValueStatus(_r), nil
 }
 
+// Tells the object to load the values of any of the specified keys that aren’t already loaded.
+//
 // LoadValuesAsynchronouslyForKeys blocks until the operation completes or ctx is cancelled.
 func (x *MetadataItem) LoadValuesAsynchronouslyForKeys(ctx context.Context, keys *foundation.NSArray[*foundation.NSString]) error {
 	_ch := make(chan error, 1)

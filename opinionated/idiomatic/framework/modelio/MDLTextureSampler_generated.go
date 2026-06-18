@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that pairs a source of texture data with sampling parameters to be used in rendering the texture.
+//
 // TextureSampler wraps [raw.MDLTextureSampler] with a fluent Go API.
 type TextureSampler struct {
 	inner *raw.MDLTextureSampler
@@ -35,18 +37,24 @@ func NewTextureSampler() *TextureSampler {
 	return &TextureSampler{inner: raw.MDLTextureSamplerFromID(_id)}
 }
 
+// The texture object that provides image data for sampling.
+//
 // WithTexture sets the texture property and returns the receiver for chaining.
 func (x *TextureSampler) WithTexture(texture TextureProvider) *TextureSampler {
 	x.inner.SetTexture(texture.asTexture())
 	return x
 }
 
+// An object that describes filtering modes for sampling from the texture.
+//
 // WithHardwareFilter sets the hardwareFilter property and returns the receiver for chaining.
 func (x *TextureSampler) WithHardwareFilter(hardwareFilter *TextureFilter) *TextureSampler {
 	x.inner.SetHardwareFilter(hardwareFilter.Unwrap())
 	return x
 }
 
+// The transformation to be applied to texture coordinate data before sampling from the texture.
+//
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *TextureSampler) WithTransform(transform *Transform) *TextureSampler {
 	x.inner.SetTransform(transform.Unwrap())

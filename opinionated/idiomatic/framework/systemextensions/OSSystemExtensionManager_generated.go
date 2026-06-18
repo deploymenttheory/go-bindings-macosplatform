@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that facilitates activation and deactivation of system extensions.
+//
 // SystemExtensionManager wraps [raw.OSSystemExtensionManager] with a fluent Go API.
 type SystemExtensionManager struct {
 	inner *raw.OSSystemExtensionManager
@@ -35,7 +37,7 @@ func NewSystemExtensionManager() *SystemExtensionManager {
 	return &SystemExtensionManager{inner: raw.OSSystemExtensionManagerFromID(_id)}
 }
 
-// @abstract Submits a System Extension request to the manager. @param request The request to process.
+// Submits a system extension request to the manager.
 //
 // SubmitRequest calls the underlying SubmitRequest.
 func (x *SystemExtensionManager) SubmitRequest(request *raw.OSSystemExtensionRequest) {

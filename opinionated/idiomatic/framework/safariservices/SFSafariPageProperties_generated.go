@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that captures information about a webpage.
+//
 // SafariPageProperties wraps [raw.SFSafariPageProperties] with a fluent Go API.
 type SafariPageProperties struct {
 	inner *raw.SFSafariPageProperties

@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An object that draws headers over a table view’s columns and handles mouse events in those headers.
+//
 // TableHeaderView wraps [raw.NSTableHeaderView] with a fluent Go API.
 type TableHeaderView struct {
 	inner *raw.NSTableHeaderView
@@ -40,6 +42,8 @@ func NewTableHeaderView() *TableHeaderView {
 	return &TableHeaderView{inner: raw.NSTableHeaderViewFromID(_id)}
 }
 
+// The NSTableView instance that this table header view belongs to.
+//
 // WithTableView sets the tableView property and returns the receiver for chaining.
 func (x *TableHeaderView) WithTableView(tableView TableViewProvider) *TableHeaderView {
 	x.inner.SetTableView(tableView.asTableView())
@@ -88,6 +92,8 @@ func (x *TableHeaderView) WithAutoresizingMask(autoresizingMask NSAutoresizingMa
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *TableHeaderView) WithFrame(frame corefoundation.CGRect) *TableHeaderView {
 	x.inner.NSView.SetFrame(frame)
@@ -112,6 +118,8 @@ func (x *TableHeaderView) WithBoundsRotation(boundsRotation float64) *TableHeade
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *TableHeaderView) WithBounds(bounds corefoundation.CGRect) *TableHeaderView {
 	x.inner.NSView.SetBounds(bounds)
@@ -124,6 +132,8 @@ func (x *TableHeaderView) WithCanDrawConcurrently(canDrawConcurrently bool) *Tab
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *TableHeaderView) WithNeedsDisplay(needsDisplay bool) *TableHeaderView {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -310,7 +320,7 @@ func (x *TableHeaderView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets 
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *TableHeaderView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableHeaderView {
@@ -366,35 +376,47 @@ func (x *TableHeaderView) WithPressureConfiguration(pressureConfiguration *Press
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *TableHeaderView) WithNextResponder(nextResponder ResponderProvider) *TableHeaderView {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *TableHeaderView) WithMenu(menu *Menu) *TableHeaderView {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *TableHeaderView) WithUserActivity(userActivity *foundation.NSUserActivity) *TableHeaderView {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *TableHeaderView) WithTouchBar(touchBar *TouchBar) *TableHeaderView {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Returns the rectangle containing the header tile for the column at columnIndex.
+//
 // HeaderRectOfColumn calls the underlying HeaderRectOfColumn.
 func (x *TableHeaderView) HeaderRectOfColumn(column int) corefoundation.CGRect {
 	return x.inner.HeaderRectOfColumn(column)
 }
 
+// Returns the index of the column whose header lies under aPoint in the receiver, or –1 if no such column is found.
+//
 // ColumnAtPoint calls the underlying ColumnAtPoint.
 func (x *TableHeaderView) ColumnAtPoint(point corefoundation.CGPoint) int {
 	return x.inner.ColumnAtPoint(point)

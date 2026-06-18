@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A container that stores an array of sample buffer attachments for a blit pass.
+//
 // BlitPassSampleBufferAttachmentDescriptorArray wraps [raw.MTLBlitPassSampleBufferAttachmentDescriptorArray] with a fluent Go API.
 type BlitPassSampleBufferAttachmentDescriptorArray struct {
 	inner *raw.MTLBlitPassSampleBufferAttachmentDescriptorArray
@@ -37,6 +39,8 @@ func NewBlitPassSampleBufferAttachmentDescriptorArray() *BlitPassSampleBufferAtt
 	return &BlitPassSampleBufferAttachmentDescriptorArray{inner: raw.MTLBlitPassSampleBufferAttachmentDescriptorArrayFromID(_id)}
 }
 
+// Accesses one of the array’s blit pass sample buffer attachment descriptor instances.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *BlitPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *BlitPassSampleBufferAttachmentDescriptor {
 	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
@@ -46,6 +50,8 @@ func (x *BlitPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript
 	return &BlitPassSampleBufferAttachmentDescriptor{inner: _r}
 }
 
+// Copies the properties of a blit pass sample buffer attachment descriptor instance to the properties of one of the array’s instances.
+//
 // SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
 func (x *BlitPassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLBlitPassSampleBufferAttachmentDescriptor, attachmentIndex uint) {
 	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)

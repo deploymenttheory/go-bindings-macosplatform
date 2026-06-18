@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that holds the credential.
+//
 // AuthorizationPlatformPublicKeyCredentialDescriptor wraps [raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor] with a fluent Go API.
 type AuthorizationPlatformPublicKeyCredentialDescriptor struct {
 	inner *raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor
@@ -32,6 +34,8 @@ func AuthorizationPlatformPublicKeyCredentialDescriptorFromID(id objc.ID) *Autho
 	return &AuthorizationPlatformPublicKeyCredentialDescriptor{inner: raw.ASAuthorizationPlatformPublicKeyCredentialDescriptorFromID(id)}
 }
 
+// Creates the descriptor with a credential.
+//
 // NewAuthorizationPlatformPublicKeyCredentialDescriptorWithCredentialID creates a new [AuthorizationPlatformPublicKeyCredentialDescriptor].
 func NewAuthorizationPlatformPublicKeyCredentialDescriptorWithCredentialID(credentialID *foundation.NSData) *AuthorizationPlatformPublicKeyCredentialDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationPlatformPublicKeyCredentialDescriptor")), objc.RegisterName("alloc"))

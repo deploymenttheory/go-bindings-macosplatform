@@ -26,10 +26,13 @@ func (e MDLAnimatedValueInterpolation) String() string {
 	}
 }
 
+// Options for camera projection styles, used by the projection property.
 type MDLCameraProjection uint64
 
 const (
-	MDLCameraProjectionPerspective  MDLCameraProjection = 0
+	// A perspective projection.
+	MDLCameraProjectionPerspective MDLCameraProjection = 0
+	// An orthographic projection.
 	MDLCameraProjectionOrthographic MDLCameraProjection = 1
 )
 
@@ -65,14 +68,21 @@ func (e MDLDataPrecision) String() string {
 	}
 }
 
+// Types of geometric primitives for rendering a submesh, used by the geometryType property.
 type MDLGeometryType int64
 
 const (
-	MDLGeometryTypePoints           MDLGeometryType = 0
-	MDLGeometryTypeLines            MDLGeometryType = 1
-	MDLGeometryTypeTriangles        MDLGeometryType = 2
-	MDLGeometryTypeTriangleStrips   MDLGeometryType = 3
-	MDLGeometryTypeQuads            MDLGeometryType = 4
+	// Each index in the submesh refers to a vertex to be rendered as a single point.
+	MDLGeometryTypePoints MDLGeometryType = 0
+	// Each pair of consecutive indices in the submesh refers to two vertices to be rendered as a line segment.
+	MDLGeometryTypeLines MDLGeometryType = 1
+	// Each set of three consecutive indices in the submesh refers to three vertices to be rendered as a triangle.
+	MDLGeometryTypeTriangles MDLGeometryType = 2
+	// The first three consecutive indices in the submesh refer to three vertices to be rendered as a triangle. Each subsequent index refers to another vertex that completes a triangle formed by connecting it to the previous two vertices.
+	MDLGeometryTypeTriangleStrips MDLGeometryType = 3
+	// Each set of four consecutive indices in the submesh refers to four vertices to be rendered as a quadrilateral.
+	MDLGeometryTypeQuads MDLGeometryType = 4
+	// The submesh’s index buffer does not contain a uniform set of primitives.
 	MDLGeometryTypeVariableTopology MDLGeometryType = 5
 )
 
@@ -95,16 +105,21 @@ func (e MDLGeometryType) String() string {
 	}
 }
 
+// Options for the size of integer data in a submesh’s index buffer, used by the indexType property.
 type MDLIndexBitDepth uint64
 
 const (
+	// The submesh has not been initialized or its data type is unknown.
 	MDLIndexBitDepthInvalid MDLIndexBitDepth = 0
-	MDLIndexBitDepthUInt8   MDLIndexBitDepth = 8
-	MDLIndexBitDepthUint8   MDLIndexBitDepth = 8
-	MDLIndexBitDepthUInt16  MDLIndexBitDepth = 16
-	MDLIndexBitDepthUint16  MDLIndexBitDepth = 16
-	MDLIndexBitDepthUInt32  MDLIndexBitDepth = 32
-	MDLIndexBitDepthUint32  MDLIndexBitDepth = 32
+	// Each index in the submesh’s index buffer is an 8-bit integer.
+	MDLIndexBitDepthUInt8 MDLIndexBitDepth = 8
+	MDLIndexBitDepthUint8 MDLIndexBitDepth = 8
+	// Each index in the submesh’s index buffer is a 16-bit integer.
+	MDLIndexBitDepthUInt16 MDLIndexBitDepth = 16
+	MDLIndexBitDepthUint16 MDLIndexBitDepth = 16
+	// Each index in the submesh’s index buffer is a 32-bit integer.
+	MDLIndexBitDepthUInt32 MDLIndexBitDepth = 32
+	MDLIndexBitDepthUint32 MDLIndexBitDepth = 32
 )
 
 func (e MDLIndexBitDepth) String() string {
@@ -122,21 +137,34 @@ func (e MDLIndexBitDepth) String() string {
 	}
 }
 
+// Options for the shape and style of illumination provided by a light, used by the lightType property.
 type MDLLightType uint64
 
 const (
-	MDLLightTypeUnknown         MDLLightType = 0
-	MDLLightTypeAmbient         MDLLightType = 1
-	MDLLightTypeDirectional     MDLLightType = 2
-	MDLLightTypeSpot            MDLLightType = 3
-	MDLLightTypePoint           MDLLightType = 4
-	MDLLightTypeLinear          MDLLightType = 5
-	MDLLightTypeDiscArea        MDLLightType = 6
+	// The type of the light is unknown or has not been initialized.
+	MDLLightTypeUnknown MDLLightType = 0
+	// The light source should illuminate a scene evenly regardless of position or direction.
+	MDLLightTypeAmbient MDLLightType = 1
+	// The light source illuminates a scene from a uniform direction regardless of its position.
+	MDLLightTypeDirectional MDLLightType = 2
+	// The light source illuminates a scene from a specific position and direction.
+	MDLLightTypeSpot MDLLightType = 3
+	// The light source illuminates a scene in all directions from a specific position.
+	MDLLightTypePoint MDLLightType = 4
+	// The light source illuminates a scene in all directions from an area in the shape of a line.
+	MDLLightTypeLinear MDLLightType = 5
+	// The light source illuminates a scene in all directions from an area in the shape of a disc.
+	MDLLightTypeDiscArea MDLLightType = 6
+	// The light source illuminates a scene in all directions from an area in the shape of a rectangle.
 	MDLLightTypeRectangularArea MDLLightType = 7
+	// The light source illuminates a scene in all directions from an area in the shape of a superellipse.
 	MDLLightTypeSuperElliptical MDLLightType = 8
-	MDLLightTypePhotometric     MDLLightType = 9
-	MDLLightTypeProbe           MDLLightType = 10
-	MDLLightTypeEnvironment     MDLLightType = 11
+	// The illumination from the light is determined by a photometric profile.
+	MDLLightTypePhotometric MDLLightType = 9
+	// The illumination from the light is determined by texture images representing a sample of a scene at a specific point.
+	MDLLightTypeProbe MDLLightType = 10
+	// The illumination from the light is determined by texture images representing a sample of the surrounding environment for a scene.
+	MDLLightTypeEnvironment MDLLightType = 11
 )
 
 func (e MDLLightType) String() string {
@@ -191,11 +219,14 @@ func (e MDLMaterialFace) String() string {
 	}
 }
 
+// Modes for sampling textures at sizes between mipmap levels, used by the mipFilter property.
 type MDLMaterialMipMapFilterMode uint64
 
 const (
+	// Sampling a texture at a size between mipmap levels should return a texel value from the nearest mipmap level.
 	MDLMaterialMipMapFilterModeNearest MDLMaterialMipMapFilterMode = 0
-	MDLMaterialMipMapFilterModeLinear  MDLMaterialMipMapFilterMode = 1
+	// Sampling a texture at a size between mipmap levels should linearly interpolate between mipmap levels.
+	MDLMaterialMipMapFilterModeLinear MDLMaterialMipMapFilterMode = 1
 )
 
 func (e MDLMaterialMipMapFilterMode) String() string {
@@ -209,18 +240,29 @@ func (e MDLMaterialMipMapFilterMode) String() string {
 	}
 }
 
+// Options for the data type of a material property, used by the type property.
 type MDLMaterialPropertyType uint64
 
 const (
-	MDLMaterialPropertyTypeNone     MDLMaterialPropertyType = 0
-	MDLMaterialPropertyTypeString   MDLMaterialPropertyType = 1
-	MDLMaterialPropertyTypeURL      MDLMaterialPropertyType = 2
-	MDLMaterialPropertyTypeTexture  MDLMaterialPropertyType = 3
-	MDLMaterialPropertyTypeColor    MDLMaterialPropertyType = 4
-	MDLMaterialPropertyTypeFloat    MDLMaterialPropertyType = 5
-	MDLMaterialPropertyTypeFloat2   MDLMaterialPropertyType = 6
-	MDLMaterialPropertyTypeFloat3   MDLMaterialPropertyType = 7
-	MDLMaterialPropertyTypeFloat4   MDLMaterialPropertyType = 8
+	// The material property’s value has not been initialized.
+	MDLMaterialPropertyTypeNone MDLMaterialPropertyType = 0
+	// The material’s value is a string.
+	MDLMaterialPropertyTypeString MDLMaterialPropertyType = 1
+	// The material property’s value is a URL—typically, a URL referencing a texture image.
+	MDLMaterialPropertyTypeURL MDLMaterialPropertyType = 2
+	// The material property’s value is a MDLTextureSampler object that provides both a texture image and texture rendering parameters.
+	MDLMaterialPropertyTypeTexture MDLMaterialPropertyType = 3
+	// The material property’s value is a uniform color.
+	MDLMaterialPropertyTypeColor MDLMaterialPropertyType = 4
+	// The material property’s value is a floating-point scalar.
+	MDLMaterialPropertyTypeFloat MDLMaterialPropertyType = 5
+	// The material property’s value is a 2-component floating-point vector.
+	MDLMaterialPropertyTypeFloat2 MDLMaterialPropertyType = 6
+	// The material property’s value is a 3-component floating-point vector.
+	MDLMaterialPropertyTypeFloat3 MDLMaterialPropertyType = 7
+	// The material property’s value is a 4-component floating-point vector.
+	MDLMaterialPropertyTypeFloat4 MDLMaterialPropertyType = 8
+	// The material property’s value is a 4 x 4 floating-point matrix.
 	MDLMaterialPropertyTypeMatrix44 MDLMaterialPropertyType = 9
 	MDLMaterialPropertyTypeBuffer   MDLMaterialPropertyType = 10
 )
@@ -254,35 +296,62 @@ func (e MDLMaterialPropertyType) String() string {
 	}
 }
 
+// Options for the semantic use of a material property’s value in rendering a particular surface appearance; used by the semantic property.
 type MDLMaterialSemantic uint64
 
 const (
-	MDLMaterialSemanticBaseColor                  MDLMaterialSemantic = 0
-	MDLMaterialSemanticSubsurface                 MDLMaterialSemantic = 1
-	MDLMaterialSemanticMetallic                   MDLMaterialSemantic = 2
-	MDLMaterialSemanticSpecular                   MDLMaterialSemantic = 3
-	MDLMaterialSemanticSpecularExponent           MDLMaterialSemantic = 4
-	MDLMaterialSemanticSpecularTint               MDLMaterialSemantic = 5
-	MDLMaterialSemanticRoughness                  MDLMaterialSemantic = 6
-	MDLMaterialSemanticAnisotropic                MDLMaterialSemantic = 7
-	MDLMaterialSemanticAnisotropicRotation        MDLMaterialSemantic = 8
-	MDLMaterialSemanticSheen                      MDLMaterialSemantic = 9
-	MDLMaterialSemanticSheenTint                  MDLMaterialSemantic = 10
-	MDLMaterialSemanticClearcoat                  MDLMaterialSemantic = 11
-	MDLMaterialSemanticClearcoatGloss             MDLMaterialSemantic = 12
-	MDLMaterialSemanticEmission                   MDLMaterialSemantic = 13
-	MDLMaterialSemanticBump                       MDLMaterialSemantic = 14
-	MDLMaterialSemanticOpacity                    MDLMaterialSemantic = 15
+	// The inherent color of a surface, to be used as a modulator during shading.
+	MDLMaterialSemanticBaseColor MDLMaterialSemantic = 0
+	// The degree to which light scatters under the surface of a material.
+	MDLMaterialSemanticSubsurface MDLMaterialSemantic = 1
+	// The degree to which a material appears as a dielectric surface (lower values) or as a metal (higher values).
+	MDLMaterialSemanticMetallic MDLMaterialSemantic = 2
+	// The intensity of specular highlights that appear on the material’s surface.
+	MDLMaterialSemanticSpecular MDLMaterialSemantic = 3
+	// The exponent to be used in Blinn-Phong approximation of the material’s specular response.
+	MDLMaterialSemanticSpecularExponent MDLMaterialSemantic = 4
+	// The balance of color for specular highlights, between the light color (lower values) and the material’s base color (at higher values).
+	MDLMaterialSemanticSpecularTint MDLMaterialSemantic = 5
+	// The degree to which a material appears smooth, affecting both diffuse and specular response.
+	MDLMaterialSemanticRoughness MDLMaterialSemantic = 6
+	// The degree to which specular highlights elongate in the direction of the local tangent basis.
+	MDLMaterialSemanticAnisotropic MDLMaterialSemantic = 7
+	// The angle at which anisotropic effects are rotated relative to the local tangent basis.
+	MDLMaterialSemanticAnisotropicRotation MDLMaterialSemantic = 8
+	// The intensity of highlights that appear only at glancing angles on a material’s surface.
+	MDLMaterialSemanticSheen MDLMaterialSemantic = 9
+	// The balance of color for highlights that appear only at glancing angles, between the light color (lower values) and the material’s base color (at higher values).
+	MDLMaterialSemanticSheenTint MDLMaterialSemantic = 10
+	// The intensity of a second specular highlight, similar to the gloss that results from a clear coat on an automotive finish.
+	MDLMaterialSemanticClearcoat MDLMaterialSemantic = 11
+	// The spread of a second specular highlight, similar to the gloss that results from a clear coat on an automotive finish.
+	MDLMaterialSemanticClearcoatGloss MDLMaterialSemantic = 12
+	// The color emitted as radiance from a material’s surface.
+	MDLMaterialSemanticEmission MDLMaterialSemantic = 13
+	// The degree of perturbation in a material’s surface.
+	MDLMaterialSemanticBump MDLMaterialSemantic = 14
+	// The opacity of a material’s surface.
+	MDLMaterialSemanticOpacity MDLMaterialSemantic = 15
+	// The index of refraction for the medium surrounding a material.
 	MDLMaterialSemanticInterfaceIndexOfRefraction MDLMaterialSemantic = 16
-	MDLMaterialSemanticMaterialIndexOfRefraction  MDLMaterialSemantic = 17
-	MDLMaterialSemanticObjectSpaceNormal          MDLMaterialSemantic = 18
-	MDLMaterialSemanticTangentSpaceNormal         MDLMaterialSemantic = 19
-	MDLMaterialSemanticDisplacement               MDLMaterialSemantic = 20
-	MDLMaterialSemanticDisplacementScale          MDLMaterialSemantic = 21
-	MDLMaterialSemanticAmbientOcclusion           MDLMaterialSemantic = 22
-	MDLMaterialSemanticAmbientOcclusionScale      MDLMaterialSemantic = 23
-	MDLMaterialSemanticNone                       MDLMaterialSemantic = 32768
-	MDLMaterialSemanticUserDefined                MDLMaterialSemantic = 32769
+	// The index of refraction for a material itself.
+	MDLMaterialSemanticMaterialIndexOfRefraction MDLMaterialSemantic = 17
+	// The variation in the surface normal vectors in a material, relative to model coordinate space.
+	MDLMaterialSemanticObjectSpaceNormal MDLMaterialSemantic = 18
+	// The variation in the surface normal vectors in a material, relative to surface tangent coordinate space.
+	MDLMaterialSemanticTangentSpaceNormal MDLMaterialSemantic = 19
+	// The displacement of a material’s surface relative to the surface normal.
+	MDLMaterialSemanticDisplacement MDLMaterialSemantic = 20
+	// The scaling factor for displacement of a material’s surface.
+	MDLMaterialSemanticDisplacementScale MDLMaterialSemantic = 21
+	// The attenuation of ambient light due to local geometry variations on a surface.
+	MDLMaterialSemanticAmbientOcclusion MDLMaterialSemantic = 22
+	// The scaling factor for ambient occlusion shading.
+	MDLMaterialSemanticAmbientOcclusionScale MDLMaterialSemantic = 23
+	// The material property’s semantic property has not been initialized.
+	MDLMaterialSemanticNone MDLMaterialSemantic = 32768
+	// The meaning of the material property’s value is not one of the standard semantic uses recognized by Model I/O.
+	MDLMaterialSemanticUserDefined MDLMaterialSemantic = 32769
 )
 
 func (e MDLMaterialSemantic) String() string {
@@ -344,11 +413,14 @@ func (e MDLMaterialSemantic) String() string {
 	}
 }
 
+// Modes for sampling textures at coordinates between texels, used by the minFilter and magFilter properties.
 type MDLMaterialTextureFilterMode uint64
 
 const (
+	// Sampling at texture coordinates between texels should return the value of the nearest texel.
 	MDLMaterialTextureFilterModeNearest MDLMaterialTextureFilterMode = 0
-	MDLMaterialTextureFilterModeLinear  MDLMaterialTextureFilterMode = 1
+	// Sampling at texture coordinates between texels should linearly interpolate between texel values.
+	MDLMaterialTextureFilterModeLinear MDLMaterialTextureFilterMode = 1
 )
 
 func (e MDLMaterialTextureFilterMode) String() string {
@@ -362,11 +434,15 @@ func (e MDLMaterialTextureFilterMode) String() string {
 	}
 }
 
+// Modes for sampling textures at coordinates outside the texture bounds, used by the sWrapMode, tWrapMode, and rWrapMode properties.
 type MDLMaterialTextureWrapMode uint64
 
 const (
-	MDLMaterialTextureWrapModeClamp  MDLMaterialTextureWrapMode = 0
+	// Sampling at any texture coordinate outside the 0.0 to 1.0 range returns the texel color from the nearest edge.
+	MDLMaterialTextureWrapModeClamp MDLMaterialTextureWrapMode = 0
+	// Sampling at texture coordinates outside the 0.0 to 1.0 range results in a repeated tiling effect.
 	MDLMaterialTextureWrapModeRepeat MDLMaterialTextureWrapMode = 1
+	// Sampling at texture coordinates outside the 0.0 to 1.0 range results in a mirrored tiling effect.
 	MDLMaterialTextureWrapModeMirror MDLMaterialTextureWrapMode = 2
 )
 
@@ -383,10 +459,13 @@ func (e MDLMaterialTextureWrapMode) String() string {
 	}
 }
 
+// Options for the content of a mesh buffer, used by the type property and by MDLMeshBufferAllocator methods for creating buffers.
 type MDLMeshBufferType uint64
 
 const (
+	// The buffer contains per-vertex data for one or more vertex attributes of a MDLMesh object.
 	MDLMeshBufferTypeVertex MDLMeshBufferType = 1
+	// The buffer contains index data for a MDLSubmesh object.
 	MDLMeshBufferTypeIndex  MDLMeshBufferType = 2
 	MDLMeshBufferTypeCustom MDLMeshBufferType = 3
 )
@@ -404,10 +483,13 @@ func (e MDLMeshBufferType) String() string {
 	}
 }
 
+// Options affecting automatic placement of light probes in a scene, used with the placeLightProbesWithDensity:heuristic:usingIrradianceDataSource: method.
 type MDLProbePlacement int64
 
 const (
-	MDLProbePlacementUniformGrid            MDLProbePlacement = 0
+	// An option to place light probes at each unit coordinate in a three-dimensional grid that evenly divides the region being evaluated.
+	MDLProbePlacementUniformGrid MDLProbePlacement = 0
+	// An option to examine the lighting conditions at various positions in the scene being evaluated, then place light probes only at the locations where each contributes optimally to scene lighting.
 	MDLProbePlacementIrradianceDistribution MDLProbePlacement = 1
 )
 
@@ -422,20 +504,31 @@ func (e MDLProbePlacement) String() string {
 	}
 }
 
+// Options for the data size and type of texel channel values, used by the channelEncoding property.
 type MDLTextureChannelEncoding int64
 
 const (
-	MDLTextureChannelEncodingUInt8     MDLTextureChannelEncoding = 1
-	MDLTextureChannelEncodingUint8     MDLTextureChannelEncoding = 1
-	MDLTextureChannelEncodingUInt16    MDLTextureChannelEncoding = 2
-	MDLTextureChannelEncodingUint16    MDLTextureChannelEncoding = 2
-	MDLTextureChannelEncodingUInt24    MDLTextureChannelEncoding = 3
-	MDLTextureChannelEncodingUint24    MDLTextureChannelEncoding = 3
-	MDLTextureChannelEncodingUInt32    MDLTextureChannelEncoding = 4
-	MDLTextureChannelEncodingUint32    MDLTextureChannelEncoding = 4
+	// Each channel value per texel is an 8-bit unsigned integer.
+	MDLTextureChannelEncodingUInt8 MDLTextureChannelEncoding = 1
+	// Each channel value per texel is an 8-bit unsigned integer.
+	MDLTextureChannelEncodingUint8 MDLTextureChannelEncoding = 1
+	// Each channel value per texel is a 16-bit unsigned integer.
+	MDLTextureChannelEncodingUInt16 MDLTextureChannelEncoding = 2
+	// Each channel value per texel is a 16-bit unsigned integer.
+	MDLTextureChannelEncodingUint16 MDLTextureChannelEncoding = 2
+	// Each channel value per texel is a 24-bit unsigned integer.
+	MDLTextureChannelEncodingUInt24 MDLTextureChannelEncoding = 3
+	// Each channel value per texel is a 24-bit unsigned integer.
+	MDLTextureChannelEncodingUint24 MDLTextureChannelEncoding = 3
+	// Each channel value per texel is a 32-bit unsigned integer.
+	MDLTextureChannelEncodingUInt32 MDLTextureChannelEncoding = 4
+	// Each channel value per texel is a 32-bit unsigned integer.
+	MDLTextureChannelEncodingUint32 MDLTextureChannelEncoding = 4
+	// Each channel value per texel is a 16-bit floating-point value.
 	MDLTextureChannelEncodingFloat16   MDLTextureChannelEncoding = 258
 	MDLTextureChannelEncodingFloat16SR MDLTextureChannelEncoding = 770
-	MDLTextureChannelEncodingFloat32   MDLTextureChannelEncoding = 260
+	// Each channel value per texel is a 32-bit floating-point value.
+	MDLTextureChannelEncodingFloat32 MDLTextureChannelEncoding = 260
 )
 
 func (e MDLTextureChannelEncoding) String() string {
@@ -489,72 +582,137 @@ func (e MDLTransformOpRotationOrder) String() string {
 	}
 }
 
+// Descriptions of the data size and layout for a vertex attribute, used by the format property.
 type MDLVertexFormat uint64
 
 const (
-	MDLVertexFormatInvalid               MDLVertexFormat = 0
-	MDLVertexFormatPackedBit             MDLVertexFormat = 4096
-	MDLVertexFormatUCharBits             MDLVertexFormat = 65536
-	MDLVertexFormatCharBits              MDLVertexFormat = 131072
-	MDLVertexFormatUCharNormalizedBits   MDLVertexFormat = 196608
-	MDLVertexFormatCharNormalizedBits    MDLVertexFormat = 262144
-	MDLVertexFormatUShortBits            MDLVertexFormat = 327680
-	MDLVertexFormatShortBits             MDLVertexFormat = 393216
-	MDLVertexFormatUShortNormalizedBits  MDLVertexFormat = 458752
-	MDLVertexFormatShortNormalizedBits   MDLVertexFormat = 524288
-	MDLVertexFormatUIntBits              MDLVertexFormat = 589824
-	MDLVertexFormatIntBits               MDLVertexFormat = 655360
-	MDLVertexFormatHalfBits              MDLVertexFormat = 720896
-	MDLVertexFormatFloatBits             MDLVertexFormat = 786432
-	MDLVertexFormatUChar                 MDLVertexFormat = 65537
-	MDLVertexFormatUChar2                MDLVertexFormat = 65538
-	MDLVertexFormatUChar3                MDLVertexFormat = 65539
-	MDLVertexFormatUChar4                MDLVertexFormat = 65540
-	MDLVertexFormatChar                  MDLVertexFormat = 131073
-	MDLVertexFormatChar2                 MDLVertexFormat = 131074
-	MDLVertexFormatChar3                 MDLVertexFormat = 131075
-	MDLVertexFormatChar4                 MDLVertexFormat = 131076
-	MDLVertexFormatUCharNormalized       MDLVertexFormat = 196609
-	MDLVertexFormatUChar2Normalized      MDLVertexFormat = 196610
-	MDLVertexFormatUChar3Normalized      MDLVertexFormat = 196611
-	MDLVertexFormatUChar4Normalized      MDLVertexFormat = 196612
-	MDLVertexFormatCharNormalized        MDLVertexFormat = 262145
-	MDLVertexFormatChar2Normalized       MDLVertexFormat = 262146
-	MDLVertexFormatChar3Normalized       MDLVertexFormat = 262147
-	MDLVertexFormatChar4Normalized       MDLVertexFormat = 262148
-	MDLVertexFormatUShort                MDLVertexFormat = 327681
-	MDLVertexFormatUShort2               MDLVertexFormat = 327682
-	MDLVertexFormatUShort3               MDLVertexFormat = 327683
-	MDLVertexFormatUShort4               MDLVertexFormat = 327684
-	MDLVertexFormatShort                 MDLVertexFormat = 393217
-	MDLVertexFormatShort2                MDLVertexFormat = 393218
-	MDLVertexFormatShort3                MDLVertexFormat = 393219
-	MDLVertexFormatShort4                MDLVertexFormat = 393220
-	MDLVertexFormatUShortNormalized      MDLVertexFormat = 458753
-	MDLVertexFormatUShort2Normalized     MDLVertexFormat = 458754
-	MDLVertexFormatUShort3Normalized     MDLVertexFormat = 458755
-	MDLVertexFormatUShort4Normalized     MDLVertexFormat = 458756
-	MDLVertexFormatShortNormalized       MDLVertexFormat = 524289
-	MDLVertexFormatShort2Normalized      MDLVertexFormat = 524290
-	MDLVertexFormatShort3Normalized      MDLVertexFormat = 524291
-	MDLVertexFormatShort4Normalized      MDLVertexFormat = 524292
-	MDLVertexFormatUInt                  MDLVertexFormat = 589825
-	MDLVertexFormatUInt2                 MDLVertexFormat = 589826
-	MDLVertexFormatUInt3                 MDLVertexFormat = 589827
-	MDLVertexFormatUInt4                 MDLVertexFormat = 589828
-	MDLVertexFormatInt                   MDLVertexFormat = 655361
-	MDLVertexFormatInt2                  MDLVertexFormat = 655362
-	MDLVertexFormatInt3                  MDLVertexFormat = 655363
-	MDLVertexFormatInt4                  MDLVertexFormat = 655364
-	MDLVertexFormatHalf                  MDLVertexFormat = 720897
-	MDLVertexFormatHalf2                 MDLVertexFormat = 720898
-	MDLVertexFormatHalf3                 MDLVertexFormat = 720899
-	MDLVertexFormatHalf4                 MDLVertexFormat = 720900
-	MDLVertexFormatFloat                 MDLVertexFormat = 786433
-	MDLVertexFormatFloat2                MDLVertexFormat = 786434
-	MDLVertexFormatFloat3                MDLVertexFormat = 786435
-	MDLVertexFormatFloat4                MDLVertexFormat = 786436
-	MDLVertexFormatInt1010102Normalized  MDLVertexFormat = 659460
+	// The vertex attribute has just been initialized or its format is unknown.
+	MDLVertexFormatInvalid MDLVertexFormat = 0
+	// A bit mask for vertex attributes in packed vector formats.
+	MDLVertexFormatPackedBit MDLVertexFormat = 4096
+	// A bit mask for vertex attributes whose components are in 8-bit unsigned integer format.
+	MDLVertexFormatUCharBits MDLVertexFormat = 65536
+	// A bit mask for vertex attributes whose components are in 8-bit signed integer format.
+	MDLVertexFormatCharBits MDLVertexFormat = 131072
+	// A bit mask for vertex attributes whose components are in 8-bit unsigned normalized integer format.
+	MDLVertexFormatUCharNormalizedBits MDLVertexFormat = 196608
+	// A bit mask for vertex attributes whose components are in 8-bit signed normalized integer format.
+	MDLVertexFormatCharNormalizedBits MDLVertexFormat = 262144
+	// A bit mask for vertex attributes whose components are in 16-bit unsigned integer format.
+	MDLVertexFormatUShortBits MDLVertexFormat = 327680
+	// A bit mask for vertex attributes whose components are in 16-bit signed integer format.
+	MDLVertexFormatShortBits MDLVertexFormat = 393216
+	// A bit mask for vertex attributes whose components are in 16-bit unsigned normalized integer format.
+	MDLVertexFormatUShortNormalizedBits MDLVertexFormat = 458752
+	// A bit mask for vertex attributes whose components are in 16-bit signed normalized integer format.
+	MDLVertexFormatShortNormalizedBits MDLVertexFormat = 524288
+	// A bit mask for vertex attributes whose components are in 32-bit unsigned integer format.
+	MDLVertexFormatUIntBits MDLVertexFormat = 589824
+	// A bit mask for vertex attributes whose components are in 32-bit signed integer format.
+	MDLVertexFormatIntBits MDLVertexFormat = 655360
+	// A bit mask for vertex attributes whose components are in 16-bit floating-point format.
+	MDLVertexFormatHalfBits MDLVertexFormat = 720896
+	// A bit mask for vertex attributes whose components are in 32-bit floating-point format.
+	MDLVertexFormatFloatBits MDLVertexFormat = 786432
+	// The attribute value for each vertex is a scalar of unsigned 8-bit integer type.
+	MDLVertexFormatUChar MDLVertexFormat = 65537
+	// The attribute value for each vertex is a vector with 2 components, each of unsigned 8-bit integer type.
+	MDLVertexFormatUChar2 MDLVertexFormat = 65538
+	// The attribute value for each vertex is a vector with 3 components, each of unsigned 8-bit integer type.
+	MDLVertexFormatUChar3 MDLVertexFormat = 65539
+	// The attribute value for each vertex is a vector with 4 components, each of unsigned 8-bit integer type.
+	MDLVertexFormatUChar4 MDLVertexFormat = 65540
+	// The attribute value for each vertex is a scalar of signed 8-bit integer type.
+	MDLVertexFormatChar MDLVertexFormat = 131073
+	// The attribute value for each vertex is a vector with 2 components, each of signed 8-bit integer type.
+	MDLVertexFormatChar2 MDLVertexFormat = 131074
+	// The attribute value for each vertex is a vector with 3 components, each of signed 8-bit integer type.
+	MDLVertexFormatChar3 MDLVertexFormat = 131075
+	// The attribute value for each vertex is a vector with 4 components, each of signed 8-bit integer type.
+	MDLVertexFormatChar4 MDLVertexFormat = 131076
+	// The attribute value for each vertex is a normalized scalar of unsigned 8-bit integer type.
+	MDLVertexFormatUCharNormalized MDLVertexFormat = 196609
+	// The attribute value for each vertex is a vector with 2 components, each with a normalized value of unsigned 8-bit integer type.
+	MDLVertexFormatUChar2Normalized MDLVertexFormat = 196610
+	// The attribute value for each vertex is a vector with 3 components, each with a normalized value of unsigned 8-bit integer type.
+	MDLVertexFormatUChar3Normalized MDLVertexFormat = 196611
+	// The attribute value for each vertex is a vector with 4 components, each with a normalized value of unsigned 8-bit integer type.
+	MDLVertexFormatUChar4Normalized MDLVertexFormat = 196612
+	// The attribute value for each vertex is a normalized scalar of signed 8-bit integer type.
+	MDLVertexFormatCharNormalized MDLVertexFormat = 262145
+	// The attribute value for each vertex is a vector with 2 components, each with a normalized value of signed 8-bit integer type.
+	MDLVertexFormatChar2Normalized MDLVertexFormat = 262146
+	// The attribute value for each vertex is a vector with 3 components, each with a normalized value of signed 8-bit integer type.
+	MDLVertexFormatChar3Normalized MDLVertexFormat = 262147
+	// The attribute value for each vertex is a vector with 4 components, each with a normalized value of signed 8-bit integer type.
+	MDLVertexFormatChar4Normalized MDLVertexFormat = 262148
+	// The attribute value for each vertex is a scalar of unsigned 16-bit integer type.
+	MDLVertexFormatUShort MDLVertexFormat = 327681
+	// The attribute value for each vertex is a vector with 2 components, each of unsigned 16-bit integer type.
+	MDLVertexFormatUShort2 MDLVertexFormat = 327682
+	// The attribute value for each vertex is a vector with 3 components, each of unsigned 16-bit integer type.
+	MDLVertexFormatUShort3 MDLVertexFormat = 327683
+	// The attribute value for each vertex is a vector with 4 components, each of unsigned 16-bit integer type.
+	MDLVertexFormatUShort4 MDLVertexFormat = 327684
+	// The attribute value for each vertex is a scalar of signed 16-bit integer type.
+	MDLVertexFormatShort MDLVertexFormat = 393217
+	// The attribute value for each vertex is a vector with 2 components, each of signed 16-bit integer type.
+	MDLVertexFormatShort2 MDLVertexFormat = 393218
+	// The attribute value for each vertex is a vector with 3 components, each of signed 16-bit integer type.
+	MDLVertexFormatShort3 MDLVertexFormat = 393219
+	// The attribute value for each vertex is a vector with 4 components, each of signed 16-bit integer type.
+	MDLVertexFormatShort4 MDLVertexFormat = 393220
+	// The attribute value for each vertex is a normalized scalar of unsigned 16-bit integer type.
+	MDLVertexFormatUShortNormalized MDLVertexFormat = 458753
+	// The attribute value for each vertex is a vector with 2 components, each with a normalized value of unsigned 16-bit integer type.
+	MDLVertexFormatUShort2Normalized MDLVertexFormat = 458754
+	// The attribute value for each vertex is a vector with 3 components, each with a normalized value of unsigned 16-bit integer type.
+	MDLVertexFormatUShort3Normalized MDLVertexFormat = 458755
+	// The attribute value for each vertex is a vector with 4 components, each with a normalized value of unsigned 16-bit integer type.
+	MDLVertexFormatUShort4Normalized MDLVertexFormat = 458756
+	// The attribute value for each vertex is a normalized scalar of signed 16-bit integer type.
+	MDLVertexFormatShortNormalized MDLVertexFormat = 524289
+	// The attribute value for each vertex is a vector with 2 components, each with a normalized value of signed 16-bit integer type.
+	MDLVertexFormatShort2Normalized MDLVertexFormat = 524290
+	// The attribute value for each vertex is a vector with 3 components, each with a normalized value of signed 16-bit integer type.
+	MDLVertexFormatShort3Normalized MDLVertexFormat = 524291
+	// The attribute value for each vertex is a vector with 4 components, each with a normalized value of signed 16-bit integer type.
+	MDLVertexFormatShort4Normalized MDLVertexFormat = 524292
+	// The attribute value for each vertex is a scalar of unsigned 32-bit integer type.
+	MDLVertexFormatUInt MDLVertexFormat = 589825
+	// The attribute value for each vertex is a vector with 2 components, each of unsigned 32-bit integer type.
+	MDLVertexFormatUInt2 MDLVertexFormat = 589826
+	// The attribute value for each vertex is a vector with 3 components, each of unsigned 32-bit integer type.
+	MDLVertexFormatUInt3 MDLVertexFormat = 589827
+	// The attribute value for each vertex is a vector with 4 components, each of unsigned 32-bit integer type.
+	MDLVertexFormatUInt4 MDLVertexFormat = 589828
+	// The attribute value for each vertex is a scalar of signed 32-bit integer type.
+	MDLVertexFormatInt MDLVertexFormat = 655361
+	// The attribute value for each vertex is a vector with 2 components, each of signed 32-bit integer type.
+	MDLVertexFormatInt2 MDLVertexFormat = 655362
+	// The attribute value for each vertex is a vector with 3 components, each of signed 32-bit integer type.
+	MDLVertexFormatInt3 MDLVertexFormat = 655363
+	// The attribute value for each vertex is a vector with 4 components, each of signed 32-bit integer type.
+	MDLVertexFormatInt4 MDLVertexFormat = 655364
+	// The attribute value for each vertex is a scalar of 16-bit floating-point type.
+	MDLVertexFormatHalf MDLVertexFormat = 720897
+	// The attribute value for each vertex is a vector with 2 components, each of 16-bit floating-point type.
+	MDLVertexFormatHalf2 MDLVertexFormat = 720898
+	// The attribute value for each vertex is a vector with 3 components, each of 16-bit floating-point type.
+	MDLVertexFormatHalf3 MDLVertexFormat = 720899
+	// The attribute value for each vertex is a vector with 4 components, each of 16-bit floating-point type.
+	MDLVertexFormatHalf4 MDLVertexFormat = 720900
+	// The attribute value for each vertex is a scalar of 32-bit floating-point type.
+	MDLVertexFormatFloat MDLVertexFormat = 786433
+	// The attribute value for each vertex is a vector with 2 components, each of 32-bit floating-point type.
+	MDLVertexFormatFloat2 MDLVertexFormat = 786434
+	// The attribute value for each vertex is a vector with 3 components, each of 32-bit floating-point type.
+	MDLVertexFormatFloat3 MDLVertexFormat = 786435
+	// The attribute value for each vertex is a vector with 4 components, each of 32-bit floating-point type.
+	MDLVertexFormatFloat4 MDLVertexFormat = 786436
+	// The attribute value for each vertex is a packed vector with 4 components of signed integer type. The first three components are 10 bits each, and the fourth component is 2 bits.
+	MDLVertexFormatInt1010102Normalized MDLVertexFormat = 659460
+	// The attribute value for each vertex is a packed vector with 4 components of unsigned integer type. The first three components are 10 bits each, and the fourth component is 2 bits.
 	MDLVertexFormatUInt1010102Normalized MDLVertexFormat = 593924
 )
 

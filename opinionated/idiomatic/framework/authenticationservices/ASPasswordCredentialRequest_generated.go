@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents a request to supply a password credential.
+//
 // PasswordCredentialRequest wraps [raw.ASPasswordCredentialRequest] with a fluent Go API.
 type PasswordCredentialRequest struct {
 	inner *raw.ASPasswordCredentialRequest
@@ -29,7 +31,7 @@ func PasswordCredentialRequestFromID(id objc.ID) *PasswordCredentialRequest {
 	return &PasswordCredentialRequest{inner: raw.ASPasswordCredentialRequestFromID(id)}
 }
 
-// @abstract Initializes an instance of ASPasswordCredentialRequest. @param credentialIdentity the credential identity to use for this request.
+// Initializes a password credential request object.
 //
 // NewPasswordCredentialRequestWithCredentialIdentity creates a new [PasswordCredentialRequest].
 func NewPasswordCredentialRequestWithCredentialIdentity(credentialIdentity *raw.ASPasswordCredentialIdentity) *PasswordCredentialRequest {

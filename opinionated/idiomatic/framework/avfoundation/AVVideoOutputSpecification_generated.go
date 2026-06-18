@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that specifies the pixel buffer attributes and tag collections handled by a player video output.
+//
 // VideoOutputSpecification wraps [raw.AVVideoOutputSpecification] with a fluent Go API.
 type VideoOutputSpecification struct {
 	inner *raw.AVVideoOutputSpecification

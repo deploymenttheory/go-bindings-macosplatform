@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A control element for the cursor used as a directional pad.
+//
 // DeviceCursor wraps [raw.GCDeviceCursor] with a fluent Go API.
 type DeviceCursor struct {
 	inner *raw.GCDeviceCursor
@@ -36,13 +38,15 @@ func NewDeviceCursor() *DeviceCursor {
 	return &DeviceCursor{inner: raw.GCDeviceCursorFromID(_id)}
 }
 
+// The block that the directional pad calls when the user changes its values.
+//
 // WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
 func (x *DeviceCursor) WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerDirectionPad, float32, float32)) *DeviceCursor {
 	x.inner.GCControllerDirectionPad.SetValueChangedHandler(valueChangedHandler)
 	return x
 }
 
-// The preferred system gesture state for this element. Defaults to GCSystemGestureStateEnabled for most elements @note This is merely the preferred system gesture state - it is not guaranteed to be respected by the system. @note It is highly recommended to leave this set to the default value, however there may be situations (for example, game streaming apps) where it is preferrable to disable system gestures. @see boundToSystemGesture
+// The preferred state for handling input when the user binds the element to a system gesture.
 //
 // WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
 func (x *DeviceCursor) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *DeviceCursor {
@@ -50,7 +54,7 @@ func (x *DeviceCursor) WithPreferredSystemGestureState(preferredSystemGestureSta
 	return x
 }
 
-// The element's SF Symbols name, taking input remapping into account. @note In almost all instances, you should use this over unmappedSfSymbolsName in your UI.
+// A system symbol for the element or the remapped element.
 //
 // WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
 func (x *DeviceCursor) WithSfSymbolsName(sfSymbolsName string) *DeviceCursor {
@@ -58,7 +62,7 @@ func (x *DeviceCursor) WithSfSymbolsName(sfSymbolsName string) *DeviceCursor {
 	return x
 }
 
-// The element's localized name, taking input remapping into account. @note In almost all instances, you should use this over unmappedLocalizedName in your UI.
+// The localized name for the element or the remapped element.
 //
 // WithLocalizedName sets the localizedName property and returns the receiver for chaining.
 func (x *DeviceCursor) WithLocalizedName(localizedName string) *DeviceCursor {
@@ -66,7 +70,7 @@ func (x *DeviceCursor) WithLocalizedName(localizedName string) *DeviceCursor {
 	return x
 }
 
-// The element's SF Symbols name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (sfSymbolsName is nil).
+// The element’s system symbol, not the remapped symbol.
 //
 // WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
 func (x *DeviceCursor) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *DeviceCursor {
@@ -74,7 +78,7 @@ func (x *DeviceCursor) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *
 	return x
 }
 
-// The element's localized name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (localizedName is nil).
+// The element’s localized name, not the remapped name.
 //
 // WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
 func (x *DeviceCursor) WithUnmappedLocalizedName(unmappedLocalizedName string) *DeviceCursor {

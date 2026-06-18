@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An abstract class that defines the interface and general characteristics of Automator actions.
+//
 // Action wraps [raw.AMAction] with a fluent Go API.
 type Action struct {
 	inner *raw.AMAction
@@ -32,6 +34,8 @@ func ActionFromID(id objc.ID) *Action {
 	return &Action{inner: raw.AMActionFromID(id)}
 }
 
+// Initializes the action with the specified definition.
+//
 // NewActionWithDefinitionFromArchive creates a new [Action].
 func NewActionWithDefinitionFromArchive(dict *foundation.NSDictionary[*foundation.NSString, objc.ID], archived bool) *Action {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AMAction")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewActionWithDefinitionFromArchive(dict *foundation.NSDictionary[*foundatio
 	return &Action{inner: raw.AMActionFromID(_id)}
 }
 
+// Loads an Automator action from a file URL.
+//
 // NewActionWithContentsOfURLError creates a new [Action].
 func NewActionWithContentsOfURLError(fileURL string) (*Action, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AMAction")), objc.RegisterName("alloc"))
@@ -50,82 +56,114 @@ func NewActionWithContentsOfURLError(fileURL string) (*Action, error) {
 	return &Action{inner: raw.AMActionFromID(_id)}, nil
 }
 
+// A float value between 0 and 1, which indicates how far along the action is while processing.
+//
 // WithProgressValue sets the progressValue property and returns the receiver for chaining.
 func (x *Action) WithProgressValue(progressValue float64) *Action {
 	x.inner.SetProgressValue(progressValue)
 	return x
 }
 
+// Requests the action to perform its task using the specified input from the specified action.
+//
 // RunWithInputFromActionError calls the underlying RunWithInputFromActionError.
 func (x *Action) RunWithInputFromActionError(input objc.ID, anAction *raw.AMAction, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) objc.ID {
 	return x.inner.RunWithInputFromActionError(input, anAction, errorInfo)
 }
 
+// Requests the action to perform its task using the specified input.
+//
 // RunWithInputError calls the underlying RunWithInputError.
 func (x *Action) RunWithInputError(input objc.ID) (objc.ID, error) {
 	return x.inner.RunWithInputError(input)
 }
 
+// Causes Automator to wait for notification that the action has completed execution, which allows the action to perform an asynchronous operation.
+//
 // RunAsynchronouslyWithInput calls the underlying RunAsynchronouslyWithInput.
 func (x *Action) RunAsynchronouslyWithInput(input objc.ID) {
 	x.inner.RunAsynchronouslyWithInput(input)
 }
 
+// Provides an opportunity for an action to perform cleanup operations, such as closing windows and deallocating memory.
+//
 // WillFinishRunning calls the underlying WillFinishRunning.
 func (x *Action) WillFinishRunning() {
 	x.inner.WillFinishRunning()
 }
 
+// Sent by the action to itself when it has finished running asynchronously.
+//
 // DidFinishRunningWithError calls the underlying DidFinishRunningWithError.
 func (x *Action) DidFinishRunningWithError(errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.DidFinishRunningWithError(errorInfo)
 }
 
+// Causes the action to stop running and return an error, which, in turn, causes the workflow to stop.
+//
 // FinishRunningWithError calls the underlying FinishRunningWithError.
 func (x *Action) FinishRunningWithError(error_ unsafe.Pointer) {
 	x.inner.FinishRunningWithError(error_)
 }
 
+// Stops the action from running.
+//
 // Stop calls the underlying Stop.
 func (x *Action) Stop() {
 	x.inner.Stop()
 }
 
+// Resets the action to its initial state.
+//
 // Reset calls the underlying Reset.
 func (x *Action) Reset() {
 	x.inner.Reset()
 }
 
+// Examines the parameters and other configuration information specified in the passed dictionary and adds its own information to it if appropriate.
+//
 // WriteToDictionary calls the underlying WriteToDictionary.
 func (x *Action) WriteToDictionary(dictionary *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.WriteToDictionary(dictionary)
 }
 
+// Allows the action to initialize its user interface.
+//
 // Opened calls the underlying Opened.
 func (x *Action) Opened() {
 	x.inner.Opened()
 }
 
+// Allows the action to synchronize its information with settings in another app.
+//
 // Activated calls the underlying Activated.
 func (x *Action) Activated() {
 	x.inner.Activated()
 }
 
+// Invoked by Automator when the receiving action is removed from a workflow, allowing it to perform cleanup operations.
+//
 // Closed calls the underlying Closed.
 func (x *Action) Closed() {
 	x.inner.Closed()
 }
 
+// Requests the action to update its stored set of parameters from the settings in the action’s user interface.
+//
 // UpdateParameters calls the underlying UpdateParameters.
 func (x *Action) UpdateParameters() {
 	x.inner.UpdateParameters()
 }
 
+// Requests the action to update its user interface from its stored parameters, which have changed.
+//
 // ParametersUpdated calls the underlying ParametersUpdated.
 func (x *Action) ParametersUpdated() {
 	x.inner.ParametersUpdated()
 }
 
+// Displays a message in Automator’s log area.
+//
 // LogMessageWithLevelFormat calls the underlying LogMessageWithLevelFormat.
 func (x *Action) LogMessageWithLevelFormat(level AMLogLevel, format string) {
 	x.inner.LogMessageWithLevelFormat(raw.AMLogLevel(level), foundation.NSStringStringWithUTF8String(format))

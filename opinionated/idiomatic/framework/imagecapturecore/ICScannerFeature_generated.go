@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class that describes a scanner feature.
+//
 // ScannerFeature wraps [raw.ICScannerFeature] with a fluent Go API.
 type ScannerFeature struct {
 	inner *raw.ICScannerFeature

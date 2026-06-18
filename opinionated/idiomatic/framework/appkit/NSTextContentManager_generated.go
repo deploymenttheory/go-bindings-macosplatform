@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An abstract class that defines the interface and a default implementation for managing the text document contents.
+//
 // TextContentManager wraps [raw.NSTextContentManager] with a fluent Go API.
 type TextContentManager struct {
 	inner *raw.NSTextContentManager
@@ -39,6 +41,8 @@ func NewTextContentManager() *TextContentManager {
 	return &TextContentManager{inner: raw.NSTextContentManagerFromID(_id)}
 }
 
+// Creates a new content manager object from data in an unarchiver.
+//
 // NewTextContentManagerWithCoder creates a new [TextContentManager].
 func NewTextContentManagerWithCoder(coder *foundation.NSCoder) *TextContentManager {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextContentManager")), objc.RegisterName("alloc"))
@@ -46,40 +50,54 @@ func NewTextContentManagerWithCoder(coder *foundation.NSCoder) *TextContentManag
 	return &TextContentManager{inner: raw.NSTextContentManagerFromID(_id)}
 }
 
+// The delegate for the content manager object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *TextContentManager) WithDelegate(delegate raw.NSTextContentManagerDelegate) *TextContentManager {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The primary text layout manager for this content.
+//
 // WithPrimaryTextLayoutManager sets the primaryTextLayoutManager property and returns the receiver for chaining.
 func (x *TextContentManager) WithPrimaryTextLayoutManager(primaryTextLayoutManager *TextLayoutManager) *TextContentManager {
 	x.inner.SetPrimaryTextLayoutManager(primaryTextLayoutManager.Unwrap())
 	return x
 }
 
+// Determines if the framework should automatically synchronize all text layout managers when exiting an editing transaction.
+//
 // WithAutomaticallySynchronizesTextLayoutManagers sets the automaticallySynchronizesTextLayoutManagers property and returns the receiver for chaining.
 func (x *TextContentManager) WithAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers bool) *TextContentManager {
 	x.inner.SetAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers)
 	return x
 }
 
+// Determines whether to automatically synchronize with the backing store when an editing transaction finishes.
+//
 // WithAutomaticallySynchronizesToBackingStore sets the automaticallySynchronizesToBackingStore property and returns the receiver for chaining.
 func (x *TextContentManager) WithAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore bool) *TextContentManager {
 	x.inner.SetAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore)
 	return x
 }
 
+// Adds the layout manager you provide to the list of layout managers.
+//
 // AddTextLayoutManager calls the underlying AddTextLayoutManager.
 func (x *TextContentManager) AddTextLayoutManager(textLayoutManager *raw.NSTextLayoutManager) {
 	x.inner.AddTextLayoutManager(textLayoutManager)
 }
 
+// Removes the layout manager you specifiy from the list of layout managers.
+//
 // RemoveTextLayoutManager calls the underlying RemoveTextLayoutManager.
 func (x *TextContentManager) RemoveTextLayoutManager(textLayoutManager *raw.NSTextLayoutManager) {
 	x.inner.RemoveTextLayoutManager(textLayoutManager)
 }
 
+// Synchronizes changes to all nonprimary text layout managers.
+//
 // SynchronizeTextLayoutManagers blocks until the operation completes or ctx is cancelled.
 func (x *TextContentManager) SynchronizeTextLayoutManagers(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -98,11 +116,15 @@ func (x *TextContentManager) SynchronizeTextLayoutManagers(ctx context.Context) 
 	}
 }
 
+// Returns an array of text elements that intersect with the range you specify.
+//
 // TextElementsForRange calls the underlying TextElementsForRange.
 func (x *TextContentManager) TextElementsForRange(range_ *raw.NSTextRange) *foundation.NSArray[*raw.NSTextElement] {
 	return x.inner.TextElementsForRange(range_)
 }
 
+// Performs an editing transaction and invokes a block upon completion.
+//
 // PerformEditingTransactionUsing blocks until the operation completes or ctx is cancelled.
 func (x *TextContentManager) PerformEditingTransactionUsing(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -117,6 +139,8 @@ func (x *TextContentManager) PerformEditingTransactionUsing(ctx context.Context)
 	}
 }
 
+// Records information about an edit action to the transaction.
+//
 // RecordEditActionInRangeNewTextRange calls the underlying RecordEditActionInRangeNewTextRange.
 func (x *TextContentManager) RecordEditActionInRangeNewTextRange(originalTextRange *raw.NSTextRange, newTextRange *raw.NSTextRange) {
 	x.inner.RecordEditActionInRangeNewTextRange(originalTextRange, newTextRange)

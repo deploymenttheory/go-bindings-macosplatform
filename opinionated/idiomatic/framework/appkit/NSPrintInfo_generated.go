@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that stores information that’s used to generate printed output.
+//
 // PrintInfo wraps [raw.NSPrintInfo] with a fluent Go API.
 type PrintInfo struct {
 	inner *raw.NSPrintInfo
@@ -39,6 +41,8 @@ func NewPrintInfo() *PrintInfo {
 	return &PrintInfo{inner: raw.NSPrintInfoFromID(_id)}
 }
 
+// Returns a printing information object initialized with the parameters in the specified dictionary.
+//
 // NewPrintInfoWithDictionary creates a new [PrintInfo].
 func NewPrintInfoWithDictionary(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PrintInfo {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPrintInfo")), objc.RegisterName("alloc"))
@@ -46,6 +50,8 @@ func NewPrintInfoWithDictionary(attributes *foundation.NSDictionary[*foundation.
 	return &PrintInfo{inner: raw.NSPrintInfoFromID(_id)}
 }
 
+// Creates a printing information object from data in an unarchiver.
+//
 // NewPrintInfoWithCoder creates a new [PrintInfo].
 func NewPrintInfoWithCoder(coder *foundation.NSCoder) *PrintInfo {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPrintInfo")), objc.RegisterName("alloc"))
@@ -53,131 +59,177 @@ func NewPrintInfoWithCoder(coder *foundation.NSCoder) *PrintInfo {
 	return &PrintInfo{inner: raw.NSPrintInfoFromID(_id)}
 }
 
+// The name of the currently selected paper size.
+//
 // WithPaperName sets the paperName property and returns the receiver for chaining.
 func (x *PrintInfo) WithPaperName(paperName *foundation.NSString) *PrintInfo {
 	x.inner.SetPaperName(paperName)
 	return x
 }
 
+// The size of the paper.
+//
 // WithPaperSize sets the paperSize property and returns the receiver for chaining.
 func (x *PrintInfo) WithPaperSize(paperSize corefoundation.CGSize) *PrintInfo {
 	x.inner.SetPaperSize(paperSize)
 	return x
 }
 
+// The orientation attribute.
+//
 // WithOrientation sets the orientation property and returns the receiver for chaining.
 func (x *PrintInfo) WithOrientation(orientation NSPaperOrientation) *PrintInfo {
 	x.inner.SetOrientation(raw.NSPaperOrientation(orientation))
 	return x
 }
 
+// The current scaling factor.
+//
 // WithScalingFactor sets the scalingFactor property and returns the receiver for chaining.
 func (x *PrintInfo) WithScalingFactor(scalingFactor float64) *PrintInfo {
 	x.inner.SetScalingFactor(scalingFactor)
 	return x
 }
 
+// The width of the left margin.
+//
 // WithLeftMargin sets the leftMargin property and returns the receiver for chaining.
 func (x *PrintInfo) WithLeftMargin(leftMargin float64) *PrintInfo {
 	x.inner.SetLeftMargin(leftMargin)
 	return x
 }
 
+// The width of the right margin.
+//
 // WithRightMargin sets the rightMargin property and returns the receiver for chaining.
 func (x *PrintInfo) WithRightMargin(rightMargin float64) *PrintInfo {
 	x.inner.SetRightMargin(rightMargin)
 	return x
 }
 
+// The top margin to the specified size.
+//
 // WithTopMargin sets the topMargin property and returns the receiver for chaining.
 func (x *PrintInfo) WithTopMargin(topMargin float64) *PrintInfo {
 	x.inner.SetTopMargin(topMargin)
 	return x
 }
 
+// The height of the bottom margin.
+//
 // WithBottomMargin sets the bottomMargin property and returns the receiver for chaining.
 func (x *PrintInfo) WithBottomMargin(bottomMargin float64) *PrintInfo {
 	x.inner.SetBottomMargin(bottomMargin)
 	return x
 }
 
+// A Boolean value that indicates whether the image is centered horizontally.
+//
 // WithHorizontallyCentered sets the horizontallyCentered property and returns the receiver for chaining.
 func (x *PrintInfo) WithHorizontallyCentered(horizontallyCentered bool) *PrintInfo {
 	x.inner.SetHorizontallyCentered(horizontallyCentered)
 	return x
 }
 
+// A Boolean value that indicates whether the image is centered vertically.
+//
 // WithVerticallyCentered sets the verticallyCentered property and returns the receiver for chaining.
 func (x *PrintInfo) WithVerticallyCentered(verticallyCentered bool) *PrintInfo {
 	x.inner.SetVerticallyCentered(verticallyCentered)
 	return x
 }
 
+// The horizontal pagination mode.
+//
 // WithHorizontalPagination sets the horizontalPagination property and returns the receiver for chaining.
 func (x *PrintInfo) WithHorizontalPagination(horizontalPagination NSPrintingPaginationMode) *PrintInfo {
 	x.inner.SetHorizontalPagination(raw.NSPrintingPaginationMode(horizontalPagination))
 	return x
 }
 
+// The vertical pagination to the specified mode.
+//
 // WithVerticalPagination sets the verticalPagination property and returns the receiver for chaining.
 func (x *PrintInfo) WithVerticalPagination(verticalPagination NSPrintingPaginationMode) *PrintInfo {
 	x.inner.SetVerticalPagination(raw.NSPrintingPaginationMode(verticalPagination))
 	return x
 }
 
+// The action specified for the job.
+//
 // WithJobDisposition sets the jobDisposition property and returns the receiver for chaining.
 func (x *PrintInfo) WithJobDisposition(jobDisposition *foundation.NSString) *PrintInfo {
 	x.inner.SetJobDisposition(jobDisposition)
 	return x
 }
 
+// The printer object to be used for printing.
+//
 // WithPrinter sets the printer property and returns the receiver for chaining.
 func (x *PrintInfo) WithPrinter(printer *Printer) *PrintInfo {
 	x.inner.SetPrinter(printer.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether only the currently selected contents should be printed.
+//
 // WithSelectionOnly sets the selectionOnly property and returns the receiver for chaining.
 func (x *PrintInfo) WithSelectionOnly(selectionOnly bool) *PrintInfo {
 	x.inner.SetSelectionOnly(selectionOnly)
 	return x
 }
 
+// Returns the print info’s dictionary that contains the printing attributes.
+//
 // Dictionary calls the underlying Dictionary.
 func (x *PrintInfo) Dictionary() *foundation.NSMutableDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.Dictionary()
 }
 
+// Validates the attributes encapsulated by the print info.
+//
 // SetUpPrintOperationDefaultValues calls the underlying SetUpPrintOperationDefaultValues.
 func (x *PrintInfo) SetUpPrintOperationDefaultValues() {
 	x.inner.SetUpPrintOperationDefaultValues()
 }
 
+// Returns a Core Printing object configured with the print info’s session information.
+//
 // PMPrintSession calls the underlying PMPrintSession.
 func (x *PrintInfo) PMPrintSession() unsafe.Pointer {
 	return x.inner.PMPrintSession()
 }
 
+// Returns a Core Printing object configured with the print info’s page format information.
+//
 // PMPageFormat calls the underlying PMPageFormat.
 func (x *PrintInfo) PMPageFormat() unsafe.Pointer {
 	return x.inner.PMPageFormat()
 }
 
+// Returns a Core Printing object configured with the print info’s print settings information
+//
 // PMPrintSettings calls the underlying PMPrintSettings.
 func (x *PrintInfo) PMPrintSettings() unsafe.Pointer {
 	return x.inner.PMPrintSettings()
 }
 
+// Synchronizes the print info’s page format information with information from its associated page format object.
+//
 // UpdateFromPMPageFormat calls the underlying UpdateFromPMPageFormat.
 func (x *PrintInfo) UpdateFromPMPageFormat() {
 	x.inner.UpdateFromPMPageFormat()
 }
 
+// Synchronizes the print info’s print settings information with information from its associated print settings object.
+//
 // UpdateFromPMPrintSettings calls the underlying UpdateFromPMPrintSettings.
 func (x *PrintInfo) UpdateFromPMPrintSettings() {
 	x.inner.UpdateFromPMPrintSettings()
 }
 
+// Updates the print info with all the settings and attributes in the specified PDF info object.
+//
 // TakeSettingsFromPDFInfo calls the underlying TakeSettingsFromPDFInfo.
 func (x *PrintInfo) TakeSettingsFromPDFInfo(inPDFInfo *raw.NSPDFInfo) {
 	x.inner.TakeSettingsFromPDFInfo(inPDFInfo)

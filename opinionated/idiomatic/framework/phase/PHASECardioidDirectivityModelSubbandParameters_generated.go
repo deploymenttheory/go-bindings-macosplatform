@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A data set that projects sound of a certain frequency outward in the shape of a heart.
+//
 // CardioidDirectivityModelSubbandParameters wraps [raw.PHASECardioidDirectivityModelSubbandParameters] with a fluent Go API.
 type CardioidDirectivityModelSubbandParameters struct {
 	inner *raw.PHASECardioidDirectivityModelSubbandParameters
@@ -37,7 +39,7 @@ func NewCardioidDirectivityModelSubbandParameters() *CardioidDirectivityModelSub
 	return &CardioidDirectivityModelSubbandParameters{inner: raw.PHASECardioidDirectivityModelSubbandParametersFromID(_id)}
 }
 
-// @property frequency @abstract The frequency of the subband, in hertz. @note Values are clamped to the range [20.0, 20000.0]. Default value is 1000.0.
+// A frequency in the audio spectrum where the pattern and sharpness resonate most.
 //
 // WithFrequency sets the frequency property and returns the receiver for chaining.
 func (x *CardioidDirectivityModelSubbandParameters) WithFrequency(frequency float64) *CardioidDirectivityModelSubbandParameters {
@@ -45,7 +47,7 @@ func (x *CardioidDirectivityModelSubbandParameters) WithFrequency(frequency floa
 	return x
 }
 
-// @property pattern @abstract The directivity pattern. @note Values are clamped to the range [0.0, 1.0]. Default value is 0.0. 0.0 is omnidirectional. 0.5 is cardioid. 1.0 is dipole.
+// A shape that determines the direction of sound.
 //
 // WithPattern sets the pattern property and returns the receiver for chaining.
 func (x *CardioidDirectivityModelSubbandParameters) WithPattern(pattern float64) *CardioidDirectivityModelSubbandParameters {
@@ -53,7 +55,7 @@ func (x *CardioidDirectivityModelSubbandParameters) WithPattern(pattern float64)
 	return x
 }
 
-// @property sharpness @abstract The sharpness of the directivity pattern. @note Values are clamped to the range [1.0, DBL_MAX]. Default value is 1.0. Values > 1.0 increase sharpness.
+// The amount that the shape overlaps with bordering subbands.
 //
 // WithSharpness sets the sharpness property and returns the receiver for chaining.
 func (x *CardioidDirectivityModelSubbandParameters) WithSharpness(sharpness float64) *CardioidDirectivityModelSubbandParameters {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object you use to configure frame processor for low-latency super-resolution scaler processing.
+//
 // LowLatencySuperResolutionScalerConfiguration wraps [raw.VTLowLatencySuperResolutionScalerConfiguration] with a fluent Go API.
 type LowLatencySuperResolutionScalerConfiguration struct {
 	inner *raw.VTLowLatencySuperResolutionScalerConfiguration
@@ -33,7 +35,7 @@ func LowLatencySuperResolutionScalerConfigurationFromID(id objc.ID) *LowLatencyS
 	return &LowLatencySuperResolutionScalerConfiguration{inner: raw.VTLowLatencySuperResolutionScalerConfigurationFromID(id)}
 }
 
-// Creates a new low-latency super-resolution scaler configuration with specified frame width and height. - Parameters: - frameWidth: Width of source frame in pixels. - frameHeight: Height of source frame in pixels. - scaleFactor: The scale factor to apply. This must be a supported value that “supportedScaleFactorsForFrameWidth:frameHeight:“ returns.
+// Creates a new low-latency super-resolution scaler configuration with specified frame width and height.
 //
 // NewLowLatencySuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactor creates a new [LowLatencySuperResolutionScalerConfiguration].
 func NewLowLatencySuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactor(frameWidth int, frameHeight int, scaleFactor float32) *LowLatencySuperResolutionScalerConfiguration {

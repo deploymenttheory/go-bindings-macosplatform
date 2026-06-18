@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A graph of points and curves that shapes the volume of a sound over distance.
+//
 // EnvelopeDistanceModelParameters wraps [raw.PHASEEnvelopeDistanceModelParameters] with a fluent Go API.
 type EnvelopeDistanceModelParameters struct {
 	inner *raw.PHASEEnvelopeDistanceModelParameters
@@ -31,7 +33,7 @@ func EnvelopeDistanceModelParametersFromID(id objc.ID) *EnvelopeDistanceModelPar
 	return &EnvelopeDistanceModelParameters{inner: raw.PHASEEnvelopeDistanceModelParametersFromID(id)}
 }
 
-// @method initWithEnvelope @abstract Initialize a PHASEEnvelopeDistanceModelParameters with a PHASEEnvelope @param envelope An envelope object where x values are interpreted as distance and the y values interpreted as gain. @return An instance, or nil if initialization failed.
+// Creates the distance model parameters with an envelope.
 //
 // NewEnvelopeDistanceModelParametersWithEnvelope creates a new [EnvelopeDistanceModelParameters].
 func NewEnvelopeDistanceModelParametersWithEnvelope(envelope *raw.PHASEEnvelope) *EnvelopeDistanceModelParameters {
@@ -40,7 +42,7 @@ func NewEnvelopeDistanceModelParametersWithEnvelope(envelope *raw.PHASEEnvelope)
 	return &EnvelopeDistanceModelParameters{inner: raw.PHASEEnvelopeDistanceModelParametersFromID(_id)}
 }
 
-// @property fadeOutParameters @abstract Fade out parameters (optional).
+// A distance over which the framework fades out the mixer’s sound.
 //
 // WithFadeOutParameters sets the fadeOutParameters property and returns the receiver for chaining.
 func (x *EnvelopeDistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *EnvelopeDistanceModelParameters {

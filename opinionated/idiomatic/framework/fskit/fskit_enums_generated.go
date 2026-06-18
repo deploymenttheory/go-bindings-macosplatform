@@ -9,12 +9,13 @@ import (
 	"strings"
 )
 
+// An enumeration of container state values.
 type FSContainerState int64
 
 const (
-	// The container isn't ready.
+	// The container isn’t ready.
 	FSContainerStateNotReady FSContainerState = 0
-	// The container is blocked from transitioning from the not-ready state to the ready state by a potentially-recoverable error. This state implies that the error has a resolution that would allow the container to become ready, such as correcting an incorrect password.
+	// The container is blocked from transitioning from the not-ready state to the ready state by a potentially-recoverable error.
 	FSContainerStateBlocked FSContainerState = 1
 	// The container is ready, but inactive.
 	FSContainerStateReady FSContainerState = 2
@@ -37,12 +38,13 @@ func (e FSContainerState) String() string {
 	}
 }
 
+// An enumeration of types of extents.
 type FSExtentType int64
 
 const (
-	// An extent type to indicate valid data. Use this type for all extents on a file system that doesn't support sparse files. > Tip: The kernel keeps track of the end of file, so it knows a range of `[EOF, allocated space]` is uninitialized. Because of this behavior, it's valid to pass the data extent type for such a range.
+	// An extent type to indicate valid data.
 	FSExtentTypeData FSExtentType = 0
-	// An extent type to indicate uninitialized data. Only use this extent type in file systems that support sparse files, and only then to represent ranges in the file that aren't allocated yet.
+	// An extent type to indicate uninitialized data.
 	FSExtentTypeZeroFill FSExtentType = 1
 )
 
@@ -229,14 +231,15 @@ func (e FSItemType) String() string {
 	}
 }
 
+// A type that represents the recognition and usability of a probed resource.
 type FSMatchResult int64
 
 const (
-	// The probe doesn't recognize the resource. This match result is appropriate when the file system module determines that the resource uses a completely different format.
+	// The probe doesn’t recognize the resource.
 	FSMatchResultNotRecognized FSMatchResult = 0
-	// The probe recognizes the resource but can't use it. This match result is appropriate when the file system module identifies the resource's format but can't use it. For example, if the resource uses a newer version than the module supports, the module can name the resource but can't safely do anything with it.
+	// The probe recognizes the resource but can’t use it.
 	FSMatchResultRecognized FSMatchResult = 1
-	// The probe recognizes the resource and is ready to use it, but only in a limited capacity. This match result is appropriate when the file system module identifies the resource's format but also identifies incompatibilities. For example, if the module determines the resource uses new features that the module doesn't support, the module may only offer read-only access.
+	// The probe recognizes the resource and is ready to use it, but only in a limited capacity.
 	FSMatchResultUsableButLimited FSMatchResult = 2
 	// The probe recognizes the resource and is ready to use it.
 	FSMatchResultUsable FSMatchResult = 3

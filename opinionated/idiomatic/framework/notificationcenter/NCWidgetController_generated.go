@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object used to specify whether a Today widget has content to display.
+//
 // WidgetController wraps [raw.NCWidgetController] with a fluent Go API.
 type WidgetController struct {
 	inner *raw.NCWidgetController
@@ -36,6 +38,8 @@ func NewWidgetController() *WidgetController {
 	return &WidgetController{inner: raw.NCWidgetControllerFromID(_id)}
 }
 
+// Sets whether the specified widget has content to display.
+//
 // SetHasContentForWidgetWithBundleIdentifier calls the underlying SetHasContentForWidgetWithBundleIdentifier.
 func (x *WidgetController) SetHasContentForWidgetWithBundleIdentifier(flag bool, bundleID string) {
 	x.inner.SetHasContentForWidgetWithBundleIdentifier(flag, foundation.NSStringStringWithUTF8String(bundleID))

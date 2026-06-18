@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains layout-related attributes for an element in a collection view.
+//
 // CollectionViewLayoutAttributes wraps [raw.NSCollectionViewLayoutAttributes] with a fluent Go API.
 type CollectionViewLayoutAttributes struct {
 	inner *raw.NSCollectionViewLayoutAttributes
@@ -40,36 +42,48 @@ func NewCollectionViewLayoutAttributes() *CollectionViewLayoutAttributes {
 	return &CollectionViewLayoutAttributes{inner: raw.NSCollectionViewLayoutAttributesFromID(_id)}
 }
 
+// The frame rectangle of the element.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *CollectionViewLayoutAttributes) WithFrame(frame corefoundation.CGRect) *CollectionViewLayoutAttributes {
 	x.inner.SetFrame(frame)
 	return x
 }
 
+// The size of the element.
+//
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *CollectionViewLayoutAttributes) WithSize(size corefoundation.CGSize) *CollectionViewLayoutAttributes {
 	x.inner.SetSize(size)
 	return x
 }
 
+// The transparency of the element.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *CollectionViewLayoutAttributes) WithAlpha(alpha float64) *CollectionViewLayoutAttributes {
 	x.inner.SetAlpha(alpha)
 	return x
 }
 
+// The element’s position on the z axis.
+//
 // WithZIndex sets the zIndex property and returns the receiver for chaining.
 func (x *CollectionViewLayoutAttributes) WithZIndex(zIndex int) *CollectionViewLayoutAttributes {
 	x.inner.SetZIndex(zIndex)
 	return x
 }
 
+// A Boolean value indicating whether the element is hidden.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *CollectionViewLayoutAttributes) WithHidden(hidden bool) *CollectionViewLayoutAttributes {
 	x.inner.SetHidden(hidden)
 	return x
 }
 
+// The index path of the element.
+//
 // WithIndexPath sets the indexPath property and returns the receiver for chaining.
 func (x *CollectionViewLayoutAttributes) WithIndexPath(indexPath *foundation.NSIndexPath) *CollectionViewLayoutAttributes {
 	x.inner.SetIndexPath(indexPath)

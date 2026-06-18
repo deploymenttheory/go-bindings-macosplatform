@@ -184,13 +184,15 @@ func (x *AccelerationStructureMotionCurveGeometryDescriptor) WithCurveEndCaps(cu
 	return x
 }
 
+// An index into the intersection table for determining which intersection function Metal calls when it intersects a ray with the acceleration structure.
+//
 // WithIntersectionFunctionTableOffset sets the intersectionFunctionTableOffset property and returns the receiver for chaining.
 func (x *AccelerationStructureMotionCurveGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset)
 	return x
 }
 
-// @brief Whether the geometry is opaque
+// A Boolean value that determines whether the geometry data in the acceleration structure needs to skip triangle-intersection tests.
 //
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *AccelerationStructureMotionCurveGeometryDescriptor) WithOpaque(opaque bool) *AccelerationStructureMotionCurveGeometryDescriptor {
@@ -198,7 +200,7 @@ func (x *AccelerationStructureMotionCurveGeometryDescriptor) WithOpaque(opaque b
 	return x
 }
 
-// @brief Whether intersection functions may be invoked more than once per ray/primitive intersection. Defaults to YES.
+// A Boolean value that indicates whether Metal calls the ray-intersection test more than once per primitive on the structure.
 //
 // WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
 func (x *AccelerationStructureMotionCurveGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureMotionCurveGeometryDescriptor {
@@ -206,7 +208,7 @@ func (x *AccelerationStructureMotionCurveGeometryDescriptor) WithAllowDuplicateI
 	return x
 }
 
-// @brief Label
+// A label for the geometry structure, suitable for debugging.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *AccelerationStructureMotionCurveGeometryDescriptor) WithLabel(label string) *AccelerationStructureMotionCurveGeometryDescriptor {

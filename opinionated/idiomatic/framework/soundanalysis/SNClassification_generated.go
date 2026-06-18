@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that pairs a sound classifier’s prediction with its confidence in that prediction.
+//
 // Classification wraps [raw.SNClassification] with a fluent Go API.
 type Classification struct {
 	inner *raw.SNClassification

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Base interface for other function-derived interfaces.
+//
 // MTL4BinaryFunctionDescriptor wraps [raw.MTL4BinaryFunctionDescriptor] with a fluent Go API.
 type MTL4BinaryFunctionDescriptor struct {
 	inner *raw.MTL4BinaryFunctionDescriptor
@@ -37,7 +39,7 @@ func NewMTL4BinaryFunctionDescriptor() *MTL4BinaryFunctionDescriptor {
 	return &MTL4BinaryFunctionDescriptor{inner: raw.MTL4BinaryFunctionDescriptorFromID(_id)}
 }
 
-// Associates a string that uniquely identifies a binary function. You can use this property to look up a corresponding binary function by name in a “MTL4Archive“ instance.
+// Associates a string that uniquely identifies a binary function.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *MTL4BinaryFunctionDescriptor) WithName(name string) *MTL4BinaryFunctionDescriptor {

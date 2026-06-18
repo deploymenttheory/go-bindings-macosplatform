@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object describing the location of a custom language model and specialized vocabulary.
+//
 // SpeechLanguageModelConfiguration wraps [raw.SFSpeechLanguageModelConfiguration] with a fluent Go API.
 type SpeechLanguageModelConfiguration struct {
 	inner *raw.SFSpeechLanguageModelConfiguration

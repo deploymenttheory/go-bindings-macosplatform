@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A concrete layout object that arranges items end-to-end in a linear strip.
+//
 // ScrubberFlowLayout wraps [raw.NSScrubberFlowLayout] with a fluent Go API.
 type ScrubberFlowLayout struct {
 	inner *raw.NSScrubberFlowLayout
@@ -37,7 +39,7 @@ func NewScrubberFlowLayout() *ScrubberFlowLayout {
 	return &ScrubberFlowLayout{inner: raw.NSScrubberFlowLayoutFromID(_id)}
 }
 
-// The amount of horizontal spacing between items in points. The default value is 0.0.
+// The horizontal spacing between items, specified in points.
 //
 // WithItemSpacing sets the itemSpacing property and returns the receiver for chaining.
 func (x *ScrubberFlowLayout) WithItemSpacing(itemSpacing float64) *ScrubberFlowLayout {
@@ -45,7 +47,7 @@ func (x *ScrubberFlowLayout) WithItemSpacing(itemSpacing float64) *ScrubberFlowL
 	return x
 }
 
-// The frame size for each item, if not provided by the scrubber's delegate. The default value is { 50.0, 30.0 }.
+// The frame size for each item in the scrubber.
 //
 // WithItemSize sets the itemSize property and returns the receiver for chaining.
 func (x *ScrubberFlowLayout) WithItemSize(itemSize corefoundation.CGSize) *ScrubberFlowLayout {
@@ -53,6 +55,8 @@ func (x *ScrubberFlowLayout) WithItemSize(itemSize corefoundation.CGSize) *Scrub
 	return x
 }
 
+// Informs the scrubber that it should perform a new layout pass for the items at the specified indexes.
+//
 // InvalidateLayoutForItemsAtIndexes calls the underlying InvalidateLayoutForItemsAtIndexes.
 func (x *ScrubberFlowLayout) InvalidateLayoutForItemsAtIndexes(invalidItemIndexes *foundation.NSIndexSet) {
 	x.inner.InvalidateLayoutForItemsAtIndexes(invalidItemIndexes)

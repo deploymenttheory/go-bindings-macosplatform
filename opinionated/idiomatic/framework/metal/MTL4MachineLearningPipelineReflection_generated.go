@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Represents reflection information for a machine learning pipeline state.
+//
 // MTL4MachineLearningPipelineReflection wraps [raw.MTL4MachineLearningPipelineReflection] with a fluent Go API.
 type MTL4MachineLearningPipelineReflection struct {
 	inner *raw.MTL4MachineLearningPipelineReflection

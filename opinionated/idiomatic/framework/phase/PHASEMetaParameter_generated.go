@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A named parameter with a value that the app can change over time.
+//
 // MetaParameter wraps [raw.PHASEMetaParameter] with a fluent Go API.
 type MetaParameter struct {
 	inner *raw.PHASEMetaParameter
@@ -36,7 +38,7 @@ func NewMetaParameter() *MetaParameter {
 	return &MetaParameter{inner: raw.PHASEMetaParameterFromID(_id)}
 }
 
-// @property value @abstract The value of this metaparameter
+// A value for the metaparameter.
 //
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *MetaParameter) WithValue(value objc.ID) *MetaParameter {

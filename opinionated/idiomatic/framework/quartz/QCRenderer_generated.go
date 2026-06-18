@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A base class for low-level rendering.
+//
 // QCRenderer wraps [raw.QCRenderer] with a fluent Go API.
 type QCRenderer struct {
 	inner *raw.QCRenderer
@@ -33,6 +35,8 @@ func QCRendererFromID(id objc.ID) *QCRenderer {
 	return &QCRenderer{inner: raw.QCRendererFromID(id)}
 }
 
+// Creates a renderer object with a composition object and a color space.
+//
 // NewQCRendererWithCompositionColorSpace creates a new [QCRenderer].
 func NewQCRendererWithCompositionColorSpace(composition *raw.QCComposition, colorSpace unsafe.Pointer) *QCRenderer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QCRenderer")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewQCRendererWithCompositionColorSpace(composition *raw.QCComposition, colo
 	return &QCRenderer{inner: raw.QCRendererFromID(_id)}
 }
 
+// Creates a renderer object with a CGLContextObj object, a pixel format, a color space, and a composition object.
+//
 // NewQCRendererWithCGLContextPixelFormatColorSpaceComposition creates a new [QCRenderer].
 func NewQCRendererWithCGLContextPixelFormatColorSpaceComposition(context_ unsafe.Pointer, format unsafe.Pointer, colorSpace unsafe.Pointer, composition *raw.QCComposition) *QCRenderer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QCRenderer")), objc.RegisterName("alloc"))
@@ -47,6 +53,8 @@ func NewQCRendererWithCGLContextPixelFormatColorSpaceComposition(context_ unsafe
 	return &QCRenderer{inner: raw.QCRendererFromID(_id)}
 }
 
+// Creates an offscreen renderer of a given size with the provided color space and composition object.
+//
 // NewQCRendererOffScreenWithSizeColorSpaceComposition creates a new [QCRenderer].
 func NewQCRendererOffScreenWithSizeColorSpaceComposition(size corefoundation.CGSize, colorSpace unsafe.Pointer, composition *raw.QCComposition) *QCRenderer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QCRenderer")), objc.RegisterName("alloc"))
@@ -54,6 +62,8 @@ func NewQCRendererOffScreenWithSizeColorSpaceComposition(size corefoundation.CGS
 	return &QCRenderer{inner: raw.QCRendererFromID(_id)}
 }
 
+// Creates a renderer object with an NSOpenGLContext object and a composition file.
+//
 // NewQCRendererWithOpenGLContextPixelFormatFile creates a new [QCRenderer].
 func NewQCRendererWithOpenGLContextPixelFormatFile(context_ *appkit.NSOpenGLContext, format *appkit.NSOpenGLPixelFormat, path string) *QCRenderer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QCRenderer")), objc.RegisterName("alloc"))
@@ -61,6 +71,8 @@ func NewQCRendererWithOpenGLContextPixelFormatFile(context_ *appkit.NSOpenGLCont
 	return &QCRenderer{inner: raw.QCRendererFromID(_id)}
 }
 
+// Renders a frame of a composition at the specified time.
+//
 // RenderAtTimeArguments calls the underlying RenderAtTimeArguments.
 func (x *QCRenderer) RenderAtTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool {
 	return x.inner.RenderAtTimeArguments(time_, arguments)
@@ -71,6 +83,8 @@ func (x *QCRenderer) RenderingTimeForTimeArguments(time_ float64, arguments *fou
 	return x.inner.RenderingTimeForTimeArguments(time_, arguments)
 }
 
+// Returns the composition object associated with the renderer.
+//
 // Composition calls the underlying Composition.
 func (x *QCRenderer) Composition() *QCComposition {
 	_r := x.inner.Composition()
@@ -80,11 +94,15 @@ func (x *QCRenderer) Composition() *QCComposition {
 	return &QCComposition{inner: _r}
 }
 
+// Returns an NSImage object of the current image in the OpenGL context associated with the renderer.
+//
 // SnapshotImage calls the underlying SnapshotImage.
 func (x *QCRenderer) SnapshotImage() *appkit.NSImage {
 	return x.inner.SnapshotImage()
 }
 
+// Returns the current image in the OpenGL context associated with the renderer, as an image object of the provided image type.
+//
 // CreateSnapshotImageOfType calls the underlying CreateSnapshotImageOfType.
 func (x *QCRenderer) CreateSnapshotImageOfType(type_ string) objc.ID {
 	return x.inner.CreateSnapshotImageOfType(foundation.NSStringStringWithUTF8String(type_))

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents an in-progress or concluded asset download.
+//
 // Download wraps [raw.BADownload] with a fluent Go API.
 type Download struct {
 	inner *raw.BADownload

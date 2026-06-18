@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A set of interfaces for setting the language option for the Now Playing item.
+//
 // NowPlayingInfoLanguageOption wraps [raw.MPNowPlayingInfoLanguageOption] with a fluent Go API.
 type NowPlayingInfoLanguageOption struct {
 	inner *raw.MPNowPlayingInfoLanguageOption
@@ -31,6 +33,8 @@ func NowPlayingInfoLanguageOptionFromID(id objc.ID) *NowPlayingInfoLanguageOptio
 	return &NowPlayingInfoLanguageOption{inner: raw.MPNowPlayingInfoLanguageOptionFromID(id)}
 }
 
+// Creates a single language option.
+//
 // NewNowPlayingInfoLanguageOptionWithTypeLanguageTagCharacteristicsDisplayNameIdentifier creates a new [NowPlayingInfoLanguageOption].
 func NewNowPlayingInfoLanguageOptionWithTypeLanguageTagCharacteristicsDisplayNameIdentifier(languageOptionType MPNowPlayingInfoLanguageOptionType, languageTag string, languageOptionCharacteristics *foundation.NSArray[*foundation.NSString], displayName string, identifier string) *NowPlayingInfoLanguageOption {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPNowPlayingInfoLanguageOption")), objc.RegisterName("alloc"))
@@ -38,14 +42,14 @@ func NewNowPlayingInfoLanguageOptionWithTypeLanguageTagCharacteristicsDisplayNam
 	return &NowPlayingInfoLanguageOption{inner: raw.MPNowPlayingInfoLanguageOptionFromID(_id)}
 }
 
-// Represents a special case that is used to represent the best legible language option based on system preferences. See AVPlayerItem-selectMediaOptionAutomaticallyInMediaSelectionGroup
+// Returns a Boolean value that determines whether to use the best legible language option based on the system preferences.
 //
 // IsAutomaticLegibleLanguageOption calls the underlying IsAutomaticLegibleLanguageOption.
 func (x *NowPlayingInfoLanguageOption) IsAutomaticLegibleLanguageOption() bool {
 	return x.inner.IsAutomaticLegibleLanguageOption()
 }
 
-// Represents a special case that is used to represent the best audible language option based on system preferences. See AVPlayerItem-selectMediaOptionAutomaticallyInMediaSelectionGroup
+// Returns a Boolean value that determines whether to use the best audible language option based on the system preferences.
 //
 // IsAutomaticAudibleLanguageOption calls the underlying IsAutomaticAudibleLanguageOption.
 func (x *NowPlayingInfoLanguageOption) IsAutomaticAudibleLanguageOption() bool {

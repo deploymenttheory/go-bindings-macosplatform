@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Describes bounding-box geometry suitable for ray tracing.
+//
 // MTL4AccelerationStructureBoundingBoxGeometryDescriptor wraps [raw.MTL4AccelerationStructureBoundingBoxGeometryDescriptor] with a fluent Go API.
 type MTL4AccelerationStructureBoundingBoxGeometryDescriptor struct {
 	inner *raw.MTL4AccelerationStructureBoundingBoxGeometryDescriptor
@@ -38,7 +40,7 @@ func NewMTL4AccelerationStructureBoundingBoxGeometryDescriptor() *MTL4Accelerati
 	return &MTL4AccelerationStructureBoundingBoxGeometryDescriptor{inner: raw.MTL4AccelerationStructureBoundingBoxGeometryDescriptorFromID(_id)}
 }
 
-// References a buffer containing bounding box data in `MTLAxisAlignedBoundingBoxes` format. You are responsible for ensuring the buffer address of the range is not zero.
+// References a buffer containing bounding box data in MTLAxisAlignedBoundingBoxes format.
 //
 // WithBoundingBoxBuffer sets the boundingBoxBuffer property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxBuffer(boundingBoxBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
@@ -46,7 +48,7 @@ func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBox
 	return x
 }
 
-// Assigns the stride, in bytes, between bounding boxes in the bounding box buffer `boundingBoxBuffer` references. You are responsible for ensuring this stride is at least 24 bytes and a multiple of 4 bytes. This property defaults to `24` bytes.
+// Assigns the stride, in bytes, between bounding boxes in the bounding box buffer boundingBoxBuffer references.
 //
 // WithBoundingBoxStride sets the boundingBoxStride property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxStride(boundingBoxStride uint) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
@@ -54,7 +56,7 @@ func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBox
 	return x
 }
 
-// Describes the number of bounding boxes the `boundingBoxBuffer` contains.
+// Describes the number of bounding boxes the boundingBoxBuffer contains.
 //
 // WithBoundingBoxCount sets the boundingBoxCount property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxCount(boundingBoxCount uint) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
@@ -62,7 +64,7 @@ func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBox
 	return x
 }
 
-// Sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it. When you perform a ray tracing operation in the Metal Shading Language, and provide the ray intersector object with an instance of “MTLIntersectionFunctionTable“, Metal adds this offset to the instance offset from structs such as: - “MTLAccelerationStructureInstanceDescriptor“ - “MTLAccelerationStructureUserIDInstanceDescriptor“ - “MTLAccelerationStructureMotionInstanceDescriptor“ - “MTLIndirectAccelerationStructureInstanceDescriptor“ - “MTLIndirectAccelerationStructureMotionInstanceDescriptor“ The sum of these offsets provides an index into the intersection function table that the ray tracing system uses to retrieve and invoke the function at this index, allowing you to customize the intersection evaluation process.
+// Sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it.
 //
 // WithIntersectionFunctionTableOffset sets the intersectionFunctionTableOffset property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
@@ -78,7 +80,7 @@ func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithOpaque(opaq
 	return x
 }
 
-// A boolean value that indicates whether the ray-tracing system in Metal allows the invocation of intersection functions more than once per ray-primitive intersection. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+// A boolean value that indicates whether the ray-tracing system in Metal allows the invocation of intersection functions more than once per ray-primitive intersection.
 //
 // WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
@@ -94,7 +96,7 @@ func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithLabel(label
 	return x
 }
 
-// Assigns optional buffer containing data to associate with each primitive in this geometry. You can use zero as the buffer address in this buffer range.
+// Assigns optional buffer containing data to associate with each primitive in this geometry.
 //
 // WithPrimitiveDataBuffer sets the primitiveDataBuffer property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
@@ -102,7 +104,7 @@ func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDa
 	return x
 }
 
-// Defines the stride, in bytes, between each primitive's data in the primitive data buffer “primitiveDataBuffer“ references. You are responsible for ensuring the stride is at least “primitiveDataElementSize“ in size and a multiple of 4 bytes. This property defaults to `0` bytes,  which indicates the stride is equal to “primitiveDataElementSize“.
+// Defines the stride, in bytes, between each primitive’s data in the primitive data buffer primitiveDataBuffer references.
 //
 // WithPrimitiveDataStride sets the primitiveDataStride property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride uint) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
@@ -110,7 +112,7 @@ func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDa
 	return x
 }
 
-// Sets the size, in bytes, of the data for each primitive in the primitive data buffer “primitiveDataBuffer“ references. This size needs to be at most “primitiveDataStride“ in size and a multiple of 4 bytes. This property defaults to 0 bytes.
+// Sets the size, in bytes, of the data for each primitive in the primitive data buffer primitiveDataBuffer references.
 //
 // WithPrimitiveDataElementSize sets the primitiveDataElementSize property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize uint) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {

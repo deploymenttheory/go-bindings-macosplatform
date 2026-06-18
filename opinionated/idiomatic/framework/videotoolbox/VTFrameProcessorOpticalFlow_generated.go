@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A class to wrap bidirectional optical flow to send to the processor.
+//
 // FrameProcessorOpticalFlow wraps [raw.VTFrameProcessorOpticalFlow] with a fluent Go API.
 type FrameProcessorOpticalFlow struct {
 	inner *raw.VTFrameProcessorOpticalFlow
@@ -30,7 +32,7 @@ func FrameProcessorOpticalFlowFromID(id objc.ID) *FrameProcessorOpticalFlow {
 	return &FrameProcessorOpticalFlow{inner: raw.VTFrameProcessorOpticalFlowFromID(id)}
 }
 
-// Creates a new instance of forward and backward optical flow with pixel buffers. Create a new instance with forward and backward optical flow “CVPixelBuffer“s. Instances retain the pixel buffers you provide to this method. Returns `nil` if either `CVPixelBuffer` is NULL or the `CVPixelBuffer`s are not `IOSurface` backed. - Parameters: - forwardFlow: `CVPixelBuffer` that contains forward optical flow; it must not be `nil` and must be `IOSurface` backed. - backwardFlow: `CVPixelBuffer` that contains backward optical flow; it must not be `nil` and must be `IOSurface` backed.
+// Creates an object with forward and backward optical flow pixel buffers.
 //
 // NewFrameProcessorOpticalFlowWithForwardFlowBackwardFlow creates a new [FrameProcessorOpticalFlow].
 func NewFrameProcessorOpticalFlowWithForwardFlowBackwardFlow(forwardFlow unsafe.Pointer, backwardFlow unsafe.Pointer) *FrameProcessorOpticalFlow {

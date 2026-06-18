@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mechanism for providing public key credential requests to an app or service with iCloud Keychain.
+//
 // AuthorizationPlatformPublicKeyCredentialProvider wraps [raw.ASAuthorizationPlatformPublicKeyCredentialProvider] with a fluent Go API.
 type AuthorizationPlatformPublicKeyCredentialProvider struct {
 	inner *raw.ASAuthorizationPlatformPublicKeyCredentialProvider
@@ -33,6 +35,8 @@ func AuthorizationPlatformPublicKeyCredentialProviderFromID(id objc.ID) *Authori
 	return &AuthorizationPlatformPublicKeyCredentialProvider{inner: raw.ASAuthorizationPlatformPublicKeyCredentialProviderFromID(id)}
 }
 
+// Creates the object with a relying party identifier.
+//
 // NewAuthorizationPlatformPublicKeyCredentialProviderWithRelyingPartyIdentifier creates a new [AuthorizationPlatformPublicKeyCredentialProvider].
 func NewAuthorizationPlatformPublicKeyCredentialProviderWithRelyingPartyIdentifier(relyingPartyIdentifier string) *AuthorizationPlatformPublicKeyCredentialProvider {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationPlatformPublicKeyCredentialProvider")), objc.RegisterName("alloc"))
@@ -40,7 +44,7 @@ func NewAuthorizationPlatformPublicKeyCredentialProviderWithRelyingPartyIdentifi
 	return &AuthorizationPlatformPublicKeyCredentialProvider{inner: raw.ASAuthorizationPlatformPublicKeyCredentialProviderFromID(_id)}
 }
 
-// @abstract Create a request to register a new platform credential. @param challenge The challenge to sign. @param name The user name for the new credential. @param userID An identifier to be stored alongside the credential, which will be returned with the credential when it is used to authenticate.
+// Creates a registration request with a challenge, name, and user ID.
 //
 // CreateCredentialRegistrationRequestWithChallengeNameUserID calls the underlying CreateCredentialRegistrationRequestWithChallengeNameUserID.
 func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeNameUserID(challenge *foundation.NSData, name string, userID *foundation.NSData) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
@@ -62,7 +66,7 @@ func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialRegis
 	return &AuthorizationPlatformPublicKeyCredentialRegistrationRequest{inner: _r}
 }
 
-// @abstract Create a request to authenticate using an existing credential. @param challenge The challenge to sign.
+// Creates an assertion request with a challenge.
 //
 // CreateCredentialAssertionRequestWithChallenge calls the underlying CreateCredentialAssertionRequestWithChallenge.
 func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialAssertionRequestWithChallenge(challenge *foundation.NSData) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {

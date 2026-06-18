@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A continuous gesture recognizer for panning gestures.
+//
 // PanGestureRecognizer wraps [raw.NSPanGestureRecognizer] with a fluent Go API.
 type PanGestureRecognizer struct {
 	inner *raw.NSPanGestureRecognizer
@@ -37,84 +39,112 @@ func NewPanGestureRecognizer() *PanGestureRecognizer {
 	return &PanGestureRecognizer{inner: raw.NSPanGestureRecognizerFromID(_id)}
 }
 
+// A bit mask of the button (or buttons) required to recognize this gesture.
+//
 // WithButtonMask sets the buttonMask property and returns the receiver for chaining.
 func (x *PanGestureRecognizer) WithButtonMask(buttonMask uint) *PanGestureRecognizer {
 	x.inner.SetButtonMask(buttonMask)
 	return x
 }
 
+// The number of necessary touches on a Touch Bar for the gesture recognizer to match.
+//
 // WithNumberOfTouchesRequired sets the numberOfTouchesRequired property and returns the receiver for chaining.
 func (x *PanGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequired int) *PanGestureRecognizer {
 	x.inner.SetNumberOfTouchesRequired(numberOfTouchesRequired)
 	return x
 }
 
+// The object that implements the action method.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *PanGestureRecognizer) WithTarget(target objc.ID) *PanGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetTarget(target)
 	return x
 }
 
+// The action method to call when the gesture is recognized.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *PanGestureRecognizer) WithAction(action objc.SEL) *PanGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetAction(action)
 	return x
 }
 
+// The current state of the gesture recognizer.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *PanGestureRecognizer) WithState(state NSGestureRecognizerState) *PanGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetState(raw.NSGestureRecognizerState(state))
 	return x
 }
 
+// The delegate of the gesture recognizer.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PanGestureRecognizer) WithDelegate(delegate raw.NSGestureRecognizerDelegate) *PanGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelegate(delegate)
 	return x
 }
 
+// A Boolean value indicating whether the gesture recognizer is able to handle events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *PanGestureRecognizer) WithEnabled(enabled bool) *PanGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetEnabled(enabled)
 	return x
 }
 
+// Configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
+//
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
 func (x *PanGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PanGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
+//
 // WithDelaysPrimaryMouseButtonEvents sets the delaysPrimaryMouseButtonEvents property and returns the receiver for chaining.
 func (x *PanGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *PanGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents)
 	return x
 }
 
+// A Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
+//
 // WithDelaysSecondaryMouseButtonEvents sets the delaysSecondaryMouseButtonEvents property and returns the receiver for chaining.
 func (x *PanGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *PanGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents)
 	return x
 }
 
+// A Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
+//
 // WithDelaysOtherMouseButtonEvents sets the delaysOtherMouseButtonEvents property and returns the receiver for chaining.
 func (x *PanGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *PanGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents)
 	return x
 }
 
+// A Boolean value that indicates whether key events are delivered only after gesture recognition fails.
+//
 // WithDelaysKeyEvents sets the delaysKeyEvents property and returns the receiver for chaining.
 func (x *PanGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *PanGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysKeyEvents(delaysKeyEvents)
 	return x
 }
 
+// A Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
+//
 // WithDelaysMagnificationEvents sets the delaysMagnificationEvents property and returns the receiver for chaining.
 func (x *PanGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *PanGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysMagnificationEvents(delaysMagnificationEvents)
 	return x
 }
 
+// A Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
+//
 // WithDelaysRotationEvents sets the delaysRotationEvents property and returns the receiver for chaining.
 func (x *PanGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *PanGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysRotationEvents(delaysRotationEvents)
@@ -133,16 +163,22 @@ func (x *PanGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes NSTouchTy
 	return x
 }
 
+// The distance traveled by the mouse during the gesture.
+//
 // TranslationInView calls the underlying TranslationInView.
 func (x *PanGestureRecognizer) TranslationInView(view *raw.NSView) corefoundation.CGPoint {
 	return x.inner.TranslationInView(view)
 }
 
+// Changes the current translation value of the gesture recognizer.
+//
 // SetTranslationInView calls the underlying SetTranslationInView.
 func (x *PanGestureRecognizer) SetTranslationInView(translation corefoundation.CGPoint, view *raw.NSView) {
 	x.inner.SetTranslationInView(translation, view)
 }
 
+// The velocity of the pan, measured in points per second.
+//
 // VelocityInView calls the underlying VelocityInView.
 func (x *PanGestureRecognizer) VelocityInView(view *raw.NSView) corefoundation.CGPoint {
 	return x.inner.VelocityInView(view)

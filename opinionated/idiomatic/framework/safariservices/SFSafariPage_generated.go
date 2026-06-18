@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A proxy for a Safari webpage.
+//
 // SafariPage wraps [raw.SFSafariPage] with a fluent Go API.
 type SafariPage struct {
 	inner *raw.SFSafariPage
@@ -38,21 +40,21 @@ func NewSafariPage() *SafariPage {
 	return &SafariPage{inner: raw.SFSafariPageFromID(_id)}
 }
 
-// Dispatches a message to the content script injected in this page.
+// Dispatches a message from the app extension to the content script injected in this page.
 //
 // DispatchMessageToScriptWithNameUserInfo calls the underlying DispatchMessageToScriptWithNameUserInfo.
 func (x *SafariPage) DispatchMessageToScriptWithNameUserInfo(messageName string, userInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.DispatchMessageToScriptWithNameUserInfo(foundation.NSStringStringWithUTF8String(messageName), userInfo)
 }
 
-// Reloads the page.
+// Tells Safari to reload the webpage.
 //
 // Reload calls the underlying Reload.
 func (x *SafariPage) Reload() {
 	x.inner.Reload()
 }
 
-// This calls the completion handler with the properties of the page.
+// Retrieves the properties of the webpage.
 //
 // GetPageProperties blocks until the operation completes or ctx is cancelled.
 func (x *SafariPage) GetPageProperties(ctx context.Context) (*SafariPageProperties, error) {

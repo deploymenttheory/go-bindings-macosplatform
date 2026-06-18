@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An immutable object that represents a segment of time on the integrated timeline.
+//
 // PlayerItemSegment wraps [raw.AVPlayerItemSegment] with a fluent Go API.
 type PlayerItemSegment struct {
 	inner *raw.AVPlayerItemSegment

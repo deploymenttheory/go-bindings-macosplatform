@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A range that describes contiguous metadata segments on disk. This type represents a range that begins at `startOffset` and ends at `startOffset + segmentLength * segmentCount`. Each segment in the range represents a single block in the resource's buffer cache. For example, given an `FSMetadataRange` with the following properties: * `startOffset = 0` * `segmentLength = 512` * `segmentCount = 8` The range represents eight segments: from 0 to 511, then from 512 to 1023, and so on until a final segment of 3584 to 4095. Ensure that each metadata segment represents a range that's already present in the resource's buffer cache. Similarly, ensure that each segment's offset and length matches the offset and length of the corresponding block in the buffer cache.
+// A range that describes contiguous metadata segments on disk.
 //
 // MetadataRange wraps [raw.FSMetadataRange] with a fluent Go API.
 type MetadataRange struct {
@@ -31,7 +31,7 @@ func MetadataRangeFromID(id objc.ID) *MetadataRange {
 	return &MetadataRange{inner: raw.FSMetadataRangeFromID(id)}
 }
 
-// Initializes a metadata range with the given properties. - Parameters: - startOffset: The start offset of the range in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“. - segmentLength: The segment length in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“. - segmentCount: The number of segments in the range.
+// Initializes a metadata range with the given properties.
 //
 // NewMetadataRangeWithOffsetSegmentLengthSegmentCount creates a new [MetadataRange].
 func NewMetadataRangeWithOffsetSegmentLengthSegmentCount(startOffset int64, segmentLength uint64, segmentCount uint64) *MetadataRange {

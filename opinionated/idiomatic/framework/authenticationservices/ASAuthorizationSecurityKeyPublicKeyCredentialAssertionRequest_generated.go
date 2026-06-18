@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A class that defines the assertion request type for security key credentials.
+//
 // AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest wraps [raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest] with a fluent Go API.
 type AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest struct {
 	inner *raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest
@@ -42,7 +44,7 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest() *Authoriza
 	return &AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestFromID(_id)}
 }
 
-// A list of descriptors indicating credentials that may be used to sign in. If this is non-empty, only credentials matching the provided descriptors can be used when authenticating.
+// An array of allowed credentials.
 //
 // WithAllowedCredentials sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) WithAllowedCredentials(items ...*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {

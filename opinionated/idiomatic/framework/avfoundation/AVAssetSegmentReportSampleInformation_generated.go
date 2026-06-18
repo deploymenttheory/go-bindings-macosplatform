@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides information about sample data in a track.
+//
 // AssetSegmentReportSampleInformation wraps [raw.AVAssetSegmentReportSampleInformation] with a fluent Go API.
 type AssetSegmentReportSampleInformation struct {
 	inner *raw.AVAssetSegmentReportSampleInformation

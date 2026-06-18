@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A log entry.
+//
 // LogEntryLog wraps [raw.OSLogEntryLog] with a fluent Go API.
 type LogEntryLog struct {
 	inner *raw.OSLogEntryLog

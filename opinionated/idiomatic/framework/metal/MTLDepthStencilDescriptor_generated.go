@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An instance that configures new MTLDepthStencilState instances.
+//
 // DepthStencilDescriptor wraps [raw.MTLDepthStencilDescriptor] with a fluent Go API.
 type DepthStencilDescriptor struct {
 	inner *raw.MTLDepthStencilDescriptor
@@ -37,31 +39,39 @@ func NewDepthStencilDescriptor() *DepthStencilDescriptor {
 	return &DepthStencilDescriptor{inner: raw.MTLDepthStencilDescriptorFromID(_id)}
 }
 
+// The comparison that is performed between a fragment’s depth value and the depth value in the attachment, which determines whether to discard the fragment.
+//
 // WithDepthCompareFunction sets the depthCompareFunction property and returns the receiver for chaining.
 func (x *DepthStencilDescriptor) WithDepthCompareFunction(depthCompareFunction MTLCompareFunction) *DepthStencilDescriptor {
 	x.inner.SetDepthCompareFunction(raw.MTLCompareFunction(depthCompareFunction))
 	return x
 }
 
+// A Boolean value that indicates whether depth values can be written to the depth attachment.
+//
 // WithDepthWriteEnabled sets the depthWriteEnabled property and returns the receiver for chaining.
 func (x *DepthStencilDescriptor) WithDepthWriteEnabled(depthWriteEnabled bool) *DepthStencilDescriptor {
 	x.inner.SetDepthWriteEnabled(depthWriteEnabled)
 	return x
 }
 
+// The stencil descriptor for front-facing primitives.
+//
 // WithFrontFaceStencil sets the frontFaceStencil property and returns the receiver for chaining.
 func (x *DepthStencilDescriptor) WithFrontFaceStencil(frontFaceStencil *StencilDescriptor) *DepthStencilDescriptor {
 	x.inner.SetFrontFaceStencil(frontFaceStencil.Unwrap())
 	return x
 }
 
+// The stencil descriptor for back-facing primitives.
+//
 // WithBackFaceStencil sets the backFaceStencil property and returns the receiver for chaining.
 func (x *DepthStencilDescriptor) WithBackFaceStencil(backFaceStencil *StencilDescriptor) *DepthStencilDescriptor {
 	x.inner.SetBackFaceStencil(backFaceStencil.Unwrap())
 	return x
 }
 
-// @property label @abstract A string to help identify the created object.
+// A string that identifies this object.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *DepthStencilDescriptor) WithLabel(label string) *DepthStencilDescriptor {

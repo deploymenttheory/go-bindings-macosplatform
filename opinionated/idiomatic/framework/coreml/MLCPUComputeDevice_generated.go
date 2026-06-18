@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a CPU compute device.
+//
 // CPUComputeDevice wraps [raw.MLCPUComputeDevice] with a fluent Go API.
 type CPUComputeDevice struct {
 	inner *raw.MLCPUComputeDevice

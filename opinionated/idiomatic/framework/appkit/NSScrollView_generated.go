@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A view that displays a portion of a document view and provides scroll bars that allow the user to move the document view within the scroll view.
+//
 // ScrollView wraps [raw.NSScrollView] with a fluent Go API.
 type ScrollView struct {
 	inner *raw.NSScrollView
@@ -48,216 +50,288 @@ func NewScrollViewWithCoder(coder *foundation.NSCoder) *ScrollView {
 	return &ScrollView{inner: raw.NSScrollViewFromID(_id)}
 }
 
+// The view the scroll view scrolls within its content view.
+//
 // WithDocumentView sets the documentView property and returns the receiver for chaining.
 func (x *ScrollView) WithDocumentView(documentView ViewProvider) *ScrollView {
 	x.inner.SetDocumentView(documentView.asView())
 	return x
 }
 
+// The scroll view’s content view, the view that clips the document view.
+//
 // WithContentView sets the contentView property and returns the receiver for chaining.
 func (x *ScrollView) WithContentView(contentView *ClipView) *ScrollView {
 	x.inner.SetContentView(contentView.Unwrap())
 	return x
 }
 
+// The content view’s document cursor.
+//
 // WithDocumentCursor sets the documentCursor property and returns the receiver for chaining.
 func (x *ScrollView) WithDocumentCursor(documentCursor *Cursor) *ScrollView {
 	x.inner.SetDocumentCursor(documentCursor.Unwrap())
 	return x
 }
 
+// A value that specifies the appearance of the scroll view’s border.
+//
 // WithBorderType sets the borderType property and returns the receiver for chaining.
 func (x *ScrollView) WithBorderType(borderType NSBorderType) *ScrollView {
 	x.inner.SetBorderType(raw.NSBorderType(borderType))
 	return x
 }
 
+// The color of the content view’s background.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *ScrollView) WithBackgroundColor(backgroundColor *Color) *ScrollView {
 	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// A Boolean that indicates whether the scroll view draws its background.
+//
 // WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
 func (x *ScrollView) WithDrawsBackground(drawsBackground bool) *ScrollView {
 	x.inner.SetDrawsBackground(drawsBackground)
 	return x
 }
 
+// A Boolean that indicates whether the scroll view has a vertical scroller.
+//
 // WithHasVerticalScroller sets the hasVerticalScroller property and returns the receiver for chaining.
 func (x *ScrollView) WithHasVerticalScroller(hasVerticalScroller bool) *ScrollView {
 	x.inner.SetHasVerticalScroller(hasVerticalScroller)
 	return x
 }
 
+// A Boolean that indicates whether the scroll view has a horizontal scroller.
+//
 // WithHasHorizontalScroller sets the hasHorizontalScroller property and returns the receiver for chaining.
 func (x *ScrollView) WithHasHorizontalScroller(hasHorizontalScroller bool) *ScrollView {
 	x.inner.SetHasHorizontalScroller(hasHorizontalScroller)
 	return x
 }
 
+// The scroll view’s vertical scroller.
+//
 // WithVerticalScroller sets the verticalScroller property and returns the receiver for chaining.
 func (x *ScrollView) WithVerticalScroller(verticalScroller *Scroller) *ScrollView {
 	x.inner.SetVerticalScroller(verticalScroller.Unwrap())
 	return x
 }
 
+// The scroll view’s horizontal scroller.
+//
 // WithHorizontalScroller sets the horizontalScroller property and returns the receiver for chaining.
 func (x *ScrollView) WithHorizontalScroller(horizontalScroller *Scroller) *ScrollView {
 	x.inner.SetHorizontalScroller(horizontalScroller.Unwrap())
 	return x
 }
 
+// A Boolean that indicates whether the scroll view automatically hides its scroll bars when they are not needed.
+//
 // WithAutohidesScrollers sets the autohidesScrollers property and returns the receiver for chaining.
 func (x *ScrollView) WithAutohidesScrollers(autohidesScrollers bool) *ScrollView {
 	x.inner.SetAutohidesScrollers(autohidesScrollers)
 	return x
 }
 
+// The scroll view’s horizontal line by line scroll amount.
+//
 // WithHorizontalLineScroll sets the horizontalLineScroll property and returns the receiver for chaining.
 func (x *ScrollView) WithHorizontalLineScroll(horizontalLineScroll float64) *ScrollView {
 	x.inner.SetHorizontalLineScroll(horizontalLineScroll)
 	return x
 }
 
+// The scroll view’s vertical line by line scroll amount.
+//
 // WithVerticalLineScroll sets the verticalLineScroll property and returns the receiver for chaining.
 func (x *ScrollView) WithVerticalLineScroll(verticalLineScroll float64) *ScrollView {
 	x.inner.SetVerticalLineScroll(verticalLineScroll)
 	return x
 }
 
+// The scroll view’s line by line scroll amount.
+//
 // WithLineScroll sets the lineScroll property and returns the receiver for chaining.
 func (x *ScrollView) WithLineScroll(lineScroll float64) *ScrollView {
 	x.inner.SetLineScroll(lineScroll)
 	return x
 }
 
+// The amount of the document view kept visible when scrolling horizontally page by page.
+//
 // WithHorizontalPageScroll sets the horizontalPageScroll property and returns the receiver for chaining.
 func (x *ScrollView) WithHorizontalPageScroll(horizontalPageScroll float64) *ScrollView {
 	x.inner.SetHorizontalPageScroll(horizontalPageScroll)
 	return x
 }
 
+// The amount of the document view kept visible when scrolling vertically page by page.
+//
 // WithVerticalPageScroll sets the verticalPageScroll property and returns the receiver for chaining.
 func (x *ScrollView) WithVerticalPageScroll(verticalPageScroll float64) *ScrollView {
 	x.inner.SetVerticalPageScroll(verticalPageScroll)
 	return x
 }
 
+// The amount of the document view kept visible when scrolling page by page.
+//
 // WithPageScroll sets the pageScroll property and returns the receiver for chaining.
 func (x *ScrollView) WithPageScroll(pageScroll float64) *ScrollView {
 	x.inner.SetPageScroll(pageScroll)
 	return x
 }
 
+// A Boolean that indicates whether the scroll view redraws its document view while scrolling continuously.
+//
 // WithScrollsDynamically sets the scrollsDynamically property and returns the receiver for chaining.
 func (x *ScrollView) WithScrollsDynamically(scrollsDynamically bool) *ScrollView {
 	x.inner.SetScrollsDynamically(scrollsDynamically)
 	return x
 }
 
+// The scroller style used by the scroll view.
+//
 // WithScrollerStyle sets the scrollerStyle property and returns the receiver for chaining.
 func (x *ScrollView) WithScrollerStyle(scrollerStyle NSScrollerStyle) *ScrollView {
 	x.inner.SetScrollerStyle(raw.NSScrollerStyle(scrollerStyle))
 	return x
 }
 
+// The knob style of scroll views that use the overlay scroller style.
+//
 // WithScrollerKnobStyle sets the scrollerKnobStyle property and returns the receiver for chaining.
 func (x *ScrollView) WithScrollerKnobStyle(scrollerKnobStyle NSScrollerKnobStyle) *ScrollView {
 	x.inner.SetScrollerKnobStyle(raw.NSScrollerKnobStyle(scrollerKnobStyle))
 	return x
 }
 
+// The scroll view’s horizontal scrolling elasticity mode.
+//
 // WithHorizontalScrollElasticity sets the horizontalScrollElasticity property and returns the receiver for chaining.
 func (x *ScrollView) WithHorizontalScrollElasticity(horizontalScrollElasticity NSScrollElasticity) *ScrollView {
 	x.inner.SetHorizontalScrollElasticity(raw.NSScrollElasticity(horizontalScrollElasticity))
 	return x
 }
 
+// The scroll view’s vertical scrolling elasticity mode.
+//
 // WithVerticalScrollElasticity sets the verticalScrollElasticity property and returns the receiver for chaining.
 func (x *ScrollView) WithVerticalScrollElasticity(verticalScrollElasticity NSScrollElasticity) *ScrollView {
 	x.inner.SetVerticalScrollElasticity(raw.NSScrollElasticity(verticalScrollElasticity))
 	return x
 }
 
+// A Boolean that indicates whether the scroll view uses a predominant scrolling axis for content.
+//
 // WithUsesPredominantAxisScrolling sets the usesPredominantAxisScrolling property and returns the receiver for chaining.
 func (x *ScrollView) WithUsesPredominantAxisScrolling(usesPredominantAxisScrolling bool) *ScrollView {
 	x.inner.SetUsesPredominantAxisScrolling(usesPredominantAxisScrolling)
 	return x
 }
 
+// Allows the user to magnify the scroll view.
+//
 // WithAllowsMagnification sets the allowsMagnification property and returns the receiver for chaining.
 func (x *ScrollView) WithAllowsMagnification(allowsMagnification bool) *ScrollView {
 	x.inner.SetAllowsMagnification(allowsMagnification)
 	return x
 }
 
+// The amount by which the content is currently scaled.
+//
 // WithMagnification sets the magnification property and returns the receiver for chaining.
 func (x *ScrollView) WithMagnification(magnification float64) *ScrollView {
 	x.inner.SetMagnification(magnification)
 	return x
 }
 
+// The maximum value to which the content can be magnified.
+//
 // WithMaxMagnification sets the maxMagnification property and returns the receiver for chaining.
 func (x *ScrollView) WithMaxMagnification(maxMagnification float64) *ScrollView {
 	x.inner.SetMaxMagnification(maxMagnification)
 	return x
 }
 
+// The minimum value to which the content can be magnified.
+//
 // WithMinMagnification sets the minMagnification property and returns the receiver for chaining.
 func (x *ScrollView) WithMinMagnification(minMagnification float64) *ScrollView {
 	x.inner.SetMinMagnification(minMagnification)
 	return x
 }
 
+// A Boolean that indicates whether the scroll view automatically adjusts its content insets.
+//
 // WithAutomaticallyAdjustsContentInsets sets the automaticallyAdjustsContentInsets property and returns the receiver for chaining.
 func (x *ScrollView) WithAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool) *ScrollView {
 	x.inner.SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets)
 	return x
 }
 
+// The distance that the scroll view’s subviews are inset from the enclosing scroll view during tiling.
+//
 // WithContentInsets sets the contentInsets property and returns the receiver for chaining.
 func (x *ScrollView) WithContentInsets(contentInsets foundation.NSEdgeInsets) *ScrollView {
 	x.inner.SetContentInsets(contentInsets)
 	return x
 }
 
+// The distance the scrollers are inset from the edge of the scroll view.
+//
 // WithScrollerInsets sets the scrollerInsets property and returns the receiver for chaining.
 func (x *ScrollView) WithScrollerInsets(scrollerInsets foundation.NSEdgeInsets) *ScrollView {
 	x.inner.SetScrollerInsets(scrollerInsets)
 	return x
 }
 
+// A Boolean that indicates whether the scroll view displays its rulers.
+//
 // WithRulersVisible sets the rulersVisible property and returns the receiver for chaining.
 func (x *ScrollView) WithRulersVisible(rulersVisible bool) *ScrollView {
 	x.inner.SetRulersVisible(rulersVisible)
 	return x
 }
 
+// A Boolean that indicates whether the scroll view keeps a horizontal ruler object.
+//
 // WithHasHorizontalRuler sets the hasHorizontalRuler property and returns the receiver for chaining.
 func (x *ScrollView) WithHasHorizontalRuler(hasHorizontalRuler bool) *ScrollView {
 	x.inner.SetHasHorizontalRuler(hasHorizontalRuler)
 	return x
 }
 
+// A Boolean that indicates whether the scroll view keeps a vertical ruler object.
+//
 // WithHasVerticalRuler sets the hasVerticalRuler property and returns the receiver for chaining.
 func (x *ScrollView) WithHasVerticalRuler(hasVerticalRuler bool) *ScrollView {
 	x.inner.SetHasVerticalRuler(hasVerticalRuler)
 	return x
 }
 
+// The scroll view’s horizontal ruler view.
+//
 // WithHorizontalRulerView sets the horizontalRulerView property and returns the receiver for chaining.
 func (x *ScrollView) WithHorizontalRulerView(horizontalRulerView *RulerView) *ScrollView {
 	x.inner.SetHorizontalRulerView(horizontalRulerView.Unwrap())
 	return x
 }
 
+// The scroll view’s vertical ruler view.
+//
 // WithVerticalRulerView sets the verticalRulerView property and returns the receiver for chaining.
 func (x *ScrollView) WithVerticalRulerView(verticalRulerView *RulerView) *ScrollView {
 	x.inner.SetVerticalRulerView(verticalRulerView.Unwrap())
 	return x
 }
 
+// The position of the find bar.
+//
 // WithFindBarPosition sets the findBarPosition property and returns the receiver for chaining.
 func (x *ScrollView) WithFindBarPosition(findBarPosition NSScrollViewFindBarPosition) *ScrollView {
 	x.inner.SetFindBarPosition(raw.NSScrollViewFindBarPosition(findBarPosition))
@@ -306,6 +380,8 @@ func (x *ScrollView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOpt
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *ScrollView) WithFrame(frame corefoundation.CGRect) *ScrollView {
 	x.inner.NSView.SetFrame(frame)
@@ -330,6 +406,8 @@ func (x *ScrollView) WithBoundsRotation(boundsRotation float64) *ScrollView {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *ScrollView) WithBounds(bounds corefoundation.CGRect) *ScrollView {
 	x.inner.NSView.SetBounds(bounds)
@@ -342,6 +420,8 @@ func (x *ScrollView) WithCanDrawConcurrently(canDrawConcurrently bool) *ScrollVi
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *ScrollView) WithNeedsDisplay(needsDisplay bool) *ScrollView {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -528,7 +608,7 @@ func (x *ScrollView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets found
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *ScrollView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrollView {
@@ -584,50 +664,68 @@ func (x *ScrollView) WithPressureConfiguration(pressureConfiguration *PressureCo
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *ScrollView) WithNextResponder(nextResponder ResponderProvider) *ScrollView {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *ScrollView) WithMenu(menu *Menu) *ScrollView {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *ScrollView) WithUserActivity(userActivity *foundation.NSUserActivity) *ScrollView {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *ScrollView) WithTouchBar(touchBar *TouchBar) *ScrollView {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Lays out the components of the receiver: the content view, the scrollers, and the ruler views.
+//
 // Tile calls the underlying Tile.
 func (x *ScrollView) Tile() {
 	x.inner.Tile()
 }
 
+// Flash the overlay scroll bars.
+//
 // FlashScrollers calls the underlying FlashScrollers.
 func (x *ScrollView) FlashScrollers() {
 	x.inner.FlashScrollers()
 }
 
+// Magnifies the content view proportionally such that the given rectangle fits centered in the scroll view.
+//
 // MagnifyToFitRect calls the underlying MagnifyToFitRect.
 func (x *ScrollView) MagnifyToFitRect(rect corefoundation.CGRect) {
 	x.inner.MagnifyToFitRect(rect)
 }
 
+// Magnify the content by the given amount and center the result on the given point.
+//
 // SetMagnificationCenteredAtPoint calls the underlying SetMagnificationCenteredAtPoint.
 func (x *ScrollView) SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint) {
 	x.inner.SetMagnificationCenteredAtPoint(magnification, point)
 }
 
+// Adds a floating subview to the document view.
+//
 // AddFloatingSubviewForAxis calls the underlying AddFloatingSubviewForAxis.
 func (x *ScrollView) AddFloatingSubviewForAxis(view *raw.NSView, axis NSEventGestureAxis) {
 	x.inner.AddFloatingSubviewForAxis(view, raw.NSEventGestureAxis(axis))

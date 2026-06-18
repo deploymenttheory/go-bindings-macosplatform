@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a single audio unit parameter.
+//
 // Parameter wraps [raw.AUParameter] with a fluent Go API.
 type Parameter struct {
 	inner *raw.AUParameter
@@ -38,7 +40,7 @@ func NewParameter() *Parameter {
 	return &Parameter{inner: raw.AUParameterFromID(_id)}
 }
 
-// The parameter's current value.
+// The parameter’s current value.
 //
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *Parameter) WithValue(value float32) *Parameter {
@@ -46,7 +48,7 @@ func (x *Parameter) WithValue(value float32) *Parameter {
 	return x
 }
 
-// @brief		Called when a parameter changes value. @discussion This block, used only in an audio unit implementation, receives all externally-generated changes to parameter values. It should store the new value in its audio signal processing state (assuming that that state is separate from the AUParameter object).
+// The callback for parameter value changes.
 //
 // WithImplementorValueObserver sets the implementorValueObserver property and returns the receiver for chaining.
 func (x *Parameter) WithImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32)) *Parameter {
@@ -54,7 +56,7 @@ func (x *Parameter) WithImplementorValueObserver(implementorValueObserver func(*
 	return x
 }
 
-// @brief		Called when a value of a parameter in the tree is known to have a stale value needing to be refreshed. @discussion The audio unit should return the current value for this parameter; the AUParameterNode will store the value.
+// The callback for refreshing known stale values in a parameter tree.
 //
 // WithImplementorValueProvider sets the implementorValueProvider property and returns the receiver for chaining.
 func (x *Parameter) WithImplementorValueProvider(implementorValueProvider objc.Block) *Parameter {
@@ -62,7 +64,7 @@ func (x *Parameter) WithImplementorValueProvider(implementorValueProvider objc.B
 	return x
 }
 
-// Called to provide string representations of parameter values. If value is nil, the callback uses the current value of the parameter.
+// The callback for providing a string representation of a parameter value.
 //
 // WithImplementorStringFromValueCallback sets the implementorStringFromValueCallback property and returns the receiver for chaining.
 func (x *Parameter) WithImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) *Parameter {
@@ -70,7 +72,7 @@ func (x *Parameter) WithImplementorStringFromValueCallback(implementorStringFrom
 	return x
 }
 
-// Called to convert string to numeric representations of parameter values.
+// The callback for converting a string to a parameter value.
 //
 // WithImplementorValueFromStringCallback sets the implementorValueFromStringCallback property and returns the receiver for chaining.
 func (x *Parameter) WithImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) *Parameter {
@@ -78,7 +80,7 @@ func (x *Parameter) WithImplementorValueFromStringCallback(implementorValueFromS
 	return x
 }
 
-// Called to obtain an abbreviated version of a parameter or group name.
+// The callback for obtaining an abbreviated version of a parameter node display name.
 //
 // WithImplementorDisplayNameWithLengthCallback sets the implementorDisplayNameWithLengthCallback property and returns the receiver for chaining.
 func (x *Parameter) WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *Parameter {
@@ -86,14 +88,14 @@ func (x *Parameter) WithImplementorDisplayNameWithLengthCallback(implementorDisp
 	return x
 }
 
-// @brief	Set the parameter's value, avoiding redundant notifications to the originator. @discussion Bridged to the v2 function AudioUnitSetParameter.
+// Sets the parameter’s value, avoiding redundant notifications to the originator.
 //
 // SetValueOriginator calls the underlying SetValueOriginator.
 func (x *Parameter) SetValueOriginator(value float32, originator unsafe.Pointer) {
 	x.inner.SetValueOriginator(value, originator)
 }
 
-// @brief	Convenience for setValue:originator:atHostTime:eventType: @discussion Bridged to the v2 function AudioUnitSetParameter.
+// Sets the parameter’s value, preserving the host time of the gesture that initiated the change.
 //
 // SetValueOriginatorAtHostTime calls the underlying SetValueOriginatorAtHostTime.
 func (x *Parameter) SetValueOriginatorAtHostTime(value float32, originator unsafe.Pointer, hostTime uint64) {
@@ -107,7 +109,7 @@ func (x *Parameter) SetValueOriginatorAtHostTimeEventType(value float32, origina
 	x.inner.SetValueOriginatorAtHostTimeEventType(value, originator, hostTime, raw.AUParameterAutomationEventType(eventType))
 }
 
-// @brief Get a textual representation of a value for the parameter. Use value==nil to use the current value. Bridged to the v2 property kAudioUnitProperty_ParameterStringFromValue. @discussion This is currently only supported for parameters whose flags include kAudioUnitParameterFlag_ValuesHaveStrings.
+// Gets the string representation of a parameter value.
 //
 // StringFromValue calls the underlying StringFromValue.
 func (x *Parameter) StringFromValue(value *float32) string {
@@ -118,7 +120,7 @@ func (x *Parameter) StringFromValue(value *float32) string {
 	return purego.GoString(_r.Ptr())
 }
 
-// @brief Convert a textual representation of a value to a numeric one. @discussion This is currently only supported for parameters whose flags include kAudioUnitParameterFlag_ValuesHaveStrings.
+// Converts a string into a parameter value.
 //
 // ValueFromString calls the underlying ValueFromString.
 func (x *Parameter) ValueFromString(string_ string) float32 {

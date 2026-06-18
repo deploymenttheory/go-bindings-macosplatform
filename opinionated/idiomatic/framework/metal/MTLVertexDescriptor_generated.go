@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An instance that describes how to organize and map data to a vertex function.
+//
 // VertexDescriptor wraps [raw.MTLVertexDescriptor] with a fluent Go API.
 type VertexDescriptor struct {
 	inner *raw.MTLVertexDescriptor
@@ -35,6 +37,8 @@ func NewVertexDescriptor() *VertexDescriptor {
 	return &VertexDescriptor{inner: raw.MTLVertexDescriptorFromID(_id)}
 }
 
+// Resets the default state for the vertex descriptor.
+//
 // Reset calls the underlying Reset.
 func (x *VertexDescriptor) Reset() {
 	x.inner.Reset()

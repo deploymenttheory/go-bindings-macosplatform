@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information about a Quick Response code detected in a still or video image.
+//
 // QRCodeFeature wraps [raw.CIQRCodeFeature] with a fluent Go API.
 type QRCodeFeature struct {
 	inner *raw.CIQRCodeFeature

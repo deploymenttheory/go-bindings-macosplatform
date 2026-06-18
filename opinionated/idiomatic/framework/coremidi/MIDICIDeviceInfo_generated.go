@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides basic information about a MIDI-CI device.
+//
 // CIDeviceInfo wraps [raw.MIDICIDeviceInfo] with a fluent Go API.
 type CIDeviceInfo struct {
 	inner *raw.MIDICIDeviceInfo
@@ -30,6 +32,8 @@ func CIDeviceInfoFromID(id objc.ID) *CIDeviceInfo {
 	return &CIDeviceInfo{inner: raw.MIDICIDeviceInfoFromID(id)}
 }
 
+// Creates a new device information instance.
+//
 // NewCIDeviceInfoWithDestinationManufacturerFamilyModelRevision creates a new [CIDeviceInfo].
 func NewCIDeviceInfoWithDestinationManufacturerFamilyModelRevision(midiDestination uint, manufacturer *foundation.NSData, family *foundation.NSData, modelNumber *foundation.NSData, revisionLevel *foundation.NSData) *CIDeviceInfo {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICIDeviceInfo")), objc.RegisterName("alloc"))

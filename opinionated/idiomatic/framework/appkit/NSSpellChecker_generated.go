@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An interface to the Cocoa spell-checking service.
+//
 // SpellChecker wraps [raw.NSSpellChecker] with a fluent Go API.
 type SpellChecker struct {
 	inner *raw.NSSpellChecker
@@ -39,49 +41,67 @@ func NewSpellChecker() *SpellChecker {
 	return &SpellChecker{inner: raw.NSSpellCheckerFromID(_id)}
 }
 
+// Makes a view an accessory of the Spelling panel by making it a subview of the panel’s content view.
+//
 // WithAccessoryView sets the accessoryView property and returns the receiver for chaining.
 func (x *SpellChecker) WithAccessoryView(accessoryView ViewProvider) *SpellChecker {
 	x.inner.SetAccessoryView(accessoryView.asView())
 	return x
 }
 
+// Sets the substitutions panel’s accessory view.
+//
 // WithSubstitutionsPanelAccessoryViewController sets the substitutionsPanelAccessoryViewController property and returns the receiver for chaining.
 func (x *SpellChecker) WithSubstitutionsPanelAccessoryViewController(substitutionsPanelAccessoryViewController ViewControllerProvider) *SpellChecker {
 	x.inner.SetSubstitutionsPanelAccessoryViewController(substitutionsPanelAccessoryViewController.asViewController())
 	return x
 }
 
+// Sets whether the spell checker will automatically identify languages.
+//
 // WithAutomaticallyIdentifiesLanguages sets the automaticallyIdentifiesLanguages property and returns the receiver for chaining.
 func (x *SpellChecker) WithAutomaticallyIdentifiesLanguages(automaticallyIdentifiesLanguages bool) *SpellChecker {
 	x.inner.SetAutomaticallyIdentifiesLanguages(automaticallyIdentifiesLanguages)
 	return x
 }
 
+// Starts the search for a misspelled word in a string starting at specified offset within the string.
+//
 // CheckSpellingOfStringStartingAtLanguageWrapInSpellDocumentWithTagWordCount calls the underlying CheckSpellingOfStringStartingAtLanguageWrapInSpellDocumentWithTagWordCount.
 func (x *SpellChecker) CheckSpellingOfStringStartingAtLanguageWrapInSpellDocumentWithTagWordCount(stringToCheck string, startingOffset int, language string, wrapFlag bool, tag int, wordCount *int64) foundation.NSRange {
 	return x.inner.CheckSpellingOfStringStartingAtLanguageWrapInSpellDocumentWithTagWordCount(foundation.NSStringStringWithUTF8String(stringToCheck), startingOffset, foundation.NSStringStringWithUTF8String(language), wrapFlag, tag, wordCount)
 }
 
+// Starts the search for a misspelled word in stringToCheck starting at startingOffset within the string object.
+//
 // CheckSpellingOfStringStartingAt calls the underlying CheckSpellingOfStringStartingAt.
 func (x *SpellChecker) CheckSpellingOfStringStartingAt(stringToCheck string, startingOffset int) foundation.NSRange {
 	return x.inner.CheckSpellingOfStringStartingAt(foundation.NSStringStringWithUTF8String(stringToCheck), startingOffset)
 }
 
+// Returns the number of words in the specified string.
+//
 // CountWordsInStringLanguage calls the underlying CountWordsInStringLanguage.
 func (x *SpellChecker) CountWordsInStringLanguage(stringToCount string, language string) int {
 	return x.inner.CountWordsInStringLanguage(foundation.NSStringStringWithUTF8String(stringToCount), foundation.NSStringStringWithUTF8String(language))
 }
 
+// Initiates a grammatical analysis of a given string.
+//
 // CheckGrammarOfStringStartingAtLanguageWrapInSpellDocumentWithTagDetails calls the underlying CheckGrammarOfStringStartingAtLanguageWrapInSpellDocumentWithTagDetails.
 func (x *SpellChecker) CheckGrammarOfStringStartingAtLanguageWrapInSpellDocumentWithTagDetails(stringToCheck string, startingOffset int, language string, wrapFlag bool, tag int, details *foundation.NSArray[objc.ID]) foundation.NSRange {
 	return x.inner.CheckGrammarOfStringStartingAtLanguageWrapInSpellDocumentWithTagDetails(foundation.NSStringStringWithUTF8String(stringToCheck), startingOffset, foundation.NSStringStringWithUTF8String(language), wrapFlag, tag, details)
 }
 
+// Requests unified text checking for the given range of the given string.
+//
 // CheckStringRangeTypesOptionsInSpellDocumentWithTagOrthographyWordCount calls the underlying CheckStringRangeTypesOptionsInSpellDocumentWithTagOrthographyWordCount.
 func (x *SpellChecker) CheckStringRangeTypesOptionsInSpellDocumentWithTagOrthographyWordCount(stringToCheck string, range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], tag int, orthography *foundation.NSOrthography, wordCount *int64) *foundation.NSArray[*foundation.NSTextCheckingResult] {
 	return x.inner.CheckStringRangeTypesOptionsInSpellDocumentWithTagOrthographyWordCount(foundation.NSStringStringWithUTF8String(stringToCheck), range_, checkingTypes, options, tag, orthography, wordCount)
 }
 
+// Requests that the string be checked in the background.
+//
 // RequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler calls the underlying RequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler.
 func (x *SpellChecker) RequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler(stringToCheck string, range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], tag int, completionHandler objc.Block) int {
 	return x.inner.RequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler(foundation.NSStringStringWithUTF8String(stringToCheck), range_, checkingTypes, options, tag, completionHandler)
@@ -92,6 +112,8 @@ func (x *SpellChecker) RequestCandidatesForSelectedRangeInStringTypesOptionsInSp
 	return x.inner.RequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler(selectedRange, foundation.NSStringStringWithUTF8String(stringToCheck), checkingTypes, options, tag, completionHandler)
 }
 
+// Provides a menu containing contextual menu items suitable for certain kinds of detected results.
+//
 // MenuForResultStringOptionsAtLocationInView calls the underlying MenuForResultStringOptionsAtLocationInView.
 func (x *SpellChecker) MenuForResultStringOptionsAtLocationInView(result *foundation.NSTextCheckingResult, checkedString string, options *foundation.NSDictionary[*foundation.NSString, objc.ID], location corefoundation.CGPoint, view *raw.NSView) *Menu {
 	_r := x.inner.MenuForResultStringOptionsAtLocationInView(result, foundation.NSStringStringWithUTF8String(checkedString), options, location, view)
@@ -101,46 +123,64 @@ func (x *SpellChecker) MenuForResultStringOptionsAtLocationInView(result *founda
 	return &Menu{inner: _r}
 }
 
+// Returns the default values for quote replacement.
+//
 // UserQuotesArrayForLanguage calls the underlying UserQuotesArrayForLanguage.
 func (x *SpellChecker) UserQuotesArrayForLanguage(language string) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.UserQuotesArrayForLanguage(foundation.NSStringStringWithUTF8String(language))
 }
 
+// Causes the spell checker to update the Spelling panel’s misspelled-word field to reflect word.
+//
 // UpdateSpellingPanelWithMisspelledWord calls the underlying UpdateSpellingPanelWithMisspelledWord.
 func (x *SpellChecker) UpdateSpellingPanelWithMisspelledWord(word string) {
 	x.inner.UpdateSpellingPanelWithMisspelledWord(foundation.NSStringStringWithUTF8String(word))
 }
 
+// Specifies a grammar-analysis detail to highlight in the Spelling panel.
+//
 // UpdateSpellingPanelWithGrammarStringDetail calls the underlying UpdateSpellingPanelWithGrammarStringDetail.
 func (x *SpellChecker) UpdateSpellingPanelWithGrammarStringDetail(string_ string, detail *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.UpdateSpellingPanelWithGrammarStringDetail(foundation.NSStringStringWithUTF8String(string_), detail)
 }
 
+// Updates the available panels to account for user changes.
+//
 // UpdatePanels calls the underlying UpdatePanels.
 func (x *SpellChecker) UpdatePanels() {
 	x.inner.UpdatePanels()
 }
 
+// Instructs the spell checker to ignore all future occurrences of wordToIgnore in the document identified by tag.
+//
 // IgnoreWordInSpellDocumentWithTag calls the underlying IgnoreWordInSpellDocumentWithTag.
 func (x *SpellChecker) IgnoreWordInSpellDocumentWithTag(wordToIgnore string, tag int) {
 	x.inner.IgnoreWordInSpellDocumentWithTag(foundation.NSStringStringWithUTF8String(wordToIgnore), tag)
 }
 
+// Returns the array of ignored words for a document identified by tag.
+//
 // IgnoredWordsInSpellDocumentWithTag calls the underlying IgnoredWordsInSpellDocumentWithTag.
 func (x *SpellChecker) IgnoredWordsInSpellDocumentWithTag(tag int) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.IgnoredWordsInSpellDocumentWithTag(tag)
 }
 
+// Initializes the ignored-words document (a dictionary identified by tag with someWords), an array of words to ignore.
+//
 // SetIgnoredWordsInSpellDocumentWithTag calls the underlying SetIgnoredWordsInSpellDocumentWithTag.
 func (x *SpellChecker) SetIgnoredWordsInSpellDocumentWithTag(words *foundation.NSArray[*foundation.NSString], tag int) {
 	x.inner.SetIgnoredWordsInSpellDocumentWithTag(words, tag)
 }
 
+// Returns an array of possible substitutions for the specified string.
+//
 // GuessesForWordRangeInStringLanguageInSpellDocumentWithTag calls the underlying GuessesForWordRangeInStringLanguageInSpellDocumentWithTag.
 func (x *SpellChecker) GuessesForWordRangeInStringLanguageInSpellDocumentWithTag(range_ foundation.NSRange, string_ string, language string, tag int) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.GuessesForWordRangeInStringLanguageInSpellDocumentWithTag(range_, foundation.NSStringStringWithUTF8String(string_), foundation.NSStringStringWithUTF8String(language), tag)
 }
 
+// Returns a single proposed correction if a word is mis-spelled.
+//
 // CorrectionForWordRangeInStringLanguageInSpellDocumentWithTag calls the underlying CorrectionForWordRangeInStringLanguageInSpellDocumentWithTag.
 func (x *SpellChecker) CorrectionForWordRangeInStringLanguageInSpellDocumentWithTag(range_ foundation.NSRange, string_ string, language string, tag int) string {
 	_r := x.inner.CorrectionForWordRangeInStringLanguageInSpellDocumentWithTag(range_, foundation.NSStringStringWithUTF8String(string_), foundation.NSStringStringWithUTF8String(language), tag)
@@ -150,6 +190,8 @@ func (x *SpellChecker) CorrectionForWordRangeInStringLanguageInSpellDocumentWith
 	return purego.GoString(_r.Ptr())
 }
 
+// Provides a list of complete words that the user might be trying to type based on a partial word in a given string.
+//
 // CompletionsForPartialWordRangeInStringLanguageInSpellDocumentWithTag calls the underlying CompletionsForPartialWordRangeInStringLanguageInSpellDocumentWithTag.
 func (x *SpellChecker) CompletionsForPartialWordRangeInStringLanguageInSpellDocumentWithTag(range_ foundation.NSRange, string_ string, language string, tag int) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.CompletionsForPartialWordRangeInStringLanguageInSpellDocumentWithTag(range_, foundation.NSStringStringWithUTF8String(string_), foundation.NSStringStringWithUTF8String(language), tag)
@@ -164,16 +206,22 @@ func (x *SpellChecker) LanguageForWordRangeInStringOrthography(range_ foundation
 	return purego.GoString(_r.Ptr())
 }
 
+// Notifies the receiver that the user has finished with the tagged document.
+//
 // CloseSpellDocumentWithTag calls the underlying CloseSpellDocumentWithTag.
 func (x *SpellChecker) CloseSpellDocumentWithTag(tag int) {
 	x.inner.CloseSpellDocumentWithTag(tag)
 }
 
+// Records the user response to the correction indicator being displayed.
+//
 // RecordResponseToCorrectionForWordLanguageInSpellDocumentWithTag calls the underlying RecordResponseToCorrectionForWordLanguageInSpellDocumentWithTag.
 func (x *SpellChecker) RecordResponseToCorrectionForWordLanguageInSpellDocumentWithTag(response NSCorrectionResponse, correction string, word string, language string, tag int) {
 	x.inner.RecordResponseToCorrectionForWordLanguageInSpellDocumentWithTag(raw.NSCorrectionResponse(response), foundation.NSStringStringWithUTF8String(correction), foundation.NSStringStringWithUTF8String(word), foundation.NSStringStringWithUTF8String(language), tag)
 }
 
+// Display a suitable user interface to indicate a correction may need to be made.
+//
 // ShowCorrectionIndicatorOfTypePrimaryStringAlternativeStringsForStringInRectView blocks until the operation completes or ctx is cancelled.
 func (x *SpellChecker) ShowCorrectionIndicatorOfTypePrimaryStringAlternativeStringsForStringInRectView(ctx context.Context, type_ NSCorrectionIndicatorType, primaryString string, alternativeStrings *foundation.NSArray[*foundation.NSString], rectOfTypedString corefoundation.CGRect, view *raw.NSView) (string, error) {
 	type _result struct {
@@ -197,6 +245,8 @@ func (x *SpellChecker) ShowCorrectionIndicatorOfTypePrimaryStringAlternativeStri
 	}
 }
 
+// Dismisses the correction indicator for the specified view.
+//
 // DismissCorrectionIndicatorForView calls the underlying DismissCorrectionIndicatorForView.
 func (x *SpellChecker) DismissCorrectionIndicatorForView(view *raw.NSView) {
 	x.inner.DismissCorrectionIndicatorForView(view)
@@ -217,26 +267,36 @@ func (x *SpellChecker) DeletesAutospaceBetweenStringAndStringLanguage(precedingS
 	return x.inner.DeletesAutospaceBetweenStringAndStringLanguage(foundation.NSStringStringWithUTF8String(precedingString), foundation.NSStringStringWithUTF8String(followingString), foundation.NSStringStringWithUTF8String(language))
 }
 
+// Sets the string that appears in the misspelled word field, using the string object aString.
+//
 // SetWordFieldStringValue calls the underlying SetWordFieldStringValue.
 func (x *SpellChecker) SetWordFieldStringValue(string_ string) {
 	x.inner.SetWordFieldStringValue(foundation.NSStringStringWithUTF8String(string_))
 }
 
+// Adds the word to the spell checker dictionary.
+//
 // LearnWord calls the underlying LearnWord.
 func (x *SpellChecker) LearnWord(word string) {
 	x.inner.LearnWord(foundation.NSStringStringWithUTF8String(word))
 }
 
+// Indicates whether the spell checker has learned a given word.
+//
 // HasLearnedWord calls the underlying HasLearnedWord.
 func (x *SpellChecker) HasLearnedWord(word string) bool {
 	return x.inner.HasLearnedWord(foundation.NSStringStringWithUTF8String(word))
 }
 
+// Tells the spell checker to unlearn a given word.
+//
 // UnlearnWord calls the underlying UnlearnWord.
 func (x *SpellChecker) UnlearnWord(word string) {
 	x.inner.UnlearnWord(foundation.NSStringStringWithUTF8String(word))
 }
 
+// Returns the current language used in spell checking.
+//
 // Language calls the underlying Language.
 func (x *SpellChecker) Language() string {
 	_r := x.inner.Language()
@@ -246,6 +306,8 @@ func (x *SpellChecker) Language() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns whether the specified language is in the Spelling pop-up list.
+//
 // SetLanguage calls the underlying SetLanguage.
 func (x *SpellChecker) SetLanguage(language string) bool {
 	return x.inner.SetLanguage(foundation.NSStringStringWithUTF8String(language))
@@ -334,11 +396,15 @@ func (x *SpellChecker) SetAutomaticallyIdentifiesLanguages(automaticallyIdentifi
 	x.inner.SetAutomaticallyIdentifiesLanguages(automaticallyIdentifiesLanguages)
 }
 
+// Returns an array of suggested spellings for the misspelled word.
+//
 // GuessesForWord calls the underlying GuessesForWord.
 func (x *SpellChecker) GuessesForWord(word string) *foundation.NSArray[objc.ID] {
 	return x.inner.GuessesForWord(foundation.NSStringStringWithUTF8String(word))
 }
 
+// Remove this word from the spelling dictionary.
+//
 // ForgetWord calls the underlying ForgetWord.
 func (x *SpellChecker) ForgetWord(word string) {
 	x.inner.ForgetWord(foundation.NSStringStringWithUTF8String(word))

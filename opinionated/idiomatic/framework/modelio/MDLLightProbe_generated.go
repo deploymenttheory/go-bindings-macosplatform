@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A light source described in terms of the variations in color and intensity of its illumination in all directions.
+//
 // LightProbe wraps [raw.MDLLightProbe] with a fluent Go API.
 type LightProbe struct {
 	inner *raw.MDLLightProbe
@@ -30,6 +32,8 @@ func LightProbeFromID(id objc.ID) *LightProbe {
 	return &LightProbe{inner: raw.MDLLightProbeFromID(id)}
 }
 
+// Initializes a light probe with the specified cube map textures.
+//
 // NewLightProbeWithReflectiveTextureIrradianceTexture creates a new [LightProbe].
 func NewLightProbeWithReflectiveTextureIrradianceTexture(reflectiveTexture *raw.MDLTexture, irradianceTexture *raw.MDLTexture) *LightProbe {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLLightProbe")), objc.RegisterName("alloc"))
@@ -37,19 +41,23 @@ func NewLightProbeWithReflectiveTextureIrradianceTexture(reflectiveTexture *raw.
 	return &LightProbe{inner: raw.MDLLightProbeFromID(_id)}
 }
 
+// The type of the light.
+//
 // WithLightType sets the lightType property and returns the receiver for chaining.
 func (x *LightProbe) WithLightType(lightType MDLLightType) *LightProbe {
 	x.inner.MDLLight.SetLightType(raw.MDLLightType(lightType))
 	return x
 }
 
+// The name of the Core Graphics color space to be used for interpreting the light’s color information.
+//
 // WithColorSpace sets the colorSpace property and returns the receiver for chaining.
 func (x *LightProbe) WithColorSpace(colorSpace string) *LightProbe {
 	x.inner.MDLLight.SetColorSpace(foundation.NSStringStringWithUTF8String(colorSpace))
 	return x
 }
 
-// @property parent @abstract Parent object. Nil if no parent. @discussion Set to nil when you remove this from an object container inside the parent object.
+// The parent object that contains this object.
 //
 // WithParent sets the parent property and returns the receiver for chaining.
 func (x *LightProbe) WithParent(parent ObjectProvider) *LightProbe {
@@ -57,7 +65,7 @@ func (x *LightProbe) WithParent(parent ObjectProvider) *LightProbe {
 	return x
 }
 
-// @property instance @abstract Instance object @discussion nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
+// The primary object, if applicable, of which this object is an instance.
 //
 // WithInstance sets the instance property and returns the receiver for chaining.
 func (x *LightProbe) WithInstance(instance ObjectProvider) *LightProbe {
@@ -65,7 +73,7 @@ func (x *LightProbe) WithInstance(instance ObjectProvider) *LightProbe {
 	return x
 }
 
-// @property transform @abstract Short hand property for the MDLTransformComponent. @discussion The default value is nil @see MDLTransformComponent
+// A component that manages this object’s spatial transform and its changes over time.
 //
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *LightProbe) WithTransform(transform raw.MDLTransformComponent) *LightProbe {
@@ -73,7 +81,7 @@ func (x *LightProbe) WithTransform(transform raw.MDLTransformComponent) *LightPr
 	return x
 }
 
-// @property children @abstract Short hand property for the MDLObjectContainerComponent. @discussion The default value is an empty MDLObjectContainer @see MDLObjectContainerComponent
+// A component that manages this object’s collection of children.
 //
 // WithChildren sets the children property and returns the receiver for chaining.
 func (x *LightProbe) WithChildren(children raw.MDLObjectContainerComponent) *LightProbe {
@@ -81,12 +89,16 @@ func (x *LightProbe) WithChildren(children raw.MDLObjectContainerComponent) *Lig
 	return x
 }
 
+// A Boolean value indicating whether this object should be used in rendering.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *LightProbe) WithHidden(hidden bool) *LightProbe {
 	x.inner.MDLLight.MDLObject.SetHidden(hidden)
 	return x
 }
 
+// Generates spherical harmonics information based on the light probe’s irradiance texture.
+//
 // GenerateSphericalHarmonicsFromIrradiance calls the underlying GenerateSphericalHarmonicsFromIrradiance.
 func (x *LightProbe) GenerateSphericalHarmonicsFromIrradiance(sphericalHarmonicsLevel uint) {
 	x.inner.GenerateSphericalHarmonicsFromIrradiance(sphericalHarmonicsLevel)

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A factory class for creating layout constraint objects using a fluent API.
+//
 // LayoutAnchor wraps [raw.NSLayoutAnchor] with a fluent Go API.
 type LayoutAnchor struct {
 	inner *raw.NSLayoutAnchor[objc.ID]
@@ -36,6 +38,8 @@ func NewLayoutAnchor() *LayoutAnchor {
 	return &LayoutAnchor{inner: raw.NSLayoutAnchorFromID[objc.ID](_id)}
 }
 
+// Returns a constraint that defines one item’s attribute as equal to another.
+//
 // ConstraintEqualToAnchor calls the underlying ConstraintEqualToAnchor.
 func (x *LayoutAnchor) ConstraintEqualToAnchor(anchor *raw.NSLayoutAnchor[objc.ID]) *LayoutConstraint {
 	_r := x.inner.ConstraintEqualToAnchor(anchor)
@@ -45,6 +49,8 @@ func (x *LayoutAnchor) ConstraintEqualToAnchor(anchor *raw.NSLayoutAnchor[objc.I
 	return &LayoutConstraint{inner: _r}
 }
 
+// Returns a constraint that defines one item’s attribute as greater than or equal to another.
+//
 // ConstraintGreaterThanOrEqualToAnchor calls the underlying ConstraintGreaterThanOrEqualToAnchor.
 func (x *LayoutAnchor) ConstraintGreaterThanOrEqualToAnchor(anchor *raw.NSLayoutAnchor[objc.ID]) *LayoutConstraint {
 	_r := x.inner.ConstraintGreaterThanOrEqualToAnchor(anchor)
@@ -54,6 +60,8 @@ func (x *LayoutAnchor) ConstraintGreaterThanOrEqualToAnchor(anchor *raw.NSLayout
 	return &LayoutConstraint{inner: _r}
 }
 
+// Returns a constraint that defines one item’s attribute as less than or equal to another.
+//
 // ConstraintLessThanOrEqualToAnchor calls the underlying ConstraintLessThanOrEqualToAnchor.
 func (x *LayoutAnchor) ConstraintLessThanOrEqualToAnchor(anchor *raw.NSLayoutAnchor[objc.ID]) *LayoutConstraint {
 	_r := x.inner.ConstraintLessThanOrEqualToAnchor(anchor)
@@ -63,6 +71,8 @@ func (x *LayoutAnchor) ConstraintLessThanOrEqualToAnchor(anchor *raw.NSLayoutAnc
 	return &LayoutConstraint{inner: _r}
 }
 
+// Returns a constraint that defines one item’s attribute as equal to another item’s attribute plus a constant offset.
+//
 // ConstraintEqualToAnchorConstant calls the underlying ConstraintEqualToAnchorConstant.
 func (x *LayoutAnchor) ConstraintEqualToAnchorConstant(anchor *raw.NSLayoutAnchor[objc.ID], c float64) *LayoutConstraint {
 	_r := x.inner.ConstraintEqualToAnchorConstant(anchor, c)
@@ -72,6 +82,8 @@ func (x *LayoutAnchor) ConstraintEqualToAnchorConstant(anchor *raw.NSLayoutAncho
 	return &LayoutConstraint{inner: _r}
 }
 
+// Returns a constraint that defines one item’s attribute as greater than or equal to another item’s attribute plus a constant offset.
+//
 // ConstraintGreaterThanOrEqualToAnchorConstant calls the underlying ConstraintGreaterThanOrEqualToAnchorConstant.
 func (x *LayoutAnchor) ConstraintGreaterThanOrEqualToAnchorConstant(anchor *raw.NSLayoutAnchor[objc.ID], c float64) *LayoutConstraint {
 	_r := x.inner.ConstraintGreaterThanOrEqualToAnchorConstant(anchor, c)
@@ -81,6 +93,8 @@ func (x *LayoutAnchor) ConstraintGreaterThanOrEqualToAnchorConstant(anchor *raw.
 	return &LayoutConstraint{inner: _r}
 }
 
+// Returns a constraint that defines one item’s attribute as less than or equal to another item’s attribute plus a constant offset.
+//
 // ConstraintLessThanOrEqualToAnchorConstant calls the underlying ConstraintLessThanOrEqualToAnchorConstant.
 func (x *LayoutAnchor) ConstraintLessThanOrEqualToAnchorConstant(anchor *raw.NSLayoutAnchor[objc.ID], c float64) *LayoutConstraint {
 	_r := x.inner.ConstraintLessThanOrEqualToAnchorConstant(anchor, c)

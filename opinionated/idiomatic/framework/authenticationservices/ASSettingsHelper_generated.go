@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that opens Settings and navigates to the settings for configuring credential providers.
+//
 // SettingsHelper wraps [raw.ASSettingsHelper] with a fluent Go API.
 type SettingsHelper struct {
 	inner *raw.ASSettingsHelper

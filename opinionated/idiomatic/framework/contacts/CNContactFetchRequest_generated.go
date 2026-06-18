@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that defines the options to use when fetching contacts.
+//
 // ContactFetchRequest wraps [raw.CNContactFetchRequest] with a fluent Go API.
 type ContactFetchRequest struct {
 	inner *raw.CNContactFetchRequest
@@ -32,7 +34,7 @@ func ContactFetchRequestFromID(id objc.ID) *ContactFetchRequest {
 	return &ContactFetchRequest{inner: raw.CNContactFetchRequestFromID(id)}
 }
 
-// @param      keysToFetch The properties to fetch for the returned contacts. @discussion Only fetch the properties that will be used.
+// Creates a fetch request for the specified keys.
 //
 // NewContactFetchRequestWithKeysToFetch creates a new [ContactFetchRequest].
 func NewContactFetchRequestWithKeysToFetch(keysToFetch ...purego.IDer) *ContactFetchRequest {
@@ -50,7 +52,7 @@ func NewContactFetchRequestWithKeysToFetch(keysToFetch ...purego.IDer) *ContactF
 	return &ContactFetchRequest{inner: raw.CNContactFetchRequestFromID(_id)}
 }
 
-// @abstract The predicate to match contacts against. @discussion Use only predicates from CNContact+Predicates.h. Compound predicates are not supported. Set to nil to match all contacts.
+// The predicate to match contacts against.
 //
 // WithPredicate sets the predicate property and returns the receiver for chaining.
 func (x *ContactFetchRequest) WithPredicate(predicate *foundation.NSPredicate) *ContactFetchRequest {
@@ -58,7 +60,7 @@ func (x *ContactFetchRequest) WithPredicate(predicate *foundation.NSPredicate) *
 	return x
 }
 
-// @abstract To return mutable contacts. @discussion If YES returns CNMutableContact objects, otherwise returns CNContact objects. Default is NO.
+// A Boolean value that indicates whether to return mutable contacts.
 //
 // WithMutableObjects sets the mutableObjects property and returns the receiver for chaining.
 func (x *ContactFetchRequest) WithMutableObjects(mutableObjects bool) *ContactFetchRequest {
@@ -66,7 +68,7 @@ func (x *ContactFetchRequest) WithMutableObjects(mutableObjects bool) *ContactFe
 	return x
 }
 
-// @abstract To return linked contacts as unified contacts. @discussion If YES returns unified contacts, otherwise returns individual contacts. Default is YES. @note A unified contact is the aggregation of properties from a set of linked individual contacts. If an individual contact is not linked then the unified contact is simply that individual contact.
+// A Boolean value that indicates whether to return linked contacts as unified contacts.
 //
 // WithUnifyResults sets the unifyResults property and returns the receiver for chaining.
 func (x *ContactFetchRequest) WithUnifyResults(unifyResults bool) *ContactFetchRequest {
@@ -74,7 +76,7 @@ func (x *ContactFetchRequest) WithUnifyResults(unifyResults bool) *ContactFetchR
 	return x
 }
 
-// @abstract To return contacts in a specific sort order. @discussion Default is CNContactSortOrderNone.
+// The sort order for contacts.
 //
 // WithSortOrder sets the sortOrder property and returns the receiver for chaining.
 func (x *ContactFetchRequest) WithSortOrder(sortOrder CNContactSortOrder) *ContactFetchRequest {

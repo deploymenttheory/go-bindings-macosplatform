@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A single render task.
+//
 // RenderTask wraps [raw.CIRenderTask] with a fluent Go API.
 type RenderTask struct {
 	inner *raw.CIRenderTask
@@ -35,6 +37,8 @@ func NewRenderTask() *RenderTask {
 	return &RenderTask{inner: raw.CIRenderTaskFromID(_id)}
 }
 
+// Waits until the CIRenderTask finishes and returns.
+//
 // WaitUntilCompletedAndReturnError calls the underlying WaitUntilCompletedAndReturnError.
 func (x *RenderTask) WaitUntilCompletedAndReturnError() (*RenderInfo, error) {
 	_r, _err := x.inner.WaitUntilCompletedAndReturnError()

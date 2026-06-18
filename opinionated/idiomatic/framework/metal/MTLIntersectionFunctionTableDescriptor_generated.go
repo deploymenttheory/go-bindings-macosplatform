@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specification of how to create an intersection function table.
+//
 // IntersectionFunctionTableDescriptor wraps [raw.MTLIntersectionFunctionTableDescriptor] with a fluent Go API.
 type IntersectionFunctionTableDescriptor struct {
 	inner *raw.MTLIntersectionFunctionTableDescriptor
@@ -37,7 +39,7 @@ func NewIntersectionFunctionTableDescriptor() *IntersectionFunctionTableDescript
 	return &IntersectionFunctionTableDescriptor{inner: raw.MTLIntersectionFunctionTableDescriptorFromID(_id)}
 }
 
-// @property functionCount @abstract The number of functions in the table.
+// The number of entries in the intersection function table.
 //
 // WithFunctionCount sets the functionCount property and returns the receiver for chaining.
 func (x *IntersectionFunctionTableDescriptor) WithFunctionCount(functionCount uint) *IntersectionFunctionTableDescriptor {

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A description of a list of bounding boxes, as motion keyframe data, to turn into an acceleration structure.
+//
 // AccelerationStructureMotionBoundingBoxGeometryDescriptor wraps [raw.MTLAccelerationStructureMotionBoundingBoxGeometryDescriptor] with a fluent Go API.
 type AccelerationStructureMotionBoundingBoxGeometryDescriptor struct {
 	inner *raw.MTLAccelerationStructureMotionBoundingBoxGeometryDescriptor
@@ -40,7 +42,7 @@ func NewAccelerationStructureMotionBoundingBoxGeometryDescriptor() *Acceleration
 	return &AccelerationStructureMotionBoundingBoxGeometryDescriptor{inner: raw.MTLAccelerationStructureMotionBoundingBoxGeometryDescriptorFromID(_id)}
 }
 
-// @brief Bounding box buffer containing MTLAxisAlignedBoundingBoxes similar to what MTLAccelerationStructureBoundingBoxGeometryDescriptor has but array of the values.
+// A array of motion keyframes, each containing bounding box data.
 //
 // WithBoundingBoxBuffers sets the collection, converting the Go slice to an NSArray.
 func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithBoundingBoxBuffers(items ...*raw.MTLMotionKeyframeData) *AccelerationStructureMotionBoundingBoxGeometryDescriptor {
@@ -60,7 +62,7 @@ func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithBoundingB
 	return x
 }
 
-// @brief Stride, in bytes, between bounding boxes in the bounding box buffer. Must be at least 24 bytes and must be a multiple of 4 bytes. Defaults to 24 bytes.
+// The stride, in bytes, between bounding boxes in each buffer.
 //
 // WithBoundingBoxStride sets the boundingBoxStride property and returns the receiver for chaining.
 func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithBoundingBoxStride(boundingBoxStride uint) *AccelerationStructureMotionBoundingBoxGeometryDescriptor {
@@ -68,7 +70,7 @@ func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithBoundingB
 	return x
 }
 
-// @brief Number of bounding boxes
+// The number of bounding boxes in each bounding box buffer.
 //
 // WithBoundingBoxCount sets the boundingBoxCount property and returns the receiver for chaining.
 func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithBoundingBoxCount(boundingBoxCount uint) *AccelerationStructureMotionBoundingBoxGeometryDescriptor {
@@ -76,13 +78,15 @@ func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithBoundingB
 	return x
 }
 
+// An index into the intersection table for determining which intersection function Metal calls when it intersects a ray with the acceleration structure.
+//
 // WithIntersectionFunctionTableOffset sets the intersectionFunctionTableOffset property and returns the receiver for chaining.
 func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *AccelerationStructureMotionBoundingBoxGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset)
 	return x
 }
 
-// @brief Whether the geometry is opaque
+// A Boolean value that determines whether the geometry data in the acceleration structure needs to skip triangle-intersection tests.
 //
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithOpaque(opaque bool) *AccelerationStructureMotionBoundingBoxGeometryDescriptor {
@@ -90,7 +94,7 @@ func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithOpaque(op
 	return x
 }
 
-// @brief Whether intersection functions may be invoked more than once per ray/primitive intersection. Defaults to YES.
+// A Boolean value that indicates whether Metal calls the ray-intersection test more than once per primitive on the structure.
 //
 // WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
 func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureMotionBoundingBoxGeometryDescriptor {
@@ -98,7 +102,7 @@ func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithAllowDupl
 	return x
 }
 
-// @brief Label
+// A label for the geometry structure, suitable for debugging.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithLabel(label string) *AccelerationStructureMotionBoundingBoxGeometryDescriptor {

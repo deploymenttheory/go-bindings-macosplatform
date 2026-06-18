@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// An interface for configuring a rule-based list of options.
+//
 // RuleEditor wraps [raw.NSRuleEditor] with a fluent Go API.
 type RuleEditor struct {
 	inner *raw.NSRuleEditor
@@ -41,210 +43,280 @@ func NewRuleEditor() *RuleEditor {
 	return &RuleEditor{inner: raw.NSRuleEditorFromID(_id)}
 }
 
+// The rule editor’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *RuleEditor) WithDelegate(delegate raw.NSRuleEditorDelegate) *RuleEditor {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The name of the rule editor’s strings file.
+//
 // WithFormattingStringsFilename sets the formattingStringsFilename property and returns the receiver for chaining.
 func (x *RuleEditor) WithFormattingStringsFilename(formattingStringsFilename string) *RuleEditor {
 	x.inner.SetFormattingStringsFilename(foundation.NSStringStringWithUTF8String(formattingStringsFilename))
 	return x
 }
 
+// The formatting dictionary for the rule editor.
+//
 // WithFormattingDictionary sets the formattingDictionary property and returns the receiver for chaining.
 func (x *RuleEditor) WithFormattingDictionary(formattingDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *RuleEditor {
 	x.inner.SetFormattingDictionary(formattingDictionary)
 	return x
 }
 
+// The rule editor’s nesting mode.
+//
 // WithNestingMode sets the nestingMode property and returns the receiver for chaining.
 func (x *RuleEditor) WithNestingMode(nestingMode NSRuleEditorNestingMode) *RuleEditor {
 	x.inner.SetNestingMode(raw.NSRuleEditorNestingMode(nestingMode))
 	return x
 }
 
+// The rule editor’s row height.
+//
 // WithRowHeight sets the rowHeight property and returns the receiver for chaining.
 func (x *RuleEditor) WithRowHeight(rowHeight float64) *RuleEditor {
 	x.inner.SetRowHeight(rowHeight)
 	return x
 }
 
+// A Boolean value that determines whether the rule editor is editable.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *RuleEditor) WithEditable(editable bool) *RuleEditor {
 	x.inner.SetEditable(editable)
 	return x
 }
 
+// A Boolean value that indicates whether all the rows can be removed.
+//
 // WithCanRemoveAllRows sets the canRemoveAllRows property and returns the receiver for chaining.
 func (x *RuleEditor) WithCanRemoveAllRows(canRemoveAllRows bool) *RuleEditor {
 	x.inner.SetCanRemoveAllRows(canRemoveAllRows)
 	return x
 }
 
+// The class used to create a new row in the “rows” binding.
+//
 // WithRowClass sets the rowClass property and returns the receiver for chaining.
 func (x *RuleEditor) WithRowClass(rowClass objc.Class) *RuleEditor {
 	x.inner.SetRowClass(rowClass)
 	return x
 }
 
+// The key path for the row type.
+//
 // WithRowTypeKeyPath sets the rowTypeKeyPath property and returns the receiver for chaining.
 func (x *RuleEditor) WithRowTypeKeyPath(rowTypeKeyPath string) *RuleEditor {
 	x.inner.SetRowTypeKeyPath(foundation.NSStringStringWithUTF8String(rowTypeKeyPath))
 	return x
 }
 
+// The key path for the subrows.
+//
 // WithSubrowsKeyPath sets the subrowsKeyPath property and returns the receiver for chaining.
 func (x *RuleEditor) WithSubrowsKeyPath(subrowsKeyPath string) *RuleEditor {
 	x.inner.SetSubrowsKeyPath(foundation.NSStringStringWithUTF8String(subrowsKeyPath))
 	return x
 }
 
+// The criteria key path.
+//
 // WithCriteriaKeyPath sets the criteriaKeyPath property and returns the receiver for chaining.
 func (x *RuleEditor) WithCriteriaKeyPath(criteriaKeyPath string) *RuleEditor {
 	x.inner.SetCriteriaKeyPath(foundation.NSStringStringWithUTF8String(criteriaKeyPath))
 	return x
 }
 
+// The display values key path.
+//
 // WithDisplayValuesKeyPath sets the displayValuesKeyPath property and returns the receiver for chaining.
 func (x *RuleEditor) WithDisplayValuesKeyPath(displayValuesKeyPath string) *RuleEditor {
 	x.inner.SetDisplayValuesKeyPath(foundation.NSStringStringWithUTF8String(displayValuesKeyPath))
 	return x
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *RuleEditor) WithTarget(target objc.ID) *RuleEditor {
 	x.inner.NSControl.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *RuleEditor) WithAction(action objc.SEL) *RuleEditor {
 	x.inner.NSControl.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *RuleEditor) WithTag(tag int) *RuleEditor {
 	x.inner.NSControl.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *RuleEditor) WithIgnoresMultiClick(ignoresMultiClick bool) *RuleEditor {
 	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *RuleEditor) WithContinuous(continuous bool) *RuleEditor {
 	x.inner.NSControl.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *RuleEditor) WithEnabled(enabled bool) *RuleEditor {
 	x.inner.NSControl.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *RuleEditor) WithRefusesFirstResponder(refusesFirstResponder bool) *RuleEditor {
 	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *RuleEditor) WithHighlighted(highlighted bool) *RuleEditor {
 	x.inner.NSControl.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *RuleEditor) WithControlSize(controlSize NSControlSize) *RuleEditor {
 	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *RuleEditor) WithFormatter(formatter *foundation.NSFormatter) *RuleEditor {
 	x.inner.NSControl.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *RuleEditor) WithObjectValue(objectValue objc.ID) *RuleEditor {
 	x.inner.NSControl.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *RuleEditor) WithStringValue(stringValue string) *RuleEditor {
 	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *RuleEditor) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *RuleEditor {
 	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *RuleEditor) WithIntValue(intValue int) *RuleEditor {
 	x.inner.NSControl.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *RuleEditor) WithIntegerValue(integerValue int) *RuleEditor {
 	x.inner.NSControl.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *RuleEditor) WithFloatValue(floatValue float32) *RuleEditor {
 	x.inner.NSControl.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *RuleEditor) WithDoubleValue(doubleValue float64) *RuleEditor {
 	x.inner.NSControl.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *RuleEditor) WithFont(font *Font) *RuleEditor {
 	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *RuleEditor) WithUsesSingleLineMode(usesSingleLineMode bool) *RuleEditor {
 	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *RuleEditor) WithLineBreakMode(lineBreakMode NSLineBreakMode) *RuleEditor {
 	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *RuleEditor) WithAlignment(alignment NSTextAlignment) *RuleEditor {
 	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *RuleEditor) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *RuleEditor {
 	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *RuleEditor) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *RuleEditor {
 	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -299,6 +371,8 @@ func (x *RuleEditor) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOpt
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *RuleEditor) WithFrame(frame corefoundation.CGRect) *RuleEditor {
 	x.inner.NSControl.NSView.SetFrame(frame)
@@ -323,6 +397,8 @@ func (x *RuleEditor) WithBoundsRotation(boundsRotation float64) *RuleEditor {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *RuleEditor) WithBounds(bounds corefoundation.CGRect) *RuleEditor {
 	x.inner.NSControl.NSView.SetBounds(bounds)
@@ -335,6 +411,8 @@ func (x *RuleEditor) WithCanDrawConcurrently(canDrawConcurrently bool) *RuleEdit
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *RuleEditor) WithNeedsDisplay(needsDisplay bool) *RuleEditor {
 	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
@@ -521,7 +599,7 @@ func (x *RuleEditor) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets found
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *RuleEditor) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *RuleEditor {
@@ -577,100 +655,138 @@ func (x *RuleEditor) WithPressureConfiguration(pressureConfiguration *PressureCo
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *RuleEditor) WithNextResponder(nextResponder ResponderProvider) *RuleEditor {
 	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *RuleEditor) WithMenu(menu *Menu) *RuleEditor {
 	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *RuleEditor) WithUserActivity(userActivity *foundation.NSUserActivity) *RuleEditor {
 	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *RuleEditor) WithTouchBar(touchBar *TouchBar) *RuleEditor {
 	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Instructs the receiver to refetch criteria from its delegate.
+//
 // ReloadCriteria calls the underlying ReloadCriteria.
 func (x *RuleEditor) ReloadCriteria() {
 	x.inner.ReloadCriteria()
 }
 
+// Instructs the receiver to regenerate its predicate by invoking the corresponding delegate method.
+//
 // ReloadPredicate calls the underlying ReloadPredicate.
 func (x *RuleEditor) ReloadPredicate() {
 	x.inner.ReloadPredicate()
 }
 
+// Returns the predicate for a given row.
+//
 // PredicateForRow calls the underlying PredicateForRow.
 func (x *RuleEditor) PredicateForRow(row int) *foundation.NSPredicate {
 	return x.inner.PredicateForRow(row)
 }
 
+// Returns the immediate subrows of a given row.
+//
 // SubrowIndexesForRow calls the underlying SubrowIndexesForRow.
 func (x *RuleEditor) SubrowIndexesForRow(rowIndex int) *foundation.NSIndexSet {
 	return x.inner.SubrowIndexesForRow(rowIndex)
 }
 
+// Returns the currently chosen items for a given row.
+//
 // CriteriaForRow calls the underlying CriteriaForRow.
 func (x *RuleEditor) CriteriaForRow(row int) *foundation.NSArray[objc.ID] {
 	return x.inner.CriteriaForRow(row)
 }
 
+// Returns the chosen values for a given row.
+//
 // DisplayValuesForRow calls the underlying DisplayValuesForRow.
 func (x *RuleEditor) DisplayValuesForRow(row int) *foundation.NSArray[objc.ID] {
 	return x.inner.DisplayValuesForRow(row)
 }
 
+// Returns the index of the row containing a given value.
+//
 // RowForDisplayValue calls the underlying RowForDisplayValue.
 func (x *RuleEditor) RowForDisplayValue(displayValue objc.ID) int {
 	return x.inner.RowForDisplayValue(displayValue)
 }
 
+// Returns the type of a given row.
+//
 // RowTypeForRow calls the underlying RowTypeForRow.
 func (x *RuleEditor) RowTypeForRow(rowIndex int) NSRuleEditorRowType {
 	return NSRuleEditorRowType(x.inner.RowTypeForRow(rowIndex))
 }
 
+// Returns the index of the parent of a given row.
+//
 // ParentRowForRow calls the underlying ParentRowForRow.
 func (x *RuleEditor) ParentRowForRow(rowIndex int) int {
 	return x.inner.ParentRowForRow(rowIndex)
 }
 
+// Adds a row to the receiver.
+//
 // AddRow calls the underlying AddRow.
 func (x *RuleEditor) AddRow(sender objc.ID) {
 	x.inner.AddRow(sender)
 }
 
+// Adds a new row of a given type at a given location.
+//
 // InsertRowAtIndexWithTypeAsSubrowOfRowAnimate calls the underlying InsertRowAtIndexWithTypeAsSubrowOfRowAnimate.
 func (x *RuleEditor) InsertRowAtIndexWithTypeAsSubrowOfRowAnimate(rowIndex int, rowType NSRuleEditorRowType, parentRow int, shouldAnimate bool) {
 	x.inner.InsertRowAtIndexWithTypeAsSubrowOfRowAnimate(rowIndex, raw.NSRuleEditorRowType(rowType), parentRow, shouldAnimate)
 }
 
+// Modifies the row at a given index to contain the given items and values.
+//
 // SetCriteriaAndDisplayValuesForRowAtIndex calls the underlying SetCriteriaAndDisplayValuesForRowAtIndex.
 func (x *RuleEditor) SetCriteriaAndDisplayValuesForRowAtIndex(criteria *foundation.NSArray[objc.ID], values *foundation.NSArray[objc.ID], rowIndex int) {
 	x.inner.SetCriteriaAndDisplayValuesForRowAtIndex(criteria, values, rowIndex)
 }
 
+// Removes the row at a given index.
+//
 // RemoveRowAtIndex calls the underlying RemoveRowAtIndex.
 func (x *RuleEditor) RemoveRowAtIndex(rowIndex int) {
 	x.inner.RemoveRowAtIndex(rowIndex)
 }
 
+// Removes the rows at given indexes.
+//
 // RemoveRowsAtIndexesIncludeSubrows calls the underlying RemoveRowsAtIndexesIncludeSubrows.
 func (x *RuleEditor) RemoveRowsAtIndexesIncludeSubrows(rowIndexes *foundation.NSIndexSet, includeSubrows bool) {
 	x.inner.RemoveRowsAtIndexesIncludeSubrows(rowIndexes, includeSubrows)
 }
 
+// Sets in the receiver the indexes of rows that are selected.
+//
 // SelectRowIndexesByExtendingSelection calls the underlying SelectRowIndexesByExtendingSelection.
 func (x *RuleEditor) SelectRowIndexesByExtendingSelection(indexes *foundation.NSIndexSet, extend bool) {
 	x.inner.SelectRowIndexesByExtendingSelection(indexes, extend)

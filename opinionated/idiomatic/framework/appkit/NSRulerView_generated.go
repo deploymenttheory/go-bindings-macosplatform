@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A ruler and the markers above or to the side of a scroll view’s document view.
+//
 // RulerView wraps [raw.NSRulerView] with a fluent Go API.
 type RulerView struct {
 	inner *raw.NSRulerView
@@ -42,6 +44,8 @@ func NewRulerViewWithCoder(coder *foundation.NSCoder) *RulerView {
 	return &RulerView{inner: raw.NSRulerViewFromID(_id)}
 }
 
+// Initializes a newly allocated NSRulerView to have orientation (NSHorizontalRuler or NSVerticalRuler) within aScrollView.
+//
 // NewRulerViewWithScrollViewOrientation creates a new [RulerView].
 func NewRulerViewWithScrollViewOrientation(scrollView *raw.NSScrollView, orientation NSRulerOrientation) *RulerView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSRulerView")), objc.RegisterName("alloc"))
@@ -49,54 +53,72 @@ func NewRulerViewWithScrollViewOrientation(scrollView *raw.NSScrollView, orienta
 	return &RulerView{inner: raw.NSRulerViewFromID(_id)}
 }
 
+// The NSScrollView that owns the receiver to scrollView, without retaining it.
+//
 // WithScrollView sets the scrollView property and returns the receiver for chaining.
 func (x *RulerView) WithScrollView(scrollView *ScrollView) *RulerView {
 	x.inner.SetScrollView(scrollView.Unwrap())
 	return x
 }
 
+// The orientation of the receiver to orientation.
+//
 // WithOrientation sets the orientation property and returns the receiver for chaining.
 func (x *RulerView) WithOrientation(orientation NSRulerOrientation) *RulerView {
 	x.inner.SetOrientation(raw.NSRulerOrientation(orientation))
 	return x
 }
 
+// The thickness of the area where ruler hash marks and labels are drawn.
+//
 // WithRuleThickness sets the ruleThickness property and returns the receiver for chaining.
 func (x *RulerView) WithRuleThickness(ruleThickness float64) *RulerView {
 	x.inner.SetRuleThickness(ruleThickness)
 	return x
 }
 
+// The room available for ruler markers to thickness.
+//
 // WithReservedThicknessForMarkers sets the reservedThicknessForMarkers property and returns the receiver for chaining.
 func (x *RulerView) WithReservedThicknessForMarkers(reservedThicknessForMarkers float64) *RulerView {
 	x.inner.SetReservedThicknessForMarkers(reservedThicknessForMarkers)
 	return x
 }
 
+// The room available for the receiver’s accessory view to thickness.
+//
 // WithReservedThicknessForAccessoryView sets the reservedThicknessForAccessoryView property and returns the receiver for chaining.
 func (x *RulerView) WithReservedThicknessForAccessoryView(reservedThicknessForAccessoryView float64) *RulerView {
 	x.inner.SetReservedThicknessForAccessoryView(reservedThicknessForAccessoryView)
 	return x
 }
 
+// The measurement units used by the ruler to unitName.
+//
 // WithMeasurementUnits sets the measurementUnits property and returns the receiver for chaining.
 func (x *RulerView) WithMeasurementUnits(measurementUnits *foundation.NSString) *RulerView {
 	x.inner.SetMeasurementUnits(measurementUnits)
 	return x
 }
 
+// The distance to the zero hash mark from the bounds origin of the NSScrollView’s document view (not of the receiver’s client view), in the document view’s coordinate system.
+//
 // WithOriginOffset sets the originOffset property and returns the receiver for chaining.
 func (x *RulerView) WithOriginOffset(originOffset float64) *RulerView {
 	x.inner.SetOriginOffset(originOffset)
 	return x
 }
 
+// The receiver’s client view, if it has one.
+//
 // WithClientView sets the clientView property and returns the receiver for chaining.
 func (x *RulerView) WithClientView(clientView ViewProvider) *RulerView {
 	x.inner.SetClientView(clientView.asView())
 	return x
 }
 
+// The receiver’s ruler markers to markers, removing any existing ruler markers and not consulting with the client view about the new markers.
+//
 // WithMarkers sets the collection, converting the Go slice to an NSArray.
 func (x *RulerView) WithMarkers(items ...*raw.NSRulerMarker) *RulerView {
 	if len(items) == 0 {
@@ -115,6 +137,8 @@ func (x *RulerView) WithMarkers(items ...*raw.NSRulerMarker) *RulerView {
 	return x
 }
 
+// The receiver’s accessory view to aView.
+//
 // WithAccessoryView sets the accessoryView property and returns the receiver for chaining.
 func (x *RulerView) WithAccessoryView(accessoryView ViewProvider) *RulerView {
 	x.inner.SetAccessoryView(accessoryView.asView())
@@ -163,6 +187,8 @@ func (x *RulerView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOpti
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *RulerView) WithFrame(frame corefoundation.CGRect) *RulerView {
 	x.inner.NSView.SetFrame(frame)
@@ -187,6 +213,8 @@ func (x *RulerView) WithBoundsRotation(boundsRotation float64) *RulerView {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *RulerView) WithBounds(bounds corefoundation.CGRect) *RulerView {
 	x.inner.NSView.SetBounds(bounds)
@@ -199,6 +227,8 @@ func (x *RulerView) WithCanDrawConcurrently(canDrawConcurrently bool) *RulerView
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *RulerView) WithNeedsDisplay(needsDisplay bool) *RulerView {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -385,7 +415,7 @@ func (x *RulerView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets founda
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *RulerView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *RulerView {
@@ -441,60 +471,82 @@ func (x *RulerView) WithPressureConfiguration(pressureConfiguration *PressureCon
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *RulerView) WithNextResponder(nextResponder ResponderProvider) *RulerView {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *RulerView) WithMenu(menu *Menu) *RulerView {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *RulerView) WithUserActivity(userActivity *foundation.NSUserActivity) *RulerView {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *RulerView) WithTouchBar(touchBar *TouchBar) *RulerView {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Adds aMarker to the receiver, without consulting the client view for approval.
+//
 // AddMarker calls the underlying AddMarker.
 func (x *RulerView) AddMarker(marker *raw.NSRulerMarker) {
 	x.inner.AddMarker(marker)
 }
 
+// Removes aMarker from the receiver, without consulting the client view for approval.
+//
 // RemoveMarker calls the underlying RemoveMarker.
 func (x *RulerView) RemoveMarker(marker *raw.NSRulerMarker) {
 	x.inner.RemoveMarker(marker)
 }
 
+// Tracks the mouse to add aMarker based on the initial mouse-down or mouse-dragged event theEvent.
+//
 // TrackMarkerWithMouseEvent calls the underlying TrackMarkerWithMouseEvent.
 func (x *RulerView) TrackMarkerWithMouseEvent(marker *raw.NSRulerMarker, event *raw.NSEvent) bool {
 	return x.inner.TrackMarkerWithMouseEvent(marker, event)
 }
 
+// Draws temporary lines in the ruler area.
+//
 // MoveRulerlineFromLocationToLocation calls the underlying MoveRulerlineFromLocationToLocation.
 func (x *RulerView) MoveRulerlineFromLocationToLocation(oldLocation float64, newLocation float64) {
 	x.inner.MoveRulerlineFromLocationToLocation(oldLocation, newLocation)
 }
 
+// Forces recalculation of the hash mark spacing for the next time the receiver is displayed.
+//
 // InvalidateHashMarks calls the underlying InvalidateHashMarks.
 func (x *RulerView) InvalidateHashMarks() {
 	x.inner.InvalidateHashMarks()
 }
 
+// Draws the receiver’s hash marks and labels in aRect, which is expressed in the receiver’s coordinate system.
+//
 // DrawHashMarksAndLabelsInRect calls the underlying DrawHashMarksAndLabelsInRect.
 func (x *RulerView) DrawHashMarksAndLabelsInRect(rect corefoundation.CGRect) {
 	x.inner.DrawHashMarksAndLabelsInRect(rect)
 }
 
+// Draws the receiver’s markers in aRect, which is expressed in the receiver’s coordinate system.
+//
 // DrawMarkersInRect calls the underlying DrawMarkersInRect.
 func (x *RulerView) DrawMarkersInRect(rect corefoundation.CGRect) {
 	x.inner.DrawMarkersInRect(rect)

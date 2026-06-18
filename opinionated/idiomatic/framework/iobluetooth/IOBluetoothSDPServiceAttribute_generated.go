@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// IOBluetoothSDPServiceAttribute represents a single SDP service attribute.
+//
 // IOBluetoothSDPServiceAttribute wraps [raw.IOBluetoothSDPServiceAttribute] with a fluent Go API.
 type IOBluetoothSDPServiceAttribute struct {
 	inner *raw.IOBluetoothSDPServiceAttribute
@@ -30,6 +32,8 @@ func IOBluetoothSDPServiceAttributeFromID(id objc.ID) *IOBluetoothSDPServiceAttr
 	return &IOBluetoothSDPServiceAttribute{inner: raw.IOBluetoothSDPServiceAttributeFromID(id)}
 }
 
+// Initializes a new service attribute with the given ID and element value.
+//
 // NewIOBluetoothSDPServiceAttributeWithIDAttributeElementValue creates a new [IOBluetoothSDPServiceAttribute].
 func NewIOBluetoothSDPServiceAttributeWithIDAttributeElementValue(newAttributeID uint16, attributeElementValue *foundation.NSObject) *IOBluetoothSDPServiceAttribute {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothSDPServiceAttribute")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewIOBluetoothSDPServiceAttributeWithIDAttributeElementValue(newAttributeID
 	return &IOBluetoothSDPServiceAttribute{inner: raw.IOBluetoothSDPServiceAttributeFromID(_id)}
 }
 
+// Initializes a new service attribute with the given ID and data element.
+//
 // NewIOBluetoothSDPServiceAttributeWithIDAttributeElement creates a new [IOBluetoothSDPServiceAttribute].
 func NewIOBluetoothSDPServiceAttributeWithIDAttributeElement(newAttributeID uint16, attributeElement *raw.IOBluetoothSDPDataElement) *IOBluetoothSDPServiceAttribute {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothSDPServiceAttribute")), objc.RegisterName("alloc"))
@@ -44,11 +50,15 @@ func NewIOBluetoothSDPServiceAttributeWithIDAttributeElement(newAttributeID uint
 	return &IOBluetoothSDPServiceAttribute{inner: raw.IOBluetoothSDPServiceAttributeFromID(_id)}
 }
 
+// Returns the attribute ID for the target service attribute.
+//
 // GetAttributeID calls the underlying GetAttributeID.
 func (x *IOBluetoothSDPServiceAttribute) GetAttributeID() uint16 {
 	return x.inner.GetAttributeID()
 }
 
+// Returns the data element for the target service attribute.
+//
 // GetDataElement calls the underlying GetDataElement.
 func (x *IOBluetoothSDPServiceAttribute) GetDataElement() *IOBluetoothSDPDataElement {
 	_r := x.inner.GetDataElement()
@@ -58,6 +68,8 @@ func (x *IOBluetoothSDPServiceAttribute) GetDataElement() *IOBluetoothSDPDataEle
 	return &IOBluetoothSDPDataElement{inner: _r}
 }
 
+// Returns the data element representing the attribute ID for the target service attribute.
+//
 // GetIDDataElement calls the underlying GetIDDataElement.
 func (x *IOBluetoothSDPServiceAttribute) GetIDDataElement() *IOBluetoothSDPDataElement {
 	_r := x.inner.GetIDDataElement()

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides metrics related to video playback quality.
+//
 // VideoPerformanceMetrics wraps [raw.AVVideoPerformanceMetrics] with a fluent Go API.
 type VideoPerformanceMetrics struct {
 	inner *raw.AVVideoPerformanceMetrics

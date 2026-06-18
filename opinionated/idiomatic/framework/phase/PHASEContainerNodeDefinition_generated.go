@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A node that plays all its children at the same time.
+//
 // ContainerNodeDefinition wraps [raw.PHASEContainerNodeDefinition] with a fluent Go API.
 type ContainerNodeDefinition struct {
 	inner *raw.PHASEContainerNodeDefinition
@@ -36,7 +38,7 @@ func NewContainerNodeDefinition() *ContainerNodeDefinition {
 	return &ContainerNodeDefinition{inner: raw.PHASEContainerNodeDefinitionFromID(_id)}
 }
 
-// @method initWithIdentifier @abstract Create a container node definition @param identifier An optional custom identifier to give to this object @return A new PHASEContainerNodeDefinition object
+// Creates a container node with the given name.
 //
 // NewContainerNodeDefinitionWithIdentifier creates a new [ContainerNodeDefinition].
 func NewContainerNodeDefinitionWithIdentifier(identifier string) *ContainerNodeDefinition {
@@ -45,7 +47,7 @@ func NewContainerNodeDefinitionWithIdentifier(identifier string) *ContainerNodeD
 	return &ContainerNodeDefinition{inner: raw.PHASEContainerNodeDefinitionFromID(_id)}
 }
 
-// @method addSubtree @abstract Add a subtree to this node @param subtree Add a subtree of PHASESoundEventNodeDefinition nodes beneath this node.
+// Adds a sound event node as a child.
 //
 // AddSubtree calls the underlying AddSubtree.
 func (x *ContainerNodeDefinition) AddSubtree(subtree *raw.PHASESoundEventNodeDefinition) {

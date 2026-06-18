@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that adds metadata to an item you share using the macOS share sheet.
+//
 // PreviewRepresentingActivityItem wraps [raw.NSPreviewRepresentingActivityItem] with a fluent Go API.
 type PreviewRepresentingActivityItem struct {
 	inner *raw.NSPreviewRepresentingActivityItem
@@ -32,6 +34,8 @@ func PreviewRepresentingActivityItemFromID(id objc.ID) *PreviewRepresentingActiv
 	return &PreviewRepresentingActivityItem{inner: raw.NSPreviewRepresentingActivityItemFromID(id)}
 }
 
+// Creates a metadata object with the title, image, and icon for a shareable item.
+//
 // NewPreviewRepresentingActivityItemWithItemTitleImageIcon creates a new [PreviewRepresentingActivityItem].
 func NewPreviewRepresentingActivityItemWithItemTitleImageIcon(item objc.ID, title string, image *raw.NSImage, icon *raw.NSImage) *PreviewRepresentingActivityItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPreviewRepresentingActivityItem")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewPreviewRepresentingActivityItemWithItemTitleImageIcon(item objc.ID, titl
 	return &PreviewRepresentingActivityItem{inner: raw.NSPreviewRepresentingActivityItemFromID(_id)}
 }
 
+// Creates a metadata object that provides a title and images for a shareable item.
+//
 // NewPreviewRepresentingActivityItemWithItemTitleImageProviderIconProvider creates a new [PreviewRepresentingActivityItem].
 func NewPreviewRepresentingActivityItemWithItemTitleImageProviderIconProvider(item objc.ID, title string, imageProvider *foundation.NSItemProvider, iconProvider *foundation.NSItemProvider) *PreviewRepresentingActivityItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPreviewRepresentingActivityItem")), objc.RegisterName("alloc"))

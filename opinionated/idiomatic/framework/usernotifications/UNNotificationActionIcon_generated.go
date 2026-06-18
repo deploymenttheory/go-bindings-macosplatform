@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An icon associated with an action.
+//
 // NotificationActionIcon wraps [raw.UNNotificationActionIcon] with a fluent Go API.
 type NotificationActionIcon struct {
 	inner *raw.UNNotificationActionIcon

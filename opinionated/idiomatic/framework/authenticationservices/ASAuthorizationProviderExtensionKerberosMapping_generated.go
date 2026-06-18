@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A set of Kerberos mappings that the system login process uses.
+//
 // AuthorizationProviderExtensionKerberosMapping wraps [raw.ASAuthorizationProviderExtensionKerberosMapping] with a fluent Go API.
 type AuthorizationProviderExtensionKerberosMapping struct {
 	inner *raw.ASAuthorizationProviderExtensionKerberosMapping
@@ -39,7 +41,7 @@ func NewAuthorizationProviderExtensionKerberosMapping() *AuthorizationProviderEx
 	return &AuthorizationProviderExtensionKerberosMapping{inner: raw.ASAuthorizationProviderExtensionKerberosMappingFromID(_id)}
 }
 
-// @abstract The keypath in the response JSON that uses this set of mappings. @discussion If the response tokens from login contain this keypath, then the mapping in this class will be used to create a Kerberos ticket. The expected response is a JSON dictionary with the supplied key names.
+// The keypath in the response JSON that uses this set of mappings.
 //
 // WithTicketKeyPath sets the ticketKeyPath property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithTicketKeyPath(ticketKeyPath string) *AuthorizationProviderExtensionKerberosMapping {
@@ -47,7 +49,7 @@ func (x *AuthorizationProviderExtensionKerberosMapping) WithTicketKeyPath(ticket
 	return x
 }
 
-// @abstract The key name that contains the base64 encoded kerberos AS-REP string.
+// The key name of the Base 64-encoded Kerberos AS-REP string.
 //
 // WithMessageBufferKeyName sets the messageBufferKeyName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithMessageBufferKeyName(messageBufferKeyName string) *AuthorizationProviderExtensionKerberosMapping {
@@ -55,7 +57,7 @@ func (x *AuthorizationProviderExtensionKerberosMapping) WithMessageBufferKeyName
 	return x
 }
 
-// @abstract The key name that contains the Kerberos Realm string.
+// The key name of the Kerberos realm string.
 //
 // WithRealmKeyName sets the realmKeyName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithRealmKeyName(realmKeyName string) *AuthorizationProviderExtensionKerberosMapping {
@@ -63,7 +65,7 @@ func (x *AuthorizationProviderExtensionKerberosMapping) WithRealmKeyName(realmKe
 	return x
 }
 
-// @abstract The key name that contains the Kerberos service name string.
+// The key name of the Kerberos service name string.
 //
 // WithServiceNameKeyName sets the serviceNameKeyName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithServiceNameKeyName(serviceNameKeyName string) *AuthorizationProviderExtensionKerberosMapping {
@@ -71,7 +73,7 @@ func (x *AuthorizationProviderExtensionKerberosMapping) WithServiceNameKeyName(s
 	return x
 }
 
-// @abstract The key name that contains the Kerberos client name string.
+// The key name of the Kerberos client name string.
 //
 // WithClientNameKeyName sets the clientNameKeyName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithClientNameKeyName(clientNameKeyName string) *AuthorizationProviderExtensionKerberosMapping {
@@ -79,7 +81,7 @@ func (x *AuthorizationProviderExtensionKerberosMapping) WithClientNameKeyName(cl
 	return x
 }
 
-// @abstract The key name that contains the Kerberos session key type number. @discussion The value for this key should be the correct encryption type per RFC3962, section 7 for the session key.
+// The key name of the Kerberos session key type number.
 //
 // WithEncryptionKeyTypeKeyName sets the encryptionKeyTypeKeyName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithEncryptionKeyTypeKeyName(encryptionKeyTypeKeyName string) *AuthorizationProviderExtensionKerberosMapping {
@@ -87,7 +89,7 @@ func (x *AuthorizationProviderExtensionKerberosMapping) WithEncryptionKeyTypeKey
 	return x
 }
 
-// @abstract The key name that contains the Kerberos session key.
+// The key name of the Kerberos session key.
 //
 // WithSessionKeyKeyName sets the sessionKeyKeyName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithSessionKeyKeyName(sessionKeyKeyName string) *AuthorizationProviderExtensionKerberosMapping {

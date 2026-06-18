@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A factory class for creating size-based layout constraint objects using a fluent API.
+//
 // LayoutDimension wraps [raw.NSLayoutDimension] with a fluent Go API.
 type LayoutDimension struct {
 	inner *raw.NSLayoutDimension
@@ -35,6 +37,8 @@ func NewLayoutDimension() *LayoutDimension {
 	return &LayoutDimension{inner: raw.NSLayoutDimensionFromID(_id)}
 }
 
+// Returns a constraint that defines a constant size for the anchor’s size attribute.
+//
 // ConstraintEqualToConstant calls the underlying ConstraintEqualToConstant.
 func (x *LayoutDimension) ConstraintEqualToConstant(c float64) *LayoutConstraint {
 	_r := x.inner.ConstraintEqualToConstant(c)
@@ -44,6 +48,8 @@ func (x *LayoutDimension) ConstraintEqualToConstant(c float64) *LayoutConstraint
 	return &LayoutConstraint{inner: _r}
 }
 
+// Returns a constraint that defines the minimum size for the anchor’s size attribute.
+//
 // ConstraintGreaterThanOrEqualToConstant calls the underlying ConstraintGreaterThanOrEqualToConstant.
 func (x *LayoutDimension) ConstraintGreaterThanOrEqualToConstant(c float64) *LayoutConstraint {
 	_r := x.inner.ConstraintGreaterThanOrEqualToConstant(c)
@@ -53,6 +59,8 @@ func (x *LayoutDimension) ConstraintGreaterThanOrEqualToConstant(c float64) *Lay
 	return &LayoutConstraint{inner: _r}
 }
 
+// Returns a constraint that defines the maximum size for the anchor’s size attribute.
+//
 // ConstraintLessThanOrEqualToConstant calls the underlying ConstraintLessThanOrEqualToConstant.
 func (x *LayoutDimension) ConstraintLessThanOrEqualToConstant(c float64) *LayoutConstraint {
 	_r := x.inner.ConstraintLessThanOrEqualToConstant(c)
@@ -62,6 +70,8 @@ func (x *LayoutDimension) ConstraintLessThanOrEqualToConstant(c float64) *Layout
 	return &LayoutConstraint{inner: _r}
 }
 
+// Returns a constraint that defines the anchor’s size attribute as equal to the specified anchor multiplied by the constant.
+//
 // ConstraintEqualToAnchorMultiplier calls the underlying ConstraintEqualToAnchorMultiplier.
 func (x *LayoutDimension) ConstraintEqualToAnchorMultiplier(anchor *raw.NSLayoutDimension, m float64) *LayoutConstraint {
 	_r := x.inner.ConstraintEqualToAnchorMultiplier(anchor, m)
@@ -71,6 +81,8 @@ func (x *LayoutDimension) ConstraintEqualToAnchorMultiplier(anchor *raw.NSLayout
 	return &LayoutConstraint{inner: _r}
 }
 
+// Returns a constraint that defines the anchor’s size attribute as greater than or equal to the specified anchor multiplied by the constant.
+//
 // ConstraintGreaterThanOrEqualToAnchorMultiplier calls the underlying ConstraintGreaterThanOrEqualToAnchorMultiplier.
 func (x *LayoutDimension) ConstraintGreaterThanOrEqualToAnchorMultiplier(anchor *raw.NSLayoutDimension, m float64) *LayoutConstraint {
 	_r := x.inner.ConstraintGreaterThanOrEqualToAnchorMultiplier(anchor, m)
@@ -80,6 +92,8 @@ func (x *LayoutDimension) ConstraintGreaterThanOrEqualToAnchorMultiplier(anchor 
 	return &LayoutConstraint{inner: _r}
 }
 
+// Returns a constraint that defines the anchor’s size attribute as less than or equal to the specified anchor multiplied by the constant.
+//
 // ConstraintLessThanOrEqualToAnchorMultiplier calls the underlying ConstraintLessThanOrEqualToAnchorMultiplier.
 func (x *LayoutDimension) ConstraintLessThanOrEqualToAnchorMultiplier(anchor *raw.NSLayoutDimension, m float64) *LayoutConstraint {
 	_r := x.inner.ConstraintLessThanOrEqualToAnchorMultiplier(anchor, m)
@@ -89,6 +103,8 @@ func (x *LayoutDimension) ConstraintLessThanOrEqualToAnchorMultiplier(anchor *ra
 	return &LayoutConstraint{inner: _r}
 }
 
+// Returns a constraint that defines the anchor’s size attribute as equal to the specified size attribute multiplied by a constant plus an offset.
+//
 // ConstraintEqualToAnchorMultiplierConstant calls the underlying ConstraintEqualToAnchorMultiplierConstant.
 func (x *LayoutDimension) ConstraintEqualToAnchorMultiplierConstant(anchor *raw.NSLayoutDimension, m float64, c float64) *LayoutConstraint {
 	_r := x.inner.ConstraintEqualToAnchorMultiplierConstant(anchor, m, c)
@@ -98,6 +114,8 @@ func (x *LayoutDimension) ConstraintEqualToAnchorMultiplierConstant(anchor *raw.
 	return &LayoutConstraint{inner: _r}
 }
 
+// Returns a constraint that defines the anchor’s size attribute as greater than or equal to the specified anchor multiplied by the constant plus an offset.
+//
 // ConstraintGreaterThanOrEqualToAnchorMultiplierConstant calls the underlying ConstraintGreaterThanOrEqualToAnchorMultiplierConstant.
 func (x *LayoutDimension) ConstraintGreaterThanOrEqualToAnchorMultiplierConstant(anchor *raw.NSLayoutDimension, m float64, c float64) *LayoutConstraint {
 	_r := x.inner.ConstraintGreaterThanOrEqualToAnchorMultiplierConstant(anchor, m, c)
@@ -107,6 +125,8 @@ func (x *LayoutDimension) ConstraintGreaterThanOrEqualToAnchorMultiplierConstant
 	return &LayoutConstraint{inner: _r}
 }
 
+// Returns a constraint that defines the anchor’s size attribute as greater than or equal to the specified anchor multiplied by the constant plus an offset.
+//
 // ConstraintLessThanOrEqualToAnchorMultiplierConstant calls the underlying ConstraintLessThanOrEqualToAnchorMultiplierConstant.
 func (x *LayoutDimension) ConstraintLessThanOrEqualToAnchorMultiplierConstant(anchor *raw.NSLayoutDimension, m float64, c float64) *LayoutConstraint {
 	_r := x.inner.ConstraintLessThanOrEqualToAnchorMultiplierConstant(anchor, m, c)

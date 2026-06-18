@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that reflects the feedback state for the playing item.
+//
 // FeedbackCommand wraps [raw.MPFeedbackCommand] with a fluent Go API.
 type FeedbackCommand struct {
 	inner *raw.MPFeedbackCommand
@@ -37,7 +39,7 @@ func NewFeedbackCommand() *FeedbackCommand {
 	return &FeedbackCommand{inner: raw.MPFeedbackCommandFromID(_id)}
 }
 
-// Whether the feedback command is in an "active" state. An example of when a feedback command would be active is if the user already "liked" a particular content item.
+// A Boolean value that indicates whether the feedback’s action is on or off.
 //
 // WithActive sets the active property and returns the receiver for chaining.
 func (x *FeedbackCommand) WithActive(active bool) *FeedbackCommand {
@@ -45,7 +47,7 @@ func (x *FeedbackCommand) WithActive(active bool) *FeedbackCommand {
 	return x
 }
 
-// A localized string briefly describing the context of the command.
+// A localized string used to describe the context of a command.
 //
 // WithLocalizedTitle sets the localizedTitle property and returns the receiver for chaining.
 func (x *FeedbackCommand) WithLocalizedTitle(localizedTitle string) *FeedbackCommand {
@@ -53,7 +55,7 @@ func (x *FeedbackCommand) WithLocalizedTitle(localizedTitle string) *FeedbackCom
 	return x
 }
 
-// An optional shorter version of the localized title for this feedback command. MediaPlayer uses this property to display this command's title on remote control interfaces with little screen space.
+// A shortened version of the string used to describe the context of a command.
 //
 // WithLocalizedShortTitle sets the localizedShortTitle property and returns the receiver for chaining.
 func (x *FeedbackCommand) WithLocalizedShortTitle(localizedShortTitle string) *FeedbackCommand {
@@ -61,7 +63,7 @@ func (x *FeedbackCommand) WithLocalizedShortTitle(localizedShortTitle string) *F
 	return x
 }
 
-// Whether a button (for example) should be enabled and tappable for this particular command.
+// A Boolean value that indicates whether a user can interact with the displayed element.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *FeedbackCommand) WithEnabled(enabled bool) *FeedbackCommand {

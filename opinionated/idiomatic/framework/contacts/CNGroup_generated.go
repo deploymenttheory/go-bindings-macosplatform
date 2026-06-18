@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An immutable object that represents a group of contacts.
+//
 // Group wraps [raw.CNGroup] with a fluent Go API.
 type Group struct {
 	inner *raw.CNGroup

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An array of pipeline buffer descriptors.
+//
 // PipelineBufferDescriptorArray wraps [raw.MTLPipelineBufferDescriptorArray] with a fluent Go API.
 type PipelineBufferDescriptorArray struct {
 	inner *raw.MTLPipelineBufferDescriptorArray
@@ -37,6 +39,8 @@ func NewPipelineBufferDescriptorArray() *PipelineBufferDescriptorArray {
 	return &PipelineBufferDescriptorArray{inner: raw.MTLPipelineBufferDescriptorArrayFromID(_id)}
 }
 
+// Returns the pipeline buffer descriptor at the specified array index.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *PipelineBufferDescriptorArray) ObjectAtIndexedSubscript(bufferIndex uint) *PipelineBufferDescriptor {
 	_r := x.inner.ObjectAtIndexedSubscript(bufferIndex)
@@ -46,6 +50,8 @@ func (x *PipelineBufferDescriptorArray) ObjectAtIndexedSubscript(bufferIndex uin
 	return &PipelineBufferDescriptor{inner: _r}
 }
 
+// Sets a pipeline buffer descriptor at the specified array index.
+//
 // SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
 func (x *PipelineBufferDescriptorArray) SetObjectAtIndexedSubscript(buffer *raw.MTLPipelineBufferDescriptor, bufferIndex uint) {
 	x.inner.SetObjectAtIndexedSubscript(buffer, bufferIndex)

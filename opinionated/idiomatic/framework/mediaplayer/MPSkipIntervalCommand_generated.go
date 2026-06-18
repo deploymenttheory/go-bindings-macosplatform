@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that defines the skip intervals for the player.
+//
 // SkipIntervalCommand wraps [raw.MPSkipIntervalCommand] with a fluent Go API.
 type SkipIntervalCommand struct {
 	inner *raw.MPSkipIntervalCommand
@@ -38,7 +40,7 @@ func NewSkipIntervalCommand() *SkipIntervalCommand {
 	return &SkipIntervalCommand{inner: raw.MPSkipIntervalCommandFromID(_id)}
 }
 
-// An array of NSNumbers (NSTimeIntervals) that contain preferred skip intervals.
+// The available skip intervals, in seconds, for a media item.
 //
 // WithPreferredIntervals sets the collection, converting the Go slice to an NSArray.
 func (x *SkipIntervalCommand) WithPreferredIntervals(items ...*foundation.NSNumber) *SkipIntervalCommand {
@@ -58,7 +60,7 @@ func (x *SkipIntervalCommand) WithPreferredIntervals(items ...*foundation.NSNumb
 	return x
 }
 
-// Whether a button (for example) should be enabled and tappable for this particular command.
+// A Boolean value that indicates whether a user can interact with the displayed element.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *SkipIntervalCommand) WithEnabled(enabled bool) *SkipIntervalCommand {

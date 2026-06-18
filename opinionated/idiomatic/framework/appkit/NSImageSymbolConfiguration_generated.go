@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains the specific font, style, and weight attributes to apply to a symbol image.
+//
 // ImageSymbolConfiguration wraps [raw.NSImageSymbolConfiguration] with a fluent Go API.
 type ImageSymbolConfiguration struct {
 	inner *raw.NSImageSymbolConfiguration

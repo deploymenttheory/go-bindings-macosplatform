@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description that uniquely identifies a particular passkey credential.
+//
 // PasskeyCredentialIdentity wraps [raw.ASPasskeyCredentialIdentity] with a fluent Go API.
 type PasskeyCredentialIdentity struct {
 	inner *raw.ASPasskeyCredentialIdentity
@@ -31,7 +33,7 @@ func PasskeyCredentialIdentityFromID(id objc.ID) *PasskeyCredentialIdentity {
 	return &PasskeyCredentialIdentity{inner: raw.ASPasskeyCredentialIdentityFromID(id)}
 }
 
-// @abstract Initialize an instance of ASPasskeyCredentialIdentity. @param relyingPartyIdentifier relying party for this credential. @param userName user name associated with this credential. @param credentialID credential ID of this passkey credential. @param userHandle user handle data of this passkey credential. @param recordIdentifier identifier used by credential provider extension to identify this credential.
+// Initializes a passkey credential identity.
 //
 // NewPasskeyCredentialIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier creates a new [PasskeyCredentialIdentity].
 func NewPasskeyCredentialIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier(relyingPartyIdentifier string, userName string, credentialID *foundation.NSData, userHandle *foundation.NSData, recordIdentifier string) *PasskeyCredentialIdentity {
@@ -40,7 +42,7 @@ func NewPasskeyCredentialIdentityWithRelyingPartyIdentifierUserNameCredentialIDU
 	return &PasskeyCredentialIdentity{inner: raw.ASPasskeyCredentialIdentityFromID(_id)}
 }
 
-// @abstract Get or set the rank of the credential identity object. @discussion The system may utilize the rank to decide which credential identity precedes the other if two identities have the same service identifier. A credential identity with a larger rank value precedes one with a smaller value if both credential identities have the same service identifier. The default value of this property is 0.
+// An indicator that enables you to prioritize credential identities relative to each other.
 //
 // WithRank sets the rank property and returns the receiver for chaining.
 func (x *PasskeyCredentialIdentity) WithRank(rank int) *PasskeyCredentialIdentity {

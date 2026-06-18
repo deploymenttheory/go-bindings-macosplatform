@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The metadata that partitions sequences of other entries.
+//
 // LogEntryBoundary wraps [raw.OSLogEntryBoundary] with a fluent Go API.
 type LogEntryBoundary struct {
 	inner *raw.OSLogEntryBoundary

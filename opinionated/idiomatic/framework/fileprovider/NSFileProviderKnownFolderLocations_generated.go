@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class for working with known-folder locations.
+//
 // FileProviderKnownFolderLocations wraps [raw.NSFileProviderKnownFolderLocations] with a fluent Go API.
 type FileProviderKnownFolderLocations struct {
 	inner *raw.NSFileProviderKnownFolderLocations

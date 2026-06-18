@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An animated image, such as an animated music album cover art, for a media item.
+//
 // MediaItemAnimatedArtwork wraps [raw.MPMediaItemAnimatedArtwork] with a fluent Go API.
 type MediaItemAnimatedArtwork struct {
 	inner *raw.MPMediaItemAnimatedArtwork
@@ -30,7 +32,7 @@ func MediaItemAnimatedArtworkFromID(id objc.ID) *MediaItemAnimatedArtwork {
 	return &MediaItemAnimatedArtwork{inner: raw.MPMediaItemAnimatedArtworkFromID(id)}
 }
 
-// Creates an animated artwork. - Parameters: - artworkID: A unique identifier for this animated artwork. This identifier should encapsulate the identity of both the preview frame and video asset. If you change either, you should provide an “MPMediaItemAnimatedArtwork“ with an updated `artworkID`. - previewImageRequestHandler: A handler to return a preview image for this artwork, for the requested `CGSize` in pixels. Once requested, you should pass the preview image to the provided completion handler, or you can pass `nil` if the preview image cannot be resolved for any reason. You can call the completion handler on an arbitrary queue, however it must only be called once. The `NSImage` you provide should ideally have a size equal to the requested `CGSize`, however an image of the same aspect ratio is acceptable. Images that diverge significantly from the requested aspect ratio may be rejected by the system. Aim to provide preview images quickly and ideally synchronously, and if possible you should preload these images in order to reduce perceived latency when displaying animated artwork to the user. - videoAssetFileURLRequestHandler: A handler to return a file `URL` for the artwork video asset for this artwork, for the requested `CGSize` in pixels. Once requested, you should pass the `URL` to the provided completion handler, or you can pass `nil` if the artwork video asset cannot be resolved for any reason. You can call the completion handler on an arbitrary queue, however it must only be called once. The `URL` you provide must reference a local asset, ideally with a size equal to the requested `CGSize`, however an asset with the same aspect ratio is acceptable. Assets that diverge significantly from the requested aspect ratio may be rejected by the system. The video assets you provide should loop cleanly, and should be available relatively quickly from this handler (particularly when re-fetched). It’s advised that assets are cached for subsequent fetches.
+// Creates an animated artwork.
 //
 // NewMediaItemAnimatedArtworkWithArtworkIDPreviewImageRequestHandlerVideoAssetFileURLRequestHandler creates a new [MediaItemAnimatedArtwork].
 func NewMediaItemAnimatedArtworkWithArtworkIDPreviewImageRequestHandlerVideoAssetFileURLRequestHandler(artworkID string, previewImageRequestHandler objc.Block, videoAssetFileURLRequestHandler objc.Block) *MediaItemAnimatedArtwork {

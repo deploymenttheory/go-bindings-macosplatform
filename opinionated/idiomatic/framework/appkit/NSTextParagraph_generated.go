@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents a single paragraph backed by an attributed string as the contents.
+//
 // TextParagraph wraps [raw.NSTextParagraph] with a fluent Go API.
 type TextParagraph struct {
 	inner *raw.NSTextParagraph
@@ -30,6 +32,8 @@ func TextParagraphFromID(id objc.ID) *TextParagraph {
 	return &TextParagraph{inner: raw.NSTextParagraphFromID(id)}
 }
 
+// Creates a new paragraph with the attributed string you provide.
+//
 // NewTextParagraphWithAttributedString creates a new [TextParagraph].
 func NewTextParagraphWithAttributedString(attributedString *foundation.NSAttributedString) *TextParagraph {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextParagraph")), objc.RegisterName("alloc"))
@@ -37,12 +41,16 @@ func NewTextParagraphWithAttributedString(attributedString *foundation.NSAttribu
 	return &TextParagraph{inner: raw.NSTextParagraphFromID(_id)}
 }
 
+// The value that represents the current content manager.
+//
 // WithTextContentManager sets the textContentManager property and returns the receiver for chaining.
 func (x *TextParagraph) WithTextContentManager(textContentManager TextContentManagerProvider) *TextParagraph {
 	x.inner.NSTextElement.SetTextContentManager(textContentManager.asTextContentManager())
 	return x
 }
 
+// A range value that represents the range of the element inside the document.
+//
 // WithElementRange sets the elementRange property and returns the receiver for chaining.
 func (x *TextParagraph) WithElementRange(elementRange *TextRange) *TextParagraph {
 	x.inner.NSTextElement.SetElementRange(elementRange.Unwrap())

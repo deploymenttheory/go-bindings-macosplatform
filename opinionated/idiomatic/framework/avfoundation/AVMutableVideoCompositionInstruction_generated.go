@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A mutable video composition instruction subclass.
+//
 // MutableVideoCompositionInstruction wraps [raw.AVMutableVideoCompositionInstruction] with a fluent Go API.
 type MutableVideoCompositionInstruction struct {
 	inner *raw.AVMutableVideoCompositionInstruction
@@ -40,7 +42,7 @@ func NewMutableVideoCompositionInstruction() *MutableVideoCompositionInstruction
 	return &MutableVideoCompositionInstruction{inner: raw.AVMutableVideoCompositionInstructionFromID(_id)}
 }
 
-// Indicates the timeRange during which the instruction is effective. Note requirements for the timeRanges of instructions described in connection with AVVideoComposition's instructions key above.
+// The time range to which the instruction applies.
 //
 // WithTimeRange sets the timeRange property and returns the receiver for chaining.
 func (x *MutableVideoCompositionInstruction) WithTimeRange(timeRange coremedia.CMTimeRange) *MutableVideoCompositionInstruction {
@@ -48,7 +50,7 @@ func (x *MutableVideoCompositionInstruction) WithTimeRange(timeRange coremedia.C
 	return x
 }
 
-// Provides an array of instances of AVVideoCompositionLayerInstruction that specify how video frames from source tracks should be layered and composed. Tracks are layered in the composition according to the top-to-bottom order of the layerInstructions array; the track with trackID of the first instruction in the array will be layered on top, with the track with the trackID of the second instruction immediately underneath, etc. If this key is nil, the output will be a fill of the background color.
+// Instructions that specify how to layer and compose video frames from source tracks.
 //
 // WithLayerInstructions sets the collection, converting the Go slice to an NSArray.
 func (x *MutableVideoCompositionInstruction) WithLayerInstructions(items ...VideoCompositionLayerInstructionProvider) *MutableVideoCompositionInstruction {
@@ -68,7 +70,7 @@ func (x *MutableVideoCompositionInstruction) WithLayerInstructions(items ...Vide
 	return x
 }
 
-// If NO, indicates that post-processing should be skipped for the duration of this instruction.  YES by default. See +[AVVideoCompositionCoreAnimationTool videoCompositionToolWithPostProcessingAsVideoLayer:inLayer:].
+// A Boolean value that indicates whether the instruction requires post processing.
 //
 // WithEnablePostProcessing sets the enablePostProcessing property and returns the receiver for chaining.
 func (x *MutableVideoCompositionInstruction) WithEnablePostProcessing(enablePostProcessing bool) *MutableVideoCompositionInstruction {
@@ -76,7 +78,7 @@ func (x *MutableVideoCompositionInstruction) WithEnablePostProcessing(enablePost
 	return x
 }
 
-// List of sample data track IDs required to compose frames for this instruction. Currently only tracks of type kCMMediaType_Metadata are allowed to be specified.  If this property is unspecified or is an empty array, no sample data is considered to be required for this instruction.  Note that you must also specify all tracks for which sample data is required for ANY instruction in the AVVideoComposition, in AVVideoComposition's property sourceSampleDataTrackIDs.
+// The track identifiers of source sample data that the compositor requires to compose frames for the instruction.
 //
 // WithRequiredSourceSampleDataTrackIDs sets the collection, converting the Go slice to an NSArray.
 func (x *MutableVideoCompositionInstruction) WithRequiredSourceSampleDataTrackIDs(items ...*foundation.NSNumber) *MutableVideoCompositionInstruction {

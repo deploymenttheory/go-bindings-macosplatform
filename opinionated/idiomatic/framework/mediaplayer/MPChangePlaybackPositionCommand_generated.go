@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that responds to requests to change the current playback position of the playing item.
+//
 // ChangePlaybackPositionCommand wraps [raw.MPChangePlaybackPositionCommand] with a fluent Go API.
 type ChangePlaybackPositionCommand struct {
 	inner *raw.MPChangePlaybackPositionCommand
@@ -35,7 +37,7 @@ func NewChangePlaybackPositionCommand() *ChangePlaybackPositionCommand {
 	return &ChangePlaybackPositionCommand{inner: raw.MPChangePlaybackPositionCommandFromID(_id)}
 }
 
-// Whether a button (for example) should be enabled and tappable for this particular command.
+// A Boolean value that indicates whether a user can interact with the displayed element.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *ChangePlaybackPositionCommand) WithEnabled(enabled bool) *ChangePlaybackPositionCommand {

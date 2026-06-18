@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The Cocoa interface to speech recognition in macOS.
+//
 // SpeechRecognizer wraps [raw.NSSpeechRecognizer] with a fluent Go API.
 type SpeechRecognizer struct {
 	inner *raw.NSSpeechRecognizer
@@ -38,12 +40,16 @@ func NewSpeechRecognizer() *SpeechRecognizer {
 	return &SpeechRecognizer{inner: raw.NSSpeechRecognizerFromID(_id)}
 }
 
+// The delegate for the speech recognizer object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SpeechRecognizer) WithDelegate(delegate raw.NSSpeechRecognizerDelegate) *SpeechRecognizer {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// An array of strings defining the commands for which the speech recognizer object should listen.
+//
 // WithCommands sets the collection, converting the Go slice to an NSArray.
 func (x *SpeechRecognizer) WithCommands(items ...*foundation.NSString) *SpeechRecognizer {
 	if len(items) == 0 {
@@ -62,29 +68,39 @@ func (x *SpeechRecognizer) WithCommands(items ...*foundation.NSString) *SpeechRe
 	return x
 }
 
+// The title of the commands section in the Speech Commands window or nil if there is no title.
+//
 // WithDisplayedCommandsTitle sets the displayedCommandsTitle property and returns the receiver for chaining.
 func (x *SpeechRecognizer) WithDisplayedCommandsTitle(displayedCommandsTitle string) *SpeechRecognizer {
 	x.inner.SetDisplayedCommandsTitle(foundation.NSStringStringWithUTF8String(displayedCommandsTitle))
 	return x
 }
 
+// A Boolean value that indicates whether the speech recognizer object should only enable its commands when its application is the frontmost one.
+//
 // WithListensInForegroundOnly sets the listensInForegroundOnly property and returns the receiver for chaining.
 func (x *SpeechRecognizer) WithListensInForegroundOnly(listensInForegroundOnly bool) *SpeechRecognizer {
 	x.inner.SetListensInForegroundOnly(listensInForegroundOnly)
 	return x
 }
 
+// A Boolean value that indicates whether the speech recognizer object should block all other recognizers (that is, other applications attempting to understand spoken commands) when listening.
+//
 // WithBlocksOtherRecognizers sets the blocksOtherRecognizers property and returns the receiver for chaining.
 func (x *SpeechRecognizer) WithBlocksOtherRecognizers(blocksOtherRecognizers bool) *SpeechRecognizer {
 	x.inner.SetBlocksOtherRecognizers(blocksOtherRecognizers)
 	return x
 }
 
+// Tells the speech recognition engine to begin listening for commands.
+//
 // StartListening calls the underlying StartListening.
 func (x *SpeechRecognizer) StartListening() {
 	x.inner.StartListening()
 }
 
+// Tells the speech recognition engine to suspend listening for commands.
+//
 // StopListening calls the underlying StopListening.
 func (x *SpeechRecognizer) StopListening() {
 	x.inner.StopListening()

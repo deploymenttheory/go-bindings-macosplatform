@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class that defines the common interface to output media data from a player item.
+//
 // PlayerItemOutput wraps [raw.AVPlayerItemOutput] with a fluent Go API.
 type PlayerItemOutput struct {
 	inner *raw.AVPlayerItemOutput
@@ -37,7 +39,7 @@ func NewPlayerItemOutput() *PlayerItemOutput {
 	return &PlayerItemOutput{inner: raw.AVPlayerItemOutputFromID(_id)}
 }
 
-// @property		suppressesPlayerRendering @abstract		Indicates whether the output, when added to an AVPlayerItem, will be used in addition to normal rendering of media data by the player or instead of normal rendering. @discussion The default value is NO, indicating that the output will be used in addition to normal rendering. If you want to render the media data provided by the output yourself instead of allowing it to be rendered as in normally would be by AVPlayer, set suppressesPlayerRendering to YES. Whenever any output is added to an AVPlayerItem that has suppressesPlayerRendering set to YES, the media data supplied to the output will not be rendered by AVPlayer. Other media data associated with the item but not provided to such an output is not affected. For example, if an output of class AVPlayerItemVideoOutput with a value of YES for suppressesPlayerRendering is added to an AVPlayerItem, video media for that item will not be rendered by the AVPlayer, while audio media, subtitle media, and other kinds of media, if present, will be rendered.
+// A Boolean value that indicates whether the player object renders the receiver’s output.
 //
 // WithSuppressesPlayerRendering sets the suppressesPlayerRendering property and returns the receiver for chaining.
 func (x *PlayerItemOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemOutput {
@@ -45,16 +47,22 @@ func (x *PlayerItemOutput) WithSuppressesPlayerRendering(suppressesPlayerRenderi
 	return x
 }
 
+// Converts a host time, specified in seconds, to the item’s timebase.
+//
 // ItemTimeForHostTime calls the underlying ItemTimeForHostTime.
 func (x *PlayerItemOutput) ItemTimeForHostTime(hostTimeInSeconds float64) coremedia.CMTime {
 	return x.inner.ItemTimeForHostTime(hostTimeInSeconds)
 }
 
+// Converts a Mach host time to the item’s timebase.
+//
 // ItemTimeForMachAbsoluteTime calls the underlying ItemTimeForMachAbsoluteTime.
 func (x *PlayerItemOutput) ItemTimeForMachAbsoluteTime(machAbsoluteTime int64) coremedia.CMTime {
 	return x.inner.ItemTimeForMachAbsoluteTime(machAbsoluteTime)
 }
 
+// Converts a Core Video timestamp to the item’s timebase.
+//
 // ItemTimeForCVTimeStamp calls the underlying ItemTimeForCVTimeStamp.
 func (x *PlayerItemOutput) ItemTimeForCVTimeStamp(timestamp corevideo.CVTimeStamp) coremedia.CMTime {
 	return x.inner.ItemTimeForCVTimeStamp(timestamp)

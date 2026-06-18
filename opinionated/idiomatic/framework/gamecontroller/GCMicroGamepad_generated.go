@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A controller profile that supports the Siri Remote.
+//
 // MicroGamepad wraps [raw.GCMicroGamepad] with a fluent Go API.
 type MicroGamepad struct {
 	inner *raw.GCMicroGamepad
@@ -35,13 +37,15 @@ func NewMicroGamepad() *MicroGamepad {
 	return &MicroGamepad{inner: raw.GCMicroGamepadFromID(_id)}
 }
 
+// The block that this profile calls when an element’s value changes.
+//
 // WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
 func (x *MicroGamepad) WithValueChangedHandler(valueChangedHandler func(*raw.GCMicroGamepad, *raw.GCControllerElement)) *MicroGamepad {
 	x.inner.SetValueChangedHandler(valueChangedHandler)
 	return x
 }
 
-// The Micro profile can use the raw position values of the touchpad on the remote as D-pad values, or it can create a virtual dpad centered around the first contact point with the surface. If NO; a smaller sliding window is created around the initial touch point and subsequent movement is relative to that center. Movement outside the window will slide the window with it to re-center it. This is great for surfaces where there is no clear sense of a middle and drift over time is an issue. If YES; the absolute values are used and any drift will have to managed manually either through user traning or by a developer using the dpad. The default value for this property is NO, meaning a sliding window is used for the dpad.
+// A Boolean value that indicates whether the directional pad reports absolute or relative values.
 //
 // WithReportsAbsoluteDpadValues sets the reportsAbsoluteDpadValues property and returns the receiver for chaining.
 func (x *MicroGamepad) WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *MicroGamepad {
@@ -49,7 +53,7 @@ func (x *MicroGamepad) WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues b
 	return x
 }
 
-// Allows the Micro profile to monitor the orientation of the controller, if the controller is positioned in landscape orientation, D-pad input values will be transposed 90 degrees to match the new orientation. The default value for this property is NO.
+// A Boolean value that indicates whether the profile reports the directional pad values relative to its current orientation.
 //
 // WithAllowsRotation sets the allowsRotation property and returns the receiver for chaining.
 func (x *MicroGamepad) WithAllowsRotation(allowsRotation bool) *MicroGamepad {
@@ -57,7 +61,7 @@ func (x *MicroGamepad) WithAllowsRotation(allowsRotation bool) *MicroGamepad {
 	return x
 }
 
-// Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called for each element that changed. @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons. @param element the element that has been modified.
+// The block that the profile calls when an element’s value changes.
 //
 // WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
 func (x *MicroGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *MicroGamepad {
@@ -65,7 +69,7 @@ func (x *MicroGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw
 	return x
 }
 
-// Polls the state vector of the controller and saves it to a snapshot. The snapshot is stored in a device independent format that can be serialized and used at a later date. This is useful for features such as quality assurance, save game or replay functionality among many. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken. @see GCMicroGamepadSnapshot
+// Saves a snapshot of all of the profile’s elements.
 //
 // SaveSnapshot calls the underlying SaveSnapshot.
 func (x *MicroGamepad) SaveSnapshot() *MicroGamepadSnapshot {
@@ -76,7 +80,7 @@ func (x *MicroGamepad) SaveSnapshot() *MicroGamepadSnapshot {
 	return &MicroGamepadSnapshot{inner: _r}
 }
 
-// Sets the state vector of the micro gamepad to a copy of the input micro gamepad's state vector. @note If the controller's snapshot flag is set to NO, this method has no effect. @see GCController.snapshot
+// Copies the input values from a specified micro gamepad to a snapshot of a micro gamepad.
 //
 // SetStateFromMicroGamepad calls the underlying SetStateFromMicroGamepad.
 func (x *MicroGamepad) SetStateFromMicroGamepad(microGamepad *raw.GCMicroGamepad) {

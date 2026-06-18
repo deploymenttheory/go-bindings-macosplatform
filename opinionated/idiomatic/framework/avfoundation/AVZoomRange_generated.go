@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines an inclusive range of zoom values.
+//
 // ZoomRange wraps [raw.AVZoomRange] with a fluent Go API.
 type ZoomRange struct {
 	inner *raw.AVZoomRange
@@ -35,7 +37,7 @@ func NewZoomRange() *ZoomRange {
 	return &ZoomRange{inner: raw.AVZoomRangeFromID(_id)}
 }
 
-// @method containsZoomFactor: @abstract Tests if a given zoom factor is within the zoom range. @param zoomFactor The zoom factor to test. @result Returns YES if the given zoom factor is within the zoom range, NO otherwise. @discussion Note that the zoom ranges are inclusive.
+// Returns a Boolean value that indicates whether the specified zoom factor exists in the range.
 //
 // ContainsZoomFactor calls the underlying ContainsZoomFactor.
 func (x *ZoomRange) ContainsZoomFactor(zoomFactor float64) bool {

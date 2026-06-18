@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains an email address that the data detection system matches. The DataDetection framework returns an email match in a `DDMatchEmailAddress` object, which includes an email address, and optionally a label that categorizes the email address.
+// An object that contains an email address that the data detection system matches.
 //
 // MatchEmailAddress wraps [raw.DDMatchEmailAddress] with a fluent Go API.
 type MatchEmailAddress struct {

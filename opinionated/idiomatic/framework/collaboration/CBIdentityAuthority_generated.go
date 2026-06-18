@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An identity authority is a database that stores information about identities. The CBIdentityAuthority class defines one or more identity authorities. You can search this database for identities in conjunction with the CBIdentity class factory methods.
+//
 // IdentityAuthority wraps [raw.CBIdentityAuthority] with a fluent Go API.
 type IdentityAuthority struct {
 	inner *raw.CBIdentityAuthority

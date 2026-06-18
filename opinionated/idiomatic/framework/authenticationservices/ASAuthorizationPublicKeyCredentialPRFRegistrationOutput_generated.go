@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type to represent outputs of the web authentication PRF extension, when requesting them during a registration.
+//
 // AuthorizationPublicKeyCredentialPRFRegistrationOutput wraps [raw.ASAuthorizationPublicKeyCredentialPRFRegistrationOutput] with a fluent Go API.
 type AuthorizationPublicKeyCredentialPRFRegistrationOutput struct {
 	inner *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationOutput

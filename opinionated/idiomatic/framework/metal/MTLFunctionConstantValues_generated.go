@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A set of constant values that specialize a graphics or compute GPU function.
+//
 // FunctionConstantValues wraps [raw.MTLFunctionConstantValues] with a fluent Go API.
 type FunctionConstantValues struct {
 	inner *raw.MTLFunctionConstantValues
@@ -37,21 +39,29 @@ func NewFunctionConstantValues() *FunctionConstantValues {
 	return &FunctionConstantValues{inner: raw.MTLFunctionConstantValuesFromID(_id)}
 }
 
+// Sets a value for a function constant at a specific index.
+//
 // SetConstantValueTypeAtIndex calls the underlying SetConstantValueTypeAtIndex.
 func (x *FunctionConstantValues) SetConstantValueTypeAtIndex(value unsafe.Pointer, type_ MTLDataType, index uint) {
 	x.inner.SetConstantValueTypeAtIndex(value, raw.MTLDataType(type_), index)
 }
 
+// Sets values for a group of function constants within a specific index range.
+//
 // SetConstantValuesTypeWithRange calls the underlying SetConstantValuesTypeWithRange.
 func (x *FunctionConstantValues) SetConstantValuesTypeWithRange(values unsafe.Pointer, type_ MTLDataType, range_ foundation.NSRange) {
 	x.inner.SetConstantValuesTypeWithRange(values, raw.MTLDataType(type_), range_)
 }
 
+// Sets a value for a function constant with a specific name.
+//
 // SetConstantValueTypeWithName calls the underlying SetConstantValueTypeWithName.
 func (x *FunctionConstantValues) SetConstantValueTypeWithName(value unsafe.Pointer, type_ MTLDataType, name string) {
 	x.inner.SetConstantValueTypeWithName(value, raw.MTLDataType(type_), foundation.NSStringStringWithUTF8String(name))
 }
 
+// Deletes all previously set constant values.
+//
 // Reset calls the underlying Reset.
 func (x *FunctionConstantValues) Reset() {
 	x.inner.Reset()

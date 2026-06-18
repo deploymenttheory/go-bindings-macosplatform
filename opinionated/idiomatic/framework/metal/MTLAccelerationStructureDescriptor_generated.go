@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A base class for classes that define the configuration for a new acceleration structure.
+//
 // AccelerationStructureDescriptor wraps [raw.MTLAccelerationStructureDescriptor] with a fluent Go API.
 type AccelerationStructureDescriptor struct {
 	inner *raw.MTLAccelerationStructureDescriptor
@@ -37,6 +39,8 @@ func NewAccelerationStructureDescriptor() *AccelerationStructureDescriptor {
 	return &AccelerationStructureDescriptor{inner: raw.MTLAccelerationStructureDescriptorFromID(_id)}
 }
 
+// The options that describe how you intend to use the acceleration structure.
+//
 // WithUsage sets the usage property and returns the receiver for chaining.
 func (x *AccelerationStructureDescriptor) WithUsage(usage MTLAccelerationStructureUsage) *AccelerationStructureDescriptor {
 	x.inner.SetUsage(raw.MTLAccelerationStructureUsage(usage))

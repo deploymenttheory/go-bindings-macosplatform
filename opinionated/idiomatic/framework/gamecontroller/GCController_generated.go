@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a real game controller, a virtual controller, or a snapshot of a controller.
+//
 // Controller wraps [raw.GCController] with a fluent Go API.
 type Controller struct {
 	inner *raw.GCController
@@ -36,7 +38,7 @@ func NewController() *Controller {
 	return &Controller{inner: raw.GCControllerFromID(_id)}
 }
 
-// Set this block to be notified when a user intends to suspend or resume the current game state. A controller will have a button dedicated to suspending and resuming play and invoking context sensitive actions. During event handling the system will notify the application using this block such that the application can handle the suspension and resumption from the given controller. Use this to implement your canonical transition to a pause menu for example if that is your application's desired handling of suspension in play. You may pause and resume based on game state as well so the event is only called each time the pause/resume button is pressed. @note This handler has been deprecated in favor of the Menu button found on GCMicroGamepad and GCExtendedGamepad. @see microGamepad @see extendedGamepad
+// The block that the framework calls when the user presses the pause button on the controller.
 //
 // WithControllerPausedHandler sets the controllerPausedHandler property and returns the receiver for chaining.
 func (x *Controller) WithControllerPausedHandler(controllerPausedHandler func(*raw.GCController)) *Controller {
@@ -44,7 +46,7 @@ func (x *Controller) WithControllerPausedHandler(controllerPausedHandler func(*r
 	return x
 }
 
-// A player index for the controller, defaults to GCControllerPlayerIndexUnset. This can be set both for the application to keep track of controllers and as a signal to make a controller display a player index on a set of LEDs or some other mechanism. A controller is not guaranteed to have a visual display of the playerIndex, playerIndex does not persist for a controller with regards to a system. Negative values less than GCControllerPlayerIndexUnset will just map back to GCControllerPlayerIndexUnset when read back.
+// The player index for the controller.
 //
 // WithPlayerIndex sets the playerIndex property and returns the receiver for chaining.
 func (x *Controller) WithPlayerIndex(playerIndex GCControllerPlayerIndex) *Controller {
@@ -196,7 +198,7 @@ func (x *Controller) Haptics() *DeviceHaptics {
 	return &DeviceHaptics{inner: _r}
 }
 
-// Polls the state vector of the controller and saves it to a new and writable instance of GCController. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken. @see snapshot @return A new controller with the duplicated state vector of the current controller.
+// Returns a snapshot of the controller with its current element values.
 //
 // Capture calls the underlying Capture.
 func (x *Controller) Capture() *Controller {

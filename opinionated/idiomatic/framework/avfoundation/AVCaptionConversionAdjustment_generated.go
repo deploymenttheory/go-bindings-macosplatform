@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes an adjustment to correct a problem found during validation of a caption conversion.
+//
 // CaptionConversionAdjustment wraps [raw.AVCaptionConversionAdjustment] with a fluent Go API.
 type CaptionConversionAdjustment struct {
 	inner *raw.AVCaptionConversionAdjustment

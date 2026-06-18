@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A set of material properties that describes a basic shading model for materials, and the superclass for more complex shading models.
+//
 // ScatteringFunction wraps [raw.MDLScatteringFunction] with a fluent Go API.
 type ScatteringFunction struct {
 	inner *raw.MDLScatteringFunction
@@ -37,7 +39,7 @@ func NewScatteringFunction() *ScatteringFunction {
 	return &ScatteringFunction{inner: raw.MDLScatteringFunctionFromID(_id)}
 }
 
-// @see MDLNamed
+// A descriptive name for the scattering function.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *ScatteringFunction) WithName(name string) *ScatteringFunction {

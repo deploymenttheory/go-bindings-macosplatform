@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that configures how to present Desk View.
+//
 // CaptureDeskViewApplicationLaunchConfiguration wraps [raw.AVCaptureDeskViewApplicationLaunchConfiguration] with a fluent Go API.
 type CaptureDeskViewApplicationLaunchConfiguration struct {
 	inner *raw.AVCaptureDeskViewApplicationLaunchConfiguration

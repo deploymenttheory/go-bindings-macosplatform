@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A half-open interval from a lower bound up to, but not including, an upper bound.
+//
 // Range wraps [raw.SHRange] with a fluent Go API.
 type Range struct {
 	inner *raw.SHRange
@@ -29,7 +31,7 @@ func RangeFromID(id objc.ID) *Range {
 	return &Range{inner: raw.SHRangeFromID(id)}
 }
 
-// Creates a range with the bounds you specify. - Parameters: - lowerBound: The lower bound of the range. - upperBound: The upper bound of the range.
+// Creates a range with the bounds you specify.
 //
 // NewRangeWithLowerBoundUpperBound creates a new [Range].
 func NewRangeWithLowerBoundUpperBound(lowerBound float64, upperBound float64) *Range {

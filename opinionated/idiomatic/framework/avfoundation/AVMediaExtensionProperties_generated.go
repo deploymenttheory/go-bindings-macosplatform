@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes a Media Extension.
+//
 // MediaExtensionProperties wraps [raw.AVMediaExtensionProperties] with a fluent Go API.
 type MediaExtensionProperties struct {
 	inner *raw.AVMediaExtensionProperties

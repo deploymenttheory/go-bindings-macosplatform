@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// The options for each band of data that the scanner reads.
+//
 // ScannerBandData wraps [raw.ICScannerBandData] with a fluent Go API.
 type ScannerBandData struct {
 	inner *raw.ICScannerBandData

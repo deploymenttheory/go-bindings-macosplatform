@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A type you use to initiate searches from your interface and offer suggested text completions.
+//
 // UserQuery wraps [raw.CSUserQuery] with a fluent Go API.
 type UserQuery struct {
 	inner *raw.CSUserQuery
@@ -32,6 +34,8 @@ func UserQueryFromID(id objc.ID) *UserQuery {
 	return &UserQuery{inner: raw.CSUserQueryFromID(id)}
 }
 
+// Creates a new user query that searches for the specified term.
+//
 // NewUserQueryWithUserQueryStringUserQueryContext creates a new [UserQuery].
 func NewUserQueryWithUserQueryStringUserQueryContext(userQueryString string, userQueryContext *raw.CSUserQueryContext) *UserQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CSUserQuery")), objc.RegisterName("alloc"))
@@ -39,24 +43,32 @@ func NewUserQueryWithUserQueryStringUserQueryContext(userQueryString string, use
 	return &UserQuery{inner: raw.CSUserQueryFromID(_id)}
 }
 
+// The block to execute when the query delivers a new batch of suggested items.
+//
 // WithFoundSuggestionsHandler sets the foundSuggestionsHandler property and returns the receiver for chaining.
 func (x *UserQuery) WithFoundSuggestionsHandler(foundSuggestionsHandler func(*foundation.NSArray[*raw.CSSuggestion])) *UserQuery {
 	x.inner.SetFoundSuggestionsHandler(foundSuggestionsHandler)
 	return x
 }
 
+// The block to execute when the query delivers a new batch of matching items.
+//
 // WithFoundItemsHandler sets the foundItemsHandler property and returns the receiver for chaining.
 func (x *UserQuery) WithFoundItemsHandler(foundItemsHandler func(*foundation.NSArray[*raw.CSSearchableItem])) *UserQuery {
 	x.inner.CSSearchQuery.SetFoundItemsHandler(foundItemsHandler)
 	return x
 }
 
+// The block to execute when the query finishes delivering all results.
+//
 // WithCompletionHandler sets the completionHandler property and returns the receiver for chaining.
 func (x *UserQuery) WithCompletionHandler(completionHandler func(unsafe.Pointer)) *UserQuery {
 	x.inner.CSSearchQuery.SetCompletionHandler(completionHandler)
 	return x
 }
 
+// The protection types of the indexes you want to search.
+//
 // WithProtectionClasses sets the collection, converting the Go slice to an NSArray.
 func (x *UserQuery) WithProtectionClasses(items ...*foundation.NSString) *UserQuery {
 	if len(items) == 0 {

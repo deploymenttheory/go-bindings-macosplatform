@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of the features and settings in use for an in-progress or complete photo capture request.
+//
 // CaptureResolvedPhotoSettings wraps [raw.AVCaptureResolvedPhotoSettings] with a fluent Go API.
 type CaptureResolvedPhotoSettings struct {
 	inner *raw.AVCaptureResolvedPhotoSettings

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mapping of MIDI messages to specific sounds and synthesis behaviors, such as General MIDI, a drawbar organ, and so on.
+//
 // CIProfile wraps [raw.MIDICIProfile] with a fluent Go API.
 type CIProfile struct {
 	inner *raw.MIDICIProfile
@@ -31,6 +33,8 @@ func CIProfileFromID(id objc.ID) *CIProfile {
 	return &CIProfile{inner: raw.MIDICIProfileFromID(id)}
 }
 
+// Creates a MIDI profile for the specified data.
+//
 // NewCIProfileWithData creates a new [CIProfile].
 func NewCIProfileWithData(data *foundation.NSData) *CIProfile {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICIProfile")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewCIProfileWithData(data *foundation.NSData) *CIProfile {
 	return &CIProfile{inner: raw.MIDICIProfileFromID(_id)}
 }
 
+// Creates a named MIDI profile for the specified data.
+//
 // NewCIProfileWithDataName creates a new [CIProfile].
 func NewCIProfileWithDataName(data *foundation.NSData, inName string) *CIProfile {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICIProfile")), objc.RegisterName("alloc"))

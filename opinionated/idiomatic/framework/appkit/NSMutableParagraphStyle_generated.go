@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object for changing the values of the subattributes in a paragraph style attribute.
+//
 // MutableParagraphStyle wraps [raw.NSMutableParagraphStyle] with a fluent Go API.
 type MutableParagraphStyle struct {
 	inner *raw.NSMutableParagraphStyle
@@ -37,72 +39,96 @@ func NewMutableParagraphStyle() *MutableParagraphStyle {
 	return &MutableParagraphStyle{inner: raw.NSMutableParagraphStyleFromID(_id)}
 }
 
+// The distance in points between the bottom of one line fragment and the top of the next.
+//
 // WithLineSpacing sets the lineSpacing property and returns the receiver for chaining.
 func (x *MutableParagraphStyle) WithLineSpacing(lineSpacing float64) *MutableParagraphStyle {
 	x.inner.SetLineSpacing(lineSpacing)
 	return x
 }
 
+// The space after the end of the paragraph.
+//
 // WithParagraphSpacing sets the paragraphSpacing property and returns the receiver for chaining.
 func (x *MutableParagraphStyle) WithParagraphSpacing(paragraphSpacing float64) *MutableParagraphStyle {
 	x.inner.SetParagraphSpacing(paragraphSpacing)
 	return x
 }
 
+// The indentation of the first line of the paragraph.
+//
 // WithFirstLineHeadIndent sets the firstLineHeadIndent property and returns the receiver for chaining.
 func (x *MutableParagraphStyle) WithFirstLineHeadIndent(firstLineHeadIndent float64) *MutableParagraphStyle {
 	x.inner.SetFirstLineHeadIndent(firstLineHeadIndent)
 	return x
 }
 
+// The indentation of the paragraph’s lines other than the first.
+//
 // WithHeadIndent sets the headIndent property and returns the receiver for chaining.
 func (x *MutableParagraphStyle) WithHeadIndent(headIndent float64) *MutableParagraphStyle {
 	x.inner.SetHeadIndent(headIndent)
 	return x
 }
 
+// The trailing indentation of the paragraph.
+//
 // WithTailIndent sets the tailIndent property and returns the receiver for chaining.
 func (x *MutableParagraphStyle) WithTailIndent(tailIndent float64) *MutableParagraphStyle {
 	x.inner.SetTailIndent(tailIndent)
 	return x
 }
 
+// The mode for breaking lines in the paragraph.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *MutableParagraphStyle) WithLineBreakMode(lineBreakMode NSLineBreakMode) *MutableParagraphStyle {
 	x.inner.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The paragraph’s minimum line height.
+//
 // WithMinimumLineHeight sets the minimumLineHeight property and returns the receiver for chaining.
 func (x *MutableParagraphStyle) WithMinimumLineHeight(minimumLineHeight float64) *MutableParagraphStyle {
 	x.inner.SetMinimumLineHeight(minimumLineHeight)
 	return x
 }
 
+// The paragraph’s maximum line height.
+//
 // WithMaximumLineHeight sets the maximumLineHeight property and returns the receiver for chaining.
 func (x *MutableParagraphStyle) WithMaximumLineHeight(maximumLineHeight float64) *MutableParagraphStyle {
 	x.inner.SetMaximumLineHeight(maximumLineHeight)
 	return x
 }
 
+// The base writing direction for the paragraph.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *MutableParagraphStyle) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *MutableParagraphStyle {
 	x.inner.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// The line height multiple.
+//
 // WithLineHeightMultiple sets the lineHeightMultiple property and returns the receiver for chaining.
 func (x *MutableParagraphStyle) WithLineHeightMultiple(lineHeightMultiple float64) *MutableParagraphStyle {
 	x.inner.SetLineHeightMultiple(lineHeightMultiple)
 	return x
 }
 
+// The distance between the paragraph’s top and the beginning of its text content.
+//
 // WithParagraphSpacingBefore sets the paragraphSpacingBefore property and returns the receiver for chaining.
 func (x *MutableParagraphStyle) WithParagraphSpacingBefore(paragraphSpacingBefore float64) *MutableParagraphStyle {
 	x.inner.SetParagraphSpacingBefore(paragraphSpacingBefore)
 	return x
 }
 
+// The paragraph’s threshold for hyphenation.
+//
 // WithHyphenationFactor sets the hyphenationFactor property and returns the receiver for chaining.
 func (x *MutableParagraphStyle) WithHyphenationFactor(hyphenationFactor float32) *MutableParagraphStyle {
 	x.inner.SetHyphenationFactor(hyphenationFactor)
@@ -115,6 +141,8 @@ func (x *MutableParagraphStyle) WithUsesDefaultHyphenation(usesDefaultHyphenatio
 	return x
 }
 
+// The text tab objects that represent the paragraph’s tab stops.
+//
 // WithTabStops sets the collection, converting the Go slice to an NSArray.
 func (x *MutableParagraphStyle) WithTabStops(items ...*raw.NSTextTab) *MutableParagraphStyle {
 	if len(items) == 0 {
@@ -133,24 +161,32 @@ func (x *MutableParagraphStyle) WithTabStops(items ...*raw.NSTextTab) *MutablePa
 	return x
 }
 
+// A number used as the document’s default tab spacing.
+//
 // WithDefaultTabInterval sets the defaultTabInterval property and returns the receiver for chaining.
 func (x *MutableParagraphStyle) WithDefaultTabInterval(defaultTabInterval float64) *MutableParagraphStyle {
 	x.inner.SetDefaultTabInterval(defaultTabInterval)
 	return x
 }
 
+// A Boolean value that indicates whether the system tightens intercharacter spacing before truncating text.
+//
 // WithAllowsDefaultTighteningForTruncation sets the allowsDefaultTighteningForTruncation property and returns the receiver for chaining.
 func (x *MutableParagraphStyle) WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *MutableParagraphStyle {
 	x.inner.SetAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation)
 	return x
 }
 
+// The strategies that the text system may use to break lines while laying out the paragraph.
+//
 // WithLineBreakStrategy sets the lineBreakStrategy property and returns the receiver for chaining.
 func (x *MutableParagraphStyle) WithLineBreakStrategy(lineBreakStrategy NSLineBreakStrategy) *MutableParagraphStyle {
 	x.inner.SetLineBreakStrategy(raw.NSLineBreakStrategy(lineBreakStrategy))
 	return x
 }
 
+// The text lists that contain the paragraph.
+//
 // WithTextLists sets the collection, converting the Go slice to an NSArray.
 func (x *MutableParagraphStyle) WithTextLists(items ...*raw.NSTextList) *MutableParagraphStyle {
 	if len(items) == 0 {
@@ -169,18 +205,24 @@ func (x *MutableParagraphStyle) WithTextLists(items ...*raw.NSTextList) *Mutable
 	return x
 }
 
+// The text alignment of the paragraph.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *MutableParagraphStyle) WithAlignment(alignment NSTextAlignment) *MutableParagraphStyle {
 	x.inner.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The threshold for using tightening as an alternative to truncation.
+//
 // WithTighteningFactorForTruncation sets the tighteningFactorForTruncation property and returns the receiver for chaining.
 func (x *MutableParagraphStyle) WithTighteningFactorForTruncation(tighteningFactorForTruncation float32) *MutableParagraphStyle {
 	x.inner.SetTighteningFactorForTruncation(tighteningFactorForTruncation)
 	return x
 }
 
+// The text blocks that contain the paragraph.
+//
 // WithTextBlocks sets the collection, converting the Go slice to an NSArray.
 func (x *MutableParagraphStyle) WithTextBlocks(items ...TextBlockProvider) *MutableParagraphStyle {
 	if len(items) == 0 {
@@ -199,22 +241,30 @@ func (x *MutableParagraphStyle) WithTextBlocks(items ...TextBlockProvider) *Muta
 	return x
 }
 
+// The paragraph’s header level for HTML generation.
+//
 // WithHeaderLevel sets the headerLevel property and returns the receiver for chaining.
 func (x *MutableParagraphStyle) WithHeaderLevel(headerLevel int) *MutableParagraphStyle {
 	x.inner.SetHeaderLevel(headerLevel)
 	return x
 }
 
+// Adds the specified tab stop to the paragraph.
+//
 // AddTabStop calls the underlying AddTabStop.
 func (x *MutableParagraphStyle) AddTabStop(anObject *raw.NSTextTab) {
 	x.inner.AddTabStop(anObject)
 }
 
+// Removes the first text tab with a location and type equal to the specified tab stop.
+//
 // RemoveTabStop calls the underlying RemoveTabStop.
 func (x *MutableParagraphStyle) RemoveTabStop(anObject *raw.NSTextTab) {
 	x.inner.RemoveTabStop(anObject)
 }
 
+// Replaces the subattributes of the paragraph with those in the specified paragraph style object.
+//
 // SetParagraphStyle calls the underlying SetParagraphStyle.
 func (x *MutableParagraphStyle) SetParagraphStyle(obj *raw.NSParagraphStyle) {
 	x.inner.SetParagraphStyle(obj)

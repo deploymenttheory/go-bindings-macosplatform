@@ -14,7 +14,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information associated with an AVAsset for a cinematic video.
+// An object that provides Cinematic-specific information about an asset, including its tracks.
 //
 // AssetInfo wraps [raw.CNAssetInfo] with a fluent Go API.
 type AssetInfo struct {

@@ -9,6 +9,7 @@ import (
 	"strings"
 )
 
+// Component information for a bitmap image.
 // Bitmask — values may be combined with |.
 type CGBitmapInfo int64
 
@@ -19,12 +20,18 @@ const (
 	KCGBitmapPixelFormatInfoMask CGBitmapInfo = 983040
 	KCGBitmapFloatInfoMask       CGBitmapInfo = 3840
 	KCGBitmapByteOrderMask       CGBitmapInfo = 28672
-	KCGBitmapFloatComponents     CGBitmapInfo = 256
-	KCGBitmapByteOrderDefault    CGBitmapInfo = 0
-	KCGBitmapByteOrder16Little   CGBitmapInfo = 4096
-	KCGBitmapByteOrder32Little   CGBitmapInfo = 8192
-	KCGBitmapByteOrder16Big      CGBitmapInfo = 12288
-	KCGBitmapByteOrder32Big      CGBitmapInfo = 16384
+	// The components of a bitmap are floating-point values.
+	KCGBitmapFloatComponents CGBitmapInfo = 256
+	// The default byte order.
+	KCGBitmapByteOrderDefault CGBitmapInfo = 0
+	// 16-bit, little endian format.
+	KCGBitmapByteOrder16Little CGBitmapInfo = 4096
+	// 32-bit, little endian format.
+	KCGBitmapByteOrder32Little CGBitmapInfo = 8192
+	// 16-bit, big endian format.
+	KCGBitmapByteOrder16Big CGBitmapInfo = 12288
+	// 32-bit, big endian format.
+	KCGBitmapByteOrder32Big CGBitmapInfo = 16384
 )
 
 func (e CGBitmapInfo) String() string {
@@ -68,37 +75,60 @@ func (e CGBitmapInfo) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Compositing operations for images.
 type CGBlendMode int64
 
 const (
-	KCGBlendModeNormal          CGBlendMode = 0
-	KCGBlendModeMultiply        CGBlendMode = 1
-	KCGBlendModeScreen          CGBlendMode = 2
-	KCGBlendModeOverlay         CGBlendMode = 3
-	KCGBlendModeDarken          CGBlendMode = 4
-	KCGBlendModeLighten         CGBlendMode = 5
-	KCGBlendModeColorDodge      CGBlendMode = 6
-	KCGBlendModeColorBurn       CGBlendMode = 7
-	KCGBlendModeSoftLight       CGBlendMode = 8
-	KCGBlendModeHardLight       CGBlendMode = 9
-	KCGBlendModeDifference      CGBlendMode = 10
-	KCGBlendModeExclusion       CGBlendMode = 11
-	KCGBlendModeHue             CGBlendMode = 12
-	KCGBlendModeSaturation      CGBlendMode = 13
-	KCGBlendModeColor           CGBlendMode = 14
-	KCGBlendModeLuminosity      CGBlendMode = 15
-	KCGBlendModeClear           CGBlendMode = 16
-	KCGBlendModeCopy            CGBlendMode = 17
-	KCGBlendModeSourceIn        CGBlendMode = 18
-	KCGBlendModeSourceOut       CGBlendMode = 19
-	KCGBlendModeSourceAtop      CGBlendMode = 20
+	// Paints the source image samples over the background image samples.
+	KCGBlendModeNormal CGBlendMode = 0
+	// Multiplies the source image samples with the background image samples. This results in colors that are at least as dark as either of the two contributing sample colors.
+	KCGBlendModeMultiply CGBlendMode = 1
+	// Multiplies the inverse of the source image samples with the inverse of the background image samples, resulting in colors that are at least as light as either of the two contributing sample colors.
+	KCGBlendModeScreen  CGBlendMode = 2
+	KCGBlendModeOverlay CGBlendMode = 3
+	KCGBlendModeDarken  CGBlendMode = 4
+	KCGBlendModeLighten CGBlendMode = 5
+	// Brightens the background image samples to reflect the source image samples. Source image sample values that specify black do not produce a change.
+	KCGBlendModeColorDodge CGBlendMode = 6
+	// Darkens the background image samples to reflect the source image samples. Source image sample values that specify white do not produce a change.
+	KCGBlendModeColorBurn  CGBlendMode = 7
+	KCGBlendModeSoftLight  CGBlendMode = 8
+	KCGBlendModeHardLight  CGBlendMode = 9
+	KCGBlendModeDifference CGBlendMode = 10
+	// Produces an effect similar to that produced by kCGBlendModeDifference, but with lower contrast. Source image sample values that are black don’t produce a change; white inverts the background color values.
+	KCGBlendModeExclusion CGBlendMode = 11
+	// Uses the luminance and saturation values of the background with the hue of the source image.
+	KCGBlendModeHue CGBlendMode = 12
+	// Uses the luminance and hue values of the background with the saturation of the source image. Areas of the background that have no saturation (that is, pure gray areas) don’t produce a change.
+	KCGBlendModeSaturation CGBlendMode = 13
+	// Uses the luminance values of the background with the hue and saturation values of the source image. This mode preserves the gray levels in the image. You can use this mode to color monochrome images or to tint color images.
+	KCGBlendModeColor CGBlendMode = 14
+	// Uses the hue and saturation of the background with the luminance of the source image. This mode creates an effect that is inverse to the effect created by kCGBlendModeColor.
+	KCGBlendModeLuminosity CGBlendMode = 15
+	// R = 0
+	KCGBlendModeClear CGBlendMode = 16
+	// R = S
+	KCGBlendModeCopy CGBlendMode = 17
+	// R = S*Da
+	KCGBlendModeSourceIn CGBlendMode = 18
+	// R = S*(1 - Da)
+	KCGBlendModeSourceOut CGBlendMode = 19
+	// R = S*Da + D*(1 - Sa)
+	KCGBlendModeSourceAtop CGBlendMode = 20
+	// R = S*(1 - Da) + D
 	KCGBlendModeDestinationOver CGBlendMode = 21
-	KCGBlendModeDestinationIn   CGBlendMode = 22
-	KCGBlendModeDestinationOut  CGBlendMode = 23
+	// R = D*Sa
+	KCGBlendModeDestinationIn CGBlendMode = 22
+	// R = D*(1 - Sa)
+	KCGBlendModeDestinationOut CGBlendMode = 23
+	// R = S*(1 - Da) + D*Sa
 	KCGBlendModeDestinationAtop CGBlendMode = 24
-	KCGBlendModeXOR             CGBlendMode = 25
-	KCGBlendModePlusDarker      CGBlendMode = 26
-	KCGBlendModePlusLighter     CGBlendMode = 27
+	// R = S*(1 - Da) + D*(1 - Sa). This XOR mode is only nominally related to the classical bitmap XOR operation, which is not supported by Core Graphics
+	KCGBlendModeXOR CGBlendMode = 25
+	// R = MAX(0, 1 - ((1 - D) + (1 - S)))
+	KCGBlendModePlusDarker CGBlendMode = 26
+	// R = MIN(1, S + D)
+	KCGBlendModePlusLighter CGBlendMode = 27
 )
 
 func (e CGBlendMode) String() string {
@@ -164,12 +194,15 @@ func (e CGBlendMode) String() string {
 	}
 }
 
+// Configuration parameters that are used when capturing displays.
 // Bitmask — values may be combined with |.
 type CGCaptureOptions int64
 
 const (
+	// The system should use the default fill behavior, which is fill with black.
 	KCGCaptureNoOptions CGCaptureOptions = 0
-	KCGCaptureNoFill    CGCaptureOptions = 1
+	// Disables fill with black.
+	KCGCaptureNoFill CGCaptureOptions = 1
 )
 
 func (e CGCaptureOptions) String() string {
@@ -183,11 +216,15 @@ func (e CGCaptureOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants describing how a color conversion uses color spaces.
 type CGColorConversionInfoTransformType int64
 
 const (
-	KCGColorConversionTransformFromSpace  CGColorConversionInfoTransformType = 0
-	KCGColorConversionTransformToSpace    CGColorConversionInfoTransformType = 1
+	// Specifies a color conversion from a device color space to a color profile.
+	KCGColorConversionTransformFromSpace CGColorConversionInfoTransformType = 0
+	// Specifies a color conversion from a color profile to a device color space.
+	KCGColorConversionTransformToSpace CGColorConversionInfoTransformType = 1
+	// Specifies a color conversion between one color profile and another.
 	KCGColorConversionTransformApplySpace CGColorConversionInfoTransformType = 2
 )
 
@@ -204,14 +241,17 @@ func (e CGColorConversionInfoTransformType) String() string {
 	}
 }
 
+// Handling options for colors that are not located within the destination color space of a graphics context.
 type CGColorRenderingIntent int64
 
 const (
+	// The default rendering intent for the graphics context.
 	KCGRenderingIntentDefault              CGColorRenderingIntent = 0
 	KCGRenderingIntentAbsoluteColorimetric CGColorRenderingIntent = 1
 	KCGRenderingIntentRelativeColorimetric CGColorRenderingIntent = 2
-	KCGRenderingIntentPerceptual           CGColorRenderingIntent = 3
-	KCGRenderingIntentSaturation           CGColorRenderingIntent = 4
+	// Preserve the visual relationship between colors by compressing the gamut of the graphics context to fit inside the gamut of the output device. Perceptual intent is good for photographs and other complex, detailed images.
+	KCGRenderingIntentPerceptual CGColorRenderingIntent = 3
+	KCGRenderingIntentSaturation CGColorRenderingIntent = 4
 )
 
 func (e CGColorRenderingIntent) String() string {
@@ -231,18 +271,28 @@ func (e CGColorRenderingIntent) String() string {
 	}
 }
 
+// Models for color spaces.
 type CGColorSpaceModel int64
 
 const (
-	KCGColorSpaceModelUnknown    CGColorSpaceModel = -1
+	// An unknown color space model.
+	KCGColorSpaceModelUnknown CGColorSpaceModel = -1
+	// A monochrome color space model.
 	KCGColorSpaceModelMonochrome CGColorSpaceModel = 0
-	KCGColorSpaceModelRGB        CGColorSpaceModel = 1
-	KCGColorSpaceModelCMYK       CGColorSpaceModel = 2
-	KCGColorSpaceModelLab        CGColorSpaceModel = 3
-	KCGColorSpaceModelDeviceN    CGColorSpaceModel = 4
-	KCGColorSpaceModelIndexed    CGColorSpaceModel = 5
-	KCGColorSpaceModelPattern    CGColorSpaceModel = 6
-	KCGColorSpaceModelXYZ        CGColorSpaceModel = 7
+	// An RGB color space model.
+	KCGColorSpaceModelRGB CGColorSpaceModel = 1
+	// A CMYK color space model.
+	KCGColorSpaceModelCMYK CGColorSpaceModel = 2
+	// A Lab color space model.
+	KCGColorSpaceModelLab CGColorSpaceModel = 3
+	// A DeviceN color space model.
+	KCGColorSpaceModelDeviceN CGColorSpaceModel = 4
+	// An indexed color space model.
+	KCGColorSpaceModelIndexed CGColorSpaceModel = 5
+	// A pattern color space model.
+	KCGColorSpaceModelPattern CGColorSpaceModel = 6
+	// An XYZ color space model.
+	KCGColorSpaceModelXYZ CGColorSpaceModel = 7
 )
 
 func (e CGColorSpaceModel) String() string {
@@ -270,11 +320,14 @@ func (e CGColorSpaceModel) String() string {
 	}
 }
 
+// The scope of the changes in a display configuration transaction.
 // Bitmask — values may be combined with |.
 type CGConfigureOption int64
 
 const (
-	KCGConfigureForAppOnly  CGConfigureOption = 0
+	// Changes persist for the lifetime of the current application. After the application terminates, the display configuration settings revert to the current login session.
+	KCGConfigureForAppOnly CGConfigureOption = 0
+	// Changes persist for the lifetime of the current login session. After the current session terminates, the displays revert to the last saved permanent configuration.
 	KCGConfigureForSession  CGConfigureOption = 1
 	KCGConfigurePermanently CGConfigureOption = 2
 )
@@ -293,20 +346,32 @@ func (e CGConfigureOption) String() string {
 	return strings.Join(parts, "|")
 }
 
+// A uniform type for result codes returned by functions in Core Graphics.
 type CGError int64
 
 const (
-	KCGErrorSuccess           CGError = 0
-	KCGErrorFailure           CGError = 1000
-	KCGErrorIllegalArgument   CGError = 1001
+	// The requested operation was completed successfully.
+	KCGErrorSuccess CGError = 0
+	// A general failure occurred.
+	KCGErrorFailure CGError = 1000
+	// One or more of the parameters passed to a function are invalid. Check for NULL pointers.
+	KCGErrorIllegalArgument CGError = 1001
+	// The parameter representing a connection to the window server is invalid.
 	KCGErrorInvalidConnection CGError = 1002
-	KCGErrorInvalidContext    CGError = 1003
-	KCGErrorCannotComplete    CGError = 1004
-	KCGErrorNotImplemented    CGError = 1006
-	KCGErrorRangeCheck        CGError = 1007
-	KCGErrorTypeCheck         CGError = 1008
-	KCGErrorInvalidOperation  CGError = 1010
-	KCGErrorNoneAvailable     CGError = 1011
+	// The CPSProcessSerNum or context identifier parameter is not valid.
+	KCGErrorInvalidContext CGError = 1003
+	// The requested operation is inappropriate for the parameters passed in, or the current system state.
+	KCGErrorCannotComplete CGError = 1004
+	// Return value from obsolete function stubs present for binary compatibility, but not typically called.
+	KCGErrorNotImplemented CGError = 1006
+	// A parameter passed in has a value that is inappropriate, or which does not map to a useful operation or value.
+	KCGErrorRangeCheck CGError = 1007
+	// A data type or token was encountered that did not match the expected type or token.
+	KCGErrorTypeCheck CGError = 1008
+	// The requested operation is not valid for the parameters passed in, or the current system state.
+	KCGErrorInvalidOperation CGError = 1010
+	// The requested operation could not be completed as the indicated resources were not found.
+	KCGErrorNoneAvailable CGError = 1011
 )
 
 func (e CGError) String() string {
@@ -338,64 +403,118 @@ func (e CGError) String() string {
 	}
 }
 
+// Constants used as keys to access specialized fields in low-level events.
 type CGEventField int64
 
 const (
-	KCGMouseEventNumber                                        CGEventField = 0
-	KCGMouseEventClickState                                    CGEventField = 1
-	KCGMouseEventPressure                                      CGEventField = 2
-	KCGMouseEventButtonNumber                                  CGEventField = 3
-	KCGMouseEventDeltaX                                        CGEventField = 4
-	KCGMouseEventDeltaY                                        CGEventField = 5
-	KCGMouseEventInstantMouser                                 CGEventField = 6
-	KCGMouseEventSubtype                                       CGEventField = 7
-	KCGKeyboardEventAutorepeat                                 CGEventField = 8
-	KCGKeyboardEventKeycode                                    CGEventField = 9
-	KCGKeyboardEventKeyboardType                               CGEventField = 10
-	KCGScrollWheelEventDeltaAxis1                              CGEventField = 11
-	KCGScrollWheelEventDeltaAxis2                              CGEventField = 12
-	KCGScrollWheelEventDeltaAxis3                              CGEventField = 13
-	KCGScrollWheelEventFixedPtDeltaAxis1                       CGEventField = 93
-	KCGScrollWheelEventFixedPtDeltaAxis2                       CGEventField = 94
-	KCGScrollWheelEventFixedPtDeltaAxis3                       CGEventField = 95
-	KCGScrollWheelEventPointDeltaAxis1                         CGEventField = 96
-	KCGScrollWheelEventPointDeltaAxis2                         CGEventField = 97
-	KCGScrollWheelEventPointDeltaAxis3                         CGEventField = 98
-	KCGScrollWheelEventScrollPhase                             CGEventField = 99
-	KCGScrollWheelEventScrollCount                             CGEventField = 100
-	KCGScrollWheelEventMomentumPhase                           CGEventField = 123
-	KCGScrollWheelEventInstantMouser                           CGEventField = 14
-	KCGTabletEventPointX                                       CGEventField = 15
-	KCGTabletEventPointY                                       CGEventField = 16
-	KCGTabletEventPointZ                                       CGEventField = 17
-	KCGTabletEventPointButtons                                 CGEventField = 18
-	KCGTabletEventPointPressure                                CGEventField = 19
-	KCGTabletEventTiltX                                        CGEventField = 20
-	KCGTabletEventTiltY                                        CGEventField = 21
-	KCGTabletEventRotation                                     CGEventField = 22
-	KCGTabletEventTangentialPressure                           CGEventField = 23
-	KCGTabletEventDeviceID                                     CGEventField = 24
-	KCGTabletEventVendor1                                      CGEventField = 25
-	KCGTabletEventVendor2                                      CGEventField = 26
-	KCGTabletEventVendor3                                      CGEventField = 27
-	KCGTabletProximityEventVendorID                            CGEventField = 28
-	KCGTabletProximityEventTabletID                            CGEventField = 29
-	KCGTabletProximityEventPointerID                           CGEventField = 30
-	KCGTabletProximityEventDeviceID                            CGEventField = 31
-	KCGTabletProximityEventSystemTabletID                      CGEventField = 32
-	KCGTabletProximityEventVendorPointerType                   CGEventField = 33
-	KCGTabletProximityEventVendorPointerSerialNumber           CGEventField = 34
-	KCGTabletProximityEventVendorUniqueID                      CGEventField = 35
-	KCGTabletProximityEventCapabilityMask                      CGEventField = 36
-	KCGTabletProximityEventPointerType                         CGEventField = 37
-	KCGTabletProximityEventEnterProximity                      CGEventField = 38
-	KCGEventTargetProcessSerialNumber                          CGEventField = 39
-	KCGEventTargetUnixProcessID                                CGEventField = 40
-	KCGEventSourceUnixProcessID                                CGEventField = 41
-	KCGEventSourceUserData                                     CGEventField = 42
-	KCGEventSourceUserID                                       CGEventField = 43
-	KCGEventSourceGroupID                                      CGEventField = 44
-	KCGEventSourceStateID                                      CGEventField = 45
+	// Key to access an integer field that contains the mouse button event number. Matching mouse-down and mouse-up events will have the same event number.
+	KCGMouseEventNumber CGEventField = 0
+	// Key to access an integer field that contains the mouse button click state. A click state of 1 represents a single click. A click state of 2 represents a double-click. A click state of 3 represents a triple-click.
+	KCGMouseEventClickState CGEventField = 1
+	// Key to access a double field that contains the mouse button pressure. The pressure value may range from 0 to 1, with 0 representing the mouse being up. This value is commonly set by tablet pens mimicking a mouse.
+	KCGMouseEventPressure CGEventField = 2
+	// Key to access an integer field that contains the mouse button number. For information about the possible values, see CGMouseButton.
+	KCGMouseEventButtonNumber CGEventField = 3
+	// Key to access an integer field that contains the horizontal mouse delta since the last mouse movement event.
+	KCGMouseEventDeltaX CGEventField = 4
+	// Key to access an integer field that contains the vertical mouse delta since the last mouse movement event.
+	KCGMouseEventDeltaY CGEventField = 5
+	// Key to access an integer field. The value is non-zero if the event should be ignored by the Inkwell subsystem.
+	KCGMouseEventInstantMouser CGEventField = 6
+	// Key to access an integer field that encodes the mouse event subtype as a kCFNumberIntType.
+	KCGMouseEventSubtype CGEventField = 7
+	// Key to access an integer field, non-zero when this is an autorepeat of a key-down, and zero otherwise.
+	KCGKeyboardEventAutorepeat CGEventField = 8
+	// Key to access an integer field that contains the virtual keycode of the key-down or key-up event.
+	KCGKeyboardEventKeycode CGEventField = 9
+	// Key to access an integer field that contains the keyboard type identifier.
+	KCGKeyboardEventKeyboardType CGEventField = 10
+	// Key to access an integer field that contains scrolling data. This field typically contains the change in vertical position since the last scrolling event from a Mighty Mouse scroller or a single-wheel mouse scroller.
+	KCGScrollWheelEventDeltaAxis1 CGEventField = 11
+	// Key to access an integer field that contains scrolling data. This field typically contains the change in horizontal position since the last scrolling event from a Mighty Mouse scroller.
+	KCGScrollWheelEventDeltaAxis2 CGEventField = 12
+	// This field is not used.
+	KCGScrollWheelEventDeltaAxis3 CGEventField = 13
+	// Key to access a field that contains scrolling data. The scrolling data represents a line-based or pixel-based change in vertical position since the last scrolling event from a Mighty Mouse scroller or a single-wheel mouse scroller. The scrolling data uses a fixed-point 16.16 signed integer format. For example, if the field contains a value of 1.0, the integer 0x00010000 is returned by CGEventGetIntegerValueField. If this key is passed to CGEventGetDoubleValueField, the fixed-point value is converted to a double value.
+	KCGScrollWheelEventFixedPtDeltaAxis1 CGEventField = 93
+	// Key to access a field that contains scrolling data. The scrolling data represents a line-based or pixel-based change in horizontal position since the last scrolling event from a Mighty Mouse scroller. The scrolling data uses a fixed-point 16.16 signed integer format. For example, if the field contains a value of 1.0, the integer 0x00010000 is returned by CGEventGetIntegerValueField. If this key is passed to CGEventGetDoubleValueField, the fixed-point value is converted to a double value.
+	KCGScrollWheelEventFixedPtDeltaAxis2 CGEventField = 94
+	// This field is not used.
+	KCGScrollWheelEventFixedPtDeltaAxis3 CGEventField = 95
+	// Key to access an integer field that contains pixel-based scrolling data. The scrolling data represents the change in vertical position since the last scrolling event from a Mighty Mouse scroller or a single-wheel mouse scroller.
+	KCGScrollWheelEventPointDeltaAxis1 CGEventField = 96
+	// Key to access an integer field that contains pixel-based scrolling data. The scrolling data represents the change in horizontal position since the last scrolling event from a Mighty Mouse scroller.
+	KCGScrollWheelEventPointDeltaAxis2 CGEventField = 97
+	// This field is not used.
+	KCGScrollWheelEventPointDeltaAxis3 CGEventField = 98
+	KCGScrollWheelEventScrollPhase     CGEventField = 99
+	KCGScrollWheelEventScrollCount     CGEventField = 100
+	KCGScrollWheelEventMomentumPhase   CGEventField = 123
+	// Key to access an integer field that indicates whether the event should be ignored by the Inkwell subsystem. If the value is non-zero, the event should be ignored.
+	KCGScrollWheelEventInstantMouser CGEventField = 14
+	// Key to access an integer field that contains the absolute X coordinate in tablet space at full tablet resolution.
+	KCGTabletEventPointX CGEventField = 15
+	// Key to access an integer field that contains the absolute Y coordinate in tablet space at full tablet resolution.
+	KCGTabletEventPointY CGEventField = 16
+	// Key to access an integer field that contains the absolute Z coordinate in tablet space at full tablet resolution.
+	KCGTabletEventPointZ CGEventField = 17
+	// Key to access an integer field that contains the tablet button state. Bit 0 is the first button, and a set bit represents a closed or pressed button. Up to 16 buttons are supported.
+	KCGTabletEventPointButtons CGEventField = 18
+	// Key to access a double field that contains the tablet pen pressure. A value of 0.0 represents no pressure, and 1.0 represents maximum pressure.
+	KCGTabletEventPointPressure CGEventField = 19
+	// Key to access a double field that contains the horizontal tablet pen tilt. A value of 0.0 represents no tilt, and 1.0 represents maximum tilt.
+	KCGTabletEventTiltX CGEventField = 20
+	// Key to access a double field that contains the vertical tablet pen tilt. A value of 0.0 represents no tilt, and 1.0 represents maximum tilt.
+	KCGTabletEventTiltY CGEventField = 21
+	// Key to access a double field that contains the tablet pen rotation.
+	KCGTabletEventRotation CGEventField = 22
+	// Key to access a double field that contains the tangential pressure on the device. A value of 0.0 represents no pressure, and 1.0 represents maximum pressure.
+	KCGTabletEventTangentialPressure CGEventField = 23
+	// Key to access an integer field that contains the system-assigned unique device ID.
+	KCGTabletEventDeviceID CGEventField = 24
+	// Key to access an integer field that contains a vendor-specified value.
+	KCGTabletEventVendor1 CGEventField = 25
+	// Key to access an integer field that contains a vendor-specified value.
+	KCGTabletEventVendor2 CGEventField = 26
+	// Key to access an integer field that contains a vendor-specified value.
+	KCGTabletEventVendor3 CGEventField = 27
+	// Key to access an integer field that contains the vendor-defined ID, typically the USB vendor ID.
+	KCGTabletProximityEventVendorID CGEventField = 28
+	// Key to access an integer field that contains the vendor-defined tablet ID, typically the USB product ID.
+	KCGTabletProximityEventTabletID CGEventField = 29
+	// Key to access an integer field that contains the vendor-defined ID of the pointing device.
+	KCGTabletProximityEventPointerID CGEventField = 30
+	// Key to access an integer field that contains the system-assigned device ID.
+	KCGTabletProximityEventDeviceID CGEventField = 31
+	// Key to access an integer field that contains the system-assigned unique tablet ID.
+	KCGTabletProximityEventSystemTabletID CGEventField = 32
+	// Key to access an integer field that contains the vendor-assigned pointer type.
+	KCGTabletProximityEventVendorPointerType CGEventField = 33
+	// Key to access an integer field that contains the vendor-defined pointer serial number.
+	KCGTabletProximityEventVendorPointerSerialNumber CGEventField = 34
+	// Key to access an integer field that contains the vendor-defined unique ID.
+	KCGTabletProximityEventVendorUniqueID CGEventField = 35
+	// Key to access an integer field that contains the device capabilities mask.
+	KCGTabletProximityEventCapabilityMask CGEventField = 36
+	// Key to access an integer field that contains the pointer type.
+	KCGTabletProximityEventPointerType CGEventField = 37
+	// Key to access an integer field that indicates whether the pen is in proximity to the tablet. The value is non-zero if the pen is in proximity to the tablet and zero when leaving the tablet.
+	KCGTabletProximityEventEnterProximity CGEventField = 38
+	// Key to access a field that contains the event target process serial number. The value is a 64-bit long word.
+	KCGEventTargetProcessSerialNumber CGEventField = 39
+	// Key to access a field that contains the event target Unix process ID.
+	KCGEventTargetUnixProcessID CGEventField = 40
+	// Key to access a field that contains the event source Unix process ID.
+	KCGEventSourceUnixProcessID CGEventField = 41
+	// Key to access a field that contains the event source user-supplied data, up to 64 bits.
+	KCGEventSourceUserData CGEventField = 42
+	// Key to access a field that contains the event source Unix effective UID.
+	KCGEventSourceUserID CGEventField = 43
+	// Key to access a field that contains the event source Unix effective GID.
+	KCGEventSourceGroupID CGEventField = 44
+	// Key to access a field that contains the event source state ID used to create this event.
+	KCGEventSourceStateID CGEventField = 45
+	// Key to access an integer field that indicates whether a scrolling event contains continuous, pixel-based scrolling data. The value is non-zero when the scrolling data is pixel-based and zero when the scrolling data is line-based.
 	KCGScrollWheelEventIsContinuous                            CGEventField = 88
 	KCGMouseEventWindowUnderMousePointer                       CGEventField = 91
 	KCGMouseEventWindowUnderMousePointerThatCanHandleThisEvent CGEventField = 92
@@ -545,6 +664,7 @@ func (e CGEventField) String() string {
 	}
 }
 
+// Specify masks for classes of low-level events that can be filtered during event suppression states.
 // Bitmask — values may be combined with |.
 type CGEventFilterMask int64
 
@@ -571,18 +691,28 @@ func (e CGEventFilterMask) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that indicate the modifier key state at the time an event is created, as well as other event-related states.
 // Bitmask — values may be combined with |.
 type CGEventFlags int64
 
 const (
-	KCGEventFlagMaskAlphaShift   CGEventFlags = 65536
-	KCGEventFlagMaskShift        CGEventFlags = 131072
-	KCGEventFlagMaskControl      CGEventFlags = 262144
-	KCGEventFlagMaskAlternate    CGEventFlags = 524288
-	KCGEventFlagMaskCommand      CGEventFlags = 1048576
-	KCGEventFlagMaskHelp         CGEventFlags = 4194304
-	KCGEventFlagMaskSecondaryFn  CGEventFlags = 8388608
-	KCGEventFlagMaskNumericPad   CGEventFlags = 2097152
+	// Indicates that the Caps Lock key is down for a keyboard, mouse, or flag-changed event.
+	KCGEventFlagMaskAlphaShift CGEventFlags = 65536
+	// Indicates that the Shift key is down for a keyboard, mouse, or flag-changed event.
+	KCGEventFlagMaskShift CGEventFlags = 131072
+	// Indicates that the Control key is down for a keyboard, mouse, or flag-changed event.
+	KCGEventFlagMaskControl CGEventFlags = 262144
+	// Indicates that the Alt or Option key is down for a keyboard, mouse, or flag-changed event.
+	KCGEventFlagMaskAlternate CGEventFlags = 524288
+	// Indicates that the Command key is down for a keyboard, mouse, or flag-changed event.
+	KCGEventFlagMaskCommand CGEventFlags = 1048576
+	// Indicates that the Help modifier key is down for a keyboard, mouse, or flag-changed event. This key is not present on most keyboards, and is different than the Help key found in the same row as Home and Page Up.
+	KCGEventFlagMaskHelp CGEventFlags = 4194304
+	// Indicates that the Fn (Function) key is down for a keyboard, mouse, or flag-changed event. This key is found primarily on laptop keyboards.
+	KCGEventFlagMaskSecondaryFn CGEventFlags = 8388608
+	// Identifies key events from the numeric keypad area on extended keyboards.
+	KCGEventFlagMaskNumericPad CGEventFlags = 2097152
+	// Indicates that mouse and pen movement events are not being coalesced.
 	KCGEventFlagMaskNonCoalesced CGEventFlags = 256
 )
 
@@ -621,12 +751,16 @@ func (e CGEventFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that specify the possible source states of an event source.
 type CGEventSourceStateID int64
 
 const (
-	KCGEventSourceStatePrivate              CGEventSourceStateID = -1
+	// Specifies that an event source should use a private event state table.
+	KCGEventSourceStatePrivate CGEventSourceStateID = -1
+	// Specifies that an event source should use the event state table that reflects the combined state of all event sources posting to the current user login session.
 	KCGEventSourceStateCombinedSessionState CGEventSourceStateID = 0
-	KCGEventSourceStateHIDSystemState       CGEventSourceStateID = 1
+	// Specifies that an event source should use the event state table that reflects the combined state of all hardware event sources posting from the HID system.
+	KCGEventSourceStateHIDSystemState CGEventSourceStateID = 1
 )
 
 func (e CGEventSourceStateID) String() string {
@@ -642,12 +776,15 @@ func (e CGEventSourceStateID) String() string {
 	}
 }
 
+// Specify the event suppression states that can occur after posting an event.
 type CGEventSuppressionState int64
 
 const (
+	// Specifies that certain local hardware events may be suppressed for a short interval after posting an event.
 	KCGEventSuppressionStateSuppressionInterval CGEventSuppressionState = 0
-	KCGEventSuppressionStateRemoteMouseDrag     CGEventSuppressionState = 1
-	KCGNumberOfEventSuppressionStates           CGEventSuppressionState = 2
+	// Specifies that certain local hardware events may be suppressed during a mouse drag operation (mouse movement with the left or only mouse button down).
+	KCGEventSuppressionStateRemoteMouseDrag CGEventSuppressionState = 1
+	KCGNumberOfEventSuppressionStates       CGEventSuppressionState = 2
 )
 
 func (e CGEventSuppressionState) String() string {
@@ -663,11 +800,15 @@ func (e CGEventSuppressionState) String() string {
 	}
 }
 
+// Constants that specify possible tapping points for events.
 type CGEventTapLocation int64
 
 const (
-	KCGHIDEventTap              CGEventTapLocation = 0
-	KCGSessionEventTap          CGEventTapLocation = 1
+	// Specifies that an event tap is placed at the point where HID system events enter the window server.
+	KCGHIDEventTap CGEventTapLocation = 0
+	// Specifies that an event tap is placed at the point where HID system and remote control events enter a login session.
+	KCGSessionEventTap CGEventTapLocation = 1
+	// Specifies that an event tap is placed at the point where session events have been annotated to flow to an application.
 	KCGAnnotatedSessionEventTap CGEventTapLocation = 2
 )
 
@@ -684,6 +825,7 @@ func (e CGEventTapLocation) String() string {
 	}
 }
 
+// Constants that specify whether a new event tap is an active filter or a passive listener.
 type CGEventTapOptions int64
 
 const (
@@ -702,10 +844,13 @@ func (e CGEventTapOptions) String() string {
 	}
 }
 
+// Constants that specify where a new event tap is inserted into the list of active event taps.
 type CGEventTapPlacement int64
 
 const (
+	// Specifies that a new event tap should be inserted before any pre-existing event taps at the same location.
 	KCGHeadInsertEventTap CGEventTapPlacement = 0
+	// Specifies that a new event tap should be inserted after any pre-existing event taps at the same location.
 	KCGTailAppendEventTap CGEventTapPlacement = 1
 )
 
@@ -720,27 +865,47 @@ func (e CGEventTapPlacement) String() string {
 	}
 }
 
+// Constants that specify the different types of input events.
 type CGEventType int64
 
 const (
-	KCGEventNull                   CGEventType = 0
-	KCGEventLeftMouseDown          CGEventType = 1
-	KCGEventLeftMouseUp            CGEventType = 2
-	KCGEventRightMouseDown         CGEventType = 3
-	KCGEventRightMouseUp           CGEventType = 4
-	KCGEventMouseMoved             CGEventType = 5
-	KCGEventLeftMouseDragged       CGEventType = 6
-	KCGEventRightMouseDragged      CGEventType = 7
-	KCGEventKeyDown                CGEventType = 10
-	KCGEventKeyUp                  CGEventType = 11
-	KCGEventFlagsChanged           CGEventType = 12
-	KCGEventScrollWheel            CGEventType = 22
-	KCGEventTabletPointer          CGEventType = 23
-	KCGEventTabletProximity        CGEventType = 24
-	KCGEventOtherMouseDown         CGEventType = 25
-	KCGEventOtherMouseUp           CGEventType = 26
-	KCGEventOtherMouseDragged      CGEventType = 27
-	KCGEventTapDisabledByTimeout   CGEventType = 4294967294
+	// Specifies a null event.
+	KCGEventNull CGEventType = 0
+	// Specifies a mouse down event with the left button.
+	KCGEventLeftMouseDown CGEventType = 1
+	// Specifies a mouse up event with the left button.
+	KCGEventLeftMouseUp CGEventType = 2
+	// Specifies a mouse down event with the right button.
+	KCGEventRightMouseDown CGEventType = 3
+	// Specifies a mouse up event with the right button.
+	KCGEventRightMouseUp CGEventType = 4
+	// Specifies a mouse moved event.
+	KCGEventMouseMoved CGEventType = 5
+	// Specifies a mouse drag event with the left button down.
+	KCGEventLeftMouseDragged CGEventType = 6
+	// Specifies a mouse drag event with the right button down.
+	KCGEventRightMouseDragged CGEventType = 7
+	// Specifies a key down event.
+	KCGEventKeyDown CGEventType = 10
+	// Specifies a key up event.
+	KCGEventKeyUp CGEventType = 11
+	// Specifies a key changed event for a modifier or status key.
+	KCGEventFlagsChanged CGEventType = 12
+	// Specifies a scroll wheel moved event.
+	KCGEventScrollWheel CGEventType = 22
+	// Specifies a tablet pointer event.
+	KCGEventTabletPointer CGEventType = 23
+	// Specifies a tablet proximity event.
+	KCGEventTabletProximity CGEventType = 24
+	// Specifies a mouse down event with one of buttons 2-31.
+	KCGEventOtherMouseDown CGEventType = 25
+	// Specifies a mouse up event with one of buttons 2-31.
+	KCGEventOtherMouseUp CGEventType = 26
+	// Specifies a mouse drag event with one of buttons 2-31 down.
+	KCGEventOtherMouseDragged CGEventType = 27
+	// Specifies an event indicating the event tap is disabled because of timeout.
+	KCGEventTapDisabledByTimeout CGEventType = 4294967294
+	// Specifies an event indicating the event tap is disabled because of user input.
 	KCGEventTapDisabledByUserInput CGEventType = 4294967295
 )
 
@@ -789,11 +954,15 @@ func (e CGEventType) String() string {
 	}
 }
 
+// Possible formats for a PostScript font subset.
 type CGFontPostScriptFormat int64
 
 const (
-	KCGFontPostScriptFormatType1  CGFontPostScriptFormat = 1
-	KCGFontPostScriptFormatType3  CGFontPostScriptFormat = 3
+	// A Type 1 font format.
+	KCGFontPostScriptFormatType1 CGFontPostScriptFormat = 1
+	// A Type 3 PostScript format.
+	KCGFontPostScriptFormatType3 CGFontPostScriptFormat = 3
+	// A constant representing a Type 42 font format.
 	KCGFontPostScriptFormatType42 CGFontPostScriptFormat = 42
 )
 
@@ -810,12 +979,15 @@ func (e CGFontPostScriptFormat) String() string {
 	}
 }
 
+// Drawing locations for gradients.
 // Bitmask — values may be combined with |.
 type CGGradientDrawingOptions int64
 
 const (
+	// The fill should extend beyond the starting location. The color that extends beyond the starting point is the solid color defined by the CGGradientRef object to be at location 0.
 	KCGGradientDrawsBeforeStartLocation CGGradientDrawingOptions = 1
-	KCGGradientDrawsAfterEndLocation    CGGradientDrawingOptions = 2
+	// The fill should extend beyond the ending location. The color that extends beyond the ending point is the solid color defined by the CGGradientRef object to be at location 1.
+	KCGGradientDrawsAfterEndLocation CGGradientDrawingOptions = 2
 )
 
 func (e CGGradientDrawingOptions) String() string {
@@ -832,17 +1004,26 @@ func (e CGGradientDrawingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Storage options for alpha component data.
 type CGImageAlphaInfo int64
 
 const (
-	KCGImageAlphaNone               CGImageAlphaInfo = 0
-	KCGImageAlphaPremultipliedLast  CGImageAlphaInfo = 1
+	// There is no alpha channel.
+	KCGImageAlphaNone CGImageAlphaInfo = 0
+	// The alpha component is stored in the least significant bits of each pixel and the color components have already been multiplied by this alpha value. For example, premultiplied RGBA.
+	KCGImageAlphaPremultipliedLast CGImageAlphaInfo = 1
+	// The alpha component is stored in the most significant bits of each pixel and the color components have already been multiplied by this alpha value. For example, premultiplied ARGB.
 	KCGImageAlphaPremultipliedFirst CGImageAlphaInfo = 2
-	KCGImageAlphaLast               CGImageAlphaInfo = 3
-	KCGImageAlphaFirst              CGImageAlphaInfo = 4
-	KCGImageAlphaNoneSkipLast       CGImageAlphaInfo = 5
-	KCGImageAlphaNoneSkipFirst      CGImageAlphaInfo = 6
-	KCGImageAlphaOnly               CGImageAlphaInfo = 7
+	// The alpha component is stored in the least significant bits of each pixel. For example, non-premultiplied RGBA.
+	KCGImageAlphaLast CGImageAlphaInfo = 3
+	// The alpha component is stored in the most significant bits of each pixel. For example, non-premultiplied ARGB.
+	KCGImageAlphaFirst CGImageAlphaInfo = 4
+	// There is no alpha channel.
+	KCGImageAlphaNoneSkipLast CGImageAlphaInfo = 5
+	// There is no alpha channel. If the total size of the pixel is greater than the space required for the number of color components in the color space, the most significant bits are ignored.
+	KCGImageAlphaNoneSkipFirst CGImageAlphaInfo = 6
+	// There is no color data, only an alpha channel.
+	KCGImageAlphaOnly CGImageAlphaInfo = 7
 )
 
 func (e CGImageAlphaInfo) String() string {
@@ -948,14 +1129,20 @@ func (e CGImagePixelFormatInfo) String() string {
 	}
 }
 
+// Levels of interpolation quality for rendering an image.
 type CGInterpolationQuality int64
 
 const (
+	// The default level of quality.
 	KCGInterpolationDefault CGInterpolationQuality = 0
-	KCGInterpolationNone    CGInterpolationQuality = 1
-	KCGInterpolationLow     CGInterpolationQuality = 2
-	KCGInterpolationMedium  CGInterpolationQuality = 4
-	KCGInterpolationHigh    CGInterpolationQuality = 3
+	// No interpolation.
+	KCGInterpolationNone CGInterpolationQuality = 1
+	// A low level of interpolation quality. This setting may speed up image rendering.
+	KCGInterpolationLow CGInterpolationQuality = 2
+	// A medium level of interpolation quality. This setting is slower than the low setting but faster than the high setting.
+	KCGInterpolationMedium CGInterpolationQuality = 4
+	// A high level of interpolation quality. This setting may slow down image rendering.
+	KCGInterpolationHigh CGInterpolationQuality = 3
 )
 
 func (e CGInterpolationQuality) String() string {
@@ -975,11 +1162,15 @@ func (e CGInterpolationQuality) String() string {
 	}
 }
 
+// Styles for rendering the endpoint of a stroked line.
 type CGLineCap int64
 
 const (
-	KCGLineCapButt   CGLineCap = 0
-	KCGLineCapRound  CGLineCap = 1
+	// A line with a squared-off end. Core Graphics draws the line to extend only to the exact endpoint of the path. This is the default.
+	KCGLineCapButt CGLineCap = 0
+	// A line with a rounded end. Core Graphics draws the line to extend beyond the endpoint of the path. The line ends with a semicircular arc with a radius of 1/2 the line’s width, centered on the endpoint.
+	KCGLineCapRound CGLineCap = 1
+	// A line with a squared-off end. Core Graphics extends the line beyond the endpoint of the path for a distance equal to half the line width.
 	KCGLineCapSquare CGLineCap = 2
 )
 
@@ -996,11 +1187,14 @@ func (e CGLineCap) String() string {
 	}
 }
 
+// Junction types for stroked lines.
 type CGLineJoin int64
 
 const (
 	KCGLineJoinMiter CGLineJoin = 0
+	// A join with a rounded end. Core Graphics draws the line to extend beyond the endpoint of the path. The line ends with a semicircular arc with a radius of 1/2 the line’s width, centered on the endpoint.
 	KCGLineJoinRound CGLineJoin = 1
+	// A join with a squared-off end. Core Graphics draws the line to extend beyond the endpoint of the path, for a distance of 1/2 the line’s width.
 	KCGLineJoinBevel CGLineJoin = 2
 )
 
@@ -1017,6 +1211,7 @@ func (e CGLineJoin) String() string {
 	}
 }
 
+// Constants that specify buttons on a one, two, or three-button mouse.
 type CGMouseButton int64
 
 const (
@@ -1084,14 +1279,20 @@ func (e CGPDFAccessPermissions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Box types for a PDF page.
 type CGPDFBox int64
 
 const (
+	// The page media box—a rectangle, expressed in default user space units, that defines the boundaries of the physical medium on which the page is intended to be displayed or printed
 	KCGPDFMediaBox CGPDFBox = 0
-	KCGPDFCropBox  CGPDFBox = 1
+	// The page crop box—a rectangle, expressed in default user space units, that defines the visible region of default user space. When the page is displayed or printed, its contents are to be clipped to this rectangle.
+	KCGPDFCropBox CGPDFBox = 1
+	// The page bleed box—a rectangle, expressed in default user space units, that defines the region to which the contents of the page should be clipped when output in a production environment.
 	KCGPDFBleedBox CGPDFBox = 2
-	KCGPDFTrimBox  CGPDFBox = 3
-	KCGPDFArtBox   CGPDFBox = 4
+	// The page trim box—a rectangle, expressed in default user space units, that defines the intended dimensions of the finished page after trimming.
+	KCGPDFTrimBox CGPDFBox = 3
+	// The page art box—a rectangle, expressed in default user space units, defining the extent of the page’s meaningful content (including potential white space) as intended by the page’s creator.
+	KCGPDFArtBox CGPDFBox = 4
 )
 
 func (e CGPDFBox) String() string {
@@ -1111,12 +1312,16 @@ func (e CGPDFBox) String() string {
 	}
 }
 
+// The encoding format of PDF data.
 type CGPDFDataFormat int64
 
 const (
-	CGPDFDataFormatRaw         CGPDFDataFormat = 0
+	// The data stream is not encoded.
+	CGPDFDataFormatRaw CGPDFDataFormat = 0
+	// The data stream is encoded in JPEG format.
 	CGPDFDataFormatJPEGEncoded CGPDFDataFormat = 1
-	CGPDFDataFormatJPEG2000    CGPDFDataFormat = 2
+	// The data stream is encoded in JPEG-2000 format.
+	CGPDFDataFormatJPEG2000 CGPDFDataFormat = 2
 )
 
 func (e CGPDFDataFormat) String() string {
@@ -1132,18 +1337,28 @@ func (e CGPDFDataFormat) String() string {
 	}
 }
 
+// Types of PDF object.
 type CGPDFObjectType int64
 
 const (
-	KCGPDFObjectTypeNull       CGPDFObjectType = 1
-	KCGPDFObjectTypeBoolean    CGPDFObjectType = 2
-	KCGPDFObjectTypeInteger    CGPDFObjectType = 3
-	KCGPDFObjectTypeReal       CGPDFObjectType = 4
-	KCGPDFObjectTypeName       CGPDFObjectType = 5
-	KCGPDFObjectTypeString     CGPDFObjectType = 6
-	KCGPDFObjectTypeArray      CGPDFObjectType = 7
+	// The type for a PDF null.
+	KCGPDFObjectTypeNull CGPDFObjectType = 1
+	// The type for a PDF Boolean.
+	KCGPDFObjectTypeBoolean CGPDFObjectType = 2
+	// The type for a PDF integer.
+	KCGPDFObjectTypeInteger CGPDFObjectType = 3
+	// The type for a PDF real.
+	KCGPDFObjectTypeReal CGPDFObjectType = 4
+	// Type for a PDF name.
+	KCGPDFObjectTypeName CGPDFObjectType = 5
+	// The type for a PDF string.
+	KCGPDFObjectTypeString CGPDFObjectType = 6
+	// Type for a PDF array.
+	KCGPDFObjectTypeArray CGPDFObjectType = 7
+	// The type for a PDF dictionary.
 	KCGPDFObjectTypeDictionary CGPDFObjectType = 8
-	KCGPDFObjectTypeStream     CGPDFObjectType = 9
+	// The type for a PDF stream.
+	KCGPDFObjectTypeStream CGPDFObjectType = 9
 )
 
 func (e CGPDFObjectType) String() string {
@@ -1333,13 +1548,19 @@ func (e CGPDFTagType) String() string {
 	}
 }
 
+// Options for rendering a path.
 type CGPathDrawingMode int64
 
 const (
-	KCGPathFill         CGPathDrawingMode = 0
-	KCGPathEOFill       CGPathDrawingMode = 1
-	KCGPathStroke       CGPathDrawingMode = 2
-	KCGPathFillStroke   CGPathDrawingMode = 3
+	// Render the area contained within the path using the non-zero winding number rule.
+	KCGPathFill CGPathDrawingMode = 0
+	// Render the area within the path using the even-odd rule.
+	KCGPathEOFill CGPathDrawingMode = 1
+	// Render a line along the path.
+	KCGPathStroke CGPathDrawingMode = 2
+	// First fill and then stroke the path, using the nonzero winding number rule.
+	KCGPathFillStroke CGPathDrawingMode = 3
+	// First fill and then stroke the path, using the even-odd rule.
 	KCGPathEOFillStroke CGPathDrawingMode = 4
 )
 
@@ -1360,12 +1581,16 @@ func (e CGPathDrawingMode) String() string {
 	}
 }
 
+// Different methods for rendering a tiled pattern.
 type CGPatternTiling int64
 
 const (
-	KCGPatternTilingNoDistortion                     CGPatternTiling = 0
+	// The pattern cell is not distorted when painted.The spacing between pattern cells may vary by as much as 1 devicepixel.
+	KCGPatternTilingNoDistortion CGPatternTiling = 0
+	// Pattern cells are spaced consistently. Thepattern cell may be distorted by as much as 1 device pixel whenthe pattern is painted.
 	KCGPatternTilingConstantSpacingMinimalDistortion CGPatternTiling = 1
-	KCGPatternTilingConstantSpacing                  CGPatternTiling = 2
+	// Pattern cells are spaced consistently, as with kCGPatternTilingConstantSpacingMinimalDistortion.The pattern cell may be distorted additionally to permit a moreefficient implementation.
+	KCGPatternTilingConstantSpacing CGPatternTiling = 2
 )
 
 func (e CGPatternTiling) String() string {
@@ -1381,11 +1606,14 @@ func (e CGPatternTiling) String() string {
 	}
 }
 
+// Types of screen-update operations.
 // Bitmask — values may be combined with |.
 type CGScreenUpdateOperation int64
 
 const (
-	KCGScreenUpdateOperationRefresh                    CGScreenUpdateOperation = 0
+	// A screen-refresh operation.
+	KCGScreenUpdateOperationRefresh CGScreenUpdateOperation = 0
+	// A screen-move operation.
 	KCGScreenUpdateOperationMove                       CGScreenUpdateOperation = 1
 	KCGScreenUpdateOperationReducedDirtyRectangleCount CGScreenUpdateOperation = 2147483648
 )
@@ -1404,11 +1632,14 @@ func (e CGScreenUpdateOperation) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that specify the unit of measurement for a scrolling event.
 type CGScrollEventUnit int64
 
 const (
+	// Specifies that the unit of measurement is pixels.
 	KCGScrollEventUnitPixel CGScrollEventUnit = 0
-	KCGScrollEventUnitLine  CGScrollEventUnit = 1
+	// Specifies that the unit of measurement is lines.
+	KCGScrollEventUnitLine CGScrollEventUnit = 1
 )
 
 func (e CGScrollEventUnit) String() string {
@@ -1422,17 +1653,26 @@ func (e CGScrollEventUnit) String() string {
 	}
 }
 
+// Modes for rendering text.
 type CGTextDrawingMode int64
 
 const (
-	KCGTextFill           CGTextDrawingMode = 0
-	KCGTextStroke         CGTextDrawingMode = 1
-	KCGTextFillStroke     CGTextDrawingMode = 2
-	KCGTextInvisible      CGTextDrawingMode = 3
-	KCGTextFillClip       CGTextDrawingMode = 4
-	KCGTextStrokeClip     CGTextDrawingMode = 5
+	// Perform a fill operation on the text.
+	KCGTextFill CGTextDrawingMode = 0
+	// Perform a stroke operation on the text.
+	KCGTextStroke CGTextDrawingMode = 1
+	// Perform fill, then stroke operations on the text.
+	KCGTextFillStroke CGTextDrawingMode = 2
+	// Do not draw the text, but do update the text position.
+	KCGTextInvisible CGTextDrawingMode = 3
+	// Perform a fill operation, then intersect the text with the current clipping path.
+	KCGTextFillClip CGTextDrawingMode = 4
+	// Perform a stroke operation, then intersect the text with the current clipping path.
+	KCGTextStrokeClip CGTextDrawingMode = 5
+	// Perform fill then stroke operations, then intersect the text with the current clipping path.
 	KCGTextFillStrokeClip CGTextDrawingMode = 6
-	KCGTextClip           CGTextDrawingMode = 7
+	// Specifies to intersect the text with the current clipping path. This mode does not paint the text.
+	KCGTextClip CGTextDrawingMode = 7
 )
 
 func (e CGTextDrawingMode) String() string {
@@ -1458,12 +1698,16 @@ func (e CGTextDrawingMode) String() string {
 	}
 }
 
+// Text encodings for fonts.
+//
 // Deprecated: No longer supported
 type CGTextEncoding int64
 
 const (
+	// The built-in encoding of the font.
 	KCGEncodingFontSpecific CGTextEncoding = 0
-	KCGEncodingMacRoman     CGTextEncoding = 1
+	// The MacRoman encoding. MacRoman is an ASCII variant originally created for use in the Mac OS, in which characters 127 and lower are ASCII, and characters 128 and higher are non-English characters and symbols.
+	KCGEncodingMacRoman CGTextEncoding = 1
 )
 
 func (e CGTextEncoding) String() string {
@@ -1507,6 +1751,7 @@ func (e CGToneMapping) String() string {
 	}
 }
 
+// The data type to use to specify the type of image to be generated for a window.
 // Bitmask — values may be combined with |.
 type CGWindowImageOption int64
 
@@ -1515,8 +1760,10 @@ const (
 	KCGWindowImageBoundsIgnoreFraming CGWindowImageOption = 1
 	KCGWindowImageShouldBeOpaque      CGWindowImageOption = 2
 	KCGWindowImageOnlyShadows         CGWindowImageOption = 4
-	KCGWindowImageBestResolution      CGWindowImageOption = 8
-	KCGWindowImageNominalResolution   CGWindowImageOption = 16
+	// When capturing the window, return the best image resolution. The returned image size may be different than the screen size.
+	KCGWindowImageBestResolution CGWindowImageOption = 8
+	// When capturing the window, return the nominal image resolution. The returned image size is the same as the screen size.
+	KCGWindowImageNominalResolution CGWindowImageOption = 16
 )
 
 func (e CGWindowImageOption) String() string {
@@ -1542,6 +1789,7 @@ func (e CGWindowImageOption) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Keys that represent the standard window levels in macOS. Quartz includes these keys to support application frameworks like Cocoa. Applications do not need to use them directly.
 type CGWindowLevelKey int64
 
 const (
@@ -1620,6 +1868,7 @@ func (e CGWindowLevelKey) String() string {
 	}
 }
 
+// The data type used to specify the options for gathering a list of windows.
 // Bitmask — values may be combined with |.
 type CGWindowListOption int64
 

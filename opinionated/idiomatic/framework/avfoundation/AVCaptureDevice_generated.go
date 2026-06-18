@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a hardware or virtual capture device like a camera or microphone.
+//
 // CaptureDevice wraps [raw.AVCaptureDevice] with a fluent Go API.
 type CaptureDevice struct {
 	inner *raw.AVCaptureDevice
@@ -64,7 +66,7 @@ func (x *CaptureDevice) WithActiveVideoMaxFrameDuration(activeVideoMaxFrameDurat
 	return x
 }
 
-// Indicates whether the receiver should enable auto video frame rate. When you enable this property, the device automatically adjusts the active frame rate, depending on light level. Under low light conditions, it decreases the frame rate to properly expose the scene. For formats with a maximum frame rate of 30 fps, the device switches the frame rate between 30 - 24. For formats with a maximum frame rate of 60 fps, the device switches the frame rate between 60 - 30 - 24. Setting this property throws an `NSInvalidArgumentException` if the active format's “AVCaptureDeviceFormat/autoVideoFrameRateSupported“ returns `false`. When you change the device's active format, this property resets to its default value of `false`. If you set this property to `true`, frame rate is under device control, and you may not set “activeVideoMinFrameDuration“ or “activeVideoMaxFrameDuration“. Doing so throws an `NSInvalidArgumentException`. - Note: Setting this property to `true` throws an `NSInvalidArgumentException` if “videoFrameDurationLocked“ or “followingExternalSyncDevice“ are `true`.
+// A Boolean value that indicates whether the capture device performs automatic video frame rate adjustments.
 //
 // WithAutoVideoFrameRateEnabled sets the autoVideoFrameRateEnabled property and returns the receiver for chaining.
 func (x *CaptureDevice) WithAutoVideoFrameRateEnabled(autoVideoFrameRateEnabled bool) *CaptureDevice {
@@ -80,7 +82,7 @@ func (x *CaptureDevice) WithActiveInputSource(activeInputSource *CaptureDeviceIn
 	return x
 }
 
-// @property fallbackPrimaryConstituentDevices @abstract The constituent devices that may be used as a fallback device when a constituent device with a longer focal length becomes limited by its light sensitivity or minimum focus distance. @discussion This may only be set to the supportedFallbackPrimaryConstituentDevices or a subset thereof. By default this is set to all supportedFallbackPrimaryConstituentDevices. This property will throw an NSInvalidArgumentException if the array includes any device not reported in supportedFallbackPrimaryConstituentDevices. This property is key-value observable.
+// The fallback devices to use when a constituent device with a longer focal length becomes limited by its light sensitivity or minimum focus distance.
 //
 // WithFallbackPrimaryConstituentDevices sets the collection, converting the Go slice to an NSArray.
 func (x *CaptureDevice) WithFallbackPrimaryConstituentDevices(items ...*raw.AVCaptureDevice) *CaptureDevice {
@@ -188,14 +190,14 @@ func (x *CaptureDevice) WithCenterStageRectOfInterest(centerStageRectOfInterest 
 	return x
 }
 
-// @method hasMediaType: @abstract Returns whether the receiver provides media with the given media type. @param mediaType A media type, such as AVMediaTypeVideo, AVMediaTypeAudio, or AVMediaTypeMuxed. @result YES if the device outputs the given media type, NO otherwise. @discussion Media type constants are defined in AVMediaFormat.h.
+// Returns a Boolean value that indicates whether the device captures media of a particular type.
 //
 // HasMediaType calls the underlying HasMediaType.
 func (x *CaptureDevice) HasMediaType(mediaType *foundation.NSString) bool {
 	return x.inner.HasMediaType(mediaType)
 }
 
-// @method lockForConfiguration: @abstract Requests exclusive access to configure device hardware properties. @param outError On return, if the device could not be locked, points to an NSError describing why the failure occurred. @result A BOOL indicating whether the device was successfully locked for configuration. @discussion In order to set hardware properties on an AVCaptureDevice, such as focusMode and exposureMode, clients must first acquire a lock on the device. Clients should only hold the device lock if they require settable device properties to remain unchanged. Holding the device lock unnecessarily may degrade capture quality in other applications sharing the device.
+// Requests exclusive access to configure device hardware properties.
 //
 // LockForConfiguration returns any validation error.
 func (x *CaptureDevice) LockForConfiguration() error {
@@ -203,14 +205,14 @@ func (x *CaptureDevice) LockForConfiguration() error {
 	return err
 }
 
-// @method unlockForConfiguration @abstract Release exclusive control over device hardware properties. @discussion This method should be called to match an invocation of lockForConfiguration: when an application no longer needs to keep device hardware properties from changing automatically.
+// Releases exclusive control over device hardware properties.
 //
 // UnlockForConfiguration calls the underlying UnlockForConfiguration.
 func (x *CaptureDevice) UnlockForConfiguration() {
 	x.inner.UnlockForConfiguration()
 }
 
-// @method supportsAVCaptureSessionPreset: @abstract Returns whether the receiver can be used in an AVCaptureSession configured with the given preset. @param preset An AVCaptureSession preset. @result YES if the receiver can be used with the given preset, NO otherwise. @discussion An AVCaptureSession instance can be associated with a preset that configures its inputs and outputs to fulfill common use cases. This method can be used to determine if the receiver can be used in a capture session with the given preset. Presets are defined in AVCaptureSession.h.
+// Returns a Boolean value that indicates whether you can use the device with capture session configured with the specified preset.
 //
 // SupportsAVCaptureSessionPreset calls the underlying SupportsAVCaptureSessionPreset.
 func (x *CaptureDevice) SupportsAVCaptureSessionPreset(preset *foundation.NSString) bool {
@@ -438,7 +440,7 @@ func (x *CaptureDevice) DeviceType() string {
 	return purego.GoString(_r.Ptr())
 }
 
-// @method setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions: @abstract The switching behavior and conditions, unless overwritten via -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions]. @param switchingBehavior The desired switching behavior. @param restrictedSwitchingBehaviorConditions The desired conditions for restricting camera switching. This must be set to AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone whenever switchingBehavior is not equal to AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted. @discussion The switching behavior may be overridden on the AVCaptureMovieFileOutput while recording (see -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions]). This method throws an NSInvalidArgumentException if constituent device switching is not supported by the receiver or if restrictedSwitchingBehaviorConditions is not equal to AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone and switchingBehavior is not equal to AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted.
+// Sets the switching behavior of the primary constituent device.
 //
 // SetPrimaryConstituentDeviceSwitchingBehaviorRestrictedSwitchingBehaviorConditions calls the underlying SetPrimaryConstituentDeviceSwitchingBehaviorRestrictedSwitchingBehaviorConditions.
 func (x *CaptureDevice) SetPrimaryConstituentDeviceSwitchingBehaviorRestrictedSwitchingBehaviorConditions(switchingBehavior AVCapturePrimaryConstituentDeviceSwitchingBehavior, restrictedSwitchingBehaviorConditions AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) {
@@ -616,21 +618,21 @@ func (x *CaptureDevice) DefaultRectForFocusPointOfInterest(pointOfInterest coref
 	return x.inner.DefaultRectForFocusPointOfInterest(pointOfInterest)
 }
 
-// Focus on and start tracking a detected object. - Parameter detectedObjectID: The ID of the detected object. - Parameter focusMode: Specify whether to focus strongly or weakly.
+// Focus on and start tracking a detected object.
 //
 // SetCinematicVideoTrackingFocusWithDetectedObjectIDFocusMode calls the underlying SetCinematicVideoTrackingFocusWithDetectedObjectIDFocusMode.
 func (x *CaptureDevice) SetCinematicVideoTrackingFocusWithDetectedObjectIDFocusMode(detectedObjectID int, focusMode AVCaptureCinematicVideoFocusMode) {
 	x.inner.SetCinematicVideoTrackingFocusWithDetectedObjectIDFocusMode(detectedObjectID, raw.AVCaptureCinematicVideoFocusMode(focusMode))
 }
 
-// Focus on and start tracking an object if it can be detected at the region specified by the point. - Parameter point: A normalized point of interest (i.e., [0,1]) in the coordinate space of the device. - Parameter focusMode: Specify whether to focus strongly or weakly.
+// Focus on and start tracking an object if it can be detected at the region specified by the point.
 //
 // SetCinematicVideoTrackingFocusAtPointFocusMode calls the underlying SetCinematicVideoTrackingFocusAtPointFocusMode.
 func (x *CaptureDevice) SetCinematicVideoTrackingFocusAtPointFocusMode(point corefoundation.CGPoint, focusMode AVCaptureCinematicVideoFocusMode) {
 	x.inner.SetCinematicVideoTrackingFocusAtPointFocusMode(point, raw.AVCaptureCinematicVideoFocusMode(focusMode))
 }
 
-// Fix focus at a distance. - Parameter point: A normalized point of interest (i.e., [0,1]) in the coordinate space of the device. - Parameter focusMode: Specify whether to focus strongly or weakly. The distance at which focus is set is determined internally using signals such as depth data.
+// Fix focus at a distance.
 //
 // SetCinematicVideoFixedFocusAtPointFocusMode calls the underlying SetCinematicVideoFixedFocusAtPointFocusMode.
 func (x *CaptureDevice) SetCinematicVideoFixedFocusAtPointFocusMode(point corefoundation.CGPoint, focusMode AVCaptureCinematicVideoFocusMode) {
@@ -948,7 +950,7 @@ func (x *CaptureDevice) CinematicVideoCaptureSceneMonitoringStatuses() *foundati
 	return x.inner.CinematicVideoCaptureSceneMonitoringStatuses()
 }
 
-// Updates the dynamic aspect ratio of the device. - Parameter dynamicAspectRatio: The new “AVCaptureAspectRatio“ the device should output. - Parameter handler: A block called by the device when `dynamicAspectRatio` is set to the value specified. If you call “setDynamicAspectRatio:completionHandler:“ multiple times, the completion handlers are called in FIFO order. The block receives a timestamp which matches that of the first buffer to which all settings have been applied. Note that the timestamp is synchronized to the device clock, and thus must be converted to the “AVCaptureSession/synchronizationClock“ prior to comparison with the timestamps of buffers delivered via an “AVCaptureVideoDataOutput“. You may pass `nil` for the `handler` parameter if you do not need to know when the operation completes. This is the only way of setting “dynamicAspectRatio“. This method throws an `NSInvalidArgumentException` if `dynamicAspectRatio` is not a supported aspect ratio found in the device's activeFormat's “AVCaptureDeviceFormat/supportedDynamicAspectRatios“. This method throws an `NSGenericException` if you call it without first obtaining exclusive access to the device using “AVCaptureDevice/lockForConfiguration:“.
+// Updates the dynamic aspect ratio of the device.
 //
 // SetDynamicAspectRatioCompletionHandler calls the underlying SetDynamicAspectRatioCompletionHandler.
 func (x *CaptureDevice) SetDynamicAspectRatioCompletionHandler(dynamicAspectRatio *foundation.NSString, handler objc.Block) {
@@ -985,7 +987,7 @@ func (x *CaptureDevice) IsStudioLightActive() bool {
 	return x.inner.IsStudioLightActive()
 }
 
-// Specify whether to enable camera lens smudge detection, and the interval time between each run of detections. - Parameter cameraLensSmudgeDetectionEnabled: Specify whether camera lens smudge detection should be enabled. - Parameter detectionInterval: The detection running interval if detection is enabled. Each run of detection processes frames over a short period, and produces one detection result. Use `detectionInterval` to specify the interval time between each run of detections. For example, when “cameraLensSmudgeDetectionEnabled“ is set to `true` and `detectionInterval` is set to 1 minute, detection runs once per minute, and updates “AVCaptureCameraLensSmudgeDetectionStatus“. If `detectionInterval` is set to “kCMTimeInvalid“, detection runs only once after the session starts. If `detectionInterval` is set to “kCMTimeZero“, detection runs continuously. “AVCaptureDevice“ throws an `NSInvalidArgumentException` if the “AVCaptureDeviceFormat/cameraLensSmudgeDetectionSupported“ property on the current active format returns `false`. Enabling detection requires a lengthy reconfiguration of the capture render pipeline, so you should enable detection before calling “AVCaptureSession/startRunning“ or within “AVCaptureSession/beginConfiguration“ and “AVCaptureSession/commitConfiguration“ while running.
+// Specify whether to enable camera lens smudge detection, and the interval time between each run of detections.
 //
 // SetCameraLensSmudgeDetectionEnabledDetectionInterval calls the underlying SetCameraLensSmudgeDetectionEnabledDetectionInterval.
 func (x *CaptureDevice) SetCameraLensSmudgeDetectionEnabledDetectionInterval(cameraLensSmudgeDetectionEnabled bool, detectionInterval coremedia.CMTime) {

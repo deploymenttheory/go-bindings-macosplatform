@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing metrics about disk usage.
+//
 // DiskIOMetric wraps [raw.MXDiskIOMetric] with a fluent Go API.
 type DiskIOMetric struct {
 	inner *raw.MXDiskIOMetric

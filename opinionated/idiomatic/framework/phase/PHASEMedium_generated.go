@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A property or quality of the environment that affects how sound travels.
+//
 // Medium wraps [raw.PHASEMedium] with a fluent Go API.
 type Medium struct {
 	inner *raw.PHASEMedium
@@ -29,7 +31,7 @@ func MediumFromID(id objc.ID) *Medium {
 	return &Medium{inner: raw.PHASEMediumFromID(id)}
 }
 
-// @method initWithEngine:preset @abstract Initialize a new medium from a preset.
+// Creates a medium.
 //
 // NewMediumWithEnginePreset creates a new [Medium].
 func NewMediumWithEnginePreset(engine *raw.PHASEEngine, preset PHASEMediumPreset) *Medium {

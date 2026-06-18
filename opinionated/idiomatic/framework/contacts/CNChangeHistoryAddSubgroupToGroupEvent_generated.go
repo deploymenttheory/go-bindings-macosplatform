@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a user adding a subgroup to a group.
+//
 // ChangeHistoryAddSubgroupToGroupEvent wraps [raw.CNChangeHistoryAddSubgroupToGroupEvent] with a fluent Go API.
 type ChangeHistoryAddSubgroupToGroupEvent struct {
 	inner *raw.CNChangeHistoryAddSubgroupToGroupEvent

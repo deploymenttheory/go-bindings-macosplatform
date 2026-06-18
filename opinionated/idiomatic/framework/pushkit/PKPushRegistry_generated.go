@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that requests the delivery and handles the receipt of PushKit notifications.
+//
 // PushRegistry wraps [raw.PKPushRegistry] with a fluent Go API.
 type PushRegistry struct {
 	inner *raw.PKPushRegistry
@@ -30,7 +32,7 @@ func PushRegistryFromID(id objc.ID) *PushRegistry {
 	return &PushRegistry{inner: raw.PKPushRegistryFromID(id)}
 }
 
-// Creates a push registry with the specified dispatch queue. - Parameters: - queue: The dispatch queue on which to execute the delegate methods. It is recommended that you specify a serial queue for this parameter. Specify `nil` to execute the delegate methods on the app’s main queue. - Returns: A `PKPushRegistry` object that you can use to register for push tokens and use to receive notifications.
+// Creates a push registry with the specified dispatch queue.
 //
 // NewPushRegistryWithQueue creates a new [PushRegistry].
 func NewPushRegistryWithQueue(queue *foundation.NSObject) *PushRegistry {
@@ -39,7 +41,7 @@ func NewPushRegistryWithQueue(queue *foundation.NSObject) *PushRegistry {
 	return &PushRegistry{inner: raw.PKPushRegistryFromID(_id)}
 }
 
-// The delegate object that receives notifications coming from the push registry object. You must assign a valid object to this property before modifying the “PushKit/PKPushRegistry/desiredPushTypes“ property. A valid delegate object is required to receive push tokens and payload data from incoming pushes. For more information about the methods of the `PKPushRegistryDelegate` protocol, see “PushKit/PKPushRegistryDelegate“.
+// The delegate object that receives notifications coming from the push registry object.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PushRegistry) WithDelegate(delegate raw.PKPushRegistryDelegate) *PushRegistry {
@@ -47,7 +49,7 @@ func (x *PushRegistry) WithDelegate(delegate raw.PKPushRegistryDelegate) *PushRe
 	return x
 }
 
-// Registers the push types for this push registry object. When you assign a value to this property, the push registry object makes a registration request with the PushKit server. This request is asynchronous, and the success or failure of the request is reported to your registery's delegate object. For a successful registration, PushKit delivers a push token to the delegate. Use that token to generate push requests from your server. For a list of push types that you may include in the set, see “PushKit/PKPushType“.
+// Registers the push types for this push registry object.
 //
 // WithDesiredPushTypes sets the desiredPushTypes property and returns the receiver for chaining.
 func (x *PushRegistry) WithDesiredPushTypes(desiredPushTypes *foundation.NSSet[*foundation.NSString]) *PushRegistry {
@@ -55,7 +57,7 @@ func (x *PushRegistry) WithDesiredPushTypes(desiredPushTypes *foundation.NSSet[*
 	return x
 }
 
-// Retrieves the locally cached push token for the specified push type. If registration for a specific push type is successful, the push registry delivers the corresponding push token to its delegate and adds a copy of the token to its local cache. Use this method to retrieve the token at a later time. - Parameters: - type: A push type requested by this push registry object. For a list of possible types, see “PushKit/PKPushType“. - Returns: The push token used to send pushes to the device or `nil` if no token is available for the specified type.
+// Retrieves the locally cached push token for the specified push type.
 //
 // PushTokenForType calls the underlying PushTokenForType.
 func (x *PushRegistry) PushTokenForType(type_ *foundation.NSString) *foundation.NSData {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Contains the card data needed to add a card to Apple Pay.
+//
 // AddPaymentPassRequest wraps [raw.PKAddPaymentPassRequest] with a fluent Go API.
 type AddPaymentPassRequest struct {
 	inner *raw.PKAddPaymentPassRequest
@@ -36,18 +38,24 @@ func NewAddPaymentPassRequest() *AddPaymentPassRequest {
 	return &AddPaymentPassRequest{inner: raw.PKAddPaymentPassRequestFromID(_id)}
 }
 
+// An encrypted JSON file containing the sensitive information needed to add a card to Apple Pay.
+//
 // WithEncryptedPassData sets the encryptedPassData property and returns the receiver for chaining.
 func (x *AddPaymentPassRequest) WithEncryptedPassData(encryptedPassData *foundation.NSData) *AddPaymentPassRequest {
 	x.inner.SetEncryptedPassData(encryptedPassData)
 	return x
 }
 
+// The request’s activation data.
+//
 // WithActivationData sets the activationData property and returns the receiver for chaining.
 func (x *AddPaymentPassRequest) WithActivationData(activationData *foundation.NSData) *AddPaymentPassRequest {
 	x.inner.SetActivationData(activationData)
 	return x
 }
 
+// The ephemeral public key used by elliptic curve cryptography (ECC).
+//
 // WithEphemeralPublicKey sets the ephemeralPublicKey property and returns the receiver for chaining.
 func (x *AddPaymentPassRequest) WithEphemeralPublicKey(ephemeralPublicKey *foundation.NSData) *AddPaymentPassRequest {
 	x.inner.SetEphemeralPublicKey(ephemeralPublicKey)

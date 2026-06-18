@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The user’s response to an actionable notification.
+//
 // NotificationResponse wraps [raw.UNNotificationResponse] with a fluent Go API.
 type NotificationResponse struct {
 	inner *raw.UNNotificationResponse

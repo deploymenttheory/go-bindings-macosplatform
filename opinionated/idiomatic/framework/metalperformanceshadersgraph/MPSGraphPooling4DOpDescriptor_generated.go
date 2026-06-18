@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// The class that defines the parameters for a 4D pooling operation.
+//
 // GraphPooling4DOpDescriptor wraps [raw.MPSGraphPooling4DOpDescriptor] with a fluent Go API.
 type GraphPooling4DOpDescriptor struct {
 	inner *raw.MPSGraphPooling4DOpDescriptor
@@ -39,7 +41,7 @@ func NewGraphPooling4DOpDescriptor() *GraphPooling4DOpDescriptor {
 	return &GraphPooling4DOpDescriptor{inner: raw.MPSGraphPooling4DOpDescriptorFromID(_id)}
 }
 
-// Defines the pooling window size. Must be four numbers, one for each spatial dimension, fastest running index last.
+// Defines the pooling window size.
 //
 // WithKernelSizes sets the collection, converting the Go slice to an NSArray.
 func (x *GraphPooling4DOpDescriptor) WithKernelSizes(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor {
@@ -59,7 +61,7 @@ func (x *GraphPooling4DOpDescriptor) WithKernelSizes(items ...*foundation.NSNumb
 	return x
 }
 
-// Defines strides for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last. Default value: `@[ @1, @1, @1, @1 ]`
+// Defines strides for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last.
 //
 // WithStrides sets the collection, converting the Go slice to an NSArray.
 func (x *GraphPooling4DOpDescriptor) WithStrides(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor {
@@ -79,7 +81,7 @@ func (x *GraphPooling4DOpDescriptor) WithStrides(items ...*foundation.NSNumber) 
 	return x
 }
 
-// Defines dilation rates for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last. Default value: `@[ @1, @1, @1, @1 ]`
+// Defines dilation rates for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last.
 //
 // WithDilationRates sets the collection, converting the Go slice to an NSArray.
 func (x *GraphPooling4DOpDescriptor) WithDilationRates(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor {
@@ -99,7 +101,7 @@ func (x *GraphPooling4DOpDescriptor) WithDilationRates(items ...*foundation.NSNu
 	return x
 }
 
-// Defines padding values for spatial dimensions which must be eight numbers, two for each spatial dimension. For example `paddingValues[0]` defines the explicit padding amount before the first spatial dimension (slowest running index of spatial dimensions), `paddingValues[1]` defines the padding amount after the first spatial dimension etc. Used only when `paddingStyle = MPSGraphPaddingStyleExplicit`. Default value: `@[ @0, @0, @0, @0, @0, @0, @0, @0 ]`
+// Defines padding values for spatial dimensions which must be eight numbers, two for each spatial dimension.
 //
 // WithPaddingValues sets the collection, converting the Go slice to an NSArray.
 func (x *GraphPooling4DOpDescriptor) WithPaddingValues(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor {
@@ -119,7 +121,7 @@ func (x *GraphPooling4DOpDescriptor) WithPaddingValues(items ...*foundation.NSNu
 	return x
 }
 
-// Defines what kind of padding graph applies to the operation. Default value: `MPSGraphPaddingStyleExplicit`.
+// Defines what kind of padding graph applies to the operation.
 //
 // WithPaddingStyle sets the paddingStyle property and returns the receiver for chaining.
 func (x *GraphPooling4DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphPooling4DOpDescriptor {
@@ -127,7 +129,7 @@ func (x *GraphPooling4DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddi
 	return x
 }
 
-// Affects how MPSGraph computes the output size: if set to `YES` then output size is computed by rounding up instead of down when dividing input size by stride. Default value: `NO`.
+// Affects how MPSGraph computes the output size: if set to YES then output size is computed by rounding up instead of down when dividing input size by stride.
 //
 // WithCeilMode sets the ceilMode property and returns the receiver for chaining.
 func (x *GraphPooling4DOpDescriptor) WithCeilMode(ceilMode bool) *GraphPooling4DOpDescriptor {
@@ -135,7 +137,7 @@ func (x *GraphPooling4DOpDescriptor) WithCeilMode(ceilMode bool) *GraphPooling4D
 	return x
 }
 
-// Defines a mode for average pooling, where samples outside the input tensor count as zeroes in the average computation. Otherwise the result is sum over samples divided by number of samples that didn't come from padding. Default value: `NO`.
+// Defines a mode for average pooling, where samples outside the input tensor count as zeroes in the average computation.
 //
 // WithIncludeZeroPadToAverage sets the includeZeroPadToAverage property and returns the receiver for chaining.
 func (x *GraphPooling4DOpDescriptor) WithIncludeZeroPadToAverage(includeZeroPadToAverage bool) *GraphPooling4DOpDescriptor {
@@ -143,7 +145,7 @@ func (x *GraphPooling4DOpDescriptor) WithIncludeZeroPadToAverage(includeZeroPadT
 	return x
 }
 
-// Defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
+// Defines the mode for returned indices of maximum values within each pooling window.
 //
 // WithReturnIndicesMode sets the returnIndicesMode property and returns the receiver for chaining.
 func (x *GraphPooling4DOpDescriptor) WithReturnIndicesMode(returnIndicesMode MPSGraphPoolingReturnIndicesMode) *GraphPooling4DOpDescriptor {
@@ -151,7 +153,7 @@ func (x *GraphPooling4DOpDescriptor) WithReturnIndicesMode(returnIndicesMode MPS
 	return x
 }
 
-// Defines the data type for returned indices. Use this in conjunction with “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ API. Currently MPSGraph supports the following datatypes: `MPSDataTypeInt32`. Default value: `MPSDataTypeInt32`.
+// Defines the data type for returned indices.
 //
 // WithReturnIndicesDataType sets the returnIndicesDataType property and returns the receiver for chaining.
 func (x *GraphPooling4DOpDescriptor) WithReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType) *GraphPooling4DOpDescriptor {

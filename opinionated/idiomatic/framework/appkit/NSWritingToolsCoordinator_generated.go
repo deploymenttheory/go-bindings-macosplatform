@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that manages interactions between Writing Tools and your custom text view.
+//
 // WritingToolsCoordinator wraps [raw.NSWritingToolsCoordinator] with a fluent Go API.
 type WritingToolsCoordinator struct {
 	inner *raw.NSWritingToolsCoordinator
@@ -30,7 +32,7 @@ func WritingToolsCoordinatorFromID(id objc.ID) *WritingToolsCoordinator {
 	return &WritingToolsCoordinator{inner: raw.NSWritingToolsCoordinatorFromID(id)}
 }
 
-// Creates a writing tools coordinator and assigns the specified delegate object to it. - Parameters: - delegate: An object capable of handling Writing Tools interactions for your view. The delegate must be able to modify your view’s text storage and refresh the view’s layout and appearance. Create the coordinator object during your view’s initialization, and assign the object to your view. Assign the coordinator to the “NSView/writingToolsCoordinator“ property of your view.
+// Creates a writing tools coordinator and assigns the specified delegate object to it.
 //
 // NewWritingToolsCoordinatorWithDelegate creates a new [WritingToolsCoordinator].
 func NewWritingToolsCoordinatorWithDelegate(delegate raw.NSWritingToolsCoordinatorDelegate) *WritingToolsCoordinator {
@@ -39,7 +41,7 @@ func NewWritingToolsCoordinatorWithDelegate(delegate raw.NSWritingToolsCoordinat
 	return &WritingToolsCoordinator{inner: raw.NSWritingToolsCoordinatorFromID(_id)}
 }
 
-// The view that Writing Tools uses to display visual effects during the text-rewriting process. Writing Tools uses the view in this property to host the visual effects it creates when making interactive changes to your view’s content. These visual effects let people know the state of the text and provide feedback about what’s happening to it. Set this property to a subview that sits visually above, and covers, all of the text in your custom text view. If you don’t assign a value to this property, the coordinator places its own effect view in front of the subviews in your custom view. The default value of this property is `nil`. If you display your view’s text using multiple text containers, implement the “NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:requestsSingleContainerSubrangesOf:in:completion:)“ method to request multiple previews.
+// The view that Writing Tools uses to display visual effects during the text-rewriting process.
 //
 // WithEffectContainerView sets the effectContainerView property and returns the receiver for chaining.
 func (x *WritingToolsCoordinator) WithEffectContainerView(effectContainerView ViewProvider) *WritingToolsCoordinator {
@@ -47,7 +49,7 @@ func (x *WritingToolsCoordinator) WithEffectContainerView(effectContainerView Vi
 	return x
 }
 
-// The view that Writing Tools uses to display background decorations such as proofreading marks. Writing Tools uses the view in this property to host proofreading marks and other visual elements that show any suggested changes. Set this property to a subview situated visibly below the text in your custom text view. It's also satisfactory to place this view visually in front of the text. Make sure the size of the view is big enough to cover all of the affected text. If you don’t assign a value to this property, the coordinator places its own decoration view behind the subviews in your custom view. The default value of this property is `nil`. If you display your view’s text using multiple text containers, implement the “NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:requestsSingleContainerSubrangesOf:in:completion:)“ and “NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:requestsDecorationContainerViewFor:in:completion:)“ methods to provide separate decoration views for each container.
+// The view that Writing Tools uses to display background decorations such as proofreading marks.
 //
 // WithDecorationContainerView sets the decorationContainerView property and returns the receiver for chaining.
 func (x *WritingToolsCoordinator) WithDecorationContainerView(decorationContainerView ViewProvider) *WritingToolsCoordinator {
@@ -55,7 +57,7 @@ func (x *WritingToolsCoordinator) WithDecorationContainerView(decorationContaine
 	return x
 }
 
-// The level of Writing Tools support you want the system to provide for your view. Use this property to request an inline or panel-based experience, or to disable Writing Tools for your view altogether. The default value of this property is “NSWritingToolsBehavior/default“.
+// The level of Writing Tools support you want the system to provide for your view.
 //
 // WithPreferredBehavior sets the preferredBehavior property and returns the receiver for chaining.
 func (x *WritingToolsCoordinator) WithPreferredBehavior(preferredBehavior NSWritingToolsBehavior) *WritingToolsCoordinator {
@@ -63,7 +65,7 @@ func (x *WritingToolsCoordinator) WithPreferredBehavior(preferredBehavior NSWrit
 	return x
 }
 
-// The type of content you allow Writing Tools to generate for your custom text view. Writing Tools can create plain text or rich text, and it can format text using lists or tables as needed. If your view doesn’t support specific types of content, specify the types you do support in this property. The default value of this property is “NSWritingToolsResultOptions/default“, which lets the system determine the type of content to generate.
+// The type of content you allow Writing Tools to generate for your custom text view.
 //
 // WithPreferredResultOptions sets the preferredResultOptions property and returns the receiver for chaining.
 func (x *WritingToolsCoordinator) WithPreferredResultOptions(preferredResultOptions NSWritingToolsResultOptions) *WritingToolsCoordinator {
@@ -77,21 +79,21 @@ func (x *WritingToolsCoordinator) WithIncludesTextListMarkers(includesTextListMa
 	return x
 }
 
-// Stops the current Writing Tools operation and dismisses the system UI. Call this method to abort the current Writing Tools operation. This method dismisses the system’s Writing Tools UI and stops any in-flight interactions with your view. This method does not undo any changes that Writing Tools already made to your view’s content.
+// Stops the current Writing Tools operation and dismisses the system UI.
 //
 // StopWritingTools calls the underlying StopWritingTools.
 func (x *WritingToolsCoordinator) StopWritingTools() {
 	x.inner.StopWritingTools()
 }
 
-// Informs the coordinator about changes your app made to the text in the specified context object. - Parameters: - range: The range of text to replace. This range is relative to the starting location of the specified context object’s text in your view’s text storage. If you initialized the context object with the entire contents of your view’s text storage, specify the range of text you’re replacing in your text storage. However, if you initialized the context object with only a portion of your view’s text, specify a range that is relative to the starting location of the context object’s text. - replacementText: The text that replaces the previous content in `range`. Specify an empty string to delete the text in the specified range. - reason: The reason you updated the text. - contextID: The unique identifier of the context object that contains the text you modified. If you make any changes to the text Writing Tools is evaluating, call this method to report those changes to your view’s coordinator object. You might make changes in response to an undo command or when someone types into the same part of your view’s text. Calling this method keeps the coordinator object informed of any changes, and ensures it delivers accurate information to its delegate. In response, the coordinator refreshes previews and other information related to your view. If the scope of the update is significantly large, the coordinator can optionally cancel the Writing Tools session altogether. Use this method to report changes that precisely intersect your context object’s text. The first time you call this method for a context object, report changes only to the original attributed string in that object. If you call this method more than once, report changes to the newly modified version of that string. Don’t use this method to report changes to text that comes before or after the context object. If you make changes before your context object, report those changes separately using the “updateForReflowedTextInContextWithIdentifier(_:)“ method. > Warning: Failure to call this method for a change can cause Writing Tools to deliver inaccurate information to your delegate and lead to data loss.
+// Informs the coordinator about changes your app made to the text in the specified context object.
 //
 // UpdateRangeWithTextReasonForContextWithIdentifier calls the underlying UpdateRangeWithTextReasonForContextWithIdentifier.
 func (x *WritingToolsCoordinator) UpdateRangeWithTextReasonForContextWithIdentifier(range_ foundation.NSRange, replacementText *foundation.NSAttributedString, reason NSWritingToolsCoordinatorTextUpdateReason, contextID *foundation.NSUUID) {
 	x.inner.UpdateRangeWithTextReasonForContextWithIdentifier(range_, replacementText, raw.NSWritingToolsCoordinatorTextUpdateReason(reason), contextID)
 }
 
-// Informs the coordinator that a change occurred to the view or its text that requires a layout update. - Parameters: - contextID: The unique identifier of the context object affected by the change. Pass the identifier for the context object that comes after the changes. Use this method to inform Writing Tools when the geometry of your view changes, or when the text that precedes one of your context objects changes. Changes to the view’s geometry or text can affect the flow of any remaining text, and require a layout update. Writing Tools uses this method to refresh any layout-dependent information it’s currently tracking. For example, it uses it to refresh the location of proofreading marks it’s displaying in your view. If a text change affects the text inside a context object, call the “updateRange(_:with:reason:forContextWithIdentifier:)“ method to report that change instead.
+// Informs the coordinator that a change occurred to the view or its text that requires a layout update.
 //
 // UpdateForReflowedTextInContextWithIdentifier calls the underlying UpdateForReflowedTextInContextWithIdentifier.
 func (x *WritingToolsCoordinator) UpdateForReflowedTextInContextWithIdentifier(contextID *foundation.NSUUID) {

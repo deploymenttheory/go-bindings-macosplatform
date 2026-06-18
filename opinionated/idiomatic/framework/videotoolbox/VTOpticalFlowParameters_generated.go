@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes frame-level optical flow parameters.
+//
 // OpticalFlowParameters wraps [raw.VTOpticalFlowParameters] with a fluent Go API.
 type OpticalFlowParameters struct {
 	inner *raw.VTOpticalFlowParameters

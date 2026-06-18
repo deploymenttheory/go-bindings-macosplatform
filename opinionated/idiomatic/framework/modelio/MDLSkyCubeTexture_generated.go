@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A generator of texel data that creates cube textures using a physically realistic simulation of the sunlit sky.
+//
 // SkyCubeTexture wraps [raw.MDLSkyCubeTexture] with a fluent Go API.
 type SkyCubeTexture struct {
 	inner *raw.MDLSkyCubeTexture
@@ -31,6 +33,8 @@ func SkyCubeTextureFromID(id objc.ID) *SkyCubeTexture {
 	return &SkyCubeTexture{inner: raw.MDLSkyCubeTextureFromID(id)}
 }
 
+// Initializes a sky cube texture object with the specified parameters.
+//
 // NewSkyCubeTextureWithNameChannelEncodingTextureDimensionsTurbiditySunElevationUpperAtmosphereScatteringGroundAlbedo creates a new [SkyCubeTexture].
 func NewSkyCubeTextureWithNameChannelEncodingTextureDimensionsTurbiditySunElevationUpperAtmosphereScatteringGroundAlbedo(name string, channelEncoding MDLTextureChannelEncoding, textureDimensions unsafe.Pointer, turbidity float32, sunElevation float32, upperAtmosphereScattering float32, groundAlbedo float32) *SkyCubeTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLSkyCubeTexture")), objc.RegisterName("alloc"))
@@ -45,12 +49,16 @@ func NewSkyCubeTextureWithNameChannelEncodingTextureDimensionsTurbiditySunElevat
 	return &SkyCubeTexture{inner: raw.MDLSkyCubeTextureFromID(_id)}
 }
 
+// The cloudiness or haziness of the simulated sky.
+//
 // WithTurbidity sets the turbidity property and returns the receiver for chaining.
 func (x *SkyCubeTexture) WithTurbidity(turbidity float32) *SkyCubeTexture {
 	x.inner.SetTurbidity(turbidity)
 	return x
 }
 
+// The sun’s position in the simulated sky.
+//
 // WithSunElevation sets the sunElevation property and returns the receiver for chaining.
 func (x *SkyCubeTexture) WithSunElevation(sunElevation float32) *SkyCubeTexture {
 	x.inner.SetSunElevation(sunElevation)
@@ -63,54 +71,72 @@ func (x *SkyCubeTexture) WithSunAzimuth(sunAzimuth float32) *SkyCubeTexture {
 	return x
 }
 
+// A factor that influences the color of the simulated sky.
+//
 // WithUpperAtmosphereScattering sets the upperAtmosphereScattering property and returns the receiver for chaining.
 func (x *SkyCubeTexture) WithUpperAtmosphereScattering(upperAtmosphereScattering float32) *SkyCubeTexture {
 	x.inner.SetUpperAtmosphereScattering(upperAtmosphereScattering)
 	return x
 }
 
+// A factor that influences the clarity of the simulated sky.
+//
 // WithGroundAlbedo sets the groundAlbedo property and returns the receiver for chaining.
 func (x *SkyCubeTexture) WithGroundAlbedo(groundAlbedo float32) *SkyCubeTexture {
 	x.inner.SetGroundAlbedo(groundAlbedo)
 	return x
 }
 
+// The angle, in radians relative to center, below which to render the ground color.
+//
 // WithHorizonElevation sets the horizonElevation property and returns the receiver for chaining.
 func (x *SkyCubeTexture) WithHorizonElevation(horizonElevation float32) *SkyCubeTexture {
 	x.inner.SetHorizonElevation(horizonElevation)
 	return x
 }
 
+// The amount of gamma correction to apply during tone mapping.
+//
 // WithGamma sets the gamma property and returns the receiver for chaining.
 func (x *SkyCubeTexture) WithGamma(gamma float32) *SkyCubeTexture {
 	x.inner.SetGamma(gamma)
 	return x
 }
 
+// The amount of exposure compensation to apply during tone mapping.
+//
 // WithExposure sets the exposure property and returns the receiver for chaining.
 func (x *SkyCubeTexture) WithExposure(exposure float32) *SkyCubeTexture {
 	x.inner.SetExposure(exposure)
 	return x
 }
 
+// The amount of brightness enhancement to apply during tone mapping.
+//
 // WithBrightness sets the brightness property and returns the receiver for chaining.
 func (x *SkyCubeTexture) WithBrightness(brightness float32) *SkyCubeTexture {
 	x.inner.SetBrightness(brightness)
 	return x
 }
 
+// The amount of contrast enhancement to apply during tone mapping.
+//
 // WithContrast sets the contrast property and returns the receiver for chaining.
 func (x *SkyCubeTexture) WithContrast(contrast float32) *SkyCubeTexture {
 	x.inner.SetContrast(contrast)
 	return x
 }
 
+// The amount of saturation enhancement to apply during tone mapping.
+//
 // WithSaturation sets the saturation property and returns the receiver for chaining.
 func (x *SkyCubeTexture) WithSaturation(saturation float32) *SkyCubeTexture {
 	x.inner.SetSaturation(saturation)
 	return x
 }
 
+// A Boolean value that indicates whether the texture is a cube textures.
+//
 // WithIsCube sets the isCube property and returns the receiver for chaining.
 func (x *SkyCubeTexture) WithIsCube(isCube bool) *SkyCubeTexture {
 	x.inner.MDLTexture.SetIsCube(isCube)
@@ -125,7 +151,7 @@ func (x *SkyCubeTexture) WithHasAlphaValues(hasAlphaValues bool) *SkyCubeTexture
 	return x
 }
 
-// Call updateTexture if parameters have been changed and a new sky is required.
+// Generates new texel data matching the current sky parameters.
 //
 // UpdateTexture calls the underlying UpdateTexture.
 func (x *SkyCubeTexture) UpdateTexture() {

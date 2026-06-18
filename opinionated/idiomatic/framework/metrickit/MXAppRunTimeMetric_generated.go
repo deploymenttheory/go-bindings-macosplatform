@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing metrics about the amount of time the app is active.
+//
 // AppRunTimeMetric wraps [raw.MXAppRunTimeMetric] with a fluent Go API.
 type AppRunTimeMetric struct {
 	inner *raw.MXAppRunTimeMetric

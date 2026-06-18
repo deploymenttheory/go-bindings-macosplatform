@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A convenience wrapper for batches of feature providers.
+//
 // ArrayBatchProvider wraps [raw.MLArrayBatchProvider] with a fluent Go API.
 type ArrayBatchProvider struct {
 	inner *raw.MLArrayBatchProvider
@@ -32,7 +34,7 @@ func ArrayBatchProviderFromID(id objc.ID) *ArrayBatchProvider {
 	return &ArrayBatchProvider{inner: raw.MLArrayBatchProviderFromID(id)}
 }
 
-// Initalize with an array of feature providers
+// Creates the batch provider based on the array of feature providers.
 //
 // NewArrayBatchProviderWithFeatureProviderArray creates a new [ArrayBatchProvider].
 func NewArrayBatchProviderWithFeatureProviderArray(array ...purego.IDer) *ArrayBatchProvider {
@@ -50,7 +52,7 @@ func NewArrayBatchProviderWithFeatureProviderArray(array ...purego.IDer) *ArrayB
 	return &ArrayBatchProvider{inner: raw.MLArrayBatchProviderFromID(_id)}
 }
 
-// Initialize with a dictionary which maps feature names to an array of values [String : [Any]] Error is returned if all arrays do not have equal length or if array values for a specific feature name do not have the same type or not expressible as MLFeatureValue
+// Creates a batch provider based on feature names and their associated arrays of data.
 //
 // NewArrayBatchProviderWithDictionaryError creates a new [ArrayBatchProvider].
 func NewArrayBatchProviderWithDictionaryError(dictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*ArrayBatchProvider, error) {

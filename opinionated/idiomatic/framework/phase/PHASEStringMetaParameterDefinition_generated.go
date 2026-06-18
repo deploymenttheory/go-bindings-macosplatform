@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specification for a metaparameter defined by text.
+//
 // StringMetaParameterDefinition wraps [raw.PHASEStringMetaParameterDefinition] with a fluent Go API.
 type StringMetaParameterDefinition struct {
 	inner *raw.PHASEStringMetaParameterDefinition
@@ -32,7 +34,7 @@ func StringMetaParameterDefinitionFromID(id objc.ID) *StringMetaParameterDefinit
 	return &StringMetaParameterDefinition{inner: raw.PHASEStringMetaParameterDefinitionFromID(id)}
 }
 
-// @method initWithValue:identifier @abstract Create a new string metaparameter definition @param value The initial value of the metaparameter @param identifier An optional custom identifier to give to this object @return The new PHASEStringMetaParameterDefinition object
+// Creates a specification for a named textual metaparameter with the given value.
 //
 // NewStringMetaParameterDefinitionWithValueIdentifier creates a new [StringMetaParameterDefinition].
 func NewStringMetaParameterDefinitionWithValueIdentifier(value string, identifier string) *StringMetaParameterDefinition {
@@ -41,7 +43,7 @@ func NewStringMetaParameterDefinitionWithValueIdentifier(value string, identifie
 	return &StringMetaParameterDefinition{inner: raw.PHASEStringMetaParameterDefinitionFromID(_id)}
 }
 
-// @method initWithValue @abstract Create a new string metaparameter definition @param value The initial value of the metaparameter @return The new PHASEStringMetaParameterDefinition object
+// Creates a specification for a textual metaparameter with the given value.
 //
 // NewStringMetaParameterDefinitionWithValue creates a new [StringMetaParameterDefinition].
 func NewStringMetaParameterDefinitionWithValue(value string) *StringMetaParameterDefinition {

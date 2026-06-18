@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration you create to customize a blit command encoder, which affects the runtime behavior of the blit pass you encode with it.
+//
 // BlitPassDescriptor wraps [raw.MTLBlitPassDescriptor] with a fluent Go API.
 type BlitPassDescriptor struct {
 	inner *raw.MTLBlitPassDescriptor

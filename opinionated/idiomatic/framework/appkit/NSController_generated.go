@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An abstract class that implements the NSEditor and NSEditorRegistration informal protocols required for controller classes.
+//
 // Controller wraps [raw.NSController] with a fluent Go API.
 type Controller struct {
 	inner *raw.NSController
@@ -44,26 +46,36 @@ func NewControllerWithCoder(coder *foundation.NSCoder) *Controller {
 	return &Controller{inner: raw.NSControllerFromID(_id)}
 }
 
+// Invoked to inform the receiver that editor has uncommitted changes that can affect the receiver.
+//
 // ObjectDidBeginEditing calls the underlying ObjectDidBeginEditing.
 func (x *Controller) ObjectDidBeginEditing(editor raw.NSEditor) {
 	x.inner.ObjectDidBeginEditing(editor)
 }
 
+// Invoked to inform the receiver that editor has committed or discarded its changes.
+//
 // ObjectDidEndEditing calls the underlying ObjectDidEndEditing.
 func (x *Controller) ObjectDidEndEditing(editor raw.NSEditor) {
 	x.inner.ObjectDidEndEditing(editor)
 }
 
+// Discards any pending changes by registered editors.
+//
 // DiscardEditing calls the underlying DiscardEditing.
 func (x *Controller) DiscardEditing() {
 	x.inner.DiscardEditing()
 }
 
+// Attempts to commit any pending edits.
+//
 // CommitEditing calls the underlying CommitEditing.
 func (x *Controller) CommitEditing() bool {
 	return x.inner.CommitEditing()
 }
 
+// Attempts to commit any pending changes in known editors of the receiver.
+//
 // CommitEditingWithDelegateDidCommitSelectorContextInfo calls the underlying CommitEditingWithDelegateDidCommitSelectorContextInfo.
 func (x *Controller) CommitEditingWithDelegateDidCommitSelectorContextInfo(delegate objc.ID, didCommitSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.CommitEditingWithDelegateDidCommitSelectorContextInfo(delegate, didCommitSelector, contextInfo)

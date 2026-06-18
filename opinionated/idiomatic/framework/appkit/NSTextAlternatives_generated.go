@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A list of alternative strings for a piece of text.
+//
 // TextAlternatives wraps [raw.NSTextAlternatives] with a fluent Go API.
 type TextAlternatives struct {
 	inner *raw.NSTextAlternatives
@@ -31,6 +33,8 @@ func TextAlternativesFromID(id objc.ID) *TextAlternatives {
 	return &TextAlternatives{inner: raw.NSTextAlternativesFromID(id)}
 }
 
+// Initializes an NSTextAlternatives instance.
+//
 // NewTextAlternativesWithPrimaryStringAlternativeStrings creates a new [TextAlternatives].
 func NewTextAlternativesWithPrimaryStringAlternativeStrings(primaryString string, alternativeStrings *foundation.NSArray[*foundation.NSString]) *TextAlternatives {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextAlternatives")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewTextAlternativesWithPrimaryStringAlternativeStrings(primaryString string
 	return &TextAlternatives{inner: raw.NSTextAlternativesFromID(_id)}
 }
 
+// Sent to the NSTextAlternatives object by the text view when the user chooses one of the alternative strings.
+//
 // NoteSelectedAlternativeString calls the underlying NoteSelectedAlternativeString.
 func (x *TextAlternatives) NoteSelectedAlternativeString(alternativeString string) {
 	x.inner.NoteSelectedAlternativeString(foundation.NSStringStringWithUTF8String(alternativeString))

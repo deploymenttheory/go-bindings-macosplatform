@@ -12,7 +12,7 @@ import (
 	"unsafe"
 )
 
-// @class       ODNode @abstract    This class is used to work with OpenDirectory nodes. @discussion  OpenDirectory uses nodes to represent different sources of directory information, via the local disk, LDAP, etc.
+// An ODNode object serves as a Cocoa wrapper for an Open Directory node.
 //
 // Node wraps [raw.ODNode] with a fluent Go API.
 type Node struct {
@@ -34,7 +34,7 @@ func NodeFromID(id objc.ID) *Node {
 	return &Node{inner: raw.ODNodeFromID(id)}
 }
 
-// @method     initWithSession:type:error: @abstract   Initialize an ODNode instance of the given type, optionally in a specific session. @discussion initialize instance of an ODNode with a provided ODSession and ODNodeType.  outError is optional parameter, nil can be passed if error details are not needed.
+// Creates a node object with a specified session and type.
 //
 // NewNodeWithSessionTypeError creates a new [Node].
 func NewNodeWithSessionTypeError(inSession *raw.ODSession, inType uint32) (*Node, error) {
@@ -47,7 +47,7 @@ func NewNodeWithSessionTypeError(inSession *raw.ODSession, inType uint32) (*Node
 	return &Node{inner: raw.ODNodeFromID(_id)}, nil
 }
 
-// @method     initWithSession:name:error: @abstract   Initialize an ODNode instance with the given name, optionally in a specific session. @discussion initialize instance of an ODNode with a provided ODSession and node name.  outError is optional parameter, nil can be passed if error details are not needed.
+// Creates a node object with a specified session and name.
 //
 // NewNodeWithSessionNameError creates a new [Node].
 func NewNodeWithSessionNameError(inSession *raw.ODSession, inName string) (*Node, error) {
@@ -60,49 +60,49 @@ func NewNodeWithSessionNameError(inSession *raw.ODSession, inName string) (*Node
 	return &Node{inner: raw.ODNodeFromID(_id)}, nil
 }
 
-// @method     subnodeNamesAndReturnError: @abstract   Returns NSArray of node names for this node, which may contain sub-nodes or search policy nodes @discussion Returns NSArray of node names for this node, which may contain sub-nodes or search policy nodes. Commonly used with Search policy nodes.  outError is optional parameter, nil can be passed if error details are not needed.
+// Returns the names of subnodes for the node.
 //
 // SubnodeNamesAndReturnError calls the underlying SubnodeNamesAndReturnError.
 func (x *Node) SubnodeNamesAndReturnError() (*foundation.NSArray[objc.ID], error) {
 	return x.inner.SubnodeNamesAndReturnError()
 }
 
-// @method     unreachableSubnodeNamesAndReturnError: @abstract   Will return NSArray of names of subnodes that are not currently reachable. @discussion Will return NSArray of names of subnodes that are not currently reachable.  Commonly used with Search policy nodes to determine if any nodes are currently unreachable, but may also return other subnodes if the OpenDirectory plugin supports.  outError is optional parameter, nil can be passed if error details are not needed.
+// Returns an array of the subnodes of a given node that are currently unreachable.
 //
 // UnreachableSubnodeNamesAndReturnError calls the underlying UnreachableSubnodeNamesAndReturnError.
 func (x *Node) UnreachableSubnodeNamesAndReturnError() (*foundation.NSArray[objc.ID], error) {
 	return x.inner.UnreachableSubnodeNamesAndReturnError()
 }
 
-// @method     nodeDetails:error: @abstract   Returns a dictionary of information about the instance of ODNode @discussion Returns a dictionary of information about the instance of ODNode.  Details such as Trust information (kODAttributeTypeTrustInformation) or other Node details can be retrieved.  outError is optional parameter, nil can be passed if error details are not needed.
+// Returns a dictionary containing details about a node.
 //
 // NodeDetailsForKeysError calls the underlying NodeDetailsForKeysError.
 func (x *Node) NodeDetailsForKeysError(inKeys *foundation.NSArray[objc.ID]) (*foundation.NSDictionary[objc.ID, objc.ID], error) {
 	return x.inner.NodeDetailsForKeysError(inKeys)
 }
 
-// @method     supportedRecordTypesAndReturnError: @abstract   Returns a NSArray of the record types supported by this node. @discussion Returns a NSArray of the record types supported by this node.  If node does not support the check then all possible types will be returned.  outError is optional parameter, nil can be passed if error details are not needed.
+// Returns an array of the record types supported by the node.
 //
 // SupportedRecordTypesAndReturnError calls the underlying SupportedRecordTypesAndReturnError.
 func (x *Node) SupportedRecordTypesAndReturnError() (*foundation.NSArray[objc.ID], error) {
 	return x.inner.SupportedRecordTypesAndReturnError()
 }
 
-// @method     supportedAttributesForRecordType:error: @abstract   Will return a list of attribute types supported for that attribute if possible @discussion Will return a list of attribute types supported for that attribute if possible.  If no specific types are available, then all possible values will be returned instead.  outError is optional parameter, nil can be passed if error details are not needed.
+// Returns an array of attribute types supported by the node’s records.
 //
 // SupportedAttributesForRecordTypeError calls the underlying SupportedAttributesForRecordTypeError.
 func (x *Node) SupportedAttributesForRecordTypeError(inRecordType *foundation.NSString) (*foundation.NSArray[objc.ID], error) {
 	return x.inner.SupportedAttributesForRecordTypeError(inRecordType)
 }
 
-// @method     setCredentialsWithRecordType:recordName:password:error: @abstract   Sets the credentials for interaction with the ODNode @discussion Sets the credentials for interaction with the ODNode.  Record references, etc. will use these credentials to query or change data.  Setting the credentials on a node referenced by other OD object types will change the credentials for all for all references.  outError is optional parameter, nil can be passed if error details are not needed.
+// Sets credentials for interacting with the node.
 //
 // SetCredentialsWithRecordTypeRecordNamePasswordError calls the underlying SetCredentialsWithRecordTypeRecordNamePasswordError.
 func (x *Node) SetCredentialsWithRecordTypeRecordNamePasswordError(inRecordType *foundation.NSString, inRecordName string, inPassword string) (bool, error) {
 	return x.inner.SetCredentialsWithRecordTypeRecordNamePasswordError(inRecordType, foundation.NSStringStringWithUTF8String(inRecordName), foundation.NSStringStringWithUTF8String(inPassword))
 }
 
-// @method     setCredentialsWithRecordType:authType:authItems:outAuthItems:context:error: @abstract   Allows use of other OpenDirectory types of authentications to set the credentials for an ODNode @discussion Allows the caller to use other types of authentications that are available in OpenDirectory, that may require response-request loops, etc.  Not all OD plugins will support this call, look for kODErrorCredentialsMethodNotSupported in outError.  outError is optional parameter, nil can be passed if error details is not needed.
+// Sets the credentials for interaction with the node using other types of authentication available to Open Directory.
 //
 // SetCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError calls the underlying SetCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError.
 func (x *Node) SetCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError(inRecordType *foundation.NSString, inType *foundation.NSString, inItems *foundation.NSArray[objc.ID], outItems *foundation.NSArray[objc.ID], outContext **foundation.ObjcObject) (bool, error) {
@@ -116,7 +116,7 @@ func (x *Node) SetCredentialsUsingKerberosCacheError(inCacheName string) (bool, 
 	return x.inner.SetCredentialsUsingKerberosCacheError(foundation.NSStringStringWithUTF8String(inCacheName))
 }
 
-// @method     createRecordWithRecordType:name:attributes:error: @abstract   Creates a record in this node, using the given name and attributes. @discussion Takes all the provided attributes and type to create an entire record.  The function will assign a UUID to the record automatically.  This UUID can be overwritten by the client by passing with the other attributes.  inAttributes is optional, nil can be passed if no other attributes are to be set.
+// Creates a record in a specified node with specified properties.
 //
 // CreateRecordWithRecordTypeNameAttributesError calls the underlying CreateRecordWithRecordTypeNameAttributesError.
 func (x *Node) CreateRecordWithRecordTypeNameAttributesError(inRecordType *foundation.NSString, inRecordName string, inAttributes *foundation.NSDictionary[objc.ID, objc.ID]) (*Record, error) {
@@ -130,7 +130,7 @@ func (x *Node) CreateRecordWithRecordTypeNameAttributesError(inRecordType *found
 	return &Record{inner: _r}, nil
 }
 
-// @method     recordWithRecordType:name:attributes:error: @abstract   Returns an ODRecord object that references the requested type and name @discussion Returns an ODRecord object that references the requested type and name.  The record will have cached the attributes requested.  Further attributes can be requested via ODRecord APIs.  For performance it is best to ask for as many attributes that are needed as possible up front.
+// Returns a record from the node with a specified type and name.
 //
 // RecordWithRecordTypeNameAttributesError calls the underlying RecordWithRecordTypeNameAttributesError.
 func (x *Node) RecordWithRecordTypeNameAttributesError(inRecordType *foundation.NSString, inRecordName string, inAttributes objc.ID) (*Record, error) {
@@ -144,7 +144,7 @@ func (x *Node) RecordWithRecordTypeNameAttributesError(inRecordType *foundation.
 	return &Record{inner: _r}, nil
 }
 
-// @method     customCall:sendData:error: @abstract   Sends a custom code to the node; input and output data formats are specific to the call. @discussion Sends a custom code to the node; input and output data formats are specific to the call.  outError is optional parameter, nil can be passed if error details are not needed.
+// Returns the result of a custom call to the node.
 //
 // CustomCallSendDataError calls the underlying CustomCallSendDataError.
 func (x *Node) CustomCallSendDataError(inCustomCode int, inSendData *foundation.NSData) (*foundation.NSData, error) {

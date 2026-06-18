@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A concrete subclass the Core Image Barcode Descriptor that represents an Aztec code symbol.
+//
 // AztecCodeDescriptor wraps [raw.CIAztecCodeDescriptor] with a fluent Go API.
 type AztecCodeDescriptor struct {
 	inner *raw.CIAztecCodeDescriptor
@@ -30,7 +32,7 @@ func AztecCodeDescriptorFromID(id objc.ID) *AztecCodeDescriptor {
 	return &AztecCodeDescriptor{inner: raw.CIAztecCodeDescriptorFromID(id)}
 }
 
-// Initializes an Aztec code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the Aztec code symbol. - isCompact: A Boolean indicating whether or not the Aztec code is compact. - layerCount: The number of layers in the Aztec code, from 1 to 32. - dataCodewordCount: The number of codewords in the Aztec code, from 1 to 2048. - Returns: An initialized “CIAztecCodeDescriptor“ instance or `nil` if the parameters are invalid
+// Initializes an Aztec code descriptor for the given payload and parameters.
 //
 // NewAztecCodeDescriptorWithPayloadIsCompactLayerCountDataCodewordCount creates a new [AztecCodeDescriptor].
 func NewAztecCodeDescriptorWithPayloadIsCompactLayerCountDataCodewordCount(errorCorrectedPayload *foundation.NSData, isCompact bool, layerCount int, dataCodewordCount int) *AztecCodeDescriptor {

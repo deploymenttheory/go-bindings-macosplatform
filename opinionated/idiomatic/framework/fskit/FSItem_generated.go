@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A distinct object in a file hierarchy, such as a file, directory, symlink, socket, and more.
+//
 // Item wraps [raw.FSItem] with a fluent Go API.
 type Item struct {
 	inner *raw.FSItem

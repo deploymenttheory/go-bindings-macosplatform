@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object for finding digital cameras and scanners.
+//
 // DeviceBrowser wraps [raw.ICDeviceBrowser] with a fluent Go API.
 type DeviceBrowser struct {
 	inner *raw.ICDeviceBrowser
@@ -37,7 +39,7 @@ func NewDeviceBrowser() *DeviceBrowser {
 	return &DeviceBrowser{inner: raw.ICDeviceBrowserFromID(_id)}
 }
 
-// @property delegate @abstract The delegate. It must conform to ICDeviceBrowserDelegate protocol. The messages this delegate can expect to receive are described by ICDeviceBrowserDelegate protocol.
+// The object that acts as the delegate of the device browser.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *DeviceBrowser) WithDelegate(delegate raw.ICDeviceBrowserDelegate) *DeviceBrowser {
@@ -45,7 +47,7 @@ func (x *DeviceBrowser) WithDelegate(delegate raw.ICDeviceBrowserDelegate) *Devi
 	return x
 }
 
-// @property browsedDeviceTypeMask @abstract A mask whose set bits indicate the type of device(s) being browsed after the receiver receives the start message. This property can be changed while the browser is browsing for devices. This property can be constructed by OR'd values of ICDeviceTypeMask with values of ICDeviceLocationTypeMask.
+// A mask whose set bits indicate the type of devices being browsed after the delegate receives the start message.
 //
 // WithBrowsedDeviceTypeMask sets the browsedDeviceTypeMask property and returns the receiver for chaining.
 func (x *DeviceBrowser) WithBrowsedDeviceTypeMask(browsedDeviceTypeMask ICDeviceTypeMask) *DeviceBrowser {
@@ -53,14 +55,14 @@ func (x *DeviceBrowser) WithBrowsedDeviceTypeMask(browsedDeviceTypeMask ICDevice
 	return x
 }
 
-// @method start: @abstract This message tells the receiver to start looking for devices. @discussion Make sure that the receiver's delegate is set prior to sending this message; otherwise this message will be ignored. The messages the delegate can expect to receive are described by ICDeviceBrowserDelegate protocol.
+// Tells the delegate to start looking for devices.
 //
 // Start calls the underlying Start.
 func (x *DeviceBrowser) Start() {
 	x.inner.Start()
 }
 
-// @method stop: @abstract This method tells the receiver to stop looking for devices. @discussion This will free all device instances that are not in use.
+// Tells the delegate to stop looking for devices.
 //
 // Stop calls the underlying Stop.
 func (x *DeviceBrowser) Stop() {

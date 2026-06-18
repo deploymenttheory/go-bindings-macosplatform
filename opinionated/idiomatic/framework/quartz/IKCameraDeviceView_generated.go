@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The IKCameraDeviceView class displays the contents of the selected camera.
+//
 // IKCameraDeviceView wraps [raw.IKCameraDeviceView] with a fluent Go API.
 type IKCameraDeviceView struct {
 	inner *raw.IKCameraDeviceView
@@ -39,7 +41,7 @@ func NewIKCameraDeviceView() *IKCameraDeviceView {
 	return &IKCameraDeviceView{inner: raw.IKCameraDeviceViewFromID(_id)}
 }
 
-// @property delegate @abstract Delegate of the IKCameraDeviceView.
+// The camera device view delegate.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithDelegate(delegate objc.ID) *IKCameraDeviceView {
@@ -47,7 +49,7 @@ func (x *IKCameraDeviceView) WithDelegate(delegate objc.ID) *IKCameraDeviceView 
 	return x
 }
 
-// @property cameraDevice @abstract the camera device.
+// The current camera device.
 //
 // WithCameraDevice sets the cameraDevice property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithCameraDevice(cameraDevice *imagecapturecore.ICCameraDevice) *IKCameraDeviceView {
@@ -55,7 +57,7 @@ func (x *IKCameraDeviceView) WithCameraDevice(cameraDevice *imagecapturecore.ICC
 	return x
 }
 
-// @property mode @abstract current display mode.
+// Specifies the display mode of the camera device view.
 //
 // WithMode sets the mode property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithMode(mode objc.ID) *IKCameraDeviceView {
@@ -63,7 +65,7 @@ func (x *IKCameraDeviceView) WithMode(mode objc.ID) *IKCameraDeviceView {
 	return x
 }
 
-// @property hasDisplayModeTable @abstract support table view display mode.
+// Returns whether the device view is being displayed in table mode.
 //
 // WithHasDisplayModeTable sets the hasDisplayModeTable property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithHasDisplayModeTable(hasDisplayModeTable bool) *IKCameraDeviceView {
@@ -71,7 +73,7 @@ func (x *IKCameraDeviceView) WithHasDisplayModeTable(hasDisplayModeTable bool) *
 	return x
 }
 
-// @property hasDisplayModeIcon @abstract support icon view display mode.
+// Returns whether the device view is being displayed in icon mode.
 //
 // WithHasDisplayModeIcon sets the hasDisplayModeIcon property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithHasDisplayModeIcon(hasDisplayModeIcon bool) *IKCameraDeviceView {
@@ -79,7 +81,7 @@ func (x *IKCameraDeviceView) WithHasDisplayModeIcon(hasDisplayModeIcon bool) *IK
 	return x
 }
 
-// @property downloadAllControlLabel @abstract label for the 'Download All' control - allows for example renaming to 'Import All'.
+// Allows the “Download All” control to be renamed.
 //
 // WithDownloadAllControlLabel sets the downloadAllControlLabel property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithDownloadAllControlLabel(downloadAllControlLabel string) *IKCameraDeviceView {
@@ -87,7 +89,7 @@ func (x *IKCameraDeviceView) WithDownloadAllControlLabel(downloadAllControlLabel
 	return x
 }
 
-// @property downloadSelectedControlLabel @abstract label for the 'Download Selected' control.
+// Allows the “Download Selected” control to be renamed.
 //
 // WithDownloadSelectedControlLabel sets the downloadSelectedControlLabel property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithDownloadSelectedControlLabel(downloadSelectedControlLabel string) *IKCameraDeviceView {
@@ -95,7 +97,7 @@ func (x *IKCameraDeviceView) WithDownloadSelectedControlLabel(downloadSelectedCo
 	return x
 }
 
-// @property iconSize @abstract in icon mode: size of the image thumbnails.
+// Specifies the icon size.
 //
 // WithIconSize sets the iconSize property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithIconSize(iconSize uint) *IKCameraDeviceView {
@@ -103,7 +105,7 @@ func (x *IKCameraDeviceView) WithIconSize(iconSize uint) *IKCameraDeviceView {
 	return x
 }
 
-// @property transferMode @abstract transfer mode either file based - or - in memory.
+// Determines how the contents are saved by the delegate.
 //
 // WithTransferMode sets the transferMode property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithTransferMode(transferMode objc.ID) *IKCameraDeviceView {
@@ -111,7 +113,7 @@ func (x *IKCameraDeviceView) WithTransferMode(transferMode objc.ID) *IKCameraDev
 	return x
 }
 
-// @property displaysDownloadsDirectoryControl @abstract show a downloads directory control.
+// Specifies whether the downloads directory control should be displayed.
 //
 // WithDisplaysDownloadsDirectoryControl sets the displaysDownloadsDirectoryControl property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) *IKCameraDeviceView {
@@ -119,7 +121,7 @@ func (x *IKCameraDeviceView) WithDisplaysDownloadsDirectoryControl(displaysDownl
 	return x
 }
 
-// @property downloadsDirectory @abstract downloads directory.
+// Specifies the directory where files are downloaded
 //
 // WithDownloadsDirectory sets the downloadsDirectory property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithDownloadsDirectory(downloadsDirectory string) *IKCameraDeviceView {
@@ -127,7 +129,7 @@ func (x *IKCameraDeviceView) WithDownloadsDirectory(downloadsDirectory string) *
 	return x
 }
 
-// @property displaysPostProcessApplicationControl @abstract show a postprocessing application control.
+// Displays whether the post process application control should be displayed.
 //
 // WithDisplaysPostProcessApplicationControl sets the displaysPostProcessApplicationControl property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) *IKCameraDeviceView {
@@ -135,7 +137,7 @@ func (x *IKCameraDeviceView) WithDisplaysPostProcessApplicationControl(displaysP
 	return x
 }
 
-// @property postProcessApplication @abstract postprocessing application.
+// The URL of the application used to post process the image.
 //
 // WithPostProcessApplication sets the postProcessApplication property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithPostProcessApplication(postProcessApplication string) *IKCameraDeviceView {
@@ -143,49 +145,49 @@ func (x *IKCameraDeviceView) WithPostProcessApplication(postProcessApplication s
 	return x
 }
 
-// @method selectedIndexes @abstract current user selection.
+// The selected indexes of the camera files.
 //
 // SelectedIndexes calls the underlying SelectedIndexes.
 func (x *IKCameraDeviceView) SelectedIndexes() *foundation.NSIndexSet {
 	return x.inner.SelectedIndexes()
 }
 
-// @method selectIndexes:byExtendingSelection: @abstract setting current user selection.
+// Invoked to select the specified files, extending the selection if specified.
 //
 // SelectIndexesByExtendingSelection calls the underlying SelectIndexesByExtendingSelection.
 func (x *IKCameraDeviceView) SelectIndexesByExtendingSelection(indexes *foundation.NSIndexSet, extend bool) {
 	x.inner.SelectIndexesByExtendingSelection(indexes, extend)
 }
 
-// @method rotateLeft: @abstract rotate selected items left.
+// Rotates the selected image to the left.
 //
 // RotateLeft calls the underlying RotateLeft.
 func (x *IKCameraDeviceView) RotateLeft(sender objc.ID) {
 	x.inner.RotateLeft(sender)
 }
 
-// @method rotateRight: @abstract rotate selected items right.
+// Rotates the selected image to the right.
 //
 // RotateRight calls the underlying RotateRight.
 func (x *IKCameraDeviceView) RotateRight(sender objc.ID) {
 	x.inner.RotateRight(sender)
 }
 
-// @method deleteSelectedItems: @abstract delete selected items.
+// Deletes the currently selected items.
 //
 // DeleteSelectedItems calls the underlying DeleteSelectedItems.
 func (x *IKCameraDeviceView) DeleteSelectedItems(sender objc.ID) {
 	x.inner.DeleteSelectedItems(sender)
 }
 
-// @method downloadSelectedItems: @abstract download selected items.
+// Deletes the selected items from the camera.
 //
 // DownloadSelectedItems calls the underlying DownloadSelectedItems.
 func (x *IKCameraDeviceView) DownloadSelectedItems(sender objc.ID) {
 	x.inner.DownloadSelectedItems(sender)
 }
 
-// @method downloadAllItems: @abstract download all items.
+// Downloads all the items.
 //
 // DownloadAllItems calls the underlying DownloadAllItems.
 func (x *IKCameraDeviceView) DownloadAllItems(sender objc.ID) {

@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// The configuration details to apply to a user query.
+//
 // UserQueryContext wraps [raw.CSUserQueryContext] with a fluent Go API.
 type UserQueryContext struct {
 	inner *raw.CSUserQueryContext
@@ -37,36 +39,48 @@ func NewUserQueryContext() *UserQueryContext {
 	return &UserQueryContext{inner: raw.CSUserQueryContextFromID(_id)}
 }
 
+// A Boolean value that indicates whether the query sorts results by their relevance.
+//
 // WithEnableRankedResults sets the enableRankedResults property and returns the receiver for chaining.
 func (x *UserQueryContext) WithEnableRankedResults(enableRankedResults bool) *UserQueryContext {
 	x.inner.SetEnableRankedResults(enableRankedResults)
 	return x
 }
 
+// A Boolean value that indicates whether to exclude semantic-based search results from the output.
+//
 // WithDisableSemanticSearch sets the disableSemanticSearch property and returns the receiver for chaining.
 func (x *UserQueryContext) WithDisableSemanticSearch(disableSemanticSearch bool) *UserQueryContext {
 	x.inner.SetDisableSemanticSearch(disableSemanticSearch)
 	return x
 }
 
+// The maximum number of search results for the query to return.
+//
 // WithMaxResultCount sets the maxResultCount property and returns the receiver for chaining.
 func (x *UserQueryContext) WithMaxResultCount(maxResultCount int) *UserQueryContext {
 	x.inner.SetMaxResultCount(maxResultCount)
 	return x
 }
 
+// The maximum number of suggested text completions for the query to return.
+//
 // WithMaxSuggestionCount sets the maxSuggestionCount property and returns the receiver for chaining.
 func (x *UserQueryContext) WithMaxSuggestionCount(maxSuggestionCount int) *UserQueryContext {
 	x.inner.SetMaxSuggestionCount(maxSuggestionCount)
 	return x
 }
 
+// The maximum number of ranked results to return during the query.
+//
 // WithMaxRankedResultCount sets the maxRankedResultCount property and returns the receiver for chaining.
 func (x *UserQueryContext) WithMaxRankedResultCount(maxRankedResultCount int) *UserQueryContext {
 	x.inner.SetMaxRankedResultCount(maxRankedResultCount)
 	return x
 }
 
+// The attributes the system fetches for the searchable items.
+//
 // WithFetchAttributes sets the collection, converting the Go slice to an NSArray.
 func (x *UserQueryContext) WithFetchAttributes(items ...*foundation.NSString) *UserQueryContext {
 	if len(items) == 0 {
@@ -85,6 +99,8 @@ func (x *UserQueryContext) WithFetchAttributes(items ...*foundation.NSString) *U
 	return x
 }
 
+// The query string used to filter the results.
+//
 // WithFilterQueries sets the collection, converting the Go slice to an NSArray.
 func (x *UserQueryContext) WithFilterQueries(items ...*foundation.NSString) *UserQueryContext {
 	if len(items) == 0 {
@@ -103,12 +119,16 @@ func (x *UserQueryContext) WithFilterQueries(items ...*foundation.NSString) *Use
 	return x
 }
 
+// The language used for the query.
+//
 // WithKeyboardLanguage sets the keyboardLanguage property and returns the receiver for chaining.
 func (x *UserQueryContext) WithKeyboardLanguage(keyboardLanguage string) *UserQueryContext {
 	x.inner.CSSearchQueryContext.SetKeyboardLanguage(foundation.NSStringStringWithUTF8String(keyboardLanguage))
 	return x
 }
 
+// The query source options to allow or deny Mail messages in the search.
+//
 // WithSourceOptions sets the sourceOptions property and returns the receiver for chaining.
 func (x *UserQueryContext) WithSourceOptions(sourceOptions CSSearchQuerySourceOptions) *UserQueryContext {
 	x.inner.CSSearchQueryContext.SetSourceOptions(raw.CSSearchQuerySourceOptions(sourceOptions))

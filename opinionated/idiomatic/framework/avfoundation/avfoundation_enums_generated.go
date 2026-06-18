@@ -9,6 +9,7 @@ import (
 	"strings"
 )
 
+// Values that indicate the state of an export session.
 type AVAssetExportSessionStatus int64
 
 const (
@@ -39,6 +40,7 @@ func (e AVAssetExportSessionStatus) String() string {
 	}
 }
 
+// Values that represent the possible states of an asset reader.
 type AVAssetReaderStatus int64
 
 const (
@@ -66,22 +68,24 @@ func (e AVAssetReaderStatus) String() string {
 	}
 }
 
+// Restrictions to use when resolving references to external media data.
 // Bitmask — values may be combined with |.
 type AVAssetReferenceRestrictions uint64
 
 const (
-	// Indicates that all types of references should be followed.
+	// The asset should follow all media references.
 	AVAssetReferenceRestrictionForbidNone AVAssetReferenceRestrictions = 0
-	// Indicates that references from a remote asset (e.g. referenced via http URL) to local media data (e.g. stored in a local file) should not be followed.
+	// A remote asset shouldn’t follow references to local media.
 	AVAssetReferenceRestrictionForbidRemoteReferenceToLocal AVAssetReferenceRestrictions = 1
-	// Indicates that references from a local asset to remote media data should not be followed.
+	// A local asset shouldn’t follow references to remote media.
 	AVAssetReferenceRestrictionForbidLocalReferenceToRemote AVAssetReferenceRestrictions = 2
-	// Indicates that references from a remote asset to remote media data stored at a different site should not be followed.
+	// A remote asset shouldn’t follow references to remote media data stored at a different host.
 	AVAssetReferenceRestrictionForbidCrossSiteReference AVAssetReferenceRestrictions = 4
-	// Indicates that references from a local asset to local media data stored outside the asset's container file should not be followed.
+	// A local asset shouldn’t follow references to local media data stored outside its container file.
 	AVAssetReferenceRestrictionForbidLocalReferenceToLocal AVAssetReferenceRestrictions = 8
-	// Indicates that only references to media data stored within the asset's container file should be allowed.
-	AVAssetReferenceRestrictionForbidAll     AVAssetReferenceRestrictions = 65535
+	// The asset can only reference media stored within its container file.
+	AVAssetReferenceRestrictionForbidAll AVAssetReferenceRestrictions = 65535
+	// The asset should use the default reference restrictions policy.
 	AVAssetReferenceRestrictionDefaultPolicy AVAssetReferenceRestrictions = 2
 )
 
@@ -111,11 +115,14 @@ func (e AVAssetReferenceRestrictions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that define the type of a segment.
 type AVAssetSegmentType int64
 
 const (
+	// An initialization segment type.
 	AVAssetSegmentTypeInitialization AVAssetSegmentType = 1
-	AVAssetSegmentTypeSeparable      AVAssetSegmentType = 2
+	// A separable segment type.
+	AVAssetSegmentTypeSeparable AVAssetSegmentType = 2
 )
 
 func (e AVAssetSegmentType) String() string {
@@ -129,13 +136,17 @@ func (e AVAssetSegmentType) String() string {
 	}
 }
 
+// A type that specifies policies for how an export session processes alternate tracks in a track group.
 // Bitmask — values may be combined with |.
 type AVAssetTrackGroupOutputHandling uint64
 
 const (
-	AVAssetTrackGroupOutputHandlingNone                    AVAssetTrackGroupOutputHandling = 0
+	// A policy that doesn’t pass through alternate audio tracks from the source asset during export.
+	AVAssetTrackGroupOutputHandlingNone AVAssetTrackGroupOutputHandling = 0
+	// A policy that passes through alternate audio tracks from the source asset during export.
 	AVAssetTrackGroupOutputHandlingPreserveAlternateTracks AVAssetTrackGroupOutputHandling = 1
-	AVAssetTrackGroupOutputHandlingDefaultPolicy           AVAssetTrackGroupOutputHandling = 0
+	// The default track group output handling policy.
+	AVAssetTrackGroupOutputHandlingDefaultPolicy AVAssetTrackGroupOutputHandling = 0
 )
 
 func (e AVAssetTrackGroupOutputHandling) String() string {
@@ -149,6 +160,7 @@ func (e AVAssetTrackGroupOutputHandling) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Values that indicate the state of an asset writer.
 type AVAssetWriterStatus int64
 
 const (
@@ -176,13 +188,18 @@ func (e AVAssetWriterStatus) String() string {
 	}
 }
 
+// A structure that defines the spatialization formats that a player item supports.
 // Bitmask — values may be combined with |.
 type AVAudioSpatializationFormats uint64
 
 const (
-	AVAudioSpatializationFormatNone                      AVAudioSpatializationFormats = 0
-	AVAudioSpatializationFormatMonoAndStereo             AVAudioSpatializationFormats = 3
-	AVAudioSpatializationFormatMultichannel              AVAudioSpatializationFormats = 4
+	// A value that indicates the player item doesn’t support audio spatialization.
+	AVAudioSpatializationFormatNone AVAudioSpatializationFormats = 0
+	// A value that indicates the player item only supports mono and stereo layouts for audio spatialization.
+	AVAudioSpatializationFormatMonoAndStereo AVAudioSpatializationFormats = 3
+	// A value that indicates the player item only supports multichannel layouts for audio spatialization.
+	AVAudioSpatializationFormatMultichannel AVAudioSpatializationFormats = 4
+	// A value that indicates the player item supports mono, stereo, and multichannel layouts for audio spatialization.
 	AVAudioSpatializationFormatMonoStereoAndMultichannel AVAudioSpatializationFormats = 7
 )
 
@@ -203,13 +220,18 @@ func (e AVAudioSpatializationFormats) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that indicate the status of an app’s authorization to capture media.
 type AVAuthorizationStatus int64
 
 const (
+	// A status that indicates the user hasn’t yet granted or denied authorization.
 	AVAuthorizationStatusNotDetermined AVAuthorizationStatus = 0
-	AVAuthorizationStatusRestricted    AVAuthorizationStatus = 1
-	AVAuthorizationStatusDenied        AVAuthorizationStatus = 2
-	AVAuthorizationStatusAuthorized    AVAuthorizationStatus = 3
+	// A status that indicates the app isn’t permitted to use media capture devices.
+	AVAuthorizationStatusRestricted AVAuthorizationStatus = 1
+	// A status that indicates the user has explicitly denied an app permission to capture media.
+	AVAuthorizationStatusDenied AVAuthorizationStatus = 2
+	// A status that indicates the user has explicitly granted an app permission to capture media.
+	AVAuthorizationStatusAuthorized AVAuthorizationStatus = 3
 )
 
 func (e AVAuthorizationStatus) String() string {
@@ -227,6 +249,7 @@ func (e AVAuthorizationStatus) String() string {
 	}
 }
 
+// Animation options for a caption.
 type AVCaptionAnimation int64
 
 const (
@@ -245,6 +268,7 @@ func (e AVCaptionAnimation) String() string {
 	}
 }
 
+// Constants that indicate the status of a validator.
 type AVCaptionConversionValidatorStatus int64
 
 const (
@@ -269,10 +293,12 @@ func (e AVCaptionConversionValidatorStatus) String() string {
 	}
 }
 
+// Text decorations for caption text.
 // Bitmask — values may be combined with |.
 type AVCaptionDecoration uint64
 
 const (
+	// No text decoration.
 	AVCaptionDecorationNone        AVCaptionDecoration = 0
 	AVCaptionDecorationUnderline   AVCaptionDecoration = 1
 	AVCaptionDecorationLineThrough AVCaptionDecoration = 2
@@ -296,6 +322,7 @@ func (e AVCaptionDecoration) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Font styles for caption text.
 type AVCaptionFontStyle int64
 
 const (
@@ -317,6 +344,7 @@ func (e AVCaptionFontStyle) String() string {
 	}
 }
 
+// Font weights for a caption.
 type AVCaptionFontWeight int64
 
 const (
@@ -338,6 +366,7 @@ func (e AVCaptionFontWeight) String() string {
 	}
 }
 
+// Constants that indicate the alignment of lines in a region.
 type AVCaptionRegionDisplayAlignment int64
 
 const (
@@ -359,6 +388,7 @@ func (e AVCaptionRegionDisplayAlignment) String() string {
 	}
 }
 
+// Constants that indicate the scrolling effects the system applies to a region.
 type AVCaptionRegionScroll int64
 
 const (
@@ -377,6 +407,7 @@ func (e AVCaptionRegionScroll) String() string {
 	}
 }
 
+// Constants that indicate the writing mode for a region.
 type AVCaptionRegionWritingMode int64
 
 const (
@@ -437,6 +468,7 @@ func (e AVCaptionRubyPosition) String() string {
 	}
 }
 
+// Text alignment options for a caption.
 type AVCaptionTextAlignment int64
 
 const (
@@ -464,6 +496,7 @@ func (e AVCaptionTextAlignment) String() string {
 	}
 }
 
+// The caption’s supported rendering policy options.
 type AVCaptionTextCombine int64
 
 const (
@@ -494,12 +527,16 @@ func (e AVCaptionTextCombine) String() string {
 	}
 }
 
+// A structure that defines a units for caption formats.
 type AVCaptionUnitsType int64
 
 const (
+	// An unspecified unit type.
 	AVCaptionUnitsTypeUnspecified AVCaptionUnitsType = 0
-	AVCaptionUnitsTypeCells       AVCaptionUnitsType = 1
-	AVCaptionUnitsTypePercent     AVCaptionUnitsType = 2
+	// A cell-based unit type.
+	AVCaptionUnitsTypeCells AVCaptionUnitsType = 1
+	// A percentage-based unit type.
+	AVCaptionUnitsTypePercent AVCaptionUnitsType = 2
 )
 
 func (e AVCaptionUnitsType) String() string {
@@ -515,6 +552,7 @@ func (e AVCaptionUnitsType) String() string {
 	}
 }
 
+// An enumeration of auto focus systems.
 type AVCaptureAutoFocusSystem int64
 
 const (
@@ -536,6 +574,7 @@ func (e AVCaptureAutoFocusSystem) String() string {
 	}
 }
 
+// Constants indicating the current camera lens smudge detection status.
 type AVCaptureCameraLensSmudgeDetectionStatus int64
 
 const (
@@ -564,6 +603,7 @@ func (e AVCaptureCameraLensSmudgeDetectionStatus) String() string {
 	}
 }
 
+// Constants that indicate the current Center Stage control mode.
 type AVCaptureCenterStageControlMode int64
 
 const (
@@ -609,12 +649,13 @@ func (e AVCaptureCinematicVideoFocusMode) String() string {
 	}
 }
 
+// An enumeration of color spaces a device can support.
 type AVCaptureColorSpace int64
 
 const (
-	// The sRGB color space ( https://www.w3.org/Graphics/Color/srgb ).
+	// The standard RGB color space.
 	AVCaptureColorSpace_sRGB AVCaptureColorSpace = 0
-	// The P3 D65 wide color space which uses Illuminant D65 as the white point.
+	// The P3 D65 wide color space that uses Illuminant D65 as the white point.
 	AVCaptureColorSpace_P3_D65 AVCaptureColorSpace = 1
 )
 
@@ -629,6 +670,7 @@ func (e AVCaptureColorSpace) String() string {
 	}
 }
 
+// Constants that indicate the physical position of a capture device.
 type AVCaptureDevicePosition int64
 
 const (
@@ -650,6 +692,7 @@ func (e AVCaptureDevicePosition) String() string {
 	}
 }
 
+// Constants that indicate the transport control’s current mode of playback, if it has one.
 type AVCaptureDeviceTransportControlsPlaybackMode int64
 
 const (
@@ -668,6 +711,7 @@ func (e AVCaptureDeviceTransportControlsPlaybackMode) String() string {
 	}
 }
 
+// Constants that specify the exposure mode of a capture device.
 type AVCaptureExposureMode int64
 
 const (
@@ -692,6 +736,7 @@ func (e AVCaptureExposureMode) String() string {
 	}
 }
 
+// Constants that specify the flash modes of a capture device.
 type AVCaptureFlashMode int64
 
 const (
@@ -713,6 +758,7 @@ func (e AVCaptureFlashMode) String() string {
 	}
 }
 
+// Constants to specify the focus mode of a capture device.
 type AVCaptureFocusMode int64
 
 const (
@@ -734,6 +780,7 @@ func (e AVCaptureFocusMode) String() string {
 	}
 }
 
+// Constants that define the available microphone modes.
 type AVCaptureMicrophoneMode int64
 
 const (
@@ -755,11 +802,15 @@ func (e AVCaptureMicrophoneMode) String() string {
 	}
 }
 
+// Constants that indicate the modes of multichannel audio.
 type AVCaptureMultichannelAudioMode int64
 
 const (
-	AVCaptureMultichannelAudioModeNone                 AVCaptureMultichannelAudioMode = 0
-	AVCaptureMultichannelAudioModeStereo               AVCaptureMultichannelAudioMode = 1
+	// A mode that indicates there’s no multichannel audio.
+	AVCaptureMultichannelAudioModeNone AVCaptureMultichannelAudioMode = 0
+	// A mode that indicates the recording uses stereo audio.
+	AVCaptureMultichannelAudioModeStereo AVCaptureMultichannelAudioMode = 1
+	// An audio mode that indicates the recording uses first-order ambisonics.
 	AVCaptureMultichannelAudioModeFirstOrderAmbisonics AVCaptureMultichannelAudioMode = 2
 )
 
@@ -776,6 +827,7 @@ func (e AVCaptureMultichannelAudioMode) String() string {
 	}
 }
 
+// Constants that indicate whether the output is ready to receive capture requests.
 type AVCapturePhotoOutputCaptureReadiness int64
 
 const (
@@ -803,6 +855,7 @@ func (e AVCapturePhotoOutputCaptureReadiness) String() string {
 	}
 }
 
+// Constants that indicate how to prioritize photo quality relative to capture speed.
 type AVCapturePhotoQualityPrioritization int64
 
 const (
@@ -824,10 +877,12 @@ func (e AVCapturePhotoQualityPrioritization) String() string {
 	}
 }
 
+// A structure that defines the conditions in which to restrict camera switching.
 // Bitmask — values may be combined with |.
 type AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions uint64
 
 const (
+	// Disallow switching to a fallback camera.
 	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone                AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 0
 	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged    AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 1
 	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionFocusModeChanged    AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 2
@@ -851,6 +906,7 @@ func (e AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) 
 	return strings.Join(parts, "|")
 }
 
+// Constants that control when to allow a virtual device to switch its active primary constituent device.
 type AVCapturePrimaryConstituentDeviceSwitchingBehavior int64
 
 const (
@@ -875,6 +931,7 @@ func (e AVCapturePrimaryConstituentDeviceSwitchingBehavior) String() string {
 	}
 }
 
+// Constants that describe the capture device configuration user interfaces.
 type AVCaptureSystemUserInterface int64
 
 const (
@@ -917,6 +974,7 @@ func (e AVCaptureTimecodeSourceType) String() string {
 	}
 }
 
+// Constants to specify the capture device’s torch mode.
 type AVCaptureTorchMode int64
 
 const (
@@ -938,14 +996,20 @@ func (e AVCaptureTorchMode) String() string {
 	}
 }
 
+// Constants indicating video orientation.
+//
 // Deprecated: Use AVCaptureDeviceRotationCoordinator instead
 type AVCaptureVideoOrientation int64
 
 const (
-	AVCaptureVideoOrientationPortrait           AVCaptureVideoOrientation = 1
+	// Indicates that video should be oriented vertically, top at the top.
+	AVCaptureVideoOrientationPortrait AVCaptureVideoOrientation = 1
+	// Indicates that video should be oriented vertically, top at the bottom.
 	AVCaptureVideoOrientationPortraitUpsideDown AVCaptureVideoOrientation = 2
-	AVCaptureVideoOrientationLandscapeRight     AVCaptureVideoOrientation = 3
-	AVCaptureVideoOrientationLandscapeLeft      AVCaptureVideoOrientation = 4
+	// Indicates that video should be oriented horizontally, top on the left.
+	AVCaptureVideoOrientationLandscapeRight AVCaptureVideoOrientation = 3
+	// Indicates that video should be oriented horizontally, top on the right.
+	AVCaptureVideoOrientationLandscapeLeft AVCaptureVideoOrientation = 4
 )
 
 func (e AVCaptureVideoOrientation) String() string {
@@ -963,6 +1027,7 @@ func (e AVCaptureVideoOrientation) String() string {
 	}
 }
 
+// Constants to specify the white balance mode of a capture device.
 type AVCaptureWhiteBalanceMode int64
 
 const (
@@ -984,16 +1049,24 @@ func (e AVCaptureWhiteBalanceMode) String() string {
 	}
 }
 
+// A value representing the status of a content authorization request.
 type AVContentAuthorizationStatus int64
 
 const (
-	AVContentAuthorizationUnknown      AVContentAuthorizationStatus = 0
-	AVContentAuthorizationCompleted    AVContentAuthorizationStatus = 1
-	AVContentAuthorizationCancelled    AVContentAuthorizationStatus = 2
-	AVContentAuthorizationTimedOut     AVContentAuthorizationStatus = 3
-	AVContentAuthorizationBusy         AVContentAuthorizationStatus = 4
+	// The content authorization content request hasn’t completed.
+	AVContentAuthorizationUnknown AVContentAuthorizationStatus = 0
+	// The last completed call to request content authorization completed.
+	AVContentAuthorizationCompleted AVContentAuthorizationStatus = 1
+	// The last call to request content authorization was cancelled by the user.
+	AVContentAuthorizationCancelled AVContentAuthorizationStatus = 2
+	// The last call to request content authorization was cancelled because the timeout interval was reached.
+	AVContentAuthorizationTimedOut AVContentAuthorizationStatus = 3
+	// The last call to request content authorization couldn’t be completed because another asset is currently attempting authorization.
+	AVContentAuthorizationBusy AVContentAuthorizationStatus = 4
+	// The last call to request content authorization couldn’t be completed because there was no known mechanism by which to attempt authorization.
 	AVContentAuthorizationNotAvailable AVContentAuthorizationStatus = 5
-	AVContentAuthorizationNotPossible  AVContentAuthorizationStatus = 6
+	// The last call to request content authorization couldn’t be completed in a non-recoverable way.
+	AVContentAuthorizationNotPossible AVContentAuthorizationStatus = 6
 )
 
 func (e AVContentAuthorizationStatus) String() string {
@@ -1017,6 +1090,7 @@ func (e AVContentAuthorizationStatus) String() string {
 	}
 }
 
+// The status for a content key request.
 type AVContentKeyRequestStatus int64
 
 const (
@@ -1053,11 +1127,12 @@ func (e AVContentKeyRequestStatus) String() string {
 	}
 }
 
+// Constants that define rate change options.
 // Bitmask — values may be combined with |.
 type AVDelegatingPlaybackCoordinatorRateChangeOptions uint64
 
 const (
-	// Requests that the coordinator begin playback as soon as possible and ignore other participant's readiness and suspensions.
+	// Indicates that the coordinator should begin playback as soon as possible, regardless of other participant’s readiness or suspensions.
 	AVDelegatingPlaybackCoordinatorRateChangeOptionPlayImmediately AVDelegatingPlaybackCoordinatorRateChangeOptions = 1
 )
 
@@ -1072,11 +1147,12 @@ func (e AVDelegatingPlaybackCoordinatorRateChangeOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that define seek options.
 // Bitmask — values may be combined with |.
 type AVDelegatingPlaybackCoordinatorSeekOptions uint64
 
 const (
-	// Requests that the coordinator resume playback as soon as possible after the seek is complete and ignore other participant's readiness and suspensions.
+	// An option that Indicates that the coordinator needs to resume playback as soon as possible, regardless of other participant’s readiness or suspensions.
 	AVDelegatingPlaybackCoordinatorSeekOptionResumeImmediately AVDelegatingPlaybackCoordinatorSeekOptions = 1
 )
 
@@ -1091,6 +1167,7 @@ func (e AVDelegatingPlaybackCoordinatorSeekOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Values indicating the general accuracy of a depth data map.
 type AVDepthDataAccuracy int64
 
 const (
@@ -1109,6 +1186,7 @@ func (e AVDepthDataAccuracy) String() string {
 	}
 }
 
+// Values indicating the overall quality of a depth data map.
 type AVDepthDataQuality int64
 
 const (
@@ -1127,14 +1205,15 @@ func (e AVDepthDataQuality) String() string {
 	}
 }
 
+// Constants that specify whether sufficient protection exists to display the content.
 type AVExternalContentProtectionStatus int64
 
 const (
-	// Indicates that the current protection status has not yet been discovered for the attached display(s).
+	// A status that indicates content protections are pending.
 	AVExternalContentProtectionStatusPending AVExternalContentProtectionStatus = 0
-	// Indicates that sufficient protection with the attached display(s) has been established, content protected by the associated AVContentKey will be eligible to be displayed on the display(s).
+	// A status that indicates sufficient protections exists for display.
 	AVExternalContentProtectionStatusSufficient AVExternalContentProtectionStatus = 1
-	// Indicates that sufficient protection with the attached display(s) has failed to be established, content protected by the associated AVContentKey will not be displayed.
+	// A status that indicates insufficient protections exists for display.
 	AVExternalContentProtectionStatusInsufficient AVExternalContentProtectionStatus = 2
 )
 
@@ -1151,6 +1230,7 @@ func (e AVExternalContentProtectionStatus) String() string {
 	}
 }
 
+// Connection state of an external sync device
 type AVExternalSyncDeviceStatus int64
 
 const (
@@ -1160,7 +1240,7 @@ const (
 	AVExternalSyncDeviceStatusReady AVExternalSyncDeviceStatus = 1
 	// Indicates that the external sync signal is connected and that the AVExternalSyncDevice object is calibrating to follow.
 	AVExternalSyncDeviceStatusCalibrating AVExternalSyncDeviceStatus = 2
-	// Indicates that the ``AVExternalSyncDevice`` object is running and that the clock property on ``AVExternalSyncDevice`` is calibrated to the external sync signal.
+	// Indicates that the AVExternalSyncDevice object is running and that the clock property on AVExternalSyncDevice is calibrated to the external sync signal.
 	AVExternalSyncDeviceStatusActiveSync AVExternalSyncDeviceStatus = 3
 	// Indicates that the AVExternalSyncDevice was calibrated to follow the external sync, but the sync signal has been lost. The camera will continue to match the last signal it received, but sync is not guaranteed.
 	AVExternalSyncDeviceStatusFreeRunSync AVExternalSyncDeviceStatus = 4
@@ -1183,13 +1263,19 @@ func (e AVExternalSyncDeviceStatus) String() string {
 	}
 }
 
+// Values that indicate the loaded status of a property.
 type AVKeyValueStatus int64
 
 const (
-	AVKeyValueStatusUnknown   AVKeyValueStatus = 0
-	AVKeyValueStatusLoading   AVKeyValueStatus = 1
-	AVKeyValueStatusLoaded    AVKeyValueStatus = 2
-	AVKeyValueStatusFailed    AVKeyValueStatus = 3
+	// The property value’s status is unknown.
+	AVKeyValueStatusUnknown AVKeyValueStatus = 0
+	// The system is loading the property value.
+	AVKeyValueStatusLoading AVKeyValueStatus = 1
+	// The property value is ready to use.
+	AVKeyValueStatusLoaded AVKeyValueStatus = 2
+	// The system is unable to load the property value.
+	AVKeyValueStatusFailed AVKeyValueStatus = 3
+	// You canceled loading a property value.
 	AVKeyValueStatusCancelled AVKeyValueStatus = 4
 )
 
@@ -1210,11 +1296,14 @@ func (e AVKeyValueStatus) String() string {
 	}
 }
 
+// A structure that defines options to control the writing of a movie header to a destination URL.
 // Bitmask — values may be combined with |.
 type AVMovieWritingOptions uint64
 
 const (
-	AVMovieWritingAddMovieHeaderToDestination          AVMovieWritingOptions = 0
+	// The new movie header overwrites any existing movie header.
+	AVMovieWritingAddMovieHeaderToDestination AVMovieWritingOptions = 0
+	// The movie header overwrites all existing data and creates a pure reference movie file.
 	AVMovieWritingTruncateDestinationToMovieHeaderOnly AVMovieWritingOptions = 1
 )
 
@@ -1229,6 +1318,7 @@ func (e AVMovieWritingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The actions a player can take when it finishes playing.
 type AVPlayerActionAtItemEnd int64
 
 const (
@@ -1253,14 +1343,15 @@ func (e AVPlayerActionAtItemEnd) String() string {
 	}
 }
 
+// Policies that describe playback behavior when an app transitions to the background while playing video.
 type AVPlayerAudiovisualBackgroundPlaybackPolicy int64
 
 const (
-	// Indicates that the system is free to decide. This is the default policy.
+	// The system decides whether playback continues.
 	AVPlayerAudiovisualBackgroundPlaybackPolicyAutomatic AVPlayerAudiovisualBackgroundPlaybackPolicy = 1
-	// Indicates that the player must be paused on going to background.
+	// The app pauses playback.
 	AVPlayerAudiovisualBackgroundPlaybackPolicyPauses AVPlayerAudiovisualBackgroundPlaybackPolicy = 2
-	// Indicates that the player continues to play if possible in background.
+	// The app continues playback, if possible.
 	AVPlayerAudiovisualBackgroundPlaybackPolicyContinuesIfPossible AVPlayerAudiovisualBackgroundPlaybackPolicy = 3
 )
 
@@ -1277,17 +1368,19 @@ func (e AVPlayerAudiovisualBackgroundPlaybackPolicy) String() string {
 	}
 }
 
+// Constants that define restrictions on the playback of interstitial content.
 // Bitmask — values may be combined with |.
 type AVPlayerInterstitialEventRestrictions uint64
 
 const (
-	// Indicates that the user may freely employ playback controls, as available, both within the primary content and in the interstitial content specified for the event.
+	// A value that indicates no restrictions on playback of primary or interstitial content.
 	AVPlayerInterstitialEventRestrictionNone AVPlayerInterstitialEventRestrictions = 0
 	// Indicates that seeking within the primary content from a date prior to the date of the event to a date subsequent to the date of the event is not permitted.
 	AVPlayerInterstitialEventRestrictionConstrainsSeekingForwardInPrimaryContent AVPlayerInterstitialEventRestrictions = 1
 	// Indicates that advancing the currentTime within an interstitial item, either by seeking ahead or by setting the playback rate to a value greater than the item's asset's preferredRate, is not permitted.
 	AVPlayerInterstitialEventRestrictionRequiresPlaybackAtPreferredRateForAdvancement AVPlayerInterstitialEventRestrictions = 4
-	AVPlayerInterstitialEventRestrictionDefaultPolicy                                 AVPlayerInterstitialEventRestrictions = 0
+	// The default restriction policy.
+	AVPlayerInterstitialEventRestrictionDefaultPolicy AVPlayerInterstitialEventRestrictions = 0
 )
 
 func (e AVPlayerInterstitialEventRestrictions) String() string {
@@ -1332,6 +1425,7 @@ func (e AVPlayerInterstitialEventSkippableEventState) String() string {
 	}
 }
 
+// Constants that specify how an event occupies time on an integrated timeline.
 type AVPlayerInterstitialEventTimelineOccupancy int64
 
 const (
@@ -1352,6 +1446,7 @@ func (e AVPlayerInterstitialEventTimelineOccupancy) String() string {
 	}
 }
 
+// Constants that specify the type of segment.
 type AVPlayerItemSegmentType int64
 
 const (
@@ -1370,6 +1465,7 @@ func (e AVPlayerItemSegmentType) String() string {
 	}
 }
 
+// The statuses for a player item.
 type AVPlayerItemStatus int64
 
 const (
@@ -1394,6 +1490,7 @@ func (e AVPlayerItemStatus) String() string {
 	}
 }
 
+// Constants that define the ordering of items in a player looper.
 type AVPlayerLooperItemOrdering int64
 
 const (
@@ -1412,6 +1509,7 @@ func (e AVPlayerLooperItemOrdering) String() string {
 	}
 }
 
+// Status constants that indicate whether a looper can successfully perform looping playback.
 type AVPlayerLooperStatus int64
 
 const (
@@ -1460,6 +1558,7 @@ func (e AVPlayerNetworkResourcePriority) String() string {
 	}
 }
 
+// Status values that indicate whether a player can successfully play media.
 type AVPlayerStatus int64
 
 const (
@@ -1484,6 +1583,7 @@ func (e AVPlayerStatus) String() string {
 	}
 }
 
+// Constants that indicate the state of playback control.
 type AVPlayerTimeControlStatus int64
 
 const (
@@ -1508,12 +1608,16 @@ func (e AVPlayerTimeControlStatus) String() string {
 	}
 }
 
+// The statuses for sample buffer rendering.
 type AVQueuedSampleBufferRenderingStatus int64
 
 const (
-	AVQueuedSampleBufferRenderingStatusUnknown   AVQueuedSampleBufferRenderingStatus = 0
+	// The object doesn’t have any sample buffers enqueued.
+	AVQueuedSampleBufferRenderingStatusUnknown AVQueuedSampleBufferRenderingStatus = 0
+	// The object is rendering the sample buffer.
 	AVQueuedSampleBufferRenderingStatusRendering AVQueuedSampleBufferRenderingStatus = 1
-	AVQueuedSampleBufferRenderingStatusFailed    AVQueuedSampleBufferRenderingStatus = 2
+	// The object can no longer render sample buffers because of an error.
+	AVQueuedSampleBufferRenderingStatusFailed AVQueuedSampleBufferRenderingStatus = 2
 )
 
 func (e AVQueuedSampleBufferRenderingStatus) String() string {
@@ -1529,6 +1633,7 @@ func (e AVQueuedSampleBufferRenderingStatus) String() string {
 	}
 }
 
+// The modes that describe the buffer request direction.
 type AVSampleBufferRequestDirection int64
 
 const (
@@ -1550,6 +1655,7 @@ func (e AVSampleBufferRequestDirection) String() string {
 	}
 }
 
+// The modes in which a sample buffer generator processes a request.
 type AVSampleBufferRequestMode int64
 
 const (
@@ -1571,13 +1677,14 @@ func (e AVSampleBufferRequestMode) String() string {
 	}
 }
 
+// Defines the preferences the player item uses when selecting variant playlists.
 // Bitmask — values may be combined with |.
 type AVVariantPreferences uint64
 
 const (
-	// Indicates that only the basic behaviors of the player for choosing among variants should be applied, including considerations of available bandwidth, compatibility of the indicated codec or codecs, the dimensions of visual output, and the number of available audio output channels.
+	// Indicates that the player item uses the default behavior for determining variant playlist selection.
 	AVVariantPreferenceNone AVVariantPreferences = 0
-	// Directs the item to permit the use of variants with lossless audio encodings, if sufficient bandwidth is available for their use.
+	// A preference that indicates the player item supports variant playlists that contain losslessly encoded audio when sufficient bandwidth is available.
 	AVVariantPreferenceScalabilityToLosslessAudio AVVariantPreferences = 1
 )
 
@@ -1592,12 +1699,17 @@ func (e AVVariantPreferences) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that indicate which interlacing modes the connection applies to video flowing through it.
 type AVVideoFieldMode int64
 
 const (
-	AVVideoFieldModeBoth        AVVideoFieldMode = 0
-	AVVideoFieldModeTopOnly     AVVideoFieldMode = 1
-	AVVideoFieldModeBottomOnly  AVVideoFieldMode = 2
+	// A value that indicates that a video connection passes both the top and bottom video fields.
+	AVVideoFieldModeBoth AVVideoFieldMode = 0
+	// A value that indicates that a video connection only passes the top video field.
+	AVVideoFieldModeTopOnly AVVideoFieldMode = 1
+	// A value that indicates that a video connection only passes the bottom video field.
+	AVVideoFieldModeBottomOnly AVVideoFieldMode = 2
+	// A value that indicates that a video connection deinterlaces the top and bottom video fields.
 	AVVideoFieldModeDeinterlace AVVideoFieldMode = 3
 )
 
@@ -1616,10 +1728,13 @@ func (e AVVideoFieldMode) String() string {
 	}
 }
 
+// Constants that indicate the type of video content to output.
 type CMTagCollectionVideoOutputPreset int64
 
 const (
-	KCMTagCollectionVideoOutputPreset_Monoscopic   CMTagCollectionVideoOutputPreset = 0
+	// An output preset for monoscopic video.
+	KCMTagCollectionVideoOutputPreset_Monoscopic CMTagCollectionVideoOutputPreset = 0
+	// An output preset for stereoscopic video.
 	KCMTagCollectionVideoOutputPreset_Stereoscopic CMTagCollectionVideoOutputPreset = 1
 )
 

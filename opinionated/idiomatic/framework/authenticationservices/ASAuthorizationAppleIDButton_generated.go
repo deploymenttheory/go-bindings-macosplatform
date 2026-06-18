@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A control you add to your interface that enables users to initiate the Sign In with Apple flow.
+//
 // AuthorizationAppleIDButton wraps [raw.ASAuthorizationAppleIDButton] with a fluent Go API.
 type AuthorizationAppleIDButton struct {
 	inner *raw.ASAuthorizationAppleIDButton
@@ -29,6 +31,8 @@ func AuthorizationAppleIDButtonFromID(id objc.ID) *AuthorizationAppleIDButton {
 	return &AuthorizationAppleIDButton{inner: raw.ASAuthorizationAppleIDButtonFromID(id)}
 }
 
+// Creates a new Sign In with Apple authorization button with the given type and style.
+//
 // NewAuthorizationAppleIDButtonWithAuthorizationButtonTypeAuthorizationButtonStyle creates a new [AuthorizationAppleIDButton].
 func NewAuthorizationAppleIDButtonWithAuthorizationButtonTypeAuthorizationButtonStyle(type_ ASAuthorizationAppleIDButtonType, style ASAuthorizationAppleIDButtonStyle) *AuthorizationAppleIDButton {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationAppleIDButton")), objc.RegisterName("alloc"))
@@ -36,7 +40,7 @@ func NewAuthorizationAppleIDButtonWithAuthorizationButtonTypeAuthorizationButton
 	return &AuthorizationAppleIDButton{inner: raw.ASAuthorizationAppleIDButtonFromID(_id)}
 }
 
-// @abstract Set a custom corner radius to be used by this button.
+// The radius, in points, for the rounded corners on the Apple ID sign-in button.
 //
 // WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
 func (x *AuthorizationAppleIDButton) WithCornerRadius(cornerRadius float64) *AuthorizationAppleIDButton {

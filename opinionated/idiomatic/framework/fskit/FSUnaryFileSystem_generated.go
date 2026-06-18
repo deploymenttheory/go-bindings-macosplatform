@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract base class for implementing a minimal file system.
+//
 // UnaryFileSystem wraps [raw.FSUnaryFileSystem] with a fluent Go API.
 type UnaryFileSystem struct {
 	inner *raw.FSUnaryFileSystem

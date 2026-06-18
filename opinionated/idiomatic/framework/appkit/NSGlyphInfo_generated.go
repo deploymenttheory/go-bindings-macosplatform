@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A glyph attribute in an attributed string.
+//
 // GlyphInfo wraps [raw.NSGlyphInfo] with a fluent Go API.
 type GlyphInfo struct {
 	inner *raw.NSGlyphInfo

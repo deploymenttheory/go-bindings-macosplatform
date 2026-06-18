@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A metaparameter with a text definition that can change over time.
+//
 // StringMetaParameter wraps [raw.PHASEStringMetaParameter] with a fluent Go API.
 type StringMetaParameter struct {
 	inner *raw.PHASEStringMetaParameter
@@ -35,7 +37,7 @@ func NewStringMetaParameter() *StringMetaParameter {
 	return &StringMetaParameter{inner: raw.PHASEStringMetaParameterFromID(_id)}
 }
 
-// @property value @abstract The value of this metaparameter
+// A value for the metaparameter.
 //
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *StringMetaParameter) WithValue(value objc.ID) *StringMetaParameter {
