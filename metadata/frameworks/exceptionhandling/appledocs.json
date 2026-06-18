@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "framework": "ExceptionHandling",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "NSExceptionHandler": {
+      "doc": "The NSExceptionHandler class provides facilities for monitoring and debugging exceptional conditions in Objective-C programs. It works by installing a special uncaught exception handler via the NSSetUncaughtExceptionHandler function. Consequently, to use the services of NSExceptionHandler, you must not install your own custom uncaught exception handler.",
+      "url": "https://developer.apple.com/documentation/exceptionhandling/nsexceptionhandler"
+    }
+  },
+  "methods": {
+    "NSExceptionHandler": {
+      "+defaultExceptionHandler": {
+        "doc": "Returns the singleton NSExceptionHandler instance.",
+        "url": "https://developer.apple.com/documentation/exceptionhandling/nsexceptionhandler/default()"
+      },
+      "-delegate": {
+        "doc": "Returns the delegate of the NSExceptionHandler object.",
+        "url": "https://developer.apple.com/documentation/exceptionhandling/nsexceptionhandler/delegate()"
+      },
+      "-exceptionHandlingMask": {
+        "doc": "Returns a bit mask representing the types of exceptions monitored by the receiver and its handling and logging behavior.",
+        "url": "https://developer.apple.com/documentation/exceptionhandling/nsexceptionhandler/exceptionhandlingmask()"
+      },
+      "-exceptionHangingMask": {
+        "doc": "Returns a bit mask representing the types of exceptions that will halt execution for debugging.",
+        "url": "https://developer.apple.com/documentation/exceptionhandling/nsexceptionhandler/exceptionhangingmask()"
+      },
+      "-setDelegate:": {
+        "doc": "Sets the delegate of the NSExceptionHandler object.",
+        "url": "https://developer.apple.com/documentation/exceptionhandling/nsexceptionhandler/setdelegate(_:)"
+      },
+      "-setExceptionHandlingMask:": {
+        "doc": "Sets the bit mask of constants specifying the types of exceptions monitored by the receiver and its handling and logging behavior.",
+        "url": "https://developer.apple.com/documentation/exceptionhandling/nsexceptionhandler/setexceptionhandlingmask(_:)"
+      },
+      "-setExceptionHangingMask:": {
+        "doc": "Sets the bit mask of constants specifying the types of exceptions that will halt execution for debugging.",
+        "url": "https://developer.apple.com/documentation/exceptionhandling/nsexceptionhandler/setexceptionhangingmask(_:)"
+      }
+    }
+  }
+}

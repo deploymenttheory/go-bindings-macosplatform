@@ -1,0 +1,1539 @@
+{
+  "schema_version": 1,
+  "framework": "AudioToolbox",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "AUAudioUnit": {
+      "doc": "A class that defines a host’s interface to an audio unit.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit"
+    },
+    "AUAudioUnitBus": {
+      "doc": "A class that defines an input or output connection point on an audio unit.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbus"
+    },
+    "AUAudioUnitBusArray": {
+      "doc": "A class that defines a container for an audio unit’s input or output busses.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbusarray"
+    },
+    "AUAudioUnitPreset": {
+      "doc": "A class that describes an interface for custom parameter settings provided by the audio unit developer.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitpreset"
+    },
+    "AUAudioUnitV2Bridge": {
+      "doc": "A class that wraps a version 2 audio unit as version 3 audio unit.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitv2bridge"
+    },
+    "AUParameter": {
+      "doc": "An object that represents a single audio unit parameter.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auparameter"
+    },
+    "AUParameterGroup": {
+      "doc": "A parameter group object represents a group of related audio unit parameters.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auparametergroup"
+    },
+    "AUParameterNode": {
+      "doc": "An object that represents a node in an audio unit’s parameter tree.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auparameternode"
+    },
+    "AUParameterTree": {
+      "doc": "An object that represents a top-level group node that contains all of an audio unit’s parameters.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auparametertree"
+    }
+  },
+  "protocols": {
+    "AUAudioUnitFactory": {
+      "doc": "An object that creates a version 3 audio unit.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitfactory"
+    },
+    "AUMessageChannel": {
+      "doc": "A specification for a bidirectional communication message channel.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/aumessagechannel"
+    }
+  },
+  "enums": {
+    "AU3DMixerAttenuationCurve": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/au3dmixerattenuationcurve",
+      "members": {
+        "k3DMixerAttenuationCurve_Exponential": {
+          "doc": "An exponential attenuation curve.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/au3dmixerattenuationcurve/k3dmixerattenuationcurve_exponential"
+        },
+        "k3DMixerAttenuationCurve_Inverse": {
+          "doc": "An inverse attenuation curve.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/au3dmixerattenuationcurve/k3dmixerattenuationcurve_inverse"
+        },
+        "k3DMixerAttenuationCurve_Linear": {
+          "doc": "A linear attenuation curve.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/au3dmixerattenuationcurve/k3dmixerattenuationcurve_linear"
+        },
+        "k3DMixerAttenuationCurve_Power": {
+          "doc": "An equal-power-based attenuation curve.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/au3dmixerattenuationcurve/k3dmixerattenuationcurve_power"
+        }
+      }
+    },
+    "AU3DMixerRenderingFlags": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/au3dmixerrenderingflags"
+    },
+    "AUAudioMixRenderingStyle": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiomixrenderingstyle"
+    },
+    "AUAudioUnitBusType": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbustype",
+      "members": {
+        "AUAudioUnitBusTypeInput": {
+          "doc": "An input bus.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbustype/input"
+        },
+        "AUAudioUnitBusTypeOutput": {
+          "doc": "An output bus.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbustype/output"
+        }
+      }
+    },
+    "AUHostTransportStateFlags": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auhosttransportstateflags",
+      "members": {
+        "AUHostTransportStateChanged": {
+          "doc": "Indicates such state changes as start, stop, or seeking to another position in the timeline. Can be active if there was a change to the state of, or discontinuities in, the audio transport since the AUHostTransportStateBlock callback was last called.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/auhosttransportstateflags/changed"
+        },
+        "AUHostTransportStateCycling": {
+          "doc": "Indicates that the host is cycling or looping.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/auhosttransportstateflags/cycling"
+        },
+        "AUHostTransportStateMoving": {
+          "doc": "Indicates that the audio transport is moving.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/auhosttransportstateflags/moving"
+        },
+        "AUHostTransportStateRecording": {
+          "doc": "Indicates that the host is recording, or is prepared to record. Can be active with or without a moving state.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/auhosttransportstateflags/recording"
+        }
+      }
+    },
+    "AUParameterAutomationEventType": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auparameterautomationeventtype"
+    },
+    "AUParameterEventType": {
+      "doc": "Audio unit parameter event types.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auparametereventtype",
+      "members": {
+        "kParameterEvent_Immediate": {
+          "doc": "An immediate change from the parameter’s previous value to a new value.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/auparametereventtype/parameterevent_immediate"
+        },
+        "kParameterEvent_Ramped": {
+          "doc": "A gradual change from the parameter’s previous value to a new value, applied linearly over a specified period of time",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/auparametereventtype/parameterevent_ramped"
+        }
+      }
+    },
+    "AUParameterMIDIMappingFlags": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auparametermidimappingflags"
+    },
+    "AURenderEventType": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/aurendereventtype",
+      "members": {
+        "AURenderEventMIDI": {
+          "doc": "A MIDI event.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/aurendereventtype/midi"
+        },
+        "AURenderEventMIDISysEx": {
+          "doc": "A system-exclusive MIDI event.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/aurendereventtype/midisysex"
+        },
+        "AURenderEventParameter": {
+          "doc": "A parameter event.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/aurendereventtype/parameter"
+        },
+        "AURenderEventParameterRamp": {
+          "doc": "A ramped parameter event.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/aurendereventtype/parameterramp"
+        }
+      }
+    },
+    "AUReverbRoomType": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/aureverbroomtype"
+    },
+    "AUScheduledAudioSliceFlags": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auscheduledaudiosliceflags"
+    },
+    "AUSpatialMixerAttenuationCurve": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auspatialmixerattenuationcurve"
+    },
+    "AUSpatialMixerOutputType": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auspatialmixeroutputtype"
+    },
+    "AUSpatialMixerPersonalizedHRTFMode": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auspatialmixerpersonalizedhrtfmode"
+    },
+    "AUSpatialMixerPointSourceInHeadMode": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auspatialmixerpointsourceinheadmode"
+    },
+    "AUSpatialMixerRenderingFlags": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auspatialmixerrenderingflags"
+    },
+    "AUSpatialMixerSourceMode": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auspatialmixersourcemode"
+    },
+    "AUSpatializationAlgorithm": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auspatializationalgorithm"
+    },
+    "AUVoiceIOOtherAudioDuckingLevel": {
+      "doc": "The ducking level to apply to other non-voice audio.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auvoiceiootheraudioduckinglevel",
+      "members": {
+        "kAUVoiceIOOtherAudioDuckingLevelDefault": {
+          "doc": "The default ducking level of other non-voice audio in a typical voice chat.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/auvoiceiootheraudioduckinglevel/default"
+        },
+        "kAUVoiceIOOtherAudioDuckingLevelMax": {
+          "doc": "The maximum ducking level of other non-voice audio.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/auvoiceiootheraudioduckinglevel/max"
+        },
+        "kAUVoiceIOOtherAudioDuckingLevelMid": {
+          "doc": "A medium ducking level of other non-voice audio.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/auvoiceiootheraudioduckinglevel/mid"
+        },
+        "kAUVoiceIOOtherAudioDuckingLevelMin": {
+          "doc": "The minimum ducking level of other non-voice audio.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/auvoiceiootheraudioduckinglevel/min"
+        }
+      }
+    },
+    "AUVoiceIOSpeechActivityEvent": {
+      "doc": "Constants that indicate the state of muted speech.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auvoiceiospeechactivityevent",
+      "members": {
+        "kAUVoiceIOSpeechActivityHasEnded": {
+          "doc": "A state that indicates speech ended.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/auvoiceiospeechactivityevent/hasended"
+        },
+        "kAUVoiceIOSpeechActivityHasStarted": {
+          "doc": "A state that indicates speech started.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/auvoiceiospeechactivityevent/hasstarted"
+        }
+      }
+    },
+    "AudioBalanceFadeType": {
+      "doc": "Identifiers for audio balance fade types.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiobalancefadetype",
+      "members": {
+        "kAudioBalanceFadeType_EqualPower": {
+          "doc": "Overall loudness remains constant, but gain can exceed 1.0. The gain value is 1.0 when the balance and fade are in the center. From there they can increase to +3dB (1.414) and decrease to silence.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiobalancefadetype/equalpower"
+        },
+        "kAudioBalanceFadeType_MaxUnityGain": {
+          "doc": "Ensures that the overall gain value never exceeds 1.0 by fading one channel as the other channel’s level rises. This can reduce overall loudness when the balance or fade is not in the center.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiobalancefadetype/maxunitygain"
+        }
+      }
+    },
+    "AudioBytePacketTranslationFlags": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiobytepackettranslationflags",
+      "members": {
+        "kBytePacketTranslationFlag_IsEstimate": {
+          "doc": "If set, the result value is an estimate.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiobytepackettranslationflags/bytepackettranslationflag_isestimate"
+        }
+      }
+    },
+    "AudioComponentFlags": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiocomponentflags"
+    },
+    "AudioComponentInstantiationOptions": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiocomponentinstantiationoptions"
+    },
+    "AudioComponentValidationResult": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiocomponentvalidationresult"
+    },
+    "AudioConverterOptions": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audioconverteroptions"
+    },
+    "AudioFileFlags": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiofileflags",
+      "members": {
+        "kAudioFileFlags_DontPageAlignAudioData": {
+          "doc": "Typically, the audio data in a file is page aligned. To make reading the file data as fast as possible, you can use page-aligned data to take advantage of optimized code paths in the file system. However, when space is at a premium, you might want to avoid the additional padding required to attain alignment. To do so, set this flag when calling AudioFileCreate or AudioFileCreateWithURL.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiofileflags/dontpagealignaudiodata"
+        }
+      }
+    },
+    "AudioFilePermissions": {
+      "doc": "Flags for use when opening an audio file.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiofilepermissions",
+      "members": {
+        "kAudioFileReadPermission": {
+          "doc": "File is read-only.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiofilepermissions/readpermission"
+        },
+        "kAudioFileReadWritePermission": {
+          "doc": "File has read-write permission.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiofilepermissions/readwritepermission"
+        },
+        "kAudioFileWritePermission": {
+          "doc": "File is write-only.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiofilepermissions/writepermission"
+        }
+      }
+    },
+    "AudioFileRegionFlags": {
+      "doc": "Flags that specify a playback direction for an audio file region structure.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiofileregionflags",
+      "members": {
+        "kAudioFileRegionFlag_LoopEnable": {
+          "doc": "If set, the region is looped. You must set one or both of the remaining flags must also be set for the region to be looped.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiofileregionflags/loopenable"
+        },
+        "kAudioFileRegionFlag_PlayBackward": {
+          "doc": "If set, the region is played backward.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiofileregionflags/playbackward"
+        },
+        "kAudioFileRegionFlag_PlayForward": {
+          "doc": "If set, the region is played forward.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiofileregionflags/playforward"
+        }
+      }
+    },
+    "AudioFileStreamParseFlags": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiofilestreamparseflags",
+      "members": {
+        "kAudioFileStreamParseFlag_Discontinuity": {
+          "doc": "Pass this flag to the AudioFileStreamParseBytes function to signal a discontinuity in the audio data.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiofilestreamparseflags/discontinuity"
+        }
+      }
+    },
+    "AudioFileStreamPropertyFlags": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiofilestreampropertyflags",
+      "members": {
+        "kAudioFileStreamPropertyFlag_CacheProperty": {
+          "doc": "A property listener sets this flag to instruct the parser to cache the property value so that it remains available after the callback returns.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiofilestreampropertyflags/cacheproperty"
+        },
+        "kAudioFileStreamPropertyFlag_PropertyIsCached": {
+          "doc": "This flag is set when the callback AudioFileStream_PropertyListenerProc is invoked in the case that the value of the property has been cached and can be obtained later.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiofilestreampropertyflags/propertyiscached"
+        }
+      }
+    },
+    "AudioFileStreamSeekFlags": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiofilestreamseekflags",
+      "members": {
+        "kAudioFileStreamSeekFlag_OffsetIsEstimated": {
+          "doc": "This flag is returned by the AudioFileStreamSeek function if the byte offset is only an estimate.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiofilestreamseekflags/offsetisestimated"
+        }
+      }
+    },
+    "AudioPanningMode": {
+      "doc": "Identifiers for audio panning algorithms.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiopanningmode",
+      "members": {
+        "kPanningMode_SoundField": {
+          "doc": "The SoundField panning algorithm.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiopanningmode/panningmode_soundfield"
+        },
+        "kPanningMode_VectorBasedPanning": {
+          "doc": "A vector-based panning algorithm.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiopanningmode/panningmode_vectorbasedpanning"
+        }
+      }
+    },
+    "AudioQueueProcessingTapFlags": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audioqueueprocessingtapflags"
+    },
+    "AudioSettingsFlags": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiosettingsflags"
+    },
+    "AudioUnitEventType": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiouniteventtype"
+    },
+    "AudioUnitParameterOptions": {
+      "doc": "Value options for audio unit parameters.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameteroptions",
+      "members": {
+        "kAudioUnitParameterFlag_CFNameRelease": {
+          "doc": "If an audio unit can generate parameter names dynamically, it should set this flag.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameteroptions/flag_cfnamerelease"
+        },
+        "kAudioUnitParameterFlag_PlotHistory": {
+          "doc": "If set, getting the kAudioUnitProperty_ParameterHistoryInfo property fills out the AudioUnitParameterHistoryInfo struct containing the recommended update rate and history duration.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameteroptions/flag_plothistory"
+        }
+      }
+    },
+    "AudioUnitParameterUnit": {
+      "doc": "The unit-of-measure for an audio unit parameter.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit",
+      "members": {
+        "kAudioUnitParameterUnit_AbsoluteCents": {
+          "doc": "An absolute unit of measure for the musical pitch of a note.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/absolutecents"
+        },
+        "kAudioUnitParameterUnit_BPM": {
+          "doc": "A whole-number unit of measure for musical tempo, representing beats per minute.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/bpm"
+        },
+        "kAudioUnitParameterUnit_Beats": {
+          "doc": "A time unit of measure in musical beats.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/beats"
+        },
+        "kAudioUnitParameterUnit_Boolean": {
+          "doc": "A Boolean-like unit of measure.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/boolean"
+        },
+        "kAudioUnitParameterUnit_Cents": {
+          "doc": "A logarithmic unit of measure for a musical interval between two notes.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/cents"
+        },
+        "kAudioUnitParameterUnit_CustomUnit": {
+          "doc": "A custom unit of measure.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/customunit"
+        },
+        "kAudioUnitParameterUnit_Decibels": {
+          "doc": "A logarithmic unit of measure representing the ratio between two audio levels.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/decibels"
+        },
+        "kAudioUnitParameterUnit_Degrees": {
+          "doc": "An angular degree unit of measure.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/degrees"
+        },
+        "kAudioUnitParameterUnit_EqualPowerCrossfade": {
+          "doc": "An audio power unit of measure.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/equalpowercrossfade"
+        },
+        "kAudioUnitParameterUnit_Generic": {
+          "doc": "A generic unit of measure.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/generic"
+        },
+        "kAudioUnitParameterUnit_Hertz": {
+          "doc": "A hertz unit of measure.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/hertz"
+        },
+        "kAudioUnitParameterUnit_Indexed": {
+          "doc": "An indexed unit of measure.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/indexed"
+        },
+        "kAudioUnitParameterUnit_LinearGain": {
+          "doc": "A linear unit of measure representing the difference between two audio levels.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/lineargain"
+        },
+        "kAudioUnitParameterUnit_MIDIController": {
+          "doc": "A whole-number unit of measure corresponding to standard MIDI control numbers.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/midicontroller"
+        },
+        "kAudioUnitParameterUnit_MIDINoteNumber": {
+          "doc": "A whole-number unit of measure corresponding to audio frequency.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/midinotenumber"
+        },
+        "kAudioUnitParameterUnit_Meters": {
+          "doc": "A distance unit of measure, corresponding to meters.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/meters"
+        },
+        "kAudioUnitParameterUnit_Milliseconds": {
+          "doc": "A time unit of measure representing milliseconds.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/milliseconds"
+        },
+        "kAudioUnitParameterUnit_MixerFaderCurve1": {
+          "doc": "An audio power unit of measure.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/mixerfadercurve1"
+        },
+        "kAudioUnitParameterUnit_Octaves": {
+          "doc": "A relative unit of measure for the musical interval between two notes.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/octaves"
+        },
+        "kAudioUnitParameterUnit_Pan": {
+          "doc": "An audio position unit of measure.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/pan"
+        },
+        "kAudioUnitParameterUnit_Percent": {
+          "doc": "A percentage unit of measure.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/percent"
+        },
+        "kAudioUnitParameterUnit_Phase": {
+          "doc": "An angular degree unit of measure.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/phase"
+        },
+        "kAudioUnitParameterUnit_Rate": {
+          "doc": "A multiplication factor unit of measure.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/rate"
+        },
+        "kAudioUnitParameterUnit_Ratio": {
+          "doc": "A unitless ratio unit of measure.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/ratio"
+        },
+        "kAudioUnitParameterUnit_RelativeSemiTones": {
+          "doc": "A relative unit of measure for a musical interval between two notes.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/relativesemitones"
+        },
+        "kAudioUnitParameterUnit_SampleFrames": {
+          "doc": "A sample-frame-count unit of measure.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/sampleframes"
+        },
+        "kAudioUnitParameterUnit_Seconds": {
+          "doc": "A whole-seconds unit of measure, indicating either absolute or relative time.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterunit/seconds"
+        }
+      }
+    },
+    "AudioUnitRemoteControlEvent": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitremotecontrolevent"
+    },
+    "AudioUnitRenderActionFlags": {
+      "doc": "Flags for configuring audio unit rendering.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitrenderactionflags",
+      "members": {
+        "kAudioOfflineUnitRenderAction_Complete": {
+          "doc": "This flag is set when an offline unit has completed either its preflight or performed render operation.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitrenderactionflags/offlineunitrenderaction_complete"
+        },
+        "kAudioOfflineUnitRenderAction_Preflight": {
+          "doc": "This is used with offline audio units (of type 'auol'). It is used when an offline unit is being preflighted, which is performed prior to the actual offline rendering actions are performed. It is used for those cases where the offline process needs it (for example, with an offline unit that normalizes an audio file, it needs to see all of the audio data first before it can perform its normalization).",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitrenderactionflags/offlineunitrenderaction_preflight"
+        },
+        "kAudioOfflineUnitRenderAction_Render": {
+          "doc": "Once an offline unit has been successfully preflighted, it is then put into its render mode. So this flag is set to indicate to the audio unit that it is now in that state and that it should perform its processing on the input data.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitrenderactionflags/offlineunitrenderaction_render"
+        },
+        "kAudioUnitRenderAction_DoNotCheckRenderArgs": {
+          "doc": "If this flag is set, then checks that are done on the arguments provided to render are not performed. This can be useful to use to save computation time in situations where you are sure you are providing the correct arguments and structures to the various render calls.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitrenderactionflags/unitrenderaction_donotcheckrenderargs"
+        },
+        "kAudioUnitRenderAction_OutputIsSilence": {
+          "doc": "This flag can be set in a render input callback (or in the audio unit’s render operation itself) and is used to indicate that the render buffer contains only silence. It can then be used by the caller as a hint to whether the buffer needs to be processed or not.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitrenderactionflags/unitrenderaction_outputissilence"
+        },
+        "kAudioUnitRenderAction_PostRender": {
+          "doc": "Called on a render notification Proc - which is called either before or after the render operation of the audio unit. If this flag is set, the proc is being called after the render operation is completed.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitrenderactionflags/unitrenderaction_postrender"
+        },
+        "kAudioUnitRenderAction_PostRenderError": {
+          "doc": "If this flag is set on the post-render call an error was returned by the audio unit’s render operation. In this case, the error can be retrieved through the lastRenderError property and the audio data in ioData handed to the post-render notification will be invalid.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitrenderactionflags/unitrenderaction_postrendererror"
+        },
+        "kAudioUnitRenderAction_PreRender": {
+          "doc": "Called on a render notification Proc - which is called either before or after the render operation of the audio unit. If this flag is set, the proc is being called before the render operation is performed.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitrenderactionflags/unitrenderaction_prerender"
+        }
+      }
+    },
+    "CAClockMessage": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/caclockmessage"
+    },
+    "CAClockPropertyID": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/caclockpropertyid"
+    },
+    "CAClockSyncMode": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/caclocksyncmode"
+    },
+    "CAClockTimeFormat": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/caclocktimeformat"
+    },
+    "CAClockTimebase": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/caclocktimebase"
+    },
+    "CAFFormatFlags": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafformatflags"
+    },
+    "CAFRegionFlags": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafregionflags"
+    },
+    "MusicSequenceFileFlags": {
+      "doc": "Flags that configure the behavior of the MusicSequenceFileCreate and MusicSequenceFileCreateData functions.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/musicsequencefileflags",
+      "members": {
+        "kMusicSequenceFileFlags_EraseFile": {
+          "doc": "Specifies that an existing file should be erased when creating a new file.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/musicsequencefileflags/erasefile"
+        }
+      }
+    },
+    "MusicSequenceFileTypeID": {
+      "doc": "The various types of files that can be parsed by a music sequence.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/musicsequencefiletypeid",
+      "members": {
+        "kMusicSequenceFile_MIDIType": {
+          "doc": "A MIDI file type",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/musicsequencefiletypeid/miditype"
+        },
+        "kMusicSequenceFile_iMelodyType": {
+          "doc": "An iMelody file type.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/musicsequencefiletypeid/imelodytype"
+        }
+      }
+    },
+    "MusicSequenceLoadFlags": {
+      "doc": "Flags used to configure the behavior of the MusicSequenceFileLoad and MusicSequenceFileLoadData functions.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/musicsequenceloadflags",
+      "members": {
+        "kMusicSequenceLoadSMF_ChannelsToTracks": {
+          "doc": "If this flag is set the resultant Sequence will contain a tempo track, 1 track for each MIDI Channel that is found in the SMF, 1 track for SysEx or MetaEvents - and this will be the last track in the sequence after the LoadSMFWithFlags calls.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/musicsequenceloadflags/smf_channelstotracks"
+        }
+      }
+    },
+    "MusicSequenceType": {
+      "doc": "The various types of music sequences.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/musicsequencetype",
+      "members": {
+        "kMusicSequenceType_Beats": {
+          "doc": "Used for a music sequence that corresponds to a normal MIDI file. The tempo track defines the number of beats per second and can have multiple tempo events.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/musicsequencetype/beats"
+        },
+        "kMusicSequenceType_Samples": {
+          "doc": "Used for audio samples; a music sequence of this type cannot be saved to a MIDI file. The tempo track contains a single tempo event that specifies an audio sample rate in samples-per-second.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/musicsequencetype/samples"
+        },
+        "kMusicSequenceType_Seconds": {
+          "doc": "Used for a music sequence that corresponds to a MIDI file, but employs SMPTE timecode. The tempo track contains a single tempo event that specifies 60 beat-per-minute.",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/musicsequencetype/seconds"
+        }
+      }
+    }
+  },
+  "structs": {
+    "AUChannelInfo": {
+      "doc": "The audio input and output channel capabilities for an audio unit.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auchannelinfo"
+    },
+    "AUDependentParameter": {
+      "doc": "An audio unit parameter whose value can change in response to a change in its parent metaparameter.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audependentparameter"
+    },
+    "AUDistanceAttenuationData": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audistanceattenuationdata"
+    },
+    "AUHostIdentifier": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auhostidentifier"
+    },
+    "AUHostVersionIdentifier": {
+      "doc": "The name and version of an audio unit’s host application.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auhostversionidentifier"
+    },
+    "AUInputSamplesInOutputCallbackStruct": {
+      "doc": "The callback function and custom data for providing input-to-output sample mapping for an audio unit.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auinputsamplesinoutputcallbackstruct"
+    },
+    "AUMIDIEvent": {
+      "doc": "A structure that describes a scheduled MIDI event.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/aumidievent"
+    },
+    "AUMIDIEventList": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/aumidieventlist"
+    },
+    "AUMIDIOutputCallbackStruct": {
+      "doc": "The callback function and custom data for an audio unit that provides MIDI output.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/aumidioutputcallbackstruct"
+    },
+    "AUNodeInteraction": {
+      "doc": "Describes the interaction between two node objects.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/aunodeinteraction"
+    },
+    "AUNodeRenderCallback": {
+      "doc": "A callback used to provide input to an audio unit.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/aunoderendercallback"
+    },
+    "AUNumVersion": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/aunumversion"
+    },
+    "AUParameterAutomationEvent": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auparameterautomationevent"
+    },
+    "AUParameterEvent": {
+      "doc": "A structure that describes a scheduled parameter event.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auparameterevent"
+    },
+    "AUParameterMIDIMapping": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auparametermidimapping"
+    },
+    "AUPreset": {
+      "doc": "Used to set factory presets for an audio unit.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/aupreset"
+    },
+    "AUPresetEvent": {
+      "doc": "Describes an audio unit preset.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/aupresetevent"
+    },
+    "AURecordedParameterEvent": {
+      "doc": "An event recording the changing of a parameter at a particular host time.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/aurecordedparameterevent"
+    },
+    "AURenderCallbackStruct": {
+      "doc": "Used for registering an input callback function with an audio unit.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/aurendercallbackstruct"
+    },
+    "AURenderEventHeader": {
+      "doc": "The common header for a render event.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/aurendereventheader"
+    },
+    "AUSamplerBankPresetData": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/ausamplerbankpresetdata"
+    },
+    "AUSamplerInstrumentData": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/ausamplerinstrumentdata"
+    },
+    "AUVoiceIOOtherAudioDuckingConfiguration": {
+      "doc": "A structure that you use to configure ducking of other non-voice audio in a voice chat.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/auvoiceiootheraudioduckingconfiguration"
+    },
+    "AudioBalanceFade": {
+      "doc": "Describes audio left/right balance and front/back fade values.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiobalancefade"
+    },
+    "AudioBytePacketTranslation": {
+      "doc": "A data structure used by the kAudioFilePropertyByteToPacket and kAudioFilePropertyPacketToByte properties.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiobytepackettranslation"
+    },
+    "AudioCodecMagicCookieInfo": {
+      "doc": "A structure holding magic cookie information needed by some codecs.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiocodecmagiccookieinfo"
+    },
+    "AudioCodecPrimeInfo": {
+      "doc": "A structure specifying the number of leading and trailing empty frames to be inserted.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiocodecprimeinfo"
+    },
+    "AudioComponentDescription": {
+      "doc": "Identifying information for an audio component.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiocomponentdescription"
+    },
+    "AudioComponentPlugInInterface": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiocomponentplugininterface"
+    },
+    "AudioConverterPrimeInfo": {
+      "doc": "Specifies priming information for an audio converter.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audioconverterprimeinfo"
+    },
+    "AudioFileFDFTable": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiofilefdftable"
+    },
+    "AudioFileFDFTableExtended": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiofilefdftableextended"
+    },
+    "AudioFileMarker": {
+      "doc": "Annotates a position in an audio file.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiofilemarker"
+    },
+    "AudioFileMarkerList": {
+      "doc": "A list of markers associated with an audio file, including their SMPTE time type, the number of markers, and the markers themselves.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiofilemarkerlist"
+    },
+    "AudioFilePacketTableInfo": {
+      "doc": "Contains information about the number of valid frames in a file and where they begin and end.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiofilepackettableinfo"
+    },
+    "AudioFileRegion": {
+      "doc": "An audio file region specifies a segment of audio data.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiofileregion"
+    },
+    "AudioFileRegionList": {
+      "doc": "A list of the audio file regions in a file.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiofileregionlist"
+    },
+    "AudioFileTypeAndFormatID": {
+      "doc": "A specifier for the constantkAudioFileGlobalInfo_AvailableStreamDescriptionsForFormat.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiofiletypeandformatid"
+    },
+    "AudioFile_SMPTE_Time": {
+      "doc": "A data structure for describing SMPTE (Society of Motion Picture and Television Engineers) time.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiofile_smpte_time"
+    },
+    "AudioFormatInfo": {
+      "doc": "A structure that specifies an audio format.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audioformatinfo"
+    },
+    "AudioFramePacketTranslation": {
+      "doc": "A structure that specifies frame and packet translations.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audioframepackettranslation"
+    },
+    "AudioIndependentPacketTranslation": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audioindependentpackettranslation"
+    },
+    "AudioOutputUnitMIDICallbacks": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiooutputunitmidicallbacks"
+    },
+    "AudioOutputUnitStartAtTimeParams": {
+      "doc": "A timestamp for scheduled starting of an I/O audio unit.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiooutputunitstartattimeparams"
+    },
+    "AudioPacketDependencyInfoTranslation": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiopacketdependencyinfotranslation"
+    },
+    "AudioPacketRangeByteCountTranslation": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiopacketrangebytecounttranslation"
+    },
+    "AudioPacketRollDistanceTranslation": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiopacketrolldistancetranslation"
+    },
+    "AudioPanningInfo": {
+      "doc": "Audio panning information.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiopanninginfo"
+    },
+    "AudioQueueBuffer": {
+      "doc": "Defines an audio queue buffer.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audioqueuebuffer"
+    },
+    "AudioQueueChannelAssignment": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audioqueuechannelassignment"
+    },
+    "AudioQueueLevelMeterState": {
+      "doc": "Specifies the current level metering information for one channel of an audio queue.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audioqueuelevelmeterstate"
+    },
+    "AudioQueueParameterEvent": {
+      "doc": "Specifies an audio queue parameter and associated value.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audioqueueparameterevent"
+    },
+    "AudioUnitCocoaViewInfo": {
+      "doc": "The name and number of custom Cocoa views for an audio unit.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitcocoaviewinfo"
+    },
+    "AudioUnitConnection": {
+      "doc": "An audio unit source-to-destination connection specification.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitconnection"
+    },
+    "AudioUnitEvent": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitevent"
+    },
+    "AudioUnitExternalBuffer": {
+      "doc": "Allows an audio unit host application to tell an audio unit to use a specified buffer for its input callback.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitexternalbuffer"
+    },
+    "AudioUnitFrequencyResponseBin": {
+      "doc": "An audio unit’s audio level at a particular frequency.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitfrequencyresponsebin"
+    },
+    "AudioUnitMIDIControlMapping": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitmidicontrolmapping"
+    },
+    "AudioUnitMeterClipping": {
+      "doc": "Audio clipping that has occurred in a mixer unit.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitmeterclipping"
+    },
+    "AudioUnitNodeConnection": {
+      "doc": "A connection between two node objects in an audio processing graph.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitnodeconnection"
+    },
+    "AudioUnitOtherPluginDesc": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitotherplugindesc"
+    },
+    "AudioUnitParameter": {
+      "doc": "An adjustable audio unit attribute such as volume, pitch, or filter cutoff frequency.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameter"
+    },
+    "AudioUnitParameterEvent": {
+      "doc": "A scheduled change to an audio unit parameter’s value.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterevent"
+    },
+    "AudioUnitParameterHistoryInfo": {
+      "doc": "The suggested update rate and history duration for parameters which have the kAudioUnitParameterFlag_PlotHistory flag set.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterhistoryinfo"
+    },
+    "AudioUnitParameterInfo": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterinfo"
+    },
+    "AudioUnitParameterNameInfo": {
+      "doc": "A short version of the name for an audio unit parameter.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameternameinfo"
+    },
+    "AudioUnitParameterStringFromValue": {
+      "doc": "A string representation of a parameter’s value.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparameterstringfromvalue"
+    },
+    "AudioUnitParameterValueFromString": {
+      "doc": "A parameter’s value based on a string representation of the value.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparametervaluefromstring"
+    },
+    "AudioUnitParameterValueName": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparametervaluename"
+    },
+    "AudioUnitParameterValueTranslation": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitparametervaluetranslation"
+    },
+    "AudioUnitPresetMAS_SettingData": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitpresetmas_settingdata"
+    },
+    "AudioUnitPresetMAS_Settings": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitpresetmas_settings"
+    },
+    "AudioUnitProperty": {
+      "doc": "A key-value pair that declares an attribute or behavior for an audio unit.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitproperty"
+    },
+    "AudioUnitRenderContext": {
+      "doc": "A structure that contains thread context information for a real-time rendering operation.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/audiounitrendercontext"
+    },
+    "CABarBeatTime": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cabarbeattime"
+    },
+    "CAClockTime": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/caclocktime"
+    },
+    "CAFAudioDescription": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafaudiodescription"
+    },
+    "CAFAudioFormatListItem": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafaudioformatlistitem"
+    },
+    "CAFChunkHeader": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafchunkheader"
+    },
+    "CAFDataChunk": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafdatachunk"
+    },
+    "CAFFileHeader": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/caffileheader"
+    },
+    "CAFInfoStrings": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafinfostrings"
+    },
+    "CAFInstrumentChunk": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafinstrumentchunk"
+    },
+    "CAFMarker": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafmarker"
+    },
+    "CAFMarkerChunk": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafmarkerchunk"
+    },
+    "CAFOverviewChunk": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafoverviewchunk"
+    },
+    "CAFOverviewSample": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafoverviewsample"
+    },
+    "CAFPacketTableHeader": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafpackettableheader"
+    },
+    "CAFPeakChunk": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafpeakchunk"
+    },
+    "CAFPositionPeak": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafpositionpeak"
+    },
+    "CAFRegion": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafregion"
+    },
+    "CAFRegionChunk": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafregionchunk"
+    },
+    "CAFStringID": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafstringid"
+    },
+    "CAFStrings": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafstrings"
+    },
+    "CAFUMIDChunk": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cafumidchunk"
+    },
+    "CAF_SMPTE_Time": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/caf_smpte_time"
+    },
+    "CAF_UUID_ChunkHeader": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/caf_uuid_chunkheader"
+    },
+    "CAMeterTrackEntry": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/cametertrackentry"
+    },
+    "CATempoMapEntry": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/catempomapentry"
+    },
+    "ExtendedAudioFormatInfo": {
+      "doc": "A specifier for the kAudioFormatProperty_FormatList property, including the codec to use.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/extendedaudioformatinfo"
+    },
+    "ExtendedControlEvent": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/extendedcontrolevent"
+    },
+    "ExtendedNoteOnEvent": {
+      "doc": "Describes a note-on event with extended parameters.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/extendednoteonevent"
+    },
+    "ExtendedTempoEvent": {
+      "doc": "Describes a music track tempo in beats-per-minute.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/extendedtempoevent"
+    },
+    "HostCallbackInfo": {
+      "doc": "The time- and transport-related callback functions for an audio unit.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/hostcallbackinfo"
+    },
+    "MIDIChannelMessage": {
+      "doc": "Describes a MIDI channel message.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/midichannelmessage"
+    },
+    "MIDIEventList": {
+      "doc": "A variable-length list of MIDI event packets.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/midieventlist"
+    },
+    "MIDIMetaEvent": {
+      "doc": "Describes a MIDI metaevent such as lyric text, time signature, and so on.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/midimetaevent"
+    },
+    "MIDINoteMessage": {
+      "doc": "Describes a MIDI note.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/midinotemessage"
+    },
+    "MIDIPacketList": {
+      "doc": "A list of MIDI events the system sends to or receives from an endpoint.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/midipacketlist"
+    },
+    "MIDIRawData": {
+      "doc": "Describes a MIDI system-exclusive (SysEx) message.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/midirawdata"
+    },
+    "MixerDistanceParams": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/mixerdistanceparams"
+    },
+    "MusicDeviceNoteParams": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/musicdevicenoteparams"
+    },
+    "MusicDeviceStdNoteParams": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/musicdevicestdnoteparams"
+    },
+    "MusicEventUserData": {
+      "doc": "Describes a user-defined event.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/musiceventuserdata"
+    },
+    "MusicTrackLoopInfo": {
+      "doc": "Supports control of the looping behavior of a music track.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/musictrackloopinfo"
+    },
+    "NoteParamsControlValue": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/noteparamscontrolvalue"
+    },
+    "ParameterEvent": {
+      "doc": "Describes an audio unit parameter automation event.",
+      "url": "https://developer.apple.com/documentation/audiotoolbox/parameterevent"
+    },
+    "ScheduledAudioFileRegion": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/scheduledaudiofileregion"
+    },
+    "ScheduledAudioSlice": {
+      "url": "https://developer.apple.com/documentation/audiotoolbox/scheduledaudioslice"
+    }
+  },
+  "methods": {
+    "AUAudioUnit": {
+      "+instantiateWithComponentDescription:options:completionHandler:": {
+        "doc": "Asynchronously creates an audio unit instance.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/instantiate(with:options:completionhandler:)"
+      },
+      "+registerSubclass:asComponentDescription:name:version:": {
+        "doc": "Registers an audio unit subclass.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/registersubclass(_:as:name:version:)"
+      },
+      "-allocateRenderResourcesAndReturnError:": {
+        "doc": "Allocates resources required to render audio.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/allocaterenderresources()"
+      },
+      "-deallocateRenderResources": {
+        "doc": "Deallocates resources required to render audio.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/deallocaterenderresources()"
+      },
+      "-initWithComponentDescription:error:": {
+        "doc": "Synchronously initializes a new audio unit object.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/init(componentdescription:)"
+      },
+      "-initWithComponentDescription:options:error:": {
+        "doc": "Synchronously initializes a new audio unit object.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/init(componentdescription:options:)"
+      },
+      "-messageChannelFor:": {
+        "doc": "Returns an object for bidirectional communication between an audio unit and its host.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/messagechannel(for:)"
+      },
+      "-parametersForOverviewWithCount:": {
+        "doc": "Returns the audio unit’s most important parameters.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/parametersforoverview(withcount:)"
+      },
+      "-removeRenderObserver:": {
+        "doc": "Removes an observer block previously added to the render cycle.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/removerenderobserver(_:)"
+      },
+      "-requestViewControllerWithCompletionHandler:": {
+        "doc": "Requests an audio unit’s custom view controller.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/requestviewcontroller(completionhandler:)"
+      },
+      "-reset": {
+        "doc": "Resets transitory rendering state to its initial state.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/reset()"
+      },
+      "-setDeviceID:error:": {
+        "doc": "Sets the I/O hardware device.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/setdeviceid(_:)"
+      },
+      "-setRenderResourcesAllocated:": {
+        "doc": "Sets the Boolean value of the renderResourcesAllocated property.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/setrenderresourcesallocated(_:)"
+      },
+      "-shouldChangeToFormat:forBus:": {
+        "doc": "This is called when you set the format on a bus.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/shouldchange(to:for:)"
+      },
+      "-startHardwareAndReturnError:": {
+        "doc": "Starts the audio hardware.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/starthardware()"
+      },
+      "-stopHardware": {
+        "doc": "Stops the audio hardware.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/stophardware()"
+      },
+      "-tokenByAddingRenderObserver:": {
+        "doc": "Adds a block to be called on each render cycle.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/token(byaddingrenderobserver:)"
+      }
+    },
+    "AUAudioUnitBus": {
+      "-initWithFormat:error:": {
+        "doc": "Initializes a bus object with a specific format.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbus/init(format:)"
+      },
+      "-setFormat:error:": {
+        "doc": "Sets the bus’s audio format.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbus/setformat(_:)"
+      }
+    },
+    "AUAudioUnitBusArray": {
+      "-addObserverToAllBusses:forKeyPath:options:context:": {
+        "doc": "Adds a KVO observer for a given property on all busses in the array.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbusarray/addobserver(toallbusses:forkeypath:options:context:)"
+      },
+      "-initWithAudioUnit:busType:": {
+        "doc": "Initializes an empty bus array.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbusarray/init(audiounit:bustype:)"
+      },
+      "-initWithAudioUnit:busType:busses:": {
+        "doc": "Initializes a bus array by making a copy of the supplied busses.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbusarray/init(audiounit:bustype:busses:)"
+      },
+      "-objectAtIndexedSubscript:": {
+        "doc": "Returns the bus at the specified index.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbusarray/subscript(_:)"
+      },
+      "-removeObserverFromAllBusses:forKeyPath:context:": {
+        "doc": "Removes a KVO observer for a given property on all busses in the array.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbusarray/removeobserver(fromallbusses:forkeypath:context:)"
+      },
+      "-replaceBusses:": {
+        "doc": "Replaces the current bus array with a copy of the supplied bus array.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbusarray/replacebusses(_:)"
+      },
+      "-setBusCount:error:": {
+        "doc": "Changes the number of busses in the array.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbusarray/setbuscount(_:)"
+      }
+    },
+    "AUParameter": {
+      "-setValue:originator:": {
+        "doc": "Sets the parameter’s value, avoiding redundant notifications to the originator.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameter/setvalue(_:originator:)"
+      },
+      "-setValue:originator:atHostTime:": {
+        "doc": "Sets the parameter’s value, preserving the host time of the gesture that initiated the change.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameter/setvalue(_:originator:athosttime:)"
+      },
+      "-stringFromValue:": {
+        "doc": "Gets the string representation of a parameter value.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameter/string(fromvalue:)"
+      },
+      "-valueFromString:": {
+        "doc": "Converts a string into a parameter value.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameter/value(from:)"
+      }
+    },
+    "AUParameterNode": {
+      "-displayNameWithLength:": {
+        "doc": "Another version of the display name, possibly truncated to a desired length.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameternode/displayname(withlength:)"
+      },
+      "-removeParameterObserver:": {
+        "doc": "Remove a specific parameter observer.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameternode/removeparameterobserver(_:)"
+      },
+      "-tokenByAddingParameterObserver:": {
+        "doc": "Adds an observer for a single parameter or all parameters in a group.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameternode/token(byaddingparameterobserver:)"
+      },
+      "-tokenByAddingParameterRecordingObserver:": {
+        "doc": "Adds a recording observer for a single parameter or all parameters in a group.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameternode/token(byaddingparameterrecordingobserver:)"
+      }
+    },
+    "AUParameterTree": {
+      "+createGroupFromTemplate:identifier:name:addressOffset:": {
+        "doc": "Initializes a group as a copied instance of a template group.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparametertree/creategroup(fromtemplate:identifier:name:addressoffset:)"
+      },
+      "+createGroupTemplate:": {
+        "doc": "Creates a template group which may be used as a prototype for further group instances.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparametertree/creategrouptemplate(_:)"
+      },
+      "+createGroupWithIdentifier:name:children:": {
+        "doc": "Creates a parameter group object.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparametertree/creategroup(withidentifier:name:children:)"
+      },
+      "+createParameterWithIdentifier:name:address:min:max:unit:unitName:flags:valueStrings:dependentParameters:": {
+        "doc": "Creates a single parameter object.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparametertree/createparameter(withidentifier:name:address:min:max:unit:unitname:flags:valuestrings:dependentparameters:)"
+      },
+      "+createTreeWithChildren:": {
+        "doc": "Creates a parameter tree object.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparametertree/createtree(withchildren:)"
+      },
+      "-parameterWithAddress:": {
+        "doc": "Searches the tree for a parameter with a specific address.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparametertree/parameter(withaddress:)"
+      },
+      "-parameterWithID:scope:element:": {
+        "doc": "Searches the tree for a specific version 2 audio unit parameter.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparametertree/parameter(withid:scope:element:)"
+      }
+    }
+  },
+  "properties": {
+    "AUAudioUnit": {
+      "MIDIOutputNames": {
+        "doc": "The names of the MIDI outputs.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/midioutputnames"
+      },
+      "allParameterValues": {
+        "doc": "Special read-only property for KVO.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/allparametervalues"
+      },
+      "audioUnitName": {
+        "doc": "The audio unit’s name, derived from the component’s name.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/audiounitname"
+      },
+      "canPerformInput": {
+        "doc": "Determines whether the I/O device can perform input.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/canperforminput"
+      },
+      "canPerformOutput": {
+        "doc": "Determines whether the I/O device can perform output.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/canperformoutput"
+      },
+      "canProcessInPlace": {
+        "doc": "Determines whether an audio unit can process in place.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/canprocessinplace"
+      },
+      "channelCapabilities": {
+        "doc": "Expresses valid combinations of input and output channels.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/channelcapabilities"
+      },
+      "component": {
+        "doc": "The component found in the component description with which the audio unit was created.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/component"
+      },
+      "componentDescription": {
+        "doc": "The component description with which the audio unit was created.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/componentdescription"
+      },
+      "componentName": {
+        "doc": "The audio unit’s component’s name.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/componentname"
+      },
+      "componentVersion": {
+        "doc": "The audio unit’s component’s version.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/componentversion"
+      },
+      "contextName": {
+        "doc": "Information about the host context in which the audio unit is connected, for display in the audio unit’s view.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/contextname"
+      },
+      "currentPreset": {
+        "doc": "The audio unit’s last-selected preset.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/currentpreset"
+      },
+      "deviceID": {
+        "doc": "Gets the I/O hardware device.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/deviceid"
+      },
+      "deviceInputLatency": {
+        "doc": "The audio device’s input latency, in seconds.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/deviceinputlatency"
+      },
+      "deviceOutputLatency": {
+        "doc": "The audio devic’s output latency, in seconds.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/deviceoutputlatency"
+      },
+      "factoryPresets": {
+        "doc": "A collection of presets provided by the audio unit’s developer.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/factorypresets"
+      },
+      "fullState": {
+        "doc": "A persistable snapshot of the audio unit’s properties and parameters, suitable for saving as a user preset.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/fullstate"
+      },
+      "fullStateForDocument": {
+        "doc": "A persistable snapshot of the audio unit’s properties and parameters, suitable for saving in a user’s document.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/fullstatefordocument"
+      },
+      "inputBusses": {
+        "doc": "An array containing the audio unit’s input connection points.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/inputbusses"
+      },
+      "inputEnabled": {
+        "doc": "A flag enabling audio input from the unit.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/isinputenabled"
+      },
+      "inputHandler": {
+        "doc": "The block that the output unit will call to notify when input is available.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/inputhandler"
+      },
+      "intendedSpatialExperience": {
+        "doc": "The AUAudioUnit’s intended spatial experience.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/intendedspatialexperience-1dvhd"
+      },
+      "internalRenderBlock": {
+        "doc": "The block which you must provide, via a getter, in order to implement rendering.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/internalrenderblock"
+      },
+      "latency": {
+        "doc": "The audio unit’s processing latency, in seconds.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/latency"
+      },
+      "manufacturerName": {
+        "doc": "The manufacturer’s name, derived from the component’s name.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/manufacturername"
+      },
+      "maximumFramesToRender": {
+        "doc": "The maximum number of frames that the audio unit can render at once.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/maximumframestorender"
+      },
+      "musicDeviceOrEffect": {
+        "doc": "Specifies whether an audio unit responds to MIDI events.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/ismusicdeviceoreffect"
+      },
+      "musicalContextBlock": {
+        "doc": "A callback to the host for musical context information.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/musicalcontextblock"
+      },
+      "osWorkgroup": {
+        "doc": "The workgroup associated with the audio device underlying this Audio Unit.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/osworkgroup"
+      },
+      "outputBusses": {
+        "doc": "An array containing the audio unit’s output connection points.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/outputbusses"
+      },
+      "outputEnabled": {
+        "doc": "A flag enabling audio output from the unit.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/isoutputenabled"
+      },
+      "outputProvider": {
+        "doc": "The block that the output unit will call to get audio to send to the output.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/outputprovider"
+      },
+      "parameterTree": {
+        "doc": "An audio unit’s parameters, organized in a tree hierarchy.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/parametertree"
+      },
+      "providesUserInterface": {
+        "doc": "A Boolean that indicates whether the audio unit provides a user interface, normally in the form of a view controller.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/providesuserinterface"
+      },
+      "renderBlock": {
+        "doc": "The block that hosts use to ask the audio unit to render audio.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/renderblock"
+      },
+      "renderContextObserver": {
+        "doc": "The block that the system calls when the rendering context changes.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/rendercontextobserver"
+      },
+      "renderQuality": {
+        "doc": "Provides a trade-off between rendering quality and CPU load.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/renderquality"
+      },
+      "renderResourcesAllocated": {
+        "doc": "Determines whether the audio unit has allocated render resources.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/renderresourcesallocated"
+      },
+      "renderingOffline": {
+        "doc": "Communicates to an audio unit that it is rendering offline.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/isrenderingoffline"
+      },
+      "scheduleMIDIEventBlock": {
+        "doc": "A block used to schedule MIDI events.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/schedulemidieventblock"
+      },
+      "scheduleParameterBlock": {
+        "doc": "The block that hosts use to schedule parameters.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/scheduleparameterblock"
+      },
+      "shouldBypassEffect": {
+        "doc": "Determines whether an effect should route input directly to output, without any processing.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/shouldbypasseffect"
+      },
+      "supportsMPE": {
+        "doc": "A Boolean value that indicates whether the audio unit supports multi-dimensional polyphonic expression.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/supportsmpe"
+      },
+      "tailTime": {
+        "doc": "The audio unit’s tail time, in seconds.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/tailtime"
+      },
+      "transportStateBlock": {
+        "doc": "A callback to the host for transport state information.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/transportstateblock"
+      },
+      "virtualMIDICableCount": {
+        "doc": "The number of virtual MIDI cables implemented by a music device or effect.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounit/virtualmidicablecount"
+      }
+    },
+    "AUAudioUnitBus": {
+      "busType": {
+        "doc": "The bus type.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbus/bustype"
+      },
+      "contextPresentationLatency": {
+        "doc": "Information about latency in the audio unit’s processing context.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbus/contextpresentationlatency"
+      },
+      "enabled": {
+        "doc": "Determines whether the bus is active.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbus/isenabled"
+      },
+      "format": {
+        "doc": "The audio format and channel layout of audio being transferred on the bus.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbus/format"
+      },
+      "index": {
+        "doc": "The index of this bus in its containing array.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbus/index"
+      },
+      "maximumChannelCount": {
+        "doc": "The maximum number of channels supported for this bus.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbus/maximumchannelcount"
+      },
+      "name": {
+        "doc": "A name for the bus.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbus/name"
+      },
+      "ownerAudioUnit": {
+        "doc": "The audio unit that owns the bus.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbus/owneraudiounit"
+      },
+      "supportedChannelCounts": {
+        "doc": "An array of numbers indicating the supported number of channels for this bus.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbus/supportedchannelcounts"
+      },
+      "supportedChannelLayoutTags": {
+        "doc": "An array of audio channel layout tags.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbus/supportedchannellayouttags"
+      }
+    },
+    "AUAudioUnitBusArray": {
+      "busType": {
+        "doc": "Determines whether the bus array is for input or output.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbusarray/bustype"
+      },
+      "count": {
+        "doc": "The number of busses in the array.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbusarray/count"
+      },
+      "countChangeable": {
+        "doc": "Determines whether the array can have a variable number of busses.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbusarray/iscountchangeable"
+      },
+      "ownerAudioUnit": {
+        "doc": "The audio unit that owns the bus array.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitbusarray/owneraudiounit"
+      }
+    },
+    "AUAudioUnitPreset": {
+      "name": {
+        "doc": "The preset’s name.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitpreset/name"
+      },
+      "number": {
+        "doc": "The preset’s unique numeric identifier.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auaudiounitpreset/number"
+      }
+    },
+    "AUParameter": {
+      "address": {
+        "doc": "The parameter’s address.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameter/address"
+      },
+      "dependentParameters": {
+        "doc": "Any other parameter’s whose values may change as a side effect of this parameter’s value changing.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameter/dependentparameters"
+      },
+      "flags": {
+        "doc": "The parameter’s characteristic details.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameter/flags"
+      },
+      "maxValue": {
+        "doc": "The parameter’s maximum value.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameter/maxvalue"
+      },
+      "minValue": {
+        "doc": "The parameter’s minimum value.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameter/minvalue"
+      },
+      "unit": {
+        "doc": "The parameter’s unit of measurement.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameter/unit"
+      },
+      "unitName": {
+        "doc": "The parameter’s localized unit name.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameter/unitname"
+      },
+      "value": {
+        "doc": "The parameter’s current value.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameter/value"
+      },
+      "valueStrings": {
+        "doc": "The parameter’s localized value strings.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameter/valuestrings"
+      }
+    },
+    "AUParameterGroup": {
+      "allParameters": {
+        "doc": "Returns a flat array of all parameters in the group, including those in child groups.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparametergroup/allparameters"
+      },
+      "children": {
+        "doc": "The group’s child nodes.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparametergroup/children"
+      }
+    },
+    "AUParameterNode": {
+      "displayName": {
+        "doc": "A localized display name for the parameter node.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameternode/displayname"
+      },
+      "identifier": {
+        "doc": "A non-localized, permanent name for the parameter node.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameternode/identifier"
+      },
+      "implementorDisplayNameWithLengthCallback": {
+        "doc": "The callback for obtaining an abbreviated version of a parameter node display name.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameternode/implementordisplaynamewithlengthcallback"
+      },
+      "implementorStringFromValueCallback": {
+        "doc": "The callback for providing a string representation of a parameter value.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameternode/implementorstringfromvaluecallback"
+      },
+      "implementorValueFromStringCallback": {
+        "doc": "The callback for converting a string to a parameter value.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameternode/implementorvaluefromstringcallback"
+      },
+      "implementorValueObserver": {
+        "doc": "The callback for parameter value changes.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameternode/implementorvalueobserver"
+      },
+      "implementorValueProvider": {
+        "doc": "The callback for refreshing known stale values in a parameter tree.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameternode/implementorvalueprovider"
+      },
+      "keyPath": {
+        "doc": "A key path generated by concatenating the identifiers of the parameter and its parents.",
+        "url": "https://developer.apple.com/documentation/audiotoolbox/auparameternode/keypath"
+      }
+    }
+  }
+}

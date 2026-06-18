@@ -1,0 +1,347 @@
+{
+  "schema_version": 1,
+  "framework": "ShazamKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "SHCatalog": {
+      "doc": "An abstract base class for storing reference signatures and their associated metadata.",
+      "url": "https://developer.apple.com/documentation/shazamkit/shcatalog"
+    },
+    "SHCustomCatalog": {
+      "doc": "An object for storing the reference signatures for custom audio recordings and their associated metadata.",
+      "url": "https://developer.apple.com/documentation/shazamkit/shcustomcatalog"
+    },
+    "SHMatch": {
+      "doc": "An object that represents the catalog media items that match a query.",
+      "url": "https://developer.apple.com/documentation/shazamkit/shmatch"
+    },
+    "SHMatchedMediaItem": {
+      "doc": "An object that represents the metadata for a matched reference signature.",
+      "url": "https://developer.apple.com/documentation/shazamkit/shmatchedmediaitem"
+    },
+    "SHMediaItem": {
+      "doc": "An object that represents the metadata for a reference signature.",
+      "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem"
+    },
+    "SHMediaLibrary": {
+      "doc": "An object that represents the user’s Shazam library.",
+      "url": "https://developer.apple.com/documentation/shazamkit/shmedialibrary"
+    },
+    "SHRange": {
+      "doc": "A half-open interval from a lower bound up to, but not including, an upper bound.",
+      "url": "https://developer.apple.com/documentation/shazamkit/shrange"
+    },
+    "SHSession": {
+      "doc": "An object that matches a specific audio recording when a segment of that recording is part of captured sound in the Shazam catalog or your custom catalog.",
+      "url": "https://developer.apple.com/documentation/shazamkit/shsession"
+    },
+    "SHSignature": {
+      "doc": "An object that contains the opaque data and other information for a signature.",
+      "url": "https://developer.apple.com/documentation/shazamkit/shsignature"
+    },
+    "SHSignatureGenerator": {
+      "doc": "An object for converting audio data into a signature.",
+      "url": "https://developer.apple.com/documentation/shazamkit/shsignaturegenerator"
+    }
+  },
+  "protocols": {
+    "SHSessionDelegate": {
+      "doc": "Methods that the session calls with the result of a match request.",
+      "url": "https://developer.apple.com/documentation/shazamkit/shsessiondelegate"
+    }
+  },
+  "enums": {
+    "SHErrorCode": {
+      "doc": "Codes for the errors that Shazam produces.",
+      "url": "https://developer.apple.com/documentation/shazamkit/sherrorcode"
+    }
+  },
+  "methods": {
+    "SHCustomCatalog": {
+      "+new": {
+        "doc": "Creates a new custom catalog object for storing reference audio signatures and their associated metadata.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shcustomcatalog/new"
+      },
+      "-addCustomCatalogFromURL:error:": {
+        "doc": "Loads a saved custom catalog from a file.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shcustomcatalog/add(from:)"
+      },
+      "-addReferenceSignature:representingMediaItems:error:": {
+        "doc": "Adds a reference signature and its associated metadata to a catalog.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shcustomcatalog/addreferencesignature(_:representing:)"
+      },
+      "-init": {
+        "doc": "Creates a new custom catalog object for storing reference audio signatures and their associated metadata.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shcustomcatalog/init()"
+      },
+      "-initWithDataRepresentation:error:": {
+        "doc": "Load a @c SHCustomCatalog from data",
+        "url": "https://developer.apple.com/documentation/shazamkit/shcustomcatalog/init(datarepresentation:)"
+      },
+      "-writeToURL:error:": {
+        "doc": "Saves the custom catalog to a local file.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shcustomcatalog/write(to:)"
+      }
+    },
+    "SHMediaItem": {
+      "+fetchMediaItemWithShazamID:completionHandler:": {
+        "doc": "Requests the media item for the song with the specified Shazam ID.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/fetch(shazamid:completionhandler:)"
+      },
+      "+mediaItemWithProperties:": {
+        "doc": "Creates a media item object with a dictionary of properties and their associated values.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/mediaitemwithproperties:"
+      },
+      "-objectForKeyedSubscript:": {
+        "doc": "Accesses the property for the specified key for reading.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/subscript(_:)"
+      },
+      "-valueForProperty:": {
+        "doc": "Accesses the property for the specified key for reading.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/valueforproperty:"
+      }
+    },
+    "SHMediaLibrary": {
+      "-addMediaItems:completionHandler:": {
+        "doc": "Adds an array of songs to the user’s Shazam library.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmedialibrary/add(_:completionhandler:)"
+      }
+    },
+    "SHRange": {
+      "+rangeWithLowerBound:upperBound:": {
+        "doc": "Creates a range with the bounds you specify.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shrange/rangewithlowerbound:upperbound:"
+      },
+      "-initWithLowerBound:upperBound:": {
+        "doc": "Creates a range with the bounds you specify.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shrange/initwithlowerbound:upperbound:"
+      }
+    },
+    "SHSession": {
+      "-init": {
+        "doc": "Creates a new session object for matching songs in the Shazam Music catalog.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shsession/init()"
+      },
+      "-initWithCatalog:": {
+        "doc": "Creates a new session object for matching audio in a custom catalog.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shsession/init(catalog:)"
+      },
+      "-matchSignature:": {
+        "doc": "Searches for the query signature in the reference signatures that the session catalog contains.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shsession/match(_:)"
+      },
+      "-matchStreamingBuffer:atTime:": {
+        "doc": "Converts the audio in the buffer to a signature, and searches the reference signatures in the session catalog.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shsession/matchstreamingbuffer(_:at:)"
+      }
+    },
+    "SHSignature": {
+      "+signatureWithDataRepresentation:error:": {
+        "doc": "Creates a signature object from raw data.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shsignature/signaturewithdatarepresentation:error:"
+      },
+      "-initWithDataRepresentation:error:": {
+        "doc": "Creates a signature object from raw data.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shsignature/init(datarepresentation:)"
+      }
+    },
+    "SHSignatureGenerator": {
+      "+generateSignatureFromAsset:completionHandler:": {
+        "doc": "Creates a signature with the asset you specify.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shsignaturegenerator/generatesignature(from:completionhandler:)"
+      },
+      "-appendBuffer:atTime:error:": {
+        "doc": "Adds audio to the generator.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shsignaturegenerator/append(_:at:)"
+      },
+      "-signature": {
+        "doc": "Converts the audio buffer into a signature.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shsignaturegenerator/signature()"
+      }
+    }
+  },
+  "properties": {
+    "SHCatalog": {
+      "maximumQuerySignatureDuration": {
+        "doc": "The maximum duration of a query signature that you use to match reference signatures in the catalog.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shcatalog/maximumquerysignatureduration"
+      },
+      "minimumQuerySignatureDuration": {
+        "doc": "The minimum duration of a query signature that you use to match reference signatures in the catalog.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shcatalog/minimumquerysignatureduration"
+      }
+    },
+    "SHCustomCatalog": {
+      "dataRepresentation": {
+        "doc": "The data representation of this file, it can be written to disk",
+        "url": "https://developer.apple.com/documentation/shazamkit/shcustomcatalog/datarepresentation"
+      }
+    },
+    "SHMatch": {
+      "mediaItems": {
+        "doc": "An array of the media items in the catalog that match the query signature, in order of the quality of the match.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmatch/mediaitems"
+      },
+      "querySignature": {
+        "doc": "The query signature for the match.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmatch/querysignature"
+      }
+    },
+    "SHMatchedMediaItem": {
+      "confidence": {
+        "doc": "The level of confidence in the match result.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmatchedmediaitem/confidence"
+      },
+      "frequencySkew": {
+        "doc": "A multiple for the difference in frequency between the matched audio and the query audio.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmatchedmediaitem/frequencyskew"
+      },
+      "matchOffset": {
+        "doc": "The timecode in the reference recording that matches the start of the query, in seconds.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmatchedmediaitem/matchoffset"
+      },
+      "predictedCurrentMatchOffset": {
+        "doc": "The updated timecode in the reference recording that matches the current playback position of the query audio, in seconds.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmatchedmediaitem/predictedcurrentmatchoffset"
+      }
+    },
+    "SHMediaItem": {
+      "appleMusicID": {
+        "doc": "The Apple Music ID for the song.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/applemusicid"
+      },
+      "appleMusicURL": {
+        "doc": "A link to the Apple Music page that contains the full information for the song.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/applemusicurl"
+      },
+      "artist": {
+        "doc": "The name of the artist for the media item, such as the performer of a song.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/artist"
+      },
+      "artworkURL": {
+        "doc": "The URL for artwork for the media item, such as an album cover.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/artworkurl"
+      },
+      "creationDate": {
+        "doc": "The date the media item was created.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/creationdate"
+      },
+      "explicitContent": {
+        "doc": "A Boolean value that indicates whether the media item contains explicit content.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/explicitcontent"
+      },
+      "frequencySkewRanges": {
+        "doc": "An array of ranges that indicate the frequency skews in the reference signature that this media item describes.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/frequencyskewranges-1j7d3"
+      },
+      "genres": {
+        "doc": "An array of genre names for the media item.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/genres"
+      },
+      "id": {
+        "doc": "A unique identifier for this media item.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/id"
+      },
+      "init(properties:)": {
+        "doc": "Creates a media item object with a dictionary of properties and their associated values.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/init(properties:)"
+      },
+      "isrc": {
+        "doc": "The International Standard Recording Code (ISRC) for the media item.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/isrc"
+      },
+      "shazamID": {
+        "doc": "The Shazam ID for the song.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/shazamid"
+      },
+      "songs": {
+        "doc": "An array of MusicKit song objects that represent the song.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/songs"
+      },
+      "songs()": {
+        "doc": "An array of MusicKit song objects that represent the media item.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/songs()"
+      },
+      "subtitle": {
+        "doc": "A subtitle for the media item.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/subtitle"
+      },
+      "timeRanges": {
+        "doc": "An array of ranges that indicate the offsets within the reference signature that this media item describes.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/timeranges-43654"
+      },
+      "title": {
+        "doc": "A title for the media item.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/title"
+      },
+      "videoURL": {
+        "doc": "The URL for a video for the media item, such as a music video.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/videourl"
+      },
+      "webURL": {
+        "doc": "A link to the Shazam Music catalog page that contains the full information for the song.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/weburl"
+      }
+    },
+    "SHMediaLibrary": {
+      "defaultLibrary": {
+        "doc": "An instance of the user’s default Shazam library.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shmedialibrary/default"
+      }
+    },
+    "SHRange": {
+      "lowerBound": {
+        "doc": "The range’s lower bound.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shrange/lowerbound"
+      },
+      "upperBound": {
+        "doc": "The range’s upper bound.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shrange/upperbound"
+      }
+    },
+    "SHSession": {
+      "SHSession.Result": {
+        "doc": "Identifies the result from an asynchronous sequence result.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shsession/result"
+      },
+      "SHSession.Results": {
+        "doc": "An asynchronous sequence that emits updates from a session object query.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shsession/results-swift.struct"
+      },
+      "catalog": {
+        "doc": "The catalog object containing the reference signatures and their associated metadata that the session uses to perform matches.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shsession/catalog"
+      },
+      "delegate": {
+        "doc": "The object that the session calls with the result of a match request.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shsession/delegate"
+      },
+      "result(from:)": {
+        "doc": "Performs an asynchronous match with a signature you specify.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shsession/result(from:)"
+      },
+      "results": {
+        "doc": "The results as an asynchronous sequence of matches.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shsession/results-swift.property"
+      }
+    },
+    "SHSignature": {
+      "SHSignature.Slices": {
+        "doc": "A sequence of signature segments.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shsignature/slices"
+      },
+      "dataRepresentation": {
+        "doc": "The raw data for the signature.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shsignature/datarepresentation"
+      },
+      "duration": {
+        "doc": "The duration of the audio you use to generate the signature.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shsignature/duration"
+      },
+      "slices(from:duration:stride:)": {
+        "doc": "Returns a sequence of signatures of the specified duration from a starting value, stepping by the stride.",
+        "url": "https://developer.apple.com/documentation/shazamkit/shsignature/slices(from:duration:stride:)"
+      }
+    }
+  }
+}

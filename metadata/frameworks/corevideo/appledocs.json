@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "framework": "CoreVideo",
+  "source": "developer.apple.com DocC render API",
+  "enums": {
+    "CVAttachmentMode": {
+      "doc": "The propagation modes of a Core Video buffer attachment.",
+      "url": "https://developer.apple.com/documentation/corevideo/cvattachmentmode",
+      "members": {
+        "kCVAttachmentMode_ShouldNotPropagate": {
+          "doc": "Indicates to not propagate the attachment.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvattachmentmode/shouldnotpropagate"
+        },
+        "kCVAttachmentMode_ShouldPropagate": {
+          "doc": "Indicates to copy the attachment.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvattachmentmode/shouldpropagate"
+        }
+      }
+    },
+    "CVPixelBufferLockFlags": {
+      "doc": "The flags to pass to CVPixelBufferLockBaseAddress and CVPixelBufferUnlockBaseAddress.",
+      "url": "https://developer.apple.com/documentation/corevideo/cvpixelbufferlockflags",
+      "members": {
+        "kCVPixelBufferLock_ReadOnly": {
+          "doc": "A read-only buffer.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvpixelbufferlockflags/readonly"
+        }
+      }
+    },
+    "CVPixelBufferPoolFlushFlags": {
+      "doc": "The flags to pass to flush the pool.",
+      "url": "https://developer.apple.com/documentation/corevideo/cvpixelbufferpoolflushflags",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates a pixel buffer pool flush flags set with the options flags that you specify.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvpixelbufferpoolflushflags/init(rawvalue:)"
+        },
+        "kCVPixelBufferPoolFlushExcessBuffers": {
+          "doc": "The value to pass to flush all unused buffers regardless of age.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvpixelbufferpoolflushflags/excessbuffers"
+        }
+      }
+    },
+    "CVSMPTETimeFlags": {
+      "url": "https://developer.apple.com/documentation/corevideo/cvsmptetimeflags",
+      "members": {
+        "kCVSMPTETimeRunning": {
+          "doc": "Time is running.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvsmptetimeflags/running"
+        },
+        "kCVSMPTETimeValid": {
+          "doc": "The full time is valid.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvsmptetimeflags/valid"
+        }
+      }
+    },
+    "CVSMPTETimeType": {
+      "url": "https://developer.apple.com/documentation/corevideo/cvsmptetimetype",
+      "members": {
+        "kCVSMPTETimeType24": {
+          "doc": "24 frames per second (standard film).",
+          "url": "https://developer.apple.com/documentation/corevideo/cvsmptetimetype/type24"
+        },
+        "kCVSMPTETimeType25": {
+          "doc": "25 frames per second (standard PAL).",
+          "url": "https://developer.apple.com/documentation/corevideo/cvsmptetimetype/type25"
+        },
+        "kCVSMPTETimeType2997": {
+          "doc": "29.97 frames per second (standard NTSC).",
+          "url": "https://developer.apple.com/documentation/corevideo/cvsmptetimetype/type2997"
+        },
+        "kCVSMPTETimeType2997Drop": {
+          "doc": "29.97 drop frame.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvsmptetimetype/type2997drop"
+        },
+        "kCVSMPTETimeType30": {
+          "doc": "30 frames per second.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvsmptetimetype/type30"
+        },
+        "kCVSMPTETimeType30Drop": {
+          "doc": "30 drop frame.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvsmptetimetype/type30drop"
+        },
+        "kCVSMPTETimeType5994": {
+          "doc": "59.94 frames per second.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvsmptetimetype/type5994"
+        },
+        "kCVSMPTETimeType60": {
+          "doc": "60 frames per second.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvsmptetimetype/type60"
+        }
+      }
+    },
+    "CVTimeFlags": {
+      "url": "https://developer.apple.com/documentation/corevideo/cvtimeflags",
+      "members": {
+        "kCVTimeIsIndefinite": {
+          "doc": "The time value is unknown.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvtimeflags/isindefinite"
+        }
+      }
+    },
+    "CVTimeStampFlags": {
+      "url": "https://developer.apple.com/documentation/corevideo/cvtimestampflags",
+      "members": {
+        "kCVTimeStampBottomField": {
+          "doc": "The timestamp represents the bottom lines of an interlaced image.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvtimestampflags/bottomfield"
+        },
+        "kCVTimeStampHostTimeValid": {
+          "doc": "The value in the host time field is valid.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvtimestampflags/hosttimevalid"
+        },
+        "kCVTimeStampIsInterlaced": {
+          "doc": "A convenience constant indicating that the timestamp is for an interlaced image.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvtimestampflags/isinterlaced"
+        },
+        "kCVTimeStampRateScalarValid": {
+          "doc": "The value in the rate scalar field is valid.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvtimestampflags/ratescalarvalid"
+        },
+        "kCVTimeStampSMPTETimeValid": {
+          "doc": "The value in the SMPTE time field is valid.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvtimestampflags/smptetimevalid"
+        },
+        "kCVTimeStampTopField": {
+          "doc": "The timestamp represents the top lines of an interlaced image.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvtimestampflags/topfield"
+        },
+        "kCVTimeStampVideoHostTimeValid": {
+          "doc": "A convenience constant indicating that both the video time and host time fields are valid.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvtimestampflags/videohosttimevalid"
+        },
+        "kCVTimeStampVideoRefreshPeriodValid": {
+          "doc": "The value in the video refresh period field is valid.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvtimestampflags/videorefreshperiodvalid"
+        },
+        "kCVTimeStampVideoTimeValid": {
+          "doc": "The value in the video time field is valid.",
+          "url": "https://developer.apple.com/documentation/corevideo/cvtimestampflags/videotimevalid"
+        }
+      }
+    }
+  },
+  "structs": {
+    "CVFillExtendedPixelsCallBackData": {
+      "doc": "A structure for holding information that describes a custom extended pixel fill algorithm.",
+      "url": "https://developer.apple.com/documentation/corevideo/cvfillextendedpixelscallbackdata"
+    },
+    "CVPlanarComponentInfo": {
+      "doc": "A structure for describing planar components.",
+      "url": "https://developer.apple.com/documentation/corevideo/cvplanarcomponentinfo"
+    },
+    "CVPlanarPixelBufferInfo": {
+      "doc": "A structure for describing planar buffers.",
+      "url": "https://developer.apple.com/documentation/corevideo/cvplanarpixelbufferinfo"
+    },
+    "CVPlanarPixelBufferInfo_YCbCrBiPlanar": {
+      "doc": "A structure for describing YCbCr biplanar buffers.",
+      "url": "https://developer.apple.com/documentation/corevideo/cvplanarpixelbufferinfo_ycbcrbiplanar"
+    },
+    "CVPlanarPixelBufferInfo_YCbCrPlanar": {
+      "doc": "A structure for describing YCbCr planar buffers.",
+      "url": "https://developer.apple.com/documentation/corevideo/cvplanarpixelbufferinfo_ycbcrplanar"
+    },
+    "CVSMPTETime": {
+      "doc": "A structure for holding an SMPTE time.",
+      "url": "https://developer.apple.com/documentation/corevideo/cvsmptetime"
+    },
+    "CVTime": {
+      "doc": "A structure for reporting Core Video time values.",
+      "url": "https://developer.apple.com/documentation/corevideo/cvtime"
+    },
+    "CVTimeStamp": {
+      "doc": "A structure for defining a display timestamp.",
+      "url": "https://developer.apple.com/documentation/corevideo/cvtimestamp"
+    }
+  }
+}

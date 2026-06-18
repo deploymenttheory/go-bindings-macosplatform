@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "framework": "AdServices",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "AAAttribution": {
+      "doc": "The parent class that the framework uses to request a token.",
+      "url": "https://developer.apple.com/documentation/adservices/aaattribution"
+    }
+  },
+  "enums": {
+    "AAAttributionErrorCode": {
+      "doc": "The error code that the parent class issues.",
+      "url": "https://developer.apple.com/documentation/adservices/aaattributionerrorcode"
+    }
+  },
+  "methods": {
+    "AAAttribution": {
+      "+attributionTokenWithError:": {
+        "doc": "Generates a token.",
+        "url": "https://developer.apple.com/documentation/adservices/aaattribution/attributiontoken()"
+      }
+    }
+  }
+}

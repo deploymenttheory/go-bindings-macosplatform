@@ -1,0 +1,2354 @@
+{
+  "schema_version": 1,
+  "framework": "ModelIO",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "MDLAnimatedMatrix4x4": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlanimatedmatrix4x4"
+    },
+    "MDLAnimatedQuaternion": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlanimatedquaternion"
+    },
+    "MDLAnimatedQuaternionArray": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlanimatedquaternionarray"
+    },
+    "MDLAnimatedScalar": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlanimatedscalar"
+    },
+    "MDLAnimatedScalarArray": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlanimatedscalararray"
+    },
+    "MDLAnimatedValue": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlanimatedvalue"
+    },
+    "MDLAnimatedVector2": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlanimatedvector2"
+    },
+    "MDLAnimatedVector3": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlanimatedvector3"
+    },
+    "MDLAnimatedVector3Array": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlanimatedvector3array"
+    },
+    "MDLAnimatedVector4": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlanimatedvector4"
+    },
+    "MDLAnimationBindComponent": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlanimationbindcomponent"
+    },
+    "MDLAreaLight": {
+      "doc": "A light source that illuminates a 3D scene from an area with a specific shape.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlarealight"
+    },
+    "MDLAsset": {
+      "doc": "An indexed container for 3D objects and associated information, such as transform hierarchies, meshes, cameras, and lights.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlasset"
+    },
+    "MDLBundleAssetResolver": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlbundleassetresolver"
+    },
+    "MDLCamera": {
+      "doc": "A point of view for rendering a 3D scene, along with a set of parameters describing an intended appearance for rendering.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlcamera"
+    },
+    "MDLCheckerboardTexture": {
+      "doc": "A generator of texel data that creates a checkerboard pattern with two specified colors.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlcheckerboardtexture"
+    },
+    "MDLColorSwatchTexture": {
+      "doc": "A generator of texel data that creates a gradient between two specified colors.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlcolorswatchtexture"
+    },
+    "MDLLight": {
+      "doc": "The abstract superclass for objects that describe light sources in a scene.",
+      "url": "https://developer.apple.com/documentation/modelio/mdllight"
+    },
+    "MDLLightProbe": {
+      "doc": "A light source described in terms of the variations in color and intensity of its illumination in all directions.",
+      "url": "https://developer.apple.com/documentation/modelio/mdllightprobe"
+    },
+    "MDLMaterial": {
+      "doc": "A collection of material properties that together describe the intended surface appearance for rendering a 3D object.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlmaterial"
+    },
+    "MDLMaterialProperty": {
+      "doc": "A definition for one specific aspect of the rendering parameters for a material.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty"
+    },
+    "MDLMaterialPropertyConnection": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlmaterialpropertyconnection"
+    },
+    "MDLMaterialPropertyGraph": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlmaterialpropertygraph"
+    },
+    "MDLMaterialPropertyNode": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlmaterialpropertynode"
+    },
+    "MDLMatrix4x4Array": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlmatrix4x4array"
+    },
+    "MDLMesh": {
+      "doc": "A container for vertex buffer data to be used in rendering a 3D object.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlmesh"
+    },
+    "MDLMeshBufferData": {
+      "doc": "A memory buffer that stores vertex or index data for a Model I/O mesh.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlmeshbufferdata"
+    },
+    "MDLMeshBufferDataAllocator": {
+      "doc": "A basic allocator implementation that allocates from main memory using data objects.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlmeshbufferdataallocator"
+    },
+    "MDLMeshBufferMap": {
+      "doc": "An object that manages access to a memory buffer used for the data storage of a Model I/O mesh.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlmeshbuffermap"
+    },
+    "MDLMeshBufferZoneDefault": {
+      "doc": "A standard implementation of the MDLMeshBufferZone protocol.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlmeshbufferzonedefault"
+    },
+    "MDLNoiseTexture": {
+      "doc": "A generator of texel data that creates a field of random noise.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlnoisetexture"
+    },
+    "MDLNormalMapTexture": {
+      "doc": "A generator of texel data that computes a normal map from a supplied texture.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlnormalmaptexture"
+    },
+    "MDLObject": {
+      "doc": "The base class for objects that are part of a 3D asset, including meshes, cameras, and lights.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlobject"
+    },
+    "MDLObjectContainer": {
+      "doc": "A default implementation for handling object hierarchy relationships in a 3D asset.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlobjectcontainer"
+    },
+    "MDLPackedJointAnimation": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlpackedjointanimation"
+    },
+    "MDLPathAssetResolver": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlpathassetresolver"
+    },
+    "MDLPhotometricLight": {
+      "doc": "A light source whose shape, direction, and intensity of illumination are determined by a photometric profile.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlphotometriclight"
+    },
+    "MDLPhysicallyPlausibleLight": {
+      "doc": "A light source for use in shading models based on real-world physics.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblelight"
+    },
+    "MDLPhysicallyPlausibleScatteringFunction": {
+      "doc": "A set of material properties that describes a physically realistic shading model for materials.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblescatteringfunction"
+    },
+    "MDLRelativeAssetResolver": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlrelativeassetresolver"
+    },
+    "MDLScatteringFunction": {
+      "doc": "A set of material properties that describes a basic shading model for materials, and the superclass for more complex shading models.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlscatteringfunction"
+    },
+    "MDLSkeleton": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlskeleton"
+    },
+    "MDLSkyCubeTexture": {
+      "doc": "A generator of texel data that creates cube textures using a physically realistic simulation of the sunlit sky.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlskycubetexture"
+    },
+    "MDLStereoscopicCamera": {
+      "doc": "A point of view for rendering a stereoscopic display of a 3D scene.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlstereoscopiccamera"
+    },
+    "MDLSubmesh": {
+      "doc": "A container for index buffer data and material information to be used in rendering all or part of a 3D object.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlsubmesh"
+    },
+    "MDLSubmeshTopology": {
+      "doc": "A description of how a submesh’s index buffer data is arranged and how that arrangement should be used to produce the submesh’s intended 3D shape.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlsubmeshtopology"
+    },
+    "MDLTexture": {
+      "doc": "A source of texel data to be used in rendering material surface appearances.",
+      "url": "https://developer.apple.com/documentation/modelio/mdltexture"
+    },
+    "MDLTextureFilter": {
+      "doc": "A description of filtering modes for a renderer to use when sampling from a texture.",
+      "url": "https://developer.apple.com/documentation/modelio/mdltexturefilter"
+    },
+    "MDLTextureSampler": {
+      "doc": "An object that pairs a source of texture data with sampling parameters to be used in rendering the texture.",
+      "url": "https://developer.apple.com/documentation/modelio/mdltexturesampler"
+    },
+    "MDLTransform": {
+      "doc": "A description of the local coordinate space transformations for a 3D object.",
+      "url": "https://developer.apple.com/documentation/modelio/mdltransform"
+    },
+    "MDLTransformMatrixOp": {
+      "url": "https://developer.apple.com/documentation/modelio/mdltransformmatrixop"
+    },
+    "MDLTransformOrientOp": {
+      "url": "https://developer.apple.com/documentation/modelio/mdltransformorientop"
+    },
+    "MDLTransformRotateOp": {
+      "url": "https://developer.apple.com/documentation/modelio/mdltransformrotateop"
+    },
+    "MDLTransformRotateXOp": {
+      "url": "https://developer.apple.com/documentation/modelio/mdltransformrotatexop"
+    },
+    "MDLTransformRotateYOp": {
+      "url": "https://developer.apple.com/documentation/modelio/mdltransformrotateyop"
+    },
+    "MDLTransformRotateZOp": {
+      "url": "https://developer.apple.com/documentation/modelio/mdltransformrotatezop"
+    },
+    "MDLTransformScaleOp": {
+      "url": "https://developer.apple.com/documentation/modelio/mdltransformscaleop"
+    },
+    "MDLTransformStack": {
+      "url": "https://developer.apple.com/documentation/modelio/mdltransformstack"
+    },
+    "MDLTransformTranslateOp": {
+      "url": "https://developer.apple.com/documentation/modelio/mdltransformtranslateop"
+    },
+    "MDLURLTexture": {
+      "doc": "A lightweight reference to a URL from which to load texture data.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlurltexture"
+    },
+    "MDLUtility": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlutility"
+    },
+    "MDLVertexAttribute": {
+      "doc": "A description of the format of per-vertex data for a single vertex attribute in a mesh object.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlvertexattribute"
+    },
+    "MDLVertexAttributeData": {
+      "doc": "An object that provides convenience access to vertex data for a specific vertex attribute of a mesh.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlvertexattributedata"
+    },
+    "MDLVertexBufferLayout": {
+      "doc": "A MDLVertexBufferLayout object describes layout information for a vertex buffer in a MDLMesh object. A collection of vertex layer objects, vertex attribute objects, and additional information forms a MDLVertexDescriptor object, which completely describes the layout of vertex buffers for a mesh.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlvertexbufferlayout"
+    },
+    "MDLVertexDescriptor": {
+      "doc": "A description of the structure, format, and layout for vertex data buffers associated with a mesh.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlvertexdescriptor"
+    },
+    "MDLVoxelArray": {
+      "doc": "A model of a 3D object’s solid volume as a collection of voxels, or cubic units.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray"
+    }
+  },
+  "protocols": {
+    "MDLAssetResolver": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlassetresolver"
+    },
+    "MDLComponent": {
+      "doc": "The base protocol for extensible file format support in Model I/O.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlcomponent"
+    },
+    "MDLJointAnimation": {
+      "url": "https://developer.apple.com/documentation/modelio/mdljointanimation"
+    },
+    "MDLLightProbeIrradianceDataSource": {
+      "doc": "Adopt this protocol to provide information for use in automatic placement of light probes around a scene.",
+      "url": "https://developer.apple.com/documentation/modelio/mdllightprobeirradiancedatasource"
+    },
+    "MDLMeshBuffer": {
+      "doc": "The general interface for managing storage of vertex and index data used in loading, processing, and rendering meshes.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlmeshbuffer"
+    },
+    "MDLMeshBufferAllocator": {
+      "doc": "The general interface for managing allocation of data buffers to be used in loading, processing, and rendering meshes.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlmeshbufferallocator"
+    },
+    "MDLMeshBufferZone": {
+      "doc": "The general interface for logical pools of memory used in allocation of related mesh data buffers.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlmeshbufferzone"
+    },
+    "MDLNamed": {
+      "doc": "The common interface for Model I/O objects that expose a human-readable name.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlnamed"
+    },
+    "MDLObjectContainerComponent": {
+      "doc": "The general interface for classes that can act as containers in an object hierarchy.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlobjectcontainercomponent"
+    },
+    "MDLTransformComponent": {
+      "doc": "The general interface for classes that manage local coordinate space transforms for 3D objects",
+      "url": "https://developer.apple.com/documentation/modelio/mdltransformcomponent"
+    },
+    "MDLTransformOp": {
+      "url": "https://developer.apple.com/documentation/modelio/mdltransformop"
+    }
+  },
+  "enums": {
+    "MDLAnimatedValueInterpolation": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlanimatedvalueinterpolation"
+    },
+    "MDLCameraProjection": {
+      "doc": "Options for camera projection styles, used by the projection property.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlcameraprojection",
+      "members": {
+        "MDLCameraProjectionOrthographic": {
+          "doc": "An orthographic projection.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlcameraprojection/orthographic"
+        },
+        "MDLCameraProjectionPerspective": {
+          "doc": "A perspective projection.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlcameraprojection/perspective"
+        }
+      }
+    },
+    "MDLDataPrecision": {
+      "url": "https://developer.apple.com/documentation/modelio/mdldataprecision"
+    },
+    "MDLGeometryType": {
+      "doc": "Types of geometric primitives for rendering a submesh, used by the geometryType property.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlgeometrytype",
+      "members": {
+        "MDLGeometryTypeLines": {
+          "doc": "Each pair of consecutive indices in the submesh refers to two vertices to be rendered as a line segment.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlgeometrytype/lines"
+        },
+        "MDLGeometryTypePoints": {
+          "doc": "Each index in the submesh refers to a vertex to be rendered as a single point.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlgeometrytype/points"
+        },
+        "MDLGeometryTypeQuads": {
+          "doc": "Each set of four consecutive indices in the submesh refers to four vertices to be rendered as a quadrilateral.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlgeometrytype/quads"
+        },
+        "MDLGeometryTypeTriangleStrips": {
+          "doc": "The first three consecutive indices in the submesh refer to three vertices to be rendered as a triangle. Each subsequent index refers to another vertex that completes a triangle formed by connecting it to the previous two vertices.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlgeometrytype/trianglestrips"
+        },
+        "MDLGeometryTypeTriangles": {
+          "doc": "Each set of three consecutive indices in the submesh refers to three vertices to be rendered as a triangle.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlgeometrytype/triangles"
+        },
+        "MDLGeometryTypeVariableTopology": {
+          "doc": "The submesh’s index buffer does not contain a uniform set of primitives.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlgeometrytype/variabletopology"
+        }
+      }
+    },
+    "MDLIndexBitDepth": {
+      "doc": "Options for the size of integer data in a submesh’s index buffer, used by the indexType property.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlindexbitdepth",
+      "members": {
+        "MDLIndexBitDepthInvalid": {
+          "doc": "The submesh has not been initialized or its data type is unknown.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlindexbitdepth/invalid"
+        },
+        "MDLIndexBitDepthUInt16": {
+          "doc": "Each index in the submesh’s index buffer is a 16-bit integer.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlindexbitdepth/uint16-swift.enum.case"
+        },
+        "MDLIndexBitDepthUInt32": {
+          "doc": "Each index in the submesh’s index buffer is a 32-bit integer.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlindexbitdepth/uint32-swift.enum.case"
+        },
+        "MDLIndexBitDepthUInt8": {
+          "doc": "Each index in the submesh’s index buffer is an 8-bit integer.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlindexbitdepth/uint8-swift.enum.case"
+        }
+      }
+    },
+    "MDLLightType": {
+      "doc": "Options for the shape and style of illumination provided by a light, used by the lightType property.",
+      "url": "https://developer.apple.com/documentation/modelio/mdllighttype",
+      "members": {
+        "MDLLightTypeAmbient": {
+          "doc": "The light source should illuminate a scene evenly regardless of position or direction.",
+          "url": "https://developer.apple.com/documentation/modelio/mdllighttype/ambient"
+        },
+        "MDLLightTypeDirectional": {
+          "doc": "The light source illuminates a scene from a uniform direction regardless of its position.",
+          "url": "https://developer.apple.com/documentation/modelio/mdllighttype/directional"
+        },
+        "MDLLightTypeDiscArea": {
+          "doc": "The light source illuminates a scene in all directions from an area in the shape of a disc.",
+          "url": "https://developer.apple.com/documentation/modelio/mdllighttype/discarea"
+        },
+        "MDLLightTypeEnvironment": {
+          "doc": "The illumination from the light is determined by texture images representing a sample of the surrounding environment for a scene.",
+          "url": "https://developer.apple.com/documentation/modelio/mdllighttype/environment"
+        },
+        "MDLLightTypeLinear": {
+          "doc": "The light source illuminates a scene in all directions from an area in the shape of a line.",
+          "url": "https://developer.apple.com/documentation/modelio/mdllighttype/linear"
+        },
+        "MDLLightTypePhotometric": {
+          "doc": "The illumination from the light is determined by a photometric profile.",
+          "url": "https://developer.apple.com/documentation/modelio/mdllighttype/photometric"
+        },
+        "MDLLightTypePoint": {
+          "doc": "The light source illuminates a scene in all directions from a specific position.",
+          "url": "https://developer.apple.com/documentation/modelio/mdllighttype/point"
+        },
+        "MDLLightTypeProbe": {
+          "doc": "The illumination from the light is determined by texture images representing a sample of a scene at a specific point.",
+          "url": "https://developer.apple.com/documentation/modelio/mdllighttype/probe"
+        },
+        "MDLLightTypeRectangularArea": {
+          "doc": "The light source illuminates a scene in all directions from an area in the shape of a rectangle.",
+          "url": "https://developer.apple.com/documentation/modelio/mdllighttype/rectangulararea"
+        },
+        "MDLLightTypeSpot": {
+          "doc": "The light source illuminates a scene from a specific position and direction.",
+          "url": "https://developer.apple.com/documentation/modelio/mdllighttype/spot"
+        },
+        "MDLLightTypeSuperElliptical": {
+          "doc": "The light source illuminates a scene in all directions from an area in the shape of a superellipse.",
+          "url": "https://developer.apple.com/documentation/modelio/mdllighttype/superelliptical"
+        },
+        "MDLLightTypeUnknown": {
+          "doc": "The type of the light is unknown or has not been initialized.",
+          "url": "https://developer.apple.com/documentation/modelio/mdllighttype/unknown"
+        }
+      }
+    },
+    "MDLMaterialFace": {
+      "url": "https://developer.apple.com/documentation/modelio/mdlmaterialface"
+    },
+    "MDLMaterialMipMapFilterMode": {
+      "doc": "Modes for sampling textures at sizes between mipmap levels, used by the mipFilter property.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlmaterialmipmapfiltermode",
+      "members": {
+        "MDLMaterialMipMapFilterModeLinear": {
+          "doc": "Sampling a texture at a size between mipmap levels should linearly interpolate between mipmap levels.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialmipmapfiltermode/linear"
+        },
+        "MDLMaterialMipMapFilterModeNearest": {
+          "doc": "Sampling a texture at a size between mipmap levels should return a texel value from the nearest mipmap level.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialmipmapfiltermode/nearest"
+        }
+      }
+    },
+    "MDLMaterialPropertyType": {
+      "doc": "Options for the data type of a material property, used by the type property.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlmaterialpropertytype",
+      "members": {
+        "MDLMaterialPropertyTypeColor": {
+          "doc": "The material property’s value is a uniform color.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialpropertytype/color"
+        },
+        "MDLMaterialPropertyTypeFloat": {
+          "doc": "The material property’s value is a floating-point scalar.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialpropertytype/float"
+        },
+        "MDLMaterialPropertyTypeFloat2": {
+          "doc": "The material property’s value is a 2-component floating-point vector.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialpropertytype/float2"
+        },
+        "MDLMaterialPropertyTypeFloat3": {
+          "doc": "The material property’s value is a 3-component floating-point vector.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialpropertytype/float3"
+        },
+        "MDLMaterialPropertyTypeFloat4": {
+          "doc": "The material property’s value is a 4-component floating-point vector.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialpropertytype/float4"
+        },
+        "MDLMaterialPropertyTypeMatrix44": {
+          "doc": "The material property’s value is a 4 x 4 floating-point matrix.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialpropertytype/matrix44"
+        },
+        "MDLMaterialPropertyTypeNone": {
+          "doc": "The material property’s value has not been initialized.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialpropertytype/none"
+        },
+        "MDLMaterialPropertyTypeString": {
+          "doc": "The material’s value is a string.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialpropertytype/string"
+        },
+        "MDLMaterialPropertyTypeTexture": {
+          "doc": "The material property’s value is a MDLTextureSampler object that provides both a texture image and texture rendering parameters.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialpropertytype/texture"
+        },
+        "MDLMaterialPropertyTypeURL": {
+          "doc": "The material property’s value is a URL—typically, a URL referencing a texture image.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialpropertytype/url"
+        }
+      }
+    },
+    "MDLMaterialSemantic": {
+      "doc": "Options for the semantic use of a material property’s value in rendering a particular surface appearance; used by the semantic property.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic",
+      "members": {
+        "MDLMaterialSemanticAmbientOcclusion": {
+          "doc": "The attenuation of ambient light due to local geometry variations on a surface.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/ambientocclusion"
+        },
+        "MDLMaterialSemanticAmbientOcclusionScale": {
+          "doc": "The scaling factor for ambient occlusion shading.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/ambientocclusionscale"
+        },
+        "MDLMaterialSemanticAnisotropic": {
+          "doc": "The degree to which specular highlights elongate in the direction of the local tangent basis.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/anisotropic"
+        },
+        "MDLMaterialSemanticAnisotropicRotation": {
+          "doc": "The angle at which anisotropic effects are rotated relative to the local tangent basis.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/anisotropicrotation"
+        },
+        "MDLMaterialSemanticBaseColor": {
+          "doc": "The inherent color of a surface, to be used as a modulator during shading.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/basecolor"
+        },
+        "MDLMaterialSemanticBump": {
+          "doc": "The degree of perturbation in a material’s surface.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/bump"
+        },
+        "MDLMaterialSemanticClearcoat": {
+          "doc": "The intensity of a second specular highlight, similar to the gloss that results from a clear coat on an automotive finish.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/clearcoat"
+        },
+        "MDLMaterialSemanticClearcoatGloss": {
+          "doc": "The spread of a second specular highlight, similar to the gloss that results from a clear coat on an automotive finish.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/clearcoatgloss"
+        },
+        "MDLMaterialSemanticDisplacement": {
+          "doc": "The displacement of a material’s surface relative to the surface normal.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/displacement"
+        },
+        "MDLMaterialSemanticDisplacementScale": {
+          "doc": "The scaling factor for displacement of a material’s surface.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/displacementscale"
+        },
+        "MDLMaterialSemanticEmission": {
+          "doc": "The color emitted as radiance from a material’s surface.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/emission"
+        },
+        "MDLMaterialSemanticInterfaceIndexOfRefraction": {
+          "doc": "The index of refraction for the medium surrounding a material.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/interfaceindexofrefraction"
+        },
+        "MDLMaterialSemanticMaterialIndexOfRefraction": {
+          "doc": "The index of refraction for a material itself.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/materialindexofrefraction"
+        },
+        "MDLMaterialSemanticMetallic": {
+          "doc": "The degree to which a material appears as a dielectric surface (lower values) or as a metal (higher values).",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/metallic"
+        },
+        "MDLMaterialSemanticNone": {
+          "doc": "The material property’s semantic property has not been initialized.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/none"
+        },
+        "MDLMaterialSemanticObjectSpaceNormal": {
+          "doc": "The variation in the surface normal vectors in a material, relative to model coordinate space.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/objectspacenormal"
+        },
+        "MDLMaterialSemanticOpacity": {
+          "doc": "The opacity of a material’s surface.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/opacity"
+        },
+        "MDLMaterialSemanticRoughness": {
+          "doc": "The degree to which a material appears smooth, affecting both diffuse and specular response.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/roughness"
+        },
+        "MDLMaterialSemanticSheen": {
+          "doc": "The intensity of highlights that appear only at glancing angles on a material’s surface.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/sheen"
+        },
+        "MDLMaterialSemanticSheenTint": {
+          "doc": "The balance of color for highlights that appear only at glancing angles, between the light color (lower values) and the material’s base color (at higher values).",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/sheentint"
+        },
+        "MDLMaterialSemanticSpecular": {
+          "doc": "The intensity of specular highlights that appear on the material’s surface.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/specular"
+        },
+        "MDLMaterialSemanticSpecularExponent": {
+          "doc": "The exponent to be used in Blinn-Phong approximation of the material’s specular response.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/specularexponent"
+        },
+        "MDLMaterialSemanticSpecularTint": {
+          "doc": "The balance of color for specular highlights, between the light color (lower values) and the material’s base color (at higher values).",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/speculartint"
+        },
+        "MDLMaterialSemanticSubsurface": {
+          "doc": "The degree to which light scatters under the surface of a material.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/subsurface"
+        },
+        "MDLMaterialSemanticTangentSpaceNormal": {
+          "doc": "The variation in the surface normal vectors in a material, relative to surface tangent coordinate space.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/tangentspacenormal"
+        },
+        "MDLMaterialSemanticUserDefined": {
+          "doc": "The meaning of the material property’s value is not one of the standard semantic uses recognized by Model I/O.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialsemantic/userdefined"
+        }
+      }
+    },
+    "MDLMaterialTextureFilterMode": {
+      "doc": "Modes for sampling textures at coordinates between texels, used by the minFilter and magFilter properties.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlmaterialtexturefiltermode",
+      "members": {
+        "MDLMaterialTextureFilterModeLinear": {
+          "doc": "Sampling at texture coordinates between texels should linearly interpolate between texel values.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialtexturefiltermode/linear"
+        },
+        "MDLMaterialTextureFilterModeNearest": {
+          "doc": "Sampling at texture coordinates between texels should return the value of the nearest texel.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialtexturefiltermode/nearest"
+        }
+      }
+    },
+    "MDLMaterialTextureWrapMode": {
+      "doc": "Modes for sampling textures at coordinates outside the texture bounds, used by the sWrapMode, tWrapMode, and rWrapMode properties.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlmaterialtexturewrapmode",
+      "members": {
+        "MDLMaterialTextureWrapModeClamp": {
+          "doc": "Sampling at any texture coordinate outside the 0.0 to 1.0 range returns the texel color from the nearest edge.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialtexturewrapmode/clamp"
+        },
+        "MDLMaterialTextureWrapModeMirror": {
+          "doc": "Sampling at texture coordinates outside the 0.0 to 1.0 range results in a mirrored tiling effect.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialtexturewrapmode/mirror"
+        },
+        "MDLMaterialTextureWrapModeRepeat": {
+          "doc": "Sampling at texture coordinates outside the 0.0 to 1.0 range results in a repeated tiling effect.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmaterialtexturewrapmode/repeat"
+        }
+      }
+    },
+    "MDLMeshBufferType": {
+      "doc": "Options for the content of a mesh buffer, used by the type property and by MDLMeshBufferAllocator methods for creating buffers.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlmeshbuffertype",
+      "members": {
+        "MDLMeshBufferTypeIndex": {
+          "doc": "The buffer contains index data for a MDLSubmesh object.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmeshbuffertype/index"
+        },
+        "MDLMeshBufferTypeVertex": {
+          "doc": "The buffer contains per-vertex data for one or more vertex attributes of a MDLMesh object.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlmeshbuffertype/vertex"
+        }
+      }
+    },
+    "MDLProbePlacement": {
+      "doc": "Options affecting automatic placement of light probes in a scene, used with the placeLightProbesWithDensity:heuristic:usingIrradianceDataSource: method.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlprobeplacement",
+      "members": {
+        "MDLProbePlacementIrradianceDistribution": {
+          "doc": "An option to examine the lighting conditions at various positions in the scene being evaluated, then place light probes only at the locations where each contributes optimally to scene lighting.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlprobeplacement/irradiancedistribution"
+        },
+        "MDLProbePlacementUniformGrid": {
+          "doc": "An option to place light probes at each unit coordinate in a three-dimensional grid that evenly divides the region being evaluated.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlprobeplacement/uniformgrid"
+        }
+      }
+    },
+    "MDLTextureChannelEncoding": {
+      "doc": "Options for the data size and type of texel channel values, used by the channelEncoding property.",
+      "url": "https://developer.apple.com/documentation/modelio/mdltexturechannelencoding",
+      "members": {
+        "MDLTextureChannelEncodingFloat16": {
+          "doc": "Each channel value per texel is a 16-bit floating-point value.",
+          "url": "https://developer.apple.com/documentation/modelio/mdltexturechannelencoding/float16"
+        },
+        "MDLTextureChannelEncodingFloat32": {
+          "doc": "Each channel value per texel is a 32-bit floating-point value.",
+          "url": "https://developer.apple.com/documentation/modelio/mdltexturechannelencoding/float32"
+        },
+        "MDLTextureChannelEncodingUInt16": {
+          "doc": "Each channel value per texel is a 16-bit unsigned integer.",
+          "url": "https://developer.apple.com/documentation/modelio/mdltexturechannelencoding/uint16-swift.enum.case"
+        },
+        "MDLTextureChannelEncodingUInt24": {
+          "doc": "Each channel value per texel is a 24-bit unsigned integer.",
+          "url": "https://developer.apple.com/documentation/modelio/mdltexturechannelencoding/uint24-swift.enum.case"
+        },
+        "MDLTextureChannelEncodingUInt32": {
+          "doc": "Each channel value per texel is a 32-bit unsigned integer.",
+          "url": "https://developer.apple.com/documentation/modelio/mdltexturechannelencoding/uint32-swift.enum.case"
+        },
+        "MDLTextureChannelEncodingUInt8": {
+          "doc": "Each channel value per texel is an 8-bit unsigned integer.",
+          "url": "https://developer.apple.com/documentation/modelio/mdltexturechannelencoding/uint8-swift.enum.case"
+        },
+        "MDLTextureChannelEncodingUint16": {
+          "doc": "Each channel value per texel is a 16-bit unsigned integer.",
+          "url": "https://developer.apple.com/documentation/modelio/mdltexturechannelencoding/uint16-swift.type.property"
+        },
+        "MDLTextureChannelEncodingUint24": {
+          "doc": "Each channel value per texel is a 24-bit unsigned integer.",
+          "url": "https://developer.apple.com/documentation/modelio/mdltexturechannelencoding/uint24-swift.type.property"
+        },
+        "MDLTextureChannelEncodingUint32": {
+          "doc": "Each channel value per texel is a 32-bit unsigned integer.",
+          "url": "https://developer.apple.com/documentation/modelio/mdltexturechannelencoding/uint32-swift.type.property"
+        },
+        "MDLTextureChannelEncodingUint8": {
+          "doc": "Each channel value per texel is an 8-bit unsigned integer.",
+          "url": "https://developer.apple.com/documentation/modelio/mdltexturechannelencoding/uint8-swift.type.property"
+        }
+      }
+    },
+    "MDLTransformOpRotationOrder": {
+      "url": "https://developer.apple.com/documentation/modelio/mdltransformoprotationorder"
+    },
+    "MDLVertexFormat": {
+      "doc": "Descriptions of the data size and layout for a vertex attribute, used by the format property.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat",
+      "members": {
+        "MDLVertexFormatChar": {
+          "doc": "The attribute value for each vertex is a scalar of signed 8-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/char"
+        },
+        "MDLVertexFormatChar2": {
+          "doc": "The attribute value for each vertex is a vector with 2 components, each of signed 8-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/char2"
+        },
+        "MDLVertexFormatChar2Normalized": {
+          "doc": "The attribute value for each vertex is a vector with 2 components, each with a normalized value of signed 8-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/char2normalized"
+        },
+        "MDLVertexFormatChar3": {
+          "doc": "The attribute value for each vertex is a vector with 3 components, each of signed 8-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/char3"
+        },
+        "MDLVertexFormatChar3Normalized": {
+          "doc": "The attribute value for each vertex is a vector with 3 components, each with a normalized value of signed 8-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/char3normalized"
+        },
+        "MDLVertexFormatChar4": {
+          "doc": "The attribute value for each vertex is a vector with 4 components, each of signed 8-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/char4"
+        },
+        "MDLVertexFormatChar4Normalized": {
+          "doc": "The attribute value for each vertex is a vector with 4 components, each with a normalized value of signed 8-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/char4normalized"
+        },
+        "MDLVertexFormatCharBits": {
+          "doc": "A bit mask for vertex attributes whose components are in 8-bit signed integer format.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/charbits"
+        },
+        "MDLVertexFormatCharNormalized": {
+          "doc": "The attribute value for each vertex is a normalized scalar of signed 8-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/charnormalized"
+        },
+        "MDLVertexFormatCharNormalizedBits": {
+          "doc": "A bit mask for vertex attributes whose components are in 8-bit signed normalized integer format.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/charnormalizedbits"
+        },
+        "MDLVertexFormatFloat": {
+          "doc": "The attribute value for each vertex is a scalar of 32-bit floating-point type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/float"
+        },
+        "MDLVertexFormatFloat2": {
+          "doc": "The attribute value for each vertex is a vector with 2 components, each of 32-bit floating-point type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/float2"
+        },
+        "MDLVertexFormatFloat3": {
+          "doc": "The attribute value for each vertex is a vector with 3 components, each of 32-bit floating-point type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/float3"
+        },
+        "MDLVertexFormatFloat4": {
+          "doc": "The attribute value for each vertex is a vector with 4 components, each of 32-bit floating-point type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/float4"
+        },
+        "MDLVertexFormatFloatBits": {
+          "doc": "A bit mask for vertex attributes whose components are in 32-bit floating-point format.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/floatbits"
+        },
+        "MDLVertexFormatHalf": {
+          "doc": "The attribute value for each vertex is a scalar of 16-bit floating-point type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/half"
+        },
+        "MDLVertexFormatHalf2": {
+          "doc": "The attribute value for each vertex is a vector with 2 components, each of 16-bit floating-point type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/half2"
+        },
+        "MDLVertexFormatHalf3": {
+          "doc": "The attribute value for each vertex is a vector with 3 components, each of 16-bit floating-point type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/half3"
+        },
+        "MDLVertexFormatHalf4": {
+          "doc": "The attribute value for each vertex is a vector with 4 components, each of 16-bit floating-point type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/half4"
+        },
+        "MDLVertexFormatHalfBits": {
+          "doc": "A bit mask for vertex attributes whose components are in 16-bit floating-point format.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/halfbits"
+        },
+        "MDLVertexFormatInt": {
+          "doc": "The attribute value for each vertex is a scalar of signed 32-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/int"
+        },
+        "MDLVertexFormatInt1010102Normalized": {
+          "doc": "The attribute value for each vertex is a packed vector with 4 components of signed integer type. The first three components are 10 bits each, and the fourth component is 2 bits.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/int1010102normalized"
+        },
+        "MDLVertexFormatInt2": {
+          "doc": "The attribute value for each vertex is a vector with 2 components, each of signed 32-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/int2"
+        },
+        "MDLVertexFormatInt3": {
+          "doc": "The attribute value for each vertex is a vector with 3 components, each of signed 32-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/int3"
+        },
+        "MDLVertexFormatInt4": {
+          "doc": "The attribute value for each vertex is a vector with 4 components, each of signed 32-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/int4"
+        },
+        "MDLVertexFormatIntBits": {
+          "doc": "A bit mask for vertex attributes whose components are in 32-bit signed integer format.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/intbits"
+        },
+        "MDLVertexFormatInvalid": {
+          "doc": "The vertex attribute has just been initialized or its format is unknown.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/invalid"
+        },
+        "MDLVertexFormatPackedBit": {
+          "doc": "A bit mask for vertex attributes in packed vector formats.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/packedbit"
+        },
+        "MDLVertexFormatShort": {
+          "doc": "The attribute value for each vertex is a scalar of signed 16-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/short"
+        },
+        "MDLVertexFormatShort2": {
+          "doc": "The attribute value for each vertex is a vector with 2 components, each of signed 16-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/short2"
+        },
+        "MDLVertexFormatShort2Normalized": {
+          "doc": "The attribute value for each vertex is a vector with 2 components, each with a normalized value of signed 16-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/short2normalized"
+        },
+        "MDLVertexFormatShort3": {
+          "doc": "The attribute value for each vertex is a vector with 3 components, each of signed 16-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/short3"
+        },
+        "MDLVertexFormatShort3Normalized": {
+          "doc": "The attribute value for each vertex is a vector with 3 components, each with a normalized value of signed 16-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/short3normalized"
+        },
+        "MDLVertexFormatShort4": {
+          "doc": "The attribute value for each vertex is a vector with 4 components, each of signed 16-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/short4"
+        },
+        "MDLVertexFormatShort4Normalized": {
+          "doc": "The attribute value for each vertex is a vector with 4 components, each with a normalized value of signed 16-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/short4normalized"
+        },
+        "MDLVertexFormatShortBits": {
+          "doc": "A bit mask for vertex attributes whose components are in 16-bit signed integer format.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/shortbits"
+        },
+        "MDLVertexFormatShortNormalized": {
+          "doc": "The attribute value for each vertex is a normalized scalar of signed 16-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/shortnormalized"
+        },
+        "MDLVertexFormatShortNormalizedBits": {
+          "doc": "A bit mask for vertex attributes whose components are in 16-bit signed normalized integer format.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/shortnormalizedbits"
+        },
+        "MDLVertexFormatUChar": {
+          "doc": "The attribute value for each vertex is a scalar of unsigned 8-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/uchar"
+        },
+        "MDLVertexFormatUChar2": {
+          "doc": "The attribute value for each vertex is a vector with 2 components, each of unsigned 8-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/uchar2"
+        },
+        "MDLVertexFormatUChar2Normalized": {
+          "doc": "The attribute value for each vertex is a vector with 2 components, each with a normalized value of unsigned 8-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/uchar2normalized"
+        },
+        "MDLVertexFormatUChar3": {
+          "doc": "The attribute value for each vertex is a vector with 3 components, each of unsigned 8-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/uchar3"
+        },
+        "MDLVertexFormatUChar3Normalized": {
+          "doc": "The attribute value for each vertex is a vector with 3 components, each with a normalized value of unsigned 8-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/uchar3normalized"
+        },
+        "MDLVertexFormatUChar4": {
+          "doc": "The attribute value for each vertex is a vector with 4 components, each of unsigned 8-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/uchar4"
+        },
+        "MDLVertexFormatUChar4Normalized": {
+          "doc": "The attribute value for each vertex is a vector with 4 components, each with a normalized value of unsigned 8-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/uchar4normalized"
+        },
+        "MDLVertexFormatUCharBits": {
+          "doc": "A bit mask for vertex attributes whose components are in 8-bit unsigned integer format.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/ucharbits"
+        },
+        "MDLVertexFormatUCharNormalized": {
+          "doc": "The attribute value for each vertex is a normalized scalar of unsigned 8-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/ucharnormalized"
+        },
+        "MDLVertexFormatUCharNormalizedBits": {
+          "doc": "A bit mask for vertex attributes whose components are in 8-bit unsigned normalized integer format.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/ucharnormalizedbits"
+        },
+        "MDLVertexFormatUInt": {
+          "doc": "The attribute value for each vertex is a scalar of unsigned 32-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/uint"
+        },
+        "MDLVertexFormatUInt1010102Normalized": {
+          "doc": "The attribute value for each vertex is a packed vector with 4 components of unsigned integer type. The first three components are 10 bits each, and the fourth component is 2 bits.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/uint1010102normalized"
+        },
+        "MDLVertexFormatUInt2": {
+          "doc": "The attribute value for each vertex is a vector with 2 components, each of unsigned 32-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/uint2"
+        },
+        "MDLVertexFormatUInt3": {
+          "doc": "The attribute value for each vertex is a vector with 3 components, each of unsigned 32-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/uint3"
+        },
+        "MDLVertexFormatUInt4": {
+          "doc": "The attribute value for each vertex is a vector with 4 components, each of unsigned 32-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/uint4"
+        },
+        "MDLVertexFormatUIntBits": {
+          "doc": "A bit mask for vertex attributes whose components are in 32-bit unsigned integer format.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/uintbits"
+        },
+        "MDLVertexFormatUShort": {
+          "doc": "The attribute value for each vertex is a scalar of unsigned 16-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/ushort"
+        },
+        "MDLVertexFormatUShort2": {
+          "doc": "The attribute value for each vertex is a vector with 2 components, each of unsigned 16-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/ushort2"
+        },
+        "MDLVertexFormatUShort2Normalized": {
+          "doc": "The attribute value for each vertex is a vector with 2 components, each with a normalized value of unsigned 16-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/ushort2normalized"
+        },
+        "MDLVertexFormatUShort3": {
+          "doc": "The attribute value for each vertex is a vector with 3 components, each of unsigned 16-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/ushort3"
+        },
+        "MDLVertexFormatUShort3Normalized": {
+          "doc": "The attribute value for each vertex is a vector with 3 components, each with a normalized value of unsigned 16-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/ushort3normalized"
+        },
+        "MDLVertexFormatUShort4": {
+          "doc": "The attribute value for each vertex is a vector with 4 components, each of unsigned 16-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/ushort4"
+        },
+        "MDLVertexFormatUShort4Normalized": {
+          "doc": "The attribute value for each vertex is a vector with 4 components, each with a normalized value of unsigned 16-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/ushort4normalized"
+        },
+        "MDLVertexFormatUShortBits": {
+          "doc": "A bit mask for vertex attributes whose components are in 16-bit unsigned integer format.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/ushortbits"
+        },
+        "MDLVertexFormatUShortNormalized": {
+          "doc": "The attribute value for each vertex is a normalized scalar of unsigned 16-bit integer type.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/ushortnormalized"
+        },
+        "MDLVertexFormatUShortNormalizedBits": {
+          "doc": "A bit mask for vertex attributes whose components are in 16-bit unsigned normalized integer format.",
+          "url": "https://developer.apple.com/documentation/modelio/mdlvertexformat/ushortnormalizedbits"
+        }
+      }
+    }
+  },
+  "structs": {
+    "MDLAxisAlignedBoundingBox": {
+      "doc": "The minimal volume containing an object, used by the boundingBoxAtTime: method.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlaxisalignedboundingbox"
+    },
+    "MDLVoxelIndexExtent": {
+      "doc": "The corner voxel indices defining a solid rectangular volume of voxels. Used by the voxelIndexExtent property and voxelsWithinExtent: method.",
+      "url": "https://developer.apple.com/documentation/modelio/mdlvoxelindexextent"
+    }
+  },
+  "methods": {
+    "MDLAsset": {
+      "+canExportFileExtension:": {
+        "doc": "Returns a Boolean value that indicates whether the MDLAsset class can write asset data as a file with the specified format extension.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/canexportfileextension(_:)"
+      },
+      "+canImportFileExtension:": {
+        "doc": "Returns a Boolean value that indicates whether the MDLAsset class can read asset data from files with the specified extension.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/canimportfileextension(_:)"
+      },
+      "+placeLightProbesWithDensity:heuristic:usingIrradianceDataSource:": {
+        "doc": "Automatically creates and places light probes for use in illuminating a scene.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/placelightprobes(withdensity:heuristic:using:)"
+      },
+      "-addObject:": {
+        "doc": "Adds the specified object to the asset’s list of top-level objects.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/add(_:)"
+      },
+      "-boundingBoxAtTime:": {
+        "doc": "Returns the minimum region entirely enclosing the asset’s contents at the specified time sample.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/boundingbox(attime:)"
+      },
+      "-childObjectsOfClass:": {
+        "doc": "Returns all objects contained in the asset of the specified class.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/childobjects(of:)"
+      },
+      "-exportAssetToURL:": {
+        "doc": "Writes asset data to a file at the specified URL.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/exportassettourl:"
+      },
+      "-exportAssetToURL:error:": {
+        "doc": "Writes asset data to a file at the specified URL and reports errors that occur during export.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/export(to:)"
+      },
+      "-initWithBufferAllocator:": {
+        "doc": "Initializes an empty asset, using the specified buffer allocator.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/init(bufferallocator:)"
+      },
+      "-initWithURL:": {
+        "doc": "Initializes an asset from the file at the specified URL.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/init(url:)-1f4ym"
+      },
+      "-initWithURL:vertexDescriptor:bufferAllocator:": {
+        "doc": "Initializes an asset from the file at the specified URL, using the specified vertex descriptor and buffer allocator.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/init(url:vertexdescriptor:bufferallocator:)-1tchi"
+      },
+      "-initWithURL:vertexDescriptor:bufferAllocator:preserveTopology:error:": {
+        "doc": "Initializes an asset from the file at the specified URL, using the specified options for allocating and transforming data during import.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/init(url:vertexdescriptor:bufferallocator:preservetopology:error:)-510xi"
+      },
+      "-objectAtIndex:": {
+        "doc": "Returns the top-level object at the specified index in the asset.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/object(at:)"
+      },
+      "-objectAtIndexedSubscript:": {
+        "doc": "Returns the top-level object at the specified index in the asset, using subscript syntax.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/subscript(_:)"
+      },
+      "-removeObject:": {
+        "doc": "Removes the specified object from the asset’s list of top-level objects.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/remove(_:)"
+      }
+    },
+    "MDLCamera": {
+      "-bokehKernelWithSize:": {
+        "doc": "Creates and returns a texture, based on the camera’s aperture blade count, to be used in rendering out-of-focus highlights in a scene.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/bokehkernel(withsize:)"
+      },
+      "-frameBoundingBox:setNearAndFar:": {
+        "doc": "Moves the camera such that the specified bounding box lies entirely within the camera’s field of view.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/frameboundingbox(_:setnearandfar:)"
+      },
+      "-lookAt:": {
+        "doc": "Orients the camera to face toward the specified point.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/look(at:)"
+      },
+      "-lookAt:from:": {
+        "doc": "Sets the camera’s position and orients the camera to face toward the specified point.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/look(at:from:)"
+      },
+      "-rayTo:forViewPort:": {
+        "doc": "Returns a point, in 3D world coordinates, corresponding to the specified 2D view coordinates.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/ray(to:forviewport:)"
+      }
+    },
+    "MDLCheckerboardTexture": {
+      "-initWithDivisions:name:dimensions:channelCount:channelEncoding:color1:color2:": {
+        "doc": "Initializes a checkerboard texture with the specified colors and other properties.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcheckerboardtexture/init(divisions:name:dimensions:channelcount:channelencoding:color1:color2:)"
+      }
+    },
+    "MDLColorSwatchTexture": {
+      "-initWithColorGradientFrom:toColor:name:textureDimensions:": {
+        "doc": "Initializes a texture that creates a vertical gradient between two colors.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcolorswatchtexture/init(colorgradientfrom:to:name:texturedimensions:)"
+      },
+      "-initWithColorTemperatureGradientFrom:toColorTemperature:name:textureDimensions:": {
+        "doc": "Initializes a texture that creates a vertical gradient between two color temperatures.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcolorswatchtexture/init(colortemperaturegradientfrom:tocolortemperature:name:texturedimensions:)"
+      }
+    },
+    "MDLLight": {
+      "-irradianceAtPoint:": {
+        "doc": "Returns the radiance of the light as received at a specific point in the same scene.",
+        "url": "https://developer.apple.com/documentation/modelio/mdllight/irradiance(atpoint:)"
+      },
+      "-irradianceAtPoint:colorSpace:": {
+        "doc": "Returns the radiance of the light as received at a specific point in the same scene, expressed using the specified color space.",
+        "url": "https://developer.apple.com/documentation/modelio/mdllight/irradiance(atpoint:colorspace:)"
+      }
+    },
+    "MDLLightProbe": {
+      "+lightProbeWithTextureSize:forLocation:lightsToConsider:objectsToConsider:reflectiveCubemap:irradianceCubemap:": {
+        "doc": "Creates a light probe representing the shading environment at a specific point in a scene.",
+        "url": "https://developer.apple.com/documentation/modelio/mdllightprobe/init(texturesize:forlocation:lightstoconsider:objectstoconsider:reflectivecubemap:irradiancecubemap:)"
+      },
+      "-generateSphericalHarmonicsFromIrradiance:": {
+        "doc": "Generates spherical harmonics information based on the light probe’s irradiance texture.",
+        "url": "https://developer.apple.com/documentation/modelio/mdllightprobe/generatesphericalharmonics(fromirradiance:)"
+      },
+      "-initWithReflectiveTexture:irradianceTexture:": {
+        "doc": "Initializes a light probe with the specified cube map textures.",
+        "url": "https://developer.apple.com/documentation/modelio/mdllightprobe/init(reflectivetexture:irradiancetexture:)"
+      }
+    },
+    "MDLMaterial": {
+      "-initWithName:scatteringFunction:": {
+        "doc": "Initializes a material",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterial/init(name:scatteringfunction:)"
+      },
+      "-loadTexturesUsingResolver:": {
+        "doc": "Loads textures using resolver for string paths and NSURLs.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterial/loadtextures(using:)"
+      },
+      "-objectAtIndexedSubscript:": {
+        "doc": "Returns the material property at the specified index in the material, for use with subscript syntax.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterial/subscript(_:)-19j2"
+      },
+      "-objectForKeyedSubscript:": {
+        "doc": "Returns the material property with the specified name, for use with subscript syntax.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterial/subscript(_:)-323j3"
+      },
+      "-propertiesWithSemantic:": {
+        "doc": "Returns the complete list of material properties that match the specified material semantic.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterial/properties(with:)"
+      },
+      "-propertyNamed:": {
+        "doc": "Returns the material property with the specified name.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterial/propertynamed(_:)"
+      },
+      "-propertyWithSemantic:": {
+        "doc": "Returns the material property for the specified material semantic.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterial/property(with:)"
+      },
+      "-removeAllProperties": {
+        "doc": "Removes all material properties from the material.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterial/removeallproperties()"
+      },
+      "-removeProperty:": {
+        "doc": "Removes the specified material property from the material.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterial/remove(_:)"
+      },
+      "-resolveTexturesWithResolver:": {
+        "doc": "Resolves all texture string paths as NSURLs with resolver.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterial/resolvetextures(with:)"
+      },
+      "-setProperty:": {
+        "doc": "Adds a new material property to or replaces an existing material property in the material.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterial/setproperty(_:)"
+      }
+    },
+    "MDLMaterialProperty": {
+      "-initWithName:semantic:": {
+        "doc": "Initializes a material property without a value.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/init(name:semantic:)"
+      },
+      "-initWithName:semantic:URL:": {
+        "doc": "Initializes a material property with a URL value.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/init(name:semantic:url:)-2ldk4"
+      },
+      "-initWithName:semantic:color:": {
+        "doc": "Initializes a material property with a color value.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/init(name:semantic:color:)"
+      },
+      "-initWithName:semantic:float2:": {
+        "doc": "Initializes a material property with a 2-component vector value.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/init(name:semantic:float2:)"
+      },
+      "-initWithName:semantic:float3:": {
+        "doc": "Initializes a material property with a 3-component vector value.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/init(name:semantic:float3:)"
+      },
+      "-initWithName:semantic:float4:": {
+        "doc": "Initializes a material property with a 4-component vector value.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/init(name:semantic:float4:)"
+      },
+      "-initWithName:semantic:float:": {
+        "doc": "Initializes a material property with a scalar value.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/init(name:semantic:float:)"
+      },
+      "-initWithName:semantic:matrix4x4:": {
+        "doc": "Initializes a material property with a 4 x 4 matrix value.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/init(name:semantic:matrix4x4:)"
+      },
+      "-initWithName:semantic:string:": {
+        "doc": "Initializes a material property with a string value.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/init(name:semantic:string:)"
+      },
+      "-initWithName:semantic:textureSampler:": {
+        "doc": "Initializes a material property with a texture sampler object.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/init(name:semantic:texturesampler:)"
+      },
+      "-setProperties:": {
+        "doc": "Sets the material property’s attributes to those of the specified material property.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/setproperties(_:)"
+      }
+    },
+    "MDLMesh": {
+      "+newBoxWithDimensions:segments:geometryType:inwardNormals:allocator:": {
+        "doc": "Creates a mesh in the shape of a rectangular box or cube.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/newbox(withdimensions:segments:geometrytype:inwardnormals:allocator:)"
+      },
+      "+newCylinderWithHeight:radii:radialSegments:verticalSegments:geometryType:inwardNormals:allocator:": {
+        "doc": "Generates a mesh in the shape of a right circular or elliptical cylinder.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/newcylinder(withheight:radii:radialsegments:verticalsegments:geometrytype:inwardnormals:allocator:)"
+      },
+      "+newEllipsoidWithRadii:radialSegments:verticalSegments:geometryType:inwardNormals:hemisphere:allocator:": {
+        "doc": "Creates a mesh in the shape of an ellipsoid or sphere.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/newellipsoid(withradii:radialsegments:verticalsegments:geometrytype:inwardnormals:hemisphere:allocator:)"
+      },
+      "+newEllipticalConeWithHeight:radii:radialSegments:verticalSegments:geometryType:inwardNormals:allocator:": {
+        "doc": "Generates a mesh in the shape of an elliptical or circular cone.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/newellipticalcone(withheight:radii:radialsegments:verticalsegments:geometrytype:inwardnormals:allocator:)"
+      },
+      "+newIcosahedronWithRadius:inwardNormals:allocator:": {
+        "doc": "Generates a mesh in the shape of a regular 20-sided polyhedron with triangular faces.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/newicosahedron(withradius:inwardnormals:allocator:)"
+      },
+      "+newPlaneWithDimensions:segments:geometryType:allocator:": {
+        "doc": "Generates a mesh in the shape of a rectangular plane.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/newplane(withdimensions:segments:geometrytype:allocator:)"
+      },
+      "+newSubdividedMesh:submeshIndex:subdivisionLevels:": {
+        "doc": "Creates a new mesh by subdividing the specified mesh.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/newsubdividedmesh(_:submeshindex:subdivisionlevels:)"
+      },
+      "-addAttributeWithName:format:": {
+        "doc": "Adds a vertex attribute to the mesh and creates a new, empty corresponding vertex buffer.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/addattribute(withname:format:)"
+      },
+      "-addNormalsWithAttributeNamed:creaseThreshold:": {
+        "doc": "Generates surface normal data for the mesh based on its vertex position data.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/addnormals(withattributenamed:creasethreshold:)"
+      },
+      "-addTangentBasisForTextureCoordinateAttributeNamed:normalAttributeNamed:tangentAttributeNamed:": {
+        "doc": "Generates surface tangent data for the mesh based on its vertex position, surface normal, and texture coordinate data.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/addtangentbasis(fortexturecoordinateattributenamed:normalattributenamed:tangentattributenamed:)"
+      },
+      "-addTangentBasisForTextureCoordinateAttributeNamed:tangentAttributeNamed:bitangentAttributeNamed:": {
+        "doc": "Generates surface tangent and bitangent data for the mesh based on its vertex position and texture coordinate data.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/addtangentbasis(fortexturecoordinateattributenamed:tangentattributenamed:bitangentattributenamed:)"
+      },
+      "-generateAmbientOcclusionTextureWithQuality:attenuationFactor:objectsToConsider:vertexAttributeNamed:materialPropertyNamed:": {
+        "doc": "Calculates ambient occlusion (AO) information for the mesh and saves it in the mesh as a material property texture.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/generateambientocclusiontexture(withquality:attenuationfactor:objectstoconsider:vertexattributenamed:materialpropertynamed:)"
+      },
+      "-generateAmbientOcclusionTextureWithSize:raysPerSample:attenuationFactor:objectsToConsider:vertexAttributeNamed:materialPropertyNamed:": {
+        "doc": "Calculates ambient occlusion (AO) information for the mesh and saves it in the mesh as a material property texture of the specified size.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/generateambientocclusiontexture(withsize:rayspersample:attenuationfactor:objectstoconsider:vertexattributenamed:materialpropertynamed:)"
+      },
+      "-generateAmbientOcclusionVertexColorsWithQuality:attenuationFactor:objectsToConsider:vertexAttributeNamed:": {
+        "doc": "Calculates ambient occlusion (AO) information for the mesh and saves it in the mesh as a vertex color attribute.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/generateambientocclusionvertexcolors(withquality:attenuationfactor:objectstoconsider:vertexattributenamed:)"
+      },
+      "-generateAmbientOcclusionVertexColorsWithRaysPerSample:attenuationFactor:objectsToConsider:vertexAttributeNamed:": {
+        "doc": "Calculates ambient occlusion (AO) information for the mesh, using the specified number of rays per sample, and saves it in the mesh as a vertex color attribute.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/generateambientocclusionvertexcolors(withrayspersample:attenuationfactor:objectstoconsider:vertexattributenamed:)"
+      },
+      "-generateLightMapTextureWithQuality:lightsToConsider:objectsToConsider:vertexAttributeNamed:materialPropertyNamed:": {
+        "doc": "Calculates static lighting information for the mesh and saves it in the mesh as a material property texture.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/generatelightmaptexture(withquality:lightstoconsider:objectstoconsider:vertexattributenamed:materialpropertynamed:)"
+      },
+      "-generateLightMapTextureWithTextureSize:lightsToConsider:objectsToConsider:vertexAttributeNamed:materialPropertyNamed:": {
+        "doc": "Calculates static lighting information for the mesh and saves it in the mesh as a material property texture of the specified size.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/generatelightmaptexture(withtexturesize:lightstoconsider:objectstoconsider:vertexattributenamed:materialpropertynamed:)"
+      },
+      "-generateLightMapVertexColorsWithLightsToConsider:objectsToConsider:vertexAttributeNamed:": {
+        "doc": "Calculates static lighting information for the mesh and saves it in the mesh as a vertex color attribute.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/generatelightmapvertexcolorswithlights(toconsider:objectstoconsider:vertexattributenamed:)"
+      },
+      "-initWithVertexBuffer:vertexCount:descriptor:submeshes:": {
+        "doc": "Creates a mesh from a single vertex buffer with the specified parameters.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/init(vertexbuffer:vertexcount:descriptor:submeshes:)"
+      },
+      "-initWithVertexBuffers:vertexCount:descriptor:submeshes:": {
+        "doc": "Creates a mesh by unifying vertex data from multiple sources with the specified parameters.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/init(vertexbuffers:vertexcount:descriptor:submeshes:)"
+      },
+      "-makeVerticesUnique": {
+        "doc": "Modifies the mesh’s vertex buffers so that no vertices are shared by multiple faces.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/makeverticesunique()"
+      },
+      "-vertexAttributeDataForAttributeNamed:": {
+        "doc": "Returns the vertex data for the specified attribute.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/vertexattributedata(forattributenamed:)"
+      }
+    },
+    "MDLMeshBufferData": {
+      "-initWithType:data:": {
+        "doc": "Initializes a buffer containing the specified data.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmeshbufferdata/init(type:data:)"
+      },
+      "-initWithType:length:": {
+        "doc": "Initializes a buffer of the specified length.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmeshbufferdata/init(type:length:)"
+      }
+    },
+    "MDLMeshBufferMap": {
+      "-initWithBytes:deallocator:": {
+        "doc": "Initializes a buffer map object to manage access to the specified memory.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmeshbuffermap/init(bytes:deallocator:)"
+      }
+    },
+    "MDLNoiseTexture": {
+      "-initScalarNoiseWithSmoothness:name:textureDimensions:channelCount:channelEncoding:grayscale:": {
+        "doc": "Initializes a noise texture that creates random color noise.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlnoisetexture/init(scalarnoisewithsmoothness:name:texturedimensions:channelcount:channelencoding:grayscale:)"
+      },
+      "-initVectorNoiseWithSmoothness:name:textureDimensions:channelEncoding:": {
+        "doc": "Initializes a noise texture that creates random directional noise.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlnoisetexture/init(vectornoisewithsmoothness:name:texturedimensions:channelencoding:)"
+      }
+    },
+    "MDLNormalMapTexture": {
+      "-initByGeneratingNormalMapWithTexture:name:smoothness:contrast:": {
+        "doc": "Initializes a normal map to be generated from the specified texture.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlnormalmaptexture/init(bygeneratingnormalmapwith:name:smoothness:contrast:)"
+      }
+    },
+    "MDLObject": {
+      "-addChild:": {
+        "doc": "Adds a child object to this object, creating a container for the object’s children if necessary.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlobject/addchild(_:)"
+      },
+      "-boundingBoxAtTime:": {
+        "doc": "Returns the minimum region entirely enclosing the object’s contents at the specified time sample.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlobject/boundingbox(attime:)"
+      },
+      "-componentConformingToProtocol:": {
+        "doc": "Returns the object’s component for the specified protocol.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlobject/componentconforming(to:)"
+      },
+      "-enumerateChildObjectsOfClass:root:usingBlock:stopPointer:": {
+        "doc": "Executes the specified block using each object in this object’s child hierarchy.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlobject/enumeratechildobjects(of:root:using:stoppointer:)"
+      },
+      "-objectAtPath:": {
+        "doc": "Returns the child object at the specified path.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlobject/atpath(_:)"
+      },
+      "-setComponent:forProtocol:": {
+        "doc": "Associates a component with the object for the specified protocol.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlobject/setcomponent(_:for:)"
+      }
+    },
+    "MDLPhotometricLight": {
+      "-generateCubemapFromLight:": {
+        "doc": "Generates a cube map texture from the light’s photometry data.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphotometriclight/generatecubemap(fromlight:)"
+      },
+      "-generateSphericalHarmonicsFromLight:": {
+        "doc": "Generates spherical harmonics information based on the light’s photometry data.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphotometriclight/generatesphericalharmonics(fromlight:)"
+      },
+      "-initWithIESProfile:": {
+        "doc": "Initializes a light from photometry data in the file at the specified URL.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphotometriclight/init(iesprofile:)-57hxs"
+      }
+    },
+    "MDLPhysicallyPlausibleLight": {
+      "-setColorByTemperature:": {
+        "doc": "Sets the light’s color based on a black-body temperature.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblelight/setcolorbytemperature(_:)"
+      }
+    },
+    "MDLSkyCubeTexture": {
+      "-initWithName:channelEncoding:textureDimensions:turbidity:sunElevation:upperAtmosphereScattering:groundAlbedo:": {
+        "doc": "Initializes a sky cube texture object with the specified parameters.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlskycubetexture/init(name:channelencoding:texturedimensions:turbidity:sunelevation:upperatmospherescattering:groundalbedo:)"
+      },
+      "-updateTexture": {
+        "doc": "Generates new texel data matching the current sky parameters.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlskycubetexture/update()"
+      }
+    },
+    "MDLSubmesh": {
+      "-initWithIndexBuffer:indexCount:indexType:geometryType:material:": {
+        "doc": "Initializes a submesh with an index buffer and the specified properties.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmesh/init(indexbuffer:indexcount:indextype:geometrytype:material:)"
+      },
+      "-initWithMDLSubmesh:indexType:geometryType:": {
+        "doc": "Initializes a submesh by copying or converting another submesh.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmesh/init(mdlsubmesh:indextype:geometrytype:)-4czyc"
+      },
+      "-initWithName:indexBuffer:indexCount:indexType:geometryType:material:": {
+        "doc": "Initializes a named submesh with an index buffer and the specified properties.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmesh/init(name:indexbuffer:indexcount:indextype:geometrytype:material:)"
+      },
+      "-initWithName:indexBuffer:indexCount:indexType:geometryType:material:topology:": {
+        "doc": "Initializes a named submesh with a specific topology.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmesh/init(name:indexbuffer:indexcount:indextype:geometrytype:material:topology:)"
+      }
+    },
+    "MDLTexture": {
+      "+irradianceTextureCubeWithTexture:name:dimensions:": {
+        "doc": "Generates an irradiance texture from the specified reflectance cube texture.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/irradiancetexturecube(with:name:dimensions:)"
+      },
+      "+irradianceTextureCubeWithTexture:name:dimensions:roughness:": {
+        "doc": "Generates an irradiance texture from the specified reflectance cube texture, assuming a surface of the specified roughness.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/irradiancetexturecube(with:name:dimensions:roughness:)"
+      },
+      "+textureCubeWithImagesNamed:": {
+        "doc": "Loads a cube texture from the specified image files in the app’s main bundle.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/init(cubewithimagesnamed:)"
+      },
+      "+textureCubeWithImagesNamed:bundle:": {
+        "doc": "Loads a cube texture from the specified image files in the specified bundle.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/init(cubewithimagesnamed:bundle:)"
+      },
+      "+textureNamed:": {
+        "doc": "Loads the texture with the specified filename from the app’s main bundle.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/init(named:)"
+      },
+      "+textureNamed:bundle:": {
+        "doc": "Loads the texture with the specified filename from the specified bundle.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/init(named:bundle:)"
+      },
+      "-imageFromTexture": {
+        "doc": "Exports the texture data as a CoreGraphics image.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/imagefromtexture()"
+      },
+      "-initWithData:topLeftOrigin:name:dimensions:rowStride:channelCount:channelEncoding:isCube:": {
+        "doc": "Initializes a texture object with the specified image data and properties.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/init(data:topleftorigin:name:dimensions:rowstride:channelcount:channelencoding:iscube:)"
+      },
+      "-texelDataWithBottomLeftOrigin": {
+        "doc": "Returns the texture’s image data, organized such that its first pixel represents the bottom-left corner of the image.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/texeldatawithbottomleftorigin()"
+      },
+      "-texelDataWithBottomLeftOriginAtMipLevel:create:": {
+        "doc": "Returns the texture’s image data for the specified mipmap level, organized such that its first pixel represents the bottom-left corner of the image.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/texeldatawithbottomleftorigin(atmiplevel:create:)"
+      },
+      "-texelDataWithTopLeftOrigin": {
+        "doc": "Returns the texture’s image data, organized such that its first pixel represents the top-left corner of the image.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/texeldatawithtopleftorigin()"
+      },
+      "-texelDataWithTopLeftOriginAtMipLevel:create:": {
+        "doc": "Returns the texture’s image data for the specified mipmap level, organized such that its first pixel represents the top-left corner of the image.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/texeldatawithtopleftorigin(atmiplevel:create:)"
+      },
+      "-writeToURL:": {
+        "doc": "Exports the texture data to an image file at the specified URL.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/write(to:)"
+      },
+      "-writeToURL:type:": {
+        "doc": "Exports the texture data to an image file at the specified URL, of the specified type.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/write(to:type:)"
+      }
+    },
+    "MDLTransform": {
+      "-initWithIdentity": {
+        "doc": "Initializes a transform object to the identity transformation.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltransform/init(identity:)"
+      },
+      "-initWithMatrix:": {
+        "doc": "Initializes a transform object with the specified transform matrix.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltransform/init(matrix:)"
+      },
+      "-initWithTransformComponent:": {
+        "doc": "Initializes a transform object to match the specified transform component.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltransform/init(transformcomponent:)"
+      },
+      "-rotationAtTime:": {
+        "doc": "Returns the orientation of the transform relative to its parent coordinate space, as of the specified time sample.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltransform/rotation(attime:)"
+      },
+      "-rotationMatrixAtTime:": {
+        "doc": "Returns the orientation of the transform as a rotation matrix, as of the specified time sample.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltransform/rotationmatrix(attime:)"
+      },
+      "-scaleAtTime:": {
+        "doc": "Returns the x-, y-, and z-axis scale factors of the transform relative to its parent coordinate space, as of the specified time sample.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltransform/scale(attime:)"
+      },
+      "-setIdentity": {
+        "doc": "Sets all factors of the transform to those of the identity transformation.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltransform/setidentity()"
+      },
+      "-setRotation:forTime:": {
+        "doc": "Sets the orientation of the transform for the specified time sample.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltransform/setrotation(_:fortime:)"
+      },
+      "-setScale:forTime:": {
+        "doc": "Sets the x-, y-, and z-axis scale factors of the transform for the specified time sample.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltransform/setscale(_:fortime:)"
+      },
+      "-setShear:forTime:": {
+        "doc": "Sets the x-, y-, and z-axis shear factors of the transform for the specified time sample.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltransform/setshear(_:fortime:)"
+      },
+      "-setTranslation:forTime:": {
+        "doc": "Sets the x-, y-, and z-axis offsets of the transform for the specified time sample.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltransform/settranslation(_:fortime:)"
+      },
+      "-shearAtTime:": {
+        "doc": "Returns the x-, y-, and z-axis shear factors of the transform relative to its parent coordinate space, as of the specified time sample.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltransform/shear(attime:)"
+      },
+      "-translationAtTime:": {
+        "doc": "Returns the x-, y-, and z-axis offsets of the transform relative to its parent coordinate space, as of the specified time sample.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltransform/translation(attime:)"
+      }
+    },
+    "MDLURLTexture": {
+      "-initWithURL:name:": {
+        "doc": "Initializes a texture that loads its texel data from a file at the specified URL.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlurltexture/init(url:name:)-1y03u"
+      }
+    },
+    "MDLVertexAttribute": {
+      "-initWithName:format:offset:bufferIndex:": {
+        "doc": "Initializes a vertex attribute object with the specified property values.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvertexattribute/init(name:format:offset:bufferindex:)"
+      }
+    },
+    "MDLVertexDescriptor": {
+      "-addOrReplaceAttribute:": {
+        "doc": "Adds the specified vertex attribute to the vertex descriptor, replacing any existing attribute with the same name.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvertexdescriptor/addorreplaceattribute(_:)"
+      },
+      "-attributeNamed:": {
+        "doc": "Returns the vertex attribute with the specified name in the vertex descriptor.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvertexdescriptor/attributenamed(_:)"
+      },
+      "-initWithVertexDescriptor:": {
+        "doc": "Creates a new vertex descriptor by performing a deep copy of the specified vertex descriptor.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvertexdescriptor/init(vertexdescriptor:)"
+      },
+      "-reset": {
+        "doc": "Resets a vertex descriptor to its default state.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvertexdescriptor/reset()"
+      },
+      "-setPackedOffsets": {
+        "doc": "Sets the offset for each vertex attribute to the minimum value to pack vertex data together in a single buffer.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvertexdescriptor/setpackedoffsets()"
+      },
+      "-setPackedStrides": {
+        "doc": "Sets the stride for each vertex layout to the minimum value to pack vertex data together in a single buffer.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvertexdescriptor/setpackedstrides()"
+      }
+    },
+    "MDLVoxelArray": {
+      "-differenceWithVoxels:": {
+        "doc": "Reduces the voxel array to cover only the portion of its volume not covered by another voxel array.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray/difference(with:)"
+      },
+      "-indexOfSpatialLocation:": {
+        "doc": "Returns voxel information corresponding to the specified point in the world coordinate space of the asset from which the voxel array was created.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray/index(ofspatiallocation:)"
+      },
+      "-initWithAsset:divisions:interiorNBWidth:exteriorNBWidth:patchRadius:": {
+        "doc": "Initializes a voxel array that models the volume of 3D objects in the specified asset, creating voxel shells for the specified distances from the object’s surface.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray/init(asset:divisions:interiornbwidth:exteriornbwidth:patchradius:)"
+      },
+      "-initWithAsset:divisions:interiorShells:exteriorShells:patchRadius:": {
+        "doc": "Initializes a voxel array that models the volume of 3D objects in the specified asset and creates the specified number of voxel shells.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray/init(asset:divisions:interiorshells:exteriorshells:patchradius:)"
+      },
+      "-initWithData:boundingBox:voxelExtent:": {
+        "doc": "Initializes a voxel array with the specified voxel data.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray/init(data:boundingbox:voxelextent:)"
+      },
+      "-intersectWithVoxels:": {
+        "doc": "Reduces the voxel array to cover only the volume within both it and another voxel array.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray/intersect(with:)"
+      },
+      "-meshUsingAllocator:": {
+        "doc": "Generates a closed polygon mesh around the volume of space the voxel array describes.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray/mesh(using:)"
+      },
+      "-setVoxelAtIndex:": {
+        "doc": "Sets voxel characteristics at the specified index in the array.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray/setvoxelatindex(_:)"
+      },
+      "-setVoxelsForMesh:divisions:interiorNBWidth:exteriorNBWidth:patchRadius:": {
+        "doc": "Sets voxel values in the array to model the volume of the specified mesh and creates voxel shells for the specified distances from the object’s surface.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray/setvoxelsfor(_:divisions:interiornbwidth:exteriornbwidth:patchradius:)"
+      },
+      "-setVoxelsForMesh:divisions:interiorShells:exteriorShells:patchRadius:": {
+        "doc": "Sets voxel values in the array to model the volume of the specified mesh and creates the specified number of voxel shells.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray/setvoxelsfor(_:divisions:interiorshells:exteriorshells:patchradius:)"
+      },
+      "-spatialLocationOfIndex:": {
+        "doc": "Returns the location of the specified voxel in world coordinate space.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray/spatiallocation(ofindex:)"
+      },
+      "-unionWithVoxels:": {
+        "doc": "Extends the voxel array to also cover the volume of the specified voxel array.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray/union(with:)"
+      },
+      "-voxelBoundingBoxAtIndex:": {
+        "doc": "Returns the extent of the specified voxel’s volume in the world coordinate space of the asset from which the voxel array was created.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray/voxelboundingbox(atindex:)"
+      },
+      "-voxelExistsAtIndex:allowAnyX:allowAnyY:allowAnyZ:allowAnyShell:": {
+        "doc": "Returns a Boolean value indicating whether the voxel array contains voxel data for the specified index.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray/voxelexists(atindex:allowanyx:allowanyy:allowanyz:allowanyshell:)"
+      },
+      "-voxelIndices": {
+        "doc": "Returns a data object containing all voxels within the voxel array.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray/voxelindices()"
+      },
+      "-voxelsWithinExtent:": {
+        "doc": "Returns a data object containing all voxels within the specified volume.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray/voxels(within:)"
+      }
+    }
+  },
+  "properties": {
+    "MDLAreaLight": {
+      "areaRadius": {
+        "doc": "The radius, in units of local coordinate space, of the area from which light emanates.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlarealight/arearadius"
+      },
+      "aspect": {
+        "doc": "The aspect ratio of the light’s shape.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlarealight/aspect"
+      },
+      "superEllipticPower": {
+        "doc": "A vector that controls the roundness of a superelliptical light in the x- and y-axis directions.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlarealight/superellipticpower"
+      }
+    },
+    "MDLAsset": {
+      "URL": {
+        "doc": "The URL from which the asset was loaded, if available.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/url"
+      },
+      "boundingBox": {
+        "doc": "The minimum region entirely enclosing the asset’s contents.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/boundingbox"
+      },
+      "bufferAllocator": {
+        "doc": "An object responsible for allocating mesh vertex data loaded from the asset.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/bufferallocator"
+      },
+      "count": {
+        "doc": "The number of top-level objects in the asset.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/count"
+      },
+      "endTime": {
+        "doc": "The timestamp for the last timed data sample in the asset.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/endtime"
+      },
+      "frameInterval": {
+        "doc": "The time interval between data samples in the asset.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/frameinterval"
+      },
+      "masters": {
+        "doc": "An array of objects that can be reused in the asset’s object hierarchy through instancing.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/masters"
+      },
+      "startTime": {
+        "doc": "The timestamp for the first timed data sample in the asset.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/starttime"
+      },
+      "vertexDescriptor": {
+        "doc": "The description of the vertex data format to be used for loading mesh data from the asset.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlasset/vertexdescriptor"
+      }
+    },
+    "MDLCamera": {
+      "apertureBladeCount": {
+        "doc": "The number of blades in the camera’s simulated aperture.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/aperturebladecount"
+      },
+      "barrelDistortion": {
+        "doc": "The first coefficient for determining the radial distortion applied to pixels rendered using the camera.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/barreldistortion"
+      },
+      "chromaticAberration": {
+        "doc": "The amount of radial color shift around the edges of an image rendered using the camera.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/chromaticaberration"
+      },
+      "exposure": {
+        "doc": "Red, green, and blue factors that scale each color channel in the camera’s image.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/exposure"
+      },
+      "exposureCompression": {
+        "doc": "Two parameters that determine the brightness compression curve for colors in the camera’s image.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/exposurecompression"
+      },
+      "fStop": {
+        "doc": "The relative aperture ratio of the camera’s simulated lens.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/fstop"
+      },
+      "farVisibilityDistance": {
+        "doc": "The camera’s far depth limit.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/farvisibilitydistance"
+      },
+      "fieldOfView": {
+        "doc": "The camera’s field of view, in degrees.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/fieldofview"
+      },
+      "fisheyeDistortion": {
+        "doc": "The second coefficient for determining the radial distortion applied to pixels rendered using the camera.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/fisheyedistortion"
+      },
+      "flash": {
+        "doc": "Red, green, and blue factors to be used in brightening darker areas of the camera’s image.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/flash"
+      },
+      "focalLength": {
+        "doc": "The focal length, in millimeters, of the camera’s simulated lens.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/focallength"
+      },
+      "focusDistance": {
+        "doc": "The distance, in meters, at which the lens is focused.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/focusdistance"
+      },
+      "maximumCircleOfConfusion": {
+        "doc": "The maximum diameter, in millimeters on the imaging plane, at which light from a point source should appear in an image rendered using the camera.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/maximumcircleofconfusion"
+      },
+      "nearVisibilityDistance": {
+        "doc": "The camera’s near depth limit.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/nearvisibilitydistance"
+      },
+      "opticalVignetting": {
+        "doc": "The amount of radial light attenuation around the edges of an image rendered using the camera.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/opticalvignetting"
+      },
+      "projection": {
+        "doc": "The style of projection transform used by the camera.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/projection"
+      },
+      "projectionMatrix": {
+        "doc": "A transformation matrix that determines the extent of a scene visible to the camera.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/projectionmatrix"
+      },
+      "sensorAspect": {
+        "doc": "The ratio of width to height for the camera’s simulated imaging surface.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/sensoraspect"
+      },
+      "sensorEnlargement": {
+        "doc": "The horizontal and vertical scale factors that determine the active region of the sensor.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/sensorenlargement"
+      },
+      "sensorShift": {
+        "doc": "The horizontal and vertical offsets, in millimeters, of the center of the camera image relative to the center of the simulated lens.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/sensorshift"
+      },
+      "sensorVerticalAperture": {
+        "doc": "The height, in millimeters, of the camera’s simulated imaging surface.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/sensorverticalaperture"
+      },
+      "shutterOpenInterval": {
+        "doc": "The duration, in seconds, for which the camera’s simulated shutter is open during each frame.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/shutteropeninterval"
+      },
+      "worldToMetersConversionScale": {
+        "doc": "The scale factor to meters from the world coordinate system containing the camera.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcamera/worldtometersconversionscale"
+      }
+    },
+    "MDLCheckerboardTexture": {
+      "color1": {
+        "doc": "The color for half of the squares in the checkerboard pattern.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcheckerboardtexture/color1"
+      },
+      "color2": {
+        "doc": "The color for the other half of the squares in the checkerboard pattern.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcheckerboardtexture/color2"
+      },
+      "divisions": {
+        "doc": "The number of squares along each dimension in the checkerboard pattern.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlcheckerboardtexture/divisions"
+      }
+    },
+    "MDLLight": {
+      "colorSpace": {
+        "doc": "The name of the Core Graphics color space to be used for interpreting the light’s color information.",
+        "url": "https://developer.apple.com/documentation/modelio/mdllight/colorspace"
+      },
+      "lightType": {
+        "doc": "The type of the light.",
+        "url": "https://developer.apple.com/documentation/modelio/mdllight/lighttype"
+      }
+    },
+    "MDLLightProbe": {
+      "irradianceTexture": {
+        "doc": "A cube map texture that contains samples of the total light arriving at the light probe’s position from every direction.",
+        "url": "https://developer.apple.com/documentation/modelio/mdllightprobe/irradiancetexture"
+      },
+      "reflectiveTexture": {
+        "doc": "A cube map texture that contains a rendering of a scene as seen from the light probe’s position.",
+        "url": "https://developer.apple.com/documentation/modelio/mdllightprobe/reflectivetexture"
+      },
+      "sphericalHarmonicsCoefficients": {
+        "doc": "Data containing the spherical harmonics coefficients for the light.",
+        "url": "https://developer.apple.com/documentation/modelio/mdllightprobe/sphericalharmonicscoefficients"
+      },
+      "sphericalHarmonicsLevel": {
+        "doc": "The number of levels of spherical harmonics information in the light probe.",
+        "url": "https://developer.apple.com/documentation/modelio/mdllightprobe/sphericalharmonicslevel"
+      }
+    },
+    "MDLMaterial": {
+      "baseMaterial": {
+        "doc": "Another material object from which this material’s properties are derived.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterial/base"
+      },
+      "count": {
+        "doc": "The number of material properties in the material.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterial/count"
+      },
+      "materialFace": {
+        "doc": "The surface of an object.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterial/materialface"
+      },
+      "name": {
+        "doc": "A descriptive name for the material.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterial/name"
+      },
+      "scatteringFunction": {
+        "doc": "The collection of material properties that define the material’s response to light.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterial/scatteringfunction"
+      }
+    },
+    "MDLMaterialProperty": {
+      "URLValue": {
+        "doc": "The URL value for the material property—typically, the URL to a texture image.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/urlvalue"
+      },
+      "color": {
+        "doc": "The color value for the material property.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/color"
+      },
+      "float2Value": {
+        "doc": "The 2-component floating-point vector value for the material property.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/float2value"
+      },
+      "float3Value": {
+        "doc": "The 3-component floating-point vector value for the material property.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/float3value"
+      },
+      "float4Value": {
+        "doc": "The 4-component floating-point vector value for the material property.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/float4value"
+      },
+      "floatValue": {
+        "doc": "The scalar floating-point value for the material property.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/floatvalue"
+      },
+      "matrix4x4": {
+        "doc": "The 4 x 4 floating-point matrix value for the material property.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/matrix4x4"
+      },
+      "name": {
+        "doc": "A descriptive name for the material property.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/name"
+      },
+      "semantic": {
+        "doc": "The semantic meaning for the material property’s value.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/semantic"
+      },
+      "stringValue": {
+        "doc": "The string value for the material.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/stringvalue"
+      },
+      "textureSamplerValue": {
+        "doc": "A texture sampler object that provides the texture image value for the material property.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/texturesamplervalue"
+      },
+      "type": {
+        "doc": "The data type stored in the material property’s value.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmaterialproperty/type"
+      }
+    },
+    "MDLMesh": {
+      "boundingBox": {
+        "doc": "The minimum region entirely enclosing the mesh’s vertex positions, expressed in the model coordinate system of the mesh.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/boundingbox"
+      },
+      "submeshes": {
+        "doc": "The array of submeshes to be used in rendering the mesh.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/submeshes"
+      },
+      "vertexBuffers": {
+        "doc": "The array of buffers that provide vertex data for the mesh.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/vertexbuffers"
+      },
+      "vertexCount": {
+        "doc": "The number of vertices in the mesh.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/vertexcount"
+      },
+      "vertexDescriptor": {
+        "doc": "A description of the format and layout of the mesh’s vertex buffers.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmesh/vertexdescriptor"
+      }
+    },
+    "MDLMeshBufferData": {
+      "data": {
+        "doc": "The underlying data storage for the mesh buffer.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmeshbufferdata/data"
+      }
+    },
+    "MDLMeshBufferMap": {
+      "bytes": {
+        "doc": "A pointer to the mutable memory managed by the buffer map.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlmeshbuffermap/bytes"
+      }
+    },
+    "MDLObject": {
+      "children": {
+        "doc": "A component that manages this object’s collection of children.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlobject/children"
+      },
+      "hidden": {
+        "doc": "A Boolean value indicating whether this object should be used in rendering.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlobject/hidden"
+      },
+      "instance": {
+        "doc": "The primary object, if applicable, of which this object is an instance.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlobject/instance"
+      },
+      "parent": {
+        "doc": "The parent object that contains this object.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlobject/parent"
+      },
+      "path": {
+        "doc": "A path that identifies the object in an asset’s object hierarchy using object names.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlobject/path"
+      },
+      "transform": {
+        "doc": "A component that manages this object’s spatial transform and its changes over time.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlobject/transform"
+      }
+    },
+    "MDLPhotometricLight": {
+      "lightCubeMap": {
+        "doc": "A cube map texture describing the light’s intensity in all directions.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphotometriclight/lightcubemap"
+      },
+      "sphericalHarmonicsCoefficients": {
+        "doc": "Data containing spherical harmonics coefficients that describe the light’s intensity in all directions.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphotometriclight/sphericalharmonicscoefficients"
+      },
+      "sphericalHarmonicsLevel": {
+        "doc": "The number of levels of generated spherical harmonics information.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphotometriclight/sphericalharmonicslevel"
+      }
+    },
+    "MDLPhysicallyPlausibleLight": {
+      "attenuationEndDistance": {
+        "doc": "The distance from the light source, in units of local coordinate space, at which its illumination becomes zero.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblelight/attenuationenddistance"
+      },
+      "attenuationStartDistance": {
+        "doc": "The distance from the light source, in units of local coordinate space, at which its illumination begins to diminish.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblelight/attenuationstartdistance"
+      },
+      "color": {
+        "doc": "The color of the light source.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblelight/color"
+      },
+      "innerConeAngle": {
+        "doc": "The radial angle, in degrees, of the area fully illuminated by the light.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblelight/innerconeangle"
+      },
+      "lumens": {
+        "doc": "The total visible intensity of the light source, in lumens.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblelight/lumens"
+      },
+      "outerConeAngle": {
+        "doc": "The radial angle, in degrees, at which the illumination from a spotlight becomes zero.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblelight/outerconeangle"
+      }
+    },
+    "MDLPhysicallyPlausibleScatteringFunction": {
+      "anisotropic": {
+        "doc": "The degree to which specular highlights elongate in the direction of the local tangent basis.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblescatteringfunction/anisotropic"
+      },
+      "anisotropicRotation": {
+        "doc": "The angle at which anisotropic effects are rotated relative to the local tangent basis.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblescatteringfunction/anisotropicrotation"
+      },
+      "clearcoat": {
+        "doc": "The intensity of a second specular highlight, similar to the gloss that results from a clear coat on an automotive finish.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblescatteringfunction/clearcoat"
+      },
+      "clearcoatGloss": {
+        "doc": "The sharpness of a second specular highlight, similar to the gloss that results from a clear coat on an automotive finish.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblescatteringfunction/clearcoatgloss"
+      },
+      "metallic": {
+        "doc": "The degree to which the material appears as a dielectric surface (lower values) or as a metal (higher values).",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblescatteringfunction/metallic"
+      },
+      "roughness": {
+        "doc": "The degree to which a material appears smooth, affecting both diffuse and specular response.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblescatteringfunction/roughness"
+      },
+      "sheen": {
+        "doc": "The intensity of highlights that appear only at glancing angles on a material’s surface.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblescatteringfunction/sheen"
+      },
+      "sheenTint": {
+        "doc": "The balance of color for highlights that appear only at glancing angles, between the light color (lower values) and the material’s base color (at higher values).",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblescatteringfunction/sheentint"
+      },
+      "specularAmount": {
+        "doc": "The tendency of the material to generate specular highlights.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblescatteringfunction/specularamount"
+      },
+      "specularTint": {
+        "doc": "The balance of color for specular highlights, between the light color (lower values) and the material’s base color (at higher values).",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblescatteringfunction/speculartint"
+      },
+      "subsurface": {
+        "doc": "The degree to which light scatters under the surface of the material.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblescatteringfunction/subsurface"
+      }
+    },
+    "MDLScatteringFunction": {
+      "ambientOcclusion": {
+        "doc": "The attenuation of ambient light due to local geometry variations on a surface.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlscatteringfunction/ambientocclusion"
+      },
+      "ambientOcclusionScale": {
+        "doc": "The scaling factor for ambient occlusion shading.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlscatteringfunction/ambientocclusionscale"
+      },
+      "baseColor": {
+        "doc": "The inherent color of the material, to be used as a modulator during shading.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlscatteringfunction/basecolor"
+      },
+      "emission": {
+        "doc": "The color emitted as radiance from a material’s surface.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlscatteringfunction/emission"
+      },
+      "interfaceIndexOfRefraction": {
+        "doc": "The index of refraction for a material itself.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlscatteringfunction/interfaceindexofrefraction"
+      },
+      "materialIndexOfRefraction": {
+        "doc": "The index of refraction for the medium surrounding a material.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlscatteringfunction/materialindexofrefraction"
+      },
+      "name": {
+        "doc": "A descriptive name for the scattering function.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlscatteringfunction/name"
+      },
+      "normal": {
+        "doc": "The variation in the surface normal vectors in a material, relative to model coordinate space.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlscatteringfunction/normal"
+      },
+      "specular": {
+        "doc": "The intensity of specular highlights on the material’s surface.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlscatteringfunction/specular"
+      }
+    },
+    "MDLSkyCubeTexture": {
+      "brightness": {
+        "doc": "The amount of brightness enhancement to apply during tone mapping.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlskycubetexture/brightness"
+      },
+      "contrast": {
+        "doc": "The amount of contrast enhancement to apply during tone mapping.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlskycubetexture/contrast"
+      },
+      "exposure": {
+        "doc": "The amount of exposure compensation to apply during tone mapping.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlskycubetexture/exposure"
+      },
+      "gamma": {
+        "doc": "The amount of gamma correction to apply during tone mapping.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlskycubetexture/gamma"
+      },
+      "groundAlbedo": {
+        "doc": "A factor that influences the clarity of the simulated sky.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlskycubetexture/groundalbedo"
+      },
+      "groundColor": {
+        "doc": "The color of the simulated ground.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlskycubetexture/groundcolor"
+      },
+      "highDynamicRangeCompression": {
+        "doc": "Two parameters that determine the brightness compression curve for colors in the texture image.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlskycubetexture/highdynamicrangecompression"
+      },
+      "horizonElevation": {
+        "doc": "The angle, in radians relative to center, below which to render the ground color.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlskycubetexture/horizonelevation"
+      },
+      "saturation": {
+        "doc": "The amount of saturation enhancement to apply during tone mapping.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlskycubetexture/saturation"
+      },
+      "sunElevation": {
+        "doc": "The sun’s position in the simulated sky.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlskycubetexture/sunelevation"
+      },
+      "turbidity": {
+        "doc": "The cloudiness or haziness of the simulated sky.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlskycubetexture/turbidity"
+      },
+      "upperAtmosphereScattering": {
+        "doc": "A factor that influences the color of the simulated sky.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlskycubetexture/upperatmospherescattering"
+      }
+    },
+    "MDLStereoscopicCamera": {
+      "interPupillaryDistance": {
+        "doc": "The distance, in millimeters, between the stereoscopic camera’s two viewpoints.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlstereoscopiccamera/interpupillarydistance"
+      },
+      "leftProjectionMatrix": {
+        "doc": "The transformation matrix that determines the extent of a scene visible to the camera’s left viewpoint.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlstereoscopiccamera/leftprojectionmatrix"
+      },
+      "leftVergence": {
+        "doc": "The angle, in degrees, at which the camera’s left viewpoint faces toward a central focal point.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlstereoscopiccamera/leftvergence"
+      },
+      "leftViewMatrix": {
+        "doc": "The transformation matrix that determines the position and orientation of the camera’s left viewpoint relative to a scene.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlstereoscopiccamera/leftviewmatrix"
+      },
+      "overlap": {
+        "doc": "The amount, as a fraction of image width, by which the images from the camera’s two viewpoints overlap.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlstereoscopiccamera/overlap"
+      },
+      "rightProjectionMatrix": {
+        "doc": "The transformation matrix that determines the extent of a scene visible to the camera’s right viewpoint.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlstereoscopiccamera/rightprojectionmatrix"
+      },
+      "rightVergence": {
+        "doc": "The angle, in degrees, at which the camera’s right viewpoint faces toward a central focal point.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlstereoscopiccamera/rightvergence"
+      },
+      "rightViewMatrix": {
+        "doc": "The transformation matrix that determines the position and orientation of the camera’s right viewpoint relative to a scene.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlstereoscopiccamera/rightviewmatrix"
+      }
+    },
+    "MDLSubmesh": {
+      "geometryType": {
+        "doc": "The type of geometric primitives described by the submesh’s index buffer.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmesh/geometrytype"
+      },
+      "indexBuffer": {
+        "doc": "An object that provides index data for the submesh.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmesh/indexbuffer"
+      },
+      "indexCount": {
+        "doc": "The number of indices in the submesh’s index buffer.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmesh/indexcount"
+      },
+      "indexType": {
+        "doc": "The data type for each element in the submesh’s index buffer.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmesh/indextype"
+      },
+      "material": {
+        "doc": "An object that describes the intended surface appearance of the submesh for rendering.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmesh/material"
+      },
+      "name": {
+        "doc": "A descriptive name for the submesh.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmesh/name"
+      },
+      "topology": {
+        "doc": "A description of how the non-uniform layout of the submesh’s index buffer defines the shape of the mesh.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmesh/topology"
+      }
+    },
+    "MDLSubmeshTopology": {
+      "edgeCreaseCount": {
+        "doc": "The number of entries in the edge creases buffers.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmeshtopology/edgecreasecount"
+      },
+      "edgeCreaseIndices": {
+        "doc": "A buffer containing vertex indices that describe edges to be treated as creases during surface subdivision.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmeshtopology/edgecreaseindices"
+      },
+      "edgeCreases": {
+        "doc": "A buffer containing sharpness values to be applied to edges during surface subdivision.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmeshtopology/edgecreases"
+      },
+      "faceCount": {
+        "doc": "The number of faces in the submesh’s face topology buffer.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmeshtopology/facecount"
+      },
+      "faceTopology": {
+        "doc": "A buffer identifying the faces in the submesh and the number of vertices in each.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmeshtopology/facetopology"
+      },
+      "holeCount": {
+        "doc": "The number of entries in the holes buffer.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmeshtopology/holecount"
+      },
+      "holes": {
+        "doc": "An index buffer identifying faces to be treated as holes in the mesh during surface subdivision.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmeshtopology/holes"
+      },
+      "vertexCreaseCount": {
+        "doc": "The number of entries in the vertex creases buffers.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmeshtopology/vertexcreasecount"
+      },
+      "vertexCreaseIndices": {
+        "doc": "A buffer containing vertex indices to be treated as creases during surface subdivision.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmeshtopology/vertexcreaseindices"
+      },
+      "vertexCreases": {
+        "doc": "A buffer containing sharpness values to be applied to points during surface subdivision.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlsubmeshtopology/vertexcreases"
+      }
+    },
+    "MDLTexture": {
+      "channelCount": {
+        "doc": "The number of channels per texel.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/channelcount"
+      },
+      "channelEncoding": {
+        "doc": "The data format for each channel value per texel.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/channelencoding"
+      },
+      "dimensions": {
+        "doc": "The width and height, in texels, of the texture image.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/dimensions"
+      },
+      "isCube": {
+        "doc": "A Boolean value that indicates whether the texture is a cube textures.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/iscube"
+      },
+      "mipLevelCount": {
+        "doc": "The number of mipmap levels contained in the texture image data.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/miplevelcount"
+      },
+      "rowStride": {
+        "doc": "The number of bytes between the first texel in a row of image data and the first texel in the next row.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexture/rowstride"
+      }
+    },
+    "MDLTextureFilter": {
+      "magFilter": {
+        "doc": "The filter mode for rendering textures at sizes larger than that of the original image.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexturefilter/magfilter"
+      },
+      "minFilter": {
+        "doc": "The filter mode for rendering textures at sizes smaller than that of the original image.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexturefilter/minfilter"
+      },
+      "mipFilter": {
+        "doc": "The filter mode for rendering textures using mipmapping.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexturefilter/mipfilter"
+      },
+      "rWrapMode": {
+        "doc": "The coordinate wrapping mode for texture r-coordinates.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexturefilter/rwrapmode"
+      },
+      "sWrapMode": {
+        "doc": "The coordinate wrapping mode for texture t-coordinates.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexturefilter/swrapmode"
+      },
+      "tWrapMode": {
+        "doc": "The coordinate wrapping mode for texture t-coordinates.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexturefilter/twrapmode"
+      }
+    },
+    "MDLTextureSampler": {
+      "hardwareFilter": {
+        "doc": "An object that describes filtering modes for sampling from the texture.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexturesampler/hardwarefilter"
+      },
+      "texture": {
+        "doc": "The texture object that provides image data for sampling.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexturesampler/texture"
+      },
+      "transform": {
+        "doc": "The transformation to be applied to texture coordinate data before sampling from the texture.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltexturesampler/transform"
+      }
+    },
+    "MDLTransform": {
+      "rotation": {
+        "doc": "The orientation, as a vector of Euler angles in radians, of the transform relative to its parent coordinate space.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltransform/rotation"
+      },
+      "scale": {
+        "doc": "The x-, y-, and z-axis scale factors of the transform relative to its parent coordinate space.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltransform/scale"
+      },
+      "shear": {
+        "doc": "The x-, y-, and z-axis shear factors of the transform relative to its parent coordinate space.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltransform/shear"
+      },
+      "translation": {
+        "doc": "The x-, y-, and z-axis offsets of the transform relative to its parent coordinate space.",
+        "url": "https://developer.apple.com/documentation/modelio/mdltransform/translation"
+      }
+    },
+    "MDLURLTexture": {
+      "URL": {
+        "doc": "The URL from which to load texture data.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlurltexture/url"
+      }
+    },
+    "MDLVertexAttribute": {
+      "bufferIndex": {
+        "doc": "The index of the vertex buffer containing data for this attribute in a mesh’s vertexBuffers array.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvertexattribute/bufferindex"
+      },
+      "format": {
+        "doc": "The format of per-vertex data for the attribute.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvertexattribute/format"
+      },
+      "initializationValue": {
+        "doc": "The default value for vertex data for this attribute.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvertexattribute/initializationvalue"
+      },
+      "name": {
+        "doc": "An identifier for the semantic use of the vertex attribute.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvertexattribute/name"
+      },
+      "offset": {
+        "doc": "The offset, in bytes, of vertex data for the attribute in a vertex buffer, relative to the start of data for each vertex.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvertexattribute/offset"
+      }
+    },
+    "MDLVertexAttributeData": {
+      "dataStart": {
+        "doc": "The offset, in bytes, from the start of the data to where vertex attribute information begins.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvertexattributedata/datastart"
+      },
+      "format": {
+        "doc": "The format of per-vertex data for the attribute.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvertexattributedata/format"
+      },
+      "stride": {
+        "doc": "The stride, in bytes, between vertex information for consecutive vertices in the data.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvertexattributedata/stride"
+      }
+    },
+    "MDLVertexBufferLayout": {
+      "stride": {
+        "doc": "The stride, in bytes, between data for separate vertices in a vertex buffer.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvertexbufferlayout/stride"
+      }
+    },
+    "MDLVertexDescriptor": {
+      "attributes": {
+        "doc": "The list of vertex attributes described by the vertex descriptor.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvertexdescriptor/attributes"
+      },
+      "layouts": {
+        "doc": "The list of vertex buffer layouts described by the vertex descriptor.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvertexdescriptor/layouts"
+      }
+    },
+    "MDLVoxelArray": {
+      "boundingBox": {
+        "doc": "The extent of the voxel array’s volume in world coordinate space.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray/boundingbox"
+      },
+      "count": {
+        "doc": "The number of voxels in the array.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray/count"
+      },
+      "voxelIndexExtent": {
+        "doc": "The indexes that define the corners of the three-dimensional voxel grid.",
+        "url": "https://developer.apple.com/documentation/modelio/mdlvoxelarray/voxelindexextent"
+      }
+    }
+  }
+}

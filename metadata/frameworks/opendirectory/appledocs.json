@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "framework": "OpenDirectory",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "ODAttributeMap": {
+      "url": "https://developer.apple.com/documentation/opendirectory/odattributemap"
+    },
+    "ODConfiguration": {
+      "url": "https://developer.apple.com/documentation/opendirectory/odconfiguration"
+    },
+    "ODMappings": {
+      "url": "https://developer.apple.com/documentation/opendirectory/odmappings"
+    },
+    "ODModuleEntry": {
+      "url": "https://developer.apple.com/documentation/opendirectory/odmoduleentry"
+    },
+    "ODNode": {
+      "doc": "An ODNode object serves as a Cocoa wrapper for an Open Directory node.",
+      "url": "https://developer.apple.com/documentation/opendirectory/odnode"
+    },
+    "ODQuery": {
+      "doc": "An ODQuery object serves as a Cocoa wrapper for an Open Directory query.",
+      "url": "https://developer.apple.com/documentation/opendirectory/odquery"
+    },
+    "ODRecord": {
+      "doc": "An ODRecord object serves as a Cocoa wrapper for an Open Directory record.",
+      "url": "https://developer.apple.com/documentation/opendirectory/odrecord"
+    },
+    "ODRecordMap": {
+      "url": "https://developer.apple.com/documentation/opendirectory/odrecordmap"
+    },
+    "ODSession": {
+      "doc": "An ODSession object serves as a Cocoa wrapper for an Open Directory session.",
+      "url": "https://developer.apple.com/documentation/opendirectory/odsession"
+    }
+  },
+  "protocols": {
+    "ODQueryDelegate": {
+      "doc": "The ODQueryDelegate protocol defines methods for receiving results returned from an Open Directory query.",
+      "url": "https://developer.apple.com/documentation/opendirectory/odquerydelegate"
+    }
+  },
+  "methods": {
+    "ODNode": {
+      "+nodeWithSession:name:error:": {
+        "doc": "Returns an autoreleased node object with a specified session and name.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odnode/nodewithsession:name:error:"
+      },
+      "+nodeWithSession:type:error:": {
+        "doc": "Returns an autoreleased node object with a specified session and type.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odnode/nodewithsession:type:error:"
+      },
+      "-createRecordWithRecordType:name:attributes:error:": {
+        "doc": "Creates a record in a specified node with specified properties.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odnode/createrecord(withrecordtype:name:attributes:)"
+      },
+      "-customCall:sendData:error:": {
+        "doc": "Returns the result of a custom call to the node.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odnode/customcall(_:send:)"
+      },
+      "-initWithSession:name:error:": {
+        "doc": "Creates a node object with a specified session and name.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odnode/init(session:name:)"
+      },
+      "-initWithSession:type:error:": {
+        "doc": "Creates a node object with a specified session and type.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odnode/init(session:type:)"
+      },
+      "-nodeDetailsForKeys:error:": {
+        "doc": "Returns a dictionary containing details about a node.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odnode/nodedetails(forkeys:)"
+      },
+      "-recordWithRecordType:name:attributes:error:": {
+        "doc": "Returns a record from the node with a specified type and name.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odnode/record(withrecordtype:name:attributes:)"
+      },
+      "-setCredentialsWithRecordType:authenticationType:authenticationItems:continueItems:context:error:": {
+        "doc": "Sets the credentials for interaction with the node using other types of authentication available to Open Directory.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odnode/setcredentialswithrecordtype(_:authenticationtype:authenticationitems:continueitems:context:)"
+      },
+      "-setCredentialsWithRecordType:recordName:password:error:": {
+        "doc": "Sets credentials for interacting with the node.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odnode/setcredentialswithrecordtype(_:recordname:password:)"
+      },
+      "-subnodeNamesAndReturnError:": {
+        "doc": "Returns the names of subnodes for the node.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odnode/subnodenames()"
+      },
+      "-supportedAttributesForRecordType:error:": {
+        "doc": "Returns an array of attribute types supported by the node’s records.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odnode/supportedattributes(forrecordtype:)"
+      },
+      "-supportedRecordTypesAndReturnError:": {
+        "doc": "Returns an array of the record types supported by the node.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odnode/supportedrecordtypes()"
+      },
+      "-unreachableSubnodeNamesAndReturnError:": {
+        "doc": "Returns an array of the subnodes of a given node that are currently unreachable.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odnode/unreachablesubnodenames()"
+      }
+    },
+    "ODQuery": {
+      "+queryWithNode:forRecordTypes:attribute:matchType:queryValues:returnAttributes:maximumResults:error:": {
+        "doc": "Returns an autoreleased query object created with provided parameters.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odquery/querywithnode:forrecordtypes:attribute:matchtype:queryvalues:returnattributes:maximumresults:error:"
+      },
+      "-initWithNode:forRecordTypes:attribute:matchType:queryValues:returnAttributes:maximumResults:error:": {
+        "doc": "Creates a query object with provided parameters.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odquery/init(node:forrecordtypes:attribute:matchtype:queryvalues:returnattributes:maximumresults:)"
+      },
+      "-removeFromRunLoop:forMode:": {
+        "doc": "Removes the query from a specified run loop.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odquery/remove(from:formode:)"
+      },
+      "-resultsAllowingPartial:error:": {
+        "doc": "Returns results from a query synchronously.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odquery/resultsallowingpartial(_:)"
+      },
+      "-scheduleInRunLoop:forMode:": {
+        "doc": "Retrieves results from a query asynchronously by scheduling the query in a run loop.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odquery/schedule(in:formode:)"
+      },
+      "-synchronize": {
+        "doc": "Restarts a query, disposing of any results it has obtained.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odquery/synchronize()"
+      }
+    },
+    "ODRecord": {
+      "-addMemberRecord:error:": {
+        "doc": "Adds a member record to this group record.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/addmemberrecord(_:)"
+      },
+      "-addValue:toAttribute:error:": {
+        "doc": "Adds a value to an attribute of the record.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/addvalue(_:toattribute:)"
+      },
+      "-changePassword:toPassword:error:": {
+        "doc": "Changes the record’s password.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/changepassword(_:topassword:)"
+      },
+      "-deleteRecordAndReturnError:": {
+        "doc": "Deletes the record from its node and invalidates it.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/delete()"
+      },
+      "-isMemberRecord:error:": {
+        "doc": "Determines whether a given record is a member of this group record.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/ismemberrecord(_:)"
+      },
+      "-passwordPolicyAndReturnError:": {
+        "doc": "Returns a dictionary containing the password policy for the record.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/passwordpolicyandreturnerror:"
+      },
+      "-recordDetailsForAttributes:error:": {
+        "doc": "Returns a dictionary of attributes with their respective values.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/recorddetails(forattributes:)"
+      },
+      "-removeMemberRecord:error:": {
+        "doc": "Removes a record as a member of this group record.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/removememberrecord(_:)"
+      },
+      "-removeValue:fromAttribute:error:": {
+        "doc": "Removes a value from an attribute of the record.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/removevalue(_:fromattribute:)"
+      },
+      "-removeValuesForAttribute:error:": {
+        "doc": "Removes all values from an attribute of the record.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/removevalues(forattribute:)"
+      },
+      "-setNodeCredentials:password:error:": {
+        "doc": "Sets credentials for the record’s node.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/setnodecredentials(_:password:)"
+      },
+      "-setNodeCredentialsUsingKerberosCache:error:": {
+        "doc": "Sets the credentials for interaction with the record’s node using a Kerberos cache.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/setnodecredentialsusingkerberoscache:error:"
+      },
+      "-setNodeCredentialsWithRecordType:authenticationType:authenticationItems:continueItems:context:error:": {
+        "doc": "Sets the credentials for interaction with the record’s node using other types of authentication available to Open Directory.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/setnodecredentialswithrecordtype(_:authenticationtype:authenticationitems:continueitems:context:)"
+      },
+      "-setValue:forAttribute:error:": {
+        "doc": "Sets the values of an attribute of the record.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/setvalue(_:forattribute:)"
+      },
+      "-synchronizeAndReturnError:": {
+        "doc": "Synchronizes the record from the directory to get current data and commit changes.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/synchronize()"
+      },
+      "-valuesForAttribute:error:": {
+        "doc": "Returns the values of an attribute of the record.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/values(forattribute:)"
+      },
+      "-verifyExtendedWithAuthenticationType:authenticationItems:continueItems:context:error:": {
+        "doc": "Verifies the credentials for interaction with the record’s node using other types of authentication available to Open Directory.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/verifyextended(withauthenticationtype:authenticationitems:continueitems:context:)"
+      },
+      "-verifyPassword:error:": {
+        "doc": "Verifies the password for interaction with the record.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/verifypassword(_:)"
+      }
+    },
+    "ODSession": {
+      "+defaultSession": {
+        "doc": "Returns a shared instance of the local session.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odsession/default()"
+      },
+      "+sessionWithOptions:error:": {
+        "doc": "Returns an autoreleased session object directed over proxy to another host.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odsession/sessionwithoptions:error:"
+      },
+      "-initWithOptions:error:": {
+        "doc": "Creates a session object directed over proxy to another host.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odsession/init(options:)"
+      },
+      "-nodeNamesAndReturnError:": {
+        "doc": "Returns the node names that are registered with this session.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odsession/nodenames()"
+      }
+    }
+  },
+  "properties": {
+    "ODNode": {
+      "nodeName": {
+        "doc": "The node’s name.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odnode/nodename"
+      }
+    },
+    "ODQuery": {
+      "delegate": {
+        "doc": "The query’s delegate.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odquery/delegate"
+      },
+      "operationQueue": {
+        "doc": "The queue on which asynchronous results are delivered to the delegate.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odquery/operationqueue"
+      }
+    },
+    "ODRecord": {
+      "recordName": {
+        "doc": "The official name of the record.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/recordname"
+      },
+      "recordType": {
+        "doc": "The record’s type.",
+        "url": "https://developer.apple.com/documentation/opendirectory/odrecord/recordtype"
+      }
+    }
+  }
+}

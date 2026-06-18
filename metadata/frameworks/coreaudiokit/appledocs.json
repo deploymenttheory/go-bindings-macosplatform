@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "framework": "CoreAudioKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "AUAudioUnitViewConfiguration": {
+      "doc": "A configuration object that describes how to present the audio unit’s user interface.",
+      "url": "https://developer.apple.com/documentation/coreaudiokit/auaudiounitviewconfiguration"
+    },
+    "AUGenericView": {
+      "doc": "A view that provides a generic user interface for a Cocoa audio unit.",
+      "url": "https://developer.apple.com/documentation/coreaudiokit/augenericview"
+    },
+    "AUGenericViewController": {
+      "url": "https://developer.apple.com/documentation/coreaudiokit/augenericviewcontroller"
+    },
+    "AUPannerView": {
+      "doc": "A view that provides a specialized user interface for a Cocoa-based panner audio unit.",
+      "url": "https://developer.apple.com/documentation/coreaudiokit/aupannerview"
+    },
+    "AUViewController": {
+      "doc": "The base class to extend when creating a custom user interface for an audio unit.",
+      "url": "https://developer.apple.com/documentation/coreaudiokit/auviewcontroller"
+    },
+    "CABTLEMIDIWindowController": {
+      "doc": "A window controller that displays nearby Bluetooth-based MIDI peripherals.",
+      "url": "https://developer.apple.com/documentation/coreaudiokit/cabtlemidiwindowcontroller"
+    },
+    "CAInterDeviceAudioViewController": {
+      "doc": "A view controller object that displays iOS devices that support inter-device audio.",
+      "url": "https://developer.apple.com/documentation/coreaudiokit/cainterdeviceaudioviewcontroller"
+    },
+    "CANetworkBrowserWindowController": {
+      "doc": "A window controller that displays available network audio devices.",
+      "url": "https://developer.apple.com/documentation/coreaudiokit/canetworkbrowserwindowcontroller"
+    }
+  },
+  "protocols": {
+    "AUCustomViewPersistentData": {
+      "doc": "A protocol that defines the methods an Audio Unit host calls to manage view data.",
+      "url": "https://developer.apple.com/documentation/coreaudiokit/aucustomviewpersistentdata"
+    }
+  },
+  "enums": {
+    "AUGenericViewDisplayFlags": {
+      "doc": "Flags that describe the display of a generic view.",
+      "url": "https://developer.apple.com/documentation/coreaudiokit/augenericviewdisplayflags",
+      "members": {
+        "AUViewParametersDisplayFlag": {
+          "doc": "If set, the generic view displays the audio unit parameters of the audio unit.",
+          "url": "https://developer.apple.com/documentation/coreaudiokit/augenericviewdisplayflags/viewparametersdisplayflag"
+        },
+        "AUViewPropertiesDisplayFlag": {
+          "doc": "If set, the generic view displays the audio unit properties of the audio unit.",
+          "url": "https://developer.apple.com/documentation/coreaudiokit/augenericviewdisplayflags/viewpropertiesdisplayflag"
+        },
+        "AUViewTitleDisplayFlag": {
+          "doc": "If set, the generic view displays the title and manufacturer of the audio unit.",
+          "url": "https://developer.apple.com/documentation/coreaudiokit/augenericviewdisplayflags/viewtitledisplayflag"
+        }
+      }
+    }
+  },
+  "methods": {
+    "AUAudioUnitViewConfiguration": {
+      "-initWithWidth:height:hostHasController:": {
+        "doc": "Creates a new configuration object.",
+        "url": "https://developer.apple.com/documentation/coreaudiokit/auaudiounitviewconfiguration/init(width:height:hosthascontroller:)"
+      }
+    },
+    "AUGenericView": {
+      "-initWithAudioUnit:": {
+        "doc": "Creates a generic view for an audio unit, setting all display flags.",
+        "url": "https://developer.apple.com/documentation/coreaudiokit/augenericview/init(audiounit:)"
+      },
+      "-initWithAudioUnit:displayFlags:": {
+        "doc": "Initializes a generic view for an audio unit, setting specific display flags.",
+        "url": "https://developer.apple.com/documentation/coreaudiokit/augenericview/init(audiounit:displayflags:)"
+      }
+    },
+    "AUPannerView": {
+      "+AUPannerViewWithAudioUnit:": {
+        "doc": "Creates a panner view for an audio unit.",
+        "url": "https://developer.apple.com/documentation/coreaudiokit/aupannerview/init(audiounit:)"
+      }
+    },
+    "CANetworkBrowserWindowController": {
+      "+isAVBSupported": {
+        "doc": "Returns a Boolean value that indicates whether the current machine hardware supports Audio Video Bridging (AVB).",
+        "url": "https://developer.apple.com/documentation/coreaudiokit/canetworkbrowserwindowcontroller/isavbsupported()"
+      },
+      "-init": {
+        "doc": "Creates a new network browser window controller.",
+        "url": "https://developer.apple.com/documentation/coreaudiokit/canetworkbrowserwindowcontroller/init()"
+      }
+    }
+  },
+  "properties": {
+    "AUAudioUnitViewConfiguration": {
+      "height": {
+        "doc": "The configured height.",
+        "url": "https://developer.apple.com/documentation/coreaudiokit/auaudiounitviewconfiguration/height"
+      },
+      "hostHasController": {
+        "doc": "A Boolean value that indicates whether the host shows its own control surface in this view configuration.",
+        "url": "https://developer.apple.com/documentation/coreaudiokit/auaudiounitviewconfiguration/hosthascontroller"
+      },
+      "width": {
+        "doc": "The configured width.",
+        "url": "https://developer.apple.com/documentation/coreaudiokit/auaudiounitviewconfiguration/width"
+      }
+    },
+    "AUGenericView": {
+      "audioUnit": {
+        "doc": "The audio unit associated with the generic view.",
+        "url": "https://developer.apple.com/documentation/coreaudiokit/augenericview/audiounit"
+      },
+      "showsExpertParameters": {
+        "doc": "Indicates whether or not controls for expert audio unit parameters are displayed in the generic view.",
+        "url": "https://developer.apple.com/documentation/coreaudiokit/augenericview/showsexpertparameters"
+      }
+    },
+    "AUPannerView": {
+      "audioUnit": {
+        "doc": "The panner audio unit associated with the generic panner view.",
+        "url": "https://developer.apple.com/documentation/coreaudiokit/aupannerview/audiounit"
+      }
+    }
+  }
+}

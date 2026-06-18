@@ -1,0 +1,1483 @@
+{
+  "schema_version": 1,
+  "framework": "CoreText",
+  "source": "developer.apple.com DocC render API",
+  "protocols": {
+    "CTAdaptiveImageProviding": {
+      "url": "https://developer.apple.com/documentation/coretext/ctadaptiveimageproviding"
+    }
+  },
+  "enums": {
+    "CTCharacterCollection": {
+      "doc": "Constants that specify character collections.",
+      "url": "https://developer.apple.com/documentation/coretext/ctcharactercollection",
+      "members": {
+        "kCTAdobeCNS1CharacterCollection": {
+          "doc": "The Adobe-CNS1 mapping.",
+          "url": "https://developer.apple.com/documentation/coretext/ctcharactercollection/kctadobecns1charactercollection"
+        },
+        "kCTAdobeGB1CharacterCollection": {
+          "doc": "The Adobe-GB1 mapping.",
+          "url": "https://developer.apple.com/documentation/coretext/ctcharactercollection/kctadobegb1charactercollection"
+        },
+        "kCTAdobeJapan1CharacterCollection": {
+          "doc": "The Adobe-Japan1 mapping.",
+          "url": "https://developer.apple.com/documentation/coretext/ctcharactercollection/kctadobejapan1charactercollection"
+        },
+        "kCTAdobeJapan2CharacterCollection": {
+          "doc": "The Adobe-Japan2 mapping.",
+          "url": "https://developer.apple.com/documentation/coretext/ctcharactercollection/kctadobejapan2charactercollection"
+        },
+        "kCTAdobeKorea1CharacterCollection": {
+          "doc": "The Adobe-Korea1 mapping.",
+          "url": "https://developer.apple.com/documentation/coretext/ctcharactercollection/kctadobekorea1charactercollection"
+        },
+        "kCTCharacterCollectionAdobeCNS1": {
+          "doc": "The Adobe-CNS1 mapping.",
+          "url": "https://developer.apple.com/documentation/coretext/ctcharactercollection/adobecns1"
+        },
+        "kCTCharacterCollectionAdobeGB1": {
+          "doc": "The Adobe-GB1 mapping.",
+          "url": "https://developer.apple.com/documentation/coretext/ctcharactercollection/adobegb1"
+        },
+        "kCTCharacterCollectionAdobeJapan1": {
+          "doc": "The Adobe-Japan1 mapping.",
+          "url": "https://developer.apple.com/documentation/coretext/ctcharactercollection/adobejapan1"
+        },
+        "kCTCharacterCollectionAdobeJapan2": {
+          "doc": "The Adobe-Japan2 mapping.",
+          "url": "https://developer.apple.com/documentation/coretext/ctcharactercollection/adobejapan2"
+        },
+        "kCTCharacterCollectionAdobeKorea1": {
+          "doc": "The Adobe-Korea1 mapping.",
+          "url": "https://developer.apple.com/documentation/coretext/ctcharactercollection/adobekorea1"
+        },
+        "kCTCharacterCollectionIdentityMapping": {
+          "doc": "The character identifier is equal to the glyph index.",
+          "url": "https://developer.apple.com/documentation/coretext/ctcharactercollection/identitymapping"
+        },
+        "kCTIdentityMappingCharacterCollection": {
+          "doc": "The character identifier is equal to the glyph index.",
+          "url": "https://developer.apple.com/documentation/coretext/ctcharactercollection/kctidentitymappingcharactercollection"
+        }
+      }
+    },
+    "CTFontCollectionCopyOptions": {
+      "doc": "Option bits for use with CTFontCollectionCopyFontAttribute(s).",
+      "url": "https://developer.apple.com/documentation/coretext/ctfontcollectioncopyoptions",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates a copy options structure with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontcollectioncopyoptions/init(rawvalue:)"
+        },
+        "kCTFontCollectionCopyDefaultOptions": {
+          "doc": "Passing this option indicates that defaults are to be used.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontcollectioncopyoptions/kctfontcollectioncopydefaultoptions"
+        },
+        "kCTFontCollectionCopyStandardSort": {
+          "doc": "Passing this option indicates that the return values should be sorted in standard UI order, suitable for display to the user. This is the same sorting behavior used by NSFontPanel and Font Book.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontcollectioncopyoptions/standardsort"
+        },
+        "kCTFontCollectionCopyUnique": {
+          "doc": "Passing this option indicates that duplicate values should be removed from the results.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontcollectioncopyoptions/unique"
+        }
+      }
+    },
+    "CTFontDescriptorMatchingState": {
+      "doc": "Constants that track the progress of font descriptor matching.",
+      "url": "https://developer.apple.com/documentation/coretext/ctfontdescriptormatchingstate",
+      "members": {
+        "kCTFontDescriptorMatchingDidBegin": {
+          "doc": "A state that indicates matching is about to begin.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontdescriptormatchingstate/didbegin"
+        },
+        "kCTFontDescriptorMatchingDidFailWithError": {
+          "doc": "A state that indicates an error.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontdescriptormatchingstate/didfailwitherror"
+        },
+        "kCTFontDescriptorMatchingDidFinish": {
+          "doc": "A state that indicates matching is done.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontdescriptormatchingstate/didfinish"
+        },
+        "kCTFontDescriptorMatchingDidFinishDownloading": {
+          "doc": "A state that indicates downloading is done.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontdescriptormatchingstate/didfinishdownloading"
+        },
+        "kCTFontDescriptorMatchingDidMatch": {
+          "doc": "A state that indicates the font descriptor match is successful.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontdescriptormatchingstate/didmatch"
+        },
+        "kCTFontDescriptorMatchingDownloading": {
+          "doc": "A state that indicates downloading is in progress.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontdescriptormatchingstate/downloading"
+        },
+        "kCTFontDescriptorMatchingStalled": {
+          "doc": "A state that indicates that matching is stalled, such as while waiting for a server response.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontdescriptormatchingstate/stalled"
+        },
+        "kCTFontDescriptorMatchingWillBeginDownloading": {
+          "doc": "A state that indicates downloading is about to begin.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontdescriptormatchingstate/willbegindownloading"
+        },
+        "kCTFontDescriptorMatchingWillBeginQuerying": {
+          "doc": "A state that indicates communication with the server is about to begin.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontdescriptormatchingstate/willbeginquerying"
+        }
+      }
+    },
+    "CTFontFormat": {
+      "doc": "The recognized format of the font.",
+      "url": "https://developer.apple.com/documentation/coretext/ctfontformat",
+      "members": {
+        "kCTFontFormatBitmap": {
+          "doc": "The font is a bitmap-only format.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontformat/bitmap"
+        },
+        "kCTFontFormatOpenTypePostScript": {
+          "doc": "The font is an OpenType format containing PostScript data.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontformat/opentypepostscript"
+        },
+        "kCTFontFormatOpenTypeTrueType": {
+          "doc": "The font is an OpenType format containing TrueType data.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontformat/opentypetruetype"
+        },
+        "kCTFontFormatPostScript": {
+          "doc": "The font is a recognized PostScript format.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontformat/postscript"
+        },
+        "kCTFontFormatTrueType": {
+          "doc": "The font is a recognized TrueType format.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontformat/truetype"
+        },
+        "kCTFontFormatUnrecognized": {
+          "doc": "The font is not a recognized format.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontformat/unrecognized"
+        }
+      }
+    },
+    "CTFontManagerAutoActivationSetting": {
+      "doc": "Sets the auto-activation for the specified bundle identifier.",
+      "url": "https://developer.apple.com/documentation/coretext/ctfontmanagerautoactivationsetting"
+    },
+    "CTFontManagerError": {
+      "doc": "Errors that prevent unregistration of fonts for a specified font file URL.",
+      "url": "https://developer.apple.com/documentation/coretext/ctfontmanagererror",
+      "members": {
+        "kCTFontManagerErrorAlreadyRegistered": {
+          "doc": "An error that indicates the file is already registered in the specified scope.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagererror/alreadyregistered"
+        },
+        "kCTFontManagerErrorAssetNotFound": {
+          "doc": "An error that indicates the asset isn’t found.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagererror/assetnotfound"
+        },
+        "kCTFontManagerErrorCancelledByUser": {
+          "doc": "An error that indicates the user cancelled the operation.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagererror/cancelledbyuser"
+        },
+        "kCTFontManagerErrorDuplicatedName": {
+          "doc": "An error that indicates the file can’t register because of a duplicate font name.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagererror/duplicatedname"
+        },
+        "kCTFontManagerErrorExceededResourceLimit": {
+          "doc": "An error that indicates an operation failure due to a system limitation.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagererror/exceededresourcelimit"
+        },
+        "kCTFontManagerErrorFileNotFound": {
+          "doc": "An error that indicates the file doesn’t exist at the specified URL.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagererror/filenotfound"
+        },
+        "kCTFontManagerErrorInUse": {
+          "doc": "An error that indicates the font file is actively in use and can’t be unregistered.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagererror/inuse"
+        },
+        "kCTFontManagerErrorInsufficientInfo": {
+          "doc": "An error that indicates the font descriptor doesn’t have the necessary information to specify a font file.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagererror/insufficientinfo"
+        },
+        "kCTFontManagerErrorInsufficientPermissions": {
+          "doc": "An error that indicates insufficient permissions to access the file.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagererror/insufficientpermissions"
+        },
+        "kCTFontManagerErrorInvalidFilePath": {
+          "doc": "An error that indicates the file isn’t in an allowed location, which must be either in the app’s bundle or an on-demand resource.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagererror/invalidfilepath"
+        },
+        "kCTFontManagerErrorInvalidFontData": {
+          "doc": "An error that indicates the file contains invalid font data that could cause system problems.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagererror/invalidfontdata"
+        },
+        "kCTFontManagerErrorMissingEntitlement": {
+          "doc": "An error that indicates the file can’t be processed because the provider doesn’t have a necessary entitlement.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagererror/missingentitlement"
+        },
+        "kCTFontManagerErrorNotRegistered": {
+          "doc": "An error that indicates the file isn’t registered in the specified scope.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagererror/notregistered"
+        },
+        "kCTFontManagerErrorRegistrationFailed": {
+          "doc": "An error that indicates the file can’t be processed due to an unexpected FontProvider error.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagererror/registrationfailed"
+        },
+        "kCTFontManagerErrorSystemRequired": {
+          "doc": "An error that indicates the file is required by the system and can’t be unregistered.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagererror/systemrequired"
+        },
+        "kCTFontManagerErrorUnrecognizedFormat": {
+          "doc": "An error that indicates the file’s format is unrecognized or unsupported.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagererror/unrecognizedformat"
+        },
+        "kCTFontManagerErrorUnsupportedScope": {
+          "doc": "An error that indicates the specified scope isn’t supported.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagererror/unsupportedscope"
+        }
+      }
+    },
+    "CTFontManagerScope": {
+      "doc": "Constants that define the scope for font registration.",
+      "url": "https://developer.apple.com/documentation/coretext/ctfontmanagerscope",
+      "members": {
+        "kCTFontManagerScopeNone": {
+          "doc": "No scope is defined.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagerscope/none"
+        },
+        "kCTFontManagerScopePersistent": {
+          "doc": "The font is available to all processes for the current user session and will be available in subsequent sessions unless unregistered.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagerscope/persistent"
+        },
+        "kCTFontManagerScopeProcess": {
+          "doc": "The font is available to the current process for the duration of the process unless directly unregistered.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagerscope/process"
+        },
+        "kCTFontManagerScopeSession": {
+          "doc": "The font is available to the current user session but won’t be available in subsequent sessions.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagerscope/session"
+        },
+        "kCTFontManagerScopeUser": {
+          "doc": "The font is available to all processes for the current user session and will be available in subsequent sessions unless unregistered.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontmanagerscope/user"
+        }
+      }
+    },
+    "CTFontOptions": {
+      "doc": "Options for font creation and descriptor matching.",
+      "url": "https://developer.apple.com/documentation/coretext/ctfontoptions",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates a font options structure with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontoptions/init(rawvalue:)"
+        },
+        "kCTFontOptionsDefault": {
+          "doc": "Default options are used.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontoptions/kctfontoptionsdefault"
+        },
+        "kCTFontOptionsPreferSystemFont": {
+          "doc": "Font matching prefers to match Apple system fonts.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontoptions/prefersystemfont"
+        },
+        "kCTFontOptionsPreventAutoActivation": {
+          "doc": "Prevents automatic font activation.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontoptions/preventautoactivation"
+        }
+      }
+    },
+    "CTFontOrientation": {
+      "doc": "The intended rendering orientation of the font for obtaining glyph metrics.",
+      "url": "https://developer.apple.com/documentation/coretext/ctfontorientation",
+      "members": {
+        "kCTFontDefaultOrientation": {
+          "doc": "The native orientation of the font.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontorientation/kctfontdefaultorientation"
+        },
+        "kCTFontHorizontalOrientation": {
+          "doc": "The horizontal orientation.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontorientation/kctfonthorizontalorientation"
+        },
+        "kCTFontOrientationDefault": {
+          "doc": "The native orientation of the font.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontorientation/default"
+        },
+        "kCTFontOrientationHorizontal": {
+          "doc": "The horizontal orientation.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontorientation/horizontal"
+        },
+        "kCTFontOrientationVertical": {
+          "doc": "The vertical orientation.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontorientation/vertical"
+        },
+        "kCTFontVerticalOrientation": {
+          "doc": "The vertical orientation.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontorientation/kctfontverticalorientation"
+        }
+      }
+    },
+    "CTFontStylisticClass": {
+      "doc": "The stylistic class values of the font.",
+      "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates a stylistic class structure with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/init(rawvalue:)"
+        },
+        "kCTFontClarendonSerifsClass": {
+          "doc": "The font’s style is a variation of the Oldstyle Serifs and the Transitional Serifs.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/clarendonserifsclass"
+        },
+        "kCTFontClassClarendonSerifs": {
+          "doc": "A font style variation of the Oldstyle Serifs and the Transitional Serifs.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/classclarendonserifs"
+        },
+        "kCTFontClassFreeformSerifs": {
+          "doc": "A font style that includes serifs but expresses a design freedom that doesn’t generally fit within the other serif design classifications.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/classfreeformserifs"
+        },
+        "kCTFontClassModernSerifs": {
+          "doc": "A font style based on the Latin printing style of the 20th century.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/classmodernserifs"
+        },
+        "kCTFontClassOldStyleSerifs": {
+          "doc": "A font style based on the Latin printing style of the 15th to 17th century.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/classoldstyleserifs"
+        },
+        "kCTFontClassOrnamentals": {
+          "doc": "A font style that includes highly decorated or stylized character shapes such as those typically used in headlines.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/classornamentals"
+        },
+        "kCTFontClassSansSerif": {
+          "doc": "A font style that includes most basic letter forms (excluding Scripts and Ornamentals) that do not have serifs on the strokes.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/classsansserif"
+        },
+        "kCTFontClassScripts": {
+          "doc": "A font style among those typefaces designed to simulate handwriting.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/classscripts"
+        },
+        "kCTFontClassSlabSerifs": {
+          "doc": "A font style characterized by serifs with a square transition between the strokes and the serifs (no brackets).",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/classslabserifs"
+        },
+        "kCTFontClassSymbolic": {
+          "doc": "A generally design-independent font style.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/classsymbolic"
+        },
+        "kCTFontClassTransitionalSerifs": {
+          "doc": "A font style based on the Latin printing style of the 18th to 19th century.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/classtransitionalserifs"
+        },
+        "kCTFontClassUnknown": {
+          "doc": "The font has no design classification.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/kctfontclassunknown"
+        },
+        "kCTFontFreeformSerifsClass": {
+          "doc": "The font’s style includes serifs but expresses a design freedom that doesn’t generally fit within the other serif design classifications.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/freeformserifsclass"
+        },
+        "kCTFontModernSerifsClass": {
+          "doc": "The font’s style is based on the Latin printing style of the 20th century.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/modernserifsclass"
+        },
+        "kCTFontOldStyleSerifsClass": {
+          "doc": "The font’s style is based on the Latin printing style of the 15th to 17th century.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/oldstyleserifsclass"
+        },
+        "kCTFontOrnamentalsClass": {
+          "doc": "The font’s style includes highly decorated or stylized character shapes such as those typically used in headlines.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/ornamentalsclass"
+        },
+        "kCTFontSansSerifClass": {
+          "doc": "The font’s style includes most basic letter forms (excluding Scripts and Ornamentals) that do not have serifs on the strokes.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/sansserifclass"
+        },
+        "kCTFontScriptsClass": {
+          "doc": "The font’s style is among those typefaces designed to simulate handwriting.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/scriptsclass"
+        },
+        "kCTFontSlabSerifsClass": {
+          "doc": "The font’s style is characterized by serifs with a square transition between the strokes and the serifs (no brackets).",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/slabserifsclass"
+        },
+        "kCTFontSymbolicClass": {
+          "doc": "The font’s style is generally design independent.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/symbolicclass"
+        },
+        "kCTFontTransitionalSerifsClass": {
+          "doc": "The font’s style is based on the Latin printing style of the 18th to 19th century.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/transitionalserifsclass"
+        },
+        "kCTFontUnknownClass": {
+          "doc": "The font has no design classification.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontstylisticclass/kctfontunknownclass"
+        }
+      }
+    },
+    "CTFontSymbolicTraits": {
+      "doc": "The symbolic representation of stylistic font attributes.",
+      "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates a symbolic traits structure with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/init(rawvalue:)"
+        },
+        "kCTFontBoldTrait": {
+          "doc": "The font typestyle is boldface.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/boldtrait"
+        },
+        "kCTFontClassMaskTrait": {
+          "doc": "Mask for the font class.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/classmasktrait"
+        },
+        "kCTFontColorGlyphsTrait": {
+          "doc": "The font contains color glyphs.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/colorglyphstrait"
+        },
+        "kCTFontCompositeTrait": {
+          "doc": "The font is in Composite Font Reference format.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/compositetrait"
+        },
+        "kCTFontCondensedTrait": {
+          "doc": "The font typestyle is condensed.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/condensedtrait"
+        },
+        "kCTFontExpandedTrait": {
+          "doc": "The font typestyle is expanded.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/expandedtrait"
+        },
+        "kCTFontItalicTrait": {
+          "doc": "The font typestyle is italic.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/italictrait"
+        },
+        "kCTFontMonoSpaceTrait": {
+          "doc": "The font uses fixed-pitch glyphs if available.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/monospacetrait"
+        },
+        "kCTFontTraitBold": {
+          "doc": "The font typestyle is boldface.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/traitbold"
+        },
+        "kCTFontTraitClassMask": {
+          "doc": "Mask for the font class.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/traitclassmask"
+        },
+        "kCTFontTraitColorGlyphs": {
+          "doc": "The font contains color glyphs.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/traitcolorglyphs"
+        },
+        "kCTFontTraitComposite": {
+          "doc": "The font is in Composite Font Reference format.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/traitcomposite"
+        },
+        "kCTFontTraitCondensed": {
+          "doc": "The font typestyle is condensed.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/traitcondensed"
+        },
+        "kCTFontTraitExpanded": {
+          "doc": "The font typestyle is expanded.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/traitexpanded"
+        },
+        "kCTFontTraitItalic": {
+          "doc": "The font typestyle is italic.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/traititalic"
+        },
+        "kCTFontTraitMonoSpace": {
+          "doc": "The font uses fixed-pitch glyphs if available.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/traitmonospace"
+        },
+        "kCTFontTraitUIOptimized": {
+          "doc": "The font synthesizes appropriate attributes for user interface rendering, such as control titles, if necessary.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/traituioptimized"
+        },
+        "kCTFontTraitVertical": {
+          "doc": "The font uses vertical glyph variants and metrics.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/traitvertical"
+        },
+        "kCTFontUIOptimizedTrait": {
+          "doc": "The font synthesizes appropriate attributes for user interface rendering, such as control titles, if necessary.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/uioptimizedtrait"
+        },
+        "kCTFontVerticalTrait": {
+          "doc": "The font uses vertical glyph variants and metrics.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontsymbolictraits/verticaltrait"
+        }
+      }
+    },
+    "CTFontTableOptions": {
+      "doc": "Constants that describe font table options.",
+      "url": "https://developer.apple.com/documentation/coretext/ctfonttableoptions",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates a font table options structure with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfonttableoptions/init(rawvalue:)"
+        },
+        "kCTFontTableOptionExcludeSynthetic": {
+          "doc": "The font table excludes synthetic font data.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfonttableoptions/excludesynthetic"
+        },
+        "kCTFontTableOptionNoOptions": {
+          "doc": "No font table options are specified.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfonttableoptions/kctfonttableoptionnooptions"
+        }
+      }
+    },
+    "CTFontUIFontType": {
+      "doc": "Constants that represent the specific user-interface purpose to specify for font creation.",
+      "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype",
+      "members": {
+        "kCTFontAlertHeaderFontType": {
+          "doc": "The font used for alert headers.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontalertheaderfonttype"
+        },
+        "kCTFontApplicationFontType": {
+          "doc": "The default font for text documents.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontapplicationfonttype"
+        },
+        "kCTFontControlContentFontType": {
+          "doc": "The font used for contents of user-interface controls.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontcontrolcontentfonttype"
+        },
+        "kCTFontEmphasizedSystemDetailFontType": {
+          "doc": "The system font used for emphasis in details.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontemphasizedsystemdetailfonttype"
+        },
+        "kCTFontEmphasizedSystemFontType": {
+          "doc": "The system font used for emphasis in alerts.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontemphasizedsystemfonttype"
+        },
+        "kCTFontLabelFontType": {
+          "doc": "The font used for labels and tick marks on full-size sliders.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontlabelfonttype"
+        },
+        "kCTFontMenuItemCmdKeyFontType": {
+          "doc": "The font used for menu-item command-key equivalents.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontmenuitemcmdkeyfonttype"
+        },
+        "kCTFontMenuItemFontType": {
+          "doc": "The font used for menu items.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontmenuitemfonttype"
+        },
+        "kCTFontMenuItemMarkFontType": {
+          "doc": "The font used to draw menu-item marks.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontmenuitemmarkfonttype"
+        },
+        "kCTFontMenuTitleFontType": {
+          "doc": "The font used for menu titles.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontmenutitlefonttype"
+        },
+        "kCTFontMessageFontType": {
+          "doc": "The font used for standard interface items, such as button labels and menu items.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontmessagefonttype"
+        },
+        "kCTFontMiniEmphasizedSystemFontType": {
+          "doc": "The miniature system font used for emphasis.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontminiemphasizedsystemfonttype"
+        },
+        "kCTFontMiniSystemFontType": {
+          "doc": "The standard miniature system font used for mini controls and utility window labels and text.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontminisystemfonttype"
+        },
+        "kCTFontNoFontType": {
+          "doc": "The user-interface font type isn’t specified.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontnofonttype"
+        },
+        "kCTFontPaletteFontType": {
+          "doc": "The font used in tool palettes.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontpalettefonttype"
+        },
+        "kCTFontPushButtonFontType": {
+          "doc": "The font used for a push button, a rounded rectangular button with a text label on it.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontpushbuttonfonttype"
+        },
+        "kCTFontSmallEmphasizedSystemFontType": {
+          "doc": "The small system font used for emphasis.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontsmallemphasizedsystemfonttype"
+        },
+        "kCTFontSmallSystemFontType": {
+          "doc": "The standard small system font used for informative text in alerts, column headings in lists, help tags, and small controls.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontsmallsystemfonttype"
+        },
+        "kCTFontSmallToolbarFontType": {
+          "doc": "The small font used for labels of toolbar items.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontsmalltoolbarfonttype"
+        },
+        "kCTFontSystemDetailFontType": {
+          "doc": "The standard system font used for details.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontsystemdetailfonttype"
+        },
+        "kCTFontSystemFontType": {
+          "doc": "The system font used for standard user-interface items, such as button labels and menu items.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontsystemfonttype"
+        },
+        "kCTFontToolTipFontType": {
+          "doc": "The font used for tool tips.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfonttooltipfonttype"
+        },
+        "kCTFontToolbarFontType": {
+          "doc": "The font used for labels of toolbar items.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfonttoolbarfonttype"
+        },
+        "kCTFontUIFontAlertHeader": {
+          "doc": "The font for alert headers.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/alertheader"
+        },
+        "kCTFontUIFontApplication": {
+          "doc": "The default font for text documents.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/application"
+        },
+        "kCTFontUIFontControlContent": {
+          "doc": "The font for contents of user-interface controls.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/controlcontent"
+        },
+        "kCTFontUIFontEmphasizedSystem": {
+          "doc": "The system font for emphasis in alerts.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/emphasizedsystem"
+        },
+        "kCTFontUIFontEmphasizedSystemDetail": {
+          "doc": "The system font for emphasis in details.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/emphasizedsystemdetail"
+        },
+        "kCTFontUIFontLabel": {
+          "doc": "The font for labels and tick marks on full-size sliders.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/label"
+        },
+        "kCTFontUIFontMenuItem": {
+          "doc": "The font for menu items.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/menuitem"
+        },
+        "kCTFontUIFontMenuItemCmdKey": {
+          "doc": "The font for menu-item command-key equivalents.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/menuitemcmdkey"
+        },
+        "kCTFontUIFontMenuItemMark": {
+          "doc": "The font to draw menu-item marks.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/menuitemmark"
+        },
+        "kCTFontUIFontMenuTitle": {
+          "doc": "The font for menu titles.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/menutitle"
+        },
+        "kCTFontUIFontMessage": {
+          "doc": "The font for standard interface items, such as button labels and menu items.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/message"
+        },
+        "kCTFontUIFontMiniEmphasizedSystem": {
+          "doc": "The miniature system font for emphasis.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/miniemphasizedsystem"
+        },
+        "kCTFontUIFontMiniSystem": {
+          "doc": "The standard miniature system font for mini controls and utility window labels and text.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/minisystem"
+        },
+        "kCTFontUIFontNone": {
+          "doc": "The user-interface font type isn’t specified.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/none"
+        },
+        "kCTFontUIFontPalette": {
+          "doc": "The font in tool palettes.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/palette"
+        },
+        "kCTFontUIFontPushButton": {
+          "doc": "The font for a push button, a rounded rectangular button with a text label on it.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/pushbutton"
+        },
+        "kCTFontUIFontSmallEmphasizedSystem": {
+          "doc": "The small system font for emphasis.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/smallemphasizedsystem"
+        },
+        "kCTFontUIFontSmallSystem": {
+          "doc": "The standard small system font for informative text in alerts, column headings in lists, help tags, and small controls.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/smallsystem"
+        },
+        "kCTFontUIFontSmallToolbar": {
+          "doc": "The small font for labels of toolbar items.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/smalltoolbar"
+        },
+        "kCTFontUIFontSystem": {
+          "doc": "The system font for standard user-interface items, such as button labels and menu items.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/system"
+        },
+        "kCTFontUIFontSystemDetail": {
+          "doc": "The standard system font for details.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/systemdetail"
+        },
+        "kCTFontUIFontToolTip": {
+          "doc": "The font for tool tips.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/tooltip"
+        },
+        "kCTFontUIFontToolbar": {
+          "doc": "The font used for labels of toolbar items.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/toolbar"
+        },
+        "kCTFontUIFontUser": {
+          "doc": "The default font for documents and other text whose font the user can typically change.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/user"
+        },
+        "kCTFontUIFontUserFixedPitch": {
+          "doc": "The default font for documents and other text under the user’s control when that font is fixed-pitch.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/userfixedpitch"
+        },
+        "kCTFontUIFontUtilityWindowTitle": {
+          "doc": "The font for utility window titles.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/utilitywindowtitle"
+        },
+        "kCTFontUIFontViews": {
+          "doc": "The default view font for text in lists and tables.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/views"
+        },
+        "kCTFontUIFontWindowTitle": {
+          "doc": "The font for window titles.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/windowtitle"
+        },
+        "kCTFontUserFixedPitchFontType": {
+          "doc": "The font used by default for documents and other text under the user’s control when that font is fixed-pitch.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontuserfixedpitchfonttype"
+        },
+        "kCTFontUserFontType": {
+          "doc": "The font used by default for documents and other text under the user’s control.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontuserfonttype"
+        },
+        "kCTFontUtilityWindowTitleFontType": {
+          "doc": "The font used for utility window titles.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontutilitywindowtitlefonttype"
+        },
+        "kCTFontViewsFontType": {
+          "doc": "The view font used as the default font of text in lists and tables.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontviewsfonttype"
+        },
+        "kCTFontWindowTitleFontType": {
+          "doc": "The font used for window titles.",
+          "url": "https://developer.apple.com/documentation/coretext/ctfontuifonttype/kctfontwindowtitlefonttype"
+        }
+      }
+    },
+    "CTFramePathFillRule": {
+      "doc": "These constants specify the fill rule used by a frame",
+      "url": "https://developer.apple.com/documentation/coretext/ctframepathfillrule",
+      "members": {
+        "kCTFramePathFillEvenOdd": {
+          "doc": "Paints the area using the even-odd fill rule.",
+          "url": "https://developer.apple.com/documentation/coretext/ctframepathfillrule/evenodd"
+        },
+        "kCTFramePathFillWindingNumber": {
+          "doc": "Paints the area using the nonzero winding number rule.",
+          "url": "https://developer.apple.com/documentation/coretext/ctframepathfillrule/windingnumber"
+        }
+      }
+    },
+    "CTFrameProgression": {
+      "doc": "Constants that specify frame progression types.",
+      "url": "https://developer.apple.com/documentation/coretext/ctframeprogression",
+      "members": {
+        "kCTFrameProgressionLeftToRight": {
+          "doc": "Lines stack left to right for vertical text.",
+          "url": "https://developer.apple.com/documentation/coretext/ctframeprogression/lefttoright"
+        },
+        "kCTFrameProgressionRightToLeft": {
+          "doc": "Lines stack right to left for vertical text.",
+          "url": "https://developer.apple.com/documentation/coretext/ctframeprogression/righttoleft"
+        },
+        "kCTFrameProgressionTopToBottom": {
+          "doc": "Lines stack top to bottom for horizontal text.",
+          "url": "https://developer.apple.com/documentation/coretext/ctframeprogression/toptobottom"
+        }
+      }
+    },
+    "CTLineBoundsOptions": {
+      "doc": "Options for getting the bounds of a line of text.",
+      "url": "https://developer.apple.com/documentation/coretext/ctlineboundsoptions",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates a line bound options enumeration with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/coretext/ctlineboundsoptions/init(rawvalue:)"
+        },
+        "kCTLineBoundsExcludeTypographicLeading": {
+          "doc": "An option to exclude typographic leading.",
+          "url": "https://developer.apple.com/documentation/coretext/ctlineboundsoptions/excludetypographicleading"
+        },
+        "kCTLineBoundsExcludeTypographicShifts": {
+          "doc": "An option to ignore cross-stream shifts due to positioning, such as kerning or baseline alignment.",
+          "url": "https://developer.apple.com/documentation/coretext/ctlineboundsoptions/excludetypographicshifts"
+        },
+        "kCTLineBoundsIncludeLanguageExtents": {
+          "doc": "An option to include additional space based on common glyph sequences for various languages.",
+          "url": "https://developer.apple.com/documentation/coretext/ctlineboundsoptions/includelanguageextents"
+        },
+        "kCTLineBoundsUseGlyphPathBounds": {
+          "doc": "An option to use glyph path bounds rather than the default typographic bounds.",
+          "url": "https://developer.apple.com/documentation/coretext/ctlineboundsoptions/useglyphpathbounds"
+        },
+        "kCTLineBoundsUseHangingPunctuation": {
+          "doc": "An option to enable hanging punctuation.",
+          "url": "https://developer.apple.com/documentation/coretext/ctlineboundsoptions/usehangingpunctuation"
+        },
+        "kCTLineBoundsUseOpticalBounds": {
+          "doc": "An option to use optical bounds.",
+          "url": "https://developer.apple.com/documentation/coretext/ctlineboundsoptions/useopticalbounds"
+        }
+      }
+    },
+    "CTLineBreakMode": {
+      "doc": "These constants specify what happens when a line is too long for its frame.",
+      "url": "https://developer.apple.com/documentation/coretext/ctlinebreakmode"
+    },
+    "CTLineTruncationType": {
+      "doc": "Truncation types required by the CTLineCreateTruncatedLine function to tell the truncation engine which type of truncation is being requested.",
+      "url": "https://developer.apple.com/documentation/coretext/ctlinetruncationtype"
+    },
+    "CTParagraphStyleSpecifier": {
+      "doc": "Constants used to query and modify a paragraph style object.",
+      "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier",
+      "members": {
+        "kCTParagraphStyleSpecifierAlignment": {
+          "doc": "The text alignment.",
+          "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier/alignment"
+        },
+        "kCTParagraphStyleSpecifierBaseWritingDirection": {
+          "doc": "The base writing direction of the lines.",
+          "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier/basewritingdirection"
+        },
+        "kCTParagraphStyleSpecifierCount": {
+          "doc": "The number of style specifiers.",
+          "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier/count"
+        },
+        "kCTParagraphStyleSpecifierDefaultTabInterval": {
+          "doc": "The document-wide default tab interval.",
+          "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier/defaulttabinterval"
+        },
+        "kCTParagraphStyleSpecifierFirstLineHeadIndent": {
+          "doc": "The distance, in points, from the leading margin of a frame to the beginning of the paragraph’s first line.",
+          "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier/firstlineheadindent"
+        },
+        "kCTParagraphStyleSpecifierHeadIndent": {
+          "doc": "The distance, in points, from the leading margin of a text container to the beginning of lines other than the first.",
+          "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier/headindent"
+        },
+        "kCTParagraphStyleSpecifierLineBoundsOptions": {
+          "doc": "Options that control the alignment of the line edges with the leading and trailing margins.",
+          "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier/lineboundsoptions"
+        },
+        "kCTParagraphStyleSpecifierLineBreakMode": {
+          "doc": "The mode that should be used to break lines when laying out the paragraph’s text.",
+          "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier/linebreakmode"
+        },
+        "kCTParagraphStyleSpecifierLineHeightMultiple": {
+          "doc": "The line height multiple.",
+          "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier/lineheightmultiple"
+        },
+        "kCTParagraphStyleSpecifierLineSpacing": {
+          "doc": "The space in points added between lines within the paragraph (commonly known as leading).",
+          "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier/linespacing"
+        },
+        "kCTParagraphStyleSpecifierLineSpacingAdjustment": {
+          "doc": "The space in points added between lines within the paragraph (commonly known as leading).",
+          "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier/linespacingadjustment"
+        },
+        "kCTParagraphStyleSpecifierMaximumLineHeight": {
+          "doc": "The maximum height that any line in the frame will occupy, regardless of the font size or size of any attached graphic.",
+          "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier/maximumlineheight"
+        },
+        "kCTParagraphStyleSpecifierMaximumLineSpacing": {
+          "doc": "The maximum space in points between lines within the paragraph (commonly known as leading).",
+          "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier/maximumlinespacing"
+        },
+        "kCTParagraphStyleSpecifierMinimumLineHeight": {
+          "doc": "The minimum height that any line in the frame will occupy, regardless of the font size or size of any attached graphic.",
+          "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier/minimumlineheight"
+        },
+        "kCTParagraphStyleSpecifierMinimumLineSpacing": {
+          "doc": "The minimum space in points between lines within the paragraph (commonly known as leading).",
+          "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier/minimumlinespacing"
+        },
+        "kCTParagraphStyleSpecifierParagraphSpacing": {
+          "doc": "The space added at the end of the paragraph to separate it from the following paragraph.",
+          "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier/paragraphspacing"
+        },
+        "kCTParagraphStyleSpecifierParagraphSpacingBefore": {
+          "doc": "The distance between the paragraph’s top and the beginning of its text content.",
+          "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier/paragraphspacingbefore"
+        },
+        "kCTParagraphStyleSpecifierTabStops": {
+          "doc": "The text tab objects, sorted by location, that define the tab stops for the paragraph style.",
+          "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier/tabstops"
+        },
+        "kCTParagraphStyleSpecifierTailIndent": {
+          "doc": "The distance, in points, from the margin of a frame to the end of lines.",
+          "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylespecifier/tailindent"
+        }
+      }
+    },
+    "CTRubyAlignment": {
+      "doc": "Constants that specify how to align the ruby text and the base text relative to each other when they have different lengths.",
+      "url": "https://developer.apple.com/documentation/coretext/ctrubyalignment",
+      "members": {
+        "kCTRubyAlignmentAuto": {
+          "doc": "Core Text automatically determines the alignment.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrubyalignment/auto"
+        },
+        "kCTRubyAlignmentCenter": {
+          "doc": "Centers the ruby text within the width of the base text.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrubyalignment/center"
+        },
+        "kCTRubyAlignmentDistributeLetter": {
+          "doc": "Distributes the ruby text evenly over the width of the base text, aligning the first and last characters of the ruby text with the first and last characters of the base text.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrubyalignment/distributeletter"
+        },
+        "kCTRubyAlignmentDistributeSpace": {
+          "doc": "Distributes the ruby text evenly over the width of the base text, adding space before the first and after the last character.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrubyalignment/distributespace"
+        },
+        "kCTRubyAlignmentEnd": {
+          "doc": "Aligns the ruby text with the ending edge of the base text.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrubyalignment/end"
+        },
+        "kCTRubyAlignmentInvalid": {
+          "doc": "The alignment is invalid.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrubyalignment/invalid"
+        },
+        "kCTRubyAlignmentLineEdge": {
+          "doc": "Aligns the ruby text to an adjacent line edge.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrubyalignment/lineedge"
+        },
+        "kCTRubyAlignmentStart": {
+          "doc": "Aligns the ruby text with the starting edge of the base text.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrubyalignment/start"
+        }
+      }
+    },
+    "CTRubyOverhang": {
+      "doc": "Constants that specify whether, and on which side, ruby text can overhang adjacent text if it’s wider than the base text.",
+      "url": "https://developer.apple.com/documentation/coretext/ctrubyoverhang",
+      "members": {
+        "kCTRubyOverhangAuto": {
+          "doc": "The ruby text can overhang adjacent text on both sides.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrubyoverhang/auto"
+        },
+        "kCTRubyOverhangEnd": {
+          "doc": "The ruby text can overhang the text that follows it.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrubyoverhang/end"
+        },
+        "kCTRubyOverhangInvalid": {
+          "doc": "The overhang specification is invalid.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrubyoverhang/invalid"
+        },
+        "kCTRubyOverhangNone": {
+          "doc": "The ruby text can’t overhang the preceding or following text.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrubyoverhang/none"
+        },
+        "kCTRubyOverhangStart": {
+          "doc": "The ruby text can overhang the text that precedes it.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrubyoverhang/start"
+        }
+      }
+    },
+    "CTRubyPosition": {
+      "doc": "Constants that specify the position of the ruby text relative to to the base text.",
+      "url": "https://developer.apple.com/documentation/coretext/ctrubyposition",
+      "members": {
+        "kCTRubyPositionAfter": {
+          "doc": "The ruby text is positioned after the base text, appearing below horizontal text and to the left of vertical text.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrubyposition/after"
+        },
+        "kCTRubyPositionBefore": {
+          "doc": "The ruby text is positioned before the base text, appearing above horizontal text and to the right of vertical text.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrubyposition/before"
+        },
+        "kCTRubyPositionCount": {
+          "doc": "A constant that accounts for all ruby positions during ruby annotation creation.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrubyposition/count"
+        },
+        "kCTRubyPositionInline": {
+          "doc": "The ruby text follows the base text with no special styling.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrubyposition/inline"
+        },
+        "kCTRubyPositionInterCharacter": {
+          "doc": "The ruby text is positioned to the right of the base text, regardless of whether it’s horizontal or vertical.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrubyposition/intercharacter"
+        }
+      }
+    },
+    "CTRunStatus": {
+      "doc": "A bitfield that represents the disposition of the run.",
+      "url": "https://developer.apple.com/documentation/coretext/ctrunstatus",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates a run status structure with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrunstatus/init(rawvalue:)"
+        },
+        "kCTRunStatusHasNonIdentityMatrix": {
+          "doc": "The run requires a specific text matrix to be set in the current Core Graphics context for proper drawing.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrunstatus/hasnonidentitymatrix"
+        },
+        "kCTRunStatusNoStatus": {
+          "doc": "The run has no special attributes.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrunstatus/kctrunstatusnostatus"
+        },
+        "kCTRunStatusNonMonotonic": {
+          "doc": "The run isn’t in strictly increasing or decreasing order.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrunstatus/nonmonotonic"
+        },
+        "kCTRunStatusRightToLeft": {
+          "doc": "The run proceeds from right to left.",
+          "url": "https://developer.apple.com/documentation/coretext/ctrunstatus/righttoleft"
+        }
+      }
+    },
+    "CTTextAlignment": {
+      "doc": "Constants that specify text alignment.",
+      "url": "https://developer.apple.com/documentation/coretext/cttextalignment",
+      "members": {
+        "init(_:)": {
+          "doc": "Converts a UIKit text alignment constant value to the matching constant value that Core Text uses.",
+          "url": "https://developer.apple.com/documentation/coretext/cttextalignment/init(_:)"
+        },
+        "kCTCenterTextAlignment": {
+          "doc": "Text is visually center-aligned.",
+          "url": "https://developer.apple.com/documentation/coretext/cttextalignment/kctcentertextalignment"
+        },
+        "kCTJustifiedTextAlignment": {
+          "doc": "Text is fully justified.",
+          "url": "https://developer.apple.com/documentation/coretext/cttextalignment/kctjustifiedtextalignment"
+        },
+        "kCTLeftTextAlignment": {
+          "doc": "Text is visually left-aligned.",
+          "url": "https://developer.apple.com/documentation/coretext/cttextalignment/kctlefttextalignment"
+        },
+        "kCTNaturalTextAlignment": {
+          "doc": "Text uses the natural alignment of the text’s script.",
+          "url": "https://developer.apple.com/documentation/coretext/cttextalignment/kctnaturaltextalignment"
+        },
+        "kCTRightTextAlignment": {
+          "doc": "Text is visually right-aligned.",
+          "url": "https://developer.apple.com/documentation/coretext/cttextalignment/kctrighttextalignment"
+        },
+        "kCTTextAlignmentCenter": {
+          "doc": "Text is visually center-aligned.",
+          "url": "https://developer.apple.com/documentation/coretext/cttextalignment/center"
+        },
+        "kCTTextAlignmentJustified": {
+          "doc": "Text is fully justified.",
+          "url": "https://developer.apple.com/documentation/coretext/cttextalignment/justified"
+        },
+        "kCTTextAlignmentLeft": {
+          "doc": "Text is visually left-aligned.",
+          "url": "https://developer.apple.com/documentation/coretext/cttextalignment/left"
+        },
+        "kCTTextAlignmentNatural": {
+          "doc": "Text uses the natural alignment of the text’s script.",
+          "url": "https://developer.apple.com/documentation/coretext/cttextalignment/natural"
+        },
+        "kCTTextAlignmentRight": {
+          "doc": "Text is visually right-aligned.",
+          "url": "https://developer.apple.com/documentation/coretext/cttextalignment/right"
+        }
+      }
+    },
+    "CTUnderlineStyle": {
+      "doc": "Underline style specifiers.",
+      "url": "https://developer.apple.com/documentation/coretext/ctunderlinestyle",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates an underline style structure with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/coretext/ctunderlinestyle/init(rawvalue:)"
+        },
+        "kCTUnderlineStyleDouble": {
+          "doc": "A specifier that indicates to draw an underline consisting of a double line.",
+          "url": "https://developer.apple.com/documentation/coretext/ctunderlinestyle/double"
+        },
+        "kCTUnderlineStyleNone": {
+          "doc": "A specifier that indicates not to draw an underline.",
+          "url": "https://developer.apple.com/documentation/coretext/ctunderlinestyle/kctunderlinestylenone"
+        },
+        "kCTUnderlineStyleSingle": {
+          "doc": "A specifier that indicates to draw an underline consisting of a single line.",
+          "url": "https://developer.apple.com/documentation/coretext/ctunderlinestyle/single"
+        },
+        "kCTUnderlineStyleThick": {
+          "doc": "A specifier that indicates to draw an underline consisting of a thick line.",
+          "url": "https://developer.apple.com/documentation/coretext/ctunderlinestyle/thick"
+        }
+      }
+    },
+    "CTUnderlineStyleModifiers": {
+      "doc": "Underline style modifiers.",
+      "url": "https://developer.apple.com/documentation/coretext/ctunderlinestylemodifiers",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates an underline style modifiers structure with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/coretext/ctunderlinestylemodifiers/init(rawvalue:)"
+        },
+        "kCTUnderlinePatternDash": {
+          "doc": "A modifier that indicates to draw an underline using a pattern of dashes.",
+          "url": "https://developer.apple.com/documentation/coretext/ctunderlinestylemodifiers/patterndash"
+        },
+        "kCTUnderlinePatternDashDot": {
+          "doc": "A modifier that indicates to draw an underline using a pattern of alternating dashes and dots.",
+          "url": "https://developer.apple.com/documentation/coretext/ctunderlinestylemodifiers/patterndashdot"
+        },
+        "kCTUnderlinePatternDashDotDot": {
+          "doc": "A modifier that indicates to draw an underline using a pattern of a dash followed by two dots.",
+          "url": "https://developer.apple.com/documentation/coretext/ctunderlinestylemodifiers/patterndashdotdot"
+        },
+        "kCTUnderlinePatternDot": {
+          "doc": "A modifier that indicates to draw an underline using a pattern of dots.",
+          "url": "https://developer.apple.com/documentation/coretext/ctunderlinestylemodifiers/patterndot"
+        },
+        "kCTUnderlinePatternSolid": {
+          "doc": "A modifier that indicates to draw a solid underline.",
+          "url": "https://developer.apple.com/documentation/coretext/ctunderlinestylemodifiers/patternsolid"
+        }
+      }
+    },
+    "CTWritingDirection": {
+      "doc": "These constants specify the writing direction.",
+      "url": "https://developer.apple.com/documentation/coretext/ctwritingdirection"
+    }
+  },
+  "structs": {
+    "ALMXGlyphEntry": {
+      "url": "https://developer.apple.com/documentation/coretext/almxglyphentry"
+    },
+    "ALMXHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/almxheader"
+    },
+    "AnchorPoint": {
+      "url": "https://developer.apple.com/documentation/coretext/anchorpoint"
+    },
+    "AnchorPointTable": {
+      "url": "https://developer.apple.com/documentation/coretext/anchorpointtable"
+    },
+    "AnkrTable": {
+      "url": "https://developer.apple.com/documentation/coretext/ankrtable"
+    },
+    "BslnFormat0Part": {
+      "url": "https://developer.apple.com/documentation/coretext/bslnformat0part"
+    },
+    "BslnFormat1Part": {
+      "url": "https://developer.apple.com/documentation/coretext/bslnformat1part"
+    },
+    "BslnFormat2Part": {
+      "url": "https://developer.apple.com/documentation/coretext/bslnformat2part"
+    },
+    "BslnFormat3Part": {
+      "url": "https://developer.apple.com/documentation/coretext/bslnformat3part"
+    },
+    "BslnTable": {
+      "url": "https://developer.apple.com/documentation/coretext/bslntable"
+    },
+    "CTParagraphStyleSetting": {
+      "doc": "This structure is used to alter the paragraph style.",
+      "url": "https://developer.apple.com/documentation/coretext/ctparagraphstylesetting"
+    },
+    "CTRunDelegateCallbacks": {
+      "doc": "A structure holding pointers to callbacks implemented by the run delegate.",
+      "url": "https://developer.apple.com/documentation/coretext/ctrundelegatecallbacks"
+    },
+    "FontVariation": {
+      "url": "https://developer.apple.com/documentation/coretext/fontvariation"
+    },
+    "JustDirectionTable": {
+      "url": "https://developer.apple.com/documentation/coretext/justdirectiontable"
+    },
+    "JustPCAction": {
+      "url": "https://developer.apple.com/documentation/coretext/justpcaction"
+    },
+    "JustPCActionSubrecord": {
+      "url": "https://developer.apple.com/documentation/coretext/justpcactionsubrecord"
+    },
+    "JustPCConditionalAddAction": {
+      "url": "https://developer.apple.com/documentation/coretext/justpcconditionaladdaction"
+    },
+    "JustPCDecompositionAction": {
+      "url": "https://developer.apple.com/documentation/coretext/justpcdecompositionaction"
+    },
+    "JustPCDuctilityAction": {
+      "url": "https://developer.apple.com/documentation/coretext/justpcductilityaction"
+    },
+    "JustPCGlyphRepeatAddAction": {
+      "url": "https://developer.apple.com/documentation/coretext/justpcglyphrepeataddaction"
+    },
+    "JustPostcompTable": {
+      "url": "https://developer.apple.com/documentation/coretext/justpostcomptable"
+    },
+    "JustTable": {
+      "url": "https://developer.apple.com/documentation/coretext/justtable"
+    },
+    "JustWidthDeltaEntry": {
+      "url": "https://developer.apple.com/documentation/coretext/justwidthdeltaentry"
+    },
+    "JustWidthDeltaGroup": {
+      "url": "https://developer.apple.com/documentation/coretext/justwidthdeltagroup"
+    },
+    "KernIndexArrayHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/kernindexarrayheader"
+    },
+    "KernKerningPair": {
+      "url": "https://developer.apple.com/documentation/coretext/kernkerningpair"
+    },
+    "KernOffsetTable": {
+      "url": "https://developer.apple.com/documentation/coretext/kernoffsettable"
+    },
+    "KernOrderedListEntry": {
+      "url": "https://developer.apple.com/documentation/coretext/kernorderedlistentry"
+    },
+    "KernOrderedListHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/kernorderedlistheader"
+    },
+    "KernSimpleArrayHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/kernsimplearrayheader"
+    },
+    "KernStateEntry": {
+      "url": "https://developer.apple.com/documentation/coretext/kernstateentry"
+    },
+    "KernStateHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/kernstateheader"
+    },
+    "KernSubtableHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/kernsubtableheader"
+    },
+    "KernTableHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/kerntableheader"
+    },
+    "KernVersion0Header": {
+      "url": "https://developer.apple.com/documentation/coretext/kernversion0header"
+    },
+    "KernVersion0SubtableHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/kernversion0subtableheader"
+    },
+    "KerxAnchorPointAction": {
+      "url": "https://developer.apple.com/documentation/coretext/kerxanchorpointaction"
+    },
+    "KerxControlPointAction": {
+      "url": "https://developer.apple.com/documentation/coretext/kerxcontrolpointaction"
+    },
+    "KerxControlPointEntry": {
+      "url": "https://developer.apple.com/documentation/coretext/kerxcontrolpointentry"
+    },
+    "KerxControlPointHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/kerxcontrolpointheader"
+    },
+    "KerxCoordinateAction": {
+      "url": "https://developer.apple.com/documentation/coretext/kerxcoordinateaction"
+    },
+    "KerxIndexArrayHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/kerxindexarrayheader"
+    },
+    "KerxKerningPair": {
+      "url": "https://developer.apple.com/documentation/coretext/kerxkerningpair"
+    },
+    "KerxOrderedListEntry": {
+      "url": "https://developer.apple.com/documentation/coretext/kerxorderedlistentry"
+    },
+    "KerxOrderedListHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/kerxorderedlistheader"
+    },
+    "KerxSimpleArrayHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/kerxsimplearrayheader"
+    },
+    "KerxStateEntry": {
+      "url": "https://developer.apple.com/documentation/coretext/kerxstateentry"
+    },
+    "KerxStateHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/kerxstateheader"
+    },
+    "KerxSubtableHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/kerxsubtableheader"
+    },
+    "KerxTableHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/kerxtableheader"
+    },
+    "LcarCaretClassEntry": {
+      "url": "https://developer.apple.com/documentation/coretext/lcarcaretclassentry"
+    },
+    "LcarCaretTable": {
+      "url": "https://developer.apple.com/documentation/coretext/lcarcarettable"
+    },
+    "LtagStringRange": {
+      "url": "https://developer.apple.com/documentation/coretext/ltagstringrange"
+    },
+    "LtagTable": {
+      "url": "https://developer.apple.com/documentation/coretext/ltagtable"
+    },
+    "MortChain": {
+      "url": "https://developer.apple.com/documentation/coretext/mortchain"
+    },
+    "MortContextualSubtable": {
+      "url": "https://developer.apple.com/documentation/coretext/mortcontextualsubtable"
+    },
+    "MortFeatureEntry": {
+      "url": "https://developer.apple.com/documentation/coretext/mortfeatureentry"
+    },
+    "MortInsertionSubtable": {
+      "url": "https://developer.apple.com/documentation/coretext/mortinsertionsubtable"
+    },
+    "MortLigatureSubtable": {
+      "url": "https://developer.apple.com/documentation/coretext/mortligaturesubtable"
+    },
+    "MortRearrangementSubtable": {
+      "url": "https://developer.apple.com/documentation/coretext/mortrearrangementsubtable"
+    },
+    "MortSubtable": {
+      "url": "https://developer.apple.com/documentation/coretext/mortsubtable"
+    },
+    "MortSwashSubtable": {
+      "url": "https://developer.apple.com/documentation/coretext/mortswashsubtable"
+    },
+    "MortTable": {
+      "url": "https://developer.apple.com/documentation/coretext/morttable"
+    },
+    "MorxChain": {
+      "url": "https://developer.apple.com/documentation/coretext/morxchain"
+    },
+    "MorxContextualSubtable": {
+      "url": "https://developer.apple.com/documentation/coretext/morxcontextualsubtable"
+    },
+    "MorxInsertionSubtable": {
+      "url": "https://developer.apple.com/documentation/coretext/morxinsertionsubtable"
+    },
+    "MorxLigatureSubtable": {
+      "url": "https://developer.apple.com/documentation/coretext/morxligaturesubtable"
+    },
+    "MorxRearrangementSubtable": {
+      "url": "https://developer.apple.com/documentation/coretext/morxrearrangementsubtable"
+    },
+    "MorxSubtable": {
+      "url": "https://developer.apple.com/documentation/coretext/morxsubtable"
+    },
+    "MorxTable": {
+      "url": "https://developer.apple.com/documentation/coretext/morxtable"
+    },
+    "OpbdSideValues": {
+      "url": "https://developer.apple.com/documentation/coretext/opbdsidevalues"
+    },
+    "OpbdTable": {
+      "url": "https://developer.apple.com/documentation/coretext/opbdtable"
+    },
+    "PropLookupSegment": {
+      "url": "https://developer.apple.com/documentation/coretext/proplookupsegment"
+    },
+    "PropLookupSingle": {
+      "url": "https://developer.apple.com/documentation/coretext/proplookupsingle"
+    },
+    "PropTable": {
+      "url": "https://developer.apple.com/documentation/coretext/proptable"
+    },
+    "ROTAGlyphEntry": {
+      "url": "https://developer.apple.com/documentation/coretext/rotaglyphentry"
+    },
+    "ROTAHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/rotaheader"
+    },
+    "SFNTLookupArrayHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntlookuparrayheader"
+    },
+    "SFNTLookupBinarySearchHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntlookupbinarysearchheader"
+    },
+    "SFNTLookupSegment": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntlookupsegment"
+    },
+    "SFNTLookupSegmentHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntlookupsegmentheader"
+    },
+    "SFNTLookupSingle": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntlookupsingle"
+    },
+    "SFNTLookupSingleHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntlookupsingleheader"
+    },
+    "SFNTLookupTable": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntlookuptable"
+    },
+    "SFNTLookupTrimmedArrayHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntlookuptrimmedarrayheader"
+    },
+    "SFNTLookupVectorHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntlookupvectorheader"
+    },
+    "STClassTable": {
+      "url": "https://developer.apple.com/documentation/coretext/stclasstable"
+    },
+    "STEntryOne": {
+      "url": "https://developer.apple.com/documentation/coretext/stentryone"
+    },
+    "STEntryTwo": {
+      "url": "https://developer.apple.com/documentation/coretext/stentrytwo"
+    },
+    "STEntryZero": {
+      "url": "https://developer.apple.com/documentation/coretext/stentryzero"
+    },
+    "STHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/stheader"
+    },
+    "STXEntryOne": {
+      "url": "https://developer.apple.com/documentation/coretext/stxentryone"
+    },
+    "STXEntryTwo": {
+      "url": "https://developer.apple.com/documentation/coretext/stxentrytwo"
+    },
+    "STXEntryZero": {
+      "url": "https://developer.apple.com/documentation/coretext/stxentryzero"
+    },
+    "STXHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/stxheader"
+    },
+    "TrakTable": {
+      "url": "https://developer.apple.com/documentation/coretext/traktable"
+    },
+    "TrakTableData": {
+      "url": "https://developer.apple.com/documentation/coretext/traktabledata"
+    },
+    "TrakTableEntry": {
+      "url": "https://developer.apple.com/documentation/coretext/traktableentry"
+    },
+    "sfntCMapEncoding": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntcmapencoding"
+    },
+    "sfntCMapExtendedSubHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntcmapextendedsubheader"
+    },
+    "sfntCMapHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntcmapheader"
+    },
+    "sfntCMapSubHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntcmapsubheader"
+    },
+    "sfntDescriptorHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntdescriptorheader"
+    },
+    "sfntDirectory": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntdirectory"
+    },
+    "sfntDirectoryEntry": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntdirectoryentry"
+    },
+    "sfntFeatureHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntfeatureheader"
+    },
+    "sfntFeatureName": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntfeaturename"
+    },
+    "sfntFontDescriptor": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntfontdescriptor"
+    },
+    "sfntFontFeatureSetting": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntfontfeaturesetting"
+    },
+    "sfntFontRunFeature": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntfontrunfeature"
+    },
+    "sfntInstance": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntinstance"
+    },
+    "sfntNameHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntnameheader"
+    },
+    "sfntNameRecord": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntnamerecord"
+    },
+    "sfntVariationAxis": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntvariationaxis"
+    },
+    "sfntVariationHeader": {
+      "url": "https://developer.apple.com/documentation/coretext/sfntvariationheader"
+    }
+  }
+}

@@ -1,0 +1,434 @@
+{
+  "schema_version": 1,
+  "framework": "SecurityInterface",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "SFAuthorizationPluginView": {
+      "doc": "Allows authorization plug-in developers to create a custom view their plug-in can display.",
+      "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationpluginview"
+    },
+    "SFAuthorizationView": {
+      "doc": "The class responsible for displaying a lock icon that can be used to indicate that a user interface has restricted access.",
+      "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationview"
+    },
+    "SFCertificatePanel": {
+      "doc": "A panel or sheet that displays one or more certificates.",
+      "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatepanel"
+    },
+    "SFCertificateTrustPanel": {
+      "doc": "A panel or sheet that lets the user edit the trust settings in any of the certificates in a certificate chain.",
+      "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatetrustpanel"
+    },
+    "SFCertificateView": {
+      "doc": "A view that displays the contents of a certificate, with options to display certificate details, display trust settings, and allow users to edit a certificate’s trust settings.",
+      "url": "https://developer.apple.com/documentation/securityinterface/sfcertificateview"
+    },
+    "SFChooseIdentityPanel": {
+      "doc": "A panel or sheet containing a list of identities that a user can choose from.",
+      "url": "https://developer.apple.com/documentation/securityinterface/sfchooseidentitypanel"
+    },
+    "SFChooseIdentityTableCellView": {
+      "url": "https://developer.apple.com/documentation/securityinterface/sfchooseidentitytablecellview"
+    },
+    "SFKeychainSavePanel": {
+      "doc": "A panel or sheet that allows the user to create a keychain.",
+      "url": "https://developer.apple.com/documentation/securityinterface/sfkeychainsavepanel"
+    },
+    "SFKeychainSettingsPanel": {
+      "doc": "A panel or sheet that allows users to change their keychain settings.",
+      "url": "https://developer.apple.com/documentation/securityinterface/sfkeychainsettingspanel"
+    }
+  },
+  "enums": {
+    "SFAuthorizationViewState": {
+      "doc": "Defines the current state of the authorization view.",
+      "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationviewstate"
+    },
+    "SFButtonType": {
+      "doc": "These constants define the button types used by authorization plug-ins.",
+      "url": "https://developer.apple.com/documentation/securityinterface/sfbuttontype"
+    },
+    "SFViewType": {
+      "doc": "These constants define the view type requested by the authorization plug-in.",
+      "url": "https://developer.apple.com/documentation/securityinterface/sfviewtype"
+    }
+  },
+  "methods": {
+    "SFAuthorizationPluginView": {
+      "-buttonPressed:": {
+        "doc": "Tells the authorization plug-in that the user pressed a button in the custom view.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationpluginview/buttonpressed(_:)"
+      },
+      "-callbacks": {
+        "doc": "Returns the authorization callbacks structure with which this instance was initialized.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationpluginview/callbacks()"
+      },
+      "-didActivate": {
+        "doc": "Tells the authorization plug-in when its user interface has become active.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationpluginview/didactivate()"
+      },
+      "-didDeactivate": {
+        "doc": "Tells the authorization plug-in that its user interface has been deactivated.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationpluginview/diddeactivate()"
+      },
+      "-displayView": {
+        "doc": "Displays the user interface provided by the authorization plug-in view subclass.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationpluginview/display()"
+      },
+      "-engineRef": {
+        "doc": "Returns the authorization engine handle with which this instance was initialized.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationpluginview/engineref()"
+      },
+      "-firstKeyView": {
+        "doc": "Returns the first view in the keyboard loop of the view.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationpluginview/firstkeyview()"
+      },
+      "-firstResponder": {
+        "doc": "Returns the view that should get focus for keyboard events.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationpluginview/firstresponder()"
+      },
+      "-initWithCallbacks:andEngineRef:": {
+        "doc": "Initializes a new authorization plug-in view with the specified callbacks and authorization engine handle.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationpluginview/init(callbacks:andengineref:)"
+      },
+      "-lastError": {
+        "doc": "Returns the last error that occurred during evaluation.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationpluginview/lasterror()"
+      },
+      "-lastKeyView": {
+        "doc": "Returns the last view in the keyboard loop of the view.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationpluginview/lastkeyview()"
+      },
+      "-setButton:enabled:": {
+        "doc": "Enables or disables a button in the authorization plug-in’s user interface.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationpluginview/setbutton(_:enabled:)"
+      },
+      "-setEnabled:": {
+        "doc": "Enables or disables the controls in the authorization plug-in’s view.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationpluginview/setenabled(_:)"
+      },
+      "-updateView": {
+        "doc": "Tells the authorization plug-in to get and display the appropriate view in the authorization plug-in’s user interface.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationpluginview/update()"
+      },
+      "-viewForType:": {
+        "doc": "Returns the appropriate view object for the specified view type.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationpluginview/view(for:)"
+      },
+      "-willActivateWithUser:": {
+        "doc": "Tells the authorization plug-in that its user interface is about to be made active by the Apple-provided Security Agent.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationpluginview/willactivate(withuser:)"
+      }
+    },
+    "SFAuthorizationView": {
+      "-authorization": {
+        "doc": "Returns the authorization object associated with this view.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationview/authorization()"
+      },
+      "-authorizationRights": {
+        "doc": "Returns the authorization rights for this view.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationview/authorizationrights()"
+      },
+      "-authorizationState": {
+        "doc": "Returns the current state of the authorization view.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationview/authorizationstate()"
+      },
+      "-authorize:": {
+        "doc": "Attempts to unlock the lock icon in the view.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationview/authorize(_:)"
+      },
+      "-deauthorize:": {
+        "doc": "Sets the authorization state to unauthorized and locks the lock icon in the view.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationview/deauthorize(_:)"
+      },
+      "-delegate": {
+        "doc": "Returns the delegate for this view.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationview/delegate()"
+      },
+      "-isEnabled": {
+        "doc": "Indicates whether the authorization view is enabled (true) or disabled (false).",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationview/isenabled()"
+      },
+      "-setAuthorizationRights:": {
+        "doc": "Sets the authorization rights for this view.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationview/setauthorizationrights(_:)"
+      },
+      "-setAutoupdate:": {
+        "doc": "Sets the authorization view to update itself automatically.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationview/setautoupdate(_:)"
+      },
+      "-setAutoupdate:interval:": {
+        "doc": "Sets the authorization view to update itself at a specific interval.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationview/setautoupdate(_:interval:)"
+      },
+      "-setDelegate:": {
+        "doc": "Sets the delegate for this authorization view.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationview/setdelegate(_:)"
+      },
+      "-setEnabled:": {
+        "doc": "Sets the current state of the authorization view.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationview/setenabled(_:)"
+      },
+      "-setFlags:": {
+        "doc": "Sets the current authorization flags for the view.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationview/setflags(_:)"
+      },
+      "-setString:": {
+        "doc": "Sets the requested-right string to use with the default authorization rights set.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationview/setstring(_:)"
+      },
+      "-updateStatus:": {
+        "doc": "Manually updates the authorization view.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfauthorizationview/updatestatus(_:)"
+      }
+    },
+    "SFCertificatePanel": {
+      "+sharedCertificatePanel": {
+        "doc": "Returns a fully initialized, singleton certificate panel object.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatepanel/shared()"
+      },
+      "-beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:certificates:showGroup:": {
+        "doc": "Displays one or more certificates in a modal sheet.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatepanel/beginsheet(for:modaldelegate:didend:contextinfo:certificates:showgroup:)"
+      },
+      "-beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:trust:showGroup:": {
+        "doc": "Displays a certificate chain in a modal sheet.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatepanel/beginsheet(for:modaldelegate:didend:contextinfo:trust:showgroup:)"
+      },
+      "-certificateView": {
+        "doc": "Returns the certificate view for the modal panel.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatepanel/certificateview()"
+      },
+      "-helpAnchor": {
+        "doc": "Returns the current help anchor string for the sheet or panel.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatepanel/helpanchor()"
+      },
+      "-policies": {
+        "doc": "Returns an array of policies used to evaluate the status of the displayed certificates.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatepanel/policies()"
+      },
+      "-runModalForCertificates:showGroup:": {
+        "doc": "Displays one or more specified certificates in a modal panel.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatepanel/runmodal(forcertificates:showgroup:)"
+      },
+      "-runModalForTrust:showGroup:": {
+        "doc": "Displays a certificate chain in a modal panel.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatepanel/runmodal(for:showgroup:)"
+      },
+      "-setAlternateButtonTitle:": {
+        "doc": "Customizes the title of the alternate button.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatepanel/setalternatebuttontitle(_:)"
+      },
+      "-setDefaultButtonTitle:": {
+        "doc": "Customizes the title of the default button.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatepanel/setdefaultbuttontitle(_:)"
+      },
+      "-setHelpAnchor:": {
+        "doc": "Sets the help anchor string for the sheet or modal panel.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatepanel/sethelpanchor(_:)"
+      },
+      "-setPolicies:": {
+        "doc": "Specifies one or more policies that apply to the displayed certificates.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatepanel/setpolicies(_:)"
+      },
+      "-setShowsHelp:": {
+        "doc": "Displays a Help button in the sheet or panel.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatepanel/setshowshelp(_:)"
+      },
+      "-showsHelp": {
+        "doc": "Indicates whether the help button is currently set to be displayed.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatepanel/showshelp()"
+      }
+    },
+    "SFCertificateTrustPanel": {
+      "+sharedCertificateTrustPanel": {
+        "doc": "Returns a fully initialized, singleton certificate trust panel object.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatetrustpanel/shared()"
+      },
+      "-beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:trust:message:": {
+        "doc": "Displays a modal sheet that shows the results of a certificate trust evaluation and that allows the user to edit trust settings.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatetrustpanel/beginsheet(for:modaldelegate:didend:contextinfo:trust:message:)"
+      },
+      "-informativeText": {
+        "doc": "Returns the (optional) informative text currently displayed in the panel.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatetrustpanel/informativetext()"
+      },
+      "-runModalForTrust:message:": {
+        "doc": "Displays a modal panel that shows the results of a certificate trust evaluation and that allows the user to edit trust settings.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatetrustpanel/runmodal(for:message:)"
+      },
+      "-setInformativeText:": {
+        "doc": "Sets the (optional) informative text displayed in the panel.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificatetrustpanel/setinformativetext(_:)"
+      }
+    },
+    "SFCertificateView": {
+      "-certificate": {
+        "doc": "Returns the certificate currently displayed in the view.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificateview/certificate()"
+      },
+      "-detailsDisclosed": {
+        "doc": "Returns whether the view currently shows the certificate’s details.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificateview/detailsdisclosed()"
+      },
+      "-detailsDisplayed": {
+        "doc": "Indicates if the view currently shows the certificate’s details.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificateview/detailsdisplayed()"
+      },
+      "-isEditable": {
+        "doc": "Indicates if the view allows the user to edit the certificate’s trust.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificateview/iseditable()"
+      },
+      "-isTrustDisplayed": {
+        "doc": "Indicates if the view currently shows the certificate’s trust settings.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificateview/istrustdisplayed()"
+      },
+      "-policies": {
+        "doc": "Returns an array of policies used to evaluate the status of the displayed certificate.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificateview/policies()"
+      },
+      "-policiesDisclosed": {
+        "doc": "Returns whether the trust policy subview is disclosed.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificateview/policiesdisclosed()"
+      },
+      "-saveTrustSettings": {
+        "doc": "Saves the user’s current trust settings for the displayed certificate.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificateview/savetrustsettings()"
+      },
+      "-setCertificate:": {
+        "doc": "Specifies the certificate that’s displayed in the view.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificateview/setcertificate(_:)"
+      },
+      "-setDetailsDisclosed:": {
+        "doc": "Sets whether the certificate details subview is disclosed.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificateview/setdetailsdisclosed(_:)"
+      },
+      "-setDisplayDetails:": {
+        "doc": "Specifies whether the user can see the certificate details.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificateview/setdisplaydetails(_:)"
+      },
+      "-setDisplayTrust:": {
+        "doc": "Specifies whether the user can see the certificate’s trust settings.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificateview/setdisplaytrust(_:)"
+      },
+      "-setEditableTrust:": {
+        "doc": "Specifies whether the user can edit the certificate’s trust settings.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificateview/seteditabletrust(_:)"
+      },
+      "-setPolicies:": {
+        "doc": "Specifies the policies to use when evaluating this certificate’s status.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificateview/setpolicies(_:)"
+      },
+      "-setPoliciesDisclosed:": {
+        "doc": "Specifies whether the trust policy settings subview is disclosed.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfcertificateview/setpoliciesdisclosed(_:)"
+      }
+    },
+    "SFChooseIdentityPanel": {
+      "+sharedChooseIdentityPanel": {
+        "doc": "Returns a fully initialized, singleton choose identity panel object.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfchooseidentitypanel/shared()"
+      },
+      "-beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:identities:message:": {
+        "doc": "Displays a list of identities in a modal sheet from which the user can select an identity.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfchooseidentitypanel/beginsheet(for:modaldelegate:didend:contextinfo:identities:message:)"
+      },
+      "-domain": {
+        "doc": "Returns the domain that will be associated with the chosen identity.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfchooseidentitypanel/domain()"
+      },
+      "-helpAnchor": {
+        "doc": "Returns the current help anchor string for the sheet or panel.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfchooseidentitypanel/helpanchor()"
+      },
+      "-identity": {
+        "doc": "Returns the identity that the user chose in the panel or sheet.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfchooseidentitypanel/identity()"
+      },
+      "-informativeText": {
+        "doc": "Returns the informative text currently displayed in the panel.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfchooseidentitypanel/informativetext()"
+      },
+      "-policies": {
+        "doc": "Returns an array of policies used to evaluate the status of the displayed certificates.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfchooseidentitypanel/policies()"
+      },
+      "-runModalForIdentities:message:": {
+        "doc": "Displays a list of identities in a modal panel.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfchooseidentitypanel/runmodal(foridentities:message:)"
+      },
+      "-setAlternateButtonTitle:": {
+        "doc": "Customizes the title of the alternate button.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfchooseidentitypanel/setalternatebuttontitle(_:)"
+      },
+      "-setDefaultButtonTitle:": {
+        "doc": "Customizes the title of the default button.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfchooseidentitypanel/setdefaultbuttontitle(_:)"
+      },
+      "-setDomain:": {
+        "doc": "Sets an optional domain in which the identity is to be used.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfchooseidentitypanel/setdomain(_:)"
+      },
+      "-setHelpAnchor:": {
+        "doc": "Sets the help anchor string for the sheet or modal panel.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfchooseidentitypanel/sethelpanchor(_:)"
+      },
+      "-setInformativeText:": {
+        "doc": "Sets the optional informative text displayed in the panel.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfchooseidentitypanel/setinformativetext(_:)"
+      },
+      "-setPolicies:": {
+        "doc": "Specifies one or more policies that apply to the displayed certificates.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfchooseidentitypanel/setpolicies(_:)"
+      },
+      "-setShowsHelp:": {
+        "doc": "Displays a Help button in the sheet or panel.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfchooseidentitypanel/setshowshelp(_:)"
+      },
+      "-showsHelp": {
+        "doc": "Indicates whether the help button is currently set to be displayed.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfchooseidentitypanel/showshelp()"
+      }
+    },
+    "SFKeychainSavePanel": {
+      "+sharedKeychainSavePanel": {
+        "doc": "Returns a shared keychain save panel object.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfkeychainsavepanel/shared()"
+      },
+      "-beginSheetForDirectory:file:modalForWindow:modalDelegate:didEndSelector:contextInfo:": {
+        "doc": "Displays a sheet that allows a user to create a new keychain.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfkeychainsavepanel/beginsheet(fordirectory:file:modalfor:modaldelegate:didend:contextinfo:)"
+      },
+      "-error": {
+        "doc": "Returns the last error encountered by the keychain save panel.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfkeychainsavepanel/error()"
+      },
+      "-keychain": {
+        "doc": "Returns the keychain created by the keychain save panel.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfkeychainsavepanel/keychain()"
+      },
+      "-runModalForDirectory:file:": {
+        "doc": "Displays a panel that allows a user to create a new keychain.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfkeychainsavepanel/runmodal(fordirectory:file:)"
+      },
+      "-setPassword:": {
+        "doc": "Specifies the password for the keychain that will be created.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfkeychainsavepanel/setpassword(_:)"
+      }
+    },
+    "SFKeychainSettingsPanel": {
+      "+sharedKeychainSettingsPanel": {
+        "doc": "Returns a shared keychain settings panel object.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfkeychainsettingspanel/shared()"
+      },
+      "-beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:settings:keychain:": {
+        "doc": "Displays a sheet that allows users to change keychain settings.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfkeychainsettingspanel/beginsheet(for:modaldelegate:didend:contextinfo:settings:keychain:)"
+      },
+      "-runModalForSettings:keychain:": {
+        "doc": "Displays a panel that allows users to change keychain settings.",
+        "url": "https://developer.apple.com/documentation/securityinterface/sfkeychainsettingspanel/runmodal(for:keychain:)"
+      }
+    }
+  }
+}

@@ -1,0 +1,1786 @@
+{
+  "schema_version": 1,
+  "framework": "Security",
+  "source": "developer.apple.com DocC render API",
+  "protocols": {
+    "OS_sec_certificate": {
+      "url": "https://developer.apple.com/documentation/security/os_sec_certificate"
+    },
+    "OS_sec_identity": {
+      "url": "https://developer.apple.com/documentation/security/os_sec_identity"
+    },
+    "OS_sec_object": {
+      "doc": "A sec_object is a generic, ARC-able type wrapper for common CoreFoundation Security types.",
+      "url": "https://developer.apple.com/documentation/security/os_sec_object"
+    },
+    "OS_sec_protocol_metadata": {
+      "doc": "A sec_protocol_metadata instance conatins read-only properties of a connected and configured security protocol. Clients use this object to read information about a protocol instance. Properties include, for example, the negotiated TLS version, ciphersuite, and peer certificates.",
+      "url": "https://developer.apple.com/documentation/security/os_sec_protocol_metadata"
+    },
+    "OS_sec_protocol_options": {
+      "doc": "A sec_protocol_options instance is a container of options for security protocol instances, such as TLS. Protocol options are used to configure security protocols in the network stack. For example, clients may set the maximum and minimum allowed TLS versions through protocol options.",
+      "url": "https://developer.apple.com/documentation/security/os_sec_protocol_options"
+    },
+    "OS_sec_trust": {
+      "doc": "These are os_object compatible and ARC-able wrappers around existing CoreFoundation Security types, including: SecTrustRef, SecIdentityRef, and SecCertificateRef. They allow clients to use these types in os_object-type APIs and data structures. The underlying CoreFoundation types may be extracted and used by clients as needed.",
+      "url": "https://developer.apple.com/documentation/security/os_sec_trust"
+    }
+  },
+  "enums": {
+    "AuthorizationFlags": {
+      "doc": "The flags used to specify authorization options.",
+      "url": "https://developer.apple.com/documentation/security/authorizationflags",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Initializes an authorization flags structure.",
+          "url": "https://developer.apple.com/documentation/security/authorizationflags/init(rawvalue:)"
+        },
+        "kAuthorizationFlagDefaults": {
+          "doc": "An empty flag set that you use as a placeholder when you don’t want any of the other flags.",
+          "url": "https://developer.apple.com/documentation/security/authorizationflags/kauthorizationflagdefaults"
+        },
+        "kAuthorizationFlagDestroyRights": {
+          "doc": "A flag that instructs the Security Server to revoke authorization.",
+          "url": "https://developer.apple.com/documentation/security/authorizationflags/destroyrights"
+        },
+        "kAuthorizationFlagExtendRights": {
+          "doc": "A flag that permits the Security Server to attempt to grant the rights requested.",
+          "url": "https://developer.apple.com/documentation/security/authorizationflags/extendrights"
+        },
+        "kAuthorizationFlagInteractionAllowed": {
+          "doc": "A flag that permits user interaction as needed.",
+          "url": "https://developer.apple.com/documentation/security/authorizationflags/interactionallowed"
+        },
+        "kAuthorizationFlagNoData": {
+          "doc": "Private flag. Do not use.",
+          "url": "https://developer.apple.com/documentation/security/authorizationflags/nodata"
+        },
+        "kAuthorizationFlagPartialRights": {
+          "doc": "A flag that permits the Security Server to grant rights on an individual basis.",
+          "url": "https://developer.apple.com/documentation/security/authorizationflags/partialrights"
+        },
+        "kAuthorizationFlagPreAuthorize": {
+          "doc": "A flag that instructs the Security Server to preauthorize the rights requested.",
+          "url": "https://developer.apple.com/documentation/security/authorizationflags/preauthorize"
+        }
+      }
+    },
+    "CMSCertificateChainMode": {
+      "doc": "Constants that can be set to specify what certificates to include in a signed message.",
+      "url": "https://developer.apple.com/documentation/security/cmscertificatechainmode",
+      "members": {
+        "kCMSCertificateChain": {
+          "doc": "Include the signer certificate chain up to but not including the root certificate.",
+          "url": "https://developer.apple.com/documentation/security/cmscertificatechainmode/chain"
+        },
+        "kCMSCertificateChainWithRoot": {
+          "doc": "Include the entire signer certificate chain, including the root certificate.",
+          "url": "https://developer.apple.com/documentation/security/cmscertificatechainmode/chainwithroot"
+        },
+        "kCMSCertificateNone": {
+          "doc": "Don’t include any certificates.",
+          "url": "https://developer.apple.com/documentation/security/cmscertificatechainmode/none"
+        },
+        "kCMSCertificateSignerOnly": {
+          "doc": "Only include signer certificates.",
+          "url": "https://developer.apple.com/documentation/security/cmscertificatechainmode/signeronly"
+        }
+      }
+    },
+    "CMSSignedAttributes": {
+      "doc": "Optional attributes you can add to a signed message.",
+      "url": "https://developer.apple.com/documentation/security/cmssignedattributes",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Initializes a new attributes structure.",
+          "url": "https://developer.apple.com/documentation/security/cmssignedattributes/init(rawvalue:)"
+        },
+        "kCMSAttrAppleCodesigningHashAgility": {
+          "doc": "Include Apple codesigning hash agility.",
+          "url": "https://developer.apple.com/documentation/security/cmssignedattributes/attrapplecodesigninghashagility"
+        },
+        "kCMSAttrAppleCodesigningHashAgilityV2": {
+          "doc": "Include Apple codesigning hash agility, version 2.",
+          "url": "https://developer.apple.com/documentation/security/cmssignedattributes/attrapplecodesigninghashagilityv2"
+        },
+        "kCMSAttrAppleExpirationTime": {
+          "doc": "Include the expiration time.",
+          "url": "https://developer.apple.com/documentation/security/cmssignedattributes/attrappleexpirationtime"
+        },
+        "kCMSAttrNone": {
+          "doc": "No attributes.",
+          "url": "https://developer.apple.com/documentation/security/cmssignedattributes/kcmsattrnone"
+        },
+        "kCMSAttrSigningTime": {
+          "doc": "Include the signing time.",
+          "url": "https://developer.apple.com/documentation/security/cmssignedattributes/attrsigningtime"
+        },
+        "kCMSAttrSmimeCapabilities": {
+          "doc": "Identify signature, encryption, and digest algorithms supported by the encoder.",
+          "url": "https://developer.apple.com/documentation/security/cmssignedattributes/attrsmimecapabilities"
+        },
+        "kCMSAttrSmimeEncryptionKeyPrefs": {
+          "doc": "Indicate that the signing certificate included with the message is the preferred one for S/MIME encryption.",
+          "url": "https://developer.apple.com/documentation/security/cmssignedattributes/attrsmimeencryptionkeyprefs"
+        },
+        "kCMSAttrSmimeMSEncryptionKeyPrefs": {
+          "doc": "Indicate that the signing certificate included with the message is the preferred one for S/MIME encryption, but using an attribute object identifier (OID) preferred by Microsoft.",
+          "url": "https://developer.apple.com/documentation/security/cmssignedattributes/attrsmimemsencryptionkeyprefs"
+        }
+      }
+    },
+    "CMSSignerStatus": {
+      "doc": "The constants that indicate the status of the signature and signer information in a signed message.",
+      "url": "https://developer.apple.com/documentation/security/cmssignerstatus",
+      "members": {
+        "kCMSSignerInvalidCert": {
+          "doc": "The message was signed but the signer’s certificate could not be verified.",
+          "url": "https://developer.apple.com/documentation/security/cmssignerstatus/invalidcert"
+        },
+        "kCMSSignerInvalidIndex": {
+          "doc": "The specified value for the signer index (signerIndex parameter) is greater than the number of signers of the message minus one (signerIndex \u003e (numSigners – 1)).",
+          "url": "https://developer.apple.com/documentation/security/cmssignerstatus/invalidindex"
+        },
+        "kCMSSignerInvalidSignature": {
+          "doc": "The message was signed but the signature is invalid.",
+          "url": "https://developer.apple.com/documentation/security/cmssignerstatus/invalidsignature"
+        },
+        "kCMSSignerNeedsDetachedContent": {
+          "doc": "The message was signed but has detached content. You must call the CMSDecoderSetDetachedContent function before ascertaining the signature status.",
+          "url": "https://developer.apple.com/documentation/security/cmssignerstatus/needsdetachedcontent"
+        },
+        "kCMSSignerUnsigned": {
+          "doc": "The message was not signed.",
+          "url": "https://developer.apple.com/documentation/security/cmssignerstatus/unsigned"
+        },
+        "kCMSSignerValid": {
+          "doc": "The message was signed and both the signature and the signer certificate have been verified.",
+          "url": "https://developer.apple.com/documentation/security/cmssignerstatus/valid"
+        }
+      }
+    },
+    "SSLAuthenticate": {
+      "doc": "The flags that represent the requirements for client-side authentication.",
+      "url": "https://developer.apple.com/documentation/security/sslauthenticate",
+      "members": {
+        "kAlwaysAuthenticate": {
+          "doc": "Indicates that client-side authentication is required.",
+          "url": "https://developer.apple.com/documentation/security/sslauthenticate/alwaysauthenticate"
+        },
+        "kNeverAuthenticate": {
+          "doc": "Indicates that client-side authentication is not required. (Default.)",
+          "url": "https://developer.apple.com/documentation/security/sslauthenticate/neverauthenticate"
+        },
+        "kTryAuthenticate": {
+          "doc": "Indicates that client-side authentication should be attempted. There is no error if the client doesn’t have a certificate.",
+          "url": "https://developer.apple.com/documentation/security/sslauthenticate/tryauthenticate"
+        }
+      }
+    },
+    "SSLCiphersuiteGroup": {
+      "doc": "A mechanism for grouping related cipher suites.",
+      "url": "https://developer.apple.com/documentation/security/sslciphersuitegroup"
+    },
+    "SSLClientCertificateState": {
+      "doc": "An enumeration of the states of client certificate exchange.",
+      "url": "https://developer.apple.com/documentation/security/sslclientcertificatestate",
+      "members": {
+        "kSSLClientCertNone": {
+          "doc": "Indicates that the server hasn’t asked for a certificate and that the client hasn’t sent one.",
+          "url": "https://developer.apple.com/documentation/security/sslclientcertificatestate/certnone"
+        },
+        "kSSLClientCertRejected": {
+          "doc": "Indicates that the client sent a certificate but the certificate failed validation. This value is seen only on the server side. The server application can inspect the certificate using the function SSLGetPeerCertificates.",
+          "url": "https://developer.apple.com/documentation/security/sslclientcertificatestate/certrejected"
+        },
+        "kSSLClientCertRequested": {
+          "doc": "Indicates that the server has asked for a certificate, but the client has not sent it.",
+          "url": "https://developer.apple.com/documentation/security/sslclientcertificatestate/certrequested"
+        },
+        "kSSLClientCertSent": {
+          "doc": "Indicates that the server asked for a certificate, the client sent one, and the server validated it. The application can inspect the certificate using the function SSLGetPeerCertificates.",
+          "url": "https://developer.apple.com/documentation/security/sslclientcertificatestate/certsent"
+        }
+      }
+    },
+    "SSLConnectionType": {
+      "doc": "The flags that indicate whether a context is to be used for streaming or datagram-based communication.",
+      "url": "https://developer.apple.com/documentation/security/sslconnectiontype",
+      "members": {
+        "kSSLDatagramType": {
+          "doc": "Datagram-based communication (UDP).",
+          "url": "https://developer.apple.com/documentation/security/sslconnectiontype/datagramtype"
+        },
+        "kSSLStreamType": {
+          "doc": "Stream-based communication (TCP).",
+          "url": "https://developer.apple.com/documentation/security/sslconnectiontype/streamtype"
+        }
+      }
+    },
+    "SSLProtocol": {
+      "doc": "An enumeration of valid SSL protocol versions.",
+      "url": "https://developer.apple.com/documentation/security/sslprotocol",
+      "members": {
+        "kDTLSProtocol1": {
+          "doc": "Specifies the DTLS 1.0 protocol.",
+          "url": "https://developer.apple.com/documentation/security/sslprotocol/dtlsprotocol1"
+        },
+        "kDTLSProtocol12": {
+          "doc": "Specifies the DTLS 1.2 protocol.",
+          "url": "https://developer.apple.com/documentation/security/sslprotocol/dtlsprotocol12"
+        },
+        "kSSLProtocol2": {
+          "doc": "Specifies that only the SSL 2.0 protocol may be negotiated. Deprecated in iOS.",
+          "url": "https://developer.apple.com/documentation/security/sslprotocol/sslprotocol2"
+        },
+        "kSSLProtocol3": {
+          "doc": "Specifies that the SSL 3.0 protocol is preferred; the SSL 2.0 protocol may be negotiated if the peer cannot use the SSL 3.0 protocol.",
+          "url": "https://developer.apple.com/documentation/security/sslprotocol/sslprotocol3"
+        },
+        "kSSLProtocol3Only": {
+          "doc": "Specifies that only the SSL 3.0 protocol may be negotiated; fails if the peer tries to negotiate the SSL 2.0 protocol. Deprecated in iOS.",
+          "url": "https://developer.apple.com/documentation/security/sslprotocol/sslprotocol3only"
+        },
+        "kSSLProtocolAll": {
+          "doc": "Specifies all supported versions. Deprecated in iOS.",
+          "url": "https://developer.apple.com/documentation/security/sslprotocol/sslprotocolall"
+        },
+        "kSSLProtocolUnknown": {
+          "doc": "Specifies that no protocol has been or should be negotiated or specified; use default.",
+          "url": "https://developer.apple.com/documentation/security/sslprotocol/sslprotocolunknown"
+        },
+        "kTLSProtocol1": {
+          "doc": "Specifies that the TLS 1.0 protocol is preferred but lower versions may be negotiated.",
+          "url": "https://developer.apple.com/documentation/security/sslprotocol/tlsprotocol1"
+        },
+        "kTLSProtocol11": {
+          "doc": "Specifies that the TLS 1.1 protocol is preferred but lower versions may be negotiated.",
+          "url": "https://developer.apple.com/documentation/security/sslprotocol/tlsprotocol11"
+        },
+        "kTLSProtocol12": {
+          "doc": "Specifies that the TLS 1.2 protocol is preferred but lower versions may be negotiated.",
+          "url": "https://developer.apple.com/documentation/security/sslprotocol/tlsprotocol12"
+        },
+        "kTLSProtocol13": {
+          "doc": "Specifies that the TLS 1.3 protocol is preferred but lower versions may be negotiated.",
+          "url": "https://developer.apple.com/documentation/security/sslprotocol/tlsprotocol13"
+        },
+        "kTLSProtocol1Only": {
+          "doc": "Specifies that only the TLS 1.0 protocol may be negotiated. Deprecated in iOS.",
+          "url": "https://developer.apple.com/documentation/security/sslprotocol/tlsprotocol1only"
+        },
+        "kTLSProtocolMaxSupported": {
+          "doc": "The maximum system supported version.",
+          "url": "https://developer.apple.com/documentation/security/sslprotocol/tlsprotocolmaxsupported"
+        }
+      }
+    },
+    "SSLProtocolSide": {
+      "doc": "The flags that indicate whether a context is for the server or client side of a connection.",
+      "url": "https://developer.apple.com/documentation/security/sslprotocolside",
+      "members": {
+        "kSSLClientSide": {
+          "doc": "Client side.",
+          "url": "https://developer.apple.com/documentation/security/sslprotocolside/clientside"
+        },
+        "kSSLServerSide": {
+          "doc": "Server side.",
+          "url": "https://developer.apple.com/documentation/security/sslprotocolside/serverside"
+        }
+      }
+    },
+    "SSLSessionOption": {
+      "doc": "The options that can be set for an SSL session.",
+      "url": "https://developer.apple.com/documentation/security/sslsessionoption",
+      "members": {
+        "kSSLSessionOptionAllowRenegotiation": {
+          "doc": "Allow renegotiation.",
+          "url": "https://developer.apple.com/documentation/security/sslsessionoption/allowrenegotiation"
+        },
+        "kSSLSessionOptionAllowServerIdentityChange": {
+          "doc": "Allow server identity change on renegotiation.",
+          "url": "https://developer.apple.com/documentation/security/sslsessionoption/allowserveridentitychange"
+        },
+        "kSSLSessionOptionBreakOnCertRequested": {
+          "doc": "Enables returning from SSLHandshake (with a result of errSSLClientCertRequested) when the server requests a client certificate.",
+          "url": "https://developer.apple.com/documentation/security/sslsessionoption/breakoncertrequested"
+        },
+        "kSSLSessionOptionBreakOnClientAuth": {
+          "doc": "Enables returning from SSLHandshake (with a result of errSSLClientAuthCompleted) when the client authentication portion of the handshake is complete to allow your application to perform its own certificate verification.",
+          "url": "https://developer.apple.com/documentation/security/sslsessionoption/breakonclientauth"
+        },
+        "kSSLSessionOptionBreakOnClientHello": {
+          "doc": "Break from a client hello in order to check for SNI.",
+          "url": "https://developer.apple.com/documentation/security/sslsessionoption/breakonclienthello"
+        },
+        "kSSLSessionOptionBreakOnServerAuth": {
+          "doc": "Enables returning from SSLHandshake (with a result of errSSLServerAuthCompleted) when the server authentication portion of the handshake is complete to allow your application to perform its own certificate verification.",
+          "url": "https://developer.apple.com/documentation/security/sslsessionoption/breakonserverauth"
+        },
+        "kSSLSessionOptionEnableSessionTickets": {
+          "doc": "Enable session tickets.",
+          "url": "https://developer.apple.com/documentation/security/sslsessionoption/enablesessiontickets"
+        },
+        "kSSLSessionOptionFallback": {
+          "doc": "Enable fallback countermeasures.",
+          "url": "https://developer.apple.com/documentation/security/sslsessionoption/fallback"
+        },
+        "kSSLSessionOptionFalseStart": {
+          "doc": "When enabled, TLS False Start is used if an adequate cipher-suite is negotiated.",
+          "url": "https://developer.apple.com/documentation/security/sslsessionoption/falsestart"
+        },
+        "kSSLSessionOptionSendOneByteRecord": {
+          "doc": "Enables 1/n-1 record splitting for BEAST attack mitigation.",
+          "url": "https://developer.apple.com/documentation/security/sslsessionoption/sendonebyterecord"
+        }
+      }
+    },
+    "SSLSessionState": {
+      "doc": "The flags that represent the state of an SSL session.",
+      "url": "https://developer.apple.com/documentation/security/sslsessionstate",
+      "members": {
+        "kSSLAborted": {
+          "doc": "The connection aborted.",
+          "url": "https://developer.apple.com/documentation/security/sslsessionstate/aborted"
+        },
+        "kSSLClosed": {
+          "doc": "The connection closed normally.",
+          "url": "https://developer.apple.com/documentation/security/sslsessionstate/closed"
+        },
+        "kSSLConnected": {
+          "doc": "The SSL handshake is complete; the connection is ready for normal I/O.",
+          "url": "https://developer.apple.com/documentation/security/sslsessionstate/connected"
+        },
+        "kSSLHandshake": {
+          "doc": "The SSL handshake is in progress.",
+          "url": "https://developer.apple.com/documentation/security/sslsessionstate/handshake"
+        },
+        "kSSLIdle": {
+          "doc": "No I/O has been performed yet.",
+          "url": "https://developer.apple.com/documentation/security/sslsessionstate/idle"
+        }
+      }
+    },
+    "SecAccessControlCreateFlags": {
+      "doc": "Access control constants that dictate how a keychain item may be used.",
+      "url": "https://developer.apple.com/documentation/security/secaccesscontrolcreateflags",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Initialize an access control creation flags object.",
+          "url": "https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/init(rawvalue:)"
+        },
+        "kSecAccessControlAnd": {
+          "doc": "Indicates that all constraints must be satisfied.",
+          "url": "https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/and"
+        },
+        "kSecAccessControlApplicationPassword": {
+          "doc": "Option to use an application-provided password for data encryption key generation.",
+          "url": "https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/applicationpassword"
+        },
+        "kSecAccessControlBiometryAny": {
+          "doc": "Constraint to access an item with Touch ID for any enrolled fingers, or Face ID.",
+          "url": "https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/biometryany"
+        },
+        "kSecAccessControlBiometryCurrentSet": {
+          "doc": "Constraint to access an item with Touch ID for currently enrolled fingers, or from Face ID with the currently enrolled user.",
+          "url": "https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/biometrycurrentset"
+        },
+        "kSecAccessControlDevicePasscode": {
+          "doc": "Constraint to access an item with a passcode.",
+          "url": "https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/devicepasscode"
+        },
+        "kSecAccessControlOr": {
+          "doc": "Indicates that at least one constraint must be satisfied.",
+          "url": "https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/or"
+        },
+        "kSecAccessControlPrivateKeyUsage": {
+          "doc": "Enable a private key to be used in signing a block of data or verifying a signed block.",
+          "url": "https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/privatekeyusage"
+        },
+        "kSecAccessControlTouchIDAny": {
+          "doc": "Constraint to access an item with Touch ID for any enrolled fingers.",
+          "url": "https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/touchidany"
+        },
+        "kSecAccessControlTouchIDCurrentSet": {
+          "doc": "Constraint to access an item with Touch ID for currently enrolled fingers.",
+          "url": "https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/touchidcurrentset"
+        },
+        "kSecAccessControlUserPresence": {
+          "doc": "Constraint to access an item with either biometry or passcode.",
+          "url": "https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/userpresence"
+        },
+        "kSecAccessControlWatch": {
+          "doc": "Constraint to access an item with a watch.",
+          "url": "https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/watch"
+        }
+      }
+    },
+    "SecAuthenticationType": {
+      "doc": "The authentication type to use for an Internet password.",
+      "url": "https://developer.apple.com/documentation/security/secauthenticationtype",
+      "members": {
+        "kSecAuthenticationTypeAny": {
+          "doc": "Specifies that any authentication type is acceptable.",
+          "url": "https://developer.apple.com/documentation/security/secauthenticationtype/any"
+        },
+        "kSecAuthenticationTypeDPA": {
+          "doc": "Specifies Distributed Password authentication.",
+          "url": "https://developer.apple.com/documentation/security/secauthenticationtype/dpa"
+        },
+        "kSecAuthenticationTypeDefault": {
+          "doc": "Specifies the default authentication type.",
+          "url": "https://developer.apple.com/documentation/security/secauthenticationtype/default"
+        },
+        "kSecAuthenticationTypeHTMLForm": {
+          "doc": "Specifies HTML form based authentication.",
+          "url": "https://developer.apple.com/documentation/security/secauthenticationtype/htmlform"
+        },
+        "kSecAuthenticationTypeHTTPBasic": {
+          "doc": "Specifies HTTP Basic authentication.",
+          "url": "https://developer.apple.com/documentation/security/secauthenticationtype/httpbasic"
+        },
+        "kSecAuthenticationTypeHTTPDigest": {
+          "doc": "Specifies HTTP Digest Access authentication.",
+          "url": "https://developer.apple.com/documentation/security/secauthenticationtype/httpdigest"
+        },
+        "kSecAuthenticationTypeMSN": {
+          "doc": "Specifies Microsoft Network default authentication.",
+          "url": "https://developer.apple.com/documentation/security/secauthenticationtype/msn"
+        },
+        "kSecAuthenticationTypeNTLM": {
+          "doc": "Specifies Windows NT LAN Manager authentication.",
+          "url": "https://developer.apple.com/documentation/security/secauthenticationtype/ntlm"
+        },
+        "kSecAuthenticationTypeRPA": {
+          "doc": "Specifies Remote Password authentication.",
+          "url": "https://developer.apple.com/documentation/security/secauthenticationtype/rpa"
+        }
+      }
+    },
+    "SecCSDigestAlgorithm": {
+      "doc": "The list of digest algorithms available for code signatures.",
+      "url": "https://developer.apple.com/documentation/security/seccsdigestalgorithm"
+    },
+    "SecCSFlags": {
+      "doc": "Values that can be used in the flags parameter to most code signing functions.",
+      "url": "https://developer.apple.com/documentation/security/seccsflags",
+      "members": {
+        "kSecCSConsiderExpiration": {
+          "doc": "Consider expired certificates invalid.",
+          "url": "https://developer.apple.com/documentation/security/seccsflags/considerexpiration"
+        },
+        "kSecCSDefaultFlags": {
+          "doc": "No flags (use the default behavior).",
+          "url": "https://developer.apple.com/documentation/security/seccsflags/kseccsdefaultflags"
+        }
+      }
+    },
+    "SecCodeSignatureFlags": {
+      "doc": "Specify option flags that can be embedded in a code signature during signing and that govern the use of the signature.",
+      "url": "https://developer.apple.com/documentation/security/seccodesignatureflags",
+      "members": {
+        "kSecCodeSignatureAdhoc": {
+          "doc": "Must be used without a signing identity.",
+          "url": "https://developer.apple.com/documentation/security/seccodesignatureflags/adhoc"
+        },
+        "kSecCodeSignatureEnforcement": {
+          "doc": "Enforce code signing.",
+          "url": "https://developer.apple.com/documentation/security/seccodesignatureflags/enforcement"
+        },
+        "kSecCodeSignatureForceExpiration": {
+          "doc": "Always set the kSecCSConsiderExpiration flag when validating the code.",
+          "url": "https://developer.apple.com/documentation/security/seccodesignatureflags/forceexpiration"
+        },
+        "kSecCodeSignatureForceHard": {
+          "doc": "Always set the kSecCodeStatusHard status flag on launch.",
+          "url": "https://developer.apple.com/documentation/security/seccodesignatureflags/forcehard"
+        },
+        "kSecCodeSignatureForceKill": {
+          "doc": "Always set the termination status flag on launch.",
+          "url": "https://developer.apple.com/documentation/security/seccodesignatureflags/forcekill"
+        },
+        "kSecCodeSignatureHost": {
+          "doc": "May host guest code.",
+          "url": "https://developer.apple.com/documentation/security/seccodesignatureflags/host"
+        },
+        "kSecCodeSignatureLibraryValidation": {
+          "doc": "Require library validation.",
+          "url": "https://developer.apple.com/documentation/security/seccodesignatureflags/libraryvalidation"
+        },
+        "kSecCodeSignatureRestrict": {
+          "doc": "Restrict dyld loading.",
+          "url": "https://developer.apple.com/documentation/security/seccodesignatureflags/restrict"
+        },
+        "kSecCodeSignatureRuntime": {
+          "doc": "Apply runtime hardening policies as required by the hardened runtime version.",
+          "url": "https://developer.apple.com/documentation/security/seccodesignatureflags/runtime"
+        }
+      }
+    },
+    "SecCodeStatus": {
+      "doc": "Operational flags attached by code signing services to running code.",
+      "url": "https://developer.apple.com/documentation/security/seccodestatus",
+      "members": {
+        "kSecCodeStatusDebugged": {
+          "doc": "The code has been debugged by another process that was allowed to do so.",
+          "url": "https://developer.apple.com/documentation/security/seccodestatus/debugged"
+        },
+        "kSecCodeStatusHard": {
+          "doc": "The code prefers to be denied access to resources if gaining access would invalidate it.",
+          "url": "https://developer.apple.com/documentation/security/seccodestatus/hard"
+        },
+        "kSecCodeStatusKill": {
+          "doc": "The code wants to be terminated if it ever loses its validity.",
+          "url": "https://developer.apple.com/documentation/security/seccodestatus/kill"
+        },
+        "kSecCodeStatusPlatform": {
+          "doc": "The code ships with the operating system and is signed by Apple.",
+          "url": "https://developer.apple.com/documentation/security/seccodestatus/platform"
+        },
+        "kSecCodeStatusValid": {
+          "doc": "The code is dynamically valid.",
+          "url": "https://developer.apple.com/documentation/security/seccodestatus/valid"
+        }
+      }
+    },
+    "SecCredentialType": {
+      "doc": "The credential type to be returned by SecKeyGetCredentials.",
+      "url": "https://developer.apple.com/documentation/security/seccredentialtype",
+      "members": {
+        "kSecCredentialTypeDefault": {
+          "doc": "The default setting for determining whether to present UI is used.",
+          "url": "https://developer.apple.com/documentation/security/seccredentialtype/default"
+        },
+        "kSecCredentialTypeNoUI": {
+          "doc": "Keychain operations on keys that have this credential are not allowed to present UI, and will fail if UI is required.",
+          "url": "https://developer.apple.com/documentation/security/seccredentialtype/noui"
+        },
+        "kSecCredentialTypeWithUI": {
+          "doc": "Keychain operations on keys that have this credential are allowed to present UI if required.",
+          "url": "https://developer.apple.com/documentation/security/seccredentialtype/withui"
+        }
+      }
+    },
+    "SecExternalFormat": {
+      "doc": "The external format of a keychain item.",
+      "url": "https://developer.apple.com/documentation/security/secexternalformat",
+      "members": {
+        "kSecFormatBSAFE": {
+          "doc": "Format for asymmetric keys. BSAFE is a standard from RSA Security for encryption, digital signatures, and privacy.",
+          "url": "https://developer.apple.com/documentation/security/secexternalformat/formatbsafe"
+        },
+        "kSecFormatNetscapeCertSequence": {
+          "doc": "Set of certificates in the Netscape Certificate Sequence format.",
+          "url": "https://developer.apple.com/documentation/security/secexternalformat/formatnetscapecertsequence"
+        },
+        "kSecFormatOpenSSL": {
+          "doc": "Format for asymmetric (public/private) keys. OpenSSL is an open source toolkit for Secure Sockets Layer (SSL) and Transport Layer Security (TLS). Also known as X.509 for public keys.",
+          "url": "https://developer.apple.com/documentation/security/secexternalformat/formatopenssl"
+        },
+        "kSecFormatPEMSequence": {
+          "doc": "Sequence of certificates and keys with PEM armor. PEM armor refers to a way of expressing binary data as an ASCII string so that it can be transferred over text-only channels such as email. This is the default format for multiple items.",
+          "url": "https://developer.apple.com/documentation/security/secexternalformat/formatpemsequence"
+        },
+        "kSecFormatPKCS12": {
+          "doc": "Set of certificates and private keys. PKCS12 is the Personal Information Exchange Syntax from RSA Security, Inc.",
+          "url": "https://developer.apple.com/documentation/security/secexternalformat/formatpkcs12"
+        },
+        "kSecFormatPKCS7": {
+          "doc": "Sequence of certificates, no PEM armor. PKCS7 is the Cryptographic Message Syntax Standard from RSA Security, Inc.",
+          "url": "https://developer.apple.com/documentation/security/secexternalformat/formatpkcs7"
+        },
+        "kSecFormatRawKey": {
+          "doc": "Format for symmetric keys. Raw, unformatted key bits. This is the default for symmetric keys.",
+          "url": "https://developer.apple.com/documentation/security/secexternalformat/formatrawkey"
+        },
+        "kSecFormatSSH": {
+          "doc": "OpenSSH 1 format for asymmetric (public/private) keys. OpenSSH is an OpenBSD implementation of the Secure Shell (SSH) protocol.",
+          "url": "https://developer.apple.com/documentation/security/secexternalformat/formatssh"
+        },
+        "kSecFormatSSHv2": {
+          "doc": "OpenSSH 2 format for public keys. OpenSSH version 2 private keys are in format kSecFormatOpenSSL or kSecFormatWrappedOpenSSL. OpenSSH is an OpenBSD implementation of the Secure Shell (SSH) protocol.",
+          "url": "https://developer.apple.com/documentation/security/secexternalformat/formatsshv2"
+        },
+        "kSecFormatWrappedLSH": {
+          "doc": "Not supported.",
+          "url": "https://developer.apple.com/documentation/security/secexternalformat/formatwrappedlsh"
+        },
+        "kSecFormatWrappedOpenSSL": {
+          "doc": "Format for wrapped symmetric and private keys. OpenSSL is an open-source toolkit for Secure Sockets Layer (SSL) and Transport Layer Security (TLS).",
+          "url": "https://developer.apple.com/documentation/security/secexternalformat/formatwrappedopenssl"
+        },
+        "kSecFormatWrappedPKCS8": {
+          "doc": "Format for wrapped symmetric and private keys. PKCS8 is the Private-Key Information Syntax Standard from RSA Security.",
+          "url": "https://developer.apple.com/documentation/security/secexternalformat/formatwrappedpkcs8"
+        },
+        "kSecFormatWrappedSSH": {
+          "doc": "OpenSSH 1 format for wrapped symmetric and private keys. OpenSSH is an OpenBSD implementation of the Secure Shell (SSH) protocol.",
+          "url": "https://developer.apple.com/documentation/security/secexternalformat/formatwrappedssh"
+        },
+        "kSecFormatX509Cert": {
+          "doc": "Format for certificates. DER (distinguished encoding rules) encoded. X.509 is a standard for digital certificates from the International Telecommunication Union (ITU). This is the default for certificates.",
+          "url": "https://developer.apple.com/documentation/security/secexternalformat/formatx509cert"
+        }
+      }
+    },
+    "SecExternalItemType": {
+      "doc": "The import item type.",
+      "url": "https://developer.apple.com/documentation/security/secexternalitemtype",
+      "members": {
+        "kSecItemTypeAggregate": {
+          "doc": "Indicates a set of certificates or certificates and private keys.",
+          "url": "https://developer.apple.com/documentation/security/secexternalitemtype/itemtypeaggregate"
+        },
+        "kSecItemTypeCertificate": {
+          "doc": "Indicates a certificate.",
+          "url": "https://developer.apple.com/documentation/security/secexternalitemtype/itemtypecertificate"
+        },
+        "kSecItemTypePrivateKey": {
+          "doc": "Indicates a private key.",
+          "url": "https://developer.apple.com/documentation/security/secexternalitemtype/itemtypeprivatekey"
+        },
+        "kSecItemTypePublicKey": {
+          "doc": "Indicates a public key.",
+          "url": "https://developer.apple.com/documentation/security/secexternalitemtype/itemtypepublickey"
+        },
+        "kSecItemTypeSessionKey": {
+          "doc": "Indicates a session key.",
+          "url": "https://developer.apple.com/documentation/security/secexternalitemtype/itemtypesessionkey"
+        },
+        "kSecItemTypeUnknown": {
+          "doc": "Indicates that the caller does not know the type of information being imported or exported.",
+          "url": "https://developer.apple.com/documentation/security/secexternalitemtype/itemtypeunknown"
+        }
+      }
+    },
+    "SecItemAttr": {
+      "doc": "Specifies a keychain item’s attributes.",
+      "url": "https://developer.apple.com/documentation/security/secitemattr",
+      "members": {
+        "kSecAccountItemAttr": {
+          "doc": "Identifies the account attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/accountitemattr"
+        },
+        "kSecAddressItemAttr": {
+          "doc": "Identifies the address attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/addressitemattr"
+        },
+        "kSecAlias": {
+          "doc": "Indicates an alias.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/alias"
+        },
+        "kSecAuthenticationTypeItemAttr": {
+          "doc": "Identifies the authentication type attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/authenticationtypeitemattr"
+        },
+        "kSecCertificateEncoding": {
+          "doc": "Indicates a CSSM_CERT_ENCODING type.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/certificateencoding"
+        },
+        "kSecCertificateType": {
+          "doc": "Indicates a CSSM_CERT_TYPE type.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/certificatetype"
+        },
+        "kSecCommentItemAttr": {
+          "doc": "Identifies the comment attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/commentitemattr"
+        },
+        "kSecCreationDateItemAttr": {
+          "doc": "Identifies the creation date attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/creationdateitemattr"
+        },
+        "kSecCreatorItemAttr": {
+          "doc": "Identifies the creator attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/creatoritemattr"
+        },
+        "kSecCrlEncoding": {
+          "doc": "Indicates a CSSM_CRL_ENCODING type.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/crlencoding"
+        },
+        "kSecCrlType": {
+          "doc": "Indicates a CSSM_CRL_TYPE type.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/crltype"
+        },
+        "kSecCustomIconItemAttr": {
+          "doc": "Identifies the custom icon attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/customiconitemattr"
+        },
+        "kSecDescriptionItemAttr": {
+          "doc": "Identifies the description attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/descriptionitemattr"
+        },
+        "kSecGenericItemAttr": {
+          "doc": "Identifies the generic attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/genericitemattr"
+        },
+        "kSecInvisibleItemAttr": {
+          "doc": "Identifies the invisible attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/invisibleitemattr"
+        },
+        "kSecLabelItemAttr": {
+          "doc": "Identifies the label attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/labelitemattr"
+        },
+        "kSecModDateItemAttr": {
+          "doc": "Identifies the modification date attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/moddateitemattr"
+        },
+        "kSecNegativeItemAttr": {
+          "doc": "Identifies the negative attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/negativeitemattr"
+        },
+        "kSecPathItemAttr": {
+          "doc": "Identifies the path attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/pathitemattr"
+        },
+        "kSecPortItemAttr": {
+          "doc": "Identifies the port attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/portitemattr"
+        },
+        "kSecProtocolItemAttr": {
+          "doc": "Identifies the protocol attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/protocolitemattr"
+        },
+        "kSecScriptCodeItemAttr": {
+          "doc": "Identifies the script code attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/scriptcodeitemattr"
+        },
+        "kSecSecurityDomainItemAttr": {
+          "doc": "Identifies the security domain attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/securitydomainitemattr"
+        },
+        "kSecServerItemAttr": {
+          "doc": "Identifies the server attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/serveritemattr"
+        },
+        "kSecServiceItemAttr": {
+          "doc": "Identifies the service attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/serviceitemattr"
+        },
+        "kSecSignatureItemAttr": {
+          "doc": "Identifies the server signature attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/signatureitemattr"
+        },
+        "kSecTypeItemAttr": {
+          "doc": "Identifies the type attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/typeitemattr"
+        },
+        "kSecVolumeItemAttr": {
+          "doc": "Identifies the volume attribute.",
+          "url": "https://developer.apple.com/documentation/security/secitemattr/volumeitemattr"
+        }
+      }
+    },
+    "SecItemClass": {
+      "doc": "Specifies a keychain item’s class code.",
+      "url": "https://developer.apple.com/documentation/security/secitemclass",
+      "members": {
+        "kSecAppleSharePasswordItemClass": {
+          "doc": "Indicates that the item is an AppleShare password.",
+          "url": "https://developer.apple.com/documentation/security/secitemclass/ksecapplesharepassworditemclass"
+        },
+        "kSecCertificateItemClass": {
+          "doc": "Indicates that the item is an X509 certificate.",
+          "url": "https://developer.apple.com/documentation/security/secitemclass/certificateitemclass"
+        },
+        "kSecGenericPasswordItemClass": {
+          "doc": "Indicates that the item is a generic password.",
+          "url": "https://developer.apple.com/documentation/security/secitemclass/genericpassworditemclass"
+        },
+        "kSecInternetPasswordItemClass": {
+          "doc": "Indicates that the item is an Internet password.",
+          "url": "https://developer.apple.com/documentation/security/secitemclass/internetpassworditemclass"
+        },
+        "kSecPrivateKeyItemClass": {
+          "doc": "Indicates that the item is a private key of a public-private pair.",
+          "url": "https://developer.apple.com/documentation/security/secitemclass/privatekeyitemclass"
+        },
+        "kSecPublicKeyItemClass": {
+          "doc": "Indicates that the item is a public key of a public-private pair.",
+          "url": "https://developer.apple.com/documentation/security/secitemclass/publickeyitemclass"
+        },
+        "kSecSymmetricKeyItemClass": {
+          "doc": "Indicates that the item is a private key used for symmetric-key encryption.",
+          "url": "https://developer.apple.com/documentation/security/secitemclass/symmetrickeyitemclass"
+        }
+      }
+    },
+    "SecItemImportExportFlags": {
+      "doc": "The import and export function flags.",
+      "url": "https://developer.apple.com/documentation/security/secitemimportexportflags",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Initialize an item import/export flag structure.",
+          "url": "https://developer.apple.com/documentation/security/secitemimportexportflags/init(rawvalue:)"
+        },
+        "kSecItemPemArmour": {
+          "doc": "A flag that indicates the exported data should have PEM armor.",
+          "url": "https://developer.apple.com/documentation/security/secitemimportexportflags/pemarmour"
+        }
+      }
+    },
+    "SecKeyImportExportFlags": {
+      "doc": "The import/export parameter structure flags.",
+      "url": "https://developer.apple.com/documentation/security/seckeyimportexportflags",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Initialize a key import/export flag structure.",
+          "url": "https://developer.apple.com/documentation/security/seckeyimportexportflags/init(rawvalue:)"
+        },
+        "kSecKeyImportOnlyOne": {
+          "doc": "A flag that you set to prevent importing more than one private key.",
+          "url": "https://developer.apple.com/documentation/security/seckeyimportexportflags/importonlyone"
+        },
+        "kSecKeyNoAccessControl": {
+          "doc": "A flag that indicates imported private keys have no access object attached to them.",
+          "url": "https://developer.apple.com/documentation/security/seckeyimportexportflags/noaccesscontrol"
+        },
+        "kSecKeySecurePassphrase": {
+          "doc": "A flag that indicates the user should be prompted for a passphrase on import or export.",
+          "url": "https://developer.apple.com/documentation/security/seckeyimportexportflags/securepassphrase"
+        }
+      }
+    },
+    "SecKeyOperationType": {
+      "doc": "The types of operations that you can use a cryptographic key to perform.",
+      "url": "https://developer.apple.com/documentation/security/seckeyoperationtype"
+    },
+    "SecKeySizes": {
+      "doc": "The supported sizes for keys of various common types.",
+      "url": "https://developer.apple.com/documentation/security/seckeysizes",
+      "members": {
+        "kSec3DES192": {
+          "doc": "192-bit DES.",
+          "url": "https://developer.apple.com/documentation/security/seckeysizes/sec3des192"
+        },
+        "kSecAES128": {
+          "doc": "128-bit AES.",
+          "url": "https://developer.apple.com/documentation/security/seckeysizes/secaes128"
+        },
+        "kSecAES192": {
+          "doc": "192-bit AES.",
+          "url": "https://developer.apple.com/documentation/security/seckeysizes/secaes192"
+        },
+        "kSecAES256": {
+          "doc": "256-bit AES.",
+          "url": "https://developer.apple.com/documentation/security/seckeysizes/secaes256"
+        },
+        "kSecDefaultKeySize": {
+          "doc": "The default key size for the specified type.",
+          "url": "https://developer.apple.com/documentation/security/seckeysizes/secdefaultkeysize"
+        },
+        "kSecRSAMax": {
+          "doc": "4096 bits is the maximum size for an RSA key.",
+          "url": "https://developer.apple.com/documentation/security/seckeysizes/secrsamax"
+        },
+        "kSecRSAMin": {
+          "doc": "1024 bits is the minimum size for an RSA key.",
+          "url": "https://developer.apple.com/documentation/security/seckeysizes/secrsamin"
+        },
+        "kSecp192r1": {
+          "doc": "192-bit ECC Keys for Suite-B from RFC 4492 section 5.1.1.",
+          "url": "https://developer.apple.com/documentation/security/seckeysizes/secp192r1"
+        },
+        "kSecp256r1": {
+          "doc": "256-bit ECC Keys for Suite-B from RFC 4492 section 5.1.1.",
+          "url": "https://developer.apple.com/documentation/security/seckeysizes/secp256r1"
+        },
+        "kSecp384r1": {
+          "doc": "384-bit ECC Keys for Suite-B from RFC 4492 section 5.1.1.",
+          "url": "https://developer.apple.com/documentation/security/seckeysizes/secp384r1"
+        },
+        "kSecp521r1": {
+          "doc": "521-bit ECC Keys for Suite-B from RFC 4492 section 5.1.1.",
+          "url": "https://developer.apple.com/documentation/security/seckeysizes/secp521r1"
+        }
+      }
+    },
+    "SecKeyUsage": {
+      "doc": "The flags that indicate key usage in the KeyUsage extension of a certificate.",
+      "url": "https://developer.apple.com/documentation/security/seckeyusage",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Initializes a key usage structure.",
+          "url": "https://developer.apple.com/documentation/security/seckeyusage/init(rawvalue:)"
+        },
+        "kSecKeyUsageAll": {
+          "doc": "All flags set.",
+          "url": "https://developer.apple.com/documentation/security/seckeyusage/all"
+        },
+        "kSecKeyUsageCRLSign": {
+          "doc": "The CRLSign bit is set in KeyUsage extension.",
+          "url": "https://developer.apple.com/documentation/security/seckeyusage/crlsign"
+        },
+        "kSecKeyUsageContentCommitment": {
+          "doc": "The ContentCommitment bit is set in KeyUsage extension.",
+          "url": "https://developer.apple.com/documentation/security/seckeyusage/contentcommitment"
+        },
+        "kSecKeyUsageCritical": {
+          "doc": "The KeyUsage extension is marked critical.",
+          "url": "https://developer.apple.com/documentation/security/seckeyusage/critical"
+        },
+        "kSecKeyUsageDataEncipherment": {
+          "doc": "The DataEncipherment bit is set in KeyUsage extension.",
+          "url": "https://developer.apple.com/documentation/security/seckeyusage/dataencipherment"
+        },
+        "kSecKeyUsageDecipherOnly": {
+          "doc": "The DecipherOnly bit is set in KeyUsage extension.",
+          "url": "https://developer.apple.com/documentation/security/seckeyusage/decipheronly"
+        },
+        "kSecKeyUsageDigitalSignature": {
+          "doc": "The DigitalSignature bit is set in KeyUsage extension.",
+          "url": "https://developer.apple.com/documentation/security/seckeyusage/digitalsignature"
+        },
+        "kSecKeyUsageEncipherOnly": {
+          "doc": "The EncipherOnly bit is set in KeyUsage extension.",
+          "url": "https://developer.apple.com/documentation/security/seckeyusage/encipheronly"
+        },
+        "kSecKeyUsageKeyAgreement": {
+          "doc": "The KeyAgreement bit is set in KeyUsage extension.",
+          "url": "https://developer.apple.com/documentation/security/seckeyusage/keyagreement"
+        },
+        "kSecKeyUsageKeyCertSign": {
+          "doc": "The KeyCertSign bit is set in KeyUsage extension.",
+          "url": "https://developer.apple.com/documentation/security/seckeyusage/keycertsign"
+        },
+        "kSecKeyUsageKeyEncipherment": {
+          "doc": "The KeyEncipherment bit is set in KeyUsage extension.",
+          "url": "https://developer.apple.com/documentation/security/seckeyusage/keyencipherment"
+        },
+        "kSecKeyUsageNonRepudiation": {
+          "doc": "The NonRepudiation bit is set in KeyUsage extension.",
+          "url": "https://developer.apple.com/documentation/security/seckeyusage/nonrepudiation"
+        }
+      }
+    },
+    "SecKeychainEvent": {
+      "doc": "The list of keychain events that can trigger a callback.",
+      "url": "https://developer.apple.com/documentation/security/seckeychainevent",
+      "members": {
+        "kSecAddEvent": {
+          "doc": "Indicates an item was added to a keychain.",
+          "url": "https://developer.apple.com/documentation/security/seckeychainevent/addevent"
+        },
+        "kSecDataAccessEvent": {
+          "doc": "Indicates a process has accessed a keychain item’s data.",
+          "url": "https://developer.apple.com/documentation/security/seckeychainevent/dataaccessevent"
+        },
+        "kSecDefaultChangedEvent": {
+          "doc": "Indicates that a different keychain was specified as the default.",
+          "url": "https://developer.apple.com/documentation/security/seckeychainevent/defaultchangedevent"
+        },
+        "kSecDeleteEvent": {
+          "doc": "Indicates an item was deleted from a keychain.",
+          "url": "https://developer.apple.com/documentation/security/seckeychainevent/deleteevent"
+        },
+        "kSecKeychainListChangedEvent": {
+          "doc": "Indicates the list of keychains has changed.",
+          "url": "https://developer.apple.com/documentation/security/seckeychainevent/keychainlistchangedevent"
+        },
+        "kSecLockEvent": {
+          "doc": "Indicates a keychain was locked.",
+          "url": "https://developer.apple.com/documentation/security/seckeychainevent/lockevent"
+        },
+        "kSecPasswordChangedEvent": {
+          "doc": "Indicates the keychain password was changed.",
+          "url": "https://developer.apple.com/documentation/security/seckeychainevent/passwordchangedevent"
+        },
+        "kSecTrustSettingsChangedEvent": {
+          "doc": "Indicates trust settings have changed.",
+          "url": "https://developer.apple.com/documentation/security/seckeychainevent/trustsettingschangedevent"
+        },
+        "kSecUnlockEvent": {
+          "doc": "Indicates a keychain was successfully unlocked.",
+          "url": "https://developer.apple.com/documentation/security/seckeychainevent/unlockevent"
+        },
+        "kSecUpdateEvent": {
+          "doc": "Indicates a keychain item was updated.",
+          "url": "https://developer.apple.com/documentation/security/seckeychainevent/updateevent"
+        }
+      }
+    },
+    "SecKeychainEventMask": {
+      "doc": "Bit masks corresponding to the events that can trigger a keychain callback.",
+      "url": "https://developer.apple.com/documentation/security/seckeychaineventmask",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Initializes an event mask value.",
+          "url": "https://developer.apple.com/documentation/security/seckeychaineventmask/init(rawvalue:)"
+        },
+        "kSecAddEventMask": {
+          "doc": "If the bit specified by this mask is set, your callback function is invoked when an item is added to a keychain.",
+          "url": "https://developer.apple.com/documentation/security/seckeychaineventmask/addeventmask"
+        },
+        "kSecDataAccessEventMask": {
+          "doc": "If the bit specified by this mask is set, your callback function is invoked when a process accesses a keychain item’s data.",
+          "url": "https://developer.apple.com/documentation/security/seckeychaineventmask/dataaccesseventmask"
+        },
+        "kSecDefaultChangedEventMask": {
+          "doc": "If the bit specified by this mask is set, your callback function is invoked when a different keychain is specified as the default.",
+          "url": "https://developer.apple.com/documentation/security/seckeychaineventmask/defaultchangedeventmask"
+        },
+        "kSecDeleteEventMask": {
+          "doc": "If the bit specified by this mask is set, your callback function is invoked when an item is deleted from a keychain.",
+          "url": "https://developer.apple.com/documentation/security/seckeychaineventmask/deleteeventmask"
+        },
+        "kSecEveryEventMask": {
+          "doc": "If all the bits are set, your callback function is invoked whenever any event occurs.",
+          "url": "https://developer.apple.com/documentation/security/seckeychaineventmask/everyeventmask"
+        },
+        "kSecKeychainListChangedMask": {
+          "doc": "If the bit specified by this mask is set, your callback function is invoked when a keychain list is changed.",
+          "url": "https://developer.apple.com/documentation/security/seckeychaineventmask/keychainlistchangedmask"
+        },
+        "kSecLockEventMask": {
+          "doc": "If the bit specified by this mask is set, your callback function is invoked when a keychain is locked.",
+          "url": "https://developer.apple.com/documentation/security/seckeychaineventmask/lockeventmask"
+        },
+        "kSecPasswordChangedEventMask": {
+          "doc": "If the bit specified by this mask is set, your callback function is invoked when the keychain password is changed.",
+          "url": "https://developer.apple.com/documentation/security/seckeychaineventmask/passwordchangedeventmask"
+        },
+        "kSecTrustSettingsChangedEventMask": {
+          "doc": "If the bit specified by this mask is set, your callback function is invoked when there is a change in certificate trust settings.",
+          "url": "https://developer.apple.com/documentation/security/seckeychaineventmask/trustsettingschangedeventmask"
+        },
+        "kSecUnlockEventMask": {
+          "doc": "If the bit specified by this mask is set, your callback function is invoked when a keychain is unlocked.",
+          "url": "https://developer.apple.com/documentation/security/seckeychaineventmask/unlockeventmask"
+        },
+        "kSecUpdateEventMask": {
+          "doc": "If the bit specified by this mask is set, your callback function is invoked when a keychain item is updated.",
+          "url": "https://developer.apple.com/documentation/security/seckeychaineventmask/updateeventmask"
+        }
+      }
+    },
+    "SecKeychainPromptSelector": {
+      "doc": "Bits that define when a keychain should require a passphrase.",
+      "url": "https://developer.apple.com/documentation/security/seckeychainpromptselector",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Initializes a keychain prompt selector.",
+          "url": "https://developer.apple.com/documentation/security/seckeychainpromptselector/init(rawvalue:)"
+        },
+        "kSecKeychainPromptInvalid": {
+          "doc": "Indicates that a passphrase should be required when an application with an invalid signature attempts to use the keychain, overriding the system default.",
+          "url": "https://developer.apple.com/documentation/security/seckeychainpromptselector/invalid"
+        },
+        "kSecKeychainPromptInvalidAct": {
+          "doc": "Indicates that a passphrase should be required when an application with an invalid signature attempts to use the keychain.",
+          "url": "https://developer.apple.com/documentation/security/seckeychainpromptselector/invalidact"
+        },
+        "kSecKeychainPromptRequirePassphase": {
+          "doc": "Indicates that a passphrase should be required for every access.",
+          "url": "https://developer.apple.com/documentation/security/seckeychainpromptselector/requirepassphase"
+        },
+        "kSecKeychainPromptUnsigned": {
+          "doc": "Indicates that a passphrase should be required when an unsigned application attempts to use the keychain, overriding the system default.",
+          "url": "https://developer.apple.com/documentation/security/seckeychainpromptselector/unsigned"
+        },
+        "kSecKeychainPromptUnsignedAct": {
+          "doc": "Indicates that a passphrase should be required when an unsigned application attempts to use the keychain.",
+          "url": "https://developer.apple.com/documentation/security/seckeychainpromptselector/unsignedact"
+        }
+      }
+    },
+    "SecPadding": {
+      "doc": "The types of padding to use when you create or verify a digital signature.",
+      "url": "https://developer.apple.com/documentation/security/secpadding",
+      "members": {
+        "kSecPaddingNone": {
+          "doc": "No padding.",
+          "url": "https://developer.apple.com/documentation/security/secpadding/ksecpaddingnone"
+        },
+        "kSecPaddingPKCS1": {
+          "doc": "PKCS1 padding.",
+          "url": "https://developer.apple.com/documentation/security/secpadding/pkcs1"
+        },
+        "kSecPaddingPKCS1MD2": {
+          "doc": "Data to be signed is an MD2 hash.",
+          "url": "https://developer.apple.com/documentation/security/secpadding/pkcs1md2"
+        },
+        "kSecPaddingPKCS1MD5": {
+          "doc": "Data to be signed is an MD5 hash.",
+          "url": "https://developer.apple.com/documentation/security/secpadding/pkcs1md5"
+        },
+        "kSecPaddingPKCS1SHA1": {
+          "doc": "Data to be signed is a SHA1 hash.",
+          "url": "https://developer.apple.com/documentation/security/secpadding/pkcs1sha1"
+        },
+        "kSecPaddingPKCS1SHA224": {
+          "doc": "Data to be signed is a SHA224 hash.",
+          "url": "https://developer.apple.com/documentation/security/secpadding/pkcs1sha224"
+        },
+        "kSecPaddingPKCS1SHA256": {
+          "doc": "Data to be signed is a SHA256 hash.",
+          "url": "https://developer.apple.com/documentation/security/secpadding/pkcs1sha256"
+        },
+        "kSecPaddingPKCS1SHA384": {
+          "doc": "Data to be signed is a SHA384 hash.",
+          "url": "https://developer.apple.com/documentation/security/secpadding/pkcs1sha384"
+        },
+        "kSecPaddingPKCS1SHA512": {
+          "doc": "Data to be signed is a SHA512 hash.",
+          "url": "https://developer.apple.com/documentation/security/secpadding/pkcs1sha512"
+        }
+      }
+    },
+    "SecPreferencesDomain": {
+      "doc": "The keychain preference domains.",
+      "url": "https://developer.apple.com/documentation/security/secpreferencesdomain",
+      "members": {
+        "kSecPreferencesDomainCommon": {
+          "doc": "Indicates the preferences are common to everyone.",
+          "url": "https://developer.apple.com/documentation/security/secpreferencesdomain/common"
+        },
+        "kSecPreferencesDomainDynamic": {
+          "doc": "Indicates a dynamic search list (typically provided by removable keychains such as smart cards).",
+          "url": "https://developer.apple.com/documentation/security/secpreferencesdomain/dynamic"
+        },
+        "kSecPreferencesDomainSystem": {
+          "doc": "Indicates the system or daemon preference domain preferences.",
+          "url": "https://developer.apple.com/documentation/security/secpreferencesdomain/system"
+        },
+        "kSecPreferencesDomainUser": {
+          "doc": "Indicates the user preference domain preferences.",
+          "url": "https://developer.apple.com/documentation/security/secpreferencesdomain/user"
+        }
+      }
+    },
+    "SecProtocolType": {
+      "doc": "The protocol type associated with an Internet password.",
+      "url": "https://developer.apple.com/documentation/security/secprotocoltype",
+      "members": {
+        "kSecProtocolTypeAFP": {
+          "doc": "Indicates AFP over TCP.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/afp"
+        },
+        "kSecProtocolTypeAny": {
+          "doc": "Indicates that any protocol is acceptable.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/any"
+        },
+        "kSecProtocolTypeAppleTalk": {
+          "doc": "Indicates AFP over AppleTalk.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/appletalk"
+        },
+        "kSecProtocolTypeCIFS": {
+          "doc": "Indicates CIFS.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/cifs"
+        },
+        "kSecProtocolTypeCVSpserver": {
+          "doc": "Indicates CVS pserver.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/cvspserver"
+        },
+        "kSecProtocolTypeDAAP": {
+          "doc": "Indicates DAAP.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/daap"
+        },
+        "kSecProtocolTypeEPPC": {
+          "doc": "Indicates Remote Apple Events.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/eppc"
+        },
+        "kSecProtocolTypeFTP": {
+          "doc": "Indicates FTP.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/ftp"
+        },
+        "kSecProtocolTypeFTPAccount": {
+          "doc": "Indicates a client side FTP account. The usage of this constant is deprecated as of macOS 10.3.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/ftpaccount"
+        },
+        "kSecProtocolTypeFTPProxy": {
+          "doc": "Indicates FTP proxy.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/ftpproxy"
+        },
+        "kSecProtocolTypeFTPS": {
+          "doc": "Indicates FTP over TLS/SSL.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/ftps"
+        },
+        "kSecProtocolTypeHTTP": {
+          "doc": "Indicates HTTP.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/http"
+        },
+        "kSecProtocolTypeHTTPProxy": {
+          "doc": "Indicates HTTP proxy.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/httpproxy"
+        },
+        "kSecProtocolTypeHTTPS": {
+          "doc": "Indicates HTTP over TLS/SSL.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/https"
+        },
+        "kSecProtocolTypeHTTPSProxy": {
+          "doc": "Indicates HTTPS proxy.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/httpsproxy"
+        },
+        "kSecProtocolTypeIMAP": {
+          "doc": "Indicates IMAP.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/imap"
+        },
+        "kSecProtocolTypeIMAPS": {
+          "doc": "Indicates IMAP4 over TLS/SSL.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/imaps"
+        },
+        "kSecProtocolTypeIPP": {
+          "doc": "Indicates IPP.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/ipp"
+        },
+        "kSecProtocolTypeIRC": {
+          "doc": "Indicates IRC.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/irc"
+        },
+        "kSecProtocolTypeIRCS": {
+          "doc": "Indicates IRC over TLS/SSL.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/ircs"
+        },
+        "kSecProtocolTypeLDAP": {
+          "doc": "Indicates LDAP.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/ldap"
+        },
+        "kSecProtocolTypeLDAPS": {
+          "doc": "Indicates LDAP over TLS/SSL.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/ldaps"
+        },
+        "kSecProtocolTypeNNTP": {
+          "doc": "Indicates NNTP.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/nntp"
+        },
+        "kSecProtocolTypeNNTPS": {
+          "doc": "Indicates NNTP over TLS/SSL.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/nntps"
+        },
+        "kSecProtocolTypePOP3": {
+          "doc": "Indicates POP3.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/pop3"
+        },
+        "kSecProtocolTypePOP3S": {
+          "doc": "Indicates POP3 over TLS/SSL.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/pop3s"
+        },
+        "kSecProtocolTypeRTSP": {
+          "doc": "Indicates RTSP.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/rtsp"
+        },
+        "kSecProtocolTypeRTSPProxy": {
+          "doc": "Indicates RTSP proxy.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/rtspproxy"
+        },
+        "kSecProtocolTypeSMB": {
+          "doc": "Indicates SMB.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/smb"
+        },
+        "kSecProtocolTypeSMTP": {
+          "doc": "Indicates SMTP.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/smtp"
+        },
+        "kSecProtocolTypeSOCKS": {
+          "doc": "Indicates SOCKS.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/socks"
+        },
+        "kSecProtocolTypeSSH": {
+          "doc": "Indicates SSH.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/ssh"
+        },
+        "kSecProtocolTypeSVN": {
+          "doc": "Indicates Subversion.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/svn"
+        },
+        "kSecProtocolTypeTelnet": {
+          "doc": "Indicates Telnet.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/telnet"
+        },
+        "kSecProtocolTypeTelnetS": {
+          "doc": "Indicates Telnet over TLS/SSL.",
+          "url": "https://developer.apple.com/documentation/security/secprotocoltype/telnets"
+        }
+      }
+    },
+    "SecRequirementType": {
+      "doc": "An enumeration indicating different types of internal requirements for code.",
+      "url": "https://developer.apple.com/documentation/security/secrequirementtype",
+      "members": {
+        "kSecDesignatedRequirementType": {
+          "doc": "A designated requirement.",
+          "url": "https://developer.apple.com/documentation/security/secrequirementtype/designatedrequirementtype"
+        },
+        "kSecGuestRequirementType": {
+          "doc": "What guests this code may run.",
+          "url": "https://developer.apple.com/documentation/security/secrequirementtype/guestrequirementtype"
+        },
+        "kSecHostRequirementType": {
+          "doc": "What hosts may run this code.",
+          "url": "https://developer.apple.com/documentation/security/secrequirementtype/hostrequirementtype"
+        },
+        "kSecInvalidRequirementType": {
+          "doc": "Invalid type of requirement.",
+          "url": "https://developer.apple.com/documentation/security/secrequirementtype/invalidrequirementtype"
+        },
+        "kSecLibraryRequirementType": {
+          "doc": "What libraries this code may link against.",
+          "url": "https://developer.apple.com/documentation/security/secrequirementtype/libraryrequirementtype"
+        },
+        "kSecPluginRequirementType": {
+          "doc": "What plug-ins this code may load.",
+          "url": "https://developer.apple.com/documentation/security/secrequirementtype/pluginrequirementtype"
+        },
+        "kSecRequirementTypeCount": {
+          "doc": "The number of valid requirement types.",
+          "url": "https://developer.apple.com/documentation/security/secrequirementtype/requirementtypecount"
+        }
+      }
+    },
+    "SecTransformMetaAttributeType": {
+      "doc": "The keys that describe the metadata attributes of transform attributes.",
+      "url": "https://developer.apple.com/documentation/security/sectransformmetaattributetype",
+      "members": {
+        "kSecTransformMetaAttributeCanCycle": {
+          "doc": "The transform allows cyclic behavior.",
+          "url": "https://developer.apple.com/documentation/security/sectransformmetaattributetype/cancycle"
+        },
+        "kSecTransformMetaAttributeDeferred": {
+          "doc": "The attribute defers notifications.",
+          "url": "https://developer.apple.com/documentation/security/sectransformmetaattributetype/deferred"
+        },
+        "kSecTransformMetaAttributeExternalize": {
+          "doc": "The attribute is exportable.",
+          "url": "https://developer.apple.com/documentation/security/sectransformmetaattributetype/externalize"
+        },
+        "kSecTransformMetaAttributeHasInboundConnection": {
+          "doc": "The attribute has an inbound connection.",
+          "url": "https://developer.apple.com/documentation/security/sectransformmetaattributetype/hasinboundconnection"
+        },
+        "kSecTransformMetaAttributeHasOutboundConnections": {
+          "doc": "The attribute has an outbound connection.",
+          "url": "https://developer.apple.com/documentation/security/sectransformmetaattributetype/hasoutboundconnections"
+        },
+        "kSecTransformMetaAttributeName": {
+          "doc": "The name of the attribute.",
+          "url": "https://developer.apple.com/documentation/security/sectransformmetaattributetype/name"
+        },
+        "kSecTransformMetaAttributeRef": {
+          "doc": "A direct reference to an attribute’s value.",
+          "url": "https://developer.apple.com/documentation/security/sectransformmetaattributetype/ref"
+        },
+        "kSecTransformMetaAttributeRequired": {
+          "doc": "Indicates whether the attribute value is optional.",
+          "url": "https://developer.apple.com/documentation/security/sectransformmetaattributetype/required"
+        },
+        "kSecTransformMetaAttributeRequiresOutboundConnection": {
+          "doc": "The attribute requires an outbound connection.",
+          "url": "https://developer.apple.com/documentation/security/sectransformmetaattributetype/requiresoutboundconnection"
+        },
+        "kSecTransformMetaAttributeStream": {
+          "doc": "The attribute expects stream operation.",
+          "url": "https://developer.apple.com/documentation/security/sectransformmetaattributetype/stream"
+        },
+        "kSecTransformMetaAttributeValue": {
+          "doc": "The actual value of the attribute.",
+          "url": "https://developer.apple.com/documentation/security/sectransformmetaattributetype/value"
+        }
+      }
+    },
+    "SecTrustOptionFlags": {
+      "doc": "The option flags used to condition a trust evaluation.",
+      "url": "https://developer.apple.com/documentation/security/sectrustoptionflags",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Initializes a trust option flags structure.",
+          "url": "https://developer.apple.com/documentation/security/sectrustoptionflags/init(rawvalue:)"
+        },
+        "kSecTrustOptionAllowExpired": {
+          "doc": "Allow expired certificates (except for the root certificate).",
+          "url": "https://developer.apple.com/documentation/security/sectrustoptionflags/allowexpired"
+        },
+        "kSecTrustOptionAllowExpiredRoot": {
+          "doc": "Allow expired root certificates.",
+          "url": "https://developer.apple.com/documentation/security/sectrustoptionflags/allowexpiredroot"
+        },
+        "kSecTrustOptionFetchIssuerFromNet": {
+          "doc": "Allow network downloads of CA certificates.",
+          "url": "https://developer.apple.com/documentation/security/sectrustoptionflags/fetchissuerfromnet"
+        },
+        "kSecTrustOptionImplicitAnchors": {
+          "doc": "Treat properly self-signed certificates as anchors implicitly.",
+          "url": "https://developer.apple.com/documentation/security/sectrustoptionflags/implicitanchors"
+        },
+        "kSecTrustOptionLeafIsCA": {
+          "doc": "Allow CA certificates as leaf certificates.",
+          "url": "https://developer.apple.com/documentation/security/sectrustoptionflags/leafisca"
+        },
+        "kSecTrustOptionRequireRevPerCert": {
+          "doc": "Require a positive revocation check for each certificate.",
+          "url": "https://developer.apple.com/documentation/security/sectrustoptionflags/requirerevpercert"
+        },
+        "kSecTrustOptionUseTrustSettings": {
+          "doc": "Use TrustSettings instead of anchors.",
+          "url": "https://developer.apple.com/documentation/security/sectrustoptionflags/usetrustsettings"
+        }
+      }
+    },
+    "SecTrustResultType": {
+      "doc": "Trust evaluation result codes.",
+      "url": "https://developer.apple.com/documentation/security/sectrustresulttype",
+      "members": {
+        "kSecTrustResultConfirm": {
+          "doc": "User confirmation is required before proceeding.",
+          "url": "https://developer.apple.com/documentation/security/sectrustresulttype/confirm"
+        },
+        "kSecTrustResultDeny": {
+          "doc": "The user specified that the certificate should not be trusted.",
+          "url": "https://developer.apple.com/documentation/security/sectrustresulttype/deny"
+        },
+        "kSecTrustResultFatalTrustFailure": {
+          "doc": "Trust is denied and no simple fix is available.",
+          "url": "https://developer.apple.com/documentation/security/sectrustresulttype/fataltrustfailure"
+        },
+        "kSecTrustResultInvalid": {
+          "doc": "An indication of an invalid setting or result.",
+          "url": "https://developer.apple.com/documentation/security/sectrustresulttype/invalid"
+        },
+        "kSecTrustResultOtherError": {
+          "doc": "A value that indicates a failure other than trust evaluation.",
+          "url": "https://developer.apple.com/documentation/security/sectrustresulttype/othererror"
+        },
+        "kSecTrustResultProceed": {
+          "doc": "The user granted permission to trust the certificate for the purposes designated in the specified policies.",
+          "url": "https://developer.apple.com/documentation/security/sectrustresulttype/proceed"
+        },
+        "kSecTrustResultRecoverableTrustFailure": {
+          "doc": "Trust is denied, but recovery may be possible.",
+          "url": "https://developer.apple.com/documentation/security/sectrustresulttype/recoverabletrustfailure"
+        },
+        "kSecTrustResultUnspecified": {
+          "doc": "The user did not specify a trust setting.",
+          "url": "https://developer.apple.com/documentation/security/sectrustresulttype/unspecified"
+        }
+      }
+    },
+    "SecTrustSettingsDomain": {
+      "doc": "The trust settings domains.",
+      "url": "https://developer.apple.com/documentation/security/sectrustsettingsdomain",
+      "members": {
+        "kSecTrustSettingsDomainAdmin": {
+          "doc": "Locally administered, system-wide trust settings.",
+          "url": "https://developer.apple.com/documentation/security/sectrustsettingsdomain/admin"
+        },
+        "kSecTrustSettingsDomainSystem": {
+          "doc": "System trust settings.",
+          "url": "https://developer.apple.com/documentation/security/sectrustsettingsdomain/system"
+        },
+        "kSecTrustSettingsDomainUser": {
+          "doc": "Per-user trust settings.",
+          "url": "https://developer.apple.com/documentation/security/sectrustsettingsdomain/user"
+        }
+      }
+    },
+    "SecTrustSettingsKeyUsage": {
+      "doc": "Allowed uses for the encryption key in a certificate.",
+      "url": "https://developer.apple.com/documentation/security/sectrustsettingskeyusage",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Initializes a trust settings key usage structure.",
+          "url": "https://developer.apple.com/documentation/security/sectrustsettingskeyusage/init(rawvalue:)"
+        },
+        "kSecTrustSettingsKeyUseAny": {
+          "doc": "The key can be used for any purpose.",
+          "url": "https://developer.apple.com/documentation/security/sectrustsettingskeyusage/useany"
+        },
+        "kSecTrustSettingsKeyUseEnDecryptData": {
+          "doc": "The key can be used to encrypt or decrypt data.",
+          "url": "https://developer.apple.com/documentation/security/sectrustsettingskeyusage/useendecryptdata"
+        },
+        "kSecTrustSettingsKeyUseEnDecryptKey": {
+          "doc": "The key can be used to encrypt or decrypt (wrap or unwrap) a key.",
+          "url": "https://developer.apple.com/documentation/security/sectrustsettingskeyusage/useendecryptkey"
+        },
+        "kSecTrustSettingsKeyUseKeyExchange": {
+          "doc": "The key is a private key that has been shared using a key exchange protocol, such as Diffie-Hellman key exchange.",
+          "url": "https://developer.apple.com/documentation/security/sectrustsettingskeyusage/usekeyexchange"
+        },
+        "kSecTrustSettingsKeyUseSignCert": {
+          "doc": "The key can be used to sign a certificate or verify a signature.",
+          "url": "https://developer.apple.com/documentation/security/sectrustsettingskeyusage/usesigncert"
+        },
+        "kSecTrustSettingsKeyUseSignRevocation": {
+          "doc": "The key can be used to sign an OCSP (online certificate status protocol) message or CRL (certificate verification list), or to verify a signature.",
+          "url": "https://developer.apple.com/documentation/security/sectrustsettingskeyusage/usesignrevocation"
+        },
+        "kSecTrustSettingsKeyUseSignature": {
+          "doc": "The key can be used to sign data or verify a signature.",
+          "url": "https://developer.apple.com/documentation/security/sectrustsettingskeyusage/usesignature"
+        }
+      }
+    },
+    "SecTrustSettingsResult": {
+      "doc": "Trust settings returned in usage constraints dictionaries.",
+      "url": "https://developer.apple.com/documentation/security/sectrustsettingsresult",
+      "members": {
+        "kSecTrustSettingsResultDeny": {
+          "doc": "This certificate is explicitly distrusted.",
+          "url": "https://developer.apple.com/documentation/security/sectrustsettingsresult/deny"
+        },
+        "kSecTrustSettingsResultInvalid": {
+          "doc": "Never valid in a trust settings array or in an API call.",
+          "url": "https://developer.apple.com/documentation/security/sectrustsettingsresult/invalid"
+        },
+        "kSecTrustSettingsResultTrustAsRoot": {
+          "doc": "This non-root certificate is explicitly trusted as if it were a trusted root.",
+          "url": "https://developer.apple.com/documentation/security/sectrustsettingsresult/trustasroot"
+        },
+        "kSecTrustSettingsResultTrustRoot": {
+          "doc": "This root certificate is explicitly trusted.",
+          "url": "https://developer.apple.com/documentation/security/sectrustsettingsresult/trustroot"
+        },
+        "kSecTrustSettingsResultUnspecified": {
+          "doc": "This certificate is neither trusted nor distrusted. This value can be used to specify an “allowed error” without assigning trust to a specific certificate.",
+          "url": "https://developer.apple.com/documentation/security/sectrustsettingsresult/unspecified"
+        }
+      }
+    },
+    "SessionAttributeBits": {
+      "doc": "The attributes of a security session.",
+      "url": "https://developer.apple.com/documentation/security/sessionattributebits",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Initializes a session attribute bits structure.",
+          "url": "https://developer.apple.com/documentation/security/sessionattributebits/init(rawvalue:)"
+        },
+        "sessionHasGraphicAccess": {
+          "doc": "A bit that indicates a graphic subsystem is available.",
+          "url": "https://developer.apple.com/documentation/security/sessionattributebits/sessionhasgraphicaccess"
+        },
+        "sessionHasTTY": {
+          "doc": "A bit that indicates /dev/tty is available.",
+          "url": "https://developer.apple.com/documentation/security/sessionattributebits/sessionhastty"
+        },
+        "sessionIsRemote": {
+          "doc": "A bit that indicates the session was initiated over the network.",
+          "url": "https://developer.apple.com/documentation/security/sessionattributebits/sessionisremote"
+        },
+        "sessionIsRoot": {
+          "doc": "A bit that indicates the session is the root session.",
+          "url": "https://developer.apple.com/documentation/security/sessionattributebits/sessionisroot"
+        }
+      }
+    },
+    "SessionCreationFlags": {
+      "doc": "The flags that affect the creation of a security session.",
+      "url": "https://developer.apple.com/documentation/security/sessioncreationflags",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Initializes a session creation flags value.",
+          "url": "https://developer.apple.com/documentation/security/sessioncreationflags/init(rawvalue:)"
+        },
+        "sessionKeepCurrentBootstrap": {
+          "doc": "The caller has allocated sub-bootstrap.",
+          "url": "https://developer.apple.com/documentation/security/sessioncreationflags/sessionkeepcurrentbootstrap"
+        }
+      }
+    },
+    "cssm_appledl_open_parameters_mask": {
+      "url": "https://developer.apple.com/documentation/security/cssm_appledl_open_parameters_mask"
+    },
+    "extension_data_format": {
+      "url": "https://developer.apple.com/documentation/security/extension_data_format"
+    },
+    "tls_ciphersuite_group_t": {
+      "doc": "Groups that collect ciphersuites of comparable security properties.",
+      "url": "https://developer.apple.com/documentation/security/tls_ciphersuite_group_t"
+    },
+    "tls_ciphersuite_t": {
+      "doc": "The collection of valid ciphersuites.",
+      "url": "https://developer.apple.com/documentation/security/tls_ciphersuite_t"
+    },
+    "tls_protocol_version_t": {
+      "doc": "The collection of supported TLS and DTLS versions.",
+      "url": "https://developer.apple.com/documentation/security/tls_protocol_version_t",
+      "members": {
+        "tls_protocol_version_DTLSv10": {
+          "doc": "The DTLS 1.0 protocol.",
+          "url": "https://developer.apple.com/documentation/security/tls_protocol_version_t/dtlsv10"
+        },
+        "tls_protocol_version_DTLSv12": {
+          "doc": "The DTLS 1.2 protocol.",
+          "url": "https://developer.apple.com/documentation/security/tls_protocol_version_t/dtlsv12"
+        },
+        "tls_protocol_version_TLSv10": {
+          "doc": "The TLS 1.0 protocol.",
+          "url": "https://developer.apple.com/documentation/security/tls_protocol_version_t/tlsv10"
+        },
+        "tls_protocol_version_TLSv11": {
+          "doc": "The TLS 1.1 protocol.",
+          "url": "https://developer.apple.com/documentation/security/tls_protocol_version_t/tlsv11"
+        },
+        "tls_protocol_version_TLSv12": {
+          "doc": "The TLS 1.2 protocol.",
+          "url": "https://developer.apple.com/documentation/security/tls_protocol_version_t/tlsv12"
+        },
+        "tls_protocol_version_TLSv13": {
+          "doc": "The TLS 1.3 protocol.",
+          "url": "https://developer.apple.com/documentation/security/tls_protocol_version_t/tlsv13"
+        }
+      }
+    }
+  },
+  "structs": {
+    "AuthorizationExternalForm": {
+      "doc": "The external representation of an authorization reference.",
+      "url": "https://developer.apple.com/documentation/security/authorizationexternalform"
+    },
+    "AuthorizationItem": {
+      "doc": "A structure containing information about an authorization right or the authorization environment.",
+      "url": "https://developer.apple.com/documentation/security/authorizationitem"
+    },
+    "AuthorizationItemSet": {
+      "doc": "A structure containing a set of authorization items.",
+      "url": "https://developer.apple.com/documentation/security/authorizationitemset"
+    },
+    "CSSM_APPLE_CL_CSR_REQUEST": {
+      "url": "https://developer.apple.com/documentation/security/cssm_apple_cl_csr_request"
+    },
+    "CSSM_APPLE_TP_ACTION_DATA": {
+      "url": "https://developer.apple.com/documentation/security/cssm_apple_tp_action_data"
+    },
+    "CSSM_APPLE_TP_CERT_REQUEST": {
+      "url": "https://developer.apple.com/documentation/security/cssm_apple_tp_cert_request"
+    },
+    "CSSM_APPLE_TP_CRL_OPTIONS": {
+      "url": "https://developer.apple.com/documentation/security/cssm_apple_tp_crl_options"
+    },
+    "CSSM_APPLE_TP_NAME_OID": {
+      "url": "https://developer.apple.com/documentation/security/cssm_apple_tp_name_oid"
+    },
+    "CSSM_APPLE_TP_SMIME_OPTIONS": {
+      "url": "https://developer.apple.com/documentation/security/cssm_apple_tp_smime_options"
+    },
+    "CSSM_APPLE_TP_SSL_OPTIONS": {
+      "url": "https://developer.apple.com/documentation/security/cssm_apple_tp_ssl_options"
+    },
+    "CSSM_TP_APPLE_EVIDENCE_HEADER": {
+      "url": "https://developer.apple.com/documentation/security/cssm_tp_apple_evidence_header"
+    },
+    "CSSM_TP_APPLE_EVIDENCE_INFO": {
+      "url": "https://developer.apple.com/documentation/security/cssm_tp_apple_evidence_info"
+    },
+    "CSSM_TUPLE": {
+      "url": "https://developer.apple.com/documentation/security/cssm_tuple"
+    },
+    "SSLContext": {
+      "doc": "An opaque type that represents an SSL session context object.",
+      "url": "https://developer.apple.com/documentation/security/sslcontext"
+    },
+    "SecAsn1AlgId": {
+      "doc": "A structure identifying an ASN.1 algorithm by its OID, and its corresponding parameters.",
+      "url": "https://developer.apple.com/documentation/security/secasn1algid"
+    },
+    "SecAsn1PubKeyInfo": {
+      "doc": "A structure containing a public key and its associated algorithm.",
+      "url": "https://developer.apple.com/documentation/security/secasn1pubkeyinfo"
+    },
+    "SecAsn1Template_struct": {
+      "doc": "A structure that defines one element of a BER or DER encoding.",
+      "url": "https://developer.apple.com/documentation/security/secasn1template_struct"
+    },
+    "SecItemImportExportKeyParameters": {
+      "doc": "The import/export parameter structure.",
+      "url": "https://developer.apple.com/documentation/security/secitemimportexportkeyparameters"
+    },
+    "SecKeyImportExportParameters": {
+      "doc": "The legacy import/export parameter structure.",
+      "url": "https://developer.apple.com/documentation/security/seckeyimportexportparameters"
+    },
+    "SecKeychainAttribute": {
+      "doc": "A structure that holds a single keychain attribute.",
+      "url": "https://developer.apple.com/documentation/security/seckeychainattribute"
+    },
+    "SecKeychainAttributeInfo": {
+      "doc": "A structure that represents an attribute.",
+      "url": "https://developer.apple.com/documentation/security/seckeychainattributeinfo"
+    },
+    "SecKeychainAttributeList": {
+      "doc": "A list of keychain attributes.",
+      "url": "https://developer.apple.com/documentation/security/seckeychainattributelist"
+    },
+    "SecKeychainCallbackInfo": {
+      "doc": "Information about a keychain event that keychain services deliver to your app via a callback function.",
+      "url": "https://developer.apple.com/documentation/security/seckeychaincallbackinfo"
+    },
+    "SecKeychainSettings": {
+      "doc": "A structure that contains information about keychain settings.",
+      "url": "https://developer.apple.com/documentation/security/seckeychainsettings"
+    },
+    "cssm_applecspdl_db_change_password_parameters": {
+      "url": "https://developer.apple.com/documentation/security/cssm_applecspdl_db_change_password_parameters"
+    },
+    "cssm_applecspdl_db_is_locked_parameters": {
+      "url": "https://developer.apple.com/documentation/security/cssm_applecspdl_db_is_locked_parameters"
+    },
+    "cssm_applecspdl_db_settings_parameters": {
+      "url": "https://developer.apple.com/documentation/security/cssm_applecspdl_db_settings_parameters"
+    },
+    "cssm_appledl_open_parameters": {
+      "url": "https://developer.apple.com/documentation/security/cssm_appledl_open_parameters"
+    },
+    "cssm_authorizationgroup": {
+      "url": "https://developer.apple.com/documentation/security/cssm_authorizationgroup"
+    },
+    "cssm_csp_operational_statistics": {
+      "url": "https://developer.apple.com/documentation/security/cssm_csp_operational_statistics"
+    },
+    "cssm_date": {
+      "url": "https://developer.apple.com/documentation/security/cssm_date"
+    },
+    "cssm_db_schema_index_info": {
+      "url": "https://developer.apple.com/documentation/security/cssm_db_schema_index_info"
+    },
+    "cssm_dl_db_handle": {
+      "url": "https://developer.apple.com/documentation/security/cssm_dl_db_handle"
+    },
+    "cssm_dl_pkcs11_attributes": {
+      "url": "https://developer.apple.com/documentation/security/cssm_dl_pkcs11_attributes"
+    },
+    "cssm_func_name_addr": {
+      "url": "https://developer.apple.com/documentation/security/cssm_func_name_addr"
+    },
+    "cssm_guid": {
+      "url": "https://developer.apple.com/documentation/security/cssm_guid"
+    },
+    "cssm_key_size": {
+      "url": "https://developer.apple.com/documentation/security/cssm_key_size"
+    },
+    "cssm_kr_wrappedproductinfo": {
+      "url": "https://developer.apple.com/documentation/security/cssm_kr_wrappedproductinfo"
+    },
+    "cssm_list": {
+      "url": "https://developer.apple.com/documentation/security/cssm_list"
+    },
+    "cssm_memory_funcs": {
+      "url": "https://developer.apple.com/documentation/security/cssm_memory_funcs"
+    },
+    "cssm_name_list": {
+      "url": "https://developer.apple.com/documentation/security/cssm_name_list"
+    },
+    "cssm_parsed_cert": {
+      "url": "https://developer.apple.com/documentation/security/cssm_parsed_cert"
+    },
+    "cssm_parsed_crl": {
+      "url": "https://developer.apple.com/documentation/security/cssm_parsed_crl"
+    },
+    "cssm_query_size_data": {
+      "url": "https://developer.apple.com/documentation/security/cssm_query_size_data"
+    },
+    "cssm_range": {
+      "url": "https://developer.apple.com/documentation/security/cssm_range"
+    },
+    "cssm_tp_result_set": {
+      "url": "https://developer.apple.com/documentation/security/cssm_tp_result_set"
+    },
+    "cssm_version": {
+      "url": "https://developer.apple.com/documentation/security/cssm_version"
+    },
+    "cssm_x509_extensionTagAndValue": {
+      "url": "https://developer.apple.com/documentation/security/cssm_x509_extensiontagandvalue"
+    },
+    "x509_validity": {
+      "url": "https://developer.apple.com/documentation/security/x509_validity"
+    }
+  }
+}

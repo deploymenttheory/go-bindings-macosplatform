@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "framework": "AppTrackingTransparency",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "ATTrackingManager": {
+      "doc": "A class that provides a tracking authorization request and the tracking authorization status of the app.",
+      "url": "https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager"
+    }
+  },
+  "enums": {
+    "ATTrackingManagerAuthorizationStatus": {
+      "doc": "The status values for app tracking authorization.",
+      "url": "https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanagerauthorizationstatus"
+    }
+  },
+  "methods": {
+    "ATTrackingManager": {
+      "+requestTrackingAuthorizationWithCompletionHandler:": {
+        "doc": "The request for user authorization to access app-related data.",
+        "url": "https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/requesttrackingauthorization(completionhandler:)"
+      }
+    }
+  },
+  "properties": {
+    "ATTrackingManager": {
+      "ATTrackingManagerAuthorizationStatus": {
+        "doc": "The status values for app tracking authorization.",
+        "url": "https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus"
+      },
+      "trackingAuthorizationStatus": {
+        "doc": "The authorization status that is current for the calling application.",
+        "url": "https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/trackingauthorizationstatus"
+      }
+    }
+  }
+}

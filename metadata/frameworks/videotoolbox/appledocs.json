@@ -1,0 +1,898 @@
+{
+  "schema_version": 1,
+  "framework": "VideoToolbox",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "VTFrameProcessor": {
+      "doc": "A class that creates a new frame processor for the configured video effect.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtframeprocessor"
+    },
+    "VTFrameProcessorFrame": {
+      "doc": "An object that wraps video frames to send to the processor, as source, reference, or output frames.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtframeprocessorframe"
+    },
+    "VTFrameProcessorOpticalFlow": {
+      "doc": "A class to wrap bidirectional optical flow to send to the processor.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtframeprocessoropticalflow"
+    },
+    "VTFrameRateConversionConfiguration": {
+      "doc": "An object that enables the frame rate conversion on a frame processing session.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionconfiguration"
+    },
+    "VTFrameRateConversionParameters": {
+      "doc": "An object that contains the required input and output parameters to run a frame rate conversion processor on a frame.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionparameters"
+    },
+    "VTLowLatencyFrameInterpolationConfiguration": {
+      "doc": "Configuration that you use to program Video Toolbox frame processor for low-latency frame interpolation.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration"
+    },
+    "VTLowLatencyFrameInterpolationParameters": {
+      "doc": "An object that contains both input and output parameters that the low-latency frame interpolation processor needs.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationparameters"
+    },
+    "VTLowLatencySuperResolutionScalerConfiguration": {
+      "doc": "An object you use to configure frame processor for low-latency super-resolution scaler processing.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration"
+    },
+    "VTLowLatencySuperResolutionScalerParameters": {
+      "doc": "An object that contains both input and output parameters that the low-latency super-resolution scaler frame processor needs.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerparameters"
+    },
+    "VTMotionBlurConfiguration": {
+      "doc": "A configuration object to enable motion blur on a frame processing session.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration"
+    },
+    "VTMotionBlurParameters": {
+      "doc": "This object contains both input and output parameters necessary to run the motion blur processor on a frame.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurparameters"
+    },
+    "VTOpticalFlowConfiguration": {
+      "doc": "A configuration object that enables optical flow on a frame processing session.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration"
+    },
+    "VTOpticalFlowParameters": {
+      "doc": "An object that describes frame-level optical flow parameters.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowparameters"
+    },
+    "VTSuperResolutionScalerConfiguration": {
+      "doc": "Configuration that you use to set up the super-resolution processor.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration"
+    },
+    "VTSuperResolutionScalerParameters": {
+      "doc": "An object that contains both input and output parameters that the super-resolution processor needs to run on a frame.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerparameters"
+    },
+    "VTTemporalNoiseFilterConfiguration": {
+      "doc": "A configuration object to initiate a frame processor and use temporal noise-filter processor.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterconfiguration"
+    },
+    "VTTemporalNoiseFilterParameters": {
+      "doc": "Encapsulates the frame-level parameters necessary for processing a source frame using temporal noise-filter processor.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterparameters"
+    }
+  },
+  "protocols": {
+    "VTFrameProcessorConfiguration": {
+      "doc": "A protocol that describes the configuration of a processor to use during a video processing session.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtframeprocessorconfiguration"
+    },
+    "VTFrameProcessorParameters": {
+      "doc": "The base protocol for input and output processing parameters for a frame processor implementation.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtframeprocessorparameters"
+    }
+  },
+  "enums": {
+    "VTCompressionSessionOptionFlags": {
+      "doc": "Flags to pass to a compression session.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtcompressionsessionoptionflags",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates a flags structure with a raw value.",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtcompressionsessionoptionflags/init(rawvalue:)"
+        },
+        "kVTCompressionSessionBeginFinalPass": {
+          "doc": "A flag that indicates the last pass in a multi-pass compression session.",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtcompressionsessionoptionflags/beginfinalpass"
+        }
+      }
+    },
+    "VTDecodeFrameFlags": {
+      "doc": "Flags to pass to a decompression session and the video decoder.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtdecodeframeflags",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates a flags structure with a raw value.",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtdecodeframeflags/init(rawvalue:)"
+        },
+        "kVTDecodeFrame_1xRealTimePlayback": {
+          "doc": "A flag that provides a hint to the video decoder that it’s ok to use a low-power mode that can’t decode faster than realtime.",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtdecodeframeflags/kvtdecodeframe_1xrealtimeplayback"
+        },
+        "kVTDecodeFrame_DoNotOutputFrame": {
+          "doc": "A flag that provides a hint to the decompression session and video decoder not to return a frame.",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtdecodeframeflags/kvtdecodeframe_donotoutputframe"
+        },
+        "kVTDecodeFrame_EnableAsynchronousDecompression": {
+          "doc": "A flag that indicates to enable asynchronous decompression.",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtdecodeframeflags/kvtdecodeframe_enableasynchronousdecompression"
+        },
+        "kVTDecodeFrame_EnableTemporalProcessing": {
+          "doc": "A flag that indicates to enable temporal processing.",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtdecodeframeflags/kvtdecodeframe_enabletemporalprocessing"
+        }
+      }
+    },
+    "VTDecodeInfoFlags": {
+      "doc": "Flags that provide information about the status of a decode operation.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtdecodeinfoflags",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates a flag from a raw unsigned-integer value.",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtdecodeinfoflags/init(rawvalue:)"
+        },
+        "kVTDecodeInfo_Asynchronous": {
+          "doc": "A flag that indicates the decode operation ran asynchronously.",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtdecodeinfoflags/asynchronous"
+        },
+        "kVTDecodeInfo_FrameDropped": {
+          "doc": "A flag that indicates the decode operation dropped a frame.",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtdecodeinfoflags/framedropped"
+        },
+        "kVTDecodeInfo_ImageBufferModifiable": {
+          "doc": "A flag that indicates the image buffer is safe to modify.",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtdecodeinfoflags/imagebuffermodifiable"
+        },
+        "kVTDecodeInfo_SkippedLeadingFrameDropped": {
+          "doc": "A flag that indicates whether the decode process skips leading frames after dropping a synchronization frame.",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtdecodeinfoflags/skippedleadingframedropped"
+        }
+      }
+    },
+    "VTEncodeInfoFlags": {
+      "doc": "Flags that indicate encoder state.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtencodeinfoflags",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates a flags structure with a raw value.",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtencodeinfoflags/init(rawvalue:)"
+        },
+        "kVTEncodeInfo_Asynchronous": {
+          "doc": "A flag that indicates that an encode operation ran asynchronously.",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtencodeinfoflags/asynchronous"
+        },
+        "kVTEncodeInfo_FrameDropped": {
+          "doc": "A flag that indicates that a frame dropped during encoding.",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtencodeinfoflags/framedropped"
+        }
+      }
+    },
+    "VTMotionEstimationFrameFlags": {
+      "doc": "Flags to control processing of a frame you pass to the motion-estimation session.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionestimationframeflags",
+      "members": {
+        "kVTMotionEstimationFrameFlags_CurrentBufferWillBeNextReferenceBuffer": {
+          "doc": "A hint to the motion-estimation session that you are going to reuse the currentBuffer as referenceBuffer in the next call to VTMotionEstimationSessionEstimateMotionVectors. Using this flag allows the motion-estimation processor to deliver better performance.",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionestimationframeflags/kvtmotionestimationframeflags_currentbufferwillbenextreferencebuffer"
+        }
+      }
+    },
+    "VTMotionEstimationInfoFlags": {
+      "doc": "Directives that provide information back to you with the results of motion-estimation.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionestimationinfoflags"
+    }
+  },
+  "structs": {
+    "VTDecompressionOutputCallbackRecord": {
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtdecompressionoutputcallbackrecord"
+    },
+    "VTInt32Point": {
+      "doc": "A structure that represents a 32-bit integer point value.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtint32point"
+    },
+    "VTInt32Size": {
+      "doc": "A structure that represents a 32-bit integer size value.",
+      "url": "https://developer.apple.com/documentation/videotoolbox/vtint32size"
+    }
+  },
+  "methods": {
+    "VTFrameProcessor": {
+      "-endSession": {
+        "doc": "Performs all necessary tasks to end the session.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframeprocessor/endsession()"
+      },
+      "-init": {
+        "doc": "Creates a new frame processor.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframeprocessor/init()"
+      },
+      "-processWithCommandBuffer:parameters:": {
+        "doc": "Asynchronously performs the video effect specified in the start session specifically for Metal.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframeprocessor/process(with:parameters:)"
+      },
+      "-processWithParameters:completionHandler:": {
+        "doc": "Asynchronously performs the video effect specified in the start session.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframeprocessor/process(parameters:completionhandler:)"
+      },
+      "-processWithParameters:error:": {
+        "doc": "Synchronously performs the configured video effect.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframeprocessor/processwithparameters:error:"
+      },
+      "-processWithParameters:frameOutputHandler:": {
+        "doc": "Asynchronously performs the processor effects and outputs each frame separately.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframeprocessor/processwithparameters:frameoutputhandler:"
+      },
+      "-startSessionWithConfiguration:error:": {
+        "doc": "Starts a new session and configures the processor pipeline.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframeprocessor/startsession(configuration:)"
+      }
+    },
+    "VTFrameProcessorFrame": {
+      "-initWithBuffer:presentationTimeStamp:": {
+        "doc": "Creates a frame object with a pixel buffer and presentation time.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframeprocessorframe/init(buffer:presentationtimestamp:)"
+      }
+    },
+    "VTFrameProcessorOpticalFlow": {
+      "-initWithForwardFlow:backwardFlow:": {
+        "doc": "Creates an object with forward and backward optical flow pixel buffers.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframeprocessoropticalflow/init(forwardflow:backwardflow:)"
+      }
+    },
+    "VTFrameRateConversionConfiguration": {
+      "-initWithFrameWidth:frameHeight:usePrecomputedFlow:qualityPrioritization:revision:": {
+        "doc": "Creates a new frame rate conversion configuration with specified flow width and height.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionconfiguration/init(framewidth:frameheight:useprecomputedflow:qualityprioritization:revision:)"
+      }
+    },
+    "VTFrameRateConversionParameters": {
+      "-initWithSourceFrame:nextFrame:opticalFlow:interpolationPhase:submissionMode:destinationFrames:": {
+        "doc": "Creates a new frame rate conversion parameters object.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionparameters/initwithsourceframe:nextframe:opticalflow:interpolationphase:submissionmode:destinationframes:"
+      }
+    },
+    "VTLowLatencyFrameInterpolationConfiguration": {
+      "+maximumDimensionForSpatialScaleFactor:": {
+        "doc": "The maximum value for either dimension of the source frame, in pixels, for a given spatial scale factor.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration/maximumdimension(forspatialscalefactor:)"
+      },
+      "+maximumPixelCountForSpatialScaleFactor:": {
+        "doc": "The maximum total number of pixels in the source frame for a given spatial scale factor.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration/maximumpixelcount(forspatialscalefactor:)"
+      },
+      "-initWithFrameWidth:frameHeight:numberOfInterpolatedFrames:": {
+        "doc": "Creates a new low-latency frame interpolation configuration for frame-rate conversion.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration/init(framewidth:frameheight:numberofinterpolatedframes:)"
+      },
+      "-initWithFrameWidth:frameHeight:spatialScaleFactor:": {
+        "doc": "Creates a new low-latency frame interpolation configuration for spatial scaling and temporal scaling.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration/init(framewidth:frameheight:spatialscalefactor:)"
+      }
+    },
+    "VTLowLatencyFrameInterpolationParameters": {
+      "-initWithSourceFrame:previousFrame:interpolationPhase:destinationFrames:": {
+        "doc": "Creates a new low-latency frame interpolation parameters object.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationparameters/initwithsourceframe:previousframe:interpolationphase:destinationframes:"
+      }
+    },
+    "VTLowLatencySuperResolutionScalerConfiguration": {
+      "+supportedScaleFactorsForFrameWidth:frameHeight:": {
+        "doc": "Returns an array of supported scale factors values, or an empty list if the processor doesn’t support the dimensions.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/supportedscalefactorsforframewidth:frameheight:"
+      },
+      "-initWithFrameWidth:frameHeight:scaleFactor:": {
+        "doc": "Creates a new low-latency super-resolution scaler configuration with specified frame width and height.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/init(framewidth:frameheight:scalefactor:)"
+      }
+    },
+    "VTLowLatencySuperResolutionScalerParameters": {
+      "-initWithSourceFrame:destinationFrame:": {
+        "doc": "Creates a new low-latency, super-resolution scaler parameters object.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerparameters/init(sourceframe:destinationframe:)"
+      }
+    },
+    "VTMotionBlurConfiguration": {
+      "-initWithFrameWidth:frameHeight:usePrecomputedFlow:qualityPrioritization:revision:": {
+        "doc": "Creates a new motion blur configuration with specified flow width and height.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/init(framewidth:frameheight:useprecomputedflow:qualityprioritization:revision:)"
+      }
+    },
+    "VTSuperResolutionScalerConfiguration": {
+      "-downloadConfigurationModelWithCompletionHandler:": {
+        "doc": "Downloads models that the system needs for the current configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/downloadconfigurationmodel(completionhandler:)"
+      },
+      "-initWithFrameWidth:frameHeight:scaleFactor:inputType:usePrecomputedFlow:qualityPrioritization:revision:": {
+        "doc": "Creates a new super-resolution scaler processor configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/init(framewidth:frameheight:scalefactor:inputtype:useprecomputedflow:qualityprioritization:revision:)"
+      }
+    },
+    "VTSuperResolutionScalerParameters": {
+      "-initWithSourceFrame:previousFrame:previousOutputFrame:opticalFlow:submissionMode:destinationFrame:": {
+        "doc": "Creates a new super-resolution scaler parameters instance.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerparameters/init(sourceframe:previousframe:previousoutputframe:opticalflow:submissionmode:destinationframe:)"
+      }
+    },
+    "VTTemporalNoiseFilterConfiguration": {
+      "-initWithFrameWidth:frameHeight:sourcePixelFormat:": {
+        "doc": "Creates a new temporal noise-processor configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterconfiguration/init(framewidth:frameheight:sourcepixelformat:)"
+      }
+    },
+    "VTTemporalNoiseFilterParameters": {
+      "-initWithSourceFrame:nextFrames:previousFrames:destinationFrame:filterStrength:hasDiscontinuity:": {
+        "doc": "Creates a new VTTemporalNoiseFilterParameters object.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterparameters/init(sourceframe:nextframes:previousframes:destinationframe:filterstrength:hasdiscontinuity:)"
+      }
+    }
+  },
+  "properties": {
+    "VTFrameProcessorFrame": {
+      "buffer": {
+        "doc": "The pixel buffer specified when the object was created.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframeprocessorframe/buffer"
+      },
+      "presentationTimeStamp": {
+        "doc": "The presentation timestamp specified when the object was created.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframeprocessorframe/presentationtimestamp"
+      }
+    },
+    "VTFrameProcessorOpticalFlow": {
+      "backwardFlow": {
+        "doc": "The backward optical flow pixel buffer that was provided when the object was created.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframeprocessoropticalflow/backwardflow"
+      },
+      "forwardFlow": {
+        "doc": "The forward optical flow pixel that was provided when the object was created.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframeprocessoropticalflow/forwardflow"
+      }
+    },
+    "VTFrameRateConversionConfiguration": {
+      "VTFrameRateConversionConfigurationQualityPrioritization": {
+        "doc": "Values that specify whether to prioritize quality or performance.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionconfiguration/qualityprioritization-swift.enum"
+      },
+      "VTFrameRateConversionConfigurationRevision": {
+        "doc": "The specific algorithm or configuration revision that is to be used to perform the request.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionconfiguration/revision-swift.enum"
+      },
+      "defaultRevision": {
+        "doc": "The default revision of a particular algorithm or configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionconfiguration/defaultrevision"
+      },
+      "destinationPixelBufferAttributes": {
+        "doc": "A dictionary of pixel buffer attributes describing the requirements for pixel buffers used as destination frames.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionconfiguration/destinationpixelbufferattributes"
+      },
+      "frameHeight": {
+        "doc": "The height of a source frame in pixels.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionconfiguration/frameheight"
+      },
+      "frameSupportedPixelFormats": {
+        "doc": "Supported pixel formats available for source frames for current configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionconfiguration/framesupportedpixelformats-9w7f9"
+      },
+      "frameWidth": {
+        "doc": "The width of a source frame in pixels.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionconfiguration/framewidth"
+      },
+      "processorSupported": {
+        "doc": "A Boolean value that indicates whether the processor supported on the current configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionconfiguration/processorsupported"
+      },
+      "qualityPrioritization": {
+        "doc": "A value that specifies whether to prioritize quality or performance.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionconfiguration/qualityprioritization-swift.property"
+      },
+      "revision": {
+        "doc": "The specific algorithm or configuration revision to use to perform the request.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionconfiguration/revision-swift.property"
+      },
+      "sourcePixelBufferAttributes": {
+        "doc": "A dictionary of pixel buffer attributes describing requirements for pixel buffers used as source frames and reference frames.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionconfiguration/sourcepixelbufferattributes"
+      },
+      "supported": {
+        "doc": "Reports whether the system supports this processor.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionconfiguration/issupported"
+      },
+      "supportedRevisions": {
+        "doc": "The collection of currently-supported algorithms or configuration revisions for the class of configurations.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionconfiguration/supportedrevisions"
+      },
+      "usePrecomputedFlow": {
+        "doc": "A Boolean value to indicates whether the optical flow will be provided by the user.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionconfiguration/useprecomputedflow"
+      }
+    },
+    "VTFrameRateConversionParameters": {
+      "VTFrameRateConversionParametersSubmissionMode": {
+        "doc": "A value describing the processing request in a parameters submission object.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionparameters/submissionmode-swift.enum"
+      },
+      "destinationFrames": {
+        "doc": "A caller-allocated array of frames that contains the pixel buffers to receive the results.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionparameters/destinationframes"
+      },
+      "init(sourceFrame:nextFrame:opticalFlow:interpolationPhase:submissionMode:destinationFrames:)": {
+        "doc": "Creates a new frame rate conversion parameters object.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionparameters/init(sourceframe:nextframe:opticalflow:interpolationphase:submissionmode:destinationframes:)"
+      },
+      "interpolationPhase": {
+        "doc": "An array of floating-point values that indicate which intervals to insert a frame between the current and next frame.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionparameters/interpolationphase-6wdns"
+      },
+      "nextFrame": {
+        "doc": "The next source frame in presentation time order.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionparameters/nextframe"
+      },
+      "opticalFlow": {
+        "doc": "A property that defines the optical flow for an object.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionparameters/opticalflow"
+      },
+      "sourceFrame": {
+        "doc": "The current source frame.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionparameters/sourceframe"
+      },
+      "submissionMode": {
+        "doc": "A value describing the processing request in a parameters submission object.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtframerateconversionparameters/submissionmode-swift.property"
+      }
+    },
+    "VTLowLatencyFrameInterpolationConfiguration": {
+      "destinationPixelBufferAttributes": {
+        "doc": "Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration/destinationpixelbufferattributes"
+      },
+      "frameHeight": {
+        "doc": "Height of source frames in pixels.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration/frameheight"
+      },
+      "frameSupportedPixelFormats": {
+        "doc": "Available supported pixel formats for current configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration/framesupportedpixelformats"
+      },
+      "frameWidth": {
+        "doc": "Width of source frames in pixels.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration/framewidth"
+      },
+      "numberOfInterpolatedFrames": {
+        "doc": "Number of uniformly spaced frames for which you configured the processor.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration/numberofinterpolatedframes"
+      },
+      "sourcePixelBufferAttributes": {
+        "doc": "Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration/sourcepixelbufferattributes"
+      },
+      "spatialScaleFactor": {
+        "doc": "Configured spatial scale factor as an integer.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration/spatialscalefactor"
+      },
+      "supported": {
+        "doc": "Reports whether the system supports this processor.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration/issupported"
+      }
+    },
+    "VTLowLatencyFrameInterpolationParameters": {
+      "destinationFrames": {
+        "doc": "Array of destination frames that you provided when creating the low-latency frame interpolation parameters object.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationparameters/destinationframes"
+      },
+      "interpolationPhase": {
+        "doc": "Array of interpolation phases that you provided when creating the low-latency frame interpolation parameters object.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationparameters/interpolationphase-33m49"
+      },
+      "previousFrame": {
+        "doc": "Previous frame that you provided when creating the low-latency frame interpolation parameters object.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationparameters/previousframe"
+      },
+      "sourceFrame": {
+        "doc": "Source frame that you provided when creating the low-latency frame interpolation parameters object.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationparameters/sourceframe"
+      }
+    },
+    "VTLowLatencySuperResolutionScalerConfiguration": {
+      "destinationPixelBufferAttributes": {
+        "doc": "Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/destinationpixelbufferattributes"
+      },
+      "frameHeight": {
+        "doc": "Height of source frame in pixels.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/frameheight"
+      },
+      "frameSupportedPixelFormats": {
+        "doc": "Available supported pixel formats for source frames for current configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/framesupportedpixelformats"
+      },
+      "frameWidth": {
+        "doc": "Width of source frame in pixels.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/framewidth"
+      },
+      "maximumDimensions": {
+        "doc": "Maximum dimensions for a source frame for the processor.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/maximumdimensions"
+      },
+      "minimumDimensions": {
+        "doc": "Minimum dimensions for a source frame for the processor.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/minimumdimensions"
+      },
+      "scaleFactor": {
+        "doc": "Scale factor with which you initialized the configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/scalefactor"
+      },
+      "sourcePixelBufferAttributes": {
+        "doc": "Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/sourcepixelbufferattributes"
+      },
+      "supported": {
+        "doc": "Reports whether the system supports this processor on the current configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerconfiguration/issupported"
+      }
+    },
+    "VTLowLatencySuperResolutionScalerParameters": {
+      "destinationFrame": {
+        "doc": "Destination frame that contains user-allocated pixel buffer that receives the scaled processor output.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerparameters/destinationframe"
+      },
+      "sourceFrame": {
+        "doc": "Current source frame, which must be non nil.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerparameters/sourceframe"
+      }
+    },
+    "VTMotionBlurConfiguration": {
+      "VTMotionBlurConfigurationQualityPrioritization": {
+        "doc": "Values that specify whether to prioritize quality or performance.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/qualityprioritization-swift.enum"
+      },
+      "VTMotionBlurConfigurationRevision": {
+        "doc": "The specific algorithm or configuration revision that is to be used to perform the request.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/revision-swift.enum"
+      },
+      "defaultRevision": {
+        "doc": "The default revision of a particular algorithm or configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/defaultrevision"
+      },
+      "destinationPixelBufferAttributes": {
+        "doc": "A dictionary of pixel buffer attributes describing the requirements for pixel buffers used as destination frames.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/destinationpixelbufferattributes"
+      },
+      "frameHeight": {
+        "doc": "The height of a source frame in pixels.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/frameheight"
+      },
+      "frameSupportedPixelFormats": {
+        "doc": "A list of source frame supported pixel formats for the current configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/framesupportedpixelformats-1n4uq"
+      },
+      "frameWidth": {
+        "doc": "The width of a source frame in pixels.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/framewidth"
+      },
+      "processorSupported": {
+        "doc": "A Boolean value that indicates whether the processor is supported.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/processorsupported"
+      },
+      "qualityPrioritization": {
+        "doc": "A value that specifies whether to prioritize quality or performance.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/qualityprioritization-swift.property"
+      },
+      "revision": {
+        "doc": "The specific algorithm or configuration revision that is to be used to perform the request.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/revision-swift.property"
+      },
+      "sourcePixelBufferAttributes": {
+        "doc": "A dictionary of pixel buffer attributes describing requirements for pixel buffers used as source frames and reference frames.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/sourcepixelbufferattributes"
+      },
+      "supported": {
+        "doc": "Reports whether the system supports this processor.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/issupported"
+      },
+      "supportedRevisions": {
+        "doc": "The collection of currently-supported algorithms or configuration revisions for the class of configurations.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/supportedrevisions"
+      },
+      "usePrecomputedFlow": {
+        "doc": "A Boolean value to indicates whether the the optical flow will be provided by the user.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/useprecomputedflow"
+      }
+    },
+    "VTMotionBlurParameters": {
+      "VTMotionBlurParametersSubmissionMode": {
+        "doc": "A value describing the processing request in a parameters submission object.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurparameters/submissionmode-swift.enum"
+      },
+      "destinationFrame": {
+        "doc": "A user-allocated pixel buffer that receives the results.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurparameters/destinationframe"
+      },
+      "motionBlurStrength": {
+        "doc": "A value that indicates the strength of blur to apply.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurparameters/motionblurstrength"
+      },
+      "nextFrame": {
+        "doc": "The next source frame in presentation time order.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurparameters/nextframe"
+      },
+      "nextOpticalFlow": {
+        "doc": "Optional optical flow object that contains forward and backward optical flow with the next frame.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurparameters/nextopticalflow"
+      },
+      "previousFrame": {
+        "doc": "The previous source frame in presentation time order.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurparameters/previousframe"
+      },
+      "previousOpticalFlow": {
+        "doc": "Optional optical flow object that contains forward and backward optical flow with the previous frame.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurparameters/previousopticalflow"
+      },
+      "sourceFrame": {
+        "doc": "The current source frame.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurparameters/sourceframe"
+      },
+      "submissionMode": {
+        "doc": "A value describing the processing request in a parameters submission object.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurparameters/submissionmode-swift.property"
+      }
+    },
+    "VTOpticalFlowConfiguration": {
+      "VTOpticalFlowConfigurationQualityPrioritization": {
+        "doc": "Values that specify whether to prioritize quality or performance.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/qualityprioritization-swift.enum"
+      },
+      "VTOpticalFlowConfigurationRevision": {
+        "doc": "The specific algorithm or configuration revision that is to be used to perform the request.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/revision-swift.enum"
+      },
+      "defaultRevision": {
+        "doc": "The default revision of a particular algorithm or configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/defaultrevision"
+      },
+      "destinationPixelBufferAttributes": {
+        "doc": "A dictionary of pixel buffer attributes describing the requirements for pixel buffers used as destination frames.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/destinationpixelbufferattributes"
+      },
+      "frameHeight": {
+        "doc": "The height of source frame in pixels.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/frameheight"
+      },
+      "frameSupportedPixelFormats": {
+        "doc": "A list of source frame supported pixel formats for the current configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/framesupportedpixelformats-gm6u"
+      },
+      "frameWidth": {
+        "doc": "The width of a source frame in pixels.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/framewidth"
+      },
+      "processorSupported": {
+        "doc": "A boolean value that indicates whether the processor supported on the current configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/processorsupported"
+      },
+      "qualityPrioritization": {
+        "doc": "A value that specifies whether to prioritize quality or performance.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/qualityprioritization-swift.property"
+      },
+      "revision": {
+        "doc": "The specific algorithm or configuration revision that is to be used to perform the request.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/revision-swift.property"
+      },
+      "sourcePixelBufferAttributes": {
+        "doc": "A dictionary of pixel buffer attributes describing requirements for pixel buffers used as source frames and reference frames.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/sourcepixelbufferattributes"
+      },
+      "supported": {
+        "doc": "Reports whether the system supports this processor.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/issupported"
+      },
+      "supportedRevisions": {
+        "doc": "A boolean value that indicates whether the processor supported on the current configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/supportedrevisions"
+      }
+    },
+    "VTOpticalFlowParameters": {
+      "VTOpticalFlowParametersSubmissionMode": {
+        "doc": "A value describing the processing request in a parameters submission object.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowparameters/submissionmode-swift.enum"
+      },
+      "destinationOpticalFlow": {
+        "doc": "A user allocated mutable optical flow that will receive the results.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowparameters/destinationopticalflow"
+      },
+      "nextFrame": {
+        "doc": "The next source frame in presentation time order.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowparameters/nextframe"
+      },
+      "sourceFrame": {
+        "doc": "The current source frame.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowparameters/sourceframe"
+      },
+      "submissionMode": {
+        "doc": "A value describing the processing request in a parameters submission object.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowparameters/submissionmode-swift.property"
+      }
+    },
+    "VTSuperResolutionScalerConfiguration": {
+      "VTSuperResolutionScalerConfigurationInputType": {
+        "doc": "Available super-resolution processor input types.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/inputtype-swift.enum"
+      },
+      "VTSuperResolutionScalerConfigurationModelStatus": {
+        "doc": "Available super-resolution processor model status types.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/modelstatus"
+      },
+      "VTSuperResolutionScalerConfigurationQualityPrioritization": {
+        "doc": "Configuration value you set to prioritize quality or performance.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/qualityprioritization-swift.enum"
+      },
+      "VTSuperResolutionScalerConfigurationRevision": {
+        "doc": "Available algorithm revisions.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/revision-swift.enum"
+      },
+      "configurationModelPercentageAvailable": {
+        "doc": "Returns a floating point value between 0.0 and 1.0 indicating the percentage of required model assets that have been downloaded.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/configurationmodelpercentageavailable"
+      },
+      "configurationModelStatus": {
+        "doc": "Reports the download status of models that the system needs for the current configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/configurationmodelstatus"
+      },
+      "defaultRevision": {
+        "doc": "Provides the default revision of a specific algorithm or configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/defaultrevision"
+      },
+      "destinationPixelBufferAttributes": {
+        "doc": "Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/destinationpixelbufferattributes"
+      },
+      "frameHeight": {
+        "doc": "Height of source frame in pixels.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/frameheight"
+      },
+      "frameSupportedPixelFormats": {
+        "doc": "Available supported pixel formats for source frames for current configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/framesupportedpixelformats"
+      },
+      "frameWidth": {
+        "doc": "Width of source frame in pixels.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/framewidth"
+      },
+      "inputType": {
+        "doc": "Indicates the type of input.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/inputtype-swift.property"
+      },
+      "precomputedFlow": {
+        "doc": "Indicates that you provide optical flow.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/usesprecomputedflow"
+      },
+      "qualityPrioritization": {
+        "doc": "A parameter to control quality and performance levels.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/qualityprioritization-swift.property"
+      },
+      "revision": {
+        "doc": "The specific algorithm or configuration revision you use to perform the request.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/revision-swift.property"
+      },
+      "scaleFactor": {
+        "doc": "Indicates the scale factor between input and output.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/scalefactor"
+      },
+      "sourcePixelBufferAttributes": {
+        "doc": "Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/sourcepixelbufferattributes"
+      },
+      "supported": {
+        "doc": "Reports whether the system supports this processor.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/issupported"
+      },
+      "supportedRevisions": {
+        "doc": "Provides the collection of currently supported algorithms or configuration revisions for the class of configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/supportedrevisions"
+      },
+      "supportedScaleFactors": {
+        "doc": "Reports the set of supported scale factors to use when initializing a super-resolution scaler configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerconfiguration/supportedscalefactors-94rce"
+      }
+    },
+    "VTSuperResolutionScalerParameters": {
+      "VTSuperResolutionScalerParametersSubmissionMode": {
+        "doc": "Indicates the order of input frames.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerparameters/submissionmode-swift.enum"
+      },
+      "destinationFrame": {
+        "doc": "Destination frame that contains user-allocated pixel buffer that receives the results.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerparameters/destinationframe"
+      },
+      "opticalFlow": {
+        "doc": "Optional object that contains forward and backward optical flow with the previous frame.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerparameters/opticalflow"
+      },
+      "previousFrame": {
+        "doc": "Previous source frame in presentation time order, which is nil for the first frame.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerparameters/previousframe"
+      },
+      "previousOutputFrame": {
+        "doc": "Previous output frame in presentation time order, which is nil for the first frame.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerparameters/previousoutputframe"
+      },
+      "sourceFrame": {
+        "doc": "Current source frame, which must be non nil.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerparameters/sourceframe"
+      },
+      "submissionMode": {
+        "doc": "Ordering of the input frames in this submission relative to the previous submission.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerparameters/submissionmode-swift.property"
+      }
+    },
+    "VTTemporalNoiseFilterConfiguration": {
+      "destinationPixelBufferAttributes": {
+        "doc": "Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterconfiguration/destinationpixelbufferattributes"
+      },
+      "frameHeight": {
+        "doc": "Height of source frame in pixels.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterconfiguration/frameheight"
+      },
+      "frameSupportedPixelFormats": {
+        "doc": "Supported pixel formats for source frames for current configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterconfiguration/framesupportedpixelformats"
+      },
+      "frameWidth": {
+        "doc": "Width of source frame in pixels.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterconfiguration/framewidth"
+      },
+      "maximumDimensions": {
+        "doc": "The maximum dimensions of a source frame that the processor supports.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterconfiguration/maximumdimensions"
+      },
+      "minimumDimensions": {
+        "doc": "The minimum dimensions of a source frame that the processor supports.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterconfiguration/minimumdimensions"
+      },
+      "nextFrameCount": {
+        "doc": "Maximum number of future reference frames that the processor can use to process a source frame.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterconfiguration/nextframecount"
+      },
+      "previousFrameCount": {
+        "doc": "Maximum number of past reference frames that the processor can use to process a source frame.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterconfiguration/previousframecount"
+      },
+      "sourcePixelBufferAttributes": {
+        "doc": "Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterconfiguration/sourcepixelbufferattributes"
+      },
+      "supported": {
+        "doc": "Reports whether the system supports this processor.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterconfiguration/issupported"
+      },
+      "supportedSourcePixelFormats": {
+        "doc": "List of all supported pixel formats for source frames.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterconfiguration/supportedsourcepixelformats-1w5i2"
+      }
+    },
+    "VTTemporalNoiseFilterParameters": {
+      "destinationFrame": {
+        "doc": "Destination frame that contains a user-allocated pixel buffer that receives the output frame.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterparameters/destinationframe"
+      },
+      "filterStrength": {
+        "doc": "A parameter to control the strength of noise-filtering. The value can range from the minimum strength of 0.0 to the maximum strength of 1.0. Change in filter strength causes the processor to flush all frames in the queue prior to processing the source frame.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterparameters/filterstrength"
+      },
+      "hasDiscontinuity": {
+        "doc": "A Boolean that indicates sequence discontinuity, forcing the processor to reset prior to processing the source frame.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterparameters/hasdiscontinuity"
+      },
+      "nextFrames": {
+        "doc": "Future reference frames in presentation time order that you use to process the source frame.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterparameters/nextframes"
+      },
+      "previousFrames": {
+        "doc": "Past reference frames in presentation time order that you use to process the source frame.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterparameters/previousframes"
+      },
+      "sourceFrame": {
+        "doc": "Current source frame; must be non nil.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterparameters/sourceframe"
+      }
+    }
+  }
+}

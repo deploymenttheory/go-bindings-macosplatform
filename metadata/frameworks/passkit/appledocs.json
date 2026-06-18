@@ -1,0 +1,2457 @@
+{
+  "schema_version": 1,
+  "framework": "PassKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "PKAddCarKeyPassConfiguration": {
+      "doc": "A specialized configuration object that PassKit uses when it creates a digital car key.",
+      "url": "https://developer.apple.com/documentation/passkit/pkaddcarkeypassconfiguration"
+    },
+    "PKAddIdentityDocumentConfiguration": {
+      "doc": "Configuration to define the identity document.",
+      "url": "https://developer.apple.com/documentation/passkit/pkaddidentitydocumentconfiguration"
+    },
+    "PKAddIdentityDocumentMetadata": {
+      "doc": "The object for specifying the metadata necessary to provision identity documents.",
+      "url": "https://developer.apple.com/documentation/passkit/pkaddidentitydocumentmetadata"
+    },
+    "PKAddPassMetadataPreview": {
+      "doc": "A preview object that contains information representing the pass you add to Wallet.",
+      "url": "https://developer.apple.com/documentation/passkit/pkaddpassmetadatapreview"
+    },
+    "PKAddPaymentPassRequest": {
+      "doc": "Contains the card data needed to add a card to Apple Pay.",
+      "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpassrequest"
+    },
+    "PKAddPaymentPassRequestConfiguration": {
+      "doc": "Contains the configuration data for a view controller that lets the user add a payment pass.",
+      "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpassrequestconfiguration"
+    },
+    "PKAddSecureElementPassConfiguration": {
+      "doc": "An object that describes the configuration of a secure element payment pass.",
+      "url": "https://developer.apple.com/documentation/passkit/pkaddsecureelementpassconfiguration"
+    },
+    "PKAddShareablePassConfiguration": {
+      "doc": "An object that represents the data and action for a shared copy of pass.",
+      "url": "https://developer.apple.com/documentation/passkit/pkaddshareablepassconfiguration"
+    },
+    "PKAutomaticReloadPaymentRequest": {
+      "doc": "A class that represents a request to set up an automatic reload payment, such as a store card top-up or a prepaid account.",
+      "url": "https://developer.apple.com/documentation/passkit/pkautomaticreloadpaymentrequest"
+    },
+    "PKAutomaticReloadPaymentSummaryItem": {
+      "doc": "An object that defines a summary item for an automatic reload or refill payment, such as a store card top-up.",
+      "url": "https://developer.apple.com/documentation/passkit/pkautomaticreloadpaymentsummaryitem"
+    },
+    "PKBarcodeEventConfigurationRequest": {
+      "url": "https://developer.apple.com/documentation/passkit/pkbarcodeeventconfigurationrequest"
+    },
+    "PKBarcodeEventMetadataRequest": {
+      "url": "https://developer.apple.com/documentation/passkit/pkbarcodeeventmetadatarequest"
+    },
+    "PKBarcodeEventMetadataResponse": {
+      "url": "https://developer.apple.com/documentation/passkit/pkbarcodeeventmetadataresponse"
+    },
+    "PKBarcodeEventSignatureRequest": {
+      "url": "https://developer.apple.com/documentation/passkit/pkbarcodeeventsignaturerequest"
+    },
+    "PKBarcodeEventSignatureResponse": {
+      "url": "https://developer.apple.com/documentation/passkit/pkbarcodeeventsignatureresponse"
+    },
+    "PKContact": {
+      "doc": "An object that encapsulates contact information needed for billing and shipping.",
+      "url": "https://developer.apple.com/documentation/passkit/pkcontact"
+    },
+    "PKDateComponentsRange": {
+      "doc": "An object that specifies the start and end dates for a range of time.",
+      "url": "https://developer.apple.com/documentation/passkit/pkdatecomponentsrange"
+    },
+    "PKDeferredPaymentRequest": {
+      "doc": "An object that represents a request to set up a deferred payment, such as a hotel booking or a pre-order.",
+      "url": "https://developer.apple.com/documentation/passkit/pkdeferredpaymentrequest"
+    },
+    "PKDeferredPaymentSummaryItem": {
+      "doc": "An object that defines a summary item for a payment that occurs at a later date, such as a pre-order.",
+      "url": "https://developer.apple.com/documentation/passkit/pkdeferredpaymentsummaryitem"
+    },
+    "PKDisbursementRequest": {
+      "doc": "An object that represents a request to disburse funds from a merchant to an individual.",
+      "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest"
+    },
+    "PKDisbursementSummaryItem": {
+      "doc": "A summary item that represents a disbursement.",
+      "url": "https://developer.apple.com/documentation/passkit/pkdisbursementsummaryitem"
+    },
+    "PKIdentityAnyOfDescriptor": {
+      "doc": "An object you use to request information from multiple identity documents.",
+      "url": "https://developer.apple.com/documentation/passkit/pkidentityanyofdescriptor"
+    },
+    "PKIdentityAuthorizationController": {
+      "doc": "An object that presents a sheet that prompts the user to allow a request for identity information.",
+      "url": "https://developer.apple.com/documentation/passkit/pkidentityauthorizationcontroller"
+    },
+    "PKIdentityDocument": {
+      "doc": "An object that represents the response to a request.",
+      "url": "https://developer.apple.com/documentation/passkit/pkidentitydocument"
+    },
+    "PKIdentityDocumentMetadata": {
+      "doc": "A set of configured metadata that defines the required information to add the corresponding pass to Wallet.",
+      "url": "https://developer.apple.com/documentation/passkit/pkidentitydocumentmetadata"
+    },
+    "PKIdentityDriversLicenseDescriptor": {
+      "doc": "An object for requesting information from a user’s driver’s license or equivalent document.",
+      "url": "https://developer.apple.com/documentation/passkit/pkidentitydriverslicensedescriptor"
+    },
+    "PKIdentityElement": {
+      "doc": "An object that represents the elements an app requests from identity documents.",
+      "url": "https://developer.apple.com/documentation/passkit/pkidentityelement"
+    },
+    "PKIdentityIntentToStore": {
+      "doc": "An object that represents your intention to store an identity element or values derived from an identity element.",
+      "url": "https://developer.apple.com/documentation/passkit/pkidentityintenttostore"
+    },
+    "PKIdentityNationalIDCardDescriptor": {
+      "doc": "An object for requesting information from a user’s national ID card.",
+      "url": "https://developer.apple.com/documentation/passkit/pkidentitynationalidcarddescriptor"
+    },
+    "PKIdentityPhotoIDDescriptor": {
+      "doc": "An object you use to request information from a user’s photo ID or equivalent document.",
+      "url": "https://developer.apple.com/documentation/passkit/pkidentityphotoiddescriptor"
+    },
+    "PKIdentityRequest": {
+      "doc": "An object that represents a request for identity information from a Wallet pass.",
+      "url": "https://developer.apple.com/documentation/passkit/pkidentityrequest"
+    },
+    "PKInstantFundsOutFeeSummaryItem": {
+      "doc": "A summary item that represents a fee for an instant funds out transfer.",
+      "url": "https://developer.apple.com/documentation/passkit/pkinstantfundsoutfeesummaryitem"
+    },
+    "PKIssuerProvisioningExtensionHandler": {
+      "doc": "An abstract superclass for an app extension to add a payment card to Wallet.",
+      "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionhandler"
+    },
+    "PKIssuerProvisioningExtensionPassEntry": {
+      "doc": "An object that represents an item available to add to as a Wallet pass.",
+      "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionpassentry"
+    },
+    "PKIssuerProvisioningExtensionPaymentPassEntry": {
+      "doc": "An object that represents a payment card available to add as a payment pass.",
+      "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionpaymentpassentry"
+    },
+    "PKIssuerProvisioningExtensionStatus": {
+      "doc": "An object that indicates whether there are any payment cards available to add as Wallet passes.",
+      "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionstatus"
+    },
+    "PKJapanIndividualNumberCardMetadata": {
+      "doc": "A class that contains metadata indicating the specific product instance to provision.",
+      "url": "https://developer.apple.com/documentation/passkit/pkjapanindividualnumbercardmetadata"
+    },
+    "PKLabeledValue": {
+      "doc": "An object that can represent a detail about a payment card or other item.",
+      "url": "https://developer.apple.com/documentation/passkit/pklabeledvalue"
+    },
+    "PKPass": {
+      "doc": "An object that represents a single pass.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpass"
+    },
+    "PKPassLibrary": {
+      "doc": "Provides an interface to the user’s library of passes.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary"
+    },
+    "PKPassRelevantDate": {
+      "url": "https://developer.apple.com/documentation/passkit/pkpassrelevantdate"
+    },
+    "PKPayment": {
+      "doc": "Represents the result of authorizing a payment request and contains payment information, encrypted in the payment token.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpayment"
+    },
+    "PKPaymentAuthorizationController": {
+      "doc": "An object that presents a sheet that prompts the user to authorize a payment request.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationcontroller"
+    },
+    "PKPaymentAuthorizationResult": {
+      "doc": "An object that reports the status code and errors for a payment authorization request.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationresult"
+    },
+    "PKPaymentAuthorizationViewController": {
+      "doc": "An object that presents a sheet that prompts the user to authorize a payment request.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationviewcontroller"
+    },
+    "PKPaymentButton": {
+      "doc": "An object that displays a button either to trigger payments through Apple Pay or to prompt the user to set up a card.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentbutton"
+    },
+    "PKPaymentInformationEventExtension": {
+      "doc": "An abstract superclass for an extension to collect payment information and sign transaction data in a QR code purchase.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentinformationeventextension"
+    },
+    "PKPaymentMerchantSession": {
+      "doc": "An object that validates the identity of a merchant for a payment request.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentmerchantsession"
+    },
+    "PKPaymentMethod": {
+      "doc": "An object that contains information about payment methods.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentmethod"
+    },
+    "PKPaymentOrderDetails": {
+      "doc": "Optional metadata with payment order details for the placed order.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentorderdetails"
+    },
+    "PKPaymentPass": {
+      "doc": "An object that represents a provisioned payment card for in-app payments.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentpass"
+    },
+    "PKPaymentRequest": {
+      "doc": "An object that represents a request for payment, including details about payment-processing capabilities, the payment amount, and shipping information.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest"
+    },
+    "PKPaymentRequestCouponCodeUpdate": {
+      "doc": "An object that updates the payment request after the coupon code changes.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestcouponcodeupdate"
+    },
+    "PKPaymentRequestMerchantSessionUpdate": {
+      "doc": "An object that updates a payment request with a merchant validation.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestmerchantsessionupdate"
+    },
+    "PKPaymentRequestPaymentMethodUpdate": {
+      "doc": "An object that updates the payment request after the payment method changes.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestpaymentmethodupdate"
+    },
+    "PKPaymentRequestShippingContactUpdate": {
+      "doc": "An object that updates the payment request after the shipping contact information changes.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestshippingcontactupdate"
+    },
+    "PKPaymentRequestShippingMethodUpdate": {
+      "doc": "An object that updates the payment request after the shipping method changed.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestshippingmethodupdate"
+    },
+    "PKPaymentRequestUpdate": {
+      "doc": "The base class for updating the payment request after the user makes changes on the payment sheet.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestupdate"
+    },
+    "PKPaymentSummaryItem": {
+      "doc": "An object that defines a summary item in a payment request, taxes, discounts, shipping, a grand total, and the like.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentsummaryitem"
+    },
+    "PKPaymentToken": {
+      "doc": "Contains the user’s payment credentials.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymenttoken"
+    },
+    "PKPaymentTokenContext": {
+      "doc": "A class that defines the context for a single payment token in a payment request for multimerchant payments.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymenttokencontext"
+    },
+    "PKRecurringPaymentRequest": {
+      "doc": "A class that represents a request to set up a recurring payment, typically a subscription.",
+      "url": "https://developer.apple.com/documentation/passkit/pkrecurringpaymentrequest"
+    },
+    "PKRecurringPaymentSummaryItem": {
+      "doc": "An object that defines a summary item for a payment that occurs repeatedly at a specified interval, such as a subscription.",
+      "url": "https://developer.apple.com/documentation/passkit/pkrecurringpaymentsummaryitem"
+    },
+    "PKSecureElementPass": {
+      "doc": "A pass with a credential that the device stores in a certified payment information chip.",
+      "url": "https://developer.apple.com/documentation/passkit/pksecureelementpass"
+    },
+    "PKShareablePassMetadata": {
+      "doc": "Information that you use to configure the sharing sheet for a pass.",
+      "url": "https://developer.apple.com/documentation/passkit/pkshareablepassmetadata"
+    },
+    "PKShareablePassMetadataPreview": {
+      "url": "https://developer.apple.com/documentation/passkit/pkshareablepassmetadatapreview"
+    },
+    "PKShippingMethod": {
+      "doc": "An object that defines a shipping method for delivering physical goods.",
+      "url": "https://developer.apple.com/documentation/passkit/pkshippingmethod"
+    },
+    "PKStoredValuePassBalance": {
+      "doc": "An object that represents a balance that’s available for transactions, such as points or money.",
+      "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance"
+    },
+    "PKStoredValuePassProperties": {
+      "doc": "An object that represents the properties of a pass that contains a balance used for specific transactions, such as a transit pass or loyalty card.",
+      "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassproperties"
+    },
+    "PKSuicaPassProperties": {
+      "doc": "The properties of a pass used as a ticket for the Suica transportation system.",
+      "url": "https://developer.apple.com/documentation/passkit/pksuicapassproperties"
+    },
+    "PKTransitPassProperties": {
+      "doc": "The properties of a transit pass.",
+      "url": "https://developer.apple.com/documentation/passkit/pktransitpassproperties"
+    },
+    "PKVehicleConnectionSession": {
+      "url": "https://developer.apple.com/documentation/passkit/pkvehicleconnectionsession"
+    }
+  },
+  "protocols": {
+    "PKIdentityDocumentDescriptor": {
+      "doc": "A type that describes the structure and behavior of an identity document.",
+      "url": "https://developer.apple.com/documentation/passkit/pkidentitydocumentdescriptor"
+    },
+    "PKIssuerProvisioningExtensionAuthorizationProviding": {
+      "doc": "A protocol for a UI app extension to authorize a user to add a payment card to Wallet.",
+      "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionauthorizationproviding"
+    },
+    "PKPaymentAuthorizationControllerDelegate": {
+      "doc": "Methods that let you respond to user interactions with your payment authorization controller.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationcontrollerdelegate"
+    },
+    "PKPaymentAuthorizationViewControllerDelegate": {
+      "doc": "Methods that let you respond to user interactions with your payment authorization view controller.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationviewcontrollerdelegate"
+    },
+    "PKPaymentInformationRequestHandling": {
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentinformationrequesthandling"
+    },
+    "PKVehicleConnectionDelegate": {
+      "url": "https://developer.apple.com/documentation/passkit/pkvehicleconnectiondelegate"
+    }
+  },
+  "enums": {
+    "PKAddIdentityDocumentType": {
+      "doc": "Classifications that reflect the type of identity document.",
+      "url": "https://developer.apple.com/documentation/passkit/pkaddidentitydocumenttype",
+      "members": {
+        "PKAddIdentityDocumentTypeIDCard": {
+          "doc": "A generic pass that represents a person’s identification.",
+          "url": "https://developer.apple.com/documentation/passkit/pkaddidentitydocumenttype/idcard"
+        },
+        "PKAddIdentityDocumentTypeMDL": {
+          "doc": "A pass that represents a driver’s license or government-issued identification.",
+          "url": "https://developer.apple.com/documentation/passkit/pkaddidentitydocumenttype/mdl"
+        },
+        "PKAddIdentityDocumentTypePhotoID": {
+          "doc": "A pass to use for personal identification.",
+          "url": "https://developer.apple.com/documentation/passkit/pkaddidentitydocumenttype/photoid"
+        }
+      }
+    },
+    "PKAddPaymentPassError": {
+      "doc": "Error codes for adding payment passes.",
+      "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpasserror",
+      "members": {
+        "PKAddPaymentPassErrorSystemCancelled": {
+          "doc": "The system canceled the request to add a card to Apple Pay.",
+          "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpasserror/systemcancelled"
+        },
+        "PKAddPaymentPassErrorUnsupported": {
+          "doc": "The app cannot add cards to Apple Pay.",
+          "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpasserror/unsupported"
+        },
+        "PKAddPaymentPassErrorUserCancelled": {
+          "doc": "The user canceled the request to add a card to Apple Pay.",
+          "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpasserror/usercancelled"
+        }
+      }
+    },
+    "PKAddPaymentPassStyle": {
+      "doc": "The type of payment pass.",
+      "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpassstyle",
+      "members": {
+        "PKAddPaymentPassStyleAccess": {
+          "doc": "A pass that authorizes the user to access a location or resource.",
+          "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpassstyle/access"
+        },
+        "PKAddPaymentPassStylePayment": {
+          "doc": "A pass used by a customer for purchasing.",
+          "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpassstyle/payment"
+        }
+      }
+    },
+    "PKAddSecureElementPassErrorCode": {
+      "doc": "Error codes for problems that occur when you add a secure element passes.",
+      "url": "https://developer.apple.com/documentation/passkit/pkaddsecureelementpasserrorcode",
+      "members": {
+        "PKAddSecureElementPassUnknownError": {
+          "doc": "The system canceled adding the pass due to an unknown failure.",
+          "url": "https://developer.apple.com/documentation/passkit/pkaddsecureelementpasserrorcode/pkaddsecureelementpassunknownerror"
+        }
+      }
+    },
+    "PKAddShareablePassConfigurationPrimaryAction": {
+      "doc": "The kind of add action that the system performs with a pass.",
+      "url": "https://developer.apple.com/documentation/passkit/pkaddshareablepassconfigurationprimaryaction",
+      "members": {
+        "PKAddShareablePassConfigurationPrimaryActionAdd": {
+          "doc": "A constant that indicates the system adds a pass to a device.",
+          "url": "https://developer.apple.com/documentation/passkit/pkaddshareablepassconfigurationprimaryaction/add"
+        },
+        "PKAddShareablePassConfigurationPrimaryActionShare": {
+          "doc": "A constant that indicates the system shares the pass with another user.",
+          "url": "https://developer.apple.com/documentation/passkit/pkaddshareablepassconfigurationprimaryaction/share"
+        }
+      }
+    },
+    "PKAddressField": {
+      "doc": "Billing or shipping address fields.",
+      "url": "https://developer.apple.com/documentation/passkit/pkaddressfield",
+      "members": {
+        "PKAddressFieldAll": {
+          "doc": "All fields.",
+          "url": "https://developer.apple.com/documentation/passkit/pkaddressfield/all"
+        },
+        "PKAddressFieldEmail": {
+          "doc": "The buyer’s email address.",
+          "url": "https://developer.apple.com/documentation/passkit/pkaddressfield/email"
+        },
+        "PKAddressFieldName": {
+          "doc": "The buyer’s first and last name.",
+          "url": "https://developer.apple.com/documentation/passkit/pkaddressfield/name"
+        },
+        "PKAddressFieldNone": {
+          "doc": "No fields.",
+          "url": "https://developer.apple.com/documentation/passkit/pkaddressfield/pkaddressfieldnone"
+        },
+        "PKAddressFieldPhone": {
+          "doc": "The buyer’s telephone number.",
+          "url": "https://developer.apple.com/documentation/passkit/pkaddressfield/phone"
+        },
+        "PKAddressFieldPostalAddress": {
+          "doc": "The buyer’s full street address, including name, street, city, state or province, postal code, and country or region.",
+          "url": "https://developer.apple.com/documentation/passkit/pkaddressfield/postaladdress"
+        }
+      }
+    },
+    "PKApplePayLaterAvailability": {
+      "doc": "Values you use to enable or disable Apple Pay Later for a specific transaction.",
+      "url": "https://developer.apple.com/documentation/passkit/pkapplepaylateravailability",
+      "members": {
+        "PKApplePayLaterAvailable": {
+          "doc": "Apple Pay Later is available.",
+          "url": "https://developer.apple.com/documentation/passkit/pkapplepaylateravailability/available"
+        },
+        "PKApplePayLaterUnavailableItemIneligible": {
+          "doc": "Apple Pay Later is unavailable because one or more ineligible or prohibited items are in the shopping cart, such as gift cards.",
+          "url": "https://developer.apple.com/documentation/passkit/pkapplepaylateravailability/unavailableitemineligible"
+        },
+        "PKApplePayLaterUnavailableRecurringTransaction": {
+          "doc": "Apple Pay Later is unavailable because there’s a recurring payment or subscription in the shopping cart.",
+          "url": "https://developer.apple.com/documentation/passkit/pkapplepaylateravailability/unavailablerecurringtransaction"
+        }
+      }
+    },
+    "PKAutomaticPassPresentationSuppressionResult": {
+      "doc": "The result of an attempt to suppress automatic pass presentation.",
+      "url": "https://developer.apple.com/documentation/passkit/pkautomaticpasspresentationsuppressionresult",
+      "members": {
+        "PKAutomaticPassPresentationSuppressionResultAlreadyPresenting": {
+          "doc": "The device is already presenting passes.",
+          "url": "https://developer.apple.com/documentation/passkit/pkautomaticpasspresentationsuppressionresult/alreadypresenting"
+        },
+        "PKAutomaticPassPresentationSuppressionResultCancelled": {
+          "doc": "The system canceled the suppression before calling the response handler.",
+          "url": "https://developer.apple.com/documentation/passkit/pkautomaticpasspresentationsuppressionresult/cancelled"
+        },
+        "PKAutomaticPassPresentationSuppressionResultDenied": {
+          "doc": "The user prevented the suppression, or an internal error occurred.",
+          "url": "https://developer.apple.com/documentation/passkit/pkautomaticpasspresentationsuppressionresult/denied"
+        },
+        "PKAutomaticPassPresentationSuppressionResultNotSupported": {
+          "doc": "The device doesn’t support the suppression of automatic pass presentation.",
+          "url": "https://developer.apple.com/documentation/passkit/pkautomaticpasspresentationsuppressionresult/notsupported"
+        },
+        "PKAutomaticPassPresentationSuppressionResultSuccess": {
+          "doc": "Suppression of automatic presentation successful.",
+          "url": "https://developer.apple.com/documentation/passkit/pkautomaticpasspresentationsuppressionresult/success"
+        }
+      }
+    },
+    "PKBarcodeEventConfigurationDataType": {
+      "url": "https://developer.apple.com/documentation/passkit/pkbarcodeeventconfigurationdatatype"
+    },
+    "PKDisbursementErrorCode": {
+      "doc": "Values that describe errors that can occur while processing the disbursement.",
+      "url": "https://developer.apple.com/documentation/passkit/pkdisbursementerrorcode"
+    },
+    "PKIdentityError": {
+      "doc": "A structure that represents an identity error.",
+      "url": "https://developer.apple.com/documentation/passkit/pkidentityerror"
+    },
+    "PKIssuerProvisioningExtensionAuthorizationResult": {
+      "doc": "A value that indicates the result of authorizing the addition of a payment card.",
+      "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionauthorizationresult",
+      "members": {
+        "PKIssuerProvisioningExtensionAuthorizationResultAuthorized": {
+          "doc": "A result that indicates the user successfully authorized adding the payment pass.",
+          "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionauthorizationresult/authorized"
+        },
+        "PKIssuerProvisioningExtensionAuthorizationResultCanceled": {
+          "doc": "A result that indicates the user canceled authorization or wasn’t authorized to add the payment card.",
+          "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionauthorizationresult/canceled"
+        }
+      }
+    },
+    "PKMerchantCapability": {
+      "doc": "Capabilities for processing payment.",
+      "url": "https://developer.apple.com/documentation/passkit/pkmerchantcapability",
+      "members": {
+        "PKMerchantCapability3DS": {
+          "doc": "Support for the 3-D Secure protocol.",
+          "url": "https://developer.apple.com/documentation/passkit/pkmerchantcapability/threedsecure"
+        },
+        "PKMerchantCapabilityCredit": {
+          "doc": "Support for credit cards.",
+          "url": "https://developer.apple.com/documentation/passkit/pkmerchantcapability/credit"
+        },
+        "PKMerchantCapabilityDebit": {
+          "doc": "Support for debit cards.",
+          "url": "https://developer.apple.com/documentation/passkit/pkmerchantcapability/debit"
+        },
+        "PKMerchantCapabilityEMV": {
+          "doc": "Support for the EMV protocol.",
+          "url": "https://developer.apple.com/documentation/passkit/pkmerchantcapability/emv"
+        },
+        "PKMerchantCapabilityInstantFundsOut": {
+          "doc": "The value that indicates the merchant supports disbursing funds using Instant Funds Out.",
+          "url": "https://developer.apple.com/documentation/passkit/pkmerchantcapability/instantfundsout"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a merchant capability using the raw value you provide.",
+          "url": "https://developer.apple.com/documentation/passkit/pkmerchantcapability/init(rawvalue:)"
+        }
+      }
+    },
+    "PKPassKitErrorCode": {
+      "doc": "Errors that the PassKit framework uses.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpasskiterrorcode"
+    },
+    "PKPassLibraryAddPassesStatus": {
+      "doc": "Statuses that PassKit uses when it adds passes to the pass library.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpasslibraryaddpassesstatus",
+      "members": {
+        "PKPassLibraryDidAddPasses": {
+          "doc": "A status that occurs when the user successfully adds one or more passes.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpasslibraryaddpassesstatus/didaddpasses"
+        },
+        "PKPassLibraryDidCancelAddPasses": {
+          "doc": "A status that occurs when the user cancels the addition of passes.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpasslibraryaddpassesstatus/didcanceladdpasses"
+        },
+        "PKPassLibraryShouldReviewPasses": {
+          "doc": "A status that occurs when the app prompts the user to review the passes.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpasslibraryaddpassesstatus/shouldreviewpasses"
+        }
+      }
+    },
+    "PKPassType": {
+      "doc": "Types of passes.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpasstype",
+      "members": {
+        "PKPassTypeAny": {
+          "doc": "A nonspecific pass type.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpasstype/any"
+        },
+        "PKPassTypeBarcode": {
+          "doc": "A pass that represents a barcode.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpasstype/barcode"
+        },
+        "PKPassTypePayment": {
+          "doc": "A pass that represents a credit or debit card",
+          "url": "https://developer.apple.com/documentation/passkit/pkpasstype/payment"
+        },
+        "PKPassTypeSecureElement": {
+          "doc": "A pass that represents a credential that the device stores in the Secure Element.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpasstype/secureelement"
+        }
+      }
+    },
+    "PKPaymentAuthorizationStatus": {
+      "doc": "General success and failure status for payment authorization.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationstatus",
+      "members": {
+        "PKPaymentAuthorizationStatusFailure": {
+          "doc": "Merchant failed to authorize the transaction.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationstatus/failure"
+        },
+        "PKPaymentAuthorizationStatusInvalidBillingPostalAddress": {
+          "doc": "Invalid or unusable billing address.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationstatus/invalidbillingpostaladdress"
+        },
+        "PKPaymentAuthorizationStatusInvalidShippingContact": {
+          "doc": "Invalid or incomplete shipping contact.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationstatus/invalidshippingcontact"
+        },
+        "PKPaymentAuthorizationStatusInvalidShippingPostalAddress": {
+          "doc": "Invalid or unusable shipping address.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationstatus/invalidshippingpostaladdress"
+        },
+        "PKPaymentAuthorizationStatusPINIncorrect": {
+          "doc": "Incorrect PIN entered.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationstatus/pinincorrect"
+        },
+        "PKPaymentAuthorizationStatusPINLockout": {
+          "doc": "PIN retry limit exceeded.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationstatus/pinlockout"
+        },
+        "PKPaymentAuthorizationStatusPINRequired": {
+          "doc": "Transaction requires PIN entry.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationstatus/pinrequired"
+        },
+        "PKPaymentAuthorizationStatusSuccess": {
+          "doc": "Merchant successfully authorized the transaction, or the transaction is expected to succeed.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationstatus/success"
+        }
+      }
+    },
+    "PKPaymentButtonStyle": {
+      "doc": "A type that indicates the available appearances for an Apple Pay button.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttonstyle",
+      "members": {
+        "PKPaymentButtonStyleAutomatic": {
+          "doc": "A button that automatically changes its appearance when the user switches between Light Mode and Dark Mode.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttonstyle/automatic"
+        },
+        "PKPaymentButtonStyleBlack": {
+          "doc": "A black button with white lettering.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttonstyle/black"
+        },
+        "PKPaymentButtonStyleWhite": {
+          "doc": "A white button with black lettering.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttonstyle/white"
+        },
+        "PKPaymentButtonStyleWhiteOutline": {
+          "doc": "A white button with black lettering and a black outline.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttonstyle/whiteoutline"
+        }
+      }
+    },
+    "PKPaymentButtonType": {
+      "doc": "The Apple Pay button types you can display to initiate Apple Pay transactions.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttontype",
+      "members": {
+        "PKPaymentButtonTypeAddMoney": {
+          "doc": "An Apple Pay button useful for adding money to a card, account, or payment system.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttontype/addmoney"
+        },
+        "PKPaymentButtonTypeBook": {
+          "doc": "An Apple Pay button useful for booking trips, flights, or other experiences.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttontype/book"
+        },
+        "PKPaymentButtonTypeBuy": {
+          "doc": "An Apple Pay button useful for product purchases.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttontype/buy"
+        },
+        "PKPaymentButtonTypeCheckout": {
+          "doc": "An Apple Pay button useful for purchase experiences that include other payment buttons that start with “Check out”.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttontype/checkout"
+        },
+        "PKPaymentButtonTypeContinue": {
+          "doc": "An Apple Pay button useful for general purchases.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttontype/continue"
+        },
+        "PKPaymentButtonTypeContribute": {
+          "doc": "An Apple Pay button useful to help people contribute money to projects, causes, organizations, and other entities.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttontype/contribute"
+        },
+        "PKPaymentButtonTypeDonate": {
+          "doc": "An Apple Pay button used by approved nonprofit organization that lets people make donations.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttontype/donate"
+        },
+        "PKPaymentButtonTypeInStore": {
+          "doc": "An Apple Pay button useful for paying bills or invoices.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttontype/instore"
+        },
+        "PKPaymentButtonTypeOrder": {
+          "doc": "An Apple Pay button useful for placing orders for such as like meals or flowers.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttontype/order"
+        },
+        "PKPaymentButtonTypePlain": {
+          "doc": "An Apple Pay button with the Apple Pay logo only, useful when an additional call to action isn’t needed.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttontype/plain"
+        },
+        "PKPaymentButtonTypeReload": {
+          "doc": "An Apple Pay button useful for adding money to a card, account, or payment system.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttontype/reload"
+        },
+        "PKPaymentButtonTypeRent": {
+          "doc": "An Apple Pay button useful for renting items such as cars or scooters.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttontype/rent"
+        },
+        "PKPaymentButtonTypeSetUp": {
+          "doc": "An Apple Pay button useful for prompting the user to set up a card.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttontype/setup"
+        },
+        "PKPaymentButtonTypeSubscribe": {
+          "doc": "An Apple Pay button useful for purchasing a subscription such as a gym membership or meal-kit delivery service.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttontype/subscribe"
+        },
+        "PKPaymentButtonTypeSupport": {
+          "doc": "An Apple Pay button useful supporting people give money to projects, causes, organizations, and other entities.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttontype/support"
+        },
+        "PKPaymentButtonTypeTip": {
+          "doc": "An Apple Pay button useful useful for letting people tip for goods or services.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttontype/tip"
+        },
+        "PKPaymentButtonTypeTopUp": {
+          "doc": "An Apple Pay button useful for adding money to a card, account, or payment system.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentbuttontype/topup"
+        }
+      }
+    },
+    "PKPaymentErrorCode": {
+      "doc": "An error code that you provide to indicate problems with address or contact information on an Apple Pay sheet.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymenterrorcode"
+    },
+    "PKPaymentMethodType": {
+      "doc": "The type of cards available in Apple Pay.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentmethodtype",
+      "members": {
+        "PKPaymentMethodTypeCredit": {
+          "doc": "A credit card.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentmethodtype/credit"
+        },
+        "PKPaymentMethodTypeDebit": {
+          "doc": "A debit card.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentmethodtype/debit"
+        },
+        "PKPaymentMethodTypeEMoney": {
+          "doc": "An electronic money card.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentmethodtype/emoney"
+        },
+        "PKPaymentMethodTypePrepaid": {
+          "doc": "A prepaid card.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentmethodtype/prepaid"
+        },
+        "PKPaymentMethodTypeStore": {
+          "doc": "A store card.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentmethodtype/store"
+        },
+        "PKPaymentMethodTypeUnknown": {
+          "doc": "The card’s type is unknown.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentmethodtype/unknown"
+        }
+      }
+    },
+    "PKPaymentPassActivationState": {
+      "doc": "Cases that indicate payment pass activation states.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentpassactivationstate",
+      "members": {
+        "PKPaymentPassActivationStateActivated": {
+          "doc": "Active and ready for payment use.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentpassactivationstate/activated"
+        },
+        "PKPaymentPassActivationStateActivating": {
+          "doc": "Not ready for use but activation is in progress.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentpassactivationstate/activating"
+        },
+        "PKPaymentPassActivationStateDeactivated": {
+          "doc": "Not active because the issuer disabled the account associated with the device.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentpassactivationstate/deactivated"
+        },
+        "PKPaymentPassActivationStateRequiresActivation": {
+          "doc": "Not active but may be activated by the issuer.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentpassactivationstate/requiresactivation"
+        },
+        "PKPaymentPassActivationStateSuspended": {
+          "doc": "Not active and can’t be activated.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentpassactivationstate/suspended"
+        }
+      }
+    },
+    "PKPaymentSummaryItemType": {
+      "doc": "Constants that describe the type of the payment summary item, such as final or pending.",
+      "url": "https://developer.apple.com/documentation/passkit/pkpaymentsummaryitemtype",
+      "members": {
+        "PKPaymentSummaryItemTypeFinal": {
+          "doc": "A summary item that represents a known, final cost.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentsummaryitemtype/final"
+        },
+        "PKPaymentSummaryItemTypePending": {
+          "doc": "A summary item that represents an estimated or unknown cost.",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentsummaryitemtype/pending"
+        }
+      }
+    },
+    "PKRadioTechnology": {
+      "doc": "Constants that describe the type of wireless radio technology that a pass uses.",
+      "url": "https://developer.apple.com/documentation/passkit/pkradiotechnology",
+      "members": {
+        "PKRadioTechnologyBluetooth": {
+          "doc": "An identifier that indicates the Bluetooth radio frequency communication technology.",
+          "url": "https://developer.apple.com/documentation/passkit/pkradiotechnology/bluetooth"
+        },
+        "PKRadioTechnologyNFC": {
+          "doc": "An identifier that indicates the near field communication (NFC) radio frequency communication technology.",
+          "url": "https://developer.apple.com/documentation/passkit/pkradiotechnology/nfc"
+        },
+        "PKRadioTechnologyNone": {
+          "doc": "An identifier that indicates the pass doesn’t use radio frequency communication.",
+          "url": "https://developer.apple.com/documentation/passkit/pkradiotechnology/pkradiotechnologynone"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a radio technology object of the specified type.",
+          "url": "https://developer.apple.com/documentation/passkit/pkradiotechnology/init(rawvalue:)"
+        }
+      }
+    },
+    "PKSecureElementPassActivationState": {
+      "doc": "The activation states of a Secure Element pass.",
+      "url": "https://developer.apple.com/documentation/passkit/pksecureelementpassactivationstate"
+    },
+    "PKShareSecureElementPassErrorCode": {
+      "url": "https://developer.apple.com/documentation/passkit/pksharesecureelementpasserrorcode"
+    },
+    "PKShippingContactEditingMode": {
+      "doc": "Constants that indicate whether the shipping mode prevents the user from editing fields of the shipping address.",
+      "url": "https://developer.apple.com/documentation/passkit/pkshippingcontacteditingmode",
+      "members": {
+        "PKShippingContactEditingModeAvailable": {
+          "doc": "The value that indicates Apple Pay Later is available.",
+          "url": "https://developer.apple.com/documentation/passkit/pkshippingcontacteditingmode/available"
+        },
+        "PKShippingContactEditingModeEnabled": {
+          "doc": "All fields of the shipping contact on the payment sheet are editable by the user.",
+          "url": "https://developer.apple.com/documentation/passkit/pkshippingcontacteditingmode/enabled"
+        },
+        "PKShippingContactEditingModeStorePickup": {
+          "doc": "The shipping contact on the payment sheet represents a pickup address and isn’t editable by the user.",
+          "url": "https://developer.apple.com/documentation/passkit/pkshippingcontacteditingmode/storepickup"
+        }
+      }
+    },
+    "PKShippingType": {
+      "doc": "A complete list of valid shipping types.",
+      "url": "https://developer.apple.com/documentation/passkit/pkshippingtype",
+      "members": {
+        "PKShippingTypeDelivery": {
+          "doc": "Delivering the purchase by the seller (for example, pizza, flower, or furniture delivery).",
+          "url": "https://developer.apple.com/documentation/passkit/pkshippingtype/delivery"
+        },
+        "PKShippingTypeServicePickup": {
+          "doc": "Picking up an item from the provided address by the service (for example, transportation or shipping services that provide home pickup).",
+          "url": "https://developer.apple.com/documentation/passkit/pkshippingtype/servicepickup"
+        },
+        "PKShippingTypeShipping": {
+          "doc": "Shipping the purchase to the provided address using a third-party shipping company. This is the default shipping type.",
+          "url": "https://developer.apple.com/documentation/passkit/pkshippingtype/shipping"
+        },
+        "PKShippingTypeStorePickup": {
+          "doc": "Store pickup of the purchase from the seller’s store.",
+          "url": "https://developer.apple.com/documentation/passkit/pkshippingtype/storepickup"
+        }
+      }
+    },
+    "PKVehicleConnectionErrorCode": {
+      "url": "https://developer.apple.com/documentation/passkit/pkvehicleconnectionerrorcode"
+    },
+    "PKVehicleConnectionSessionConnectionState": {
+      "url": "https://developer.apple.com/documentation/passkit/pkvehicleconnectionsessionconnectionstate"
+    }
+  },
+  "methods": {
+    "PKAddCarKeyPassConfiguration": {
+      "-init": {
+        "doc": "Creates a digital car key configuration object.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddcarkeypassconfiguration/init()"
+      }
+    },
+    "PKAddIdentityDocumentConfiguration": {
+      "+configurationForMetadata:completion:": {
+        "doc": "Returns the identity document configuration.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddidentitydocumentconfiguration/formetadata(_:completion:)"
+      }
+    },
+    "PKAddIdentityDocumentMetadata": {
+      "-initWithProvisioningCredentialIdentifier:sharingInstanceIdentifier:cardTemplateIdentifier:issuingCountryCode:documentType:preview:": {
+        "doc": "Creates the identity document metadata with parameters that the issuer’s server configures to indicate the specific product instance to provision.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddidentitydocumentmetadata/init(provisioningcredentialidentifier:sharinginstanceidentifier:cardtemplateidentifier:issuingcountrycode:documenttype:preview:)"
+      }
+    },
+    "PKAddPassMetadataPreview": {
+      "+previewWithPassThumbnail:localizedDescription:": {
+        "doc": "Initializes properties you need to preview an object that represents the pass you add to Wallet.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddpassmetadatapreview/previewwithpassthumbnail:localizeddescription:"
+      },
+      "-initWithPassThumbnail:localizedDescription:": {
+        "doc": "Provides a preview of an image object that represents the pass you add to Wallet.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddpassmetadatapreview/init(passthumbnail:localizeddescription:)"
+      }
+    },
+    "PKAddPaymentPassRequestConfiguration": {
+      "-initWithEncryptionScheme:": {
+        "doc": "Instantiates a new request configuration with the given encryption scheme.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpassrequestconfiguration/init(encryptionscheme:)"
+      }
+    },
+    "PKAddShareablePassConfiguration": {
+      "+configurationForPassMetadata:provisioningPolicyIdentifier:primaryAction:completion:": {
+        "doc": "Creates and error checks a new shareable pass-configuration object.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddshareablepassconfiguration/forpassmetadata(_:provisioningpolicyidentifier:action:completion:)"
+      }
+    },
+    "PKAutomaticReloadPaymentRequest": {
+      "-initWithPaymentDescription:automaticReloadBilling:managementURL:": {
+        "doc": "Create an automatic reload payment object with a description, automatic billing information, and a management URL.",
+        "url": "https://developer.apple.com/documentation/passkit/pkautomaticreloadpaymentrequest/init(paymentdescription:automaticreloadbilling:managementurl:)"
+      }
+    },
+    "PKDateComponentsRange": {
+      "-initWithStartDateComponents:endDateComponents:": {
+        "doc": "Creates a new time range with the start and end dates and times that you specify.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdatecomponentsrange/init(start:end:)"
+      }
+    },
+    "PKDeferredPaymentRequest": {
+      "-initWithPaymentDescription:deferredBilling:managementURL:": {
+        "doc": "Creates a deferred payment request with the payment description, deferred billing summary, and management URL you provide.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdeferredpaymentrequest/init(paymentdescription:deferredbilling:managementurl:)"
+      }
+    },
+    "PKDisbursementRequest": {
+      "+disbursementCardUnsupportedError": {
+        "doc": "Creates an error that indicates that the selected payment pass doesn’t support receiving funds through disbursements.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/disbursementcardunsupportederror()"
+      },
+      "+disbursementContactInvalidErrorWithContactField:localizedDescription:": {
+        "doc": "Creates a recipient contact error with the supplied field.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/disbursementcontactinvaliderror(withcontactfield:localizeddescription:)"
+      },
+      "-initWithMerchantIdentifier:currencyCode:regionCode:supportedNetworks:merchantCapabilities:summaryItems:": {
+        "doc": "Creates a new instance of a disbursement request with the merchant identifier, currency and region codes, and other parameters you specify.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/initwithmerchantidentifier:currencycode:regioncode:supportednetworks:merchantcapabilities:summaryitems:"
+      }
+    },
+    "PKIdentityAnyOfDescriptor": {
+      "-initWithDescriptors:": {
+        "doc": "Returns a composite document descriptor with specified descriptors.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityanyofdescriptor/init(descriptors:)"
+      }
+    },
+    "PKIdentityAuthorizationController": {
+      "-cancelRequest": {
+        "doc": "Cancels a request in progress.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityauthorizationcontroller/cancelrequest()"
+      },
+      "-checkCanRequestDocument:completion:": {
+        "doc": "Returns whether an identity document is available to request.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityauthorizationcontroller/checkcanrequestdocument(_:completion:)"
+      },
+      "-requestDocument:completion:": {
+        "doc": "Prompts the user to approve the request to get the identity information.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityauthorizationcontroller/requestdocument(_:completion:)"
+      }
+    },
+    "PKIdentityElement": {
+      "+ageThresholdElementWithAge:": {
+        "doc": "Returns an element that represents the user’s age is at least the age you specify.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/age(atleast:)"
+      }
+    },
+    "PKIdentityIntentToStore": {
+      "+mayStoreIntentForDays:": {
+        "doc": "An object that indicates your app may store a data element for the length of time you specify.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityintenttostore/maystore(days:)"
+      }
+    },
+    "PKIssuerProvisioningExtensionHandler": {
+      "-generateAddPaymentPassRequestForPassEntryWithIdentifier:configuration:certificateChain:nonce:nonceSignature:completionHandler:": {
+        "doc": "Creates an object with the data the system needs to add a card to Apple Pay.",
+        "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionhandler/generateaddpaymentpassrequestforpassentrywithidentifier(_:configuration:certificatechain:nonce:noncesignature:completionhandler:)"
+      },
+      "-passEntriesWithCompletion:": {
+        "doc": "Reports the list of passes available to add to an iPhone.",
+        "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionhandler/passentries(completion:)"
+      },
+      "-remotePassEntriesWithCompletion:": {
+        "doc": "Reports the list of passes available to add to an Apple Watch.",
+        "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionhandler/remotepassentries(completion:)"
+      },
+      "-statusWithCompletion:": {
+        "doc": "Reports the status of your Wallet extension.",
+        "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionhandler/status(completion:)"
+      }
+    },
+    "PKIssuerProvisioningExtensionPaymentPassEntry": {
+      "-initWithIdentifier:title:art:addRequestConfiguration:": {
+        "doc": "Creates a new entry for a payment pass that a user adds to Wallet.",
+        "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionpaymentpassentry/init(identifier:title:art:addrequestconfiguration:)"
+      }
+    },
+    "PKIssuerProvisioningExtensionStatus": {
+      "-init": {
+        "doc": "Creates a new extension-handler status object.",
+        "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionstatus/init()"
+      }
+    },
+    "PKJapanIndividualNumberCardMetadata": {
+      "-initWithProvisioningCredentialIdentifier:sharingInstanceIdentifier:cardConfigurationIdentifier:preview:": {
+        "doc": "Initializes the user instance for provisioning.",
+        "url": "https://developer.apple.com/documentation/passkit/pkjapanindividualnumbercardmetadata/init(provisioningcredentialidentifier:sharinginstanceidentifier:cardconfigurationidentifier:preview:)"
+      },
+      "-initWithProvisioningCredentialIdentifier:sharingInstanceIdentifier:cardTemplateIdentifier:preview:": {
+        "doc": "Creates the product instance to provision.",
+        "url": "https://developer.apple.com/documentation/passkit/pkjapanindividualnumbercardmetadata/init(provisioningcredentialidentifier:sharinginstanceidentifier:cardtemplateidentifier:preview:)"
+      }
+    },
+    "PKLabeledValue": {
+      "-initWithLabel:value:": {
+        "doc": "Instantiates a new labeled value object with the specified label and value strings.",
+        "url": "https://developer.apple.com/documentation/passkit/pklabeledvalue/init(label:value:)"
+      }
+    },
+    "PKPass": {
+      "-initWithData:error:": {
+        "doc": "Creates a pass using the data you provide.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpass/init(data:)"
+      },
+      "-localizedValueForFieldKey:": {
+        "doc": "Returns the localized value for a specified field of the pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpass/localizedvalue(forfieldkey:)"
+      }
+    },
+    "PKPassLibrary": {
+      "+endAutomaticPassPresentationSuppressionWithRequestToken:": {
+        "doc": "Reenables the automatic display of the Apple Pay interface.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/endautomaticpasspresentationsuppression(withrequesttoken:)"
+      },
+      "+isPassLibraryAvailable": {
+        "doc": "Returns a Boolean value that indicates whether the pass library is available.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/ispasslibraryavailable()"
+      },
+      "+isSuppressingAutomaticPassPresentation": {
+        "doc": "Returns a Boolean value that indicates whether the system suppresses the automatic presentation of Apple Pay passes.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/issuppressingautomaticpasspresentation()"
+      },
+      "+requestAutomaticPassPresentationSuppressionWithResponseHandler:": {
+        "doc": "Prevents the device from automatically displaying the Apple Pay interface.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/requestautomaticpasspresentationsuppression(responsehandler:)"
+      },
+      "-activateSecureElementPass:withActivationData:completion:": {
+        "doc": "Activates a Secure Element pass using the specified data.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/activate(_:activationdata:completion:)"
+      },
+      "-addPasses:withCompletionHandler:": {
+        "doc": "Presents a user interface for adding multiple passes at once.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/addpasses(_:withcompletionhandler:)"
+      },
+      "-canAddFelicaPass": {
+        "doc": "Returns a Boolean value that indicates whether the library can add FeliCa™ passes.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/canaddfelicapass()"
+      },
+      "-canAddSecureElementPassWithPrimaryAccountIdentifier:": {
+        "doc": "Returns a Boolean value that indicates whether PassKit can add a Secure Element pass for the specified account.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/canaddsecureelementpass(primaryaccountidentifier:)"
+      },
+      "-containsPass:": {
+        "doc": "Returns a Boolean value that indicates whether the user’s pass library contains the specified pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/containspass(_:)"
+      },
+      "-openPaymentSetup": {
+        "doc": "Opens the user interface to set up credit cards for Apple Pay.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/openpaymentsetup()"
+      },
+      "-passWithPassTypeIdentifier:serialNumber:": {
+        "doc": "Returns the pass with the specified pass type identifier and serial number.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/pass(withpasstypeidentifier:serialnumber:)"
+      },
+      "-passes": {
+        "doc": "Returns the passes in the user’s pass library that the app can access.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/passes()"
+      },
+      "-passesOfType:": {
+        "doc": "Returns the passes of the specified pass type.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/passes(of:)"
+      },
+      "-presentSecureElementPass:": {
+        "doc": "Presents a Secure Element pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/present(_:)-9467u"
+      },
+      "-removePass:": {
+        "doc": "Removes the pass from the user’s pass library.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/removepass(_:)"
+      },
+      "-replacePassWithPass:": {
+        "doc": "Replaces a pass in the user’s pass library with the specified pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/replacepass(with:)"
+      },
+      "-serviceProviderDataForSecureElementPass:completion:": {
+        "doc": "Calls a completion handler that returns the custom data for a Secure Element pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/serviceproviderdata(for:completion:)"
+      },
+      "-signData:withSecureElementPass:completion:": {
+        "doc": "Signs an opaque value using a cryptographic signature.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/sign(_:using:completion:)"
+      }
+    },
+    "PKPaymentAuthorizationController": {
+      "+canMakePayments": {
+        "doc": "Returns whether the user can make payments.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationcontroller/canmakepayments()"
+      },
+      "+canMakePaymentsUsingNetworks:": {
+        "doc": "Returns whether the user can make payments through the specified network.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationcontroller/canmakepayments(usingnetworks:)"
+      },
+      "+canMakePaymentsUsingNetworks:capabilities:": {
+        "doc": "Returns whether the user can make payments using a card from the specified network with the specified capabilities.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationcontroller/canmakepayments(usingnetworks:capabilities:)"
+      },
+      "+supportsDisbursements": {
+        "doc": "Returns a Boolean value that indicates whether this device can process disbursement requests.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationcontroller/supportsdisbursements()"
+      },
+      "+supportsDisbursementsUsingNetworks:": {
+        "doc": "Returns a Boolean value that indicates whether this device can process disbursement requests using the specified payment network brands.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationcontroller/supportsdisbursements(using:)"
+      },
+      "+supportsDisbursementsUsingNetworks:capabilities:": {
+        "doc": "Returns a Boolean value indicating whether this device can process disbursement requests using the specified payment network brands and capabilities.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationcontroller/supportsdisbursements(using:capabilities:)"
+      },
+      "-dismissWithCompletion:": {
+        "doc": "Dismisses the payment sheet.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationcontroller/dismiss(completion:)"
+      },
+      "-initWithDisbursementRequest:": {
+        "doc": "Creates a new payment authorization controller with the disbursement request you provide.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationcontroller/init(disbursementrequest:)"
+      },
+      "-initWithPaymentRequest:": {
+        "doc": "Initializes and returns a payment authorization controller.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationcontroller/init(paymentrequest:)"
+      },
+      "-presentWithCompletion:": {
+        "doc": "Presents the payment sheet modally over your app.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationcontroller/present(completion:)"
+      }
+    },
+    "PKPaymentAuthorizationResult": {
+      "-initWithStatus:errors:": {
+        "doc": "Initializes the result with the status code and list of errors.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationresult/init(status:errors:)"
+      }
+    },
+    "PKPaymentAuthorizationViewController": {
+      "+canMakePayments": {
+        "doc": "Returns whether the user can make payments.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationviewcontroller/canmakepayments()"
+      },
+      "+canMakePaymentsUsingNetworks:": {
+        "doc": "Returns whether the user can make payments through the specified network.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationviewcontroller/canmakepayments(usingnetworks:)"
+      },
+      "+canMakePaymentsUsingNetworks:capabilities:": {
+        "doc": "Returns whether the user can make payments using a card from the specified network with the specified capabilities.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationviewcontroller/canmakepayments(usingnetworks:capabilities:)"
+      },
+      "+supportsDisbursements": {
+        "doc": "Returns a Boolean value that indicates whether this device can process disbursement requests.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationviewcontroller/supportsdisbursements()"
+      },
+      "+supportsDisbursementsUsingNetworks:": {
+        "doc": "Returns a Boolean value that indicates whether this device can process disbursement requests using the specified payment networks.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationviewcontroller/supportsdisbursements(using:)"
+      },
+      "+supportsDisbursementsUsingNetworks:capabilities:": {
+        "doc": "Returns a Boolean value that indicates whether this device can process disbursement requests using the specified payment networks and merchant capabilities.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationviewcontroller/supportsdisbursements(using:capabilities:)"
+      },
+      "-initWithDisbursementRequest:": {
+        "doc": "Initializes and returns a new payment authorization view controller with the provided disbursement request.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationviewcontroller/init(disbursementrequest:)"
+      },
+      "-initWithPaymentRequest:": {
+        "doc": "Initializes and returns a payment authorization view controller.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationviewcontroller/init(paymentrequest:)"
+      }
+    },
+    "PKPaymentButton": {
+      "+buttonWithType:style:": {
+        "doc": "Creates a new payment button with the specified type and style.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentbutton/buttonwithtype:style:"
+      },
+      "-initWithPaymentButtonType:paymentButtonStyle:": {
+        "doc": "Creates a new payment button with the specified type and style.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentbutton/init(paymentbuttontype:paymentbuttonstyle:)"
+      }
+    },
+    "PKPaymentMerchantSession": {
+      "-initWithDictionary:": {
+        "doc": "Creates an object that validates the identity of a merchant for a payment request.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentmerchantsession/init(dictionary:)"
+      }
+    },
+    "PKPaymentOrderDetails": {
+      "-initWithOrderTypeIdentifier:orderIdentifier:webServiceURL:authenticationToken:": {
+        "doc": "Initializes a payment order details object with the identifier, web service URL, and authentication token you provide.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentorderdetails/init(ordertypeidentifier:orderidentifier:webserviceurl:authenticationtoken:)"
+      }
+    },
+    "PKPaymentRequest": {
+      "+availableNetworks": {
+        "doc": "Returns the list of available payment methods that Apple Pay supports.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/availablenetworks()"
+      },
+      "+paymentBillingAddressInvalidErrorWithKey:localizedDescription:": {
+        "doc": "Creates a billing address error with the supplied key and user-facing error message.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/paymentbillingaddressinvaliderror(withkey:localizeddescription:)"
+      },
+      "+paymentContactInvalidErrorWithContactField:localizedDescription:": {
+        "doc": "Creates a contact error with the supplied field and user-facing error message.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/paymentcontactinvaliderror(withcontactfield:localizeddescription:)"
+      },
+      "+paymentCouponCodeExpiredErrorWithLocalizedDescription:": {
+        "doc": "Returns an error object that indicates an expired coupon.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/paymentcouponcodeexpirederrorwithlocalizeddescription:"
+      },
+      "+paymentCouponCodeInvalidErrorWithLocalizedDescription:": {
+        "doc": "Returns an error object that indicates an invalid coupon.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/paymentcouponcodeinvaliderrorwithlocalizeddescription:"
+      },
+      "+paymentShippingAddressInvalidErrorWithKey:localizedDescription:": {
+        "doc": "Creates a shipping address error with the supplied key and user-facing error message.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/paymentshippingaddressinvaliderror(withkey:localizeddescription:)"
+      },
+      "+paymentShippingAddressUnserviceableErrorWithLocalizedDescription:": {
+        "doc": "Creates an error for an unserviceable address, with the supplied user-facing error message.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/paymentshippingaddressunserviceableerror(withlocalizeddescription:)"
+      }
+    },
+    "PKPaymentRequestCouponCodeUpdate": {
+      "-initWithErrors:paymentSummaryItems:shippingMethods:": {
+        "doc": "Creates a payment coupon update with your specified payment summary items, errors, and shipping methods.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestcouponcodeupdate/init(errors:paymentsummaryitems:shippingmethods:)"
+      }
+    },
+    "PKPaymentRequestMerchantSessionUpdate": {
+      "-initWithStatus:merchantSession:": {
+        "doc": "Creates a payment method update with the specified status and merchant session.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestmerchantsessionupdate/init(status:merchantsession:)"
+      }
+    },
+    "PKPaymentRequestPaymentMethodUpdate": {
+      "-initWithErrors:paymentSummaryItems:": {
+        "doc": "Creates a payment-method update with your specified payment summary items.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestpaymentmethodupdate/init(errors:paymentsummaryitems:)"
+      }
+    },
+    "PKPaymentRequestShippingContactUpdate": {
+      "-initWithErrors:paymentSummaryItems:shippingMethods:": {
+        "doc": "Creates a shipping contact update with your specified payment summary items and shipping methods.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestshippingcontactupdate/init(errors:paymentsummaryitems:shippingmethods:)"
+      }
+    },
+    "PKPaymentRequestUpdate": {
+      "-initWithPaymentSummaryItems:": {
+        "doc": "Creates a payment request update with the specified payment summary items.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestupdate/init(paymentsummaryitems:)"
+      }
+    },
+    "PKPaymentSummaryItem": {
+      "+summaryItemWithLabel:amount:": {
+        "doc": "Initializes and returns a summary item with the given label and amount.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentsummaryitem/init(label:amount:)"
+      },
+      "+summaryItemWithLabel:amount:type:": {
+        "doc": "Initializes and returns a summary item with the given label, amount, and type.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentsummaryitem/init(label:amount:type:)"
+      }
+    },
+    "PKPaymentTokenContext": {
+      "-initWithMerchantIdentifier:externalIdentifier:merchantName:merchantDomain:amount:": {
+        "doc": "Create a payment token context for a single merchant.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymenttokencontext/init(merchantidentifier:externalidentifier:merchantname:merchantdomain:amount:)"
+      }
+    },
+    "PKRecurringPaymentRequest": {
+      "-initWithPaymentDescription:regularBilling:managementURL:": {
+        "doc": "Create a recurring payment object with a description, regular billing information, and a management URL.",
+        "url": "https://developer.apple.com/documentation/passkit/pkrecurringpaymentrequest/init(paymentdescription:regularbilling:managementurl:)"
+      }
+    },
+    "PKShareablePassMetadata": {
+      "-initWithProvisioningCredentialIdentifier:cardConfigurationIdentifier:sharingInstanceIdentifier:passThumbnailImage:ownerDisplayName:localizedDescription:": {
+        "doc": "Creates a shareable pass metadata object.",
+        "url": "https://developer.apple.com/documentation/passkit/pkshareablepassmetadata/init(provisioningcredentialidentifier:cardconfigurationidentifier:sharinginstanceidentifier:passthumbnailimage:ownerdisplayname:localizeddescription:)"
+      }
+    },
+    "PKStoredValuePassBalance": {
+      "-isEqualToBalance:": {
+        "doc": "Returns a Boolean value that indicates whether two pass balance objects contain the same values.",
+        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance/isequaltobalance:"
+      }
+    },
+    "PKStoredValuePassProperties": {
+      "+passPropertiesForPass:": {
+        "doc": "Creates a stored-value pass properties object for the specified pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassproperties/init(for:)"
+      }
+    },
+    "PKSuicaPassProperties": {
+      "+passPropertiesForPass:": {
+        "doc": "Instantiates a Suica pass properties object that contains the properties supported in the specified pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pksuicapassproperties/init(for:)"
+      }
+    }
+  },
+  "properties": {
+    "PKAddCarKeyPassConfiguration": {
+      "password": {
+        "doc": "A one-time password that the vehicle manufacturer provides.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddcarkeypassconfiguration/password"
+      },
+      "productPlanIdentifier": {
+        "doc": "The product plan identifier (PPID) supplied by the vehicle’s original equipment manufacturer (OEM).",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddcarkeypassconfiguration/productplanidentifier"
+      },
+      "supportedRadioTechnologies": {
+        "doc": "The wireless radio technology that the key uses.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddcarkeypassconfiguration/supportedradiotechnologies"
+      }
+    },
+    "PKAddIdentityDocumentConfiguration": {
+      "metadata": {
+        "doc": "A set of configurable metadata that defines the required information to add the corresponding pass to Wallet.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddidentitydocumentconfiguration/metadata"
+      }
+    },
+    "PKAddIdentityDocumentMetadata": {
+      "preview": {
+        "doc": "A preview object containing the necessary information to represent the pass during provisioning.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddidentitydocumentmetadata/preview"
+      }
+    },
+    "PKAddPassMetadataPreview": {
+      "localizedDescription": {
+        "doc": "A localized description of the pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddpassmetadatapreview/localizeddescription"
+      },
+      "passThumbnailImage": {
+        "doc": "A CGImage object representing the card artwork of the pass you use during provisioning.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddpassmetadatapreview/passthumbnailimage"
+      }
+    },
+    "PKAddPaymentPassRequest": {
+      "activationData": {
+        "doc": "The request’s activation data.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpassrequest/activationdata"
+      },
+      "encryptedPassData": {
+        "doc": "An encrypted JSON file containing the sensitive information needed to add a card to Apple Pay.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpassrequest/encryptedpassdata"
+      },
+      "ephemeralPublicKey": {
+        "doc": "The ephemeral public key used by elliptic curve cryptography (ECC).",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpassrequest/ephemeralpublickey"
+      }
+    },
+    "PKAddPaymentPassRequestConfiguration": {
+      "cardDetails": {
+        "doc": "An array of labeled values that describe a card.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpassrequestconfiguration/carddetails"
+      },
+      "cardholderName": {
+        "doc": "The name of the person as shown on the card.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpassrequestconfiguration/cardholdername"
+      },
+      "encryptionScheme": {
+        "doc": "The encryption scheme to be used in this request.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpassrequestconfiguration/encryptionscheme"
+      },
+      "localizedDescription": {
+        "doc": "A short description of the card.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpassrequestconfiguration/localizeddescription"
+      },
+      "paymentNetwork": {
+        "doc": "The payment network.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpassrequestconfiguration/paymentnetwork"
+      },
+      "primaryAccountIdentifier": {
+        "doc": "A primary account identifier, used to filter out pass libraries.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpassrequestconfiguration/primaryaccountidentifier"
+      },
+      "primaryAccountSuffix": {
+        "doc": "The last four or five digits of the card’s number.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpassrequestconfiguration/primaryaccountsuffix"
+      },
+      "requiresFelicaSecureElement": {
+        "doc": "A Boolean value that indicates whether the payment pass requires the Felica Secure Element.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpassrequestconfiguration/requiresfelicasecureelement"
+      },
+      "style": {
+        "doc": "A value that indicates whether a pass is for access or for payment use.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddpaymentpassrequestconfiguration/style"
+      }
+    },
+    "PKAddSecureElementPassConfiguration": {
+      "issuerIdentifier": {
+        "doc": "An opaque value for the configuration.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddsecureelementpassconfiguration/issueridentifier"
+      },
+      "localizedDescription": {
+        "doc": "The configuration’s localized description.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddsecureelementpassconfiguration/localizeddescription"
+      }
+    },
+    "PKAddShareablePassConfiguration": {
+      "credentialsMetadata": {
+        "doc": "Information for a shareable pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddshareablepassconfiguration/credentialsmetadata"
+      },
+      "primaryAction": {
+        "doc": "The action that the system performs with the shareable pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkaddshareablepassconfiguration/primaryaction"
+      }
+    },
+    "PKAutomaticReloadPaymentRequest": {
+      "automaticReloadBilling": {
+        "doc": "Summary items that contain the top-up amount and balance threshold amount for the automatic reload payment.",
+        "url": "https://developer.apple.com/documentation/passkit/pkautomaticreloadpaymentrequest/automaticreloadbilling"
+      },
+      "billingAgreement": {
+        "doc": "A localized billing agreement that the payment sheet displays to the user before the user authorizes the payment.",
+        "url": "https://developer.apple.com/documentation/passkit/pkautomaticreloadpaymentrequest/billingagreement"
+      },
+      "managementURL": {
+        "doc": "A URL to a web page where the user can manage and delete the payment method for the automatic reload payment.",
+        "url": "https://developer.apple.com/documentation/passkit/pkautomaticreloadpaymentrequest/managementurl"
+      },
+      "paymentDescription": {
+        "doc": "A description that you provide of the automatic reload payment and that Apple Pay displays to the user in the payment sheet.",
+        "url": "https://developer.apple.com/documentation/passkit/pkautomaticreloadpaymentrequest/paymentdescription"
+      },
+      "tokenNotificationURL": {
+        "doc": "A URL you provide to receive life-cycle notifications from the Apple Pay servers about the Apple Pay merchant token for the automatic reload payment.",
+        "url": "https://developer.apple.com/documentation/passkit/pkautomaticreloadpaymentrequest/tokennotificationurl"
+      }
+    },
+    "PKAutomaticReloadPaymentSummaryItem": {
+      "thresholdAmount": {
+        "doc": "The balance an account reaches before you apply the automatic reload amount.",
+        "url": "https://developer.apple.com/documentation/passkit/pkautomaticreloadpaymentsummaryitem/thresholdamount"
+      }
+    },
+    "PKContact": {
+      "emailAddress": {
+        "doc": "The contact’s email address, or nil if the contact’s email is not needed for the transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkcontact/emailaddress"
+      },
+      "name": {
+        "doc": "The contact’s first and last name, or nil if the contact’s name is not needed for the transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkcontact/name"
+      },
+      "phoneNumber": {
+        "doc": "The contact’s telephone number, or nil if the contact’s phone number is not needed for the transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkcontact/phonenumber"
+      },
+      "postalAddress": {
+        "doc": "The contact’s full postal address.",
+        "url": "https://developer.apple.com/documentation/passkit/pkcontact/postaladdress"
+      },
+      "supplementarySubLocality": {
+        "doc": "The contact’s sublocality, or nil if the sublocality is not needed for the transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkcontact/supplementarysublocality"
+      }
+    },
+    "PKDateComponentsRange": {
+      "endDateComponents": {
+        "doc": "The end date and time of the range.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdatecomponentsrange/enddatecomponents"
+      },
+      "startDateComponents": {
+        "doc": "The start date and time of the range.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdatecomponentsrange/startdatecomponents"
+      }
+    },
+    "PKDeferredPaymentRequest": {
+      "billingAgreement": {
+        "doc": "The localized billing agreement the framework displays to the user prior to payment authorization.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdeferredpaymentrequest/billingagreement"
+      },
+      "deferredBilling": {
+        "doc": "An object that contains details about the deferred payment.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdeferredpaymentrequest/deferredbilling"
+      },
+      "freeCancellationDate": {
+        "doc": "The date before which you must cancel a deferred payment without incurring any cancellation charges.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdeferredpaymentrequest/freecancellationdate"
+      },
+      "freeCancellationDateTimeZone": {
+        "doc": "The time zone at the destination location of the payment.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdeferredpaymentrequest/freecancellationdatetimezone"
+      },
+      "managementURL": {
+        "doc": "A URL that links to a page on your web site where the user can manage the payment method for the deferred payment, including deleting it.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdeferredpaymentrequest/managementurl"
+      },
+      "paymentDescription": {
+        "doc": "A description of the deferred payment.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdeferredpaymentrequest/paymentdescription"
+      },
+      "tokenNotificationURL": {
+        "doc": "A URL to receive life-cycle notifications for the merchant-specific payment token the system issues for the request, if applicable.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdeferredpaymentrequest/tokennotificationurl"
+      }
+    },
+    "PKDeferredPaymentSummaryItem": {
+      "deferredDate": {
+        "doc": "The date, in the future, of the payment.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdeferredpaymentsummaryitem/deferreddate"
+      }
+    },
+    "PKDisbursementRequest": {
+      "applicationData": {
+        "doc": "Optional merchant-supplied information about the disbursement request.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/applicationdata"
+      },
+      "currency": {
+        "doc": "The currency to use for this disbursement.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/currency"
+      },
+      "currencyCode": {
+        "doc": "The currency code string for this disbursement.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/currencycode"
+      },
+      "init(merchantIdentifier:currency:region:supportedNetworks:merchantCapabilities:summaryItems:)": {
+        "doc": "Creates a disbursement request with the parameters you specify.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/init(merchantidentifier:currency:region:supportednetworks:merchantcapabilities:summaryitems:)"
+      },
+      "isDelegatedRequest": {
+        "doc": "A Boolean value that indicates whether this disbursement request is being made by a delegated entity on behalf of a merchant.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/isdelegatedrequest"
+      },
+      "merchantCapabilities": {
+        "doc": "A value that represents the payment-processing capabilities of the merchant.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/merchantcapabilities"
+      },
+      "merchantIdentifier": {
+        "doc": "A string that identifies the merchant.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/merchantidentifier"
+      },
+      "recipientContact": {
+        "doc": "A contact object that describes the recipient.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/recipientcontact"
+      },
+      "region": {
+        "doc": "The geographic region that describes the location for this disbursement.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/region"
+      },
+      "regionCode": {
+        "doc": "The merchant’s country code string.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/regioncode"
+      },
+      "requiredRecipientContactFields": {
+        "doc": "An array that indicates which of the recipient’s contact details the merchant requires in order to process a disbursement.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/requiredrecipientcontactfields"
+      },
+      "summaryItems": {
+        "doc": "An array of payment summary item objects that the framework presents to people.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/summaryitems"
+      },
+      "supportedNetworks": {
+        "doc": "An array of payment networks the merchant supports.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/supportednetworks"
+      },
+      "supportedRegions": {
+        "doc": "An array of two-letter region codes that describes the regions to support.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/supportedregions-j9ug"
+      }
+    },
+    "PKIdentityAnyOfDescriptor": {
+      "descriptors": {
+        "doc": "Set of requested descriptors for the composite document descriptor.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityanyofdescriptor/descriptors"
+      }
+    },
+    "PKIdentityDocument": {
+      "encryptedData": {
+        "doc": "An encrypted data object that contains the document information and metadata to associate with a request.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentitydocument/encrypteddata"
+      }
+    },
+    "PKIdentityDocumentMetadata": {
+      "documentType": {
+        "doc": "Identifies the type of the identity document.",
+        "url": "https://developer.apple.com/documentation/PassKit/PKIdentityDocumentMetadata/documentType"
+      },
+      "issuingCountryCode": {
+        "doc": "Identifies the issuing country of the identity document.",
+        "url": "https://developer.apple.com/documentation/PassKit/PKIdentityDocumentMetadata/issuingCountryCode"
+      },
+      "serverEnvironmentIdentifier": {
+        "doc": "An identifier that references the target server environment Apple Pay servers need to connect with to provision the pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentitydocumentmetadata/serverenvironmentidentifier"
+      },
+      "sharingInstanceIdentifier": {
+        "doc": "A unique identifier that refers to an instance of sharing credentials to a person’s device that another user, device, or the web initiates.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentitydocumentmetadata/sharinginstanceidentifier"
+      }
+    },
+    "PKIdentityElement": {
+      "addressElement": {
+        "doc": "An element that represents the user’s home address.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/address"
+      },
+      "ageElement": {
+        "doc": "An element that represents the user’s age, in years.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/age"
+      },
+      "dateOfBirthElement": {
+        "doc": "An element that represents the user’s date of birth.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/dateofbirth"
+      },
+      "dhsTemporaryLawfulStatusElement": {
+        "doc": "Indicates whether the mobile document holder has temporary lawful status based on information from the U.S. Department of Homeland Security (DHS).",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/dhstemporarylawfulstatus"
+      },
+      "documentExpirationDateElement": {
+        "doc": "An element that represents the expiration date of the document.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/documentexpirationdate"
+      },
+      "documentIssueDateElement": {
+        "doc": "An element that represents the issue date of the document.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/documentissuedate"
+      },
+      "documentNumberElement": {
+        "doc": "An element that represents the document’s number, as the issuing authority defines.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/documentnumber"
+      },
+      "drivingPrivilegesElement": {
+        "doc": "An element that represents the user’s driving privileges.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/drivingprivileges"
+      },
+      "eyeColorElement": {
+        "doc": "The user’s eye color on record with the issuer.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/eyecolor"
+      },
+      "familyNameElement": {
+        "doc": "An element that represents the user’s family name.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/familyname"
+      },
+      "givenNameElement": {
+        "doc": "An element that represents the user’s given name.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/givenname"
+      },
+      "hairColorElement": {
+        "doc": "The user’s hair color on record with the issuer.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/haircolor"
+      },
+      "heightElement": {
+        "doc": "The user’s height on record with the issuer.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/height"
+      },
+      "issuingAuthorityElement": {
+        "doc": "An element that represents the user’s issuing authority.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/issuingauthority"
+      },
+      "nameElement": {
+        "doc": "The user’s full name.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/name"
+      },
+      "nationalityElement": {
+        "doc": "The mobile document holder’s nationality.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/nationality"
+      },
+      "organDonorStatusElement": {
+        "doc": "The user’s organ donor status on record with the issuer.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/organdonorstatus"
+      },
+      "placeOfBirthElement": {
+        "doc": "The place where the mobile document holder was born.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/placeofbirth"
+      },
+      "portraitElement": {
+        "doc": "An element that represents the user’s photo.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/portrait"
+      },
+      "sexElement": {
+        "doc": "An element that represents the document holder’s sex.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/sex"
+      },
+      "signatureUsualMarkElement": {
+        "doc": "The signature or usual mark of the mobile document holder.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/signatureusualmark"
+      },
+      "veteranStatusElement": {
+        "doc": "The user’s veteran status on record with the issuer.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/veteranstatus"
+      },
+      "weightElement": {
+        "doc": "The user’s weight on record with the issuer.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityelement/weight"
+      }
+    },
+    "PKIdentityIntentToStore": {
+      "mayStoreIntent": {
+        "doc": "An object that indicates your app may store a data element for an indefinite length of time.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityintenttostore/maystore"
+      },
+      "willNotStoreIntent": {
+        "doc": "An object that indicates your app won’t store a data element any longer than necessary to complete a request.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityintenttostore/willnotstore"
+      }
+    },
+    "PKIdentityNationalIDCardDescriptor": {
+      "region": {
+        "doc": "A string used to specify the region associated with the ID.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentitynationalidcarddescriptor/region"
+      }
+    },
+    "PKIdentityRequest": {
+      "descriptor": {
+        "doc": "The description of the document the app requests.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityrequest/descriptor"
+      },
+      "merchantIdentifier": {
+        "doc": "A value that represents the merchant that makes the request.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityrequest/merchantidentifier"
+      },
+      "nonce": {
+        "doc": "An arbitrary number that the signed response playload includes.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityrequest/nonce"
+      },
+      "usageDescriptionKey": {
+        "doc": "A key in the NSIdentityUsageDescriptionDictionary field of the app’s Info.plist file.",
+        "url": "https://developer.apple.com/documentation/passkit/pkidentityrequest/usagedescriptionkey"
+      }
+    },
+    "PKIssuerProvisioningExtensionPassEntry": {
+      "art": {
+        "doc": "An image to that the system displays to the user when they add or select the card.",
+        "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionpassentry/art"
+      },
+      "identifier": {
+        "doc": "A developer-defined value you use to identify the card.",
+        "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionpassentry/identifier"
+      },
+      "title": {
+        "doc": "A name for the pass that the system displays to the user when they add or select the card.",
+        "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionpassentry/title"
+      }
+    },
+    "PKIssuerProvisioningExtensionPaymentPassEntry": {
+      "addRequestConfiguration": {
+        "doc": "The configuration that the system uses to add a payment pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionpaymentpassentry/addrequestconfiguration"
+      }
+    },
+    "PKIssuerProvisioningExtensionStatus": {
+      "passEntriesAvailable": {
+        "doc": "A Boolean value that indicates whether a payment card is available to add to an iPhone.",
+        "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionstatus/passentriesavailable"
+      },
+      "remotePassEntriesAvailable": {
+        "doc": "A Boolean value that indicates whether a payment card is available to add to an Apple Watch.",
+        "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionstatus/remotepassentriesavailable"
+      },
+      "requiresAuthentication": {
+        "doc": "A Boolean value that indicates whether adding a card requires an authorization-user-interface extension provided by your app.",
+        "url": "https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionstatus/requiresauthentication"
+      }
+    },
+    "PKJapanIndividualNumberCardMetadata": {
+      "authenticationPassword": {
+        "doc": "A string that specifies the authentication password when provisioning the pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkjapanindividualnumbercardmetadata/authenticationpassword"
+      },
+      "preview": {
+        "doc": "An object that contains information representing the pass for provisioning.",
+        "url": "https://developer.apple.com/documentation/passkit/pkjapanindividualnumbercardmetadata/preview"
+      },
+      "signingPassword": {
+        "doc": "A string that sets the signing password when you provision the pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkjapanindividualnumbercardmetadata/signingpassword"
+      }
+    },
+    "PKLabeledValue": {
+      "label": {
+        "doc": "A string that contains the label for the value.",
+        "url": "https://developer.apple.com/documentation/passkit/pklabeledvalue/label"
+      },
+      "value": {
+        "doc": "A string that contains the value associated with a label.",
+        "url": "https://developer.apple.com/documentation/passkit/pklabeledvalue/value"
+      }
+    },
+    "PKPass": {
+      "authenticationToken": {
+        "doc": "The token for authenticating update requests.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpass/authenticationtoken"
+      },
+      "deviceName": {
+        "doc": "The name of the device that hosts the pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpass/devicename"
+      },
+      "icon": {
+        "doc": "The pass icon.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpass/icon"
+      },
+      "localizedDescription": {
+        "doc": "The pass’s localized description.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpass/localizeddescription"
+      },
+      "localizedName": {
+        "doc": "The localized name for the pass’s template.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpass/localizedname"
+      },
+      "organizationName": {
+        "doc": "The name of the organization that creates the pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpass/organizationname"
+      },
+      "passType": {
+        "doc": "The pass’s type.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpass/passtype"
+      },
+      "passTypeIdentifier": {
+        "doc": "The pass’s pass type identifier.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpass/passtypeidentifier"
+      },
+      "passURL": {
+        "doc": "The URL that opens the pass in the Wallet app.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpass/passurl"
+      },
+      "paymentPass": {
+        "doc": "The underlying payment pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpass/paymentpass"
+      },
+      "relevantDate": {
+        "doc": "The date when the pass is most likely to be useful or necessary.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpass/relevantdate"
+      },
+      "remotePass": {
+        "doc": "A Boolean value that indicates whether the pass is on a paired device, such as an Apple Watch.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpass/isremotepass"
+      },
+      "secureElementPass": {
+        "doc": "The pass that contains an accompanying credential that the device stores in the Secure Element.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpass/secureelementpass"
+      },
+      "serialNumber": {
+        "doc": "A value that uniquely identifies the pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpass/serialnumber"
+      },
+      "userInfo": {
+        "doc": "Developer-specific custom data.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpass/userinfo"
+      },
+      "webServiceURL": {
+        "doc": "The URL for the web service.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpass/webserviceurl"
+      }
+    },
+    "PKPassLibrary": {
+      "remoteSecureElementPasses": {
+        "doc": "The Secure Element passes that PassKit stores on paired devices.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/remotesecureelementpasses"
+      },
+      "secureElementPassActivationAvailable": {
+        "doc": "A Boolean value that indicates whether the device supports creating Secure Element passes.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpasslibrary/issecureelementpassactivationavailable"
+      }
+    },
+    "PKPayment": {
+      "billingAddress": {
+        "doc": "The user-selected billing address for this transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpayment/billingaddress"
+      },
+      "billingContact": {
+        "doc": "The user-selected billing address for this transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpayment/billingcontact"
+      },
+      "shippingAddress": {
+        "doc": "The user-selected shipping address for this transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpayment/shippingaddress"
+      },
+      "shippingContact": {
+        "doc": "The user-selected shipping address for this transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpayment/shippingcontact"
+      },
+      "shippingMethod": {
+        "doc": "The user-selected shipping method for this transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpayment/shippingmethod"
+      },
+      "token": {
+        "doc": "The encrypted payment information.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpayment/token"
+      }
+    },
+    "PKPaymentAuthorizationController": {
+      "delegate": {
+        "doc": "The controller’s delegate.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationcontroller/delegate"
+      }
+    },
+    "PKPaymentAuthorizationResult": {
+      "errors": {
+        "doc": "List of errors in the Apple Pay sheet.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationresult/errors"
+      },
+      "orderDetails": {
+        "doc": "Optional metadata with order details for the placed order.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationresult/orderdetails"
+      },
+      "status": {
+        "doc": "Payment authorization general status.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationresult/status"
+      }
+    },
+    "PKPaymentAuthorizationViewController": {
+      "delegate": {
+        "doc": "The view controller’s delegate.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationviewcontroller/delegate"
+      }
+    },
+    "PKPaymentButton": {
+      "cornerRadius": {
+        "doc": "The radius, in points, for the rounded corners on the button.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentbutton/cornerradius"
+      }
+    },
+    "PKPaymentMethod": {
+      "billingAddress": {
+        "doc": "The user’s billing address.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentmethod/billingaddress"
+      },
+      "displayName": {
+        "doc": "A string, suitable for display, that describes the card.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentmethod/displayname"
+      },
+      "network": {
+        "doc": "A string, suitable for display, that describes the payment network for the card.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentmethod/network"
+      },
+      "paymentPass": {
+        "doc": "The accompanying payment pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentmethod/paymentpass"
+      },
+      "secureElementPass": {
+        "doc": "The accompanying Secure Element pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentmethod/secureelementpass"
+      },
+      "type": {
+        "doc": "A value that represents the card’s type.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentmethod/type"
+      }
+    },
+    "PKPaymentOrderDetails": {
+      "authenticationToken": {
+        "doc": "The authentification token supplied to your web service.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentorderdetails/authenticationtoken"
+      },
+      "orderIdentifier": {
+        "doc": "A unique order identifier scoped to your order type identifier.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentorderdetails/orderidentifier"
+      },
+      "orderTypeIdentifier": {
+        "doc": "An identifier for the order type associated with the order.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentorderdetails/ordertypeidentifier"
+      },
+      "webServiceURL": {
+        "doc": "The URL for your web service.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentorderdetails/webserviceurl"
+      }
+    },
+    "PKPaymentPass": {
+      "activationState": {
+        "doc": "The current activation state of the pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentpass/activationstate"
+      }
+    },
+    "PKPaymentRequest": {
+      "PKPaymentRequest.ApplePayLaterAvailability": {
+        "doc": "Values you use to enable or disable Apple Pay Later for a specific transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/applepaylateravailability-swift.enum"
+      },
+      "PKPaymentRequest.MerchantCategoryCode": {
+        "doc": "An optional four-digit struct, in ISO 18245 format, that represents the type of goods or service the merchant provides for the transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/merchantcategorycode-swift.struct"
+      },
+      "applePayLaterAvailability": {
+        "doc": "A value that indicates whether Apple Pay Later is available for a transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/applepaylateravailability-3dxrt"
+      },
+      "applicationData": {
+        "doc": "Application-specific data or state.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/applicationdata"
+      },
+      "automaticReloadPaymentRequest": {
+        "doc": "An optional request to set up an automatic reload payment, such as a store card top-up.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/automaticreloadpaymentrequest"
+      },
+      "billingAddress": {
+        "doc": "A prepopulated billing address.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/billingaddress"
+      },
+      "billingContact": {
+        "doc": "A prepopulated billing address.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/billingcontact"
+      },
+      "countryCode": {
+        "doc": "The merchant’s two-letter ISO 3166 country code.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/countrycode"
+      },
+      "couponCode": {
+        "doc": "The initial coupon code for the payment request.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/couponcode"
+      },
+      "currencyCode": {
+        "doc": "The three-letter ISO 4217 currency code that determines the currency the payment request uses.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/currencycode"
+      },
+      "deferredPaymentRequest": {
+        "doc": "A request to set up a deferred payment, such as a hotel booking or a pre-order.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/deferredpaymentrequest"
+      },
+      "isDelegatedRequest": {
+        "doc": "A Boolean value that indicates whether this payment request is being made by a delegated entity on behalf of a merchant.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/isdelegatedrequest"
+      },
+      "merchantCapabilities": {
+        "doc": "A bit field of the payment-processing protocols and card types that you support.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/merchantcapabilities"
+      },
+      "merchantCategoryCode": {
+        "doc": "An optional four-digit property, in ISO 18245 format, that represents the type of goods or service the merchant provides for the transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/merchantcategorycode-7vg6z"
+      },
+      "merchantIdentifier": {
+        "doc": "Your merchant identifier.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/merchantidentifier"
+      },
+      "multiTokenContexts": {
+        "doc": "An array of payment token contexts to request multiple payment tokens with one payment token per context.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/multitokencontexts"
+      },
+      "paymentCouponCodeExpiredError(localizedDescription:)": {
+        "doc": "Returns an error object that indicates an expired coupon.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/paymentcouponcodeexpirederror(localizeddescription:)"
+      },
+      "paymentCouponCodeInvalidError(localizedDescription:)": {
+        "doc": "Returns an error object that indicates an invalid coupon.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/paymentcouponcodeinvaliderror(localizeddescription:)"
+      },
+      "paymentSummaryItems": {
+        "doc": "An array of payment summary item objects that summarize the amount of the payment.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/paymentsummaryitems"
+      },
+      "recurringPaymentRequest": {
+        "doc": "An optional request to set up a recurring payment, typically a subscription.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/recurringpaymentrequest"
+      },
+      "requiredBillingAddressFields": {
+        "doc": "A bit field of billing address fields that you need in order to process the transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/requiredbillingaddressfields"
+      },
+      "requiredBillingContactFields": {
+        "doc": "A list of fields that you need for a billing contact to process the transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/requiredbillingcontactfields"
+      },
+      "requiredShippingAddressFields": {
+        "doc": "A bit field of shipping address fields that you need in order to process the transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/requiredshippingaddressfields"
+      },
+      "requiredShippingContactFields": {
+        "doc": "A list of fields that you need for a shipping contact to process the transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/requiredshippingcontactfields"
+      },
+      "shippingAddress": {
+        "doc": "A prepopulated shipping address.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/shippingaddress"
+      },
+      "shippingContact": {
+        "doc": "A prepopulated shipping address.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/shippingcontact"
+      },
+      "shippingContactEditingMode": {
+        "doc": "A value that indicates whether the shipping mode prevents the user from editing the shipping address.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/shippingcontacteditingmode"
+      },
+      "shippingMethods": {
+        "doc": "An array of shipping method objects that describe the supported shipping methods.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/shippingmethods"
+      },
+      "shippingType": {
+        "doc": "The type of shipping the request uses.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/shippingtype"
+      },
+      "supportedCountries": {
+        "doc": "A list of ISO 3166 country codes to limit payments to cards from specific countries or regions.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/supportedcountries"
+      },
+      "supportedNetworks": {
+        "doc": "The payment methods that you support.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/supportednetworks"
+      },
+      "supportsCouponCode": {
+        "doc": "A Boolean value that determines whether the payment sheet displays the coupon code field.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/supportscouponcode"
+      },
+      "unsupportedPrimaryAccountIdentifiers": {
+        "doc": "An array of Apple Pay cards to exclude from payment.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/unsupportedprimaryaccountidentifiers"
+      }
+    },
+    "PKPaymentRequestCouponCodeUpdate": {
+      "errors": {
+        "doc": "An array of errors for the coupon code that the user must resolve.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestcouponcodeupdate/errors"
+      }
+    },
+    "PKPaymentRequestMerchantSessionUpdate": {
+      "session": {
+        "doc": "An object that validates the identity of a merchant for the payment request.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestmerchantsessionupdate/session"
+      },
+      "status": {
+        "doc": "The current authorization status for the payment.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestmerchantsessionupdate/status"
+      }
+    },
+    "PKPaymentRequestPaymentMethodUpdate": {
+      "errors": {
+        "doc": "An array of payment-method errors that the user must resolve.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestpaymentmethodupdate/errors"
+      }
+    },
+    "PKPaymentRequestShippingContactUpdate": {
+      "errors": {
+        "doc": "An array of shipping contact information errors that the user must resolve.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestshippingcontactupdate/errors"
+      },
+      "shippingMethods": {
+        "doc": "An array of shipping methods.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestshippingcontactupdate/shippingmethods"
+      }
+    },
+    "PKPaymentRequestUpdate": {
+      "automaticReloadPaymentRequest": {
+        "doc": "The automatic reload payment request to update the payment request with.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestupdate/automaticreloadpaymentrequest"
+      },
+      "deferredPaymentRequest": {
+        "doc": "The deferred payment request to update the payment request with.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestupdate/deferredpaymentrequest"
+      },
+      "multiTokenContexts": {
+        "doc": "An optional array of payment token contexts to request multiple payment tokens with one payment token per context.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestupdate/multitokencontexts"
+      },
+      "paymentSummaryItems": {
+        "doc": "The list of payment summary items for the instance.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestupdate/paymentsummaryitems"
+      },
+      "recurringPaymentRequest": {
+        "doc": "The recurring payment request to update the payment request with.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestupdate/recurringpaymentrequest"
+      },
+      "shippingMethods": {
+        "doc": "The list of shipping methods available for a payment request.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestupdate/shippingmethods"
+      },
+      "status": {
+        "doc": "The status of the payment request that indicates whether authorization succeeds or fails.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequestupdate/status"
+      }
+    },
+    "PKPaymentSummaryItem": {
+      "amount": {
+        "doc": "The summary item’s amount.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentsummaryitem/amount"
+      },
+      "label": {
+        "doc": "A short, localized description of the item.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentsummaryitem/label"
+      },
+      "type": {
+        "doc": "The summary item’s type that indicates whether the amount is final.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentsummaryitem/type"
+      }
+    },
+    "PKPaymentToken": {
+      "paymentData": {
+        "doc": "The payment data as a UTF-8 encoded serialization of a JSON dictionary.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymenttoken/paymentdata"
+      },
+      "paymentInstrumentName": {
+        "doc": "A description of the payment card that the user selected to fund the transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymenttoken/paymentinstrumentname"
+      },
+      "paymentMethod": {
+        "doc": "Information about the card used in the transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymenttoken/paymentmethod"
+      },
+      "paymentNetwork": {
+        "doc": "The payment network for the card that funds this transaction.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymenttoken/paymentnetwork"
+      },
+      "transactionIdentifier": {
+        "doc": "A unique identifier for this payment.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymenttoken/transactionidentifier"
+      }
+    },
+    "PKPaymentTokenContext": {
+      "amount": {
+        "doc": "The amount to authorize for the payment token.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymenttokencontext/amount"
+      },
+      "externalIdentifier": {
+        "doc": "An external identifier for the merchant.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymenttokencontext/externalidentifier"
+      },
+      "merchantDomain": {
+        "doc": "The merchant’s top-level domain that the Apple Pay server associates with the payment token.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymenttokencontext/merchantdomain"
+      },
+      "merchantIdentifier": {
+        "doc": "The Apply Pay merchant identifier.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymenttokencontext/merchantidentifier"
+      },
+      "merchantName": {
+        "doc": "The merchant’s display name that the Apple Pay server associates with the payment token.",
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymenttokencontext/merchantname"
+      }
+    },
+    "PKRecurringPaymentRequest": {
+      "billingAgreement": {
+        "doc": "A localized billing agreement that the payment sheet displays to the user before the user authorizes the payment.",
+        "url": "https://developer.apple.com/documentation/passkit/pkrecurringpaymentrequest/billingagreement"
+      },
+      "managementURL": {
+        "doc": "A URL to a web page where the user can update or delete the payment method for the recurring payment.",
+        "url": "https://developer.apple.com/documentation/passkit/pkrecurringpaymentrequest/managementurl"
+      },
+      "paymentDescription": {
+        "doc": "A description that you provide of the recurring payment and that Apple Pay displays to the user in the payment sheet.",
+        "url": "https://developer.apple.com/documentation/passkit/pkrecurringpaymentrequest/paymentdescription"
+      },
+      "regularBilling": {
+        "doc": "The regular billing cycle for the recurring payment, including start and end dates, an interval, and an interval count.",
+        "url": "https://developer.apple.com/documentation/passkit/pkrecurringpaymentrequest/regularbilling"
+      },
+      "tokenNotificationURL": {
+        "doc": "A URL you provide to receive life-cycle notifications from the Apple Pay servers about the Apple Pay merchant token for the recurring payment.",
+        "url": "https://developer.apple.com/documentation/passkit/pkrecurringpaymentrequest/tokennotificationurl"
+      },
+      "trialBilling": {
+        "doc": "The trial billing cycle for the recurring payment.",
+        "url": "https://developer.apple.com/documentation/passkit/pkrecurringpaymentrequest/trialbilling"
+      }
+    },
+    "PKRecurringPaymentSummaryItem": {
+      "endDate": {
+        "doc": "The date of the final payment.",
+        "url": "https://developer.apple.com/documentation/passkit/pkrecurringpaymentsummaryitem/enddate"
+      },
+      "intervalCount": {
+        "doc": "The number of interval units that make up the total payment interval.",
+        "url": "https://developer.apple.com/documentation/passkit/pkrecurringpaymentsummaryitem/intervalcount"
+      },
+      "intervalUnit": {
+        "doc": "The amount of time – in calendar units such as day, month, or year – that represents a fraction of the total payment interval.",
+        "url": "https://developer.apple.com/documentation/passkit/pkrecurringpaymentsummaryitem/intervalunit"
+      },
+      "startDate": {
+        "doc": "The date of the first payment.",
+        "url": "https://developer.apple.com/documentation/passkit/pkrecurringpaymentsummaryitem/startdate"
+      }
+    },
+    "PKSecureElementPass": {
+      "PKSecureElementPassActivationState": {
+        "doc": "The activation states of a Secure Element pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pksecureelementpass/passactivationstate-swift.enum"
+      },
+      "deviceAccountIdentifier": {
+        "doc": "The unique identifier for the device-specific account number.",
+        "url": "https://developer.apple.com/documentation/passkit/pksecureelementpass/deviceaccountidentifier"
+      },
+      "deviceAccountNumberSuffix": {
+        "doc": "A display-ready version of the device-specific account number.",
+        "url": "https://developer.apple.com/documentation/passkit/pksecureelementpass/deviceaccountnumbersuffix"
+      },
+      "devicePassIdentifier": {
+        "doc": "An opaque value for the pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pksecureelementpass/devicepassidentifier"
+      },
+      "pairedTerminalIdentifier": {
+        "doc": "The unique identifier of the paired terminal.",
+        "url": "https://developer.apple.com/documentation/passkit/pksecureelementpass/pairedterminalidentifier"
+      },
+      "passActivationState": {
+        "doc": "The activation state of the pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pksecureelementpass/passactivationstate-swift.property"
+      },
+      "primaryAccountIdentifier": {
+        "doc": "An opaque value that identifies the primary account number that funds the pass’s transactions.",
+        "url": "https://developer.apple.com/documentation/passkit/pksecureelementpass/primaryaccountidentifier"
+      },
+      "primaryAccountNumberSuffix": {
+        "doc": "A display-ready version of the primary account number.",
+        "url": "https://developer.apple.com/documentation/passkit/pksecureelementpass/primaryaccountnumbersuffix"
+      },
+      "provisioningAvailable": {
+        "doc": "A Boolean value indicating whether provisioning is available for this pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pksecureelementpass/isprovisioningavailable"
+      }
+    },
+    "PKShareablePassMetadata": {
+      "accountHash": {
+        "doc": "An Apple Push Notification push token.",
+        "url": "https://developer.apple.com/documentation/passkit/pkshareablepassmetadata/accounthash"
+      },
+      "cardConfigurationIdentifier": {
+        "doc": "A developer-defined value that represents the configuration of a pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkshareablepassmetadata/cardconfigurationidentifier"
+      },
+      "credentialIdentifier": {
+        "doc": "A developer-defined value that represents the user credentials of a pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkshareablepassmetadata/credentialidentifier"
+      },
+      "localizedDescription": {
+        "doc": "A longer form of the pass description that the system displays on the sharing sheet.",
+        "url": "https://developer.apple.com/documentation/passkit/pkshareablepassmetadata/localizeddescription"
+      },
+      "ownerDisplayName": {
+        "doc": "The name of the person that receives a shared pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkshareablepassmetadata/ownerdisplayname"
+      },
+      "passThumbnailImage": {
+        "doc": "A thumbnail image of a pass that the system displays on the sharing sheet.",
+        "url": "https://developer.apple.com/documentation/passkit/pkshareablepassmetadata/passthumbnailimage"
+      },
+      "relyingPartyIdentifier": {
+        "doc": "An identifier used in push notifications.",
+        "url": "https://developer.apple.com/documentation/passkit/pkshareablepassmetadata/relyingpartyidentifier"
+      },
+      "sharingInstanceIdentifier": {
+        "doc": "A developer-defined unique value that you use to validate a shared pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkshareablepassmetadata/sharinginstanceidentifier"
+      },
+      "templateIdentifier": {
+        "doc": "An identifier used in push notifications.",
+        "url": "https://developer.apple.com/documentation/passkit/pkshareablepassmetadata/templateidentifier"
+      }
+    },
+    "PKShippingMethod": {
+      "dateComponentsRange": {
+        "doc": "An expected range of delivery or shipping dates for a package, or the time range when an item is available for pickup.",
+        "url": "https://developer.apple.com/documentation/passkit/pkshippingmethod/datecomponentsrange"
+      },
+      "detail": {
+        "doc": "A user-readable description of the shipping method.",
+        "url": "https://developer.apple.com/documentation/passkit/pkshippingmethod/detail"
+      },
+      "identifier": {
+        "doc": "A unique identifier for the shipping method, used by the app.",
+        "url": "https://developer.apple.com/documentation/passkit/pkshippingmethod/identifier"
+      }
+    },
+    "PKStoredValuePassBalance": {
+      "==(_:_:)": {
+        "doc": "Returns a Boolean value that indicates whether two pass balance objects contain the same values.",
+        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance/==(_:_:)"
+      },
+      "PKStoredValuePassBalanceType": {
+        "doc": "The type of value that the balance represents, such as money or points.",
+        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance/balancetype-swift.struct"
+      },
+      "amount": {
+        "doc": "The current balance of a stored-value pass in money or points.",
+        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance/amount-2nwf5"
+      },
+      "balanceType": {
+        "doc": "The type of value that the balance represents, such as money or points.",
+        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance/balancetype-swift.property"
+      },
+      "currencyCode": {
+        "doc": "The ISO 4217 currency code of the balance.",
+        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance/currencycode"
+      },
+      "expiryDate": {
+        "doc": "The date that the balance expires.",
+        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance/expirydate"
+      }
+    },
+    "PKStoredValuePassProperties": {
+      "balances": {
+        "doc": "The amount available for transactions for a service represented by a stored-value pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassproperties/balances"
+      },
+      "blacklisted": {
+        "doc": "A Boolean value that indicates the pass issuer disabled a stored-value pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassproperties/isblacklisted"
+      },
+      "blocked": {
+        "doc": "A Boolean value that indicates the pass issuer disabled a stored-value pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassproperties/blocked"
+      },
+      "expirationDate": {
+        "doc": "The expiration date of a pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassproperties/expirationdate"
+      },
+      "isBlocked": {
+        "doc": "A Boolean value that indicates the pass issuer disabled a stored-value pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassproperties/isblocked"
+      }
+    },
+    "PKSuicaPassProperties": {
+      "balanceAllowedForCommute": {
+        "doc": "A Boolean value that indicates how the balance can be used.",
+        "url": "https://developer.apple.com/documentation/passkit/pksuicapassproperties/isbalanceallowedforcommute"
+      },
+      "blacklisted": {
+        "doc": "A Boolean value that indicates whether the transit pass issuer disabled the pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pksuicapassproperties/isblacklisted"
+      },
+      "greenCarTicketUsed": {
+        "doc": "A Boolean value that indicates whether the customer has redeemed the Green Car ticket.",
+        "url": "https://developer.apple.com/documentation/passkit/pksuicapassproperties/isgreencarticketused"
+      },
+      "inShinkansenStation": {
+        "doc": "A Boolean value that indicates whether the pass has tapped in at a Shinkansen Station and has not tapped out.",
+        "url": "https://developer.apple.com/documentation/passkit/pksuicapassproperties/isinshinkansenstation"
+      },
+      "inStation": {
+        "doc": "A Boolean value that indicates whether the transit pass has tapped in at a station and has not tapped out.",
+        "url": "https://developer.apple.com/documentation/passkit/pksuicapassproperties/isinstation"
+      },
+      "isBlocked": {
+        "doc": "A Boolean value that indicates whether the pass issuer disabled the pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pksuicapassproperties/isblocked"
+      },
+      "lowBalanceGateNotificationEnabled": {
+        "doc": "A Boolean value that determines whether the terminal provides feedback if the balance is low after a deduction.",
+        "url": "https://developer.apple.com/documentation/passkit/pksuicapassproperties/islowbalancegatenotificationenabled"
+      },
+      "transitBalance": {
+        "doc": "The current usable stored value on the transit card.",
+        "url": "https://developer.apple.com/documentation/passkit/pksuicapassproperties/transitbalance"
+      },
+      "transitBalanceCurrencyCode": {
+        "doc": "The currency code associated with the balance on the pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pksuicapassproperties/transitbalancecurrencycode"
+      }
+    },
+    "PKTransitPassProperties": {
+      "blacklisted": {
+        "doc": "A Boolean value that indicates the transit pass issuer disabled the pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pktransitpassproperties/isblacklisted"
+      },
+      "blocked": {
+        "doc": "A Boolean value that indicates the pass issuer disabled the pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pktransitpassproperties/blocked"
+      },
+      "expirationDate": {
+        "doc": "The date that the transit card expires.",
+        "url": "https://developer.apple.com/documentation/passkit/pktransitpassproperties/expirationdate"
+      },
+      "inStation": {
+        "doc": "A Boolean value that indicates whether the transit pass has tapped in at a station and has not tapped out.",
+        "url": "https://developer.apple.com/documentation/passkit/pktransitpassproperties/isinstation"
+      },
+      "isBlocked": {
+        "doc": "A Boolean value that indicates the pass issuer disabled the pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pktransitpassproperties/isblocked"
+      },
+      "transitBalance": {
+        "doc": "The current usable stored value on the transit card.",
+        "url": "https://developer.apple.com/documentation/passkit/pktransitpassproperties/transitbalance"
+      },
+      "transitBalanceCurrencyCode": {
+        "doc": "The currency code associated with the balance on the pass.",
+        "url": "https://developer.apple.com/documentation/passkit/pktransitpassproperties/transitbalancecurrencycode"
+      }
+    }
+  }
+}

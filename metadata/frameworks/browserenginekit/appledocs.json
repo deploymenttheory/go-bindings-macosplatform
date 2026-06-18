@@ -1,0 +1,405 @@
+{
+  "schema_version": 1,
+  "framework": "BrowserEngineKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "BEAccessibilityTextMarker": {
+      "doc": "An abstract class that represents a location in an element’s accessibility text.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitytextmarker"
+    },
+    "BEDownloadMonitorLocation": {
+      "doc": "A class that associates a URL with the bookmark you use to access that URL.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/bedownloadmonitorlocation"
+    },
+    "BENetworkingProcess": {
+      "doc": "An object that represents a networking extension process.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/benetworkingprocess"
+    },
+    "BERenderingProcess": {
+      "doc": "An object that represents a running browser rendering extension process.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/berenderingprocess"
+    },
+    "BETextAlternatives": {
+      "doc": "An object that provides alternative text suggestions for a person’s text selection.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/betextalternatives"
+    },
+    "BETextSuggestion": {
+      "doc": "A text suggestion to insert into a document.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/betextsuggestion"
+    },
+    "BEWebAppManifest": {
+      "doc": "An object that represents a web app manifest.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/bewebappmanifest"
+    },
+    "BEWebContentFilter": {
+      "doc": "An object that represents a web content filter.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/bewebcontentfilter"
+    },
+    "BEWebContentProcess": {
+      "doc": "A class that processes webpage content in an app extension.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/bewebcontentprocess"
+    }
+  },
+  "protocols": {
+    "BEAccessibilityTextMarkerSupport": {
+      "doc": "A set of methods that provide information about text offsets to support assistive features.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitytextmarkersupport"
+    },
+    "BEExtensionProcess": {
+      "doc": "A common protocol that creates XPC connections for an extension process.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/beextensionprocess"
+    },
+    "BEProcessCapabilityGrant": {
+      "doc": "An object that represents a granted capability.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/beprocesscapabilitygrant"
+    },
+    "BETextInput": {
+      "doc": "A protocol for asynchronous text views that integrate with the text system.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/betextinput"
+    },
+    "BETextInputDelegate": {
+      "doc": "A delegate protocol that a browser text view uses to notify the text system of changes.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/betextinputdelegate"
+    },
+    "BETextInteractionDelegate": {
+      "doc": "A set of methods that informs you about selection changes in text views.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/betextinteractiondelegate"
+    }
+  },
+  "enums": {
+    "BEAccessibilityContainerType": {
+      "doc": "Types of containers for an element.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitycontainertype",
+      "members": {
+        "BEAccessibilityContainerTypeAlert": {
+          "doc": "An alert that contains the element.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitycontainertype/alert"
+        },
+        "BEAccessibilityContainerTypeArticle": {
+          "doc": "An HTML article element that contains the alert.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitycontainertype/article"
+        },
+        "BEAccessibilityContainerTypeDescriptionList": {
+          "doc": "A description list that contains the element.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitycontainertype/descriptionlist"
+        },
+        "BEAccessibilityContainerTypeDialog": {
+          "doc": "A dialog that contains the element.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitycontainertype/dialog"
+        },
+        "BEAccessibilityContainerTypeFieldset": {
+          "doc": "An HTML fieldset element that contains the element.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitycontainertype/fieldset"
+        },
+        "BEAccessibilityContainerTypeFrame": {
+          "doc": "A frame that contains the element.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitycontainertype/frame"
+        },
+        "BEAccessibilityContainerTypeLandmark": {
+          "doc": "A website accessibility landmark that contains the element.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitycontainertype/landmark"
+        },
+        "BEAccessibilityContainerTypeList": {
+          "doc": "A list contains the element.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitycontainertype/list"
+        },
+        "BEAccessibilityContainerTypeNone": {
+          "doc": "An option that indicates the element has no container.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitycontainertype/beaccessibilitycontainertypenone"
+        },
+        "BEAccessibilityContainerTypeScrollArea": {
+          "doc": "A scroll area that contains the element.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitycontainertype/scrollarea"
+        },
+        "BEAccessibilityContainerTypeSemanticGroup": {
+          "doc": "A semantic group that contains the element.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitycontainertype/semanticgroup"
+        },
+        "BEAccessibilityContainerTypeTable": {
+          "doc": "A table that contains the element.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitycontainertype/table"
+        },
+        "BEAccessibilityContainerTypeTree": {
+          "doc": "A tree that contains the element.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitycontainertype/tree"
+        }
+      }
+    },
+    "BEAccessibilityPressedState": {
+      "doc": "An enumeration that indicates whether an element is pressed.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitypressedstate",
+      "members": {
+        "BEAccessibilityPressedStateFalse": {
+          "doc": "A state that indicates the element isn’t pressed.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitypressedstate/false"
+        },
+        "BEAccessibilityPressedStateMixed": {
+          "doc": "A state that indicates the element is in a mixed state.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitypressedstate/mixed"
+        },
+        "BEAccessibilityPressedStateTrue": {
+          "doc": "A state that indicates the element is pressed.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitypressedstate/true"
+        },
+        "BEAccessibilityPressedStateUndefined": {
+          "doc": "An option that indicates an undefined pressed state.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beaccessibilitypressedstate/undefined"
+        }
+      }
+    },
+    "BEGestureType": {
+      "doc": "The types of touch gestures that operate on input text.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/begesturetype",
+      "members": {
+        "BEGestureTypeDoubleTap": {
+          "doc": "A gesture for two rapid consecutive taps.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/begesturetype/doubletap"
+        },
+        "BEGestureTypeDoubleTapAndHold": {
+          "doc": "A gesture for a double tap followed by holding the second tap.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/begesturetype/doubletapandhold"
+        },
+        "BEGestureTypeForceTouch": {
+          "doc": "A gesture that represents a deep press using 3D Touch or Force Touch.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/begesturetype/forcetouch"
+        },
+        "BEGestureTypeIMPhraseBoundaryDrag": {
+          "doc": "A gesture for dragging to adjust input method phrase boundaries.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/begesturetype/imphraseboundarydrag"
+        },
+        "BEGestureTypeLoupe": {
+          "doc": "A gesture for touch interactions with the magnifying glass tool.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/begesturetype/loupe"
+        },
+        "BEGestureTypeOneFingerDoubleTap": {
+          "doc": "A gesture for a double tap with a single finger.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/begesturetype/onefingerdoubletap"
+        },
+        "BEGestureTypeOneFingerTap": {
+          "doc": "A gesture for a single tap performed with one finger.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/begesturetype/onefingertap"
+        },
+        "BEGestureTypeOneFingerTripleTap": {
+          "doc": "A gesture for three rapid consecutive taps with one finger.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/begesturetype/onefingertripletap"
+        },
+        "BEGestureTypeTwoFingerRangedSelectGesture": {
+          "doc": "A gesture to select a range of text with two fingers.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/begesturetype/twofingerrangedselectgesture"
+        },
+        "BEGestureTypeTwoFingerSingleTap": {
+          "doc": "A gesture for a single simultaneous tap with two fingers.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/begesturetype/twofingersingletap"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a gesture option of the specified underlying value.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/begesturetype/init(rawvalue:)"
+        }
+      }
+    },
+    "BESelectionFlags": {
+      "doc": "Flags that indicate different states or characteristics of a text selection.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/beselectionflags",
+      "members": {
+        "BEPhraseBoundaryChanged": {
+          "doc": "A flag that indicates whether a text selection crosses or modifies phrase boundaries in an active selection.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beselectionflags/phraseboundarychanged"
+        },
+        "BESelectionFlagsNone": {
+          "doc": "An option that indicates no active flags.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beselectionflags/beselectionflagsnone"
+        },
+        "BESelectionFlipped": {
+          "doc": "A flag that indicates whether a text selection is reversed or flipped in direction from its original direction.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beselectionflags/selectionflipped"
+        },
+        "BEWordIsNearTap": {
+          "doc": "A flag that indicates whether a word resides near the person’s tap gesture.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beselectionflags/wordisneartap"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a selection flags instance with the given underlying value.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beselectionflags/init(rawvalue:)"
+        }
+      }
+    },
+    "BESelectionTouchPhase": {
+      "doc": "The different phases of touch interaction during text selection operations.",
+      "url": "https://developer.apple.com/documentation/browserenginekit/beselectiontouchphase",
+      "members": {
+        "BESelectionTouchPhaseEnded": {
+          "doc": "A phase that indicates when the touch interaction for text selection completes without specifying movement direction.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beselectiontouchphase/ended"
+        },
+        "BESelectionTouchPhaseEndedMovingBackward": {
+          "doc": "A phase that indicates when the touch interaction ends after moving in a backward direction.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beselectiontouchphase/endedmovingbackward"
+        },
+        "BESelectionTouchPhaseEndedMovingForward": {
+          "doc": "A phase that indicates when the touch interaction ends after moving in a forward direction.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beselectiontouchphase/endedmovingforward"
+        },
+        "BESelectionTouchPhaseEndedNotMoving": {
+          "doc": "A phase that indicates when the touch interaction ends without any movement of the selection boundaries.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beselectiontouchphase/endednotmoving"
+        },
+        "BESelectionTouchPhaseMoved": {
+          "doc": "A phase that indicates that a touch actively adjusts the text selection boundaries.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beselectiontouchphase/moved"
+        },
+        "BESelectionTouchPhaseStarted": {
+          "doc": "A phase that indicates when a new touch interaction for text selection begins.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beselectiontouchphase/started"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a text selection phase with the specified underlying value.",
+          "url": "https://developer.apple.com/documentation/browserenginekit/beselectiontouchphase/init(rawvalue:)"
+        }
+      }
+    }
+  },
+  "methods": {
+    "BENetworkingProcess": {
+      "+networkProcessWithBundleID:interruptionHandler:completion:": {
+        "doc": "Launches a networking extension process asynchronously.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/benetworkingprocess/networkprocesswithbundleid:interruptionhandler:completion:"
+      },
+      "+networkProcessWithInterruptionHandler:completion:": {
+        "doc": "Launches a networking extension process asynchronously.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/benetworkingprocess/networkprocesswithinterruptionhandler:completion:"
+      },
+      "-grantCapability:error:": {
+        "doc": "Grants the specified capability to the process.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/benetworkingprocess/grantcapability:error:"
+      },
+      "-grantCapability:error:invalidationHandler:": {
+        "doc": "Grants the specified capability to the process and observes an invalidation closure.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/benetworkingprocess/grantcapability:error:invalidationhandler:"
+      },
+      "-invalidate": {
+        "doc": "Stops the networking process.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/benetworkingprocess/invalidate"
+      },
+      "-makeLibXPCConnectionError:": {
+        "doc": "Creates a new XPC connection to the extension process.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/benetworkingprocess/makelibxpcconnectionerror:"
+      }
+    },
+    "BERenderingProcess": {
+      "+renderingProcessWithBundleID:interruptionHandler:completion:": {
+        "doc": "Launches a rendering extension process asynchronously.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/berenderingprocess/renderingprocesswithbundleid:interruptionhandler:completion:"
+      },
+      "+renderingProcessWithInterruptionHandler:completion:": {
+        "doc": "Launches a rendering extension process asynchronously.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/berenderingprocess/renderingprocesswithinterruptionhandler:completion:"
+      },
+      "-createVisibilityPropagationInteraction": {
+        "doc": "Returns an interaction that associates a view with the rendering process.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/berenderingprocess/createvisibilitypropagationinteraction"
+      },
+      "-grantCapability:error:": {
+        "doc": "Grants the specified capability to the process.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/berenderingprocess/grantcapability:error:"
+      },
+      "-grantCapability:error:invalidationHandler:": {
+        "doc": "Grants the specified capability to the process, invoking the handler when the capability becomes invalid.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/berenderingprocess/grantcapability:error:invalidationhandler:"
+      },
+      "-invalidate": {
+        "doc": "Stops the rendering process.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/berenderingprocess/invalidate"
+      },
+      "-makeLibXPCConnectionError:": {
+        "doc": "Creates a new XPC connection to the extension process.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/berenderingprocess/makelibxpcconnectionerror:"
+      }
+    },
+    "BETextSuggestion": {
+      "-initWithInputText:": {
+        "doc": "Initializes a new text suggestion with the given input text.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/betextsuggestion/init(inputtext:)"
+      }
+    },
+    "BEWebAppManifest": {
+      "-initWithJSONData:manifestURL:": {
+        "doc": "Returns nil if manifestURL is invalid or jsonData cannot be parsed.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/bewebappmanifest/init(jsondata:manifesturl:)-3azfg"
+      }
+    },
+    "BEWebContentFilter": {
+      "-allowURL:completionHandler:": {
+        "doc": "Adds a previously blocked URL to the web content filter’s allow list.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/bewebcontentfilter/allow(_:completionhandler:)"
+      },
+      "-evaluateURL:completionHandler:": {
+        "doc": "Determines whether to block a URL.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/bewebcontentfilter/evaluateurl(_:completionhandler:)"
+      }
+    },
+    "BEWebContentProcess": {
+      "+webContentProcessWithBundleID:interruptionHandler:completion:": {
+        "doc": "Launches a web content extension process asynchronously.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/bewebcontentprocess/webcontentprocesswithbundleid:interruptionhandler:completion:"
+      },
+      "+webContentProcessWithInterruptionHandler:completion:": {
+        "doc": "Launches a web content extension process asynchronously.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/bewebcontentprocess/webcontentprocesswithinterruptionhandler:completion:"
+      },
+      "-createVisibilityPropagationInteraction": {
+        "doc": "Returns an interaction that associates a view with the web content process.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/bewebcontentprocess/createvisibilitypropagationinteraction"
+      },
+      "-grantCapability:error:": {
+        "doc": "Grants the specified capability to the process.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/bewebcontentprocess/grantcapability:error:"
+      },
+      "-grantCapability:error:invalidationHandler:": {
+        "doc": "Grants the specified capability to the process, invoking the handler when the capability becomes invalid.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/bewebcontentprocess/grantcapability:error:invalidationhandler:"
+      },
+      "-invalidate": {
+        "doc": "Stops the web content process.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/bewebcontentprocess/invalidate"
+      },
+      "-makeLibXPCConnectionError:": {
+        "doc": "Creates a new XPC connection to the extension process.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/bewebcontentprocess/makelibxpcconnectionerror:"
+      }
+    }
+  },
+  "properties": {
+    "BEDownloadMonitorLocation": {
+      "bookmarkData": {
+        "doc": "A bookmark that resolves to the resource’s URL.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/bedownloadmonitorlocation/bookmarkdata"
+      },
+      "url": {
+        "doc": "The location of the resource.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/bedownloadmonitorlocation/url"
+      }
+    },
+    "BETextAlternatives": {
+      "alternativeStrings": {
+        "doc": "An array of strings that represent alternatives to the currently selected text.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/betextalternatives/alternativestrings"
+      },
+      "primaryString": {
+        "doc": "The original text that the alternatives derive from.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/betextalternatives/primarystring"
+      }
+    },
+    "BETextSuggestion": {
+      "inputText": {
+        "doc": "Text that will be inserted into the document when the user chooses the suggestion.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/betextsuggestion/inputtext"
+      }
+    },
+    "BEWebContentFilter": {
+      "shouldEvaluateURLs": {
+        "doc": "Determines whether the built-in web content filter is active.",
+        "url": "https://developer.apple.com/documentation/browserenginekit/bewebcontentfilter/shouldevaluateurls"
+      }
+    }
+  }
+}

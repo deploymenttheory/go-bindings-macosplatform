@@ -1,0 +1,275 @@
+{
+  "schema_version": 1,
+  "framework": "SharedWithYouCore",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "SWAction": {
+      "doc": "An object that represents a collaboration action.",
+      "url": "https://developer.apple.com/documentation/sharedwithyoucore/swaction"
+    },
+    "SWCollaborationCoordinator": {
+      "doc": "An object that contains the shared collaboration coordinator.",
+      "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationcoordinator"
+    },
+    "SWCollaborationMetadata": {
+      "doc": "A model object for conveying data during a collaboration.",
+      "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationmetadata"
+    },
+    "SWCollaborationOption": {
+      "doc": "An object that determines how the system shares a document in a collaboration.",
+      "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoption"
+    },
+    "SWCollaborationOptionsGroup": {
+      "doc": "An object that represents a group of collaboration options that the system displays together.",
+      "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoptionsgroup"
+    },
+    "SWCollaborationOptionsPickerGroup": {
+      "doc": "An object that represents a group of collaboration options that the system displays together with mutually exclusive options.",
+      "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoptionspickergroup"
+    },
+    "SWCollaborationShareOptions": {
+      "doc": "An object that represents the state of the collaboration options for the document.",
+      "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationshareoptions"
+    },
+    "SWPerson": {
+      "doc": "An object that tracks participants in a collaboration.",
+      "url": "https://developer.apple.com/documentation/sharedwithyoucore/swperson"
+    },
+    "SWStartCollaborationAction": {
+      "doc": "An object that represents the first action sent to an app when the user shares a collaboration.",
+      "url": "https://developer.apple.com/documentation/sharedwithyoucore/swstartcollaborationaction"
+    },
+    "SWUpdateCollaborationParticipantsAction": {
+      "doc": "An action that contains the cryptographic identities the system uses to add to or remove from an existing collaboration.",
+      "url": "https://developer.apple.com/documentation/sharedwithyoucore/swupdatecollaborationparticipantsaction"
+    }
+  },
+  "protocols": {
+    "SWCollaborationActionHandler": {
+      "doc": "A delegate to handle incoming collaboration actions from a collaboration coordinator.",
+      "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationactionhandler"
+    }
+  },
+  "methods": {
+    "SWAction": {
+      "-fail": {
+        "doc": "Reports a failed execution of the action.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swaction/fail()"
+      },
+      "-fulfill": {
+        "doc": "Reports a successful execution of the action.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swaction/fulfill()"
+      }
+    },
+    "SWCollaborationMetadata": {
+      "-initWithCollaborationIdentifier:": {
+        "doc": "Creates and initializes a collaboration metadata object for the specified global identifier.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationmetadata/init(collaborationidentifier:)"
+      },
+      "-initWithLocalIdentifier:": {
+        "doc": "Creates and initializes a collaboration metadata object for the specified local identifier.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationmetadata/init(localidentifier:)"
+      }
+    },
+    "SWCollaborationOption": {
+      "+optionWithTitle:identifier:": {
+        "doc": "Creates and initializes a collaboration option object with a provided title and identifier.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoption/init(title:identifier:)"
+      },
+      "-initWithTitle:identifier:": {
+        "doc": "Creates and initializes a collaboration option object.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoption/initwithtitle:identifier:"
+      }
+    },
+    "SWCollaborationOptionsGroup": {
+      "+optionsGroupWithIdentifier:options:": {
+        "doc": "Creates and initializes a collaboration options group object.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoptionsgroup/optionsgroupwithidentifier:options:"
+      },
+      "-initWithIdentifier:options:": {
+        "doc": "Creates and initializes a collaboration options group object.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoptionsgroup/init(identifier:options:)"
+      }
+    },
+    "SWCollaborationShareOptions": {
+      "+shareOptionsWithOptionsGroups:": {
+        "doc": "Creates and initializes a collaboration share options object with the array of groups.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationshareoptions/shareoptionswithoptionsgroups:"
+      },
+      "+shareOptionsWithOptionsGroups:summary:": {
+        "doc": "Creates and initializes a collaboration share options object the array of groups and a summary string.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationshareoptions/shareoptionswithoptionsgroups:summary:"
+      },
+      "-initWithCoder:": {
+        "doc": "Creates and initializes a collaboration share options object.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationshareoptions/init(coder:)"
+      },
+      "-initWithOptionsGroups:": {
+        "doc": "Creates and initializes a collaboration share options object with the array of groups.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationshareoptions/init(optionsgroups:)"
+      },
+      "-initWithOptionsGroups:summary:": {
+        "doc": "Creates and initializes a collaboration share options object the array of groups and a summary string.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationshareoptions/init(optionsgroups:summary:)"
+      }
+    },
+    "SWPerson": {
+      "-initWithHandle:identity:displayName:thumbnailImageData:": {
+        "doc": "Creates and initializes a person object.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swperson/init(handle:identity:displayname:thumbnailimagedata:)"
+      }
+    },
+    "SWStartCollaborationAction": {
+      "-fulfillUsingURL:collaborationIdentifier:": {
+        "doc": "Informs an app to set up the universal link and device independent identifier to provide to the system.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swstartcollaborationaction/fulfill(using:collaborationidentifier:)"
+      }
+    }
+  },
+  "properties": {
+    "SWAction": {
+      "complete": {
+        "doc": "A Boolean value that represents whether an action is complete.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swaction/iscomplete"
+      },
+      "uuid": {
+        "doc": "The unique identifier of an action.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swaction/uuid"
+      }
+    },
+    "SWCollaborationCoordinator": {
+      "actionHandler": {
+        "doc": "The collaboration action handler.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationcoordinator/actionhandler"
+      },
+      "sharedCoordinator": {
+        "doc": "The shared collaboration coordinator.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationcoordinator/shared"
+      }
+    },
+    "SWCollaborationMetadata": {
+      "collaborationIdentifier": {
+        "doc": "A globally unique identifier that the app hosting the collaboration provides.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationmetadata/collaborationidentifier"
+      },
+      "defaultShareOptions": {
+        "doc": "The collaboration options that the content supports.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationmetadata/defaultshareoptions"
+      },
+      "initiatorHandle": {
+        "doc": "The handle of the person who initiates the collaboration.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationmetadata/initiatorhandle"
+      },
+      "initiatorNameComponents": {
+        "doc": "The name of the person who initiates the collaboration.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationmetadata/initiatornamecomponents"
+      },
+      "localIdentifier": {
+        "doc": "A locally unique identifier for the item the metadata represents.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationmetadata/localidentifier"
+      },
+      "title": {
+        "doc": "The title of the content.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationmetadata/title"
+      },
+      "userSelectedShareOptions": {
+        "doc": "The selected collaboration options from the person who sends the invitation.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationmetadata/userselectedshareoptions"
+      }
+    },
+    "SWCollaborationOption": {
+      "identifier": {
+        "doc": "A unique identifier.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoption/identifier"
+      },
+      "init(title:identifier:subtitle:selected:requiredOptionsIdentifiers:)": {
+        "doc": "Creates and initializes a collaboration option object with the provided values.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoption/init(title:identifier:subtitle:selected:requiredoptionsidentifiers:)"
+      },
+      "requiredOptionsIdentifiers": {
+        "doc": "An array of option identifiers that the app must select before the system makes the option interactive.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoption/requiredoptionsidentifiers"
+      },
+      "selected": {
+        "doc": "A Boolean value that represents the selected state of an option.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoption/isselected"
+      },
+      "subtitle": {
+        "doc": "A localized string the system displays to represent the permissions option in the collaboration view.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoption/subtitle"
+      },
+      "title": {
+        "doc": "A localized string the system displays as a title to represent the permissions option.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoption/title"
+      }
+    },
+    "SWCollaborationOptionsGroup": {
+      "footer": {
+        "doc": "A localized string that provides additional information for the group of options.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoptionsgroup/footer"
+      },
+      "identifier": {
+        "doc": "A unique identifier.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoptionsgroup/identifier"
+      },
+      "options": {
+        "doc": "An array of collaboration options the system displays as a group.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoptionsgroup/options"
+      },
+      "title": {
+        "doc": "A localized string the system displays as the title of the group section.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoptionsgroup/title"
+      }
+    },
+    "SWCollaborationOptionsPickerGroup": {
+      "selectedOptionIdentifier": {
+        "doc": "The identifier of the selected option in the group.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoptionspickergroup/selectedoptionidentifier"
+      }
+    },
+    "SWCollaborationShareOptions": {
+      "optionsGroups": {
+        "doc": "An array of options group objects to customize how the system shares the collaboration.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationshareoptions/optionsgroups"
+      },
+      "summary": {
+        "doc": "A localized string to summarize the collaboration options.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationshareoptions/summary"
+      }
+    },
+    "SWPerson": {
+      "SWPersonIdentity": {
+        "doc": "The unique identity for a person.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swperson/identity"
+      },
+      "SWPersonIdentityProof": {
+        "doc": "An object that represents proof of inclusion to a Merkle tree.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swperson/identityproof"
+      },
+      "SWSignedPersonIdentityProof": {
+        "doc": "The signature that the system creates by signing the data with this person’s identity.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swperson/signedidentityproof"
+      }
+    },
+    "SWStartCollaborationAction": {
+      "collaborationMetadata": {
+        "doc": "An object for that conveys data during a collaboration.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swstartcollaborationaction/collaborationmetadata"
+      }
+    },
+    "SWUpdateCollaborationParticipantsAction": {
+      "addedIdentities": {
+        "doc": "An array of added identities in a collaboration.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swupdatecollaborationparticipantsaction/addedidentities"
+      },
+      "collaborationMetadata": {
+        "doc": "An object for conveying data during a collaboration.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swupdatecollaborationparticipantsaction/collaborationmetadata"
+      },
+      "removedIdentities": {
+        "doc": "An array of removed identities in a collaboration.",
+        "url": "https://developer.apple.com/documentation/sharedwithyoucore/swupdatecollaborationparticipantsaction/removedidentities"
+      }
+    }
+  }
+}

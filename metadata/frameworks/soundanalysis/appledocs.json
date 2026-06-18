@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "framework": "SoundAnalysis",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "SNAudioFileAnalyzer": {
+      "doc": "An analyzer that runs sound classification requests on an audio file.",
+      "url": "https://developer.apple.com/documentation/soundanalysis/snaudiofileanalyzer"
+    },
+    "SNAudioStreamAnalyzer": {
+      "doc": "An object you create to analyze a stream of audio data and provide the results to your app.",
+      "url": "https://developer.apple.com/documentation/soundanalysis/snaudiostreamanalyzer"
+    },
+    "SNClassification": {
+      "doc": "A type that pairs a sound classifier’s prediction with its confidence in that prediction.",
+      "url": "https://developer.apple.com/documentation/soundanalysis/snclassification"
+    },
+    "SNClassificationResult": {
+      "doc": "A result that contains the highest-ranking classifications in a time range.",
+      "url": "https://developer.apple.com/documentation/soundanalysis/snclassificationresult"
+    },
+    "SNClassifySoundRequest": {
+      "doc": "A request that classifies sound using a Core ML model.",
+      "url": "https://developer.apple.com/documentation/soundanalysis/snclassifysoundrequest"
+    },
+    "SNTimeDurationConstraint": {
+      "doc": "Defines the time duration windows the request’s underlying sound classifier accepts with a range, or an array, of durations.",
+      "url": "https://developer.apple.com/documentation/soundanalysis/sntimedurationconstraint"
+    }
+  },
+  "protocols": {
+    "SNRequest": {
+      "doc": "A protocol that represents sound analysis requests.",
+      "url": "https://developer.apple.com/documentation/soundanalysis/snrequest"
+    },
+    "SNResult": {
+      "doc": "A protocol that represents sound analysis results.",
+      "url": "https://developer.apple.com/documentation/soundanalysis/snresult"
+    },
+    "SNResultsObserving": {
+      "doc": "The interface your app implements to receive the results of an analysis request.",
+      "url": "https://developer.apple.com/documentation/soundanalysis/snresultsobserving"
+    }
+  },
+  "enums": {
+    "SNErrorCode": {
+      "doc": "The enumerated error codes that the Sound Analysis framework produces.",
+      "url": "https://developer.apple.com/documentation/soundanalysis/snerrorcode"
+    },
+    "SNTimeDurationConstraintType": {
+      "doc": "Defines the types a time duration constraint uses.",
+      "url": "https://developer.apple.com/documentation/soundanalysis/sntimedurationconstrainttype",
+      "members": {
+        "SNTimeDurationConstraintTypeEnumerated": {
+          "doc": "A constraint type that uses an array of time durations to define what a request’s underlying sound classifier accepts.",
+          "url": "https://developer.apple.com/documentation/soundanalysis/sntimedurationconstrainttype/sntimedurationconstrainttypeenumerated"
+        },
+        "SNTimeDurationConstraintTypeRange": {
+          "doc": "A constraint type that uses a time duration range to define what a request’s underlying sound classifier accepts.",
+          "url": "https://developer.apple.com/documentation/soundanalysis/sntimedurationconstrainttype/sntimedurationconstrainttyperange"
+        }
+      }
+    }
+  },
+  "methods": {
+    "SNAudioFileAnalyzer": {
+      "-addRequest:withObserver:error:": {
+        "doc": "Adds a new analysis request to the audio file analyzer.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snaudiofileanalyzer/add(_:withobserver:)"
+      },
+      "-analyze": {
+        "doc": "Analyzes the audio file synchronously.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snaudiofileanalyzer/analyze()"
+      },
+      "-analyzeWithCompletionHandler:": {
+        "doc": "Analyzes the audio file asynchronously.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snaudiofileanalyzer/analyze(completionhandler:)"
+      },
+      "-cancelAnalysis": {
+        "doc": "Cancels all the asynchronous sound analysis requests the analyzer is currently processing.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snaudiofileanalyzer/cancelanalysis()"
+      },
+      "-initWithURL:error:": {
+        "doc": "Creates a new audio file analyzer.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snaudiofileanalyzer/init(url:)-336no"
+      },
+      "-removeAllRequests": {
+        "doc": "Removes all the sound analysis requests from the audio file analyzer.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snaudiofileanalyzer/removeallrequests()"
+      },
+      "-removeRequest:": {
+        "doc": "Removes an existing request from the audio file analyzer.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snaudiofileanalyzer/remove(_:)"
+      }
+    },
+    "SNAudioStreamAnalyzer": {
+      "-addRequest:withObserver:error:": {
+        "doc": "Adds a new analysis request to the audio stream analyzer.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snaudiostreamanalyzer/add(_:withobserver:)"
+      },
+      "-analyzeAudioBuffer:atAudioFramePosition:": {
+        "doc": "Adds a new audio buffer to the analyzer’s larger stream buffer.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snaudiostreamanalyzer/analyze(_:ataudioframeposition:)"
+      },
+      "-completeAnalysis": {
+        "doc": "Notifies the analyzer when it receives the final audio buffer.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snaudiostreamanalyzer/completeanalysis()"
+      },
+      "-initWithFormat:": {
+        "doc": "Creates a new audio stream analyzer.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snaudiostreamanalyzer/init(format:)"
+      },
+      "-removeAllRequests": {
+        "doc": "Removes all the sound analysis requests from the audio stream analyzer.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snaudiostreamanalyzer/removeallrequests()"
+      },
+      "-removeRequest:": {
+        "doc": "Removes an existing request from the audio stream analyzer.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snaudiostreamanalyzer/remove(_:)"
+      }
+    },
+    "SNClassificationResult": {
+      "-classificationForIdentifier:": {
+        "doc": "Returns the classification for an identifier.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snclassificationresult/classification(foridentifier:)"
+      }
+    },
+    "SNClassifySoundRequest": {
+      "-initWithClassifierIdentifier:error:": {
+        "doc": "Creates a request that uses the framework’s built-in sound classification model.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snclassifysoundrequest/init(classifieridentifier:)"
+      },
+      "-initWithMLModel:error:": {
+        "doc": "Creates a request that uses a custom sound classification model.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snclassifysoundrequest/init(mlmodel:)-6rmee"
+      }
+    }
+  },
+  "properties": {
+    "SNClassification": {
+      "confidence": {
+        "doc": "The confidence value the model has in its prediction.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snclassification/confidence"
+      },
+      "identifier": {
+        "doc": "A prediction label that’s one of the classifications a sound classifier’s underlying model defines.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snclassification/identifier"
+      }
+    },
+    "SNClassificationResult": {
+      "classifications": {
+        "doc": "A sorted array of the request’s top classification candidates.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snclassificationresult/classifications"
+      },
+      "timeRange": {
+        "doc": "The time span that corresponds to the result’s classifications.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snclassificationresult/timerange"
+      }
+    },
+    "SNClassifySoundRequest": {
+      "knownClassifications": {
+        "doc": "A string array that contains every prediction label in the request’s underlying sound classifier model.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snclassifysoundrequest/knownclassifications"
+      },
+      "overlapFactor": {
+        "doc": "The amount of overlap between successive analysis windows when the model operates on a fixed-size audio block.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snclassifysoundrequest/overlapfactor"
+      },
+      "windowDuration": {
+        "doc": "The duration of the audio buffer the request sends to the underlying sound classifier for each prediction.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snclassifysoundrequest/windowduration"
+      },
+      "windowDurationConstraint": {
+        "doc": "A range or list of sound duration times the request’s underlying sound classifier supports.",
+        "url": "https://developer.apple.com/documentation/soundanalysis/snclassifysoundrequest/windowdurationconstraint-5aqvx"
+      }
+    }
+  }
+}

@@ -1,0 +1,668 @@
+{
+  "schema_version": 1,
+  "framework": "ARKit",
+  "source": "developer.apple.com DocC render API",
+  "protocols": {
+    "OS_ar_anchor": {
+      "doc": "The identity, location, and orientation of an object in world space.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_anchor"
+    },
+    "OS_ar_authorization_result": {
+      "doc": "An authorization result.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_authorization_result"
+    },
+    "OS_ar_authorization_results": {
+      "doc": "A collection of authorization results.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_authorization_results"
+    },
+    "OS_ar_barcode_anchor": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_barcode_anchor"
+    },
+    "OS_ar_barcode_anchors": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_barcode_anchors"
+    },
+    "OS_ar_barcode_detection_callbacks": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_barcode_detection_callbacks"
+    },
+    "OS_ar_barcode_detection_configuration": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_barcode_detection_configuration"
+    },
+    "OS_ar_barcode_detection_provider": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_barcode_detection_provider"
+    },
+    "OS_ar_camera_frame": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_camera_frame"
+    },
+    "OS_ar_camera_frame_parameters": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_camera_frame_parameters"
+    },
+    "OS_ar_camera_frame_provider": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_camera_frame_provider"
+    },
+    "OS_ar_camera_frame_sample": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_camera_frame_sample"
+    },
+    "OS_ar_camera_frame_samples": {
+      "doc": "A collection of camera frame samples.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_camera_frame_samples"
+    },
+    "OS_ar_camera_video_format": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_camera_video_format"
+    },
+    "OS_ar_camera_video_formats": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_camera_video_formats"
+    },
+    "OS_ar_data": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_data"
+    },
+    "OS_ar_data_provider": {
+      "doc": "A source of live data from ARKit.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_data_provider"
+    },
+    "OS_ar_data_providers": {
+      "doc": "A source of live data from ARKit.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_data_providers"
+    },
+    "OS_ar_device": {
+      "doc": "Represents a physical device that a session can be run on.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_device"
+    },
+    "OS_ar_device_anchor": {
+      "doc": "The position and orientation of Apple Vision Pro.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_device_anchor"
+    },
+    "OS_ar_environment_light_estimation_configuration": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_environment_light_estimation_configuration"
+    },
+    "OS_ar_environment_light_estimation_provider": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_environment_light_estimation_provider"
+    },
+    "OS_ar_environment_probe_anchor": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_environment_probe_anchor"
+    },
+    "OS_ar_environment_probe_anchors": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_environment_probe_anchors"
+    },
+    "OS_ar_error": {
+      "doc": "An error reported by ARKit.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_error"
+    },
+    "OS_ar_geometry_element": {
+      "doc": "A container for vertex indices of lines or triangles.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_geometry_element"
+    },
+    "OS_ar_geometry_source": {
+      "doc": "A container for geometrical vector data.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_geometry_source"
+    },
+    "OS_ar_hand_anchor": {
+      "doc": "A hand’s position in a person’s surroundings.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_hand_anchor"
+    },
+    "OS_ar_hand_skeleton": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_hand_skeleton"
+    },
+    "OS_ar_hand_tracking_configuration": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_hand_tracking_configuration"
+    },
+    "OS_ar_hand_tracking_provider": {
+      "doc": "A source of live data about the position of a person’s hands and hand joints.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_hand_tracking_provider"
+    },
+    "OS_ar_identifiers": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_identifiers"
+    },
+    "OS_ar_image_anchor": {
+      "doc": "A 2D image’s position in a person’s surroundings.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_image_anchor"
+    },
+    "OS_ar_image_anchors": {
+      "doc": "A collection of image anchors.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_image_anchors"
+    },
+    "OS_ar_image_tracking_configuration": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_image_tracking_configuration"
+    },
+    "OS_ar_image_tracking_provider": {
+      "doc": "A source of live data about a 2D image’s position in a person’s surroundings.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_image_tracking_provider"
+    },
+    "OS_ar_mesh_anchor": {
+      "doc": "A source of live data about a 2D image’s position in a person’s surroundings.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_mesh_anchor"
+    },
+    "OS_ar_mesh_anchors": {
+      "doc": "A collection of mech anchors.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_mesh_anchors"
+    },
+    "OS_ar_mesh_geometries": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_mesh_geometries"
+    },
+    "OS_ar_mesh_geometry": {
+      "doc": "The shapes that make up a mesh anchor.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_mesh_geometry"
+    },
+    "OS_ar_object_anchor": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_object_anchor"
+    },
+    "OS_ar_object_anchors": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_object_anchors"
+    },
+    "OS_ar_object_axis_aligned_bounding_box": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_object_axis_aligned_bounding_box"
+    },
+    "OS_ar_object_tracking_configuration": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_object_tracking_configuration"
+    },
+    "OS_ar_object_tracking_provider": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_object_tracking_provider"
+    },
+    "OS_ar_plane_anchor": {
+      "doc": "An anchor that represents horizontal and vertical planes.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_plane_anchor"
+    },
+    "OS_ar_plane_anchors": {
+      "doc": "A collection of plane anchors.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_plane_anchors"
+    },
+    "OS_ar_plane_detection_configuration": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_plane_detection_configuration"
+    },
+    "OS_ar_plane_detection_provider": {
+      "doc": "A source of live data about planes in a person’s surroundings.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_plane_detection_provider"
+    },
+    "OS_ar_plane_extent": {
+      "doc": "The size of a plane.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_plane_extent"
+    },
+    "OS_ar_plane_geometry": {
+      "doc": "The geometry of a plane anchor.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_plane_geometry"
+    },
+    "OS_ar_reference_image": {
+      "doc": "A 2D image the system uses as a reference to find the same image in a person’s surroundings.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_reference_image"
+    },
+    "OS_ar_reference_images": {
+      "doc": "A collection of reference images.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_reference_images"
+    },
+    "OS_ar_reference_object": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_reference_object"
+    },
+    "OS_ar_reference_objects": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_reference_objects"
+    },
+    "OS_ar_room_anchor": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_room_anchor"
+    },
+    "OS_ar_room_anchors": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_room_anchors"
+    },
+    "OS_ar_room_tracking_configuration": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_room_tracking_configuration"
+    },
+    "OS_ar_room_tracking_provider": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_room_tracking_provider"
+    },
+    "OS_ar_scene_reconstruction_configuration": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_scene_reconstruction_configuration"
+    },
+    "OS_ar_scene_reconstruction_provider": {
+      "doc": "A source of live data about the shape of a person’s surroundings.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_scene_reconstruction_provider"
+    },
+    "OS_ar_session": {
+      "doc": "The main entry point for receiving data from ARKit.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_session"
+    },
+    "OS_ar_skeleton_joint": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_skeleton_joint"
+    },
+    "OS_ar_stereo_properties_configuration": {
+      "doc": "Configuration for the stereo properties provider.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_stereo_properties_configuration"
+    },
+    "OS_ar_stereo_properties_provider": {
+      "doc": "A data provider that provides stereo viewpoint properties.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_stereo_properties_provider"
+    },
+    "OS_ar_strings": {
+      "doc": "A collection of strings.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_strings"
+    },
+    "OS_ar_trackable_anchor": {
+      "doc": "An anchor that can gain and lose its tracking state over the course of a session.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_trackable_anchor"
+    },
+    "OS_ar_viewpoint_properties": {
+      "doc": "Properties describing the stereo viewpoints of the device.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_viewpoint_properties"
+    },
+    "OS_ar_world_anchor": {
+      "doc": "A fixed location in a person’s surroundings.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_world_anchor"
+    },
+    "OS_ar_world_anchors": {
+      "doc": "A collection of world anchors.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_world_anchors"
+    },
+    "OS_ar_world_tracking_configuration": {
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_world_tracking_configuration"
+    },
+    "OS_ar_world_tracking_provider": {
+      "doc": "A source of live data about the device pose and anchors in a person’s surroundings.",
+      "url": "https://developer.apple.com/documentation/arkit/os_ar_world_tracking_provider"
+    }
+  },
+  "enums": {
+    "ar_authorization_status_t": {
+      "doc": "The authorization states for a type of ARKit data.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_authorization_status_t",
+      "members": {
+        "ar_authorization_status_allowed": {
+          "doc": "Your app has permission to use the associated kind of ARKit data.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_authorization_status_t/ar_authorization_status_allowed"
+        },
+        "ar_authorization_status_denied": {
+          "doc": "Your app doesn’t have permission to use the associated kind of ARKit data.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_authorization_status_t/ar_authorization_status_denied"
+        },
+        "ar_authorization_status_not_determined": {
+          "doc": "Permission for your app to use the associated kind of ARKit data is undetermined.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_authorization_status_t/ar_authorization_status_not_determined"
+        }
+      }
+    },
+    "ar_authorization_type_t": {
+      "doc": "The authorization types you can request from ARKit.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_authorization_type_t",
+      "members": {
+        "ar_authorization_type_accessory_tracking": {
+          "doc": "Authorization type used when requesting:",
+          "url": "https://developer.apple.com/documentation/arkit/ar_authorization_type_t/ar_authorization_type_accessory_tracking"
+        },
+        "ar_authorization_type_camera_access": {
+          "doc": "The authorization for camera access.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_authorization_type_t/ar_authorization_type_camera_access"
+        },
+        "ar_authorization_type_hand_tracking": {
+          "doc": "The authorization for access to detailed hand-tracking data.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_authorization_type_t/ar_authorization_type_hand_tracking"
+        },
+        "ar_authorization_type_none": {
+          "doc": "There isn’t an authorization type.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_authorization_type_t/ar_authorization_type_none"
+        },
+        "ar_authorization_type_world_sensing": {
+          "doc": "The authorization for access to plane detection, scene reconstruction, and image tracking.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_authorization_type_t/ar_authorization_type_world_sensing"
+        }
+      }
+    },
+    "ar_barcode_detection_symbology_t": {
+      "doc": "An enumeration that describes the kinds of barcode the framework can detect.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_barcode_detection_symbology_t"
+    },
+    "ar_camera_position_t": {
+      "doc": "An enumeration that describes possible camera positions.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_camera_position_t",
+      "members": {
+        "ar_camera_position_right": {
+          "doc": "Camera position on the right side of the device.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_camera_position_t/ar_camera_position_right"
+        }
+      }
+    },
+    "ar_camera_rectification_type_t": {
+      "doc": "A value describing the type of rectification applied to a video format.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_camera_rectification_type_t",
+      "members": {
+        "ar_camera_rectification_type_mono": {
+          "doc": "Mono camera rectification.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_camera_rectification_type_t/ar_camera_rectification_type_mono"
+        },
+        "ar_camera_rectification_type_stereo_corrected": {
+          "doc": "Stereo corrected camera rectification.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_camera_rectification_type_t/ar_camera_rectification_type_stereo_corrected"
+        }
+      }
+    },
+    "ar_camera_type_t": {
+      "doc": "An enumeration that describes camera types.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_camera_type_t"
+    },
+    "ar_data_provider_state_t": {
+      "doc": "The possible states of a data provider.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_data_provider_state_t",
+      "members": {
+        "ar_data_provider_state_initialized": {
+          "doc": "The data provider has been created.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_data_provider_state_t/ar_data_provider_state_initialized"
+        },
+        "ar_data_provider_state_paused": {
+          "doc": "The data provider is paused.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_data_provider_state_t/ar_data_provider_state_paused"
+        },
+        "ar_data_provider_state_running": {
+          "doc": "The data provider is running.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_data_provider_state_t/ar_data_provider_state_running"
+        },
+        "ar_data_provider_state_stopped": {
+          "doc": "The data provider is stopped.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_data_provider_state_t/ar_data_provider_state_stopped"
+        }
+      }
+    },
+    "ar_device_anchor_query_status_t": {
+      "url": "https://developer.apple.com/documentation/arkit/ar_device_anchor_query_status_t",
+      "members": {
+        "ar_device_anchor_query_status_failure": {
+          "doc": "The device anchor query failed.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_device_anchor_query_status_t/ar_device_anchor_query_status_failure"
+        },
+        "ar_device_anchor_query_status_success": {
+          "doc": "The device anchor query succeeded.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_device_anchor_query_status_t/ar_device_anchor_query_status_success"
+        }
+      }
+    },
+    "ar_device_anchor_tracking_state_t": {
+      "doc": "Values that describe the tracking states of a device anchor.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_device_anchor_tracking_state_t",
+      "members": {
+        "ar_device_anchor_tracking_state_orientation_tracked": {
+          "doc": "The value that indicates that the framework is only currently tracking orientation.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_device_anchor_tracking_state_t/ar_device_anchor_tracking_state_orientation_tracked"
+        },
+        "ar_device_anchor_tracking_state_tracked": {
+          "doc": "The value that indicates that the framework is currently tracking both position and orientation.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_device_anchor_tracking_state_t/ar_device_anchor_tracking_state_tracked"
+        },
+        "ar_device_anchor_tracking_state_untracked": {
+          "doc": "The value that indicates the framework isn’t tracking the anchor.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_device_anchor_tracking_state_t/ar_device_anchor_tracking_state_untracked"
+        }
+      }
+    },
+    "ar_geometry_primitive_type_t": {
+      "doc": "The kinds of geometry primitives that a geometry element can contain.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_geometry_primitive_type_t",
+      "members": {
+        "ar_geometry_primitive_type_line": {
+          "doc": "Two vertices that connect to form a line.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_geometry_primitive_type_t/ar_geometry_primitive_type_line"
+        },
+        "ar_geometry_primitive_type_triangle": {
+          "doc": "Three vertices that connect to form a triangle.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_geometry_primitive_type_t/ar_geometry_primitive_type_triangle"
+        }
+      }
+    },
+    "ar_hand_anchor_query_status_t": {
+      "doc": "An enumeration that describes the status of a hand anchor query.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_hand_anchor_query_status_t"
+    },
+    "ar_hand_chirality_t": {
+      "doc": "The values identifying hand chirality.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_hand_chirality_t",
+      "members": {
+        "ar_hand_chirality_left": {
+          "doc": "A left hand.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_hand_chirality_t/ar_hand_chirality_left"
+        },
+        "ar_hand_chirality_right": {
+          "doc": "A right hand.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_hand_chirality_t/ar_hand_chirality_right"
+        }
+      }
+    },
+    "ar_hand_fidelity_t": {
+      "doc": "Enum for hand fidelity.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_hand_fidelity_t",
+      "members": {
+        "ar_hand_fidelity_high": {
+          "doc": "Enum for hand fidelity.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_hand_fidelity_t/ar_hand_fidelity_high"
+        },
+        "ar_hand_fidelity_nominal": {
+          "doc": "Enum for hand fidelity.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_hand_fidelity_t/ar_hand_fidelity_nominal"
+        }
+      }
+    },
+    "ar_hand_skeleton_joint_name_t": {
+      "doc": "An enumeration that describes hand joint names.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_hand_skeleton_joint_name_t"
+    },
+    "ar_mesh_classification_t": {
+      "doc": "The kinds of classification a mesh anchor can have.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_mesh_classification_t",
+      "members": {
+        "ar_mesh_classification_bed": {
+          "doc": "A bed.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_mesh_classification_t/ar_mesh_classification_bed"
+        },
+        "ar_mesh_classification_cabinet": {
+          "doc": "A cabinet.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_mesh_classification_t/ar_mesh_classification_cabinet"
+        },
+        "ar_mesh_classification_ceiling": {
+          "doc": "A ceiling.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_mesh_classification_t/ar_mesh_classification_ceiling"
+        },
+        "ar_mesh_classification_door": {
+          "doc": "A door.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_mesh_classification_t/ar_mesh_classification_door"
+        },
+        "ar_mesh_classification_floor": {
+          "doc": "A floor.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_mesh_classification_t/ar_mesh_classification_floor"
+        },
+        "ar_mesh_classification_home_appliance": {
+          "doc": "A home appliance.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_mesh_classification_t/ar_mesh_classification_home_appliance"
+        },
+        "ar_mesh_classification_plant": {
+          "doc": "A plant.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_mesh_classification_t/ar_mesh_classification_plant"
+        },
+        "ar_mesh_classification_seat": {
+          "doc": "A seat.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_mesh_classification_t/ar_mesh_classification_seat"
+        },
+        "ar_mesh_classification_stairs": {
+          "doc": "A set of stairs.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_mesh_classification_t/ar_mesh_classification_stairs"
+        },
+        "ar_mesh_classification_table": {
+          "doc": "A table.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_mesh_classification_t/ar_mesh_classification_table"
+        },
+        "ar_mesh_classification_tv": {
+          "doc": "A television.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_mesh_classification_t/ar_mesh_classification_tv"
+        },
+        "ar_mesh_classification_wall": {
+          "doc": "A wall.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_mesh_classification_t/ar_mesh_classification_wall"
+        },
+        "ar_mesh_classification_window": {
+          "doc": "A window.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_mesh_classification_t/ar_mesh_classification_window"
+        }
+      }
+    },
+    "ar_object_tracking_error_code_t": {
+      "doc": "An enumeration that describes object tracking errors.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_object_tracking_error_code_t"
+    },
+    "ar_plane_alignment_t": {
+      "doc": "The kinds of alignment — horizontal or vertical — that a plane anchor can have.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_plane_alignment_t",
+      "members": {
+        "ar_plane_alignment_horizontal": {
+          "doc": "The plane is in a horizontal position.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_plane_alignment_t/ar_plane_alignment_horizontal"
+        },
+        "ar_plane_alignment_none": {
+          "doc": "The plane doesn’t have an alignment.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_plane_alignment_t/ar_plane_alignment_none"
+        },
+        "ar_plane_alignment_slanted": {
+          "doc": "The plane is in a slanted orientation.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_plane_alignment_t/ar_plane_alignment_slanted"
+        },
+        "ar_plane_alignment_vertical": {
+          "doc": "The plane is in a vertical position.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_plane_alignment_t/ar_plane_alignment_vertical"
+        }
+      }
+    },
+    "ar_plane_classification_t": {
+      "doc": "The kinds of object classification a plane anchor can have.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_plane_classification_t",
+      "members": {
+        "ar_plane_classification_ceiling": {
+          "doc": "A ceiling.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_plane_classification_t/ar_plane_classification_ceiling"
+        },
+        "ar_plane_classification_door": {
+          "doc": "A door.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_plane_classification_t/ar_plane_classification_door"
+        },
+        "ar_plane_classification_floor": {
+          "doc": "A floor.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_plane_classification_t/ar_plane_classification_floor"
+        },
+        "ar_plane_classification_seat": {
+          "doc": "A seat.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_plane_classification_t/ar_plane_classification_seat"
+        },
+        "ar_plane_classification_status_not_available": {
+          "doc": "A plane classification is currently unavailable.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_plane_classification_t/ar_plane_classification_status_not_available"
+        },
+        "ar_plane_classification_status_undetermined": {
+          "doc": "A plane classification is undetermined.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_plane_classification_t/ar_plane_classification_status_undetermined"
+        },
+        "ar_plane_classification_status_unknown": {
+          "doc": "A plane classification isn’t one of the known classes.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_plane_classification_t/ar_plane_classification_status_unknown"
+        },
+        "ar_plane_classification_table": {
+          "doc": "A table.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_plane_classification_t/ar_plane_classification_table"
+        },
+        "ar_plane_classification_wall": {
+          "doc": "A wall.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_plane_classification_t/ar_plane_classification_wall"
+        },
+        "ar_plane_classification_window": {
+          "doc": "A window.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_plane_classification_t/ar_plane_classification_window"
+        }
+      }
+    },
+    "ar_scene_reconstruction_mode_t": {
+      "doc": "The additional kinds of information you can request about a person’s surroundings.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_scene_reconstruction_mode_t"
+    },
+    "ar_session_error_code_t": {
+      "doc": "The error codes for ARKit sessions.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_session_error_code_t",
+      "members": {
+        "ar_session_error_code_data_provider_failed_to_run": {
+          "doc": "The error code for when a data provider fails to run.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_session_error_code_t/ar_session_error_code_data_provider_failed_to_run"
+        },
+        "ar_session_error_code_data_provider_not_authorized": {
+          "doc": "The error code for when a data provider is missing at least one authorization it needs to run.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_session_error_code_t/ar_session_error_code_data_provider_not_authorized"
+        }
+      }
+    },
+    "ar_surface_classification_t": {
+      "doc": "A value describing the classification of a surface.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_surface_classification_t",
+      "members": {
+        "ar_surface_classification_bed": {
+          "doc": "A value describing the classification of a surface.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_surface_classification_t/ar_surface_classification_bed"
+        },
+        "ar_surface_classification_cabinet": {
+          "doc": "A value describing the classification of a surface.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_surface_classification_t/ar_surface_classification_cabinet"
+        },
+        "ar_surface_classification_ceiling": {
+          "doc": "A value describing the classification of a surface.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_surface_classification_t/ar_surface_classification_ceiling"
+        },
+        "ar_surface_classification_door": {
+          "doc": "A value describing the classification of a surface.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_surface_classification_t/ar_surface_classification_door"
+        },
+        "ar_surface_classification_floor": {
+          "doc": "A value describing the classification of a surface.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_surface_classification_t/ar_surface_classification_floor"
+        },
+        "ar_surface_classification_home_appliance": {
+          "doc": "A value describing the classification of a surface.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_surface_classification_t/ar_surface_classification_home_appliance"
+        },
+        "ar_surface_classification_none": {
+          "doc": "A value describing the classification of a surface.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_surface_classification_t/ar_surface_classification_none"
+        },
+        "ar_surface_classification_plant": {
+          "doc": "A value describing the classification of a surface.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_surface_classification_t/ar_surface_classification_plant"
+        },
+        "ar_surface_classification_seat": {
+          "doc": "A value describing the classification of a surface.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_surface_classification_t/ar_surface_classification_seat"
+        },
+        "ar_surface_classification_stairs": {
+          "doc": "A value describing the classification of a surface.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_surface_classification_t/ar_surface_classification_stairs"
+        },
+        "ar_surface_classification_table": {
+          "doc": "A value describing the classification of a surface.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_surface_classification_t/ar_surface_classification_table"
+        },
+        "ar_surface_classification_tv": {
+          "doc": "A value describing the classification of a surface.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_surface_classification_t/ar_surface_classification_tv"
+        },
+        "ar_surface_classification_wall": {
+          "doc": "A value describing the classification of a surface.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_surface_classification_t/ar_surface_classification_wall"
+        },
+        "ar_surface_classification_window": {
+          "doc": "A value describing the classification of a surface.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_surface_classification_t/ar_surface_classification_window"
+        }
+      }
+    },
+    "ar_world_tracking_error_code_t": {
+      "doc": "The error codes for errors that world tracking providers throw.",
+      "url": "https://developer.apple.com/documentation/arkit/ar_world_tracking_error_code_t",
+      "members": {
+        "ar_world_tracking_error_code_add_anchor_failed": {
+          "doc": "The error code for when a world tracking provider can’t add a world anchor.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_world_tracking_error_code_t/ar_world_tracking_error_code_add_anchor_failed"
+        },
+        "ar_world_tracking_error_code_anchor_max_limit_reached": {
+          "doc": "The error code for when a world tracking provider reaches its world anchor limit.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_world_tracking_error_code_t/ar_world_tracking_error_code_anchor_max_limit_reached"
+        },
+        "ar_world_tracking_error_code_remove_anchor_failed": {
+          "doc": "The error code for when a world tracking provider can’t remove a world anchor.",
+          "url": "https://developer.apple.com/documentation/arkit/ar_world_tracking_error_code_t/ar_world_tracking_error_code_remove_anchor_failed"
+        }
+      }
+    }
+  }
+}

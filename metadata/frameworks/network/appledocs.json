@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "framework": "Network",
+  "source": "developer.apple.com DocC render API",
+  "protocols": {
+    "OS_nw_advertise_descriptor": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_advertise_descriptor"
+    },
+    "OS_nw_browse_descriptor": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_browse_descriptor"
+    },
+    "OS_nw_browse_result": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_browse_result"
+    },
+    "OS_nw_browser": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_browser"
+    },
+    "OS_nw_connection": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_connection"
+    },
+    "OS_nw_connection_group": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_connection_group"
+    },
+    "OS_nw_content_context": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_content_context"
+    },
+    "OS_nw_data_transfer_report": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_data_transfer_report"
+    },
+    "OS_nw_endpoint": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_endpoint"
+    },
+    "OS_nw_error": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_error"
+    },
+    "OS_nw_establishment_report": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_establishment_report"
+    },
+    "OS_nw_ethernet_channel": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_ethernet_channel"
+    },
+    "OS_nw_framer": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_framer"
+    },
+    "OS_nw_group_descriptor": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_group_descriptor"
+    },
+    "OS_nw_interface": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_interface"
+    },
+    "OS_nw_listener": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_listener"
+    },
+    "OS_nw_object": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_object"
+    },
+    "OS_nw_parameters": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_parameters"
+    },
+    "OS_nw_path": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_path"
+    },
+    "OS_nw_path_monitor": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_path_monitor"
+    },
+    "OS_nw_privacy_context": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_privacy_context"
+    },
+    "OS_nw_protocol_definition": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_protocol_definition"
+    },
+    "OS_nw_protocol_metadata": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_protocol_metadata"
+    },
+    "OS_nw_protocol_options": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_protocol_options"
+    },
+    "OS_nw_protocol_stack": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_protocol_stack"
+    },
+    "OS_nw_proxy_config": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_proxy_config"
+    },
+    "OS_nw_relay_hop": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_relay_hop"
+    },
+    "OS_nw_resolution_report": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_resolution_report"
+    },
+    "OS_nw_resolver_config": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_resolver_config"
+    },
+    "OS_nw_txt_record": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_txt_record"
+    },
+    "OS_nw_ws_request": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_ws_request"
+    },
+    "OS_nw_ws_response": {
+      "url": "https://developer.apple.com/documentation/network/os_nw_ws_response"
+    }
+  },
+  "enums": {
+    "nw_browser_state_t": {
+      "doc": "States indicating whether a browser is able to discover services.",
+      "url": "https://developer.apple.com/documentation/network/nw_browser_state_t"
+    },
+    "nw_connection_group_state_t": {
+      "doc": "States that indicate whether you can use a connection group to send and receive messages.",
+      "url": "https://developer.apple.com/documentation/network/nw_connection_group_state_t"
+    },
+    "nw_connection_state_t": {
+      "doc": "States indicating whether a connection can be used to send and receive data.",
+      "url": "https://developer.apple.com/documentation/network/nw_connection_state_t"
+    },
+    "nw_data_transfer_report_state_t": {
+      "doc": "States indicating whether a data transfer report is collected yet.",
+      "url": "https://developer.apple.com/documentation/network/nw_data_transfer_report_state_t"
+    },
+    "nw_endpoint_type_t": {
+      "doc": "The type of a network endpoint, such as a host or a service.",
+      "url": "https://developer.apple.com/documentation/network/nw_endpoint_type_t"
+    },
+    "nw_error_domain_t": {
+      "doc": "The error domain for errors used by the Network framework.",
+      "url": "https://developer.apple.com/documentation/network/nw_error_domain_t"
+    },
+    "nw_ethernet_channel_state_t": {
+      "doc": "States indicating whether an Ethernet channel is able to send and receive frames.",
+      "url": "https://developer.apple.com/documentation/network/nw_ethernet_channel_state_t"
+    },
+    "nw_framer_start_result_t": {
+      "doc": "Results that you send to indicate the disposition of your protocol after the start handler is invoked.",
+      "url": "https://developer.apple.com/documentation/network/nw_framer_start_result_t"
+    },
+    "nw_interface_radio_type_t": {
+      "url": "https://developer.apple.com/documentation/network/nw_interface_radio_type_t"
+    },
+    "nw_interface_type_t": {
+      "doc": "Types of network interfaces, based on their link layer media types.",
+      "url": "https://developer.apple.com/documentation/network/nw_interface_type_t",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates an instance of the interface type structure.",
+          "url": "https://developer.apple.com/documentation/network/nw_interface_type_t/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates an instance of the interface type structure.",
+          "url": "https://developer.apple.com/documentation/network/nw_interface_type_t/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The raw value of this instance.",
+          "url": "https://developer.apple.com/documentation/network/nw_interface_type_t/rawvalue"
+        }
+      }
+    },
+    "nw_ip_ecn_flag_t": {
+      "doc": "Flag values for Explicit Congestion Notifications in IP packets.",
+      "url": "https://developer.apple.com/documentation/network/nw_ip_ecn_flag_t"
+    },
+    "nw_ip_local_address_preference_t": {
+      "doc": "Types of local addresses that can be selected, such as temporary or stable.",
+      "url": "https://developer.apple.com/documentation/network/nw_ip_local_address_preference_t"
+    },
+    "nw_ip_version_t": {
+      "doc": "IP versions to require on connections and listeners.",
+      "url": "https://developer.apple.com/documentation/network/nw_ip_version_t"
+    },
+    "nw_link_quality_t": {
+      "url": "https://developer.apple.com/documentation/network/nw_link_quality_t"
+    },
+    "nw_listener_state_t": {
+      "doc": "States indicating whether a listener is able to accept incoming connections.",
+      "url": "https://developer.apple.com/documentation/network/nw_listener_state_t"
+    },
+    "nw_multipath_service_t": {
+      "doc": "Modes in which a connection can support multipath protocols.",
+      "url": "https://developer.apple.com/documentation/network/nw_multipath_service_t",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates an instance of the multipath service type structure.",
+          "url": "https://developer.apple.com/documentation/network/nw_multipath_service_t/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates an instance of the multipath service type structure.",
+          "url": "https://developer.apple.com/documentation/network/nw_multipath_service_t/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The raw value of this instance.",
+          "url": "https://developer.apple.com/documentation/network/nw_multipath_service_t/rawvalue"
+        }
+      }
+    },
+    "nw_multipath_version_t": {
+      "url": "https://developer.apple.com/documentation/network/nw_multipath_version_t"
+    },
+    "nw_parameters_attribution_t": {
+      "doc": "The entities that can make a network request.",
+      "url": "https://developer.apple.com/documentation/network/nw_parameters_attribution_t",
+      "members": {
+        "nw_parameters_attribution_developer": {
+          "doc": "A developer-initiated network request.",
+          "url": "https://developer.apple.com/documentation/network/nw_parameters_attribution_t/developer"
+        },
+        "nw_parameters_attribution_user": {
+          "doc": "The user explicitly directs the app to make a network request.",
+          "url": "https://developer.apple.com/documentation/network/nw_parameters_attribution_t/user"
+        }
+      }
+    },
+    "nw_parameters_expired_dns_behavior_t": {
+      "doc": "Options for configuring how expired DNS answers should be used.",
+      "url": "https://developer.apple.com/documentation/network/nw_parameters_expired_dns_behavior_t",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates an instance of the expired DNS behavior structure.",
+          "url": "https://developer.apple.com/documentation/network/nw_parameters_expired_dns_behavior_t/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates an instance of the expired DNS behavior structure.",
+          "url": "https://developer.apple.com/documentation/network/nw_parameters_expired_dns_behavior_t/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The raw value of this instance.",
+          "url": "https://developer.apple.com/documentation/network/nw_parameters_expired_dns_behavior_t/rawvalue"
+        }
+      }
+    },
+    "nw_path_status_t": {
+      "doc": "Status values indicating whether a path can be used by connections.",
+      "url": "https://developer.apple.com/documentation/network/nw_path_status_t"
+    },
+    "nw_path_unsatisfied_reason_t": {
+      "url": "https://developer.apple.com/documentation/network/nw_path_unsatisfied_reason_t"
+    },
+    "nw_quic_stream_type_t": {
+      "url": "https://developer.apple.com/documentation/network/nw_quic_stream_type_t"
+    },
+    "nw_report_resolution_protocol_t": {
+      "doc": "A set of transport protocols connections use for DNS resolution.",
+      "url": "https://developer.apple.com/documentation/network/nw_report_resolution_protocol_t"
+    },
+    "nw_report_resolution_source_t": {
+      "doc": "Sources that may provide DNS responses.",
+      "url": "https://developer.apple.com/documentation/network/nw_report_resolution_source_t"
+    },
+    "nw_service_class_t": {
+      "doc": "Levels of service quality that can be used with a connection.",
+      "url": "https://developer.apple.com/documentation/network/nw_service_class_t",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates an instance of the service class structure.",
+          "url": "https://developer.apple.com/documentation/network/nw_service_class_t/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates an instance of the service class structure.",
+          "url": "https://developer.apple.com/documentation/network/nw_service_class_t/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The raw value of this instance.",
+          "url": "https://developer.apple.com/documentation/network/nw_service_class_t/rawvalue"
+        }
+      }
+    },
+    "nw_txt_record_find_key_t": {
+      "doc": "Status values describing what kind of value is stored in a TXT record dictionary.",
+      "url": "https://developer.apple.com/documentation/network/nw_txt_record_find_key_t"
+    },
+    "nw_ws_close_code_t": {
+      "doc": "Types of codes used upon closing a WebSocket connection.",
+      "url": "https://developer.apple.com/documentation/network/nw_ws_close_code_t"
+    },
+    "nw_ws_opcode_t": {
+      "doc": "Types of messages that you send and receive on a WebSocket connection.",
+      "url": "https://developer.apple.com/documentation/network/nw_ws_opcode_t"
+    },
+    "nw_ws_response_status_t": {
+      "doc": "Status values that are sent with a WebSocket server response.",
+      "url": "https://developer.apple.com/documentation/network/nw_ws_response_status_t"
+    },
+    "nw_ws_version_t": {
+      "doc": "Supported versions of the WebSocket protocol.",
+      "url": "https://developer.apple.com/documentation/network/nw_ws_version_t"
+    }
+  }
+}

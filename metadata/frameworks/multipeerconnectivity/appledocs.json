@@ -1,0 +1,313 @@
+{
+  "schema_version": 1,
+  "framework": "MultipeerConnectivity",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "MCAdvertiserAssistant": {
+      "doc": "The MCAdvertiserAssistant is a convenience class that handles advertising, presents incoming invitations to the user, and handles users’ responses. Use this class to provide a user interface for handling invitations when your app does not require programmatic control over the invitation process.",
+      "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcadvertiserassistant"
+    },
+    "MCBrowserViewController": {
+      "doc": "The MCBrowserViewController class presents nearby devices to the user and enables the user to invite nearby devices to a session. To use this class in iOS or tvOS, call methods from the underlying UIViewController class (prepareForSegue:sender: and performSegueWithIdentifier:sender: for storyboards or presentViewController:animated:completion: and dismissViewControllerAnimated:completion: for nib-based views) to present and dismiss the view controller. In macOS, use the comparable NSViewController methods presentViewControllerAsSheet: and dismissViewController: instead.",
+      "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcbrowserviewcontroller"
+    },
+    "MCNearbyServiceAdvertiser": {
+      "doc": "The MCNearbyServiceAdvertiser class publishes an advertisement for a specific service that your app provides through the Multipeer Connectivity framework and notifies its delegate about invitations from nearby peers.",
+      "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyserviceadvertiser"
+    },
+    "MCNearbyServiceBrowser": {
+      "doc": "Searches (by service type) for services offered by nearby devices using infrastructure Wi-Fi, peer-to-peer Wi-Fi, and Bluetooth (in iOS) or Ethernet (in macOS and tvOS), and provides the ability to easily invite those devices to a Multipeer Connectivity session (MCSession).",
+      "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyservicebrowser"
+    },
+    "MCPeerID": {
+      "doc": "An MCPeerID object represents a peer in a multipeer session.",
+      "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcpeerid"
+    },
+    "MCSession": {
+      "doc": "An MCSession object enables and manages communication among all peers in a Multipeer Connectivity session.",
+      "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsession"
+    }
+  },
+  "protocols": {
+    "MCAdvertiserAssistantDelegate": {
+      "doc": "The MCAdvertiserAssistantDelegate protocol describes the methods that the delegate object for an MCAdvertiserAssistant instance can implement to handle advertising-related events.",
+      "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcadvertiserassistantdelegate"
+    },
+    "MCBrowserViewControllerDelegate": {
+      "doc": "The MCBrowserViewControllerDelegate protocol defines the methods that your delegate object can implement to handle events related to the MCBrowserViewController class.",
+      "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcbrowserviewcontrollerdelegate"
+    },
+    "MCNearbyServiceAdvertiserDelegate": {
+      "doc": "The MCNearbyServiceAdvertiserDelegate protocol describes the methods that the delegate object for an MCNearbyServiceAdvertiser instance can implement for handling events from the MCNearbyServiceAdvertiser class.",
+      "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyserviceadvertiserdelegate"
+    },
+    "MCNearbyServiceBrowserDelegate": {
+      "doc": "The MCNearbyServiceBrowserDelegate protocol defines methods that a MCNearbyServiceBrowser object’s delegate can implement to handle browser-related events.",
+      "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyservicebrowserdelegate"
+    },
+    "MCSessionDelegate": {
+      "doc": "The MCSessionDelegate protocol defines methods that a delegate of the MCSession class can implement to handle session-related events. For more information, see MCSession.",
+      "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsessiondelegate"
+    }
+  },
+  "enums": {
+    "MCEncryptionPreference": {
+      "doc": "Indicates whether a session should use encryption when communicating with nearby peers.",
+      "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcencryptionpreference",
+      "members": {
+        "MCEncryptionNone": {
+          "doc": "The session should not be encrypted.",
+          "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcencryptionpreference/none"
+        },
+        "MCEncryptionOptional": {
+          "doc": "The session prefers to use encryption, but accepts unencrypted connections. A connection uses encryption when all the peers choose either MCEncryptionOptional or MCEncryptionRequired. If some peers choose MCEncryptionNone, then the session will not be encrypted. For this reason, if some peers running your app can be configured without encryption, you should always assume that the session is unencrypted.",
+          "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcencryptionpreference/optional"
+        },
+        "MCEncryptionRequired": {
+          "doc": "The session requires encryption.",
+          "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcencryptionpreference/required"
+        }
+      }
+    },
+    "MCErrorCode": {
+      "doc": "Error codes found in MCErrorDomain error domain NSError objects returned by methods in the Multipeer Connectivity framework.",
+      "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcerrorcode"
+    },
+    "MCSessionSendDataMode": {
+      "doc": "Indicates whether delivery of data should be guaranteed.",
+      "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsessionsenddatamode",
+      "members": {
+        "MCSessionSendDataReliable": {
+          "doc": "The framework should guarantee delivery of each message, enqueueing and retransmitting data as needed, and ensuring in-order delivery.",
+          "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsessionsenddatamode/reliable"
+        },
+        "MCSessionSendDataUnreliable": {
+          "doc": "Messages to peers should be sent immediately without socket-level queueing. If a message cannot be sent immediately, it should be dropped. The order of messages is not guaranteed.",
+          "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsessionsenddatamode/unreliable"
+        }
+      }
+    },
+    "MCSessionState": {
+      "doc": "Indicates the current state of a given peer within a session.",
+      "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsessionstate",
+      "members": {
+        "MCSessionStateConnected": {
+          "doc": "The peer is connected to this session.",
+          "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsessionstate/connected"
+        },
+        "MCSessionStateConnecting": {
+          "doc": "A connection to the peer is currently being established.",
+          "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsessionstate/connecting"
+        },
+        "MCSessionStateNotConnected": {
+          "doc": "The peer is not (or is no longer) in this session.",
+          "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsessionstate/notconnected"
+        }
+      }
+    }
+  },
+  "methods": {
+    "MCAdvertiserAssistant": {
+      "-initWithServiceType:discoveryInfo:session:": {
+        "doc": "Initializes an advertiser assistant object.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcadvertiserassistant/init(servicetype:discoveryinfo:session:)"
+      },
+      "-start": {
+        "doc": "Begins advertising the service provided by a local peer and starts the assistant.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcadvertiserassistant/start()"
+      },
+      "-stop": {
+        "doc": "Stops advertising the service provided by a local peer and stops the assistant.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcadvertiserassistant/stop()"
+      }
+    },
+    "MCBrowserViewController": {
+      "-initWithBrowser:session:": {
+        "doc": "Initializes a browser view controller with the provided browser and session.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcbrowserviewcontroller/init(browser:session:)"
+      },
+      "-initWithServiceType:session:": {
+        "doc": "Initializes a browser view controller using the provided service type and session.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcbrowserviewcontroller/init(servicetype:session:)"
+      }
+    },
+    "MCNearbyServiceAdvertiser": {
+      "-initWithPeer:discoveryInfo:serviceType:": {
+        "doc": "Initializes an advertiser object.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyserviceadvertiser/init(peer:discoveryinfo:servicetype:)"
+      },
+      "-startAdvertisingPeer": {
+        "doc": "Begins advertising the service provided by a local peer.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyserviceadvertiser/startadvertisingpeer()"
+      },
+      "-stopAdvertisingPeer": {
+        "doc": "Stops advertising the service provided by a local peer.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyserviceadvertiser/stopadvertisingpeer()"
+      }
+    },
+    "MCNearbyServiceBrowser": {
+      "-initWithPeer:serviceType:": {
+        "doc": "Initializes the nearby service browser object.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyservicebrowser/init(peer:servicetype:)"
+      },
+      "-invitePeer:toSession:withContext:timeout:": {
+        "doc": "Invites a discovered peer to join a Multipeer Connectivity session.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyservicebrowser/invitepeer(_:to:withcontext:timeout:)"
+      },
+      "-startBrowsingForPeers": {
+        "doc": "Starts browsing for peers.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyservicebrowser/startbrowsingforpeers()"
+      },
+      "-stopBrowsingForPeers": {
+        "doc": "Stops browsing for peers.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyservicebrowser/stopbrowsingforpeers()"
+      }
+    },
+    "MCPeerID": {
+      "-initWithDisplayName:": {
+        "doc": "Initializes a peer.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcpeerid/init(displayname:)"
+      }
+    },
+    "MCSession": {
+      "-cancelConnectPeer:": {
+        "doc": "Cancels an attempt to connect to a peer.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsession/cancelconnectpeer(_:)"
+      },
+      "-connectPeer:withNearbyConnectionData:": {
+        "doc": "Call this method to connect a peer to the session when using your own service discovery code instead of an MCNearbyServiceBrowser or MCBrowserViewController object.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsession/connectpeer(_:withnearbyconnectiondata:)"
+      },
+      "-disconnect": {
+        "doc": "Disconnects the local peer from the session.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsession/disconnect()"
+      },
+      "-initWithPeer:": {
+        "doc": "Creates a Multipeer Connectivity session.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsession/init(peer:)"
+      },
+      "-initWithPeer:securityIdentity:encryptionPreference:": {
+        "doc": "Creates a Multipeer Connectivity session, providing security information.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsession/init(peer:securityidentity:encryptionpreference:)"
+      },
+      "-nearbyConnectionDataForPeer:withCompletionHandler:": {
+        "doc": "Obtains connection data for the specified peer.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsession/nearbyconnectiondata(forpeer:withcompletionhandler:)"
+      },
+      "-sendData:toPeers:withMode:error:": {
+        "doc": "Sends a message to nearby peers.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsession/send(_:topeers:with:)"
+      },
+      "-sendResourceAtURL:withName:toPeer:withCompletionHandler:": {
+        "doc": "Sends the contents of a URL to a peer.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsession/sendresource(at:withname:topeer:withcompletionhandler:)"
+      },
+      "-startStreamWithName:toPeer:error:": {
+        "doc": "Opens a byte stream to a nearby peer.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsession/startstream(withname:topeer:)"
+      }
+    }
+  },
+  "properties": {
+    "MCAdvertiserAssistant": {
+      "delegate": {
+        "doc": "The delegate object that handles advertising-assistant-related events.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcadvertiserassistant/delegate"
+      },
+      "discoveryInfo": {
+        "doc": "The info dictionary that was passed when this object was initialized.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcadvertiserassistant/discoveryinfo"
+      },
+      "serviceType": {
+        "doc": "The service type that your app is advertising.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcadvertiserassistant/servicetype"
+      },
+      "session": {
+        "doc": "The session into which new peers are added after accepting an invitation.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcadvertiserassistant/session"
+      }
+    },
+    "MCBrowserViewController": {
+      "browser": {
+        "doc": "The browser object that is used for discovering peers.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcbrowserviewcontroller/browser"
+      },
+      "delegate": {
+        "doc": "The delegate object that handles browser-view-controller-related events.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcbrowserviewcontroller/delegate"
+      },
+      "maximumNumberOfPeers": {
+        "doc": "The maximum number of peers allowed in a session, including the local peer.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcbrowserviewcontroller/maximumnumberofpeers"
+      },
+      "minimumNumberOfPeers": {
+        "doc": "The minimum number of peers that need to be in a session, including the local peer.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcbrowserviewcontroller/minimumnumberofpeers"
+      },
+      "session": {
+        "doc": "The multipeer session to which the invited peers are connected.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcbrowserviewcontroller/session"
+      }
+    },
+    "MCNearbyServiceAdvertiser": {
+      "delegate": {
+        "doc": "The delegate object that handles advertising-related events.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyserviceadvertiser/delegate"
+      },
+      "discoveryInfo": {
+        "doc": "The info dictionary passed when this object was initialized.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyserviceadvertiser/discoveryinfo"
+      },
+      "myPeerID": {
+        "doc": "The local peer ID for this instance.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyserviceadvertiser/mypeerid"
+      },
+      "serviceType": {
+        "doc": "The service type that your app is advertising",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyserviceadvertiser/servicetype"
+      }
+    },
+    "MCNearbyServiceBrowser": {
+      "delegate": {
+        "doc": "The delegate object that handles browser-related events.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyservicebrowser/delegate"
+      },
+      "myPeerID": {
+        "doc": "The local peer ID for this instance.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyservicebrowser/mypeerid"
+      },
+      "serviceType": {
+        "doc": "The service type to browse for.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcnearbyservicebrowser/servicetype"
+      }
+    },
+    "MCPeerID": {
+      "displayName": {
+        "doc": "The display name for this peer.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcpeerid/displayname"
+      }
+    },
+    "MCSession": {
+      "connectedPeers": {
+        "doc": "An array of all peers that are currently connected to this session.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsession/connectedpeers"
+      },
+      "delegate": {
+        "doc": "The delegate object that handles session-related events.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsession/delegate"
+      },
+      "encryptionPreference": {
+        "doc": "A value indicating whether the connection prefers encrypted connections, unencrypted connections, or has no preference.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsession/encryptionpreference"
+      },
+      "myPeerID": {
+        "doc": "A local identifier that represents the device on which your app is currently running.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsession/mypeerid"
+      },
+      "securityIdentity": {
+        "doc": "The security identity of the local peer.",
+        "url": "https://developer.apple.com/documentation/multipeerconnectivity/mcsession/securityidentity"
+      }
+    }
+  }
+}
