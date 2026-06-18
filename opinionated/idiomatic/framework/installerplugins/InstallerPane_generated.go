@@ -37,6 +37,8 @@ func NewInstallerPane() *InstallerPane {
 	return &InstallerPane{inner: raw.InstallerPaneFromID(_id)}
 }
 
+// @method     initWithSection @discussion Init method for InstallerPane.  This method takes it's parent section as an argument.
+//
 // NewInstallerPaneWithSection creates a new [InstallerPane].
 func NewInstallerPaneWithSection(parent objc.ID) *InstallerPane {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("InstallerPane")), objc.RegisterName("alloc"))
@@ -74,33 +76,45 @@ func (x *InstallerPane) WithNextPane(nextPane *InstallerPane) *InstallerPane {
 	return x
 }
 
+// @method     nextEnabled @discussion Specifies whether going to the next pane is enabled in the UI.
+//
 // WithNextEnabled sets the nextEnabled property and returns the receiver for chaining.
 func (x *InstallerPane) WithNextEnabled(nextEnabled bool) *InstallerPane {
 	x.inner.SetNextEnabled(nextEnabled)
 	return x
 }
 
+// @method     previousEnabled @discussion Specifies whether going to the previous pane is enabled in the UI.
+//
 // WithPreviousEnabled sets the previousEnabled property and returns the receiver for chaining.
 func (x *InstallerPane) WithPreviousEnabled(previousEnabled bool) *InstallerPane {
 	x.inner.SetPreviousEnabled(previousEnabled)
 	return x
 }
 
+// @method     contentView @discussion Returns the contentView outlet.  ContentView is used to determine what is to be displayed on screen when this pane is active.  The contentView must be the same view when the pane is exited, as when the pane is first entered. Subclasses can override this method to return dynamic views which are not loaded from a nib.
+//
 // ContentView calls the underlying ContentView.
 func (x *InstallerPane) ContentView() *appkit.NSView {
 	return x.inner.ContentView()
 }
 
+// @method     firstKeyView @discussion Returns the view that should first have keyboard focus when the content view of the pane first becomes key.  This method returns the firstKeyView outlet.  This outlet should be connected in the nib containing the pane. A subclass can override this method to return a dynamically defined firstKeyView.
+//
 // FirstKeyView calls the underlying FirstKeyView.
 func (x *InstallerPane) FirstKeyView() *appkit.NSView {
 	return x.inner.FirstKeyView()
 }
 
+// @method     lastKeyView @discussion Returns the lastKeyView which has focus before the contentView of the pane is no longer the key view. A subclass can override this method to return a dynamically defined lastKeyView.
+//
 // LastKeyView calls the underlying LastKeyView.
 func (x *InstallerPane) LastKeyView() *appkit.NSView {
 	return x.inner.LastKeyView()
 }
 
+// @method     nextPane @discussion Returns the next InstallerPane to follow this one.  Set the nextPane outlet in a nib to define a default nextPane. A subclass may want to override nextPane if the pane determines it's nextPane dynamically.
+//
 // NextPane calls the underlying NextPane.
 func (x *InstallerPane) NextPane() *InstallerPane {
 	_r := x.inner.NextPane()
@@ -110,26 +124,36 @@ func (x *InstallerPane) NextPane() *InstallerPane {
 	return &InstallerPane{inner: _r}
 }
 
+// @method     willEnterPane: @discussion Called immediatly before the InstallerPane is displayed on the screen. @param		dir The direction in which the pane will be entered from
+//
 // WillEnterPane calls the underlying WillEnterPane.
 func (x *InstallerPane) WillEnterPane(dir InstallerSectionDirection) {
 	x.inner.WillEnterPane(raw.InstallerSectionDirection(dir))
 }
 
+// @method     didEnterPane: @discussion Called immediatly after the InstallerPane is displayed on the screen. @param		dir The direction in which the pane was entered
+//
 // DidEnterPane calls the underlying DidEnterPane.
 func (x *InstallerPane) DidEnterPane(dir InstallerSectionDirection) {
 	x.inner.DidEnterPane(raw.InstallerSectionDirection(dir))
 }
 
+// @method     shouldExitPane: @discussion Called to determine if a pane should exit and allow another pane to be display on screen. A subclass should override this method if it needs to prevent the InstallerPane from exiting. Once the InstallerPane decides it is time to exit, it can call gotoNextPane or gotoPreviousPane to exit without calling shouldExitPane again. @param		dir The direction in which the pane was entered @result		Yes or No defining if the pane should really exit
+//
 // ShouldExitPane calls the underlying ShouldExitPane.
 func (x *InstallerPane) ShouldExitPane(dir InstallerSectionDirection) bool {
 	return x.inner.ShouldExitPane(raw.InstallerSectionDirection(dir))
 }
 
+// @method     willExitPane: @discussion Called immediatly before the InstallerPane will exit and be removed from the screen. @param		dir The direction in which the pane will exit to
+//
 // WillExitPane calls the underlying WillExitPane.
 func (x *InstallerPane) WillExitPane(dir InstallerSectionDirection) {
 	x.inner.WillExitPane(raw.InstallerSectionDirection(dir))
 }
 
+// @method     willExitPane: @discussion Called immediatly after the InstallerPane has exited and has been removed from the screen. @param		dir The direction in which the pane exited
+//
 // DidExitPane calls the underlying DidExitPane.
 func (x *InstallerPane) DidExitPane(dir InstallerSectionDirection) {
 	x.inner.DidExitPane(raw.InstallerSectionDirection(dir))
@@ -160,6 +184,8 @@ func (x *InstallerPane) SetNextPane(nextPane *raw.InstallerPane) {
 	x.inner.SetNextPane(nextPane)
 }
 
+// @method     title @discussion Title text for the pane while being displayed.  The title is retrieved and displayed every time a pane is entered.  The title must be vaild after the willEnter method is called. You must override this method if you would like a title for a custom pane.
+//
 // Title calls the underlying Title.
 func (x *InstallerPane) Title() string {
 	_r := x.inner.Title()
@@ -169,6 +195,8 @@ func (x *InstallerPane) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @method     section @discussion The parent section for this pane.
+//
 // Section calls the underlying Section.
 func (x *InstallerPane) Section() *InstallerSection {
 	_r := x.inner.Section()
@@ -178,6 +206,8 @@ func (x *InstallerPane) Section() *InstallerSection {
 	return &InstallerSection{inner: _r}
 }
 
+// @method     nextEnabled @discussion Specifies whether going to the next pane is enabled in the UI.
+//
 // NextEnabled calls the underlying NextEnabled.
 func (x *InstallerPane) NextEnabled() bool {
 	return x.inner.NextEnabled()
@@ -188,6 +218,8 @@ func (x *InstallerPane) SetNextEnabled(nextEnabled bool) {
 	x.inner.SetNextEnabled(nextEnabled)
 }
 
+// @method     previousEnabled @discussion Specifies whether going to the previous pane is enabled in the UI.
+//
 // PreviousEnabled calls the underlying PreviousEnabled.
 func (x *InstallerPane) PreviousEnabled() bool {
 	return x.inner.PreviousEnabled()
@@ -198,11 +230,15 @@ func (x *InstallerPane) SetPreviousEnabled(previousEnabled bool) {
 	x.inner.SetPreviousEnabled(previousEnabled)
 }
 
+// @method     gotoNextPane @discussion Causes the current pane to exit and the following pane available to be loaded.  gotoNextPane causes this pane's shouldExit: method to be skipped. @result		gotoNextPane will return NO if there is no nextPane (in any sections) or there is an error loading the nextPane.
+//
 // GotoNextPane calls the underlying GotoNextPane.
 func (x *InstallerPane) GotoNextPane() bool {
 	return x.inner.GotoNextPane()
 }
 
+// @method     gotoPreviousPane @discussion Causes the current pane to exit and the previous pane in the Installer's Pane Stack to be displayed. gotoNextPane causes this pane's shouldExit: method to be skipped. @result		gotoPreviousPane will return NO if there is no previous (in any sections) or there is an error loading the previousPane.
+//
 // GotoPreviousPane calls the underlying GotoPreviousPane.
 func (x *InstallerPane) GotoPreviousPane() bool {
 	return x.inner.GotoPreviousPane()

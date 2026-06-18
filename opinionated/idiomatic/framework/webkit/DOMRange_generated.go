@@ -238,6 +238,8 @@ func (x *DOMRange) CompareBoundaryPoints(how uint16, sourceRange *raw.DOMRange) 
 	return x.inner.CompareBoundaryPoints(how, sourceRange)
 }
 
+// @property webArchive @abstract A WebArchive representing the range.
+//
 // WebArchive calls the underlying WebArchive.
 func (x *DOMRange) WebArchive() *WebArchive {
 	_r := x.inner.WebArchive()
@@ -247,6 +249,8 @@ func (x *DOMRange) WebArchive() *WebArchive {
 	return &WebArchive{inner: _r}
 }
 
+// @property markupString @abstract A markup string representing the range.
+//
 // MarkupString calls the underlying MarkupString.
 func (x *DOMRange) MarkupString() string {
 	_r := x.inner.MarkupString()

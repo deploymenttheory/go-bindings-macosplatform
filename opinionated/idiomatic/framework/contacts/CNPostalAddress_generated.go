@@ -36,6 +36,8 @@ func NewPostalAddress() *PostalAddress {
 	return &PostalAddress{inner: raw.CNPostalAddressFromID(_id)}
 }
 
+// multi-street address is delimited with carriage returns “\n”
+//
 // Street calls the underlying Street.
 func (x *PostalAddress) Street() string {
 	_r := x.inner.Street()

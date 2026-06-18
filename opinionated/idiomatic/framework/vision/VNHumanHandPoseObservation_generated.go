@@ -37,6 +37,8 @@ func NewHumanHandPoseObservation() *HumanHandPoseObservation {
 	return &HumanHandPoseObservation{inner: raw.VNHumanHandPoseObservationFromID(_id)}
 }
 
+// @brief Obtain a specific normalized point for a named human hand joint. @param jointName The name of the human hand joint. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return the recognized point, or nil if the point could not be obtained.
+//
 // RecognizedPointForJointNameError calls the underlying RecognizedPointForJointNameError.
 func (x *HumanHandPoseObservation) RecognizedPointForJointNameError(jointName *foundation.NSString) (*RecognizedPoint, error) {
 	_r, _err := x.inner.RecognizedPointForJointNameError(jointName)
@@ -49,11 +51,15 @@ func (x *HumanHandPoseObservation) RecognizedPointForJointNameError(jointName *f
 	return &RecognizedPoint{inner: _r}, nil
 }
 
+// @brief Obtains the collection of points associated with a named human hand joints group. @discussion The obtained collection is a dictionary that provides the mapping of human hand join names to the recognized point. @param jointsGroupName The name of the human hand joints group. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return a dictionary of recognized points in the group, or nil if an error was encountered.
+//
 // RecognizedPointsForJointsGroupNameError calls the underlying RecognizedPointsForJointsGroupNameError.
 func (x *HumanHandPoseObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint], error) {
 	return x.inner.RecognizedPointsForJointsGroupNameError(jointsGroupName)
 }
 
+// @brief All of the joint names available in the observation.
+//
 // AvailableJointNames returns the collection as a Go slice.
 func (x *HumanHandPoseObservation) AvailableJointNames() []*foundation.NSString {
 	arr := x.inner.AvailableJointNames()
@@ -65,6 +71,8 @@ func (x *HumanHandPoseObservation) AvailableJointNames() []*foundation.NSString 
 	})
 }
 
+// @brief All of the joints group names available in the observation.
+//
 // AvailableJointsGroupNames returns the collection as a Go slice.
 func (x *HumanHandPoseObservation) AvailableJointsGroupNames() []*foundation.NSString {
 	arr := x.inner.AvailableJointsGroupNames()
@@ -76,6 +84,8 @@ func (x *HumanHandPoseObservation) AvailableJointsGroupNames() []*foundation.NSS
 	})
 }
 
+// @brief The chirality of the hand.
+//
 // Chirality calls the underlying Chirality.
 func (x *HumanHandPoseObservation) Chirality() VNChirality {
 	return VNChirality(x.inner.Chirality())

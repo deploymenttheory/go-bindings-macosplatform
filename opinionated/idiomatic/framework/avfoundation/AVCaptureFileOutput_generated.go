@@ -37,56 +37,76 @@ func NewCaptureFileOutput() *CaptureFileOutput {
 	return &CaptureFileOutput{inner: raw.AVCaptureFileOutputFromID(_id)}
 }
 
+// @property delegate @abstract The receiver's delegate. @discussion The value of this property is an object conforming to the AVCaptureFileOutputDelegate protocol that will be able to monitor and control recording along exact sample boundaries.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *CaptureFileOutput) WithDelegate(delegate raw.AVCaptureFileOutputDelegate) *CaptureFileOutput {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @property maxRecordedDuration @abstract Specifies the maximum duration of the media that should be recorded by the receiver. @discussion This property specifies a hard limit on the duration of recorded files. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error. The default value of this property is kCMTimeInvalid, which indicates no limit.
+//
 // WithMaxRecordedDuration sets the maxRecordedDuration property and returns the receiver for chaining.
 func (x *CaptureFileOutput) WithMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) *CaptureFileOutput {
 	x.inner.SetMaxRecordedDuration(maxRecordedDuration)
 	return x
 }
 
+// @property maxRecordedFileSize @abstract Specifies the maximum size, in bytes, of the data that should be recorded by the receiver. @discussion This property specifies a hard limit on the data size of recorded files. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error. The default value of this property is 0, which indicates no limit.
+//
 // WithMaxRecordedFileSize sets the maxRecordedFileSize property and returns the receiver for chaining.
 func (x *CaptureFileOutput) WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureFileOutput {
 	x.inner.SetMaxRecordedFileSize(maxRecordedFileSize)
 	return x
 }
 
+// @property minFreeDiskSpaceLimit @abstract Specifies the minimum amount of free space, in bytes, required for recording to continue on a given volume. @discussion This property specifies a hard lower limit on the amount of free space that must remain on a target volume for recording to continue. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error.
+//
 // WithMinFreeDiskSpaceLimit sets the minFreeDiskSpaceLimit property and returns the receiver for chaining.
 func (x *CaptureFileOutput) WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureFileOutput {
 	x.inner.SetMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit)
 	return x
 }
 
+// A `BOOL` value that indicates whether to defer starting this capture output. When this value is `true`, the session does not prepare the output's resources until some time after “AVCaptureSession/startRunning“ returns. You can start the visual parts of your user interface (e.g. preview) prior to other parts (e.g. photo/movie capture, metadata output, etc..) to improve startup performance. Set this value to `false` for outputs that your app needs for startup, and `true` for the ones it does not need to start immediately. For example, an “AVCaptureVideoDataOutput“ that you intend to use for displaying preview should set this value to `false`, so that the frames are available as soon as possible. By default, for apps that are linked on or after iOS 26, this property value is `true` for “AVCapturePhotoOutput“ and “AVCaptureFileOutput“ subclasses if supported, and `false` otherwise. When set to `true` for “AVCapturePhotoOutput“, if you want to support multiple capture requests before running deferred start, set “AVCapturePhotoOutput/responsiveCaptureEnabled“ to `true` on that output. If “deferredStartSupported“ is `false`, setting this property value to `true` results in the system throwing an `NSInvalidArgumentException`. - Note: Set this value before calling “AVCaptureSession/commitConfiguration“ as it requires a lengthy reconfiguration of the capture render pipeline.
+//
 // WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
 func (x *CaptureFileOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureFileOutput {
 	x.inner.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
 	return x
 }
 
+// @method startRecordingToOutputFileURL:recordingDelegate: @abstract Tells the receiver to start recording to a new file, and specifies a delegate that will be notified when recording is finished. @param outputFileURL An NSURL object containing the URL of the output file. This method throws an NSInvalidArgumentException if the URL is not a valid file URL. @param delegate An object conforming to the AVCaptureFileOutputRecordingDelegate protocol. Clients must specify a delegate so that they can be notified when recording to the given URL is finished. @discussion The method sets the file URL to which the receiver is currently writing output media. If a file at the given URL already exists when capturing starts, recording to the new file will fail. Clients need not call stopRecording before calling this method while another recording is in progress. On macOS, if this method is invoked while an existing output file was already being recorded, no media samples will be discarded between the old file and the new file. When recording is stopped either by calling stopRecording, by changing files using this method, or because of an error, the remaining data that needs to be included to the file will be written in the background. Therefore, clients must specify a delegate that will be notified when all data has been written to the file using the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: method. The recording delegate can also optionally implement methods that inform it when data starts being written, when recording is paused and resumed, and when recording is about to be finished. On macOS, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the first samples written to the new file are guaranteed to be those contained in the sample buffer passed to that method. Note: AVCaptureAudioFileOutput does not support -startRecordingToOutputFileURL:recordingDelegate:. Use -startRecordingToOutputFileURL:outputFileType:recordingDelegate: instead.
+//
 // StartRecordingToOutputFileURLRecordingDelegate calls the underlying StartRecordingToOutputFileURLRecordingDelegate.
 func (x *CaptureFileOutput) StartRecordingToOutputFileURLRecordingDelegate(outputFileURL string, delegate raw.AVCaptureFileOutputRecordingDelegate) {
 	x.inner.StartRecordingToOutputFileURLRecordingDelegate(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputFileURL)), delegate)
 }
 
+// @method stopRecording @abstract Tells the receiver to stop recording to the current file. @discussion Clients can call this method when they want to stop recording new samples to the current file, and do not want to continue recording to another file. Clients that want to switch from one file to another should not call this method. Instead they should simply call startRecordingToOutputFileURL:recordingDelegate: with the new file URL. When recording is stopped either by calling this method, by changing files using startRecordingToOutputFileURL:recordingDelegate:, or because of an error, the remaining data that needs to be included to the file will be written in the background. Therefore, before using the file, clients must wait until the delegate that was specified in startRecordingToOutputFileURL:recordingDelegate: is notified when all data has been written to the file using the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: method. On macOS, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the last samples written to the current file are guaranteed to be those that were output immediately before those in the sample buffer passed to that method.
+//
 // StopRecording calls the underlying StopRecording.
 func (x *CaptureFileOutput) StopRecording() {
 	x.inner.StopRecording()
 }
 
+// @method pauseRecording @abstract Pauses recording to the current output file. @discussion This method causes the receiver to stop writing captured samples to the current output file returned by outputFileURL, but leaves the file open so that samples can be written to it in the future, when resumeRecording is called. This allows clients to record multiple media segments that are not contiguous in time to a single file. On macOS, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the last samples written to the current file are guaranteed to be those that were output immediately before those in the sample buffer passed to that method. A recording can be stopped as normal, even when it's paused. A format or device change will result in the recording being stopped, even when it's paused.
+//
 // PauseRecording calls the underlying PauseRecording.
 func (x *CaptureFileOutput) PauseRecording() {
 	x.inner.PauseRecording()
 }
 
+// @method resumeRecording @abstract Resumes recording to the current output file after it was previously paused using pauseRecording. @discussion This method causes the receiver to resume writing captured samples to the current output file returned by outputFileURL, after recording was previously paused using pauseRecording. This allows clients to record multiple media segments that are not contiguous in time to a single file. On macOS, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the first samples written to the current file are guaranteed to be those contained in the sample buffer passed to that method.
+//
 // ResumeRecording calls the underlying ResumeRecording.
 func (x *CaptureFileOutput) ResumeRecording() {
 	x.inner.ResumeRecording()
 }
 
+// @property delegate @abstract The receiver's delegate. @discussion The value of this property is an object conforming to the AVCaptureFileOutputDelegate protocol that will be able to monitor and control recording along exact sample boundaries.
+//
 // Delegate calls the underlying Delegate.
 func (x *CaptureFileOutput) Delegate() raw.AVCaptureFileOutputDelegate {
 	return x.inner.Delegate()
@@ -97,31 +117,43 @@ func (x *CaptureFileOutput) SetDelegate(delegate raw.AVCaptureFileOutputDelegate
 	x.inner.SetDelegate(delegate)
 }
 
+// @property outputFileURL @abstract The file URL of the file to which the receiver is currently recording incoming buffers. @discussion The value of this property is an NSURL object containing the file URL of the file currently being written by the receiver. Returns nil if the receiver is not recording to any file.
+//
 // OutputFileURL calls the underlying OutputFileURL.
 func (x *CaptureFileOutput) OutputFileURL() *foundation.NSURL {
 	return x.inner.OutputFileURL()
 }
 
+// @property recording @abstract Indicates whether the receiver is currently recording. @discussion The value of this property is YES when the receiver currently has a file to which it is writing new samples, NO otherwise.
+//
 // IsRecording calls the underlying IsRecording.
 func (x *CaptureFileOutput) IsRecording() bool {
 	return x.inner.IsRecording()
 }
 
+// @property recordingPaused @abstract Indicates whether recording to the current output file is paused. @discussion This property indicates recording to the file returned by outputFileURL has been previously paused using the pauseRecording method. When a recording is paused, captured samples are not written to the output file, but new samples can be written to the same file in the future by calling resumeRecording.
+//
 // IsRecordingPaused calls the underlying IsRecordingPaused.
 func (x *CaptureFileOutput) IsRecordingPaused() bool {
 	return x.inner.IsRecordingPaused()
 }
 
+// @property recordedDuration @abstract Indicates the duration of the media recorded to the current output file. @discussion If recording is in progress, this property returns the total time recorded so far.
+//
 // RecordedDuration calls the underlying RecordedDuration.
 func (x *CaptureFileOutput) RecordedDuration() coremedia.CMTime {
 	return x.inner.RecordedDuration()
 }
 
+// @property recordedFileSize @abstract Indicates the size, in bytes, of the data recorded to the current output file. @discussion If a recording is in progress, this property returns the size in bytes of the data recorded so far.
+//
 // RecordedFileSize calls the underlying RecordedFileSize.
 func (x *CaptureFileOutput) RecordedFileSize() int64 {
 	return x.inner.RecordedFileSize()
 }
 
+// @property maxRecordedDuration @abstract Specifies the maximum duration of the media that should be recorded by the receiver. @discussion This property specifies a hard limit on the duration of recorded files. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error. The default value of this property is kCMTimeInvalid, which indicates no limit.
+//
 // MaxRecordedDuration calls the underlying MaxRecordedDuration.
 func (x *CaptureFileOutput) MaxRecordedDuration() coremedia.CMTime {
 	return x.inner.MaxRecordedDuration()
@@ -132,6 +164,8 @@ func (x *CaptureFileOutput) SetMaxRecordedDuration(maxRecordedDuration coremedia
 	x.inner.SetMaxRecordedDuration(maxRecordedDuration)
 }
 
+// @property maxRecordedFileSize @abstract Specifies the maximum size, in bytes, of the data that should be recorded by the receiver. @discussion This property specifies a hard limit on the data size of recorded files. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error. The default value of this property is 0, which indicates no limit.
+//
 // MaxRecordedFileSize calls the underlying MaxRecordedFileSize.
 func (x *CaptureFileOutput) MaxRecordedFileSize() int64 {
 	return x.inner.MaxRecordedFileSize()
@@ -142,6 +176,8 @@ func (x *CaptureFileOutput) SetMaxRecordedFileSize(maxRecordedFileSize int64) {
 	x.inner.SetMaxRecordedFileSize(maxRecordedFileSize)
 }
 
+// @property minFreeDiskSpaceLimit @abstract Specifies the minimum amount of free space, in bytes, required for recording to continue on a given volume. @discussion This property specifies a hard lower limit on the amount of free space that must remain on a target volume for recording to continue. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error.
+//
 // MinFreeDiskSpaceLimit calls the underlying MinFreeDiskSpaceLimit.
 func (x *CaptureFileOutput) MinFreeDiskSpaceLimit() int64 {
 	return x.inner.MinFreeDiskSpaceLimit()

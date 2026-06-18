@@ -37,6 +37,8 @@ func NewPHQ9Assessment() *PHQ9Assessment {
 	return &PHQ9Assessment{inner: raw.HKPHQ9AssessmentFromID(_id)}
 }
 
+// Answers on the PHQ-9 assessment. There are exactly 9 answers, one for each multiple choice question. Each answer is of type `HKPHQ9AssessmentAnswer`. If the 9th question was unanswered,  the answer is `HKPHQ9AssessmentAnswerPreferNotToAnswer`.
+//
 // Answers returns the collection as a Go slice.
 func (x *PHQ9Assessment) Answers() []*foundation.NSNumber {
 	arr := x.inner.Answers()
@@ -48,6 +50,8 @@ func (x *PHQ9Assessment) Answers() []*foundation.NSNumber {
 	})
 }
 
+// @property   risk @discussion The risk determined by the score on a PHQ-9 assessment.
+//
 // Risk calls the underlying Risk.
 func (x *PHQ9Assessment) Risk() HKPHQ9AssessmentRisk {
 	return HKPHQ9AssessmentRisk(x.inner.Risk())

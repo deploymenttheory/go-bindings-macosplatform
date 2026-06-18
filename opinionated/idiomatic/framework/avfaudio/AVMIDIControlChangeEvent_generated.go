@@ -29,6 +29,8 @@ func MIDIControlChangeEventFromID(id objc.ID) *MIDIControlChangeEvent {
 	return &MIDIControlChangeEvent{inner: raw.AVMIDIControlChangeEventFromID(id)}
 }
 
+// @method initWithChannel:messageType:value @abstract Initialize the event with a channel, a control change type, and a control value. @param channel The MIDI channel for the control change.  Range: 0-15. @param messageType The AVMIDIControlChangeMessageType indicating which MIDI control change message to send. @param value The value for this control change.  Range: Depends on the type (see the General MIDI specification).
+//
 // NewMIDIControlChangeEventWithChannelMessageTypeValue creates a new [MIDIControlChangeEvent].
 func NewMIDIControlChangeEventWithChannelMessageTypeValue(channel uint, messageType AVMIDIControlChangeMessageType, value uint) *MIDIControlChangeEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDIControlChangeEvent")), objc.RegisterName("alloc"))
@@ -36,17 +38,23 @@ func NewMIDIControlChangeEventWithChannelMessageTypeValue(channel uint, messageT
 	return &MIDIControlChangeEvent{inner: raw.AVMIDIControlChangeEventFromID(_id)}
 }
 
+// @property channel The MIDI channel for the event.  Range: 0-15.
+//
 // WithChannel sets the channel property and returns the receiver for chaining.
 func (x *MIDIControlChangeEvent) WithChannel(channel uint) *MIDIControlChangeEvent {
 	x.inner.AVMIDIChannelEvent.SetChannel(channel)
 	return x
 }
 
+// @property messageType The type of control change message, specified as an AVMIDIControlChangeMessageType.
+//
 // MessageType calls the underlying MessageType.
 func (x *MIDIControlChangeEvent) MessageType() AVMIDIControlChangeMessageType {
 	return AVMIDIControlChangeMessageType(x.inner.MessageType())
 }
 
+// @property value The value of the control change event.  The range of this value depends on the type (see the General MIDI specification).
+//
 // Value calls the underlying Value.
 func (x *MIDIControlChangeEvent) Value() uint {
 	return x.inner.Value()

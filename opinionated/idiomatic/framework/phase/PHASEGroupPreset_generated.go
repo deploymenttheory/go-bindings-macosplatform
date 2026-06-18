@@ -30,6 +30,8 @@ func GroupPresetFromID(id objc.ID) *GroupPreset {
 	return &GroupPreset{inner: raw.PHASEGroupPresetFromID(id)}
 }
 
+// @method initWithEngine @abstract Create a new PHASEGroupPreset object with a given PHASEEngine object. @param engine The PHASEEngine object to register this preset with. @param settings A dictionary containing PHASEGroupPresetSetting objects paired with PHASEGroup objects as keys. @param timeToTarget The time interval that all group settings in this preset will take to gradually fade to the new value @param timeToReset The time interval that all group settings in this preset will take to gradually fade to the unity value @note The timeToTarget and timeToReset are scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
+//
 // NewGroupPresetWithEngineSettingsTimeToTargetTimeToReset creates a new [GroupPreset].
 func NewGroupPresetWithEngineSettingsTimeToTargetTimeToReset(engine *raw.PHASEEngine, settings *foundation.NSDictionary[*foundation.NSString, *raw.PHASEGroupPresetSetting], timeToTarget float64, timeToReset float64) *GroupPreset {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEGroupPreset")), objc.RegisterName("alloc"))
@@ -37,36 +39,50 @@ func NewGroupPresetWithEngineSettingsTimeToTargetTimeToReset(engine *raw.PHASEEn
 	return &GroupPreset{inner: raw.PHASEGroupPresetFromID(_id)}
 }
 
+// @method activate @abstract Activate this preset in the PHASEEngine object it was initialized with. The internal timeToTarget value is used. The current preset will be deactivated automatically.
+//
 // Activate calls the underlying Activate.
 func (x *GroupPreset) Activate() {
 	x.inner.Activate()
 }
 
+// @method activateWithTimeToTargetOverride @abstract Activate this preset in the PHASEEngine object it was initialized with. The current preset will be deactivated automatically. @param timeToTargetOverride Override the timeToTarget value in the preset with this value. @note The timeToTargetOverride is scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
+//
 // ActivateWithTimeToTargetOverride calls the underlying ActivateWithTimeToTargetOverride.
 func (x *GroupPreset) ActivateWithTimeToTargetOverride(timeToTargetOverride float64) {
 	x.inner.ActivateWithTimeToTargetOverride(timeToTargetOverride)
 }
 
+// @method deactivate @abstract Deactivate this preset and return the system to default unity values. The internal timeToReset value is used.
+//
 // Deactivate calls the underlying Deactivate.
 func (x *GroupPreset) Deactivate() {
 	x.inner.Deactivate()
 }
 
+// @method deactivateWithTimeToResetOverride @abstract Deactivate this preset and return the system to default unity values. @param timeToResetOverride Override the timeToReset value in the preset with this value. @note The timeToResetOverride is scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
+//
 // DeactivateWithTimeToResetOverride calls the underlying DeactivateWithTimeToResetOverride.
 func (x *GroupPreset) DeactivateWithTimeToResetOverride(timeToResetOverride float64) {
 	x.inner.DeactivateWithTimeToResetOverride(timeToResetOverride)
 }
 
+// @property settings @abstract The collection of PHASEGroupPresetSetting objects to apply when this preset is activated.
+//
 // Settings calls the underlying Settings.
 func (x *GroupPreset) Settings() *foundation.NSDictionary[*foundation.NSString, *raw.PHASEGroupPresetSetting] {
 	return x.inner.Settings()
 }
 
+// @property timeToTarget @abstract The time interval that all group settings in this preset will take to gradually fade to the new value @note The timeToTarget is scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
+//
 // TimeToTarget calls the underlying TimeToTarget.
 func (x *GroupPreset) TimeToTarget() float64 {
 	return x.inner.TimeToTarget()
 }
 
+// @property timeToReset @abstract The time interval that all group settings in this preset will take to gradually fade to the unity value @note The timeToReset is scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
+//
 // TimeToReset calls the underlying TimeToReset.
 func (x *GroupPreset) TimeToReset() float64 {
 	return x.inner.TimeToReset()

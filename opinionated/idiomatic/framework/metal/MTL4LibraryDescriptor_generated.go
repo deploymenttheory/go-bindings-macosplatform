@@ -37,24 +37,32 @@ func NewMTL4LibraryDescriptor() *MTL4LibraryDescriptor {
 	return &MTL4LibraryDescriptor{inner: raw.MTL4LibraryDescriptorFromID(_id)}
 }
 
+// Assigns an optional string containing the source code of the shader language program to compile into a Metal library.
+//
 // WithSource sets the source property and returns the receiver for chaining.
 func (x *MTL4LibraryDescriptor) WithSource(source string) *MTL4LibraryDescriptor {
 	x.inner.SetSource(foundation.NSStringStringWithUTF8String(source))
 	return x
 }
 
+// Provides compile-time options for the Metal library.
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MTL4LibraryDescriptor) WithOptions(options *CompileOptions) *MTL4LibraryDescriptor {
 	x.inner.SetOptions(options.Unwrap())
 	return x
 }
 
+// Assigns an optional name to the Metal library.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *MTL4LibraryDescriptor) WithName(name string) *MTL4LibraryDescriptor {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// Assigns an optional string containing the source code of the shader language program to compile into a Metal library.
+//
 // Source calls the underlying Source.
 func (x *MTL4LibraryDescriptor) Source() string {
 	_r := x.inner.Source()
@@ -69,6 +77,8 @@ func (x *MTL4LibraryDescriptor) SetSource(source string) {
 	x.inner.SetSource(foundation.NSStringStringWithUTF8String(source))
 }
 
+// Provides compile-time options for the Metal library.
+//
 // Options calls the underlying Options.
 func (x *MTL4LibraryDescriptor) Options() *CompileOptions {
 	_r := x.inner.Options()
@@ -83,6 +93,8 @@ func (x *MTL4LibraryDescriptor) SetOptions(options *raw.MTLCompileOptions) {
 	x.inner.SetOptions(options)
 }
 
+// Assigns an optional name to the Metal library.
+//
 // Name calls the underlying Name.
 func (x *MTL4LibraryDescriptor) Name() string {
 	_r := x.inner.Name()

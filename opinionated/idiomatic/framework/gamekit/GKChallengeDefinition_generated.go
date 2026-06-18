@@ -38,11 +38,15 @@ func NewChallengeDefinition() *ChallengeDefinition {
 	return &ChallengeDefinition{inner: raw.GKChallengeDefinitionFromID(_id)}
 }
 
+// Loads the image set on the challenge definition, which may be `nil` if none was set.
+//
 // LoadImageWithCompletionHandler calls the underlying LoadImageWithCompletionHandler.
 func (x *ChallengeDefinition) LoadImageWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	x.inner.LoadImageWithCompletionHandler(completionHandler)
 }
 
+// The developer defined identifier for a given challenge definition.
+//
 // Identifier calls the underlying Identifier.
 func (x *ChallengeDefinition) Identifier() string {
 	_r := x.inner.Identifier()
@@ -52,6 +56,8 @@ func (x *ChallengeDefinition) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The group identifier for the challenge definition, if one exists.
+//
 // GroupIdentifier calls the underlying GroupIdentifier.
 func (x *ChallengeDefinition) GroupIdentifier() string {
 	_r := x.inner.GroupIdentifier()
@@ -61,6 +67,8 @@ func (x *ChallengeDefinition) GroupIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A short title for the challenge definition.
+//
 // Title calls the underlying Title.
 func (x *ChallengeDefinition) Title() string {
 	_r := x.inner.Title()
@@ -70,6 +78,8 @@ func (x *ChallengeDefinition) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A more detailed description of the challenge definition.
+//
 // Details calls the underlying Details.
 func (x *ChallengeDefinition) Details() string {
 	_r := x.inner.Details()
@@ -79,6 +89,8 @@ func (x *ChallengeDefinition) Details() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The duration options for the challenge, like `1 day` or `1 week`. - Note: If set, the amount of weeks is stored in the `weekOfYear` field. - Important: The actual duration of the challenge may be dynamically adjusted in order to accommodate different factors like players' timezones.
+//
 // DurationOptions returns the collection as a Go slice.
 func (x *ChallengeDefinition) DurationOptions() []*foundation.NSDateComponents {
 	arr := x.inner.DurationOptions()
@@ -90,11 +102,15 @@ func (x *ChallengeDefinition) DurationOptions() []*foundation.NSDateComponents {
 	})
 }
 
+// Indicates if a challenge can be attempted more than once.
+//
 // IsRepeatable calls the underlying IsRepeatable.
 func (x *ChallengeDefinition) IsRepeatable() bool {
 	return x.inner.IsRepeatable()
 }
 
+// Scores submitted to this leaderboard will also be submitted as scores in this challenge.
+//
 // Leaderboard calls the underlying Leaderboard.
 func (x *ChallengeDefinition) Leaderboard() *Leaderboard {
 	_r := x.inner.Leaderboard()
@@ -104,11 +120,15 @@ func (x *ChallengeDefinition) Leaderboard() *Leaderboard {
 	return &Leaderboard{inner: _r}
 }
 
+// The release state of the challenge definition in App Store Connect.
+//
 // ReleaseState calls the underlying ReleaseState.
 func (x *ChallengeDefinition) ReleaseState() GKReleaseState {
 	return GKReleaseState(x.inner.ReleaseState())
 }
 
+// Indicates if this definition has active challenges associated with it.
+//
 // HasActiveChallengesWithCompletionHandler calls the underlying HasActiveChallengesWithCompletionHandler.
 func (x *ChallengeDefinition) HasActiveChallengesWithCompletionHandler(completionHandler func(bool, unsafe.Pointer)) {
 	x.inner.HasActiveChallengesWithCompletionHandler(completionHandler)

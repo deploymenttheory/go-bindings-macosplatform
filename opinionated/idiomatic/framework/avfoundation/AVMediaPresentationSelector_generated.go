@@ -37,6 +37,8 @@ func NewMediaPresentationSelector() *MediaPresentationSelector {
 	return &MediaPresentationSelector{inner: raw.AVMediaPresentationSelectorFromID(_id)}
 }
 
+// Returns the display name for the selector that best matches the specified locale identifier.
+//
 // DisplayNameForLocaleIdentifier calls the underlying DisplayNameForLocaleIdentifier.
 func (x *MediaPresentationSelector) DisplayNameForLocaleIdentifier(localeIdentifier string) string {
 	_r := x.inner.DisplayNameForLocaleIdentifier(foundation.NSStringStringWithUTF8String(localeIdentifier))
@@ -46,6 +48,8 @@ func (x *MediaPresentationSelector) DisplayNameForLocaleIdentifier(localeIdentif
 	return purego.GoString(_r.Ptr())
 }
 
+// Provides the authored identifier for the selector.
+//
 // Identifier calls the underlying Identifier.
 func (x *MediaPresentationSelector) Identifier() string {
 	_r := x.inner.Identifier()
@@ -55,6 +59,8 @@ func (x *MediaPresentationSelector) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Provides selectable mutually exclusive settings for the selector.
+//
 // Settings returns the collection as a Go slice.
 func (x *MediaPresentationSelector) Settings() []*MediaPresentationSetting {
 	arr := x.inner.Settings()

@@ -38,6 +38,8 @@ func NewCNNGroupNormalizationGradientState() *CNNGroupNormalizationGradientState
 	return &CNNGroupNormalizationGradientState{inner: raw.MPSCNNGroupNormalizationGradientStateFromID(_id)}
 }
 
+// @abstract The MPSCNNGroupNormalization object that created this state object.
+//
 // GroupNormalization calls the underlying GroupNormalization.
 func (x *CNNGroupNormalizationGradientState) GroupNormalization() *CNNGroupNormalization {
 	_r := x.inner.GroupNormalization()
@@ -47,21 +49,29 @@ func (x *CNNGroupNormalizationGradientState) GroupNormalization() *CNNGroupNorma
 	return &CNNGroupNormalization{inner: _r}
 }
 
+// @abstract   Return an MTLBuffer object with the state's current gamma values.
+//
 // Gamma calls the underlying Gamma.
 func (x *CNNGroupNormalizationGradientState) Gamma() metal.MTLBuffer {
 	return x.inner.Gamma()
 }
 
+// @abstract   Return an MTLBuffer object with the state's current beta values..
+//
 // Beta calls the underlying Beta.
 func (x *CNNGroupNormalizationGradientState) Beta() metal.MTLBuffer {
 	return x.inner.Beta()
 }
 
+// @property   The MTLBuffer containing the gradient values for gamma.
+//
 // GradientForGamma calls the underlying GradientForGamma.
 func (x *CNNGroupNormalizationGradientState) GradientForGamma() metal.MTLBuffer {
 	return x.inner.GradientForGamma()
 }
 
+// @property   The MTLBuffer containing the gradient values for beta.
+//
 // GradientForBeta calls the underlying GradientForBeta.
 func (x *CNNGroupNormalizationGradientState) GradientForBeta() metal.MTLBuffer {
 	return x.inner.GradientForBeta()

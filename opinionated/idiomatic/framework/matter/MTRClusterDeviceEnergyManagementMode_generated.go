@@ -35,6 +35,8 @@ func MTRClusterDeviceEnergyManagementModeFromID(id objc.ID) *MTRClusterDeviceEne
 	return &MTRClusterDeviceEnergyManagementMode{inner: raw.MTRClusterDeviceEnergyManagementModeFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterDeviceEnergyManagementModeWithDeviceEndpointIDQueue creates a new [MTRClusterDeviceEnergyManagementMode].
 func NewMTRClusterDeviceEnergyManagementModeWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterDeviceEnergyManagementMode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterDeviceEnergyManagementMode")), objc.RegisterName("alloc"))

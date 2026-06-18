@@ -38,12 +38,16 @@ func NewAuthorizationAppleIDRequest() *AuthorizationAppleIDRequest {
 	return &AuthorizationAppleIDRequest{inner: raw.ASAuthorizationAppleIDRequestFromID(_id)}
 }
 
+// @abstract If you have been previously vended a 'user' value through ASAuthorization response, you may set it here to provide additional context to identity provider. @see ASAuthorizationAppleIDCredential doc for the description of this property in context of response.
+//
 // WithUser sets the user property and returns the receiver for chaining.
 func (x *AuthorizationAppleIDRequest) WithUser(user string) *AuthorizationAppleIDRequest {
 	x.inner.SetUser(foundation.NSStringStringWithUTF8String(user))
 	return x
 }
 
+// @abstract The contact information to be requested from the user.  Only scopes for which this app was authorized for will be returned.
+//
 // WithRequestedScopes sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationAppleIDRequest) WithRequestedScopes(items ...*foundation.NSString) *AuthorizationAppleIDRequest {
 	if len(items) == 0 {
@@ -62,18 +66,24 @@ func (x *AuthorizationAppleIDRequest) WithRequestedScopes(items ...*foundation.N
 	return x
 }
 
+// @abstract State to be passed to the identity provider.  This value will be returned as a part of successful ASAuthorization response. @note The state size may depend on the actual technology used and an error might be returned by the request execution.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *AuthorizationAppleIDRequest) WithState(state string) *AuthorizationAppleIDRequest {
 	x.inner.ASAuthorizationOpenIDRequest.SetState(foundation.NSStringStringWithUTF8String(state))
 	return x
 }
 
+// @abstract Nonce to be passed to the identity provider.  This value can be verified with the identity token provided as a part of successful ASAuthorization response. @note The nonce size may depend on the actual technology used and an error might be returned by the request execution.
+//
 // WithNonce sets the nonce property and returns the receiver for chaining.
 func (x *AuthorizationAppleIDRequest) WithNonce(nonce string) *AuthorizationAppleIDRequest {
 	x.inner.ASAuthorizationOpenIDRequest.SetNonce(foundation.NSStringStringWithUTF8String(nonce))
 	return x
 }
 
+// @abstract Operation to be executed by the request. The ASAuthorizationOperationImplicit operation interpretation depends on the credential provider implementation.
+//
 // WithRequestedOperation sets the requestedOperation property and returns the receiver for chaining.
 func (x *AuthorizationAppleIDRequest) WithRequestedOperation(requestedOperation *foundation.NSString) *AuthorizationAppleIDRequest {
 	x.inner.ASAuthorizationOpenIDRequest.SetRequestedOperation(requestedOperation)

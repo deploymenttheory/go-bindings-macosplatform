@@ -35,6 +35,8 @@ func NewCDADocumentSample() *CDADocumentSample {
 	return &CDADocumentSample{inner: raw.HKCDADocumentSampleFromID(_id)}
 }
 
+// @property      document @abstract      The contents of the document. @discussion    Access to each CDA instance must be authorized by the user in order for the document data to be accessible to an app.  The authorization request occurs the first time a document matches the predicate of an executed HKDocumentQuery.  This property will always be nil if the sample is returned by an HKSampleQuery or an HKAnchoredObjectQuery.
+//
 // Document calls the underlying Document.
 func (x *CDADocumentSample) Document() *CDADocument {
 	_r := x.inner.Document()

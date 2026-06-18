@@ -39,50 +39,68 @@ func NewMatrixRandom() *MatrixRandom {
 	return &MatrixRandom{inner: raw.MPSMatrixRandomFromID(_id)}
 }
 
+// @property   batchStart @discussion The starting index in the destination batch.
+//
 // WithBatchStart sets the batchStart property and returns the receiver for chaining.
 func (x *MatrixRandom) WithBatchStart(batchStart uint) *MatrixRandom {
 	x.inner.SetBatchStart(batchStart)
 	return x
 }
 
+// @property   batchSize @discussion The size of the batch to process.
+//
 // WithBatchSize sets the batchSize property and returns the receiver for chaining.
 func (x *MatrixRandom) WithBatchSize(batchSize uint) *MatrixRandom {
 	x.inner.SetBatchSize(batchSize)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixRandom) WithOptions(options mpscore.MPSKernelOptions) *MatrixRandom {
 	x.inner.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixRandom) WithLabel(label string) *MatrixRandom {
 	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @abstract   Encode a MPSMatrixRandom kernel into a command Buffer. @param      commandBuffer       A valid MTLCommandBuffer to receive the encoded filter @param      destinationVector   A valid MPSVector to contain the result.
+//
 // EncodeToCommandBufferDestinationVector calls the underlying EncodeToCommandBufferDestinationVector.
 func (x *MatrixRandom) EncodeToCommandBufferDestinationVector(commandBuffer metal.MTLCommandBuffer, destinationVector *mpscore.MPSVector) {
 	x.inner.EncodeToCommandBufferDestinationVector(commandBuffer, destinationVector)
 }
 
+// @abstract   Encode a MPSMatrixRandom kernel into a command Buffer. @param      commandBuffer       A valid MTLCommandBuffer to receive the encoded filter @param      destinationMatrix   A valid MPSMatrix to contain the result.
+//
 // EncodeToCommandBufferDestinationMatrix calls the underlying EncodeToCommandBufferDestinationMatrix.
 func (x *MatrixRandom) EncodeToCommandBufferDestinationMatrix(commandBuffer metal.MTLCommandBuffer, destinationMatrix *mpscore.MPSMatrix) {
 	x.inner.EncodeToCommandBufferDestinationMatrix(commandBuffer, destinationMatrix)
 }
 
+// @property   destinationDataType @discussion The type of the data which makes up the values of the result. Supported values are: MPSDataTypeUInt32 MPSDataTypeFloat32 Default is MPSDataTypeUInt32
+//
 // DestinationDataType calls the underlying DestinationDataType.
 func (x *MatrixRandom) DestinationDataType() mpscore.MPSDataType {
 	return x.inner.DestinationDataType()
 }
 
+// @property   distributionType @discussion The distribution from which to generate random values. Default is MPSMatrixRandomDistributionDefault
+//
 // DistributionType calls the underlying DistributionType.
 func (x *MatrixRandom) DistributionType() mpsmatrix.MPSMatrixRandomDistribution {
 	return x.inner.DistributionType()
 }
 
+// @property   batchStart @discussion The starting index in the destination batch.
+//
 // BatchStart calls the underlying BatchStart.
 func (x *MatrixRandom) BatchStart() uint {
 	return x.inner.BatchStart()
@@ -93,6 +111,8 @@ func (x *MatrixRandom) SetBatchStart(batchStart uint) {
 	x.inner.SetBatchStart(batchStart)
 }
 
+// @property   batchSize @discussion The size of the batch to process.
+//
 // BatchSize calls the underlying BatchSize.
 func (x *MatrixRandom) BatchSize() uint {
 	return x.inner.BatchSize()

@@ -31,6 +31,8 @@ func DetectionFromID(id objc.ID) *Detection {
 	return &Detection{inner: raw.CNDetectionFromID(id)}
 }
 
+// Initialize a cinematic detection. For playback and edit, most detections are obtained by from the cinematic script rather than being created. However, if you need to add a custom track, you can build an array of detections to create one. Any detections you create will not have a valid detectionID until the custom track is added to the cinematic script. Doing so will return the assigned detectionID. Any detections newly obtained from the cinematic script will have their assigned detectionID. - Parameters: - time: the presentation time of the frame in which the detection occurred - detectionType: the type of object that was detected (face, torso, cat, dog, etc.) - normalizedRect: the rectangle within the image where the object occurs, normalized such that (0.0, 0.0) is the top-left and (1.0, 1.0) is the bottom-right - focusDisparity: the disparity to use in order to focus on the object (use the static `disparity` method to compute if unknown)
+//
 // NewDetectionWithTimeDetectionTypeNormalizedRectFocusDisparity creates a new [Detection].
 func NewDetectionWithTimeDetectionTypeNormalizedRectFocusDisparity(time_ coremedia.CMTime, detectionType CNDetectionType, normalizedRect corefoundation.CGRect, focusDisparity float32) *Detection {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNDetection")), objc.RegisterName("alloc"))
@@ -38,31 +40,43 @@ func NewDetectionWithTimeDetectionTypeNormalizedRectFocusDisparity(time_ coremed
 	return &Detection{inner: raw.CNDetectionFromID(_id)}
 }
 
+// The presentation time of the frame in which the detection occurred.
+//
 // Time calls the underlying Time.
 func (x *Detection) Time() coremedia.CMTime {
 	return x.inner.Time()
 }
 
+// The type of object that was detected (face, torso, cat, dog, etc.)
+//
 // DetectionType calls the underlying DetectionType.
 func (x *Detection) DetectionType() CNDetectionType {
 	return CNDetectionType(x.inner.DetectionType())
 }
 
+// The rectangle within the image where the object occurs, normalized such that (0.0, 0.0) is the top-left and (1.0, 1.0) is the bottom-right.
+//
 // NormalizedRect calls the underlying NormalizedRect.
 func (x *Detection) NormalizedRect() corefoundation.CGRect {
 	return x.inner.NormalizedRect()
 }
 
+// The disparity to use in order to focus on the object. If the disparity is unknown, use the class method to find it: `disparityInNormalizedRect:sourceDisparity:detectionType:priorDisparity:`.
+//
 // FocusDisparity calls the underlying FocusDisparity.
 func (x *Detection) FocusDisparity() float32 {
 	return x.inner.FocusDisparity()
 }
 
+// An unique identifier assigned by the cinematic script to all detections of the same subject and detection type across time. If you build a custom detection track, the detectionID will be assigned when you add it to the script.
+//
 // DetectionID calls the underlying DetectionID.
 func (x *Detection) DetectionID() int64 {
 	return x.inner.DetectionID()
 }
 
+// An unique identifier assigned by the cinematic script to all detections of the same subject and related detection types across time. For example, the face/torso detections of the same person are assigned the same detectionGroupID.
+//
 // DetectionGroupID calls the underlying DetectionGroupID.
 func (x *Detection) DetectionGroupID() int64 {
 	return x.inner.DetectionGroupID()

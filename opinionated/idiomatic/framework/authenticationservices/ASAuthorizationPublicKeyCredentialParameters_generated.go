@@ -38,6 +38,8 @@ func NewAuthorizationPublicKeyCredentialParametersWithAlgorithm(algorithm int) *
 	return &AuthorizationPublicKeyCredentialParameters{inner: raw.ASAuthorizationPublicKeyCredentialParametersFromID(_id)}
 }
 
+// @abstract A COSE algorithm indentifier.
+//
 // Algorithm calls the underlying Algorithm.
 func (x *AuthorizationPublicKeyCredentialParameters) Algorithm() int {
 	return x.inner.Algorithm()

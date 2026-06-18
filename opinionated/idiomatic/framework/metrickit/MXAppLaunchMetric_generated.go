@@ -36,21 +36,29 @@ func NewAppLaunchMetric() *AppLaunchMetric {
 	return &AppLaunchMetric{inner: raw.MXAppLaunchMetricFromID(_id)}
 }
 
+// @property      histogrammedTimeToFirstDraw @abstract      Histogrammed application time-to-first-draw data. @discussion    Dimensioned as NSUnitDuration. @discussion    This represents the time when the first CA commit is finished.
+//
 // HistogrammedTimeToFirstDraw calls the underlying HistogrammedTimeToFirstDraw.
 func (x *AppLaunchMetric) HistogrammedTimeToFirstDraw() *raw.MXHistogram[*foundation.NSUnitDuration] {
 	return x.inner.HistogrammedTimeToFirstDraw()
 }
 
+// @property      histogrammedApplicationResumeTime @abstract      Histogrammed application resume time data. @discussion    Dimensioned as NSUnitDuration.
+//
 // HistogrammedApplicationResumeTime calls the underlying HistogrammedApplicationResumeTime.
 func (x *AppLaunchMetric) HistogrammedApplicationResumeTime() *raw.MXHistogram[*foundation.NSUnitDuration] {
 	return x.inner.HistogrammedApplicationResumeTime()
 }
 
+// @property      histogrammedOptimizedTimeToFirstDraw @abstract      Histogrammed optimized application time-to-first-draw data. @discussion    Dimensioned as NSUnitDuration. @discussion    This represents the time when the first CA commit is finished where the application launch has been optimized by the system. @discussion    In iOS 15, the system will opportunistically start applications that are not running in the background to reduce the amount of time a user may have to wait before an application is usable. These launches can occur after a system reboot and periodically as system conditions allow.
+//
 // HistogrammedOptimizedTimeToFirstDraw calls the underlying HistogrammedOptimizedTimeToFirstDraw.
 func (x *AppLaunchMetric) HistogrammedOptimizedTimeToFirstDraw() *raw.MXHistogram[*foundation.NSUnitDuration] {
 	return x.inner.HistogrammedOptimizedTimeToFirstDraw()
 }
 
+// @property      histogrammedExtendedLaunch @abstract      Histogrammed extended launch data. @discussion    Dimensioned as NSUnitDuration. @discussion    This represents the time when the app has drawn the first frame and finishes all extended launch tasks that assigned by the developer.
+//
 // HistogrammedExtendedLaunch calls the underlying HistogrammedExtendedLaunch.
 func (x *AppLaunchMetric) HistogrammedExtendedLaunch() *raw.MXHistogram[*foundation.NSUnitDuration] {
 	return x.inner.HistogrammedExtendedLaunch()

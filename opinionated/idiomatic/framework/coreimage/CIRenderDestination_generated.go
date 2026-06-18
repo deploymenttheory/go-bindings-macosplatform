@@ -110,6 +110,8 @@ func (x *RenderDestination) WithBlendsInDestinationColorSpace(blendsInDestinatio
 	return x
 }
 
+// Tell the next render using this destination to capture a Metal trace. If this property is set to a file-based URL, then the next render using this destination will capture a Metal trace, deleting any existing file if present. This property is nil by default.
+//
 // WithCaptureTraceURL sets the captureTraceURL property and returns the receiver for chaining.
 func (x *RenderDestination) WithCaptureTraceURL(captureTraceURL string) *RenderDestination {
 	x.inner.SetCaptureTraceURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(captureTraceURL)))
@@ -200,6 +202,8 @@ func (x *RenderDestination) SetBlendsInDestinationColorSpace(blendsInDestination
 	x.inner.SetBlendsInDestinationColorSpace(blendsInDestinationColorSpace)
 }
 
+// Tell the next render using this destination to capture a Metal trace. If this property is set to a file-based URL, then the next render using this destination will capture a Metal trace, deleting any existing file if present. This property is nil by default.
+//
 // CaptureTraceURL calls the underlying CaptureTraceURL.
 func (x *RenderDestination) CaptureTraceURL() *foundation.NSURL {
 	return x.inner.CaptureTraceURL()

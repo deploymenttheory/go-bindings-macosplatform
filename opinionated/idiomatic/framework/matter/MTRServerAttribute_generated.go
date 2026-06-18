@@ -30,6 +30,8 @@ func MTRServerAttributeFromID(id objc.ID) *MTRServerAttribute {
 	return &MTRServerAttribute{inner: raw.MTRServerAttributeFromID(id)}
 }
 
+// Initialize as a readonly attribute.  The value is a data-value as documented in MTRBaseDevice.h. Will fail if the attribute ID is not valid per the Matter specification or the attribute value is not a valid data-value. requiredPrivilege is the privilege required to read the attribute. This initializer may fail if the provided attributeID is a global attribute and the provided requiredPrivilege value is not correct for that attribute ID.
+//
 // NewMTRServerAttributeReadonlyAttributeWithIDInitialValueRequiredPrivilege creates a new [MTRServerAttribute].
 func NewMTRServerAttributeReadonlyAttributeWithIDInitialValueRequiredPrivilege(attributeID *foundation.NSNumber, value *foundation.NSDictionary[*foundation.NSString, objc.ID], requiredPrivilege MTRAccessControlEntryPrivilege) *MTRServerAttribute {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRServerAttribute")), objc.RegisterName("alloc"))
@@ -43,6 +45,8 @@ func (x *MTRServerAttribute) WithValue(value *foundation.NSDictionary[*foundatio
 	return x
 }
 
+// Change the value of the attribute to a new value.  The value is a data-value as documented in MTRBaseDevice.h. Will fail if the attribute is not a valid data-value.
+//
 // SetValue calls the underlying SetValue.
 func (x *MTRServerAttribute) SetValue(value *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
 	return x.inner.SetValue(value)
@@ -58,6 +62,8 @@ func (x *MTRServerAttribute) Value() *foundation.NSDictionary[*foundation.NSStri
 	return x.inner.Value()
 }
 
+// The privilege level necessary to read this attribute.
+//
 // RequiredReadPrivilege calls the underlying RequiredReadPrivilege.
 func (x *MTRServerAttribute) RequiredReadPrivilege() MTRAccessControlEntryPrivilege {
 	return MTRAccessControlEntryPrivilege(x.inner.RequiredReadPrivilege())

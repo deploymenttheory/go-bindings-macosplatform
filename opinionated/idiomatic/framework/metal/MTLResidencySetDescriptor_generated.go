@@ -37,18 +37,24 @@ func NewResidencySetDescriptor() *ResidencySetDescriptor {
 	return &ResidencySetDescriptor{inner: raw.MTLResidencySetDescriptorFromID(_id)}
 }
 
+// @property label @abstract An optional label for the MTLResidencySet.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ResidencySetDescriptor) WithLabel(label string) *ResidencySetDescriptor {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property initialCapacity @abstract If non-zero, defines the number of allocations for which to initialize the internal arrays. Defaults to zero.
+//
 // WithInitialCapacity sets the initialCapacity property and returns the receiver for chaining.
 func (x *ResidencySetDescriptor) WithInitialCapacity(initialCapacity uint) *ResidencySetDescriptor {
 	x.inner.SetInitialCapacity(initialCapacity)
 	return x
 }
 
+// @property label @abstract An optional label for the MTLResidencySet.
+//
 // Label calls the underlying Label.
 func (x *ResidencySetDescriptor) Label() string {
 	_r := x.inner.Label()

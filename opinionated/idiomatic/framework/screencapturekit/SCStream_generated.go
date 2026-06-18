@@ -33,6 +33,8 @@ func StreamFromID(id objc.ID) *Stream {
 	return &Stream{inner: raw.SCStreamFromID(id)}
 }
 
+// @abstract initWithFilter:configuration:delegate: @param contentFilter the requested content filter to be captured @param streamConfig the requested stream configuration to be applied to the SCStream @param delegate the SCStream delegate object @discussion this method create a SCStream object that has the particular output settings for the content stream
+//
 // NewStreamWithFilterConfigurationDelegate creates a new [Stream].
 func NewStreamWithFilterConfigurationDelegate(contentFilter *raw.SCContentFilter, streamConfig *raw.SCStreamConfiguration, delegate raw.SCStreamDelegate) *Stream {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCStream")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewStreamWithFilterConfigurationDelegate(contentFilter *raw.SCContentFilter
 	return &Stream{inner: raw.SCStreamFromID(_id)}
 }
 
+// @abstract addStreamOutput:type:sampleHandlerQueue:error: @param output an object that adheres to the SCStreamOutput protocol that will receive the frames and call its delegate frame call back on its sample handler queue @param type the SCStreamOutput type @param sampleHandlerQueue the return queue for the sample handler @param error the error pertaining to the add stream output @discussion An SCStreamOutput protocol object instance can only be added to a session using -addStreamOutput: Returns a BOOL denoting if the add was successful
+//
 // AddStreamOutputTypeSampleHandlerQueueError calls the underlying AddStreamOutputTypeSampleHandlerQueueError.
 func (x *Stream) AddStreamOutputTypeSampleHandlerQueueError(output raw.SCStreamOutput, type_ SCStreamOutputType, sampleHandlerQueue *foundation.NSObject) (bool, error) {
 	return x.inner.AddStreamOutputTypeSampleHandlerQueueError(output, raw.SCStreamOutputType(type_), sampleHandlerQueue)
@@ -50,6 +54,8 @@ func (x *Stream) RemoveStreamOutputTypeError(output raw.SCStreamOutput, type_ SC
 	return x.inner.RemoveStreamOutputTypeError(output, raw.SCStreamOutputType(type_))
 }
 
+// @abstract updateContentFilter:completionHandler: @param contentFilter the requested content filter to be updated @param completionHandler the handler to be called when the function completes @discussion this method will update the content filter for a content stream. A completion handler will be called when the update is complete with an error denoting if the update has failed.
+//
 // UpdateContentFilter blocks until the operation completes or ctx is cancelled.
 func (x *Stream) UpdateContentFilter(ctx context.Context, contentFilter *raw.SCContentFilter) error {
 	_ch := make(chan error, 1)
@@ -68,6 +74,8 @@ func (x *Stream) UpdateContentFilter(ctx context.Context, contentFilter *raw.SCC
 	}
 }
 
+// @abstract updateConfiguration:completionHandler: @param streamConfig the requested content filter to be updated @param completionHandler the handler to be called when the function completes @discussion this method will update the stream configuration for a content stream. A completion handler will be called when the update is complete with an error denoting if the update has failed.
+//
 // UpdateConfiguration blocks until the operation completes or ctx is cancelled.
 func (x *Stream) UpdateConfiguration(ctx context.Context, streamConfig *raw.SCStreamConfiguration) error {
 	_ch := make(chan error, 1)
@@ -86,6 +94,8 @@ func (x *Stream) UpdateConfiguration(ctx context.Context, streamConfig *raw.SCSt
 	}
 }
 
+// @abstract startCaptureWithCompletionHandler: @param completionHandler the handler to be called when the function completes @discussion this method starts the content stream. The handler will be called when the content stream start has completed with an error denoting if the start has failed.
+//
 // StartCapture blocks until the operation completes or ctx is cancelled.
 func (x *Stream) StartCapture(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -104,6 +114,8 @@ func (x *Stream) StartCapture(ctx context.Context) error {
 	}
 }
 
+// @abstract stopCaptureWithCompletionHandler: @param completionHandler the handler to be called when the function completes @discussion this method stops the content stream. The handler will be called when the content stream stop has completed with an error denoting if the stop has failed.
+//
 // StopCapture blocks until the operation completes or ctx is cancelled.
 func (x *Stream) StopCapture(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -122,16 +134,22 @@ func (x *Stream) StopCapture(ctx context.Context) error {
 	}
 }
 
+// @method addRecordingOutput @abstract Add a SCRecordingOutput to the SCStream. Starts Recording if stream is already capturing, otherwise recording will be started after capture starts. Recording will be written into a file url specified in SCRecordingOutput. Media(Screen/Audio/Microphone) to be recorded will be based on the SCStream configuration. @param recordingOutput an SCRecordingOutput that including configuration of recording, and delegate for recording event. @param error the error pertaining to the add recording output @discussion Returns a BOOL denoting if the add was successful. Currently only support one recordingOutput on a stream. To guarantee the first sample captured in the stream to be written into the recording file, client need to add recordingOutput before startCapture. Delegate for recordingDidStart will be notified in SCRecordingOutput or recordingDidFinishWithError will be notified with an error associated if recording failed to start.
+//
 // AddRecordingOutputError calls the underlying AddRecordingOutputError.
 func (x *Stream) AddRecordingOutputError(recordingOutput *raw.SCRecordingOutput) (bool, error) {
 	return x.inner.AddRecordingOutputError(recordingOutput)
 }
 
+// @method removeRecordingOutput @abstract Remove SCRecordingOutput from the SCStream. Stops Recording if the stream is currently recording. @param recordingOutput an SCRecordingOutput that including configuration of recording, and delegate for recording event. @param error the error pertaining to the remove recording output @discussion Returns a BOOL denoting if the remove was successful. Delegate for recordingDidFinishWithError will be notified in SCRecordingOutput, associate with an error code if recording failed to finish written to the file. If stopCapture is called without removing recordingOutput, recording will be stopped and finish writting into the file. In case client update the stream configuration during recording, recording will be stopped as well.
+//
 // RemoveRecordingOutputError calls the underlying RemoveRecordingOutputError.
 func (x *Stream) RemoveRecordingOutputError(recordingOutput *raw.SCRecordingOutput) (bool, error) {
 	return x.inner.RemoveRecordingOutputError(recordingOutput)
 }
 
+// @abstract Synchronization clock used for media capture.
+//
 // SynchronizationClock calls the underlying SynchronizationClock.
 func (x *Stream) SynchronizationClock() unsafe.Pointer {
 	return x.inner.SynchronizationClock()

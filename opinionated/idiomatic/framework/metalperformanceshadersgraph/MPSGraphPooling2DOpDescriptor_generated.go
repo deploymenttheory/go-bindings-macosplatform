@@ -36,107 +36,143 @@ func NewGraphPooling2DOpDescriptor() *GraphPooling2DOpDescriptor {
 	return &GraphPooling2DOpDescriptor{inner: raw.MPSGraphPooling2DOpDescriptorFromID(_id)}
 }
 
+// Defines the pooling window size for the width dimension.
+//
 // WithKernelWidth sets the kernelWidth property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithKernelWidth(kernelWidth uint) *GraphPooling2DOpDescriptor {
 	x.inner.SetKernelWidth(kernelWidth)
 	return x
 }
 
+// Defines the pooling window size for the height dimension.
+//
 // WithKernelHeight sets the kernelHeight property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithKernelHeight(kernelHeight uint) *GraphPooling2DOpDescriptor {
 	x.inner.SetKernelHeight(kernelHeight)
 	return x
 }
 
+// Defines the stride for the width dimension. Default value: 1.
+//
 // WithStrideInX sets the strideInX property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithStrideInX(strideInX uint) *GraphPooling2DOpDescriptor {
 	x.inner.SetStrideInX(strideInX)
 	return x
 }
 
+// Defines the stride for the height dimension. Default value: 1.
+//
 // WithStrideInY sets the strideInY property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithStrideInY(strideInY uint) *GraphPooling2DOpDescriptor {
 	x.inner.SetStrideInY(strideInY)
 	return x
 }
 
+// Defines the dilation rate for the width dimension. Default value: 1.
+//
 // WithDilationRateInX sets the dilationRateInX property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithDilationRateInX(dilationRateInX uint) *GraphPooling2DOpDescriptor {
 	x.inner.SetDilationRateInX(dilationRateInX)
 	return x
 }
 
+// Defines the dilation rate for the height dimension. Default value: 1.
+//
 // WithDilationRateInY sets the dilationRateInY property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithDilationRateInY(dilationRateInY uint) *GraphPooling2DOpDescriptor {
 	x.inner.SetDilationRateInY(dilationRateInY)
 	return x
 }
 
+// Defines the explicit padding value for the width dimension to add before the data. Default value: 0.
+//
 // WithPaddingLeft sets the paddingLeft property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithPaddingLeft(paddingLeft uint) *GraphPooling2DOpDescriptor {
 	x.inner.SetPaddingLeft(paddingLeft)
 	return x
 }
 
+// Defines the explicit padding value for the width dimension to add after the data. Default value: 0.
+//
 // WithPaddingRight sets the paddingRight property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithPaddingRight(paddingRight uint) *GraphPooling2DOpDescriptor {
 	x.inner.SetPaddingRight(paddingRight)
 	return x
 }
 
+// Defines the explicit padding value for the height dimension to add before the data. Default value: 0.
+//
 // WithPaddingTop sets the paddingTop property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithPaddingTop(paddingTop uint) *GraphPooling2DOpDescriptor {
 	x.inner.SetPaddingTop(paddingTop)
 	return x
 }
 
+// Defines the explicit padding value for the height dimension to add after the data. Default value: 0.
+//
 // WithPaddingBottom sets the paddingBottom property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithPaddingBottom(paddingBottom uint) *GraphPooling2DOpDescriptor {
 	x.inner.SetPaddingBottom(paddingBottom)
 	return x
 }
 
+// Defines what kind of padding graph applies to the operation. Default value: `MPSGraphPaddingStyleExplicit`.
+//
 // WithPaddingStyle sets the paddingStyle property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphPooling2DOpDescriptor {
 	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 	return x
 }
 
+// Defines the data layout of the input data in the forward pass. See: “MPSGraphTensorNamedDataLayout“.
+//
 // WithDataLayout sets the dataLayout property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithDataLayout(dataLayout MPSGraphTensorNamedDataLayout) *GraphPooling2DOpDescriptor {
 	x.inner.SetDataLayout(raw.MPSGraphTensorNamedDataLayout(dataLayout))
 	return x
 }
 
+// Defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
+//
 // WithReturnIndicesMode sets the returnIndicesMode property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithReturnIndicesMode(returnIndicesMode MPSGraphPoolingReturnIndicesMode) *GraphPooling2DOpDescriptor {
 	x.inner.SetReturnIndicesMode(raw.MPSGraphPoolingReturnIndicesMode(returnIndicesMode))
 	return x
 }
 
+// Defines the data type for returned indices. Use this in conjunction with “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ API. Currently MPSGraph supports the following datatypes: `MPSDataTypeInt32`. Default value: `MPSDataTypeInt32`.
+//
 // WithReturnIndicesDataType sets the returnIndicesDataType property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType) *GraphPooling2DOpDescriptor {
 	x.inner.SetReturnIndicesDataType(returnIndicesDataType)
 	return x
 }
 
+// Affects how the graph computes the output size. if set to `YES` then output size is computed by rounding up instead of down when dividing input size by stride. Default value: `NO`.
+//
 // WithCeilMode sets the ceilMode property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithCeilMode(ceilMode bool) *GraphPooling2DOpDescriptor {
 	x.inner.SetCeilMode(ceilMode)
 	return x
 }
 
+// Defines a mode for average pooling, where samples outside the input tensor count as zeroes in the average computation. Otherwise the result is sum over samples divided by number of samples that didn't come from padding. Default value: `NO`.
+//
 // WithIncludeZeroPadToAverage sets the includeZeroPadToAverage property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithIncludeZeroPadToAverage(includeZeroPadToAverage bool) *GraphPooling2DOpDescriptor {
 	x.inner.SetIncludeZeroPadToAverage(includeZeroPadToAverage)
 	return x
 }
 
+// Sets the explicit padding values and sets padding style to explicit. - Parameters: - paddingLeft: See `paddingLeft` property. - paddingRight: See `paddingRight` property. - paddingTop: See `paddingTop` property. - paddingBottom: See `paddingBottom` property.
+//
 // SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom calls the underlying SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom.
 func (x *GraphPooling2DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint) {
 	x.inner.SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft, paddingRight, paddingTop, paddingBottom)
 }
 
+// Defines the pooling window size for the width dimension.
+//
 // KernelWidth calls the underlying KernelWidth.
 func (x *GraphPooling2DOpDescriptor) KernelWidth() uint {
 	return x.inner.KernelWidth()
@@ -147,6 +183,8 @@ func (x *GraphPooling2DOpDescriptor) SetKernelWidth(kernelWidth uint) {
 	x.inner.SetKernelWidth(kernelWidth)
 }
 
+// Defines the pooling window size for the height dimension.
+//
 // KernelHeight calls the underlying KernelHeight.
 func (x *GraphPooling2DOpDescriptor) KernelHeight() uint {
 	return x.inner.KernelHeight()
@@ -157,6 +195,8 @@ func (x *GraphPooling2DOpDescriptor) SetKernelHeight(kernelHeight uint) {
 	x.inner.SetKernelHeight(kernelHeight)
 }
 
+// Defines the stride for the width dimension. Default value: 1.
+//
 // StrideInX calls the underlying StrideInX.
 func (x *GraphPooling2DOpDescriptor) StrideInX() uint {
 	return x.inner.StrideInX()
@@ -167,6 +207,8 @@ func (x *GraphPooling2DOpDescriptor) SetStrideInX(strideInX uint) {
 	x.inner.SetStrideInX(strideInX)
 }
 
+// Defines the stride for the height dimension. Default value: 1.
+//
 // StrideInY calls the underlying StrideInY.
 func (x *GraphPooling2DOpDescriptor) StrideInY() uint {
 	return x.inner.StrideInY()
@@ -177,6 +219,8 @@ func (x *GraphPooling2DOpDescriptor) SetStrideInY(strideInY uint) {
 	x.inner.SetStrideInY(strideInY)
 }
 
+// Defines the dilation rate for the width dimension. Default value: 1.
+//
 // DilationRateInX calls the underlying DilationRateInX.
 func (x *GraphPooling2DOpDescriptor) DilationRateInX() uint {
 	return x.inner.DilationRateInX()
@@ -187,6 +231,8 @@ func (x *GraphPooling2DOpDescriptor) SetDilationRateInX(dilationRateInX uint) {
 	x.inner.SetDilationRateInX(dilationRateInX)
 }
 
+// Defines the dilation rate for the height dimension. Default value: 1.
+//
 // DilationRateInY calls the underlying DilationRateInY.
 func (x *GraphPooling2DOpDescriptor) DilationRateInY() uint {
 	return x.inner.DilationRateInY()
@@ -197,6 +243,8 @@ func (x *GraphPooling2DOpDescriptor) SetDilationRateInY(dilationRateInY uint) {
 	x.inner.SetDilationRateInY(dilationRateInY)
 }
 
+// Defines the explicit padding value for the width dimension to add before the data. Default value: 0.
+//
 // PaddingLeft calls the underlying PaddingLeft.
 func (x *GraphPooling2DOpDescriptor) PaddingLeft() uint {
 	return x.inner.PaddingLeft()
@@ -207,6 +255,8 @@ func (x *GraphPooling2DOpDescriptor) SetPaddingLeft(paddingLeft uint) {
 	x.inner.SetPaddingLeft(paddingLeft)
 }
 
+// Defines the explicit padding value for the width dimension to add after the data. Default value: 0.
+//
 // PaddingRight calls the underlying PaddingRight.
 func (x *GraphPooling2DOpDescriptor) PaddingRight() uint {
 	return x.inner.PaddingRight()
@@ -217,6 +267,8 @@ func (x *GraphPooling2DOpDescriptor) SetPaddingRight(paddingRight uint) {
 	x.inner.SetPaddingRight(paddingRight)
 }
 
+// Defines the explicit padding value for the height dimension to add before the data. Default value: 0.
+//
 // PaddingTop calls the underlying PaddingTop.
 func (x *GraphPooling2DOpDescriptor) PaddingTop() uint {
 	return x.inner.PaddingTop()
@@ -227,6 +279,8 @@ func (x *GraphPooling2DOpDescriptor) SetPaddingTop(paddingTop uint) {
 	x.inner.SetPaddingTop(paddingTop)
 }
 
+// Defines the explicit padding value for the height dimension to add after the data. Default value: 0.
+//
 // PaddingBottom calls the underlying PaddingBottom.
 func (x *GraphPooling2DOpDescriptor) PaddingBottom() uint {
 	return x.inner.PaddingBottom()
@@ -237,6 +291,8 @@ func (x *GraphPooling2DOpDescriptor) SetPaddingBottom(paddingBottom uint) {
 	x.inner.SetPaddingBottom(paddingBottom)
 }
 
+// Defines what kind of padding graph applies to the operation. Default value: `MPSGraphPaddingStyleExplicit`.
+//
 // PaddingStyle calls the underlying PaddingStyle.
 func (x *GraphPooling2DOpDescriptor) PaddingStyle() MPSGraphPaddingStyle {
 	return MPSGraphPaddingStyle(x.inner.PaddingStyle())
@@ -247,6 +303,8 @@ func (x *GraphPooling2DOpDescriptor) SetPaddingStyle(paddingStyle MPSGraphPaddin
 	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 }
 
+// Defines the data layout of the input data in the forward pass. See: “MPSGraphTensorNamedDataLayout“.
+//
 // DataLayout calls the underlying DataLayout.
 func (x *GraphPooling2DOpDescriptor) DataLayout() MPSGraphTensorNamedDataLayout {
 	return MPSGraphTensorNamedDataLayout(x.inner.DataLayout())
@@ -257,26 +315,36 @@ func (x *GraphPooling2DOpDescriptor) SetDataLayout(dataLayout MPSGraphTensorName
 	x.inner.SetDataLayout(raw.MPSGraphTensorNamedDataLayout(dataLayout))
 }
 
+// Defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
+//
 // ReturnIndicesMode calls the underlying ReturnIndicesMode.
 func (x *GraphPooling2DOpDescriptor) ReturnIndicesMode() MPSGraphPoolingReturnIndicesMode {
 	return MPSGraphPoolingReturnIndicesMode(x.inner.ReturnIndicesMode())
 }
 
+// Defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
+//
 // SetReturnIndicesMode calls the underlying SetReturnIndicesMode.
 func (x *GraphPooling2DOpDescriptor) SetReturnIndicesMode(returnIndicesMode MPSGraphPoolingReturnIndicesMode) {
 	x.inner.SetReturnIndicesMode(raw.MPSGraphPoolingReturnIndicesMode(returnIndicesMode))
 }
 
+// Defines the data type for returned indices. Use this in conjunction with “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ API. Currently MPSGraph supports the following datatypes: `MPSDataTypeInt32`. Default value: `MPSDataTypeInt32`.
+//
 // ReturnIndicesDataType calls the underlying ReturnIndicesDataType.
 func (x *GraphPooling2DOpDescriptor) ReturnIndicesDataType() mpscore.MPSDataType {
 	return x.inner.ReturnIndicesDataType()
 }
 
+// Defines the data type for returned indices. Use this in conjunction with “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ API. Currently MPSGraph supports the following datatypes: `MPSDataTypeInt32`. Default value: `MPSDataTypeInt32`.
+//
 // SetReturnIndicesDataType calls the underlying SetReturnIndicesDataType.
 func (x *GraphPooling2DOpDescriptor) SetReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType) {
 	x.inner.SetReturnIndicesDataType(returnIndicesDataType)
 }
 
+// Affects how the graph computes the output size. if set to `YES` then output size is computed by rounding up instead of down when dividing input size by stride. Default value: `NO`.
+//
 // CeilMode calls the underlying CeilMode.
 func (x *GraphPooling2DOpDescriptor) CeilMode() bool {
 	return x.inner.CeilMode()
@@ -287,6 +355,8 @@ func (x *GraphPooling2DOpDescriptor) SetCeilMode(ceilMode bool) {
 	x.inner.SetCeilMode(ceilMode)
 }
 
+// Defines a mode for average pooling, where samples outside the input tensor count as zeroes in the average computation. Otherwise the result is sum over samples divided by number of samples that didn't come from padding. Default value: `NO`.
+//
 // IncludeZeroPadToAverage calls the underlying IncludeZeroPadToAverage.
 func (x *GraphPooling2DOpDescriptor) IncludeZeroPadToAverage() bool {
 	return x.inner.IncludeZeroPadToAverage()

@@ -37,30 +37,40 @@ func NewSphere() *Sphere {
 	return &Sphere{inner: raw.SCNSphereFromID(_id)}
 }
 
+// @property radius @abstract The sphere radius. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
+//
 // WithRadius sets the radius property and returns the receiver for chaining.
 func (x *Sphere) WithRadius(radius float64) *Sphere {
 	x.inner.SetRadius(radius)
 	return x
 }
 
+// @property geodesic @abstract Indicate if the geometry is a geosphere. @discussion The default value is NO.
+//
 // WithGeodesic sets the geodesic property and returns the receiver for chaining.
 func (x *Sphere) WithGeodesic(geodesic bool) *Sphere {
 	x.inner.SetGeodesic(geodesic)
 	return x
 }
 
+// @property segmentCount @abstract The number of segments along both spherical coordinates. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
+//
 // WithSegmentCount sets the segmentCount property and returns the receiver for chaining.
 func (x *Sphere) WithSegmentCount(segmentCount int) *Sphere {
 	x.inner.SetSegmentCount(segmentCount)
 	return x
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Sphere) WithName(name string) *Sphere {
 	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+//
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Sphere) WithMaterials(items ...*raw.SCNMaterial) *Sphere {
 	if len(items) == 0 {
@@ -79,12 +89,16 @@ func (x *Sphere) WithMaterials(items ...*raw.SCNMaterial) *Sphere {
 	return x
 }
 
+// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+//
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Sphere) WithFirstMaterial(firstMaterial *Material) *Sphere {
 	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
+// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+//
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Sphere) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Sphere {
 	if len(items) == 0 {
@@ -109,30 +123,40 @@ func (x *Sphere) WithTessellator(tessellator *GeometryTessellator) *Sphere {
 	return x
 }
 
+// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+//
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Sphere) WithSubdivisionLevel(subdivisionLevel uint) *Sphere {
 	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
 	return x
 }
 
+// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+//
 // WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
 func (x *Sphere) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Sphere {
 	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
 	return x
 }
 
+// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+//
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Sphere) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Sphere {
 	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
+// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+//
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Sphere) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Sphere {
 	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
+// @property radius @abstract The sphere radius. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
+//
 // Radius calls the underlying Radius.
 func (x *Sphere) Radius() float64 {
 	return x.inner.Radius()
@@ -143,6 +167,8 @@ func (x *Sphere) SetRadius(radius float64) {
 	x.inner.SetRadius(radius)
 }
 
+// @property geodesic @abstract Indicate if the geometry is a geosphere. @discussion The default value is NO.
+//
 // IsGeodesic calls the underlying IsGeodesic.
 func (x *Sphere) IsGeodesic() bool {
 	return x.inner.IsGeodesic()
@@ -153,6 +179,8 @@ func (x *Sphere) SetGeodesic(geodesic bool) {
 	x.inner.SetGeodesic(geodesic)
 }
 
+// @property segmentCount @abstract The number of segments along both spherical coordinates. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
+//
 // SegmentCount calls the underlying SegmentCount.
 func (x *Sphere) SegmentCount() int {
 	return x.inner.SegmentCount()

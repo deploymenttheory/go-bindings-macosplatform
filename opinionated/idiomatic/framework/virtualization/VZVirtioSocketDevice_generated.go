@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A device that manages port-based connections between the guest system and the host computer.
+//
 // VirtioSocketDevice wraps [raw.VZVirtioSocketDevice] with a fluent Go API.
 type VirtioSocketDevice struct {
 	inner *raw.VZVirtioSocketDevice
@@ -38,16 +40,22 @@ func NewVirtioSocketDevice() *VirtioSocketDevice {
 	return &VirtioSocketDevice{inner: raw.VZVirtioSocketDeviceFromID(_id)}
 }
 
+// Configures an object to monitor the specified port for new connections.
+//
 // SetSocketListenerForPort calls the underlying SetSocketListenerForPort.
 func (x *VirtioSocketDevice) SetSocketListenerForPort(listener *raw.VZVirtioSocketListener, port uint32) {
 	x.inner.SetSocketListenerForPort(listener, port)
 }
 
+// Removes the listener object from the specfied port.
+//
 // RemoveSocketListenerForPort calls the underlying RemoveSocketListenerForPort.
 func (x *VirtioSocketDevice) RemoveSocketListenerForPort(port uint32) {
 	x.inner.RemoveSocketListenerForPort(port)
 }
 
+// Initiates a connection to the specified port of the guest operating system.
+//
 // ConnectToPort blocks until the operation completes or ctx is cancelled.
 func (x *VirtioSocketDevice) ConnectToPort(ctx context.Context, port uint32) (*VirtioSocketConnection, error) {
 	type _result struct {

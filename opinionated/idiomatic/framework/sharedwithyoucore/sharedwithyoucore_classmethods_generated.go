@@ -7,6 +7,8 @@ package sharedwithyoucore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
+	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SharedCoordinator calls the underlying SWCollaborationCoordinatorSharedCoordinator.
@@ -46,8 +48,17 @@ func ShareOptionsWithOptionsGroupsSummary(optionsGroups *foundation.NSArray[*raw
 }
 
 // ShareOptionsWithOptionsGroups calls the underlying SWCollaborationShareOptionsShareOptionsWithOptionsGroups.
-func ShareOptionsWithOptionsGroups(optionsGroups *foundation.NSArray[*raw.SWCollaborationOptionsGroup]) *CollaborationShareOptions {
-	_r := raw.SWCollaborationShareOptionsShareOptionsWithOptionsGroups(optionsGroups)
+func ShareOptionsWithOptionsGroups(optionsGroups ...CollaborationOptionsGroupProvider) *CollaborationShareOptions {
+	_ptrs := make([]objc.ID, len(optionsGroups))
+	for _i, _v := range optionsGroups {
+		_ptrs[_i] = _v.asCollaborationOptionsGroup().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.SWCollaborationOptionsGroup]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.SWCollaborationOptionsGroup](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	_r := raw.SWCollaborationShareOptionsShareOptionsWithOptionsGroups(_arg0)
 	if _r == nil {
 		return nil
 	}

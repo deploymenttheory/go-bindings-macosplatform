@@ -37,11 +37,15 @@ func NewRenderedCaptionImage() *RenderedCaptionImage {
 	return &RenderedCaptionImage{inner: raw.AVRenderedCaptionImageFromID(_id)}
 }
 
+// @property		pixelBuffer @abstract		A CVPixelBufferRef that contains pixel data for the rendered caption. @discussion		If the client reads a pixelBuffer and wants to use it longer than AVRenderedCaptionImage, it must retain the pixelBuffer. The pixel buffer can be converted to MTLTexture using CVMetalTextureCache. The pixel format is fixed to kCVPixelFormatType_32BGRA defined in <CoreVideo/CVPixelBuffer.h>.
+//
 // PixelBuffer calls the underlying PixelBuffer.
 func (x *RenderedCaptionImage) PixelBuffer() unsafe.Pointer {
 	return x.inner.PixelBuffer()
 }
 
+// @property		position @abstract		A CGPoint that defines the position (in pixels) of the rendered caption image relative to the video frame @discussion		To place the caption image correcly, the size of pixel buffer can be extracted from CVPixelBufferGetWidth and CVPixelBufferGetHeight. Origin is assumed at upper-left. So, a caption image is rendered to the right and bottom of the origin point.
+//
 // Position calls the underlying Position.
 func (x *RenderedCaptionImage) Position() corefoundation.CGPoint {
 	return x.inner.Position()

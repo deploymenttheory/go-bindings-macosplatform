@@ -8,7 +8,9 @@ import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // WKWebExtensionController wraps [raw.WKWebExtensionController] with a fluent Go API.
@@ -37,6 +39,8 @@ func NewWKWebExtensionController() *WKWebExtensionController {
 	return &WKWebExtensionController{inner: raw.WKWebExtensionControllerFromID(_id)}
 }
 
+// @abstract Returns a web extension controller initialized with the specified configuration. @param configuration The configuration for the new web extension controller. @result An initialized web extension controller, or nil if the object could not be initialized. @discussion This is a designated initializer. You can use “init:“ to initialize an instance with the default configuration. The initializer copies the specified configuration, so mutating the configuration after invoking the initializer has no effect on the web extension controller. @seealso init
+//
 // NewWKWebExtensionControllerWithConfiguration creates a new [WKWebExtensionController].
 func NewWKWebExtensionControllerWithConfiguration(configuration *raw.WKWebExtensionControllerConfiguration) *WKWebExtensionController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WKWebExtensionController")), objc.RegisterName("alloc"))
@@ -44,22 +48,30 @@ func NewWKWebExtensionControllerWithConfiguration(configuration *raw.WKWebExtens
 	return &WKWebExtensionController{inner: raw.WKWebExtensionControllerFromID(_id)}
 }
 
+// @abstract The extension controller delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *WKWebExtensionController) WithDelegate(delegate raw.WKWebExtensionControllerDelegate) *WKWebExtensionController {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @abstract Loads the specified extension context. @discussion Causes the context to start, loading any background content, and injecting any content into relevant tabs. @param error Set to \c nil or an \c NSError instance if an error occurred. @result A Boolean value indicating if the context was successfully loaded. @seealso loadExtensionContext:
+//
 // LoadExtensionContextError calls the underlying LoadExtensionContextError.
 func (x *WKWebExtensionController) LoadExtensionContextError(extensionContext *raw.WKWebExtensionContext) (bool, error) {
 	return x.inner.LoadExtensionContextError(extensionContext)
 }
 
+// @abstract Unloads the specified extension context. @discussion Causes the context to stop running. @param error Set to \c nil or an \c NSError instance if an error occurred. @result A Boolean value indicating if the context was successfully unloaded. @seealso unloadExtensionContext:
+//
 // UnloadExtensionContextError calls the underlying UnloadExtensionContextError.
 func (x *WKWebExtensionController) UnloadExtensionContextError(extensionContext *raw.WKWebExtensionContext) (bool, error) {
 	return x.inner.UnloadExtensionContextError(extensionContext)
 }
 
+// @abstract Returns a loaded extension context for the specified extension. @param extension An extension to lookup. @result An extension context or `nil` if no match was found. @seealso extensions
+//
 // ExtensionContextForExtension calls the underlying ExtensionContextForExtension.
 func (x *WKWebExtensionController) ExtensionContextForExtension(extension *raw.WKWebExtension) *WKWebExtensionContext {
 	_r := x.inner.ExtensionContextForExtension(extension)
@@ -69,6 +81,8 @@ func (x *WKWebExtensionController) ExtensionContextForExtension(extension *raw.W
 	return &WKWebExtensionContext{inner: _r}
 }
 
+// @abstract Returns a loaded extension context matching the specified URL. @param URL The URL to lookup. @result An extension context or `nil` if no match was found. @discussion This method is useful for determining the extension context to use when about to navigate to an extension URL. For example, you could use this method to retrieve the appropriate extension context and then use its “webViewConfiguration“ property to configure a web view for loading that URL.
+//
 // ExtensionContextForURL calls the underlying ExtensionContextForURL.
 func (x *WKWebExtensionController) ExtensionContextForURL(uRL string) *WKWebExtensionContext {
 	_r := x.inner.ExtensionContextForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
@@ -78,6 +92,8 @@ func (x *WKWebExtensionController) ExtensionContextForURL(uRL string) *WKWebExte
 	return &WKWebExtensionContext{inner: _r}
 }
 
+// @abstract Fetches data records containing the given extension data types for all known extensions. @param dataTypes The extension data types to fetch records for. @param completionHandler A block to invoke when the data records have been fetched. @note The extension does not need to be loaded to be included in the result.
+//
 // FetchDataRecordsOfTypes blocks until the operation completes or ctx is cancelled.
 func (x *WKWebExtensionController) FetchDataRecordsOfTypes(ctx context.Context, dataTypes *foundation.NSSet[*foundation.NSString]) (*foundation.NSArray[*raw.WKWebExtensionDataRecord], error) {
 	type _result struct {
@@ -99,6 +115,8 @@ func (x *WKWebExtensionController) FetchDataRecordsOfTypes(ctx context.Context, 
 	}
 }
 
+// @abstract Fetches a data record containing the given extension data types for a specific known web extension context. @param dataTypes The extension data types to fetch records for. @param extensionContext The specific web extension context to fetch records for. @param completionHandler A block to invoke when the data record has been fetched. @note The extension does not need to be loaded to be included in the result.
+//
 // FetchDataRecordOfTypesForExtensionContext blocks until the operation completes or ctx is cancelled.
 func (x *WKWebExtensionController) FetchDataRecordOfTypesForExtensionContext(ctx context.Context, dataTypes *foundation.NSSet[*foundation.NSString], extensionContext *raw.WKWebExtensionContext) (*WKWebExtensionDataRecord, error) {
 	type _result struct {
@@ -122,6 +140,8 @@ func (x *WKWebExtensionController) FetchDataRecordOfTypesForExtensionContext(ctx
 	}
 }
 
+// @abstract Removes extension data of the given types for the given data records. @param dataTypes The extension data types that should be removed. @param dataRecords The extension data records to delete data from. @param completionHandler A block to invoke when the data has been removed.
+//
 // RemoveDataOfTypesFromDataRecords blocks until the operation completes or ctx is cancelled.
 func (x *WKWebExtensionController) RemoveDataOfTypesFromDataRecords(ctx context.Context, dataTypes *foundation.NSSet[*foundation.NSString], dataRecords *foundation.NSArray[*raw.WKWebExtensionDataRecord]) error {
 	_ch := make(chan error, 1)
@@ -136,61 +156,103 @@ func (x *WKWebExtensionController) RemoveDataOfTypesFromDataRecords(ctx context.
 	}
 }
 
+// @abstract Should be called by the app when a new window is opened to fire appropriate events with all loaded web extensions. @param newWindow The newly opened window. @discussion This method informs all loaded extensions of the opening of a new window, ensuring consistent understanding across extensions. If the intention is to inform only a specific extension, you should use the respective method on that extension's context instead. @seealso didCloseWindow:
+//
 // DidOpenWindow calls the underlying DidOpenWindow.
 func (x *WKWebExtensionController) DidOpenWindow(newWindow raw.WKWebExtensionWindow) {
 	x.inner.DidOpenWindow(newWindow)
 }
 
+// @abstract Should be called by the app when a window is closed to fire appropriate events with all loaded web extensions. @param newWindow The window that was closed. @discussion This method informs all loaded extensions of the closure of a window, ensuring consistent understanding across extensions. If the intention is to inform only a specific extension, you should use the respective method on that extension's context instead. @seealso didOpenWindow:
+//
 // DidCloseWindow calls the underlying DidCloseWindow.
 func (x *WKWebExtensionController) DidCloseWindow(closedWindow raw.WKWebExtensionWindow) {
 	x.inner.DidCloseWindow(closedWindow)
 }
 
+// @abstract Should be called by the app when a window gains focus to fire appropriate events with all loaded web extensions. @param focusedWindow The window that gained focus, or \c nil if no window has focus or a window has focus that is not visible to extensions. @discussion This method informs all loaded extensions of the focused window, ensuring consistent understanding across extensions. If the intention is to inform only a specific extension, you should use the respective method on that extension's context instead.
+//
 // DidFocusWindow calls the underlying DidFocusWindow.
 func (x *WKWebExtensionController) DidFocusWindow(focusedWindow raw.WKWebExtensionWindow) {
 	x.inner.DidFocusWindow(focusedWindow)
 }
 
+// @abstract Should be called by the app when a new tab is opened to fire appropriate events with all loaded web extensions. @param newTab The newly opened tab. @discussion This method informs all loaded extensions of the opening of a new tab, ensuring consistent understanding across extensions. If the intention is to inform only a specific extension, you should use the respective method on that extension's context instead. @seealso didCloseTab:
+//
 // DidOpenTab calls the underlying DidOpenTab.
 func (x *WKWebExtensionController) DidOpenTab(newTab raw.WKWebExtensionTab) {
 	x.inner.DidOpenTab(newTab)
 }
 
+// @abstract Should be called by the app when a tab is closed to fire appropriate events with all loaded web extensions. @param closedTab The tab that was closed. @param windowIsClosing A boolean value indicating whether the window containing the tab is also closing. @discussion This method informs all loaded extensions of the closing of a tab, ensuring consistent understanding across extensions. If the intention is to inform only a specific extension, you should use the respective method on that extension's context instead. @seealso didOpenTab:
+//
 // DidCloseTabWindowIsClosing calls the underlying DidCloseTabWindowIsClosing.
 func (x *WKWebExtensionController) DidCloseTabWindowIsClosing(closedTab raw.WKWebExtensionTab, windowIsClosing bool) {
 	x.inner.DidCloseTabWindowIsClosing(closedTab, windowIsClosing)
 }
 
+// @abstract Should be called by the app when a tab is activated to notify all loaded web extensions. @param activatedTab The tab that has become active. @param previousTab The tab that was active before. This parameter can be \c nil if there was no previously active tab. @discussion This method informs all loaded extensions of the tab activation, ensuring consistent state awareness across extensions. If the intention is to inform only a specific extension, use the respective method on that extension's context instead.
+//
 // DidActivateTabPreviousActiveTab calls the underlying DidActivateTabPreviousActiveTab.
 func (x *WKWebExtensionController) DidActivateTabPreviousActiveTab(activatedTab raw.WKWebExtensionTab, previousTab raw.WKWebExtensionTab) {
 	x.inner.DidActivateTabPreviousActiveTab(activatedTab, previousTab)
 }
 
+// @abstract Should be called by the app when tabs are selected to fire appropriate events with all loaded web extensions. @param selectedTabs The set of tabs that were selected. @discussion This method informs all loaded extensions that tabs have been selected, ensuring consistent understanding across extensions. If the intention is to inform only a specific extension, you should use the respective method on that extension's context instead.
+//
 // DidSelectTabs calls the underlying DidSelectTabs.
-func (x *WKWebExtensionController) DidSelectTabs(selectedTabs *foundation.NSArray[raw.WKWebExtensionTab]) {
-	x.inner.DidSelectTabs(selectedTabs)
+func (x *WKWebExtensionController) DidSelectTabs(selectedTabs ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(selectedTabs))
+	for _i, _v := range selectedTabs {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.WKWebExtensionTab]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.WKWebExtensionTab](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.DidSelectTabs(_arg0)
 }
 
+// @abstract Should be called by the app when tabs are deselected to fire appropriate events with all loaded web extensions. @param deselectedTabs The set of tabs that were deselected. @discussion This method informs all loaded extensions that tabs have been deselected, ensuring consistent understanding across extensions. If the intention is to inform only a specific extension, you should use the respective method on that extension's context instead.
+//
 // DidDeselectTabs calls the underlying DidDeselectTabs.
-func (x *WKWebExtensionController) DidDeselectTabs(deselectedTabs *foundation.NSArray[raw.WKWebExtensionTab]) {
-	x.inner.DidDeselectTabs(deselectedTabs)
+func (x *WKWebExtensionController) DidDeselectTabs(deselectedTabs ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(deselectedTabs))
+	for _i, _v := range deselectedTabs {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.WKWebExtensionTab]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.WKWebExtensionTab](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.DidDeselectTabs(_arg0)
 }
 
+// @abstract Should be called by the app when a tab is moved to fire appropriate events with all loaded web extensions. @param movedTab The tab that was moved. @param index The old index of the tab within the window. @param oldWindow The window that the tab was moved from, or \c nil if the tab is moving from no open window. @discussion This method informs all loaded extensions of the movement of a tab, ensuring consistent understanding across extensions. If the window is staying the same, the current window should be specified. If the intention is to inform only a specific extension, use the respective method on that extension's context instead.
+//
 // DidMoveTabFromIndexInWindow calls the underlying DidMoveTabFromIndexInWindow.
 func (x *WKWebExtensionController) DidMoveTabFromIndexInWindow(movedTab raw.WKWebExtensionTab, index uint, oldWindow raw.WKWebExtensionWindow) {
 	x.inner.DidMoveTabFromIndexInWindow(movedTab, index, oldWindow)
 }
 
+// @abstract Should be called by the app when a tab is replaced by another tab to fire appropriate events with all loaded web extensions. @param oldTab The tab that was replaced. @param newTab The tab that replaced the old tab. @discussion This method informs all loaded extensions of the replacement of a tab, ensuring consistent understanding across extensions. If the intention is to inform only a specific extension, you should use the respective method on that extension's context instead.
+//
 // DidReplaceTabWithTab calls the underlying DidReplaceTabWithTab.
 func (x *WKWebExtensionController) DidReplaceTabWithTab(oldTab raw.WKWebExtensionTab, newTab raw.WKWebExtensionTab) {
 	x.inner.DidReplaceTabWithTab(oldTab, newTab)
 }
 
+// @abstract Should be called by the app when the properties of a tab are changed to fire appropriate events with all loaded web extensions. @param properties The properties of the tab that were changed. @param changedTab The tab whose properties were changed. @discussion This method informs all loaded extensions of changes to tab properties, ensuring a unified understanding across extensions. If the intention is to inform only a specific extension, you should use the respective method on that extension's context instead.
+//
 // DidChangeTabPropertiesForTab calls the underlying DidChangeTabPropertiesForTab.
 func (x *WKWebExtensionController) DidChangeTabPropertiesForTab(properties WKWebExtensionTabChangedProperties, changedTab raw.WKWebExtensionTab) {
 	x.inner.DidChangeTabPropertiesForTab(raw.WKWebExtensionTabChangedProperties(properties), changedTab)
 }
 
+// @abstract The extension controller delegate.
+//
 // Delegate calls the underlying Delegate.
 func (x *WKWebExtensionController) Delegate() raw.WKWebExtensionControllerDelegate {
 	return x.inner.Delegate()
@@ -201,6 +263,8 @@ func (x *WKWebExtensionController) SetDelegate(delegate raw.WKWebExtensionContro
 	x.inner.SetDelegate(delegate)
 }
 
+// @abstract A copy of the configuration with which the web extension controller was initialized. @discussion Mutating the configuration has no effect on the web extension controller.
+//
 // Configuration calls the underlying Configuration.
 func (x *WKWebExtensionController) Configuration() *WKWebExtensionControllerConfiguration {
 	_r := x.inner.Configuration()
@@ -210,11 +274,15 @@ func (x *WKWebExtensionController) Configuration() *WKWebExtensionControllerConf
 	return &WKWebExtensionControllerConfiguration{inner: _r}
 }
 
+// @abstract A set of all the currently loaded extensions. @seealso extensionContexts
+//
 // Extensions calls the underlying Extensions.
 func (x *WKWebExtensionController) Extensions() *foundation.NSSet[*raw.WKWebExtension] {
 	return x.inner.Extensions()
 }
 
+// @abstract A set of all the currently loaded extension contexts. @seealso extensions
+//
 // ExtensionContexts calls the underlying ExtensionContexts.
 func (x *WKWebExtensionController) ExtensionContexts() *foundation.NSSet[*raw.WKWebExtensionContext] {
 	return x.inner.ExtensionContexts()
@@ -237,8 +305,8 @@ type WKWebExtensionControllerable interface {
 	DidOpenTab(newTab raw.WKWebExtensionTab)
 	DidCloseTabWindowIsClosing(closedTab raw.WKWebExtensionTab, windowIsClosing bool)
 	DidActivateTabPreviousActiveTab(activatedTab raw.WKWebExtensionTab, previousTab raw.WKWebExtensionTab)
-	DidSelectTabs(selectedTabs *foundation.NSArray[raw.WKWebExtensionTab])
-	DidDeselectTabs(deselectedTabs *foundation.NSArray[raw.WKWebExtensionTab])
+	DidSelectTabs(selectedTabs ...purego.IDer)
+	DidDeselectTabs(deselectedTabs ...purego.IDer)
 	DidMoveTabFromIndexInWindow(movedTab raw.WKWebExtensionTab, index uint, oldWindow raw.WKWebExtensionWindow)
 	DidReplaceTabWithTab(oldTab raw.WKWebExtensionTab, newTab raw.WKWebExtensionTab)
 	DidChangeTabPropertiesForTab(properties WKWebExtensionTabChangedProperties, changedTab raw.WKWebExtensionTab)

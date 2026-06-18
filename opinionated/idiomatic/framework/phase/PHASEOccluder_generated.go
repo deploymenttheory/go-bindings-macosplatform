@@ -31,6 +31,8 @@ func OccluderFromID(id objc.ID) *Occluder {
 	return &Occluder{inner: raw.PHASEOccluderFromID(id)}
 }
 
+// @method initWithEngine:shapes: @abstract Initialize a new occluder with shapes. @discussion The shapes array cannot be empty, otherwise an exception is thrown. @note This function is thread-safe. Clients can safely run this function to create multiple occluders from multiple threads, if required.
+//
 // NewOccluderWithEngineShapes creates a new [Occluder].
 func NewOccluderWithEngineShapes(engine *raw.PHASEEngine, shapes *foundation.NSArray[*raw.PHASEShape]) *Occluder {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEOccluder")), objc.RegisterName("alloc"))

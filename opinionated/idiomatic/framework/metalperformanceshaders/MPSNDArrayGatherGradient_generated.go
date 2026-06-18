@@ -38,18 +38,24 @@ func NewNDArrayGatherGradient() *NDArrayGatherGradient {
 	return &NDArrayGatherGradient{inner: raw.MPSNDArrayGatherGradientFromID(_id)}
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *NDArrayGatherGradient) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayGatherGradient {
 	x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *NDArrayGatherGradient) WithOptions(options mpscore.MPSKernelOptions) *NDArrayGatherGradient {
 	x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NDArrayGatherGradient) WithLabel(label string) *NDArrayGatherGradient {
 	x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))

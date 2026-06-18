@@ -37,72 +37,100 @@ func NewPeripheral() *Peripheral {
 	return &Peripheral{inner: raw.CBPeripheralFromID(_id)}
 }
 
+// @property delegate @discussion The delegate object that will receive peripheral events.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Peripheral) WithDelegate(delegate raw.CBPeripheralDelegate) *Peripheral {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @method readRSSI @discussion While connected, retrieves the current RSSI of the link. @see        peripheral:didReadRSSI:error:
+//
 // ReadRSSI calls the underlying ReadRSSI.
 func (x *Peripheral) ReadRSSI() {
 	x.inner.ReadRSSI()
 }
 
+// @method discoverServices: @param serviceUUIDs A list of <code>CBUUID</code> objects representing the service types to be discovered. If <i>nil</i>, all services will be discovered. @discussion			Discovers available service(s) on the peripheral. @see				peripheral:didDiscoverServices:
+//
 // DiscoverServices calls the underlying DiscoverServices.
 func (x *Peripheral) DiscoverServices(serviceUUIDs *foundation.NSArray[*raw.CBUUID]) {
 	x.inner.DiscoverServices(serviceUUIDs)
 }
 
+// @method discoverIncludedServices:forService: @param includedServiceUUIDs A list of <code>CBUUID</code> objects representing the included service types to be discovered. If <i>nil</i>, all of <i>service</i>s included services will be discovered, which is considerably slower and not recommended. @param service				A GATT service. @discussion					Discovers the specified included service(s) of <i>service</i>. @see						peripheral:didDiscoverIncludedServicesForService:error:
+//
 // DiscoverIncludedServicesForService calls the underlying DiscoverIncludedServicesForService.
 func (x *Peripheral) DiscoverIncludedServicesForService(includedServiceUUIDs *foundation.NSArray[*raw.CBUUID], service *raw.CBService) {
 	x.inner.DiscoverIncludedServicesForService(includedServiceUUIDs, service)
 }
 
+// @method discoverCharacteristics:forService: @param characteristicUUIDs	A list of <code>CBUUID</code> objects representing the characteristic types to be discovered. If <i>nil</i>, all characteristics of <i>service</i> will be discovered. @param service				A GATT service. @discussion					Discovers the specified characteristic(s) of <i>service</i>. @see						peripheral:didDiscoverCharacteristicsForService:error:
+//
 // DiscoverCharacteristicsForService calls the underlying DiscoverCharacteristicsForService.
 func (x *Peripheral) DiscoverCharacteristicsForService(characteristicUUIDs *foundation.NSArray[*raw.CBUUID], service *raw.CBService) {
 	x.inner.DiscoverCharacteristicsForService(characteristicUUIDs, service)
 }
 
+// @method readValueForCharacteristic: @param characteristic	A GATT characteristic. @discussion				Reads the characteristic value for <i>characteristic</i>. @see					peripheral:didUpdateValueForCharacteristic:error:
+//
 // ReadValueForCharacteristic calls the underlying ReadValueForCharacteristic.
 func (x *Peripheral) ReadValueForCharacteristic(characteristic *raw.CBCharacteristic) {
 	x.inner.ReadValueForCharacteristic(characteristic)
 }
 
+// @method		maximumWriteValueLengthForType: @discussion	The maximum amount of data, in bytes, that can be sent to a characteristic in a single write type. @see		writeValue:forCharacteristic:type:
+//
 // MaximumWriteValueLengthForType calls the underlying MaximumWriteValueLengthForType.
 func (x *Peripheral) MaximumWriteValueLengthForType(type_ CBCharacteristicWriteType) uint {
 	return x.inner.MaximumWriteValueLengthForType(raw.CBCharacteristicWriteType(type_))
 }
 
+// @method writeValue:forCharacteristic:type: @param data				The value to write. @param characteristic	The characteristic whose characteristic value will be written. @param type				The type of write to be executed. @discussion				Writes <i>value</i> to <i>characteristic</i>'s characteristic value. If the <code>CBCharacteristicWriteWithResponse</code> type is specified, {@link peripheral:didWriteValueForCharacteristic:error:} is called with the result of the write request. If the <code>CBCharacteristicWriteWithoutResponse</code> type is specified, and canSendWriteWithoutResponse is false, the delivery of the data is best-effort and may not be guaranteed. @see					peripheral:didWriteValueForCharacteristic:error: @see					peripheralIsReadyToSendWriteWithoutResponse: @see					canSendWriteWithoutResponse @see					CBCharacteristicWriteType
+//
 // WriteValueForCharacteristicType calls the underlying WriteValueForCharacteristicType.
 func (x *Peripheral) WriteValueForCharacteristicType(data *foundation.NSData, characteristic *raw.CBCharacteristic, type_ CBCharacteristicWriteType) {
 	x.inner.WriteValueForCharacteristicType(data, characteristic, raw.CBCharacteristicWriteType(type_))
 }
 
+// @method setNotifyValue:forCharacteristic: @param enabled			Whether or not notifications/indications should be enabled. @param characteristic	The characteristic containing the client characteristic configuration descriptor. @discussion				Enables or disables notifications/indications for the characteristic value of <i>characteristic</i>. If <i>characteristic</i> allows both, notifications will be used. When notifications/indications are enabled, updates to the characteristic value will be received via delegate method @link peripheral:didUpdateValueForCharacteristic:error: @/link. Since it is the peripheral that chooses when to send an update, the application should be prepared to handle them as long as notifications/indications remain enabled. @see					peripheral:didUpdateNotificationStateForCharacteristic:error: @seealso                CBConnectPeripheralOptionNotifyOnNotificationKey
+//
 // SetNotifyValueForCharacteristic calls the underlying SetNotifyValueForCharacteristic.
 func (x *Peripheral) SetNotifyValueForCharacteristic(enabled bool, characteristic *raw.CBCharacteristic) {
 	x.inner.SetNotifyValueForCharacteristic(enabled, characteristic)
 }
 
+// @method discoverDescriptorsForCharacteristic: @param characteristic	A GATT characteristic. @discussion				Discovers the characteristic descriptor(s) of <i>characteristic</i>. @see					peripheral:didDiscoverDescriptorsForCharacteristic:error:
+//
 // DiscoverDescriptorsForCharacteristic calls the underlying DiscoverDescriptorsForCharacteristic.
 func (x *Peripheral) DiscoverDescriptorsForCharacteristic(characteristic *raw.CBCharacteristic) {
 	x.inner.DiscoverDescriptorsForCharacteristic(characteristic)
 }
 
+// @method readValueForDescriptor: @param descriptor	A GATT characteristic descriptor. @discussion			Reads the value of <i>descriptor</i>. @see				peripheral:didUpdateValueForDescriptor:error:
+//
 // ReadValueForDescriptor calls the underlying ReadValueForDescriptor.
 func (x *Peripheral) ReadValueForDescriptor(descriptor *raw.CBDescriptor) {
 	x.inner.ReadValueForDescriptor(descriptor)
 }
 
+// @method writeValue:forDescriptor: @param data			The value to write. @param descriptor	A GATT characteristic descriptor. @discussion			Writes <i>data</i> to <i>descriptor</i>'s value. Client characteristic configuration descriptors cannot be written using this method, and should instead use @link setNotifyValue:forCharacteristic: @/link. @see				peripheral:didWriteValueForCharacteristic:error:
+//
 // WriteValueForDescriptor calls the underlying WriteValueForDescriptor.
 func (x *Peripheral) WriteValueForDescriptor(data *foundation.NSData, descriptor *raw.CBDescriptor) {
 	x.inner.WriteValueForDescriptor(data, descriptor)
 }
 
+// @method openL2CAPChannel: @param PSM			The PSM of the channel to open @discussion			Attempt to open an L2CAP channel to the peripheral using the supplied PSM. @see				peripheral:didWriteValueForCharacteristic:error:
+//
 // OpenL2CAPChannel calls the underlying OpenL2CAPChannel.
 func (x *Peripheral) OpenL2CAPChannel(pSM uint16) {
 	x.inner.OpenL2CAPChannel(pSM)
 }
 
+// @property delegate @discussion The delegate object that will receive peripheral events.
+//
 // Delegate calls the underlying Delegate.
 func (x *Peripheral) Delegate() raw.CBPeripheralDelegate {
 	return x.inner.Delegate()
@@ -113,6 +141,8 @@ func (x *Peripheral) SetDelegate(delegate raw.CBPeripheralDelegate) {
 	x.inner.SetDelegate(delegate)
 }
 
+// @property name @discussion The name of the peripheral.
+//
 // Name calls the underlying Name.
 func (x *Peripheral) Name() string {
 	_r := x.inner.Name()
@@ -122,16 +152,22 @@ func (x *Peripheral) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property RSSI @discussion The most recently read RSSI, in decibels. @deprecated Use {@link peripheral:didReadRSSI:error:} instead.
+//
 // RSSI calls the underlying RSSI.
 func (x *Peripheral) RSSI() *foundation.NSNumber {
 	return x.inner.RSSI()
 }
 
+// @property state @discussion The current connection state of the peripheral.
+//
 // State calls the underlying State.
 func (x *Peripheral) State() CBPeripheralState {
 	return CBPeripheralState(x.inner.State())
 }
 
+// @property services @discussion A list of <code>CBService</code> objects that have been discovered on the peripheral.
+//
 // Services returns the collection as a Go slice.
 func (x *Peripheral) Services() []*Service {
 	arr := x.inner.Services()
@@ -143,6 +179,8 @@ func (x *Peripheral) Services() []*Service {
 	})
 }
 
+// @property canSendWriteWithoutResponse @discussion YES if the remote device has space to send a write without response. If this value is NO, the value will be set to YES after the current writes have been flushed, and <link>peripheralIsReadyToSendWriteWithoutResponse:</link> will be called.
+//
 // CanSendWriteWithoutResponse calls the underlying CanSendWriteWithoutResponse.
 func (x *Peripheral) CanSendWriteWithoutResponse() bool {
 	return x.inner.CanSendWriteWithoutResponse()

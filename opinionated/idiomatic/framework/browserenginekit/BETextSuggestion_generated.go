@@ -31,6 +31,8 @@ func TextSuggestionFromID(id objc.ID) *TextSuggestion {
 	return &TextSuggestion{inner: raw.BETextSuggestionFromID(id)}
 }
 
+// Initializes a new text suggestion with the given input text.
+//
 // NewTextSuggestionWithInputText creates a new [TextSuggestion].
 func NewTextSuggestionWithInputText(inputText string) *TextSuggestion {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("BETextSuggestion")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewTextSuggestionWithInputText(inputText string) *TextSuggestion {
 	return &TextSuggestion{inner: raw.BETextSuggestionFromID(_id)}
 }
 
+// Text that will be inserted into the document when the user chooses the suggestion.
+//
 // InputText calls the underlying InputText.
 func (x *TextSuggestion) InputText() string {
 	_r := x.inner.InputText()

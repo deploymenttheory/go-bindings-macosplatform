@@ -31,6 +31,8 @@ func FileNameFromID(id objc.ID) *FileName {
 	return &FileName{inner: raw.FSFileNameFromID(id)}
 }
 
+// Initializes a filename from a null-terminated character sequence. > Note: This initializer is unavailable in Swift. Use “initWithData:“ or “initWithString:“ instead. - Parameter name: A pointer to a C string.
+//
 // NewFileNameWithCString creates a new [FileName].
 func NewFileNameWithCString(name string) *FileName {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSFileName")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewFileNameWithCString(name string) *FileName {
 	return &FileName{inner: raw.FSFileNameFromID(_id)}
 }
 
+// Initializes a file name by copying a character sequence from a byte array. > Note: This initializer is unavailable in Swift. Use “initWithData:“ or “initWithString:“ instead. - Parameters: - bytes: A pointer to the character data to copy, up to a maximum of `length`. The sequence terminates if a `NUL` character exists prior to `length`. - length: The size of the `bytes` array.
+//
 // NewFileNameWithBytesLength creates a new [FileName].
 func NewFileNameWithBytesLength(bytes_ string, length uint) *FileName {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSFileName")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewFileNameWithBytesLength(bytes_ string, length uint) *FileName {
 	return &FileName{inner: raw.FSFileNameFromID(_id)}
 }
 
+// Creates a filename by copying a character sequence data object. This initializer copies up to `name.length` characters of the sequence pointed to by `bytes`. - Parameter name: The data object containing the character sequence to use for the filename. The sequence terminates if a `NUL` character exists prior to `name.length`.
+//
 // NewFileNameWithData creates a new [FileName].
 func NewFileNameWithData(name *foundation.NSData) *FileName {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSFileName")), objc.RegisterName("alloc"))
@@ -52,6 +58,8 @@ func NewFileNameWithData(name *foundation.NSData) *FileName {
 	return &FileName{inner: raw.FSFileNameFromID(_id)}
 }
 
+// Creates a filename by copying a character sequence from a string instance. This initializer copies the UTF-8 representation of the characters in `string`. If `string` contains a `NUL` character, the sequence terminates. - Parameter name: The string containing the character sequence to use for the filename.
+//
 // NewFileNameWithString creates a new [FileName].
 func NewFileNameWithString(name string) *FileName {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSFileName")), objc.RegisterName("alloc"))
@@ -59,11 +67,15 @@ func NewFileNameWithString(name string) *FileName {
 	return &FileName{inner: raw.FSFileNameFromID(_id)}
 }
 
+// The byte sequence of the filename, as a data object. This property always provides a value.
+//
 // Data calls the underlying Data.
 func (x *FileName) Data() *foundation.NSData {
 	return x.inner.Data()
 }
 
+// The filename, represented as a Unicode string. If the value of the filename's “FSFileName/data“ is not a valid UTF-8 byte sequence, this property is empty.
+//
 // String calls the underlying String.
 func (x *FileName) String() string {
 	_r := x.inner.String()

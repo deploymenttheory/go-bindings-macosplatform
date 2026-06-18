@@ -30,6 +30,8 @@ func MTRClusterBooleanStateFromID(id objc.ID) *MTRClusterBooleanState {
 	return &MTRClusterBooleanState{inner: raw.MTRClusterBooleanStateFromID(id)}
 }
 
+// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+//
 // NewMTRClusterBooleanStateWithDeviceEndpointIDQueue creates a new [MTRClusterBooleanState].
 func NewMTRClusterBooleanStateWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterBooleanState {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterBooleanState")), objc.RegisterName("alloc"))

@@ -37,16 +37,22 @@ func NewEncodedOutgoingMessageWithRawDataIsSignedIsEncrypted(rawData *foundation
 	return &EncodedOutgoingMessage{inner: raw.MEEncodedOutgoingMessageFromID(_id)}
 }
 
+// @brief The full encoded RFC822 message including headers and body.
+//
 // RawData calls the underlying RawData.
 func (x *EncodedOutgoingMessage) RawData() *foundation.NSData {
 	return x.inner.RawData()
 }
 
+// @brief Whether or not the encoded message is signed
+//
 // IsSigned calls the underlying IsSigned.
 func (x *EncodedOutgoingMessage) IsSigned() bool {
 	return x.inner.IsSigned()
 }
 
+// @brief Whether or not the encoded message is encrypted
+//
 // IsEncrypted calls the underlying IsEncrypted.
 func (x *EncodedOutgoingMessage) IsEncrypted() bool {
 	return x.inner.IsEncrypted()

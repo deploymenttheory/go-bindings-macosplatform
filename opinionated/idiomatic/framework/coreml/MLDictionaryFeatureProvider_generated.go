@@ -32,6 +32,8 @@ func DictionaryFeatureProviderFromID(id objc.ID) *DictionaryFeatureProvider {
 	return &DictionaryFeatureProvider{inner: raw.MLDictionaryFeatureProviderFromID(id)}
 }
 
+// Create from a generic dictionary by converting all values to MLFeatureValues or from a dictionary with values already stored as MLFeatureValues. An error results if the values are not or cannot be represented as MLFeatureValues.
+//
 // NewDictionaryFeatureProviderWithDictionaryError creates a new [DictionaryFeatureProvider].
 func NewDictionaryFeatureProviderWithDictionaryError(dictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*DictionaryFeatureProvider, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MLDictionaryFeatureProvider")), objc.RegisterName("alloc"))
@@ -43,6 +45,8 @@ func NewDictionaryFeatureProviderWithDictionaryError(dictionary *foundation.NSDi
 	return &DictionaryFeatureProvider{inner: raw.MLDictionaryFeatureProviderFromID(_id)}, nil
 }
 
+// Get the value for specified feature
+//
 // ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
 func (x *DictionaryFeatureProvider) ObjectForKeyedSubscript(featureName string) *FeatureValue {
 	_r := x.inner.ObjectForKeyedSubscript(foundation.NSStringStringWithUTF8String(featureName))
@@ -52,6 +56,8 @@ func (x *DictionaryFeatureProvider) ObjectForKeyedSubscript(featureName string) 
 	return &FeatureValue{inner: _r}
 }
 
+// Dictionary holding the feature values
+//
 // Dictionary calls the underlying Dictionary.
 func (x *DictionaryFeatureProvider) Dictionary() *foundation.NSDictionary[*foundation.NSString, *raw.MLFeatureValue] {
 	return x.inner.Dictionary()

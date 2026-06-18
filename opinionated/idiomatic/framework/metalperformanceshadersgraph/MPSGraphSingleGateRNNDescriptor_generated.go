@@ -35,30 +35,40 @@ func NewGraphSingleGateRNNDescriptor() *GraphSingleGateRNNDescriptor {
 	return &GraphSingleGateRNNDescriptor{inner: raw.MPSGraphSingleGateRNNDescriptorFromID(_id)}
 }
 
+// A parameter that defines time direction of the input sequence. If set to `YES` then the input sequence is passed in reverse time order to the layer. Note: Ignored when `bidirectional = YES`. Default value: `NO`.
+//
 // WithReverse sets the reverse property and returns the receiver for chaining.
 func (x *GraphSingleGateRNNDescriptor) WithReverse(reverse bool) *GraphSingleGateRNNDescriptor {
 	x.inner.SetReverse(reverse)
 	return x
 }
 
+// A parameter that defines a bidirectional RNN layer. If set to `YES` then the input sequence is traversed in both directions and the two results are concatenated together on the channel-axis. Default value: `NO`.
+//
 // WithBidirectional sets the bidirectional property and returns the receiver for chaining.
 func (x *GraphSingleGateRNNDescriptor) WithBidirectional(bidirectional bool) *GraphSingleGateRNNDescriptor {
 	x.inner.SetBidirectional(bidirectional)
 	return x
 }
 
+// A parameter that makes the RNN layer support training. If set to `YES` then the layer will produce training state tensor as a secondary output. Default value: `NO`.
+//
 // WithTraining sets the training property and returns the receiver for chaining.
 func (x *GraphSingleGateRNNDescriptor) WithTraining(training bool) *GraphSingleGateRNNDescriptor {
 	x.inner.SetTraining(training)
 	return x
 }
 
+// A parameter that defines the activation function to use with the RNN operation. Default value: `MPSGraphRNNActivationRelu`.
+//
 // WithActivation sets the activation property and returns the receiver for chaining.
 func (x *GraphSingleGateRNNDescriptor) WithActivation(activation MPSGraphRNNActivation) *GraphSingleGateRNNDescriptor {
 	x.inner.SetActivation(raw.MPSGraphRNNActivation(activation))
 	return x
 }
 
+// A parameter that defines time direction of the input sequence. If set to `YES` then the input sequence is passed in reverse time order to the layer. Note: Ignored when `bidirectional = YES`. Default value: `NO`.
+//
 // Reverse calls the underlying Reverse.
 func (x *GraphSingleGateRNNDescriptor) Reverse() bool {
 	return x.inner.Reverse()
@@ -69,6 +79,8 @@ func (x *GraphSingleGateRNNDescriptor) SetReverse(reverse bool) {
 	x.inner.SetReverse(reverse)
 }
 
+// A parameter that defines a bidirectional RNN layer. If set to `YES` then the input sequence is traversed in both directions and the two results are concatenated together on the channel-axis. Default value: `NO`.
+//
 // Bidirectional calls the underlying Bidirectional.
 func (x *GraphSingleGateRNNDescriptor) Bidirectional() bool {
 	return x.inner.Bidirectional()
@@ -79,6 +91,8 @@ func (x *GraphSingleGateRNNDescriptor) SetBidirectional(bidirectional bool) {
 	x.inner.SetBidirectional(bidirectional)
 }
 
+// A parameter that makes the RNN layer support training. If set to `YES` then the layer will produce training state tensor as a secondary output. Default value: `NO`.
+//
 // Training calls the underlying Training.
 func (x *GraphSingleGateRNNDescriptor) Training() bool {
 	return x.inner.Training()
@@ -89,6 +103,8 @@ func (x *GraphSingleGateRNNDescriptor) SetTraining(training bool) {
 	x.inner.SetTraining(training)
 }
 
+// A parameter that defines the activation function to use with the RNN operation. Default value: `MPSGraphRNNActivationRelu`.
+//
 // Activation calls the underlying Activation.
 func (x *GraphSingleGateRNNDescriptor) Activation() MPSGraphRNNActivation {
 	return MPSGraphRNNActivation(x.inner.Activation())

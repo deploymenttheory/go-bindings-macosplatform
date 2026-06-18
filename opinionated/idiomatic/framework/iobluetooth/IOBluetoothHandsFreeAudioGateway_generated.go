@@ -32,6 +32,8 @@ func IOBluetoothHandsFreeAudioGatewayFromID(id objc.ID) *IOBluetoothHandsFreeAud
 	return &IOBluetoothHandsFreeAudioGateway{inner: raw.IOBluetoothHandsFreeAudioGatewayFromID(id)}
 }
 
+// @method		initWithDevice:delegate: @abstract		Create a new IOBluetoothHandsFreeAudioGateway to act as a hands free gateway @discussion	This will register a listener for incoming connections. @param			device An IOBluetoothDevice @param			inDelegate An object to act as delegate @result		A newly created IOBluetoothHandsFreeAudioGateway object on success, nil on failure
+//
 // NewIOBluetoothHandsFreeAudioGatewayWithDeviceDelegate creates a new [IOBluetoothHandsFreeAudioGateway].
 func NewIOBluetoothHandsFreeAudioGatewayWithDeviceDelegate(device *raw.IOBluetoothDevice, inDelegate objc.ID) *IOBluetoothHandsFreeAudioGateway {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothHandsFreeAudioGateway")), objc.RegisterName("alloc"))
@@ -39,62 +41,84 @@ func NewIOBluetoothHandsFreeAudioGatewayWithDeviceDelegate(device *raw.IOBluetoo
 	return &IOBluetoothHandsFreeAudioGateway{inner: raw.IOBluetoothHandsFreeAudioGatewayFromID(_id)}
 }
 
+// @method		supportedFeatures @abstract		Return supported features @discussion	Returns the supported features bitmap. The values are described in “IOBluetoothHandsFreeDeviceFeatures and IOBluetoothHandsFreeAudioGatewayFeatures.” @result		The supported features bitmap @method		setSupportedFeatures:featuresBitmap @abstract		Set the supported features @discussion	Sets the supported features bitmap. The values are described in “IOBluetoothHandsFreeDeviceFeatures and IOBluetoothHandsFreeAudioGatewayFeatures.” @param			featuresBitmap The features bitmap
+//
 // WithSupportedFeatures sets the supportedFeatures property and returns the receiver for chaining.
 func (x *IOBluetoothHandsFreeAudioGateway) WithSupportedFeatures(supportedFeatures uint32) *IOBluetoothHandsFreeAudioGateway {
 	x.inner.IOBluetoothHandsFree.SetSupportedFeatures(supportedFeatures)
 	return x
 }
 
+// @method		inputVolume @abstract		Return the input volume @discussion	Returns the input volume between 0 and 1. 0 is the same as mute. @result		The input volume @method		setInputVolume:newVolume @abstract		Set the input volume @discussion	Sets the input volume between 0 and 1. 0 is the same as mute. @param			newVolume The new input volume
+//
 // WithInputVolume sets the inputVolume property and returns the receiver for chaining.
 func (x *IOBluetoothHandsFreeAudioGateway) WithInputVolume(inputVolume float32) *IOBluetoothHandsFreeAudioGateway {
 	x.inner.IOBluetoothHandsFree.SetInputVolume(inputVolume)
 	return x
 }
 
+// @method		isInputMuted @abstract		Return the input mute state. @discussion	Returns the inputs mute state. @result		YES if muted; otherwise NO. @method		setInputMuted:muted @abstract		Set the input mute state. @discussion	Sets the inputs mute state. @param			muted YES if muted; otherwise NO.
+//
 // WithInputMuted sets the inputMuted property and returns the receiver for chaining.
 func (x *IOBluetoothHandsFreeAudioGateway) WithInputMuted(inputMuted bool) *IOBluetoothHandsFreeAudioGateway {
 	x.inner.IOBluetoothHandsFree.SetInputMuted(inputMuted)
 	return x
 }
 
+// @method		outputVolume @abstract		Return the output volume @discussion	Returns the output volume between 0 and 1. 0 is the same as mute. @result		The output volume @method		setOutputVolume:newVolume @abstract		Set the output volume @discussion	Sets the output volume between 0 and 1. 0 is the same as mute. @param			newVolume The new output volume
+//
 // WithOutputVolume sets the outputVolume property and returns the receiver for chaining.
 func (x *IOBluetoothHandsFreeAudioGateway) WithOutputVolume(outputVolume float32) *IOBluetoothHandsFreeAudioGateway {
 	x.inner.IOBluetoothHandsFree.SetOutputVolume(outputVolume)
 	return x
 }
 
+// @method		isOutputMuted @abstract		Return the output mute state. @discussion	Returns the outputs mute state. @result		YES if muted; otherwise NO. @method		setOutputMuted:muted @abstract		Set the output mute state. @discussion	Sets the outputs mute state. @param			muted YES if muted; otherwise NO.
+//
 // WithOutputMuted sets the outputMuted property and returns the receiver for chaining.
 func (x *IOBluetoothHandsFreeAudioGateway) WithOutputMuted(outputMuted bool) *IOBluetoothHandsFreeAudioGateway {
 	x.inner.IOBluetoothHandsFree.SetOutputMuted(outputMuted)
 	return x
 }
 
+// @method		delegate @abstract		Return the delegate @discussion	Returns the hands free object's delegate. @result		The delegate for the hands free object or nil if it doesn't have a delegate. @method		setDelegate:newDelegate @abstract		Sets the hands free object’s delegate to a given object or removes an existing delegate. @discussion	A IOBluetoothHandsFree delegate can optionally respond to any of the delegate methods in IOBluetoothHandsFreeDelegate and any subclasses delegates. @param			newDelegate The delegate for the hands free object. Pass nil to remove an existing delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *IOBluetoothHandsFreeAudioGateway) WithDelegate(delegate raw.IOBluetoothHandsFreeDelegate) *IOBluetoothHandsFreeAudioGateway {
 	x.inner.IOBluetoothHandsFree.SetDelegate(delegate)
 	return x
 }
 
+// @method		createIndicator:indicatorName:min:max:currentValue @abstract		Create an indicator @discussion	Creates an indicator with min and max values and sets the current value. The current value must be valid. @param			indicatorName  See  �Hands free indicator constants," for standard indicator names. @param			minValue Minimum value allowed for the indicator @param			maxValue Maximum value allowed for the indicator @param			currentValue The current indicator value. Must be within the min and max values passed in or the indicator will not be created.
+//
 // CreateIndicatorMinMaxCurrentValue calls the underlying CreateIndicatorMinMaxCurrentValue.
 func (x *IOBluetoothHandsFreeAudioGateway) CreateIndicatorMinMaxCurrentValue(indicatorName string, minValue int, maxValue int, currentValue int) {
 	x.inner.CreateIndicatorMinMaxCurrentValue(foundation.NSStringStringWithUTF8String(indicatorName), minValue, maxValue, currentValue)
 }
 
+// @method		processATCommand:atCommand @abstract		Handles AT commands sent from the hands free device @discussion	Implement this in a subclass if you wish to respond to additional AT commands or to change the default response. @param			atCommand The at command from the hands free device
+//
 // ProcessATCommand calls the underlying ProcessATCommand.
 func (x *IOBluetoothHandsFreeAudioGateway) ProcessATCommand(atCommand string) {
 	x.inner.ProcessATCommand(foundation.NSStringStringWithUTF8String(atCommand))
 }
 
+// @method		sendOKResponse @abstract		Sends an OK response @discussion	Use this to respond OK.
+//
 // SendOKResponse calls the underlying SendOKResponse.
 func (x *IOBluetoothHandsFreeAudioGateway) SendOKResponse() {
 	x.inner.SendOKResponse()
 }
 
+// @method		sendResponse:response @abstract		Sends a response to the hands free device @discussion	Use this to send a response followed by an OK. Equivalent to [sendResponse:response withOK:YES]. @param			response The response to send to the hands free device
+//
 // SendResponse calls the underlying SendResponse.
 func (x *IOBluetoothHandsFreeAudioGateway) SendResponse(response string) {
 	x.inner.SendResponse(foundation.NSStringStringWithUTF8String(response))
 }
 
+// @method		sendResponse:response:withOK @abstract		Sends a response to the hands free device @discussion	Use this to send a response and optionally followed by an OK. @param			response The response to send to the hands free device @param			withOK If yes, an OK response will also be sent.
+//
 // SendResponseWithOK calls the underlying SendResponseWithOK.
 func (x *IOBluetoothHandsFreeAudioGateway) SendResponseWithOK(response string, withOK bool) {
 	x.inner.SendResponseWithOK(foundation.NSStringStringWithUTF8String(response), withOK)

@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // TokenKeychainContents wraps [raw.TKTokenKeychainContents] with a fluent Go API.
@@ -37,11 +38,24 @@ func NewTokenKeychainContents() *TokenKeychainContents {
 	return &TokenKeychainContents{inner: raw.TKTokenKeychainContentsFromID(_id)}
 }
 
+// @discussion Fills keychain with the set of specified items.  All items belonging to token are first removed from the keychain and then the keychain is populated with new items. @param items New items to be stored into the keychain.
+//
 // FillWithItems calls the underlying FillWithItems.
-func (x *TokenKeychainContents) FillWithItems(items *foundation.NSArray[*raw.TKTokenKeychainItem]) {
-	x.inner.FillWithItems(items)
+func (x *TokenKeychainContents) FillWithItems(items ...TokenKeychainItemProvider) {
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asTokenKeychainItem().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.TKTokenKeychainItem]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.TKTokenKeychainItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.FillWithItems(_arg0)
 }
 
+// @discussion Returns key with specified objectID.  Fills error with TKTokenErrorCodeObjectNotFound if no such key exists.
+//
 // KeyForObjectIDError calls the underlying KeyForObjectIDError.
 func (x *TokenKeychainContents) KeyForObjectIDError(objectID objc.ID) (*TokenKeychainKey, error) {
 	_r, _err := x.inner.KeyForObjectIDError(objectID)
@@ -54,6 +68,8 @@ func (x *TokenKeychainContents) KeyForObjectIDError(objectID objc.ID) (*TokenKey
 	return &TokenKeychainKey{inner: _r}, nil
 }
 
+// @discussion Returns certificate with specified objectID.  Fills error with TKTokenErrorCodeObjectNotFound if no such certificate exists.
+//
 // CertificateForObjectIDError calls the underlying CertificateForObjectIDError.
 func (x *TokenKeychainContents) CertificateForObjectIDError(objectID objc.ID) (*TokenKeychainCertificate, error) {
 	_r, _err := x.inner.CertificateForObjectIDError(objectID)
@@ -66,6 +82,8 @@ func (x *TokenKeychainContents) CertificateForObjectIDError(objectID objc.ID) (*
 	return &TokenKeychainCertificate{inner: _r}, nil
 }
 
+// @brief All items related to this token in the keychain.
+//
 // Items returns the collection as a Go slice.
 func (x *TokenKeychainContents) Items() []*TokenKeychainItem {
 	arr := x.inner.Items()
@@ -80,7 +98,7 @@ func (x *TokenKeychainContents) Items() []*TokenKeychainItem {
 // TokenKeychainContentsable is the interface implemented by [TokenKeychainContents], for mocking and DI.
 type TokenKeychainContentsable interface {
 	Unwrap() *raw.TKTokenKeychainContents
-	FillWithItems(items *foundation.NSArray[*raw.TKTokenKeychainItem])
+	FillWithItems(items ...TokenKeychainItemProvider)
 	KeyForObjectIDError(objectID objc.ID) (*TokenKeychainKey, error)
 	CertificateForObjectIDError(objectID objc.ID) (*TokenKeychainCertificate, error)
 	Items() []*TokenKeychainItem

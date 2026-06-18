@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A base class that represents a network device in a virtual machine.
+//
 // NetworkDevice wraps [raw.VZNetworkDevice] with a fluent Go API.
 type NetworkDevice struct {
 	inner *raw.VZNetworkDevice
@@ -35,6 +37,8 @@ func NewNetworkDevice() *NetworkDevice {
 	return &NetworkDevice{inner: raw.VZNetworkDeviceFromID(_id)}
 }
 
+// The network attachment that’s connected to this network device.
+//
 // WithAttachment sets the attachment property and returns the receiver for chaining.
 func (x *NetworkDevice) WithAttachment(attachment NetworkDeviceAttachmentProvider) *NetworkDevice {
 	x.inner.SetAttachment(attachment.asNetworkDeviceAttachment())

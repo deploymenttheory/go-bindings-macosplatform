@@ -32,6 +32,8 @@ func StatefulRequestFromID(id objc.ID) *StatefulRequest {
 	return &StatefulRequest{inner: raw.VNStatefulRequestFromID(id)}
 }
 
+// @brief Create a new video-based stateful request. @param frameAnalysisSpacing The reciprocal of maximum rate at which buffers will be processed. The request will not process buffers that fall within the frameAnalysisSpacing after it has performed the analysis. The analysis is not done by wall time but by analysis of of the time stamps of the samplebuffers being processed. @param completionHandler The block to be invoked after the request has completed its processing. The completion handler gets executed on the same dispatch queue as the request being executed.
+//
 // NewStatefulRequestWithFrameAnalysisSpacingCompletionHandler creates a new [StatefulRequest].
 func NewStatefulRequestWithFrameAnalysisSpacingCompletionHandler(frameAnalysisSpacing coremedia.CMTime, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *StatefulRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNStatefulRequest")), objc.RegisterName("alloc"))
@@ -39,35 +41,47 @@ func NewStatefulRequestWithFrameAnalysisSpacingCompletionHandler(frameAnalysisSp
 	return &StatefulRequest{inner: raw.VNStatefulRequestFromID(_id)}
 }
 
+// @brief The region of the image in which the request will be performed.  The rectangle is normalized to the dimensions of the image being processed and has its origin specified relative to the image's lower-left corner. @discussion The default value for this property is { { 0, 0 }, { 1, 1 } }.  Setting this property to a rectangle that is outside of the normalized coordinate space will be accepted but result in the request failing to be performed.
+//
 // WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
 func (x *StatefulRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *StatefulRequest {
 	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
 	return x
 }
 
+// @abstract A hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
+//
 // WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
 func (x *StatefulRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *StatefulRequest {
 	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
 	return x
 }
 
+// @abstract This property, if set to YES, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is NO, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
+//
 // WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
 func (x *StatefulRequest) WithUsesCPUOnly(usesCPUOnly bool) *StatefulRequest {
 	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
 	return x
 }
 
+// @abstract The specific algorithm or implementation revision that is to be used to perform the request.
+//
 // WithRevision sets the revision property and returns the receiver for chaining.
 func (x *StatefulRequest) WithRevision(revision uint) *StatefulRequest {
 	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
 	return x
 }
 
+// @brief The minimum number of frames that the request has to process on before reporting back any observation. This information is provided by the request once initialized with its required paramters. @discussion Video based request often need a minimum number of frames before they can report back any observation. An example would be that a movement detection requires at least 5 frames to be detected. The minimumLatencyFrameCount for that request would report 5 and only after 5 frames have been processed an observation would be returned in the results. This latency is indicative of how responsive a request is in respect to the incoming data.
+//
 // MinimumLatencyFrameCount calls the underlying MinimumLatencyFrameCount.
 func (x *StatefulRequest) MinimumLatencyFrameCount() int {
 	return x.inner.MinimumLatencyFrameCount()
 }
 
+// @brief The reciprocal of maximum rate at which buffers will be processed. @discussion The request will not process buffers that fall within the `frameAnalysisSpacing` after it has performed the analysis. The analysis is not done by wall time but by analysis of of the time stamps of the samplebuffers being processed.
+//
 // FrameAnalysisSpacing calls the underlying FrameAnalysisSpacing.
 func (x *StatefulRequest) FrameAnalysisSpacing() coremedia.CMTime {
 	return x.inner.FrameAnalysisSpacing()

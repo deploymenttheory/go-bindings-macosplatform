@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// GKGraphNode coupled with a 3D position
+//
 // GraphNode3D wraps [raw.GKGraphNode3D] with a fluent Go API.
 type GraphNode3D struct {
 	inner *raw.GKGraphNode3D

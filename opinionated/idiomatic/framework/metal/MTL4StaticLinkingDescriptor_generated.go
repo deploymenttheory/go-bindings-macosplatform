@@ -38,6 +38,8 @@ func NewMTL4StaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
 	return &MTL4StaticLinkingDescriptor{inner: raw.MTL4StaticLinkingDescriptorFromID(_id)}
 }
 
+// Provides an array of functions to link at the Metal IR level.
+//
 // WithFunctionDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *MTL4StaticLinkingDescriptor) WithFunctionDescriptors(items ...MTL4FunctionDescriptorProvider) *MTL4StaticLinkingDescriptor {
 	if len(items) == 0 {
@@ -56,6 +58,8 @@ func (x *MTL4StaticLinkingDescriptor) WithFunctionDescriptors(items ...MTL4Funct
 	return x
 }
 
+// Provides an array of private functions to link at the Metal IR level. You specify private functions to link separately from “functionDescriptors“ because pipelines don't export private functions as “MTLFunctionHandle“ instances. - Note: You can link private functions even when your “MTLDevice“ doesn't support function pointers.
+//
 // WithPrivateFunctionDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *MTL4StaticLinkingDescriptor) WithPrivateFunctionDescriptors(items ...MTL4FunctionDescriptorProvider) *MTL4StaticLinkingDescriptor {
 	if len(items) == 0 {
@@ -74,12 +78,16 @@ func (x *MTL4StaticLinkingDescriptor) WithPrivateFunctionDescriptors(items ...MT
 	return x
 }
 
+// Assigns groups of functions to match call-site attributes in shader code. Function groups help the compiler reduce the number of candidate functions it needs to evaluate for shader function calls, potentially increasing runtime performance.
+//
 // WithGroups sets the groups property and returns the receiver for chaining.
 func (x *MTL4StaticLinkingDescriptor) WithGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTL4StaticLinkingDescriptor {
 	x.inner.SetGroups(groups)
 	return x
 }
 
+// Provides an array of functions to link at the Metal IR level.
+//
 // FunctionDescriptors returns the collection as a Go slice.
 func (x *MTL4StaticLinkingDescriptor) FunctionDescriptors() []*MTL4FunctionDescriptor {
 	arr := x.inner.FunctionDescriptors()
@@ -92,10 +100,21 @@ func (x *MTL4StaticLinkingDescriptor) FunctionDescriptors() []*MTL4FunctionDescr
 }
 
 // SetFunctionDescriptors calls the underlying SetFunctionDescriptors.
-func (x *MTL4StaticLinkingDescriptor) SetFunctionDescriptors(functionDescriptors *foundation.NSArray[*raw.MTL4FunctionDescriptor]) {
-	x.inner.SetFunctionDescriptors(functionDescriptors)
+func (x *MTL4StaticLinkingDescriptor) SetFunctionDescriptors(functionDescriptors ...MTL4FunctionDescriptorProvider) {
+	_ptrs := make([]objc.ID, len(functionDescriptors))
+	for _i, _v := range functionDescriptors {
+		_ptrs[_i] = _v.asMTL4FunctionDescriptor().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.MTL4FunctionDescriptor]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetFunctionDescriptors(_arg0)
 }
 
+// Provides an array of private functions to link at the Metal IR level. You specify private functions to link separately from “functionDescriptors“ because pipelines don't export private functions as “MTLFunctionHandle“ instances. - Note: You can link private functions even when your “MTLDevice“ doesn't support function pointers.
+//
 // PrivateFunctionDescriptors returns the collection as a Go slice.
 func (x *MTL4StaticLinkingDescriptor) PrivateFunctionDescriptors() []*MTL4FunctionDescriptor {
 	arr := x.inner.PrivateFunctionDescriptors()
@@ -108,10 +127,21 @@ func (x *MTL4StaticLinkingDescriptor) PrivateFunctionDescriptors() []*MTL4Functi
 }
 
 // SetPrivateFunctionDescriptors calls the underlying SetPrivateFunctionDescriptors.
-func (x *MTL4StaticLinkingDescriptor) SetPrivateFunctionDescriptors(privateFunctionDescriptors *foundation.NSArray[*raw.MTL4FunctionDescriptor]) {
-	x.inner.SetPrivateFunctionDescriptors(privateFunctionDescriptors)
+func (x *MTL4StaticLinkingDescriptor) SetPrivateFunctionDescriptors(privateFunctionDescriptors ...MTL4FunctionDescriptorProvider) {
+	_ptrs := make([]objc.ID, len(privateFunctionDescriptors))
+	for _i, _v := range privateFunctionDescriptors {
+		_ptrs[_i] = _v.asMTL4FunctionDescriptor().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.MTL4FunctionDescriptor]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetPrivateFunctionDescriptors(_arg0)
 }
 
+// Assigns groups of functions to match call-site attributes in shader code. Function groups help the compiler reduce the number of candidate functions it needs to evaluate for shader function calls, potentially increasing runtime performance.
+//
 // Groups calls the underlying Groups.
 func (x *MTL4StaticLinkingDescriptor) Groups() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.Groups()
@@ -129,9 +159,9 @@ type MTL4StaticLinkingDescriptorable interface {
 	WithPrivateFunctionDescriptors(items ...MTL4FunctionDescriptorProvider) *MTL4StaticLinkingDescriptor
 	WithGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTL4StaticLinkingDescriptor
 	FunctionDescriptors() []*MTL4FunctionDescriptor
-	SetFunctionDescriptors(functionDescriptors *foundation.NSArray[*raw.MTL4FunctionDescriptor])
+	SetFunctionDescriptors(functionDescriptors ...MTL4FunctionDescriptorProvider)
 	PrivateFunctionDescriptors() []*MTL4FunctionDescriptor
-	SetPrivateFunctionDescriptors(privateFunctionDescriptors *foundation.NSArray[*raw.MTL4FunctionDescriptor])
+	SetPrivateFunctionDescriptors(privateFunctionDescriptors ...MTL4FunctionDescriptorProvider)
 	Groups() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	SetGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID])
 }

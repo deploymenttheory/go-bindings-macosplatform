@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A collection of GKGraphNodes that are governed by a mesh formed by the space between a set of GKPolygonObstacles
+//
 // MeshGraph wraps [raw.GKMeshGraph] with a fluent Go API.
 type MeshGraph struct {
 	inner *raw.GKMeshGraph[objc.ID]
@@ -46,42 +48,58 @@ func NewMeshGraphWithBufferRadiusMinCoordinateMaxCoordinate(bufferRadius float32
 	return &MeshGraph{inner: raw.GKMeshGraphFromID[objc.ID](_id)}
 }
 
+// Specifies how graph nodes are generated when you triangulate this graph. You can combine triangulation modes using the | (OR) operator @see GKMeshGraphTriangulationMode
+//
 // WithTriangulationMode sets the triangulationMode property and returns the receiver for chaining.
 func (x *MeshGraph) WithTriangulationMode(triangulationMode GKMeshGraphTriangulationMode) *MeshGraph {
 	x.inner.SetTriangulationMode(raw.GKMeshGraphTriangulationMode(triangulationMode))
 	return x
 }
 
+// Adds obstacles to this mesh graph.  Only reflected after the next triangulate call.
+//
 // AddObstacles calls the underlying AddObstacles.
 func (x *MeshGraph) AddObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle]) {
 	x.inner.AddObstacles(obstacles)
 }
 
+// Removes obstacles from this graph.  Only reflected after the next triangulate call.
+//
 // RemoveObstacles calls the underlying RemoveObstacles.
 func (x *MeshGraph) RemoveObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle]) {
 	x.inner.RemoveObstacles(obstacles)
 }
 
+// Connects the node to this graph by inserting it into an existing triangle and making the appropriate connections Node must be in the space defined by the min and max coordinates of this graph. @param node the node to connect
+//
 // ConnectNodeUsingObstacles calls the underlying ConnectNodeUsingObstacles.
 func (x *MeshGraph) ConnectNodeUsingObstacles(node objc.ID) {
 	x.inner.ConnectNodeUsingObstacles(node)
 }
 
+// Generates a new triangle mesh for the given obstacles. This should be called after some number of calls to addObstacle The negative space between all input obstacles are triangulated to create a mesh This mesh is turned into a set of connected graph nodes based on
+//
 // Triangulate calls the underlying Triangulate.
 func (x *MeshGraph) Triangulate() {
 	x.inner.Triangulate()
 }
 
+// Returns the triangle at the given index @see numTriangles @param index the index of the triangle to be returned @return the triangle at the given index
+//
 // TriangleAtIndex calls the underlying TriangleAtIndex.
 func (x *MeshGraph) TriangleAtIndex(index uint) raw.GKTriangle {
 	return x.inner.TriangleAtIndex(index)
 }
 
+// Returns the class of the specified generic index
+//
 // ClassForGenericArgumentAtIndex calls the underlying ClassForGenericArgumentAtIndex.
 func (x *MeshGraph) ClassForGenericArgumentAtIndex(index uint) objc.Class {
 	return x.inner.ClassForGenericArgumentAtIndex(index)
 }
 
+// Array of the extruded obstacles currently represented by this graph
+//
 // Obstacles returns the collection as a Go slice.
 func (x *MeshGraph) Obstacles() []*PolygonObstacle {
 	arr := x.inner.Obstacles()
@@ -93,11 +111,15 @@ func (x *MeshGraph) Obstacles() []*PolygonObstacle {
 	})
 }
 
+// The distance by which all obstacles are extruded. This is most commonly the spatial bounding radius of a potential traveler on this path
+//
 // BufferRadius calls the underlying BufferRadius.
 func (x *MeshGraph) BufferRadius() float32 {
 	return x.inner.BufferRadius()
 }
 
+// Specifies how graph nodes are generated when you triangulate this graph. You can combine triangulation modes using the | (OR) operator @see GKMeshGraphTriangulationMode
+//
 // TriangulationMode calls the underlying TriangulationMode.
 func (x *MeshGraph) TriangulationMode() GKMeshGraphTriangulationMode {
 	return GKMeshGraphTriangulationMode(x.inner.TriangulationMode())
@@ -108,6 +130,8 @@ func (x *MeshGraph) SetTriangulationMode(triangulationMode GKMeshGraphTriangulat
 	x.inner.SetTriangulationMode(raw.GKMeshGraphTriangulationMode(triangulationMode))
 }
 
+// The number of triangles currently in this mesh graph
+//
 // TriangleCount calls the underlying TriangleCount.
 func (x *MeshGraph) TriangleCount() uint {
 	return x.inner.TriangleCount()

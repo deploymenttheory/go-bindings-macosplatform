@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that listens for port-based connection requests from the guest operating system.
+//
 // VirtioSocketListener wraps [raw.VZVirtioSocketListener] with a fluent Go API.
 type VirtioSocketListener struct {
 	inner *raw.VZVirtioSocketListener
@@ -35,6 +37,8 @@ func NewVirtioSocketListener() *VirtioSocketListener {
 	return &VirtioSocketListener{inner: raw.VZVirtioSocketListenerFromID(_id)}
 }
 
+// The custom object you use to respond to port-based connection attempts.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *VirtioSocketListener) WithDelegate(delegate raw.VZVirtioSocketListenerDelegate) *VirtioSocketListener {
 	x.inner.SetDelegate(delegate)

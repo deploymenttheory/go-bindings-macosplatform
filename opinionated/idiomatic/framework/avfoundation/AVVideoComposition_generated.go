@@ -40,36 +40,50 @@ func NewVideoComposition() *VideoComposition {
 	return &VideoComposition{inner: raw.AVVideoCompositionFromID(_id)}
 }
 
+// Indicates a custom compositor class to use. The class must implement the AVVideoCompositing protocol. If nil, the default, internal video compositor is used
+//
 // CustomVideoCompositorClass calls the underlying CustomVideoCompositorClass.
 func (x *VideoComposition) CustomVideoCompositorClass() unsafe.Pointer {
 	return x.inner.CustomVideoCompositorClass()
 }
 
+// Indicates the interval which the video composition, when enabled, should render composed video frames
+//
 // FrameDuration calls the underlying FrameDuration.
 func (x *VideoComposition) FrameDuration() coremedia.CMTime {
 	return x.inner.FrameDuration()
 }
 
+// If sourceTrackIDForFrameTiming is not kCMPersistentTrackID_Invalid, frame timing for the video composition is derived from the source asset's track with the corresponding ID. This may be used to preserve a source asset's variable frame timing. If an empty edit is encountered in the source asset’s track, the compositor composes frames as needed up to the frequency specified in frameDuration property. */
+//
 // SourceTrackIDForFrameTiming calls the underlying SourceTrackIDForFrameTiming.
 func (x *VideoComposition) SourceTrackIDForFrameTiming() int32 {
 	return x.inner.SourceTrackIDForFrameTiming()
 }
 
+// Indicates the size at which the video composition, when enabled, should render
+//
 // RenderSize calls the underlying RenderSize.
 func (x *VideoComposition) RenderSize() corefoundation.CGSize {
 	return x.inner.RenderSize()
 }
 
+// Indicates the scale at which the video composition should render. May only be other than 1.0 for a video composition set on an AVPlayerItem
+//
 // RenderScale calls the underlying RenderScale.
 func (x *VideoComposition) RenderScale() float32 {
 	return x.inner.RenderScale()
 }
 
+// Indicates instructions for video composition via an NSArray of instances of classes implementing the AVVideoCompositionInstruction protocol. For the first instruction in the array, timeRange.start must be less than or equal to the earliest time for which playback or other processing will be attempted (note that this will typically be kCMTimeZero). For subsequent instructions, timeRange.start must be equal to the prior instruction's end time. The end time of the last instruction must be greater than or equal to the latest time for which playback or other processing will be attempted (note that this will often be the duration of the asset with which the instance of AVVideoComposition is associated).
+//
 // Instructions calls the underlying Instructions.
 func (x *VideoComposition) Instructions() *foundation.NSArray[raw.AVVideoCompositionInstructionProtocol] {
 	return x.inner.Instructions()
 }
 
+// Indicates a special video composition tool for use of Core Animation; may be nil
+//
 // AnimationTool calls the underlying AnimationTool.
 func (x *VideoComposition) AnimationTool() *VideoCompositionCoreAnimationTool {
 	_r := x.inner.AnimationTool()
@@ -79,6 +93,8 @@ func (x *VideoComposition) AnimationTool() *VideoCompositionCoreAnimationTool {
 	return &VideoCompositionCoreAnimationTool{inner: _r}
 }
 
+// List of all track IDs for tracks from which sample data should be presented to the compositor at any point in the overall composition. The sample data will be delivered to the custom compositor via AVAsynchronousVideoCompositionRequest.
+//
 // SourceSampleDataTrackIDs returns the collection as a Go slice.
 func (x *VideoComposition) SourceSampleDataTrackIDs() []*foundation.NSNumber {
 	arr := x.inner.SourceSampleDataTrackIDs()
@@ -90,11 +106,15 @@ func (x *VideoComposition) SourceSampleDataTrackIDs() []*foundation.NSNumber {
 	})
 }
 
+// The output buffers of the video composition can be specified with the outputBufferDescription. The value is an array of CMTagCollectionRef objects that describes the output buffers. If the video composition will output tagged buffers, the details of those buffers should be specified with CMTags. Specifically, the StereoView (eyes) and ProjectionKind must be specified. The behavior is undefined if the output tagged buffers do not match the outputBufferDescription. The default is nil, which means monoscopic output. Note that an empty array is not valid. An exception will be thrown if the objects in the array are not of type CMTagCollectionRef. Note that tagged buffers are only supported for custom compositors.
+//
 // OutputBufferDescription calls the underlying OutputBufferDescription.
 func (x *VideoComposition) OutputBufferDescription() *foundation.NSArray[objc.ID] {
 	return x.inner.OutputBufferDescription()
 }
 
+// Indicates the spatial configurations that are available to associate with the output of the video composition. A custom compositor can output spatial video by specifying one of these spatial configurations. A spatial configuration with all nil values indicates the video is not spatial. A nil spatial configuration also indicates the video is not spatial. The value can be nil, which indicates the output will not be spatial. NOTE: If this property is not empty, then the client must attach one of the spatial configurations in this array to all of the pixel buffers, otherwise an exception will be thrown.
+//
 // SpatialVideoConfigurations returns the collection as a Go slice.
 func (x *VideoComposition) SpatialVideoConfigurations() []*SpatialVideoConfiguration {
 	arr := x.inner.SpatialVideoConfigurations()
@@ -106,6 +126,8 @@ func (x *VideoComposition) SpatialVideoConfigurations() []*SpatialVideoConfigura
 	})
 }
 
+// Rendering will use these primaries and frames will be tagged as such. If the value of this property is nil then the source's primaries will be propagated and used. Default is nil. Valid values are those suitable for AVVideoColorPrimariesKey. Generally set as a triple along with colorYCbCrMatrix and colorTransferFunction.
+//
 // ColorPrimaries calls the underlying ColorPrimaries.
 func (x *VideoComposition) ColorPrimaries() string {
 	_r := x.inner.ColorPrimaries()
@@ -115,6 +137,8 @@ func (x *VideoComposition) ColorPrimaries() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Rendering will use this matrix and frames will be tagged as such. If the value of this property is nil then the source's matrix will be propagated and used. Default is nil. Valid values are those suitable for AVVideoYCbCrMatrixKey. Generally set as a triple along with colorPrimaries and colorTransferFunction.
+//
 // ColorYCbCrMatrix calls the underlying ColorYCbCrMatrix.
 func (x *VideoComposition) ColorYCbCrMatrix() string {
 	_r := x.inner.ColorYCbCrMatrix()
@@ -124,6 +148,8 @@ func (x *VideoComposition) ColorYCbCrMatrix() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Rendering will use this transfer function and frames will be tagged as such. If the value of this property is nil then the source's transfer function will be propagated and used. Default is nil. Valid values are those suitable for AVVideoTransferFunctionKey. Generally set as a triple along with colorYCbCrMatrix and colorYCbCrMatrix.
+//
 // ColorTransferFunction calls the underlying ColorTransferFunction.
 func (x *VideoComposition) ColorTransferFunction() string {
 	_r := x.inner.ColorTransferFunction()
@@ -133,6 +159,8 @@ func (x *VideoComposition) ColorTransferFunction() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Configures policy for per frame HDR display metadata on the rendered frame Allows the system to identify situations where HDR metadata can be generated and attached to the rendered video frame. Default is AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate. Any HDR metadata attached to the composed frame will be propagated to the rendered video frames.
+//
 // PerFrameHDRDisplayMetadataPolicy calls the underlying PerFrameHDRDisplayMetadataPolicy.
 func (x *VideoComposition) PerFrameHDRDisplayMetadataPolicy() string {
 	_r := x.inner.PerFrameHDRDisplayMetadataPolicy()
@@ -142,16 +170,22 @@ func (x *VideoComposition) PerFrameHDRDisplayMetadataPolicy() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Indicates whether the timeRanges of the receiver's instructions conform to the requirements described for them immediately above (in connection with the instructions property) and also whether all of the layer instructions have a value for trackID that corresponds either to a track of the specified asset or to the receiver's animationTool. In the course of validation, the receiver will invoke its validationDelegate with reference to any trouble spots in the video composition. An exception will be raised if the delegate modifies the receiver's array of instructions or the array of layerInstructions of any AVVideoCompositionInstruction contained therein during validation. - Parameter asset: Pass a reference to an AVAsset if you wish to validate the timeRanges of the instructions against the duration of the asset and the trackIDs of the layer instructions against the asset's tracks. Pass nil to skip that validation. Clients should ensure that the keys @"tracks" and @"duration" are already loaded on the AVAsset before validation is attempted. - Parameter timeRange: A CMTimeRange. Only those instructions with timeRanges that overlap with the specified timeRange will be validated. To validate all instructions that may be used for playback or other processing, regardless of timeRange, pass CMTimeRangeMake(kCMTimeZero, kCMTimePositiveInfinity). - Parameter validationDelegate: Indicates an object implementing the AVVideoCompositionValidationHandling protocol to receive information about troublesome portions of a video composition during processing of -isValidForAsset:. May be nil.
+//
 // IsValidForAssetTimeRangeValidationDelegate calls the underlying IsValidForAssetTimeRangeValidationDelegate.
 func (x *VideoComposition) IsValidForAssetTimeRangeValidationDelegate(asset *raw.AVAsset, timeRange coremedia.CMTimeRange, validationDelegate raw.AVVideoCompositionValidationHandling) bool {
 	return x.inner.IsValidForAssetTimeRangeValidationDelegate(asset, timeRange, validationDelegate)
 }
 
+// Determines whether the timeRanges of the receiver's instructions conform to the requirements described for them immediately above (in connection with the instructions property) and also whether all of the layer instructions have a value for trackID that corresponds either to a track of the specified asset or to the receiver's animationTool. In the course of validation, the receiver will invoke its validationDelegate with reference to any trouble spots in the video composition. An exception will be raised if the delegate modifies the receiver's array of instructions or the array of layerInstructions of any AVVideoCompositionInstruction contained therein during validation. - Parameter asset: Pass a reference to an AVAsset if you wish to validate the timeRanges of the instructions against the duration of the asset and the trackIDs of the layer instructions against the asset's tracks. Pass nil to skip that validation. - Parameter timeRange: A CMTimeRange. Only those instructions with timeRanges that overlap with the specified timeRange will be validated. To validate all instructions that may be used for playback or other processing, regardless of timeRange, pass CMTimeRangeMake(kCMTimeZero, kCMTimePositiveInfinity). - Parameter validationDelegate: Indicates an object implementing the AVVideoCompositionValidationHandling protocol to receive information about troublesome portions of a video composition during processing of -determineValidityForAsset:. May be nil. - Parameter completionHandler: A block that is invoked when a determination is made about whether the video composition is valid. If the `isValid` parameter is NO, either the video composition is not valid, in which case the `error` parameter will be nil, or the answer could not be determined, in which case the `error` parameter will be non-nil and describe the failure that occurred.
+//
 // DetermineValidityForAssetTimeRangeValidationDelegateCompletionHandler calls the underlying DetermineValidityForAssetTimeRangeValidationDelegateCompletionHandler.
 func (x *VideoComposition) DetermineValidityForAssetTimeRangeValidationDelegateCompletionHandler(asset *raw.AVAsset, timeRange coremedia.CMTimeRange, validationDelegate raw.AVVideoCompositionValidationHandling, completionHandler func(bool, unsafe.Pointer)) {
 	x.inner.DetermineValidityForAssetTimeRangeValidationDelegateCompletionHandler(asset, timeRange, validationDelegate, completionHandler)
 }
 
+// Indicates whether the timeRanges of the receiver's instructions conform to the requirements described for them immediately above (in connection with the instructions property) and also whether all of the layer instructions have a value for trackID that corresponds either to a track of the specified asset or to the receiver's animationTool. In the course of validation, the receiver will invoke its validationDelegate with reference to any trouble spots in the video composition. An exception will be raised if the delegate modifies the receiver's array of instructions or the array of layerInstructions of any AVVideoCompositionInstruction contained therein during validation. - Parameter tracks: Pass a reference to an AVAsset's tracks if you wish to validate the trackIDs of the layer instructions against the asset's tracks. Pass nil to skip that validation. This method throws an exception if the tracks are not all from the same asset. - Parameter duration: Pass an AVAsset if you wish to validate the timeRanges of the instructions against the duration of the asset. Pass kCMTimeInvalid to skip that validation. - Parameter timeRange: A CMTimeRange. Only those instructions with timeRanges that overlap with the specified timeRange will be validated. To validate all instructions that may be used for playback or other processing, regardless of timeRange, pass CMTimeRangeMake(kCMTimeZero, kCMTimePositiveInfinity). - Parameter validationDelegate: Indicates an object implementing the AVVideoCompositionValidationHandling protocol to receive information about troublesome portions of a video composition during processing of -isValidForAsset:. May be nil.
+//
 // IsValidForTracksAssetDurationTimeRangeValidationDelegate calls the underlying IsValidForTracksAssetDurationTimeRangeValidationDelegate.
 func (x *VideoComposition) IsValidForTracksAssetDurationTimeRangeValidationDelegate(tracks *foundation.NSArray[*raw.AVAssetTrack], duration coremedia.CMTime, timeRange coremedia.CMTimeRange, validationDelegate raw.AVVideoCompositionValidationHandling) bool {
 	return x.inner.IsValidForTracksAssetDurationTimeRangeValidationDelegate(tracks, duration, timeRange, validationDelegate)

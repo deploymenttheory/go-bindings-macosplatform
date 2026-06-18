@@ -48,6 +48,8 @@ func (x *Font) FontWithSize(fontSize float64) *Font {
 	return &Font{inner: _r}
 }
 
+// ******* Glyph metrics ******** ******* Glyph metrics ********
+//
 // BoundingRectForCGGlyph calls the underlying BoundingRectForCGGlyph.
 func (x *Font) BoundingRectForCGGlyph(glyph uint16) corefoundation.CGRect {
 	return x.inner.BoundingRectForCGGlyph(glyph)
@@ -68,6 +70,8 @@ func (x *Font) GetAdvancementsForCGGlyphsCount(advancements *corefoundation.CGSi
 	x.inner.GetAdvancementsForCGGlyphsCount(advancements, glyphs, glyphCount)
 }
 
+// ******* NSGraphicsContext-related ********
+//
 // Set calls the underlying Set.
 func (x *Font) Set() {
 	x.inner.Set()
@@ -78,6 +82,8 @@ func (x *Font) SetInContext(graphicsContext *raw.NSGraphicsContext) {
 	x.inner.SetInContext(graphicsContext)
 }
 
+// ******* Core font attribute ********
+//
 // FontName calls the underlying FontName.
 func (x *Font) FontName() string {
 	_r := x.inner.FontName()
@@ -129,6 +135,8 @@ func (x *Font) TextTransform() *foundation.NSAffineTransform {
 	return x.inner.TextTransform()
 }
 
+// ******* Glyph coverage ********
+//
 // NumberOfGlyphs calls the underlying NumberOfGlyphs.
 func (x *Font) NumberOfGlyphs() uint {
 	return x.inner.NumberOfGlyphs()
@@ -252,6 +260,8 @@ func (x *Font) ScreenFontWithRenderingMode(renderingMode NSFontRenderingMode) *F
 	return &Font{inner: _r}
 }
 
+// ******* Rendering mode ********
+//
 // PrinterFont calls the underlying PrinterFont.
 func (x *Font) PrinterFont() *Font {
 	_r := x.inner.PrinterFont()

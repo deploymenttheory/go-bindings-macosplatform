@@ -37,12 +37,16 @@ func NewScannerFeatureEnumeration() *ScannerFeatureEnumeration {
 	return &ScannerFeatureEnumeration{inner: raw.ICScannerFeatureEnumerationFromID(_id)}
 }
 
+// @property currentValue @abstract The current value. The current value can be set to one of the possible values in the "values" property below￼.
+//
 // WithCurrentValue sets the currentValue property and returns the receiver for chaining.
 func (x *ScannerFeatureEnumeration) WithCurrentValue(currentValue objc.ID) *ScannerFeatureEnumeration {
 	x.inner.SetCurrentValue(currentValue)
 	return x
 }
 
+// @property currentValue @abstract The current value. The current value can be set to one of the possible values in the "values" property below￼.
+//
 // CurrentValue calls the underlying CurrentValue.
 func (x *ScannerFeatureEnumeration) CurrentValue() objc.ID {
 	return x.inner.CurrentValue()
@@ -53,11 +57,15 @@ func (x *ScannerFeatureEnumeration) SetCurrentValue(currentValue objc.ID) {
 	x.inner.SetCurrentValue(currentValue)
 }
 
+// @property defaultValue @abstract ￼The default value. The default value can be set to one of the possible values in the "values" property below.
+//
 // DefaultValue calls the underlying DefaultValue.
 func (x *ScannerFeatureEnumeration) DefaultValue() objc.ID {
 	return x.inner.DefaultValue()
 }
 
+// @property values @abstract An array of possible values. All items in this array must be of same type￼.
+//
 // Values returns the collection as a Go slice.
 func (x *ScannerFeatureEnumeration) Values() []*foundation.NSNumber {
 	arr := x.inner.Values()
@@ -69,6 +77,8 @@ func (x *ScannerFeatureEnumeration) Values() []*foundation.NSNumber {
 	})
 }
 
+// @property menuItemLabels @abstract ￼The human readable menu item labels to be used in a menu to allow the user to select the current value from an array of possible values.
+//
 // MenuItemLabels returns the collection as a Go slice.
 func (x *ScannerFeatureEnumeration) MenuItemLabels() []string {
 	arr := x.inner.MenuItemLabels()
@@ -80,6 +90,8 @@ func (x *ScannerFeatureEnumeration) MenuItemLabels() []string {
 	})
 }
 
+// @property menuItemLabelsTooltips @abstract ￼Tooltip text associated with the menu items.
+//
 // MenuItemLabelsTooltips returns the collection as a Go slice.
 func (x *ScannerFeatureEnumeration) MenuItemLabelsTooltips() []string {
 	arr := x.inner.MenuItemLabelsTooltips()

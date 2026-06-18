@@ -35,26 +35,36 @@ func NewMetadataFaceObject() *MetadataFaceObject {
 	return &MetadataFaceObject{inner: raw.AVMetadataFaceObjectFromID(_id)}
 }
 
+// @property faceID @abstract A unique number associated with the receiver. @discussion The value of this property is an NSInteger indicating the unique identifier of this face in the picture. When a new face enters the picture, it is assigned a new unique identifier. faceIDs are not re-used as faces leave the picture and new ones enter. Faces that leave the picture then re-enter are assigned a new faceID.
+//
 // FaceID calls the underlying FaceID.
 func (x *MetadataFaceObject) FaceID() int {
 	return x.inner.FaceID()
 }
 
+// @property hasRollAngle @abstract A BOOL indicating whether the rollAngle property is valid for this receiver.
+//
 // HasRollAngle calls the underlying HasRollAngle.
 func (x *MetadataFaceObject) HasRollAngle() bool {
 	return x.inner.HasRollAngle()
 }
 
+// @property rollAngle @abstract The roll angle of the face in degrees. @discussion The value of this property is a CGFloat indicating the face's angle of roll (or tilt) in degrees. A value of 0.0 indicates that the face is level in the picture. If -hasRollAngle returns NO, then reading this property throws an NSGenericException.
+//
 // RollAngle calls the underlying RollAngle.
 func (x *MetadataFaceObject) RollAngle() float64 {
 	return x.inner.RollAngle()
 }
 
+// @property hasYawAngle @abstract A BOOL indicating whether the yawAngle property is valid for this receiver.
+//
 // HasYawAngle calls the underlying HasYawAngle.
 func (x *MetadataFaceObject) HasYawAngle() bool {
 	return x.inner.HasYawAngle()
 }
 
+// @property yawAngle @abstract The yaw angle of the face in degrees. @discussion The value of this property is a CGFloat indicating the face's angle of yaw (or turn) in degrees. A value of 0.0 indicates that the face is straight on in the picture. If -hasYawAngle returns NO, then reading this property throws an NSGenericException.
+//
 // YawAngle calls the underlying YawAngle.
 func (x *MetadataFaceObject) YawAngle() float64 {
 	return x.inner.YawAngle()

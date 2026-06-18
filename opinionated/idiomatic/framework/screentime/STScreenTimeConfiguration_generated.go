@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The configuration for this device.
+//
 // ScreenTimeConfiguration wraps [raw.STScreenTimeConfiguration] with a fluent Go API.
 type ScreenTimeConfiguration struct {
 	inner *raw.STScreenTimeConfiguration
@@ -35,6 +37,8 @@ func NewScreenTimeConfiguration() *ScreenTimeConfiguration {
 	return &ScreenTimeConfiguration{inner: raw.STScreenTimeConfigurationFromID(_id)}
 }
 
+// A Boolean that indicates whether the device is currently enforcing child restrictions.
+//
 // EnforcesChildRestrictions calls the underlying EnforcesChildRestrictions.
 func (x *ScreenTimeConfiguration) EnforcesChildRestrictions() bool {
 	return x.inner.EnforcesChildRestrictions()

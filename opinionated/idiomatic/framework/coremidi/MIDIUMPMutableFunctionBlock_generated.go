@@ -30,6 +30,8 @@ func UMPMutableFunctionBlockFromID(id objc.ID) *UMPMutableFunctionBlock {
 	return &UMPMutableFunctionBlock{inner: raw.MIDIUMPMutableFunctionBlockFromID(id)}
 }
 
+// @method		initWithName:direction:firstGroup:totalGroupsSpanned:maxSysEx8Streams:MIDI1Info:UIHint:isEnabled: @brief		The initializer for constructing a Function Block. @param		name					The Function Block name. @param		direction				The directionality of the Function Block. @param		firstGroup				The first UMP Group supported by the Function Block. @param		totalGroupsSpanned		The number of UMP groups spanned by the Function Block. @param		maxSysEx8Streams		The maximum number of simultaneous Sysex8 streams. @param		MIDI1Info				The MIDI 1.0 speed information for the Function Block. @param		UIHint					A UI hint for the Function Block. @param		isEnabled				The enable state of the Function Block. @discussion	This operation will fail if virtual MIDI endpoint creation is not allowed (for example, on iOS, if your app doesn't list 'audio' in UIBackgroundModes).
+//
 // NewUMPMutableFunctionBlockWithNameDirectionFirstGroupTotalGroupsSpannedMaxSysEx8StreamsMIDI1InfoUIHintIsEnabled creates a new [UMPMutableFunctionBlock].
 func NewUMPMutableFunctionBlockWithNameDirectionFirstGroupTotalGroupsSpannedMaxSysEx8StreamsMIDI1InfoUIHintIsEnabled(name string, direction MIDIUMPFunctionBlockDirection, firstGroup uint8, totalGroupsSpanned uint8, maxSysEx8Streams uint8, mIDI1Info MIDIUMPFunctionBlockMIDI1Info, uIHint MIDIUMPFunctionBlockUIHint, isEnabled bool) *UMPMutableFunctionBlock {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDIUMPMutableFunctionBlock")), objc.RegisterName("alloc"))
@@ -37,16 +39,22 @@ func NewUMPMutableFunctionBlockWithNameDirectionFirstGroupTotalGroupsSpannedMaxS
 	return &UMPMutableFunctionBlock{inner: raw.MIDIUMPMutableFunctionBlockFromID(_id)}
 }
 
+// @method		setEnabled:error: @brief		Set whether this Function Block is enabled or disabled. @param		isEnabled		The new state of the Function Block. @param		error			The out-error used if an error occurred. @return     YES for success. NO in the event of a failure, in which case the error is returned in error. @discussion	If a Function Block is registered to UMP Endpoint as part of a static configuration, the state must always be enabled and may not change. If registered to a UMP Endpoint, changes to the Function Block state are propagated to the system-wide cache.
+//
 // SetEnabledError calls the underlying SetEnabledError.
 func (x *UMPMutableFunctionBlock) SetEnabledError(isEnabled bool) (bool, error) {
 	return x.inner.SetEnabledError(isEnabled)
 }
 
+// @method       setName:error: @brief        Set the function block name. @param        name                      A string representing the name of the function block. @param        error                    The out-error used if an error occurs. @return       YES for success. NO in the event of a failure, in which case the error is returned in error. @discussion   The Function Block name string. Updating the name of a Function Block will cause the updated name to be propagated to all local copies of the system-wide cache.
+//
 // SetNameError calls the underlying SetNameError.
 func (x *UMPMutableFunctionBlock) SetNameError(name string) (bool, error) {
 	return x.inner.SetNameError(foundation.NSStringStringWithUTF8String(name))
 }
 
+// @method       reconfigureWithFirstGroup:direction:MIDI1Info:UIHint:error @brief        Reconfigure a Function Block. @param    firstGroup            The new first Group to use for the Function Block.. @param    direction              The direction of the Function Block: input, output, or bidirectional. @param    MIDI1Info              MIDI 1.0 speed information. @param    UIHint                     A hint for UI about the primary usage of this Function Block. @discussion    If a mutable Function Block has not been registered to a CI device or was registered in a non-static Function Block configuration, the first Group can be changed if the final Group spanned by the Function Block is valid after the Function Block has been relocated. Returns YES if the first Group of the Function Block was changed.
+//
 // ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError calls the underlying ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError.
 func (x *UMPMutableFunctionBlock) ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError(firstGroup uint8, direction MIDIUMPFunctionBlockDirection, mIDI1Info MIDIUMPFunctionBlockMIDI1Info, uIHint MIDIUMPFunctionBlockUIHint) (bool, error) {
 	return x.inner.ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError(firstGroup, raw.MIDIUMPFunctionBlockDirection(direction), raw.MIDIUMPFunctionBlockMIDI1Info(mIDI1Info), raw.MIDIUMPFunctionBlockUIHint(uIHint))

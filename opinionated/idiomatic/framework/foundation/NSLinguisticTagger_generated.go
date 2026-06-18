@@ -9,6 +9,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // LinguisticTagger wraps [raw.NSLinguisticTagger] with a fluent Go API.
@@ -94,8 +95,17 @@ func (x *LinguisticTagger) TagAtIndexUnitSchemeTokenRange(charIndex uint, unit N
 }
 
 // TagsInRangeUnitSchemeOptionsTokenRanges calls the underlying TagsInRangeUnitSchemeOptionsTokenRanges.
-func (x *LinguisticTagger) TagsInRangeUnitSchemeOptionsTokenRanges(range_ raw.NSRange, unit NSLinguisticTaggerUnit, scheme *raw.NSString, options NSLinguisticTaggerOptions, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString] {
-	return x.inner.TagsInRangeUnitSchemeOptionsTokenRanges(range_, raw.NSLinguisticTaggerUnit(unit), scheme, raw.NSLinguisticTaggerOptions(options), tokenRanges)
+func (x *LinguisticTagger) TagsInRangeUnitSchemeOptionsTokenRanges(range_ raw.NSRange, unit NSLinguisticTaggerUnit, scheme *raw.NSString, options NSLinguisticTaggerOptions, tokenRanges ...ValueProvider) *raw.NSArray[*raw.NSString] {
+	_ptrs := make([]objc.ID, len(tokenRanges))
+	for _i, _v := range tokenRanges {
+		_ptrs[_i] = _v.asValue().Ptr()
+	}
+	var _arg4 *raw.NSArray[*raw.NSValue]
+	if len(_ptrs) > 0 {
+		_arg4 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	return x.inner.TagsInRangeUnitSchemeOptionsTokenRanges(range_, raw.NSLinguisticTaggerUnit(unit), scheme, raw.NSLinguisticTaggerOptions(options), _arg4)
 }
 
 // EnumerateTagsInRangeSchemeOptionsUsing calls the underlying EnumerateTagsInRangeSchemeOptionsUsing.
@@ -113,13 +123,31 @@ func (x *LinguisticTagger) TagAtIndexSchemeTokenRangeSentenceRange(charIndex uin
 }
 
 // TagsInRangeSchemeOptionsTokenRanges calls the underlying TagsInRangeSchemeOptionsTokenRanges.
-func (x *LinguisticTagger) TagsInRangeSchemeOptionsTokenRanges(range_ raw.NSRange, tagScheme string, opts NSLinguisticTaggerOptions, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString] {
-	return x.inner.TagsInRangeSchemeOptionsTokenRanges(range_, foundation.NSStringStringWithUTF8String(tagScheme), raw.NSLinguisticTaggerOptions(opts), tokenRanges)
+func (x *LinguisticTagger) TagsInRangeSchemeOptionsTokenRanges(range_ raw.NSRange, tagScheme string, opts NSLinguisticTaggerOptions, tokenRanges ...ValueProvider) *raw.NSArray[*raw.NSString] {
+	_ptrs := make([]objc.ID, len(tokenRanges))
+	for _i, _v := range tokenRanges {
+		_ptrs[_i] = _v.asValue().Ptr()
+	}
+	var _arg3 *raw.NSArray[*raw.NSValue]
+	if len(_ptrs) > 0 {
+		_arg3 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	return x.inner.TagsInRangeSchemeOptionsTokenRanges(range_, foundation.NSStringStringWithUTF8String(tagScheme), raw.NSLinguisticTaggerOptions(opts), _arg3)
 }
 
 // PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores calls the underlying PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores.
-func (x *LinguisticTagger) PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores(charIndex uint, tagScheme string, tokenRange *raw.NSRange, sentenceRange *raw.NSRange, scores *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString] {
-	return x.inner.PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores(charIndex, foundation.NSStringStringWithUTF8String(tagScheme), tokenRange, sentenceRange, scores)
+func (x *LinguisticTagger) PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores(charIndex uint, tagScheme string, tokenRange *raw.NSRange, sentenceRange *raw.NSRange, scores ...ValueProvider) *raw.NSArray[*raw.NSString] {
+	_ptrs := make([]objc.ID, len(scores))
+	for _i, _v := range scores {
+		_ptrs[_i] = _v.asValue().Ptr()
+	}
+	var _arg4 *raw.NSArray[*raw.NSValue]
+	if len(_ptrs) > 0 {
+		_arg4 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	return x.inner.PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores(charIndex, foundation.NSStringStringWithUTF8String(tagScheme), tokenRange, sentenceRange, _arg4)
 }
 
 // TagSchemes returns the collection as a Go slice.
@@ -170,11 +198,11 @@ type LinguisticTaggerable interface {
 	SentenceRangeForRange(range_ raw.NSRange) raw.NSRange
 	EnumerateTagsInRangeUnitSchemeOptionsUsing(range_ raw.NSRange, unit NSLinguisticTaggerUnit, scheme *raw.NSString, options NSLinguisticTaggerOptions, block objc.Block)
 	TagAtIndexUnitSchemeTokenRange(charIndex uint, unit NSLinguisticTaggerUnit, scheme *raw.NSString, tokenRange *raw.NSRange) *String
-	TagsInRangeUnitSchemeOptionsTokenRanges(range_ raw.NSRange, unit NSLinguisticTaggerUnit, scheme *raw.NSString, options NSLinguisticTaggerOptions, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString]
+	TagsInRangeUnitSchemeOptionsTokenRanges(range_ raw.NSRange, unit NSLinguisticTaggerUnit, scheme *raw.NSString, options NSLinguisticTaggerOptions, tokenRanges ...ValueProvider) *raw.NSArray[*raw.NSString]
 	EnumerateTagsInRangeSchemeOptionsUsing(range_ raw.NSRange, tagScheme *raw.NSString, opts NSLinguisticTaggerOptions, block objc.Block)
 	TagAtIndexSchemeTokenRangeSentenceRange(charIndex uint, scheme *raw.NSString, tokenRange *raw.NSRange, sentenceRange *raw.NSRange) *String
-	TagsInRangeSchemeOptionsTokenRanges(range_ raw.NSRange, tagScheme string, opts NSLinguisticTaggerOptions, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString]
-	PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores(charIndex uint, tagScheme string, tokenRange *raw.NSRange, sentenceRange *raw.NSRange, scores *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString]
+	TagsInRangeSchemeOptionsTokenRanges(range_ raw.NSRange, tagScheme string, opts NSLinguisticTaggerOptions, tokenRanges ...ValueProvider) *raw.NSArray[*raw.NSString]
+	PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores(charIndex uint, tagScheme string, tokenRange *raw.NSRange, sentenceRange *raw.NSRange, scores ...ValueProvider) *raw.NSArray[*raw.NSString]
 	TagSchemes() []*String
 	String() *String
 	SetString(string_ string)

@@ -45,6 +45,8 @@ func NewMenuItemWithCoder(coder *foundation.NSCoder) *MenuItem {
 	return &MenuItem{inner: raw.NSMenuItemFromID(_id)}
 }
 
+// @note Never call the setter method directly: it is there only for subclassers.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *MenuItem) WithMenu(menu *Menu) *MenuItem {
 	x.inner.SetMenu(menu.Unwrap())
@@ -69,6 +71,8 @@ func (x *MenuItem) WithAttributedTitle(attributedTitle *foundation.NSAttributedS
 	return x
 }
 
+// @abstract       Used to specify a standard subtitle for the menu item. @discussion     The subtitle is displayed below the standard title. @note           On macOS 14, a menu item with an attributed title does not show the subtitle. The subtitle is shown on macOS 15 and later.
+//
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *MenuItem) WithSubtitle(subtitle string) *MenuItem {
 	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
@@ -195,12 +199,16 @@ func (x *MenuItem) WithToolTip(toolTip string) *MenuItem {
 	return x
 }
 
+// A badge used to provide additional quantitative information specific to the menu item, such as the number of available updates. The default value of this property is `nil`.
+//
 // WithBadge sets the badge property and returns the receiver for chaining.
 func (x *MenuItem) WithBadge(badge *MenuItemBadge) *MenuItem {
 	x.inner.SetBadge(badge.Unwrap())
 	return x
 }
 
+// @note Never call the setter method directly: it is there only for subclassers.
+//
 // Menu calls the underlying Menu.
 func (x *MenuItem) Menu() *Menu {
 	_r := x.inner.Menu()
@@ -210,6 +218,8 @@ func (x *MenuItem) Menu() *Menu {
 	return &Menu{inner: _r}
 }
 
+// @note Never call the setter method directly: it is there only for subclassers.
+//
 // SetMenu calls the underlying SetMenu.
 func (x *MenuItem) SetMenu(menu *raw.NSMenu) {
 	x.inner.SetMenu(menu)
@@ -234,6 +244,8 @@ func (x *MenuItem) SetSubmenu(submenu *raw.NSMenu) {
 	x.inner.SetSubmenu(submenu)
 }
 
+// @return The `NSMenuItem` whose submenu contains the receiver, or nil if the receiver does not have a parent item.
+//
 // ParentItem calls the underlying ParentItem.
 func (x *MenuItem) ParentItem() *MenuItem {
 	_r := x.inner.ParentItem()
@@ -267,6 +279,8 @@ func (x *MenuItem) SetAttributedTitle(attributedTitle *foundation.NSAttributedSt
 	x.inner.SetAttributedTitle(attributedTitle)
 }
 
+// @abstract       Used to specify a standard subtitle for the menu item. @discussion     The subtitle is displayed below the standard title. @note           On macOS 14, a menu item with an attributed title does not show the subtitle. The subtitle is shown on macOS 15 and later.
+//
 // Subtitle calls the underlying Subtitle.
 func (x *MenuItem) Subtitle() string {
 	_r := x.inner.Subtitle()
@@ -276,6 +290,8 @@ func (x *MenuItem) Subtitle() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract       Used to specify a standard subtitle for the menu item. @discussion     The subtitle is displayed below the standard title. @note           On macOS 14, a menu item with an attributed title does not show the subtitle. The subtitle is shown on macOS 15 and later.
+//
 // SetSubtitle calls the underlying SetSubtitle.
 func (x *MenuItem) SetSubtitle(subtitle string) {
 	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
@@ -286,6 +302,8 @@ func (x *MenuItem) IsSeparatorItem() bool {
 	return x.inner.IsSeparatorItem()
 }
 
+// Indicates whether the item is a section header. Section header items are created using the `sectionHeader(title:)` class method.
+//
 // IsSectionHeader calls the underlying IsSectionHeader.
 func (x *MenuItem) IsSectionHeader() bool {
 	return x.inner.IsSectionHeader()
@@ -538,6 +556,8 @@ func (x *MenuItem) SetToolTip(toolTip string) {
 	x.inner.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
 }
 
+// A badge used to provide additional quantitative information specific to the menu item, such as the number of available updates. The default value of this property is `nil`.
+//
 // Badge calls the underlying Badge.
 func (x *MenuItem) Badge() *MenuItemBadge {
 	_r := x.inner.Badge()
@@ -547,6 +567,8 @@ func (x *MenuItem) Badge() *MenuItemBadge {
 	return &MenuItemBadge{inner: _r}
 }
 
+// A badge used to provide additional quantitative information specific to the menu item, such as the number of available updates. The default value of this property is `nil`.
+//
 // SetBadge calls the underlying SetBadge.
 func (x *MenuItem) SetBadge(badge *raw.NSMenuItemBadge) {
 	x.inner.SetBadge(badge)

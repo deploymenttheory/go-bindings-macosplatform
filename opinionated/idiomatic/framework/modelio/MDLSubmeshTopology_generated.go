@@ -29,6 +29,8 @@ func SubmeshTopologyFromID(id objc.ID) *SubmeshTopology {
 	return &SubmeshTopology{inner: raw.MDLSubmeshTopologyFromID(id)}
 }
 
+// @method initWithSubmesh: @abstract create a topology object corresponding to the topology in the submesh
+//
 // NewSubmeshTopologyWithSubmesh creates a new [SubmeshTopology].
 func NewSubmeshTopologyWithSubmesh(submesh *raw.MDLSubmesh) *SubmeshTopology {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLSubmeshTopology")), objc.RegisterName("alloc"))
@@ -36,18 +38,24 @@ func NewSubmeshTopologyWithSubmesh(submesh *raw.MDLSubmesh) *SubmeshTopology {
 	return &SubmeshTopology{inner: raw.MDLSubmeshTopologyFromID(_id)}
 }
 
+// @property faceTopologyBuffer @abstract A buffer of 8 bit unsigned integer values, where each entry corresponds to the number of vertices making up a face. @discussion A submesh containing two triangles, a four sided polygon, and a line, would contain the data 3 3 4 2. If geometryType is of a fixed type, such as triangles, the buffer is optional, and will be created on demand if read. Indices to the vertex buffer will be stored in the index buffer correspondingly. In the example above, the indices would be stored in order, three indices for the first triangle, followed by three for the second, followed by four for the polygon, and finally two indices for the line.
+//
 // WithFaceTopology sets the faceTopology property and returns the receiver for chaining.
 func (x *SubmeshTopology) WithFaceTopology(faceTopology raw.MDLMeshBuffer) *SubmeshTopology {
 	x.inner.SetFaceTopology(faceTopology)
 	return x
 }
 
+// @property faceCount @abstract The number of faces encoded in faceTopologyBuffer
+//
 // WithFaceCount sets the faceCount property and returns the receiver for chaining.
 func (x *SubmeshTopology) WithFaceCount(faceCount uint) *SubmeshTopology {
 	x.inner.SetFaceCount(faceCount)
 	return x
 }
 
+// A crease value at a vertex to be applied during subdivision. Vertex creases A zero value is smooth, a one value is peaked. It is intended to be used with an index buffer, where the index buffer entries are vertex indices. The corresponding values in the corner sharpness attribute indicate the corner sharpness of those vertices. The index buffer is sparse. If a mesh has three sharp vertices, then the index buffer will have three entries. Since the number of entries in this vertex buffer is likely to be different than the number of entries in any other vertex buffer, it shouldn't be interleaved with other data.
+//
 // WithVertexCreaseIndices sets the vertexCreaseIndices property and returns the receiver for chaining.
 func (x *SubmeshTopology) WithVertexCreaseIndices(vertexCreaseIndices raw.MDLMeshBuffer) *SubmeshTopology {
 	x.inner.SetVertexCreaseIndices(vertexCreaseIndices)
@@ -60,12 +68,16 @@ func (x *SubmeshTopology) WithVertexCreases(vertexCreases raw.MDLMeshBuffer) *Su
 	return x
 }
 
+// @property vertexCreaseCount @abstract The number of vertex creases encoded in vertexCreases
+//
 // WithVertexCreaseCount sets the vertexCreaseCount property and returns the receiver for chaining.
 func (x *SubmeshTopology) WithVertexCreaseCount(vertexCreaseCount uint) *SubmeshTopology {
 	x.inner.SetVertexCreaseCount(vertexCreaseCount)
 	return x
 }
 
+// A crease value at an edge to be applied during subdivision. Edge creases A zero value is smooth, a one value is peaked. It is intended to be used with an index buffer, where the index buffer entries are edge index pairs. Accordingly, there will be two index entries for each edge sharpness entry, and the sharpness entry corresponds to the edge itself. The corresponding values in the edge sharpness attribute indicate the edge sharpness of those edges.  The index buffer is sparse. If a mesh has three sharp edges, then the index buffer will have six entries. Since the number of entries in this vertex buffer is likely to be different than the number of entries in any other vertex buffer, it shouldn't be interleaved with other data.
+//
 // WithEdgeCreaseIndices sets the edgeCreaseIndices property and returns the receiver for chaining.
 func (x *SubmeshTopology) WithEdgeCreaseIndices(edgeCreaseIndices raw.MDLMeshBuffer) *SubmeshTopology {
 	x.inner.SetEdgeCreaseIndices(edgeCreaseIndices)
@@ -78,24 +90,32 @@ func (x *SubmeshTopology) WithEdgeCreases(edgeCreases raw.MDLMeshBuffer) *Submes
 	return x
 }
 
+// @property edgeCreaseCount @abstract The number of edge creases encoded in edgeCreases
+//
 // WithEdgeCreaseCount sets the edgeCreaseCount property and returns the receiver for chaining.
 func (x *SubmeshTopology) WithEdgeCreaseCount(edgeCreaseCount uint) *SubmeshTopology {
 	x.inner.SetEdgeCreaseCount(edgeCreaseCount)
 	return x
 }
 
+// The hole attribute is a vertex attribute of single integer values where each integer is an index of a face that is to be used as a hole. If there are two holes in a mesh, then the vertex buffer will have two entries. Since the number of entries in this vertex buffer is likely to be different than the number of entries in any other vertex buffer, it shouldn't be interleaved with other data.
+//
 // WithHoles sets the holes property and returns the receiver for chaining.
 func (x *SubmeshTopology) WithHoles(holes raw.MDLMeshBuffer) *SubmeshTopology {
 	x.inner.SetHoles(holes)
 	return x
 }
 
+// @property holeCount @abstract The number of holes encoded in holes
+//
 // WithHoleCount sets the holeCount property and returns the receiver for chaining.
 func (x *SubmeshTopology) WithHoleCount(holeCount uint) *SubmeshTopology {
 	x.inner.SetHoleCount(holeCount)
 	return x
 }
 
+// @property faceTopologyBuffer @abstract A buffer of 8 bit unsigned integer values, where each entry corresponds to the number of vertices making up a face. @discussion A submesh containing two triangles, a four sided polygon, and a line, would contain the data 3 3 4 2. If geometryType is of a fixed type, such as triangles, the buffer is optional, and will be created on demand if read. Indices to the vertex buffer will be stored in the index buffer correspondingly. In the example above, the indices would be stored in order, three indices for the first triangle, followed by three for the second, followed by four for the polygon, and finally two indices for the line.
+//
 // FaceTopology calls the underlying FaceTopology.
 func (x *SubmeshTopology) FaceTopology() raw.MDLMeshBuffer {
 	return x.inner.FaceTopology()
@@ -106,6 +126,8 @@ func (x *SubmeshTopology) SetFaceTopology(faceTopology raw.MDLMeshBuffer) {
 	x.inner.SetFaceTopology(faceTopology)
 }
 
+// @property faceCount @abstract The number of faces encoded in faceTopologyBuffer
+//
 // FaceCount calls the underlying FaceCount.
 func (x *SubmeshTopology) FaceCount() uint {
 	return x.inner.FaceCount()
@@ -116,6 +138,8 @@ func (x *SubmeshTopology) SetFaceCount(faceCount uint) {
 	x.inner.SetFaceCount(faceCount)
 }
 
+// A crease value at a vertex to be applied during subdivision. Vertex creases A zero value is smooth, a one value is peaked. It is intended to be used with an index buffer, where the index buffer entries are vertex indices. The corresponding values in the corner sharpness attribute indicate the corner sharpness of those vertices. The index buffer is sparse. If a mesh has three sharp vertices, then the index buffer will have three entries. Since the number of entries in this vertex buffer is likely to be different than the number of entries in any other vertex buffer, it shouldn't be interleaved with other data.
+//
 // VertexCreaseIndices calls the underlying VertexCreaseIndices.
 func (x *SubmeshTopology) VertexCreaseIndices() raw.MDLMeshBuffer {
 	return x.inner.VertexCreaseIndices()
@@ -136,6 +160,8 @@ func (x *SubmeshTopology) SetVertexCreases(vertexCreases raw.MDLMeshBuffer) {
 	x.inner.SetVertexCreases(vertexCreases)
 }
 
+// @property vertexCreaseCount @abstract The number of vertex creases encoded in vertexCreases
+//
 // VertexCreaseCount calls the underlying VertexCreaseCount.
 func (x *SubmeshTopology) VertexCreaseCount() uint {
 	return x.inner.VertexCreaseCount()
@@ -146,6 +172,8 @@ func (x *SubmeshTopology) SetVertexCreaseCount(vertexCreaseCount uint) {
 	x.inner.SetVertexCreaseCount(vertexCreaseCount)
 }
 
+// A crease value at an edge to be applied during subdivision. Edge creases A zero value is smooth, a one value is peaked. It is intended to be used with an index buffer, where the index buffer entries are edge index pairs. Accordingly, there will be two index entries for each edge sharpness entry, and the sharpness entry corresponds to the edge itself. The corresponding values in the edge sharpness attribute indicate the edge sharpness of those edges.  The index buffer is sparse. If a mesh has three sharp edges, then the index buffer will have six entries. Since the number of entries in this vertex buffer is likely to be different than the number of entries in any other vertex buffer, it shouldn't be interleaved with other data.
+//
 // EdgeCreaseIndices calls the underlying EdgeCreaseIndices.
 func (x *SubmeshTopology) EdgeCreaseIndices() raw.MDLMeshBuffer {
 	return x.inner.EdgeCreaseIndices()
@@ -166,6 +194,8 @@ func (x *SubmeshTopology) SetEdgeCreases(edgeCreases raw.MDLMeshBuffer) {
 	x.inner.SetEdgeCreases(edgeCreases)
 }
 
+// @property edgeCreaseCount @abstract The number of edge creases encoded in edgeCreases
+//
 // EdgeCreaseCount calls the underlying EdgeCreaseCount.
 func (x *SubmeshTopology) EdgeCreaseCount() uint {
 	return x.inner.EdgeCreaseCount()
@@ -176,6 +206,8 @@ func (x *SubmeshTopology) SetEdgeCreaseCount(edgeCreaseCount uint) {
 	x.inner.SetEdgeCreaseCount(edgeCreaseCount)
 }
 
+// The hole attribute is a vertex attribute of single integer values where each integer is an index of a face that is to be used as a hole. If there are two holes in a mesh, then the vertex buffer will have two entries. Since the number of entries in this vertex buffer is likely to be different than the number of entries in any other vertex buffer, it shouldn't be interleaved with other data.
+//
 // Holes calls the underlying Holes.
 func (x *SubmeshTopology) Holes() raw.MDLMeshBuffer {
 	return x.inner.Holes()
@@ -186,6 +218,8 @@ func (x *SubmeshTopology) SetHoles(holes raw.MDLMeshBuffer) {
 	x.inner.SetHoles(holes)
 }
 
+// @property holeCount @abstract The number of holes encoded in holes
+//
 // HoleCount calls the underlying HoleCount.
 func (x *SubmeshTopology) HoleCount() uint {
 	return x.inner.HoleCount()

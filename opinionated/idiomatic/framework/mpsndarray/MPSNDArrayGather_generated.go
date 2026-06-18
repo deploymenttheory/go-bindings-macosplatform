@@ -36,18 +36,24 @@ func NewArrayGather() *ArrayGather {
 	return &ArrayGather{inner: raw.MPSNDArrayGatherFromID(_id)}
 }
 
+// @property  axis @abstract  The axis along which to apply the gather operation. Defaults to zero.
+//
 // WithAxis sets the axis property and returns the receiver for chaining.
 func (x *ArrayGather) WithAxis(axis uint) *ArrayGather {
 	x.inner.SetAxis(axis)
 	return x
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *ArrayGather) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayGather {
 	x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
 	return x
 }
 
+// @property  axis @abstract  The axis along which to apply the gather operation. Defaults to zero.
+//
 // Axis calls the underlying Axis.
 func (x *ArrayGather) Axis() uint {
 	return x.inner.Axis()

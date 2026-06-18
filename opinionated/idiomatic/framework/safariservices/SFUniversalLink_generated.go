@@ -30,6 +30,8 @@ func UniversalLinkFromID(id objc.ID) *UniversalLink {
 	return &UniversalLink{inner: raw.SFUniversalLinkFromID(id)}
 }
 
+// Initialize the receiver with a web URL that may or may not be a universal link.
+//
 // NewUniversalLinkWithWebpageURL creates a new [UniversalLink].
 func NewUniversalLinkWithWebpageURL(url string) *UniversalLink {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SFUniversalLink")), objc.RegisterName("alloc"))
@@ -37,22 +39,30 @@ func NewUniversalLinkWithWebpageURL(url string) *UniversalLink {
 	return &UniversalLink{inner: raw.SFUniversalLinkFromID(_id)}
 }
 
+// Whether or not this universal link is enabled. If it is enabled, the URL will open in the application instead of the browser. Set this property when the user indicates they wish to enable or disable this universal link.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *UniversalLink) WithEnabled(enabled bool) *UniversalLink {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// The URL passed when initializing the receiver.
+//
 // WebpageURL calls the underlying WebpageURL.
 func (x *UniversalLink) WebpageURL() *foundation.NSURL {
 	return x.inner.WebpageURL()
 }
 
+// The file URL to the application that can handle this universal link.
+//
 // ApplicationURL calls the underlying ApplicationURL.
 func (x *UniversalLink) ApplicationURL() *foundation.NSURL {
 	return x.inner.ApplicationURL()
 }
 
+// Whether or not this universal link is enabled. If it is enabled, the URL will open in the application instead of the browser. Set this property when the user indicates they wish to enable or disable this universal link.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *UniversalLink) IsEnabled() bool {
 	return x.inner.IsEnabled()

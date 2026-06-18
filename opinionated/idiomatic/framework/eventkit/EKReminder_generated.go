@@ -37,42 +37,56 @@ func NewReminder() *Reminder {
 	return &Reminder{inner: raw.EKReminderFromID(_id)}
 }
 
+// @property   startDateComponents @abstract   The start date of the task, as date components. @discussion The use of date components allows the start date and its time zone to be represented in a single property. A nil time zone represents a floating date.  Setting a date component without a hour, minute and second component will set allDay to YES. If you set this property, the calendar must be set to NSCalendarIdentifierGregorian. An exception is raised otherwise.
+//
 // WithStartDateComponents sets the startDateComponents property and returns the receiver for chaining.
 func (x *Reminder) WithStartDateComponents(startDateComponents *foundation.NSDateComponents) *Reminder {
 	x.inner.SetStartDateComponents(startDateComponents)
 	return x
 }
 
+// @property   dueDateComponents @abstract   The date by which this reminder should be completed. @discussion The use of date components allows the due date and its time zone to be represented in a single property. A nil time zone represents a floating date.  Setting a date component without a hour, minute and second component will set allDay to YES. If you set this property, the calendar must be set to NSCalendarIdentifierGregorian. An exception is raised otherwise. On iOS, if you set the due date for a reminder, you must also set a start date, otherwise you will receive an error (EKErrorNoStartDate) when attempting to save this reminder. This is not a requirement on OS X.
+//
 // WithDueDateComponents sets the dueDateComponents property and returns the receiver for chaining.
 func (x *Reminder) WithDueDateComponents(dueDateComponents *foundation.NSDateComponents) *Reminder {
 	x.inner.SetDueDateComponents(dueDateComponents)
 	return x
 }
 
+// @property   completed @abstract   Whether or not the reminder is completed. @discussion Setting it to YES will set the completed date to the current date. Setting it to NO will set the completed date to nil.
+//
 // WithCompleted sets the completed property and returns the receiver for chaining.
 func (x *Reminder) WithCompleted(completed bool) *Reminder {
 	x.inner.SetCompleted(completed)
 	return x
 }
 
+// @property   completionDate @abstract   The date on which this reminder was completed.
+//
 // WithCompletionDate sets the completionDate property and returns the receiver for chaining.
 func (x *Reminder) WithCompletionDate(completionDate *foundation.NSDate) *Reminder {
 	x.inner.SetCompletionDate(completionDate)
 	return x
 }
 
+// @property   priority @abstract   The priority of the reminder. @discussion Priorities run from 1 (highest) to 9 (lowest).  A priority of 0 means no priority. Saving a reminder with any other priority will fail. Per RFC 5545, priorities of 1-4 are considered "high," a priority of 5 is "medium," and priorities of 6-9 are "low."
+//
 // WithPriority sets the priority property and returns the receiver for chaining.
 func (x *Reminder) WithPriority(priority uint) *Reminder {
 	x.inner.SetPriority(priority)
 	return x
 }
 
+// @property calendar @abstract The calendar that this calendar item belongs to. @discussion This will be nil for new calendar items until you set it.
+//
 // WithCalendar sets the calendar property and returns the receiver for chaining.
 func (x *Reminder) WithCalendar(calendar *Calendar) *Reminder {
 	x.inner.EKCalendarItem.SetCalendar(calendar.Unwrap())
 	return x
 }
 
+// @property title @abstract The title of this calendar item. @discussion This will be an empty string for new calendar items until you set it.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *Reminder) WithTitle(title string) *Reminder {
 	x.inner.EKCalendarItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
@@ -121,6 +135,8 @@ func (x *Reminder) WithAlarms(items ...*raw.EKAlarm) *Reminder {
 	return x
 }
 
+// @property   recurrenceRules @abstract   An array of EKRecurrenceRules, or nil if none.
+//
 // WithRecurrenceRules sets the collection, converting the Go slice to an NSArray.
 func (x *Reminder) WithRecurrenceRules(items ...*raw.EKRecurrenceRule) *Reminder {
 	if len(items) == 0 {
@@ -139,6 +155,8 @@ func (x *Reminder) WithRecurrenceRules(items ...*raw.EKRecurrenceRule) *Reminder
 	return x
 }
 
+// @property   startDateComponents @abstract   The start date of the task, as date components. @discussion The use of date components allows the start date and its time zone to be represented in a single property. A nil time zone represents a floating date.  Setting a date component without a hour, minute and second component will set allDay to YES. If you set this property, the calendar must be set to NSCalendarIdentifierGregorian. An exception is raised otherwise.
+//
 // StartDateComponents calls the underlying StartDateComponents.
 func (x *Reminder) StartDateComponents() *foundation.NSDateComponents {
 	return x.inner.StartDateComponents()
@@ -149,6 +167,8 @@ func (x *Reminder) SetStartDateComponents(startDateComponents *foundation.NSDate
 	x.inner.SetStartDateComponents(startDateComponents)
 }
 
+// @property   dueDateComponents @abstract   The date by which this reminder should be completed. @discussion The use of date components allows the due date and its time zone to be represented in a single property. A nil time zone represents a floating date.  Setting a date component without a hour, minute and second component will set allDay to YES. If you set this property, the calendar must be set to NSCalendarIdentifierGregorian. An exception is raised otherwise. On iOS, if you set the due date for a reminder, you must also set a start date, otherwise you will receive an error (EKErrorNoStartDate) when attempting to save this reminder. This is not a requirement on OS X.
+//
 // DueDateComponents calls the underlying DueDateComponents.
 func (x *Reminder) DueDateComponents() *foundation.NSDateComponents {
 	return x.inner.DueDateComponents()
@@ -159,6 +179,8 @@ func (x *Reminder) SetDueDateComponents(dueDateComponents *foundation.NSDateComp
 	x.inner.SetDueDateComponents(dueDateComponents)
 }
 
+// @property   completed @abstract   Whether or not the reminder is completed. @discussion Setting it to YES will set the completed date to the current date. Setting it to NO will set the completed date to nil.
+//
 // IsCompleted calls the underlying IsCompleted.
 func (x *Reminder) IsCompleted() bool {
 	return x.inner.IsCompleted()
@@ -169,6 +191,8 @@ func (x *Reminder) SetCompleted(completed bool) {
 	x.inner.SetCompleted(completed)
 }
 
+// @property   completionDate @abstract   The date on which this reminder was completed.
+//
 // CompletionDate calls the underlying CompletionDate.
 func (x *Reminder) CompletionDate() *foundation.NSDate {
 	return x.inner.CompletionDate()
@@ -179,6 +203,8 @@ func (x *Reminder) SetCompletionDate(completionDate *foundation.NSDate) {
 	x.inner.SetCompletionDate(completionDate)
 }
 
+// @property   priority @abstract   The priority of the reminder. @discussion Priorities run from 1 (highest) to 9 (lowest).  A priority of 0 means no priority. Saving a reminder with any other priority will fail. Per RFC 5545, priorities of 1-4 are considered "high," a priority of 5 is "medium," and priorities of 6-9 are "low."
+//
 // Priority calls the underlying Priority.
 func (x *Reminder) Priority() uint {
 	return x.inner.Priority()

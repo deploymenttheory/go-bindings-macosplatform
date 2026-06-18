@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A source of entropy for the guest’s random number generator.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtioentropydeviceconfiguration
 type VZVirtioEntropyDeviceConfiguration struct {
 	VZEntropyDeviceConfiguration
@@ -29,6 +31,7 @@ func VZVirtioEntropyDeviceConfigurationFromID(id objc.ID) *VZVirtioEntropyDevice
 	return o
 }
 
+// Creates an entropy device configuration object.
 func (o *VZVirtioEntropyDeviceConfiguration) Init() *VZVirtioEntropyDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioEntropyDeviceConfigurationSelInit)
 	if _ret != 0 {

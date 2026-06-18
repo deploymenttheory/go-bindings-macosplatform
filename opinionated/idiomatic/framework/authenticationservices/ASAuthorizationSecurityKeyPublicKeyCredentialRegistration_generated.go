@@ -39,6 +39,8 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialRegistration() *Authorization
 	return &AuthorizationSecurityKeyPublicKeyCredentialRegistration{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationFromID(_id)}
 }
 
+// @abstract A list of transports that the authenticator is believed to support, if this could be determined.
+//
 // Transports returns the collection as a Go slice.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Transports() []*foundation.NSString {
 	arr := x.inner.Transports()

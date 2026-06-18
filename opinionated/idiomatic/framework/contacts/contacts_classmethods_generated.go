@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // LocalizedStringForKey calls the underlying CNContactLocalizedStringForKey.
@@ -123,8 +124,17 @@ func DescriptorForRequiredKeys() raw.CNKeyDescriptor {
 }
 
 // DataWithContactsError calls the underlying CNContactVCardSerializationDataWithContactsError.
-func DataWithContactsError(contacts *foundation.NSArray[*raw.CNContact]) (*foundation.NSData, error) {
-	return raw.CNContactVCardSerializationDataWithContactsError(contacts)
+func DataWithContactsError(contacts ...ContactProvider) (*foundation.NSData, error) {
+	_ptrs := make([]objc.ID, len(contacts))
+	for _i, _v := range contacts {
+		_ptrs[_i] = _v.asContact().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.CNContact]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.CNContact](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	return raw.CNContactVCardSerializationDataWithContactsError(_arg0)
 }
 
 // ContactsWithDataError calls the underlying CNContactVCardSerializationContactsWithDataError.

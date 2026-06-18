@@ -60,6 +60,8 @@ func (x *AssetResource) OriginalFilename() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The type of data associated with this asset resource (the data can be retrieved via PHAssetResourceManager)
+//
 // ContentType calls the underlying ContentType.
 func (x *AssetResource) ContentType() *uniformtypeidentifiers.UTType {
 	return x.inner.ContentType()

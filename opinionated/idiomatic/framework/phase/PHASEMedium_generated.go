@@ -29,6 +29,8 @@ func MediumFromID(id objc.ID) *Medium {
 	return &Medium{inner: raw.PHASEMediumFromID(id)}
 }
 
+// @method initWithEngine:preset @abstract Initialize a new medium from a preset.
+//
 // NewMediumWithEnginePreset creates a new [Medium].
 func NewMediumWithEnginePreset(engine *raw.PHASEEngine, preset PHASEMediumPreset) *Medium {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEMedium")), objc.RegisterName("alloc"))

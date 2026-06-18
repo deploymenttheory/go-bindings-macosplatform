@@ -9,12 +9,16 @@ import (
 	"strings"
 )
 
+// An integer that describes the disk image caching mode.
 type VZDiskImageCachingMode int64
 
 const (
+	// Allows the virtualization framework to automatically determine whether to enable data caching.
 	VZDiskImageCachingModeAutomatic VZDiskImageCachingMode = 0
-	VZDiskImageCachingModeUncached  VZDiskImageCachingMode = 1
-	VZDiskImageCachingModeCached    VZDiskImageCachingMode = 2
+	// Disables data caching.
+	VZDiskImageCachingModeUncached VZDiskImageCachingMode = 1
+	// Enables data caching.
+	VZDiskImageCachingModeCached VZDiskImageCachingMode = 2
 )
 
 func (e VZDiskImageCachingMode) String() string {
@@ -30,14 +34,15 @@ func (e VZDiskImageCachingMode) String() string {
 	}
 }
 
+// An integer that describes the disk image synchronization mode.
 type VZDiskImageSynchronizationMode int64
 
 const (
-	// The data is synchronized to the permanent storage holding the disk image. No synchronized data is lost on panic or loss of power.
+	// Synchronizes data to the permanent storage holding the disk image.
 	VZDiskImageSynchronizationModeFull VZDiskImageSynchronizationMode = 1
-	// Synchronize the data to the drive. This mode synchronizes the data with the drive, but does not ensure the data is moved from the disk's internal cache to permanent storage. This is a best-effort mode with the same guarantees as the fsync() system call.
+	// Synchronizes data to the drive using the system’s best-effort synchronization mode.
 	VZDiskImageSynchronizationModeFsync VZDiskImageSynchronizationMode = 2
-	// Do not synchronize the data with the permanent storage. This option does not guarantee data integrity if any error condition occurs such as disk full on the host, panic, power loss, etc. This mode is useful when a virtual machine is only run once to perform a task to completion or failure. In that case, the disk image cannot safely be reused on failure. Using this mode may result in improved performance since no synchronization with the underlying storage is necessary.
+	// Disables data synchronization with the permanent storage.
 	VZDiskImageSynchronizationModeNone VZDiskImageSynchronizationMode = 3
 )
 
@@ -54,12 +59,13 @@ func (e VZDiskImageSynchronizationMode) String() string {
 	}
 }
 
+// Values that describe the synchronization modes available to the guest OS.
 type VZDiskSynchronizationMode int64
 
 const (
-	// Perform all synchronization operations as requested by the guest OS. With VZDiskSynchronizationModeFull, "flush" and "barrier" commands from the guest result in their counterpart synchronization commands being sent to the disk implementation.
+	// Perform all synchronization operations as requested by the guest OS.
 	VZDiskSynchronizationModeFull VZDiskSynchronizationMode = 0
-	// Do not synchronize the data with the permanent storage. This option does not guarantee data integrity if any error condition occurs such as disk full on the host, panic, power loss, etc. This mode is useful when a virtual machine is only run once to perform a task to completion or failure. In case of failure, the state of blocks on disk and their order is undefined. Using this mode may result in improved performance since no synchronization with the underlying storage is necessary.
+	// Don’t synchronize the data with the permanent storage.
 	VZDiskSynchronizationModeNone VZDiskSynchronizationMode = 1
 )
 
@@ -74,6 +80,7 @@ func (e VZDiskSynchronizationMode) String() string {
 	}
 }
 
+// Constants that describe the options available when creating a new Extensible Firmware Interface (EFI) variable store.
 // Bitmask — values may be combined with |.
 type VZEFIVariableStoreInitializationOptions uint64
 
@@ -92,14 +99,15 @@ func (e VZEFIVariableStoreInitializationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that describe the availability and installation status of Rosetta.
 type VZLinuxRosettaAvailability int64
 
 const (
-	// Rosetta support for Linux binaries is not available on the host system.
+	// The current hardware or software configuration doesn’t support Rosetta.
 	VZLinuxRosettaAvailabilityNotSupported VZLinuxRosettaAvailability = 0
-	// Rosetta support for Linux binaries is not installed on the host system.
+	// Rosetta isn’t installed.
 	VZLinuxRosettaAvailabilityNotInstalled VZLinuxRosettaAvailability = 1
-	// Rosetta support for Linux is installed on the host system.
+	// Rosetta is available on the host system.
 	VZLinuxRosettaAvailabilityInstalled VZLinuxRosettaAvailability = 2
 )
 
@@ -116,6 +124,7 @@ func (e VZLinuxRosettaAvailability) String() string {
 	}
 }
 
+// Options you can set when creating new auxiliary storage.
 // Bitmask — values may be combined with |.
 type VZMacAuxiliaryStorageInitializationOptions uint64
 
@@ -135,6 +144,7 @@ func (e VZMacAuxiliaryStorageInitializationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The execution states of the VM.
 type VZVirtualMachineState int64
 
 const (

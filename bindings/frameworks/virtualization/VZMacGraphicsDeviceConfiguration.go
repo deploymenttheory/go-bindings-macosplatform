@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Configuration for a display attached to a Mac graphics device.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzmacgraphicsdeviceconfiguration
 type VZMacGraphicsDeviceConfiguration struct {
 	VZGraphicsDeviceConfiguration
@@ -32,6 +34,7 @@ func VZMacGraphicsDeviceConfigurationFromID(id objc.ID) *VZMacGraphicsDeviceConf
 	return o
 }
 
+// Creates a new Mac graphics device configuration.
 func (o *VZMacGraphicsDeviceConfiguration) Init() *VZMacGraphicsDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacGraphicsDeviceConfigurationSelInit)
 	if _ret != 0 {

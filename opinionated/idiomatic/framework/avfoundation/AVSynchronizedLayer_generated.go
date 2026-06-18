@@ -35,6 +35,8 @@ func NewSynchronizedLayer() *SynchronizedLayer {
 	return &SynchronizedLayer{inner: raw.AVSynchronizedLayerFromID(_id)}
 }
 
+// @property		playerItem @abstract		Indicates the instance of AVPlayerItem to which the timing of the AVSynchronizedLayer is synchronized. @discussion		Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+//
 // WithPlayerItem sets the playerItem property and returns the receiver for chaining.
 func (x *SynchronizedLayer) WithPlayerItem(playerItem *PlayerItem) *SynchronizedLayer {
 	x.inner.SetPlayerItem(playerItem.Unwrap())

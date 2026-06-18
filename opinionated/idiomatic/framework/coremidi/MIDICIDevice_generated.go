@@ -36,6 +36,8 @@ func NewCIDevice() *CIDevice {
 	return &CIDevice{inner: raw.MIDICIDeviceFromID(_id)}
 }
 
+// @property   deviceInfo @brief      The basic information describing the CI device.
+//
 // DeviceInfo calls the underlying DeviceInfo.
 func (x *CIDevice) DeviceInfo() *MIDI2DeviceInfo {
 	_r := x.inner.DeviceInfo()
@@ -45,46 +47,64 @@ func (x *CIDevice) DeviceInfo() *MIDI2DeviceInfo {
 	return &MIDI2DeviceInfo{inner: _r}
 }
 
+// @property	MUID @brief		The MIDI unique identifier (MUID) assigned to the CI device.
+//
 // MUID calls the underlying MUID.
 func (x *CIDevice) MUID() uint {
 	return x.inner.MUID()
 }
 
+// @property	supportsProtocolNegotiation @brief		MIDI-CI Protocol Negotiation capability.
+//
 // SupportsProtocolNegotiation calls the underlying SupportsProtocolNegotiation.
 func (x *CIDevice) SupportsProtocolNegotiation() bool {
 	return x.inner.SupportsProtocolNegotiation()
 }
 
+// @property	supportsProfileConfiguration @brief		MIDI-CI Profile Configuration capability.
+//
 // SupportsProfileConfiguration calls the underlying SupportsProfileConfiguration.
 func (x *CIDevice) SupportsProfileConfiguration() bool {
 	return x.inner.SupportsProfileConfiguration()
 }
 
+// @property	supportsPropertyExchange @brief		MIDI-CI Property Exchange capability.
+//
 // SupportsPropertyExchange calls the underlying SupportsPropertyExchange.
 func (x *CIDevice) SupportsPropertyExchange() bool {
 	return x.inner.SupportsPropertyExchange()
 }
 
+// @property	supportsProcessInquiry @brief		MIDI-CI Process Inquiry capability.
+//
 // SupportsProcessInquiry calls the underlying SupportsProcessInquiry.
 func (x *CIDevice) SupportsProcessInquiry() bool {
 	return x.inner.SupportsProcessInquiry()
 }
 
+// @property 	maxSysExSize @brief		The maximum receivable MIDI System Exclusive size for this CI device.
+//
 // MaxSysExSize calls the underlying MaxSysExSize.
 func (x *CIDevice) MaxSysExSize() uint {
 	return x.inner.MaxSysExSize()
 }
 
+// @property 	maxPropertyExchangeRequests @brief		The maximum number of simultaneous Property Exchange requests, if supported.
+//
 // MaxPropertyExchangeRequests calls the underlying MaxPropertyExchangeRequests.
 func (x *CIDevice) MaxPropertyExchangeRequests() uint {
 	return x.inner.MaxPropertyExchangeRequests()
 }
 
+// @property 	deviceType @brief		The type of MIDI-CI device.
+//
 // DeviceType calls the underlying DeviceType.
 func (x *CIDevice) DeviceType() MIDICIDeviceType {
 	return MIDICIDeviceType(x.inner.DeviceType())
 }
 
+// @property	profiles @brief		The MIDI-CI Profiles that are registered to the  Function Block.
+//
 // Profiles returns the collection as a Go slice.
 func (x *CIDevice) Profiles() []*UMPCIProfile {
 	arr := x.inner.Profiles()

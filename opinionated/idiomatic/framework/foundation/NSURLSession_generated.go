@@ -150,6 +150,8 @@ func (x *URLSession) UploadTaskWithRequestFromData(request *raw.NSURLRequest, bo
 	return &URLSessionUploadTask{inner: _r}
 }
 
+// Creates an upload task from a resume data blob. Requires the server to support the latest resumable uploads Internet-Draft from the HTTP Working Group, found at https://datatracker.ietf.org/doc/draft-ietf-httpbis-resumable-upload/ If resuming from an upload file, the file must still exist and be unmodified. If the upload cannot be successfully resumed, URLSession:task:didCompleteWithError: will be called. - Parameter resumeData: Resume data blob from an incomplete upload, such as data returned by the cancelByProducingResumeData: method. - Returns: A new session upload task, or nil if the resumeData is invalid.
+//
 // UploadTaskWithResumeData calls the underlying UploadTaskWithResumeData.
 func (x *URLSession) UploadTaskWithResumeData(resumeData *raw.NSData) *URLSessionUploadTask {
 	_r := x.inner.UploadTaskWithResumeData(resumeData)
@@ -223,8 +225,17 @@ func (x *URLSession) WebSocketTaskWithURL(url string) *URLSessionWebSocketTask {
 }
 
 // WebSocketTaskWithURLProtocols calls the underlying WebSocketTaskWithURLProtocols.
-func (x *URLSession) WebSocketTaskWithURLProtocols(url string, protocols *raw.NSArray[*raw.NSString]) *URLSessionWebSocketTask {
-	_r := x.inner.WebSocketTaskWithURLProtocols(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), protocols)
+func (x *URLSession) WebSocketTaskWithURLProtocols(url string, protocols ...StringProvider) *URLSessionWebSocketTask {
+	_ptrs := make([]objc.ID, len(protocols))
+	for _i, _v := range protocols {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg1 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg1 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	_r := x.inner.WebSocketTaskWithURLProtocols(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), _arg1)
 	if _r == nil {
 		return nil
 	}
@@ -313,6 +324,8 @@ func (x *URLSession) UploadTaskWithRequestFromDataCompletionHandler(request *raw
 	return &URLSessionUploadTask{inner: _r}
 }
 
+// Creates a URLSessionUploadTask from a resume data blob. If resuming from an upload file, the file must still exist and be unmodified. - Parameter resumeData: Resume data blob from an incomplete upload, such as data returned by the cancelByProducingResumeData: method. - Parameter completionHandler: The completion handler to call when the load request is complete. - Returns: A new session upload task, or nil if the resumeData is invalid.
+//
 // UploadTaskWithResumeDataCompletionHandler calls the underlying UploadTaskWithResumeDataCompletionHandler.
 func (x *URLSession) UploadTaskWithResumeDataCompletionHandler(resumeData *raw.NSData, completionHandler func(*raw.NSData, *raw.NSURLResponse, unsafe.Pointer)) *URLSessionUploadTask {
 	_r := x.inner.UploadTaskWithResumeDataCompletionHandler(resumeData, completionHandler)
@@ -374,7 +387,7 @@ type URLSessionable interface {
 	StreamTaskWithHostNamePort(hostname string, port int) *URLSessionStreamTask
 	StreamTaskWithNetService(service *raw.NSNetService) *URLSessionStreamTask
 	WebSocketTaskWithURL(url string) *URLSessionWebSocketTask
-	WebSocketTaskWithURLProtocols(url string, protocols *raw.NSArray[*raw.NSString]) *URLSessionWebSocketTask
+	WebSocketTaskWithURLProtocols(url string, protocols ...StringProvider) *URLSessionWebSocketTask
 	WebSocketTaskWithRequest(request *raw.NSURLRequest) *URLSessionWebSocketTask
 	DelegateQueue() *OperationQueue
 	Delegate() raw.NSURLSessionDelegate

@@ -30,6 +30,8 @@ func URLDownloadFromID(id objc.ID) *URLDownload {
 	return &URLDownload{inner: raw.NSURLDownloadFromID(id)}
 }
 
+// @method initWithRequest:delegate: @abstract Initializes a NSURLDownload object and starts the download. @param request The request to download. Must not be nil. @param delegate The delegate of the download. @result An initialized NSURLDownload object.
+//
 // NewURLDownloadWithRequestDelegate creates a new [URLDownload].
 func NewURLDownloadWithRequestDelegate(request *raw.NSURLRequest, delegate raw.NSURLDownloadDelegate) *URLDownload {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLDownload")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewURLDownloadWithRequestDelegate(request *raw.NSURLRequest, delegate raw.N
 	return &URLDownload{inner: raw.NSURLDownloadFromID(_id)}
 }
 
+// @method initWithResumeData:delegate:path: @abstract Initializes a NSURLDownload object for resuming a previous download. @param resumeData The resume data from the previous download. @param delegate The delegate of the download. @param path The path of the incomplete downloaded file. @result An initialized NSURLDownload object.
+//
 // NewURLDownloadWithResumeDataDelegatePath creates a new [URLDownload].
 func NewURLDownloadWithResumeDataDelegatePath(resumeData *raw.NSData, delegate raw.NSURLDownloadDelegate, path string) *URLDownload {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLDownload")), objc.RegisterName("alloc"))
@@ -44,6 +48,8 @@ func NewURLDownloadWithResumeDataDelegatePath(resumeData *raw.NSData, delegate r
 	return &URLDownload{inner: raw.NSURLDownloadFromID(_id)}
 }
 
+// @abstract Sets whether or not the downloaded file should be deleted upon failure. 1    @description To allow the download to be resumed in case the download ends prematurely, deletesFileUponFailure must be set to NO as soon as possible to prevent the downloaded file from being deleted. deletesFileUponFailure is YES by default.
+//
 // WithDeletesFileUponFailure sets the deletesFileUponFailure property and returns the receiver for chaining.
 func (x *URLDownload) WithDeletesFileUponFailure(deletesFileUponFailure bool) *URLDownload {
 	x.inner.SetDeletesFileUponFailure(deletesFileUponFailure)
@@ -56,16 +62,22 @@ func (x *URLDownload) WithScriptingProperties(scriptingProperties *raw.NSDiction
 	return x
 }
 
+// @method cancel @abstract Cancels the download and deletes the downloaded file.
+//
 // Cancel calls the underlying Cancel.
 func (x *URLDownload) Cancel() {
 	x.inner.Cancel()
 }
 
+// @method setDestination:allowOverwrite: @abstract Sets the destination path of the downloaded file. @param path The destination path of the downloaded file. @param allowOverwrite Allows a file of the same path to be overwritten. @discussion This method can be called after the download is created or in response to the decideDestinationWithSuggestedFilename: delegate method. It should only be called once. If NO is passed for allowOverwrite and a file of the same path exists, a number will be appended to the filename to prevent the overwrite. Because of this, use the path passed with didCreateDestination: to determine the actual path of the downloaded file.
+//
 // SetDestinationAllowOverwrite calls the underlying SetDestinationAllowOverwrite.
 func (x *URLDownload) SetDestinationAllowOverwrite(path string, allowOverwrite bool) {
 	x.inner.SetDestinationAllowOverwrite(foundation.NSStringStringWithUTF8String(path), allowOverwrite)
 }
 
+// @abstract Returns the request of the download. @result The request of the download.
+//
 // Request calls the underlying Request.
 func (x *URLDownload) Request() *URLRequest {
 	_r := x.inner.Request()
@@ -75,6 +87,8 @@ func (x *URLDownload) Request() *URLRequest {
 	return &URLRequest{inner: _r}
 }
 
+// @abstract Returns the resume data of a download that is incomplete. @result The resume data. @description resumeData returns the resume data of a download that is incomplete. This data represents the necessary state information that NSURLDownload needs to resume a download. The resume data can later be used when initializing a download with initWithResumeData:delegate:path:. Non-nil is returned if resuming the download seems possible. Non-nil is returned if the download was cancelled or ended in error after some but not all data has been received. The protocol of the download as well as the server must support resuming for non-nil to be returned. In order to later resume a download, be sure to call setDeletesFileUponFailure: with NO.
+//
 // ResumeData calls the underlying ResumeData.
 func (x *URLDownload) ResumeData() *Data {
 	_r := x.inner.ResumeData()
@@ -84,6 +98,8 @@ func (x *URLDownload) ResumeData() *Data {
 	return &Data{inner: _r}
 }
 
+// @abstract Sets whether or not the downloaded file should be deleted upon failure. 1    @description To allow the download to be resumed in case the download ends prematurely, deletesFileUponFailure must be set to NO as soon as possible to prevent the downloaded file from being deleted. deletesFileUponFailure is YES by default.
+//
 // DeletesFileUponFailure calls the underlying DeletesFileUponFailure.
 func (x *URLDownload) DeletesFileUponFailure() bool {
 	return x.inner.DeletesFileUponFailure()

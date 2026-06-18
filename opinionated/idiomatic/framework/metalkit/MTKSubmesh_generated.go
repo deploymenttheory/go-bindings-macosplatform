@@ -38,22 +38,30 @@ func NewSubmesh() *Submesh {
 	return &Submesh{inner: raw.MTKSubmeshFromID(_id)}
 }
 
+// @property name @abstract Name from the original MDLSubmesh object. @discussion Although not directly used by this object, the application may use this to identify the submesh in the renderer/scene/world.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Submesh) WithName(name string) *Submesh {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property primitiveType @abstract Metal primitive type with which to draw this object. @discussion Value to use for primitiveType parameter in a [MTLRenderCommandEncoder drawIndexedPrimitives] call.
+//
 // PrimitiveType calls the underlying PrimitiveType.
 func (x *Submesh) PrimitiveType() metal.MTLPrimitiveType {
 	return x.inner.PrimitiveType()
 }
 
+// @property indexType @abstract Metal index type of data in indexBuffer. @discussion Value to use for indexType parameter in a [MTLRenderCommandEncoder drawIndexedPrimitives] call.
+//
 // IndexType calls the underlying IndexType.
 func (x *Submesh) IndexType() metal.MTLIndexType {
 	return x.inner.IndexType()
 }
 
+// @property indexBuffer @abstract IndexBuffer (including indexCount) to render the object. @discussion The MTLBuffer to use for indexBuffer parameter in a [MTLRenderCommandEncoder drawIndexedPrimitives] call.
+//
 // IndexBuffer calls the underlying IndexBuffer.
 func (x *Submesh) IndexBuffer() *MeshBuffer {
 	_r := x.inner.IndexBuffer()
@@ -63,11 +71,15 @@ func (x *Submesh) IndexBuffer() *MeshBuffer {
 	return &MeshBuffer{inner: _r}
 }
 
+// @property indexCount @abstract Number of indicies in indexBuffer. @discussion Value to use for indexCount parameter in a [MTLRenderCommandEncoder drawIndexedPrimitives] call.
+//
 // IndexCount calls the underlying IndexCount.
 func (x *Submesh) IndexCount() uint {
 	return x.inner.IndexCount()
 }
 
+// @property mesh @abstract Parent MTKMesh object containing vertex data of this object. @discussion The buffer of this parent mesh should be set in the encoder before a drawIndexedPrimitives call is made.
+//
 // Mesh calls the underlying Mesh.
 func (x *Submesh) Mesh() *Mesh {
 	_r := x.inner.Mesh()
@@ -77,6 +89,8 @@ func (x *Submesh) Mesh() *Mesh {
 	return &Mesh{inner: _r}
 }
 
+// @property name @abstract Name from the original MDLSubmesh object. @discussion Although not directly used by this object, the application may use this to identify the submesh in the renderer/scene/world.
+//
 // Name calls the underlying Name.
 func (x *Submesh) Name() string {
 	_r := x.inner.Name()

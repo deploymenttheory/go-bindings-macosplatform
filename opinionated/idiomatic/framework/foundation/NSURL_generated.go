@@ -88,6 +88,8 @@ func NewURLWithStringRelativeToURL(uRLString string, baseURL string) *URL {
 	return &URL{inner: raw.NSURLFromID(_id)}
 }
 
+// Initializes an `NSURL` with a URL string and the option to add (or skip) IDNA- and percent-encoding of invalid characters. If `encodingInvalidCharacters` is false, and the URL string is invalid according to RFC 3986, `nil` is returned. If `encodingInvalidCharacters` is true, `NSURL` will try to encode the string to create a valid URL. If the URL string is still invalid after encoding, `nil` is returned. - Parameter URLString: The URL string. - Parameter encodingInvalidCharacters: True if `NSURL` should try to encode an invalid URL string, false otherwise. - Returns: An `NSURL` instance for a valid URL, or `nil` if the URL is invalid.
+//
 // NewURLWithStringEncodingInvalidCharacters creates a new [URL].
 func NewURLWithStringEncodingInvalidCharacters(uRLString string, encodingInvalidCharacters bool) *URL {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
@@ -151,8 +153,17 @@ func (x *URL) GetResourceValueForKeyError(value **raw.ObjcObject, key *raw.NSStr
 }
 
 // ResourceValuesForKeysError calls the underlying ResourceValuesForKeysError.
-func (x *URL) ResourceValuesForKeysError(keys *raw.NSArray[*raw.NSString]) (*raw.NSDictionary[*raw.NSString, objc.ID], error) {
-	return x.inner.ResourceValuesForKeysError(keys)
+func (x *URL) ResourceValuesForKeysError(keys ...StringProvider) (*raw.NSDictionary[*raw.NSString, objc.ID], error) {
+	_ptrs := make([]objc.ID, len(keys))
+	for _i, _v := range keys {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	return x.inner.ResourceValuesForKeysError(_arg0)
 }
 
 // SetResourceValueForKeyError calls the underlying SetResourceValueForKeyError.
@@ -385,8 +396,17 @@ func (x *URL) GetPromisedItemResourceValueForKeyError(value **raw.ObjcObject, ke
 }
 
 // PromisedItemResourceValuesForKeysError calls the underlying PromisedItemResourceValuesForKeysError.
-func (x *URL) PromisedItemResourceValuesForKeysError(keys *raw.NSArray[*raw.NSString]) (*raw.NSDictionary[*raw.NSString, objc.ID], error) {
-	return x.inner.PromisedItemResourceValuesForKeysError(keys)
+func (x *URL) PromisedItemResourceValuesForKeysError(keys ...StringProvider) (*raw.NSDictionary[*raw.NSString, objc.ID], error) {
+	_ptrs := make([]objc.ID, len(keys))
+	for _i, _v := range keys {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	return x.inner.PromisedItemResourceValuesForKeysError(_arg0)
 }
 
 // CheckPromisedItemIsReachableAndReturnError returns any validation error.
@@ -541,7 +561,7 @@ type URLable interface {
 	IsFileReferenceURL() bool
 	FileReferenceURL() *URL
 	GetResourceValueForKeyError(value **raw.ObjcObject, key *raw.NSString) (bool, error)
-	ResourceValuesForKeysError(keys *raw.NSArray[*raw.NSString]) (*raw.NSDictionary[*raw.NSString, objc.ID], error)
+	ResourceValuesForKeysError(keys ...StringProvider) (*raw.NSDictionary[*raw.NSString, objc.ID], error)
 	SetResourceValueForKeyError(value objc.ID, key *raw.NSString) (bool, error)
 	SetResourceValuesError(keyedValues *raw.NSDictionary[*raw.NSString, objc.ID]) (bool, error)
 	RemoveCachedResourceValueForKey(key *raw.NSString)
@@ -572,7 +592,7 @@ type URLable interface {
 	StandardizedURL() *URL
 	FilePathURL() *URL
 	GetPromisedItemResourceValueForKeyError(value **raw.ObjcObject, key *raw.NSString) (bool, error)
-	PromisedItemResourceValuesForKeysError(keys *raw.NSArray[*raw.NSString]) (*raw.NSDictionary[*raw.NSString, objc.ID], error)
+	PromisedItemResourceValuesForKeysError(keys ...StringProvider) (*raw.NSDictionary[*raw.NSString, objc.ID], error)
 	CheckPromisedItemIsReachableAndReturnError() error
 	URLByAppendingPathComponent(pathComponent string) *URL
 	URLByAppendingPathComponentIsDirectory(pathComponent string, isDirectory bool) *URL

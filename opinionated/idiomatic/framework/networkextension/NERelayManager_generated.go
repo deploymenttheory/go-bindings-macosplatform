@@ -39,30 +39,40 @@ func NewNERelayManager() *NERelayManager {
 	return &NERelayManager{inner: raw.NERelayManagerFromID(_id)}
 }
 
+// @property localizedDescription @discussion A string containing a description of the relay.
+//
 // WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
 func (x *NERelayManager) WithLocalizedDescription(localizedDescription string) *NERelayManager {
 	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
 	return x
 }
 
+// @property enabled @discussion Toggles the enabled status of the relay.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *NERelayManager) WithEnabled(enabled bool) *NERelayManager {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// @property uiToggleEnabled @discussion Determines if the user will have the ability to enable and disable the relay
+//
 // WithUIToggleEnabled sets the uIToggleEnabled property and returns the receiver for chaining.
 func (x *NERelayManager) WithUIToggleEnabled(uIToggleEnabled bool) *NERelayManager {
 	x.inner.SetUIToggleEnabled(uIToggleEnabled)
 	return x
 }
 
+// @property allowDNSFailover @discussion Determines if DNS queries that fail over relay can fallback to default DNS
+//
 // WithAllowDNSFailover sets the allowDNSFailover property and returns the receiver for chaining.
 func (x *NERelayManager) WithAllowDNSFailover(allowDNSFailover bool) *NERelayManager {
 	x.inner.SetAllowDNSFailover(allowDNSFailover)
 	return x
 }
 
+// @property relays @discussion An array of relay configurations describing one or more relay hops.
+//
 // WithRelays sets the collection, converting the Go slice to an NSArray.
 func (x *NERelayManager) WithRelays(items ...*raw.NERelay) *NERelayManager {
 	if len(items) == 0 {
@@ -81,6 +91,8 @@ func (x *NERelayManager) WithRelays(items ...*raw.NERelay) *NERelayManager {
 	return x
 }
 
+// @property matchDomains @discussion An array of strings containing domain names. If this property is non-nil, the relay will be used to access hosts within the specified domains. If this and the match FQDNs property is nil, the relay will be used for all domains.
+//
 // WithMatchDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NERelayManager) WithMatchDomains(items ...*foundation.NSString) *NERelayManager {
 	if len(items) == 0 {
@@ -99,6 +111,8 @@ func (x *NERelayManager) WithMatchDomains(items ...*foundation.NSString) *NERela
 	return x
 }
 
+// @property matchFQDNs @discussion An array of strings containing Fully Qualified Domain Names (FQDNs). If this property is non-nil, the relay will be used to access the specified hosts.  If this and the matchDomains property is nil, the relay will be used for all domains.
+//
 // WithMatchFQDNs sets the collection, converting the Go slice to an NSArray.
 func (x *NERelayManager) WithMatchFQDNs(items ...*foundation.NSString) *NERelayManager {
 	if len(items) == 0 {
@@ -117,6 +131,8 @@ func (x *NERelayManager) WithMatchFQDNs(items ...*foundation.NSString) *NERelayM
 	return x
 }
 
+// @property excludedDomains @discussion An array of strings containing domain names. If the destination host name of a connection shares a suffix with one of these strings then the relay will not be used.
+//
 // WithExcludedDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NERelayManager) WithExcludedDomains(items ...*foundation.NSString) *NERelayManager {
 	if len(items) == 0 {
@@ -135,6 +151,8 @@ func (x *NERelayManager) WithExcludedDomains(items ...*foundation.NSString) *NER
 	return x
 }
 
+// @property excludedFQDNs @discussion An array of strings containing Fully Qualified Domain Names (FQDNs). If the destination host matches one of these strings then the relay will not be used.  An excluded FQDN takes priority over the matchDomain property.  This means the relay will not be used if the hostname matches an FQDN in this array even if the matchDomains contains a domain that would have been considered a match.
+//
 // WithExcludedFQDNs sets the collection, converting the Go slice to an NSArray.
 func (x *NERelayManager) WithExcludedFQDNs(items ...*foundation.NSString) *NERelayManager {
 	if len(items) == 0 {
@@ -153,6 +171,8 @@ func (x *NERelayManager) WithExcludedFQDNs(items ...*foundation.NSString) *NERel
 	return x
 }
 
+// @property onDemandRules @discussion An array of NEOnDemandRule objects. If nil, the associated relay will always apply. If non-nil, the array describes the networks on which the relay should be used or not.
+//
 // WithOnDemandRules sets the collection, converting the Go slice to an NSArray.
 func (x *NERelayManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NERelayManager {
 	if len(items) == 0 {
@@ -171,6 +191,8 @@ func (x *NERelayManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NER
 	return x
 }
 
+// @method loadFromPreferencesWithCompletionHandler: @discussion This function loads the current relay configuration from the caller's relay preferences. @param completionHandler A block that will be called when the load operation is completed. The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
+//
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NERelayManager) LoadFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -189,6 +211,8 @@ func (x *NERelayManager) LoadFromPreferences(ctx context.Context) error {
 	}
 }
 
+// @method removeFromPreferencesWithCompletionHandler: @discussion This function removes the relay configuration from the caller's relay preferences. If the relay is enabled, the relay becomes disabled. @param completionHandler A block that will be called when the remove operation is completed. The NSError passed to this block will be nil if the remove operation succeeded, non-nil otherwise.
+//
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NERelayManager) RemoveFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -207,6 +231,8 @@ func (x *NERelayManager) RemoveFromPreferences(ctx context.Context) error {
 	}
 }
 
+// @method saveToPreferencesWithCompletionHandler: @discussion This function saves the relay configuration in the caller's relay preferences. If the relay are enabled, they will become active. @param completionHandler A block that will be called when the save operation is completed. The NSError passed to this block will be nil if the save operation succeeded, non-nil otherwise.
+//
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NERelayManager) SaveToPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -225,11 +251,15 @@ func (x *NERelayManager) SaveToPreferences(ctx context.Context) error {
 	}
 }
 
+// @method getLastClientErrors @discussion This function will get errors that the client detected while using this relay configuration within the specified time period.  Errors will be from the NERelayClientErrorDomain and the NERelayManagerClientErrorNone value will be set for successful connections. @param seconds A NSTimeInterval that specifies how many seconds to report errors for.  The maximum supported value is 24 hours and any larger values will be automatically reduced to 24 hours. @param completionHandler A block that will be called when once the errors have been collected. The NSArray will contain a list of NERelayManagerClientError values detected within the last number of seconds as specified by the "seconds" parameter.  The values will be ordered from the error most recently detected to the oldest.  The error value of NERelayManagerClientErrorNone indicates the last successful use of the relay without error.  The NSArray will be empty if there are no values detected within the specified time period or nil if there was a problem in retrieving the errors.
+//
 // GetLastClientErrorsCompletionHandler calls the underlying GetLastClientErrorsCompletionHandler.
 func (x *NERelayManager) GetLastClientErrorsCompletionHandler(seconds float64, completionHandler objc.Block) {
 	x.inner.GetLastClientErrorsCompletionHandler(seconds, completionHandler)
 }
 
+// @property localizedDescription @discussion A string containing a description of the relay.
+//
 // LocalizedDescription calls the underlying LocalizedDescription.
 func (x *NERelayManager) LocalizedDescription() string {
 	_r := x.inner.LocalizedDescription()
@@ -244,6 +274,8 @@ func (x *NERelayManager) SetLocalizedDescription(localizedDescription string) {
 	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
 }
 
+// @property enabled @discussion Toggles the enabled status of the relay.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *NERelayManager) IsEnabled() bool {
 	return x.inner.IsEnabled()
@@ -254,6 +286,8 @@ func (x *NERelayManager) SetEnabled(enabled bool) {
 	x.inner.SetEnabled(enabled)
 }
 
+// @property uiToggleEnabled @discussion Determines if the user will have the ability to enable and disable the relay
+//
 // IsUIToggleEnabled calls the underlying IsUIToggleEnabled.
 func (x *NERelayManager) IsUIToggleEnabled() bool {
 	return x.inner.IsUIToggleEnabled()
@@ -264,6 +298,8 @@ func (x *NERelayManager) SetUIToggleEnabled(uIToggleEnabled bool) {
 	x.inner.SetUIToggleEnabled(uIToggleEnabled)
 }
 
+// @property allowDNSFailover @discussion Determines if DNS queries that fail over relay can fallback to default DNS
+//
 // IsDNSFailoverAllowed calls the underlying IsDNSFailoverAllowed.
 func (x *NERelayManager) IsDNSFailoverAllowed() bool {
 	return x.inner.IsDNSFailoverAllowed()
@@ -274,6 +310,8 @@ func (x *NERelayManager) SetAllowDNSFailover(allowDNSFailover bool) {
 	x.inner.SetAllowDNSFailover(allowDNSFailover)
 }
 
+// @property relays @discussion An array of relay configurations describing one or more relay hops.
+//
 // Relays returns the collection as a Go slice.
 func (x *NERelayManager) Relays() []*NERelay {
 	arr := x.inner.Relays()
@@ -290,6 +328,8 @@ func (x *NERelayManager) SetRelays(relays *foundation.NSArray[*raw.NERelay]) {
 	x.inner.SetRelays(relays)
 }
 
+// @property matchDomains @discussion An array of strings containing domain names. If this property is non-nil, the relay will be used to access hosts within the specified domains. If this and the match FQDNs property is nil, the relay will be used for all domains.
+//
 // MatchDomains returns the collection as a Go slice.
 func (x *NERelayManager) MatchDomains() []string {
 	arr := x.inner.MatchDomains()
@@ -306,6 +346,8 @@ func (x *NERelayManager) SetMatchDomains(matchDomains *foundation.NSArray[*found
 	x.inner.SetMatchDomains(matchDomains)
 }
 
+// @property matchFQDNs @discussion An array of strings containing Fully Qualified Domain Names (FQDNs). If this property is non-nil, the relay will be used to access the specified hosts.  If this and the matchDomains property is nil, the relay will be used for all domains.
+//
 // MatchFQDNs returns the collection as a Go slice.
 func (x *NERelayManager) MatchFQDNs() []string {
 	arr := x.inner.MatchFQDNs()
@@ -322,6 +364,8 @@ func (x *NERelayManager) SetMatchFQDNs(matchFQDNs *foundation.NSArray[*foundatio
 	x.inner.SetMatchFQDNs(matchFQDNs)
 }
 
+// @property excludedDomains @discussion An array of strings containing domain names. If the destination host name of a connection shares a suffix with one of these strings then the relay will not be used.
+//
 // ExcludedDomains returns the collection as a Go slice.
 func (x *NERelayManager) ExcludedDomains() []string {
 	arr := x.inner.ExcludedDomains()
@@ -338,6 +382,8 @@ func (x *NERelayManager) SetExcludedDomains(excludedDomains *foundation.NSArray[
 	x.inner.SetExcludedDomains(excludedDomains)
 }
 
+// @property excludedFQDNs @discussion An array of strings containing Fully Qualified Domain Names (FQDNs). If the destination host matches one of these strings then the relay will not be used.  An excluded FQDN takes priority over the matchDomain property.  This means the relay will not be used if the hostname matches an FQDN in this array even if the matchDomains contains a domain that would have been considered a match.
+//
 // ExcludedFQDNs returns the collection as a Go slice.
 func (x *NERelayManager) ExcludedFQDNs() []string {
 	arr := x.inner.ExcludedFQDNs()
@@ -354,6 +400,8 @@ func (x *NERelayManager) SetExcludedFQDNs(excludedFQDNs *foundation.NSArray[*fou
 	x.inner.SetExcludedFQDNs(excludedFQDNs)
 }
 
+// @property onDemandRules @discussion An array of NEOnDemandRule objects. If nil, the associated relay will always apply. If non-nil, the array describes the networks on which the relay should be used or not.
+//
 // OnDemandRules returns the collection as a Go slice.
 func (x *NERelayManager) OnDemandRules() []*NEOnDemandRule {
 	arr := x.inner.OnDemandRules()
@@ -366,8 +414,17 @@ func (x *NERelayManager) OnDemandRules() []*NEOnDemandRule {
 }
 
 // SetOnDemandRules calls the underlying SetOnDemandRules.
-func (x *NERelayManager) SetOnDemandRules(onDemandRules *foundation.NSArray[*raw.NEOnDemandRule]) {
-	x.inner.SetOnDemandRules(onDemandRules)
+func (x *NERelayManager) SetOnDemandRules(onDemandRules ...NEOnDemandRuleProvider) {
+	_ptrs := make([]objc.ID, len(onDemandRules))
+	for _i, _v := range onDemandRules {
+		_ptrs[_i] = _v.asNEOnDemandRule().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NEOnDemandRule]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NEOnDemandRule](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetOnDemandRules(_arg0)
 }
 
 // NERelayManagerable is the interface implemented by [NERelayManager], for mocking and DI.
@@ -406,7 +463,7 @@ type NERelayManagerable interface {
 	ExcludedFQDNs() []string
 	SetExcludedFQDNs(excludedFQDNs *foundation.NSArray[*foundation.NSString])
 	OnDemandRules() []*NEOnDemandRule
-	SetOnDemandRules(onDemandRules *foundation.NSArray[*raw.NEOnDemandRule])
+	SetOnDemandRules(onDemandRules ...NEOnDemandRuleProvider)
 }
 
 var _ NERelayManagerable = (*NERelayManager)(nil)

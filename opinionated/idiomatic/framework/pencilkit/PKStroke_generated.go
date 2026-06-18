@@ -46,6 +46,8 @@ func NewStrokeWithInkStrokePathTransformMaskRandomSeed(ink *raw.PKInk, strokePat
 	return &Stroke{inner: raw.PKStrokeFromID(_id)}
 }
 
+// The ink used to render this stroke.
+//
 // Ink calls the underlying Ink.
 func (x *Stroke) Ink() *Ink {
 	_r := x.inner.Ink()
@@ -55,11 +57,15 @@ func (x *Stroke) Ink() *Ink {
 	return &Ink{inner: _r}
 }
 
+// The affine transform of the stroke when rendered.
+//
 // Transform calls the underlying Transform.
 func (x *Stroke) Transform() corefoundation.CGAffineTransform {
 	return x.inner.Transform()
 }
 
+// The B-spline path that describes this stroke.
+//
 // Path calls the underlying Path.
 func (x *Stroke) Path() *StrokePath {
 	_r := x.inner.Path()
@@ -74,11 +80,15 @@ func (x *Stroke) Mask() *appkit.NSBezierPath {
 	return x.inner.Mask()
 }
 
+// The bounds of the rendered stroke. This includes the width & ink of the stroke after the transform is applied.
+//
 // RenderBounds calls the underlying RenderBounds.
 func (x *Stroke) RenderBounds() corefoundation.CGRect {
 	return x.inner.RenderBounds()
 }
 
+// These are the parametric parameter ranges of points in `strokePath` that intersect the stroke's mask.
+//
 // MaskedPathRanges returns the collection as a Go slice.
 func (x *Stroke) MaskedPathRanges() []*FloatRange {
 	arr := x.inner.MaskedPathRanges()
@@ -90,11 +100,15 @@ func (x *Stroke) MaskedPathRanges() []*FloatRange {
 	})
 }
 
+// The random seed for drawing strokes that use randomized effects.
+//
 // RandomSeed calls the underlying RandomSeed.
 func (x *Stroke) RandomSeed() uint32 {
 	return x.inner.RandomSeed()
 }
 
+// The PencilKit version required to use this stroke.
+//
 // RequiredContentVersion calls the underlying RequiredContentVersion.
 func (x *Stroke) RequiredContentVersion() PKContentVersion {
 	return PKContentVersion(x.inner.RequiredContentVersion())

@@ -39,6 +39,8 @@ func NewSecret() *Secret {
 	return &Secret{inner: raw.LASecretFromID(_id)}
 }
 
+// @brief Fetch stored data if any @param handler Completion handler invoked with a generic secret stored along with the right or an error if no secret is found or the fetch operation fails.
+//
 // LoadDataWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Secret) LoadDataWithCompletion(ctx context.Context) (*foundation.NSData, error) {
 	type _result struct {

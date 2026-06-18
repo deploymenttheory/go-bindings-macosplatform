@@ -36,6 +36,8 @@ func NewCaptureDeviceInputSource() *CaptureDeviceInputSource {
 	return &CaptureDeviceInputSource{inner: raw.AVCaptureDeviceInputSourceFromID(_id)}
 }
 
+// @property inputSourceID @abstract An ID unique among the inputSources exposed by a given AVCaptureDevice. @discussion An AVCaptureDevice's inputSources array must contain AVCaptureInputSource objects with unique inputSourceIDs.
+//
 // InputSourceID calls the underlying InputSourceID.
 func (x *CaptureDeviceInputSource) InputSourceID() string {
 	_r := x.inner.InputSourceID()
@@ -45,6 +47,8 @@ func (x *CaptureDeviceInputSource) InputSourceID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property localizedName @abstract A localized human-readable name for the receiver. @discussion This property can be used for displaying the name of the capture device input source in a user interface.
+//
 // LocalizedName calls the underlying LocalizedName.
 func (x *CaptureDeviceInputSource) LocalizedName() string {
 	_r := x.inner.LocalizedName()

@@ -33,6 +33,8 @@ func TemporalNoiseFilterConfigurationFromID(id objc.ID) *TemporalNoiseFilterConf
 	return &TemporalNoiseFilterConfiguration{inner: raw.VTTemporalNoiseFilterConfigurationFromID(id)}
 }
 
+// Creates a new temporal noise-processor configuration. Returns nil if frameWidth, frameHeight, or sourcePixelFormat is unsupported. - Parameters: - frameWidth: Width of source frame in pixels. - frameHeight: Height of source frame in pixels.
+//
 // NewTemporalNoiseFilterConfigurationWithFrameWidthFrameHeightSourcePixelFormat creates a new [TemporalNoiseFilterConfiguration].
 func NewTemporalNoiseFilterConfigurationWithFrameWidthFrameHeightSourcePixelFormat(frameWidth int, frameHeight int, sourcePixelFormat uint) *TemporalNoiseFilterConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTTemporalNoiseFilterConfiguration")), objc.RegisterName("alloc"))
@@ -40,16 +42,22 @@ func NewTemporalNoiseFilterConfigurationWithFrameWidthFrameHeightSourcePixelForm
 	return &TemporalNoiseFilterConfiguration{inner: raw.VTTemporalNoiseFilterConfigurationFromID(_id)}
 }
 
+// Width of source frame in pixels.
+//
 // FrameWidth calls the underlying FrameWidth.
 func (x *TemporalNoiseFilterConfiguration) FrameWidth() int {
 	return x.inner.FrameWidth()
 }
 
+// Height of source frame in pixels.
+//
 // FrameHeight calls the underlying FrameHeight.
 func (x *TemporalNoiseFilterConfiguration) FrameHeight() int {
 	return x.inner.FrameHeight()
 }
 
+// Supported pixel formats for source frames for current configuration.
+//
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (x *TemporalNoiseFilterConfiguration) FrameSupportedPixelFormats() []*foundation.NSNumber {
 	arr := x.inner.FrameSupportedPixelFormats()
@@ -61,21 +69,29 @@ func (x *TemporalNoiseFilterConfiguration) FrameSupportedPixelFormats() []*found
 	})
 }
 
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+//
 // SourcePixelBufferAttributes calls the underlying SourcePixelBufferAttributes.
 func (x *TemporalNoiseFilterConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.SourcePixelBufferAttributes()
 }
 
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+//
 // DestinationPixelBufferAttributes calls the underlying DestinationPixelBufferAttributes.
 func (x *TemporalNoiseFilterConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.DestinationPixelBufferAttributes()
 }
 
+// Maximum number of future reference frames that the processor can use to process a source frame.
+//
 // NextFrameCount calls the underlying NextFrameCount.
 func (x *TemporalNoiseFilterConfiguration) NextFrameCount() int {
 	return x.inner.NextFrameCount()
 }
 
+// Maximum number of past reference frames that the processor can use to process a source frame.
+//
 // PreviousFrameCount calls the underlying PreviousFrameCount.
 func (x *TemporalNoiseFilterConfiguration) PreviousFrameCount() int {
 	return x.inner.PreviousFrameCount()

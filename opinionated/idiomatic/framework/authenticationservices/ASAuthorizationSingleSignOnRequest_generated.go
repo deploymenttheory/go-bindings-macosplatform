@@ -40,6 +40,8 @@ func NewAuthorizationSingleSignOnRequest() *AuthorizationSingleSignOnRequest {
 	return &AuthorizationSingleSignOnRequest{inner: raw.ASAuthorizationSingleSignOnRequestFromID(_id)}
 }
 
+// @abstract Parameters required by the specific Authorization Server which should be used by the selected Authorization Services extension for authorization.
+//
 // WithAuthorizationOptions sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationSingleSignOnRequest) WithAuthorizationOptions(items ...*foundation.NSURLQueryItem) *AuthorizationSingleSignOnRequest {
 	if len(items) == 0 {
@@ -58,12 +60,16 @@ func (x *AuthorizationSingleSignOnRequest) WithAuthorizationOptions(items ...*fo
 	return x
 }
 
+// @abstract Enables or disables the authorization user interface. @discussion The default values is YES. If user interface is not enabled, then the authorization will fail with @see ASAuthorizationErrorNotInteractive if it attempts to display the authorization user interface.
+//
 // WithUserInterfaceEnabled sets the userInterfaceEnabled property and returns the receiver for chaining.
 func (x *AuthorizationSingleSignOnRequest) WithUserInterfaceEnabled(userInterfaceEnabled bool) *AuthorizationSingleSignOnRequest {
 	x.inner.SetUserInterfaceEnabled(userInterfaceEnabled)
 	return x
 }
 
+// @abstract The contact information to be requested from the user.  Only scopes for which this app was authorized for will be returned.
+//
 // WithRequestedScopes sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationSingleSignOnRequest) WithRequestedScopes(items ...*foundation.NSString) *AuthorizationSingleSignOnRequest {
 	if len(items) == 0 {
@@ -82,24 +88,32 @@ func (x *AuthorizationSingleSignOnRequest) WithRequestedScopes(items ...*foundat
 	return x
 }
 
+// @abstract State to be passed to the identity provider.  This value will be returned as a part of successful ASAuthorization response. @note The state size may depend on the actual technology used and an error might be returned by the request execution.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *AuthorizationSingleSignOnRequest) WithState(state string) *AuthorizationSingleSignOnRequest {
 	x.inner.ASAuthorizationOpenIDRequest.SetState(foundation.NSStringStringWithUTF8String(state))
 	return x
 }
 
+// @abstract Nonce to be passed to the identity provider.  This value can be verified with the identity token provided as a part of successful ASAuthorization response. @note The nonce size may depend on the actual technology used and an error might be returned by the request execution.
+//
 // WithNonce sets the nonce property and returns the receiver for chaining.
 func (x *AuthorizationSingleSignOnRequest) WithNonce(nonce string) *AuthorizationSingleSignOnRequest {
 	x.inner.ASAuthorizationOpenIDRequest.SetNonce(foundation.NSStringStringWithUTF8String(nonce))
 	return x
 }
 
+// @abstract Operation to be executed by the request. The ASAuthorizationOperationImplicit operation interpretation depends on the credential provider implementation.
+//
 // WithRequestedOperation sets the requestedOperation property and returns the receiver for chaining.
 func (x *AuthorizationSingleSignOnRequest) WithRequestedOperation(requestedOperation *foundation.NSString) *AuthorizationSingleSignOnRequest {
 	x.inner.ASAuthorizationOpenIDRequest.SetRequestedOperation(requestedOperation)
 	return x
 }
 
+// @abstract Parameters required by the specific Authorization Server which should be used by the selected Authorization Services extension for authorization.
+//
 // AuthorizationOptions returns the collection as a Go slice.
 func (x *AuthorizationSingleSignOnRequest) AuthorizationOptions() []*foundation.NSURLQueryItem {
 	arr := x.inner.AuthorizationOptions()
@@ -116,6 +130,8 @@ func (x *AuthorizationSingleSignOnRequest) SetAuthorizationOptions(authorization
 	x.inner.SetAuthorizationOptions(authorizationOptions)
 }
 
+// @abstract Enables or disables the authorization user interface. @discussion The default values is YES. If user interface is not enabled, then the authorization will fail with @see ASAuthorizationErrorNotInteractive if it attempts to display the authorization user interface.
+//
 // IsUserInterfaceEnabled calls the underlying IsUserInterfaceEnabled.
 func (x *AuthorizationSingleSignOnRequest) IsUserInterfaceEnabled() bool {
 	return x.inner.IsUserInterfaceEnabled()

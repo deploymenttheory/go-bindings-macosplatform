@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents a Virtio console device in a virtual machine.
+//
 // VirtioConsoleDevice wraps [raw.VZVirtioConsoleDevice] with a fluent Go API.
 type VirtioConsoleDevice struct {
 	inner *raw.VZVirtioConsoleDevice
@@ -35,12 +37,16 @@ func NewVirtioConsoleDevice() *VirtioConsoleDevice {
 	return &VirtioConsoleDevice{inner: raw.VZVirtioConsoleDeviceFromID(_id)}
 }
 
+// The delegate object for the console device.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *VirtioConsoleDevice) WithDelegate(delegate raw.VZVirtioConsoleDeviceDelegate) *VirtioConsoleDevice {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @abstract Pointer to a delegate object for the console device.
+//
 // Delegate calls the underlying Delegate.
 func (x *VirtioConsoleDevice) Delegate() raw.VZVirtioConsoleDeviceDelegate {
 	return x.inner.Delegate()
@@ -51,6 +57,8 @@ func (x *VirtioConsoleDevice) SetDelegate(delegate raw.VZVirtioConsoleDeviceDele
 	x.inner.SetDelegate(delegate)
 }
 
+// @abstract The console ports currently being used by this console device.
+//
 // Ports calls the underlying Ports.
 func (x *VirtioConsoleDevice) Ports() *VirtioConsolePortArray {
 	_r := x.inner.Ports()

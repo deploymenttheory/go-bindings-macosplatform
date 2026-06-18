@@ -31,6 +31,8 @@ func TrackObjectRequestFromID(id objc.ID) *TrackObjectRequest {
 	return &TrackObjectRequest{inner: raw.VNTrackObjectRequestFromID(id)}
 }
 
+// @brief Create a new request with detected object observation. @param    observation          Detected object observation with bounding box info.
+//
 // NewTrackObjectRequestWithDetectedObjectObservation creates a new [TrackObjectRequest].
 func NewTrackObjectRequestWithDetectedObjectObservation(observation *raw.VNDetectedObjectObservation) *TrackObjectRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTrackObjectRequest")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewTrackObjectRequestWithDetectedObjectObservation(observation *raw.VNDetec
 	return &TrackObjectRequest{inner: raw.VNTrackObjectRequestFromID(_id)}
 }
 
+// @brief Create a new request with detected object observation. @param    observation          Detected object observation with bounding box info. @param    completionHandler    The block that is invoked when the request has been performed.
+//
 // NewTrackObjectRequestWithDetectedObjectObservationCompletionHandler creates a new [TrackObjectRequest].
 func NewTrackObjectRequestWithDetectedObjectObservationCompletionHandler(observation *raw.VNDetectedObjectObservation, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TrackObjectRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTrackObjectRequest")), objc.RegisterName("alloc"))
@@ -45,42 +49,56 @@ func NewTrackObjectRequestWithDetectedObjectObservationCompletionHandler(observa
 	return &TrackObjectRequest{inner: raw.VNTrackObjectRequestFromID(_id)}
 }
 
+// @property property inputObservation @abstract The observation object that defines a region to track. Providing an observation not returned from a tracker (e.g. user-defined, or from a detector) begins a new tracker for the sequence. Providing an observation that was returned from a tracker continues the use of that tracker, to track the region to the next frame. In general, unless documented in the request's documentation, the rectangle must be defined in normalized coordinates (both dimensions normalized to [0,1] with the origin at the lower-left corner).
+//
 // WithInputObservation sets the inputObservation property and returns the receiver for chaining.
 func (x *TrackObjectRequest) WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackObjectRequest {
 	x.inner.VNTrackingRequest.SetInputObservation(inputObservation.asDetectedObjectObservation())
 	return x
 }
 
+// @property property trackingLevel @abstract Tracking level allows tuning tracking algorithm to prefer speed (VNRequestTrackingLevelFast) vs. tracking object location accuracy (VNRequestTrackingLevelAccurate). This property has no effect on general purpose object tracker (VNTrackObjectRequest) revision 2 (VNTrackObjectRequestRevision2)
+//
 // WithTrackingLevel sets the trackingLevel property and returns the receiver for chaining.
 func (x *TrackObjectRequest) WithTrackingLevel(trackingLevel VNRequestTrackingLevel) *TrackObjectRequest {
 	x.inner.VNTrackingRequest.SetTrackingLevel(raw.VNRequestTrackingLevel(trackingLevel))
 	return x
 }
 
+// @property property lastFrame @abstract This property allows marking the last frame for tracking using current tracker. If set to YES, the results for this frame will be processed and returned and the current tracker will be released to the pool of available trackers
+//
 // WithLastFrame sets the lastFrame property and returns the receiver for chaining.
 func (x *TrackObjectRequest) WithLastFrame(lastFrame bool) *TrackObjectRequest {
 	x.inner.VNTrackingRequest.SetLastFrame(lastFrame)
 	return x
 }
 
+// @brief The region of the image in which the request will be performed.  The rectangle is normalized to the dimensions of the image being processed and has its origin specified relative to the image's lower-left corner. @discussion The default value for this property is { { 0, 0 }, { 1, 1 } }.  Setting this property to a rectangle that is outside of the normalized coordinate space will be accepted but result in the request failing to be performed.
+//
 // WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
 func (x *TrackObjectRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackObjectRequest {
 	x.inner.VNTrackingRequest.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
 	return x
 }
 
+// @abstract A hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
+//
 // WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
 func (x *TrackObjectRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackObjectRequest {
 	x.inner.VNTrackingRequest.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
 	return x
 }
 
+// @abstract This property, if set to YES, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is NO, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
+//
 // WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
 func (x *TrackObjectRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackObjectRequest {
 	x.inner.VNTrackingRequest.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
 	return x
 }
 
+// @abstract The specific algorithm or implementation revision that is to be used to perform the request.
+//
 // WithRevision sets the revision property and returns the receiver for chaining.
 func (x *TrackObjectRequest) WithRevision(revision uint) *TrackObjectRequest {
 	x.inner.VNTrackingRequest.VNImageBasedRequest.VNRequest.SetRevision(revision)

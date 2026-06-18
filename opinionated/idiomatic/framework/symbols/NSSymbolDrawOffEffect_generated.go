@@ -35,6 +35,8 @@ func NewSymbolDrawOffEffect() *SymbolDrawOffEffect {
 	return &SymbolDrawOffEffect{inner: raw.NSSymbolDrawOffEffectFromID(_id)}
 }
 
+// Returns a copy of the effect requesting an animation that applies separately to each motion group.
+//
 // EffectWithByLayer calls the underlying EffectWithByLayer.
 func (x *SymbolDrawOffEffect) EffectWithByLayer() *SymbolDrawOffEffect {
 	_r := x.inner.EffectWithByLayer()
@@ -44,6 +46,8 @@ func (x *SymbolDrawOffEffect) EffectWithByLayer() *SymbolDrawOffEffect {
 	return &SymbolDrawOffEffect{inner: _r}
 }
 
+// Returns a copy of the effect requesting an animation that applies to all motion groups simultaneously.
+//
 // EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
 func (x *SymbolDrawOffEffect) EffectWithWholeSymbol() *SymbolDrawOffEffect {
 	_r := x.inner.EffectWithWholeSymbol()
@@ -53,6 +57,8 @@ func (x *SymbolDrawOffEffect) EffectWithWholeSymbol() *SymbolDrawOffEffect {
 	return &SymbolDrawOffEffect{inner: _r}
 }
 
+// Returns a copy of the effect requesting an animation that applies separately to each motion group, where only one motion group is active at a time.
+//
 // EffectWithIndividually calls the underlying EffectWithIndividually.
 func (x *SymbolDrawOffEffect) EffectWithIndividually() *SymbolDrawOffEffect {
 	_r := x.inner.EffectWithIndividually()
@@ -62,6 +68,8 @@ func (x *SymbolDrawOffEffect) EffectWithIndividually() *SymbolDrawOffEffect {
 	return &SymbolDrawOffEffect{inner: _r}
 }
 
+// Returns a copy of the effect that animates in reverse. This cancels the nonReversed variant.
+//
 // EffectWithReversed calls the underlying EffectWithReversed.
 func (x *SymbolDrawOffEffect) EffectWithReversed() *SymbolDrawOffEffect {
 	_r := x.inner.EffectWithReversed()
@@ -71,6 +79,8 @@ func (x *SymbolDrawOffEffect) EffectWithReversed() *SymbolDrawOffEffect {
 	return &SymbolDrawOffEffect{inner: _r}
 }
 
+// Returns a copy of the effect that only animates forwards. This cancels the reversed variant.
+//
 // EffectWithNonReversed calls the underlying EffectWithNonReversed.
 func (x *SymbolDrawOffEffect) EffectWithNonReversed() *SymbolDrawOffEffect {
 	_r := x.inner.EffectWithNonReversed()

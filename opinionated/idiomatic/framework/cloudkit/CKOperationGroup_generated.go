@@ -37,6 +37,8 @@ func NewOperationGroup() *OperationGroup {
 	return &OperationGroup{inner: raw.CKOperationGroupFromID(_id)}
 }
 
+// Creates an operation group from a serialized instance. - Parameters: - aDecoder: The coder to use when deserializing the group.
+//
 // NewOperationGroupWithCoder creates a new [OperationGroup].
 func NewOperationGroupWithCoder(aDecoder *foundation.NSCoder) *OperationGroup {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKOperationGroup")), objc.RegisterName("alloc"))
@@ -44,36 +46,48 @@ func NewOperationGroupWithCoder(aDecoder *foundation.NSCoder) *OperationGroup {
 	return &OperationGroup{inner: raw.CKOperationGroupFromID(_id)}
 }
 
+// The default configuration for operations in the group. If an operation in the group has its own configuration, that configuration's values override the default configuration's values. For more information, see “CKOperation/Configuration“.
+//
 // WithDefaultConfiguration sets the defaultConfiguration property and returns the receiver for chaining.
 func (x *OperationGroup) WithDefaultConfiguration(defaultConfiguration *OperationConfiguration) *OperationGroup {
 	x.inner.SetDefaultConfiguration(defaultConfiguration.Unwrap())
 	return x
 }
 
+// The operation group's name. The system sends the name of the operation group to CloudKit to provide aggregate reporting for “CKOperationGroup“. The name must not include any personal data.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *OperationGroup) WithName(name string) *OperationGroup {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// The number of operations in the operation group. This property shows the number of operations that you expect to be in this operation group. It's the developer's responsibility to set this value.
+//
 // WithQuantity sets the quantity property and returns the receiver for chaining.
 func (x *OperationGroup) WithQuantity(quantity uint) *OperationGroup {
 	x.inner.SetQuantity(quantity)
 	return x
 }
 
+// The estimated size of traffic to upload to CloudKit. This property informs the system about the amount of data your app can transfer. An order-of-magnitude estimate is better than no estimate, and accuracy helps performance. The system checks this value when it schedules discretionary network requests.
+//
 // WithExpectedSendSize sets the expectedSendSize property and returns the receiver for chaining.
 func (x *OperationGroup) WithExpectedSendSize(expectedSendSize CKOperationGroupTransferSize) *OperationGroup {
 	x.inner.SetExpectedSendSize(raw.CKOperationGroupTransferSize(expectedSendSize))
 	return x
 }
 
+// The estimated size of traffic to download from CloudKit. This property informs the system about the amount of data your app can transfer. An order-of-magnitude estimate is better than no estimate, and accuracy helps performance. The system checks this value when it schedules discretionary network requests.
+//
 // WithExpectedReceiveSize sets the expectedReceiveSize property and returns the receiver for chaining.
 func (x *OperationGroup) WithExpectedReceiveSize(expectedReceiveSize CKOperationGroupTransferSize) *OperationGroup {
 	x.inner.SetExpectedReceiveSize(raw.CKOperationGroupTransferSize(expectedReceiveSize))
 	return x
 }
 
+// The operation group's unique identifier. The framework generates this value and it's unique to this operation group. The system sends this identifier to CloudKit, which can use it to identify server-side logs for “CKOperationGroup“.
+//
 // OperationGroupID calls the underlying OperationGroupID.
 func (x *OperationGroup) OperationGroupID() string {
 	_r := x.inner.OperationGroupID()
@@ -83,6 +97,8 @@ func (x *OperationGroup) OperationGroupID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The default configuration for operations in the group. If an operation in the group has its own configuration, that configuration's values override the default configuration's values. For more information, see “CKOperation/Configuration“.
+//
 // DefaultConfiguration calls the underlying DefaultConfiguration.
 func (x *OperationGroup) DefaultConfiguration() *OperationConfiguration {
 	_r := x.inner.DefaultConfiguration()
@@ -97,6 +113,8 @@ func (x *OperationGroup) SetDefaultConfiguration(defaultConfiguration *raw.CKOpe
 	x.inner.SetDefaultConfiguration(defaultConfiguration)
 }
 
+// The operation group's name. The system sends the name of the operation group to CloudKit to provide aggregate reporting for “CKOperationGroup“. The name must not include any personal data.
+//
 // Name calls the underlying Name.
 func (x *OperationGroup) Name() string {
 	_r := x.inner.Name()
@@ -111,6 +129,8 @@ func (x *OperationGroup) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// The number of operations in the operation group. This property shows the number of operations that you expect to be in this operation group. It's the developer's responsibility to set this value.
+//
 // Quantity calls the underlying Quantity.
 func (x *OperationGroup) Quantity() uint {
 	return x.inner.Quantity()
@@ -121,6 +141,8 @@ func (x *OperationGroup) SetQuantity(quantity uint) {
 	x.inner.SetQuantity(quantity)
 }
 
+// The estimated size of traffic to upload to CloudKit. This property informs the system about the amount of data your app can transfer. An order-of-magnitude estimate is better than no estimate, and accuracy helps performance. The system checks this value when it schedules discretionary network requests.
+//
 // ExpectedSendSize calls the underlying ExpectedSendSize.
 func (x *OperationGroup) ExpectedSendSize() CKOperationGroupTransferSize {
 	return CKOperationGroupTransferSize(x.inner.ExpectedSendSize())
@@ -131,6 +153,8 @@ func (x *OperationGroup) SetExpectedSendSize(expectedSendSize CKOperationGroupTr
 	x.inner.SetExpectedSendSize(raw.CKOperationGroupTransferSize(expectedSendSize))
 }
 
+// The estimated size of traffic to download from CloudKit. This property informs the system about the amount of data your app can transfer. An order-of-magnitude estimate is better than no estimate, and accuracy helps performance. The system checks this value when it schedules discretionary network requests.
+//
 // ExpectedReceiveSize calls the underlying ExpectedReceiveSize.
 func (x *OperationGroup) ExpectedReceiveSize() CKOperationGroupTransferSize {
 	return CKOperationGroupTransferSize(x.inner.ExpectedReceiveSize())

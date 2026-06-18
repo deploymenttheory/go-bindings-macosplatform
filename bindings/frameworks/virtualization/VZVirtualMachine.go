@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages the overall state and configuration of your VM.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtualmachine
 type VZVirtualMachine struct {
 	foundation.NSObject
@@ -58,7 +60,7 @@ func VZVirtualMachineFromID(id objc.ID) *VZVirtualMachine {
 	return o
 }
 
-// @abstract Initialize the virtual machine. @discussion This initializer uses the main queue to operate the virtual machine. Every call must be done on the main queue and the callbacks are invoked on the main queue. @param configuration The configuration of the virtual machine. The configuration must be valid. Validation can be performed at runtime with [VZVirtualMachineConfiguration validateWithError:]. The configuration is copied by the initializer.
+// Creates the VM and configures it with the specified data.
 func (o *VZVirtualMachine) InitWithConfiguration(configuration *VZVirtualMachineConfiguration) *VZVirtualMachine {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineSelInitWithConfiguration, configuration.Ptr())
 	if _ret != 0 {
@@ -67,7 +69,7 @@ func (o *VZVirtualMachine) InitWithConfiguration(configuration *VZVirtualMachine
 	return VZVirtualMachineFromID(_ret)
 }
 
-// @abstract Initialize the virtual machine. @param configuration The configuration of the virtual machine. The configuration must be valid. Validation can be performed at runtime with [VZVirtualMachineConfiguration validateWithError:]. The configuration is copied by the initializer. @param queue The serial queue on which the virtual machine operates. Every operation on the virtual machine must be done on that queue. The callbacks and delegate methods are invoked on that queue. If the queue is not serial, the behavior is undefined.
+// Creates and configures the VM with the specified data and dispatch queue.
 func (o *VZVirtualMachine) InitWithConfigurationQueue(configuration *VZVirtualMachineConfiguration, queue *foundation.NSObject) *VZVirtualMachine {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineSelInitWithConfigurationQueue, configuration.Ptr(), queue.Ptr())
 	if _ret != 0 {
@@ -76,7 +78,7 @@ func (o *VZVirtualMachine) InitWithConfigurationQueue(configuration *VZVirtualMa
 	return VZVirtualMachineFromID(_ret)
 }
 
-// @abstract Start a virtual machine. @discussion Start a virtual machine that is in either Stopped or Error state. @param completionHandler Block called after the virtual machine has been successfully started or on error. The error parameter passed to the block is nil if the start was successful.
+// Starts the VM and notifies the specified completion handler if startup was successful.
 func (o *VZVirtualMachine) StartWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -88,7 +90,7 @@ func (o *VZVirtualMachine) StartWithCompletionHandler(completionHandler func(uns
 	o.Ptr().Send(_vZVirtualMachineSelStartWithCompletionHandler, __block_completionHandler)
 }
 
-// @abstract Start a virtual machine with options. @discussion Start a virtual machine that is in either Stopped or Error state. @param options Options used to control how the virtual machine is started. @param completionHandler Block called after the virtual machine has been successfully started or on error. The error parameter passed to the block is nil if the start was successful. @seealso VZMacOSVirtualMachineStartOptions
+// Starts the VM with the options and a completion handler you provide.
 func (o *VZVirtualMachine) StartWithOptionsCompletionHandler(options *VZVirtualMachineStartOptions, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -100,7 +102,7 @@ func (o *VZVirtualMachine) StartWithOptionsCompletionHandler(options *VZVirtualM
 	o.Ptr().Send(_vZVirtualMachineSelStartWithOptionsCompletionHandler, options.Ptr(), __block_completionHandler)
 }
 
-// @abstract Stop a virtual machine. @discussion Stop a virtual machine that is in either Running or Paused state. @param completionHandler Block called after the virtual machine has been successfully stopped or on error. The error parameter passed to the block is nil if the stop was successful. @discussion This is a destructive operation. It stops the virtual machine without giving the guest a chance to stop cleanly. @seealso -[VZVirtualMachine requestStopWithError:]
+// Stops a VM that’s in either a running or paused state.
 func (o *VZVirtualMachine) StopWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -112,7 +114,7 @@ func (o *VZVirtualMachine) StopWithCompletionHandler(completionHandler func(unsa
 	o.Ptr().Send(_vZVirtualMachineSelStopWithCompletionHandler, __block_completionHandler)
 }
 
-// @abstract Pause a virtual machine. @discussion Pause a virtual machine that is in Running state. @param completionHandler Block called after the virtual machine has been successfully paused or on error. The error parameter passed to the block is nil if the pause was successful.
+// Pauses a running VM and notifies the specified completion handler of the results.
 func (o *VZVirtualMachine) PauseWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -124,7 +126,7 @@ func (o *VZVirtualMachine) PauseWithCompletionHandler(completionHandler func(uns
 	o.Ptr().Send(_vZVirtualMachineSelPauseWithCompletionHandler, __block_completionHandler)
 }
 
-// @abstract Resume a virtual machine. @discussion Resume a virtual machine that is in the Paused state. @param completionHandler Block called after the virtual machine has been successfully resumed or on error. The error parameter passed to the block is nil if the resumption was successful.
+// Resumes a paused VM and notifies the specified completion handler of the results.
 func (o *VZVirtualMachine) ResumeWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -136,7 +138,7 @@ func (o *VZVirtualMachine) ResumeWithCompletionHandler(completionHandler func(un
 	o.Ptr().Send(_vZVirtualMachineSelResumeWithCompletionHandler, __block_completionHandler)
 }
 
-// @abstract Restore a virtual machine. @discussion Restore a stopped virtual machine to a state previously saved to file through `saveMachineStateToURL:completionHandler:`. If the file cannot be read, or contains otherwise invalid contents, this operation will fail with a `VZErrorRestore` error. If the virtual machine is not in the stopped state, this operation will fail with a `VZErrorInvalidVirtualMachineStateTransition` error. If the virtual machine cannot be started due to an internal error, this operation will fail with a `VZErrorInternal` error. The `VZVirtualMachineConfiguration` must also support restoring, which can be checked with  `-[VZVirtualMachineConfiguration validateSaveRestoreSupportWithError:]`. If this operation fails, the virtual machine state is unchanged. If successful, the virtual machine is restored and placed in the paused state. @param saveFileURL URL to file containing saved state of a suspended virtual machine. The file must have been generated by `saveMachineStateToURL:completionHandler:` on the same host. Otherwise, this operation will fail with a `VZErrorRestore` error indicating a permission denied failure reason. The virtual machine must also be configured compatibly with the state contained in the file. If the `VZVirtualMachineConfiguration` is not compatible with the content of the file, this operation will fail with a `VZErrorRestore` error indicating an invalid argument failure reason. Files generated with `saveMachineStateToURL:completionHandler:` on a software version that is newer than the current version will also be rejected with an invalid argument failure reason. In some cases, `restoreMachineStateFromURL:completionHandler:` can fail if a software update has changed the host in a way that would be incompatible with the previous format. In this case, an invalid argument error will be surfaced. In most cases, the virtual machine should be restarted with `startWithCompletionHandler:`. @param completionHandler Block called after the virtual machine has been successfully started or on error. The error parameter passed to the block is nil if the restore was successful. @see -[VZVirtualMachineConfiguration validateSaveRestoreSupportWithError:]
+// Restores a VM from a previously saved state.
 func (o *VZVirtualMachine) RestoreMachineStateFromURLCompletionHandler(saveFileURL *foundation.NSURL, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -148,7 +150,7 @@ func (o *VZVirtualMachine) RestoreMachineStateFromURLCompletionHandler(saveFileU
 	o.Ptr().Send(_vZVirtualMachineSelRestoreMachineStateFromURLCompletionHandler, saveFileURL.Ptr(), __block_completionHandler)
 }
 
-// @abstract Save a virtual machine. @discussion Save a paused virtual machine to file. The contents of this file can be used later to restore the state of the paused virtual machine. If the virtual machine is not paused, this operation will fail with a `VZErrorInvalidVirtualMachineState` error. If the virtual machine cannot be saved, this operation will fail with a `VZErrorSave` error. The `VZVirtualMachineConfiguration` must also support saving, which can be checked with  `-[VZVirtualMachineConfiguration validateSaveRestoreSupportWithError:]`. If this operation fails, the virtual machine state is unchanged. If successful, the file is written out and the virtual machine state is unchanged. @param saveFileURL URL to location where the saved state of the virtual machine is to be written. Each file is protected by an encryption key that is tied to the host on which it is created. @param completionHandler Block called after the virtual machine has been successfully saved or on error. The error parameter passed to the block is nil if the save was successful. @see -[VZVirtualMachineConfiguration validateSaveRestoreSupportWithError:]
+// Saves the state of a VM.
 func (o *VZVirtualMachine) SaveMachineStateToURLCompletionHandler(saveFileURL *foundation.NSURL, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -160,7 +162,7 @@ func (o *VZVirtualMachine) SaveMachineStateToURLCompletionHandler(saveFileURL *f
 	o.Ptr().Send(_vZVirtualMachineSelSaveMachineStateToURLCompletionHandler, saveFileURL.Ptr(), __block_completionHandler)
 }
 
-// @abstract Request that the guest turns itself off. @param error If not nil, assigned with the error if the request failed. @return YES if the request was made successfully. @discussion The -[VZVirtualMachineDelegate guestDidStopVirtualMachine:] delegate method is invoked when the guest has turned itself off. @seealso -[VZVirtualMachineDelegate guestDidStopVirtualMachine:].
+// Asks the guest operating system to stop running.
 func (o *VZVirtualMachine) RequestStopWithError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vZVirtualMachineSelRequestStopWithError, unsafe.Pointer(&_nsErr))

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration object that requests the creation of a socket device to communicate with the guest system.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtiosocketdeviceconfiguration
 type VZVirtioSocketDeviceConfiguration struct {
 	VZSocketDeviceConfiguration
@@ -29,6 +31,7 @@ func VZVirtioSocketDeviceConfigurationFromID(id objc.ID) *VZVirtioSocketDeviceCo
 	return o
 }
 
+// Creates a socket device configuration object.
 func (o *VZVirtioSocketDeviceConfiguration) Init() *VZVirtioSocketDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioSocketDeviceConfigurationSelInit)
 	if _ret != 0 {

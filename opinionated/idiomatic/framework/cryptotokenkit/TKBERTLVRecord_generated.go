@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // BERTLVRecord wraps [raw.TKBERTLVRecord] with a fluent Go API.
@@ -30,6 +31,8 @@ func BERTLVRecordFromID(id objc.ID) *BERTLVRecord {
 	return &BERTLVRecord{inner: raw.TKBERTLVRecordFromID(id)}
 }
 
+// Creates TLV record with specified tag and value. @param tag Tag value for the new record. @param value Value for the new record. @return Newly created TLV record.
+//
 // NewBERTLVRecordWithTagValue creates a new [BERTLVRecord].
 func NewBERTLVRecordWithTagValue(tag uint64, value *foundation.NSData) *BERTLVRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKBERTLVRecord")), objc.RegisterName("alloc"))
@@ -37,10 +40,21 @@ func NewBERTLVRecordWithTagValue(tag uint64, value *foundation.NSData) *BERTLVRe
 	return &BERTLVRecord{inner: raw.TKBERTLVRecordFromID(_id)}
 }
 
+// Creates TKBERTLVRecord with specified tag and array of children TKTLVRecord instances as subrecords. @param tag Tag value for the new record. @param records Array of TKTLVRecord instances serving as subrecords of this record. @return Newly created TLV record.
+//
 // NewBERTLVRecordWithTagRecords creates a new [BERTLVRecord].
-func NewBERTLVRecordWithTagRecords(tag uint64, records *foundation.NSArray[*raw.TKTLVRecord]) *BERTLVRecord {
+func NewBERTLVRecordWithTagRecords(tag uint64, records ...TLVRecordProvider) *BERTLVRecord {
+	_ptrs := make([]objc.ID, len(records))
+	for _i, _v := range records {
+		_ptrs[_i] = _v.asTLVRecord().Ptr()
+	}
+	var _arg1 *foundation.NSArray[*raw.TKTLVRecord]
+	if len(_ptrs) > 0 {
+		_arg1 = foundation.NSArrayFromID[*raw.TKTLVRecord](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKBERTLVRecord")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTag:records:"), tag, records.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTag:records:"), tag, _arg1.Ptr())
 	return &BERTLVRecord{inner: raw.TKBERTLVRecordFromID(_id)}
 }
 

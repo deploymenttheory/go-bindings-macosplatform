@@ -36,102 +36,136 @@ func NewCNNYOLOLossDescriptor() *CNNYOLOLossDescriptor {
 	return &CNNYOLOLossDescriptor{inner: raw.MPSCNNYOLOLossDescriptorFromID(_id)}
 }
 
+// @property   XYLossDescriptor @abstract   The type of a loss filter. @discussion This parameter specifies the type of a loss filter.
+//
 // WithXYLossDescriptor sets the xYLossDescriptor property and returns the receiver for chaining.
 func (x *CNNYOLOLossDescriptor) WithXYLossDescriptor(xYLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor {
 	x.inner.SetXYLossDescriptor(xYLossDescriptor.Unwrap())
 	return x
 }
 
+// @property   WHLossDescriptor @abstract   The type of a loss filter. @discussion This parameter specifies the type of a loss filter.
+//
 // WithWHLossDescriptor sets the wHLossDescriptor property and returns the receiver for chaining.
 func (x *CNNYOLOLossDescriptor) WithWHLossDescriptor(wHLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor {
 	x.inner.SetWHLossDescriptor(wHLossDescriptor.Unwrap())
 	return x
 }
 
+// @property   confidenceLossDescriptor @abstract   The type of a loss filter. @discussion This parameter specifies the type of a loss filter.
+//
 // WithConfidenceLossDescriptor sets the confidenceLossDescriptor property and returns the receiver for chaining.
 func (x *CNNYOLOLossDescriptor) WithConfidenceLossDescriptor(confidenceLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor {
 	x.inner.SetConfidenceLossDescriptor(confidenceLossDescriptor.Unwrap())
 	return x
 }
 
+// @property   classesLossDescriptor @abstract   The type of a loss filter. @discussion This parameter specifies the type of a loss filter.
+//
 // WithClassesLossDescriptor sets the classesLossDescriptor property and returns the receiver for chaining.
 func (x *CNNYOLOLossDescriptor) WithClassesLossDescriptor(classesLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor {
 	x.inner.SetClassesLossDescriptor(classesLossDescriptor.Unwrap())
 	return x
 }
 
+// @property   reductionType @abstract   ReductionType shared accross all losses (so they may generate same sized output)
+//
 // WithReductionType sets the reductionType property and returns the receiver for chaining.
 func (x *CNNYOLOLossDescriptor) WithReductionType(reductionType MPSCNNReductionType) *CNNYOLOLossDescriptor {
 	x.inner.SetReductionType(raw.MPSCNNReductionType(reductionType))
 	return x
 }
 
+// @property   reduceAcrossBatch @abstract   If set to YES then the reduction operation is applied also across the batch-index dimension, ie. the loss value is summed over images in the batch and the result of the reduction is written on the first loss image in the batch while the other loss images will be set to zero. If set to NO, then no reductions are performed across the batch dimension and each image in the batch will contain the loss value associated with that one particular image. NOTE: If reductionType == MPSCNNReductionTypeNone, then this flag has no effect on results, that is no reductions are done in this case. NOTE: If reduceAcrossBatch is set to YES and reductionType == MPSCNNReductionTypeMean then the final forward loss value is computed by first summing over the components and then by dividing the result with: number of feature channels * width * height * number of images in the batch. The default value is NO.
+//
 // WithReduceAcrossBatch sets the reduceAcrossBatch property and returns the receiver for chaining.
 func (x *CNNYOLOLossDescriptor) WithReduceAcrossBatch(reduceAcrossBatch bool) *CNNYOLOLossDescriptor {
 	x.inner.SetReduceAcrossBatch(reduceAcrossBatch)
 	return x
 }
 
+// @property   rescore @abstract   Rescore pertains to multiplying the confidence groundTruth with IOU (intersection over union) of predicted bounding box and the groundTruth boundingBox. Default is YES
+//
 // WithRescore sets the rescore property and returns the receiver for chaining.
 func (x *CNNYOLOLossDescriptor) WithRescore(rescore bool) *CNNYOLOLossDescriptor {
 	x.inner.SetRescore(rescore)
 	return x
 }
 
+// @property   scaleXY @abstract   scale factor for XY loss and loss gradient default is 10.0
+//
 // WithScaleXY sets the scaleXY property and returns the receiver for chaining.
 func (x *CNNYOLOLossDescriptor) WithScaleXY(scaleXY float32) *CNNYOLOLossDescriptor {
 	x.inner.SetScaleXY(scaleXY)
 	return x
 }
 
+// @property   scaleWH @abstract   scale factor for WH loss and loss gradient default is 10.0
+//
 // WithScaleWH sets the scaleWH property and returns the receiver for chaining.
 func (x *CNNYOLOLossDescriptor) WithScaleWH(scaleWH float32) *CNNYOLOLossDescriptor {
 	x.inner.SetScaleWH(scaleWH)
 	return x
 }
 
+// @property   scaleNoObject @abstract   scale factor for no object confidence loss and loss gradient default is 5.0
+//
 // WithScaleNoObject sets the scaleNoObject property and returns the receiver for chaining.
 func (x *CNNYOLOLossDescriptor) WithScaleNoObject(scaleNoObject float32) *CNNYOLOLossDescriptor {
 	x.inner.SetScaleNoObject(scaleNoObject)
 	return x
 }
 
+// @property   scaleObject @abstract   scale factor for no object confidence loss and loss gradient default is 100.0
+//
 // WithScaleObject sets the scaleObject property and returns the receiver for chaining.
 func (x *CNNYOLOLossDescriptor) WithScaleObject(scaleObject float32) *CNNYOLOLossDescriptor {
 	x.inner.SetScaleObject(scaleObject)
 	return x
 }
 
+// @property   scaleClass @abstract   scale factor for no object classes loss and loss gradient default is 2.0
+//
 // WithScaleClass sets the scaleClass property and returns the receiver for chaining.
 func (x *CNNYOLOLossDescriptor) WithScaleClass(scaleClass float32) *CNNYOLOLossDescriptor {
 	x.inner.SetScaleClass(scaleClass)
 	return x
 }
 
+// @property   pos_iou @abstract   If the prediction IOU with groundTruth is higher than this value we consider it a confident object presence, default is 0.7
+//
 // WithMinIOUForObjectPresence sets the minIOUForObjectPresence property and returns the receiver for chaining.
 func (x *CNNYOLOLossDescriptor) WithMinIOUForObjectPresence(minIOUForObjectPresence float32) *CNNYOLOLossDescriptor {
 	x.inner.SetMinIOUForObjectPresence(minIOUForObjectPresence)
 	return x
 }
 
+// @property   neg_iou @abstract   If the prediction IOU with groundTruth is lower than this value we consider it a confident object absence, default is 0.3
+//
 // WithMaxIOUForObjectAbsence sets the maxIOUForObjectAbsence property and returns the receiver for chaining.
 func (x *CNNYOLOLossDescriptor) WithMaxIOUForObjectAbsence(maxIOUForObjectAbsence float32) *CNNYOLOLossDescriptor {
 	x.inner.SetMaxIOUForObjectAbsence(maxIOUForObjectAbsence)
 	return x
 }
 
+// @property   numberOfAnchorBoxes @abstract   number of anchor boxes used to detect object per grid cell
+//
 // WithNumberOfAnchorBoxes sets the numberOfAnchorBoxes property and returns the receiver for chaining.
 func (x *CNNYOLOLossDescriptor) WithNumberOfAnchorBoxes(numberOfAnchorBoxes uint) *CNNYOLOLossDescriptor {
 	x.inner.SetNumberOfAnchorBoxes(numberOfAnchorBoxes)
 	return x
 }
 
+// @property   anchorBoxes @abstract   NSData containing the width and height for numberOfAnchorBoxes anchor boxes This NSData should have 2 float values per anchor box which represent the width and height of the anchor box. @code typedef struct anchorBox{ float width; float height; }anchorBox; anchorBox_t gAnchorBoxes[MAX_NUM_ANCHOR_BOXES] = { {.width = 1.f, .height = 2.f}, {.width = 1.f, .height = 1.f}, {.width = 2.f, .height = 1.f}, }; NSData* labelsInputData = [NSData dataWithBytes: gAnchorBoxes length: MAX_NUM_ANCHOR_BOXES * sizeof(anchorBox)]; @endcode
+//
 // WithAnchorBoxes sets the anchorBoxes property and returns the receiver for chaining.
 func (x *CNNYOLOLossDescriptor) WithAnchorBoxes(anchorBoxes *foundation.NSData) *CNNYOLOLossDescriptor {
 	x.inner.SetAnchorBoxes(anchorBoxes)
 	return x
 }
 
+// @property   XYLossDescriptor @abstract   The type of a loss filter. @discussion This parameter specifies the type of a loss filter.
+//
 // XYLossDescriptor calls the underlying XYLossDescriptor.
 func (x *CNNYOLOLossDescriptor) XYLossDescriptor() *CNNLossDescriptor {
 	_r := x.inner.XYLossDescriptor()
@@ -146,6 +180,8 @@ func (x *CNNYOLOLossDescriptor) SetXYLossDescriptor(xYLossDescriptor *raw.MPSCNN
 	x.inner.SetXYLossDescriptor(xYLossDescriptor)
 }
 
+// @property   WHLossDescriptor @abstract   The type of a loss filter. @discussion This parameter specifies the type of a loss filter.
+//
 // WHLossDescriptor calls the underlying WHLossDescriptor.
 func (x *CNNYOLOLossDescriptor) WHLossDescriptor() *CNNLossDescriptor {
 	_r := x.inner.WHLossDescriptor()
@@ -160,6 +196,8 @@ func (x *CNNYOLOLossDescriptor) SetWHLossDescriptor(wHLossDescriptor *raw.MPSCNN
 	x.inner.SetWHLossDescriptor(wHLossDescriptor)
 }
 
+// @property   confidenceLossDescriptor @abstract   The type of a loss filter. @discussion This parameter specifies the type of a loss filter.
+//
 // ConfidenceLossDescriptor calls the underlying ConfidenceLossDescriptor.
 func (x *CNNYOLOLossDescriptor) ConfidenceLossDescriptor() *CNNLossDescriptor {
 	_r := x.inner.ConfidenceLossDescriptor()
@@ -174,6 +212,8 @@ func (x *CNNYOLOLossDescriptor) SetConfidenceLossDescriptor(confidenceLossDescri
 	x.inner.SetConfidenceLossDescriptor(confidenceLossDescriptor)
 }
 
+// @property   classesLossDescriptor @abstract   The type of a loss filter. @discussion This parameter specifies the type of a loss filter.
+//
 // ClassesLossDescriptor calls the underlying ClassesLossDescriptor.
 func (x *CNNYOLOLossDescriptor) ClassesLossDescriptor() *CNNLossDescriptor {
 	_r := x.inner.ClassesLossDescriptor()
@@ -188,6 +228,8 @@ func (x *CNNYOLOLossDescriptor) SetClassesLossDescriptor(classesLossDescriptor *
 	x.inner.SetClassesLossDescriptor(classesLossDescriptor)
 }
 
+// @property   reductionType @abstract   ReductionType shared accross all losses (so they may generate same sized output)
+//
 // ReductionType calls the underlying ReductionType.
 func (x *CNNYOLOLossDescriptor) ReductionType() MPSCNNReductionType {
 	return MPSCNNReductionType(x.inner.ReductionType())
@@ -198,6 +240,8 @@ func (x *CNNYOLOLossDescriptor) SetReductionType(reductionType MPSCNNReductionTy
 	x.inner.SetReductionType(raw.MPSCNNReductionType(reductionType))
 }
 
+// @property   reduceAcrossBatch @abstract   If set to YES then the reduction operation is applied also across the batch-index dimension, ie. the loss value is summed over images in the batch and the result of the reduction is written on the first loss image in the batch while the other loss images will be set to zero. If set to NO, then no reductions are performed across the batch dimension and each image in the batch will contain the loss value associated with that one particular image. NOTE: If reductionType == MPSCNNReductionTypeNone, then this flag has no effect on results, that is no reductions are done in this case. NOTE: If reduceAcrossBatch is set to YES and reductionType == MPSCNNReductionTypeMean then the final forward loss value is computed by first summing over the components and then by dividing the result with: number of feature channels * width * height * number of images in the batch. The default value is NO.
+//
 // ReduceAcrossBatch calls the underlying ReduceAcrossBatch.
 func (x *CNNYOLOLossDescriptor) ReduceAcrossBatch() bool {
 	return x.inner.ReduceAcrossBatch()
@@ -208,6 +252,8 @@ func (x *CNNYOLOLossDescriptor) SetReduceAcrossBatch(reduceAcrossBatch bool) {
 	x.inner.SetReduceAcrossBatch(reduceAcrossBatch)
 }
 
+// @property   rescore @abstract   Rescore pertains to multiplying the confidence groundTruth with IOU (intersection over union) of predicted bounding box and the groundTruth boundingBox. Default is YES
+//
 // Rescore calls the underlying Rescore.
 func (x *CNNYOLOLossDescriptor) Rescore() bool {
 	return x.inner.Rescore()
@@ -218,6 +264,8 @@ func (x *CNNYOLOLossDescriptor) SetRescore(rescore bool) {
 	x.inner.SetRescore(rescore)
 }
 
+// @property   scaleXY @abstract   scale factor for XY loss and loss gradient default is 10.0
+//
 // ScaleXY calls the underlying ScaleXY.
 func (x *CNNYOLOLossDescriptor) ScaleXY() float32 {
 	return x.inner.ScaleXY()
@@ -228,6 +276,8 @@ func (x *CNNYOLOLossDescriptor) SetScaleXY(scaleXY float32) {
 	x.inner.SetScaleXY(scaleXY)
 }
 
+// @property   scaleWH @abstract   scale factor for WH loss and loss gradient default is 10.0
+//
 // ScaleWH calls the underlying ScaleWH.
 func (x *CNNYOLOLossDescriptor) ScaleWH() float32 {
 	return x.inner.ScaleWH()
@@ -238,6 +288,8 @@ func (x *CNNYOLOLossDescriptor) SetScaleWH(scaleWH float32) {
 	x.inner.SetScaleWH(scaleWH)
 }
 
+// @property   scaleNoObject @abstract   scale factor for no object confidence loss and loss gradient default is 5.0
+//
 // ScaleNoObject calls the underlying ScaleNoObject.
 func (x *CNNYOLOLossDescriptor) ScaleNoObject() float32 {
 	return x.inner.ScaleNoObject()
@@ -248,6 +300,8 @@ func (x *CNNYOLOLossDescriptor) SetScaleNoObject(scaleNoObject float32) {
 	x.inner.SetScaleNoObject(scaleNoObject)
 }
 
+// @property   scaleObject @abstract   scale factor for no object confidence loss and loss gradient default is 100.0
+//
 // ScaleObject calls the underlying ScaleObject.
 func (x *CNNYOLOLossDescriptor) ScaleObject() float32 {
 	return x.inner.ScaleObject()
@@ -258,6 +312,8 @@ func (x *CNNYOLOLossDescriptor) SetScaleObject(scaleObject float32) {
 	x.inner.SetScaleObject(scaleObject)
 }
 
+// @property   scaleClass @abstract   scale factor for no object classes loss and loss gradient default is 2.0
+//
 // ScaleClass calls the underlying ScaleClass.
 func (x *CNNYOLOLossDescriptor) ScaleClass() float32 {
 	return x.inner.ScaleClass()
@@ -268,6 +324,8 @@ func (x *CNNYOLOLossDescriptor) SetScaleClass(scaleClass float32) {
 	x.inner.SetScaleClass(scaleClass)
 }
 
+// @property   pos_iou @abstract   If the prediction IOU with groundTruth is higher than this value we consider it a confident object presence, default is 0.7
+//
 // MinIOUForObjectPresence calls the underlying MinIOUForObjectPresence.
 func (x *CNNYOLOLossDescriptor) MinIOUForObjectPresence() float32 {
 	return x.inner.MinIOUForObjectPresence()
@@ -278,6 +336,8 @@ func (x *CNNYOLOLossDescriptor) SetMinIOUForObjectPresence(minIOUForObjectPresen
 	x.inner.SetMinIOUForObjectPresence(minIOUForObjectPresence)
 }
 
+// @property   neg_iou @abstract   If the prediction IOU with groundTruth is lower than this value we consider it a confident object absence, default is 0.3
+//
 // MaxIOUForObjectAbsence calls the underlying MaxIOUForObjectAbsence.
 func (x *CNNYOLOLossDescriptor) MaxIOUForObjectAbsence() float32 {
 	return x.inner.MaxIOUForObjectAbsence()
@@ -288,6 +348,8 @@ func (x *CNNYOLOLossDescriptor) SetMaxIOUForObjectAbsence(maxIOUForObjectAbsence
 	x.inner.SetMaxIOUForObjectAbsence(maxIOUForObjectAbsence)
 }
 
+// @property   numberOfAnchorBoxes @abstract   number of anchor boxes used to detect object per grid cell
+//
 // NumberOfAnchorBoxes calls the underlying NumberOfAnchorBoxes.
 func (x *CNNYOLOLossDescriptor) NumberOfAnchorBoxes() uint {
 	return x.inner.NumberOfAnchorBoxes()
@@ -298,6 +360,8 @@ func (x *CNNYOLOLossDescriptor) SetNumberOfAnchorBoxes(numberOfAnchorBoxes uint)
 	x.inner.SetNumberOfAnchorBoxes(numberOfAnchorBoxes)
 }
 
+// @property   anchorBoxes @abstract   NSData containing the width and height for numberOfAnchorBoxes anchor boxes This NSData should have 2 float values per anchor box which represent the width and height of the anchor box. @code typedef struct anchorBox{ float width; float height; }anchorBox; anchorBox_t gAnchorBoxes[MAX_NUM_ANCHOR_BOXES] = { {.width = 1.f, .height = 2.f}, {.width = 1.f, .height = 1.f}, {.width = 2.f, .height = 1.f}, }; NSData* labelsInputData = [NSData dataWithBytes: gAnchorBoxes length: MAX_NUM_ANCHOR_BOXES * sizeof(anchorBox)]; @endcode
+//
 // AnchorBoxes calls the underlying AnchorBoxes.
 func (x *CNNYOLOLossDescriptor) AnchorBoxes() *foundation.NSData {
 	return x.inner.AnchorBoxes()

@@ -39,6 +39,8 @@ func NewMatrixFullyConnectedGradientWithDevice(device metal.MTLDevice) *MatrixFu
 	return &MatrixFullyConnectedGradient{inner: raw.MPSMatrixFullyConnectedGradientFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixFullyConnectedGradient @param      device      The MTLDevice on which to make the MPSMatrixFullyConnectedGradient object. @return     A new MPSMatrixFullyConnected object, or nil if failure.
+//
 // NewMatrixFullyConnectedGradientWithCoderDevice creates a new [MatrixFullyConnectedGradient].
 func NewMatrixFullyConnectedGradientWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MatrixFullyConnectedGradient {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixFullyConnectedGradient")), objc.RegisterName("alloc"))
@@ -46,40 +48,54 @@ func NewMatrixFullyConnectedGradientWithCoderDevice(aDecoder *foundation.NSCoder
 	return &MatrixFullyConnectedGradient{inner: raw.MPSMatrixFullyConnectedGradientFromID(_id)}
 }
 
+// @property   sourceNumberOfFeatureVectors @discussion The number of input vectors which make up the input array. This is equivalent to the number of rows in both the input matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+//
 // WithSourceNumberOfFeatureVectors sets the sourceNumberOfFeatureVectors property and returns the receiver for chaining.
 func (x *MatrixFullyConnectedGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixFullyConnectedGradient {
 	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
 	return x
 }
 
+// @property   sourceOutputFeatureChannels @discussion The number of feature channels in the output of the forward fully connected layer. This is equivalent to the number of columns in both the weight matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+//
 // WithSourceOutputFeatureChannels sets the sourceOutputFeatureChannels property and returns the receiver for chaining.
 func (x *MatrixFullyConnectedGradient) WithSourceOutputFeatureChannels(sourceOutputFeatureChannels uint) *MatrixFullyConnectedGradient {
 	x.inner.SetSourceOutputFeatureChannels(sourceOutputFeatureChannels)
 	return x
 }
 
+// @property   sourceInputFeatureChannels @discussion The number of feature channels in the input to the forward fully connected layer. This is equivalent to the number of columns in the input matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+//
 // WithSourceInputFeatureChannels sets the sourceInputFeatureChannels property and returns the receiver for chaining.
 func (x *MatrixFullyConnectedGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixFullyConnectedGradient {
 	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
 	return x
 }
 
+// @property   alpha @discussion Scale factor to apply to the product.  This value should be equal to the corresponding value in the forward fully connected kernel.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *MatrixFullyConnectedGradient) WithAlpha(alpha float64) *MatrixFullyConnectedGradient {
 	x.inner.SetAlpha(alpha)
 	return x
 }
 
+// @abstract   Encode a MPSMatrixFullyConnectedGradient object to a command buffer and produce the gradient of the loss function with respect to the input data. @param      commandBuffer               A valid MTLCommandBuffer to receive the encoded kernel. @param      gradientMatrix              A valid MPSMatrix object which specifies the input gradient. @param      weightMatrix                A valid MPSMatrix object which specifies the weight array. @param      resultGradientForDataMatrix A valid MPSMatrix object which specifies the result gradient. @discussion This operation computes the resulting gradient of the loss function with respect to the forward kernel's input data.  weightMatrix should contain the same values used to compute the result of the forward kernel.
+//
 // EncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix calls the underlying EncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix.
 func (x *MatrixFullyConnectedGradient) EncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, weightMatrix *mpscore.MPSMatrix, resultGradientForDataMatrix *mpscore.MPSMatrix) {
 	x.inner.EncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix(commandBuffer, gradientMatrix, weightMatrix, resultGradientForDataMatrix)
 }
 
+// @abstract   Encode a MPSMatrixFullyConnectedGradient object to a command buffer and produce the gradient of the loss function with respect to the weight matrix and bias vector. @param      commandBuffer                   A valid MTLCommandBuffer to receive the encoded kernel. @param      gradientMatrix                  A valid MPSMatrix object which specifies the input gradient. @param      inputMatrix                     A valid MPSMatrix object which specifies the input array. @param      resultGradientForWeightMatrix   A valid MPSMatrix object which specifies the resulting gradients with respect to the weights. @param      resultGradientForBiasVector     A valid MPSVector object which specifies the resulting gradients with respect to the bias terms.  If NULL these values will not be returned. @discussion This operation computes the resulting gradient of the loss function with respect to the forward kernel's weight data.  inputMatrix should contain the same values used to compute the result of the forward kernel.
+//
 // EncodeGradientForWeightsAndBiasToCommandBufferGradientMatrixInputMatrixResultGradientForWeightMatrixResultGradientForBiasVector calls the underlying EncodeGradientForWeightsAndBiasToCommandBufferGradientMatrixInputMatrixResultGradientForWeightMatrixResultGradientForBiasVector.
 func (x *MatrixFullyConnectedGradient) EncodeGradientForWeightsAndBiasToCommandBufferGradientMatrixInputMatrixResultGradientForWeightMatrixResultGradientForBiasVector(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, inputMatrix *mpscore.MPSMatrix, resultGradientForWeightMatrix *mpscore.MPSMatrix, resultGradientForBiasVector *mpscore.MPSVector) {
 	x.inner.EncodeGradientForWeightsAndBiasToCommandBufferGradientMatrixInputMatrixResultGradientForWeightMatrixResultGradientForBiasVector(commandBuffer, gradientMatrix, inputMatrix, resultGradientForWeightMatrix, resultGradientForBiasVector)
 }
 
+// @property   sourceNumberOfFeatureVectors @discussion The number of input vectors which make up the input array. This is equivalent to the number of rows in both the input matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+//
 // SourceNumberOfFeatureVectors calls the underlying SourceNumberOfFeatureVectors.
 func (x *MatrixFullyConnectedGradient) SourceNumberOfFeatureVectors() uint {
 	return x.inner.SourceNumberOfFeatureVectors()
@@ -90,6 +106,8 @@ func (x *MatrixFullyConnectedGradient) SetSourceNumberOfFeatureVectors(sourceNum
 	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
 }
 
+// @property   sourceOutputFeatureChannels @discussion The number of feature channels in the output of the forward fully connected layer. This is equivalent to the number of columns in both the weight matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+//
 // SourceOutputFeatureChannels calls the underlying SourceOutputFeatureChannels.
 func (x *MatrixFullyConnectedGradient) SourceOutputFeatureChannels() uint {
 	return x.inner.SourceOutputFeatureChannels()
@@ -100,6 +118,8 @@ func (x *MatrixFullyConnectedGradient) SetSourceOutputFeatureChannels(sourceOutp
 	x.inner.SetSourceOutputFeatureChannels(sourceOutputFeatureChannels)
 }
 
+// @property   sourceInputFeatureChannels @discussion The number of feature channels in the input to the forward fully connected layer. This is equivalent to the number of columns in the input matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+//
 // SourceInputFeatureChannels calls the underlying SourceInputFeatureChannels.
 func (x *MatrixFullyConnectedGradient) SourceInputFeatureChannels() uint {
 	return x.inner.SourceInputFeatureChannels()
@@ -110,6 +130,8 @@ func (x *MatrixFullyConnectedGradient) SetSourceInputFeatureChannels(sourceInput
 	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
 }
 
+// @property   alpha @discussion Scale factor to apply to the product.  This value should be equal to the corresponding value in the forward fully connected kernel.
+//
 // Alpha calls the underlying Alpha.
 func (x *MatrixFullyConnectedGradient) Alpha() float64 {
 	return x.inner.Alpha()

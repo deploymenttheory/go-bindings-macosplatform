@@ -36,11 +36,15 @@ func NewTokenKeyAlgorithm() *TokenKeyAlgorithm {
 	return &TokenKeyAlgorithm{inner: raw.TKTokenKeyAlgorithmFromID(_id)}
 }
 
+// @brief Checks if specified algorithm is base operation algorithm.
+//
 // IsAlgorithm calls the underlying IsAlgorithm.
 func (x *TokenKeyAlgorithm) IsAlgorithm(algorithm unsafe.Pointer) bool {
 	return x.inner.IsAlgorithm(algorithm)
 }
 
+// @brief Checks whether specified algorithm is either target algorithm or one of the algorithms through which the operation passed.
+//
 // SupportsAlgorithm calls the underlying SupportsAlgorithm.
 func (x *TokenKeyAlgorithm) SupportsAlgorithm(algorithm unsafe.Pointer) bool {
 	return x.inner.SupportsAlgorithm(algorithm)

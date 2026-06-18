@@ -37,6 +37,8 @@ func NewPhysicsWorld() *PhysicsWorld {
 	return &PhysicsWorld{inner: raw.SKPhysicsWorldFromID(_id)}
 }
 
+// A global 2D vector specifying the field force acceleration due to gravity. The unit is meters per second so standard earth gravity would be { 0.0, +/-9.8 }.
+//
 // WithGravity sets the gravity property and returns the receiver for chaining.
 func (x *PhysicsWorld) WithGravity(gravity corefoundation.CGVector) *PhysicsWorld {
 	x.inner.SetGravity(gravity)
@@ -117,6 +119,8 @@ func (x *PhysicsWorld) EnumerateBodiesAlongRayStartEndUsing(start corefoundation
 	x.inner.EnumerateBodiesAlongRayStartEndUsing(start, end, block)
 }
 
+// A global 2D vector specifying the field force acceleration due to gravity. The unit is meters per second so standard earth gravity would be { 0.0, +/-9.8 }.
+//
 // Gravity calls the underlying Gravity.
 func (x *PhysicsWorld) Gravity() corefoundation.CGVector {
 	return x.inner.Gravity()

@@ -33,6 +33,8 @@ func MTRBaseClusterApplicationBasicFromID(id objc.ID) *MTRBaseClusterApplication
 	return &MTRBaseClusterApplicationBasic{inner: raw.MTRBaseClusterApplicationBasicFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterApplicationBasicWithDeviceEndpointIDQueue creates a new [MTRBaseClusterApplicationBasic].
 func NewMTRBaseClusterApplicationBasicWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterApplicationBasic {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterApplicationBasic")), objc.RegisterName("alloc"))

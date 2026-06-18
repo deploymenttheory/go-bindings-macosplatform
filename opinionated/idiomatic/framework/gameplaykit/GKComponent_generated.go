@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A component is the data and logic for one part of an object in an entity-component system. Entities have many components but components are associated with only a single entity. Components across entities are best arranged in ComponentSystems, which are homogeneous collections of components that the game logic updates in a deterministic order. @see GKComponentSystem
+//
 // Component wraps [raw.GKComponent] with a fluent Go API.
 type Component struct {
 	inner *raw.GKComponent
@@ -35,21 +37,29 @@ func NewComponent() *Component {
 	return &Component{inner: raw.GKComponentFromID(_id)}
 }
 
+// Updates the component with the given delta time since the last update. Each component should perform its time-based logic in this method.
+//
 // UpdateWithDeltaTime calls the underlying UpdateWithDeltaTime.
 func (x *Component) UpdateWithDeltaTime(seconds float64) {
 	x.inner.UpdateWithDeltaTime(seconds)
 }
 
+// Override this to perform game logic when this component is added to an entity
+//
 // DidAddToEntity calls the underlying DidAddToEntity.
 func (x *Component) DidAddToEntity() {
 	x.inner.DidAddToEntity()
 }
 
+// Override this to perform game logic before this entity is removed from it's entity
+//
 // WillRemoveFromEntity calls the underlying WillRemoveFromEntity.
 func (x *Component) WillRemoveFromEntity() {
 	x.inner.WillRemoveFromEntity()
 }
 
+// The entity that this component belongs to. Defaults to nil until the component is added to an entity.
+//
 // Entity calls the underlying Entity.
 func (x *Component) Entity() *Entity {
 	_r := x.inner.Entity()

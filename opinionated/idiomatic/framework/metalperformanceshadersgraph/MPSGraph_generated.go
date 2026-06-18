@@ -40,12 +40,16 @@ func NewGraph() *Graph {
 	return &Graph{inner: raw.MPSGraphFromID(_id)}
 }
 
+// Options for the graph. The default value is `MPSGraphOptionsDefault`.
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *Graph) WithOptions(options MPSGraphOptions) *Graph {
 	x.inner.SetOptions(raw.MPSGraphOptions(options))
 	return x
 }
 
+// Compiles the graph for the given feeds to returns the target tensor values, ensuring all target operations would be executed. This call blocks until execution has completed. The compilation descriptor helps specialize the executable returned. - Parameters: - device: MPSGraph device to optimize for. - feeds: Feeds dictionary for the placeholder tensors. - targetTensors: Tensors for which the caller wishes MPSGraphTensorData to be returned. - targetOperations: Operations to be completed at the end of the run. - compilationDescriptor: compilation descriptor to set different compilation parameters. - Returns: A valid MPSGraphExecutable object
+//
 // CompileWithDeviceFeedsTargetTensorsTargetOperationsCompilationDescriptor calls the underlying CompileWithDeviceFeedsTargetTensorsTargetOperationsCompilationDescriptor.
 func (x *Graph) CompileWithDeviceFeedsTargetTensorsTargetOperationsCompilationDescriptor(device *raw.MPSGraphDevice, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation], compilationDescriptor *raw.MPSGraphCompilationDescriptor) *GraphExecutable {
 	_r := x.inner.CompileWithDeviceFeedsTargetTensorsTargetOperationsCompilationDescriptor(device, feeds, targetTensors, targetOperations, compilationDescriptor)
@@ -55,46 +59,82 @@ func (x *Graph) CompileWithDeviceFeedsTargetTensorsTargetOperationsCompilationDe
 	return &GraphExecutable{inner: _r}
 }
 
+// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed. This call blocks until execution has completed. - Parameters: - feeds: Feeds dictionary for the placeholder tensors. - targetTensors: Tensors for which the caller wishes MPSGraphTensorData to be returned. - targetOperations: Operations to be completed at the end of the run. - Returns: A valid MPSGraphTensor : MPSGraphTensorData dictionary with results synchronized to the CPU memory.
+//
 // RunWithFeedsTargetTensorsTargetOperations calls the underlying RunWithFeedsTargetTensorsTargetOperations.
-func (x *Graph) RunWithFeedsTargetTensorsTargetOperations(feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation]) unsafe.Pointer {
-	return x.inner.RunWithFeedsTargetTensorsTargetOperations(feeds, targetTensors, targetOperations)
+func (x *Graph) RunWithFeedsTargetTensorsTargetOperations(feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations ...GraphOperationProvider) unsafe.Pointer {
+	_ptrs := make([]objc.ID, len(targetOperations))
+	for _i, _v := range targetOperations {
+		_ptrs[_i] = _v.asGraphOperation().Ptr()
+	}
+	var _arg2 *foundation.NSArray[*raw.MPSGraphOperation]
+	if len(_ptrs) > 0 {
+		_arg2 = foundation.NSArrayFromID[*raw.MPSGraphOperation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	return x.inner.RunWithFeedsTargetTensorsTargetOperations(feeds, targetTensors, _arg2)
 }
 
+// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed. This call blocks until execution has completed. - Parameters: - commandQueue: CommandQueue passed to exectute the graph on. - feeds: Feeds dictionary for the placeholder tensors. - targetTensors: Tensors for which the caller wishes MPSGraphTensorData to be returned. - targetOperations: Operations to be completed at the end of the run. - Returns: A valid MPSGraphTensor : MPSGraphTensorData dictionary with results synchronized to the CPU memory.
+//
 // RunWithMTLCommandQueueFeedsTargetTensorsTargetOperations calls the underlying RunWithMTLCommandQueueFeedsTargetTensorsTargetOperations.
-func (x *Graph) RunWithMTLCommandQueueFeedsTargetTensorsTargetOperations(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation]) unsafe.Pointer {
-	return x.inner.RunWithMTLCommandQueueFeedsTargetTensorsTargetOperations(commandQueue, feeds, targetTensors, targetOperations)
+func (x *Graph) RunWithMTLCommandQueueFeedsTargetTensorsTargetOperations(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations ...GraphOperationProvider) unsafe.Pointer {
+	_ptrs := make([]objc.ID, len(targetOperations))
+	for _i, _v := range targetOperations {
+		_ptrs[_i] = _v.asGraphOperation().Ptr()
+	}
+	var _arg3 *foundation.NSArray[*raw.MPSGraphOperation]
+	if len(_ptrs) > 0 {
+		_arg3 = foundation.NSArrayFromID[*raw.MPSGraphOperation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	return x.inner.RunWithMTLCommandQueueFeedsTargetTensorsTargetOperations(commandQueue, feeds, targetTensors, _arg3)
 }
 
+// Runs the graph for the given feeds and returns the target tensor values in the results dictionary provided by the user. It also ensures all target operations also executed. This call blocks until execution has completed. - Parameters: - commandQueue: CommandQueue passed to exectute the graph on. - feeds: Feeds dictionary for the placeholder tensors. - targetOperations: Operations to be completed at the end of the run. - resultsDictionary: MPSGraphTensors dictionary passed by user, these will be filled with graph output data.
+//
 // RunWithMTLCommandQueueFeedsTargetOperationsResultsDictionary calls the underlying RunWithMTLCommandQueueFeedsTargetOperationsResultsDictionary.
 func (x *Graph) RunWithMTLCommandQueueFeedsTargetOperationsResultsDictionary(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetOperations *foundation.NSArray[*raw.MPSGraphOperation], resultsDictionary unsafe.Pointer) {
 	x.inner.RunWithMTLCommandQueueFeedsTargetOperationsResultsDictionary(commandQueue, feeds, targetOperations, resultsDictionary)
 }
 
+// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed. This call is asynchronous and will return immediately if a completionHandler is set. - Parameters: - feeds: Feeds dictionary for the placeholder tensors. - targetTensors: Tensors for which the caller wishes MPSGraphTensorData to be returned. - targetOperations: Operations to be completed at the end of the run. - executionDescriptor: ExecutionDescriptor to be passed in and used. - Returns: A valid MPSGraphTensor : MPSGraphTensorData dictionary with results synchronized to the CPU memory.
+//
 // RunAsyncWithFeedsTargetTensorsTargetOperationsExecutionDescriptor calls the underlying RunAsyncWithFeedsTargetTensorsTargetOperationsExecutionDescriptor.
 func (x *Graph) RunAsyncWithFeedsTargetTensorsTargetOperationsExecutionDescriptor(feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation], executionDescriptor *raw.MPSGraphExecutionDescriptor) unsafe.Pointer {
 	return x.inner.RunAsyncWithFeedsTargetTensorsTargetOperationsExecutionDescriptor(feeds, targetTensors, targetOperations, executionDescriptor)
 }
 
+// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed. This call is asynchronous and will return immediately if a completionHandler is set. - Parameters: - commandQueue: CommandQueue passed to exectute the graph on. - feeds: Feeds dictionary for the placeholder tensors. - targetTensors: Tensors for which the caller wishes MPSGraphTensorData to be returned. - targetOperations: Operations to be completed at the end of the run. - executionDescriptor: ExecutionDescriptor to be passed in and used. - Returns: A valid MPSGraphTensor : MPSGraphTensorData dictionary with results synchronized to the CPU memory if MPSGraphOptionsSynchronizeResults set.
+//
 // RunAsyncWithMTLCommandQueueFeedsTargetTensorsTargetOperationsExecutionDescriptor calls the underlying RunAsyncWithMTLCommandQueueFeedsTargetTensorsTargetOperationsExecutionDescriptor.
 func (x *Graph) RunAsyncWithMTLCommandQueueFeedsTargetTensorsTargetOperationsExecutionDescriptor(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation], executionDescriptor *raw.MPSGraphExecutionDescriptor) unsafe.Pointer {
 	return x.inner.RunAsyncWithMTLCommandQueueFeedsTargetTensorsTargetOperationsExecutionDescriptor(commandQueue, feeds, targetTensors, targetOperations, executionDescriptor)
 }
 
+// Encodes the graph for the given feeds to returns the target tensor values in the results dictionary provided by the user. It ensures all target operations also executed. This call is asynchronous and will return immediately if a completionHandler is set. - Parameters: - commandQueue: CommandQueue passed to exectute the graph on. - feeds: Feeds dictionary for the placeholder tensors. - targetOperations: Operations to be completed at the end of the run. - resultsDictionary: MPSGraphTensors dictionary passed by user, these will be filled with graph output data. - executionDescriptor: ExecutionDescriptor to be passed in and used.
+//
 // RunAsyncWithMTLCommandQueueFeedsTargetOperationsResultsDictionaryExecutionDescriptor calls the underlying RunAsyncWithMTLCommandQueueFeedsTargetOperationsResultsDictionaryExecutionDescriptor.
 func (x *Graph) RunAsyncWithMTLCommandQueueFeedsTargetOperationsResultsDictionaryExecutionDescriptor(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetOperations *foundation.NSArray[*raw.MPSGraphOperation], resultsDictionary unsafe.Pointer, executionDescriptor *raw.MPSGraphExecutionDescriptor) {
 	x.inner.RunAsyncWithMTLCommandQueueFeedsTargetOperationsResultsDictionaryExecutionDescriptor(commandQueue, feeds, targetOperations, resultsDictionary, executionDescriptor)
 }
 
+// Encodes the graph for the given feeds to returns the target tensor values, ensuring all target operations also executed. This call is asynchronous and will return immediately if a completionHandler is set. - Parameters: - commandBuffer: commandBuffer passed to exectute the graph on, it is an MPSCommandBuffer, commitAndContinue might be called, please don't rely on underlying MTLCommandBuffer to remain uncommitted. - feeds: Feeds dictionary for the placeholder tensors. - targetTensors: Tensors for which the caller wishes MPSGraphTensorData to be returned. - targetOperations: Operations to be completed at the end of the run. - executionDescriptor: ExecutionDescriptor to be passed in and used. - Returns: A valid MPSGraphTensor : MPSGraphTensorData dictionary with results synchronized to the CPU memory if MPSGraphOptionsSynchronizeResults set.
+//
 // EncodeToCommandBufferFeedsTargetTensorsTargetOperationsExecutionDescriptor calls the underlying EncodeToCommandBufferFeedsTargetTensorsTargetOperationsExecutionDescriptor.
 func (x *Graph) EncodeToCommandBufferFeedsTargetTensorsTargetOperationsExecutionDescriptor(commandBuffer *mpscore.MPSCommandBuffer, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation], executionDescriptor *raw.MPSGraphExecutionDescriptor) unsafe.Pointer {
 	return x.inner.EncodeToCommandBufferFeedsTargetTensorsTargetOperationsExecutionDescriptor(commandBuffer, feeds, targetTensors, targetOperations, executionDescriptor)
 }
 
+// Encodes the graph for the given feeds to returns the target tensor values in the results dictionary provided by the user. It ensures all target operations also executed. This call is asynchronous and will return immediately if a completionHandler is set. - Parameters: - commandBuffer: commandBuffer passed to execute the graph on, commitAndContinue might be called, please don't rely on underlying MTLCommandBuffer to remain uncommitted. - feeds: Feeds dictionary for the placeholder tensors. - targetOperations: Operations to be completed at the end of the run. - resultsDictionary: MPSGraphTensors dictionary passed by user, these will be filled with graph output data. - executionDescriptor: ExecutionDescriptor to be passed in and used.
+//
 // EncodeToCommandBufferFeedsTargetOperationsResultsDictionaryExecutionDescriptor calls the underlying EncodeToCommandBufferFeedsTargetOperationsResultsDictionaryExecutionDescriptor.
 func (x *Graph) EncodeToCommandBufferFeedsTargetOperationsResultsDictionaryExecutionDescriptor(commandBuffer *mpscore.MPSCommandBuffer, feeds unsafe.Pointer, targetOperations *foundation.NSArray[*raw.MPSGraphOperation], resultsDictionary unsafe.Pointer, executionDescriptor *raw.MPSGraphExecutionDescriptor) {
 	x.inner.EncodeToCommandBufferFeedsTargetOperationsResultsDictionaryExecutionDescriptor(commandBuffer, feeds, targetOperations, resultsDictionary, executionDescriptor)
 }
 
+// Options for the graph. The default value is `MPSGraphOptionsDefault`.
+//
 // Options calls the underlying Options.
 func (x *Graph) Options() MPSGraphOptions {
 	return MPSGraphOptions(x.inner.Options())
@@ -105,6 +145,8 @@ func (x *Graph) SetOptions(options MPSGraphOptions) {
 	x.inner.SetOptions(raw.MPSGraphOptions(options))
 }
 
+// Array of all the placeholder tensors.
+//
 // PlaceholderTensors returns the collection as a Go slice.
 func (x *Graph) PlaceholderTensors() []*GraphTensor {
 	arr := x.inner.PlaceholderTensors()
@@ -116,11 +158,15 @@ func (x *Graph) PlaceholderTensors() []*GraphTensor {
 	})
 }
 
+// Calculates a partial derivative of primaryTensor with respect to the tensors. - Parameters: - primaryTensor: Tensor to be differentiated (numerator). - tensors: Tensors to do the differentiation with (denominator). - name: Name for the gradient operation. - Returns: A valid MPSGraphTensor dictionary object containing partial derivative d(primaryTensor)/d(secondaryTensor) for each tensor as key.
+//
 // GradientForPrimaryTensorWithTensorsName calls the underlying GradientForPrimaryTensorWithTensorsName.
 func (x *Graph) GradientForPrimaryTensorWithTensorsName(primaryTensor *raw.MPSGraphTensor, tensors *foundation.NSArray[*raw.MPSGraphTensor], name string) *foundation.NSDictionary[*raw.MPSGraphTensor, *raw.MPSGraphTensor] {
 	return x.inner.GradientForPrimaryTensorWithTensorsName(primaryTensor, tensors, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Computes the ReLU (rectified linear activation unit) function with the input tensor. The operation is:  f(x) = max(x, 0). - Parameters: - tensor: The input tensor. - name: The name for the operation. - Returns: A valid “MPSGraphTensor“ object.
+//
 // ReLUWithTensorName calls the underlying ReLUWithTensorName.
 func (x *Graph) ReLUWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ReLUWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -130,6 +176,8 @@ func (x *Graph) ReLUWithTensorName(tensor *raw.MPSGraphTensor, name string) *Gra
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the gradient of the ReLU  (rectified linear activation unit) function using the incoming gradient. - Parameters: - gradient: The incoming gradient tensor. - source: The input tensor from forward pass. - name: The name for the operation. - Returns: A valid “MPSGraphTensor“ object.
+//
 // ReLUGradientWithIncomingGradientSourceTensorName calls the underlying ReLUGradientWithIncomingGradientSourceTensorName.
 func (x *Graph) ReLUGradientWithIncomingGradientSourceTensorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ReLUGradientWithIncomingGradientSourceTensorName(gradient, source, foundation.NSStringStringWithUTF8String(name))
@@ -139,6 +187,8 @@ func (x *Graph) ReLUGradientWithIncomingGradientSourceTensorName(gradient *raw.M
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the sigmoid operation on an input tensor. - Parameters: - tensor: The input tensor. - name: The name for the operation. - Returns: A valid “MPSGraphTensor“ object.
+//
 // SigmoidWithTensorName calls the underlying SigmoidWithTensorName.
 func (x *Graph) SigmoidWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.SigmoidWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -148,6 +198,8 @@ func (x *Graph) SigmoidWithTensorName(tensor *raw.MPSGraphTensor, name string) *
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the gradient of the sigmoid function using the incoming gradient tensor. - Parameters: - gradient: The incoming gradient tensor. - source: The input tensor. - name: The name for the operation. - Returns: A valid “MPSGraphTensor“ object
+//
 // SigmoidGradientWithIncomingGradientSourceTensorName calls the underlying SigmoidGradientWithIncomingGradientSourceTensorName.
 func (x *Graph) SigmoidGradientWithIncomingGradientSourceTensorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.SigmoidGradientWithIncomingGradientSourceTensorName(gradient, source, foundation.NSStringStringWithUTF8String(name))
@@ -157,6 +209,8 @@ func (x *Graph) SigmoidGradientWithIncomingGradientSourceTensorName(gradient *ra
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the softmax function on the input tensor along the specified axis. - Parameters: - tensor: The input tensor. - axis: The axis along which softmax is computed. - name: The name for the operation. - Returns: A valid “MPSGraphTensor“ object
+//
 // SoftMaxWithTensorAxisName calls the underlying SoftMaxWithTensorAxisName.
 func (x *Graph) SoftMaxWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.SoftMaxWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -166,6 +220,8 @@ func (x *Graph) SoftMaxWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, 
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the gradient of the softmax function along the specified axis using the incoming gradient tensor. - Parameters: - gradient: The incoming gradient tensor. - source: The input tensor. - axis: The axis along which softmax is computed. - name: The name for the operation. - Returns: A valid “MPSGraphTensor“ object
+//
 // SoftMaxGradientWithIncomingGradientSourceTensorAxisName calls the underlying SoftMaxGradientWithIncomingGradientSourceTensorAxisName.
 func (x *Graph) SoftMaxGradientWithIncomingGradientSourceTensorAxisName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.SoftMaxGradientWithIncomingGradientSourceTensorAxisName(gradient, source, axis, foundation.NSStringStringWithUTF8String(name))
@@ -175,6 +231,8 @@ func (x *Graph) SoftMaxGradientWithIncomingGradientSourceTensorAxisName(gradient
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the leaky rectified linear unit (ReLU) activation function on the input tensor. The operation is: f(x) = max(x, alpha). - Parameters: - tensor: An input tensor. - alpha: The scalar value alpha used by all elements in the input tensor. - name: The name for the operation. - Returns: A valid “MPSGraphTensor“ object
+//
 // LeakyReLUWithTensorAlphaName calls the underlying LeakyReLUWithTensorAlphaName.
 func (x *Graph) LeakyReLUWithTensorAlphaName(tensor *raw.MPSGraphTensor, alpha float64, name string) *GraphTensor {
 	_r := x.inner.LeakyReLUWithTensorAlphaName(tensor, alpha, foundation.NSStringStringWithUTF8String(name))
@@ -184,6 +242,8 @@ func (x *Graph) LeakyReLUWithTensorAlphaName(tensor *raw.MPSGraphTensor, alpha f
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the leaky rectified linear unit (ReLU) activation function on the input tensor. The operation is: f(x) = max(x, alpha). This operation supports broadcasting with the alpha tensor. - Parameters: - tensor: The input tensor. - alpha: The alpha tensor. - name: The name for the operation. - Returns: A valid “MPSGraphTensor“ object
+//
 // LeakyReLUWithTensorAlphaTensorName calls the underlying LeakyReLUWithTensorAlphaTensorName.
 func (x *Graph) LeakyReLUWithTensorAlphaTensorName(tensor *raw.MPSGraphTensor, alphaTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.LeakyReLUWithTensorAlphaTensorName(tensor, alphaTensor, foundation.NSStringStringWithUTF8String(name))
@@ -193,6 +253,8 @@ func (x *Graph) LeakyReLUWithTensorAlphaTensorName(tensor *raw.MPSGraphTensor, a
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the gradient of the leaky rectified linear unit (ReLU) activation. This operation supports broadcasting with the alpha tensor. - Parameters: - gradient: The incoming gradient tensor. - source: The input tensor in forward pass. - alpha: The alpha tensor - name: The name for the operation. - Returns: A valid “MPSGraphTensor“ object
+//
 // LeakyReLUGradientWithIncomingGradientSourceTensorAlphaTensorName calls the underlying LeakyReLUGradientWithIncomingGradientSourceTensorAlphaTensorName.
 func (x *Graph) LeakyReLUGradientWithIncomingGradientSourceTensorAlphaTensorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, alphaTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.LeakyReLUGradientWithIncomingGradientSourceTensorAlphaTensorName(gradient, source, alphaTensor, foundation.NSStringStringWithUTF8String(name))
@@ -202,6 +264,8 @@ func (x *Graph) LeakyReLUGradientWithIncomingGradientSourceTensorAlphaTensorName
 	return &GraphTensor{inner: _r}
 }
 
+// Copies the input tensor values into the output, behaving as an identity operation. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object which is a copy of the input.
+//
 // IdentityWithTensorName calls the underlying IdentityWithTensorName.
 func (x *Graph) IdentityWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.IdentityWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -211,6 +275,8 @@ func (x *Graph) IdentityWithTensorName(tensor *raw.MPSGraphTensor, name string) 
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the natural exponent to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // ExponentWithTensorName calls the underlying ExponentWithTensorName.
 func (x *Graph) ExponentWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ExponentWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -220,6 +286,8 @@ func (x *Graph) ExponentWithTensorName(tensor *raw.MPSGraphTensor, name string) 
 	return &GraphTensor{inner: _r}
 }
 
+// Applies an exponent with base 2 to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // ExponentBase2WithTensorName calls the underlying ExponentBase2WithTensorName.
 func (x *Graph) ExponentBase2WithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ExponentBase2WithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -229,6 +297,8 @@ func (x *Graph) ExponentBase2WithTensorName(tensor *raw.MPSGraphTensor, name str
 	return &GraphTensor{inner: _r}
 }
 
+// Applies an exponent with base 10 to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // ExponentBase10WithTensorName calls the underlying ExponentBase10WithTensorName.
 func (x *Graph) ExponentBase10WithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ExponentBase10WithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -238,6 +308,8 @@ func (x *Graph) ExponentBase10WithTensorName(tensor *raw.MPSGraphTensor, name st
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the natural logarithm to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // LogarithmWithTensorName calls the underlying LogarithmWithTensorName.
 func (x *Graph) LogarithmWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.LogarithmWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -247,6 +319,8 @@ func (x *Graph) LogarithmWithTensorName(tensor *raw.MPSGraphTensor, name string)
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the logarithm with base 2 to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // LogarithmBase2WithTensorName calls the underlying LogarithmBase2WithTensorName.
 func (x *Graph) LogarithmBase2WithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.LogarithmBase2WithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -256,6 +330,8 @@ func (x *Graph) LogarithmBase2WithTensorName(tensor *raw.MPSGraphTensor, name st
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the logarithm with base 10 to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // LogarithmBase10WithTensorName calls the underlying LogarithmBase10WithTensorName.
 func (x *Graph) LogarithmBase10WithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.LogarithmBase10WithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -265,6 +341,8 @@ func (x *Graph) LogarithmBase10WithTensorName(tensor *raw.MPSGraphTensor, name s
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the square operation to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // SquareWithTensorName calls the underlying SquareWithTensorName.
 func (x *Graph) SquareWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.SquareWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -274,6 +352,8 @@ func (x *Graph) SquareWithTensorName(tensor *raw.MPSGraphTensor, name string) *G
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the square root operation to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // SquareRootWithTensorName calls the underlying SquareRootWithTensorName.
 func (x *Graph) SquareRootWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.SquareRootWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -283,6 +363,8 @@ func (x *Graph) SquareRootWithTensorName(tensor *raw.MPSGraphTensor, name string
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the reciprocal square root operation to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // ReciprocalSquareRootWithTensorName calls the underlying ReciprocalSquareRootWithTensorName.
 func (x *Graph) ReciprocalSquareRootWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ReciprocalSquareRootWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -292,6 +374,8 @@ func (x *Graph) ReciprocalSquareRootWithTensorName(tensor *raw.MPSGraphTensor, n
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the reverse square root operation to the input tensor elements. The reverse square root operation is the reciprocal of the square root. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // ReverseSquareRootWithTensorName calls the underlying ReverseSquareRootWithTensorName.
 func (x *Graph) ReverseSquareRootWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ReverseSquareRootWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -301,6 +385,8 @@ func (x *Graph) ReverseSquareRootWithTensorName(tensor *raw.MPSGraphTensor, name
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the reciprocal operation to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // ReciprocalWithTensorName calls the underlying ReciprocalWithTensorName.
 func (x *Graph) ReciprocalWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ReciprocalWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -310,6 +396,8 @@ func (x *Graph) ReciprocalWithTensorName(tensor *raw.MPSGraphTensor, name string
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the absolute values of the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // AbsoluteWithTensorName calls the underlying AbsoluteWithTensorName.
 func (x *Graph) AbsoluteWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.AbsoluteWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -319,6 +407,8 @@ func (x *Graph) AbsoluteWithTensorName(tensor *raw.MPSGraphTensor, name string) 
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the absolute square of the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation.. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // AbsoluteSquareWithTensorName calls the underlying AbsoluteSquareWithTensorName.
 func (x *Graph) AbsoluteSquareWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.AbsoluteSquareWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -328,6 +418,8 @@ func (x *Graph) AbsoluteSquareWithTensorName(tensor *raw.MPSGraphTensor, name st
 	return &GraphTensor{inner: _r}
 }
 
+// Applies negative to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // NegativeWithTensorName calls the underlying NegativeWithTensorName.
 func (x *Graph) NegativeWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.NegativeWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -337,6 +429,8 @@ func (x *Graph) NegativeWithTensorName(tensor *raw.MPSGraphTensor, name string) 
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the sign of the input tensor elements. This operation returns 1.0 if the correspnding input element is greater than 0, -1.0 if it is lesser than 0, -0.0 if it is equal to -0.0, and +0.0 if it is equal to +0.0. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // SignWithTensorName calls the underlying SignWithTensorName.
 func (x *Graph) SignWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.SignWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -346,6 +440,8 @@ func (x *Graph) SignWithTensorName(tensor *raw.MPSGraphTensor, name string) *Gra
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the sign bit of the input tensor elements. This operation returns `true` if the sign bit is set for the correspnding floating-point input element, otherwise it returns `false`. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // SignbitWithTensorName calls the underlying SignbitWithTensorName.
 func (x *Graph) SignbitWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.SignbitWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -355,6 +451,8 @@ func (x *Graph) SignbitWithTensorName(tensor *raw.MPSGraphTensor, name string) *
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the ceiling operation to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // CeilWithTensorName calls the underlying CeilWithTensorName.
 func (x *Graph) CeilWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.CeilWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -364,6 +462,8 @@ func (x *Graph) CeilWithTensorName(tensor *raw.MPSGraphTensor, name string) *Gra
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the floor operation to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // FloorWithTensorName calls the underlying FloorWithTensorName.
 func (x *Graph) FloorWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.FloorWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -373,6 +473,8 @@ func (x *Graph) FloorWithTensorName(tensor *raw.MPSGraphTensor, name string) *Gr
 	return &GraphTensor{inner: _r}
 }
 
+// Rounds the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // RoundWithTensorName calls the underlying RoundWithTensorName.
 func (x *Graph) RoundWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.RoundWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -382,6 +484,8 @@ func (x *Graph) RoundWithTensorName(tensor *raw.MPSGraphTensor, name string) *Gr
 	return &GraphTensor{inner: _r}
 }
 
+// Rounds the input tensor elements by rounding to nearest even. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // RintWithTensorName calls the underlying RintWithTensorName.
 func (x *Graph) RintWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.RintWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -391,6 +495,8 @@ func (x *Graph) RintWithTensorName(tensor *raw.MPSGraphTensor, name string) *Gra
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the sine operation to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // SinWithTensorName calls the underlying SinWithTensorName.
 func (x *Graph) SinWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.SinWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -400,6 +506,8 @@ func (x *Graph) SinWithTensorName(tensor *raw.MPSGraphTensor, name string) *Grap
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the cosine operation to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // CosWithTensorName calls the underlying CosWithTensorName.
 func (x *Graph) CosWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.CosWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -409,6 +517,8 @@ func (x *Graph) CosWithTensorName(tensor *raw.MPSGraphTensor, name string) *Grap
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the tangent operation to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // TanWithTensorName calls the underlying TanWithTensorName.
 func (x *Graph) TanWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.TanWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -418,6 +528,8 @@ func (x *Graph) TanWithTensorName(tensor *raw.MPSGraphTensor, name string) *Grap
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the hyperbolic sine operation to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // SinhWithTensorName calls the underlying SinhWithTensorName.
 func (x *Graph) SinhWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.SinhWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -427,6 +539,8 @@ func (x *Graph) SinhWithTensorName(tensor *raw.MPSGraphTensor, name string) *Gra
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the hyperbolic cosine operation to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // CoshWithTensorName calls the underlying CoshWithTensorName.
 func (x *Graph) CoshWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.CoshWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -436,6 +550,8 @@ func (x *Graph) CoshWithTensorName(tensor *raw.MPSGraphTensor, name string) *Gra
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the hyperbolic tangent operation to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // TanhWithTensorName calls the underlying TanhWithTensorName.
 func (x *Graph) TanhWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.TanhWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -445,6 +561,8 @@ func (x *Graph) TanhWithTensorName(tensor *raw.MPSGraphTensor, name string) *Gra
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the inverse sine operation to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // AsinWithTensorName calls the underlying AsinWithTensorName.
 func (x *Graph) AsinWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.AsinWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -454,6 +572,8 @@ func (x *Graph) AsinWithTensorName(tensor *raw.MPSGraphTensor, name string) *Gra
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the inverse cosine operation to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // AcosWithTensorName calls the underlying AcosWithTensorName.
 func (x *Graph) AcosWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.AcosWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -463,6 +583,8 @@ func (x *Graph) AcosWithTensorName(tensor *raw.MPSGraphTensor, name string) *Gra
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the inverse tangent operation to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // AtanWithTensorName calls the underlying AtanWithTensorName.
 func (x *Graph) AtanWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.AtanWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -472,6 +594,8 @@ func (x *Graph) AtanWithTensorName(tensor *raw.MPSGraphTensor, name string) *Gra
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the inverse hyperbolic sine operation to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // AsinhWithTensorName calls the underlying AsinhWithTensorName.
 func (x *Graph) AsinhWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.AsinhWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -481,6 +605,8 @@ func (x *Graph) AsinhWithTensorName(tensor *raw.MPSGraphTensor, name string) *Gr
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the inverse hyperbolic cosine operation to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // AcoshWithTensorName calls the underlying AcoshWithTensorName.
 func (x *Graph) AcoshWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.AcoshWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -490,6 +616,8 @@ func (x *Graph) AcoshWithTensorName(tensor *raw.MPSGraphTensor, name string) *Gr
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the inverse hyperbolic tangent operation to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // AtanhWithTensorName calls the underlying AtanhWithTensorName.
 func (x *Graph) AtanhWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.AtanhWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -499,6 +627,8 @@ func (x *Graph) AtanhWithTensorName(tensor *raw.MPSGraphTensor, name string) *Gr
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the logical NOT operation to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // NotWithTensorName calls the underlying NotWithTensorName.
 func (x *Graph) NotWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.NotWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -508,6 +638,8 @@ func (x *Graph) NotWithTensorName(tensor *raw.MPSGraphTensor, name string) *Grap
 	return &GraphTensor{inner: _r}
 }
 
+// Checks if the input tensor elements are infinite or not. If the input tensor element is infinite, the operation returns `true`, else it returns `false`. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // IsInfiniteWithTensorName calls the underlying IsInfiniteWithTensorName.
 func (x *Graph) IsInfiniteWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.IsInfiniteWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -517,6 +649,8 @@ func (x *Graph) IsInfiniteWithTensorName(tensor *raw.MPSGraphTensor, name string
 	return &GraphTensor{inner: _r}
 }
 
+// Checks if the input tensor elements are finite or not. If the input tensor element is finite, the operation returns `true`, else it returns `false`. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // IsFiniteWithTensorName calls the underlying IsFiniteWithTensorName.
 func (x *Graph) IsFiniteWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.IsFiniteWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -526,6 +660,8 @@ func (x *Graph) IsFiniteWithTensorName(tensor *raw.MPSGraphTensor, name string) 
 	return &GraphTensor{inner: _r}
 }
 
+// Checks if the input tensor elements are `NaN` or not. If the input tensor element is `NaN`, the operation returns `true`, else it returns `false`. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // IsNaNWithTensorName calls the underlying IsNaNWithTensorName.
 func (x *Graph) IsNaNWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.IsNaNWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -535,6 +671,8 @@ func (x *Graph) IsNaNWithTensorName(tensor *raw.MPSGraphTensor, name string) *Gr
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the error function to the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // ErfWithTensorName calls the underlying ErfWithTensorName.
 func (x *Graph) ErfWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ErfWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -544,6 +682,8 @@ func (x *Graph) ErfWithTensorName(tensor *raw.MPSGraphTensor, name string) *Grap
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the truncate operation to the input tensor elements. This operation applies the floor operation to positive inputs and ceiling operation to negative inputs. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // TruncateWithTensorName calls the underlying TruncateWithTensorName.
 func (x *Graph) TruncateWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.TruncateWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -553,6 +693,8 @@ func (x *Graph) TruncateWithTensorName(tensor *raw.MPSGraphTensor, name string) 
 	return &GraphTensor{inner: _r}
 }
 
+// Applies the bitwise NOT operation to the input tensor element. This operation only accepts integer tensors. - Parameters: - tensor: The input tensor, which must be of integer type. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // BitwiseNOTWithTensorName calls the underlying BitwiseNOTWithTensorName.
 func (x *Graph) BitwiseNOTWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.BitwiseNOTWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -562,6 +704,8 @@ func (x *Graph) BitwiseNOTWithTensorName(tensor *raw.MPSGraphTensor, name string
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the population count of the input tensor elements. This operation only accepts integer tensors, and returns the number of bits set in the input element. - Parameters: - tensor: The input tensor, which must be of integer type. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // BitwisePopulationCountWithTensorName calls the underlying BitwisePopulationCountWithTensorName.
 func (x *Graph) BitwisePopulationCountWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.BitwisePopulationCountWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -571,6 +715,8 @@ func (x *Graph) BitwisePopulationCountWithTensorName(tensor *raw.MPSGraphTensor,
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the complex conjugate of the input tensor elements. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation.. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // ConjugateWithTensorName calls the underlying ConjugateWithTensorName.
 func (x *Graph) ConjugateWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ConjugateWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -580,6 +726,8 @@ func (x *Graph) ConjugateWithTensorName(tensor *raw.MPSGraphTensor, name string)
 	return &GraphTensor{inner: _r}
 }
 
+// Adds two input tensors. This operation creates an add operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = primaryTensor + secondaryTensor ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // AdditionWithPrimaryTensorSecondaryTensorName calls the underlying AdditionWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) AdditionWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.AdditionWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -589,6 +737,8 @@ func (x *Graph) AdditionWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.
 	return &GraphTensor{inner: _r}
 }
 
+// Subtracts the second input tensor from the first. This operation creates a subtract operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = primaryTensor - secondaryTensor ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // SubtractionWithPrimaryTensorSecondaryTensorName calls the underlying SubtractionWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) SubtractionWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.SubtractionWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -598,6 +748,8 @@ func (x *Graph) SubtractionWithPrimaryTensorSecondaryTensorName(primaryTensor *r
 	return &GraphTensor{inner: _r}
 }
 
+// Multiplies two input tensors. This operation creates a multiply operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = primaryTensor * secondaryTensor ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // MultiplicationWithPrimaryTensorSecondaryTensorName calls the underlying MultiplicationWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) MultiplicationWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.MultiplicationWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -607,6 +759,8 @@ func (x *Graph) MultiplicationWithPrimaryTensorSecondaryTensorName(primaryTensor
 	return &GraphTensor{inner: _r}
 }
 
+// Divides the first input tensor by the second. This operation creates a divide operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = primaryTensor / secondaryTensor ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // DivisionWithPrimaryTensorSecondaryTensorName calls the underlying DivisionWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) DivisionWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.DivisionWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -616,6 +770,8 @@ func (x *Graph) DivisionWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the remainder obtained by dividing the first input tensor by the second. This operation creates a modulo operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = primaryTensor % secondaryTensor ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // ModuloWithPrimaryTensorSecondaryTensorName calls the underlying ModuloWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) ModuloWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ModuloWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -625,6 +781,8 @@ func (x *Graph) ModuloWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MP
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the elementwise result of raising the first tensor to the power of the second tensor. This operation creates a power operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = pow(primaryTensor, secondaryTensor) ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // PowerWithPrimaryTensorSecondaryTensorName calls the underlying PowerWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) PowerWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.PowerWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -634,6 +792,8 @@ func (x *Graph) PowerWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPS
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the elementwise minimum of the input tensors. This operation creates a minimum operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = min(primaryTensor, secondaryTensor) ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // MinimumWithPrimaryTensorSecondaryTensorName calls the underlying MinimumWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) MinimumWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.MinimumWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -643,6 +803,8 @@ func (x *Graph) MinimumWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.M
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the elementwise maximum of the input tensors. This operation creates a maximum operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = max(primaryTensor, secondaryTensor) ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // MaximumWithPrimaryTensorSecondaryTensorName calls the underlying MaximumWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) MaximumWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.MaximumWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -652,6 +814,8 @@ func (x *Graph) MaximumWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.M
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the elementwise minimum of the input tensors, while propagating `NaN` values. This operation creates a minimum with `NaN` propagation operation and returns the result tensor. This means that if any of the elementwise operands is `NaN`, the result is `NaN`. It supports broadcasting as well. ```md resultTensor = isNaN(primaryTensor) || isNan(secondaryTensor) ? NaN : min(primaryTensor, secondaryTensor) ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // MinimumWithNaNPropagationWithPrimaryTensorSecondaryTensorName calls the underlying MinimumWithNaNPropagationWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) MinimumWithNaNPropagationWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.MinimumWithNaNPropagationWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -661,6 +825,8 @@ func (x *Graph) MinimumWithNaNPropagationWithPrimaryTensorSecondaryTensorName(pr
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the elementwise maximum of the input tensors, while propagating `NaN` values. This operation creates a maximum with `NaN` propagation operation and returns the result tensor. This means that if any of the elementwise operands is `NaN`, the result is `NaN`. It supports broadcasting as well. ```md resultTensor = isNaN(primaryTensor) || isNan(secondaryTensor) ? NaN : max(primaryTensor, secondaryTensor) ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // MaximumWithNaNPropagationWithPrimaryTensorSecondaryTensorName calls the underlying MaximumWithNaNPropagationWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) MaximumWithNaNPropagationWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.MaximumWithNaNPropagationWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -670,6 +836,8 @@ func (x *Graph) MaximumWithNaNPropagationWithPrimaryTensorSecondaryTensorName(pr
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the elementwise equality check of the input tensors. This operation creates a equal operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = primaryTensor == secondaryTensor ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // EqualWithPrimaryTensorSecondaryTensorName calls the underlying EqualWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) EqualWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.EqualWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -679,6 +847,8 @@ func (x *Graph) EqualWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPS
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the elementwise inequality check of the input tensors. This operation creates a not equal operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = primaryTensor != secondaryTensor ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // NotEqualWithPrimaryTensorSecondaryTensorName calls the underlying NotEqualWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) NotEqualWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.NotEqualWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -688,6 +858,8 @@ func (x *Graph) NotEqualWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.
 	return &GraphTensor{inner: _r}
 }
 
+// Checks in an elementwise manner if the first input tensor is less than the second. This operation creates a `lessThan` operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = primaryTensor < secondaryTensor ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // LessThanWithPrimaryTensorSecondaryTensorName calls the underlying LessThanWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) LessThanWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.LessThanWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -697,6 +869,8 @@ func (x *Graph) LessThanWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.
 	return &GraphTensor{inner: _r}
 }
 
+// Checks in an elementwise manner if the first input tensor is less than or equal to the second. This operation creates a `lessThanOrEqualTo` operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = primaryTensor <= secondaryTensor ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // LessThanOrEqualToWithPrimaryTensorSecondaryTensorName calls the underlying LessThanOrEqualToWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) LessThanOrEqualToWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.LessThanOrEqualToWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -706,6 +880,8 @@ func (x *Graph) LessThanOrEqualToWithPrimaryTensorSecondaryTensorName(primaryTen
 	return &GraphTensor{inner: _r}
 }
 
+// Checks in an elementwise manner if the first input tensor is greater than the second. This operation creates a `greaterThan` operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = primaryTensor > secondaryTensor ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // GreaterThanWithPrimaryTensorSecondaryTensorName calls the underlying GreaterThanWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) GreaterThanWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.GreaterThanWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -715,6 +891,8 @@ func (x *Graph) GreaterThanWithPrimaryTensorSecondaryTensorName(primaryTensor *r
 	return &GraphTensor{inner: _r}
 }
 
+// Checks in an elementwise manner if the first input tensor is greater than or equal to the second. This operation creates a `greaterThanOrEqual` operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = primaryTensor < secondaryTensor ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // GreaterThanOrEqualToWithPrimaryTensorSecondaryTensorName calls the underlying GreaterThanOrEqualToWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) GreaterThanOrEqualToWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.GreaterThanOrEqualToWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -724,6 +902,8 @@ func (x *Graph) GreaterThanOrEqualToWithPrimaryTensorSecondaryTensorName(primary
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the elementwise logical AND of the input tensors. This operation creates a logical AND operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = primaryTensor && secondaryTensor ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // LogicalANDWithPrimaryTensorSecondaryTensorName calls the underlying LogicalANDWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) LogicalANDWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.LogicalANDWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -733,6 +913,8 @@ func (x *Graph) LogicalANDWithPrimaryTensorSecondaryTensorName(primaryTensor *ra
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the elementwise logical OR of the input tensors. This operation creates a logical OR operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = primaryTensor || secondaryTensor ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // LogicalORWithPrimaryTensorSecondaryTensorName calls the underlying LogicalORWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) LogicalORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.LogicalORWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -742,6 +924,8 @@ func (x *Graph) LogicalORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the elementwise logical NAND of the input tensors. This operation creates a logical NAND operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = !(primaryTensor && secondaryTensor) ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // LogicalNANDWithPrimaryTensorSecondaryTensorName calls the underlying LogicalNANDWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) LogicalNANDWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.LogicalNANDWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -751,6 +935,8 @@ func (x *Graph) LogicalNANDWithPrimaryTensorSecondaryTensorName(primaryTensor *r
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the elementwise logical NOR of the input tensors. This operation creates a logical NOR operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = !(primaryTensor || secondaryTensor) ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // LogicalNORWithPrimaryTensorSecondaryTensorName calls the underlying LogicalNORWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) LogicalNORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.LogicalNORWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -760,6 +946,8 @@ func (x *Graph) LogicalNORWithPrimaryTensorSecondaryTensorName(primaryTensor *ra
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the elementwise logical XOR of the input tensors. This operation creates a logical XOR operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = XOR(primaryTensor, secondaryTensor) ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // LogicalXORWithPrimaryTensorSecondaryTensorName calls the underlying LogicalXORWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) LogicalXORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.LogicalXORWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -769,6 +957,8 @@ func (x *Graph) LogicalXORWithPrimaryTensorSecondaryTensorName(primaryTensor *ra
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the elementwise logical XNOR of the input tensors. This operation creates a logical XNOR operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = XNOR(primaryTensor, secondaryTensor) ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // LogicalXNORWithPrimaryTensorSecondaryTensorName calls the underlying LogicalXNORWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) LogicalXNORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.LogicalXNORWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -778,6 +968,8 @@ func (x *Graph) LogicalXNORWithPrimaryTensorSecondaryTensorName(primaryTensor *r
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the elementwise two-argument arctangent of the input tensors. This operation creates a `atan2` operation and returns the result tensor. It supports broadcasting as well. Graph computes arc tangent of primaryTensor over secondaryTensor. ```md resultTensor = atan2(primaryTensor, secondaryTensor) ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // Atan2WithPrimaryTensorSecondaryTensorName calls the underlying Atan2WithPrimaryTensorSecondaryTensorName.
 func (x *Graph) Atan2WithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.Atan2WithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -787,6 +979,8 @@ func (x *Graph) Atan2WithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPS
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the elementwise bitwise AND of binary representations of two integer tensors. - Parameters: - primaryTensor: The primary input tensor, must be of integer type. - secondaryTensor: The secondary input tensor, must be of integer type. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // BitwiseANDWithPrimaryTensorSecondaryTensorName calls the underlying BitwiseANDWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) BitwiseANDWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.BitwiseANDWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -796,6 +990,8 @@ func (x *Graph) BitwiseANDWithPrimaryTensorSecondaryTensorName(primaryTensor *ra
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the elementwise bitwise OR of binary representations of two integer tensors. - Parameters: - primaryTensor: The primary input tensor, must be of integer type. - secondaryTensor: The secondary input tensor, must be of integer type. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // BitwiseORWithPrimaryTensorSecondaryTensorName calls the underlying BitwiseORWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) BitwiseORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.BitwiseORWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -805,6 +1001,8 @@ func (x *Graph) BitwiseORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the elementwise bitwise XOR of binary representations of two integer tensors. - Parameters: - primaryTensor: The primary input tensor, must be of integer type. - secondaryTensor: The secondary input tensor, must be of integer type. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // BitwiseXORWithPrimaryTensorSecondaryTensorName calls the underlying BitwiseXORWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) BitwiseXORWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.BitwiseXORWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -814,6 +1012,8 @@ func (x *Graph) BitwiseXORWithPrimaryTensorSecondaryTensorName(primaryTensor *ra
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the elementwise left-shifted binary representations of the primary integer by the secondary tensor amount. - Parameters: - primaryTensor: The primary input tensor, must be of integer type. - secondaryTensor: The secondary input tensor, must be of integer type. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // BitwiseLeftShiftWithPrimaryTensorSecondaryTensorName calls the underlying BitwiseLeftShiftWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) BitwiseLeftShiftWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.BitwiseLeftShiftWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -823,6 +1023,8 @@ func (x *Graph) BitwiseLeftShiftWithPrimaryTensorSecondaryTensorName(primaryTens
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the elementwise right-shifted binary representations of the primary integer by the secondary tensor amount. - Parameters: - primaryTensor: The primary input tensor, must be of integer type. - secondaryTensor: The secondary input tensor, must be of integer type. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // BitwiseRightShiftWithPrimaryTensorSecondaryTensorName calls the underlying BitwiseRightShiftWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) BitwiseRightShiftWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.BitwiseRightShiftWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -832,6 +1034,8 @@ func (x *Graph) BitwiseRightShiftWithPrimaryTensorSecondaryTensorName(primaryTen
 	return &GraphTensor{inner: _r}
 }
 
+// Selects values from either the true or false predicate tensor, depending on the values in the first input. This operation creates a select operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = select(predicateTensor, truePredicateTensor, falseSelectTensor) ``` - Parameters: - predicateTensor: The predicate tensor. - truePredicateTensor: The tensor to select values from if predicate is true. - falseSelectTensor: The tensor to select values from if predicate is false. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // SelectWithPredicateTensorTruePredicateTensorFalsePredicateTensorName calls the underlying SelectWithPredicateTensorTruePredicateTensorFalsePredicateTensorName.
 func (x *Graph) SelectWithPredicateTensorTruePredicateTensorFalsePredicateTensorName(predicateTensor *raw.MPSGraphTensor, truePredicateTensor *raw.MPSGraphTensor, falseSelectTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.SelectWithPredicateTensorTruePredicateTensorFalsePredicateTensorName(predicateTensor, truePredicateTensor, falseSelectTensor, foundation.NSStringStringWithUTF8String(name))
@@ -841,6 +1045,8 @@ func (x *Graph) SelectWithPredicateTensorTruePredicateTensorFalsePredicateTensor
 	return &GraphTensor{inner: _r}
 }
 
+// Clamps the values in the first tensor between the corresponding values in the minimum and maximum value tensor. This operation creates a clamp operation and returns the result tensor. It supports broadcasting as well. ```md resultTensor = clamp(tensor, minValueTensor, maxValueTensor) ``` - Parameters: - tensor: The tensor to be clamped. - minValueTensor: The tensor with min values to clamp to. - minValueTensor: The tensor with max values to clamp to. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // ClampWithTensorMinValueTensorMaxValueTensorName calls the underlying ClampWithTensorMinValueTensorMaxValueTensorName.
 func (x *Graph) ClampWithTensorMinValueTensorMaxValueTensorName(tensor *raw.MPSGraphTensor, minValueTensor *raw.MPSGraphTensor, maxValueTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ClampWithTensorMinValueTensorMaxValueTensorName(tensor, minValueTensor, maxValueTensor, foundation.NSStringStringWithUTF8String(name))
@@ -850,6 +1056,8 @@ func (x *Graph) ClampWithTensorMinValueTensorMaxValueTensorName(tensor *raw.MPSG
 	return &GraphTensor{inner: _r}
 }
 
+// Divides the first input tensor by the second, with the result being 0 if the denominator is 0. ```md resultTensor = select(secondaryTensor, primaryTensor / secondaryTensor, 0) ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // DivisionNoNaNWithPrimaryTensorSecondaryTensorName calls the underlying DivisionNoNaNWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) DivisionNoNaNWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.DivisionNoNaNWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -859,6 +1067,8 @@ func (x *Graph) DivisionNoNaNWithPrimaryTensorSecondaryTensorName(primaryTensor 
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the remainder of floor divison between the primary and secondary tensor. Creates a floorModulo operation and returns the result tensor, it supports broadcasting as well, returns 0 if divisor is 0. ```md resultTensor = primaryTensor - (floor(primaryTensor / secondaryTensor) * secondaryTensor) ``` - Parameters: - primaryTensor: The LHS tensor of the binary Op. - secondaryTensor: The RHS tensor of the binary Op. - name: An optional string which serves as an identifier for the operation. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // FloorModuloWithPrimaryTensorSecondaryTensorName calls the underlying FloorModuloWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) FloorModuloWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.FloorModuloWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -868,6 +1078,8 @@ func (x *Graph) FloorModuloWithPrimaryTensorSecondaryTensorName(primaryTensor *r
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the real part of a tensor. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation.. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // RealPartOfTensorName calls the underlying RealPartOfTensorName.
 func (x *Graph) RealPartOfTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.RealPartOfTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -877,6 +1089,8 @@ func (x *Graph) RealPartOfTensorName(tensor *raw.MPSGraphTensor, name string) *G
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the imaginary part of a tensor. - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation.. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // ImaginaryPartOfTensorName calls the underlying ImaginaryPartOfTensorName.
 func (x *Graph) ImaginaryPartOfTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ImaginaryPartOfTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -886,6 +1100,8 @@ func (x *Graph) ImaginaryPartOfTensorName(tensor *raw.MPSGraphTensor, name strin
 	return &GraphTensor{inner: _r}
 }
 
+// Returns a complex tensor from the two input tensors. - Parameters: - realTensor: The real part of the complex tensor. - imaginaryTensor: The imaginary part of the complex tensor. - name: An optional string which serves as an identifier for the operation.. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // ComplexTensorWithRealTensorImaginaryTensorName calls the underlying ComplexTensorWithRealTensorImaginaryTensorName.
 func (x *Graph) ComplexTensorWithRealTensorImaginaryTensorName(realTensor *raw.MPSGraphTensor, imaginaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ComplexTensorWithRealTensorImaginaryTensorName(realTensor, imaginaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -895,6 +1111,8 @@ func (x *Graph) ComplexTensorWithRealTensorImaginaryTensorName(realTensor *raw.M
 	return &GraphTensor{inner: _r}
 }
 
+// Returns a real-valued tensor from a complex-valued tensor with real and imaginary planes separated. Creates a complexToPlanar operation and returns the result tensor. In case the input tensor is a complex tensor the result tensor is twice as wide as the input tensor in the last dimension, and its datatype will be the underlying datatype of the input tensor - for example `<3xcomplex<f16>>` becomes `<6xf16>`. In case the input is not complex-valued, this op simply returns the input tensor. For complex input: ```md { resultTensor[...,i] = realPart(inputTensor[...,i]) { resultTensor[...,i+DimSize(inputTensor,-1)] = imagPart(inputTensor[...,i]) ``` For real-valued input: ```md resultTensor = inputTensor ``` - Parameters: - tensor: The input tensor. - name: An optional string which serves as an identifier for the operation.. - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+//
 // PlanarTensorWithComplexTensorName calls the underlying PlanarTensorWithComplexTensorName.
 func (x *Graph) PlanarTensorWithComplexTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.PlanarTensorWithComplexTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -904,11 +1122,15 @@ func (x *Graph) PlanarTensorWithComplexTensorName(tensor *raw.MPSGraphTensor, na
 	return &GraphTensor{inner: _r}
 }
 
+// Creates an operation which invokes another executable. - Parameters: - symbolName: The unique identifier used to find the executable in the “MPSGraphCompilationDescriptor.callables“ directory. - inputTensors: The tensors which are passed as inputs to the executable being invoked. - outputTypes: The expected return types of the executable being invoked. - name: name of operation. - Returns: An array of valid “MPSGraphTensor“ objects representing the return tensors of the invoked executable.
+//
 // CallSymbolNameInputTensorsOutputTypesName calls the underlying CallSymbolNameInputTensorsOutputTypesName.
 func (x *Graph) CallSymbolNameInputTensorsOutputTypesName(symbolName string, inputTensors *foundation.NSArray[*raw.MPSGraphTensor], outputTypes *foundation.NSArray[*raw.MPSGraphType], name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.CallSymbolNameInputTensorsOutputTypesName(foundation.NSStringStringWithUTF8String(symbolName), inputTensors, outputTypes, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a 2D (forward) convolution operation and returns the result tensor. - Parameters: - source: source tensor - must be a rank 4 tensor. The layout is defined by “descriptor.dataLayout“. - weights: weights tensor, must be rank 4. The layout is defined by “descriptor.weightsLayout“. - descriptor: Specifies strides, dilation rates, paddings and layouts. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // Convolution2DWithSourceTensorWeightsTensorDescriptorName calls the underlying Convolution2DWithSourceTensorWeightsTensorDescriptorName.
 func (x *Graph) Convolution2DWithSourceTensorWeightsTensorDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, descriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.Convolution2DWithSourceTensorWeightsTensorDescriptorName(source, weights, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -918,6 +1140,8 @@ func (x *Graph) Convolution2DWithSourceTensorWeightsTensorDescriptorName(source 
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 2D convolution gradient operation with respect to the source tensor of the forward convolution. If `S` is source tensor to forward convolution, `R` is the result/returned tensor from forward convolution, and `L` is the loss function, `convolution2DDataGradientWithIncomingGradientTensor` returns tensor `dL/dS = dL/dR * dR/dS`, where `dL/dR` is the incomingGradient parameter. - Parameters: - incomingGradient: Incoming loss gradient tensor - weights: Forward pass weights tensor - outputShape: Shape of the forward pass source tensor - forwardConvolutionDescriptor: Forward convolution 2D op “descriptor“ - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName calls the underlying Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName.
 func (x *Graph) Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape unsafe.Pointer, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient, weights, outputShape, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
@@ -927,6 +1151,8 @@ func (x *Graph) Convolution2DDataGradientWithIncomingGradientTensorWeightsTensor
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 2D convolution gradient operation with respect to the source tensor of the forward convolution. If `S` is source tensor to forward convolution, `R` is the result/returned tensor of forward convolution, and `L` is the loss function, convolution2DDataGradientWithIncomingGradientTensor returns tensor `dL/dS = dL/dR * dR/dS`, where `dL/dR` is the incomingGradient parameter. - Parameters: - incomingGradient: Incoming loss gradient tensor - weights: Forward pass weights tensor - outputShapeTensor: 4-element 1D Int32 or Int64 tensor. Shape of the forward pass source tensor - forwardConvolutionDescriptor: Forward convolution 2D op “descriptor“ - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName calls the underlying Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName.
 func (x *Graph) Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShapeTensor *raw.MPSGraphTensor, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.Convolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient, weights, outputShapeTensor, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
@@ -936,6 +1162,8 @@ func (x *Graph) Convolution2DDataGradientWithIncomingGradientTensorWeightsTensor
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 2D convolution gradient operation with respect to the weights tensor of the forward convolution. If `W` is weights tensor to forward convolution, `R` is the result/returned tensor of forward convolution, and `L` is the loss function, convolution2DWeightsGradientWithIncomingGradientTensor returns tensor `dL/dW = dL/dR * dR/dW`, where `dL/dR` is the incomingGradient parameter. - Parameters: - incomingGradient: Incoming loss gradient tensor - weights: Forward pass weights tensor - outputShape: Shape of the forward pass source tensor - forwardConvolutionDescriptor: Forward convolution 2D op “descriptor“ - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName calls the underlying Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName.
 func (x *Graph) Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShape unsafe.Pointer, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient, source, outputShape, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
@@ -945,6 +1173,8 @@ func (x *Graph) Convolution2DWeightsGradientWithIncomingGradientTensorSourceTens
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 2D convolution gradient operation with respect to weights tensor of forward convolution. If `W` is weights tensor to forward convolution, `R` is the result/returned tensor of forward convolution, and `L` is the loss function, convolution2DWeightsGradientWithIncomingGradientTensor returns tensor `dL/dW = dL/dR * dR/dW`, where `dL/dR` is the incomingGradient parameter. - Parameters: - incomingGradient: Incoming loss gradient tensor - weights: Forward pass weights tensor - outputShapeTensor: 4D int32 or Int64 Tensor. Shape of the forward pass source tensor - forwardConvolutionDescriptor: Forward convolution 2D op “descriptor“ - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName calls the underlying Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName.
 func (x *Graph) Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShapeTensor *raw.MPSGraphTensor, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.Convolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient, source, outputShapeTensor, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
@@ -954,6 +1184,8 @@ func (x *Graph) Convolution2DWeightsGradientWithIncomingGradientTensorSourceTens
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 3D forward convolution operation and returns the result tensor. - Parameters: - source: source tensor - must be of rank 5. The layout is defined by “descriptor.dataLayout“. - weights: weights tensor, must be rank 5. The layout is defined by “descriptor.weightsLayout“. - descriptor: Specifies strides, dilation rates, paddings and layouts. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // Convolution3DWithSourceTensorWeightsTensorDescriptorName calls the underlying Convolution3DWithSourceTensorWeightsTensorDescriptorName.
 func (x *Graph) Convolution3DWithSourceTensorWeightsTensorDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, descriptor *raw.MPSGraphConvolution3DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.Convolution3DWithSourceTensorWeightsTensorDescriptorName(source, weights, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -963,6 +1195,8 @@ func (x *Graph) Convolution3DWithSourceTensorWeightsTensorDescriptorName(source 
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 3D convolution gradient operation with respect to the source tensor of the forward convolution. If `S` is source tensor to forward convolution, `R` is the result/returned tensor of forward convolution, and `L` is the loss function, convolution3DDataGradientWithIncomingGradientTensor returns tensor `dL/dS = dL/dR * dR/dS`, where `dL/dR` is the incomingGradient parameter. - Parameters: - incomingGradient: Incoming loss gradient tensor - weights: Forward pass weights tensor - outputShape: Shape of the forward pass source tensor - forwardConvolutionDescriptor: Forward convolution 2D op “descriptor“ - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName calls the underlying Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName.
 func (x *Graph) Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape unsafe.Pointer, forwardConvolutionDescriptor *raw.MPSGraphConvolution3DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient, weights, outputShape, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
@@ -972,6 +1206,8 @@ func (x *Graph) Convolution3DDataGradientWithIncomingGradientTensorWeightsTensor
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 3D convolution gradient operation with respect to the source tensor of the forward convolution. If `S` is source tensor to forward convolution, `R` is the result/returned tensor of forward convolution, and `L` is the loss function, convolution3DDataGradientWithIncomingGradientTensor returns tensor `dL/dS = dL/dR * dR/dS`, where `dL/dR` is the incomingGradient parameter. - Parameters: - incomingGradient: Incoming loss gradient tensor - weights: Forward pass weights tensor - outputShapeTensor: 4D Int32 or Int64 tensor. Shape of the forward pass source tensor - forwardConvolutionDescriptor: Forward convolution 2D op “descriptor“ - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName calls the underlying Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName.
 func (x *Graph) Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShapeTensor *raw.MPSGraphTensor, forwardConvolutionDescriptor *raw.MPSGraphConvolution3DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.Convolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient, weights, outputShapeTensor, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
@@ -981,6 +1217,8 @@ func (x *Graph) Convolution3DDataGradientWithIncomingGradientTensorWeightsTensor
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 3D convolution gradient operation with respect to the weights tensor of the forward convolution. If `W` is weights tensor to forward convolution, `R` is the result/returned tensor of forward convolution, and `L` is the loss function, convolution3DWeightsGradientWithIncomingGradientTensor returns tensor `dL/dW = dL/dR * dR/dW`, where `dL/dR` is the incomingGradient parameter. - Parameters: - incomingGradient: Incoming loss gradient tensor - weights: Forward pass weights tensor - outputShape: Shape of the forward pass source tensor - forwardConvolutionDescriptor: Forward convolution 2D op “descriptor“ - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName calls the underlying Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName.
 func (x *Graph) Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShape unsafe.Pointer, forwardConvolutionDescriptor *raw.MPSGraphConvolution3DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient, source, outputShape, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
@@ -990,6 +1228,8 @@ func (x *Graph) Convolution3DWeightsGradientWithIncomingGradientTensorSourceTens
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 3D convolution gradient operation with respect to the weights tensor of the forward convolution. If `W` is weights tensor to forward convolution, `R` is the result/returned tensor of forward convolution, and `L` is the loss function, convolution3DWeightsGradientWithIncomingGradientTensor returns tensor `dL/dW = dL/dR * dR/dW`, where `dL/dR` is the incomingGradient parameter. - Parameters: - incomingGradient: Incoming loss gradient tensor - weights: Forward pass weights tensor - outputShapeTensor: 4D int32 or Int64 Tensor. Shape of the forward pass source tensor - forwardConvolutionDescriptor: Forward convolution 2D op “descriptor“ - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName calls the underlying Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName.
 func (x *Graph) Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShapeTensor *raw.MPSGraphTensor, forwardConvolutionDescriptor *raw.MPSGraphConvolution3DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.Convolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(gradient, source, outputShapeTensor, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
@@ -999,6 +1239,8 @@ func (x *Graph) Convolution3DWeightsGradientWithIncomingGradientTensorSourceTens
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a convolution transpose operation and returns the result tensor. Convolution Tranpose operation is exactly the same as convolution gradint with respect to input image `convolution2DDataGradientWithIncomingGradient`. Weights tensor and source tensors are interpreted as they are in `convolution2DDataGradientWithIncomingGradient`. Convolution with stride `s` downsamples source tensor by factor `s` in spatial dimensions whereas convolution tranpose with stride `s` upsamples source tensor by factor `s`. Convolution transpose can map the same source size to multiple destination sizes. The relationship between the width of the source and the width of the destination is `(sourceWidth - 1)stride + 1 + (kernelWidth - 1)dilationRate <= destinationWidth + paddingLeft + paddingRight` so there are stride -1 values of the width of the destination that give same width of the source. In order to disambiguate, outputShape parameter is used. - Parameters: - source: input tensor - weights: weights tensor - outputShape: shape of the result tensor. - descriptor: descriptor for the corresponding forward 2D-convolution operation - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeDescriptorName calls the underlying ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeDescriptorName.
 func (x *Graph) ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeDescriptorName(source, weights, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1008,6 +1250,8 @@ func (x *Graph) ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeDe
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a convolution transpose operation and returns the result tensor. - Parameters: - source: input tensor - weights: weights tensor - outputShape: 1D Int32 or Int64 tensor. shape of the result tensor. - descriptor: descriptor for the corresponding forward Conv2D operation - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeTensorDescriptorName calls the underlying ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeTensorDescriptorName.
 func (x *Graph) ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeTensorDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape *raw.MPSGraphTensor, descriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeTensorDescriptorName(source, weights, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1017,6 +1261,8 @@ func (x *Graph) ConvolutionTranspose2DWithSourceTensorWeightsTensorOutputShapeTe
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a convolution transpose gradient operation with respect to the source tensor of convolution transpose operation and returns the result tensor. Inserts an operation in graph to compute gradient of convolution transpose with respect to source tensor of the corresponding convolution transpose operation. - Parameters: - incomingGradient: Incoming gradient tensor - weights: Forward pass weights tensor - outputShape: Shape of the forward pass source tensor - forwardConvolutionDescriptor: Forward pass op descriptor - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName calls the underlying ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName.
 func (x *Graph) ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape unsafe.Pointer, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeForwardConvolutionDescriptorName(incomingGradient, weights, outputShape, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1026,6 +1272,8 @@ func (x *Graph) ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeig
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a convolution transpose gradient operation with respect to the source tensor of convolution transpose operation and returns the result tensor. Inserts an operation in graph to compute gradient of convolution transpose with respect to source tensor of the corresponding convolution transpose operation. - Parameters: - incomingGradient: Incoming gradient tensor - weights: Forward pass weights tensor - outputShape: 1D Int32 or Int64 Tensor. Shape of the forward pass source tensor - forwardConvolutionDescriptor: Forward pass op descriptor - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName calls the underlying ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName.
 func (x *Graph) ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(incomingGradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape *raw.MPSGraphTensor, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeTensorForwardConvolutionDescriptorName(incomingGradient, weights, outputShape, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1035,6 +1283,8 @@ func (x *Graph) ConvolutionTranspose2DDataGradientWithIncomingGradientTensorWeig
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a convolution transpose gradient operation with respect to the weights tensor of the convolution transpose operation and returns the result tensor. Inserts an operation in graph to compute gradient of convolution transpose with respect to the weights tensor of the corresponding convolution transpose operation. - Parameters: - incomingGradientTensor: Incoming gradient tensor - source: Forward pass source tensor - outputShape: Shape of the forward pass source weights tensor - forwardConvolutionDescriptor: Forward pass op descriptor - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName calls the underlying ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName.
 func (x *Graph) ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName(incomingGradientTensor *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShape unsafe.Pointer, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeForwardConvolutionDescriptorName(incomingGradientTensor, source, outputShape, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1044,6 +1294,8 @@ func (x *Graph) ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorS
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a convolution transpose gradient operation with respect to the weights tensor of the convolution transpose operation and returns the result tensor. Inserts an operation in graph to compute gradient of convolution transpose with respect to the weights tensor of the corresponding convolution transpose operation. - Parameters: - incomingGradientTensor: Incoming gradient tensor - source: Forward pass source tensor - outputShape: 1D Int32 or Int64 Tensor. Shape of the forward pass source weights tensor - forwardConvolutionDescriptor: Forward pass op descriptor - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName calls the underlying ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName.
 func (x *Graph) ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(incomingGradientTensor *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShape *raw.MPSGraphTensor, forwardConvolutionDescriptor *raw.MPSGraphConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeTensorForwardConvolutionDescriptorName(incomingGradientTensor, source, outputShape, forwardConvolutionDescriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1053,31 +1305,43 @@ func (x *Graph) ConvolutionTranspose2DWeightsGradientWithIncomingGradientTensorS
 	return &GraphTensor{inner: _r}
 }
 
+// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed. This call blocks until execution has completed. - Parameters: - operations: Operations maked as control dependency for all ops created inside the dependent block - dependentBlock: MPSGraphControlFlowDependencyBlock which is provided by caller to create dependent ops - name: name of scope - Returns: A valid MPSGraphTensor array with results returned from dependentBlock forwarded
+//
 // ControlDependencyWithOperationsDependentBlockName calls the underlying ControlDependencyWithOperationsDependentBlockName.
 func (x *Graph) ControlDependencyWithOperationsDependentBlockName(operations *foundation.NSArray[*raw.MPSGraphOperation], dependentBlock objc.Block, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.ControlDependencyWithOperationsDependentBlockName(operations, dependentBlock, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Adds an if-then-else operation to the graph. - Parameters: - predicateTensor: Tensor must have a single scalar value, used to decide between then/else branches - thenBlock: If predicate is true operations in this block are executed - elseBlock: If predicate is false operations in this block are executed - name: name of operation - Returns: results If no error, the tensors returned by user. If not empty, user must define both then/else block, both should have same number of arguments and each corresponding argument should have same elementTypes.
+//
 // IfWithPredicateTensorThenBlockElseBlockName calls the underlying IfWithPredicateTensorThenBlockElseBlockName.
 func (x *Graph) IfWithPredicateTensorThenBlockElseBlockName(predicateTensor *raw.MPSGraphTensor, thenBlock objc.Block, elseBlock objc.Block, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.IfWithPredicateTensorThenBlockElseBlockName(predicateTensor, thenBlock, elseBlock, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Adds a while loop operation. - Parameters: - initialInputs: inputTensors to the `beforeBlock`, for the 1st iteration will be same as initialInputs passed to the while loop. - before: `beforeBlock`, this will be run first and then call the `afterBlock` with results or return results from the loop. - after: `afterBlock`, this will execute after the condition evaluation. - name: name of operation. - Returns: A valid MPSGraphTensor array with results returned from the conditionBlock depending on the predicate tensor.
+//
 // WhileWithInitialInputsBeforeAfterName calls the underlying WhileWithInitialInputsBeforeAfterName.
 func (x *Graph) WhileWithInitialInputsBeforeAfterName(initialInputs *foundation.NSArray[*raw.MPSGraphTensor], before objc.Block, after objc.Block, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.WhileWithInitialInputsBeforeAfterName(initialInputs, before, after, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Adds a for loop operation, The lower and upper bounds specify a half-open range: the range includes the lower bound but does not include the upper bound. - Parameters: - lowerBound: Lower bound value of the loop, this is a scalar tensor, this is the index the loop will start with. - upperBound: Upper bound value of the loop, this is a scalar tensor. - step: Step value of the loop, this is a scalar tensor and must be positive. - initialBodyArguments: initial set of iteration arguments passed to the bodyBlock of the for loop. - body: This block will execute the body of the for loop. - name: name of operation. - Returns: A valid `MPSGraphTensor` array with same count and corresponding element types as `initialIterationArguments` and return types of the for loop.
+//
 // ForLoopWithLowerBoundUpperBoundStepInitialBodyArgumentsBodyName calls the underlying ForLoopWithLowerBoundUpperBoundStepInitialBodyArgumentsBodyName.
 func (x *Graph) ForLoopWithLowerBoundUpperBoundStepInitialBodyArgumentsBodyName(lowerBound *raw.MPSGraphTensor, upperBound *raw.MPSGraphTensor, step *raw.MPSGraphTensor, initialBodyArguments *foundation.NSArray[*raw.MPSGraphTensor], body objc.Block, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.ForLoopWithLowerBoundUpperBoundStepInitialBodyArgumentsBodyName(lowerBound, upperBound, step, initialBodyArguments, body, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Adds a for loop operation, with a specific number of iterations. - Parameters: - numberOfIterations: tensor with number of iterations the loop will execute - initialBodyArguments: initial set of iteration arguments passed to the bodyBlock of the for loop - body: bodyBlock, this will execute the body of the for loop, index will go from 0 to numberOfIterations-1 - name: name of operation - Returns: A valid MPSGraphTensor array with same count and corresponding elementTypes as initialIterationArguments and return types of the for loop
+//
 // ForLoopWithNumberOfIterationsInitialBodyArgumentsBodyName calls the underlying ForLoopWithNumberOfIterationsInitialBodyArgumentsBodyName.
 func (x *Graph) ForLoopWithNumberOfIterationsInitialBodyArgumentsBodyName(numberOfIterations *raw.MPSGraphTensor, initialBodyArguments *foundation.NSArray[*raw.MPSGraphTensor], body objc.Block, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.ForLoopWithNumberOfIterationsInitialBodyArgumentsBodyName(numberOfIterations, initialBodyArguments, body, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Computes the cumulative sum of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axis: The tensor dimension where you compute the cumulative operation - exclusive: If true, perform the exclusive cumulative operation, and the first element will be equal to zero - reverse: If true, reverse the direction of the cumulative operation along the specified axis - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // CumulativeSumWithTensorAxisExclusiveReverseName calls the underlying CumulativeSumWithTensorAxisExclusiveReverseName.
 func (x *Graph) CumulativeSumWithTensorAxisExclusiveReverseName(tensor *raw.MPSGraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor {
 	_r := x.inner.CumulativeSumWithTensorAxisExclusiveReverseName(tensor, axis, exclusive, reverse, foundation.NSStringStringWithUTF8String(name))
@@ -1087,6 +1351,8 @@ func (x *Graph) CumulativeSumWithTensorAxisExclusiveReverseName(tensor *raw.MPSG
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the cumulative sum of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axisTensor: The tensor dimension where you compute the cumulative operation - exclusive: If true, perform the exclusive cumulative operation, and the first element will be equal to zero - reverse: If true, reverse the direction of the cumulative operation along the specified axis - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // CumulativeSumWithTensorAxisTensorExclusiveReverseName calls the underlying CumulativeSumWithTensorAxisTensorExclusiveReverseName.
 func (x *Graph) CumulativeSumWithTensorAxisTensorExclusiveReverseName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, exclusive bool, reverse bool, name string) *GraphTensor {
 	_r := x.inner.CumulativeSumWithTensorAxisTensorExclusiveReverseName(tensor, axisTensor, exclusive, reverse, foundation.NSStringStringWithUTF8String(name))
@@ -1096,6 +1362,8 @@ func (x *Graph) CumulativeSumWithTensorAxisTensorExclusiveReverseName(tensor *ra
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the cumulative sum of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axis: The tensor dimension where you compute the cumulative operation - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // CumulativeSumWithTensorAxisName calls the underlying CumulativeSumWithTensorAxisName.
 func (x *Graph) CumulativeSumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.CumulativeSumWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -1105,6 +1373,8 @@ func (x *Graph) CumulativeSumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the cumulative sum of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axisTensor: The tensor dimension where you compute the cumulative operation - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // CumulativeSumWithTensorAxisTensorName calls the underlying CumulativeSumWithTensorAxisTensorName.
 func (x *Graph) CumulativeSumWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.CumulativeSumWithTensorAxisTensorName(tensor, axisTensor, foundation.NSStringStringWithUTF8String(name))
@@ -1114,6 +1384,8 @@ func (x *Graph) CumulativeSumWithTensorAxisTensorName(tensor *raw.MPSGraphTensor
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the cumulative product of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axis: The tensor dimension where you compute the cumulative operation - exclusive: If true, perform the exclusive cumulative operation, and the first element will be equal to one - reverse: If true, reverse the direction of the cumulative operation along the specified axis - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // CumulativeProductWithTensorAxisExclusiveReverseName calls the underlying CumulativeProductWithTensorAxisExclusiveReverseName.
 func (x *Graph) CumulativeProductWithTensorAxisExclusiveReverseName(tensor *raw.MPSGraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor {
 	_r := x.inner.CumulativeProductWithTensorAxisExclusiveReverseName(tensor, axis, exclusive, reverse, foundation.NSStringStringWithUTF8String(name))
@@ -1123,6 +1395,8 @@ func (x *Graph) CumulativeProductWithTensorAxisExclusiveReverseName(tensor *raw.
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the cumulative product of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axisTensor: The tensor dimension where you compute the cumulative operation - exclusive: If true, perform the exclusive cumulative operation, and the first element will be equal to one - reverse: If true, reverse the direction of the cumulative operation along the specified axis - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // CumulativeProductWithTensorAxisTensorExclusiveReverseName calls the underlying CumulativeProductWithTensorAxisTensorExclusiveReverseName.
 func (x *Graph) CumulativeProductWithTensorAxisTensorExclusiveReverseName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, exclusive bool, reverse bool, name string) *GraphTensor {
 	_r := x.inner.CumulativeProductWithTensorAxisTensorExclusiveReverseName(tensor, axisTensor, exclusive, reverse, foundation.NSStringStringWithUTF8String(name))
@@ -1132,6 +1406,8 @@ func (x *Graph) CumulativeProductWithTensorAxisTensorExclusiveReverseName(tensor
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the cumulative product of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axis: The tensor dimension where you compute the cumulative operation - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // CumulativeProductWithTensorAxisName calls the underlying CumulativeProductWithTensorAxisName.
 func (x *Graph) CumulativeProductWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.CumulativeProductWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -1141,6 +1417,8 @@ func (x *Graph) CumulativeProductWithTensorAxisName(tensor *raw.MPSGraphTensor, 
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the cumulative product of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axisTensor: The tensor dimension where you compute the cumulative operation - exclusive: If true, perform the exclusive cumulative operation, and the first element will be equal to one - reverse: If true, reverse the direction of the cumulative operation along the specified axis - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // CumulativeProductWithTensorAxisTensorName calls the underlying CumulativeProductWithTensorAxisTensorName.
 func (x *Graph) CumulativeProductWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.CumulativeProductWithTensorAxisTensorName(tensor, axisTensor, foundation.NSStringStringWithUTF8String(name))
@@ -1150,6 +1428,8 @@ func (x *Graph) CumulativeProductWithTensorAxisTensorName(tensor *raw.MPSGraphTe
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the cumulative minimum of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axis: The tensor dimension where you compute the cumulative operation - exclusive: If true, perform the exclusive cumulative operation, and the first element will be equal to the largest value of the tensor data type - reverse: If true, reverse the direction of the cumulative operation along the specified axis - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // CumulativeMinimumWithTensorAxisExclusiveReverseName calls the underlying CumulativeMinimumWithTensorAxisExclusiveReverseName.
 func (x *Graph) CumulativeMinimumWithTensorAxisExclusiveReverseName(tensor *raw.MPSGraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor {
 	_r := x.inner.CumulativeMinimumWithTensorAxisExclusiveReverseName(tensor, axis, exclusive, reverse, foundation.NSStringStringWithUTF8String(name))
@@ -1159,6 +1439,8 @@ func (x *Graph) CumulativeMinimumWithTensorAxisExclusiveReverseName(tensor *raw.
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the cumulative minimum of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axisTensor: The tensor dimension where you compute the cumulative operation - exclusive: If true, perform the exclusive cumulative operation, and the first element will be equal to the largest value of the tensor data type - reverse: If true, reverse the direction of the cumulative operation along the specified axis - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // CumulativeMinimumWithTensorAxisTensorExclusiveReverseName calls the underlying CumulativeMinimumWithTensorAxisTensorExclusiveReverseName.
 func (x *Graph) CumulativeMinimumWithTensorAxisTensorExclusiveReverseName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, exclusive bool, reverse bool, name string) *GraphTensor {
 	_r := x.inner.CumulativeMinimumWithTensorAxisTensorExclusiveReverseName(tensor, axisTensor, exclusive, reverse, foundation.NSStringStringWithUTF8String(name))
@@ -1168,6 +1450,8 @@ func (x *Graph) CumulativeMinimumWithTensorAxisTensorExclusiveReverseName(tensor
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the cumulative minimum of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axis: The tensor dimension where you compute the cumulative operation - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // CumulativeMinimumWithTensorAxisName calls the underlying CumulativeMinimumWithTensorAxisName.
 func (x *Graph) CumulativeMinimumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.CumulativeMinimumWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -1177,6 +1461,8 @@ func (x *Graph) CumulativeMinimumWithTensorAxisName(tensor *raw.MPSGraphTensor, 
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the cumulative minimum of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axisTensor: The tensor dimension where you compute the cumulative operation - exclusive: If true, perform the exclusive cumulative operation, and the first element will be equal to the largest value of the tensor data type - reverse: If true, reverse the direction of the cumulative operation along the specified axis - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // CumulativeMinimumWithTensorAxisTensorName calls the underlying CumulativeMinimumWithTensorAxisTensorName.
 func (x *Graph) CumulativeMinimumWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.CumulativeMinimumWithTensorAxisTensorName(tensor, axisTensor, foundation.NSStringStringWithUTF8String(name))
@@ -1186,6 +1472,8 @@ func (x *Graph) CumulativeMinimumWithTensorAxisTensorName(tensor *raw.MPSGraphTe
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the cumulative maximum of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axis: The tensor dimension where you compute the cumulative operation - exclusive: If true, perform the exclusive cumulative operation, and the first element will be equal to the lowest value of the tensor data type - reverse: If true, reverse the direction of the cumulative operation along the specified axis - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // CumulativeMaximumWithTensorAxisExclusiveReverseName calls the underlying CumulativeMaximumWithTensorAxisExclusiveReverseName.
 func (x *Graph) CumulativeMaximumWithTensorAxisExclusiveReverseName(tensor *raw.MPSGraphTensor, axis int, exclusive bool, reverse bool, name string) *GraphTensor {
 	_r := x.inner.CumulativeMaximumWithTensorAxisExclusiveReverseName(tensor, axis, exclusive, reverse, foundation.NSStringStringWithUTF8String(name))
@@ -1195,6 +1483,8 @@ func (x *Graph) CumulativeMaximumWithTensorAxisExclusiveReverseName(tensor *raw.
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the cumulative maximum of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axisTensor: The tensor dimension where you compute the cumulative operation - exclusive: If true, perform the exclusive cumulative operation, and the first element will be equal to the lowest value of the tensor data type - reverse: If true, reverse the direction of the cumulative operation along the specified axis - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // CumulativeMaximumWithTensorAxisTensorExclusiveReverseName calls the underlying CumulativeMaximumWithTensorAxisTensorExclusiveReverseName.
 func (x *Graph) CumulativeMaximumWithTensorAxisTensorExclusiveReverseName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, exclusive bool, reverse bool, name string) *GraphTensor {
 	_r := x.inner.CumulativeMaximumWithTensorAxisTensorExclusiveReverseName(tensor, axisTensor, exclusive, reverse, foundation.NSStringStringWithUTF8String(name))
@@ -1204,6 +1494,8 @@ func (x *Graph) CumulativeMaximumWithTensorAxisTensorExclusiveReverseName(tensor
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the cumulative maximum of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axis: The tensor dimension where you compute the cumulative operation - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // CumulativeMaximumWithTensorAxisName calls the underlying CumulativeMaximumWithTensorAxisName.
 func (x *Graph) CumulativeMaximumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.CumulativeMaximumWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -1213,6 +1505,8 @@ func (x *Graph) CumulativeMaximumWithTensorAxisName(tensor *raw.MPSGraphTensor, 
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the cumulative maximum of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axisTensor: The tensor dimension where you compute the cumulative operation - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // CumulativeMaximumWithTensorAxisTensorName calls the underlying CumulativeMaximumWithTensorAxisTensorName.
 func (x *Graph) CumulativeMaximumWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.CumulativeMaximumWithTensorAxisTensorName(tensor, axisTensor, foundation.NSStringStringWithUTF8String(name))
@@ -1222,6 +1516,8 @@ func (x *Graph) CumulativeMaximumWithTensorAxisTensorName(tensor *raw.MPSGraphTe
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 2D-depthwise convolution operation and returns the result tensor. - Parameters: - source: A 2D Image source as tensor - must be of rank=4. The layout is defined by `descriptor.dataLayout`. - weights: The weights tensor, must be rank=4. The layout is defined by `descriptor.weightsLayout`. - descriptor: The descriptor object that specifies strides, dilation rates, paddings and layouts. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // DepthwiseConvolution2DWithSourceTensorWeightsTensorDescriptorName calls the underlying DepthwiseConvolution2DWithSourceTensorWeightsTensorDescriptorName.
 func (x *Graph) DepthwiseConvolution2DWithSourceTensorWeightsTensorDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, descriptor *raw.MPSGraphDepthwiseConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.DepthwiseConvolution2DWithSourceTensorWeightsTensorDescriptorName(source, weights, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1231,6 +1527,8 @@ func (x *Graph) DepthwiseConvolution2DWithSourceTensorWeightsTensorDescriptorNam
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 2D-depthwise convolution gradient for data operation and returns the result tensor. - Parameters: - incomingGradient: A 2D input gradient tensor - must be of rank=4. The layout is defined by `descriptor.dataLayout`. - weights: The weights tensor, must be rank=4. The layout is defined by `descriptor.weightsLayout`. - outputShape: The shape of the οutput tensor (and therefore input tensor of forward pass). - descriptor: The descriptor object that specifies strides, dilation rates, paddings and layouts. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // DepthwiseConvolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeDescriptorName calls the underlying DepthwiseConvolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeDescriptorName.
 func (x *Graph) DepthwiseConvolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeDescriptorName(incomingGradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphDepthwiseConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.DepthwiseConvolution2DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeDescriptorName(incomingGradient, weights, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1240,6 +1538,8 @@ func (x *Graph) DepthwiseConvolution2DDataGradientWithIncomingGradientTensorWeig
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 2D-depthwise convolution gradient for weights operation and returns the result tensor. - Parameters: - incomingGradient: A 2D input gradient tensor - must be of rank=4. The layout is defined by `descriptor.dataLayout`. - source: A 2D Image source as tensor - must be of rank=4. The layout is defined by `descriptor.dataLayout`. - outputShape: The shape of the οutput tensor (and therefore weight tensor of forward pass). - descriptor: The descriptor object that specifies strides, dilation rates, paddings and layouts. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // DepthwiseConvolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeDescriptorName calls the underlying DepthwiseConvolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeDescriptorName.
 func (x *Graph) DepthwiseConvolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeDescriptorName(incomingGradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphDepthwiseConvolution2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.DepthwiseConvolution2DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeDescriptorName(incomingGradient, source, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1249,6 +1549,8 @@ func (x *Graph) DepthwiseConvolution2DWeightsGradientWithIncomingGradientTensorS
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 3D depthwise convolution operation and returns the result tensor. Works exactly like depthwise convolution2D, but in three dimensions. Supports different layouts with the “MPSGraphDepthwiseConvolution3DOpDescriptor/channelDimensionIndex“ property. If your weights need a different layout add a permute operation on them before this operation. - Parameters: - source: A 3D Image source as tensor - must be at least rank=4 (CDHW when channelDimensionIndex = -4). - weights: The weights tensor, must be rank=4 - axes are interpreted as CDHW when channelDimensionIndex = -4 . - descriptor: The descriptor object that specifies strides, dilation rates and paddings. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // DepthwiseConvolution3DWithSourceTensorWeightsTensorDescriptorName calls the underlying DepthwiseConvolution3DWithSourceTensorWeightsTensorDescriptorName.
 func (x *Graph) DepthwiseConvolution3DWithSourceTensorWeightsTensorDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, descriptor *raw.MPSGraphDepthwiseConvolution3DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.DepthwiseConvolution3DWithSourceTensorWeightsTensorDescriptorName(source, weights, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1258,6 +1560,8 @@ func (x *Graph) DepthwiseConvolution3DWithSourceTensorWeightsTensorDescriptorNam
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 3D depthwise convolution gradient for data operation and returns the result tensor. - Parameters: - incomingGradient: A 3D input gradient tensor - must be at least rank=4 (CDHW). - weights: The weights tensor, must be rank=4 - axes are interpreted as CDHW. - outputShape: The shape of the οutput tensor (and therefore input tensor of forward pass). - descriptor: The descriptor object that  specifies strides, dilation rates and paddings. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // DepthwiseConvolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeDescriptorName calls the underlying DepthwiseConvolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeDescriptorName.
 func (x *Graph) DepthwiseConvolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeDescriptorName(incomingGradient *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphDepthwiseConvolution3DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.DepthwiseConvolution3DDataGradientWithIncomingGradientTensorWeightsTensorOutputShapeDescriptorName(incomingGradient, weights, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1267,6 +1571,8 @@ func (x *Graph) DepthwiseConvolution3DDataGradientWithIncomingGradientTensorWeig
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 3D depthwise convolution gradient for weights operation and returns the result tensor. - Parameters: - incomingGradient: A 3D input gradient tensor - must be at least rank=4 (NCDHW). - source: The forward pass 3D Image source as tensor - must be at least rank=4 (NCDHW). - outputShape: The shape of the οutput tensor (and therefore weight tensor of forward pass). - descriptor: The descriptor object that specifies strides, dilation rates and paddings. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // DepthwiseConvolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeDescriptorName calls the underlying DepthwiseConvolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeDescriptorName.
 func (x *Graph) DepthwiseConvolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeDescriptorName(incomingGradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphDepthwiseConvolution3DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.DepthwiseConvolution3DWeightsGradientWithIncomingGradientTensorSourceTensorOutputShapeDescriptorName(incomingGradient, source, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1276,6 +1582,8 @@ func (x *Graph) DepthwiseConvolution3DWeightsGradientWithIncomingGradientTensorS
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a fast Fourier transform operation and returns the result tensor. This operation computes the fast Fourier transform of the input tensor according to the following formulae. ```md output[mu] = scale * sum_nu exp( +/- i * 2Pi * mu * nu / n ) input[nu], where ``` `scale = 1` for `scaling_mode = none`, `scale = 1/V_f` for `scaling_mode = size`, `scale = 1/sqrt(V_f)` for `scaling_mode = unitary`, where `V_f` is the volume of the transformation defined by the dimensions included in `axes` (`V_f = prod_{i \in axes} shape(input)[i]`) (see “MPSGraphFFTDescriptor/scalingMode“), `+` is selected in `+/-` when `inverse` is specified, otherwise `-` is used and the sum is done separately over each dimension in `axes` and `n` is the dimension length of that axis. > Tip: Currently MPSGraph supports the transformation only within the last four dimensions of the input tensor. In case you need to transform higher dimensions than the last four, you can tranpose the higher dimensions of the input with “MPSGraph/transposeTensor:permutation:name:“  to be within that last four and then transpose the result tensor back with the inverse of the input transpose. - Parameters: - tensor: A complex or real-valued input tensor. - axes: An array of numbers that specifies over which axes MPSGraph performs the Fourier transform - all axes must be contained within last four dimensions of the input tensor. - descriptor: A descriptor that defines the parameters of the Fourier transform operation - see “MPSGraphFFTDescriptor“. - name: The name for the operation. - Returns: A valid complex-valued MPSGraphTensor of the same shape as `tensor`.
+//
 // FastFourierTransformWithTensorAxesDescriptorName calls the underlying FastFourierTransformWithTensorAxesDescriptorName.
 func (x *Graph) FastFourierTransformWithTensorAxesDescriptorName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], descriptor *raw.MPSGraphFFTDescriptor, name string) *GraphTensor {
 	_r := x.inner.FastFourierTransformWithTensorAxesDescriptorName(tensor, axes, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1285,6 +1593,8 @@ func (x *Graph) FastFourierTransformWithTensorAxesDescriptorName(tensor *raw.MPS
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a fast Fourier transform operation and returns the result tensor. This operation computes the fast Fourier transform of the input tensor according to the following formulae. ```md output[mu] = scale * sum_nu exp( +/- i * 2Pi * mu * nu / n ) input[nu], where ``` `scale = 1` for `scaling_mode = none`, `scale = 1/V_f` for `scaling_mode = size`, `scale = 1/sqrt(V_f)` for `scaling_mode = unitary`, where `V_f` is the volume of the transformation defined by the dimensions included in `axes` (`V_f = prod_{i \in axes} shape(input)[i]`) (see “MPSGraphFFTDescriptor/scalingMode“), `+` is selected in `+/-` when `inverse` is specified, otherwise `-` is used and the sum is done separately over each dimension in `axes` and `n` is the dimension length of that axis. > Tip: Currently MPSGraph supports the transformation only within the last four dimensions of the input tensor. In case you need to transform higher dimensions than the last four, you can tranpose the higher dimensions of the input with “MPSGraph/transposeTensor:permutation:name:“  to be within that last four and then transpose the result tensor back with the inverse of the input transpose. - Parameters: - tensor: A complex or real-valued input tensor. - axesTensor: A tensor of rank one containing the axes over which MPSGraph performs the transformation. See “MPSGraph/fastFourierTransformWithTensor:axes:descriptor:name:“. - descriptor: A descriptor that defines the parameters of the Fourier transform operation - see “MPSGraphFFTDescriptor“. - name: The name for the operation. - Returns: A valid complex-valued MPSGraphTensor of the same shape as `tensor`.
+//
 // FastFourierTransformWithTensorAxesTensorDescriptorName calls the underlying FastFourierTransformWithTensorAxesTensorDescriptorName.
 func (x *Graph) FastFourierTransformWithTensorAxesTensorDescriptorName(tensor *raw.MPSGraphTensor, axesTensor *raw.MPSGraphTensor, descriptor *raw.MPSGraphFFTDescriptor, name string) *GraphTensor {
 	_r := x.inner.FastFourierTransformWithTensorAxesTensorDescriptorName(tensor, axesTensor, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1294,6 +1604,8 @@ func (x *Graph) FastFourierTransformWithTensorAxesTensorDescriptorName(tensor *r
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Real-to-Hermitean fast Fourier transform operation and returns the result tensor. This operation computes the fast Fourier transform of a real-valued input tensor according to the following formulae. ```md output[mu] = scale * sum_nu exp( +/- i * 2Pi * mu * nu / n ) input[nu], where ``` `scale = 1` for `scaling_mode = none`, `scale = 1/V_f` for `scaling_mode = size`, `scale = 1/sqrt(V_f)` for `scaling_mode = unitary`, where `V_f` is the volume of the transformation defined by the dimensions included in `axes` (`V_f = prod_{i \in axes} shape(input)[i]`) (see “MPSGraphFFTDescriptor/scalingMode“), `+` is selected in `+/-` when `inverse` is specified, otherwise `-` is used and the sum is done separately over each dimension in `axes` and `n` is the dimension length of that axis. With this API MPSGraph writes out only the results for the unique frequencies, resulting in a tensor which has size `(n/2)+1` in the last dimension defined by `axes`. > Tip: Currently MPSGraph supports the transformation only within the last four dimensions of the input tensor. In case you need to transform higher dimensions than the last four, you can tranpose the higher dimensions of the input with “MPSGraph/transposeTensor:permutation:name:“  to be within that last four and then transpose the result tensor back with the inverse of the input transpose. - Parameters: - tensor: A Real-valued input tensor. Must have datatype `MPSDataTypeFloat32` or `MPSDatatypeFloat16`. - axes: An array of numbers that specifies over which axes MPSGraph performs the Fourier transform - all axes must be contained within last four dimensions of the input tensor. - descriptor: A descriptor that defines the parameters of the Fourier transform operation - see “MPSGraphFFTDescriptor“. - name: The name for the operation. - Returns: A valid MPSGraphTensor of type `MPSDataTypeComplexFloat32` or `MPSDataTypeComplexFloat16` with reduced size (see Discussion).
+//
 // RealToHermiteanFFTWithTensorAxesDescriptorName calls the underlying RealToHermiteanFFTWithTensorAxesDescriptorName.
 func (x *Graph) RealToHermiteanFFTWithTensorAxesDescriptorName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], descriptor *raw.MPSGraphFFTDescriptor, name string) *GraphTensor {
 	_r := x.inner.RealToHermiteanFFTWithTensorAxesDescriptorName(tensor, axes, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1303,6 +1615,8 @@ func (x *Graph) RealToHermiteanFFTWithTensorAxesDescriptorName(tensor *raw.MPSGr
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Real-to-Hermitean fast Fourier transform operation and returns the result tensor. This operation computes the fast Fourier transform of a real-valued input tensor according to the following formulae. ```md output[mu] = scale * sum_nu exp( +/- i * 2Pi * mu * nu / n ) input[nu], where ``` `scale = 1` for `scaling_mode = none`, `scale = 1/V_f` for `scaling_mode = size`, `scale = 1/sqrt(V_f)` for `scaling_mode = unitary`, where `V_f` is the volume of the transformation defined by the dimensions included in `axes` (`V_f = prod_{i \in axes} shape(input)[i]`) (see “MPSGraphFFTDescriptor/scalingMode“), `+` is selected in `+/-` when `inverse` is specified, otherwise `-` is used and the sum is done separately over each dimension in `axes` and `n` is the dimension length of that axis. With this API MPSGraph writes out only the results for the unique frequencies, resulting in a tensor which has size `(n/2)+1` in the last dimension defined by `axes`. > Tip: Currently MPSGraph supports the transformation only within the last four dimensions of the input tensor. In case you need to transform higher dimensions than the last four, you can tranpose the higher dimensions of the input with “MPSGraph/transposeTensor:permutation:name:“  to be within that last four and then transpose the result tensor back with the inverse of the input transpose. - Parameters: - tensor: A real-valued input tensor. Must have datatype `MPSDataTypeFloat32` or `MPSDatatypeFloat16`. - axesTensor: A tensor of rank one containing the axes over which MPSGraph performs the transformation. See “MPSGraph/fastFourierTransformWithTensor:axes:descriptor:name:“. - descriptor: A descriptor that defines the parameters of the Fourier transform operation - see “MPSGraphFFTDescriptor“. - name: The name for the operation. - Returns: A valid MPSGraphTensor of type `MPSDataTypeComplexFloat32` or `MPSDataTypeComplexFloat16`  with reduced size (see Discussion).
+//
 // RealToHermiteanFFTWithTensorAxesTensorDescriptorName calls the underlying RealToHermiteanFFTWithTensorAxesTensorDescriptorName.
 func (x *Graph) RealToHermiteanFFTWithTensorAxesTensorDescriptorName(tensor *raw.MPSGraphTensor, axesTensor *raw.MPSGraphTensor, descriptor *raw.MPSGraphFFTDescriptor, name string) *GraphTensor {
 	_r := x.inner.RealToHermiteanFFTWithTensorAxesTensorDescriptorName(tensor, axesTensor, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1312,6 +1626,8 @@ func (x *Graph) RealToHermiteanFFTWithTensorAxesTensorDescriptorName(tensor *raw
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Hermitean-to-real fast Fourier transform operation and returns the result tensor. This operation computes the fast Fourier transform of a complex-valued input tensor according to the following formulae. ```md output[mu] = scale * sum_nu exp( +/- i * 2Pi * mu * nu / n ) in'[nu], where ``` `in'[nu] = conjugate(in[n - nu])`, for the last dimension defined by `axes` when `nu` is out of range of the input dimension. `scale = 1` for `scaling_mode = none`, `scale = 1/V_f` for `scaling_mode = size`, `scale = 1/sqrt(V_f)` for `scaling_mode = unitary`, where `V_f` is the volume of the transformation defined by the dimensions included in `axes` (`V_f = prod_{i \in axes} shape(input)[i]`) (see “MPSGraphFFTDescriptor/scalingMode“), `+` is selected in `+/-` when `inverse` is specified, otherwise `-` is used and the sum is done separately over each dimension in `axes` and `n` is the dimension length of that axis. With this API MPSGraph treats the input tensor to have only the unique frequencies, which means that the resulting tensor has size `(inSize-1)*2 + x` in the last dimension defined by `axes`, where `inSize = shape(input)[axis] ( = (n/2)+1 )` is the size of the input `tensor` in the last transformed dimension and `x = 1` when “MPSGraphFFTDescriptor/roundToOddHermitean“ = `YES` and `x = 0` otherwise. > Tip: Currently transformation is supported only within the last four dimensions of the input tensor. In case you need to transform higher dimensions than the last four, you can tranpose the higher dimensions of the input with “MPSGraph/transposeTensor:permutation:name:“  to be within that last four and then transpose the result tensor back with the inverse of the input transpose. - Parameters: - tensor: A complex-valued input tensor with reduced size (see Discussion). Must have datatype `MPSDataTypeComplexFloat32` or `MPSDataTypeComplexFloat16`. - axes: An array of numbers that specifies over which axes MPSGraph performs the Fourier transform - all axes must be contained within last four dimensions of the input tensor. - descriptor: A descriptor that defines the parameters of the Fourier transform operation - see “MPSGraphFFTDescriptor“. - name: The name for the operation. - Returns: A valid MPSGraphTensor of type `MPSDataTypeFloat32` or `MPSDataTypeFloat16` (full size).
+//
 // HermiteanToRealFFTWithTensorAxesDescriptorName calls the underlying HermiteanToRealFFTWithTensorAxesDescriptorName.
 func (x *Graph) HermiteanToRealFFTWithTensorAxesDescriptorName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], descriptor *raw.MPSGraphFFTDescriptor, name string) *GraphTensor {
 	_r := x.inner.HermiteanToRealFFTWithTensorAxesDescriptorName(tensor, axes, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1321,6 +1637,8 @@ func (x *Graph) HermiteanToRealFFTWithTensorAxesDescriptorName(tensor *raw.MPSGr
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Hermitean-to-real fast Fourier transform operation and returns the result tensor. This operation computes the fast Fourier transform of a complex-valued input tensor according to the following formulae. ```md output[mu] = scale * sum_nu exp( +/- i * 2Pi * mu * nu / n ) in'[nu], where ``` `in'[nu] = conjugate(in[n - nu])`, for the last dimension defined by `axes` when `nu` is out of range of the input dimension. `scale = 1` for `scaling_mode = none`, `scale = 1/V_f` for `scaling_mode = size`, `scale = 1/sqrt(V_f)` for `scaling_mode = unitary`, where `V_f` is the volume of the transformation defined by the dimensions included in `axes` (`V_f = prod_{i \in axes} shape(input)[i]`) (see “MPSGraphFFTDescriptor/scalingMode“), `+` is selected in `+/-` when `inverse` is specified, otherwise `-` is used and the sum is done separately over each dimension in `axes` and `n` is the dimension length of that axis. With this API MPSGraph treats the input tensor to have only the unique frequencies, which means that the resulting tensor has size `(inSize-1)*2 + x` in the last dimension defined by `axes`, where `inSize = shape(input)[axis] ( = (n/2)+1 )` is the size of the input `tensor` in the last transformed dimension and `x = 1` when “MPSGraphFFTDescriptor/roundToOddHermitean“ = `YES` and `x = 0` otherwise. > Tip: Currently MPSGraph supports the transformation only within the last four dimensions of the input tensor. In case you need to transform higher dimensions than the last four, you can tranpose the higher dimensions of the input with “MPSGraph/transposeTensor:permutation:name:“  to be within that last four and then transpose the result tensor back with the inverse of the input transpose. - Parameters: - tensor: A complex-valued input tensor with reduced size (see Discussion). Must have datatype `MPSDataTypeComplexFloat32` or `MPSDataTypeComplexFloat16`. - axesTensor: A tensor of rank one containing the axes over which MPSGraph performs the transformation. See “MPSGraph/fastFourierTransformWithTensor:axes:descriptor:name:“. - descriptor: A descriptor that defines the parameters of the Fourier transform operation - see “MPSGraphFFTDescriptor“. - name: The name for the operation. - Returns: A valid MPSGraphTensor of type `MPSDataTypeFloat32` or `MPSDataTypeFloat16` (full size).
+//
 // HermiteanToRealFFTWithTensorAxesTensorDescriptorName calls the underlying HermiteanToRealFFTWithTensorAxesTensorDescriptorName.
 func (x *Graph) HermiteanToRealFFTWithTensorAxesTensorDescriptorName(tensor *raw.MPSGraphTensor, axesTensor *raw.MPSGraphTensor, descriptor *raw.MPSGraphFFTDescriptor, name string) *GraphTensor {
 	_r := x.inner.HermiteanToRealFFTWithTensorAxesTensorDescriptorName(tensor, axesTensor, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1330,6 +1648,8 @@ func (x *Graph) HermiteanToRealFFTWithTensorAxesTensorDescriptorName(tensor *raw
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a GatherND operation and returns the result tensor. Gathers the slices in updatesTensor to the result tensor along the indices in indicesTensor. The gather is defined as ```md B = batchDims U = updates.rank - B P = res.rank - B Q = inds.rank - B K = inds.shape[-1] index_slice = indices[i_{b0},...,i_{bB},i_{0},..,i_{Q-1}] res[i_{b0},...,i_{bB},i_{0},...,i_{Q-1}] = updates[i_{b0},...,i_{bB},index_slice[0],...,index_slice[K-1]] ``` The tensors have the following shape requirements ```md U > 0; P > 0; Q > 0 K <= U P = (U-K) + Q-1 indices.shape[0:Q-1] = res.shape[0:Q-1] res.shape[Q:P] = updates.shape[K:U] ``` - Parameters: - updatesTensor: Tensor containing slices to be inserted into the result tensor. - indicesTensor: Tensor containg the updates indices to read slices from - batchDimensions: The number of batch dimensions - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // GatherNDWithUpdatesTensorIndicesTensorBatchDimensionsName calls the underlying GatherNDWithUpdatesTensorIndicesTensorBatchDimensionsName.
 func (x *Graph) GatherNDWithUpdatesTensorIndicesTensorBatchDimensionsName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, batchDimensions uint, name string) *GraphTensor {
 	_r := x.inner.GatherNDWithUpdatesTensorIndicesTensorBatchDimensionsName(updatesTensor, indicesTensor, batchDimensions, foundation.NSStringStringWithUTF8String(name))
@@ -1339,6 +1659,8 @@ func (x *Graph) GatherNDWithUpdatesTensorIndicesTensorBatchDimensionsName(update
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Gather operation and returns the result tensor. Gathers the values in updatesTensor to the result tensor along the indices in indicesTensor. The gather is defined as ```md B = batchDims U = updates.rank P = res.rank Q = inds.rank res[p_{0},...p_{axis-1}, i_{B},...,i_{Q}, ...,p_{axis+1},...,p{U-1}] = updates[p_{0},...p_{axis-1}, indices[p_{0},...,p_{B-1},i_{B},...,i_{Q}, ...,p_{axis+1},...,p{U-1}] ``` The tensors have the following shape requirements ```md P = Q-B + U-1 indices.shape[0:B] = updates.shape[0:B] = res.shape[0:B] res.shape[0:axis] = updates.shape[0:axis] res.shape[axis:axis+Q-B] = indices.shape[B:] res.shape[axis+1+Q-B:] = updates.shape[axis+1:] ``` - Parameters: - updatesTensor: Tensor containing slices to be inserted into the result tensor. - indicesTensor: Tensor containg the updates indices to read slices from - axis: The dimension on which to perform the gather - batchDimensions: The number of batch dimensions - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // GatherWithUpdatesTensorIndicesTensorAxisBatchDimensionsName calls the underlying GatherWithUpdatesTensorIndicesTensorAxisBatchDimensionsName.
 func (x *Graph) GatherWithUpdatesTensorIndicesTensorAxisBatchDimensionsName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, axis uint, batchDimensions uint, name string) *GraphTensor {
 	_r := x.inner.GatherWithUpdatesTensorIndicesTensorAxisBatchDimensionsName(updatesTensor, indicesTensor, axis, batchDimensions, foundation.NSStringStringWithUTF8String(name))
@@ -1357,6 +1679,8 @@ func (x *Graph) GatherAlongAxisWithUpdatesTensorIndicesTensorName(axis int, upda
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a GatherAlongAxis operation and returns the result tensor. Gather values from `updatesTensor` along the specified `axis` at indices in `indicesTensor`. The shape of `updatesTensor` and `indicesTensor` must match except at `axis`. The shape of the result tensor is equal to the shape of `indicesTensor`. If an index is out of bounds of the `updatesTensor` along `axis` a 0 is inserted. - Parameters: - axisTensor: Scalar Int32 tensor. The axis to gather from. Negative values wrap around - updatesTensor: The input tensor to gather values from - indicesTensor: Int32 or Int64 tensor used to index `updatesTensor` - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // GatherAlongAxisTensorWithUpdatesTensorIndicesTensorName calls the underlying GatherAlongAxisTensorWithUpdatesTensorIndicesTensorName.
 func (x *Graph) GatherAlongAxisTensorWithUpdatesTensorIndicesTensorName(axisTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.GatherAlongAxisTensorWithUpdatesTensorIndicesTensorName(axisTensor, updatesTensor, indicesTensor, foundation.NSStringStringWithUTF8String(name))
@@ -1366,6 +1690,8 @@ func (x *Graph) GatherAlongAxisTensorWithUpdatesTensorIndicesTensorName(axisTens
 	return &GraphTensor{inner: _r}
 }
 
+// Creates an imToCol operation and returns the result tensor. - Parameters: - source: The tensor containing the source data. Must be of rank 4. The layout is defined by `descriptor.dataLayout`. - descriptor: The descriptor object that specifies the parameters of the operation. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ImToColWithSourceTensorDescriptorName calls the underlying ImToColWithSourceTensorDescriptorName.
 func (x *Graph) ImToColWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphImToColOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.ImToColWithSourceTensorDescriptorName(source, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1375,6 +1701,8 @@ func (x *Graph) ImToColWithSourceTensorDescriptorName(source *raw.MPSGraphTensor
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a column to image operation and returns the result tensor. - Parameters: - source: The tensor containing the source data. Must be of rank 4. The layout is defined by `descriptor.dataLayout`. - outputShape: The result tensor shape. - descriptor: The descriptor object that specifies the parameters of the operation. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ColToImWithSourceTensorOutputShapeDescriptorName calls the underlying ColToImWithSourceTensorOutputShapeDescriptorName.
 func (x *Graph) ColToImWithSourceTensorOutputShapeDescriptorName(source *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphImToColOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.ColToImWithSourceTensorOutputShapeDescriptorName(source, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1384,6 +1712,8 @@ func (x *Graph) ColToImWithSourceTensorOutputShapeDescriptorName(source *raw.MPS
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the band part of an input tensor. This operation copies a diagonal band of values from input tensor to a result tensor of the same size. A coordinate `[..., i, j]` is in the band if ```md (numLower < 0 || (i-j) <= numLower) && (numUpper < 0 || (j-i) <= numUpper) ``` The values outside of the band are set to 0. - Parameters: - inputTensor: input tensor - numLower: the number of diagonals in the lower triangle to keep. If -1, the framework returns all sub diagnols. - numUpper: the number of diagonals in the upper triangle to keep. If -1,  the framework returns all super diagnols. - name: name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // BandPartWithTensorNumLowerNumUpperName calls the underlying BandPartWithTensorNumLowerNumUpperName.
 func (x *Graph) BandPartWithTensorNumLowerNumUpperName(inputTensor *raw.MPSGraphTensor, numLower int, numUpper int, name string) *GraphTensor {
 	_r := x.inner.BandPartWithTensorNumLowerNumUpperName(inputTensor, numLower, numUpper, foundation.NSStringStringWithUTF8String(name))
@@ -1393,6 +1723,8 @@ func (x *Graph) BandPartWithTensorNumLowerNumUpperName(inputTensor *raw.MPSGraph
 	return &GraphTensor{inner: _r}
 }
 
+// Creates the band part operation and returns the result. See above discussion of bandPartWithTensor: numLower: numUpper: name: - Parameters: - inputTensor: The source tensor to copy. - numLowerTensor: Scalar Int32 tensor. The number of diagonals in the lower triangle to keep. If -1, keep all. - numUpperTensor: Scalar Int32 tensor. The number of diagonals in the upper triangle to keep. If -1, keep all. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // BandPartWithTensorNumLowerTensorNumUpperTensorName calls the underlying BandPartWithTensorNumLowerTensorNumUpperTensorName.
 func (x *Graph) BandPartWithTensorNumLowerTensorNumUpperTensorName(inputTensor *raw.MPSGraphTensor, numLowerTensor *raw.MPSGraphTensor, numUpperTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.BandPartWithTensorNumLowerTensorNumUpperTensorName(inputTensor, numLowerTensor, numUpperTensor, foundation.NSStringStringWithUTF8String(name))
@@ -1402,6 +1734,8 @@ func (x *Graph) BandPartWithTensorNumLowerTensorNumUpperTensorName(inputTensor *
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a softmax cross-entropy loss operation and returns the result tensor. The softmax cross-entropy operation computes: ```md loss = reduction( - labels*ln( softmax(source) )), where sotfmax(source) = exp(source) / sum( exp(source) ), and ``` the operation performs the reduction over the `axis` dimension. - Parameters: - sourceTensor: The source tensor. - labelsTensor: The labels tensor. - axis: The axis over which the operation computes the softmax reduction. - reductionType: The type of reduction MPSGraph uses to reduce across all other axes than `axis`. See: “MPSGraphLossReductionType“. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName calls the underlying SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName.
 func (x *Graph) SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName(sourceTensor *raw.MPSGraphTensor, labelsTensor *raw.MPSGraphTensor, axis int, reductionType MPSGraphLossReductionType, name string) *GraphTensor {
 	_r := x.inner.SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName(sourceTensor, labelsTensor, axis, raw.MPSGraphLossReductionType(reductionType), foundation.NSStringStringWithUTF8String(name))
@@ -1411,6 +1745,8 @@ func (x *Graph) SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionType
 	return &GraphTensor{inner: _r}
 }
 
+// Creates the gradient of a softmax cross-entropy loss operation and returns the result tensor. - Parameters: - gradientTensor: The input gradientTensor. Note: in most cases this is the initial gradient tensor, which is a constant tensor with value one. - sourceTensor: The source tensor. - labelsTensor: The labels tensor. - axis: The axis over which the operation computes the softmax reduction. - reductionType: The type of reduction MPSGraph uses to reduce across all other axes than `axis`. See: “MPSGraphLossReductionType“. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName calls the underlying SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName.
 func (x *Graph) SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName(gradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, labelsTensor *raw.MPSGraphTensor, axis int, reductionType MPSGraphLossReductionType, name string) *GraphTensor {
 	_r := x.inner.SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName(gradientTensor, sourceTensor, labelsTensor, axis, raw.MPSGraphLossReductionType(reductionType), foundation.NSStringStringWithUTF8String(name))
@@ -1420,6 +1756,8 @@ func (x *Graph) SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTenso
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the inverse of an input tensor. The framework computes the inverse of a square matrix by calling LU decomposition and LU solver. All dimensions after the first 2 are treated as batch dimensions and the inverse for each batch is computed. Results are undefined for ill conditioned matrices. - Parameters: - inputTensor: The input tensor. - name: The name for the operation. - Returns: A valid “MPSGraphTensor“ object containing the inverse of the input tensor.
+//
 // InverseOfTensorName calls the underlying InverseOfTensorName.
 func (x *Graph) InverseOfTensorName(inputTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.InverseOfTensorName(inputTensor, foundation.NSStringStringWithUTF8String(name))
@@ -1429,6 +1767,8 @@ func (x *Graph) InverseOfTensorName(inputTensor *raw.MPSGraphTensor, name string
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the matrix multiplication of 2 input tensors with support for broadcasting. - Parameters: - primaryTensor: The left-hand side tensor. - secondaryTensor: The right-hand side tensor. - name: The name for the operation. - Returns: A valid tensor containing the product of the input matrices.
+//
 // MatrixMultiplicationWithPrimaryTensorSecondaryTensorName calls the underlying MatrixMultiplicationWithPrimaryTensorSecondaryTensorName.
 func (x *Graph) MatrixMultiplicationWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.MatrixMultiplicationWithPrimaryTensorSecondaryTensorName(primaryTensor, secondaryTensor, foundation.NSStringStringWithUTF8String(name))
@@ -1438,6 +1778,8 @@ func (x *Graph) MatrixMultiplicationWithPrimaryTensorSecondaryTensorName(primary
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the hamming distance of two input tensors with support for broadcasting. The hamming distance is computed between 2 sets of vectors and the last dimension(s) of each input tensor is considered a vector. - Parameters: - primaryTensor: The first input tensor. - secondaryTensor: The second input tensor. - resultDataType: The datatype of the return MPSGraphTensor. Must be either “MPSDataTypeUInt32“ or “MPSDataTypeUInt16“. - name: The name for the operation. - Returns: A valid tensor containing the hamming distance between the input tensors.
+//
 // HammingDistanceWithPrimaryTensorSecondaryTensorResultDataTypeName calls the underlying HammingDistanceWithPrimaryTensorSecondaryTensorResultDataTypeName.
 func (x *Graph) HammingDistanceWithPrimaryTensorSecondaryTensorResultDataTypeName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, resultDataType mpscore.MPSDataType, name string) *GraphTensor {
 	_r := x.inner.HammingDistanceWithPrimaryTensorSecondaryTensorResultDataTypeName(primaryTensor, secondaryTensor, resultDataType, foundation.NSStringStringWithUTF8String(name))
@@ -1447,6 +1789,8 @@ func (x *Graph) HammingDistanceWithPrimaryTensorSecondaryTensorResultDataTypeNam
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a scaled dot product attention (SDPA) operation and returns the result tensor. SDPA Op computes attention by computing softmax(scale * QK^T + M)V. queryTensor Q with shape [B, Hq, Nq, F] and keyTensor K with shape [B, Hq, Nkv, F], with Q's H dimension expandable to satisfy matmul QK^T. maskTensor M's shape should be broadcast compatible to satisfy (QK^T + M). valueTensor V with shape [B, Hv, Nkv, F] should satisfy the matmul (QK^T + M)V. - Parameters: - queryTensor: A tensor that represents the query projection. - keyTensor: A tensor that represents the key projection. - valueTensor: A tensor that represents the value projection. - maskTensor: An optional tensor that contains a mask that is applied to the scaled, matrix multiplied query and value matrices. If mask tensor is nil, the QK^T is not element-wise masked. - scale: A scale that is applied to the result of query and value matrix multiply. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorMaskTensorScaleName calls the underlying ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorMaskTensorScaleName.
 func (x *Graph) ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorMaskTensorScaleName(queryTensor *raw.MPSGraphTensor, keyTensor *raw.MPSGraphTensor, valueTensor *raw.MPSGraphTensor, maskTensor *raw.MPSGraphTensor, scale float32, name string) *GraphTensor {
 	_r := x.inner.ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorMaskTensorScaleName(queryTensor, keyTensor, valueTensor, maskTensor, scale, foundation.NSStringStringWithUTF8String(name))
@@ -1456,6 +1800,8 @@ func (x *Graph) ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorMask
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a scaled dot product attention (SDPA) operation (without a mask) and returns the result tensor. - Parameters: - queryTensor: A tensor that represents the query projection. - keyTensor: A tensor that represents the key projection. - valueTensor: A tensor that represents the value projection. - scale: A scale that is applied on the result of query and value matrix multiply. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorScaleName calls the underlying ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorScaleName.
 func (x *Graph) ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorScaleName(queryTensor *raw.MPSGraphTensor, keyTensor *raw.MPSGraphTensor, valueTensor *raw.MPSGraphTensor, scale float32, name string) *GraphTensor {
 	_r := x.inner.ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorScaleName(queryTensor, keyTensor, valueTensor, scale, foundation.NSStringStringWithUTF8String(name))
@@ -1465,6 +1811,8 @@ func (x *Graph) ScaledDotProductAttentionWithQueryTensorKeyTensorValueTensorScal
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a placeholder operation and returns the result tensor. - Parameters: - shape: The shape of the output tensor. A nil shape will result in an unranked tensor. - dataType: The dataType of the placeholder tensor. - name: The name for the placeholder operation. - Returns: A valid MPSGraphTensor object.
+//
 // PlaceholderWithShapeDataTypeName calls the underlying PlaceholderWithShapeDataTypeName.
 func (x *Graph) PlaceholderWithShapeDataTypeName(shape unsafe.Pointer, dataType mpscore.MPSDataType, name string) *GraphTensor {
 	_r := x.inner.PlaceholderWithShapeDataTypeName(shape, dataType, foundation.NSStringStringWithUTF8String(name))
@@ -1474,6 +1822,8 @@ func (x *Graph) PlaceholderWithShapeDataTypeName(shape unsafe.Pointer, dataType 
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a placeholder operation and returns the result tensor with the dataType of the placeholder tensor set to 32 bit float. - Parameters: - shape: The shape of the output tensor. A nil shape will result in an unranked tensor. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // PlaceholderWithShapeName calls the underlying PlaceholderWithShapeName.
 func (x *Graph) PlaceholderWithShapeName(shape unsafe.Pointer, name string) *GraphTensor {
 	_r := x.inner.PlaceholderWithShapeName(shape, foundation.NSStringStringWithUTF8String(name))
@@ -1483,6 +1833,8 @@ func (x *Graph) PlaceholderWithShapeName(shape unsafe.Pointer, name string) *Gra
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a constant op with a given shape and data, and returns the result tensor. - Parameters: - data: The data for the tensor. The number of bytes should be sizeof(dataType)numberOfElements. - shape: The shape of the output tensor. This has to be statically shaped. - dataType: The dataType of theconstant tensor. - Returns: A valid MPSGraphTensor object.
+//
 // ConstantWithDataShapeDataType calls the underlying ConstantWithDataShapeDataType.
 func (x *Graph) ConstantWithDataShapeDataType(data *foundation.NSData, shape unsafe.Pointer, dataType mpscore.MPSDataType) *GraphTensor {
 	_r := x.inner.ConstantWithDataShapeDataType(data, shape, dataType)
@@ -1492,6 +1844,8 @@ func (x *Graph) ConstantWithDataShapeDataType(data *foundation.NSData, shape uns
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a constant operation and returns the result tensor. - Parameters: - scalar: The scalar value to fill the entire tensor values with. - dataType: The dataType of the constant tensor. - Returns: A valid MPSGraphTensor object.
+//
 // ConstantWithScalarDataType calls the underlying ConstantWithScalarDataType.
 func (x *Graph) ConstantWithScalarDataType(scalar float64, dataType mpscore.MPSDataType) *GraphTensor {
 	_r := x.inner.ConstantWithScalarDataType(scalar, dataType)
@@ -1501,6 +1855,8 @@ func (x *Graph) ConstantWithScalarDataType(scalar float64, dataType mpscore.MPSD
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a constant op with a given shape and returns the result tensor. - Parameters: - scalar: The scalar value to fill the entire tensor values with. - shape: The shape of the output tensor. - dataType: The dataType of the constant tensor. - Returns: A valid MPSGraphTensor object.
+//
 // ConstantWithScalarShapeDataType calls the underlying ConstantWithScalarShapeDataType.
 func (x *Graph) ConstantWithScalarShapeDataType(scalar float64, shape unsafe.Pointer, dataType mpscore.MPSDataType) *GraphTensor {
 	_r := x.inner.ConstantWithScalarShapeDataType(scalar, shape, dataType)
@@ -1510,6 +1866,8 @@ func (x *Graph) ConstantWithScalarShapeDataType(scalar float64, shape unsafe.Poi
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a complex constant op with the MPSDataTypeComplexFloat32 data type and returns the result tensor. - Parameters: - realPart: The real part of the complex scalar to fill the entire tensor values with. - imaginaryPart: The imaginary part of the complex scalar to fill the entire tensor values with. - dataType: The dataType of the constant tensor. - Returns: A valid MPSGraphTensor object.
+//
 // ConstantWithRealPartImaginaryPart calls the underlying ConstantWithRealPartImaginaryPart.
 func (x *Graph) ConstantWithRealPartImaginaryPart(realPart float64, imaginaryPart float64) *GraphTensor {
 	_r := x.inner.ConstantWithRealPartImaginaryPart(realPart, imaginaryPart)
@@ -1519,6 +1877,8 @@ func (x *Graph) ConstantWithRealPartImaginaryPart(realPart float64, imaginaryPar
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a complex constant operation and returns the result tensor. - Parameters: - realPart: The real part of the complex scalar to fill the entire tensor values with. - imaginaryPart: The imaginary part of the complex scalar to fill the entire tensor values with. - dataType: The dataType of the constant tensor. - Returns: A valid MPSGraphTensor object.
+//
 // ConstantWithRealPartImaginaryPartDataType calls the underlying ConstantWithRealPartImaginaryPartDataType.
 func (x *Graph) ConstantWithRealPartImaginaryPartDataType(realPart float64, imaginaryPart float64, dataType mpscore.MPSDataType) *GraphTensor {
 	_r := x.inner.ConstantWithRealPartImaginaryPartDataType(realPart, imaginaryPart, dataType)
@@ -1528,6 +1888,8 @@ func (x *Graph) ConstantWithRealPartImaginaryPartDataType(realPart float64, imag
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a complex constant op with a given shape and returns the result tensor. - Parameters: - realPart: The real part of the complex scalar to fill the entire tensor values with. - imaginaryPart: The imaginary part of the complex scalar to fill the entire tensor values with. - shape: The shape of the output tensor. This has to be statically shaped. - dataType: The dataType of the constant tensor. - Returns: A valid MPSGraphTensor object.
+//
 // ConstantWithRealPartImaginaryPartShapeDataType calls the underlying ConstantWithRealPartImaginaryPartShapeDataType.
 func (x *Graph) ConstantWithRealPartImaginaryPartShapeDataType(realPart float64, imaginaryPart float64, shape unsafe.Pointer, dataType mpscore.MPSDataType) *GraphTensor {
 	_r := x.inner.ConstantWithRealPartImaginaryPartShapeDataType(realPart, imaginaryPart, shape, dataType)
@@ -1537,6 +1899,8 @@ func (x *Graph) ConstantWithRealPartImaginaryPartShapeDataType(realPart float64,
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a variable operation and returns the result tensor. - Parameters: - data: The data for the tensor. The number of bytes should be sizeof(dataType)numberOfElements. - shape: The shape of the output tensor. This has to be statically shaped. - dataType: The dataType of the constant tensor. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // VariableWithDataShapeDataTypeName calls the underlying VariableWithDataShapeDataTypeName.
 func (x *Graph) VariableWithDataShapeDataTypeName(data *foundation.NSData, shape unsafe.Pointer, dataType mpscore.MPSDataType, name string) *GraphTensor {
 	_r := x.inner.VariableWithDataShapeDataTypeName(data, shape, dataType, foundation.NSStringStringWithUTF8String(name))
@@ -1546,6 +1910,8 @@ func (x *Graph) VariableWithDataShapeDataTypeName(data *foundation.NSData, shape
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a variable from an input tensor. - Parameters: - tensor: The tensor from which to form the variable. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // VariableFromTensorWithTensorName calls the underlying VariableFromTensorWithTensorName.
 func (x *Graph) VariableFromTensorWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.VariableFromTensorWithTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -1555,6 +1921,8 @@ func (x *Graph) VariableFromTensorWithTensorName(tensor *raw.MPSGraphTensor, nam
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a read op which reads at this point of execution of the graph and returns the result tensor. - Parameters: - variable: The variable resource tensor to read from. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // ReadVariableName calls the underlying ReadVariableName.
 func (x *Graph) ReadVariableName(variable *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ReadVariableName(variable, foundation.NSStringStringWithUTF8String(name))
@@ -1564,6 +1932,8 @@ func (x *Graph) ReadVariableName(variable *raw.MPSGraphTensor, name string) *Gra
 	return &GraphTensor{inner: _r}
 }
 
+// Creates an assign operation which writes at this point of execution of the graph. - Parameters: - variable: The variable resource tensor to assign to. - tensor: The tensor to assign to the variable. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // AssignVariableWithValueOfTensorName calls the underlying AssignVariableWithValueOfTensorName.
 func (x *Graph) AssignVariableWithValueOfTensorName(variable *raw.MPSGraphTensor, tensor *raw.MPSGraphTensor, name string) *GraphOperation {
 	_r := x.inner.AssignVariableWithValueOfTensorName(variable, tensor, foundation.NSStringStringWithUTF8String(name))
@@ -1573,6 +1943,8 @@ func (x *Graph) AssignVariableWithValueOfTensorName(variable *raw.MPSGraphTensor
 	return &GraphOperation{inner: _r}
 }
 
+// Creates a nonMaximumumSuppression operation and returns the result tensor. - Parameters: - boxesTensor: A tensor containing the coordinates of the input boxes. Must be a rank 3 tensor of shape [N,B,4] of type “MPSDataTypeFloat32“ - scoresTensor: A tensor containing the scores of the input boxes. Must be a rank 3 tensor of shape [N,B,K] of type “MPSDataTypeFloat32“ - IOUThreshold: The threshold for when to reject boxes based on their Intersection Over Union. Valid range is [0,1]. - scoreThreshold: The threshold for when to reject boxes based on their score, before IOU suppression. - perClassSuppression: When this is specified a box will only suppress another box if they have the same class. - coordinateMode: The coordinate mode the box coordinates are provided in. - name: The name for the operation.
+//
 // NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName calls the underlying NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName.
 func (x *Graph) NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *raw.MPSGraphTensor, scoresTensor *raw.MPSGraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode MPSGraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor {
 	_r := x.inner.NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor, scoresTensor, iOUThreshold, scoreThreshold, perClassSuppression, raw.MPSGraphNonMaximumSuppressionCoordinateMode(coordinateMode), foundation.NSStringStringWithUTF8String(name))
@@ -1582,6 +1954,8 @@ func (x *Graph) NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScor
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a nonMaximumumSuppression operation and returns the result tensor. - Parameters: - boxesTensor: A tensor containing the coordinates of the input boxes. Must be a rank 3 tensor of shape [N,B,4] of type “MPSDataTypeFloat32“ - scoresTensor: A tensor containing the scores of the input boxes. Must be a rank 3 tensor of shape [N,B,1] of type “MPSDataTypeFloat32“ - classIndicesTensor: A tensor containing the class indices of the input boxes. Must be a rank 2 tensor of shape [N,B] of type “MPSDataTypeInt32“ - IOUThreshold: The threshold for when to reject boxes based on their Intersection Over Union. Valid range is [0,1]. - scoreThreshold: The threshold for when to reject boxes based on their score, before IOU suppression. - perClassSuppression: When this is specified a box will only suppress another box if they have the same class. - coordinateMode: The coordinate mode the box coordinates are provided in. - name: The name for the operation.
+//
 // NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName calls the underlying NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName.
 func (x *Graph) NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *raw.MPSGraphTensor, scoresTensor *raw.MPSGraphTensor, classIndicesTensor *raw.MPSGraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode MPSGraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor {
 	_r := x.inner.NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor, scoresTensor, classIndicesTensor, iOUThreshold, scoreThreshold, perClassSuppression, raw.MPSGraphNonMaximumSuppressionCoordinateMode(coordinateMode), foundation.NSStringStringWithUTF8String(name))
@@ -1591,6 +1965,8 @@ func (x *Graph) NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTens
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the indices of the non-zero elements of the input tensor. The indices are returned as a two-dimensional tensor of size `[number_of_nonzeros, input_rank]`. Each row in the result contains indices of a nonzero elements in input. For example: ```md tensor = [[ 1,  0, 3], [ 0, 10, 0]] indices = [[ 0, 0], [ 0, 2], [ 1, 1]] ``` - Parameters: - tensor: An MPSGraphTensor of which to compute the non-zero indices. - Returns: A valid MPSGraphTensor containing indices in signed int32 data type.
+//
 // NonZeroIndicesOfTensorName calls the underlying NonZeroIndicesOfTensorName.
 func (x *Graph) NonZeroIndicesOfTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.NonZeroIndicesOfTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -1600,6 +1976,8 @@ func (x *Graph) NonZeroIndicesOfTensorName(tensor *raw.MPSGraphTensor, name stri
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the mean of the first input along the specified axes. - Parameters: - axes: A list of axes over which to perform the reduction. The order of dimensions goes from the slowest moving at axis=0 to the fastest moving dimension. - name: An optional name for the operation. - Returns: A valid `MPSGraphTensor` object.
+//
 // MeanOfTensorAxesName calls the underlying MeanOfTensorAxesName.
 func (x *Graph) MeanOfTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
 	_r := x.inner.MeanOfTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
@@ -1609,6 +1987,8 @@ func (x *Graph) MeanOfTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundatio
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the variance of the first input along the specified axes when the mean has been precomputed. - Parameters: - axes: A list of axes over which to perform the reduction such that the order of dimensions goes from the slowest moving at axis=0 to the fastest moving dimension. - name: An optional name for the operation. - Returns: A valid `MPSGraphTensor` object.
+//
 // VarianceOfTensorMeanTensorAxesName calls the underlying VarianceOfTensorMeanTensorAxesName.
 func (x *Graph) VarianceOfTensorMeanTensorAxesName(tensor *raw.MPSGraphTensor, meanTensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
 	_r := x.inner.VarianceOfTensorMeanTensorAxesName(tensor, meanTensor, axes, foundation.NSStringStringWithUTF8String(name))
@@ -1618,6 +1998,8 @@ func (x *Graph) VarianceOfTensorMeanTensorAxesName(tensor *raw.MPSGraphTensor, m
 	return &GraphTensor{inner: _r}
 }
 
+// Returns the variance of the first input along the specified axes. - Parameters: - axes: A list of axes over which to perform the reduction. Tthe order of dimensions goes from the slowest moving at axis=0 to the fastest moving dimension. - name: An optional name for the operation. - Returns: A valid `MPSGraphTensor` object.
+//
 // VarianceOfTensorAxesName calls the underlying VarianceOfTensorAxesName.
 func (x *Graph) VarianceOfTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
 	_r := x.inner.VarianceOfTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
@@ -1627,6 +2009,8 @@ func (x *Graph) VarianceOfTensorAxesName(tensor *raw.MPSGraphTensor, axes *found
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a batch normalization operation and returns the result tensor. The mean and variance tensors should be outputs of `meanWithTensor:axes:name` and `varianceWithTensor:meanTensor:axes:name`. Use the axes parameter to achieve different types of normalizations. For example (assuming your data is in NxHxWxC format) Batch normalization: axes = [0, 1, 2] Instance normalization: axes = [1, 2] Shapes for gamma and beta must match the input data along at least one dimension and will be broadcast along the rest. For batch normalization, gamma and beta would typically be 1x1x1xC i.e. one value per channel. - Parameters: - tensor: The input tensor. - mean: The mean tensor. - variance: The variance tensor. - gamma: The tensor used to scale the normalized result. - beta: The tensor used to bias the normalized result. - epsilon: A small value to add to the variance when normalizing the inputs. - name: An optional name for the operation. - Returns: A valid `MPSGraphTensor` object.
+//
 // NormalizationWithTensorMeanTensorVarianceTensorGammaTensorBetaTensorEpsilonName calls the underlying NormalizationWithTensorMeanTensorVarianceTensorGammaTensorBetaTensorEpsilonName.
 func (x *Graph) NormalizationWithTensorMeanTensorVarianceTensorGammaTensorBetaTensorEpsilonName(tensor *raw.MPSGraphTensor, mean *raw.MPSGraphTensor, variance *raw.MPSGraphTensor, gamma *raw.MPSGraphTensor, beta *raw.MPSGraphTensor, epsilon float32, name string) *GraphTensor {
 	_r := x.inner.NormalizationWithTensorMeanTensorVarianceTensorGammaTensorBetaTensorEpsilonName(tensor, mean, variance, gamma, beta, epsilon, foundation.NSStringStringWithUTF8String(name))
@@ -1636,6 +2020,8 @@ func (x *Graph) NormalizationWithTensorMeanTensorVarianceTensorGammaTensorBetaTe
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a normalization gamma-gradient operation and returns the result tensor. The mean and variance tensors should be outputs of “meanWithTensor:axes:name“ and “varianceWithTensor:meanTensor:axes:name“. Use the axes parameter to achieve different types of normalizations. For example (assuming your data is in `NxHxWxC` format) Batch normalization: axes = [0, 1, 2] Instance normalization: axes = [1, 2] - Parameters: - incomingGradientTensor: The incoming original `resultTensor` gradient. - sourceTensor: The original input source in forward direction. - meanTensor: The mean tensor. - varianceTensor: The variance tensor. - axes: The axes of normalization. - epsilon: A small value to add to the variance when normalizing the inputs. - name: An optional name for the operation. - Returns: A valid `MPSGraphTensor` object.
+//
 // NormalizationGammaGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorReductionAxesEpsilonName calls the underlying NormalizationGammaGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorReductionAxesEpsilonName.
 func (x *Graph) NormalizationGammaGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorReductionAxesEpsilonName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, meanTensor *raw.MPSGraphTensor, varianceTensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], epsilon float32, name string) *GraphTensor {
 	_r := x.inner.NormalizationGammaGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorReductionAxesEpsilonName(incomingGradientTensor, sourceTensor, meanTensor, varianceTensor, axes, epsilon, foundation.NSStringStringWithUTF8String(name))
@@ -1645,6 +2031,8 @@ func (x *Graph) NormalizationGammaGradientWithIncomingGradientTensorSourceTensor
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a normalization beta-gradient operation and returns the result tensor. The mean and variance tensors should be outputs of “meanWithTensor:axes:name“ and “varianceWithTensor:meanTensor:axes:name“. Use the axes parameter to achieve different types of normalizations. For example (assuming your data is in `NxHxWxC` format) Batch normalization: axes = [0, 1, 2] Instance normalization: axes = [1, 2] - Parameters: - incomingGradientTensor: The incoming original `resultTensor` gradient. - sourceTensor: The original input source in forward direction. - axes: The axes of normalization. - name: An optional name for the operation. - Returns: A valid `MPSGraphTensor` object.
+//
 // NormalizationBetaGradientWithIncomingGradientTensorSourceTensorReductionAxesName calls the underlying NormalizationBetaGradientWithIncomingGradientTensorSourceTensorReductionAxesName.
 func (x *Graph) NormalizationBetaGradientWithIncomingGradientTensorSourceTensorReductionAxesName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
 	_r := x.inner.NormalizationBetaGradientWithIncomingGradientTensorSourceTensorReductionAxesName(incomingGradientTensor, sourceTensor, axes, foundation.NSStringStringWithUTF8String(name))
@@ -1654,6 +2042,8 @@ func (x *Graph) NormalizationBetaGradientWithIncomingGradientTensorSourceTensorR
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a normalization input gradient operation and returns the result tensor. The mean and variance tensors should be outputs of “meanWithTensor:axes:name“ and “varianceWithTensor:meanTensor:axes:name“. Use the axes parameter to achieve different types of normalizations. For example (assuming your data is in `NxHxWxC` format) Batch normalization: axes = [0, 1, 2] Instance normalization: axes = [1, 2] - Parameters: - incomingGradientTensor: The incoming original `resultTensor` gradient. - sourceTensor: The original input source in forward direction. - meanTensor: The mean tensor. - varianceTensor: The variance tensor. - gamma: The gamma tensor. - gammaGradient: The `gammaGradient` tensor. - betaGradient: The `betaGradient` tensor - axes: The axes of normalization. - epsilon: A small value to add to the variance when normalizing the inputs. - name: An optional name for the operation.
+//
 // NormalizationGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorGammaTensorGammaGradientTensorBetaGradientTensorReductionAxesEpsilonName calls the underlying NormalizationGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorGammaTensorGammaGradientTensorBetaGradientTensorReductionAxesEpsilonName.
 func (x *Graph) NormalizationGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorGammaTensorGammaGradientTensorBetaGradientTensorReductionAxesEpsilonName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, meanTensor *raw.MPSGraphTensor, varianceTensor *raw.MPSGraphTensor, gamma *raw.MPSGraphTensor, gammaGradient *raw.MPSGraphTensor, betaGradient *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], epsilon float32, name string) *GraphTensor {
 	_r := x.inner.NormalizationGradientWithIncomingGradientTensorSourceTensorMeanTensorVarianceTensorGammaTensorGammaGradientTensorBetaGradientTensorReductionAxesEpsilonName(incomingGradientTensor, sourceTensor, meanTensor, varianceTensor, gamma, gammaGradient, betaGradient, axes, epsilon, foundation.NSStringStringWithUTF8String(name))
@@ -1663,6 +2053,8 @@ func (x *Graph) NormalizationGradientWithIncomingGradientTensorSourceTensorMeanT
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a oneHot operation and returns the result tensor. Creates a tensor of rank equal to the indicesTensor rank + 1. Inserts a new axis at the axis specified, or the minor axis if axis is -1. The values at the indices in the indicesTensor will have the onValue, and all other values will be set to the offValue. - Parameters: - indicesTensor: Tensor of indices for on values - depth: Depth of the oneHot vector along the axis - axis: The axis to insert the new oneHot vector at. Defaults to -1, the minor axis - dataType: MPSDataType of the result tensor Defaults to MPSDataTypeFloat - onValue: The value for indices designated by the indicesTensor. This value must match the specified data type. Defaults to 1.0f - offValue: The value for indices not designated by the indicesTensor. This value must match the specified data type. Defaults to 0.0f - name: Name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // OneHotWithIndicesTensorDepthAxisDataTypeOnValueOffValueName calls the underlying OneHotWithIndicesTensorDepthAxisDataTypeOnValueOffValueName.
 func (x *Graph) OneHotWithIndicesTensorDepthAxisDataTypeOnValueOffValueName(indicesTensor *raw.MPSGraphTensor, depth uint, axis uint, dataType mpscore.MPSDataType, onValue float64, offValue float64, name string) *GraphTensor {
 	_r := x.inner.OneHotWithIndicesTensorDepthAxisDataTypeOnValueOffValueName(indicesTensor, depth, axis, dataType, onValue, offValue, foundation.NSStringStringWithUTF8String(name))
@@ -1672,6 +2064,8 @@ func (x *Graph) OneHotWithIndicesTensorDepthAxisDataTypeOnValueOffValueName(indi
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a oneHot operation and returns the result tensor. Creates a tensor of rank equal to the rank of `indicesTensor` + 1. Inserts a new axis at the minor dimension. The values at the indices in the indicesTensor will have the onValue, and all other values will be set to the offValue. - Parameters: - indicesTensor: Tensor of indices for on values - depth: Depth of the oneHot vector along the axis - dataType: MPSDataType of the result tensor. - onValue: The value for indices designated by the indicesTensor. This value must match the specified data type. - offValue: The value for indices not designated by the indicesTensor. This value must match the specified data type. - name: Name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // OneHotWithIndicesTensorDepthDataTypeOnValueOffValueName calls the underlying OneHotWithIndicesTensorDepthDataTypeOnValueOffValueName.
 func (x *Graph) OneHotWithIndicesTensorDepthDataTypeOnValueOffValueName(indicesTensor *raw.MPSGraphTensor, depth uint, dataType mpscore.MPSDataType, onValue float64, offValue float64, name string) *GraphTensor {
 	_r := x.inner.OneHotWithIndicesTensorDepthDataTypeOnValueOffValueName(indicesTensor, depth, dataType, onValue, offValue, foundation.NSStringStringWithUTF8String(name))
@@ -1681,6 +2075,8 @@ func (x *Graph) OneHotWithIndicesTensorDepthDataTypeOnValueOffValueName(indicesT
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a oneHot operation and returns the result tensor. Creates a tensor of rank equal to the rank of `indicesTensor` + 1. Inserts a new axis at the axis specified, or the minor axis if `axis` is -1. The values at the indices in the indicesTensor will be set to 1, and all other values will be set to 0. - Parameters: - indicesTensor: Tensor of indices for on values - depth: Depth of the oneHot vector along the axis - axis: The axis to insert the new oneHot vector at - dataType: MPSDataType of the result tensor. - name: Name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // OneHotWithIndicesTensorDepthAxisDataTypeName calls the underlying OneHotWithIndicesTensorDepthAxisDataTypeName.
 func (x *Graph) OneHotWithIndicesTensorDepthAxisDataTypeName(indicesTensor *raw.MPSGraphTensor, depth uint, axis uint, dataType mpscore.MPSDataType, name string) *GraphTensor {
 	_r := x.inner.OneHotWithIndicesTensorDepthAxisDataTypeName(indicesTensor, depth, axis, dataType, foundation.NSStringStringWithUTF8String(name))
@@ -1690,6 +2086,8 @@ func (x *Graph) OneHotWithIndicesTensorDepthAxisDataTypeName(indicesTensor *raw.
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a oneHot operation and returns the result tensor. Creates a tensor of rank equal to the rank of `indicesTensor` + 1, of type MPSDataTypeFloat32. Inserts a new axis at the axis specified, or the minor axis if `axis` is -1. The values at the indices in the indicesTensor will be set to 1, and all other values will be set to 0. - Parameters: - indicesTensor: Tensor of indices for on values - depth: Depth of the oneHot vector along the axis - axis: The axis to insert the new oneHot vector at - name: Name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // OneHotWithIndicesTensorDepthAxisName calls the underlying OneHotWithIndicesTensorDepthAxisName.
 func (x *Graph) OneHotWithIndicesTensorDepthAxisName(indicesTensor *raw.MPSGraphTensor, depth uint, axis uint, name string) *GraphTensor {
 	_r := x.inner.OneHotWithIndicesTensorDepthAxisName(indicesTensor, depth, axis, foundation.NSStringStringWithUTF8String(name))
@@ -1699,6 +2097,8 @@ func (x *Graph) OneHotWithIndicesTensorDepthAxisName(indicesTensor *raw.MPSGraph
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a oneHot operation and returns the result tensor. Creates a tensor of rank equal to the rank of `indicesTensor` + 1. Inserts a new axis at the minor dimension. The values at the indices in the indicesTensor will be set to 1, and all other values will be set to 0. - Parameters: - indicesTensor: Tensor of indices for on values - depth: Depth of the oneHot vector along the axis - dataType: MPSDataType of the result tensor. - name: Name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // OneHotWithIndicesTensorDepthDataTypeName calls the underlying OneHotWithIndicesTensorDepthDataTypeName.
 func (x *Graph) OneHotWithIndicesTensorDepthDataTypeName(indicesTensor *raw.MPSGraphTensor, depth uint, dataType mpscore.MPSDataType, name string) *GraphTensor {
 	_r := x.inner.OneHotWithIndicesTensorDepthDataTypeName(indicesTensor, depth, dataType, foundation.NSStringStringWithUTF8String(name))
@@ -1708,6 +2108,8 @@ func (x *Graph) OneHotWithIndicesTensorDepthDataTypeName(indicesTensor *raw.MPSG
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a oneHot operation and returns the result tensor. Creates a tensor of rank equal to the rank of `indicesTensor` + 1, of type MPSDataTypeFloat32. Inserts a new axis at the minor dimension. The values at the indices in the indicesTensor will be set to 1, and all other values will be set to 0. - Parameters: - indicesTensor: Tensor of indices for on values - depth: Depth of the oneHot vector along the axis - name: Name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // OneHotWithIndicesTensorDepthName calls the underlying OneHotWithIndicesTensorDepthName.
 func (x *Graph) OneHotWithIndicesTensorDepthName(indicesTensor *raw.MPSGraphTensor, depth uint, name string) *GraphTensor {
 	_r := x.inner.OneHotWithIndicesTensorDepthName(indicesTensor, depth, foundation.NSStringStringWithUTF8String(name))
@@ -1717,6 +2119,8 @@ func (x *Graph) OneHotWithIndicesTensorDepthName(indicesTensor *raw.MPSGraphTens
 	return &GraphTensor{inner: _r}
 }
 
+// The Stochastic gradient descent performs a gradient descent. `variable = variable - (learningRate * g)` where, `g` is gradient of error wrt variable - Parameters: - learningRateTensor: scalar tensor which indicates the learning rate to use with the optimizer - valuesTensor: values tensor, usually representing the trainable parameters - gradientTensor: partial gradient of the trainable parameters with respect to loss - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // StochasticGradientDescentWithLearningRateTensorValuesTensorGradientTensorName calls the underlying StochasticGradientDescentWithLearningRateTensorValuesTensorGradientTensorName.
 func (x *Graph) StochasticGradientDescentWithLearningRateTensorValuesTensorGradientTensorName(learningRateTensor *raw.MPSGraphTensor, valuesTensor *raw.MPSGraphTensor, gradientTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.StochasticGradientDescentWithLearningRateTensorValuesTensorGradientTensorName(learningRateTensor, valuesTensor, gradientTensor, foundation.NSStringStringWithUTF8String(name))
@@ -1726,6 +2130,8 @@ func (x *Graph) StochasticGradientDescentWithLearningRateTensorValuesTensorGradi
 	return &GraphTensor{inner: _r}
 }
 
+// The Stochastic gradient descent performs a gradient descent `variable = variable - (learningRate * g)` where, `g` is gradient of error wrt variable this op directly writes to the variable - Parameters: - learningRateTensor: scalar tensor which indicates the learning rate to use with the optimizer - variable: variable operation with trainable parameters - gradientTensor: partial gradient of the trainable parameters with respect to loss - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ApplyStochasticGradientDescentWithLearningRateTensorVariableGradientTensorName calls the underlying ApplyStochasticGradientDescentWithLearningRateTensorVariableGradientTensorName.
 func (x *Graph) ApplyStochasticGradientDescentWithLearningRateTensorVariableGradientTensorName(learningRateTensor *raw.MPSGraphTensor, variable *raw.MPSGraphVariableOp, gradientTensor *raw.MPSGraphTensor, name string) *GraphOperation {
 	_r := x.inner.ApplyStochasticGradientDescentWithLearningRateTensorVariableGradientTensorName(learningRateTensor, variable, gradientTensor, foundation.NSStringStringWithUTF8String(name))
@@ -1735,16 +2141,22 @@ func (x *Graph) ApplyStochasticGradientDescentWithLearningRateTensorVariableGrad
 	return &GraphOperation{inner: _r}
 }
 
+// Creates operations to apply Adam optimization. The adam update ops are added current learning rate: ```md lr[t] = learningRate * sqrt(1 - beta2^t) / (1 - beta1^t) m[t] = beta1 * m[t-1] + (1 - beta1) * g v[t] = beta2 * v[t-1] + (1 - beta2) * (g ^ 2) maxVel[t] = max(maxVel[t-1], v[t]) variable = variable - lr[t] * m[t] / (sqrt(maxVel) + epsilon) ``` - Parameters: - learningRateTensor: scalar tensor which indicates the learning rate to use with the optimizer - beta1Tensor: beta1Tensor - beta2Tensor: beta2Tensor - beta1PowerTensor: `beta1^t` beta1 power tensor - beta2PowerTensor: `beta2^t` beta2 power tensor - valuesTensor: values to update with optimization - momentumTensor: momentum tensor - velocityTensor: velocity tensor - maximumVelocityTensor: optional maximum velocity tensor - gradientTensor: partial gradient of the trainable parameters with respect to loss - name: name for the operation - Returns: if maximumVelocity is nil array of 3 tensors (update, newMomentum, newVelocity) else array of 4 tensors (update, newMomentum, newVelocity, newMaximumVelocity)
+//
 // AdamWithLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorBeta1PowerTensorBeta2PowerTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName calls the underlying AdamWithLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorBeta1PowerTensorBeta2PowerTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName.
 func (x *Graph) AdamWithLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorBeta1PowerTensorBeta2PowerTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName(learningRateTensor *raw.MPSGraphTensor, beta1Tensor *raw.MPSGraphTensor, beta2Tensor *raw.MPSGraphTensor, epsilonTensor *raw.MPSGraphTensor, beta1PowerTensor *raw.MPSGraphTensor, beta2PowerTensor *raw.MPSGraphTensor, valuesTensor *raw.MPSGraphTensor, momentumTensor *raw.MPSGraphTensor, velocityTensor *raw.MPSGraphTensor, maximumVelocityTensor *raw.MPSGraphTensor, gradientTensor *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.AdamWithLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorBeta1PowerTensorBeta2PowerTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName(learningRateTensor, beta1Tensor, beta2Tensor, epsilonTensor, beta1PowerTensor, beta2PowerTensor, valuesTensor, momentumTensor, velocityTensor, maximumVelocityTensor, gradientTensor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates operations to apply Adam optimization. The adam update ops are added ```md m[t] = beta1m[t-1] + (1 - beta1) * g v[t] = beta2v[t-1] + (1 - beta2) * (g ^ 2) maxVel[t] = max(maxVel[t-1],v[t]) variable = variable - lr[t] * m[t] / (sqrt(maxVel) + epsilon) ``` - Parameters: - learningRateTensor: scalar tensor which indicates the learning rate to use with the optimizer - beta1Tensor: beta1Tensor - beta2Tensor: beta2Tensor - epsilonTensor: epsilon tensor - valuesTensor: values to update with optimization - momentumTensor: momentum tensor - velocityTensor: velocity tensor - maximumVelocityTensor: optional maximum velocity tensor - gradientTensor: partial gradient of the trainable parameters with respect to loss - name: name for the operation - Returns: if maximumVelocity is nil array of 3 tensors (update, newMomentum, newVelocity) else array of 4 tensors (update, newMomentum, newVelocity, newMaximumVelocity)
+//
 // AdamWithCurrentLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName calls the underlying AdamWithCurrentLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName.
 func (x *Graph) AdamWithCurrentLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName(currentLearningRateTensor *raw.MPSGraphTensor, beta1Tensor *raw.MPSGraphTensor, beta2Tensor *raw.MPSGraphTensor, epsilonTensor *raw.MPSGraphTensor, valuesTensor *raw.MPSGraphTensor, momentumTensor *raw.MPSGraphTensor, velocityTensor *raw.MPSGraphTensor, maximumVelocityTensor *raw.MPSGraphTensor, gradientTensor *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.AdamWithCurrentLearningRateTensorBeta1TensorBeta2TensorEpsilonTensorValuesTensorMomentumTensorVelocityTensorMaximumVelocityTensorGradientTensorName(currentLearningRateTensor, beta1Tensor, beta2Tensor, epsilonTensor, valuesTensor, momentumTensor, velocityTensor, maximumVelocityTensor, gradientTensor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a 2D max-pooling operation and returns the result tensor. - Parameters: - source: A 2D Image source as tensor - must be of rank=4. The layout is defined by `descriptor.dataLayout`. - descriptor: A pooling operation descriptor that specifies pooling window sizes, strides, dilation rates, paddings and layouts. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // MaxPooling2DWithSourceTensorDescriptorName calls the underlying MaxPooling2DWithSourceTensorDescriptorName.
 func (x *Graph) MaxPooling2DWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.MaxPooling2DWithSourceTensorDescriptorName(source, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1754,11 +2166,15 @@ func (x *Graph) MaxPooling2DWithSourceTensorDescriptorName(source *raw.MPSGraphT
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 2D max-pooling operation and returns the result tensor and the corresponding indices tensor. In order to Computes the indices, `returnIndicesMode` of the descriptor must be set. The datatype of indices tensor can be set using `returnIndicesDataType`. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns will be valid and using the second result will assert. - Parameters: - source: A 2D Image source as tensor - must be of rank=4. The layout is defined by `descriptor.dataLayout`. - descriptor: A pooling operation descriptor that specifies pooling window sizes, strides, dilation rates, paddings and layouts. - name: The name for the operation. - Returns: An array of two MPSGraphTensors. The first tensor holds the result of max pool and the second tensor holds the corresponding indices
+//
 // MaxPooling2DReturnIndicesWithSourceTensorDescriptorName calls the underlying MaxPooling2DReturnIndicesWithSourceTensorDescriptorName.
 func (x *Graph) MaxPooling2DReturnIndicesWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.MaxPooling2DReturnIndicesWithSourceTensorDescriptorName(source, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a max-pooling gradient operation and returns the result tensor. - Parameters: - gradient: A 2D input gradient tensor - must be of rank=4. The layout is defined by `descriptor.dataLayout`. - source: The input tensor for the forward pass. - descriptor: A pooling operation descriptor that specifies pooling window sizes, strides, dilation rates, paddings and layouts. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // MaxPooling2DGradientWithGradientTensorSourceTensorDescriptorName calls the underlying MaxPooling2DGradientWithGradientTensorSourceTensorDescriptorName.
 func (x *Graph) MaxPooling2DGradientWithGradientTensorSourceTensorDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.MaxPooling2DGradientWithGradientTensorSourceTensorDescriptorName(gradient, source, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1768,6 +2184,8 @@ func (x *Graph) MaxPooling2DGradientWithGradientTensorSourceTensorDescriptorName
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a max-pooling gradient operation and returns the result tensor. With this API MPSGraph computes the max-pooling gradient efficiently by reusing the indices from the forward API instead of recomputing them. The descriptor must set `returnIndicesMode` and `returnIndicesDataType` to the same value as that set by the forward pass. - Parameters: - gradient: A 2D input gradient tensor - must be of rank=4. The layout is defined by `descriptor.dataLayout`. - indices: The indices tensor returned from “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“. - outputShape: The shape of the destination gradient. - descriptor: A pooling operation descriptor that specifies pooling window sizes, strides, dilation rates, paddings and layouts. - name: The name for the operation. - Returns: Destination gradient tensor.
+//
 // MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeDescriptorName calls the underlying MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeDescriptorName.
 func (x *Graph) MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeDescriptorName(gradient *raw.MPSGraphTensor, indices *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeDescriptorName(gradient, indices, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1777,6 +2195,8 @@ func (x *Graph) MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeDe
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a max-pooling gradient operation and returns the result tensor. With this API MPSGraph computes the max-pooling gradient efficiently by reusing the indices from the forward API instead of recomputing them. The descriptor must set `returnIndicesMode` and `returnIndicesDataType` to the same value as that set by the forward pass. - Parameters: - gradient: A 2D input gradient tensor - must be of rank=4. The layout is defined by `descriptor.dataLayout`. - indices: The indices tensor returned from “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“. - outputShape: A tensor containing the shape of the destination gradient. - descriptor: A pooling operation descriptor that specifies pooling window sizes, strides, dilation rates, paddings and layouts. - name: The name for the operation. - Returns: Destination gradient tensor.
+//
 // MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName calls the underlying MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName.
 func (x *Graph) MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName(gradient *raw.MPSGraphTensor, indices *raw.MPSGraphTensor, outputShape *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName(gradient, indices, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1786,6 +2206,8 @@ func (x *Graph) MaxPooling2DGradientWithGradientTensorIndicesTensorOutputShapeTe
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 2D average-pooling operation and returns the result tensor. - Parameters: - source: A 2D Image source as tensor - must be of rank=4. The layout is defined by `descriptor.dataLayout`. - descriptor: A pooling operation descriptor that specifies pooling window sizes, strides, dilation rates, paddings and layouts. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // AvgPooling2DWithSourceTensorDescriptorName calls the underlying AvgPooling2DWithSourceTensorDescriptorName.
 func (x *Graph) AvgPooling2DWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.AvgPooling2DWithSourceTensorDescriptorName(source, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1795,6 +2217,8 @@ func (x *Graph) AvgPooling2DWithSourceTensorDescriptorName(source *raw.MPSGraphT
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 2D average pooling gradient operation and returns the result tensor. - Parameters: - gradient: A 2D input gradient tensor - must be of rank=4. The layout is defined by `descriptor.dataLayout`. - source: The input tensor for the forward pass. - descriptor: A pooling operation descriptor that specifies pooling window sizes, strides, dilation rates, paddings and layouts. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // AvgPooling2DGradientWithGradientTensorSourceTensorDescriptorName calls the underlying AvgPooling2DGradientWithGradientTensorSourceTensorDescriptorName.
 func (x *Graph) AvgPooling2DGradientWithGradientTensorSourceTensorDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling2DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.AvgPooling2DGradientWithGradientTensorSourceTensorDescriptorName(gradient, source, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1804,6 +2228,8 @@ func (x *Graph) AvgPooling2DGradientWithGradientTensorSourceTensorDescriptorName
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 4D max-pooling operation and returns the result tensor. - Parameters: - source: A source tensor. - descriptor: A pooling operation descriptor that specifies pooling window sizes, strides, dilation rates and paddings. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // MaxPooling4DWithSourceTensorDescriptorName calls the underlying MaxPooling4DWithSourceTensorDescriptorName.
 func (x *Graph) MaxPooling4DWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.MaxPooling4DWithSourceTensorDescriptorName(source, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1813,11 +2239,15 @@ func (x *Graph) MaxPooling4DWithSourceTensorDescriptorName(source *raw.MPSGraphT
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 4D max-pooling operation and returns the result tensor and the corresponding indices tensor. In order to Computes the indices, `returnIndicesMode` of the descriptor must be set. The datatype of indices tensor can be set using `returnIndicesDataType`. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns will be valid and using the second result will assert. - Parameters: - source: The source tensor on which pooling will be performed. - descriptor: A pooling operation descriptor that specifies pooling window sizes, strides, dilation rates and paddings. - name: The name for the operation. - Returns: An array of two MPSGraphTensors. The first tensor holds the result of max pool and the second tensor holds the corresponding indices.
+//
 // MaxPooling4DReturnIndicesWithSourceTensorDescriptorName calls the underlying MaxPooling4DReturnIndicesWithSourceTensorDescriptorName.
 func (x *Graph) MaxPooling4DReturnIndicesWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.MaxPooling4DReturnIndicesWithSourceTensorDescriptorName(source, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a max-pooling gradient operation and returns the result tensor. - Parameters: - gradient: An input gradient tensor. - source: The input tensor for the forward pass. - descriptor: A pooling operation descriptor that specifies pooling window sizes, strides, dilation rates and paddings. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // MaxPooling4DGradientWithGradientTensorSourceTensorDescriptorName calls the underlying MaxPooling4DGradientWithGradientTensorSourceTensorDescriptorName.
 func (x *Graph) MaxPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.MaxPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient, source, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1827,6 +2257,8 @@ func (x *Graph) MaxPooling4DGradientWithGradientTensorSourceTensorDescriptorName
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a max-pooling gradient operation and returns the result tensor. With this API MPSGraph computes the max-pooling gradient efficiently by reusing the indices from the forward API instead of recomputing them. The descriptor must set `returnIndicesMode` and `returnIndicesDataType` to the same value as that set by the forward pass. - Parameters: - gradient: An input gradient tensor. - indices: Indices tensor returned from “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“. - outputShape: The shape of the destination gradient. - descriptor: A pooling operation descriptor that specifies pooling window sizes, strides, dilation rates, paddings and layouts. - name: The name for the operation. - Returns: Destination gradient tensor.
+//
 // MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeDescriptorName calls the underlying MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeDescriptorName.
 func (x *Graph) MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeDescriptorName(gradient *raw.MPSGraphTensor, indices *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeDescriptorName(gradient, indices, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1836,6 +2268,8 @@ func (x *Graph) MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeDe
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a max-pooling gradient operation and returns the result tensor. With this API MPSGraph computes the max-pooling gradient efficiently by reusing the indices from the forward API instead of recomputing them. The descriptor must set `returnIndicesMode` and `returnIndicesDataType` to the same value as that set by the forward pass. - Parameters: - gradient: An input gradient tensor. - indices: The indices tensor returned from “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“. - outputShape: A tensor containing the shape of the destination gradient. - descriptor: A pooling operation descriptor that specifies pooling window sizes, strides, dilation rates, paddings and layouts. - name: The name for the operation. - Returns: Destination gradient tensor.
+//
 // MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName calls the underlying MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName.
 func (x *Graph) MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName(gradient *raw.MPSGraphTensor, indices *raw.MPSGraphTensor, outputShape *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeTensorDescriptorName(gradient, indices, outputShape, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1845,6 +2279,8 @@ func (x *Graph) MaxPooling4DGradientWithGradientTensorIndicesTensorOutputShapeTe
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 4D average pooling operation and returns the result tensor. - Parameters: - source: A source tensor. - descriptor: A pooling operation descriptor that specifies pooling window sizes, strides, dilation rates and paddings. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // AvgPooling4DWithSourceTensorDescriptorName calls the underlying AvgPooling4DWithSourceTensorDescriptorName.
 func (x *Graph) AvgPooling4DWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.AvgPooling4DWithSourceTensorDescriptorName(source, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1854,6 +2290,8 @@ func (x *Graph) AvgPooling4DWithSourceTensorDescriptorName(source *raw.MPSGraphT
 	return &GraphTensor{inner: _r}
 }
 
+// Creates an average pooling gradient operation and returns the result tensor. - Parameters: - gradient: An input gradient tensor. - source: The input tensor for the forward pass. - descriptor: A pooling operation descriptor that specifies pooling window sizes, strides, dilation rates and paddings. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // AvgPooling4DGradientWithGradientTensorSourceTensorDescriptorName calls the underlying AvgPooling4DGradientWithGradientTensorSourceTensorDescriptorName.
 func (x *Graph) AvgPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.AvgPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient, source, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1863,6 +2301,8 @@ func (x *Graph) AvgPooling4DGradientWithGradientTensorSourceTensorDescriptorName
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a 4D L2-norm pooling operation and returns the result tensor. - Parameters: - source: A source tensor. - descriptor: A pooling operation descriptor that specifies pooling window sizes, strides, dilation rates and paddings. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // L2NormPooling4DWithSourceTensorDescriptorName calls the underlying L2NormPooling4DWithSourceTensorDescriptorName.
 func (x *Graph) L2NormPooling4DWithSourceTensorDescriptorName(source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.L2NormPooling4DWithSourceTensorDescriptorName(source, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1872,6 +2312,8 @@ func (x *Graph) L2NormPooling4DWithSourceTensorDescriptorName(source *raw.MPSGra
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a L2-Norm pooling gradient operation and returns the result tensor. - Parameters: - gradient: An input gradient tensor. - source: The input tensor for the forward pass. - descriptor: A pooling operation descriptor that specifies pooling window sizes, strides, dilation rates and paddings. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // L2NormPooling4DGradientWithGradientTensorSourceTensorDescriptorName calls the underlying L2NormPooling4DGradientWithGradientTensorSourceTensorDescriptorName.
 func (x *Graph) L2NormPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, descriptor *raw.MPSGraphPooling4DOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.L2NormPooling4DGradientWithGradientTensorSourceTensorDescriptorName(gradient, source, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1881,6 +2323,8 @@ func (x *Graph) L2NormPooling4DGradientWithGradientTensorSourceTensorDescriptorN
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Quantize operation and returns the result tensor. Convert the float `tensor` to an i8 or u8 tensor by applying a scale + bias transform: result = (tensor / scale) + zeroPoint - Parameters: - tensor: Input tensor to be quantized - scale: Scale scalar parameter - zeroPoint: Bias scalar parameter (converted to dataType of resultTensor) - dataType: Integer data type of the result tensor. - name: The name for the operation. - Returns: A valid MPSGraphTensor array of datatype dataType
+//
 // QuantizeTensorScaleZeroPointDataTypeName calls the underlying QuantizeTensorScaleZeroPointDataTypeName.
 func (x *Graph) QuantizeTensorScaleZeroPointDataTypeName(tensor *raw.MPSGraphTensor, scale float64, zeroPoint float64, dataType mpscore.MPSDataType, name string) *GraphTensor {
 	_r := x.inner.QuantizeTensorScaleZeroPointDataTypeName(tensor, scale, zeroPoint, dataType, foundation.NSStringStringWithUTF8String(name))
@@ -1890,6 +2334,8 @@ func (x *Graph) QuantizeTensorScaleZeroPointDataTypeName(tensor *raw.MPSGraphTen
 	return &GraphTensor{inner: _r}
 }
 
+// Creates Dequantize operation and returns the result tensor. Convert the i8 or u8 `tensor` to a float tensor by applying a scale + bias transform: result = scale(tensor - zeroPoint) - Parameters: - tensor: Input tensor to be dequantized - scale: Scale scalar parameter - zeroPoint: Bias scalar parameter (converted to dataType of tensor) - dataType: Float data type of the result tensor. - name: The name for the operation. - Returns: A valid MPSGraphTensor array of datatype dataType
+//
 // DequantizeTensorScaleZeroPointDataTypeName calls the underlying DequantizeTensorScaleZeroPointDataTypeName.
 func (x *Graph) DequantizeTensorScaleZeroPointDataTypeName(tensor *raw.MPSGraphTensor, scale float64, zeroPoint float64, dataType mpscore.MPSDataType, name string) *GraphTensor {
 	_r := x.inner.DequantizeTensorScaleZeroPointDataTypeName(tensor, scale, zeroPoint, dataType, foundation.NSStringStringWithUTF8String(name))
@@ -1899,6 +2345,8 @@ func (x *Graph) DequantizeTensorScaleZeroPointDataTypeName(tensor *raw.MPSGraphT
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Quantize operation and returns the result tensor. Convert the float `tensor` to an i8 or u8 tensor by applying a scale + bias transform: result = (tensor / scaleTensor) + zeroPoint - Parameters: - tensor: Input tensor to be quantized - scaleTensor: Scale 1D Tensor parameter with size == tensor.shape[axis] - zeroPoint: Bias scalar parameter (converted to dataType of resultTensor) - dataType: Integer data type of the result tensor. - axis: Axis on which the scale 1D value is being broadcasted - name: The name for the operation. - Returns: A valid MPSGraphTensor array of datatype dataType
+//
 // QuantizeTensorScaleTensorZeroPointDataTypeAxisName calls the underlying QuantizeTensorScaleTensorZeroPointDataTypeAxisName.
 func (x *Graph) QuantizeTensorScaleTensorZeroPointDataTypeAxisName(tensor *raw.MPSGraphTensor, scaleTensor *raw.MPSGraphTensor, zeroPoint float64, dataType mpscore.MPSDataType, axis int, name string) *GraphTensor {
 	_r := x.inner.QuantizeTensorScaleTensorZeroPointDataTypeAxisName(tensor, scaleTensor, zeroPoint, dataType, axis, foundation.NSStringStringWithUTF8String(name))
@@ -1908,6 +2356,8 @@ func (x *Graph) QuantizeTensorScaleTensorZeroPointDataTypeAxisName(tensor *raw.M
 	return &GraphTensor{inner: _r}
 }
 
+// Creates Dequantize operation and returns the result tensor. Convert the i8 or u8 `tensor` to a float tensor by applying a scale + bias transform: result = scaleTensor(tensor - zeroPoint) - Parameters: - tensor: Input tensor to be dequantized - scaleTensor: Scale scalar or 1D Tensor parameter with size == tensor.shape[axis] - zeroPoint: Bias scalar parameter (converted to dataType of tensor) - dataType: Float data type of the result tensor. - axis: Axis on which the scale 1D value is being broadcasted - name: The name for the operation. - Returns: A valid MPSGraphTensor array of datatype dataType
+//
 // DequantizeTensorScaleTensorZeroPointDataTypeAxisName calls the underlying DequantizeTensorScaleTensorZeroPointDataTypeAxisName.
 func (x *Graph) DequantizeTensorScaleTensorZeroPointDataTypeAxisName(tensor *raw.MPSGraphTensor, scaleTensor *raw.MPSGraphTensor, zeroPoint float64, dataType mpscore.MPSDataType, axis int, name string) *GraphTensor {
 	_r := x.inner.DequantizeTensorScaleTensorZeroPointDataTypeAxisName(tensor, scaleTensor, zeroPoint, dataType, axis, foundation.NSStringStringWithUTF8String(name))
@@ -1917,6 +2367,8 @@ func (x *Graph) DequantizeTensorScaleTensorZeroPointDataTypeAxisName(tensor *raw
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Quantize operation and returns the result tensor. Convert the float `tensor` to an i8 or u8 tensor by applying a scale + bias transform: result = (tensor / scaleTensor) + zeroPointTensor - Parameters: - tensor: Input tensor to be quantized - scaleTensor: Scale scalar or 1D Tensor parameter with size == tensor.shape[axis] - zeroPointTensor: Bias scalar or 1D Tensor parameter with size == tensor.shape[axis] - dataType: Integer data type of the result tensor. - axis: Axis on which the scale 1D value is being broadcasted - name: The name for the operation. - Returns: A valid MPSGraphTensor array of datatype dataType
+//
 // QuantizeTensorScaleTensorZeroPointTensorDataTypeAxisName calls the underlying QuantizeTensorScaleTensorZeroPointTensorDataTypeAxisName.
 func (x *Graph) QuantizeTensorScaleTensorZeroPointTensorDataTypeAxisName(tensor *raw.MPSGraphTensor, scaleTensor *raw.MPSGraphTensor, zeroPointTensor *raw.MPSGraphTensor, dataType mpscore.MPSDataType, axis int, name string) *GraphTensor {
 	_r := x.inner.QuantizeTensorScaleTensorZeroPointTensorDataTypeAxisName(tensor, scaleTensor, zeroPointTensor, dataType, axis, foundation.NSStringStringWithUTF8String(name))
@@ -1926,6 +2378,8 @@ func (x *Graph) QuantizeTensorScaleTensorZeroPointTensorDataTypeAxisName(tensor 
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a dequantize operation and returns the result tensor. Convert the i8 or u8 `tensor` to a float tensor by applying a scale + bias transform: result = scaleTensor(tensor - zeroPointTensor) - Parameters: - tensor: Input tensor to be dequantized - scaleTensor: Scale scalar or 1D Tensor parameter with size == tensor.shape[axis] - zeroPointTensor: Bias scalar or 1D Tensor parameter with size == tensor.shape[axis] - dataType: Float data type of the result tensor. - axis: Axis on which the scale 1D value is being broadcasted - name: The name for the operation. - Returns: A valid MPSGraphTensor array of datatype dataType
+//
 // DequantizeTensorScaleTensorZeroPointTensorDataTypeAxisName calls the underlying DequantizeTensorScaleTensorZeroPointTensorDataTypeAxisName.
 func (x *Graph) DequantizeTensorScaleTensorZeroPointTensorDataTypeAxisName(tensor *raw.MPSGraphTensor, scaleTensor *raw.MPSGraphTensor, zeroPointTensor *raw.MPSGraphTensor, dataType mpscore.MPSDataType, axis int, name string) *GraphTensor {
 	_r := x.inner.DequantizeTensorScaleTensorZeroPointTensorDataTypeAxisName(tensor, scaleTensor, zeroPointTensor, dataType, axis, foundation.NSStringStringWithUTF8String(name))
@@ -1935,6 +2389,8 @@ func (x *Graph) DequantizeTensorScaleTensorZeroPointTensorDataTypeAxisName(tenso
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a dequantize operation and returns the result tensor. Convert the i8, u8, i4 or u4 `tensor` to a float tensor by applying a scale and bias transform: ```md result = scaleTensor(tensor - zeroPointTensor). ``` - Parameters: - tensor: Input tensor to be dequantized. - scaleTensor: The scale tensor with groups support. - zeroPointTensor: The bias tensor with groups support. - dataType: Float data type of the result tensor. - name: The name for the operation. - Returns: A valid “MPSGraphTensor“ array of datatype `dataType`.
+//
 // DequantizeTensorScaleTensorZeroPointTensorDataTypeName calls the underlying DequantizeTensorScaleTensorZeroPointTensorDataTypeName.
 func (x *Graph) DequantizeTensorScaleTensorZeroPointTensorDataTypeName(tensor *raw.MPSGraphTensor, scaleTensor *raw.MPSGraphTensor, zeroPointTensor *raw.MPSGraphTensor, dataType mpscore.MPSDataType, name string) *GraphTensor {
 	_r := x.inner.DequantizeTensorScaleTensorZeroPointTensorDataTypeName(tensor, scaleTensor, zeroPointTensor, dataType, foundation.NSStringStringWithUTF8String(name))
@@ -1944,6 +2400,8 @@ func (x *Graph) DequantizeTensorScaleTensorZeroPointTensorDataTypeName(tensor *r
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a dequantize operation and returns the result tensor. Converts the i8, u8, i4 or u4 `tensor` to a float tensor by applying a scale and bias transform: ```md result = scaleTensor * tensor. ``` - Parameters: - tensor: Input tensor to be dequantized. - scaleTensor: Scale Tensor parameter with groups support. - dataType: Float data type of the result tensor. - name: The name for the operation. - Returns: A valid “MPSGraphTensor“ array of datatype `dataType`.
+//
 // DequantizeTensorScaleTensorDataTypeName calls the underlying DequantizeTensorScaleTensorDataTypeName.
 func (x *Graph) DequantizeTensorScaleTensorDataTypeName(tensor *raw.MPSGraphTensor, scaleTensor *raw.MPSGraphTensor, dataType mpscore.MPSDataType, name string) *GraphTensor {
 	_r := x.inner.DequantizeTensorScaleTensorDataTypeName(tensor, scaleTensor, dataType, foundation.NSStringStringWithUTF8String(name))
@@ -1953,6 +2411,8 @@ func (x *Graph) DequantizeTensorScaleTensorDataTypeName(tensor *raw.MPSGraphTens
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a lookup-table based quantization operation and returns the result tensor. Converts a u8 or u4 `tensor` to a float tensor by applying a lookup operation: ```md result[i1,...,in] = LUTTensor[i1',...,in',tensor[i1,...,in]]. ``` Note: The operation supports LUT groups up to the last 3 dimensions for `tensor`. - Parameters: - tensor: Input tensor to be dequantized. - LUTTensor: The lookup table to use - for u4 the last dimension should have 16 elements, and for u8 256 elements. - name: The name for the operation. - Returns: A valid “MPSGraphTensor“ object.
+//
 // DequantizeTensorLUTTensorName calls the underlying DequantizeTensorLUTTensorName.
 func (x *Graph) DequantizeTensorLUTTensorName(tensor *raw.MPSGraphTensor, lUTTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.DequantizeTensorLUTTensorName(tensor, lUTTensor, foundation.NSStringStringWithUTF8String(name))
@@ -1962,6 +2422,8 @@ func (x *Graph) DequantizeTensorLUTTensorName(tensor *raw.MPSGraphTensor, lUTTen
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a vector lookup-table based quantization operation and returns the result tensor. Converts a u8 or u4 `tensor` to a float tensor by applying a lookup operation, where each input index defines a vector of values. The operation reads the vector values from the last dimension of the lookup table tensor and stores them into the dimension defined by `axis` on the result tensor. ```md result[i1, ... , i_axis, ..., in] = LUTTensor[i1', ..., in', tensor[i1, ..., in], i_axis] ``` Note: The operation supports LUT groups up to the last 2 dimensions for `tensor`. - Parameters: - tensor: Input tensor to be dequantized. - LUTTensor: The lookup table to use - for u4 the second to last dimension should have 16 elements, and for u8 256 elements. - axis: Axis on which the scale 1D value is being broadcasted. - name: The name for the operation. - Returns: A valid “MPSGraphTensor“ object.
+//
 // DequantizeTensorLUTTensorAxisName calls the underlying DequantizeTensorLUTTensorAxisName.
 func (x *Graph) DequantizeTensorLUTTensorAxisName(tensor *raw.MPSGraphTensor, lUTTensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.DequantizeTensorLUTTensorAxisName(tensor, lUTTensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -1971,6 +2433,8 @@ func (x *Graph) DequantizeTensorLUTTensorAxisName(tensor *raw.MPSGraphTensor, lU
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a tensor representing state using the Philox algorithm with given counter and key values. Generates random numbers using the Philox counter-based algorithm, for further details see: John K. Salmon, Mark A. Moraes, Ron O. Dror, and David E. Shaw. Parallel Random Numbers: As Easy as 1, 2, 3. A stateTensor generated with this API can be used in MPSGraph Random APIs which accept a stateTensor. The updated stateTensor is returned alongside the random values, and can be fed to the following random layer. In most use cases, a stateTensor should only need to be initialized once at the start of the graph. A stateTensor can be set as a target tensor of an MPSGraph execution to obtain a stateTensor serialized as an NDArray. This can be used as input to a placeholder in the graph to avoid ever needing to have a state intilization layer in an MPSGraph. This can allow for a continued stream through multiple executions of a single MPSGraph by having the final stateTensor as a target tensor passed into the following MPSGraph execution as a placeholder input. This may be helpful for training graphs in particular. ```md MPSGraph *graph = [MPSGraph new]; MPSGraphTensor *stateTensor = [graph randomPhiloxStateTensorWithSeed: seed name: nil]; NSArray<MPSGraphTensor*> *resultTensors0 = [graph randomUniformTensorWithShape: - Parameters: - seed: Initial counter and key values will be generated using seed. - name: Name for the operation - Returns: An MPSGraphTensor representing a random state, to be passed as an input to a random op.
+//
 // RandomPhiloxStateTensorWithSeedName calls the underlying RandomPhiloxStateTensorWithSeedName.
 func (x *Graph) RandomPhiloxStateTensorWithSeedName(seed uint, name string) *GraphTensor {
 	_r := x.inner.RandomPhiloxStateTensorWithSeedName(seed, foundation.NSStringStringWithUTF8String(name))
@@ -1980,6 +2444,8 @@ func (x *Graph) RandomPhiloxStateTensorWithSeedName(seed uint, name string) *Gra
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a tensor representing state using the Philox algorithm with given counter and key values. See randomPhiloxStateTensorWithSeed. - Parameters: - counterLow: The value to initilaize lower 64 bits of counter to. Philox utilizes a 128 bit counter - counterHigh: The value to initilaize upper 64 bits of counter to. Philox utilizes a 128 bit counter - key: The value to initialize the key to in Philox algorithm. - name: Name for the operation - Returns: An MPSGraphTensor representing a random state, to be passed as an input to a random op.
+//
 // RandomPhiloxStateTensorWithCounterLowCounterHighKeyName calls the underlying RandomPhiloxStateTensorWithCounterLowCounterHighKeyName.
 func (x *Graph) RandomPhiloxStateTensorWithCounterLowCounterHighKeyName(counterLow uint, counterHigh uint, key uint, name string) *GraphTensor {
 	_r := x.inner.RandomPhiloxStateTensorWithCounterLowCounterHighKeyName(counterLow, counterHigh, key, foundation.NSStringStringWithUTF8String(name))
@@ -1989,6 +2455,8 @@ func (x *Graph) RandomPhiloxStateTensorWithCounterLowCounterHighKeyName(counterL
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Random op of type matching distribution in descriptor and returns random values. Returns a tensor of provided shape of random values in the distribution specified. Uses a random seed value to initalize state. No state is preserved, and subsequent calls are not guaranteed to result in a unique stream of random values. - Parameters: - shape: The shape of the tensor generated - descriptor: The descriptor of the distribution. See MPSGraphRandomOpDescriptor. - name: The name for the operation. - Returns: An MPSGraphTensor of shape containing random values in the defined range.
+//
 // RandomTensorWithShapeDescriptorName calls the underlying RandomTensorWithShapeDescriptorName.
 func (x *Graph) RandomTensorWithShapeDescriptorName(shape unsafe.Pointer, descriptor *raw.MPSGraphRandomOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.RandomTensorWithShapeDescriptorName(shape, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -1998,6 +2466,8 @@ func (x *Graph) RandomTensorWithShapeDescriptorName(shape unsafe.Pointer, descri
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Random op of type matching distribution in descriptor and returns random values. Returns a tensor of provided shape of random values in the distribution specified. Uses a random seed value to initalize state. No state is preserved, and subsequent calls are not guaranteed to result in a unique stream of random values. - Parameters: - shapeTensor: 1D Int32 or Int64 tensor. The shape of the tensor generated - descriptor: The descriptor of the distribution. See MPSGraphRandomOpDescriptor. - name: The name for the operation. - Returns: An MPSGraphTensor of shape containing random values in the defined range.
+//
 // RandomTensorWithShapeTensorDescriptorName calls the underlying RandomTensorWithShapeTensorDescriptorName.
 func (x *Graph) RandomTensorWithShapeTensorDescriptorName(shapeTensor *raw.MPSGraphTensor, descriptor *raw.MPSGraphRandomOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.RandomTensorWithShapeTensorDescriptorName(shapeTensor, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -2007,6 +2477,8 @@ func (x *Graph) RandomTensorWithShapeTensorDescriptorName(shapeTensor *raw.MPSGr
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Random op of type matching distribution in descriptor and returns random values. Returns a tensor of provided shape of random values in the distribution specified. Uses the provided seed value to initalize state. No state is preserved, and all calls with equal seed yield an identical stream of random values. - Parameters: - shape: The shape of the tensor generated - descriptor: The descriptor of the distribution. See MPSGraphRandomOpDescriptor. - seed: The seed to use to initialize state. All calls with equal seed yield an identical stream of random values. - name: The name for the operation. - Returns: An MPSGraphTensor of shape containing random values in the defined range.
+//
 // RandomTensorWithShapeDescriptorSeedName calls the underlying RandomTensorWithShapeDescriptorSeedName.
 func (x *Graph) RandomTensorWithShapeDescriptorSeedName(shape unsafe.Pointer, descriptor *raw.MPSGraphRandomOpDescriptor, seed uint, name string) *GraphTensor {
 	_r := x.inner.RandomTensorWithShapeDescriptorSeedName(shape, descriptor, seed, foundation.NSStringStringWithUTF8String(name))
@@ -2016,6 +2488,8 @@ func (x *Graph) RandomTensorWithShapeDescriptorSeedName(shape unsafe.Pointer, de
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Random op of type matching distribution in descriptor and returns random values. Returns a tensor of provided shape of random values in the distribution specified. Uses the provided seed value to initalize state. No state is preserved, and all calls with equal seed yield an identical stream of random values. - Parameters: - shapeTensor: 1D Int32 or Int64 tensor. The shape of the tensor generated - descriptor: The descriptor of the distribution. See MPSGraphRandomOpDescriptor. - seed: The seed to use to initialize state. All calls with equal seed yield an identical stream of random values. - name: The name for the operation. - Returns: An MPSGraphTensor of shape containing random values in the defined range.
+//
 // RandomTensorWithShapeTensorDescriptorSeedName calls the underlying RandomTensorWithShapeTensorDescriptorSeedName.
 func (x *Graph) RandomTensorWithShapeTensorDescriptorSeedName(shapeTensor *raw.MPSGraphTensor, descriptor *raw.MPSGraphRandomOpDescriptor, seed uint, name string) *GraphTensor {
 	_r := x.inner.RandomTensorWithShapeTensorDescriptorSeedName(shapeTensor, descriptor, seed, foundation.NSStringStringWithUTF8String(name))
@@ -2025,16 +2499,22 @@ func (x *Graph) RandomTensorWithShapeTensorDescriptorSeedName(shapeTensor *raw.M
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Random op of type matching distribution in descriptor, and returns random values and updated state. Returns an array of 2 tensors, where the first is of provided shape of random values in the distribution specified, and the second is the updated state tensor. Uses the provided state to define a stream of random values. No state is preserved, and all calls with equal state yield an identical stream of random values. The initial stateTensor provided should be created using the MPSGraph randomPhiloxStateTensor APIs. The resulting stateTensor from this op can be passed as an argument to the following random calls to continue sampling from the stream. - Parameters: - shape: The shape of the tensor generated - descriptor: The descriptor of the distribution. See MPSGraphRandomOpDescriptor. - state: The state to define a stream of random values. All calls with equal state yield an identical stream of random values. - name: The name for the operation. - Returns: An array of MPSGraphTensor of size 2. The first MPSGraphTensor is of shape containing random values in the defined range. The second MPSGraphTensor is the updated state tensor.
+//
 // RandomTensorWithShapeDescriptorStateTensorName calls the underlying RandomTensorWithShapeDescriptorStateTensorName.
 func (x *Graph) RandomTensorWithShapeDescriptorStateTensorName(shape unsafe.Pointer, descriptor *raw.MPSGraphRandomOpDescriptor, state *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.RandomTensorWithShapeDescriptorStateTensorName(shape, descriptor, state, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a Random op of type matching distribution in descriptor, and returns random values and updated state. Returns an array of 2 tensors, where the first is of provided shape of random values in the distribution specified, and the second is the updated state tensor. Uses the provided state to define a stream of random values. No state is preserved, and all calls with equal state yield an identical stream of random values. The initial stateTensor provided should be created using the MPSGraph randomPhiloxStateTensor APIs. The resulting stateTensor from this op can be passed as an argument to the following random calls to continue sampling from the stream. - Parameters: - shapeTensor: 1D Int32 or Int64 tensor. The shape of the tensor generated. - descriptor: The descriptor of the distribution. See MPSGraphRandomOpDescriptor. - state: The state to define a stream of random values. All calls with equal state yield an identical stream of random values. - name: The name for the operation. - Returns: An array of MPSGraphTensor of size 2. The first MPSGraphTensor is of shape containing random values in the defined range. The second MPSGraphTensor is the updated state tensor.
+//
 // RandomTensorWithShapeTensorDescriptorStateTensorName calls the underlying RandomTensorWithShapeTensorDescriptorStateTensorName.
 func (x *Graph) RandomTensorWithShapeTensorDescriptorStateTensorName(shapeTensor *raw.MPSGraphTensor, descriptor *raw.MPSGraphRandomOpDescriptor, state *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.RandomTensorWithShapeTensorDescriptorStateTensorName(shapeTensor, descriptor, state, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a RandomUniform operation and returns random uniform values Returns a tensor of provided shape of random uniform values in the range [0.0, 1.0). Uses a random seed value to initalize state. No state is preserved, and subsequent calls are not guaranteed to result in a unique stream of random values. - Parameters: - shape: The shape of the tensor generated - name: The name for the operation. - Returns: An MPSGraphTensor of shape containing random values in the defined range.
+//
 // RandomUniformTensorWithShapeName calls the underlying RandomUniformTensorWithShapeName.
 func (x *Graph) RandomUniformTensorWithShapeName(shape unsafe.Pointer, name string) *GraphTensor {
 	_r := x.inner.RandomUniformTensorWithShapeName(shape, foundation.NSStringStringWithUTF8String(name))
@@ -2044,6 +2524,8 @@ func (x *Graph) RandomUniformTensorWithShapeName(shape unsafe.Pointer, name stri
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a RandomUniform operation and returns random uniform values Returns a tensor of provided shape of random uniform values in the range [0.0, 1.0). Uses a random seed value to initalize state. No state is preserved, and subsequent calls are not guaranteed to result in a unique stream of random values. - Parameters: - shapeTensor: 1D Int32 or Int64 tensor. The shape of the tensor generated - name: The name for the operation. - Returns: An MPSGraphTensor of shape containing random values in the defined range.
+//
 // RandomUniformTensorWithShapeTensorName calls the underlying RandomUniformTensorWithShapeTensorName.
 func (x *Graph) RandomUniformTensorWithShapeTensorName(shapeTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.RandomUniformTensorWithShapeTensorName(shapeTensor, foundation.NSStringStringWithUTF8String(name))
@@ -2053,6 +2535,8 @@ func (x *Graph) RandomUniformTensorWithShapeTensorName(shapeTensor *raw.MPSGraph
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a RandomUniform operation and returns random uniform values Returns a tensor of provided shape of random uniform values in the range [0.0, 1.0). Uses the provided seed value to initalize state. No state is preserved, and all calls with equal seed yield an identical stream of random values. - Parameters: - shape: The shape of the tensor generated - seed: The seed to use to initialize state. All calls with equal seed yield an identical stream of random values. - name: The name for the operation. - Returns: An MPSGraphTensor of shape containing random values in the defined range.
+//
 // RandomUniformTensorWithShapeSeedName calls the underlying RandomUniformTensorWithShapeSeedName.
 func (x *Graph) RandomUniformTensorWithShapeSeedName(shape unsafe.Pointer, seed uint, name string) *GraphTensor {
 	_r := x.inner.RandomUniformTensorWithShapeSeedName(shape, seed, foundation.NSStringStringWithUTF8String(name))
@@ -2062,6 +2546,8 @@ func (x *Graph) RandomUniformTensorWithShapeSeedName(shape unsafe.Pointer, seed 
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a RandomUniform operation and returns random uniform values Returns a tensor of provided shape of random uniform values in the range [0.0, 1.0). Uses the provided seed value to initalize state. No state is preserved, and all calls with equal seed yield an identical stream of random values. - Parameters: - shapeTensor: 1D Int32 or Int64 tensor. The shape of the tensor generated - seed: The seed to use to initialize state. All calls with equal seed yield an identical stream of random values. - name: The name for the operation. - Returns: An MPSGraphTensor of shape containing random values in the defined range.
+//
 // RandomUniformTensorWithShapeTensorSeedName calls the underlying RandomUniformTensorWithShapeTensorSeedName.
 func (x *Graph) RandomUniformTensorWithShapeTensorSeedName(shapeTensor *raw.MPSGraphTensor, seed uint, name string) *GraphTensor {
 	_r := x.inner.RandomUniformTensorWithShapeTensorSeedName(shapeTensor, seed, foundation.NSStringStringWithUTF8String(name))
@@ -2071,16 +2557,22 @@ func (x *Graph) RandomUniformTensorWithShapeTensorSeedName(shapeTensor *raw.MPSG
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a RandomUniform operation and returns random uniform values and updated state Returns an array of 2 tensors, where the first is a tensor of provided shape of random uniform values in the range [0.0, 1.0), and the second is the updated state tensor. The provided state is used to define a stream of random values. No state is preserved, and all calls with equal state yield an identical stream of random values. The initial stateTensor provided should be created using the MPSGraph randomPhiloxStateTensor APIs. The resulting stateTensor from this op can be passed as an argument to the following random calls to continue sampling from the stream. - Parameters: - shape: The shape of the tensor generated - state: The state to define a stream of random values. All calls with equal state yield an identical stream of random values. - name: The name for the operation. - Returns: An array of MPSGraphTensor of size 2. The first MPSGraphTensor is of shape containing random values in the defined range. The second MPSGraphTensor is the updated state tensor.
+//
 // RandomUniformTensorWithShapeStateTensorName calls the underlying RandomUniformTensorWithShapeStateTensorName.
 func (x *Graph) RandomUniformTensorWithShapeStateTensorName(shape unsafe.Pointer, state *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.RandomUniformTensorWithShapeStateTensorName(shape, state, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a RandomUniform operation and returns random uniform values and updated state Returns an array of 2 tensors, where the first is a tensor of provided shape of random uniform values in the range [0.0, 1.0), and the second is the updated state tensor. The provided state is used to define a stream of random values. No state is preserved, and all calls with equal state yield an identical stream of random values. The initial stateTensor provided should be created using the MPSGraph randomPhiloxStateTensor APIs. The resulting stateTensor from this op can be passed as an argument to the following random calls to continue sampling from the stream. - Parameters: - shapeTensor: 1D Int32 or Int64 tensor. The shape of the tensor generated - state: The state to define a stream of random values. All calls with equal state yield an identical stream of random values. - name: The name for the operation. - Returns: An array of MPSGraphTensor of size 2. The first MPSGraphTensor is of shape containing random values in the defined range. The second MPSGraphTensor is the updated state tensor.
+//
 // RandomUniformTensorWithShapeTensorStateTensorName calls the underlying RandomUniformTensorWithShapeTensorStateTensorName.
 func (x *Graph) RandomUniformTensorWithShapeTensorStateTensorName(shapeTensor *raw.MPSGraphTensor, state *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.RandomUniformTensorWithShapeTensorStateTensorName(shapeTensor, state, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a dropout operation and returns the result Removes values in the `tensor` with a percentage chance equal to `rate`. Removed values are set to 0 - Parameters: - tensor: Input tensor - rate: The rate of values to be set to 0 - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // DropoutTensorRateName calls the underlying DropoutTensorRateName.
 func (x *Graph) DropoutTensorRateName(tensor *raw.MPSGraphTensor, rate float64, name string) *GraphTensor {
 	_r := x.inner.DropoutTensorRateName(tensor, rate, foundation.NSStringStringWithUTF8String(name))
@@ -2090,6 +2582,8 @@ func (x *Graph) DropoutTensorRateName(tensor *raw.MPSGraphTensor, rate float64, 
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a dropout operation and returns the result Removes values in the `tensor` with a percentage chance equal to `rate`. Removed values are set to 0 - Parameters: - tensor: Input tensor - rate: The rate of values to be set to 0 - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // DropoutTensorRateTensorName calls the underlying DropoutTensorRateTensorName.
 func (x *Graph) DropoutTensorRateTensorName(tensor *raw.MPSGraphTensor, rate *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.DropoutTensorRateTensorName(tensor, rate, foundation.NSStringStringWithUTF8String(name))
@@ -2099,6 +2593,8 @@ func (x *Graph) DropoutTensorRateTensorName(tensor *raw.MPSGraphTensor, rate *ra
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reduction sum operation and returns the result tensor. - Parameters: - tensor: input tensor - axis: axis of reduction - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ReductionSumWithTensorAxisName calls the underlying ReductionSumWithTensorAxisName.
 func (x *Graph) ReductionSumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.ReductionSumWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -2108,6 +2604,8 @@ func (x *Graph) ReductionSumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis 
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reduction sum operation and returns the result tensor. - Parameters: - tensor: input tensor - axes: axes of reduction - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ReductionSumWithTensorAxesName calls the underlying ReductionSumWithTensorAxesName.
 func (x *Graph) ReductionSumWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
 	_r := x.inner.ReductionSumWithTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
@@ -2117,6 +2615,8 @@ func (x *Graph) ReductionSumWithTensorAxesName(tensor *raw.MPSGraphTensor, axes 
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reduction max operation and returns the result tensor. - Parameters: - tensor: input tensor - axis: axis of reduction - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ReductionMaximumWithTensorAxisName calls the underlying ReductionMaximumWithTensorAxisName.
 func (x *Graph) ReductionMaximumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.ReductionMaximumWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -2126,6 +2626,8 @@ func (x *Graph) ReductionMaximumWithTensorAxisName(tensor *raw.MPSGraphTensor, a
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reduction max operation and returns the result tensor. - Parameters: - tensor: input tensor - axes: axes of reduction - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ReductionMaximumWithTensorAxesName calls the underlying ReductionMaximumWithTensorAxesName.
 func (x *Graph) ReductionMaximumWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
 	_r := x.inner.ReductionMaximumWithTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
@@ -2135,6 +2637,8 @@ func (x *Graph) ReductionMaximumWithTensorAxesName(tensor *raw.MPSGraphTensor, a
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reduction minimum operation and returns the result tensor. - Parameters: - tensor: input tensor - axis: axis of reduction - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ReductionMinimumWithTensorAxisName calls the underlying ReductionMinimumWithTensorAxisName.
 func (x *Graph) ReductionMinimumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.ReductionMinimumWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -2144,6 +2648,8 @@ func (x *Graph) ReductionMinimumWithTensorAxisName(tensor *raw.MPSGraphTensor, a
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reduction min operation and returns the result tensor. - Parameters: - tensor: input tensor - axes: axes of reduction - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ReductionMinimumWithTensorAxesName calls the underlying ReductionMinimumWithTensorAxesName.
 func (x *Graph) ReductionMinimumWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
 	_r := x.inner.ReductionMinimumWithTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
@@ -2153,6 +2659,8 @@ func (x *Graph) ReductionMinimumWithTensorAxesName(tensor *raw.MPSGraphTensor, a
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reduction max propagate NaN operation and returns the result tensor. - Parameters: - tensor: input tensor - axis: axis of reduction - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ReductionMaximumPropagateNaNWithTensorAxisName calls the underlying ReductionMaximumPropagateNaNWithTensorAxisName.
 func (x *Graph) ReductionMaximumPropagateNaNWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.ReductionMaximumPropagateNaNWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -2162,6 +2670,8 @@ func (x *Graph) ReductionMaximumPropagateNaNWithTensorAxisName(tensor *raw.MPSGr
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reduction max propagate NaN operation and returns the result tensor. - Parameters: - tensor: input tensor - axes: axes of reduction - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ReductionMaximumPropagateNaNWithTensorAxesName calls the underlying ReductionMaximumPropagateNaNWithTensorAxesName.
 func (x *Graph) ReductionMaximumPropagateNaNWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
 	_r := x.inner.ReductionMaximumPropagateNaNWithTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
@@ -2171,6 +2681,8 @@ func (x *Graph) ReductionMaximumPropagateNaNWithTensorAxesName(tensor *raw.MPSGr
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reduction min propagate NaN operation and returns the result tensor. - Parameters: - tensor: input tensor - axis: axis of reduction - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ReductionMinimumPropagateNaNWithTensorAxisName calls the underlying ReductionMinimumPropagateNaNWithTensorAxisName.
 func (x *Graph) ReductionMinimumPropagateNaNWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.ReductionMinimumPropagateNaNWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -2180,6 +2692,8 @@ func (x *Graph) ReductionMinimumPropagateNaNWithTensorAxisName(tensor *raw.MPSGr
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reduction min propagate NaN operation and returns the result tensor. - Parameters: - tensor: input tensor - axes: axes of reduction - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ReductionMinimumPropagateNaNWithTensorAxesName calls the underlying ReductionMinimumPropagateNaNWithTensorAxesName.
 func (x *Graph) ReductionMinimumPropagateNaNWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
 	_r := x.inner.ReductionMinimumPropagateNaNWithTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
@@ -2189,6 +2703,8 @@ func (x *Graph) ReductionMinimumPropagateNaNWithTensorAxesName(tensor *raw.MPSGr
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reduction product operation and returns the result tensor. - Parameters: - tensor: input tensor - axis: axis of reduction - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ReductionProductWithTensorAxisName calls the underlying ReductionProductWithTensorAxisName.
 func (x *Graph) ReductionProductWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.ReductionProductWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -2198,6 +2714,8 @@ func (x *Graph) ReductionProductWithTensorAxisName(tensor *raw.MPSGraphTensor, a
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reduction product operation and returns the result tensor. - Parameters: - tensor: input tensor - axes: axes of reduction - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ReductionProductWithTensorAxesName calls the underlying ReductionProductWithTensorAxesName.
 func (x *Graph) ReductionProductWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
 	_r := x.inner.ReductionProductWithTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
@@ -2207,6 +2725,8 @@ func (x *Graph) ReductionProductWithTensorAxesName(tensor *raw.MPSGraphTensor, a
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reduction argMax operation and returns the result tensor. - Parameters: - tensor: input tensor - axis: axis of reduction - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ReductionArgMaximumWithTensorAxisName calls the underlying ReductionArgMaximumWithTensorAxisName.
 func (x *Graph) ReductionArgMaximumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.ReductionArgMaximumWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -2216,6 +2736,8 @@ func (x *Graph) ReductionArgMaximumWithTensorAxisName(tensor *raw.MPSGraphTensor
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reduction argMin operation and returns the result tensor. - Parameters: - tensor: input tensor - axis: axis of reduction - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ReductionArgMinimumWithTensorAxisName calls the underlying ReductionArgMinimumWithTensorAxisName.
 func (x *Graph) ReductionArgMinimumWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.ReductionArgMinimumWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -2225,6 +2747,8 @@ func (x *Graph) ReductionArgMinimumWithTensorAxisName(tensor *raw.MPSGraphTensor
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reduction and operation and returns the result tensor. - Parameters: - tensor: input tensor - axis: axis of reduction - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ReductionAndWithTensorAxisName calls the underlying ReductionAndWithTensorAxisName.
 func (x *Graph) ReductionAndWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.ReductionAndWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -2234,6 +2758,8 @@ func (x *Graph) ReductionAndWithTensorAxisName(tensor *raw.MPSGraphTensor, axis 
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reduction and operation and returns the result tensor. - Parameters: - tensor: input tensor - axes: axes of reduction - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ReductionAndWithTensorAxesName calls the underlying ReductionAndWithTensorAxesName.
 func (x *Graph) ReductionAndWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
 	_r := x.inner.ReductionAndWithTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
@@ -2243,6 +2769,8 @@ func (x *Graph) ReductionAndWithTensorAxesName(tensor *raw.MPSGraphTensor, axes 
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reduction or operation and returns the result tensor. - Parameters: - tensor: input tensor - axis: axis of reduction - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ReductionOrWithTensorAxisName calls the underlying ReductionOrWithTensorAxisName.
 func (x *Graph) ReductionOrWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.ReductionOrWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -2252,6 +2780,8 @@ func (x *Graph) ReductionOrWithTensorAxisName(tensor *raw.MPSGraphTensor, axis i
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reduction or operation and returns the result tensor. - Parameters: - tensor: input tensor - axes: axes of reduction - name: name for the operation - Returns: A valid MPSGraphTensor object.
+//
 // ReductionOrWithTensorAxesName calls the underlying ReductionOrWithTensorAxesName.
 func (x *Graph) ReductionOrWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
 	_r := x.inner.ReductionOrWithTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
@@ -2261,6 +2791,8 @@ func (x *Graph) ReductionOrWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Resize operation and returns the result tensor. Resamples input images to given size. Result images will be distorted if size is of different aspect ratio. Resize supports the following modes: Nearest Neighbor - values are interpolated using the closest neighbor pixel Bilinear - values are computed using bilinear interpolation of 4 neighboring pixels Destination indices are computed using direct index scaling by default, with no offset added. If the centerResult parameter is true, the destination indices will be scaled and shifted to be centered on the input image. If the alignCorners parameter is true, the corners of the result images will match the input images. Scaling will be modified to a factor of (size - 1) / (inputSize - 1). When alignCorners is true, the centerResult parameter does nothing. In order to achieve the same behavior as OpenCV's resize and TensorFlowV2's resize, ```md centerResult = YES; alginCorners = NO; ``` To achieve the same behavior as TensorFlowV1 resize ```md centerResult = NO; ``` - Parameters: - imagesTensor: Tensor containing input images. - size: A 2-element shape as [newHeight, newWidth] - mode: The resampling mode to use. If nearest sampling is specifed, RoundPreferCeil mode will be used. - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned - alignCorners: When YES, the result image will have the same value as the input image in the corners - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeTensorSizeModeCenterResultAlignCornersLayoutName calls the underlying ResizeTensorSizeModeCenterResultAlignCornersLayoutName.
 func (x *Graph) ResizeTensorSizeModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size unsafe.Pointer, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := x.inner.ResizeTensorSizeModeCenterResultAlignCornersLayoutName(imagesTensor, size, raw.MPSGraphResizeMode(mode), centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
@@ -2270,6 +2802,8 @@ func (x *Graph) ResizeTensorSizeModeCenterResultAlignCornersLayoutName(imagesTen
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Resize operation and returns the result tensor. Resamples input images to given size. Result images will be distorted if size is of different aspect ratio. Resize supports the following modes: Nearest Neighbor - values are interpolated using the closest neighbor pixel Bilinear - values are computed using bilinear interpolation of 4 neighboring pixels Destination indices are computed using direct index scaling by default, with no offset added. If the centerResult parameter is true, the destination indices will be scaled and shifted to be centered on the input image. If the alignCorners parameter is true, the corners of the result images will match the input images. Scaling will be modified to a factor of (size - 1) / (inputSize - 1). When alignCorners is true, the centerResult parameter does nothing. In order to achieve the same behavior as OpenCV's resize and TensorFlowV2's resize, ```md centerResult = YES; alginCorners = NO; ``` To achieve the same behavior as TensorFlowV1 resize ```md centerResult = NO; ``` - Parameters: - imagesTensor: Tensor containing input images. - size: 1D Int32 or Int64 tensor. A 2-element shape as [newHeight, newWidth] - mode: The resampling mode to use. If nearest sampling is specifed, RoundPreferCeil mode will be used. - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned - alignCorners: When YES, the result image will have the same value as the input image in the corners - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName calls the underlying ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName.
 func (x *Graph) ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := x.inner.ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName(imagesTensor, size, raw.MPSGraphResizeMode(mode), centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
@@ -2279,6 +2813,8 @@ func (x *Graph) ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName(ima
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Resize operation and returns the result tensor. Resamples input images to given size. Result images will be distorted if size is of different aspect ratio. Resize supports the following modes: Nearest Neighbor - values are interpolated using the closest neighbor pixel Bilinear - values are computed using bilinear interpolation of 4 neighboring pixels Destination indices are computed using direct index scaling by default, with no offset added. If the centerResult parameter is true, the destination indices will be scaled and shifted to be centered on the input image. If the alignCorners parameter is true, the corners of the result images will match the input images. Scaling will be modified to a factor of (size - 1) / (inputSize - 1). When alignCorners is true, the centerResult parameter does nothing. In order to achieve the same behavior as OpenCV's resize and TensorFlowV2's resize, ```md centerResult = YES; alginCorners = NO; ``` To achieve the same behavior as TensorFlowV1 resize ```md centerResult = NO; ``` - Parameters: - imagesTensor: Tensor containing input images. - size: The target size of the result tensor. 1D Int32 or Int64 tensor of size equal to rank of input. - mode: The resampling mode to use. If nearest sampling is specifed, RoundPreferCeil mode will be used. - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned - alignCorners: When YES, the result image will have the same value as the input image in the corners - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeTensorSizeTensorModeCenterResultAlignCornersName calls the underlying ResizeTensorSizeTensorModeCenterResultAlignCornersName.
 func (x *Graph) ResizeTensorSizeTensorModeCenterResultAlignCornersName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, name string) *GraphTensor {
 	_r := x.inner.ResizeTensorSizeTensorModeCenterResultAlignCornersName(imagesTensor, size, raw.MPSGraphResizeMode(mode), centerResult, alignCorners, foundation.NSStringStringWithUTF8String(name))
@@ -2288,6 +2824,8 @@ func (x *Graph) ResizeTensorSizeTensorModeCenterResultAlignCornersName(imagesTen
 	return &GraphTensor{inner: _r}
 }
 
+// Resamples input images to given size using nearest neighbor sampling. This API allows for the rounding mode to be specified. Resamples input images to given size. Result images will be distorted if size is of different aspect ratio. Resize supports the following modes: Nearest Neighbor - values are interpolated using the closest neighbor pixel Bilinear - values are computed using bilinear interpolation of 4 neighboring pixels Destination indices are computed using direct index scaling by default, with no offset added. If the centerResult parameter is true, the destination indices will be scaled and shifted to be centered on the input image. If the alignCorners parameter is true, the corners of the result images will match the input images. Scaling will be modified to a factor of (size - 1) / (inputSize - 1). When alignCorners is true, the centerResult parameter does nothing. In order to achieve the same behavior as OpenCV's resize and TensorFlowV2's resize, ```md centerResult = YES; alginCorners = NO; ``` To achieve the same behavior as TensorFlowV1 resize ```md centerResult = NO; ``` - Parameters: - imagesTensor: Tensor containing input images. - size: 1D Int32 or Int64 tensor. A 2-element shape as [newHeight, newWidth] - nearestRoundingMode: The rounding mode to use when using nearest resampling. Default is roundPreferCeil. - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned - alignCorners: When YES, the result image will have the same value as the input image in the corners - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName calls the underlying ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName.
 func (x *Graph) ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := x.inner.ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName(imagesTensor, size, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
@@ -2297,6 +2835,8 @@ func (x *Graph) ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResult
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Resize operation and returns the result tensor. Resamples input images to given size using nearest neighbor sampling. Result images will be distorted if size is of different aspect ratio. Destination indices are computed using direct index scaling by default, with no offset added. If the centerResult parameter is true, the destination indices will be scaled and shifted to be centered on the input image. If the alignCorners parameter is true, the corners of the result images will match the input images. Scaling will be modified to a factor of (size - 1) / (inputSize - 1). When alignCorners is true, the centerResult parameter does nothing. In order to achieve the same behavior as OpenCV's resize and TensorFlowV2's resize, ```md centerResult = YES; alginCorners = NO; ``` To achieve the same behavior as TensorFlowV1 resize ```md centerResult = NO; ``` - Parameters: - imagesTensor: Tensor containing input images. - size: The target size of the result tensor. 1D Int32 or Int64 tensor of size equal to rank of input. - nearestRoundingMode: The rounding mode to use when using nearest resampling. Default is roundPreferCeil. - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned - alignCorners: When YES, the result image will have the same value as the input image in the corners - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName calls the underlying ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName.
 func (x *Graph) ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, name string) *GraphTensor {
 	_r := x.inner.ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName(imagesTensor, size, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), centerResult, alignCorners, foundation.NSStringStringWithUTF8String(name))
@@ -2306,6 +2846,8 @@ func (x *Graph) ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResult
 	return &GraphTensor{inner: _r}
 }
 
+// Resamples input images to given size using bilinear sampling. Resamples input images to given size using nearest neighbor sampling. Result images will be distorted if size is of different aspect ratio. Destination indices are computed using direct index scaling by default, with no offset added. If the centerResult parameter is true, the destination indices will be scaled and shifted to be centered on the input image. If the alignCorners parameter is true, the corners of the result images will match the input images. Scaling will be modified to a factor of (size - 1) / (inputSize - 1). When alignCorners is true, the centerResult parameter does nothing. In order to achieve the same behavior as OpenCV's resize and TensorFlowV2's resize, ```md centerResult = YES; alginCorners = NO; ``` To achieve the same behavior as TensorFlowV1 resize ```md centerResult = NO; ``` - Parameters: - imagesTensor: Tensor containing input images. - size: 1D Int32 or Int64 tensor. A 2-element shape as [newHeight, newWidth] - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned - alignCorners: When YES, the result image will have the same value as the input image in the corners - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName calls the underlying ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName.
 func (x *Graph) ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := x.inner.ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName(imagesTensor, size, centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
@@ -2315,6 +2857,8 @@ func (x *Graph) ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayout
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Resize operation and returns the result tensor. Resamples input images to given size using bilinear sampling. Result images will be distorted if size is of different aspect ratio. Destination indices are computed using direct index scaling by default, with no offset added. If the centerResult parameter is true, the destination indices will be scaled and shifted to be centered on the input image. If the alignCorners parameter is true, the corners of the result images will match the input images. Scaling will be modified to a factor of (size - 1) / (inputSize - 1). When alignCorners is true, the centerResult parameter does nothing. In order to achieve the same behavior as OpenCV's resize and TensorFlowV2's resize, ```md centerResult = YES; alginCorners = NO; ``` To achieve the same behavior as TensorFlowV1 resize ```md centerResult = NO; ``` - Parameters: - imagesTensor: Tensor containing input images. - size: The target size of the result tensor. 1D Int32 or Int64 tensor of size equal to rank of input. - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned - alignCorners: When YES, the result image will have the same value as the input image in the corners - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersName calls the underlying ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersName.
 func (x *Graph) ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, centerResult bool, alignCorners bool, name string) *GraphTensor {
 	_r := x.inner.ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersName(imagesTensor, size, centerResult, alignCorners, foundation.NSStringStringWithUTF8String(name))
@@ -2324,6 +2868,8 @@ func (x *Graph) ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersName(i
 	return &GraphTensor{inner: _r}
 }
 
+// Resamples input images to given size using the provided scale and offset. Destination indices are computed using ```md dst_indices = (src_indicesscale) + offset ``` For most use cases passing the scale and offset directly is unnecessary, and it is preferable to use the API specifying centerResult and alignCorners. - Parameters: - imagesTensor: Tensor containing input images. - size: 1D Int32 or Int64 tensor. A 2-element shape as [newHeight, newWidth] - scaleOffset: 1D float tensor. A 4-element shape as [scaleY, scaleX, offsetY, offsetX] - mode: The resampling mode to use. If nearest sampling is specifed, RoundPreferCeil mode will be used. - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName calls the underlying ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName.
 func (x *Graph) ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, mode MPSGraphResizeMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := x.inner.ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName(imagesTensor, size, scaleOffset, raw.MPSGraphResizeMode(mode), raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
@@ -2333,6 +2879,8 @@ func (x *Graph) ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName(imagesTens
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Resize operation and returns the result tensor. Resamples input images to given size using the provided scale and offset. Destination indices are computed using ```md dst_indices = (src_indices * scale) + offset ``` For most use cases passing the scale and offset directly is unnecessary, and it is preferable to use the API specifying centerResult and alignCorners. - Parameters: - imagesTensor: Tensor containing input images. - size: The target size of the result tensor.  1D Int32 or Int64 tensor of size equal to rank of input. - scale: 1D float tensor of size equal to rank of input. - offset: 1D float tensor of size equal to rank of input. - mode: The resampling mode to use. If nearest sampling is specifed, RoundPreferCeil mode will be used. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeTensorSizeTensorScaleTensorOffsetTensorModeName calls the underlying ResizeTensorSizeTensorScaleTensorOffsetTensorModeName.
 func (x *Graph) ResizeTensorSizeTensorScaleTensorOffsetTensorModeName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, mode MPSGraphResizeMode, name string) *GraphTensor {
 	_r := x.inner.ResizeTensorSizeTensorScaleTensorOffsetTensorModeName(imagesTensor, size, scale, offset, raw.MPSGraphResizeMode(mode), foundation.NSStringStringWithUTF8String(name))
@@ -2342,6 +2890,8 @@ func (x *Graph) ResizeTensorSizeTensorScaleTensorOffsetTensorModeName(imagesTens
 	return &GraphTensor{inner: _r}
 }
 
+// Resamples input images to given size using the provided scale and offset and nearest neighbor sampling See above discussion for more details. - Parameters: - imagesTensor: Tensor containing input images. - size: 1D Int32 or Int64 tensor. A 2-element shape as [newHeight, newWidth] - scaleOffset: 1D float tensor. A 4-element shape as [scaleY, scaleX, offsetY, offsetX] - nearestRoundingMode: The rounding mode to use when using nearest resampling. - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName calls the underlying ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName.
 func (x *Graph) ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := x.inner.ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName(imagesTensor, size, scaleOffset, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
@@ -2351,6 +2901,8 @@ func (x *Graph) ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundin
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Resize operation and returns the result tensor. Resamples input images to given size using the provided scale and offset and nearest neighbor sampling. Destination indices are computed using ```md dst_indices = (src_indices * scale) + offset ``` For most use cases passing the scale and offset directly is unnecessary, and it is preferable to use the API specifying centerResult and alignCorners. - Parameters: - imagesTensor: Tensor containing input images. - size: The target size of the result tensor.  1D Int32 or Int64 tensor of size equal to rank of input. - scale: 1D float tensor of size equal to rank of input. - offset: 1D float tensor of size equal to rank of input. - nearestRoundingMode: The rounding mode to use when using nearest resampling. Default is roundPreferCeil. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName calls the underlying ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName.
 func (x *Graph) ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, name string) *GraphTensor {
 	_r := x.inner.ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName(imagesTensor, size, scale, offset, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), foundation.NSStringStringWithUTF8String(name))
@@ -2360,6 +2912,8 @@ func (x *Graph) ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestR
 	return &GraphTensor{inner: _r}
 }
 
+// Resamples input images to given size using the provided scale and offset and bilinear sampling See above discussion for more details. - Parameters: - imagesTensor: Tensor containing input images. - size: 1D Int32 or Int64 tensor. A 2-element shape as [newHeight, newWidth] - scaleOffset: 1D float tensor. A 4-element shape as [scaleY, scaleX, offsetY, offsetX] - nearestRoundingMode: The rounding mode to use when using nearest resampling. - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName calls the underlying ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName.
 func (x *Graph) ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := x.inner.ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName(imagesTensor, size, scaleOffset, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
@@ -2369,6 +2923,8 @@ func (x *Graph) ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName(im
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Resize operation and returns the result tensor. Resamples input images to given size using the provided scale and offset and bilinear sampling. Destination indices are computed using ```md dst_indices = (src_indices * scale) + offset ``` For most use cases passing the scale and offset directly is unnecessary, and it is preferable to use the API specifying centerResult and alignCorners. - Parameters: - imagesTensor: Tensor containing input images. - size: The target size of the result tensor.  1D Int32 or Int64 tensor of size equal to rank of input. - scale: 1D float tensor of size equal to rank of input. - offset: 1D float tensor of size equal to rank of input. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeBilinearWithTensorSizeTensorScaleTensorOffsetTensorName calls the underlying ResizeBilinearWithTensorSizeTensorScaleTensorOffsetTensorName.
 func (x *Graph) ResizeBilinearWithTensorSizeTensorScaleTensorOffsetTensorName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ResizeBilinearWithTensorSizeTensorScaleTensorOffsetTensorName(imagesTensor, size, scale, offset, foundation.NSStringStringWithUTF8String(name))
@@ -2378,6 +2934,8 @@ func (x *Graph) ResizeBilinearWithTensorSizeTensorScaleTensorOffsetTensorName(im
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Resize gradient operation and returns the result tensor. Computes the gradient for the forward pass Resize op with identical parameters. See discussion of resizeTensor for more in depth description of resize paramters. - Parameters: - gradient: Incoming gradient tensor - input: Forward pass input tensor - mode: The resampling mode to use. If nearest sampling is specifed, RoundPreferCeil mode will be used. - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned - alignCorners: When YES, the result image will have the same value as the input image in the corners - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName calls the underlying ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName.
 func (x *Graph) ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := x.inner.ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName(gradient, input, raw.MPSGraphResizeMode(mode), centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
@@ -2387,6 +2945,8 @@ func (x *Graph) ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutN
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Resize gradient operation and returns the result tensor. Computes the gradient for the forward pass Resize op with identical parameters. See discussion of resizeTensor for more in depth description of resize paramters. - Parameters: - gradient: Incoming gradient tensor - input: Forward pass input tensor - nearestRoundingMode: The rounding mode to use when using nearest resampling. - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned - alignCorners: When YES, the result image will have the same value as the input image in the corners - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName calls the underlying ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName.
 func (x *Graph) ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := x.inner.ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName(gradient, input, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
@@ -2396,6 +2956,8 @@ func (x *Graph) ResizeNearestWithGradientTensorInputNearestRoundingModeCenterRes
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Resize gradient operation and returns the result tensor. Computes the gradient for the forward pass Resize op with identical parameters. See discussion of resizeTensor for more in depth description of resize paramters. - Parameters: - gradient: Incoming gradient tensor - input: Forward pass input tensor - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned - alignCorners: When YES, the result image will have the same value as the input image in the corners - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName calls the underlying ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName.
 func (x *Graph) ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := x.inner.ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName(gradient, input, centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
@@ -2405,6 +2967,8 @@ func (x *Graph) ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLay
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Resize gradient operation and returns the result tensor. Computes the gradient for the forward pass Resize op with identical parameters. See discussion of resizeTensor for more in depth description of resize paramters. - Parameters: - gradient: Incoming gradient tensor - input: Forward pass input tensor - scaleOffset: 1D float tensor. A 4-element shape as [scaleY, scaleX, offsetY, offsetX] - mode: The resampling mode to use. If nearest sampling is specifed, RoundPreferCeil mode will be used. - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName calls the underlying ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName.
 func (x *Graph) ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, mode MPSGraphResizeMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := x.inner.ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName(gradient, input, scaleOffset, raw.MPSGraphResizeMode(mode), raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
@@ -2414,6 +2978,8 @@ func (x *Graph) ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName(gra
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Resize gradient operation and returns the result tensor. Computes the gradient for the forward pass Resize op with identical parameters. See discussion of resizeTensor for more in depth description of resize paramters. - Parameters: - gradient: Incoming gradient tensor - input: Forward pass input tensor - scale: 1D float tensor of size equal to rank of input. - offset: 1D float tensor of size equal to rank of input. - mode: The resampling mode to use. If nearest sampling is specifed, RoundPreferCeil mode will be used. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName calls the underlying ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName.
 func (x *Graph) ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, mode MPSGraphResizeMode, name string) *GraphTensor {
 	_r := x.inner.ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName(gradient, input, scale, offset, raw.MPSGraphResizeMode(mode), foundation.NSStringStringWithUTF8String(name))
@@ -2423,6 +2989,8 @@ func (x *Graph) ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName(gra
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Resize gradient operation and returns the result tensor. Computes the gradient for the forward pass Resize op with identical parameters. See discussion of resizeTensor for more in depth description of resize paramters. - Parameters: - gradient: Incoming gradient tensor - input: Forward pass input tensor - scaleOffset: 1D float tensor. A 4-element shape as [scaleY, scaleX, offsetY, offsetX] - nearestRoundingMode: The rounding mode to use when using nearest resampling. - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName calls the underlying ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName.
 func (x *Graph) ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := x.inner.ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName(gradient, input, scaleOffset, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
@@ -2432,6 +3000,8 @@ func (x *Graph) ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoun
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Resize gradient operation and returns the result tensor. Computes the gradient for the forward pass Resize op with nearest neighbor sampling and identical parameters. See discussion of resizeTensor for more in depth description of resize paramters. - Parameters: - gradient: Incoming gradient tensor - input: Forward pass input tensor - scale: 1D float tensor of size equal to rank of input. - offset: 1D float tensor of size equal to rank of input. - nearestRoundingMode: The rounding mode to use when using nearest resampling. Default is roundPreferCeil. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName calls the underlying ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName.
 func (x *Graph) ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, name string) *GraphTensor {
 	_r := x.inner.ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName(gradient, input, scale, offset, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), foundation.NSStringStringWithUTF8String(name))
@@ -2441,6 +3011,8 @@ func (x *Graph) ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNeare
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Resize gradient operation and returns the result tensor. Computes the gradient for the forward pass Resize op with bilinear sampling and identical parameters. See discussion of resizeTensor for more in depth description of resize paramters. - Parameters: - gradient: Incoming gradient tensor - input: Forward pass input tensor - scaleOffset: 1D float tensor. A 4-element shape as [scaleY, scaleX, offsetY, offsetX] - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName calls the underlying ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName.
 func (x *Graph) ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
 	_r := x.inner.ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName(gradient, input, scaleOffset, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
@@ -2450,6 +3022,8 @@ func (x *Graph) ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Resize gradient operation and returns the result tensor. Computes the gradient for the forward pass Resize op with bilinear sampling and identical parameters. - Parameters: - gradient: Incoming gradient tensor - input: Forward pass input tensor - scale: 1D float tensor of size equal to rank of input. - offset: 1D float tensor of size equal to rank of input. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ResizeBilinearWithGradientTensorInputScaleTensorOffsetTensorName calls the underlying ResizeBilinearWithGradientTensorInputScaleTensorOffsetTensorName.
 func (x *Graph) ResizeBilinearWithGradientTensorInputScaleTensorOffsetTensorName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ResizeBilinearWithGradientTensorInputScaleTensorOffsetTensorName(gradient, input, scale, offset, foundation.NSStringStringWithUTF8String(name))
@@ -2459,106 +3033,148 @@ func (x *Graph) ResizeBilinearWithGradientTensorInputScaleTensorOffsetTensorName
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a single-gate RNN operation and returns the value and optionally the training state tensor. This operation returns tensors `h` and optionally `z` that are defined recursively as follows: ```md for t = 0 to T-1 z[t] = x[t] W^T + (h[t-1]m) R^T + b h[t] = activation( z[t] ), where ``` `W` is optional `inputWeight`, `R` is `recurrentWeight`, `b` is `bias`, `m` is optional `mask`, `x[t]` is `source` `h[t]` is the first output, `z[t]` is the second output (optional) and `h[-1]` is `initState`. See “MPSGraphSingleGateRNNDescriptor“ for different `activation` options. - Parameters: - source: A tensor that contains the source data `x[t]` with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,2H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,H,H] and otherwise it is [H,H]. - inputWeight: A tensor containing the input weights matrix `W` - optional, if missing the operation assumes a diagonal unit-matrix. For `bidirectional` the layout is [2H,I] and otherwise it is [H,I]. - bias: A tensor containing the bias `b` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [2H] and otherwise it is [H]. - initState: The initial internal state of the RNN `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - mask: A tensor containing the mask `m` - optional, if missing the operation assumes ones. This is useful for dropout support. - descriptor: A descriptor that defines the parameters for the RNN operation. - name: The name for the operation. - Returns: A valid MPSGraphTensor array of size 1 or 2, depending on value of `descriptor.training`. The layout of the both outputs is [T,N,H] or [T,N,2H] for bidirectional.
+//
 // SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskDescriptorName calls the underlying SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskDescriptorName.
 func (x *Graph) SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskDescriptorName(source, recurrentWeight, inputWeight, bias, initState, mask, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a single-gate RNN operation and returns the value and optionally the training state tensor. This operation returns tensors `h` and optionally `z` that are defined recursively as follows: ```md for t = 0 to T-1 z[t] = x[t] W^T + (h[t-1]m) R^T + b h[t] = activation( z[t] ), where ``` `W` is optional `inputWeight`, `R` is `recurrentWeight`, `b` is `bias`, `m` is optional `mask`, `x[t]` is `source` `h[t]` is the first output, `z[t]` is the second output (optional) and `h[-1]` is `initState`. See “MPSGraphSingleGateRNNDescriptor“ for different `activation` options. - Parameters: - source: A tensor that contains the source data `x[t]` with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,2H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,H,H] and otherwise it is [H,H]. - inputWeight: A tensor containing the input weights matrix `W` - optional, if missing the operation assumes a diagonal unit-matrix. For `bidirectional` the layout is [2H,I] and otherwise it is [H,I]. - bias: A tensor containing the bias `b` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [2H] and otherwise it is [H]. - initState: The initial internal state of the RNN `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - descriptor: A descriptor that defines the parameters for the RNN operation. - name: The name for the operation. - Returns: A valid MPSGraphTensor array of size 1 or 2, depending on value of `descriptor.training`. The layout of the both outputs is [T,N,H] or [T,N,2H] for bidirectional.
+//
 // SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName calls the underlying SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName.
 func (x *Graph) SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName(source, recurrentWeight, inputWeight, bias, initState, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a single-gate RNN operation and returns the value and optionally the training state tensor. This operation returns tensors `h` and optionally `z` that are defined recursively as follows: ```md for t = 0 to T-1 z[t] = x[t] W^T + (h[t-1]m) R^T + b h[t] = activation( z[t] ), where ``` `W` is optional `inputWeight`, `R` is `recurrentWeight`, `b` is `bias`, `m` is optional `mask`, `x[t]` is `source` `h[t]` is the first output, `z[t]` is the second output (optional) and `h[-1]` is `initState`. See “MPSGraphSingleGateRNNDescriptor“ for different `activation` options. - Parameters: - source: A tensor that contains the source data `x[t]` with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,2H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,H,H] and otherwise it is [H,H]. - initState: The initial internal state of the RNN `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - descriptor: A descriptor that defines the parameters for the RNN operation. - name: The name for the operation. - Returns: A valid MPSGraphTensor array of size 1 or 2, depending on value of `descriptor.training`. The layout of the both outputs is [T,N,H] or [T,N,2H] for bidirectional.
+//
 // SingleGateRNNWithSourceTensorRecurrentWeightInitStateDescriptorName calls the underlying SingleGateRNNWithSourceTensorRecurrentWeightInitStateDescriptorName.
 func (x *Graph) SingleGateRNNWithSourceTensorRecurrentWeightInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.SingleGateRNNWithSourceTensorRecurrentWeightInitStateDescriptorName(source, recurrentWeight, initState, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a single-gate RNN gradient operation and returns the gradient tensor values. For details of this operation and parameters, refer to documentation of “MPSGraph/singleGateRNNWithSourceTensor:recurrentWeight:inputWeight:bias:initState:mask:descriptor:name:“. - Parameters: - source: A tensor that contains the source data `x[t]` with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,2H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,H,H] and otherwise it is [H,H]. Note: For `bidirectional` this tensor must have a static shape. - sourceGradient: The input gradient, that is the gradient of a tensor with respect to the first output of the forward pass. - zState: The second output of “MPSGraph/singleGateRNNWithSourceTensor:recurrentWeight:inputWeight:bias:initState:mask:descriptor:name:“ with `descriptor.training = YES`. - stateGradient: The input gradient coming from the future timestep - optional, if missing the operation assumes zeroes. - inputWeight: A tensor containing the input weights matrix `W` - optional, if missing the operation assumes a diagonal unit-matrix. For `bidirectional` the layout is [2H,I] and otherwise it is [H,I]. - bias: A tensor containing the bias `b` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [2H] and otherwise it is [H]. - initState: The initial internal state of the RNN `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - mask: A tensor containing the mask `m` - optional, if missing the operation assumes ones. This is useful for dropout support. - descriptor: A descriptor that defines the parameters for the RNN operation. - name: The name for the operation. - Returns: A valid `MPSGraphTensor` array containing gradients for each input tensor, except for `sourceGradient` and `mask`. In case an input is `nil`, no gradient will be returned for it. The order of the gradients will be: for `source`, for `recurrentWeight`, for `inputWeight`, for `bias` and finally for `initState`.
+//
 // SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateStateGradientInputWeightBiasInitStateMaskDescriptorName calls the underlying SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateStateGradientInputWeightBiasInitStateMaskDescriptorName.
 func (x *Graph) SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateStateGradientInputWeightBiasInitStateMaskDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, stateGradient *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateStateGradientInputWeightBiasInitStateMaskDescriptorName(source, recurrentWeight, sourceGradient, zState, stateGradient, inputWeight, bias, initState, mask, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a single-gate RNN gradient operation and returns the gradient tensor values. For details of this operation and parameters, refer to documentation of “MPSGraph/singleGateRNNWithSourceTensor:recurrentWeight:inputWeight:bias:initState:mask:descriptor:name:“. - Parameters: - source: A tensor that contains the source data `x[t]` with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,2H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,H,H] and otherwise it is [H,H]. Note: For `bidirectional` this tensor must have a static shape. - sourceGradient: The input gradient, that is the gradient of a tensor with respect to the first output of the forward pass. - zState: The second output of “MPSGraph/singleGateRNNWithSourceTensor:recurrentWeight:inputWeight:bias:initState:mask:descriptor:name:“ with `descriptor.training = YES`. - inputWeight: A tensor containing the input weights matrix `W` - optional, if missing the operation assumes a diagonal unit-matrix. For `bidirectional` the layout is [2H,I] and otherwise it is [H,I]. - bias: A tensor containing the bias `b` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [2H] and otherwise it is [H]. - initState: The initial internal state of the RNN `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - mask: A tensor containing the mask `m` - optional, if missing the operation assumes ones. This is useful for dropout support. - descriptor: A descriptor that defines the parameters for the RNN operation. - name: The name for the operation. - Returns: A valid `MPSGraphTensor` array containing gradients for each input tensor, except for `sourceGradient` and `mask`. In case an input is `nil`, no gradient will be returned for it. The order of the gradients will be: for `source`, for `recurrentWeight`, for `inputWeight`, for `bias` and finally for `initState`.
+//
 // SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateMaskDescriptorName calls the underlying SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateMaskDescriptorName.
 func (x *Graph) SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateMaskDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateMaskDescriptorName(source, recurrentWeight, sourceGradient, zState, inputWeight, bias, initState, mask, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a single-gate RNN gradient operation and returns the gradient tensor values. For details of this operation and parameters, refer to documentation of “MPSGraph/singleGateRNNWithSourceTensor:recurrentWeight:inputWeight:bias:initState:mask:descriptor:name:“. - Parameters: - source: A tensor that contains the source data `x[t]` with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,2H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,H,H] and otherwise it is [H,H]. Note: For `bidirectional` this tensor must have a static shape. - sourceGradient: The input gradient, that is the gradient of a tensor with respect to the first output of the forward pass. - zState: The second output of “MPSGraph/singleGateRNNWithSourceTensor:recurrentWeight:inputWeight:bias:initState:mask:descriptor:name:“ with `descriptor.training = YES`. - inputWeight: A tensor containing the input weights matrix `W` - optional, if missing the operation assumes a diagonal unit-matrix. For `bidirectional` the layout is [2H,I] and otherwise it is [H,I]. - bias: A tensor containing the bias `b` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [2H] and otherwise it is [H]. - initState: The initial internal state of the RNN `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - descriptor: A descriptor that defines the parameters for the RNN operation. - name: The name for the operation. - Returns: A valid `MPSGraphTensor` array containing gradients for each input tensor, except for `sourceGradient` and `mask`. In case an input is `nil`, no gradient will be returned for it. The order of the gradients will be: for `source`, for `recurrentWeight`, for `inputWeight`, for `bias` and finally for `initState`.
+//
 // SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateDescriptorName calls the underlying SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateDescriptorName.
 func (x *Graph) SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInputWeightBiasInitStateDescriptorName(source, recurrentWeight, sourceGradient, zState, inputWeight, bias, initState, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a single-gate RNN gradient operation and returns the gradient tensor values. For details of this operation and parameters, refer to documentation of “MPSGraph/singleGateRNNWithSourceTensor:recurrentWeight:inputWeight:bias:initState:mask:descriptor:name:“. - Parameters: - source: A tensor that contains the source data `x[t]` with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,2H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,H,H] and otherwise it is [H,H]. Note: For `bidirectional` this tensor must have a static shape. - sourceGradient: The input gradient, that is the gradient of a tensor with respect to the first output of the forward pass. - zState: The second output of “MPSGraph/singleGateRNNWithSourceTensor:recurrentWeight:inputWeight:bias:initState:mask:descriptor:name:“ with `descriptor.training = YES`. - initState: The initial internal state of the RNN `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - descriptor: A descriptor that defines the parameters for the RNN operation. - name: The name for the operation. - Returns: A valid `MPSGraphTensor` array containing gradients for each input tensor, except for `sourceGradient` and `mask`. In case an input is `nil`, no gradient will be returned for it. The order of the gradients will be: for `source`, for `recurrentWeight`, for `inputWeight`, for `bias` and finally for `initState`.
+//
 // SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInitStateDescriptorName calls the underlying SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInitStateDescriptorName.
 func (x *Graph) SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.SingleGateRNNGradientsWithSourceTensorRecurrentWeightSourceGradientZStateInitStateDescriptorName(source, recurrentWeight, sourceGradient, zState, initState, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates an LSTM operation and returns the value tensor and optionally the cell state tensor and  the training state tensor. This operation returns tensors `h` and optionally `c` and optionally `z` that are defined recursively as follows: ```md for t = 0 to T-1 z[t] = [i, f, z, o][t] = f( (h[t-1] m) R^T + x'[t] + p c[t-1] ) x'[t] = x[t] W^T + b c[t] = f[t]c[t-1] + i[t]z[t] h[t] = o[t]g(c[t]), where ``` `W` is optional `inputWeight`, `R` is `recurrentWeight`, `b` is optional `bias`, `m` is optional `mask`, `x[t]` is `source` `h[t]` is the first output, `c[t]` is the second output (optional), `z[t]` is either the second or third output (optional), `h[-1]` is `initCell`.  and `h[-1]` is `initState`. `p` is an optional peephole vector. See “MPSGraphLSTMDescriptor“ for different `activation` options for `f()` and `g()`. - Parameters: - source: A tensor containing the source data `x[t]`  with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,4H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,8H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,4H,H] and otherwise it is [4H,H]. - inputWeight: A tensor containing the input weights matrix `W` - optional, if missing the operation assumes a diagonal unit-matrix. For `bidirectional` the layout is [8H,I] and otherwise it is [4H,I]. - bias: A tensor containing the bias `b` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [8H] and otherwise it is [4H]. - initState: The initial internal state of the LSTM `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - initCell: The initial internal cell of the LSTM `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - mask: A tensor containing the mask `m` - optional, if missing the operation assumes ones. Useful for dropout. - peephole: A tensor containing the peephole vector `v` - optional, if missing the operation assumes zeroes. Shape is [4H], ie. a vector for each gate, or [2,4H] for bidirectional. - descriptor: A descriptor that defines the parameters for the LSTM operation. - name: The name for the operation. - Returns: A valid `MPSGraphTensor` array of size 1 or 2 or 3, depending on values of `descriptor.produceCell` and `descriptor.training`. The layout of the both state and cell outputs are [T,N,H] or [T,N,2H] for bidirectional, and the layout of the trainingState output is [T,N,4H] or [T,N,8H] for bidirectional.
+//
 // LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName calls the underlying LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName.
 func (x *Graph) LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, initCell *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, peephole *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName(source, recurrentWeight, inputWeight, bias, initState, initCell, mask, peephole, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates an LSTM operation and returns the value tensor and optionally the cell state tensor and  the training state tensor. This operation returns tensors `h` and optionally `c` and optionally `z` that are defined recursively as follows: ```md for t = 0 to T-1 z[t] = [i, f, z, o][t] = f( (h[t-1] m) R^T + x'[t] + p c[t-1] ) x'[t] = x[t] W^T + b c[t] = f[t]c[t-1] + i[t]z[t] h[t] = o[t]g(c[t]), where ``` `W` is optional `inputWeight`, `R` is `recurrentWeight`, `b` is optional `bias`, `m` is optional `mask`, `x[t]` is `source` `h[t]` is the first output, `c[t]` is the second output (optional), `z[t]` is either the second or third output (optional), `h[-1]` is `initCell`.  and `h[-1]` is `initState`. `p` is an optional peephole vector. See “MPSGraphLSTMDescriptor“ for different `activation` options for `f()` and `g()`. - Parameters: - source: A tensor containing the source data `x[t]`  with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,4H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,8H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,4H,H] and otherwise it is [4H,H]. - inputWeight: A tensor containing the input weights matrix `W` - optional, if missing the operation assumes a diagonal unit-matrix. For `bidirectional` the layout is [8H,I] and otherwise it is [4H,I]. - bias: A tensor containing the bias `b` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [8H] and otherwise it is [4H]. - initState: The initial internal state of the LSTM `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - initCell: The initial internal cell of the LSTM `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - descriptor: A descriptor that defines the parameters for the LSTM operation. - name: The name for the operation. - Returns: A valid `MPSGraphTensor` array of size 1 or 2 or 3, depending on values of `descriptor.produceCell` and `descriptor.training`. The layout of the both state and cell outputs are [T,N,H] or [T,N,2H] for bidirectional, and the layout of the trainingState output is [T,N,4H] or [T,N,8H] for bidirectional.
+//
 // LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellDescriptorName calls the underlying LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellDescriptorName.
 func (x *Graph) LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, initCell *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.LSTMWithSourceTensorRecurrentWeightInputWeightBiasInitStateInitCellDescriptorName(source, recurrentWeight, inputWeight, bias, initState, initCell, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates an LSTM operation and returns the value tensor and optionally the cell state tensor and  the training state tensor. This operation returns tensors `h` and optionally `c` and optionally `z` that are defined recursively as follows: ```md for t = 0 to T-1 z[t] = [i, f, z, o][t] = f( (h[t-1] m) R^T + x'[t] + p c[t-1] ) x'[t] = x[t] W^T + b c[t] = f[t]c[t-1] + i[t]z[t] h[t] = o[t]g(c[t]), where ``` `W` is optional `inputWeight`, `R` is `recurrentWeight`, `b` is optional `bias`, `m` is optional `mask`, `x[t]` is `source` `h[t]` is the first output, `c[t]` is the second output (optional), `z[t]` is either the second or third output (optional), `h[-1]` is `initCell`.  and `h[-1]` is `initState`. `p` is an optional peephole vector. See “MPSGraphLSTMDescriptor“ for different `activation` options for `f()` and `g()`. - Parameters: - source: A tensor containing the source data `x[t]`  with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,4H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,8H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,4H,H] and otherwise it is [4H,H]. - initState: The initial internal state of the LSTM `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - initCell: The initial internal cell of the LSTM `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - descriptor: A descriptor that defines the parameters for the LSTM operation. - name: The name for the operation. - Returns: A valid `MPSGraphTensor` array of size 1 or 2 or 3, depending on values of `descriptor.produceCell` and `descriptor.training`. The layout of the both state and cell outputs are [T,N,H] or [T,N,2H] for bidirectional, and the layout of the trainingState output is [T,N,4H] or [T,N,8H] for bidirectional.
+//
 // LSTMWithSourceTensorRecurrentWeightInitStateInitCellDescriptorName calls the underlying LSTMWithSourceTensorRecurrentWeightInitStateInitCellDescriptorName.
 func (x *Graph) LSTMWithSourceTensorRecurrentWeightInitStateInitCellDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, initCell *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.LSTMWithSourceTensorRecurrentWeightInitStateInitCellDescriptorName(source, recurrentWeight, initState, initCell, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates an LSTM gradient operation and returns the gradient tensor values. For details of this operation and parameters, refer to documentation of “MPSGraph/LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:mask:peephole:descriptor:name:“. - Parameters: - source: A tensor containing the source data `x[t]`  with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,4H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,8H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,4H,H] and otherwise it is [4H,H]. - sourceGradient: The input gradient, that is the gradient of a tensor with respect to the first output of the forward pass. - zState: The third output of “MPSGraph/LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:descriptor:name:“ with `descriptor.training = YES`. - cellOutputFwd: The second output of “MPSGraph/LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:descriptor:name:“ with `descriptor.training = YES` or `descriptor.produceCell = YES`. - stateGradient: The input gradient for state coming from the future timestep - optional, if missing the operation assumes zeroes. - cellGradient: Input gradient for cell coming from the future timestep - optional, if missing the operation assumes zeroes. - inputWeight: A tensor containing the input weights matrix `W` - optional, if missing the operation assumes a diagonal unit-matrix. For `bidirectional` the layout is [8H,I] and otherwise it is [4H,I]. - bias: A tensor containing the bias `b` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [8H] and otherwise it is [4H]. - initState: The initial internal state of the LSTM `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - initCell: The initial internal cell of the LSTM `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - mask: A tensor containing the mask `m` - optional, if missing the operation assumes ones. Useful for dropout. - peephole: A tensor containing the peephole vector `v` - optional, if missing the operation assumes zeroes. Shape is [4H], ie. a vector for each gate, or [2,4H] for bidirectional. - descriptor: A descriptor that defines the parameters for the LSTM operation. - name: The name for the operation. - Returns: A valid `MPSGraphTensor` array containing gradients for each input tensor, except for `sourceGradient` and `mask`. In case an input is nil, no gradient will be returned for it. The order of the gradients will be: for `source`, for `recurrentWeight`, for `inputWeight`, for `bias`, for `peephole`, for `initState` and for `initCell`.
+//
 // LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdStateGradientCellGradientInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName calls the underlying LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdStateGradientCellGradientInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName.
 func (x *Graph) LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdStateGradientCellGradientInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, cellOutputFwd *raw.MPSGraphTensor, stateGradient *raw.MPSGraphTensor, cellGradient *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, initCell *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, peephole *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdStateGradientCellGradientInputWeightBiasInitStateInitCellMaskPeepholeDescriptorName(source, recurrentWeight, sourceGradient, zState, cellOutputFwd, stateGradient, cellGradient, inputWeight, bias, initState, initCell, mask, peephole, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates an LSTM gradient operation and returns the gradient tensor values. For details of this operation and parameters, refer to documentation of “MPSGraph/LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:mask:peephole:descriptor:name:“. - Parameters: - source: A tensor containing the source data `x[t]`  with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,4H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,8H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,4H,H] and otherwise it is [4H,H]. - sourceGradient: The input gradient, that is the gradient of a tensor with respect to the first output of the forward pass. - zState: The third output of “MPSGraph/LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:descriptor:name:“ with `descriptor.training = YES`. - cellOutputFwd: The second output of “MPSGraph/LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:descriptor:name:“ with `descriptor.training = YES` or `descriptor.produceCell = YES`. - inputWeight: A tensor containing the input weights matrix `W` - optional, if missing the operation assumes a diagonal unit-matrix. For `bidirectional` the layout is [8H,I] and otherwise it is [4H,I]. - bias: A tensor containing the bias `b` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [8H] and otherwise it is [4H]. - initState: The initial internal state of the LSTM `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - initCell: The initial internal cell of the LSTM `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - mask: A tensor containing the mask `m` - optional, if missing the operation assumes ones. Useful for dropout. - descriptor: A descriptor that defines the parameters for the LSTM operation. - name: The name for the operation. - Returns: A valid `MPSGraphTensor` array containing gradients for each input tensor, except for `sourceGradient` and `mask`. In case an input is nil, no gradient will be returned for it. The order of the gradients will be: for `source`, for `recurrentWeight`, for `inputWeight`, for `bias`, for `peephole`, for `initState` and for `initCell`.
+//
 // LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellMaskDescriptorName calls the underlying LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellMaskDescriptorName.
 func (x *Graph) LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellMaskDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, cellOutputFwd *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, initCell *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellMaskDescriptorName(source, recurrentWeight, sourceGradient, zState, cellOutputFwd, inputWeight, bias, initState, initCell, mask, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates an LSTM gradient operation and returns the gradient tensor values. For details of this operation and parameters, refer to documentation of “MPSGraph/LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:mask:peephole:descriptor:name:“. - Parameters: - source: A tensor containing the source data `x[t]`  with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,4H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,8H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,4H,H] and otherwise it is [4H,H]. - sourceGradient: The input gradient, that is the gradient of a tensor with respect to the first output of the forward pass. - zState: The third output of “MPSGraph/LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:descriptor:name:“ with `descriptor.training = YES`. - cellOutputFwd: The second output of “MPSGraph/LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:descriptor:name:“ with `descriptor.training = YES` or `descriptor.produceCell = YES`. - inputWeight: A tensor containing the input weights matrix `W` - optional, if missing the operation assumes a diagonal unit-matrix. For `bidirectional` the layout is [8H,I] and otherwise it is [4H,I]. - bias: A tensor containing the bias `b` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [8H] and otherwise it is [4H]. - initState: The initial internal state of the LSTM `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - initCell: The initial internal cell of the LSTM `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - descriptor: A descriptor that defines the parameters for the LSTM operation. - name: The name for the operation. - Returns: A valid `MPSGraphTensor` array containing gradients for each input tensor, except for `sourceGradient` and `mask`. In case an input is nil, no gradient will be returned for it. The order of the gradients will be: for `source`, for `recurrentWeight`, for `inputWeight`, for `bias`, for `initState` and for `initCell`.
+//
 // LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellDescriptorName calls the underlying LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellDescriptorName.
 func (x *Graph) LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, cellOutputFwd *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, initCell *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdInputWeightBiasInitStateInitCellDescriptorName(source, recurrentWeight, sourceGradient, zState, cellOutputFwd, inputWeight, bias, initState, initCell, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates an LSTM gradient operation and returns the gradient tensor values. For details of this operation and parameters, refer to documentation of “MPSGraph/LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:mask:peephole:descriptor:name:“. - Parameters: - source: A tensor containing the source data `x[t]`  with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,4H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,8H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,4H,H] and otherwise it is [4H,H]. - sourceGradient: The input gradient, that is the gradient of a tensor with respect to the first output of the forward pass. - zState: The third output of “MPSGraph/LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:descriptor:name:“ with `descriptor.training = YES`. - cellOutputFwd: The second output of “MPSGraph/LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:descriptor:name:“ with `descriptor.training = YES` or `descriptor.produceCell = YES`. - descriptor: A descriptor that defines the parameters for the LSTM operation. - name: The name for the operation. - Returns: A valid `MPSGraphTensor` array containing gradients for each input tensor, except for `sourceGradient` and `mask`. In case an input is nil, no gradient will be returned for it. The order of the gradients will be: for `source`, for `recurrentWeight`, for `inputWeight`, for `bias`, for `initState` and for `initCell`.
+//
 // LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdDescriptorName calls the underlying LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdDescriptorName.
 func (x *Graph) LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, cellOutputFwd *raw.MPSGraphTensor, descriptor *raw.MPSGraphLSTMDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.LSTMGradientsWithSourceTensorRecurrentWeightSourceGradientZStateCellOutputFwdDescriptorName(source, recurrentWeight, sourceGradient, zState, cellOutputFwd, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a GRU operation and returns the value and optionally the training state tensor. This operation returns tensors `h` and optionally `z` that are defined recursively as follows: ```md for t = 0 to T-1 z[t] = fz( (h[t-1] m) R^T + x[t] W^T + b ), r[t] = fr( (h[t-1] m) R^T + x[t] W^T + b ), c[t] = (h[t-1] r[t] m) R^T o[t] = fo( c[t] + x[t] W^T + b ) h[t] = z[t]h[t-1] + (1-z[t])o[t] ``` If `resetAfter = YES` then `c[t]` is replaced by ```md c[t] = ( (h[t-1] m) R^T + b2 ) r[t] ``` If `flipZ = YES` then `h[t]` is replaced by ```md h[t] = (1-z[t])h[t-1] + z[t]o[t]. ``` `W` is optional `inputWeight`, `R` is `recurrentWeight`, `b` is optional  `bias`, `m` is optional `mask`, `x[t]` is `source` `h[t]` is the first output, `z[t]` is the second output (optional) and `h[-1]` is `initState`. `b2` is an optional `resetBias` vector, only used when `resetAfter = YES`. See “MPSGraphGRUDescriptor“ for different `activation` options for `f()`. - Parameters: - source: A tensor containing the source data `x[t]` with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,3H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,6H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,3H,H] and otherwise it is [3H,H]. - inputWeight: A tensor containing the input weights matrix `W` - optional, if missing the operation assumes a diagonal unit-matrix. For `bidirectional` the layout is [6H,I] and otherwise it is [3H,I]. - bias: A tensor containing the bias `b` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [6H] and otherwise it is [3H]. - initState: The initial internal state of the LSTM `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - mask: A tensor containing the mask `m` - optional, if missing the operation assumes ones. Useful for dropout. - secondaryBias: A tensor containing the secondary bias vector `b2` - optional, if missing the operation assumes zeroes. Only used with `reset_after = YES`. Shape is [H], ie. a vector for each gate, or [2H] for bidirectional. - descriptor: A descriptor that defines the parameters for the GRU operation. - name: The name for the operation. - Returns: A valid `MPSGraphTensor` array of size 1 or 2 depending on value of  `descriptor.training`. The layout of the state output is [T,N,H] or [T,N,2H] for bidirectional, and the layout of the `trainingState` output is [T,N,3H] or [T,N,6H] for bidirectional.
+//
 // GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskSecondaryBiasDescriptorName calls the underlying GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskSecondaryBiasDescriptorName.
 func (x *Graph) GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskSecondaryBiasDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, secondaryBias *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskSecondaryBiasDescriptorName(source, recurrentWeight, inputWeight, bias, initState, mask, secondaryBias, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a GRU operation and returns the value and optionally the training state tensor. This operation returns tensors `h` and optionally `z` that are defined recursively as follows: ```md for t = 0 to T-1 z[t] = fz( (h[t-1] m) R^T + x[t] W^T + b ), r[t] = fr( (h[t-1] m) R^T + x[t] W^T + b ), c[t] = (h[t-1] r[t] m) R^T o[t] = fo( c[t] + x[t] W^T + b ) h[t] = z[t]h[t-1] + (1-z[t])o[t] ``` If `resetAfter = YES` then `c[t]` is replaced by ```md c[t] = ( (h[t-1] m) R^T + b2 ) r[t] ``` If `flipZ = YES` then `h[t]` is replaced by ```md h[t] = (1-z[t])h[t-1] + z[t]o[t]. ``` `W` is optional `inputWeight`, `R` is `recurrentWeight`, `b` is optional  `bias`, `m` is optional `mask`, `x[t]` is `source` `h[t]` is the first output, `z[t]` is the second output (optional) and `h[-1]` is `initState`. `b2` is an optional `resetBias` vector, only used when `resetAfter = YES`. See “MPSGraphGRUDescriptor“ for different `activation` options for `f()`. - Parameters: - source: A tensor containing the source data `x[t]` with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,3H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,6H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,3H,H] and otherwise it is [3H,H]. - inputWeight: A tensor containing the input weights matrix `W` - optional, if missing the operation assumes a diagonal unit-matrix. For `bidirectional` the layout is [6H,I] and otherwise it is [3H,I]. - bias: A tensor containing the bias `b` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [6H] and otherwise it is [3H]. - initState: The initial internal state of the LSTM `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - descriptor: A descriptor that defines the parameters for the GRU operation. - name: The name for the operation. - Returns: A valid `MPSGraphTensor` array of size 1 or 2 depending on value of  `descriptor.training`. The layout of the state output is [T,N,H] or [T,N,2H] for bidirectional, and the layout of the `trainingState` output is [T,N,3H] or [T,N,6H] for bidirectional.
+//
 // GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName calls the underlying GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName.
 func (x *Graph) GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.GRUWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName(source, recurrentWeight, inputWeight, bias, initState, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a GRU operation and returns the value and optionally the training state tensor. This operation returns tensors `h` and optionally `z` that are defined recursively as follows: ```md for t = 0 to T-1 z[t] = fz( (h[t-1] m) R^T + x[t] W^T + b ), r[t] = fr( (h[t-1] m) R^T + x[t] W^T + b ), c[t] = (h[t-1] r[t] m) R^T o[t] = fo( c[t] + x[t] W^T + b ) h[t] = z[t]h[t-1] + (1-z[t])o[t] ``` If `resetAfter = YES` then `c[t]` is replaced by ```md c[t] = ( (h[t-1] m) R^T + b2 ) r[t] ``` If `flipZ = YES` then `h[t]` is replaced by ```md h[t] = (1-z[t])h[t-1] + z[t]o[t]. ``` `W` is optional `inputWeight`, `R` is `recurrentWeight`, `b` is optional  `bias`, `m` is optional `mask`, `x[t]` is `source` `h[t]` is the first output, `z[t]` is the second output (optional) and `h[-1]` is `initState`. `b2` is an optional `resetBias` vector, only used when `resetAfter = YES`. See “MPSGraphGRUDescriptor“ for different `activation` options for `f()`. - Parameters: - source: A tensor containing the source data `x[t]` with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,3H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,6H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,3H,H] and otherwise it is [3H,H]. - inputWeight: A tensor containing the input weights matrix `W` - optional, if missing the operation assumes a diagonal unit-matrix. For `bidirectional` the layout is [6H,I] and otherwise it is [3H,I]. - bias: A tensor containing the bias `b` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [6H] and otherwise it is [3H]. - descriptor: A descriptor that defines the parameters for the GRU operation. - name: The name for the operation. - Returns: A valid `MPSGraphTensor` array of size 1 or 2 depending on value of  `descriptor.training`. The layout of the state output is [T,N,H] or [T,N,2H] for bidirectional, and the layout of the `trainingState` output is [T,N,3H] or [T,N,6H] for bidirectional.
+//
 // GRUWithSourceTensorRecurrentWeightInputWeightBiasDescriptorName calls the underlying GRUWithSourceTensorRecurrentWeightInputWeightBiasDescriptorName.
 func (x *Graph) GRUWithSourceTensorRecurrentWeightInputWeightBiasDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.GRUWithSourceTensorRecurrentWeightInputWeightBiasDescriptorName(source, recurrentWeight, inputWeight, bias, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a GRU gradient operation and returns the gradient tensor values. For details of this operation and parameters, refer to documentation of “MPSGraph/GRUWithSourceTensor:recurrentWeight:inputWeight:bias:initState:mask:secondaryBias:descriptor:name:“. - Parameters: - source: A tensor containing the source data `x[t]` with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,3H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,6H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,3H,H] and otherwise it is [3H,H]. - sourceGradient: The input gradient, that is the gradient of a tensor with respect to the first output of the forward pass. - zState: The second output of “MPSGraph/GRUWithSourceTensor:recurrentWeight:inputWeight:bias:initState:descriptor:name:“ with  `descriptor.training = YES`. - outputFwd: The first output of “MPSGraph/GRUWithSourceTensor:recurrentWeight:inputWeight:bias:initState:descriptor:name:“ with `descriptor.training = YES`. - stateGradient: The input gradient for state coming from the future timestep - optional, if missing the operation assumes zeroes. - inputWeight: A tensor containing the input weights matrix `W` - optional, if missing the operation assumes a diagonal unit-matrix. For `bidirectional` the layout is [6H,I] and otherwise it is [3H,I]. - bias: A tensor containing the bias `b` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [6H] and otherwise it is [3H]. - initState: The initial internal state of the LSTM `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - mask: A tensor containing the mask `m` - optional, if missing the operation assumes ones. Useful for dropout. - secondaryBias: A tensor containing the secondary bias vector `b2` - optional, if missing the operation assumes zeroes. Only used with `reset_after = YES`. Shape is [H], ie. a vector for each gate, or [2H] for bidirectional. - descriptor: A descriptor that defines the parameters for the GRU operation. - name: The name for the operation. - Returns: A valid `MPSGraphTensor` array containing gradients for each input tensor, except for `sourceGradient` and `mask`. In case an input is nil, no gradient will be returned for it. The order of the gradients will be: for `source`, for `recurrentWeight`, for `inputWeight`, for `bias`, for `initState` and for `secondaryBias`.
+//
 // GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdStateGradientInputWeightBiasInitStateMaskSecondaryBiasDescriptorName calls the underlying GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdStateGradientInputWeightBiasInitStateMaskSecondaryBiasDescriptorName.
 func (x *Graph) GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdStateGradientInputWeightBiasInitStateMaskSecondaryBiasDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, outputFwd *raw.MPSGraphTensor, stateGradient *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, secondaryBias *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdStateGradientInputWeightBiasInitStateMaskSecondaryBiasDescriptorName(source, recurrentWeight, sourceGradient, zState, outputFwd, stateGradient, inputWeight, bias, initState, mask, secondaryBias, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a GRU gradient operation and returns the gradient tensor values. For details of this operation and parameters, refer to documentation of “MPSGraph/GRUWithSourceTensor:recurrentWeight:inputWeight:bias:initState:mask:secondaryBias:descriptor:name:“. - Parameters: - source: A tensor containing the source data `x[t]` with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,3H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,6H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,3H,H] and otherwise it is [3H,H]. - sourceGradient: The input gradient, that is the gradient of a tensor with respect to the first output of the forward pass. - zState: The second output of “MPSGraph/GRUWithSourceTensor:recurrentWeight:inputWeight:bias:initState:descriptor:name:“ with  `descriptor.training = YES`. - outputFwd: The first output of “MPSGraph/GRUWithSourceTensor:recurrentWeight:inputWeight:bias:initState:descriptor:name:“ with `descriptor.training = YES`. - inputWeight: A tensor containing the input weights matrix `W` - optional, if missing the operation assumes a diagonal unit-matrix. For `bidirectional` the layout is [6H,I] and otherwise it is [3H,I]. - bias: A tensor containing the bias `b` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [6H] and otherwise it is [3H]. - initState: The initial internal state of the LSTM `h[-1]` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [N,2H] and otherwise it is [N,H]. - descriptor: A descriptor that defines the parameters for the GRU operation. - name: The name for the operation. - Returns: A valid `MPSGraphTensor` array containing gradients for each input tensor, except for `sourceGradient` and `mask`. In case an input is nil, no gradient will be returned for it. The order of the gradients will be: for `source`, for `recurrentWeight`, for `inputWeight`, for `bias` and for `initState`.
+//
 // GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasInitStateDescriptorName calls the underlying GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasInitStateDescriptorName.
 func (x *Graph) GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, outputFwd *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasInitStateDescriptorName(source, recurrentWeight, sourceGradient, zState, outputFwd, inputWeight, bias, initState, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a GRU gradient operation and returns the gradient tensor values. For details of this operation and parameters, refer to documentation of “MPSGraph/GRUWithSourceTensor:recurrentWeight:inputWeight:bias:initState:mask:secondaryBias:descriptor:name:“. - Parameters: - source: A tensor containing the source data `x[t]` with the data layout [T,N,I]. In case `inputWeight = nil` and `bidirectional = NO` then the layout is [T,N,3H] and for `inputWeight = nil` and `bidirectional = YES` the layout is [T,N,6H]. - recurrentWeight: A tensor containing the recurrent weights `R`. For `bidirectional` the layout is [2,3H,H] and otherwise it is [3H,H]. - sourceGradient: The input gradient, that is the gradient of a tensor with respect to the first output of the forward pass. - zState: The second output of “MPSGraph/GRUWithSourceTensor:recurrentWeight:inputWeight:bias:initState:descriptor:name:“ with  `descriptor.training = YES`. - outputFwd: The first output of “MPSGraph/GRUWithSourceTensor:recurrentWeight:inputWeight:bias:initState:descriptor:name:“ with `descriptor.training = YES`. - inputWeight: A tensor containing the input weights matrix `W` - optional, if missing the operation assumes a diagonal unit-matrix. For `bidirectional` the layout is [6H,I] and otherwise it is [3H,I]. - bias: A tensor containing the bias `b` - optional, if missing the operation assumes zeroes. For `bidirectional` the layout is [6H] and otherwise it is [3H]. - descriptor: A descriptor that defines the parameters for the GRU operation. - name: The name for the operation. - Returns: A valid `MPSGraphTensor` array containing gradients for each input tensor, except for `sourceGradient` and `mask`. In case an input is nil, no gradient will be returned for it. The order of the gradients will be: for `source`, for `recurrentWeight`, for `inputWeight` and for `bias`.
+//
 // GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasDescriptorName calls the underlying GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasDescriptorName.
 func (x *Graph) GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, outputFwd *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasDescriptorName(source, recurrentWeight, sourceGradient, zState, outputFwd, inputWeight, bias, descriptor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Samples a tensor using the coordinates provided. Given an input tensor (N, H1, W1, C) or (N, C, H1, W1) and coordinates tensor (N, H2, W2, 2) this operation outputs a tensor of size (N, H2, W2, C) or (N, C, H2, W2) by sampling the input tensor at the coordinates provided by the coordinates tensor. - Parameters: - source: Tensor containing source data - coordinates: a tensor (N, Hout, Wout, 2) that contains the coordinates of the samples in the source tensor that constitute the output tensor. - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC and NCHW. - normalizeCoordinates: If true, coordinates are within [-1, 1] x [-1, 1] otherwise they are in pixels in the input tensor. - relativeCoordinates: If true, coordinates are relative to the postion of the pixel in the output tensor and scaled back to the input tensor size - alignCorners: If true, coordinate extrema are equal to the center of edge pixels, otherwise extrema are equal to outer edge of edge pixels - paddingMode: determines how samples outside the inputTensor are evaluated (only constant, reflect, symmetric and clampToEdge are supported) - samplingMode: Can be either MPSGraphResizeNearest or MPSGraphResizeBilinear. Nearest sampling will use roundPreferCeil. - constantValue: If paddingMode is MPSGraphPaddingModeConstant, then this constant is used for samples outside the input tensor. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName calls the underlying SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName.
 func (x *Graph) SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName(source *raw.MPSGraphTensor, coordinates *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode MPSGraphPaddingMode, samplingMode MPSGraphResizeMode, constantValue float64, name string) *GraphTensor {
 	_r := x.inner.SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName(source, coordinates, raw.MPSGraphTensorNamedDataLayout(layout), normalizeCoordinates, relativeCoordinates, alignCorners, raw.MPSGraphPaddingMode(paddingMode), raw.MPSGraphResizeMode(samplingMode), constantValue, foundation.NSStringStringWithUTF8String(name))
@@ -2568,6 +3184,8 @@ func (x *Graph) SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordin
 	return &GraphTensor{inner: _r}
 }
 
+// Samples a tensor using the coordinates provided, using nearest neighbor sampling with specified rounding mode. Given an input tensor (N, H1, W1, C) or (N, C, H1, W1) and coordinates tensor (N, H2, W2, 2) this operation outputs a tensor of size (N, H2, W2, C) or (N, C, H2, W2) by sampling the input tensor at the coordinates provided by the coordinates tensor. - Parameters: - source: Tensor containing source data - coordinates: a tensor (N, Hout, Wout, 2) that contains the coordinates of the samples in the source tensor that constitute the output tensor. - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC and NCHW. - normalizeCoordinates: If true, coordinates are within [-1, 1] x [-1, 1] otherwise they are in pixels in the input tensor. - relativeCoordinates: If true, coordinates are relative to the postion of the pixel in the output tensor and scaled back to the input tensor size - alignCorners: If true, coordinate extrema are equal to the center of edge pixels, otherwise extrema are equal to outer edge of edge pixels - paddingMode: determines how samples outside the inputTensor are evaluated (only constant, reflect, symmetric and clampToEdge are supported) - nearestRoundingMode: The rounding mode to use for determining the nearest neighbor. Valid modes are roundPreferCeil, roundPreferFloor, ceil, and floor. - constantValue: If paddingMode is MPSGraphPaddingModeConstant, then this constant is used for samples outside the input tensor. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName calls the underlying SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName.
 func (x *Graph) SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName(source *raw.MPSGraphTensor, coordinates *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode MPSGraphPaddingMode, nearestRoundingMode MPSGraphResizeNearestRoundingMode, constantValue float64, name string) *GraphTensor {
 	_r := x.inner.SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName(source, coordinates, raw.MPSGraphTensorNamedDataLayout(layout), normalizeCoordinates, relativeCoordinates, alignCorners, raw.MPSGraphPaddingMode(paddingMode), raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), constantValue, foundation.NSStringStringWithUTF8String(name))
@@ -2577,6 +3195,8 @@ func (x *Graph) SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordin
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a ScatterND operation and returns the result tensor. Scatters the slices in updatesTensor to the result tensor along the indices in indicesTensor. The scatter is defined as ```md B = batchDims U = updates.rank - B P = res.rank - B Q = inds.rank - B K = inds.shape[-1] index_slice = indices[i_{b0},...,i_{bB},i_{0},..,i_{Q-1}] res[i_{b0},...,i_{bB},index_slice[0],...,index_slice[K-1]] = updates[i_{b0},...,i_{bB},i_{0},...,i_{Q-1}] ``` Collisions will be summed, and slices not set by indices are set to 0. The tensors have the following shape requirements ```md K <= P U = (P-K) + Q-1 indices.shape[0:Q-1] = updates.shape[0:Q-1] updates.shape[Q:U] = res.shape[K:P] ``` - Parameters: - updatesTensor: Tensor containing slices to be inserted into the result tensor. - indicesTensor: Tensor containg the result indices to insert slices at - shape: The shape of the result tensor. - batchDimensions: The number of batch dimensions - mode: The type of update to use on the destination - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsModeName calls the underlying ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsModeName.
 func (x *Graph) ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsModeName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, batchDimensions uint, mode MPSGraphScatterMode, name string) *GraphTensor {
 	_r := x.inner.ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsModeName(updatesTensor, indicesTensor, shape, batchDimensions, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
@@ -2586,6 +3206,8 @@ func (x *Graph) ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsModeN
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a ScatterND operation and returns the result tensor. Scatters the slices in updatesTensor to the result tensor along the indices in indicesTensor. The scatter is defined as ```md B = batchDims U = updates.rank - B P = res.rank - B Q = inds.rank - B K = inds.shape[-1] index_slice = indices[i_{b0},...,i_{bB},i_{0},..,i_{Q-1}] res[i_{b0},...,i_{bB},index_slice[0],...,index_slice[K-1]] = updates[i_{b0},...,i_{bB},i_{0},...,i_{Q-1}] ``` Collisions will be summed, and slices not set by indices are set to 0. The tensors have the following shape requirements ```md K <= P U = (P-K) + Q-1 indices.shape[0:Q-1] = updates.shape[0:Q-1] updates.shape[Q:U] = res.shape[K:P] ``` - Parameters: - updatesTensor: Tensor containing slices to be inserted into the result tensor. - indicesTensor: Tensor containg the result indices to insert slices at - shape: The shape of the result tensor. - batchDimensions: The number of batch dimensions - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsName calls the underlying ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsName.
 func (x *Graph) ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, batchDimensions uint, name string) *GraphTensor {
 	_r := x.inner.ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsName(updatesTensor, indicesTensor, shape, batchDimensions, foundation.NSStringStringWithUTF8String(name))
@@ -2595,6 +3217,8 @@ func (x *Graph) ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsName(
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a ScatterND operation and returns the result tensor. Scatters the slices in updatesTensor to the result tensor along the indices in indicesTensor, on top of dataTensor. The scatter is defined as ```md B = batchDims U = updates.rank - B P = res.rank - B Q = inds.rank - B K = inds.shape[-1] index_slice = indices[i_{b0},...,i_{bB},i_{0},..,i_{Q-1}] res[...] = data[...] res[i_{b0},...,i_{bB},index_slice[0],...,index_slice[K-1]] += updates[i_{b0},...,i_{bB},i_{0},...,i_{Q-1}] // Note += is used but this depends on mode ``` Collisions will be updated according to mode, and slices not set by indices are set to 0. The tensors have the following shape requirements ```md K <= P U = (P-K) + Q-1 data.shape = res.shape indices.shape[0:Q-1] = updates.shape[0:Q-1] updates.shape[Q:U] = res.shape[K:P] ``` - Parameters: - dataTensor: Tensor containing inital values of same shape as result tensor - updatesTensor: Tensor containing slices to be inserted into the result tensor. - indicesTensor: Tensor containg the result indices to insert slices at - batchDimensions: The number of batch dimensions - mode: The type of update to use on the destination - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName calls the underlying ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName.
 func (x *Graph) ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName(dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, batchDimensions uint, mode MPSGraphScatterMode, name string) *GraphTensor {
 	_r := x.inner.ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName(dataTensor, updatesTensor, indicesTensor, batchDimensions, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
@@ -2604,6 +3228,8 @@ func (x *Graph) ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensions
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Scatter operation and returns the result tensor. Scatters the slices in updatesTensor to the result tensor along the indices in indicesTensor. The scatter is defined as ```md U = updates.rank P = res.rank res[i_{0},...,i_{axis-1},indices[i_{axis}],i_{axis+1},...,i_{U-1}] = updates[i_{0},...,i_{axis-1},i_{axis},i_{axis+1},...,i_{U-1}] ``` Collisions will be updated according to mode. The tensors have the following shape requirements ```md U = P indices.rank = 1 updates.shape[0:axis-1] = res.shape[0:axis-1] updates.shape[axis] = indices.shape[0] updates.shape[axis+1:U] = res.shape[0:P] ``` - Parameters: - updatesTensor: Tensor containing values to be inserted into the result tensor. - indicesTensor: Tensor containg the result indices to insert values at. - shape: The shape of the result tensor. - axis: The axis of the result tensor to scatter values along. - mode: The type of update to use on the destination. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // ScatterWithUpdatesTensorIndicesTensorShapeAxisModeName calls the underlying ScatterWithUpdatesTensorIndicesTensorShapeAxisModeName.
 func (x *Graph) ScatterWithUpdatesTensorIndicesTensorShapeAxisModeName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, axis int, mode MPSGraphScatterMode, name string) *GraphTensor {
 	_r := x.inner.ScatterWithUpdatesTensorIndicesTensorShapeAxisModeName(updatesTensor, indicesTensor, shape, axis, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
@@ -2613,6 +3239,8 @@ func (x *Graph) ScatterWithUpdatesTensorIndicesTensorShapeAxisModeName(updatesTe
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a Scatter operation and returns the result tensor. Scatters the slices in updatesTensor to the result tensor along the indices in indicesTensor, on top of dataTensor. The scatter is defined as ```md U = updates.rank P = res.rank res[...] = data[...] res[i_{0},...,i_{axis-1},indices[i_{axis}],i_{axis+1},...,i_{U-1}] += updates[i_{0},...,i_{axis-1},i_{axis},i_{axis+1},...,i_{U-1}] // Note += is used but this depends on mode ``` Collisions will be updated according to mode. The tensors have the following shape requirements ```md U = P indices.rank = 1 data.shape = res.shape updates.shape[0:axis-1] = res.shape[0:axis-1] updates.shape[axis] = indices.shape[0] updates.shape[axis+1:U] = res.shape[0:P] ``` - Parameters: - dataTensor: Tensor containing inital values of same shape as result tensor - updatesTensor: Tensor containing values to be inserted into the result tensor. - indicesTensor: Tensor containg the result indices to insert values at - axis: The axis of the result tensor to scatter values along - mode: The type of update to use on the destination - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName calls the underlying ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName.
 func (x *Graph) ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName(dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, axis int, mode MPSGraphScatterMode, name string) *GraphTensor {
 	_r := x.inner.ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName(dataTensor, updatesTensor, indicesTensor, axis, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
@@ -2622,6 +3250,8 @@ func (x *Graph) ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName(data
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a ScatterAlongAxis operation and returns the result tensor. Scatter values from `updatesTensor` along the specified `axis` at indices in `indicesTensor` into a result tensor. Values are updated following `mode`. See MPSGraphScatterMode. The shape of `updatesTensor` and `indicesTensor` must match. `shape` must match except at `axis`. The shape of the result tensor is equal to `shape` and initialized with an initial value corresponding to `mode`. If an index is out of bounds of `shape` along `axis` the update value is skipped. - Parameters: - axis: The axis to scatter to. Negative values wrap around - updatesTensor: The input tensor to scatter values from - indicesTensor: Int32 or Int64 tensor used to index the result tensor. - mode: The type of update to use - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ScatterAlongAxisWithUpdatesTensorIndicesTensorShapeModeName calls the underlying ScatterAlongAxisWithUpdatesTensorIndicesTensorShapeModeName.
 func (x *Graph) ScatterAlongAxisWithUpdatesTensorIndicesTensorShapeModeName(axis int, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, mode MPSGraphScatterMode, name string) *GraphTensor {
 	_r := x.inner.ScatterAlongAxisWithUpdatesTensorIndicesTensorShapeModeName(axis, updatesTensor, indicesTensor, shape, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
@@ -2631,6 +3261,8 @@ func (x *Graph) ScatterAlongAxisWithUpdatesTensorIndicesTensorShapeModeName(axis
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a ScatterAlongAxis operation and returns the result tensor. Scatter values from `updatesTensor` along the specified `axis` at indices in `indicesTensor` into a result tensor. Values are updated following `mode`. See MPSGraphScatterMode. The shape of `updatesTensor` and `indicesTensor` must match. `shape` must match except at `axis`. The shape of the result tensor is equal to `shape` and initialized with an initial value corresponding to `mode`. If an index is out of bounds of `shape` along `axis` the update value is skipped. - Parameters: - axisTensor: Scalar Int32 tensor. The axis to scatter to. Negative values wrap around - updatesTensor: The input tensor to scatter values from - indicesTensor: Int32 or Int64 tensor used to index the result tensor. - mode: The type of update to use - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ScatterAlongAxisTensorWithUpdatesTensorIndicesTensorShapeModeName calls the underlying ScatterAlongAxisTensorWithUpdatesTensorIndicesTensorShapeModeName.
 func (x *Graph) ScatterAlongAxisTensorWithUpdatesTensorIndicesTensorShapeModeName(axisTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, mode MPSGraphScatterMode, name string) *GraphTensor {
 	_r := x.inner.ScatterAlongAxisTensorWithUpdatesTensorIndicesTensorShapeModeName(axisTensor, updatesTensor, indicesTensor, shape, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
@@ -2640,6 +3272,8 @@ func (x *Graph) ScatterAlongAxisTensorWithUpdatesTensorIndicesTensorShapeModeNam
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a ScatterAlongAxis operation and returns the result tensor. Scatter values from `updatesTensor` along the specified `axis` at indices in `indicesTensor` onto `dataTensor`. Values in `dataTensor` are updated following `mode`. See MPSGraphScatterMode. The shape of `updatesTensor` and `indicesTensor` must match. The shape of `dataTensor` must match except at `axis`. If an index is out of bounds of `shape` along `axis` the update value is skipped. For example, ```md data = [ [0, 0, 0], [1, 1, 1], [2, 2, 2], [3, 3, 3] ] updates = [ [1, 2, 3], [4, 5, 6] ] indices = [ [2, 1, 0], [1, 3, 2] ] axis = 0 result = scatterAlongAxis(axis, data, updates, indices, MPSGraphScatterModeAdd, "scatter") result = [ [0, 0, 3], [5, 3, 1], [3, 2, 8], [3, 8, 3] ] ``` - Parameters: - axis: The axis to scatter to. Negative values wrap around - dataTensor: The input tensor to scatter values onto - updatesTensor: The input tensor to scatter values from - indicesTensor: Int32 or Int64 tensor used to index the result tensor. - mode: The type of update to use - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName calls the underlying ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName.
 func (x *Graph) ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName(axis int, dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, mode MPSGraphScatterMode, name string) *GraphTensor {
 	_r := x.inner.ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName(axis, dataTensor, updatesTensor, indicesTensor, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
@@ -2649,6 +3283,8 @@ func (x *Graph) ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a ScatterAlongAxis operation and returns the result tensor. Scatter values from `updatesTensor` along the specified `axis` at indices in `indicesTensor` onto `dataTensor`. Values in `dataTensor` are updated following `mode`. See MPSGraphScatterMode. The shape of `updatesTensor` and `indicesTensor` must match. The shape of `dataTensor` must match except at `axis`. If an index is out of bounds of `shape` along `axis` the update value is skipped. For example, ```md data = [ [0, 0, 0], [1, 1, 1], [2, 2, 2], [3, 3, 3] ] updates = [ [1, 2, 3], [4, 5, 6] ] indices = [ [2, 1, 0], [1, 3, 2] ] axis = 0 result = scatterAlongAxis(axis, data, updates, indices, MPSGraphScatterModeAdd, "scatter") result = [ [0, 0, 3], [5, 3, 1], [3, 2, 8], [3, 8, 3] ] ``` - Parameters: - axisTensor: Scalar Int32 tensor. The axis to scatter to. Negative values wrap around - dataTensor: The input tensor to scatter values onto - updatesTensor: The input tensor to scatter values from - indicesTensor: Int32 or Int64 tensor used to index the result tensor. - mode: The type of update to use - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName calls the underlying ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName.
 func (x *Graph) ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName(axisTensor *raw.MPSGraphTensor, dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, mode MPSGraphScatterMode, name string) *GraphTensor {
 	_r := x.inner.ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName(axisTensor, dataTensor, updatesTensor, indicesTensor, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
@@ -2658,6 +3294,8 @@ func (x *Graph) ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorMo
 	return &GraphTensor{inner: _r}
 }
 
+// Sorts the elements of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axis: The tensor dimension over which you sort the tensor - descending: If true, reverse the sort direction - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // SortWithTensorAxisDescendingName calls the underlying SortWithTensorAxisDescendingName.
 func (x *Graph) SortWithTensorAxisDescendingName(tensor *raw.MPSGraphTensor, axis int, descending bool, name string) *GraphTensor {
 	_r := x.inner.SortWithTensorAxisDescendingName(tensor, axis, descending, foundation.NSStringStringWithUTF8String(name))
@@ -2667,6 +3305,8 @@ func (x *Graph) SortWithTensorAxisDescendingName(tensor *raw.MPSGraphTensor, axi
 	return &GraphTensor{inner: _r}
 }
 
+// Sorts the elements of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axisTensor: The tensor dimension over which you sort the tensor - descending: If true, reverse the sort direction - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // SortWithTensorAxisTensorDescendingName calls the underlying SortWithTensorAxisTensorDescendingName.
 func (x *Graph) SortWithTensorAxisTensorDescendingName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, descending bool, name string) *GraphTensor {
 	_r := x.inner.SortWithTensorAxisTensorDescendingName(tensor, axisTensor, descending, foundation.NSStringStringWithUTF8String(name))
@@ -2676,6 +3316,8 @@ func (x *Graph) SortWithTensorAxisTensorDescendingName(tensor *raw.MPSGraphTenso
 	return &GraphTensor{inner: _r}
 }
 
+// Sorts the elements of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axis: The tensor dimension over which you sort the tensor - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // SortWithTensorAxisName calls the underlying SortWithTensorAxisName.
 func (x *Graph) SortWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.SortWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -2685,6 +3327,8 @@ func (x *Graph) SortWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, nam
 	return &GraphTensor{inner: _r}
 }
 
+// Sorts the elements of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axisTensor: The tensor dimension over which you sort the tensor - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // SortWithTensorAxisTensorName calls the underlying SortWithTensorAxisTensorName.
 func (x *Graph) SortWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.SortWithTensorAxisTensorName(tensor, axisTensor, foundation.NSStringStringWithUTF8String(name))
@@ -2694,6 +3338,8 @@ func (x *Graph) SortWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTen
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the indices that sort the elements of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axis: The tensor dimension over which you sort the tensor - descending: If true, reverse the sort direction - name: The name for the operation. - Returns: A valid MPSGraphTensor object with 32-bit integer data type
+//
 // ArgSortWithTensorAxisDescendingName calls the underlying ArgSortWithTensorAxisDescendingName.
 func (x *Graph) ArgSortWithTensorAxisDescendingName(tensor *raw.MPSGraphTensor, axis int, descending bool, name string) *GraphTensor {
 	_r := x.inner.ArgSortWithTensorAxisDescendingName(tensor, axis, descending, foundation.NSStringStringWithUTF8String(name))
@@ -2703,6 +3349,8 @@ func (x *Graph) ArgSortWithTensorAxisDescendingName(tensor *raw.MPSGraphTensor, 
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the indices that sort the elements of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axisTensor: The tensor dimension over which you sort the tensor - descending: If true, reverse the sort direction - name: The name for the operation. - Returns: A valid MPSGraphTensor object with 32-bit integer data type
+//
 // ArgSortWithTensorAxisTensorDescendingName calls the underlying ArgSortWithTensorAxisTensorDescendingName.
 func (x *Graph) ArgSortWithTensorAxisTensorDescendingName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, descending bool, name string) *GraphTensor {
 	_r := x.inner.ArgSortWithTensorAxisTensorDescendingName(tensor, axisTensor, descending, foundation.NSStringStringWithUTF8String(name))
@@ -2712,6 +3360,8 @@ func (x *Graph) ArgSortWithTensorAxisTensorDescendingName(tensor *raw.MPSGraphTe
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the indices that sort the elements of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axis: The tensor dimension over which you sort the tensor - name: The name for the operation. - Returns: A valid MPSGraphTensor object with 32-bit integer data type
+//
 // ArgSortWithTensorAxisName calls the underlying ArgSortWithTensorAxisName.
 func (x *Graph) ArgSortWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.ArgSortWithTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -2721,6 +3371,8 @@ func (x *Graph) ArgSortWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, 
 	return &GraphTensor{inner: _r}
 }
 
+// Computes the indices that sort the elements of the input tensor along the specified axis. - Parameters: - tensor: The input tensor - axisTensor: The tensor dimension over which you sort the tensor - name: The name for the operation. - Returns: A valid MPSGraphTensor object with 32-bit integer data type
+//
 // ArgSortWithTensorAxisTensorName calls the underlying ArgSortWithTensorAxisTensorName.
 func (x *Graph) ArgSortWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ArgSortWithTensorAxisTensorName(tensor, axisTensor, foundation.NSStringStringWithUTF8String(name))
@@ -2730,6 +3382,8 @@ func (x *Graph) ArgSortWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axis
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a sparse tensor representation. sparseVals corresponds to non zero values in matrix. indexTensor0 and indexTensor1 are indices used for indexing into sparse data structure. For COO, indexTensor0 is x index and indexTensor1 is y index. For CSC, indexTensor0 and indexTensor1 correspond to rowIndex and colStarts respectively. For CSR, indexTensor0 and indexTensor1 correspond to colIndex and rowStarts respectively. You must set input tensors appropriately for each sparse storage type. - Parameters: - sparseStorageType: A sparseStorageType. - inputTensorArray: An array of input tensors as [sparseVals, indexTensor0, indexTensor1]. - shape: The shape of the sparse tensor. - dataType: The dataType of the sparse tensor. - name: A name for the operation. - Returns: A valid “MPSGraphTensor“ object.
+//
 // SparseTensorWithTypeTensorsShapeDataTypeName calls the underlying SparseTensorWithTypeTensorsShapeDataTypeName.
 func (x *Graph) SparseTensorWithTypeTensorsShapeDataTypeName(sparseStorageType MPSGraphSparseStorageType, inputTensorArray *foundation.NSArray[*raw.MPSGraphTensor], shape unsafe.Pointer, dataType mpscore.MPSDataType, name string) *GraphTensor {
 	_r := x.inner.SparseTensorWithTypeTensorsShapeDataTypeName(raw.MPSGraphSparseStorageType(sparseStorageType), inputTensorArray, shape, dataType, foundation.NSStringStringWithUTF8String(name))
@@ -2739,6 +3393,8 @@ func (x *Graph) SparseTensorWithTypeTensorsShapeDataTypeName(sparseStorageType M
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a sparse tensor representation. sparseVals corresponds to non zero values in matrix. indexTensor0 and indexTensor1 are indices used for indexing into sparse data structure. For COO, indexTensor0 is x index and indexTensor1 is y index . For CSC, indexTensor0 and indexTensor1 correspond to rowIndex and colStarts respectively. For CSR, indexTensor0 and indexTensor1 correspond to colIndex and rowStarts respectively. You must set input tensors appropriately for each sparse storage type. - Parameters: - sparseDescriptor: A sparseDescriptor. - inputTensorArray: An array of input tensors as [sparseVals, indexTensor0, indexTensor1]. - shape: The shape of the sparse tensor. - name: A name for the operation. - Returns: A valid “MPSGraphTensor“ object
+//
 // SparseTensorWithDescriptorTensorsShapeName calls the underlying SparseTensorWithDescriptorTensorsShapeName.
 func (x *Graph) SparseTensorWithDescriptorTensorsShapeName(sparseDescriptor *raw.MPSGraphCreateSparseOpDescriptor, inputTensorArray *foundation.NSArray[*raw.MPSGraphTensor], shape unsafe.Pointer, name string) *GraphTensor {
 	_r := x.inner.SparseTensorWithDescriptorTensorsShapeName(sparseDescriptor, inputTensorArray, shape, foundation.NSStringStringWithUTF8String(name))
@@ -2748,6 +3404,8 @@ func (x *Graph) SparseTensorWithDescriptorTensorsShapeName(sparseDescriptor *raw
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a stencil operation and returns the result tensor. Performs a weighted reduction operation (See “MPSGraphStencilOpDescriptor/reductionMode“) on the last 4 dimensions of the `source` over the window determined by `weights`, according to the value defined in `descriptor`. ```md y[i] = reduction{j \in w} ( x[ i + j ]w[j] ) ``` - Parameters: - source: The tensor containing the source data. Must be of rank 4 or greater. - weights: A 4-D tensor containing the weights data. - descriptor: The descriptor object that specifies the parameters for the stencil operation. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // StencilWithSourceTensorWeightsTensorDescriptorName calls the underlying StencilWithSourceTensorWeightsTensorDescriptorName.
 func (x *Graph) StencilWithSourceTensorWeightsTensorDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, descriptor *raw.MPSGraphStencilOpDescriptor, name string) *GraphTensor {
 	_r := x.inner.StencilWithSourceTensorWeightsTensorDescriptorName(source, weights, descriptor, foundation.NSStringStringWithUTF8String(name))
@@ -2757,6 +3415,8 @@ func (x *Graph) StencilWithSourceTensorWeightsTensorDescriptorName(source *raw.M
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reshape operation and returns the result tensor. This operation reshapes the input tensor to the target shape. The shape must be compatible with the input tensor shape, specifically the volume of the input tensor has to match the volume defined by the shape. The shape is allowed to contain dynamic dimensions (-1) when the result type can be inferred unambiguously. - Parameters: - tensor: The tensor to be reshaped. - shape: The result tensor shape. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // ReshapeTensorWithShapeName calls the underlying ReshapeTensorWithShapeName.
 func (x *Graph) ReshapeTensorWithShapeName(tensor *raw.MPSGraphTensor, shape unsafe.Pointer, name string) *GraphTensor {
 	_r := x.inner.ReshapeTensorWithShapeName(tensor, shape, foundation.NSStringStringWithUTF8String(name))
@@ -2766,6 +3426,8 @@ func (x *Graph) ReshapeTensorWithShapeName(tensor *raw.MPSGraphTensor, shape uns
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reshape operation and returns the result tensor. This operation reshapes the input tensor to the target shape. The shape tensor must be compatible with the input tensor shape, specifically the volume of the input tensor has to match the volume defined by the shape tensor. The shape tensor is allowed to contain dynamic dimensions (-1) when the result type can be inferred unambiguously. - Parameters: - tensor: The tensor to be reshaped. - shapeTensor: A 1D tensor of type `MPSDataTypeInt32` or `MPSDataTypeInt64`, that contains the target shape values. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // ReshapeTensorWithShapeTensorName calls the underlying ReshapeTensorWithShapeTensorName.
 func (x *Graph) ReshapeTensorWithShapeTensorName(tensor *raw.MPSGraphTensor, shapeTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ReshapeTensorWithShapeTensorName(tensor, shapeTensor, foundation.NSStringStringWithUTF8String(name))
@@ -2775,6 +3437,8 @@ func (x *Graph) ReshapeTensorWithShapeTensorName(tensor *raw.MPSGraphTensor, sha
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a transpose operation and returns the result tensor. Transposes the dimensions `dimensionIndex` and `dimensionIndex2` of the input tensor. - Parameters: - tensor: The tensor to be transposed. - dimensionIndex: The first dimension index to be transposed. - dimensionIndex2: The second dimension index to be transposed. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // TransposeTensorDimensionWithDimensionName calls the underlying TransposeTensorDimensionWithDimensionName.
 func (x *Graph) TransposeTensorDimensionWithDimensionName(tensor *raw.MPSGraphTensor, dimensionIndex uint, dimensionIndex2 uint, name string) *GraphTensor {
 	_r := x.inner.TransposeTensorDimensionWithDimensionName(tensor, dimensionIndex, dimensionIndex2, foundation.NSStringStringWithUTF8String(name))
@@ -2784,6 +3448,8 @@ func (x *Graph) TransposeTensorDimensionWithDimensionName(tensor *raw.MPSGraphTe
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a permutation operation and returns the result tensor. Permutes the dimensions of the input tensor according to values in `permutation`. - Parameters: - tensor: The tensor to be permuted. - permutation: An array of numbers defining the permutation, must be of length `rank(tensor)` and define a valid permutation. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // TransposeTensorPermutationName calls the underlying TransposeTensorPermutationName.
 func (x *Graph) TransposeTensorPermutationName(tensor *raw.MPSGraphTensor, permutation *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
 	_r := x.inner.TransposeTensorPermutationName(tensor, permutation, foundation.NSStringStringWithUTF8String(name))
@@ -2793,6 +3459,8 @@ func (x *Graph) TransposeTensorPermutationName(tensor *raw.MPSGraphTensor, permu
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a slice operation and returns the result tensor. - Parameters: - tensor: The tensor to be sliced. - dimensionIndex: The dimension to slice. - start: The starting index of the slice, can be negative to count from the end of the tensor dimension. - length: The length of the slice. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // SliceTensorDimensionStartLengthName calls the underlying SliceTensorDimensionStartLengthName.
 func (x *Graph) SliceTensorDimensionStartLengthName(tensor *raw.MPSGraphTensor, dimensionIndex uint, start int, length int, name string) *GraphTensor {
 	_r := x.inner.SliceTensorDimensionStartLengthName(tensor, dimensionIndex, start, length, foundation.NSStringStringWithUTF8String(name))
@@ -2802,6 +3470,8 @@ func (x *Graph) SliceTensorDimensionStartLengthName(tensor *raw.MPSGraphTensor, 
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a strided-slice operation and returns the result tensor. Slices a tensor starting from `starts`, stopping short before `ends` stepping `strides` paces between each value. Semantics based on [TensorFlow Strided Slice Op](https://www.tensorflow.org/api_docs/python/tf/strided_slice). - Parameters: - tensor: The tensor to be sliced. - starts: An array of numbers that specify the starting points for each dimension. - ends: An array of numbers that specify the ending points for each dimension. - strides: An array of numbers that specify the strides for each dimension. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // SliceTensorStartsEndsStridesName calls the underlying SliceTensorStartsEndsStridesName.
 func (x *Graph) SliceTensorStartsEndsStridesName(tensor *raw.MPSGraphTensor, starts *foundation.NSArray[*foundation.NSNumber], ends *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
 	_r := x.inner.SliceTensorStartsEndsStridesName(tensor, starts, ends, strides, foundation.NSStringStringWithUTF8String(name))
@@ -2811,6 +3481,8 @@ func (x *Graph) SliceTensorStartsEndsStridesName(tensor *raw.MPSGraphTensor, sta
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a strided-slice operation and returns the result tensor. Slices a tensor starting from `starts`, stopping short before `ends` stepping `strides` paces between each value. Semantics based on [TensorFlow Strided Slice Op](https://www.tensorflow.org/api_docs/python/tf/strided_slice). - Parameters: - tensor: The Tensor to be sliced. - starts: An array of numbers that specify the starting points for each dimension. - ends: An array of numbers that specify the ending points for each dimension. - strides: An array of numbers that specify the strides for each dimension. - startMask: A bitmask that indicates dimensions whose `starts` values the operation should ignore. - endMask: A bitmask that indicates dimensions whose `ends` values the operation should ignore. - squeezeMask: A bitmask that indicates dimensions the operation will squeeze out from the result. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // SliceTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName calls the underlying SliceTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName.
 func (x *Graph) SliceTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(tensor *raw.MPSGraphTensor, starts *foundation.NSArray[*foundation.NSNumber], ends *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
 	_r := x.inner.SliceTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(tensor, starts, ends, strides, startMask, endMask, squeezeMask, foundation.NSStringStringWithUTF8String(name))
@@ -2820,6 +3492,8 @@ func (x *Graph) SliceTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(tens
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a strided-slice operation and returns the result tensor. Slices a tensor starting from `startTensor`, stopping short before `endTensor` stepping `strideTensor` paces between each value. Semantics based on [TensorFlow Strided Slice Op](https://www.tensorflow.org/api_docs/python/tf/strided_slice). - Parameters: - tensor: The Tensor to be sliced. - startTensor: The tensor that specifies the starting points for each dimension. - endTensor: The tensor that specifies the ending points for each dimension. - strideTensor: The tensor that specifies the strides for each dimension. - startMask: A bitmask that indicates dimensions whose `starts` values the operation should ignore. - endMask: A bitmask that indicates dimensions whose `ends` values the operation should ignore. - squeezeMask: A bitmask that indicates dimensions the operation will squeeze out from the result. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // SliceTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName calls the underlying SliceTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName.
 func (x *Graph) SliceTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName(tensor *raw.MPSGraphTensor, startTensor *raw.MPSGraphTensor, endTensor *raw.MPSGraphTensor, strideTensor *raw.MPSGraphTensor, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
 	_r := x.inner.SliceTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName(tensor, startTensor, endTensor, strideTensor, startMask, endMask, squeezeMask, foundation.NSStringStringWithUTF8String(name))
@@ -2829,6 +3503,8 @@ func (x *Graph) SliceTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSquee
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a slice operation and returns the result tensor. Slices a tensor starting from `startTensor`, stopping short before `startTensor + endTensor` stepping a single pace between each value. Semantics based on [TensorFlow Strided Slice Op](https://www.tensorflow.org/api_docs/python/tf/strided_slice). - Parameters: - tensor: The Tensor to be sliced. - startTensor: The tensor that specifies the starting points for each dimension. - sizeTensor: The tensor that specifies the size of the result for each dimension. - squeezeMask: A bitmask that indicates dimensions the operation will squeeze out from the result. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // SliceTensorStartTensorSizeTensorSqueezeMaskName calls the underlying SliceTensorStartTensorSizeTensorSqueezeMaskName.
 func (x *Graph) SliceTensorStartTensorSizeTensorSqueezeMaskName(tensor *raw.MPSGraphTensor, startTensor *raw.MPSGraphTensor, sizeTensor *raw.MPSGraphTensor, squeezeMask uint32, name string) *GraphTensor {
 	_r := x.inner.SliceTensorStartTensorSizeTensorSqueezeMaskName(tensor, startTensor, sizeTensor, squeezeMask, foundation.NSStringStringWithUTF8String(name))
@@ -2838,6 +3514,8 @@ func (x *Graph) SliceTensorStartTensorSizeTensorSqueezeMaskName(tensor *raw.MPSG
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a strided-slice gradient operation and returns the result tensor. - Parameters: - inputGradientTensor: The input gradient. - fwdInShapeTensor: The shape of the forward pass input, that is the shape of the gradient output. - starts: An array of numbers that specify the starting points for each dimension. - ends: An array of numbers that specify the ending points for each dimension. - strides: An array of numbers that specify the strides for each dimension. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // SliceGradientTensorFwdInShapeTensorStartsEndsStridesName calls the underlying SliceGradientTensorFwdInShapeTensorStartsEndsStridesName.
 func (x *Graph) SliceGradientTensorFwdInShapeTensorStartsEndsStridesName(inputGradientTensor *raw.MPSGraphTensor, fwdInShapeTensor *raw.MPSGraphTensor, starts *foundation.NSArray[*foundation.NSNumber], ends *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
 	_r := x.inner.SliceGradientTensorFwdInShapeTensorStartsEndsStridesName(inputGradientTensor, fwdInShapeTensor, starts, ends, strides, foundation.NSStringStringWithUTF8String(name))
@@ -2847,6 +3525,8 @@ func (x *Graph) SliceGradientTensorFwdInShapeTensorStartsEndsStridesName(inputGr
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a strided-slice gradient operation and returns the result tensor. - Parameters: - inputGradientTensor: The input gradient. - fwdInShapeTensor: The shape of the forward pass input, that is the shape of the gradient output. - startTensor: The tensor that specifies the starting points for each dimension. - endTensor: The tensor that specifies the ending points for each dimension. - strideTensor: The tensor that specifies the strides for each dimension. - startMask: A bitmask that indicates dimensions whose `starts` values the operation should ignore. - endMask: A bitmask that indicates dimensions whose `ends` values the operation should ignore. - squeezeMask: A bitmask that indicates dimensions the operation will squeeze out from the result. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // SliceGradientTensorFwdInShapeTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName calls the underlying SliceGradientTensorFwdInShapeTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName.
 func (x *Graph) SliceGradientTensorFwdInShapeTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName(inputGradientTensor *raw.MPSGraphTensor, fwdInShapeTensor *raw.MPSGraphTensor, startTensor *raw.MPSGraphTensor, endTensor *raw.MPSGraphTensor, strideTensor *raw.MPSGraphTensor, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
 	_r := x.inner.SliceGradientTensorFwdInShapeTensorStartTensorEndTensorStrideTensorStartMaskEndMaskSqueezeMaskName(inputGradientTensor, fwdInShapeTensor, startTensor, endTensor, strideTensor, startMask, endMask, squeezeMask, foundation.NSStringStringWithUTF8String(name))
@@ -2856,6 +3536,8 @@ func (x *Graph) SliceGradientTensorFwdInShapeTensorStartTensorEndTensorStrideTen
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a slice gradient operation and returns the result tensor. - Parameters: - inputGradientTensor: The input gradient. - fwdInShapeTensor: The shape of the forward pass input, that is the shape of the gradient output. - startTensor: The tensor that specifies the starting points for each dimension. - sizeTensor: The tensor that specifies the size of the forward result for each dimension. - squeezeMask: A bitmask that indicates dimensions the operation will squeeze out from the result. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // SliceGradientTensorFwdInShapeTensorStartTensorSizeTensorSqueezeMaskName calls the underlying SliceGradientTensorFwdInShapeTensorStartTensorSizeTensorSqueezeMaskName.
 func (x *Graph) SliceGradientTensorFwdInShapeTensorStartTensorSizeTensorSqueezeMaskName(inputGradientTensor *raw.MPSGraphTensor, fwdInShapeTensor *raw.MPSGraphTensor, startTensor *raw.MPSGraphTensor, sizeTensor *raw.MPSGraphTensor, squeezeMask uint32, name string) *GraphTensor {
 	_r := x.inner.SliceGradientTensorFwdInShapeTensorStartTensorSizeTensorSqueezeMaskName(inputGradientTensor, fwdInShapeTensor, startTensor, sizeTensor, squeezeMask, foundation.NSStringStringWithUTF8String(name))
@@ -2865,6 +3547,8 @@ func (x *Graph) SliceGradientTensorFwdInShapeTensorStartTensorSizeTensorSqueezeM
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a strided-slice gradient operation and returns the result tensor. - Parameters: - inputGradientTensor: The input gradient. - fwdInShapeTensor: The shape of the forward pass input, that is the shape of the gradient output. - starts: An array of numbers that specify the starting points for each dimension. - ends: An array of numbers that specify the ending points for each dimension. - strides: An array of numbers that specify the strides for each dimension. - startMask: A bitmask that indicates dimensions whose `starts` values the operation should ignore. - endMask: A bitmask that indicates dimensions whose `ends` values the operation should ignore. - squeezeMask: A bitmask that indicates dimensions the operation will squeeze out from the result. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // SliceGradientTensorFwdInShapeTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName calls the underlying SliceGradientTensorFwdInShapeTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName.
 func (x *Graph) SliceGradientTensorFwdInShapeTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(inputGradientTensor *raw.MPSGraphTensor, fwdInShapeTensor *raw.MPSGraphTensor, starts *foundation.NSArray[*foundation.NSNumber], ends *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
 	_r := x.inner.SliceGradientTensorFwdInShapeTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(inputGradientTensor, fwdInShapeTensor, starts, ends, strides, startMask, endMask, squeezeMask, foundation.NSStringStringWithUTF8String(name))
@@ -2874,6 +3558,8 @@ func (x *Graph) SliceGradientTensorFwdInShapeTensorStartsEndsStridesStartMaskEnd
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a strided-slice update operation and returns the result tensor. - Parameters: - dataTensor: The large tensor that will receive the update. - updateTensor: The tensor with the new values that will replace values in the dataTensor. - startsTensor: A Tensor that contains an array of numbers that specify the starting points for each dimension. - endsTensor: A Tensor that contains an array of numbers that specify the ending points for each dimension. - stridesTensor: A Tensor that contains an array of numbers that specify the strides for each dimension. - startMask: A bitmask that indicates dimensions whose `starts` values the operation should ignore. - endMask: A bitmask that indicates dimensions whose `ends` values the operation should ignore. - squeezeMask: A bitmask that indicates dimensions the operation will squeeze out from the result. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorStartMaskEndMaskSqueezeMaskName calls the underlying SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorStartMaskEndMaskSqueezeMaskName.
 func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorStartMaskEndMaskSqueezeMaskName(dataTensor *raw.MPSGraphTensor, updateTensor *raw.MPSGraphTensor, startsTensor *raw.MPSGraphTensor, endsTensor *raw.MPSGraphTensor, stridesTensor *raw.MPSGraphTensor, startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
 	_r := x.inner.SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorStartMaskEndMaskSqueezeMaskName(dataTensor, updateTensor, startsTensor, endsTensor, stridesTensor, startMask, endMask, squeezeMask, foundation.NSStringStringWithUTF8String(name))
@@ -2883,6 +3569,8 @@ func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTe
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a strided-slice update operation and returns the result tensor. - Parameters: - dataTensor: The large tensor that will receive the update. - updateTensor: The tensor with the new values that will replace values in the dataTensor. - starts: An array of numbers that specify the starting points for each dimension. - ends: An array of numbers that specify the ending points for each dimension. - strides: An array of numbers that specify the strides for each dimension. - startMask: A bitmask that indicates dimensions whose `starts` values the operation should ignore. - endMask: A bitmask that indicates dimensions whose `ends` values the operation should ignore. - squeezeMask: A bitmask that indicates dimensions the operation will squeeze out from the result. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // SliceUpdateDataTensorUpdateTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName calls the underlying SliceUpdateDataTensorUpdateTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName.
 func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(dataTensor *raw.MPSGraphTensor, updateTensor *raw.MPSGraphTensor, starts *foundation.NSArray[*foundation.NSNumber], ends *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], startMask uint32, endMask uint32, squeezeMask uint32, name string) *GraphTensor {
 	_r := x.inner.SliceUpdateDataTensorUpdateTensorStartsEndsStridesStartMaskEndMaskSqueezeMaskName(dataTensor, updateTensor, starts, ends, strides, startMask, endMask, squeezeMask, foundation.NSStringStringWithUTF8String(name))
@@ -2892,6 +3580,8 @@ func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsEndsStridesStartMaskEndMa
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a strided-slice update operation with zero masks and returns the result tensor. - Parameters: - dataTensor: The large tensor that will receive the update. - updateTensor: The tensor with the new values that will replace values in the dataTensor. - startsTensor: A Tensor that contains an array of numbers that specify the starting points for each dimension. - endsTensor: A Tensor that contains an array of numbers that specify the ending points for each dimension. - stridesTensor: A Tensor that contains an array of numbers that specify the strides for each dimension. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorName calls the underlying SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorName.
 func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorName(dataTensor *raw.MPSGraphTensor, updateTensor *raw.MPSGraphTensor, startsTensor *raw.MPSGraphTensor, endsTensor *raw.MPSGraphTensor, stridesTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTensorName(dataTensor, updateTensor, startsTensor, endsTensor, stridesTensor, foundation.NSStringStringWithUTF8String(name))
@@ -2901,6 +3591,8 @@ func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsTensorEndsTensorStridesTe
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a strided-slice update operation with zero masks and returns the result tensor. - Parameters: - dataTensor: The large tensor that will receive the update. - updateTensor: The tensor with the new values that will replace values in the dataTensor. - starts: An array of numbers that specify the starting points for each dimension. - ends: An array of numbers that specify the ending points for each dimension. - strides: An array of numbers that specify the strides for each dimension. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // SliceUpdateDataTensorUpdateTensorStartsEndsStridesName calls the underlying SliceUpdateDataTensorUpdateTensorStartsEndsStridesName.
 func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsEndsStridesName(dataTensor *raw.MPSGraphTensor, updateTensor *raw.MPSGraphTensor, starts *foundation.NSArray[*foundation.NSNumber], ends *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
 	_r := x.inner.SliceUpdateDataTensorUpdateTensorStartsEndsStridesName(dataTensor, updateTensor, starts, ends, strides, foundation.NSStringStringWithUTF8String(name))
@@ -2910,6 +3602,8 @@ func (x *Graph) SliceUpdateDataTensorUpdateTensorStartsEndsStridesName(dataTenso
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a concatenation operation and returns the result tensor. Concatenates two input tensors along the specified dimension. Tensors must be broadcast compatible along all other dimensions, and have the same datatype. - Parameters: - tensor: The first tensor to concatenate. - tensor2: The second tensor to concatenate. - dimensionIndex: The dimension to concatenate across, must be in range: `-rank <= dimension < rank`. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // ConcatTensorWithTensorDimensionName calls the underlying ConcatTensorWithTensorDimensionName.
 func (x *Graph) ConcatTensorWithTensorDimensionName(tensor *raw.MPSGraphTensor, tensor2 *raw.MPSGraphTensor, dimensionIndex int, name string) *GraphTensor {
 	_r := x.inner.ConcatTensorWithTensorDimensionName(tensor, tensor2, dimensionIndex, foundation.NSStringStringWithUTF8String(name))
@@ -2919,6 +3613,8 @@ func (x *Graph) ConcatTensorWithTensorDimensionName(tensor *raw.MPSGraphTensor, 
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a concatenation operation and returns the result tensor. Concatenates all input tensors along the specified dimension. All inputs must be broadcast compatible along all other dimensions, and have the same datatype. - Parameters: - tensors: The tensors to concatenate. - dimensionIndex: The dimension to concatenate across, must be in range: `-rank <= dimension < rank`. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // ConcatTensorsDimensionName calls the underlying ConcatTensorsDimensionName.
 func (x *Graph) ConcatTensorsDimensionName(tensors *foundation.NSArray[*raw.MPSGraphTensor], dimensionIndex int, name string) *GraphTensor {
 	_r := x.inner.ConcatTensorsDimensionName(tensors, dimensionIndex, foundation.NSStringStringWithUTF8String(name))
@@ -2928,6 +3624,8 @@ func (x *Graph) ConcatTensorsDimensionName(tensors *foundation.NSArray[*raw.MPSG
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a concatenation operation and returns the result tensor. Concatenates all input tensors along specified dimension. All inputs must be broadcast compatible along all other dimensions, and have the same type. When interleave is specified, all tensors will be interleaved. To interleave, make sure to provide broadcast compatible inputs along the specified dimension as well. For example: ```md operand0 = [1, 2, 3] operand1 = [4, 5, 6] concat([operand0, operand1], axis = 0, interleave = YES) = [1, 4, 2, 5, 3, 6] ``` - Parameters: - tensors: The tensors to concatenate. - dimensionIndex: The dimension to concatenate across, must be in range: `-rank <= dimension < rank`. - interleave: A boolean value that specifies whether the operation interleaves input tensors. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // ConcatTensorsDimensionInterleaveName calls the underlying ConcatTensorsDimensionInterleaveName.
 func (x *Graph) ConcatTensorsDimensionInterleaveName(tensors *foundation.NSArray[*raw.MPSGraphTensor], dimensionIndex int, interleave bool, name string) *GraphTensor {
 	_r := x.inner.ConcatTensorsDimensionInterleaveName(tensors, dimensionIndex, interleave, foundation.NSStringStringWithUTF8String(name))
@@ -2937,6 +3635,8 @@ func (x *Graph) ConcatTensorsDimensionInterleaveName(tensors *foundation.NSArray
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a tile operation and returns the result tensor. Creates a tensor which contains multiple copies of the input tensor along each dimension of the tensor. - Parameters: - tensor: The input tensor - multiplier: An array of numbers that specifies how many copies per dimension MPSGraph produces. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // TileTensorWithMultiplierName calls the underlying TileTensorWithMultiplierName.
 func (x *Graph) TileTensorWithMultiplierName(tensor *raw.MPSGraphTensor, multiplier unsafe.Pointer, name string) *GraphTensor {
 	_r := x.inner.TileTensorWithMultiplierName(tensor, multiplier, foundation.NSStringStringWithUTF8String(name))
@@ -2946,6 +3646,8 @@ func (x *Graph) TileTensorWithMultiplierName(tensor *raw.MPSGraphTensor, multipl
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a tile gradient operation and returns the result tensor. - Parameters: - incomingGradientTensor: The input gradient tensor. - sourceTensor: The input tensor of the forward pass. - multiplier: An array of numbers that specifies how many copies per dimension MPSGraph produced in the forward pass. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // TileGradientWithIncomingGradientTensorSourceTensorWithMultiplierName calls the underlying TileGradientWithIncomingGradientTensorSourceTensorWithMultiplierName.
 func (x *Graph) TileGradientWithIncomingGradientTensorSourceTensorWithMultiplierName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, multiplier unsafe.Pointer, name string) *GraphTensor {
 	_r := x.inner.TileGradientWithIncomingGradientTensorSourceTensorWithMultiplierName(incomingGradientTensor, sourceTensor, multiplier, foundation.NSStringStringWithUTF8String(name))
@@ -2955,6 +3657,8 @@ func (x *Graph) TileGradientWithIncomingGradientTensorSourceTensorWithMultiplier
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a padding operation and returns the result tensor. - Parameters: - tensor: The input tensor. - paddingMode: The parameter that defines the padding mode. - leftPadding: The parameter that defines how much padding the operation applies to the input tensor before each dimension - must be of size `rank(tensor)`. - rightPadding: The parameter that defines how much padding the operation applies to the input tensor after each dimension - must be of size `rank(tensor)`. - constantValue: The constant value the operation uses when `paddingMode = MPSGraphPaddingModeConstant`. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // PadTensorWithPaddingModeLeftPaddingRightPaddingConstantValueName calls the underlying PadTensorWithPaddingModeLeftPaddingRightPaddingConstantValueName.
 func (x *Graph) PadTensorWithPaddingModeLeftPaddingRightPaddingConstantValueName(tensor *raw.MPSGraphTensor, paddingMode MPSGraphPaddingMode, leftPadding unsafe.Pointer, rightPadding unsafe.Pointer, constantValue float64, name string) *GraphTensor {
 	_r := x.inner.PadTensorWithPaddingModeLeftPaddingRightPaddingConstantValueName(tensor, raw.MPSGraphPaddingMode(paddingMode), leftPadding, rightPadding, constantValue, foundation.NSStringStringWithUTF8String(name))
@@ -2964,6 +3668,8 @@ func (x *Graph) PadTensorWithPaddingModeLeftPaddingRightPaddingConstantValueName
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a padding gradient operation and returns the result tensor. - Parameters: - incomingGradientTensor: The input gradient tensor. - sourceTensor: The input tensor of the forward pass. - paddingMode: The parameter that defines the padding mode. - leftPadding: The parameter that defines how much padding the operation applies to the input tensor before each dimension - must be of size `rank(tensor)`. - rightPadding: The parameter that defines how much padding the operation applies to the input tensor after each dimension - must be of size `rank(tensor)`. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // PadGradientWithIncomingGradientTensorSourceTensorPaddingModeLeftPaddingRightPaddingName calls the underlying PadGradientWithIncomingGradientTensorSourceTensorPaddingModeLeftPaddingRightPaddingName.
 func (x *Graph) PadGradientWithIncomingGradientTensorSourceTensorPaddingModeLeftPaddingRightPaddingName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, paddingMode MPSGraphPaddingMode, leftPadding unsafe.Pointer, rightPadding unsafe.Pointer, name string) *GraphTensor {
 	_r := x.inner.PadGradientWithIncomingGradientTensorSourceTensorPaddingModeLeftPaddingRightPaddingName(incomingGradientTensor, sourceTensor, raw.MPSGraphPaddingMode(paddingMode), leftPadding, rightPadding, foundation.NSStringStringWithUTF8String(name))
@@ -2973,6 +3679,8 @@ func (x *Graph) PadGradientWithIncomingGradientTensorSourceTensorPaddingModeLeft
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a space-to-depth2D operation and returns the result tensor. This operation outputs a copy of the `input` tensor, where values from the `widthAxis` and `heightAxis` dimensions are moved in spatial blocks of size `blockSize` to the `depthAxis` dimension. Use the `usePixelShuffleOrder` parameter to control how the data within spatial blocks is ordered in the `depthAxis` dimension: with `usePixelShuffleOrder=YES` MPSGraph stores the values of the spatial blocks  contiguosly within the `depthAxis` dimension, whereas otherwise they are stored interleaved with existing values in the `depthAxis` dimension. This operation is the inverse of `MPSGraph/depthToSpace2DTensor:widthAxis:heightAxis:depthAxis:blockSize:usePixelShuffleOrder:name:`. - Parameters: - tensor: The input tensor. - widthAxis: The axis that defines the fastest running dimension within the block. - heightAxis: The axis that defines the 2nd fastest running dimension within the block. - depthAxis: The axis that defines the destination dimension, where to copy the blocks. - blockSize: The size of the square spatial sub-block. - usePixelShuffleOrder: A parameter that controls the layout of the sub-blocks within the depth dimension. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // SpaceToDepth2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName calls the underlying SpaceToDepth2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName.
 func (x *Graph) SpaceToDepth2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, widthAxis uint, heightAxis uint, depthAxis uint, blockSize uint, usePixelShuffleOrder bool, name string) *GraphTensor {
 	_r := x.inner.SpaceToDepth2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName(tensor, widthAxis, heightAxis, depthAxis, blockSize, usePixelShuffleOrder, foundation.NSStringStringWithUTF8String(name))
@@ -2982,6 +3690,8 @@ func (x *Graph) SpaceToDepth2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixe
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a space-to-depth2D operation and returns the result tensor. This operation outputs a copy of the `input` tensor, where values from the `widthAxisTensor` and `heightAxisTensor` dimensions are moved in spatial blocks of size `blockSize` to the `depthAxisTensor` dimension. Use the `usePixelShuffleOrder` parameter to control how the data within spatial blocks is ordered in the `depthAxisTensor` dimension: with `usePixelShuffleOrder=YES` MPSGraph stores the values of the spatial blocks  contiguosly within the `depthAxisTensor` dimension, whereas otherwise they are stored interleaved with existing values in the `depthAxisTensor` dimension. This operation is the inverse of “MPSGraph/depthToSpace2DTensor:widthAxisTensor:heightAxisTensor:depthAxisTensor:blockSize:usePixelShuffleOrder:name:“. - Parameters: - tensor: The input tensor. - widthAxisTensor: A scalar tensor that contains the axis that defines the fastest running dimension within the block. - heightAxisTensor: A scalar tensor that contains the axis that defines the 2nd fastest running dimension within the block. - depthAxisTensor: A scalar tensor that contains the axis that defines the destination dimension, where to copy the blocks. - blockSize: The size of the square spatial sub-block. - usePixelShuffleOrder: A parameter that controls the layout of the sub-blocks within the depth dimension. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // SpaceToDepth2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName calls the underlying SpaceToDepth2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName.
 func (x *Graph) SpaceToDepth2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, widthAxisTensor *raw.MPSGraphTensor, heightAxisTensor *raw.MPSGraphTensor, depthAxisTensor *raw.MPSGraphTensor, blockSize uint, usePixelShuffleOrder bool, name string) *GraphTensor {
 	_r := x.inner.SpaceToDepth2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName(tensor, widthAxisTensor, heightAxisTensor, depthAxisTensor, blockSize, usePixelShuffleOrder, foundation.NSStringStringWithUTF8String(name))
@@ -2991,6 +3701,8 @@ func (x *Graph) SpaceToDepth2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTens
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a depth-to-space2D operation and returns the result tensor. This operation outputs a copy of the input tensor, where values from the `depthAxis` dimension are moved in spatial blocks of size `blockSize` to the `heightAxis` and `widthAxis` dimensions.  Use the `usePixelShuffleOrder` parameter to control how the data within spatial blocks is ordered in the `depthAxis` dimension: with `usePixelShuffleOrder = YES` MPSGraph stores the values of the spatial block contiguosly within the `depthAxis` dimension, whereas without it they are stored interleaved with existing values in the `depthAxisTensor` dimension. This operation is the inverse of “MPSGraph/spaceToDepth2DTensor:widthAxis:heightAxis:depthAxis:blockSize:usePixelShuffleOrder:name:“. - Parameters: - tensor: The input tensor. - widthAxis: The axis that defines the fastest running dimension within the block. - heightAxis: The axis that defines the 2nd fastest running dimension within the block. - depthAxis: The axis that defines the destination dimension, where to copy the blocks. - blockSize: The size of the square spatial sub-block. - usePixelShuffleOrder: A parameter that controls the layout of the sub-blocks within the depth dimension. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // DepthToSpace2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName calls the underlying DepthToSpace2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName.
 func (x *Graph) DepthToSpace2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, widthAxis uint, heightAxis uint, depthAxis uint, blockSize uint, usePixelShuffleOrder bool, name string) *GraphTensor {
 	_r := x.inner.DepthToSpace2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName(tensor, widthAxis, heightAxis, depthAxis, blockSize, usePixelShuffleOrder, foundation.NSStringStringWithUTF8String(name))
@@ -3000,6 +3712,8 @@ func (x *Graph) DepthToSpace2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixe
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a depth-to-space2D operation and returns the result tensor. This operation outputs a copy of the input tensor, where values from the `depthAxisTensor` dimension are moved in spatial blocks of size `blockSize` to the `heightAxisTensor` and `widthAxisTensor` dimensions.  Use the `usePixelShuffleOrder` parameter to control how the data within spatial blocks is ordered in the `depthAxisTensor` dimension: with `usePixelShuffleOrder = YES` MPSGraph stores the values of the spatial block contiguosly within the `depthAxisTensor` dimension, whereas without it they are stored interleaved with existing values in the `depthAxisTensor` dimension. This operation is the inverse of “MPSGraph/spaceToDepth2DTensor:widthAxisTensor:heightAxisTensor:depthAxisTensor:blockSize:usePixelShuffleOrder:name:“. - Parameters: - tensor: The input tensor. - widthAxisTensor: A scalar tensor that contains the axis that defines the fastest running dimension within the block. - heightAxisTensor: A scalar tensor that contains the axis that defines the 2nd fastest running dimension within the block. - depthAxisTensor: A scalar tensor that contains the axis that defines the destination dimension, where to copy the blocks. - blockSize: The size of the square spatial sub-block. - usePixelShuffleOrder: A parameter that controls the layout of the sub-blocks within the depth dimension. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // DepthToSpace2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName calls the underlying DepthToSpace2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName.
 func (x *Graph) DepthToSpace2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, widthAxisTensor *raw.MPSGraphTensor, heightAxisTensor *raw.MPSGraphTensor, depthAxisTensor *raw.MPSGraphTensor, blockSize uint, usePixelShuffleOrder bool, name string) *GraphTensor {
 	_r := x.inner.DepthToSpace2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName(tensor, widthAxisTensor, heightAxisTensor, depthAxisTensor, blockSize, usePixelShuffleOrder, foundation.NSStringStringWithUTF8String(name))
@@ -3009,6 +3723,8 @@ func (x *Graph) DepthToSpace2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTens
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a space-to-batch operation and returns the result tensor. This operation outputs a copy of the `input` tensor, where values from the `spatialAxes` (for `usePixelShuffleOrder=YES` 1,2 or 3 axes supported, otherwise limited only by `MPSNDArray` rank limitations) dimensions are moved in spatial blocks with rectangular size defined by `blockDimensions` to the `batchAxis` dimension. Use the `usePixelShuffleOrder` parameter  to control how the data within spatial blocks is ordered in the `batchAxis` dimension: with `usePixelShuffleOrder=YES` MPSGraph stores the values of the spatial blocks contiguosly within the `batchAxis` dimension, whereas otherwise they are stored interleaved with existing values in the `batchAxis` dimension. Note: This operation is the inverse of “MPSGraph/batchToSpaceTensor:spatialAxes:batchAxis:blockDimensions:usePixelShuffleOrder:name:“. Note: This operation is a generalization of “MPSGraph/spaceToDepth2DTensor:widthAxis:heightAxis:depthAxis:blockSize:usePixelShuffleOrder:name:“. - Parameters: - tensor: The input tensor. - spatialAxes: The axes that define the dimensions containing the spatial blocks. - batchAxis: The axis that defines the destination dimension, where to copy the blocks. - blockDimensions: An array of numbers that defines the size of the rectangular spatial sub-block. - usePixelShuffleOrder: A parameter that controls layout of the sub-blocks within the batch dimension. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // SpaceToBatchTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName calls the underlying SpaceToBatchTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName.
 func (x *Graph) SpaceToBatchTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, spatialAxes *foundation.NSArray[*foundation.NSNumber], batchAxis int, blockDimensions *foundation.NSArray[*foundation.NSNumber], usePixelShuffleOrder bool, name string) *GraphTensor {
 	_r := x.inner.SpaceToBatchTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName(tensor, spatialAxes, batchAxis, blockDimensions, usePixelShuffleOrder, foundation.NSStringStringWithUTF8String(name))
@@ -3018,6 +3734,8 @@ func (x *Graph) SpaceToBatchTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShu
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a space-to-batch operation and returns the result tensor. This operation outputs a copy of the `input` tensor, where values from the `spatialAxesTensor` (for `usePixelShuffleOrder=YES` 1,2 or 3 axes supported, otherwise limited only by `MPSNDArray` rank limitations) dimensions are moved in spatial blocks with rectangular size defined by `blockDimensionsTensor` to the `batchAxisTensor` dimension. Use the `usePixelShuffleOrder` parameter  to control how the data within spatial blocks is ordered in the `batchAxisTensor` dimension: with `usePixelShuffleOrder=YES` MPSGraph stores the values of the spatial blocks contiguosly within the `batchAxisTensor` dimension, whereas otherwise they are stored interleaved with existing values in the `batchAxisTensor` dimension. Note: This operation is the inverse of “MPSGraph/batchToSpaceTensor:spatialAxesTensor:batchAxisTensor:blockDimensionsTensor:usePixelShuffleOrder:name:“. Note: This operation is a generalization of “MPSGraph/spaceToDepth2DTensor:widthAxisTensor:heightAxisTensor:depthAxisTensor:blockSize:usePixelShuffleOrder:name:“. - Parameters: - tensor: The input tensor. - spatialAxesTensor: A tensor that contains the axes that define the dimensions containing the spatial blocks. - batchAxisTensor: A tensor that contains the axis that defines the destination dimension, where to copy the blocks. - blockDimensionsTensor: A tensor that defines the size of the rectangular spatial sub-block. - usePixelShuffleOrder: A parameter that controls layout of the sub-blocks within the batch dimension. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // SpaceToBatchTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName calls the underlying SpaceToBatchTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName.
 func (x *Graph) SpaceToBatchTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, spatialAxesTensor *raw.MPSGraphTensor, batchAxisTensor *raw.MPSGraphTensor, blockDimensionsTensor *raw.MPSGraphTensor, usePixelShuffleOrder bool, name string) *GraphTensor {
 	_r := x.inner.SpaceToBatchTensorSpatialAxesTensorBatchAxisTensorBlockDimensionsTensorUsePixelShuffleOrderName(tensor, spatialAxesTensor, batchAxisTensor, blockDimensionsTensor, usePixelShuffleOrder, foundation.NSStringStringWithUTF8String(name))
@@ -3027,6 +3745,8 @@ func (x *Graph) SpaceToBatchTensorSpatialAxesTensorBatchAxisTensorBlockDimension
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a batch-to-space operation and returns the result tensor. This operation outputs a copy of the input tensor, where values from the `batchAxis` dimension are moved in spatial blocks of size `blockDimensions` to the `spatialAxes` dimensions (for `usePixelShuffleOrder=YES` 1,2 or 3 axes supported, otherwise limited only by `MPSNDArray` rank limitations).  Use the `usePixelShuffleOrder` parameter to control how the data within spatial blocks is ordered in the `batchAxis` dimension: with `usePixelShuffleOrder = YES` MPSGraph stores the values of the spatial block contiguosly within the `batchAxis` dimension whereas without it they are stored interleaved with existing values in the `batchAxis` dimension. Note: This operation is the inverse of “MPSGraph/spaceToBatchTensor:spatialAxes:batchAxis:blockDimensions:usePixelShuffleOrder:name:“. Note: This operation is a generalization of “MPSGraph/depthToSpace2DTensor:widthAxis:heightAxis:depthAxis:blockSize:usePixelShuffleOrder:name:“. - Parameters: - tensor: The input tensor. - spatialAxes: The axes that define the dimensions containing the spatial blocks. - batchAxis: The axis that defines the destination dimension, where to copy the blocks. - blockDimensions: An array of numbers that defines the size of the rectangular spatial sub-block. - usePixelShuffleOrder: A parameter that controls layout of the sub-blocks within the batch dimension. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // BatchToSpaceTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName calls the underlying BatchToSpaceTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName.
 func (x *Graph) BatchToSpaceTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, spatialAxes *foundation.NSArray[*foundation.NSNumber], batchAxis int, blockDimensions *foundation.NSArray[*foundation.NSNumber], usePixelShuffleOrder bool, name string) *GraphTensor {
 	_r := x.inner.BatchToSpaceTensorSpatialAxesBatchAxisBlockDimensionsUsePixelShuffleOrderName(tensor, spatialAxes, batchAxis, blockDimensions, usePixelShuffleOrder, foundation.NSStringStringWithUTF8String(name))
@@ -3045,6 +3765,8 @@ func (x *Graph) BatchToSpaceTensorSpatialAxesTensorBatchAxisTensorBlockDimension
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reverse operation and returns the result tensor. Reverses a tensor on given axes. Semantics based on [TensorFlow reverse op](https://www.tensorflow.org/api_docs/python/tf/reverse). - Parameters: - tensor: The tensor to be reversed. - axesTensor: A tensor that specifies axes to be reversed (Axes must be unique and within normal axis range). - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // ReverseTensorAxesTensorName calls the underlying ReverseTensorAxesTensorName.
 func (x *Graph) ReverseTensorAxesTensorName(tensor *raw.MPSGraphTensor, axesTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ReverseTensorAxesTensorName(tensor, axesTensor, foundation.NSStringStringWithUTF8String(name))
@@ -3054,6 +3776,8 @@ func (x *Graph) ReverseTensorAxesTensorName(tensor *raw.MPSGraphTensor, axesTens
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reverse operation and returns the result tensor. Reverses a tensor on given axes. Semantics based on [TensorFlow reverse op](https://www.tensorflow.org/api_docs/python/tf/reverse). - Parameters: - tensor: The tensor to be reversed. - axes: A tensor that specifies axes to be reversed (Axes must be unique and within normal axis range). - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // ReverseTensorAxesName calls the underlying ReverseTensorAxesName.
 func (x *Graph) ReverseTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
 	_r := x.inner.ReverseTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
@@ -3072,6 +3796,8 @@ func (x *Graph) ReverseTensorName(tensor *raw.MPSGraphTensor, name string) *Grap
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a flatten2D operation and returns the result tensor. Flattens dimensions before `axis` to `result[0]` and dimensions starting from `axis` to `result[1]` and returns a rank-2 tensor as result. - Parameters: - tensor: The tensor to be flattened. - axis: The axis around which to flatten. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // Flatten2DTensorAxisName calls the underlying Flatten2DTensorAxisName.
 func (x *Graph) Flatten2DTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.Flatten2DTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -3081,6 +3807,8 @@ func (x *Graph) Flatten2DTensorAxisName(tensor *raw.MPSGraphTensor, axis int, na
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a flatten2D operation and returns the result tensor. Flattens dimensions before `axis` to `result[0]` and dimensions starting from `axis` to `result[1]` and returns a rank-2 tensor as result. - Parameters: - tensor: The tensor to be flattened. - axisTensor: A scalar tensor that contains the axis around which to flatten. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // Flatten2DTensorAxisTensorName calls the underlying Flatten2DTensorAxisTensorName.
 func (x *Graph) Flatten2DTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.Flatten2DTensorAxisTensorName(tensor, axisTensor, foundation.NSStringStringWithUTF8String(name))
@@ -3090,6 +3818,8 @@ func (x *Graph) Flatten2DTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTe
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a broadcast operation and returns the result tensor. Broadcasts values inside the tensor, starting from the trailing dimensions, to give it the correct shape. This is equivalent to the broadcasting for arithmetic operations when operands have different shapes. - Parameters: - tensor: The tensor to be broadcasted - shape: The shape of the result tensor. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // BroadcastTensorToShapeName calls the underlying BroadcastTensorToShapeName.
 func (x *Graph) BroadcastTensorToShapeName(tensor *raw.MPSGraphTensor, shape unsafe.Pointer, name string) *GraphTensor {
 	_r := x.inner.BroadcastTensorToShapeName(tensor, shape, foundation.NSStringStringWithUTF8String(name))
@@ -3099,6 +3829,8 @@ func (x *Graph) BroadcastTensorToShapeName(tensor *raw.MPSGraphTensor, shape uns
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a broadcast operation and returns the result tensor. Broadcasts values inside the tensor, starting from the trailing dimensions, to give it the correct shape. This is equivalent to the broadcasting for arithmetic operations when operands have different shapes. - Parameters: - tensor: The Tensor to be broadcasted. - shapeTensor: A rank-1 tensor of type `MPSDataTypeInt32` or `MPSDataTypeInt64` that defines the shape of the result tensor. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // BroadcastTensorToShapeTensorName calls the underlying BroadcastTensorToShapeTensorName.
 func (x *Graph) BroadcastTensorToShapeTensorName(tensor *raw.MPSGraphTensor, shapeTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.BroadcastTensorToShapeTensorName(tensor, shapeTensor, foundation.NSStringStringWithUTF8String(name))
@@ -3108,6 +3840,8 @@ func (x *Graph) BroadcastTensorToShapeTensorName(tensor *raw.MPSGraphTensor, sha
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a shape-of operation and returns the result tensor. Returns a rank-1 tensor of type `MPSDataTypeInt32` with the values of the static shape of the input tensor. - Parameters: - tensor: The input tensor. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // ShapeOfTensorName calls the underlying ShapeOfTensorName.
 func (x *Graph) ShapeOfTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.ShapeOfTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -3117,6 +3851,8 @@ func (x *Graph) ShapeOfTensorName(tensor *raw.MPSGraphTensor, name string) *Grap
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a cast operation and returns the result tensor. Returns the input tensor casted to the specied data type. - Parameters: - tensor: The input tensor. - type: The datatype to which MPSGraph casts the input. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // CastTensorToTypeName calls the underlying CastTensorToTypeName.
 func (x *Graph) CastTensorToTypeName(tensor *raw.MPSGraphTensor, type_ mpscore.MPSDataType, name string) *GraphTensor {
 	_r := x.inner.CastTensorToTypeName(tensor, type_, foundation.NSStringStringWithUTF8String(name))
@@ -3126,6 +3862,8 @@ func (x *Graph) CastTensorToTypeName(tensor *raw.MPSGraphTensor, type_ mpscore.M
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a reinterpret cast operation and returns the result tensor. Returns input tensor (with element type `tensor_type`) reinterpreted to element type passed in with the last dimension scaled by `sizeof(tensor_type) / sizeof(type)`. This operation is endianness agnostic and MPSGraph reinterprets the data with the endianness of the system. - Parameters: - tensor: The input tensor. - type: The element type of the returned tensor. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // ReinterpretCastTensorToTypeName calls the underlying ReinterpretCastTensorToTypeName.
 func (x *Graph) ReinterpretCastTensorToTypeName(tensor *raw.MPSGraphTensor, type_ mpscore.MPSDataType, name string) *GraphTensor {
 	_r := x.inner.ReinterpretCastTensorToTypeName(tensor, type_, foundation.NSStringStringWithUTF8String(name))
@@ -3135,6 +3873,8 @@ func (x *Graph) ReinterpretCastTensorToTypeName(tensor *raw.MPSGraphTensor, type
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a stack operation and returns the result tensor. Stacks all input tensors along `axis` into a result tensor of `rank + 1`. Tensors must be broadcast compatible along all dimensions except `axis`, and have the same type. - Parameters: - inputTensors: The input tensors. - axis: The dimension to stack tensors into result. Must be in range: `-rank + 1 <= dimension < rank + 1`. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // StackTensorsAxisName calls the underlying StackTensorsAxisName.
 func (x *Graph) StackTensorsAxisName(inputTensors *foundation.NSArray[*raw.MPSGraphTensor], axis int, name string) *GraphTensor {
 	_r := x.inner.StackTensorsAxisName(inputTensors, axis, foundation.NSStringStringWithUTF8String(name))
@@ -3144,21 +3884,29 @@ func (x *Graph) StackTensorsAxisName(inputTensors *foundation.NSArray[*raw.MPSGr
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a split operation and returns the result tensor. Splits the input tensor along `axis` into multiple result tensors of size determined by `splitSizes`. Requires that the sum of `splitSizes` is equal to the lenth of the input along `axis`. - Parameters: - tensor: The input tensor. - splitSizes: The lengths of the result tensors along the split axis. - axis: The dimension along which MPSGraph splits the input tensor. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // SplitTensorSplitSizesAxisName calls the underlying SplitTensorSplitSizesAxisName.
 func (x *Graph) SplitTensorSplitSizesAxisName(tensor *raw.MPSGraphTensor, splitSizes *foundation.NSArray[*foundation.NSNumber], axis int, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.SplitTensorSplitSizesAxisName(tensor, splitSizes, axis, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a split operation and returns the result tensor. Splits the input tensor along `axis` into multiple result tensors of size determined by `splitSizesTensor`. Requires that the sum of the elements of `splitSizesTensor` is equal to the lenth of the input along `axis`. - Parameters: - tensor: The input tensor - splitSizesTensor: The lengths of the result tensors along the split axis. - axis: The dimension along which MPSGraph splits the input tensor. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // SplitTensorSplitSizesTensorAxisName calls the underlying SplitTensorSplitSizesTensorAxisName.
 func (x *Graph) SplitTensorSplitSizesTensorAxisName(tensor *raw.MPSGraphTensor, splitSizesTensor *raw.MPSGraphTensor, axis int, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.SplitTensorSplitSizesTensorAxisName(tensor, splitSizesTensor, axis, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a split operation and returns the result tensor. Splits the input tensor along `axis` into `numsplits` result tensors of equal size. Requires that the lenth of the input along `axis` is divisible by `numSplits`. - Parameters: - tensor: The input tensor. - numSplits: The number of result tensors to split to. - axis: The dimension along which MPSGraph splits the input tensor. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // SplitTensorNumSplitsAxisName calls the underlying SplitTensorNumSplitsAxisName.
 func (x *Graph) SplitTensorNumSplitsAxisName(tensor *raw.MPSGraphTensor, numSplits uint, axis int, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.SplitTensorNumSplitsAxisName(tensor, numSplits, axis, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a squeeze operation and returns the result tensor. Squeezes the tensor, removing all dimensions with size 1. - Parameters: - tensor: The input tensor. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // SqueezeTensorName calls the underlying SqueezeTensorName.
 func (x *Graph) SqueezeTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.SqueezeTensorName(tensor, foundation.NSStringStringWithUTF8String(name))
@@ -3168,6 +3916,8 @@ func (x *Graph) SqueezeTensorName(tensor *raw.MPSGraphTensor, name string) *Grap
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a squeeze operation and returns the result tensor. Squeezes the tensor, removing a dimension with size 1 at the specified axis. The size of the input tensor must be 1 at the specified axis. - Parameters: - tensor: The input tensor. - axis: The axis to squeeze. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // SqueezeTensorAxisName calls the underlying SqueezeTensorAxisName.
 func (x *Graph) SqueezeTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.SqueezeTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -3177,6 +3927,8 @@ func (x *Graph) SqueezeTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a squeeze operation and returns the result tensor. Squeezes the tensor, removing dimensions with size 1 at specified axes. The size of the input tensor must be 1 at all specified axes. - Parameters: - tensor: The input tensor. - axes: The axes to squeeze. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // SqueezeTensorAxesName calls the underlying SqueezeTensorAxesName.
 func (x *Graph) SqueezeTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
 	_r := x.inner.SqueezeTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
@@ -3186,6 +3938,8 @@ func (x *Graph) SqueezeTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundati
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a squeeze operation and returns the result tensor. Squeezes the tensor, removing dimensions with size 1 at specified axes. The size of the input tensor must be 1 at all specified axes. - Parameters: - tensor: The input tensor. - axesTensor: The tensor containing the axes to squeeze. - name: The name for the operation. - Returns: A valid MPSGraphTensor object
+//
 // SqueezeTensorAxesTensorName calls the underlying SqueezeTensorAxesTensorName.
 func (x *Graph) SqueezeTensorAxesTensorName(tensor *raw.MPSGraphTensor, axesTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.SqueezeTensorAxesTensorName(tensor, axesTensor, foundation.NSStringStringWithUTF8String(name))
@@ -3195,6 +3949,8 @@ func (x *Graph) SqueezeTensorAxesTensorName(tensor *raw.MPSGraphTensor, axesTens
 	return &GraphTensor{inner: _r}
 }
 
+// Creates an expand-dimensions operation and returns the result tensor. Expands the tensor, inserting a dimension with size 1 at the specified axis. - Parameters: - tensor: The input tensor. - axis: The axis to expand. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // ExpandDimsOfTensorAxisName calls the underlying ExpandDimsOfTensorAxisName.
 func (x *Graph) ExpandDimsOfTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor {
 	_r := x.inner.ExpandDimsOfTensorAxisName(tensor, axis, foundation.NSStringStringWithUTF8String(name))
@@ -3204,6 +3960,8 @@ func (x *Graph) ExpandDimsOfTensorAxisName(tensor *raw.MPSGraphTensor, axis int,
 	return &GraphTensor{inner: _r}
 }
 
+// Creates an expand-dimensions operation and returns the result tensor. Expands the tensor, inserting dimensions with size 1 at specified axes. - Parameters: - tensor: The input tensor. - axes: The axes to expand. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // ExpandDimsOfTensorAxesName calls the underlying ExpandDimsOfTensorAxesName.
 func (x *Graph) ExpandDimsOfTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor {
 	_r := x.inner.ExpandDimsOfTensorAxesName(tensor, axes, foundation.NSStringStringWithUTF8String(name))
@@ -3222,6 +3980,8 @@ func (x *Graph) ExpandDimsOfTensorAxesTensorName(tensor *raw.MPSGraphTensor, axe
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a get-coordindate operation and returns the result tensor. Creates a tensor of specified shape with value at index `[i_0, i_1, ... , i_N] = i_axis` For example, ```md coordinateAlongAxis(0, withShape=[5]) = [0, 1, 2, 3, 4] coordinateAlongAxis(0, withShape=[3,2]) = [[0, 0], [1, 1], [2, 2]] ``` - Parameters: - axis: The coordinate axis an element's value is set to. Negative values wrap around. - shape: The shape of the result tensor. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // CoordinateAlongAxisWithShapeName calls the underlying CoordinateAlongAxisWithShapeName.
 func (x *Graph) CoordinateAlongAxisWithShapeName(axis int, shape unsafe.Pointer, name string) *GraphTensor {
 	_r := x.inner.CoordinateAlongAxisWithShapeName(axis, shape, foundation.NSStringStringWithUTF8String(name))
@@ -3231,6 +3991,8 @@ func (x *Graph) CoordinateAlongAxisWithShapeName(axis int, shape unsafe.Pointer,
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a get-coordindate operation and returns the result tensor. See “MPSGraph/coordinateAlongAxis:withShape:name:“. - Parameters: - axisTensor: A Scalar tensor of type `MPSDataTypeInt32`, that specifies the coordinate axis an element's value is set to. Negative values wrap around. - shape: The shape of the result tensor. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // CoordinateAlongAxisTensorWithShapeName calls the underlying CoordinateAlongAxisTensorWithShapeName.
 func (x *Graph) CoordinateAlongAxisTensorWithShapeName(axisTensor *raw.MPSGraphTensor, shape unsafe.Pointer, name string) *GraphTensor {
 	_r := x.inner.CoordinateAlongAxisTensorWithShapeName(axisTensor, shape, foundation.NSStringStringWithUTF8String(name))
@@ -3240,6 +4002,8 @@ func (x *Graph) CoordinateAlongAxisTensorWithShapeName(axisTensor *raw.MPSGraphT
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a get-coordindate operation and returns the result tensor. See “coordinateAlongAxis:withShape:name:“. - Parameters: - axis: The coordinate axis an element's value is set to. Negative values wrap around. - shapeTensor: A rank-1 tensor of type `MPSDataTypeInt32` or `MPSDataTypeInt64` that defines the shape of the result tensor. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // CoordinateAlongAxisWithShapeTensorName calls the underlying CoordinateAlongAxisWithShapeTensorName.
 func (x *Graph) CoordinateAlongAxisWithShapeTensorName(axis int, shapeTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.CoordinateAlongAxisWithShapeTensorName(axis, shapeTensor, foundation.NSStringStringWithUTF8String(name))
@@ -3249,6 +4013,8 @@ func (x *Graph) CoordinateAlongAxisWithShapeTensorName(axis int, shapeTensor *ra
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a get-coordindate operation and returns the result tensor. See “coordinateAlongAxis:withShape:name:“. - Parameters: - axisTensor: A Scalar tensor of type `MPSDataTypeInt32`, that specifies the coordinate axis an element's value is set to. Negative values wrap around. - shapeTensor: A rank-1 tensor of type `MPSDataTypeInt32` or `MPSDataTypeInt64` that defines the shape of the result tensor. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // CoordinateAlongAxisTensorWithShapeTensorName calls the underlying CoordinateAlongAxisTensorWithShapeTensorName.
 func (x *Graph) CoordinateAlongAxisTensorWithShapeTensorName(axisTensor *raw.MPSGraphTensor, shapeTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.CoordinateAlongAxisTensorWithShapeTensorName(axisTensor, shapeTensor, foundation.NSStringStringWithUTF8String(name))
@@ -3258,36 +4024,50 @@ func (x *Graph) CoordinateAlongAxisTensorWithShapeTensorName(axisTensor *raw.MPS
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a TopK operation and returns the value and indices tensors Finds the k largest values along the minor dimension of the input. The source must have at least k elements along its minor dimension. The first element of the result array corresponds to the top values, and the second element of the result array corresponds to the indices of the top values. - Parameters: - source: Tensor containing source data - k: The number of largest values to return - name: The name for the operation. - Returns: A valid MPSGraphTensor array of size 2
+//
 // TopKWithSourceTensorKName calls the underlying TopKWithSourceTensorKName.
 func (x *Graph) TopKWithSourceTensorKName(source *raw.MPSGraphTensor, k uint, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.TopKWithSourceTensorKName(source, k, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a TopK operation and returns the result tensor. Finds the k largest values along the minor dimension of the input. The source must have at least k elements along its minor dimension. The first element of the result array corresponds to the top values, and the second element of the result array corresponds to the indices of the top values. - Parameters: - source: Tensor containing source data. - kTensor: Tensor of the number of largest values to return. - name: The name for the operation. - Returns: A valid MPSGraphTensor array of size 2.
+//
 // TopKWithSourceTensorKTensorName calls the underlying TopKWithSourceTensorKTensorName.
 func (x *Graph) TopKWithSourceTensorKTensorName(source *raw.MPSGraphTensor, kTensor *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.TopKWithSourceTensorKTensorName(source, kTensor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a TopK operation and returns the value and indices tensors. Finds the k largest values along the minor dimension of the input. The source must have at least k elements along its minor dimension. The first element of the result array corresponds to the top values, and the second array corresponds to the indices of the top values. - Parameters: - source: Tensor containing source data. - axis: The dimension along which to compute the TopK values. - k: The number of largest values to return. - name: The name for the operation. - Returns: A valid MPSGraphTensor array of size 2.
+//
 // TopKWithSourceTensorAxisKName calls the underlying TopKWithSourceTensorAxisKName.
 func (x *Graph) TopKWithSourceTensorAxisKName(source *raw.MPSGraphTensor, axis int, k uint, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.TopKWithSourceTensorAxisKName(source, axis, k, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a BottomK operation and returns the value and indices tensors. Finds the k smallest values along the minor dimension of the input. The source must have at least k elements along its minor dimension. The first element of the result array corresponds to the bottom values, and the second array corresponds to the indices of the bottom values. - Parameters: - source: Tensor containing source data. - axis: The dimension along which to compute the BottomK values. - k: The number of largest values to return. - name: The name for the operation. - Returns: A valid MPSGraphTensor array of size 2.
+//
 // BottomKWithSourceTensorAxisKName calls the underlying BottomKWithSourceTensorAxisKName.
 func (x *Graph) BottomKWithSourceTensorAxisKName(source *raw.MPSGraphTensor, axis int, k uint, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.BottomKWithSourceTensorAxisKName(source, axis, k, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a TopK operation and returns the result tensor. Finds the k largest values along the minor dimension of the input. The source must have at least k elements along its minor dimension. The first element of the result array corresponds to the top values, and the second array corresponds to the indices of the top values. - Parameters: - source: Tensor containing source data. - axisTensor: Tensor containing the dimension along which to compute the TopK values. - kTensor: Tensor of the number of largest values to return. - name: The name for the operation. - Returns: A valid MPSGraphTensor array of size 2.
+//
 // TopKWithSourceTensorAxisTensorKTensorName calls the underlying TopKWithSourceTensorAxisTensorKTensorName.
 func (x *Graph) TopKWithSourceTensorAxisTensorKTensorName(source *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, kTensor *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.TopKWithSourceTensorAxisTensorKTensorName(source, axisTensor, kTensor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a BottomK operation and returns the result tensor. Finds the k smallest values along the minor dimension of the input. The source must have at least k elements along its minor dimension. The first element of the result array corresponds to the bottom values, and the second array corresponds to the indices of the bottom values. - Parameters: - source: Tensor containing source data. - axisTensor: Tensor containing the dimension along which to compute the BottomK values. - kTensor: Tensor of the number of largest values to return. - name: The name for the operation. - Returns: A valid MPSGraphTensor array of size 2.
+//
 // BottomKWithSourceTensorAxisTensorKTensorName calls the underlying BottomKWithSourceTensorAxisTensorKTensorName.
 func (x *Graph) BottomKWithSourceTensorAxisTensorKTensorName(source *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, kTensor *raw.MPSGraphTensor, name string) *foundation.NSArray[*raw.MPSGraphTensor] {
 	return x.inner.BottomKWithSourceTensorAxisTensorKTensorName(source, axisTensor, kTensor, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Creates a TopKGradient operation and returns the result tensor. Finds the K largest values along the minor dimension of the input. The input must have at least K elements along its minor dimension. - Parameters: - gradient: Tensor containing the incoming gradient. - source: Tensor containing source data. - k: The number of largest values to return. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // TopKWithGradientTensorSourceKName calls the underlying TopKWithGradientTensorSourceKName.
 func (x *Graph) TopKWithGradientTensorSourceKName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, k uint, name string) *GraphTensor {
 	_r := x.inner.TopKWithGradientTensorSourceKName(gradient, source, k, foundation.NSStringStringWithUTF8String(name))
@@ -3297,6 +4077,8 @@ func (x *Graph) TopKWithGradientTensorSourceKName(gradient *raw.MPSGraphTensor, 
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a TopKGradient operation and returns the result tensor. Finds the K largest values along the minor dimension of the input. The input must have at least K elements along its minor dimension. - Parameters: - gradient: Tensor containing the incoming gradient. - source: Tensor containing source data. - axis: The dimension along which to compute the TopK values.. - k: The number of largest values to return. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // TopKWithGradientTensorSourceAxisKName calls the underlying TopKWithGradientTensorSourceAxisKName.
 func (x *Graph) TopKWithGradientTensorSourceAxisKName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, axis int, k uint, name string) *GraphTensor {
 	_r := x.inner.TopKWithGradientTensorSourceAxisKName(gradient, source, axis, k, foundation.NSStringStringWithUTF8String(name))
@@ -3306,6 +4088,8 @@ func (x *Graph) TopKWithGradientTensorSourceAxisKName(gradient *raw.MPSGraphTens
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a BottomKGradient operation and returns the result tensor. Finds the K smallest values along the minor dimension of the input. The input must have at least K elements along its minor dimension. - Parameters: - gradient: Tensor containing the incoming gradient. - source: Tensor containing source data. - axis: The dimension along which to compute the BottomK values. - k: The number of largest values to return. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // BottomKWithGradientTensorSourceAxisKName calls the underlying BottomKWithGradientTensorSourceAxisKName.
 func (x *Graph) BottomKWithGradientTensorSourceAxisKName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, axis int, k uint, name string) *GraphTensor {
 	_r := x.inner.BottomKWithGradientTensorSourceAxisKName(gradient, source, axis, k, foundation.NSStringStringWithUTF8String(name))
@@ -3315,6 +4099,8 @@ func (x *Graph) BottomKWithGradientTensorSourceAxisKName(gradient *raw.MPSGraphT
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a TopKGradient operation and returns the result tensor. Finds the K largest values along the minor dimension of the input. The input must have at least K elements along its minor dimension. - Parameters: - gradient: Tensor containing the incoming gradient. - source: Tensor containing source data. - kTensor: Tensor of the number of largest values to return. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // TopKWithGradientTensorSourceKTensorName calls the underlying TopKWithGradientTensorSourceKTensorName.
 func (x *Graph) TopKWithGradientTensorSourceKTensorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, kTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.TopKWithGradientTensorSourceKTensorName(gradient, source, kTensor, foundation.NSStringStringWithUTF8String(name))
@@ -3324,6 +4110,8 @@ func (x *Graph) TopKWithGradientTensorSourceKTensorName(gradient *raw.MPSGraphTe
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a TopKGradient operation and returns the result tensor. Finds the K largest values along the minor dimension of the input. The input must have at least K elements along its minor dimension. - Parameters: - gradient: Tensor containing the incoming gradient. - source: Tensor containing source data. - axisTensor: Tensor containing the dimension along which to compute the TopK values. - kTensor: Tensor of the number of largest values to return. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // TopKWithGradientTensorSourceAxisTensorKTensorName calls the underlying TopKWithGradientTensorSourceAxisTensorKTensorName.
 func (x *Graph) TopKWithGradientTensorSourceAxisTensorKTensorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, kTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.TopKWithGradientTensorSourceAxisTensorKTensorName(gradient, source, axisTensor, kTensor, foundation.NSStringStringWithUTF8String(name))
@@ -3333,6 +4121,8 @@ func (x *Graph) TopKWithGradientTensorSourceAxisTensorKTensorName(gradient *raw.
 	return &GraphTensor{inner: _r}
 }
 
+// Creates a BottomKGradient operation and returns the result tensor. Finds the K smallest values along the minor dimension of the input. The input must have at least K elements along its minor dimension. - Parameters: - gradient: Tensor containing the incoming gradient. - source: Tensor containing source data. - axisTensor: Tensor containing the dimension along which to compute the BottomK values. - kTensor: Tensor of the number of largest values to return. - name: The name for the operation. - Returns: A valid MPSGraphTensor object.
+//
 // BottomKWithGradientTensorSourceAxisTensorKTensorName calls the underlying BottomKWithGradientTensorSourceAxisTensorKTensorName.
 func (x *Graph) BottomKWithGradientTensorSourceAxisTensorKTensorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, kTensor *raw.MPSGraphTensor, name string) *GraphTensor {
 	_r := x.inner.BottomKWithGradientTensorSourceAxisTensorKTensorName(gradient, source, axisTensor, kTensor, foundation.NSStringStringWithUTF8String(name))
@@ -3349,8 +4139,8 @@ type Graphable interface {
 	Unwrap() *raw.MPSGraph
 	WithOptions(options MPSGraphOptions) *Graph
 	CompileWithDeviceFeedsTargetTensorsTargetOperationsCompilationDescriptor(device *raw.MPSGraphDevice, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation], compilationDescriptor *raw.MPSGraphCompilationDescriptor) *GraphExecutable
-	RunWithFeedsTargetTensorsTargetOperations(feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation]) unsafe.Pointer
-	RunWithMTLCommandQueueFeedsTargetTensorsTargetOperations(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation]) unsafe.Pointer
+	RunWithFeedsTargetTensorsTargetOperations(feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations ...GraphOperationProvider) unsafe.Pointer
+	RunWithMTLCommandQueueFeedsTargetTensorsTargetOperations(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations ...GraphOperationProvider) unsafe.Pointer
 	RunWithMTLCommandQueueFeedsTargetOperationsResultsDictionary(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetOperations *foundation.NSArray[*raw.MPSGraphOperation], resultsDictionary unsafe.Pointer)
 	RunAsyncWithFeedsTargetTensorsTargetOperationsExecutionDescriptor(feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation], executionDescriptor *raw.MPSGraphExecutionDescriptor) unsafe.Pointer
 	RunAsyncWithMTLCommandQueueFeedsTargetTensorsTargetOperationsExecutionDescriptor(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation], executionDescriptor *raw.MPSGraphExecutionDescriptor) unsafe.Pointer

@@ -82,6 +82,8 @@ func (x *IOBluetoothL2CAPChannel) SetDelegateWithConfiguration(channelDelegate o
 	return x.inner.SetDelegateWithConfiguration(channelDelegate, channelConfiguration)
 }
 
+// @method		delegate @abstract		Returns the currently assigned delegate @discussion	An incoming channel is one that was initiated by a remote device. @result		Returns the current delegate, or nil if one is not set.
+//
 // Delegate calls the underlying Delegate.
 func (x *IOBluetoothL2CAPChannel) Delegate() objc.ID {
 	return x.inner.Delegate()

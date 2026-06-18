@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Configuration that represents the configuration of a Virtio graphics device for a Linux VM.
+//
 // VirtioGraphicsDeviceConfiguration wraps [raw.VZVirtioGraphicsDeviceConfiguration] with a fluent Go API.
 type VirtioGraphicsDeviceConfiguration struct {
 	inner *raw.VZVirtioGraphicsDeviceConfiguration
@@ -40,6 +42,8 @@ func NewVirtioGraphicsDeviceConfiguration() *VirtioGraphicsDeviceConfiguration {
 	return &VirtioGraphicsDeviceConfiguration{inner: raw.VZVirtioGraphicsDeviceConfigurationFromID(_id)}
 }
 
+// The array of output devices.
+//
 // WithScanouts sets the collection, converting the Go slice to an NSArray.
 func (x *VirtioGraphicsDeviceConfiguration) WithScanouts(items ...*raw.VZVirtioGraphicsScanoutConfiguration) *VirtioGraphicsDeviceConfiguration {
 	if len(items) == 0 {

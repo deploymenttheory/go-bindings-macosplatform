@@ -37,6 +37,8 @@ func NewLibArtist() *LibArtist {
 	return &LibArtist{inner: raw.ITLibArtistFromID(_id)}
 }
 
+// @abstract The name of this artist.
+//
 // Name calls the underlying Name.
 func (x *LibArtist) Name() string {
 	_r := x.inner.Name()
@@ -46,6 +48,8 @@ func (x *LibArtist) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The name of this artist that should be used for sorting purposes.
+//
 // SortName calls the underlying SortName.
 func (x *LibArtist) SortName() string {
 	_r := x.inner.SortName()
@@ -55,6 +59,8 @@ func (x *LibArtist) SortName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The unique identifier of this artist.
+//
 // PersistentID calls the underlying PersistentID.
 func (x *LibArtist) PersistentID() *foundation.NSNumber {
 	return x.inner.PersistentID()

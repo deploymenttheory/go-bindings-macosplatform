@@ -36,11 +36,15 @@ func NewIKFilterBrowserView() *IKFilterBrowserView {
 	return &IKFilterBrowserView{inner: raw.IKFilterBrowserViewFromID(_id)}
 }
 
+// @method     setPreviewState: @abstract   Use this method to show and hide the Preview @discussion Use this method to show and hide the Preview from the program. @param      inState Boolean for visibility of the preview.
+//
 // SetPreviewState calls the underlying SetPreviewState.
 func (x *IKFilterBrowserView) SetPreviewState(inState bool) {
 	x.inner.SetPreviewState(inState)
 }
 
+// @method     filterName @abstract   Returns the name of the currently selected filter. @discussion Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
+//
 // FilterName calls the underlying FilterName.
 func (x *IKFilterBrowserView) FilterName() string {
 	_r := x.inner.FilterName()

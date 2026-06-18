@@ -37,6 +37,8 @@ func NewWKNavigationAction() *WKNavigationAction {
 	return &WKNavigationAction{inner: raw.WKNavigationActionFromID(_id)}
 }
 
+// @abstract The frame requesting the navigation.
+//
 // SourceFrame calls the underlying SourceFrame.
 func (x *WKNavigationAction) SourceFrame() *WKFrameInfo {
 	_r := x.inner.SourceFrame()
@@ -46,6 +48,8 @@ func (x *WKNavigationAction) SourceFrame() *WKFrameInfo {
 	return &WKFrameInfo{inner: _r}
 }
 
+// @abstract The target frame, or nil if this is a new window navigation.
+//
 // TargetFrame calls the underlying TargetFrame.
 func (x *WKNavigationAction) TargetFrame() *WKFrameInfo {
 	_r := x.inner.TargetFrame()
@@ -55,31 +59,43 @@ func (x *WKNavigationAction) TargetFrame() *WKFrameInfo {
 	return &WKFrameInfo{inner: _r}
 }
 
+// @abstract The type of action that triggered the navigation. @discussion The value is one of the constants of the enumerated type WKNavigationType.
+//
 // NavigationType calls the underlying NavigationType.
 func (x *WKNavigationAction) NavigationType() WKNavigationType {
 	return WKNavigationType(x.inner.NavigationType())
 }
 
+// @abstract The navigation's request.
+//
 // Request calls the underlying Request.
 func (x *WKNavigationAction) Request() *foundation.NSURLRequest {
 	return x.inner.Request()
 }
 
+// @abstract A value indicating whether the web content used a download attribute to indicate that this should be downloaded.
+//
 // ShouldPerformDownload calls the underlying ShouldPerformDownload.
 func (x *WKNavigationAction) ShouldPerformDownload() bool {
 	return x.inner.ShouldPerformDownload()
 }
 
+// @abstract Whether or not the navigation is a redirect from a content rule list.
+//
 // IsContentRuleListRedirect calls the underlying IsContentRuleListRedirect.
 func (x *WKNavigationAction) IsContentRuleListRedirect() bool {
 	return x.inner.IsContentRuleListRedirect()
 }
 
+// @abstract The modifier keys that were in effect when the navigation was requested.
+//
 // ModifierFlags calls the underlying ModifierFlags.
 func (x *WKNavigationAction) ModifierFlags() appkit.NSEventModifierFlags {
 	return x.inner.ModifierFlags()
 }
 
+// @abstract The number of the mouse button causing the navigation to be requested.
+//
 // ButtonNumber calls the underlying ButtonNumber.
 func (x *WKNavigationAction) ButtonNumber() int {
 	return x.inner.ButtonNumber()

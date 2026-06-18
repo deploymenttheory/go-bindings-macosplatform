@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A singleton object responsible for dispatching challenge-related events to its delegate
+//
 // ChallengeEventHandler wraps [raw.GKChallengeEventHandler] with a fluent Go API.
 type ChallengeEventHandler struct {
 	inner *raw.GKChallengeEventHandler

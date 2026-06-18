@@ -32,6 +32,8 @@ func ImageGuidedFilterFromID(id objc.ID) *ImageGuidedFilter {
 	return &ImageGuidedFilter{inner: raw.MPSImageGuidedFilterFromID(id)}
 }
 
+// @abstract Specifies information to apply the guided filter regression. @param    device            The device the filter will run on @param    kernelDiameter    The local window size @return     A valid MPSImageGuidedFilterRegression object or nil, if failure.
+//
 // NewImageGuidedFilterWithDeviceKernelDiameter creates a new [ImageGuidedFilter].
 func NewImageGuidedFilterWithDeviceKernelDiameter(device metal.MTLDevice, kernelDiameter uint) *ImageGuidedFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageGuidedFilter")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewImageGuidedFilterWithDeviceKernelDiameter(device metal.MTLDevice, kernel
 	return &ImageGuidedFilter{inner: raw.MPSImageGuidedFilterFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+//
 // NewImageGuidedFilterWithCoderDevice creates a new [ImageGuidedFilter].
 func NewImageGuidedFilterWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageGuidedFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageGuidedFilter")), objc.RegisterName("alloc"))
@@ -46,61 +50,83 @@ func NewImageGuidedFilterWithCoderDevice(aDecoder *foundation.NSCoder, device me
 	return &ImageGuidedFilter{inner: raw.MPSImageGuidedFilterFromID(_id)}
 }
 
+// @property   epsilon @abstract   The regularization parameter @discussion The parameter used when computing the linear coefficients a and b.
+//
 // WithEpsilon sets the epsilon property and returns the receiver for chaining.
 func (x *ImageGuidedFilter) WithEpsilon(epsilon float32) *ImageGuidedFilter {
 	x.inner.SetEpsilon(epsilon)
 	return x
 }
 
+// @property   reconstructScale @abstract   The scale parameter @discussion The parameter used to scale the result of the reconstruction operation. The default value is 1.0f.
+//
 // WithReconstructScale sets the reconstructScale property and returns the receiver for chaining.
 func (x *ImageGuidedFilter) WithReconstructScale(reconstructScale float32) *ImageGuidedFilter {
 	x.inner.SetReconstructScale(reconstructScale)
 	return x
 }
 
+// @property   reconstructOffset @abstract   The offset parameter @discussion The offset parameter added to the result of the scaled reconstructed value. The default value is 0.0f.
+//
 // WithReconstructOffset sets the reconstructOffset property and returns the receiver for chaining.
 func (x *ImageGuidedFilter) WithReconstructOffset(reconstructOffset float32) *ImageGuidedFilter {
 	x.inner.SetReconstructOffset(reconstructOffset)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *ImageGuidedFilter) WithOptions(options mpscore.MPSKernelOptions) *ImageGuidedFilter {
 	x.inner.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ImageGuidedFilter) WithLabel(label string) *ImageGuidedFilter {
 	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @abstract Perform Guided Filter Regression (correlation) to produce a coefficients texture @discussion The filter will not begin to execute until after the command buffer has been enqueued and committed. @param  commandBuffer           A valid MTLCommandBuffer. @param  sourceTexture           Input source texture to be filtered (typically a mask).  This should be a single channel image. @param  guidanceTexture         Input guidance texture.  This should be a color (RGB) image. @param  weightsTexture          Optional input confidence texture.  This should also a single channel image. @param  destinationCoefficientsTexture  Output texture with four coefficients that minimize the mean squared error between the source and an affine function of guidance R, G, B. Note: The destinationCoefficientsTexture computes the linear cofficients "a" and "b".  The "a" coefficient is stored in the RGB channels of destinationCoefficientsTexture and the "b" coefficient in the alpha chnanel. Set the MPSKernelOptionsAllowReducedPrecision in the "options" property for this kernel to peform the computations using half-precision arithmetic.  This can potentially improve performance and/or power usage.
+//
 // EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTexture calls the underlying EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTexture.
 func (x *ImageGuidedFilter) EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, guidanceTexture metal.MTLTexture, weightsTexture metal.MTLTexture, destinationCoefficientsTexture metal.MTLTexture) {
 	x.inner.EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTexture(commandBuffer, sourceTexture, guidanceTexture, weightsTexture, destinationCoefficientsTexture)
 }
 
+// @abstract Perform Guided Filter Reconstruction (inference) to produce the filtered output @discussion The filter will not begin to execute until after the command buffer has been enqueued and committed. @pparam sourceGuidanceTexture Input guidance pixel buffer.  This should be a color (RGB) image. @pparam coefficientsTexture   Input coefficients texture generated generated by a previous encodeRegressionToCommandBuffer @param destinationTexture     Output texture Note: The coefficients are upsampled at the reconstruction of the filtered data. Reconstruct(guidance RGB) = a.r * R + a.g * G + a.b * B + b, where a and b are the coefficients learnt using encodeRegressionToCommandBuffer. Final reconstructed value = value * reconstructScale + reconstructOffset
+//
 // EncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureDestinationTexture calls the underlying EncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureDestinationTexture.
 func (x *ImageGuidedFilter) EncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureDestinationTexture(commandBuffer metal.MTLCommandBuffer, guidanceTexture metal.MTLTexture, coefficientsTexture metal.MTLTexture, destinationTexture metal.MTLTexture) {
 	x.inner.EncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureDestinationTexture(commandBuffer, guidanceTexture, coefficientsTexture, destinationTexture)
 }
 
+// @abstract Perform per-channel (non-color correlated) Guided Filter Regression (correlation) to produce a coefficients texture @discussion The filter will not begin to execute until after the command buffer has been enqueued and committed. This encode call differs from the one above in that the correlations are not computed across channels and therefore this filter computes two coefficient textures: ai and bi. @param  commandBuffer           A valid MTLCommandBuffer. @param  sourceTexture           Input source texture to be filtered. @param  guidanceTexture       Input guidance texture.  This should be a color (RGB) image. @param  weightsTexture          Optional input confidence texture.  This should be a single channel image. @param  destinationCoefficientsTextureA  Output texture with four coefficients A that minimize the mean squared error between the source channels and an affine function of guidance channels. @param  destinationCoefficientsTextureB  Output texture with four coefficients B that minimize the mean squared error between the source channels and an affine function of guidance channels. Set the MPSKernelOptionsAllowReducedPrecision in the "options" property for this kernel to peform the computations using half-precision arithmetic.  This can potentially improve performance and/or power usage.
+//
 // EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTextureADestinationCoefficientsTextureB calls the underlying EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTextureADestinationCoefficientsTextureB.
 func (x *ImageGuidedFilter) EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTextureADestinationCoefficientsTextureB(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, guidanceTexture metal.MTLTexture, weightsTexture metal.MTLTexture, destinationCoefficientsTextureA metal.MTLTexture, destinationCoefficientsTextureB metal.MTLTexture) {
 	x.inner.EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTextureADestinationCoefficientsTextureB(commandBuffer, sourceTexture, guidanceTexture, weightsTexture, destinationCoefficientsTextureA, destinationCoefficientsTextureB)
 }
 
+// @abstract Perform Guided Filter Reconstruction (inference) to produce the filtered output @discussion The filter will not begin to execute until after the command buffer has been enqueued and committed. @param commandBuffer                  A valid MTLCommandBuffer. @param guidanceTexture              Input guidance pixel buffer. @param coefficientsTextureA   Input coefficients A texture generated generated by a previous encodeRegressionToCommandBuffer. @param coefficientsTextureB   Input coefficients B texture generated generated by a previous encodeRegressionToCommandBuffer. @param destinationTexture       Output texture
+//
 // EncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureACoefficientsTextureBDestinationTexture calls the underlying EncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureACoefficientsTextureBDestinationTexture.
 func (x *ImageGuidedFilter) EncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureACoefficientsTextureBDestinationTexture(commandBuffer metal.MTLCommandBuffer, guidanceTexture metal.MTLTexture, coefficientsTextureA metal.MTLTexture, coefficientsTextureB metal.MTLTexture, destinationTexture metal.MTLTexture) {
 	x.inner.EncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureACoefficientsTextureBDestinationTexture(commandBuffer, guidanceTexture, coefficientsTextureA, coefficientsTextureB, destinationTexture)
 }
 
+// @property   kernelDiameter @abstract   The local window size @discussion The local window size.
+//
 // KernelDiameter calls the underlying KernelDiameter.
 func (x *ImageGuidedFilter) KernelDiameter() uint {
 	return x.inner.KernelDiameter()
 }
 
+// @property   epsilon @abstract   The regularization parameter @discussion The parameter used when computing the linear coefficients a and b.
+//
 // Epsilon calls the underlying Epsilon.
 func (x *ImageGuidedFilter) Epsilon() float32 {
 	return x.inner.Epsilon()
@@ -111,6 +137,8 @@ func (x *ImageGuidedFilter) SetEpsilon(epsilon float32) {
 	x.inner.SetEpsilon(epsilon)
 }
 
+// @property   reconstructScale @abstract   The scale parameter @discussion The parameter used to scale the result of the reconstruction operation. The default value is 1.0f.
+//
 // ReconstructScale calls the underlying ReconstructScale.
 func (x *ImageGuidedFilter) ReconstructScale() float32 {
 	return x.inner.ReconstructScale()
@@ -121,6 +149,8 @@ func (x *ImageGuidedFilter) SetReconstructScale(reconstructScale float32) {
 	x.inner.SetReconstructScale(reconstructScale)
 }
 
+// @property   reconstructOffset @abstract   The offset parameter @discussion The offset parameter added to the result of the scaled reconstructed value. The default value is 0.0f.
+//
 // ReconstructOffset calls the underlying ReconstructOffset.
 func (x *ImageGuidedFilter) ReconstructOffset() float32 {
 	return x.inner.ReconstructOffset()

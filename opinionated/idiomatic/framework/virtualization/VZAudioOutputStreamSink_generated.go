@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class for an audio output stream sink.
+//
 // AudioOutputStreamSink wraps [raw.VZAudioOutputStreamSink] with a fluent Go API.
 type AudioOutputStreamSink struct {
 	inner *raw.VZAudioOutputStreamSink

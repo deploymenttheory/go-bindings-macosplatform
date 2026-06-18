@@ -36,6 +36,8 @@ func NewEnvironmentState() *EnvironmentState {
 	return &EnvironmentState{inner: raw.LAEnvironmentStateFromID(_id)}
 }
 
+// @brief Information about biometric authentication (Touch ID, Face ID or Optic ID). @discussion @c nil if biometry is not supported by this device.
+//
 // Biometry calls the underlying Biometry.
 func (x *EnvironmentState) Biometry() *EnvironmentMechanismBiometry {
 	_r := x.inner.Biometry()
@@ -45,6 +47,8 @@ func (x *EnvironmentState) Biometry() *EnvironmentMechanismBiometry {
 	return &EnvironmentMechanismBiometry{inner: _r}
 }
 
+// @brief Information about local user password (on macOS) or passcode (on embedded platforms). @discussion @c nil if user password or passcode is not supported by this device.
+//
 // UserPassword calls the underlying UserPassword.
 func (x *EnvironmentState) UserPassword() *EnvironmentMechanismUserPassword {
 	_r := x.inner.UserPassword()
@@ -54,6 +58,8 @@ func (x *EnvironmentState) UserPassword() *EnvironmentMechanismUserPassword {
 	return &EnvironmentMechanismUserPassword{inner: _r}
 }
 
+// @brief Companion authentication mechanisms. @discussion Companion mechanisms such as Apple Watch can appear and disappear as they get in and out of reach, but this property enumerates paired companions, even if they are not reachable at the moment. Check @c isUsable property to determine if a particular companion type is available for use. Note that items in this array represent paired companion types, not individual devices. Therefore, even if the user has paired multiple Apple Watch devices for companion authentication, the array will contain only one @c LAEnvironmentMechanimsCompanion instance of type @c LACompanionTypeWatch.
+//
 // Companions returns the collection as a Go slice.
 func (x *EnvironmentState) Companions() []*EnvironmentMechanismCompanion {
 	arr := x.inner.Companions()
@@ -65,6 +71,8 @@ func (x *EnvironmentState) Companions() []*EnvironmentMechanismCompanion {
 	})
 }
 
+// @brief Information about all authentication mechanisms. @discussion This property aggregates @c biometry, @c userPassword, @c companions and any future authentication mechanisms.
+//
 // AllMechanisms returns the collection as a Go slice.
 func (x *EnvironmentState) AllMechanisms() []*EnvironmentMechanism {
 	arr := x.inner.AllMechanisms()

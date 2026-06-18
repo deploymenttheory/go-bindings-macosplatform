@@ -35,18 +35,24 @@ func NewVectorDescriptor() *VectorDescriptor {
 	return &VectorDescriptor{inner: raw.MPSVectorDescriptorFromID(_id)}
 }
 
+// @property   length @discussion The number of elements in the vector.
+//
 // WithLength sets the length property and returns the receiver for chaining.
 func (x *VectorDescriptor) WithLength(length uint) *VectorDescriptor {
 	x.inner.SetLength(length)
 	return x
 }
 
+// @property   dataType @discussion The type of the data which makes up the values of the vector.
+//
 // WithDataType sets the dataType property and returns the receiver for chaining.
 func (x *VectorDescriptor) WithDataType(dataType MPSDataType) *VectorDescriptor {
 	x.inner.SetDataType(raw.MPSDataType(dataType))
 	return x
 }
 
+// @property   length @discussion The number of elements in the vector.
+//
 // Length calls the underlying Length.
 func (x *VectorDescriptor) Length() uint {
 	return x.inner.Length()
@@ -57,11 +63,15 @@ func (x *VectorDescriptor) SetLength(length uint) {
 	x.inner.SetLength(length)
 }
 
+// @property   vectors @discussion The number of vectors.
+//
 // Vectors calls the underlying Vectors.
 func (x *VectorDescriptor) Vectors() uint {
 	return x.inner.Vectors()
 }
 
+// @property   dataType @discussion The type of the data which makes up the values of the vector.
+//
 // DataType calls the underlying DataType.
 func (x *VectorDescriptor) DataType() MPSDataType {
 	return MPSDataType(x.inner.DataType())
@@ -72,6 +82,8 @@ func (x *VectorDescriptor) SetDataType(dataType MPSDataType) {
 	x.inner.SetDataType(raw.MPSDataType(dataType))
 }
 
+// @property   vectorBytes @discussion The stride, in bytes, between corresponding elements of consecutive vectors.  Must be a multiple of the element size
+//
 // VectorBytes calls the underlying VectorBytes.
 func (x *VectorDescriptor) VectorBytes() uint {
 	return x.inner.VectorBytes()

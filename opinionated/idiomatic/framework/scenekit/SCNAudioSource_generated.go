@@ -30,6 +30,8 @@ func AudioSourceFromID(id objc.ID) *AudioSource {
 	return &AudioSource{inner: raw.SCNAudioSourceFromID(id)}
 }
 
+// @method initWithFileNamed: @abstract Convenience initializer that creates an AVAudioNode from the named audio asset in the main bundle.
+//
 // NewAudioSourceWithFileNamed creates a new [AudioSource].
 func NewAudioSourceWithFileNamed(name string) *AudioSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNAudioSource")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewAudioSourceWithFileNamed(name string) *AudioSource {
 	return &AudioSource{inner: raw.SCNAudioSourceFromID(_id)}
 }
 
+// @method initWithURL: @abstract Convenience initializer that creates an AVAudioNode from the URL that contain a audio asset.
+//
 // NewAudioSourceWithURL creates a new [AudioSource].
 func NewAudioSourceWithURL(url string) *AudioSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNAudioSource")), objc.RegisterName("alloc"))
@@ -44,47 +48,63 @@ func NewAudioSourceWithURL(url string) *AudioSource {
 	return &AudioSource{inner: raw.SCNAudioSourceFromID(_id)}
 }
 
+// @property positional @abstract Marks the audio source as positional so that the audio mix considers relative position and velocity with regards to the SCNSceneRenderer's current listener node. Defaults to YES. @discussion shouldStream must be set to false in order to get positional audio (see shouldStream). @see SCNSceneRenderer audioListener.
+//
 // WithPositional sets the positional property and returns the receiver for chaining.
 func (x *AudioSource) WithPositional(positional bool) *AudioSource {
 	x.inner.SetPositional(positional)
 	return x
 }
 
+// @property volume @abstract The default volume for this audio buffer. Default is 1.0 (full volume).
+//
 // WithVolume sets the volume property and returns the receiver for chaining.
 func (x *AudioSource) WithVolume(volume float32) *AudioSource {
 	x.inner.SetVolume(volume)
 	return x
 }
 
+// @property rate @abstract The default rate for this audio buffer. Default is 1.0 (original rate of the audio source).
+//
 // WithRate sets the rate property and returns the receiver for chaining.
 func (x *AudioSource) WithRate(rate float32) *AudioSource {
 	x.inner.SetRate(rate)
 	return x
 }
 
+// @property reverbBlend @abstract The default reverbBlend for this audio buffer. Default is 0.0 (no sound is sent to the reverb).
+//
 // WithReverbBlend sets the reverbBlend property and returns the receiver for chaining.
 func (x *AudioSource) WithReverbBlend(reverbBlend float32) *AudioSource {
 	x.inner.SetReverbBlend(reverbBlend)
 	return x
 }
 
+// @property loops @abstract Specifies whether the audio source should loop or not. Defaults to NO.
+//
 // WithLoops sets the loops property and returns the receiver for chaining.
 func (x *AudioSource) WithLoops(loops bool) *AudioSource {
 	x.inner.SetLoops(loops)
 	return x
 }
 
+// @property shouldStream @abstract Specifies whether the audio source should be streamed or not. Defaults to NO.
+//
 // WithShouldStream sets the shouldStream property and returns the receiver for chaining.
 func (x *AudioSource) WithShouldStream(shouldStream bool) *AudioSource {
 	x.inner.SetShouldStream(shouldStream)
 	return x
 }
 
+// @method load @abstract Load and uncompress the audio source in memory. This method has no effect if "shouldStream" is set to YES or if the audio source is already loaded. @discussion This method let you preload your audio sources. If an audio source is not preloaded, it will be loaded anyway when playing it.
+//
 // Load calls the underlying Load.
 func (x *AudioSource) Load() {
 	x.inner.Load()
 }
 
+// @property positional @abstract Marks the audio source as positional so that the audio mix considers relative position and velocity with regards to the SCNSceneRenderer's current listener node. Defaults to YES. @discussion shouldStream must be set to false in order to get positional audio (see shouldStream). @see SCNSceneRenderer audioListener.
+//
 // IsPositional calls the underlying IsPositional.
 func (x *AudioSource) IsPositional() bool {
 	return x.inner.IsPositional()
@@ -95,6 +115,8 @@ func (x *AudioSource) SetPositional(positional bool) {
 	x.inner.SetPositional(positional)
 }
 
+// @property volume @abstract The default volume for this audio buffer. Default is 1.0 (full volume).
+//
 // Volume calls the underlying Volume.
 func (x *AudioSource) Volume() float32 {
 	return x.inner.Volume()
@@ -105,6 +127,8 @@ func (x *AudioSource) SetVolume(volume float32) {
 	x.inner.SetVolume(volume)
 }
 
+// @property rate @abstract The default rate for this audio buffer. Default is 1.0 (original rate of the audio source).
+//
 // Rate calls the underlying Rate.
 func (x *AudioSource) Rate() float32 {
 	return x.inner.Rate()
@@ -115,6 +139,8 @@ func (x *AudioSource) SetRate(rate float32) {
 	x.inner.SetRate(rate)
 }
 
+// @property reverbBlend @abstract The default reverbBlend for this audio buffer. Default is 0.0 (no sound is sent to the reverb).
+//
 // ReverbBlend calls the underlying ReverbBlend.
 func (x *AudioSource) ReverbBlend() float32 {
 	return x.inner.ReverbBlend()
@@ -125,6 +151,8 @@ func (x *AudioSource) SetReverbBlend(reverbBlend float32) {
 	x.inner.SetReverbBlend(reverbBlend)
 }
 
+// @property loops @abstract Specifies whether the audio source should loop or not. Defaults to NO.
+//
 // Loops calls the underlying Loops.
 func (x *AudioSource) Loops() bool {
 	return x.inner.Loops()
@@ -135,6 +163,8 @@ func (x *AudioSource) SetLoops(loops bool) {
 	x.inner.SetLoops(loops)
 }
 
+// @property shouldStream @abstract Specifies whether the audio source should be streamed or not. Defaults to NO.
+//
 // ShouldStream calls the underlying ShouldStream.
 func (x *AudioSource) ShouldStream() bool {
 	return x.inner.ShouldStream()

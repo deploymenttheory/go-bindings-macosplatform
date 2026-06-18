@@ -36,54 +36,72 @@ func NewCNNLossDescriptor() *CNNLossDescriptor {
 	return &CNNLossDescriptor{inner: raw.MPSCNNLossDescriptorFromID(_id)}
 }
 
+// @property   lossType @abstract   The type of a loss filter. @discussion This parameter specifies the type of a loss filter.
+//
 // WithLossType sets the lossType property and returns the receiver for chaining.
 func (x *CNNLossDescriptor) WithLossType(lossType mpsneuralnetwork.MPSCNNLossType) *CNNLossDescriptor {
 	x.inner.SetLossType(lossType)
 	return x
 }
 
+// @property   reductionType @abstract   The type of a reduction operation performed in the loss filter. @discussion This parameter specifies the type of a reduction operation performed in the loss filter.
+//
 // WithReductionType sets the reductionType property and returns the receiver for chaining.
 func (x *CNNLossDescriptor) WithReductionType(reductionType mpsneuralnetwork.MPSCNNReductionType) *CNNLossDescriptor {
 	x.inner.SetReductionType(reductionType)
 	return x
 }
 
+// @property   reduceAcrossBatch @abstract   If set to YES then the reduction operation is applied also across the batch-index dimension, ie. the loss value is summed over images in the batch and the result of the reduction is written on the first loss image in the batch while the other loss images will be set to zero. If set to NO, then no reductions are performed across the batch dimension and each image in the batch will contain the loss value associated with that one particular image. NOTE: If reductionType == MPSCNNReductionTypeNone, then this flag has no effect on results, that is no reductions are done in this case. NOTE: If reduceAcrossBatch is set to YES and reductionType == MPSCNNReductionTypeMean then the final forward loss value is computed by first summing over the components and then by dividing the result with: number of feature channels * width * height * number of images in the batch. The default value is NO.
+//
 // WithReduceAcrossBatch sets the reduceAcrossBatch property and returns the receiver for chaining.
 func (x *CNNLossDescriptor) WithReduceAcrossBatch(reduceAcrossBatch bool) *CNNLossDescriptor {
 	x.inner.SetReduceAcrossBatch(reduceAcrossBatch)
 	return x
 }
 
+// @property   weight @abstract   The scale factor to apply to each element of a result. @discussion Each element of a result is multiplied by the weight value. The default value is 1.0f.
+//
 // WithWeight sets the weight property and returns the receiver for chaining.
 func (x *CNNLossDescriptor) WithWeight(weight float32) *CNNLossDescriptor {
 	x.inner.SetWeight(weight)
 	return x
 }
 
+// @property    labelSmoothing @abstract    The label smoothing parameter. The default value is 0.0f. @discussion  This parameter is valid only for the loss functions of the following type(s): MPSCNNLossFunctionTypeSoftmaxCrossEntropy, MPSCNNLossFunctionTypeSigmoidCrossEntropy. MPSCNNLossFunctionTypeSoftmaxCrossEntropy: given labels (ground truth), it is applied in the following way: labels = labelSmoothing > 0 ? labels * (1 - labelSmoothing) + labelSmoothing / numberOfClasses : labels MPSCNNLossFunctionTypeSigmoidCrossEntropy: given labels (ground truth), it is applied in the following way: labels = labelSmoothing > 0 ? labels * (1 - labelSmoothing) + 0.5 * labelSmoothing : labels
+//
 // WithLabelSmoothing sets the labelSmoothing property and returns the receiver for chaining.
 func (x *CNNLossDescriptor) WithLabelSmoothing(labelSmoothing float32) *CNNLossDescriptor {
 	x.inner.SetLabelSmoothing(labelSmoothing)
 	return x
 }
 
+// @property    numberOfClasses @abstract    The number of classes parameter. The default value is 1. @discussion  This parameter is valid only for the loss functions of the following type(s): MPSCNNLossFunctionTypeSoftmaxCrossEntropy. Given labels (ground truth), it is applied in the following way: labels = labelSmoothing > 0 ? labels * (1 - labelSmoothing) + labelSmoothing / numberOfClasses : labels
+//
 // WithNumberOfClasses sets the numberOfClasses property and returns the receiver for chaining.
 func (x *CNNLossDescriptor) WithNumberOfClasses(numberOfClasses uint) *CNNLossDescriptor {
 	x.inner.SetNumberOfClasses(numberOfClasses)
 	return x
 }
 
+// @property    epsilon @abstract    The epsilon parameter. The default value is 1e-7. @discussion  This parameter is valid only for the loss functions of the following type(s): MPSCNNLossTypeLog. Given predictions and labels (ground truth), it is applied in the following way: -(labels * log(predictions + epsilon)) - ((1 - labels) * log(1 - predictions + epsilon))
+//
 // WithEpsilon sets the epsilon property and returns the receiver for chaining.
 func (x *CNNLossDescriptor) WithEpsilon(epsilon float32) *CNNLossDescriptor {
 	x.inner.SetEpsilon(epsilon)
 	return x
 }
 
+// @property    delta @abstract    The delta parameter. The default value is 1.0f. @discussion  This parameter is valid only for the loss functions of the following type(s): MPSCNNLossTypeHuber. Given predictions and labels (ground truth), it is applied in the following way: if (|predictions - labels| <= delta, loss = 0.5f * predictions^2 if (|predictions - labels| >  delta, loss = 0.5 * delta^2 + delta * (|predictions - labels| - delta)
+//
 // WithDelta sets the delta property and returns the receiver for chaining.
 func (x *CNNLossDescriptor) WithDelta(delta float32) *CNNLossDescriptor {
 	x.inner.SetDelta(delta)
 	return x
 }
 
+// @property   lossType @abstract   The type of a loss filter. @discussion This parameter specifies the type of a loss filter.
+//
 // LossType calls the underlying LossType.
 func (x *CNNLossDescriptor) LossType() mpsneuralnetwork.MPSCNNLossType {
 	return x.inner.LossType()
@@ -94,6 +112,8 @@ func (x *CNNLossDescriptor) SetLossType(lossType mpsneuralnetwork.MPSCNNLossType
 	x.inner.SetLossType(lossType)
 }
 
+// @property   reductionType @abstract   The type of a reduction operation performed in the loss filter. @discussion This parameter specifies the type of a reduction operation performed in the loss filter.
+//
 // ReductionType calls the underlying ReductionType.
 func (x *CNNLossDescriptor) ReductionType() mpsneuralnetwork.MPSCNNReductionType {
 	return x.inner.ReductionType()
@@ -104,6 +124,8 @@ func (x *CNNLossDescriptor) SetReductionType(reductionType mpsneuralnetwork.MPSC
 	x.inner.SetReductionType(reductionType)
 }
 
+// @property   reduceAcrossBatch @abstract   If set to YES then the reduction operation is applied also across the batch-index dimension, ie. the loss value is summed over images in the batch and the result of the reduction is written on the first loss image in the batch while the other loss images will be set to zero. If set to NO, then no reductions are performed across the batch dimension and each image in the batch will contain the loss value associated with that one particular image. NOTE: If reductionType == MPSCNNReductionTypeNone, then this flag has no effect on results, that is no reductions are done in this case. NOTE: If reduceAcrossBatch is set to YES and reductionType == MPSCNNReductionTypeMean then the final forward loss value is computed by first summing over the components and then by dividing the result with: number of feature channels * width * height * number of images in the batch. The default value is NO.
+//
 // ReduceAcrossBatch calls the underlying ReduceAcrossBatch.
 func (x *CNNLossDescriptor) ReduceAcrossBatch() bool {
 	return x.inner.ReduceAcrossBatch()
@@ -114,6 +136,8 @@ func (x *CNNLossDescriptor) SetReduceAcrossBatch(reduceAcrossBatch bool) {
 	x.inner.SetReduceAcrossBatch(reduceAcrossBatch)
 }
 
+// @property   weight @abstract   The scale factor to apply to each element of a result. @discussion Each element of a result is multiplied by the weight value. The default value is 1.0f.
+//
 // Weight calls the underlying Weight.
 func (x *CNNLossDescriptor) Weight() float32 {
 	return x.inner.Weight()
@@ -124,6 +148,8 @@ func (x *CNNLossDescriptor) SetWeight(weight float32) {
 	x.inner.SetWeight(weight)
 }
 
+// @property    labelSmoothing @abstract    The label smoothing parameter. The default value is 0.0f. @discussion  This parameter is valid only for the loss functions of the following type(s): MPSCNNLossFunctionTypeSoftmaxCrossEntropy, MPSCNNLossFunctionTypeSigmoidCrossEntropy. MPSCNNLossFunctionTypeSoftmaxCrossEntropy: given labels (ground truth), it is applied in the following way: labels = labelSmoothing > 0 ? labels * (1 - labelSmoothing) + labelSmoothing / numberOfClasses : labels MPSCNNLossFunctionTypeSigmoidCrossEntropy: given labels (ground truth), it is applied in the following way: labels = labelSmoothing > 0 ? labels * (1 - labelSmoothing) + 0.5 * labelSmoothing : labels
+//
 // LabelSmoothing calls the underlying LabelSmoothing.
 func (x *CNNLossDescriptor) LabelSmoothing() float32 {
 	return x.inner.LabelSmoothing()
@@ -134,6 +160,8 @@ func (x *CNNLossDescriptor) SetLabelSmoothing(labelSmoothing float32) {
 	x.inner.SetLabelSmoothing(labelSmoothing)
 }
 
+// @property    numberOfClasses @abstract    The number of classes parameter. The default value is 1. @discussion  This parameter is valid only for the loss functions of the following type(s): MPSCNNLossFunctionTypeSoftmaxCrossEntropy. Given labels (ground truth), it is applied in the following way: labels = labelSmoothing > 0 ? labels * (1 - labelSmoothing) + labelSmoothing / numberOfClasses : labels
+//
 // NumberOfClasses calls the underlying NumberOfClasses.
 func (x *CNNLossDescriptor) NumberOfClasses() uint {
 	return x.inner.NumberOfClasses()
@@ -144,6 +172,8 @@ func (x *CNNLossDescriptor) SetNumberOfClasses(numberOfClasses uint) {
 	x.inner.SetNumberOfClasses(numberOfClasses)
 }
 
+// @property    epsilon @abstract    The epsilon parameter. The default value is 1e-7. @discussion  This parameter is valid only for the loss functions of the following type(s): MPSCNNLossTypeLog. Given predictions and labels (ground truth), it is applied in the following way: -(labels * log(predictions + epsilon)) - ((1 - labels) * log(1 - predictions + epsilon))
+//
 // Epsilon calls the underlying Epsilon.
 func (x *CNNLossDescriptor) Epsilon() float32 {
 	return x.inner.Epsilon()
@@ -154,6 +184,8 @@ func (x *CNNLossDescriptor) SetEpsilon(epsilon float32) {
 	x.inner.SetEpsilon(epsilon)
 }
 
+// @property    delta @abstract    The delta parameter. The default value is 1.0f. @discussion  This parameter is valid only for the loss functions of the following type(s): MPSCNNLossTypeHuber. Given predictions and labels (ground truth), it is applied in the following way: if (|predictions - labels| <= delta, loss = 0.5f * predictions^2 if (|predictions - labels| >  delta, loss = 0.5 * delta^2 + delta * (|predictions - labels| - delta)
+//
 // Delta calls the underlying Delta.
 func (x *CNNLossDescriptor) Delta() float32 {
 	return x.inner.Delta()

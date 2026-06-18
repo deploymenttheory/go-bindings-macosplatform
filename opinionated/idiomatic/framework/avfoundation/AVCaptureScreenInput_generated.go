@@ -37,6 +37,8 @@ func NewCaptureScreenInput() *CaptureScreenInput {
 	return &CaptureScreenInput{inner: raw.AVCaptureScreenInputFromID(_id)}
 }
 
+// @method initWithDisplayID: @abstract Creates an AVCaptureScreenInput instance that provides media data from the given display. @param displayID The id of the display from which to capture video. CGDirectDisplayID is defined in <CoreGraphics/CGDirectDisplay.h> @result An AVCaptureScreenInput instance that provides data from the given screen, or nil, if the screen could not be used for capture. @discussion This method creates an instance of AVCaptureScreenInput that can be used to capture data from a display in an AVCaptureSession. This method validates the displayID. If the display cannot be used because it is not available on the system, for example, this method returns nil.
+//
 // NewCaptureScreenInputWithDisplayID creates a new [CaptureScreenInput].
 func NewCaptureScreenInputWithDisplayID(displayID uint32) *CaptureScreenInput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureScreenInput")), objc.RegisterName("alloc"))
@@ -44,42 +46,56 @@ func NewCaptureScreenInputWithDisplayID(displayID uint32) *CaptureScreenInput {
 	return &CaptureScreenInput{inner: raw.AVCaptureScreenInputFromID(_id)}
 }
 
+// @property minFrameDuration @abstract A property indicating the screen input's minimum frame duration. @discussion An AVCaptureScreenInput's minFrameDuration is the reciprocal of its maximum frame rate. This property may be used to request a maximum frame rate at which the input produces video frames. The requested rate may not be achievable due to overall bandwidth, so actual frame rates may be lower.
+//
 // WithMinFrameDuration sets the minFrameDuration property and returns the receiver for chaining.
 func (x *CaptureScreenInput) WithMinFrameDuration(minFrameDuration coremedia.CMTime) *CaptureScreenInput {
 	x.inner.SetMinFrameDuration(minFrameDuration)
 	return x
 }
 
+// @property cropRect @abstract A property indicating the bounding rectangle of the screen area to be captured in points. @discussion By default, AVCaptureScreenInput captures the entire area of the displayID with which it is associated. To limit the capture rectangle to a subsection of the screen, set the cropRect property, which defines a smaller section of the screen in the screen's coordinate system. The origin (0,0) is the bottom-left corner of the screen.
+//
 // WithCropRect sets the cropRect property and returns the receiver for chaining.
 func (x *CaptureScreenInput) WithCropRect(cropRect corefoundation.CGRect) *CaptureScreenInput {
 	x.inner.SetCropRect(cropRect)
 	return x
 }
 
+// @property scaleFactor @abstract A property indicating the factor by which video buffers captured from the screen are to be scaled. @discussion By default, AVCaptureScreenInput captures the video buffers from the display at a scale factor of 1.0 (no scaling). Set this property to scale the buffers by a given factor. For instance, a 320x240 capture area with a scaleFactor of 2.0f produces video buffers at 640x480.
+//
 // WithScaleFactor sets the scaleFactor property and returns the receiver for chaining.
 func (x *CaptureScreenInput) WithScaleFactor(scaleFactor float64) *CaptureScreenInput {
 	x.inner.SetScaleFactor(scaleFactor)
 	return x
 }
 
+// @property capturesMouseClicks @abstract A property indicating whether mouse clicks should be highlighted in the captured output. @discussion By default, AVCaptureScreenInput does not highlight mouse clicks in its captured output. If this property is set to YES, mouse clicks are highlighted (a circle is drawn around the mouse for the duration of the click) in the captured output.
+//
 // WithCapturesMouseClicks sets the capturesMouseClicks property and returns the receiver for chaining.
 func (x *CaptureScreenInput) WithCapturesMouseClicks(capturesMouseClicks bool) *CaptureScreenInput {
 	x.inner.SetCapturesMouseClicks(capturesMouseClicks)
 	return x
 }
 
+// @property capturesCursor @abstract A property indicating whether the cursor should be rendered to the captured output. @discussion By default, AVCaptureScreenInput draws the cursor in its captured output. If this property is set to NO, the captured output contains only the windows on the screen. Cursor is omitted. Note that cursor position and mouse button state at the time of capture is preserved in CMSampleBuffers emitted from AVCaptureScreenInput. See the inline documentation for kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers in <CoreMediaIO/CMIOSampleBuffer.h>
+//
 // WithCapturesCursor sets the capturesCursor property and returns the receiver for chaining.
 func (x *CaptureScreenInput) WithCapturesCursor(capturesCursor bool) *CaptureScreenInput {
 	x.inner.SetCapturesCursor(capturesCursor)
 	return x
 }
 
+// @property removesDuplicateFrames @abstract A property indicating whether duplicate frames should be removed by the input. @discussion If this property is set to YES, AVCaptureScreenInput performs frame differencing and when it detects duplicate frames, it drops them. If set to NO, the captured output receives all frames from the input. Prior to 10.9 this value defaulted to YES. In 10.9 and later, it defaults to NO, as modern platforms support frame differencing in hardware-based encoders. As of 10.10, this property has been deprecated and is ignored. Clients wishing to re-create this functionality can use an AVCaptureVideoDataOutput and compare frame contents in their own code. If they wish to write a movie file, they can then pass the unique frames to an AVAssetWriterInput.
+//
 // WithRemovesDuplicateFrames sets the removesDuplicateFrames property and returns the receiver for chaining.
 func (x *CaptureScreenInput) WithRemovesDuplicateFrames(removesDuplicateFrames bool) *CaptureScreenInput {
 	x.inner.SetRemovesDuplicateFrames(removesDuplicateFrames)
 	return x
 }
 
+// @property minFrameDuration @abstract A property indicating the screen input's minimum frame duration. @discussion An AVCaptureScreenInput's minFrameDuration is the reciprocal of its maximum frame rate. This property may be used to request a maximum frame rate at which the input produces video frames. The requested rate may not be achievable due to overall bandwidth, so actual frame rates may be lower.
+//
 // MinFrameDuration calls the underlying MinFrameDuration.
 func (x *CaptureScreenInput) MinFrameDuration() coremedia.CMTime {
 	return x.inner.MinFrameDuration()
@@ -90,6 +106,8 @@ func (x *CaptureScreenInput) SetMinFrameDuration(minFrameDuration coremedia.CMTi
 	x.inner.SetMinFrameDuration(minFrameDuration)
 }
 
+// @property cropRect @abstract A property indicating the bounding rectangle of the screen area to be captured in points. @discussion By default, AVCaptureScreenInput captures the entire area of the displayID with which it is associated. To limit the capture rectangle to a subsection of the screen, set the cropRect property, which defines a smaller section of the screen in the screen's coordinate system. The origin (0,0) is the bottom-left corner of the screen.
+//
 // CropRect calls the underlying CropRect.
 func (x *CaptureScreenInput) CropRect() corefoundation.CGRect {
 	return x.inner.CropRect()
@@ -100,6 +118,8 @@ func (x *CaptureScreenInput) SetCropRect(cropRect corefoundation.CGRect) {
 	x.inner.SetCropRect(cropRect)
 }
 
+// @property scaleFactor @abstract A property indicating the factor by which video buffers captured from the screen are to be scaled. @discussion By default, AVCaptureScreenInput captures the video buffers from the display at a scale factor of 1.0 (no scaling). Set this property to scale the buffers by a given factor. For instance, a 320x240 capture area with a scaleFactor of 2.0f produces video buffers at 640x480.
+//
 // ScaleFactor calls the underlying ScaleFactor.
 func (x *CaptureScreenInput) ScaleFactor() float64 {
 	return x.inner.ScaleFactor()
@@ -110,6 +130,8 @@ func (x *CaptureScreenInput) SetScaleFactor(scaleFactor float64) {
 	x.inner.SetScaleFactor(scaleFactor)
 }
 
+// @property capturesMouseClicks @abstract A property indicating whether mouse clicks should be highlighted in the captured output. @discussion By default, AVCaptureScreenInput does not highlight mouse clicks in its captured output. If this property is set to YES, mouse clicks are highlighted (a circle is drawn around the mouse for the duration of the click) in the captured output.
+//
 // CapturesMouseClicks calls the underlying CapturesMouseClicks.
 func (x *CaptureScreenInput) CapturesMouseClicks() bool {
 	return x.inner.CapturesMouseClicks()
@@ -120,6 +142,8 @@ func (x *CaptureScreenInput) SetCapturesMouseClicks(capturesMouseClicks bool) {
 	x.inner.SetCapturesMouseClicks(capturesMouseClicks)
 }
 
+// @property capturesCursor @abstract A property indicating whether the cursor should be rendered to the captured output. @discussion By default, AVCaptureScreenInput draws the cursor in its captured output. If this property is set to NO, the captured output contains only the windows on the screen. Cursor is omitted. Note that cursor position and mouse button state at the time of capture is preserved in CMSampleBuffers emitted from AVCaptureScreenInput. See the inline documentation for kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers in <CoreMediaIO/CMIOSampleBuffer.h>
+//
 // CapturesCursor calls the underlying CapturesCursor.
 func (x *CaptureScreenInput) CapturesCursor() bool {
 	return x.inner.CapturesCursor()
@@ -130,6 +154,8 @@ func (x *CaptureScreenInput) SetCapturesCursor(capturesCursor bool) {
 	x.inner.SetCapturesCursor(capturesCursor)
 }
 
+// @property removesDuplicateFrames @abstract A property indicating whether duplicate frames should be removed by the input. @discussion If this property is set to YES, AVCaptureScreenInput performs frame differencing and when it detects duplicate frames, it drops them. If set to NO, the captured output receives all frames from the input. Prior to 10.9 this value defaulted to YES. In 10.9 and later, it defaults to NO, as modern platforms support frame differencing in hardware-based encoders. As of 10.10, this property has been deprecated and is ignored. Clients wishing to re-create this functionality can use an AVCaptureVideoDataOutput and compare frame contents in their own code. If they wish to write a movie file, they can then pass the unique frames to an AVAssetWriterInput.
+//
 // RemovesDuplicateFrames calls the underlying RemovesDuplicateFrames.
 func (x *CaptureScreenInput) RemovesDuplicateFrames() bool {
 	return x.inner.RemovesDuplicateFrames()

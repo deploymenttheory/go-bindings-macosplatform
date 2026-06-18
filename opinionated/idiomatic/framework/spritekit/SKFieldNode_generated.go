@@ -38,150 +38,200 @@ func NewFieldNode() *FieldNode {
 	return &FieldNode{inner: raw.SKFieldNodeFromID(_id)}
 }
 
+// The region property is the domain of the field's effect. No force is applied to objects outside the region.
+//
 // WithRegion sets the region property and returns the receiver for chaining.
 func (x *FieldNode) WithRegion(region *Region) *FieldNode {
 	x.inner.SetRegion(region.Unwrap())
 	return x
 }
 
+// strength scaling value. default 1.0
+//
 // WithStrength sets the strength property and returns the receiver for chaining.
 func (x *FieldNode) WithStrength(strength float32) *FieldNode {
 	x.inner.SetStrength(strength)
 	return x
 }
 
+// The falloff exponent used to calculate field strength at a distance. Falloff starts at the minimum radius. The default exponent is zero, which results in a uniform field with no falloff. @see minimumRadius
+//
 // WithFalloff sets the falloff property and returns the receiver for chaining.
 func (x *FieldNode) WithFalloff(falloff float32) *FieldNode {
 	x.inner.SetFalloff(falloff)
 	return x
 }
 
+// minimum radius of effect. Default is very small.
+//
 // WithMinimumRadius sets the minimumRadius property and returns the receiver for chaining.
 func (x *FieldNode) WithMinimumRadius(minimumRadius float32) *FieldNode {
 	x.inner.SetMinimumRadius(minimumRadius)
 	return x
 }
 
+// If enabled, a field has an effect. default YES
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *FieldNode) WithEnabled(enabled bool) *FieldNode {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// If a field is exclusive, it suppresses any other field in its region of effect. If two or more exclusive fields overlap, it is undefined which one of them will take effect @see region
+//
 // WithExclusive sets the exclusive property and returns the receiver for chaining.
 func (x *FieldNode) WithExclusive(exclusive bool) *FieldNode {
 	x.inner.SetExclusive(exclusive)
 	return x
 }
 
+// Logical categories the field belongs to. Default is all categories. These categories correspond to fieldBitMasks, and can be used to enforce that a particular field applies to a particular category of objects. @see SKPhysicsBody.fieldBitMask @see SKEmitterNode.fieldBitMask
+//
 // WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
 func (x *FieldNode) WithCategoryBitMask(categoryBitMask uint32) *FieldNode {
 	x.inner.SetCategoryBitMask(categoryBitMask)
 	return x
 }
 
+// fields without a smoothness component will return 0 @see noiseFieldWithSmoothness:smoothness:animationSpeed @see turbulenceFieldWithSmoothness:smoothness:animationSpeed
+//
 // WithSmoothness sets the smoothness property and returns the receiver for chaining.
 func (x *FieldNode) WithSmoothness(smoothness float32) *FieldNode {
 	x.inner.SetSmoothness(smoothness)
 	return x
 }
 
+// fields that can be animated can have non zero values. A value of 2 will animated twice as fast as a value of 1. @see noiseFieldWithSmoothness:smoothness:animationSpeed @see turbulenceFieldWithSmoothness:smoothness:animationSpeed
+//
 // WithAnimationSpeed sets the animationSpeed property and returns the receiver for chaining.
 func (x *FieldNode) WithAnimationSpeed(animationSpeed float32) *FieldNode {
 	x.inner.SetAnimationSpeed(animationSpeed)
 	return x
 }
 
+// fields constructed with a texture can be uppdated by assigning a new texture @see velocityFieldWithTexture:velocityTexture
+//
 // WithTexture sets the texture property and returns the receiver for chaining.
 func (x *FieldNode) WithTexture(texture TextureProvider) *FieldNode {
 	x.inner.SetTexture(texture.asTexture())
 	return x
 }
 
+// The position of the node in the parent's coordinate system
+//
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *FieldNode) WithPosition(position corefoundation.CGPoint) *FieldNode {
 	x.inner.SKNode.SetPosition(position)
 	return x
 }
 
+// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+//
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *FieldNode) WithZPosition(zPosition float64) *FieldNode {
 	x.inner.SKNode.SetZPosition(zPosition)
 	return x
 }
 
+// The Euler rotation about the z axis (in radians)
+//
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *FieldNode) WithZRotation(zRotation float64) *FieldNode {
 	x.inner.SKNode.SetZRotation(zRotation)
 	return x
 }
 
+// The scaling in the X axis
+//
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *FieldNode) WithXScale(xScale float64) *FieldNode {
 	x.inner.SKNode.SetXScale(xScale)
 	return x
 }
 
+// The scaling in the Y axis
+//
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *FieldNode) WithYScale(yScale float64) *FieldNode {
 	x.inner.SKNode.SetYScale(yScale)
 	return x
 }
 
+// The speed multiplier applied to all actions run on this node. Inherited by its children.
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *FieldNode) WithSpeed(speed float64) *FieldNode {
 	x.inner.SKNode.SetSpeed(speed)
 	return x
 }
 
+// Alpha of this node (multiplied by the output color to give the final result)
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *FieldNode) WithAlpha(alpha float64) *FieldNode {
 	x.inner.SKNode.SetAlpha(alpha)
 	return x
 }
 
+// Controls whether or not the node's actions is updated or paused.
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *FieldNode) WithPaused(paused bool) *FieldNode {
 	x.inner.SKNode.SetPaused(paused)
 	return x
 }
 
+// Controls whether or not the node and its children are rendered.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *FieldNode) WithHidden(hidden bool) *FieldNode {
 	x.inner.SKNode.SetHidden(hidden)
 	return x
 }
 
+// Controls whether or not the node receives touch events
+//
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *FieldNode) WithUserInteractionEnabled(userInteractionEnabled bool) *FieldNode {
 	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
 	return x
 }
 
+// The client assignable name. In general, this should be unique among peers in the scene graph.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *FieldNode) WithName(name string) *FieldNode {
 	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// Physics body attached to the node, with synchronized scale, rotation, and position
+//
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *FieldNode) WithPhysicsBody(physicsBody *PhysicsBody) *FieldNode {
 	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
+// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+//
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *FieldNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *FieldNode {
 	x.inner.SKNode.SetUserData(userData)
 	return x
 }
 
+// Kinematic constraints, used in IK solving
+//
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *FieldNode) WithReachConstraints(reachConstraints *ReachConstraints) *FieldNode {
 	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
+// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+//
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *FieldNode) WithConstraints(items ...*raw.SKConstraint) *FieldNode {
 	if len(items) == 0 {
@@ -200,6 +250,8 @@ func (x *FieldNode) WithConstraints(items ...*raw.SKConstraint) *FieldNode {
 	return x
 }
 
+// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+//
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *FieldNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *FieldNode {
 	x.inner.SKNode.SetAttributeValues(attributeValues)
@@ -260,6 +312,8 @@ func (x *FieldNode) WithAccessibilityEnabled(accessibilityEnabled bool) *FieldNo
 	return x
 }
 
+// The region property is the domain of the field's effect. No force is applied to objects outside the region.
+//
 // Region calls the underlying Region.
 func (x *FieldNode) Region() *Region {
 	_r := x.inner.Region()
@@ -274,6 +328,8 @@ func (x *FieldNode) SetRegion(region *raw.SKRegion) {
 	x.inner.SetRegion(region)
 }
 
+// strength scaling value. default 1.0
+//
 // Strength calls the underlying Strength.
 func (x *FieldNode) Strength() float32 {
 	return x.inner.Strength()
@@ -284,6 +340,8 @@ func (x *FieldNode) SetStrength(strength float32) {
 	x.inner.SetStrength(strength)
 }
 
+// The falloff exponent used to calculate field strength at a distance. Falloff starts at the minimum radius. The default exponent is zero, which results in a uniform field with no falloff. @see minimumRadius
+//
 // Falloff calls the underlying Falloff.
 func (x *FieldNode) Falloff() float32 {
 	return x.inner.Falloff()
@@ -294,6 +352,8 @@ func (x *FieldNode) SetFalloff(falloff float32) {
 	x.inner.SetFalloff(falloff)
 }
 
+// minimum radius of effect. Default is very small.
+//
 // MinimumRadius calls the underlying MinimumRadius.
 func (x *FieldNode) MinimumRadius() float32 {
 	return x.inner.MinimumRadius()
@@ -304,6 +364,8 @@ func (x *FieldNode) SetMinimumRadius(minimumRadius float32) {
 	x.inner.SetMinimumRadius(minimumRadius)
 }
 
+// If enabled, a field has an effect. default YES
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *FieldNode) IsEnabled() bool {
 	return x.inner.IsEnabled()
@@ -314,6 +376,8 @@ func (x *FieldNode) SetEnabled(enabled bool) {
 	x.inner.SetEnabled(enabled)
 }
 
+// If a field is exclusive, it suppresses any other field in its region of effect. If two or more exclusive fields overlap, it is undefined which one of them will take effect @see region
+//
 // IsExclusive calls the underlying IsExclusive.
 func (x *FieldNode) IsExclusive() bool {
 	return x.inner.IsExclusive()
@@ -324,6 +388,8 @@ func (x *FieldNode) SetExclusive(exclusive bool) {
 	x.inner.SetExclusive(exclusive)
 }
 
+// Logical categories the field belongs to. Default is all categories. These categories correspond to fieldBitMasks, and can be used to enforce that a particular field applies to a particular category of objects. @see SKPhysicsBody.fieldBitMask @see SKEmitterNode.fieldBitMask
+//
 // CategoryBitMask calls the underlying CategoryBitMask.
 func (x *FieldNode) CategoryBitMask() uint32 {
 	return x.inner.CategoryBitMask()
@@ -334,6 +400,8 @@ func (x *FieldNode) SetCategoryBitMask(categoryBitMask uint32) {
 	x.inner.SetCategoryBitMask(categoryBitMask)
 }
 
+// directed fields' directions can be accessed here. If the field is non-directional, a zero vector will be returned @see linearGravityFieldWithVector:direction @see velocityFieldWithVector:direction
+//
 // Direction calls the underlying Direction.
 func (x *FieldNode) Direction() unsafe.Pointer {
 	return x.inner.Direction()
@@ -344,6 +412,8 @@ func (x *FieldNode) SetDirection(direction unsafe.Pointer) {
 	x.inner.SetDirection(direction)
 }
 
+// fields without a smoothness component will return 0 @see noiseFieldWithSmoothness:smoothness:animationSpeed @see turbulenceFieldWithSmoothness:smoothness:animationSpeed
+//
 // Smoothness calls the underlying Smoothness.
 func (x *FieldNode) Smoothness() float32 {
 	return x.inner.Smoothness()
@@ -354,6 +424,8 @@ func (x *FieldNode) SetSmoothness(smoothness float32) {
 	x.inner.SetSmoothness(smoothness)
 }
 
+// fields that can be animated can have non zero values. A value of 2 will animated twice as fast as a value of 1. @see noiseFieldWithSmoothness:smoothness:animationSpeed @see turbulenceFieldWithSmoothness:smoothness:animationSpeed
+//
 // AnimationSpeed calls the underlying AnimationSpeed.
 func (x *FieldNode) AnimationSpeed() float32 {
 	return x.inner.AnimationSpeed()
@@ -364,6 +436,8 @@ func (x *FieldNode) SetAnimationSpeed(animationSpeed float32) {
 	x.inner.SetAnimationSpeed(animationSpeed)
 }
 
+// fields constructed with a texture can be uppdated by assigning a new texture @see velocityFieldWithTexture:velocityTexture
+//
 // Texture calls the underlying Texture.
 func (x *FieldNode) Texture() *Texture {
 	_r := x.inner.Texture()

@@ -38,6 +38,8 @@ func NewFetchSubscriptionsOperation() *FetchSubscriptionsOperation {
 	return &FetchSubscriptionsOperation{inner: raw.CKFetchSubscriptionsOperationFromID(_id)}
 }
 
+// Creates an operation for fetching the specified subscriptions. - Parameters: - subscriptionIDs: An array of strings where each one is an ID of a subscription that you want to retrieve. This parameter sets the “CKFetchSubscriptionsOperation/subscriptionIDs-714ct“ property's value. If you specify `nil`, you must set the `subscriptionIDs` property before you execute the operation. After creating the operation, assign a block to the “CKFetchSubscriptionsOperation/fetchSubscriptionCompletionBlock-207ep“ property to process the results.
+//
 // NewFetchSubscriptionsOperationWithSubscriptionIDs creates a new [FetchSubscriptionsOperation].
 func NewFetchSubscriptionsOperationWithSubscriptionIDs(subscriptionIDs *foundation.NSArray[*foundation.NSString]) *FetchSubscriptionsOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKFetchSubscriptionsOperation")), objc.RegisterName("alloc"))
@@ -45,6 +47,8 @@ func NewFetchSubscriptionsOperationWithSubscriptionIDs(subscriptionIDs *foundati
 	return &FetchSubscriptionsOperation{inner: raw.CKFetchSubscriptionsOperationFromID(_id)}
 }
 
+// The IDs of the subscriptions to fetch. Use this property to view or change the IDs of the subscriptions to fetch. Each element of the array is a string that represents the ID of a subscription. If you intend to modify this property's value, do so before you execute the operation or submit it to a queue. If you use the “CKFetchSubscriptionsOperation/fetchAllSubscriptionsOperation()“ method to create the operation, CloudKit ignores this property's value and sets it to `nil`.
+//
 // WithSubscriptionIDs sets the collection, converting the Go slice to an NSArray.
 func (x *FetchSubscriptionsOperation) WithSubscriptionIDs(items ...*foundation.NSString) *FetchSubscriptionsOperation {
 	if len(items) == 0 {
@@ -63,72 +67,96 @@ func (x *FetchSubscriptionsOperation) WithSubscriptionIDs(items ...*foundation.N
 	return x
 }
 
+// The closure to execute as the operation fetches individual subscriptions. The closure returns no value and takes the following parameters: - The ID of the subscription. - The subscription, or `nil` if CloudKit can't fetch the subscription. - If CloudKit can't fetch the subscription, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each subscription ID in the “CKFetchSubscriptionsOperation/subscriptionIDs-714ct“ property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // WithPerSubscriptionCompletionBlock sets the perSubscriptionCompletionBlock property and returns the receiver for chaining.
 func (x *FetchSubscriptionsOperation) WithPerSubscriptionCompletionBlock(perSubscriptionCompletionBlock func(*foundation.NSString, *raw.CKSubscription, unsafe.Pointer)) *FetchSubscriptionsOperation {
 	x.inner.SetPerSubscriptionCompletionBlock(perSubscriptionCompletionBlock)
 	return x
 }
 
+// The block to execute after the operation fetches the subscriptions. The block returns no value and takes the following parameters: - term `subscriptionsBySubscriptionID`: A dictionary with keys that are the IDs of the subscriptions you request, and values that are the corresponding subscriptions. - term `operationError`: An error that contains information about a problem, or `nil` if the system successfully fetches the subscriptions. The operation executes this block only once, and it's your only opportunity to process the results. The block executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The block reports an error of type “CKError/Code/partialFailure“ when it retrieves only some of the subscriptions successfully. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the IDs of the subscriptions that the operation can't fetch, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
+//
 // WithFetchSubscriptionCompletionBlock sets the fetchSubscriptionCompletionBlock property and returns the receiver for chaining.
 func (x *FetchSubscriptionsOperation) WithFetchSubscriptionCompletionBlock(fetchSubscriptionCompletionBlock objc.Block) *FetchSubscriptionsOperation {
 	x.inner.SetFetchSubscriptionCompletionBlock(fetchSubscriptionCompletionBlock)
 	return x
 }
 
+// The database that the operation uses. For operations that you execute in a custom queue, use this property to specify the target database. Setting the database also sets the corresponding container, which it inherits from “CKOperation“. If this property's value is `nil`, the operation targets the user's private database. The default value is `nil`.
+//
 // WithDatabase sets the database property and returns the receiver for chaining.
 func (x *FetchSubscriptionsOperation) WithDatabase(database *Database) *FetchSubscriptionsOperation {
 	x.inner.CKDatabaseOperation.SetDatabase(database.Unwrap())
 	return x
 }
 
+// The operation's configuration.
+//
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *FetchSubscriptionsOperation) WithConfiguration(configuration *OperationConfiguration) *FetchSubscriptionsOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
+// The operation's group.
+//
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *FetchSubscriptionsOperation) WithGroup(group *OperationGroup) *FetchSubscriptionsOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
+// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *FetchSubscriptionsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchSubscriptionsOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
 	return x
 }
 
+// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
+//
 // WithContainer sets the container property and returns the receiver for chaining.
 func (x *FetchSubscriptionsOperation) WithContainer(container *Container) *FetchSubscriptionsOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
+//
 // WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
 func (x *FetchSubscriptionsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchSubscriptionsOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
 	return x
 }
 
+// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *FetchSubscriptionsOperation) WithLongLived(longLived bool) *FetchSubscriptionsOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetLongLived(longLived)
 	return x
 }
 
+// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
+//
 // WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
 func (x *FetchSubscriptionsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchSubscriptionsOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
 	return x
 }
 
+// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
+//
 // WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
 func (x *FetchSubscriptionsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchSubscriptionsOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
 	return x
 }
 
+// The IDs of the subscriptions to fetch. Use this property to view or change the IDs of the subscriptions to fetch. Each element of the array is a string that represents the ID of a subscription. If you intend to modify this property's value, do so before you execute the operation or submit it to a queue. If you use the “CKFetchSubscriptionsOperation/fetchAllSubscriptionsOperation()“ method to create the operation, CloudKit ignores this property's value and sets it to `nil`.
+//
 // SubscriptionIDs returns the collection as a Go slice.
 func (x *FetchSubscriptionsOperation) SubscriptionIDs() []*foundation.NSString {
 	arr := x.inner.SubscriptionIDs()
@@ -145,6 +173,8 @@ func (x *FetchSubscriptionsOperation) SetSubscriptionIDs(subscriptionIDs *founda
 	x.inner.SetSubscriptionIDs(subscriptionIDs)
 }
 
+// The closure to execute as the operation fetches individual subscriptions. The closure returns no value and takes the following parameters: - The ID of the subscription. - The subscription, or `nil` if CloudKit can't fetch the subscription. - If CloudKit can't fetch the subscription, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each subscription ID in the “CKFetchSubscriptionsOperation/subscriptionIDs-714ct“ property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // PerSubscriptionCompletionBlock calls the underlying PerSubscriptionCompletionBlock.
 func (x *FetchSubscriptionsOperation) PerSubscriptionCompletionBlock() objc.Block {
 	return x.inner.PerSubscriptionCompletionBlock()
@@ -155,6 +185,8 @@ func (x *FetchSubscriptionsOperation) SetPerSubscriptionCompletionBlock(perSubsc
 	x.inner.SetPerSubscriptionCompletionBlock(perSubscriptionCompletionBlock)
 }
 
+// The block to execute after the operation fetches the subscriptions. The block returns no value and takes the following parameters: - term `subscriptionsBySubscriptionID`: A dictionary with keys that are the IDs of the subscriptions you request, and values that are the corresponding subscriptions. - term `operationError`: An error that contains information about a problem, or `nil` if the system successfully fetches the subscriptions. The operation executes this block only once, and it's your only opportunity to process the results. The block executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The block reports an error of type “CKError/Code/partialFailure“ when it retrieves only some of the subscriptions successfully. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the IDs of the subscriptions that the operation can't fetch, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
+//
 // FetchSubscriptionCompletionBlock calls the underlying FetchSubscriptionCompletionBlock.
 func (x *FetchSubscriptionsOperation) FetchSubscriptionCompletionBlock() objc.Block {
 	return x.inner.FetchSubscriptionCompletionBlock()

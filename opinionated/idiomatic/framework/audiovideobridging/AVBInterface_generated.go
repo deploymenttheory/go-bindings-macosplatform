@@ -31,6 +31,8 @@ func InterfaceFromID(id objc.ID) *Interface {
 	return &Interface{inner: raw.AVBInterfaceFromID(id)}
 }
 
+// @method		initWithInterfaceName: @abstract	This method initializes the receiver to work on the specified interface. @param		anInterfaceName	The BSD name of the interface. @result		The initialized receiver.
+//
 // NewInterfaceWithInterfaceName creates a new [Interface].
 func NewInterfaceWithInterfaceName(anInterfaceName string) *Interface {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVBInterface")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewInterfaceWithInterfaceName(anInterfaceName string) *Interface {
 	return &Interface{inner: raw.AVBInterfaceFromID(_id)}
 }
 
+// @property	interfaceName @abstract	The BSD interface name.
+//
 // InterfaceName calls the underlying InterfaceName.
 func (x *Interface) InterfaceName() string {
 	_r := x.inner.InterfaceName()
@@ -47,6 +51,8 @@ func (x *Interface) InterfaceName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property	entityDiscovery @abstract	The IEEE Std 1722.1™-2013 entity discovery for the interface.
+//
 // EntityDiscovery calls the underlying EntityDiscovery.
 func (x *Interface) EntityDiscovery() *AVB17221EntityDiscovery {
 	_r := x.inner.EntityDiscovery()
@@ -56,6 +62,8 @@ func (x *Interface) EntityDiscovery() *AVB17221EntityDiscovery {
 	return &AVB17221EntityDiscovery{inner: _r}
 }
 
+// @property	aecp @abstract	The IEEE Std 1722.1™-2013 AECP interface for the interface.
+//
 // Aecp calls the underlying Aecp.
 func (x *Interface) Aecp() *AVB17221AECPInterface {
 	_r := x.inner.Aecp()
@@ -65,6 +73,8 @@ func (x *Interface) Aecp() *AVB17221AECPInterface {
 	return &AVB17221AECPInterface{inner: _r}
 }
 
+// @property	acmp @abstract	The IEEE Std 1722.1™-2013 ACMP interface for the interface.
+//
 // Acmp calls the underlying Acmp.
 func (x *Interface) Acmp() *AVB17221ACMPInterface {
 	_r := x.inner.Acmp()

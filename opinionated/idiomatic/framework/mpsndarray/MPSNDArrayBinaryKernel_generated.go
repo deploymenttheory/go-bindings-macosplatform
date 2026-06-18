@@ -38,77 +38,107 @@ func NewArrayBinaryKernelWithDevice(device metal.MTLDevice) *ArrayBinaryKernel {
 	return &ArrayBinaryKernel{inner: raw.MPSNDArrayBinaryKernelFromID(_id)}
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *ArrayBinaryKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayBinaryKernel {
 	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
 	return x
 }
 
+// @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf                 The command buffer into which to encode the kernel @param      primarySourceArray     The primary source for the filter in an NSArray. @param      secondarySourceArray   The secondary source for the filter in an NSArray. @result     A newly allocated MPSNDArray that will contain the result of the calculation when the command buffer completes successfully.
+//
 // EncodeToCommandBufferPrimarySourceArraySecondarySourceArray calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArray.
 func (x *ArrayBinaryKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray) *mpscore.MPSNDArray {
 	return x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArray(cmdBuf, primarySourceArray, secondarySourceArray)
 }
 
+// @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      primarySourceArray     The primary source for the filter in an NSArray. @param      secondarySourceArray   The secondary source for the filter in an NSArray. @param      destination     The NDArray to receive the result
+//
 // EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayDestinationArray calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayDestinationArray.
 func (x *ArrayBinaryKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayDestinationArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, destination *mpscore.MPSNDArray) {
 	x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayDestinationArray(cmdBuf, primarySourceArray, secondarySourceArray, destination)
 }
 
+// @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      primarySourceArray     The primary source for the filter in an NSArray. @param      secondarySourceArray   The secondary source for the filter in an NSArray. @param      outGradientState If non-nil, the address output gradient state is written to this address @param      outputStateIsTemporary  If YES, the state if any will be allocated to contain temporary textures and buffers as needed @result     A newly allocated MPSNDArray that will contain the result of the calculation when the command buffer completes successfully.
+//
 // EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateOutputStateIsTemporary calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateOutputStateIsTemporary.
 func (x *ArrayBinaryKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray {
 	return x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateOutputStateIsTemporary(cmdBuf, primarySourceArray, secondarySourceArray, outGradientState, outputStateIsTemporary)
 }
 
+// @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      primarySourceArray     The primary source for the filter in an NSArray. @param      secondarySourceArray   The secondary source for the filter in an NSArray. @param      outGradientState The output gradient state to record the operation for later use by gradient @param      destination     A destination array to contain the result of the calculation when the command buffer completes successfully.
+//
 // EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateDestinationArray calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateDestinationArray.
 func (x *ArrayBinaryKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateDestinationArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, destination *mpscore.MPSNDArray) {
 	x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateDestinationArray(cmdBuf, primarySourceArray, secondarySourceArray, outGradientState, destination)
 }
 
+// @property  primaryOffsets @abstract  The coordinate of the position read from this source array which is used to calculate the result value at [0,0,0,....] If the position read is actually a contiguous region (e.g. the area covered by a convolution kernel) then this is the center of that region, rounded down, for each dimension. Default: 0,0,0...
+//
 // PrimaryOffsets calls the underlying PrimaryOffsets.
 func (x *ArrayBinaryKernel) PrimaryOffsets() raw.MPSNDArrayOffsets {
 	return x.inner.PrimaryOffsets()
 }
 
+// @property  primaryEdgeMode @abstract  The edge mode used for a source NDArray Default: MPSImageEdgeModeZero
+//
 // PrimaryEdgeMode calls the underlying PrimaryEdgeMode.
 func (x *ArrayBinaryKernel) PrimaryEdgeMode() mpscore.MPSImageEdgeMode {
 	return x.inner.PrimaryEdgeMode()
 }
 
+// @property  primaryKernelSizes @abstract  The diameters of the point spread function in each dimension for a source NDArray Default: 1
+//
 // PrimaryKernelSizes calls the underlying PrimaryKernelSizes.
 func (x *ArrayBinaryKernel) PrimaryKernelSizes() raw.MPSNDArraySizes {
 	return x.inner.PrimaryKernelSizes()
 }
 
+// @property  primaryStrides @abstract  If the filter is a "backwards" filter such as a gradient filter or convolution transpose, then this is the upsampling ratio and zeros are inserted in the result. Default: 1
+//
 // PrimaryStrides calls the underlying PrimaryStrides.
 func (x *ArrayBinaryKernel) PrimaryStrides() raw.MPSNDArrayOffsets {
 	return x.inner.PrimaryStrides()
 }
 
+// @property  primaryDilationRate @abstract  The stride in each dimension from one PSF tap to an adjacent PSF tap. Default: 1
+//
 // PrimaryDilationRates calls the underlying PrimaryDilationRates.
 func (x *ArrayBinaryKernel) PrimaryDilationRates() raw.MPSNDArraySizes {
 	return x.inner.PrimaryDilationRates()
 }
 
+// @property  secondaryOffsets @abstract  The coordinate of the position read from this source array which is used to calculate the result value at [0,0,0,....] If the position read is actually a contiguous region (e.g. the area covered by a convolution kernel) then this is the center of that region, rounded down, for each dimension. Default: 0,0,0...
+//
 // SecondaryOffsets calls the underlying SecondaryOffsets.
 func (x *ArrayBinaryKernel) SecondaryOffsets() raw.MPSNDArrayOffsets {
 	return x.inner.SecondaryOffsets()
 }
 
+// @property  secondaryEdgeMode @abstract  The edge mode used for a source NDArray Default: MPSImageEdgeModeZero
+//
 // SecondaryEdgeMode calls the underlying SecondaryEdgeMode.
 func (x *ArrayBinaryKernel) SecondaryEdgeMode() mpscore.MPSImageEdgeMode {
 	return x.inner.SecondaryEdgeMode()
 }
 
+// @property  secondaryKernelSizes @abstract  The diameters of the point spread function in each dimension for a source NDArray Default: 1
+//
 // SecondaryKernelSizes calls the underlying SecondaryKernelSizes.
 func (x *ArrayBinaryKernel) SecondaryKernelSizes() raw.MPSNDArraySizes {
 	return x.inner.SecondaryKernelSizes()
 }
 
+// @property  secondaryStrides @abstract  If the filter is a "backwards" filter such as a gradient filter or convolution transpose, then this is the upsampling ratio and zeros are inserted in the result. Default: 1
+//
 // SecondaryStrides calls the underlying SecondaryStrides.
 func (x *ArrayBinaryKernel) SecondaryStrides() raw.MPSNDArrayOffsets {
 	return x.inner.SecondaryStrides()
 }
 
+// @property  secondaryDilationRate @abstract  The stride in each dimension from one PSF tap to an adjacent PSF tap. Default: 1
+//
 // SecondaryDilationRates calls the underlying SecondaryDilationRates.
 func (x *ArrayBinaryKernel) SecondaryDilationRates() raw.MPSNDArraySizes {
 	return x.inner.SecondaryDilationRates()

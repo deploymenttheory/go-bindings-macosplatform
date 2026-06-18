@@ -40,21 +40,29 @@ func NewWKWebExtensionWindowConfiguration() *WKWebExtensionWindowConfiguration {
 	return &WKWebExtensionWindowConfiguration{inner: raw.WKWebExtensionWindowConfigurationFromID(_id)}
 }
 
+// @abstract Indicates the window type for the window.
+//
 // WindowType calls the underlying WindowType.
 func (x *WKWebExtensionWindowConfiguration) WindowType() WKWebExtensionWindowType {
 	return WKWebExtensionWindowType(x.inner.WindowType())
 }
 
+// @abstract Indicates the window state for the window.
+//
 // WindowState calls the underlying WindowState.
 func (x *WKWebExtensionWindowConfiguration) WindowState() WKWebExtensionWindowState {
 	return WKWebExtensionWindowState(x.inner.WindowState())
 }
 
+// @abstract Indicates the frame where the window should be positioned on the main screen. @discussion This frame should override the app's default window position and size. Individual components (e.g., `origin.x`, `size.width`) will be `NaN` if not specified.
+//
 // Frame calls the underlying Frame.
 func (x *WKWebExtensionWindowConfiguration) Frame() corefoundation.CGRect {
 	return x.inner.Frame()
 }
 
+// @abstract Indicates the URLs that the window should initially load as tabs. @discussion If “tabURLs“ and “tabs“ are both empty, the app's default "start page" should appear in a tab. @seealso tabs
+//
 // TabURLs returns the collection as a Go slice.
 func (x *WKWebExtensionWindowConfiguration) TabURLs() []*foundation.NSURL {
 	arr := x.inner.TabURLs()
@@ -66,16 +74,22 @@ func (x *WKWebExtensionWindowConfiguration) TabURLs() []*foundation.NSURL {
 	})
 }
 
+// @abstract Indicates the existing tabs that should be moved to the window. @discussion If “tabs“ and “tabURLs“ are both empty, the app's default "start page" should appear in a tab. @seealso tabURLs
+//
 // Tabs calls the underlying Tabs.
 func (x *WKWebExtensionWindowConfiguration) Tabs() *foundation.NSArray[raw.WKWebExtensionTab] {
 	return x.inner.Tabs()
 }
 
+// @abstract Indicates whether the window should be focused.
+//
 // ShouldBeFocused calls the underlying ShouldBeFocused.
 func (x *WKWebExtensionWindowConfiguration) ShouldBeFocused() bool {
 	return x.inner.ShouldBeFocused()
 }
 
+// @abstract Indicates whether the window should be private. @note To ensure proper isolation between private and non-private data, web views associated with private data must use a different “WKUserContentController“. Likewise, to be identified as a private web view and to ensure that cookies and other website data is not shared, private web views must be configured to use a non-persistent “WKWebsiteDataStore“.
+//
 // ShouldBePrivate calls the underlying ShouldBePrivate.
 func (x *WKWebExtensionWindowConfiguration) ShouldBePrivate() bool {
 	return x.inner.ShouldBePrivate()

@@ -39,26 +39,36 @@ func NewContentKeySession() *ContentKeySession {
 	return &ContentKeySession{inner: raw.AVContentKeySessionFromID(_id)}
 }
 
+// Sets the receiver's delegate. A delegate is required to handle content key initialization. - Parameter delegate: An object conforming to the AVContentKeySessionDelegate protocol. - Parameter delegateQueue: A dispatch queue on which delegate methods will be invoked whenever processes requiring content keys are executed asynchronously. Passing a value of nil for the delegateQueue parameter along with a non-nil value for the delegate parameter will result in an invalid argument exception.
+//
 // SetDelegateQueue calls the underlying SetDelegateQueue.
 func (x *ContentKeySession) SetDelegateQueue(delegate raw.AVContentKeySessionDelegate, delegateQueue *foundation.NSObject) {
 	x.inner.SetDelegateQueue(delegate, delegateQueue)
 }
 
+// Tells the receiver to treat the session as having been intentionally and normally expired. When an instance of AVContentKeySession receives an expire message, all of its associated objects conforming to the AVContentKeyRecipient protocol will become inoperable. Send this message only after you have finished operating on the media data.
+//
 // Expire calls the underlying Expire.
 func (x *ContentKeySession) Expire() {
 	x.inner.Expire()
 }
 
+// Informs the receiver that it should attempt to instantiate a content decryption key using the specified initialization data. May be used to generate an AVContentKeyRequest from request initialization data already in hand, without awaiting such data during the processing of media data of an associated recipient. - Parameter identifier: Container- and protocol-specific identifier to be used to obtain a key response. Either identifier or initializationData must be non-nil. Both can be non-nil, if the content protection protocol requires both. - Parameter initializationData: Container- and protocol-specific data to be used to obtain a key response. Either identifier or initializationData must be non-nil. Both can be non-nil, if the content protection protocol requires both. - Parameter options: Additional information necessary to obtain the key, or nil if none. See AVContentKeyRequest*Key below.
+//
 // ProcessContentKeyRequestWithIdentifierInitializationDataOptions calls the underlying ProcessContentKeyRequestWithIdentifierInitializationDataOptions.
 func (x *ContentKeySession) ProcessContentKeyRequestWithIdentifierInitializationDataOptions(identifier objc.ID, initializationData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.ProcessContentKeyRequestWithIdentifierInitializationDataOptions(identifier, initializationData, options)
 }
 
+// Informs the receiver that the already provided response data for an earlier AVContentKeyRequest will imminently expire. In response the receiver will invoke your delegate with a new content key request entreating it to renew the expiring response data, via -contentKeySession:didProvideRenewingContentKeyRequest:.
+//
 // RenewExpiringResponseDataForContentKeyRequest calls the underlying RenewExpiringResponseDataForContentKeyRequest.
 func (x *ContentKeySession) RenewExpiringResponseDataForContentKeyRequest(contentKeyRequest *raw.AVContentKeyRequest) {
 	x.inner.RenewExpiringResponseDataForContentKeyRequest(contentKeyRequest)
 }
 
+// Creates a secure server playback context (SPC) that the client could send to the key server to obtain an expiration date for the provided persistable content key data. - Parameter persistableContentKeyData: Persistable content key data that was previously created using -[AVContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:] or obtained via AVContentKeySessionDelegate callback -contentKeySession:didUpdatePersistableContentKey:forContentKeyIdentifier:. - Parameter handler: Once the secure token is ready, this block will be called with the token or an error describing the failure.
+//
 // MakeSecureTokenForExpirationDateOfPersistableContentKey blocks until the operation completes or ctx is cancelled.
 func (x *ContentKeySession) MakeSecureTokenForExpirationDateOfPersistableContentKey(ctx context.Context, persistableContentKeyData *foundation.NSData) (*foundation.NSData, error) {
 	type _result struct {
@@ -83,6 +93,8 @@ func (x *ContentKeySession) MakeSecureTokenForExpirationDateOfPersistableContent
 	}
 }
 
+// Invalidates the persistable content key and creates a secure server playback context (SPC) that the client could send to the key server to verify the outcome of invalidation request. Once invalidated, a persistable content key cannot be used to answer key requests during later playback sessions. - Parameter persistableContentKeyData: Persistable content key data that was previously created using -[AVContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:] or obtained via AVContentKeySessionDelegate callback -contentKeySession:didUpdatePersistableContentKey:forContentKeyIdentifier:. - Parameter options: Additional information necessary to generate the server playback context, or nil if none. See AVContentKeySessionServerPlaybackContextOption for supported options. - Parameter handler: Once the server playback context is ready, this block will be called with the data or an error describing the failure.
+//
 // InvalidatePersistableContentKeyOptions blocks until the operation completes or ctx is cancelled.
 func (x *ContentKeySession) InvalidatePersistableContentKeyOptions(ctx context.Context, persistableContentKeyData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
 	type _result struct {
@@ -107,6 +119,8 @@ func (x *ContentKeySession) InvalidatePersistableContentKeyOptions(ctx context.C
 	}
 }
 
+// Invalidates all persistable content keys associated with the application and creates a secure server playback context (SPC) that the client could send to the key server to verify the outcome of invalidation request. Once invalidated, persistable content keys cannot be used to answer key requests during later playback sessions. - Parameter appIdentifier: An opaque identifier for the application. The contents of this identifier depend on the particular protocol in use by the entity that controls the use of the media data. - Parameter options: Additional information necessary to generate the server playback context, or nil if none. See AVContentKeySessionServerPlaybackContextOption for supported options. - Parameter handler: Once the server playback context is ready, this block will be called with the data or an error describing the failure.
+//
 // InvalidateAllPersistableContentKeysForAppOptions blocks until the operation completes or ctx is cancelled.
 func (x *ContentKeySession) InvalidateAllPersistableContentKeysForAppOptions(ctx context.Context, appIdentifier *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
 	type _result struct {
@@ -131,21 +145,29 @@ func (x *ContentKeySession) InvalidateAllPersistableContentKeysForAppOptions(ctx
 	}
 }
 
+// The receiver's delegate. The value of this property is an object conforming to the AVContentKeySessionDelegate protocol. The delegate is set using the setDelegate:queue: method.
+//
 // Delegate calls the underlying Delegate.
 func (x *ContentKeySession) Delegate() raw.AVContentKeySessionDelegate {
 	return x.inner.Delegate()
 }
 
+// The dispatch queue on which all delegate methods will be invoked whenever processes requiring content keys are executed asynchronously. The value of this property is a dispatch_queue_t. The queue is set using the setDelegate:queue: method.
+//
 // DelegateQueue calls the underlying DelegateQueue.
 func (x *ContentKeySession) DelegateQueue() *foundation.NSObject {
 	return x.inner.DelegateQueue()
 }
 
+// The storage URL provided when the AVContentKeySession was created. May be nil. URL to a writable directory; may be nil. The session will use this to facilitate expired session reports after abnormal session termination.
+//
 // StorageURL calls the underlying StorageURL.
 func (x *ContentKeySession) StorageURL() *foundation.NSURL {
 	return x.inner.StorageURL()
 }
 
+// The key system used for retrieving keys
+//
 // KeySystem calls the underlying KeySystem.
 func (x *ContentKeySession) KeySystem() string {
 	_r := x.inner.KeySystem()
@@ -155,16 +177,22 @@ func (x *ContentKeySession) KeySystem() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// An opaque identifier for the current content protection session. May be nil. Will call the delegate's contentKeySessionContentProtectionSessionIdentifierDidChange: when the identifier changes. The protection session ID is a unique string identifier generated by the AVContentKeySession that can be used by the application to identify content key session objects.
+//
 // ContentProtectionSessionIdentifier calls the underlying ContentProtectionSessionIdentifier.
 func (x *ContentKeySession) ContentProtectionSessionIdentifier() *foundation.NSData {
 	return x.inner.ContentProtectionSessionIdentifier()
 }
 
+// Informs the receiver that the specified recipient will be used for the session. It is an error to add recipient to sessions that have received an expire message. It is also an error to add recipients after they have already begun to process media data (e.g. after an AVURLAsset has loaded the values of any of its keys). Such errors will result in NSInternalInconsistencyExceptions. Sending this message to an AVContentKeySession is atomic.
+//
 // AddContentKeyRecipient calls the underlying AddContentKeyRecipient.
 func (x *ContentKeySession) AddContentKeyRecipient(recipient raw.AVContentKeyRecipient) {
 	x.inner.AddContentKeyRecipient(recipient)
 }
 
+// Informs the receiver that the specified recipient will no longer be used. After the specified recipient is removed from the receiver it will become inoperable. Remove the recipient only after you have finished operating on the media data associated with it. Sending this message to an AVContentKeySession is atomic.
+//
 // RemoveContentKeyRecipient calls the underlying RemoveContentKeyRecipient.
 func (x *ContentKeySession) RemoveContentKeyRecipient(recipient raw.AVContentKeyRecipient) {
 	x.inner.RemoveContentKeyRecipient(recipient)

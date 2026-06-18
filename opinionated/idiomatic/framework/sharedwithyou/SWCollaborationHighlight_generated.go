@@ -38,6 +38,8 @@ func NewCollaborationHighlight() *CollaborationHighlight {
 	return &CollaborationHighlight{inner: raw.SWCollaborationHighlightFromID(_id)}
 }
 
+// @abstract Unique identifier as provided by the app hosting the collaboration @discussion This identifier is unique across platforms and shares
+//
 // CollaborationIdentifier calls the underlying CollaborationIdentifier.
 func (x *CollaborationHighlight) CollaborationIdentifier() string {
 	_r := x.inner.CollaborationIdentifier()
@@ -47,6 +49,8 @@ func (x *CollaborationHighlight) CollaborationIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Title of the collaboration highlight @discussion Title of the collaboration if provided by the app hosting the collaboration
+//
 // Title calls the underlying Title.
 func (x *CollaborationHighlight) Title() string {
 	_r := x.inner.Title()
@@ -56,11 +60,15 @@ func (x *CollaborationHighlight) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Date when the file was created
+//
 // CreationDate calls the underlying CreationDate.
 func (x *CollaborationHighlight) CreationDate() *foundation.NSDate {
 	return x.inner.CreationDate()
 }
 
+// @abstract UTI type for this collaboration highlight
+//
 // ContentType calls the underlying ContentType.
 func (x *CollaborationHighlight) ContentType() *uniformtypeidentifiers.UTType {
 	return x.inner.ContentType()

@@ -35,6 +35,8 @@ func NewMouse() *Mouse {
 	return &Mouse{inner: raw.GCMouseFromID(_id)}
 }
 
+// Unlike GCController GCMouse supports only one input profile Profile contains mouse buttons, scroll wheel and  pointer delta.
+//
 // MouseInput calls the underlying MouseInput.
 func (x *Mouse) MouseInput() *MouseInput {
 	_r := x.inner.MouseInput()

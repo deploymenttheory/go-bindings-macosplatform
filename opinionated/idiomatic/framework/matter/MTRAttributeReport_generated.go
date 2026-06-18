@@ -32,6 +32,8 @@ func MTRAttributeReportFromID(id objc.ID) *MTRAttributeReport {
 	return &MTRAttributeReport{inner: raw.MTRAttributeReportFromID(id)}
 }
 
+// Initialize an MTRAttributeReport with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not an attribute response. Will set the value property to nil and the error property to non-nil, even if the schema for the value is not known, if the response-value is an error, not data. Will return nil and hand out an error if the response-value is data in the following cases: * The response is for a cluster/attribute combination for which the schema is unknown and hence the type of the data is not known. * The data does not match the known schema.
+//
 // NewMTRAttributeReportWithResponseValueError creates a new [MTRAttributeReport].
 func NewMTRAttributeReportWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRAttributeReport, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAttributeReport")), objc.RegisterName("alloc"))
@@ -52,11 +54,15 @@ func (x *MTRAttributeReport) Path() *MTRAttributePath {
 	return &MTRAttributePath{inner: _r}
 }
 
+// value will be nil in the following cases: * There was an error.  In this case, "error" will not be nil. * The attribute is nullable and the value of the attribute is null. If value is not nil, the actual type of value will depend on the schema-defined (typically defined in the Matter specification) type of the attribute as follows: * list: NSArray of whatever type the list entries are. * struct: The corresponding structure interface defined by Matter.framework * octet string: NSData * string: NSString * discrete/analog types: NSNumber Derived types (in the Matter specification sense) are represented the same as the base type, except for "string" (which is a derived type of "octet string" in the specification).
+//
 // Value calls the underlying Value.
 func (x *MTRAttributeReport) Value() objc.ID {
 	return x.inner.Value()
 }
 
+// If this specific path resulted in an error, the error (in the MTRInteractionErrorDomain or MTRErrorDomain) that corresponds to this path.
+//
 // Error calls the underlying Error.
 func (x *MTRAttributeReport) Error() unsafe.Pointer {
 	return x.inner.Error()

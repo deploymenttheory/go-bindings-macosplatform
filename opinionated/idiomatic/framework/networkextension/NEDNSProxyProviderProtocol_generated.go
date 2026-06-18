@@ -37,102 +37,136 @@ func NewNEDNSProxyProviderProtocol() *NEDNSProxyProviderProtocol {
 	return &NEDNSProxyProviderProtocol{inner: raw.NEDNSProxyProviderProtocolFromID(_id)}
 }
 
+// @property providerConfiguration @discussion A dictionary containing NEDNSProxyProvider vendor-specific configuration parameters. This dictionary is passed as-is to NEDNSProxyProviders when a DNS proxy is started.
+//
 // WithProviderConfiguration sets the providerConfiguration property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NEDNSProxyProviderProtocol {
 	x.inner.SetProviderConfiguration(providerConfiguration)
 	return x
 }
 
+// @property providerBundleIdentifier @discussion A string containing the bundle identifier of the NEDNSProxyProvider to be used by this configuration.
+//
 // WithProviderBundleIdentifier sets the providerBundleIdentifier property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithProviderBundleIdentifier(providerBundleIdentifier string) *NEDNSProxyProviderProtocol {
 	x.inner.SetProviderBundleIdentifier(foundation.NSStringStringWithUTF8String(providerBundleIdentifier))
 	return x
 }
 
+// @property serverAddress @discussion The VPN server. Depending on the protocol, may be an IP address, host name, or URL.
+//
 // WithServerAddress sets the serverAddress property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithServerAddress(serverAddress string) *NEDNSProxyProviderProtocol {
 	x.inner.NEVPNProtocol.SetServerAddress(foundation.NSStringStringWithUTF8String(serverAddress))
 	return x
 }
 
+// @property username @discussion The username component of the VPN authentication credential.
+//
 // WithUsername sets the username property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithUsername(username string) *NEDNSProxyProviderProtocol {
 	x.inner.NEVPNProtocol.SetUsername(foundation.NSStringStringWithUTF8String(username))
 	return x
 }
 
+// @property passwordReference @discussion The password component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassGenericPassword class.
+//
 // WithPasswordReference sets the passwordReference property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithPasswordReference(passwordReference *foundation.NSData) *NEDNSProxyProviderProtocol {
 	x.inner.NEVPNProtocol.SetPasswordReference(passwordReference)
 	return x
 }
 
+// @property identityReference @discussion The certificate and private key component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassIdentity class.
+//
 // WithIdentityReference sets the identityReference property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithIdentityReference(identityReference *foundation.NSData) *NEDNSProxyProviderProtocol {
 	x.inner.NEVPNProtocol.SetIdentityReference(identityReference)
 	return x
 }
 
+// @property identityData @discussion The PKCS12 data for the VPN authentication identity. The value is a NSData in PKCS12 format.
+//
 // WithIdentityData sets the identityData property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithIdentityData(identityData *foundation.NSData) *NEDNSProxyProviderProtocol {
 	x.inner.NEVPNProtocol.SetIdentityData(identityData)
 	return x
 }
 
+// @property identityDataPassword @discussion The password to be used to decrypt the PKCS12 identity data.
+//
 // WithIdentityDataPassword sets the identityDataPassword property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithIdentityDataPassword(identityDataPassword string) *NEDNSProxyProviderProtocol {
 	x.inner.NEVPNProtocol.SetIdentityDataPassword(foundation.NSStringStringWithUTF8String(identityDataPassword))
 	return x
 }
 
+// @property disconnectOnSleep @discussion If YES, the VPN connection will be disconnected when the device goes to sleep. The default is NO.
+//
 // WithDisconnectOnSleep sets the disconnectOnSleep property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithDisconnectOnSleep(disconnectOnSleep bool) *NEDNSProxyProviderProtocol {
 	x.inner.NEVPNProtocol.SetDisconnectOnSleep(disconnectOnSleep)
 	return x
 }
 
+// @property proxySettings @discussion An NEProxySettings object containing the proxy settings to use for connections routed through the tunnel.
+//
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithProxySettings(proxySettings *NEProxySettings) *NEDNSProxyProviderProtocol {
 	x.inner.NEVPNProtocol.SetProxySettings(proxySettings.Unwrap())
 	return x
 }
 
+// @property includeAllNetworks @discussion If this property is set to YES then all network traffic is routed through the tunnel, with some exclusions. Several of the exclusions can be controlled with the excludeLocalNetworks, excludeCellularServices, excludeAPNs and excludeDeviceCommunication properties. See the documentation for those properties. The following traffic is always excluded from the tunnel: - Traffic necessary for connecting and maintaining the device's network connection, such as DHCP. - Traffic necessary for connecting to captive networks. - Certain cellular services traffic that is not routable over the internet and is instead directly routed to the cellular network. See the excludeCellularServices property for more details. - Network communication with a companion device such as a watchOS device. The default value of this property is NO.
+//
 // WithIncludeAllNetworks sets the includeAllNetworks property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithIncludeAllNetworks(includeAllNetworks bool) *NEDNSProxyProviderProtocol {
 	x.inner.NEVPNProtocol.SetIncludeAllNetworks(includeAllNetworks)
 	return x
 }
 
+// @property excludeLocalNetworks @discussion If YES, all traffic destined for local networks will be excluded from the tunnel. The default is NO on macOS and YES on iOS.
+//
 // WithExcludeLocalNetworks sets the excludeLocalNetworks property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEDNSProxyProviderProtocol {
 	x.inner.NEVPNProtocol.SetExcludeLocalNetworks(excludeLocalNetworks)
 	return x
 }
 
+// @property excludeCellularServices @discussion If includeAllNetworks is set to YES and this property is set to YES, then internet-routable network traffic for cellular services (VoLTE, Wi-Fi Calling, IMS, MMS, Visual Voicemail, etc.) is excluded from the tunnel. Note that some cellular carriers route cellular services traffic directly to the carrier network, bypassing the internet. Such cellular services traffic is always excluded from the tunnel. The default value of this property is YES.
+//
 // WithExcludeCellularServices sets the excludeCellularServices property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithExcludeCellularServices(excludeCellularServices bool) *NEDNSProxyProviderProtocol {
 	x.inner.NEVPNProtocol.SetExcludeCellularServices(excludeCellularServices)
 	return x
 }
 
+// @property excludeAPNs @discussion If includeAllNetworks is set to YES and this property is set to YES, then network traffic for the Apple Push Notification service (APNs) is excluded from the tunnel. The default value of this property is YES.
+//
 // WithExcludeAPNs sets the excludeAPNs property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithExcludeAPNs(excludeAPNs bool) *NEDNSProxyProviderProtocol {
 	x.inner.NEVPNProtocol.SetExcludeAPNs(excludeAPNs)
 	return x
 }
 
+// @property excludeDeviceCommunication @discussion If includeAllNetworks is set to YES and this property is set to YES, then network traffic used for communicating with devices connected via USB or Wi-Fi is excluded from the tunnel. For example, Xcode uses a network tunnel to communicate with connected development devices like iPhone, iPad and TV. The default value of this property is YES.
+//
 // WithExcludeDeviceCommunication sets the excludeDeviceCommunication property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithExcludeDeviceCommunication(excludeDeviceCommunication bool) *NEDNSProxyProviderProtocol {
 	x.inner.NEVPNProtocol.SetExcludeDeviceCommunication(excludeDeviceCommunication)
 	return x
 }
 
+// @property enforceRoutes @discussion If YES, route rules for this tunnel will take precendence over any locally-defined routes. The default is NO.
+//
 // WithEnforceRoutes sets the enforceRoutes property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithEnforceRoutes(enforceRoutes bool) *NEDNSProxyProviderProtocol {
 	x.inner.NEVPNProtocol.SetEnforceRoutes(enforceRoutes)
 	return x
 }
 
+// @property providerConfiguration @discussion A dictionary containing NEDNSProxyProvider vendor-specific configuration parameters. This dictionary is passed as-is to NEDNSProxyProviders when a DNS proxy is started.
+//
 // ProviderConfiguration calls the underlying ProviderConfiguration.
 func (x *NEDNSProxyProviderProtocol) ProviderConfiguration() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.ProviderConfiguration()
@@ -143,6 +177,8 @@ func (x *NEDNSProxyProviderProtocol) SetProviderConfiguration(providerConfigurat
 	x.inner.SetProviderConfiguration(providerConfiguration)
 }
 
+// @property providerBundleIdentifier @discussion A string containing the bundle identifier of the NEDNSProxyProvider to be used by this configuration.
+//
 // ProviderBundleIdentifier calls the underlying ProviderBundleIdentifier.
 func (x *NEDNSProxyProviderProtocol) ProviderBundleIdentifier() string {
 	_r := x.inner.ProviderBundleIdentifier()

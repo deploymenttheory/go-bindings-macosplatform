@@ -42,6 +42,8 @@ func (x *TermOfAddress) WithScriptingProperties(scriptingProperties *raw.NSDicti
 	return x
 }
 
+// The ISO language code if this is a localized term of address
+//
 // LanguageIdentifier calls the underlying LanguageIdentifier.
 func (x *TermOfAddress) LanguageIdentifier() *String {
 	_r := x.inner.LanguageIdentifier()
@@ -51,6 +53,8 @@ func (x *TermOfAddress) LanguageIdentifier() *String {
 	return &String{inner: _r}
 }
 
+// A list of pronouns for a localized term of address
+//
 // Pronouns returns the collection as a Go slice.
 func (x *TermOfAddress) Pronouns() []*MorphologyPronoun {
 	arr := x.inner.Pronouns()

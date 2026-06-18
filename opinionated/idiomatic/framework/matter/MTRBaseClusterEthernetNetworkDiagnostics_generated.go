@@ -35,6 +35,8 @@ func MTRBaseClusterEthernetNetworkDiagnosticsFromID(id objc.ID) *MTRBaseClusterE
 	return &MTRBaseClusterEthernetNetworkDiagnostics{inner: raw.MTRBaseClusterEthernetNetworkDiagnosticsFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterEthernetNetworkDiagnosticsWithDeviceEndpointIDQueue creates a new [MTRBaseClusterEthernetNetworkDiagnostics].
 func NewMTRBaseClusterEthernetNetworkDiagnosticsWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterEthernetNetworkDiagnostics {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterEthernetNetworkDiagnostics")), objc.RegisterName("alloc"))
@@ -49,6 +51,8 @@ func NewMTRBaseClusterEthernetNetworkDiagnosticsWithDeviceEndpointQueue(device *
 	return &MTRBaseClusterEthernetNetworkDiagnostics{inner: raw.MTRBaseClusterEthernetNetworkDiagnosticsFromID(_id)}
 }
 
+// Command ResetCounts This command is used to reset the count attributes.
+//
 // ResetCountsWithParamsCompletion calls the underlying ResetCountsWithParamsCompletion.
 func (x *MTRBaseClusterEthernetNetworkDiagnostics) ResetCountsWithParamsCompletion(params *raw.MTREthernetNetworkDiagnosticsClusterResetCountsParams, completion func(unsafe.Pointer)) {
 	x.inner.ResetCountsWithParamsCompletion(params, completion)

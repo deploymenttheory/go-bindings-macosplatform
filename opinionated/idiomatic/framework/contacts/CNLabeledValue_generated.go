@@ -31,6 +31,8 @@ func LabeledValueFromID(id objc.ID) *LabeledValue {
 	return &LabeledValue{inner: raw.CNLabeledValueFromID[objc.ID](id)}
 }
 
+// Initializes the CNLabeledValue with a new identifier.
+//
 // NewLabeledValueWithLabelValue creates a new [LabeledValue].
 func NewLabeledValueWithLabelValue(label string, value objc.ID) *LabeledValue {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNLabeledValue")), objc.RegisterName("alloc"))
@@ -38,21 +40,29 @@ func NewLabeledValueWithLabelValue(label string, value objc.ID) *LabeledValue {
 	return &LabeledValue{inner: raw.CNLabeledValueFromID[objc.ID](_id)}
 }
 
+// Returns a new CNLabeledValue with the existing value and identifier.
+//
 // LabeledValueBySettingLabel calls the underlying LabeledValueBySettingLabel.
 func (x *LabeledValue) LabeledValueBySettingLabel(label string) *raw.CNLabeledValue[objc.ID] {
 	return x.inner.LabeledValueBySettingLabel(foundation.NSStringStringWithUTF8String(label))
 }
 
+// Returns a new CNLabeledValue with the existing label and identifier.
+//
 // LabeledValueBySettingValue calls the underlying LabeledValueBySettingValue.
 func (x *LabeledValue) LabeledValueBySettingValue(value objc.ID) *raw.CNLabeledValue[objc.ID] {
 	return x.inner.LabeledValueBySettingValue(value)
 }
 
+// Returns a new CNLabeledValue with the existing identifier.
+//
 // LabeledValueBySettingLabelValue calls the underlying LabeledValueBySettingLabelValue.
 func (x *LabeledValue) LabeledValueBySettingLabelValue(label string, value objc.ID) *raw.CNLabeledValue[objc.ID] {
 	return x.inner.LabeledValueBySettingLabelValue(foundation.NSStringStringWithUTF8String(label), value)
 }
 
+// The identifier is unique among contacts on the device. It can be saved and used for finding labeled values next application launch.
+//
 // Identifier calls the underlying Identifier.
 func (x *LabeledValue) Identifier() string {
 	_r := x.inner.Identifier()

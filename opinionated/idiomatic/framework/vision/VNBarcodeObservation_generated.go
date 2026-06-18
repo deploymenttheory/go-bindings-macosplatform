@@ -38,6 +38,8 @@ func NewBarcodeObservation() *BarcodeObservation {
 	return &BarcodeObservation{inner: raw.VNBarcodeObservationFromID(_id)}
 }
 
+// @brief The symbology of the detected barcode.
+//
 // Symbology calls the underlying Symbology.
 func (x *BarcodeObservation) Symbology() string {
 	_r := x.inner.Symbology()
@@ -47,11 +49,15 @@ func (x *BarcodeObservation) Symbology() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief An object that provides symbology-specific data for the barcode.
+//
 // BarcodeDescriptor calls the underlying BarcodeDescriptor.
 func (x *BarcodeObservation) BarcodeDescriptor() *coreimage.CIBarcodeDescriptor {
 	return x.inner.BarcodeDescriptor()
 }
 
+// @brief The string representation of the barcode's payload.  Depending on the symbology of the barcode and/or the payload data itself, a string representation of the payload may not be available.
+//
 // PayloadStringValue calls the underlying PayloadStringValue.
 func (x *BarcodeObservation) PayloadStringValue() string {
 	_r := x.inner.PayloadStringValue()
@@ -61,26 +67,36 @@ func (x *BarcodeObservation) PayloadStringValue() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief The raw data representation of the barcode's payload if available.
+//
 // PayloadData calls the underlying PayloadData.
 func (x *BarcodeObservation) PayloadData() *foundation.NSData {
 	return x.inner.PayloadData()
 }
 
+// @brief Boolean indicating if the barcode carries any GS1 application specific data
+//
 // IsGS1DataCarrier calls the underlying IsGS1DataCarrier.
 func (x *BarcodeObservation) IsGS1DataCarrier() bool {
 	return x.inner.IsGS1DataCarrier()
 }
 
+// @brief A boolean indicating if the barcode is color inverted
+//
 // IsColorInverted calls the underlying IsColorInverted.
 func (x *BarcodeObservation) IsColorInverted() bool {
 	return x.inner.IsColorInverted()
 }
 
+// @brief Represents the supplemental composite type. Currently, this can only refer to the composite flag of the 2D symbology as part of a GS1 composite symbology. This attribute only exists when the primary descriptor is the 1D symbology of a GS1 composite symbology, and of which a valid 2D counterpart has been coalesced into.
+//
 // SupplementalCompositeType calls the underlying SupplementalCompositeType.
 func (x *BarcodeObservation) SupplementalCompositeType() VNBarcodeCompositeType {
 	return VNBarcodeCompositeType(x.inner.SupplementalCompositeType())
 }
 
+// @brief Decode the supplemental code in the descriptor as a string value. Note: this property might be expensive the first time it is accessed When non-NULL, and if the descriptor has supplemental raw payload data, the pointee will be set to the decoded supplemental payload string value.
+//
 // SupplementalPayloadString calls the underlying SupplementalPayloadString.
 func (x *BarcodeObservation) SupplementalPayloadString() string {
 	_r := x.inner.SupplementalPayloadString()
@@ -90,6 +106,8 @@ func (x *BarcodeObservation) SupplementalPayloadString() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief Decode the supplemental code in the descriptor as a string value. Note: this property might be expensive the first time it is accessed When non-NULL, and if the descriptor has supplemental raw payload data, the pointee will be set to the decoded supplemental payload raw data value.
+//
 // SupplementalPayloadData calls the underlying SupplementalPayloadData.
 func (x *BarcodeObservation) SupplementalPayloadData() *foundation.NSData {
 	return x.inner.SupplementalPayloadData()

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A PCM stream of input audio data, such as from a microphone.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtiosounddeviceinputstreamconfiguration
 type VZVirtioSoundDeviceInputStreamConfiguration struct {
 	VZVirtioSoundDeviceStreamConfiguration
@@ -31,7 +33,7 @@ func VZVirtioSoundDeviceInputStreamConfigurationFromID(id objc.ID) *VZVirtioSoun
 	return o
 }
 
-// @abstract Initialize the input stream configuration.
+// Creates a new sound device input stream configuration.
 func (o *VZVirtioSoundDeviceInputStreamConfiguration) Init() *VZVirtioSoundDeviceInputStreamConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioSoundDeviceInputStreamConfigurationSelInit)
 	if _ret != 0 {

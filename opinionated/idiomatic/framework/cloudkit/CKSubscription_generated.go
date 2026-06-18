@@ -36,12 +36,16 @@ func NewSubscription() *Subscription {
 	return &Subscription{inner: raw.CKSubscriptionFromID(_id)}
 }
 
+// The configuration for a subscription's push notifications. If you want the system to display your subscription's push notifications, assign a value to this property. The server uses the configuration you provide to determine the delivery options for notifications. For example, you can specify the text to display to the user, and the sound to play. You can also specify which fields of the record to include in the notification's payload. If you don't assign a value to this property, CloudKit still sends push notifications, but the system doesn't display them to the user. The default value of this property is `nil`.
+//
 // WithNotificationInfo sets the notificationInfo property and returns the receiver for chaining.
 func (x *Subscription) WithNotificationInfo(notificationInfo *NotificationInfo) *Subscription {
 	x.inner.SetNotificationInfo(notificationInfo.Unwrap())
 	return x
 }
 
+// The subscription's unique identifier. This property's value is the subscription ID that you provide to the `initWithRecordType:predicate:subscriptionID:options:` or `initWithZoneID:subscriptionID:options:` methods when you create the subscription. If you use a different method to create the subscription, CloudKit automatically assigns a UUID as the subscription ID.
+//
 // SubscriptionID calls the underlying SubscriptionID.
 func (x *Subscription) SubscriptionID() string {
 	_r := x.inner.SubscriptionID()
@@ -51,11 +55,15 @@ func (x *Subscription) SubscriptionID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The behavior that a subscription provides.
+//
 // SubscriptionType calls the underlying SubscriptionType.
 func (x *Subscription) SubscriptionType() CKSubscriptionType {
 	return CKSubscriptionType(x.inner.SubscriptionType())
 }
 
+// The configuration for a subscription's push notifications. If you want the system to display your subscription's push notifications, assign a value to this property. The server uses the configuration you provide to determine the delivery options for notifications. For example, you can specify the text to display to the user, and the sound to play. You can also specify which fields of the record to include in the notification's payload. If you don't assign a value to this property, CloudKit still sends push notifications, but the system doesn't display them to the user. The default value of this property is `nil`.
+//
 // NotificationInfo calls the underlying NotificationInfo.
 func (x *Subscription) NotificationInfo() *NotificationInfo {
 	_r := x.inner.NotificationInfo()

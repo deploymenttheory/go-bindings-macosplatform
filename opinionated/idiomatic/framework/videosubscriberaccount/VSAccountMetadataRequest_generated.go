@@ -38,12 +38,16 @@ func NewVSAccountMetadataRequest() *VSAccountMetadataRequest {
 	return &VSAccountMetadataRequest{inner: raw.VSAccountMetadataRequestFromID(_id)}
 }
 
+// Identifies who is making the request. For use by applications using the SAML authentication scheme only.
+//
 // WithChannelIdentifier sets the channelIdentifier property and returns the receiver for chaining.
 func (x *VSAccountMetadataRequest) WithChannelIdentifier(channelIdentifier string) *VSAccountMetadataRequest {
 	x.inner.SetChannelIdentifier(foundation.NSStringStringWithUTF8String(channelIdentifier))
 	return x
 }
 
+// If non-empty, limits which account providers can respond to the request.
+//
 // WithSupportedAccountProviderIdentifiers sets the collection, converting the Go slice to an NSArray.
 func (x *VSAccountMetadataRequest) WithSupportedAccountProviderIdentifiers(items ...*foundation.NSString) *VSAccountMetadataRequest {
 	if len(items) == 0 {
@@ -62,6 +66,8 @@ func (x *VSAccountMetadataRequest) WithSupportedAccountProviderIdentifiers(items
 	return x
 }
 
+// If non-empty, specifies providers which may be given more prominent placement when choosing an account provider during authentication.
+//
 // WithFeaturedAccountProviderIdentifiers sets the collection, converting the Go slice to an NSArray.
 func (x *VSAccountMetadataRequest) WithFeaturedAccountProviderIdentifiers(items ...*foundation.NSString) *VSAccountMetadataRequest {
 	if len(items) == 0 {
@@ -80,42 +86,56 @@ func (x *VSAccountMetadataRequest) WithFeaturedAccountProviderIdentifiers(items 
 	return x
 }
 
+// A value that the account provider may use to verify the identity of the requesting app.
+//
 // WithVerificationToken sets the verificationToken property and returns the receiver for chaining.
 func (x *VSAccountMetadataRequest) WithVerificationToken(verificationToken string) *VSAccountMetadataRequest {
 	x.inner.SetVerificationToken(foundation.NSStringStringWithUTF8String(verificationToken))
 	return x
 }
 
+// Whether to request information that identifies the account provider.
+//
 // WithIncludeAccountProviderIdentifier sets the includeAccountProviderIdentifier property and returns the receiver for chaining.
 func (x *VSAccountMetadataRequest) WithIncludeAccountProviderIdentifier(includeAccountProviderIdentifier bool) *VSAccountMetadataRequest {
 	x.inner.SetIncludeAccountProviderIdentifier(includeAccountProviderIdentifier)
 	return x
 }
 
+// Whether to request the expiration date of the subscriber's current authentication.
+//
 // WithIncludeAuthenticationExpirationDate sets the includeAuthenticationExpirationDate property and returns the receiver for chaining.
 func (x *VSAccountMetadataRequest) WithIncludeAuthenticationExpirationDate(includeAuthenticationExpirationDate bool) *VSAccountMetadataRequest {
 	x.inner.SetIncludeAuthenticationExpirationDate(includeAuthenticationExpirationDate)
 	return x
 }
 
+// A brief, user-presentable name for the video that the app will play if it receives a successful response. For example, "What's New in Swift" or "Office Space" Do not provide a value if the request will not be used to play a specific video.
+//
 // WithLocalizedVideoTitle sets the localizedVideoTitle property and returns the receiver for chaining.
 func (x *VSAccountMetadataRequest) WithLocalizedVideoTitle(localizedVideoTitle string) *VSAccountMetadataRequest {
 	x.inner.SetLocalizedVideoTitle(foundation.NSStringStringWithUTF8String(localizedVideoTitle))
 	return x
 }
 
+// Whether the user might expect to be prompted to authenticate in order to complete this request.
+//
 // WithInterruptionAllowed sets the interruptionAllowed property and returns the receiver for chaining.
 func (x *VSAccountMetadataRequest) WithInterruptionAllowed(interruptionAllowed bool) *VSAccountMetadataRequest {
 	x.inner.SetInterruptionAllowed(interruptionAllowed)
 	return x
 }
 
+// Requests that the TV Provider reauthenticate the user if they are already authenticated.
+//
 // WithForceAuthentication sets the forceAuthentication property and returns the receiver for chaining.
 func (x *VSAccountMetadataRequest) WithForceAuthentication(forceAuthentication bool) *VSAccountMetadataRequest {
 	x.inner.SetForceAuthentication(forceAuthentication)
 	return x
 }
 
+// Attributes to add to a SAML attributeQuery request and sent to the account provider.
+//
 // WithAttributeNames sets the collection, converting the Go slice to an NSArray.
 func (x *VSAccountMetadataRequest) WithAttributeNames(items ...*foundation.NSString) *VSAccountMetadataRequest {
 	if len(items) == 0 {
@@ -134,6 +154,8 @@ func (x *VSAccountMetadataRequest) WithAttributeNames(items ...*foundation.NSStr
 	return x
 }
 
+// The collection of authentication schemes that the app supports for this request. This list may be used to determine compatibility of the app with providers. Defaults to SAML.
+//
 // WithSupportedAuthenticationSchemes sets the collection, converting the Go slice to an NSArray.
 func (x *VSAccountMetadataRequest) WithSupportedAuthenticationSchemes(items ...*foundation.NSString) *VSAccountMetadataRequest {
 	if len(items) == 0 {
@@ -152,12 +174,16 @@ func (x *VSAccountMetadataRequest) WithSupportedAuthenticationSchemes(items ...*
 	return x
 }
 
+// A value that an account provider application may set to pass an existing authentication session. For use by TV Provider applications only.
+//
 // WithAccountProviderAuthenticationToken sets the accountProviderAuthenticationToken property and returns the receiver for chaining.
 func (x *VSAccountMetadataRequest) WithAccountProviderAuthenticationToken(accountProviderAuthenticationToken string) *VSAccountMetadataRequest {
 	x.inner.SetAccountProviderAuthenticationToken(foundation.NSStringStringWithUTF8String(accountProviderAuthenticationToken))
 	return x
 }
 
+// Application-specific providers to be added to the list of account providers.
+//
 // WithApplicationAccountProviders sets the collection, converting the Go slice to an NSArray.
 func (x *VSAccountMetadataRequest) WithApplicationAccountProviders(items ...*raw.VSAccountApplicationProvider) *VSAccountMetadataRequest {
 	if len(items) == 0 {
@@ -176,6 +202,8 @@ func (x *VSAccountMetadataRequest) WithApplicationAccountProviders(items ...*raw
 	return x
 }
 
+// Identifies who is making the request. For use by applications using the SAML authentication scheme only.
+//
 // ChannelIdentifier calls the underlying ChannelIdentifier.
 func (x *VSAccountMetadataRequest) ChannelIdentifier() string {
 	_r := x.inner.ChannelIdentifier()
@@ -190,6 +218,8 @@ func (x *VSAccountMetadataRequest) SetChannelIdentifier(channelIdentifier string
 	x.inner.SetChannelIdentifier(foundation.NSStringStringWithUTF8String(channelIdentifier))
 }
 
+// If non-empty, limits which account providers can respond to the request.
+//
 // SupportedAccountProviderIdentifiers returns the collection as a Go slice.
 func (x *VSAccountMetadataRequest) SupportedAccountProviderIdentifiers() []string {
 	arr := x.inner.SupportedAccountProviderIdentifiers()
@@ -206,6 +236,8 @@ func (x *VSAccountMetadataRequest) SetSupportedAccountProviderIdentifiers(suppor
 	x.inner.SetSupportedAccountProviderIdentifiers(supportedAccountProviderIdentifiers)
 }
 
+// If non-empty, specifies providers which may be given more prominent placement when choosing an account provider during authentication.
+//
 // FeaturedAccountProviderIdentifiers returns the collection as a Go slice.
 func (x *VSAccountMetadataRequest) FeaturedAccountProviderIdentifiers() []string {
 	arr := x.inner.FeaturedAccountProviderIdentifiers()
@@ -217,11 +249,15 @@ func (x *VSAccountMetadataRequest) FeaturedAccountProviderIdentifiers() []string
 	})
 }
 
+// If non-empty, specifies providers which may be given more prominent placement when choosing an account provider during authentication.
+//
 // SetFeaturedAccountProviderIdentifiers calls the underlying SetFeaturedAccountProviderIdentifiers.
 func (x *VSAccountMetadataRequest) SetFeaturedAccountProviderIdentifiers(featuredAccountProviderIdentifiers *foundation.NSArray[*foundation.NSString]) {
 	x.inner.SetFeaturedAccountProviderIdentifiers(featuredAccountProviderIdentifiers)
 }
 
+// A value that the account provider may use to verify the identity of the requesting app.
+//
 // VerificationToken calls the underlying VerificationToken.
 func (x *VSAccountMetadataRequest) VerificationToken() string {
 	_r := x.inner.VerificationToken()
@@ -236,6 +272,8 @@ func (x *VSAccountMetadataRequest) SetVerificationToken(verificationToken string
 	x.inner.SetVerificationToken(foundation.NSStringStringWithUTF8String(verificationToken))
 }
 
+// Whether to request information that identifies the account provider.
+//
 // IncludeAccountProviderIdentifier calls the underlying IncludeAccountProviderIdentifier.
 func (x *VSAccountMetadataRequest) IncludeAccountProviderIdentifier() bool {
 	return x.inner.IncludeAccountProviderIdentifier()
@@ -246,6 +284,8 @@ func (x *VSAccountMetadataRequest) SetIncludeAccountProviderIdentifier(includeAc
 	x.inner.SetIncludeAccountProviderIdentifier(includeAccountProviderIdentifier)
 }
 
+// Whether to request the expiration date of the subscriber's current authentication.
+//
 // IncludeAuthenticationExpirationDate calls the underlying IncludeAuthenticationExpirationDate.
 func (x *VSAccountMetadataRequest) IncludeAuthenticationExpirationDate() bool {
 	return x.inner.IncludeAuthenticationExpirationDate()
@@ -256,6 +296,8 @@ func (x *VSAccountMetadataRequest) SetIncludeAuthenticationExpirationDate(includ
 	x.inner.SetIncludeAuthenticationExpirationDate(includeAuthenticationExpirationDate)
 }
 
+// A brief, user-presentable name for the video that the app will play if it receives a successful response. For example, "What's New in Swift" or "Office Space" Do not provide a value if the request will not be used to play a specific video.
+//
 // LocalizedVideoTitle calls the underlying LocalizedVideoTitle.
 func (x *VSAccountMetadataRequest) LocalizedVideoTitle() string {
 	_r := x.inner.LocalizedVideoTitle()
@@ -270,6 +312,8 @@ func (x *VSAccountMetadataRequest) SetLocalizedVideoTitle(localizedVideoTitle st
 	x.inner.SetLocalizedVideoTitle(foundation.NSStringStringWithUTF8String(localizedVideoTitle))
 }
 
+// Whether the user might expect to be prompted to authenticate in order to complete this request.
+//
 // IsInterruptionAllowed calls the underlying IsInterruptionAllowed.
 func (x *VSAccountMetadataRequest) IsInterruptionAllowed() bool {
 	return x.inner.IsInterruptionAllowed()
@@ -280,6 +324,8 @@ func (x *VSAccountMetadataRequest) SetInterruptionAllowed(interruptionAllowed bo
 	x.inner.SetInterruptionAllowed(interruptionAllowed)
 }
 
+// Requests that the TV Provider reauthenticate the user if they are already authenticated.
+//
 // ForceAuthentication calls the underlying ForceAuthentication.
 func (x *VSAccountMetadataRequest) ForceAuthentication() bool {
 	return x.inner.ForceAuthentication()
@@ -290,6 +336,8 @@ func (x *VSAccountMetadataRequest) SetForceAuthentication(forceAuthentication bo
 	x.inner.SetForceAuthentication(forceAuthentication)
 }
 
+// Attributes to add to a SAML attributeQuery request and sent to the account provider.
+//
 // AttributeNames returns the collection as a Go slice.
 func (x *VSAccountMetadataRequest) AttributeNames() []string {
 	arr := x.inner.AttributeNames()
@@ -306,6 +354,8 @@ func (x *VSAccountMetadataRequest) SetAttributeNames(attributeNames *foundation.
 	x.inner.SetAttributeNames(attributeNames)
 }
 
+// The collection of authentication schemes that the app supports for this request. This list may be used to determine compatibility of the app with providers. Defaults to SAML.
+//
 // SupportedAuthenticationSchemes returns the collection as a Go slice.
 func (x *VSAccountMetadataRequest) SupportedAuthenticationSchemes() []*foundation.NSString {
 	arr := x.inner.SupportedAuthenticationSchemes()
@@ -317,11 +367,15 @@ func (x *VSAccountMetadataRequest) SupportedAuthenticationSchemes() []*foundatio
 	})
 }
 
+// The collection of authentication schemes that the app supports for this request. This list may be used to determine compatibility of the app with providers. Defaults to SAML.
+//
 // SetSupportedAuthenticationSchemes calls the underlying SetSupportedAuthenticationSchemes.
 func (x *VSAccountMetadataRequest) SetSupportedAuthenticationSchemes(supportedAuthenticationSchemes *foundation.NSArray[*foundation.NSString]) {
 	x.inner.SetSupportedAuthenticationSchemes(supportedAuthenticationSchemes)
 }
 
+// A value that an account provider application may set to pass an existing authentication session. For use by TV Provider applications only.
+//
 // AccountProviderAuthenticationToken calls the underlying AccountProviderAuthenticationToken.
 func (x *VSAccountMetadataRequest) AccountProviderAuthenticationToken() string {
 	_r := x.inner.AccountProviderAuthenticationToken()
@@ -336,6 +390,8 @@ func (x *VSAccountMetadataRequest) SetAccountProviderAuthenticationToken(account
 	x.inner.SetAccountProviderAuthenticationToken(foundation.NSStringStringWithUTF8String(accountProviderAuthenticationToken))
 }
 
+// Application-specific providers to be added to the list of account providers.
+//
 // ApplicationAccountProviders returns the collection as a Go slice.
 func (x *VSAccountMetadataRequest) ApplicationAccountProviders() []*VSAccountApplicationProvider {
 	arr := x.inner.ApplicationAccountProviders()
@@ -347,6 +403,8 @@ func (x *VSAccountMetadataRequest) ApplicationAccountProviders() []*VSAccountApp
 	})
 }
 
+// Application-specific providers to be added to the list of account providers.
+//
 // SetApplicationAccountProviders calls the underlying SetApplicationAccountProviders.
 func (x *VSAccountMetadataRequest) SetApplicationAccountProviders(applicationAccountProviders *foundation.NSArray[*raw.VSAccountApplicationProvider]) {
 	x.inner.SetApplicationAccountProviders(applicationAccountProviders)

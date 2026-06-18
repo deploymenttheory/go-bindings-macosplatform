@@ -123,7 +123,16 @@ func EmitFrameworkWrappers(
 	}
 	takenNames := buildTakenNames(fw, trialNames, abstractBases, cfErrorWrapperNames)
 	if err := emitClassMethodFunctions(
-		outDir, pkgName, rawPkgAlias, rawPkgPath, fw, m, trialNames, handFuncs, takenNames,
+		outDir,
+		pkgName,
+		rawPkgAlias,
+		rawPkgPath,
+		fw,
+		m,
+		trialNames,
+		handFuncs,
+		takenNames,
+		abstractBases,
 	); err != nil {
 		return fmt.Errorf("emit class method functions: %w", err)
 	}
@@ -320,7 +329,12 @@ func scanHandAuthored(outDir string) (map[string]map[string]bool, map[string]boo
 			strings.HasSuffix(name, "_generated.go") {
 			continue
 		}
-		f, perr := parser.ParseFile(fset, filepath.Join(outDir, name), nil, parser.SkipObjectResolution)
+		f, perr := parser.ParseFile(
+			fset,
+			filepath.Join(outDir, name),
+			nil,
+			parser.SkipObjectResolution,
+		)
 		if perr != nil {
 			// A stale or half-written file must not abort generation; skip it.
 			continue
@@ -397,8 +411,32 @@ type providerMethodView struct {
 	Items      []providerMethodItem
 }
 
+// commentBlock renders documentation prose as a Go // comment block, one
+// "// "-prefixed line per source line, with blank lines preserved as "//".
+// Returns "" for empty docs. The result ends in a newline when non-empty, so a
+// template can follow it with a "//" separator before the generated summary.
+func commentBlock(doc string) string {
+	doc = strings.TrimSpace(doc)
+	if doc == "" {
+		return ""
+	}
+	var sb strings.Builder
+	for line := range strings.SplitSeq(doc, "\n") {
+		line = strings.TrimRight(line, " ")
+		if line == "" {
+			sb.WriteString("//\n")
+			continue
+		}
+		sb.WriteString("// ")
+		sb.WriteString(line)
+		sb.WriteString("\n")
+	}
+	return sb.String()
+}
+
 // classHeaderView is the template data for class_header.tmpl.
 type classHeaderView struct {
+	DocComment  string
 	GoTypeName  string
 	RawAlias    string
 	ClassName   string
@@ -427,7 +465,17 @@ func emitClassFile(
 		GenericParams: cls.GenericParams,
 	}
 
-	ctors := buildConstructors(cls, className, goTypeName, fw, ctx, m, rawPkgAlias, trialNames)
+	ctors := buildConstructors(
+		cls,
+		className,
+		goTypeName,
+		fw,
+		ctx,
+		m,
+		rawPkgAlias,
+		trialNames,
+		abstractBases,
+	)
 	withMethods := buildWithSetters(
 		cls,
 		goTypeName,
@@ -439,7 +487,7 @@ func emitClassFile(
 		prefix,
 		abstractBases,
 	)
-	methods := buildMethods(cls, fw, ctx, m, rawPkgAlias, trialNames)
+	methods := buildMethods(cls, fw, ctx, m, rawPkgAlias, trialNames, abstractBases)
 	providerMethods, providerImports := buildProviderMethods(
 		cls, className, goTypeName, fw, m, rawPkgAlias, abstractBases)
 
@@ -453,8 +501,19 @@ func emitClassFile(
 	// nearer-ancestor setters win on name collision. Only setters are flattened:
 	// flattening arbitrary methods reintroduces base/override arity clashes through
 	// embedding and out-of-package return types.
-	withMethods = append(withMethods,
-		buildInheritedSetters(cls, className, fw, m, rawPkgAlias, trialNames, prefix, abstractBases, withMethods)...)
+	withMethods = append(
+		withMethods,
+		buildInheritedSetters(
+			cls,
+			className,
+			fw,
+			m,
+			rawPkgAlias,
+			trialNames,
+			prefix,
+			abstractBases,
+			withMethods,
+		)...)
 
 	// Drop anything a hand-authored file in this package already declares, so the
 	// human's version wins (no duplicate-method compile error).
@@ -462,9 +521,18 @@ func emitClassFile(
 		ctors = slices.DeleteFunc(ctors, func(c ctorEntry) bool { return handFuncs[c.goName] })
 	}
 	if len(handMethods) > 0 {
-		withMethods = slices.DeleteFunc(withMethods, func(e withEntry) bool { return handMethods[e.goName] })
-		methods = slices.DeleteFunc(methods, func(e methodEntry) bool { return handMethods[e.goName] })
-		providerMethods = slices.DeleteFunc(providerMethods, func(e providerMethodEntry) bool { return handMethods[e.methodName] })
+		withMethods = slices.DeleteFunc(
+			withMethods,
+			func(e withEntry) bool { return handMethods[e.goName] },
+		)
+		methods = slices.DeleteFunc(
+			methods,
+			func(e methodEntry) bool { return handMethods[e.goName] },
+		)
+		providerMethods = slices.DeleteFunc(
+			providerMethods,
+			func(e providerMethodEntry) bool { return handMethods[e.methodName] },
+		)
 	}
 
 	// Ensure a +new constructor exists for provider-only classes (no other content).
@@ -494,6 +562,7 @@ func emitClassFile(
 	// APIs taking an object/CFTypeRef pointer without the raw import; FromID
 	// mirrors the raw FromID (releasing finalizer, no retain).
 	renderTemplate(&body, "class_header", classHeaderView{
+		DocComment:  commentBlock(cls.Doc),
 		GoTypeName:  goTypeName,
 		RawAlias:    rawPkgAlias,
 		ClassName:   className,
@@ -527,9 +596,19 @@ func emitClassFile(
 			BodyExpr:   pm.bodyExpr,
 		}
 	}
-	renderTemplate(&body, "provider_method", providerMethodView{GoTypeName: goTypeName, Items: provItems})
+	renderTemplate(
+		&body,
+		"provider_method",
+		providerMethodView{GoTypeName: goTypeName, Items: provItems},
+	)
 
-	emitDictionaryAugment(&body, className, goTypeName, rawPkgAlias, genericInstantiation(len(cls.GenericParams)))
+	emitDictionaryAugment(
+		&body,
+		className,
+		goTypeName,
+		rawPkgAlias,
+		genericInstantiation(len(cls.GenericParams)),
+	)
 
 	// Mockable interface: lists Unwrap plus every generated exported method so
 	// callers can accept the interface and supply test doubles. The compile-time
@@ -540,7 +619,7 @@ func emitClassFile(
 		rawPkgAlias:  rawPkgPath,
 		"context":    "context",
 		"unsafe":     "unsafe",
-		"purego":   pureobjcImportPath,
+		"purego":     pureobjcImportPath,
 		"foundation": foundationImportPath,
 		"objc":       objcImportPath,
 	}
@@ -630,6 +709,7 @@ func buildConstructors(
 	m *typemap.Mapper,
 	rawPkgAlias string,
 	trialNames trialNameMap,
+	abstractBases abstractBaseIndex,
 ) []ctorEntry {
 	var ctors []ctorEntry
 	hasExplicitParamInit := false
@@ -641,8 +721,19 @@ func buildConstructors(
 		if len(method.Params) == 0 {
 			continue // plain init handled below as +new fallback
 		}
-		e := buildParamConstructor(method, goTypeName, cls, fw, ctx, m, rawPkgAlias, trialNames)
+		e := buildParamConstructor(
+			method,
+			goTypeName,
+			cls,
+			fw,
+			ctx,
+			m,
+			rawPkgAlias,
+			trialNames,
+			abstractBases,
+		)
 		if e != nil {
+			e.doc = method.Doc
 			ctors = append(ctors, *e)
 			hasExplicitParamInit = true
 		}
@@ -700,6 +791,7 @@ func buildWithSetters(
 		if we == nil || seenWithName[we.goName] {
 			continue
 		}
+		we.doc = prop.Doc
 		seenWithName[we.goName] = true
 		withMethods = append(withMethods, *we)
 	}
@@ -717,6 +809,7 @@ func buildMethods(
 	m *typemap.Mapper,
 	rawPkgAlias string,
 	trialNames trialNameMap,
+	abstractBases abstractBaseIndex,
 ) []methodEntry {
 	rawNames := instanceRawMethodNames(cls)
 	var methods []methodEntry
@@ -729,10 +822,11 @@ func buildMethods(
 		if rawGoName == "" {
 			rawGoName = naming.MethodName(method.Selector)
 		}
-		e := buildMethod(method, rawGoName, cls, fw, ctx, m, rawPkgAlias, trialNames)
+		e := buildMethod(method, rawGoName, cls, fw, ctx, m, rawPkgAlias, trialNames, abstractBases)
 		if e == nil || seenMethod[e.goName] {
 			continue
 		}
+		e.doc = method.Doc
 		seenMethod[e.goName] = true
 		methods = append(methods, *e)
 	}
@@ -848,15 +942,38 @@ func buildProviderMethods(
 
 // usedImports filters candidates down to the aliases the rendered body actually
 // references as a package qualifier ("<alias>." preceded by a non-identifier byte).
+// Comment lines are stripped first: doc prose frequently contains words like
+// "context." or "...the foundation." that would otherwise be mistaken for a
+// package qualifier and pull in an unused import.
 func usedImports(body []byte, candidates map[string]string) map[string]string {
+	code := stripCommentLines(body)
 	imports := map[string]string{}
 	for alias, path := range candidates {
-		pattern := regexp.MustCompile(`(^|[^A-Za-z0-9_.])` + regexp.QuoteMeta(alias) + `\.`)
-		if pattern.Match(body) {
+		// A qualifier counts when it begins a token: at the start of input, after
+		// a non-identifier/non-dot byte, or right after a variadic "..." ellipsis
+		// (e.g. `...purego.IDer`). The lone-dot exclusion still rejects genuine
+		// selectors like `x.purego.Bar`, where the alias is a field, not a package.
+		pattern := regexp.MustCompile(`(^|\.\.\.|[^A-Za-z0-9_.])` + regexp.QuoteMeta(alias) + `\.`)
+		if pattern.Match(code) {
 			imports[alias] = path
 		}
 	}
 	return imports
+}
+
+// stripCommentLines removes whole-line // comments so import detection scans
+// only code. Doc comment blocks are always emitted as full-line comments, so
+// dropping comment-only lines removes the prose without touching real code.
+func stripCommentLines(body []byte) []byte {
+	lines := bytes.Split(body, []byte("\n"))
+	kept := lines[:0]
+	for _, line := range lines {
+		if bytes.HasPrefix(bytes.TrimSpace(line), []byte("//")) {
+			continue
+		}
+		kept = append(kept, line)
+	}
+	return bytes.Join(kept, []byte("\n"))
 }
 
 // genericInstantiation returns the type-argument list used to instantiate a
@@ -876,7 +993,12 @@ func genericInstantiation(n int) string {
 // methodNameClaimed reports whether a generated With-setter, method, or
 // hand-authored method already uses name on this wrapper type (so the emitter
 // does not add a colliding helper such as ID).
-func methodNameClaimed(name string, withMethods []withEntry, methods []methodEntry, handMethods map[string]bool) bool {
+func methodNameClaimed(
+	name string,
+	withMethods []withEntry,
+	methods []methodEntry,
+	handMethods map[string]bool,
+) bool {
 	if handMethods[name] {
 		return true
 	}
@@ -911,12 +1033,16 @@ func emitDictionaryAugment(w io.Writer, className, goTypeName, _, _ string) {
 
 type ctorEntry struct {
 	goName          string
+	doc             string // Apple/header documentation for the underlying init
 	rawInitGoName   string // "" = use +new
 	rawInitSelector string // ObjC selector, e.g. "initWithURL:readOnly:error:"
 	params          []ctorParam
 	hasNSError      bool
 	needsFoundation bool
 	extraImports    map[string]string
+	// preamble is rendered verbatim at the top of the constructor body, before
+	// alloc/init — used to build a raw NSArray from a variadic ergonomic param.
+	preamble string
 }
 
 type ctorParam struct {
@@ -944,10 +1070,12 @@ func buildParamConstructor(
 	m *typemap.Mapper,
 	rawPkgAlias string,
 	_ trialNameMap,
+	abstractBases abstractBaseIndex,
 ) *ctorEntry {
 	rawInit := naming.MethodName(method.Selector)
 	needsFoundation := false
 	extraImports := map[string]string{}
+	preamble := ""
 
 	var params []ctorParam
 	for i, p := range method.Params {
@@ -982,6 +1110,28 @@ func buildParamConstructor(
 			resolved := rawParamGoType(p.ObjCType, ctx, m, impSet)
 			goType := qualifyRaw(resolved, fw, rawPkgAlias, ctx.GenericParams)
 			maps.Copy(extraImports, impSet)
+			// A trailing *NSArray[...] param becomes a variadic ergonomic so
+			// callers never name the raw element type (only the last param may
+			// be variadic per Go's rules).
+			if i == len(method.Params)-1 {
+				if av := arrayVariadicSpec(goType, rawPkgAlias, abstractBases); av != nil {
+					argLocal := fmt.Sprintf("_arg%d", i)
+					extraImports["objc"] = objcImportPath
+					extraImports["unsafe"] = "unsafe"
+					needsFoundation = true
+					if strings.HasPrefix(av.elemSig, "purego.") {
+						extraImports["purego"] = pureobjcImportPath
+					}
+					preamble += arrayVariadicPreamble(argLocal, pName, av)
+					params = append(params, ctorParam{
+						goName:   pName,
+						goType:   "..." + av.elemSig,
+						rawExpr:  argLocal,
+						isObject: true,
+					})
+					continue
+				}
+			}
 			sigType, rawExpr := localizeParam(pName, goType, fw, rawPkgAlias)
 			params = append(params, ctorParam{
 				goName:   pName,
@@ -1000,6 +1150,7 @@ func buildParamConstructor(
 		hasNSError:      method.IsNSError,
 		needsFoundation: needsFoundation,
 		extraImports:    extraImports,
+		preamble:        preamble,
 	}
 }
 
@@ -1021,12 +1172,14 @@ func writeConstructor(
 	}
 
 	view := constructorView{
+		DocComment: commentBlock(c.doc),
 		GoName:     c.goName,
 		GoTypeName: goTypeName,
 		ParamStr:   strings.Join(paramParts, ", "),
 		RetStr:     retStr,
 		ClassName:  className,
 		FromIDFn:   fromIDFn,
+		Preamble:   c.preamble,
 		IsPlainNew: c.rawInitGoName == "",
 		HasNSError: c.hasNSError,
 	}
@@ -1052,12 +1205,14 @@ func writeConstructor(
 
 // constructorView is the template data for constructor.tmpl.
 type constructorView struct {
+	DocComment  string
 	GoName      string
 	GoTypeName  string
 	ParamStr    string
 	RetStr      string
 	ClassName   string
 	FromIDFn    string
+	Preamble    string
 	IsPlainNew  bool
 	HasNSError  bool
 	SendAllArgs string // alloc-init path: `_alloc, objc.RegisterName("sel"), …`
@@ -1098,6 +1253,7 @@ func isObjectPointerType(goType string, m *typemap.Mapper) bool {
 
 type withEntry struct {
 	goName             string // e.g. "WithVariableStore"
+	doc                string // Apple/header documentation for the underlying property
 	rawSetterGoName    string // e.g. "SetVariableStore"
 	param              withParam
 	isNSArray          bool   // true: variadic slice → NSArray
@@ -1318,6 +1474,7 @@ func writeWithMethod(w io.Writer, typeName string, we withEntry) {
 		inner = "x.inner"
 	}
 	view := withSetterView{
+		DocComment:      commentBlock(we.doc),
 		TypeName:        typeName,
 		GoName:          we.goName,
 		Inner:           inner,
@@ -1344,6 +1501,7 @@ func writeWithMethod(w io.Writer, typeName string, we withEntry) {
 
 // withSetterView is the template data for with_setter.tmpl.
 type withSetterView struct {
+	DocComment      string
 	TypeName        string
 	GoName          string
 	Inner           string
@@ -1397,6 +1555,7 @@ type methodEntry struct {
 	kind         methodKind
 	goName       string
 	rawGoName    string
+	doc          string // Apple/header documentation for the underlying method
 	extraImports map[string]string
 
 	blockObjCParams     []string
@@ -1404,10 +1563,10 @@ type methodEntry struct {
 	asyncNonBlockParams []asyncParam
 	// Typed-result completion: when the block carries exactly one non-error
 	// param, the wrapper returns (R, error) instead of plain error.
-	asyncResultIdx     int          // index into blockGoParamTypes of the result param; -1 = error-only
-	asyncResultGoType  string       // wrapped Go return type R ("" = error-only)
-	asyncResultMode    plainRetMode // plainRetRaw | plainRetString | plainRetTrialWrap
-	asyncResultTrial   string       // trial type name for plainRetTrialWrap
+	asyncResultIdx    int          // index into blockGoParamTypes of the result param; -1 = error-only
+	asyncResultGoType string       // wrapped Go return type R ("" = error-only)
+	asyncResultMode   plainRetMode // plainRetRaw | plainRetString | plainRetTrialWrap
+	asyncResultTrial  string       // trial type name for plainRetTrialWrap
 
 	sliceElemGoType string
 	sliceConvFmt    string // fmt template (one %s) converting an objc.ID element to sliceElemGoType
@@ -1418,6 +1577,10 @@ type methodEntry struct {
 	plainRetMode   plainRetMode
 	plainTrialType string // trial type name for plainRetTrialWrap
 	plainHasError  bool   // raw method returns a trailing error (IsNSError)
+
+	// preamble is rendered verbatim at the top of the method body, before the
+	// raw call — used to build a raw NSArray from a variadic ergonomic param.
+	preamble string
 }
 
 type asyncParam struct {
@@ -1497,8 +1660,8 @@ func buildAsyncMethod(
 			return nil
 		}
 		resultIdx = i
-		switch {
-		case t == "*foundation.NSString":
+		switch t {
+		case "*foundation.NSString":
 			resultImports["purego"] = pureobjcImportPath
 			resultMode, resultGoType = plainRetString, "string"
 		default:
@@ -1584,6 +1747,7 @@ func buildMethod(
 	m *typemap.Mapper,
 	rawPkgAlias string,
 	trialNames trialNameMap,
+	abstractBases abstractBaseIndex,
 ) *methodEntry {
 	// Async completion → (ctx) error. Fall through to a plain wrapper when the
 	// block shape can't be expressed idiomatically (non-NSError result params).
@@ -1613,7 +1777,7 @@ func buildMethod(
 
 	// Everything else: a plain pass-through wrapper so the method is callable on
 	// the idiomatic type without dropping to .Unwrap().
-	return buildPlainMethod(method, rawGoName, fw, ctx, m, rawPkgAlias, trialNames)
+	return buildPlainMethod(method, rawGoName, fw, ctx, m, rawPkgAlias, trialNames, abstractBases)
 }
 
 // buildSliceMethod builds an NSArray-getter → []T entry, or nil when the element
@@ -1701,9 +1865,11 @@ func buildPlainMethod(
 	m *typemap.Mapper,
 	rawPkgAlias string,
 	trialNames trialNameMap,
+	abstractBases abstractBaseIndex,
 ) *methodEntry {
 	extraImports := map[string]string{}
 	params := make([]plainParam, 0, len(method.Params))
+	preamble := ""
 	usedParamNames := map[string]int{}
 	for i, p := range method.Params {
 		pName := naming.ParamName(p.Name)
@@ -1746,6 +1912,26 @@ func buildPlainMethod(
 				return nil
 			}
 			maps.Copy(extraImports, impSet)
+			// A trailing *NSArray[...] param becomes a variadic ergonomic so
+			// callers never name the raw element type (only the last param may
+			// be variadic per Go's rules).
+			if i == len(method.Params)-1 {
+				if av := arrayVariadicSpec(goType, rawPkgAlias, abstractBases); av != nil {
+					argLocal := fmt.Sprintf("_arg%d", i)
+					extraImports["objc"] = objcImportPath
+					extraImports["unsafe"] = "unsafe"
+					extraImports["foundation"] = foundationImportPath
+					if strings.HasPrefix(av.elemSig, "purego.") {
+						extraImports["purego"] = pureobjcImportPath
+					}
+					preamble += arrayVariadicPreamble(argLocal, pName, av)
+					params = append(
+						params,
+						plainParam{goName: pName, goType: "..." + av.elemSig, rawExpr: argLocal},
+					)
+					continue
+				}
+			}
 			sigType, rawExpr := localizeParam(pName, goType, fw, rawPkgAlias)
 			params = append(params, plainParam{goName: pName, goType: sigType, rawExpr: rawExpr})
 		}
@@ -1770,6 +1956,7 @@ func buildPlainMethod(
 				plainRetType:  "objc.Block",
 				plainRetMode:  plainRetRaw,
 				plainHasError: method.IsNSError,
+				preamble:      preamble,
 			}
 		}
 		impSet := make(typemap.ImportSet)
@@ -1812,6 +1999,7 @@ func buildPlainMethod(
 		plainRetMode:   retMode,
 		plainTrialType: trialType,
 		plainHasError:  method.IsNSError,
+		preamble:       preamble,
 	}
 }
 
@@ -1870,16 +2058,18 @@ func writePlainMethod(w io.Writer, recv, target string, me methodEntry) {
 		rawArgs = append(rawArgs, p.rawExpr)
 	}
 	renderTemplate(w, "plain_method", plainMethodView{
-		Recv:      recv,
-		GoName:    me.goName,
-		RawGoName: me.rawGoName,
-		ParamStr:  strings.Join(paramParts, ", "),
-		RetSig:    plainRetSig(me),
-		Call:      fmt.Sprintf("%s.%s(%s)", target, me.rawGoName, strings.Join(rawArgs, ", ")),
-		HasError:  me.plainHasError,
-		RetMode:   plainRetModeName(me.plainRetMode),
-		TrialType: me.plainTrialType,
-		EnumType:  me.plainRetType,
+		DocComment: commentBlock(me.doc),
+		Recv:       recv,
+		GoName:     me.goName,
+		RawGoName:  me.rawGoName,
+		ParamStr:   strings.Join(paramParts, ", "),
+		RetSig:     plainRetSig(me),
+		Preamble:   me.preamble,
+		Call:       fmt.Sprintf("%s.%s(%s)", target, me.rawGoName, strings.Join(rawArgs, ", ")),
+		HasError:   me.plainHasError,
+		RetMode:    plainRetModeName(me.plainRetMode),
+		TrialType:  me.plainTrialType,
+		EnumType:   me.plainRetType,
 	})
 }
 
@@ -1903,16 +2093,18 @@ func plainRetModeName(m plainRetMode) string {
 
 // plainMethodView is the template data for plain_method.tmpl.
 type plainMethodView struct {
-	Recv      string
-	GoName    string
-	RawGoName string
-	ParamStr  string
-	RetSig    string
-	Call      string
-	HasError  bool
-	RetMode   string // "void" | "raw" | "string" | "trialwrap" | "enumcast"
-	TrialType string
-	EnumType  string // local enum type for the enumcast return
+	DocComment string
+	Recv       string
+	GoName     string
+	RawGoName  string
+	ParamStr   string
+	RetSig     string
+	Preamble   string
+	Call       string
+	HasError   bool
+	RetMode    string // "void" | "raw" | "string" | "trialwrap" | "enumcast"
+	TrialType  string
+	EnumType   string // local enum type for the enumcast return
 }
 
 // plainRetSig is the return clause for a plain method, shared by the writer and
@@ -1980,7 +2172,12 @@ func interfaceMethodLine(me methodEntry) string {
 			parts = append(parts, p.goName+" "+p.goType)
 		}
 		if me.asyncResultGoType != "" {
-			return fmt.Sprintf("%s(%s) (%s, error)", me.goName, strings.Join(parts, ", "), me.asyncResultGoType)
+			return fmt.Sprintf(
+				"%s(%s) (%s, error)",
+				me.goName,
+				strings.Join(parts, ", "),
+				me.asyncResultGoType,
+			)
 		}
 		return fmt.Sprintf("%s(%s) error", me.goName, strings.Join(parts, ", "))
 	case kindBoolNSError:
@@ -2033,7 +2230,11 @@ func writeAsyncMethod(w io.Writer, recv, target string, me methodEntry) {
 			return ""
 		case errGoType == "unsafe.Pointer":
 			return fmt.Sprintf("\t\tif uintptr(_p%d) != 0 {\n", errIdx) +
-				fmt.Sprintf("\t\t\t%s = purego.NSErrorToError(objc.ID(uintptr(_p%d)))\n", target, errIdx) +
+				fmt.Sprintf(
+					"\t\t\t%s = purego.NSErrorToError(objc.ID(uintptr(_p%d)))\n",
+					target,
+					errIdx,
+				) +
 				"\t\t}\n"
 		case errGoType == "objc.ID":
 			return fmt.Sprintf("\t\tif _p%d != 0 {\n", errIdx) +
@@ -2052,13 +2253,17 @@ func writeAsyncMethod(w io.Writer, recv, target string, me methodEntry) {
 		if errIdx >= 0 {
 			closureBody = "\t\tvar _err error\n" + errExpr("_err") + "\t\t_ch <- _err\n"
 		}
-		rawArgs = append(rawArgs, "func("+strings.Join(closureParams, ", ")+") {\n"+closureBody+"\t}")
+		rawArgs = append(
+			rawArgs,
+			"func("+strings.Join(closureParams, ", ")+") {\n"+closureBody+"\t}",
+		)
 		renderTemplate(w, "async_method", asyncMethodView{
-			Recv:      recv,
-			GoName:    me.goName,
-			ParamStr:  paramStr,
-			HasResult: false,
-			RawCall:   fmt.Sprintf("%s.%s(%s)", target, me.rawGoName, strings.Join(rawArgs, ", ")),
+			DocComment: commentBlock(me.doc),
+			Recv:       recv,
+			GoName:     me.goName,
+			ParamStr:   paramStr,
+			HasResult:  false,
+			RawCall:    fmt.Sprintf("%s.%s(%s)", target, me.rawGoName, strings.Join(rawArgs, ", ")),
 		})
 		return
 	}
@@ -2069,9 +2274,18 @@ func writeAsyncMethod(w io.Writer, recv, target string, me methodEntry) {
 	var resultConv string
 	switch me.asyncResultMode {
 	case plainRetString:
-		resultConv = fmt.Sprintf("\t\tif _p%d != nil {\n\t\t\t_o.val = purego.GoString(_p%d.Ptr())\n\t\t}\n", ri, ri)
+		resultConv = fmt.Sprintf(
+			"\t\tif _p%d != nil {\n\t\t\t_o.val = purego.GoString(_p%d.Ptr())\n\t\t}\n",
+			ri,
+			ri,
+		)
 	case plainRetTrialWrap:
-		resultConv = fmt.Sprintf("\t\tif _p%d != nil {\n\t\t\t_o.val = &%s{inner: _p%d}\n\t\t}\n", ri, me.asyncResultTrial, ri)
+		resultConv = fmt.Sprintf(
+			"\t\tif _p%d != nil {\n\t\t\t_o.val = &%s{inner: _p%d}\n\t\t}\n",
+			ri,
+			me.asyncResultTrial,
+			ri,
+		)
 	default: // plainRetRaw
 		resultConv = fmt.Sprintf("\t\t_o.val = _p%d\n", ri)
 	}
@@ -2079,6 +2293,7 @@ func writeAsyncMethod(w io.Writer, recv, target string, me methodEntry) {
 
 	rawArgs = append(rawArgs, "func("+strings.Join(closureParams, ", ")+") {\n"+closureBody+"\t}")
 	renderTemplate(w, "async_method", asyncMethodView{
+		DocComment:   commentBlock(me.doc),
 		Recv:         recv,
 		GoName:       me.goName,
 		ParamStr:     paramStr,
@@ -2091,6 +2306,7 @@ func writeAsyncMethod(w io.Writer, recv, target string, me methodEntry) {
 // asyncMethodView is the template data for async_method.tmpl. RawCall is the
 // fully-built raw call (including the channel-feeding completion closure).
 type asyncMethodView struct {
+	DocComment   string
 	Recv         string
 	GoName       string
 	ParamStr     string
@@ -2101,10 +2317,11 @@ type asyncMethodView struct {
 
 func writeBoolNSErrorMethod(w io.Writer, recv, target string, me methodEntry) {
 	renderTemplate(w, "boolnserror_method", boolNSErrorMethodView{
-		Recv:      recv,
-		GoName:    me.goName,
-		Target:    target,
-		RawGoName: me.rawGoName,
+		DocComment: commentBlock(me.doc),
+		Recv:       recv,
+		GoName:     me.goName,
+		Target:     target,
+		RawGoName:  me.rawGoName,
 	})
 }
 
@@ -2112,8 +2329,13 @@ func writeSliceMethod(w io.Writer, recv, target string, me methodEntry) {
 	// Iterate via the purego collections helper off the array id, avoiding the
 	// typed-NSArray element accessor whose returned wrapper is not ABI-safe.
 	conv := fmt.Sprintf(me.sliceConvFmt, "_id")
-	convClosure := fmt.Sprintf("func(_id objc.ID) %s {\n\t\treturn %s\n\t}", me.sliceElemGoType, conv)
+	convClosure := fmt.Sprintf(
+		"func(_id objc.ID) %s {\n\t\treturn %s\n\t}",
+		me.sliceElemGoType,
+		conv,
+	)
 	renderTemplate(w, "slice_method", sliceMethodView{
+		DocComment:  commentBlock(me.doc),
 		Recv:        recv,
 		GoName:      me.goName,
 		Target:      target,
@@ -2129,13 +2351,15 @@ func writeSliceMethod(w io.Writer, recv, target string, me methodEntry) {
 // instance method or "" for a package-level class function; Target is the
 // receiver/raw-package expression the method forwards to.
 type boolNSErrorMethodView struct {
-	Recv      string
-	GoName    string
-	Target    string
-	RawGoName string
+	DocComment string
+	Recv       string
+	GoName     string
+	Target     string
+	RawGoName  string
 }
 
 type sliceMethodView struct {
+	DocComment  string
 	Recv        string
 	GoName      string
 	Target      string
@@ -2258,6 +2482,78 @@ func parseArrayGoType(goType string) (alias, container, elem string, ok bool) {
 		return "", "", "", false
 	}
 	return alias, container, elem, true
+}
+
+// arrayVariadic describes a raw *NSArray[...] parameter re-expressed as an
+// idiomatic variadic, so callers never name the raw element type. Only the LAST
+// parameter of a method/constructor may be variadic-ized (Go's variadic rule).
+type arrayVariadic struct {
+	elemSig      string // variadic element type: a provider interface or objc.ID
+	loopExpr     string // converts the loop variable _v to an objc.ID
+	arrayFromID  string // e.g. "foundation.NSArrayFromID[*raw.VNRequest]"
+	arrayClass   string // "NSArray" | "NSMutableArray"
+	rawArrayType string // the raw param Go type, e.g. "*foundation.NSArray[*raw.VNRequest]"
+}
+
+// arrayVariadicSpec returns a variadic ergonomic for a raw *NSArray[...] param
+// whose element is an abstract base (→ provider interface) or a same-framework
+// protocol (→ objc.ID; callers pass the wrapper's .ID()). It returns nil for
+// every other element type — foundation value types, concrete classes,
+// cross-package types — leaving the raw NSArray parameter untouched. This mirrors
+// the with_setter collection codegen for arbitrary methods and constructors.
+func arrayVariadicSpec(
+	rawArrayType, rawPkgAlias string,
+	abstractBases abstractBaseIndex,
+) *arrayVariadic {
+	alias, container, elem, ok := parseArrayGoType(rawArrayType)
+	if !ok {
+		return nil
+	}
+	arrayFromID := fmt.Sprintf("%s.%sFromID[%s]", alias, container, elem)
+
+	// Abstract base element → provider interface (type-safe).
+	elemClass := strings.TrimPrefix(strings.TrimPrefix(elem, "*"), rawPkgAlias+".")
+	if goTypeName, isBase := abstractBases[elemClass]; isBase {
+		return &arrayVariadic{
+			elemSig:      providerInterfaceName(goTypeName),
+			loopExpr:     "_v." + providerMethodName(goTypeName) + "().Ptr()",
+			arrayFromID:  arrayFromID,
+			arrayClass:   container,
+			rawArrayType: rawArrayType,
+		}
+	}
+
+	// Same-framework protocol element (an interface, hence no leading '*') →
+	// purego.IDer. A bare protocol has no wrapper (so no provider interface),
+	// but any idiomatic wrapper satisfies IDer; the consumer passes the wrapper
+	// by value and the codegen reads its .ID() to build the array.
+	if !strings.HasPrefix(elem, "*") && strings.HasPrefix(elem, rawPkgAlias+".") {
+		return &arrayVariadic{
+			elemSig:      "purego.IDer",
+			loopExpr:     "_v.ID()",
+			arrayFromID:  arrayFromID,
+			arrayClass:   container,
+			rawArrayType: rawArrayType,
+		}
+	}
+
+	return nil
+}
+
+// arrayVariadicPreamble renders the lines that build the raw NSArray named
+// argLocal from the variadic slice paramName, mirroring the with_setter
+// collection codegen. gofmt fixes the loose indentation afterwards.
+func arrayVariadicPreamble(argLocal, paramName string, av *arrayVariadic) string {
+	return fmt.Sprintf(
+		"_ptrs := make([]objc.ID, len(%[1]s))\n"+
+			"for _i, _v := range %[1]s {\n_ptrs[_i] = %[2]s\n}\n"+
+			"var %[3]s %[4]s\n"+
+			"if len(_ptrs) > 0 {\n"+
+			"%[3]s = %[5]s(objc.Send[objc.ID](objc.ID(objc.GetClass(%[6]q)), "+
+			"objc.RegisterName(\"arrayWithObjects:count:\"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))\n"+
+			"}\n",
+		paramName, av.loopExpr, argLocal, av.rawArrayType, av.arrayFromID, av.arrayClass,
+	)
 }
 
 // fromIDCallPrefix derives the FromID constructor call for a typed element, e.g.
@@ -2584,7 +2880,11 @@ func referencedEnums(fw *meta.FrameworkMeta) map[string]bool {
 // returns (localType, rawType, true); for anything else it returns the input
 // unchanged with isEnum=false. Only the exact alias.<E> form matches, so
 // pointer/slice/compound types keep their raw spelling.
-func localizeEnumType(qualified string, fw *meta.FrameworkMeta, rawPkgAlias string) (sigType, rawType string, isEnum bool) {
+func localizeEnumType(
+	qualified string,
+	fw *meta.FrameworkMeta,
+	rawPkgAlias string,
+) (sigType, rawType string, isEnum bool) {
 	prefix := rawPkgAlias + "."
 	if !strings.HasPrefix(qualified, prefix) {
 		return qualified, "", false
@@ -2601,7 +2901,11 @@ func localizeEnumType(qualified string, fw *meta.FrameworkMeta, rawPkgAlias stri
 // parameter whose raw-qualified type is goType, supplied as pName. When goType
 // is a local enum the signature uses the local spelling and the value is cast
 // back to the raw enum at the boundary; otherwise both are unchanged.
-func localizeParam(pName, goType string, fw *meta.FrameworkMeta, rawPkgAlias string) (sigType, rawExpr string) {
+func localizeParam(
+	pName, goType string,
+	fw *meta.FrameworkMeta,
+	rawPkgAlias string,
+) (sigType, rawExpr string) {
 	if sig, raw, isEnum := localizeEnumType(goType, fw, rawPkgAlias); isEnum {
 		return sig, raw + "(" + pName + ")"
 	}
@@ -2638,7 +2942,11 @@ func splitTopLevelCommas(s string) []string {
 // raw-typed params/return that converts each enum across the boundary before/after
 // calling the caller's pName closure. ok is false for non-blocks or blocks with no
 // enum component (left untouched).
-func localizeBlockParam(pName, blockType string, fw *meta.FrameworkMeta, rawPkgAlias string) (sigType, adapter string, ok bool) {
+func localizeBlockParam(
+	pName, blockType string,
+	fw *meta.FrameworkMeta,
+	rawPkgAlias string,
+) (sigType, adapter string, ok bool) {
 	if !strings.HasPrefix(blockType, "func(") {
 		return "", "", false
 	}
@@ -2710,7 +3018,11 @@ func localizeBlockParam(pName, blockType string, fw *meta.FrameworkMeta, rawPkgA
 // to the two compound enum surfaces C functions present: pointer-to-enum
 // out-parameters (via a raw temporary copied back) and enum-bearing block
 // parameters (via an adapter closure).
-func adaptCFuncParam(pName, goType string, fw *meta.FrameworkMeta, rawPkgAlias string) (sigType, callArg string, pre, post []string) {
+func adaptCFuncParam(
+	pName, goType string,
+	fw *meta.FrameworkMeta,
+	rawPkgAlias string,
+) (sigType, callArg string, pre, post []string) {
 	if sig, rawType, isEnum := localizeEnumType(goType, fw, rawPkgAlias); isEnum {
 		return sig, rawType + "(" + pName + ")", nil, nil
 	}
@@ -3019,9 +3331,14 @@ func emitFunctionWrappers(
 		// (snake_case → PascalCase; already-exported names unchanged).
 		goFnName := naming.ExportedFunctionName(e.rawFnName)
 		view.Entries = append(view.Entries, cfErrFuncEntry{
-			GoFnName:   goFnName,
-			Sig:        strings.Join(sigParts, ", "),
-			RawCall:    fmt.Sprintf("%s.%s(%s)", rawPkgAlias, goFnName, strings.Join(callArgs, ", ")),
+			GoFnName: goFnName,
+			Sig:      strings.Join(sigParts, ", "),
+			RawCall: fmt.Sprintf(
+				"%s.%s(%s)",
+				rawPkgAlias,
+				goFnName,
+				strings.Join(callArgs, ", "),
+			),
 			RetIsBool:  e.retIsBool,
 			IsPureBool: e.goRetType == "bool",
 			RawFnName:  e.rawFnName,

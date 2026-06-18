@@ -36,6 +36,8 @@ func NewSource() *Source {
 	return &Source{inner: raw.HKSourceFromID(_id)}
 }
 
+// @property      name @abstract      The name of the source represented by the receiver.  If the source is an app, then the name is the localized name of the app.
+//
 // Name calls the underlying Name.
 func (x *Source) Name() string {
 	_r := x.inner.Name()
@@ -45,6 +47,8 @@ func (x *Source) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property  bundleIdentifier @abstract  The bundle identifier of the source represented by the receiver.
+//
 // BundleIdentifier calls the underlying BundleIdentifier.
 func (x *Source) BundleIdentifier() string {
 	_r := x.inner.BundleIdentifier()

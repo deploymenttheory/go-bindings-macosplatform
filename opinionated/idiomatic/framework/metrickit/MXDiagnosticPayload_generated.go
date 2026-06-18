@@ -37,16 +37,22 @@ func NewDiagnosticPayload() *DiagnosticPayload {
 	return &DiagnosticPayload{inner: raw.MXDiagnosticPayloadFromID(_id)}
 }
 
+// @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this diagnostic payload. @result        An NSData object containing the JSON representation
+//
 // JSONRepresentation calls the underlying JSONRepresentation.
 func (x *DiagnosticPayload) JSONRepresentation() *foundation.NSData {
 	return x.inner.JSONRepresentation()
 }
 
+// @method        dictionaryRepresentation @abstract      Convenience method to return a NSDictionary representation of this diagnostic payload. @result        An NSDictionary object containing the dictionary representation
+//
 // DictionaryRepresentation calls the underlying DictionaryRepresentation.
 func (x *DiagnosticPayload) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.DictionaryRepresentation()
 }
 
+// @property      cpuExceptionDiagnostics @abstract      An array containing CPU exception diagnostics for this application.
+//
 // CpuExceptionDiagnostics returns the collection as a Go slice.
 func (x *DiagnosticPayload) CpuExceptionDiagnostics() []*CPUExceptionDiagnostic {
 	arr := x.inner.CpuExceptionDiagnostics()
@@ -58,6 +64,8 @@ func (x *DiagnosticPayload) CpuExceptionDiagnostics() []*CPUExceptionDiagnostic 
 	})
 }
 
+// @property      diskWriteExceptionDiagnostics @abstract      An array containing disk write exception diagnostics for this application.
+//
 // DiskWriteExceptionDiagnostics returns the collection as a Go slice.
 func (x *DiagnosticPayload) DiskWriteExceptionDiagnostics() []*DiskWriteExceptionDiagnostic {
 	arr := x.inner.DiskWriteExceptionDiagnostics()
@@ -69,6 +77,8 @@ func (x *DiagnosticPayload) DiskWriteExceptionDiagnostics() []*DiskWriteExceptio
 	})
 }
 
+// @property      hangDiagnostics @abstract      An array containing hang diagnostics for this application.
+//
 // HangDiagnostics returns the collection as a Go slice.
 func (x *DiagnosticPayload) HangDiagnostics() []*HangDiagnostic {
 	arr := x.inner.HangDiagnostics()
@@ -80,6 +90,8 @@ func (x *DiagnosticPayload) HangDiagnostics() []*HangDiagnostic {
 	})
 }
 
+// @property      crashDiagnostics @abstract      An array containing crash diagnostics for this application.
+//
 // CrashDiagnostics returns the collection as a Go slice.
 func (x *DiagnosticPayload) CrashDiagnostics() []*CrashDiagnostic {
 	arr := x.inner.CrashDiagnostics()
@@ -91,11 +103,15 @@ func (x *DiagnosticPayload) CrashDiagnostics() []*CrashDiagnostic {
 	})
 }
 
+// @property      timeStampBegin @abstract      An NSDate object that indicates the start time for which the payload was generated.
+//
 // TimeStampBegin calls the underlying TimeStampBegin.
 func (x *DiagnosticPayload) TimeStampBegin() *foundation.NSDate {
 	return x.inner.TimeStampBegin()
 }
 
+// @property      timeStampEnd @abstract      An NSDate object that indicates the end time for which the payload was generated.
+//
 // TimeStampEnd calls the underlying TimeStampEnd.
 func (x *DiagnosticPayload) TimeStampEnd() *foundation.NSDate {
 	return x.inner.TimeStampEnd()

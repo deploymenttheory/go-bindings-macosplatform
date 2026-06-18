@@ -36,6 +36,8 @@ func NewTextAlternatives() *TextAlternatives {
 	return &TextAlternatives{inner: raw.BETextAlternativesFromID(_id)}
 }
 
+// Original text for which alternative strings are provided
+//
 // PrimaryString calls the underlying PrimaryString.
 func (x *TextAlternatives) PrimaryString() string {
 	_r := x.inner.PrimaryString()
@@ -45,6 +47,8 @@ func (x *TextAlternatives) PrimaryString() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Array of available aternative strings
+//
 // AlternativeStrings returns the collection as a Go slice.
 func (x *TextAlternatives) AlternativeStrings() []string {
 	arr := x.inner.AlternativeStrings()

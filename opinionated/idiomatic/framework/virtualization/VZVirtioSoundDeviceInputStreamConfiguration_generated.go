@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A PCM stream of input audio data, such as from a microphone.
+//
 // VirtioSoundDeviceInputStreamConfiguration wraps [raw.VZVirtioSoundDeviceInputStreamConfiguration] with a fluent Go API.
 type VirtioSoundDeviceInputStreamConfiguration struct {
 	inner *raw.VZVirtioSoundDeviceInputStreamConfiguration
@@ -37,6 +39,8 @@ func NewVirtioSoundDeviceInputStreamConfiguration() *VirtioSoundDeviceInputStrea
 	return &VirtioSoundDeviceInputStreamConfiguration{inner: raw.VZVirtioSoundDeviceInputStreamConfigurationFromID(_id)}
 }
 
+// An audio stream source that defines how the host supplies audio data for the guest.
+//
 // WithSource sets the source property and returns the receiver for chaining.
 func (x *VirtioSoundDeviceInputStreamConfiguration) WithSource(source AudioInputStreamSourceProvider) *VirtioSoundDeviceInputStreamConfiguration {
 	x.inner.SetSource(source.asAudioInputStreamSource())

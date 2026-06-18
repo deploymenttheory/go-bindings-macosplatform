@@ -31,6 +31,8 @@ func URLCacheFromID(id objc.ID) *URLCache {
 	return &URLCache{inner: raw.NSURLCacheFromID(id)}
 }
 
+// @method initWithMemoryCapacity:diskCapacity:diskPath: @abstract Initializes an NSURLCache with the given capacity and path. @discussion The returned NSURLCache is backed by disk, so developers can be more liberal with space when choosing the capacity for this kind of cache. A disk cache measured in the tens of megabytes should be acceptable in most cases. @param memoryCapacity the capacity, measured in bytes, for the cache in memory. @param diskCapacity the capacity, measured in bytes, for the cache on disk. @param path the path on disk where the cache data is stored. @result an initialized NSURLCache, with the given capacity, backed by disk.
+//
 // NewURLCacheWithMemoryCapacityDiskCapacityDiskPath creates a new [URLCache].
 func NewURLCacheWithMemoryCapacityDiskCapacityDiskPath(memoryCapacity uint, diskCapacity uint, path string) *URLCache {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLCache")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewURLCacheWithMemoryCapacityDiskCapacityDiskPath(memoryCapacity uint, disk
 	return &URLCache{inner: raw.NSURLCacheFromID(_id)}
 }
 
+// @method initWithMemoryCapacity:diskCapacity:directoryURL: @abstract Initializes an NSURLCache with the given capacity and directory. @param memoryCapacity the capacity, measured in bytes, for the cache in memory. Or 0 to disable memory cache. @param diskCapacity the capacity, measured in bytes, for the cache on disk. Or 0 to disable disk cache. @param directoryURL the path to a directory on disk where the cache data is stored. Or nil for default directory. @result an initialized NSURLCache, with the given capacity, optionally backed by disk.
+//
 // NewURLCacheWithMemoryCapacityDiskCapacityDirectoryURL creates a new [URLCache].
 func NewURLCacheWithMemoryCapacityDiskCapacityDirectoryURL(memoryCapacity uint, diskCapacity uint, directoryURL string) *URLCache {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLCache")), objc.RegisterName("alloc"))
@@ -45,12 +49,16 @@ func NewURLCacheWithMemoryCapacityDiskCapacityDirectoryURL(memoryCapacity uint, 
 	return &URLCache{inner: raw.NSURLCacheFromID(_id)}
 }
 
+// @abstract In-memory capacity of the receiver. @discussion At the time this call is made, the in-memory cache will truncate its contents to the size given, if necessary. @result The in-memory capacity, measured in bytes, for the receiver.
+//
 // WithMemoryCapacity sets the memoryCapacity property and returns the receiver for chaining.
 func (x *URLCache) WithMemoryCapacity(memoryCapacity uint) *URLCache {
 	x.inner.SetMemoryCapacity(memoryCapacity)
 	return x
 }
 
+// @abstract The on-disk capacity of the receiver. @discussion The on-disk capacity, measured in bytes, for the receiver. On mutation the on-disk cache will truncate its contents to the size given, if necessary.
+//
 // WithDiskCapacity sets the diskCapacity property and returns the receiver for chaining.
 func (x *URLCache) WithDiskCapacity(diskCapacity uint) *URLCache {
 	x.inner.SetDiskCapacity(diskCapacity)
@@ -63,6 +71,8 @@ func (x *URLCache) WithScriptingProperties(scriptingProperties *raw.NSDictionary
 	return x
 }
 
+// @method cachedResponseForRequest: @abstract Returns the NSCachedURLResponse stored in the cache with the given request. @discussion The method returns nil if there is no NSCachedURLResponse stored using the given request. @param request the NSURLRequest to use as a key for the lookup. @result The NSCachedURLResponse stored in the cache with the given request, or nil if there is no NSCachedURLResponse stored with the given request.
+//
 // CachedResponseForRequest calls the underlying CachedResponseForRequest.
 func (x *URLCache) CachedResponseForRequest(request *raw.NSURLRequest) *CachedURLResponse {
 	_r := x.inner.CachedResponseForRequest(request)
@@ -72,26 +82,36 @@ func (x *URLCache) CachedResponseForRequest(request *raw.NSURLRequest) *CachedUR
 	return &CachedURLResponse{inner: _r}
 }
 
+// @method storeCachedResponse:forRequest: @abstract Stores the given NSCachedURLResponse in the cache using the given request. @param cachedResponse The cached response to store. @param request the NSURLRequest to use as a key for the storage.
+//
 // StoreCachedResponseForRequest calls the underlying StoreCachedResponseForRequest.
 func (x *URLCache) StoreCachedResponseForRequest(cachedResponse *raw.NSCachedURLResponse, request *raw.NSURLRequest) {
 	x.inner.StoreCachedResponseForRequest(cachedResponse, request)
 }
 
+// @method removeCachedResponseForRequest: @abstract Removes the NSCachedURLResponse from the cache that is stored using the given request. @discussion No action is taken if there is no NSCachedURLResponse stored with the given request. @param request the NSURLRequest to use as a key for the lookup.
+//
 // RemoveCachedResponseForRequest calls the underlying RemoveCachedResponseForRequest.
 func (x *URLCache) RemoveCachedResponseForRequest(request *raw.NSURLRequest) {
 	x.inner.RemoveCachedResponseForRequest(request)
 }
 
+// @method removeAllCachedResponses @abstract Clears the given cache, removing all NSCachedURLResponse objects that it stores.
+//
 // RemoveAllCachedResponses calls the underlying RemoveAllCachedResponses.
 func (x *URLCache) RemoveAllCachedResponses() {
 	x.inner.RemoveAllCachedResponses()
 }
 
+// @method removeCachedResponsesSince: @abstract Clears the given cache of any cached responses since the provided date.
+//
 // RemoveCachedResponsesSinceDate calls the underlying RemoveCachedResponsesSinceDate.
 func (x *URLCache) RemoveCachedResponsesSinceDate(date *raw.NSDate) {
 	x.inner.RemoveCachedResponsesSinceDate(date)
 }
 
+// @abstract In-memory capacity of the receiver. @discussion At the time this call is made, the in-memory cache will truncate its contents to the size given, if necessary. @result The in-memory capacity, measured in bytes, for the receiver.
+//
 // MemoryCapacity calls the underlying MemoryCapacity.
 func (x *URLCache) MemoryCapacity() uint {
 	return x.inner.MemoryCapacity()
@@ -102,6 +122,8 @@ func (x *URLCache) SetMemoryCapacity(memoryCapacity uint) {
 	x.inner.SetMemoryCapacity(memoryCapacity)
 }
 
+// @abstract The on-disk capacity of the receiver. @discussion The on-disk capacity, measured in bytes, for the receiver. On mutation the on-disk cache will truncate its contents to the size given, if necessary.
+//
 // DiskCapacity calls the underlying DiskCapacity.
 func (x *URLCache) DiskCapacity() uint {
 	return x.inner.DiskCapacity()
@@ -112,11 +134,15 @@ func (x *URLCache) SetDiskCapacity(diskCapacity uint) {
 	x.inner.SetDiskCapacity(diskCapacity)
 }
 
+// @abstract Returns the current amount of space consumed by the in-memory cache of the receiver. @discussion This size, measured in bytes, indicates the current usage of the in-memory cache. @result the current usage of the in-memory cache of the receiver.
+//
 // CurrentMemoryUsage calls the underlying CurrentMemoryUsage.
 func (x *URLCache) CurrentMemoryUsage() uint {
 	return x.inner.CurrentMemoryUsage()
 }
 
+// @abstract Returns the current amount of space consumed by the on-disk cache of the receiver. @discussion This size, measured in bytes, indicates the current usage of the on-disk cache. @result the current usage of the on-disk cache of the receiver.
+//
 // CurrentDiskUsage calls the underlying CurrentDiskUsage.
 func (x *URLCache) CurrentDiskUsage() uint {
 	return x.inner.CurrentDiskUsage()

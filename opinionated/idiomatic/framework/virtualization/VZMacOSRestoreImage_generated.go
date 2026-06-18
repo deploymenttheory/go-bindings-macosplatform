@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes a version of macOS to install on to a virtual machine.
+//
 // MacOSRestoreImage wraps [raw.VZMacOSRestoreImage] with a fluent Go API.
 type MacOSRestoreImage struct {
 	inner *raw.VZMacOSRestoreImage
@@ -37,16 +39,22 @@ func NewMacOSRestoreImage() *MacOSRestoreImage {
 	return &MacOSRestoreImage{inner: raw.VZMacOSRestoreImageFromID(_id)}
 }
 
+// @abstract Whether this restore image is supported on the current host.
+//
 // IsSupported calls the underlying IsSupported.
 func (x *MacOSRestoreImage) IsSupported() bool {
 	return x.inner.IsSupported()
 }
 
+// @abstract The URL of this restore image. @discussion If the restore image was loaded using +[VZMacOSRestoreImage loadFileURL:completionHandler:], the value of this property will be a file URL. If the restore image was fetched using +[VZMacOSRestoreImage fetchLatestSupportedWithCompletionHandler:], the value of this property will be a network URL referring to an installation media file.
+//
 // URL calls the underlying URL.
 func (x *MacOSRestoreImage) URL() *foundation.NSURL {
 	return x.inner.URL()
 }
 
+// @abstract The build version this restore image contains.
+//
 // BuildVersion calls the underlying BuildVersion.
 func (x *MacOSRestoreImage) BuildVersion() string {
 	_r := x.inner.BuildVersion()
@@ -56,11 +64,15 @@ func (x *MacOSRestoreImage) BuildVersion() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The operating system version this restore image contains.
+//
 // OperatingSystemVersion calls the underlying OperatingSystemVersion.
 func (x *MacOSRestoreImage) OperatingSystemVersion() foundation.NSOperatingSystemVersion {
 	return x.inner.OperatingSystemVersion()
 }
 
+// @abstract The configuration requirements for the most featureful configuration supported by the current host and by this restore image. @discussion A VZMacOSRestoreImage can contain installation media for multiple Mac hardware models (VZMacHardwareModel). Some of these hardware models may not be supported by the current host. The mostFeaturefulSupportedConfiguration property can be used to determine the hardware model and configuration requirements that will provide the most complete feature set on the current host. If none of the hardware models are supported on the current host, this property is nil.
+//
 // MostFeaturefulSupportedConfiguration calls the underlying MostFeaturefulSupportedConfiguration.
 func (x *MacOSRestoreImage) MostFeaturefulSupportedConfiguration() *MacOSConfigurationRequirements {
 	_r := x.inner.MostFeaturefulSupportedConfiguration()

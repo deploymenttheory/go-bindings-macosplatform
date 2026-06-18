@@ -29,6 +29,8 @@ func ContactsLensSpecificationFromID(id objc.ID) *ContactsLensSpecification {
 	return &ContactsLensSpecification{inner: raw.HKContactsLensSpecificationFromID(id)}
 }
 
+// @method        initWithSphere:cylinder:axis:addPower:baseCurve:diameter @param         sphere     The lens power to correct nearsightedness or farsightedness @param         cylinder   The lens power required to correct astigmatism @param         axis       The angle along which cylindrical power should be positioned to correct astigmatism @param         addPower   The power adjustment applied to a multifocal lens to correct presbyopia @param         baseCurve  The curvature of the back surface of the lens @param         diameter   The width of the lens from edge to edge
+//
 // NewContactsLensSpecificationWithSphereCylinderAxisAddPowerBaseCurveDiameter creates a new [ContactsLensSpecification].
 func NewContactsLensSpecificationWithSphereCylinderAxisAddPowerBaseCurveDiameter(sphere *raw.HKQuantity, cylinder *raw.HKQuantity, axis *raw.HKQuantity, addPower *raw.HKQuantity, baseCurve *raw.HKQuantity, diameter *raw.HKQuantity) *ContactsLensSpecification {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKContactsLensSpecification")), objc.RegisterName("alloc"))
@@ -36,6 +38,8 @@ func NewContactsLensSpecificationWithSphereCylinderAxisAddPowerBaseCurveDiameter
 	return &ContactsLensSpecification{inner: raw.HKContactsLensSpecificationFromID(_id)}
 }
 
+// @property      baseCurve @abstract      The curvature of the back surface of the lens (measured in mm)
+//
 // BaseCurve calls the underlying BaseCurve.
 func (x *ContactsLensSpecification) BaseCurve() *Quantity {
 	_r := x.inner.BaseCurve()
@@ -45,6 +49,8 @@ func (x *ContactsLensSpecification) BaseCurve() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property      diameter @abstract      The width of the lens from edge to edge (measured in mm)
+//
 // Diameter calls the underlying Diameter.
 func (x *ContactsLensSpecification) Diameter() *Quantity {
 	_r := x.inner.Diameter()

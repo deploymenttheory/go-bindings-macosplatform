@@ -32,6 +32,8 @@ func MutableCharacteristicFromID(id objc.ID) *MutableCharacteristic {
 	return &MutableCharacteristic{inner: raw.CBMutableCharacteristicFromID(id)}
 }
 
+// @method initWithType:properties:value:permissions @param UUID			The Bluetooth UUID of the characteristic. @param properties	The properties of the characteristic. @param value		The characteristic value to be cached. If <i>nil</i>, the value will be dynamic and requested on-demand. @param permissions	The permissions of the characteristic value. @discussion			Returns an initialized characteristic.
+//
 // NewMutableCharacteristicWithTypePropertiesValuePermissions creates a new [MutableCharacteristic].
 func NewMutableCharacteristicWithTypePropertiesValuePermissions(uUID *raw.CBUUID, properties CBCharacteristicProperties, value *foundation.NSData, permissions CBAttributePermissions) *MutableCharacteristic {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CBMutableCharacteristic")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewMutableCharacteristicWithTypePropertiesValuePermissions(uUID *raw.CBUUID
 	return &MutableCharacteristic{inner: raw.CBMutableCharacteristicFromID(_id)}
 }
 
+// @property permissions @discussion The permissions of the characteristic value. @see		CBAttributePermissions
+//
 // WithPermissions sets the permissions property and returns the receiver for chaining.
 func (x *MutableCharacteristic) WithPermissions(permissions CBAttributePermissions) *MutableCharacteristic {
 	x.inner.SetPermissions(raw.CBAttributePermissions(permissions))
@@ -75,6 +79,8 @@ func (x *MutableCharacteristic) WithDescriptors(items ...DescriptorProvider) *Mu
 	return x
 }
 
+// @property permissions @discussion The permissions of the characteristic value. @see		CBAttributePermissions
+//
 // Permissions calls the underlying Permissions.
 func (x *MutableCharacteristic) Permissions() CBAttributePermissions {
 	return CBAttributePermissions(x.inner.Permissions())
@@ -85,6 +91,8 @@ func (x *MutableCharacteristic) SetPermissions(permissions CBAttributePermission
 	x.inner.SetPermissions(raw.CBAttributePermissions(permissions))
 }
 
+// @property subscribedCentrals @discussion For notifying characteristics, the set of currently subscribed centrals.
+//
 // SubscribedCentrals returns the collection as a Go slice.
 func (x *MutableCharacteristic) SubscribedCentrals() []*Central {
 	arr := x.inner.SubscribedCentrals()
@@ -107,8 +115,17 @@ func (x *MutableCharacteristic) SetValue(value *foundation.NSData) {
 }
 
 // SetDescriptors calls the underlying SetDescriptors.
-func (x *MutableCharacteristic) SetDescriptors(descriptors *foundation.NSArray[*raw.CBDescriptor]) {
-	x.inner.SetDescriptors(descriptors)
+func (x *MutableCharacteristic) SetDescriptors(descriptors ...DescriptorProvider) {
+	_ptrs := make([]objc.ID, len(descriptors))
+	for _i, _v := range descriptors {
+		_ptrs[_i] = _v.asDescriptor().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.CBDescriptor]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.CBDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetDescriptors(_arg0)
 }
 
 func (x *MutableCharacteristic) asCharacteristic() *raw.CBCharacteristic {
@@ -131,7 +148,7 @@ type MutableCharacteristicable interface {
 	SubscribedCentrals() []*Central
 	SetProperties(properties CBCharacteristicProperties)
 	SetValue(value *foundation.NSData)
-	SetDescriptors(descriptors *foundation.NSArray[*raw.CBDescriptor])
+	SetDescriptors(descriptors ...DescriptorProvider)
 }
 
 var _ MutableCharacteristicable = (*MutableCharacteristic)(nil)

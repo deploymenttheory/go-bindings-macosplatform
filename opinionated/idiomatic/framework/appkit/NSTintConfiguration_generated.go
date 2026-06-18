@@ -35,6 +35,8 @@ func NewTintConfiguration() *TintConfiguration {
 	return &TintConfiguration{inner: raw.NSTintConfigurationFromID(_id)}
 }
 
+// The base NSColor supplied when creating the tint configuration object. If the receiver wasn't created using a base NSColor, this property returns nil.
+//
 // BaseTintColor calls the underlying BaseTintColor.
 func (x *TintConfiguration) BaseTintColor() *Color {
 	_r := x.inner.BaseTintColor()
@@ -44,6 +46,8 @@ func (x *TintConfiguration) BaseTintColor() *Color {
 	return &Color{inner: _r}
 }
 
+// An equivalent NSColor matching the effective content tint of the receiver. If the receiver can't be represented as a NSColor, this property returns nil.
+//
 // EquivalentContentTintColor calls the underlying EquivalentContentTintColor.
 func (x *TintConfiguration) EquivalentContentTintColor() *Color {
 	_r := x.inner.EquivalentContentTintColor()
@@ -53,6 +57,8 @@ func (x *TintConfiguration) EquivalentContentTintColor() *Color {
 	return &Color{inner: _r}
 }
 
+// If YES, the tint configuration alters its effect based on the user's preferred Accent Color. Otherwise, the tint configuration produces a constant effect regardless of the Accent Color preference.
+//
 // AdaptsToUserAccentColor calls the underlying AdaptsToUserAccentColor.
 func (x *TintConfiguration) AdaptsToUserAccentColor() bool {
 	return x.inner.AdaptsToUserAccentColor()

@@ -1,0 +1,327 @@
+{
+  "schema_version": 1,
+  "framework": "AutomaticAssessmentConfiguration",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "AEAssessmentApplication": {
+      "doc": "A representation of an app that users can access during an assessment.",
+      "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentapplication"
+    },
+    "AEAssessmentConfiguration": {
+      "doc": "Configuration information for an assessment session.",
+      "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration"
+    },
+    "AEAssessmentParticipantConfiguration": {
+      "doc": "Configuration information for an app that’s available during an assessment.",
+      "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentparticipantconfiguration"
+    },
+    "AEAssessmentSession": {
+      "doc": "A session that your app uses to protect an assessment.",
+      "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentsession"
+    }
+  },
+  "protocols": {
+    "AEAssessmentSessionDelegate": {
+      "doc": "An interface that the session uses to provide information about session state changes to a delegate.",
+      "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentsessiondelegate"
+    }
+  },
+  "enums": {
+    "AEAssessmentErrorCode": {
+      "doc": "Error codes that the framework returns if a session fails.",
+      "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmenterrorcode"
+    },
+    "AEAutocorrectMode": {
+      "doc": "The set of autocorrect features that you can enable during an assessment.",
+      "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeautocorrectmode"
+    }
+  },
+  "methods": {
+    "AEAssessmentApplication": {
+      "-initWithBundleIdentifier:": {
+        "doc": "Creates a representation of an app using its bundle identifier.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentapplication/init(bundleidentifier:)"
+      },
+      "-initWithBundleIdentifier:teamIdentifier:": {
+        "doc": "Creates a representation of an app using its bundle and team identifiers.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentapplication/init(bundleidentifier:teamidentifier:)"
+      }
+    },
+    "AEAssessmentConfiguration": {
+      "-removeApplication:": {
+        "doc": "Removes the availability of a previously allowed app.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/remove(_:)"
+      },
+      "-setConfiguration:forApplication:": {
+        "doc": "Adds an app to the list of apps available during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/setconfiguration(_:for:)"
+      }
+    },
+    "AEAssessmentParticipantConfiguration": {
+      "+new": {
+        "doc": "Creates a new assessment participant configuration instance.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentparticipantconfiguration/new()"
+      },
+      "-allowedMenuItemsForLanguageIdentifier:": {
+        "doc": "Returns the set of allowed menu item titles for the given language identifier, or @c nil if no items have been configured for that identifier.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentparticipantconfiguration/allowedmenuitemsforlanguageidentifier:"
+      },
+      "-init": {
+        "doc": "Initializes an assessment participant configuration instance.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentparticipantconfiguration/init()"
+      },
+      "-setAllowedMenuItems:forLanguageIdentifier:": {
+        "doc": "Sets the allowed menu item titles for the given language identifier.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentparticipantconfiguration/setallowedmenuitems:forlanguageidentifier:"
+      }
+    },
+    "AEAssessmentSession": {
+      "-begin": {
+        "doc": "Starts an assessment session.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentsession/begin()"
+      },
+      "-end": {
+        "doc": "Ends an assessment session.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentsession/end()"
+      },
+      "-initWithConfiguration:": {
+        "doc": "Creates a new assessment session.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentsession/init(configuration:)"
+      },
+      "-updateToConfiguration:": {
+        "doc": "Changes the session to use the specified configuration.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentsession/update(to:)"
+      }
+    }
+  },
+  "properties": {
+    "AEAssessmentApplication": {
+      "bundleIdentifier": {
+        "doc": "The bundle identifier of the app.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentapplication/bundleidentifier"
+      },
+      "requiresSignatureValidation": {
+        "doc": "A Boolean that indicates whether the session requires the app to have a valid code signature to run.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentapplication/requiressignaturevalidation"
+      },
+      "teamIdentifier": {
+        "doc": "The team identifier of the app.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentapplication/teamidentifier"
+      }
+    },
+    "AEAssessmentConfiguration": {
+      "AEAutocorrectMode": {
+        "doc": "The set of autocorrect features that you can enable during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/autocorrectmode-swift.struct"
+      },
+      "allowLockdownMode": {
+        "doc": "A Boolean value that indicates whether the assessment allows Lockdown Mode to be active.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowlockdownmode"
+      },
+      "allowOnlyParticipantsToRun": {
+        "doc": "A Boolean value that indicates whether only participant applications are allowed to run during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowonlyparticipantstorun"
+      },
+      "allowPrivateRelay": {
+        "doc": "A Boolean value that indicates whether the assessment allows iCloud Private Relay to be active.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowprivaterelay"
+      },
+      "allowedAppleMenuItems": {
+        "doc": "The set of allowed Apple menu items during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowedapplemenuitems"
+      },
+      "allowedDirectoriesAndFiles": {
+        "doc": "The set of allowed directories and files that participants can access during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/alloweddirectoriesandfiles"
+      },
+      "allowedMenuBarItems": {
+        "doc": "The set of menu bar items that should remain visible during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowedmenubaritems"
+      },
+      "allowsAccessibilityAlternativeInputMethods": {
+        "doc": "A Boolean value that indicates whether to allow alternative input methods for accessibility features during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsaccessibilityalternativeinputmethods"
+      },
+      "allowsAccessibilityBackgroundSounds": {
+        "doc": "A Boolean value that indicates whether to allow Background Sounds during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsaccessibilitybackgroundsounds"
+      },
+      "allowsAccessibilityHoverText": {
+        "doc": "A Boolean value that indicates whether to allow Hover Text during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsaccessibilityhovertext"
+      },
+      "allowsAccessibilityKeyboard": {
+        "doc": "A Boolean value that indicates whether to allow the Accessibility Keyboard during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsaccessibilitykeyboard"
+      },
+      "allowsAccessibilityLiveCaptions": {
+        "doc": "A Boolean value that indicates whether to allow Live Captions during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsaccessibilitylivecaptions"
+      },
+      "allowsAccessibilityLiveSpeech": {
+        "doc": "A Boolean value that indicates whether to allow Live Speech during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsaccessibilitylivespeech"
+      },
+      "allowsAccessibilityReader": {
+        "doc": "A Boolean value that indicates whether to allow the Accessibility Reader during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsaccessibilityreader"
+      },
+      "allowsAccessibilitySpeech": {
+        "doc": "A Boolean value that indicates whether to allow the speech-related accessibility features during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsaccessibilityspeech"
+      },
+      "allowsAccessibilitySpokenContent": {
+        "doc": "A Boolean value that indicates whether to allow Spoken Content during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsaccessibilityspokencontent"
+      },
+      "allowsAccessibilitySwitchControl": {
+        "doc": "A Boolean value that indicates whether to allow Switch Control during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsaccessibilityswitchcontrol"
+      },
+      "allowsAccessibilityTypingFeedback": {
+        "doc": "A Boolean value that indicates whether to allow accessibility typing feedback during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsaccessibilitytypingfeedback"
+      },
+      "allowsAccessibilityVoiceControl": {
+        "doc": "A Boolean value that indicates whether to allow Voice Control during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsaccessibilityvoicecontrol"
+      },
+      "allowsAccessibilityVoiceOver": {
+        "doc": "A Boolean value that indicates whether to allow VoiceOver during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsaccessibilityvoiceover"
+      },
+      "allowsAccessibilityZoom": {
+        "doc": "A Boolean value that indicates whether to allow Zoom during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsaccessibilityzoom"
+      },
+      "allowsActivityContinuation": {
+        "doc": "A Boolean value that indicates whether to allow Handoff during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsactivitycontinuation"
+      },
+      "allowsAutoFill": {
+        "doc": "A Boolean value that indicates whether to allow autofill during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsautofill"
+      },
+      "allowsContinuousPathKeyboard": {
+        "doc": "A Boolean value that indicates whether to allow Slide to Type to operate during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowscontinuouspathkeyboard"
+      },
+      "allowsDictation": {
+        "doc": "A Boolean value that indicates whether to allow the use of dictation during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsdictation"
+      },
+      "allowsDock": {
+        "doc": "A Boolean value that indicates whether to allow the Dock during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsdock"
+      },
+      "allowsEmojiKeyboard": {
+        "doc": "A Boolean value that indicates whether to allow the emoji keyboard during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsemojikeyboard"
+      },
+      "allowsKeyboardShortcuts": {
+        "doc": "A Boolean value that indicates whether to allow keyboard shortcuts during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowskeyboardshortcuts"
+      },
+      "allowsMenuBar": {
+        "doc": "A Boolean value that indicates whether to allow the menu bar during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsmenubar"
+      },
+      "allowsPasswordAutoFill": {
+        "doc": "A Boolean value that indicates whether to allow password autofill during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowspasswordautofill"
+      },
+      "allowsPredictiveKeyboard": {
+        "doc": "A Boolean value that indicates whether to enable the predictive keyboard during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowspredictivekeyboard"
+      },
+      "allowsScreenshots": {
+        "doc": "A Boolean value that indicates whether to allow screenshots copied to the clipboard during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsscreenshots"
+      },
+      "allowsSpellCheck": {
+        "doc": "A Boolean value that indicates whether to allow spell check during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsspellcheck"
+      },
+      "allowsStructuralInput": {
+        "doc": "A Boolean value that indicates whether to allow Chinese and Japanese structural input during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsstructuralinput"
+      },
+      "allowsUserScriptExecution": {
+        "doc": "A Boolean value that indicates whether to allow user script execution during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/allowsuserscriptexecution"
+      },
+      "autocorrectMode": {
+        "doc": "A Boolean value that indicates whether to allow Autocorrect during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/autocorrectmode-swift.property"
+      },
+      "configurationsByApplication": {
+        "doc": "The collection of apps available during an assessment, along with their associated configurations.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/configurationsbyapplication"
+      },
+      "mainParticipantConfiguration": {
+        "doc": "The app-specific configuration for the app that invokes the assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/mainparticipantconfiguration"
+      },
+      "requiresManagedDevice": {
+        "doc": "A Boolean value that indicates whether the device must be managed to start an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/requiresmanageddevice"
+      },
+      "requiresSIP": {
+        "doc": "A Boolean value that indicates whether System Integrity Protection (SIP) must be enabled to start an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/requiressip"
+      },
+      "requiresSingleUser": {
+        "doc": "A Boolean value that indicates whether only a single user account must be logged in to start an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/requiressingleuser"
+      },
+      "requiresUserAccountType": {
+        "doc": "Specifies the type of user account required to start an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration/requiresuseraccounttype"
+      }
+    },
+    "AEAssessmentParticipantConfiguration": {
+      "allowedMenuItemLanguageIdentifiers": {
+        "doc": "The set of language identifiers for which allowed menu items have been configured.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentparticipantconfiguration/allowedmenuitemlanguageidentifiers"
+      },
+      "allowedMenuItemLanguages": {
+        "doc": "The set of languages for which allowed menu items have been configured.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentparticipantconfiguration/allowedmenuitemlanguages"
+      },
+      "allowedMenuItems(for:)": {
+        "doc": "Returns the set of allowed menu item titles for the given language, or nil if no items have been configured for that language.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentparticipantconfiguration/allowedmenuitems(for:)"
+      },
+      "allowsNetworkAccess": {
+        "doc": "A Boolean that indicates whether an app can access network resources during an assessment.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentparticipantconfiguration/allowsnetworkaccess"
+      },
+      "setAllowedMenuItems(_:for:)": {
+        "doc": "Sets the allowed menu item titles for the given language.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentparticipantconfiguration/setallowedmenuitems(_:for:)"
+      }
+    },
+    "AEAssessmentSession": {
+      "active": {
+        "doc": "A Boolean that indicates whether an assessment session is running.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentsession/isactive"
+      },
+      "configuration": {
+        "doc": "The current configuration of the session.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentsession/configuration"
+      },
+      "delegate": {
+        "doc": "A delegate to which the session provides state change updates.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentsession/delegate"
+      },
+      "supportsConfigurationUpdates": {
+        "doc": "A Boolean that indicates whether the current device or platform supports updating a session’s configuration after the session has begun.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentsession/supportsconfigurationupdates"
+      },
+      "supportsMultipleParticipants": {
+        "doc": "A Boolean that indicates whether the current device or platform supports a configuration with one or more participant applications.",
+        "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentsession/supportsmultipleparticipants"
+      }
+    }
+  }
+}

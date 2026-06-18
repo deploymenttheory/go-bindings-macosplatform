@@ -53,6 +53,8 @@ func (x *QuantitySample) Quantity() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property      count @abstract      The number of individual values making up the receiver's quantity. @discussion    Requests for the individual series quantities can be made using HKQuantitySeriesSampleQuery.
+//
 // Count calls the underlying Count.
 func (x *QuantitySample) Count() int {
 	return x.inner.Count()

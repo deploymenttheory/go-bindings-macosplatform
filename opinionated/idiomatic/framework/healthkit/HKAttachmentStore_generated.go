@@ -34,6 +34,8 @@ func AttachmentStoreFromID(id objc.ID) *AttachmentStore {
 	return &AttachmentStore{inner: raw.HKAttachmentStoreFromID(id)}
 }
 
+// @method        initWithHealthStore: @abstract      The designated initializer to create an HKAttachmentStore. @param         healthStore     Specifies the HKHealthStore object to use.
+//
 // NewAttachmentStoreWithHealthStore creates a new [AttachmentStore].
 func NewAttachmentStoreWithHealthStore(healthStore *raw.HKHealthStore) *AttachmentStore {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKAttachmentStore")), objc.RegisterName("alloc"))
@@ -41,6 +43,8 @@ func NewAttachmentStoreWithHealthStore(healthStore *raw.HKHealthStore) *Attachme
 	return &AttachmentStore{inner: raw.HKAttachmentStoreFromID(_id)}
 }
 
+// @method        addAttachmentToObject:name:contentType:URL:metadata:completion: @abstract      Creates a new HKAttachment using the passed in NSURL and attaches it to the specified HKObject. @param         object          The object for which to add the HKAttachment. @param         name            The name of the attachment. @param         contentType     The content type of the attachment. @param         URL             The NSURL to use to create the attachment. @param         metadata        Extra information describing the attachment. @param         completion      Called with an HKAttachment instance once the file was successfully saved and attached, otherwise called with an error.
+//
 // AddAttachmentToObjectNameContentTypeURLMetadataCompletion blocks until the operation completes or ctx is cancelled.
 func (x *AttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataCompletion(ctx context.Context, object *raw.HKObject, name string, contentType *uniformtypeidentifiers.UTType, uRL string, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*Attachment, error) {
 	type _result struct {
@@ -67,11 +71,15 @@ func (x *AttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataComplet
 	}
 }
 
+// @method        removeAttachment:fromObject:completion: @abstract      Removes the given HKAttachment from the specified HKObject. @param         attachment      The HKAttachment to be removed. @param         object          The object from which to remove the attachment. @param         completion      Called once the remove operation finishes.
+//
 // RemoveAttachmentFromObjectCompletion calls the underlying RemoveAttachmentFromObjectCompletion.
 func (x *AttachmentStore) RemoveAttachmentFromObjectCompletion(attachment *raw.HKAttachment, object *raw.HKObject, completion func(bool, unsafe.Pointer)) {
 	x.inner.RemoveAttachmentFromObjectCompletion(attachment, object, completion)
 }
 
+// @method        getAttachmentsForObject:completion: @abstract      Retrieves a list of attachments for a given object. @param         object               The object for which to retrieve attachments. @param         completion           Called with a list of attachments or an error.
+//
 // GetAttachmentsForObjectCompletion blocks until the operation completes or ctx is cancelled.
 func (x *AttachmentStore) GetAttachmentsForObjectCompletion(ctx context.Context, object *raw.HKObject) (*foundation.NSArray[*raw.HKAttachment], error) {
 	type _result struct {
@@ -96,11 +104,15 @@ func (x *AttachmentStore) GetAttachmentsForObjectCompletion(ctx context.Context,
 	}
 }
 
+// @method        getDataForAttachment:completion: @abstract      Retrieves the NSData for the given HKAttachment. @discussion    Prefer @c streamDataForAttachment:completion: for large files that support incremental reading to limit your app's peak memory usage. The attachment's data may not always be available locally, and could be stored in iCloud. @param         attachment           The attachment object to read data from. @param         completion           Called with an NSData or an error. @return        An NSProgress object to use for tracking the progress of downloading the attachment's data from iCloud.
+//
 // GetDataForAttachmentCompletion calls the underlying GetDataForAttachmentCompletion.
 func (x *AttachmentStore) GetDataForAttachmentCompletion(attachment *raw.HKAttachment, completion func(*foundation.NSData, unsafe.Pointer)) *foundation.NSProgress {
 	return x.inner.GetDataForAttachmentCompletion(attachment, completion)
 }
 
+// @method        streamDataForAttachment:dataHandler: @abstract      Streams the given HKAttachment's data as ordered NSData chunks. @discussion    The dataHandler's done parameter is set to YES when all chunks have been streamed. The attachment's data may not always be available locally, and could be stored in iCloud. @param         attachment           The attachment object to read data from. @param         dataHandler          Called with an NSData chunk or an error. When done is YES, the operation has completed. @return        An NSProgress object to use for tracking the progress of downloading the attachment's data from iCloud.
+//
 // StreamDataForAttachmentDataHandler calls the underlying StreamDataForAttachmentDataHandler.
 func (x *AttachmentStore) StreamDataForAttachmentDataHandler(attachment *raw.HKAttachment, dataHandler func(*foundation.NSData, unsafe.Pointer, bool)) *foundation.NSProgress {
 	return x.inner.StreamDataForAttachmentDataHandler(attachment, dataHandler)

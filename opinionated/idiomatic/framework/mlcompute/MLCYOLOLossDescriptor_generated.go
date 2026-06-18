@@ -36,64 +36,86 @@ func NewYOLOLossDescriptor() *YOLOLossDescriptor {
 	return &YOLOLossDescriptor{inner: raw.MLCYOLOLossDescriptorFromID(_id)}
 }
 
+// @property   shouldRescore @abstract   Rescore pertains to multiplying the confidence groundTruth with IOU (intersection over union) of predicted bounding box and the groundTruth boundingBox.  The default is YES
+//
 // WithShouldRescore sets the shouldRescore property and returns the receiver for chaining.
 func (x *YOLOLossDescriptor) WithShouldRescore(shouldRescore bool) *YOLOLossDescriptor {
 	x.inner.SetShouldRescore(shouldRescore)
 	return x
 }
 
+// @property   scaleSpatialPositionLoss @abstract   The scale factor for spatial position loss and loss gradient.  The default is 10.0
+//
 // WithScaleSpatialPositionLoss sets the scaleSpatialPositionLoss property and returns the receiver for chaining.
 func (x *YOLOLossDescriptor) WithScaleSpatialPositionLoss(scaleSpatialPositionLoss float32) *YOLOLossDescriptor {
 	x.inner.SetScaleSpatialPositionLoss(scaleSpatialPositionLoss)
 	return x
 }
 
+// @property   scaleSpatialSizeLoss @abstract   The scale factor for spatial size loss and loss gradient.  The default is 10.0
+//
 // WithScaleSpatialSizeLoss sets the scaleSpatialSizeLoss property and returns the receiver for chaining.
 func (x *YOLOLossDescriptor) WithScaleSpatialSizeLoss(scaleSpatialSizeLoss float32) *YOLOLossDescriptor {
 	x.inner.SetScaleSpatialSizeLoss(scaleSpatialSizeLoss)
 	return x
 }
 
+// @property   scaleNoObject @abstract   The scale factor for no object confidence loss and loss gradient.  The default is 5.0
+//
 // WithScaleNoObjectConfidenceLoss sets the scaleNoObjectConfidenceLoss property and returns the receiver for chaining.
 func (x *YOLOLossDescriptor) WithScaleNoObjectConfidenceLoss(scaleNoObjectConfidenceLoss float32) *YOLOLossDescriptor {
 	x.inner.SetScaleNoObjectConfidenceLoss(scaleNoObjectConfidenceLoss)
 	return x
 }
 
+// @property   scaleObject @abstract   The scale factor for object confidence loss and loss gradient.  The default is 100.0
+//
 // WithScaleObjectConfidenceLoss sets the scaleObjectConfidenceLoss property and returns the receiver for chaining.
 func (x *YOLOLossDescriptor) WithScaleObjectConfidenceLoss(scaleObjectConfidenceLoss float32) *YOLOLossDescriptor {
 	x.inner.SetScaleObjectConfidenceLoss(scaleObjectConfidenceLoss)
 	return x
 }
 
+// @property   scaleClass @abstract   The scale factor for no object classes loss and loss gradient.  The default is 2.0
+//
 // WithScaleClassLoss sets the scaleClassLoss property and returns the receiver for chaining.
 func (x *YOLOLossDescriptor) WithScaleClassLoss(scaleClassLoss float32) *YOLOLossDescriptor {
 	x.inner.SetScaleClassLoss(scaleClassLoss)
 	return x
 }
 
+// @property   positive IOU @abstract   If the prediction IOU with groundTruth is higher than this value we consider it a confident object presence, The default is 0.7
+//
 // WithMinimumIOUForObjectPresence sets the minimumIOUForObjectPresence property and returns the receiver for chaining.
 func (x *YOLOLossDescriptor) WithMinimumIOUForObjectPresence(minimumIOUForObjectPresence float32) *YOLOLossDescriptor {
 	x.inner.SetMinimumIOUForObjectPresence(minimumIOUForObjectPresence)
 	return x
 }
 
+// @property   negative IOU @abstract   If the prediction IOU with groundTruth is lower than this value we consider it a confident object absence.  The default is 0.3
+//
 // WithMaximumIOUForObjectAbsence sets the maximumIOUForObjectAbsence property and returns the receiver for chaining.
 func (x *YOLOLossDescriptor) WithMaximumIOUForObjectAbsence(maximumIOUForObjectAbsence float32) *YOLOLossDescriptor {
 	x.inner.SetMaximumIOUForObjectAbsence(maximumIOUForObjectAbsence)
 	return x
 }
 
+// @property   anchorBoxCount @abstract   number of anchor boxes used to detect object per grid cell
+//
 // AnchorBoxCount calls the underlying AnchorBoxCount.
 func (x *YOLOLossDescriptor) AnchorBoxCount() uint {
 	return x.inner.AnchorBoxCount()
 }
 
+// @property   anchorBoxes @abstract   \p NSData containing the width and height for \p anchorBoxCount anchor boxes This \p NSData should have 2 floating-point values per anchor box which represent the width and height of the anchor box.
+//
 // AnchorBoxes calls the underlying AnchorBoxes.
 func (x *YOLOLossDescriptor) AnchorBoxes() *foundation.NSData {
 	return x.inner.AnchorBoxes()
 }
 
+// @property   shouldRescore @abstract   Rescore pertains to multiplying the confidence groundTruth with IOU (intersection over union) of predicted bounding box and the groundTruth boundingBox.  The default is YES
+//
 // ShouldRescore calls the underlying ShouldRescore.
 func (x *YOLOLossDescriptor) ShouldRescore() bool {
 	return x.inner.ShouldRescore()
@@ -104,6 +126,8 @@ func (x *YOLOLossDescriptor) SetShouldRescore(shouldRescore bool) {
 	x.inner.SetShouldRescore(shouldRescore)
 }
 
+// @property   scaleSpatialPositionLoss @abstract   The scale factor for spatial position loss and loss gradient.  The default is 10.0
+//
 // ScaleSpatialPositionLoss calls the underlying ScaleSpatialPositionLoss.
 func (x *YOLOLossDescriptor) ScaleSpatialPositionLoss() float32 {
 	return x.inner.ScaleSpatialPositionLoss()
@@ -114,6 +138,8 @@ func (x *YOLOLossDescriptor) SetScaleSpatialPositionLoss(scaleSpatialPositionLos
 	x.inner.SetScaleSpatialPositionLoss(scaleSpatialPositionLoss)
 }
 
+// @property   scaleSpatialSizeLoss @abstract   The scale factor for spatial size loss and loss gradient.  The default is 10.0
+//
 // ScaleSpatialSizeLoss calls the underlying ScaleSpatialSizeLoss.
 func (x *YOLOLossDescriptor) ScaleSpatialSizeLoss() float32 {
 	return x.inner.ScaleSpatialSizeLoss()
@@ -124,6 +150,8 @@ func (x *YOLOLossDescriptor) SetScaleSpatialSizeLoss(scaleSpatialSizeLoss float3
 	x.inner.SetScaleSpatialSizeLoss(scaleSpatialSizeLoss)
 }
 
+// @property   scaleNoObject @abstract   The scale factor for no object confidence loss and loss gradient.  The default is 5.0
+//
 // ScaleNoObjectConfidenceLoss calls the underlying ScaleNoObjectConfidenceLoss.
 func (x *YOLOLossDescriptor) ScaleNoObjectConfidenceLoss() float32 {
 	return x.inner.ScaleNoObjectConfidenceLoss()
@@ -134,6 +162,8 @@ func (x *YOLOLossDescriptor) SetScaleNoObjectConfidenceLoss(scaleNoObjectConfide
 	x.inner.SetScaleNoObjectConfidenceLoss(scaleNoObjectConfidenceLoss)
 }
 
+// @property   scaleObject @abstract   The scale factor for object confidence loss and loss gradient.  The default is 100.0
+//
 // ScaleObjectConfidenceLoss calls the underlying ScaleObjectConfidenceLoss.
 func (x *YOLOLossDescriptor) ScaleObjectConfidenceLoss() float32 {
 	return x.inner.ScaleObjectConfidenceLoss()
@@ -144,6 +174,8 @@ func (x *YOLOLossDescriptor) SetScaleObjectConfidenceLoss(scaleObjectConfidenceL
 	x.inner.SetScaleObjectConfidenceLoss(scaleObjectConfidenceLoss)
 }
 
+// @property   scaleClass @abstract   The scale factor for no object classes loss and loss gradient.  The default is 2.0
+//
 // ScaleClassLoss calls the underlying ScaleClassLoss.
 func (x *YOLOLossDescriptor) ScaleClassLoss() float32 {
 	return x.inner.ScaleClassLoss()
@@ -154,6 +186,8 @@ func (x *YOLOLossDescriptor) SetScaleClassLoss(scaleClassLoss float32) {
 	x.inner.SetScaleClassLoss(scaleClassLoss)
 }
 
+// @property   positive IOU @abstract   If the prediction IOU with groundTruth is higher than this value we consider it a confident object presence, The default is 0.7
+//
 // MinimumIOUForObjectPresence calls the underlying MinimumIOUForObjectPresence.
 func (x *YOLOLossDescriptor) MinimumIOUForObjectPresence() float32 {
 	return x.inner.MinimumIOUForObjectPresence()
@@ -164,6 +198,8 @@ func (x *YOLOLossDescriptor) SetMinimumIOUForObjectPresence(minimumIOUForObjectP
 	x.inner.SetMinimumIOUForObjectPresence(minimumIOUForObjectPresence)
 }
 
+// @property   negative IOU @abstract   If the prediction IOU with groundTruth is lower than this value we consider it a confident object absence.  The default is 0.3
+//
 // MaximumIOUForObjectAbsence calls the underlying MaximumIOUForObjectAbsence.
 func (x *YOLOLossDescriptor) MaximumIOUForObjectAbsence() float32 {
 	return x.inner.MaximumIOUForObjectAbsence()

@@ -31,6 +31,8 @@ func MatrixDecompositionCholeskyFromID(id objc.ID) *MatrixDecompositionCholesky 
 	return &MatrixDecompositionCholesky{inner: raw.MPSMatrixDecompositionCholeskyFromID(id)}
 }
 
+// @abstract   Initialize an MPSMatrixDecompositionCholesky object on a device @param      device          The device on which the kernel will execute. @param      lower           A boolean value indicating if the lower triangular part of the source matrix is stored.  If lower = YES the lower triangular part will be used and the factor will be written to the lower triangular part of the result, otherwise the upper triangular part will be used and the factor will be written to the upper triangular part. @param      order           The number of rows and columns in the source matrix. @return     A valid MPSMatrixDecompositionCholesky object or nil, if failure.
+//
 // NewMatrixDecompositionCholeskyWithDeviceLowerOrder creates a new [MatrixDecompositionCholesky].
 func NewMatrixDecompositionCholeskyWithDeviceLowerOrder(device metal.MTLDevice, lower bool, order uint) *MatrixDecompositionCholesky {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixDecompositionCholesky")), objc.RegisterName("alloc"))
@@ -38,30 +40,40 @@ func NewMatrixDecompositionCholeskyWithDeviceLowerOrder(device metal.MTLDevice, 
 	return &MatrixDecompositionCholesky{inner: raw.MPSMatrixDecompositionCholeskyFromID(_id)}
 }
 
+// @property   sourceMatrixOrigin @discussion The origin, relative to [0, 0] in the source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithSourceMatrixOrigin sets the sourceMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixDecompositionCholesky) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixDecompositionCholesky {
 	x.inner.MPSMatrixUnaryKernel.SetSourceMatrixOrigin(sourceMatrixOrigin)
 	return x
 }
 
+// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixDecompositionCholesky) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixDecompositionCholesky {
 	x.inner.MPSMatrixUnaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
 	return x
 }
 
+// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+//
 // WithBatchStart sets the batchStart property and returns the receiver for chaining.
 func (x *MatrixDecompositionCholesky) WithBatchStart(batchStart uint) *MatrixDecompositionCholesky {
 	x.inner.MPSMatrixUnaryKernel.SetBatchStart(batchStart)
 	return x
 }
 
+// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+//
 // WithBatchSize sets the batchSize property and returns the receiver for chaining.
 func (x *MatrixDecompositionCholesky) WithBatchSize(batchSize uint) *MatrixDecompositionCholesky {
 	x.inner.MPSMatrixUnaryKernel.SetBatchSize(batchSize)
 	return x
 }
 
+// @abstract   Encode a MPSMatrixDecompositionCholesky kernel into a command Buffer. @param      commandBuffer           A valid MTLCommandBuffer to receive the encoded filter @param      sourceMatrix            A valid MPSMatrix containing the source data.  Must have enough space to hold a order x order matrix. @param      resultMatrix            A valid MPSMatrix to contain the result.  Must have enough space to hold a order x order matrix. @param      status                  A MTLBuffer which indicates the resulting MPSMatrixDecompositionStatus value. @discussion This function encodes the MPSMatrixDecompositionCholesky object to a valid command buffer. If during the factorization a leading minor of the matrix is found to be not positive definite, MPSMatrixDecompositionNonPositiveDefinite will be returned in the provided status buffer.  Previously computed pivots and the non positive pivot are written to the result, but the factorization does not complete. The data referenced by the MTLBuffer is not valid until the command buffer has completed execution.  If the matrix return status is not desired NULL may be provided. If the return status is MPSMatrixDecompositionStatusSuccess, resultMatrix contains the resulting factors in its lower or upper triangular regions respectively. This kernel functions either in-place, if the result matrix completely aliases the source matrix, or out-of-place.  If there is any partial overlap between input and output data the results are undefined.
+//
 // EncodeToCommandBufferSourceMatrixResultMatrixStatus calls the underlying EncodeToCommandBufferSourceMatrixResultMatrixStatus.
 func (x *MatrixDecompositionCholesky) EncodeToCommandBufferSourceMatrixResultMatrixStatus(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix, status metal.MTLBuffer) {
 	x.inner.EncodeToCommandBufferSourceMatrixResultMatrixStatus(commandBuffer, sourceMatrix, resultMatrix, status)

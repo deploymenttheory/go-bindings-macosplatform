@@ -45,42 +45,56 @@ func (x *AccelerationStructureGeometryDescriptor) WithIntersectionFunctionTableO
 	return x
 }
 
+// @brief Whether the geometry is opaque
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *AccelerationStructureGeometryDescriptor) WithOpaque(opaque bool) *AccelerationStructureGeometryDescriptor {
 	x.inner.SetOpaque(opaque)
 	return x
 }
 
+// @brief Whether intersection functions may be invoked more than once per ray/primitive intersection. Defaults to YES.
+//
 // WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
 func (x *AccelerationStructureGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureGeometryDescriptor {
 	x.inner.SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation)
 	return x
 }
 
+// @brief Label
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *AccelerationStructureGeometryDescriptor) WithLabel(label string) *AccelerationStructureGeometryDescriptor {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @brief Data buffer containing per-primitive data. May be nil.
+//
 // WithPrimitiveDataBuffer sets the primitiveDataBuffer property and returns the receiver for chaining.
 func (x *AccelerationStructureGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTLBuffer) *AccelerationStructureGeometryDescriptor {
 	x.inner.SetPrimitiveDataBuffer(primitiveDataBuffer)
 	return x
 }
 
+// @brief Primitive data buffer offset in bytes. Must be aligned to the platform's buffer offset alignment. Defaults to 0 bytes.
+//
 // WithPrimitiveDataBufferOffset sets the primitiveDataBufferOffset property and returns the receiver for chaining.
 func (x *AccelerationStructureGeometryDescriptor) WithPrimitiveDataBufferOffset(primitiveDataBufferOffset uint) *AccelerationStructureGeometryDescriptor {
 	x.inner.SetPrimitiveDataBufferOffset(primitiveDataBufferOffset)
 	return x
 }
 
+// @brief Stride, in bytes, between per-primitive data in the primitive data buffer. Must be at least primitiveDataElementSize and must be a multiple of 4 bytes. Defaults to 0 bytes. Assumed to be equal to primitiveDataElementSize if zero.
+//
 // WithPrimitiveDataStride sets the primitiveDataStride property and returns the receiver for chaining.
 func (x *AccelerationStructureGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride uint) *AccelerationStructureGeometryDescriptor {
 	x.inner.SetPrimitiveDataStride(primitiveDataStride)
 	return x
 }
 
+// @brief Size, in bytes, of the data for each primitive in the primitive data buffer. Must be at most primitiveDataStride and must be a multiple of 4 bytes. Defaults to 0 bytes.
+//
 // WithPrimitiveDataElementSize sets the primitiveDataElementSize property and returns the receiver for chaining.
 func (x *AccelerationStructureGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize uint) *AccelerationStructureGeometryDescriptor {
 	x.inner.SetPrimitiveDataElementSize(primitiveDataElementSize)
@@ -97,6 +111,8 @@ func (x *AccelerationStructureGeometryDescriptor) SetIntersectionFunctionTableOf
 	x.inner.SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset)
 }
 
+// @brief Whether the geometry is opaque
+//
 // Opaque calls the underlying Opaque.
 func (x *AccelerationStructureGeometryDescriptor) Opaque() bool {
 	return x.inner.Opaque()
@@ -107,6 +123,8 @@ func (x *AccelerationStructureGeometryDescriptor) SetOpaque(opaque bool) {
 	x.inner.SetOpaque(opaque)
 }
 
+// @brief Whether intersection functions may be invoked more than once per ray/primitive intersection. Defaults to YES.
+//
 // AllowDuplicateIntersectionFunctionInvocation calls the underlying AllowDuplicateIntersectionFunctionInvocation.
 func (x *AccelerationStructureGeometryDescriptor) AllowDuplicateIntersectionFunctionInvocation() bool {
 	return x.inner.AllowDuplicateIntersectionFunctionInvocation()
@@ -117,6 +135,8 @@ func (x *AccelerationStructureGeometryDescriptor) SetAllowDuplicateIntersectionF
 	x.inner.SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation)
 }
 
+// @brief Label
+//
 // Label calls the underlying Label.
 func (x *AccelerationStructureGeometryDescriptor) Label() string {
 	_r := x.inner.Label()
@@ -131,6 +151,8 @@ func (x *AccelerationStructureGeometryDescriptor) SetLabel(label string) {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 }
 
+// @brief Data buffer containing per-primitive data. May be nil.
+//
 // PrimitiveDataBuffer calls the underlying PrimitiveDataBuffer.
 func (x *AccelerationStructureGeometryDescriptor) PrimitiveDataBuffer() raw.MTLBuffer {
 	return x.inner.PrimitiveDataBuffer()
@@ -141,6 +163,8 @@ func (x *AccelerationStructureGeometryDescriptor) SetPrimitiveDataBuffer(primiti
 	x.inner.SetPrimitiveDataBuffer(primitiveDataBuffer)
 }
 
+// @brief Primitive data buffer offset in bytes. Must be aligned to the platform's buffer offset alignment. Defaults to 0 bytes.
+//
 // PrimitiveDataBufferOffset calls the underlying PrimitiveDataBufferOffset.
 func (x *AccelerationStructureGeometryDescriptor) PrimitiveDataBufferOffset() uint {
 	return x.inner.PrimitiveDataBufferOffset()
@@ -151,6 +175,8 @@ func (x *AccelerationStructureGeometryDescriptor) SetPrimitiveDataBufferOffset(p
 	x.inner.SetPrimitiveDataBufferOffset(primitiveDataBufferOffset)
 }
 
+// @brief Stride, in bytes, between per-primitive data in the primitive data buffer. Must be at least primitiveDataElementSize and must be a multiple of 4 bytes. Defaults to 0 bytes. Assumed to be equal to primitiveDataElementSize if zero.
+//
 // PrimitiveDataStride calls the underlying PrimitiveDataStride.
 func (x *AccelerationStructureGeometryDescriptor) PrimitiveDataStride() uint {
 	return x.inner.PrimitiveDataStride()
@@ -161,6 +187,8 @@ func (x *AccelerationStructureGeometryDescriptor) SetPrimitiveDataStride(primiti
 	x.inner.SetPrimitiveDataStride(primitiveDataStride)
 }
 
+// @brief Size, in bytes, of the data for each primitive in the primitive data buffer. Must be at most primitiveDataStride and must be a multiple of 4 bytes. Defaults to 0 bytes.
+//
 // PrimitiveDataElementSize calls the underlying PrimitiveDataElementSize.
 func (x *AccelerationStructureGeometryDescriptor) PrimitiveDataElementSize() uint {
 	return x.inner.PrimitiveDataElementSize()

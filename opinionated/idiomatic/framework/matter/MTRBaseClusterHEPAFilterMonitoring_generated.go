@@ -35,6 +35,8 @@ func MTRBaseClusterHEPAFilterMonitoringFromID(id objc.ID) *MTRBaseClusterHEPAFil
 	return &MTRBaseClusterHEPAFilterMonitoring{inner: raw.MTRBaseClusterHEPAFilterMonitoringFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterHEPAFilterMonitoringWithDeviceEndpointIDQueue creates a new [MTRBaseClusterHEPAFilterMonitoring].
 func NewMTRBaseClusterHEPAFilterMonitoringWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterHEPAFilterMonitoring {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterHEPAFilterMonitoring")), objc.RegisterName("alloc"))
@@ -42,6 +44,8 @@ func NewMTRBaseClusterHEPAFilterMonitoringWithDeviceEndpointIDQueue(device *raw.
 	return &MTRBaseClusterHEPAFilterMonitoring{inner: raw.MTRBaseClusterHEPAFilterMonitoringFromID(_id)}
 }
 
+// Command ResetCondition Upon receipt, the device SHALL reset the Condition and ChangeIndicator attributes, indicating full resource availability and readiness for use, as initially configured.
+//
 // ResetConditionWithParamsCompletion calls the underlying ResetConditionWithParamsCompletion.
 func (x *MTRBaseClusterHEPAFilterMonitoring) ResetConditionWithParamsCompletion(params *raw.MTRHEPAFilterMonitoringClusterResetConditionParams, completion func(unsafe.Pointer)) {
 	x.inner.ResetConditionWithParamsCompletion(params, completion)

@@ -95,6 +95,8 @@ func (x *PhysicsField) WithDirection(direction raw.SCNVector3) *PhysicsField {
 	return x
 }
 
+// @property categoryBitMask @abstract Determines the node physicsBody's categories that will be influenced by the receiver. Defaults to all bit set.
+//
 // WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
 func (x *PhysicsField) WithCategoryBitMask(categoryBitMask uint) *PhysicsField {
 	x.inner.SetCategoryBitMask(categoryBitMask)
@@ -201,6 +203,8 @@ func (x *PhysicsField) SetDirection(direction raw.SCNVector3) {
 	x.inner.SetDirection(direction)
 }
 
+// @property categoryBitMask @abstract Determines the node physicsBody's categories that will be influenced by the receiver. Defaults to all bit set.
+//
 // CategoryBitMask calls the underlying CategoryBitMask.
 func (x *PhysicsField) CategoryBitMask() uint {
 	return x.inner.CategoryBitMask()

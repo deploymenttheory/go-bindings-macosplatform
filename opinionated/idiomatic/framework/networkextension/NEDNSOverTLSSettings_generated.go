@@ -38,18 +38,24 @@ func NewNEDNSOverTLSSettings() *NEDNSOverTLSSettings {
 	return &NEDNSOverTLSSettings{inner: raw.NEDNSOverTLSSettingsFromID(_id)}
 }
 
+// @property serverName @discussion The name of the server to use for TLS certificate validation.
+//
 // WithServerName sets the serverName property and returns the receiver for chaining.
 func (x *NEDNSOverTLSSettings) WithServerName(serverName string) *NEDNSOverTLSSettings {
 	x.inner.SetServerName(foundation.NSStringStringWithUTF8String(serverName))
 	return x
 }
 
+// @property identityReference @discussion The optional certificate identity keychain reference to use as a TLS client certificate.
+//
 // WithIdentityReference sets the identityReference property and returns the receiver for chaining.
 func (x *NEDNSOverTLSSettings) WithIdentityReference(identityReference *foundation.NSData) *NEDNSOverTLSSettings {
 	x.inner.SetIdentityReference(identityReference)
 	return x
 }
 
+// @property searchDomains @discussion An array of DNS server search domain strings.
+//
 // WithSearchDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEDNSOverTLSSettings) WithSearchDomains(items ...*foundation.NSString) *NEDNSOverTLSSettings {
 	if len(items) == 0 {
@@ -68,12 +74,16 @@ func (x *NEDNSOverTLSSettings) WithSearchDomains(items ...*foundation.NSString) 
 	return x
 }
 
+// @property domainName @discussion A string containing the DNS domain.
+//
 // WithDomainName sets the domainName property and returns the receiver for chaining.
 func (x *NEDNSOverTLSSettings) WithDomainName(domainName string) *NEDNSOverTLSSettings {
 	x.inner.NEDNSSettings.SetDomainName(foundation.NSStringStringWithUTF8String(domainName))
 	return x
 }
 
+// @property matchDomains @discussion An array of strings containing domain strings. If this property is non-nil, the DNS settings will only be used to resolve host names within the specified domains.
+//
 // WithMatchDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEDNSOverTLSSettings) WithMatchDomains(items ...*foundation.NSString) *NEDNSOverTLSSettings {
 	if len(items) == 0 {
@@ -92,18 +102,24 @@ func (x *NEDNSOverTLSSettings) WithMatchDomains(items ...*foundation.NSString) *
 	return x
 }
 
+// @property matchDomainsNoSearch @discussion A boolean indicating if the match domains should be appended to the search domain list.  Default is NO (match domains will be appended to the search domain list).
+//
 // WithMatchDomainsNoSearch sets the matchDomainsNoSearch property and returns the receiver for chaining.
 func (x *NEDNSOverTLSSettings) WithMatchDomainsNoSearch(matchDomainsNoSearch bool) *NEDNSOverTLSSettings {
 	x.inner.NEDNSSettings.SetMatchDomainsNoSearch(matchDomainsNoSearch)
 	return x
 }
 
+// @property allowFailover @discussion A boolean indicating if failover to the default system resolver is permitted on resolution failure.
+//
 // WithAllowFailover sets the allowFailover property and returns the receiver for chaining.
 func (x *NEDNSOverTLSSettings) WithAllowFailover(allowFailover bool) *NEDNSOverTLSSettings {
 	x.inner.NEDNSSettings.SetAllowFailover(allowFailover)
 	return x
 }
 
+// @property serverName @discussion The name of the server to use for TLS certificate validation.
+//
 // ServerName calls the underlying ServerName.
 func (x *NEDNSOverTLSSettings) ServerName() string {
 	_r := x.inner.ServerName()
@@ -118,6 +134,8 @@ func (x *NEDNSOverTLSSettings) SetServerName(serverName string) {
 	x.inner.SetServerName(foundation.NSStringStringWithUTF8String(serverName))
 }
 
+// @property identityReference @discussion The optional certificate identity keychain reference to use as a TLS client certificate.
+//
 // IdentityReference calls the underlying IdentityReference.
 func (x *NEDNSOverTLSSettings) IdentityReference() *foundation.NSData {
 	return x.inner.IdentityReference()

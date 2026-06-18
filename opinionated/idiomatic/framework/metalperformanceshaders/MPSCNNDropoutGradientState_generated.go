@@ -44,12 +44,16 @@ func (x *CNNDropoutGradientState) WithReadCount(readCount uint) *CNNDropoutGradi
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNDropoutGradientState) WithLabel(label string) *CNNDropoutGradientState {
 	x.inner.MPSNNGradientState.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @abstract   Mask data accessor method. @return     An autoreleased NSData object, containing the mask data. The mask data is populated in the -encode call, thus the contents are undefined until you -encode the filter. Use for debugging purposes only. In order to gaurantee that the mask data is correctly synchronized for CPU side access, it is the application's responsibility to call the [gradientState synchronizeOnCommandBuffer:] method before accessing the mask data.
+//
 // MaskData calls the underlying MaskData.
 func (x *CNNDropoutGradientState) MaskData() *foundation.NSData {
 	return x.inner.MaskData()

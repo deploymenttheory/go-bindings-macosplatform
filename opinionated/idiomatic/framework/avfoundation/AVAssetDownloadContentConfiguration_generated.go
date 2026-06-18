@@ -40,6 +40,8 @@ func NewAssetDownloadContentConfiguration() *AssetDownloadContentConfiguration {
 	return &AssetDownloadContentConfiguration{inner: raw.AVAssetDownloadContentConfigurationFromID(_id)}
 }
 
+// An array of variant qualifiers. The qualifiers are expected to be added in the preferential order and will be evaluated in that order until the qualifier matches one or more AVAssetVariants. Only those variants which can be played on the current device configuration will be initially chosen for evaluation. If there is more than one match, automatic variant selection will be used to choose among the matched. If a variant qualifier is constructed to explicitly choose a variant, no evaluation is performed and the variant provided will be downloaded as is, even if it is not playable on current device configuration. If a variant qualifier has not been provided, or if the variant qualifier when evaluated does not match any of the variants which can be played according to the current device configuration, automatic variant selection will be used.
+//
 // WithVariantQualifiers sets the collection, converting the Go slice to an NSArray.
 func (x *AssetDownloadContentConfiguration) WithVariantQualifiers(items ...*raw.AVAssetVariantQualifier) *AssetDownloadContentConfiguration {
 	if len(items) == 0 {
@@ -58,6 +60,8 @@ func (x *AssetDownloadContentConfiguration) WithVariantQualifiers(items ...*raw.
 	return x
 }
 
+// An array of media selections obtained from the AVAsset. If a media selection is not provided, automatic media selection associated with the asset will be used.
+//
 // WithMediaSelections sets the collection, converting the Go slice to an NSArray.
 func (x *AssetDownloadContentConfiguration) WithMediaSelections(items ...MediaSelectionProvider) *AssetDownloadContentConfiguration {
 	if len(items) == 0 {
@@ -76,6 +80,8 @@ func (x *AssetDownloadContentConfiguration) WithMediaSelections(items ...MediaSe
 	return x
 }
 
+// An array of variant qualifiers. The qualifiers are expected to be added in the preferential order and will be evaluated in that order until the qualifier matches one or more AVAssetVariants. Only those variants which can be played on the current device configuration will be initially chosen for evaluation. If there is more than one match, automatic variant selection will be used to choose among the matched. If a variant qualifier is constructed to explicitly choose a variant, no evaluation is performed and the variant provided will be downloaded as is, even if it is not playable on current device configuration. If a variant qualifier has not been provided, or if the variant qualifier when evaluated does not match any of the variants which can be played according to the current device configuration, automatic variant selection will be used.
+//
 // VariantQualifiers returns the collection as a Go slice.
 func (x *AssetDownloadContentConfiguration) VariantQualifiers() []*AssetVariantQualifier {
 	arr := x.inner.VariantQualifiers()
@@ -92,6 +98,8 @@ func (x *AssetDownloadContentConfiguration) SetVariantQualifiers(variantQualifie
 	x.inner.SetVariantQualifiers(variantQualifiers)
 }
 
+// An array of media selections obtained from the AVAsset. If a media selection is not provided, automatic media selection associated with the asset will be used.
+//
 // MediaSelections returns the collection as a Go slice.
 func (x *AssetDownloadContentConfiguration) MediaSelections() []*MediaSelection {
 	arr := x.inner.MediaSelections()
@@ -104,8 +112,17 @@ func (x *AssetDownloadContentConfiguration) MediaSelections() []*MediaSelection 
 }
 
 // SetMediaSelections calls the underlying SetMediaSelections.
-func (x *AssetDownloadContentConfiguration) SetMediaSelections(mediaSelections *foundation.NSArray[*raw.AVMediaSelection]) {
-	x.inner.SetMediaSelections(mediaSelections)
+func (x *AssetDownloadContentConfiguration) SetMediaSelections(mediaSelections ...MediaSelectionProvider) {
+	_ptrs := make([]objc.ID, len(mediaSelections))
+	for _i, _v := range mediaSelections {
+		_ptrs[_i] = _v.asMediaSelection().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.AVMediaSelection]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.AVMediaSelection](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetMediaSelections(_arg0)
 }
 
 // AssetDownloadContentConfigurationable is the interface implemented by [AssetDownloadContentConfiguration], for mocking and DI.
@@ -116,7 +133,7 @@ type AssetDownloadContentConfigurationable interface {
 	VariantQualifiers() []*AssetVariantQualifier
 	SetVariantQualifiers(variantQualifiers *foundation.NSArray[*raw.AVAssetVariantQualifier])
 	MediaSelections() []*MediaSelection
-	SetMediaSelections(mediaSelections *foundation.NSArray[*raw.AVMediaSelection])
+	SetMediaSelections(mediaSelections ...MediaSelectionProvider)
 }
 
 var _ AssetDownloadContentConfigurationable = (*AssetDownloadContentConfiguration)(nil)

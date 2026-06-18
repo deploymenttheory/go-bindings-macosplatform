@@ -33,6 +33,8 @@ func MTRClusterThreadNetworkDiagnosticsFromID(id objc.ID) *MTRClusterThreadNetwo
 	return &MTRClusterThreadNetworkDiagnostics{inner: raw.MTRClusterThreadNetworkDiagnosticsFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue creates a new [MTRClusterThreadNetworkDiagnostics].
 func NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterThreadNetworkDiagnostics {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterThreadNetworkDiagnostics")), objc.RegisterName("alloc"))

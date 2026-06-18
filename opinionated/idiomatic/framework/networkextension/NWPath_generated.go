@@ -35,21 +35,29 @@ func NewNWPath() *NWPath {
 	return &NWPath{inner: raw.NWPathFromID(_id)}
 }
 
+// @method isEqualToPath: @param path An NWPath object to compare. @return YES if the two path objects have the same content, NO otherwise.
+//
 // IsEqualToPath calls the underlying IsEqualToPath.
 func (x *NWPath) IsEqualToPath(path *raw.NWPath) bool {
 	return x.inner.IsEqualToPath(path)
 }
 
+// @property status @discussion The evaluated NWPathStatus of the NWPath.
+//
 // Status calls the underlying Status.
 func (x *NWPath) Status() NWPathStatus {
 	return NWPathStatus(x.inner.Status())
 }
 
+// @property expensive @discussion Returns YES if the path is considered expensive, as when using a cellular data plan.
+//
 // IsExpensive calls the underlying IsExpensive.
 func (x *NWPath) IsExpensive() bool {
 	return x.inner.IsExpensive()
 }
 
+// @property constrained @discussion Returns YES if the path is considered constrained, as when it is in save data mode.
+//
 // IsConstrained calls the underlying IsConstrained.
 func (x *NWPath) IsConstrained() bool {
 	return x.inner.IsConstrained()

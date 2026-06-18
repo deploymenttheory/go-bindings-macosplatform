@@ -39,46 +39,64 @@ func NewMTRDevice() *MTRDevice {
 	return &MTRDevice{inner: raw.MTRDeviceFromID(_id)}
 }
 
+// Set the delegate to receive asynchronous callbacks about the device. The delegate will be called on the provided queue, for attribute reports, event reports, and device state changes.
+//
 // SetDelegateQueue calls the underlying SetDelegateQueue.
 func (x *MTRDevice) SetDelegateQueue(delegate raw.MTRDeviceDelegate, queue *foundation.NSObject) {
 	x.inner.SetDelegateQueue(delegate, queue)
 }
 
+// Adds a delegate to receive asynchronous callbacks about the device. The delegate will be called on the provided queue, for attribute reports, event reports, and device state changes. MTRDevice holds a weak reference to the delegate object.
+//
 // AddDelegateQueue calls the underlying AddDelegateQueue.
 func (x *MTRDevice) AddDelegateQueue(delegate raw.MTRDeviceDelegate, queue *foundation.NSObject) {
 	x.inner.AddDelegateQueue(delegate, queue)
 }
 
+// Adds a delegate to receive asynchronous callbacks about the device, and limit attribute and/or event reports to a specific set of paths. interestedPathsForAttributes may contain either MTRClusterPath or MTRAttributePath to specify interested clusters and attributes, or NSNumber for endpoints. interestedPathsForEvents may contain either MTRClusterPath or MTREventPath to specify interested clusters and events, or NSNumber for endpoints. For both interested paths arguments, if nil is specified, then no filter will be applied. Calling addDelegate: again with the same delegate object will update the interested paths for attributes and events for this delegate. MTRDevice holds a weak reference to the delegate object.
+//
 // AddDelegateQueueInterestedPathsForAttributesInterestedPathsForEvents calls the underlying AddDelegateQueueInterestedPathsForAttributesInterestedPathsForEvents.
 func (x *MTRDevice) AddDelegateQueueInterestedPathsForAttributesInterestedPathsForEvents(delegate raw.MTRDeviceDelegate, queue *foundation.NSObject, interestedPathsForAttributes *foundation.NSArray[objc.ID], interestedPathsForEvents *foundation.NSArray[objc.ID]) {
 	x.inner.AddDelegateQueueInterestedPathsForAttributesInterestedPathsForEvents(delegate, queue, interestedPathsForAttributes, interestedPathsForEvents)
 }
 
+// Removes the delegate from receiving callbacks about the device.
+//
 // RemoveDelegate calls the underlying RemoveDelegate.
 func (x *MTRDevice) RemoveDelegate(delegate raw.MTRDeviceDelegate) {
 	x.inner.RemoveDelegate(delegate)
 }
 
+// Read attribute in a designated attribute path.  If there is no value available for the attribute, whether because the device does not implement it or because the subscription priming read has not yet gotten to this attribute, nil will be returned. TODO: Need to fully document that this returns "the system's best guess" of attribute values. @return a data-value dictionary of the attribute as described in MTRDeviceResponseHandler, or nil if there is no value.
+//
 // ReadAttributeWithEndpointIDClusterIDAttributeIDParams calls the underlying ReadAttributeWithEndpointIDClusterIDAttributeIDParams.
 func (x *MTRDevice) ReadAttributeWithEndpointIDClusterIDAttributeIDParams(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, attributeID *foundation.NSNumber, params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.ReadAttributeWithEndpointIDClusterIDAttributeIDParams(endpointID, clusterID, attributeID, params)
 }
 
+// Write to attribute in a designated attribute path @param value       A data-value NSDictionary object as described in MTRDeviceResponseHandler. @param expectedValueInterval  maximum interval in milliseconds during which reads of the attribute will return the value being written. This value must be within [1, UINT32_MAX], and will be clamped to this range. TODO: document that -readAttribute... will return the expected value for the [endpoint,cluster,attribute] until one of the following: 1. Another write for the same attribute happens. 2. expectedValueIntervalMs (clamped) expires. Need to figure out phrasing here. 3. We succeed at writing the attribute. 4. We fail at writing the attribute and give up on the write @param timeout   timeout in milliseconds for timed write, or nil. This value must be within [1, UINT16_MAX], and will be clamped to this range. TODO: make timeout arguments uniform
+//
 // WriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout calls the underlying WriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout.
 func (x *MTRDevice) WriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, attributeID *foundation.NSNumber, value objc.ID, expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber) {
 	x.inner.WriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout(endpointID, clusterID, attributeID, value, expectedValueInterval, timeout)
 }
 
+// Read the attributes identified by the provided attribute paths.  The paths can include wildcards. Paths that do not correspond to any existing attributes, or that the MTRDevice does not have attribute values for, will not be present in the return value from this function. @return an array of response-value dictionaries as described in the documentation for MTRDeviceResponseHandler.  Each one will have an MTRAttributePathKey and an MTRDataKey.
+//
 // ReadAttributePaths calls the underlying ReadAttributePaths.
 func (x *MTRDevice) ReadAttributePaths(attributePaths *foundation.NSArray[*raw.MTRAttributeRequestPath]) *foundation.NSArray[objc.ID] {
 	return x.inner.ReadAttributePaths(attributePaths)
 }
 
+// Read all known attributes from descriptor clusters on all known endpoints. @return A dictionary with the paths of the attributes as keys and the data-values (as described in the documentation for MTRDeviceResponseHandler) as values.
+//
 // DescriptorClusters calls the underlying DescriptorClusters.
 func (x *MTRDevice) DescriptorClusters() *foundation.NSDictionary[*raw.MTRAttributePath, objc.ID] {
 	return x.inner.DescriptorClusters()
 }
 
+// Invoke a command with a designated command path @param commandFields command fields object. If not nil, the object must be a data-value NSDictionary object as described in the MTRDeviceResponseHandler documentation. The value must be a Structure, i.e., the NSDictionary MTRTypeKey key must have the value MTRStructureValueType. If commandFields is nil, it will be treated as a Structure with no fields. @param expectedValues The expected values of attributes that will be affected by the command, if any.  If these are provided, the relevant attributes will have the provided values when read until one of the following happens: 1. Something (another invoke or a write) sets different expected values. 2. expectedValueInterval elapses without the device reporting the attributes changing their values to the expected values. 3. The command invoke fails. 4. The device reports some other values for these attributes. The dictionaries in this array are expected to be response-value dictionaries as documented in the documentation of MTRDeviceResponseHandler, and each one must have an MTRAttributePathKey. The expectedValues and expectedValueInterval arguments need to be both nil or both non-nil, or both will be both ignored. @param expectedValueInterval  maximum interval in milliseconds during which reads of the attributes that had expected values provided will return the expected values. If the value is less than 1, both this value and expectedValues will be ignored. If this value is greater than UINT32_MAX, it will be clamped to UINT32_MAX. @param completion  response handler will receive either values or error.  A path-specific error status from the command invocation will result in an error being passed to the completion, so values will only be passed in when the command succeeds. If values are passed, the array length will always be 1 and the single response-value in it will have an MTRCommandPathKey.  If the command response is just a success status, there will be no MTRDataKey.  If the command response has data fields, there will be an MTRDataKey, whose value will be of type MTRStructureValueType and describe the response payload.
+//
 // InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion calls the underlying InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion.
 func (x *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
 	x.inner.InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion(endpointID, clusterID, commandID, commandFields, expectedValues, expectedValueInterval, queue, completion)
@@ -89,21 +107,29 @@ func (x *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsEx
 	x.inner.InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion(endpointID, clusterID, commandID, commandFields, expectedValues, expectedValueInterval, timeout, queue, completion)
 }
 
+// Invoke one or more groups of commands. For any given group, if any command in any preceding group failed, the group will be skipped.  If all commands in all preceding groups succeeded, the commands within the group will be invoked, with no ordering guarantees within that group. Results from all commands that were invoked will be passed to the provided completion as an array of response-value dictionaries.  Each of these will have the command path of the command (see MTRCommandPathKey) and one of three things: 1) No other fields, indicating that the command invoke returned a succcess status. 2) A field for MTRErrorKey, indicating that the invoke returned a failure status (which is the value of the field). 3) A field for MTRDataKey, indicating that the invoke returned a data response.  In this case the data-value representing the response will be the value of this field.
+//
 // InvokeCommandsQueueCompletion calls the underlying InvokeCommandsQueueCompletion.
 func (x *MTRDevice) InvokeCommandsQueueCompletion(commands *foundation.NSArray[objc.ID], queue *foundation.NSObject, completion objc.Block) {
 	x.inner.InvokeCommandsQueueCompletion(commands, queue, completion)
 }
 
+// Open a commissioning window on the device. On success, completion will be called on queue with the MTRSetupPayload that can be used to commission the device. @param setupPasscode The setup passcode to use for the commissioning window. See MTRSetupPayload's generateRandomSetupPasscode for generating a valid random passcode. @param discriminator The discriminator to use for the commissionable advertisement. @param duration      Duration, in seconds, during which the commissioning window will be open.
+//
 // OpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion calls the underlying OpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion.
 func (x *MTRDevice) OpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion(setupPasscode *foundation.NSNumber, discriminator *foundation.NSNumber, duration *foundation.NSNumber, queue *foundation.NSObject, completion func(*raw.MTRSetupPayload, unsafe.Pointer)) {
 	x.inner.OpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion(setupPasscode, discriminator, duration, queue, completion)
 }
 
+// Open a commissioning window on the device, using a random setup passcode. On success, completion will be called on queue with the MTRSetupPayload that can be used to commission the device. @param discriminator The discriminator to use for the commissionable advertisement. @param duration      Duration, in seconds, during which the commissioning window will be open.
+//
 // OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion calls the underlying OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion.
 func (x *MTRDevice) OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion(discriminator *foundation.NSNumber, duration *foundation.NSNumber, queue *foundation.NSObject, completion func(*raw.MTRSetupPayload, unsafe.Pointer)) {
 	x.inner.OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion(discriminator, duration, queue, completion)
 }
 
+// Download log of the desired type from the device. Note: The consumer of this API should move the file that the url points to or open it for reading before the completion handler returns. Otherwise, the file will be deleted, and the data will be lost. @param type       The type of log being requested. This should correspond to a value in the enum MTRDiagnosticLogType. @param timeout    The timeout for getting the log. If the timeout expires, completion will be called with whatever has been retrieved by that point (which might be none or a partial log). If the timeout is set to 0, the request will not expire and completion will not be called until the log is fully retrieved or an error occurs. @param queue      The queue on which completion will be called. @param completion The completion handler that is called after attempting to retrieve the requested log. - In case of success, the completion handler is called with a non-nil URL and a nil error. - If there is an error, a non-nil error is used and the url can be non-nil too if some logs have already been downloaded.
+//
 // DownloadLogOfTypeTimeoutQueueCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ MTRDiagnosticLogType, timeout float64, queue *foundation.NSObject) (*foundation.NSURL, error) {
 	type _result struct {
@@ -128,6 +154,8 @@ func (x *MTRDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context,
 	}
 }
 
+// Sets up the provided completion to be called when any of the following happens: 1) A set of attributes reaches certain values: completion called with nil. 2) The provided timeout expires: completion called with MTRErrorCodeTimeout error. 3) The wait is canceled: completion called with MTRErrorCodeCancelled error. If the MTRAttributeValueWaiter is destroyed before the completion is called, that is treated the same as canceling the waiter. The attributes and values to wait for are represented as a dictionary which has the attribute paths as keys and the expected data-values as values.
+//
 // WaitForAttributeValuesTimeoutQueueCompletion calls the underlying WaitForAttributeValuesTimeoutQueueCompletion.
 func (x *MTRDevice) WaitForAttributeValuesTimeoutQueueCompletion(values *foundation.NSDictionary[*raw.MTRAttributePath, objc.ID], timeout float64, queue *foundation.NSObject, completion func(unsafe.Pointer)) *MTRAttributeValueWaiter {
 	_r := x.inner.WaitForAttributeValuesTimeoutQueueCompletion(values, timeout, queue, completion)
@@ -137,11 +165,15 @@ func (x *MTRDevice) WaitForAttributeValuesTimeoutQueueCompletion(values *foundat
 	return &MTRAttributeValueWaiter{inner: _r}
 }
 
+// The current state of the device. The three states: MTRDeviceStateUnknown Unable to determine the state of the device at the moment. MTRDeviceStateReachable Communication with the device is expected to succeed. MTRDeviceStateUnreachable The device is currently unreachable.
+//
 // State calls the underlying State.
 func (x *MTRDevice) State() MTRDeviceState {
 	return MTRDeviceState(x.inner.State())
 }
 
+// Is the device cache primed for this device? This will be true after the deviceCachePrimed: delegate callback has been called, false if not. Please note if you have a storage delegate implemented, the cache is then stored persistently, so the delegate would then only be called once, ever - and this property would basically always be true if a subscription has ever been established at any point in the past.
+//
 // DeviceCachePrimed calls the underlying DeviceCachePrimed.
 func (x *MTRDevice) DeviceCachePrimed() bool {
 	return x.inner.DeviceCachePrimed()
@@ -152,6 +184,8 @@ func (x *MTRDevice) EstimatedStartTime() *foundation.NSDate {
 	return x.inner.EstimatedStartTime()
 }
 
+// The controller this device was created for.  May return nil if that controller has been shut down.
+//
 // DeviceController calls the underlying DeviceController.
 func (x *MTRDevice) DeviceController() *MTRDeviceController {
 	_r := x.inner.DeviceController()
@@ -161,26 +195,36 @@ func (x *MTRDevice) DeviceController() *MTRDeviceController {
 	return &MTRDeviceController{inner: _r}
 }
 
+// The node ID of the node this device corresponds to.
+//
 // NodeID calls the underlying NodeID.
 func (x *MTRDevice) NodeID() *foundation.NSNumber {
 	return x.inner.NodeID()
 }
 
+// An estimate of how much time is likely to elapse between setDelegate being called and the current device state (attributes, stored events) being known. nil if no such estimate is available.  Otherwise, the NSNumber stores an NSTimeInterval.
+//
 // EstimatedSubscriptionLatency calls the underlying EstimatedSubscriptionLatency.
 func (x *MTRDevice) EstimatedSubscriptionLatency() *foundation.NSNumber {
 	return x.inner.EstimatedSubscriptionLatency()
 }
 
+// The Vendor Identifier associated with the device. A non-nil value if the vendor identifier has been determined from the device, nil if unknown.
+//
 // VendorID calls the underlying VendorID.
 func (x *MTRDevice) VendorID() *foundation.NSNumber {
 	return x.inner.VendorID()
 }
 
+// The Product Identifier associated with the device. A non-nil value if the product identifier has been determined from the device, nil if unknown.
+//
 // ProductID calls the underlying ProductID.
 func (x *MTRDevice) ProductID() *foundation.NSNumber {
 	return x.inner.ProductID()
 }
 
+// Network commissioning features supported by the device.
+//
 // NetworkCommissioningFeatures calls the underlying NetworkCommissioningFeatures.
 func (x *MTRDevice) NetworkCommissioningFeatures() MTRNetworkCommissioningFeature {
 	return MTRNetworkCommissioningFeature(x.inner.NetworkCommissioningFeatures())

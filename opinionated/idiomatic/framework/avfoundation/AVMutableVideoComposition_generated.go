@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -39,36 +40,48 @@ func NewMutableVideoComposition() *MutableVideoComposition {
 	return &MutableVideoComposition{inner: raw.AVMutableVideoCompositionFromID(_id)}
 }
 
+// Indicates the interval which the video composition, when enabled, should render composed video frames
+//
 // WithFrameDuration sets the frameDuration property and returns the receiver for chaining.
 func (x *MutableVideoComposition) WithFrameDuration(frameDuration coremedia.CMTime) *MutableVideoComposition {
 	x.inner.SetFrameDuration(frameDuration)
 	return x
 }
 
+// If sourceTrackIDForFrameTiming is not kCMPersistentTrackID_Invalid, frame timing for the video composition is derived from the source asset's track with the corresponding ID. This may be used to preserve a source asset's variable frame timing. If an empty edit is encountered in the source asset’s track, the compositor composes frames as needed up to the frequency specified in frameDuration property.
+//
 // WithSourceTrackIDForFrameTiming sets the sourceTrackIDForFrameTiming property and returns the receiver for chaining.
 func (x *MutableVideoComposition) WithSourceTrackIDForFrameTiming(sourceTrackIDForFrameTiming int32) *MutableVideoComposition {
 	x.inner.SetSourceTrackIDForFrameTiming(sourceTrackIDForFrameTiming)
 	return x
 }
 
+// Indicates the size at which the video composition, when enabled, should render
+//
 // WithRenderSize sets the renderSize property and returns the receiver for chaining.
 func (x *MutableVideoComposition) WithRenderSize(renderSize corefoundation.CGSize) *MutableVideoComposition {
 	x.inner.SetRenderSize(renderSize)
 	return x
 }
 
+// Indicates the scale at which the video composition should render. May only be other than 1.0 for a video composition set on an AVPlayerItem
+//
 // WithRenderScale sets the renderScale property and returns the receiver for chaining.
 func (x *MutableVideoComposition) WithRenderScale(renderScale float32) *MutableVideoComposition {
 	x.inner.SetRenderScale(renderScale)
 	return x
 }
 
+// Indicates a special video composition tool for use of Core Animation; may be nil
+//
 // WithAnimationTool sets the animationTool property and returns the receiver for chaining.
 func (x *MutableVideoComposition) WithAnimationTool(animationTool *VideoCompositionCoreAnimationTool) *MutableVideoComposition {
 	x.inner.SetAnimationTool(animationTool.Unwrap())
 	return x
 }
 
+// List of all track IDs for tracks from which sample data should be presented to the compositor at any point in the overall composition.  Currently only tracks of type kCMMediaType_Metadata are allowed to be specified.
+//
 // WithSourceSampleDataTrackIDs sets the collection, converting the Go slice to an NSArray.
 func (x *MutableVideoComposition) WithSourceSampleDataTrackIDs(items ...*foundation.NSNumber) *MutableVideoComposition {
 	if len(items) == 0 {
@@ -87,24 +100,32 @@ func (x *MutableVideoComposition) WithSourceSampleDataTrackIDs(items ...*foundat
 	return x
 }
 
+// Rendering will use these primaries and frames will be tagged as such. If the value of this property is nil then the source's primaries will be propagated and used. Default is nil. Valid values are those suitable for AVVideoColorPrimariesKey. Generally set as a triple along with colorYCbCrMatrix and colorTransferFunction.
+//
 // WithColorPrimaries sets the colorPrimaries property and returns the receiver for chaining.
 func (x *MutableVideoComposition) WithColorPrimaries(colorPrimaries string) *MutableVideoComposition {
 	x.inner.SetColorPrimaries(foundation.NSStringStringWithUTF8String(colorPrimaries))
 	return x
 }
 
+// Rendering will use this matrix and frames will be tagged as such. If the value of this property is nil then the source's matrix will be propagated and used. Default is nil. Valid values are those suitable for AVVideoYCbCrMatrixKey. Generally set as a triple along with colorPrimaries and colorTransferFunction.
+//
 // WithColorYCbCrMatrix sets the colorYCbCrMatrix property and returns the receiver for chaining.
 func (x *MutableVideoComposition) WithColorYCbCrMatrix(colorYCbCrMatrix string) *MutableVideoComposition {
 	x.inner.SetColorYCbCrMatrix(foundation.NSStringStringWithUTF8String(colorYCbCrMatrix))
 	return x
 }
 
+// Rendering will use this transfer function and frames will be tagged as such. If the value of this property is nil then the source's transfer function will be propagated and used. Default is nil. Valid values are those suitable for AVVideoTransferFunctionKey. Generally set as a triple along with colorYCbCrMatrix and colorYCbCrMatrix.
+//
 // WithColorTransferFunction sets the colorTransferFunction property and returns the receiver for chaining.
 func (x *MutableVideoComposition) WithColorTransferFunction(colorTransferFunction string) *MutableVideoComposition {
 	x.inner.SetColorTransferFunction(foundation.NSStringStringWithUTF8String(colorTransferFunction))
 	return x
 }
 
+// Configures policy for per frame HDR display metadata on the rendered frame Allows the system to identify situations where HDR metadata can be generated and attached to the rendered video frame. Default is AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate. Any HDR metadata attached to the composed frame will be propagated to the rendered video frames.
+//
 // WithPerFrameHDRDisplayMetadataPolicy sets the perFrameHDRDisplayMetadataPolicy property and returns the receiver for chaining.
 func (x *MutableVideoComposition) WithPerFrameHDRDisplayMetadataPolicy(perFrameHDRDisplayMetadataPolicy *foundation.NSString) *MutableVideoComposition {
 	x.inner.SetPerFrameHDRDisplayMetadataPolicy(perFrameHDRDisplayMetadataPolicy)
@@ -137,8 +158,17 @@ func (x *MutableVideoComposition) SetRenderScale(renderScale float32) {
 }
 
 // SetInstructions calls the underlying SetInstructions.
-func (x *MutableVideoComposition) SetInstructions(instructions *foundation.NSArray[raw.AVVideoCompositionInstructionProtocol]) {
-	x.inner.SetInstructions(instructions)
+func (x *MutableVideoComposition) SetInstructions(instructions ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(instructions))
+	for _i, _v := range instructions {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.AVVideoCompositionInstructionProtocol]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.AVVideoCompositionInstructionProtocol](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetInstructions(_arg0)
 }
 
 // SetAnimationTool calls the underlying SetAnimationTool.
@@ -198,7 +228,7 @@ type MutableVideoCompositionable interface {
 	SetSourceTrackIDForFrameTiming(sourceTrackIDForFrameTiming int32)
 	SetRenderSize(renderSize corefoundation.CGSize)
 	SetRenderScale(renderScale float32)
-	SetInstructions(instructions *foundation.NSArray[raw.AVVideoCompositionInstructionProtocol])
+	SetInstructions(instructions ...purego.IDer)
 	SetAnimationTool(animationTool *raw.AVVideoCompositionCoreAnimationTool)
 	SetSourceSampleDataTrackIDs(sourceSampleDataTrackIDs *foundation.NSArray[*foundation.NSNumber])
 	SetOutputBufferDescription(outputBufferDescription *foundation.NSArray[objc.ID])

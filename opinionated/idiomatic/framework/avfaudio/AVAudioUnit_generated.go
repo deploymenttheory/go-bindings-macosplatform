@@ -38,21 +38,29 @@ func NewAudioUnit() *AudioUnit {
 	return &AudioUnit{inner: raw.AVAudioUnitFromID(_id)}
 }
 
+// @method loadAudioUnitPresetAtURL:error: @abstract Load an audio unit preset. @param url NSURL of the .aupreset file. @param outError A pointer to a NSError object @discussion If the .aupreset file cannot be successfully loaded, an error is returned.
+//
 // LoadAudioUnitPresetAtURLError calls the underlying LoadAudioUnitPresetAtURLError.
 func (x *AudioUnit) LoadAudioUnitPresetAtURLError(url string) (bool, error) {
 	return x.inner.LoadAudioUnitPresetAtURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 }
 
+// @property audioComponentDescription @abstract AudioComponentDescription of the underlying audio unit.
+//
 // AudioComponentDescription calls the underlying AudioComponentDescription.
 func (x *AudioUnit) AudioComponentDescription() objc.ID {
 	return x.inner.AudioComponentDescription()
 }
 
+// @property audioUnit @abstract Reference to the underlying audio unit. @discussion A reference to the underlying audio unit is provided so that parameters that are not exposed by AVAudioUnit subclasses can be modified using the AudioUnit C API. No operations that may conflict with state maintained by the engine should be performed directly on the audio unit. These include changing initialization state, stream formats, channel layouts or connections to other audio units.
+//
 // AudioUnit calls the underlying AudioUnit.
 func (x *AudioUnit) AudioUnit() *carboncore.ComponentInstanceRecord {
 	return x.inner.AudioUnit()
 }
 
+// @property name @abstract Name of the audio unit.
+//
 // Name calls the underlying Name.
 func (x *AudioUnit) Name() string {
 	_r := x.inner.Name()
@@ -62,6 +70,8 @@ func (x *AudioUnit) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property manufacturerName @abstract Manufacturer name of the audio unit.
+//
 // ManufacturerName calls the underlying ManufacturerName.
 func (x *AudioUnit) ManufacturerName() string {
 	_r := x.inner.ManufacturerName()

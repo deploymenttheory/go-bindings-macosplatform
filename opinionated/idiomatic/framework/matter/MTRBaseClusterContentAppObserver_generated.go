@@ -35,6 +35,8 @@ func MTRBaseClusterContentAppObserverFromID(id objc.ID) *MTRBaseClusterContentAp
 	return &MTRBaseClusterContentAppObserver{inner: raw.MTRBaseClusterContentAppObserverFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterContentAppObserverWithDeviceEndpointIDQueue creates a new [MTRBaseClusterContentAppObserver].
 func NewMTRBaseClusterContentAppObserverWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterContentAppObserver {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterContentAppObserver")), objc.RegisterName("alloc"))
@@ -42,6 +44,8 @@ func NewMTRBaseClusterContentAppObserverWithDeviceEndpointIDQueue(device *raw.MT
 	return &MTRBaseClusterContentAppObserver{inner: raw.MTRBaseClusterContentAppObserverFromID(_id)}
 }
 
+// Command ContentAppMessage Upon receipt, the data field MAY be parsed and interpreted. Message encoding is specific to the Content App. A Content App MAY when possible read attributes from the Basic Information Cluster on the Observer and use this to determine the Message encoding.
+//
 // ContentAppMessageWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterContentAppObserver) ContentAppMessageWithParamsCompletion(ctx context.Context, params *raw.MTRContentAppObserverClusterContentAppMessageParams) (*MTRContentAppObserverClusterContentAppMessageResponseParams, error) {
 	type _result struct {

@@ -31,6 +31,8 @@ func CaptureSystemExposureBiasSliderFromID(id objc.ID) *CaptureSystemExposureBia
 	return &CaptureSystemExposureBiasSlider{inner: raw.AVCaptureSystemExposureBiasSliderFromID(id)}
 }
 
+// @method initWithDevice: @abstract Initializes an `AVCaptureSystemExposureBiasSlider` for controlling `device`. @param device The device to control. @discussion `AVCaptureSystemExposureBiasSlider` may only be initialized with `AVCaptureDevice` instances that support setting `exposureTargetBias`, otherwise an `NSInvalidArgumentException` is thrown.
+//
 // NewCaptureSystemExposureBiasSliderWithDevice creates a new [CaptureSystemExposureBiasSlider].
 func NewCaptureSystemExposureBiasSliderWithDevice(device *raw.AVCaptureDevice) *CaptureSystemExposureBiasSlider {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureSystemExposureBiasSlider")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewCaptureSystemExposureBiasSliderWithDevice(device *raw.AVCaptureDevice) *
 	return &CaptureSystemExposureBiasSlider{inner: raw.AVCaptureSystemExposureBiasSliderFromID(_id)}
 }
 
+// @method initWithDevice:action @abstract Initializes an `AVCaptureSystemExposureBiasSlider` for controlling `device` with a `@MainActor` `action` for handling `exposureTargetBias` changes. @param device The device to control. @param action An action called on `@MainActor` to handle `exposureTargetBias` changes by `AVCaptureSystemExposureBiasSlider`. @discussion `action` is **only** called when `exposureTargetBias` is changed by this control. Clients should not change `exposureTargetBias` on the device when `action` is called. If you need to react to other sources of `exposureTargetBias` changes, you will still need to use key-value observation. `AVCaptureSystemExposureBiasSlider` may only be initialized with `AVCaptureDevice` instances that support setting `exposureTargetBias`, otherwise an `NSInvalidArgumentException` is thrown.
+//
 // NewCaptureSystemExposureBiasSliderWithDeviceAction creates a new [CaptureSystemExposureBiasSlider].
 func NewCaptureSystemExposureBiasSliderWithDeviceAction(device *raw.AVCaptureDevice, action func(float32)) *CaptureSystemExposureBiasSlider {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureSystemExposureBiasSlider")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewCaptureSystemExposureBiasSliderWithDeviceAction(device *raw.AVCaptureDev
 	return &CaptureSystemExposureBiasSlider{inner: raw.AVCaptureSystemExposureBiasSliderFromID(_id)}
 }
 
+// @property enabled @abstract Indicates whether the control should be enabled for user interaction. @discussion The value of this property is a `BOOL` that determines whether the control should be enabled for user interaction. Clients can set this property to keep a control added to an `AVCaptureSession` but prevent it from being interacted with by the user. A control's value may still be changed while it is disabled. The default value is `YES`.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *CaptureSystemExposureBiasSlider) WithEnabled(enabled bool) *CaptureSystemExposureBiasSlider {
 	x.inner.AVCaptureControl.SetEnabled(enabled)

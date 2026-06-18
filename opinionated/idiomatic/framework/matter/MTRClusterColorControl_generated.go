@@ -31,6 +31,8 @@ func MTRClusterColorControlFromID(id objc.ID) *MTRClusterColorControl {
 	return &MTRClusterColorControl{inner: raw.MTRClusterColorControlFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterColorControlWithDeviceEndpointIDQueue creates a new [MTRClusterColorControl].
 func NewMTRClusterColorControlWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterColorControl {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterColorControl")), objc.RegisterName("alloc"))

@@ -37,11 +37,15 @@ func NewIdentityAuthority() *IdentityAuthority {
 	return &IdentityAuthority{inner: raw.CBIdentityAuthorityFromID(_id)}
 }
 
+// Returns an identity authority for use with the Core Services Identity API. This method, along with “CBIdentityAuthority/identityAuthorityWithCSIdentityAuthority:“, is used for interoperability with the Core Services Identity API. - Returns: The opaque authority object for use with the Core Services Identity API.
+//
 // CSIdentityAuthority calls the underlying CSIdentityAuthority.
 func (x *IdentityAuthority) CSIdentityAuthority() unsafe.Pointer {
 	return x.inner.CSIdentityAuthority()
 }
 
+// Returns the localized name of the identity authority. - Returns: The computer’s name if the authority is local, or Managed Network Directory if the authority is managed.
+//
 // LocalizedName calls the underlying LocalizedName.
 func (x *IdentityAuthority) LocalizedName() string {
 	_r := x.inner.LocalizedName()

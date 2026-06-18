@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// @class       IOUSBHostInterface @brief       The IOUSBHostObject representing a USB interface @discussion  This class provides functionality to send control requests to the default control endpoint, as well as create IOUSBHostPipe objects to transfer data.
+//
 // HostInterface wraps [raw.IOUSBHostInterface] with a fluent Go API.
 type HostInterface struct {
 	inner *raw.IOUSBHostInterface
@@ -31,6 +33,8 @@ func HostInterfaceFromID(id objc.ID) *HostInterface {
 	return &HostInterface{inner: raw.IOUSBHostInterfaceFromID(id)}
 }
 
+// @brief      Initializes IOUSBHostInterface object along with user client @discussion See IOUSBHostObject for documentation.
+//
 // NewHostInterfaceWithIOServiceOptionsQueueErrorInterestHandler creates a new [HostInterface].
 func NewHostInterfaceWithIOServiceOptionsQueueErrorInterestHandler(ioService uint, options IOUSBHostObjectInitOptions, queue *foundation.NSObject, error_ unsafe.Pointer, interestHandler func(*raw.IOUSBHostObject, uint32, unsafe.Pointer)) *HostInterface {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOUSBHostInterface")), objc.RegisterName("alloc"))
@@ -38,16 +42,22 @@ func NewHostInterfaceWithIOServiceOptionsQueueErrorInterestHandler(ioService uin
 	return &HostInterface{inner: raw.IOUSBHostInterfaceFromID(_id)}
 }
 
+// @brief       Sets the desired idle suspend timeout for the interface @discussion  Once the interface is considered idle, it will defer electrical suspend of the device for the specified duration. @param       idleTimeout The amount of time after all pipes are idle to wait before suspending the device. @return      YES on success. An IOReturn error code will be reported on failure.
+//
 // SetIdleTimeoutError calls the underlying SetIdleTimeoutError.
 func (x *HostInterface) SetIdleTimeoutError(idleTimeout float64) (bool, error) {
 	return x.inner.SetIdleTimeoutError(idleTimeout)
 }
 
+// @brief       Select an alternate setting for this interface @discussion  This method is used to select an alternate setting for the interface. All pending IO on the interface's pipes will be aborted, and the open pipes will be closed. The IOUSBHostPipe objects already created will no longer be valid. The new alternate setting will be selected via SET_INTERFACE control request (USB 2.0 9.4.10). @param       alternateSetting Alternate interface number to activate @return      YES on success, an IOReturn error code will be reported on failure.
+//
 // SelectAlternateSettingError calls the underlying SelectAlternateSettingError.
 func (x *HostInterface) SelectAlternateSettingError(alternateSetting uint) (bool, error) {
 	return x.inner.SelectAlternateSettingError(alternateSetting)
 }
 
+// @brief       Return the pipe whose <code>bEndpointAddress</code> matches <code>address</code> @discussion  This method will return the pipe whose <code>bEndpointAddress</code> matches <code>address</code>. If the pipe is returned successfully, it will maintain a reference to the IOUSBHostInterface. @param       address Endpoint address of the pipe @return      Pointer to an IOUSBHostPipe object or nil. The IOUSBHostPipe is to be released by the caller. An IOReturn error code will be reported on failure.
+//
 // CopyPipeWithAddressError calls the underlying CopyPipeWithAddressError.
 func (x *HostInterface) CopyPipeWithAddressError(address uint) (*HostPipe, error) {
 	_r, _err := x.inner.CopyPipeWithAddressError(address)
@@ -60,16 +70,22 @@ func (x *HostInterface) CopyPipeWithAddressError(address uint) (*HostPipe, error
 	return &HostPipe{inner: _r}, nil
 }
 
+// @brief       Retrieve the current idle suspend timeout. See @link setIdleTimeout @/link @return      The amount of time after all pipes are idle to wait before suspending the device,
+//
 // IdleTimeout calls the underlying IdleTimeout.
 func (x *HostInterface) IdleTimeout() float64 {
 	return x.inner.IdleTimeout()
 }
 
+// @brief       Retrieve the configuration descriptor associated with this interface @return      IOUSBConfigurationDescriptor pointer
+//
 // ConfigurationDescriptor calls the underlying ConfigurationDescriptor.
 func (x *HostInterface) ConfigurationDescriptor() unsafe.Pointer {
 	return x.inner.ConfigurationDescriptor()
 }
 
+// @brief       Retrieve the interface descriptor associated with this interface. @return      IOUSBInterfaceDescriptor pointer
+//
 // InterfaceDescriptor calls the underlying InterfaceDescriptor.
 func (x *HostInterface) InterfaceDescriptor() unsafe.Pointer {
 	return x.inner.InterfaceDescriptor()

@@ -35,6 +35,8 @@ func NewAppExitMetric() *AppExitMetric {
 	return &AppExitMetric{inner: raw.MXAppExitMetricFromID(_id)}
 }
 
+// @property      foregroundExitData @abstract      Cumulative foreground exit data. @discussion    This includes application exit data when the application was on screen and visible to the user.
+//
 // ForegroundExitData calls the underlying ForegroundExitData.
 func (x *AppExitMetric) ForegroundExitData() *ForegroundExitData {
 	_r := x.inner.ForegroundExitData()
@@ -44,6 +46,8 @@ func (x *AppExitMetric) ForegroundExitData() *ForegroundExitData {
 	return &ForegroundExitData{inner: _r}
 }
 
+// @property      backgroundExitData @abstract      Cumulative background exit data. @discussion    This includes application exit data when the application was off screen and not visible to the user.
+//
 // BackgroundExitData calls the underlying BackgroundExitData.
 func (x *AppExitMetric) BackgroundExitData() *BackgroundExitData {
 	_r := x.inner.BackgroundExitData()

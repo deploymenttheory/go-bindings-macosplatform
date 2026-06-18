@@ -3,8 +3,12 @@
     Three shapes: plain +new; alloc+init; alloc+init returning (T, error) for an
     init that takes an NSError out-parameter. Whitespace is loose; gofmt cleans.
 */}}
-{{define "constructor"}}// {{.GoName}} creates a new [{{.GoTypeName}}].
+{{define "constructor"}}{{if .DocComment}}{{.DocComment}}//
+{{end}}// {{.GoName}} creates a new [{{.GoTypeName}}].
 func {{.GoName}}({{.ParamStr}}) {{.RetStr}} {
+{{- if .Preamble}}
+{{.Preamble}}
+{{- end}}
 {{- if .IsPlainNew}}
 _id := objc.Send[objc.ID](objc.ID(objc.GetClass({{.ClassName | printf "%q"}})), objc.RegisterName("new"))
 return &{{.GoTypeName}}{inner: {{.FromIDFn}}(_id)}

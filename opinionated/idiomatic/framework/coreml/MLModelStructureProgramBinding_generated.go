@@ -36,6 +36,8 @@ func NewModelStructureProgramBinding() *ModelStructureProgramBinding {
 	return &ModelStructureProgramBinding{inner: raw.MLModelStructureProgramBindingFromID(_id)}
 }
 
+// The name of the variable in the Program.
+//
 // Name calls the underlying Name.
 func (x *ModelStructureProgramBinding) Name() string {
 	_r := x.inner.Name()
@@ -45,6 +47,8 @@ func (x *ModelStructureProgramBinding) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The compile time constant value in the Program.
+//
 // Value calls the underlying Value.
 func (x *ModelStructureProgramBinding) Value() *ModelStructureProgramValue {
 	_r := x.inner.Value()

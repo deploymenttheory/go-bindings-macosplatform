@@ -31,6 +31,8 @@ func AudioPCMBufferFromID(id objc.ID) *AudioPCMBuffer {
 	return &AudioPCMBuffer{inner: raw.AVAudioPCMBufferFromID(id)}
 }
 
+// @method initWithPCMFormat:frameCapacity: @abstract Initialize a buffer that is to contain PCM audio samples. @param format The format of the PCM audio to be contained in the buffer. @param frameCapacity The capacity of the buffer in PCM sample frames. @discussion An exception is raised if the format is not PCM. Returns nil in the following cases: - if the format has zero bytes per frame (format.streamDescription->mBytesPerFrame == 0) - if the buffer byte capacity (frameCapacity * format.streamDescription->mBytesPerFrame) cannot be represented by an uint32_t
+//
 // NewAudioPCMBufferWithPCMFormatFrameCapacity creates a new [AudioPCMBuffer].
 func NewAudioPCMBufferWithPCMFormatFrameCapacity(format *raw.AVAudioFormat, frameCapacity uint32) *AudioPCMBuffer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioPCMBuffer")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewAudioPCMBufferWithPCMFormatFrameCapacity(format *raw.AVAudioFormat, fram
 	return &AudioPCMBuffer{inner: raw.AVAudioPCMBufferFromID(_id)}
 }
 
+// @method initWithPCMFormat:bufferListNoCopy:deallocator: @abstract Initialize a buffer that is to contain PCM audio samples with a given AudioBufferList without copying samples and a custom deallocator block. @param format The format of the PCM audio to be contained in the buffer. @param bufferList The buffer list with allocated memory to contain the PCM audio data. @param deallocator A block to invoke when the resulting AVAudioPCMBuffer object is deallocated. @discussion An exception is raised if the format is not PCM. Returns nil in the following cases: - if the format has zero bytes per frame (format.streamDescription->mBytesPerFrame == 0) - if supplied buffer has zero number of buffers - if each buffer's data byte size are not equal or if any of the buffers' data byte size is zero - if there is a mismatch between the format's number of buffers and the AudioBufferList's size (1 if interleaved, mChannelsPerFrame if deinterleaved) - if the AudioBufferList's pointer to the buffer of audio data is null. Use the deallocator block to define your own deallocation behavior for the provided AudioBufferList's underlying memory. The AudioBufferList passed to the deallocator is identical to the one which was passed to the initializer, in terms of the buffer count, and each buffer's mData and mDataByteSize members.
+//
 // NewAudioPCMBufferWithPCMFormatBufferListNoCopyDeallocator creates a new [AudioPCMBuffer].
 func NewAudioPCMBufferWithPCMFormatBufferListNoCopyDeallocator(format *raw.AVAudioFormat, bufferList *coreaudiotypes.AudioBufferList, deallocator func(*coreaudiotypes.AudioBufferList)) *AudioPCMBuffer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioPCMBuffer")), objc.RegisterName("alloc"))
@@ -45,17 +49,23 @@ func NewAudioPCMBufferWithPCMFormatBufferListNoCopyDeallocator(format *raw.AVAud
 	return &AudioPCMBuffer{inner: raw.AVAudioPCMBufferFromID(_id)}
 }
 
+// @property frameLength @abstract The current number of valid sample frames in the buffer. @discussion You may modify the length of the buffer as part of an operation that modifies its contents. The length must be less than or equal to the frameCapacity. Modifying frameLength will update the mDataByteSize in each of the underlying AudioBufferList's AudioBuffer's correspondingly, and vice versa. Note that in the case of deinterleaved formats, mDataByteSize will refers the size of one channel's worth of audio samples.
+//
 // WithFrameLength sets the frameLength property and returns the receiver for chaining.
 func (x *AudioPCMBuffer) WithFrameLength(frameLength uint32) *AudioPCMBuffer {
 	x.inner.SetFrameLength(frameLength)
 	return x
 }
 
+// @property frameCapacity @abstract The buffer's capacity, in audio sample frames.
+//
 // FrameCapacity calls the underlying FrameCapacity.
 func (x *AudioPCMBuffer) FrameCapacity() uint32 {
 	return x.inner.FrameCapacity()
 }
 
+// @property frameLength @abstract The current number of valid sample frames in the buffer. @discussion You may modify the length of the buffer as part of an operation that modifies its contents. The length must be less than or equal to the frameCapacity. Modifying frameLength will update the mDataByteSize in each of the underlying AudioBufferList's AudioBuffer's correspondingly, and vice versa. Note that in the case of deinterleaved formats, mDataByteSize will refers the size of one channel's worth of audio samples.
+//
 // FrameLength calls the underlying FrameLength.
 func (x *AudioPCMBuffer) FrameLength() uint32 {
 	return x.inner.FrameLength()
@@ -66,21 +76,29 @@ func (x *AudioPCMBuffer) SetFrameLength(frameLength uint32) {
 	x.inner.SetFrameLength(frameLength)
 }
 
+// @property stride @abstract The buffer's number of interleaved channels. @discussion Useful in conjunction with floatChannelData etc.
+//
 // Stride calls the underlying Stride.
 func (x *AudioPCMBuffer) Stride() uint {
 	return x.inner.Stride()
 }
 
+// @property floatChannelData @abstract Access the buffer's float audio samples. @discussion floatChannelData returns pointers to the buffer's audio samples if the buffer's format is 32-bit float, or nil if it is another format. The returned pointer is to format.channelCount pointers to float. Each of these pointers is to "frameLength" valid samples, which are spaced by "stride" samples. If format.interleaved is false (as with the standard deinterleaved float format), then the pointers will be to separate chunks of memory. "stride" is 1. If format.interleaved is true, then the pointers will refer into the same chunk of interleaved samples, each offset by 1 frame. "stride" is the number of interleaved channels.
+//
 // FloatChannelData calls the underlying FloatChannelData.
 func (x *AudioPCMBuffer) FloatChannelData() unsafe.Pointer {
 	return x.inner.FloatChannelData()
 }
 
+// @property int16ChannelData @abstract Access the buffer's int16_t audio samples. @discussion int16ChannelData returns the buffer's audio samples if the buffer's format has 2-byte integer samples, or nil if it is another format. See the discussion of floatChannelData.
+//
 // Int16ChannelData calls the underlying Int16ChannelData.
 func (x *AudioPCMBuffer) Int16ChannelData() unsafe.Pointer {
 	return x.inner.Int16ChannelData()
 }
 
+// @property int32ChannelData @abstract Access the buffer's int32_t audio samples. @discussion int32ChannelData returns the buffer's audio samples if the buffer's format has 4-byte integer samples, or nil if it is another format. See the discussion of floatChannelData.
+//
 // Int32ChannelData calls the underlying Int32ChannelData.
 func (x *AudioPCMBuffer) Int32ChannelData() unsafe.Pointer {
 	return x.inner.Int32ChannelData()

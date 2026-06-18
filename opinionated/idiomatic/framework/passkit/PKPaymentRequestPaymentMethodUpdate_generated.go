@@ -34,9 +34,18 @@ func PaymentRequestPaymentMethodUpdateFromID(id objc.ID) *PaymentRequestPaymentM
 }
 
 // NewPaymentRequestPaymentMethodUpdateWithErrorsPaymentSummaryItems creates a new [PaymentRequestPaymentMethodUpdate].
-func NewPaymentRequestPaymentMethodUpdateWithErrorsPaymentSummaryItems(errors_ *foundation.NSArray[objc.ID], paymentSummaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem]) *PaymentRequestPaymentMethodUpdate {
+func NewPaymentRequestPaymentMethodUpdateWithErrorsPaymentSummaryItems(errors_ *foundation.NSArray[objc.ID], paymentSummaryItems ...PaymentSummaryItemProvider) *PaymentRequestPaymentMethodUpdate {
+	_ptrs := make([]objc.ID, len(paymentSummaryItems))
+	for _i, _v := range paymentSummaryItems {
+		_ptrs[_i] = _v.asPaymentSummaryItem().Ptr()
+	}
+	var _arg1 *foundation.NSArray[*raw.PKPaymentSummaryItem]
+	if len(_ptrs) > 0 {
+		_arg1 = foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentRequestPaymentMethodUpdate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithErrors:paymentSummaryItems:"), errors_.Ptr(), paymentSummaryItems.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithErrors:paymentSummaryItems:"), errors_.Ptr(), _arg1.Ptr())
 	return &PaymentRequestPaymentMethodUpdate{inner: raw.PKPaymentRequestPaymentMethodUpdateFromID(_id)}
 }
 

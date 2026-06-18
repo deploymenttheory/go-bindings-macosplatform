@@ -36,11 +36,15 @@ func NewProjectElement() *ProjectElement {
 	return &ProjectElement{inner: raw.PHProjectElementFromID(_id)}
 }
 
+// Relative significance of any element in the section content is defined by it's weight. Values range from 0.0 to 1.0 where the higher numbers represent higher overall significance. Projects that allow a user to reduce the number of elements in any section content can use this hint to determine which elements are most important to keep in order to preserve context. Default is 0.5.
+//
 // Weight calls the underlying Weight.
 func (x *ProjectElement) Weight() float64 {
 	return x.inner.Weight()
 }
 
+// Placement of elements in the suggested layout is provided in grid space coordinates. For example, a rect of (0,0,3,4) represents a placement in the upper-left of the layout grid that is 3 grid units wide by 4 grid units high. For layout grids with more than one column, the values in the rect will always be integral. For fixed layouts, rect values will be in fractional unit values. If suggested placement could not be determined at time of project creation, placement will contain CGRectNull.
+//
 // Placement calls the underlying Placement.
 func (x *ProjectElement) Placement() corefoundation.CGRect {
 	return x.inner.Placement()

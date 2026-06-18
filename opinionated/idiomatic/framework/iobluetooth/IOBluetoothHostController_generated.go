@@ -81,6 +81,8 @@ func (x *IOBluetoothHostController) SetDelegate(delegate objc.ID) {
 	x.inner.SetDelegate(delegate)
 }
 
+// @method		powerState @abstract	Gets the controller power state @result		The current controller's power state.  This will be 1 for on, or 0 for off.  Only Apple Bluetooth adapters support power off
+//
 // PowerState calls the underlying PowerState.
 func (x *IOBluetoothHostController) PowerState() icadevices.BluetoothHCIPowerState {
 	return x.inner.PowerState()

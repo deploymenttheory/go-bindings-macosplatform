@@ -33,9 +33,18 @@ func FunctionStitchingGraphFromID(id objc.ID) *FunctionStitchingGraph {
 }
 
 // NewFunctionStitchingGraphWithFunctionNameNodesOutputNodeAttributes creates a new [FunctionStitchingGraph].
-func NewFunctionStitchingGraphWithFunctionNameNodesOutputNodeAttributes(functionName string, nodes *foundation.NSArray[*raw.MTLFunctionStitchingFunctionNode], outputNode *raw.MTLFunctionStitchingFunctionNode, attributes *foundation.NSArray[raw.MTLFunctionStitchingAttribute]) *FunctionStitchingGraph {
+func NewFunctionStitchingGraphWithFunctionNameNodesOutputNodeAttributes(functionName string, nodes *foundation.NSArray[*raw.MTLFunctionStitchingFunctionNode], outputNode *raw.MTLFunctionStitchingFunctionNode, attributes ...purego.IDer) *FunctionStitchingGraph {
+	_ptrs := make([]objc.ID, len(attributes))
+	for _i, _v := range attributes {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg3 *foundation.NSArray[raw.MTLFunctionStitchingAttribute]
+	if len(_ptrs) > 0 {
+		_arg3 = foundation.NSArrayFromID[raw.MTLFunctionStitchingAttribute](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLFunctionStitchingGraph")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFunctionName:nodes:outputNode:attributes:"), foundation.NSStringStringWithUTF8String(functionName).Ptr(), nodes.Ptr(), outputNode.Ptr(), attributes.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFunctionName:nodes:outputNode:attributes:"), foundation.NSStringStringWithUTF8String(functionName).Ptr(), nodes.Ptr(), outputNode.Ptr(), _arg3.Ptr())
 	return &FunctionStitchingGraph{inner: raw.MTLFunctionStitchingGraphFromID(_id)}
 }
 
@@ -119,8 +128,17 @@ func (x *FunctionStitchingGraph) Attributes() *foundation.NSArray[raw.MTLFunctio
 }
 
 // SetAttributes calls the underlying SetAttributes.
-func (x *FunctionStitchingGraph) SetAttributes(attributes *foundation.NSArray[raw.MTLFunctionStitchingAttribute]) {
-	x.inner.SetAttributes(attributes)
+func (x *FunctionStitchingGraph) SetAttributes(attributes ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(attributes))
+	for _i, _v := range attributes {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTLFunctionStitchingAttribute]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTLFunctionStitchingAttribute](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetAttributes(_arg0)
 }
 
 // FunctionStitchingGraphable is the interface implemented by [FunctionStitchingGraph], for mocking and DI.
@@ -136,7 +154,7 @@ type FunctionStitchingGraphable interface {
 	OutputNode() *FunctionStitchingFunctionNode
 	SetOutputNode(outputNode *raw.MTLFunctionStitchingFunctionNode)
 	Attributes() *foundation.NSArray[raw.MTLFunctionStitchingAttribute]
-	SetAttributes(attributes *foundation.NSArray[raw.MTLFunctionStitchingAttribute])
+	SetAttributes(attributes ...purego.IDer)
 }
 
 var _ FunctionStitchingGraphable = (*FunctionStitchingGraph)(nil)

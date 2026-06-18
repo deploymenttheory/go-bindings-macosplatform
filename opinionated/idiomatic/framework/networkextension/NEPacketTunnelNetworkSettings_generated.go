@@ -36,42 +36,56 @@ func NewNEPacketTunnelNetworkSettings() *NEPacketTunnelNetworkSettings {
 	return &NEPacketTunnelNetworkSettings{inner: raw.NEPacketTunnelNetworkSettingsFromID(_id)}
 }
 
+// @property IPv4Settings @discussion An NEIPv4Settings object that contains the desired tunnel IPv4 settings.
+//
 // WithIPv4Settings sets the iPv4Settings property and returns the receiver for chaining.
 func (x *NEPacketTunnelNetworkSettings) WithIPv4Settings(iPv4Settings *NEIPv4Settings) *NEPacketTunnelNetworkSettings {
 	x.inner.SetIPv4Settings(iPv4Settings.Unwrap())
 	return x
 }
 
+// @property IPv6Settings @discussion An NEIPv6Settings object that contains the desired tunnel IPv6 settings.
+//
 // WithIPv6Settings sets the iPv6Settings property and returns the receiver for chaining.
 func (x *NEPacketTunnelNetworkSettings) WithIPv6Settings(iPv6Settings *NEIPv6Settings) *NEPacketTunnelNetworkSettings {
 	x.inner.SetIPv6Settings(iPv6Settings.Unwrap())
 	return x
 }
 
+// @property tunnelOverheadBytes @discussion An NSNumber object containing the number of bytes of overhead appended to each outbound packet through the tunnel. The MTU for the TUN interface is computed by subtracting this value from the MTU of the primary physical interface.
+//
 // WithTunnelOverheadBytes sets the tunnelOverheadBytes property and returns the receiver for chaining.
 func (x *NEPacketTunnelNetworkSettings) WithTunnelOverheadBytes(tunnelOverheadBytes *foundation.NSNumber) *NEPacketTunnelNetworkSettings {
 	x.inner.SetTunnelOverheadBytes(tunnelOverheadBytes)
 	return x
 }
 
+// @property MTU @discussion An NSNumber object containing the Maximum Transmission Unit (MTU) size in bytes to assign to the TUN interface. If this property is set, the tunnelOverheadBytes property is ignored.
+//
 // WithMTU sets the mTU property and returns the receiver for chaining.
 func (x *NEPacketTunnelNetworkSettings) WithMTU(mTU *foundation.NSNumber) *NEPacketTunnelNetworkSettings {
 	x.inner.SetMTU(mTU)
 	return x
 }
 
+// @property DNSSettings @discussion An NEDNSSettings object that contains the desired tunnel DNS settings.
+//
 // WithDNSSettings sets the dNSSettings property and returns the receiver for chaining.
 func (x *NEPacketTunnelNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NEPacketTunnelNetworkSettings {
 	x.inner.NETunnelNetworkSettings.SetDNSSettings(dNSSettings.asNEDNSSettings())
 	return x
 }
 
+// @property proxySettings @discussion An NEProxySettings object that contains the desired tunnel proxy settings.
+//
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
 func (x *NEPacketTunnelNetworkSettings) WithProxySettings(proxySettings *NEProxySettings) *NEPacketTunnelNetworkSettings {
 	x.inner.NETunnelNetworkSettings.SetProxySettings(proxySettings.Unwrap())
 	return x
 }
 
+// @property IPv4Settings @discussion An NEIPv4Settings object that contains the desired tunnel IPv4 settings.
+//
 // IPv4Settings calls the underlying IPv4Settings.
 func (x *NEPacketTunnelNetworkSettings) IPv4Settings() *NEIPv4Settings {
 	_r := x.inner.IPv4Settings()
@@ -86,6 +100,8 @@ func (x *NEPacketTunnelNetworkSettings) SetIPv4Settings(iPv4Settings *raw.NEIPv4
 	x.inner.SetIPv4Settings(iPv4Settings)
 }
 
+// @property IPv6Settings @discussion An NEIPv6Settings object that contains the desired tunnel IPv6 settings.
+//
 // IPv6Settings calls the underlying IPv6Settings.
 func (x *NEPacketTunnelNetworkSettings) IPv6Settings() *NEIPv6Settings {
 	_r := x.inner.IPv6Settings()
@@ -100,6 +116,8 @@ func (x *NEPacketTunnelNetworkSettings) SetIPv6Settings(iPv6Settings *raw.NEIPv6
 	x.inner.SetIPv6Settings(iPv6Settings)
 }
 
+// @property tunnelOverheadBytes @discussion An NSNumber object containing the number of bytes of overhead appended to each outbound packet through the tunnel. The MTU for the TUN interface is computed by subtracting this value from the MTU of the primary physical interface.
+//
 // TunnelOverheadBytes calls the underlying TunnelOverheadBytes.
 func (x *NEPacketTunnelNetworkSettings) TunnelOverheadBytes() *foundation.NSNumber {
 	return x.inner.TunnelOverheadBytes()
@@ -110,6 +128,8 @@ func (x *NEPacketTunnelNetworkSettings) SetTunnelOverheadBytes(tunnelOverheadByt
 	x.inner.SetTunnelOverheadBytes(tunnelOverheadBytes)
 }
 
+// @property MTU @discussion An NSNumber object containing the Maximum Transmission Unit (MTU) size in bytes to assign to the TUN interface. If this property is set, the tunnelOverheadBytes property is ignored.
+//
 // MTU calls the underlying MTU.
 func (x *NEPacketTunnelNetworkSettings) MTU() *foundation.NSNumber {
 	return x.inner.MTU()

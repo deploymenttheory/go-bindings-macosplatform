@@ -36,6 +36,8 @@ func NewModelStructureProgramBlock() *ModelStructureProgramBlock {
 	return &ModelStructureProgramBlock{inner: raw.MLModelStructureProgramBlockFromID(_id)}
 }
 
+// The named inputs to the block.
+//
 // Inputs returns the collection as a Go slice.
 func (x *ModelStructureProgramBlock) Inputs() []*ModelStructureProgramNamedValueType {
 	arr := x.inner.Inputs()
@@ -47,6 +49,8 @@ func (x *ModelStructureProgramBlock) Inputs() []*ModelStructureProgramNamedValue
 	})
 }
 
+// The output names.
+//
 // OutputNames returns the collection as a Go slice.
 func (x *ModelStructureProgramBlock) OutputNames() []string {
 	arr := x.inner.OutputNames()
@@ -58,6 +62,8 @@ func (x *ModelStructureProgramBlock) OutputNames() []string {
 	})
 }
 
+// The list of topologically sorted operations in the block.
+//
 // Operations returns the collection as a Go slice.
 func (x *ModelStructureProgramBlock) Operations() []*ModelStructureProgramOperation {
 	arr := x.inner.Operations()

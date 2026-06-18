@@ -32,6 +32,8 @@ func TokenKeychainKeyFromID(id objc.ID) *TokenKeychainKey {
 	return &TokenKeychainKey{inner: raw.TKTokenKeychainKeyFromID(id)}
 }
 
+// @discussion Initialize TKTokenKeychainKey with informations from SecCertificateRef associated with the key.  Use SecCertificateCreateWithData to obtain SecCertificateRef.  If NULL is passed instead of certificate, all properties of created instance must be initialized manually.
+//
 // NewTokenKeychainKeyWithCertificateObjectID creates a new [TokenKeychainKey].
 func NewTokenKeychainKeyWithCertificateObjectID(certificateRef unsafe.Pointer, objectID objc.ID) *TokenKeychainKey {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenKeychainKey")), objc.RegisterName("alloc"))
@@ -39,72 +41,96 @@ func NewTokenKeychainKeyWithCertificateObjectID(certificateRef unsafe.Pointer, o
 	return &TokenKeychainKey{inner: raw.TKTokenKeychainKeyFromID(_id)}
 }
 
+// @discussion Type of the key, currently kSecAttrKeyTypeRSA and kSecAttrKeyTypeECSECPrimeRandom is supported).  The property is an equivalent to kSecAttrKeyType in SecItem.h
+//
 // WithKeyType sets the keyType property and returns the receiver for chaining.
 func (x *TokenKeychainKey) WithKeyType(keyType string) *TokenKeychainKey {
 	x.inner.SetKeyType(foundation.NSStringStringWithUTF8String(keyType))
 	return x
 }
 
+// @discussion Represents private tag data.  The property is an equivalent to kSecAttrApplicationTag in SecItem.h
+//
 // WithApplicationTag sets the applicationTag property and returns the receiver for chaining.
 func (x *TokenKeychainKey) WithApplicationTag(applicationTag *foundation.NSData) *TokenKeychainKey {
 	x.inner.SetApplicationTag(applicationTag)
 	return x
 }
 
+// @discussion Indicates the number of bits in this key.  The property is an equivalent to kSecAttrKeySizeInBits in SecItem.h
+//
 // WithKeySizeInBits sets the keySizeInBits property and returns the receiver for chaining.
 func (x *TokenKeychainKey) WithKeySizeInBits(keySizeInBits int) *TokenKeychainKey {
 	x.inner.SetKeySizeInBits(keySizeInBits)
 	return x
 }
 
+// @discussion Contains raw public key data for this private key.
+//
 // WithPublicKeyData sets the publicKeyData property and returns the receiver for chaining.
 func (x *TokenKeychainKey) WithPublicKeyData(publicKeyData *foundation.NSData) *TokenKeychainKey {
 	x.inner.SetPublicKeyData(publicKeyData)
 	return x
 }
 
+// @discussion SHA1 hash of the raw public key.  The property is an equivalent to kSecAttrApplicationLabel in SecItem.h
+//
 // WithPublicKeyHash sets the publicKeyHash property and returns the receiver for chaining.
 func (x *TokenKeychainKey) WithPublicKeyHash(publicKeyHash *foundation.NSData) *TokenKeychainKey {
 	x.inner.SetPublicKeyHash(publicKeyHash)
 	return x
 }
 
+// @discussion Indicates whether this key can be used to decrypt data.  The property is an equivalent to kSecAttrCanDecrypt in SecItem.h
+//
 // WithCanDecrypt sets the canDecrypt property and returns the receiver for chaining.
 func (x *TokenKeychainKey) WithCanDecrypt(canDecrypt bool) *TokenKeychainKey {
 	x.inner.SetCanDecrypt(canDecrypt)
 	return x
 }
 
+// @discussion Indicates whether this key can be used to create a digital signature.  The property is an equivalent to kSecAttrCanSign in SecItem.h
+//
 // WithCanSign sets the canSign property and returns the receiver for chaining.
 func (x *TokenKeychainKey) WithCanSign(canSign bool) *TokenKeychainKey {
 	x.inner.SetCanSign(canSign)
 	return x
 }
 
+// @discussion Indicates whether this key can be used to perform Diffie-Hellman style cryptographic key exchange.
+//
 // WithCanPerformKeyExchange sets the canPerformKeyExchange property and returns the receiver for chaining.
 func (x *TokenKeychainKey) WithCanPerformKeyExchange(canPerformKeyExchange bool) *TokenKeychainKey {
 	x.inner.SetCanPerformKeyExchange(canPerformKeyExchange)
 	return x
 }
 
+// @discussion Indicates whether this key can be used for login in to the system.
+//
 // WithSuitableForLogin sets the suitableForLogin property and returns the receiver for chaining.
 func (x *TokenKeychainKey) WithSuitableForLogin(suitableForLogin bool) *TokenKeychainKey {
 	x.inner.SetSuitableForLogin(suitableForLogin)
 	return x
 }
 
+// @discussion Contains the user-visible label for this item.  This property is an equivalent of kSecAttrLabel in SecItem.h
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *TokenKeychainKey) WithLabel(label string) *TokenKeychainKey {
 	x.inner.TKTokenKeychainItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @discussion Contains access constraints for this object keyed by TKTOpenOperation wrapped in NSNumber.
+//
 // WithConstraints sets the constraints property and returns the receiver for chaining.
 func (x *TokenKeychainKey) WithConstraints(constraints *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *TokenKeychainKey {
 	x.inner.TKTokenKeychainItem.SetConstraints(constraints)
 	return x
 }
 
+// @discussion Type of the key, currently kSecAttrKeyTypeRSA and kSecAttrKeyTypeECSECPrimeRandom is supported).  The property is an equivalent to kSecAttrKeyType in SecItem.h
+//
 // KeyType calls the underlying KeyType.
 func (x *TokenKeychainKey) KeyType() string {
 	_r := x.inner.KeyType()
@@ -119,6 +145,8 @@ func (x *TokenKeychainKey) SetKeyType(keyType string) {
 	x.inner.SetKeyType(foundation.NSStringStringWithUTF8String(keyType))
 }
 
+// @discussion Represents private tag data.  The property is an equivalent to kSecAttrApplicationTag in SecItem.h
+//
 // ApplicationTag calls the underlying ApplicationTag.
 func (x *TokenKeychainKey) ApplicationTag() *foundation.NSData {
 	return x.inner.ApplicationTag()
@@ -129,6 +157,8 @@ func (x *TokenKeychainKey) SetApplicationTag(applicationTag *foundation.NSData) 
 	x.inner.SetApplicationTag(applicationTag)
 }
 
+// @discussion Indicates the number of bits in this key.  The property is an equivalent to kSecAttrKeySizeInBits in SecItem.h
+//
 // KeySizeInBits calls the underlying KeySizeInBits.
 func (x *TokenKeychainKey) KeySizeInBits() int {
 	return x.inner.KeySizeInBits()
@@ -139,6 +169,8 @@ func (x *TokenKeychainKey) SetKeySizeInBits(keySizeInBits int) {
 	x.inner.SetKeySizeInBits(keySizeInBits)
 }
 
+// @discussion Contains raw public key data for this private key.
+//
 // PublicKeyData calls the underlying PublicKeyData.
 func (x *TokenKeychainKey) PublicKeyData() *foundation.NSData {
 	return x.inner.PublicKeyData()
@@ -149,6 +181,8 @@ func (x *TokenKeychainKey) SetPublicKeyData(publicKeyData *foundation.NSData) {
 	x.inner.SetPublicKeyData(publicKeyData)
 }
 
+// @discussion SHA1 hash of the raw public key.  The property is an equivalent to kSecAttrApplicationLabel in SecItem.h
+//
 // PublicKeyHash calls the underlying PublicKeyHash.
 func (x *TokenKeychainKey) PublicKeyHash() *foundation.NSData {
 	return x.inner.PublicKeyHash()
@@ -159,6 +193,8 @@ func (x *TokenKeychainKey) SetPublicKeyHash(publicKeyHash *foundation.NSData) {
 	x.inner.SetPublicKeyHash(publicKeyHash)
 }
 
+// @discussion Indicates whether this key can be used to decrypt data.  The property is an equivalent to kSecAttrCanDecrypt in SecItem.h
+//
 // CanDecrypt calls the underlying CanDecrypt.
 func (x *TokenKeychainKey) CanDecrypt() bool {
 	return x.inner.CanDecrypt()
@@ -169,6 +205,8 @@ func (x *TokenKeychainKey) SetCanDecrypt(canDecrypt bool) {
 	x.inner.SetCanDecrypt(canDecrypt)
 }
 
+// @discussion Indicates whether this key can be used to create a digital signature.  The property is an equivalent to kSecAttrCanSign in SecItem.h
+//
 // CanSign calls the underlying CanSign.
 func (x *TokenKeychainKey) CanSign() bool {
 	return x.inner.CanSign()
@@ -179,6 +217,8 @@ func (x *TokenKeychainKey) SetCanSign(canSign bool) {
 	x.inner.SetCanSign(canSign)
 }
 
+// @discussion Indicates whether this key can be used to perform Diffie-Hellman style cryptographic key exchange.
+//
 // CanPerformKeyExchange calls the underlying CanPerformKeyExchange.
 func (x *TokenKeychainKey) CanPerformKeyExchange() bool {
 	return x.inner.CanPerformKeyExchange()
@@ -189,6 +229,8 @@ func (x *TokenKeychainKey) SetCanPerformKeyExchange(canPerformKeyExchange bool) 
 	x.inner.SetCanPerformKeyExchange(canPerformKeyExchange)
 }
 
+// @discussion Indicates whether this key can be used for login in to the system.
+//
 // IsSuitableForLogin calls the underlying IsSuitableForLogin.
 func (x *TokenKeychainKey) IsSuitableForLogin() bool {
 	return x.inner.IsSuitableForLogin()

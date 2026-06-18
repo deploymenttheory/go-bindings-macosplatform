@@ -36,6 +36,8 @@ func NewGraphOperation() *GraphOperation {
 	return &GraphOperation{inner: raw.MPSGraphOperationFromID(_id)}
 }
 
+// The input tensors of the operation.
+//
 // InputTensors returns the collection as a Go slice.
 func (x *GraphOperation) InputTensors() []*GraphTensor {
 	arr := x.inner.InputTensors()
@@ -47,6 +49,8 @@ func (x *GraphOperation) InputTensors() []*GraphTensor {
 	})
 }
 
+// The output tensors of the operation.
+//
 // OutputTensors returns the collection as a Go slice.
 func (x *GraphOperation) OutputTensors() []*GraphTensor {
 	arr := x.inner.OutputTensors()
@@ -58,6 +62,8 @@ func (x *GraphOperation) OutputTensors() []*GraphTensor {
 	})
 }
 
+// The set of operations guaranteed to execute before this operation.
+//
 // ControlDependencies returns the collection as a Go slice.
 func (x *GraphOperation) ControlDependencies() []*GraphOperation {
 	arr := x.inner.ControlDependencies()
@@ -69,6 +75,8 @@ func (x *GraphOperation) ControlDependencies() []*GraphOperation {
 	})
 }
 
+// The graph on which the operation is defined.
+//
 // Graph calls the underlying Graph.
 func (x *GraphOperation) Graph() *Graph {
 	_r := x.inner.Graph()
@@ -78,6 +86,8 @@ func (x *GraphOperation) Graph() *Graph {
 	return &Graph{inner: _r}
 }
 
+// Name of the operation.
+//
 // Name calls the underlying Name.
 func (x *GraphOperation) Name() string {
 	_r := x.inner.Name()

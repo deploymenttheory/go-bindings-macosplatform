@@ -40,12 +40,16 @@ func NewMutableVideoCompositionInstruction() *MutableVideoCompositionInstruction
 	return &MutableVideoCompositionInstruction{inner: raw.AVMutableVideoCompositionInstructionFromID(_id)}
 }
 
+// Indicates the timeRange during which the instruction is effective. Note requirements for the timeRanges of instructions described in connection with AVVideoComposition's instructions key above.
+//
 // WithTimeRange sets the timeRange property and returns the receiver for chaining.
 func (x *MutableVideoCompositionInstruction) WithTimeRange(timeRange coremedia.CMTimeRange) *MutableVideoCompositionInstruction {
 	x.inner.SetTimeRange(timeRange)
 	return x
 }
 
+// Provides an array of instances of AVVideoCompositionLayerInstruction that specify how video frames from source tracks should be layered and composed. Tracks are layered in the composition according to the top-to-bottom order of the layerInstructions array; the track with trackID of the first instruction in the array will be layered on top, with the track with the trackID of the second instruction immediately underneath, etc. If this key is nil, the output will be a fill of the background color.
+//
 // WithLayerInstructions sets the collection, converting the Go slice to an NSArray.
 func (x *MutableVideoCompositionInstruction) WithLayerInstructions(items ...VideoCompositionLayerInstructionProvider) *MutableVideoCompositionInstruction {
 	if len(items) == 0 {
@@ -64,12 +68,16 @@ func (x *MutableVideoCompositionInstruction) WithLayerInstructions(items ...Vide
 	return x
 }
 
+// If NO, indicates that post-processing should be skipped for the duration of this instruction.  YES by default. See +[AVVideoCompositionCoreAnimationTool videoCompositionToolWithPostProcessingAsVideoLayer:inLayer:].
+//
 // WithEnablePostProcessing sets the enablePostProcessing property and returns the receiver for chaining.
 func (x *MutableVideoCompositionInstruction) WithEnablePostProcessing(enablePostProcessing bool) *MutableVideoCompositionInstruction {
 	x.inner.SetEnablePostProcessing(enablePostProcessing)
 	return x
 }
 
+// List of sample data track IDs required to compose frames for this instruction. Currently only tracks of type kCMMediaType_Metadata are allowed to be specified.  If this property is unspecified or is an empty array, no sample data is considered to be required for this instruction.  Note that you must also specify all tracks for which sample data is required for ANY instruction in the AVVideoComposition, in AVVideoComposition's property sourceSampleDataTrackIDs.
+//
 // WithRequiredSourceSampleDataTrackIDs sets the collection, converting the Go slice to an NSArray.
 func (x *MutableVideoCompositionInstruction) WithRequiredSourceSampleDataTrackIDs(items ...*foundation.NSNumber) *MutableVideoCompositionInstruction {
 	if len(items) == 0 {
@@ -88,6 +96,8 @@ func (x *MutableVideoCompositionInstruction) WithRequiredSourceSampleDataTrackID
 	return x
 }
 
+// Indicates the timeRange during which the instruction is effective. Note requirements for the timeRanges of instructions described in connection with AVVideoComposition's instructions key above.
+//
 // TimeRange calls the underlying TimeRange.
 func (x *MutableVideoCompositionInstruction) TimeRange() coremedia.CMTimeRange {
 	return x.inner.TimeRange()
@@ -104,8 +114,17 @@ func (x *MutableVideoCompositionInstruction) SetBackgroundColor(backgroundColor 
 }
 
 // SetLayerInstructions calls the underlying SetLayerInstructions.
-func (x *MutableVideoCompositionInstruction) SetLayerInstructions(layerInstructions *foundation.NSArray[*raw.AVVideoCompositionLayerInstruction]) {
-	x.inner.SetLayerInstructions(layerInstructions)
+func (x *MutableVideoCompositionInstruction) SetLayerInstructions(layerInstructions ...VideoCompositionLayerInstructionProvider) {
+	_ptrs := make([]objc.ID, len(layerInstructions))
+	for _i, _v := range layerInstructions {
+		_ptrs[_i] = _v.asVideoCompositionLayerInstruction().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.AVVideoCompositionLayerInstruction]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.AVVideoCompositionLayerInstruction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetLayerInstructions(_arg0)
 }
 
 // SetEnablePostProcessing calls the underlying SetEnablePostProcessing.
@@ -132,7 +151,7 @@ type MutableVideoCompositionInstructionable interface {
 	TimeRange() coremedia.CMTimeRange
 	SetTimeRange(timeRange coremedia.CMTimeRange)
 	SetBackgroundColor(backgroundColor unsafe.Pointer)
-	SetLayerInstructions(layerInstructions *foundation.NSArray[*raw.AVVideoCompositionLayerInstruction])
+	SetLayerInstructions(layerInstructions ...VideoCompositionLayerInstructionProvider)
 	SetEnablePostProcessing(enablePostProcessing bool)
 	SetRequiredSourceSampleDataTrackIDs(requiredSourceSampleDataTrackIDs *foundation.NSArray[*foundation.NSNumber])
 }

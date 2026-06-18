@@ -35,6 +35,8 @@ func NewAssetPlaybackAssistant() *AssetPlaybackAssistant {
 	return &AssetPlaybackAssistant{inner: raw.AVAssetPlaybackAssistantFromID(_id)}
 }
 
+// Calls the completionHandler with information about the asset. completionHandler is called when all of the AVAssetPlaybackConfigurationOption values have been loaded. If AVAssetPlaybackAssistant encounters failures when inspecting the contents of the asset, it will return no AVAssetPlaybackConfigurationOptions associated with those contents. - Parameter completionHandler: Called with an array of AVAssetPlaybackConfigurationOption values describing capabilities of the asset.
+//
 // LoadPlaybackConfigurationOptionsWithCompletionHandler calls the underlying LoadPlaybackConfigurationOptionsWithCompletionHandler.
 func (x *AssetPlaybackAssistant) LoadPlaybackConfigurationOptionsWithCompletionHandler(completionHandler objc.Block) {
 	x.inner.LoadPlaybackConfigurationOptionsWithCompletionHandler(completionHandler)

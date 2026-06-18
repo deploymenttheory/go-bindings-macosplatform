@@ -387,8 +387,17 @@ func (x *ViewController) ChildViewControllers() []*ViewController {
 }
 
 // SetChildViewControllers calls the underlying SetChildViewControllers.
-func (x *ViewController) SetChildViewControllers(childViewControllers *foundation.NSArray[*raw.NSViewController]) {
-	x.inner.SetChildViewControllers(childViewControllers)
+func (x *ViewController) SetChildViewControllers(childViewControllers ...ViewControllerProvider) {
+	_ptrs := make([]objc.ID, len(childViewControllers))
+	for _i, _v := range childViewControllers {
+		_ptrs[_i] = _v.asViewController().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NSViewController]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NSViewController](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetChildViewControllers(_arg0)
 }
 
 // Storyboard calls the underlying Storyboard.
@@ -500,7 +509,7 @@ type ViewControllerable interface {
 	ViewWillTransitionToSize(newSize corefoundation.CGSize)
 	ParentViewController() *ViewController
 	ChildViewControllers() []*ViewController
-	SetChildViewControllers(childViewControllers *foundation.NSArray[*raw.NSViewController])
+	SetChildViewControllers(childViewControllers ...ViewControllerProvider)
 	Storyboard() *Storyboard
 	ExtensionContext() *foundation.NSExtensionContext
 	SourceItemView() *View

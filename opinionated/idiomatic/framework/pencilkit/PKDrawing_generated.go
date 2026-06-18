@@ -40,6 +40,8 @@ func NewDrawing() *Drawing {
 	return &Drawing{inner: raw.PKDrawingFromID(_id)}
 }
 
+// Initializes a drawing with an array of strokes.
+//
 // NewDrawingWithStrokes creates a new [Drawing].
 func NewDrawingWithStrokes(strokes *foundation.NSArray[*raw.PKStroke]) *Drawing {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKDrawing")), objc.RegisterName("alloc"))
@@ -47,6 +49,8 @@ func NewDrawingWithStrokes(strokes *foundation.NSArray[*raw.PKStroke]) *Drawing 
 	return &Drawing{inner: raw.PKDrawingFromID(_id)}
 }
 
+// Initializes and returns the drawing with the specified data. @param data The data containing the drawing data. @param error If an error occurs, upon return the NSError object describes the error. Set to NULL to ignore errors. @return On success, an initialized PKDrawing object. If nil, the outError parameter contains an NSError instance describing the problem.
+//
 // NewDrawingWithDataError creates a new [Drawing].
 func NewDrawingWithDataError(data *foundation.NSData) (*Drawing, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKDrawing")), objc.RegisterName("alloc"))
@@ -58,6 +62,8 @@ func NewDrawingWithDataError(data *foundation.NSData) (*Drawing, error) {
 	return &Drawing{inner: raw.PKDrawingFromID(_id)}, nil
 }
 
+// Generate a data representation of the drawing. @return A NSData object containing a representation of the drawing.
+//
 // DataRepresentation calls the underlying DataRepresentation.
 func (x *Drawing) DataRepresentation() *foundation.NSData {
 	return x.inner.DataRepresentation()
@@ -68,6 +74,8 @@ func (x *Drawing) ImageFromRectScale(rect corefoundation.CGRect, scale float64) 
 	return x.inner.ImageFromRectScale(rect, scale)
 }
 
+// Returns a new drawing with `transform` applied. @param transform The transform to apply to this drawing. @return A new copy of this drawing with `transform` applied.
+//
 // DrawingByApplyingTransform calls the underlying DrawingByApplyingTransform.
 func (x *Drawing) DrawingByApplyingTransform(transform corefoundation.CGAffineTransform) *Drawing {
 	_r := x.inner.DrawingByApplyingTransform(transform)
@@ -77,6 +85,8 @@ func (x *Drawing) DrawingByApplyingTransform(transform corefoundation.CGAffineTr
 	return &Drawing{inner: _r}
 }
 
+// Returns a new drawing by appending the contents of `drawing` on top of the receiver’s contents. @param drawing The drawing to append. @return A new copy of this drawing with `drawing` appended onto it.
+//
 // DrawingByAppendingDrawing calls the underlying DrawingByAppendingDrawing.
 func (x *Drawing) DrawingByAppendingDrawing(drawing *raw.PKDrawing) *Drawing {
 	_r := x.inner.DrawingByAppendingDrawing(drawing)
@@ -86,6 +96,8 @@ func (x *Drawing) DrawingByAppendingDrawing(drawing *raw.PKDrawing) *Drawing {
 	return &Drawing{inner: _r}
 }
 
+// Create a new drawing by appending an array of strokes to this drawing. This is a convenience method, to quickly add strokes to a drawing. @param strokes The strokes to append. @return A new copy of this drawing with `strokes` appended onto it.
+//
 // DrawingByAppendingStrokes calls the underlying DrawingByAppendingStrokes.
 func (x *Drawing) DrawingByAppendingStrokes(strokes *foundation.NSArray[*raw.PKStroke]) *Drawing {
 	_r := x.inner.DrawingByAppendingStrokes(strokes)
@@ -95,6 +107,8 @@ func (x *Drawing) DrawingByAppendingStrokes(strokes *foundation.NSArray[*raw.PKS
 	return &Drawing{inner: _r}
 }
 
+// The strokes that this drawing contains.
+//
 // Strokes returns the collection as a Go slice.
 func (x *Drawing) Strokes() []*Stroke {
 	arr := x.inner.Strokes()
@@ -106,11 +120,15 @@ func (x *Drawing) Strokes() []*Stroke {
 	})
 }
 
+// The bounds of the drawing's contents, taking into account the rendered width of all content. If these bounds are used to render an image with `imageFromRect:scale:`, no contents will be cropped.
+//
 // Bounds calls the underlying Bounds.
 func (x *Drawing) Bounds() corefoundation.CGRect {
 	return x.inner.Bounds()
 }
 
+// The PencilKit version required to use this drawing.
+//
 // RequiredContentVersion calls the underlying RequiredContentVersion.
 func (x *Drawing) RequiredContentVersion() PKContentVersion {
 	return PKContentVersion(x.inner.RequiredContentVersion())

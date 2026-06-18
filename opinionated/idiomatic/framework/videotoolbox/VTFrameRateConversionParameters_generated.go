@@ -31,6 +31,8 @@ func FrameRateConversionParametersFromID(id objc.ID) *FrameRateConversionParamet
 	return &FrameRateConversionParameters{inner: raw.VTFrameRateConversionParametersFromID(id)}
 }
 
+// Creates new frame rate conversion parameters. Returns `nil` if `sourceFrame` or `nextFrame` is `nil`, if `sourceFrame` and reference frames don't have the same pixel format, or if `interpolationPhase` array count does not match `destinationFrames` array count. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrame: Next source frame in presentation time order; must be non `nil`. - opticalFlow: Optional “VTFrameProcessorOpticalFlow“ object that contains forward and backward optical flow with next frame. You only need to use this if the optical flow is pre-computed. For the first frame this is always `nil`. - interpolationPhase: Array of float numbers that indicate intervals at which the processor inserts a frame between current and next frame. The array size indicates how many frames to interpolate and this size must match `destinationFrames` size, with one interval for each destination frame. Use float number values between 0 and 1, for example, to insert one frame in the middle use a value of 0.5. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presentation sequence. For more information about supported modes see “VTFrameRateConversionParametersSubmissionMode“. - destinationFrames: Caller-allocated array of “VTFrameProcessorFrame“ that contains pixel buffers to receive the results. Must contain the same number of elements as `interpolationPhase`.
+//
 // NewFrameRateConversionParametersWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames creates a new [FrameRateConversionParameters].
 func NewFrameRateConversionParametersWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames(sourceFrame *raw.VTFrameProcessorFrame, nextFrame *raw.VTFrameProcessorFrame, opticalFlow *raw.VTFrameProcessorOpticalFlow, interpolationPhase *foundation.NSArray[*foundation.NSNumber], submissionMode VTFrameRateConversionParametersSubmissionMode, destinationFrame *foundation.NSArray[*raw.VTFrameProcessorFrame]) *FrameRateConversionParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTFrameRateConversionParameters")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewFrameRateConversionParametersWithSourceFrameNextFrameOpticalFlowInterpol
 	return &FrameRateConversionParameters{inner: raw.VTFrameRateConversionParametersFromID(_id)}
 }
 
+// Current source frame, which must be non `nil`.
+//
 // SourceFrame calls the underlying SourceFrame.
 func (x *FrameRateConversionParameters) SourceFrame() *FrameProcessorFrame {
 	_r := x.inner.SourceFrame()
@@ -47,6 +51,8 @@ func (x *FrameRateConversionParameters) SourceFrame() *FrameProcessorFrame {
 	return &FrameProcessorFrame{inner: _r}
 }
 
+// The next source frame in presentation time order, which is `nil` for the last frame.
+//
 // NextFrame calls the underlying NextFrame.
 func (x *FrameRateConversionParameters) NextFrame() *FrameProcessorFrame {
 	_r := x.inner.NextFrame()
@@ -56,6 +62,8 @@ func (x *FrameRateConversionParameters) NextFrame() *FrameProcessorFrame {
 	return &FrameProcessorFrame{inner: _r}
 }
 
+// An optional object that contains forward and backward optical flow with next frame. Only needed if optical flow is pre-computed. For the last frame this is `nil`.
+//
 // OpticalFlow calls the underlying OpticalFlow.
 func (x *FrameRateConversionParameters) OpticalFlow() *FrameProcessorOpticalFlow {
 	_r := x.inner.OpticalFlow()
@@ -65,6 +73,8 @@ func (x *FrameRateConversionParameters) OpticalFlow() *FrameProcessorOpticalFlow
 	return &FrameProcessorOpticalFlow{inner: _r}
 }
 
+// Array of float numbers that indicate intervals at which the processor inserts a frame between the current and next frame. Array size indicates how many frames to interpolate and must match `destinationFrames` size, one interval for each destination frame. Use float number values between 0 and 1, for example, to insert one frame in the middle use a value of 0.5.
+//
 // InterpolationPhase returns the collection as a Go slice.
 func (x *FrameRateConversionParameters) InterpolationPhase() []*foundation.NSNumber {
 	arr := x.inner.InterpolationPhase()
@@ -76,11 +86,15 @@ func (x *FrameRateConversionParameters) InterpolationPhase() []*foundation.NSNum
 	})
 }
 
+// Ordering of the input frames in this submission relative to the previous submission.
+//
 // SubmissionMode calls the underlying SubmissionMode.
 func (x *FrameRateConversionParameters) SubmissionMode() VTFrameRateConversionParametersSubmissionMode {
 	return VTFrameRateConversionParametersSubmissionMode(x.inner.SubmissionMode())
 }
 
+// Caller-allocated array of video frame objects that contain pixel buffers to receive the results. Must contain the same number of elements as `interpolationPhase` NSArray.
+//
 // DestinationFrames returns the collection as a Go slice.
 func (x *FrameRateConversionParameters) DestinationFrames() []*FrameProcessorFrame {
 	arr := x.inner.DestinationFrames()

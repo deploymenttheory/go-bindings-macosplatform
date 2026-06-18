@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The media access control (MAC) address for a network interface in your virtual machine.
+//
 // MACAddress wraps [raw.VZMACAddress] with a fluent Go API.
 type MACAddress struct {
 	inner *raw.VZMACAddress
@@ -32,6 +34,8 @@ func MACAddressFromID(id objc.ID) *MACAddress {
 	return &MACAddress{inner: raw.VZMACAddressFromID(id)}
 }
 
+// Creates a MAC address from the specified 48-bit Ethernet address.
+//
 // NewMACAddressWithEthernetAddress creates a new [MACAddress].
 func NewMACAddressWithEthernetAddress(ethernetAddress unsafe.Pointer) *MACAddress {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMACAddress")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewMACAddressWithEthernetAddress(ethernetAddress unsafe.Pointer) *MACAddres
 	return &MACAddress{inner: raw.VZMACAddressFromID(_id)}
 }
 
+// Creates a MAC address object from a specially formatted string.
+//
 // NewMACAddressWithString creates a new [MACAddress].
 func NewMACAddressWithString(string_ string) *MACAddress {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMACAddress")), objc.RegisterName("alloc"))
@@ -46,11 +52,15 @@ func NewMACAddressWithString(string_ string) *MACAddress {
 	return &MACAddress{inner: raw.VZMACAddressFromID(_id)}
 }
 
+// @abstract The address represented as an ether_addr_t.
+//
 // EthernetAddress calls the underlying EthernetAddress.
 func (x *MACAddress) EthernetAddress() unsafe.Pointer {
 	return x.inner.EthernetAddress()
 }
 
+// @abstract The address represented as a string. @discussion The 6 bytes are represented in hexadecimal form, separated by a colon character. Alphabetical characters are lowercase. The address is compatible with the parameter of -[VZMACAddress initWithString:].
+//
 // String calls the underlying String.
 func (x *MACAddress) String() string {
 	_r := x.inner.String()
@@ -60,26 +70,36 @@ func (x *MACAddress) String() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract True if the address is the broadcast address, false otherwise.
+//
 // IsBroadcastAddress calls the underlying IsBroadcastAddress.
 func (x *MACAddress) IsBroadcastAddress() bool {
 	return x.inner.IsBroadcastAddress()
 }
 
+// @abstract True if the address is a multicast address, false otherwise.
+//
 // IsMulticastAddress calls the underlying IsMulticastAddress.
 func (x *MACAddress) IsMulticastAddress() bool {
 	return x.inner.IsMulticastAddress()
 }
 
+// @abstract True if the address is a unicast address, false otherwise.
+//
 // IsUnicastAddress calls the underlying IsUnicastAddress.
 func (x *MACAddress) IsUnicastAddress() bool {
 	return x.inner.IsUnicastAddress()
 }
 
+// @abstract True if the address is a locally administered addresses (LAA), false otherwise.
+//
 // IsLocallyAdministeredAddress calls the underlying IsLocallyAdministeredAddress.
 func (x *MACAddress) IsLocallyAdministeredAddress() bool {
 	return x.inner.IsLocallyAdministeredAddress()
 }
 
+// @abstract True if the address is a universally administered addresses (UAA), false otherwise.
+//
 // IsUniversallyAdministeredAddress calls the underlying IsUniversallyAdministeredAddress.
 func (x *MACAddress) IsUniversallyAdministeredAddress() bool {
 	return x.inner.IsUniversallyAdministeredAddress()

@@ -37,11 +37,15 @@ func NewProjectExtensionContext() *ProjectExtensionContext {
 	return &ProjectExtensionContext{inner: raw.PHProjectExtensionContextFromID(_id)}
 }
 
+// Invokes the Photos Editor for the given asset. @param asset The asset to edit. @note The extension should observe library changes to get notified when assets are changed/edited. @see PHPhotoLibraryChangeObserver
+//
 // ShowEditorForAsset calls the underlying ShowEditorForAsset.
 func (x *ProjectExtensionContext) ShowEditorForAsset(asset *photos.PHAsset) {
 	x.inner.ShowEditorForAsset(asset)
 }
 
+// Creates an updated PHProjectInfo from the given projectInfo and the current assets in the PHProject. If the existingProjectInfo is not nil the extension sections will be update to reflect any deletions from the photo library and a new section is appended for any assets in the project which weren't referenced in existingProjectInfo. @param existingProjectInfo PHProjectInfo to update. If existingProjectInfo is nil a new PHProjectInfo will be created from all assets in the PHProject. @param completion          Completion block that is called with the update result. updatedProjectInfo is the updated project info, if the update was cancelled it might be nil. @return NSProgress which can be observed, if it's canceled the original project info is returned.
+//
 // UpdatedProjectInfoFromProjectInfoCompletion calls the underlying UpdatedProjectInfoFromProjectInfoCompletion.
 func (x *ProjectExtensionContext) UpdatedProjectInfoFromProjectInfoCompletion(existingProjectInfo *raw.PHProjectInfo, completion func(*raw.PHProjectInfo)) *foundation.NSProgress {
 	return x.inner.UpdatedProjectInfoFromProjectInfoCompletion(existingProjectInfo, completion)

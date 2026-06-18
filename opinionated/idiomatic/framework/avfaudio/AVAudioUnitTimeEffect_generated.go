@@ -29,6 +29,8 @@ func AudioUnitTimeEffectFromID(id objc.ID) *AudioUnitTimeEffect {
 	return &AudioUnitTimeEffect{inner: raw.AVAudioUnitTimeEffectFromID(id)}
 }
 
+// @method initWithAudioComponentDescription: @abstract create an AVAudioUnitTimeEffect object @param audioComponentDescription AudioComponentDescription of the audio unit to be initialized @discussion The componentType must be kAudioUnitType_FormatConverter
+//
 // NewAudioUnitTimeEffectWithAudioComponentDescription creates a new [AudioUnitTimeEffect].
 func NewAudioUnitTimeEffectWithAudioComponentDescription(audioComponentDescription objc.ID) *AudioUnitTimeEffect {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioUnitTimeEffect")), objc.RegisterName("alloc"))
@@ -36,6 +38,8 @@ func NewAudioUnitTimeEffectWithAudioComponentDescription(audioComponentDescripti
 	return &AudioUnitTimeEffect{inner: raw.AVAudioUnitTimeEffectFromID(_id)}
 }
 
+// @property bypass @abstract bypass state of the audio unit
+//
 // WithBypass sets the bypass property and returns the receiver for chaining.
 func (x *AudioUnitTimeEffect) WithBypass(bypass bool) *AudioUnitTimeEffect {
 	x.inner.SetBypass(bypass)

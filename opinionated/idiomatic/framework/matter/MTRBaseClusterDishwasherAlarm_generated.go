@@ -33,6 +33,8 @@ func MTRBaseClusterDishwasherAlarmFromID(id objc.ID) *MTRBaseClusterDishwasherAl
 	return &MTRBaseClusterDishwasherAlarm{inner: raw.MTRBaseClusterDishwasherAlarmFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterDishwasherAlarmWithDeviceEndpointIDQueue creates a new [MTRBaseClusterDishwasherAlarm].
 func NewMTRBaseClusterDishwasherAlarmWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterDishwasherAlarm {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterDishwasherAlarm")), objc.RegisterName("alloc"))
@@ -40,11 +42,15 @@ func NewMTRBaseClusterDishwasherAlarmWithDeviceEndpointIDQueue(device *raw.MTRBa
 	return &MTRBaseClusterDishwasherAlarm{inner: raw.MTRBaseClusterDishwasherAlarmFromID(_id)}
 }
 
+// Command Reset This command resets active and latched alarms (if possible).
+//
 // ResetWithParamsCompletion calls the underlying ResetWithParamsCompletion.
 func (x *MTRBaseClusterDishwasherAlarm) ResetWithParamsCompletion(params *raw.MTRDishwasherAlarmClusterResetParams, completion func(unsafe.Pointer)) {
 	x.inner.ResetWithParamsCompletion(params, completion)
 }
 
+// Command ModifyEnabledAlarms This command allows a client to request that an alarm be enabled or suppressed at the server.
+//
 // ModifyEnabledAlarmsWithParamsCompletion calls the underlying ModifyEnabledAlarmsWithParamsCompletion.
 func (x *MTRBaseClusterDishwasherAlarm) ModifyEnabledAlarmsWithParamsCompletion(params *raw.MTRDishwasherAlarmClusterModifyEnabledAlarmsParams, completion func(unsafe.Pointer)) {
 	x.inner.ModifyEnabledAlarmsWithParamsCompletion(params, completion)

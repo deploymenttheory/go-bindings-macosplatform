@@ -31,6 +31,8 @@ func AudioCompressedBufferFromID(id objc.ID) *AudioCompressedBuffer {
 	return &AudioCompressedBuffer{inner: raw.AVAudioCompressedBufferFromID(id)}
 }
 
+// @method initWithFormat:packetCapacity:maximumPacketSize: @abstract Initialize a buffer that is to contain compressed audio data. @param format The format of the audio to be contained in the buffer. @param packetCapacity The capacity of the buffer in packets. @param maximumPacketSize The maximum size in bytes of a compressed packet. The maximum packet size can be obtained from the maximumOutputPacketSize property of an AVAudioConverter configured for encoding this format. @discussion An exception is raised if the format is PCM.
+//
 // NewAudioCompressedBufferWithFormatPacketCapacityMaximumPacketSize creates a new [AudioCompressedBuffer].
 func NewAudioCompressedBufferWithFormatPacketCapacityMaximumPacketSize(format *raw.AVAudioFormat, packetCapacity uint32, maximumPacketSize int) *AudioCompressedBuffer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioCompressedBuffer")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewAudioCompressedBufferWithFormatPacketCapacityMaximumPacketSize(format *r
 	return &AudioCompressedBuffer{inner: raw.AVAudioCompressedBufferFromID(_id)}
 }
 
+// @method initWithFormat:packetCapacity: @abstract Initialize a buffer that is to contain constant bytes per packet compressed audio data. @param format The format of the audio to be contained in the buffer. @param packetCapacity The capacity of the buffer in packets. @discussion This fails if the format is PCM or if the format has variable bytes per packet (format.streamDescription->mBytesPerPacket == 0).
+//
 // NewAudioCompressedBufferWithFormatPacketCapacity creates a new [AudioCompressedBuffer].
 func NewAudioCompressedBufferWithFormatPacketCapacity(format *raw.AVAudioFormat, packetCapacity uint32) *AudioCompressedBuffer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioCompressedBuffer")), objc.RegisterName("alloc"))
@@ -45,23 +49,31 @@ func NewAudioCompressedBufferWithFormatPacketCapacity(format *raw.AVAudioFormat,
 	return &AudioCompressedBuffer{inner: raw.AVAudioCompressedBufferFromID(_id)}
 }
 
+// @property packetCount @abstract The current number of compressed packets in the buffer. @discussion You may modify the packetCount as part of an operation that modifies its contents. The packetCount must be less than or equal to the packetCapacity.
+//
 // WithPacketCount sets the packetCount property and returns the receiver for chaining.
 func (x *AudioCompressedBuffer) WithPacketCount(packetCount uint32) *AudioCompressedBuffer {
 	x.inner.SetPacketCount(packetCount)
 	return x
 }
 
+// @property byteLength @abstract The current number of valid bytes in the buffer. @discussion Can be changed as part of an operation that modifies the contents.
+//
 // WithByteLength sets the byteLength property and returns the receiver for chaining.
 func (x *AudioCompressedBuffer) WithByteLength(byteLength uint32) *AudioCompressedBuffer {
 	x.inner.SetByteLength(byteLength)
 	return x
 }
 
+// @property packetCapacity @abstract The number of compressed packets the buffer can contain.
+//
 // PacketCapacity calls the underlying PacketCapacity.
 func (x *AudioCompressedBuffer) PacketCapacity() uint32 {
 	return x.inner.PacketCapacity()
 }
 
+// @property packetCount @abstract The current number of compressed packets in the buffer. @discussion You may modify the packetCount as part of an operation that modifies its contents. The packetCount must be less than or equal to the packetCapacity.
+//
 // PacketCount calls the underlying PacketCount.
 func (x *AudioCompressedBuffer) PacketCount() uint32 {
 	return x.inner.PacketCount()
@@ -72,21 +84,29 @@ func (x *AudioCompressedBuffer) SetPacketCount(packetCount uint32) {
 	x.inner.SetPacketCount(packetCount)
 }
 
+// @property maximumPacketSize @abstract The maximum size of a compressed packet in bytes.
+//
 // MaximumPacketSize calls the underlying MaximumPacketSize.
 func (x *AudioCompressedBuffer) MaximumPacketSize() int {
 	return x.inner.MaximumPacketSize()
 }
 
+// @property data @abstract Access the buffer's data bytes.
+//
 // Data calls the underlying Data.
 func (x *AudioCompressedBuffer) Data() unsafe.Pointer {
 	return x.inner.Data()
 }
 
+// @property byteCapacity @abstract The buffer's capacity in bytes
+//
 // ByteCapacity calls the underlying ByteCapacity.
 func (x *AudioCompressedBuffer) ByteCapacity() uint32 {
 	return x.inner.ByteCapacity()
 }
 
+// @property byteLength @abstract The current number of valid bytes in the buffer. @discussion Can be changed as part of an operation that modifies the contents.
+//
 // ByteLength calls the underlying ByteLength.
 func (x *AudioCompressedBuffer) ByteLength() uint32 {
 	return x.inner.ByteLength()
@@ -97,11 +117,15 @@ func (x *AudioCompressedBuffer) SetByteLength(byteLength uint32) {
 	x.inner.SetByteLength(byteLength)
 }
 
+// @property packetDescriptions @abstract Access the buffer's array of packet descriptions, if any. @discussion If the format has constant bytes per packet (format.streamDescription->mBytesPerPacket != 0), then this will return nil.
+//
 // PacketDescriptions calls the underlying PacketDescriptions.
 func (x *AudioCompressedBuffer) PacketDescriptions() *coreaudiotypes.AudioStreamPacketDescription {
 	return x.inner.PacketDescriptions()
 }
 
+// @property packetDependencies @abstract Access the buffer's array of packet dependencies, if any. @discussion If the format doesn't employ packet dependencies, this will be nil.
+//
 // PacketDependencies calls the underlying PacketDependencies.
 func (x *AudioCompressedBuffer) PacketDependencies() *coreaudiotypes.AudioStreamPacketDependencyDescription {
 	return x.inner.PacketDependencies()

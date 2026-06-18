@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @brief NSAccessibilityCustomRotorItemResults are the objects returned to assistive technologies that match a search parameter criteria.
+//
 // AccessibilityCustomRotorItemResult wraps [raw.NSAccessibilityCustomRotorItemResult] with a fluent Go API.
 type AccessibilityCustomRotorItemResult struct {
 	inner *raw.NSAccessibilityCustomRotorItemResult
@@ -33,6 +35,8 @@ func AccessibilityCustomRotorItemResultFromID(id objc.ID) *AccessibilityCustomRo
 	return &AccessibilityCustomRotorItemResult{inner: raw.NSAccessibilityCustomRotorItemResultFromID(id)}
 }
 
+// @brief Creates an item result with a given target element. Assistive technologies may try to set accessibility focus on the element.
+//
 // NewAccessibilityCustomRotorItemResultWithTargetElement creates a new [AccessibilityCustomRotorItemResult].
 func NewAccessibilityCustomRotorItemResultWithTargetElement(targetElement raw.NSAccessibilityElementProtocol) *AccessibilityCustomRotorItemResult {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAccessibilityCustomRotorItemResult")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewAccessibilityCustomRotorItemResultWithTargetElement(targetElement raw.NS
 	return &AccessibilityCustomRotorItemResult{inner: raw.NSAccessibilityCustomRotorItemResultFromID(_id)}
 }
 
+// @brief Creates an item result with a given item load token and custom label. Use this initializer if the application has not yet loaded the element backing the item result.
+//
 // NewAccessibilityCustomRotorItemResultWithItemLoadingTokenCustomLabel creates a new [AccessibilityCustomRotorItemResult].
 func NewAccessibilityCustomRotorItemResultWithItemLoadingTokenCustomLabel(itemLoadingToken objc.ID, customLabel string) *AccessibilityCustomRotorItemResult {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAccessibilityCustomRotorItemResult")), objc.RegisterName("alloc"))
@@ -47,38 +53,52 @@ func NewAccessibilityCustomRotorItemResultWithItemLoadingTokenCustomLabel(itemLo
 	return &AccessibilityCustomRotorItemResult{inner: raw.NSAccessibilityCustomRotorItemResultFromID(_id)}
 }
 
+// @brief For text-based elements such as an NSTextView, this is an NSRange that specifies the area of interest. If the target range has NSNotFound for the location, the search should begin from the first or last character of the text element, depending on the search direction.
+//
 // WithTargetRange sets the targetRange property and returns the receiver for chaining.
 func (x *AccessibilityCustomRotorItemResult) WithTargetRange(targetRange foundation.NSRange) *AccessibilityCustomRotorItemResult {
 	x.inner.SetTargetRange(targetRange)
 	return x
 }
 
+// @brief A localized label that can be used instead of the default item label to describe the item result. @remark Required if using the loader-based initializer. Optional otherwise.
+//
 // WithCustomLabel sets the customLabel property and returns the receiver for chaining.
 func (x *AccessibilityCustomRotorItemResult) WithCustomLabel(customLabel string) *AccessibilityCustomRotorItemResult {
 	x.inner.SetCustomLabel(foundation.NSStringStringWithUTF8String(customLabel))
 	return x
 }
 
+// @brief A target element references an element that will be messaged for other accessibility properties. If it is not nil, assistive technologies may try to set accessibility focus on it.
+//
 // TargetElement calls the underlying TargetElement.
 func (x *AccessibilityCustomRotorItemResult) TargetElement() raw.NSAccessibilityElementProtocol {
 	return x.inner.TargetElement()
 }
 
+// @brief Provide an item load token if the application has not yet loaded the element backing the item result. Application can use the token to determine which item to return.
+//
 // ItemLoadingToken calls the underlying ItemLoadingToken.
 func (x *AccessibilityCustomRotorItemResult) ItemLoadingToken() objc.ID {
 	return x.inner.ItemLoadingToken()
 }
 
+// @brief For text-based elements such as an NSTextView, this is an NSRange that specifies the area of interest. If the target range has NSNotFound for the location, the search should begin from the first or last character of the text element, depending on the search direction.
+//
 // TargetRange calls the underlying TargetRange.
 func (x *AccessibilityCustomRotorItemResult) TargetRange() foundation.NSRange {
 	return x.inner.TargetRange()
 }
 
+// @brief For text-based elements such as an NSTextView, this is an NSRange that specifies the area of interest. If the target range has NSNotFound for the location, the search should begin from the first or last character of the text element, depending on the search direction.
+//
 // SetTargetRange calls the underlying SetTargetRange.
 func (x *AccessibilityCustomRotorItemResult) SetTargetRange(targetRange foundation.NSRange) {
 	x.inner.SetTargetRange(targetRange)
 }
 
+// @brief A localized label that can be used instead of the default item label to describe the item result. @remark Required if using the loader-based initializer. Optional otherwise.
+//
 // CustomLabel calls the underlying CustomLabel.
 func (x *AccessibilityCustomRotorItemResult) CustomLabel() string {
 	_r := x.inner.CustomLabel()
@@ -88,6 +108,8 @@ func (x *AccessibilityCustomRotorItemResult) CustomLabel() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief A localized label that can be used instead of the default item label to describe the item result. @remark Required if using the loader-based initializer. Optional otherwise.
+//
 // SetCustomLabel calls the underlying SetCustomLabel.
 func (x *AccessibilityCustomRotorItemResult) SetCustomLabel(customLabel string) {
 	x.inner.SetCustomLabel(foundation.NSStringStringWithUTF8String(customLabel))

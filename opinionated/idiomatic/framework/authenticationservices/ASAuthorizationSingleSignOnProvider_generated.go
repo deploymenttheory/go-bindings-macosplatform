@@ -52,6 +52,8 @@ func (x *AuthorizationSingleSignOnProvider) Url() *foundation.NSURL {
 	return x.inner.Url()
 }
 
+// @abstract Returns YES if the configured provider is capable of performing authorization within a given configuration.
+//
 // CanPerformAuthorization calls the underlying CanPerformAuthorization.
 func (x *AuthorizationSingleSignOnProvider) CanPerformAuthorization() bool {
 	return x.inner.CanPerformAuthorization()

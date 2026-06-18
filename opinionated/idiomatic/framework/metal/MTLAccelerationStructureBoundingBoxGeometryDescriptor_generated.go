@@ -38,24 +38,32 @@ func NewAccelerationStructureBoundingBoxGeometryDescriptor() *AccelerationStruct
 	return &AccelerationStructureBoundingBoxGeometryDescriptor{inner: raw.MTLAccelerationStructureBoundingBoxGeometryDescriptorFromID(_id)}
 }
 
+// @brief Bounding box buffer containing MTLAxisAlignedBoundingBoxes. Must not be nil.
+//
 // WithBoundingBoxBuffer sets the boundingBoxBuffer property and returns the receiver for chaining.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxBuffer(boundingBoxBuffer raw.MTLBuffer) *AccelerationStructureBoundingBoxGeometryDescriptor {
 	x.inner.SetBoundingBoxBuffer(boundingBoxBuffer)
 	return x
 }
 
+// @brief Bounding box buffer offset. Must be a multiple of the bounding box stride and must be aligned to the platform's buffer offset alignment.
+//
 // WithBoundingBoxBufferOffset sets the boundingBoxBufferOffset property and returns the receiver for chaining.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxBufferOffset(boundingBoxBufferOffset uint) *AccelerationStructureBoundingBoxGeometryDescriptor {
 	x.inner.SetBoundingBoxBufferOffset(boundingBoxBufferOffset)
 	return x
 }
 
+// @brief Stride, in bytes, between bounding boxes in the bounding box buffer. Must be at least 24 bytes and must be a multiple of 4 bytes. Defaults to 24 bytes.
+//
 // WithBoundingBoxStride sets the boundingBoxStride property and returns the receiver for chaining.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxStride(boundingBoxStride uint) *AccelerationStructureBoundingBoxGeometryDescriptor {
 	x.inner.SetBoundingBoxStride(boundingBoxStride)
 	return x
 }
 
+// @brief Number of bounding boxes
+//
 // WithBoundingBoxCount sets the boundingBoxCount property and returns the receiver for chaining.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxCount(boundingBoxCount uint) *AccelerationStructureBoundingBoxGeometryDescriptor {
 	x.inner.SetBoundingBoxCount(boundingBoxCount)
@@ -68,48 +76,64 @@ func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithIntersectionFun
 	return x
 }
 
+// @brief Whether the geometry is opaque
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithOpaque(opaque bool) *AccelerationStructureBoundingBoxGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetOpaque(opaque)
 	return x
 }
 
+// @brief Whether intersection functions may be invoked more than once per ray/primitive intersection. Defaults to YES.
+//
 // WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureBoundingBoxGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation)
 	return x
 }
 
+// @brief Label
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithLabel(label string) *AccelerationStructureBoundingBoxGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @brief Data buffer containing per-primitive data. May be nil.
+//
 // WithPrimitiveDataBuffer sets the primitiveDataBuffer property and returns the receiver for chaining.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTLBuffer) *AccelerationStructureBoundingBoxGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataBuffer(primitiveDataBuffer)
 	return x
 }
 
+// @brief Primitive data buffer offset in bytes. Must be aligned to the platform's buffer offset alignment. Defaults to 0 bytes.
+//
 // WithPrimitiveDataBufferOffset sets the primitiveDataBufferOffset property and returns the receiver for chaining.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataBufferOffset(primitiveDataBufferOffset uint) *AccelerationStructureBoundingBoxGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataBufferOffset(primitiveDataBufferOffset)
 	return x
 }
 
+// @brief Stride, in bytes, between per-primitive data in the primitive data buffer. Must be at least primitiveDataElementSize and must be a multiple of 4 bytes. Defaults to 0 bytes. Assumed to be equal to primitiveDataElementSize if zero.
+//
 // WithPrimitiveDataStride sets the primitiveDataStride property and returns the receiver for chaining.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride uint) *AccelerationStructureBoundingBoxGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataStride(primitiveDataStride)
 	return x
 }
 
+// @brief Size, in bytes, of the data for each primitive in the primitive data buffer. Must be at most primitiveDataStride and must be a multiple of 4 bytes. Defaults to 0 bytes.
+//
 // WithPrimitiveDataElementSize sets the primitiveDataElementSize property and returns the receiver for chaining.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize uint) *AccelerationStructureBoundingBoxGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataElementSize(primitiveDataElementSize)
 	return x
 }
 
+// @brief Bounding box buffer containing MTLAxisAlignedBoundingBoxes. Must not be nil.
+//
 // BoundingBoxBuffer calls the underlying BoundingBoxBuffer.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxBuffer() raw.MTLBuffer {
 	return x.inner.BoundingBoxBuffer()
@@ -120,6 +144,8 @@ func (x *AccelerationStructureBoundingBoxGeometryDescriptor) SetBoundingBoxBuffe
 	x.inner.SetBoundingBoxBuffer(boundingBoxBuffer)
 }
 
+// @brief Bounding box buffer offset. Must be a multiple of the bounding box stride and must be aligned to the platform's buffer offset alignment.
+//
 // BoundingBoxBufferOffset calls the underlying BoundingBoxBufferOffset.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxBufferOffset() uint {
 	return x.inner.BoundingBoxBufferOffset()
@@ -130,6 +156,8 @@ func (x *AccelerationStructureBoundingBoxGeometryDescriptor) SetBoundingBoxBuffe
 	x.inner.SetBoundingBoxBufferOffset(boundingBoxBufferOffset)
 }
 
+// @brief Stride, in bytes, between bounding boxes in the bounding box buffer. Must be at least 24 bytes and must be a multiple of 4 bytes. Defaults to 24 bytes.
+//
 // BoundingBoxStride calls the underlying BoundingBoxStride.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxStride() uint {
 	return x.inner.BoundingBoxStride()
@@ -140,6 +168,8 @@ func (x *AccelerationStructureBoundingBoxGeometryDescriptor) SetBoundingBoxStrid
 	x.inner.SetBoundingBoxStride(boundingBoxStride)
 }
 
+// @brief Number of bounding boxes
+//
 // BoundingBoxCount calls the underlying BoundingBoxCount.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxCount() uint {
 	return x.inner.BoundingBoxCount()

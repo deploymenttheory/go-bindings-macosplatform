@@ -37,12 +37,16 @@ func NewPhysicalInputProfile() *PhysicalInputProfile {
 	return &PhysicalInputProfile{inner: raw.GCPhysicalInputProfileFromID(_id)}
 }
 
+// Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called for each element that changed. @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons. @param element the element that has been modified.
+//
 // WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
 func (x *PhysicalInputProfile) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *PhysicalInputProfile {
 	x.inner.SetValueDidChangeHandler(valueDidChangeHandler)
 	return x
 }
 
+// Profile elements can be accessed using keyed subscript notation, with a valid alias of its inputs. @example extendedGamepad["Button A"] == extendedGamepad.buttonA // YES @example microGamepad["Button X"] == microGamepad.buttonX // YES @note Equivalent to -elements
+//
 // ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
 func (x *PhysicalInputProfile) ObjectForKeyedSubscript(key string) *ControllerElement {
 	_r := x.inner.ObjectForKeyedSubscript(foundation.NSStringStringWithUTF8String(key))
@@ -52,6 +56,8 @@ func (x *PhysicalInputProfile) ObjectForKeyedSubscript(key string) *ControllerEl
 	return &ControllerElement{inner: _r}
 }
 
+// Polls the state vector of the physical input input and saves it to a new and writable instance of GCPhysicalInputProfile. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken. @see snapshot @return A new physical input profile with the duplicated state vector of the current physical input
+//
 // Capture calls the underlying Capture.
 func (x *PhysicalInputProfile) Capture() *PhysicalInputProfile {
 	_r := x.inner.Capture()
@@ -61,11 +67,15 @@ func (x *PhysicalInputProfile) Capture() *PhysicalInputProfile {
 	return &PhysicalInputProfile{inner: _r}
 }
 
+// Sets the state vector of the physical input profile to a copy of the passed in physical input profile's state vector. @note If the controller's snapshot flag is set to NO, this method has no effect. @see GCController.snapshot
+//
 // SetStateFromPhysicalInput calls the underlying SetStateFromPhysicalInput.
 func (x *PhysicalInputProfile) SetStateFromPhysicalInput(physicalInput *raw.GCPhysicalInputProfile) {
 	x.inner.SetStateFromPhysicalInput(physicalInput)
 }
 
+// Returns the primary alias of the GCControllerElement that a given physical input maps to. @discussion If the user were to map a physical press of the A button of their game controller to the B button, then -[GCPhysicalInputProfile  mappedElementAliasForPhysicalInputName: GCInputButtonA] would return GCInputButtonB. Note that mappings can change anytime your app is backgrounded, so make sure you update any relevant visuals when returning to foreground. @param inputName A GCInput string corresponding to the physical button you want the mapped element alias for. @returns A GCInput string corresponding to the primary alias of the GCControllerElement that a given physical button maps to, or nil if there is no mapping.
+//
 // MappedElementAliasForPhysicalInputName calls the underlying MappedElementAliasForPhysicalInputName.
 func (x *PhysicalInputProfile) MappedElementAliasForPhysicalInputName(inputName string) string {
 	_r := x.inner.MappedElementAliasForPhysicalInputName(foundation.NSStringStringWithUTF8String(inputName))
@@ -75,26 +85,36 @@ func (x *PhysicalInputProfile) MappedElementAliasForPhysicalInputName(inputName 
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns a set of GCInput strings corresponding to physical inputs that are mapped to a given GCControllerElement. @discussion If the user mapped the physical press of the A button, the B button, and the X button to the B button, then -[GCPhysicalInputProfile mappedPhysicalInputNamesForElementAlias: GCInputButtonB] would return  [GCInputButtonA, GCInputButtonB, GCInputButtonX]. Note that mappings can change anytime your app is backgrounded, so make sure you update any relevant visuals when returning to foreground. @param elementAlias A GCInput string corresponding to an alias of the GCControllerElement you want the physical buttons for. @returns A set of GCInput strings corresponding to physical inputs that are mapped to a given GCControllerElement, or an empty set if there are no mappings.
+//
 // MappedPhysicalInputNamesForElementAlias calls the underlying MappedPhysicalInputNamesForElementAlias.
 func (x *PhysicalInputProfile) MappedPhysicalInputNamesForElementAlias(elementAlias string) *foundation.NSSet[*foundation.NSString] {
 	return x.inner.MappedPhysicalInputNamesForElementAlias(foundation.NSStringStringWithUTF8String(elementAlias))
 }
 
+// A profile keeps a reference to the device that this profile is mapping input from
+//
 // Device calls the underlying Device.
 func (x *PhysicalInputProfile) Device() raw.GCDevice {
 	return x.inner.Device()
 }
 
+// The last time elements of this profile were updated.
+//
 // LastEventTimestamp calls the underlying LastEventTimestamp.
 func (x *PhysicalInputProfile) LastEventTimestamp() float64 {
 	return x.inner.LastEventTimestamp()
 }
 
+// Whether the user has remapped their physical input controls for this profile at the system level. @discussion On iOS and tvOS, users can remap their game controller inputs in Settings.
+//
 // HasRemappedElements calls the underlying HasRemappedElements.
 func (x *PhysicalInputProfile) HasRemappedElements() bool {
 	return x.inner.HasRemappedElements()
 }
 
+// Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called for each element that changed. @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons. @param element the element that has been modified.
+//
 // ValueDidChangeHandler calls the underlying ValueDidChangeHandler.
 func (x *PhysicalInputProfile) ValueDidChangeHandler() objc.Block {
 	return x.inner.ValueDidChangeHandler()
@@ -105,6 +125,8 @@ func (x *PhysicalInputProfile) SetValueDidChangeHandler(valueDidChangeHandler fu
 	x.inner.SetValueDidChangeHandler(valueDidChangeHandler)
 }
 
+// The following properties allow for runtime lookup of any input element on a profile, when provided with a valid alias. @example extendedGamepad.elements["Button A"] == extendedGamepad.buttonA // YES @example extendedGamepad.dpads["Left Thumbstick"] == extendedGamepad.leftThumbstick // YES @example extendedGamepad.dpads["Button B"] // returns nil, "Button B" is not a GCControllerDirectionPad
+//
 // Elements calls the underlying Elements.
 func (x *PhysicalInputProfile) Elements() *foundation.NSDictionary[*foundation.NSString, *raw.GCControllerElement] {
 	return x.inner.Elements()
@@ -130,6 +152,8 @@ func (x *PhysicalInputProfile) Touchpads() *foundation.NSDictionary[*foundation.
 	return x.inner.Touchpads()
 }
 
+// The following properties allow for dynamic querying of the input elements available on a profile.
+//
 // AllElements calls the underlying AllElements.
 func (x *PhysicalInputProfile) AllElements() *foundation.NSSet[*raw.GCControllerElement] {
 	return x.inner.AllElements()

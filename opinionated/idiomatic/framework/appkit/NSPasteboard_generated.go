@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Pasteboard wraps [raw.NSPasteboard] with a fluent Go API.
@@ -53,8 +54,17 @@ func (x *Pasteboard) ClearContents() int {
 }
 
 // WriteObjects calls the underlying WriteObjects.
-func (x *Pasteboard) WriteObjects(objects *foundation.NSArray[raw.NSPasteboardWriting]) bool {
-	return x.inner.WriteObjects(objects)
+func (x *Pasteboard) WriteObjects(objects ...purego.IDer) bool {
+	_ptrs := make([]objc.ID, len(objects))
+	for _i, _v := range objects {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.NSPasteboardWriting]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.NSPasteboardWriting](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	return x.inner.WriteObjects(_arg0)
 }
 
 // ReadObjectsForClassesOptions calls the underlying ReadObjectsForClassesOptions.
@@ -130,16 +140,22 @@ func (x *Pasteboard) StringForType(dataType *foundation.NSString) string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Determines whether the first pasteboard item matches the specified patterns, without notifying the person using the app. This method only gives an indication of whether the first pasteboard item matches a particular pattern, and doesn’t allow the app to access the item's contents. As a result, the system doesn’t notify the person using the app about reading the contents of the pasteboard. The following example shows how to use this method to find email and postal addresses in the first pasteboard item: ```obj-c [NSPasteboard.generalPasteboard detectPatternsForPatterns:[NSSet setWithArray:@[NSPasteboardDetectionPatternEmailAddress, NSPasteboardDetectionPatternPostalAddress]] completionHandler:^(NSSet<NSPasteboardDetectionPattern> *matchedPatterns, NSError *error) { if (error) { NSLog(@"Error: %@", error); return; } BOOL matchedEmail = [matchedPatterns containsObject:NSPasteboardDetectionPatternEmailAddress]; BOOL matchedPostal = [matchedPatterns containsObject: NSPasteboardDetectionPatternPostalAddress]; if (matchedEmail) { NSLog(@"Email address(es) detected"); } if (matchedPostal) { NSLog(@"Postal address(es) detected"); } if (!matchedEmail && !matchedPostal) { NSLog(@"Matched neither email nor postal addresses."); } }]; ``` - Parameters: - patterns: The patterns to detect on the pasteboard. - completionHandler: A block the system invokes after detecting patterns on the pasteboard. The block receives either a set with the patterns the system finds on the pasteboard or an error if detection fails.
+//
 // DetectPatternsForPatternsCompletionHandler calls the underlying DetectPatternsForPatternsCompletionHandler.
 func (x *Pasteboard) DetectPatternsForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler objc.Block) {
 	x.inner.DetectPatternsForPatternsCompletionHandler(patterns, completionHandler)
 }
 
+// Determines whether the first pasteboard item matches the specified patterns, reading the contents if it finds a match. For details about the types returned for each pattern, see “NSPasteboardDetectionPattern“. The following example shows how to use this method to find web URLs and web search terms in the first pasteboard item: ```obj-c [NSPasteboard.generalPasteboard detectValuesForPatterns:[NSSet setWithArray:@[NSPasteboardDetectionPatternProbableWebSearch, NSPasteboardDetectionPatternProbableWebURL]] completionHandler:^(NSDictionary<NSPasteboardDetectionPattern, id> *patternValues, NSError *error) { if (error) { NSLog(@"Error: %@", error); return; } NSString *searchString = (NSString*)patternValues[NSPasteboardDetectionPatternProbableWebSearch]; NSString *urlString = (NSString*)patternValues[NSPasteboardDetectionPatternProbableWebURL] ; if (searchString != nil) { NSLog(@"Web search retrieved: %@", searchString); } if (urlString != nil) { NSLog(@"Web URL retrieved: %@", urlString); } if (searchString == nil && urlString == nil) { NSLog(@"No web patterns retrieved."); } }]; ``` > Important: If the system finds a match when calling this method, the system informs the person using the app that the app is trying to read the contents of the pasteboard. If the person denies access to the pasteboard, the completion handler receives an error. - Parameters: - patterns: The patterns to detect on the pasteboard. - completionHandler: A block the system invokes after detecting patterns on the pasteboard. The block returns either a dictionary with the patterns the system finds on the pasteboard or an error if detection fails. The dictionary keys specify the matched patterns and the values specify the corresponding content of the pasteboard.
+//
 // DetectValuesForPatternsCompletionHandler calls the underlying DetectValuesForPatternsCompletionHandler.
 func (x *Pasteboard) DetectValuesForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler objc.Block) {
 	x.inner.DetectValuesForPatternsCompletionHandler(patterns, completionHandler)
 }
 
+// Determines available metadata from the specified metadata types for the first pasteboard item, without notifying the person using the app. This method only gives access to limited types of metadata and doesn’t allow the app to access the contents. As a result, the system doesn’t notify the person using the app about reading the contents of the pasteboard. For details about the metadata returned for each type, see “NSPasteboardMetadataType“. The following example shows how to use this method to find the content type of a file reference in the first item on the pasteboard: ```obj-c [NSPasteboard.generalPasteboard detectMetadataForTypes:[NSSet setWithArray:@[NSPasteboardMetadataTypeContentType]] completionHandler:^(NSDictionary<NSPasteboardMetadataType, id> *metadata, NSError *error) { if (error) { NSLog(@"Error: %@", error); return; } UTType *contentType = (UTType*)metadata[NSPasteboardMetadataTypeContentType]; if (contentType) { NSLog(@"Content type is: %@", contentType.identifier); } else { NSLog(@"Couldn't get content type"); } }]; ``` - Parameters: - types: The metadata types to detect on the pasteboard. - completionHandler: A block the system invokes after detecting metadata on the pasteboard. The block receives either a dictionary with the metadata types the system finds on the pasteboard or an error if detection fails. The dictionary keys specify the matched metadata types and the values specify the corresponding metadata.
+//
 // DetectMetadataForTypesCompletionHandler calls the underlying DetectMetadataForTypesCompletionHandler.
 func (x *Pasteboard) DetectMetadataForTypesCompletionHandler(types *foundation.NSSet[*foundation.NSString], completionHandler objc.Block) {
 	x.inner.DetectMetadataForTypesCompletionHandler(types, completionHandler)
@@ -159,6 +175,8 @@ func (x *Pasteboard) ChangeCount() int {
 	return x.inner.ChangeCount()
 }
 
+// The current pasteboard access behavior. The user can customize this behavior per-app in System Settings for any app that has triggered a pasteboard access alert in the past.
+//
 // AccessBehavior calls the underlying AccessBehavior.
 func (x *Pasteboard) AccessBehavior() NSPasteboardAccessBehavior {
 	return NSPasteboardAccessBehavior(x.inner.AccessBehavior())
@@ -216,7 +234,7 @@ type Pasteboardable interface {
 	ReleaseGlobally()
 	PrepareForNewContentsWithOptions(options NSPasteboardContentsOptions) int
 	ClearContents() int
-	WriteObjects(objects *foundation.NSArray[raw.NSPasteboardWriting]) bool
+	WriteObjects(objects ...purego.IDer) bool
 	ReadObjectsForClassesOptions(classArray *foundation.NSArray[objc.Class], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[objc.ID]
 	IndexOfPasteboardItem(pasteboardItem *raw.NSPasteboardItem) uint
 	CanReadItemWithDataConformingToTypes(types *foundation.NSArray[*foundation.NSString]) bool

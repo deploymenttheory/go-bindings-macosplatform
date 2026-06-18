@@ -38,6 +38,8 @@ func NewMTRSetupPayload() *MTRSetupPayload {
 	return &MTRSetupPayload{inner: raw.MTRSetupPayloadFromID(_id)}
 }
 
+// Initializes the payload object from the provide QR Code or Manual Pairing Code string. Returns nil if the payload is not valid.
+//
 // NewMTRSetupPayloadWithPayload creates a new [MTRSetupPayload].
 func NewMTRSetupPayloadWithPayload(payload string) *MTRSetupPayload {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRSetupPayload")), objc.RegisterName("alloc"))
@@ -45,6 +47,8 @@ func NewMTRSetupPayloadWithPayload(payload string) *MTRSetupPayload {
 	return &MTRSetupPayload{inner: raw.MTRSetupPayloadFromID(_id)}
 }
 
+// Initialize an MTRSetupPayload with the given passcode and discriminator. This will pre-set version, product id, and vendor id to 0.
+//
 // NewMTRSetupPayloadWithSetupPasscodeDiscriminator creates a new [MTRSetupPayload].
 func NewMTRSetupPayloadWithSetupPasscodeDiscriminator(setupPasscode *foundation.NSNumber, discriminator *foundation.NSNumber) *MTRSetupPayload {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRSetupPayload")), objc.RegisterName("alloc"))
@@ -52,6 +56,8 @@ func NewMTRSetupPayloadWithSetupPasscodeDiscriminator(setupPasscode *foundation.
 	return &MTRSetupPayload{inner: raw.MTRSetupPayloadFromID(_id)}
 }
 
+// The individual constituent payloads, if the receiver represents a concatenated payload. @see concatenated
+//
 // WithSubPayloads sets the collection, converting the Go slice to an NSArray.
 func (x *MTRSetupPayload) WithSubPayloads(items ...*raw.MTRSetupPayload) *MTRSetupPayload {
 	if len(items) == 0 {
@@ -100,6 +106,8 @@ func (x *MTRSetupPayload) WithDiscriminator(discriminator *foundation.NSNumber) 
 	return x
 }
 
+// If hasShortDiscriminator is true, the discriminator value contains just the high 4 bits of the full discriminator.  For example, if hasShortDiscriminator is true and discriminator is 0xA, then the full discriminator can be anything in the range 0xA00 to 0xAFF.
+//
 // WithHasShortDiscriminator sets the hasShortDiscriminator property and returns the receiver for chaining.
 func (x *MTRSetupPayload) WithHasShortDiscriminator(hasShortDiscriminator bool) *MTRSetupPayload {
 	x.inner.SetHasShortDiscriminator(hasShortDiscriminator)
@@ -112,6 +120,8 @@ func (x *MTRSetupPayload) WithSetupPasscode(setupPasscode *foundation.NSNumber) 
 	return x
 }
 
+// The value of the Serial Number extension element, if any.
+//
 // WithSerialNumber sets the serialNumber property and returns the receiver for chaining.
 func (x *MTRSetupPayload) WithSerialNumber(serialNumber string) *MTRSetupPayload {
 	x.inner.SetSerialNumber(foundation.NSStringStringWithUTF8String(serialNumber))
@@ -130,6 +140,8 @@ func (x *MTRSetupPayload) WithSetUpPINCode(setUpPINCode *foundation.NSNumber) *M
 	return x
 }
 
+// Returns the Manufacturer-specific extension element with the specified tag, if any. The tag must be in the range 0x80 - 0xFF.
+//
 // VendorElementWithTag calls the underlying VendorElementWithTag.
 func (x *MTRSetupPayload) VendorElementWithTag(tag *foundation.NSNumber) *MTROptionalQRCodeInfo {
 	_r := x.inner.VendorElementWithTag(tag)
@@ -139,16 +151,22 @@ func (x *MTRSetupPayload) VendorElementWithTag(tag *foundation.NSNumber) *MTROpt
 	return &MTROptionalQRCodeInfo{inner: _r}
 }
 
+// Removes the extension element with the specified tag, if any. The tag must be in the range 0x80 - 0xFF.
+//
 // RemoveVendorElementWithTag calls the underlying RemoveVendorElementWithTag.
 func (x *MTRSetupPayload) RemoveVendorElementWithTag(tag *foundation.NSNumber) {
 	x.inner.RemoveVendorElementWithTag(tag)
 }
 
+// Adds or replaces a Manufacturer-specific extension element.
+//
 // AddOrReplaceVendorElement calls the underlying AddOrReplaceVendorElement.
 func (x *MTRSetupPayload) AddOrReplaceVendorElement(element *raw.MTROptionalQRCodeInfo) {
 	x.inner.AddOrReplaceVendorElement(element)
 }
 
+// Creates a Manual Pairing Code from this setup payload. Returns nil if this payload cannot be represented as a valid Manual Pairing Code. The following properties must be populated for a valid Manual Pairing Code: - setupPasscode - discriminator (short or long) In most cases the pairing code will be 11 digits long. If the payload indicates a `commissioningFlow` other than `MTRCommissioningFlowStandard`, a 21 digit code will be produced that includes the vendorID and productID values.
+//
 // ManualEntryCode calls the underlying ManualEntryCode.
 func (x *MTRSetupPayload) ManualEntryCode() string {
 	_r := x.inner.ManualEntryCode()
@@ -158,6 +176,8 @@ func (x *MTRSetupPayload) ManualEntryCode() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Creates a QR Code payload from this setup payload. Returns nil if this payload cannot be represented as a valid QR Code. The following properties must be populated for a valid QR Code: - setupPasscode - discriminator (must be long) - discoveryCapabilities (not MTRDiscoveryCapabilitiesUnknown) If this object represents a `concatenated` payload, then this property will include the QR Code strings of all the underlying `subPayloads.`
+//
 // QrCodeString calls the underlying QrCodeString.
 func (x *MTRSetupPayload) QrCodeString() string {
 	_r := x.inner.QrCodeString()
@@ -167,11 +187,15 @@ func (x *MTRSetupPayload) QrCodeString() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Whether this object represents a concatenated QR Code payload consisting of two or more underlying payloads. If YES, then: - The constituent payloads are exposed in the `subPayloads` property. - Properties other than `subPayloads` and `qrCodeString` (e.g. `vendorID`, `discriminator`) are not relevant to a concatenated payload and should not be used. If accessed, they will act as if the payload was not in fact concatenated, and return the relevant value associated with the first sub-payload. Mutating such a property will discard the additional sub-payloads.
+//
 // IsConcatenated calls the underlying IsConcatenated.
 func (x *MTRSetupPayload) IsConcatenated() bool {
 	return x.inner.IsConcatenated()
 }
 
+// The individual constituent payloads, if the receiver represents a concatenated payload. @see concatenated
+//
 // SubPayloads returns the collection as a Go slice.
 func (x *MTRSetupPayload) SubPayloads() []*MTRSetupPayload {
 	arr := x.inner.SubPayloads()
@@ -238,6 +262,8 @@ func (x *MTRSetupPayload) SetDiscriminator(discriminator *foundation.NSNumber) {
 	x.inner.SetDiscriminator(discriminator)
 }
 
+// If hasShortDiscriminator is true, the discriminator value contains just the high 4 bits of the full discriminator.  For example, if hasShortDiscriminator is true and discriminator is 0xA, then the full discriminator can be anything in the range 0xA00 to 0xAFF.
+//
 // HasShortDiscriminator calls the underlying HasShortDiscriminator.
 func (x *MTRSetupPayload) HasShortDiscriminator() bool {
 	return x.inner.HasShortDiscriminator()
@@ -258,6 +284,8 @@ func (x *MTRSetupPayload) SetSetupPasscode(setupPasscode *foundation.NSNumber) {
 	x.inner.SetSetupPasscode(setupPasscode)
 }
 
+// The value of the Serial Number extension element, if any.
+//
 // SerialNumber calls the underlying SerialNumber.
 func (x *MTRSetupPayload) SerialNumber() string {
 	_r := x.inner.SerialNumber()
@@ -272,6 +300,8 @@ func (x *MTRSetupPayload) SetSerialNumber(serialNumber string) {
 	x.inner.SetSerialNumber(foundation.NSStringStringWithUTF8String(serialNumber))
 }
 
+// The list of Manufacturer-specific extension elements contained in the setup code. May be empty.
+//
 // VendorElements returns the collection as a Go slice.
 func (x *MTRSetupPayload) VendorElements() []*MTROptionalQRCodeInfo {
 	arr := x.inner.VendorElements()

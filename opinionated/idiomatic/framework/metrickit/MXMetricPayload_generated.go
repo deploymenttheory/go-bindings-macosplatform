@@ -37,16 +37,22 @@ func NewMetricPayload() *MetricPayload {
 	return &MetricPayload{inner: raw.MXMetricPayloadFromID(_id)}
 }
 
+// @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this payload. @result        An NSData object containing the JSON representation
+//
 // JSONRepresentation calls the underlying JSONRepresentation.
 func (x *MetricPayload) JSONRepresentation() *foundation.NSData {
 	return x.inner.JSONRepresentation()
 }
 
+// @method        dictionaryRepresentation @abstract      Convenience method to return a NSDictionary representation of this payload. @result        An NSDictionary object containing the dictionary representation
+//
 // DictionaryRepresentation calls the underlying DictionaryRepresentation.
 func (x *MetricPayload) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.DictionaryRepresentation()
 }
 
+// @property      latestApplicationVersion @abstract      An NSString representation of the application version from which this payload was generated. @discussion    If the application version was changed during the aggregation of this data, this value will reflect the latest application version at the time of retrieval.
+//
 // LatestApplicationVersion calls the underlying LatestApplicationVersion.
 func (x *MetricPayload) LatestApplicationVersion() string {
 	_r := x.inner.LatestApplicationVersion()
@@ -61,16 +67,22 @@ func (x *MetricPayload) IncludesMultipleApplicationVersions() bool {
 	return x.inner.IncludesMultipleApplicationVersions()
 }
 
+// @property      timeStampBegin @abstract      An NSDate object that indicates the time which the payload was generated.
+//
 // TimeStampBegin calls the underlying TimeStampBegin.
 func (x *MetricPayload) TimeStampBegin() *foundation.NSDate {
 	return x.inner.TimeStampBegin()
 }
 
+// @property      timeStampEnd @abstract      An NSDate object that indicates the time which the payload was generated.
+//
 // TimeStampEnd calls the underlying TimeStampEnd.
 func (x *MetricPayload) TimeStampEnd() *foundation.NSDate {
 	return x.inner.TimeStampEnd()
 }
 
+// @property      cpuMetrics @abstract      An object containing CPU metrics for this application.
+//
 // CpuMetrics calls the underlying CpuMetrics.
 func (x *MetricPayload) CpuMetrics() *CPUMetric {
 	_r := x.inner.CpuMetrics()
@@ -80,6 +92,8 @@ func (x *MetricPayload) CpuMetrics() *CPUMetric {
 	return &CPUMetric{inner: _r}
 }
 
+// @property      gpuMetrics @abstract      An object containing GPU metrics for this application.
+//
 // GpuMetrics calls the underlying GpuMetrics.
 func (x *MetricPayload) GpuMetrics() *GPUMetric {
 	_r := x.inner.GpuMetrics()
@@ -89,6 +103,8 @@ func (x *MetricPayload) GpuMetrics() *GPUMetric {
 	return &GPUMetric{inner: _r}
 }
 
+// @property      cellularConditionMetrics @abstract      An object containing a cellular condition metrics for this application.
+//
 // CellularConditionMetrics calls the underlying CellularConditionMetrics.
 func (x *MetricPayload) CellularConditionMetrics() *CellularConditionMetric {
 	_r := x.inner.CellularConditionMetrics()
@@ -98,6 +114,8 @@ func (x *MetricPayload) CellularConditionMetrics() *CellularConditionMetric {
 	return &CellularConditionMetric{inner: _r}
 }
 
+// @property      applicationTimeMetrics @abstract      An object containing running mode metrics for this application.
+//
 // ApplicationTimeMetrics calls the underlying ApplicationTimeMetrics.
 func (x *MetricPayload) ApplicationTimeMetrics() *AppRunTimeMetric {
 	_r := x.inner.ApplicationTimeMetrics()
@@ -107,6 +125,8 @@ func (x *MetricPayload) ApplicationTimeMetrics() *AppRunTimeMetric {
 	return &AppRunTimeMetric{inner: _r}
 }
 
+// @property      locationActivityMetrics @abstract      An object containing location activity metrics for this application.
+//
 // LocationActivityMetrics calls the underlying LocationActivityMetrics.
 func (x *MetricPayload) LocationActivityMetrics() *LocationActivityMetric {
 	_r := x.inner.LocationActivityMetrics()
@@ -116,6 +136,8 @@ func (x *MetricPayload) LocationActivityMetrics() *LocationActivityMetric {
 	return &LocationActivityMetric{inner: _r}
 }
 
+// @property      networkTransferMetrics @abstract      An object containing network transfer metrics for this application.
+//
 // NetworkTransferMetrics calls the underlying NetworkTransferMetrics.
 func (x *MetricPayload) NetworkTransferMetrics() *NetworkTransferMetric {
 	_r := x.inner.NetworkTransferMetrics()
@@ -125,6 +147,8 @@ func (x *MetricPayload) NetworkTransferMetrics() *NetworkTransferMetric {
 	return &NetworkTransferMetric{inner: _r}
 }
 
+// @property      applicationLaunchMetrics @abstract      An object containing launch metrics for this application.
+//
 // ApplicationLaunchMetrics calls the underlying ApplicationLaunchMetrics.
 func (x *MetricPayload) ApplicationLaunchMetrics() *AppLaunchMetric {
 	_r := x.inner.ApplicationLaunchMetrics()
@@ -134,6 +158,8 @@ func (x *MetricPayload) ApplicationLaunchMetrics() *AppLaunchMetric {
 	return &AppLaunchMetric{inner: _r}
 }
 
+// @property      applicationResponsivenessMetrics @abstract      An object containing hang metrics for this application.
+//
 // ApplicationResponsivenessMetrics calls the underlying ApplicationResponsivenessMetrics.
 func (x *MetricPayload) ApplicationResponsivenessMetrics() *AppResponsivenessMetric {
 	_r := x.inner.ApplicationResponsivenessMetrics()
@@ -143,6 +169,8 @@ func (x *MetricPayload) ApplicationResponsivenessMetrics() *AppResponsivenessMet
 	return &AppResponsivenessMetric{inner: _r}
 }
 
+// @property      diskIOMetrics @abstract      An object containing disk IO metrics for this application.
+//
 // DiskIOMetrics calls the underlying DiskIOMetrics.
 func (x *MetricPayload) DiskIOMetrics() *DiskIOMetric {
 	_r := x.inner.DiskIOMetrics()
@@ -152,6 +180,8 @@ func (x *MetricPayload) DiskIOMetrics() *DiskIOMetric {
 	return &DiskIOMetric{inner: _r}
 }
 
+// @property      memoryMetrics @abstract      An object containing memory metrics for this application.
+//
 // MemoryMetrics calls the underlying MemoryMetrics.
 func (x *MetricPayload) MemoryMetrics() *MemoryMetric {
 	_r := x.inner.MemoryMetrics()
@@ -161,6 +191,8 @@ func (x *MetricPayload) MemoryMetrics() *MemoryMetric {
 	return &MemoryMetric{inner: _r}
 }
 
+// @property      displayMetrics @abstract      An object containing display metrics for this application.
+//
 // DisplayMetrics calls the underlying DisplayMetrics.
 func (x *MetricPayload) DisplayMetrics() *DisplayMetric {
 	_r := x.inner.DisplayMetrics()
@@ -170,6 +202,8 @@ func (x *MetricPayload) DisplayMetrics() *DisplayMetric {
 	return &DisplayMetric{inner: _r}
 }
 
+// @property      animationMetrics @abstract      An object containing animation metrics for this application.
+//
 // AnimationMetrics calls the underlying AnimationMetrics.
 func (x *MetricPayload) AnimationMetrics() *AnimationMetric {
 	_r := x.inner.AnimationMetrics()
@@ -179,6 +213,8 @@ func (x *MetricPayload) AnimationMetrics() *AnimationMetric {
 	return &AnimationMetric{inner: _r}
 }
 
+// @property      applicationExitMetrics @abstract      An object containing exit metrics for this application.
+//
 // ApplicationExitMetrics calls the underlying ApplicationExitMetrics.
 func (x *MetricPayload) ApplicationExitMetrics() *AppExitMetric {
 	_r := x.inner.ApplicationExitMetrics()
@@ -188,6 +224,8 @@ func (x *MetricPayload) ApplicationExitMetrics() *AppExitMetric {
 	return &AppExitMetric{inner: _r}
 }
 
+// @property      diskSpaceUsageMetrics @abstract      An object containing disk space usage metrics for this application.
+//
 // DiskSpaceUsageMetrics calls the underlying DiskSpaceUsageMetrics.
 func (x *MetricPayload) DiskSpaceUsageMetrics() *DiskSpaceUsageMetric {
 	_r := x.inner.DiskSpaceUsageMetrics()
@@ -197,6 +235,8 @@ func (x *MetricPayload) DiskSpaceUsageMetrics() *DiskSpaceUsageMetric {
 	return &DiskSpaceUsageMetric{inner: _r}
 }
 
+// @property      signpostMetrics @abstract      An array containing signpost metrics for this application.
+//
 // SignpostMetrics returns the collection as a Go slice.
 func (x *MetricPayload) SignpostMetrics() []*SignpostMetric {
 	arr := x.inner.SignpostMetrics()
@@ -208,6 +248,8 @@ func (x *MetricPayload) SignpostMetrics() []*SignpostMetric {
 	})
 }
 
+// @property      metaData @abstract      An object containing extra metadata for this payload.
+//
 // MetaData calls the underlying MetaData.
 func (x *MetricPayload) MetaData() *MetaData {
 	_r := x.inner.MetaData()

@@ -32,6 +32,8 @@ func CNNConvolutionDescriptorFromID(id objc.ID) *CNNConvolutionDescriptor {
 	return &CNNConvolutionDescriptor{inner: raw.MPSCNNConvolutionDescriptorFromID(id)}
 }
 
+// @abstract <NSSecureCoding> support
+//
 // NewCNNConvolutionDescriptorWithCoder creates a new [CNNConvolutionDescriptor].
 func NewCNNConvolutionDescriptorWithCoder(aDecoder *foundation.NSCoder) *CNNConvolutionDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNConvolutionDescriptor")), objc.RegisterName("alloc"))
@@ -39,101 +41,137 @@ func NewCNNConvolutionDescriptorWithCoder(aDecoder *foundation.NSCoder) *CNNConv
 	return &CNNConvolutionDescriptor{inner: raw.MPSCNNConvolutionDescriptorFromID(_id)}
 }
 
+// @property   kernelWidth @abstract   The width of the filter window.  The default value is 3. Any positive non-zero value is valid, including even values. The position of the left edge of the filter window is given by offset.x - (kernelWidth>>1)
+//
 // WithKernelWidth sets the kernelWidth property and returns the receiver for chaining.
 func (x *CNNConvolutionDescriptor) WithKernelWidth(kernelWidth uint) *CNNConvolutionDescriptor {
 	x.inner.SetKernelWidth(kernelWidth)
 	return x
 }
 
+// @property   kernelHeight @abstract   The height of the filter window.  The default value is 3. Any positive non-zero value is valid, including even values. The position of the top edge of the filter window is given by offset.y - (kernelHeight>>1)
+//
 // WithKernelHeight sets the kernelHeight property and returns the receiver for chaining.
 func (x *CNNConvolutionDescriptor) WithKernelHeight(kernelHeight uint) *CNNConvolutionDescriptor {
 	x.inner.SetKernelHeight(kernelHeight)
 	return x
 }
 
+// @property   inputFeatureChannels @abstract   The number of feature channels per pixel in the input image.
+//
 // WithInputFeatureChannels sets the inputFeatureChannels property and returns the receiver for chaining.
 func (x *CNNConvolutionDescriptor) WithInputFeatureChannels(inputFeatureChannels uint) *CNNConvolutionDescriptor {
 	x.inner.SetInputFeatureChannels(inputFeatureChannels)
 	return x
 }
 
+// @property   outputFeatureChannels @abstract   The number of feature channels per pixel in the output image.
+//
 // WithOutputFeatureChannels sets the outputFeatureChannels property and returns the receiver for chaining.
 func (x *CNNConvolutionDescriptor) WithOutputFeatureChannels(outputFeatureChannels uint) *CNNConvolutionDescriptor {
 	x.inner.SetOutputFeatureChannels(outputFeatureChannels)
 	return x
 }
 
+// @property   strideInPixelsX @abstract   The output stride (downsampling factor) in the x dimension. The default value is 1.
+//
 // WithStrideInPixelsX sets the strideInPixelsX property and returns the receiver for chaining.
 func (x *CNNConvolutionDescriptor) WithStrideInPixelsX(strideInPixelsX uint) *CNNConvolutionDescriptor {
 	x.inner.SetStrideInPixelsX(strideInPixelsX)
 	return x
 }
 
+// @property   strideInPixelsY @abstract   The output stride (downsampling factor) in the y dimension. The default value is 1.
+//
 // WithStrideInPixelsY sets the strideInPixelsY property and returns the receiver for chaining.
 func (x *CNNConvolutionDescriptor) WithStrideInPixelsY(strideInPixelsY uint) *CNNConvolutionDescriptor {
 	x.inner.SetStrideInPixelsY(strideInPixelsY)
 	return x
 }
 
+// @property   groups @abstract   Number of groups input and output channels are divided into. The default value is 1. Groups lets you reduce the parameterization. If groups is set to n, input is divided into n groups with inputFeatureChannels/n channels in each group. Similarly output is divided into n groups with outputFeatureChannels/n channels in each group. ith group in input is only connected to ith group in output so number of weights (parameters) needed is reduced by factor of n. Both inputFeatureChannels and outputFeatureChannels must be divisible by n and number of channels in each group must be multiple of 4.
+//
 // WithGroups sets the groups property and returns the receiver for chaining.
 func (x *CNNConvolutionDescriptor) WithGroups(groups uint) *CNNConvolutionDescriptor {
 	x.inner.SetGroups(groups)
 	return x
 }
 
+// @property      dilationRateX @discussion    dilationRateX property can be used to implement dilated convolution as described in https://arxiv.org/pdf/1511.07122v3.pdf to aggregate global information in dense prediction problems. Default value is 1. When set to value > 1, original kernel width, kW is dilated to kW_Dilated = (kW-1)*dilationRateX + 1 by inserting d-1 zeros between consecutive entries in each row of the original kernel. The kernel is centered based on kW_Dilated.
+//
 // WithDilationRateX sets the dilationRateX property and returns the receiver for chaining.
 func (x *CNNConvolutionDescriptor) WithDilationRateX(dilationRateX uint) *CNNConvolutionDescriptor {
 	x.inner.SetDilationRateX(dilationRateX)
 	return x
 }
 
+// @property      dilationRateY @discussion    dilationRateY property can be used to implement dilated convolution as described in https://arxiv.org/pdf/1511.07122v3.pdf to aggregate global information in dense prediction problems. Default value is 1. When set to value > 1, original kernel height, kH is dilated to kH_Dilated = (kH-1)*dilationRateY + 1 by inserting d-1 rows of zeros between consecutive row of the original kernel. The kernel is centered based on kH_Dilated.
+//
 // WithDilationRateY sets the dilationRateY property and returns the receiver for chaining.
 func (x *CNNConvolutionDescriptor) WithDilationRateY(dilationRateY uint) *CNNConvolutionDescriptor {
 	x.inner.SetDilationRateY(dilationRateY)
 	return x
 }
 
+// @property   fusedNeuronDescriptor @discussion This mathod can be used to add a neuron activation funtion of given type with associated scalar parameters A and B that are shared across all output channels. Neuron activation fucntion is applied to output of convolution. This is a per-pixel operation that is fused with convolution kernel itself for best performance. Note that this method can only be used to fuse neuron of kind for which parameters A and B are shared across all channels of convoution output. It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. For those kind of neuron activation functions, use appropriate setter functions. Default is descriptor with neuronType MPSCNNNeuronTypeNone. Note: in certain cases the neuron descriptor will be cached by the MPSNNGraph or the MPSCNNConvolution. If the neuron type changes after either is made, behavior is undefined.
+//
 // WithFusedNeuronDescriptor sets the fusedNeuronDescriptor property and returns the receiver for chaining.
 func (x *CNNConvolutionDescriptor) WithFusedNeuronDescriptor(fusedNeuronDescriptor *mpsneuralnetwork.MPSNNNeuronDescriptor) *CNNConvolutionDescriptor {
 	x.inner.SetFusedNeuronDescriptor(fusedNeuronDescriptor)
 	return x
 }
 
+// @abstract <NSSecureCoding> support
+//
 // EncodeWithCoder calls the underlying EncodeWithCoder.
 func (x *CNNConvolutionDescriptor) EncodeWithCoder(aCoder *foundation.NSCoder) {
 	x.inner.EncodeWithCoder(aCoder)
 }
 
+// @abstract   Adds batch normalization for inference, it copies all the float arrays provided, expecting outputFeatureChannels elements in each. @discussion This method will be used to pass in batch normalization parameters to the convolution during the init call. For inference we modify weights and bias going in convolution or Fully Connected layer to combine and optimize the layers. w: weights for a corresponding output feature channel b: bias for a corresponding output feature channel W: batch normalized weights for a corresponding output feature channel B: batch normalized bias for a corresponding output feature channel I = gamma / sqrt(variance + epsilon), J = beta - ( I * mean ) W = w * I B = b * I + J Every convolution has (OutputFeatureChannel * kernelWidth * kernelHeight * InputFeatureChannel) weights I, J are calculated, for every output feature channel separately to get the corresponding weights and bias Thus, I, J are calculated and then used for every (kernelWidth * kernelHeight * InputFeatureChannel) weights, and this is done OutputFeatureChannel number of times for each output channel. thus, internally, batch normalized weights are computed as: W[no][i][j][ni] = w[no][i][j][ni] * I[no] no: index into outputFeatureChannel i : index into kernel Height j : index into kernel Width ni: index into inputFeatureChannel One usually doesn't see a bias term and batch normalization together as batch normalization potentially cancels out the bias term after training, but in MPS if the user provides it, batch normalization will use the above formula to incorporate it, if user does not have bias terms then put a float array of zeroes in the convolution init for bias terms of each output feature channel. this comes from: https://arxiv.org/pdf/1502.03167v3.pdf Note: in certain cases the batch normalization parameters will be cached by the MPSNNGraph or the MPSCNNConvolution. If the batch normalization parameters change after either is made, behavior is undefined. @param      mean                        Pointer to an array of floats of mean for each output feature channel @param      variance                    Pointer to an array of floats of variance for each output feature channel @param      gamma                       Pointer to an array of floats of gamma for each output feature channel @param      beta                        Pointer to an array of floats of beta for each output feature channel @param      epsilon                     A small float value used to have numerical stability in the code
+//
 // SetBatchNormalizationParametersForInferenceWithMeanVarianceGammaBetaEpsilon calls the underlying SetBatchNormalizationParametersForInferenceWithMeanVarianceGammaBetaEpsilon.
 func (x *CNNConvolutionDescriptor) SetBatchNormalizationParametersForInferenceWithMeanVarianceGammaBetaEpsilon(mean *float32, variance *float32, gamma *float32, beta *float32, epsilon unsafe.Pointer) {
 	x.inner.SetBatchNormalizationParametersForInferenceWithMeanVarianceGammaBetaEpsilon(mean, variance, gamma, beta, epsilon)
 }
 
+// @abstract   Adds a neuron activation function to convolution descriptor. @discussion This mathod can be used to add a neuron activation funtion of given type with associated scalar parameters A and B that are shared across all output channels. Neuron activation fucntion is applied to output of convolution. This is a per-pixel operation that is fused with convolution kernel itself for best performance. Note that this method can only be used to fuse neuron of kind for which parameters A and B are shared across all channels of convoution output. It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. For those kind of neuron activation functions, use appropriate setter functions. Note: in certain cases, the neuron descriptor will be cached by the MPSNNGraph or the MPSCNNConvolution. If the neuron type changes after either is made, behavior is undefined. @param      neuronType      type of neuron activation function. For full list see MPSCNNNeuronType.h @param      parameterA      parameterA of neuron activation that is shared across all channels of convolution output. @param      parameterB      parameterB of neuron activation that is shared across all channels of convolution output.
+//
 // SetNeuronTypeParameterAParameterB calls the underlying SetNeuronTypeParameterAParameterB.
 func (x *CNNConvolutionDescriptor) SetNeuronTypeParameterAParameterB(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32) {
 	x.inner.SetNeuronTypeParameterAParameterB(neuronType, parameterA, parameterB)
 }
 
+// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB method
+//
 // NeuronType calls the underlying NeuronType.
 func (x *CNNConvolutionDescriptor) NeuronType() mpsneuralnetwork.MPSCNNNeuronType {
 	return x.inner.NeuronType()
 }
 
+// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB method
+//
 // NeuronParameterA calls the underlying NeuronParameterA.
 func (x *CNNConvolutionDescriptor) NeuronParameterA() float32 {
 	return x.inner.NeuronParameterA()
 }
 
+// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB method
+//
 // NeuronParameterB calls the underlying NeuronParameterB.
 func (x *CNNConvolutionDescriptor) NeuronParameterB() float32 {
 	return x.inner.NeuronParameterB()
 }
 
+// @abstract   Add per-channel neuron parameters A for PReLu neuron activation functions. @discussion This method sets the neuron to PReLU, zeros parameters A and B and sets the per-channel neuron parameters A to an array containing a unique value of A for each output feature channel. If the neuron function is f(v,a,b), it will apply OutputImage(x,y,i) = f( ConvolutionResult(x,y,i), A[i], B[i] ) where i in [0,outputFeatureChannels-1] See https://arxiv.org/pdf/1502.01852.pdf for details. All other neuron types, where parameter A and parameter B are shared across channels must be set using -setNeuronOfType:parameterA:parameterB: If batch normalization parameters are set, batch normalization will occur before neuron application i.e. output of convolution is first batch normalized followed by neuron activation. This function automatically sets neuronType to MPSCNNNeuronTypePReLU. Note: in certain cases the neuron descriptor will be cached by the MPSNNGraph or the MPSCNNConvolution. If the neuron type changes after either is made, behavior is undefined. @param      A       An array containing per-channel float values for neuron parameter A. Number of entries must be equal to outputFeatureChannels.
+//
 // SetNeuronToPReLUWithParametersA calls the underlying SetNeuronToPReLUWithParametersA.
 func (x *CNNConvolutionDescriptor) SetNeuronToPReLUWithParametersA(a *foundation.NSData) {
 	x.inner.SetNeuronToPReLUWithParametersA(a)
 }
 
+// @property   kernelWidth @abstract   The width of the filter window.  The default value is 3. Any positive non-zero value is valid, including even values. The position of the left edge of the filter window is given by offset.x - (kernelWidth>>1)
+//
 // KernelWidth calls the underlying KernelWidth.
 func (x *CNNConvolutionDescriptor) KernelWidth() uint {
 	return x.inner.KernelWidth()
@@ -144,6 +182,8 @@ func (x *CNNConvolutionDescriptor) SetKernelWidth(kernelWidth uint) {
 	x.inner.SetKernelWidth(kernelWidth)
 }
 
+// @property   kernelHeight @abstract   The height of the filter window.  The default value is 3. Any positive non-zero value is valid, including even values. The position of the top edge of the filter window is given by offset.y - (kernelHeight>>1)
+//
 // KernelHeight calls the underlying KernelHeight.
 func (x *CNNConvolutionDescriptor) KernelHeight() uint {
 	return x.inner.KernelHeight()
@@ -154,6 +194,8 @@ func (x *CNNConvolutionDescriptor) SetKernelHeight(kernelHeight uint) {
 	x.inner.SetKernelHeight(kernelHeight)
 }
 
+// @property   inputFeatureChannels @abstract   The number of feature channels per pixel in the input image.
+//
 // InputFeatureChannels calls the underlying InputFeatureChannels.
 func (x *CNNConvolutionDescriptor) InputFeatureChannels() uint {
 	return x.inner.InputFeatureChannels()
@@ -164,6 +206,8 @@ func (x *CNNConvolutionDescriptor) SetInputFeatureChannels(inputFeatureChannels 
 	x.inner.SetInputFeatureChannels(inputFeatureChannels)
 }
 
+// @property   outputFeatureChannels @abstract   The number of feature channels per pixel in the output image.
+//
 // OutputFeatureChannels calls the underlying OutputFeatureChannels.
 func (x *CNNConvolutionDescriptor) OutputFeatureChannels() uint {
 	return x.inner.OutputFeatureChannels()
@@ -174,6 +218,8 @@ func (x *CNNConvolutionDescriptor) SetOutputFeatureChannels(outputFeatureChannel
 	x.inner.SetOutputFeatureChannels(outputFeatureChannels)
 }
 
+// @property   strideInPixelsX @abstract   The output stride (downsampling factor) in the x dimension. The default value is 1.
+//
 // StrideInPixelsX calls the underlying StrideInPixelsX.
 func (x *CNNConvolutionDescriptor) StrideInPixelsX() uint {
 	return x.inner.StrideInPixelsX()
@@ -184,6 +230,8 @@ func (x *CNNConvolutionDescriptor) SetStrideInPixelsX(strideInPixelsX uint) {
 	x.inner.SetStrideInPixelsX(strideInPixelsX)
 }
 
+// @property   strideInPixelsY @abstract   The output stride (downsampling factor) in the y dimension. The default value is 1.
+//
 // StrideInPixelsY calls the underlying StrideInPixelsY.
 func (x *CNNConvolutionDescriptor) StrideInPixelsY() uint {
 	return x.inner.StrideInPixelsY()
@@ -194,6 +242,8 @@ func (x *CNNConvolutionDescriptor) SetStrideInPixelsY(strideInPixelsY uint) {
 	x.inner.SetStrideInPixelsY(strideInPixelsY)
 }
 
+// @property   groups @abstract   Number of groups input and output channels are divided into. The default value is 1. Groups lets you reduce the parameterization. If groups is set to n, input is divided into n groups with inputFeatureChannels/n channels in each group. Similarly output is divided into n groups with outputFeatureChannels/n channels in each group. ith group in input is only connected to ith group in output so number of weights (parameters) needed is reduced by factor of n. Both inputFeatureChannels and outputFeatureChannels must be divisible by n and number of channels in each group must be multiple of 4.
+//
 // Groups calls the underlying Groups.
 func (x *CNNConvolutionDescriptor) Groups() uint {
 	return x.inner.Groups()
@@ -204,6 +254,8 @@ func (x *CNNConvolutionDescriptor) SetGroups(groups uint) {
 	x.inner.SetGroups(groups)
 }
 
+// @property      dilationRateX @discussion    dilationRateX property can be used to implement dilated convolution as described in https://arxiv.org/pdf/1511.07122v3.pdf to aggregate global information in dense prediction problems. Default value is 1. When set to value > 1, original kernel width, kW is dilated to kW_Dilated = (kW-1)*dilationRateX + 1 by inserting d-1 zeros between consecutive entries in each row of the original kernel. The kernel is centered based on kW_Dilated.
+//
 // DilationRateX calls the underlying DilationRateX.
 func (x *CNNConvolutionDescriptor) DilationRateX() uint {
 	return x.inner.DilationRateX()
@@ -214,6 +266,8 @@ func (x *CNNConvolutionDescriptor) SetDilationRateX(dilationRateX uint) {
 	x.inner.SetDilationRateX(dilationRateX)
 }
 
+// @property      dilationRateY @discussion    dilationRateY property can be used to implement dilated convolution as described in https://arxiv.org/pdf/1511.07122v3.pdf to aggregate global information in dense prediction problems. Default value is 1. When set to value > 1, original kernel height, kH is dilated to kH_Dilated = (kH-1)*dilationRateY + 1 by inserting d-1 rows of zeros between consecutive row of the original kernel. The kernel is centered based on kH_Dilated.
+//
 // DilationRateY calls the underlying DilationRateY.
 func (x *CNNConvolutionDescriptor) DilationRateY() uint {
 	return x.inner.DilationRateY()
@@ -224,21 +278,29 @@ func (x *CNNConvolutionDescriptor) SetDilationRateY(dilationRateY uint) {
 	x.inner.SetDilationRateY(dilationRateY)
 }
 
+// @property   fusedNeuronDescriptor @discussion This mathod can be used to add a neuron activation funtion of given type with associated scalar parameters A and B that are shared across all output channels. Neuron activation fucntion is applied to output of convolution. This is a per-pixel operation that is fused with convolution kernel itself for best performance. Note that this method can only be used to fuse neuron of kind for which parameters A and B are shared across all channels of convoution output. It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. For those kind of neuron activation functions, use appropriate setter functions. Default is descriptor with neuronType MPSCNNNeuronTypeNone. Note: in certain cases the neuron descriptor will be cached by the MPSNNGraph or the MPSCNNConvolution. If the neuron type changes after either is made, behavior is undefined.
+//
 // FusedNeuronDescriptor calls the underlying FusedNeuronDescriptor.
 func (x *CNNConvolutionDescriptor) FusedNeuronDescriptor() *mpsneuralnetwork.MPSNNNeuronDescriptor {
 	return x.inner.FusedNeuronDescriptor()
 }
 
+// @property   fusedNeuronDescriptor @discussion This mathod can be used to add a neuron activation funtion of given type with associated scalar parameters A and B that are shared across all output channels. Neuron activation fucntion is applied to output of convolution. This is a per-pixel operation that is fused with convolution kernel itself for best performance. Note that this method can only be used to fuse neuron of kind for which parameters A and B are shared across all channels of convoution output. It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. For those kind of neuron activation functions, use appropriate setter functions. Default is descriptor with neuronType MPSCNNNeuronTypeNone. Note: in certain cases the neuron descriptor will be cached by the MPSNNGraph or the MPSCNNConvolution. If the neuron type changes after either is made, behavior is undefined.
+//
 // SetFusedNeuronDescriptor calls the underlying SetFusedNeuronDescriptor.
 func (x *CNNConvolutionDescriptor) SetFusedNeuronDescriptor(fusedNeuronDescriptor *mpsneuralnetwork.MPSNNNeuronDescriptor) {
 	x.inner.SetFusedNeuronDescriptor(fusedNeuronDescriptor)
 }
 
+// @property   neuron @abstract   MPSCNNNeuron filter to be applied as part of convolution. This is applied after BatchNormalization in the end. Default is nil. This is deprecated. You dont need to create MPSCNNNeuron object to fuse with convolution. Use neuron properties in this descriptor.
+//
 // Neuron calls the underlying Neuron.
 func (x *CNNConvolutionDescriptor) Neuron() unsafe.Pointer {
 	return x.inner.Neuron()
 }
 
+// @property   neuron @abstract   MPSCNNNeuron filter to be applied as part of convolution. This is applied after BatchNormalization in the end. Default is nil. This is deprecated. You dont need to create MPSCNNNeuron object to fuse with convolution. Use neuron properties in this descriptor.
+//
 // SetNeuron calls the underlying SetNeuron.
 func (x *CNNConvolutionDescriptor) SetNeuron(neuron unsafe.Pointer) {
 	x.inner.SetNeuron(neuron)

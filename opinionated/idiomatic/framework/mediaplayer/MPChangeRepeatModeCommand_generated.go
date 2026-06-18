@@ -35,12 +35,16 @@ func NewChangeRepeatModeCommand() *ChangeRepeatModeCommand {
 	return &ChangeRepeatModeCommand{inner: raw.MPChangeRepeatModeCommandFromID(_id)}
 }
 
+// The app's current repeat mode.
+//
 // WithCurrentRepeatType sets the currentRepeatType property and returns the receiver for chaining.
 func (x *ChangeRepeatModeCommand) WithCurrentRepeatType(currentRepeatType MPRepeatType) *ChangeRepeatModeCommand {
 	x.inner.SetCurrentRepeatType(raw.MPRepeatType(currentRepeatType))
 	return x
 }
 
+// Whether a button (for example) should be enabled and tappable for this particular command.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *ChangeRepeatModeCommand) WithEnabled(enabled bool) *ChangeRepeatModeCommand {
 	x.inner.MPRemoteCommand.SetEnabled(enabled)

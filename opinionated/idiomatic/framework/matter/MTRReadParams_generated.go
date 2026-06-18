@@ -42,12 +42,16 @@ func (x *MTRReadParams) WithFilterByFabric(filterByFabric bool) *MTRReadParams {
 	return x
 }
 
+// Sets a filter for which events will be reported in the read/subscribe interaction. If nil (the default value), all of the queued events will be reported from lowest to highest event number. If not nil, queued events with an event number smaller than minEventNumber will not be reported.
+//
 // WithMinEventNumber sets the minEventNumber property and returns the receiver for chaining.
 func (x *MTRReadParams) WithMinEventNumber(minEventNumber *foundation.NSNumber) *MTRReadParams {
 	x.inner.SetMinEventNumber(minEventNumber)
 	return x
 }
 
+// Controls whether attributes without known schema (e.g. vendor-specific attributes) should be assumed to be reportable normally via subscriptions. The default is YES. This setting is only relevant to some consumers of MTRReadParams.  One of those consumers is readAttributeWithEndpointID:clusterID:attributeID:params: on MTRDevice.
+//
 // WithAssumeUnknownAttributesReportable sets the assumeUnknownAttributesReportable property and returns the receiver for chaining.
 func (x *MTRReadParams) WithAssumeUnknownAttributesReportable(assumeUnknownAttributesReportable bool) *MTRReadParams {
 	x.inner.SetAssumeUnknownAttributesReportable(assumeUnknownAttributesReportable)
@@ -70,6 +74,8 @@ func (x *MTRReadParams) SetFilterByFabric(filterByFabric bool) {
 	x.inner.SetFilterByFabric(filterByFabric)
 }
 
+// Sets a filter for which events will be reported in the read/subscribe interaction. If nil (the default value), all of the queued events will be reported from lowest to highest event number. If not nil, queued events with an event number smaller than minEventNumber will not be reported.
+//
 // MinEventNumber calls the underlying MinEventNumber.
 func (x *MTRReadParams) MinEventNumber() *foundation.NSNumber {
 	return x.inner.MinEventNumber()
@@ -80,6 +86,8 @@ func (x *MTRReadParams) SetMinEventNumber(minEventNumber *foundation.NSNumber) {
 	x.inner.SetMinEventNumber(minEventNumber)
 }
 
+// Controls whether attributes without known schema (e.g. vendor-specific attributes) should be assumed to be reportable normally via subscriptions. The default is YES. This setting is only relevant to some consumers of MTRReadParams.  One of those consumers is readAttributeWithEndpointID:clusterID:attributeID:params: on MTRDevice.
+//
 // ShouldAssumeUnknownAttributesReportable calls the underlying ShouldAssumeUnknownAttributesReportable.
 func (x *MTRReadParams) ShouldAssumeUnknownAttributesReportable() bool {
 	return x.inner.ShouldAssumeUnknownAttributesReportable()

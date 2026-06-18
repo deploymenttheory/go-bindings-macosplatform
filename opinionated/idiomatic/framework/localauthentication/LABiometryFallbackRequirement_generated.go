@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @brief Builds authentication requirements that can be used as fallbacks for  biometric authentication
+//
 // BiometryFallbackRequirement wraps [raw.LABiometryFallbackRequirement] with a fluent Go API.
 type BiometryFallbackRequirement struct {
 	inner *raw.LABiometryFallbackRequirement

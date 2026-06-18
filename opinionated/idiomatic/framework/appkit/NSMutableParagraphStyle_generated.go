@@ -321,8 +321,17 @@ func (x *MutableParagraphStyle) SetTighteningFactorForTruncation(tighteningFacto
 }
 
 // SetTextBlocks calls the underlying SetTextBlocks.
-func (x *MutableParagraphStyle) SetTextBlocks(textBlocks *foundation.NSArray[*raw.NSTextBlock]) {
-	x.inner.SetTextBlocks(textBlocks)
+func (x *MutableParagraphStyle) SetTextBlocks(textBlocks ...TextBlockProvider) {
+	_ptrs := make([]objc.ID, len(textBlocks))
+	for _i, _v := range textBlocks {
+		_ptrs[_i] = _v.asTextBlock().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NSTextBlock]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NSTextBlock](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetTextBlocks(_arg0)
 }
 
 // SetHeaderLevel calls the underlying SetHeaderLevel.
@@ -382,7 +391,7 @@ type MutableParagraphStyleable interface {
 	SetTextLists(textLists *foundation.NSArray[*raw.NSTextList])
 	SetAlignment(alignment NSTextAlignment)
 	SetTighteningFactorForTruncation(tighteningFactorForTruncation float32)
-	SetTextBlocks(textBlocks *foundation.NSArray[*raw.NSTextBlock])
+	SetTextBlocks(textBlocks ...TextBlockProvider)
 	SetHeaderLevel(headerLevel int)
 }
 

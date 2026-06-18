@@ -36,6 +36,8 @@ func NewAudiogramSample() *AudiogramSample {
 	return &AudiogramSample{inner: raw.HKAudiogramSampleFromID(_id)}
 }
 
+// @property  sensitivityPoints @abstract  The hearing sensitivity readings associated with a hearing test.
+//
 // SensitivityPoints returns the collection as a Go slice.
 func (x *AudiogramSample) SensitivityPoints() []*AudiogramSensitivityPoint {
 	arr := x.inner.SensitivityPoints()

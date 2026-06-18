@@ -36,6 +36,8 @@ func NewRandomNodeDefinition() *RandomNodeDefinition {
 	return &RandomNodeDefinition{inner: raw.PHASERandomNodeDefinitionFromID(_id)}
 }
 
+// @method initWithIdentifier @abstract Create a random node definition @param identifier An optional custom identifier to give to this object @return A new PHASERandomNodeDefinition object
+//
 // NewRandomNodeDefinitionWithIdentifier creates a new [RandomNodeDefinition].
 func NewRandomNodeDefinitionWithIdentifier(identifier string) *RandomNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASERandomNodeDefinition")), objc.RegisterName("alloc"))
@@ -43,12 +45,16 @@ func NewRandomNodeDefinitionWithIdentifier(identifier string) *RandomNodeDefinit
 	return &RandomNodeDefinition{inner: raw.PHASERandomNodeDefinitionFromID(_id)}
 }
 
+// @property uniqueSelectionQueueLength @abstract Subtrees will not be repeated until after this random node is activated uniqueSelectionQueueLength number of times.
+//
 // WithUniqueSelectionQueueLength sets the uniqueSelectionQueueLength property and returns the receiver for chaining.
 func (x *RandomNodeDefinition) WithUniqueSelectionQueueLength(uniqueSelectionQueueLength int) *RandomNodeDefinition {
 	x.inner.SetUniqueSelectionQueueLength(uniqueSelectionQueueLength)
 	return x
 }
 
+// @method addSubtree @abstract Add a subtree to a random node @param subtree A PHASESoundEventNodeDefinition that will be a child node of this random node @param weight The probability weight of this subtree.  Higher numbers compared to other subtree weights will increase the likelihood of being chosen. This value must be greater than or equal to 1, and is clamped otherwise.
+//
 // AddSubtreeWeight calls the underlying AddSubtreeWeight.
 func (x *RandomNodeDefinition) AddSubtreeWeight(subtree *raw.PHASESoundEventNodeDefinition, weight *foundation.NSNumber) {
 	x.inner.AddSubtreeWeight(subtree, weight)

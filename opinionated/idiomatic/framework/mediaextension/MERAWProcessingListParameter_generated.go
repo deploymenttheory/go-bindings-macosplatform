@@ -65,28 +65,38 @@ func NewRAWProcessingListParameterWithNameKeyDescriptionListInitialValueNeutralV
 	return &RAWProcessingListParameter{inner: raw.MERAWProcessingListParameterFromID(_id)}
 }
 
+// @property		currentValue @abstract		Get or set the current value for this parameter. @discussion		The value is the listElementID value of the selected MERAWProcessingListElementParameter.   This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
+//
 // WithCurrentValue sets the currentValue property and returns the receiver for chaining.
 func (x *RAWProcessingListParameter) WithCurrentValue(currentValue int) *RAWProcessingListParameter {
 	x.inner.SetCurrentValue(currentValue)
 	return x
 }
 
+// @property		enabled @abstract		Indicates whether the parameter is enabled or disabled by the extension. @discussion	This parameter can only be modified by the extension.  From the application-facing interface, VTRAWProcessingSession, this is a read-only value which indicates whether the parameter should be greyed out and disabled in any UI being generated.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *RAWProcessingListParameter) WithEnabled(enabled bool) *RAWProcessingListParameter {
 	x.inner.MERAWProcessingParameter.SetEnabled(enabled)
 	return x
 }
 
+// @property		hasNeutralValue @abstract		Return value indicates whether the MERAWProcessingListParameter has an optional declared Neutral value. @discussion	If the return value is YES and outNeutralValue is not nil, the value held by outNeutralValue will be set to the neutral value. If the return value is NO and outNeutralValue is not nil, the value held by outNeutralValue will be set to 0.
+//
 // HasNeutralValue calls the underlying HasNeutralValue.
 func (x *RAWProcessingListParameter) HasNeutralValue(outNeutralValue *int64) bool {
 	return x.inner.HasNeutralValue(outNeutralValue)
 }
 
+// @property		hasCameraValue @abstract		Return value indicates whether the MERAWProcessingListParameter has an optional declared Camera value. @discussion	If the return value is YES and outCameraValue is not nil, the value held by outCameraValue will be set to the camera value. If the return value is NO and outCameraValue is not nil, the value held by outCameraValue will be set to 0.
+//
 // HasCameraValue calls the underlying HasCameraValue.
 func (x *RAWProcessingListParameter) HasCameraValue(outCameraValue *int64) bool {
 	return x.inner.HasCameraValue(outCameraValue)
 }
 
+// @property		listElements @abstract		The ordered array of MERAWProcessingListElementParameter which make up this list.
+//
 // ListElements returns the collection as a Go slice.
 func (x *RAWProcessingListParameter) ListElements() []*RAWProcessingListElementParameter {
 	arr := x.inner.ListElements()
@@ -98,6 +108,8 @@ func (x *RAWProcessingListParameter) ListElements() []*RAWProcessingListElementP
 	})
 }
 
+// @property		currentValue @abstract		Get or set the current value for this parameter. @discussion		The value is the listElementID value of the selected MERAWProcessingListElementParameter.   This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
+//
 // CurrentValue calls the underlying CurrentValue.
 func (x *RAWProcessingListParameter) CurrentValue() int {
 	return x.inner.CurrentValue()

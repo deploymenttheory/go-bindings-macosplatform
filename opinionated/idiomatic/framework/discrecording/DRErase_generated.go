@@ -31,6 +31,8 @@ func EraseFromID(id objc.ID) *Erase {
 	return &Erase{inner: raw.DREraseFromID(id)}
 }
 
+// @method			initWithDevice: @abstract		Initializes an erase object. @discussion		An erase object created with this method is ready to erase media. @param 			device	Device to use for the erase. @result  		A DRErase object.
+//
 // NewEraseWithDevice creates a new [Erase].
 func NewEraseWithDevice(device *raw.DRDevice) *Erase {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRErase")), objc.RegisterName("alloc"))
@@ -38,26 +40,36 @@ func NewEraseWithDevice(device *raw.DRDevice) *Erase {
 	return &Erase{inner: raw.DREraseFromID(_id)}
 }
 
+// @method			start @abstract		Begin the process of erasing media. @discussion		This method only kicks off the erase. Once the erasure starts, control returns to the caller. The caller can monitor the progress of the erase by listening for a notification or by polling @link //apple_ref/occ/instm/DRErase/status status @/link.
+//
 // Start calls the underlying Start.
 func (x *Erase) Start() {
 	x.inner.Start()
 }
 
+// @method			status @abstract		Returns a dictionary containing the status of the erase. @discussion		The same dictionary is returned through the @link //apple_ref/occ/data/DREraseStatusChangedNotification DREraseStatusChangedNotification @/link notification. @result			An NSDictionary containing the status of the erase.
+//
 // Status calls the underlying Status.
 func (x *Erase) Status() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.Status()
 }
 
+// @method 		properties @abstract		Returns the properties dictionary of the erase. @result  		An NSDictionary containing the properties of the erase.
+//
 // Properties calls the underlying Properties.
 func (x *Erase) Properties() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.Properties()
 }
 
+// @method 		setProperties: @abstract		Sets the properties dictionary of the erase @param 			properties	NSDictionary of the properties to set.
+//
 // SetProperties calls the underlying SetProperties.
 func (x *Erase) SetProperties(properties *foundation.NSDictionary[objc.ID, objc.ID]) {
 	x.inner.SetProperties(properties)
 }
 
+// @method 		device @abstract		Returns the device being used for the erase. @result  		The DRDevice the erase will use.
+//
 // Device calls the underlying Device.
 func (x *Erase) Device() *Device {
 	_r := x.inner.Device()
@@ -67,6 +79,8 @@ func (x *Erase) Device() *Device {
 	return &Device{inner: _r}
 }
 
+// @method			eraseType @abstract		Returns the type of erase to be performed. @result			An NSString
+//
 // EraseType calls the underlying EraseType.
 func (x *Erase) EraseType() string {
 	_r := x.inner.EraseType()
@@ -76,6 +90,8 @@ func (x *Erase) EraseType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @method			setEraseType: @abstract		Sets the type of erase to perform. @param			type	The type of erase.
+//
 // SetEraseType calls the underlying SetEraseType.
 func (x *Erase) SetEraseType(type_ string) {
 	x.inner.SetEraseType(foundation.NSStringStringWithUTF8String(type_))

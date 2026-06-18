@@ -38,16 +38,22 @@ func NewCapturePhoto() *CapturePhoto {
 	return &CapturePhoto{inner: raw.AVCapturePhotoFromID(_id)}
 }
 
+// @property timestamp @abstract The time at which this image was captured, synchronized to the synchronizationClock of the AVCaptureSession @discussion The timestamp property indicates the time the image was captured, and is analogous to CMSampleBufferGetPresentationTimeStamp(). If an error was provided in the -captureOutput:didFinishingProcessingPhoto:error: callback, timestamp returns kCMTimeInvalid.
+//
 // Timestamp calls the underlying Timestamp.
 func (x *CapturePhoto) Timestamp() coremedia.CMTime {
 	return x.inner.Timestamp()
 }
 
+// @property pixelBuffer @abstract For uncompressed or RAW captures, this property offers access to the pixel data. @discussion Uncompressed captures, such as '420f' or 'BGRA', Bayer RAW captures, such as 'bgg4', or Apple ProRAW captures, such as 'l64r', present pixel data as a CVPixelBuffer. See AVCapturePhotoOutput's -appleProRAWEnabled for a discussion on the differences between Bayer RAW and Apple ProRAW. This property is analogous to CMSampleBufferGetImageBuffer(). The pixel buffer contains only the minimal attachments required for correct display. Compressed captures, such as 'jpeg', return nil.
+//
 // PixelBuffer calls the underlying PixelBuffer.
 func (x *CapturePhoto) PixelBuffer() unsafe.Pointer {
 	return x.inner.PixelBuffer()
 }
 
+// @property resolvedSettings @abstract The AVCaptureResolvedPhotoSettings associated with all photo results for a given -[AVCapturePhotoOutput capturePhotoWithSettings:delegate:] request. @discussion Even in the event of an error, the resolved settings are always non nil.
+//
 // ResolvedSettings calls the underlying ResolvedSettings.
 func (x *CapturePhoto) ResolvedSettings() *CaptureResolvedPhotoSettings {
 	_r := x.inner.ResolvedSettings()
@@ -57,31 +63,43 @@ func (x *CapturePhoto) ResolvedSettings() *CaptureResolvedPhotoSettings {
 	return &CaptureResolvedPhotoSettings{inner: _r}
 }
 
+// @property photoCount @abstract This photo's index (1-based) in the total expected photo count. @discussion The resolvedSettings.expectedPhotoCount property indicates the total number of images that will be returned for a given capture request. This property indicates this photo's index (1-based). When you receive a -captureOutput:didFinishProcessingPhoto:error: callback with a photo whose photoCount matches resolvedSettings.expectedPhotoCount, you know you've received the last one for the given capture request.
+//
 // PhotoCount calls the underlying PhotoCount.
 func (x *CapturePhoto) PhotoCount() int {
 	return x.inner.PhotoCount()
 }
 
+// @property constantColorConfidenceMap @abstract Returns a pixel buffer with the same aspect ratio as the constant color photo, where each pixel value (unsigned 8-bit integer) indicates how fully the constant color effect has been achieved in the corresponding region of the constant color photo -- 255 means full confidence, 0 means zero confidence. @discussion NULL is returned for any non constant color photos.
+//
 // ConstantColorConfidenceMap calls the underlying ConstantColorConfidenceMap.
 func (x *CapturePhoto) ConstantColorConfidenceMap() unsafe.Pointer {
 	return x.inner.ConstantColorConfidenceMap()
 }
 
+// @property constantColorCenterWeightedMeanConfidenceLevel @abstract Returns a score summarizing the overall confidence level of a constant color photo -- 1.0 means full confidence, 0.0 means zero confidence. @discussion Default is 0.0. In most use cases (document scanning for example), the central region of the photo is considered more important than the peripherals, therefore the confidence level of the central pixels are weighted more heavily than pixels on the edges of the photo. Use constantColorConfidenceMap for more use case specific analyses of the confidence level.
+//
 // ConstantColorCenterWeightedMeanConfidenceLevel calls the underlying ConstantColorCenterWeightedMeanConfidenceLevel.
 func (x *CapturePhoto) ConstantColorCenterWeightedMeanConfidenceLevel() float32 {
 	return x.inner.ConstantColorCenterWeightedMeanConfidenceLevel()
 }
 
+// @property constantColorFallbackPhoto @abstract Indicates whether this photo is a fallback photo for a constant color capture.
+//
 // IsConstantColorFallbackPhoto calls the underlying IsConstantColorFallbackPhoto.
 func (x *CapturePhoto) IsConstantColorFallbackPhoto() bool {
 	return x.inner.IsConstantColorFallbackPhoto()
 }
 
+// @method fileDataRepresentation @abstract Flattens the AVCapturePhoto to an NSData using the file container format (processedFileType or rawFileType) specified in the AVCapturePhotoSettings (e.g. JFIF, HEIF, DNG, DICOM). @result An NSData containing bits in the file container's format, or nil if the flattening process fails.
+//
 // FileDataRepresentation calls the underlying FileDataRepresentation.
 func (x *CapturePhoto) FileDataRepresentation() *foundation.NSData {
 	return x.inner.FileDataRepresentation()
 }
 
+// @method CGImageRepresentation @abstract Utility method that converts the AVCapturePhoto's primary photo to a CGImage. @result A CGImageRef, or nil if the conversion process fails. @discussion Each time you access this method, AVCapturePhoto generates a new CGImageRef. When backed by a compressed container (such as HEIC), the CGImageRepresentation is decoded lazily as needed. When backed by an uncompressed format such as BGRA, it is copied into a separate backing buffer whose lifetime is not tied to that of the AVCapturePhoto. For a 12 megapixel image, a BGRA CGImage represents ~48 megabytes per call. If you only intend to use the CGImage for on-screen rendering, use the previewCGImageRepresentation instead. Note that the physical rotation of the CGImageRef matches that of the main image. Exif orientation has not been applied. If you wish to apply rotation when working with UIImage, you can do so by querying the photo's metadata[kCGImagePropertyOrientation] value, and passing it as the orientation parameter to +[UIImage imageWithCGImage:scale:orientation:]. RAW images always return a CGImageRepresentation of nil. If you wish to make a CGImageRef from a RAW image, use CIRAWFilter in the CoreImage framework.
+//
 // CGImageRepresentation calls the underlying CGImageRepresentation.
 func (x *CapturePhoto) CGImageRepresentation() unsafe.Pointer {
 	return x.inner.CGImageRepresentation()

@@ -34,6 +34,8 @@ func ImageConversionFromID(id objc.ID) *ImageConversion {
 	return &ImageConversion{inner: raw.MPSImageConversionFromID(id)}
 }
 
+// @abstract   Create a converter that can convert texture colorspace, alpha and texture format @discussion Create a converter that can convert texture colorspace, alpha and MTLPixelFormat. Optimized cases exist for NULL color space converter and no alpha conversion. @param      device              The device the filter will run on @param      srcAlpha            The alpha encoding for the source texture @param      destAlpha           The alpha encoding for the destination texture @param      backgroundColor     An array of CGFloats giving the background color to use when flattening an image. The color is in the source colorspace.  The length of the array is the number of color channels in the src colorspace. If NULL, use {0}. @param      conversionInfo      The colorspace conversion to use. May be NULL, indicating no color space conversions need to be done. @result     An initialized MPSImageConversion object.
+//
 // NewImageConversionWithDeviceSrcAlphaDestAlphaBackgroundColorConversionInfo creates a new [ImageConversion].
 func NewImageConversionWithDeviceSrcAlphaDestAlphaBackgroundColorConversionInfo(device metal.MTLDevice, srcAlpha mpsimage.MPSAlphaType, destAlpha mpsimage.MPSAlphaType, backgroundColor *float64, conversionInfo unsafe.Pointer) *ImageConversion {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageConversion")), objc.RegisterName("alloc"))
@@ -41,41 +43,55 @@ func NewImageConversionWithDeviceSrcAlphaDestAlphaBackgroundColorConversionInfo(
 	return &ImageConversion{inner: raw.MPSImageConversionFromID(_id)}
 }
 
+// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *ImageConversion) WithOffset(offset mpscore.MPSOffset) *ImageConversion {
 	x.inner.MPSUnaryImageKernel.SetOffset(offset)
 	return x
 }
 
+// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+//
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImageConversion) WithClipRect(clipRect metal.MTLRegion) *ImageConversion {
 	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
 	return x
 }
 
+// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
+//
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *ImageConversion) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageConversion {
 	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *ImageConversion) WithOptions(options mpscore.MPSKernelOptions) *ImageConversion {
 	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ImageConversion) WithLabel(label string) *ImageConversion {
 	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   sourceAlpha @abstract   Premultiplication description for the source texture @discussion Most colorspace conversion operations can not work directly on premultiplied data. Use this property to tag premultiplied data so that the source texture can be unpremultiplied prior to application of these transforms. Default: MPSPixelAlpha_AlphaIsOne
+//
 // SourceAlpha calls the underlying SourceAlpha.
 func (x *ImageConversion) SourceAlpha() mpsimage.MPSAlphaType {
 	return x.inner.SourceAlpha()
 }
 
+// @property   destinationAlpha @abstract   Premultiplication description for the destinationAlpha texture @discussion Colorspace conversion operations produce non-premultiplied data. Use this property to tag cases where premultiplied results are required. If MPSPixelAlpha_AlphaIsOne is used, the alpha channel will be set to 1. Default: MPSPixelAlpha_AlphaIsOne
+//
 // DestinationAlpha calls the underlying DestinationAlpha.
 func (x *ImageConversion) DestinationAlpha() mpsimage.MPSAlphaType {
 	return x.inner.DestinationAlpha()

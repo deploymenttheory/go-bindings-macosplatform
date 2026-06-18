@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A tile definition contains the information needed to represent a single type of tile within a tile map.
+//
 // TileDefinition wraps [raw.SKTileDefinition] with a fluent Go API.
 type TileDefinition struct {
 	inner *raw.SKTileDefinition
@@ -33,6 +35,8 @@ func TileDefinitionFromID(id objc.ID) *TileDefinition {
 	return &TileDefinition{inner: raw.SKTileDefinitionFromID(id)}
 }
 
+// Initilize a tile definition with an SKTexture, and set its size to the SKTexture's width/height. @param texture the texture to reference for size and content
+//
 // NewTileDefinitionWithTexture creates a new [TileDefinition].
 func NewTileDefinitionWithTexture(texture *raw.SKTexture) *TileDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKTileDefinition")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewTileDefinitionWithTexture(texture *raw.SKTexture) *TileDefinition {
 	return &TileDefinition{inner: raw.SKTileDefinitionFromID(_id)}
 }
 
+// Initilize a tile definition with an SKTexture and the specified size. @param texture the texture to reference for content @param size the size of the tile in points
+//
 // NewTileDefinitionWithTextureSize creates a new [TileDefinition].
 func NewTileDefinitionWithTextureSize(texture *raw.SKTexture, size corefoundation.CGSize) *TileDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKTileDefinition")), objc.RegisterName("alloc"))
@@ -47,6 +53,8 @@ func NewTileDefinitionWithTextureSize(texture *raw.SKTexture, size corefoundatio
 	return &TileDefinition{inner: raw.SKTileDefinitionFromID(_id)}
 }
 
+// Initilize a tile definition with an SKTexture and the specified size. @param texture the texture to reference for content @param normalTexture the normal texture to use for generating normals for lighting @param size the size of the tile in points
+//
 // NewTileDefinitionWithTextureNormalTextureSize creates a new [TileDefinition].
 func NewTileDefinitionWithTextureNormalTextureSize(texture *raw.SKTexture, normalTexture *raw.SKTexture, size corefoundation.CGSize) *TileDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKTileDefinition")), objc.RegisterName("alloc"))
@@ -54,6 +62,8 @@ func NewTileDefinitionWithTextureNormalTextureSize(texture *raw.SKTexture, norma
 	return &TileDefinition{inner: raw.SKTileDefinitionFromID(_id)}
 }
 
+// Initilize an animated tile definition with an array of SKTextures, the specified size, and the length of time each texture should be displayed for in the animation. @param textures the textures to reference for animated content @param size the size of the tile in points @param timePerFrame the duration, in seconds, that each texture in the textures array is displayed before switching to the next texture in the sequence
+//
 // NewTileDefinitionWithTexturesSizeTimePerFrame creates a new [TileDefinition].
 func NewTileDefinitionWithTexturesSizeTimePerFrame(textures *foundation.NSArray[*raw.SKTexture], size corefoundation.CGSize, timePerFrame float64) *TileDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKTileDefinition")), objc.RegisterName("alloc"))
@@ -61,6 +71,8 @@ func NewTileDefinitionWithTexturesSizeTimePerFrame(textures *foundation.NSArray[
 	return &TileDefinition{inner: raw.SKTileDefinitionFromID(_id)}
 }
 
+// Initilize an animated tile definition with an array of SKTextures, the specified size, and the length of time each texture should be displayed for in the animation. @param textures the textures to reference for animated content @param normalTextures the normal textures to use for generating normals for lighting @param size the size of the tile in points @param timePerFrame the duration, in seconds, that each texture in the textures array is displayed before switching to the next texture in the sequence
+//
 // NewTileDefinitionWithTexturesNormalTexturesSizeTimePerFrame creates a new [TileDefinition].
 func NewTileDefinitionWithTexturesNormalTexturesSizeTimePerFrame(textures *foundation.NSArray[*raw.SKTexture], normalTextures *foundation.NSArray[*raw.SKTexture], size corefoundation.CGSize, timePerFrame float64) *TileDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKTileDefinition")), objc.RegisterName("alloc"))
@@ -68,6 +80,8 @@ func NewTileDefinitionWithTexturesNormalTexturesSizeTimePerFrame(textures *found
 	return &TileDefinition{inner: raw.SKTileDefinitionFromID(_id)}
 }
 
+// The textures used to draw the tile. Non-animated tiles use only one texture. When more than one texture is present, the tile will swap through them in sequence, showing each for the duration specified in the timePerFrame property. After displaying the last texture in the array, the sequence is repeated from the first texture.
+//
 // WithTextures sets the collection, converting the Go slice to an NSArray.
 func (x *TileDefinition) WithTextures(items ...TextureProvider) *TileDefinition {
 	if len(items) == 0 {
@@ -86,6 +100,8 @@ func (x *TileDefinition) WithTextures(items ...TextureProvider) *TileDefinition 
 	return x
 }
 
+// The textures to use for generating normals that lights use to light this tile. These will only be used if the tile is lit by at least one light. Each normal texture corresponds to a texture in the textures property.
+//
 // WithNormalTextures sets the collection, converting the Go slice to an NSArray.
 func (x *TileDefinition) WithNormalTextures(items ...TextureProvider) *TileDefinition {
 	if len(items) == 0 {
@@ -104,54 +120,72 @@ func (x *TileDefinition) WithNormalTextures(items ...TextureProvider) *TileDefin
 	return x
 }
 
+// An optional dictionary that can be used to store your own data for each tile definition. Defaults to nil.
+//
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *TileDefinition) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *TileDefinition {
 	x.inner.SetUserData(userData)
 	return x
 }
 
+// Client-assignable name for the tile definition. Defaults to nil.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *TileDefinition) WithName(name string) *TileDefinition {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// The size of the tile in points.
+//
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *TileDefinition) WithSize(size corefoundation.CGSize) *TileDefinition {
 	x.inner.SetSize(size)
 	return x
 }
 
+// The duration, in seconds, that each texture in the textures array is displayed before switching to the next texture in the sequence. Only used when there is more than one texture available.
+//
 // WithTimePerFrame sets the timePerFrame property and returns the receiver for chaining.
 func (x *TileDefinition) WithTimePerFrame(timePerFrame float64) *TileDefinition {
 	x.inner.SetTimePerFrame(timePerFrame)
 	return x
 }
 
+// This value is used to determine how likely this tile definition is to be chosen for placement when a SKTileGroupRule has mulitple tile definitions assigned to it. A higher value relative to the other definitions assigned to the rule make it more likely for this definition to be selected; lower values make it less likely. Defaults to 1. When set to 0, the definition will never be chosen as long as there is at least one other definition with a placementWeight above 0.
+//
 // WithPlacementWeight sets the placementWeight property and returns the receiver for chaining.
 func (x *TileDefinition) WithPlacementWeight(placementWeight uint) *TileDefinition {
 	x.inner.SetPlacementWeight(placementWeight)
 	return x
 }
 
+// The rotation of the tile definition's images can be set in 90 degree increments. Defaults to SKTileDefinitionRotation0.
+//
 // WithRotation sets the rotation property and returns the receiver for chaining.
 func (x *TileDefinition) WithRotation(rotation SKTileDefinitionRotation) *TileDefinition {
 	x.inner.SetRotation(raw.SKTileDefinitionRotation(rotation))
 	return x
 }
 
+// When set to YES, the tile definition's images will be flipped vertically (i.e., the top of the image becomes the bottom). Defaults to NO.
+//
 // WithFlipVertically sets the flipVertically property and returns the receiver for chaining.
 func (x *TileDefinition) WithFlipVertically(flipVertically bool) *TileDefinition {
 	x.inner.SetFlipVertically(flipVertically)
 	return x
 }
 
+// When set to YES, the tile definition's images will be flipped horizontally (i.e., the left of the image becomes the right). Defaults to NO.
+//
 // WithFlipHorizontally sets the flipHorizontally property and returns the receiver for chaining.
 func (x *TileDefinition) WithFlipHorizontally(flipHorizontally bool) *TileDefinition {
 	x.inner.SetFlipHorizontally(flipHorizontally)
 	return x
 }
 
+// The textures used to draw the tile. Non-animated tiles use only one texture. When more than one texture is present, the tile will swap through them in sequence, showing each for the duration specified in the timePerFrame property. After displaying the last texture in the array, the sequence is repeated from the first texture.
+//
 // Textures returns the collection as a Go slice.
 func (x *TileDefinition) Textures() []*Texture {
 	arr := x.inner.Textures()
@@ -164,10 +198,21 @@ func (x *TileDefinition) Textures() []*Texture {
 }
 
 // SetTextures calls the underlying SetTextures.
-func (x *TileDefinition) SetTextures(textures *foundation.NSArray[*raw.SKTexture]) {
-	x.inner.SetTextures(textures)
+func (x *TileDefinition) SetTextures(textures ...TextureProvider) {
+	_ptrs := make([]objc.ID, len(textures))
+	for _i, _v := range textures {
+		_ptrs[_i] = _v.asTexture().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.SKTexture]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.SKTexture](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetTextures(_arg0)
 }
 
+// The textures to use for generating normals that lights use to light this tile. These will only be used if the tile is lit by at least one light. Each normal texture corresponds to a texture in the textures property.
+//
 // NormalTextures returns the collection as a Go slice.
 func (x *TileDefinition) NormalTextures() []*Texture {
 	arr := x.inner.NormalTextures()
@@ -180,10 +225,21 @@ func (x *TileDefinition) NormalTextures() []*Texture {
 }
 
 // SetNormalTextures calls the underlying SetNormalTextures.
-func (x *TileDefinition) SetNormalTextures(normalTextures *foundation.NSArray[*raw.SKTexture]) {
-	x.inner.SetNormalTextures(normalTextures)
+func (x *TileDefinition) SetNormalTextures(normalTextures ...TextureProvider) {
+	_ptrs := make([]objc.ID, len(normalTextures))
+	for _i, _v := range normalTextures {
+		_ptrs[_i] = _v.asTexture().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.SKTexture]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.SKTexture](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetNormalTextures(_arg0)
 }
 
+// An optional dictionary that can be used to store your own data for each tile definition. Defaults to nil.
+//
 // UserData calls the underlying UserData.
 func (x *TileDefinition) UserData() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
 	return x.inner.UserData()
@@ -194,6 +250,8 @@ func (x *TileDefinition) SetUserData(userData *foundation.NSMutableDictionary[ob
 	x.inner.SetUserData(userData)
 }
 
+// Client-assignable name for the tile definition. Defaults to nil.
+//
 // Name calls the underlying Name.
 func (x *TileDefinition) Name() string {
 	_r := x.inner.Name()
@@ -208,6 +266,8 @@ func (x *TileDefinition) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// The size of the tile in points.
+//
 // Size calls the underlying Size.
 func (x *TileDefinition) Size() corefoundation.CGSize {
 	return x.inner.Size()
@@ -218,6 +278,8 @@ func (x *TileDefinition) SetSize(size corefoundation.CGSize) {
 	x.inner.SetSize(size)
 }
 
+// The duration, in seconds, that each texture in the textures array is displayed before switching to the next texture in the sequence. Only used when there is more than one texture available.
+//
 // TimePerFrame calls the underlying TimePerFrame.
 func (x *TileDefinition) TimePerFrame() float64 {
 	return x.inner.TimePerFrame()
@@ -228,6 +290,8 @@ func (x *TileDefinition) SetTimePerFrame(timePerFrame float64) {
 	x.inner.SetTimePerFrame(timePerFrame)
 }
 
+// This value is used to determine how likely this tile definition is to be chosen for placement when a SKTileGroupRule has mulitple tile definitions assigned to it. A higher value relative to the other definitions assigned to the rule make it more likely for this definition to be selected; lower values make it less likely. Defaults to 1. When set to 0, the definition will never be chosen as long as there is at least one other definition with a placementWeight above 0.
+//
 // PlacementWeight calls the underlying PlacementWeight.
 func (x *TileDefinition) PlacementWeight() uint {
 	return x.inner.PlacementWeight()
@@ -238,6 +302,8 @@ func (x *TileDefinition) SetPlacementWeight(placementWeight uint) {
 	x.inner.SetPlacementWeight(placementWeight)
 }
 
+// The rotation of the tile definition's images can be set in 90 degree increments. Defaults to SKTileDefinitionRotation0.
+//
 // Rotation calls the underlying Rotation.
 func (x *TileDefinition) Rotation() SKTileDefinitionRotation {
 	return SKTileDefinitionRotation(x.inner.Rotation())
@@ -248,6 +314,8 @@ func (x *TileDefinition) SetRotation(rotation SKTileDefinitionRotation) {
 	x.inner.SetRotation(raw.SKTileDefinitionRotation(rotation))
 }
 
+// When set to YES, the tile definition's images will be flipped vertically (i.e., the top of the image becomes the bottom). Defaults to NO.
+//
 // FlipVertically calls the underlying FlipVertically.
 func (x *TileDefinition) FlipVertically() bool {
 	return x.inner.FlipVertically()
@@ -258,6 +326,8 @@ func (x *TileDefinition) SetFlipVertically(flipVertically bool) {
 	x.inner.SetFlipVertically(flipVertically)
 }
 
+// When set to YES, the tile definition's images will be flipped horizontally (i.e., the left of the image becomes the right). Defaults to NO.
+//
 // FlipHorizontally calls the underlying FlipHorizontally.
 func (x *TileDefinition) FlipHorizontally() bool {
 	return x.inner.FlipHorizontally()
@@ -282,9 +352,9 @@ type TileDefinitionable interface {
 	WithFlipVertically(flipVertically bool) *TileDefinition
 	WithFlipHorizontally(flipHorizontally bool) *TileDefinition
 	Textures() []*Texture
-	SetTextures(textures *foundation.NSArray[*raw.SKTexture])
+	SetTextures(textures ...TextureProvider)
 	NormalTextures() []*Texture
-	SetNormalTextures(normalTextures *foundation.NSArray[*raw.SKTexture])
+	SetNormalTextures(normalTextures ...TextureProvider)
 	UserData() *foundation.NSMutableDictionary[objc.ID, objc.ID]
 	SetUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID])
 	Name() string

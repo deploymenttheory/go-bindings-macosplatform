@@ -31,6 +31,8 @@ func NEIPv6RouteFromID(id objc.ID) *NEIPv6Route {
 	return &NEIPv6Route{inner: raw.NEIPv6RouteFromID(id)}
 }
 
+// @method initWithDestinationAddress:networkPrefixLength: @discussion Initialize a newly-allocated NEIPv6Route. @param address The IPv6 address of the destination network. @param networkPrefixLength A number containing the length in bits of the network prefix of the destination network. @return The initialized NEIPv6Route.
+//
 // NewNEIPv6RouteWithDestinationAddressNetworkPrefixLength creates a new [NEIPv6Route].
 func NewNEIPv6RouteWithDestinationAddressNetworkPrefixLength(address string, networkPrefixLength *foundation.NSNumber) *NEIPv6Route {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NEIPv6Route")), objc.RegisterName("alloc"))
@@ -38,12 +40,16 @@ func NewNEIPv6RouteWithDestinationAddressNetworkPrefixLength(address string, net
 	return &NEIPv6Route{inner: raw.NEIPv6RouteFromID(_id)}
 }
 
+// @property gatewayAddress @discussion The IPv6 address of the route's gateway. If this property is nil then the route's gateway will be set to the tunnel's virtual interface.
+//
 // WithGatewayAddress sets the gatewayAddress property and returns the receiver for chaining.
 func (x *NEIPv6Route) WithGatewayAddress(gatewayAddress string) *NEIPv6Route {
 	x.inner.SetGatewayAddress(foundation.NSStringStringWithUTF8String(gatewayAddress))
 	return x
 }
 
+// @property destinationAddress @discussion An IPv6 address represented as a string.
+//
 // DestinationAddress calls the underlying DestinationAddress.
 func (x *NEIPv6Route) DestinationAddress() string {
 	_r := x.inner.DestinationAddress()
@@ -53,11 +59,15 @@ func (x *NEIPv6Route) DestinationAddress() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property destinationNetworkPrefixLength @discussion A number containing the length in bits of the network prefix of the destination network. This prefix in combination with the destinationAddress property is used to determine the destination network of the route.
+//
 // DestinationNetworkPrefixLength calls the underlying DestinationNetworkPrefixLength.
 func (x *NEIPv6Route) DestinationNetworkPrefixLength() *foundation.NSNumber {
 	return x.inner.DestinationNetworkPrefixLength()
 }
 
+// @property gatewayAddress @discussion The IPv6 address of the route's gateway. If this property is nil then the route's gateway will be set to the tunnel's virtual interface.
+//
 // GatewayAddress calls the underlying GatewayAddress.
 func (x *NEIPv6Route) GatewayAddress() string {
 	_r := x.inner.GatewayAddress()

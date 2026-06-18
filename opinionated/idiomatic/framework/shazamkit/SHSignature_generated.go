@@ -32,6 +32,8 @@ func SignatureFromID(id objc.ID) *Signature {
 	return &Signature{inner: raw.SHSignatureFromID(id)}
 }
 
+// Creates a signature object from raw data. - Parameters: - dataRepresentation: The raw data for the signature. - error: The error that occurs; otherwise, `nil`. - Returns: A signature if the raw data is a valid signature; otherwise, `nil`.
+//
 // NewSignatureWithDataRepresentationError creates a new [Signature].
 func NewSignatureWithDataRepresentationError(dataRepresentation *foundation.NSData) (*Signature, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SHSignature")), objc.RegisterName("alloc"))
@@ -43,11 +45,15 @@ func NewSignatureWithDataRepresentationError(dataRepresentation *foundation.NSDa
 	return &Signature{inner: raw.SHSignatureFromID(_id)}, nil
 }
 
+// The duration of the audio you use to generate the signature. Audio that contains periods of silence may result in a duration value that's shorter than the full duration of the original audio track.
+//
 // Duration calls the underlying Duration.
 func (x *Signature) Duration() float64 {
 	return x.inner.Duration()
 }
 
+// The raw data for the signature.
+//
 // DataRepresentation calls the underlying DataRepresentation.
 func (x *Signature) DataRepresentation() *foundation.NSData {
 	return x.inner.DataRepresentation()

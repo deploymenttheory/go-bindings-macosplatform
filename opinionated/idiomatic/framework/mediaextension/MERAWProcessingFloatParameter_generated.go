@@ -64,38 +64,52 @@ func NewRAWProcessingFloatParameterWithNameKeyDescriptionInitialValueMaximumMini
 	return &RAWProcessingFloatParameter{inner: raw.MERAWProcessingFloatParameterFromID(_id)}
 }
 
+// @property		currentValue @abstract		Get or set the current value for this parameter. @discussion		This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
+//
 // WithCurrentValue sets the currentValue property and returns the receiver for chaining.
 func (x *RAWProcessingFloatParameter) WithCurrentValue(currentValue float32) *RAWProcessingFloatParameter {
 	x.inner.SetCurrentValue(currentValue)
 	return x
 }
 
+// @property		enabled @abstract		Indicates whether the parameter is enabled or disabled by the extension. @discussion	This parameter can only be modified by the extension.  From the application-facing interface, VTRAWProcessingSession, this is a read-only value which indicates whether the parameter should be greyed out and disabled in any UI being generated.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *RAWProcessingFloatParameter) WithEnabled(enabled bool) *RAWProcessingFloatParameter {
 	x.inner.MERAWProcessingParameter.SetEnabled(enabled)
 	return x
 }
 
+// @property		hasNeutralValue @abstract		Return value indicates whether the MERAWProcessingFloatParameter has an optional declared Neutral value. @discussion	If the return value is YES and outNeutralValue is not nil, the value held by outNeutralValue will be set to the neutral value. If the return value is NO and outNeutralValue is not nil, the value held by outNeutralValue will be set to 0.
+//
 // HasNeutralValue calls the underlying HasNeutralValue.
 func (x *RAWProcessingFloatParameter) HasNeutralValue(outNeutralValue *float32) bool {
 	return x.inner.HasNeutralValue(outNeutralValue)
 }
 
+// @property		hasCameraValue @abstract		Return value indicates whether the MERAWProcessingFloatParameter has an optional declared Camera value. @discussion	If the return value is YES and outCameraValue is not nil, the value held by outCameraValue will be set to the camera value. If the return value is NO and outCameraValue is not nil, the value held by outCameraValue will be set to 0.
+//
 // HasCameraValue calls the underlying HasCameraValue.
 func (x *RAWProcessingFloatParameter) HasCameraValue(outCameraValue *float32) bool {
 	return x.inner.HasCameraValue(outCameraValue)
 }
 
+// @property		maximumValue @abstract		The maximum value for this parameter.
+//
 // MaximumValue calls the underlying MaximumValue.
 func (x *RAWProcessingFloatParameter) MaximumValue() float32 {
 	return x.inner.MaximumValue()
 }
 
+// @property		minimumValue @abstract		The minimum value for this parameter.
+//
 // MinimumValue calls the underlying MinimumValue.
 func (x *RAWProcessingFloatParameter) MinimumValue() float32 {
 	return x.inner.MinimumValue()
 }
 
+// @property		currentValue @abstract		Get or set the current value for this parameter. @discussion		This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
+//
 // CurrentValue calls the underlying CurrentValue.
 func (x *RAWProcessingFloatParameter) CurrentValue() float32 {
 	return x.inner.CurrentValue()

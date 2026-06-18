@@ -35,126 +35,168 @@ func NewVolumeSupportedCapabilities() *VolumeSupportedCapabilities {
 	return &VolumeSupportedCapabilities{inner: raw.FSVolumeSupportedCapabilitiesFromID(_id)}
 }
 
+// A Boolean property that indicates whether the volume supports persistent object identifiers and can look up file system objects by their IDs.
+//
 // WithSupportsPersistentObjectIDs sets the supportsPersistentObjectIDs property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithSupportsPersistentObjectIDs(supportsPersistentObjectIDs bool) *VolumeSupportedCapabilities {
 	x.inner.SetSupportsPersistentObjectIDs(supportsPersistentObjectIDs)
 	return x
 }
 
+// A Boolean property that indicates whether the volume supports symbolic links.
+//
 // WithSupportsSymbolicLinks sets the supportsSymbolicLinks property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithSupportsSymbolicLinks(supportsSymbolicLinks bool) *VolumeSupportedCapabilities {
 	x.inner.SetSupportsSymbolicLinks(supportsSymbolicLinks)
 	return x
 }
 
+// A Boolean property that indicates whether the volume supports hard links.
+//
 // WithSupportsHardLinks sets the supportsHardLinks property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithSupportsHardLinks(supportsHardLinks bool) *VolumeSupportedCapabilities {
 	x.inner.SetSupportsHardLinks(supportsHardLinks)
 	return x
 }
 
+// A Boolean property that indicates whether the volume supports a journal used to speed recovery in case of unplanned restart, such as a power outage or crash. This property doesn't necessarily mean the volume is actively using a journal.
+//
 // WithSupportsJournal sets the supportsJournal property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithSupportsJournal(supportsJournal bool) *VolumeSupportedCapabilities {
 	x.inner.SetSupportsJournal(supportsJournal)
 	return x
 }
 
+// A Boolean property that indicates whether the volume currently uses a journal for speeding recovery after an unplanned shutdown.
+//
 // WithSupportsActiveJournal sets the supportsActiveJournal property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithSupportsActiveJournal(supportsActiveJournal bool) *VolumeSupportedCapabilities {
 	x.inner.SetSupportsActiveJournal(supportsActiveJournal)
 	return x
 }
 
+// A Boolan property that indicates the volume doesn't store reliable times for the root directory. If this value is `true` (Swift) or `YES` (Objective-C), the volume doesn't store reliable times for the root directory.
+//
 // WithDoesNotSupportRootTimes sets the doesNotSupportRootTimes property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithDoesNotSupportRootTimes(doesNotSupportRootTimes bool) *VolumeSupportedCapabilities {
 	x.inner.SetDoesNotSupportRootTimes(doesNotSupportRootTimes)
 	return x
 }
 
+// A Boolean property that indicates whether the volume supports sparse files. A sparse file is a file that can have "holes" that the file system has never written to, and as a result don't consume space on disk.
+//
 // WithSupportsSparseFiles sets the supportsSparseFiles property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithSupportsSparseFiles(supportsSparseFiles bool) *VolumeSupportedCapabilities {
 	x.inner.SetSupportsSparseFiles(supportsSparseFiles)
 	return x
 }
 
+// A Boolean property that indicates whether the volume supports zero runs If this value is true, the volume keeps track of allocated but unwritten runs of a file so that it can substitute zeroes without actually writing zeroes to the media.
+//
 // WithSupportsZeroRuns sets the supportsZeroRuns property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithSupportsZeroRuns(supportsZeroRuns bool) *VolumeSupportedCapabilities {
 	x.inner.SetSupportsZeroRuns(supportsZeroRuns)
 	return x
 }
 
+// A Boolean property that indicates whether the volume supports fast results when fetching file system statistics. A true value means this volume hints to upper layers to indicate that `statfs(2)` is fast enough that its results need not be cached by the caller.
+//
 // WithSupportsFastStatFS sets the supportsFastStatFS property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithSupportsFastStatFS(supportsFastStatFS bool) *VolumeSupportedCapabilities {
 	x.inner.SetSupportsFastStatFS(supportsFastStatFS)
 	return x
 }
 
+// A Boolean property that indicates whether the volume supports file sizes larger than 4GB, and potentially up to 2TB.
+//
 // WithSupports2TBFiles sets the supports2TBFiles property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithSupports2TBFiles(supports2TBFiles bool) *VolumeSupportedCapabilities {
 	x.inner.SetSupports2TBFiles(supports2TBFiles)
 	return x
 }
 
+// A Boolean property that indicates whether the volume supports open deny modes. These are modes such as "open for read write, deny write".
+//
 // WithSupportsOpenDenyModes sets the supportsOpenDenyModes property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithSupportsOpenDenyModes(supportsOpenDenyModes bool) *VolumeSupportedCapabilities {
 	x.inner.SetSupportsOpenDenyModes(supportsOpenDenyModes)
 	return x
 }
 
+// A Boolean property that indicates whether the volume supports hidden files. A `true` value means the volume supports the `UF_HIDDEN` file flag.
+//
 // WithSupportsHiddenFiles sets the supportsHiddenFiles property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithSupportsHiddenFiles(supportsHiddenFiles bool) *VolumeSupportedCapabilities {
 	x.inner.SetSupportsHiddenFiles(supportsHiddenFiles)
 	return x
 }
 
+// A Boolean property that indicates the volume doesn't support certain volume size reports. A true value means the volume doesn't support determining values for total data blocks, available blocks, or free blocks, as in `f_blocks`, `f_bavail`, and `f_bfree` in the struct `statFS` returned by `statfs(2)`.
+//
 // WithDoesNotSupportVolumeSizes sets the doesNotSupportVolumeSizes property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithDoesNotSupportVolumeSizes(doesNotSupportVolumeSizes bool) *VolumeSupportedCapabilities {
 	x.inner.SetDoesNotSupportVolumeSizes(doesNotSupportVolumeSizes)
 	return x
 }
 
+// A Boolean property that indicates whether the volume supports 64-bit object IDs.
+//
 // WithSupports64BitObjectIDs sets the supports64BitObjectIDs property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithSupports64BitObjectIDs(supports64BitObjectIDs bool) *VolumeSupportedCapabilities {
 	x.inner.SetSupports64BitObjectIDs(supports64BitObjectIDs)
 	return x
 }
 
+// A Boolean property that indicates whether the volume supports document IDs for document revisions. A document ID is an identifier that persists across object ID changes.
+//
 // WithSupportsDocumentID sets the supportsDocumentID property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithSupportsDocumentID(supportsDocumentID bool) *VolumeSupportedCapabilities {
 	x.inner.SetSupportsDocumentID(supportsDocumentID)
 	return x
 }
 
+// A Boolean property that indicates the volume doesn't support immutable files. A `true` value means this volume doesn't support setting the `UF_IMMUTABLE` flag.
+//
 // WithDoesNotSupportImmutableFiles sets the doesNotSupportImmutableFiles property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithDoesNotSupportImmutableFiles(doesNotSupportImmutableFiles bool) *VolumeSupportedCapabilities {
 	x.inner.SetDoesNotSupportImmutableFiles(doesNotSupportImmutableFiles)
 	return x
 }
 
+// A Boolean property that indicates the volume doesn't set file permissions. If this value is `true` (Swift) or `YES` (Objective-C), the volume doesn't support setting file permissions.
+//
 // WithDoesNotSupportSettingFilePermissions sets the doesNotSupportSettingFilePermissions property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithDoesNotSupportSettingFilePermissions(doesNotSupportSettingFilePermissions bool) *VolumeSupportedCapabilities {
 	x.inner.SetDoesNotSupportSettingFilePermissions(doesNotSupportSettingFilePermissions)
 	return x
 }
 
+// A Boolean property that indicates whether the volume supports multiple logical file systems that share space in a single "partition."
+//
 // WithSupportsSharedSpace sets the supportsSharedSpace property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithSupportsSharedSpace(supportsSharedSpace bool) *VolumeSupportedCapabilities {
 	x.inner.SetSupportsSharedSpace(supportsSharedSpace)
 	return x
 }
 
+// A Boolean property that indicates whether the volume supports volume groups. Volume groups involve multiple logical file systems that the system can mount and unmount together, and for which the system can present common file system identifier information.
+//
 // WithSupportsVolumeGroups sets the supportsVolumeGroups property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithSupportsVolumeGroups(supportsVolumeGroups bool) *VolumeSupportedCapabilities {
 	x.inner.SetSupportsVolumeGroups(supportsVolumeGroups)
 	return x
 }
 
+// A value that indicates the volume's support for case sensitivity.
+//
 // WithCaseFormat sets the caseFormat property and returns the receiver for chaining.
 func (x *VolumeSupportedCapabilities) WithCaseFormat(caseFormat FSVolumeCaseFormat) *VolumeSupportedCapabilities {
 	x.inner.SetCaseFormat(raw.FSVolumeCaseFormat(caseFormat))
 	return x
 }
 
+// A Boolean property that indicates whether the volume supports persistent object identifiers and can look up file system objects by their IDs.
+//
 // SupportsPersistentObjectIDs calls the underlying SupportsPersistentObjectIDs.
 func (x *VolumeSupportedCapabilities) SupportsPersistentObjectIDs() bool {
 	return x.inner.SupportsPersistentObjectIDs()
@@ -165,6 +207,8 @@ func (x *VolumeSupportedCapabilities) SetSupportsPersistentObjectIDs(supportsPer
 	x.inner.SetSupportsPersistentObjectIDs(supportsPersistentObjectIDs)
 }
 
+// A Boolean property that indicates whether the volume supports symbolic links.
+//
 // SupportsSymbolicLinks calls the underlying SupportsSymbolicLinks.
 func (x *VolumeSupportedCapabilities) SupportsSymbolicLinks() bool {
 	return x.inner.SupportsSymbolicLinks()
@@ -175,6 +219,8 @@ func (x *VolumeSupportedCapabilities) SetSupportsSymbolicLinks(supportsSymbolicL
 	x.inner.SetSupportsSymbolicLinks(supportsSymbolicLinks)
 }
 
+// A Boolean property that indicates whether the volume supports hard links.
+//
 // SupportsHardLinks calls the underlying SupportsHardLinks.
 func (x *VolumeSupportedCapabilities) SupportsHardLinks() bool {
 	return x.inner.SupportsHardLinks()
@@ -185,6 +231,8 @@ func (x *VolumeSupportedCapabilities) SetSupportsHardLinks(supportsHardLinks boo
 	x.inner.SetSupportsHardLinks(supportsHardLinks)
 }
 
+// A Boolean property that indicates whether the volume supports a journal used to speed recovery in case of unplanned restart, such as a power outage or crash. This property doesn't necessarily mean the volume is actively using a journal.
+//
 // SupportsJournal calls the underlying SupportsJournal.
 func (x *VolumeSupportedCapabilities) SupportsJournal() bool {
 	return x.inner.SupportsJournal()
@@ -195,6 +243,8 @@ func (x *VolumeSupportedCapabilities) SetSupportsJournal(supportsJournal bool) {
 	x.inner.SetSupportsJournal(supportsJournal)
 }
 
+// A Boolean property that indicates whether the volume currently uses a journal for speeding recovery after an unplanned shutdown.
+//
 // SupportsActiveJournal calls the underlying SupportsActiveJournal.
 func (x *VolumeSupportedCapabilities) SupportsActiveJournal() bool {
 	return x.inner.SupportsActiveJournal()
@@ -205,6 +255,8 @@ func (x *VolumeSupportedCapabilities) SetSupportsActiveJournal(supportsActiveJou
 	x.inner.SetSupportsActiveJournal(supportsActiveJournal)
 }
 
+// A Boolan property that indicates the volume doesn't store reliable times for the root directory. If this value is `true` (Swift) or `YES` (Objective-C), the volume doesn't store reliable times for the root directory.
+//
 // DoesNotSupportRootTimes calls the underlying DoesNotSupportRootTimes.
 func (x *VolumeSupportedCapabilities) DoesNotSupportRootTimes() bool {
 	return x.inner.DoesNotSupportRootTimes()
@@ -215,6 +267,8 @@ func (x *VolumeSupportedCapabilities) SetDoesNotSupportRootTimes(doesNotSupportR
 	x.inner.SetDoesNotSupportRootTimes(doesNotSupportRootTimes)
 }
 
+// A Boolean property that indicates whether the volume supports sparse files. A sparse file is a file that can have "holes" that the file system has never written to, and as a result don't consume space on disk.
+//
 // SupportsSparseFiles calls the underlying SupportsSparseFiles.
 func (x *VolumeSupportedCapabilities) SupportsSparseFiles() bool {
 	return x.inner.SupportsSparseFiles()
@@ -225,6 +279,8 @@ func (x *VolumeSupportedCapabilities) SetSupportsSparseFiles(supportsSparseFiles
 	x.inner.SetSupportsSparseFiles(supportsSparseFiles)
 }
 
+// A Boolean property that indicates whether the volume supports zero runs If this value is true, the volume keeps track of allocated but unwritten runs of a file so that it can substitute zeroes without actually writing zeroes to the media.
+//
 // SupportsZeroRuns calls the underlying SupportsZeroRuns.
 func (x *VolumeSupportedCapabilities) SupportsZeroRuns() bool {
 	return x.inner.SupportsZeroRuns()
@@ -235,6 +291,8 @@ func (x *VolumeSupportedCapabilities) SetSupportsZeroRuns(supportsZeroRuns bool)
 	x.inner.SetSupportsZeroRuns(supportsZeroRuns)
 }
 
+// A Boolean property that indicates whether the volume supports fast results when fetching file system statistics. A true value means this volume hints to upper layers to indicate that `statfs(2)` is fast enough that its results need not be cached by the caller.
+//
 // SupportsFastStatFS calls the underlying SupportsFastStatFS.
 func (x *VolumeSupportedCapabilities) SupportsFastStatFS() bool {
 	return x.inner.SupportsFastStatFS()
@@ -245,6 +303,8 @@ func (x *VolumeSupportedCapabilities) SetSupportsFastStatFS(supportsFastStatFS b
 	x.inner.SetSupportsFastStatFS(supportsFastStatFS)
 }
 
+// A Boolean property that indicates whether the volume supports file sizes larger than 4GB, and potentially up to 2TB.
+//
 // Supports2TBFiles calls the underlying Supports2TBFiles.
 func (x *VolumeSupportedCapabilities) Supports2TBFiles() bool {
 	return x.inner.Supports2TBFiles()
@@ -255,6 +315,8 @@ func (x *VolumeSupportedCapabilities) SetSupports2TBFiles(supports2TBFiles bool)
 	x.inner.SetSupports2TBFiles(supports2TBFiles)
 }
 
+// A Boolean property that indicates whether the volume supports open deny modes. These are modes such as "open for read write, deny write".
+//
 // SupportsOpenDenyModes calls the underlying SupportsOpenDenyModes.
 func (x *VolumeSupportedCapabilities) SupportsOpenDenyModes() bool {
 	return x.inner.SupportsOpenDenyModes()
@@ -265,6 +327,8 @@ func (x *VolumeSupportedCapabilities) SetSupportsOpenDenyModes(supportsOpenDenyM
 	x.inner.SetSupportsOpenDenyModes(supportsOpenDenyModes)
 }
 
+// A Boolean property that indicates whether the volume supports hidden files. A `true` value means the volume supports the `UF_HIDDEN` file flag.
+//
 // SupportsHiddenFiles calls the underlying SupportsHiddenFiles.
 func (x *VolumeSupportedCapabilities) SupportsHiddenFiles() bool {
 	return x.inner.SupportsHiddenFiles()
@@ -275,6 +339,8 @@ func (x *VolumeSupportedCapabilities) SetSupportsHiddenFiles(supportsHiddenFiles
 	x.inner.SetSupportsHiddenFiles(supportsHiddenFiles)
 }
 
+// A Boolean property that indicates the volume doesn't support certain volume size reports. A true value means the volume doesn't support determining values for total data blocks, available blocks, or free blocks, as in `f_blocks`, `f_bavail`, and `f_bfree` in the struct `statFS` returned by `statfs(2)`.
+//
 // DoesNotSupportVolumeSizes calls the underlying DoesNotSupportVolumeSizes.
 func (x *VolumeSupportedCapabilities) DoesNotSupportVolumeSizes() bool {
 	return x.inner.DoesNotSupportVolumeSizes()
@@ -285,6 +351,8 @@ func (x *VolumeSupportedCapabilities) SetDoesNotSupportVolumeSizes(doesNotSuppor
 	x.inner.SetDoesNotSupportVolumeSizes(doesNotSupportVolumeSizes)
 }
 
+// A Boolean property that indicates whether the volume supports 64-bit object IDs.
+//
 // Supports64BitObjectIDs calls the underlying Supports64BitObjectIDs.
 func (x *VolumeSupportedCapabilities) Supports64BitObjectIDs() bool {
 	return x.inner.Supports64BitObjectIDs()
@@ -295,6 +363,8 @@ func (x *VolumeSupportedCapabilities) SetSupports64BitObjectIDs(supports64BitObj
 	x.inner.SetSupports64BitObjectIDs(supports64BitObjectIDs)
 }
 
+// A Boolean property that indicates whether the volume supports document IDs for document revisions. A document ID is an identifier that persists across object ID changes.
+//
 // SupportsDocumentID calls the underlying SupportsDocumentID.
 func (x *VolumeSupportedCapabilities) SupportsDocumentID() bool {
 	return x.inner.SupportsDocumentID()
@@ -305,6 +375,8 @@ func (x *VolumeSupportedCapabilities) SetSupportsDocumentID(supportsDocumentID b
 	x.inner.SetSupportsDocumentID(supportsDocumentID)
 }
 
+// A Boolean property that indicates the volume doesn't support immutable files. A `true` value means this volume doesn't support setting the `UF_IMMUTABLE` flag.
+//
 // DoesNotSupportImmutableFiles calls the underlying DoesNotSupportImmutableFiles.
 func (x *VolumeSupportedCapabilities) DoesNotSupportImmutableFiles() bool {
 	return x.inner.DoesNotSupportImmutableFiles()
@@ -315,6 +387,8 @@ func (x *VolumeSupportedCapabilities) SetDoesNotSupportImmutableFiles(doesNotSup
 	x.inner.SetDoesNotSupportImmutableFiles(doesNotSupportImmutableFiles)
 }
 
+// A Boolean property that indicates the volume doesn't set file permissions. If this value is `true` (Swift) or `YES` (Objective-C), the volume doesn't support setting file permissions.
+//
 // DoesNotSupportSettingFilePermissions calls the underlying DoesNotSupportSettingFilePermissions.
 func (x *VolumeSupportedCapabilities) DoesNotSupportSettingFilePermissions() bool {
 	return x.inner.DoesNotSupportSettingFilePermissions()
@@ -325,6 +399,8 @@ func (x *VolumeSupportedCapabilities) SetDoesNotSupportSettingFilePermissions(do
 	x.inner.SetDoesNotSupportSettingFilePermissions(doesNotSupportSettingFilePermissions)
 }
 
+// A Boolean property that indicates whether the volume supports multiple logical file systems that share space in a single "partition."
+//
 // SupportsSharedSpace calls the underlying SupportsSharedSpace.
 func (x *VolumeSupportedCapabilities) SupportsSharedSpace() bool {
 	return x.inner.SupportsSharedSpace()
@@ -335,6 +411,8 @@ func (x *VolumeSupportedCapabilities) SetSupportsSharedSpace(supportsSharedSpace
 	x.inner.SetSupportsSharedSpace(supportsSharedSpace)
 }
 
+// A Boolean property that indicates whether the volume supports volume groups. Volume groups involve multiple logical file systems that the system can mount and unmount together, and for which the system can present common file system identifier information.
+//
 // SupportsVolumeGroups calls the underlying SupportsVolumeGroups.
 func (x *VolumeSupportedCapabilities) SupportsVolumeGroups() bool {
 	return x.inner.SupportsVolumeGroups()
@@ -345,6 +423,8 @@ func (x *VolumeSupportedCapabilities) SetSupportsVolumeGroups(supportsVolumeGrou
 	x.inner.SetSupportsVolumeGroups(supportsVolumeGroups)
 }
 
+// A value that indicates the volume's support for case sensitivity.
+//
 // CaseFormat calls the underlying CaseFormat.
 func (x *VolumeSupportedCapabilities) CaseFormat() FSVolumeCaseFormat {
 	return FSVolumeCaseFormat(x.inner.CaseFormat())

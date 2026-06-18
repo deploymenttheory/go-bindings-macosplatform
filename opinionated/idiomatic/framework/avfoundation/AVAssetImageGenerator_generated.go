@@ -34,6 +34,8 @@ func AssetImageGeneratorFromID(id objc.ID) *AssetImageGenerator {
 	return &AssetImageGenerator{inner: raw.AVAssetImageGeneratorFromID(id)}
 }
 
+// @method			initWithAsset: @abstract		Initializes an instance of AVAssetImageGenerator for use with the specified asset. @param			asset The asset from which images will be extracted. @result			An instance of AVAssetImageGenerator @discussion		This method may succeed even if the asset possesses no visual tracks at the time of initialization. Clients may wish to test whether an asset has any tracks with the visual characteristic via -[AVAsset tracksWithMediaCharacteristic:]. Note also that assets that belong to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie, may gain visual tracks after initialization of an associated AVAssetImageGenerator. However, the results of image generation are undefined if mutations of the asset occur while images are being generated. AVAssetImageGenerator will use the default enabled video track(s) to generate images.
+//
 // NewAssetImageGeneratorWithAsset creates a new [AssetImageGenerator].
 func NewAssetImageGeneratorWithAsset(asset *raw.AVAsset) *AssetImageGenerator {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetImageGenerator")), objc.RegisterName("alloc"))
@@ -59,12 +61,16 @@ func (x *AssetImageGenerator) WithApertureMode(apertureMode *foundation.NSString
 	return x
 }
 
+// @property		dynamicRangePolicy @abstract		Configures the video dynamic range for the output CGImage @discussion	Default is AVAssetImageGeneratorDynamicRangePolicyForceSDR
+//
 // WithDynamicRangePolicy sets the dynamicRangePolicy property and returns the receiver for chaining.
 func (x *AssetImageGenerator) WithDynamicRangePolicy(dynamicRangePolicy *foundation.NSString) *AssetImageGenerator {
 	x.inner.SetDynamicRangePolicy(dynamicRangePolicy)
 	return x
 }
 
+// @property		videoComposition @abstract		Specifies the video composition to use when extracting images from assets with multiple video tracks. @discussion	If no videoComposition is specified, only the first enabled video track will be used. If a videoComposition is specified, the value of appliesPreferredTrackTransform is ignored. This property throws an exception if a video composition is set with any of the following property values: - "renderScale" is not equal to one - "renderSize" width or height is less than zero - "frameDuration" is invalid or less than or equal to zero - "sourceTrackIDForFrameTiming" is less than zero - "outputBufferDescription" is non-nil
+//
 // WithVideoComposition sets the videoComposition property and returns the receiver for chaining.
 func (x *AssetImageGenerator) WithVideoComposition(videoComposition VideoCompositionProvider) *AssetImageGenerator {
 	x.inner.SetVideoComposition(videoComposition.asVideoComposition())
@@ -83,21 +89,29 @@ func (x *AssetImageGenerator) WithRequestedTimeToleranceAfter(requestedTimeToler
 	return x
 }
 
+// @method			copyCGImageAtTime:actualTime:error: @abstract		Returns a CFRetained CGImageRef for an asset at or near the specified time. @param			requestedTime The time at which the image of the asset is to be created. @param			actualTime A pointer to a CMTime to receive the time at which the image was actually generated. If you are not interested in this information, pass NULL. @param			outError An error object describing the reason for failure, in the event that this method returns NULL. @result			A CGImageRef. @discussion Returns the CGImage synchronously. Ownership follows the Create Rule. Because of the nature of timed audiovisual media, generating an image may take significant time. AVAssetImageGenerator may have to block the calling thread in order to do so.  In order to avoid blocking, clients can use -generateCGImagesAsynchronouslyForTimes:completionHandler: to request that one or more images be generated asynchronously and to be notified when they become available. On iOS and tvOS, it is particularly important to avoid blocking.  To preserve responsiveness, a synchronous request that blocks for too long (eg, a request to generate an image from an asset on a slow HTTP server) may lead to media services being reset.
+//
 // CopyCGImageAtTimeActualTimeError calls the underlying CopyCGImageAtTimeActualTimeError.
 func (x *AssetImageGenerator) CopyCGImageAtTimeActualTimeError(requestedTime coremedia.CMTime, actualTime *coremedia.CMTime) (unsafe.Pointer, error) {
 	return x.inner.CopyCGImageAtTimeActualTimeError(requestedTime, actualTime)
 }
 
+// @method			generateCGImagesAsynchronouslyForTimes:completionHandler: @abstract		Returns a series of CGImageRefs for an asset at or near the specified times. @param			requestedTimes An NSArray of NSValues, each containing a CMTime, specifying the asset times at which an image is requested. @param			handler A block that will be called when an image request is complete. @discussion		Employs an efficient "batch mode" for getting images in time order. The client will receive exactly one handler callback for each requested time in requestedTimes. Changes to generator properties (snap behavior, maximum size, etc...) will not affect outstanding asynchronous image generation requests. The generated image is not retained.  Clients should retain the image if they wish it to persist after the completion handler returns.
+//
 // GenerateCGImagesAsynchronouslyForTimesCompletionHandler calls the underlying GenerateCGImagesAsynchronouslyForTimesCompletionHandler.
 func (x *AssetImageGenerator) GenerateCGImagesAsynchronouslyForTimesCompletionHandler(requestedTimes *foundation.NSArray[*foundation.NSValue], handler objc.Block) {
 	x.inner.GenerateCGImagesAsynchronouslyForTimesCompletionHandler(requestedTimes, handler)
 }
 
+// @method			generateCGImageAsynchronouslyForTime:completionHandler: @abstract		Returns a CGImageRef for an asset at or near the specified time. @param			requestedTime A CMTime, specifying the asset time at which an image is requested. @param			handler A block that will be called when the image request is complete. @discussion		The client will receive exactly one handler callback for requestedTime. Changes to generator properties (snap behavior, maximum size, etc...) will not affect outstanding asynchronous image generation requests. The generated image is not retained.  Clients should retain the image if they wish it to persist after the completion handler returns. If image generation succeeds, the `image` parameter to the completion handler will be non-NULL and the `error` parameter will be nil.  If image generation fails or was cancelled, the `image` parameter will be NULL and the `error` parameter will describe what went wrong.  For cancelled images, the returned error will be AVErrorOperationCancelled.
+//
 // GenerateCGImageAsynchronouslyForTimeCompletionHandler calls the underlying GenerateCGImageAsynchronouslyForTimeCompletionHandler.
 func (x *AssetImageGenerator) GenerateCGImageAsynchronouslyForTimeCompletionHandler(requestedTime coremedia.CMTime, handler objc.Block) {
 	x.inner.GenerateCGImageAsynchronouslyForTimeCompletionHandler(requestedTime, handler)
 }
 
+// @method			cancelAllCGImageGeneration @abstract		Cancels all outstanding image generation requests. @discussion		Calls the handler block with AVAssetImageGeneratorCancelled for each image time in every previous invocation of -generateCGImagesAsynchronouslyForTimes:completionHandler: for which images have not yet been supplied.
+//
 // CancelAllCGImageGeneration calls the underlying CancelAllCGImageGeneration.
 func (x *AssetImageGenerator) CancelAllCGImageGeneration() {
 	x.inner.CancelAllCGImageGeneration()
@@ -146,6 +160,8 @@ func (x *AssetImageGenerator) SetApertureMode(apertureMode *foundation.NSString)
 	x.inner.SetApertureMode(apertureMode)
 }
 
+// @property		dynamicRangePolicy @abstract		Configures the video dynamic range for the output CGImage @discussion	Default is AVAssetImageGeneratorDynamicRangePolicyForceSDR
+//
 // DynamicRangePolicy calls the underlying DynamicRangePolicy.
 func (x *AssetImageGenerator) DynamicRangePolicy() string {
 	_r := x.inner.DynamicRangePolicy()
@@ -160,6 +176,8 @@ func (x *AssetImageGenerator) SetDynamicRangePolicy(dynamicRangePolicy *foundati
 	x.inner.SetDynamicRangePolicy(dynamicRangePolicy)
 }
 
+// @property		videoComposition @abstract		Specifies the video composition to use when extracting images from assets with multiple video tracks. @discussion	If no videoComposition is specified, only the first enabled video track will be used. If a videoComposition is specified, the value of appliesPreferredTrackTransform is ignored. This property throws an exception if a video composition is set with any of the following property values: - "renderScale" is not equal to one - "renderSize" width or height is less than zero - "frameDuration" is invalid or less than or equal to zero - "sourceTrackIDForFrameTiming" is less than zero - "outputBufferDescription" is non-nil
+//
 // VideoComposition calls the underlying VideoComposition.
 func (x *AssetImageGenerator) VideoComposition() *VideoComposition {
 	_r := x.inner.VideoComposition()

@@ -33,6 +33,8 @@ func MTRBaseClusterRVCCleanModeFromID(id objc.ID) *MTRBaseClusterRVCCleanMode {
 	return &MTRBaseClusterRVCCleanMode{inner: raw.MTRBaseClusterRVCCleanModeFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterRVCCleanModeWithDeviceEndpointIDQueue creates a new [MTRBaseClusterRVCCleanMode].
 func NewMTRBaseClusterRVCCleanModeWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterRVCCleanMode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterRVCCleanMode")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewMTRBaseClusterRVCCleanModeWithDeviceEndpointIDQueue(device *raw.MTRBaseD
 	return &MTRBaseClusterRVCCleanMode{inner: raw.MTRBaseClusterRVCCleanModeFromID(_id)}
 }
 
+// Command ChangeToMode This command is used to change device modes. On receipt of this command the device SHALL respond with a ChangeToModeResponse command.
+//
 // ChangeToModeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterRVCCleanMode) ChangeToModeWithParamsCompletion(ctx context.Context, params *raw.MTRRVCCleanModeClusterChangeToModeParams) (*MTRRVCCleanModeClusterChangeToModeResponseParams, error) {
 	type _result struct {

@@ -90,11 +90,15 @@ func (x *WebAuthenticationSessionRequest) SetDelegate(delegate raw.ASWebAuthenti
 	x.inner.SetDelegate(delegate)
 }
 
+// Additional headers to be sent when loading the initial URL. These should _only_ apply to the initial page, and should not overwrite any headers normally sent by the browser. Add `AdditionalHeaderFieldsAreSupported: true` to `ASWebAuthenticationSessionWebBrowserSupportCapabilities` in your browser's Info.plist file to indicate support for this.
+//
 // AdditionalHeaderFields calls the underlying AdditionalHeaderFields.
 func (x *WebAuthenticationSessionRequest) AdditionalHeaderFields() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
 	return x.inner.AdditionalHeaderFields()
 }
 
+// The callback to listen for to complete this request. Check all main-frame navigations loaded during the request with this callback. It is used to handle all callback types, including custom schemes and HTTPS navigations. When a match is found, invoke `-completeWithCallbackURL:` with that URL. Add `CallbackURLMatchingIsSupported: true` to `ASWebAuthenticationSessionWebBrowserSupportCapabilities` in your browser's Info.plist file to indicate support for this.
+//
 // Callback calls the underlying Callback.
 func (x *WebAuthenticationSessionRequest) Callback() *WebAuthenticationSessionCallback {
 	_r := x.inner.Callback()

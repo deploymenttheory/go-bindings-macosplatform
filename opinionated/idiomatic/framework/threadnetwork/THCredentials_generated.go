@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that contains credentials for a Thread network. A Thread network defines parameters that all connected devices use. “THCredentials“ provides these parameters.
+//
 // THCredentials wraps [raw.THCredentials] with a fluent Go API.
 type THCredentials struct {
 	inner *raw.THCredentials
@@ -37,12 +39,16 @@ func NewTHCredentials() *THCredentials {
 	return &THCredentials{inner: raw.THCredentialsFromID(_id)}
 }
 
+// The Thread network radio channel.
+//
 // WithChannel sets the channel property and returns the receiver for chaining.
 func (x *THCredentials) WithChannel(channel uint8) *THCredentials {
 	x.inner.SetChannel(channel)
 	return x
 }
 
+// The Thread network name.
+//
 // NetworkName calls the underlying NetworkName.
 func (x *THCredentials) NetworkName() string {
 	_r := x.inner.NetworkName()
@@ -52,31 +58,43 @@ func (x *THCredentials) NetworkName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The Thread network extended PAN identifier.
+//
 // ExtendedPANID calls the underlying ExtendedPANID.
 func (x *THCredentials) ExtendedPANID() *foundation.NSData {
 	return x.inner.ExtendedPANID()
 }
 
+// The identifer of an active Thread network Border Agent. This property’s value is the MAC Extended Address, a random identifier that the active Thread network border router generates.
+//
 // BorderAgentID calls the underlying BorderAgentID.
 func (x *THCredentials) BorderAgentID() *foundation.NSData {
 	return x.inner.BorderAgentID()
 }
 
+// The essential operational parameters for the Thread network. The framework parses this property, then extracts and sets “THCredentials/channel“, “THCredentials/extendedPANID“, “THCredentials/networkKey“, “THCredentials/networkName“, “THCredentials/panID“, and “THCredentials/PSKC“ when you call “THClient/storeCredentialsForBorderAgent:activeOperationalDataSet:completion:“.
+//
 // ActiveOperationalDataSet calls the underlying ActiveOperationalDataSet.
 func (x *THCredentials) ActiveOperationalDataSet() *foundation.NSData {
 	return x.inner.ActiveOperationalDataSet()
 }
 
+// The sixteen byte Thread network key.
+//
 // NetworkKey calls the underlying NetworkKey.
 func (x *THCredentials) NetworkKey() *foundation.NSData {
 	return x.inner.NetworkKey()
 }
 
+// The sixteen byte Thread network pre-shared key for the Commissioner.
+//
 // PSKC calls the underlying PSKC.
 func (x *THCredentials) PSKC() *foundation.NSData {
 	return x.inner.PSKC()
 }
 
+// The Thread network radio channel.
+//
 // Channel calls the underlying Channel.
 func (x *THCredentials) Channel() uint8 {
 	return x.inner.Channel()
@@ -87,16 +105,22 @@ func (x *THCredentials) SetChannel(channel uint8) {
 	x.inner.SetChannel(channel)
 }
 
+// The two byte Thead network PAN identifier.
+//
 // PanID calls the underlying PanID.
 func (x *THCredentials) PanID() *foundation.NSData {
 	return x.inner.PanID()
 }
 
+// The date and time that the framework stored the credential in the database.
+//
 // CreationDate calls the underlying CreationDate.
 func (x *THCredentials) CreationDate() *foundation.NSDate {
 	return x.inner.CreationDate()
 }
 
+// The date and time that the framework updated the credential in the database.
+//
 // LastModificationDate calls the underlying LastModificationDate.
 func (x *THCredentials) LastModificationDate() *foundation.NSDate {
 	return x.inner.LastModificationDate()

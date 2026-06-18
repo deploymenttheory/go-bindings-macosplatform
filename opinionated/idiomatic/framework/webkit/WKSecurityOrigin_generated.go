@@ -36,6 +36,8 @@ func NewWKSecurityOrigin() *WKSecurityOrigin {
 	return &WKSecurityOrigin{inner: raw.WKSecurityOriginFromID(_id)}
 }
 
+// @abstract The security origin's protocol.
+//
 // Protocol calls the underlying Protocol.
 func (x *WKSecurityOrigin) Protocol() string {
 	_r := x.inner.Protocol()
@@ -45,6 +47,8 @@ func (x *WKSecurityOrigin) Protocol() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The security origin's host.
+//
 // Host calls the underlying Host.
 func (x *WKSecurityOrigin) Host() string {
 	_r := x.inner.Host()
@@ -54,6 +58,8 @@ func (x *WKSecurityOrigin) Host() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The security origin's port.
+//
 // Port calls the underlying Port.
 func (x *WKSecurityOrigin) Port() int {
 	return x.inner.Port()

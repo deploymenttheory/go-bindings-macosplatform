@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The boot loader configuration the system uses to boot guest-operating systems that expect an Extensible Firmware Interface (EFI) ROM.
+//
 // EFIBootLoader wraps [raw.VZEFIBootLoader] with a fluent Go API.
 type EFIBootLoader struct {
 	inner *raw.VZEFIBootLoader
@@ -35,6 +37,8 @@ func NewEFIBootLoader() *EFIBootLoader {
 	return &EFIBootLoader{inner: raw.VZEFIBootLoaderFromID(_id)}
 }
 
+// The boot loader’s EFI variable store.
+//
 // WithVariableStore sets the variableStore property and returns the receiver for chaining.
 func (x *EFIBootLoader) WithVariableStore(variableStore *EFIVariableStore) *EFIBootLoader {
 	x.inner.SetVariableStore(variableStore.Unwrap())

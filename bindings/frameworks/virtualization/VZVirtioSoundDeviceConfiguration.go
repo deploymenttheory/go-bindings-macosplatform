@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines a Virtio sound device configuration.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtiosounddeviceconfiguration
 type VZVirtioSoundDeviceConfiguration struct {
 	VZAudioDeviceConfiguration
@@ -32,6 +34,7 @@ func VZVirtioSoundDeviceConfigurationFromID(id objc.ID) *VZVirtioSoundDeviceConf
 	return o
 }
 
+// Creates a new sound device configuration.
 func (o *VZVirtioSoundDeviceConfiguration) Init() *VZVirtioSoundDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioSoundDeviceConfigurationSelInit)
 	if _ret != 0 {

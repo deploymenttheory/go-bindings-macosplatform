@@ -35,6 +35,8 @@ func NewRacingWheelInputState() *RacingWheelInputState {
 	return &RacingWheelInputState{inner: raw.GCRacingWheelInputStateFromID(_id)}
 }
 
+// The steering wheel element.
+//
 // Wheel calls the underlying Wheel.
 func (x *RacingWheelInputState) Wheel() *SteeringWheelElement {
 	_r := x.inner.Wheel()
@@ -59,6 +61,8 @@ func (x *RacingWheelInputState) ClutchPedal() raw.GCButtonElement {
 	return x.inner.ClutchPedal()
 }
 
+// The element representing an attached gear shifter accessory. Note that this element only represents an external gear shifter accessory. Many racing wheels have a pair of built in paddle buttons that can be used for sequential gear shifting.  Those buttons are can be looked up with the \c GCInputLeftPaddle and \c GCInputRightPaddle input names.
+//
 // Shifter calls the underlying Shifter.
 func (x *RacingWheelInputState) Shifter() *GearShifterElement {
 	_r := x.inner.Shifter()

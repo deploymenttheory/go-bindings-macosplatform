@@ -31,6 +31,8 @@ func MTRThreadOperationalDatasetFromID(id objc.ID) *MTRThreadOperationalDataset 
 	return &MTRThreadOperationalDataset{inner: raw.MTRThreadOperationalDatasetFromID(id)}
 }
 
+// Create a Thread Operational Dataset object with the individual network fields. @param extendedPANID Must be MTRSizeThreadExtendedPANID bytes.  Otherwise nil will be returned. @param masterKey Must be MTRSizeThreadMasterKey bytes. Otherwise nil will be returned. @param PSKc Must be MTRSizeThreadPSKc bytes.  Otherwise nil will be returned. @param channelNumber Must be an unsigned 16-bit value. @param panID Must be MTRSizeThreadPANID bytes.  Otherwise nil will be returned.  In particular, it's expected to be a 16-bit unsigned integer stored as 2 bytes in host order.
+//
 // NewMTRThreadOperationalDatasetWithNetworkNameExtendedPANIDMasterKeyPSKcChannelNumberPanID creates a new [MTRThreadOperationalDataset].
 func NewMTRThreadOperationalDatasetWithNetworkNameExtendedPANIDMasterKeyPSKcChannelNumberPanID(networkName string, extendedPANID *foundation.NSData, masterKey *foundation.NSData, pSKc *foundation.NSData, channelNumber *foundation.NSNumber, panID *foundation.NSData) *MTRThreadOperationalDataset {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRThreadOperationalDataset")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewMTRThreadOperationalDatasetWithNetworkNameExtendedPANIDMasterKeyPSKcChan
 	return &MTRThreadOperationalDataset{inner: raw.MTRThreadOperationalDatasetFromID(_id)}
 }
 
+// Create a Thread Operational Dataset object with a RCP formatted active operational dataset. This initializer will return nil if the input data cannot be parsed correctly
+//
 // NewMTRThreadOperationalDatasetWithData creates a new [MTRThreadOperationalDataset].
 func NewMTRThreadOperationalDatasetWithData(data *foundation.NSData) *MTRThreadOperationalDataset {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRThreadOperationalDataset")), objc.RegisterName("alloc"))
@@ -58,11 +62,15 @@ func (x *MTRThreadOperationalDataset) WithChannel(channel uint16) *MTRThreadOper
 	return x
 }
 
+// Get the underlying data that represents the Thread Active Operational Dataset This can be used for the threadOperationalDataset of MTRCommissioningParameters.
+//
 // Data calls the underlying Data.
 func (x *MTRThreadOperationalDataset) Data() *foundation.NSData {
 	return x.inner.Data()
 }
 
+// The Thread Network name
+//
 // NetworkName calls the underlying NetworkName.
 func (x *MTRThreadOperationalDataset) NetworkName() string {
 	_r := x.inner.NetworkName()
@@ -72,26 +80,36 @@ func (x *MTRThreadOperationalDataset) NetworkName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The Thread Network extendended PAN ID
+//
 // ExtendedPANID calls the underlying ExtendedPANID.
 func (x *MTRThreadOperationalDataset) ExtendedPANID() *foundation.NSData {
 	return x.inner.ExtendedPANID()
 }
 
+// The 16 byte Master Key
+//
 // MasterKey calls the underlying MasterKey.
 func (x *MTRThreadOperationalDataset) MasterKey() *foundation.NSData {
 	return x.inner.MasterKey()
 }
 
+// The Thread PSKc
+//
 // PSKc calls the underlying PSKc.
 func (x *MTRThreadOperationalDataset) PSKc() *foundation.NSData {
 	return x.inner.PSKc()
 }
 
+// The Thread network channel.  Always an unsigned 16-bit integer.
+//
 // ChannelNumber calls the underlying ChannelNumber.
 func (x *MTRThreadOperationalDataset) ChannelNumber() *foundation.NSNumber {
 	return x.inner.ChannelNumber()
 }
 
+// A uint16_t stored as 2-bytes in host order representing the Thread PAN ID
+//
 // PanID calls the underlying PanID.
 func (x *MTRThreadOperationalDataset) PanID() *foundation.NSData {
 	return x.inner.PanID()

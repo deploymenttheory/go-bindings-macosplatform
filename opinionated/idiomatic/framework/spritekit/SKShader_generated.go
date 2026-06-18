@@ -32,6 +32,8 @@ func ShaderFromID(id objc.ID) *Shader {
 	return &Shader{inner: raw.SKShaderFromID(id)}
 }
 
+// Create a custom shader with source code. @param source the source code for the custom fragment shader.
+//
 // NewShaderWithSource creates a new [Shader].
 func NewShaderWithSource(source string) *Shader {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKShader")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewShaderWithSource(source string) *Shader {
 	return &Shader{inner: raw.SKShaderFromID(_id)}
 }
 
+// Create a custom shader with source code and uniforms. @param source the source code for the custom fragment shader. @param uniforms the array of uniforms supplied to this shader
+//
 // NewShaderWithSourceUniforms creates a new [Shader].
 func NewShaderWithSourceUniforms(source string, uniforms *foundation.NSArray[*raw.SKUniform]) *Shader {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKShader")), objc.RegisterName("alloc"))
@@ -52,6 +56,8 @@ func (x *Shader) WithSource(source string) *Shader {
 	return x
 }
 
+// You may define additional uniforms to be used in your shader here. There is no need to declare them in you source, just use them by name. All uniforms declared must be used within the source.
+//
 // WithUniforms sets the collection, converting the Go slice to an NSArray.
 func (x *Shader) WithUniforms(items ...*raw.SKUniform) *Shader {
 	if len(items) == 0 {
@@ -121,6 +127,8 @@ func (x *Shader) SetSource(source string) {
 	x.inner.SetSource(foundation.NSStringStringWithUTF8String(source))
 }
 
+// You may define additional uniforms to be used in your shader here. There is no need to declare them in you source, just use them by name. All uniforms declared must be used within the source.
+//
 // Uniforms returns the collection as a Go slice.
 func (x *Shader) Uniforms() []*Uniform {
 	arr := x.inner.Uniforms()

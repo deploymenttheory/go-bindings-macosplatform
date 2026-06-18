@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @class			DREraseProgressPanel @abstract 		Manages a panel that displays progress while erasing media. @discussion		A DREraseProgressPanel object manages a panel that displays and updates erase progress. The erase panel is responsible for begining the erase. The erase is begun and a progress panel is displayed on screen by calling @link //apple_ref/occ/instm/DREraseProgressPanel/beginProgressSheetForErase:modalForWindow: beginProgressSheetForErase:modalForWindow: @/link if a sheet interface is desired, or @link //apple_ref/occ/instm/DREraseProgressPanel/beginProgressPanelForErase: beginProgressPanelForErase:  @/link for a non-modal panel. A DREraseProgressPanel sends a @link //apple_ref/occ/instm/NSObject/eraseProgressPanel:eraseDidFinish: eraseProgressPanel:eraseDidFinish: @/link message to it's delegate when the erase completes. This method allows the delegate to take over end-of-erase handling from the erase progress panel to customize error dialogs or user notification.
+//
 // EraseProgressPanel wraps [raw.DREraseProgressPanel] with a fluent Go API.
 type EraseProgressPanel struct {
 	inner *raw.DREraseProgressPanel
@@ -38,16 +40,22 @@ func NewEraseProgressPanel() *EraseProgressPanel {
 	return &EraseProgressPanel{inner: raw.DREraseProgressPanelFromID(_id)}
 }
 
+// @method			beginProgressSheetForErase:modalForWindow: @abstract		Presents the progress panel as a sheet and begins the erase process. @discussion		This method returns control to the caller after it has displayed the progress sheet and begun the erase. Once the method has returned the caller can perform other operations while the erase continues. @param			erase		The object performing the erase. @param			docWindow	The window the sheet will be attached to. If docWindow is not nil, the panel slides down as a sheet running as a document modal window. If owner is nil, this is an error.
+//
 // BeginProgressSheetForEraseModalForWindow calls the underlying BeginProgressSheetForEraseModalForWindow.
 func (x *EraseProgressPanel) BeginProgressSheetForEraseModalForWindow(erase *discrecording.DRErase, docWindow *appkit.NSWindow) {
 	x.inner.BeginProgressSheetForEraseModalForWindow(erase, docWindow)
 }
 
+// @method			beginProgressPanelForErase: @abstract		Presents the progress panel on screen and begins the erase process. @discussion		This method returns control to the caller after it has displayed the progress sheet and begun the erase. Once the method has returned the caller can perform other operations while the erase continues. @param			erase		The object performing the erase.
+//
 // BeginProgressPanelForErase calls the underlying BeginProgressPanelForErase.
 func (x *EraseProgressPanel) BeginProgressPanelForErase(erase *discrecording.DRErase) {
 	x.inner.BeginProgressPanelForErase(erase)
 }
 
+// @method			setDescription: @abstract		Sets the panel text displayed to the user. @discussion		The panel's description is typically a short text string that gives an indication to the user what operation is being performed. If no description is explicitly set, the progress panel uses a standard text string suitable to the erase. @param			description	The text to display.
+//
 // SetDescription calls the underlying SetDescription.
 func (x *EraseProgressPanel) SetDescription(description string) {
 	x.inner.SetDescription(foundation.NSStringStringWithUTF8String(description))

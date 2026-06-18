@@ -32,6 +32,8 @@ func MTRClusterRelativeHumidityMeasurementFromID(id objc.ID) *MTRClusterRelative
 	return &MTRClusterRelativeHumidityMeasurement{inner: raw.MTRClusterRelativeHumidityMeasurementFromID(id)}
 }
 
+// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+//
 // NewMTRClusterRelativeHumidityMeasurementWithDeviceEndpointIDQueue creates a new [MTRClusterRelativeHumidityMeasurement].
 func NewMTRClusterRelativeHumidityMeasurementWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterRelativeHumidityMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterRelativeHumidityMeasurement")), objc.RegisterName("alloc"))

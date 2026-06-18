@@ -46,30 +46,40 @@ func NewNumericDataAxisDescriptorWithAttributedTitleLowerBoundUpperBoundGridline
 	return &NumericDataAxisDescriptor{inner: raw.AXNumericDataAxisDescriptorFromID(_id)}
 }
 
+// The scale to use for this axis. This should match the visual representation in the chart. If not set explicitly, this will default to `linear`.
+//
 // WithScaleType sets the scaleType property and returns the receiver for chaining.
 func (x *NumericDataAxisDescriptor) WithScaleType(scaleType AXNumericDataAxisDescriptorScale) *NumericDataAxisDescriptor {
 	x.inner.SetScaleType(raw.AXNumericDataAxisDescriptorScale(scaleType))
 	return x
 }
 
+// The minimum displayable value for the axis.
+//
 // WithLowerBound sets the lowerBound property and returns the receiver for chaining.
 func (x *NumericDataAxisDescriptor) WithLowerBound(lowerBound float64) *NumericDataAxisDescriptor {
 	x.inner.SetLowerBound(lowerBound)
 	return x
 }
 
+// The maximum displayable value for the axis.
+//
 // WithUpperBound sets the upperBound property and returns the receiver for chaining.
 func (x *NumericDataAxisDescriptor) WithUpperBound(upperBound float64) *NumericDataAxisDescriptor {
 	x.inner.SetUpperBound(upperBound)
 	return x
 }
 
+// Provides a value description to be spoken for a particular data value on this axis. Use this to format data values to string representations that include units, dates, times, etc.
+//
 // WithValueDescriptionProvider sets the valueDescriptionProvider property and returns the receiver for chaining.
 func (x *NumericDataAxisDescriptor) WithValueDescriptionProvider(valueDescriptionProvider objc.Block) *NumericDataAxisDescriptor {
 	x.inner.SetValueDescriptionProvider(valueDescriptionProvider)
 	return x
 }
 
+// The positions of any gridlines along this axis.
+//
 // WithGridlinePositions sets the collection, converting the Go slice to an NSArray.
 func (x *NumericDataAxisDescriptor) WithGridlinePositions(items ...*foundation.NSNumber) *NumericDataAxisDescriptor {
 	if len(items) == 0 {
@@ -88,6 +98,8 @@ func (x *NumericDataAxisDescriptor) WithGridlinePositions(items ...*foundation.N
 	return x
 }
 
+// The scale to use for this axis. This should match the visual representation in the chart. If not set explicitly, this will default to `linear`.
+//
 // ScaleType calls the underlying ScaleType.
 func (x *NumericDataAxisDescriptor) ScaleType() AXNumericDataAxisDescriptorScale {
 	return AXNumericDataAxisDescriptorScale(x.inner.ScaleType())
@@ -98,6 +110,8 @@ func (x *NumericDataAxisDescriptor) SetScaleType(scaleType AXNumericDataAxisDesc
 	x.inner.SetScaleType(raw.AXNumericDataAxisDescriptorScale(scaleType))
 }
 
+// The minimum displayable value for the axis.
+//
 // LowerBound calls the underlying LowerBound.
 func (x *NumericDataAxisDescriptor) LowerBound() float64 {
 	return x.inner.LowerBound()
@@ -108,6 +122,8 @@ func (x *NumericDataAxisDescriptor) SetLowerBound(lowerBound float64) {
 	x.inner.SetLowerBound(lowerBound)
 }
 
+// The maximum displayable value for the axis.
+//
 // UpperBound calls the underlying UpperBound.
 func (x *NumericDataAxisDescriptor) UpperBound() float64 {
 	return x.inner.UpperBound()
@@ -118,6 +134,8 @@ func (x *NumericDataAxisDescriptor) SetUpperBound(upperBound float64) {
 	x.inner.SetUpperBound(upperBound)
 }
 
+// Provides a value description to be spoken for a particular data value on this axis. Use this to format data values to string representations that include units, dates, times, etc.
+//
 // ValueDescriptionProvider calls the underlying ValueDescriptionProvider.
 func (x *NumericDataAxisDescriptor) ValueDescriptionProvider() objc.Block {
 	return x.inner.ValueDescriptionProvider()
@@ -128,6 +146,8 @@ func (x *NumericDataAxisDescriptor) SetValueDescriptionProvider(valueDescription
 	x.inner.SetValueDescriptionProvider(valueDescriptionProvider)
 }
 
+// The positions of any gridlines along this axis.
+//
 // GridlinePositions returns the collection as a Go slice.
 func (x *NumericDataAxisDescriptor) GridlinePositions() []*foundation.NSNumber {
 	arr := x.inner.GridlinePositions()

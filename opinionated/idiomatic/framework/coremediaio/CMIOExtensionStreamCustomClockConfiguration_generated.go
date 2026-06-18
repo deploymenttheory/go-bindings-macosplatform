@@ -34,6 +34,8 @@ func ExtensionStreamCustomClockConfigurationFromID(id objc.ID) *ExtensionStreamC
 	return &ExtensionStreamCustomClockConfiguration{inner: raw.CMIOExtensionStreamCustomClockConfigurationFromID(id)}
 }
 
+// @method initWithName:sourceIdentifier:getTimeCallMinimumInterval:numberOfEventsForRateSmoothing:numberOfAveragesForRateSmoothing: @abstract Initialize a custom clock configuration instance. @param clockName The name of the clock being specified. @param sourceIdentifier An unique identifier that is used to indicate the entity that is driving the clock. This value is used internally to determine if two custom clocks have the same hardware source, and thus determine whether or not they will drift relative to one another. This parameter is used in the following way: if a device supports multiple active streams that are internally clocked by a common source, then instead of sharing one clock between each stream, a clock per stream can be configured with the sourceIdentifier for each clock set to be the same value. @param getTimeCallMinimumInterval If the clock is queried for its current time more often than this interval, an interpolated value will be returned. @param numberOfEventsForRateSmoothing The number of events to use for rate smoothing; must be > 0. @param numberOfAveragesForRateSmoothing The number of averages used for rate smoothing; if 0, the default smoothing algorithm is used. @result A CMIOExtensionStreamCustomClockConfiguration instance.
+//
 // NewExtensionStreamCustomClockConfigurationWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing creates a new [ExtensionStreamCustomClockConfiguration].
 func NewExtensionStreamCustomClockConfigurationWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing(clockName string, sourceIdentifier *foundation.NSUUID, getTimeCallMinimumInterval coremedia.CMTime, numberOfEventsForRateSmoothing uint32, numberOfAveragesForRateSmoothing uint32) *ExtensionStreamCustomClockConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionStreamCustomClockConfiguration")), objc.RegisterName("alloc"))
@@ -41,6 +43,8 @@ func NewExtensionStreamCustomClockConfigurationWithClockNameSourceIdentifierGetT
 	return &ExtensionStreamCustomClockConfiguration{inner: raw.CMIOExtensionStreamCustomClockConfigurationFromID(_id)}
 }
 
+// @property clockName @abstract The name of the clock.
+//
 // ClockName calls the underlying ClockName.
 func (x *ExtensionStreamCustomClockConfiguration) ClockName() string {
 	_r := x.inner.ClockName()
@@ -50,21 +54,29 @@ func (x *ExtensionStreamCustomClockConfiguration) ClockName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property sourceIdentifier @abstract The identifier of the entity driving the clock. @discussion An unique identifier that is used to indicate the entity that is driving the clock. This value is used internally to determine if two custom clocks have the same hardware source, and thus determine whether or not they will drift relative to one another. This parameter is used in the following way: if a device supports multiple active streams that are internally clocked by a common source, then instead of sharing one clock between each stream, a clock per stream can be configured with the sourceIdentifier for each clock set to be the same value.
+//
 // SourceIdentifier calls the underlying SourceIdentifier.
 func (x *ExtensionStreamCustomClockConfiguration) SourceIdentifier() *foundation.NSUUID {
 	return x.inner.SourceIdentifier()
 }
 
+// @property getTimeCallMinimumInterval @abstract If the clock is queried for its current time more often than this interval, an interpolated value will be returned.
+//
 // GetTimeCallMinimumInterval calls the underlying GetTimeCallMinimumInterval.
 func (x *ExtensionStreamCustomClockConfiguration) GetTimeCallMinimumInterval() coremedia.CMTime {
 	return x.inner.GetTimeCallMinimumInterval()
 }
 
+// @property numberOfEventsForRateSmoothing @abstract The number of events to use for rate smoothing; will be > 0.
+//
 // NumberOfEventsForRateSmoothing calls the underlying NumberOfEventsForRateSmoothing.
 func (x *ExtensionStreamCustomClockConfiguration) NumberOfEventsForRateSmoothing() uint32 {
 	return x.inner.NumberOfEventsForRateSmoothing()
 }
 
+// @property numberOfAveragesForRateSmoothing @abstract The number of averages used for rate smoothing; 0 indicates that the default smoothing algorithm is used.
+//
 // NumberOfAveragesForRateSmoothing calls the underlying NumberOfAveragesForRateSmoothing.
 func (x *ExtensionStreamCustomClockConfiguration) NumberOfAveragesForRateSmoothing() uint32 {
 	return x.inner.NumberOfAveragesForRateSmoothing()

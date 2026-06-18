@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An obstacle with an impassible closed polygon
+//
 // PolygonObstacle wraps [raw.GKPolygonObstacle] with a fluent Go API.
 type PolygonObstacle struct {
 	inner *raw.GKPolygonObstacle
@@ -37,11 +39,15 @@ func NewPolygonObstacleWithPointsCount(points unsafe.Pointer, numPoints uint) *P
 	return &PolygonObstacle{inner: raw.GKPolygonObstacleFromID(_id)}
 }
 
+// Returns the vertex at the indicated index @param index index of the vertex to retrieve
+//
 // VertexAtIndex calls the underlying VertexAtIndex.
 func (x *PolygonObstacle) VertexAtIndex(index uint) unsafe.Pointer {
 	return x.inner.VertexAtIndex(index)
 }
 
+// Number of vertices on this polygon
+//
 // VertexCount calls the underlying VertexCount.
 func (x *PolygonObstacle) VertexCount() uint {
 	return x.inner.VertexCount()

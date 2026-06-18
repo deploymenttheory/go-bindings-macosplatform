@@ -30,6 +30,16 @@ type Object interface {
 	Ptr() objc.ID
 }
 
+// IDer is satisfied by every idiomatic wrapper type, each of which exposes its
+// underlying ObjC object pointer via ID(). Generated variadic ergonomics use it
+// as the element type for parameters whose raw element is an ObjC *protocol*:
+// a protocol has many unrelated conformers and thus no single wrapper type (so
+// no provider interface), but any idiomatic wrapper can be passed by value and
+// the codegen reads its .ID() to build the underlying array.
+type IDer interface {
+	ID() objc.ID
+}
+
 // AnyObject is the constraint for ObjC generic type parameters (NSArray[T],
 // NSDictionary[K,V], etc). Using any allows both raw objc.ID handles and
 // fully typed wrapper structs as type arguments without unsafe.Pointer fallback.

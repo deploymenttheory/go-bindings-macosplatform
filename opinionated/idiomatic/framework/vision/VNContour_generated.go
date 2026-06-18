@@ -38,6 +38,8 @@ func NewContour() *Contour {
 	return &Contour{inner: raw.VNContourFromID(_id)}
 }
 
+// @brief Returns a VNContour object that is a child of this VNContour at the specified index. @param childContourIndex The index into the childContours array. @param error The error returned if the child contour cannot be provided. @return The VNContour object at the specified index path, or nil of a failure occurs.
+//
 // ChildContourAtIndexError calls the underlying ChildContourAtIndexError.
 func (x *Contour) ChildContourAtIndexError(childContourIndex uint) (*Contour, error) {
 	_r, _err := x.inner.ChildContourAtIndexError(childContourIndex)
@@ -50,6 +52,8 @@ func (x *Contour) ChildContourAtIndexError(childContourIndex uint) (*Contour, er
 	return &Contour{inner: _r}, nil
 }
 
+// @brief Simplifies the contour's collection of points into a polygon using the Ramer Douglas Peucker Algorithm. @discussion See <https://en.wikipedia.org/wiki/Ramer–Douglas–Peucker_algorithm> @param epsilon Points that have a perpendicular distance to the line segment they are on which are greater than epsilon are kept, others are eliminated. @param error The error returned if a simplified contour cannot be created. @return A new VNContour object with a simplified polygon consisting of a subset of the points that defined the original VNContour.
+//
 // PolygonApproximationWithEpsilonError calls the underlying PolygonApproximationWithEpsilonError.
 func (x *Contour) PolygonApproximationWithEpsilonError(epsilon float32) (*Contour, error) {
 	_r, _err := x.inner.PolygonApproximationWithEpsilonError(epsilon)
@@ -62,16 +66,22 @@ func (x *Contour) PolygonApproximationWithEpsilonError(epsilon float32) (*Contou
 	return &Contour{inner: _r}, nil
 }
 
+// @brief The path to the target VNContour as it is stored in the owning VNContoursObservation's hierarchy of contours.
+//
 // IndexPath calls the underlying IndexPath.
 func (x *Contour) IndexPath() *foundation.NSIndexPath {
 	return x.inner.IndexPath()
 }
 
+// @brief The total number of child contours in the target contour. @discussion The use of this property is preferred over childContours.count due to the cost of building the child objects.
+//
 // ChildContourCount calls the underlying ChildContourCount.
 func (x *Contour) ChildContourCount() int {
 	return x.inner.ChildContourCount()
 }
 
+// @brief The array of the contours enclosed by the target contour. @discussion This property may come with the cost of instantiating new VNContour objects; therefore, clients are strongly encouraged to hold the results in a local variable instead of repeatedly invoking it.
+//
 // ChildContours returns the collection as a Go slice.
 func (x *Contour) ChildContours() []*Contour {
 	arr := x.inner.ChildContours()
@@ -83,21 +93,29 @@ func (x *Contour) ChildContours() []*Contour {
 	})
 }
 
+// @brief The number of points that describe the contour.
+//
 // PointCount calls the underlying PointCount.
 func (x *Contour) PointCount() int {
 	return x.inner.PointCount()
 }
 
+// @brief The array of points in normalized coordinates that describe the contour. @discussion Provides the address of a buffer containing the array of (x,y) points stored as a simd_float2 value.  This buffer is owned by the target object and is guaranteed to exist as long as this VNContour instance exists.
+//
 // NormalizedPoints calls the underlying NormalizedPoints.
 func (x *Contour) NormalizedPoints() unsafe.Pointer {
 	return x.inner.NormalizedPoints()
 }
 
+// @brief The contour represented as a CGPath in normalized coordinates. @details The path is owned by this object and therefore will be alive as long as the the observation is alive.
+//
 // NormalizedPath calls the underlying NormalizedPath.
 func (x *Contour) NormalizedPath() unsafe.Pointer {
 	return x.inner.NormalizedPath()
 }
 
+// @brief The aspect ratio of the contour from the original image aspect ratio expressed as width/height
+//
 // AspectRatio calls the underlying AspectRatio.
 func (x *Contour) AspectRatio() float32 {
 	return x.inner.AspectRatio()

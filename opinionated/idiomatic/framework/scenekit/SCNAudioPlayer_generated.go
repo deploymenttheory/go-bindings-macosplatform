@@ -31,6 +31,8 @@ func AudioPlayerFromID(id objc.ID) *AudioPlayer {
 	return &AudioPlayer{inner: raw.SCNAudioPlayerFromID(id)}
 }
 
+// @property initWithSource: @abstract Init an audio player with a source. Most people should use audioPlayerWithSource as it permits to recycle previous players instead of creating new ones for each instance.
+//
 // NewAudioPlayerWithSource creates a new [AudioPlayer].
 func NewAudioPlayerWithSource(source *raw.SCNAudioSource) *AudioPlayer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNAudioPlayer")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewAudioPlayerWithSource(source *raw.SCNAudioSource) *AudioPlayer {
 	return &AudioPlayer{inner: raw.SCNAudioPlayerFromID(_id)}
 }
 
+// @property initWithAVAudioNode: @abstract Init an audio player with an AVAudioNode. Most people should use audioPlayerWithAVAudioNode as it permits to recycle previous players instead of creating new ones for each instance.
+//
 // NewAudioPlayerWithAVAudioNode creates a new [AudioPlayer].
 func NewAudioPlayerWithAVAudioNode(audioNode *avfaudio.AVAudioNode) *AudioPlayer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNAudioPlayer")), objc.RegisterName("alloc"))
@@ -45,18 +49,24 @@ func NewAudioPlayerWithAVAudioNode(audioNode *avfaudio.AVAudioNode) *AudioPlayer
 	return &AudioPlayer{inner: raw.SCNAudioPlayerFromID(_id)}
 }
 
+// @property playbackStarted @abstract This block is called when the playback starts in case a valid audio source is present.
+//
 // WithWillStartPlayback sets the willStartPlayback property and returns the receiver for chaining.
 func (x *AudioPlayer) WithWillStartPlayback(willStartPlayback func()) *AudioPlayer {
 	x.inner.SetWillStartPlayback(willStartPlayback)
 	return x
 }
 
+// @property playbackFinished @abstract This block is called when the playback stops in case a valid audio source is present.
+//
 // WithDidFinishPlayback sets the didFinishPlayback property and returns the receiver for chaining.
 func (x *AudioPlayer) WithDidFinishPlayback(didFinishPlayback func()) *AudioPlayer {
 	x.inner.SetDidFinishPlayback(didFinishPlayback)
 	return x
 }
 
+// @property playbackStarted @abstract This block is called when the playback starts in case a valid audio source is present.
+//
 // WillStartPlayback calls the underlying WillStartPlayback.
 func (x *AudioPlayer) WillStartPlayback() objc.Block {
 	return x.inner.WillStartPlayback()
@@ -76,6 +86,8 @@ func (x *AudioPlayer) SetWillStartPlayback(ctx context.Context) error {
 	}
 }
 
+// @property playbackFinished @abstract This block is called when the playback stops in case a valid audio source is present.
+//
 // DidFinishPlayback calls the underlying DidFinishPlayback.
 func (x *AudioPlayer) DidFinishPlayback() objc.Block {
 	return x.inner.DidFinishPlayback()
@@ -95,11 +107,15 @@ func (x *AudioPlayer) SetDidFinishPlayback(ctx context.Context) error {
 	}
 }
 
+// @property audioNode @abstract The audioNode. If this player was not initialised with a custom AVAudioNode this contains the internal audio player node used by scene kit internally.
+//
 // AudioNode calls the underlying AudioNode.
 func (x *AudioPlayer) AudioNode() *avfaudio.AVAudioNode {
 	return x.inner.AudioNode()
 }
 
+// @property audioSource @abstract The audioSource if there is one.
+//
 // AudioSource calls the underlying AudioSource.
 func (x *AudioPlayer) AudioSource() *AudioSource {
 	_r := x.inner.AudioSource()

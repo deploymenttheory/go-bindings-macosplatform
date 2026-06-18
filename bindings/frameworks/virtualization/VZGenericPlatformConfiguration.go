@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The platform configuration for a generic Intel or ARM virtual machine.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzgenericplatformconfiguration
 type VZGenericPlatformConfiguration struct {
 	VZPlatformConfiguration
@@ -34,6 +36,7 @@ func VZGenericPlatformConfigurationFromID(id objc.ID) *VZGenericPlatformConfigur
 	return o
 }
 
+// Returns a new generic platform configuration.
 func (o *VZGenericPlatformConfiguration) Init() *VZGenericPlatformConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZGenericPlatformConfigurationSelInit)
 	if _ret != 0 {

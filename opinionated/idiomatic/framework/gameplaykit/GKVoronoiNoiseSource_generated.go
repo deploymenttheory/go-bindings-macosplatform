@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Voronoi noise partitions the space into angular, polygonal "cells", which are reminiscent of stained glass or crystal-like structures.
+//
 // VoronoiNoiseSource wraps [raw.GKVoronoiNoiseSource] with a fluent Go API.
 type VoronoiNoiseSource struct {
 	inner *raw.GKVoronoiNoiseSource

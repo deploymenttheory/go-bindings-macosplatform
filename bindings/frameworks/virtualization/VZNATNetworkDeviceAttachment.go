@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A device that routes network requests through the host computer and performs network address translation on the resulting packets.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vznatnetworkdeviceattachment
 type VZNATNetworkDeviceAttachment struct {
 	VZNetworkDeviceAttachment
@@ -29,6 +31,7 @@ func VZNATNetworkDeviceAttachmentFromID(id objc.ID) *VZNATNetworkDeviceAttachmen
 	return o
 }
 
+// Creates an attachment that performs network address translation on the guest system’s network packets.
 func (o *VZNATNetworkDeviceAttachment) Init() *VZNATNetworkDeviceAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZNATNetworkDeviceAttachmentSelInit)
 	if _ret != 0 {

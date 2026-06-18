@@ -31,6 +31,8 @@ func MTRClusterAudioOutputFromID(id objc.ID) *MTRClusterAudioOutput {
 	return &MTRClusterAudioOutput{inner: raw.MTRClusterAudioOutputFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterAudioOutputWithDeviceEndpointIDQueue creates a new [MTRClusterAudioOutput].
 func NewMTRClusterAudioOutputWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterAudioOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterAudioOutput")), objc.RegisterName("alloc"))

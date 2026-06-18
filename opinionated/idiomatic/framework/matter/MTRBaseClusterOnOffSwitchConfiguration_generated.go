@@ -35,6 +35,8 @@ func MTRBaseClusterOnOffSwitchConfigurationFromID(id objc.ID) *MTRBaseClusterOnO
 	return &MTRBaseClusterOnOffSwitchConfiguration{inner: raw.MTRBaseClusterOnOffSwitchConfigurationFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterOnOffSwitchConfigurationWithDeviceEndpointIDQueue creates a new [MTRBaseClusterOnOffSwitchConfiguration].
 func NewMTRBaseClusterOnOffSwitchConfigurationWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterOnOffSwitchConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterOnOffSwitchConfiguration")), objc.RegisterName("alloc"))

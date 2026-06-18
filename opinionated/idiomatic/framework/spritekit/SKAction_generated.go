@@ -35,30 +35,40 @@ func NewAction() *Action {
 	return &Action{inner: raw.SKActionFromID(_id)}
 }
 
+// The duration required to complete an action, in seconds.
+//
 // WithDuration sets the duration property and returns the receiver for chaining.
 func (x *Action) WithDuration(duration float64) *Action {
 	x.inner.SetDuration(duration)
 	return x
 }
 
+// The timing mode used to execute an action @see SKActionTimingMode
+//
 // WithTimingMode sets the timingMode property and returns the receiver for chaining.
 func (x *Action) WithTimingMode(timingMode SKActionTimingMode) *Action {
 	x.inner.SetTimingMode(raw.SKActionTimingMode(timingMode))
 	return x
 }
 
+// When set, prodives a custom timing via a block. Applies after the 'timingMode' property is taken into account, defaults to nil @see SKActionTimingFunction
+//
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
 func (x *Action) WithTimingFunction(timingFunction objc.Block) *Action {
 	x.inner.SetTimingFunction(timingFunction)
 	return x
 }
 
+// A speed factor that modifies how fast an action runs. Default value is 1.0
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *Action) WithSpeed(speed float64) *Action {
 	x.inner.SetSpeed(speed)
 	return x
 }
 
+// Creates an action that reverses the behavior of another action @return This method always returns an action object; however, not all actions are reversible
+//
 // ReversedAction calls the underlying ReversedAction.
 func (x *Action) ReversedAction() *Action {
 	_r := x.inner.ReversedAction()
@@ -68,6 +78,8 @@ func (x *Action) ReversedAction() *Action {
 	return &Action{inner: _r}
 }
 
+// The duration required to complete an action, in seconds.
+//
 // Duration calls the underlying Duration.
 func (x *Action) Duration() float64 {
 	return x.inner.Duration()
@@ -78,6 +90,8 @@ func (x *Action) SetDuration(duration float64) {
 	x.inner.SetDuration(duration)
 }
 
+// The timing mode used to execute an action @see SKActionTimingMode
+//
 // TimingMode calls the underlying TimingMode.
 func (x *Action) TimingMode() SKActionTimingMode {
 	return SKActionTimingMode(x.inner.TimingMode())
@@ -88,6 +102,8 @@ func (x *Action) SetTimingMode(timingMode SKActionTimingMode) {
 	x.inner.SetTimingMode(raw.SKActionTimingMode(timingMode))
 }
 
+// When set, prodives a custom timing via a block. Applies after the 'timingMode' property is taken into account, defaults to nil @see SKActionTimingFunction
+//
 // TimingFunction calls the underlying TimingFunction.
 func (x *Action) TimingFunction() objc.Block {
 	return x.inner.TimingFunction()
@@ -98,6 +114,8 @@ func (x *Action) SetTimingFunction(timingFunction objc.Block) {
 	x.inner.SetTimingFunction(timingFunction)
 }
 
+// A speed factor that modifies how fast an action runs. Default value is 1.0
+//
 // Speed calls the underlying Speed.
 func (x *Action) Speed() float64 {
 	return x.inner.Speed()

@@ -36,11 +36,15 @@ func NewEnvironmentMechanismCompanion() *EnvironmentMechanismCompanion {
 	return &EnvironmentMechanismCompanion{inner: raw.LAEnvironmentMechanismCompanionFromID(_id)}
 }
 
+// Type of the companion.
+//
 // Type calls the underlying Type.
 func (x *EnvironmentMechanismCompanion) Type() LACompanionType {
 	return LACompanionType(x.inner.Type())
 }
 
+// @brief Hash of the current companion pairing as returned by @c LAContext.domainState.companion.stateHash(for:) @discussion If no companion are paired for this companion type, @c stateHash property is @c nil. If at least one companion is paired for this companion type, @c stateHash is not @c nil and it changes whenever the set of paired companions of this type is changed.
+//
 // StateHash calls the underlying StateHash.
 func (x *EnvironmentMechanismCompanion) StateHash() *foundation.NSData {
 	return x.inner.StateHash()

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains a phone number that the data detection system matches. The DataDetection framework returns a phone number match in a `DDMatchPhoneNumber` object, which contains a phone number, and optionally a label that categorizes the phone number.
+//
 // MatchPhoneNumber wraps [raw.DDMatchPhoneNumber] with a fluent Go API.
 type MatchPhoneNumber struct {
 	inner *raw.DDMatchPhoneNumber
@@ -36,6 +38,8 @@ func NewMatchPhoneNumber() *MatchPhoneNumber {
 	return &MatchPhoneNumber{inner: raw.DDMatchPhoneNumberFromID(_id)}
 }
 
+// A string that represents a phone number.
+//
 // PhoneNumber calls the underlying PhoneNumber.
 func (x *MatchPhoneNumber) PhoneNumber() string {
 	_r := x.inner.PhoneNumber()
@@ -45,6 +49,8 @@ func (x *MatchPhoneNumber) PhoneNumber() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A string that categorizes a phone number, such as Home or Work.
+//
 // Label calls the underlying Label.
 func (x *MatchPhoneNumber) Label() string {
 	_r := x.inner.Label()

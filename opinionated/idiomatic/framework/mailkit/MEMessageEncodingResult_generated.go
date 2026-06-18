@@ -37,6 +37,8 @@ func NewMessageEncodingResultWithEncodedMessageSigningErrorEncryptionError(encod
 	return &MessageEncodingResult{inner: raw.MEMessageEncodingResultFromID(_id)}
 }
 
+// @brief The encoded message. Nil if no need to encode or an error occured while encoding
+//
 // EncodedMessage calls the underlying EncodedMessage.
 func (x *MessageEncodingResult) EncodedMessage() *EncodedOutgoingMessage {
 	_r := x.inner.EncodedMessage()
@@ -46,11 +48,15 @@ func (x *MessageEncodingResult) EncodedMessage() *EncodedOutgoingMessage {
 	return &EncodedOutgoingMessage{inner: _r}
 }
 
+// @brief Any error that occured while attempting to sign the outgoing message.
+//
 // SigningError calls the underlying SigningError.
 func (x *MessageEncodingResult) SigningError() unsafe.Pointer {
 	return x.inner.SigningError()
 }
 
+// @brief Any error that occured while attempting to encrypt the outgoing message.
+//
 // EncryptionError calls the underlying EncryptionError.
 func (x *MessageEncodingResult) EncryptionError() unsafe.Pointer {
 	return x.inner.EncryptionError()

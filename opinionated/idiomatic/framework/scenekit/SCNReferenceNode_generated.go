@@ -33,6 +33,8 @@ func ReferenceNodeFromID(id objc.ID) *ReferenceNode {
 	return &ReferenceNode{inner: raw.SCNReferenceNodeFromID(id)}
 }
 
+// @method initWithURL: @abstract Creates a reference node with a url.
+//
 // NewReferenceNodeWithURL creates a new [ReferenceNode].
 func NewReferenceNodeWithURL(referenceURL string) *ReferenceNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNReferenceNode")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewReferenceNodeWithURL(referenceURL string) *ReferenceNode {
 	return &ReferenceNode{inner: raw.SCNReferenceNodeFromID(_id)}
 }
 
+// @method initWithCoder: @abstract Support coding and decoding via NSKeyedArchiver.
+//
 // NewReferenceNodeWithCoder creates a new [ReferenceNode].
 func NewReferenceNodeWithCoder(aDecoder *foundation.NSCoder) *ReferenceNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNReferenceNode")), objc.RegisterName("alloc"))
@@ -47,24 +51,32 @@ func NewReferenceNodeWithCoder(aDecoder *foundation.NSCoder) *ReferenceNode {
 	return &ReferenceNode{inner: raw.SCNReferenceNodeFromID(_id)}
 }
 
+// @property referenceURL @abstract Specifies the url to resolve.
+//
 // WithReferenceURL sets the referenceURL property and returns the receiver for chaining.
 func (x *ReferenceNode) WithReferenceURL(referenceURL string) *ReferenceNode {
 	x.inner.SetReferenceURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(referenceURL)))
 	return x
 }
 
+// @property loadingPolicy @abstract Specifies when to load the reference. see SCNReferenceLoadingPolicy above. Defaults to SCNReferenceLoadingPolicyImmediately.
+//
 // WithLoadingPolicy sets the loadingPolicy property and returns the receiver for chaining.
 func (x *ReferenceNode) WithLoadingPolicy(loadingPolicy SCNReferenceLoadingPolicy) *ReferenceNode {
 	x.inner.SetLoadingPolicy(raw.SCNReferenceLoadingPolicy(loadingPolicy))
 	return x
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *ReferenceNode) WithName(name string) *ReferenceNode {
 	x.inner.SCNNode.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property light @abstract Determines the light attached to the receiver.
+//
 // WithLight sets the light property and returns the receiver for chaining.
 func (x *ReferenceNode) WithLight(light *Light) *ReferenceNode {
 	x.inner.SCNNode.SetLight(light.Unwrap())
@@ -77,126 +89,168 @@ func (x *ReferenceNode) WithCamera(camera *Camera) *ReferenceNode {
 	return x
 }
 
+// @property geometry @abstract Returns the geometry attached to the receiver.
+//
 // WithGeometry sets the geometry property and returns the receiver for chaining.
 func (x *ReferenceNode) WithGeometry(geometry GeometryProvider) *ReferenceNode {
 	x.inner.SCNNode.SetGeometry(geometry.asGeometry())
 	return x
 }
 
+// @property skinner @abstract Returns the skinner attached to the receiver.
+//
 // WithSkinner sets the skinner property and returns the receiver for chaining.
 func (x *ReferenceNode) WithSkinner(skinner *Skinner) *ReferenceNode {
 	x.inner.SCNNode.SetSkinner(skinner.Unwrap())
 	return x
 }
 
+// @property morpher @abstract Returns the morpher attached to the receiver.
+//
 // WithMorpher sets the morpher property and returns the receiver for chaining.
 func (x *ReferenceNode) WithMorpher(morpher *Morpher) *ReferenceNode {
 	x.inner.SCNNode.SetMorpher(morpher.Unwrap())
 	return x
 }
 
+// @property transform @abstract Determines the receiver's transform. Animatable. @discussion The transform is the combination of the position, rotation and scale defined below. So when the transform is set, the receiver's position, rotation and scale are changed to match the new transform.
+//
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *ReferenceNode) WithTransform(transform quartzcore.CATransform3D) *ReferenceNode {
 	x.inner.SCNNode.SetTransform(transform)
 	return x
 }
 
+// @property worldTransform @abstract Determines the receiver's transform in world space (relative to the scene's root node). Animatable.
+//
 // WithWorldTransform sets the worldTransform property and returns the receiver for chaining.
 func (x *ReferenceNode) WithWorldTransform(worldTransform quartzcore.CATransform3D) *ReferenceNode {
 	x.inner.SCNNode.SetWorldTransform(worldTransform)
 	return x
 }
 
+// @property position @abstract Determines the receiver's position. Animatable.
+//
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *ReferenceNode) WithPosition(position raw.SCNVector3) *ReferenceNode {
 	x.inner.SCNNode.SetPosition(position)
 	return x
 }
 
+// @property worldPosition @abstract Determines the receiver's position in world space (relative to the scene's root node).
+//
 // WithWorldPosition sets the worldPosition property and returns the receiver for chaining.
 func (x *ReferenceNode) WithWorldPosition(worldPosition raw.SCNVector3) *ReferenceNode {
 	x.inner.SCNNode.SetWorldPosition(worldPosition)
 	return x
 }
 
+// @property rotation @abstract Determines the receiver's rotation. Animatable. @discussion The rotation is axis angle rotation. The three first components are the axis, the fourth one is the rotation (in radian).
+//
 // WithRotation sets the rotation property and returns the receiver for chaining.
 func (x *ReferenceNode) WithRotation(rotation raw.SCNVector4) *ReferenceNode {
 	x.inner.SCNNode.SetRotation(rotation)
 	return x
 }
 
+// @property orientation @abstract Determines the receiver's orientation as a unit quaternion. Animatable.
+//
 // WithOrientation sets the orientation property and returns the receiver for chaining.
 func (x *ReferenceNode) WithOrientation(orientation raw.SCNVector4) *ReferenceNode {
 	x.inner.SCNNode.SetOrientation(orientation)
 	return x
 }
 
+// @property worldOrientation @abstract Determines the receiver's orientation in world space (relative to the scene's root node). Animatable.
+//
 // WithWorldOrientation sets the worldOrientation property and returns the receiver for chaining.
 func (x *ReferenceNode) WithWorldOrientation(worldOrientation raw.SCNVector4) *ReferenceNode {
 	x.inner.SCNNode.SetWorldOrientation(worldOrientation)
 	return x
 }
 
+// @property eulerAngles @abstract Determines the receiver's euler angles. Animatable. @dicussion The order of components in this vector matches the axes of rotation: 1. Pitch (the x component) is the rotation about the node's x-axis (in radians) 2. Yaw   (the y component) is the rotation about the node's y-axis (in radians) 3. Roll  (the z component) is the rotation about the node's z-axis (in radians) SceneKit applies these rotations in the reverse order of the components: 1. first roll 2. then yaw 3. then pitch
+//
 // WithEulerAngles sets the eulerAngles property and returns the receiver for chaining.
 func (x *ReferenceNode) WithEulerAngles(eulerAngles raw.SCNVector3) *ReferenceNode {
 	x.inner.SCNNode.SetEulerAngles(eulerAngles)
 	return x
 }
 
+// @property scale @abstract Determines the receiver's scale. Animatable.
+//
 // WithScale sets the scale property and returns the receiver for chaining.
 func (x *ReferenceNode) WithScale(scale raw.SCNVector3) *ReferenceNode {
 	x.inner.SCNNode.SetScale(scale)
 	return x
 }
 
+// @property pivot @abstract Determines the receiver's pivot. Animatable.
+//
 // WithPivot sets the pivot property and returns the receiver for chaining.
 func (x *ReferenceNode) WithPivot(pivot quartzcore.CATransform3D) *ReferenceNode {
 	x.inner.SCNNode.SetPivot(pivot)
 	return x
 }
 
+// @property hidden @abstract Determines whether the receiver is displayed. Defaults to NO. Animatable.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *ReferenceNode) WithHidden(hidden bool) *ReferenceNode {
 	x.inner.SCNNode.SetHidden(hidden)
 	return x
 }
 
+// @property opacity @abstract Determines the opacity of the receiver. Default is 1. Animatable.
+//
 // WithOpacity sets the opacity property and returns the receiver for chaining.
 func (x *ReferenceNode) WithOpacity(opacity float64) *ReferenceNode {
 	x.inner.SCNNode.SetOpacity(opacity)
 	return x
 }
 
+// @property renderingOrder @abstract Determines the rendering order of the receiver. @discussion Nodes with greater rendering orders are rendered last. Defaults to 0.
+//
 // WithRenderingOrder sets the renderingOrder property and returns the receiver for chaining.
 func (x *ReferenceNode) WithRenderingOrder(renderingOrder int) *ReferenceNode {
 	x.inner.SCNNode.SetRenderingOrder(renderingOrder)
 	return x
 }
 
+// @property castsShadow @abstract Determines if the node is rendered in shadow maps. Defaults to YES.
+//
 // WithCastsShadow sets the castsShadow property and returns the receiver for chaining.
 func (x *ReferenceNode) WithCastsShadow(castsShadow bool) *ReferenceNode {
 	x.inner.SCNNode.SetCastsShadow(castsShadow)
 	return x
 }
 
+// @property movabilityHint @abstract Communicates to SceneKit’s rendering system about how you want to move content in your scene; it does not affect your ability to change the node’s position or add animations or physics to the node. Defaults to SCNMovabilityHintFixed.
+//
 // WithMovabilityHint sets the movabilityHint property and returns the receiver for chaining.
 func (x *ReferenceNode) WithMovabilityHint(movabilityHint SCNMovabilityHint) *ReferenceNode {
 	x.inner.SCNNode.SetMovabilityHint(raw.SCNMovabilityHint(movabilityHint))
 	return x
 }
 
+// @property physicsBody @abstract The description of the physics body of the receiver. @discussion Default is nil.
+//
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *ReferenceNode) WithPhysicsBody(physicsBody *PhysicsBody) *ReferenceNode {
 	x.inner.SCNNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
+// @property physicsField @abstract The description of the physics field of the receiver. @discussion Default is nil.
+//
 // WithPhysicsField sets the physicsField property and returns the receiver for chaining.
 func (x *ReferenceNode) WithPhysicsField(physicsField *PhysicsField) *ReferenceNode {
 	x.inner.SCNNode.SetPhysicsField(physicsField.Unwrap())
 	return x
 }
 
+// @property constraints @abstract An array of SCNConstraint that are applied to the receiver. @discussion Adding or removing a constraint can be implicitly animated based on the current transaction.
+//
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *ReferenceNode) WithConstraints(items ...ConstraintProvider) *ReferenceNode {
 	if len(items) == 0 {
@@ -215,6 +269,8 @@ func (x *ReferenceNode) WithConstraints(items ...ConstraintProvider) *ReferenceN
 	return x
 }
 
+// @property filters @abstract An array of Core Image filters that are applied to the rendering of the receiver and its child nodes. Animatable. @discussion Defaults to nil. Filter properties should be modified by calling setValue:forKeyPath: on each node that the filter is attached to. If the inputs of the filter are modified directly after the filter is attached to a node, the behavior is undefined.
+//
 // WithFilters sets the collection, converting the Go slice to an NSArray.
 func (x *ReferenceNode) WithFilters(items ...*coreimage.CIFilter) *ReferenceNode {
 	if len(items) == 0 {
@@ -233,40 +289,54 @@ func (x *ReferenceNode) WithFilters(items ...*coreimage.CIFilter) *ReferenceNode
 	return x
 }
 
+// @property paused @abstract Controls whether or not the node's actions and animations are updated or paused. Defaults to NO.
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *ReferenceNode) WithPaused(paused bool) *ReferenceNode {
 	x.inner.SCNNode.SetPaused(paused)
 	return x
 }
 
+// @property rendererDelegate @abstract Specifies the receiver's renderer delegate object. @discussion Setting a renderer delegate prevents the SceneKit renderer from drawing the node and lets you use custom OpenGL code instead. The preferred way to customize the rendering is to tweak the material properties of the different materials of the node's geometry. SCNMaterial conforms to the SCNShadable protocol and allows for more advanced rendering using GLSL. You would typically use a renderer delegate with a node that has no geometry and only serves as a location in space. An example would be attaching a particle system to that node and render it with custom OpenGL code.
+//
 // WithRendererDelegate sets the rendererDelegate property and returns the receiver for chaining.
 func (x *ReferenceNode) WithRendererDelegate(rendererDelegate raw.SCNNodeRendererDelegate) *ReferenceNode {
 	x.inner.SCNNode.SetRendererDelegate(rendererDelegate)
 	return x
 }
 
+// @property categoryBitMask @abstract Defines what logical 'categories' the receiver belongs too. Defaults to 1. @discussion Categories can be used to 1. exclude nodes from the influence of a given light (see SCNLight.categoryBitMask) 2. include/exclude nodes from render passes (see SCNTechnique.h) 3. specify which nodes to use when hit-testing (see SCNHitTestOptionCategoryBitMask)
+//
 // WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
 func (x *ReferenceNode) WithCategoryBitMask(categoryBitMask uint) *ReferenceNode {
 	x.inner.SCNNode.SetCategoryBitMask(categoryBitMask)
 	return x
 }
 
+// @property focusBehavior @abstract Controls the behavior of the receiver regarding the UIFocus system. Defaults to SCNNodeFocusBehaviorNone.
+//
 // WithFocusBehavior sets the focusBehavior property and returns the receiver for chaining.
 func (x *ReferenceNode) WithFocusBehavior(focusBehavior SCNNodeFocusBehavior) *ReferenceNode {
 	x.inner.SCNNode.SetFocusBehavior(raw.SCNNodeFocusBehavior(focusBehavior))
 	return x
 }
 
+// @method load @abstract Force the reference to be loaded if it hasn't been loaded already. The resolved nodes will be added as child nodes of the receiver.
+//
 // Load calls the underlying Load.
 func (x *ReferenceNode) Load() {
 	x.inner.Load()
 }
 
+// @method unload @abstract Remove the child nodes and mark as unloaded.
+//
 // Unload calls the underlying Unload.
 func (x *ReferenceNode) Unload() {
 	x.inner.Unload()
 }
 
+// @property referenceURL @abstract Specifies the url to resolve.
+//
 // ReferenceURL calls the underlying ReferenceURL.
 func (x *ReferenceNode) ReferenceURL() *foundation.NSURL {
 	return x.inner.ReferenceURL()
@@ -277,6 +347,8 @@ func (x *ReferenceNode) SetReferenceURL(referenceURL string) {
 	x.inner.SetReferenceURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(referenceURL)))
 }
 
+// @property loadingPolicy @abstract Specifies when to load the reference. see SCNReferenceLoadingPolicy above. Defaults to SCNReferenceLoadingPolicyImmediately.
+//
 // LoadingPolicy calls the underlying LoadingPolicy.
 func (x *ReferenceNode) LoadingPolicy() SCNReferenceLoadingPolicy {
 	return SCNReferenceLoadingPolicy(x.inner.LoadingPolicy())
@@ -287,6 +359,8 @@ func (x *ReferenceNode) SetLoadingPolicy(loadingPolicy SCNReferenceLoadingPolicy
 	x.inner.SetLoadingPolicy(raw.SCNReferenceLoadingPolicy(loadingPolicy))
 }
 
+// @property loaded @abstract Indicates whether the referenced URL has been loaded.
+//
 // IsLoaded calls the underlying IsLoaded.
 func (x *ReferenceNode) IsLoaded() bool {
 	return x.inner.IsLoaded()

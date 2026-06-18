@@ -37,11 +37,15 @@ func NewSystemExtensionProperties() *SystemExtensionProperties {
 	return &SystemExtensionProperties{inner: raw.OSSystemExtensionPropertiesFromID(_id)}
 }
 
+// @brief The file URL locating an indicating the extension bundle these properties were retreived from.
+//
 // URL calls the underlying URL.
 func (x *SystemExtensionProperties) URL() *foundation.NSURL {
 	return x.inner.URL()
 }
 
+// @brief The bundle identifier of the extension (CFBundleIdentifier)
+//
 // BundleIdentifier calls the underlying BundleIdentifier.
 func (x *SystemExtensionProperties) BundleIdentifier() string {
 	_r := x.inner.BundleIdentifier()
@@ -51,6 +55,8 @@ func (x *SystemExtensionProperties) BundleIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief The bundle version of the extension (CFBundleVersion)
+//
 // BundleVersion calls the underlying BundleVersion.
 func (x *SystemExtensionProperties) BundleVersion() string {
 	_r := x.inner.BundleVersion()
@@ -60,6 +66,8 @@ func (x *SystemExtensionProperties) BundleVersion() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief The bundle short version string of the extension (CFBundleShortVersionString)
+//
 // BundleShortVersion calls the underlying BundleShortVersion.
 func (x *SystemExtensionProperties) BundleShortVersion() string {
 	_r := x.inner.BundleShortVersion()
@@ -69,16 +77,22 @@ func (x *SystemExtensionProperties) BundleShortVersion() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief Returns the enabled state of the extension
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *SystemExtensionProperties) IsEnabled() bool {
 	return x.inner.IsEnabled()
 }
 
+// @brief Returns whether an extension is waiting for user approval
+//
 // IsAwaitingUserApproval calls the underlying IsAwaitingUserApproval.
 func (x *SystemExtensionProperties) IsAwaitingUserApproval() bool {
 	return x.inner.IsAwaitingUserApproval()
 }
 
+// @brief Returns if an extension is being uninstalled
+//
 // IsUninstalling calls the underlying IsUninstalling.
 func (x *SystemExtensionProperties) IsUninstalling() bool {
 	return x.inner.IsUninstalling()

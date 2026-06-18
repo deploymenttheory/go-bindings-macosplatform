@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The Linux directory share for Rosetta.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzlinuxrosettadirectoryshare
 type VZLinuxRosettaDirectoryShare struct {
 	VZDirectoryShare
@@ -35,7 +37,7 @@ func VZLinuxRosettaDirectoryShareFromID(id objc.ID) *VZLinuxRosettaDirectoryShar
 	return o
 }
 
-// @abstract Initialize a Rosetta directory share if Rosetta support for Linux binaries is installed. @param error Error object to store the error, if an error exists. @discussion The call returns an error if Rosetta is not available for a directory share. To install Rosetta support, use +[VZLinuxRosettaDirectoryShare installRosettaIfNeeded:]. @see +[VZLinuxRosettaDirectoryShare installRosettaIfNeeded:]
+// Creates a new Rosetta directory share, or returns an error if Rosetta isn’t installed.
 func (o *VZLinuxRosettaDirectoryShare) InitWithError() (*VZLinuxRosettaDirectoryShare, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZLinuxRosettaDirectoryShareSelInitWithError, unsafe.Pointer(&_nsErr))
@@ -48,7 +50,7 @@ func (o *VZLinuxRosettaDirectoryShare) InitWithError() (*VZLinuxRosettaDirectory
 	return VZLinuxRosettaDirectoryShareFromID(_ret), nil
 }
 
-// @abstract Download and install Rosetta support for Linux binaries if necessary. @param completionHandler The completion handler gets called with a valid error on failure and a nil error on success. It will also be invoked on an arbitrary queue. @discussion The call prompts the user through the download and install flow for Rosetta. This call is successful if the error is nil. @see +[VZLinuxRosettaDirectoryShare availability]
+// Starts the installation of Rosetta.
 func VZLinuxRosettaDirectoryShareInstallRosettaWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

@@ -29,6 +29,8 @@ func GroupPresetSettingFromID(id objc.ID) *GroupPresetSetting {
 	return &GroupPresetSetting{inner: raw.PHASEGroupPresetSettingFromID(id)}
 }
 
+// @method initWithGain:rate:gainCurveType:rateCurveType @abstract Initialize the PHASEGroupPresetSetting object with an existing PHASEGroup object. @param gain The main gain setting to apply to the group. Values are clamped to the range [0, 1]. Default value is 1. @param rate The playback rate setting to apply to the group. Values are clamped to the range [0.25, 4]. Default value is 1. @param gainCurveType The type of curve to apply to the gain as the preset changes to this new setting. @param rateCurveType The type of curve to apply to the rate as the preset changes to this new setting.
+//
 // NewGroupPresetSettingWithGainRateGainCurveTypeRateCurveType creates a new [GroupPresetSetting].
 func NewGroupPresetSettingWithGainRateGainCurveTypeRateCurveType(gain float64, rate float64, gainCurveType PHASECurveType, rateCurveType PHASECurveType) *GroupPresetSetting {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEGroupPresetSetting")), objc.RegisterName("alloc"))
@@ -36,21 +38,29 @@ func NewGroupPresetSettingWithGainRateGainCurveTypeRateCurveType(gain float64, r
 	return &GroupPresetSetting{inner: raw.PHASEGroupPresetSettingFromID(_id)}
 }
 
+// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+//
 // Gain calls the underlying Gain.
 func (x *GroupPresetSetting) Gain() float64 {
 	return x.inner.Gain()
 }
 
+// @property rate @abstract Linear rate scalar.
+//
 // Rate calls the underlying Rate.
 func (x *GroupPresetSetting) Rate() float64 {
 	return x.inner.Rate()
 }
 
+// @property gainCurveType @abstract The type of curve to apply to the gain as the preset changes to this new setting.
+//
 // GainCurveType calls the underlying GainCurveType.
 func (x *GroupPresetSetting) GainCurveType() PHASECurveType {
 	return PHASECurveType(x.inner.GainCurveType())
 }
 
+// @property rateCurveType @abstract The type of curve to apply to the rate as the preset changes to this new setting.
+//
 // RateCurveType calls the underlying RateCurveType.
 func (x *GroupPresetSetting) RateCurveType() PHASECurveType {
 	return PHASECurveType(x.inner.RateCurveType())

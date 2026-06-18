@@ -36,18 +36,24 @@ func NewActivationLayer() *ActivationLayer {
 	return &ActivationLayer{inner: raw.MLCActivationLayerFromID(_id)}
 }
 
+// @property   label @abstract   A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ActivationLayer) WithLabel(label string) *ActivationLayer {
 	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+//
 // WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
 func (x *ActivationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ActivationLayer {
 	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
 	return x
 }
 
+// @property   descriptor @abstract   The activation descriptor
+//
 // Descriptor calls the underlying Descriptor.
 func (x *ActivationLayer) Descriptor() *ActivationDescriptor {
 	_r := x.inner.Descriptor()

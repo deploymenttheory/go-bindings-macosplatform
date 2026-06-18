@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A tree data structure where each level has 4 children that subdivide a given space into the four quadrants. Stores arbitrary NSObject data via points and quads.
+//
 // Quadtree wraps [raw.GKQuadtree] with a fluent Go API.
 type Quadtree struct {
 	inner *raw.GKQuadtree[objc.ID]
@@ -38,6 +40,8 @@ func NewQuadtreeWithBoundingQuadMinimumCellSize(quad raw.GKQuad, minCellSize flo
 	return &Quadtree{inner: raw.GKQuadtreeFromID[objc.ID](_id)}
 }
 
+// Adds an NSObject to this quadtree with a given point. This data will always reside in the leaf node its point is in. @param element the element to store @param point the point associated with the element you want to store @return the quadtree node the element was added to
+//
 // AddElementWithPoint calls the underlying AddElementWithPoint.
 func (x *Quadtree) AddElementWithPoint(element objc.ID, point unsafe.Pointer) *QuadtreeNode {
 	_r := x.inner.AddElementWithPoint(element, point)
@@ -47,6 +51,8 @@ func (x *Quadtree) AddElementWithPoint(element objc.ID, point unsafe.Pointer) *Q
 	return &QuadtreeNode{inner: _r}
 }
 
+// Adds an NSObject to this quadtree with a given quad. This data will reside in the lowest node that its quad fits in completely. @param element the element to store @param quad the quad associated with the element you want to store @return the quad tree node the element was added to
+//
 // AddElementWithQuad calls the underlying AddElementWithQuad.
 func (x *Quadtree) AddElementWithQuad(element objc.ID, quad raw.GKQuad) *QuadtreeNode {
 	_r := x.inner.AddElementWithQuad(element, quad)
@@ -56,21 +62,29 @@ func (x *Quadtree) AddElementWithQuad(element objc.ID, quad raw.GKQuad) *Quadtre
 	return &QuadtreeNode{inner: _r}
 }
 
+// Returns all of the elements in the quadtree node this point would be placed in @param point the point to query @return an NSArray of all the data found at the quad tree node this point would be placed in
+//
 // ElementsAtPoint calls the underlying ElementsAtPoint.
 func (x *Quadtree) ElementsAtPoint(point unsafe.Pointer) *foundation.NSArray[objc.ID] {
 	return x.inner.ElementsAtPoint(point)
 }
 
+// Returns all of the elements that resides in quad tree nodes which intersect the given quad @param quad the quad you want to test @return an NSArray of all the elements in all of the nodes that intersect the given quad
+//
 // ElementsInQuad calls the underlying ElementsInQuad.
 func (x *Quadtree) ElementsInQuad(quad raw.GKQuad) *foundation.NSArray[objc.ID] {
 	return x.inner.ElementsInQuad(quad)
 }
 
+// Removes the given NSObject from this quad tree. Note that this is an exhaustive search and is slow. Cache the relevant GKQuadTreeNode and use removeElement:WithNode: for better performance. @param element the data to be removed @return returns YES if the data was removed, NO otherwise
+//
 // RemoveElement calls the underlying RemoveElement.
 func (x *Quadtree) RemoveElement(element objc.ID) bool {
 	return x.inner.RemoveElement(element)
 }
 
+// Removes the given NSObject from the given quadtree node Note that this is not an exhaustive search and is faster than removeData: @param data the data to be removed @param node the node in which this data resides @return returns YES if the data was removed, NO otherwise
+//
 // RemoveElementWithNode calls the underlying RemoveElementWithNode.
 func (x *Quadtree) RemoveElementWithNode(data objc.ID, node *raw.GKQuadtreeNode) bool {
 	return x.inner.RemoveElementWithNode(data, node)

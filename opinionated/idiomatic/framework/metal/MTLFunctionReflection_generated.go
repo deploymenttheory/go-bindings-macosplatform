@@ -37,11 +37,15 @@ func NewFunctionReflection() *FunctionReflection {
 	return &FunctionReflection{inner: raw.MTLFunctionReflectionFromID(_id)}
 }
 
+// Provides a list of inputs and outputs of the function.
+//
 // Bindings calls the underlying Bindings.
 func (x *FunctionReflection) Bindings() *foundation.NSArray[raw.MTLBinding] {
 	return x.inner.Bindings()
 }
 
+// The string passed to the user annotation attribute for this function. Null if no user annotation is present for this function.
+//
 // UserAnnotation calls the underlying UserAnnotation.
 func (x *FunctionReflection) UserAnnotation() string {
 	_r := x.inner.UserAnnotation()

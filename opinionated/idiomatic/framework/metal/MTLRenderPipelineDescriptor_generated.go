@@ -9,6 +9,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // RenderPipelineDescriptor wraps [raw.MTLRenderPipelineDescriptor] with a fluent Go API.
@@ -163,48 +164,64 @@ func (x *RenderPipelineDescriptor) WithSupportIndirectCommandBuffers(supportIndi
 	return x
 }
 
+// @property vertexLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the vertex function. @see MTLLinkedFunctions
+//
 // WithVertexLinkedFunctions sets the vertexLinkedFunctions property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithVertexLinkedFunctions(vertexLinkedFunctions *LinkedFunctions) *RenderPipelineDescriptor {
 	x.inner.SetVertexLinkedFunctions(vertexLinkedFunctions.Unwrap())
 	return x
 }
 
+// @property fragmentLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the fragment function. @see MTLLinkedFunctions
+//
 // WithFragmentLinkedFunctions sets the fragmentLinkedFunctions property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithFragmentLinkedFunctions(fragmentLinkedFunctions *LinkedFunctions) *RenderPipelineDescriptor {
 	x.inner.SetFragmentLinkedFunctions(fragmentLinkedFunctions.Unwrap())
 	return x
 }
 
+// @property supportAddingVertexBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
+//
 // WithSupportAddingVertexBinaryFunctions sets the supportAddingVertexBinaryFunctions property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithSupportAddingVertexBinaryFunctions(supportAddingVertexBinaryFunctions bool) *RenderPipelineDescriptor {
 	x.inner.SetSupportAddingVertexBinaryFunctions(supportAddingVertexBinaryFunctions)
 	return x
 }
 
+// @property supportFragmentAddingBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
+//
 // WithSupportAddingFragmentBinaryFunctions sets the supportAddingFragmentBinaryFunctions property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithSupportAddingFragmentBinaryFunctions(supportAddingFragmentBinaryFunctions bool) *RenderPipelineDescriptor {
 	x.inner.SetSupportAddingFragmentBinaryFunctions(supportAddingFragmentBinaryFunctions)
 	return x
 }
 
+// @property maxVertexCallStackDepth @abstract The maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
+//
 // WithMaxVertexCallStackDepth sets the maxVertexCallStackDepth property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithMaxVertexCallStackDepth(maxVertexCallStackDepth uint) *RenderPipelineDescriptor {
 	x.inner.SetMaxVertexCallStackDepth(maxVertexCallStackDepth)
 	return x
 }
 
+// @property maxFragmentCallStackDepth @abstract The maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
+//
 // WithMaxFragmentCallStackDepth sets the maxFragmentCallStackDepth property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithMaxFragmentCallStackDepth(maxFragmentCallStackDepth uint) *RenderPipelineDescriptor {
 	x.inner.SetMaxFragmentCallStackDepth(maxFragmentCallStackDepth)
 	return x
 }
 
+// @property shaderValidation @abstract Toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. @discussion The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
+//
 // WithShaderValidation sets the shaderValidation property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithShaderValidation(shaderValidation MTLShaderValidation) *RenderPipelineDescriptor {
 	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
 	return x
 }
 
+// @method reset @abstract Restore all pipeline descriptor properties to their default values.
+//
 // Reset calls the underlying Reset.
 func (x *RenderPipelineDescriptor) Reset() {
 	x.inner.Reset()
@@ -455,36 +472,71 @@ func (x *RenderPipelineDescriptor) SetSupportIndirectCommandBuffers(supportIndir
 	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
 }
 
+// @property binaryArchives @abstract The set of MTLBinaryArchive to search for compiled code when creating the pipeline state. @discussion Accelerate pipeline state creation by providing archives of compiled code such that no compilation needs to happen on the fast path. @see MTLBinaryArchive
+//
 // BinaryArchives calls the underlying BinaryArchives.
 func (x *RenderPipelineDescriptor) BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive] {
 	return x.inner.BinaryArchives()
 }
 
 // SetBinaryArchives calls the underlying SetBinaryArchives.
-func (x *RenderPipelineDescriptor) SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive]) {
-	x.inner.SetBinaryArchives(binaryArchives)
+func (x *RenderPipelineDescriptor) SetBinaryArchives(binaryArchives ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(binaryArchives))
+	for _i, _v := range binaryArchives {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTLBinaryArchive]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTLBinaryArchive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetBinaryArchives(_arg0)
 }
 
+// @property vertexPreloadedLibraries @abstract The set of MTLDynamicLibrary to use to resolve external symbols for the vertexFunction before considering symbols from dependent MTLDynamicLibrary. @discussion Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use vertexPreloadedLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system. @see MTLDynamicLibrary
+//
 // VertexPreloadedLibraries calls the underlying VertexPreloadedLibraries.
 func (x *RenderPipelineDescriptor) VertexPreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary] {
 	return x.inner.VertexPreloadedLibraries()
 }
 
 // SetVertexPreloadedLibraries calls the underlying SetVertexPreloadedLibraries.
-func (x *RenderPipelineDescriptor) SetVertexPreloadedLibraries(vertexPreloadedLibraries *foundation.NSArray[raw.MTLDynamicLibrary]) {
-	x.inner.SetVertexPreloadedLibraries(vertexPreloadedLibraries)
+func (x *RenderPipelineDescriptor) SetVertexPreloadedLibraries(vertexPreloadedLibraries ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(vertexPreloadedLibraries))
+	for _i, _v := range vertexPreloadedLibraries {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTLDynamicLibrary]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetVertexPreloadedLibraries(_arg0)
 }
 
+// @property fragmentPreloadedLibraries @abstract The set of MTLDynamicLibrary to use to resolve external symbols for the fragmentFunction before considering symbols from dependent MTLDynamicLibrary. @discussion Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use fragmentPreloadedLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system. @see MTLDynamicLibrary
+//
 // FragmentPreloadedLibraries calls the underlying FragmentPreloadedLibraries.
 func (x *RenderPipelineDescriptor) FragmentPreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary] {
 	return x.inner.FragmentPreloadedLibraries()
 }
 
 // SetFragmentPreloadedLibraries calls the underlying SetFragmentPreloadedLibraries.
-func (x *RenderPipelineDescriptor) SetFragmentPreloadedLibraries(fragmentPreloadedLibraries *foundation.NSArray[raw.MTLDynamicLibrary]) {
-	x.inner.SetFragmentPreloadedLibraries(fragmentPreloadedLibraries)
+func (x *RenderPipelineDescriptor) SetFragmentPreloadedLibraries(fragmentPreloadedLibraries ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(fragmentPreloadedLibraries))
+	for _i, _v := range fragmentPreloadedLibraries {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTLDynamicLibrary]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetFragmentPreloadedLibraries(_arg0)
 }
 
+// @property vertexLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the vertex function. @see MTLLinkedFunctions
+//
 // VertexLinkedFunctions calls the underlying VertexLinkedFunctions.
 func (x *RenderPipelineDescriptor) VertexLinkedFunctions() *LinkedFunctions {
 	_r := x.inner.VertexLinkedFunctions()
@@ -494,11 +546,15 @@ func (x *RenderPipelineDescriptor) VertexLinkedFunctions() *LinkedFunctions {
 	return &LinkedFunctions{inner: _r}
 }
 
+// @property vertexLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the vertex function. @see MTLLinkedFunctions
+//
 // SetVertexLinkedFunctions calls the underlying SetVertexLinkedFunctions.
 func (x *RenderPipelineDescriptor) SetVertexLinkedFunctions(vertexLinkedFunctions *raw.MTLLinkedFunctions) {
 	x.inner.SetVertexLinkedFunctions(vertexLinkedFunctions)
 }
 
+// @property fragmentLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the fragment function. @see MTLLinkedFunctions
+//
 // FragmentLinkedFunctions calls the underlying FragmentLinkedFunctions.
 func (x *RenderPipelineDescriptor) FragmentLinkedFunctions() *LinkedFunctions {
 	_r := x.inner.FragmentLinkedFunctions()
@@ -508,51 +564,71 @@ func (x *RenderPipelineDescriptor) FragmentLinkedFunctions() *LinkedFunctions {
 	return &LinkedFunctions{inner: _r}
 }
 
+// @property fragmentLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the fragment function. @see MTLLinkedFunctions
+//
 // SetFragmentLinkedFunctions calls the underlying SetFragmentLinkedFunctions.
 func (x *RenderPipelineDescriptor) SetFragmentLinkedFunctions(fragmentLinkedFunctions *raw.MTLLinkedFunctions) {
 	x.inner.SetFragmentLinkedFunctions(fragmentLinkedFunctions)
 }
 
+// @property supportAddingVertexBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
+//
 // SupportAddingVertexBinaryFunctions calls the underlying SupportAddingVertexBinaryFunctions.
 func (x *RenderPipelineDescriptor) SupportAddingVertexBinaryFunctions() bool {
 	return x.inner.SupportAddingVertexBinaryFunctions()
 }
 
+// @property supportAddingVertexBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
+//
 // SetSupportAddingVertexBinaryFunctions calls the underlying SetSupportAddingVertexBinaryFunctions.
 func (x *RenderPipelineDescriptor) SetSupportAddingVertexBinaryFunctions(supportAddingVertexBinaryFunctions bool) {
 	x.inner.SetSupportAddingVertexBinaryFunctions(supportAddingVertexBinaryFunctions)
 }
 
+// @property supportFragmentAddingBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
+//
 // SupportAddingFragmentBinaryFunctions calls the underlying SupportAddingFragmentBinaryFunctions.
 func (x *RenderPipelineDescriptor) SupportAddingFragmentBinaryFunctions() bool {
 	return x.inner.SupportAddingFragmentBinaryFunctions()
 }
 
+// @property supportFragmentAddingBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
+//
 // SetSupportAddingFragmentBinaryFunctions calls the underlying SetSupportAddingFragmentBinaryFunctions.
 func (x *RenderPipelineDescriptor) SetSupportAddingFragmentBinaryFunctions(supportAddingFragmentBinaryFunctions bool) {
 	x.inner.SetSupportAddingFragmentBinaryFunctions(supportAddingFragmentBinaryFunctions)
 }
 
+// @property maxVertexCallStackDepth @abstract The maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
+//
 // MaxVertexCallStackDepth calls the underlying MaxVertexCallStackDepth.
 func (x *RenderPipelineDescriptor) MaxVertexCallStackDepth() uint {
 	return x.inner.MaxVertexCallStackDepth()
 }
 
+// @property maxVertexCallStackDepth @abstract The maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
+//
 // SetMaxVertexCallStackDepth calls the underlying SetMaxVertexCallStackDepth.
 func (x *RenderPipelineDescriptor) SetMaxVertexCallStackDepth(maxVertexCallStackDepth uint) {
 	x.inner.SetMaxVertexCallStackDepth(maxVertexCallStackDepth)
 }
 
+// @property maxFragmentCallStackDepth @abstract The maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
+//
 // MaxFragmentCallStackDepth calls the underlying MaxFragmentCallStackDepth.
 func (x *RenderPipelineDescriptor) MaxFragmentCallStackDepth() uint {
 	return x.inner.MaxFragmentCallStackDepth()
 }
 
+// @property maxFragmentCallStackDepth @abstract The maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
+//
 // SetMaxFragmentCallStackDepth calls the underlying SetMaxFragmentCallStackDepth.
 func (x *RenderPipelineDescriptor) SetMaxFragmentCallStackDepth(maxFragmentCallStackDepth uint) {
 	x.inner.SetMaxFragmentCallStackDepth(maxFragmentCallStackDepth)
 }
 
+// @property shaderValidation @abstract Toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. @discussion The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
+//
 // ShaderValidation calls the underlying ShaderValidation.
 func (x *RenderPipelineDescriptor) ShaderValidation() MTLShaderValidation {
 	return MTLShaderValidation(x.inner.ShaderValidation())
@@ -641,11 +717,11 @@ type RenderPipelineDescriptorable interface {
 	SupportIndirectCommandBuffers() bool
 	SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool)
 	BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive]
-	SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive])
+	SetBinaryArchives(binaryArchives ...purego.IDer)
 	VertexPreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary]
-	SetVertexPreloadedLibraries(vertexPreloadedLibraries *foundation.NSArray[raw.MTLDynamicLibrary])
+	SetVertexPreloadedLibraries(vertexPreloadedLibraries ...purego.IDer)
 	FragmentPreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary]
-	SetFragmentPreloadedLibraries(fragmentPreloadedLibraries *foundation.NSArray[raw.MTLDynamicLibrary])
+	SetFragmentPreloadedLibraries(fragmentPreloadedLibraries ...purego.IDer)
 	VertexLinkedFunctions() *LinkedFunctions
 	SetVertexLinkedFunctions(vertexLinkedFunctions *raw.MTLLinkedFunctions)
 	FragmentLinkedFunctions() *LinkedFunctions

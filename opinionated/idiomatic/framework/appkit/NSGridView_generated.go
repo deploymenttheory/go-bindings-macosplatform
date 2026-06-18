@@ -342,6 +342,8 @@ func (x *GridView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundat
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *GridView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GridView {
 	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
@@ -467,8 +469,17 @@ func (x *GridView) CellForView(view *raw.NSView) *GridCell {
 }
 
 // AddRowWithViews calls the underlying AddRowWithViews.
-func (x *GridView) AddRowWithViews(views *foundation.NSArray[*raw.NSView]) *GridRow {
-	_r := x.inner.AddRowWithViews(views)
+func (x *GridView) AddRowWithViews(views ...ViewProvider) *GridRow {
+	_ptrs := make([]objc.ID, len(views))
+	for _i, _v := range views {
+		_ptrs[_i] = _v.asView().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NSView]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	_r := x.inner.AddRowWithViews(_arg0)
 	if _r == nil {
 		return nil
 	}
@@ -476,8 +487,17 @@ func (x *GridView) AddRowWithViews(views *foundation.NSArray[*raw.NSView]) *Grid
 }
 
 // InsertRowAtIndexWithViews calls the underlying InsertRowAtIndexWithViews.
-func (x *GridView) InsertRowAtIndexWithViews(index int, views *foundation.NSArray[*raw.NSView]) *GridRow {
-	_r := x.inner.InsertRowAtIndexWithViews(index, views)
+func (x *GridView) InsertRowAtIndexWithViews(index int, views ...ViewProvider) *GridRow {
+	_ptrs := make([]objc.ID, len(views))
+	for _i, _v := range views {
+		_ptrs[_i] = _v.asView().Ptr()
+	}
+	var _arg1 *foundation.NSArray[*raw.NSView]
+	if len(_ptrs) > 0 {
+		_arg1 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	_r := x.inner.InsertRowAtIndexWithViews(index, _arg1)
 	if _r == nil {
 		return nil
 	}
@@ -495,8 +515,17 @@ func (x *GridView) RemoveRowAtIndex(index int) {
 }
 
 // AddColumnWithViews calls the underlying AddColumnWithViews.
-func (x *GridView) AddColumnWithViews(views *foundation.NSArray[*raw.NSView]) *GridColumn {
-	_r := x.inner.AddColumnWithViews(views)
+func (x *GridView) AddColumnWithViews(views ...ViewProvider) *GridColumn {
+	_ptrs := make([]objc.ID, len(views))
+	for _i, _v := range views {
+		_ptrs[_i] = _v.asView().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NSView]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	_r := x.inner.AddColumnWithViews(_arg0)
 	if _r == nil {
 		return nil
 	}
@@ -504,8 +533,17 @@ func (x *GridView) AddColumnWithViews(views *foundation.NSArray[*raw.NSView]) *G
 }
 
 // InsertColumnAtIndexWithViews calls the underlying InsertColumnAtIndexWithViews.
-func (x *GridView) InsertColumnAtIndexWithViews(index int, views *foundation.NSArray[*raw.NSView]) *GridColumn {
-	_r := x.inner.InsertColumnAtIndexWithViews(index, views)
+func (x *GridView) InsertColumnAtIndexWithViews(index int, views ...ViewProvider) *GridColumn {
+	_ptrs := make([]objc.ID, len(views))
+	for _i, _v := range views {
+		_ptrs[_i] = _v.asView().Ptr()
+	}
+	var _arg1 *foundation.NSArray[*raw.NSView]
+	if len(_ptrs) > 0 {
+		_arg1 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	_r := x.inner.InsertColumnAtIndexWithViews(index, _arg1)
 	if _r == nil {
 		return nil
 	}
@@ -654,12 +692,12 @@ type GridViewable interface {
 	IndexOfColumn(column *raw.NSGridColumn) int
 	CellAtColumnIndexRowIndex(columnIndex int, rowIndex int) *GridCell
 	CellForView(view *raw.NSView) *GridCell
-	AddRowWithViews(views *foundation.NSArray[*raw.NSView]) *GridRow
-	InsertRowAtIndexWithViews(index int, views *foundation.NSArray[*raw.NSView]) *GridRow
+	AddRowWithViews(views ...ViewProvider) *GridRow
+	InsertRowAtIndexWithViews(index int, views ...ViewProvider) *GridRow
 	MoveRowAtIndexToIndex(fromIndex int, toIndex int)
 	RemoveRowAtIndex(index int)
-	AddColumnWithViews(views *foundation.NSArray[*raw.NSView]) *GridColumn
-	InsertColumnAtIndexWithViews(index int, views *foundation.NSArray[*raw.NSView]) *GridColumn
+	AddColumnWithViews(views ...ViewProvider) *GridColumn
+	InsertColumnAtIndexWithViews(index int, views ...ViewProvider) *GridColumn
 	MoveColumnAtIndexToIndex(fromIndex int, toIndex int)
 	RemoveColumnAtIndex(index int)
 	MergeCellsInHorizontalRangeVerticalRange(hRange foundation.NSRange, vRange foundation.NSRange)

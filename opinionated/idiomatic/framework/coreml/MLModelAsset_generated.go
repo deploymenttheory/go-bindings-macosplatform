@@ -39,6 +39,8 @@ func NewModelAsset() *ModelAsset {
 	return &ModelAsset{inner: raw.MLModelAssetFromID(_id)}
 }
 
+// The default model descripton. Use this method to get the description of the model such as the feature descriptions, the model author, and other metadata. For the multi-function model asset, this method vends the description for the default function. Use `modelDescription(for:)` to get the model description of other functions. ```swift let modelAsset = try MLModelAsset(url: modelURL) let modelDescription = try await modelAsset.modelDescription() print(modelDescription) ```
+//
 // ModelDescription blocks until the operation completes or ctx is cancelled.
 func (x *ModelAsset) ModelDescription(ctx context.Context) (*ModelDescription, error) {
 	type _result struct {
@@ -65,6 +67,8 @@ func (x *ModelAsset) ModelDescription(ctx context.Context) (*ModelDescription, e
 	}
 }
 
+// The model descripton for a specified function. Use this method to get the description of the model such as the feature descriptions, the model author, and other metadata. ```swift let modelAsset = try MLModelAsset(url: modelURL) let modelDescription = try await modelAsset.modelDescription(of: "my_function") print(modelDescription) ```
+//
 // ModelDescriptionOfFunctionNamed blocks until the operation completes or ctx is cancelled.
 func (x *ModelAsset) ModelDescriptionOfFunctionNamed(ctx context.Context, functionName string) (*ModelDescription, error) {
 	type _result struct {
@@ -91,6 +95,8 @@ func (x *ModelAsset) ModelDescriptionOfFunctionNamed(ctx context.Context, functi
 	}
 }
 
+// The list of function names in the model asset. Some model types (e.g. ML Program) supports multiple functions. Use this method to query the function names. The method vends the empty array when the model doesn't use the multi-function configuration. ```swift let modelAsset = try MLModelAsset(url: modelURL) let functionNames = try await modelAsset.functionNames print(functionNames) // For example, ["my_function1", "my_function2"]; ```
+//
 // FunctionNamesWithCompletionHandler calls the underlying FunctionNamesWithCompletionHandler.
 func (x *ModelAsset) FunctionNamesWithCompletionHandler(handler objc.Block) {
 	x.inner.FunctionNamesWithCompletionHandler(handler)

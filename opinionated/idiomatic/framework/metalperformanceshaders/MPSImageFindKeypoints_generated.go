@@ -40,6 +40,8 @@ func NewImageFindKeypointsWithDeviceInfo(device metal.MTLDevice, info *mpsimage.
 	return &ImageFindKeypoints{inner: raw.MPSImageFindKeypointsFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+//
 // NewImageFindKeypointsWithCoderDevice creates a new [ImageFindKeypoints].
 func NewImageFindKeypointsWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageFindKeypoints {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageFindKeypoints")), objc.RegisterName("alloc"))
@@ -47,23 +49,31 @@ func NewImageFindKeypointsWithCoderDevice(aDecoder *foundation.NSCoder, device m
 	return &ImageFindKeypoints{inner: raw.MPSImageFindKeypointsFromID(_id)}
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *ImageFindKeypoints) WithOptions(options mpscore.MPSKernelOptions) *ImageFindKeypoints {
 	x.inner.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ImageFindKeypoints) WithLabel(label string) *ImageFindKeypoints {
 	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @abstract Encode the filter to a command buffer using a MTLComputeCommandEncoder. @discussion The filter will not begin to execute until after the command buffer has been enqueued and committed. @param  commandBuffer               A valid MTLCommandBuffer. @param  source                      A valid MTLTexture containing the source image for the filter. @param  regions                     An array of rectangles that describe regions in the image. The list of keypoints is generated for each individual rectangle specifed. @param  keypointCountBuffer         The list of keypoints for each specified region @param  keypointCountBufferOffset   Byte offset into keypointCountBufferOffset buffer at which to write the keypoint results. Must be a multiple of 32 bytes. @param  keypointDataBuffer          A valid MTLBuffer to receive the keypoint data results for each rectangle. The keypoint data for keypoints in each rectangle are stored consecutively. The keypoint data for each rectangle starts at the following offset: MPSImageKeypointRangeInfo.maximumKeyPoints * rectangle index @param  keypointDataBufferOffset    Byte offset into keypointData buffer at which to write the keypoint results. Must be a multiple of 32 bytes.
+//
 // EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset calls the underlying EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset.
 func (x *ImageFindKeypoints) EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, regions *metal.MTLRegion, numberOfRegions uint, keypointCountBuffer metal.MTLBuffer, keypointCountBufferOffset uint, keypointDataBuffer metal.MTLBuffer, keypointDataBufferOffset uint) {
 	x.inner.EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset(commandBuffer, source, regions, numberOfRegions, keypointCountBuffer, keypointCountBufferOffset, keypointDataBuffer, keypointDataBufferOffset)
 }
 
+// @property   keypointRangeInfo @abstract   Return a structure describing the keypoint range info @discussion Returns a MPSImageKeypointRangeInfo structure
+//
 // KeypointRangeInfo calls the underlying KeypointRangeInfo.
 func (x *ImageFindKeypoints) KeypointRangeInfo() mpsimage.MPSImageKeypointRangeInfo {
 	return x.inner.KeypointRangeInfo()

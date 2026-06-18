@@ -29,6 +29,8 @@ func URLProtocolFromID(id objc.ID) *URLProtocol {
 	return &URLProtocol{inner: raw.NSURLProtocolFromID(id)}
 }
 
+// @method initWithRequest:cachedResponse:client: @abstract Initializes an NSURLProtocol given request, cached response, and client. @param request The request to load. @param cachedResponse A response that has been retrieved from the cache for the given request. The protocol implementation should apply protocol-specific validity checks if such tests are necessary. @param client The NSURLProtocolClient object that serves as the interface the protocol implementation can use to report results back to the URL loading system.
+//
 // NewURLProtocolWithRequestCachedResponseClient creates a new [URLProtocol].
 func NewURLProtocolWithRequestCachedResponseClient(request *raw.NSURLRequest, cachedResponse *raw.NSCachedURLResponse, client raw.NSURLProtocolClient) *URLProtocol {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLProtocol")), objc.RegisterName("alloc"))
@@ -49,21 +51,29 @@ func (x *URLProtocol) WithScriptingProperties(scriptingProperties *raw.NSDiction
 	return x
 }
 
+// @method startLoading @abstract Starts protocol-specific loading of a request. @discussion When this method is called, the protocol implementation should start loading a request.
+//
 // StartLoading calls the underlying StartLoading.
 func (x *URLProtocol) StartLoading() {
 	x.inner.StartLoading()
 }
 
+// @method stopLoading @abstract Stops protocol-specific loading of a request. @discussion When this method is called, the protocol implementation should end the work of loading a request. This could be in response to a cancel operation, so protocol implementations must be able to handle this call while a load is in progress.
+//
 // StopLoading calls the underlying StopLoading.
 func (x *URLProtocol) StopLoading() {
 	x.inner.StopLoading()
 }
 
+// @abstract Returns the NSURLProtocolClient of the receiver. @result The NSURLProtocolClient of the receiver.
+//
 // Client calls the underlying Client.
 func (x *URLProtocol) Client() raw.NSURLProtocolClient {
 	return x.inner.Client()
 }
 
+// @abstract Returns the NSURLRequest of the receiver. @result The NSURLRequest of the receiver.
+//
 // Request calls the underlying Request.
 func (x *URLProtocol) Request() *URLRequest {
 	_r := x.inner.Request()
@@ -73,6 +83,8 @@ func (x *URLProtocol) Request() *URLRequest {
 	return &URLRequest{inner: _r}
 }
 
+// @abstract Returns the NSCachedURLResponse of the receiver. @result The NSCachedURLResponse of the receiver.
+//
 // CachedResponse calls the underlying CachedResponse.
 func (x *URLProtocol) CachedResponse() *CachedURLResponse {
 	_r := x.inner.CachedResponse()

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A random distribution is a random source itself with a specific mapping from the input source to the output values. The distribution is uniform, meaning there is no bias towards any of the possible outcomes.
+//
 // RandomDistribution wraps [raw.GKRandomDistribution] with a fluent Go API.
 type RandomDistribution struct {
 	inner *raw.GKRandomDistribution
@@ -29,6 +31,8 @@ func RandomDistributionFromID(id objc.ID) *RandomDistribution {
 	return &RandomDistribution{inner: raw.GKRandomDistributionFromID(id)}
 }
 
+// Initializes a random distribution within the range [lowest, highest] using a source to grab input values from.
+//
 // NewRandomDistributionWithRandomSourceLowestValueHighestValue creates a new [RandomDistribution].
 func NewRandomDistributionWithRandomSourceLowestValueHighestValue(source raw.GKRandom, lowestInclusive int, highestInclusive int) *RandomDistribution {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKRandomDistribution")), objc.RegisterName("alloc"))
@@ -36,36 +40,50 @@ func NewRandomDistributionWithRandomSourceLowestValueHighestValue(source raw.GKR
 	return &RandomDistribution{inner: raw.GKRandomDistributionFromID(_id)}
 }
 
+// Returns the next integer in the distribution sequence and moves ahead to the next one. The value is in the range of [lowest, highest].
+//
 // NextInt calls the underlying NextInt.
 func (x *RandomDistribution) NextInt() int {
 	return x.inner.NextInt()
 }
 
+// Returns the next unsigned value in the distribution sequence that is less than upperBound. The value never equals or exceeeds upperBounds, and in this case it will also never exceed the highest value of the distribution.
+//
 // NextIntWithUpperBound calls the underlying NextIntWithUpperBound.
 func (x *RandomDistribution) NextIntWithUpperBound(upperBound uint) uint {
 	return x.inner.NextIntWithUpperBound(upperBound)
 }
 
+// Returns the next uniform float in the random sequence and moves ahead to the next one. The value is in the range of [lowest / higest, 1.0]. The value is quantized to the distribution's lowest and highest bounds. Thus on a d20 distribution the value is quantized to 5% increments. The output value 0 is not possible to get unless the lowest value bound is also 0 or below. @see nextInt
+//
 // NextUniform calls the underlying NextUniform.
 func (x *RandomDistribution) NextUniform() float32 {
 	return x.inner.NextUniform()
 }
 
+// Returns the next true or false value in the distribution sequence and moves ahead to the next one. The value is either nonzero (true) or zero (false). Use this for simple boolean switches in logic that don't require fuzzy evaluation. For fuzzy evaluation use nextUniform. By default this is based on the referenced source's definition of nextBool. @see GKRandomSource.nextBool
+//
 // NextBool calls the underlying NextBool.
 func (x *RandomDistribution) NextBool() bool {
 	return x.inner.NextBool()
 }
 
+// The lowest value the distribution will output.
+//
 // LowestValue calls the underlying LowestValue.
 func (x *RandomDistribution) LowestValue() int {
 	return x.inner.LowestValue()
 }
 
+// The highest value the distribution will output.
+//
 // HighestValue calls the underlying HighestValue.
 func (x *RandomDistribution) HighestValue() int {
 	return x.inner.HighestValue()
 }
 
+// The number of unique possible outcomes, depending on the distribution type this is not always highest - lowest + 1.
+//
 // NumberOfPossibleOutcomes calls the underlying NumberOfPossibleOutcomes.
 func (x *RandomDistribution) NumberOfPossibleOutcomes() uint {
 	return x.inner.NumberOfPossibleOutcomes()

@@ -36,21 +36,29 @@ func NewDisplay() *Display {
 	return &Display{inner: raw.SCDisplayFromID(_id)}
 }
 
+// @abstract displayId the CGDirectDisplayID for the SCDisplay
+//
 // DisplayID calls the underlying DisplayID.
 func (x *Display) DisplayID() uint32 {
 	return x.inner.DisplayID()
 }
 
+// @abstract width the width, in points, for the SCDisplay
+//
 // Width calls the underlying Width.
 func (x *Display) Width() int {
 	return x.inner.Width()
 }
 
+// @abstract height the height, in points, for the SCDisplay
+//
 // Height calls the underlying Height.
 func (x *Display) Height() int {
 	return x.inner.Height()
 }
 
+// @abstract frame the CGRect frame for the SCDisplay
+//
 // Frame calls the underlying Frame.
 func (x *Display) Frame() corefoundation.CGRect {
 	return x.inner.Frame()

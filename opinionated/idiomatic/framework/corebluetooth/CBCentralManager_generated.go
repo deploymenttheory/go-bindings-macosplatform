@@ -30,6 +30,8 @@ func CentralManagerFromID(id objc.ID) *CentralManager {
 	return &CentralManager{inner: raw.CBCentralManagerFromID(id)}
 }
 
+// @method initWithDelegate:queue: @param delegate The delegate that will receive central role events. @param queue    The dispatch queue on which the events will be dispatched. @discussion     The initialization call. The events of the central role will be dispatched on the provided queue. If <i>nil</i>, the main queue will be used.
+//
 // NewCentralManagerWithDelegateQueue creates a new [CentralManager].
 func NewCentralManagerWithDelegateQueue(delegate raw.CBCentralManagerDelegate, queue *foundation.NSObject) *CentralManager {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CBCentralManager")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewCentralManagerWithDelegateQueue(delegate raw.CBCentralManagerDelegate, q
 	return &CentralManager{inner: raw.CBCentralManagerFromID(_id)}
 }
 
+// @method initWithDelegate:queue:options: @param delegate The delegate that will receive central role events. @param queue    The dispatch queue on which the events will be dispatched. @param options  An optional dictionary specifying options for the manager. @discussion     The initialization call. The events of the central role will be dispatched on the provided queue. If <i>nil</i>, the main queue will be used. @seealso		CBCentralManagerOptionShowPowerAlertKey @seealso		CBCentralManagerOptionRestoreIdentifierKey
+//
 // NewCentralManagerWithDelegateQueueOptions creates a new [CentralManager].
 func NewCentralManagerWithDelegateQueueOptions(delegate raw.CBCentralManagerDelegate, queue *foundation.NSObject, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CentralManager {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CBCentralManager")), objc.RegisterName("alloc"))
@@ -44,42 +48,58 @@ func NewCentralManagerWithDelegateQueueOptions(delegate raw.CBCentralManagerDele
 	return &CentralManager{inner: raw.CBCentralManagerFromID(_id)}
 }
 
+// @property delegate @discussion The delegate object that will receive central events.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *CentralManager) WithDelegate(delegate raw.CBCentralManagerDelegate) *CentralManager {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @method retrievePeripheralsWithIdentifiers: @param identifiers	A list of <code>NSUUID</code> objects. @discussion			Attempts to retrieve the <code>CBPeripheral</code> object(s) with the corresponding <i>identifiers</i>. @return				A list of <code>CBPeripheral</code> objects.
+//
 // RetrievePeripheralsWithIdentifiers calls the underlying RetrievePeripheralsWithIdentifiers.
 func (x *CentralManager) RetrievePeripheralsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSUUID]) *foundation.NSArray[*raw.CBPeripheral] {
 	return x.inner.RetrievePeripheralsWithIdentifiers(identifiers)
 }
 
+// @method retrieveConnectedPeripheralsWithServices @discussion Retrieves all peripherals that are connected to the system and implement any of the services listed in <i>serviceUUIDs</i>. Note that this set can include peripherals which were connected by other applications, which will need to be connected locally via {@link connectPeripheral:options:} before they can be used. @return		A list of <code>CBPeripheral</code> objects.
+//
 // RetrieveConnectedPeripheralsWithServices calls the underlying RetrieveConnectedPeripheralsWithServices.
 func (x *CentralManager) RetrieveConnectedPeripheralsWithServices(serviceUUIDs *foundation.NSArray[*raw.CBUUID]) *foundation.NSArray[*raw.CBPeripheral] {
 	return x.inner.RetrieveConnectedPeripheralsWithServices(serviceUUIDs)
 }
 
+// @method scanForPeripheralsWithServices:options: @param serviceUUIDs A list of <code>CBUUID</code> objects representing the service(s) to scan for. @param options      An optional dictionary specifying options for the scan. @discussion         Starts scanning for peripherals that are advertising any of the services listed in <i>serviceUUIDs</i>. Although strongly discouraged, if <i>serviceUUIDs</i> is <i>nil</i> all discovered peripherals will be returned. If the central is already scanning with different <i>serviceUUIDs</i> or <i>options</i>, the provided parameters will replace them. Applications that have specified the <code>bluetooth-central</code> background mode are allowed to scan while backgrounded, with two caveats: the scan must specify one or more service types in <i>serviceUUIDs</i>, and the <code>CBCentralManagerScanOptionAllowDuplicatesKey</code> scan option will be ignored. @see                centralManager:didDiscoverPeripheral:advertisementData:RSSI: @seealso            CBCentralManagerScanOptionAllowDuplicatesKey @seealso			CBCentralManagerScanOptionSolicitedServiceUUIDsKey
+//
 // ScanForPeripheralsWithServicesOptions calls the underlying ScanForPeripheralsWithServicesOptions.
 func (x *CentralManager) ScanForPeripheralsWithServicesOptions(serviceUUIDs *foundation.NSArray[*raw.CBUUID], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.ScanForPeripheralsWithServicesOptions(serviceUUIDs, options)
 }
 
+// @method stopScan: @discussion Stops scanning for peripherals.
+//
 // StopScan calls the underlying StopScan.
 func (x *CentralManager) StopScan() {
 	x.inner.StopScan()
 }
 
+// @method connectPeripheral:options: @param peripheral   The <code>CBPeripheral</code> to be connected. @param options      An optional dictionary specifying connection behavior options. @discussion         Initiates a connection to <i>peripheral</i>. Connection attempts never time out and, depending on the outcome, will result in a call to either {@link centralManager:didConnectPeripheral:} or {@link centralManager:didFailToConnectPeripheral:error:}. Pending attempts are cancelled automatically upon deallocation of <i>peripheral</i>, and explicitly via {@link cancelPeripheralConnection}. @see                centralManager:didConnectPeripheral: @see                centralManager:didFailToConnectPeripheral:error: @seealso            CBConnectPeripheralOptionNotifyOnConnectionKey @seealso            CBConnectPeripheralOptionNotifyOnDisconnectionKey @seealso            CBConnectPeripheralOptionNotifyOnNotificationKey @seealso            CBConnectPeripheralOptionEnableTransportBridgingKey @seealso			CBConnectPeripheralOptionRequiresANCS @seealso            CBConnectPeripheralOptionEnableAutoReconnect
+//
 // ConnectPeripheralOptions calls the underlying ConnectPeripheralOptions.
 func (x *CentralManager) ConnectPeripheralOptions(peripheral *raw.CBPeripheral, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.ConnectPeripheralOptions(peripheral, options)
 }
 
+// @method cancelPeripheralConnection: @param peripheral   A <code>CBPeripheral</code>. @discussion         Cancels an active or pending connection to <i>peripheral</i>. Note that this is non-blocking, and any <code>CBPeripheral</code> commands that are still pending to <i>peripheral</i> may or may not complete. @see                centralManager:didDisconnectPeripheral:error:
+//
 // CancelPeripheralConnection calls the underlying CancelPeripheralConnection.
 func (x *CentralManager) CancelPeripheralConnection(peripheral *raw.CBPeripheral) {
 	x.inner.CancelPeripheralConnection(peripheral)
 }
 
+// @property delegate @discussion The delegate object that will receive central events.
+//
 // Delegate calls the underlying Delegate.
 func (x *CentralManager) Delegate() raw.CBCentralManagerDelegate {
 	return x.inner.Delegate()
@@ -90,6 +110,8 @@ func (x *CentralManager) SetDelegate(delegate raw.CBCentralManagerDelegate) {
 	x.inner.SetDelegate(delegate)
 }
 
+// @property isScanning @discussion Whether or not the central is currently scanning.
+//
 // IsScanning calls the underlying IsScanning.
 func (x *CentralManager) IsScanning() bool {
 	return x.inner.IsScanning()

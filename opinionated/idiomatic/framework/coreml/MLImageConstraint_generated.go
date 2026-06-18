@@ -35,21 +35,29 @@ func NewImageConstraint() *ImageConstraint {
 	return &ImageConstraint{inner: raw.MLImageConstraintFromID(_id)}
 }
 
+// The required or default height of the image
+//
 // PixelsHigh calls the underlying PixelsHigh.
 func (x *ImageConstraint) PixelsHigh() int {
 	return x.inner.PixelsHigh()
 }
 
+// The required or default width of the image
+//
 // PixelsWide calls the underlying PixelsWide.
 func (x *ImageConstraint) PixelsWide() int {
 	return x.inner.PixelsWide()
 }
 
+// The accepted kCVPixelFormatType for the image.
+//
 // PixelFormatType calls the underlying PixelFormatType.
 func (x *ImageConstraint) PixelFormatType() uint {
 	return x.inner.PixelFormatType()
 }
 
+// Detailed image size constraint
+//
 // SizeConstraint calls the underlying SizeConstraint.
 func (x *ImageConstraint) SizeConstraint() *ImageSizeConstraint {
 	_r := x.inner.SizeConstraint()

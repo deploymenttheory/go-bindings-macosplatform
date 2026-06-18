@@ -46,6 +46,8 @@ func (x *PersistentCloudKitContainerOptions) WithDatabaseScope(databaseScope obj
 	return x
 }
 
+// The container identifier of the CKContainer to use with a given instance of NSPersistentStoreDescription
+//
 // ContainerIdentifier calls the underlying ContainerIdentifier.
 func (x *PersistentCloudKitContainerOptions) ContainerIdentifier() string {
 	_r := x.inner.ContainerIdentifier()

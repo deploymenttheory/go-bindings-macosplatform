@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Represents a decision to focus on a specific detectionID or detectionGroupID; optionally strong. A strong decision keeps focus for as long as possible.
+//
 // Decision wraps [raw.CNDecision] with a fluent Go API.
 type Decision struct {
 	inner *raw.CNDecision
@@ -30,6 +32,8 @@ func DecisionFromID(id objc.ID) *Decision {
 	return &Decision{inner: raw.CNDecisionFromID(id)}
 }
 
+// Make a decision to focus on the detection with the given detectionID. A strong decision keeps focus for as long as possible.
+//
 // NewDecisionWithTimeDetectionIDStrong creates a new [Decision].
 func NewDecisionWithTimeDetectionIDStrong(time_ coremedia.CMTime, detectionID int64, isStrong bool) *Decision {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNDecision")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewDecisionWithTimeDetectionIDStrong(time_ coremedia.CMTime, detectionID in
 	return &Decision{inner: raw.CNDecisionFromID(_id)}
 }
 
+// Make a decision to focus on the best among those detections with the same detectionGroupID. A strong decision keeps focus for as long as possible.
+//
 // NewDecisionWithTimeDetectionGroupIDStrong creates a new [Decision].
 func NewDecisionWithTimeDetectionGroupIDStrong(time_ coremedia.CMTime, detectionGroupID int64, isStrong bool) *Decision {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNDecision")), objc.RegisterName("alloc"))
@@ -44,31 +50,43 @@ func NewDecisionWithTimeDetectionGroupIDStrong(time_ coremedia.CMTime, detection
 	return &Decision{inner: raw.CNDecisionFromID(_id)}
 }
 
+// The first presentation time at which the subject should be in focus. The rack focus transition to the subject occurs prior to this time.
+//
 // Time calls the underlying Time.
 func (x *Decision) Time() coremedia.CMTime {
 	return x.inner.Time()
 }
 
+// The detectionID of the detection to focus on if this is not a group decision.
+//
 // DetectionID calls the underlying DetectionID.
 func (x *Decision) DetectionID() int64 {
 	return x.inner.DetectionID()
 }
 
+// The detectionGroupID of the detection to focus on if this is a group decision.
+//
 // DetectionGroupID calls the underlying DetectionGroupID.
 func (x *Decision) DetectionGroupID() int64 {
 	return x.inner.DetectionGroupID()
 }
 
+// Whether this is a user-created decision, or a base decision.
+//
 // IsUserDecision calls the underlying IsUserDecision.
 func (x *Decision) IsUserDecision() bool {
 	return x.inner.IsUserDecision()
 }
 
+// Whether this is a group decision or not.
+//
 // IsGroupDecision calls the underlying IsGroupDecision.
 func (x *Decision) IsGroupDecision() bool {
 	return x.inner.IsGroupDecision()
 }
 
+// Whether this is a strong decision or not. A strong decision keeps focus for as long as possible.
+//
 // IsStrongDecision calls the underlying IsStrongDecision.
 func (x *Decision) IsStrongDecision() bool {
 	return x.inner.IsStrongDecision()

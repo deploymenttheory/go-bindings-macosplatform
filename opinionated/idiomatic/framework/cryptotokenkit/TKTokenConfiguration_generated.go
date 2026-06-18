@@ -38,12 +38,16 @@ func NewTokenConfiguration() *TokenConfiguration {
 	return &TokenConfiguration{inner: raw.TKTokenConfigurationFromID(_id)}
 }
 
+// Additional configuration available for token instance. Token implementation and its hosting application can use this data for specifying any additional configuration for the token. System does not interpret this data in any way. For example, network-based HSM can store here (using Codable or other serialization mechanisms) target network address, access credentials and the list of identities accessible in the HSM.
+//
 // WithConfigurationData sets the configurationData property and returns the receiver for chaining.
 func (x *TokenConfiguration) WithConfigurationData(configurationData *foundation.NSData) *TokenConfiguration {
 	x.inner.SetConfigurationData(configurationData)
 	return x
 }
 
+// All keychain items of this token.
+//
 // WithKeychainItems sets the collection, converting the Go slice to an NSArray.
 func (x *TokenConfiguration) WithKeychainItems(items ...TokenKeychainItemProvider) *TokenConfiguration {
 	if len(items) == 0 {
@@ -62,6 +66,8 @@ func (x *TokenConfiguration) WithKeychainItems(items ...TokenKeychainItemProvide
 	return x
 }
 
+// Returns keychain item key with specified objectID.  Fills error with TKTokenErrorCodeObjectNotFound if no such key exists.
+//
 // KeyForObjectIDError calls the underlying KeyForObjectIDError.
 func (x *TokenConfiguration) KeyForObjectIDError(objectID objc.ID) (*TokenKeychainKey, error) {
 	_r, _err := x.inner.KeyForObjectIDError(objectID)
@@ -74,6 +80,8 @@ func (x *TokenConfiguration) KeyForObjectIDError(objectID objc.ID) (*TokenKeycha
 	return &TokenKeychainKey{inner: _r}, nil
 }
 
+// Returns certificate with specified objectID.  Fills error with TKTokenErrorCodeObjectNotFound if no such certificate exists.
+//
 // CertificateForObjectIDError calls the underlying CertificateForObjectIDError.
 func (x *TokenConfiguration) CertificateForObjectIDError(objectID objc.ID) (*TokenKeychainCertificate, error) {
 	_r, _err := x.inner.CertificateForObjectIDError(objectID)
@@ -86,6 +94,8 @@ func (x *TokenConfiguration) CertificateForObjectIDError(objectID objc.ID) (*Tok
 	return &TokenKeychainCertificate{inner: _r}, nil
 }
 
+// Unique, persistent identifier of this token, always created by specific token implementation. Typically implemented by some kind of serial number of the target hardware, for example SmartCard serial number.
+//
 // InstanceID calls the underlying InstanceID.
 func (x *TokenConfiguration) InstanceID() string {
 	_r := x.inner.InstanceID()
@@ -95,6 +105,8 @@ func (x *TokenConfiguration) InstanceID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Additional configuration available for token instance. Token implementation and its hosting application can use this data for specifying any additional configuration for the token. System does not interpret this data in any way. For example, network-based HSM can store here (using Codable or other serialization mechanisms) target network address, access credentials and the list of identities accessible in the HSM.
+//
 // ConfigurationData calls the underlying ConfigurationData.
 func (x *TokenConfiguration) ConfigurationData() *foundation.NSData {
 	return x.inner.ConfigurationData()
@@ -105,6 +117,8 @@ func (x *TokenConfiguration) SetConfigurationData(configurationData *foundation.
 	x.inner.SetConfigurationData(configurationData)
 }
 
+// All keychain items of this token.
+//
 // KeychainItems returns the collection as a Go slice.
 func (x *TokenConfiguration) KeychainItems() []*TokenKeychainItem {
 	arr := x.inner.KeychainItems()
@@ -117,8 +131,17 @@ func (x *TokenConfiguration) KeychainItems() []*TokenKeychainItem {
 }
 
 // SetKeychainItems calls the underlying SetKeychainItems.
-func (x *TokenConfiguration) SetKeychainItems(keychainItems *foundation.NSArray[*raw.TKTokenKeychainItem]) {
-	x.inner.SetKeychainItems(keychainItems)
+func (x *TokenConfiguration) SetKeychainItems(keychainItems ...TokenKeychainItemProvider) {
+	_ptrs := make([]objc.ID, len(keychainItems))
+	for _i, _v := range keychainItems {
+		_ptrs[_i] = _v.asTokenKeychainItem().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.TKTokenKeychainItem]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.TKTokenKeychainItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetKeychainItems(_arg0)
 }
 
 // TokenConfigurationable is the interface implemented by [TokenConfiguration], for mocking and DI.
@@ -132,7 +155,7 @@ type TokenConfigurationable interface {
 	ConfigurationData() *foundation.NSData
 	SetConfigurationData(configurationData *foundation.NSData)
 	KeychainItems() []*TokenKeychainItem
-	SetKeychainItems(keychainItems *foundation.NSArray[*raw.TKTokenKeychainItem])
+	SetKeychainItems(keychainItems ...TokenKeychainItemProvider)
 }
 
 var _ TokenConfigurationable = (*TokenConfiguration)(nil)

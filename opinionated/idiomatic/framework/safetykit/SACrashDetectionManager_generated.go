@@ -36,22 +36,30 @@ func NewCrashDetectionManager() *CrashDetectionManager {
 	return &CrashDetectionManager{inner: raw.SACrashDetectionManagerFromID(_id)}
 }
 
+// delegate @discussion The delegate object to receive Crash Detection events.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *CrashDetectionManager) WithDelegate(delegate raw.SACrashDetectionDelegate) *CrashDetectionManager {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @discussion Requests the user’s permission to access Crash Detection information. @param handler Completion handler invoked with the status of the authorization request.
+//
 // RequestAuthorizationWithCompletionHandler calls the underlying RequestAuthorizationWithCompletionHandler.
 func (x *CrashDetectionManager) RequestAuthorizationWithCompletionHandler(handler func(SAAuthorizationStatus, unsafe.Pointer)) {
 	x.inner.RequestAuthorizationWithCompletionHandler(func(_a0 raw.SAAuthorizationStatus, _a1 unsafe.Pointer) { handler(SAAuthorizationStatus(_a0), _a1) })
 }
 
+// authorizationStatus @discussion Returns a value indicating whether the user has authorized the app to receive Crash Detection updates
+//
 // AuthorizationStatus calls the underlying AuthorizationStatus.
 func (x *CrashDetectionManager) AuthorizationStatus() SAAuthorizationStatus {
 	return SAAuthorizationStatus(x.inner.AuthorizationStatus())
 }
 
+// delegate @discussion The delegate object to receive Crash Detection events.
+//
 // Delegate calls the underlying Delegate.
 func (x *CrashDetectionManager) Delegate() raw.SACrashDetectionDelegate {
 	return x.inner.Delegate()

@@ -40,12 +40,16 @@ func NewLeaderboardSet() *LeaderboardSet {
 	return &LeaderboardSet{inner: raw.GKLeaderboardSetFromID(_id)}
 }
 
+// leaderboard set.
+//
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *LeaderboardSet) WithIdentifier(identifier string) *LeaderboardSet {
 	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
 	return x
 }
 
+// Loads array with all classic leaderboards and current instances of recurring leaderboards for this leaderboardSet Possible reasons for error: 1. Communications problem 2. Unauthenticated player
+//
 // LoadLeaderboardsWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *LeaderboardSet) LoadLeaderboardsWithHandler(ctx context.Context) (*foundation.NSArray[*raw.GKLeaderboard], error) {
 	type _result struct {
@@ -70,6 +74,8 @@ func (x *LeaderboardSet) LoadLeaderboardsWithHandler(ctx context.Context) (*foun
 	}
 }
 
+// Localized set title.
+//
 // Title calls the underlying Title.
 func (x *LeaderboardSet) Title() string {
 	_r := x.inner.Title()
@@ -79,6 +85,8 @@ func (x *LeaderboardSet) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// set when leaderboardSets have been designated a game group; set when loadLeaderboardSetsWithCompletionHandler has been called for leaderboards that support game groups
+//
 // GroupIdentifier calls the underlying GroupIdentifier.
 func (x *LeaderboardSet) GroupIdentifier() string {
 	_r := x.inner.GroupIdentifier()
@@ -88,6 +96,8 @@ func (x *LeaderboardSet) GroupIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// leaderboard set.
+//
 // Identifier calls the underlying Identifier.
 func (x *LeaderboardSet) Identifier() string {
 	_r := x.inner.Identifier()
@@ -102,6 +112,8 @@ func (x *LeaderboardSet) SetIdentifier(identifier string) {
 	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
 }
 
+// Loads array with all leaderboards for the leaderboardSet Possible reasons for error: 1. Communications problem 2. Unauthenticated player
+//
 // LoadLeaderboards blocks until the operation completes or ctx is cancelled.
 func (x *LeaderboardSet) LoadLeaderboards(ctx context.Context) (*foundation.NSArray[*raw.GKLeaderboard], error) {
 	type _result struct {
@@ -126,6 +138,8 @@ func (x *LeaderboardSet) LoadLeaderboards(ctx context.Context) (*foundation.NSAr
 	}
 }
 
+// Asynchronously load the image. Error will be nil on success.
+//
 // LoadImage blocks until the operation completes or ctx is cancelled.
 func (x *LeaderboardSet) LoadImage(ctx context.Context) (*appkit.NSImage, error) {
 	type _result struct {

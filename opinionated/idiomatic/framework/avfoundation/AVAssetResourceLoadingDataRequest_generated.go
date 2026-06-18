@@ -38,26 +38,36 @@ func NewAssetResourceLoadingDataRequest() *AssetResourceLoadingDataRequest {
 	return &AssetResourceLoadingDataRequest{inner: raw.AVAssetResourceLoadingDataRequestFromID(_id)}
 }
 
+// @method 		respondWithData: @abstract		Provides data to the receiver. @param			data An instance of NSData containing some or all of the requested bytes. @discussion	May be invoked multiple times on the same instance of AVAssetResourceLoadingDataRequest to provide the full range of requested data incrementally. Upon each invocation, the value of currentOffset will be updated to accord with the amount of data provided. The instance of NSData that you provide may be retained for use in parsing or other processing for an indefinite period of time after this method returns. For this reason, if you are providing an instance of NSMutableData, you should avoid mutating it further after sharing its contents. If you are managing your own memory pool for I/O and resource loading, consider using -[NSData initWithBytesNoCopy:length:deallocator:] in order to receive notification of the earliest opportunity for safe recycling of the underlying memory.
+//
 // RespondWithData calls the underlying RespondWithData.
 func (x *AssetResourceLoadingDataRequest) RespondWithData(data *foundation.NSData) {
 	x.inner.RespondWithData(data)
 }
 
+// @property 		requestedOffset @abstract		The position within the resource of the first byte requested.
+//
 // RequestedOffset calls the underlying RequestedOffset.
 func (x *AssetResourceLoadingDataRequest) RequestedOffset() int64 {
 	return x.inner.RequestedOffset()
 }
 
+// @property 		requestedLength @abstract		The length of the data requested. @discussion	Note that requestsAllDataToEndOfResource will be set to YES when the entire remaining length of the resource is being requested from requestedOffset to the end of the resource. This can occur even when the content length has not yet been reported by you via a prior finished loading request. When requestsAllDataToEndOfResource has a value of YES, you should disregard the value of requestedLength and incrementally provide as much data starting from the requestedOffset as the resource contains, until you have provided all of the available data successfully and invoked -finishLoading, until you have encountered a failure and invoked -finishLoadingWithError:, or until you have received -resourceLoader:didCancelLoadingRequest: for the AVAssetResourceLoadingRequest from which the AVAssetResourceLoadingDataRequest was obtained. When requestsAllDataToEndOfResource is YES and the content length has not yet been provided by you via a prior finished loading request, the value of requestedLength is set to NSIntegerMax. Starting in macOS 10.11 and iOS 9.0, in 32-bit applications requestedLength is also set to NSIntegerMax when all of the remaining resource data is being requested and the known length of the remaining data exceeds NSIntegerMax.
+//
 // RequestedLength calls the underlying RequestedLength.
 func (x *AssetResourceLoadingDataRequest) RequestedLength() int {
 	return x.inner.RequestedLength()
 }
 
+// @property 		requestsAllDataToEndOfResource @abstract		Specifies that the entire remaining length of the resource from requestedOffset to the end of the resource is being requested. @discussion	When requestsAllDataToEndOfResource has a value of YES, you should disregard the value of requestedLength and incrementally provide as much data starting from the requestedOffset as the resource contains, until you have provided all of the available data successfully and invoked -finishLoading, until you have encountered a failure and invoked -finishLoadingWithError:, or until you have received -resourceLoader:didCancelLoadingRequest: for the AVAssetResourceLoadingRequest from which the AVAssetResourceLoadingDataRequest was obtained.
+//
 // RequestsAllDataToEndOfResource calls the underlying RequestsAllDataToEndOfResource.
 func (x *AssetResourceLoadingDataRequest) RequestsAllDataToEndOfResource() bool {
 	return x.inner.RequestsAllDataToEndOfResource()
 }
 
+// @property 		currentOffset @abstract		The position within the resource of the next byte within the resource following the bytes that have already been provided via prior invocations of -respondWithData.
+//
 // CurrentOffset calls the underlying CurrentOffset.
 func (x *AssetResourceLoadingDataRequest) CurrentOffset() int64 {
 	return x.inner.CurrentOffset()

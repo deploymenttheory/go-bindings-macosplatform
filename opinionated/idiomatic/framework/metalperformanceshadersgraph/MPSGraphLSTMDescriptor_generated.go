@@ -35,66 +35,88 @@ func NewGraphLSTMDescriptor() *GraphLSTMDescriptor {
 	return &GraphLSTMDescriptor{inner: raw.MPSGraphLSTMDescriptorFromID(_id)}
 }
 
+// A parameter that defines time direction of the input sequence. If set to `YES` then the input sequence is passed in reverse time order to the layer. Note: Ignored when `bidirectional = YES`. Default value: `NO`.
+//
 // WithReverse sets the reverse property and returns the receiver for chaining.
 func (x *GraphLSTMDescriptor) WithReverse(reverse bool) *GraphLSTMDescriptor {
 	x.inner.SetReverse(reverse)
 	return x
 }
 
+// A parameter that defines a bidirectional LSTM layer. If set to `YES` then the input sequence is traversed in both directions and the two results are concatenated together on the channel-axis. Default value: `NO`.
+//
 // WithBidirectional sets the bidirectional property and returns the receiver for chaining.
 func (x *GraphLSTMDescriptor) WithBidirectional(bidirectional bool) *GraphLSTMDescriptor {
 	x.inner.SetBidirectional(bidirectional)
 	return x
 }
 
+// A parameter that controls whether or not to return the output cell from the LSTM layer. If set to `YES` then this layer will produce the internal cell of the LSTM unit as secondary output. Default value: `NO`.
+//
 // WithProduceCell sets the produceCell property and returns the receiver for chaining.
 func (x *GraphLSTMDescriptor) WithProduceCell(produceCell bool) *GraphLSTMDescriptor {
 	x.inner.SetProduceCell(produceCell)
 	return x
 }
 
+// A parameter that enables the LSTM layer to support training. If set to `YES` then the layer will produce training state tensor as a secondary output. Default value: `NO`.
+//
 // WithTraining sets the training property and returns the receiver for chaining.
 func (x *GraphLSTMDescriptor) WithTraining(training bool) *GraphLSTMDescriptor {
 	x.inner.SetTraining(training)
 	return x
 }
 
+// A parameter that controls the internal order of the LSTM gates. If set to `YES` then the layer will use the gate-ordering `[ i, z, f, o ]` instead of default `[ i, f, z, o ]`. Default value: `NO`
+//
 // WithForgetGateLast sets the forgetGateLast property and returns the receiver for chaining.
 func (x *GraphLSTMDescriptor) WithForgetGateLast(forgetGateLast bool) *GraphLSTMDescriptor {
 	x.inner.SetForgetGateLast(forgetGateLast)
 	return x
 }
 
+// A parameter that defines the activation function used with the input gate of the LSTM operation. Default value: `MPSGraphRNNActivationSigmoid`.
+//
 // WithInputGateActivation sets the inputGateActivation property and returns the receiver for chaining.
 func (x *GraphLSTMDescriptor) WithInputGateActivation(inputGateActivation MPSGraphRNNActivation) *GraphLSTMDescriptor {
 	x.inner.SetInputGateActivation(raw.MPSGraphRNNActivation(inputGateActivation))
 	return x
 }
 
+// A parameter that defines the activation function used with the forget gate of the LSTM operation. Default value: `MPSGraphRNNActivationSigmoid`.
+//
 // WithForgetGateActivation sets the forgetGateActivation property and returns the receiver for chaining.
 func (x *GraphLSTMDescriptor) WithForgetGateActivation(forgetGateActivation MPSGraphRNNActivation) *GraphLSTMDescriptor {
 	x.inner.SetForgetGateActivation(raw.MPSGraphRNNActivation(forgetGateActivation))
 	return x
 }
 
+// A parameter that defines the activation function used with the cell gate of the LSTM operation. Default value: `MPSGraphRNNActivationTanh`.
+//
 // WithCellGateActivation sets the cellGateActivation property and returns the receiver for chaining.
 func (x *GraphLSTMDescriptor) WithCellGateActivation(cellGateActivation MPSGraphRNNActivation) *GraphLSTMDescriptor {
 	x.inner.SetCellGateActivation(raw.MPSGraphRNNActivation(cellGateActivation))
 	return x
 }
 
+// A parameter that defines the activation function used with the output gate of the LSTM operation. Default value: `MPSGraphRNNActivationSigmoid`.
+//
 // WithOutputGateActivation sets the outputGateActivation property and returns the receiver for chaining.
 func (x *GraphLSTMDescriptor) WithOutputGateActivation(outputGateActivation MPSGraphRNNActivation) *GraphLSTMDescriptor {
 	x.inner.SetOutputGateActivation(raw.MPSGraphRNNActivation(outputGateActivation))
 	return x
 }
 
+// A parameter that defines the activation function used with the current cell value of the LSTM operation. Default value: `MPSGraphRNNActivationTanh`.
+//
 // WithActivation sets the activation property and returns the receiver for chaining.
 func (x *GraphLSTMDescriptor) WithActivation(activation MPSGraphRNNActivation) *GraphLSTMDescriptor {
 	x.inner.SetActivation(raw.MPSGraphRNNActivation(activation))
 	return x
 }
 
+// A parameter that defines time direction of the input sequence. If set to `YES` then the input sequence is passed in reverse time order to the layer. Note: Ignored when `bidirectional = YES`. Default value: `NO`.
+//
 // Reverse calls the underlying Reverse.
 func (x *GraphLSTMDescriptor) Reverse() bool {
 	return x.inner.Reverse()
@@ -105,6 +127,8 @@ func (x *GraphLSTMDescriptor) SetReverse(reverse bool) {
 	x.inner.SetReverse(reverse)
 }
 
+// A parameter that defines a bidirectional LSTM layer. If set to `YES` then the input sequence is traversed in both directions and the two results are concatenated together on the channel-axis. Default value: `NO`.
+//
 // Bidirectional calls the underlying Bidirectional.
 func (x *GraphLSTMDescriptor) Bidirectional() bool {
 	return x.inner.Bidirectional()
@@ -115,6 +139,8 @@ func (x *GraphLSTMDescriptor) SetBidirectional(bidirectional bool) {
 	x.inner.SetBidirectional(bidirectional)
 }
 
+// A parameter that controls whether or not to return the output cell from the LSTM layer. If set to `YES` then this layer will produce the internal cell of the LSTM unit as secondary output. Default value: `NO`.
+//
 // ProduceCell calls the underlying ProduceCell.
 func (x *GraphLSTMDescriptor) ProduceCell() bool {
 	return x.inner.ProduceCell()
@@ -125,6 +151,8 @@ func (x *GraphLSTMDescriptor) SetProduceCell(produceCell bool) {
 	x.inner.SetProduceCell(produceCell)
 }
 
+// A parameter that enables the LSTM layer to support training. If set to `YES` then the layer will produce training state tensor as a secondary output. Default value: `NO`.
+//
 // Training calls the underlying Training.
 func (x *GraphLSTMDescriptor) Training() bool {
 	return x.inner.Training()
@@ -135,6 +163,8 @@ func (x *GraphLSTMDescriptor) SetTraining(training bool) {
 	x.inner.SetTraining(training)
 }
 
+// A parameter that controls the internal order of the LSTM gates. If set to `YES` then the layer will use the gate-ordering `[ i, z, f, o ]` instead of default `[ i, f, z, o ]`. Default value: `NO`
+//
 // ForgetGateLast calls the underlying ForgetGateLast.
 func (x *GraphLSTMDescriptor) ForgetGateLast() bool {
 	return x.inner.ForgetGateLast()
@@ -145,6 +175,8 @@ func (x *GraphLSTMDescriptor) SetForgetGateLast(forgetGateLast bool) {
 	x.inner.SetForgetGateLast(forgetGateLast)
 }
 
+// A parameter that defines the activation function used with the input gate of the LSTM operation. Default value: `MPSGraphRNNActivationSigmoid`.
+//
 // InputGateActivation calls the underlying InputGateActivation.
 func (x *GraphLSTMDescriptor) InputGateActivation() MPSGraphRNNActivation {
 	return MPSGraphRNNActivation(x.inner.InputGateActivation())
@@ -155,6 +187,8 @@ func (x *GraphLSTMDescriptor) SetInputGateActivation(inputGateActivation MPSGrap
 	x.inner.SetInputGateActivation(raw.MPSGraphRNNActivation(inputGateActivation))
 }
 
+// A parameter that defines the activation function used with the forget gate of the LSTM operation. Default value: `MPSGraphRNNActivationSigmoid`.
+//
 // ForgetGateActivation calls the underlying ForgetGateActivation.
 func (x *GraphLSTMDescriptor) ForgetGateActivation() MPSGraphRNNActivation {
 	return MPSGraphRNNActivation(x.inner.ForgetGateActivation())
@@ -165,6 +199,8 @@ func (x *GraphLSTMDescriptor) SetForgetGateActivation(forgetGateActivation MPSGr
 	x.inner.SetForgetGateActivation(raw.MPSGraphRNNActivation(forgetGateActivation))
 }
 
+// A parameter that defines the activation function used with the cell gate of the LSTM operation. Default value: `MPSGraphRNNActivationTanh`.
+//
 // CellGateActivation calls the underlying CellGateActivation.
 func (x *GraphLSTMDescriptor) CellGateActivation() MPSGraphRNNActivation {
 	return MPSGraphRNNActivation(x.inner.CellGateActivation())
@@ -175,6 +211,8 @@ func (x *GraphLSTMDescriptor) SetCellGateActivation(cellGateActivation MPSGraphR
 	x.inner.SetCellGateActivation(raw.MPSGraphRNNActivation(cellGateActivation))
 }
 
+// A parameter that defines the activation function used with the output gate of the LSTM operation. Default value: `MPSGraphRNNActivationSigmoid`.
+//
 // OutputGateActivation calls the underlying OutputGateActivation.
 func (x *GraphLSTMDescriptor) OutputGateActivation() MPSGraphRNNActivation {
 	return MPSGraphRNNActivation(x.inner.OutputGateActivation())
@@ -185,6 +223,8 @@ func (x *GraphLSTMDescriptor) SetOutputGateActivation(outputGateActivation MPSGr
 	x.inner.SetOutputGateActivation(raw.MPSGraphRNNActivation(outputGateActivation))
 }
 
+// A parameter that defines the activation function used with the current cell value of the LSTM operation. Default value: `MPSGraphRNNActivationTanh`.
+//
 // Activation calls the underlying Activation.
 func (x *GraphLSTMDescriptor) Activation() MPSGraphRNNActivation {
 	return MPSGraphRNNActivation(x.inner.Activation())

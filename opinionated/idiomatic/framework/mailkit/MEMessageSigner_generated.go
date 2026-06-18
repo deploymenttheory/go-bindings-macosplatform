@@ -38,6 +38,8 @@ func NewMessageSignerWithEmailAddressesSignatureLabelContext(emailAddresses *fou
 	return &MessageSigner{inner: raw.MEMessageSignerFromID(_id)}
 }
 
+// @brief Email addresses associated with the signature.
+//
 // EmailAddresses returns the collection as a Go slice.
 func (x *MessageSigner) EmailAddresses() []*EmailAddress {
 	arr := x.inner.EmailAddresses()
@@ -49,6 +51,8 @@ func (x *MessageSigner) EmailAddresses() []*EmailAddress {
 	})
 }
 
+// @brief The message signers label. Shown in the message header view. For instance, "John Smith".
+//
 // Label calls the underlying Label.
 func (x *MessageSigner) Label() string {
 	_r := x.inner.Label()
@@ -58,6 +62,8 @@ func (x *MessageSigner) Label() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief The context for the message signature. This might include the signing certificate. This will be passed back to the extension for either verifying the signature or if the user wishes to view signature information.
+//
 // Context calls the underlying Context.
 func (x *MessageSigner) Context() *foundation.NSData {
 	return x.inner.Context()

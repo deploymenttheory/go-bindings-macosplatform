@@ -38,11 +38,15 @@ func NewProjectAssetElement() *ProjectAssetElement {
 	return &ProjectAssetElement{inner: raw.PHProjectAssetElementFromID(_id)}
 }
 
+// Cloud identifier for the underlying PHAsset. This identifier must be converted to a localIdentifier before fetching, but if archiving the identifier in project data the provided PHCloudIdentifier should always be used.
+//
 // CloudAssetIdentifier calls the underlying CloudAssetIdentifier.
 func (x *ProjectAssetElement) CloudAssetIdentifier() *photos.PHCloudIdentifier {
 	return x.inner.CloudAssetIdentifier()
 }
 
+// If a user has explicitly annotated an asset (e.g., caption) that value will be provided in this property.
+//
 // Annotation calls the underlying Annotation.
 func (x *ProjectAssetElement) Annotation() string {
 	_r := x.inner.Annotation()
@@ -52,11 +56,15 @@ func (x *ProjectAssetElement) Annotation() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// If the asset was presented to the user in a cropped manner in Photos either automatically or through user manipulation (pan & zoom) before the creation of the project, the visible image area shown to the user will be provided as a crop rect. As a fallback, Photos may suggest a general "safe crop" based on image content through this property. The rect is in unit coordinates with an upper left origin. Default value: {(0.0, 0.0), (1.0,1.0)}
+//
 // CropRect calls the underlying CropRect.
 func (x *ProjectAssetElement) CropRect() corefoundation.CGRect {
 	return x.inner.CropRect()
 }
 
+// Array of regions of interest (faces, objects, etc.) in the assets. Note: Photos will filter out features of an asset that it doesn't believe to be meaningful in the context of the user's full library. For example, random faces in a crowd.
+//
 // RegionsOfInterest returns the collection as a Go slice.
 func (x *ProjectAssetElement) RegionsOfInterest() []*ProjectRegionOfInterest {
 	arr := x.inner.RegionsOfInterest()
@@ -68,11 +76,15 @@ func (x *ProjectAssetElement) RegionsOfInterest() []*ProjectRegionOfInterest {
 	})
 }
 
+// The following properties are only used when the user creates a new project from an existing Apple Print Product. YES if the asset was presented horizontally flipped in the originating project.
+//
 // HorizontallyFlipped calls the underlying HorizontallyFlipped.
 func (x *ProjectAssetElement) HorizontallyFlipped() bool {
 	return x.inner.HorizontallyFlipped()
 }
 
+// YES if the asset was presented vertically flipped in the originating project.
+//
 // VerticallyFlipped calls the underlying VerticallyFlipped.
 func (x *ProjectAssetElement) VerticallyFlipped() bool {
 	return x.inner.VerticallyFlipped()

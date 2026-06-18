@@ -45,6 +45,8 @@ func NewSpeechUtteranceWithAttributedString(string_ *foundation.NSAttributedStri
 	return &SpeechUtterance{inner: raw.AVSpeechUtteranceFromID(_id)}
 }
 
+// @abstract A speech utterance that expects markup written using the Speech Synthesis Markup Language (SSML)  standard. @discussion Uses SSML markup to add attributes. If using SSML to request voices that fall under certain attributes, a single utterance may be split into multiple parts, each sent to the appropriate synthesizer. If no voice matches the properties, the voice in the @c voice property of the utterance will be used. If no @c voice is specified, the system's default will be used. @c AVSpeechUtterance properties that affect the prosidy of a voice such as @c rate, @c pitchMultiplier, @c pitchMultiplier will not apply to an utterance that uses an SSML representation. Returns nil if invalid SSML is passed in.
+//
 // NewSpeechUtteranceWithSSMLRepresentation creates a new [SpeechUtterance].
 func NewSpeechUtteranceWithSSMLRepresentation(string_ string) *SpeechUtterance {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechUtterance")), objc.RegisterName("alloc"))

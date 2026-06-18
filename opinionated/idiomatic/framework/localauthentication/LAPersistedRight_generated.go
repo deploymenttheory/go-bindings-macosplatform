@@ -35,12 +35,16 @@ func NewPersistedRight() *PersistedRight {
 	return &PersistedRight{inner: raw.LAPersistedRightFromID(_id)}
 }
 
+// @brief An application-supplied integer that can be used to identify right instances. The default value is @c 0.
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *PersistedRight) WithTag(tag int) *PersistedRight {
 	x.inner.LARight.SetTag(tag)
 	return x
 }
 
+// @brief Managed private key
+//
 // Key calls the underlying Key.
 func (x *PersistedRight) Key() *PrivateKey {
 	_r := x.inner.Key()
@@ -50,6 +54,8 @@ func (x *PersistedRight) Key() *PrivateKey {
 	return &PrivateKey{inner: _r}
 }
 
+// @brief Generic secret @discussion This is the generic secret that would have been stored along with the right
+//
 // Secret calls the underlying Secret.
 func (x *PersistedRight) Secret() *Secret {
 	_r := x.inner.Secret()

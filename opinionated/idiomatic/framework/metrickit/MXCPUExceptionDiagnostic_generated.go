@@ -36,6 +36,8 @@ func NewCPUExceptionDiagnostic() *CPUExceptionDiagnostic {
 	return &CPUExceptionDiagnostic{inner: raw.MXCPUExceptionDiagnosticFromID(_id)}
 }
 
+// @property      callStackTree @abstract      The application call stack tree associated with the excessive CPU consumption.
+//
 // CallStackTree calls the underlying CallStackTree.
 func (x *CPUExceptionDiagnostic) CallStackTree() *CallStackTree {
 	_r := x.inner.CallStackTree()
@@ -45,11 +47,15 @@ func (x *CPUExceptionDiagnostic) CallStackTree() *CallStackTree {
 	return &CallStackTree{inner: _r}
 }
 
+// @property      totalCPUTime @abstract      Total CPU time consumed in the scope of this CPU exception. @discussion    Dimensioned as NSUnitDuration.
+//
 // TotalCPUTime calls the underlying TotalCPUTime.
 func (x *CPUExceptionDiagnostic) TotalCPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
 	return x.inner.TotalCPUTime()
 }
 
+// @property      totalSampledTime @abstract      Total time that the application was sampled for during the CPU exception. @discussion    Dimensioned as NSUnitDuration.
+//
 // TotalSampledTime calls the underlying TotalSampledTime.
 func (x *CPUExceptionDiagnostic) TotalSampledTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
 	return x.inner.TotalSampledTime()

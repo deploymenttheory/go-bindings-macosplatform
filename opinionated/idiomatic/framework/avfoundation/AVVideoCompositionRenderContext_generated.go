@@ -37,41 +37,57 @@ func NewVideoCompositionRenderContext() *VideoCompositionRenderContext {
 	return &VideoCompositionRenderContext{inner: raw.AVVideoCompositionRenderContextFromID(_id)}
 }
 
+// Vends a CVPixelBuffer to use for rendering The buffer will have its kCVImageBufferCleanApertureKey and kCVImageBufferPixelAspectRatioKey attachments set to match the current composition processor properties.
+//
 // NewPixelBuffer calls the underlying NewPixelBuffer.
 func (x *VideoCompositionRenderContext) NewPixelBuffer() unsafe.Pointer {
 	return x.inner.NewPixelBuffer()
 }
 
+// Indicates the width and height for rendering frames.
+//
 // Size calls the underlying Size.
 func (x *VideoCompositionRenderContext) Size() corefoundation.CGSize {
 	return x.inner.Size()
 }
 
+// Transform to apply to the source image to incorporate renderScale, pixelAspectRatio, edgeWidths. The coordinate system origin is the top left corner of the buffer.
+//
 // RenderTransform calls the underlying RenderTransform.
 func (x *VideoCompositionRenderContext) RenderTransform() corefoundation.CGAffineTransform {
 	return x.inner.RenderTransform()
 }
 
+// Indicates a scaling ratio that should be applied when rendering frames.
+//
 // RenderScale calls the underlying RenderScale.
 func (x *VideoCompositionRenderContext) RenderScale() float32 {
 	return x.inner.RenderScale()
 }
 
+// Indicates the pixel aspect ratio for rendered frames.
+//
 // PixelAspectRatio calls the underlying PixelAspectRatio.
 func (x *VideoCompositionRenderContext) PixelAspectRatio() raw.AVPixelAspectRatio {
 	return x.inner.PixelAspectRatio()
 }
 
+// Indicates the thickness of the edge processing region on the left, top, right and bottom edges, in pixels.
+//
 // EdgeWidths calls the underlying EdgeWidths.
 func (x *VideoCompositionRenderContext) EdgeWidths() raw.AVEdgeWidths {
 	return x.inner.EdgeWidths()
 }
 
+// Hints the custom compositor that it may use higher quality, potentially slower algorithms. Generally true for non real time use cases.
+//
 // HighQualityRendering calls the underlying HighQualityRendering.
 func (x *VideoCompositionRenderContext) HighQualityRendering() bool {
 	return x.inner.HighQualityRendering()
 }
 
+// The AVVideoComposition being rendered.
+//
 // VideoComposition calls the underlying VideoComposition.
 func (x *VideoCompositionRenderContext) VideoComposition() *VideoComposition {
 	_r := x.inner.VideoComposition()

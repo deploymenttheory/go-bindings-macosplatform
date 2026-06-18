@@ -35,6 +35,8 @@ func MTRBaseClusterThreadBorderRouterManagementFromID(id objc.ID) *MTRBaseCluste
 	return &MTRBaseClusterThreadBorderRouterManagement{inner: raw.MTRBaseClusterThreadBorderRouterManagementFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterThreadBorderRouterManagementWithDeviceEndpointIDQueue creates a new [MTRBaseClusterThreadBorderRouterManagement].
 func NewMTRBaseClusterThreadBorderRouterManagementWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterThreadBorderRouterManagement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterThreadBorderRouterManagement")), objc.RegisterName("alloc"))
@@ -42,6 +44,8 @@ func NewMTRBaseClusterThreadBorderRouterManagementWithDeviceEndpointIDQueue(devi
 	return &MTRBaseClusterThreadBorderRouterManagement{inner: raw.MTRBaseClusterThreadBorderRouterManagementFromID(_id)}
 }
 
+// Command GetActiveDatasetRequest This command SHALL be used to request the active operational dataset of the Thread network to which the border router is connected.
+//
 // GetActiveDatasetRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterThreadBorderRouterManagement) GetActiveDatasetRequestWithParamsCompletion(ctx context.Context, params *raw.MTRThreadBorderRouterManagementClusterGetActiveDatasetRequestParams) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error) {
 	type _result struct {
@@ -94,6 +98,8 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) GetActiveDatasetRequestWith
 	}
 }
 
+// Command GetPendingDatasetRequest This command SHALL be used to request the pending dataset of the Thread network to which the border router is connected.
+//
 // GetPendingDatasetRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterThreadBorderRouterManagement) GetPendingDatasetRequestWithParamsCompletion(ctx context.Context, params *raw.MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error) {
 	type _result struct {
@@ -146,11 +152,15 @@ func (x *MTRBaseClusterThreadBorderRouterManagement) GetPendingDatasetRequestWit
 	}
 }
 
+// Command SetActiveDatasetRequest This command SHALL be used to set the active Dataset of the Thread network to which the Border Router is connected, when there is no active dataset already.
+//
 // SetActiveDatasetRequestWithParamsCompletion calls the underlying SetActiveDatasetRequestWithParamsCompletion.
 func (x *MTRBaseClusterThreadBorderRouterManagement) SetActiveDatasetRequestWithParamsCompletion(params *raw.MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams, completion func(unsafe.Pointer)) {
 	x.inner.SetActiveDatasetRequestWithParamsCompletion(params, completion)
 }
 
+// Command SetPendingDatasetRequest This command SHALL be used to set or update the pending Dataset of the Thread network to which the Border Router is connected, if the Border Router supports PANChange Feature.
+//
 // SetPendingDatasetRequestWithParamsCompletion calls the underlying SetPendingDatasetRequestWithParamsCompletion.
 func (x *MTRBaseClusterThreadBorderRouterManagement) SetPendingDatasetRequestWithParamsCompletion(params *raw.MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams, completion func(unsafe.Pointer)) {
 	x.inner.SetPendingDatasetRequestWithParamsCompletion(params, completion)

@@ -37,18 +37,24 @@ func NewMTL4CommandQueueDescriptor() *MTL4CommandQueueDescriptor {
 	return &MTL4CommandQueueDescriptor{inner: raw.MTL4CommandQueueDescriptorFromID(_id)}
 }
 
+// Assigns an optional label to the command queue instance for debugging purposes.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MTL4CommandQueueDescriptor) WithLabel(label string) *MTL4CommandQueueDescriptor {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// Assigns a dispatch queue to which Metal submits feedback notification blocks. When you assign a dispatch queue via this method, Metal requires that the queue parameter you provide is a serial queue. If you set the value of property to `nil`, the default, Metal allocates an internal dispatch queue to service feedback notifications.
+//
 // WithFeedbackQueue sets the feedbackQueue property and returns the receiver for chaining.
 func (x *MTL4CommandQueueDescriptor) WithFeedbackQueue(feedbackQueue *foundation.NSObject) *MTL4CommandQueueDescriptor {
 	x.inner.SetFeedbackQueue(feedbackQueue)
 	return x
 }
 
+// Assigns an optional label to the command queue instance for debugging purposes.
+//
 // Label calls the underlying Label.
 func (x *MTL4CommandQueueDescriptor) Label() string {
 	_r := x.inner.Label()
@@ -63,6 +69,8 @@ func (x *MTL4CommandQueueDescriptor) SetLabel(label string) {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 }
 
+// Assigns a dispatch queue to which Metal submits feedback notification blocks. When you assign a dispatch queue via this method, Metal requires that the queue parameter you provide is a serial queue. If you set the value of property to `nil`, the default, Metal allocates an internal dispatch queue to service feedback notifications.
+//
 // FeedbackQueue calls the underlying FeedbackQueue.
 func (x *MTL4CommandQueueDescriptor) FeedbackQueue() *foundation.NSObject {
 	return x.inner.FeedbackQueue()

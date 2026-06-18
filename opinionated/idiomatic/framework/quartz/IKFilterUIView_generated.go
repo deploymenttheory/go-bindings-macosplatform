@@ -32,6 +32,8 @@ func IKFilterUIViewFromID(id objc.ID) *IKFilterUIView {
 	return &IKFilterUIView{inner: raw.IKFilterUIViewFromID(id)}
 }
 
+// @method     initWithFrame:filter: @abstract   The initWithFrame method initializes a view that retains the filter passed into it.
+//
 // NewIKFilterUIViewWithFrameFilter creates a new [IKFilterUIView].
 func NewIKFilterUIViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter *coreimage.CIFilter) *IKFilterUIView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IKFilterUIView")), objc.RegisterName("alloc"))
@@ -39,11 +41,15 @@ func NewIKFilterUIViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter 
 	return &IKFilterUIView{inner: raw.IKFilterUIViewFromID(_id)}
 }
 
+// @method     filter @abstract   Accessor method to return the filter instance that the view controls.
+//
 // Filter calls the underlying Filter.
 func (x *IKFilterUIView) Filter() *coreimage.CIFilter {
 	return x.inner.Filter()
 }
 
+// @method     objectController @abstract   Accessor method for the object controller for all bindings between the filter and the UI representation.
+//
 // ObjectController calls the underlying ObjectController.
 func (x *IKFilterUIView) ObjectController() *appkit.NSObjectController {
 	return x.inner.ObjectController()

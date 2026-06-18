@@ -9,6 +9,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // TileRenderPipelineDescriptor wraps [raw.MTLTileRenderPipelineDescriptor] with a fluent Go API.
@@ -37,12 +38,16 @@ func NewTileRenderPipelineDescriptor() *TileRenderPipelineDescriptor {
 	return &TileRenderPipelineDescriptor{inner: raw.MTLTileRenderPipelineDescriptorFromID(_id)}
 }
 
+// @property label: @abstract The descriptor label.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *TileRenderPipelineDescriptor) WithLabel(label string) *TileRenderPipelineDescriptor {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property tileFunction: @abstract  The kernel or fragment function that serves as the tile shader for this pipeline. @discussion Both kernel-based and fragment-based tile pipelines dispatches will barrier against previous draws and other dispatches. Kernel-based pipelines will wait until all prior access to the tile completes. Fragment-based pipelines will only wait until all prior access to the fragment's location completes.
+//
 // WithTileFunction sets the tileFunction property and returns the receiver for chaining.
 func (x *TileRenderPipelineDescriptor) WithTileFunction(tileFunction raw.MTLFunction) *TileRenderPipelineDescriptor {
 	x.inner.SetTileFunction(tileFunction)
@@ -55,42 +60,56 @@ func (x *TileRenderPipelineDescriptor) WithRasterSampleCount(rasterSampleCount u
 	return x
 }
 
+// @property threadgroupSizeMatchesTileSize: @abstract Whether all threadgroups associated with this pipeline will cover tiles entirely. @discussion Metal can optimize code generation for this case.
+//
 // WithThreadgroupSizeMatchesTileSize sets the threadgroupSizeMatchesTileSize property and returns the receiver for chaining.
 func (x *TileRenderPipelineDescriptor) WithThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize bool) *TileRenderPipelineDescriptor {
 	x.inner.SetThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize)
 	return x
 }
 
+// @property maxTotalThreadsPerThreadgroup @abstract Optional property. Set the maxTotalThreadsPerThreadgroup. If it is not set, returns zero.
+//
 // WithMaxTotalThreadsPerThreadgroup sets the maxTotalThreadsPerThreadgroup property and returns the receiver for chaining.
 func (x *TileRenderPipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) *TileRenderPipelineDescriptor {
 	x.inner.SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup)
 	return x
 }
 
+// @property linkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the tile function. @see MTLLinkedFunctions
+//
 // WithLinkedFunctions sets the linkedFunctions property and returns the receiver for chaining.
 func (x *TileRenderPipelineDescriptor) WithLinkedFunctions(linkedFunctions *LinkedFunctions) *TileRenderPipelineDescriptor {
 	x.inner.SetLinkedFunctions(linkedFunctions.Unwrap())
 	return x
 }
 
+// @property supportAddingBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
+//
 // WithSupportAddingBinaryFunctions sets the supportAddingBinaryFunctions property and returns the receiver for chaining.
 func (x *TileRenderPipelineDescriptor) WithSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool) *TileRenderPipelineDescriptor {
 	x.inner.SetSupportAddingBinaryFunctions(supportAddingBinaryFunctions)
 	return x
 }
 
+// @property maxCallStackDepth @abstract The maximum depth of the call stack in stack frames from the tile function. Defaults to 1 additional stack frame.
+//
 // WithMaxCallStackDepth sets the maxCallStackDepth property and returns the receiver for chaining.
 func (x *TileRenderPipelineDescriptor) WithMaxCallStackDepth(maxCallStackDepth uint) *TileRenderPipelineDescriptor {
 	x.inner.SetMaxCallStackDepth(maxCallStackDepth)
 	return x
 }
 
+// @property shaderValidation @abstract Toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. @discussion The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
+//
 // WithShaderValidation sets the shaderValidation property and returns the receiver for chaining.
 func (x *TileRenderPipelineDescriptor) WithShaderValidation(shaderValidation MTLShaderValidation) *TileRenderPipelineDescriptor {
 	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
 	return x
 }
 
+// @property requiredThreadsPerThreadgroup @abstract Sets the required threads-per-threadgroup during tile dispatches. The `threadsPerTile` argument of any tile dispatch must match to this value if it is set. Setting this to a size of 0 in every dimension disables this property
+//
 // WithRequiredThreadsPerThreadgroup sets the requiredThreadsPerThreadgroup property and returns the receiver for chaining.
 func (x *TileRenderPipelineDescriptor) WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) *TileRenderPipelineDescriptor {
 	x.inner.SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup)
@@ -102,6 +121,8 @@ func (x *TileRenderPipelineDescriptor) Reset() {
 	x.inner.Reset()
 }
 
+// @property label: @abstract The descriptor label.
+//
 // Label calls the underlying Label.
 func (x *TileRenderPipelineDescriptor) Label() string {
 	_r := x.inner.Label()
@@ -116,6 +137,8 @@ func (x *TileRenderPipelineDescriptor) SetLabel(label string) {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 }
 
+// @property tileFunction: @abstract  The kernel or fragment function that serves as the tile shader for this pipeline. @discussion Both kernel-based and fragment-based tile pipelines dispatches will barrier against previous draws and other dispatches. Kernel-based pipelines will wait until all prior access to the tile completes. Fragment-based pipelines will only wait until all prior access to the fragment's location completes.
+//
 // TileFunction calls the underlying TileFunction.
 func (x *TileRenderPipelineDescriptor) TileFunction() raw.MTLFunction {
 	return x.inner.TileFunction()
@@ -145,6 +168,8 @@ func (x *TileRenderPipelineDescriptor) ColorAttachments() *TileRenderPipelineCol
 	return &TileRenderPipelineColorAttachmentDescriptorArray{inner: _r}
 }
 
+// @property threadgroupSizeMatchesTileSize: @abstract Whether all threadgroups associated with this pipeline will cover tiles entirely. @discussion Metal can optimize code generation for this case.
+//
 // ThreadgroupSizeMatchesTileSize calls the underlying ThreadgroupSizeMatchesTileSize.
 func (x *TileRenderPipelineDescriptor) ThreadgroupSizeMatchesTileSize() bool {
 	return x.inner.ThreadgroupSizeMatchesTileSize()
@@ -164,6 +189,8 @@ func (x *TileRenderPipelineDescriptor) TileBuffers() *PipelineBufferDescriptorAr
 	return &PipelineBufferDescriptorArray{inner: _r}
 }
 
+// @property maxTotalThreadsPerThreadgroup @abstract Optional property. Set the maxTotalThreadsPerThreadgroup. If it is not set, returns zero.
+//
 // MaxTotalThreadsPerThreadgroup calls the underlying MaxTotalThreadsPerThreadgroup.
 func (x *TileRenderPipelineDescriptor) MaxTotalThreadsPerThreadgroup() uint {
 	return x.inner.MaxTotalThreadsPerThreadgroup()
@@ -174,26 +201,50 @@ func (x *TileRenderPipelineDescriptor) SetMaxTotalThreadsPerThreadgroup(maxTotal
 	x.inner.SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup)
 }
 
+// @property binaryArchives @abstract The set of MTLBinaryArchive to search for compiled code when creating the pipeline state. @discussion Accelerate pipeline state creation by providing archives of compiled code such that no compilation needs to happen on the fast path. @see MTLBinaryArchive
+//
 // BinaryArchives calls the underlying BinaryArchives.
 func (x *TileRenderPipelineDescriptor) BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive] {
 	return x.inner.BinaryArchives()
 }
 
 // SetBinaryArchives calls the underlying SetBinaryArchives.
-func (x *TileRenderPipelineDescriptor) SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive]) {
-	x.inner.SetBinaryArchives(binaryArchives)
+func (x *TileRenderPipelineDescriptor) SetBinaryArchives(binaryArchives ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(binaryArchives))
+	for _i, _v := range binaryArchives {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTLBinaryArchive]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTLBinaryArchive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetBinaryArchives(_arg0)
 }
 
+// @property preloadedLibraries @abstract The set of MTLDynamicLibrary to use to resolve external symbols before considering symbols from dependent MTLDynamicLibrary. @discussion Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use preloadedLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system. @see MTLDynamicLibrary
+//
 // PreloadedLibraries calls the underlying PreloadedLibraries.
 func (x *TileRenderPipelineDescriptor) PreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary] {
 	return x.inner.PreloadedLibraries()
 }
 
 // SetPreloadedLibraries calls the underlying SetPreloadedLibraries.
-func (x *TileRenderPipelineDescriptor) SetPreloadedLibraries(preloadedLibraries *foundation.NSArray[raw.MTLDynamicLibrary]) {
-	x.inner.SetPreloadedLibraries(preloadedLibraries)
+func (x *TileRenderPipelineDescriptor) SetPreloadedLibraries(preloadedLibraries ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(preloadedLibraries))
+	for _i, _v := range preloadedLibraries {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTLDynamicLibrary]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetPreloadedLibraries(_arg0)
 }
 
+// @property linkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the tile function. @see MTLLinkedFunctions
+//
 // LinkedFunctions calls the underlying LinkedFunctions.
 func (x *TileRenderPipelineDescriptor) LinkedFunctions() *LinkedFunctions {
 	_r := x.inner.LinkedFunctions()
@@ -203,31 +254,43 @@ func (x *TileRenderPipelineDescriptor) LinkedFunctions() *LinkedFunctions {
 	return &LinkedFunctions{inner: _r}
 }
 
+// @property linkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the tile function. @see MTLLinkedFunctions
+//
 // SetLinkedFunctions calls the underlying SetLinkedFunctions.
 func (x *TileRenderPipelineDescriptor) SetLinkedFunctions(linkedFunctions *raw.MTLLinkedFunctions) {
 	x.inner.SetLinkedFunctions(linkedFunctions)
 }
 
+// @property supportAddingBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
+//
 // SupportAddingBinaryFunctions calls the underlying SupportAddingBinaryFunctions.
 func (x *TileRenderPipelineDescriptor) SupportAddingBinaryFunctions() bool {
 	return x.inner.SupportAddingBinaryFunctions()
 }
 
+// @property supportAddingBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
+//
 // SetSupportAddingBinaryFunctions calls the underlying SetSupportAddingBinaryFunctions.
 func (x *TileRenderPipelineDescriptor) SetSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool) {
 	x.inner.SetSupportAddingBinaryFunctions(supportAddingBinaryFunctions)
 }
 
+// @property maxCallStackDepth @abstract The maximum depth of the call stack in stack frames from the tile function. Defaults to 1 additional stack frame.
+//
 // MaxCallStackDepth calls the underlying MaxCallStackDepth.
 func (x *TileRenderPipelineDescriptor) MaxCallStackDepth() uint {
 	return x.inner.MaxCallStackDepth()
 }
 
+// @property maxCallStackDepth @abstract The maximum depth of the call stack in stack frames from the tile function. Defaults to 1 additional stack frame.
+//
 // SetMaxCallStackDepth calls the underlying SetMaxCallStackDepth.
 func (x *TileRenderPipelineDescriptor) SetMaxCallStackDepth(maxCallStackDepth uint) {
 	x.inner.SetMaxCallStackDepth(maxCallStackDepth)
 }
 
+// @property shaderValidation @abstract Toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. @discussion The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
+//
 // ShaderValidation calls the underlying ShaderValidation.
 func (x *TileRenderPipelineDescriptor) ShaderValidation() MTLShaderValidation {
 	return MTLShaderValidation(x.inner.ShaderValidation())
@@ -238,6 +301,8 @@ func (x *TileRenderPipelineDescriptor) SetShaderValidation(shaderValidation MTLS
 	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
 }
 
+// @property requiredThreadsPerThreadgroup @abstract Sets the required threads-per-threadgroup during tile dispatches. The `threadsPerTile` argument of any tile dispatch must match to this value if it is set. Setting this to a size of 0 in every dimension disables this property
+//
 // RequiredThreadsPerThreadgroup calls the underlying RequiredThreadsPerThreadgroup.
 func (x *TileRenderPipelineDescriptor) RequiredThreadsPerThreadgroup() raw.MTLSize {
 	return x.inner.RequiredThreadsPerThreadgroup()
@@ -275,9 +340,9 @@ type TileRenderPipelineDescriptorable interface {
 	MaxTotalThreadsPerThreadgroup() uint
 	SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint)
 	BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive]
-	SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive])
+	SetBinaryArchives(binaryArchives ...purego.IDer)
 	PreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary]
-	SetPreloadedLibraries(preloadedLibraries *foundation.NSArray[raw.MTLDynamicLibrary])
+	SetPreloadedLibraries(preloadedLibraries ...purego.IDer)
 	LinkedFunctions() *LinkedFunctions
 	SetLinkedFunctions(linkedFunctions *raw.MTLLinkedFunctions)
 	SupportAddingBinaryFunctions() bool

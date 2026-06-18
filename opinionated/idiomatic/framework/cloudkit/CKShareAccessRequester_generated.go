@@ -35,6 +35,8 @@ func NewShareAccessRequester() *ShareAccessRequester {
 	return &ShareAccessRequester{inner: raw.CKShareAccessRequesterFromID(_id)}
 }
 
+// The identity of the user requesting access to the share.
+//
 // UserIdentity calls the underlying UserIdentity.
 func (x *ShareAccessRequester) UserIdentity() *UserIdentity {
 	_r := x.inner.UserIdentity()
@@ -44,6 +46,8 @@ func (x *ShareAccessRequester) UserIdentity() *UserIdentity {
 	return &UserIdentity{inner: _r}
 }
 
+// Lookup information for the requester. Use this lookup info with “CKFetchShareParticipantsOperation“ to fetch the corresponding participant. Once fetched, add the participant to the share to approve the requester.
+//
 // ParticipantLookupInfo calls the underlying ParticipantLookupInfo.
 func (x *ShareAccessRequester) ParticipantLookupInfo() *UserIdentityLookupInfo {
 	_r := x.inner.ParticipantLookupInfo()
@@ -53,6 +57,8 @@ func (x *ShareAccessRequester) ParticipantLookupInfo() *UserIdentityLookupInfo {
 	return &UserIdentityLookupInfo{inner: _r}
 }
 
+// A displayable CNContact representing the requester. If the requester doesn't exist in the user's contacts or is not accessible, returns a newly created `CNContact`. This provides formatted requester information suitable for display in the application's UI.
+//
 // Contact calls the underlying Contact.
 func (x *ShareAccessRequester) Contact() objc.ID {
 	return x.inner.Contact()

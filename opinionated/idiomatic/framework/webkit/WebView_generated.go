@@ -33,6 +33,8 @@ func WebViewFromID(id objc.ID) *WebView {
 	return &WebView{inner: raw.WebViewFromID(id)}
 }
 
+// @method initWithFrame:frameName:groupName: @abstract The designated initializer for WebView. @discussion Initialize a WebView with the supplied parameters. This method will create a main WebFrame with the view. Passing a top level frame name is useful if you handle a targetted frame navigation that would normally open a window in some other way that still ends up creating a new WebView. @param frame The frame used to create the view. @param frameName The name to use for the top level frame. May be nil. @param groupName The name of the webView set to which this webView will be added.  May be nil. @result Returns an initialized WebView.
+//
 // NewWebViewWithFrameFrameNameGroupName creates a new [WebView].
 func NewWebViewWithFrameFrameNameGroupName(frame corefoundation.CGRect, frameName string, groupName string) *WebView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WebView")), objc.RegisterName("alloc"))
@@ -40,108 +42,144 @@ func NewWebViewWithFrameFrameNameGroupName(frame corefoundation.CGRect, frameNam
 	return &WebView{inner: raw.WebViewFromID(_id)}
 }
 
+// @property shouldCloseWithWindow @abstract Whether the receiver closes when either it's window or hostWindow closes. @discussion Defaults to YES in garbage collected applications, otherwise NO to maintain backwards compatibility.
+//
 // WithShouldCloseWithWindow sets the shouldCloseWithWindow property and returns the receiver for chaining.
 func (x *WebView) WithShouldCloseWithWindow(shouldCloseWithWindow bool) *WebView {
 	x.inner.SetShouldCloseWithWindow(shouldCloseWithWindow)
 	return x
 }
 
+// @property UIDelegate @abstract The WebView's WebUIDelegate.
+//
 // WithUIDelegate sets the uIDelegate property and returns the receiver for chaining.
 func (x *WebView) WithUIDelegate(uIDelegate raw.WebUIDelegate) *WebView {
 	x.inner.SetUIDelegate(uIDelegate)
 	return x
 }
 
+// @property resourceLoadDelegate @abstract The WebView's WebResourceLoadDelegate.
+//
 // WithResourceLoadDelegate sets the resourceLoadDelegate property and returns the receiver for chaining.
 func (x *WebView) WithResourceLoadDelegate(resourceLoadDelegate raw.WebResourceLoadDelegate) *WebView {
 	x.inner.SetResourceLoadDelegate(resourceLoadDelegate)
 	return x
 }
 
+// @property downloadDelegate @abstract The WebView's WebDownloadDelegate.
+//
 // WithDownloadDelegate sets the downloadDelegate property and returns the receiver for chaining.
 func (x *WebView) WithDownloadDelegate(downloadDelegate raw.WebDownloadDelegate) *WebView {
 	x.inner.SetDownloadDelegate(downloadDelegate)
 	return x
 }
 
+// @property frameLoadDelegate @abstract The WebView's WebFrameLoadDelegate delegate.
+//
 // WithFrameLoadDelegate sets the frameLoadDelegate property and returns the receiver for chaining.
 func (x *WebView) WithFrameLoadDelegate(frameLoadDelegate raw.WebFrameLoadDelegate) *WebView {
 	x.inner.SetFrameLoadDelegate(frameLoadDelegate)
 	return x
 }
 
+// @property policyDelegate @abstract The WebView's WebPolicyDelegate.
+//
 // WithPolicyDelegate sets the policyDelegate property and returns the receiver for chaining.
 func (x *WebView) WithPolicyDelegate(policyDelegate raw.WebPolicyDelegate) *WebView {
 	x.inner.SetPolicyDelegate(policyDelegate)
 	return x
 }
 
+// @property textSizeMultiplier @abstract The text size multipler.
+//
 // WithTextSizeMultiplier sets the textSizeMultiplier property and returns the receiver for chaining.
 func (x *WebView) WithTextSizeMultiplier(textSizeMultiplier float32) *WebView {
 	x.inner.SetTextSizeMultiplier(textSizeMultiplier)
 	return x
 }
 
+// @property applicationNameForUserAgent @abstract The name of the application as used in the user-agent string.
+//
 // WithApplicationNameForUserAgent sets the applicationNameForUserAgent property and returns the receiver for chaining.
 func (x *WebView) WithApplicationNameForUserAgent(applicationNameForUserAgent string) *WebView {
 	x.inner.SetApplicationNameForUserAgent(foundation.NSStringStringWithUTF8String(applicationNameForUserAgent))
 	return x
 }
 
+// @property customUserAgent @abstract The custom user-agent string or nil if no custom user-agent string has been set. @discussion Setting this means that the webView should use this user-agent string instead of constructing a user-agent string for each URL. Setting it to nil causes the webView to construct the user-agent string for each URL for best results rendering web pages
+//
 // WithCustomUserAgent sets the customUserAgent property and returns the receiver for chaining.
 func (x *WebView) WithCustomUserAgent(customUserAgent string) *WebView {
 	x.inner.SetCustomUserAgent(foundation.NSStringStringWithUTF8String(customUserAgent))
 	return x
 }
 
+// @property customTextEncodingName @abstract The custom text encoding name or nil if no custom text encoding name has been set. @discussion Make the page display with a different text encoding; stops any load in progress. The text encoding passed in overrides the normal text encoding smarts including what's specified in a web page's header or HTTP response. The text encoding automatically goes back to the default when the top level frame changes to a new location. Setting the text encoding name to nil makes the webView use default encoding rules.
+//
 // WithCustomTextEncodingName sets the customTextEncodingName property and returns the receiver for chaining.
 func (x *WebView) WithCustomTextEncodingName(customTextEncodingName string) *WebView {
 	x.inner.SetCustomTextEncodingName(foundation.NSStringStringWithUTF8String(customTextEncodingName))
 	return x
 }
 
+// @property mediaStyle @abstract The media style for the WebView. @discussion The mediaStyle will override the normal value of the CSS media property. Setting the value to nil will restore the normal value. The value will be nil unless explicitly set.
+//
 // WithMediaStyle sets the mediaStyle property and returns the receiver for chaining.
 func (x *WebView) WithMediaStyle(mediaStyle string) *WebView {
 	x.inner.SetMediaStyle(foundation.NSStringStringWithUTF8String(mediaStyle))
 	return x
 }
 
+// @property preferences @abstract The preferences used by this WebView. @discussion This method will return [WebPreferences standardPreferences] if no other instance of WebPreferences has been set.
+//
 // WithPreferences sets the preferences property and returns the receiver for chaining.
 func (x *WebView) WithPreferences(preferences *WebPreferences) *WebView {
 	x.inner.SetPreferences(preferences.Unwrap())
 	return x
 }
 
+// @property preferencesIdentifier @abstract The WebPreferences key prefix. @discussion If the WebPreferences for this WebView are stored in the user defaults database, this string will be used as a key prefix.
+//
 // WithPreferencesIdentifier sets the preferencesIdentifier property and returns the receiver for chaining.
 func (x *WebView) WithPreferencesIdentifier(preferencesIdentifier string) *WebView {
 	x.inner.SetPreferencesIdentifier(foundation.NSStringStringWithUTF8String(preferencesIdentifier))
 	return x
 }
 
+// @property hostWindow @abstract The host window for the web view. @discussion Parts of WebKit (such as plug-ins and JavaScript) depend on a window to function properly. Set a host window so these parts continue to function even when the web view is not in an actual window.
+//
 // WithHostWindow sets the hostWindow property and returns the receiver for chaining.
 func (x *WebView) WithHostWindow(hostWindow *appkit.NSWindow) *WebView {
 	x.inner.SetHostWindow(hostWindow)
 	return x
 }
 
+// @property groupName @abstract The group name for this WebView. @discussion JavaScript may access named frames within the same group.
+//
 // WithGroupName sets the groupName property and returns the receiver for chaining.
 func (x *WebView) WithGroupName(groupName string) *WebView {
 	x.inner.SetGroupName(foundation.NSStringStringWithUTF8String(groupName))
 	return x
 }
 
+// @property drawsBackground @abstract Whether the receiver draws a default white background when the loaded page has no background specified.
+//
 // WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
 func (x *WebView) WithDrawsBackground(drawsBackground bool) *WebView {
 	x.inner.SetDrawsBackground(drawsBackground)
 	return x
 }
 
+// @property shouldUpdateWhileOffscreen @abstract Whether the WebView is always updated even when it is not in a window that is currently visible. @discussion If set to NO, then whenever the web view is not in a visible window, updates to the web page will not necessarily be rendered in the view. However, when the window is made visible, the view will be updated automatically. Not updating while hidden can improve performance. If set to is YES, hidden web views are always updated. This is the default.
+//
 // WithShouldUpdateWhileOffscreen sets the shouldUpdateWhileOffscreen property and returns the receiver for chaining.
 func (x *WebView) WithShouldUpdateWhileOffscreen(shouldUpdateWhileOffscreen bool) *WebView {
 	x.inner.SetShouldUpdateWhileOffscreen(shouldUpdateWhileOffscreen)
 	return x
 }
 
+// @property mainFrameURL @abstract The main frame's current URL.
+//
 // WithMainFrameURL sets the mainFrameURL property and returns the receiver for chaining.
 func (x *WebView) WithMainFrameURL(mainFrameURL string) *WebView {
 	x.inner.SetMainFrameURL(foundation.NSStringStringWithUTF8String(mainFrameURL))
@@ -178,31 +216,43 @@ func (x *WebView) WithEditingDelegate(editingDelegate raw.WebEditingDelegate) *W
 	return x
 }
 
+// @method close @abstract Closes the receiver, unloading its web page and canceling any pending loads. Once the receiver has closed, it will no longer respond to requests or fire delegate methods. (However, the -close method itself may fire delegate methods.) @discussion A garbage collected application is required to call close when the receiver is no longer needed. The close method will be called automatically when the window or hostWindow closes and shouldCloseWithWindow returns YES. A non-garbage collected application can still call close, providing a convenient way to prevent receiver from doing any more loading and firing any future delegate methods.
+//
 // Close calls the underlying Close.
 func (x *WebView) Close() {
 	x.inner.Close()
 }
 
+// @method setMaintainsBackForwardList: @abstract Enable or disable the use of a backforward list for this webView. @param flag Turns use of the back forward list on or off
+//
 // SetMaintainsBackForwardList calls the underlying SetMaintainsBackForwardList.
 func (x *WebView) SetMaintainsBackForwardList(flag bool) {
 	x.inner.SetMaintainsBackForwardList(flag)
 }
 
+// @method goBack @abstract Go back to the previous URL in the backforward list. @result YES if able to go back in the backforward list, NO otherwise.
+//
 // GoBack calls the underlying GoBack.
 func (x *WebView) GoBack() bool {
 	return x.inner.GoBack()
 }
 
+// @method goForward @abstract Go forward to the next URL in the backforward list. @result YES if able to go forward in the backforward list, NO otherwise.
+//
 // GoForward calls the underlying GoForward.
 func (x *WebView) GoForward() bool {
 	return x.inner.GoForward()
 }
 
+// @method goToBackForwardItem: @abstract Go back or forward to an item in the backforward list. @result YES if able to go to the item, NO otherwise.
+//
 // GoToBackForwardItem calls the underlying GoToBackForwardItem.
 func (x *WebView) GoToBackForwardItem(item *raw.WebHistoryItem) bool {
 	return x.inner.GoToBackForwardItem(item)
 }
 
+// @method userAgentForURL: @abstract Get the appropriate user-agent string for a particular URL. @param URL The URL. @result The user-agent string for the supplied URL.
+//
 // UserAgentForURL calls the underlying UserAgentForURL.
 func (x *WebView) UserAgentForURL(uRL string) string {
 	_r := x.inner.UserAgentForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
@@ -212,6 +262,8 @@ func (x *WebView) UserAgentForURL(uRL string) string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @method stringByEvaluatingJavaScriptFromString: @param script The text of the JavaScript. @result The result of the script, converted to a string, or nil for failure.
+//
 // StringByEvaluatingJavaScriptFromString calls the underlying StringByEvaluatingJavaScriptFromString.
 func (x *WebView) StringByEvaluatingJavaScriptFromString(script string) string {
 	_r := x.inner.StringByEvaluatingJavaScriptFromString(foundation.NSStringStringWithUTF8String(script))
@@ -221,41 +273,57 @@ func (x *WebView) StringByEvaluatingJavaScriptFromString(script string) string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @method searchFor:direction:caseSensitive: @abstract Searches a document view for a string and highlights the string if it is found. Starts the search from the current selection.  Will search across all frames. @param string The string to search for. @param forward YES to search forward, NO to seach backwards. @param caseFlag YES to for case-sensitive search, NO for case-insensitive search. @result YES if found, NO if not found.
+//
 // SearchForDirectionCaseSensitiveWrap calls the underlying SearchForDirectionCaseSensitiveWrap.
 func (x *WebView) SearchForDirectionCaseSensitiveWrap(string_ string, forward bool, caseFlag bool, wrapFlag bool) bool {
 	return x.inner.SearchForDirectionCaseSensitiveWrap(foundation.NSStringStringWithUTF8String(string_), forward, caseFlag, wrapFlag)
 }
 
+// @method elementAtPoint: @param point A point in the coordinates of the WebView @result An element dictionary describing the point
+//
 // ElementAtPoint calls the underlying ElementAtPoint.
 func (x *WebView) ElementAtPoint(point corefoundation.CGPoint) *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.ElementAtPoint(point)
 }
 
+// @method writeSelectionWithPasteboardTypes:toPasteboard: @abstract Writes the current selection to the pasteboard @param types The types that WebView will write to the pasteboard @param pasteboard The pasteboard to write to
+//
 // WriteSelectionWithPasteboardTypesToPasteboard calls the underlying WriteSelectionWithPasteboardTypesToPasteboard.
 func (x *WebView) WriteSelectionWithPasteboardTypesToPasteboard(types *foundation.NSArray[objc.ID], pasteboard *appkit.NSPasteboard) {
 	x.inner.WriteSelectionWithPasteboardTypesToPasteboard(types, pasteboard)
 }
 
+// @method pasteboardTypesForElement: @abstract Returns the pasteboard types that WebView can use for an element @param element The element
+//
 // PasteboardTypesForElement calls the underlying PasteboardTypesForElement.
 func (x *WebView) PasteboardTypesForElement(element *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSArray[objc.ID] {
 	return x.inner.PasteboardTypesForElement(element)
 }
 
+// @method writeElement:withPasteboardTypes:toPasteboard: @abstract Writes an element to the pasteboard @param element The element to write to the pasteboard @param types The types that WebView will write to the pasteboard @param pasteboard The pasteboard to write to
+//
 // WriteElementWithPasteboardTypesToPasteboard calls the underlying WriteElementWithPasteboardTypesToPasteboard.
 func (x *WebView) WriteElementWithPasteboardTypesToPasteboard(element *foundation.NSDictionary[objc.ID, objc.ID], types *foundation.NSArray[objc.ID], pasteboard *appkit.NSPasteboard) {
 	x.inner.WriteElementWithPasteboardTypesToPasteboard(element, types, pasteboard)
 }
 
+// @method moveDragCaretToPoint: @param point A point in the coordinates of the WebView @discussion This method moves the caret that shows where something being dragged will be dropped. It may cause the WebView to scroll to make the new position of the drag caret visible.
+//
 // MoveDragCaretToPoint calls the underlying MoveDragCaretToPoint.
 func (x *WebView) MoveDragCaretToPoint(point corefoundation.CGPoint) {
 	x.inner.MoveDragCaretToPoint(point)
 }
 
+// @method removeDragCaret @abstract Removes the drag caret from the WebView
+//
 // RemoveDragCaret calls the underlying RemoveDragCaret.
 func (x *WebView) RemoveDragCaret() {
 	x.inner.RemoveDragCaret()
 }
 
+// @property shouldCloseWithWindow @abstract Whether the receiver closes when either it's window or hostWindow closes. @discussion Defaults to YES in garbage collected applications, otherwise NO to maintain backwards compatibility.
+//
 // ShouldCloseWithWindow calls the underlying ShouldCloseWithWindow.
 func (x *WebView) ShouldCloseWithWindow() bool {
 	return x.inner.ShouldCloseWithWindow()
@@ -266,6 +334,8 @@ func (x *WebView) SetShouldCloseWithWindow(shouldCloseWithWindow bool) {
 	x.inner.SetShouldCloseWithWindow(shouldCloseWithWindow)
 }
 
+// @property UIDelegate @abstract The WebView's WebUIDelegate.
+//
 // UIDelegate calls the underlying UIDelegate.
 func (x *WebView) UIDelegate() raw.WebUIDelegate {
 	return x.inner.UIDelegate()
@@ -276,6 +346,8 @@ func (x *WebView) SetUIDelegate(uIDelegate raw.WebUIDelegate) {
 	x.inner.SetUIDelegate(uIDelegate)
 }
 
+// @property resourceLoadDelegate @abstract The WebView's WebResourceLoadDelegate.
+//
 // ResourceLoadDelegate calls the underlying ResourceLoadDelegate.
 func (x *WebView) ResourceLoadDelegate() raw.WebResourceLoadDelegate {
 	return x.inner.ResourceLoadDelegate()
@@ -286,6 +358,8 @@ func (x *WebView) SetResourceLoadDelegate(resourceLoadDelegate raw.WebResourceLo
 	x.inner.SetResourceLoadDelegate(resourceLoadDelegate)
 }
 
+// @property downloadDelegate @abstract The WebView's WebDownloadDelegate.
+//
 // DownloadDelegate calls the underlying DownloadDelegate.
 func (x *WebView) DownloadDelegate() raw.WebDownloadDelegate {
 	return x.inner.DownloadDelegate()
@@ -296,6 +370,8 @@ func (x *WebView) SetDownloadDelegate(downloadDelegate raw.WebDownloadDelegate) 
 	x.inner.SetDownloadDelegate(downloadDelegate)
 }
 
+// @property frameLoadDelegate @abstract The WebView's WebFrameLoadDelegate delegate.
+//
 // FrameLoadDelegate calls the underlying FrameLoadDelegate.
 func (x *WebView) FrameLoadDelegate() raw.WebFrameLoadDelegate {
 	return x.inner.FrameLoadDelegate()
@@ -306,6 +382,8 @@ func (x *WebView) SetFrameLoadDelegate(frameLoadDelegate raw.WebFrameLoadDelegat
 	x.inner.SetFrameLoadDelegate(frameLoadDelegate)
 }
 
+// @property policyDelegate @abstract The WebView's WebPolicyDelegate.
+//
 // PolicyDelegate calls the underlying PolicyDelegate.
 func (x *WebView) PolicyDelegate() raw.WebPolicyDelegate {
 	return x.inner.PolicyDelegate()
@@ -316,6 +394,8 @@ func (x *WebView) SetPolicyDelegate(policyDelegate raw.WebPolicyDelegate) {
 	x.inner.SetPolicyDelegate(policyDelegate)
 }
 
+// @property mainFrame @abstract The top level frame. @discussion Note that even documents that are not framesets will have a mainFrame.
+//
 // MainFrame calls the underlying MainFrame.
 func (x *WebView) MainFrame() *WebFrame {
 	_r := x.inner.MainFrame()
@@ -325,6 +405,8 @@ func (x *WebView) MainFrame() *WebFrame {
 	return &WebFrame{inner: _r}
 }
 
+// @property selectedFrame @abstract The frame that has the active selection. @discussion Returns the frame that contains the first responder, if any. Otherwise returns the frame that contains a non-zero-length selection, if any. Returns nil if no frame meets these criteria.
+//
 // SelectedFrame calls the underlying SelectedFrame.
 func (x *WebView) SelectedFrame() *WebFrame {
 	_r := x.inner.SelectedFrame()
@@ -334,6 +416,8 @@ func (x *WebView) SelectedFrame() *WebFrame {
 	return &WebFrame{inner: _r}
 }
 
+// @property backForwardList @abstract The backforward list for this WebView.
+//
 // BackForwardList calls the underlying BackForwardList.
 func (x *WebView) BackForwardList() *WebBackForwardList {
 	_r := x.inner.BackForwardList()
@@ -343,6 +427,8 @@ func (x *WebView) BackForwardList() *WebBackForwardList {
 	return &WebBackForwardList{inner: _r}
 }
 
+// @property textSizeMultiplier @abstract The text size multipler.
+//
 // TextSizeMultiplier calls the underlying TextSizeMultiplier.
 func (x *WebView) TextSizeMultiplier() float32 {
 	return x.inner.TextSizeMultiplier()
@@ -353,6 +439,8 @@ func (x *WebView) SetTextSizeMultiplier(textSizeMultiplier float32) {
 	x.inner.SetTextSizeMultiplier(textSizeMultiplier)
 }
 
+// @property applicationNameForUserAgent @abstract The name of the application as used in the user-agent string.
+//
 // ApplicationNameForUserAgent calls the underlying ApplicationNameForUserAgent.
 func (x *WebView) ApplicationNameForUserAgent() string {
 	_r := x.inner.ApplicationNameForUserAgent()
@@ -367,6 +455,8 @@ func (x *WebView) SetApplicationNameForUserAgent(applicationNameForUserAgent str
 	x.inner.SetApplicationNameForUserAgent(foundation.NSStringStringWithUTF8String(applicationNameForUserAgent))
 }
 
+// @property customUserAgent @abstract The custom user-agent string or nil if no custom user-agent string has been set. @discussion Setting this means that the webView should use this user-agent string instead of constructing a user-agent string for each URL. Setting it to nil causes the webView to construct the user-agent string for each URL for best results rendering web pages
+//
 // CustomUserAgent calls the underlying CustomUserAgent.
 func (x *WebView) CustomUserAgent() string {
 	_r := x.inner.CustomUserAgent()
@@ -381,11 +471,15 @@ func (x *WebView) SetCustomUserAgent(customUserAgent string) {
 	x.inner.SetCustomUserAgent(foundation.NSStringStringWithUTF8String(customUserAgent))
 }
 
+// @property supportsTextEncoding @abstract If the document view of the current web page can support different text encodings.
+//
 // SupportsTextEncoding calls the underlying SupportsTextEncoding.
 func (x *WebView) SupportsTextEncoding() bool {
 	return x.inner.SupportsTextEncoding()
 }
 
+// @property customTextEncodingName @abstract The custom text encoding name or nil if no custom text encoding name has been set. @discussion Make the page display with a different text encoding; stops any load in progress. The text encoding passed in overrides the normal text encoding smarts including what's specified in a web page's header or HTTP response. The text encoding automatically goes back to the default when the top level frame changes to a new location. Setting the text encoding name to nil makes the webView use default encoding rules.
+//
 // CustomTextEncodingName calls the underlying CustomTextEncodingName.
 func (x *WebView) CustomTextEncodingName() string {
 	_r := x.inner.CustomTextEncodingName()
@@ -400,6 +494,8 @@ func (x *WebView) SetCustomTextEncodingName(customTextEncodingName string) {
 	x.inner.SetCustomTextEncodingName(foundation.NSStringStringWithUTF8String(customTextEncodingName))
 }
 
+// @property mediaStyle @abstract The media style for the WebView. @discussion The mediaStyle will override the normal value of the CSS media property. Setting the value to nil will restore the normal value. The value will be nil unless explicitly set.
+//
 // MediaStyle calls the underlying MediaStyle.
 func (x *WebView) MediaStyle() string {
 	_r := x.inner.MediaStyle()
@@ -414,6 +510,8 @@ func (x *WebView) SetMediaStyle(mediaStyle string) {
 	x.inner.SetMediaStyle(foundation.NSStringStringWithUTF8String(mediaStyle))
 }
 
+// @property windowScriptObject @abstract A WebScriptObject that represents the window object from the script environment.
+//
 // WindowScriptObject calls the underlying WindowScriptObject.
 func (x *WebView) WindowScriptObject() *WebScriptObject {
 	_r := x.inner.WindowScriptObject()
@@ -423,6 +521,8 @@ func (x *WebView) WindowScriptObject() *WebScriptObject {
 	return &WebScriptObject{inner: _r}
 }
 
+// @property preferences @abstract The preferences used by this WebView. @discussion This method will return [WebPreferences standardPreferences] if no other instance of WebPreferences has been set.
+//
 // Preferences calls the underlying Preferences.
 func (x *WebView) Preferences() *WebPreferences {
 	_r := x.inner.Preferences()
@@ -437,6 +537,8 @@ func (x *WebView) SetPreferences(preferences *raw.WebPreferences) {
 	x.inner.SetPreferences(preferences)
 }
 
+// @property preferencesIdentifier @abstract The WebPreferences key prefix. @discussion If the WebPreferences for this WebView are stored in the user defaults database, this string will be used as a key prefix.
+//
 // PreferencesIdentifier calls the underlying PreferencesIdentifier.
 func (x *WebView) PreferencesIdentifier() string {
 	_r := x.inner.PreferencesIdentifier()
@@ -451,6 +553,8 @@ func (x *WebView) SetPreferencesIdentifier(preferencesIdentifier string) {
 	x.inner.SetPreferencesIdentifier(foundation.NSStringStringWithUTF8String(preferencesIdentifier))
 }
 
+// @property hostWindow @abstract The host window for the web view. @discussion Parts of WebKit (such as plug-ins and JavaScript) depend on a window to function properly. Set a host window so these parts continue to function even when the web view is not in an actual window.
+//
 // HostWindow calls the underlying HostWindow.
 func (x *WebView) HostWindow() *appkit.NSWindow {
 	return x.inner.HostWindow()
@@ -461,6 +565,8 @@ func (x *WebView) SetHostWindow(hostWindow *appkit.NSWindow) {
 	x.inner.SetHostWindow(hostWindow)
 }
 
+// @property groupName @abstract The group name for this WebView. @discussion JavaScript may access named frames within the same group.
+//
 // GroupName calls the underlying GroupName.
 func (x *WebView) GroupName() string {
 	_r := x.inner.GroupName()
@@ -475,21 +581,29 @@ func (x *WebView) SetGroupName(groupName string) {
 	x.inner.SetGroupName(foundation.NSStringStringWithUTF8String(groupName))
 }
 
+// @property estimatedProgress @discussion An estimate of the percent complete for a document load.  This value will range from 0 to 1.0 and, once a load completes, will remain at 1.0 until a new load starts, at which point it will be reset to 0.  The value is an estimate based on the total number of bytes expected to be received for a document, including all it's possible subresources.  For more accurate progress indication it is recommended that you implement a WebFrameLoadDelegate and a WebResourceLoadDelegate.
+//
 // EstimatedProgress calls the underlying EstimatedProgress.
 func (x *WebView) EstimatedProgress() float64 {
 	return x.inner.EstimatedProgress()
 }
 
+// @property loading @abstract Whether there are any pending loads in this WebView.
+//
 // IsLoading calls the underlying IsLoading.
 func (x *WebView) IsLoading() bool {
 	return x.inner.IsLoading()
 }
 
+// @property pasteboardTypesForSelection @abstract The pasteboard types that the WebView can use for the current selection
+//
 // PasteboardTypesForSelection calls the underlying PasteboardTypesForSelection.
 func (x *WebView) PasteboardTypesForSelection() *foundation.NSArray[objc.ID] {
 	return x.inner.PasteboardTypesForSelection()
 }
 
+// @property drawsBackground @abstract Whether the receiver draws a default white background when the loaded page has no background specified.
+//
 // DrawsBackground calls the underlying DrawsBackground.
 func (x *WebView) DrawsBackground() bool {
 	return x.inner.DrawsBackground()
@@ -500,6 +614,8 @@ func (x *WebView) SetDrawsBackground(drawsBackground bool) {
 	x.inner.SetDrawsBackground(drawsBackground)
 }
 
+// @property shouldUpdateWhileOffscreen @abstract Whether the WebView is always updated even when it is not in a window that is currently visible. @discussion If set to NO, then whenever the web view is not in a visible window, updates to the web page will not necessarily be rendered in the view. However, when the window is made visible, the view will be updated automatically. Not updating while hidden can improve performance. If set to is YES, hidden web views are always updated. This is the default.
+//
 // ShouldUpdateWhileOffscreen calls the underlying ShouldUpdateWhileOffscreen.
 func (x *WebView) ShouldUpdateWhileOffscreen() bool {
 	return x.inner.ShouldUpdateWhileOffscreen()
@@ -510,6 +626,8 @@ func (x *WebView) SetShouldUpdateWhileOffscreen(shouldUpdateWhileOffscreen bool)
 	x.inner.SetShouldUpdateWhileOffscreen(shouldUpdateWhileOffscreen)
 }
 
+// @property mainFrameURL @abstract The main frame's current URL.
+//
 // MainFrameURL calls the underlying MainFrameURL.
 func (x *WebView) MainFrameURL() string {
 	_r := x.inner.MainFrameURL()
@@ -524,6 +642,8 @@ func (x *WebView) SetMainFrameURL(mainFrameURL string) {
 	x.inner.SetMainFrameURL(foundation.NSStringStringWithUTF8String(mainFrameURL))
 }
 
+// @property mainFrameDocument @abstract The main frame's DOMDocument.
+//
 // MainFrameDocument calls the underlying MainFrameDocument.
 func (x *WebView) MainFrameDocument() *DOMDocument {
 	_r := x.inner.MainFrameDocument()
@@ -533,6 +653,8 @@ func (x *WebView) MainFrameDocument() *DOMDocument {
 	return &DOMDocument{inner: _r}
 }
 
+// @property mainFrameTitle @abstract The main frame's title if any, otherwise an empty string.
+//
 // MainFrameTitle calls the underlying MainFrameTitle.
 func (x *WebView) MainFrameTitle() string {
 	_r := x.inner.MainFrameTitle()
@@ -542,6 +664,8 @@ func (x *WebView) MainFrameTitle() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property mainFrameIcon @abstract The site icon for the current page loaded in the mainFrame, or nil.
+//
 // MainFrameIcon calls the underlying MainFrameIcon.
 func (x *WebView) MainFrameIcon() *appkit.NSImage {
 	return x.inner.MainFrameIcon()

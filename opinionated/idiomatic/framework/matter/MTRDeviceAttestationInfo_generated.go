@@ -37,36 +37,50 @@ func NewMTRDeviceAttestationInfoWithDeviceAttestationChallengeNonceElementsTLVEl
 	return &MTRDeviceAttestationInfo{inner: raw.MTRDeviceAttestationInfoFromID(_id)}
 }
 
+// The attestation challenge from the secure session.
+//
 // Challenge calls the underlying Challenge.
 func (x *MTRDeviceAttestationInfo) Challenge() *foundation.NSData {
 	return x.inner.Challenge()
 }
 
+// The attestation nonce from the AttestationRequest command.
+//
 // Nonce calls the underlying Nonce.
 func (x *MTRDeviceAttestationInfo) Nonce() *foundation.NSData {
 	return x.inner.Nonce()
 }
 
+// The TLV-encoded attestation_elements_message that was used to find the certificationDeclaration and firmwareInfo.
+//
 // ElementsTLV calls the underlying ElementsTLV.
 func (x *MTRDeviceAttestationInfo) ElementsTLV() *foundation.NSData {
 	return x.inner.ElementsTLV()
 }
 
+// A signature, using the device attestation private key of the device that sent the attestation information, over the concatenation of elementsTLV and the attestation challenge from the secure session.
+//
 // ElementsSignature calls the underlying ElementsSignature.
 func (x *MTRDeviceAttestationInfo) ElementsSignature() *foundation.NSData {
 	return x.inner.ElementsSignature()
 }
 
+// The device attestation certificate for the device.  This can be used to verify signatures created with the device attestation private key.
+//
 // DeviceAttestationCertificate calls the underlying DeviceAttestationCertificate.
 func (x *MTRDeviceAttestationInfo) DeviceAttestationCertificate() *foundation.NSData {
 	return x.inner.DeviceAttestationCertificate()
 }
 
+// The product attestation intermediate certificate that can be used to verify the authenticity of the device attestation certificate.
+//
 // ProductAttestationIntermediateCertificate calls the underlying ProductAttestationIntermediateCertificate.
 func (x *MTRDeviceAttestationInfo) ProductAttestationIntermediateCertificate() *foundation.NSData {
 	return x.inner.ProductAttestationIntermediateCertificate()
 }
 
+// The certification declaration of the device.  This is a DER-encoded string representing a CMS-formatted certification declaration.
+//
 // CertificationDeclaration calls the underlying CertificationDeclaration.
 func (x *MTRDeviceAttestationInfo) CertificationDeclaration() *foundation.NSData {
 	return x.inner.CertificationDeclaration()

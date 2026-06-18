@@ -31,6 +31,8 @@ func MTRServerClusterFromID(id objc.ID) *MTRServerCluster {
 	return &MTRServerCluster{inner: raw.MTRServerClusterFromID(id)}
 }
 
+// The provided clusterID must not be MTRClusterIDTypeDescriptorID; see newDescriptorCluster. Otherwise, it must be a valid cluster identifier.  That means: * In the range 0-0x7FFF for standard clusters. * In the range 0xVVVVFC00-0xVVVVFFFE for vendor-specific clusters, where VVVV is the vendor identifier. The provided revision must be in the range 1-65535.
+//
 // NewMTRServerClusterWithClusterIDRevision creates a new [MTRServerCluster].
 func NewMTRServerClusterWithClusterIDRevision(clusterID *foundation.NSNumber, revision *foundation.NSNumber) *MTRServerCluster {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRServerCluster")), objc.RegisterName("alloc"))
@@ -38,16 +40,22 @@ func NewMTRServerClusterWithClusterIDRevision(clusterID *foundation.NSNumber, re
 	return &MTRServerCluster{inner: raw.MTRServerClusterFromID(_id)}
 }
 
+// Add an access grant to the cluster.  If the same access grant is added multiple times, it will be treated as if it were added once (and removing it once will remove it).
+//
 // AddAccessGrant calls the underlying AddAccessGrant.
 func (x *MTRServerCluster) AddAccessGrant(accessGrant *raw.MTRAccessGrant) {
 	x.inner.AddAccessGrant(accessGrant)
 }
 
+// Remove an access grant from the cluster.
+//
 // RemoveAccessGrant calls the underlying RemoveAccessGrant.
 func (x *MTRServerCluster) RemoveAccessGrant(accessGrant *raw.MTRAccessGrant) {
 	x.inner.RemoveAccessGrant(accessGrant)
 }
 
+// Add an attribute to the cluster.  This can only be done before the endpoint the cluster is a part of has been added to a controller. The attribute must not have the same attribute ID as another attribute in this cluster. The attribute must not already be added to another cluster. If this cluster is the Descriptor cluster (id MTRClusterIDTypeDescriptorID), it must not define any values for DeviceTypeList, ServerList, ClientList, PartsList; those values will be determined automatically. For all clusters, the global AttributeList, AcceptedCommandList, GeneratedCommandList attributes will be determined automatically and must not be included in the attributes added on the cluster. For all clusters, the FeatureMap attribute will be assumed to be 0 unless otherwise specified and may be omitted from the attributes added to the cluster. For all clusters, ClusterRevision will be determined automatically based on this object's clusterRevision property, and must not be explicitly added to the cluster.
+//
 // AddAttribute calls the underlying AddAttribute.
 func (x *MTRServerCluster) AddAttribute(attribute *raw.MTRServerAttribute) bool {
 	return x.inner.AddAttribute(attribute)
@@ -63,6 +71,8 @@ func (x *MTRServerCluster) ClusterRevision() *foundation.NSNumber {
 	return x.inner.ClusterRevision()
 }
 
+// The list of entities that are allowed to access this cluster instance.  This list is in addition to any endpoint-wide access grants that exist. Defaults to empty list, which means no additional access grants.
+//
 // AccessGrants returns the collection as a Go slice.
 func (x *MTRServerCluster) AccessGrants() []*MTRAccessGrant {
 	arr := x.inner.AccessGrants()
@@ -74,6 +84,8 @@ func (x *MTRServerCluster) AccessGrants() []*MTRAccessGrant {
 	})
 }
 
+// The list of attributes supported by the cluster.
+//
 // Attributes returns the collection as a Go slice.
 func (x *MTRServerCluster) Attributes() []*MTRServerAttribute {
 	arr := x.inner.Attributes()

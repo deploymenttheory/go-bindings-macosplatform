@@ -35,6 +35,8 @@ func MTRBaseClusterOperationalCredentialsFromID(id objc.ID) *MTRBaseClusterOpera
 	return &MTRBaseClusterOperationalCredentials{inner: raw.MTRBaseClusterOperationalCredentialsFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterOperationalCredentialsWithDeviceEndpointIDQueue creates a new [MTRBaseClusterOperationalCredentials].
 func NewMTRBaseClusterOperationalCredentialsWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterOperationalCredentials {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterOperationalCredentials")), objc.RegisterName("alloc"))
@@ -49,6 +51,8 @@ func NewMTRBaseClusterOperationalCredentialsWithDeviceEndpointQueue(device *raw.
 	return &MTRBaseClusterOperationalCredentials{inner: raw.MTRBaseClusterOperationalCredentialsFromID(_id)}
 }
 
+// Command AttestationRequest Sender is requesting attestation information from the receiver.
+//
 // AttestationRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterOperationalCredentials) AttestationRequestWithParamsCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterAttestationRequestParams) (*MTROperationalCredentialsClusterAttestationResponseParams, error) {
 	type _result struct {
@@ -75,6 +79,8 @@ func (x *MTRBaseClusterOperationalCredentials) AttestationRequestWithParamsCompl
 	}
 }
 
+// Command CertificateChainRequest Sender is requesting a device attestation certificate from the receiver.
+//
 // CertificateChainRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithParamsCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterCertificateChainRequestParams) (*MTROperationalCredentialsClusterCertificateChainResponseParams, error) {
 	type _result struct {
@@ -101,6 +107,8 @@ func (x *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithParams
 	}
 }
 
+// Command CSRRequest Sender is requesting a certificate signing request (CSR) from the receiver.
+//
 // CSRRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterOperationalCredentials) CSRRequestWithParamsCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterCSRRequestParams) (*MTROperationalCredentialsClusterCSRResponseParams, error) {
 	type _result struct {
@@ -127,6 +135,8 @@ func (x *MTRBaseClusterOperationalCredentials) CSRRequestWithParamsCompletion(ct
 	}
 }
 
+// Command AddNOC Sender is requesting to add the new node operational certificates.
+//
 // AddNOCWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterOperationalCredentials) AddNOCWithParamsCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterAddNOCParams) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
 	type _result struct {
@@ -153,6 +163,8 @@ func (x *MTRBaseClusterOperationalCredentials) AddNOCWithParamsCompletion(ctx co
 	}
 }
 
+// Command UpdateNOC This command SHALL replace the NOC and optional associated ICAC (if present) scoped under the accessing fabric upon successful validation of all arguments and preconditions.
+//
 // UpdateNOCWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterOperationalCredentials) UpdateNOCWithParamsCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterUpdateNOCParams) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
 	type _result struct {
@@ -179,6 +191,8 @@ func (x *MTRBaseClusterOperationalCredentials) UpdateNOCWithParamsCompletion(ctx
 	}
 }
 
+// Command UpdateFabricLabel This command SHALL be used by an Administrative Node to set the user-visible Label field for a given Fabric, as reflected by entries in the Fabrics attribute.
+//
 // UpdateFabricLabelWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParamsCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterUpdateFabricLabelParams) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
 	type _result struct {
@@ -205,6 +219,8 @@ func (x *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParamsComple
 	}
 }
 
+// Command RemoveFabric This command is used by Administrative Nodes to remove a given fabric index and delete all associated fabric-scoped data.
+//
 // RemoveFabricWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterOperationalCredentials) RemoveFabricWithParamsCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterRemoveFabricParams) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
 	type _result struct {
@@ -231,6 +247,8 @@ func (x *MTRBaseClusterOperationalCredentials) RemoveFabricWithParamsCompletion(
 	}
 }
 
+// Command AddTrustedRootCertificate This command SHALL add a Trusted Root CA Certificate, provided as its CHIP Certificate representation.
+//
 // AddTrustedRootCertificateWithParamsCompletion calls the underlying AddTrustedRootCertificateWithParamsCompletion.
 func (x *MTRBaseClusterOperationalCredentials) AddTrustedRootCertificateWithParamsCompletion(params *raw.MTROperationalCredentialsClusterAddTrustedRootCertificateParams, completion func(unsafe.Pointer)) {
 	x.inner.AddTrustedRootCertificateWithParamsCompletion(params, completion)

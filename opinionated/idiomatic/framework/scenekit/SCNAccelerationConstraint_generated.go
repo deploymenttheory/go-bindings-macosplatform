@@ -35,48 +35,64 @@ func NewAccelerationConstraint() *AccelerationConstraint {
 	return &AccelerationConstraint{inner: raw.SCNAccelerationConstraintFromID(_id)}
 }
 
+// @property maximumLinearAcceleration @abstract Controls the maximum linear acceleration. Defaults to MAXFLOAT. Animatable. @discussion The maximum linear acceleration is in m.s^-2
+//
 // WithMaximumLinearAcceleration sets the maximumLinearAcceleration property and returns the receiver for chaining.
 func (x *AccelerationConstraint) WithMaximumLinearAcceleration(maximumLinearAcceleration float64) *AccelerationConstraint {
 	x.inner.SetMaximumLinearAcceleration(maximumLinearAcceleration)
 	return x
 }
 
+// @property maximumLinearVelocity @abstract Controls the maximum linear velocity. Defaults to MAXFLOAT. Animatable. @discussion The maximum linear velocity is in m.s
+//
 // WithMaximumLinearVelocity sets the maximumLinearVelocity property and returns the receiver for chaining.
 func (x *AccelerationConstraint) WithMaximumLinearVelocity(maximumLinearVelocity float64) *AccelerationConstraint {
 	x.inner.SetMaximumLinearVelocity(maximumLinearVelocity)
 	return x
 }
 
+// @property decelerationDistance @abstract Controls the distance at which the node should start decelerating. Defaults to 0. Animatable.
+//
 // WithDecelerationDistance sets the decelerationDistance property and returns the receiver for chaining.
 func (x *AccelerationConstraint) WithDecelerationDistance(decelerationDistance float64) *AccelerationConstraint {
 	x.inner.SetDecelerationDistance(decelerationDistance)
 	return x
 }
 
+// @property damping @abstract Specifies the damping factor of the receiver. Optionally reduce the body's linear velocity each frame to simulate fluid/air friction. Value should be zero or greater. Defaults to 0.1. Animatable.
+//
 // WithDamping sets the damping property and returns the receiver for chaining.
 func (x *AccelerationConstraint) WithDamping(damping float64) *AccelerationConstraint {
 	x.inner.SetDamping(damping)
 	return x
 }
 
+// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *AccelerationConstraint) WithEnabled(enabled bool) *AccelerationConstraint {
 	x.inner.SCNConstraint.SetEnabled(enabled)
 	return x
 }
 
+// @property influenceFactor @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+//
 // WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
 func (x *AccelerationConstraint) WithInfluenceFactor(influenceFactor float64) *AccelerationConstraint {
 	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
 	return x
 }
 
+// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+//
 // WithIncremental sets the incremental property and returns the receiver for chaining.
 func (x *AccelerationConstraint) WithIncremental(incremental bool) *AccelerationConstraint {
 	x.inner.SCNConstraint.SetIncremental(incremental)
 	return x
 }
 
+// @property maximumLinearAcceleration @abstract Controls the maximum linear acceleration. Defaults to MAXFLOAT. Animatable. @discussion The maximum linear acceleration is in m.s^-2
+//
 // MaximumLinearAcceleration calls the underlying MaximumLinearAcceleration.
 func (x *AccelerationConstraint) MaximumLinearAcceleration() float64 {
 	return x.inner.MaximumLinearAcceleration()
@@ -87,6 +103,8 @@ func (x *AccelerationConstraint) SetMaximumLinearAcceleration(maximumLinearAccel
 	x.inner.SetMaximumLinearAcceleration(maximumLinearAcceleration)
 }
 
+// @property maximumLinearVelocity @abstract Controls the maximum linear velocity. Defaults to MAXFLOAT. Animatable. @discussion The maximum linear velocity is in m.s
+//
 // MaximumLinearVelocity calls the underlying MaximumLinearVelocity.
 func (x *AccelerationConstraint) MaximumLinearVelocity() float64 {
 	return x.inner.MaximumLinearVelocity()
@@ -97,6 +115,8 @@ func (x *AccelerationConstraint) SetMaximumLinearVelocity(maximumLinearVelocity 
 	x.inner.SetMaximumLinearVelocity(maximumLinearVelocity)
 }
 
+// @property decelerationDistance @abstract Controls the distance at which the node should start decelerating. Defaults to 0. Animatable.
+//
 // DecelerationDistance calls the underlying DecelerationDistance.
 func (x *AccelerationConstraint) DecelerationDistance() float64 {
 	return x.inner.DecelerationDistance()
@@ -107,6 +127,8 @@ func (x *AccelerationConstraint) SetDecelerationDistance(decelerationDistance fl
 	x.inner.SetDecelerationDistance(decelerationDistance)
 }
 
+// @property damping @abstract Specifies the damping factor of the receiver. Optionally reduce the body's linear velocity each frame to simulate fluid/air friction. Value should be zero or greater. Defaults to 0.1. Animatable.
+//
 // Damping calls the underlying Damping.
 func (x *AccelerationConstraint) Damping() float64 {
 	return x.inner.Damping()

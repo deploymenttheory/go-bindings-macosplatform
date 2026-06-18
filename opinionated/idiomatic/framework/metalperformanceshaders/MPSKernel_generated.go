@@ -34,6 +34,8 @@ func KernelFromID(id objc.ID) *Kernel {
 	return &Kernel{inner: raw.MPSKernelFromID(id)}
 }
 
+// @abstract   Standard init with default properties per filter type @param      device      The device that the filter will be used on. May not be NULL. @result     a pointer to the newly initialized object. This will fail, returning nil if the device is not supported. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later.
+//
 // NewKernelWithDevice creates a new [Kernel].
 func NewKernelWithDevice(device metal.MTLDevice) *Kernel {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSKernel")), objc.RegisterName("alloc"))
@@ -41,6 +43,8 @@ func NewKernelWithDevice(device metal.MTLDevice) *Kernel {
 	return &Kernel{inner: raw.MPSKernelFromID(_id)}
 }
 
+// @abstract   Called by NSCoder to decode MPSKernels @discussion This isn't the right interface to decode a MPSKernel, but it is the one that NSCoder uses. To enable your NSCoder (e.g. NSKeyedUnarchiver) to set which device to use extend the object to adopt the MPSDeviceProvider protocol. Otherwise, the Metal system default device will be used.
+//
 // NewKernelWithCoder creates a new [Kernel].
 func NewKernelWithCoder(aDecoder *foundation.NSCoder) *Kernel {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSKernel")), objc.RegisterName("alloc"))
@@ -48,6 +52,8 @@ func NewKernelWithCoder(aDecoder *foundation.NSCoder) *Kernel {
 	return &Kernel{inner: raw.MPSKernelFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+//
 // NewKernelWithCoderDevice creates a new [Kernel].
 func NewKernelWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *Kernel {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSKernel")), objc.RegisterName("alloc"))
@@ -55,18 +61,24 @@ func NewKernelWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevi
 	return &Kernel{inner: raw.MPSKernelFromID(_id)}
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *Kernel) WithOptions(options mpscore.MPSKernelOptions) *Kernel {
 	x.inner.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *Kernel) WithLabel(label string) *Kernel {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @abstract   Make a copy of this MPSKernel for a new device @discussion -copyWithZone: will call this API to make a copy of the MPSKernel on the same device.  This interface may also be called directly to make a copy of the MPSKernel on a new device. Typically, the same MPSKernels should not be used to encode kernels on multiple command buffers from multiple threads. Many MPSKernels have mutable properties that might be changed by the other thread while this one is trying to encode. If you need to use a MPSKernel from multiple threads make a copy of it for each additional thread using -copyWithZone: or -copyWithZone:device: @param      zone        The NSZone in which to allocate the object @param      device      The device for the new MPSKernel. If nil, then use self.device. @result     a pointer to a copy of this MPSKernel. This will fail, returning nil if the device is not supported. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later.
+//
 // CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
 func (x *Kernel) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *Kernel {
 	_r := x.inner.CopyWithZoneDevice(zone, device)
@@ -76,6 +88,8 @@ func (x *Kernel) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice)
 	return &Kernel{inner: _r}
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // Options calls the underlying Options.
 func (x *Kernel) Options() mpscore.MPSKernelOptions {
 	return x.inner.Options()
@@ -86,11 +100,15 @@ func (x *Kernel) SetOptions(options mpscore.MPSKernelOptions) {
 	x.inner.SetOptions(options)
 }
 
+// @property device @abstract  The device on which the kernel will be used
+//
 // Device calls the underlying Device.
 func (x *Kernel) Device() metal.MTLDevice {
 	return x.inner.Device()
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // Label calls the underlying Label.
 func (x *Kernel) Label() string {
 	_r := x.inner.Label()

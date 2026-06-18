@@ -30,6 +30,8 @@ func MusicUserEventFromID(id objc.ID) *MusicUserEvent {
 	return &MusicUserEvent{inner: raw.AVMusicUserEventFromID(id)}
 }
 
+// @method initWithData: @abstract Initialize the event with an NSData. @param data An NSData object containing the contents to be returned via the AVMusicTrack's user callback.
+//
 // NewMusicUserEventWithData creates a new [MusicUserEvent].
 func NewMusicUserEventWithData(data *foundation.NSData) *MusicUserEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMusicUserEvent")), objc.RegisterName("alloc"))

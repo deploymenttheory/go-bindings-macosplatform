@@ -81,6 +81,8 @@ func (x *VSUserAccountManager) QueryUserAccountsWithOptionsCompletion(ctx contex
 	}
 }
 
+// Query the auto sign in token and authorization state.
+//
 // QueryAutoSignInToken blocks until the operation completes or ctx is cancelled.
 func (x *VSUserAccountManager) QueryAutoSignInToken(ctx context.Context) (*VSAutoSignInToken, error) {
 	type _result struct {
@@ -107,6 +109,8 @@ func (x *VSUserAccountManager) QueryAutoSignInToken(ctx context.Context) (*VSAut
 	}
 }
 
+// Deletes the auto sign in token.
+//
 // DeleteAutoSignInToken blocks until the operation completes or ctx is cancelled.
 func (x *VSUserAccountManager) DeleteAutoSignInToken(ctx context.Context) error {
 	_ch := make(chan error, 1)

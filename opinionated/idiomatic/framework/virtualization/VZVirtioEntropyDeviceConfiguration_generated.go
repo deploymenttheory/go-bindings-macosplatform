@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A source of entropy for the guest’s random number generator.
+//
 // VirtioEntropyDeviceConfiguration wraps [raw.VZVirtioEntropyDeviceConfiguration] with a fluent Go API.
 type VirtioEntropyDeviceConfiguration struct {
 	inner *raw.VZVirtioEntropyDeviceConfiguration

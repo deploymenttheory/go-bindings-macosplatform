@@ -37,66 +37,92 @@ func NewRunningApplication() *RunningApplication {
 	return &RunningApplication{inner: raw.NSRunningApplicationFromID(_id)}
 }
 
+// Attempts to hide the receiver. @return `YES` if the request to hide or unhide was successfully sent, `NO` if not (for example, if the application has quit, or is of a type that cannot be unhidden).
+//
 // Hide calls the underlying Hide.
 func (x *RunningApplication) Hide() bool {
 	return x.inner.Hide()
 }
 
+// Attempts to unhide the receiver. @return `YES` if the request to hide or unhide was successfully sent, `NO` if not (for example, if the application has quit, or is of a type that cannot be unhidden).
+//
 // Unhide calls the underlying Unhide.
 func (x *RunningApplication) Unhide() bool {
 	return x.inner.Unhide()
 }
 
+// Attempts to activate the application using the specified options. You shouldn’t assume the app will be active immediately after sending this message. The framework also does not guarantee that the app will be activated at all. Additionally allows specifying another application to take the active status from, which can be used for coordinated or cooperative activation. The other application should call `-yieldActivationToApplication:` or equivalent prior to this request being sent. @return `YES` if the request has been allowed by the system, otherwise `NO`.
+//
 // ActivateFromApplicationOptions calls the underlying ActivateFromApplicationOptions.
 func (x *RunningApplication) ActivateFromApplicationOptions(application *raw.NSRunningApplication, options NSApplicationActivationOptions) bool {
 	return x.inner.ActivateFromApplicationOptions(application, raw.NSApplicationActivationOptions(options))
 }
 
+// Attempts to activate the receiver. @return `YES` if the request to activate was successfully sent, `NO` if not (for example, if the application has quit, or is of a type that cannot be activated).
+//
 // ActivateWithOptions calls the underlying ActivateWithOptions.
 func (x *RunningApplication) ActivateWithOptions(options NSApplicationActivationOptions) bool {
 	return x.inner.ActivateWithOptions(raw.NSApplicationActivationOptions(options))
 }
 
+// Attempts to quit the receiver normally. @return `YES` if the request was successfully sent, `NO` if not (for example, if the application is no longer running). This method may return before the receiver exits; you should observe the terminated property or listen for the notification to detect when the app has exited.
+//
 // Terminate calls the underlying Terminate.
 func (x *RunningApplication) Terminate() bool {
 	return x.inner.Terminate()
 }
 
+// Attempts to force the receiver to quit. @return `YES` if the request was successfully sent, `NO` if not (for example, if the application is no longer running). This method may return before the receiver exits; you should observe the terminated property or listen for the notification to detect when the app has exited.
+//
 // ForceTerminate calls the underlying ForceTerminate.
 func (x *RunningApplication) ForceTerminate() bool {
 	return x.inner.ForceTerminate()
 }
 
+// Indicates that the process is an exited application. This is observable through KVO.
+//
 // IsTerminated calls the underlying IsTerminated.
 func (x *RunningApplication) IsTerminated() bool {
 	return x.inner.IsTerminated()
 }
 
+// Indicates that the process is finished launching, which corresponds to the @c NSApplicationDidFinishLaunching internal notification. This is observable through KVO. Some applications do not post this notification and so are never reported as finished launching.
+//
 // IsFinishedLaunching calls the underlying IsFinishedLaunching.
 func (x *RunningApplication) IsFinishedLaunching() bool {
 	return x.inner.IsFinishedLaunching()
 }
 
+// Indicates whether the application is currently hidden. This is observable through KVO.
+//
 // IsHidden calls the underlying IsHidden.
 func (x *RunningApplication) IsHidden() bool {
 	return x.inner.IsHidden()
 }
 
+// Indicates whether the application is currently frontmost. This is observable through KVO.
+//
 // IsActive calls the underlying IsActive.
 func (x *RunningApplication) IsActive() bool {
 	return x.inner.IsActive()
 }
 
+// Indicates whether the application currently owns the menu bar. This is observable through KVO.
+//
 // OwnsMenuBar calls the underlying OwnsMenuBar.
 func (x *RunningApplication) OwnsMenuBar() bool {
 	return x.inner.OwnsMenuBar()
 }
 
+// Indicates the activation policy of the application. This is observable through KVO (the type is usually fixed, but may be changed through a call to `-[NSApplication setActivationPolicy:]`).
+//
 // ActivationPolicy calls the underlying ActivationPolicy.
 func (x *RunningApplication) ActivationPolicy() NSApplicationActivationPolicy {
 	return NSApplicationActivationPolicy(x.inner.ActivationPolicy())
 }
 
+// Indicates the name of the application. This is dependent on the current localization of the referenced app, and is suitable for presentation to the user.
+//
 // LocalizedName calls the underlying LocalizedName.
 func (x *RunningApplication) LocalizedName() string {
 	_r := x.inner.LocalizedName()
@@ -106,6 +132,8 @@ func (x *RunningApplication) LocalizedName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Indicates the `CFBundleIdentifier` of the application, or nil if the application does not have an `Info.plist`.
+//
 // BundleIdentifier calls the underlying BundleIdentifier.
 func (x *RunningApplication) BundleIdentifier() string {
 	_r := x.inner.BundleIdentifier()
@@ -115,26 +143,36 @@ func (x *RunningApplication) BundleIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Indicates the URL to the application's bundle, or nil if the application does not have a bundle.
+//
 // BundleURL calls the underlying BundleURL.
 func (x *RunningApplication) BundleURL() *foundation.NSURL {
 	return x.inner.BundleURL()
 }
 
+// Indicates the URL to the application's executable.
+//
 // ExecutableURL calls the underlying ExecutableURL.
 func (x *RunningApplication) ExecutableURL() *foundation.NSURL {
 	return x.inner.ExecutableURL()
 }
 
+// Indicates the process identifier (pid) of the application. Do not rely on this for comparing processes.  Use `-isEqual:` instead. @note Not all applications have a pid.  Applications without a pid return -1 from this method. This is observable through KVO (an application's pid may change if it is automatically terminated).
+//
 // ProcessIdentifier calls the underlying ProcessIdentifier.
 func (x *RunningApplication) ProcessIdentifier() int {
 	return x.inner.ProcessIdentifier()
 }
 
+// Indicates the date when the application was launched. This property is not available for all applications. Specifically, it is not available for applications that were launched without going through `LaunchServices`.
+//
 // LaunchDate calls the underlying LaunchDate.
 func (x *RunningApplication) LaunchDate() *foundation.NSDate {
 	return x.inner.LaunchDate()
 }
 
+// @return The icon of the application.
+//
 // Icon calls the underlying Icon.
 func (x *RunningApplication) Icon() *Image {
 	_r := x.inner.Icon()
@@ -144,6 +182,8 @@ func (x *RunningApplication) Icon() *Image {
 	return &Image{inner: _r}
 }
 
+// Indicates the executing processor architecture for the application, as an @c NSBundleExecutableArchitecture from `NSBundle.h`.
+//
 // ExecutableArchitecture calls the underlying ExecutableArchitecture.
 func (x *RunningApplication) ExecutableArchitecture() int {
 	return x.inner.ExecutableArchitecture()

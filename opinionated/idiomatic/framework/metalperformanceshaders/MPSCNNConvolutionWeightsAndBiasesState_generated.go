@@ -35,6 +35,8 @@ func CNNConvolutionWeightsAndBiasesStateFromID(id objc.ID) *CNNConvolutionWeight
 	return &CNNConvolutionWeightsAndBiasesState{inner: raw.MPSCNNConvolutionWeightsAndBiasesStateFromID(id)}
 }
 
+// @abstract    Create and initialize MPSCNNConvolutionWeightsAndBiasesState with application provided weights and biases buffers. @discussion  This is the convinience API when buffers of exact size i.e. [weights length] =  inputFeatureChannels*kernelWidth*kernelHeight*channelMultiplier*sizeof(float)                   // for depthwise convolution outputFeatureChannels*kernelWidth*kernelHeight*(inputChannels/groups)*sizeof(float)      // for regular otherwise and [biases length]  =  outputFeatureChannels*sizeof(float)
+//
 // NewCNNConvolutionWeightsAndBiasesStateWithWeightsBiases creates a new [CNNConvolutionWeightsAndBiasesState].
 func NewCNNConvolutionWeightsAndBiasesStateWithWeightsBiases(weights metal.MTLBuffer, biases metal.MTLBuffer) *CNNConvolutionWeightsAndBiasesState {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNConvolutionWeightsAndBiasesState")), objc.RegisterName("alloc"))
@@ -42,6 +44,8 @@ func NewCNNConvolutionWeightsAndBiasesStateWithWeightsBiases(weights metal.MTLBu
 	return &CNNConvolutionWeightsAndBiasesState{inner: raw.MPSCNNConvolutionWeightsAndBiasesStateFromID(_id)}
 }
 
+// @abstract    Create and initialize MPSCNNConvolutionWeightsAndBiasesState with application provided convolution descriptor @discussion  Create weights and biases buffers of appropriate size
+//
 // NewCNNConvolutionWeightsAndBiasesStateWithDeviceCnnConvolutionDescriptor creates a new [CNNConvolutionWeightsAndBiasesState].
 func NewCNNConvolutionWeightsAndBiasesStateWithDeviceCnnConvolutionDescriptor(device metal.MTLDevice, descriptor *mpsneuralnetwork.MPSCNNConvolutionDescriptor) *CNNConvolutionWeightsAndBiasesState {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNConvolutionWeightsAndBiasesState")), objc.RegisterName("alloc"))
@@ -49,6 +53,8 @@ func NewCNNConvolutionWeightsAndBiasesStateWithDeviceCnnConvolutionDescriptor(de
 	return &CNNConvolutionWeightsAndBiasesState{inner: raw.MPSCNNConvolutionWeightsAndBiasesStateFromID(_id)}
 }
 
+// @abstract    Create and initialize MPSCNNConvolutionWeightsAndBiasesState with application provided weights and biases buffers. @discussion  It gives finer allocation control to application e.g. application can pass same buffer for weights and biases with appropriate offsets. Or offset into some larger buffer from application managed heap etc. Number of weights and biases or the length of weights and biases buffer this object owns (will read or write to), starting at offset is determined by MPSCNNConvolutionDescriptor passed in. weightsLength =  inputFeatureChannels*kernelWidth*kernelHeight*channelMultiplier*sizeof(float)                   // for depthwise convolution outputFeatureChannels*kernelWidth*kernelHeight*(inputChannels/groups)*sizeof(float)      // for regular otherwise biasesLength  =  outputFeatureChannels*sizeof(float) Thus filters operating on this object will read or write to NSRange(weightsOffset, weightsLength) of weights buffer and NSRange(biasesOffset, biasesLength) of biases buffer. Thus sizes of buffers provided must be such that weightsOffset + weightsLength <= [weights length] and     biasesOffset + biasesLength <= [biases length] Offsets must of sizeof(float) aligned i.e. multiple of 4.
+//
 // NewCNNConvolutionWeightsAndBiasesStateWithWeightsWeightsOffsetBiasesBiasesOffsetCnnConvolutionDescriptor creates a new [CNNConvolutionWeightsAndBiasesState].
 func NewCNNConvolutionWeightsAndBiasesStateWithWeightsWeightsOffsetBiasesBiasesOffsetCnnConvolutionDescriptor(weights metal.MTLBuffer, weightsOffset uint, biases metal.MTLBuffer, biasesOffset uint, descriptor *mpsneuralnetwork.MPSCNNConvolutionDescriptor) *CNNConvolutionWeightsAndBiasesState {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNConvolutionWeightsAndBiasesState")), objc.RegisterName("alloc"))
@@ -62,27 +68,37 @@ func (x *CNNConvolutionWeightsAndBiasesState) WithReadCount(readCount uint) *CNN
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNConvolutionWeightsAndBiasesState) WithLabel(label string) *CNNConvolutionWeightsAndBiasesState {
 	x.inner.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   weights @abstract   A buffer that contains the weights. Each value in the buffer is a float. The layout of the weights with respect to the weights is the same as the weights layout provided by data source i.e. it can be interpreted as 4D array weights[outputFeatureChannels][kernelHeight][kernelWidth][inputFeatureChannels/groups] for regular convolution. For depthwise convolution weights[outputFeatureChannels][kernelHeight][kernelWidth] as we currently only support channel multiplier of 1.
+//
 // Weights calls the underlying Weights.
 func (x *CNNConvolutionWeightsAndBiasesState) Weights() metal.MTLBuffer {
 	return x.inner.Weights()
 }
 
+// @property   biases @abstract   A buffer that contains the biases. Each value is float and there are ouputFeatureChannels values.
+//
 // Biases calls the underlying Biases.
 func (x *CNNConvolutionWeightsAndBiasesState) Biases() metal.MTLBuffer {
 	return x.inner.Biases()
 }
 
+// @property   weightsOffset @discussion Offset at which weights start in weights buffer Default value is 0.
+//
 // WeightsOffset calls the underlying WeightsOffset.
 func (x *CNNConvolutionWeightsAndBiasesState) WeightsOffset() uint {
 	return x.inner.WeightsOffset()
 }
 
+// @property   biasesOffset @discussion Offset at which weights start in biases buffer Default value is 0.
+//
 // BiasesOffset calls the underlying BiasesOffset.
 func (x *CNNConvolutionWeightsAndBiasesState) BiasesOffset() uint {
 	return x.inner.BiasesOffset()

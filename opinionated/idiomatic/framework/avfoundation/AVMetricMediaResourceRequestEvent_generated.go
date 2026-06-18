@@ -39,11 +39,15 @@ func NewMetricMediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
 	return &MetricMediaResourceRequestEvent{inner: raw.AVMetricMediaResourceRequestEventFromID(_id)}
 }
 
+// Returns the URL of the resource request. If no value is available, returns nil.
+//
 // Url calls the underlying Url.
 func (x *MetricMediaResourceRequestEvent) Url() *foundation.NSURL {
 	return x.inner.Url()
 }
 
+// The IP address of the server. If not available, the value is nil.
+//
 // ServerAddress calls the underlying ServerAddress.
 func (x *MetricMediaResourceRequestEvent) ServerAddress() string {
 	_r := x.inner.ServerAddress()
@@ -53,36 +57,50 @@ func (x *MetricMediaResourceRequestEvent) ServerAddress() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns the start time of the resource request.
+//
 // RequestStartTime calls the underlying RequestStartTime.
 func (x *MetricMediaResourceRequestEvent) RequestStartTime() *foundation.NSDate {
 	return x.inner.RequestStartTime()
 }
 
+// Returns the end time of the resource request.
+//
 // RequestEndTime calls the underlying RequestEndTime.
 func (x *MetricMediaResourceRequestEvent) RequestEndTime() *foundation.NSDate {
 	return x.inner.RequestEndTime()
 }
 
+// Returns the start time of the resource request response.
+//
 // ResponseStartTime calls the underlying ResponseStartTime.
 func (x *MetricMediaResourceRequestEvent) ResponseStartTime() *foundation.NSDate {
 	return x.inner.ResponseStartTime()
 }
 
+// Returns the end time of the resource request response.
+//
 // ResponseEndTime calls the underlying ResponseEndTime.
 func (x *MetricMediaResourceRequestEvent) ResponseEndTime() *foundation.NSDate {
 	return x.inner.ResponseEndTime()
 }
 
+// Returns the byte range downloaded for the resource request. If not available, the range start and end will be 0.
+//
 // ByteRange calls the underlying ByteRange.
 func (x *MetricMediaResourceRequestEvent) ByteRange() foundation.NSRange {
 	return x.inner.ByteRange()
 }
 
+// Returns true if the resource was read from the cache.
+//
 // WasReadFromCache calls the underlying WasReadFromCache.
 func (x *MetricMediaResourceRequestEvent) WasReadFromCache() bool {
 	return x.inner.WasReadFromCache()
 }
 
+// Returns the error event, if any, encountered during the resource request. If no value is present, returns nil.
+//
 // ErrorEvent calls the underlying ErrorEvent.
 func (x *MetricMediaResourceRequestEvent) ErrorEvent() *MetricErrorEvent {
 	_r := x.inner.ErrorEvent()
@@ -92,6 +110,8 @@ func (x *MetricMediaResourceRequestEvent) ErrorEvent() *MetricErrorEvent {
 	return &MetricErrorEvent{inner: _r}
 }
 
+// Returns the NSURLSessionTaskMetrics associated with the resource request. If no value is present, returns nil
+//
 // NetworkTransactionMetrics calls the underlying NetworkTransactionMetrics.
 func (x *MetricMediaResourceRequestEvent) NetworkTransactionMetrics() *foundation.NSURLSessionTaskMetrics {
 	return x.inner.NetworkTransactionMetrics()

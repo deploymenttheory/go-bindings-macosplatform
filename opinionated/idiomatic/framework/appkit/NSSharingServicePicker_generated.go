@@ -31,6 +31,8 @@ func SharingServicePickerFromID(id objc.ID) *SharingServicePicker {
 	return &SharingServicePicker{inner: raw.NSSharingServicePickerFromID(id)}
 }
 
+// Returns a new picker. The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider or an NSDocument. (e.g. NSString, NSImage, NSURL, etc.)
+//
 // NewSharingServicePickerWithItems creates a new [SharingServicePicker].
 func NewSharingServicePickerWithItems(items *foundation.NSArray[objc.ID]) *SharingServicePicker {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSharingServicePicker")), objc.RegisterName("alloc"))
@@ -44,11 +46,15 @@ func (x *SharingServicePicker) WithDelegate(delegate raw.NSSharingServicePickerD
 	return x
 }
 
+// Shows the picker, populated with sharing services related to the instance items. When the user selects one of the sharing services, the sharing service will be performed. Note that this method must be called on mouseDown.
+//
 // ShowRelativeToRectOfViewPreferredEdge calls the underlying ShowRelativeToRectOfViewPreferredEdge.
 func (x *SharingServicePicker) ShowRelativeToRectOfViewPreferredEdge(rect corefoundation.CGRect, view *raw.NSView, preferredEdge foundation.NSRectEdge) {
 	x.inner.ShowRelativeToRectOfViewPreferredEdge(rect, view, preferredEdge)
 }
 
+// Closes the picker UI. `-[NSSharingServicePickerDelegate sharingServicePicker:didChooseSharingService:]` will be invoked if `delegate` is set, with a `nil` service.
+//
 // Close calls the underlying Close.
 func (x *SharingServicePicker) Close() {
 	x.inner.Close()
@@ -64,6 +70,8 @@ func (x *SharingServicePicker) SetDelegate(delegate raw.NSSharingServicePickerDe
 	x.inner.SetDelegate(delegate)
 }
 
+// Returns a menu item suitable to display the picker for the given items.
+//
 // StandardShareMenuItem calls the underlying StandardShareMenuItem.
 func (x *SharingServicePicker) StandardShareMenuItem() *MenuItem {
 	_r := x.inner.StandardShareMenuItem()

@@ -36,11 +36,15 @@ func NewPushStreamNode() *PushStreamNode {
 	return &PushStreamNode{inner: raw.PHASEPushStreamNodeFromID(_id)}
 }
 
+// @method scheduleBuffer @abstract Schedule a buffer for playback. @param buffer The buffer with PCM audio data. @discussion Schedules the buffer to be played following any previously scheduled buffer(s). The buffer format must be same as format specified during player instantiation
+//
 // ScheduleBuffer calls the underlying ScheduleBuffer.
 func (x *PushStreamNode) ScheduleBuffer(buffer *avfaudio.AVAudioPCMBuffer) {
 	x.inner.ScheduleBuffer(buffer)
 }
 
+// @method scheduleBuffer:completionCallbackType:completionHandler: @abstract Schedule a buffer for playback. @discussion Schedules the buffer to be played following any previously scheduled buffer(s). The buffer format must be same as format specified during player instantiation @param buffer The buffer with PCM audio data. @param completionCallbackType Option to specify when the completion handler must be called. @param completionHandler The completionHandler to be called as per the specified completion callback type or when the player is stopped, at which point the buffer can be recycled.
+//
 // ScheduleBufferCompletionCallbackTypeCompletionHandler calls the underlying ScheduleBufferCompletionCallbackTypeCompletionHandler.
 func (x *PushStreamNode) ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, completionCallbackType PHASEPushStreamCompletionCallbackCondition, completionHandler func(PHASEPushStreamCompletionCallbackCondition)) {
 	x.inner.ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer, raw.PHASEPushStreamCompletionCallbackCondition(completionCallbackType), func(_a0 raw.PHASEPushStreamCompletionCallbackCondition) {
@@ -48,11 +52,15 @@ func (x *PushStreamNode) ScheduleBufferCompletionCallbackTypeCompletionHandler(b
 	})
 }
 
+// @method scheduleBuffer:atTime:options: @abstract Schedule a buffer for playback at a given time. @discussion The buffer format must be same as format specified during player instantiation @param buffer The buffer with PCM audio data. @param when The time at which to play the buffer. @param options Options for looping, interrupting other buffers, etc.
+//
 // ScheduleBufferAtTimeOptions calls the underlying ScheduleBufferAtTimeOptions.
 func (x *PushStreamNode) ScheduleBufferAtTimeOptions(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options PHASEPushStreamBufferOptions) {
 	x.inner.ScheduleBufferAtTimeOptions(buffer, when, raw.PHASEPushStreamBufferOptions(options))
 }
 
+// @method scheduleBuffer:atTime:options:completionCallbackType:completionHandler: @abstract Schedule a buffer for playback at a given time. @discussion The buffer format must be same as format specified during player instantiation @param buffer The buffer with PCM audio data. @param when The time at which to play the buffer. @param options Options for looping, interrupting other buffers, etc. @param completionCallbackType Option to specify when the completion handler must be called. @param completionHandler The completionHandler to be called as per the callback type specified or when the player is stopped, at which point the buffer can be recycled.
+//
 // ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler calls the underlying ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler.
 func (x *PushStreamNode) ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options PHASEPushStreamBufferOptions, completionCallbackType PHASEPushStreamCompletionCallbackCondition, completionHandler func(PHASEPushStreamCompletionCallbackCondition)) {
 	x.inner.ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer, when, raw.PHASEPushStreamBufferOptions(options), raw.PHASEPushStreamCompletionCallbackCondition(completionCallbackType), func(_a0 raw.PHASEPushStreamCompletionCallbackCondition) {

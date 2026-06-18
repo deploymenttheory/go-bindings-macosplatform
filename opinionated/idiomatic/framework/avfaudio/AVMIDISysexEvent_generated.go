@@ -30,6 +30,8 @@ func MIDISysexEventFromID(id objc.ID) *MIDISysexEvent {
 	return &MIDISysexEvent{inner: raw.AVMIDISysexEventFromID(id)}
 }
 
+// @method initWithData: @abstract Initialize the event with an NSData. @param data An NSData object containing the raw contents of the system exclusive event.
+//
 // NewMIDISysexEventWithData creates a new [MIDISysexEvent].
 func NewMIDISysexEventWithData(data *foundation.NSData) *MIDISysexEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDISysexEvent")), objc.RegisterName("alloc"))

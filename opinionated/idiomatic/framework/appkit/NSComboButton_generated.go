@@ -41,24 +41,32 @@ func NewComboButton() *ComboButton {
 	return &ComboButton{inner: raw.NSComboButtonFromID(_id)}
 }
 
+// The title displayed on the control. The default value is an empty string.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *ComboButton) WithTitle(title string) *ComboButton {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The image displayed on the control. The default value is `nil`.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *ComboButton) WithImage(image *Image) *ComboButton {
 	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
+// The scaling mode applied to fit the button's image within the content area. The default value is `NSImageScaleProportionallyDown`.
+//
 // WithImageScaling sets the imageScaling property and returns the receiver for chaining.
 func (x *ComboButton) WithImageScaling(imageScaling NSImageScaling) *ComboButton {
 	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
 	return x
 }
 
+// Specifies the visual presentation and behavior for NSComboButton's primary action and its menu. The default value is `NSComboButtonStyleSplit`.
+//
 // WithStyle sets the style property and returns the receiver for chaining.
 func (x *ComboButton) WithStyle(style NSComboButtonStyle) *ComboButton {
 	x.inner.SetStyle(raw.NSComboButtonStyle(style))
@@ -473,6 +481,8 @@ func (x *ComboButton) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foun
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *ComboButton) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ComboButton {
 	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
@@ -551,6 +561,8 @@ func (x *ComboButton) WithTouchBar(touchBar *TouchBar) *ComboButton {
 	return x
 }
 
+// The title displayed on the control. The default value is an empty string.
+//
 // Title calls the underlying Title.
 func (x *ComboButton) Title() string {
 	_r := x.inner.Title()
@@ -560,11 +572,15 @@ func (x *ComboButton) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The title displayed on the control. The default value is an empty string.
+//
 // SetTitle calls the underlying SetTitle.
 func (x *ComboButton) SetTitle(title string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// The image displayed on the control. The default value is `nil`.
+//
 // Image calls the underlying Image.
 func (x *ComboButton) Image() *Image {
 	_r := x.inner.Image()
@@ -574,26 +590,36 @@ func (x *ComboButton) Image() *Image {
 	return &Image{inner: _r}
 }
 
+// The image displayed on the control. The default value is `nil`.
+//
 // SetImage calls the underlying SetImage.
 func (x *ComboButton) SetImage(image *raw.NSImage) {
 	x.inner.SetImage(image)
 }
 
+// The scaling mode applied to fit the button's image within the content area. The default value is `NSImageScaleProportionallyDown`.
+//
 // ImageScaling calls the underlying ImageScaling.
 func (x *ComboButton) ImageScaling() NSImageScaling {
 	return NSImageScaling(x.inner.ImageScaling())
 }
 
+// The scaling mode applied to fit the button's image within the content area. The default value is `NSImageScaleProportionallyDown`.
+//
 // SetImageScaling calls the underlying SetImageScaling.
 func (x *ComboButton) SetImageScaling(imageScaling NSImageScaling) {
 	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
 }
 
+// Specifies the visual presentation and behavior for NSComboButton's primary action and its menu. The default value is `NSComboButtonStyleSplit`.
+//
 // Style calls the underlying Style.
 func (x *ComboButton) Style() NSComboButtonStyle {
 	return NSComboButtonStyle(x.inner.Style())
 }
 
+// Specifies the visual presentation and behavior for NSComboButton's primary action and its menu. The default value is `NSComboButtonStyleSplit`.
+//
 // SetStyle calls the underlying SetStyle.
 func (x *ComboButton) SetStyle(style NSComboButtonStyle) {
 	x.inner.SetStyle(raw.NSComboButtonStyle(style))

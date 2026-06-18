@@ -45,27 +45,37 @@ func (x *CNNConvolutionGradientState) WithReadCount(readCount uint) *CNNConvolut
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNConvolutionGradientState) WithLabel(label string) *CNNConvolutionGradientState {
 	x.inner.MPSNNGradientState.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   gradientForWeights @abstract   A buffer that contains the loss function gradients with respect to weights. Each value in the buffer is a float. The layout of the gradients with respect to the weights is the same as the weights layout provided by data source i.e. it can be interpreted as 4D array gradientForWeights[outputFeatureChannels][kernelHeight][kernelWidth][inputFeatureChannels/groups] For depthwise convolution it will be (since we only support channel multiplier of 1 currently) gradientForWeights[outputFeatureChannels][kernelHeight][kernelWidth]
+//
 // GradientForWeights calls the underlying GradientForWeights.
 func (x *CNNConvolutionGradientState) GradientForWeights() metal.MTLBuffer {
 	return x.inner.GradientForWeights()
 }
 
+// @property   gradientForBiases @abstract   A buffer that contains the loss function gradients with respect to biases.
+//
 // GradientForBiases calls the underlying GradientForBiases.
 func (x *CNNConvolutionGradientState) GradientForBiases() metal.MTLBuffer {
 	return x.inner.GradientForBiases()
 }
 
+// @property   convolution @abstract   The convolution filter that produced the state. For child MPSCNNConvolutionTrasposeGradientState object, convolution below refers to MPSCNNConvolution object that produced MPSCNNConvolutionGradientState object which was used to create MPSCNNConvolutionTransposeGradientState object. See resultStateForSourceImage:sourceStates method of MPSCNNConvolutionTranspose below.
+//
 // Convolution calls the underlying Convolution.
 func (x *CNNConvolutionGradientState) Convolution() *mpsneuralnetwork.MPSCNNConvolution {
 	return x.inner.Convolution()
 }
 
+// @property   gradientForWeightsLayout @abstract   Layout of gradient with respect to weights in gradientForWeights buffer. Currently only MPSCNNConvolutionWeightsLayoutOHWI is supported.
+//
 // GradientForWeightsLayout calls the underlying GradientForWeightsLayout.
 func (x *CNNConvolutionGradientState) GradientForWeightsLayout() mpsneuralnetwork.MPSCNNConvolutionWeightsLayout {
 	return x.inner.GradientForWeightsLayout()

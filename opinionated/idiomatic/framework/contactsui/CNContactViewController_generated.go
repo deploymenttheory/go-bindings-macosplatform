@@ -36,6 +36,8 @@ func NewContactViewController() *ContactViewController {
 	return &ContactViewController{inner: raw.CNContactViewControllerFromID(_id)}
 }
 
+// @abstract A @c contact to display. @discussion When @c contact is nil, displays an empty selection state.
+//
 // WithContact sets the contact property and returns the receiver for chaining.
 func (x *ContactViewController) WithContact(contact *contacts.CNContact) *ContactViewController {
 	x.inner.SetContact(contact)

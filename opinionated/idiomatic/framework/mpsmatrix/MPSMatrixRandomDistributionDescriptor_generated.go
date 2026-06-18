@@ -37,36 +37,48 @@ func NewMatrixRandomDistributionDescriptor() *MatrixRandomDistributionDescriptor
 	return &MatrixRandomDistributionDescriptor{inner: raw.MPSMatrixRandomDistributionDescriptorFromID(_id)}
 }
 
+// @property   distributionType @abstract   The type of distribution.
+//
 // WithDistributionType sets the distributionType property and returns the receiver for chaining.
 func (x *MatrixRandomDistributionDescriptor) WithDistributionType(distributionType MPSMatrixRandomDistribution) *MatrixRandomDistributionDescriptor {
 	x.inner.SetDistributionType(raw.MPSMatrixRandomDistribution(distributionType))
 	return x
 }
 
+// @property   minimum @abstract   For distributions of values bounded below, this value describes the minimum.
+//
 // WithMinimum sets the minimum property and returns the receiver for chaining.
 func (x *MatrixRandomDistributionDescriptor) WithMinimum(minimum float32) *MatrixRandomDistributionDescriptor {
 	x.inner.SetMinimum(minimum)
 	return x
 }
 
+// @property   maximum @abstract   For distributions of values bounded above, this value describes the maximum.
+//
 // WithMaximum sets the maximum property and returns the receiver for chaining.
 func (x *MatrixRandomDistributionDescriptor) WithMaximum(maximum float32) *MatrixRandomDistributionDescriptor {
 	x.inner.SetMaximum(maximum)
 	return x
 }
 
+// @property   mean @abstract   The value to use for distributions described by their mean.
+//
 // WithMean sets the mean property and returns the receiver for chaining.
 func (x *MatrixRandomDistributionDescriptor) WithMean(mean float32) *MatrixRandomDistributionDescriptor {
 	x.inner.SetMean(mean)
 	return x
 }
 
+// @property   standardDeviation @abstract   The value to use for distributions described by their standardDeviation.
+//
 // WithStandardDeviation sets the standardDeviation property and returns the receiver for chaining.
 func (x *MatrixRandomDistributionDescriptor) WithStandardDeviation(standardDeviation float32) *MatrixRandomDistributionDescriptor {
 	x.inner.SetStandardDeviation(standardDeviation)
 	return x
 }
 
+// @property   distributionType @abstract   The type of distribution.
+//
 // DistributionType calls the underlying DistributionType.
 func (x *MatrixRandomDistributionDescriptor) DistributionType() MPSMatrixRandomDistribution {
 	return MPSMatrixRandomDistribution(x.inner.DistributionType())
@@ -77,6 +89,8 @@ func (x *MatrixRandomDistributionDescriptor) SetDistributionType(distributionTyp
 	x.inner.SetDistributionType(raw.MPSMatrixRandomDistribution(distributionType))
 }
 
+// @property   minimum @abstract   For distributions of values bounded below, this value describes the minimum.
+//
 // Minimum calls the underlying Minimum.
 func (x *MatrixRandomDistributionDescriptor) Minimum() float32 {
 	return x.inner.Minimum()
@@ -87,6 +101,8 @@ func (x *MatrixRandomDistributionDescriptor) SetMinimum(minimum float32) {
 	x.inner.SetMinimum(minimum)
 }
 
+// @property   maximum @abstract   For distributions of values bounded above, this value describes the maximum.
+//
 // Maximum calls the underlying Maximum.
 func (x *MatrixRandomDistributionDescriptor) Maximum() float32 {
 	return x.inner.Maximum()
@@ -97,6 +113,8 @@ func (x *MatrixRandomDistributionDescriptor) SetMaximum(maximum float32) {
 	x.inner.SetMaximum(maximum)
 }
 
+// @property   mean @abstract   The value to use for distributions described by their mean.
+//
 // Mean calls the underlying Mean.
 func (x *MatrixRandomDistributionDescriptor) Mean() float32 {
 	return x.inner.Mean()
@@ -107,6 +125,8 @@ func (x *MatrixRandomDistributionDescriptor) SetMean(mean float32) {
 	x.inner.SetMean(mean)
 }
 
+// @property   standardDeviation @abstract   The value to use for distributions described by their standardDeviation.
+//
 // StandardDeviation calls the underlying StandardDeviation.
 func (x *MatrixRandomDistributionDescriptor) StandardDeviation() float32 {
 	return x.inner.StandardDeviation()

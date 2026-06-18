@@ -38,6 +38,8 @@ func NewMorpher() *Morpher {
 	return &Morpher{inner: raw.SCNMorpherFromID(_id)}
 }
 
+// @property targets @abstract Specifies the morph targets as an array of SCNGeometry. @discussion The target geometries must have the same number of entries in their geometry sources and the same topology as the base geometry.
+//
 // WithTargets sets the collection, converting the Go slice to an NSArray.
 func (x *Morpher) WithTargets(items ...GeometryProvider) *Morpher {
 	if len(items) == 0 {
@@ -56,6 +58,8 @@ func (x *Morpher) WithTargets(items ...GeometryProvider) *Morpher {
 	return x
 }
 
+// @property weights @abstract Access to all the weights of all the targets.
+//
 // WithWeights sets the collection, converting the Go slice to an NSArray.
 func (x *Morpher) WithWeights(items ...*foundation.NSNumber) *Morpher {
 	if len(items) == 0 {
@@ -74,38 +78,52 @@ func (x *Morpher) WithWeights(items ...*foundation.NSNumber) *Morpher {
 	return x
 }
 
+// @property calculationMode @abstract Specifies how the morph result is calculated by the receiver. Defaults to SCNMorpherCalculationModeNormalized.
+//
 // WithCalculationMode sets the calculationMode property and returns the receiver for chaining.
 func (x *Morpher) WithCalculationMode(calculationMode SCNMorpherCalculationMode) *Morpher {
 	x.inner.SetCalculationMode(raw.SCNMorpherCalculationMode(calculationMode))
 	return x
 }
 
+// @property unifiesNormals @abstract When set to YES the normals are not morphed but are recomputed after morphing the vertex instead. When set to NO, the morpher will morph the normals if the geometry targets have normals. Defaults to NO.
+//
 // WithUnifiesNormals sets the unifiesNormals property and returns the receiver for chaining.
 func (x *Morpher) WithUnifiesNormals(unifiesNormals bool) *Morpher {
 	x.inner.SetUnifiesNormals(unifiesNormals)
 	return x
 }
 
+// @method setWeight:forTargetAtIndex: @abstract Sets the weight for the target at the specified index. Animatable implicitly or explicitly with the keyPath "weights[index]" or "weights["targetName"]" (targetName is the name of the target geometry).
+//
 // SetWeightForTargetAtIndex calls the underlying SetWeightForTargetAtIndex.
 func (x *Morpher) SetWeightForTargetAtIndex(weight float64, targetIndex uint) {
 	x.inner.SetWeightForTargetAtIndex(weight, targetIndex)
 }
 
+// @method weightForTargetAtIndex: @abstract Retrieves the weight for the target at the specified index.
+//
 // WeightForTargetAtIndex calls the underlying WeightForTargetAtIndex.
 func (x *Morpher) WeightForTargetAtIndex(targetIndex uint) float64 {
 	return x.inner.WeightForTargetAtIndex(targetIndex)
 }
 
+// @method setWeight:forTargetNamed: @abstract Sets the weight for the target with the specified name (targetName is the name of the target geometry).
+//
 // SetWeightForTargetNamed calls the underlying SetWeightForTargetNamed.
 func (x *Morpher) SetWeightForTargetNamed(weight float64, targetName string) {
 	x.inner.SetWeightForTargetNamed(weight, foundation.NSStringStringWithUTF8String(targetName))
 }
 
+// @method weightForTargetNamed: @abstract Retrieves the weight for the target with the specified name (targetName is the name of the target geometry).
+//
 // WeightForTargetNamed calls the underlying WeightForTargetNamed.
 func (x *Morpher) WeightForTargetNamed(targetName string) float64 {
 	return x.inner.WeightForTargetNamed(foundation.NSStringStringWithUTF8String(targetName))
 }
 
+// @property targets @abstract Specifies the morph targets as an array of SCNGeometry. @discussion The target geometries must have the same number of entries in their geometry sources and the same topology as the base geometry.
+//
 // Targets returns the collection as a Go slice.
 func (x *Morpher) Targets() []*Geometry {
 	arr := x.inner.Targets()
@@ -118,10 +136,21 @@ func (x *Morpher) Targets() []*Geometry {
 }
 
 // SetTargets calls the underlying SetTargets.
-func (x *Morpher) SetTargets(targets *foundation.NSArray[*raw.SCNGeometry]) {
-	x.inner.SetTargets(targets)
+func (x *Morpher) SetTargets(targets ...GeometryProvider) {
+	_ptrs := make([]objc.ID, len(targets))
+	for _i, _v := range targets {
+		_ptrs[_i] = _v.asGeometry().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.SCNGeometry]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.SCNGeometry](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetTargets(_arg0)
 }
 
+// @property weights @abstract Access to all the weights of all the targets.
+//
 // Weights returns the collection as a Go slice.
 func (x *Morpher) Weights() []*foundation.NSNumber {
 	arr := x.inner.Weights()
@@ -138,6 +167,8 @@ func (x *Morpher) SetWeights(weights *foundation.NSArray[*foundation.NSNumber]) 
 	x.inner.SetWeights(weights)
 }
 
+// @property calculationMode @abstract Specifies how the morph result is calculated by the receiver. Defaults to SCNMorpherCalculationModeNormalized.
+//
 // CalculationMode calls the underlying CalculationMode.
 func (x *Morpher) CalculationMode() SCNMorpherCalculationMode {
 	return SCNMorpherCalculationMode(x.inner.CalculationMode())
@@ -148,6 +179,8 @@ func (x *Morpher) SetCalculationMode(calculationMode SCNMorpherCalculationMode) 
 	x.inner.SetCalculationMode(raw.SCNMorpherCalculationMode(calculationMode))
 }
 
+// @property unifiesNormals @abstract When set to YES the normals are not morphed but are recomputed after morphing the vertex instead. When set to NO, the morpher will morph the normals if the geometry targets have normals. Defaults to NO.
+//
 // UnifiesNormals calls the underlying UnifiesNormals.
 func (x *Morpher) UnifiesNormals() bool {
 	return x.inner.UnifiesNormals()
@@ -170,7 +203,7 @@ type Morpherable interface {
 	SetWeightForTargetNamed(weight float64, targetName string)
 	WeightForTargetNamed(targetName string) float64
 	Targets() []*Geometry
-	SetTargets(targets *foundation.NSArray[*raw.SCNGeometry])
+	SetTargets(targets ...GeometryProvider)
 	Weights() []*foundation.NSNumber
 	SetWeights(weights *foundation.NSArray[*foundation.NSNumber])
 	CalculationMode() SCNMorpherCalculationMode

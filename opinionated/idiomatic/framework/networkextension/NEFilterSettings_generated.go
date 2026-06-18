@@ -31,6 +31,8 @@ func NEFilterSettingsFromID(id objc.ID) *NEFilterSettings {
 	return &NEFilterSettings{inner: raw.NEFilterSettingsFromID(id)}
 }
 
+// @method initWithRules:defaultAction: @discussion Initialize a newly-allocated NEFilterSettings object with a set of filtering rules and a default filter action to takke if none of the rules match. @param rules An NSArray containing an ordered list of NEFilterRule objects. The maximum number of rules that this array can contain is 1000. @param defaultAction The NEFilterAction to take for flows of network (non-loopback) data that do not match any of the specified rules. The default defaultAction is NEFilterActionFilterData. If defaultAction is NEFilterActionAllow or NEFilterActionDrop, then the rules array must contain at least one NEFilterRule. The default action for loopback traffic is NEFilterActionAllow and cannot be changed. To filter loopback traffic you must include rules in the rules array that specifically match loopback traffic and have an action of NEFilterActionFilterData. @return the newly-initialized NEFilterSettings object.
+//
 // NewNEFilterSettingsWithRulesDefaultAction creates a new [NEFilterSettings].
 func NewNEFilterSettingsWithRulesDefaultAction(rules *foundation.NSArray[*raw.NEFilterRule], defaultAction NEFilterAction) *NEFilterSettings {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NEFilterSettings")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewNEFilterSettingsWithRulesDefaultAction(rules *foundation.NSArray[*raw.NE
 	return &NEFilterSettings{inner: raw.NEFilterSettingsFromID(_id)}
 }
 
+// @property rules @discussion An NSArray containing an ordered list of NEFilterRuleObjects. After the NEFilterSettings are applied to the system, each network flow is matched against these rules in order, and the NEFilterAction of the first rule that matches is taken: NEFilterActionAllow: Allow the flow of data to proceed on its journey through the networking stack without consulting this provider. NEFilterActionDrop: Drop the flow without consulting this provider. NEFilterActionFilterData: Call this provider's handleNewFlow: method with the flow.
+//
 // Rules returns the collection as a Go slice.
 func (x *NEFilterSettings) Rules() []*NEFilterRule {
 	arr := x.inner.Rules()
@@ -49,6 +53,8 @@ func (x *NEFilterSettings) Rules() []*NEFilterRule {
 	})
 }
 
+// @property defaultAction @discussion An NEFilterAction containing the default action to take for flows of network data that do not match any of the specified rules.
+//
 // DefaultAction calls the underlying DefaultAction.
 func (x *NEFilterSettings) DefaultAction() NEFilterAction {
 	return NEFilterAction(x.inner.DefaultAction())

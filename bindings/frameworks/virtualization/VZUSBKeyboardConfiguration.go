@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A device that defines the configuration for a USB keyboard.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzusbkeyboardconfiguration
 type VZUSBKeyboardConfiguration struct {
 	VZKeyboardConfiguration
@@ -29,6 +31,7 @@ func VZUSBKeyboardConfigurationFromID(id objc.ID) *VZUSBKeyboardConfiguration {
 	return o
 }
 
+// Creates a USB keyboard configuration.
 func (o *VZUSBKeyboardConfiguration) Init() *VZUSBKeyboardConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZUSBKeyboardConfigurationSelInit)
 	if _ret != 0 {

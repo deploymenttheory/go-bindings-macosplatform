@@ -39,22 +39,30 @@ func NewNEAppProxyUDPFlow() *NEAppProxyUDPFlow {
 	return &NEAppProxyUDPFlow{inner: raw.NEAppProxyUDPFlowFromID(_id)}
 }
 
+// @property networkInterface @discussion An nw_interface_t containing information about the network interface used by the flow. If the flow's data is transported using a different interface, this property should be set to that interface.
+//
 // WithNetworkInterface sets the networkInterface property and returns the receiver for chaining.
 func (x *NEAppProxyUDPFlow) WithNetworkInterface(networkInterface *foundation.NSObject) *NEAppProxyUDPFlow {
 	x.inner.NEAppProxyFlow.SetNetworkInterface(networkInterface)
 	return x
 }
 
+// @method readDatagramsAndFlowEndpointsWithCompletionHandler: @discussion Read datagrams from the flow. @param completionHandler A block that will be executed when datagrams have been read from the flow. The block takes the datagrams that were read, the destination endpoints of the datagrams, and an NSError. If an error occurred while reading then the error parameter will be non-nil.
+//
 // ReadDatagramsAndFlowEndpointsWithCompletionHandler calls the underlying ReadDatagramsAndFlowEndpointsWithCompletionHandler.
 func (x *NEAppProxyUDPFlow) ReadDatagramsAndFlowEndpointsWithCompletionHandler(completionHandler objc.Block) {
 	x.inner.ReadDatagramsAndFlowEndpointsWithCompletionHandler(completionHandler)
 }
 
+// @method readDatagramsWithCompletionHandler: @discussion Read datagrams from the flow. @param completionHandler A block that will be executed when datagrams have been read from the flow. The block takes the datagrams that were read, the destination endpoints of the datagrams, and an NSError. If an error occurred while reading then the error parameter will be non-nil.
+//
 // ReadDatagramsWithCompletionHandler calls the underlying ReadDatagramsWithCompletionHandler.
 func (x *NEAppProxyUDPFlow) ReadDatagramsWithCompletionHandler(completionHandler objc.Block) {
 	x.inner.ReadDatagramsWithCompletionHandler(completionHandler)
 }
 
+// @method writeDatagrams:sentByFlowEndpoints:completionHandler: @discussion Write datagrams to the flow. @param datagrams An array of NSData objects containing the data to be written. @param remoteEndpoints The source endpoints of the datagrams. @param completionHandler A block that will be executed when the datagrams have been written to the corresponding socket's receive buffer.
+//
 // WriteDatagramsSentByFlowEndpoints blocks until the operation completes or ctx is cancelled.
 func (x *NEAppProxyUDPFlow) WriteDatagramsSentByFlowEndpoints(ctx context.Context, datagrams *foundation.NSArray[*foundation.NSData], remoteEndpoints unsafe.Pointer) error {
 	_ch := make(chan error, 1)
@@ -73,6 +81,8 @@ func (x *NEAppProxyUDPFlow) WriteDatagramsSentByFlowEndpoints(ctx context.Contex
 	}
 }
 
+// @method writeDatagrams:sentByEndpoint:completionHandler: @discussion Write datagrams to the flow. @param datagrams An array of NSData objects containing the data to be written. @param remoteEndpoints The source endpoints of the datagrams. @param completionHandler A block that will be executed when the datagrams have been written to the corresponding socket's receive buffer.
+//
 // WriteDatagramsSentByEndpoints blocks until the operation completes or ctx is cancelled.
 func (x *NEAppProxyUDPFlow) WriteDatagramsSentByEndpoints(ctx context.Context, datagrams *foundation.NSArray[*foundation.NSData], remoteEndpoints *foundation.NSArray[objc.ID]) error {
 	_ch := make(chan error, 1)
@@ -91,11 +101,15 @@ func (x *NEAppProxyUDPFlow) WriteDatagramsSentByEndpoints(ctx context.Context, d
 	}
 }
 
+// @property localFlowEndpoint @discussion An `nw_endpoint_t` object containing the local endpoint of the flow's corresponding socket.
+//
 // LocalFlowEndpoint calls the underlying LocalFlowEndpoint.
 func (x *NEAppProxyUDPFlow) LocalFlowEndpoint() *foundation.NSObject {
 	return x.inner.LocalFlowEndpoint()
 }
 
+// @property localEndpoint @discussion An NWEndpoint object containing the local endpoint of the flow's corresponding socket.
+//
 // LocalEndpoint calls the underlying LocalEndpoint.
 func (x *NEAppProxyUDPFlow) LocalEndpoint() unsafe.Pointer {
 	return x.inner.LocalEndpoint()

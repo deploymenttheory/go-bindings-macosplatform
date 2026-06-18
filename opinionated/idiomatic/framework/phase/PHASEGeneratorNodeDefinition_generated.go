@@ -35,45 +35,61 @@ func NewGeneratorNodeDefinition() *GeneratorNodeDefinition {
 	return &GeneratorNodeDefinition{inner: raw.PHASEGeneratorNodeDefinitionFromID(_id)}
 }
 
+// @property rate @abstract Linear rate scalar. @note Values are clamped to the range [0.25, 4]. Default value is 1.
+//
 // WithRate sets the rate property and returns the receiver for chaining.
 func (x *GeneratorNodeDefinition) WithRate(rate float64) *GeneratorNodeDefinition {
 	x.inner.SetRate(rate)
 	return x
 }
 
+// @property group @abstract The PHASEGroup object this generator should be associated with for gain and rate control.
+//
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *GeneratorNodeDefinition) WithGroup(group *Group) *GeneratorNodeDefinition {
 	x.inner.SetGroup(group.Unwrap())
 	return x
 }
 
+// @property gainMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable dynamic control of the gain during playback.
+//
 // WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
 func (x *GeneratorNodeDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *GeneratorNodeDefinition {
 	x.inner.SetGainMetaParameterDefinition(gainMetaParameterDefinition.asNumberMetaParameterDefinition())
 	return x
 }
 
+// @property rateMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable dynamic control of the rate during playback.
+//
 // WithRateMetaParameterDefinition sets the rateMetaParameterDefinition property and returns the receiver for chaining.
 func (x *GeneratorNodeDefinition) WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *GeneratorNodeDefinition {
 	x.inner.SetRateMetaParameterDefinition(rateMetaParameterDefinition.asNumberMetaParameterDefinition())
 	return x
 }
 
+// @method setCalibrationMode:level @abstract Set the generator's calibration mode and level. @param calibrationMode The calibration mode. @param level The level. @note The level, including its underlying unit and range, are dependent on the calibration mode.
+//
 // SetCalibrationModeLevel calls the underlying SetCalibrationModeLevel.
 func (x *GeneratorNodeDefinition) SetCalibrationModeLevel(calibrationMode PHASECalibrationMode, level float64) {
 	x.inner.SetCalibrationModeLevel(raw.PHASECalibrationMode(calibrationMode), level)
 }
 
+// @property calibrationMode @abstract The generator's calibration mode. The default value is PHASECalibrationModeNone.
+//
 // CalibrationMode calls the underlying CalibrationMode.
 func (x *GeneratorNodeDefinition) CalibrationMode() PHASECalibrationMode {
 	return PHASECalibrationMode(x.inner.CalibrationMode())
 }
 
+// @property level @abstract The generator's level. The default value is 1. @note The level's underlying unit and range are dependent on the calibrationMode.
+//
 // Level calls the underlying Level.
 func (x *GeneratorNodeDefinition) Level() float64 {
 	return x.inner.Level()
 }
 
+// @property rate @abstract Linear rate scalar. @note Values are clamped to the range [0.25, 4]. Default value is 1.
+//
 // Rate calls the underlying Rate.
 func (x *GeneratorNodeDefinition) Rate() float64 {
 	return x.inner.Rate()
@@ -84,6 +100,8 @@ func (x *GeneratorNodeDefinition) SetRate(rate float64) {
 	x.inner.SetRate(rate)
 }
 
+// @property group @abstract The PHASEGroup object this generator should be associated with for gain and rate control.
+//
 // Group calls the underlying Group.
 func (x *GeneratorNodeDefinition) Group() *Group {
 	_r := x.inner.Group()
@@ -98,6 +116,8 @@ func (x *GeneratorNodeDefinition) SetGroup(group *raw.PHASEGroup) {
 	x.inner.SetGroup(group)
 }
 
+// @property gainMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable dynamic control of the gain during playback.
+//
 // GainMetaParameterDefinition calls the underlying GainMetaParameterDefinition.
 func (x *GeneratorNodeDefinition) GainMetaParameterDefinition() *NumberMetaParameterDefinition {
 	_r := x.inner.GainMetaParameterDefinition()
@@ -112,6 +132,8 @@ func (x *GeneratorNodeDefinition) SetGainMetaParameterDefinition(gainMetaParamet
 	x.inner.SetGainMetaParameterDefinition(gainMetaParameterDefinition)
 }
 
+// @property rateMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable dynamic control of the rate during playback.
+//
 // RateMetaParameterDefinition calls the underlying RateMetaParameterDefinition.
 func (x *GeneratorNodeDefinition) RateMetaParameterDefinition() *NumberMetaParameterDefinition {
 	_r := x.inner.RateMetaParameterDefinition()
@@ -126,6 +148,8 @@ func (x *GeneratorNodeDefinition) SetRateMetaParameterDefinition(rateMetaParamet
 	x.inner.SetRateMetaParameterDefinition(rateMetaParameterDefinition)
 }
 
+// @property mixerDefinition @abstract The readonly property that returns the PHASEMixerDefinition this generator was created with and assigned to.
+//
 // MixerDefinition calls the underlying MixerDefinition.
 func (x *GeneratorNodeDefinition) MixerDefinition() *MixerDefinition {
 	_r := x.inner.MixerDefinition()

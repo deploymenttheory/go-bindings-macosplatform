@@ -32,6 +32,8 @@ func UMPMutableEndpointFromID(id objc.ID) *UMPMutableEndpoint {
 	return &UMPMutableEndpoint{inner: raw.MIDIUMPMutableEndpointFromID(id)}
 }
 
+// @method		initWithName:deviceInfo:productInstanceID:MIDIProtocol:destinationCallback @brief		Initializer for creating a new MIDIUMPEndpoint. @param		name			        The UMP endpoint name. @param		deviceInfo		        The MIDI 2 device ID info for the UMP endpoint. @param		productInstanceID      The product instance ID, up to 42 characters. @param		MIDIProtocol	        The MIDI protocol. @param		destinationCallback The receive callback used to create the UMP endpoint's MIDI destination associated, which can be used to observe or process incoming MIDI traffic. @discussion	This operation will fail if the device ID information is malformed or if virtual MIDI endpoint creation is not allowed (for example, on iOS, if your app doesn't list 'audio' in UIBackgroundModes).
+//
 // NewUMPMutableEndpointWithNameDeviceInfoProductInstanceIDMIDIProtocolDestinationCallback creates a new [UMPMutableEndpoint].
 func NewUMPMutableEndpointWithNameDeviceInfoProductInstanceIDMIDIProtocolDestinationCallback(name string, deviceInfo *raw.MIDI2DeviceInfo, productInstanceID string, mIDIProtocol MIDIProtocolID, destinationCallback func(*raw.MIDIEventList, unsafe.Pointer)) *UMPMutableEndpoint {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDIUMPMutableEndpoint")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewUMPMutableEndpointWithNameDeviceInfoProductInstanceIDMIDIProtocolDestina
 	return &UMPMutableEndpoint{inner: raw.MIDIUMPMutableEndpointFromID(_id)}
 }
 
+// @property	mutableFunctionBlocks @brief		The Function Blocks associated with the UMP endpoint, if any.
+//
 // WithMutableFunctionBlocks sets the collection, converting the Go slice to an NSArray.
 func (x *UMPMutableEndpoint) WithMutableFunctionBlocks(items ...*raw.MIDIUMPMutableFunctionBlock) *UMPMutableEndpoint {
 	if len(items) == 0 {
@@ -57,6 +61,8 @@ func (x *UMPMutableEndpoint) WithMutableFunctionBlocks(items ...*raw.MIDIUMPMuta
 	return x
 }
 
+// @property	functionBlocks @brief		The Function Blocks associated with the UMP endpoint, if any.
+//
 // WithFunctionBlocks sets the collection, converting the Go slice to an NSArray.
 func (x *UMPMutableEndpoint) WithFunctionBlocks(items ...UMPFunctionBlockProvider) *UMPMutableEndpoint {
 	if len(items) == 0 {
@@ -75,21 +81,29 @@ func (x *UMPMutableEndpoint) WithFunctionBlocks(items ...UMPFunctionBlockProvide
 	return x
 }
 
+// @method       setName:error: @brief        Set the endpoints name. @param        name                      A string representing the name of the endpoint. @param        error             The out-error used if an error occurs. @return       YES for success. NO in the event of a failure, in which case the error is returned in error. @discussion   This operation will fail if the name could not be set.
+//
 // SetNameError calls the underlying SetNameError.
 func (x *UMPMutableEndpoint) SetNameError(name string) (bool, error) {
 	return x.inner.SetNameError(foundation.NSStringStringWithUTF8String(name))
 }
 
+// @method		registerFunctionBlocks:markAsStatic:error: @brief		Register or replace Function Blocks for a disabled client-created MIDIUMPEndpoint. @param		functionBlocks			A list of client-created Function Blocks to register. @param		markAsStatic			Whether the Function Block configuration may be updated. @param		error					The out-error used if an error occurs. @return     YES for success. NO in the event of a failure, in which case the error is returned in error. @discussion	This operation will fail if the array contains any disabled Function Blocks but the MIDIUMPEndpoint Function Block configuration is static. Returns YES if the Function Block configuration was set successfully.
+//
 // RegisterFunctionBlocksMarkAsStaticError calls the underlying RegisterFunctionBlocksMarkAsStaticError.
 func (x *UMPMutableEndpoint) RegisterFunctionBlocksMarkAsStaticError(functionBlocks *foundation.NSArray[*raw.MIDIUMPMutableFunctionBlock], markAsStatic bool) (bool, error) {
 	return x.inner.RegisterFunctionBlocksMarkAsStaticError(functionBlocks, markAsStatic)
 }
 
+// @method		setEnabled:error: @brief		Enable a mutable UMP endpoint in the system-wide UMP endpoint cache. @param		isEnabled               The enable state of the UMP endpoint. @param		error		        The out-error used if an error occurred. @return     YES for success. NO in the event of a failure, in which case the error is returned in error. @discussion	A MIDIUMPMutableEndpoint must be cache enabled before it is visible via API. Note that Function Blocks may only be registered to uncached MIDIUMPMutableEndpoint objects.
+//
 // SetEnabledError calls the underlying SetEnabledError.
 func (x *UMPMutableEndpoint) SetEnabledError(isEnabled bool) (bool, error) {
 	return x.inner.SetEnabledError(isEnabled)
 }
 
+// @property	mutableFunctionBlocks @brief		The Function Blocks associated with the UMP endpoint, if any.
+//
 // MutableFunctionBlocks returns the collection as a Go slice.
 func (x *UMPMutableEndpoint) MutableFunctionBlocks() []*UMPMutableFunctionBlock {
 	arr := x.inner.MutableFunctionBlocks()
@@ -106,6 +120,8 @@ func (x *UMPMutableEndpoint) SetMutableFunctionBlocks(mutableFunctionBlocks *fou
 	x.inner.SetMutableFunctionBlocks(mutableFunctionBlocks)
 }
 
+// @property   isEnabled @brief      The enable state of the endpoint.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *UMPMutableEndpoint) IsEnabled() bool {
 	return x.inner.IsEnabled()

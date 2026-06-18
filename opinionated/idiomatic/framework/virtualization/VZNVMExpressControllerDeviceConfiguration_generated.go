@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The configuration object that represents an NVM Express Controller storage device.
+//
 // NVMExpressControllerDeviceConfiguration wraps [raw.VZNVMExpressControllerDeviceConfiguration] with a fluent Go API.
 type NVMExpressControllerDeviceConfiguration struct {
 	inner *raw.VZNVMExpressControllerDeviceConfiguration
@@ -31,6 +33,8 @@ func NVMExpressControllerDeviceConfigurationFromID(id objc.ID) *NVMExpressContro
 	return &NVMExpressControllerDeviceConfiguration{inner: raw.VZNVMExpressControllerDeviceConfigurationFromID(id)}
 }
 
+// Creates a new NVM Express controller configuration with the storage device attachment you provide.
+//
 // NewNVMExpressControllerDeviceConfigurationWithAttachment creates a new [NVMExpressControllerDeviceConfiguration].
 func NewNVMExpressControllerDeviceConfigurationWithAttachment(attachment *raw.VZStorageDeviceAttachment) *NVMExpressControllerDeviceConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZNVMExpressControllerDeviceConfiguration")), objc.RegisterName("alloc"))

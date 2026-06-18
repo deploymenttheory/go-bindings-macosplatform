@@ -35,6 +35,8 @@ func NewSuicaPassProperties() *SuicaPassProperties {
 	return &SuicaPassProperties{inner: raw.PKSuicaPassPropertiesFromID(_id)}
 }
 
+// Note: isInShinkansenStation is not a subset of isInStation.
+//
 // IsInShinkansenStation calls the underlying IsInShinkansenStation.
 func (x *SuicaPassProperties) IsInShinkansenStation() bool {
 	return x.inner.IsInShinkansenStation()

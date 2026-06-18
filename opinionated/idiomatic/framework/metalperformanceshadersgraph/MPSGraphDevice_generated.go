@@ -36,11 +36,15 @@ func NewGraphDevice() *GraphDevice {
 	return &GraphDevice{inner: raw.MPSGraphDeviceFromID(_id)}
 }
 
+// Device of the MPSGraphDevice.
+//
 // Type calls the underlying Type.
 func (x *GraphDevice) Type() MPSGraphDeviceType {
 	return MPSGraphDeviceType(x.inner.Type())
 }
 
+// If device type is Metal then returns the corresponding MTLDevice else nil.
+//
 // MetalDevice calls the underlying MetalDevice.
 func (x *GraphDevice) MetalDevice() metal.MTLDevice {
 	return x.inner.MetalDevice()

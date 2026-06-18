@@ -37,16 +37,22 @@ func NewNEPacketTunnelFlow() *NEPacketTunnelFlow {
 	return &NEPacketTunnelFlow{inner: raw.NEPacketTunnelFlowFromID(_id)}
 }
 
+// @method readPacketsWithCompletionHandler: @discussion Read available IP packets from the flow. @param completionHandler A block that will be executed to handle the packets. This block takes an array of NSData objects and an array of NSNumber objects. The NSData and NSNumber in corresponding indicies in the array represent one packet. If after handling the packets the caller wants to read more packets then the caller must call this method again.
+//
 // ReadPacketsWithCompletionHandler calls the underlying ReadPacketsWithCompletionHandler.
 func (x *NEPacketTunnelFlow) ReadPacketsWithCompletionHandler(completionHandler objc.Block) {
 	x.inner.ReadPacketsWithCompletionHandler(completionHandler)
 }
 
+// @method writePackets:completionHandler: @discussion Write multiple IP packets to the flow. @param packets An array of NSData objects, each containing packet data to be written. @param protocols An array of NSNumber objects. Each number contains the protocol of the packet in the corresponding index in the packets array.
+//
 // WritePacketsWithProtocols calls the underlying WritePacketsWithProtocols.
 func (x *NEPacketTunnelFlow) WritePacketsWithProtocols(packets *foundation.NSArray[*foundation.NSData], protocols *foundation.NSArray[*foundation.NSNumber]) bool {
 	return x.inner.WritePacketsWithProtocols(packets, protocols)
 }
 
+// @method readPacketObjectsWithCompletionHandler: @discussion Read available IP packets from the flow. @param completionHandler A block that will be executed to handle the packets. This block takes an array of NEPacket objects. If after handling the packets the caller wants to read more packets then the caller must call this method again.
+//
 // ReadPacketObjects blocks until the operation completes or ctx is cancelled.
 func (x *NEPacketTunnelFlow) ReadPacketObjects(ctx context.Context) (*foundation.NSArray[*raw.NEPacket], error) {
 	type _result struct {
@@ -68,6 +74,8 @@ func (x *NEPacketTunnelFlow) ReadPacketObjects(ctx context.Context) (*foundation
 	}
 }
 
+// @method writePacketObjects: @discussion Write multiple IP packets to the flow. @param packets An array of NEPacket objects, each containing packet data and protocol family to be written.
+//
 // WritePacketObjects calls the underlying WritePacketObjects.
 func (x *NEPacketTunnelFlow) WritePacketObjects(packets *foundation.NSArray[*raw.NEPacket]) bool {
 	return x.inner.WritePacketObjects(packets)

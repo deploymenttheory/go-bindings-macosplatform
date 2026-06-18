@@ -33,6 +33,8 @@ func MTRBaseClusterIdentifyFromID(id objc.ID) *MTRBaseClusterIdentify {
 	return &MTRBaseClusterIdentify{inner: raw.MTRBaseClusterIdentifyFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterIdentifyWithDeviceEndpointIDQueue creates a new [MTRBaseClusterIdentify].
 func NewMTRBaseClusterIdentifyWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterIdentify {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterIdentify")), objc.RegisterName("alloc"))
@@ -47,11 +49,15 @@ func NewMTRBaseClusterIdentifyWithDeviceEndpointQueue(device *raw.MTRBaseDevice,
 	return &MTRBaseClusterIdentify{inner: raw.MTRBaseClusterIdentifyFromID(_id)}
 }
 
+// Command Identify This command starts or stops the receiving device identifying itself.
+//
 // IdentifyWithParamsCompletion calls the underlying IdentifyWithParamsCompletion.
 func (x *MTRBaseClusterIdentify) IdentifyWithParamsCompletion(params *raw.MTRIdentifyClusterIdentifyParams, completion func(unsafe.Pointer)) {
 	x.inner.IdentifyWithParamsCompletion(params, completion)
 }
 
+// Command TriggerEffect This command allows the support of feedback to the user, such as a certain light effect.
+//
 // TriggerEffectWithParamsCompletion calls the underlying TriggerEffectWithParamsCompletion.
 func (x *MTRBaseClusterIdentify) TriggerEffectWithParamsCompletion(params *raw.MTRIdentifyClusterTriggerEffectParams, completion func(unsafe.Pointer)) {
 	x.inner.TriggerEffectWithParamsCompletion(params, completion)

@@ -38,12 +38,16 @@ func NewMutableAssetDownloadStorageManagementPolicy() *MutableAssetDownloadStora
 	return &MutableAssetDownloadStorageManagementPolicy{inner: raw.AVMutableAssetDownloadStorageManagementPolicyFromID(_id)}
 }
 
+// Indicates the eviction priority of downloaded asset. Assets with default priority will be purged first before assets with higher priorities. In case this is not set, default priority is used.
+//
 // WithPriority sets the priority property and returns the receiver for chaining.
 func (x *MutableAssetDownloadStorageManagementPolicy) WithPriority(priority *foundation.NSString) *MutableAssetDownloadStorageManagementPolicy {
 	x.inner.SetPriority(priority)
 	return x
 }
 
+// Returns the expiration date of asset.
+//
 // WithExpirationDate sets the expirationDate property and returns the receiver for chaining.
 func (x *MutableAssetDownloadStorageManagementPolicy) WithExpirationDate(expirationDate *foundation.NSDate) *MutableAssetDownloadStorageManagementPolicy {
 	x.inner.SetExpirationDate(expirationDate)

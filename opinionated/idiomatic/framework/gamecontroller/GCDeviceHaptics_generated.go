@@ -37,11 +37,15 @@ func NewDeviceHaptics() *DeviceHaptics {
 	return &DeviceHaptics{inner: raw.GCDeviceHapticsFromID(_id)}
 }
 
+// Creates and returns a new instance of CHHapticEngine with a given GCHapticsLocality. Any patterns you send to this engine will play on all specified actuators. @note Often times, it is best to use GCHapticsLocalityDefault. Engines created with the default locality will give users an expected haptic experience. On most game controllers, this will cause your haptic patterns to play on the handles. If you want to play different experiences on different actuators (for example, using the left handle actuator as a woofer and the right actuator as a tweeter), you can create multiple engines (for example, one with a GCHapticsLocalityLeftHandle locality and another with a GCHapticsLocalityRightHandle locality). @see CHHapticEngine @see GCHapticsLocality
+//
 // CreateEngineWithLocality calls the underlying CreateEngineWithLocality.
 func (x *DeviceHaptics) CreateEngineWithLocality(locality *foundation.NSString) *corehaptics.CHHapticEngine {
 	return x.inner.CreateEngineWithLocality(locality)
 }
 
+// The set of supported haptic localities for this device - representing the locations of its haptic actuators. @note GCHapticsLocalityDefault and GCHapticsLocalityAll are guaranteed to be supported - and they may be equivalent. @see GCHapticsLocality
+//
 // SupportedLocalities calls the underlying SupportedLocalities.
 func (x *DeviceHaptics) SupportedLocalities() *foundation.NSSet[*foundation.NSString] {
 	return x.inner.SupportedLocalities()

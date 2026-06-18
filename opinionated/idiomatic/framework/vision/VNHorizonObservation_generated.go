@@ -36,16 +36,22 @@ func NewHorizonObservation() *HorizonObservation {
 	return &HorizonObservation{inner: raw.VNHorizonObservationFromID(_id)}
 }
 
+// @brief Creates a transform for the specified width and height.
+//
 // TransformForImageWidthHeight calls the underlying TransformForImageWidthHeight.
 func (x *HorizonObservation) TransformForImageWidthHeight(width uint, height uint) corefoundation.CGAffineTransform {
 	return x.inner.TransformForImageWidthHeight(width, height)
 }
 
+// @brief Transform applied to the detected horizon in image coordinates. @discussion This is the transform in image coordinates and not a normalized transform.
+//
 // Transform calls the underlying Transform.
 func (x *HorizonObservation) Transform() corefoundation.CGAffineTransform {
 	return x.inner.Transform()
 }
 
+// @brief Angle of the observed horizon.
+//
 // Angle calls the underlying Angle.
 func (x *HorizonObservation) Angle() float64 {
 	return x.inner.Angle()

@@ -35,24 +35,32 @@ func NewRatingCommand() *RatingCommand {
 	return &RatingCommand{inner: raw.MPRatingCommandFromID(_id)}
 }
 
+// Minimum rating for the command.
+//
 // WithMinimumRating sets the minimumRating property and returns the receiver for chaining.
 func (x *RatingCommand) WithMinimumRating(minimumRating float32) *RatingCommand {
 	x.inner.SetMinimumRating(minimumRating)
 	return x
 }
 
+// Maximum rating for the command.
+//
 // WithMaximumRating sets the maximumRating property and returns the receiver for chaining.
 func (x *RatingCommand) WithMaximumRating(maximumRating float32) *RatingCommand {
 	x.inner.SetMaximumRating(maximumRating)
 	return x
 }
 
+// Whether a button (for example) should be enabled and tappable for this particular command.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *RatingCommand) WithEnabled(enabled bool) *RatingCommand {
 	x.inner.MPRemoteCommand.SetEnabled(enabled)
 	return x
 }
 
+// Minimum rating for the command.
+//
 // MinimumRating calls the underlying MinimumRating.
 func (x *RatingCommand) MinimumRating() float32 {
 	return x.inner.MinimumRating()
@@ -63,6 +71,8 @@ func (x *RatingCommand) SetMinimumRating(minimumRating float32) {
 	x.inner.SetMinimumRating(minimumRating)
 }
 
+// Maximum rating for the command.
+//
 // MaximumRating calls the underlying MaximumRating.
 func (x *RatingCommand) MaximumRating() float32 {
 	return x.inner.MaximumRating()

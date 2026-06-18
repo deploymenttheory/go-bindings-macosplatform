@@ -38,11 +38,15 @@ func NewKeychainSettingsPanel() *KeychainSettingsPanel {
 	return &KeychainSettingsPanel{inner: raw.SFKeychainSettingsPanelFromID(_id)}
 }
 
+// @method runModalForSettings:keychain: @abstract Changes the keychain settings using the settings panel. The panel contains settings such as "lock on sleep", "automatic lock", etc. If the user attempts to change the settings of a locked keychain, the unlock panel will be presented. It returns NSOKButton or NSCancelButton. @param settings A pointer to a keychain settings structure. Since this structure is versioned, you must preallocate it and fill in the version of the structure. @param keychain The keychain that will have its settings changed.
+//
 // RunModalForSettingsKeychain calls the underlying RunModalForSettingsKeychain.
 func (x *KeychainSettingsPanel) RunModalForSettingsKeychain(settings *security.SecKeychainSettings, keychain unsafe.Pointer) int {
 	return x.inner.RunModalForSettingsKeychain(settings, keychain)
 }
 
+// @method beginSheetForWindow:settings:keychain:modalDelegate:didEndSelector:contextInfo: @abstract Presents a sheet version of SFKeychainSettingsPanel. The didEndSelector returnCode will contain either NSOKButton or NSCancelButton. @param docWindow The panel in which the settings sheet slides down; acting as a document modal window. If docWindow is nil, the behavior defaults to a standalone modal window. @param delegate Delegate object in which didEndSelector is a method. @param didEndSelector The didEndSelector method is optional. If implemented by the delegate, this method is invoked after the modal session has ended, but before dismissing the same panel. The didEndSelector may dismiss the keychain panel itself; otherwise it will be dismissed on return from the method. The didEndSelector should have the following signature: - (void)settingsPanelDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo; @param contextInfo A client-defined context. @param settings A pointer to a keychain settings structure. Since this structure is versioned, you must preallocate it and fill in the version of the structure. @param keychain The keychain that will have its settings changed.
+//
 // BeginSheetForWindowModalDelegateDidEndSelectorContextInfoSettingsKeychain calls the underlying BeginSheetForWindowModalDelegateDidEndSelectorContextInfoSettingsKeychain.
 func (x *KeychainSettingsPanel) BeginSheetForWindowModalDelegateDidEndSelectorContextInfoSettingsKeychain(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, settings *security.SecKeychainSettings, keychain unsafe.Pointer) {
 	x.inner.BeginSheetForWindowModalDelegateDidEndSelectorContextInfoSettingsKeychain(docWindow, delegate, didEndSelector, contextInfo, settings, keychain)

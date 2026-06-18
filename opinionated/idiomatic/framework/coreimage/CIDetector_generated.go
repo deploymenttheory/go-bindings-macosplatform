@@ -36,11 +36,15 @@ func NewDetector() *Detector {
 	return &Detector{inner: raw.CIDetectorFromID(_id)}
 }
 
+// Returns an array of CIFeature instances in the given image. The array is sorted by confidence, highest confidence first.
+//
 // FeaturesInImage calls the underlying FeaturesInImage.
 func (x *Detector) FeaturesInImage(image *raw.CIImage) *foundation.NSArray[*raw.CIFeature] {
 	return x.inner.FeaturesInImage(image)
 }
 
+// Returns an array of CIFeature instances in the given image. The array is sorted by confidence, highest confidence first. The options dictionary can contain a CIDetectorImageOrientation key value.
+//
 // FeaturesInImageOptions calls the underlying FeaturesInImageOptions.
 func (x *Detector) FeaturesInImageOptions(image *raw.CIImage, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.CIFeature] {
 	return x.inner.FeaturesInImageOptions(image, options)

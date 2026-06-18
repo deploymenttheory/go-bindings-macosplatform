@@ -39,17 +39,23 @@ func NewRAWProcessorPixelBufferManager() *RAWProcessorPixelBufferManager {
 	return &RAWProcessorPixelBufferManager{inner: raw.MERAWProcessorPixelBufferManagerFromID(_id)}
 }
 
+// @property		pixelBufferAttributes @abstract		VideoToolbox will use these attributes when creating a pixelBuffer for the RAW Processor. @discussion		This can be updated by the processor before requesting a new pixelBuffer.
+//
 // WithPixelBufferAttributes sets the pixelBufferAttributes property and returns the receiver for chaining.
 func (x *RAWProcessorPixelBufferManager) WithPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *RAWProcessorPixelBufferManager {
 	x.inner.SetPixelBufferAttributes(pixelBufferAttributes)
 	return x
 }
 
+// @method			createPixelBufferAndReturnError: @abstract		Generates a pixel buffer using the session's pixel buffer pool. @discussion		If implemented in Objective-C, the caller is responsible for releasing the returned CVPixelBuffer. @param			error If provided, returns error information in the event that the method fails. @result A pixel buffer compatible with the extension's most recently set pixelBufferAttributes
+//
 // CreatePixelBufferAndReturnError calls the underlying CreatePixelBufferAndReturnError.
 func (x *RAWProcessorPixelBufferManager) CreatePixelBufferAndReturnError() (unsafe.Pointer, error) {
 	return x.inner.CreatePixelBufferAndReturnError()
 }
 
+// @property		pixelBufferAttributes @abstract		VideoToolbox will use these attributes when creating a pixelBuffer for the RAW Processor. @discussion		This can be updated by the processor before requesting a new pixelBuffer.
+//
 // PixelBufferAttributes calls the underlying PixelBufferAttributes.
 func (x *RAWProcessorPixelBufferManager) PixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.PixelBufferAttributes()

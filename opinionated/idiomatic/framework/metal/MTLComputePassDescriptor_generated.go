@@ -35,12 +35,16 @@ func NewComputePassDescriptor() *ComputePassDescriptor {
 	return &ComputePassDescriptor{inner: raw.MTLComputePassDescriptorFromID(_id)}
 }
 
+// @property dispatchType @abstract The dispatch type of the compute command encoder.
+//
 // WithDispatchType sets the dispatchType property and returns the receiver for chaining.
 func (x *ComputePassDescriptor) WithDispatchType(dispatchType MTLDispatchType) *ComputePassDescriptor {
 	x.inner.SetDispatchType(raw.MTLDispatchType(dispatchType))
 	return x
 }
 
+// @property dispatchType @abstract The dispatch type of the compute command encoder.
+//
 // DispatchType calls the underlying DispatchType.
 func (x *ComputePassDescriptor) DispatchType() MTLDispatchType {
 	return MTLDispatchType(x.inner.DispatchType())
@@ -51,6 +55,8 @@ func (x *ComputePassDescriptor) SetDispatchType(dispatchType MTLDispatchType) {
 	x.inner.SetDispatchType(raw.MTLDispatchType(dispatchType))
 }
 
+// @property sampleBufferAttachments @abstract An array of sample buffers and associated sample indices.
+//
 // SampleBufferAttachments calls the underlying SampleBufferAttachments.
 func (x *ComputePassDescriptor) SampleBufferAttachments() *ComputePassSampleBufferAttachmentDescriptorArray {
 	_r := x.inner.SampleBufferAttachments()

@@ -31,6 +31,8 @@ func GroupFromID(id objc.ID) *Group {
 	return &Group{inner: raw.PHASEGroupFromID(id)}
 }
 
+// @method initWithIdentifier: @abstract Create a new group. @param identifier The identifier that uniquely represents this group.
+//
 // NewGroupWithIdentifier creates a new [Group].
 func NewGroupWithIdentifier(identifier string) *Group {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEGroup")), objc.RegisterName("alloc"))
@@ -38,58 +40,80 @@ func NewGroupWithIdentifier(identifier string) *Group {
 	return &Group{inner: raw.PHASEGroupFromID(_id)}
 }
 
+// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+//
 // WithGain sets the gain property and returns the receiver for chaining.
 func (x *Group) WithGain(gain float64) *Group {
 	x.inner.SetGain(gain)
 	return x
 }
 
+// @property rate @abstract Linear rate scalar. @note Values are clamped to the range [0.25, 4]. Default value is 1.
+//
 // WithRate sets the rate property and returns the receiver for chaining.
 func (x *Group) WithRate(rate float64) *Group {
 	x.inner.SetRate(rate)
 	return x
 }
 
+// @method registerWithEngine @abstract Registers a group with a particular engine so that referenced assets can find it. @note An exception will be thrown if the engine is invalid or the group already exists. @param engine An engine object to associate this group with.
+//
 // RegisterWithEngine calls the underlying RegisterWithEngine.
 func (x *Group) RegisterWithEngine(engine *raw.PHASEEngine) {
 	x.inner.RegisterWithEngine(engine)
 }
 
+// @method unregisterFromEngine @abstract Unregister the group from a particular engine.
+//
 // UnregisterFromEngine calls the underlying UnregisterFromEngine.
 func (x *Group) UnregisterFromEngine() {
 	x.inner.UnregisterFromEngine()
 }
 
+// @method fadeGain:duration:curveType: @abstract Fade the gain of this group over a specified duration and curve. @note The fade gain is applied on top of the base gain of the group. @param gain A target linear gain scalar. Values are clamped to the range [0, 1]. @param duration The duration over which to ramp to the target linear gain scalar. Values must be >= 0. The duration is scaled by unitsPerSecond internally, so can be provided at the client's native time scale. @param curveType The type of curve function that is applied during the fade.
+//
 // FadeGainDurationCurveType calls the underlying FadeGainDurationCurveType.
 func (x *Group) FadeGainDurationCurveType(gain float64, duration float64, curveType PHASECurveType) {
 	x.inner.FadeGainDurationCurveType(gain, duration, raw.PHASECurveType(curveType))
 }
 
+// @method fadeRate:duration:curveType: @abstract Fade the playback rate of this group over a specified duration and curve. @note The fade gain is applied on top of the base gain of the group. @param rate A target linear rate scalar. Values are clamped to the range [0.25, 4.0]. @param duration The duration over which to ramp to the target linear rate scalar. Values must be >= 0. The duration is scaled by unitsPerSecond internally, so can be provided at the client's native time scale. @param curveType The type of curve function that is applied during the fade.
+//
 // FadeRateDurationCurveType calls the underlying FadeRateDurationCurveType.
 func (x *Group) FadeRateDurationCurveType(rate float64, duration float64, curveType PHASECurveType) {
 	x.inner.FadeRateDurationCurveType(rate, duration, raw.PHASECurveType(curveType))
 }
 
+// @method mute @abstract Mute the group.
+//
 // Mute calls the underlying Mute.
 func (x *Group) Mute() {
 	x.inner.Mute()
 }
 
+// @method unmute @abstract Unmute the group.
+//
 // Unmute calls the underlying Unmute.
 func (x *Group) Unmute() {
 	x.inner.Unmute()
 }
 
+// @method solo @abstract Solo the group.
+//
 // Solo calls the underlying Solo.
 func (x *Group) Solo() {
 	x.inner.Solo()
 }
 
+// @method unsolo @abstract Unsolo the group.
+//
 // Unsolo calls the underlying Unsolo.
 func (x *Group) Unsolo() {
 	x.inner.Unsolo()
 }
 
+// @property identifier @abstract The identifier that uniquely represents this group.
+//
 // Identifier calls the underlying Identifier.
 func (x *Group) Identifier() string {
 	_r := x.inner.Identifier()
@@ -99,6 +123,8 @@ func (x *Group) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+//
 // Gain calls the underlying Gain.
 func (x *Group) Gain() float64 {
 	return x.inner.Gain()
@@ -109,6 +135,8 @@ func (x *Group) SetGain(gain float64) {
 	x.inner.SetGain(gain)
 }
 
+// @property rate @abstract Linear rate scalar. @note Values are clamped to the range [0.25, 4]. Default value is 1.
+//
 // Rate calls the underlying Rate.
 func (x *Group) Rate() float64 {
 	return x.inner.Rate()
@@ -119,11 +147,15 @@ func (x *Group) SetRate(rate float64) {
 	x.inner.SetRate(rate)
 }
 
+// @property muted @abstract Whether or not this group is muted.
+//
 // IsMuted calls the underlying IsMuted.
 func (x *Group) IsMuted() bool {
 	return x.inner.IsMuted()
 }
 
+// @property soloed @abstract Whether or not this group is soloed.
+//
 // IsSoloed calls the underlying IsSoloed.
 func (x *Group) IsSoloed() bool {
 	return x.inner.IsSoloed()

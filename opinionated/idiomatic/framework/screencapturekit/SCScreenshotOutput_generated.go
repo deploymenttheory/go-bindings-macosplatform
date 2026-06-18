@@ -37,12 +37,16 @@ func NewScreenshotOutput() *ScreenshotOutput {
 	return &ScreenshotOutput{inner: raw.SCScreenshotOutputFromID(_id)}
 }
 
+// @abstract SCScreenshotOutput property to specify the location where the image was saved.  If a fileURL in the screenshot configuration was not specified, then the fileURL will be nil
+//
 // WithFileURL sets the fileURL property and returns the receiver for chaining.
 func (x *ScreenshotOutput) WithFileURL(fileURL string) *ScreenshotOutput {
 	x.inner.SetFileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
 	return x
 }
 
+// @abstract SCScreenshotOutput property that denotes the SDR CGimage.  The output CGImage uses the same color space as the display
+//
 // SdrImage calls the underlying SdrImage.
 func (x *ScreenshotOutput) SdrImage() unsafe.Pointer {
 	return x.inner.SdrImage()
@@ -53,6 +57,8 @@ func (x *ScreenshotOutput) SetSdrImage(sdrImage unsafe.Pointer) {
 	x.inner.SetSdrImage(sdrImage)
 }
 
+// @abstract SCScreenshotOutput property that denotes the HDR CGimage.  The output CGImage uses the extended sRGB color space.
+//
 // HdrImage calls the underlying HdrImage.
 func (x *ScreenshotOutput) HdrImage() unsafe.Pointer {
 	return x.inner.HdrImage()
@@ -63,6 +69,8 @@ func (x *ScreenshotOutput) SetHdrImage(hdrImage unsafe.Pointer) {
 	x.inner.SetHdrImage(hdrImage)
 }
 
+// @abstract SCScreenshotOutput property to specify the location where the image was saved.  If a fileURL in the screenshot configuration was not specified, then the fileURL will be nil
+//
 // FileURL calls the underlying FileURL.
 func (x *ScreenshotOutput) FileURL() *foundation.NSURL {
 	return x.inner.FileURL()

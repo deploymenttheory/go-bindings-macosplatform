@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class for a graphics device configuration.
+//
 // GraphicsDeviceConfiguration wraps [raw.VZGraphicsDeviceConfiguration] with a fluent Go API.
 type GraphicsDeviceConfiguration struct {
 	inner *raw.VZGraphicsDeviceConfiguration

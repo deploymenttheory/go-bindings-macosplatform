@@ -36,66 +36,88 @@ func NewHEVCDependencyInfo() *HEVCDependencyInfo {
 	return &HEVCDependencyInfo{inner: raw.MEHEVCDependencyInfoFromID(_id)}
 }
 
+// @property		temporalSubLayerAccess @abstract		YES if the sample is an HEVC 'TSA' picture, NO otherwise. @discussion		Maps to the kCMSampleAttachmentKey_HEVCTemporalSubLayerAccess sample buffer attachment.
+//
 // WithTemporalSubLayerAccess sets the temporalSubLayerAccess property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithTemporalSubLayerAccess(temporalSubLayerAccess bool) *HEVCDependencyInfo {
 	x.inner.SetTemporalSubLayerAccess(temporalSubLayerAccess)
 	return x
 }
 
+// @property		stepwiseTemporalSubLayerAccess @abstract		YES if the sample is an HEVC 'STSA' picture, NO otherwise. @discussion		Maps to the kCMSampleAttachmentKey_HEVCStepwiseTemporalSubLayerAccess sample buffer attachment.
+//
 // WithStepwiseTemporalSubLayerAccess sets the stepwiseTemporalSubLayerAccess property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithStepwiseTemporalSubLayerAccess(stepwiseTemporalSubLayerAccess bool) *HEVCDependencyInfo {
 	x.inner.SetStepwiseTemporalSubLayerAccess(stepwiseTemporalSubLayerAccess)
 	return x
 }
 
+// @property		syncSampleNALUnitType @abstract		The NAL unit type for HEVC 'sync' sample groups, or -1 if this information is not available. @discussion		Maps to the kCMSampleAttachmentKey_HEVCSyncSampleNALUnitType sample buffer attachment.
+//
 // WithSyncSampleNALUnitType sets the syncSampleNALUnitType property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithSyncSampleNALUnitType(syncSampleNALUnitType int16) *HEVCDependencyInfo {
 	x.inner.SetSyncSampleNALUnitType(syncSampleNALUnitType)
 	return x
 }
 
+// @property		temporalLevel @abstract		The HEVC temporal level, or -1 if this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_TemporalLevel sample buffer attachment.
+//
 // WithTemporalLevel sets the temporalLevel property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithTemporalLevel(temporalLevel int16) *HEVCDependencyInfo {
 	x.inner.SetTemporalLevel(temporalLevel)
 	return x
 }
 
+// @property		profileSpace @abstract		The HEVC profile space, or -1 if this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_ProfileSpace sample buffer attachment.
+//
 // WithProfileSpace sets the profileSpace property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithProfileSpace(profileSpace int16) *HEVCDependencyInfo {
 	x.inner.SetProfileSpace(profileSpace)
 	return x
 }
 
+// @property		tierFlag @abstract		The HEVC tier level flag, or -1 if this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_TierFlag sample buffer attachment.
+//
 // WithTierFlag sets the tierFlag property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithTierFlag(tierFlag int16) *HEVCDependencyInfo {
 	x.inner.SetTierFlag(tierFlag)
 	return x
 }
 
+// @property		profileIndex @abstract		The HEVC profile index, or -1 if this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_ProfileIndex sample buffer attachment.
+//
 // WithProfileIndex sets the profileIndex property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithProfileIndex(profileIndex int16) *HEVCDependencyInfo {
 	x.inner.SetProfileIndex(profileIndex)
 	return x
 }
 
+// @property		profileCompatibilityFlags @abstract		The HEVC profile compatibility flags (4 bytes), or nil of this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_ProfileCompatibilityFlags sample buffer attachment.
+//
 // WithProfileCompatibilityFlags sets the profileCompatibilityFlags property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithProfileCompatibilityFlags(profileCompatibilityFlags *foundation.NSData) *HEVCDependencyInfo {
 	x.inner.SetProfileCompatibilityFlags(profileCompatibilityFlags)
 	return x
 }
 
+// @property		constraintIndicatorFlags @abstract		The HEVC constraint indicator flags (6 bytes), or nil of this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags sample buffer attachment.
+//
 // WithConstraintIndicatorFlags sets the constraintIndicatorFlags property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithConstraintIndicatorFlags(constraintIndicatorFlags *foundation.NSData) *HEVCDependencyInfo {
 	x.inner.SetConstraintIndicatorFlags(constraintIndicatorFlags)
 	return x
 }
 
+// @property		levelIndex @abstract		The HEVC level index, or -1 if this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_LevelIndex sample buffer attachment.
+//
 // WithLevelIndex sets the levelIndex property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithLevelIndex(levelIndex int16) *HEVCDependencyInfo {
 	x.inner.SetLevelIndex(levelIndex)
 	return x
 }
 
+// @property		temporalSubLayerAccess @abstract		YES if the sample is an HEVC 'TSA' picture, NO otherwise. @discussion		Maps to the kCMSampleAttachmentKey_HEVCTemporalSubLayerAccess sample buffer attachment.
+//
 // HasTemporalSubLayerAccess calls the underlying HasTemporalSubLayerAccess.
 func (x *HEVCDependencyInfo) HasTemporalSubLayerAccess() bool {
 	return x.inner.HasTemporalSubLayerAccess()
@@ -106,6 +128,8 @@ func (x *HEVCDependencyInfo) SetTemporalSubLayerAccess(temporalSubLayerAccess bo
 	x.inner.SetTemporalSubLayerAccess(temporalSubLayerAccess)
 }
 
+// @property		stepwiseTemporalSubLayerAccess @abstract		YES if the sample is an HEVC 'STSA' picture, NO otherwise. @discussion		Maps to the kCMSampleAttachmentKey_HEVCStepwiseTemporalSubLayerAccess sample buffer attachment.
+//
 // HasStepwiseTemporalSubLayerAccess calls the underlying HasStepwiseTemporalSubLayerAccess.
 func (x *HEVCDependencyInfo) HasStepwiseTemporalSubLayerAccess() bool {
 	return x.inner.HasStepwiseTemporalSubLayerAccess()
@@ -116,6 +140,8 @@ func (x *HEVCDependencyInfo) SetStepwiseTemporalSubLayerAccess(stepwiseTemporalS
 	x.inner.SetStepwiseTemporalSubLayerAccess(stepwiseTemporalSubLayerAccess)
 }
 
+// @property		syncSampleNALUnitType @abstract		The NAL unit type for HEVC 'sync' sample groups, or -1 if this information is not available. @discussion		Maps to the kCMSampleAttachmentKey_HEVCSyncSampleNALUnitType sample buffer attachment.
+//
 // SyncSampleNALUnitType calls the underlying SyncSampleNALUnitType.
 func (x *HEVCDependencyInfo) SyncSampleNALUnitType() int16 {
 	return x.inner.SyncSampleNALUnitType()
@@ -126,6 +152,8 @@ func (x *HEVCDependencyInfo) SetSyncSampleNALUnitType(syncSampleNALUnitType int1
 	x.inner.SetSyncSampleNALUnitType(syncSampleNALUnitType)
 }
 
+// @property		temporalLevel @abstract		The HEVC temporal level, or -1 if this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_TemporalLevel sample buffer attachment.
+//
 // TemporalLevel calls the underlying TemporalLevel.
 func (x *HEVCDependencyInfo) TemporalLevel() int16 {
 	return x.inner.TemporalLevel()
@@ -136,6 +164,8 @@ func (x *HEVCDependencyInfo) SetTemporalLevel(temporalLevel int16) {
 	x.inner.SetTemporalLevel(temporalLevel)
 }
 
+// @property		profileSpace @abstract		The HEVC profile space, or -1 if this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_ProfileSpace sample buffer attachment.
+//
 // ProfileSpace calls the underlying ProfileSpace.
 func (x *HEVCDependencyInfo) ProfileSpace() int16 {
 	return x.inner.ProfileSpace()
@@ -146,6 +176,8 @@ func (x *HEVCDependencyInfo) SetProfileSpace(profileSpace int16) {
 	x.inner.SetProfileSpace(profileSpace)
 }
 
+// @property		tierFlag @abstract		The HEVC tier level flag, or -1 if this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_TierFlag sample buffer attachment.
+//
 // TierFlag calls the underlying TierFlag.
 func (x *HEVCDependencyInfo) TierFlag() int16 {
 	return x.inner.TierFlag()
@@ -156,6 +188,8 @@ func (x *HEVCDependencyInfo) SetTierFlag(tierFlag int16) {
 	x.inner.SetTierFlag(tierFlag)
 }
 
+// @property		profileIndex @abstract		The HEVC profile index, or -1 if this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_ProfileIndex sample buffer attachment.
+//
 // ProfileIndex calls the underlying ProfileIndex.
 func (x *HEVCDependencyInfo) ProfileIndex() int16 {
 	return x.inner.ProfileIndex()
@@ -166,6 +200,8 @@ func (x *HEVCDependencyInfo) SetProfileIndex(profileIndex int16) {
 	x.inner.SetProfileIndex(profileIndex)
 }
 
+// @property		profileCompatibilityFlags @abstract		The HEVC profile compatibility flags (4 bytes), or nil of this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_ProfileCompatibilityFlags sample buffer attachment.
+//
 // ProfileCompatibilityFlags calls the underlying ProfileCompatibilityFlags.
 func (x *HEVCDependencyInfo) ProfileCompatibilityFlags() *foundation.NSData {
 	return x.inner.ProfileCompatibilityFlags()
@@ -176,6 +212,8 @@ func (x *HEVCDependencyInfo) SetProfileCompatibilityFlags(profileCompatibilityFl
 	x.inner.SetProfileCompatibilityFlags(profileCompatibilityFlags)
 }
 
+// @property		constraintIndicatorFlags @abstract		The HEVC constraint indicator flags (6 bytes), or nil of this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags sample buffer attachment.
+//
 // ConstraintIndicatorFlags calls the underlying ConstraintIndicatorFlags.
 func (x *HEVCDependencyInfo) ConstraintIndicatorFlags() *foundation.NSData {
 	return x.inner.ConstraintIndicatorFlags()
@@ -186,6 +224,8 @@ func (x *HEVCDependencyInfo) SetConstraintIndicatorFlags(constraintIndicatorFlag
 	x.inner.SetConstraintIndicatorFlags(constraintIndicatorFlags)
 }
 
+// @property		levelIndex @abstract		The HEVC level index, or -1 if this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_LevelIndex sample buffer attachment.
+//
 // LevelIndex calls the underlying LevelIndex.
 func (x *HEVCDependencyInfo) LevelIndex() int16 {
 	return x.inner.LevelIndex()

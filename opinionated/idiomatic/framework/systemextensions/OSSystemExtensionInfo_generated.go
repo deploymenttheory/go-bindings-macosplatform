@@ -36,6 +36,8 @@ func NewSystemExtensionInfo() *SystemExtensionInfo {
 	return &SystemExtensionInfo{inner: raw.OSSystemExtensionInfoFromID(_id)}
 }
 
+// @brief The bundle identifier of the extension (CFBundleIdentifier)
+//
 // BundleIdentifier calls the underlying BundleIdentifier.
 func (x *SystemExtensionInfo) BundleIdentifier() string {
 	_r := x.inner.BundleIdentifier()
@@ -45,6 +47,8 @@ func (x *SystemExtensionInfo) BundleIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief The bundle version of the extension (CFBundleVersion)
+//
 // BundleVersion calls the underlying BundleVersion.
 func (x *SystemExtensionInfo) BundleVersion() string {
 	_r := x.inner.BundleVersion()
@@ -54,6 +58,8 @@ func (x *SystemExtensionInfo) BundleVersion() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief The bundle short version string of the extension (CFBundleShortVersionString)
+//
 // BundleShortVersion calls the underlying BundleShortVersion.
 func (x *SystemExtensionInfo) BundleShortVersion() string {
 	_r := x.inner.BundleShortVersion()

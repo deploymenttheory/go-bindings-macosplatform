@@ -37,6 +37,8 @@ func NewMetricPlayerItemPlaybackSummaryEvent() *MetricPlayerItemPlaybackSummaryE
 	return &MetricPlayerItemPlaybackSummaryEvent{inner: raw.AVMetricPlayerItemPlaybackSummaryEventFromID(_id)}
 }
 
+// Returns the error event if any. If no value is available, returns nil.
+//
 // ErrorEvent calls the underlying ErrorEvent.
 func (x *MetricPlayerItemPlaybackSummaryEvent) ErrorEvent() *MetricErrorEvent {
 	_r := x.inner.ErrorEvent()
@@ -46,46 +48,64 @@ func (x *MetricPlayerItemPlaybackSummaryEvent) ErrorEvent() *MetricErrorEvent {
 	return &MetricErrorEvent{inner: _r}
 }
 
+// Returns the total count of recoverable errors encountered during playback. If no errors were encountered, returns 0.
+//
 // RecoverableErrorCount calls the underlying RecoverableErrorCount.
 func (x *MetricPlayerItemPlaybackSummaryEvent) RecoverableErrorCount() int {
 	return x.inner.RecoverableErrorCount()
 }
 
+// Returns the total count of stalls encountered during playback. If no stalls were encountered, returns 0.
+//
 // StallCount calls the underlying StallCount.
 func (x *MetricPlayerItemPlaybackSummaryEvent) StallCount() int {
 	return x.inner.StallCount()
 }
 
+// Returns the total count of variant switch encountered during playback.
+//
 // VariantSwitchCount calls the underlying VariantSwitchCount.
 func (x *MetricPlayerItemPlaybackSummaryEvent) VariantSwitchCount() int {
 	return x.inner.VariantSwitchCount()
 }
 
+// Returns the total duration of playback in seconds.
+//
 // PlaybackDuration calls the underlying PlaybackDuration.
 func (x *MetricPlayerItemPlaybackSummaryEvent) PlaybackDuration() int {
 	return x.inner.PlaybackDuration()
 }
 
+// Returns the total number of media requests performed by the player. This includes playlist requests, media segment requests, and content key requests.
+//
 // MediaResourceRequestCount calls the underlying MediaResourceRequestCount.
 func (x *MetricPlayerItemPlaybackSummaryEvent) MediaResourceRequestCount() int {
 	return x.inner.MediaResourceRequestCount()
 }
 
+// Returns the total time spent recovering from a stall event.
+//
 // TimeSpentRecoveringFromStall calls the underlying TimeSpentRecoveringFromStall.
 func (x *MetricPlayerItemPlaybackSummaryEvent) TimeSpentRecoveringFromStall() float64 {
 	return x.inner.TimeSpentRecoveringFromStall()
 }
 
+// Returns the total time spent in initial startup of playback.
+//
 // TimeSpentInInitialStartup calls the underlying TimeSpentInInitialStartup.
 func (x *MetricPlayerItemPlaybackSummaryEvent) TimeSpentInInitialStartup() float64 {
 	return x.inner.TimeSpentInInitialStartup()
 }
 
+// Returns the playtime weighted average bitrate played in bits / second.
+//
 // TimeWeightedAverageBitrate calls the underlying TimeWeightedAverageBitrate.
 func (x *MetricPlayerItemPlaybackSummaryEvent) TimeWeightedAverageBitrate() int {
 	return x.inner.TimeWeightedAverageBitrate()
 }
 
+// Returns the playtime weighted peak bitrate played in bits / second.
+//
 // TimeWeightedPeakBitrate calls the underlying TimeWeightedPeakBitrate.
 func (x *MetricPlayerItemPlaybackSummaryEvent) TimeWeightedPeakBitrate() int {
 	return x.inner.TimeWeightedPeakBitrate()

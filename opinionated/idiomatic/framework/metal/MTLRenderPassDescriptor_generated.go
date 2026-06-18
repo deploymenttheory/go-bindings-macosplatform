@@ -47,83 +47,111 @@ func (x *RenderPassDescriptor) WithStencilAttachment(stencilAttachment *RenderPa
 	return x
 }
 
+// @property visibilityResultBuffer: @abstract Buffer into which samples passing the depth and stencil tests are counted.
+//
 // WithVisibilityResultBuffer sets the visibilityResultBuffer property and returns the receiver for chaining.
 func (x *RenderPassDescriptor) WithVisibilityResultBuffer(visibilityResultBuffer raw.MTLBuffer) *RenderPassDescriptor {
 	x.inner.SetVisibilityResultBuffer(visibilityResultBuffer)
 	return x
 }
 
+// @property renderTargetArrayLength: @abstract The number of active layers
+//
 // WithRenderTargetArrayLength sets the renderTargetArrayLength property and returns the receiver for chaining.
 func (x *RenderPassDescriptor) WithRenderTargetArrayLength(renderTargetArrayLength uint) *RenderPassDescriptor {
 	x.inner.SetRenderTargetArrayLength(renderTargetArrayLength)
 	return x
 }
 
+// @property imageblockSampleLength: @abstract The per sample size in bytes of the largest explicit imageblock layout in the renderPass.
+//
 // WithImageblockSampleLength sets the imageblockSampleLength property and returns the receiver for chaining.
 func (x *RenderPassDescriptor) WithImageblockSampleLength(imageblockSampleLength uint) *RenderPassDescriptor {
 	x.inner.SetImageblockSampleLength(imageblockSampleLength)
 	return x
 }
 
+// @property threadgroupMemoryLength: @abstract The per tile size in bytes of the persistent threadgroup memory allocation.
+//
 // WithThreadgroupMemoryLength sets the threadgroupMemoryLength property and returns the receiver for chaining.
 func (x *RenderPassDescriptor) WithThreadgroupMemoryLength(threadgroupMemoryLength uint) *RenderPassDescriptor {
 	x.inner.SetThreadgroupMemoryLength(threadgroupMemoryLength)
 	return x
 }
 
+// @property tileWidth: @abstract The width in pixels of the tile. @discussion Defaults to 0. Zero means Metal chooses a width that fits within the local memory.
+//
 // WithTileWidth sets the tileWidth property and returns the receiver for chaining.
 func (x *RenderPassDescriptor) WithTileWidth(tileWidth uint) *RenderPassDescriptor {
 	x.inner.SetTileWidth(tileWidth)
 	return x
 }
 
+// @property tileHeight: @abstract The height in pixels of the tile. @discussion Defaults to 0. Zero means Metal chooses a height that fits within the local memory.
+//
 // WithTileHeight sets the tileHeight property and returns the receiver for chaining.
 func (x *RenderPassDescriptor) WithTileHeight(tileHeight uint) *RenderPassDescriptor {
 	x.inner.SetTileHeight(tileHeight)
 	return x
 }
 
+// @property defaultRasterSampleCount: @abstract The raster sample count for the render pass when no attachments are given.
+//
 // WithDefaultRasterSampleCount sets the defaultRasterSampleCount property and returns the receiver for chaining.
 func (x *RenderPassDescriptor) WithDefaultRasterSampleCount(defaultRasterSampleCount uint) *RenderPassDescriptor {
 	x.inner.SetDefaultRasterSampleCount(defaultRasterSampleCount)
 	return x
 }
 
+// @property renderTargetWidth: @abstract The width in pixels to constrain the render target to. @discussion Defaults to 0. If non-zero the value must be smaller than or equal to the minimum width of all attachments.
+//
 // WithRenderTargetWidth sets the renderTargetWidth property and returns the receiver for chaining.
 func (x *RenderPassDescriptor) WithRenderTargetWidth(renderTargetWidth uint) *RenderPassDescriptor {
 	x.inner.SetRenderTargetWidth(renderTargetWidth)
 	return x
 }
 
+// @property renderTargetHeight: @abstract The height in pixels to constrain the render target to. @discussion Defaults to 0. If non-zero the value must be smaller than or equal to the minimum height of all attachments.
+//
 // WithRenderTargetHeight sets the renderTargetHeight property and returns the receiver for chaining.
 func (x *RenderPassDescriptor) WithRenderTargetHeight(renderTargetHeight uint) *RenderPassDescriptor {
 	x.inner.SetRenderTargetHeight(renderTargetHeight)
 	return x
 }
 
+// @property rasterizationRateMap @abstract The variable rasterization rate map to use when rendering this pass, or nil to not use variable rasterization rate. @discussion The default value is nil. Enabling variable rasterization rate allows for decreasing the rasterization rate in unimportant regions of screen space.
+//
 // WithRasterizationRateMap sets the rasterizationRateMap property and returns the receiver for chaining.
 func (x *RenderPassDescriptor) WithRasterizationRateMap(rasterizationRateMap raw.MTLRasterizationRateMap) *RenderPassDescriptor {
 	x.inner.SetRasterizationRateMap(rasterizationRateMap)
 	return x
 }
 
+// Specifies if Metal accumulates visibility results between render encoders or resets them.
+//
 // WithVisibilityResultType sets the visibilityResultType property and returns the receiver for chaining.
 func (x *RenderPassDescriptor) WithVisibilityResultType(visibilityResultType MTLVisibilityResultType) *RenderPassDescriptor {
 	x.inner.SetVisibilityResultType(raw.MTLVisibilityResultType(visibilityResultType))
 	return x
 }
 
+// Specifies if the render pass should support color attachment mapping.
+//
 // WithSupportColorAttachmentMapping sets the supportColorAttachmentMapping property and returns the receiver for chaining.
 func (x *RenderPassDescriptor) WithSupportColorAttachmentMapping(supportColorAttachmentMapping bool) *RenderPassDescriptor {
 	x.inner.SetSupportColorAttachmentMapping(supportColorAttachmentMapping)
 	return x
 }
 
+// @method setSamplePositions:count: @abstract Configure the custom sample positions, to be used in MSAA rendering (i.e. when sample count > 1). @param positions The source array for custom sample position data. @param count Specifies the length of the positions array, and must be a valid sample count or 0 (to disable custom sample positions).
+//
 // SetSamplePositionsCount calls the underlying SetSamplePositionsCount.
 func (x *RenderPassDescriptor) SetSamplePositionsCount(positions *raw.MTLSamplePosition, count uint) {
 	x.inner.SetSamplePositionsCount(positions, count)
 }
 
+// @method getSamplePositions:count: @abstract Retrieve the previously configured custom sample positions. The positions input array will only be modified when count specifies a length sufficient for the number of previously configured positions. @param positions The destination array for custom sample position data. @param count Specifies the length of the positions array, which must be large enough to hold all configured sample positions. @return The number of previously configured custom sample positions.
+//
 // GetSamplePositionsCount calls the underlying GetSamplePositionsCount.
 func (x *RenderPassDescriptor) GetSamplePositionsCount(positions *raw.MTLSamplePosition, count uint) uint {
 	return x.inner.GetSamplePositionsCount(positions, count)
@@ -166,6 +194,8 @@ func (x *RenderPassDescriptor) SetStencilAttachment(stencilAttachment *raw.MTLRe
 	x.inner.SetStencilAttachment(stencilAttachment)
 }
 
+// @property visibilityResultBuffer: @abstract Buffer into which samples passing the depth and stencil tests are counted.
+//
 // VisibilityResultBuffer calls the underlying VisibilityResultBuffer.
 func (x *RenderPassDescriptor) VisibilityResultBuffer() raw.MTLBuffer {
 	return x.inner.VisibilityResultBuffer()
@@ -176,6 +206,8 @@ func (x *RenderPassDescriptor) SetVisibilityResultBuffer(visibilityResultBuffer 
 	x.inner.SetVisibilityResultBuffer(visibilityResultBuffer)
 }
 
+// @property renderTargetArrayLength: @abstract The number of active layers
+//
 // RenderTargetArrayLength calls the underlying RenderTargetArrayLength.
 func (x *RenderPassDescriptor) RenderTargetArrayLength() uint {
 	return x.inner.RenderTargetArrayLength()
@@ -186,6 +218,8 @@ func (x *RenderPassDescriptor) SetRenderTargetArrayLength(renderTargetArrayLengt
 	x.inner.SetRenderTargetArrayLength(renderTargetArrayLength)
 }
 
+// @property imageblockSampleLength: @abstract The per sample size in bytes of the largest explicit imageblock layout in the renderPass.
+//
 // ImageblockSampleLength calls the underlying ImageblockSampleLength.
 func (x *RenderPassDescriptor) ImageblockSampleLength() uint {
 	return x.inner.ImageblockSampleLength()
@@ -196,6 +230,8 @@ func (x *RenderPassDescriptor) SetImageblockSampleLength(imageblockSampleLength 
 	x.inner.SetImageblockSampleLength(imageblockSampleLength)
 }
 
+// @property threadgroupMemoryLength: @abstract The per tile size in bytes of the persistent threadgroup memory allocation.
+//
 // ThreadgroupMemoryLength calls the underlying ThreadgroupMemoryLength.
 func (x *RenderPassDescriptor) ThreadgroupMemoryLength() uint {
 	return x.inner.ThreadgroupMemoryLength()
@@ -206,6 +242,8 @@ func (x *RenderPassDescriptor) SetThreadgroupMemoryLength(threadgroupMemoryLengt
 	x.inner.SetThreadgroupMemoryLength(threadgroupMemoryLength)
 }
 
+// @property tileWidth: @abstract The width in pixels of the tile. @discussion Defaults to 0. Zero means Metal chooses a width that fits within the local memory.
+//
 // TileWidth calls the underlying TileWidth.
 func (x *RenderPassDescriptor) TileWidth() uint {
 	return x.inner.TileWidth()
@@ -216,6 +254,8 @@ func (x *RenderPassDescriptor) SetTileWidth(tileWidth uint) {
 	x.inner.SetTileWidth(tileWidth)
 }
 
+// @property tileHeight: @abstract The height in pixels of the tile. @discussion Defaults to 0. Zero means Metal chooses a height that fits within the local memory.
+//
 // TileHeight calls the underlying TileHeight.
 func (x *RenderPassDescriptor) TileHeight() uint {
 	return x.inner.TileHeight()
@@ -226,6 +266,8 @@ func (x *RenderPassDescriptor) SetTileHeight(tileHeight uint) {
 	x.inner.SetTileHeight(tileHeight)
 }
 
+// @property defaultRasterSampleCount: @abstract The raster sample count for the render pass when no attachments are given.
+//
 // DefaultRasterSampleCount calls the underlying DefaultRasterSampleCount.
 func (x *RenderPassDescriptor) DefaultRasterSampleCount() uint {
 	return x.inner.DefaultRasterSampleCount()
@@ -236,6 +278,8 @@ func (x *RenderPassDescriptor) SetDefaultRasterSampleCount(defaultRasterSampleCo
 	x.inner.SetDefaultRasterSampleCount(defaultRasterSampleCount)
 }
 
+// @property renderTargetWidth: @abstract The width in pixels to constrain the render target to. @discussion Defaults to 0. If non-zero the value must be smaller than or equal to the minimum width of all attachments.
+//
 // RenderTargetWidth calls the underlying RenderTargetWidth.
 func (x *RenderPassDescriptor) RenderTargetWidth() uint {
 	return x.inner.RenderTargetWidth()
@@ -246,6 +290,8 @@ func (x *RenderPassDescriptor) SetRenderTargetWidth(renderTargetWidth uint) {
 	x.inner.SetRenderTargetWidth(renderTargetWidth)
 }
 
+// @property renderTargetHeight: @abstract The height in pixels to constrain the render target to. @discussion Defaults to 0. If non-zero the value must be smaller than or equal to the minimum height of all attachments.
+//
 // RenderTargetHeight calls the underlying RenderTargetHeight.
 func (x *RenderPassDescriptor) RenderTargetHeight() uint {
 	return x.inner.RenderTargetHeight()
@@ -256,6 +302,8 @@ func (x *RenderPassDescriptor) SetRenderTargetHeight(renderTargetHeight uint) {
 	x.inner.SetRenderTargetHeight(renderTargetHeight)
 }
 
+// @property rasterizationRateMap @abstract The variable rasterization rate map to use when rendering this pass, or nil to not use variable rasterization rate. @discussion The default value is nil. Enabling variable rasterization rate allows for decreasing the rasterization rate in unimportant regions of screen space.
+//
 // RasterizationRateMap calls the underlying RasterizationRateMap.
 func (x *RenderPassDescriptor) RasterizationRateMap() raw.MTLRasterizationRateMap {
 	return x.inner.RasterizationRateMap()
@@ -266,6 +314,8 @@ func (x *RenderPassDescriptor) SetRasterizationRateMap(rasterizationRateMap raw.
 	x.inner.SetRasterizationRateMap(rasterizationRateMap)
 }
 
+// @property sampleBufferAttachments @abstract An array of sample buffers and associated sample indices.
+//
 // SampleBufferAttachments calls the underlying SampleBufferAttachments.
 func (x *RenderPassDescriptor) SampleBufferAttachments() *RenderPassSampleBufferAttachmentDescriptorArray {
 	_r := x.inner.SampleBufferAttachments()
@@ -275,6 +325,8 @@ func (x *RenderPassDescriptor) SampleBufferAttachments() *RenderPassSampleBuffer
 	return &RenderPassSampleBufferAttachmentDescriptorArray{inner: _r}
 }
 
+// Specifies if Metal accumulates visibility results between render encoders or resets them.
+//
 // VisibilityResultType calls the underlying VisibilityResultType.
 func (x *RenderPassDescriptor) VisibilityResultType() MTLVisibilityResultType {
 	return MTLVisibilityResultType(x.inner.VisibilityResultType())
@@ -285,6 +337,8 @@ func (x *RenderPassDescriptor) SetVisibilityResultType(visibilityResultType MTLV
 	x.inner.SetVisibilityResultType(raw.MTLVisibilityResultType(visibilityResultType))
 }
 
+// Specifies if the render pass should support color attachment mapping.
+//
 // SupportColorAttachmentMapping calls the underlying SupportColorAttachmentMapping.
 func (x *RenderPassDescriptor) SupportColorAttachmentMapping() bool {
 	return x.inner.SupportColorAttachmentMapping()

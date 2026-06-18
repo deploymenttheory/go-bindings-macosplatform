@@ -36,54 +36,72 @@ func NewAVB17221AECPVendorMessage() *AVB17221AECPVendorMessage {
 	return &AVB17221AECPVendorMessage{inner: raw.AVB17221AECPVendorMessageFromID(_id)}
 }
 
+// @property	protocolID @abstract	The protocol_id field of the AECP Vendor Unique message.
+//
 // WithProtocolID sets the protocolID property and returns the receiver for chaining.
 func (x *AVB17221AECPVendorMessage) WithProtocolID(protocolID uint64) *AVB17221AECPVendorMessage {
 	x.inner.SetProtocolID(protocolID)
 	return x
 }
 
+// @property	protocolSpecificData @abstract	The protocol_specific_data field of the AECP Vendor Unique message.
+//
 // WithProtocolSpecificData sets the protocolSpecificData property and returns the receiver for chaining.
 func (x *AVB17221AECPVendorMessage) WithProtocolSpecificData(protocolSpecificData *foundation.NSData) *AVB17221AECPVendorMessage {
 	x.inner.SetProtocolSpecificData(protocolSpecificData)
 	return x
 }
 
+// @property	messageType @abstract	The message_type field of the AECP message.
+//
 // WithMessageType sets the messageType property and returns the receiver for chaining.
 func (x *AVB17221AECPVendorMessage) WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPVendorMessage {
 	x.inner.AVB17221AECPMessage.SetMessageType(raw.AVB17221AECPMessageType(messageType))
 	return x
 }
 
+// @property	status @abstract	The status field of the AECP message.
+//
 // WithStatus sets the status property and returns the receiver for chaining.
 func (x *AVB17221AECPVendorMessage) WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPVendorMessage {
 	x.inner.AVB17221AECPMessage.SetStatus(raw.AVB17221AECPStatusCode(status))
 	return x
 }
 
+// @property	targetEntityID @abstract	The target_entity_id field of the AECP message.
+//
 // WithTargetEntityID sets the targetEntityID property and returns the receiver for chaining.
 func (x *AVB17221AECPVendorMessage) WithTargetEntityID(targetEntityID uint64) *AVB17221AECPVendorMessage {
 	x.inner.AVB17221AECPMessage.SetTargetEntityID(targetEntityID)
 	return x
 }
 
+// @property	controllerEntityID @abstract	The controller_entity_id field of the AECP message.
+//
 // WithControllerEntityID sets the controllerEntityID property and returns the receiver for chaining.
 func (x *AVB17221AECPVendorMessage) WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPVendorMessage {
 	x.inner.AVB17221AECPMessage.SetControllerEntityID(controllerEntityID)
 	return x
 }
 
+// @property	sequenceID @abstract	The sequence_id field of the AECP message.
+//
 // WithSequenceID sets the sequenceID property and returns the receiver for chaining.
 func (x *AVB17221AECPVendorMessage) WithSequenceID(sequenceID uint16) *AVB17221AECPVendorMessage {
 	x.inner.AVB17221AECPMessage.SetSequenceID(sequenceID)
 	return x
 }
 
+// @property	sourceMAC @abstract	The source_mac field of the AECP message.
+//
 // WithSourceMAC sets the sourceMAC property and returns the receiver for chaining.
 func (x *AVB17221AECPVendorMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPVendorMessage {
 	x.inner.AVB17221AECPMessage.SetSourceMAC(sourceMAC.Unwrap())
 	return x
 }
 
+// @property	protocolID @abstract	The protocol_id field of the AECP Vendor Unique message.
+//
 // ProtocolID calls the underlying ProtocolID.
 func (x *AVB17221AECPVendorMessage) ProtocolID() uint64 {
 	return x.inner.ProtocolID()
@@ -94,6 +112,8 @@ func (x *AVB17221AECPVendorMessage) SetProtocolID(protocolID uint64) {
 	x.inner.SetProtocolID(protocolID)
 }
 
+// @property	protocolSpecificData @abstract	The protocol_specific_data field of the AECP Vendor Unique message.
+//
 // ProtocolSpecificData calls the underlying ProtocolSpecificData.
 func (x *AVB17221AECPVendorMessage) ProtocolSpecificData() *foundation.NSData {
 	return x.inner.ProtocolSpecificData()

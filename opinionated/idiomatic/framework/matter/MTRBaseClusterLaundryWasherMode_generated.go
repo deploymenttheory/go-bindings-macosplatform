@@ -35,6 +35,8 @@ func MTRBaseClusterLaundryWasherModeFromID(id objc.ID) *MTRBaseClusterLaundryWas
 	return &MTRBaseClusterLaundryWasherMode{inner: raw.MTRBaseClusterLaundryWasherModeFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterLaundryWasherModeWithDeviceEndpointIDQueue creates a new [MTRBaseClusterLaundryWasherMode].
 func NewMTRBaseClusterLaundryWasherModeWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterLaundryWasherMode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterLaundryWasherMode")), objc.RegisterName("alloc"))
@@ -42,6 +44,8 @@ func NewMTRBaseClusterLaundryWasherModeWithDeviceEndpointIDQueue(device *raw.MTR
 	return &MTRBaseClusterLaundryWasherMode{inner: raw.MTRBaseClusterLaundryWasherModeFromID(_id)}
 }
 
+// Command ChangeToMode This command is used to change device modes. On receipt of this command the device SHALL respond with a ChangeToModeResponse command.
+//
 // ChangeToModeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterLaundryWasherMode) ChangeToModeWithParamsCompletion(ctx context.Context, params *raw.MTRLaundryWasherModeClusterChangeToModeParams) (*MTRLaundryWasherModeClusterChangeToModeResponseParams, error) {
 	type _result struct {

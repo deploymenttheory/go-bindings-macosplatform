@@ -37,6 +37,8 @@ func NewBrailleTranslatorWithBrailleTable(brailleTable *raw.AXBrailleTable) *Bra
 	return &BrailleTranslator{inner: raw.AXBrailleTranslatorFromID(_id)}
 }
 
+// Output Braille uses the unicode Braille characters (0x2800-0x28FF).
+//
 // TranslatePrintText calls the underlying TranslatePrintText.
 func (x *BrailleTranslator) TranslatePrintText(printText string) *BrailleTranslationResult {
 	_r := x.inner.TranslatePrintText(foundation.NSStringStringWithUTF8String(printText))
@@ -46,6 +48,8 @@ func (x *BrailleTranslator) TranslatePrintText(printText string) *BrailleTransla
 	return &BrailleTranslationResult{inner: _r}
 }
 
+// Input Braille should use the unicode Braille characters (0x2800-0x28FF).
+//
 // BackTranslateBraille calls the underlying BackTranslateBraille.
 func (x *BrailleTranslator) BackTranslateBraille(braille string) *BrailleTranslationResult {
 	_r := x.inner.BackTranslateBraille(foundation.NSStringStringWithUTF8String(braille))

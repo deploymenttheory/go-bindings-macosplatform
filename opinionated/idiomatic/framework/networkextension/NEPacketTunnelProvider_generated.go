@@ -39,12 +39,16 @@ func NewNEPacketTunnelProvider() *NEPacketTunnelProvider {
 	return &NEPacketTunnelProvider{inner: raw.NEPacketTunnelProviderFromID(_id)}
 }
 
+// @property reasserting @discussion A flag that indicates to the framework if this NETunnelProvider is currently re-establishing the tunnel. Setting this flag will cause the session status visible to the user to change to "Reasserting". Clearing this flag will change the user-visible status of the session back to "Connected". Setting and clearing this flag only has an effect if the session is in the "Connected" state.
+//
 // WithReasserting sets the reasserting property and returns the receiver for chaining.
 func (x *NEPacketTunnelProvider) WithReasserting(reasserting bool) *NEPacketTunnelProvider {
 	x.inner.NETunnelProvider.SetReasserting(reasserting)
 	return x
 }
 
+// @method startTunnelWithOptions:completionHandler: @discussion This function is called by the framework when a new tunnel is being created. Subclasses must override this method to perform whatever steps are necessary to establish the tunnel. @param options A dictionary containing keys and values passed by the provider's containing app. If the containing app did not start the tunnel then this parameter will be nil. @param completionHandler A block that must be called when the process of starting the tunnel is complete. If the tunnel cannot be established then the subclass' implementation of this method must pass a non-nil NSError object to this block. A value of nil passed to the completion handler indicates that the tunnel was successfully established.
+//
 // StartTunnelWithOptions blocks until the operation completes or ctx is cancelled.
 func (x *NEPacketTunnelProvider) StartTunnelWithOptions(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) error {
 	_ch := make(chan error, 1)
@@ -63,6 +67,8 @@ func (x *NEPacketTunnelProvider) StartTunnelWithOptions(ctx context.Context, opt
 	}
 }
 
+// @method stopTunnelWithReason:completionHandler: @discussion This function is called by the framework when the tunnel is being destroyed. Subclasses must override this method to perform whatever steps are necessary to tear down the tunnel. @param reason An NEProviderStopReason indicating why the tunnel is being stopped. @param completionHandler A block that must be called when the tunnel is completely torn down.
+//
 // StopTunnelWithReason blocks until the operation completes or ctx is cancelled.
 func (x *NEPacketTunnelProvider) StopTunnelWithReason(ctx context.Context, reason NEProviderStopReason) error {
 	_ch := make(chan error, 1)
@@ -77,11 +83,15 @@ func (x *NEPacketTunnelProvider) StopTunnelWithReason(ctx context.Context, reaso
 	}
 }
 
+// @method cancelTunnelWithError: @discussion This function is called by tunnel provider implementations to initiate tunnel destruction when a network error is encountered that renders the tunnel no longer viable. Subclasses should not override this method. @param error An NSError object containing details about the error that the tunnel provider implementation encountered.
+//
 // CancelTunnelWithError calls the underlying CancelTunnelWithError.
 func (x *NEPacketTunnelProvider) CancelTunnelWithError(error_ unsafe.Pointer) {
 	x.inner.CancelTunnelWithError(error_)
 }
 
+// @method createTCPConnectionThroughTunnelToEndpoint:enableTLS:TLSParameters:delegate: @discussion This function can be called by subclass implementations to create a TCP connection to a given network endpoint, through the tunnel established by the provider. This function should not be overridden by subclasses. @param remoteEndpoint An NWEndpoint object that specifies the remote network endpoint to connect to. @param enableTLS A flag indicating if a TLS session should be negotiated on the connection. @param TLSParameters A set of optional TLS parameters. Only valid if enableTLS is YES. If TLSParameters is nil, the default system parameters will be used for TLS negotiation. @param delegate An object to use as the connection delegate. This object should conform to the NWTCPConnectionAuthenticationDelegate protocol. @return An NWTCPConnection object.
+//
 // CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate calls the underlying CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate.
 func (x *NEPacketTunnelProvider) CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *raw.NWTLSParameters, delegate objc.ID) *NWTCPConnection {
 	_r := x.inner.CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint, enableTLS, tLSParameters, delegate)
@@ -91,6 +101,8 @@ func (x *NEPacketTunnelProvider) CreateTCPConnectionThroughTunnelToEndpointEnabl
 	return &NWTCPConnection{inner: _r}
 }
 
+// @method createUDPSessionThroughTunnelToEndpoint:fromEndpoint: @discussion This function can be called by subclass implementations to create a UDP session between a local network endpoint and a remote network endpoint, through the tunnel established by the provider. This function should not be overridden by subclasses. @param remoteEndpoint An NWEndpoint object that specifies the remote endpoint to which UDP datagrams will be sent by the UDP session. @param localEndpoint An NWHostEndpoint object that specifies the local IP address endpoint to use as the source endpoint of the UDP session. @return An NWUDPSession object.
+//
 // CreateUDPSessionThroughTunnelToEndpointFromEndpoint calls the underlying CreateUDPSessionThroughTunnelToEndpointFromEndpoint.
 func (x *NEPacketTunnelProvider) CreateUDPSessionThroughTunnelToEndpointFromEndpoint(remoteEndpoint unsafe.Pointer, localEndpoint *raw.NWHostEndpoint) *NWUDPSession {
 	_r := x.inner.CreateUDPSessionThroughTunnelToEndpointFromEndpoint(remoteEndpoint, localEndpoint)
@@ -100,6 +112,8 @@ func (x *NEPacketTunnelProvider) CreateUDPSessionThroughTunnelToEndpointFromEndp
 	return &NWUDPSession{inner: _r}
 }
 
+// @property packetFlow @discussion An NEPacketFlow object that the tunnel provider implementation should use to receive packets from the network stack and inject packets into the network stack. Every time the tunnel is started the packet flow object is in an initialized state and must be explicitly opened before any packets can be received or injected.
+//
 // PacketFlow calls the underlying PacketFlow.
 func (x *NEPacketTunnelProvider) PacketFlow() *NEPacketTunnelFlow {
 	_r := x.inner.PacketFlow()
@@ -109,6 +123,8 @@ func (x *NEPacketTunnelProvider) PacketFlow() *NEPacketTunnelFlow {
 	return &NEPacketTunnelFlow{inner: _r}
 }
 
+// @property virtualInterface @abstract The virtual network interface used to route packets to the packet tunnel provider. @discussion For NEPacketTunnelProvider sub-classes, this property will be non-nil when `-[NEPacketTunnelProvider startTunnelWithOptions:completionHandler:]` is called. For NEEthernetTunnelProvider sub-classes, this property will be non-nil when the completion handler passed to `-[NETunnelProvider setTunnelNetworkSettings:completionHandler:]` is executed. To create a connection through the tunnel, pass this interface to `nw_parameters_require_interface`.
+//
 // VirtualInterface calls the underlying VirtualInterface.
 func (x *NEPacketTunnelProvider) VirtualInterface() *foundation.NSObject {
 	return x.inner.VirtualInterface()

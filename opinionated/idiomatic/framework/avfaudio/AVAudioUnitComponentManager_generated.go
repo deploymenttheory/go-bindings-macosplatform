@@ -37,21 +37,29 @@ func NewAudioUnitComponentManager() *AudioUnitComponentManager {
 	return &AudioUnitComponentManager{inner: raw.AVAudioUnitComponentManagerFromID(_id)}
 }
 
+// @method componentsMatchingPredicate: @abstract	returns an array of AVAudioUnitComponent objects that match the search predicate. @discussion AudioComponent's information or tags can be used to build a search criteria. For example, "typeName CONTAINS 'Effect'" or tags IN {'Sampler', 'MIDI'}"
+//
 // ComponentsMatchingPredicate calls the underlying ComponentsMatchingPredicate.
 func (x *AudioUnitComponentManager) ComponentsMatchingPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[*raw.AVAudioUnitComponent] {
 	return x.inner.ComponentsMatchingPredicate(predicate)
 }
 
+// @method componentsPassingTest: @abstract	returns an array of AVAudioUnitComponent objects that pass the user provided block method. @discussion For each AudioComponent found by the manager, the block method will be called. If the return value is YES then the AudioComponent is added to the resulting array else it will excluded. This gives more control to the block provider to filter out the components returned.
+//
 // ComponentsPassingTest calls the underlying ComponentsPassingTest.
 func (x *AudioUnitComponentManager) ComponentsPassingTest(testHandler func(*raw.AVAudioUnitComponent, *bool) bool) *foundation.NSArray[*raw.AVAudioUnitComponent] {
 	return x.inner.ComponentsPassingTest(testHandler)
 }
 
+// @method componentsMatchingDescription: @abstract	returns an array of AVAudioUnitComponent objects that match the description. @discussion This method provides a mechanism to search for AudioComponents using AudioComponentDescription structure. The type, subtype and manufacturer fields are used to search for audio units. A value of 0 for any of these fields is a wildcard and returns the first match found.
+//
 // ComponentsMatchingDescription calls the underlying ComponentsMatchingDescription.
 func (x *AudioUnitComponentManager) ComponentsMatchingDescription(desc objc.ID) *foundation.NSArray[*raw.AVAudioUnitComponent] {
 	return x.inner.ComponentsMatchingDescription(desc)
 }
 
+// @discussion returns all tags associated with the current user as well as all system tags defined by the audio unit(s).
+//
 // TagNames returns the collection as a Go slice.
 func (x *AudioUnitComponentManager) TagNames() []string {
 	arr := x.inner.TagNames()

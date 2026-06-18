@@ -38,28 +38,38 @@ func NewWritingToolsCoordinatorAnimationParameters() *WritingToolsCoordinatorAni
 	return &WritingToolsCoordinatorAnimationParameters{inner: raw.NSWritingToolsCoordinatorAnimationParametersFromID(_id)}
 }
 
+// A custom block that runs at the same time as the system animations. If you have animations you want to run at the same time as the system animations, assign a block to this property and use it to run your animations. The block you provide must have no return value and take a floating-point value as a parameter. The parameter indicates the current progress of the animations as a percentage value between `0.0` to `1.0`. The system executes your block multiple times during the course of the animations, providing an updated completion value each time.
+//
 // WithProgressHandler sets the progressHandler property and returns the receiver for chaining.
 func (x *WritingToolsCoordinatorAnimationParameters) WithProgressHandler(progressHandler func(float32)) *WritingToolsCoordinatorAnimationParameters {
 	x.inner.SetProgressHandler(progressHandler)
 	return x
 }
 
+// A custom block to run when the system animations finish. Set this property to a block that you want the system to run when any animations finish. The block you provide must have no return value and no parameters. The system executes this block once when the current animation finish.
+//
 // WithCompletionHandler sets the completionHandler property and returns the receiver for chaining.
 func (x *WritingToolsCoordinatorAnimationParameters) WithCompletionHandler(completionHandler func()) *WritingToolsCoordinatorAnimationParameters {
 	x.inner.SetCompletionHandler(completionHandler)
 	return x
 }
 
+// The number of seconds it takes the system animations to run.
+//
 // Duration calls the underlying Duration.
 func (x *WritingToolsCoordinatorAnimationParameters) Duration() float64 {
 	return x.inner.Duration()
 }
 
+// The number of seconds the system waits before starting its animations.
+//
 // Delay calls the underlying Delay.
 func (x *WritingToolsCoordinatorAnimationParameters) Delay() float64 {
 	return x.inner.Delay()
 }
 
+// A custom block that runs at the same time as the system animations. If you have animations you want to run at the same time as the system animations, assign a block to this property and use it to run your animations. The block you provide must have no return value and take a floating-point value as a parameter. The parameter indicates the current progress of the animations as a percentage value between `0.0` to `1.0`. The system executes your block multiple times during the course of the animations, providing an updated completion value each time.
+//
 // ProgressHandler calls the underlying ProgressHandler.
 func (x *WritingToolsCoordinatorAnimationParameters) ProgressHandler() objc.Block {
 	return x.inner.ProgressHandler()
@@ -70,6 +80,8 @@ func (x *WritingToolsCoordinatorAnimationParameters) SetProgressHandler(progress
 	x.inner.SetProgressHandler(progressHandler)
 }
 
+// A custom block to run when the system animations finish. Set this property to a block that you want the system to run when any animations finish. The block you provide must have no return value and no parameters. The system executes this block once when the current animation finish.
+//
 // CompletionHandler calls the underlying CompletionHandler.
 func (x *WritingToolsCoordinatorAnimationParameters) CompletionHandler() objc.Block {
 	return x.inner.CompletionHandler()

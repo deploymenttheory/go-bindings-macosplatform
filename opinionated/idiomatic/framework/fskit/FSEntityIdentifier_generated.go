@@ -36,6 +36,8 @@ func NewEntityIdentifier() *EntityIdentifier {
 	return &EntityIdentifier{inner: raw.FSEntityIdentifierFromID(_id)}
 }
 
+// Creates an entity identifier with the given UUID. - Parameter uuid: The UUID to use for this identifier.
+//
 // NewEntityIdentifierWithUUID creates a new [EntityIdentifier].
 func NewEntityIdentifierWithUUID(uuid *foundation.NSUUID) *EntityIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSEntityIdentifier")), objc.RegisterName("alloc"))
@@ -43,6 +45,8 @@ func NewEntityIdentifierWithUUID(uuid *foundation.NSUUID) *EntityIdentifier {
 	return &EntityIdentifier{inner: raw.FSEntityIdentifierFromID(_id)}
 }
 
+// Creates an entity identifier with the given UUID and qualifier data as a 64-bit unsigned integer. - Parameters: - uuid: The UUID to use for this identifier. - qualifier: The data to distinguish entities that otherwise share the same UUID.
+//
 // NewEntityIdentifierWithUUIDQualifier creates a new [EntityIdentifier].
 func NewEntityIdentifierWithUUIDQualifier(uuid *foundation.NSUUID, qualifier uint64) *EntityIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSEntityIdentifier")), objc.RegisterName("alloc"))
@@ -50,6 +54,8 @@ func NewEntityIdentifierWithUUIDQualifier(uuid *foundation.NSUUID, qualifier uin
 	return &EntityIdentifier{inner: raw.FSEntityIdentifierFromID(_id)}
 }
 
+// Creates an entity identifier with the given UUID and qualifier data. - Parameters: - uuid: The UUID to use for this identifier. - qualifierData: The data to distinguish entities that otherwise share the same UUID.
+//
 // NewEntityIdentifierWithUUIDData creates a new [EntityIdentifier].
 func NewEntityIdentifierWithUUIDData(uuid *foundation.NSUUID, qualifierData *foundation.NSData) *EntityIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSEntityIdentifier")), objc.RegisterName("alloc"))
@@ -57,18 +63,24 @@ func NewEntityIdentifierWithUUIDData(uuid *foundation.NSUUID, qualifierData *fou
 	return &EntityIdentifier{inner: raw.FSEntityIdentifierFromID(_id)}
 }
 
+// A UUID to uniquely identify this entity.
+//
 // WithUuid sets the uuid property and returns the receiver for chaining.
 func (x *EntityIdentifier) WithUuid(uuid *foundation.NSUUID) *EntityIdentifier {
 	x.inner.SetUuid(uuid)
 	return x
 }
 
+// An optional piece of data to distinguish entities that otherwise share the same UUID.
+//
 // WithQualifier sets the qualifier property and returns the receiver for chaining.
 func (x *EntityIdentifier) WithQualifier(qualifier *foundation.NSData) *EntityIdentifier {
 	x.inner.SetQualifier(qualifier)
 	return x
 }
 
+// A UUID to uniquely identify this entity.
+//
 // Uuid calls the underlying Uuid.
 func (x *EntityIdentifier) Uuid() *foundation.NSUUID {
 	return x.inner.Uuid()
@@ -79,6 +91,8 @@ func (x *EntityIdentifier) SetUuid(uuid *foundation.NSUUID) {
 	x.inner.SetUuid(uuid)
 }
 
+// An optional piece of data to distinguish entities that otherwise share the same UUID.
+//
 // Qualifier calls the underlying Qualifier.
 func (x *EntityIdentifier) Qualifier() *foundation.NSData {
 	return x.inner.Qualifier()

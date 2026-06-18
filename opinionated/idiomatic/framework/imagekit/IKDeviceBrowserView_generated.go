@@ -36,42 +36,56 @@ func NewDeviceBrowserView() *DeviceBrowserView {
 	return &DeviceBrowserView{inner: raw.IKDeviceBrowserViewFromID(_id)}
 }
 
+// @property delegate @abstract delegate of the IKDeviceBrowserView.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *DeviceBrowserView) WithDelegate(delegate raw.IKDeviceBrowserViewDelegate) *DeviceBrowserView {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @property displaysLocalCameras @abstract for device filtering - indicates that the IKDeviceBrowserView should include local cameras.
+//
 // WithDisplaysLocalCameras sets the displaysLocalCameras property and returns the receiver for chaining.
 func (x *DeviceBrowserView) WithDisplaysLocalCameras(displaysLocalCameras bool) *DeviceBrowserView {
 	x.inner.SetDisplaysLocalCameras(displaysLocalCameras)
 	return x
 }
 
+// @property displaysNetworkCameras @abstract for device filtering - indicates that the IKDeviceBrowserView should include network/shared cameras.
+//
 // WithDisplaysNetworkCameras sets the displaysNetworkCameras property and returns the receiver for chaining.
 func (x *DeviceBrowserView) WithDisplaysNetworkCameras(displaysNetworkCameras bool) *DeviceBrowserView {
 	x.inner.SetDisplaysNetworkCameras(displaysNetworkCameras)
 	return x
 }
 
+// @property displaysLocalScanners @abstract for device filtering - indicates that the IKDeviceBrowserView should include local scanners.
+//
 // WithDisplaysLocalScanners sets the displaysLocalScanners property and returns the receiver for chaining.
 func (x *DeviceBrowserView) WithDisplaysLocalScanners(displaysLocalScanners bool) *DeviceBrowserView {
 	x.inner.SetDisplaysLocalScanners(displaysLocalScanners)
 	return x
 }
 
+// @property displaysNetworkScanners @abstract for device filtering - indicates that the IKDeviceBrowserView should include network/shared scanners.
+//
 // WithDisplaysNetworkScanners sets the displaysNetworkScanners property and returns the receiver for chaining.
 func (x *DeviceBrowserView) WithDisplaysNetworkScanners(displaysNetworkScanners bool) *DeviceBrowserView {
 	x.inner.SetDisplaysNetworkScanners(displaysNetworkScanners)
 	return x
 }
 
+// @property mode @abstract one of the supported display modes (table, outline, or icon mode).
+//
 // WithMode sets the mode property and returns the receiver for chaining.
 func (x *DeviceBrowserView) WithMode(mode IKDeviceBrowserViewDisplayMode) *DeviceBrowserView {
 	x.inner.SetMode(raw.IKDeviceBrowserViewDisplayMode(mode))
 	return x
 }
 
+// @property delegate @abstract delegate of the IKDeviceBrowserView.
+//
 // Delegate calls the underlying Delegate.
 func (x *DeviceBrowserView) Delegate() raw.IKDeviceBrowserViewDelegate {
 	return x.inner.Delegate()
@@ -82,6 +96,8 @@ func (x *DeviceBrowserView) SetDelegate(delegate raw.IKDeviceBrowserViewDelegate
 	x.inner.SetDelegate(delegate)
 }
 
+// @property displaysLocalCameras @abstract for device filtering - indicates that the IKDeviceBrowserView should include local cameras.
+//
 // DisplaysLocalCameras calls the underlying DisplaysLocalCameras.
 func (x *DeviceBrowserView) DisplaysLocalCameras() bool {
 	return x.inner.DisplaysLocalCameras()
@@ -92,6 +108,8 @@ func (x *DeviceBrowserView) SetDisplaysLocalCameras(displaysLocalCameras bool) {
 	x.inner.SetDisplaysLocalCameras(displaysLocalCameras)
 }
 
+// @property displaysNetworkCameras @abstract for device filtering - indicates that the IKDeviceBrowserView should include network/shared cameras.
+//
 // DisplaysNetworkCameras calls the underlying DisplaysNetworkCameras.
 func (x *DeviceBrowserView) DisplaysNetworkCameras() bool {
 	return x.inner.DisplaysNetworkCameras()
@@ -102,6 +120,8 @@ func (x *DeviceBrowserView) SetDisplaysNetworkCameras(displaysNetworkCameras boo
 	x.inner.SetDisplaysNetworkCameras(displaysNetworkCameras)
 }
 
+// @property displaysLocalScanners @abstract for device filtering - indicates that the IKDeviceBrowserView should include local scanners.
+//
 // DisplaysLocalScanners calls the underlying DisplaysLocalScanners.
 func (x *DeviceBrowserView) DisplaysLocalScanners() bool {
 	return x.inner.DisplaysLocalScanners()
@@ -112,6 +132,8 @@ func (x *DeviceBrowserView) SetDisplaysLocalScanners(displaysLocalScanners bool)
 	x.inner.SetDisplaysLocalScanners(displaysLocalScanners)
 }
 
+// @property displaysNetworkScanners @abstract for device filtering - indicates that the IKDeviceBrowserView should include network/shared scanners.
+//
 // DisplaysNetworkScanners calls the underlying DisplaysNetworkScanners.
 func (x *DeviceBrowserView) DisplaysNetworkScanners() bool {
 	return x.inner.DisplaysNetworkScanners()
@@ -122,6 +144,8 @@ func (x *DeviceBrowserView) SetDisplaysNetworkScanners(displaysNetworkScanners b
 	x.inner.SetDisplaysNetworkScanners(displaysNetworkScanners)
 }
 
+// @property mode @abstract one of the supported display modes (table, outline, or icon mode).
+//
 // Mode calls the underlying Mode.
 func (x *DeviceBrowserView) Mode() IKDeviceBrowserViewDisplayMode {
 	return IKDeviceBrowserViewDisplayMode(x.inner.Mode())
@@ -132,6 +156,8 @@ func (x *DeviceBrowserView) SetMode(mode IKDeviceBrowserViewDisplayMode) {
 	x.inner.SetMode(raw.IKDeviceBrowserViewDisplayMode(mode))
 }
 
+// @property selectedDevice @abstract user selected device (ICCameraDevice or ICScannerDevice).
+//
 // SelectedDevice calls the underlying SelectedDevice.
 func (x *DeviceBrowserView) SelectedDevice() *imagecapturecore.ICDevice {
 	return x.inner.SelectedDevice()

@@ -33,6 +33,8 @@ func MTRBaseClusterTargetNavigatorFromID(id objc.ID) *MTRBaseClusterTargetNaviga
 	return &MTRBaseClusterTargetNavigator{inner: raw.MTRBaseClusterTargetNavigatorFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterTargetNavigatorWithDeviceEndpointIDQueue creates a new [MTRBaseClusterTargetNavigator].
 func NewMTRBaseClusterTargetNavigatorWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterTargetNavigator {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterTargetNavigator")), objc.RegisterName("alloc"))
@@ -47,6 +49,8 @@ func NewMTRBaseClusterTargetNavigatorWithDeviceEndpointQueue(device *raw.MTRBase
 	return &MTRBaseClusterTargetNavigator{inner: raw.MTRBaseClusterTargetNavigatorFromID(_id)}
 }
 
+// Command NavigateTarget Upon receipt, this SHALL navigation the UX to the target identified.
+//
 // NavigateTargetWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterTargetNavigator) NavigateTargetWithParamsCompletion(ctx context.Context, params *raw.MTRTargetNavigatorClusterNavigateTargetParams) (*MTRTargetNavigatorClusterNavigateTargetResponseParams, error) {
 	type _result struct {

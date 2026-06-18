@@ -35,6 +35,8 @@ func NewRecordZoneNotification() *RecordZoneNotification {
 	return &RecordZoneNotification{inner: raw.CKRecordZoneNotificationFromID(_id)}
 }
 
+// The ID of the record zone that has changes.
+//
 // RecordZoneID calls the underlying RecordZoneID.
 func (x *RecordZoneNotification) RecordZoneID() *RecordZoneID {
 	_r := x.inner.RecordZoneID()
@@ -44,6 +46,8 @@ func (x *RecordZoneNotification) RecordZoneID() *RecordZoneID {
 	return &RecordZoneID{inner: _r}
 }
 
+// The type of database for the record zone. This property's value is one of the constants that “CKDatabase/Scope“ defines.
+//
 // DatabaseScope calls the underlying DatabaseScope.
 func (x *RecordZoneNotification) DatabaseScope() CKDatabaseScope {
 	return CKDatabaseScope(x.inner.DatabaseScope())

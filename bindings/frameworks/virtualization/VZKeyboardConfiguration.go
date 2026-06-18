@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for a configuring a keyboard.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzkeyboardconfiguration
 type VZKeyboardConfiguration struct {
 	foundation.NSObject

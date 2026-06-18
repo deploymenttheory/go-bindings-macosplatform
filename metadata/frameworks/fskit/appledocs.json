@@ -1,0 +1,865 @@
+{
+  "schema_version": 1,
+  "framework": "FSKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "FSBlockDeviceResource": {
+      "doc": "A resource that represents a block storage disk partition.",
+      "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource"
+    },
+    "FSClient": {
+      "doc": "An interface for apps and daemons to interact with FSKit.",
+      "url": "https://developer.apple.com/documentation/fskit/fsclient"
+    },
+    "FSContainerIdentifier": {
+      "doc": "A type that identifies a container.",
+      "url": "https://developer.apple.com/documentation/fskit/fscontaineridentifier"
+    },
+    "FSContainerStatus": {
+      "doc": "A type that represents a container’s status.",
+      "url": "https://developer.apple.com/documentation/fskit/fscontainerstatus"
+    },
+    "FSDirectoryEntryPacker": {
+      "doc": "An object used to provide items during a directory enumeration.",
+      "url": "https://developer.apple.com/documentation/fskit/fsdirectoryentrypacker"
+    },
+    "FSEntityIdentifier": {
+      "doc": "A base type that identifies containers and volumes.",
+      "url": "https://developer.apple.com/documentation/fskit/fsentityidentifier"
+    },
+    "FSExtentPacker": {
+      "doc": "A type that directs the kernel to map space on disk to a specific file managed by this file system.",
+      "url": "https://developer.apple.com/documentation/fskit/fsextentpacker"
+    },
+    "FSFileName": {
+      "doc": "The name of a file, expressed as a data buffer.",
+      "url": "https://developer.apple.com/documentation/fskit/fsfilename"
+    },
+    "FSFileSystem": {
+      "doc": "An abstract base class for implementing a full-featured file system.",
+      "url": "https://developer.apple.com/documentation/fskit/fsfilesystem"
+    },
+    "FSGenericURLResource": {
+      "doc": "A resource that represents an abstract URL.",
+      "url": "https://developer.apple.com/documentation/fskit/fsgenericurlresource"
+    },
+    "FSItem": {
+      "doc": "A distinct object in a file hierarchy, such as a file, directory, symlink, socket, and more.",
+      "url": "https://developer.apple.com/documentation/fskit/fsitem"
+    },
+    "FSMetadataRange": {
+      "doc": "A range that describes contiguous metadata segments on disk.",
+      "url": "https://developer.apple.com/documentation/fskit/fsmetadatarange"
+    },
+    "FSModuleIdentity": {
+      "doc": "An installed file system module.",
+      "url": "https://developer.apple.com/documentation/fskit/fsmoduleidentity"
+    },
+    "FSMutableFileDataBuffer": {
+      "doc": "A wrapper object for a data buffer.",
+      "url": "https://developer.apple.com/documentation/fskit/fsmutablefiledatabuffer"
+    },
+    "FSPathURLResource": {
+      "doc": "A resource that represents a path in the system file space.",
+      "url": "https://developer.apple.com/documentation/fskit/fspathurlresource"
+    },
+    "FSProbeResult": {
+      "doc": "An object that represents the results of a specific probe.",
+      "url": "https://developer.apple.com/documentation/fskit/fsproberesult"
+    },
+    "FSResource": {
+      "doc": "An abstract resource a file system uses to provide data for a volume.",
+      "url": "https://developer.apple.com/documentation/fskit/fsresource"
+    },
+    "FSStatFSResult": {
+      "doc": "A type used to report a volume’s statistics.",
+      "url": "https://developer.apple.com/documentation/fskit/fsstatfsresult"
+    },
+    "FSTask": {
+      "doc": "A class that enables a file system module to pass log messages and completion notifications to clients.",
+      "url": "https://developer.apple.com/documentation/fskit/fstask"
+    },
+    "FSTaskOptions": {
+      "doc": "A class that passes command options to a task, optionally providing security-scoped URLs.",
+      "url": "https://developer.apple.com/documentation/fskit/fstaskoptions"
+    },
+    "FSUnaryFileSystem": {
+      "doc": "An abstract base class for implementing a minimal file system.",
+      "url": "https://developer.apple.com/documentation/fskit/fsunaryfilesystem"
+    },
+    "FSVolume": {
+      "doc": "A directory structure for files and folders.",
+      "url": "https://developer.apple.com/documentation/fskit/fsvolume"
+    }
+  },
+  "protocols": {
+    "FSFileSystemBase": {
+      "doc": "A protocol containing functionality supplied by FSKit to file system implementations.",
+      "url": "https://developer.apple.com/documentation/fskit/fsfilesystembase"
+    },
+    "FSManageableResourceMaintenanceOperations": {
+      "doc": "Maintenance operations for a file system’s resources.",
+      "url": "https://developer.apple.com/documentation/fskit/fsmanageableresourcemaintenanceoperations"
+    },
+    "FSUnaryFileSystemOperations": {
+      "doc": "Operations performed by a unary file system.",
+      "url": "https://developer.apple.com/documentation/fskit/fsunaryfilesystemoperations"
+    },
+    "FSVolumeKernelOffloadedIOOperations": {
+      "doc": "Methods and properties implemented by volumes that use kernel-offloaded I/O to achieve higher file transfer performance.",
+      "url": "https://developer.apple.com/documentation/fskit/fsvolumekerneloffloadediooperations"
+    }
+  },
+  "enums": {
+    "FSBlockmapFlags": {
+      "doc": "Flags that describe the behavior of a blockmap operation.",
+      "url": "https://developer.apple.com/documentation/fskit/fsblockmapflags",
+      "members": {
+        "FSBlockmapFlagsRead": {
+          "doc": "A flag that describes a read operation.",
+          "url": "https://developer.apple.com/documentation/fskit/fsblockmapflags/read"
+        },
+        "FSBlockmapFlagsWrite": {
+          "doc": "A flag that describes a write operation.",
+          "url": "https://developer.apple.com/documentation/fskit/fsblockmapflags/write"
+        }
+      }
+    },
+    "FSCompleteIOFlags": {
+      "doc": "Flags that describe the behavior of an I/O completion operation.",
+      "url": "https://developer.apple.com/documentation/fskit/fscompleteioflags",
+      "members": {
+        "FSCompleteIOFlagsAsync": {
+          "doc": "A flag that requests that the file system module flush metadata I/O asynchronously.",
+          "url": "https://developer.apple.com/documentation/fskit/fscompleteioflags/async"
+        },
+        "FSCompleteIOFlagsRead": {
+          "doc": "A flag that describes a read operation.",
+          "url": "https://developer.apple.com/documentation/fskit/fscompleteioflags/read"
+        },
+        "FSCompleteIOFlagsWrite": {
+          "doc": "A flag that describes a write operation.",
+          "url": "https://developer.apple.com/documentation/fskit/fscompleteioflags/write"
+        }
+      }
+    },
+    "FSContainerState": {
+      "doc": "An enumeration of container state values.",
+      "url": "https://developer.apple.com/documentation/fskit/fscontainerstate",
+      "members": {
+        "FSContainerStateActive": {
+          "doc": "The container is active, and one or more volumes are active.",
+          "url": "https://developer.apple.com/documentation/fskit/fscontainerstate/active"
+        },
+        "FSContainerStateBlocked": {
+          "doc": "The container is blocked from transitioning from the not-ready state to the ready state by a potentially-recoverable error.",
+          "url": "https://developer.apple.com/documentation/fskit/fscontainerstate/blocked"
+        },
+        "FSContainerStateNotReady": {
+          "doc": "The container isn’t ready.",
+          "url": "https://developer.apple.com/documentation/fskit/fscontainerstate/notready"
+        },
+        "FSContainerStateReady": {
+          "doc": "The container is ready, but inactive.",
+          "url": "https://developer.apple.com/documentation/fskit/fscontainerstate/ready"
+        }
+      }
+    },
+    "FSDeactivateOptions": {
+      "doc": "Options that affect the behavior of deactivate methods.",
+      "url": "https://developer.apple.com/documentation/fskit/fsdeactivateoptions",
+      "members": {
+        "FSDeactivateOptionsForce": {
+          "doc": "An option to force deactivation.",
+          "url": "https://developer.apple.com/documentation/fskit/fsdeactivateoptions/force"
+        }
+      }
+    },
+    "FSExtentType": {
+      "doc": "An enumeration of types of extents.",
+      "url": "https://developer.apple.com/documentation/fskit/fsextenttype",
+      "members": {
+        "FSExtentTypeData": {
+          "doc": "An extent type to indicate valid data.",
+          "url": "https://developer.apple.com/documentation/fskit/fsextenttype/data"
+        },
+        "FSExtentTypeReadOnly": {
+          "doc": "An extent type to indicate read-only data.",
+          "url": "https://developer.apple.com/documentation/fskit/fsextenttype/readonly"
+        },
+        "FSExtentTypeZeroFill": {
+          "doc": "An extent type to indicate uninitialized data.",
+          "url": "https://developer.apple.com/documentation/fskit/fsextenttype/zerofill"
+        }
+      }
+    },
+    "FSMatchResult": {
+      "doc": "A type that represents the recognition and usability of a probed resource.",
+      "url": "https://developer.apple.com/documentation/fskit/fsmatchresult",
+      "members": {
+        "FSMatchResultNotRecognized": {
+          "doc": "The probe doesn’t recognize the resource.",
+          "url": "https://developer.apple.com/documentation/fskit/fsmatchresult/notrecognized"
+        },
+        "FSMatchResultRecognized": {
+          "doc": "The probe recognizes the resource but can’t use it.",
+          "url": "https://developer.apple.com/documentation/fskit/fsmatchresult/recognized"
+        },
+        "FSMatchResultUsable": {
+          "doc": "The probe recognizes the resource and is ready to use it.",
+          "url": "https://developer.apple.com/documentation/fskit/fsmatchresult/usable"
+        },
+        "FSMatchResultUsableButLimited": {
+          "doc": "The probe recognizes the resource and is ready to use it, but only in a limited capacity.",
+          "url": "https://developer.apple.com/documentation/fskit/fsmatchresult/usablebutlimited"
+        }
+      }
+    },
+    "FSSyncFlags": {
+      "doc": "Behavior flags for use with synchronization calls.",
+      "url": "https://developer.apple.com/documentation/fskit/fssyncflags",
+      "members": {
+        "FSSyncFlagsDWait": {
+          "doc": "A flag for synchronized I/O with data-integrity completion.",
+          "url": "https://developer.apple.com/documentation/fskit/fssyncflags/dwait"
+        },
+        "FSSyncFlagsNoWait": {
+          "doc": "A flag for synchronized I/O that starts I/O but doesn’t wait for it.",
+          "url": "https://developer.apple.com/documentation/fskit/fssyncflags/nowait"
+        },
+        "FSSyncFlagsWait": {
+          "doc": "A flag for synchronized I/O with file-integrity completion.",
+          "url": "https://developer.apple.com/documentation/fskit/fssyncflags/wait"
+        }
+      }
+    }
+  },
+  "methods": {
+    "FSBlockDeviceResource": {
+      "-asynchronousMetadataFlushWithError:": {
+        "doc": "Asynchronously flushes the resource’s buffer cache.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/asynchronousmetadataflush()"
+      },
+      "-delayedMetadataWriteFrom:startingAt:length:error:": {
+        "doc": "Writes file system metadata from a buffer to a cache, prior to flushing it to the resource.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/delayedmetadatawritefrom:startingat:length:error:"
+      },
+      "-metadataClear:withDelayedWrites:error:": {
+        "doc": "Clears the given ranges within the buffer cache.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/metadataclear(_:withdelayedwrites:)"
+      },
+      "-metadataFlushWithError:": {
+        "doc": "Synchronously flushes the resource’s buffer cache.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/metadataflush()"
+      },
+      "-metadataPurge:error:": {
+        "doc": "Synchronously purges the given ranges from the buffer cache.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/metadatapurge(_:)"
+      },
+      "-metadataReadInto:startingAt:length:error:": {
+        "doc": "Synchronously reads file system metadata from the resource into a buffer.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/metadatareadinto:startingat:length:error:"
+      },
+      "-metadataWriteFrom:startingAt:length:error:": {
+        "doc": "Synchronously writes file system metadata from a buffer to the resource.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/metadatawritefrom:startingat:length:error:"
+      },
+      "-readInto:startingAt:length:completionHandler:": {
+        "doc": "Reads data from the resource into a buffer and executes a block afterwards.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/readinto:startingat:length:completionhandler:"
+      },
+      "-readInto:startingAt:length:error:": {
+        "doc": "Synchronously reads data from the resource into a buffer.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/readinto:startingat:length:error:"
+      },
+      "-writeFrom:startingAt:length:completionHandler:": {
+        "doc": "Writes data from from a buffer to the resource and executes a block afterwards.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/writefrom:startingat:length:completionhandler:"
+      },
+      "-writeFrom:startingAt:length:error:": {
+        "doc": "Synchronously writes data from from a buffer to the resource and executes a block afterwards.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/writefrom:startingat:length:error:"
+      }
+    },
+    "FSClient": {
+      "-fetchInstalledExtensionsWithCompletionHandler:": {
+        "doc": "Asynchronously retrieves an list of installed file system modules.",
+        "url": "https://developer.apple.com/documentation/fskit/fsclient/fetchinstalledextensions(completionhandler:)"
+      },
+      "-mountSingleVolumeForResource:bundleID:options:completionHandler:": {
+        "doc": "Asynchronously mounts a single volume file system with a given resource.",
+        "url": "https://developer.apple.com/documentation/fskit/fsclient/mountsinglevolume(resource:bundleid:options:completionhandler:)"
+      },
+      "-openFileSystemExtensionsSettings": {
+        "doc": "Opens the File System Extensions settings in System Settings.",
+        "url": "https://developer.apple.com/documentation/fskit/fsclient/openfilesystemextensionssettings()"
+      }
+    },
+    "FSContainerStatus": {
+      "+activeWithStatus:": {
+        "doc": "Returns a active container status instance with the provided error status.",
+        "url": "https://developer.apple.com/documentation/fskit/fscontainerstatus/active(status:)"
+      },
+      "+blockedWithStatus:": {
+        "doc": "Returns a blocked container status instance with the provided error status.",
+        "url": "https://developer.apple.com/documentation/fskit/fscontainerstatus/blocked(status:)"
+      },
+      "+notReadyWithStatus:": {
+        "doc": "Returns a not-ready container status instance with the provided error status.",
+        "url": "https://developer.apple.com/documentation/fskit/fscontainerstatus/notready(status:)"
+      },
+      "+readyWithStatus:": {
+        "doc": "Returns a ready container status instance with the provided error status.",
+        "url": "https://developer.apple.com/documentation/fskit/fscontainerstatus/ready(status:)"
+      }
+    },
+    "FSDirectoryEntryPacker": {
+      "-packEntryWithName:itemType:itemID:nextCookie:attributes:": {
+        "doc": "Provides a directory entry during enumeration.",
+        "url": "https://developer.apple.com/documentation/fskit/fsdirectoryentrypacker/packentry(name:itemtype:itemid:nextcookie:attributes:)"
+      }
+    },
+    "FSEntityIdentifier": {
+      "-init": {
+        "doc": "Creates an entity identifier with a random UUID.",
+        "url": "https://developer.apple.com/documentation/fskit/fsentityidentifier/init()"
+      },
+      "-initWithUUID:": {
+        "doc": "Creates an entity identifier with the given UUID.",
+        "url": "https://developer.apple.com/documentation/fskit/fsentityidentifier/init(uuid:)-9e20k"
+      },
+      "-initWithUUID:data:": {
+        "doc": "Creates an entity identifier with the given UUID and qualifier data.",
+        "url": "https://developer.apple.com/documentation/fskit/fsentityidentifier/init(uuid:data:)-8dixs"
+      },
+      "-initWithUUID:qualifier:": {
+        "doc": "Creates an entity identifier with the given UUID and qualifier data as a 64-bit unsigned integer.",
+        "url": "https://developer.apple.com/documentation/fskit/fsentityidentifier/init(uuid:qualifier:)-9ty70"
+      },
+      "-initWithUUID:qualifierData:": {
+        "doc": "Creates an entity identifier with the given UUID and qualifier data.",
+        "url": "https://developer.apple.com/documentation/fskit/fsentityidentifier/init(uuid:qualifierdata:)-8xlg1"
+      }
+    },
+    "FSExtentPacker": {
+      "-packExtentWithResource:type:logicalOffset:physicalOffset:length:": {
+        "doc": "Packs a single extent to send to the kernel.",
+        "url": "https://developer.apple.com/documentation/fskit/fsextentpacker/packextent(resource:type:logicaloffset:physicaloffset:length:)"
+      }
+    },
+    "FSFileName": {
+      "+nameWithBytes:length:": {
+        "doc": "Creates a filename by copying a character sequence from a byte array.",
+        "url": "https://developer.apple.com/documentation/fskit/fsfilename/namewithbytes:length:"
+      },
+      "+nameWithCString:": {
+        "doc": "Creates a filename from a null-terminated character sequence.",
+        "url": "https://developer.apple.com/documentation/fskit/fsfilename/namewithcstring:"
+      },
+      "+nameWithData:": {
+        "doc": "Creates a filename by copying a character sequence data object.",
+        "url": "https://developer.apple.com/documentation/fskit/fsfilename/namewithdata:"
+      },
+      "+nameWithString:": {
+        "doc": "Creates a filename by copying a character sequence from a string instance.",
+        "url": "https://developer.apple.com/documentation/fskit/fsfilename/namewithstring:"
+      },
+      "-initWithBytes:length:": {
+        "doc": "Initializes a file name by copying a character sequence from a byte array.",
+        "url": "https://developer.apple.com/documentation/fskit/fsfilename/initwithbytes:length:"
+      },
+      "-initWithCString:": {
+        "doc": "Initializes a filename from a null-terminated character sequence.",
+        "url": "https://developer.apple.com/documentation/fskit/fsfilename/initwithcstring:"
+      },
+      "-initWithData:": {
+        "doc": "Creates a filename by copying a character sequence data object.",
+        "url": "https://developer.apple.com/documentation/fskit/fsfilename/init(data:)"
+      },
+      "-initWithString:": {
+        "doc": "Creates a filename by copying a character sequence from a string instance.",
+        "url": "https://developer.apple.com/documentation/fskit/fsfilename/init(string:)"
+      }
+    },
+    "FSGenericURLResource": {
+      "-initWithURL:": {
+        "doc": "Creates a generic URL resource with the given URL.",
+        "url": "https://developer.apple.com/documentation/fskit/fsgenericurlresource/init(url:)-2cmhi"
+      }
+    },
+    "FSItem": {
+      "-tryReclaimWithBlock:": {
+        "doc": "Reclaims the item by executing the given block, if conditions allow.",
+        "url": "https://developer.apple.com/documentation/fskit/fsitem/tryreclaim(_:)"
+      }
+    },
+    "FSMetadataRange": {
+      "+rangeWithOffset:segmentLength:segmentCount:": {
+        "doc": "Creates a metadata range with the given properties.",
+        "url": "https://developer.apple.com/documentation/fskit/fsmetadatarange/rangewithoffset:segmentlength:segmentcount:"
+      },
+      "-initWithOffset:segmentLength:segmentCount:": {
+        "doc": "Initializes a metadata range with the given properties.",
+        "url": "https://developer.apple.com/documentation/fskit/fsmetadatarange/init(offset:segmentlength:segmentcount:)"
+      }
+    },
+    "FSMutableFileDataBuffer": {
+      "-mutableBytes": {
+        "doc": "The byte data.",
+        "url": "https://developer.apple.com/documentation/fskit/fsmutablefiledatabuffer/mutablebytes"
+      }
+    },
+    "FSPathURLResource": {
+      "-initWithURL:writable:": {
+        "doc": "Creates a path URL resource.",
+        "url": "https://developer.apple.com/documentation/fskit/fspathurlresource/init(url:writable:)-2l10q"
+      }
+    },
+    "FSProbeResult": {
+      "+recognizedProbeResultWithName:containerID:": {
+        "doc": "Creates a probe result for a recognized file system.",
+        "url": "https://developer.apple.com/documentation/fskit/fsproberesult/recognized(name:containerid:)"
+      },
+      "+usableButLimitedProbeResultWithName:containerID:": {
+        "doc": "Creates a probe result for a recognized file system that is usable, but with limited capabilities.",
+        "url": "https://developer.apple.com/documentation/fskit/fsproberesult/usablebutlimited(name:containerid:)"
+      },
+      "+usableProbeResultWithName:containerID:": {
+        "doc": "Creates a probe result for a recognized and usable file system.",
+        "url": "https://developer.apple.com/documentation/fskit/fsproberesult/usable(name:containerid:)"
+      }
+    },
+    "FSResource": {
+      "-makeProxy": {
+        "doc": "Creates a proxy object of this resource.",
+        "url": "https://developer.apple.com/documentation/fskit/fsresource/makeproxy()"
+      },
+      "-revoke": {
+        "doc": "Revokes the resource.",
+        "url": "https://developer.apple.com/documentation/fskit/fsresource/revoke()"
+      }
+    },
+    "FSStatFSResult": {
+      "-initWithFileSystemTypeName:": {
+        "doc": "Creates an statistics result instance, using the given file system type name.",
+        "url": "https://developer.apple.com/documentation/fskit/fsstatfsresult/init(filesystemtypename:)"
+      }
+    },
+    "FSTask": {
+      "-didCompleteWithError:": {
+        "doc": "Informs the client that the task completed.",
+        "url": "https://developer.apple.com/documentation/fskit/fstask/didcomplete(error:)"
+      },
+      "-logMessage:": {
+        "doc": "Logs the given string to the initiating client.",
+        "url": "https://developer.apple.com/documentation/fskit/fstask/logmessage(_:)"
+      }
+    },
+    "FSTaskOptions": {
+      "-urlForOption:": {
+        "doc": "Retrieves a URL for a given option.",
+        "url": "https://developer.apple.com/documentation/fskit/fstaskoptions/url(foroption:)"
+      }
+    },
+    "FSVolume": {
+      "-initWithVolumeID:volumeName:": {
+        "doc": "Creates a volume with the given identifier and name.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/init(volumeid:volumename:)"
+      },
+      "-setCacheStateForItem:cacheMode:coherencyType:coherencyAction:": {
+        "doc": "Sends a synchronous cache state update request from the module to the kernel.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/setcachestate(for:cachemode:coherencytype:action:)"
+      }
+    }
+  },
+  "properties": {
+    "FSBlockDeviceResource": {
+      "BSDName": {
+        "doc": "The device name of the resource.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/bsdname"
+      },
+      "blockCount": {
+        "doc": "The block count on this resource.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/blockcount"
+      },
+      "blockSize": {
+        "doc": "The logical block size, the size of data blocks used by the file system.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/blocksize"
+      },
+      "delayedMetadataWrite(from:startingAt:length:)": {
+        "doc": "Writes file system metadata from a buffer to a cache, prior to flushing it to the resource.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/delayedmetadatawrite(from:startingat:length:)"
+      },
+      "metadataRead(into:startingAt:length:)": {
+        "doc": "Synchronously reads file system metadata from the resource into a buffer.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/metadataread(into:startingat:length:)"
+      },
+      "metadataWrite(from:startingAt:length:)": {
+        "doc": "Synchronously writes file system metadata from a buffer to the resource.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/metadatawrite(from:startingat:length:)"
+      },
+      "physicalBlockSize": {
+        "doc": "The sector size of the device.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/physicalblocksize"
+      },
+      "read(into:startingAt:length:)": {
+        "doc": "Synchronously reads data from the resource into a buffer.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/read(into:startingat:length:)-4ax6s"
+      },
+      "read(into:startingAt:length:completionHandler:)": {
+        "doc": "Reads data from the resource into a buffer and executes a closure afterwards.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/read(into:startingat:length:completionhandler:)"
+      },
+      "writable": {
+        "doc": "A Boolean property that indicates whether the resource can write data to the device.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/iswritable"
+      },
+      "write(from:startingAt:length:)": {
+        "doc": "Synchronously writes data from from a buffer to the resource and executes a block afterwards.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/write(from:startingat:length:)-2fmgt"
+      },
+      "write(from:startingAt:length:completionHandler:)": {
+        "doc": "Writes data from from a buffer to the resource and executes a closure afterwards.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/write(from:startingat:length:completionhandler:)"
+      }
+    },
+    "FSClient": {
+      "sharedInstance": {
+        "doc": "The shared instance of the FSKit client class.",
+        "url": "https://developer.apple.com/documentation/fskit/fsclient/shared"
+      }
+    },
+    "FSContainerIdentifier": {
+      "volumeIdentifier": {
+        "doc": "The volume identifier associated with the container.",
+        "url": "https://developer.apple.com/documentation/fskit/fscontaineridentifier/volumeidentifier"
+      }
+    },
+    "FSContainerStatus": {
+      "active": {
+        "doc": "A status that represents an active container with no error.",
+        "url": "https://developer.apple.com/documentation/fskit/fscontainerstatus/active"
+      },
+      "ready": {
+        "doc": "A status that represents a ready container with no error.",
+        "url": "https://developer.apple.com/documentation/fskit/fscontainerstatus/ready"
+      },
+      "state": {
+        "doc": "A value that represents the container state, such as ready, active, or blocked.",
+        "url": "https://developer.apple.com/documentation/fskit/fscontainerstatus/state"
+      },
+      "status": {
+        "doc": "An optional error that provides further information about the state.",
+        "url": "https://developer.apple.com/documentation/fskit/fscontainerstatus/status"
+      }
+    },
+    "FSEntityIdentifier": {
+      "qualifier": {
+        "doc": "An optional piece of data to distinguish entities that otherwise share the same UUID.",
+        "url": "https://developer.apple.com/documentation/fskit/fsentityidentifier/qualifier"
+      },
+      "uuid": {
+        "doc": "A UUID to uniquely identify this entity.",
+        "url": "https://developer.apple.com/documentation/fskit/fsentityidentifier/uuid"
+      }
+    },
+    "FSFileName": {
+      "data": {
+        "doc": "The byte sequence of the filename, as a data object.",
+        "url": "https://developer.apple.com/documentation/fskit/fsfilename/data"
+      },
+      "debugDescription": {
+        "doc": "The filename, represented as a potentially lossy conversion to a string.",
+        "url": "https://developer.apple.com/documentation/fskit/fsfilename/debugdescription"
+      },
+      "string": {
+        "doc": "The filename, represented as a Unicode string.",
+        "url": "https://developer.apple.com/documentation/fskit/fsfilename/string"
+      }
+    },
+    "FSGenericURLResource": {
+      "url": {
+        "doc": "The URL represented by the resource.",
+        "url": "https://developer.apple.com/documentation/fskit/fsgenericurlresource/url"
+      }
+    },
+    "FSItem": {
+      "FSItemAttributes": {
+        "doc": "Attributes of an item, such as size, creation and modification times, and user and group identifiers.",
+        "url": "https://developer.apple.com/documentation/fskit/fsitem/attributes"
+      },
+      "FSItemGetAttributesRequest": {
+        "doc": "A request to get attributes from an item.",
+        "url": "https://developer.apple.com/documentation/fskit/fsitem/getattributesrequest"
+      },
+      "FSItemID": {
+        "doc": "The unique identifier for an item.",
+        "url": "https://developer.apple.com/documentation/fskit/fsitem/identifier"
+      },
+      "FSItemSetAttributesRequest": {
+        "doc": "A request to set attributes on an item.",
+        "url": "https://developer.apple.com/documentation/fskit/fsitem/setattributesrequest"
+      },
+      "FSItemType": {
+        "doc": "An enumeration of item types, such as file, directory, or symbolic link.",
+        "url": "https://developer.apple.com/documentation/fskit/fsitem/itemtype"
+      }
+    },
+    "FSMetadataRange": {
+      "segmentCount": {
+        "doc": "The number of segments in the range.",
+        "url": "https://developer.apple.com/documentation/fskit/fsmetadatarange/segmentcount"
+      },
+      "segmentLength": {
+        "doc": "The segment length in bytes.",
+        "url": "https://developer.apple.com/documentation/fskit/fsmetadatarange/segmentlength"
+      },
+      "startOffset": {
+        "doc": "The start offset of the range in bytes.",
+        "url": "https://developer.apple.com/documentation/fskit/fsmetadatarange/startoffset"
+      }
+    },
+    "FSModuleIdentity": {
+      "bundleIdentifier": {
+        "doc": "The module’s bundle identifier.",
+        "url": "https://developer.apple.com/documentation/fskit/fsmoduleidentity/bundleidentifier"
+      },
+      "enabled": {
+        "doc": "A Boolean value that indicates if the module is enabled.",
+        "url": "https://developer.apple.com/documentation/fskit/fsmoduleidentity/isenabled"
+      },
+      "url": {
+        "doc": "The module’s URL.",
+        "url": "https://developer.apple.com/documentation/fskit/fsmoduleidentity/url"
+      }
+    },
+    "FSMutableFileDataBuffer": {
+      "createMutableRawSpan()": {
+        "doc": "Return a MutableRawSpan to the underlying bytes of the data buffer.",
+        "url": "https://developer.apple.com/documentation/fskit/fsmutablefiledatabuffer/createmutablerawspan()"
+      },
+      "length": {
+        "doc": "The data length of the buffer.",
+        "url": "https://developer.apple.com/documentation/fskit/fsmutablefiledatabuffer/length"
+      },
+      "withUnsafeMutableBytes(_:)": {
+        "doc": "Performs the given closure with an unsafe pointer to the underlying bytes of the data buffer.",
+        "url": "https://developer.apple.com/documentation/fskit/fsmutablefiledatabuffer/withunsafemutablebytes(_:)"
+      }
+    },
+    "FSPathURLResource": {
+      "url": {
+        "doc": "The URL represented by the resource.",
+        "url": "https://developer.apple.com/documentation/fskit/fspathurlresource/url"
+      },
+      "writable": {
+        "doc": "A Boolean value that indicates whether the file system supports writing to the contents of the path URL.",
+        "url": "https://developer.apple.com/documentation/fskit/fspathurlresource/iswritable"
+      }
+    },
+    "FSProbeResult": {
+      "containerID": {
+        "doc": "The container identifier, as found during the probe operation.",
+        "url": "https://developer.apple.com/documentation/fskit/fsproberesult/containerid"
+      },
+      "name": {
+        "doc": "The resource name, as found during the probe operation.",
+        "url": "https://developer.apple.com/documentation/fskit/fsproberesult/name"
+      },
+      "notRecognizedProbeResult": {
+        "doc": "A probe result for an unrecognized file system.",
+        "url": "https://developer.apple.com/documentation/fskit/fsproberesult/notrecognized"
+      },
+      "result": {
+        "doc": "The match result, representing the recognition and usability of a probed resource.",
+        "url": "https://developer.apple.com/documentation/fskit/fsproberesult/result"
+      },
+      "usableButLimitedProbeResult": {
+        "doc": "A probe result for a recognized file system that is usable, but with limited capabilities.",
+        "url": "https://developer.apple.com/documentation/fskit/fsproberesult/usablebutlimited"
+      }
+    },
+    "FSResource": {
+      "revoked": {
+        "doc": "A Boolean value that indicates whether the resource is revoked.",
+        "url": "https://developer.apple.com/documentation/fskit/fsresource/isrevoked"
+      }
+    },
+    "FSStatFSResult": {
+      "availableBlocks": {
+        "doc": "A property for the number of free blocks available to a non-superuser on the volume.",
+        "url": "https://developer.apple.com/documentation/fskit/fsstatfsresult/availableblocks"
+      },
+      "availableBytes": {
+        "doc": "A property for the amount of space available to users, in bytes, in the volume.",
+        "url": "https://developer.apple.com/documentation/fskit/fsstatfsresult/availablebytes"
+      },
+      "blockSize": {
+        "doc": "A property for the volume’s block size, in bytes.",
+        "url": "https://developer.apple.com/documentation/fskit/fsstatfsresult/blocksize"
+      },
+      "fileSystemSubType": {
+        "doc": "A property for the file system’s subtype or flavor.",
+        "url": "https://developer.apple.com/documentation/fskit/fsstatfsresult/filesystemsubtype"
+      },
+      "fileSystemTypeName": {
+        "doc": "A property for the file system type name.",
+        "url": "https://developer.apple.com/documentation/fskit/fsstatfsresult/filesystemtypename"
+      },
+      "freeBlocks": {
+        "doc": "A property for the number of free blocks in the volume.",
+        "url": "https://developer.apple.com/documentation/fskit/fsstatfsresult/freeblocks"
+      },
+      "freeBytes": {
+        "doc": "A property for the amount of free space, in bytes, in the volume.",
+        "url": "https://developer.apple.com/documentation/fskit/fsstatfsresult/freebytes"
+      },
+      "freeFiles": {
+        "doc": "A property for the total number of free file slots in the volume.",
+        "url": "https://developer.apple.com/documentation/fskit/fsstatfsresult/freefiles"
+      },
+      "ioSize": {
+        "doc": "A property for the optimal block size with which to perform I/O.",
+        "url": "https://developer.apple.com/documentation/fskit/fsstatfsresult/iosize"
+      },
+      "totalBlocks": {
+        "doc": "A property for the volume’s total data block count.",
+        "url": "https://developer.apple.com/documentation/fskit/fsstatfsresult/totalblocks"
+      },
+      "totalBytes": {
+        "doc": "A property for the total size, in bytes, of the volume.",
+        "url": "https://developer.apple.com/documentation/fskit/fsstatfsresult/totalbytes"
+      },
+      "totalFiles": {
+        "doc": "A property for the total number of file slots in the volume,",
+        "url": "https://developer.apple.com/documentation/fskit/fsstatfsresult/totalfiles"
+      },
+      "usedBlocks": {
+        "doc": "A property for the number of used blocks in the volume.",
+        "url": "https://developer.apple.com/documentation/fskit/fsstatfsresult/usedblocks"
+      },
+      "usedBytes": {
+        "doc": "A property for the amount of used space, in bytes, in the volume.",
+        "url": "https://developer.apple.com/documentation/fskit/fsstatfsresult/usedbytes"
+      }
+    },
+    "FSTask": {
+      "cancellationHandler": {
+        "doc": "A handler called by FSKit upon canceling the task.",
+        "url": "https://developer.apple.com/documentation/fskit/fstask/cancellationhandler"
+      }
+    },
+    "FSTaskOptions": {
+      "taskOptions": {
+        "doc": "An array of strings that represent command-line options for the task.",
+        "url": "https://developer.apple.com/documentation/fskit/fstaskoptions/taskoptions"
+      }
+    },
+    "FSVolume": {
+      "FSDataCacheMode": {
+        "doc": "A type that defines the cache mode requested by the kernel for data operations.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/datacachemode"
+      },
+      "FSKernelCacheCoherencyAction": {
+        "doc": "A type that defines actions for cache state changes.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/kernelcachecoherencyaction"
+      },
+      "FSKernelCacheCoherencyType": {
+        "doc": "A type that defines how the kernel caches data.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/kernelcachecoherencytype"
+      },
+      "FSVolumeAccessCheckHandler": {
+        "doc": "Methods and properties implemented by volumes that want to enforce access check operations.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/accesscheckhandler"
+      },
+      "FSVolumeAccessCheckOperations": {
+        "doc": "Methods and properties implemented by volumes that want to enforce access check operations.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/accesscheckoperations"
+      },
+      "FSVolumeDataCacheHandler": {
+        "doc": "Methods and properties implemented by volumes that coordinate kernel-level data caching.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/datacachehandler"
+      },
+      "FSVolumeHandler": {
+        "doc": "Methods that all volumes implement to provide required capabilities.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/handler"
+      },
+      "FSVolumeIdentifier": {
+        "doc": "A type that identifies a volume.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/identifier"
+      },
+      "FSVolumeItemDeactivation": {
+        "doc": "Methods and properties implemented by volumes that support deactivating items.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/itemdeactivation"
+      },
+      "FSVolumeItemDeactivationHandler": {
+        "doc": "Methods and properties implemented by volumes that support deactivating items.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/itemdeactivationhandler"
+      },
+      "FSVolumeKernelOffloadedIOHandler": {
+        "doc": "Methods and properties implemented by volumes that use kernel-offloaded I/O to achieve higher file transfer performance.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/kerneloffloadediohandler"
+      },
+      "FSVolumeOpenCloseHandler": {
+        "doc": "Methods and properties implemented by volumes that want to receive open and close calls for each item.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/openclosehandler"
+      },
+      "FSVolumeOpenCloseOperations": {
+        "doc": "Methods and properties implemented by volumes that want to receive open and close calls for each item.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/opencloseoperations"
+      },
+      "FSVolumeOperations": {
+        "doc": "Methods that all volumes implement to provide required capabilities.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/operations"
+      },
+      "FSVolumePathConfOperations": {
+        "doc": "Properties implemented by volumes that support providing the values of system limits or options.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/pathconfoperations"
+      },
+      "FSVolumePreallocateHandler": {
+        "doc": "Methods and properties implemented by volumes that want to offer preallocation functions.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/preallocatehandler"
+      },
+      "FSVolumePreallocateOperations": {
+        "doc": "Methods and properties implemented by volumes that want to offer preallocation functions.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/preallocateoperations"
+      },
+      "FSVolumeReadWriteHandler": {
+        "doc": "Methods implemented for read and write operations that deliver data to and from the extension.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/readwritehandler"
+      },
+      "FSVolumeReadWriteOperations": {
+        "doc": "Methods implemented for read and write operations that deliver data to and from the extension.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/readwriteoperations"
+      },
+      "FSVolumeRenameHandler": {
+        "doc": "Methods and properties implemented by volumes that support renaming the volume.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/renamehandler"
+      },
+      "FSVolumeRenameOperations": {
+        "doc": "Methods and properties implemented by volumes that support renaming the volume.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/renameoperations"
+      },
+      "FSVolumeSeekRegionHandler": {
+        "doc": "Methods and properties implemented by volumes that support seek operations",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/seekregionhandler"
+      },
+      "FSVolumeXattrHandler": {
+        "doc": "Methods and properties implemented by volumes that natively or partially support extended attributes.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/xattrhandler"
+      },
+      "FSVolumeXattrOperations": {
+        "doc": "Methods and properties implemented by volumes that natively or partially support extended attributes.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/xattroperations"
+      },
+      "name": {
+        "doc": "The name of the volume.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/name"
+      },
+      "volumeID": {
+        "doc": "An identifier that uniquely identifies the volume.",
+        "url": "https://developer.apple.com/documentation/fskit/fsvolume/volumeid"
+      }
+    }
+  }
+}

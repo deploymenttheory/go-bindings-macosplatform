@@ -36,6 +36,8 @@ func NewMTRCommissioneeInfo() *MTRCommissioneeInfo {
 	return &MTRCommissioneeInfo{inner: raw.MTRCommissioneeInfoFromID(_id)}
 }
 
+// The product identity (VID / PID) of the commissionee.
+//
 // ProductIdentity calls the underlying ProductIdentity.
 func (x *MTRCommissioneeInfo) ProductIdentity() *MTRProductIdentity {
 	_r := x.inner.ProductIdentity()
@@ -45,11 +47,15 @@ func (x *MTRCommissioneeInfo) ProductIdentity() *MTRProductIdentity {
 	return &MTRProductIdentity{inner: _r}
 }
 
+// Endpoint information for all endpoints of the commissionee. Will be present only if readEndpointInformation is set to YES on MTRCommissioningParameters. Use `rootEndpoint` and `-[MTREndpointInfo children]` to traverse endpoints in composition order.
+//
 // EndpointsById calls the underlying EndpointsById.
 func (x *MTRCommissioneeInfo) EndpointsById() *foundation.NSDictionary[*foundation.NSNumber, *raw.MTREndpointInfo] {
 	return x.inner.EndpointsById()
 }
 
+// Endpoint information for the root endpoint of the commissionee. Will be present only if readEndpointInformation is set to YES on MTRCommissioningParameters.
+//
 // RootEndpoint calls the underlying RootEndpoint.
 func (x *MTRCommissioneeInfo) RootEndpoint() *MTREndpointInfo {
 	_r := x.inner.RootEndpoint()
@@ -59,6 +65,8 @@ func (x *MTRCommissioneeInfo) RootEndpoint() *MTREndpointInfo {
 	return &MTREndpointInfo{inner: _r}
 }
 
+// Attributes that were read from the commissionee.  This will contain the following, if they are available: 1) The attributes in extraAttributesToRead on MTRCommissioningParameters. 2) The FeatureMap attributes of all Network Commissioning clusters on the commissionee.
+//
 // Attributes calls the underlying Attributes.
 func (x *MTRCommissioneeInfo) Attributes() *foundation.NSDictionary[*raw.MTRAttributePath, objc.ID] {
 	return x.inner.Attributes()

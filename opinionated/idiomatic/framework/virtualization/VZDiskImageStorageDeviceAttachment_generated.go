@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A device that stores content in a disk image.
+//
 // DiskImageStorageDeviceAttachment wraps [raw.VZDiskImageStorageDeviceAttachment] with a fluent Go API.
 type DiskImageStorageDeviceAttachment struct {
 	inner *raw.VZDiskImageStorageDeviceAttachment
@@ -34,6 +36,8 @@ func DiskImageStorageDeviceAttachmentFromID(id objc.ID) *DiskImageStorageDeviceA
 	return &DiskImageStorageDeviceAttachment{inner: raw.VZDiskImageStorageDeviceAttachmentFromID(id)}
 }
 
+// Creates the attachment object from the specified disk image.
+//
 // NewDiskImageStorageDeviceAttachmentWithURLReadOnlyError creates a new [DiskImageStorageDeviceAttachment].
 func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyError(url string, readOnly bool) (*DiskImageStorageDeviceAttachment, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZDiskImageStorageDeviceAttachment")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyError(url string, readOnl
 	return &DiskImageStorageDeviceAttachment{inner: raw.VZDiskImageStorageDeviceAttachmentFromID(_id)}, nil
 }
 
+// Initialize the attachment from a local file URL.
+//
 // NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizationModeError creates a new [DiskImageStorageDeviceAttachment].
 func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizationModeError(url string, readOnly bool, cachingMode VZDiskImageCachingMode, synchronizationMode VZDiskImageSynchronizationMode) (*DiskImageStorageDeviceAttachment, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZDiskImageStorageDeviceAttachment")), objc.RegisterName("alloc"))
@@ -56,21 +62,29 @@ func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizatio
 	return &DiskImageStorageDeviceAttachment{inner: raw.VZDiskImageStorageDeviceAttachmentFromID(_id)}, nil
 }
 
+// @abstract URL of the underlying disk image.
+//
 // URL calls the underlying URL.
 func (x *DiskImageStorageDeviceAttachment) URL() *foundation.NSURL {
 	return x.inner.URL()
 }
 
+// @abstract Whether the underlying disk image is read-only.
+//
 // IsReadOnly calls the underlying IsReadOnly.
 func (x *DiskImageStorageDeviceAttachment) IsReadOnly() bool {
 	return x.inner.IsReadOnly()
 }
 
+// @abstract How disk image data is cached by the host.
+//
 // CachingMode calls the underlying CachingMode.
 func (x *DiskImageStorageDeviceAttachment) CachingMode() VZDiskImageCachingMode {
 	return VZDiskImageCachingMode(x.inner.CachingMode())
 }
 
+// @abstract The mode in which the disk image synchronizes data with the underlying storage device.
+//
 // SynchronizationMode calls the underlying SynchronizationMode.
 func (x *DiskImageStorageDeviceAttachment) SynchronizationMode() VZDiskImageSynchronizationMode {
 	return VZDiskImageSynchronizationMode(x.inner.SynchronizationMode())

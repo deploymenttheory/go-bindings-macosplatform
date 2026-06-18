@@ -30,6 +30,8 @@ func AUGenericViewFromID(id objc.ID) *AUGenericView {
 	return &AUGenericView{inner: raw.AUGenericViewFromID(id)}
 }
 
+// @method initWithAudioUnit: @abstract initializer used to create the view for a specific audio unit @param au  The Audio Unit associated with the view @result  Returns the newly created view object
+//
 // NewAUGenericViewWithAudioUnit creates a new [AUGenericView].
 func NewAUGenericViewWithAudioUnit(au *carboncore.ComponentInstanceRecord) *AUGenericView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AUGenericView")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewAUGenericViewWithAudioUnit(au *carboncore.ComponentInstanceRecord) *AUGe
 	return &AUGenericView{inner: raw.AUGenericViewFromID(_id)}
 }
 
+// @method initWithAudioUnit:displayFlags: @abstract initializer used to create the view for a specific audio unit with a parameter for view flags @param au  The Audio Unit associated with the view @param inFlags  The flags specifying display properties (multiple flags can be combined using the or '|' operator) @result  Returns the newly created view object
+//
 // NewAUGenericViewWithAudioUnitDisplayFlags creates a new [AUGenericView].
 func NewAUGenericViewWithAudioUnitDisplayFlags(inAudioUnit *carboncore.ComponentInstanceRecord, inFlags AUGenericViewDisplayFlags) *AUGenericView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AUGenericView")), objc.RegisterName("alloc"))

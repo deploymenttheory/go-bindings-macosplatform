@@ -31,6 +31,8 @@ func LocationSortDescriptorFromID(id objc.ID) *LocationSortDescriptor {
 	return &LocationSortDescriptor{inner: raw.CKLocationSortDescriptorFromID(id)}
 }
 
+// Creates a location sort descriptor using the specified key and relative location. - Parameters: - key: The name of the key with a <doc://com.apple.documentation/documentation/corelocation/cllocation> object as its value. The key must belong to the records you're sorting. The sort descriptor uses this key to retrieve the corresponding value from the record. - relativeLocation: The reference location when sorting. CloudKit sorts records according to their distance from this location. During sorting, the sort descriptor computes the distance between the value in the `relativeLocation` parameter and the location value in the specified key of each record. It then sorts the records in ascending order using the distance between the two points. You can't change the sort order.
+//
 // NewLocationSortDescriptorWithKeyRelativeLocation creates a new [LocationSortDescriptor].
 func NewLocationSortDescriptorWithKeyRelativeLocation(key string, relativeLocation unsafe.Pointer) *LocationSortDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKLocationSortDescriptor")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewLocationSortDescriptorWithKeyRelativeLocation(key string, relativeLocati
 	return &LocationSortDescriptor{inner: raw.CKLocationSortDescriptorFromID(_id)}
 }
 
+// Creates a location sort descriptor from a serialized instance. - Parameters: - aDecoder: The coder to use when deserializing the location sort descriptor.
+//
 // NewLocationSortDescriptorWithCoder creates a new [LocationSortDescriptor].
 func NewLocationSortDescriptorWithCoder(aDecoder *foundation.NSCoder) *LocationSortDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKLocationSortDescriptor")), objc.RegisterName("alloc"))

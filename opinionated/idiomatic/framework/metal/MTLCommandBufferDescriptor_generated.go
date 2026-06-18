@@ -35,24 +35,32 @@ func NewCommandBufferDescriptor() *CommandBufferDescriptor {
 	return &CommandBufferDescriptor{inner: raw.MTLCommandBufferDescriptorFromID(_id)}
 }
 
+// @property retainedReferences @abstract If YES, the created command buffer holds strong references to objects needed for it to execute. If NO, the created command buffer does not hold strong references to objects needed for it to execute.
+//
 // WithRetainedReferences sets the retainedReferences property and returns the receiver for chaining.
 func (x *CommandBufferDescriptor) WithRetainedReferences(retainedReferences bool) *CommandBufferDescriptor {
 	x.inner.SetRetainedReferences(retainedReferences)
 	return x
 }
 
+// @property errorOptions @abstract A set of options to influence the error reporting of the created command buffer. See MTLCommandBufferErrorOption.
+//
 // WithErrorOptions sets the errorOptions property and returns the receiver for chaining.
 func (x *CommandBufferDescriptor) WithErrorOptions(errorOptions MTLCommandBufferErrorOption) *CommandBufferDescriptor {
 	x.inner.SetErrorOptions(raw.MTLCommandBufferErrorOption(errorOptions))
 	return x
 }
 
+// @property logState @abstract Contains information related to shader logging.
+//
 // WithLogState sets the logState property and returns the receiver for chaining.
 func (x *CommandBufferDescriptor) WithLogState(logState raw.MTLLogState) *CommandBufferDescriptor {
 	x.inner.SetLogState(logState)
 	return x
 }
 
+// @property retainedReferences @abstract If YES, the created command buffer holds strong references to objects needed for it to execute. If NO, the created command buffer does not hold strong references to objects needed for it to execute.
+//
 // RetainedReferences calls the underlying RetainedReferences.
 func (x *CommandBufferDescriptor) RetainedReferences() bool {
 	return x.inner.RetainedReferences()
@@ -63,6 +71,8 @@ func (x *CommandBufferDescriptor) SetRetainedReferences(retainedReferences bool)
 	x.inner.SetRetainedReferences(retainedReferences)
 }
 
+// @property errorOptions @abstract A set of options to influence the error reporting of the created command buffer. See MTLCommandBufferErrorOption.
+//
 // ErrorOptions calls the underlying ErrorOptions.
 func (x *CommandBufferDescriptor) ErrorOptions() MTLCommandBufferErrorOption {
 	return MTLCommandBufferErrorOption(x.inner.ErrorOptions())
@@ -73,11 +83,15 @@ func (x *CommandBufferDescriptor) SetErrorOptions(errorOptions MTLCommandBufferE
 	x.inner.SetErrorOptions(raw.MTLCommandBufferErrorOption(errorOptions))
 }
 
+// @property logState @abstract Contains information related to shader logging.
+//
 // LogState calls the underlying LogState.
 func (x *CommandBufferDescriptor) LogState() raw.MTLLogState {
 	return x.inner.LogState()
 }
 
+// @property logState @abstract Contains information related to shader logging.
+//
 // SetLogState calls the underlying SetLogState.
 func (x *CommandBufferDescriptor) SetLogState(logState raw.MTLLogState) {
 	x.inner.SetLogState(logState)

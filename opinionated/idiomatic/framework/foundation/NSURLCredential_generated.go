@@ -31,6 +31,8 @@ func URLCredentialFromID(id objc.ID) *URLCredential {
 	return &URLCredential{inner: raw.NSURLCredentialFromID(id)}
 }
 
+// @method initWithUser:password:persistence: @abstract Initialize a NSURLCredential with a user and password @param user the username @param password the password @param persistence enum that says to store per session, permanently or not at all @result The initialized NSURLCredential
+//
 // NewURLCredentialWithUserPasswordPersistence creates a new [URLCredential].
 func NewURLCredentialWithUserPasswordPersistence(user string, password string, persistence NSURLCredentialPersistence) *URLCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLCredential")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewURLCredentialWithUserPasswordPersistence(user string, password string, p
 	return &URLCredential{inner: raw.NSURLCredentialFromID(_id)}
 }
 
+// @method initWithIdentity:certificates:persistence: @abstract Initialize an NSURLCredential with an identity and array of at least 1 client certificates (SecCertificateRef) @param identity a SecIdentityRef object @param certArray an array containing at least one SecCertificateRef objects @param persistence enum that says to store per session, permanently or not at all @result the Initialized NSURLCredential
+//
 // NewURLCredentialWithIdentityCertificatesPersistence creates a new [URLCredential].
 func NewURLCredentialWithIdentityCertificatesPersistence(identity unsafe.Pointer, certArray *raw.NSArray[objc.ID], persistence NSURLCredentialPersistence) *URLCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLCredential")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewURLCredentialWithIdentityCertificatesPersistence(identity unsafe.Pointer
 	return &URLCredential{inner: raw.NSURLCredentialFromID(_id)}
 }
 
+// @method initWithTrust: @abstract Initialize a new NSURLCredential which specifies that the specified trust has been accepted. @result the Initialized NSURLCredential
+//
 // NewURLCredentialWithTrust creates a new [URLCredential].
 func NewURLCredentialWithTrust(trust unsafe.Pointer) *URLCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLCredential")), objc.RegisterName("alloc"))
@@ -63,6 +69,8 @@ func (x *URLCredential) Persistence() NSURLCredentialPersistence {
 	return NSURLCredentialPersistence(x.inner.Persistence())
 }
 
+// @abstract Get the username @result The user string
+//
 // User calls the underlying User.
 func (x *URLCredential) User() *String {
 	_r := x.inner.User()
@@ -72,6 +80,8 @@ func (x *URLCredential) User() *String {
 	return &String{inner: _r}
 }
 
+// @abstract Get the password @result The password string @discussion This method might actually attempt to retrieve the password from an external store, possible resulting in prompting, so do not call it unless needed.
+//
 // Password calls the underlying Password.
 func (x *URLCredential) Password() *String {
 	_r := x.inner.Password()
@@ -81,16 +91,22 @@ func (x *URLCredential) Password() *String {
 	return &String{inner: _r}
 }
 
+// @abstract Find out if this credential has a password, without trying to get it @result YES if this credential has a password, otherwise NO @discussion If this credential's password is actually kept in an external store, the password method may return nil even if this method returns YES, since getting the password may fail, or the user may refuse access.
+//
 // HasPassword calls the underlying HasPassword.
 func (x *URLCredential) HasPassword() bool {
 	return x.inner.HasPassword()
 }
 
+// @abstract Returns the SecIdentityRef of this credential, if it was created with a certificate and identity @result A SecIdentityRef or NULL if this is a username/password credential
+//
 // Identity calls the underlying Identity.
 func (x *URLCredential) Identity() unsafe.Pointer {
 	return x.inner.Identity()
 }
 
+// @abstract Returns an NSArray of SecCertificateRef objects representing the client certificate for this credential, if this credential was created with an identity and certificate. @result an NSArray of SecCertificateRef or NULL if this is a username/password credential
+//
 // Certificates calls the underlying Certificates.
 func (x *URLCredential) Certificates() *raw.NSArray[objc.ID] {
 	return x.inner.Certificates()

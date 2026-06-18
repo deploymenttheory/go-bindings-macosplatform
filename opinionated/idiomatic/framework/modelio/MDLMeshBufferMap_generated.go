@@ -30,6 +30,8 @@ func MeshBufferMapFromID(id objc.ID) *MeshBufferMap {
 	return &MeshBufferMap{inner: raw.MDLMeshBufferMapFromID(id)}
 }
 
+// @method initWithBytes:deallocator: @abstract Called by implementor of MDLMeshBuffer protocol to create the map and arrange for unmapping on deallocation.
+//
 // NewMeshBufferMapWithBytesDeallocator creates a new [MeshBufferMap].
 func NewMeshBufferMapWithBytesDeallocator(bytes_ unsafe.Pointer, deallocator func()) *MeshBufferMap {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMeshBufferMap")), objc.RegisterName("alloc"))

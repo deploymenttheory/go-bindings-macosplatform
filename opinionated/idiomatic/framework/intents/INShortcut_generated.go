@@ -30,6 +30,8 @@ func ShortcutFromID(id objc.ID) *Shortcut {
 	return &Shortcut{inner: raw.INShortcutFromID(id)}
 }
 
+// @abstract Creates a shortcut with the given intent. @param intent Unless user configurable, must have a title and have valid shortcut types. @return Will return @c nil (and log an error) if the intent isn't valid.
+//
 // NewShortcutWithIntent creates a new [Shortcut].
 func NewShortcutWithIntent(intent *raw.INIntent) *Shortcut {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INShortcut")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewShortcutWithIntent(intent *raw.INIntent) *Shortcut {
 	return &Shortcut{inner: raw.INShortcutFromID(_id)}
 }
 
+// @abstract Creates a shortcut with the given user activity.
+//
 // NewShortcutWithUserActivity creates a new [Shortcut].
 func NewShortcutWithUserActivity(userActivity *foundation.NSUserActivity) *Shortcut {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INShortcut")), objc.RegisterName("alloc"))
@@ -44,6 +48,8 @@ func NewShortcutWithUserActivity(userActivity *foundation.NSUserActivity) *Short
 	return &Shortcut{inner: raw.INShortcutFromID(_id)}
 }
 
+// @abstract The intent that will be performed when this shortcut is invoked. @discussion Is @c nil if the shortcut was created with a @c NSUserActivity.
+//
 // Intent calls the underlying Intent.
 func (x *Shortcut) Intent() *Intent {
 	_r := x.inner.Intent()
@@ -53,6 +59,8 @@ func (x *Shortcut) Intent() *Intent {
 	return &Intent{inner: _r}
 }
 
+// @abstract The user activity that will be performed when this shortcut is invoked. @discussion Is @c nil if the shortcut was created with an @c INIntent.
+//
 // UserActivity calls the underlying UserActivity.
 func (x *Shortcut) UserActivity() *foundation.NSUserActivity {
 	return x.inner.UserActivity()

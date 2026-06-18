@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Represents focus & detection information at a particular time. Indicates where to focus (disparity) and what to focus on (detection) at a particular time in the movie. It also provides access to all known detections that can be focused on at that time. Utility methods support looking up a detection by detectionID or detectionGroupID. Frames are obtained from the cinematic script using `frame(at:tolerance:)` or `frames(in:)`.
+//
 // ScriptFrame wraps [raw.CNScriptFrame] with a fluent Go API.
 type ScriptFrame struct {
 	inner *raw.CNScriptFrame
@@ -37,16 +39,22 @@ func NewScriptFrame() *ScriptFrame {
 	return &ScriptFrame{inner: raw.CNScriptFrameFromID(_id)}
 }
 
+// The presentation time associated with the remaining properties.
+//
 // Time calls the underlying Time.
 func (x *ScriptFrame) Time() coremedia.CMTime {
 	return x.inner.Time()
 }
 
+// The disparity value representing the focus plane at which the script is focused in this frame. A larger disparity results in the focus plane being closer to the camera. The scale and offset of disparity is not defined. Pass this to the rendering session when rendering the corresponding frame of the movie to focus at the recommended depth.
+//
 // FocusDisparity calls the underlying FocusDisparity.
 func (x *ScriptFrame) FocusDisparity() float32 {
 	return x.inner.FocusDisparity()
 }
 
+// The detection on which the script is focused in this frame. The focusDisparity of the focusDetection can be different from that of the frame such as when a rack focus is in progress.
+//
 // FocusDetection calls the underlying FocusDetection.
 func (x *ScriptFrame) FocusDetection() *Detection {
 	_r := x.inner.FocusDetection()
@@ -56,6 +64,8 @@ func (x *ScriptFrame) FocusDetection() *Detection {
 	return &Detection{inner: _r}
 }
 
+// All detected objects in this frame.
+//
 // AllDetections returns the collection as a Go slice.
 func (x *ScriptFrame) AllDetections() []*Detection {
 	arr := x.inner.AllDetections()
@@ -67,6 +77,8 @@ func (x *ScriptFrame) AllDetections() []*Detection {
 	})
 }
 
+// The detection in this frame with the given detection ID, if any.
+//
 // DetectionForID calls the underlying DetectionForID.
 func (x *ScriptFrame) DetectionForID(detectionID int64) *Detection {
 	_r := x.inner.DetectionForID(detectionID)
@@ -76,6 +88,8 @@ func (x *ScriptFrame) DetectionForID(detectionID int64) *Detection {
 	return &Detection{inner: _r}
 }
 
+// The best detection to focus on in this frame among those with the given detectionGroupID. For example, a face is preferred to the corresponding torso, even though both have the same detectionGroupID.
+//
 // BestDetectionForGroupID calls the underlying BestDetectionForGroupID.
 func (x *ScriptFrame) BestDetectionForGroupID(detectionGroupID int64) *Detection {
 	_r := x.inner.BestDetectionForGroupID(detectionGroupID)

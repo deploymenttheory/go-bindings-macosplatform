@@ -36,21 +36,29 @@ func NewSubmesh() *Submesh {
 	return &Submesh{inner: raw.GLKSubmeshFromID(_id)}
 }
 
+// @property type @abstract Type of data in the elementBuffer (aka indexBuffer) @discussion This value should be used for the type parameter of glDrawElements
+//
 // Type calls the underlying Type.
 func (x *Submesh) Type() uint32 {
 	return x.inner.Type()
 }
 
+// @property mode @abstract Primitive type mode value of data in the elementBuffer (aka indexBuffer) @discussion This value should be used for the mode parameter in glDrawElements
+//
 // Mode calls the underlying Mode.
 func (x *Submesh) Mode() uint32 {
 	return x.inner.Mode()
 }
 
+// @property elementCount @abstract Number of elements (aka indicies) in the elementBuffer (aka indexBuffer) @discussion This value should be used for the count parameter in glDrawElements
+//
 // ElementCount calls the underlying ElementCount.
 func (x *Submesh) ElementCount() int32 {
 	return x.inner.ElementCount()
 }
 
+// @property elementBuffer @abstract Name of buffer object with index data @discussion The buffer name to be used with DrawElements
+//
 // ElementBuffer calls the underlying ElementBuffer.
 func (x *Submesh) ElementBuffer() *MeshBuffer {
 	_r := x.inner.ElementBuffer()
@@ -60,6 +68,8 @@ func (x *Submesh) ElementBuffer() *MeshBuffer {
 	return &MeshBuffer{inner: _r}
 }
 
+// @property mesh @abstract Parent GLKit mesh containing vertex data of this object @discussion Buffer of this parent mesh should be set in the encoder before a drawIndexedPrimitives call is made
+//
 // Mesh calls the underlying Mesh.
 func (x *Submesh) Mesh() *Mesh {
 	_r := x.inner.Mesh()
@@ -69,6 +79,8 @@ func (x *Submesh) Mesh() *Mesh {
 	return &Mesh{inner: _r}
 }
 
+// @property name @abstract Name from the original MDLSubmesh object. @discussion Although not directly used by this object, the application may use this to identify the submesh in it renderer/scene/world.
+//
 // Name calls the underlying Name.
 func (x *Submesh) Name() string {
 	_r := x.inner.Name()

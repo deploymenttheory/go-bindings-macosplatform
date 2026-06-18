@@ -38,76 +38,102 @@ func NewProgram() *Program {
 	return &Program{inner: raw.SCNProgramFromID(_id)}
 }
 
+// @property vertexShader @abstract Determines the receiver's vertex shader.
+//
 // WithVertexShader sets the vertexShader property and returns the receiver for chaining.
 func (x *Program) WithVertexShader(vertexShader string) *Program {
 	x.inner.SetVertexShader(foundation.NSStringStringWithUTF8String(vertexShader))
 	return x
 }
 
+// @property fragmentShader @abstract Determines the receiver's fragment shader.
+//
 // WithFragmentShader sets the fragmentShader property and returns the receiver for chaining.
 func (x *Program) WithFragmentShader(fragmentShader string) *Program {
 	x.inner.SetFragmentShader(foundation.NSStringStringWithUTF8String(fragmentShader))
 	return x
 }
 
+// @property tessellationControlShader @abstract Determines the receiver's tessellation control shader. Tessellation shaders require OpenGL Core Profile.
+//
 // WithTessellationControlShader sets the tessellationControlShader property and returns the receiver for chaining.
 func (x *Program) WithTessellationControlShader(tessellationControlShader string) *Program {
 	x.inner.SetTessellationControlShader(foundation.NSStringStringWithUTF8String(tessellationControlShader))
 	return x
 }
 
+// @property tessellationEvaluationShader @abstract Determines the receiver's tessellation evaluation shader. Tessellation shaders require OpenGL Core Profile.
+//
 // WithTessellationEvaluationShader sets the tessellationEvaluationShader property and returns the receiver for chaining.
 func (x *Program) WithTessellationEvaluationShader(tessellationEvaluationShader string) *Program {
 	x.inner.SetTessellationEvaluationShader(foundation.NSStringStringWithUTF8String(tessellationEvaluationShader))
 	return x
 }
 
+// @property geometryShader @abstract Determines the receiver's geometry shader. Geometry shaders require OpenGL Core Profile.
+//
 // WithGeometryShader sets the geometryShader property and returns the receiver for chaining.
 func (x *Program) WithGeometryShader(geometryShader string) *Program {
 	x.inner.SetGeometryShader(foundation.NSStringStringWithUTF8String(geometryShader))
 	return x
 }
 
+// @property vertexFunctionName @abstract Determines the receiver's vertex function name. @discussion The name of the vertex function (for Metal programs).
+//
 // WithVertexFunctionName sets the vertexFunctionName property and returns the receiver for chaining.
 func (x *Program) WithVertexFunctionName(vertexFunctionName string) *Program {
 	x.inner.SetVertexFunctionName(foundation.NSStringStringWithUTF8String(vertexFunctionName))
 	return x
 }
 
+// @property fragmentFunctionName @abstract Determines the receiver's fragment function name. @discussion The name of the fragment function (for Metal programs).
+//
 // WithFragmentFunctionName sets the fragmentFunctionName property and returns the receiver for chaining.
 func (x *Program) WithFragmentFunctionName(fragmentFunctionName string) *Program {
 	x.inner.SetFragmentFunctionName(foundation.NSStringStringWithUTF8String(fragmentFunctionName))
 	return x
 }
 
+// @property opaque @abstract Determines the receiver's fragment are opaque or not. Defaults to YES.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *Program) WithOpaque(opaque bool) *Program {
 	x.inner.SetOpaque(opaque)
 	return x
 }
 
+// @property delegate @abstract Determines the receiver's delegate
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Program) WithDelegate(delegate raw.SCNProgramDelegate) *Program {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @property library @abstract Specifies the Metal library to use to locate the function names specified above. @discussion If set to nil the default library is used. Defaults to nil.
+//
 // WithLibrary sets the library property and returns the receiver for chaining.
 func (x *Program) WithLibrary(library metal.MTLLibrary) *Program {
 	x.inner.SetLibrary(library)
 	return x
 }
 
+// @method handleBindingOfBufferNamed:frequency:usingBlock: @abstract Sets the block to call at render time to bind the buffer of the specified symbol of the receiver's program. @param name The name of the buffer to bind. @param frequency The frequency at which the block has to be invoked. Can be per frame, per node or per geometry or material. See SCNBufferBindingBlock above. @param block The block that binds the buffer. @discussion This method can only be used with Metal based programs.
+//
 // HandleBindingOfBufferNamedFrequencyUsing calls the underlying HandleBindingOfBufferNamedFrequencyUsing.
 func (x *Program) HandleBindingOfBufferNamedFrequencyUsing(name string, frequency SCNBufferFrequency, block func(objc.ID, *raw.SCNNode, objc.ID, *raw.SCNRenderer)) {
 	x.inner.HandleBindingOfBufferNamedFrequencyUsing(foundation.NSStringStringWithUTF8String(name), raw.SCNBufferFrequency(frequency), block)
 }
 
+// @method setSemantic:forSymbol:options: @abstract Associates a SceneKit semantic to a symbol. @param semantic The SceneKit semantic to associate to the specified symbol. @param symbol A symbol from the program source code. @param options An optional dictionary. See the 'Semantic options' above. @discussion Associates semantics handled by the SceneKit runtime to a symbol from the program. Supported semantics are listed in SCNGeometry.h and SCNNode.h.
+//
 // SetSemanticForSymbolOptions calls the underlying SetSemanticForSymbolOptions.
 func (x *Program) SetSemanticForSymbolOptions(semantic string, symbol string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.SetSemanticForSymbolOptions(foundation.NSStringStringWithUTF8String(semantic), foundation.NSStringStringWithUTF8String(symbol), options)
 }
 
+// @method semanticForSymbol: @abstract Retrieves the SceneKit semantic associated to a symbol from the program source code. @param symbol A symbol from the program source code.
+//
 // SemanticForSymbol calls the underlying SemanticForSymbol.
 func (x *Program) SemanticForSymbol(symbol string) string {
 	_r := x.inner.SemanticForSymbol(foundation.NSStringStringWithUTF8String(symbol))
@@ -117,6 +143,8 @@ func (x *Program) SemanticForSymbol(symbol string) string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property vertexShader @abstract Determines the receiver's vertex shader.
+//
 // VertexShader calls the underlying VertexShader.
 func (x *Program) VertexShader() string {
 	_r := x.inner.VertexShader()
@@ -131,6 +159,8 @@ func (x *Program) SetVertexShader(vertexShader string) {
 	x.inner.SetVertexShader(foundation.NSStringStringWithUTF8String(vertexShader))
 }
 
+// @property fragmentShader @abstract Determines the receiver's fragment shader.
+//
 // FragmentShader calls the underlying FragmentShader.
 func (x *Program) FragmentShader() string {
 	_r := x.inner.FragmentShader()
@@ -145,6 +175,8 @@ func (x *Program) SetFragmentShader(fragmentShader string) {
 	x.inner.SetFragmentShader(foundation.NSStringStringWithUTF8String(fragmentShader))
 }
 
+// @property tessellationControlShader @abstract Determines the receiver's tessellation control shader. Tessellation shaders require OpenGL Core Profile.
+//
 // TessellationControlShader calls the underlying TessellationControlShader.
 func (x *Program) TessellationControlShader() string {
 	_r := x.inner.TessellationControlShader()
@@ -159,6 +191,8 @@ func (x *Program) SetTessellationControlShader(tessellationControlShader string)
 	x.inner.SetTessellationControlShader(foundation.NSStringStringWithUTF8String(tessellationControlShader))
 }
 
+// @property tessellationEvaluationShader @abstract Determines the receiver's tessellation evaluation shader. Tessellation shaders require OpenGL Core Profile.
+//
 // TessellationEvaluationShader calls the underlying TessellationEvaluationShader.
 func (x *Program) TessellationEvaluationShader() string {
 	_r := x.inner.TessellationEvaluationShader()
@@ -173,6 +207,8 @@ func (x *Program) SetTessellationEvaluationShader(tessellationEvaluationShader s
 	x.inner.SetTessellationEvaluationShader(foundation.NSStringStringWithUTF8String(tessellationEvaluationShader))
 }
 
+// @property geometryShader @abstract Determines the receiver's geometry shader. Geometry shaders require OpenGL Core Profile.
+//
 // GeometryShader calls the underlying GeometryShader.
 func (x *Program) GeometryShader() string {
 	_r := x.inner.GeometryShader()
@@ -187,6 +223,8 @@ func (x *Program) SetGeometryShader(geometryShader string) {
 	x.inner.SetGeometryShader(foundation.NSStringStringWithUTF8String(geometryShader))
 }
 
+// @property vertexFunctionName @abstract Determines the receiver's vertex function name. @discussion The name of the vertex function (for Metal programs).
+//
 // VertexFunctionName calls the underlying VertexFunctionName.
 func (x *Program) VertexFunctionName() string {
 	_r := x.inner.VertexFunctionName()
@@ -201,6 +239,8 @@ func (x *Program) SetVertexFunctionName(vertexFunctionName string) {
 	x.inner.SetVertexFunctionName(foundation.NSStringStringWithUTF8String(vertexFunctionName))
 }
 
+// @property fragmentFunctionName @abstract Determines the receiver's fragment function name. @discussion The name of the fragment function (for Metal programs).
+//
 // FragmentFunctionName calls the underlying FragmentFunctionName.
 func (x *Program) FragmentFunctionName() string {
 	_r := x.inner.FragmentFunctionName()
@@ -215,6 +255,8 @@ func (x *Program) SetFragmentFunctionName(fragmentFunctionName string) {
 	x.inner.SetFragmentFunctionName(foundation.NSStringStringWithUTF8String(fragmentFunctionName))
 }
 
+// @property opaque @abstract Determines the receiver's fragment are opaque or not. Defaults to YES.
+//
 // IsOpaque calls the underlying IsOpaque.
 func (x *Program) IsOpaque() bool {
 	return x.inner.IsOpaque()
@@ -225,6 +267,8 @@ func (x *Program) SetOpaque(opaque bool) {
 	x.inner.SetOpaque(opaque)
 }
 
+// @property delegate @abstract Determines the receiver's delegate
+//
 // Delegate calls the underlying Delegate.
 func (x *Program) Delegate() raw.SCNProgramDelegate {
 	return x.inner.Delegate()
@@ -235,6 +279,8 @@ func (x *Program) SetDelegate(delegate raw.SCNProgramDelegate) {
 	x.inner.SetDelegate(delegate)
 }
 
+// @property library @abstract Specifies the Metal library to use to locate the function names specified above. @discussion If set to nil the default library is used. Defaults to nil.
+//
 // Library calls the underlying Library.
 func (x *Program) Library() metal.MTLLibrary {
 	return x.inner.Library()

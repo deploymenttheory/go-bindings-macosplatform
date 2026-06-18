@@ -35,6 +35,8 @@ func NewSymbolAppearEffect() *SymbolAppearEffect {
 	return &SymbolAppearEffect{inner: raw.NSSymbolAppearEffectFromID(_id)}
 }
 
+// Returns a copy of the effect that animates incrementally, by layer.
+//
 // EffectWithByLayer calls the underlying EffectWithByLayer.
 func (x *SymbolAppearEffect) EffectWithByLayer() *SymbolAppearEffect {
 	_r := x.inner.EffectWithByLayer()
@@ -44,6 +46,8 @@ func (x *SymbolAppearEffect) EffectWithByLayer() *SymbolAppearEffect {
 	return &SymbolAppearEffect{inner: _r}
 }
 
+// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+//
 // EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
 func (x *SymbolAppearEffect) EffectWithWholeSymbol() *SymbolAppearEffect {
 	_r := x.inner.EffectWithWholeSymbol()

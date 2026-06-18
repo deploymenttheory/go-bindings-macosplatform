@@ -85,8 +85,17 @@ func (x *FunctionStitchingFunctionNode) Arguments() *foundation.NSArray[raw.MTLF
 }
 
 // SetArguments calls the underlying SetArguments.
-func (x *FunctionStitchingFunctionNode) SetArguments(arguments *foundation.NSArray[raw.MTLFunctionStitchingNode]) {
-	x.inner.SetArguments(arguments)
+func (x *FunctionStitchingFunctionNode) SetArguments(arguments ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(arguments))
+	for _i, _v := range arguments {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTLFunctionStitchingNode]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTLFunctionStitchingNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetArguments(_arg0)
 }
 
 // ControlDependencies returns the collection as a Go slice.
@@ -113,7 +122,7 @@ type FunctionStitchingFunctionNodeable interface {
 	Name() string
 	SetName(name string)
 	Arguments() *foundation.NSArray[raw.MTLFunctionStitchingNode]
-	SetArguments(arguments *foundation.NSArray[raw.MTLFunctionStitchingNode])
+	SetArguments(arguments ...purego.IDer)
 	ControlDependencies() []*FunctionStitchingFunctionNode
 	SetControlDependencies(controlDependencies *foundation.NSArray[*raw.MTLFunctionStitchingFunctionNode])
 }

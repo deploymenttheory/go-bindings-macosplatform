@@ -31,6 +31,8 @@ func MatrixFromID(id objc.ID) *Matrix {
 	return &Matrix{inner: raw.MPSMatrixFromID(id)}
 }
 
+// @abstract   Initialize a MPSMatrix object with a MTLBuffer. @param      buffer          The MTLBuffer object which contains the data to use for the MPSMatrix. May not be NULL. @param      descriptor      The MPSMatrixDescriptor. May not be NULL. @return     A valid MPSMatrix object or nil, if failure. @discussion This function returns a MPSMatrix object which uses the supplied MTLBuffer.  The dimensions and stride of the matrix are specified by the MPSMatrixDescriptor object. The provided MTLBuffer must have enough storage to hold (descriptor.matrices-1) * descriptor.matrixBytes + (descriptor.rows-1) * descriptor.rowBytes + descriptor.columns * (element size) bytes.
+//
 // NewMatrixWithBufferDescriptor creates a new [Matrix].
 func NewMatrixWithBufferDescriptor(buffer metal.MTLBuffer, descriptor *mpscore.MPSMatrixDescriptor) *Matrix {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrix")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewMatrixWithBufferDescriptor(buffer metal.MTLBuffer, descriptor *mpscore.M
 	return &Matrix{inner: raw.MPSMatrixFromID(_id)}
 }
 
+// @abstract   Initialize a MPSMatrix object with a MTLBuffer at a given offset. @param      buffer      The MTLBuffer object which contains the data to use for the MPSMatrix.  May not be NULL. @param      offset      The offset, in bytes, into the buffer at which the data begins. @param      descriptor  The MPSMatrixDescriptor describing the shape of the matrix.
+//
 // NewMatrixWithBufferOffsetDescriptor creates a new [Matrix].
 func NewMatrixWithBufferOffsetDescriptor(buffer metal.MTLBuffer, offset uint, descriptor *mpscore.MPSMatrixDescriptor) *Matrix {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrix")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewMatrixWithBufferOffsetDescriptor(buffer metal.MTLBuffer, offset uint, de
 	return &Matrix{inner: raw.MPSMatrixFromID(_id)}
 }
 
+// @abstract   Initialize a MPSMatrix object with a descriptor. Allocate the buffer. @param      device      The device with which it will be used @param      descriptor  The shape and style of the matrix @return     A valid MPSMatrix object or nil @discussion The matrix object will be created, but the storage to hold the matrix data will only be allocated when it is needed, typically when the data property is invoked.  In conjunction with -resourceSize, this will allow you to estimate storage needs without actually creating the backing store for the matrix.
+//
 // NewMatrixWithDeviceDescriptor creates a new [Matrix].
 func NewMatrixWithDeviceDescriptor(device metal.MTLDevice, descriptor *mpscore.MPSMatrixDescriptor) *Matrix {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrix")), objc.RegisterName("alloc"))
@@ -52,56 +58,78 @@ func NewMatrixWithDeviceDescriptor(device metal.MTLDevice, descriptor *mpscore.M
 	return &Matrix{inner: raw.MPSMatrixFromID(_id)}
 }
 
+// @abstract   Flush the underlying MTLBuffer from the device's caches, and invalidate any CPU caches if needed. @discussion This will call [id <MTLBlitEncoder> synchronizeResource: ] on the matrix's MTLBuffer, if any. This is necessary for all MTLStorageModeManaged resources. For other resources, including temporary resources (these are all MTLStorageModePrivate), and buffers that have not yet been allocated, nothing is done. It is more efficient to use this method than to attempt to do this yourself with the data property. @param      commandBuffer       The commandbuffer on which to synchronize
+//
 // SynchronizeOnCommandBuffer calls the underlying SynchronizeOnCommandBuffer.
 func (x *Matrix) SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer) {
 	x.inner.SynchronizeOnCommandBuffer(commandBuffer)
 }
 
+// @abstract       Get the number of bytes used to allocate underyling MTLResources @discussion     This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSMatrix instantiation and MTLBuffer is not included. It only measures the size of the allocation used to hold the matrix data in the buffer. This value is subject to change between different devices and operating systems. Except when -initWithBuffer:descriptor: is used, most MPSMatrixes are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSImage is created with -initWithTexture:featureChannels:. In such cases, 0 will be returned.
+//
 // ResourceSize calls the underlying ResourceSize.
 func (x *Matrix) ResourceSize() uint {
 	return x.inner.ResourceSize()
 }
 
+// @property   device @discussion The device on which the MPSMatrix will be used.
+//
 // Device calls the underlying Device.
 func (x *Matrix) Device() metal.MTLDevice {
 	return x.inner.Device()
 }
 
+// @property   rows @discussion The number of rows in a matrix in the MPSMatrix.
+//
 // Rows calls the underlying Rows.
 func (x *Matrix) Rows() uint {
 	return x.inner.Rows()
 }
 
+// @property   columns @discussion The number of columns in a matrix in the MPSMatrix.
+//
 // Columns calls the underlying Columns.
 func (x *Matrix) Columns() uint {
 	return x.inner.Columns()
 }
 
+// @property   matrices @discussion The number of matrices in the MPSMatrix.
+//
 // Matrices calls the underlying Matrices.
 func (x *Matrix) Matrices() uint {
 	return x.inner.Matrices()
 }
 
+// @property   dataType @discussion The type of the MPSMatrix data.
+//
 // DataType calls the underlying DataType.
 func (x *Matrix) DataType() mpscore.MPSDataType {
 	return x.inner.DataType()
 }
 
+// @property   rowBytes @discussion The stride, in bytes, between corresponding elements of consecutive rows.
+//
 // RowBytes calls the underlying RowBytes.
 func (x *Matrix) RowBytes() uint {
 	return x.inner.RowBytes()
 }
 
+// @property   matrixBytes @discussion The stride, in bytes, between corresponding elements of consecutive matrices.
+//
 // MatrixBytes calls the underlying MatrixBytes.
 func (x *Matrix) MatrixBytes() uint {
 	return x.inner.MatrixBytes()
 }
 
+// @property   offset @discussion Byte-offset to the buffer where the matrix data begins - see @ref initWithBuffer: offset: descriptor: .
+//
 // Offset calls the underlying Offset.
 func (x *Matrix) Offset() uint {
 	return x.inner.Offset()
 }
 
+// @property   data @discussion An MTLBuffer to store the data.
+//
 // Data calls the underlying Data.
 func (x *Matrix) Data() metal.MTLBuffer {
 	return x.inner.Data()

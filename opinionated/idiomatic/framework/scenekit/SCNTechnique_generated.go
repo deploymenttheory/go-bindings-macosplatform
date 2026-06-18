@@ -37,12 +37,16 @@ func NewTechnique() *Technique {
 	return &Technique{inner: raw.SCNTechniqueFromID(_id)}
 }
 
+// @property library @abstract The Metal library to use to load the Metal programs specified in the technique description. Defaults to nil which corresponds to the default Metal library.
+//
 // WithLibrary sets the library property and returns the receiver for chaining.
 func (x *Technique) WithLibrary(library metal.MTLLibrary) *Technique {
 	x.inner.SetLibrary(library)
 	return x
 }
 
+// @method handleBindingOfSymbol:usingBlock: @abstract Sets the block to call at render time to bind the value for the specified symbol of the receiver. @param symbol The name of the symbol to bind a value for. @param block The block to call to bind the specified symbol. @discussion The block will be called at every frame for every pass referencing the specified symbol.
+//
 // HandleBindingOfSymbolUsing calls the underlying HandleBindingOfSymbolUsing.
 func (x *Technique) HandleBindingOfSymbolUsing(symbol string, block func(uint, uint, *raw.SCNNode, *raw.SCNRenderer)) {
 	x.inner.HandleBindingOfSymbolUsing(foundation.NSStringStringWithUTF8String(symbol), block)
@@ -58,11 +62,15 @@ func (x *Technique) SetObjectForKeyedSubscript(obj objc.ID, key foundation.NSCop
 	x.inner.SetObjectForKeyedSubscript(obj, key)
 }
 
+// @property dictionaryRepresentation @abstract Returns the dictionary representation of the technique.
+//
 // DictionaryRepresentation calls the underlying DictionaryRepresentation.
 func (x *Technique) DictionaryRepresentation() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.DictionaryRepresentation()
 }
 
+// @property library @abstract The Metal library to use to load the Metal programs specified in the technique description. Defaults to nil which corresponds to the default Metal library.
+//
 // Library calls the underlying Library.
 func (x *Technique) Library() metal.MTLLibrary {
 	return x.inner.Library()

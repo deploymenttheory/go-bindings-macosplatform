@@ -37,70 +37,96 @@ func NewCaptureVideoDataOutput() *CaptureVideoDataOutput {
 	return &CaptureVideoDataOutput{inner: raw.AVCaptureVideoDataOutputFromID(_id)}
 }
 
+// @property videoSettings @abstract Specifies the settings used to decode or re-encode video before it is output by the receiver. @discussion See AVVideoSettings.h for more information on how to construct a video settings dictionary. To receive samples in their device native format, set this property to an empty dictionary (i.e. [NSDictionary dictionary]). To receive samples in a default uncompressed format, set this property to nil. Note that after this property is set to nil, subsequent querying of this property will yield a non-nil dictionary reflecting the settings used by the AVCaptureSession's current sessionPreset. On iOS versions prior to iOS 16.0, the only supported key is kCVPixelBufferPixelFormatTypeKey. Use -availableVideoCVPixelFormatTypes for the list of supported pixel formats. For apps linked on or after iOS 16.0, kCVPixelBufferPixelFormatTypeKey, kCVPixelBufferWidthKey, and kCVPixelBufferHeightKey are supported. The width and height must match the videoOrientation specified on the output's AVCaptureConnection or an NSInvalidArgumentException is thrown. The aspect ratio of width and height must match the aspect ratio of the source's activeFormat (corrected for the connection's videoOrientation) or an NSInvalidArgumentException is thrown. If width or height exceeds the source's activeFormat's width or height, an NSInvalidArgumentException is thrown. Changing width and height when deliversPreviewSizedOutputBuffers is set to YES is not supported and throws an NSInvalidArgumentException.
+//
 // WithVideoSettings sets the videoSettings property and returns the receiver for chaining.
 func (x *CaptureVideoDataOutput) WithVideoSettings(videoSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptureVideoDataOutput {
 	x.inner.SetVideoSettings(videoSettings)
 	return x
 }
 
+// @property alwaysDiscardsLateVideoFrames @abstract Specifies whether the receiver should always discard any video frame that is not processed before the next frame is captured. @discussion When the value of this property is YES, the receiver will immediately discard frames that are captured while the dispatch queue handling existing frames is blocked in the captureOutput:didOutputSampleBuffer:fromConnection: delegate method. When the value of this property is NO, delegates will be allowed more time to process old frames before new frames are discarded, but application memory usage may increase significantly as a result. The default value is YES.
+//
 // WithAlwaysDiscardsLateVideoFrames sets the alwaysDiscardsLateVideoFrames property and returns the receiver for chaining.
 func (x *CaptureVideoDataOutput) WithAlwaysDiscardsLateVideoFrames(alwaysDiscardsLateVideoFrames bool) *CaptureVideoDataOutput {
 	x.inner.SetAlwaysDiscardsLateVideoFrames(alwaysDiscardsLateVideoFrames)
 	return x
 }
 
+// Indicates whether the receiver should preserve dynamic HDR metadata as an attachment on the output sample buffer's underlying pixel buffer. Set this property to `true` if you wish to use “AVCaptureVideoDataOutput“ with “AVAssetWriter“ to record HDR movies. You must also set “kVTCompressionPropertyKey_PreserveDynamicHDRMetadata“ to `true` in the compression settings you pass to your “AVAssetWriterInput“. These compression settings are represented under the “AVVideoCompressionPropertiesKey“ sub-dictionary of your top-level AVVideoSettings (see <doc://com.apple.documentation/documentation/avfoundation/video-settings>). When you set this key to `true`, performance improves, as the encoder is able to skip HDR metadata calculation for every frame. The default value is `false`.
+//
 // WithPreservesDynamicHDRMetadata sets the preservesDynamicHDRMetadata property and returns the receiver for chaining.
 func (x *CaptureVideoDataOutput) WithPreservesDynamicHDRMetadata(preservesDynamicHDRMetadata bool) *CaptureVideoDataOutput {
 	x.inner.SetPreservesDynamicHDRMetadata(preservesDynamicHDRMetadata)
 	return x
 }
 
+// A `BOOL` value that indicates whether to defer starting this capture output. When this value is `true`, the session does not prepare the output's resources until some time after “AVCaptureSession/startRunning“ returns. You can start the visual parts of your user interface (e.g. preview) prior to other parts (e.g. photo/movie capture, metadata output, etc..) to improve startup performance. Set this value to `false` for outputs that your app needs for startup, and `true` for the ones it does not need to start immediately. For example, an “AVCaptureVideoDataOutput“ that you intend to use for displaying preview should set this value to `false`, so that the frames are available as soon as possible. By default, for apps that are linked on or after iOS 26, this property value is `true` for “AVCapturePhotoOutput“ and “AVCaptureFileOutput“ subclasses if supported, and `false` otherwise. When set to `true` for “AVCapturePhotoOutput“, if you want to support multiple capture requests before running deferred start, set “AVCapturePhotoOutput/responsiveCaptureEnabled“ to `true` on that output. If “deferredStartSupported“ is `false`, setting this property value to `true` results in the system throwing an `NSInvalidArgumentException`. - Note: Set this value before calling “AVCaptureSession/commitConfiguration“ as it requires a lengthy reconfiguration of the capture render pipeline.
+//
 // WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
 func (x *CaptureVideoDataOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureVideoDataOutput {
 	x.inner.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
 	return x
 }
 
+// @method setSampleBufferDelegate:queue: @abstract Sets the receiver's delegate that will accept captured buffers and dispatch queue on which the delegate will be called. @param sampleBufferDelegate An object conforming to the AVCaptureVideoDataOutputSampleBufferDelegate protocol that will receive sample buffers after they are captured. @param sampleBufferCallbackQueue A dispatch queue on which all sample buffer delegate methods will be called. @discussion When a new video sample buffer is captured it will be vended to the sample buffer delegate using the captureOutput:didOutputSampleBuffer:fromConnection: delegate method. All delegate methods will be called on the specified dispatch queue. If the queue is blocked when new frames are captured, those frames will be automatically dropped at a time determined by the value of the alwaysDiscardsLateVideoFrames property. This allows clients to process existing frames on the same queue without having to manage the potential memory usage increases that would otherwise occur when that processing is unable to keep up with the rate of incoming frames. If their frame processing is consistently unable to keep up with the rate of incoming frames, clients should consider using the minFrameDuration property, which will generally yield better performance characteristics and more consistent frame rates than frame dropping alone. Clients that need to minimize the chances of frames being dropped should specify a queue on which a sufficiently small amount of processing is being done outside of receiving sample buffers. However, if such clients migrate extra processing to another queue, they are responsible for ensuring that memory usage does not grow without bound from frames that have not been processed. A serial dispatch queue must be used to guarantee that video frames will be delivered in order. The sampleBufferCallbackQueue parameter may not be NULL, except when setting the sampleBufferDelegate to nil otherwise -setSampleBufferDelegate:queue: throws an NSInvalidArgumentException.
+//
 // SetSampleBufferDelegateQueue calls the underlying SetSampleBufferDelegateQueue.
 func (x *CaptureVideoDataOutput) SetSampleBufferDelegateQueue(sampleBufferDelegate raw.AVCaptureVideoDataOutputSampleBufferDelegate, sampleBufferCallbackQueue *foundation.NSObject) {
 	x.inner.SetSampleBufferDelegateQueue(sampleBufferDelegate, sampleBufferCallbackQueue)
 }
 
+// @method recommendedVideoSettingsForAssetWriterWithOutputFileType: @abstract Specifies the recommended settings for use with an AVAssetWriterInput. @param outputFileType Specifies the UTI of the file type to be written (see AVMediaFormat.h for a list of file format UTIs). @result A fully populated dictionary of keys and values that are compatible with AVAssetWriter. @discussion The value of this property is an NSDictionary containing values for compression settings keys defined in AVVideoSettings.h. This dictionary is suitable for use as the "outputSettings" parameter when creating an AVAssetWriterInput, such as, [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:outputSettings sourceFormatHint:hint]; The dictionary returned contains all necessary keys and values needed by AVAssetWriter (see AVAssetWriterInput.h, -initWithMediaType:outputSettings: for a more in depth discussion). For QuickTime movie and ISO file types, the recommended video settings will produce output comparable to that of AVCaptureMovieFileOutput. Note that the dictionary of settings is dependent on the current configuration of the receiver's AVCaptureSession and its inputs. The settings dictionary may change if the session's configuration changes. As such, you should configure your session first, then query the recommended video settings. As of iOS 8.3, movies produced with these settings successfully import into the iOS camera roll and sync to and from like devices via iTunes.
+//
 // RecommendedVideoSettingsForAssetWriterWithOutputFileType calls the underlying RecommendedVideoSettingsForAssetWriterWithOutputFileType.
 func (x *CaptureVideoDataOutput) RecommendedVideoSettingsForAssetWriterWithOutputFileType(outputFileType *foundation.NSString) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.RecommendedVideoSettingsForAssetWriterWithOutputFileType(outputFileType)
 }
 
+// @method availableVideoCodecTypesForAssetWriterWithOutputFileType: @abstract Specifies the available video codecs for use with AVAssetWriter and a given file type. @param outputFileType Specifies the UTI of the file type to be written (see AVMediaFormat.h for a list of file format UTIs). @result An array of video codecs; see AVVideoSettings.h for a full list. @discussion This method allows you to query the available video codecs that may be used when specifying an AVVideoCodecKey in -recommendedVideoSettingsForVideoCodecType:assetWriterOutputFileType:. When specifying an outputFileType of AVFileTypeQuickTimeMovie, video codecs are ordered identically to -[AVCaptureMovieFileOutput availableVideoCodecTypes].
+//
 // AvailableVideoCodecTypesForAssetWriterWithOutputFileType calls the underlying AvailableVideoCodecTypesForAssetWriterWithOutputFileType.
 func (x *CaptureVideoDataOutput) AvailableVideoCodecTypesForAssetWriterWithOutputFileType(outputFileType *foundation.NSString) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.AvailableVideoCodecTypesForAssetWriterWithOutputFileType(outputFileType)
 }
 
+// @method recommendedVideoSettingsForVideoCodecType:assetWriterOutputFileType: @abstract Specifies the recommended settings for a particular video codec type, to be used with an AVAssetWriterInput. @param videoCodecType Specifies the desired AVVideoCodecKey to be used for compression (see AVVideoSettings.h). @param outputFileType Specifies the UTI of the file type to be written (see AVMediaFormat.h for a list of file format UTIs). @result A fully populated dictionary of keys and values that are compatible with AVAssetWriter. @discussion The value of this property is an NSDictionary containing values for compression settings keys defined in AVVideoSettings.h. This dictionary is suitable for use as the "outputSettings" parameter when creating an AVAssetWriterInput, such as, [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:outputSettings sourceFormatHint:hint]; The dictionary returned contains all necessary keys and values needed by AVAssetWriter (see AVAssetWriterInput.h, -initWithMediaType:outputSettings: for a more in depth discussion). For QuickTime movie and ISO file types, the recommended video settings will produce output comparable to that of AVCaptureMovieFileOutput. The videoCodecType string provided must be present in the availableVideoCodecTypesForAssetWriterWithOutputFileType: array, or an NSInvalidArgumentException is thrown. Note that the dictionary of settings is dependent on the current configuration of the receiver's AVCaptureSession and its inputs. The settings dictionary may change if the session's configuration changes. As such, you should configure your session first, then query the recommended video settings. As of iOS 8.3, movies produced with these settings successfully import into the iOS camera roll and sync to and from like devices via iTunes.
+//
 // RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileType calls the underlying RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileType.
 func (x *CaptureVideoDataOutput) RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileType(videoCodecType *foundation.NSString, outputFileType *foundation.NSString) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileType(videoCodecType, outputFileType)
 }
 
+// @method recommendedVideoSettingsForVideoCodecType:assetWriterOutputFileType:outputFileURL: @abstract Specifies the recommended settings for a particular video codec type with output file URL, to be used with an AVAssetWriterInput. @param videoCodecType Specifies the desired AVVideoCodecKey to be used for compression (see AVVideoSettings.h). @param outputFileType Specifies the UTI of the file type to be written (see AVMediaFormat.h for a list of file format UTIs). @param outputFileURL Specifies the output URL of the file to be written. If you wish to capture onto an external storage device get an externalStorageDevice of type AVExternalStorageDevice (as defined in AVExternalStorageDevice.h): [AVExternalStorageDeviceDiscoverySession sharedSession] externalStorageDevices] Then use [externalStorageDevice nextAvailableURLsWithPathExtensions:pathExtensions error:&error] to get the output file URL. @result A fully populated dictionary of keys and values that are compatible with AVAssetWriter. @discussion The value of this property is an NSDictionary containing values for compression settings keys defined in AVVideoSettings.h. This dictionary is suitable for use as the "outputSettings" parameter when creating an AVAssetWriterInput, such as, [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:outputSettings sourceFormatHint:hint]; The dictionary returned contains all necessary keys and values needed by AVAssetWriter (see AVAssetWriterInput.h, -initWithMediaType:outputSettings: for a more in depth discussion). For QuickTime movie and ISO file types, the recommended video settings will produce output comparable to that of AVCaptureMovieFileOutput. The videoCodecType string provided must be present in the availableVideoCodecTypesForAssetWriterWithOutputFileType: array, or an NSInvalidArgumentException is thrown. Note that the dictionary of settings is dependent on the current configuration of the receiver's AVCaptureSession and its inputs. The settings dictionary may change if the session's configuration changes. As such, you should configure your session first, then query the recommended video settings. As of iOS 8.3, movies produced with these settings successfully import into the iOS camera roll and sync to and from like devices via iTunes.
+//
 // RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileTypeOutputFileURL calls the underlying RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileTypeOutputFileURL.
 func (x *CaptureVideoDataOutput) RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileTypeOutputFileURL(videoCodecType *foundation.NSString, outputFileType *foundation.NSString, outputFileURL string) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileTypeOutputFileURL(videoCodecType, outputFileType, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputFileURL)))
 }
 
+// Recommends movie-level metadata for a particular video codec type and output file type, to be used with an asset writer input. - Parameter videoCodecType: The desired “AVVideoCodecKey“ to be used for compression (see <doc://com.apple.documentation/documentation/avfoundation/video-settings>). - Parameter outputFileType: Specifies the UTI of the file type to be written (see <doc://com.apple.documentation/documentation/avfoundation/avfiletype>). - Returns: A fully populated array of “AVMetadataItem“ objects compatible with “AVAssetWriter“. The value of this property is an array of “AVMetadataItem“ objects representing the collection of top-level metadata to be written in each output file. This array is suitable to use as the “AVAssetWriter/metadata“ property before you have called “AVAssetWriter/startWriting“. For more details see <doc://com.apple.documentation/documentation/avfoundation/avassetwriter/startwriting()>. The “videoCodecType“ string you provide must be present in “availableVideoCodecTypesForAssetWriterWithOutputFileType:“ array, or an `NSInvalidArgumentException` is thrown. For clients writing files using a ProRes Raw codec type, white balance must be locked (call “AVCaptureDevice/setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains:completionHandler:“) before querying this property, or an `NSIvalidArgumentException` is thrown. - Note: The array of metadata is dependent on the current configuration of the receiver's “AVCaptureSession“ and its inputs. The array may change when the session's configuration changes. As such, you should configure and start your session first, then query this method.
+//
 // RecommendedMovieMetadataForVideoCodecTypeAssetWriterOutputFileType calls the underlying RecommendedMovieMetadataForVideoCodecTypeAssetWriterOutputFileType.
 func (x *CaptureVideoDataOutput) RecommendedMovieMetadataForVideoCodecTypeAssetWriterOutputFileType(videoCodecType *foundation.NSString, outputFileType *foundation.NSString) *foundation.NSArray[*raw.AVMetadataItem] {
 	return x.inner.RecommendedMovieMetadataForVideoCodecTypeAssetWriterOutputFileType(videoCodecType, outputFileType)
 }
 
+// @property sampleBufferDelegate @abstract The receiver's delegate. @discussion The value of this property is an object conforming to the AVCaptureVideoDataOutputSampleBufferDelegate protocol that will receive sample buffers after they are captured. The delegate is set using the setSampleBufferDelegate:queue: method.
+//
 // SampleBufferDelegate calls the underlying SampleBufferDelegate.
 func (x *CaptureVideoDataOutput) SampleBufferDelegate() raw.AVCaptureVideoDataOutputSampleBufferDelegate {
 	return x.inner.SampleBufferDelegate()
 }
 
+// @property sampleBufferCallbackQueue @abstract The dispatch queue on which all sample buffer delegate methods will be called. @discussion The value of this property is a dispatch_queue_t. The queue is set using the setSampleBufferDelegate:queue: method.
+//
 // SampleBufferCallbackQueue calls the underlying SampleBufferCallbackQueue.
 func (x *CaptureVideoDataOutput) SampleBufferCallbackQueue() *foundation.NSObject {
 	return x.inner.SampleBufferCallbackQueue()
 }
 
+// @property videoSettings @abstract Specifies the settings used to decode or re-encode video before it is output by the receiver. @discussion See AVVideoSettings.h for more information on how to construct a video settings dictionary. To receive samples in their device native format, set this property to an empty dictionary (i.e. [NSDictionary dictionary]). To receive samples in a default uncompressed format, set this property to nil. Note that after this property is set to nil, subsequent querying of this property will yield a non-nil dictionary reflecting the settings used by the AVCaptureSession's current sessionPreset. On iOS versions prior to iOS 16.0, the only supported key is kCVPixelBufferPixelFormatTypeKey. Use -availableVideoCVPixelFormatTypes for the list of supported pixel formats. For apps linked on or after iOS 16.0, kCVPixelBufferPixelFormatTypeKey, kCVPixelBufferWidthKey, and kCVPixelBufferHeightKey are supported. The width and height must match the videoOrientation specified on the output's AVCaptureConnection or an NSInvalidArgumentException is thrown. The aspect ratio of width and height must match the aspect ratio of the source's activeFormat (corrected for the connection's videoOrientation) or an NSInvalidArgumentException is thrown. If width or height exceeds the source's activeFormat's width or height, an NSInvalidArgumentException is thrown. Changing width and height when deliversPreviewSizedOutputBuffers is set to YES is not supported and throws an NSInvalidArgumentException.
+//
 // VideoSettings calls the underlying VideoSettings.
 func (x *CaptureVideoDataOutput) VideoSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.VideoSettings()
@@ -111,11 +137,15 @@ func (x *CaptureVideoDataOutput) SetVideoSettings(videoSettings *foundation.NSDi
 	x.inner.SetVideoSettings(videoSettings)
 }
 
+// Indicates the recommended media timescale for the video track. - Returns: The recommended media timescale based on the active capture session's inputs. It is never less than 600. It may or may not be a multiple of 600.
+//
 // RecommendedMediaTimeScaleForAssetWriter calls the underlying RecommendedMediaTimeScaleForAssetWriter.
 func (x *CaptureVideoDataOutput) RecommendedMediaTimeScaleForAssetWriter() int32 {
 	return x.inner.RecommendedMediaTimeScaleForAssetWriter()
 }
 
+// @property availableVideoCVPixelFormatTypes @abstract Indicates the supported video pixel formats that can be specified in videoSettings. @discussion The value of this property is an NSArray of NSNumbers that can be used as values for the kCVPixelBufferPixelFormatTypeKey in the receiver's videoSettings property. The formats are listed in an unspecified order. This list can may change if the activeFormat of the AVCaptureDevice connected to the receiver changes.
+//
 // AvailableVideoCVPixelFormatTypes returns the collection as a Go slice.
 func (x *CaptureVideoDataOutput) AvailableVideoCVPixelFormatTypes() []*foundation.NSNumber {
 	arr := x.inner.AvailableVideoCVPixelFormatTypes()
@@ -127,6 +157,8 @@ func (x *CaptureVideoDataOutput) AvailableVideoCVPixelFormatTypes() []*foundatio
 	})
 }
 
+// @property availableVideoCodecTypes @abstract Indicates the supported video codec formats that can be specified in videoSettings. @discussion The value of this property is an NSArray of AVVideoCodecTypes that can be used as values for the AVVideoCodecKey in the receiver's videoSettings property.
+//
 // AvailableVideoCodecTypes returns the collection as a Go slice.
 func (x *CaptureVideoDataOutput) AvailableVideoCodecTypes() []*foundation.NSString {
 	arr := x.inner.AvailableVideoCodecTypes()
@@ -138,6 +170,8 @@ func (x *CaptureVideoDataOutput) AvailableVideoCodecTypes() []*foundation.NSStri
 	})
 }
 
+// @property alwaysDiscardsLateVideoFrames @abstract Specifies whether the receiver should always discard any video frame that is not processed before the next frame is captured. @discussion When the value of this property is YES, the receiver will immediately discard frames that are captured while the dispatch queue handling existing frames is blocked in the captureOutput:didOutputSampleBuffer:fromConnection: delegate method. When the value of this property is NO, delegates will be allowed more time to process old frames before new frames are discarded, but application memory usage may increase significantly as a result. The default value is YES.
+//
 // AlwaysDiscardsLateVideoFrames calls the underlying AlwaysDiscardsLateVideoFrames.
 func (x *CaptureVideoDataOutput) AlwaysDiscardsLateVideoFrames() bool {
 	return x.inner.AlwaysDiscardsLateVideoFrames()
@@ -148,6 +182,8 @@ func (x *CaptureVideoDataOutput) SetAlwaysDiscardsLateVideoFrames(alwaysDiscards
 	x.inner.SetAlwaysDiscardsLateVideoFrames(alwaysDiscardsLateVideoFrames)
 }
 
+// Indicates whether the receiver should preserve dynamic HDR metadata as an attachment on the output sample buffer's underlying pixel buffer. Set this property to `true` if you wish to use “AVCaptureVideoDataOutput“ with “AVAssetWriter“ to record HDR movies. You must also set “kVTCompressionPropertyKey_PreserveDynamicHDRMetadata“ to `true` in the compression settings you pass to your “AVAssetWriterInput“. These compression settings are represented under the “AVVideoCompressionPropertiesKey“ sub-dictionary of your top-level AVVideoSettings (see <doc://com.apple.documentation/documentation/avfoundation/video-settings>). When you set this key to `true`, performance improves, as the encoder is able to skip HDR metadata calculation for every frame. The default value is `false`.
+//
 // PreservesDynamicHDRMetadata calls the underlying PreservesDynamicHDRMetadata.
 func (x *CaptureVideoDataOutput) PreservesDynamicHDRMetadata() bool {
 	return x.inner.PreservesDynamicHDRMetadata()

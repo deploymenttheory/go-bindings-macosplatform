@@ -49,24 +49,32 @@ func (x *LightProbe) WithColorSpace(colorSpace string) *LightProbe {
 	return x
 }
 
+// @property parent @abstract Parent object. Nil if no parent. @discussion Set to nil when you remove this from an object container inside the parent object.
+//
 // WithParent sets the parent property and returns the receiver for chaining.
 func (x *LightProbe) WithParent(parent ObjectProvider) *LightProbe {
 	x.inner.MDLLight.MDLObject.SetParent(parent.asObject())
 	return x
 }
 
+// @property instance @abstract Instance object @discussion nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
+//
 // WithInstance sets the instance property and returns the receiver for chaining.
 func (x *LightProbe) WithInstance(instance ObjectProvider) *LightProbe {
 	x.inner.MDLLight.MDLObject.SetInstance(instance.asObject())
 	return x
 }
 
+// @property transform @abstract Short hand property for the MDLTransformComponent. @discussion The default value is nil @see MDLTransformComponent
+//
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *LightProbe) WithTransform(transform raw.MDLTransformComponent) *LightProbe {
 	x.inner.MDLLight.MDLObject.SetTransform(transform)
 	return x
 }
 
+// @property children @abstract Short hand property for the MDLObjectContainerComponent. @discussion The default value is an empty MDLObjectContainer @see MDLObjectContainerComponent
+//
 // WithChildren sets the children property and returns the receiver for chaining.
 func (x *LightProbe) WithChildren(children raw.MDLObjectContainerComponent) *LightProbe {
 	x.inner.MDLLight.MDLObject.SetChildren(children)

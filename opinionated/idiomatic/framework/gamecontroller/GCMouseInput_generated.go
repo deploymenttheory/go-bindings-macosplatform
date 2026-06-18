@@ -42,6 +42,8 @@ func (x *MouseInput) WithMouseMovedHandler(mouseMovedHandler func(*raw.GCMouseIn
 	return x
 }
 
+// Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called for each element that changed. @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons. @param element the element that has been modified.
+//
 // WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
 func (x *MouseInput) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *MouseInput {
 	x.inner.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
@@ -58,6 +60,8 @@ func (x *MouseInput) SetMouseMovedHandler(mouseMovedHandler func(*raw.GCMouseInp
 	x.inner.SetMouseMovedHandler(mouseMovedHandler)
 }
 
+// Scroll is a dpad with undefined range.
+//
 // Scroll calls the underlying Scroll.
 func (x *MouseInput) Scroll() *DeviceCursor {
 	_r := x.inner.Scroll()
@@ -67,6 +71,8 @@ func (x *MouseInput) Scroll() *DeviceCursor {
 	return &DeviceCursor{inner: _r}
 }
 
+// Mouse buttons that can be used only as digital inputs
+//
 // LeftButton calls the underlying LeftButton.
 func (x *MouseInput) LeftButton() *ControllerButtonInput {
 	_r := x.inner.LeftButton()

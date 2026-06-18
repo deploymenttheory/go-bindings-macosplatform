@@ -35,6 +35,8 @@ func MTRBaseClusterWiFiNetworkManagementFromID(id objc.ID) *MTRBaseClusterWiFiNe
 	return &MTRBaseClusterWiFiNetworkManagement{inner: raw.MTRBaseClusterWiFiNetworkManagementFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterWiFiNetworkManagementWithDeviceEndpointIDQueue creates a new [MTRBaseClusterWiFiNetworkManagement].
 func NewMTRBaseClusterWiFiNetworkManagementWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterWiFiNetworkManagement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterWiFiNetworkManagement")), objc.RegisterName("alloc"))
@@ -42,6 +44,8 @@ func NewMTRBaseClusterWiFiNetworkManagementWithDeviceEndpointIDQueue(device *raw
 	return &MTRBaseClusterWiFiNetworkManagement{inner: raw.MTRBaseClusterWiFiNetworkManagementFromID(_id)}
 }
 
+// Command NetworkPassphraseRequest This command is used to request the current WPA-Personal passphrase or PSK associated with the Wi-Fi network provided by this device.
+//
 // NetworkPassphraseRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterWiFiNetworkManagement) NetworkPassphraseRequestWithParamsCompletion(ctx context.Context, params *raw.MTRWiFiNetworkManagementClusterNetworkPassphraseRequestParams) (*MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams, error) {
 	type _result struct {

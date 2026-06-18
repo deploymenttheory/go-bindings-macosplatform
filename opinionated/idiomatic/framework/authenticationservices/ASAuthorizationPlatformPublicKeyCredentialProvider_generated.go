@@ -40,6 +40,8 @@ func NewAuthorizationPlatformPublicKeyCredentialProviderWithRelyingPartyIdentifi
 	return &AuthorizationPlatformPublicKeyCredentialProvider{inner: raw.ASAuthorizationPlatformPublicKeyCredentialProviderFromID(_id)}
 }
 
+// @abstract Create a request to register a new platform credential. @param challenge The challenge to sign. @param name The user name for the new credential. @param userID An identifier to be stored alongside the credential, which will be returned with the credential when it is used to authenticate.
+//
 // CreateCredentialRegistrationRequestWithChallengeNameUserID calls the underlying CreateCredentialRegistrationRequestWithChallengeNameUserID.
 func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeNameUserID(challenge *foundation.NSData, name string, userID *foundation.NSData) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
 	_r := x.inner.CreateCredentialRegistrationRequestWithChallengeNameUserID(challenge, foundation.NSStringStringWithUTF8String(name), userID)
@@ -49,6 +51,8 @@ func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialRegis
 	return &AuthorizationPlatformPublicKeyCredentialRegistrationRequest{inner: _r}
 }
 
+// @abstract Create a request to register a new platform credential. @param challenge The challenge to sign. @param name The user name for the new credential. @param userID An identifier to be stored alongside the credential, which will be returned with the credential when it is used to authenticate. @param requestStyle The style for this request.
+//
 // CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle calls the underlying CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle.
 func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle(challenge *foundation.NSData, name string, userID *foundation.NSData, requestStyle ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
 	_r := x.inner.CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle(challenge, foundation.NSStringStringWithUTF8String(name), userID, raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle(requestStyle))
@@ -58,6 +62,8 @@ func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialRegis
 	return &AuthorizationPlatformPublicKeyCredentialRegistrationRequest{inner: _r}
 }
 
+// @abstract Create a request to authenticate using an existing credential. @param challenge The challenge to sign.
+//
 // CreateCredentialAssertionRequestWithChallenge calls the underlying CreateCredentialAssertionRequestWithChallenge.
 func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialAssertionRequestWithChallenge(challenge *foundation.NSData) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
 	_r := x.inner.CreateCredentialAssertionRequestWithChallenge(challenge)
@@ -67,6 +73,8 @@ func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialAsser
 	return &AuthorizationPlatformPublicKeyCredentialAssertionRequest{inner: _r}
 }
 
+// @abstract The Relying Party identifier used for all requests created by this object.
+//
 // RelyingPartyIdentifier calls the underlying RelyingPartyIdentifier.
 func (x *AuthorizationPlatformPublicKeyCredentialProvider) RelyingPartyIdentifier() string {
 	_r := x.inner.RelyingPartyIdentifier()

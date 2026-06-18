@@ -37,6 +37,8 @@ func NewMetricMediaRendition() *MetricMediaRendition {
 	return &MetricMediaRendition{inner: raw.AVMetricMediaRenditionFromID(_id)}
 }
 
+// @property stableID @abstract Provides ID corresponding to the rendition. This is equivalent to the STABLE-RENDITION-ID in the HLS playlist. If not available, value is nil.
+//
 // StableID calls the underlying StableID.
 func (x *MetricMediaRendition) StableID() string {
 	_r := x.inner.StableID()
@@ -46,6 +48,8 @@ func (x *MetricMediaRendition) StableID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property URL @abstract Provides URL corresponding to the rendition's HLS playlist. If not available, value is nil.
+//
 // URL calls the underlying URL.
 func (x *MetricMediaRendition) URL() *foundation.NSURL {
 	return x.inner.URL()

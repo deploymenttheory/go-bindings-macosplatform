@@ -38,6 +38,8 @@ func NewContoursObservation() *ContoursObservation {
 	return &ContoursObservation{inner: raw.VNContoursObservationFromID(_id)}
 }
 
+// @brief Returns the VNContour object at the specified index, irrespective of hierarchy. @param contourIndex The index of the contour to request. Valid values are in the range [0..contourCount-1]. @param error The error returned if the index path is out of range. @return The detected VNContour at the specified index without regard to hierarchy.
+//
 // ContourAtIndexError calls the underlying ContourAtIndexError.
 func (x *ContoursObservation) ContourAtIndexError(contourIndex int) (*Contour, error) {
 	_r, _err := x.inner.ContourAtIndexError(contourIndex)
@@ -50,6 +52,8 @@ func (x *ContoursObservation) ContourAtIndexError(contourIndex int) (*Contour, e
 	return &Contour{inner: _r}, nil
 }
 
+// @brief Returns the VNContour object at the specified index path. @details Use the indexPath property from a VNContour instance to pass to this method. @param indexPath The index path is the heirarchical path to the contour. @param error The error returned if the index path is out of range. @return The VNContour object at the specified index path.
+//
 // ContourAtIndexPathError calls the underlying ContourAtIndexPathError.
 func (x *ContoursObservation) ContourAtIndexPathError(indexPath *foundation.NSIndexPath) (*Contour, error) {
 	_r, _err := x.inner.ContourAtIndexPathError(indexPath)
@@ -62,16 +66,22 @@ func (x *ContoursObservation) ContourAtIndexPathError(indexPath *foundation.NSIn
 	return &Contour{inner: _r}, nil
 }
 
+// @brief The total number of contours detected.
+//
 // ContourCount calls the underlying ContourCount.
 func (x *ContoursObservation) ContourCount() int {
 	return x.inner.ContourCount()
 }
 
+// @brief The total number of top-level contours detected.
+//
 // TopLevelContourCount calls the underlying TopLevelContourCount.
 func (x *ContoursObservation) TopLevelContourCount() int {
 	return x.inner.TopLevelContourCount()
 }
 
+// @brief An array of the top level contours (i.e. contours that are not enclosed inside another contour),. @details This array constitutes the top of the contour hierarchy. Each contour object can be further iterated to determine its children. @see VNContour for more information.
+//
 // TopLevelContours returns the collection as a Go slice.
 func (x *ContoursObservation) TopLevelContours() []*Contour {
 	arr := x.inner.TopLevelContours()
@@ -83,6 +93,8 @@ func (x *ContoursObservation) TopLevelContours() []*Contour {
 	})
 }
 
+// @brief Obtain all of the contours represented as a CGPath in normalized coordinates. @details The path is owned by the observation and therefore will be alive as long as the the observation is alive.
+//
 // NormalizedPath calls the underlying NormalizedPath.
 func (x *ContoursObservation) NormalizedPath() unsafe.Pointer {
 	return x.inner.NormalizedPath()

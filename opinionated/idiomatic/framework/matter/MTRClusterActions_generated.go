@@ -31,6 +31,8 @@ func MTRClusterActionsFromID(id objc.ID) *MTRClusterActions {
 	return &MTRClusterActions{inner: raw.MTRClusterActionsFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterActionsWithDeviceEndpointIDQueue creates a new [MTRClusterActions].
 func NewMTRClusterActionsWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterActions {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterActions")), objc.RegisterName("alloc"))

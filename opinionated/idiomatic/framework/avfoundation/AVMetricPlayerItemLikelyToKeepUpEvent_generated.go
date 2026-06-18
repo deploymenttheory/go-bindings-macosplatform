@@ -39,6 +39,8 @@ func NewMetricPlayerItemLikelyToKeepUpEvent() *MetricPlayerItemLikelyToKeepUpEve
 	return &MetricPlayerItemLikelyToKeepUpEvent{inner: raw.AVMetricPlayerItemLikelyToKeepUpEventFromID(_id)}
 }
 
+// Returns the variant selected at the time likely to keep up is achieved. If no value is present, returns nil.
+//
 // Variant calls the underlying Variant.
 func (x *MetricPlayerItemLikelyToKeepUpEvent) Variant() *AssetVariant {
 	_r := x.inner.Variant()
@@ -48,11 +50,15 @@ func (x *MetricPlayerItemLikelyToKeepUpEvent) Variant() *AssetVariant {
 	return &AssetVariant{inner: _r}
 }
 
+// Returns the total time taken to reach likely to keep up.
+//
 // TimeTaken calls the underlying TimeTaken.
 func (x *MetricPlayerItemLikelyToKeepUpEvent) TimeTaken() float64 {
 	return x.inner.TimeTaken()
 }
 
+// This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
+//
 // LoadedTimeRanges returns the collection as a Go slice.
 func (x *MetricPlayerItemLikelyToKeepUpEvent) LoadedTimeRanges() []*foundation.NSValue {
 	arr := x.inner.LoadedTimeRanges()

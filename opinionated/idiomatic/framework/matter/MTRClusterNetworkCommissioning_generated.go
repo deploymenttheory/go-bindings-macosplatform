@@ -33,6 +33,8 @@ func MTRClusterNetworkCommissioningFromID(id objc.ID) *MTRClusterNetworkCommissi
 	return &MTRClusterNetworkCommissioning{inner: raw.MTRClusterNetworkCommissioningFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterNetworkCommissioningWithDeviceEndpointIDQueue creates a new [MTRClusterNetworkCommissioning].
 func NewMTRClusterNetworkCommissioningWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterNetworkCommissioning {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterNetworkCommissioning")), objc.RegisterName("alloc"))

@@ -29,6 +29,8 @@ func VolumeFromID(id objc.ID) *Volume {
 	return &Volume{inner: raw.FSVolumeFromID(id)}
 }
 
+// Creates a volume with the given identifier and name. - Parameters: - volumeID: An “FSVolumeIdentifier“ to uniquely identify the volume. For a network file system that supports multiple authenticated users, disambiguate the users by using qualifying data in the identifier. - volumeName: A name for the volume.
+//
 // NewVolumeWithVolumeIDVolumeName creates a new [Volume].
 func NewVolumeWithVolumeIDVolumeName(volumeID *raw.FSVolumeIdentifier, volumeName *raw.FSFileName) *Volume {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSVolume")), objc.RegisterName("alloc"))
@@ -36,12 +38,16 @@ func NewVolumeWithVolumeIDVolumeName(volumeID *raw.FSVolumeIdentifier, volumeNam
 	return &Volume{inner: raw.FSVolumeFromID(_id)}
 }
 
+// The name of the volume.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Volume) WithName(name *FileName) *Volume {
 	x.inner.SetName(name.Unwrap())
 	return x
 }
 
+// An identifier that uniquely identifies the volume.
+//
 // VolumeID calls the underlying VolumeID.
 func (x *Volume) VolumeID() *VolumeIdentifier {
 	_r := x.inner.VolumeID()
@@ -51,6 +57,8 @@ func (x *Volume) VolumeID() *VolumeIdentifier {
 	return &VolumeIdentifier{inner: _r}
 }
 
+// The name of the volume.
+//
 // Name calls the underlying Name.
 func (x *Volume) Name() *FileName {
 	_r := x.inner.Name()

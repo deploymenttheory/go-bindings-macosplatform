@@ -38,18 +38,24 @@ func NewAppService() *AppService {
 	return &AppService{inner: raw.SMAppServiceFromID(_id)}
 }
 
+// @method registerAndReturnError @abstract Registers the service such that it may begin launching subject to user consent @param error Upon unsuccessful return, a new NSError object describing the error. Upon successful return, this argument is set to NULL. This argument may be NULL. @result YES if the service was successfully registered, otherwise NO. @discussion If the service corresponds to a LoginItem bundle, the helper will be started immediately and on subsequent logins. If the helper crashes or exits non-zero it will be relaunched. If the service corresponds to the main application, the application will be launched on subsequent logins. If the service corresponds to a LaunchAgent, the LaunchAgent is immediately bootstrapped and may begin running. In addition LaunchAgents registered with this API will be bootstrapped on each subsequent login. If an app desires to register a LaunchAgent for multiple users, the API must be called once per user while the desired user is running the app. LaunchAgents cannot be registered from outside a user context using this API. If the service corresponds to a LaunchDaemon, the LaunchDaemon will not be bootstrapped until an admin approves the LaunchDaemon in System Settings. LaunchDaemons registered with this API and approved by an admin will be bootstrapped on each subsequent boot. If the service is already registered, this API will return error kSMErrorAlreadyRegistered If the service is not approved by the user, this API will return error kSMErrorLaunchDeniedByUser If the app bundle is not properly code signed, this API will return error kSMErrorInvalidSignature @see SMAppService:unregisterAndReturnError
+//
 // RegisterAndReturnError returns any validation error.
 func (x *AppService) RegisterAndReturnError() error {
 	_, err := x.inner.RegisterAndReturnError()
 	return err
 }
 
+// @method unregisterAndReturnError @abstract Unregisters the service such that it will no longer be launched by the system. @param error Upon unsuccessful return, a new NSError object describing the error. Upon successful return, this argument is set to NULL. This argument may be NULL. @result YES if the service was successfully unregistered, otherwise NO. @discussion If the service corresponds to a LoginItem, LaunchAgent, or LaunchDaemon and the service is currently running it will be killed. The unregister call will not wait for the service to be reaped. If the service corresponds to the main application, it will continue running, but will still be unregistered to prevent future launches at login. This is the opposite operation of SMAppService:register If the service is already unregistered, this API will return error kSMErrorJobNotFound @see SMAppService:registerAndReturnError
+//
 // UnregisterAndReturnError returns any validation error.
 func (x *AppService) UnregisterAndReturnError() error {
 	_, err := x.inner.UnregisterAndReturnError()
 	return err
 }
 
+// @method unregisterWithCompletionHandler @abstract Unregisters the service such that it will no longer be launched by the system. @param handler The completion handler block to be invoked with the result of the unregister operation. This handler will be invoked on libdispatch's default target queue @discussion If the service corresponds to a LoginItem, LaunchAgent, or LaunchDaemon and the service is currently running it will be killed. The unregister call will not wait for the service to be killed and will return promptly. The completion handler will be invoked after the running process has been killed if successful or will be invoked whenever an error occurs. After the completion handler has been invoked it is safe to re-register the service. If the service corresponds to the main application, it will continue running, but will still be unregistered to prevent future launches at login. This is the opposite operation of SMAppService:register This is the asynchronous variant of SMAppService:unregisterAndReturnError If the service is already unregistered, this API will return error kSMErrorJobNotFound @see SMAppService:unregisterAndReturnError
+//
 // Unregister blocks until the operation completes or ctx is cancelled.
 func (x *AppService) Unregister(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -68,6 +74,8 @@ func (x *AppService) Unregister(ctx context.Context) error {
 	}
 }
 
+// @property status @abstract Returns the status for the service @discussion The status API can be used to check what selection a user has made regarding allowing the service to launch. If the user has denied execution, the return value will be SMAppServiceRequiresApproval. If the service has been unregistered, the return value will be SMAppServiceNotRegistered
+//
 // Status calls the underlying Status.
 func (x *AppService) Status() SMAppServiceStatus {
 	return SMAppServiceStatus(x.inner.Status())

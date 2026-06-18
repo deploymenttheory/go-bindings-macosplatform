@@ -44,17 +44,23 @@ func NewScrubberProportionalLayoutWithCoder(coder *foundation.NSCoder) *Scrubber
 	return &ScrubberProportionalLayout{inner: raw.NSScrubberProportionalLayoutFromID(_id)}
 }
 
+// The number of items that should fit within the scrubber's viewport at once.
+//
 // WithNumberOfVisibleItems sets the numberOfVisibleItems property and returns the receiver for chaining.
 func (x *ScrubberProportionalLayout) WithNumberOfVisibleItems(numberOfVisibleItems int) *ScrubberProportionalLayout {
 	x.inner.SetNumberOfVisibleItems(numberOfVisibleItems)
 	return x
 }
 
+// The number of items that should fit within the scrubber's viewport at once.
+//
 // NumberOfVisibleItems calls the underlying NumberOfVisibleItems.
 func (x *ScrubberProportionalLayout) NumberOfVisibleItems() int {
 	return x.inner.NumberOfVisibleItems()
 }
 
+// The number of items that should fit within the scrubber's viewport at once.
+//
 // SetNumberOfVisibleItems calls the underlying SetNumberOfVisibleItems.
 func (x *ScrubberProportionalLayout) SetNumberOfVisibleItems(numberOfVisibleItems int) {
 	x.inner.SetNumberOfVisibleItems(numberOfVisibleItems)

@@ -30,6 +30,8 @@ func MTRCertificateInfoFromID(id objc.ID) *MTRCertificateInfo {
 	return &MTRCertificateInfo{inner: raw.MTRCertificateInfoFromID(id)}
 }
 
+// Initializes the receiver with an operational certificate in Matter TLV format. This can be a node operational certificate, a Matter intermediate certificate, or a Matter root certificate.
+//
 // NewMTRCertificateInfoWithTLVBytes creates a new [MTRCertificateInfo].
 func NewMTRCertificateInfoWithTLVBytes(bytes_ *foundation.NSData) *MTRCertificateInfo {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRCertificateInfo")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewMTRCertificateInfoWithTLVBytes(bytes_ *foundation.NSData) *MTRCertificat
 	return &MTRCertificateInfo{inner: raw.MTRCertificateInfoFromID(_id)}
 }
 
+// The Distinguished Name of the issuer of the certificate. For a node operational certificate, the issuer will match the subject of the root certificate or intermediate certificate that represents the entity that issued the node operational certificate. For an intermediate certificate, the issuer will match the subject of the root certificate. Matter root certificates are self-signed, i.e. the issuer and the subject are the same.
+//
 // Issuer calls the underlying Issuer.
 func (x *MTRCertificateInfo) Issuer() *MTRDistinguishedNameInfo {
 	_r := x.inner.Issuer()
@@ -46,6 +50,8 @@ func (x *MTRCertificateInfo) Issuer() *MTRDistinguishedNameInfo {
 	return &MTRDistinguishedNameInfo{inner: _r}
 }
 
+// The Distinguished Name of the entity represented by the certificate.
+//
 // Subject calls the underlying Subject.
 func (x *MTRCertificateInfo) Subject() *MTRDistinguishedNameInfo {
 	_r := x.inner.Subject()
@@ -65,6 +71,8 @@ func (x *MTRCertificateInfo) NotAfter() *foundation.NSDate {
 	return x.inner.NotAfter()
 }
 
+// Public key data for this certificate
+//
 // PublicKeyData calls the underlying PublicKeyData.
 func (x *MTRCertificateInfo) PublicKeyData() *foundation.NSData {
 	return x.inner.PublicKeyData()

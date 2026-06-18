@@ -36,21 +36,29 @@ func NewFrameRateRange() *FrameRateRange {
 	return &FrameRateRange{inner: raw.AVFrameRateRangeFromID(_id)}
 }
 
+// @property minFrameRate @abstract A Float64 indicating the minimum frame rate supported by this range. @discussion This read-only property indicates the minimum frame rate supported by this range in frames per second.
+//
 // MinFrameRate calls the underlying MinFrameRate.
 func (x *FrameRateRange) MinFrameRate() float64 {
 	return x.inner.MinFrameRate()
 }
 
+// @property maxFrameRate @abstract A Float64 indicating the maximum frame rate supported by this range. @discussion This read-only property indicates the maximum frame rate supported by this range in frames per second.
+//
 // MaxFrameRate calls the underlying MaxFrameRate.
 func (x *FrameRateRange) MaxFrameRate() float64 {
 	return x.inner.MaxFrameRate()
 }
 
+// @property maxFrameDuration @abstract A CMTime indicating the maximum frame duration supported by this range. @discussion This read-only property indicates the maximum frame duration supported by this range. It is the reciprocal of minFrameRate, and expresses minFrameRate as a duration.
+//
 // MaxFrameDuration calls the underlying MaxFrameDuration.
 func (x *FrameRateRange) MaxFrameDuration() coremedia.CMTime {
 	return x.inner.MaxFrameDuration()
 }
 
+// @property minFrameDuration @abstract A CMTime indicating the minimum frame duration supported by this range. @discussion This read-only property indicates the minimum frame duration supported by this range. It is the reciprocal of maxFrameRate, and expresses maxFrameRate as a duration.
+//
 // MinFrameDuration calls the underlying MinFrameDuration.
 func (x *FrameRateRange) MinFrameDuration() coremedia.CMTime {
 	return x.inner.MinFrameDuration()

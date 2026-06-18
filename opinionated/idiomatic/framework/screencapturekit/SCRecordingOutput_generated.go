@@ -30,6 +30,8 @@ func RecordingOutputFromID(id objc.ID) *RecordingOutput {
 	return &RecordingOutput{inner: raw.SCRecordingOutputFromID(id)}
 }
 
+// @method initWithConfiguration:delegate: @abstract initialize SCRecordingOutput object with SCRecordingOutputConfiguration and SCRecordingOutputDelegate @param recordingOutputConfiguration the requested recording configuration to be applied to the SCRecordingOutput @parame delegate object conforming SCRecordingOutputDelegate protocol. Clients must specify a delegate so that they can be notified about recording event. @discussion Client can create a SCRecordingOutput with this initializer and add to SCStream to record all captured media into one recording file given output url specified in recordingOutputConfig. The recording will be using H264 and file format is MPEG-4.
+//
 // NewRecordingOutputWithConfigurationDelegate creates a new [RecordingOutput].
 func NewRecordingOutputWithConfigurationDelegate(recordingOutputConfiguration *raw.SCRecordingOutputConfiguration, delegate raw.SCRecordingOutputDelegate) *RecordingOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCRecordingOutput")), objc.RegisterName("alloc"))
@@ -37,11 +39,15 @@ func NewRecordingOutputWithConfigurationDelegate(recordingOutputConfiguration *r
 	return &RecordingOutput{inner: raw.SCRecordingOutputFromID(_id)}
 }
 
+// @abstract Indicates current duration of recording to the output file.
+//
 // RecordedDuration calls the underlying RecordedDuration.
 func (x *RecordingOutput) RecordedDuration() coremedia.CMTime {
 	return x.inner.RecordedDuration()
 }
 
+// @abstract Indicates current size, in bytes, of the data recorded to the output file.
+//
 // RecordedFileSize calls the underlying RecordedFileSize.
 func (x *RecordingOutput) RecordedFileSize() int {
 	return x.inner.RecordedFileSize()

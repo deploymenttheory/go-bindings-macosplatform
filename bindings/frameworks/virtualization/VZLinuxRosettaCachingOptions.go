@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that defines UNIX socket-based caching options for Rosetta.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzlinuxrosettacachingoptions
 type VZLinuxRosettaCachingOptions struct {
 	foundation.NSObject

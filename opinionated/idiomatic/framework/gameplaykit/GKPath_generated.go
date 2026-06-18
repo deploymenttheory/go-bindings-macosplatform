@@ -52,12 +52,16 @@ func NewPathWithGraphNodesRadius(graphNodes *foundation.NSArray[*raw.GKGraphNode
 	return &Path{inner: raw.GKPathFromID(_id)}
 }
 
+// Radius of the pathway.  Defines a spatial area that the path occupies. This can be though of as the union between rectangles between all points, and circles at each point
+//
 // WithRadius sets the radius property and returns the receiver for chaining.
 func (x *Path) WithRadius(radius float32) *Path {
 	x.inner.SetRadius(radius)
 	return x
 }
 
+// Does this path loop back on itself, creating a cycle?
+//
 // WithCyclical sets the cyclical property and returns the receiver for chaining.
 func (x *Path) WithCyclical(cyclical bool) *Path {
 	x.inner.SetCyclical(cyclical)
@@ -79,6 +83,8 @@ func (x *Path) Float3AtIndex(index uint) unsafe.Pointer {
 	return x.inner.Float3AtIndex(index)
 }
 
+// Radius of the pathway.  Defines a spatial area that the path occupies. This can be though of as the union between rectangles between all points, and circles at each point
+//
 // Radius calls the underlying Radius.
 func (x *Path) Radius() float32 {
 	return x.inner.Radius()
@@ -89,11 +95,15 @@ func (x *Path) SetRadius(radius float32) {
 	x.inner.SetRadius(radius)
 }
 
+// Number of points in this path
+//
 // NumPoints calls the underlying NumPoints.
 func (x *Path) NumPoints() uint {
 	return x.inner.NumPoints()
 }
 
+// Does this path loop back on itself, creating a cycle?
+//
 // IsCyclical calls the underlying IsCyclical.
 func (x *Path) IsCyclical() bool {
 	return x.inner.IsCyclical()

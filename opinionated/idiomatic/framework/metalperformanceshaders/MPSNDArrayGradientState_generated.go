@@ -43,6 +43,8 @@ func (x *NDArrayGradientState) WithReadCount(readCount uint) *NDArrayGradientSta
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NDArrayGradientState) WithLabel(label string) *NDArrayGradientState {
 	x.inner.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))

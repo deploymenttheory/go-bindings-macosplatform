@@ -43,11 +43,15 @@ func (x *AudioMixInputParameters) GetVolumeRampForTimeStartVolumeEndVolumeTimeRa
 	return x.inner.GetVolumeRampForTimeStartVolumeEndVolumeTimeRange(time_, startVolume, endVolume, timeRange)
 }
 
+// @property		trackID @abstract		Indicates the trackID of the audio track to which the parameters should be applied.
+//
 // TrackID calls the underlying TrackID.
 func (x *AudioMixInputParameters) TrackID() int32 {
 	return x.inner.TrackID()
 }
 
+// @property		audioTimePitchAlgorithm @abstract		Indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits. @discussion Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
+//
 // AudioTimePitchAlgorithm calls the underlying AudioTimePitchAlgorithm.
 func (x *AudioMixInputParameters) AudioTimePitchAlgorithm() string {
 	_r := x.inner.AudioTimePitchAlgorithm()
@@ -57,6 +61,8 @@ func (x *AudioMixInputParameters) AudioTimePitchAlgorithm() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property		audioTapProcessor @abstract		Indicates the audio processing tap that will be used for the audio track.
+//
 // AudioTapProcessor calls the underlying AudioTapProcessor.
 func (x *AudioMixInputParameters) AudioTapProcessor() unsafe.Pointer {
 	return x.inner.AudioTapProcessor()

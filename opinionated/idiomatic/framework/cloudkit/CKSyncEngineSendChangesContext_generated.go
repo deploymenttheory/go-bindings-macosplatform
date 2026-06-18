@@ -35,11 +35,15 @@ func NewSyncEngineSendChangesContext() *SyncEngineSendChangesContext {
 	return &SyncEngineSendChangesContext{inner: raw.CKSyncEngineSendChangesContextFromID(_id)}
 }
 
+// The reason for the send operation.
+//
 // Reason calls the underlying Reason.
 func (x *SyncEngineSendChangesContext) Reason() CKSyncEngineSyncReason {
 	return CKSyncEngineSyncReason(x.inner.Reason())
 }
 
+// The additional options for the send operation.
+//
 // Options calls the underlying Options.
 func (x *SyncEngineSendChangesContext) Options() *SyncEngineSendChangesOptions {
 	_r := x.inner.Options()

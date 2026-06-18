@@ -76,12 +76,16 @@ func (x *ColorWell) WithPulldownAction(pulldownAction objc.SEL) *ColorWell {
 	return x
 }
 
+// Controls alpha support for the current color well, and the visibility of alpha slider in the color panel. When `NSColor.ignoresAlpha` (deprecated) is set to `YES`, this property will always return `NO` and alpha is not supported globally.
+//
 // WithSupportsAlpha sets the supportsAlpha property and returns the receiver for chaining.
 func (x *ColorWell) WithSupportsAlpha(supportsAlpha bool) *ColorWell {
 	x.inner.SetSupportsAlpha(supportsAlpha)
 	return x
 }
 
+// The maximum linear exposure a color in this color well can be set to. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked for this well may have a linear exposure applied to it.
+//
 // WithMaximumLinearExposure sets the maximumLinearExposure property and returns the receiver for chaining.
 func (x *ColorWell) WithMaximumLinearExposure(maximumLinearExposure float64) *ColorWell {
 	x.inner.SetMaximumLinearExposure(maximumLinearExposure)
@@ -496,6 +500,8 @@ func (x *ColorWell) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets founda
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *ColorWell) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ColorWell {
 	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
@@ -667,21 +673,29 @@ func (x *ColorWell) SetPulldownAction(pulldownAction objc.SEL) {
 	x.inner.SetPulldownAction(pulldownAction)
 }
 
+// Controls alpha support for the current color well, and the visibility of alpha slider in the color panel. When `NSColor.ignoresAlpha` (deprecated) is set to `YES`, this property will always return `NO` and alpha is not supported globally.
+//
 // SupportsAlpha calls the underlying SupportsAlpha.
 func (x *ColorWell) SupportsAlpha() bool {
 	return x.inner.SupportsAlpha()
 }
 
+// Controls alpha support for the current color well, and the visibility of alpha slider in the color panel. When `NSColor.ignoresAlpha` (deprecated) is set to `YES`, this property will always return `NO` and alpha is not supported globally.
+//
 // SetSupportsAlpha calls the underlying SetSupportsAlpha.
 func (x *ColorWell) SetSupportsAlpha(supportsAlpha bool) {
 	x.inner.SetSupportsAlpha(supportsAlpha)
 }
 
+// The maximum linear exposure a color in this color well can be set to. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked for this well may have a linear exposure applied to it.
+//
 // MaximumLinearExposure calls the underlying MaximumLinearExposure.
 func (x *ColorWell) MaximumLinearExposure() float64 {
 	return x.inner.MaximumLinearExposure()
 }
 
+// The maximum linear exposure a color in this color well can be set to. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked for this well may have a linear exposure applied to it.
+//
 // SetMaximumLinearExposure calls the underlying SetMaximumLinearExposure.
 func (x *ColorWell) SetMaximumLinearExposure(maximumLinearExposure float64) {
 	x.inner.SetMaximumLinearExposure(maximumLinearExposure)

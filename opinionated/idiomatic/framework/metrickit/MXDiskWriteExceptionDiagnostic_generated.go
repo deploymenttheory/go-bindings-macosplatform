@@ -36,6 +36,8 @@ func NewDiskWriteExceptionDiagnostic() *DiskWriteExceptionDiagnostic {
 	return &DiskWriteExceptionDiagnostic{inner: raw.MXDiskWriteExceptionDiagnosticFromID(_id)}
 }
 
+// @property      callStackTree @abstract      The application call stack tree associated with the excessive disk writes.
+//
 // CallStackTree calls the underlying CallStackTree.
 func (x *DiskWriteExceptionDiagnostic) CallStackTree() *CallStackTree {
 	_r := x.inner.CallStackTree()
@@ -45,6 +47,8 @@ func (x *DiskWriteExceptionDiagnostic) CallStackTree() *CallStackTree {
 	return &CallStackTree{inner: _r}
 }
 
+// @property      totalWritesCaused @abstract      Total disk writes caused in the scope of this disk write exception. @discussion    Dimensioned as NSUnitInformationStorage.
+//
 // TotalWritesCaused calls the underlying TotalWritesCaused.
 func (x *DiskWriteExceptionDiagnostic) TotalWritesCaused() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
 	return x.inner.TotalWritesCaused()

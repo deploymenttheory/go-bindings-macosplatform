@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -264,8 +265,17 @@ func (x *MapView) AddAnnotation(annotation raw.MKAnnotation) {
 }
 
 // AddAnnotations calls the underlying AddAnnotations.
-func (x *MapView) AddAnnotations(annotations *foundation.NSArray[raw.MKAnnotation]) {
-	x.inner.AddAnnotations(annotations)
+func (x *MapView) AddAnnotations(annotations ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(annotations))
+	for _i, _v := range annotations {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MKAnnotation]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MKAnnotation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.AddAnnotations(_arg0)
 }
 
 // RemoveAnnotation calls the underlying RemoveAnnotation.
@@ -274,8 +284,17 @@ func (x *MapView) RemoveAnnotation(annotation raw.MKAnnotation) {
 }
 
 // RemoveAnnotations calls the underlying RemoveAnnotations.
-func (x *MapView) RemoveAnnotations(annotations *foundation.NSArray[raw.MKAnnotation]) {
-	x.inner.RemoveAnnotations(annotations)
+func (x *MapView) RemoveAnnotations(annotations ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(annotations))
+	for _i, _v := range annotations {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MKAnnotation]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MKAnnotation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.RemoveAnnotations(_arg0)
 }
 
 // AnnotationsInMapRect calls the underlying AnnotationsInMapRect.
@@ -625,8 +644,17 @@ func (x *MapView) SelectedAnnotations() *foundation.NSArray[raw.MKAnnotation] {
 }
 
 // SetSelectedAnnotations calls the underlying SetSelectedAnnotations.
-func (x *MapView) SetSelectedAnnotations(selectedAnnotations *foundation.NSArray[raw.MKAnnotation]) {
-	x.inner.SetSelectedAnnotations(selectedAnnotations)
+func (x *MapView) SetSelectedAnnotations(selectedAnnotations ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(selectedAnnotations))
+	for _i, _v := range selectedAnnotations {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MKAnnotation]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MKAnnotation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetSelectedAnnotations(_arg0)
 }
 
 // AnnotationVisibleRect calls the underlying AnnotationVisibleRect.
@@ -650,8 +678,17 @@ func (x *MapView) RemoveOverlay(overlay raw.MKOverlay) {
 }
 
 // RemoveOverlays calls the underlying RemoveOverlays.
-func (x *MapView) RemoveOverlays(overlays *foundation.NSArray[raw.MKOverlay]) {
-	x.inner.RemoveOverlays(overlays)
+func (x *MapView) RemoveOverlays(overlays ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(overlays))
+	for _i, _v := range overlays {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MKOverlay]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MKOverlay](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.RemoveOverlays(_arg0)
 }
 
 // InsertOverlayAtIndexLevel calls the underlying InsertOverlayAtIndexLevel.
@@ -694,8 +731,17 @@ func (x *MapView) AddOverlay(overlay raw.MKOverlay) {
 }
 
 // AddOverlays calls the underlying AddOverlays.
-func (x *MapView) AddOverlays(overlays *foundation.NSArray[raw.MKOverlay]) {
-	x.inner.AddOverlays(overlays)
+func (x *MapView) AddOverlays(overlays ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(overlays))
+	for _i, _v := range overlays {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MKOverlay]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MKOverlay](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.AddOverlays(_arg0)
 }
 
 // InsertOverlayAtIndex calls the underlying InsertOverlayAtIndex.
@@ -756,9 +802,9 @@ type MapViewable interface {
 	ConvertRectToRegionFromView(rect corefoundation.CGRect, view *appkit.NSView) raw.MKCoordinateRegion
 	SetUserTrackingModeAnimated(mode MKUserTrackingMode, animated bool)
 	AddAnnotation(annotation raw.MKAnnotation)
-	AddAnnotations(annotations *foundation.NSArray[raw.MKAnnotation])
+	AddAnnotations(annotations ...purego.IDer)
 	RemoveAnnotation(annotation raw.MKAnnotation)
-	RemoveAnnotations(annotations *foundation.NSArray[raw.MKAnnotation])
+	RemoveAnnotations(annotations ...purego.IDer)
 	AnnotationsInMapRect(mapRect raw.MKMapRect) *foundation.NSSet[raw.MKAnnotation]
 	ViewForAnnotation(annotation raw.MKAnnotation) *AnnotationView
 	DequeueReusableAnnotationViewWithIdentifier(identifier string) *AnnotationView
@@ -821,12 +867,12 @@ type MapViewable interface {
 	IsUserLocationVisible() bool
 	Annotations() *foundation.NSArray[raw.MKAnnotation]
 	SelectedAnnotations() *foundation.NSArray[raw.MKAnnotation]
-	SetSelectedAnnotations(selectedAnnotations *foundation.NSArray[raw.MKAnnotation])
+	SetSelectedAnnotations(selectedAnnotations ...purego.IDer)
 	AnnotationVisibleRect() corefoundation.CGRect
 	AddOverlayLevel(overlay raw.MKOverlay, level MKOverlayLevel)
 	AddOverlaysLevel(overlays *foundation.NSArray[raw.MKOverlay], level MKOverlayLevel)
 	RemoveOverlay(overlay raw.MKOverlay)
-	RemoveOverlays(overlays *foundation.NSArray[raw.MKOverlay])
+	RemoveOverlays(overlays ...purego.IDer)
 	InsertOverlayAtIndexLevel(overlay raw.MKOverlay, index uint, level MKOverlayLevel)
 	InsertOverlayAboveOverlay(overlay raw.MKOverlay, sibling raw.MKOverlay)
 	InsertOverlayBelowOverlay(overlay raw.MKOverlay, sibling raw.MKOverlay)
@@ -834,7 +880,7 @@ type MapViewable interface {
 	OverlaysInLevel(level MKOverlayLevel) *foundation.NSArray[raw.MKOverlay]
 	RendererForOverlay(overlay raw.MKOverlay) *OverlayRenderer
 	AddOverlay(overlay raw.MKOverlay)
-	AddOverlays(overlays *foundation.NSArray[raw.MKOverlay])
+	AddOverlays(overlays ...purego.IDer)
 	InsertOverlayAtIndex(overlay raw.MKOverlay, index uint)
 	ExchangeOverlayAtIndexWithOverlayAtIndex(index1 uint, index2 uint)
 	Overlays() *foundation.NSArray[raw.MKOverlay]

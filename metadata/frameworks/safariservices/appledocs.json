@@ -1,0 +1,245 @@
+{
+  "schema_version": 1,
+  "framework": "SafariServices",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "SFContentBlockerManager": {
+      "doc": "A class that your app uses to interact with a content blocker extension.",
+      "url": "https://developer.apple.com/documentation/safariservices/sfcontentblockermanager"
+    },
+    "SFContentBlockerState": {
+      "doc": "The state of a content blocker extension.",
+      "url": "https://developer.apple.com/documentation/safariservices/sfcontentblockerstate"
+    },
+    "SFSafariApplication": {
+      "doc": "A proxy for the Safari app.",
+      "url": "https://developer.apple.com/documentation/safariservices/sfsafariapplication"
+    },
+    "SFSafariExtension": {
+      "doc": "A proxy for the Safari extension.",
+      "url": "https://developer.apple.com/documentation/safariservices/sfsafariextension"
+    },
+    "SFSafariExtensionHandler": {
+      "doc": "A base class that you subclass to handle events in your Safari app extension.",
+      "url": "https://developer.apple.com/documentation/safariservices/sfsafariextensionhandler"
+    },
+    "SFSafariExtensionManager": {
+      "doc": "A class that your app uses to find out the current state of a Safari extension.",
+      "url": "https://developer.apple.com/documentation/safariservices/sfsafariextensionmanager"
+    },
+    "SFSafariExtensionState": {
+      "doc": "The state of a Safari extension.",
+      "url": "https://developer.apple.com/documentation/safariservices/sfsafariextensionstate"
+    },
+    "SFSafariExtensionViewController": {
+      "doc": "The view controller for a popover associated with your app extension.",
+      "url": "https://developer.apple.com/documentation/safariservices/sfsafariextensionviewcontroller"
+    },
+    "SFSafariPage": {
+      "doc": "A proxy for a Safari webpage.",
+      "url": "https://developer.apple.com/documentation/safariservices/sfsafaripage"
+    },
+    "SFSafariPageProperties": {
+      "doc": "An object that captures information about a webpage.",
+      "url": "https://developer.apple.com/documentation/safariservices/sfsafaripageproperties"
+    },
+    "SFSafariTab": {
+      "doc": "A proxy for a tab in a Safari window.",
+      "url": "https://developer.apple.com/documentation/safariservices/sfsafaritab"
+    },
+    "SFSafariToolbarItem": {
+      "doc": "A proxy for a Safari app extension toolbar item in a Safari window.",
+      "url": "https://developer.apple.com/documentation/safariservices/sfsafaritoolbaritem"
+    },
+    "SFSafariWindow": {
+      "doc": "A proxy for a Safari window.",
+      "url": "https://developer.apple.com/documentation/safariservices/sfsafariwindow"
+    },
+    "SFUniversalLink": {
+      "doc": "An object that provides browsers with the ability to discover associations between an app and a website.",
+      "url": "https://developer.apple.com/documentation/safariservices/sfuniversallink"
+    }
+  },
+  "protocols": {
+    "SFSafariExtensionHandling": {
+      "doc": "A protocol for implementing event handling in a Safari app extension.",
+      "url": "https://developer.apple.com/documentation/safariservices/sfsafariextensionhandling"
+    }
+  },
+  "enums": {
+    "SFErrorCode": {
+      "doc": "Messages that describe a content blocker or Safari app extension error.",
+      "url": "https://developer.apple.com/documentation/safariservices/sferrorcode",
+      "members": {
+        "SFErrorLoadingInterrupted": {
+          "doc": "There was an error loading the content blocker extension.",
+          "url": "https://developer.apple.com/documentation/safariservices/sferrorcode/loadinginterrupted"
+        },
+        "SFErrorNoAttachmentFound": {
+          "doc": "The Content Blocker extension returned an NSExtensionItem that did not include an attachment.",
+          "url": "https://developer.apple.com/documentation/safariservices/sferrorcode/noattachmentfound"
+        },
+        "SFErrorNoExtensionFound": {
+          "doc": "A Content Blocker or Safari app extension with the specified bundle identifier was not found, or the bundle identifier specified an extension that was not owned by you.",
+          "url": "https://developer.apple.com/documentation/safariservices/sferrorcode/noextensionfound"
+        }
+      }
+    }
+  },
+  "methods": {
+    "SFContentBlockerManager": {
+      "+getStateOfContentBlockerWithIdentifier:completionHandler:": {
+        "doc": "Determines the state of your content blocker.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfcontentblockermanager/getstateofcontentblocker(withidentifier:completionhandler:)"
+      },
+      "+reloadContentBlockerWithIdentifier:completionHandler:": {
+        "doc": "Tells Safari to reload the specified extension’s content-blocking rules.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfcontentblockermanager/reloadcontentblocker(withidentifier:completionhandler:)"
+      }
+    },
+    "SFSafariApplication": {
+      "+dispatchMessageWithName:toExtensionWithIdentifier:userInfo:completionHandler:": {
+        "doc": "Sends a message to a Safari app extension, launching Safari if necessary.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafariapplication/dispatchmessage(withname:toextensionwithidentifier:userinfo:completionhandler:)"
+      },
+      "+getActiveWindowWithCompletionHandler:": {
+        "doc": "Calls the completion handler with the active browser window.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafariapplication/getactivewindow(completionhandler:)"
+      },
+      "+openWindowWithURL:completionHandler:": {
+        "doc": "Opens a new window with the desired webpage.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafariapplication/openwindow(with:completionhandler:)"
+      },
+      "+setToolbarItemsNeedUpdate": {
+        "doc": "Updates the enabled states and badges of toolbar items.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafariapplication/settoolbaritemsneedupdate()"
+      },
+      "+showPreferencesForExtensionWithIdentifier:completionHandler:": {
+        "doc": "Launches Safari and opens the preferences panel for a Safari app extension.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafariapplication/showpreferencesforextension(withidentifier:completionhandler:)"
+      }
+    },
+    "SFSafariExtensionManager": {
+      "+getStateOfExtensionWithIdentifier:completionHandler:": {
+        "doc": "Returns the current state of a Safari web extension.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafariextensionmanager/getstateofextension(withidentifier:completionhandler:)"
+      },
+      "+getStateOfSafariExtensionWithIdentifier:completionHandler:": {
+        "doc": "Returns the current state of a Safari extension.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafariextensionmanager/getstateofsafariextension(withidentifier:completionhandler:)"
+      }
+    },
+    "SFSafariPage": {
+      "-dispatchMessageToScriptWithName:userInfo:": {
+        "doc": "Dispatches a message from the app extension to the content script injected in this page.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafaripage/dispatchmessagetoscript(withname:userinfo:)"
+      },
+      "-getPagePropertiesWithCompletionHandler:": {
+        "doc": "Retrieves the properties of the webpage.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafaripage/getpropertieswithcompletionhandler(_:)"
+      },
+      "-reload": {
+        "doc": "Tells Safari to reload the webpage.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafaripage/reload()"
+      }
+    },
+    "SFSafariTab": {
+      "-activateWithCompletionHandler:": {
+        "doc": "Activates the tab.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafaritab/activate(completionhandler:)"
+      },
+      "-getActivePageWithCompletionHandler:": {
+        "doc": "Calls the completion handler passing the active page in the tab.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafaritab/getactivepage(completionhandler:)"
+      },
+      "-getPagesWithCompletionHandler:": {
+        "doc": "Calls the completion handler with all of the tab’s active and preloading pages.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafaritab/getpageswithcompletionhandler(_:)"
+      }
+    },
+    "SFSafariToolbarItem": {
+      "-setBadgeText:": {
+        "doc": "Sets the badge text for the toolbar item.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafaritoolbaritem/setbadgetext(_:)"
+      },
+      "-setEnabled:": {
+        "doc": "Sets whether the toolbar item is enabled.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafaritoolbaritem/setenabled(_:)"
+      },
+      "-setEnabled:withBadgeText:": {
+        "doc": "Sets the enabled state and the badge text for the toolbar item.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafaritoolbaritem/setenabled(_:withbadgetext:)"
+      },
+      "-setImage:": {
+        "doc": "Sets the image displayed in the toolbar button.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafaritoolbaritem/setimage(_:)"
+      }
+    },
+    "SFSafariWindow": {
+      "-getActiveTabWithCompletionHandler:": {
+        "doc": "Calls the completion handler with the active tab in the target window.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafariwindow/getactivetab(completionhandler:)"
+      },
+      "-getToolbarItemWithCompletionHandler:": {
+        "doc": "Gets the extension’s toolbar item from the target window.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafariwindow/gettoolbaritem(completionhandler:)"
+      },
+      "-openTabWithURL:makeActiveIfPossible:completionHandler:": {
+        "doc": "Opens a tab at the end of the tab bar.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafariwindow/opentab(with:makeactiveifpossible:completionhandler:)"
+      }
+    },
+    "SFUniversalLink": {
+      "-initWithWebpageURL:": {
+        "doc": "Creates a universal link object with the URL.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfuniversallink/init(webpageurl:)"
+      }
+    }
+  },
+  "properties": {
+    "SFContentBlockerState": {
+      "enabled": {
+        "doc": "A Boolean value that indicates whether the content blocker is enabled.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfcontentblockerstate/isenabled"
+      }
+    },
+    "SFSafariExtensionState": {
+      "enabled": {
+        "doc": "A Boolean value that indicates whether the extension is enabled.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafariextensionstate/isenabled"
+      }
+    },
+    "SFSafariPageProperties": {
+      "active": {
+        "doc": "A Boolean value that indicates whether the page is currently active.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafaripageproperties/isactive"
+      },
+      "title": {
+        "doc": "The title of the page.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafaripageproperties/title"
+      },
+      "url": {
+        "doc": "Indicates the URL of the page.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafaripageproperties/url"
+      },
+      "usesPrivateBrowsing": {
+        "doc": "A Boolean value that indicates whether the page is using Safari Private Browsing.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfsafaripageproperties/usesprivatebrowsing"
+      }
+    },
+    "SFUniversalLink": {
+      "applicationURL": {
+        "doc": "The URL to the app that can open this universal link.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfuniversallink/applicationurl"
+      },
+      "enabled": {
+        "doc": "A flag that indicates whether the universal link is enabled.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfuniversallink/isenabled"
+      },
+      "webpageURL": {
+        "doc": "The URL specified when initializing the receiver.",
+        "url": "https://developer.apple.com/documentation/safariservices/sfuniversallink/webpageurl"
+      }
+    }
+  }
+}

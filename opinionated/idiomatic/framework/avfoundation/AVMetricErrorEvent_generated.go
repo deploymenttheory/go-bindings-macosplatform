@@ -36,11 +36,15 @@ func NewMetricErrorEvent() *MetricErrorEvent {
 	return &MetricErrorEvent{inner: raw.AVMetricErrorEventFromID(_id)}
 }
 
+// Returns whether the error was recoverable.
+//
 // DidRecover calls the underlying DidRecover.
 func (x *MetricErrorEvent) DidRecover() bool {
 	return x.inner.DidRecover()
 }
 
+// Returns the error encountered.
+//
 // Error calls the underlying Error.
 func (x *MetricErrorEvent) Error() unsafe.Pointer {
 	return x.inner.Error()

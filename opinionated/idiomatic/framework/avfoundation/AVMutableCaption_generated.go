@@ -38,24 +38,32 @@ func NewMutableCaption() *MutableCaption {
 	return &MutableCaption{inner: raw.AVMutableCaptionFromID(_id)}
 }
 
+// @property text @abstract The text content of the caption. @discussion All styling information is cleared on setting this property.
+//
 // WithText sets the text property and returns the receiver for chaining.
 func (x *MutableCaption) WithText(text string) *MutableCaption {
 	x.inner.SetText(foundation.NSStringStringWithUTF8String(text))
 	return x
 }
 
+// @property timeRange @abstract The time range during which the caption should be presented.
+//
 // WithTimeRange sets the timeRange property and returns the receiver for chaining.
 func (x *MutableCaption) WithTimeRange(timeRange coremedia.CMTimeRange) *MutableCaption {
 	x.inner.SetTimeRange(timeRange)
 	return x
 }
 
+// @property region @abstract The region where the caption is placed. @discussion It can be nil when the underlying caption format doesn't support or use regions. This property throws an exception if region has unrecognizeable units.
+//
 // WithRegion sets the region property and returns the receiver for chaining.
 func (x *MutableCaption) WithRegion(region CaptionRegionProvider) *MutableCaption {
 	x.inner.SetRegion(region.asCaptionRegion())
 	return x
 }
 
+// @property textAlignment @abstract The text alignemnt within the containing region.
+//
 // WithTextAlignment sets the textAlignment property and returns the receiver for chaining.
 func (x *MutableCaption) WithTextAlignment(textAlignment AVCaptionTextAlignment) *MutableCaption {
 	x.inner.SetTextAlignment(raw.AVCaptionTextAlignment(textAlignment))
@@ -78,71 +86,99 @@ func (x *MutableCaption) SetTimeRange(timeRange coremedia.CMTimeRange) {
 	x.inner.SetTimeRange(timeRange)
 }
 
+// @method	setTextColor:inRange: @abstract Set text color for the range. @discussion The range parameter uses UTF-16 code unit index range.
+//
 // SetTextColorInRange calls the underlying SetTextColorInRange.
 func (x *MutableCaption) SetTextColorInRange(color unsafe.Pointer, range_ foundation.NSRange) {
 	x.inner.SetTextColorInRange(color, range_)
 }
 
+// @method	setBackgroundColor:inRange: @abstract Set background color for the range. @discussion The range parameter uses UTF-16 code unit index range.
+//
 // SetBackgroundColorInRange calls the underlying SetBackgroundColorInRange.
 func (x *MutableCaption) SetBackgroundColorInRange(color unsafe.Pointer, range_ foundation.NSRange) {
 	x.inner.SetBackgroundColorInRange(color, range_)
 }
 
+// @method	setFontWeight:inRange: @abstract Set font weight for the range. @discussion The range parameter uses UTF-16 code unit index range.
+//
 // SetFontWeightInRange calls the underlying SetFontWeightInRange.
 func (x *MutableCaption) SetFontWeightInRange(fontWeight AVCaptionFontWeight, range_ foundation.NSRange) {
 	x.inner.SetFontWeightInRange(raw.AVCaptionFontWeight(fontWeight), range_)
 }
 
+// @method	setFontStyle:inRange: @abstract Set font style for the range. @discussion The range parameter uses UTF-16 code unit index range.
+//
 // SetFontStyleInRange calls the underlying SetFontStyleInRange.
 func (x *MutableCaption) SetFontStyleInRange(fontStyle AVCaptionFontStyle, range_ foundation.NSRange) {
 	x.inner.SetFontStyleInRange(raw.AVCaptionFontStyle(fontStyle), range_)
 }
 
+// @method	setDecoration:inRange: @abstract Set text decoration for the range. @discussion The range parameter uses UTF-16 code unit index range.
+//
 // SetDecorationInRange calls the underlying SetDecorationInRange.
 func (x *MutableCaption) SetDecorationInRange(decoration AVCaptionDecoration, range_ foundation.NSRange) {
 	x.inner.SetDecorationInRange(raw.AVCaptionDecoration(decoration), range_)
 }
 
+// @method	setTextCombine:inRange: @abstract Set text combine for the range. @discussion The range parameter uses UTF-16 code unit index range.
+//
 // SetTextCombineInRange calls the underlying SetTextCombineInRange.
 func (x *MutableCaption) SetTextCombineInRange(textCombine AVCaptionTextCombine, range_ foundation.NSRange) {
 	x.inner.SetTextCombineInRange(raw.AVCaptionTextCombine(textCombine), range_)
 }
 
+// @method	setRuby:inRange: @abstract Set ruby text  for the range. @discussion The range parameter uses UTF-16 code unit index range.
+//
 // SetRubyInRange calls the underlying SetRubyInRange.
 func (x *MutableCaption) SetRubyInRange(ruby *raw.AVCaptionRuby, range_ foundation.NSRange) {
 	x.inner.SetRubyInRange(ruby, range_)
 }
 
+// @method	removeTextColorInRange: @abstract Remove text color for the range. @discussion The range parameter uses UTF-16 code unit index range.
+//
 // RemoveTextColorInRange calls the underlying RemoveTextColorInRange.
 func (x *MutableCaption) RemoveTextColorInRange(range_ foundation.NSRange) {
 	x.inner.RemoveTextColorInRange(range_)
 }
 
+// @method	removeBackgroundColorInRange: @abstract Remove background color for the range. @discussion The range parameter uses UTF-16 code unit index range.
+//
 // RemoveBackgroundColorInRange calls the underlying RemoveBackgroundColorInRange.
 func (x *MutableCaption) RemoveBackgroundColorInRange(range_ foundation.NSRange) {
 	x.inner.RemoveBackgroundColorInRange(range_)
 }
 
+// @method	removeFontWeightInRange: @abstract Remove font weight for the range. @discussion The range parameter uses UTF-16 code unit index range.
+//
 // RemoveFontWeightInRange calls the underlying RemoveFontWeightInRange.
 func (x *MutableCaption) RemoveFontWeightInRange(range_ foundation.NSRange) {
 	x.inner.RemoveFontWeightInRange(range_)
 }
 
+// @method	removeFontStyleInRange: @abstract Remove font style for the range. @discussion The range parameter uses UTF-16 code unit index range.
+//
 // RemoveFontStyleInRange calls the underlying RemoveFontStyleInRange.
 func (x *MutableCaption) RemoveFontStyleInRange(range_ foundation.NSRange) {
 	x.inner.RemoveFontStyleInRange(range_)
 }
 
+// @method	removeDecorationInRange: @abstract Remove text decoration for the range. @discussion The range parameter uses UTF-16 code unit index range.
+//
 // RemoveDecorationInRange calls the underlying RemoveDecorationInRange.
 func (x *MutableCaption) RemoveDecorationInRange(range_ foundation.NSRange) {
 	x.inner.RemoveDecorationInRange(range_)
 }
 
+// @method	removeTextCombineInRange: @abstract Remove text combine for the range. @discussion The range parameter uses UTF-16 code unit index range.
+//
 // RemoveTextCombineInRange calls the underlying RemoveTextCombineInRange.
 func (x *MutableCaption) RemoveTextCombineInRange(range_ foundation.NSRange) {
 	x.inner.RemoveTextCombineInRange(range_)
 }
 
+// @method	removeRubyInRange: @abstract Remove ruby text  for the range. @discussion The range parameter uses UTF-16 code unit index range.
+//
 // RemoveRubyInRange calls the underlying RemoveRubyInRange.
 func (x *MutableCaption) RemoveRubyInRange(range_ foundation.NSRange) {
 	x.inner.RemoveRubyInRange(range_)

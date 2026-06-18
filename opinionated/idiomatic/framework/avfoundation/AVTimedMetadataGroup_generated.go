@@ -32,6 +32,8 @@ func TimedMetadataGroupFromID(id objc.ID) *TimedMetadataGroup {
 	return &TimedMetadataGroup{inner: raw.AVTimedMetadataGroupFromID(id)}
 }
 
+// @method		initWithItems:timeRange: @abstract	Initializes an instance of AVTimedMetadataGroup with a collection of metadata items. @param		items An NSArray of AVMetadataItems. @param		timeRange The timeRange of the collection of AVMetadataItems. @result		An instance of AVTimedMetadataGroup.
+//
 // NewTimedMetadataGroupWithItemsTimeRange creates a new [TimedMetadataGroup].
 func NewTimedMetadataGroupWithItemsTimeRange(items *foundation.NSArray[*raw.AVMetadataItem], timeRange coremedia.CMTimeRange) *TimedMetadataGroup {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVTimedMetadataGroup")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewTimedMetadataGroupWithItemsTimeRange(items *foundation.NSArray[*raw.AVMe
 	return &TimedMetadataGroup{inner: raw.AVTimedMetadataGroupFromID(_id)}
 }
 
+// @method		initWithSampleBuffer: @abstract	Initializes an instance of AVTimedMetadataGroup with a sample buffer. @param		sampleBuffer A CMSampleBuffer with media type kCMMediaType_Metadata. @result		An instance of AVTimedMetadataGroup.
+//
 // NewTimedMetadataGroupWithSampleBuffer creates a new [TimedMetadataGroup].
 func NewTimedMetadataGroupWithSampleBuffer(sampleBuffer unsafe.Pointer) *TimedMetadataGroup {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVTimedMetadataGroup")), objc.RegisterName("alloc"))
@@ -51,6 +55,8 @@ func (x *TimedMetadataGroup) TimeRange() coremedia.CMTimeRange {
 	return x.inner.TimeRange()
 }
 
+// @method		copyFormatDescription @abstract	Creates a format description based on the receiver's items. @result		An instance of CMMetadataFormatDescription sufficient to describe the contents of all the items referenced by the receiver. @discussion The returned format description is suitable for use as the format hint parameter when creating an instance of AVAssetWriterInput. Each item referenced by the receiver must carry a non-nil value for its dataType property.  An exception will be thrown if any item does not have a data type.
+//
 // CopyFormatDescription calls the underlying CopyFormatDescription.
 func (x *TimedMetadataGroup) CopyFormatDescription() unsafe.Pointer {
 	return x.inner.CopyFormatDescription()

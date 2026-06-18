@@ -31,6 +31,8 @@ func SpeechURLRecognitionRequestFromID(id objc.ID) *SpeechURLRecognitionRequest 
 	return &SpeechURLRecognitionRequest{inner: raw.SFSpeechURLRecognitionRequestFromID(id)}
 }
 
+// Creates a speech recognition request, initialized with the specified URL. Use this method to create a request to recognize speech in a recorded audio file that resides at the specified URL. Pass the request to the recognizer's “SFSpeechRecognizer/recognitionTask(with:delegate:)“ method to start recognition.
+//
 // NewSpeechURLRecognitionRequestWithURL creates a new [SpeechURLRecognitionRequest].
 func NewSpeechURLRecognitionRequestWithURL(uRL string) *SpeechURLRecognitionRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSpeechURLRecognitionRequest")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewSpeechURLRecognitionRequestWithURL(uRL string) *SpeechURLRecognitionRequ
 	return &SpeechURLRecognitionRequest{inner: raw.SFSpeechURLRecognitionRequestFromID(_id)}
 }
 
+// A value that indicates the type of speech recognition being performed. The default value of this property is “SFSpeechRecognitionTaskHint/unspecified“. For a valid list of values, see “SFSpeechRecognitionTaskHint“.
+//
 // WithTaskHint sets the taskHint property and returns the receiver for chaining.
 func (x *SpeechURLRecognitionRequest) WithTaskHint(taskHint SFSpeechRecognitionTaskHint) *SpeechURLRecognitionRequest {
 	x.inner.SFSpeechRecognitionRequest.SetTaskHint(raw.SFSpeechRecognitionTaskHint(taskHint))
@@ -50,6 +54,8 @@ func (x *SpeechURLRecognitionRequest) WithShouldReportPartialResults(shouldRepor
 	return x
 }
 
+// An array of phrases that should be recognized, even if they are not in the system vocabulary. Use this property to specify short custom phrases that are unique to your app. You might include phrases with the names of characters, products, or places that are specific to your app. You might also include domain-specific terminology or unusual or made-up words. Assigning custom phrases to this property improves the likelihood of those phrases being recognized. Keep phrases relatively brief, limiting them to one or two words whenever possible. Lengthy phrases are less likely to be recognized. In addition, try to limit each phrase to something the user can say without pausing. Limit the total number of phrases to no more than 100.
+//
 // WithContextualStrings sets the collection, converting the Go slice to an NSArray.
 func (x *SpeechURLRecognitionRequest) WithContextualStrings(items ...*foundation.NSString) *SpeechURLRecognitionRequest {
 	if len(items) == 0 {
@@ -68,18 +74,24 @@ func (x *SpeechURLRecognitionRequest) WithContextualStrings(items ...*foundation
 	return x
 }
 
+// An identifier string that you use to describe the type of interaction associated with the speech recognition request. If different parts of your app have different speech recognition needs, you can use this property to identify the part of your app that is making each request. For example, if one part of your app lets users speak phone numbers and another part lets users speak street addresses, consistently identifying the part of the app that makes a recognition request may help improve the accuracy of the results.
+//
 // WithInteractionIdentifier sets the interactionIdentifier property and returns the receiver for chaining.
 func (x *SpeechURLRecognitionRequest) WithInteractionIdentifier(interactionIdentifier string) *SpeechURLRecognitionRequest {
 	x.inner.SFSpeechRecognitionRequest.SetInteractionIdentifier(foundation.NSStringStringWithUTF8String(interactionIdentifier))
 	return x
 }
 
+// A Boolean value that determines whether a request must keep its audio data on the device. Set this property to `true` to prevent an “SFSpeechRecognitionRequest“ from sending audio over the network. However, on-device requests won't be as accurate. > Note: > The request only honors this setting if the “SFSpeechRecognizer/supportsOnDeviceRecognition“ (“SFSpeechRecognizer“) property is also `true`.
+//
 // WithRequiresOnDeviceRecognition sets the requiresOnDeviceRecognition property and returns the receiver for chaining.
 func (x *SpeechURLRecognitionRequest) WithRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool) *SpeechURLRecognitionRequest {
 	x.inner.SFSpeechRecognitionRequest.SetRequiresOnDeviceRecognition(requiresOnDeviceRecognition)
 	return x
 }
 
+// A Boolean value that indicates whether to add punctuation to speech recognition results. Set this property to `true` for the speech framework to automatically include punctuation in the recognition results. Punctuation includes a period or question mark at the end of a sentence, and a comma within a sentence.
+//
 // WithAddsPunctuation sets the addsPunctuation property and returns the receiver for chaining.
 func (x *SpeechURLRecognitionRequest) WithAddsPunctuation(addsPunctuation bool) *SpeechURLRecognitionRequest {
 	x.inner.SFSpeechRecognitionRequest.SetAddsPunctuation(addsPunctuation)

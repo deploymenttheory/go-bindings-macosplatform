@@ -35,108 +35,144 @@ func NewTextureDescriptor() *TextureDescriptor {
 	return &TextureDescriptor{inner: raw.MTLTextureDescriptorFromID(_id)}
 }
 
+// @property type @abstract The overall type of the texture to be created. The default value is MTLTextureType2D.
+//
 // WithTextureType sets the textureType property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithTextureType(textureType MTLTextureType) *TextureDescriptor {
 	x.inner.SetTextureType(raw.MTLTextureType(textureType))
 	return x
 }
 
+// @property pixelFormat @abstract The pixel format to use when allocating this texture. This is also the pixel format that will be used to when the caller writes or reads pixels from this texture. The default value is MTLPixelFormatRGBA8Unorm.
+//
 // WithPixelFormat sets the pixelFormat property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithPixelFormat(pixelFormat MTLPixelFormat) *TextureDescriptor {
 	x.inner.SetPixelFormat(raw.MTLPixelFormat(pixelFormat))
 	return x
 }
 
+// @property width @abstract The width of the texture to create. The default value is 1.
+//
 // WithWidth sets the width property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithWidth(width uint) *TextureDescriptor {
 	x.inner.SetWidth(width)
 	return x
 }
 
+// @property height @abstract The height of the texture to create. The default value is 1. @discussion height If allocating a 1D texture, height must be 1.
+//
 // WithHeight sets the height property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithHeight(height uint) *TextureDescriptor {
 	x.inner.SetHeight(height)
 	return x
 }
 
+// @property depth @abstract The depth of the texture to create. The default value is 1. @discussion depth When allocating any texture types other than 3D, depth must be 1.
+//
 // WithDepth sets the depth property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithDepth(depth uint) *TextureDescriptor {
 	x.inner.SetDepth(depth)
 	return x
 }
 
+// @property mipmapLevelCount @abstract The number of mipmap levels to allocate. The default value is 1. @discussion When creating Buffer and Multisample textures, mipmapLevelCount must be 1.
+//
 // WithMipmapLevelCount sets the mipmapLevelCount property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithMipmapLevelCount(mipmapLevelCount uint) *TextureDescriptor {
 	x.inner.SetMipmapLevelCount(mipmapLevelCount)
 	return x
 }
 
+// @property sampleCount @abstract The number of samples in the texture to create. The default value is 1. @discussion When creating Buffer textures sampleCount must be 1. Implementations may round sample counts up to the next supported value.
+//
 // WithSampleCount sets the sampleCount property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithSampleCount(sampleCount uint) *TextureDescriptor {
 	x.inner.SetSampleCount(sampleCount)
 	return x
 }
 
+// @property arrayLength @abstract The number of array elements to allocate. The default value is 1. @discussion When allocating any non-Array texture type, arrayLength has to be 1. Otherwise it must be set to something greater than 1 and less than 2048.
+//
 // WithArrayLength sets the arrayLength property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithArrayLength(arrayLength uint) *TextureDescriptor {
 	x.inner.SetArrayLength(arrayLength)
 	return x
 }
 
+// @property resourceOptions @abstract Options to control memory allocation parameters, etc. @discussion Contains a packed set of the storageMode, cpuCacheMode and hazardTrackingMode properties.
+//
 // WithResourceOptions sets the resourceOptions property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithResourceOptions(resourceOptions MTLResourceOptions) *TextureDescriptor {
 	x.inner.SetResourceOptions(raw.MTLResourceOptions(resourceOptions))
 	return x
 }
 
+// @property cpuCacheMode @abstract Options to specify CPU cache mode of texture resource.
+//
 // WithCpuCacheMode sets the cpuCacheMode property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithCpuCacheMode(cpuCacheMode MTLCPUCacheMode) *TextureDescriptor {
 	x.inner.SetCpuCacheMode(raw.MTLCPUCacheMode(cpuCacheMode))
 	return x
 }
 
+// @property storageMode @abstract To specify storage mode of texture resource.
+//
 // WithStorageMode sets the storageMode property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithStorageMode(storageMode MTLStorageMode) *TextureDescriptor {
 	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
 	return x
 }
 
+// @property hazardTrackingMode @abstract Set hazard tracking mode for the texture. The default value is MTLHazardTrackingModeDefault. @discussion For resources created from the device, MTLHazardTrackingModeDefault is treated as MTLHazardTrackingModeTracked. For resources created on a heap, MTLHazardTrackingModeDefault is treated as the hazardTrackingMode of the heap itself. In either case, it is possible to opt-out of hazard tracking by setting MTLHazardTrackingModeUntracked. It is not possible to opt-in to hazard tracking on a heap that itself is not hazard tracked. For optimal performance, perform hazard tracking manually through MTLFence or MTLEvent instead.
+//
 // WithHazardTrackingMode sets the hazardTrackingMode property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) *TextureDescriptor {
 	x.inner.SetHazardTrackingMode(raw.MTLHazardTrackingMode(hazardTrackingMode))
 	return x
 }
 
+// @property usage @abstract Description of texture usage
+//
 // WithUsage sets the usage property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithUsage(usage MTLTextureUsage) *TextureDescriptor {
 	x.inner.SetUsage(raw.MTLTextureUsage(usage))
 	return x
 }
 
+// @property allowGPUOptimizedContents @abstract Allow GPU-optimization for the contents of this texture. The default value is true. @discussion Useful for opting-out of GPU-optimization when implicit optimization (e.g. RT writes) is regressing CPU-read-back performance. See the documentation for optimizeContentsForGPUAccess: and optimizeContentsForCPUAccess: APIs.
+//
 // WithAllowGPUOptimizedContents sets the allowGPUOptimizedContents property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithAllowGPUOptimizedContents(allowGPUOptimizedContents bool) *TextureDescriptor {
 	x.inner.SetAllowGPUOptimizedContents(allowGPUOptimizedContents)
 	return x
 }
 
+// @property compressionType @abstract Controls how the texture contents will be compressed when written to by the GPU. Compression can be used to reduce the bandwidth usage and storage requirements of a texture. @discussion The default compression type is lossless, meaning that no loss of precision will occur when the texture content is modified. Losslessly compressed textures may benefit from reduced bandwidth usage when regions of correlated color values are written, but do not benefit from reduced storage requirements. Enabling lossy compression for textures that can tolerate some precision loss will guarantee both reduced bandwidth usage and reduced storage requirements. The amount of precision loss depends on the color values stored; regions with correlated color values can be represented with limited to no precision loss, whereas regions with unrelated color values suffer more precision loss. Enabling lossy compression requires both storageMode == MTLStorageModePrivate, allowGPUOptimizedContents == YES, and cannot be combined with either MTLTextureUsagePixelFormatView, MTLTextureUsageShaderWrite, MTLTextureUsageShaderAtomic, MTLTextureType1D(Array) or MTLTextureTypeTextureBuffer. Moreover, not all MTLPixelFormat are supported with lossy compression, verify that the MTLDevice's GPU family supports the lossy compression feature for the pixelFormat requested. Set allowGPUOptimizedContents to NO to opt out of both lossless and lossy compression; such textures do not benefit from either reduced bandwidth usage or reduced storage requirements, but have predictable CPU readback performance.
+//
 // WithCompressionType sets the compressionType property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithCompressionType(compressionType MTLTextureCompressionType) *TextureDescriptor {
 	x.inner.SetCompressionType(raw.MTLTextureCompressionType(compressionType))
 	return x
 }
 
+// @property swizzle @abstract Channel swizzle to use when reading or sampling from the texture, the default value is MTLTextureSwizzleChannelsDefault.
+//
 // WithSwizzle sets the swizzle property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithSwizzle(swizzle raw.MTLTextureSwizzleChannels) *TextureDescriptor {
 	x.inner.SetSwizzle(swizzle)
 	return x
 }
 
+// Determines the page size for a placement sparse texture. Set this property to a non-zero value to create a *placement sparse texture*. Placement sparse textures are instances of “MTLTexture“ that you assign memory to using a “MTLHeap“ instance of type “MTLHeapType/MTLHeapTypePlacement“ and a “MTLHeapDescriptor/maxCompatiblePlacementSparsePageSize“ at least as large as the “MTLSparsePageSize“ value you assign to this property. This value is 0 by default.
+//
 // WithPlacementSparsePageSize sets the placementSparsePageSize property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithPlacementSparsePageSize(placementSparsePageSize MTLSparsePageSize) *TextureDescriptor {
 	x.inner.SetPlacementSparsePageSize(raw.MTLSparsePageSize(placementSparsePageSize))
 	return x
 }
 
+// @property type @abstract The overall type of the texture to be created. The default value is MTLTextureType2D.
+//
 // TextureType calls the underlying TextureType.
 func (x *TextureDescriptor) TextureType() MTLTextureType {
 	return MTLTextureType(x.inner.TextureType())
@@ -147,6 +183,8 @@ func (x *TextureDescriptor) SetTextureType(textureType MTLTextureType) {
 	x.inner.SetTextureType(raw.MTLTextureType(textureType))
 }
 
+// @property pixelFormat @abstract The pixel format to use when allocating this texture. This is also the pixel format that will be used to when the caller writes or reads pixels from this texture. The default value is MTLPixelFormatRGBA8Unorm.
+//
 // PixelFormat calls the underlying PixelFormat.
 func (x *TextureDescriptor) PixelFormat() MTLPixelFormat {
 	return MTLPixelFormat(x.inner.PixelFormat())
@@ -157,6 +195,8 @@ func (x *TextureDescriptor) SetPixelFormat(pixelFormat MTLPixelFormat) {
 	x.inner.SetPixelFormat(raw.MTLPixelFormat(pixelFormat))
 }
 
+// @property width @abstract The width of the texture to create. The default value is 1.
+//
 // Width calls the underlying Width.
 func (x *TextureDescriptor) Width() uint {
 	return x.inner.Width()
@@ -167,6 +207,8 @@ func (x *TextureDescriptor) SetWidth(width uint) {
 	x.inner.SetWidth(width)
 }
 
+// @property height @abstract The height of the texture to create. The default value is 1. @discussion height If allocating a 1D texture, height must be 1.
+//
 // Height calls the underlying Height.
 func (x *TextureDescriptor) Height() uint {
 	return x.inner.Height()
@@ -177,6 +219,8 @@ func (x *TextureDescriptor) SetHeight(height uint) {
 	x.inner.SetHeight(height)
 }
 
+// @property depth @abstract The depth of the texture to create. The default value is 1. @discussion depth When allocating any texture types other than 3D, depth must be 1.
+//
 // Depth calls the underlying Depth.
 func (x *TextureDescriptor) Depth() uint {
 	return x.inner.Depth()
@@ -187,6 +231,8 @@ func (x *TextureDescriptor) SetDepth(depth uint) {
 	x.inner.SetDepth(depth)
 }
 
+// @property mipmapLevelCount @abstract The number of mipmap levels to allocate. The default value is 1. @discussion When creating Buffer and Multisample textures, mipmapLevelCount must be 1.
+//
 // MipmapLevelCount calls the underlying MipmapLevelCount.
 func (x *TextureDescriptor) MipmapLevelCount() uint {
 	return x.inner.MipmapLevelCount()
@@ -197,6 +243,8 @@ func (x *TextureDescriptor) SetMipmapLevelCount(mipmapLevelCount uint) {
 	x.inner.SetMipmapLevelCount(mipmapLevelCount)
 }
 
+// @property sampleCount @abstract The number of samples in the texture to create. The default value is 1. @discussion When creating Buffer textures sampleCount must be 1. Implementations may round sample counts up to the next supported value.
+//
 // SampleCount calls the underlying SampleCount.
 func (x *TextureDescriptor) SampleCount() uint {
 	return x.inner.SampleCount()
@@ -207,6 +255,8 @@ func (x *TextureDescriptor) SetSampleCount(sampleCount uint) {
 	x.inner.SetSampleCount(sampleCount)
 }
 
+// @property arrayLength @abstract The number of array elements to allocate. The default value is 1. @discussion When allocating any non-Array texture type, arrayLength has to be 1. Otherwise it must be set to something greater than 1 and less than 2048.
+//
 // ArrayLength calls the underlying ArrayLength.
 func (x *TextureDescriptor) ArrayLength() uint {
 	return x.inner.ArrayLength()
@@ -217,6 +267,8 @@ func (x *TextureDescriptor) SetArrayLength(arrayLength uint) {
 	x.inner.SetArrayLength(arrayLength)
 }
 
+// @property resourceOptions @abstract Options to control memory allocation parameters, etc. @discussion Contains a packed set of the storageMode, cpuCacheMode and hazardTrackingMode properties.
+//
 // ResourceOptions calls the underlying ResourceOptions.
 func (x *TextureDescriptor) ResourceOptions() MTLResourceOptions {
 	return MTLResourceOptions(x.inner.ResourceOptions())
@@ -227,6 +279,8 @@ func (x *TextureDescriptor) SetResourceOptions(resourceOptions MTLResourceOption
 	x.inner.SetResourceOptions(raw.MTLResourceOptions(resourceOptions))
 }
 
+// @property cpuCacheMode @abstract Options to specify CPU cache mode of texture resource.
+//
 // CpuCacheMode calls the underlying CpuCacheMode.
 func (x *TextureDescriptor) CpuCacheMode() MTLCPUCacheMode {
 	return MTLCPUCacheMode(x.inner.CpuCacheMode())
@@ -237,6 +291,8 @@ func (x *TextureDescriptor) SetCpuCacheMode(cpuCacheMode MTLCPUCacheMode) {
 	x.inner.SetCpuCacheMode(raw.MTLCPUCacheMode(cpuCacheMode))
 }
 
+// @property storageMode @abstract To specify storage mode of texture resource.
+//
 // StorageMode calls the underlying StorageMode.
 func (x *TextureDescriptor) StorageMode() MTLStorageMode {
 	return MTLStorageMode(x.inner.StorageMode())
@@ -247,6 +303,8 @@ func (x *TextureDescriptor) SetStorageMode(storageMode MTLStorageMode) {
 	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
 }
 
+// @property hazardTrackingMode @abstract Set hazard tracking mode for the texture. The default value is MTLHazardTrackingModeDefault. @discussion For resources created from the device, MTLHazardTrackingModeDefault is treated as MTLHazardTrackingModeTracked. For resources created on a heap, MTLHazardTrackingModeDefault is treated as the hazardTrackingMode of the heap itself. In either case, it is possible to opt-out of hazard tracking by setting MTLHazardTrackingModeUntracked. It is not possible to opt-in to hazard tracking on a heap that itself is not hazard tracked. For optimal performance, perform hazard tracking manually through MTLFence or MTLEvent instead.
+//
 // HazardTrackingMode calls the underlying HazardTrackingMode.
 func (x *TextureDescriptor) HazardTrackingMode() MTLHazardTrackingMode {
 	return MTLHazardTrackingMode(x.inner.HazardTrackingMode())
@@ -257,6 +315,8 @@ func (x *TextureDescriptor) SetHazardTrackingMode(hazardTrackingMode MTLHazardTr
 	x.inner.SetHazardTrackingMode(raw.MTLHazardTrackingMode(hazardTrackingMode))
 }
 
+// @property usage @abstract Description of texture usage
+//
 // Usage calls the underlying Usage.
 func (x *TextureDescriptor) Usage() MTLTextureUsage {
 	return MTLTextureUsage(x.inner.Usage())
@@ -267,6 +327,8 @@ func (x *TextureDescriptor) SetUsage(usage MTLTextureUsage) {
 	x.inner.SetUsage(raw.MTLTextureUsage(usage))
 }
 
+// @property allowGPUOptimizedContents @abstract Allow GPU-optimization for the contents of this texture. The default value is true. @discussion Useful for opting-out of GPU-optimization when implicit optimization (e.g. RT writes) is regressing CPU-read-back performance. See the documentation for optimizeContentsForGPUAccess: and optimizeContentsForCPUAccess: APIs.
+//
 // AllowGPUOptimizedContents calls the underlying AllowGPUOptimizedContents.
 func (x *TextureDescriptor) AllowGPUOptimizedContents() bool {
 	return x.inner.AllowGPUOptimizedContents()
@@ -277,6 +339,8 @@ func (x *TextureDescriptor) SetAllowGPUOptimizedContents(allowGPUOptimizedConten
 	x.inner.SetAllowGPUOptimizedContents(allowGPUOptimizedContents)
 }
 
+// @property compressionType @abstract Controls how the texture contents will be compressed when written to by the GPU. Compression can be used to reduce the bandwidth usage and storage requirements of a texture. @discussion The default compression type is lossless, meaning that no loss of precision will occur when the texture content is modified. Losslessly compressed textures may benefit from reduced bandwidth usage when regions of correlated color values are written, but do not benefit from reduced storage requirements. Enabling lossy compression for textures that can tolerate some precision loss will guarantee both reduced bandwidth usage and reduced storage requirements. The amount of precision loss depends on the color values stored; regions with correlated color values can be represented with limited to no precision loss, whereas regions with unrelated color values suffer more precision loss. Enabling lossy compression requires both storageMode == MTLStorageModePrivate, allowGPUOptimizedContents == YES, and cannot be combined with either MTLTextureUsagePixelFormatView, MTLTextureUsageShaderWrite, MTLTextureUsageShaderAtomic, MTLTextureType1D(Array) or MTLTextureTypeTextureBuffer. Moreover, not all MTLPixelFormat are supported with lossy compression, verify that the MTLDevice's GPU family supports the lossy compression feature for the pixelFormat requested. Set allowGPUOptimizedContents to NO to opt out of both lossless and lossy compression; such textures do not benefit from either reduced bandwidth usage or reduced storage requirements, but have predictable CPU readback performance.
+//
 // CompressionType calls the underlying CompressionType.
 func (x *TextureDescriptor) CompressionType() MTLTextureCompressionType {
 	return MTLTextureCompressionType(x.inner.CompressionType())
@@ -287,6 +351,8 @@ func (x *TextureDescriptor) SetCompressionType(compressionType MTLTextureCompres
 	x.inner.SetCompressionType(raw.MTLTextureCompressionType(compressionType))
 }
 
+// @property swizzle @abstract Channel swizzle to use when reading or sampling from the texture, the default value is MTLTextureSwizzleChannelsDefault.
+//
 // Swizzle calls the underlying Swizzle.
 func (x *TextureDescriptor) Swizzle() raw.MTLTextureSwizzleChannels {
 	return x.inner.Swizzle()
@@ -297,6 +363,8 @@ func (x *TextureDescriptor) SetSwizzle(swizzle raw.MTLTextureSwizzleChannels) {
 	x.inner.SetSwizzle(swizzle)
 }
 
+// Determines the page size for a placement sparse texture. Set this property to a non-zero value to create a *placement sparse texture*. Placement sparse textures are instances of “MTLTexture“ that you assign memory to using a “MTLHeap“ instance of type “MTLHeapType/MTLHeapTypePlacement“ and a “MTLHeapDescriptor/maxCompatiblePlacementSparsePageSize“ at least as large as the “MTLSparsePageSize“ value you assign to this property. This value is 0 by default.
+//
 // PlacementSparsePageSize calls the underlying PlacementSparsePageSize.
 func (x *TextureDescriptor) PlacementSparsePageSize() MTLSparsePageSize {
 	return MTLSparsePageSize(x.inner.PlacementSparsePageSize())

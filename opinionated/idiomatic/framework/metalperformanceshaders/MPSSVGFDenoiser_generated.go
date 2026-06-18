@@ -31,6 +31,8 @@ func SVGFDenoiserFromID(id objc.ID) *SVGFDenoiser {
 	return &SVGFDenoiser{inner: raw.MPSSVGFDenoiserFromID(id)}
 }
 
+// @brief Initialize the MPSSVGFDenoiser object @parameter device The Metal device to use for denoising
+//
 // NewSVGFDenoiserWithDevice creates a new [SVGFDenoiser].
 func NewSVGFDenoiserWithDevice(device metal.MTLDevice) *SVGFDenoiser {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSSVGFDenoiser")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewSVGFDenoiserWithDevice(device metal.MTLDevice) *SVGFDenoiser {
 	return &SVGFDenoiser{inner: raw.MPSSVGFDenoiserFromID(_id)}
 }
 
+// @brief Initialize the MPSSVGFDenoiser object @parameter svgf             MPSSVGF kernels to use for denoising. This object can be used to configure temporal reprojection, bilateral blur settings, etc. @parameter textureAllocator An object conforming to the MPSSVGFTextureAllocator protocol. This object will be used to allocate temporary intermediate and output textures. This can be a custom object or an instance of the MPSSVGFDefaultTextureAllocator class.
+//
 // NewSVGFDenoiserWithSVGFTextureAllocator creates a new [SVGFDenoiser].
 func NewSVGFDenoiserWithSVGFTextureAllocator(svgf *mpsrayintersector.MPSSVGF, textureAllocator mpsrayintersector.MPSSVGFTextureAllocator) *SVGFDenoiser {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSSVGFDenoiser")), objc.RegisterName("alloc"))
@@ -45,42 +49,58 @@ func NewSVGFDenoiserWithSVGFTextureAllocator(svgf *mpsrayintersector.MPSSVGF, te
 	return &SVGFDenoiser{inner: raw.MPSSVGFDenoiserFromID(_id)}
 }
 
+// @brief The number of bilateral filter iterations to run. More iterations will improve quality at the cost of performance. Defaults to 5. Must be at least 1.
+//
 // WithBilateralFilterIterations sets the bilateralFilterIterations property and returns the receiver for chaining.
 func (x *SVGFDenoiser) WithBilateralFilterIterations(bilateralFilterIterations uint) *SVGFDenoiser {
 	x.inner.SetBilateralFilterIterations(bilateralFilterIterations)
 	return x
 }
 
+// @brief Clear the temporal history. Reprojection and temporal accumulation will restart on the next call to encodeToCommandBuffer:
+//
 // ClearTemporalHistory calls the underlying ClearTemporalHistory.
 func (x *SVGFDenoiser) ClearTemporalHistory() {
 	x.inner.ClearTemporalHistory()
 }
 
+// @brief Return any temporary textures to the texture allocator. Also clears the temporal history. This should be called before resizing the source texture(s).
+//
 // ReleaseTemporaryTextures calls the underlying ReleaseTemporaryTextures.
 func (x *SVGFDenoiser) ReleaseTemporaryTextures() {
 	x.inner.ReleaseTemporaryTextures()
 }
 
+// @brief Encode denoising kernels to a command buffer @discussion Removes noise from the source texture, using the additional data in the motion vector, depth/normal, and previous depth/normal textures. Returns the resulting texture. The depth/normal texture should be provided as the previous depth/normal texture for the next call to this method. This method will also update an internally managed temporal history to aid the denoising process. To reset this history, call the clearTemporalHistory method. This method will allocate and return several textures from and to the texture allocator the MPSSVGFDenoiser was initialized with. The number of iterations of the bilateral filter is controlled by the bilateralFilterIterations property. Larger numbers of iterations will improve the quality but reduce performance. To configure other parameters of the denoising process, modify the properties of the MPSSVGF object the MPSSVGFDenoiser was initialized with. @parameter commandBuffer              Command buffer to encode into @parameter sourceTexture              Source image to denoiser @parameter motionVectorTexture        Motion vector texture describing how much each texel has moved, in texels, since the previous frame. See the MPSSVGF object for more details. @parameter depthNormalTexture         Texture containing linear depth in the X component and signed normals in the YZW components. See the MPSSVGF object for more details. @parameter previousDepthNormalTexture Depth/normal texture from the previous frame. See the MPSSVGF object for more details.
+//
 // EncodeToCommandBufferSourceTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture calls the underlying EncodeToCommandBufferSourceTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture.
 func (x *SVGFDenoiser) EncodeToCommandBufferSourceTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, motionVectorTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture, previousDepthNormalTexture metal.MTLTexture) metal.MTLTexture {
 	return x.inner.EncodeToCommandBufferSourceTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer, sourceTexture, motionVectorTexture, depthNormalTexture, previousDepthNormalTexture)
 }
 
+// @brief Encode denoising kernels to a command buffer @discussion Simultaneously removes noise from the source texture and optional second source texture, using the additional data in the motion vector, depth/normal, and previous depth/normal textures. Returns the result through the destination texture pointers. The depth/normal texture should be provided as the previous depth/normal texture for the next call to this method. This method will also update an internally managed temporal history to aid the denoising process. To reset this history, call the clearTemporalHistory method. This method will allocate and return several textures from and to the texture allocator the MPSSVGFDenoiser was initialized with. The number of iterations of the bilateral filter is controlled by the bilateralFilterIterations property. Larger numbers of iterations will improve the quality but reduce performance. To configure other parameters of the denoising process, modify the properties of the MPSSVGF object the MPSSVGFDenoiser was initialized with. @parameter commandBuffer              Command buffer to encode into @parameter sourceTexture              Source image to denoiser @parameter destinationTexture         Denoised output image @parameter sourceTexture2             Optional second source image to denoise @parameter destinationTexture2        Denoised second output image, if there is a second source image @parameter motionVectorTexture        Motion vector texture describing how much each texel has moved, in texels, since the previous frame. See the MPSSVGF object for more details. @parameter depthNormalTexture         Texture containing linear depth in the X component and signed normals in the YZW components. See the MPSSVGF object for more details. @parameter previousDepthNormalTexture Depth/normal texture from the previous frame. See the MPSSVGF object for more details.
+//
 // EncodeToCommandBufferSourceTextureDestinationTextureSourceTexture2DestinationTexture2MotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture calls the underlying EncodeToCommandBufferSourceTextureDestinationTextureSourceTexture2DestinationTexture2MotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture.
 func (x *SVGFDenoiser) EncodeToCommandBufferSourceTextureDestinationTextureSourceTexture2DestinationTexture2MotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, destinationTexture metal.MTLTexture, sourceTexture2 metal.MTLTexture, destinationTexture2 metal.MTLTexture, motionVectorTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture, previousDepthNormalTexture metal.MTLTexture) {
 	x.inner.EncodeToCommandBufferSourceTextureDestinationTextureSourceTexture2DestinationTexture2MotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer, sourceTexture, destinationTexture, sourceTexture2, destinationTexture2, motionVectorTexture, depthNormalTexture, previousDepthNormalTexture)
 }
 
+// @brief The underlying MPSSVGF kernels object which will be used for denoising. Use this object to customize the denoising process.
+//
 // Svgf calls the underlying Svgf.
 func (x *SVGFDenoiser) Svgf() *mpsrayintersector.MPSSVGF {
 	return x.inner.Svgf()
 }
 
+// @brief The object which will be used to allocate intermediate and output textures.
+//
 // TextureAllocator calls the underlying TextureAllocator.
 func (x *SVGFDenoiser) TextureAllocator() mpsrayintersector.MPSSVGFTextureAllocator {
 	return x.inner.TextureAllocator()
 }
 
+// @brief The number of bilateral filter iterations to run. More iterations will improve quality at the cost of performance. Defaults to 5. Must be at least 1.
+//
 // BilateralFilterIterations calls the underlying BilateralFilterIterations.
 func (x *SVGFDenoiser) BilateralFilterIterations() uint {
 	return x.inner.BilateralFilterIterations()

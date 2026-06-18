@@ -649,8 +649,17 @@ func (x *DateFormatter) EraSymbols() []string {
 }
 
 // SetEraSymbols calls the underlying SetEraSymbols.
-func (x *DateFormatter) SetEraSymbols(eraSymbols *raw.NSArray[*raw.NSString]) {
-	x.inner.SetEraSymbols(eraSymbols)
+func (x *DateFormatter) SetEraSymbols(eraSymbols ...StringProvider) {
+	_ptrs := make([]objc.ID, len(eraSymbols))
+	for _i, _v := range eraSymbols {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetEraSymbols(_arg0)
 }
 
 // MonthSymbols returns the collection as a Go slice.
@@ -665,8 +674,17 @@ func (x *DateFormatter) MonthSymbols() []string {
 }
 
 // SetMonthSymbols calls the underlying SetMonthSymbols.
-func (x *DateFormatter) SetMonthSymbols(monthSymbols *raw.NSArray[*raw.NSString]) {
-	x.inner.SetMonthSymbols(monthSymbols)
+func (x *DateFormatter) SetMonthSymbols(monthSymbols ...StringProvider) {
+	_ptrs := make([]objc.ID, len(monthSymbols))
+	for _i, _v := range monthSymbols {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetMonthSymbols(_arg0)
 }
 
 // ShortMonthSymbols returns the collection as a Go slice.
@@ -681,8 +699,17 @@ func (x *DateFormatter) ShortMonthSymbols() []string {
 }
 
 // SetShortMonthSymbols calls the underlying SetShortMonthSymbols.
-func (x *DateFormatter) SetShortMonthSymbols(shortMonthSymbols *raw.NSArray[*raw.NSString]) {
-	x.inner.SetShortMonthSymbols(shortMonthSymbols)
+func (x *DateFormatter) SetShortMonthSymbols(shortMonthSymbols ...StringProvider) {
+	_ptrs := make([]objc.ID, len(shortMonthSymbols))
+	for _i, _v := range shortMonthSymbols {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetShortMonthSymbols(_arg0)
 }
 
 // WeekdaySymbols returns the collection as a Go slice.
@@ -697,8 +724,17 @@ func (x *DateFormatter) WeekdaySymbols() []string {
 }
 
 // SetWeekdaySymbols calls the underlying SetWeekdaySymbols.
-func (x *DateFormatter) SetWeekdaySymbols(weekdaySymbols *raw.NSArray[*raw.NSString]) {
-	x.inner.SetWeekdaySymbols(weekdaySymbols)
+func (x *DateFormatter) SetWeekdaySymbols(weekdaySymbols ...StringProvider) {
+	_ptrs := make([]objc.ID, len(weekdaySymbols))
+	for _i, _v := range weekdaySymbols {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetWeekdaySymbols(_arg0)
 }
 
 // ShortWeekdaySymbols returns the collection as a Go slice.
@@ -713,8 +749,17 @@ func (x *DateFormatter) ShortWeekdaySymbols() []string {
 }
 
 // SetShortWeekdaySymbols calls the underlying SetShortWeekdaySymbols.
-func (x *DateFormatter) SetShortWeekdaySymbols(shortWeekdaySymbols *raw.NSArray[*raw.NSString]) {
-	x.inner.SetShortWeekdaySymbols(shortWeekdaySymbols)
+func (x *DateFormatter) SetShortWeekdaySymbols(shortWeekdaySymbols ...StringProvider) {
+	_ptrs := make([]objc.ID, len(shortWeekdaySymbols))
+	for _i, _v := range shortWeekdaySymbols {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetShortWeekdaySymbols(_arg0)
 }
 
 // AMSymbol calls the underlying AMSymbol.
@@ -757,8 +802,17 @@ func (x *DateFormatter) LongEraSymbols() []string {
 }
 
 // SetLongEraSymbols calls the underlying SetLongEraSymbols.
-func (x *DateFormatter) SetLongEraSymbols(longEraSymbols *raw.NSArray[*raw.NSString]) {
-	x.inner.SetLongEraSymbols(longEraSymbols)
+func (x *DateFormatter) SetLongEraSymbols(longEraSymbols ...StringProvider) {
+	_ptrs := make([]objc.ID, len(longEraSymbols))
+	for _i, _v := range longEraSymbols {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetLongEraSymbols(_arg0)
 }
 
 // VeryShortMonthSymbols returns the collection as a Go slice.
@@ -773,8 +827,17 @@ func (x *DateFormatter) VeryShortMonthSymbols() []string {
 }
 
 // SetVeryShortMonthSymbols calls the underlying SetVeryShortMonthSymbols.
-func (x *DateFormatter) SetVeryShortMonthSymbols(veryShortMonthSymbols *raw.NSArray[*raw.NSString]) {
-	x.inner.SetVeryShortMonthSymbols(veryShortMonthSymbols)
+func (x *DateFormatter) SetVeryShortMonthSymbols(veryShortMonthSymbols ...StringProvider) {
+	_ptrs := make([]objc.ID, len(veryShortMonthSymbols))
+	for _i, _v := range veryShortMonthSymbols {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetVeryShortMonthSymbols(_arg0)
 }
 
 // StandaloneMonthSymbols returns the collection as a Go slice.
@@ -789,8 +852,17 @@ func (x *DateFormatter) StandaloneMonthSymbols() []string {
 }
 
 // SetStandaloneMonthSymbols calls the underlying SetStandaloneMonthSymbols.
-func (x *DateFormatter) SetStandaloneMonthSymbols(standaloneMonthSymbols *raw.NSArray[*raw.NSString]) {
-	x.inner.SetStandaloneMonthSymbols(standaloneMonthSymbols)
+func (x *DateFormatter) SetStandaloneMonthSymbols(standaloneMonthSymbols ...StringProvider) {
+	_ptrs := make([]objc.ID, len(standaloneMonthSymbols))
+	for _i, _v := range standaloneMonthSymbols {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetStandaloneMonthSymbols(_arg0)
 }
 
 // ShortStandaloneMonthSymbols returns the collection as a Go slice.
@@ -805,8 +877,17 @@ func (x *DateFormatter) ShortStandaloneMonthSymbols() []string {
 }
 
 // SetShortStandaloneMonthSymbols calls the underlying SetShortStandaloneMonthSymbols.
-func (x *DateFormatter) SetShortStandaloneMonthSymbols(shortStandaloneMonthSymbols *raw.NSArray[*raw.NSString]) {
-	x.inner.SetShortStandaloneMonthSymbols(shortStandaloneMonthSymbols)
+func (x *DateFormatter) SetShortStandaloneMonthSymbols(shortStandaloneMonthSymbols ...StringProvider) {
+	_ptrs := make([]objc.ID, len(shortStandaloneMonthSymbols))
+	for _i, _v := range shortStandaloneMonthSymbols {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetShortStandaloneMonthSymbols(_arg0)
 }
 
 // VeryShortStandaloneMonthSymbols returns the collection as a Go slice.
@@ -821,8 +902,17 @@ func (x *DateFormatter) VeryShortStandaloneMonthSymbols() []string {
 }
 
 // SetVeryShortStandaloneMonthSymbols calls the underlying SetVeryShortStandaloneMonthSymbols.
-func (x *DateFormatter) SetVeryShortStandaloneMonthSymbols(veryShortStandaloneMonthSymbols *raw.NSArray[*raw.NSString]) {
-	x.inner.SetVeryShortStandaloneMonthSymbols(veryShortStandaloneMonthSymbols)
+func (x *DateFormatter) SetVeryShortStandaloneMonthSymbols(veryShortStandaloneMonthSymbols ...StringProvider) {
+	_ptrs := make([]objc.ID, len(veryShortStandaloneMonthSymbols))
+	for _i, _v := range veryShortStandaloneMonthSymbols {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetVeryShortStandaloneMonthSymbols(_arg0)
 }
 
 // VeryShortWeekdaySymbols returns the collection as a Go slice.
@@ -837,8 +927,17 @@ func (x *DateFormatter) VeryShortWeekdaySymbols() []string {
 }
 
 // SetVeryShortWeekdaySymbols calls the underlying SetVeryShortWeekdaySymbols.
-func (x *DateFormatter) SetVeryShortWeekdaySymbols(veryShortWeekdaySymbols *raw.NSArray[*raw.NSString]) {
-	x.inner.SetVeryShortWeekdaySymbols(veryShortWeekdaySymbols)
+func (x *DateFormatter) SetVeryShortWeekdaySymbols(veryShortWeekdaySymbols ...StringProvider) {
+	_ptrs := make([]objc.ID, len(veryShortWeekdaySymbols))
+	for _i, _v := range veryShortWeekdaySymbols {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetVeryShortWeekdaySymbols(_arg0)
 }
 
 // StandaloneWeekdaySymbols returns the collection as a Go slice.
@@ -853,8 +952,17 @@ func (x *DateFormatter) StandaloneWeekdaySymbols() []string {
 }
 
 // SetStandaloneWeekdaySymbols calls the underlying SetStandaloneWeekdaySymbols.
-func (x *DateFormatter) SetStandaloneWeekdaySymbols(standaloneWeekdaySymbols *raw.NSArray[*raw.NSString]) {
-	x.inner.SetStandaloneWeekdaySymbols(standaloneWeekdaySymbols)
+func (x *DateFormatter) SetStandaloneWeekdaySymbols(standaloneWeekdaySymbols ...StringProvider) {
+	_ptrs := make([]objc.ID, len(standaloneWeekdaySymbols))
+	for _i, _v := range standaloneWeekdaySymbols {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetStandaloneWeekdaySymbols(_arg0)
 }
 
 // ShortStandaloneWeekdaySymbols returns the collection as a Go slice.
@@ -869,8 +977,17 @@ func (x *DateFormatter) ShortStandaloneWeekdaySymbols() []string {
 }
 
 // SetShortStandaloneWeekdaySymbols calls the underlying SetShortStandaloneWeekdaySymbols.
-func (x *DateFormatter) SetShortStandaloneWeekdaySymbols(shortStandaloneWeekdaySymbols *raw.NSArray[*raw.NSString]) {
-	x.inner.SetShortStandaloneWeekdaySymbols(shortStandaloneWeekdaySymbols)
+func (x *DateFormatter) SetShortStandaloneWeekdaySymbols(shortStandaloneWeekdaySymbols ...StringProvider) {
+	_ptrs := make([]objc.ID, len(shortStandaloneWeekdaySymbols))
+	for _i, _v := range shortStandaloneWeekdaySymbols {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetShortStandaloneWeekdaySymbols(_arg0)
 }
 
 // VeryShortStandaloneWeekdaySymbols returns the collection as a Go slice.
@@ -885,8 +1002,17 @@ func (x *DateFormatter) VeryShortStandaloneWeekdaySymbols() []string {
 }
 
 // SetVeryShortStandaloneWeekdaySymbols calls the underlying SetVeryShortStandaloneWeekdaySymbols.
-func (x *DateFormatter) SetVeryShortStandaloneWeekdaySymbols(veryShortStandaloneWeekdaySymbols *raw.NSArray[*raw.NSString]) {
-	x.inner.SetVeryShortStandaloneWeekdaySymbols(veryShortStandaloneWeekdaySymbols)
+func (x *DateFormatter) SetVeryShortStandaloneWeekdaySymbols(veryShortStandaloneWeekdaySymbols ...StringProvider) {
+	_ptrs := make([]objc.ID, len(veryShortStandaloneWeekdaySymbols))
+	for _i, _v := range veryShortStandaloneWeekdaySymbols {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetVeryShortStandaloneWeekdaySymbols(_arg0)
 }
 
 // QuarterSymbols returns the collection as a Go slice.
@@ -901,8 +1027,17 @@ func (x *DateFormatter) QuarterSymbols() []string {
 }
 
 // SetQuarterSymbols calls the underlying SetQuarterSymbols.
-func (x *DateFormatter) SetQuarterSymbols(quarterSymbols *raw.NSArray[*raw.NSString]) {
-	x.inner.SetQuarterSymbols(quarterSymbols)
+func (x *DateFormatter) SetQuarterSymbols(quarterSymbols ...StringProvider) {
+	_ptrs := make([]objc.ID, len(quarterSymbols))
+	for _i, _v := range quarterSymbols {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetQuarterSymbols(_arg0)
 }
 
 // ShortQuarterSymbols returns the collection as a Go slice.
@@ -917,8 +1052,17 @@ func (x *DateFormatter) ShortQuarterSymbols() []string {
 }
 
 // SetShortQuarterSymbols calls the underlying SetShortQuarterSymbols.
-func (x *DateFormatter) SetShortQuarterSymbols(shortQuarterSymbols *raw.NSArray[*raw.NSString]) {
-	x.inner.SetShortQuarterSymbols(shortQuarterSymbols)
+func (x *DateFormatter) SetShortQuarterSymbols(shortQuarterSymbols ...StringProvider) {
+	_ptrs := make([]objc.ID, len(shortQuarterSymbols))
+	for _i, _v := range shortQuarterSymbols {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetShortQuarterSymbols(_arg0)
 }
 
 // StandaloneQuarterSymbols returns the collection as a Go slice.
@@ -933,8 +1077,17 @@ func (x *DateFormatter) StandaloneQuarterSymbols() []string {
 }
 
 // SetStandaloneQuarterSymbols calls the underlying SetStandaloneQuarterSymbols.
-func (x *DateFormatter) SetStandaloneQuarterSymbols(standaloneQuarterSymbols *raw.NSArray[*raw.NSString]) {
-	x.inner.SetStandaloneQuarterSymbols(standaloneQuarterSymbols)
+func (x *DateFormatter) SetStandaloneQuarterSymbols(standaloneQuarterSymbols ...StringProvider) {
+	_ptrs := make([]objc.ID, len(standaloneQuarterSymbols))
+	for _i, _v := range standaloneQuarterSymbols {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetStandaloneQuarterSymbols(_arg0)
 }
 
 // ShortStandaloneQuarterSymbols returns the collection as a Go slice.
@@ -949,8 +1102,17 @@ func (x *DateFormatter) ShortStandaloneQuarterSymbols() []string {
 }
 
 // SetShortStandaloneQuarterSymbols calls the underlying SetShortStandaloneQuarterSymbols.
-func (x *DateFormatter) SetShortStandaloneQuarterSymbols(shortStandaloneQuarterSymbols *raw.NSArray[*raw.NSString]) {
-	x.inner.SetShortStandaloneQuarterSymbols(shortStandaloneQuarterSymbols)
+func (x *DateFormatter) SetShortStandaloneQuarterSymbols(shortStandaloneQuarterSymbols ...StringProvider) {
+	_ptrs := make([]objc.ID, len(shortStandaloneQuarterSymbols))
+	for _i, _v := range shortStandaloneQuarterSymbols {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetShortStandaloneQuarterSymbols(_arg0)
 }
 
 // GregorianStartDate calls the underlying GregorianStartDate.
@@ -1053,45 +1215,45 @@ type DateFormatterable interface {
 	DefaultDate() *Date
 	SetDefaultDate(defaultDate *raw.NSDate)
 	EraSymbols() []string
-	SetEraSymbols(eraSymbols *raw.NSArray[*raw.NSString])
+	SetEraSymbols(eraSymbols ...StringProvider)
 	MonthSymbols() []string
-	SetMonthSymbols(monthSymbols *raw.NSArray[*raw.NSString])
+	SetMonthSymbols(monthSymbols ...StringProvider)
 	ShortMonthSymbols() []string
-	SetShortMonthSymbols(shortMonthSymbols *raw.NSArray[*raw.NSString])
+	SetShortMonthSymbols(shortMonthSymbols ...StringProvider)
 	WeekdaySymbols() []string
-	SetWeekdaySymbols(weekdaySymbols *raw.NSArray[*raw.NSString])
+	SetWeekdaySymbols(weekdaySymbols ...StringProvider)
 	ShortWeekdaySymbols() []string
-	SetShortWeekdaySymbols(shortWeekdaySymbols *raw.NSArray[*raw.NSString])
+	SetShortWeekdaySymbols(shortWeekdaySymbols ...StringProvider)
 	AMSymbol() *String
 	SetAMSymbol(aMSymbol string)
 	PMSymbol() *String
 	SetPMSymbol(pMSymbol string)
 	LongEraSymbols() []string
-	SetLongEraSymbols(longEraSymbols *raw.NSArray[*raw.NSString])
+	SetLongEraSymbols(longEraSymbols ...StringProvider)
 	VeryShortMonthSymbols() []string
-	SetVeryShortMonthSymbols(veryShortMonthSymbols *raw.NSArray[*raw.NSString])
+	SetVeryShortMonthSymbols(veryShortMonthSymbols ...StringProvider)
 	StandaloneMonthSymbols() []string
-	SetStandaloneMonthSymbols(standaloneMonthSymbols *raw.NSArray[*raw.NSString])
+	SetStandaloneMonthSymbols(standaloneMonthSymbols ...StringProvider)
 	ShortStandaloneMonthSymbols() []string
-	SetShortStandaloneMonthSymbols(shortStandaloneMonthSymbols *raw.NSArray[*raw.NSString])
+	SetShortStandaloneMonthSymbols(shortStandaloneMonthSymbols ...StringProvider)
 	VeryShortStandaloneMonthSymbols() []string
-	SetVeryShortStandaloneMonthSymbols(veryShortStandaloneMonthSymbols *raw.NSArray[*raw.NSString])
+	SetVeryShortStandaloneMonthSymbols(veryShortStandaloneMonthSymbols ...StringProvider)
 	VeryShortWeekdaySymbols() []string
-	SetVeryShortWeekdaySymbols(veryShortWeekdaySymbols *raw.NSArray[*raw.NSString])
+	SetVeryShortWeekdaySymbols(veryShortWeekdaySymbols ...StringProvider)
 	StandaloneWeekdaySymbols() []string
-	SetStandaloneWeekdaySymbols(standaloneWeekdaySymbols *raw.NSArray[*raw.NSString])
+	SetStandaloneWeekdaySymbols(standaloneWeekdaySymbols ...StringProvider)
 	ShortStandaloneWeekdaySymbols() []string
-	SetShortStandaloneWeekdaySymbols(shortStandaloneWeekdaySymbols *raw.NSArray[*raw.NSString])
+	SetShortStandaloneWeekdaySymbols(shortStandaloneWeekdaySymbols ...StringProvider)
 	VeryShortStandaloneWeekdaySymbols() []string
-	SetVeryShortStandaloneWeekdaySymbols(veryShortStandaloneWeekdaySymbols *raw.NSArray[*raw.NSString])
+	SetVeryShortStandaloneWeekdaySymbols(veryShortStandaloneWeekdaySymbols ...StringProvider)
 	QuarterSymbols() []string
-	SetQuarterSymbols(quarterSymbols *raw.NSArray[*raw.NSString])
+	SetQuarterSymbols(quarterSymbols ...StringProvider)
 	ShortQuarterSymbols() []string
-	SetShortQuarterSymbols(shortQuarterSymbols *raw.NSArray[*raw.NSString])
+	SetShortQuarterSymbols(shortQuarterSymbols ...StringProvider)
 	StandaloneQuarterSymbols() []string
-	SetStandaloneQuarterSymbols(standaloneQuarterSymbols *raw.NSArray[*raw.NSString])
+	SetStandaloneQuarterSymbols(standaloneQuarterSymbols ...StringProvider)
 	ShortStandaloneQuarterSymbols() []string
-	SetShortStandaloneQuarterSymbols(shortStandaloneQuarterSymbols *raw.NSArray[*raw.NSString])
+	SetShortStandaloneQuarterSymbols(shortStandaloneQuarterSymbols ...StringProvider)
 	GregorianStartDate() *Date
 	SetGregorianStartDate(gregorianStartDate *raw.NSDate)
 	DoesRelativeDateFormatting() bool

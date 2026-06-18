@@ -164,8 +164,17 @@ func (x *CompositeAttributeDescription) Elements() []*AttributeDescription {
 }
 
 // SetElements calls the underlying SetElements.
-func (x *CompositeAttributeDescription) SetElements(elements *foundation.NSArray[*raw.NSAttributeDescription]) {
-	x.inner.SetElements(elements)
+func (x *CompositeAttributeDescription) SetElements(elements ...AttributeDescriptionProvider) {
+	_ptrs := make([]objc.ID, len(elements))
+	for _i, _v := range elements {
+		_ptrs[_i] = _v.asAttributeDescription().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NSAttributeDescription]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NSAttributeDescription](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetElements(_arg0)
 }
 
 func (x *CompositeAttributeDescription) asAttributeDescription() *raw.NSAttributeDescription {
@@ -197,7 +206,7 @@ type CompositeAttributeDescriptionable interface {
 	WithStoredInExternalRecord(storedInExternalRecord bool) *CompositeAttributeDescription
 	WithRenamingIdentifier(renamingIdentifier string) *CompositeAttributeDescription
 	Elements() []*AttributeDescription
-	SetElements(elements *foundation.NSArray[*raw.NSAttributeDescription])
+	SetElements(elements ...AttributeDescriptionProvider)
 }
 
 var _ CompositeAttributeDescriptionable = (*CompositeAttributeDescription)(nil)

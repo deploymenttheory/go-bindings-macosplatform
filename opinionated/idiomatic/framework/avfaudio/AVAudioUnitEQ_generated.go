@@ -30,6 +30,8 @@ func AudioUnitEQFromID(id objc.ID) *AudioUnitEQ {
 	return &AudioUnitEQ{inner: raw.AVAudioUnitEQFromID(id)}
 }
 
+// @method initWithNumberOfBands: @abstract Initialize the EQ with number of bands. @param numberOfBands The number of bands created by the EQ.
+//
 // NewAudioUnitEQWithNumberOfBands creates a new [AudioUnitEQ].
 func NewAudioUnitEQWithNumberOfBands(numberOfBands uint) *AudioUnitEQ {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioUnitEQ")), objc.RegisterName("alloc"))
@@ -37,18 +39,24 @@ func NewAudioUnitEQWithNumberOfBands(numberOfBands uint) *AudioUnitEQ {
 	return &AudioUnitEQ{inner: raw.AVAudioUnitEQFromID(_id)}
 }
 
+// @property globalGain @abstract Overall gain adjustment applied to the signal. @discussion Range:     -96 -> 24 Default:   0 Unit:      dB
+//
 // WithGlobalGain sets the globalGain property and returns the receiver for chaining.
 func (x *AudioUnitEQ) WithGlobalGain(globalGain float32) *AudioUnitEQ {
 	x.inner.SetGlobalGain(globalGain)
 	return x
 }
 
+// @property bypass @abstract Bypass state of the audio unit.
+//
 // WithBypass sets the bypass property and returns the receiver for chaining.
 func (x *AudioUnitEQ) WithBypass(bypass bool) *AudioUnitEQ {
 	x.inner.AVAudioUnitEffect.SetBypass(bypass)
 	return x
 }
 
+// @property bands @abstract Array of AVAudioUnitEQFilterParameters objects. @discussion The number of elements in the array is equal to the number of bands.
+//
 // Bands returns the collection as a Go slice.
 func (x *AudioUnitEQ) Bands() []*AudioUnitEQFilterParameters {
 	arr := x.inner.Bands()
@@ -60,6 +68,8 @@ func (x *AudioUnitEQ) Bands() []*AudioUnitEQFilterParameters {
 	})
 }
 
+// @property globalGain @abstract Overall gain adjustment applied to the signal. @discussion Range:     -96 -> 24 Default:   0 Unit:      dB
+//
 // GlobalGain calls the underlying GlobalGain.
 func (x *AudioUnitEQ) GlobalGain() float32 {
 	return x.inner.GlobalGain()

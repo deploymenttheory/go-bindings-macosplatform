@@ -44,12 +44,16 @@ func (x *ColorPickerTouchBarItem) WithColor(color *Color) *ColorPickerTouchBarIt
 	return x
 }
 
+// Whether or not the picker should allow picking a color with non-1.0 alpha. Defaults to `!NSColor.ignoresAlpha`.
+//
 // WithShowsAlpha sets the showsAlpha property and returns the receiver for chaining.
 func (x *ColorPickerTouchBarItem) WithShowsAlpha(showsAlpha bool) *ColorPickerTouchBarItem {
 	x.inner.SetShowsAlpha(showsAlpha)
 	return x
 }
 
+// Controls the color spaces that the receiver is able to produce. If a color outside of the allowed spaces are displayed or selected, it will first be converted to the first color space in the array. `nil` signifies any color space is allowed. Empty array is an invalid value and will raise an exception if set. Defaults to `nil`.
+//
 // WithAllowedColorSpaces sets the collection, converting the Go slice to an NSArray.
 func (x *ColorPickerTouchBarItem) WithAllowedColorSpaces(items ...*raw.NSColorSpace) *ColorPickerTouchBarItem {
 	if len(items) == 0 {
@@ -68,12 +72,16 @@ func (x *ColorPickerTouchBarItem) WithAllowedColorSpaces(items ...*raw.NSColorSp
 	return x
 }
 
+// The color list displayed in the list color picker. Defaults to the standard system color list. Setting a custom color list will disable the additional tints/shades that appear on long-press.
+//
 // WithColorList sets the colorList property and returns the receiver for chaining.
 func (x *ColorPickerTouchBarItem) WithColorList(colorList *ColorList) *ColorPickerTouchBarItem {
 	x.inner.SetColorList(colorList.Unwrap())
 	return x
 }
 
+// The localized string labeling this item during user customization. The default value is the localized string of "Color Picker".
+//
 // WithCustomizationLabel sets the customizationLabel property and returns the receiver for chaining.
 func (x *ColorPickerTouchBarItem) WithCustomizationLabel(customizationLabel string) *ColorPickerTouchBarItem {
 	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
@@ -92,6 +100,8 @@ func (x *ColorPickerTouchBarItem) WithAction(action objc.SEL) *ColorPickerTouchB
 	return x
 }
 
+// Enables or disabled the color picker. If it is currently being shown in a popover, it will be dismissed.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *ColorPickerTouchBarItem) WithEnabled(enabled bool) *ColorPickerTouchBarItem {
 	x.inner.SetEnabled(enabled)
@@ -118,6 +128,8 @@ func (x *ColorPickerTouchBarItem) SetColor(color *raw.NSColor) {
 	x.inner.SetColor(color)
 }
 
+// Whether or not the picker should allow picking a color with non-1.0 alpha. Defaults to `!NSColor.ignoresAlpha`.
+//
 // ShowsAlpha calls the underlying ShowsAlpha.
 func (x *ColorPickerTouchBarItem) ShowsAlpha() bool {
 	return x.inner.ShowsAlpha()
@@ -128,6 +140,8 @@ func (x *ColorPickerTouchBarItem) SetShowsAlpha(showsAlpha bool) {
 	x.inner.SetShowsAlpha(showsAlpha)
 }
 
+// Controls the color spaces that the receiver is able to produce. If a color outside of the allowed spaces are displayed or selected, it will first be converted to the first color space in the array. `nil` signifies any color space is allowed. Empty array is an invalid value and will raise an exception if set. Defaults to `nil`.
+//
 // AllowedColorSpaces returns the collection as a Go slice.
 func (x *ColorPickerTouchBarItem) AllowedColorSpaces() []*ColorSpace {
 	arr := x.inner.AllowedColorSpaces()
@@ -144,6 +158,8 @@ func (x *ColorPickerTouchBarItem) SetAllowedColorSpaces(allowedColorSpaces *foun
 	x.inner.SetAllowedColorSpaces(allowedColorSpaces)
 }
 
+// The color list displayed in the list color picker. Defaults to the standard system color list. Setting a custom color list will disable the additional tints/shades that appear on long-press.
+//
 // ColorList calls the underlying ColorList.
 func (x *ColorPickerTouchBarItem) ColorList() *ColorList {
 	_r := x.inner.ColorList()
@@ -183,6 +199,8 @@ func (x *ColorPickerTouchBarItem) SetAction(action objc.SEL) {
 	x.inner.SetAction(action)
 }
 
+// Enables or disabled the color picker. If it is currently being shown in a popover, it will be dismissed.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *ColorPickerTouchBarItem) IsEnabled() bool {
 	return x.inner.IsEnabled()

@@ -37,11 +37,15 @@ func NewLogicalToPhysicalColorAttachmentMap() *LogicalToPhysicalColorAttachmentM
 	return &LogicalToPhysicalColorAttachmentMap{inner: raw.MTLLogicalToPhysicalColorAttachmentMapFromID(_id)}
 }
 
+// Maps a physical color attachment index to a logical index. - Parameters: - physicalIndex: index of the color attachment's physical mapping. - logicalIndex: index of the color attachment's logical mapping.
+//
 // SetPhysicalIndexForLogicalIndex calls the underlying SetPhysicalIndexForLogicalIndex.
 func (x *LogicalToPhysicalColorAttachmentMap) SetPhysicalIndexForLogicalIndex(physicalIndex uint, logicalIndex uint) {
 	x.inner.SetPhysicalIndexForLogicalIndex(physicalIndex, logicalIndex)
 }
 
+// Queries the physical color attachment index corresponding to a logical index.
+//
 // GetPhysicalIndexForLogicalIndex calls the underlying GetPhysicalIndexForLogicalIndex.
 func (x *LogicalToPhysicalColorAttachmentMap) GetPhysicalIndexForLogicalIndex(logicalIndex uint) uint {
 	return x.inner.GetPhysicalIndexForLogicalIndex(logicalIndex)

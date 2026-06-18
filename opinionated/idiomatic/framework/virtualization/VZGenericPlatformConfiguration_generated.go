@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The platform configuration for a generic Intel or ARM virtual machine.
+//
 // GenericPlatformConfiguration wraps [raw.VZGenericPlatformConfiguration] with a fluent Go API.
 type GenericPlatformConfiguration struct {
 	inner *raw.VZGenericPlatformConfiguration
@@ -35,18 +37,24 @@ func NewGenericPlatformConfiguration() *GenericPlatformConfiguration {
 	return &GenericPlatformConfiguration{inner: raw.VZGenericPlatformConfigurationFromID(_id)}
 }
 
+// A value that represents a unique identifier for the virtual machine.
+//
 // WithMachineIdentifier sets the machineIdentifier property and returns the receiver for chaining.
 func (x *GenericPlatformConfiguration) WithMachineIdentifier(machineIdentifier *GenericMachineIdentifier) *GenericPlatformConfiguration {
 	x.inner.SetMachineIdentifier(machineIdentifier.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether nested virtualization is in an enabled state.
+//
 // WithNestedVirtualizationEnabled sets the nestedVirtualizationEnabled property and returns the receiver for chaining.
 func (x *GenericPlatformConfiguration) WithNestedVirtualizationEnabled(nestedVirtualizationEnabled bool) *GenericPlatformConfiguration {
 	x.inner.SetNestedVirtualizationEnabled(nestedVirtualizationEnabled)
 	return x
 }
 
+// @abstract The unique machine identifier. @discussion Running two virtual machines concurrently with the same identifier results in undefined behavior in the guest operating system. When restoring a virtual machine from saved state, this `machineIdentifier` must match the `machineIdentifier` of the saved virtual machine.
+//
 // MachineIdentifier calls the underlying MachineIdentifier.
 func (x *GenericPlatformConfiguration) MachineIdentifier() *GenericMachineIdentifier {
 	_r := x.inner.MachineIdentifier()
@@ -61,6 +69,8 @@ func (x *GenericPlatformConfiguration) SetMachineIdentifier(machineIdentifier *r
 	x.inner.SetMachineIdentifier(machineIdentifier)
 }
 
+// @abstract Enable nested virtualization for the platform. @discussion If nested virtualization is available, enable it for the current platform configuration. You can use `nestedVirtualizationSupported` to discover the nested virtualization availability before enabling it. The default value is NO, nested virtualization is disabled. @see nestedVirtualizationSupported.
+//
 // IsNestedVirtualizationEnabled calls the underlying IsNestedVirtualizationEnabled.
 func (x *GenericPlatformConfiguration) IsNestedVirtualizationEnabled() bool {
 	return x.inner.IsNestedVirtualizationEnabled()

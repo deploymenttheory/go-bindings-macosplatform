@@ -36,6 +36,8 @@ func NewShareableContent() *ShareableContent {
 	return &ShareableContent{inner: raw.SCShareableContentFromID(_id)}
 }
 
+// @abstract windows SCShareableContent property that contains all the sharable SCWindows
+//
 // Windows returns the collection as a Go slice.
 func (x *ShareableContent) Windows() []*Window {
 	arr := x.inner.Windows()
@@ -47,6 +49,8 @@ func (x *ShareableContent) Windows() []*Window {
 	})
 }
 
+// @abstract displays SCShareableContent property that contains all the sharable SCDisplays
+//
 // Displays returns the collection as a Go slice.
 func (x *ShareableContent) Displays() []*Display {
 	arr := x.inner.Displays()
@@ -58,6 +62,8 @@ func (x *ShareableContent) Displays() []*Display {
 	})
 }
 
+// @abstract applications SCShareableContent property that contains all the sharable SCRunningApplications
+//
 // Applications returns the collection as a Go slice.
 func (x *ShareableContent) Applications() []*RunningApplication {
 	arr := x.inner.Applications()

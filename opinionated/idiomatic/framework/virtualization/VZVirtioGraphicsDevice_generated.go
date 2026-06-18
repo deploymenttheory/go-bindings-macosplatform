@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A Virtio graphics device.
+//
 // VirtioGraphicsDevice wraps [raw.VZVirtioGraphicsDevice] with a fluent Go API.
 type VirtioGraphicsDevice struct {
 	inner *raw.VZVirtioGraphicsDevice

@@ -40,6 +40,8 @@ func NewGraphTensorDataWithDeviceDataShapeDataType(device *raw.MPSGraphDevice, d
 	return &GraphTensorData{inner: raw.MPSGraphTensorDataFromID(_id)}
 }
 
+// Initializes an tensor data with a metal buffer. The device of the MTLBuffer will be used to get the MPSDevice for this MPSGraphTensorData. - Parameters: - buffer: MTLBuffer to be used within the MPSGraphTensorData - shape: shape of the output tensor - dataType: dataType of the placeholder tensor - Returns: A valid MPSGraphTensorData, or nil if allocation failure.
+//
 // NewGraphTensorDataWithMTLBufferShapeDataType creates a new [GraphTensorData].
 func NewGraphTensorDataWithMTLBufferShapeDataType(buffer metal.MTLBuffer, shape unsafe.Pointer, dataType mpscore.MPSDataType) *GraphTensorData {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphTensorData")), objc.RegisterName("alloc"))
@@ -47,6 +49,8 @@ func NewGraphTensorDataWithMTLBufferShapeDataType(buffer metal.MTLBuffer, shape 
 	return &GraphTensorData{inner: raw.MPSGraphTensorDataFromID(_id)}
 }
 
+// Initializes an tensor data with a metal buffer. The device of the MTLBuffer will be used to get the MPSDevice for this MPSGraphTensorData. - Parameters: - buffer: MTLBuffer to be used within the MPSGraphTensorData - shape: shape of the output tensor - dataType: dataType of the placeholder tensor - rowBytes: rowBytes for the fastest moving dimension, must be larger than or equal to sizeOf(dataType)shape[rank - 1] and must be a multiple of sizeOf(dataType) - Returns: A valid MPSGraphTensorData, or nil if allocation failure.
+//
 // NewGraphTensorDataWithMTLBufferShapeDataTypeRowBytes creates a new [GraphTensorData].
 func NewGraphTensorDataWithMTLBufferShapeDataTypeRowBytes(buffer metal.MTLBuffer, shape unsafe.Pointer, dataType mpscore.MPSDataType, rowBytes uint) *GraphTensorData {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphTensorData")), objc.RegisterName("alloc"))
@@ -54,6 +58,8 @@ func NewGraphTensorDataWithMTLBufferShapeDataTypeRowBytes(buffer metal.MTLBuffer
 	return &GraphTensorData{inner: raw.MPSGraphTensorDataFromID(_id)}
 }
 
+// Initializes a tensor data with an MPS matrix. The device of the MPSMatrix will be used to get the MPSDevice for this MPSGraphTensorData. - Parameters: - matrix: MPSMatrix to be used within the MPSGraphTensorData - Returns: A valid MPSGraphTensorData, or nil if allocation failure.
+//
 // NewGraphTensorDataWithMPSMatrix creates a new [GraphTensorData].
 func NewGraphTensorDataWithMPSMatrix(matrix *mpscore.MPSMatrix) *GraphTensorData {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphTensorData")), objc.RegisterName("alloc"))
@@ -61,6 +67,8 @@ func NewGraphTensorDataWithMPSMatrix(matrix *mpscore.MPSMatrix) *GraphTensorData
 	return &GraphTensorData{inner: raw.MPSGraphTensorDataFromID(_id)}
 }
 
+// Initializes a tensor data with an MPS matrix enforcing rank of the result. The device of the MPSMatrix will be used to get the MPSDevice for this MPSGraphTensorData. - Parameters: - matrix: MPSMatrix to be used within the MPSGraphTensorData - rank: The rank of the resulting TensorData tensor. NOTE: must be within { 1, ... ,16 }. - Returns: A valid MPSGraphTensorData of given rank, or nil if allocation failure.
+//
 // NewGraphTensorDataWithMPSMatrixRank creates a new [GraphTensorData].
 func NewGraphTensorDataWithMPSMatrixRank(matrix *mpscore.MPSMatrix, rank uint) *GraphTensorData {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphTensorData")), objc.RegisterName("alloc"))
@@ -68,6 +76,8 @@ func NewGraphTensorDataWithMPSMatrixRank(matrix *mpscore.MPSMatrix, rank uint) *
 	return &GraphTensorData{inner: raw.MPSGraphTensorDataFromID(_id)}
 }
 
+// Initializes a tensor data with an MPS vector. The device of the MPSVector will be used to get the MPSDevice for this MPSGraphTensorData. - Parameters: - vector: MPSVector to be used within the MPSGraphTensorData - Returns: A valid MPSGraphTensorData, or nil if allocation failure.
+//
 // NewGraphTensorDataWithMPSVector creates a new [GraphTensorData].
 func NewGraphTensorDataWithMPSVector(vector *mpscore.MPSVector) *GraphTensorData {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphTensorData")), objc.RegisterName("alloc"))
@@ -75,6 +85,8 @@ func NewGraphTensorDataWithMPSVector(vector *mpscore.MPSVector) *GraphTensorData
 	return &GraphTensorData{inner: raw.MPSGraphTensorDataFromID(_id)}
 }
 
+// Initializes a tensor data with an MPS vector enforcing rank of the result. The device of the MPSVector will be used to get the MPSDevice for this MPSGraphTensorData. - Parameters: - vector: MPSVector to be used within the MPSGraphTensorData - rank: The rank of the resulting TensorData tensor. NOTE: must be within { 1, ... ,16 }. - Returns: A valid MPSGraphTensorData, or nil if allocation failure.
+//
 // NewGraphTensorDataWithMPSVectorRank creates a new [GraphTensorData].
 func NewGraphTensorDataWithMPSVectorRank(vector *mpscore.MPSVector, rank uint) *GraphTensorData {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphTensorData")), objc.RegisterName("alloc"))
@@ -82,6 +94,8 @@ func NewGraphTensorDataWithMPSVectorRank(vector *mpscore.MPSVector, rank uint) *
 	return &GraphTensorData{inner: raw.MPSGraphTensorDataFromID(_id)}
 }
 
+// Initializes an MPSGraphTensorData with an MPS ndarray. The device of the MPSNDArray will be used to get the MPSDevice for this MPSGraphTensorData. - Parameters: - ndarray: MPSNDArray to be used within the MPSGraphTensorData. - Returns: A valid MPSGraphTensorData, or nil if allocation failure.
+//
 // NewGraphTensorDataWithMPSNDArray creates a new [GraphTensorData].
 func NewGraphTensorDataWithMPSNDArray(ndarray *mpscore.MPSNDArray) *GraphTensorData {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphTensorData")), objc.RegisterName("alloc"))
@@ -89,6 +103,8 @@ func NewGraphTensorDataWithMPSNDArray(ndarray *mpscore.MPSNDArray) *GraphTensorD
 	return &GraphTensorData{inner: raw.MPSGraphTensorDataFromID(_id)}
 }
 
+// Initializes a tensor data with an MPS image batch. The dataLayout used will be NHWC, call a transpose or permute to change to a layout of your choice. - Parameters: - imageBatch: The device on which the kernel will run, unorm8 and unorm16 images will create a float32 tensorData - Returns: A valid MPSGraphTensorData, or nil if allocation failure.
+//
 // NewGraphTensorDataWithMPSImageBatch creates a new [GraphTensorData].
 func NewGraphTensorDataWithMPSImageBatch(imageBatch unsafe.Pointer) *GraphTensorData {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphTensorData")), objc.RegisterName("alloc"))
@@ -96,6 +112,8 @@ func NewGraphTensorDataWithMPSImageBatch(imageBatch unsafe.Pointer) *GraphTensor
 	return &GraphTensorData{inner: raw.MPSGraphTensorDataFromID(_id)}
 }
 
+// Initializes an MPSGraphTensorData with an MTLTensor. The internal storage of the MTLTensor will be aliased. Requires tensor to support MTLTensorUsageMachineLearning. - Parameters: - tensor: MTLTensor to be used within the MPSGraphTensorData - Returns: A valid MPSGraphTensorData, or nil if allocation failure.
+//
 // NewGraphTensorDataWithMTLTensor creates a new [GraphTensorData].
 func NewGraphTensorDataWithMTLTensor(tensor metal.MTLTensor) *GraphTensorData {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphTensorData")), objc.RegisterName("alloc"))
@@ -103,21 +121,29 @@ func NewGraphTensorDataWithMTLTensor(tensor metal.MTLTensor) *GraphTensorData {
 	return &GraphTensorData{inner: raw.MPSGraphTensorDataFromID(_id)}
 }
 
+// Return an mpsndarray object will copy contents if the contents are not stored in an MPS ndarray. - Returns: A valid MPSNDArray, or nil if allocation fails.
+//
 // Mpsndarray calls the underlying Mpsndarray.
 func (x *GraphTensorData) Mpsndarray() *mpscore.MPSNDArray {
 	return x.inner.Mpsndarray()
 }
 
+// The shape of the tensor data.
+//
 // Shape calls the underlying Shape.
 func (x *GraphTensorData) Shape() unsafe.Pointer {
 	return x.inner.Shape()
 }
 
+// The data type of the tensor data.
+//
 // DataType calls the underlying DataType.
 func (x *GraphTensorData) DataType() mpscore.MPSDataType {
 	return x.inner.DataType()
 }
 
+// The device of the tensor data.
+//
 // Device calls the underlying Device.
 func (x *GraphTensorData) Device() *GraphDevice {
 	_r := x.inner.Device()

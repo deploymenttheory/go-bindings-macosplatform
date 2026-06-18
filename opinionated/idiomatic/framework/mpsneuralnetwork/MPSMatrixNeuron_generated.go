@@ -39,6 +39,8 @@ func NewMatrixNeuronWithDevice(device metal.MTLDevice) *MatrixNeuron {
 	return &MatrixNeuron{inner: raw.MPSMatrixNeuronFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixNeuron @param      device      The MTLDevice on which to make the MPSMatrixNeuron object. @return     A new MPSMatrixNeuron object, or nil if failure.
+//
 // NewMatrixNeuronWithCoderDevice creates a new [MatrixNeuron].
 func NewMatrixNeuronWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MatrixNeuron {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixNeuron")), objc.RegisterName("alloc"))
@@ -46,59 +48,81 @@ func NewMatrixNeuronWithCoderDevice(aDecoder *foundation.NSCoder, device metal.M
 	return &MatrixNeuron{inner: raw.MPSMatrixNeuronFromID(_id)}
 }
 
+// @property   sourceNumberOfFeatureVectors @discussion The number of input vectors which make up the input array.  This is equivalent to the number of rows to consider from the primary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available number of inputs is used.  The value of NSUIntegerMax thus indicates that all available input rows (beginning at sourceMatrixOrigin.x) should be considered.
+//
 // WithSourceNumberOfFeatureVectors sets the sourceNumberOfFeatureVectors property and returns the receiver for chaining.
 func (x *MatrixNeuron) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixNeuron {
 	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
 	return x
 }
 
+// @property   sourceInputFeatureChannels @discussion The input size to to use in the operation.  This is equivalent to the number of columns in the primary (input array) source matrix to consider and the number of channels to produce for the output matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available input size is used. The value of NSUIntegerMax thus indicates that all available columns in the input array (beginning at sourceMatrixOrigin.y) should be considered. Defines also the number of output feature channels. Note: The value used in the operation will be MIN(inputMatrix.columns - sourceMatrixOrigin.y, sourceInputFeatureChannels)
+//
 // WithSourceInputFeatureChannels sets the sourceInputFeatureChannels property and returns the receiver for chaining.
 func (x *MatrixNeuron) WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixNeuron {
 	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
 	return x
 }
 
+// @property   alpha @discussion The scale factor to apply to the input.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *MatrixNeuron) WithAlpha(alpha float64) *MatrixNeuron {
 	x.inner.SetAlpha(alpha)
 	return x
 }
 
+// @abstract   Specifies a neuron activation function to be used. @discussion This method can be used to add a neuron activation funtion of given type with associated scalar parameters A, B, and C that are shared across all output values. Note that this method can only be used to specify neurons which are specified by three (or fewer) parameters shared across all output values (or channels, in CNN nomenclature). It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. For those kind of neuron activation functions, use appropriate setter functions.  An MPSMatrixNeuron kernel is initialized with a default neuron function of MPSCNNNeuronTypeNone. @param      neuronType      Type of neuron activation function. For full list see MPSCNNNeuronType.h @param      parameterA      parameterA of neuron activation that is shared across all output values. @param      parameterB      parameterB of neuron activation that is shared across all output values. @param      parameterC      parameterC of neuron activation that is shared across all output values.
+//
 // SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
 func (x *MatrixNeuron) SetNeuronTypeParameterAParameterBParameterC(neuronType MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
 	x.inner.SetNeuronTypeParameterAParameterBParameterC(raw.MPSCNNNeuronType(neuronType), parameterA, parameterB, parameterC)
 }
 
+// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+//
 // NeuronType calls the underlying NeuronType.
 func (x *MatrixNeuron) NeuronType() MPSCNNNeuronType {
 	return MPSCNNNeuronType(x.inner.NeuronType())
 }
 
+// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+//
 // NeuronParameterA calls the underlying NeuronParameterA.
 func (x *MatrixNeuron) NeuronParameterA() float32 {
 	return x.inner.NeuronParameterA()
 }
 
+// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+//
 // NeuronParameterB calls the underlying NeuronParameterB.
 func (x *MatrixNeuron) NeuronParameterB() float32 {
 	return x.inner.NeuronParameterB()
 }
 
+// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+//
 // NeuronParameterC calls the underlying NeuronParameterC.
 func (x *MatrixNeuron) NeuronParameterC() float32 {
 	return x.inner.NeuronParameterC()
 }
 
+// @abstract   Add per output value neuron parameters A for PReLu neuron activation functions. @discussion This method sets the neuron to PReLU, zeros parameters A and B and sets the per output value neuron parameters A to an array containing a unique value of A for each output value. If the neuron function is f(v,a,b), it will apply resultMatrix(i, j) = f( input(i, j), A[j], B[j] ) where j in [0, sourceInputFeatureChannels] See https://arxiv.org/pdf/1502.01852.pdf for details. All other neuron types, where parameter A and parameter B are shared across output values must be set using -setNeuronType:parameterA:parameterB: @param      A       An array containing float values for neuron parameter A. Number of entries must be equal to MIN(inputMatrix.columns - sourceMatrixOrigin.y, sourceInputFeatureChannels)
+//
 // SetNeuronToPReLUWithParametersA calls the underlying SetNeuronToPReLUWithParametersA.
 func (x *MatrixNeuron) SetNeuronToPReLUWithParametersA(a *foundation.NSData) {
 	x.inner.SetNeuronToPReLUWithParametersA(a)
 }
 
+// @abstract   Encode a MPSMatrixNeuron object to a command buffer. @param      commandBuffer   A valid MTLCommandBuffer to receive the encoded kernel. @param      inputMatrix     A valid MPSMatrix object which specifies the input array. @param      biasVector      A valid MPSVector object which specifies the bias values, or a null object to indicate that no bias is to be applied. @param      resultMatrix    A valid MPSMatrix object which specifies the output array. @discussion Encodes the operation to the specified command buffer.  resultMatrix must be large enough to hold a MIN(sourceNumberOfFeatureVectors, inputMatrix.rows - sourceMatrixOrigin.x) x MIN(inputMatrix.columns - sourceMatrixOrigin.y, sourceInputFeatureChannels) array. The bias vector must contain at least MIN(inputMatrix.columns - sourceMatrixOrigin.y, sourceInputFeatureChannels) elements.
+//
 // EncodeToCommandBufferInputMatrixBiasVectorResultMatrix calls the underlying EncodeToCommandBufferInputMatrixBiasVectorResultMatrix.
 func (x *MatrixNeuron) EncodeToCommandBufferInputMatrixBiasVectorResultMatrix(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, biasVector *mpscore.MPSVector, resultMatrix *mpscore.MPSMatrix) {
 	x.inner.EncodeToCommandBufferInputMatrixBiasVectorResultMatrix(commandBuffer, inputMatrix, biasVector, resultMatrix)
 }
 
+// @property   sourceNumberOfFeatureVectors @discussion The number of input vectors which make up the input array.  This is equivalent to the number of rows to consider from the primary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available number of inputs is used.  The value of NSUIntegerMax thus indicates that all available input rows (beginning at sourceMatrixOrigin.x) should be considered.
+//
 // SourceNumberOfFeatureVectors calls the underlying SourceNumberOfFeatureVectors.
 func (x *MatrixNeuron) SourceNumberOfFeatureVectors() uint {
 	return x.inner.SourceNumberOfFeatureVectors()
@@ -109,6 +133,8 @@ func (x *MatrixNeuron) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVect
 	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
 }
 
+// @property   sourceInputFeatureChannels @discussion The input size to to use in the operation.  This is equivalent to the number of columns in the primary (input array) source matrix to consider and the number of channels to produce for the output matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available input size is used. The value of NSUIntegerMax thus indicates that all available columns in the input array (beginning at sourceMatrixOrigin.y) should be considered. Defines also the number of output feature channels. Note: The value used in the operation will be MIN(inputMatrix.columns - sourceMatrixOrigin.y, sourceInputFeatureChannels)
+//
 // SourceInputFeatureChannels calls the underlying SourceInputFeatureChannels.
 func (x *MatrixNeuron) SourceInputFeatureChannels() uint {
 	return x.inner.SourceInputFeatureChannels()
@@ -119,6 +145,8 @@ func (x *MatrixNeuron) SetSourceInputFeatureChannels(sourceInputFeatureChannels 
 	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
 }
 
+// @property   alpha @discussion The scale factor to apply to the input.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+//
 // Alpha calls the underlying Alpha.
 func (x *MatrixNeuron) Alpha() float64 {
 	return x.inner.Alpha()

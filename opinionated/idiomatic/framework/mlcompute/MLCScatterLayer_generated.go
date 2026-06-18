@@ -36,23 +36,31 @@ func NewScatterLayer() *ScatterLayer {
 	return &ScatterLayer{inner: raw.MLCScatterLayerFromID(_id)}
 }
 
+// @property   label @abstract   A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ScatterLayer) WithLabel(label string) *ScatterLayer {
 	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+//
 // WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
 func (x *ScatterLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ScatterLayer {
 	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
 	return x
 }
 
+// @property   dimension @abstract   The dimension along which to index
+//
 // Dimension calls the underlying Dimension.
 func (x *ScatterLayer) Dimension() uint {
 	return x.inner.Dimension()
 }
 
+// @property   reductionType @abstract   The reduction type applied for all values in source tensor that are scattered to a specific location in the result tensor. Must be: MLCReductionTypeNone or MLCReductionTypeSum.
+//
 // ReductionType calls the underlying ReductionType.
 func (x *ScatterLayer) ReductionType() MLCReductionType {
 	return MLCReductionType(x.inner.ReductionType())

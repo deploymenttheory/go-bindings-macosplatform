@@ -39,6 +39,8 @@ func NewSyncEngineSentDatabaseChangesEvent() *SyncEngineSentDatabaseChangesEvent
 	return &SyncEngineSentDatabaseChangesEvent{inner: raw.CKSyncEngineSentDatabaseChangesEventFromID(_id)}
 }
 
+// The modified record zones.
+//
 // SavedZones returns the collection as a Go slice.
 func (x *SyncEngineSentDatabaseChangesEvent) SavedZones() []*RecordZone {
 	arr := x.inner.SavedZones()
@@ -50,6 +52,8 @@ func (x *SyncEngineSentDatabaseChangesEvent) SavedZones() []*RecordZone {
 	})
 }
 
+// The record zones that CloudKit is unable to modify.
+//
 // FailedZoneSaves returns the collection as a Go slice.
 func (x *SyncEngineSentDatabaseChangesEvent) FailedZoneSaves() []*SyncEngineFailedZoneSave {
 	arr := x.inner.FailedZoneSaves()
@@ -61,6 +65,8 @@ func (x *SyncEngineSentDatabaseChangesEvent) FailedZoneSaves() []*SyncEngineFail
 	})
 }
 
+// The unique identifiers of the deleted record zones.
+//
 // DeletedZoneIDs returns the collection as a Go slice.
 func (x *SyncEngineSentDatabaseChangesEvent) DeletedZoneIDs() []*RecordZoneID {
 	arr := x.inner.DeletedZoneIDs()
@@ -72,6 +78,8 @@ func (x *SyncEngineSentDatabaseChangesEvent) DeletedZoneIDs() []*RecordZoneID {
 	})
 }
 
+// The unique identifiers of the record zones CloudKit is unable to delete, and the reasons why.
+//
 // FailedZoneDeletes calls the underlying FailedZoneDeletes.
 func (x *SyncEngineSentDatabaseChangesEvent) FailedZoneDeletes() *foundation.NSDictionary[*raw.CKRecordZoneID, objc.ID] {
 	return x.inner.FailedZoneDeletes()

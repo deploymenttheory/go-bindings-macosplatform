@@ -31,6 +31,8 @@ func NEVPNIKEv2PPKConfigurationFromID(id objc.ID) *NEVPNIKEv2PPKConfiguration {
 	return &NEVPNIKEv2PPKConfiguration{inner: raw.NEVPNIKEv2PPKConfigurationFromID(id)}
 }
 
+// @method initWithIdentifier:keychainReference: @discussion Initialize a newly-allocated NEVPNIKEv2PPKConfiguration object. @param identifier The identifier for the PPK. @param keychainReference A persistent reference to a keychain item of class kSecClassGenericPassword containing the PPK.
+//
 // NewNEVPNIKEv2PPKConfigurationWithIdentifierKeychainReference creates a new [NEVPNIKEv2PPKConfiguration].
 func NewNEVPNIKEv2PPKConfigurationWithIdentifierKeychainReference(identifier string, keychainReference *foundation.NSData) *NEVPNIKEv2PPKConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NEVPNIKEv2PPKConfiguration")), objc.RegisterName("alloc"))
@@ -38,12 +40,16 @@ func NewNEVPNIKEv2PPKConfigurationWithIdentifierKeychainReference(identifier str
 	return &NEVPNIKEv2PPKConfiguration{inner: raw.NEVPNIKEv2PPKConfigurationFromID(_id)}
 }
 
+// @property isMandatory @discussion Boolean indicating whether use of the PPK is mandatory or not. Default is YES.
+//
 // WithIsMandatory sets the isMandatory property and returns the receiver for chaining.
 func (x *NEVPNIKEv2PPKConfiguration) WithIsMandatory(isMandatory bool) *NEVPNIKEv2PPKConfiguration {
 	x.inner.SetIsMandatory(isMandatory)
 	return x
 }
 
+// @property identifier @discussion The identifer for the PPK.
+//
 // Identifier calls the underlying Identifier.
 func (x *NEVPNIKEv2PPKConfiguration) Identifier() string {
 	_r := x.inner.Identifier()
@@ -53,11 +59,15 @@ func (x *NEVPNIKEv2PPKConfiguration) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property keychainReference @discussion A persistent reference to a keychain item of class kSecClassGenericPassword containing the PPK.
+//
 // KeychainReference calls the underlying KeychainReference.
 func (x *NEVPNIKEv2PPKConfiguration) KeychainReference() *foundation.NSData {
 	return x.inner.KeychainReference()
 }
 
+// @property isMandatory @discussion Boolean indicating whether use of the PPK is mandatory or not. Default is YES.
+//
 // IsMandatory calls the underlying IsMandatory.
 func (x *NEVPNIKEv2PPKConfiguration) IsMandatory() bool {
 	return x.inner.IsMandatory()

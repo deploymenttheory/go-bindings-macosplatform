@@ -33,9 +33,18 @@ func DisbursementRequestFromID(id objc.ID) *DisbursementRequest {
 }
 
 // NewDisbursementRequestWithMerchantIdentifierCurrencyCodeRegionCodeSupportedNetworksMerchantCapabilitiesSummaryItems creates a new [DisbursementRequest].
-func NewDisbursementRequestWithMerchantIdentifierCurrencyCodeRegionCodeSupportedNetworksMerchantCapabilitiesSummaryItems(merchantIdentifier string, currencyCode string, regionCode string, supportedNetworks *foundation.NSArray[*foundation.NSString], merchantCapabilities PKMerchantCapability, summaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem]) *DisbursementRequest {
+func NewDisbursementRequestWithMerchantIdentifierCurrencyCodeRegionCodeSupportedNetworksMerchantCapabilitiesSummaryItems(merchantIdentifier string, currencyCode string, regionCode string, supportedNetworks *foundation.NSArray[*foundation.NSString], merchantCapabilities PKMerchantCapability, summaryItems ...PaymentSummaryItemProvider) *DisbursementRequest {
+	_ptrs := make([]objc.ID, len(summaryItems))
+	for _i, _v := range summaryItems {
+		_ptrs[_i] = _v.asPaymentSummaryItem().Ptr()
+	}
+	var _arg5 *foundation.NSArray[*raw.PKPaymentSummaryItem]
+	if len(_ptrs) > 0 {
+		_arg5 = foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKDisbursementRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMerchantIdentifier:currencyCode:regionCode:supportedNetworks:merchantCapabilities:summaryItems:"), foundation.NSStringStringWithUTF8String(merchantIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(currencyCode).Ptr(), foundation.NSStringStringWithUTF8String(regionCode).Ptr(), supportedNetworks.Ptr(), raw.PKMerchantCapability(merchantCapabilities), summaryItems.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMerchantIdentifier:currencyCode:regionCode:supportedNetworks:merchantCapabilities:summaryItems:"), foundation.NSStringStringWithUTF8String(merchantIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(currencyCode).Ptr(), foundation.NSStringStringWithUTF8String(regionCode).Ptr(), supportedNetworks.Ptr(), raw.PKMerchantCapability(merchantCapabilities), _arg5.Ptr())
 	return &DisbursementRequest{inner: raw.PKDisbursementRequestFromID(_id)}
 }
 
@@ -147,6 +156,8 @@ func (x *DisbursementRequest) WithApplicationData(applicationData *foundation.NS
 	return x
 }
 
+// A Boolean value that indicates whether this disbursement request is being made by a delegated entity on behalf of a merchant. Set this property to YES when your application is acting as an Apple Pay delegate and presenting the payment sheet on behalf of another merchant. The default value is NO. @note This property requires your application to be registered as an Apple Pay delegate and to have the com.apple.developer.in-app-payments-delegate entitlement.
+//
 // WithIsDelegatedRequest sets the isDelegatedRequest property and returns the receiver for chaining.
 func (x *DisbursementRequest) WithIsDelegatedRequest(isDelegatedRequest bool) *DisbursementRequest {
 	x.inner.SetIsDelegatedRequest(isDelegatedRequest)
@@ -219,8 +230,17 @@ func (x *DisbursementRequest) SummaryItems() []*PaymentSummaryItem {
 }
 
 // SetSummaryItems calls the underlying SetSummaryItems.
-func (x *DisbursementRequest) SetSummaryItems(summaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem]) {
-	x.inner.SetSummaryItems(summaryItems)
+func (x *DisbursementRequest) SetSummaryItems(summaryItems ...PaymentSummaryItemProvider) {
+	_ptrs := make([]objc.ID, len(summaryItems))
+	for _i, _v := range summaryItems {
+		_ptrs[_i] = _v.asPaymentSummaryItem().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.PKPaymentSummaryItem]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetSummaryItems(_arg0)
 }
 
 // CurrencyCode calls the underlying CurrencyCode.
@@ -293,6 +313,8 @@ func (x *DisbursementRequest) SetApplicationData(applicationData *foundation.NSD
 	x.inner.SetApplicationData(applicationData)
 }
 
+// A Boolean value that indicates whether this disbursement request is being made by a delegated entity on behalf of a merchant. Set this property to YES when your application is acting as an Apple Pay delegate and presenting the payment sheet on behalf of another merchant. The default value is NO. @note This property requires your application to be registered as an Apple Pay delegate and to have the com.apple.developer.in-app-payments-delegate entitlement.
+//
 // IsDelegatedRequest calls the underlying IsDelegatedRequest.
 func (x *DisbursementRequest) IsDelegatedRequest() bool {
 	return x.inner.IsDelegatedRequest()
@@ -326,7 +348,7 @@ type DisbursementRequestable interface {
 	MerchantCapabilities() PKMerchantCapability
 	SetMerchantCapabilities(merchantCapabilities PKMerchantCapability)
 	SummaryItems() []*PaymentSummaryItem
-	SetSummaryItems(summaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem])
+	SetSummaryItems(summaryItems ...PaymentSummaryItemProvider)
 	CurrencyCode() string
 	SetCurrencyCode(currencyCode string)
 	RequiredRecipientContactFields() []*foundation.NSString

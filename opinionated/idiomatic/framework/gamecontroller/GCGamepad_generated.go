@@ -41,12 +41,16 @@ func (x *Gamepad) WithValueChangedHandler(valueChangedHandler func(*raw.GCGamepa
 	return x
 }
 
+// Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called for each element that changed. @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons. @param element the element that has been modified.
+//
 // WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
 func (x *Gamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *Gamepad {
 	x.inner.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
 	return x
 }
 
+// Polls the state vector of the controller and saves it to a snapshot. The snapshot is stored in a device independent format that can be serialized and used at a later date. This is useful for features such as quality assurance, save game or replay functionality among many. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken.
+//
 // SaveSnapshot calls the underlying SaveSnapshot.
 func (x *Gamepad) SaveSnapshot() *GamepadSnapshot {
 	_r := x.inner.SaveSnapshot()
@@ -56,6 +60,8 @@ func (x *Gamepad) SaveSnapshot() *GamepadSnapshot {
 	return &GamepadSnapshot{inner: _r}
 }
 
+// A profile keeps a reference to the controller that this profile is mapping input from.
+//
 // Controller calls the underlying Controller.
 func (x *Gamepad) Controller() *Controller {
 	_r := x.inner.Controller()
@@ -75,6 +81,8 @@ func (x *Gamepad) SetValueChangedHandler(valueChangedHandler func(*raw.GCGamepad
 	x.inner.SetValueChangedHandler(valueChangedHandler)
 }
 
+// Required to be analog in the Standard profile. All the elements of this directional input are thus analog.
+//
 // Dpad calls the underlying Dpad.
 func (x *Gamepad) Dpad() *ControllerDirectionPad {
 	_r := x.inner.Dpad()
@@ -84,6 +92,8 @@ func (x *Gamepad) Dpad() *ControllerDirectionPad {
 	return &ControllerDirectionPad{inner: _r}
 }
 
+// All face buttons are required to be analog in the Standard profile. These must be arranged in the diamond pattern given below: Y / \ X   B \ / A
+//
 // ButtonA calls the underlying ButtonA.
 func (x *Gamepad) ButtonA() *ControllerButtonInput {
 	_r := x.inner.ButtonA()
@@ -120,6 +130,8 @@ func (x *Gamepad) ButtonY() *ControllerButtonInput {
 	return &ControllerButtonInput{inner: _r}
 }
 
+// Shoulder buttons are required to be analog inputs.
+//
 // LeftShoulder calls the underlying LeftShoulder.
 func (x *Gamepad) LeftShoulder() *ControllerButtonInput {
 	_r := x.inner.LeftShoulder()
@@ -129,6 +141,8 @@ func (x *Gamepad) LeftShoulder() *ControllerButtonInput {
 	return &ControllerButtonInput{inner: _r}
 }
 
+// Shoulder buttons are required to be analog inputs.
+//
 // RightShoulder calls the underlying RightShoulder.
 func (x *Gamepad) RightShoulder() *ControllerButtonInput {
 	_r := x.inner.RightShoulder()

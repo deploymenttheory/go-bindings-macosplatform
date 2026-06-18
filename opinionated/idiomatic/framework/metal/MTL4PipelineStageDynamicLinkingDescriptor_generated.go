@@ -7,7 +7,9 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTL4PipelineStageDynamicLinkingDescriptor wraps [raw.MTL4PipelineStageDynamicLinkingDescriptor] with a fluent Go API.
@@ -38,12 +40,16 @@ func NewMTL4PipelineStageDynamicLinkingDescriptor() *MTL4PipelineStageDynamicLin
 	return &MTL4PipelineStageDynamicLinkingDescriptor{inner: raw.MTL4PipelineStageDynamicLinkingDescriptorFromID(_id)}
 }
 
+// Limits the maximum depth of the call stack for indirect function calls in the pipeline stage function.
+//
 // WithMaxCallStackDepth sets the maxCallStackDepth property and returns the receiver for chaining.
 func (x *MTL4PipelineStageDynamicLinkingDescriptor) WithMaxCallStackDepth(maxCallStackDepth uint) *MTL4PipelineStageDynamicLinkingDescriptor {
 	x.inner.SetMaxCallStackDepth(maxCallStackDepth)
 	return x
 }
 
+// Limits the maximum depth of the call stack for indirect function calls in the pipeline stage function.
+//
 // MaxCallStackDepth calls the underlying MaxCallStackDepth.
 func (x *MTL4PipelineStageDynamicLinkingDescriptor) MaxCallStackDepth() uint {
 	return x.inner.MaxCallStackDepth()
@@ -54,24 +60,46 @@ func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetMaxCallStackDepth(maxCall
 	x.inner.SetMaxCallStackDepth(maxCallStackDepth)
 }
 
+// Provides the array of binary functions to link. Binary functions are shader functions that you compile from Metal IR to machine code ahead of time using instances of “MTL4Compiler“.
+//
 // BinaryLinkedFunctions calls the underlying BinaryLinkedFunctions.
 func (x *MTL4PipelineStageDynamicLinkingDescriptor) BinaryLinkedFunctions() *foundation.NSArray[raw.MTL4BinaryFunction] {
 	return x.inner.BinaryLinkedFunctions()
 }
 
 // SetBinaryLinkedFunctions calls the underlying SetBinaryLinkedFunctions.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetBinaryLinkedFunctions(binaryLinkedFunctions *foundation.NSArray[raw.MTL4BinaryFunction]) {
-	x.inner.SetBinaryLinkedFunctions(binaryLinkedFunctions)
+func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetBinaryLinkedFunctions(binaryLinkedFunctions ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(binaryLinkedFunctions))
+	for _i, _v := range binaryLinkedFunctions {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTL4BinaryFunction]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetBinaryLinkedFunctions(_arg0)
 }
 
+// Provides an array of dynamic libraries the compiler loads when it builds the pipeline.
+//
 // PreloadedLibraries calls the underlying PreloadedLibraries.
 func (x *MTL4PipelineStageDynamicLinkingDescriptor) PreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary] {
 	return x.inner.PreloadedLibraries()
 }
 
 // SetPreloadedLibraries calls the underlying SetPreloadedLibraries.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetPreloadedLibraries(preloadedLibraries *foundation.NSArray[raw.MTLDynamicLibrary]) {
-	x.inner.SetPreloadedLibraries(preloadedLibraries)
+func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetPreloadedLibraries(preloadedLibraries ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(preloadedLibraries))
+	for _i, _v := range preloadedLibraries {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTLDynamicLibrary]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetPreloadedLibraries(_arg0)
 }
 
 // MTL4PipelineStageDynamicLinkingDescriptorable is the interface implemented by [MTL4PipelineStageDynamicLinkingDescriptor], for mocking and DI.
@@ -81,9 +109,9 @@ type MTL4PipelineStageDynamicLinkingDescriptorable interface {
 	MaxCallStackDepth() uint
 	SetMaxCallStackDepth(maxCallStackDepth uint)
 	BinaryLinkedFunctions() *foundation.NSArray[raw.MTL4BinaryFunction]
-	SetBinaryLinkedFunctions(binaryLinkedFunctions *foundation.NSArray[raw.MTL4BinaryFunction])
+	SetBinaryLinkedFunctions(binaryLinkedFunctions ...purego.IDer)
 	PreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary]
-	SetPreloadedLibraries(preloadedLibraries *foundation.NSArray[raw.MTLDynamicLibrary])
+	SetPreloadedLibraries(preloadedLibraries ...purego.IDer)
 }
 
 var _ MTL4PipelineStageDynamicLinkingDescriptorable = (*MTL4PipelineStageDynamicLinkingDescriptor)(nil)

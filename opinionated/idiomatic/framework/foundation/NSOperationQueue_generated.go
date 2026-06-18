@@ -98,6 +98,8 @@ func (x *OperationQueue) AddOperationWith(ctx context.Context) error {
 	}
 }
 
+// @method addBarrierBlock: @param barrier      A block to execute @discussion         The `addBarrierBlock:` method executes the block when the NSOperationQueue has finished all enqueued operations and prevents any subsequent operations to be executed until the barrier has been completed. This acts similarly to the `dispatch_barrier_async` function.
+//
 // AddBarrierBlock blocks until the operation completes or ctx is cancelled.
 func (x *OperationQueue) AddBarrierBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -122,6 +124,8 @@ func (x *OperationQueue) WaitUntilAllOperationsAreFinished() {
 	x.inner.WaitUntilAllOperationsAreFinished()
 }
 
+// @property progress @discussion     The `progress` property represents a total progress of the operations executed in the queue. By default NSOperationQueue does not report progress until the `totalUnitCount` of the progress is set. When the `totalUnitCount` property of the progress is set the queue then opts into participating in progress reporting. When enabled, each operation will contribute 1 unit of completion to the overall progress of the queue for operations that are finished by the end of main (operations that override start and do not invoke super will not contribute to progress). Special attention to race conditions should be made when updating the `totalUnitCount` of the progress as well as care should be taken to avoid 'backwards progress'. For example; when a NSOperationQueue's progress is 5/10, representing 50% completed, and there are 90 more operations about to be added and the `totalUnitCount` that would then make the progress report as 5/100 which represents 5%. In this example it would mean that any progress bar would jump from displaying 50% back to 5%, which might not be desirable. In the cases where the `totalUnitCount` needs to be adjusted it is suggested to do this for thread-safety in a barrier by using the `addBarrierBlock:` API. This ensures that no un-expected execution state occurs adjusting into a potentially backwards moving progress scenario. @example NSOperationQueue *queue = [[NSOperationQueue alloc] init]; queue.progress.totalUnitCount = 10;
+//
 // Progress calls the underlying Progress.
 func (x *OperationQueue) Progress() *Progress {
 	_r := x.inner.Progress()

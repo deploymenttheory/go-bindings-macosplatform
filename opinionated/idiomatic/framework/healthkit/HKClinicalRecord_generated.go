@@ -45,6 +45,8 @@ func (x *ClinicalRecord) ClinicalType() *ClinicalType {
 	return &ClinicalType{inner: _r}
 }
 
+// @property     displayName @abstract     The primary display name used in Health. @discussion   The display name is not localized, and is generally expected to be US English.
+//
 // DisplayName calls the underlying DisplayName.
 func (x *ClinicalRecord) DisplayName() string {
 	_r := x.inner.DisplayName()
@@ -54,6 +56,8 @@ func (x *ClinicalRecord) DisplayName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property     FHIRResource @abstract     The FHIR resource (where applicable) backing this sample.
+//
 // FHIRResource calls the underlying FHIRResource.
 func (x *ClinicalRecord) FHIRResource() *FHIRResource {
 	_r := x.inner.FHIRResource()

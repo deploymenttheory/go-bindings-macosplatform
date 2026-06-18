@@ -44,36 +44,48 @@ func (x *LivePhotoView) WithDelegate(delegate raw.PHLivePhotoViewDelegate) *Live
 	return x
 }
 
+// Live photo displayed in the receiver.
+//
 // WithLivePhoto sets the livePhoto property and returns the receiver for chaining.
 func (x *LivePhotoView) WithLivePhoto(livePhoto *photos.PHLivePhoto) *LivePhotoView {
 	x.inner.SetLivePhoto(livePhoto)
 	return x
 }
 
+// The mode in which the receiver will display its content. Defaults to PHLivePhotoViewContentModeAspectFit.
+//
 // WithContentMode sets the contentMode property and returns the receiver for chaining.
 func (x *LivePhotoView) WithContentMode(contentMode PHLivePhotoViewContentMode) *LivePhotoView {
 	x.inner.SetContentMode(raw.PHLivePhotoViewContentMode(contentMode))
 	return x
 }
 
+// The rectangle, in the unit coordinate space, that defines the portion of the Live Photo contents that should be displayed. In this coordinate system, the point `{0.0,0.0}` refers to the upper left corner of the Live Photo, and `{1.0,1.0}` refers to the bottom right corner.
+//
 // WithContentsRect sets the contentsRect property and returns the receiver for chaining.
 func (x *LivePhotoView) WithContentsRect(contentsRect corefoundation.CGRect) *LivePhotoView {
 	x.inner.SetContentsRect(contentsRect)
 	return x
 }
 
+// The audio volume during playback
+//
 // WithAudioVolume sets the audioVolume property and returns the receiver for chaining.
 func (x *LivePhotoView) WithAudioVolume(audioVolume float32) *LivePhotoView {
 	x.inner.SetAudioVolume(audioVolume)
 	return x
 }
 
+// Indicates whether the audio of the Live Photo is muted.
+//
 // WithMuted sets the muted property and returns the receiver for chaining.
 func (x *LivePhotoView) WithMuted(muted bool) *LivePhotoView {
 	x.inner.SetMuted(muted)
 	return x
 }
 
+// The following methods allow the client to manually trigger playback. If the live photo is changed during playback, it will be immediately interrupted.
+//
 // StartPlaybackWithStyle calls the underlying StartPlaybackWithStyle.
 func (x *LivePhotoView) StartPlaybackWithStyle(playbackStyle PHLivePhotoViewPlaybackStyle) {
 	x.inner.StartPlaybackWithStyle(raw.PHLivePhotoViewPlaybackStyle(playbackStyle))
@@ -84,6 +96,8 @@ func (x *LivePhotoView) StopPlayback() {
 	x.inner.StopPlayback()
 }
 
+// Stops live photo playback. If animated is NO, the photo is immediately displayed.
+//
 // StopPlaybackAnimated calls the underlying StopPlaybackAnimated.
 func (x *LivePhotoView) StopPlaybackAnimated(animated bool) {
 	x.inner.StopPlaybackAnimated(animated)
@@ -99,26 +113,36 @@ func (x *LivePhotoView) SetDelegate(delegate raw.PHLivePhotoViewDelegate) {
 	x.inner.SetDelegate(delegate)
 }
 
+// Live photo displayed in the receiver.
+//
 // LivePhoto calls the underlying LivePhoto.
 func (x *LivePhotoView) LivePhoto() *photos.PHLivePhoto {
 	return x.inner.LivePhoto()
 }
 
+// Live photo displayed in the receiver.
+//
 // SetLivePhoto calls the underlying SetLivePhoto.
 func (x *LivePhotoView) SetLivePhoto(livePhoto *photos.PHLivePhoto) {
 	x.inner.SetLivePhoto(livePhoto)
 }
 
+// The mode in which the receiver will display its content. Defaults to PHLivePhotoViewContentModeAspectFit.
+//
 // ContentMode calls the underlying ContentMode.
 func (x *LivePhotoView) ContentMode() PHLivePhotoViewContentMode {
 	return PHLivePhotoViewContentMode(x.inner.ContentMode())
 }
 
+// The mode in which the receiver will display its content. Defaults to PHLivePhotoViewContentModeAspectFit.
+//
 // SetContentMode calls the underlying SetContentMode.
 func (x *LivePhotoView) SetContentMode(contentMode PHLivePhotoViewContentMode) {
 	x.inner.SetContentMode(raw.PHLivePhotoViewContentMode(contentMode))
 }
 
+// The rectangle, in the unit coordinate space, that defines the portion of the Live Photo contents that should be displayed. In this coordinate system, the point `{0.0,0.0}` refers to the upper left corner of the Live Photo, and `{1.0,1.0}` refers to the bottom right corner.
+//
 // ContentsRect calls the underlying ContentsRect.
 func (x *LivePhotoView) ContentsRect() corefoundation.CGRect {
 	return x.inner.ContentsRect()
@@ -129,26 +153,36 @@ func (x *LivePhotoView) SetContentsRect(contentsRect corefoundation.CGRect) {
 	x.inner.SetContentsRect(contentsRect)
 }
 
+// The audio volume during playback
+//
 // AudioVolume calls the underlying AudioVolume.
 func (x *LivePhotoView) AudioVolume() float32 {
 	return x.inner.AudioVolume()
 }
 
+// The audio volume during playback
+//
 // SetAudioVolume calls the underlying SetAudioVolume.
 func (x *LivePhotoView) SetAudioVolume(audioVolume float32) {
 	x.inner.SetAudioVolume(audioVolume)
 }
 
+// Indicates whether the audio of the Live Photo is muted.
+//
 // IsMuted calls the underlying IsMuted.
 func (x *LivePhotoView) IsMuted() bool {
 	return x.inner.IsMuted()
 }
 
+// Indicates whether the audio of the Live Photo is muted.
+//
 // SetMuted calls the underlying SetMuted.
 func (x *LivePhotoView) SetMuted(muted bool) {
 	x.inner.SetMuted(muted)
 }
 
+// Directly access the livePhotoBadge in cases where it should be added to a different place in the view hierarchy and not the live photo view. This can be useful when the live photo view is added to a scroll view.
+//
 // LivePhotoBadgeView calls the underlying LivePhotoBadgeView.
 func (x *LivePhotoView) LivePhotoBadgeView() *appkit.NSView {
 	return x.inner.LivePhotoBadgeView()

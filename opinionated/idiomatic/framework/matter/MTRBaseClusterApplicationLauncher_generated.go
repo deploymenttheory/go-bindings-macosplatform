@@ -35,6 +35,8 @@ func MTRBaseClusterApplicationLauncherFromID(id objc.ID) *MTRBaseClusterApplicat
 	return &MTRBaseClusterApplicationLauncher{inner: raw.MTRBaseClusterApplicationLauncherFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterApplicationLauncherWithDeviceEndpointIDQueue creates a new [MTRBaseClusterApplicationLauncher].
 func NewMTRBaseClusterApplicationLauncherWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterApplicationLauncher {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterApplicationLauncher")), objc.RegisterName("alloc"))
@@ -49,6 +51,8 @@ func NewMTRBaseClusterApplicationLauncherWithDeviceEndpointQueue(device *raw.MTR
 	return &MTRBaseClusterApplicationLauncher{inner: raw.MTRBaseClusterApplicationLauncherFromID(_id)}
 }
 
+// Command LaunchApp Upon receipt of this command, the server SHALL launch the application with optional data.
+//
 // LaunchAppWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterApplicationLauncher) LaunchAppWithParamsCompletion(ctx context.Context, params *raw.MTRApplicationLauncherClusterLaunchAppParams) (*MTRApplicationLauncherClusterLauncherResponseParams, error) {
 	type _result struct {
@@ -101,6 +105,8 @@ func (x *MTRBaseClusterApplicationLauncher) LaunchAppWithCompletion(ctx context.
 	}
 }
 
+// Command StopApp Upon receipt of this command, the server SHALL stop the application if it is running.
+//
 // StopAppWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterApplicationLauncher) StopAppWithParamsCompletion(ctx context.Context, params *raw.MTRApplicationLauncherClusterStopAppParams) (*MTRApplicationLauncherClusterLauncherResponseParams, error) {
 	type _result struct {
@@ -153,6 +159,8 @@ func (x *MTRBaseClusterApplicationLauncher) StopAppWithCompletion(ctx context.Co
 	}
 }
 
+// Command HideApp Upon receipt of this command, the server SHALL hide the application.
+//
 // HideAppWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterApplicationLauncher) HideAppWithParamsCompletion(ctx context.Context, params *raw.MTRApplicationLauncherClusterHideAppParams) (*MTRApplicationLauncherClusterLauncherResponseParams, error) {
 	type _result struct {

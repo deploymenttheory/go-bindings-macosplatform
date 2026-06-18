@@ -37,6 +37,8 @@ func NewProjectTextElement() *ProjectTextElement {
 	return &ProjectTextElement{inner: raw.PHProjectTextElementFromID(_id)}
 }
 
+// Unformatted, raw string for the text element
+//
 // Text calls the underlying Text.
 func (x *ProjectTextElement) Text() string {
 	_r := x.inner.Text()
@@ -46,6 +48,8 @@ func (x *ProjectTextElement) Text() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// If the text was presented to the user in a stylized manner in Photos, attributedText will provide access to those same attributes.
+//
 // AttributedText calls the underlying AttributedText.
 func (x *ProjectTextElement) AttributedText() *foundation.NSAttributedString {
 	return x.inner.AttributedText()

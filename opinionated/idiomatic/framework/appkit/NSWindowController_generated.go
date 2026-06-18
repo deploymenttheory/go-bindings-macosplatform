@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // WindowController wraps [raw.NSWindowController] with a fluent Go API.
@@ -223,8 +224,17 @@ func (x *WindowController) PreviewRepresentableActivityItems() *foundation.NSArr
 }
 
 // SetPreviewRepresentableActivityItems calls the underlying SetPreviewRepresentableActivityItems.
-func (x *WindowController) SetPreviewRepresentableActivityItems(previewRepresentableActivityItems *foundation.NSArray[raw.NSPreviewRepresentableActivityItem]) {
-	x.inner.SetPreviewRepresentableActivityItems(previewRepresentableActivityItems)
+func (x *WindowController) SetPreviewRepresentableActivityItems(previewRepresentableActivityItems ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(previewRepresentableActivityItems))
+	for _i, _v := range previewRepresentableActivityItems {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.NSPreviewRepresentableActivityItem]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.NSPreviewRepresentableActivityItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetPreviewRepresentableActivityItems(_arg0)
 }
 
 // Document calls the underlying Document.
@@ -325,7 +335,7 @@ type WindowControllerable interface {
 	ShouldCascadeWindows() bool
 	SetShouldCascadeWindows(shouldCascadeWindows bool)
 	PreviewRepresentableActivityItems() *foundation.NSArray[raw.NSPreviewRepresentableActivityItem]
-	SetPreviewRepresentableActivityItems(previewRepresentableActivityItems *foundation.NSArray[raw.NSPreviewRepresentableActivityItem])
+	SetPreviewRepresentableActivityItems(previewRepresentableActivityItems ...purego.IDer)
 	Document() objc.ID
 	SetDocument(document objc.ID)
 	ShouldCloseDocument() bool

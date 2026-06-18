@@ -29,6 +29,8 @@ func MIDINoteEventFromID(id objc.ID) *MIDINoteEvent {
 	return &MIDINoteEvent{inner: raw.AVMIDINoteEventFromID(id)}
 }
 
+// @method initWithChannel:key:velocity:duration @abstract Initialize the event with a MIDI channel, key number, velocity and duration. @param channel The MIDI channel.  Range: 0-15. @param key The MIDI key number.  Range: 0-127. @param velocity The MIDI velocity.  Range: 0-127 with zero indicating a note-off event. @param duration The duration in beats for this note.  Range: Any non-negative number.
+//
 // NewMIDINoteEventWithChannelKeyVelocityDuration creates a new [MIDINoteEvent].
 func NewMIDINoteEventWithChannelKeyVelocityDuration(channel uint, keyNum uint, velocity uint, duration float64) *MIDINoteEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDINoteEvent")), objc.RegisterName("alloc"))
@@ -36,30 +38,40 @@ func NewMIDINoteEventWithChannelKeyVelocityDuration(channel uint, keyNum uint, v
 	return &MIDINoteEvent{inner: raw.AVMIDINoteEventFromID(_id)}
 }
 
+// @property channel The MIDI channel for the event.  Range: 0-15.
+//
 // WithChannel sets the channel property and returns the receiver for chaining.
 func (x *MIDINoteEvent) WithChannel(channel uint) *MIDINoteEvent {
 	x.inner.SetChannel(channel)
 	return x
 }
 
+// @property key The MIDI key number for the event.  Range: 0-127.
+//
 // WithKey sets the key property and returns the receiver for chaining.
 func (x *MIDINoteEvent) WithKey(key uint) *MIDINoteEvent {
 	x.inner.SetKey(key)
 	return x
 }
 
+// @property velocity The MIDI velocity for the event.  Range: 0-127.
+//
 // WithVelocity sets the velocity property and returns the receiver for chaining.
 func (x *MIDINoteEvent) WithVelocity(velocity uint) *MIDINoteEvent {
 	x.inner.SetVelocity(velocity)
 	return x
 }
 
+// @property duration The duration of the event in AVMusicTimeStamp beats.  Range: Any non-negative number.
+//
 // WithDuration sets the duration property and returns the receiver for chaining.
 func (x *MIDINoteEvent) WithDuration(duration float64) *MIDINoteEvent {
 	x.inner.SetDuration(duration)
 	return x
 }
 
+// @property channel The MIDI channel for the event.  Range: 0-15.
+//
 // Channel calls the underlying Channel.
 func (x *MIDINoteEvent) Channel() uint {
 	return x.inner.Channel()
@@ -70,6 +82,8 @@ func (x *MIDINoteEvent) SetChannel(channel uint) {
 	x.inner.SetChannel(channel)
 }
 
+// @property key The MIDI key number for the event.  Range: 0-127.
+//
 // Key calls the underlying Key.
 func (x *MIDINoteEvent) Key() uint {
 	return x.inner.Key()
@@ -80,6 +94,8 @@ func (x *MIDINoteEvent) SetKey(key uint) {
 	x.inner.SetKey(key)
 }
 
+// @property velocity The MIDI velocity for the event.  Range: 0-127.
+//
 // Velocity calls the underlying Velocity.
 func (x *MIDINoteEvent) Velocity() uint {
 	return x.inner.Velocity()
@@ -90,6 +106,8 @@ func (x *MIDINoteEvent) SetVelocity(velocity uint) {
 	x.inner.SetVelocity(velocity)
 }
 
+// @property duration The duration of the event in AVMusicTimeStamp beats.  Range: Any non-negative number.
+//
 // Duration calls the underlying Duration.
 func (x *MIDINoteEvent) Duration() float64 {
 	return x.inner.Duration()

@@ -37,11 +37,15 @@ func NewMTRDeviceType() *MTRDeviceType {
 	return &MTRDeviceType{inner: raw.MTRDeviceTypeFromID(_id)}
 }
 
+// The identifier of the device type (32-bit unsigned integer).
+//
 // Id calls the underlying Id.
 func (x *MTRDeviceType) Id() *foundation.NSNumber {
 	return x.inner.Id()
 }
 
+// Returns the name of the device type.
+//
 // Name calls the underlying Name.
 func (x *MTRDeviceType) Name() string {
 	_r := x.inner.Name()
@@ -51,6 +55,8 @@ func (x *MTRDeviceType) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns whether this is a utility device type.
+//
 // IsUtility calls the underlying IsUtility.
 func (x *MTRDeviceType) IsUtility() bool {
 	return x.inner.IsUtility()

@@ -33,6 +33,8 @@ func ImageCannyFromID(id objc.ID) *ImageCanny {
 	return &ImageCanny{inner: raw.MPSImageCannyFromID(id)}
 }
 
+// @abstract   Initialize a Canny filter on a given device using the default color transform and default sigma value for Gaussian blur. Default transform: BT.601/JPEG {0.299f, 0.587f, 0.114f} Default sigma: sqrt(2) For non-default parameters, use -initWithDevice:linearGrayColorTransform:sigma: @param      device  The device the filter will run on @return     A valid object or nil, if failure.
+//
 // NewImageCannyWithDevice creates a new [ImageCanny].
 func NewImageCannyWithDevice(device metal.MTLDevice) *ImageCanny {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageCanny")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewImageCannyWithDevice(device metal.MTLDevice) *ImageCanny {
 	return &ImageCanny{inner: raw.MPSImageCannyFromID(_id)}
 }
 
+// @abstract   Initialize a Canny filter on a given device with a non-default color transform and non-default sigma. @param      device             The device the filter will run on @param      transform       Array of three floats describing the rgb to gray scale color transform. @code Luminance = transform[0] * pixel.x + transform[1] * pixel.y + transform[2] * pixel.z; @endcode @param      sigma               The standard deviation of gaussian blur filter. Gaussian weight, centered at 0, at integer grid n is given as @code w(i) = 1/sqrt(2*pi*sigma) * exp(-n^2/2*sigma^2) @endcode If we take cut off at 1% of w(0) (max weight) beyond which weights are considered 0, we have @code ceil (sqrt(-log(0.01)*2)*sigma) ~ ceil(3.7*sigma) @endcode as rough estimate of filter width @return     A valid object or nil, if failure.
+//
 // NewImageCannyWithDeviceLinearToGrayScaleTransformSigma creates a new [ImageCanny].
 func NewImageCannyWithDeviceLinearToGrayScaleTransformSigma(device metal.MTLDevice, transform *float32, sigma unsafe.Pointer) *ImageCanny {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageCanny")), objc.RegisterName("alloc"))
@@ -47,6 +51,8 @@ func NewImageCannyWithDeviceLinearToGrayScaleTransformSigma(device metal.MTLDevi
 	return &ImageCanny{inner: raw.MPSImageCannyFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+//
 // NewImageCannyWithCoderDevice creates a new [ImageCanny].
 func NewImageCannyWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageCanny {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageCanny")), objc.RegisterName("alloc"))
@@ -54,52 +60,70 @@ func NewImageCannyWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTL
 	return &ImageCanny{inner: raw.MPSImageCannyFromID(_id)}
 }
 
+// @property highThreshold @abstract Read-write value used to set the high threshold for double thresholding, value is normalized. Default is 0.4
+//
 // WithHighThreshold sets the highThreshold property and returns the receiver for chaining.
 func (x *ImageCanny) WithHighThreshold(highThreshold float32) *ImageCanny {
 	x.inner.SetHighThreshold(highThreshold)
 	return x
 }
 
+// @property lowThreshold @abstract Read-write value used to set the low threshold for double thresholding, value is normalized. Default is 0.2
+//
 // WithLowThreshold sets the lowThreshold property and returns the receiver for chaining.
 func (x *ImageCanny) WithLowThreshold(lowThreshold float32) *ImageCanny {
 	x.inner.SetLowThreshold(lowThreshold)
 	return x
 }
 
+// @property useFastMode @abstract Read-write value used to change algorithm to an approximation of the true Canny Edge detection Algorithm. When true, a limit is placed on how far a single strong edge can extend. The result will be similar to a true output but some edges may terminate early, resulting in minor differences for cases with long, weak edges. The performance for the approximate canny implementation is improved and should provide similar enough results for most cases. Extra tuning of the high and low thresholds as well as sigma may help achieve a more similar output in this mode. Default is YES
+//
 // WithUseFastMode sets the useFastMode property and returns the receiver for chaining.
 func (x *ImageCanny) WithUseFastMode(useFastMode bool) *ImageCanny {
 	x.inner.SetUseFastMode(useFastMode)
 	return x
 }
 
+// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *ImageCanny) WithOffset(offset mpscore.MPSOffset) *ImageCanny {
 	x.inner.MPSUnaryImageKernel.SetOffset(offset)
 	return x
 }
 
+// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+//
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImageCanny) WithClipRect(clipRect metal.MTLRegion) *ImageCanny {
 	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
 	return x
 }
 
+// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
+//
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *ImageCanny) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageCanny {
 	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
 	return x
 }
 
+// @property    colorTransform @discussion  Returns a pointer to the array of three floats used to convert RGBA, RGB or RG images to the destination format when the destination is monochrome. Value is readonly and user should not modify or free.
+//
 // ColorTransform calls the underlying ColorTransform.
 func (x *ImageCanny) ColorTransform() *float32 {
 	return x.inner.ColorTransform()
 }
 
+// @property sigma @abstract Read-only sigma value used in performing Gaussian blur of the image
+//
 // Sigma calls the underlying Sigma.
 func (x *ImageCanny) Sigma() float32 {
 	return x.inner.Sigma()
 }
 
+// @property highThreshold @abstract Read-write value used to set the high threshold for double thresholding, value is normalized. Default is 0.4
+//
 // HighThreshold calls the underlying HighThreshold.
 func (x *ImageCanny) HighThreshold() float32 {
 	return x.inner.HighThreshold()
@@ -110,6 +134,8 @@ func (x *ImageCanny) SetHighThreshold(highThreshold float32) {
 	x.inner.SetHighThreshold(highThreshold)
 }
 
+// @property lowThreshold @abstract Read-write value used to set the low threshold for double thresholding, value is normalized. Default is 0.2
+//
 // LowThreshold calls the underlying LowThreshold.
 func (x *ImageCanny) LowThreshold() float32 {
 	return x.inner.LowThreshold()
@@ -120,6 +146,8 @@ func (x *ImageCanny) SetLowThreshold(lowThreshold float32) {
 	x.inner.SetLowThreshold(lowThreshold)
 }
 
+// @property useFastMode @abstract Read-write value used to change algorithm to an approximation of the true Canny Edge detection Algorithm. When true, a limit is placed on how far a single strong edge can extend. The result will be similar to a true output but some edges may terminate early, resulting in minor differences for cases with long, weak edges. The performance for the approximate canny implementation is improved and should provide similar enough results for most cases. Extra tuning of the high and low thresholds as well as sigma may help achieve a more similar output in this mode. Default is YES
+//
 // UseFastMode calls the underlying UseFastMode.
 func (x *ImageCanny) UseFastMode() bool {
 	return x.inner.UseFastMode()

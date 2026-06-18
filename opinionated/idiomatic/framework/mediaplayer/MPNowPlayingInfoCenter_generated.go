@@ -36,18 +36,24 @@ func NewNowPlayingInfoCenter() *NowPlayingInfoCenter {
 	return &NowPlayingInfoCenter{inner: raw.MPNowPlayingInfoCenterFromID(_id)}
 }
 
+// The current now playing info for the center. Setting the info to nil will clear it.
+//
 // WithNowPlayingInfo sets the nowPlayingInfo property and returns the receiver for chaining.
 func (x *NowPlayingInfoCenter) WithNowPlayingInfo(nowPlayingInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NowPlayingInfoCenter {
 	x.inner.SetNowPlayingInfo(nowPlayingInfo)
 	return x
 }
 
+// The current playback state of the app. This only applies on macOS, where playback state cannot be determined by the application's audio session. This property must be set every time the app begins or halts playback, otherwise remote control functionality may not work as expected.
+//
 // WithPlaybackState sets the playbackState property and returns the receiver for chaining.
 func (x *NowPlayingInfoCenter) WithPlaybackState(playbackState MPNowPlayingPlaybackState) *NowPlayingInfoCenter {
 	x.inner.SetPlaybackState(raw.MPNowPlayingPlaybackState(playbackState))
 	return x
 }
 
+// The current now playing info for the center. Setting the info to nil will clear it.
+//
 // NowPlayingInfo calls the underlying NowPlayingInfo.
 func (x *NowPlayingInfoCenter) NowPlayingInfo() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.NowPlayingInfo()
@@ -58,6 +64,8 @@ func (x *NowPlayingInfoCenter) SetNowPlayingInfo(nowPlayingInfo *foundation.NSDi
 	x.inner.SetNowPlayingInfo(nowPlayingInfo)
 }
 
+// The current playback state of the app. This only applies on macOS, where playback state cannot be determined by the application's audio session. This property must be set every time the app begins or halts playback, otherwise remote control functionality may not work as expected.
+//
 // PlaybackState calls the underlying PlaybackState.
 func (x *NowPlayingInfoCenter) PlaybackState() MPNowPlayingPlaybackState {
 	return MPNowPlayingPlaybackState(x.inner.PlaybackState())

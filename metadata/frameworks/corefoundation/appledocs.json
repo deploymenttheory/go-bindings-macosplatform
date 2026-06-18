@@ -1,0 +1,1769 @@
+{
+  "schema_version": 1,
+  "framework": "CoreFoundation",
+  "source": "developer.apple.com DocC render API",
+  "enums": {
+    "CFCalendarUnit": {
+      "doc": "CFCalendarUnit constants are used to specify calendrical units, such as day or month, in various calendar calculations.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfcalendarunit",
+      "members": {
+        "kCFCalendarUnitDay": {
+          "doc": "Specifies the day unit.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcalendarunit/day"
+        },
+        "kCFCalendarUnitEra": {
+          "doc": "Specifies the era unit.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcalendarunit/era"
+        },
+        "kCFCalendarUnitHour": {
+          "doc": "Specifies the hour unit.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcalendarunit/hour"
+        },
+        "kCFCalendarUnitMinute": {
+          "doc": "Specifies the minute unit.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcalendarunit/minute"
+        },
+        "kCFCalendarUnitMonth": {
+          "doc": "Specifies the month unit.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcalendarunit/month"
+        },
+        "kCFCalendarUnitQuarter": {
+          "doc": "Specifies the quarter-year unit.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcalendarunit/quarter"
+        },
+        "kCFCalendarUnitSecond": {
+          "doc": "Specifies the second unit.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcalendarunit/second"
+        },
+        "kCFCalendarUnitWeek": {
+          "doc": "Specifies the week unit.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcalendarunit/week"
+        },
+        "kCFCalendarUnitWeekOfMonth": {
+          "doc": "Specifies the original week of a month calendar unit.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcalendarunit/weekofmonth"
+        },
+        "kCFCalendarUnitWeekOfYear": {
+          "doc": "Specifies the original week of the year calendar unit.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcalendarunit/weekofyear"
+        },
+        "kCFCalendarUnitWeekday": {
+          "doc": "Specifies the weekday unit.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcalendarunit/weekday"
+        },
+        "kCFCalendarUnitWeekdayOrdinal": {
+          "doc": "Specifies the ordinal weekday unit.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcalendarunit/weekdayordinal"
+        },
+        "kCFCalendarUnitYear": {
+          "doc": "Specifies the year unit.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcalendarunit/year"
+        },
+        "kCFCalendarUnitYearForWeekOfYear": {
+          "doc": "Specifies the relative year for a week within a year calendar unit.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcalendarunit/yearforweekofyear"
+        }
+      }
+    },
+    "CFCharacterSetPredefinedSet": {
+      "doc": "Defines a predefined character set.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfcharactersetpredefinedset",
+      "members": {
+        "kCFCharacterSetAlphaNumeric": {
+          "doc": "Alpha Numeric character set (Unicode General Category L*, M*, \u0026 N*).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcharactersetpredefinedset/alphanumeric"
+        },
+        "kCFCharacterSetCapitalizedLetter": {
+          "doc": "Titlecase character set (Unicode General Category Lt).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcharactersetpredefinedset/capitalizedletter"
+        },
+        "kCFCharacterSetControl": {
+          "doc": "Control character set (Unicode General Category Cc and Cf).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcharactersetpredefinedset/control"
+        },
+        "kCFCharacterSetDecimalDigit": {
+          "doc": "Decimal digit character set.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcharactersetpredefinedset/decimaldigit"
+        },
+        "kCFCharacterSetDecomposable": {
+          "doc": "Canonically decomposable character set.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcharactersetpredefinedset/decomposable"
+        },
+        "kCFCharacterSetIllegal": {
+          "doc": "Illegal character set.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcharactersetpredefinedset/illegal"
+        },
+        "kCFCharacterSetLetter": {
+          "doc": "Letter character set (Unicode General Category L* \u0026 M*).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcharactersetpredefinedset/letter"
+        },
+        "kCFCharacterSetLowercaseLetter": {
+          "doc": "Lowercase character set (Unicode General Category Ll).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcharactersetpredefinedset/lowercaseletter"
+        },
+        "kCFCharacterSetNewline": {
+          "doc": "Newline character set (U000A ~ U000D, U0085, U2028, and U2029).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcharactersetpredefinedset/newline"
+        },
+        "kCFCharacterSetNonBase": {
+          "doc": "Non-base character set (Unicode General Category M*).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcharactersetpredefinedset/nonbase"
+        },
+        "kCFCharacterSetPunctuation": {
+          "doc": "Punctuation character set (Unicode General Category P*).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcharactersetpredefinedset/punctuation"
+        },
+        "kCFCharacterSetSymbol": {
+          "doc": "Symbol character set (Unicode General Category S*).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcharactersetpredefinedset/symbol"
+        },
+        "kCFCharacterSetUppercaseLetter": {
+          "doc": "Uppercase character set (Unicode General Category Lu and Lt).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcharactersetpredefinedset/uppercaseletter"
+        },
+        "kCFCharacterSetWhitespace": {
+          "doc": "Whitespace character set (Unicode General Category Zs and U0009 CHARACTER TABULATION).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcharactersetpredefinedset/whitespace"
+        },
+        "kCFCharacterSetWhitespaceAndNewline": {
+          "doc": "Whitespace and Newline character set (Unicode General Category Z*, U000A ~ U000D, and U0085).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcharactersetpredefinedset/whitespaceandnewline"
+        }
+      }
+    },
+    "CFComparisonResult": {
+      "doc": "Constants returned by comparison functions, indicating whether a value is equal to, less than, or greater than another value.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfcomparisonresult",
+      "members": {
+        "kCFCompareEqualTo": {
+          "doc": "Returned by a comparison function if the first value is equal to the second value.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcomparisonresult/compareequalto"
+        },
+        "kCFCompareGreaterThan": {
+          "doc": "Returned by a comparison function if the first value is greater than the second value.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcomparisonresult/comparegreaterthan"
+        },
+        "kCFCompareLessThan": {
+          "doc": "Returned by a comparison function if the first value is less than the second value.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfcomparisonresult/comparelessthan"
+        }
+      }
+    },
+    "CFDataSearchFlags": {
+      "doc": "A CFOptionFlags type for specifying options for searching.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfdatasearchflags"
+    },
+    "CFDateFormatterStyle": {
+      "doc": "Data type for predefined date and time format styles.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfdateformatterstyle",
+      "members": {
+        "kCFDateFormatterFullStyle": {
+          "doc": "Specifies a full style with complete details, such as “Tuesday, April 12, 1952 AD” or “3:30:42pm PST”.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfdateformatterstyle/fullstyle"
+        },
+        "kCFDateFormatterLongStyle": {
+          "doc": "Specifies a long style, typically with full text, such as “November 23, 1937” or “3:30:32pm”.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfdateformatterstyle/longstyle"
+        },
+        "kCFDateFormatterMediumStyle": {
+          "doc": "Specifies a medium style, typically with abbreviated text, such as “Nov 23, 1937”.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfdateformatterstyle/mediumstyle"
+        },
+        "kCFDateFormatterNoStyle": {
+          "doc": "Specifies no output.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfdateformatterstyle/nostyle"
+        },
+        "kCFDateFormatterShortStyle": {
+          "doc": "Specifies a short style, typically numeric only, such as “11/23/37” or “3:30pm”.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfdateformatterstyle/shortstyle"
+        }
+      }
+    },
+    "CFFileSecurityClearOptions": {
+      "url": "https://developer.apple.com/documentation/corefoundation/cffilesecurityclearoptions",
+      "members": {
+        "kCFFileSecurityClearAccessControlList": {
+          "doc": "Clear the access control list.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cffilesecurityclearoptions/accesscontrollist"
+        },
+        "kCFFileSecurityClearGroup": {
+          "doc": "Clear the (POSIX) group ID.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cffilesecurityclearoptions/group"
+        },
+        "kCFFileSecurityClearGroupUUID": {
+          "doc": "Clear the group UUID (for the access control list).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cffilesecurityclearoptions/groupuuid"
+        },
+        "kCFFileSecurityClearMode": {
+          "doc": "Clear the file’s mode (POSIX permissions).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cffilesecurityclearoptions/mode"
+        },
+        "kCFFileSecurityClearOwner": {
+          "doc": "Clear the (POSIX) owner ID.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cffilesecurityclearoptions/owner"
+        },
+        "kCFFileSecurityClearOwnerUUID": {
+          "doc": "Clear the owner UUID (for the access control list).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cffilesecurityclearoptions/owneruuid"
+        }
+      }
+    },
+    "CFGregorianUnitFlags": {
+      "doc": "These option flags are used as a mask to indicate a specific set of fields in the CFGregorianDate or CFGregorianUnits structures.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfgregorianunitflags",
+      "members": {
+        "kCFGregorianAllUnits": {
+          "doc": "Specifies all fields.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfgregorianunitflags/allunits"
+        },
+        "kCFGregorianUnitsDays": {
+          "doc": "Specifies the day field.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfgregorianunitflags/unitsdays"
+        },
+        "kCFGregorianUnitsHours": {
+          "doc": "Specifies the hours field.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfgregorianunitflags/unitshours"
+        },
+        "kCFGregorianUnitsMinutes": {
+          "doc": "Specifies the minutes field.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfgregorianunitflags/unitsminutes"
+        },
+        "kCFGregorianUnitsMonths": {
+          "doc": "Specifies the month field.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfgregorianunitflags/unitsmonths"
+        },
+        "kCFGregorianUnitsSeconds": {
+          "doc": "Specifies the seconds field.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfgregorianunitflags/unitsseconds"
+        },
+        "kCFGregorianUnitsYears": {
+          "doc": "Specifies the year field.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfgregorianunitflags/unitsyears"
+        }
+      }
+    },
+    "CFISO8601DateFormatOptions": {
+      "url": "https://developer.apple.com/documentation/corefoundation/cfiso8601dateformatoptions"
+    },
+    "CFLocaleLanguageDirection": {
+      "doc": "These constants describe the text direction for a language. They are returned by the functions CFLocaleGetLanguageCharacterDirection and CFLocaleGetLanguageLineDirection.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cflocalelanguagedirection"
+    },
+    "CFNotificationSuspensionBehavior": {
+      "doc": "Suspension flags that indicate how distributed notifications should be handled when the receiving application is in the background.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfnotificationsuspensionbehavior",
+      "members": {
+        "CFNotificationSuspensionBehaviorCoalesce": {
+          "doc": "The server will only queue the last notification of the specified name and object; earlier notifications are dropped.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnotificationsuspensionbehavior/coalesce"
+        },
+        "CFNotificationSuspensionBehaviorDeliverImmediately": {
+          "doc": "The server will deliver notifications of the specified name and object whether or not the application is in the background. When a notification with this suspension behavior is matched, it has the effect of first flushing any queued notifications.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnotificationsuspensionbehavior/deliverimmediately"
+        },
+        "CFNotificationSuspensionBehaviorDrop": {
+          "doc": "The server will not queue any notifications of the specified name and object while the receiving application is in the background.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnotificationsuspensionbehavior/drop"
+        },
+        "CFNotificationSuspensionBehaviorHold": {
+          "doc": "The server will hold all matching notifications until the queue has been filled (queue size determined by the server) at which point the server may flush queued notifications.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnotificationsuspensionbehavior/hold"
+        }
+      }
+    },
+    "CFNumberFormatterOptionFlags": {
+      "doc": "Type for constants specifying how numbers should be parsed.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatteroptionflags",
+      "members": {
+        "kCFNumberFormatterParseIntegersOnly": {
+          "doc": "Specifies that only integers should be parsed.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatteroptionflags/parseintegersonly"
+        }
+      }
+    },
+    "CFNumberFormatterPadPosition": {
+      "doc": "Type for constants specifying how numbers should be padded.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterpadposition",
+      "members": {
+        "kCFNumberFormatterPadAfterPrefix": {
+          "doc": "Specifies the number of padding characters after the prefix.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterpadposition/afterprefix"
+        },
+        "kCFNumberFormatterPadAfterSuffix": {
+          "doc": "Specifies the number of padding characters after the suffix.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterpadposition/aftersuffix"
+        },
+        "kCFNumberFormatterPadBeforePrefix": {
+          "doc": "Specifies the number of padding characters before the prefix.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterpadposition/beforeprefix"
+        },
+        "kCFNumberFormatterPadBeforeSuffix": {
+          "doc": "Specifies the number of padding characters before the suffix.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterpadposition/beforesuffix"
+        }
+      }
+    },
+    "CFNumberFormatterRoundingMode": {
+      "doc": "These constants are used to specify how numbers should be rounded.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterroundingmode",
+      "members": {
+        "kCFNumberFormatterRoundCeiling": {
+          "doc": "Round towards positive infinity.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterroundingmode/roundceiling"
+        },
+        "kCFNumberFormatterRoundDown": {
+          "doc": "Round towards zero.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterroundingmode/rounddown"
+        },
+        "kCFNumberFormatterRoundFloor": {
+          "doc": "Round towards negative infinity.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterroundingmode/roundfloor"
+        },
+        "kCFNumberFormatterRoundHalfDown": {
+          "doc": "Round towards the nearest integer, or towards zero if equidistant.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterroundingmode/roundhalfdown"
+        },
+        "kCFNumberFormatterRoundHalfEven": {
+          "doc": "Round towards the nearest integer, or towards an even number if equidistant.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterroundingmode/roundhalfeven"
+        },
+        "kCFNumberFormatterRoundHalfUp": {
+          "doc": "Round towards the nearest integer, or away from zero if equidistant.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterroundingmode/roundhalfup"
+        },
+        "kCFNumberFormatterRoundUp": {
+          "doc": "Round away from zero.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterroundingmode/roundup"
+        }
+      }
+    },
+    "CFNumberFormatterStyle": {
+      "doc": "Type for constants specifying a formatter style.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterstyle",
+      "members": {
+        "kCFNumberFormatterCurrencyStyle": {
+          "doc": "Specifies a currency style format.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterstyle/currencystyle"
+        },
+        "kCFNumberFormatterDecimalStyle": {
+          "doc": "Specifies a decimal style format.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterstyle/decimalstyle"
+        },
+        "kCFNumberFormatterNoStyle": {
+          "doc": "Specifies no style.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterstyle/nostyle"
+        },
+        "kCFNumberFormatterPercentStyle": {
+          "doc": "Specifies a percent style format.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterstyle/percentstyle"
+        },
+        "kCFNumberFormatterScientificStyle": {
+          "doc": "Specifies a scientific style format.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterstyle/scientificstyle"
+        },
+        "kCFNumberFormatterSpellOutStyle": {
+          "doc": "Specifies a spelled out format.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumberformatterstyle/spelloutstyle"
+        }
+      }
+    },
+    "CFNumberType": {
+      "doc": "Flags used by CFNumber to indicate the data type of a value.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfnumbertype",
+      "members": {
+        "kCFNumberCFIndexType": {
+          "doc": "CFIndex value.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumbertype/cfindextype"
+        },
+        "kCFNumberCGFloatType": {
+          "doc": "CGFloat value.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumbertype/cgfloattype"
+        },
+        "kCFNumberCharType": {
+          "doc": "Basic C char type.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumbertype/chartype"
+        },
+        "kCFNumberDoubleType": {
+          "doc": "Basic C double type.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumbertype/doubletype"
+        },
+        "kCFNumberFloat32Type": {
+          "doc": "Thirty-two-bit real. The Float32 data type is defined in MacTypes.h.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumbertype/float32type"
+        },
+        "kCFNumberFloat64Type": {
+          "doc": "Sixty-four-bit real. The Float64 data type is defined in MacTypes.h and conforms to the 64-bit IEEE 754 standard.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumbertype/float64type"
+        },
+        "kCFNumberFloatType": {
+          "doc": "Basic C float type.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumbertype/floattype"
+        },
+        "kCFNumberIntType": {
+          "doc": "Basic C int type.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumbertype/inttype"
+        },
+        "kCFNumberLongLongType": {
+          "doc": "Basic C long long type.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumbertype/longlongtype"
+        },
+        "kCFNumberLongType": {
+          "doc": "Basic C long type.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumbertype/longtype"
+        },
+        "kCFNumberMaxType": {
+          "doc": "Same as kCFNumberCGFloatType.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumbertype/maxtype"
+        },
+        "kCFNumberNSIntegerType": {
+          "doc": "NSInteger value.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumbertype/nsintegertype"
+        },
+        "kCFNumberSInt16Type": {
+          "doc": "Sixteen-bit, signed integer. The SInt16 data type is defined in MacTypes.h.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumbertype/sint16type"
+        },
+        "kCFNumberSInt32Type": {
+          "doc": "Thirty-two-bit, signed integer. The SInt32 data type is defined in MacTypes.h.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumbertype/sint32type"
+        },
+        "kCFNumberSInt64Type": {
+          "doc": "Sixty-four-bit, signed integer. The SInt64 data type is defined in MacTypes.h.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumbertype/sint64type"
+        },
+        "kCFNumberSInt8Type": {
+          "doc": "Eight-bit, signed integer. The SInt8 data type is defined in MacTypes.h.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumbertype/sint8type"
+        },
+        "kCFNumberShortType": {
+          "doc": "Basic C short type.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfnumbertype/shorttype"
+        }
+      }
+    },
+    "CFPropertyListFormat": {
+      "doc": "Specifies the format of a property list.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfpropertylistformat",
+      "members": {
+        "kCFPropertyListBinaryFormat_v1_0": {
+          "doc": "Binary format version 1.0.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfpropertylistformat/binaryformat_v1_0"
+        },
+        "kCFPropertyListOpenStepFormat": {
+          "doc": "OpenStep format (use of this format is discouraged).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfpropertylistformat/openstepformat"
+        },
+        "kCFPropertyListXMLFormat_v1_0": {
+          "doc": "XML format version 1.0.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfpropertylistformat/xmlformat_v1_0"
+        }
+      }
+    },
+    "CFPropertyListMutabilityOptions": {
+      "doc": "Type for flags that determine the degree of mutability of newly created property lists.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfpropertylistmutabilityoptions",
+      "members": {
+        "kCFPropertyListImmutable": {
+          "doc": "Specifies that the property list should be immutable.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfpropertylistmutabilityoptions/kcfpropertylistimmutable"
+        },
+        "kCFPropertyListMutableContainers": {
+          "doc": "Specifies that the property list should have mutable containers but immutable leaves.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfpropertylistmutabilityoptions/mutablecontainers"
+        },
+        "kCFPropertyListMutableContainersAndLeaves": {
+          "doc": "Specifies that the property list should have mutable containers and mutable leaves.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfpropertylistmutabilityoptions/mutablecontainersandleaves"
+        }
+      }
+    },
+    "CFRunLoopActivity": {
+      "doc": "Run loop activity stages in which run loop observers can be scheduled.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfrunloopactivity",
+      "members": {
+        "kCFRunLoopAfterWaiting": {
+          "doc": "Inside the event processing loop after the run loop wakes up, but before processing the event that woke it up. This activity occurs only if the run loop did in fact go to sleep during the current loop.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfrunloopactivity/afterwaiting"
+        },
+        "kCFRunLoopAllActivities": {
+          "doc": "A combination of all the preceding stages.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfrunloopactivity/allactivities"
+        },
+        "kCFRunLoopBeforeSources": {
+          "doc": "Inside the event processing loop before any sources are processed.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfrunloopactivity/beforesources"
+        },
+        "kCFRunLoopBeforeTimers": {
+          "doc": "Inside the event processing loop before any timers are processed.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfrunloopactivity/beforetimers"
+        },
+        "kCFRunLoopEntry": {
+          "doc": "The entrance of the run loop, before entering the event processing loop. This activity occurs once for each call to CFRunLoopRun and CFRunLoopRunInMode.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfrunloopactivity/entry"
+        },
+        "kCFRunLoopExit": {
+          "doc": "The exit of the run loop, after exiting the event processing loop. This activity occurs once for each call to CFRunLoopRun and CFRunLoopRunInMode.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfrunloopactivity/exit"
+        }
+      }
+    },
+    "CFRunLoopRunResult": {
+      "url": "https://developer.apple.com/documentation/corefoundation/cfrunlooprunresult",
+      "members": {
+        "kCFRunLoopRunFinished": {
+          "doc": "The running run loop mode has no sources or timers to process.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfrunlooprunresult/finished"
+        },
+        "kCFRunLoopRunHandledSource": {
+          "doc": "A source has been processed. This value is returned only if the run loop was told to run only until a source was processed.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfrunlooprunresult/handledsource"
+        },
+        "kCFRunLoopRunStopped": {
+          "doc": "CFRunLoopStop was called on the run loop.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfrunlooprunresult/stopped"
+        },
+        "kCFRunLoopRunTimedOut": {
+          "doc": "The specified time interval for running the run loop has passed.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfrunlooprunresult/timedout"
+        }
+      }
+    },
+    "CFSocketCallBackType": {
+      "doc": "Types of socket activity that can cause the callback function of a CFSocket object to be called.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfsocketcallbacktype",
+      "members": {
+        "kCFSocketAcceptCallBack": {
+          "doc": "New connections will be automatically accepted and the callback is called with the data argument being a pointer to a CFSocketNativeHandle of the child socket. This callback is usable only with listening sockets.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfsocketcallbacktype/acceptcallback"
+        },
+        "kCFSocketDataCallBack": {
+          "doc": "Incoming data will be read in chunks in the background and the callback is called with the data argument being a CFData object containing the read data.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfsocketcallbacktype/datacallback"
+        },
+        "kCFSocketNoCallBack": {
+          "doc": "No callback should be made for any activity.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfsocketcallbacktype/kcfsocketnocallback"
+        },
+        "kCFSocketReadCallBack": {
+          "doc": "The callback is called when data is available to be read or a new connection is waiting to be accepted. The data is not automatically read; the callback must read the data itself.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfsocketcallbacktype/readcallback"
+        },
+        "kCFSocketWriteCallBack": {
+          "doc": "The callback is called when the socket is writable. This callback type may be useful when large amounts of data are being sent rapidly over the socket and you want a notification when there is space in the kernel buffers for more data.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfsocketcallbacktype/writecallback"
+        }
+      }
+    },
+    "CFSocketError": {
+      "doc": "Error codes for many CFSocket functions.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfsocketerror",
+      "members": {
+        "kCFSocketError": {
+          "doc": "The socket operation failed.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfsocketerror/error"
+        },
+        "kCFSocketSuccess": {
+          "doc": "The socket operation succeeded.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfsocketerror/success"
+        },
+        "kCFSocketTimeout": {
+          "doc": "The socket operation timed out.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfsocketerror/timeout"
+        }
+      }
+    },
+    "CFStreamErrorDomain": {
+      "doc": "Defines constants for values returned in the domain field of the CFStreamError structure.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfstreamerrordomain",
+      "members": {
+        "kCFStreamErrorDomainCustom": {
+          "doc": "The error code is a custom error code.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstreamerrordomain/custom"
+        },
+        "kCFStreamErrorDomainMacOSStatus": {
+          "doc": "The error is an OSStatus value defined in MacErrors.h.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstreamerrordomain/macosstatus"
+        },
+        "kCFStreamErrorDomainPOSIX": {
+          "doc": "The error code is an error code defined in errno.h.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstreamerrordomain/posix"
+        }
+      }
+    },
+    "CFStreamEventType": {
+      "doc": "Defines constants for stream-related events.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfstreameventtype",
+      "members": {
+        "kCFStreamEventCanAcceptBytes": {
+          "doc": "The stream can accept bytes for writing.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstreameventtype/canacceptbytes"
+        },
+        "kCFStreamEventEndEncountered": {
+          "doc": "The end of the stream has been reached.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstreameventtype/endencountered"
+        },
+        "kCFStreamEventErrorOccurred": {
+          "doc": "An error has occurred on the stream.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstreameventtype/erroroccurred"
+        },
+        "kCFStreamEventHasBytesAvailable": {
+          "doc": "The stream has bytes to be read.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstreameventtype/hasbytesavailable"
+        },
+        "kCFStreamEventNone": {
+          "doc": "No event has occurred.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstreameventtype/kcfstreameventnone"
+        },
+        "kCFStreamEventOpenCompleted": {
+          "doc": "The open has completed successfully.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstreameventtype/opencompleted"
+        }
+      }
+    },
+    "CFStreamStatus": {
+      "doc": "Constants that describe the status of a stream.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfstreamstatus",
+      "members": {
+        "kCFStreamStatusAtEnd": {
+          "doc": "There is no more data to read, or no more data can be written.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstreamstatus/atend"
+        },
+        "kCFStreamStatusClosed": {
+          "doc": "The stream is closed.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstreamstatus/closed"
+        },
+        "kCFStreamStatusError": {
+          "doc": "An error occurred on the stream.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstreamstatus/error"
+        },
+        "kCFStreamStatusNotOpen": {
+          "doc": "The stream is not open for reading or writing.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstreamstatus/notopen"
+        },
+        "kCFStreamStatusOpen": {
+          "doc": "The stream is open.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstreamstatus/open"
+        },
+        "kCFStreamStatusOpening": {
+          "doc": "The stream is being opened for reading or for writing.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstreamstatus/opening"
+        },
+        "kCFStreamStatusReading": {
+          "doc": "The stream is being read from.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstreamstatus/reading"
+        },
+        "kCFStreamStatusWriting": {
+          "doc": "The stream is being written to.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstreamstatus/writing"
+        }
+      }
+    },
+    "CFStringBuiltInEncodings": {
+      "doc": "Encodings that are built-in on all platforms on which macOS runs.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfstringbuiltinencodings",
+      "members": {
+        "kCFStringEncodingASCII": {
+          "doc": "An encoding constant that identifies the ASCII encoding (decimal values 0 through 127).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringbuiltinencodings/ascii"
+        },
+        "kCFStringEncodingISOLatin1": {
+          "doc": "An encoding constant that identifies the ISO Latin 1 encoding (ISO 8859-1)",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringbuiltinencodings/isolatin1"
+        },
+        "kCFStringEncodingMacRoman": {
+          "doc": "An encoding constant that identifies the Mac Roman encoding.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringbuiltinencodings/macroman"
+        },
+        "kCFStringEncodingNextStepLatin": {
+          "doc": "An encoding constant that identifies the NextStep/OpenStep encoding.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringbuiltinencodings/nextsteplatin"
+        },
+        "kCFStringEncodingNonLossyASCII": {
+          "doc": "An encoding constant that identifies non-lossy ASCII encoding.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringbuiltinencodings/nonlossyascii"
+        },
+        "kCFStringEncodingUTF16": {
+          "doc": "An encoding constant that identifies kTextEncodingUnicodeDefault + kUnicodeUTF16Format encoding (alias of kCFStringEncodingUnicode).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringbuiltinencodings/utf16"
+        },
+        "kCFStringEncodingUTF16BE": {
+          "doc": "An encoding constant that identifies kTextEncodingUnicodeDefault + kUnicodeUTF16BEFormat encoding. This constant specifies big-endian byte order.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringbuiltinencodings/utf16be"
+        },
+        "kCFStringEncodingUTF16LE": {
+          "doc": "An encoding constant that identifies kTextEncodingUnicodeDefault + kUnicodeUTF16LEFormat encoding. This constant specifies little-endian byte order.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringbuiltinencodings/utf16le"
+        },
+        "kCFStringEncodingUTF32": {
+          "doc": "An encoding constant that identifies kTextEncodingUnicodeDefault + kUnicodeUTF32Format encoding.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringbuiltinencodings/utf32"
+        },
+        "kCFStringEncodingUTF32BE": {
+          "doc": "An encoding constant that identifies kTextEncodingUnicodeDefault + kUnicodeUTF32BEFormat encoding. This constant specifies big-endian byte order.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringbuiltinencodings/utf32be"
+        },
+        "kCFStringEncodingUTF32LE": {
+          "doc": "An encoding constant that identifies kTextEncodingUnicodeDefault + kUnicodeUTF32LEFormat encoding. This constant specifies little-endian byte order.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringbuiltinencodings/utf32le"
+        },
+        "kCFStringEncodingUTF8": {
+          "doc": "An encoding constant that identifies the UTF 8 encoding.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringbuiltinencodings/utf8"
+        },
+        "kCFStringEncodingUnicode": {
+          "doc": "An encoding constant that identifies the Unicode encoding.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringbuiltinencodings/unicode"
+        },
+        "kCFStringEncodingWindowsLatin1": {
+          "doc": "An encoding constant that identifies the Windows Latin 1 encoding (ANSI codepage 1252).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringbuiltinencodings/windowslatin1"
+        }
+      }
+    },
+    "CFStringCompareFlags": {
+      "doc": "A CFOptionFlags type for specifying options for string comparison .",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfstringcompareflags",
+      "members": {
+        "kCFCompareAnchored": {
+          "doc": "Performs searching only on characters at the beginning or end of the range.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringcompareflags/compareanchored"
+        },
+        "kCFCompareBackwards": {
+          "doc": "Specifies that the comparison should start at the last elements of the entities being compared (for example, strings or arrays).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringcompareflags/comparebackwards"
+        },
+        "kCFCompareCaseInsensitive": {
+          "doc": "Specifies that the comparison should ignore differences in case between alphabetical characters.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringcompareflags/comparecaseinsensitive"
+        },
+        "kCFCompareDiacriticInsensitive": {
+          "doc": "Specifies that the comparison should ignore diacritic markers.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringcompareflags/comparediacriticinsensitive"
+        },
+        "kCFCompareForcedOrdering": {
+          "doc": "Specifies that the comparison is forced to return either kCFCompareLessThan or kCFCompareGreaterThan if the strings are equivalent but not strictly equal.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringcompareflags/compareforcedordering"
+        },
+        "kCFCompareLocalized": {
+          "doc": "Specifies that the comparison should take into account differences related to locale, such as the thousands separator character.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringcompareflags/comparelocalized"
+        },
+        "kCFCompareNonliteral": {
+          "doc": "Specifies that loose equivalence is acceptable, especially as pertains to diacritical marks.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringcompareflags/comparenonliteral"
+        },
+        "kCFCompareNumerically": {
+          "doc": "Specifies that represented numeric values should be used as the basis for comparison and not the actual character values.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringcompareflags/comparenumerically"
+        },
+        "kCFCompareWidthInsensitive": {
+          "doc": "Specifies that the comparison should ignore width differences.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringcompareflags/comparewidthinsensitive"
+        }
+      }
+    },
+    "CFStringEncodings": {
+      "doc": "Index type for constants used to specify external string encodings.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings",
+      "members": {
+        "kCFStringEncodingANSEL": {
+          "doc": "ANSEL (ANSI Z39.47).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/ansel"
+        },
+        "kCFStringEncodingBig5": {
+          "doc": "Big-5 (has variants)",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/big5"
+        },
+        "kCFStringEncodingBig5_E": {
+          "doc": "Taiwan Big-5E standard.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/big5_e"
+        },
+        "kCFStringEncodingBig5_HKSCS_1999": {
+          "doc": "Big-5 with Hong Kong special char set supplement.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/big5_hkscs_1999"
+        },
+        "kCFStringEncodingCNS_11643_92_P1": {
+          "doc": "CNS 11643-1992 plane 1.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/cns_11643_92_p1"
+        },
+        "kCFStringEncodingCNS_11643_92_P2": {
+          "doc": "CNS 11643-1992 plane 2.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/cns_11643_92_p2"
+        },
+        "kCFStringEncodingCNS_11643_92_P3": {
+          "doc": "CNS 11643-1992 plane 3 (was plane 14 in 1986 version).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/cns_11643_92_p3"
+        },
+        "kCFStringEncodingDOSArabic": {
+          "doc": "Code page 864.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/dosarabic"
+        },
+        "kCFStringEncodingDOSBalticRim": {
+          "doc": "Code page 775.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/dosbalticrim"
+        },
+        "kCFStringEncodingDOSCanadianFrench": {
+          "doc": "Code page 863.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/doscanadianfrench"
+        },
+        "kCFStringEncodingDOSChineseSimplif": {
+          "doc": "Code page 936, also for Windows.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/doschinesesimplif"
+        },
+        "kCFStringEncodingDOSChineseTrad": {
+          "doc": "Code page 950, also for Windows.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/doschinesetrad"
+        },
+        "kCFStringEncodingDOSCyrillic": {
+          "doc": "Code page 855, IBM Cyrillic.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/doscyrillic"
+        },
+        "kCFStringEncodingDOSGreek": {
+          "doc": "Code page 737 (formerly code page 437G).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/dosgreek"
+        },
+        "kCFStringEncodingDOSGreek1": {
+          "doc": "Code page 851.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/dosgreek1"
+        },
+        "kCFStringEncodingDOSGreek2": {
+          "doc": "Code page 869, IBM Modern Greek.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/dosgreek2"
+        },
+        "kCFStringEncodingDOSHebrew": {
+          "doc": "Code page 862.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/doshebrew"
+        },
+        "kCFStringEncodingDOSIcelandic": {
+          "doc": "Code page 861.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/dosicelandic"
+        },
+        "kCFStringEncodingDOSJapanese": {
+          "doc": "Code page 932, also for Windows.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/dosjapanese"
+        },
+        "kCFStringEncodingDOSKorean": {
+          "doc": "Code page 949, also for Windows; Unified Hangul Code.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/doskorean"
+        },
+        "kCFStringEncodingDOSLatin1": {
+          "doc": "Code page 850, “Multilingual”.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/doslatin1"
+        },
+        "kCFStringEncodingDOSLatin2": {
+          "doc": "Code page 852, Slavic.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/doslatin2"
+        },
+        "kCFStringEncodingDOSLatinUS": {
+          "doc": "Code page 437.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/doslatinus"
+        },
+        "kCFStringEncodingDOSNordic": {
+          "doc": "Code page 865.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/dosnordic"
+        },
+        "kCFStringEncodingDOSPortuguese": {
+          "doc": "Code page 860.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/dosportuguese"
+        },
+        "kCFStringEncodingDOSRussian": {
+          "doc": "Code page 866.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/dosrussian"
+        },
+        "kCFStringEncodingDOSThai": {
+          "doc": "Code page 874, also for Windows.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/dosthai"
+        },
+        "kCFStringEncodingDOSTurkish": {
+          "doc": "Code page 857, IBM Turkish.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/dosturkish"
+        },
+        "kCFStringEncodingEBCDIC_CP037": {
+          "doc": "code page 037, extended EBCDIC (Latin-1 set) for US, Canada.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/ebcdic_cp037"
+        },
+        "kCFStringEncodingEBCDIC_US": {
+          "doc": "basic EBCDIC-US",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/ebcdic_us"
+        },
+        "kCFStringEncodingEUC_CN": {
+          "doc": "ISO 646, GB 2312-80.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/euc_cn"
+        },
+        "kCFStringEncodingEUC_JP": {
+          "doc": "ISO 646, 1-byte katakana, JIS 208, JIS 212.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/euc_jp"
+        },
+        "kCFStringEncodingEUC_KR": {
+          "doc": "ISO 646, KS C 5601-1987.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/euc_kr"
+        },
+        "kCFStringEncodingEUC_TW": {
+          "doc": "ISO 646, CNS 11643-1992 Planes 1-16.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/euc_tw"
+        },
+        "kCFStringEncodingGBK_95": {
+          "doc": "Annex to GB 13000-93; for Windows 95.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/gbk_95"
+        },
+        "kCFStringEncodingHZ_GB_2312": {
+          "doc": "HZ (RFC 1842, for Chinese mail \u0026 news).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/hz_gb_2312"
+        },
+        "kCFStringEncodingISOLatin10": {
+          "doc": "ISO 8859-16.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/isolatin10"
+        },
+        "kCFStringEncodingISOLatin2": {
+          "doc": "ISO 8859-2.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/isolatin2"
+        },
+        "kCFStringEncodingISOLatin3": {
+          "doc": "ISO 8859-3.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/isolatin3"
+        },
+        "kCFStringEncodingISOLatin4": {
+          "doc": "ISO 8859-4.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/isolatin4"
+        },
+        "kCFStringEncodingISOLatin5": {
+          "doc": "ISO 8859-9.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/isolatin5"
+        },
+        "kCFStringEncodingISOLatin6": {
+          "doc": "ISO 8859-10.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/isolatin6"
+        },
+        "kCFStringEncodingISOLatin7": {
+          "doc": "ISO 8859-13.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/isolatin7"
+        },
+        "kCFStringEncodingISOLatin8": {
+          "doc": "ISO 8859-14.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/isolatin8"
+        },
+        "kCFStringEncodingISOLatin9": {
+          "doc": "ISO 8859-15.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/isolatin9"
+        },
+        "kCFStringEncodingISOLatinArabic": {
+          "doc": "ISO 8859-6, =ASMO 708, =DOS CP 708.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/isolatinarabic"
+        },
+        "kCFStringEncodingISOLatinCyrillic": {
+          "doc": "ISO 8859-5.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/isolatincyrillic"
+        },
+        "kCFStringEncodingISOLatinGreek": {
+          "doc": "ISO 8859-7.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/isolatingreek"
+        },
+        "kCFStringEncodingISOLatinHebrew": {
+          "doc": "ISO 8859-8.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/isolatinhebrew"
+        },
+        "kCFStringEncodingISOLatinThai": {
+          "doc": "ISO 8859-11.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/isolatinthai"
+        },
+        "kCFStringEncodingISO_2022_JP_1": {
+          "doc": "RFC 2237.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/iso_2022_jp_1"
+        },
+        "kCFStringEncodingISO_2022_JP_3": {
+          "doc": "JIS X0213.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/iso_2022_jp_3"
+        },
+        "kCFStringEncodingKOI8_R": {
+          "doc": "Russian internet standard.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/koi8_r"
+        },
+        "kCFStringEncodingKOI8_U": {
+          "doc": "RFC 2319, Ukrainian.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/koi8_u"
+        },
+        "kCFStringEncodingKSC_5601_87": {
+          "doc": "Same as KSC 5601-92 without Johab annex.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/ksc_5601_87"
+        },
+        "kCFStringEncodingKSC_5601_92_Johab": {
+          "doc": "KSC 5601-92 Johab annex.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/ksc_5601_92_johab"
+        },
+        "kCFStringEncodingMacFarsi": {
+          "doc": "Like MacArabic but uses Farsi digits.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/macfarsi"
+        },
+        "kCFStringEncodingMacHFS": {
+          "doc": "Meta-value, should never appear in a table.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/machfs"
+        },
+        "kCFStringEncodingMacRomanLatin1": {
+          "doc": "Mac OS Roman permuted to align with ISO Latin-1.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/macromanlatin1"
+        },
+        "kCFStringEncodingMacVT100": {
+          "doc": "VT100102 font from Comm Toolbox: Latin-1 repertoire + box drawing etc.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/macvt100"
+        },
+        "kCFStringEncodingNextStepJapanese": {
+          "doc": "NextStep Japanese encoding.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/nextstepjapanese"
+        },
+        "kCFStringEncodingShiftJIS": {
+          "doc": "Plain Shift-JIS.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/shiftjis"
+        },
+        "kCFStringEncodingShiftJIS_X0213": {
+          "doc": "Shift-JIS format encoding of JIS X0213 planes 1 and 2.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/shiftjis_x0213"
+        },
+        "kCFStringEncodingShiftJIS_X0213_00": {
+          "doc": "Shift-JIS format encoding of JIS X0213 planes 1 and 2.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/shiftjis_x0213_00"
+        },
+        "kCFStringEncodingShiftJIS_X0213_MenKuTen": {
+          "doc": "JIS X0213 in plane-row-column notation.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/shiftjis_x0213_menkuten"
+        },
+        "kCFStringEncodingUTF7": {
+          "doc": "kTextEncodingUnicodeDefault + kUnicodeUTF7Format RFC2152.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/utf7"
+        },
+        "kCFStringEncodingUTF7_IMAP": {
+          "doc": "UTF-7 (IMAP folder variant) RFC3501.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/utf7_imap"
+        },
+        "kCFStringEncodingVISCII": {
+          "doc": "RFC 1456, Vietnamese.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/viscii"
+        },
+        "kCFStringEncodingWindowsArabic": {
+          "doc": "Code page 1256.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/windowsarabic"
+        },
+        "kCFStringEncodingWindowsBalticRim": {
+          "doc": "Code page 1257.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/windowsbalticrim"
+        },
+        "kCFStringEncodingWindowsCyrillic": {
+          "doc": "Code page 1251, Slavic Cyrillic.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/windowscyrillic"
+        },
+        "kCFStringEncodingWindowsGreek": {
+          "doc": "Code page 1253.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/windowsgreek"
+        },
+        "kCFStringEncodingWindowsHebrew": {
+          "doc": "Code page 1255.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/windowshebrew"
+        },
+        "kCFStringEncodingWindowsKoreanJohab": {
+          "doc": "Code page 1361, for Windows NT.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/windowskoreanjohab"
+        },
+        "kCFStringEncodingWindowsLatin2": {
+          "doc": "Code page 1250, Central Europe.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/windowslatin2"
+        },
+        "kCFStringEncodingWindowsLatin5": {
+          "doc": "Code page 1254, Turkish.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/windowslatin5"
+        },
+        "kCFStringEncodingWindowsVietnamese": {
+          "doc": "Code page 1258.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringencodings/windowsvietnamese"
+        }
+      }
+    },
+    "CFStringNormalizationForm": {
+      "doc": "Unicode normalization forms as described in Unicode Technical Report #15.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfstringnormalizationform",
+      "members": {
+        "kCFStringNormalizationFormC": {
+          "doc": "Canonical decomposition followed by canonical composition.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringnormalizationform/c"
+        },
+        "kCFStringNormalizationFormD": {
+          "doc": "Canonical decomposition.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringnormalizationform/d"
+        },
+        "kCFStringNormalizationFormKC": {
+          "doc": "Compatibility decomposition followed by canonical composition.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringnormalizationform/kc"
+        },
+        "kCFStringNormalizationFormKD": {
+          "doc": "Compatibility decomposition.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringnormalizationform/kd"
+        }
+      }
+    },
+    "CFStringTokenizerTokenType": {
+      "doc": "Token types returned by CFStringTokenizerGoToTokenAtIndex and CFStringTokenizerAdvanceToNextToken.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfstringtokenizertokentype",
+      "members": {
+        "kCFStringTokenizerTokenHasDerivedSubTokensMask": {
+          "doc": "Compound token which may contain derived subtokens.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringtokenizertokentype/hasderivedsubtokensmask"
+        },
+        "kCFStringTokenizerTokenHasHasNumbersMask": {
+          "doc": "Appears to contain a number.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringtokenizertokentype/hashasnumbersmask"
+        },
+        "kCFStringTokenizerTokenHasNonLettersMask": {
+          "doc": "Contains punctuation, symbols, and so on.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringtokenizertokentype/hasnonlettersmask"
+        },
+        "kCFStringTokenizerTokenHasSubTokensMask": {
+          "doc": "Compound token which may contain subtokens but with no derived subtokens.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringtokenizertokentype/hassubtokensmask"
+        },
+        "kCFStringTokenizerTokenIsCJWordMask": {
+          "doc": "Contains kana and/or ideographs.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringtokenizertokentype/iscjwordmask"
+        },
+        "kCFStringTokenizerTokenNone": {
+          "doc": "Has no token.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringtokenizertokentype/kcfstringtokenizertokennone"
+        },
+        "kCFStringTokenizerTokenNormal": {
+          "doc": "Has a normal token.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfstringtokenizertokentype/normal"
+        }
+      }
+    },
+    "CFTimeZoneNameStyle": {
+      "doc": "Index type for constants used to specify styles of time zone names.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cftimezonenamestyle",
+      "members": {
+        "kCFTimeZoneNameStyleDaylightSaving": {
+          "doc": "Specifies the daylight saving name style; for example, “Central Daylight Time” for the Central time zone.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cftimezonenamestyle/daylightsaving"
+        },
+        "kCFTimeZoneNameStyleGeneric": {
+          "doc": "Specifies the generic name style, which does not distinguish between daylight saving and standard time; for example, “Central Time” for the Central time zone.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cftimezonenamestyle/generic"
+        },
+        "kCFTimeZoneNameStyleShortDaylightSaving": {
+          "doc": "Specifies the short daylight saving name style; for example, “CDT” for the Central time zone.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cftimezonenamestyle/shortdaylightsaving"
+        },
+        "kCFTimeZoneNameStyleShortGeneric": {
+          "doc": "Specifies the short generic name style, which does not distinguish between daylight saving and standard time; for example, “CT” for the Central time zone.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cftimezonenamestyle/shortgeneric"
+        },
+        "kCFTimeZoneNameStyleShortStandard": {
+          "doc": "Specifies the short standard name style; for example, “CST” for the Central time zone.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cftimezonenamestyle/shortstandard"
+        },
+        "kCFTimeZoneNameStyleStandard": {
+          "doc": "Specifies the standard name style; for example, “Central Standard Time” for the Central time zone.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cftimezonenamestyle/standard"
+        }
+      }
+    },
+    "CFURLBookmarkCreationOptions": {
+      "doc": "Type for bookmark data creation options.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfurlbookmarkcreationoptions",
+      "members": {
+        "kCFURLBookmarkCreationMinimalBookmarkMask": {
+          "doc": "Specifies that an alias created with the bookmark data be created with minimal information, which may make it smaller but still able to resolve in certain ways.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlbookmarkcreationoptions/minimalbookmarkmask"
+        },
+        "kCFURLBookmarkCreationPreferFileIDResolutionMask": {
+          "doc": "Specifies that an alias created with the bookmark data prefers resolving with its embedded file ID.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlbookmarkcreationoptions/preferfileidresolutionmask"
+        },
+        "kCFURLBookmarkCreationSecurityScopeAllowOnlyReadAccess": {
+          "doc": "When combined with the kCFURLBookmarkCreationWithSecurityScope option, specifies that you want to create a security-scoped bookmark that, when resolved, provides a security-scoped URL allowing read-only access to a file-system resource; for use in an app that adopts App Sandbox.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlbookmarkcreationoptions/securityscopeallowonlyreadaccess"
+        },
+        "kCFURLBookmarkCreationSuitableForBookmarkFile": {
+          "doc": "Specifies that the bookmark data include properties required to create Finder alias files.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlbookmarkcreationoptions/suitableforbookmarkfile"
+        },
+        "kCFURLBookmarkCreationWithSecurityScope": {
+          "doc": "Specifies that you want to create a security-scoped bookmark that, when resolved, provides a security-scoped URL allowing read/write access to a file-system resource; for use in an app that adopts App Sandbox.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlbookmarkcreationoptions/withsecurityscope"
+        }
+      }
+    },
+    "CFURLBookmarkResolutionOptions": {
+      "doc": "Type for bookmark data resolution options.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfurlbookmarkresolutionoptions",
+      "members": {
+        "kCFBookmarkResolutionWithoutMountingMask": {
+          "doc": "Specifies that no volume should be mounted during resolution of the bookmark data.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlbookmarkresolutionoptions/cfbookmarkresolutionwithoutmountingmask"
+        },
+        "kCFBookmarkResolutionWithoutUIMask": {
+          "doc": "Specifies that no UI feedback accompany resolution of the bookmark data.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlbookmarkresolutionoptions/cfbookmarkresolutionwithoutuimask"
+        },
+        "kCFURLBookmarkResolutionWithSecurityScope": {
+          "doc": "Specifies that the security scope, applied to the bookmark when it was created, should be used during resolution of the bookmark data.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlbookmarkresolutionoptions/cfurlbookmarkresolutionwithsecurityscope"
+        }
+      }
+    },
+    "CFURLComponentType": {
+      "doc": "The types of components in a URL.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfurlcomponenttype",
+      "members": {
+        "kCFURLComponentFragment": {
+          "doc": "The URL’s fragment.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlcomponenttype/fragment"
+        },
+        "kCFURLComponentHost": {
+          "doc": "The URL’s host.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlcomponenttype/host"
+        },
+        "kCFURLComponentNetLocation": {
+          "doc": "The URL’s network location.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlcomponenttype/netlocation"
+        },
+        "kCFURLComponentParameterString": {
+          "doc": "The URL’s parameter string.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlcomponenttype/parameterstring"
+        },
+        "kCFURLComponentPassword": {
+          "doc": "The user’s password.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlcomponenttype/password"
+        },
+        "kCFURLComponentPath": {
+          "doc": "The URL’s path component.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlcomponenttype/path"
+        },
+        "kCFURLComponentPort": {
+          "doc": "The URL’s port.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlcomponenttype/port"
+        },
+        "kCFURLComponentQuery": {
+          "doc": "The URL’s query.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlcomponenttype/query"
+        },
+        "kCFURLComponentResourceSpecifier": {
+          "doc": "The URL’s resource specifier.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlcomponenttype/resourcespecifier"
+        },
+        "kCFURLComponentScheme": {
+          "doc": "The URL’s scheme.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlcomponenttype/scheme"
+        },
+        "kCFURLComponentUser": {
+          "doc": "The URL’s user.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlcomponenttype/user"
+        },
+        "kCFURLComponentUserInfo": {
+          "doc": "The user’s information.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlcomponenttype/userinfo"
+        }
+      }
+    },
+    "CFURLEnumeratorOptions": {
+      "doc": "Options for controlling enumerator behavior.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfurlenumeratoroptions",
+      "members": {
+        "kCFURLEnumeratorDefaultBehavior": {
+          "doc": "The enumerator performs its default behavior.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlenumeratoroptions/kcfurlenumeratordefaultbehavior"
+        },
+        "kCFURLEnumeratorDescendRecursively": {
+          "doc": "The enumerator recurses into each subdirectory enumerated.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlenumeratoroptions/descendrecursively"
+        },
+        "kCFURLEnumeratorGenerateFileReferenceURLs": {
+          "doc": "The enumerator generates file reference URLs instead of file path URLs.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlenumeratoroptions/generatefilereferenceurls"
+        },
+        "kCFURLEnumeratorIncludeDirectoriesPostOrder": {
+          "doc": "If provided along with the kCFURLEnumeratorDescendRecursively option, the recursive enumerator returns a directory’s URL after returning the URLs of the directory’s descendents.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlenumeratoroptions/includedirectoriespostorder"
+        },
+        "kCFURLEnumeratorIncludeDirectoriesPreOrder": {
+          "doc": "If provided along with the kCFURLEnumeratorDescendRecursively option, the recursive enumerator returns a directory’s URL before returning the URLs of the directory’s descendents.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlenumeratoroptions/includedirectoriespreorder"
+        },
+        "kCFURLEnumeratorSkipInvisibles": {
+          "doc": "The enumerator skips “hidden” or “invisible” objects.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlenumeratoroptions/skipinvisibles"
+        },
+        "kCFURLEnumeratorSkipPackageContents": {
+          "doc": "The enumerator skips package directory contents.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlenumeratoroptions/skippackagecontents"
+        }
+      }
+    },
+    "CFURLEnumeratorResult": {
+      "doc": "Result codes from the CFURLEnumeratorGetNextURL function.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfurlenumeratorresult",
+      "members": {
+        "kCFURLEnumeratorDirectoryPostOrderSuccess": {
+          "doc": "The recursive post-order enumerator returned the URL for a directory after having returned the URLs for all of the directory’s descendents.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlenumeratorresult/directorypostordersuccess"
+        },
+        "kCFURLEnumeratorEnd": {
+          "doc": "The enumeration is complete.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlenumeratorresult/end"
+        },
+        "kCFURLEnumeratorError": {
+          "doc": "An error occurred during enumeration. The error parameter of the function is populated with error information.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlenumeratorresult/error"
+        },
+        "kCFURLEnumeratorSuccess": {
+          "doc": "The enumerator was advanced successfully and returned a valid URL.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlenumeratorresult/success"
+        }
+      }
+    },
+    "CFURLError": {
+      "doc": "CFURL error codes.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfurlerror",
+      "members": {
+        "kCFURLImproperArgumentsError": {
+          "doc": "Indicates one or more arguments are improper.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlerror/improperargumentserror"
+        },
+        "kCFURLPropertyKeyUnavailableError": {
+          "doc": "Indicates a property key was unavailable.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlerror/propertykeyunavailableerror"
+        },
+        "kCFURLRemoteHostUnavailableError": {
+          "doc": "Indicates a remote host is unavailable.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlerror/remotehostunavailableerror"
+        },
+        "kCFURLResourceAccessViolationError": {
+          "doc": "Indicates an error in accessing a resource.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlerror/resourceaccessviolationerror"
+        },
+        "kCFURLResourceNotFoundError": {
+          "doc": "Indicates a resource was not found.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlerror/resourcenotfounderror"
+        },
+        "kCFURLTimeoutError": {
+          "doc": "Indicates a timeout.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlerror/timeouterror"
+        },
+        "kCFURLUnknownError": {
+          "doc": "Indicates an unknown error.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlerror/unknownerror"
+        },
+        "kCFURLUnknownPropertyKeyError": {
+          "doc": "Indicates a property key is unknown.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlerror/unknownpropertykeyerror"
+        },
+        "kCFURLUnknownSchemeError": {
+          "doc": "Indicates that the scheme is not recognized.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlerror/unknownschemeerror"
+        }
+      }
+    },
+    "CFURLPathStyle": {
+      "doc": "Options you can use to determine how CFURL functions parse a file system path name.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfurlpathstyle",
+      "members": {
+        "kCFURLHFSPathStyle": {
+          "doc": "Indicates a HFS style path name. Components are colon delimited. A leading colon indicates a relative path, otherwise the first path component denotes the volume.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlpathstyle/cfurlhfspathstyle"
+        },
+        "kCFURLPOSIXPathStyle": {
+          "doc": "Indicates a POSIX style path name. Components are slash delimited. A leading slash indicates an absolute path; a trailing slash is not significant.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlpathstyle/cfurlposixpathstyle"
+        },
+        "kCFURLWindowsPathStyle": {
+          "doc": "Indicates a Windows style path name.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfurlpathstyle/cfurlwindowspathstyle"
+        }
+      }
+    },
+    "CFXMLEntityTypeCode": {
+      "doc": "The entity type identification codes that the parser uses to describe XML entities.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfxmlentitytypecode",
+      "members": {
+        "kCFXMLEntityTypeCharacter": {
+          "doc": "Indicates a character entity type.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlentitytypecode/character"
+        },
+        "kCFXMLEntityTypeParameter": {
+          "doc": "Implies a parsed, internal entity.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlentitytypecode/parameter"
+        },
+        "kCFXMLEntityTypeParsedExternal": {
+          "doc": "Indicates a parsed, external entity.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlentitytypecode/parsedexternal"
+        },
+        "kCFXMLEntityTypeParsedInternal": {
+          "doc": "Indicates a parsed, internal entity.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlentitytypecode/parsedinternal"
+        },
+        "kCFXMLEntityTypeUnparsed": {
+          "doc": "Indicates an unparsed entity.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlentitytypecode/unparsed"
+        }
+      }
+    },
+    "CFXMLNodeTypeCode": {
+      "doc": "The various XML data type identification codes that the parser uses to describe XML structures.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfxmlnodetypecode",
+      "members": {
+        "kCFXMLNodeTypeAttribute": {
+          "doc": "Currently not used.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlnodetypecode/attribute"
+        },
+        "kCFXMLNodeTypeAttributeListDeclaration": {
+          "doc": "Indicates an attribute list declaration where the data string is the tag name and the additional information is a pointer to a CFXMLAttributeListDeclarationInfo structure.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlnodetypecode/attributelistdeclaration"
+        },
+        "kCFXMLNodeTypeCDATASection": {
+          "doc": "Indicates a CDATA section where the data string is the text of the CDATA and the additional information is NULL.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlnodetypecode/cdatasection"
+        },
+        "kCFXMLNodeTypeComment": {
+          "doc": "Indicates a comment section where the data string is the text of the comment and the additional information is NULL.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlnodetypecode/comment"
+        },
+        "kCFXMLNodeTypeDocument": {
+          "doc": "Indicates a document where the data string is NULL and the additional information is a pointer to a CFXMLDocumentInfo structure.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlnodetypecode/document"
+        },
+        "kCFXMLNodeTypeDocumentFragment": {
+          "doc": "Currently not used.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlnodetypecode/documentfragment"
+        },
+        "kCFXMLNodeTypeDocumentType": {
+          "doc": "Indicates a document type where the data string is the name given to the top-level element and the additional information is a pointer to a CFXMLDocumentTypeInfo structure.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlnodetypecode/documenttype"
+        },
+        "kCFXMLNodeTypeElement": {
+          "doc": "Indicates an element where the data string is the name of the tag and the additional information is a pointer to a CFXMLElementInfo structure.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlnodetypecode/element"
+        },
+        "kCFXMLNodeTypeElementTypeDeclaration": {
+          "doc": "Indicates an element type declaration where the data string is the tag name and the additional information is a pointer to a CFXMLElementTypeDeclarationInfo structure.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlnodetypecode/elementtypedeclaration"
+        },
+        "kCFXMLNodeTypeEntity": {
+          "doc": "Indicates an entity where the data string is the name of the entity and the additional information is a pointer to a CFXMLEntityInfo structure.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlnodetypecode/entity"
+        },
+        "kCFXMLNodeTypeEntityReference": {
+          "doc": "Indicates an entity reference where the data string is the name of the referenced entity and the additional information is a pointer to a CFXMLEntityReferenceInfo structure.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlnodetypecode/entityreference"
+        },
+        "kCFXMLNodeTypeNotation": {
+          "doc": "Indicates a notation where the data string is the notation name and the additional information is a pointer to a CFXMLNotationInfo structure.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlnodetypecode/notation"
+        },
+        "kCFXMLNodeTypeProcessingInstruction": {
+          "doc": "Indicates a processing instruction where the data string is the name of the target and the additional information is a pointer to a CFXMLProcessingInstructionInfo structure.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlnodetypecode/processinginstruction"
+        },
+        "kCFXMLNodeTypeText": {
+          "doc": "Indicates a text section where the data string is the text’s contents and the additional information is NULL.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlnodetypecode/text"
+        },
+        "kCFXMLNodeTypeWhitespace": {
+          "doc": "Indicates white space where the data string is the text of the white space and the additional information is NULL.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlnodetypecode/whitespace"
+        }
+      }
+    },
+    "CFXMLParserOptions": {
+      "doc": "Options you can use to control the parser’s treatment of an XML document.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparseroptions",
+      "members": {
+        "kCFXMLParserAddImpliedAttributes": {
+          "doc": "Where the DTD specifies implied attribute-value pairs for a particular element, add those pairs to any occurrences of the element in the element tree. Currently not supported.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparseroptions/addimpliedattributes"
+        },
+        "kCFXMLParserAllOptions": {
+          "doc": "Makes the parser do the most work, returning only the pure elementtree.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparseroptions/alloptions"
+        },
+        "kCFXMLParserNoOptions": {
+          "doc": "Leaves the XML as “intact” as possible (reports all structures; performs no replacements).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparseroptions/kcfxmlparsernooptions"
+        },
+        "kCFXMLParserReplacePhysicalEntities": {
+          "doc": "Replaces declared entities like \u0026lt;. Note that other than the 5 predefined entities (lt, gt, quot, amp, apos), these must be defined in the DTD. Currently not supported.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparseroptions/replacephysicalentities"
+        },
+        "kCFXMLParserResolveExternalEntities": {
+          "doc": "Resolves all external entities.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparseroptions/resolveexternalentities"
+        },
+        "kCFXMLParserSkipMetaData": {
+          "doc": "Silently skip over metadata constructs (the DTD and comments).",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparseroptions/skipmetadata"
+        },
+        "kCFXMLParserValidateDocument": {
+          "doc": "Validates the document against its grammar from the DTD, reporting any errors. Currently not supported.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparseroptions/validatedocument"
+        }
+      }
+    },
+    "CFXMLParserStatusCode": {
+      "doc": "The various status and error flags that can be returned by the parser.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparserstatuscode",
+      "members": {
+        "kCFXMLErrorElementlessDocument": {
+          "doc": "Indicates a document containing no elements.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparserstatuscode/errorelementlessdocument"
+        },
+        "kCFXMLErrorEncodingConversionFailure": {
+          "doc": "Indicates an encoding conversion error.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparserstatuscode/errorencodingconversionfailure"
+        },
+        "kCFXMLErrorMalformedCDSect": {
+          "doc": "Indicates a malformed CDATA section.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparserstatuscode/errormalformedcdsect"
+        },
+        "kCFXMLErrorMalformedCharacterReference": {
+          "doc": "Indicates a malformed character reference.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparserstatuscode/errormalformedcharacterreference"
+        },
+        "kCFXMLErrorMalformedCloseTag": {
+          "doc": "Indicates a malformed close tag.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparserstatuscode/errormalformedclosetag"
+        },
+        "kCFXMLErrorMalformedComment": {
+          "doc": "Indicates a malformed comment.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparserstatuscode/errormalformedcomment"
+        },
+        "kCFXMLErrorMalformedDTD": {
+          "doc": "Indicates a malformed DTD.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparserstatuscode/errormalformeddtd"
+        },
+        "kCFXMLErrorMalformedDocument": {
+          "doc": "Indicates a malformed document.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparserstatuscode/errormalformeddocument"
+        },
+        "kCFXMLErrorMalformedName": {
+          "doc": "Indicates a malformed name.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparserstatuscode/errormalformedname"
+        },
+        "kCFXMLErrorMalformedParsedCharacterData": {
+          "doc": "Indicates malformed character data.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparserstatuscode/errormalformedparsedcharacterdata"
+        },
+        "kCFXMLErrorMalformedProcessingInstruction": {
+          "doc": "Indicates a malformed processing instruction.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparserstatuscode/errormalformedprocessinginstruction"
+        },
+        "kCFXMLErrorMalformedStartTag": {
+          "doc": "Indicates a malformed start tag.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparserstatuscode/errormalformedstarttag"
+        },
+        "kCFXMLErrorNoData": {
+          "doc": "Indicates a no data error.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparserstatuscode/errornodata"
+        },
+        "kCFXMLErrorUnexpectedEOF": {
+          "doc": "Indicates an unexpected EOF occurred.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparserstatuscode/errorunexpectedeof"
+        },
+        "kCFXMLErrorUnknownEncoding": {
+          "doc": "Indicates an unknown encoding error.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparserstatuscode/errorunknownencoding"
+        },
+        "kCFXMLStatusParseInProgress": {
+          "doc": "Indicates the parser is in progress.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparserstatuscode/statusparseinprogress"
+        },
+        "kCFXMLStatusParseNotBegun": {
+          "doc": "Indicates the parser has not begun.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparserstatuscode/statusparsenotbegun"
+        },
+        "kCFXMLStatusParseSuccessful": {
+          "doc": "Indicates the parser was successful.",
+          "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparserstatuscode/kcfxmlstatusparsesuccessful"
+        }
+      }
+    },
+    "CGRectEdge": {
+      "url": "https://developer.apple.com/documentation/corefoundation/cgrectedge"
+    }
+  },
+  "structs": {
+    "CFAllocatorContext": {
+      "doc": "A structure that defines the context or operating environment for an allocator (CFAllocator) object. Every Core Foundation allocator object must have a context defined for it.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfallocatorcontext"
+    },
+    "CFArrayCallBacks": {
+      "doc": "Structure containing the callbacks of a CFArray.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfarraycallbacks"
+    },
+    "CFBagCallBacks": {
+      "doc": "This structure contains the callbacks used to retain, release, describe, and compare the values of a CFBag object.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfbagcallbacks"
+    },
+    "CFBinaryHeapCallBacks": {
+      "doc": "Structure containing the callbacks for values for a CFBinaryHeap object.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfbinaryheapcallbacks"
+    },
+    "CFBinaryHeapCompareContext": {
+      "doc": "Not used.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfbinaryheapcomparecontext"
+    },
+    "CFDictionaryKeyCallBacks": {
+      "doc": "This structure contains the callbacks used to retain, release, describe, and compare the keys in a dictionary.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfdictionarykeycallbacks"
+    },
+    "CFDictionaryValueCallBacks": {
+      "doc": "This structure contains the callbacks used to retain, release, describe, and compare the values in a dictionary.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfdictionaryvaluecallbacks"
+    },
+    "CFFileDescriptorContext": {
+      "doc": "Defines a structure for the context of a CFFileDescriptor.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cffiledescriptorcontext"
+    },
+    "CFGregorianDate": {
+      "doc": "Structure used to represent a point in time using the Gregorian calendar.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfgregoriandate"
+    },
+    "CFGregorianUnits": {
+      "doc": "Structure used to represent a time interval in Gregorian units.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfgregorianunits"
+    },
+    "CFMachPortContext": {
+      "doc": "A structure that contains program-defined data and callbacks with which you can configure a CFMachPort object’s behavior.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfmachportcontext"
+    },
+    "CFMessagePortContext": {
+      "doc": "A structure that contains program-defined data and callbacks with which you can configure a CFMessagePort object’s behavior.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfmessageportcontext"
+    },
+    "CFRange": {
+      "doc": "A structure representing a range of sequential items in a container, such as characters in a buffer or elements in a collection.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfrange"
+    },
+    "CFRunLoopObserverContext": {
+      "doc": "A structure that contains program-defined data and callbacks with which you can configure a CFRunLoopObserver object’s behavior.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfrunloopobservercontext"
+    },
+    "CFRunLoopSourceContext": {
+      "doc": "A structure that contains program-defined data and callbacks with which you can configure a version 0 CFRunLoopSource’s behavior.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfrunloopsourcecontext"
+    },
+    "CFRunLoopSourceContext1": {
+      "doc": "A structure that contains program-defined data and callbacks with which you can configure a version 1 CFRunLoopSource’s behavior.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfrunloopsourcecontext1"
+    },
+    "CFRunLoopTimerContext": {
+      "doc": "A structure that contains program-defined data and callbacks with which you can configure a CFRunLoopTimer’s behavior.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfrunlooptimercontext"
+    },
+    "CFSetCallBacks": {
+      "doc": "This structure contains the callbacks used to retain, release, describe, and compare the values of a CFSet object.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfsetcallbacks"
+    },
+    "CFSocketContext": {
+      "doc": "A structure that contains program-defined data and callbacks with which you can configure a CFSocket object’s behavior.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfsocketcontext"
+    },
+    "CFSocketSignature": {
+      "doc": "A structure that fully specifies the communication protocol and connection address of a CFSocket object.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfsocketsignature"
+    },
+    "CFStreamClientContext": {
+      "doc": "A structure that contains program-defined data and callbacks with which you can configure a stream’s client behavior.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfstreamclientcontext"
+    },
+    "CFStreamError": {
+      "doc": "The structure returned by CFReadStreamGetError and CFWriteStreamGetError.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfstreamerror"
+    },
+    "CFStringInlineBuffer": {
+      "doc": "Defines the buffer and related fields used for in-line buffer access of characters in CFString objects.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfstringinlinebuffer"
+    },
+    "CFSwappedFloat32": {
+      "doc": "Structure holding a 32-bit float value in a platform-independentbyte order.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfswappedfloat32"
+    },
+    "CFSwappedFloat64": {
+      "doc": "Structure holding a 64-bit float value in a platform-independentbyte order.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfswappedfloat64"
+    },
+    "CFTreeContext": {
+      "doc": "Structure containing program-defined data and callbacks for a CFTree object.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cftreecontext"
+    },
+    "CFUUIDBytes": {
+      "doc": "A 128-bit struct that represents a UUID as raw bytes.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfuuidbytes"
+    },
+    "CFXMLAttributeDeclarationInfo": {
+      "doc": "Contains information about an element attribute definition.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfxmlattributedeclarationinfo"
+    },
+    "CFXMLAttributeListDeclarationInfo": {
+      "doc": "Contains a list of the attributes associated with an element.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfxmlattributelistdeclarationinfo"
+    },
+    "CFXMLDocumentInfo": {
+      "doc": "Contains the source URL and text encoding information for the XML document.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfxmldocumentinfo"
+    },
+    "CFXMLDocumentTypeInfo": {
+      "doc": "Contains the external ID of the DTD.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfxmldocumenttypeinfo"
+    },
+    "CFXMLElementInfo": {
+      "doc": "Contains a list of element attributes packaged as CFDictionary key/value pairs.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfxmlelementinfo"
+    },
+    "CFXMLElementTypeDeclarationInfo": {
+      "doc": "Contains a description of the element type.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfxmlelementtypedeclarationinfo"
+    },
+    "CFXMLEntityInfo": {
+      "doc": "Contains information describing an XML entity.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfxmlentityinfo"
+    },
+    "CFXMLEntityReferenceInfo": {
+      "doc": "Contains information describing an XML entity reference.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfxmlentityreferenceinfo"
+    },
+    "CFXMLExternalID": {
+      "doc": "Contains the system and public IDs for an external entity reference.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfxmlexternalid"
+    },
+    "CFXMLNotationInfo": {
+      "doc": "Contains the external ID of the notation.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfxmlnotationinfo"
+    },
+    "CFXMLParserCallBacks": {
+      "doc": "Contains version information and function pointers to callbacks needed when parsing XML.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparsercallbacks"
+    },
+    "CFXMLParserContext": {
+      "doc": "Contains version information and function pointers to callbacks used when handling a program-defined context.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfxmlparsercontext"
+    },
+    "CFXMLProcessingInstructionInfo": {
+      "doc": "Contains the text of the processing instruction.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cfxmlprocessinginstructioninfo"
+    },
+    "CGAffineTransform": {
+      "url": "https://developer.apple.com/documentation/corefoundation/cgaffinetransform"
+    },
+    "CGAffineTransformComponents": {
+      "url": "https://developer.apple.com/documentation/corefoundation/cgaffinetransformcomponents"
+    },
+    "CGPoint": {
+      "url": "https://developer.apple.com/documentation/corefoundation/cgpoint"
+    },
+    "CGRect": {
+      "url": "https://developer.apple.com/documentation/corefoundation/cgrect"
+    },
+    "CGSize": {
+      "doc": "A structure that contains width and height values.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cgsize"
+    },
+    "CGVector": {
+      "doc": "A structure that contains a two-dimensional vector.",
+      "url": "https://developer.apple.com/documentation/corefoundation/cgvector"
+    }
+  }
+}

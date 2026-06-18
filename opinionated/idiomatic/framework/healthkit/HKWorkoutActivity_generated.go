@@ -31,6 +31,8 @@ func WorkoutActivityFromID(id objc.ID) *WorkoutActivity {
 	return &WorkoutActivity{inner: raw.HKWorkoutActivityFromID(id)}
 }
 
+// @method        initWithWorkoutConfiguration:startDate:endDate:metadata: @abstract      Initialize a new HKWorkoutActivity with the specified values. @param     workoutConfiguration    The configuration object describing the workout activity. @param     startDate               The point in time when the workout activity was started. @param     endDate                 The point in time when the workout activity was ended. @param     metadata                Metadata for the workout activity. (Optional)
+//
 // NewWorkoutActivityWithWorkoutConfigurationStartDateEndDateMetadata creates a new [WorkoutActivity].
 func NewWorkoutActivityWithWorkoutConfigurationStartDateEndDateMetadata(workoutConfiguration *raw.HKWorkoutConfiguration, startDate *foundation.NSDate, endDate *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *WorkoutActivity {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKWorkoutActivity")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewWorkoutActivityWithWorkoutConfigurationStartDateEndDateMetadata(workoutC
 	return &WorkoutActivity{inner: raw.HKWorkoutActivityFromID(_id)}
 }
 
+// @method        statisticsForType: @discussion    Returns an HKStatistics object containing the statistics for all the samples of the given type that have been added to the workout within the date interval of this activity. If there are no samples of the given type then nil is returned. @param         quantityType    The quantity type to gather statistics about.
+//
 // StatisticsForType calls the underlying StatisticsForType.
 func (x *WorkoutActivity) StatisticsForType(quantityType *raw.HKQuantityType) *Statistics {
 	_r := x.inner.StatisticsForType(quantityType)
@@ -47,11 +51,15 @@ func (x *WorkoutActivity) StatisticsForType(quantityType *raw.HKQuantityType) *S
 	return &Statistics{inner: _r}
 }
 
+// @property      UUID @abstract      A unique identifier of the activity in the HealthKit database.
+//
 // UUID calls the underlying UUID.
 func (x *WorkoutActivity) UUID() *foundation.NSUUID {
 	return x.inner.UUID()
 }
 
+// @property      workoutConfiguration @abstract      The configuration object describing the workout activity.
+//
 // WorkoutConfiguration calls the underlying WorkoutConfiguration.
 func (x *WorkoutActivity) WorkoutConfiguration() *WorkoutConfiguration {
 	_r := x.inner.WorkoutConfiguration()
@@ -61,26 +69,36 @@ func (x *WorkoutActivity) WorkoutConfiguration() *WorkoutConfiguration {
 	return &WorkoutConfiguration{inner: _r}
 }
 
+// @property      startDate @abstract      The point in time when the workout activity was started.
+//
 // StartDate calls the underlying StartDate.
 func (x *WorkoutActivity) StartDate() *foundation.NSDate {
 	return x.inner.StartDate()
 }
 
+// @property      endDate @abstract      The point in time when the workout activity was ended. @discussion    This value is nil when a workout activity is in progress.
+//
 // EndDate calls the underlying EndDate.
 func (x *WorkoutActivity) EndDate() *foundation.NSDate {
 	return x.inner.EndDate()
 }
 
+// @property      metadata @abstract      Extra information describing properties of the workout activity. @discussion    Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
+//
 // Metadata calls the underlying Metadata.
 func (x *WorkoutActivity) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.Metadata()
 }
 
+// @property      duration @abstract      The length of time that the workout activity was recording @discussion    The duration is derived from the start and end dates of the activity and takes into account periods that the activity was paused. Periods that the activity was paused are based off of the workoutEvents property of the parent workout object.
+//
 // Duration calls the underlying Duration.
 func (x *WorkoutActivity) Duration() float64 {
 	return x.inner.Duration()
 }
 
+// @property      workoutEvents @abstract      An array of HKWorkoutEvents that occurred during the workout activity. @discussion    These events will be ordered by date in ascending order. These events are a subset of the workout events that take place between the start date and end date of the activity. This includes any event that overlaps the activity, even partially. Consequently, some events may be included in more than one activity.
+//
 // WorkoutEvents returns the collection as a Go slice.
 func (x *WorkoutActivity) WorkoutEvents() []*WorkoutEvent {
 	arr := x.inner.WorkoutEvents()
@@ -92,6 +110,8 @@ func (x *WorkoutActivity) WorkoutEvents() []*WorkoutEvent {
 	})
 }
 
+// @property      allStatistics @abstract      A dictionary of statistics per quantity type during the activity @discussion    This dictionary will contain HKStatistics objects containing the statistics by quantity sample type for all of the samples that have been added to the workout within the date interval of this activity.
+//
 // AllStatistics calls the underlying AllStatistics.
 func (x *WorkoutActivity) AllStatistics() *foundation.NSDictionary[*raw.HKQuantityType, *raw.HKStatistics] {
 	return x.inner.AllStatistics()

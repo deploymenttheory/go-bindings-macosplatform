@@ -37,11 +37,15 @@ func NewDelegatingPlaybackCoordinatorPauseCommand() *DelegatingPlaybackCoordinat
 	return &DelegatingPlaybackCoordinatorPauseCommand{inner: raw.AVDelegatingPlaybackCoordinatorPauseCommandFromID(_id)}
 }
 
+// Indicates that playback is anticipated and the player should begin buffering if necessary. When shouldBufferInAnticipationOfPlayback is YES, some participant wants to resume playback at the rate indicated by the anticipatedPlaybackRate property. This should be treated similar to receiving a separate AVDelegatingPlaybackCoordinatorBufferingCommand. If YES, the command should only be considered complete once the player is ready to receive an AVDelegatingPlaybackCoordinatorPlayCommand with the indicated rate.
+//
 // ShouldBufferInAnticipationOfPlayback calls the underlying ShouldBufferInAnticipationOfPlayback.
 func (x *DelegatingPlaybackCoordinatorPauseCommand) ShouldBufferInAnticipationOfPlayback() bool {
 	return x.inner.ShouldBufferInAnticipationOfPlayback()
 }
 
+// The rate to prepare for if shouldBufferInAnticipationOfPlayback is YES.
+//
 // AnticipatedPlaybackRate calls the underlying AnticipatedPlaybackRate.
 func (x *DelegatingPlaybackCoordinatorPauseCommand) AnticipatedPlaybackRate() float32 {
 	return x.inner.AnticipatedPlaybackRate()

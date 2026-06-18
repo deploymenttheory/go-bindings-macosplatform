@@ -31,6 +31,8 @@ func AssetWriterInputMetadataAdaptorFromID(id objc.ID) *AssetWriterInputMetadata
 	return &AssetWriterInputMetadataAdaptor{inner: raw.AVAssetWriterInputMetadataAdaptorFromID(id)}
 }
 
+// Creates a new timed metadator group adaptor to receive instances of AVTimedMetadataGroup for writing to the output file. The instance of AVAssetWriterInput passed in to this method must have been created with a format hint indicating all possible combinations of identifier (or, alternatively, key and keySpace), dataType, and extendedLanguageTag that will be appended to the metadata adaptor. It is an error to append metadata items not represented in the input's format hint. For help creating a suitable format hint, see -[AVTimedMetadataGroup copyFormatDescription]. This method throws an exception for any of the following reasons: - input is already attached to another instance of AVAssetWriterInputMetadataAdaptor - input's asset writer has already started writing (progressed beyond AVAssetWriterStatusUnknown) - input's asset writer does not carry a source format hint - input's source format hint media subtype is not kCMMetadataFormatType_Boxed - Parameter input: An instance of AVAssetWriterInput to which the receiver should append groups of timed metadata. Only asset writer inputs that accept media data of type AVMediaTypeMetadata can be used to initialize a timed metadata group adaptor. - Returns: An instance of AVAssetWriterInputMetadataAdaptor.
+//
 // NewAssetWriterInputMetadataAdaptorWithAssetWriterInput creates a new [AssetWriterInputMetadataAdaptor].
 func NewAssetWriterInputMetadataAdaptorWithAssetWriterInput(input *raw.AVAssetWriterInput) *AssetWriterInputMetadataAdaptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetWriterInputMetadataAdaptor")), objc.RegisterName("alloc"))
@@ -38,11 +40,15 @@ func NewAssetWriterInputMetadataAdaptorWithAssetWriterInput(input *raw.AVAssetWr
 	return &AssetWriterInputMetadataAdaptor{inner: raw.AVAssetWriterInputMetadataAdaptorFromID(_id)}
 }
 
+// Appends a timed metadata group to the receiver. The receiver will retain the AVTimedMetadataGroup until it is done with it, and then release it. The timing of the metadata items in the output asset will correspond to the timeRange of the AVTimedMetadataGroup, regardless of the values of the time and duration properties of the individual items. Before calling this method, you must ensure that the input that underlies the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer. It is an error to invoke this method before starting a session (via -[AVAssetWriter startSessionAtSourceTime:]) or after ending a session (via -[AVAssetWriter endSessionAtSourceTime:]). This method throws an exception if the attached asset writer input has not been added to an asset writer or -startWriting has not been called on that asset writer. - Parameter timedMetadataGroup: The AVTimedMetadataGroup to be appended. - Returns: A BOOL value indicating success of appending the timed metadata group.  If a result of NO is returned, AVAssetWriter.error will contain more information about why apending the timed metadata group failed.
+//
 // AppendTimedMetadataGroup calls the underlying AppendTimedMetadataGroup.
 func (x *AssetWriterInputMetadataAdaptor) AppendTimedMetadataGroup(timedMetadataGroup *raw.AVTimedMetadataGroup) bool {
 	return x.inner.AppendTimedMetadataGroup(timedMetadataGroup)
 }
 
+// The asset writer input to which the receiver should append timed metadata groups.
+//
 // AssetWriterInput calls the underlying AssetWriterInput.
 func (x *AssetWriterInputMetadataAdaptor) AssetWriterInput() *AssetWriterInput {
 	_r := x.inner.AssetWriterInput()

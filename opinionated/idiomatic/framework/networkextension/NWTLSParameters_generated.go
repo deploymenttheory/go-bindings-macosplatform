@@ -36,65 +36,89 @@ func NewNWTLSParameters() *NWTLSParameters {
 	return &NWTLSParameters{inner: raw.NWTLSParametersFromID(_id)}
 }
 
+// @property TLSSessionID @discussion The session ID for the associated connection, used for TLS session resumption. This property is optional when using TLS.
+//
 // WithTLSSessionID sets the tLSSessionID property and returns the receiver for chaining.
 func (x *NWTLSParameters) WithTLSSessionID(tLSSessionID *foundation.NSData) *NWTLSParameters {
 	x.inner.SetTLSSessionID(tLSSessionID)
 	return x
 }
 
+// @property SSLCipherSuites @discussion The set of allowed cipher suites, as defined in <Security/CipherSuite.h>. If set to nil, the default cipher suites will be used.
+//
 // WithSSLCipherSuites sets the sSLCipherSuites property and returns the receiver for chaining.
 func (x *NWTLSParameters) WithSSLCipherSuites(sSLCipherSuites *foundation.NSSet[*foundation.NSNumber]) *NWTLSParameters {
 	x.inner.SetSSLCipherSuites(sSLCipherSuites)
 	return x
 }
 
+// @property minimumSSLProtocolVersion @discussion The minimum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version older than the minimum.
+//
 // WithMinimumSSLProtocolVersion sets the minimumSSLProtocolVersion property and returns the receiver for chaining.
 func (x *NWTLSParameters) WithMinimumSSLProtocolVersion(minimumSSLProtocolVersion uint) *NWTLSParameters {
 	x.inner.SetMinimumSSLProtocolVersion(minimumSSLProtocolVersion)
 	return x
 }
 
+// @property maximumSSLProtocolVersion @discussion The maximum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version newer than the maximum. This property should be used with caution, since it may limit the use of preferred SSL protocols.
+//
 // WithMaximumSSLProtocolVersion sets the maximumSSLProtocolVersion property and returns the receiver for chaining.
 func (x *NWTLSParameters) WithMaximumSSLProtocolVersion(maximumSSLProtocolVersion uint) *NWTLSParameters {
 	x.inner.SetMaximumSSLProtocolVersion(maximumSSLProtocolVersion)
 	return x
 }
 
+// @property TLSSessionID @discussion The session ID for the associated connection, used for TLS session resumption. This property is optional when using TLS.
+//
 // TLSSessionID calls the underlying TLSSessionID.
 func (x *NWTLSParameters) TLSSessionID() *foundation.NSData {
 	return x.inner.TLSSessionID()
 }
 
+// @property TLSSessionID @discussion The session ID for the associated connection, used for TLS session resumption. This property is optional when using TLS.
+//
 // SetTLSSessionID calls the underlying SetTLSSessionID.
 func (x *NWTLSParameters) SetTLSSessionID(tLSSessionID *foundation.NSData) {
 	x.inner.SetTLSSessionID(tLSSessionID)
 }
 
+// @property SSLCipherSuites @discussion The set of allowed cipher suites, as defined in <Security/CipherSuite.h>. If set to nil, the default cipher suites will be used.
+//
 // SSLCipherSuites calls the underlying SSLCipherSuites.
 func (x *NWTLSParameters) SSLCipherSuites() *foundation.NSSet[*foundation.NSNumber] {
 	return x.inner.SSLCipherSuites()
 }
 
+// @property SSLCipherSuites @discussion The set of allowed cipher suites, as defined in <Security/CipherSuite.h>. If set to nil, the default cipher suites will be used.
+//
 // SetSSLCipherSuites calls the underlying SetSSLCipherSuites.
 func (x *NWTLSParameters) SetSSLCipherSuites(sSLCipherSuites *foundation.NSSet[*foundation.NSNumber]) {
 	x.inner.SetSSLCipherSuites(sSLCipherSuites)
 }
 
+// @property minimumSSLProtocolVersion @discussion The minimum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version older than the minimum.
+//
 // MinimumSSLProtocolVersion calls the underlying MinimumSSLProtocolVersion.
 func (x *NWTLSParameters) MinimumSSLProtocolVersion() uint {
 	return x.inner.MinimumSSLProtocolVersion()
 }
 
+// @property minimumSSLProtocolVersion @discussion The minimum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version older than the minimum.
+//
 // SetMinimumSSLProtocolVersion calls the underlying SetMinimumSSLProtocolVersion.
 func (x *NWTLSParameters) SetMinimumSSLProtocolVersion(minimumSSLProtocolVersion uint) {
 	x.inner.SetMinimumSSLProtocolVersion(minimumSSLProtocolVersion)
 }
 
+// @property maximumSSLProtocolVersion @discussion The maximum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version newer than the maximum. This property should be used with caution, since it may limit the use of preferred SSL protocols.
+//
 // MaximumSSLProtocolVersion calls the underlying MaximumSSLProtocolVersion.
 func (x *NWTLSParameters) MaximumSSLProtocolVersion() uint {
 	return x.inner.MaximumSSLProtocolVersion()
 }
 
+// @property maximumSSLProtocolVersion @discussion The maximum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version newer than the maximum. This property should be used with caution, since it may limit the use of preferred SSL protocols.
+//
 // SetMaximumSSLProtocolVersion calls the underlying SetMaximumSSLProtocolVersion.
 func (x *NWTLSParameters) SetMaximumSSLProtocolVersion(maximumSSLProtocolVersion uint) {
 	x.inner.SetMaximumSSLProtocolVersion(maximumSSLProtocolVersion)

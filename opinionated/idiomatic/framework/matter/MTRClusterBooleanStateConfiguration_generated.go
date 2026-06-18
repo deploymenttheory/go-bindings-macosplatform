@@ -33,6 +33,8 @@ func MTRClusterBooleanStateConfigurationFromID(id objc.ID) *MTRClusterBooleanSta
 	return &MTRClusterBooleanStateConfiguration{inner: raw.MTRClusterBooleanStateConfigurationFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterBooleanStateConfigurationWithDeviceEndpointIDQueue creates a new [MTRClusterBooleanStateConfiguration].
 func NewMTRClusterBooleanStateConfigurationWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterBooleanStateConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterBooleanStateConfiguration")), objc.RegisterName("alloc"))

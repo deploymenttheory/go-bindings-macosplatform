@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents a Virtio console port in a VM.
+//
 // VirtioConsolePort wraps [raw.VZVirtioConsolePort] with a fluent Go API.
 type VirtioConsolePort struct {
 	inner *raw.VZVirtioConsolePort
@@ -36,12 +38,16 @@ func NewVirtioConsolePort() *VirtioConsolePort {
 	return &VirtioConsolePort{inner: raw.VZVirtioConsolePortFromID(_id)}
 }
 
+// An array of serial port attachments.
+//
 // WithAttachment sets the attachment property and returns the receiver for chaining.
 func (x *VirtioConsolePort) WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsolePort {
 	x.inner.SetAttachment(attachment.asSerialPortAttachment())
 	return x
 }
 
+// @abstract The console port name currently being used by this port. @discussion This property may not change while the VM is running. A null value indicates no name has been set.
+//
 // Name calls the underlying Name.
 func (x *VirtioConsolePort) Name() string {
 	_r := x.inner.Name()
@@ -51,6 +57,8 @@ func (x *VirtioConsolePort) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The console port attachment that's currently connected to this console port. @discussion This property may change at any time while the VM is running.
+//
 // Attachment calls the underlying Attachment.
 func (x *VirtioConsolePort) Attachment() *SerialPortAttachment {
 	_r := x.inner.Attachment()

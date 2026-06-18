@@ -35,11 +35,15 @@ func NewManager() *Manager {
 	return &Manager{inner: raw.CBManagerFromID(_id)}
 }
 
+// @property state @discussion The current state of the manager, initially set to <code>CBManagerStateUnknown</code>. Updates are provided by required delegate method {@link managerDidUpdateState:}.
+//
 // State calls the underlying State.
 func (x *Manager) State() CBManagerState {
 	return CBManagerState(x.inner.State())
 }
 
+// @property authorization @discussion The current authorization of the manager, initially set to <code>CBManagerAuthorizationNotDetermined</code>. Updates are provided by required delegate method {@link managerDidUpdateState:}. @seealso	state
+//
 // Authorization calls the underlying Authorization.
 func (x *Manager) Authorization() CBManagerAuthorization {
 	return CBManagerAuthorization(x.inner.Authorization())

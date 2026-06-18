@@ -36,36 +36,48 @@ func NewMatrixBinaryKernel() *MatrixBinaryKernel {
 	return &MatrixBinaryKernel{inner: raw.MPSMatrixBinaryKernelFromID(_id)}
 }
 
+// @property   primarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixBinaryKernel) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixBinaryKernel {
 	x.inner.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
 	return x
 }
 
+// @property   secondarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixBinaryKernel) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixBinaryKernel {
 	x.inner.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
 	return x
 }
 
+// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixBinaryKernel) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixBinaryKernel {
 	x.inner.SetResultMatrixOrigin(resultMatrixOrigin)
 	return x
 }
 
+// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+//
 // WithBatchStart sets the batchStart property and returns the receiver for chaining.
 func (x *MatrixBinaryKernel) WithBatchStart(batchStart uint) *MatrixBinaryKernel {
 	x.inner.SetBatchStart(batchStart)
 	return x
 }
 
+// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+//
 // WithBatchSize sets the batchSize property and returns the receiver for chaining.
 func (x *MatrixBinaryKernel) WithBatchSize(batchSize uint) *MatrixBinaryKernel {
 	x.inner.SetBatchSize(batchSize)
 	return x
 }
 
+// @property   primarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // PrimarySourceMatrixOrigin calls the underlying PrimarySourceMatrixOrigin.
 func (x *MatrixBinaryKernel) PrimarySourceMatrixOrigin() metal.MTLOrigin {
 	return x.inner.PrimarySourceMatrixOrigin()
@@ -76,6 +88,8 @@ func (x *MatrixBinaryKernel) SetPrimarySourceMatrixOrigin(primarySourceMatrixOri
 	x.inner.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
 }
 
+// @property   secondarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // SecondarySourceMatrixOrigin calls the underlying SecondarySourceMatrixOrigin.
 func (x *MatrixBinaryKernel) SecondarySourceMatrixOrigin() metal.MTLOrigin {
 	return x.inner.SecondarySourceMatrixOrigin()
@@ -86,6 +100,8 @@ func (x *MatrixBinaryKernel) SetSecondarySourceMatrixOrigin(secondarySourceMatri
 	x.inner.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
 }
 
+// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // ResultMatrixOrigin calls the underlying ResultMatrixOrigin.
 func (x *MatrixBinaryKernel) ResultMatrixOrigin() metal.MTLOrigin {
 	return x.inner.ResultMatrixOrigin()
@@ -96,6 +112,8 @@ func (x *MatrixBinaryKernel) SetResultMatrixOrigin(resultMatrixOrigin metal.MTLO
 	x.inner.SetResultMatrixOrigin(resultMatrixOrigin)
 }
 
+// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+//
 // BatchStart calls the underlying BatchStart.
 func (x *MatrixBinaryKernel) BatchStart() uint {
 	return x.inner.BatchStart()
@@ -106,6 +124,8 @@ func (x *MatrixBinaryKernel) SetBatchStart(batchStart uint) {
 	x.inner.SetBatchStart(batchStart)
 }
 
+// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+//
 // BatchSize calls the underlying BatchSize.
 func (x *MatrixBinaryKernel) BatchSize() uint {
 	return x.inner.BatchSize()

@@ -29,6 +29,8 @@ func MaterialFromID(id objc.ID) *Material {
 	return &Material{inner: raw.PHASEMaterialFromID(id)}
 }
 
+// @method initWithEngine:preset @abstract Initialize a new material from a preset.
+//
 // NewMaterialWithEnginePreset creates a new [Material].
 func NewMaterialWithEnginePreset(engine *raw.PHASEEngine, preset PHASEMaterialPreset) *Material {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEMaterial")), objc.RegisterName("alloc"))

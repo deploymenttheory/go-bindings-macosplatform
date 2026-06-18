@@ -35,6 +35,8 @@ func MTRBaseClusterGroupKeyManagementFromID(id objc.ID) *MTRBaseClusterGroupKeyM
 	return &MTRBaseClusterGroupKeyManagement{inner: raw.MTRBaseClusterGroupKeyManagementFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterGroupKeyManagementWithDeviceEndpointIDQueue creates a new [MTRBaseClusterGroupKeyManagement].
 func NewMTRBaseClusterGroupKeyManagementWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterGroupKeyManagement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterGroupKeyManagement")), objc.RegisterName("alloc"))
@@ -49,11 +51,15 @@ func NewMTRBaseClusterGroupKeyManagementWithDeviceEndpointQueue(device *raw.MTRB
 	return &MTRBaseClusterGroupKeyManagement{inner: raw.MTRBaseClusterGroupKeyManagementFromID(_id)}
 }
 
+// Command KeySetWrite Write a new set of keys for the given key set id.
+//
 // KeySetWriteWithParamsCompletion calls the underlying KeySetWriteWithParamsCompletion.
 func (x *MTRBaseClusterGroupKeyManagement) KeySetWriteWithParamsCompletion(params *raw.MTRGroupKeyManagementClusterKeySetWriteParams, completion func(unsafe.Pointer)) {
 	x.inner.KeySetWriteWithParamsCompletion(params, completion)
 }
 
+// Command KeySetRead Read the keys for a given key set id.
+//
 // KeySetReadWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterGroupKeyManagement) KeySetReadWithParamsCompletion(ctx context.Context, params *raw.MTRGroupKeyManagementClusterKeySetReadParams) (*MTRGroupKeyManagementClusterKeySetReadResponseParams, error) {
 	type _result struct {
@@ -80,11 +86,15 @@ func (x *MTRBaseClusterGroupKeyManagement) KeySetReadWithParamsCompletion(ctx co
 	}
 }
 
+// Command KeySetRemove Revoke a Root Key from a Group
+//
 // KeySetRemoveWithParamsCompletion calls the underlying KeySetRemoveWithParamsCompletion.
 func (x *MTRBaseClusterGroupKeyManagement) KeySetRemoveWithParamsCompletion(params *raw.MTRGroupKeyManagementClusterKeySetRemoveParams, completion func(unsafe.Pointer)) {
 	x.inner.KeySetRemoveWithParamsCompletion(params, completion)
 }
 
+// Command KeySetReadAllIndices Return the list of Group Key Sets associated with the accessing fabric
+//
 // KeySetReadAllIndicesWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterGroupKeyManagement) KeySetReadAllIndicesWithParamsCompletion(ctx context.Context, params *raw.MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) (*MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, error) {
 	type _result struct {

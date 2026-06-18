@@ -5,7 +5,8 @@
     emitted explicitly because gofmt preserves but does not insert blank lines
     between declarations.
 */}}
-{{define "with_setter"}}{{if .IsNSArray -}}
+{{define "with_setter"}}{{if .DocComment}}{{.DocComment}}//
+{{end}}{{if .IsNSArray -}}
 // {{.GoName}} sets the collection, converting the Go slice to an {{.ArrayClass}}.
 func (x *{{.TypeName}}) {{.GoName}}(items ...{{.SliceElemType}}) *{{.TypeName}} {
 if len(items) == 0 {

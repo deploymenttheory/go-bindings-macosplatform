@@ -42,11 +42,15 @@ func (x *ThumbnailRepresentation) Type() QLThumbnailRepresentationType {
 	return QLThumbnailRepresentationType(x.inner.Type())
 }
 
+// Returns the CGImage representation of the thumbnail.
+//
 // CGImage calls the underlying CGImage.
 func (x *ThumbnailRepresentation) CGImage() unsafe.Pointer {
 	return x.inner.CGImage()
 }
 
+// Returns the the effective rect within the thumbnail image representing the content of the document. In icon mode, this is the part of the image without all the image decorations.
+//
 // ContentRect calls the underlying ContentRect.
 func (x *ThumbnailRepresentation) ContentRect() corefoundation.CGRect {
 	return x.inner.ContentRect()

@@ -38,102 +38,136 @@ func NewAnimation() *Animation {
 	return &Animation{inner: raw.SCNAnimationFromID(_id)}
 }
 
+// The duration of the animation in seconds. Defaults to 0.
+//
 // WithDuration sets the duration property and returns the receiver for chaining.
 func (x *Animation) WithDuration(duration float64) *Animation {
 	x.inner.SetDuration(duration)
 	return x
 }
 
+// The key-path describing the property to be animated for single-property animations, nil for animations targetting multiple nodes. defaults to nil. The key-path uses the KVC syntax. It's also possible to target a specific sub-node with the following syntax: /<node-name>.property1.property2.field    (field is optional, <node-name> is the name of the targeted node).
+//
 // WithKeyPath sets the keyPath property and returns the receiver for chaining.
 func (x *Animation) WithKeyPath(keyPath string) *Animation {
 	x.inner.SetKeyPath(foundation.NSStringStringWithUTF8String(keyPath))
 	return x
 }
 
+// A timing function defining the pacing of the animation. Defaults to nil indicating linear pacing.
+//
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
 func (x *Animation) WithTimingFunction(timingFunction *TimingFunction) *Animation {
 	x.inner.SetTimingFunction(timingFunction.Unwrap())
 	return x
 }
 
+// Determines the receiver's blend-in duration. @discussion When the blendInDuration is greater than zero, the effect of the animation progressively increase from 0% to 100% during the specified duration.
+//
 // WithBlendInDuration sets the blendInDuration property and returns the receiver for chaining.
 func (x *Animation) WithBlendInDuration(blendInDuration float64) *Animation {
 	x.inner.SetBlendInDuration(blendInDuration)
 	return x
 }
 
+// Determines the receiver's blend-out duration. @discussion When the blendOutDuration is greater than zero, the effect of the animation progressively decrease from 100% to 0% at the end of the animation duration.
+//
 // WithBlendOutDuration sets the blendOutDuration property and returns the receiver for chaining.
 func (x *Animation) WithBlendOutDuration(blendOutDuration float64) *Animation {
 	x.inner.SetBlendOutDuration(blendOutDuration)
 	return x
 }
 
+// When true, the animation is removed from the render tree once its active duration has passed. Defaults to YES.
+//
 // WithRemovedOnCompletion sets the removedOnCompletion property and returns the receiver for chaining.
 func (x *Animation) WithRemovedOnCompletion(removedOnCompletion bool) *Animation {
 	x.inner.SetRemovedOnCompletion(removedOnCompletion)
 	return x
 }
 
+// When true, the animation is applied to the model tree once its active duration has passed. Defaults to NO.
+//
 // WithAppliedOnCompletion sets the appliedOnCompletion property and returns the receiver for chaining.
 func (x *Animation) WithAppliedOnCompletion(appliedOnCompletion bool) *Animation {
 	x.inner.SetAppliedOnCompletion(appliedOnCompletion)
 	return x
 }
 
+// The repeat count of the object. May be fractional. Defaults to 0.
+//
 // WithRepeatCount sets the repeatCount property and returns the receiver for chaining.
 func (x *Animation) WithRepeatCount(repeatCount float64) *Animation {
 	x.inner.SetRepeatCount(repeatCount)
 	return x
 }
 
+// When true, the object plays backwards after playing forwards. Defaults to NO.
+//
 // WithAutoreverses sets the autoreverses property and returns the receiver for chaining.
 func (x *Animation) WithAutoreverses(autoreverses bool) *Animation {
 	x.inner.SetAutoreverses(autoreverses)
 	return x
 }
 
+// The relative delay to start the animation, in relation to its parent animation if applicable. Defaults to 0. @discussion This property is bridged with CoreAnimations's beginTime. However, for top level animations, startDelay is relative to the current time (unlike CAAnimation's beginTime that is absolute). So if a CAAnimation has a non-zero beginTime, startDelay is initialized as caAnimation.beginTime - CACurrentMediaTime().
+//
 // WithStartDelay sets the startDelay property and returns the receiver for chaining.
 func (x *Animation) WithStartDelay(startDelay float64) *Animation {
 	x.inner.SetStartDelay(startDelay)
 	return x
 }
 
+// Additional offset in active local time. i.e. to convert from parent time tp to active local time t: t = (tp - begin) * speed + offset. Defaults to 0.
+//
 // WithTimeOffset sets the timeOffset property and returns the receiver for chaining.
 func (x *Animation) WithTimeOffset(timeOffset float64) *Animation {
 	x.inner.SetTimeOffset(timeOffset)
 	return x
 }
 
+// When true, the animation remains active after its active duration and evaluates to its end value. Defaults to NO.
+//
 // WithFillsForward sets the fillsForward property and returns the receiver for chaining.
 func (x *Animation) WithFillsForward(fillsForward bool) *Animation {
 	x.inner.SetFillsForward(fillsForward)
 	return x
 }
 
+// When true, the animation is active before its active duration and evaluates to its start value. Defaults to NO.
+//
 // WithFillsBackward sets the fillsBackward property and returns the receiver for chaining.
 func (x *Animation) WithFillsBackward(fillsBackward bool) *Animation {
 	x.inner.SetFillsBackward(fillsBackward)
 	return x
 }
 
+// Determines whether the receiver is evaluated using the scene time or the system time. Defaults to NO. @discussion A scene-time based animation is evaluated using the "sceneTime" value of the renderer that renders the scene. The "sceneTime" base is typically used by players or editors that need to preview, edit and being able to change the evaluation time. @see SCNSceneSourceAnimationImportPolicyKey
+//
 // WithUsesSceneTimeBase sets the usesSceneTimeBase property and returns the receiver for chaining.
 func (x *Animation) WithUsesSceneTimeBase(usesSceneTimeBase bool) *Animation {
 	x.inner.SetUsesSceneTimeBase(usesSceneTimeBase)
 	return x
 }
 
+// Called when the animation starts.
+//
 // WithAnimationDidStart sets the animationDidStart property and returns the receiver for chaining.
 func (x *Animation) WithAnimationDidStart(animationDidStart func(*raw.SCNAnimation, objc.ID)) *Animation {
 	x.inner.SetAnimationDidStart(animationDidStart)
 	return x
 }
 
+// Called when the animation either completes its active duration or is removed from the object it is attached to (i.e. the layer). The 'completed' argument of SCNAnimationDidStopBlock is true if the animation reached the end of its active duration without being removed.
+//
 // WithAnimationDidStop sets the animationDidStop property and returns the receiver for chaining.
 func (x *Animation) WithAnimationDidStop(animationDidStop func(*raw.SCNAnimation, objc.ID, bool)) *Animation {
 	x.inner.SetAnimationDidStop(animationDidStop)
 	return x
 }
 
+// Specifies the animation events attached to the receiver. @see SCNAnimationEvent
+//
 // WithAnimationEvents sets the collection, converting the Go slice to an NSArray.
 func (x *Animation) WithAnimationEvents(items ...*raw.SCNAnimationEvent) *Animation {
 	if len(items) == 0 {
@@ -152,18 +186,24 @@ func (x *Animation) WithAnimationEvents(items ...*raw.SCNAnimationEvent) *Animat
 	return x
 }
 
+// When true the value specified by the animation will be "added" to the current presentation value of the property to produce the new presentation value. The addition function is type-dependent, e.g. for affine transforms the two matrices are concatenated. Defaults to NO.
+//
 // WithAdditive sets the additive property and returns the receiver for chaining.
 func (x *Animation) WithAdditive(additive bool) *Animation {
 	x.inner.SetAdditive(additive)
 	return x
 }
 
+// The `cumulative' property affects how repeating animations produce their result. If true then the current value of the animation is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle. If false, the value is simply the value calculated for the current repeat cycle. Defaults to NO.
+//
 // WithCumulative sets the cumulative property and returns the receiver for chaining.
 func (x *Animation) WithCumulative(cumulative bool) *Animation {
 	x.inner.SetCumulative(cumulative)
 	return x
 }
 
+// The duration of the animation in seconds. Defaults to 0.
+//
 // Duration calls the underlying Duration.
 func (x *Animation) Duration() float64 {
 	return x.inner.Duration()
@@ -174,6 +214,8 @@ func (x *Animation) SetDuration(duration float64) {
 	x.inner.SetDuration(duration)
 }
 
+// The key-path describing the property to be animated for single-property animations, nil for animations targetting multiple nodes. defaults to nil. The key-path uses the KVC syntax. It's also possible to target a specific sub-node with the following syntax: /<node-name>.property1.property2.field    (field is optional, <node-name> is the name of the targeted node).
+//
 // KeyPath calls the underlying KeyPath.
 func (x *Animation) KeyPath() string {
 	_r := x.inner.KeyPath()
@@ -188,6 +230,8 @@ func (x *Animation) SetKeyPath(keyPath string) {
 	x.inner.SetKeyPath(foundation.NSStringStringWithUTF8String(keyPath))
 }
 
+// A timing function defining the pacing of the animation. Defaults to nil indicating linear pacing.
+//
 // TimingFunction calls the underlying TimingFunction.
 func (x *Animation) TimingFunction() *TimingFunction {
 	_r := x.inner.TimingFunction()
@@ -202,6 +246,8 @@ func (x *Animation) SetTimingFunction(timingFunction *raw.SCNTimingFunction) {
 	x.inner.SetTimingFunction(timingFunction)
 }
 
+// Determines the receiver's blend-in duration. @discussion When the blendInDuration is greater than zero, the effect of the animation progressively increase from 0% to 100% during the specified duration.
+//
 // BlendInDuration calls the underlying BlendInDuration.
 func (x *Animation) BlendInDuration() float64 {
 	return x.inner.BlendInDuration()
@@ -212,6 +258,8 @@ func (x *Animation) SetBlendInDuration(blendInDuration float64) {
 	x.inner.SetBlendInDuration(blendInDuration)
 }
 
+// Determines the receiver's blend-out duration. @discussion When the blendOutDuration is greater than zero, the effect of the animation progressively decrease from 100% to 0% at the end of the animation duration.
+//
 // BlendOutDuration calls the underlying BlendOutDuration.
 func (x *Animation) BlendOutDuration() float64 {
 	return x.inner.BlendOutDuration()
@@ -222,6 +270,8 @@ func (x *Animation) SetBlendOutDuration(blendOutDuration float64) {
 	x.inner.SetBlendOutDuration(blendOutDuration)
 }
 
+// When true, the animation is removed from the render tree once its active duration has passed. Defaults to YES.
+//
 // IsRemovedOnCompletion calls the underlying IsRemovedOnCompletion.
 func (x *Animation) IsRemovedOnCompletion() bool {
 	return x.inner.IsRemovedOnCompletion()
@@ -232,6 +282,8 @@ func (x *Animation) SetRemovedOnCompletion(removedOnCompletion bool) {
 	x.inner.SetRemovedOnCompletion(removedOnCompletion)
 }
 
+// When true, the animation is applied to the model tree once its active duration has passed. Defaults to NO.
+//
 // IsAppliedOnCompletion calls the underlying IsAppliedOnCompletion.
 func (x *Animation) IsAppliedOnCompletion() bool {
 	return x.inner.IsAppliedOnCompletion()
@@ -242,6 +294,8 @@ func (x *Animation) SetAppliedOnCompletion(appliedOnCompletion bool) {
 	x.inner.SetAppliedOnCompletion(appliedOnCompletion)
 }
 
+// The repeat count of the object. May be fractional. Defaults to 0.
+//
 // RepeatCount calls the underlying RepeatCount.
 func (x *Animation) RepeatCount() float64 {
 	return x.inner.RepeatCount()
@@ -252,6 +306,8 @@ func (x *Animation) SetRepeatCount(repeatCount float64) {
 	x.inner.SetRepeatCount(repeatCount)
 }
 
+// When true, the object plays backwards after playing forwards. Defaults to NO.
+//
 // Autoreverses calls the underlying Autoreverses.
 func (x *Animation) Autoreverses() bool {
 	return x.inner.Autoreverses()
@@ -262,6 +318,8 @@ func (x *Animation) SetAutoreverses(autoreverses bool) {
 	x.inner.SetAutoreverses(autoreverses)
 }
 
+// The relative delay to start the animation, in relation to its parent animation if applicable. Defaults to 0. @discussion This property is bridged with CoreAnimations's beginTime. However, for top level animations, startDelay is relative to the current time (unlike CAAnimation's beginTime that is absolute). So if a CAAnimation has a non-zero beginTime, startDelay is initialized as caAnimation.beginTime - CACurrentMediaTime().
+//
 // StartDelay calls the underlying StartDelay.
 func (x *Animation) StartDelay() float64 {
 	return x.inner.StartDelay()
@@ -272,6 +330,8 @@ func (x *Animation) SetStartDelay(startDelay float64) {
 	x.inner.SetStartDelay(startDelay)
 }
 
+// Additional offset in active local time. i.e. to convert from parent time tp to active local time t: t = (tp - begin) * speed + offset. Defaults to 0.
+//
 // TimeOffset calls the underlying TimeOffset.
 func (x *Animation) TimeOffset() float64 {
 	return x.inner.TimeOffset()
@@ -282,6 +342,8 @@ func (x *Animation) SetTimeOffset(timeOffset float64) {
 	x.inner.SetTimeOffset(timeOffset)
 }
 
+// When true, the animation remains active after its active duration and evaluates to its end value. Defaults to NO.
+//
 // FillsForward calls the underlying FillsForward.
 func (x *Animation) FillsForward() bool {
 	return x.inner.FillsForward()
@@ -292,6 +354,8 @@ func (x *Animation) SetFillsForward(fillsForward bool) {
 	x.inner.SetFillsForward(fillsForward)
 }
 
+// When true, the animation is active before its active duration and evaluates to its start value. Defaults to NO.
+//
 // FillsBackward calls the underlying FillsBackward.
 func (x *Animation) FillsBackward() bool {
 	return x.inner.FillsBackward()
@@ -302,6 +366,8 @@ func (x *Animation) SetFillsBackward(fillsBackward bool) {
 	x.inner.SetFillsBackward(fillsBackward)
 }
 
+// Determines whether the receiver is evaluated using the scene time or the system time. Defaults to NO. @discussion A scene-time based animation is evaluated using the "sceneTime" value of the renderer that renders the scene. The "sceneTime" base is typically used by players or editors that need to preview, edit and being able to change the evaluation time. @see SCNSceneSourceAnimationImportPolicyKey
+//
 // UsesSceneTimeBase calls the underlying UsesSceneTimeBase.
 func (x *Animation) UsesSceneTimeBase() bool {
 	return x.inner.UsesSceneTimeBase()
@@ -312,6 +378,8 @@ func (x *Animation) SetUsesSceneTimeBase(usesSceneTimeBase bool) {
 	x.inner.SetUsesSceneTimeBase(usesSceneTimeBase)
 }
 
+// Called when the animation starts.
+//
 // AnimationDidStart calls the underlying AnimationDidStart.
 func (x *Animation) AnimationDidStart() objc.Block {
 	return x.inner.AnimationDidStart()
@@ -322,6 +390,8 @@ func (x *Animation) SetAnimationDidStart(animationDidStart func(*raw.SCNAnimatio
 	x.inner.SetAnimationDidStart(animationDidStart)
 }
 
+// Called when the animation either completes its active duration or is removed from the object it is attached to (i.e. the layer). The 'completed' argument of SCNAnimationDidStopBlock is true if the animation reached the end of its active duration without being removed.
+//
 // AnimationDidStop calls the underlying AnimationDidStop.
 func (x *Animation) AnimationDidStop() objc.Block {
 	return x.inner.AnimationDidStop()
@@ -332,6 +402,8 @@ func (x *Animation) SetAnimationDidStop(animationDidStop func(*raw.SCNAnimation,
 	x.inner.SetAnimationDidStop(animationDidStop)
 }
 
+// Specifies the animation events attached to the receiver. @see SCNAnimationEvent
+//
 // AnimationEvents returns the collection as a Go slice.
 func (x *Animation) AnimationEvents() []*AnimationEvent {
 	arr := x.inner.AnimationEvents()
@@ -348,6 +420,8 @@ func (x *Animation) SetAnimationEvents(animationEvents *foundation.NSArray[*raw.
 	x.inner.SetAnimationEvents(animationEvents)
 }
 
+// When true the value specified by the animation will be "added" to the current presentation value of the property to produce the new presentation value. The addition function is type-dependent, e.g. for affine transforms the two matrices are concatenated. Defaults to NO.
+//
 // IsAdditive calls the underlying IsAdditive.
 func (x *Animation) IsAdditive() bool {
 	return x.inner.IsAdditive()
@@ -358,6 +432,8 @@ func (x *Animation) SetAdditive(additive bool) {
 	x.inner.SetAdditive(additive)
 }
 
+// The `cumulative' property affects how repeating animations produce their result. If true then the current value of the animation is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle. If false, the value is simply the value calculated for the current repeat cycle. Defaults to NO.
+//
 // IsCumulative calls the underlying IsCumulative.
 func (x *Animation) IsCumulative() bool {
 	return x.inner.IsCumulative()

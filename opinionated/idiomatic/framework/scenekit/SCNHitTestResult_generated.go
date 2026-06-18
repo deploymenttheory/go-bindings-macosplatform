@@ -38,11 +38,15 @@ func NewHitTestResult() *HitTestResult {
 	return &HitTestResult{inner: raw.SCNHitTestResultFromID(_id)}
 }
 
+// @method textureCoordinatesWithMappingChannel: @abstract Returns the texture coordinates at the point of intersection, for a given mapping channel. @param channel The texture coordinates source index of the geometry to use. The channel must exists on the geometry otherwise {0,0} will be returned.
+//
 // TextureCoordinatesWithMappingChannel calls the underlying TextureCoordinatesWithMappingChannel.
 func (x *HitTestResult) TextureCoordinatesWithMappingChannel(channel int) corefoundation.CGPoint {
 	return x.inner.TextureCoordinatesWithMappingChannel(channel)
 }
 
+// The hit node.
+//
 // Node calls the underlying Node.
 func (x *HitTestResult) Node() *Node {
 	_r := x.inner.Node()
@@ -52,41 +56,57 @@ func (x *HitTestResult) Node() *Node {
 	return &Node{inner: _r}
 }
 
+// Index of the hit geometry element.
+//
 // GeometryIndex calls the underlying GeometryIndex.
 func (x *HitTestResult) GeometryIndex() int {
 	return x.inner.GeometryIndex()
 }
 
+// Index of the hit primitive of the geometry element.
+//
 // FaceIndex calls the underlying FaceIndex.
 func (x *HitTestResult) FaceIndex() int {
 	return x.inner.FaceIndex()
 }
 
+// Intersection point in the node's local coordinate system.
+//
 // LocalCoordinates calls the underlying LocalCoordinates.
 func (x *HitTestResult) LocalCoordinates() raw.SCNVector3 {
 	return x.inner.LocalCoordinates()
 }
 
+// Intersection point in the world coordinate system.
+//
 // WorldCoordinates calls the underlying WorldCoordinates.
 func (x *HitTestResult) WorldCoordinates() raw.SCNVector3 {
 	return x.inner.WorldCoordinates()
 }
 
+// Intersection normal in the node's local coordinate system.
+//
 // LocalNormal calls the underlying LocalNormal.
 func (x *HitTestResult) LocalNormal() raw.SCNVector3 {
 	return x.inner.LocalNormal()
 }
 
+// Intersection normal in the world coordinate system.
+//
 // WorldNormal calls the underlying WorldNormal.
 func (x *HitTestResult) WorldNormal() raw.SCNVector3 {
 	return x.inner.WorldNormal()
 }
 
+// World transform of the hit node.
+//
 // ModelTransform calls the underlying ModelTransform.
 func (x *HitTestResult) ModelTransform() quartzcore.CATransform3D {
 	return x.inner.ModelTransform()
 }
 
+// The hit bone. Only available if the node hit has a SCNSkinner attached.
+//
 // BoneNode calls the underlying BoneNode.
 func (x *HitTestResult) BoneNode() *Node {
 	_r := x.inner.BoneNode()

@@ -31,6 +31,8 @@ func MutableServiceFromID(id objc.ID) *MutableService {
 	return &MutableService{inner: raw.CBMutableServiceFromID(id)}
 }
 
+// @method initWithType:primary: @param UUID			The Bluetooth UUID of the service. @param isPrimary	The type of the service (primary or secondary). @discussion			Returns a service, initialized with a service type and UUID.
+//
 // NewMutableServiceWithTypePrimary creates a new [MutableService].
 func NewMutableServiceWithTypePrimary(uUID *raw.CBUUID, isPrimary bool) *MutableService {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CBMutableService")), objc.RegisterName("alloc"))
@@ -75,13 +77,31 @@ func (x *MutableService) WithCharacteristics(items ...CharacteristicProvider) *M
 }
 
 // SetIncludedServices calls the underlying SetIncludedServices.
-func (x *MutableService) SetIncludedServices(includedServices *foundation.NSArray[*raw.CBService]) {
-	x.inner.SetIncludedServices(includedServices)
+func (x *MutableService) SetIncludedServices(includedServices ...ServiceProvider) {
+	_ptrs := make([]objc.ID, len(includedServices))
+	for _i, _v := range includedServices {
+		_ptrs[_i] = _v.asService().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.CBService]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.CBService](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetIncludedServices(_arg0)
 }
 
 // SetCharacteristics calls the underlying SetCharacteristics.
-func (x *MutableService) SetCharacteristics(characteristics *foundation.NSArray[*raw.CBCharacteristic]) {
-	x.inner.SetCharacteristics(characteristics)
+func (x *MutableService) SetCharacteristics(characteristics ...CharacteristicProvider) {
+	_ptrs := make([]objc.ID, len(characteristics))
+	for _i, _v := range characteristics {
+		_ptrs[_i] = _v.asCharacteristic().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.CBCharacteristic]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.CBCharacteristic](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetCharacteristics(_arg0)
 }
 
 func (x *MutableService) asService() *raw.CBService { return &x.inner.CBService }
@@ -93,8 +113,8 @@ type MutableServiceable interface {
 	Unwrap() *raw.CBMutableService
 	WithIncludedServices(items ...ServiceProvider) *MutableService
 	WithCharacteristics(items ...CharacteristicProvider) *MutableService
-	SetIncludedServices(includedServices *foundation.NSArray[*raw.CBService])
-	SetCharacteristics(characteristics *foundation.NSArray[*raw.CBCharacteristic])
+	SetIncludedServices(includedServices ...ServiceProvider)
+	SetCharacteristics(characteristics ...CharacteristicProvider)
 }
 
 var _ MutableServiceable = (*MutableService)(nil)

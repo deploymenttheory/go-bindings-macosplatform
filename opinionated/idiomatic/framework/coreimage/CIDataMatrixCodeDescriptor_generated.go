@@ -30,6 +30,8 @@ func DataMatrixCodeDescriptorFromID(id objc.ID) *DataMatrixCodeDescriptor {
 	return &DataMatrixCodeDescriptor{inner: raw.CIDataMatrixCodeDescriptorFromID(id)}
 }
 
+// Initializes a Data Matrix code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the Data Matrix code symbol. - rowCount: The number of rows in the Data Matrix code symbol. - columnCount: The number of columns in the Data Matrix code symbol. - eccVersion: The “CIDataMatrixCodeECCVersion“ for the Data Matrix code symbol. - Returns: An initialized “CIAztecCodeDescriptor“ instance or `nil` if the parameters are invalid
+//
 // NewDataMatrixCodeDescriptorWithPayloadRowCountColumnCountEccVersion creates a new [DataMatrixCodeDescriptor].
 func NewDataMatrixCodeDescriptorWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload *foundation.NSData, rowCount int, columnCount int, eccVersion CIDataMatrixCodeECCVersion) *DataMatrixCodeDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIDataMatrixCodeDescriptor")), objc.RegisterName("alloc"))
@@ -37,21 +39,29 @@ func NewDataMatrixCodeDescriptorWithPayloadRowCountColumnCountEccVersion(errorCo
 	return &DataMatrixCodeDescriptor{inner: raw.CIDataMatrixCodeDescriptorFromID(_id)}
 }
 
+// The error-corrected payload containing the data encoded in the Data Matrix code symbol. DataMatrix symbols are specified bn ISO/IEC 16022:2006(E). ECC 200-type symbols will always have an even number of rows and columns. For ECC 200-type symbols, the phases of encoding data into a symbol are described in section 5.1 -- Encode procedure overview. The error corrected payload comprises the de-interleaved bits of the message described at the end of Step 1: Data encodation.
+//
 // ErrorCorrectedPayload calls the underlying ErrorCorrectedPayload.
 func (x *DataMatrixCodeDescriptor) ErrorCorrectedPayload() *foundation.NSData {
 	return x.inner.ErrorCorrectedPayload()
 }
 
+// The number of rows in the Data Matrix code symbol. Refer to ISO/IEC 16022:2006(E) for valid module row and column count combinations.
+//
 // RowCount calls the underlying RowCount.
 func (x *DataMatrixCodeDescriptor) RowCount() int {
 	return x.inner.RowCount()
 }
 
+// The number of columns in the Data Matrix code symbol. Refer to ISO/IEC 16022:2006(E) for valid module row and column count combinations.
+//
 // ColumnCount calls the underlying ColumnCount.
 func (x *DataMatrixCodeDescriptor) ColumnCount() int {
 	return x.inner.ColumnCount()
 }
 
+// The error correction version of the Data Matrix code symbol. The possible error correction version are enumerated in “CIDataMatrixCodeECCVersion“. Any symbol with an even number of rows and columns will be ECC 200.
+//
 // EccVersion calls the underlying EccVersion.
 func (x *DataMatrixCodeDescriptor) EccVersion() CIDataMatrixCodeECCVersion {
 	return CIDataMatrixCodeECCVersion(x.inner.EccVersion())

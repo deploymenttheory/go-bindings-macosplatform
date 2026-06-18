@@ -30,6 +30,8 @@ func MTRClusterPressureMeasurementFromID(id objc.ID) *MTRClusterPressureMeasurem
 	return &MTRClusterPressureMeasurement{inner: raw.MTRClusterPressureMeasurementFromID(id)}
 }
 
+// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+//
 // NewMTRClusterPressureMeasurementWithDeviceEndpointIDQueue creates a new [MTRClusterPressureMeasurement].
 func NewMTRClusterPressureMeasurementWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterPressureMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterPressureMeasurement")), objc.RegisterName("alloc"))

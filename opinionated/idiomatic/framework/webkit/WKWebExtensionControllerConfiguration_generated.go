@@ -38,28 +38,38 @@ func NewWKWebExtensionControllerConfiguration() *WKWebExtensionControllerConfigu
 	return &WKWebExtensionControllerConfiguration{inner: raw.WKWebExtensionControllerConfigurationFromID(_id)}
 }
 
+// @abstract The web view configuration to be used as a basis for configuring web views in extension contexts.
+//
 // WithWebViewConfiguration sets the webViewConfiguration property and returns the receiver for chaining.
 func (x *WKWebExtensionControllerConfiguration) WithWebViewConfiguration(webViewConfiguration *WKWebViewConfiguration) *WKWebExtensionControllerConfiguration {
 	x.inner.SetWebViewConfiguration(webViewConfiguration.Unwrap())
 	return x
 }
 
+// @abstract The default data store for website data and cookie access in extension contexts. @discussion This property sets the primary data store for managing website data, including cookies, which extensions can access, subject to the granted permissions within the extension contexts. Defaults to “WKWebsiteDataStore.defaultDataStore“. @note In addition to this data store, extensions can also access other data stores, such as non-persistent ones, for any open tabs.
+//
 // WithDefaultWebsiteDataStore sets the defaultWebsiteDataStore property and returns the receiver for chaining.
 func (x *WKWebExtensionControllerConfiguration) WithDefaultWebsiteDataStore(defaultWebsiteDataStore *WKWebsiteDataStore) *WKWebExtensionControllerConfiguration {
 	x.inner.SetDefaultWebsiteDataStore(defaultWebsiteDataStore.Unwrap())
 	return x
 }
 
+// @abstract A Boolean value indicating if this context will write data to the the file system.
+//
 // IsPersistent calls the underlying IsPersistent.
 func (x *WKWebExtensionControllerConfiguration) IsPersistent() bool {
 	return x.inner.IsPersistent()
 }
 
+// @abstract The unique identifier used for persistent configuration storage, or `nil` when it is the default or not persistent.
+//
 // Identifier calls the underlying Identifier.
 func (x *WKWebExtensionControllerConfiguration) Identifier() *foundation.NSUUID {
 	return x.inner.Identifier()
 }
 
+// @abstract The web view configuration to be used as a basis for configuring web views in extension contexts.
+//
 // WebViewConfiguration calls the underlying WebViewConfiguration.
 func (x *WKWebExtensionControllerConfiguration) WebViewConfiguration() *WKWebViewConfiguration {
 	_r := x.inner.WebViewConfiguration()
@@ -74,6 +84,8 @@ func (x *WKWebExtensionControllerConfiguration) SetWebViewConfiguration(webViewC
 	x.inner.SetWebViewConfiguration(webViewConfiguration)
 }
 
+// @abstract The default data store for website data and cookie access in extension contexts. @discussion This property sets the primary data store for managing website data, including cookies, which extensions can access, subject to the granted permissions within the extension contexts. Defaults to “WKWebsiteDataStore.defaultDataStore“. @note In addition to this data store, extensions can also access other data stores, such as non-persistent ones, for any open tabs.
+//
 // DefaultWebsiteDataStore calls the underlying DefaultWebsiteDataStore.
 func (x *WKWebExtensionControllerConfiguration) DefaultWebsiteDataStore() *WKWebsiteDataStore {
 	_r := x.inner.DefaultWebsiteDataStore()

@@ -68,24 +68,32 @@ func (x *Window) WithTitle(title string) *Window {
 	return x
 }
 
+// Secondary text that may be displayed adjacent to or below the primary title depending on the configuration of the window. A value of empty string will remove the subtitle from the window layout.
+//
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *Window) WithSubtitle(subtitle string) *Window {
 	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
 	return x
 }
 
+// See the enum values for how this property works.
+//
 // WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
 func (x *Window) WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *Window {
 	x.inner.SetTitleVisibility(raw.NSWindowTitleVisibility(titleVisibility))
 	return x
 }
 
+// When \c YES, the titlebar doesn't draw its background, allowing all buttons to show through, and "click through" to happen. In general, this is only useful when \c NSFullSizeContentViewWindowMask is set.
+//
 // WithTitlebarAppearsTransparent sets the titlebarAppearsTransparent property and returns the receiver for chaining.
 func (x *Window) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *Window {
 	x.inner.SetTitlebarAppearsTransparent(titlebarAppearsTransparent)
 	return x
 }
 
+// Specifies how the titlebar area of the window should appear when the window displays an NSToolbar
+//
 // WithToolbarStyle sets the toolbarStyle property and returns the receiver for chaining.
 func (x *Window) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *Window {
 	x.inner.SetToolbarStyle(raw.NSWindowToolbarStyle(toolbarStyle))
@@ -110,6 +118,8 @@ func (x *Window) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAc
 	return x
 }
 
+// If url is not nil and its path is not empty, the window will show a document icon in the titlebar. If the url represents a filename or other resource with a known icon, that icon will be used as the document icon.  Otherwise the default document icon will be used.  The icon can be customized using `-[[NSWindow standardWindowButton:NSWindowDocumentIconButton] setImage:customImage]`.  If url is not nil and its path is not empty, the window will have a pop-up menu which can be shown via command-click on the area containing the document icon and title.  By default, this menu will display the path components of the url.  The presence and contents of this menu can be controlled by the delegate method `-[window:shouldPopUpDocumentPathMenu:]` If the url is nil or has an empty path, the window will not show a document icon and will not have a pop-up menu available via command-click.
+//
 // WithRepresentedURL sets the representedURL property and returns the receiver for chaining.
 func (x *Window) WithRepresentedURL(representedURL string) *Window {
 	x.inner.SetRepresentedURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(representedURL)))
@@ -140,6 +150,8 @@ func (x *Window) WithDelegate(delegate raw.NSWindowDelegate) *Window {
 	return x
 }
 
+// @note The styleMask can only be set on macOS 10.6 and later. Valid \c styleMask settings have the same restrictions as the \c styleMask passed to `-initWithContentRect:styleMask:backing:defer:`.  Some \c styleMask changes will cause the view hierarchy to be rebuilt, since there is a different subclass for the top level view of a borderless window than for the top level view of a titled window.
+//
 // WithStyleMask sets the styleMask property and returns the receiver for chaining.
 func (x *Window) WithStyleMask(styleMask NSWindowStyleMask) *Window {
 	x.inner.SetStyleMask(raw.NSWindowStyleMask(styleMask))
@@ -212,6 +224,8 @@ func (x *Window) WithHidesOnDeactivate(hidesOnDeactivate bool) *Window {
 	return x
 }
 
+// Indicates whether a window can be hidden during `-[NSApplication hide:]`.  Default is \c YES.
+//
 // WithCanHide sets the canHide property and returns the receiver for chaining.
 func (x *Window) WithCanHide(canHide bool) *Window {
 	x.inner.SetCanHide(canHide)
@@ -236,12 +250,16 @@ func (x *Window) WithDocumentEdited(documentEdited bool) *Window {
 	return x
 }
 
+// A Boolean value that indicates whether or not to prevent application termination when the receiving window is presented modally. The value of this property is `YES` if the window should prevent application termination when modal; otherwise, `NO`. The default value is `YES`. However, note that some window subclasses and some windows created indirectly (like those created by UI frameworks like AppKit and SwiftUI), may have different default values. For example, the Open panel and toolbar customization sheets should not prevent application termination, so those windows have `preventsApplicationTerminationWhenModal` set to `NO`. Some `NSAlert`s, like those that are simply informational, have windows that do not prevent application termination by default. Setting this property overrides the default behavior.
+//
 // WithPreventsApplicationTerminationWhenModal sets the preventsApplicationTerminationWhenModal property and returns the receiver for chaining.
 func (x *Window) WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *Window {
 	x.inner.SetPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal)
 	return x
 }
 
+// Default is \c NO. Set to \c YES to allow a window to display tooltips even when the application is in the background.  Note that, enabling tooltips in an inactive application will cause the app to do work any time the mouse passes over the window.  This can degrade system performance. Returns \c YES if this window displays tooltips even when the application is in the background.  To configure this setting you should call `-setAllowsToolTipsWhenApplicationIsInactive:` instead of overriding `-allowsToolTipsWhenApplicationIsInactive`.
+//
 // WithAllowsToolTipsWhenApplicationIsInactive sets the allowsToolTipsWhenApplicationIsInactive property and returns the receiver for chaining.
 func (x *Window) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *Window {
 	x.inner.SetAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive)
@@ -284,12 +302,16 @@ func (x *Window) WithOpaque(opaque bool) *Window {
 	return x
 }
 
+// `-setSharingType:` specifies whether the window content can be read from another process.  The default sharing type is \c NSWindowSharingReadOnly, which means other processes can read the window content (eg. for window capture) but cannot modify it.  If you set your window sharing type to \c NSWindowSharingNone, so that the content cannot be captured, your window will also not be able to participate in a number of system services, so this setting should be used with caution.
+//
 // WithSharingType sets the sharingType property and returns the receiver for chaining.
 func (x *Window) WithSharingType(sharingType NSWindowSharingType) *Window {
 	x.inner.SetSharingType(raw.NSWindowSharingType(sharingType))
 	return x
 }
 
+// Controls whether threading of view drawing should be enabled for this window.  Defaults to \c YES.  When this is set to \c YES, AppKit's view system is allowed to perform `-drawRect:` activity for the window's views on threads other than the main thread, for views that have `canDrawConcurrently == YES`.  When this is set to \c NO, the window's views will be drawn serially as on 10.5 and earlier, even though some of the views may have `canDrawConcurrently == YES`.
+//
 // WithAllowsConcurrentViewDrawing sets the allowsConcurrentViewDrawing property and returns the receiver for chaining.
 func (x *Window) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *Window {
 	x.inner.SetAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing)
@@ -302,6 +324,8 @@ func (x *Window) WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileC
 	return x
 }
 
+// This API controls whether the receiver is permitted onscreen before the user has logged in.  This property is off by default.  Alert panels and windows presented by input managers are examples of windows which should have this property set.
+//
 // WithCanBecomeVisibleWithoutLogin sets the canBecomeVisibleWithoutLogin property and returns the receiver for chaining.
 func (x *Window) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *Window {
 	x.inner.SetCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin)
@@ -314,6 +338,8 @@ func (x *Window) WithCollectionBehavior(collectionBehavior NSWindowCollectionBeh
 	return x
 }
 
+// Provides for per-window control over automatic orderFront/orderOut animation behaviors added in 10.7.  Can be set to \c NSWindowAnimationBehaviorNone to disable Appkit's automatic animations for a given window, or to one of the other non-Default \c NSWindowAnimationBehavior values to override AppKit's automatic inference of appropriate animation behavior based on the window's apparent type.
+//
 // WithAnimationBehavior sets the animationBehavior property and returns the receiver for chaining.
 func (x *Window) WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *Window {
 	x.inner.SetAnimationBehavior(raw.NSWindowAnimationBehavior(animationBehavior))
@@ -374,6 +400,8 @@ func (x *Window) WithParentWindow(parentWindow WindowProvider) *Window {
 	return x
 }
 
+// If set, the receiver will inherit the appearance of that object, as well as use KVO to observe its effectiveAppearance for changes. Typically this is used for child windows that are shown from a parent window or specific view. Defaults to NSApp.
+//
 // WithAppearanceSource sets the appearanceSource property and returns the receiver for chaining.
 func (x *Window) WithAppearanceSource(appearanceSource *foundation.NSObject) *Window {
 	x.inner.SetAppearanceSource(appearanceSource)
@@ -386,12 +414,16 @@ func (x *Window) WithColorSpace(colorSpace *ColorSpace) *Window {
 	return x
 }
 
+// Specifies the style of separator displayed between the window's titlebar and content. The default value is NSTitlebarSeparatorStyleAutomatic. Changing this value will override any preference made by `NSSplitViewItem`.
+//
 // WithTitlebarSeparatorStyle sets the titlebarSeparatorStyle property and returns the receiver for chaining.
 func (x *Window) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *Window {
 	x.inner.SetTitlebarSeparatorStyle(raw.NSTitlebarSeparatorStyle(titlebarSeparatorStyle))
 	return x
 }
 
+// The main content view controller for the window. This provides the contentView of the window. Assigning this value will remove the existing contentView and will make the contentViewController.view the main contentView for the window. The default value is nil. The contentViewController only controls the contentView, and not the title of the window. The window title can easily be bound to the contentViewController with the following: [window bind:NSTitleBinding toObject:contentViewController withKeyPath:@"title" options:nil]. Setting the contentViewController will cause the window to resize based on the current size of the contentViewController. Autolayout should be used to restrict the size of the window. The value of the contentViewController is encoded in the NIB. Directly assigning a contentView will clear out the contentViewController.
+//
 // WithContentViewController sets the contentViewController property and returns the receiver for chaining.
 func (x *Window) WithContentViewController(contentViewController ViewControllerProvider) *Window {
 	x.inner.SetContentViewController(contentViewController.asViewController())
@@ -428,12 +460,16 @@ func (x *Window) WithShowsToolbarButton(showsToolbarButton bool) *Window {
 	return x
 }
 
+// Get and set the tabbing mode for this window. This should be set before a window is shown. The default value is \c NSWindowTabbingModeAutomatic. When the value is \c NSWindowTabbingModeAutomatic, the system will look at the \c userTabbingPreference and automatically tab windows together based on the tabbingIdentifier, when it is appropriate to do so.
+//
 // WithTabbingMode sets the tabbingMode property and returns the receiver for chaining.
 func (x *Window) WithTabbingMode(tabbingMode NSWindowTabbingMode) *Window {
 	x.inner.SetTabbingMode(raw.NSWindowTabbingMode(tabbingMode))
 	return x
 }
 
+// Windows with the same \c tabbingIdentifier will have the ability to be tabbed together when a window is being shown. This allows aggregation of similar windows. By default, the \c tabbingIdentifier will be generated based on inherent window properties, such as the window class name, the delegate class name, the window controller class name, and some additional state. Windows can be explicitly made to group together by using the same \c tabbingIdentifier.
+//
 // WithTabbingIdentifier sets the tabbingIdentifier property and returns the receiver for chaining.
 func (x *Window) WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *Window {
 	x.inner.SetTabbingIdentifier(tabbingIdentifier)
@@ -586,11 +622,15 @@ func (x *Window) CascadeTopLeftFromPoint(topLeftPoint corefoundation.CGPoint) co
 	return x.inner.CascadeTopLeftFromPoint(topLeftPoint)
 }
 
+// Subclasses can override \c animationResizeTime: to control the total time for the frame change. \c newFrame is the rect passed into \c setFrame:display:animate:
+//
 // AnimationResizeTime calls the underlying AnimationResizeTime.
 func (x *Window) AnimationResizeTime(newFrame corefoundation.CGRect) float64 {
 	return x.inner.AnimationResizeTime(newFrame)
 }
 
+// \c setFrame:display:animate: is equivalent to \c setFrame:display: if the \c animateFlag is NO. If the \c animationFlag is YES, this method will perform a smooth resize of the window, where the total time for the resize is specified by \c -animationResizeTime:
+//
 // SetFrameDisplayAnimate calls the underlying SetFrameDisplayAnimate.
 func (x *Window) SetFrameDisplayAnimate(frameRect corefoundation.CGRect, displayFlag bool, animateFlag bool) {
 	x.inner.SetFrameDisplayAnimate(frameRect, displayFlag, animateFlag)
@@ -691,31 +731,43 @@ func (x *Window) OrderFrontRegardless() {
 	x.inner.OrderFrontRegardless()
 }
 
+// Makes the window key and main if eligible, updating NSApplication's `-keyWindow` and `-mainWindow` properties.
+//
 // MakeKeyWindow calls the underlying MakeKeyWindow.
 func (x *Window) MakeKeyWindow() {
 	x.inner.MakeKeyWindow()
 }
 
+// Makes the window main if eligible. Updates NSApplication's `-mainWindow` property.
+//
 // MakeMainWindow calls the underlying MakeMainWindow.
 func (x *Window) MakeMainWindow() {
 	x.inner.MakeMainWindow()
 }
 
+// Informs the window that it has become the key window. This method exists as an override point. Do not invoke directly. Instead, invoke `-makeKeyWindow`.
+//
 // BecomeKeyWindow calls the underlying BecomeKeyWindow.
 func (x *Window) BecomeKeyWindow() {
 	x.inner.BecomeKeyWindow()
 }
 
+// Informs the window that it has stopped being the key window. This method exists as an override point. Do not invoke directly. Windows automatically receive this message when deactivating or when another window has become key.
+//
 // ResignKeyWindow calls the underlying ResignKeyWindow.
 func (x *Window) ResignKeyWindow() {
 	x.inner.ResignKeyWindow()
 }
 
+// Informs the window that it has become the main window. This method exists as an override point. Do not invoke directly. Instead, invoke `-makeMainWindow`.
+//
 // BecomeMainWindow calls the underlying BecomeMainWindow.
 func (x *Window) BecomeMainWindow() {
 	x.inner.BecomeMainWindow()
 }
 
+// Informs the window that it has stopped being the main window. This method exists as an override point. Do not invoke directly. Windows automatically receive this message when deactivating or when another window has become main.
+//
 // ResignMainWindow calls the underlying ResignMainWindow.
 func (x *Window) ResignMainWindow() {
 	x.inner.ResignMainWindow()
@@ -761,6 +813,8 @@ func (x *Window) ConvertPointFromBacking(point corefoundation.CGPoint) corefound
 	return x.inner.ConvertPointFromBacking(point)
 }
 
+// Use `NSIntegralRectWithOptions()` to produce a backing store pixel aligned rectangle from the given input rectangle in window coordinates.
+//
 // BackingAlignedRectOptions calls the underlying BackingAlignedRectOptions.
 func (x *Window) BackingAlignedRectOptions(rect corefoundation.CGRect, options foundation.NSAlignmentOptions) corefoundation.CGRect {
 	return x.inner.BackingAlignedRectOptions(rect, options)
@@ -806,6 +860,8 @@ func (x *Window) InvalidateShadow() {
 	x.inner.InvalidateShadow()
 }
 
+// `-toggleFullScreen:` enters or exits for full screen. A window must have \c NSWindowCollectionBehaviorFullScreenAuxiliary or \c NSWindowCollectionBehaviorFullScreenPrimary included in the \c collectionBehavior property; if it does not, this method may simply do nothing.
+//
 // ToggleFullScreen calls the underlying ToggleFullScreen.
 func (x *Window) ToggleFullScreen(sender objc.ID) {
 	x.inner.ToggleFullScreen(sender)
@@ -875,11 +931,15 @@ func (x *Window) RemoveChildWindow(childWin *raw.NSWindow) {
 	x.inner.RemoveChildWindow(childWin)
 }
 
+// `-canRepresentDisplayGamut:` returns \c YES if the colorSpace of the receiving window, and the \c colorSpace of the screen containing that window, are capable of representing the given display gamut
+//
 // CanRepresentDisplayGamut calls the underlying CanRepresentDisplayGamut.
 func (x *Window) CanRepresentDisplayGamut(displayGamut NSDisplayGamut) bool {
 	return x.inner.CanRepresentDisplayGamut(raw.NSDisplayGamut(displayGamut))
 }
 
+// Call to start a drag (moving the window) in the Window Server process. In general, this can be done after a mouseDown event has come in and been examined by an application or view. The view may determine it wants to allow that portion of the window to start a window drag, and can hand off the work to the Window Server process by calling this method. This allows the window to participate in space switching, and other system features. Pass the original mouseDown event to the method. The method will return right away, and a mouseUp may not get sent.
+//
 // PerformWindowDragWithEvent calls the underlying PerformWindowDragWithEvent.
 func (x *Window) PerformWindowDragWithEvent(event *raw.NSEvent) {
 	x.inner.PerformWindowDragWithEvent(event)
@@ -930,6 +990,8 @@ func (x *Window) RunToolbarCustomizationPalette(sender objc.ID) {
 	x.inner.RunToolbarCustomizationPalette(sender)
 }
 
+// Actions that can be called to perform various tabbed window behaviors. UI that is hooked up to these items can be automatically validated by calling `NSWindow`'s \c validateUserInterfaceItem.
+//
 // SelectNextTab calls the underlying SelectNextTab.
 func (x *Window) SelectNextTab(sender objc.ID) {
 	x.inner.SelectNextTab(sender)
@@ -955,16 +1017,22 @@ func (x *Window) ToggleTabBar(sender objc.ID) {
 	x.inner.ToggleTabBar(sender)
 }
 
+// Toggle the Tab Picker / Tab Overview UI which is invoked via "Show All Tabs". Performs the toggle in an animated fashion. Use `tabGroup.isOverviewVisible` to find out if it is visible or not at a given time.
+//
 // ToggleTabOverview calls the underlying ToggleTabOverview.
 func (x *Window) ToggleTabOverview(sender objc.ID) {
 	x.inner.ToggleTabOverview(sender)
 }
 
+// This is now a cover for `-[self.tabGroup addWindow:]`, which allows more precise placement.
+//
 // AddTabbedWindowOrdered calls the underlying AddTabbedWindowOrdered.
 func (x *Window) AddTabbedWindowOrdered(window *raw.NSWindow, ordered NSWindowOrderingMode) {
 	x.inner.AddTabbedWindowOrdered(window, raw.NSWindowOrderingMode(ordered))
 }
 
+// Attempts to move window sharing (i.e. within a SharePlay session) from the receiver to another window. In response to this request, the user may choose to transfer sharing to the new window, or simply stop sharing the content. In the event of a failed transfer request, a non-`nil` error contains details about the failure. @param window A window that is replacing the reciever in representing the user's current activity. @param completionHandler A completion block that is called after the request finishes.
+//
 // TransferWindowSharingToWindow blocks until the operation completes or ctx is cancelled.
 func (x *Window) TransferWindowSharingToWindow(ctx context.Context, window *raw.NSWindow) error {
 	_ch := make(chan error, 1)
@@ -983,6 +1051,8 @@ func (x *Window) TransferWindowSharingToWindow(ctx context.Context, window *raw.
 	}
 }
 
+// @abstract Request sharing of window.  If there is an available ScreenCaptureKit sharing session, an alert will be presented asking the user to confirm the share @param window The window to share @param completionHandler A completion block that is called after the request finishes. @c error The error will be non-nil if the request does not result in a window being shared.  The error will be NSUserCancelledError if there is no ScreenCaptureKit session, or if the user rejects the offer to share.  If sharing fails for some other reason, the error will provide the details.
+//
 // RequestSharingOfWindow blocks until the operation completes or ctx is cancelled.
 func (x *Window) RequestSharingOfWindow(ctx context.Context, window *raw.NSWindow) error {
 	_ch := make(chan error, 1)
@@ -1001,6 +1071,8 @@ func (x *Window) RequestSharingOfWindow(ctx context.Context, window *raw.NSWindo
 	}
 }
 
+// @abstract Request sharing of window to be provided later.  If there is an available ScreenCaptureKit sharing session, an alert will be presented asking the user to confirm the share.  The delegate will be asked to provide the window to share via windowForSharingRequestFromWindow: @param image An image showing a preview of the window to share @param title The title to show in a confirmation dialog @param completionHandler A completion block that is called after the request finishes. @c error The error will be non-nil if the request does not result in a window being shared.  The error will be NSUserCancelledError if there is no ScreenCaptureKit session, or if the user rejects the offer to share.  If sharing fails for some other reason, the error will provide the details.
+//
 // RequestSharingOfWindowUsingPreviewTitle blocks until the operation completes or ctx is cancelled.
 func (x *Window) RequestSharingOfWindowUsingPreviewTitle(ctx context.Context, image *raw.NSImage, title string) error {
 	_ch := make(chan error, 1)
@@ -1033,6 +1105,8 @@ func (x *Window) SetTitle(title string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// Secondary text that may be displayed adjacent to or below the primary title depending on the configuration of the window. A value of empty string will remove the subtitle from the window layout.
+//
 // Subtitle calls the underlying Subtitle.
 func (x *Window) Subtitle() string {
 	_r := x.inner.Subtitle()
@@ -1042,46 +1116,64 @@ func (x *Window) Subtitle() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Secondary text that may be displayed adjacent to or below the primary title depending on the configuration of the window. A value of empty string will remove the subtitle from the window layout.
+//
 // SetSubtitle calls the underlying SetSubtitle.
 func (x *Window) SetSubtitle(subtitle string) {
 	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
 }
 
+// See the enum values for how this property works.
+//
 // TitleVisibility calls the underlying TitleVisibility.
 func (x *Window) TitleVisibility() NSWindowTitleVisibility {
 	return NSWindowTitleVisibility(x.inner.TitleVisibility())
 }
 
+// See the enum values for how this property works.
+//
 // SetTitleVisibility calls the underlying SetTitleVisibility.
 func (x *Window) SetTitleVisibility(titleVisibility NSWindowTitleVisibility) {
 	x.inner.SetTitleVisibility(raw.NSWindowTitleVisibility(titleVisibility))
 }
 
+// When \c YES, the titlebar doesn't draw its background, allowing all buttons to show through, and "click through" to happen. In general, this is only useful when \c NSFullSizeContentViewWindowMask is set.
+//
 // TitlebarAppearsTransparent calls the underlying TitlebarAppearsTransparent.
 func (x *Window) TitlebarAppearsTransparent() bool {
 	return x.inner.TitlebarAppearsTransparent()
 }
 
+// When \c YES, the titlebar doesn't draw its background, allowing all buttons to show through, and "click through" to happen. In general, this is only useful when \c NSFullSizeContentViewWindowMask is set.
+//
 // SetTitlebarAppearsTransparent calls the underlying SetTitlebarAppearsTransparent.
 func (x *Window) SetTitlebarAppearsTransparent(titlebarAppearsTransparent bool) {
 	x.inner.SetTitlebarAppearsTransparent(titlebarAppearsTransparent)
 }
 
+// Specifies how the titlebar area of the window should appear when the window displays an NSToolbar
+//
 // ToolbarStyle calls the underlying ToolbarStyle.
 func (x *Window) ToolbarStyle() NSWindowToolbarStyle {
 	return NSWindowToolbarStyle(x.inner.ToolbarStyle())
 }
 
+// Specifies how the titlebar area of the window should appear when the window displays an NSToolbar
+//
 // SetToolbarStyle calls the underlying SetToolbarStyle.
 func (x *Window) SetToolbarStyle(toolbarStyle NSWindowToolbarStyle) {
 	x.inner.SetToolbarStyle(raw.NSWindowToolbarStyle(toolbarStyle))
 }
 
+// The \c contentLayoutRect will return the area inside the window that is for non-obscured content. Typically, this is the same thing as the `contentView`'s frame. However, for windows with the \c NSFullSizeContentViewWindowMask set, there needs to be a way to determine the portion that is not under the toolbar. The \c contentLayoutRect returns the portion of the layout that is not obscured under the toolbar. \c contentLayoutRect is in window coordinates. It is KVO compliant. */
+//
 // ContentLayoutRect calls the underlying ContentLayoutRect.
 func (x *Window) ContentLayoutRect() corefoundation.CGRect {
 	return x.inner.ContentLayoutRect()
 }
 
+// \c contentLayoutGuide is a corollary to \c contentLayoutRect. It can be used by autolayout constraints to automatically bind to the \c contentLayoutRect.
+//
 // ContentLayoutGuide calls the underlying ContentLayoutGuide.
 func (x *Window) ContentLayoutGuide() objc.ID {
 	return x.inner.ContentLayoutGuide()
@@ -1103,11 +1195,15 @@ func (x *Window) SetTitlebarAccessoryViewControllers(titlebarAccessoryViewContro
 	x.inner.SetTitlebarAccessoryViewControllers(titlebarAccessoryViewControllers)
 }
 
+// If url is not nil and its path is not empty, the window will show a document icon in the titlebar. If the url represents a filename or other resource with a known icon, that icon will be used as the document icon.  Otherwise the default document icon will be used.  The icon can be customized using `-[[NSWindow standardWindowButton:NSWindowDocumentIconButton] setImage:customImage]`.  If url is not nil and its path is not empty, the window will have a pop-up menu which can be shown via command-click on the area containing the document icon and title.  By default, this menu will display the path components of the url.  The presence and contents of this menu can be controlled by the delegate method `-[window:shouldPopUpDocumentPathMenu:]` If the url is nil or has an empty path, the window will not show a document icon and will not have a pop-up menu available via command-click.
+//
 // RepresentedURL calls the underlying RepresentedURL.
 func (x *Window) RepresentedURL() *foundation.NSURL {
 	return x.inner.RepresentedURL()
 }
 
+// If url is not nil and its path is not empty, the window will show a document icon in the titlebar. If the url represents a filename or other resource with a known icon, that icon will be used as the document icon.  Otherwise the default document icon will be used.  The icon can be customized using `-[[NSWindow standardWindowButton:NSWindowDocumentIconButton] setImage:customImage]`.  If url is not nil and its path is not empty, the window will have a pop-up menu which can be shown via command-click on the area containing the document icon and title.  By default, this menu will display the path components of the url.  The presence and contents of this menu can be controlled by the delegate method `-[window:shouldPopUpDocumentPathMenu:]` If the url is nil or has an empty path, the window will not show a document icon and will not have a pop-up menu available via command-click.
+//
 // SetRepresentedURL calls the underlying SetRepresentedURL.
 func (x *Window) SetRepresentedURL(representedURL string) {
 	x.inner.SetRepresentedURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(representedURL)))
@@ -1166,16 +1262,22 @@ func (x *Window) WindowNumber() int {
 	return x.inner.WindowNumber()
 }
 
+// @note The styleMask can only be set on macOS 10.6 and later. Valid \c styleMask settings have the same restrictions as the \c styleMask passed to `-initWithContentRect:styleMask:backing:defer:`.  Some \c styleMask changes will cause the view hierarchy to be rebuilt, since there is a different subclass for the top level view of a borderless window than for the top level view of a titled window.
+//
 // StyleMask calls the underlying StyleMask.
 func (x *Window) StyleMask() NSWindowStyleMask {
 	return NSWindowStyleMask(x.inner.StyleMask())
 }
 
+// @note The styleMask can only be set on macOS 10.6 and later. Valid \c styleMask settings have the same restrictions as the \c styleMask passed to `-initWithContentRect:styleMask:backing:defer:`.  Some \c styleMask changes will cause the view hierarchy to be rebuilt, since there is a different subclass for the top level view of a borderless window than for the top level view of a titled window.
+//
 // SetStyleMask calls the underlying SetStyleMask.
 func (x *Window) SetStyleMask(styleMask NSWindowStyleMask) {
 	x.inner.SetStyleMask(raw.NSWindowStyleMask(styleMask))
 }
 
+// @abstract The frame to use when cascading or sizing a new window based on the receiver's position or size. This may be different from `frame` when the receiver is positioned by the system.
+//
 // CascadingReferenceFrame calls the underlying CascadingReferenceFrame.
 func (x *Window) CascadingReferenceFrame() corefoundation.CGRect {
 	return x.inner.CascadingReferenceFrame()
@@ -1329,11 +1431,15 @@ func (x *Window) SetHidesOnDeactivate(hidesOnDeactivate bool) {
 	x.inner.SetHidesOnDeactivate(hidesOnDeactivate)
 }
 
+// Indicates whether a window can be hidden during `-[NSApplication hide:]`.  Default is \c YES.
+//
 // CanHide calls the underlying CanHide.
 func (x *Window) CanHide() bool {
 	return x.inner.CanHide()
 }
 
+// Indicates whether a window can be hidden during `-[NSApplication hide:]`.  Default is \c YES.
+//
 // SetCanHide calls the underlying SetCanHide.
 func (x *Window) SetCanHide(canHide bool) {
 	x.inner.SetCanHide(canHide)
@@ -1416,26 +1522,36 @@ func (x *Window) WorksWhenModal() bool {
 	return x.inner.WorksWhenModal()
 }
 
+// A Boolean value that indicates whether or not to prevent application termination when the receiving window is presented modally. The value of this property is `YES` if the window should prevent application termination when modal; otherwise, `NO`. The default value is `YES`. However, note that some window subclasses and some windows created indirectly (like those created by UI frameworks like AppKit and SwiftUI), may have different default values. For example, the Open panel and toolbar customization sheets should not prevent application termination, so those windows have `preventsApplicationTerminationWhenModal` set to `NO`. Some `NSAlert`s, like those that are simply informational, have windows that do not prevent application termination by default. Setting this property overrides the default behavior.
+//
 // PreventsApplicationTerminationWhenModal calls the underlying PreventsApplicationTerminationWhenModal.
 func (x *Window) PreventsApplicationTerminationWhenModal() bool {
 	return x.inner.PreventsApplicationTerminationWhenModal()
 }
 
+// A Boolean value that indicates whether or not to prevent application termination when the receiving window is presented modally. The value of this property is `YES` if the window should prevent application termination when modal; otherwise, `NO`. The default value is `YES`. However, note that some window subclasses and some windows created indirectly (like those created by UI frameworks like AppKit and SwiftUI), may have different default values. For example, the Open panel and toolbar customization sheets should not prevent application termination, so those windows have `preventsApplicationTerminationWhenModal` set to `NO`. Some `NSAlert`s, like those that are simply informational, have windows that do not prevent application termination by default. Setting this property overrides the default behavior.
+//
 // SetPreventsApplicationTerminationWhenModal calls the underlying SetPreventsApplicationTerminationWhenModal.
 func (x *Window) SetPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) {
 	x.inner.SetPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal)
 }
 
+// Returns the scale factor representing the number of backing store pixels corresponding to each linear unit in window space on this \c NSWindow. This method is provided for rare cases when the explicit scale factor is needed. Please use `-convert*ToBacking:` methods whenever possible.
+//
 // BackingScaleFactor calls the underlying BackingScaleFactor.
 func (x *Window) BackingScaleFactor() float64 {
 	return x.inner.BackingScaleFactor()
 }
 
+// Default is \c NO. Set to \c YES to allow a window to display tooltips even when the application is in the background.  Note that, enabling tooltips in an inactive application will cause the app to do work any time the mouse passes over the window.  This can degrade system performance. Returns \c YES if this window displays tooltips even when the application is in the background.  To configure this setting you should call `-setAllowsToolTipsWhenApplicationIsInactive:` instead of overriding `-allowsToolTipsWhenApplicationIsInactive`.
+//
 // AllowsToolTipsWhenApplicationIsInactive calls the underlying AllowsToolTipsWhenApplicationIsInactive.
 func (x *Window) AllowsToolTipsWhenApplicationIsInactive() bool {
 	return x.inner.AllowsToolTipsWhenApplicationIsInactive()
 }
 
+// Default is \c NO. Set to \c YES to allow a window to display tooltips even when the application is in the background.  Note that, enabling tooltips in an inactive application will cause the app to do work any time the mouse passes over the window.  This can degrade system performance. Returns \c YES if this window displays tooltips even when the application is in the background.  To configure this setting you should call `-setAllowsToolTipsWhenApplicationIsInactive:` instead of overriding `-allowsToolTipsWhenApplicationIsInactive`.
+//
 // SetAllowsToolTipsWhenApplicationIsInactive calls the underlying SetAllowsToolTipsWhenApplicationIsInactive.
 func (x *Window) SetAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) {
 	x.inner.SetAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive)
@@ -1476,6 +1592,8 @@ func (x *Window) HasDynamicDepthLimit() bool {
 	return x.inner.HasDynamicDepthLimit()
 }
 
+// The screen property returns the best screen for the window. If the window only intersects one screen, it returns that screen. If it intersects more than one screen, then it resolves the tie through based on what space it is mostly on. It may return nil if there are no available screens, or it is completely off screen.
+//
 // Screen calls the underlying Screen.
 func (x *Window) Screen() *Screen {
 	_r := x.inner.Screen()
@@ -1524,21 +1642,29 @@ func (x *Window) SetOpaque(opaque bool) {
 	x.inner.SetOpaque(opaque)
 }
 
+// `-setSharingType:` specifies whether the window content can be read from another process.  The default sharing type is \c NSWindowSharingReadOnly, which means other processes can read the window content (eg. for window capture) but cannot modify it.  If you set your window sharing type to \c NSWindowSharingNone, so that the content cannot be captured, your window will also not be able to participate in a number of system services, so this setting should be used with caution.
+//
 // SharingType calls the underlying SharingType.
 func (x *Window) SharingType() NSWindowSharingType {
 	return NSWindowSharingType(x.inner.SharingType())
 }
 
+// `-setSharingType:` specifies whether the window content can be read from another process.  The default sharing type is \c NSWindowSharingReadOnly, which means other processes can read the window content (eg. for window capture) but cannot modify it.  If you set your window sharing type to \c NSWindowSharingNone, so that the content cannot be captured, your window will also not be able to participate in a number of system services, so this setting should be used with caution.
+//
 // SetSharingType calls the underlying SetSharingType.
 func (x *Window) SetSharingType(sharingType NSWindowSharingType) {
 	x.inner.SetSharingType(raw.NSWindowSharingType(sharingType))
 }
 
+// Controls whether threading of view drawing should be enabled for this window.  Defaults to \c YES.  When this is set to \c YES, AppKit's view system is allowed to perform `-drawRect:` activity for the window's views on threads other than the main thread, for views that have `canDrawConcurrently == YES`.  When this is set to \c NO, the window's views will be drawn serially as on 10.5 and earlier, even though some of the views may have `canDrawConcurrently == YES`.
+//
 // AllowsConcurrentViewDrawing calls the underlying AllowsConcurrentViewDrawing.
 func (x *Window) AllowsConcurrentViewDrawing() bool {
 	return x.inner.AllowsConcurrentViewDrawing()
 }
 
+// Controls whether threading of view drawing should be enabled for this window.  Defaults to \c YES.  When this is set to \c YES, AppKit's view system is allowed to perform `-drawRect:` activity for the window's views on threads other than the main thread, for views that have `canDrawConcurrently == YES`.  When this is set to \c NO, the window's views will be drawn serially as on 10.5 and earlier, even though some of the views may have `canDrawConcurrently == YES`.
+//
 // SetAllowsConcurrentViewDrawing calls the underlying SetAllowsConcurrentViewDrawing.
 func (x *Window) SetAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) {
 	x.inner.SetAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing)
@@ -1554,11 +1680,15 @@ func (x *Window) SetDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileCh
 	x.inner.SetDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges)
 }
 
+// This API controls whether the receiver is permitted onscreen before the user has logged in.  This property is off by default.  Alert panels and windows presented by input managers are examples of windows which should have this property set.
+//
 // CanBecomeVisibleWithoutLogin calls the underlying CanBecomeVisibleWithoutLogin.
 func (x *Window) CanBecomeVisibleWithoutLogin() bool {
 	return x.inner.CanBecomeVisibleWithoutLogin()
 }
 
+// This API controls whether the receiver is permitted onscreen before the user has logged in.  This property is off by default.  Alert panels and windows presented by input managers are examples of windows which should have this property set.
+//
 // SetCanBecomeVisibleWithoutLogin calls the underlying SetCanBecomeVisibleWithoutLogin.
 func (x *Window) SetCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) {
 	x.inner.SetCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin)
@@ -1574,16 +1704,22 @@ func (x *Window) SetCollectionBehavior(collectionBehavior NSWindowCollectionBeha
 	x.inner.SetCollectionBehavior(raw.NSWindowCollectionBehavior(collectionBehavior))
 }
 
+// Provides for per-window control over automatic orderFront/orderOut animation behaviors added in 10.7.  Can be set to \c NSWindowAnimationBehaviorNone to disable Appkit's automatic animations for a given window, or to one of the other non-Default \c NSWindowAnimationBehavior values to override AppKit's automatic inference of appropriate animation behavior based on the window's apparent type.
+//
 // AnimationBehavior calls the underlying AnimationBehavior.
 func (x *Window) AnimationBehavior() NSWindowAnimationBehavior {
 	return NSWindowAnimationBehavior(x.inner.AnimationBehavior())
 }
 
+// Provides for per-window control over automatic orderFront/orderOut animation behaviors added in 10.7.  Can be set to \c NSWindowAnimationBehaviorNone to disable Appkit's automatic animations for a given window, or to one of the other non-Default \c NSWindowAnimationBehavior values to override AppKit's automatic inference of appropriate animation behavior based on the window's apparent type.
+//
 // SetAnimationBehavior calls the underlying SetAnimationBehavior.
 func (x *Window) SetAnimationBehavior(animationBehavior NSWindowAnimationBehavior) {
 	x.inner.SetAnimationBehavior(raw.NSWindowAnimationBehavior(animationBehavior))
 }
 
+// Returns \c YES if this window is associated with the active space.  For visible windows, this API indicates whether the window is currently visible on the active space.  For offscreen windows, it indicates whether ordering the window onscreen would make it bring it onto the active space
+//
 // IsOnActiveSpace calls the underlying IsOnActiveSpace.
 func (x *Window) IsOnActiveSpace() bool {
 	return x.inner.IsOnActiveSpace()
@@ -1686,6 +1822,8 @@ func (x *Window) SetWindowController(windowController *raw.NSWindowController) {
 	x.inner.SetWindowController(windowController)
 }
 
+// An ordered array of the sheets on the window. This consists of the presented sheets in top-to-bottom order, followed by queued sheets in the order they were queued. This does not include nested/sub-sheets.
+//
 // Sheets returns the collection as a Go slice.
 func (x *Window) Sheets() []*Window {
 	arr := x.inner.Sheets()
@@ -1697,6 +1835,8 @@ func (x *Window) Sheets() []*Window {
 	})
 }
 
+// Returns the top-most sheet if there is one or more sheets, or nil if there is no sheet.
+//
 // AttachedSheet calls the underlying AttachedSheet.
 func (x *Window) AttachedSheet() *Window {
 	_r := x.inner.AttachedSheet()
@@ -1711,6 +1851,8 @@ func (x *Window) IsSheet() bool {
 	return x.inner.IsSheet()
 }
 
+// Returns the window that the sheet is directly attached to. This is based on the logical attachment of the sheet, not visual attachment. This relationship exists starting when the sheet is begun (using \c NSApplication's `-beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo: or NSWindow's -beginSheet:completionHandler:`), and ending once it is ordered out. Returns nil if the window is not a sheet or has no sheet parent.
+//
 // SheetParent calls the underlying SheetParent.
 func (x *Window) SheetParent() *Window {
 	_r := x.inner.SheetParent()
@@ -1745,11 +1887,15 @@ func (x *Window) SetParentWindow(parentWindow *raw.NSWindow) {
 	x.inner.SetParentWindow(parentWindow)
 }
 
+// If set, the receiver will inherit the appearance of that object, as well as use KVO to observe its effectiveAppearance for changes. Typically this is used for child windows that are shown from a parent window or specific view. Defaults to NSApp.
+//
 // AppearanceSource calls the underlying AppearanceSource.
 func (x *Window) AppearanceSource() *foundation.NSObject {
 	return x.inner.AppearanceSource()
 }
 
+// If set, the receiver will inherit the appearance of that object, as well as use KVO to observe its effectiveAppearance for changes. Typically this is used for child windows that are shown from a parent window or specific view. Defaults to NSApp.
+//
 // SetAppearanceSource calls the underlying SetAppearanceSource.
 func (x *Window) SetAppearanceSource(appearanceSource *foundation.NSObject) {
 	x.inner.SetAppearanceSource(appearanceSource)
@@ -1774,16 +1920,22 @@ func (x *Window) OcclusionState() NSWindowOcclusionState {
 	return NSWindowOcclusionState(x.inner.OcclusionState())
 }
 
+// Specifies the style of separator displayed between the window's titlebar and content. The default value is NSTitlebarSeparatorStyleAutomatic. Changing this value will override any preference made by `NSSplitViewItem`.
+//
 // TitlebarSeparatorStyle calls the underlying TitlebarSeparatorStyle.
 func (x *Window) TitlebarSeparatorStyle() NSTitlebarSeparatorStyle {
 	return NSTitlebarSeparatorStyle(x.inner.TitlebarSeparatorStyle())
 }
 
+// Specifies the style of separator displayed between the window's titlebar and content. The default value is NSTitlebarSeparatorStyleAutomatic. Changing this value will override any preference made by `NSSplitViewItem`.
+//
 // SetTitlebarSeparatorStyle calls the underlying SetTitlebarSeparatorStyle.
 func (x *Window) SetTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) {
 	x.inner.SetTitlebarSeparatorStyle(raw.NSTitlebarSeparatorStyle(titlebarSeparatorStyle))
 }
 
+// The main content view controller for the window. This provides the contentView of the window. Assigning this value will remove the existing contentView and will make the contentViewController.view the main contentView for the window. The default value is nil. The contentViewController only controls the contentView, and not the title of the window. The window title can easily be bound to the contentViewController with the following: [window bind:NSTitleBinding toObject:contentViewController withKeyPath:@"title" options:nil]. Setting the contentViewController will cause the window to resize based on the current size of the contentViewController. Autolayout should be used to restrict the size of the window. The value of the contentViewController is encoded in the NIB. Directly assigning a contentView will clear out the contentViewController.
+//
 // ContentViewController calls the underlying ContentViewController.
 func (x *Window) ContentViewController() *ViewController {
 	_r := x.inner.ContentViewController()
@@ -1793,6 +1945,8 @@ func (x *Window) ContentViewController() *ViewController {
 	return &ViewController{inner: _r}
 }
 
+// The main content view controller for the window. This provides the contentView of the window. Assigning this value will remove the existing contentView and will make the contentViewController.view the main contentView for the window. The default value is nil. The contentViewController only controls the contentView, and not the title of the window. The window title can easily be bound to the contentViewController with the following: [window bind:NSTitleBinding toObject:contentViewController withKeyPath:@"title" options:nil]. Setting the contentViewController will cause the window to resize based on the current size of the contentViewController. Autolayout should be used to restrict the size of the window. The value of the contentViewController is encoded in the NIB. Directly assigning a contentView will clear out the contentViewController.
+//
 // SetContentViewController calls the underlying SetContentViewController.
 func (x *Window) SetContentViewController(contentViewController *raw.NSViewController) {
 	x.inner.SetContentViewController(contentViewController)
@@ -1856,16 +2010,22 @@ func (x *Window) SetShowsToolbarButton(showsToolbarButton bool) {
 	x.inner.SetShowsToolbarButton(showsToolbarButton)
 }
 
+// Get and set the tabbing mode for this window. This should be set before a window is shown. The default value is \c NSWindowTabbingModeAutomatic. When the value is \c NSWindowTabbingModeAutomatic, the system will look at the \c userTabbingPreference and automatically tab windows together based on the tabbingIdentifier, when it is appropriate to do so.
+//
 // TabbingMode calls the underlying TabbingMode.
 func (x *Window) TabbingMode() NSWindowTabbingMode {
 	return NSWindowTabbingMode(x.inner.TabbingMode())
 }
 
+// Get and set the tabbing mode for this window. This should be set before a window is shown. The default value is \c NSWindowTabbingModeAutomatic. When the value is \c NSWindowTabbingModeAutomatic, the system will look at the \c userTabbingPreference and automatically tab windows together based on the tabbingIdentifier, when it is appropriate to do so.
+//
 // SetTabbingMode calls the underlying SetTabbingMode.
 func (x *Window) SetTabbingMode(tabbingMode NSWindowTabbingMode) {
 	x.inner.SetTabbingMode(raw.NSWindowTabbingMode(tabbingMode))
 }
 
+// Windows with the same \c tabbingIdentifier will have the ability to be tabbed together when a window is being shown. This allows aggregation of similar windows. By default, the \c tabbingIdentifier will be generated based on inherent window properties, such as the window class name, the delegate class name, the window controller class name, and some additional state. Windows can be explicitly made to group together by using the same \c tabbingIdentifier.
+//
 // TabbingIdentifier calls the underlying TabbingIdentifier.
 func (x *Window) TabbingIdentifier() string {
 	_r := x.inner.TabbingIdentifier()
@@ -1875,11 +2035,15 @@ func (x *Window) TabbingIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Windows with the same \c tabbingIdentifier will have the ability to be tabbed together when a window is being shown. This allows aggregation of similar windows. By default, the \c tabbingIdentifier will be generated based on inherent window properties, such as the window class name, the delegate class name, the window controller class name, and some additional state. Windows can be explicitly made to group together by using the same \c tabbingIdentifier.
+//
 // SetTabbingIdentifier calls the underlying SetTabbingIdentifier.
 func (x *Window) SetTabbingIdentifier(tabbingIdentifier *foundation.NSString) {
 	x.inner.SetTabbingIdentifier(tabbingIdentifier)
 }
 
+// This is now a cover for `self.tabGroup.windows`, but will return nil if the window is not showing a tab bar.
+//
 // TabbedWindows returns the collection as a Go slice.
 func (x *Window) TabbedWindows() []*Window {
 	arr := x.inner.TabbedWindows()
@@ -1891,6 +2055,8 @@ func (x *Window) TabbedWindows() []*Window {
 	})
 }
 
+// Access the properties for this window when it is a tabbed window environment. See the \c NSWindowTab header and comments for more information.
+//
 // Tab calls the underlying Tab.
 func (x *Window) Tab() *WindowTab {
 	_r := x.inner.Tab()
@@ -1900,6 +2066,8 @@ func (x *Window) Tab() *WindowTab {
 	return &WindowTab{inner: _r}
 }
 
+// Represents a tab group of windows. This \c tabGroup is lazily created on demand.
+//
 // TabGroup calls the underlying TabGroup.
 func (x *Window) TabGroup() *WindowTabGroup {
 	_r := x.inner.TabGroup()
@@ -1909,16 +2077,22 @@ func (x *Window) TabGroup() *WindowTabGroup {
 	return &WindowTabGroup{inner: _r}
 }
 
+// Indicates whether the receiver is the subject of an active SharePlay sharing session.
+//
 // HasActiveWindowSharingSession calls the underlying HasActiveWindowSharingSession.
 func (x *Window) HasActiveWindowSharingSession() bool {
 	return x.inner.HasActiveWindowSharingSession()
 }
 
+// Retrieve the layout direction of the window titlebar: this includes the standard window buttons (close/minimize/maximize buttons) and the title for this window. In general, this will return "right to left" (RTL) if the primary system language is RTL. The layout direction may be RTL even in applications that do not have a RTL language localization. This value should be utilized if an application uses titlebarAppearsTransparent and places controls underneath the titlebar.
+//
 // WindowTitlebarLayoutDirection calls the underlying WindowTitlebarLayoutDirection.
 func (x *Window) WindowTitlebarLayoutDirection() NSUserInterfaceLayoutDirection {
 	return NSUserInterfaceLayoutDirection(x.inner.WindowTitlebarLayoutDirection())
 }
 
+// Tracks events matching the supplied mask with the supplied tracking handler until the tracking handler explicitly terminates tracking. Each event is removed from the event queue then passed to the tracking handler. If a matching event does not exist in the event queue, then the main thread blocks in the specified runloop mode until an event of the requested type is received or the timeout expires. If the timeout expires, the tracking handler is called with a nil event. A negative timeout is interpreted as 0. Use \c NSEventDurationForever to never timeout. Tracking continues until `*stop` is set to \c YES. Calls to `-nextEventMatchingMask:…` are allowed inside the trackingHandler block. This method returns once tracking is terminated.
+//
 // TrackEventsMatchingMaskTimeoutModeHandler calls the underlying TrackEventsMatchingMaskTimeoutModeHandler.
 func (x *Window) TrackEventsMatchingMaskTimeoutModeHandler(mask NSEventMask, timeout float64, mode *foundation.NSString, trackingHandler func(*raw.NSEvent, *bool)) {
 	x.inner.TrackEventsMatchingMaskTimeoutModeHandler(raw.NSEventMask(mask), timeout, mode, trackingHandler)
@@ -2045,6 +2219,8 @@ func (x *Window) UnregisterDraggedTypes() {
 	x.inner.UnregisterDraggedTypes()
 }
 
+// Returns a new display link whose callback will be invoked in-sync with the display the window is on. If the window is not on any display the callback will not be invoked.
+//
 // DisplayLinkWithTargetSelector calls the underlying DisplayLinkWithTargetSelector.
 func (x *Window) DisplayLinkWithTargetSelector(target objc.ID, selector objc.SEL) *quartzcore.CADisplayLink {
 	return x.inner.DisplayLinkWithTargetSelector(target, selector)

@@ -36,137 +36,183 @@ func NewAVB17221ACMPMessage() *AVB17221ACMPMessage {
 	return &AVB17221ACMPMessage{inner: raw.AVB17221ACMPMessageFromID(_id)}
 }
 
+// @property	messageType @abstract	The message_type field of the ACMP message.
+//
 // WithMessageType sets the messageType property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithMessageType(messageType AVB17221ACMPMessageType) *AVB17221ACMPMessage {
 	x.inner.SetMessageType(raw.AVB17221ACMPMessageType(messageType))
 	return x
 }
 
+// @property	status @abstract	The status field of the ACMP message.
+//
 // WithStatus sets the status property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithStatus(status AVB17221ACMPStatusCode) *AVB17221ACMPMessage {
 	x.inner.SetStatus(raw.AVB17221ACMPStatusCode(status))
 	return x
 }
 
+// @property	streamID @abstract	The stream_id field of the ACMP message.
+//
 // WithStreamID sets the streamID property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithStreamID(streamID uint64) *AVB17221ACMPMessage {
 	x.inner.SetStreamID(streamID)
 	return x
 }
 
+// @property	controllerGUID @abstract	The controller_entity_id field of the ACMP message.
+//
 // WithControllerEntityID sets the controllerEntityID property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithControllerEntityID(controllerEntityID uint64) *AVB17221ACMPMessage {
 	x.inner.SetControllerEntityID(controllerEntityID)
 	return x
 }
 
+// @property	talkerEntityID @abstract	The talker_entity_id field of the ACMP message.
+//
 // WithTalkerEntityID sets the talkerEntityID property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithTalkerEntityID(talkerEntityID uint64) *AVB17221ACMPMessage {
 	x.inner.SetTalkerEntityID(talkerEntityID)
 	return x
 }
 
+// @property	listenerEntityID @abstract	The listener_entity_id field of the ACMP message.
+//
 // WithListenerEntityID sets the listenerEntityID property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithListenerEntityID(listenerEntityID uint64) *AVB17221ACMPMessage {
 	x.inner.SetListenerEntityID(listenerEntityID)
 	return x
 }
 
+// @property	talkerUniqueID @abstract	The talker_unique_id field of the ACMP message.
+//
 // WithTalkerUniqueID sets the talkerUniqueID property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithTalkerUniqueID(talkerUniqueID uint16) *AVB17221ACMPMessage {
 	x.inner.SetTalkerUniqueID(talkerUniqueID)
 	return x
 }
 
+// @property	listenerUniqueID @abstract	The listener_unique_id field of the ACMP message.
+//
 // WithListenerUniqueID sets the listenerUniqueID property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithListenerUniqueID(listenerUniqueID uint16) *AVB17221ACMPMessage {
 	x.inner.SetListenerUniqueID(listenerUniqueID)
 	return x
 }
 
+// @property	destinationMAC @abstract	The dest_mac field of the ACMP message.
+//
 // WithDestinationMAC sets the destinationMAC property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithDestinationMAC(destinationMAC *MACAddress) *AVB17221ACMPMessage {
 	x.inner.SetDestinationMAC(destinationMAC.Unwrap())
 	return x
 }
 
+// @property	connectionCount @abstract	The connection_count field of the ACMP message.
+//
 // WithConnectionCount sets the connectionCount property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithConnectionCount(connectionCount uint16) *AVB17221ACMPMessage {
 	x.inner.SetConnectionCount(connectionCount)
 	return x
 }
 
+// @property	sequenceID @abstract	The sequence_id field of the ACMP message.
+//
 // WithSequenceID sets the sequenceID property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithSequenceID(sequenceID uint16) *AVB17221ACMPMessage {
 	x.inner.SetSequenceID(sequenceID)
 	return x
 }
 
+// @property	flags @abstract	The flags field of the ACMP message.
+//
 // WithFlags sets the flags property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithFlags(flags AVB17221ACMPFlags) *AVB17221ACMPMessage {
 	x.inner.SetFlags(raw.AVB17221ACMPFlags(flags))
 	return x
 }
 
+// @property	vlanID @abstract	The stream_vlan_id field of the ACMP message.
+//
 // WithVlanID sets the vlanID property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithVlanID(vlanID uint16) *AVB17221ACMPMessage {
 	x.inner.SetVlanID(vlanID)
 	return x
 }
 
+// @property	connectedListenersEntries @abstract	The connected_listeners_entries field of the ACMP message.
+//
 // WithConnectedListenersEntries sets the connectedListenersEntries property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithConnectedListenersEntries(connectedListenersEntries uint16) *AVB17221ACMPMessage {
 	x.inner.SetConnectedListenersEntries(connectedListenersEntries)
 	return x
 }
 
+// @property	connectedListenersEntriesValid @abstract	The CL_ENTRIES_VALID flag in the flags field of the ACMP message.
+//
 // WithConnectedListenersEntriesValid sets the connectedListenersEntriesValid property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithConnectedListenersEntriesValid(connectedListenersEntriesValid bool) *AVB17221ACMPMessage {
 	x.inner.SetConnectedListenersEntriesValid(connectedListenersEntriesValid)
 	return x
 }
 
+// @property	ipFlags @abstract	The ip_flags field of the ACMP message.
+//
 // WithIpFlags sets the ipFlags property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithIpFlags(ipFlags AVB17221ACMPIPFlag) *AVB17221ACMPMessage {
 	x.inner.SetIpFlags(raw.AVB17221ACMPIPFlag(ipFlags))
 	return x
 }
 
+// @property	sourcePort @abstract	The source_port field of the ACMP message.
+//
 // WithSourcePort sets the sourcePort property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithSourcePort(sourcePort uint16) *AVB17221ACMPMessage {
 	x.inner.SetSourcePort(sourcePort)
 	return x
 }
 
+// @property	destinationPort @abstract	The destination_port field of the ACMP message.
+//
 // WithDestinationPort sets the destinationPort property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithDestinationPort(destinationPort uint16) *AVB17221ACMPMessage {
 	x.inner.SetDestinationPort(destinationPort)
 	return x
 }
 
+// @property	sourceAddress @abstract	The source_ip_address field of the ACMP message.
+//
 // WithSourceIPAddress sets the sourceIPAddress property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithSourceIPAddress(sourceIPAddress *IPAddress) *AVB17221ACMPMessage {
 	x.inner.SetSourceIPAddress(sourceIPAddress.Unwrap())
 	return x
 }
 
+// @property	destinationAddress @abstract	The destination_ip_address field of the ACMP message.
+//
 // WithDestinationIPAddress sets the destinationIPAddress property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithDestinationIPAddress(destinationIPAddress *IPAddress) *AVB17221ACMPMessage {
 	x.inner.SetDestinationIPAddress(destinationIPAddress.Unwrap())
 	return x
 }
 
+// @property	sourceMAC @abstract	The source_mac field of the ACMP message.
+//
 // WithSourceMAC sets the sourceMAC property and returns the receiver for chaining.
 func (x *AVB17221ACMPMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221ACMPMessage {
 	x.inner.SetSourceMAC(sourceMAC.Unwrap())
 	return x
 }
 
+// @method		errorForStatusCode @abstract	This method returns an NSError filled out with an appropriate description for the message's status code. @result		An NSError instance within the AVBErrorDomain with the status code and an appropriate description. Will return nil if status code is success or in progress.
+//
 // ErrorForStatusCode calls the underlying ErrorForStatusCode.
 func (x *AVB17221ACMPMessage) ErrorForStatusCode() unsafe.Pointer {
 	return x.inner.ErrorForStatusCode()
 }
 
+// @property	messageType @abstract	The message_type field of the ACMP message.
+//
 // MessageType calls the underlying MessageType.
 func (x *AVB17221ACMPMessage) MessageType() AVB17221ACMPMessageType {
 	return AVB17221ACMPMessageType(x.inner.MessageType())
@@ -177,6 +223,8 @@ func (x *AVB17221ACMPMessage) SetMessageType(messageType AVB17221ACMPMessageType
 	x.inner.SetMessageType(raw.AVB17221ACMPMessageType(messageType))
 }
 
+// @property	status @abstract	The status field of the ACMP message.
+//
 // Status calls the underlying Status.
 func (x *AVB17221ACMPMessage) Status() AVB17221ACMPStatusCode {
 	return AVB17221ACMPStatusCode(x.inner.Status())
@@ -187,6 +235,8 @@ func (x *AVB17221ACMPMessage) SetStatus(status AVB17221ACMPStatusCode) {
 	x.inner.SetStatus(raw.AVB17221ACMPStatusCode(status))
 }
 
+// @property	streamID @abstract	The stream_id field of the ACMP message.
+//
 // StreamID calls the underlying StreamID.
 func (x *AVB17221ACMPMessage) StreamID() uint64 {
 	return x.inner.StreamID()
@@ -197,6 +247,8 @@ func (x *AVB17221ACMPMessage) SetStreamID(streamID uint64) {
 	x.inner.SetStreamID(streamID)
 }
 
+// @property	controllerGUID @abstract	The controller_entity_id field of the ACMP message.
+//
 // ControllerEntityID calls the underlying ControllerEntityID.
 func (x *AVB17221ACMPMessage) ControllerEntityID() uint64 {
 	return x.inner.ControllerEntityID()
@@ -207,6 +259,8 @@ func (x *AVB17221ACMPMessage) SetControllerEntityID(controllerEntityID uint64) {
 	x.inner.SetControllerEntityID(controllerEntityID)
 }
 
+// @property	talkerEntityID @abstract	The talker_entity_id field of the ACMP message.
+//
 // TalkerEntityID calls the underlying TalkerEntityID.
 func (x *AVB17221ACMPMessage) TalkerEntityID() uint64 {
 	return x.inner.TalkerEntityID()
@@ -217,6 +271,8 @@ func (x *AVB17221ACMPMessage) SetTalkerEntityID(talkerEntityID uint64) {
 	x.inner.SetTalkerEntityID(talkerEntityID)
 }
 
+// @property	listenerEntityID @abstract	The listener_entity_id field of the ACMP message.
+//
 // ListenerEntityID calls the underlying ListenerEntityID.
 func (x *AVB17221ACMPMessage) ListenerEntityID() uint64 {
 	return x.inner.ListenerEntityID()
@@ -227,6 +283,8 @@ func (x *AVB17221ACMPMessage) SetListenerEntityID(listenerEntityID uint64) {
 	x.inner.SetListenerEntityID(listenerEntityID)
 }
 
+// @property	talkerUniqueID @abstract	The talker_unique_id field of the ACMP message.
+//
 // TalkerUniqueID calls the underlying TalkerUniqueID.
 func (x *AVB17221ACMPMessage) TalkerUniqueID() uint16 {
 	return x.inner.TalkerUniqueID()
@@ -237,6 +295,8 @@ func (x *AVB17221ACMPMessage) SetTalkerUniqueID(talkerUniqueID uint16) {
 	x.inner.SetTalkerUniqueID(talkerUniqueID)
 }
 
+// @property	listenerUniqueID @abstract	The listener_unique_id field of the ACMP message.
+//
 // ListenerUniqueID calls the underlying ListenerUniqueID.
 func (x *AVB17221ACMPMessage) ListenerUniqueID() uint16 {
 	return x.inner.ListenerUniqueID()
@@ -247,6 +307,8 @@ func (x *AVB17221ACMPMessage) SetListenerUniqueID(listenerUniqueID uint16) {
 	x.inner.SetListenerUniqueID(listenerUniqueID)
 }
 
+// @property	destinationMAC @abstract	The dest_mac field of the ACMP message.
+//
 // DestinationMAC calls the underlying DestinationMAC.
 func (x *AVB17221ACMPMessage) DestinationMAC() *MACAddress {
 	_r := x.inner.DestinationMAC()
@@ -261,6 +323,8 @@ func (x *AVB17221ACMPMessage) SetDestinationMAC(destinationMAC *raw.AVBMACAddres
 	x.inner.SetDestinationMAC(destinationMAC)
 }
 
+// @property	connectionCount @abstract	The connection_count field of the ACMP message.
+//
 // ConnectionCount calls the underlying ConnectionCount.
 func (x *AVB17221ACMPMessage) ConnectionCount() uint16 {
 	return x.inner.ConnectionCount()
@@ -271,6 +335,8 @@ func (x *AVB17221ACMPMessage) SetConnectionCount(connectionCount uint16) {
 	x.inner.SetConnectionCount(connectionCount)
 }
 
+// @property	sequenceID @abstract	The sequence_id field of the ACMP message.
+//
 // SequenceID calls the underlying SequenceID.
 func (x *AVB17221ACMPMessage) SequenceID() uint16 {
 	return x.inner.SequenceID()
@@ -281,6 +347,8 @@ func (x *AVB17221ACMPMessage) SetSequenceID(sequenceID uint16) {
 	x.inner.SetSequenceID(sequenceID)
 }
 
+// @property	flags @abstract	The flags field of the ACMP message.
+//
 // Flags calls the underlying Flags.
 func (x *AVB17221ACMPMessage) Flags() AVB17221ACMPFlags {
 	return AVB17221ACMPFlags(x.inner.Flags())
@@ -291,6 +359,8 @@ func (x *AVB17221ACMPMessage) SetFlags(flags AVB17221ACMPFlags) {
 	x.inner.SetFlags(raw.AVB17221ACMPFlags(flags))
 }
 
+// @property	vlanID @abstract	The stream_vlan_id field of the ACMP message.
+//
 // VlanID calls the underlying VlanID.
 func (x *AVB17221ACMPMessage) VlanID() uint16 {
 	return x.inner.VlanID()
@@ -301,6 +371,8 @@ func (x *AVB17221ACMPMessage) SetVlanID(vlanID uint16) {
 	x.inner.SetVlanID(vlanID)
 }
 
+// @property	connectedListenersEntries @abstract	The connected_listeners_entries field of the ACMP message.
+//
 // ConnectedListenersEntries calls the underlying ConnectedListenersEntries.
 func (x *AVB17221ACMPMessage) ConnectedListenersEntries() uint16 {
 	return x.inner.ConnectedListenersEntries()
@@ -311,6 +383,8 @@ func (x *AVB17221ACMPMessage) SetConnectedListenersEntries(connectedListenersEnt
 	x.inner.SetConnectedListenersEntries(connectedListenersEntries)
 }
 
+// @property	connectedListenersEntriesValid @abstract	The CL_ENTRIES_VALID flag in the flags field of the ACMP message.
+//
 // ConnectedListenersEntriesValid calls the underlying ConnectedListenersEntriesValid.
 func (x *AVB17221ACMPMessage) ConnectedListenersEntriesValid() bool {
 	return x.inner.ConnectedListenersEntriesValid()
@@ -321,6 +395,8 @@ func (x *AVB17221ACMPMessage) SetConnectedListenersEntriesValid(connectedListene
 	x.inner.SetConnectedListenersEntriesValid(connectedListenersEntriesValid)
 }
 
+// @property	ipFlags @abstract	The ip_flags field of the ACMP message.
+//
 // IpFlags calls the underlying IpFlags.
 func (x *AVB17221ACMPMessage) IpFlags() AVB17221ACMPIPFlag {
 	return AVB17221ACMPIPFlag(x.inner.IpFlags())
@@ -331,6 +407,8 @@ func (x *AVB17221ACMPMessage) SetIpFlags(ipFlags AVB17221ACMPIPFlag) {
 	x.inner.SetIpFlags(raw.AVB17221ACMPIPFlag(ipFlags))
 }
 
+// @property	sourcePort @abstract	The source_port field of the ACMP message.
+//
 // SourcePort calls the underlying SourcePort.
 func (x *AVB17221ACMPMessage) SourcePort() uint16 {
 	return x.inner.SourcePort()
@@ -341,6 +419,8 @@ func (x *AVB17221ACMPMessage) SetSourcePort(sourcePort uint16) {
 	x.inner.SetSourcePort(sourcePort)
 }
 
+// @property	destinationPort @abstract	The destination_port field of the ACMP message.
+//
 // DestinationPort calls the underlying DestinationPort.
 func (x *AVB17221ACMPMessage) DestinationPort() uint16 {
 	return x.inner.DestinationPort()
@@ -351,6 +431,8 @@ func (x *AVB17221ACMPMessage) SetDestinationPort(destinationPort uint16) {
 	x.inner.SetDestinationPort(destinationPort)
 }
 
+// @property	sourceAddress @abstract	The source_ip_address field of the ACMP message.
+//
 // SourceIPAddress calls the underlying SourceIPAddress.
 func (x *AVB17221ACMPMessage) SourceIPAddress() *IPAddress {
 	_r := x.inner.SourceIPAddress()
@@ -365,6 +447,8 @@ func (x *AVB17221ACMPMessage) SetSourceIPAddress(sourceIPAddress *raw.AVBIPAddre
 	x.inner.SetSourceIPAddress(sourceIPAddress)
 }
 
+// @property	destinationAddress @abstract	The destination_ip_address field of the ACMP message.
+//
 // DestinationIPAddress calls the underlying DestinationIPAddress.
 func (x *AVB17221ACMPMessage) DestinationIPAddress() *IPAddress {
 	_r := x.inner.DestinationIPAddress()
@@ -379,6 +463,8 @@ func (x *AVB17221ACMPMessage) SetDestinationIPAddress(destinationIPAddress *raw.
 	x.inner.SetDestinationIPAddress(destinationIPAddress)
 }
 
+// @property	sourceMAC @abstract	The source_mac field of the ACMP message.
+//
 // SourceMAC calls the underlying SourceMAC.
 func (x *AVB17221ACMPMessage) SourceMAC() *MACAddress {
 	_r := x.inner.SourceMAC()

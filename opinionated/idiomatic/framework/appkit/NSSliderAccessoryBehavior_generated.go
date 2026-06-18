@@ -35,6 +35,8 @@ func NewSliderAccessoryBehavior() *SliderAccessoryBehavior {
 	return &SliderAccessoryBehavior{inner: raw.NSSliderAccessoryBehaviorFromID(_id)}
 }
 
+// Override point for custom subclasses to handle interaction.
+//
 // HandleAction calls the underlying HandleAction.
 func (x *SliderAccessoryBehavior) HandleAction(sender *raw.NSSliderAccessory) {
 	x.inner.HandleAction(sender)

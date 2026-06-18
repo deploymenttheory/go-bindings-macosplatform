@@ -39,6 +39,8 @@ func NewSavedGame() *SavedGame {
 	return &SavedGame{inner: raw.GKSavedGameFromID(_id)}
 }
 
+// Asynchronously load the data for this saved game. The completion handler is called with loaded data or an error.
+//
 // LoadData blocks until the operation completes or ctx is cancelled.
 func (x *SavedGame) LoadData(ctx context.Context) (*foundation.NSData, error) {
 	type _result struct {

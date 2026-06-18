@@ -30,6 +30,8 @@ func PersonFromID(id objc.ID) *Person {
 	return &Person{inner: raw.SWPersonFromID(id)}
 }
 
+// @abstract An initializer @param handle The phone number or email address for this person. @param identity The identity of this person. @param displayName The name of this person. @param thumbnailImageData Optional thumbnail image data for this person. If nil, this will be inferred by the system.
+//
 // NewPersonWithHandleIdentityDisplayNameThumbnailImageData creates a new [Person].
 func NewPersonWithHandleIdentityDisplayNameThumbnailImageData(handle string, identity *raw.SWPersonIdentity, displayName string, thumbnailImageData *foundation.NSData) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWPerson")), objc.RegisterName("alloc"))

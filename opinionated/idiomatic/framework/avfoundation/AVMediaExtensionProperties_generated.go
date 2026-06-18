@@ -37,6 +37,8 @@ func NewMediaExtensionProperties() *MediaExtensionProperties {
 	return &MediaExtensionProperties{inner: raw.AVMediaExtensionPropertiesFromID(_id)}
 }
 
+// The identifier of the Media Extension. The extension identifier string, corresponding to the ClassImplementationID value from the EXAppExtensionAttributes dictionary in the Info.plist file.
+//
 // ExtensionIdentifier calls the underlying ExtensionIdentifier.
 func (x *MediaExtensionProperties) ExtensionIdentifier() string {
 	_r := x.inner.ExtensionIdentifier()
@@ -46,6 +48,8 @@ func (x *MediaExtensionProperties) ExtensionIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The name of the MediaExtension. The localized name of the MediaExtension format reader or video decoder, corresponding to the CFBundleDisplayName.
+//
 // ExtensionName calls the underlying ExtensionName.
 func (x *MediaExtensionProperties) ExtensionName() string {
 	_r := x.inner.ExtensionName()
@@ -55,6 +59,8 @@ func (x *MediaExtensionProperties) ExtensionName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The name of the containing application bundle. The localized name of the application that hosts the MediaExtension.
+//
 // ContainingBundleName calls the underlying ContainingBundleName.
 func (x *MediaExtensionProperties) ContainingBundleName() string {
 	_r := x.inner.ContainingBundleName()
@@ -64,11 +70,15 @@ func (x *MediaExtensionProperties) ContainingBundleName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The file URL of the MediaExtension bundle.
+//
 // ExtensionURL calls the underlying ExtensionURL.
 func (x *MediaExtensionProperties) ExtensionURL() *foundation.NSURL {
 	return x.inner.ExtensionURL()
 }
 
+// The file URL of the host application for the MediaExtension.
+//
 // ContainingBundleURL calls the underlying ContainingBundleURL.
 func (x *MediaExtensionProperties) ContainingBundleURL() *foundation.NSURL {
 	return x.inner.ContainingBundleURL()

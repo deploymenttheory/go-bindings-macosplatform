@@ -32,6 +32,8 @@ func URLProtectionSpaceFromID(id objc.ID) *URLProtectionSpace {
 	return &URLProtectionSpace{inner: raw.NSURLProtectionSpaceFromID(id)}
 }
 
+// @method initWithHost:port:protocol:realm:authenticationMethod: @abstract Initialize a protection space representing an origin server, or a realm on one @param host The hostname of the server @param port The port for the server @param protocol The protocol for this server - e.g. "http", "ftp", "https" @param realm A string indicating a protocol-specific subdivision of a single host. For http and https, this maps to the realm string in http authentication challenges. For many other protocols it is unused. @param authenticationMethod The authentication method to use to access this protection space - valid values include nil (default method), @"digest" and @"form". @result The initialized object.
+//
 // NewURLProtectionSpaceWithHostPortProtocolRealmAuthenticationMethod creates a new [URLProtectionSpace].
 func NewURLProtectionSpaceWithHostPortProtocolRealmAuthenticationMethod(host string, port int, protocol string, realm string, authenticationMethod string) *URLProtectionSpace {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLProtectionSpace")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewURLProtectionSpaceWithHostPortProtocolRealmAuthenticationMethod(host str
 	return &URLProtectionSpace{inner: raw.NSURLProtectionSpaceFromID(_id)}
 }
 
+// @method initWithProxyHost:port:type:realm:authenticationMethod: @abstract Initialize a protection space representing a proxy server, or a realm on one @param host The hostname of the proxy server @param port The port for the proxy server @param type The type of proxy - e.g. "http", "ftp", "SOCKS" @param realm A string indicating a protocol-specific subdivision of a single host. For http and https, this maps to the realm string in http authentication challenges. For many other protocols it is unused. @param authenticationMethod The authentication method to use to access this protection space - valid values include nil (default method) and @"digest" @result The initialized object.
+//
 // NewURLProtectionSpaceWithProxyHostPortTypeRealmAuthenticationMethod creates a new [URLProtectionSpace].
 func NewURLProtectionSpaceWithProxyHostPortTypeRealmAuthenticationMethod(host string, port int, type_ string, realm string, authenticationMethod string) *URLProtectionSpace {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLProtectionSpace")), objc.RegisterName("alloc"))
@@ -52,6 +56,8 @@ func (x *URLProtectionSpace) WithScriptingProperties(scriptingProperties *raw.NS
 	return x
 }
 
+// @abstract Get the authentication realm for which the protection space that needs authentication @discussion This is generally only available for http authentication, and may be nil otherwise. @result The realm string
+//
 // Realm calls the underlying Realm.
 func (x *URLProtectionSpace) Realm() *String {
 	_r := x.inner.Realm()
@@ -61,16 +67,22 @@ func (x *URLProtectionSpace) Realm() *String {
 	return &String{inner: _r}
 }
 
+// @abstract Determine if the password for this protection space can be sent securely @result YES if a secure authentication method or protocol will be used, NO otherwise
+//
 // ReceivesCredentialSecurely calls the underlying ReceivesCredentialSecurely.
 func (x *URLProtectionSpace) ReceivesCredentialSecurely() bool {
 	return x.inner.ReceivesCredentialSecurely()
 }
 
+// @abstract Determine if this authenticating protection space is a proxy server @result YES if a proxy, NO otherwise
+//
 // IsProxy calls the underlying IsProxy.
 func (x *URLProtectionSpace) IsProxy() bool {
 	return x.inner.IsProxy()
 }
 
+// @abstract Get the proxy host if this is a proxy authentication, or the host from the URL. @result The host for this protection space.
+//
 // Host calls the underlying Host.
 func (x *URLProtectionSpace) Host() *String {
 	_r := x.inner.Host()
@@ -80,11 +92,15 @@ func (x *URLProtectionSpace) Host() *String {
 	return &String{inner: _r}
 }
 
+// @abstract Get the proxy port if this is a proxy authentication, or the port from the URL. @result The port for this protection space, or 0 if not set.
+//
 // Port calls the underlying Port.
 func (x *URLProtectionSpace) Port() int {
 	return x.inner.Port()
 }
 
+// @abstract Get the type of this protection space, if a proxy @result The type string, or nil if not a proxy.
+//
 // ProxyType calls the underlying ProxyType.
 func (x *URLProtectionSpace) ProxyType() *String {
 	_r := x.inner.ProxyType()
@@ -94,6 +110,8 @@ func (x *URLProtectionSpace) ProxyType() *String {
 	return &String{inner: _r}
 }
 
+// @abstract Get the protocol of this protection space, if not a proxy @result The type string, or nil if a proxy.
+//
 // Protocol calls the underlying Protocol.
 func (x *URLProtectionSpace) Protocol() *String {
 	_r := x.inner.Protocol()
@@ -103,6 +121,8 @@ func (x *URLProtectionSpace) Protocol() *String {
 	return &String{inner: _r}
 }
 
+// @abstract Get the authentication method to be used for this protection space @result The authentication method
+//
 // AuthenticationMethod calls the underlying AuthenticationMethod.
 func (x *URLProtectionSpace) AuthenticationMethod() *String {
 	_r := x.inner.AuthenticationMethod()

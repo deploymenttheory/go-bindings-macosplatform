@@ -36,6 +36,8 @@ func NewWorkoutEffortRelationship() *WorkoutEffortRelationship {
 	return &WorkoutEffortRelationship{inner: raw.HKWorkoutEffortRelationshipFromID(_id)}
 }
 
+// @property      workout
+//
 // Workout calls the underlying Workout.
 func (x *WorkoutEffortRelationship) Workout() *Workout {
 	_r := x.inner.Workout()
@@ -45,6 +47,8 @@ func (x *WorkoutEffortRelationship) Workout() *Workout {
 	return &Workout{inner: _r}
 }
 
+// @property      activity
+//
 // Activity calls the underlying Activity.
 func (x *WorkoutEffortRelationship) Activity() *WorkoutActivity {
 	_r := x.inner.Activity()
@@ -54,6 +58,8 @@ func (x *WorkoutEffortRelationship) Activity() *WorkoutActivity {
 	return &WorkoutActivity{inner: _r}
 }
 
+// @property      samples @abstract      The samples related to the workout but not any sub-activities
+//
 // Samples returns the collection as a Go slice.
 func (x *WorkoutEffortRelationship) Samples() []*Sample {
 	arr := x.inner.Samples()

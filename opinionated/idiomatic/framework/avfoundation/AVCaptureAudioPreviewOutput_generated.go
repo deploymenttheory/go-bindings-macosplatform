@@ -37,24 +37,32 @@ func NewCaptureAudioPreviewOutput() *CaptureAudioPreviewOutput {
 	return &CaptureAudioPreviewOutput{inner: raw.AVCaptureAudioPreviewOutputFromID(_id)}
 }
 
+// @property outputDeviceUniqueID @abstract Specifies the unique ID of the Core Audio output device being used to play preview audio. @discussion The value of this property is an NSString containing the unique ID of the Core Audio device to be used for output, or nil if the default system output should be used.
+//
 // WithOutputDeviceUniqueID sets the outputDeviceUniqueID property and returns the receiver for chaining.
 func (x *CaptureAudioPreviewOutput) WithOutputDeviceUniqueID(outputDeviceUniqueID string) *CaptureAudioPreviewOutput {
 	x.inner.SetOutputDeviceUniqueID(foundation.NSStringStringWithUTF8String(outputDeviceUniqueID))
 	return x
 }
 
+// @property volume @abstract Specifies the preview volume of the output. @discussion The value of this property is the preview volume of the receiver, where 1.0 is the maximum volume and 0.0 is muted.
+//
 // WithVolume sets the volume property and returns the receiver for chaining.
 func (x *CaptureAudioPreviewOutput) WithVolume(volume float32) *CaptureAudioPreviewOutput {
 	x.inner.SetVolume(volume)
 	return x
 }
 
+// A `BOOL` value that indicates whether to defer starting this capture output. When this value is `true`, the session does not prepare the output's resources until some time after “AVCaptureSession/startRunning“ returns. You can start the visual parts of your user interface (e.g. preview) prior to other parts (e.g. photo/movie capture, metadata output, etc..) to improve startup performance. Set this value to `false` for outputs that your app needs for startup, and `true` for the ones it does not need to start immediately. For example, an “AVCaptureVideoDataOutput“ that you intend to use for displaying preview should set this value to `false`, so that the frames are available as soon as possible. By default, for apps that are linked on or after iOS 26, this property value is `true` for “AVCapturePhotoOutput“ and “AVCaptureFileOutput“ subclasses if supported, and `false` otherwise. When set to `true` for “AVCapturePhotoOutput“, if you want to support multiple capture requests before running deferred start, set “AVCapturePhotoOutput/responsiveCaptureEnabled“ to `true` on that output. If “deferredStartSupported“ is `false`, setting this property value to `true` results in the system throwing an `NSInvalidArgumentException`. - Note: Set this value before calling “AVCaptureSession/commitConfiguration“ as it requires a lengthy reconfiguration of the capture render pipeline.
+//
 // WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
 func (x *CaptureAudioPreviewOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioPreviewOutput {
 	x.inner.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
 	return x
 }
 
+// @property outputDeviceUniqueID @abstract Specifies the unique ID of the Core Audio output device being used to play preview audio. @discussion The value of this property is an NSString containing the unique ID of the Core Audio device to be used for output, or nil if the default system output should be used.
+//
 // OutputDeviceUniqueID calls the underlying OutputDeviceUniqueID.
 func (x *CaptureAudioPreviewOutput) OutputDeviceUniqueID() string {
 	_r := x.inner.OutputDeviceUniqueID()
@@ -69,6 +77,8 @@ func (x *CaptureAudioPreviewOutput) SetOutputDeviceUniqueID(outputDeviceUniqueID
 	x.inner.SetOutputDeviceUniqueID(foundation.NSStringStringWithUTF8String(outputDeviceUniqueID))
 }
 
+// @property volume @abstract Specifies the preview volume of the output. @discussion The value of this property is the preview volume of the receiver, where 1.0 is the maximum volume and 0.0 is muted.
+//
 // Volume calls the underlying Volume.
 func (x *CaptureAudioPreviewOutput) Volume() float32 {
 	return x.inner.Volume()

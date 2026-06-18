@@ -35,23 +35,31 @@ func NewSGDOptimizer() *SGDOptimizer {
 	return &SGDOptimizer{inner: raw.MLCSGDOptimizerFromID(_id)}
 }
 
+// @property   learningRate @abstract   The learning rate.  This property is 'readwrite' so that callers can implement a 'decay' during training
+//
 // WithLearningRate sets the learningRate property and returns the receiver for chaining.
 func (x *SGDOptimizer) WithLearningRate(learningRate float32) *SGDOptimizer {
 	x.inner.MLCOptimizer.SetLearningRate(learningRate)
 	return x
 }
 
+// @property   appliesGradientClipping @abstract   Whether gradient clipping should be applied or not.
+//
 // WithAppliesGradientClipping sets the appliesGradientClipping property and returns the receiver for chaining.
 func (x *SGDOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *SGDOptimizer {
 	x.inner.MLCOptimizer.SetAppliesGradientClipping(appliesGradientClipping)
 	return x
 }
 
+// @property   momentumScale @abstract   The momentum factor.  A hyper-parameter. @discussion The default is 0.0.
+//
 // MomentumScale calls the underlying MomentumScale.
 func (x *SGDOptimizer) MomentumScale() float32 {
 	return x.inner.MomentumScale()
 }
 
+// @property   usesNesterovMomentum @abstract   A boolean that specifies whether to apply nesterov momentum or not. @discussion The default is false.
+//
 // UsesNesterovMomentum calls the underlying UsesNesterovMomentum.
 func (x *SGDOptimizer) UsesNesterovMomentum() bool {
 	return x.inner.UsesNesterovMomentum()

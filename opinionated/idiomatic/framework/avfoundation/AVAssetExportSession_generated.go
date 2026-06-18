@@ -34,6 +34,8 @@ func AssetExportSessionFromID(id objc.ID) *AssetExportSession {
 	return &AssetExportSession{inner: raw.AVAssetExportSessionFromID(id)}
 }
 
+// @method						initWithAsset:presetName: @abstract					Initialize an AVAssetExportSession with the specified preset and set the source to the contents of the asset. @param		asset			An AVAsset object that is intended to be exported. @param		presetName		An NSString specifying the name of the preset template for the export. @result						Returns the initialized AVAssetExportSession. @discussion					If the specified asset belongs to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie, the results of any export-related operation are undefined if you mutate the asset after the operation commences. These operations include but are not limited to: 1) testing the compatibility of export presets with the asset, 2) calculating the maximum duration or estimated length of the output file, and 3) the export operation itself.
+//
 // NewAssetExportSessionWithAssetPresetName creates a new [AssetExportSession].
 func NewAssetExportSessionWithAssetPresetName(asset *raw.AVAsset, presetName string) *AssetExportSession {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetExportSession")), objc.RegisterName("alloc"))
@@ -59,6 +61,8 @@ func (x *AssetExportSession) WithShouldOptimizeForNetworkUse(shouldOptimizeForNe
 	return x
 }
 
+// @property		allowsParallelizedExport @abstract		Determines whether or not parallelization can be employed in the export. @discussion	On select platforms, there may be opportunities to expedite the export by using additional resources in parallel. If set to YES, export parallelization will be enabled, only if parallelization requirements are met.  There will be no error signaled if export parallelization is not achievable, and instead the export will proceed as normal (without parallelization). If set to NO, export parallelization will not be used.
+//
 // WithAllowsParallelizedExport sets the allowsParallelizedExport property and returns the receiver for chaining.
 func (x *AssetExportSession) WithAllowsParallelizedExport(allowsParallelizedExport bool) *AssetExportSession {
 	x.inner.SetAllowsParallelizedExport(allowsParallelizedExport)
@@ -119,24 +123,32 @@ func (x *AssetExportSession) WithVideoComposition(videoComposition VideoComposit
 	return x
 }
 
+// @property		audioTrackGroupHandling @abstract		Defines export policy for handling alternate audio tracks @discussion Specifies the handling of audio tracks that are members of the same alternate track group corresponding to an exported audio track in the source asset. If no audio track group is present, the value of this property has no effect. If necessary, use the trackGroups property of AVAsset to determine whether any audio track groups are present. The AVAudioMix property is not allowed to be used when also specifying alternate track output handling.  An exception will be thrown if both are specified.
+//
 // WithAudioTrackGroupHandling sets the audioTrackGroupHandling property and returns the receiver for chaining.
 func (x *AssetExportSession) WithAudioTrackGroupHandling(audioTrackGroupHandling AVAssetTrackGroupOutputHandling) *AssetExportSession {
 	x.inner.SetAudioTrackGroupHandling(raw.AVAssetTrackGroupOutputHandling(audioTrackGroupHandling))
 	return x
 }
 
+// @property	canPerformMultiplePassesOverSourceMediaData @abstract Determines whether the export session can perform multiple passes over the source media to achieve better results. @discussion When the value for this property is YES, the export session can produce higher quality results at the expense of longer export times.  Setting this property to YES may also require the export session to write temporary data to disk during the export.  To control the location of temporary data, use the property directoryForTemporaryFiles. The default value is NO.  Not all export session configurations can benefit from performing multiple passes over the source media.  In these cases, setting this property to YES has no effect. This property cannot be set after the export has started.
+//
 // WithCanPerformMultiplePassesOverSourceMediaData sets the canPerformMultiplePassesOverSourceMediaData property and returns the receiver for chaining.
 func (x *AssetExportSession) WithCanPerformMultiplePassesOverSourceMediaData(canPerformMultiplePassesOverSourceMediaData bool) *AssetExportSession {
 	x.inner.SetCanPerformMultiplePassesOverSourceMediaData(canPerformMultiplePassesOverSourceMediaData)
 	return x
 }
 
+// @property directoryForTemporaryFiles @abstract Specifies a directory that is suitable for containing temporary files generated during the export process @discussion AVAssetExportSession may need to write temporary files when configured in certain ways, such as when canPerformMultiplePassesOverSourceMediaData is set to YES.  This property can be used to control where in the filesystem those temporary files are created.  All temporary files will be deleted when the export is completed, is canceled, or fails. When the value of this property is nil, the export session will choose a suitable location when writing temporary files.  The default value is nil. This property cannot be set after the export has started.  The export will fail if the URL points to a location that is not a directory, does not exist, is not on the local file system, or if a file cannot be created in this directory (for example, due to insufficient permissions or sandboxing restrictions).
+//
 // WithDirectoryForTemporaryFiles sets the directoryForTemporaryFiles property and returns the receiver for chaining.
 func (x *AssetExportSession) WithDirectoryForTemporaryFiles(directoryForTemporaryFiles string) *AssetExportSession {
 	x.inner.SetDirectoryForTemporaryFiles(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(directoryForTemporaryFiles)))
 	return x
 }
 
+// @method						exportAsynchronouslyWithCompletionHandler: @abstract					Starts the asynchronous execution of an export session. @param						handler If internal preparation for export fails, the handler will be invoked synchronously. The handler may also be called asynchronously after -exportAsynchronouslyWithCompletionHandler: returns, in the following cases: 1) if a failure occurs during the export, including failures of loading, re-encoding, or writing media data to the output, 2) if -cancelExport is invoked, 3) if export session succeeds, having completely written its output to the outputURL. In each case, AVAssetExportSession.status will signal the terminal state of the asset reader, and if a failure occurs, the NSError that describes the failure can be obtained from the error property. @discussion					Initiates an asynchronous export operation and returns immediately.
+//
 // ExportAsynchronously blocks until the operation completes or ctx is cancelled.
 func (x *AssetExportSession) ExportAsynchronously(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -151,6 +163,8 @@ func (x *AssetExportSession) ExportAsynchronously(ctx context.Context) error {
 	}
 }
 
+// @method						cancelExport @abstract					Cancels the execution of an export session. @discussion					Cancel can be invoked when the export is running.
+//
 // CancelExport calls the underlying CancelExport.
 func (x *AssetExportSession) CancelExport() {
 	x.inner.CancelExport()
@@ -208,6 +222,8 @@ func (x *AssetExportSession) SetShouldOptimizeForNetworkUse(shouldOptimizeForNet
 	x.inner.SetShouldOptimizeForNetworkUse(shouldOptimizeForNetworkUse)
 }
 
+// @property		allowsParallelizedExport @abstract		Determines whether or not parallelization can be employed in the export. @discussion	On select platforms, there may be opportunities to expedite the export by using additional resources in parallel. If set to YES, export parallelization will be enabled, only if parallelization requirements are met.  There will be no error signaled if export parallelization is not achievable, and instead the export will proceed as normal (without parallelization). If set to NO, export parallelization will not be used.
+//
 // AllowsParallelizedExport calls the underlying AllowsParallelizedExport.
 func (x *AssetExportSession) AllowsParallelizedExport() bool {
 	return x.inner.AllowsParallelizedExport()
@@ -233,6 +249,8 @@ func (x *AssetExportSession) Progress() float32 {
 	return x.inner.Progress()
 }
 
+// @method						determineCompatibleFileTypesWithCompletionHandler: @abstract					Performs an inspection on the AVAsset and Preset the object was initialized with to determine a list of file types the ExportSession can write. @param						handler Called when the inspection completes with an array of file types the ExportSession can write.  Note that this may have a count of zero. @discussion					This method is different than the supportedFileTypes property in that it performs an inspection of the AVAsset in order to determine its compatibility with each of the session's supported file types.
+//
 // DetermineCompatibleFileTypesWithCompletionHandler calls the underlying DetermineCompatibleFileTypesWithCompletionHandler.
 func (x *AssetExportSession) DetermineCompatibleFileTypesWithCompletionHandler(handler objc.Block) {
 	x.inner.DetermineCompatibleFileTypesWithCompletionHandler(handler)
@@ -249,11 +267,15 @@ func (x *AssetExportSession) SupportedFileTypes() []*foundation.NSString {
 	})
 }
 
+// @method						estimateMaximumDurationWithCompletionHandler: @abstract					Starts the asynchronous execution of estimating the maximum duration of the export based on the asset, preset, and fileLengthLimit associated with the export session. @discussion 				If fileLengthLimit is not set on the export session, fileLengthLimit will be assumed to be the maximum file size specified by the preset (if any); else infinite. @param						handler A block called with the estimated maximum duration, or kCMTimeInvalid if an error occurs.  The error parameter will be non-nil if an error occurs.
+//
 // EstimateMaximumDurationWithCompletionHandler calls the underlying EstimateMaximumDurationWithCompletionHandler.
 func (x *AssetExportSession) EstimateMaximumDurationWithCompletionHandler(handler objc.Block) {
 	x.inner.EstimateMaximumDurationWithCompletionHandler(handler)
 }
 
+// @method						estimateOutputFileLengthWithCompletionHandler: @abstract 					Starts the asynchronous execution of estimating the output file length of the export based on the asset, preset, and timeRange associated with the export session. @discussion 				If timeRange is not set on the export session, timeRange will be assumed to be the full time range of the asset. @param						handler A block called with the estimated output file length in bytes, if it can be determined; 0 otherwise.  The error parameter will be non-nil if an error occurs.
+//
 // EstimateOutputFileLengthWithCompletionHandler calls the underlying EstimateOutputFileLengthWithCompletionHandler.
 func (x *AssetExportSession) EstimateOutputFileLengthWithCompletionHandler(handler func(int64, unsafe.Pointer)) {
 	x.inner.EstimateOutputFileLengthWithCompletionHandler(handler)
@@ -301,8 +323,17 @@ func (x *AssetExportSession) Metadata() []*MetadataItem {
 }
 
 // SetMetadata calls the underlying SetMetadata.
-func (x *AssetExportSession) SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem]) {
-	x.inner.SetMetadata(metadata)
+func (x *AssetExportSession) SetMetadata(metadata ...MetadataItemProvider) {
+	_ptrs := make([]objc.ID, len(metadata))
+	for _i, _v := range metadata {
+		_ptrs[_i] = _v.asMetadataItem().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.AVMetadataItem]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.AVMetadataItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetMetadata(_arg0)
 }
 
 // MetadataItemFilter calls the underlying MetadataItemFilter.
@@ -366,6 +397,8 @@ func (x *AssetExportSession) CustomVideoCompositor() raw.AVVideoCompositing {
 	return x.inner.CustomVideoCompositor()
 }
 
+// @property		audioTrackGroupHandling @abstract		Defines export policy for handling alternate audio tracks @discussion Specifies the handling of audio tracks that are members of the same alternate track group corresponding to an exported audio track in the source asset. If no audio track group is present, the value of this property has no effect. If necessary, use the trackGroups property of AVAsset to determine whether any audio track groups are present. The AVAudioMix property is not allowed to be used when also specifying alternate track output handling.  An exception will be thrown if both are specified.
+//
 // AudioTrackGroupHandling calls the underlying AudioTrackGroupHandling.
 func (x *AssetExportSession) AudioTrackGroupHandling() AVAssetTrackGroupOutputHandling {
 	return AVAssetTrackGroupOutputHandling(x.inner.AudioTrackGroupHandling())
@@ -376,6 +409,8 @@ func (x *AssetExportSession) SetAudioTrackGroupHandling(audioTrackGroupHandling 
 	x.inner.SetAudioTrackGroupHandling(raw.AVAssetTrackGroupOutputHandling(audioTrackGroupHandling))
 }
 
+// @property	canPerformMultiplePassesOverSourceMediaData @abstract Determines whether the export session can perform multiple passes over the source media to achieve better results. @discussion When the value for this property is YES, the export session can produce higher quality results at the expense of longer export times.  Setting this property to YES may also require the export session to write temporary data to disk during the export.  To control the location of temporary data, use the property directoryForTemporaryFiles. The default value is NO.  Not all export session configurations can benefit from performing multiple passes over the source media.  In these cases, setting this property to YES has no effect. This property cannot be set after the export has started.
+//
 // CanPerformMultiplePassesOverSourceMediaData calls the underlying CanPerformMultiplePassesOverSourceMediaData.
 func (x *AssetExportSession) CanPerformMultiplePassesOverSourceMediaData() bool {
 	return x.inner.CanPerformMultiplePassesOverSourceMediaData()
@@ -386,6 +421,8 @@ func (x *AssetExportSession) SetCanPerformMultiplePassesOverSourceMediaData(canP
 	x.inner.SetCanPerformMultiplePassesOverSourceMediaData(canPerformMultiplePassesOverSourceMediaData)
 }
 
+// @property directoryForTemporaryFiles @abstract Specifies a directory that is suitable for containing temporary files generated during the export process @discussion AVAssetExportSession may need to write temporary files when configured in certain ways, such as when canPerformMultiplePassesOverSourceMediaData is set to YES.  This property can be used to control where in the filesystem those temporary files are created.  All temporary files will be deleted when the export is completed, is canceled, or fails. When the value of this property is nil, the export session will choose a suitable location when writing temporary files.  The default value is nil. This property cannot be set after the export has started.  The export will fail if the URL points to a location that is not a directory, does not exist, is not on the local file system, or if a file cannot be created in this directory (for example, due to insufficient permissions or sandboxing restrictions).
+//
 // DirectoryForTemporaryFiles calls the underlying DirectoryForTemporaryFiles.
 func (x *AssetExportSession) DirectoryForTemporaryFiles() *foundation.NSURL {
 	return x.inner.DirectoryForTemporaryFiles()
@@ -439,7 +476,7 @@ type AssetExportSessionable interface {
 	FileLengthLimit() int64
 	SetFileLengthLimit(fileLengthLimit int64)
 	Metadata() []*MetadataItem
-	SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem])
+	SetMetadata(metadata ...MetadataItemProvider)
 	MetadataItemFilter() *MetadataItemFilter
 	SetMetadataItemFilter(metadataItemFilter *raw.AVMetadataItemFilter)
 	AudioTimePitchAlgorithm() string

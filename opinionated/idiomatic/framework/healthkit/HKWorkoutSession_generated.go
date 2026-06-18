@@ -36,62 +36,86 @@ func NewWorkoutSession() *WorkoutSession {
 	return &WorkoutSession{inner: raw.HKWorkoutSessionFromID(_id)}
 }
 
+// @property      delegate @abstract      The session delegate, which receives @discussion    The session delegate object is the one implementing the methods that get called when the session state changes or a failure occurs in the session.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *WorkoutSession) WithDelegate(delegate raw.HKWorkoutSessionDelegate) *WorkoutSession {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @method        prepare @abstract      Prepares the workout session for starting. @discussion    This method will asynchronously prepare the workout session for starting. The state of the workout session will transition to HKWorkoutSessionStatePrepared. A prepared session will put the system in session mode, but will not start the session activity. You might call this methods, for example, prior to displaying a countdown on your application while waiting for the activity to start.
+//
 // Prepare calls the underlying Prepare.
 func (x *WorkoutSession) Prepare() {
 	x.inner.Prepare()
 }
 
+// @method        startActivityWithDate: @param         date                Start date for the workout session activity @abstract      Starts the workout session activity. @discussion    This method will asynchronously begin the workout session activity. The state of the workout session will transition to HKWorkoutSessionStateRunning. Once a session activity is started the system will be in session mode and sensor algorithms will be applied to generate data for the workout activity.
+//
 // StartActivityWithDate calls the underlying StartActivityWithDate.
 func (x *WorkoutSession) StartActivityWithDate(date *foundation.NSDate) {
 	x.inner.StartActivityWithDate(date)
 }
 
+// @method        stopActivityWithDate: @param         date                Stop date for the workout session activity @abstract      Stops the workout session activity. @discussion    This method will asynchronously stop the session activity if it is currently running. The state of the workout session will transition to HKWorkoutSessionStateStopped. Once a workout session is stopped, it cannot be reused to start a new workout session. Sensor algorithms will be stopped and no new data will be generated for this session. However, the system will remain in session mode.
+//
 // StopActivityWithDate calls the underlying StopActivityWithDate.
 func (x *WorkoutSession) StopActivityWithDate(date *foundation.NSDate) {
 	x.inner.StopActivityWithDate(date)
 }
 
+// @method        end @abstract      Ends the workout session. @discussion    This method will end the session if it is currently running or stopped. The state of the workout session will transition to HKWorkoutSessionStateEnded. Once a workout session is ended, it cannot be reused to start a new workout session. Sensor algorithms will be stopped, no new data will be generated for this session, and the system will exit session mode.
+//
 // End calls the underlying End.
 func (x *WorkoutSession) End() {
 	x.inner.End()
 }
 
+// @method        pause @abstract      Pauses the workout session. @discussion    This method will pause the session if it is currently running. The state of the workout session will transition to HKWorkoutSessionStatePaused. An HKWorkoutEventTypePause will be generated and delivered to the workout session's delegate.
+//
 // Pause calls the underlying Pause.
 func (x *WorkoutSession) Pause() {
 	x.inner.Pause()
 }
 
+// @method        resume @abstract      Resumes the workout session. @discussion    This method will resume the session if it is currently paused. The state of the workout session will transition to HKWorkoutSessionStateRunning. An HKWorkoutEventTypeResume will be generated and delivered to the workout session's delegate.
+//
 // Resume calls the underlying Resume.
 func (x *WorkoutSession) Resume() {
 	x.inner.Resume()
 }
 
+// @method        beginNewActivityWithConfiguration:date:metadata: @abstract      Begins a new workout activity for this session. @discussion    This method will asynchronously begin the workout activity. The delegate for this session would be informed once the activity effectively begins.  Sensor algorithms to generate data would be updated to match the new activity.
+//
 // BeginNewActivityWithConfigurationDateMetadata calls the underlying BeginNewActivityWithConfigurationDateMetadata.
 func (x *WorkoutSession) BeginNewActivityWithConfigurationDateMetadata(workoutConfiguration *raw.HKWorkoutConfiguration, date *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.BeginNewActivityWithConfigurationDateMetadata(workoutConfiguration, date, metadata)
 }
 
+// @method        endCurrentActivityOnDate: @abstract      Ends the current workout activity. @discussion    This method will end the current activity, reverting to the main session activity. The delegate for this session would be informed once the activity effectively ends. Sensor algorithms to generate data would be updated to match the main session activity.
+//
 // EndCurrentActivityOnDate calls the underlying EndCurrentActivityOnDate.
 func (x *WorkoutSession) EndCurrentActivityOnDate(date *foundation.NSDate) {
 	x.inner.EndCurrentActivityOnDate(date)
 }
 
+// @property      activityType @abstract      Indicates the type of workout that will be performed during the session.
+//
 // ActivityType calls the underlying ActivityType.
 func (x *WorkoutSession) ActivityType() HKWorkoutActivityType {
 	return HKWorkoutActivityType(x.inner.ActivityType())
 }
 
+// @property      locationType @abstract      Indicates the type of location (indoors vs. outdoors) where the workout will take place. @discussion    Knowing the location type allows for more accurate measurements and better performance.
+//
 // LocationType calls the underlying LocationType.
 func (x *WorkoutSession) LocationType() HKWorkoutSessionLocationType {
 	return HKWorkoutSessionLocationType(x.inner.LocationType())
 }
 
+// @property      workoutConfiguration @abstract      The configuration object describing the workout. @discussion    This returns a copy of the configuration passed when creating the HKWorkoutSession. Changes made to the returned object have no impact on the HKWorkoutSession.
+//
 // WorkoutConfiguration calls the underlying WorkoutConfiguration.
 func (x *WorkoutSession) WorkoutConfiguration() *WorkoutConfiguration {
 	_r := x.inner.WorkoutConfiguration()
@@ -101,6 +125,8 @@ func (x *WorkoutSession) WorkoutConfiguration() *WorkoutConfiguration {
 	return &WorkoutConfiguration{inner: _r}
 }
 
+// @property      delegate @abstract      The session delegate, which receives @discussion    The session delegate object is the one implementing the methods that get called when the session state changes or a failure occurs in the session.
+//
 // Delegate calls the underlying Delegate.
 func (x *WorkoutSession) Delegate() raw.HKWorkoutSessionDelegate {
 	return x.inner.Delegate()
@@ -111,26 +137,36 @@ func (x *WorkoutSession) SetDelegate(delegate raw.HKWorkoutSessionDelegate) {
 	x.inner.SetDelegate(delegate)
 }
 
+// @property      state @abstract      Indicates the current state of the workout session. @discussion    Each time this value is updated, the delegate method workoutSession:didChangeToState:fromState:date: will be called.
+//
 // State calls the underlying State.
 func (x *WorkoutSession) State() HKWorkoutSessionState {
 	return HKWorkoutSessionState(x.inner.State())
 }
 
+// @property      type @abstract      Indicates the type of the workout session. @discussion    A workout session created using an initializer will be primary, while a session retrieved with the `HKHealthStore` `workoutSessionMirroringStartHandler` property will be mirrored.
+//
 // Type calls the underlying Type.
 func (x *WorkoutSession) Type() HKWorkoutSessionType {
 	return HKWorkoutSessionType(x.inner.Type())
 }
 
+// @property      startDate @abstract      Indicates the date when the workout session started running. @discussion    This value is nil when a workout session is initialized. It is set when the workout session state changes to HKWorkoutSessionStateRunning.
+//
 // StartDate calls the underlying StartDate.
 func (x *WorkoutSession) StartDate() *foundation.NSDate {
 	return x.inner.StartDate()
 }
 
+// @property      endDate @abstract      Indicates the date when the workout session stopped. @discussion    This value is nil when a workout session is initialized. It is set when the workout session state changes to HKWorkoutSessionStateStopped.
+//
 // EndDate calls the underlying EndDate.
 func (x *WorkoutSession) EndDate() *foundation.NSDate {
 	return x.inner.EndDate()
 }
 
+// @property      currentActivity @abstract      The current workout activity. @discussion    This returns a copy of the session's current workout activity. It will return a copy of the main workout activity if no new activity has begun. Changes made to the returned object have no impact on the HKWorkoutSession.
+//
 // CurrentActivity calls the underlying CurrentActivity.
 func (x *WorkoutSession) CurrentActivity() *WorkoutActivity {
 	_r := x.inner.CurrentActivity()

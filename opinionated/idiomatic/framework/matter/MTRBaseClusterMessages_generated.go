@@ -33,6 +33,8 @@ func MTRBaseClusterMessagesFromID(id objc.ID) *MTRBaseClusterMessages {
 	return &MTRBaseClusterMessages{inner: raw.MTRBaseClusterMessagesFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterMessagesWithDeviceEndpointIDQueue creates a new [MTRBaseClusterMessages].
 func NewMTRBaseClusterMessagesWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterMessages {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterMessages")), objc.RegisterName("alloc"))
@@ -40,11 +42,15 @@ func NewMTRBaseClusterMessagesWithDeviceEndpointIDQueue(device *raw.MTRBaseDevic
 	return &MTRBaseClusterMessages{inner: raw.MTRBaseClusterMessagesFromID(_id)}
 }
 
+// Command PresentMessagesRequest Command for requesting messages be presented
+//
 // PresentMessagesRequestWithParamsCompletion calls the underlying PresentMessagesRequestWithParamsCompletion.
 func (x *MTRBaseClusterMessages) PresentMessagesRequestWithParamsCompletion(params *raw.MTRMessagesClusterPresentMessagesRequestParams, completion func(unsafe.Pointer)) {
 	x.inner.PresentMessagesRequestWithParamsCompletion(params, completion)
 }
 
+// Command CancelMessagesRequest Command for cancelling message present requests
+//
 // CancelMessagesRequestWithParamsCompletion calls the underlying CancelMessagesRequestWithParamsCompletion.
 func (x *MTRBaseClusterMessages) CancelMessagesRequestWithParamsCompletion(params *raw.MTRMessagesClusterCancelMessagesRequestParams, completion func(unsafe.Pointer)) {
 	x.inner.CancelMessagesRequestWithParamsCompletion(params, completion)

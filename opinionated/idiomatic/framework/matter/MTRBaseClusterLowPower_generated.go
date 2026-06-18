@@ -33,6 +33,8 @@ func MTRBaseClusterLowPowerFromID(id objc.ID) *MTRBaseClusterLowPower {
 	return &MTRBaseClusterLowPower{inner: raw.MTRBaseClusterLowPowerFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterLowPowerWithDeviceEndpointIDQueue creates a new [MTRBaseClusterLowPower].
 func NewMTRBaseClusterLowPowerWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterLowPower {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterLowPower")), objc.RegisterName("alloc"))
@@ -47,6 +49,8 @@ func NewMTRBaseClusterLowPowerWithDeviceEndpointQueue(device *raw.MTRBaseDevice,
 	return &MTRBaseClusterLowPower{inner: raw.MTRBaseClusterLowPowerFromID(_id)}
 }
 
+// Command Sleep This command SHALL put the device into low power mode.
+//
 // SleepWithParamsCompletion calls the underlying SleepWithParamsCompletion.
 func (x *MTRBaseClusterLowPower) SleepWithParamsCompletion(params *raw.MTRLowPowerClusterSleepParams, completion func(unsafe.Pointer)) {
 	x.inner.SleepWithParamsCompletion(params, completion)

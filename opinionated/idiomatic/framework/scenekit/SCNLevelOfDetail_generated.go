@@ -35,6 +35,8 @@ func NewLevelOfDetail() *LevelOfDetail {
 	return &LevelOfDetail{inner: raw.SCNLevelOfDetailFromID(_id)}
 }
 
+// @property geometry @abstract Returns the geometry of the receiver.
+//
 // Geometry calls the underlying Geometry.
 func (x *LevelOfDetail) Geometry() *Geometry {
 	_r := x.inner.Geometry()
@@ -44,11 +46,15 @@ func (x *LevelOfDetail) Geometry() *Geometry {
 	return &Geometry{inner: _r}
 }
 
+// @property screenSpaceRadius @abstract Returns the screen space radius of the receiver if any, 0 otherwise.
+//
 // ScreenSpaceRadius calls the underlying ScreenSpaceRadius.
 func (x *LevelOfDetail) ScreenSpaceRadius() float64 {
 	return x.inner.ScreenSpaceRadius()
 }
 
+// @property worldSpaceDistance @abstract Returns the world space distance of the receiver if any, 0 otherwise.
+//
 // WorldSpaceDistance calls the underlying WorldSpaceDistance.
 func (x *LevelOfDetail) WorldSpaceDistance() float64 {
 	return x.inner.WorldSpaceDistance()

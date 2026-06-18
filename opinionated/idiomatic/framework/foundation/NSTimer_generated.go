@@ -29,6 +29,8 @@ func TimerFromID(id objc.ID) *Timer {
 	return &Timer{inner: raw.NSTimerFromID(id)}
 }
 
+// Initializes a new NSTimer object using the block as the main body of execution for the timer. This timer needs to be scheduled on a run loop (via -[NSRunLoop addTimer:]) before it will fire. - parameter:  fireDate   The time at which the timer should first fire. - parameter:  interval  The number of seconds between firings of the timer. If seconds is less than or equal to 0.0, this method chooses the nonnegative value of 0.1 milliseconds instead - parameter:  repeats  If YES, the timer will repeatedly reschedule itself until invalidated. If NO, the timer will be invalidated after it fires. - parameter:  block  The execution body of the timer; the timer itself is passed as the parameter to this block when executed to aid in avoiding cyclical references
+//
 // NewTimerWithFireDateIntervalRepeatsBlock creates a new [Timer].
 func NewTimerWithFireDateIntervalRepeatsBlock(date *raw.NSDate, interval float64, repeats bool, block func(*raw.NSTimer)) *Timer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTimer")), objc.RegisterName("alloc"))

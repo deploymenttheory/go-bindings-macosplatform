@@ -97,12 +97,16 @@ func (x *MutableNotificationContent) WithUserInfo(userInfo *foundation.NSDiction
 	return x
 }
 
+// The argument to be inserted in the summary for this notification.
+//
 // WithSummaryArgument sets the summaryArgument property and returns the receiver for chaining.
 func (x *MutableNotificationContent) WithSummaryArgument(summaryArgument string) *MutableNotificationContent {
 	x.inner.SetSummaryArgument(foundation.NSStringStringWithUTF8String(summaryArgument))
 	return x
 }
 
+// A number that indicates how many items in the summary are represented in the summary. For example if a podcast app sends one notification for 3 new episodes in a show, the argument should be the name of the show and the count should be 3. Default is 1 and cannot be 0.
+//
 // WithSummaryArgumentCount sets the summaryArgumentCount property and returns the receiver for chaining.
 func (x *MutableNotificationContent) WithSummaryArgumentCount(summaryArgumentCount uint) *MutableNotificationContent {
 	x.inner.SetSummaryArgumentCount(summaryArgumentCount)

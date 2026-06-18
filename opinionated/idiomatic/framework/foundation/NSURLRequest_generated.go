@@ -30,6 +30,8 @@ func URLRequestFromID(id objc.ID) *URLRequest {
 	return &URLRequest{inner: raw.NSURLRequestFromID(id)}
 }
 
+// @method initWithURL: @abstract Initializes an NSURLRequest with the given URL. @discussion Default values are used for cache policy (NSURLRequestUseProtocolCachePolicy) and timeout interval (60 seconds). @param URL The URL for the request. @result An initialized NSURLRequest.
+//
 // NewURLRequestWithURL creates a new [URLRequest].
 func NewURLRequestWithURL(uRL string) *URLRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLRequest")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewURLRequestWithURL(uRL string) *URLRequest {
 	return &URLRequest{inner: raw.NSURLRequestFromID(_id)}
 }
 
+// @method initWithURL: @abstract Initializes an NSURLRequest with the given URL and cache policy. @discussion This is the designated initializer for the NSURLRequest class. @param URL The URL for the request. @param cachePolicy The cache policy for the request. @param timeoutInterval The timeout interval for the request. See the commentary for the <tt>timeoutInterval</tt> for more information on timeout intervals. @result An initialized NSURLRequest.
+//
 // NewURLRequestWithURLCachePolicyTimeoutInterval creates a new [URLRequest].
 func NewURLRequestWithURLCachePolicyTimeoutInterval(uRL string, cachePolicy NSURLRequestCachePolicy, timeoutInterval float64) *URLRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLRequest")), objc.RegisterName("alloc"))
@@ -50,6 +54,8 @@ func (x *URLRequest) WithScriptingProperties(scriptingProperties *raw.NSDictiona
 	return x
 }
 
+// @abstract Returns the URL of the receiver. @result The URL of the receiver.
+//
 // URL calls the underlying URL.
 func (x *URLRequest) URL() *URL {
 	_r := x.inner.URL()
@@ -59,16 +65,22 @@ func (x *URLRequest) URL() *URL {
 	return &URL{inner: _r}
 }
 
+// @abstract Returns the cache policy of the receiver. @result The cache policy of the receiver.
+//
 // CachePolicy calls the underlying CachePolicy.
 func (x *URLRequest) CachePolicy() NSURLRequestCachePolicy {
 	return NSURLRequestCachePolicy(x.inner.CachePolicy())
 }
 
+// @abstract Returns the timeout interval of the receiver. @discussion The timeout interval specifies the limit on the idle interval allotted to a request in the process of loading. The "idle interval" is defined as the period of time that has passed since the last instance of load activity occurred for a request that is in the process of loading. Hence, when an instance of load activity occurs (e.g. bytes are received from the network for a request), the idle interval for a request is reset to 0. If the idle interval ever becomes greater than or equal to the timeout interval, the request is considered to have timed out. This timeout interval is measured in seconds. @result The timeout interval of the receiver.
+//
 // TimeoutInterval calls the underlying TimeoutInterval.
 func (x *URLRequest) TimeoutInterval() float64 {
 	return x.inner.TimeoutInterval()
 }
 
+// @abstract The main document URL associated with this load. @discussion This URL is used for the cookie "same domain as main document" policy, and attributing the request as a sub-resource of a user-specified URL. There may also be other future uses. See setMainDocumentURL: @result The main document URL.
+//
 // MainDocumentURL calls the underlying MainDocumentURL.
 func (x *URLRequest) MainDocumentURL() *URL {
 	_r := x.inner.MainDocumentURL()
@@ -78,46 +90,64 @@ func (x *URLRequest) MainDocumentURL() *URL {
 	return &URL{inner: _r}
 }
 
+// @abstract Returns the NSURLRequestNetworkServiceType associated with this request. @discussion  This will return NSURLNetworkServiceTypeDefault for requests that have not explicitly set a networkServiceType (using the setNetworkServiceType method). @result The NSURLRequestNetworkServiceType associated with this request.
+//
 // NetworkServiceType calls the underlying NetworkServiceType.
 func (x *URLRequest) NetworkServiceType() NSURLRequestNetworkServiceType {
 	return NSURLRequestNetworkServiceType(x.inner.NetworkServiceType())
 }
 
+// @abstract returns whether a connection created with this request is allowed to use the built in cellular radios (if present). @result YES if the receiver is allowed to use the built in cellular radios to satisfy the request, NO otherwise.
+//
 // AllowsCellularAccess calls the underlying AllowsCellularAccess.
 func (x *URLRequest) AllowsCellularAccess() bool {
 	return x.inner.AllowsCellularAccess()
 }
 
+// @abstract returns whether a connection created with this request is allowed to use network interfaces which have been marked as expensive. @result YES if the receiver is allowed to use an interface marked as expensive to satisfy the request, NO otherwise.
+//
 // AllowsExpensiveNetworkAccess calls the underlying AllowsExpensiveNetworkAccess.
 func (x *URLRequest) AllowsExpensiveNetworkAccess() bool {
 	return x.inner.AllowsExpensiveNetworkAccess()
 }
 
+// @abstract returns whether a connection created with this request is allowed to use network interfaces which have been marked as constrained. @result YES if the receiver is allowed to use an interface marked as constrained to satisfy the request, NO otherwise.
+//
 // AllowsConstrainedNetworkAccess calls the underlying AllowsConstrainedNetworkAccess.
 func (x *URLRequest) AllowsConstrainedNetworkAccess() bool {
 	return x.inner.AllowsConstrainedNetworkAccess()
 }
 
+// @abstract returns whether a connection created with this request is allowed to use network interfaces which have been marked as ultra constrained. @result YES if the receiver is allowed to use an interface marked as ultra constrained to satisfy the request, NO otherwise.
+//
 // AllowsUltraConstrainedNetworkAccess calls the underlying AllowsUltraConstrainedNetworkAccess.
 func (x *URLRequest) AllowsUltraConstrainedNetworkAccess() bool {
 	return x.inner.AllowsUltraConstrainedNetworkAccess()
 }
 
+// @abstract returns whether we assume that server supports HTTP/3. Enables QUIC racing without HTTP/3 service discovery. @result YES if server endpoint is known to support HTTP/3. Defaults to NO. The default may be YES in a future OS update.
+//
 // AssumesHTTP3Capable calls the underlying AssumesHTTP3Capable.
 func (x *URLRequest) AssumesHTTP3Capable() bool {
 	return x.inner.AssumesHTTP3Capable()
 }
 
+// @abstract Returns the NSURLRequestAttribution associated with this request. @discussion This will return NSURLRequestAttributionDeveloper for requests that have not explicitly set an attribution. @result The NSURLRequestAttribution associated with this request.
+//
 // Attribution calls the underlying Attribution.
 func (x *URLRequest) Attribution() NSURLRequestAttribution {
 	return NSURLRequestAttribution(x.inner.Attribution())
 }
 
+// @abstract sets whether a request is required to do DNSSEC validation during DNS lookup. @discussion YES, if the DNS lookup for this request should require DNSSEC validation, No otherwise. Defaults to NO.
+//
 // RequiresDNSSECValidation calls the underlying RequiresDNSSECValidation.
 func (x *URLRequest) RequiresDNSSECValidation() bool {
 	return x.inner.RequiresDNSSECValidation()
 }
 
+// @abstract Allows storing and usage of DNS answers, potentially beyond TTL expiry, in a persistent per-process cache. This should only be set for hostnames whose resolutions are not expected to change across networks. @discussion YES, if the DNS lookup for this request is allowed to use a persistent per-process cache, NO otherwise. Defaults to NO.
+//
 // AllowsPersistentDNS calls the underlying AllowsPersistentDNS.
 func (x *URLRequest) AllowsPersistentDNS() bool {
 	return x.inner.AllowsPersistentDNS()
@@ -132,6 +162,8 @@ func (x *URLRequest) CookiePartitionIdentifier() *String {
 	return &String{inner: _r}
 }
 
+// @method valueForHTTPHeaderField: @abstract Returns the value which corresponds to the given header field. Note that, in keeping with the HTTP RFC, HTTP header field names are case-insensitive. @param field the header field name to use for the lookup (case-insensitive). @result the value associated with the given header field, or nil if there is no value associated with the given header field.
+//
 // ValueForHTTPHeaderField calls the underlying ValueForHTTPHeaderField.
 func (x *URLRequest) ValueForHTTPHeaderField(field string) *String {
 	_r := x.inner.ValueForHTTPHeaderField(foundation.NSStringStringWithUTF8String(field))
@@ -141,6 +173,8 @@ func (x *URLRequest) ValueForHTTPHeaderField(field string) *String {
 	return &String{inner: _r}
 }
 
+// @abstract Returns the HTTP request method of the receiver. @result the HTTP request method of the receiver.
+//
 // HTTPMethod calls the underlying HTTPMethod.
 func (x *URLRequest) HTTPMethod() *String {
 	_r := x.inner.HTTPMethod()
@@ -150,11 +184,15 @@ func (x *URLRequest) HTTPMethod() *String {
 	return &String{inner: _r}
 }
 
+// @abstract Returns a dictionary containing all the HTTP header fields of the receiver. @result a dictionary containing all the HTTP header fields of the receiver.
+//
 // AllHTTPHeaderFields calls the underlying AllHTTPHeaderFields.
 func (x *URLRequest) AllHTTPHeaderFields() *raw.NSDictionary[*raw.NSString, *raw.NSString] {
 	return x.inner.AllHTTPHeaderFields()
 }
 
+// @abstract Returns the request body data of the receiver. @discussion This data is sent as the message body of the request, as in done in an HTTP POST request. @result The request body data of the receiver.
+//
 // HTTPBody calls the underlying HTTPBody.
 func (x *URLRequest) HTTPBody() *Data {
 	_r := x.inner.HTTPBody()
@@ -164,6 +202,8 @@ func (x *URLRequest) HTTPBody() *Data {
 	return &Data{inner: _r}
 }
 
+// @abstract Returns the request body stream of the receiver if any has been set @discussion The stream is returned for examination only; it is not safe for the caller to manipulate the stream in any way.  Also note that the HTTPBodyStream and HTTPBody are mutually exclusive - only one can be set on a given request.  Also note that the body stream is preserved across copies, but is LOST when the request is coded via the NSCoding protocol @result The request body stream of the receiver.
+//
 // HTTPBodyStream calls the underlying HTTPBodyStream.
 func (x *URLRequest) HTTPBodyStream() *InputStream {
 	_r := x.inner.HTTPBodyStream()
@@ -173,11 +213,15 @@ func (x *URLRequest) HTTPBodyStream() *InputStream {
 	return &InputStream{inner: _r}
 }
 
+// @abstract Determine whether default cookie handling will happen for this request. @discussion NOTE: This value is not used prior to 10.3 @result YES if cookies will be sent with and set for this request; otherwise NO.
+//
 // HTTPShouldHandleCookies calls the underlying HTTPShouldHandleCookies.
 func (x *URLRequest) HTTPShouldHandleCookies() bool {
 	return x.inner.HTTPShouldHandleCookies()
 }
 
+// @abstract Reports whether the receiver is not expected to wait for the previous response before transmitting. @result YES if the receiver should transmit before the previous response is received.  NO if the receiver should wait for the previous response before transmitting.
+//
 // HTTPShouldUsePipelining calls the underlying HTTPShouldUsePipelining.
 func (x *URLRequest) HTTPShouldUsePipelining() bool {
 	return x.inner.HTTPShouldUsePipelining()

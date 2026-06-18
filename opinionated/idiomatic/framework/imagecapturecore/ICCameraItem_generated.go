@@ -38,26 +38,36 @@ func NewCameraItem() *CameraItem {
 	return &CameraItem{inner: raw.ICCameraItemFromID(_id)}
 }
 
+// @method requestThumbnail @abstract This method requests thumbnail for the item. If one is not readily available, accessing this property will send a message to the device requesting a thumbnail for the file. The delegate of the device will be notified via method "cameraDevice:didReceiveThumbnail:forItem:error:", if this method is implemented by the delegate. @note Execution of the delegate callback will occur on the main thread.
+//
 // RequestThumbnail calls the underlying RequestThumbnail.
 func (x *CameraItem) RequestThumbnail() {
 	x.inner.RequestThumbnail()
 }
 
+// @method requestMetadata @abstract ￼Metadata for the file if one is readily available. If one is not readily available, accessing this property will send a message to the device requesting metadata for the file. The delegate of the device will be notified via method "cameraDevice:didReceiveMetadata:forItem:error:", if this method is implemented by the delegate. @note Execution of the delegate callback will occur on the main thread.
+//
 // RequestMetadata calls the underlying RequestMetadata.
 func (x *CameraItem) RequestMetadata() {
 	x.inner.RequestMetadata()
 }
 
+// @method flushThumbnailCache @abstract ￼Deletes cached thumbnail for the item.
+//
 // FlushThumbnailCache calls the underlying FlushThumbnailCache.
 func (x *CameraItem) FlushThumbnailCache() {
 	x.inner.FlushThumbnailCache()
 }
 
+// @method flushMetadataCache @abstract ￼Deletes cached metadata for the item.
+//
 // FlushMetadataCache calls the underlying FlushMetadataCache.
 func (x *CameraItem) FlushMetadataCache() {
 	x.inner.FlushMetadataCache()
 }
 
+// @property device @abstract ￼Parent device of this item.
+//
 // Device calls the underlying Device.
 func (x *CameraItem) Device() *CameraDevice {
 	_r := x.inner.Device()
@@ -67,6 +77,8 @@ func (x *CameraItem) Device() *CameraDevice {
 	return &CameraDevice{inner: _r}
 }
 
+// @property parentFolder @abstract ￼Parent folder of this folder. The root folder's parentFolder is nil.
+//
 // ParentFolder calls the underlying ParentFolder.
 func (x *CameraItem) ParentFolder() *CameraFolder {
 	_r := x.inner.ParentFolder()
@@ -76,6 +88,8 @@ func (x *CameraItem) ParentFolder() *CameraFolder {
 	return &CameraFolder{inner: _r}
 }
 
+// @property name @abstract ￼Name of this item.
+//
 // Name calls the underlying Name.
 func (x *CameraItem) Name() string {
 	_r := x.inner.Name()
@@ -85,6 +99,8 @@ func (x *CameraItem) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property UTI @abstract ￼Item UTI. This is an Uniform Type Identifier string. It is one of: kUTTypeFolder, kUTTypeImage, kUTTypeMovie, kUTTypeAudio, or kUTTypeData.
+//
 // UTI calls the underlying UTI.
 func (x *CameraItem) UTI() string {
 	_r := x.inner.UTI()
@@ -94,71 +110,99 @@ func (x *CameraItem) UTI() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property fileSystemPath @abstract ￼The file system path of the item for items on a device with transportType of ICTransportTypeMassStorage.
+//
 // FileSystemPath calls the underlying FileSystemPath.
 func (x *CameraItem) FileSystemPath() unsafe.Pointer {
 	return x.inner.FileSystemPath()
 }
 
+// @property locked @abstract ￼Indicates the protection state of this item. It is locked if the storage card in the camera is locked.
+//
 // IsLocked calls the underlying IsLocked.
 func (x *CameraItem) IsLocked() bool {
 	return x.inner.IsLocked()
 }
 
+// @property raw @abstract ￼Indicates if the file is a raw image file.
+//
 // IsRaw calls the underlying IsRaw.
 func (x *CameraItem) IsRaw() bool {
 	return x.inner.IsRaw()
 }
 
+// @property inTemporaryStore @abstract ￼Indicates if this folder is in a temporary store. A temporary store may be used by the device when images are captures on the device when it is tethered to the computer.
+//
 // IsInTemporaryStore calls the underlying IsInTemporaryStore.
 func (x *CameraItem) IsInTemporaryStore() bool {
 	return x.inner.IsInTemporaryStore()
 }
 
+// @property creationDate @abstract ￼Creation date of this file. This information is usually the same as the EXIF creation date.
+//
 // CreationDate calls the underlying CreationDate.
 func (x *CameraItem) CreationDate() *foundation.NSDate {
 	return x.inner.CreationDate()
 }
 
+// @property modificationDate @abstract ￼Modification date of this file. This information is usually the same as the EXIF modification date.
+//
 // ModificationDate calls the underlying ModificationDate.
 func (x *CameraItem) ModificationDate() *foundation.NSDate {
 	return x.inner.ModificationDate()
 }
 
+// @property thumbnail @abstract ￼Thumbnail for the item. The value of this property is NULL unless a 'requestThumbnail' message is sent to this object.
+//
 // Thumbnail calls the underlying Thumbnail.
 func (x *CameraItem) Thumbnail() unsafe.Pointer {
 	return x.inner.Thumbnail()
 }
 
+// @property metadata @abstract ￼Metadata for the item. The value of this property is NULL unless a 'requestMetadata' message is sent to this object.
+//
 // Metadata calls the underlying Metadata.
 func (x *CameraItem) Metadata() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.Metadata()
 }
 
+// @property userData @abstract ￼A mutable dictionary to store arbitrary key-value pairs associated with a camera item object. This can be used by view objects that bind to this object to store "house-keeping" information.
+//
 // UserData calls the underlying UserData.
 func (x *CameraItem) UserData() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
 	return x.inner.UserData()
 }
 
+// @property ptpObjectHandle @abstract PTP object handle value if the item is on a camera that uses PTP protocol. The value of this property is set to 0 if the camera does not use PTP protocol.
+//
 // PtpObjectHandle calls the underlying PtpObjectHandle.
 func (x *CameraItem) PtpObjectHandle() uint {
 	return x.inner.PtpObjectHandle()
 }
 
+// @property addedAfterContentCatalogCompleted @abstract This property is set if the file is captured on the device after the device's content is fully enumerated. This does not apply to files added as a result of adding a new store to the device.
+//
 // WasAddedAfterContentCatalogCompleted calls the underlying WasAddedAfterContentCatalogCompleted.
 func (x *CameraItem) WasAddedAfterContentCatalogCompleted() bool {
 	return x.inner.WasAddedAfterContentCatalogCompleted()
 }
 
+// @property thumbnailIfAvailable
+//
 // ThumbnailIfAvailable calls the underlying ThumbnailIfAvailable.
 func (x *CameraItem) ThumbnailIfAvailable() unsafe.Pointer {
 	return x.inner.ThumbnailIfAvailable()
 }
 
+// @property largeThumbnailIfAvailable
+//
 // LargeThumbnailIfAvailable calls the underlying LargeThumbnailIfAvailable.
 func (x *CameraItem) LargeThumbnailIfAvailable() unsafe.Pointer {
 	return x.inner.LargeThumbnailIfAvailable()
 }
 
+// @property metadataIfAvailable
+//
 // MetadataIfAvailable calls the underlying MetadataIfAvailable.
 func (x *CameraItem) MetadataIfAvailable() unsafe.Pointer {
 	return x.inner.MetadataIfAvailable()

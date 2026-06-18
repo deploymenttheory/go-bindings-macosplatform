@@ -193,7 +193,10 @@ func emitGenericFunctionWrappers(
 	}
 
 	fname := pkgName + "_cfunctions_generated.go"
-	return emit.WriteGoFile(filepath.Join(outDir, fname), assembleFile(pkgName, imports, body.Bytes()))
+	return emit.WriteGoFile(
+		filepath.Join(outDir, fname),
+		assembleFile(pkgName, imports, body.Bytes()),
+	)
 }
 
 // emitClassMethodFunctions writes <pkgname>_classmethods_generated.go: one
@@ -221,6 +224,7 @@ func emitClassMethodFunctions(
 	trialNames trialNameMap,
 	handFuncs map[string]bool,
 	takenNames map[string]bool,
+	abstractBases abstractBaseIndex,
 ) error {
 	candidates := map[string]string{
 		rawPkgAlias:  rawPkgPath,
@@ -258,7 +262,17 @@ func emitClassMethodFunctions(
 			if rawName == "" {
 				continue
 			}
-			entry := buildMethod(method, rawName, cls, fw, ctx, m, rawPkgAlias, trialNames)
+			entry := buildMethod(
+				method,
+				rawName,
+				cls,
+				fw,
+				ctx,
+				m,
+				rawPkgAlias,
+				trialNames,
+				abstractBases,
+			)
 			if entry == nil {
 				continue
 			}
@@ -279,7 +293,11 @@ func emitClassMethodFunctions(
 			default:
 				m.AppendDiagnostic(
 					"%s: idiomatic class-method wrapper for +[%s %s] skipped (names %s/%s already taken)",
-					fw.Framework, className, method.Selector, fluent, qualified,
+					fw.Framework,
+					className,
+					method.Selector,
+					fluent,
+					qualified,
 				)
 				continue
 			}
@@ -307,7 +325,11 @@ func emitClassMethodFunctions(
 // for the class-method namespace, which the raw emitter keeps separate from
 // instance methods (the latter are unprefixed), so a class-only pool reproduces
 // the raw suffixes exactly.
-func classRawMethodNames(cls meta.Class, className string, fw *meta.FrameworkMeta) map[string]string {
+func classRawMethodNames(
+	cls meta.Class,
+	className string,
+	fw *meta.FrameworkMeta,
+) map[string]string {
 	count := map[string]int{}
 	for _, method := range cls.Methods {
 		if !method.IsClassMethod || !emit.MethodWillBeEmitted(method) {
@@ -350,7 +372,7 @@ func classFuncShortName(goName, className string) string {
 	if s == "" {
 		return ""
 	}
-	if c := s[0]; !(c >= 'A' && c <= 'Z') {
+	if c := s[0]; c < 'A' || c > 'Z' {
 		return ""
 	}
 	return s
@@ -455,8 +477,14 @@ func emitCFFunctionWrappers(
 				// function to the generic pass) if it degrades to a pointer/block we
 				// would not improve on.
 				impSet := make(typemap.ImportSet)
-				goType := qualifyRaw(rawParamGoType(p.ObjCType, ctx, m, impSet), fw, rawPkgAlias, nil)
-				if goType == "" || strings.HasPrefix(goType, "func(") || strings.Contains(goType, "unsafe.Pointer") {
+				goType := qualifyRaw(
+					rawParamGoType(p.ObjCType, ctx, m, impSet),
+					fw,
+					rawPkgAlias,
+					nil,
+				)
+				if goType == "" || strings.HasPrefix(goType, "func(") ||
+					strings.Contains(goType, "unsafe.Pointer") {
 					ok = false
 				} else {
 					sigType, callArg := localizeParam(pName, goType, fw, rawPkgAlias)
@@ -477,7 +505,10 @@ func emitCFFunctionWrappers(
 		rawCall := fmt.Sprintf("%s.%s(%s)", rawPkgAlias, goName, strings.Join(callArgs, ", "))
 		retSig := "error"
 		if len(outTypes) > 0 {
-			retSig = "(" + strings.Join(append(append([]string{}, outTypes...), "error"), ", ") + ")"
+			retSig = "(" + strings.Join(
+				append(append([]string{}, outTypes...), "error"),
+				", ",
+			) + ")"
 		}
 
 		view.Entries = append(view.Entries, cffuncEntry{
@@ -517,11 +548,17 @@ func emitCFFunctionWrappers(
 		imports["foundation"] = foundationImportPath
 	}
 	for _, crossPkg := range collectCrossPackageRefs(bodyStr, rawPkgAlias) {
-		imports[crossPkg] = strings.TrimSuffix(rawPkgPath, naming.PackageName(fw.Framework)) + crossPkg
+		imports[crossPkg] = strings.TrimSuffix(
+			rawPkgPath,
+			naming.PackageName(fw.Framework),
+		) + crossPkg
 	}
 
 	fname := pkgName + "_cffunctions_generated.go"
-	return emit.WriteGoFile(filepath.Join(outDir, fname), assembleFile(pkgName, imports, body.Bytes()))
+	return emit.WriteGoFile(
+		filepath.Join(outDir, fname),
+		assembleFile(pkgName, imports, body.Bytes()),
+	)
 }
 
 // cFunctionNameFor recovers the original C symbol for an exported Go function
@@ -622,11 +659,11 @@ type cfuncEntry struct {
 	GoName    string
 	RawGoName string
 	CName     string
-	Params    string // "name type, …"
-	CallArgs  string // "name, …"
-	RetType   string // "" for a void function
-	RetSig    string // " <retType>" or ""
-	EnumCast  string // local enum type to cast the raw return into, else ""
+	Params    string   // "name type, …"
+	CallArgs  string   // "name, …"
+	RetType   string   // "" for a void function
+	RetSig    string   // " <retType>" or ""
+	EnumCast  string   // local enum type to cast the raw return into, else ""
 	PreLines  []string // statements before the raw call (enum out-params)
 	PostLines []string // statements after the raw call (enum out-param copy-back)
 }

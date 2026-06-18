@@ -33,6 +33,8 @@ func MTRClusterUnitTestingFromID(id objc.ID) *MTRClusterUnitTesting {
 	return &MTRClusterUnitTesting{inner: raw.MTRClusterUnitTestingFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterUnitTestingWithDeviceEndpointIDQueue creates a new [MTRClusterUnitTesting].
 func NewMTRClusterUnitTestingWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterUnitTesting {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterUnitTesting")), objc.RegisterName("alloc"))

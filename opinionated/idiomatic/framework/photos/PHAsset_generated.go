@@ -59,6 +59,8 @@ func (x *Asset) MediaSubtypes() PHAssetMediaSubtype {
 	return PHAssetMediaSubtype(x.inner.MediaSubtypes())
 }
 
+// The type of image or video data that is presented for the asset
+//
 // ContentType calls the underlying ContentType.
 func (x *Asset) ContentType() *uniformtypeidentifiers.UTType {
 	return x.inner.ContentType()
@@ -74,16 +76,22 @@ func (x *Asset) PixelHeight() uint {
 	return x.inner.PixelHeight()
 }
 
+// The date and time of this asset's creation (can be updated by the user)
+//
 // CreationDate calls the underlying CreationDate.
 func (x *Asset) CreationDate() *foundation.NSDate {
 	return x.inner.CreationDate()
 }
 
+// The date and time of the last modification to this asset or one of its properties
+//
 // ModificationDate calls the underlying ModificationDate.
 func (x *Asset) ModificationDate() *foundation.NSDate {
 	return x.inner.ModificationDate()
 }
 
+// The date and time this asset was added to the photo library (from the device that was used to add this asset)
+//
 // AddedDate calls the underlying AddedDate.
 func (x *Asset) AddedDate() *foundation.NSDate {
 	return x.inner.AddedDate()

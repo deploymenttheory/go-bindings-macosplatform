@@ -38,42 +38,56 @@ func NewShape() *Shape {
 	return &Shape{inner: raw.SCNShapeFromID(_id)}
 }
 
+// @property path @abstract The path defining the shape to be rendered. @discussion The path defines the outline of the shape. The path is filled using the even-odd rule. If the path is self-intersecting, the behavior is undefined.
+//
 // WithPath sets the path property and returns the receiver for chaining.
 func (x *Shape) WithPath(path *appkit.NSBezierPath) *Shape {
 	x.inner.SetPath(path)
 	return x
 }
 
+// @property extrusionDepth @abstract The extrusion depth. Animatable. @discussion If the value is 0, we get a mono-sided, 2D version of the shape.
+//
 // WithExtrusionDepth sets the extrusionDepth property and returns the receiver for chaining.
 func (x *Shape) WithExtrusionDepth(extrusionDepth float64) *Shape {
 	x.inner.SetExtrusionDepth(extrusionDepth)
 	return x
 }
 
+// @property chamferMode @abstract The sides of the text that are chamfered. @discussion The default value is SCNChamferModeBoth.
+//
 // WithChamferMode sets the chamferMode property and returns the receiver for chaining.
 func (x *Shape) WithChamferMode(chamferMode SCNChamferMode) *Shape {
 	x.inner.SetChamferMode(raw.SCNChamferMode(chamferMode))
 	return x
 }
 
+// @property chamferRadius @abstract The chamfer radius. Animatable. @discussion Values are clamped to the range [0, extrusionDepth / 2]. The default value is 0.
+//
 // WithChamferRadius sets the chamferRadius property and returns the receiver for chaining.
 func (x *Shape) WithChamferRadius(chamferRadius float64) *Shape {
 	x.inner.SetChamferRadius(chamferRadius)
 	return x
 }
 
+// @property chamferProfile @abstract Describes the profile used to when "chamferRadius" is not nil. When "chamferProfile" is nil we fallback on a path representing a quadrant. @discussion The profile should be a 2D curve beginning at (0,1) and ending at (1,0). The "flatness" property is also used to flatten this path. The default value is nil.
+//
 // WithChamferProfile sets the chamferProfile property and returns the receiver for chaining.
 func (x *Shape) WithChamferProfile(chamferProfile *appkit.NSBezierPath) *Shape {
 	x.inner.SetChamferProfile(chamferProfile)
 	return x
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Shape) WithName(name string) *Shape {
 	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+//
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Shape) WithMaterials(items ...*raw.SCNMaterial) *Shape {
 	if len(items) == 0 {
@@ -92,12 +106,16 @@ func (x *Shape) WithMaterials(items ...*raw.SCNMaterial) *Shape {
 	return x
 }
 
+// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+//
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Shape) WithFirstMaterial(firstMaterial *Material) *Shape {
 	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
+// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+//
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Shape) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Shape {
 	if len(items) == 0 {
@@ -122,30 +140,40 @@ func (x *Shape) WithTessellator(tessellator *GeometryTessellator) *Shape {
 	return x
 }
 
+// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+//
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Shape) WithSubdivisionLevel(subdivisionLevel uint) *Shape {
 	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
 	return x
 }
 
+// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+//
 // WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
 func (x *Shape) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Shape {
 	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
 	return x
 }
 
+// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+//
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Shape) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Shape {
 	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
+// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+//
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Shape) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Shape {
 	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
+// @property path @abstract The path defining the shape to be rendered. @discussion The path defines the outline of the shape. The path is filled using the even-odd rule. If the path is self-intersecting, the behavior is undefined.
+//
 // Path calls the underlying Path.
 func (x *Shape) Path() *appkit.NSBezierPath {
 	return x.inner.Path()
@@ -156,6 +184,8 @@ func (x *Shape) SetPath(path *appkit.NSBezierPath) {
 	x.inner.SetPath(path)
 }
 
+// @property extrusionDepth @abstract The extrusion depth. Animatable. @discussion If the value is 0, we get a mono-sided, 2D version of the shape.
+//
 // ExtrusionDepth calls the underlying ExtrusionDepth.
 func (x *Shape) ExtrusionDepth() float64 {
 	return x.inner.ExtrusionDepth()
@@ -166,6 +196,8 @@ func (x *Shape) SetExtrusionDepth(extrusionDepth float64) {
 	x.inner.SetExtrusionDepth(extrusionDepth)
 }
 
+// @property chamferMode @abstract The sides of the text that are chamfered. @discussion The default value is SCNChamferModeBoth.
+//
 // ChamferMode calls the underlying ChamferMode.
 func (x *Shape) ChamferMode() SCNChamferMode {
 	return SCNChamferMode(x.inner.ChamferMode())
@@ -176,6 +208,8 @@ func (x *Shape) SetChamferMode(chamferMode SCNChamferMode) {
 	x.inner.SetChamferMode(raw.SCNChamferMode(chamferMode))
 }
 
+// @property chamferRadius @abstract The chamfer radius. Animatable. @discussion Values are clamped to the range [0, extrusionDepth / 2]. The default value is 0.
+//
 // ChamferRadius calls the underlying ChamferRadius.
 func (x *Shape) ChamferRadius() float64 {
 	return x.inner.ChamferRadius()
@@ -186,6 +220,8 @@ func (x *Shape) SetChamferRadius(chamferRadius float64) {
 	x.inner.SetChamferRadius(chamferRadius)
 }
 
+// @property chamferProfile @abstract Describes the profile used to when "chamferRadius" is not nil. When "chamferProfile" is nil we fallback on a path representing a quadrant. @discussion The profile should be a 2D curve beginning at (0,1) and ending at (1,0). The "flatness" property is also used to flatten this path. The default value is nil.
+//
 // ChamferProfile calls the underlying ChamferProfile.
 func (x *Shape) ChamferProfile() *appkit.NSBezierPath {
 	return x.inner.ChamferProfile()

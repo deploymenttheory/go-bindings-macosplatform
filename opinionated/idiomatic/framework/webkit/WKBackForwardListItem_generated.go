@@ -37,11 +37,15 @@ func NewWKBackForwardListItem() *WKBackForwardListItem {
 	return &WKBackForwardListItem{inner: raw.WKBackForwardListItemFromID(_id)}
 }
 
+// @abstract The URL of the webpage represented by this item.
+//
 // URL calls the underlying URL.
 func (x *WKBackForwardListItem) URL() *foundation.NSURL {
 	return x.inner.URL()
 }
 
+// @abstract The title of the webpage represented by this item.
+//
 // Title calls the underlying Title.
 func (x *WKBackForwardListItem) Title() string {
 	_r := x.inner.Title()

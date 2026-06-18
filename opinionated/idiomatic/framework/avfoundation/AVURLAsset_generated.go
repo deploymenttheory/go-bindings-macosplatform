@@ -32,6 +32,8 @@ func URLAssetFromID(id objc.ID) *URLAsset {
 	return &URLAsset{inner: raw.AVURLAssetFromID(id)}
 }
 
+// Initializes an instance of AVURLAsset for inspection of a media resource. - Parameter URL: An instance of NSURL that references a media resource. - Parameter options: An instance of NSDictionary that contains keys for specifying options for the initialization of the AVURLAsset. See AVURLAssetPreferPreciseDurationAndTimingKey and AVURLAssetReferenceRestrictionsKey above. - Returns: An instance of AVURLAsset.
+//
 // NewURLAssetWithURLOptions creates a new [URLAsset].
 func NewURLAssetWithURLOptions(uRL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *URLAsset {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVURLAsset")), objc.RegisterName("alloc"))
@@ -39,11 +41,15 @@ func NewURLAssetWithURLOptions(uRL string, options *foundation.NSDictionary[*fou
 	return &URLAsset{inner: raw.AVURLAssetFromID(_id)}
 }
 
+// Indicates the URL with which the instance of AVURLAsset was initialized.
+//
 // URL calls the underlying URL.
 func (x *URLAsset) URL() *foundation.NSURL {
 	return x.inner.URL()
 }
 
+// Provides the identifier that's automatically included in any HTTP request issued on behalf of this asset in the HTTP header field "X-Playback-Session-Id". The value is an NSUUID from which the UUID string can be obtained. Note that copies of an AVURLAsset vend an equivalent httpSessionIdentifier.
+//
 // HttpSessionIdentifier calls the underlying HttpSessionIdentifier.
 func (x *URLAsset) HttpSessionIdentifier() *foundation.NSUUID {
 	return x.inner.HttpSessionIdentifier()
@@ -67,6 +73,8 @@ func (x *URLAsset) AssetCache() *AssetCache {
 	return &AssetCache{inner: _r}
 }
 
+// Provides a reference to an AVAssetTrack of the target from which any timeRange can be inserted into a mutable composition track (via -[AVMutableCompositionTrack insertTimeRange:ofTrack:atTime:error:]). Finds a track of the target with content that can be accommodated by the specified composition track. The logical complement of -[AVMutableComposition mutableTrackCompatibleWithTrack:]. - Parameter compositionTrack: The composition track for which a compatible AVAssetTrack is requested. - Returns: an instance of AVAssetTrack
+//
 // CompatibleTrackForCompositionTrack calls the underlying CompatibleTrackForCompositionTrack.
 func (x *URLAsset) CompatibleTrackForCompositionTrack(compositionTrack *raw.AVCompositionTrack) *AssetTrack {
 	_r := x.inner.CompatibleTrackForCompositionTrack(compositionTrack)
@@ -76,11 +84,15 @@ func (x *URLAsset) CompatibleTrackForCompositionTrack(compositionTrack *raw.AVCo
 	return &AssetTrack{inner: _r}
 }
 
+// Loads a reference to an AVAssetTrack of the target from which any timeRange can be inserted into a mutable composition track (via -[AVMutableCompositionTrack insertTimeRange:ofTrack:atTime:error:]). Finds a track of the target with content that can be accommodated by the specified composition track. The logical complement of -[AVMutableComposition mutableTrackCompatibleWithTrack:]. - Parameter compositionTrack: The composition track for which a compatible AVAssetTrack is requested. - Parameter completionHandler: A block that is invoked when loading is complete, vending an instance of AVAssetTrack or an error.
+//
 // FindCompatibleTrackForCompositionTrackCompletionHandler calls the underlying FindCompatibleTrackForCompositionTrackCompletionHandler.
 func (x *URLAsset) FindCompatibleTrackForCompositionTrackCompletionHandler(compositionTrack *raw.AVCompositionTrack, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	x.inner.FindCompatibleTrackForCompositionTrackCompletionHandler(compositionTrack, completionHandler)
 }
 
+// Provides an array of AVAssetVariants contained in the asset Some variants may not be playable according to the current device configuration.
+//
 // Variants returns the collection as a Go slice.
 func (x *URLAsset) Variants() []*AssetVariant {
 	arr := x.inner.Variants()
@@ -92,6 +104,8 @@ func (x *URLAsset) Variants() []*AssetVariant {
 	})
 }
 
+// The properties of the MediaExtension format reader for the asset. If the asset is being decoded using a MediaExtension format reader, this property will return a AVMediaExtensionProperties object describing the extension. If the asset is not being decoded with a MediaExtension format reader, this property will return nil.
+//
 // MediaExtensionProperties calls the underlying MediaExtensionProperties.
 func (x *URLAsset) MediaExtensionProperties() *MediaExtensionProperties {
 	_r := x.inner.MediaExtensionProperties()
@@ -101,6 +115,8 @@ func (x *URLAsset) MediaExtensionProperties() *MediaExtensionProperties {
 	return &MediaExtensionProperties{inner: _r}
 }
 
+// The sidecar URL used by the MediaExtension. The sidecar URL is returned only if the MediaExtension format reader supports sidecar files, and implements this property [MEFileInfo setSidecarFilename:]. Will return nil otherwise.
+//
 // SidecarURL calls the underlying SidecarURL.
 func (x *URLAsset) SidecarURL() *foundation.NSURL {
 	return x.inner.SidecarURL()

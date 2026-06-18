@@ -37,6 +37,8 @@ func NewAssetPack() *AssetPack {
 	return &AssetPack{inner: raw.BAAssetPackFromID(_id)}
 }
 
+// Creates a download object for the asset pack that you schedule using a download manager. - Remark: Use this method in your main app; use “BAAssetPack/downloadForContentRequest:“ instead in your downloader extension.
+//
 // Download calls the underlying Download.
 func (x *AssetPack) Download() *Download {
 	_r := x.inner.Download()
@@ -46,6 +48,8 @@ func (x *AssetPack) Download() *Download {
 	return &Download{inner: _r}
 }
 
+// Creates a download object for the asset pack that you schedule using a download manager. - Parameter contentRequest: The content request for the current extension invocation. - Returns: A download object. - Remark: Use this method in your downloader extension; use “BAAssetPack/download“ instead in your main app.
+//
 // DownloadForContentRequest calls the underlying DownloadForContentRequest.
 func (x *AssetPack) DownloadForContentRequest(contentRequest BAContentRequest) *Download {
 	_r := x.inner.DownloadForContentRequest(raw.BAContentRequest(contentRequest))
@@ -55,6 +59,8 @@ func (x *AssetPack) DownloadForContentRequest(contentRequest BAContentRequest) *
 	return &Download{inner: _r}
 }
 
+// A unique identifier for the asset pack.
+//
 // Identifier calls the underlying Identifier.
 func (x *AssetPack) Identifier() string {
 	_r := x.inner.Identifier()
@@ -64,11 +70,15 @@ func (x *AssetPack) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The size of the download file containing the asset pack in bytes. This is different than the installation size, which could be larger.
+//
 // DownloadSize calls the underlying DownloadSize.
 func (x *AssetPack) DownloadSize() int {
 	return x.inner.DownloadSize()
 }
 
+// JSON-encoded custom information that’s associated with the asset pack. This property is `nil` for Apple-hosted asset packs.
+//
 // UserInfo calls the underlying UserInfo.
 func (x *AssetPack) UserInfo() *foundation.NSData {
 	return x.inner.UserInfo()

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the configuration of a Virtio file system device.
+//
 // VirtioFileSystemDeviceConfiguration wraps [raw.VZVirtioFileSystemDeviceConfiguration] with a fluent Go API.
 type VirtioFileSystemDeviceConfiguration struct {
 	inner *raw.VZVirtioFileSystemDeviceConfiguration
@@ -33,6 +35,8 @@ func VirtioFileSystemDeviceConfigurationFromID(id objc.ID) *VirtioFileSystemDevi
 	return &VirtioFileSystemDeviceConfiguration{inner: raw.VZVirtioFileSystemDeviceConfigurationFromID(id)}
 }
 
+// Creates a configuration for a VIRTIO file system device.
+//
 // NewVirtioFileSystemDeviceConfigurationWithTag creates a new [VirtioFileSystemDeviceConfiguration].
 func NewVirtioFileSystemDeviceConfigurationWithTag(tag string) *VirtioFileSystemDeviceConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioFileSystemDeviceConfiguration")), objc.RegisterName("alloc"))
@@ -40,18 +44,24 @@ func NewVirtioFileSystemDeviceConfigurationWithTag(tag string) *VirtioFileSystem
 	return &VirtioFileSystemDeviceConfiguration{inner: raw.VZVirtioFileSystemDeviceConfigurationFromID(_id)}
 }
 
+// A label that identifies this device in the guest VM.
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *VirtioFileSystemDeviceConfiguration) WithTag(tag string) *VirtioFileSystemDeviceConfiguration {
 	x.inner.SetTag(foundation.NSStringStringWithUTF8String(tag))
 	return x
 }
 
+// A value that defines how the host exposes resources to the guest virtual machine.
+//
 // WithShare sets the share property and returns the receiver for chaining.
 func (x *VirtioFileSystemDeviceConfiguration) WithShare(share DirectoryShareProvider) *VirtioFileSystemDeviceConfiguration {
 	x.inner.SetShare(share.asDirectoryShare())
 	return x
 }
 
+// @abstract The tag is a string identifying the device. @discussion The tag is presented as a label in the guest identifying this device for mounting. The tag must be valid, which can be checked with +[VZVirtioFileSystemDeviceConfiguration validateTag:error:]. @see +[VZVirtioFileSystemDeviceConfiguration validateTag:error:]
+//
 // Tag calls the underlying Tag.
 func (x *VirtioFileSystemDeviceConfiguration) Tag() string {
 	_r := x.inner.Tag()
@@ -66,6 +76,8 @@ func (x *VirtioFileSystemDeviceConfiguration) SetTag(tag string) {
 	x.inner.SetTag(foundation.NSStringStringWithUTF8String(tag))
 }
 
+// @abstract Directory share. Defines how host resources are exposed to the guest virtual machine. @see VZSingleDirectoryShare @see VZMultipleDirectoryShare @see VZLinuxRosettaDirectoryShare
+//
 // Share calls the underlying Share.
 func (x *VirtioFileSystemDeviceConfiguration) Share() *DirectoryShare {
 	_r := x.inner.Share()

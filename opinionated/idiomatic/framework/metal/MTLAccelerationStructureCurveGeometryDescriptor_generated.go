@@ -38,102 +38,136 @@ func NewAccelerationStructureCurveGeometryDescriptor() *AccelerationStructureCur
 	return &AccelerationStructureCurveGeometryDescriptor{inner: raw.MTLAccelerationStructureCurveGeometryDescriptorFromID(_id)}
 }
 
+// @brief Buffer containing curve control points. Each control point must be of the format specified by the control point format. Must not be nil when the acceleration structure is built.
+//
 // WithControlPointBuffer sets the controlPointBuffer property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithControlPointBuffer(controlPointBuffer raw.MTLBuffer) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.SetControlPointBuffer(controlPointBuffer)
 	return x
 }
 
+// @brief Control point buffer offset. Must be a multiple of the control point format's element size and must be aligned to the platform's buffer offset alignment.
+//
 // WithControlPointBufferOffset sets the controlPointBufferOffset property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithControlPointBufferOffset(controlPointBufferOffset uint) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.SetControlPointBufferOffset(controlPointBufferOffset)
 	return x
 }
 
+// @brief Number of control points in the control point buffer
+//
 // WithControlPointCount sets the controlPointCount property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithControlPointCount(controlPointCount uint) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.SetControlPointCount(controlPointCount)
 	return x
 }
 
+// @brief Stride, in bytes, between control points in the control point buffer. Must be a multiple of the control point format's element size and must be at least the control point format's size. Defaults to 0 bytes, indicating that the control points are tightly packed.
+//
 // WithControlPointStride sets the controlPointStride property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithControlPointStride(controlPointStride uint) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.SetControlPointStride(controlPointStride)
 	return x
 }
 
+// @brief Format of the control points in the control point buffer. Defaults to MTLAttributeFormatFloat3 (packed).
+//
 // WithControlPointFormat sets the controlPointFormat property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithControlPointFormat(controlPointFormat MTLAttributeFormat) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.SetControlPointFormat(raw.MTLAttributeFormat(controlPointFormat))
 	return x
 }
 
+// @brief Buffer containing the curve radius for each control point. Each radius must be of the type specified by the radius format. Each radius must be at least zero. Must not be nil when the acceleration structure is built.
+//
 // WithRadiusBuffer sets the radiusBuffer property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithRadiusBuffer(radiusBuffer raw.MTLBuffer) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.SetRadiusBuffer(radiusBuffer)
 	return x
 }
 
+// @brief Radius buffer offset. Must be a multiple of the radius format size and must be aligned to the platform's buffer offset alignment.
+//
 // WithRadiusBufferOffset sets the radiusBufferOffset property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithRadiusBufferOffset(radiusBufferOffset uint) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.SetRadiusBufferOffset(radiusBufferOffset)
 	return x
 }
 
+// @brief Format of the radii in the radius buffer. Defaults to MTLAttributeFormatFloat.
+//
 // WithRadiusFormat sets the radiusFormat property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithRadiusFormat(radiusFormat MTLAttributeFormat) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.SetRadiusFormat(raw.MTLAttributeFormat(radiusFormat))
 	return x
 }
 
+// @brief Stride, in bytes, between radii in the radius buffer. Must be a multiple of the radius format size. Defaults to 0 bytes, indicating that the radii are tightly packed.
+//
 // WithRadiusStride sets the radiusStride property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithRadiusStride(radiusStride uint) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.SetRadiusStride(radiusStride)
 	return x
 }
 
+// Index buffer containing references to control points in the control point buffer. Must not be nil when the acceleration structure is built.
+//
 // WithIndexBuffer sets the indexBuffer property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithIndexBuffer(indexBuffer raw.MTLBuffer) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.SetIndexBuffer(indexBuffer)
 	return x
 }
 
+// @brief Index buffer offset. Must be a multiple of the index data type size and must be aligned to both the index data type's alignment and the platform's buffer offset alignment.
+//
 // WithIndexBufferOffset sets the indexBufferOffset property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithIndexBufferOffset(indexBufferOffset uint) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.SetIndexBufferOffset(indexBufferOffset)
 	return x
 }
 
+// @brief Index type
+//
 // WithIndexType sets the indexType property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithIndexType(indexType MTLIndexType) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.SetIndexType(raw.MTLIndexType(indexType))
 	return x
 }
 
+// @brief Number of curve segments
+//
 // WithSegmentCount sets the segmentCount property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithSegmentCount(segmentCount uint) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.SetSegmentCount(segmentCount)
 	return x
 }
 
+// @brief Number of control points per curve segment. Must be 2, 3, or 4.
+//
 // WithSegmentControlPointCount sets the segmentControlPointCount property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithSegmentControlPointCount(segmentControlPointCount uint) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.SetSegmentControlPointCount(segmentControlPointCount)
 	return x
 }
 
+// @brief Curve type. Defaults to MTLCurveTypeRound.
+//
 // WithCurveType sets the curveType property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithCurveType(curveType MTLCurveType) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.SetCurveType(raw.MTLCurveType(curveType))
 	return x
 }
 
+// @brief Curve basis. Defaults to MTLCurveBasisBSpline.
+//
 // WithCurveBasis sets the curveBasis property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithCurveBasis(curveBasis MTLCurveBasis) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.SetCurveBasis(raw.MTLCurveBasis(curveBasis))
 	return x
 }
 
+// @brief Type of curve end caps. Defaults to MTLCurveEndCapsNone.
+//
 // WithCurveEndCaps sets the curveEndCaps property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithCurveEndCaps(curveEndCaps MTLCurveEndCaps) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.SetCurveEndCaps(raw.MTLCurveEndCaps(curveEndCaps))
@@ -146,48 +180,64 @@ func (x *AccelerationStructureCurveGeometryDescriptor) WithIntersectionFunctionT
 	return x
 }
 
+// @brief Whether the geometry is opaque
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithOpaque(opaque bool) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetOpaque(opaque)
 	return x
 }
 
+// @brief Whether intersection functions may be invoked more than once per ray/primitive intersection. Defaults to YES.
+//
 // WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation)
 	return x
 }
 
+// @brief Label
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithLabel(label string) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @brief Data buffer containing per-primitive data. May be nil.
+//
 // WithPrimitiveDataBuffer sets the primitiveDataBuffer property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTLBuffer) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataBuffer(primitiveDataBuffer)
 	return x
 }
 
+// @brief Primitive data buffer offset in bytes. Must be aligned to the platform's buffer offset alignment. Defaults to 0 bytes.
+//
 // WithPrimitiveDataBufferOffset sets the primitiveDataBufferOffset property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataBufferOffset(primitiveDataBufferOffset uint) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataBufferOffset(primitiveDataBufferOffset)
 	return x
 }
 
+// @brief Stride, in bytes, between per-primitive data in the primitive data buffer. Must be at least primitiveDataElementSize and must be a multiple of 4 bytes. Defaults to 0 bytes. Assumed to be equal to primitiveDataElementSize if zero.
+//
 // WithPrimitiveDataStride sets the primitiveDataStride property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride uint) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataStride(primitiveDataStride)
 	return x
 }
 
+// @brief Size, in bytes, of the data for each primitive in the primitive data buffer. Must be at most primitiveDataStride and must be a multiple of 4 bytes. Defaults to 0 bytes.
+//
 // WithPrimitiveDataElementSize sets the primitiveDataElementSize property and returns the receiver for chaining.
 func (x *AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize uint) *AccelerationStructureCurveGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataElementSize(primitiveDataElementSize)
 	return x
 }
 
+// @brief Buffer containing curve control points. Each control point must be of the format specified by the control point format. Must not be nil when the acceleration structure is built.
+//
 // ControlPointBuffer calls the underlying ControlPointBuffer.
 func (x *AccelerationStructureCurveGeometryDescriptor) ControlPointBuffer() raw.MTLBuffer {
 	return x.inner.ControlPointBuffer()
@@ -198,6 +248,8 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetControlPointBuffer(con
 	x.inner.SetControlPointBuffer(controlPointBuffer)
 }
 
+// @brief Control point buffer offset. Must be a multiple of the control point format's element size and must be aligned to the platform's buffer offset alignment.
+//
 // ControlPointBufferOffset calls the underlying ControlPointBufferOffset.
 func (x *AccelerationStructureCurveGeometryDescriptor) ControlPointBufferOffset() uint {
 	return x.inner.ControlPointBufferOffset()
@@ -208,6 +260,8 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetControlPointBufferOffs
 	x.inner.SetControlPointBufferOffset(controlPointBufferOffset)
 }
 
+// @brief Number of control points in the control point buffer
+//
 // ControlPointCount calls the underlying ControlPointCount.
 func (x *AccelerationStructureCurveGeometryDescriptor) ControlPointCount() uint {
 	return x.inner.ControlPointCount()
@@ -218,6 +272,8 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetControlPointCount(cont
 	x.inner.SetControlPointCount(controlPointCount)
 }
 
+// @brief Stride, in bytes, between control points in the control point buffer. Must be a multiple of the control point format's element size and must be at least the control point format's size. Defaults to 0 bytes, indicating that the control points are tightly packed.
+//
 // ControlPointStride calls the underlying ControlPointStride.
 func (x *AccelerationStructureCurveGeometryDescriptor) ControlPointStride() uint {
 	return x.inner.ControlPointStride()
@@ -228,6 +284,8 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetControlPointStride(con
 	x.inner.SetControlPointStride(controlPointStride)
 }
 
+// @brief Format of the control points in the control point buffer. Defaults to MTLAttributeFormatFloat3 (packed).
+//
 // ControlPointFormat calls the underlying ControlPointFormat.
 func (x *AccelerationStructureCurveGeometryDescriptor) ControlPointFormat() MTLAttributeFormat {
 	return MTLAttributeFormat(x.inner.ControlPointFormat())
@@ -238,6 +296,8 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetControlPointFormat(con
 	x.inner.SetControlPointFormat(raw.MTLAttributeFormat(controlPointFormat))
 }
 
+// @brief Buffer containing the curve radius for each control point. Each radius must be of the type specified by the radius format. Each radius must be at least zero. Must not be nil when the acceleration structure is built.
+//
 // RadiusBuffer calls the underlying RadiusBuffer.
 func (x *AccelerationStructureCurveGeometryDescriptor) RadiusBuffer() raw.MTLBuffer {
 	return x.inner.RadiusBuffer()
@@ -248,6 +308,8 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetRadiusBuffer(radiusBuf
 	x.inner.SetRadiusBuffer(radiusBuffer)
 }
 
+// @brief Radius buffer offset. Must be a multiple of the radius format size and must be aligned to the platform's buffer offset alignment.
+//
 // RadiusBufferOffset calls the underlying RadiusBufferOffset.
 func (x *AccelerationStructureCurveGeometryDescriptor) RadiusBufferOffset() uint {
 	return x.inner.RadiusBufferOffset()
@@ -258,6 +320,8 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetRadiusBufferOffset(rad
 	x.inner.SetRadiusBufferOffset(radiusBufferOffset)
 }
 
+// @brief Format of the radii in the radius buffer. Defaults to MTLAttributeFormatFloat.
+//
 // RadiusFormat calls the underlying RadiusFormat.
 func (x *AccelerationStructureCurveGeometryDescriptor) RadiusFormat() MTLAttributeFormat {
 	return MTLAttributeFormat(x.inner.RadiusFormat())
@@ -268,6 +332,8 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetRadiusFormat(radiusFor
 	x.inner.SetRadiusFormat(raw.MTLAttributeFormat(radiusFormat))
 }
 
+// @brief Stride, in bytes, between radii in the radius buffer. Must be a multiple of the radius format size. Defaults to 0 bytes, indicating that the radii are tightly packed.
+//
 // RadiusStride calls the underlying RadiusStride.
 func (x *AccelerationStructureCurveGeometryDescriptor) RadiusStride() uint {
 	return x.inner.RadiusStride()
@@ -278,6 +344,8 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetRadiusStride(radiusStr
 	x.inner.SetRadiusStride(radiusStride)
 }
 
+// Index buffer containing references to control points in the control point buffer. Must not be nil when the acceleration structure is built.
+//
 // IndexBuffer calls the underlying IndexBuffer.
 func (x *AccelerationStructureCurveGeometryDescriptor) IndexBuffer() raw.MTLBuffer {
 	return x.inner.IndexBuffer()
@@ -288,6 +356,8 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetIndexBuffer(indexBuffe
 	x.inner.SetIndexBuffer(indexBuffer)
 }
 
+// @brief Index buffer offset. Must be a multiple of the index data type size and must be aligned to both the index data type's alignment and the platform's buffer offset alignment.
+//
 // IndexBufferOffset calls the underlying IndexBufferOffset.
 func (x *AccelerationStructureCurveGeometryDescriptor) IndexBufferOffset() uint {
 	return x.inner.IndexBufferOffset()
@@ -298,6 +368,8 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetIndexBufferOffset(inde
 	x.inner.SetIndexBufferOffset(indexBufferOffset)
 }
 
+// @brief Index type
+//
 // IndexType calls the underlying IndexType.
 func (x *AccelerationStructureCurveGeometryDescriptor) IndexType() MTLIndexType {
 	return MTLIndexType(x.inner.IndexType())
@@ -308,6 +380,8 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetIndexType(indexType MT
 	x.inner.SetIndexType(raw.MTLIndexType(indexType))
 }
 
+// @brief Number of curve segments
+//
 // SegmentCount calls the underlying SegmentCount.
 func (x *AccelerationStructureCurveGeometryDescriptor) SegmentCount() uint {
 	return x.inner.SegmentCount()
@@ -318,6 +392,8 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetSegmentCount(segmentCo
 	x.inner.SetSegmentCount(segmentCount)
 }
 
+// @brief Number of control points per curve segment. Must be 2, 3, or 4.
+//
 // SegmentControlPointCount calls the underlying SegmentControlPointCount.
 func (x *AccelerationStructureCurveGeometryDescriptor) SegmentControlPointCount() uint {
 	return x.inner.SegmentControlPointCount()
@@ -328,6 +404,8 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetSegmentControlPointCou
 	x.inner.SetSegmentControlPointCount(segmentControlPointCount)
 }
 
+// @brief Curve type. Defaults to MTLCurveTypeRound.
+//
 // CurveType calls the underlying CurveType.
 func (x *AccelerationStructureCurveGeometryDescriptor) CurveType() MTLCurveType {
 	return MTLCurveType(x.inner.CurveType())
@@ -338,6 +416,8 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetCurveType(curveType MT
 	x.inner.SetCurveType(raw.MTLCurveType(curveType))
 }
 
+// @brief Curve basis. Defaults to MTLCurveBasisBSpline.
+//
 // CurveBasis calls the underlying CurveBasis.
 func (x *AccelerationStructureCurveGeometryDescriptor) CurveBasis() MTLCurveBasis {
 	return MTLCurveBasis(x.inner.CurveBasis())
@@ -348,6 +428,8 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetCurveBasis(curveBasis 
 	x.inner.SetCurveBasis(raw.MTLCurveBasis(curveBasis))
 }
 
+// @brief Type of curve end caps. Defaults to MTLCurveEndCapsNone.
+//
 // CurveEndCaps calls the underlying CurveEndCaps.
 func (x *AccelerationStructureCurveGeometryDescriptor) CurveEndCaps() MTLCurveEndCaps {
 	return MTLCurveEndCaps(x.inner.CurveEndCaps())

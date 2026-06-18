@@ -36,12 +36,16 @@ func NewMutableNetworkProfile() *MutableNetworkProfile {
 	return &MutableNetworkProfile{inner: raw.CWMutableNetworkProfileFromID(_id)}
 }
 
+// @property @abstract Set the service set identifier (SSID).
+//
 // WithSsidData sets the ssidData property and returns the receiver for chaining.
 func (x *MutableNetworkProfile) WithSsidData(ssidData *foundation.NSData) *MutableNetworkProfile {
 	x.inner.SetSsidData(ssidData)
 	return x
 }
 
+// @property @abstract Set the security type.
+//
 // WithSecurity sets the security property and returns the receiver for chaining.
 func (x *MutableNetworkProfile) WithSecurity(security CWSecurity) *MutableNetworkProfile {
 	x.inner.SetSecurity(raw.CWSecurity(security))

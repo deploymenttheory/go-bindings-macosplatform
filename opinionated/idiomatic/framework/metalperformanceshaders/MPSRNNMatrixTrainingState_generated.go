@@ -43,6 +43,8 @@ func (x *RNNMatrixTrainingState) WithReadCount(readCount uint) *RNNMatrixTrainin
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *RNNMatrixTrainingState) WithLabel(label string) *RNNMatrixTrainingState {
 	x.inner.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))

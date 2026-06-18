@@ -37,6 +37,8 @@ func NewCaptureReactionEffectState() *CaptureReactionEffectState {
 	return &CaptureReactionEffectState{inner: raw.AVCaptureReactionEffectStateFromID(_id)}
 }
 
+// @property reactionType @abstract Indicates the reaction which is running. @discussion There may be multiple reactions of the same type at a given time.  Some may come from gesture detection, some may come from calls to -[AVCaptureDevice performReactionEffect:]
+//
 // ReactionType calls the underlying ReactionType.
 func (x *CaptureReactionEffectState) ReactionType() string {
 	_r := x.inner.ReactionType()
@@ -46,11 +48,15 @@ func (x *CaptureReactionEffectState) ReactionType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property startTime @abstract Provides the presentation time of the first frame where the effect is being rendered.
+//
 // StartTime calls the underlying StartTime.
 func (x *CaptureReactionEffectState) StartTime() coremedia.CMTime {
 	return x.inner.StartTime()
 }
 
+// @property endTime @abstract Provides the presentation time of the frame following the last frame where the effect is seen. @discussion Will be kCMTimeInvalid while the effect is in progress, but will be updated to a valid time when the reaction effect completes and the AVCaptureReactionEffectState is removed from -[AVCaptureDevice reactionEffectsInProgress]. (If using NSKeyValueObservingOptionOld, you can access completed effects with valid end times via NSKeyValueChangeOldKey.)
+//
 // EndTime calls the underlying EndTime.
 func (x *CaptureReactionEffectState) EndTime() coremedia.CMTime {
 	return x.inner.EndTime()

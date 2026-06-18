@@ -711,6 +711,8 @@ func (x *TextView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundat
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *TextView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextView {
 	x.inner.NSText.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
@@ -1826,6 +1828,8 @@ func (x *TextView) DrawTextHighlightBackgroundForTextRangeOrigin(textRange *raw.
 	x.inner.DrawTextHighlightBackgroundForTextRangeOrigin(textRange, origin)
 }
 
+// An action for toggling `NSTextHighlightStyleAttributeName` in the receiver’s selected range. The sender should be a menu item with a `representedObject` of type (`NSTextHighlightColorScheme`).
+//
 // Highlight calls the underlying Highlight.
 func (x *TextView) Highlight(sender objc.ID) {
 	x.inner.Highlight(sender)

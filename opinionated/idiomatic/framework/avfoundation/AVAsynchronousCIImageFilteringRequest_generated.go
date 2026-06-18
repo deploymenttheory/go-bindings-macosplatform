@@ -40,26 +40,36 @@ func NewAsynchronousCIImageFilteringRequest() *AsynchronousCIImageFilteringReque
 	return &AsynchronousCIImageFilteringRequest{inner: raw.AVAsynchronousCIImageFilteringRequestFromID(_id)}
 }
 
+// Callback the filter should call when filtering succeeded. If context is nil then a default context will be used, GPU-accelerated if possible. It is safe to pass in the sourceImage in which case the filter will appear to have no effect, essentially functioning as a pass-through.
+//
 // FinishWithImageContext calls the underlying FinishWithImageContext.
 func (x *AsynchronousCIImageFilteringRequest) FinishWithImageContext(filteredImage objc.ID, context_ objc.ID) {
 	x.inner.FinishWithImageContext(filteredImage, context_)
 }
 
+// Callback the filter should call when filtering failed. The error parameter should describe the actual error.
+//
 // FinishWithError calls the underlying FinishWithError.
 func (x *AsynchronousCIImageFilteringRequest) FinishWithError(error_ unsafe.Pointer) {
 	x.inner.FinishWithError(error_)
 }
 
+// Width and height for rendering frames.
+//
 // RenderSize calls the underlying RenderSize.
 func (x *AsynchronousCIImageFilteringRequest) RenderSize() corefoundation.CGSize {
 	return x.inner.RenderSize()
 }
 
+// The time for which the frame should be filtered
+//
 // CompositionTime calls the underlying CompositionTime.
 func (x *AsynchronousCIImageFilteringRequest) CompositionTime() coremedia.CMTime {
 	return x.inner.CompositionTime()
 }
 
+// CIImage for the first enabled source video track. Unlike AVAsynchronousVideoCompositionRequest, renderContext.renderTransform is already applied to the source image.
+//
 // SourceImage calls the underlying SourceImage.
 func (x *AsynchronousCIImageFilteringRequest) SourceImage() objc.ID {
 	return x.inner.SourceImage()

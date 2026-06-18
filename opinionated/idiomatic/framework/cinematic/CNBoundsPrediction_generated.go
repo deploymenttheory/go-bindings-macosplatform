@@ -36,18 +36,24 @@ func NewBoundsPrediction() *BoundsPrediction {
 	return &BoundsPrediction{inner: raw.CNBoundsPredictionFromID(_id)}
 }
 
+// bounds of the detected object in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right
+//
 // WithNormalizedBounds sets the normalizedBounds property and returns the receiver for chaining.
 func (x *BoundsPrediction) WithNormalizedBounds(normalizedBounds corefoundation.CGRect) *BoundsPrediction {
 	x.inner.SetNormalizedBounds(normalizedBounds)
 	return x
 }
 
+// the probability that a well-defined object is within the bounds — a number between 0.0 and 1.0.
+//
 // WithConfidence sets the confidence property and returns the receiver for chaining.
 func (x *BoundsPrediction) WithConfidence(confidence float32) *BoundsPrediction {
 	x.inner.SetConfidence(confidence)
 	return x
 }
 
+// bounds of the detected object in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right
+//
 // NormalizedBounds calls the underlying NormalizedBounds.
 func (x *BoundsPrediction) NormalizedBounds() corefoundation.CGRect {
 	return x.inner.NormalizedBounds()
@@ -58,6 +64,8 @@ func (x *BoundsPrediction) SetNormalizedBounds(normalizedBounds corefoundation.C
 	x.inner.SetNormalizedBounds(normalizedBounds)
 }
 
+// the probability that a well-defined object is within the bounds — a number between 0.0 and 1.0.
+//
 // Confidence calls the underlying Confidence.
 func (x *BoundsPrediction) Confidence() float32 {
 	return x.inner.Confidence()

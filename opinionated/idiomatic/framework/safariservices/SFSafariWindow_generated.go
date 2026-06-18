@@ -37,6 +37,8 @@ func NewSafariWindow() *SafariWindow {
 	return &SafariWindow{inner: raw.SFSafariWindowFromID(_id)}
 }
 
+// Calls the completion handler with the active tab in the window.
+//
 // GetActiveTab blocks until the operation completes or ctx is cancelled.
 func (x *SafariWindow) GetActiveTab(ctx context.Context) (*SafariTab, error) {
 	type _result struct {
@@ -60,6 +62,8 @@ func (x *SafariWindow) GetActiveTab(ctx context.Context) (*SafariTab, error) {
 	}
 }
 
+// Calls the completion handler with all of the tabs in this window ordered left to right.
+//
 // GetAllTabs blocks until the operation completes or ctx is cancelled.
 func (x *SafariWindow) GetAllTabs(ctx context.Context) (*foundation.NSArray[*raw.SFSafariTab], error) {
 	type _result struct {
@@ -81,6 +85,8 @@ func (x *SafariWindow) GetAllTabs(ctx context.Context) (*foundation.NSArray[*raw
 	}
 }
 
+// This will open a tab at the end of the tab list. The completion handler is called when the tab has been opened.
+//
 // OpenTabWithURLMakeActiveIfPossible blocks until the operation completes or ctx is cancelled.
 func (x *SafariWindow) OpenTabWithURLMakeActiveIfPossible(ctx context.Context, url string, activateTab bool) (*SafariTab, error) {
 	type _result struct {
@@ -104,6 +110,8 @@ func (x *SafariWindow) OpenTabWithURLMakeActiveIfPossible(ctx context.Context, u
 	}
 }
 
+// Gets the extension’s toolbar item in this window.
+//
 // GetToolbarItem blocks until the operation completes or ctx is cancelled.
 func (x *SafariWindow) GetToolbarItem(ctx context.Context) (*SafariToolbarItem, error) {
 	type _result struct {
@@ -127,6 +135,8 @@ func (x *SafariWindow) GetToolbarItem(ctx context.Context) (*SafariToolbarItem, 
 	}
 }
 
+// Closes this window.
+//
 // Close calls the underlying Close.
 func (x *SafariWindow) Close() {
 	x.inner.Close()

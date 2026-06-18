@@ -71,12 +71,16 @@ func (x *ImageView) WithImageFrameStyle(imageFrameStyle NSImageFrameStyle) *Imag
 	return x
 }
 
+// Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the image view uses a default size, weight, and scale provided by the system. The default value is `nil`.
+//
 // WithSymbolConfiguration sets the symbolConfiguration property and returns the receiver for chaining.
 func (x *ImageView) WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *ImageView {
 	x.inner.SetSymbolConfiguration(symbolConfiguration.Unwrap())
 	return x
 }
 
+// A tint color to be used when rendering template image content. This color may be combined with other effects to produce a theme-appropriate rendition of the template image. A `nil` value indicates the standard set of effects without color modification. The default value is `nil`.
+//
 // WithContentTintColor sets the contentTintColor property and returns the receiver for chaining.
 func (x *ImageView) WithContentTintColor(contentTintColor *Color) *ImageView {
 	x.inner.SetContentTintColor(contentTintColor.Unwrap())
@@ -95,6 +99,8 @@ func (x *ImageView) WithAllowsCutCopyPaste(allowsCutCopyPaste bool) *ImageView {
 	return x
 }
 
+// Preferred dynamic range when displaying an image in the receiving image view.
+//
 // WithPreferredImageDynamicRange sets the preferredImageDynamicRange property and returns the receiver for chaining.
 func (x *ImageView) WithPreferredImageDynamicRange(preferredImageDynamicRange NSImageDynamicRange) *ImageView {
 	x.inner.SetPreferredImageDynamicRange(raw.NSImageDynamicRange(preferredImageDynamicRange))
@@ -509,6 +515,8 @@ func (x *ImageView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets founda
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *ImageView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ImageView {
 	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
@@ -641,6 +649,8 @@ func (x *ImageView) SetImageFrameStyle(imageFrameStyle NSImageFrameStyle) {
 	x.inner.SetImageFrameStyle(raw.NSImageFrameStyle(imageFrameStyle))
 }
 
+// Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the image view uses a default size, weight, and scale provided by the system. The default value is `nil`.
+//
 // SymbolConfiguration calls the underlying SymbolConfiguration.
 func (x *ImageView) SymbolConfiguration() *ImageSymbolConfiguration {
 	_r := x.inner.SymbolConfiguration()
@@ -650,11 +660,15 @@ func (x *ImageView) SymbolConfiguration() *ImageSymbolConfiguration {
 	return &ImageSymbolConfiguration{inner: _r}
 }
 
+// Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the image view uses a default size, weight, and scale provided by the system. The default value is `nil`.
+//
 // SetSymbolConfiguration calls the underlying SetSymbolConfiguration.
 func (x *ImageView) SetSymbolConfiguration(symbolConfiguration *raw.NSImageSymbolConfiguration) {
 	x.inner.SetSymbolConfiguration(symbolConfiguration)
 }
 
+// A tint color to be used when rendering template image content. This color may be combined with other effects to produce a theme-appropriate rendition of the template image. A `nil` value indicates the standard set of effects without color modification. The default value is `nil`.
+//
 // ContentTintColor calls the underlying ContentTintColor.
 func (x *ImageView) ContentTintColor() *Color {
 	_r := x.inner.ContentTintColor()
@@ -664,6 +678,8 @@ func (x *ImageView) ContentTintColor() *Color {
 	return &Color{inner: _r}
 }
 
+// A tint color to be used when rendering template image content. This color may be combined with other effects to produce a theme-appropriate rendition of the template image. A `nil` value indicates the standard set of effects without color modification. The default value is `nil`.
+//
 // SetContentTintColor calls the underlying SetContentTintColor.
 func (x *ImageView) SetContentTintColor(contentTintColor *raw.NSColor) {
 	x.inner.SetContentTintColor(contentTintColor)
@@ -689,71 +705,99 @@ func (x *ImageView) SetAllowsCutCopyPaste(allowsCutCopyPaste bool) {
 	x.inner.SetAllowsCutCopyPaste(allowsCutCopyPaste)
 }
 
+// Preferred dynamic range when displaying an image in the receiving image view.
+//
 // PreferredImageDynamicRange calls the underlying PreferredImageDynamicRange.
 func (x *ImageView) PreferredImageDynamicRange() NSImageDynamicRange {
 	return NSImageDynamicRange(x.inner.PreferredImageDynamicRange())
 }
 
+// Preferred dynamic range when displaying an image in the receiving image view.
+//
 // SetPreferredImageDynamicRange calls the underlying SetPreferredImageDynamicRange.
 func (x *ImageView) SetPreferredImageDynamicRange(preferredImageDynamicRange NSImageDynamicRange) {
 	x.inner.SetPreferredImageDynamicRange(raw.NSImageDynamicRange(preferredImageDynamicRange))
 }
 
+// Resolved dynamic range based on fully resolved image content. Note: this will return `NSImageDynamicRangeUnspecified` if the image view has not or can not resolve the content (either because it has no resolvable image content or has not resolved because the image view hasn't displayed.)
+//
 // ImageDynamicRange calls the underlying ImageDynamicRange.
 func (x *ImageView) ImageDynamicRange() NSImageDynamicRange {
 	return NSImageDynamicRange(x.inner.ImageDynamicRange())
 }
 
+// Adds a symbol effect to the image view with default options and animation.
+//
 // AddSymbolEffect calls the underlying AddSymbolEffect.
 func (x *ImageView) AddSymbolEffect(symbolEffect *symbols.NSSymbolEffect) {
 	x.inner.AddSymbolEffect(symbolEffect)
 }
 
+// Adds a symbol effect to the image view with specified options and default animation.
+//
 // AddSymbolEffectOptions calls the underlying AddSymbolEffectOptions.
 func (x *ImageView) AddSymbolEffectOptions(symbolEffect *symbols.NSSymbolEffect, options *symbols.NSSymbolEffectOptions) {
 	x.inner.AddSymbolEffectOptions(symbolEffect, options)
 }
 
+// Adds a symbol effect to the image view with specified options and animation.
+//
 // AddSymbolEffectOptionsAnimated calls the underlying AddSymbolEffectOptionsAnimated.
 func (x *ImageView) AddSymbolEffectOptionsAnimated(symbolEffect *symbols.NSSymbolEffect, options *symbols.NSSymbolEffectOptions, animated bool) {
 	x.inner.AddSymbolEffectOptionsAnimated(symbolEffect, options, animated)
 }
 
+// Removes from the image view the symbol effect matching the type of effect passed in, with default options and animation.
+//
 // RemoveSymbolEffectOfType calls the underlying RemoveSymbolEffectOfType.
 func (x *ImageView) RemoveSymbolEffectOfType(symbolEffect *symbols.NSSymbolEffect) {
 	x.inner.RemoveSymbolEffectOfType(symbolEffect)
 }
 
+// Removes from the image view the symbol effect matching the type of effect passed in, with specified options and default animation.
+//
 // RemoveSymbolEffectOfTypeOptions calls the underlying RemoveSymbolEffectOfTypeOptions.
 func (x *ImageView) RemoveSymbolEffectOfTypeOptions(symbolEffect *symbols.NSSymbolEffect, options *symbols.NSSymbolEffectOptions) {
 	x.inner.RemoveSymbolEffectOfTypeOptions(symbolEffect, options)
 }
 
+// Removes from the image view the symbol effect matching the type of effect passed in, with specified options and animation.
+//
 // RemoveSymbolEffectOfTypeOptionsAnimated calls the underlying RemoveSymbolEffectOfTypeOptionsAnimated.
 func (x *ImageView) RemoveSymbolEffectOfTypeOptionsAnimated(symbolEffect *symbols.NSSymbolEffect, options *symbols.NSSymbolEffectOptions, animated bool) {
 	x.inner.RemoveSymbolEffectOfTypeOptionsAnimated(symbolEffect, options, animated)
 }
 
+// Removes all symbol effects from the image view with default options and animation.
+//
 // RemoveAllSymbolEffects calls the underlying RemoveAllSymbolEffects.
 func (x *ImageView) RemoveAllSymbolEffects() {
 	x.inner.RemoveAllSymbolEffects()
 }
 
+// Removes all symbol effects from the image view with specified options and default animation.
+//
 // RemoveAllSymbolEffectsWithOptions calls the underlying RemoveAllSymbolEffectsWithOptions.
 func (x *ImageView) RemoveAllSymbolEffectsWithOptions(options *symbols.NSSymbolEffectOptions) {
 	x.inner.RemoveAllSymbolEffectsWithOptions(options)
 }
 
+// Removes all symbol effects from the image view with specified options and animation.
+//
 // RemoveAllSymbolEffectsWithOptionsAnimated calls the underlying RemoveAllSymbolEffectsWithOptionsAnimated.
 func (x *ImageView) RemoveAllSymbolEffectsWithOptionsAnimated(options *symbols.NSSymbolEffectOptions, animated bool) {
 	x.inner.RemoveAllSymbolEffectsWithOptionsAnimated(options, animated)
 }
 
+// Sets the symbol image on the image view with a symbol content transition and default options. Passing in a non-symbol image will result in undefined behavior.
+//
 // SetSymbolImageWithContentTransition calls the underlying SetSymbolImageWithContentTransition.
 func (x *ImageView) SetSymbolImageWithContentTransition(symbolImage *raw.NSImage, transition *symbols.NSSymbolContentTransition) {
 	x.inner.SetSymbolImageWithContentTransition(symbolImage, transition)
 }
 
+// Sets the symbol image on the image view with a symbol content transition and specified options. Passing in a non-symbol image will result in undefined behavior.
+//
 // SetSymbolImageWithContentTransitionOptions calls the underlying SetSymbolImageWithContentTransitionOptions.
 func (x *ImageView) SetSymbolImageWithContentTransitionOptions(symbolImage *raw.NSImage, transition *symbols.NSSymbolContentTransition, options *symbols.NSSymbolEffectOptions) {
 	x.inner.SetSymbolImageWithContentTransitionOptions(symbolImage, transition, options)

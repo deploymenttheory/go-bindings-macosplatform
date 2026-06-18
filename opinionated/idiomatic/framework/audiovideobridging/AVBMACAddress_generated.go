@@ -32,6 +32,8 @@ func MACAddressFromID(id objc.ID) *MACAddress {
 	return &MACAddress{inner: raw.AVBMACAddressFromID(id)}
 }
 
+// @method		initWithBytes: @abstract	This method initializes the receiver to contain the MAC address specified. @param		bytes A pointer to 6 octets of memory containing the MAC address. @result		The initialized receiver.
+//
 // NewMACAddressWithBytes creates a new [MACAddress].
 func NewMACAddressWithBytes(bytes_ *uint8) *MACAddress {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVBMACAddress")), objc.RegisterName("alloc"))
@@ -39,29 +41,39 @@ func NewMACAddressWithBytes(bytes_ *uint8) *MACAddress {
 	return &MACAddress{inner: raw.AVBMACAddressFromID(_id)}
 }
 
+// @property	dataRepresentation @abstract	An NSData object containing the bytes of the MAC address.
+//
 // WithDataRepresentation sets the dataRepresentation property and returns the receiver for chaining.
 func (x *MACAddress) WithDataRepresentation(dataRepresentation *foundation.NSData) *MACAddress {
 	x.inner.SetDataRepresentation(dataRepresentation)
 	return x
 }
 
+// @property	stringRepresentation @abstract	The colon separated cannonical string representation of the MAC address e.g. 12:34:56:78:ab:cd
+//
 // WithStringRepresentation sets the stringRepresentation property and returns the receiver for chaining.
 func (x *MACAddress) WithStringRepresentation(stringRepresentation string) *MACAddress {
 	x.inner.SetStringRepresentation(foundation.NSStringStringWithUTF8String(stringRepresentation))
 	return x
 }
 
+// @property	multicast @abstract	Returns if the multicast bit is set in the MAC address.
+//
 // WithMulticast sets the multicast property and returns the receiver for chaining.
 func (x *MACAddress) WithMulticast(multicast bool) *MACAddress {
 	x.inner.SetMulticast(multicast)
 	return x
 }
 
+// @property	bytes @abstract	The .
+//
 // Bytes calls the underlying Bytes.
 func (x *MACAddress) Bytes() unsafe.Pointer {
 	return x.inner.Bytes()
 }
 
+// @property	dataRepresentation @abstract	An NSData object containing the bytes of the MAC address.
+//
 // DataRepresentation calls the underlying DataRepresentation.
 func (x *MACAddress) DataRepresentation() *foundation.NSData {
 	return x.inner.DataRepresentation()
@@ -72,6 +84,8 @@ func (x *MACAddress) SetDataRepresentation(dataRepresentation *foundation.NSData
 	x.inner.SetDataRepresentation(dataRepresentation)
 }
 
+// @property	stringRepresentation @abstract	The colon separated cannonical string representation of the MAC address e.g. 12:34:56:78:ab:cd
+//
 // StringRepresentation calls the underlying StringRepresentation.
 func (x *MACAddress) StringRepresentation() string {
 	_r := x.inner.StringRepresentation()
@@ -86,6 +100,8 @@ func (x *MACAddress) SetStringRepresentation(stringRepresentation string) {
 	x.inner.SetStringRepresentation(foundation.NSStringStringWithUTF8String(stringRepresentation))
 }
 
+// @property	multicast @abstract	Returns if the multicast bit is set in the MAC address.
+//
 // IsMulticast calls the underlying IsMulticast.
 func (x *MACAddress) IsMulticast() bool {
 	return x.inner.IsMulticast()

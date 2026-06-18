@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The common behavior of socket devices.
+//
 // SocketDevice wraps [raw.VZSocketDevice] with a fluent Go API.
 type SocketDevice struct {
 	inner *raw.VZSocketDevice

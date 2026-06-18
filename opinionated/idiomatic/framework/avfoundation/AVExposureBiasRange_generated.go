@@ -35,16 +35,22 @@ func NewExposureBiasRange() *ExposureBiasRange {
 	return &ExposureBiasRange{inner: raw.AVExposureBiasRangeFromID(_id)}
 }
 
+// @method containsExposureBias: @abstract Tests if a given exposure bias in EV units is within the exposure bias range. @param exposureBias The exposure bias to test. @result Returns YES if the given exposure bias is within the exposure bias, NO otherwise. @discussion Note that the exposure bias ranges are inclusive.
+//
 // ContainsExposureBias calls the underlying ContainsExposureBias.
 func (x *ExposureBiasRange) ContainsExposureBias(exposureBias float32) bool {
 	return x.inner.ContainsExposureBias(exposureBias)
 }
 
+// @property minExposureBias @abstract A float indicating the minimum exposure bias in EV units supported by this range.
+//
 // MinExposureBias calls the underlying MinExposureBias.
 func (x *ExposureBiasRange) MinExposureBias() float32 {
 	return x.inner.MinExposureBias()
 }
 
+// @property maxExposureBias @abstract A float indicating the maximum exposure bias in EV units supported by this range.
+//
 // MaxExposureBias calls the underlying MaxExposureBias.
 func (x *ExposureBiasRange) MaxExposureBias() float32 {
 	return x.inner.MaxExposureBias()

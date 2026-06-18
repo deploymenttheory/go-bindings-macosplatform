@@ -63,6 +63,8 @@ func (x *VirtualConferenceProvider) FetchAvailableRoomTypes(ctx context.Context)
 	}
 }
 
+// @method     fetchVirtualConferenceForIdentifier:completionHandler: @abstract   Called to fetch the specific virtual conference details to add to an event. @discussion Your extension must override this method in order to add virtual conferences to calendar events. When your extension has finished retrieving the requested virtual conference details, create an EKVirtualConferenceDescriptor object containing the virtual conference details and call the completion handler with the EKVirtualConferenceDescriptor object as the first argument. @param      identifier          Represents the room type that the user chose. This is the same identifier that your extension chose for this EKVirtualConferenceRoomTypeDescriptor in an earlier call to fetchAvailableRoomTypesWithCompletionHandler:. @param      completionHandler   A block to call when your extension has finished retrieving the virtual conference details. If your extension is unable to retrieve virtual conference details at this time (for example, because network access is not available), call this block with nil for the first argument and an appropriate NSError object for the second argument. Do not call this block with nil for both arguments. Similarly, do not call this block with both a non-nil EKVirtualConferenceDescriptor and a non-nil NSError.  This block must be called when your extension has finished its work.
+//
 // FetchVirtualConferenceForIdentifier blocks until the operation completes or ctx is cancelled.
 func (x *VirtualConferenceProvider) FetchVirtualConferenceForIdentifier(ctx context.Context, identifier *foundation.NSString) (*VirtualConferenceDescriptor, error) {
 	type _result struct {

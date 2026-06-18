@@ -36,11 +36,15 @@ func NewMusicHapticsManager() *MusicHapticsManager {
 	return &MusicHapticsManager{inner: raw.MAMusicHapticsManagerFromID(_id)}
 }
 
+// @abstract In an asynchronous completion handler, returns whether a specific media track with the supplied ISRC has an available haptic track.
+//
 // CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler calls the underlying CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler.
 func (x *MusicHapticsManager) CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler(internationalStandardRecordingCode string, completionHandler func(bool)) {
 	x.inner.CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler(foundation.NSStringStringWithUTF8String(internationalStandardRecordingCode), completionHandler)
 }
 
+// @abstract Determine the status of haptic playback for the now playing track asynchronously. This will only be delivered for the app that is the active Now Playing app.
+//
 // AddStatusObserver calls the underlying AddStatusObserver.
 func (x *MusicHapticsManager) AddStatusObserver(statusHandler func(*foundation.NSString, bool)) foundation.NSCopying {
 	return x.inner.AddStatusObserver(statusHandler)
@@ -51,6 +55,8 @@ func (x *MusicHapticsManager) RemoveStatusObserver(registrationToken foundation.
 	x.inner.RemoveStatusObserver(registrationToken)
 }
 
+// @abstract Whether the user setting to indicate Music Haptics are currently active. @result A boolean result.
+//
 // IsActive calls the underlying IsActive.
 func (x *MusicHapticsManager) IsActive() bool {
 	return x.inner.IsActive()

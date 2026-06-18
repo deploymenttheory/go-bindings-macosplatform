@@ -35,6 +35,8 @@ func NewScoreChallenge() *ScoreChallenge {
 	return &ScoreChallenge{inner: raw.GKScoreChallengeFromID(_id)}
 }
 
+// The score to meet to satisfy this challenge
+//
 // Score calls the underlying Score.
 func (x *ScoreChallenge) Score() *Score {
 	_r := x.inner.Score()
@@ -44,6 +46,8 @@ func (x *ScoreChallenge) Score() *Score {
 	return &Score{inner: _r}
 }
 
+// The leaderboard entry to meet to satisfy this challenge
+//
 // LeaderboardEntry calls the underlying LeaderboardEntry.
 func (x *ScoreChallenge) LeaderboardEntry() *LeaderboardEntry {
 	_r := x.inner.LeaderboardEntry()

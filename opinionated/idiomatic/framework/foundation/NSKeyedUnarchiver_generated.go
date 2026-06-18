@@ -38,6 +38,8 @@ func NewKeyedUnarchiver() *KeyedUnarchiver {
 	return &KeyedUnarchiver{inner: raw.NSKeyedUnarchiverFromID(_id)}
 }
 
+// Initializes the receiver for decoding an archive previously encoded by \c NSKeyedUnarchiver. Enables \c requiresSecureCoding by default. If \c NSSecureCoding cannot be used, \c requiresSecureCoding may be turned off manually; for improved security, \c requiresSecureCoding should be left enabled whenever possible. Sets the unarchiver's \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn. Returns \c nil if the given data is not valid, and sets the \c error out parameter.
+//
 // NewKeyedUnarchiverForReadingFromDataError creates a new [KeyedUnarchiver].
 func NewKeyedUnarchiverForReadingFromDataError(data *raw.NSData) (*KeyedUnarchiver, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSKeyedUnarchiver")), objc.RegisterName("alloc"))

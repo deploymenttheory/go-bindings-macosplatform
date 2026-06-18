@@ -40,36 +40,48 @@ func NewImageReduceColumnSumWithDevice(device metal.MTLDevice) *ImageReduceColum
 	return &ImageReduceColumnSum{inner: raw.MPSImageReduceColumnSumFromID(_id)}
 }
 
+// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
+//
 // WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
 func (x *ImageReduceColumnSum) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceColumnSum {
 	x.inner.MPSImageReduceUnary.SetClipRectSource(clipRectSource)
 	return x
 }
 
+// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *ImageReduceColumnSum) WithOffset(offset mpscore.MPSOffset) *ImageReduceColumnSum {
 	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetOffset(offset)
 	return x
 }
 
+// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+//
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImageReduceColumnSum) WithClipRect(clipRect metal.MTLRegion) *ImageReduceColumnSum {
 	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetClipRect(clipRect)
 	return x
 }
 
+// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
+//
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *ImageReduceColumnSum) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceColumnSum {
 	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *ImageReduceColumnSum) WithOptions(options mpscore.MPSKernelOptions) *ImageReduceColumnSum {
 	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ImageReduceColumnSum) WithLabel(label string) *ImageReduceColumnSum {
 	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))

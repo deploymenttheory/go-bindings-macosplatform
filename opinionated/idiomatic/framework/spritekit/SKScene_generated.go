@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A scene is the root node of your content. It is used to display SpriteKit content on an SKView. @see SKView
+//
 // Scene wraps [raw.SKScene] with a fluent Go API.
 type Scene struct {
 	inner *raw.SKScene
@@ -35,6 +37,8 @@ func SceneFromID(id objc.ID) *Scene {
 	return &Scene{inner: raw.SKSceneFromID(id)}
 }
 
+// A scene is infinitely large, but it has a viewport that is the frame through which you present the content of the scene. The passed in size defines the size of this viewport that you use to present the scene. @param size a size in points that signifies the viewport into the scene that defines your framing of the scene.
+//
 // NewSceneWithSize creates a new [Scene].
 func NewSceneWithSize(size corefoundation.CGSize) *Scene {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKScene")), objc.RegisterName("alloc"))
@@ -48,24 +52,32 @@ func (x *Scene) WithSize(size corefoundation.CGSize) *Scene {
 	return x
 }
 
+// Used to determine how to scale the scene to match the SKView it is being displayed in.
+//
 // WithScaleMode sets the scaleMode property and returns the receiver for chaining.
 func (x *Scene) WithScaleMode(scaleMode SKSceneScaleMode) *Scene {
 	x.inner.SetScaleMode(raw.SKSceneScaleMode(scaleMode))
 	return x
 }
 
+// The camera that is used to obtain the view scale and translation based on where the camera is in relation to the scene.
+//
 // WithCamera sets the camera property and returns the receiver for chaining.
 func (x *Scene) WithCamera(camera *CameraNode) *Scene {
 	x.inner.SetCamera(camera.Unwrap())
 	return x
 }
 
+// The node that is currently the listener for positional audio coming from SKAudioNodes @see SKAudioNode
+//
 // WithListener sets the listener property and returns the receiver for chaining.
 func (x *Scene) WithListener(listener NodeProvider) *Scene {
 	x.inner.SetListener(listener.asNode())
 	return x
 }
 
+// Background color, defaults to gray
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *Scene) WithBackgroundColor(backgroundColor *appkit.NSColor) *Scene {
 	x.inner.SetBackgroundColor(backgroundColor)
@@ -78,12 +90,16 @@ func (x *Scene) WithDelegate(delegate raw.SKSceneDelegate) *Scene {
 	return x
 }
 
+// Used to choose the origin of the scene's coordinate system
+//
 // WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
 func (x *Scene) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Scene {
 	x.inner.SetAnchorPoint(anchorPoint)
 	return x
 }
 
+// A CIFilter to be used as an effect Any CIFilter that requires only a single "inputImage" and produces an "outputImage" is allowed. The filter is applied to all children of the SKEffectNode. If the filter is nil, the children of this node is flattened before being drawn as long as the SKEffectNode is enabled.
+//
 // WithFilter sets the filter property and returns the receiver for chaining.
 func (x *Scene) WithFilter(filter *coreimage.CIFilter) *Scene {
 	x.inner.SKEffectNode.SetFilter(filter)
@@ -96,18 +112,24 @@ func (x *Scene) WithShouldCenterFilter(shouldCenterFilter bool) *Scene {
 	return x
 }
 
+// Enable the SKEffectNode. The SKEffectNode has no effect when appliesEffects is not enabled, this is useful for setting up an effect to use later on. Defaults to YES.
+//
 // WithShouldEnableEffects sets the shouldEnableEffects property and returns the receiver for chaining.
 func (x *Scene) WithShouldEnableEffects(shouldEnableEffects bool) *Scene {
 	x.inner.SKEffectNode.SetShouldEnableEffects(shouldEnableEffects)
 	return x
 }
 
+// Enable the rasterization on the SKEffectNode. The SKEffectNode's output is rasterized and cached internally. This cache is reused when rendering. When the SKEffectNode's children change, the cache is updated, but changing properties on the CIFilter does *not* cause an update (you must disable rasterization and then re-enable it for the changes to apply). This is more expensive than not rasterizing if the node's children change frequently, only enable this option if you know the children is largely static.
+//
 // WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
 func (x *Scene) WithShouldRasterize(shouldRasterize bool) *Scene {
 	x.inner.SKEffectNode.SetShouldRasterize(shouldRasterize)
 	return x
 }
 
+// Sets the blend mode to use when composing the effect with the final framebuffer. @see SKNode.SKBlendMode
+//
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
 func (x *Scene) WithBlendMode(blendMode SKBlendMode) *Scene {
 	x.inner.SKEffectNode.SetBlendMode(raw.SKBlendMode(blendMode))
@@ -120,90 +142,120 @@ func (x *Scene) WithShader(shader *Shader) *Scene {
 	return x
 }
 
+// The position of the node in the parent's coordinate system
+//
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *Scene) WithPosition(position corefoundation.CGPoint) *Scene {
 	x.inner.SKEffectNode.SKNode.SetPosition(position)
 	return x
 }
 
+// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+//
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *Scene) WithZPosition(zPosition float64) *Scene {
 	x.inner.SKEffectNode.SKNode.SetZPosition(zPosition)
 	return x
 }
 
+// The Euler rotation about the z axis (in radians)
+//
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *Scene) WithZRotation(zRotation float64) *Scene {
 	x.inner.SKEffectNode.SKNode.SetZRotation(zRotation)
 	return x
 }
 
+// The scaling in the X axis
+//
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *Scene) WithXScale(xScale float64) *Scene {
 	x.inner.SKEffectNode.SKNode.SetXScale(xScale)
 	return x
 }
 
+// The scaling in the Y axis
+//
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *Scene) WithYScale(yScale float64) *Scene {
 	x.inner.SKEffectNode.SKNode.SetYScale(yScale)
 	return x
 }
 
+// The speed multiplier applied to all actions run on this node. Inherited by its children.
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *Scene) WithSpeed(speed float64) *Scene {
 	x.inner.SKEffectNode.SKNode.SetSpeed(speed)
 	return x
 }
 
+// Alpha of this node (multiplied by the output color to give the final result)
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *Scene) WithAlpha(alpha float64) *Scene {
 	x.inner.SKEffectNode.SKNode.SetAlpha(alpha)
 	return x
 }
 
+// Controls whether or not the node's actions is updated or paused.
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *Scene) WithPaused(paused bool) *Scene {
 	x.inner.SKEffectNode.SKNode.SetPaused(paused)
 	return x
 }
 
+// Controls whether or not the node and its children are rendered.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *Scene) WithHidden(hidden bool) *Scene {
 	x.inner.SKEffectNode.SKNode.SetHidden(hidden)
 	return x
 }
 
+// Controls whether or not the node receives touch events
+//
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *Scene) WithUserInteractionEnabled(userInteractionEnabled bool) *Scene {
 	x.inner.SKEffectNode.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
 	return x
 }
 
+// The client assignable name. In general, this should be unique among peers in the scene graph.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Scene) WithName(name string) *Scene {
 	x.inner.SKEffectNode.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// Physics body attached to the node, with synchronized scale, rotation, and position
+//
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *Scene) WithPhysicsBody(physicsBody *PhysicsBody) *Scene {
 	x.inner.SKEffectNode.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
+// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+//
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *Scene) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *Scene {
 	x.inner.SKEffectNode.SKNode.SetUserData(userData)
 	return x
 }
 
+// Kinematic constraints, used in IK solving
+//
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *Scene) WithReachConstraints(reachConstraints *ReachConstraints) *Scene {
 	x.inner.SKEffectNode.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
+// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+//
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *Scene) WithConstraints(items ...*raw.SKConstraint) *Scene {
 	if len(items) == 0 {
@@ -222,6 +274,8 @@ func (x *Scene) WithConstraints(items ...*raw.SKConstraint) *Scene {
 	return x
 }
 
+// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+//
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *Scene) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *Scene {
 	x.inner.SKEffectNode.SKNode.SetAttributeValues(attributeValues)
@@ -297,26 +351,36 @@ func (x *Scene) ConvertPointToView(point corefoundation.CGPoint) corefoundation.
 	return x.inner.ConvertPointToView(point)
 }
 
+// Override this to perform per-frame game logic. Called exactly once per frame before any actions are evaluated and any physics are simulated. @param currentTime the current time in the app. This must be monotonically increasing.
+//
 // Update calls the underlying Update.
 func (x *Scene) Update(currentTime float64) {
 	x.inner.Update(currentTime)
 }
 
+// Override this to perform game logic. Called exactly once per frame after any actions have been evaluated but before any physics are simulated. Any additional actions applied is not evaluated until the next update.
+//
 // DidEvaluateActions calls the underlying DidEvaluateActions.
 func (x *Scene) DidEvaluateActions() {
 	x.inner.DidEvaluateActions()
 }
 
+// Override this to perform game logic. Called exactly once per frame after any actions have been evaluated and any physics have been simulated. Any additional actions applied is not evaluated until the next update. Any changes to physics bodies is not simulated until the next update.
+//
 // DidSimulatePhysics calls the underlying DidSimulatePhysics.
 func (x *Scene) DidSimulatePhysics() {
 	x.inner.DidSimulatePhysics()
 }
 
+// Override this to perform game logic. Called exactly once per frame after any enabled constraints have been applied. Any additional actions applied is not evaluated until the next update. Any changes to physics bodies is not simulated until the next update. Any changes to constraints will not be applied until the next update.
+//
 // DidApplyConstraints calls the underlying DidApplyConstraints.
 func (x *Scene) DidApplyConstraints() {
 	x.inner.DidApplyConstraints()
 }
 
+// Override this to perform game logic. Called after all update logic has been completed. Any additional actions applied are not evaluated until the next update. Any changes to physics bodies are not simulated until the next update. Any changes to constraints will not be applied until the next update. No futher update logic will be applied to the scene after this call. Any values set on nodes here will be used when the scene is rendered for the current frame.
+//
 // DidFinishUpdate calls the underlying DidFinishUpdate.
 func (x *Scene) DidFinishUpdate() {
 	x.inner.DidFinishUpdate()
@@ -347,6 +411,8 @@ func (x *Scene) SetSize(size corefoundation.CGSize) {
 	x.inner.SetSize(size)
 }
 
+// Used to determine how to scale the scene to match the SKView it is being displayed in.
+//
 // ScaleMode calls the underlying ScaleMode.
 func (x *Scene) ScaleMode() SKSceneScaleMode {
 	return SKSceneScaleMode(x.inner.ScaleMode())
@@ -357,6 +423,8 @@ func (x *Scene) SetScaleMode(scaleMode SKSceneScaleMode) {
 	x.inner.SetScaleMode(raw.SKSceneScaleMode(scaleMode))
 }
 
+// The camera that is used to obtain the view scale and translation based on where the camera is in relation to the scene.
+//
 // Camera calls the underlying Camera.
 func (x *Scene) Camera() *CameraNode {
 	_r := x.inner.Camera()
@@ -371,6 +439,8 @@ func (x *Scene) SetCamera(camera *raw.SKCameraNode) {
 	x.inner.SetCamera(camera)
 }
 
+// The node that is currently the listener for positional audio coming from SKAudioNodes @see SKAudioNode
+//
 // Listener calls the underlying Listener.
 func (x *Scene) Listener() *Node {
 	_r := x.inner.Listener()
@@ -390,6 +460,8 @@ func (x *Scene) AudioEngine() *avfaudio.AVAudioEngine {
 	return x.inner.AudioEngine()
 }
 
+// Background color, defaults to gray
+//
 // BackgroundColor calls the underlying BackgroundColor.
 func (x *Scene) BackgroundColor() *appkit.NSColor {
 	return x.inner.BackgroundColor()
@@ -410,6 +482,8 @@ func (x *Scene) SetDelegate(delegate raw.SKSceneDelegate) {
 	x.inner.SetDelegate(delegate)
 }
 
+// Used to choose the origin of the scene's coordinate system
+//
 // AnchorPoint calls the underlying AnchorPoint.
 func (x *Scene) AnchorPoint() corefoundation.CGPoint {
 	return x.inner.AnchorPoint()
@@ -420,6 +494,8 @@ func (x *Scene) SetAnchorPoint(anchorPoint corefoundation.CGPoint) {
 	x.inner.SetAnchorPoint(anchorPoint)
 }
 
+// Physics simulation functionality
+//
 // PhysicsWorld calls the underlying PhysicsWorld.
 func (x *Scene) PhysicsWorld() *PhysicsWorld {
 	_r := x.inner.PhysicsWorld()
@@ -429,6 +505,8 @@ func (x *Scene) PhysicsWorld() *PhysicsWorld {
 	return &PhysicsWorld{inner: _r}
 }
 
+// The SKView this scene is currently presented in, or nil if it is not being presented.
+//
 // View calls the underlying View.
 func (x *Scene) View() *View {
 	_r := x.inner.View()

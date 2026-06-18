@@ -64,38 +64,52 @@ func NewRAWProcessingIntegerParameterWithNameKeyDescriptionInitialValueMaximumMi
 	return &RAWProcessingIntegerParameter{inner: raw.MERAWProcessingIntegerParameterFromID(_id)}
 }
 
+// @property		currentValue @abstract		Get or set the current value for this parameter. @discussion		This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
+//
 // WithCurrentValue sets the currentValue property and returns the receiver for chaining.
 func (x *RAWProcessingIntegerParameter) WithCurrentValue(currentValue int) *RAWProcessingIntegerParameter {
 	x.inner.SetCurrentValue(currentValue)
 	return x
 }
 
+// @property		enabled @abstract		Indicates whether the parameter is enabled or disabled by the extension. @discussion	This parameter can only be modified by the extension.  From the application-facing interface, VTRAWProcessingSession, this is a read-only value which indicates whether the parameter should be greyed out and disabled in any UI being generated.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *RAWProcessingIntegerParameter) WithEnabled(enabled bool) *RAWProcessingIntegerParameter {
 	x.inner.MERAWProcessingParameter.SetEnabled(enabled)
 	return x
 }
 
+// @property		hasNeutralValue @abstract		Return value indicates whether the MERAWProcessingIntegerParameter has an optional declared Neutral value. @discussion	If the return value is YES and outNeutralValue is not nil, the value held by outNeutralValue will be set to the neutral value. If the return value is NO and outNeutralValue is not nil, the value held by outNeutralValue will be set to 0.
+//
 // HasNeutralValue calls the underlying HasNeutralValue.
 func (x *RAWProcessingIntegerParameter) HasNeutralValue(outNeutralValue *int64) bool {
 	return x.inner.HasNeutralValue(outNeutralValue)
 }
 
+// @property		hasCameraValue @abstract		Return value indicates whether the MERAWProcessingIntegerParameter has an optional declared Camera value. If the return value is YES and outCameraValue is not nil, the value held by outCameraValue will be set to the camera value. If the return value is NO and outCameraValue is not nil, the value held by outCameraValue will be set to 0.
+//
 // HasCameraValue calls the underlying HasCameraValue.
 func (x *RAWProcessingIntegerParameter) HasCameraValue(outCameraValue *int64) bool {
 	return x.inner.HasCameraValue(outCameraValue)
 }
 
+// @property		maximumValue @abstract		The maximum value for this parameter.
+//
 // MaximumValue calls the underlying MaximumValue.
 func (x *RAWProcessingIntegerParameter) MaximumValue() int {
 	return x.inner.MaximumValue()
 }
 
+// @property		minimumValue @abstract		The minimum value for this parameter.
+//
 // MinimumValue calls the underlying MinimumValue.
 func (x *RAWProcessingIntegerParameter) MinimumValue() int {
 	return x.inner.MinimumValue()
 }
 
+// @property		currentValue @abstract		Get or set the current value for this parameter. @discussion		This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
+//
 // CurrentValue calls the underlying CurrentValue.
 func (x *RAWProcessingIntegerParameter) CurrentValue() int {
 	return x.inner.CurrentValue()

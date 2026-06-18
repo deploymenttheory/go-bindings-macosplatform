@@ -37,6 +37,8 @@ func NewPushPayload() *PushPayload {
 	return &PushPayload{inner: raw.PKPushPayloadFromID(_id)}
 }
 
+// The type value indicating how to interpret the payload. For possible values, see “PushKit/PKPushType“.
+//
 // Type calls the underlying Type.
 func (x *PushPayload) Type() string {
 	_r := x.inner.Type()
@@ -46,6 +48,8 @@ func (x *PushPayload) Type() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The contents of the received payload. For VoIP pushes, the sender is free to specify any fields for the contained data as long as it is provided in a text-encodable JSON format.
+//
 // DictionaryPayload calls the underlying DictionaryPayload.
 func (x *PushPayload) DictionaryPayload() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.DictionaryPayload()

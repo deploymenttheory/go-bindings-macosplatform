@@ -39,36 +39,48 @@ func NewAssetResourceLoadingContentInformationRequest() *AssetResourceLoadingCon
 	return &AssetResourceLoadingContentInformationRequest{inner: raw.AVAssetResourceLoadingContentInformationRequestFromID(_id)}
 }
 
+// @property 		contentType @abstract		A UTI that indicates the type of data contained by the requested resource. @discussion	Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you should set the value of this property to a UTI indicating the type of data contained by the requested resource.
+//
 // WithContentType sets the contentType property and returns the receiver for chaining.
 func (x *AssetResourceLoadingContentInformationRequest) WithContentType(contentType string) *AssetResourceLoadingContentInformationRequest {
 	x.inner.SetContentType(foundation.NSStringStringWithUTF8String(contentType))
 	return x
 }
 
+// @property 		contentLength @abstract		Indicates the length of the requested resource, in bytes. @discussion	Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you should set the value of this property to the number of bytes contained by the requested resource.
+//
 // WithContentLength sets the contentLength property and returns the receiver for chaining.
 func (x *AssetResourceLoadingContentInformationRequest) WithContentLength(contentLength int64) *AssetResourceLoadingContentInformationRequest {
 	x.inner.SetContentLength(contentLength)
 	return x
 }
 
+// @property 		byteRangeAccessSupported @abstract		Indicates whether random access to arbitrary ranges of bytes of the resource is supported. Such support also allows portions of the resource to be requested more than once. @discussion	Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you should set the value of this property to YES if you support random access to arbitrary ranges of bytes of the resource. If you do not set this property to YES for resources that must be loaded incrementally, loading of the resource may fail. Such resources include anything that contains media data.
+//
 // WithByteRangeAccessSupported sets the byteRangeAccessSupported property and returns the receiver for chaining.
 func (x *AssetResourceLoadingContentInformationRequest) WithByteRangeAccessSupported(byteRangeAccessSupported bool) *AssetResourceLoadingContentInformationRequest {
 	x.inner.SetByteRangeAccessSupported(byteRangeAccessSupported)
 	return x
 }
 
+// @property		renewalDate @abstract		For resources that expire, the date at which a new AVAssetResourceLoadingRequest will be issued for a renewal of this resource, if the media system still requires it. @discussion	Before you finish loading an AVAssetResourceLoadingRequest, if the resource is prone to expiry you should set the value of this property to the date at which a renewal should be triggered. This value should be set sufficiently early enough to allow an AVAssetResourceRenewalRequest, delivered to your delegate via -resourceLoader:shouldWaitForRenewalOfRequestedResource:, to finish before the actual expiry time. Otherwise media playback may fail.
+//
 // WithRenewalDate sets the renewalDate property and returns the receiver for chaining.
 func (x *AssetResourceLoadingContentInformationRequest) WithRenewalDate(renewalDate *foundation.NSDate) *AssetResourceLoadingContentInformationRequest {
 	x.inner.SetRenewalDate(renewalDate)
 	return x
 }
 
+// @property		entireLengthAvailableOnDemand @abstract		Indicates whether asset data loading can expect data to be produced immediately. @discussion	Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you may set this property to YES to indicate that all asset data can be produced immediately, e.g., because the data is fully cached, or because the custom URL scheme ultimately refers to files on local storage. This allows significant data flow optimizations. For backward compatibility, this property defaults to NO.
+//
 // WithEntireLengthAvailableOnDemand sets the entireLengthAvailableOnDemand property and returns the receiver for chaining.
 func (x *AssetResourceLoadingContentInformationRequest) WithEntireLengthAvailableOnDemand(entireLengthAvailableOnDemand bool) *AssetResourceLoadingContentInformationRequest {
 	x.inner.SetEntireLengthAvailableOnDemand(entireLengthAvailableOnDemand)
 	return x
 }
 
+// @property 		contentType @abstract		A UTI that indicates the type of data contained by the requested resource. @discussion	Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you should set the value of this property to a UTI indicating the type of data contained by the requested resource.
+//
 // ContentType calls the underlying ContentType.
 func (x *AssetResourceLoadingContentInformationRequest) ContentType() string {
 	_r := x.inner.ContentType()
@@ -83,6 +95,8 @@ func (x *AssetResourceLoadingContentInformationRequest) SetContentType(contentTy
 	x.inner.SetContentType(foundation.NSStringStringWithUTF8String(contentType))
 }
 
+// @property		allowedContentTypes @abstract		An array showing the types of data which will be accepted as a valid response for the requested resource. @discussion	If an AVAssetResourceLoadingRequest's contentInformationRequest is not nil, ensure that the value assigned to the contentType property is in this array. Otherwise, calling -finishLoading on the associated request will result in an exception.
+//
 // AllowedContentTypes returns the collection as a Go slice.
 func (x *AssetResourceLoadingContentInformationRequest) AllowedContentTypes() []string {
 	arr := x.inner.AllowedContentTypes()
@@ -94,6 +108,8 @@ func (x *AssetResourceLoadingContentInformationRequest) AllowedContentTypes() []
 	})
 }
 
+// @property 		contentLength @abstract		Indicates the length of the requested resource, in bytes. @discussion	Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you should set the value of this property to the number of bytes contained by the requested resource.
+//
 // ContentLength calls the underlying ContentLength.
 func (x *AssetResourceLoadingContentInformationRequest) ContentLength() int64 {
 	return x.inner.ContentLength()
@@ -104,6 +120,8 @@ func (x *AssetResourceLoadingContentInformationRequest) SetContentLength(content
 	x.inner.SetContentLength(contentLength)
 }
 
+// @property 		byteRangeAccessSupported @abstract		Indicates whether random access to arbitrary ranges of bytes of the resource is supported. Such support also allows portions of the resource to be requested more than once. @discussion	Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you should set the value of this property to YES if you support random access to arbitrary ranges of bytes of the resource. If you do not set this property to YES for resources that must be loaded incrementally, loading of the resource may fail. Such resources include anything that contains media data.
+//
 // IsByteRangeAccessSupported calls the underlying IsByteRangeAccessSupported.
 func (x *AssetResourceLoadingContentInformationRequest) IsByteRangeAccessSupported() bool {
 	return x.inner.IsByteRangeAccessSupported()
@@ -114,6 +132,8 @@ func (x *AssetResourceLoadingContentInformationRequest) SetByteRangeAccessSuppor
 	x.inner.SetByteRangeAccessSupported(byteRangeAccessSupported)
 }
 
+// @property		renewalDate @abstract		For resources that expire, the date at which a new AVAssetResourceLoadingRequest will be issued for a renewal of this resource, if the media system still requires it. @discussion	Before you finish loading an AVAssetResourceLoadingRequest, if the resource is prone to expiry you should set the value of this property to the date at which a renewal should be triggered. This value should be set sufficiently early enough to allow an AVAssetResourceRenewalRequest, delivered to your delegate via -resourceLoader:shouldWaitForRenewalOfRequestedResource:, to finish before the actual expiry time. Otherwise media playback may fail.
+//
 // RenewalDate calls the underlying RenewalDate.
 func (x *AssetResourceLoadingContentInformationRequest) RenewalDate() *foundation.NSDate {
 	return x.inner.RenewalDate()
@@ -124,6 +144,8 @@ func (x *AssetResourceLoadingContentInformationRequest) SetRenewalDate(renewalDa
 	x.inner.SetRenewalDate(renewalDate)
 }
 
+// @property		entireLengthAvailableOnDemand @abstract		Indicates whether asset data loading can expect data to be produced immediately. @discussion	Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you may set this property to YES to indicate that all asset data can be produced immediately, e.g., because the data is fully cached, or because the custom URL scheme ultimately refers to files on local storage. This allows significant data flow optimizations. For backward compatibility, this property defaults to NO.
+//
 // IsEntireLengthAvailableOnDemand calls the underlying IsEntireLengthAvailableOnDemand.
 func (x *AssetResourceLoadingContentInformationRequest) IsEntireLengthAvailableOnDemand() bool {
 	return x.inner.IsEntireLengthAvailableOnDemand()

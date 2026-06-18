@@ -33,6 +33,8 @@ func LowLatencySuperResolutionScalerConfigurationFromID(id objc.ID) *LowLatencyS
 	return &LowLatencySuperResolutionScalerConfiguration{inner: raw.VTLowLatencySuperResolutionScalerConfigurationFromID(id)}
 }
 
+// Creates a new low-latency super-resolution scaler configuration with specified frame width and height. - Parameters: - frameWidth: Width of source frame in pixels. - frameHeight: Height of source frame in pixels. - scaleFactor: The scale factor to apply. This must be a supported value that “supportedScaleFactorsForFrameWidth:frameHeight:“ returns.
+//
 // NewLowLatencySuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactor creates a new [LowLatencySuperResolutionScalerConfiguration].
 func NewLowLatencySuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactor(frameWidth int, frameHeight int, scaleFactor float32) *LowLatencySuperResolutionScalerConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("alloc"))
@@ -40,16 +42,22 @@ func NewLowLatencySuperResolutionScalerConfigurationWithFrameWidthFrameHeightSca
 	return &LowLatencySuperResolutionScalerConfiguration{inner: raw.VTLowLatencySuperResolutionScalerConfigurationFromID(_id)}
 }
 
+// Width of source frame in pixels.
+//
 // FrameWidth calls the underlying FrameWidth.
 func (x *LowLatencySuperResolutionScalerConfiguration) FrameWidth() int {
 	return x.inner.FrameWidth()
 }
 
+// Height of source frame in pixels.
+//
 // FrameHeight calls the underlying FrameHeight.
 func (x *LowLatencySuperResolutionScalerConfiguration) FrameHeight() int {
 	return x.inner.FrameHeight()
 }
 
+// Available supported pixel formats for source frames for current configuration.
+//
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (x *LowLatencySuperResolutionScalerConfiguration) FrameSupportedPixelFormats() []*foundation.NSNumber {
 	arr := x.inner.FrameSupportedPixelFormats()
@@ -61,16 +69,22 @@ func (x *LowLatencySuperResolutionScalerConfiguration) FrameSupportedPixelFormat
 	})
 }
 
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+//
 // SourcePixelBufferAttributes calls the underlying SourcePixelBufferAttributes.
 func (x *LowLatencySuperResolutionScalerConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.SourcePixelBufferAttributes()
 }
 
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+//
 // DestinationPixelBufferAttributes calls the underlying DestinationPixelBufferAttributes.
 func (x *LowLatencySuperResolutionScalerConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.DestinationPixelBufferAttributes()
 }
 
+// Scale factor with which you initialized the configuration.
+//
 // ScaleFactor calls the underlying ScaleFactor.
 func (x *LowLatencySuperResolutionScalerConfiguration) ScaleFactor() float32 {
 	return x.inner.ScaleFactor()

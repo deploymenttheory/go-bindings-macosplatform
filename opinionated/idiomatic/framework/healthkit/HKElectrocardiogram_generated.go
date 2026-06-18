@@ -35,11 +35,15 @@ func NewElectrocardiogram() *Electrocardiogram {
 	return &Electrocardiogram{inner: raw.HKElectrocardiogramFromID(_id)}
 }
 
+// The number of voltage measurements in the electrocardiogram.
+//
 // NumberOfVoltageMeasurements calls the underlying NumberOfVoltageMeasurements.
 func (x *Electrocardiogram) NumberOfVoltageMeasurements() int {
 	return x.inner.NumberOfVoltageMeasurements()
 }
 
+// The frequency at which the data was sampled. This is reported in [HKUnit hertzUnit].
+//
 // SamplingFrequency calls the underlying SamplingFrequency.
 func (x *Electrocardiogram) SamplingFrequency() *Quantity {
 	_r := x.inner.SamplingFrequency()
@@ -49,11 +53,15 @@ func (x *Electrocardiogram) SamplingFrequency() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// The classification of this electrocardiogram sample.
+//
 // Classification calls the underlying Classification.
 func (x *Electrocardiogram) Classification() HKElectrocardiogramClassification {
 	return HKElectrocardiogramClassification(x.inner.Classification())
 }
 
+// The average heart rate of the user while the electrocardiogram was recorded.
+//
 // AverageHeartRate calls the underlying AverageHeartRate.
 func (x *Electrocardiogram) AverageHeartRate() *Quantity {
 	_r := x.inner.AverageHeartRate()
@@ -63,6 +71,8 @@ func (x *Electrocardiogram) AverageHeartRate() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// Whether the user experienced symptoms during this electrocardiogram.
+//
 // SymptomsStatus calls the underlying SymptomsStatus.
 func (x *Electrocardiogram) SymptomsStatus() HKElectrocardiogramSymptomsStatus {
 	return HKElectrocardiogramSymptomsStatus(x.inner.SymptomsStatus())

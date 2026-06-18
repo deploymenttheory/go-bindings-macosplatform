@@ -36,6 +36,8 @@ func NewAudiogramSensitivityPoint() *AudiogramSensitivityPoint {
 	return &AudiogramSensitivityPoint{inner: raw.HKAudiogramSensitivityPointFromID(_id)}
 }
 
+// @property frequency  Frequency where sensitivity was measured.  The unit of measurement is [HKUnit hertzUnit] or "Hz".
+//
 // Frequency calls the underlying Frequency.
 func (x *AudiogramSensitivityPoint) Frequency() *Quantity {
 	_r := x.inner.Frequency()
@@ -45,6 +47,8 @@ func (x *AudiogramSensitivityPoint) Frequency() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property sensitivity Left ear sensitivity measured in dB from a baseline of 0 dB. Reduced hearing sensitivity corresponds to an increase from 0 dB. The unit of measurement is `HKUnit.decibelHearingLevelUnit` or "dBHL".
+//
 // LeftEarSensitivity calls the underlying LeftEarSensitivity.
 func (x *AudiogramSensitivityPoint) LeftEarSensitivity() *Quantity {
 	_r := x.inner.LeftEarSensitivity()
@@ -54,6 +58,8 @@ func (x *AudiogramSensitivityPoint) LeftEarSensitivity() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property sensitivity Right ear sensitivity measured in dB from a baseline of 0 dB. Reduced hearing sensitivity corresponds to an increase from 0 dB. The unit of measurement is `HKUnit.decibelHearingLevelUnit` or "dBHL".
+//
 // RightEarSensitivity calls the underlying RightEarSensitivity.
 func (x *AudiogramSensitivityPoint) RightEarSensitivity() *Quantity {
 	_r := x.inner.RightEarSensitivity()
@@ -63,6 +69,8 @@ func (x *AudiogramSensitivityPoint) RightEarSensitivity() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property      tests @abstract      The tests conducted at this frequency
+//
 // Tests returns the collection as a Go slice.
 func (x *AudiogramSensitivityPoint) Tests() []*AudiogramSensitivityTest {
 	arr := x.inner.Tests()

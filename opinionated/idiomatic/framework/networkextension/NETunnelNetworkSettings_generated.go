@@ -31,6 +31,8 @@ func NETunnelNetworkSettingsFromID(id objc.ID) *NETunnelNetworkSettings {
 	return &NETunnelNetworkSettings{inner: raw.NETunnelNetworkSettingsFromID(id)}
 }
 
+// @method initWithTunnelRemoteAddress: @discussion This function initializes a newly-allocated NETunnelNetworkSettings object with a given tunnel remote address. @param address The address of the remote endpoint that is providing the tunnel service.
+//
 // NewNETunnelNetworkSettingsWithTunnelRemoteAddress creates a new [NETunnelNetworkSettings].
 func NewNETunnelNetworkSettingsWithTunnelRemoteAddress(address string) *NETunnelNetworkSettings {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NETunnelNetworkSettings")), objc.RegisterName("alloc"))
@@ -38,18 +40,24 @@ func NewNETunnelNetworkSettingsWithTunnelRemoteAddress(address string) *NETunnel
 	return &NETunnelNetworkSettings{inner: raw.NETunnelNetworkSettingsFromID(_id)}
 }
 
+// @property DNSSettings @discussion An NEDNSSettings object that contains the desired tunnel DNS settings.
+//
 // WithDNSSettings sets the dNSSettings property and returns the receiver for chaining.
 func (x *NETunnelNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NETunnelNetworkSettings {
 	x.inner.SetDNSSettings(dNSSettings.asNEDNSSettings())
 	return x
 }
 
+// @property proxySettings @discussion An NEProxySettings object that contains the desired tunnel proxy settings.
+//
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
 func (x *NETunnelNetworkSettings) WithProxySettings(proxySettings *NEProxySettings) *NETunnelNetworkSettings {
 	x.inner.SetProxySettings(proxySettings.Unwrap())
 	return x
 }
 
+// @property tunnelRemoteAddress @discussion A string containing the IP address of the remote endpoint that is providing the tunnel service.
+//
 // TunnelRemoteAddress calls the underlying TunnelRemoteAddress.
 func (x *NETunnelNetworkSettings) TunnelRemoteAddress() string {
 	_r := x.inner.TunnelRemoteAddress()
@@ -59,6 +67,8 @@ func (x *NETunnelNetworkSettings) TunnelRemoteAddress() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property DNSSettings @discussion An NEDNSSettings object that contains the desired tunnel DNS settings.
+//
 // DNSSettings calls the underlying DNSSettings.
 func (x *NETunnelNetworkSettings) DNSSettings() *NEDNSSettings {
 	_r := x.inner.DNSSettings()
@@ -73,6 +83,8 @@ func (x *NETunnelNetworkSettings) SetDNSSettings(dNSSettings *raw.NEDNSSettings)
 	x.inner.SetDNSSettings(dNSSettings)
 }
 
+// @property proxySettings @discussion An NEProxySettings object that contains the desired tunnel proxy settings.
+//
 // ProxySettings calls the underlying ProxySettings.
 func (x *NETunnelNetworkSettings) ProxySettings() *NEProxySettings {
 	_r := x.inner.ProxySettings()

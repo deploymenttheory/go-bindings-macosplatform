@@ -37,26 +37,36 @@ func NewInstanceMaskObservation() *InstanceMaskObservation {
 	return &InstanceMaskObservation{inner: raw.VNInstanceMaskObservationFromID(_id)}
 }
 
+// @brief The low res mask from the selected instances in the resolution of the performed analysis which is not upscaled to the image resolution. @param instances An NSIndexSet of selected instances where 0 is the background. An empty set selects all instances but the background @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. The pixel format of kCVPixelFormatType_OneComponent32Float
+//
 // GenerateMaskForInstancesError calls the underlying GenerateMaskForInstancesError.
 func (x *InstanceMaskObservation) GenerateMaskForInstancesError(instances *foundation.NSIndexSet) (unsafe.Pointer, error) {
 	return x.inner.GenerateMaskForInstancesError(instances)
 }
 
+// @brief High res image with everything but the selected instances removed to transparent black. @param instances An NSIndexSet of selected instances where 0 is the background. @param croppedToInstancesExtent Crops the image to the smallest rectangle containg all instances with remaining alpha elements. Setting this value to NO does not perform any cropping. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed.
+//
 // GenerateMaskedImageOfInstancesFromRequestHandlerCroppedToInstancesExtentError calls the underlying GenerateMaskedImageOfInstancesFromRequestHandlerCroppedToInstancesExtentError.
 func (x *InstanceMaskObservation) GenerateMaskedImageOfInstancesFromRequestHandlerCroppedToInstancesExtentError(instances *foundation.NSIndexSet, requestHandler *raw.VNImageRequestHandler, cropResult bool) (unsafe.Pointer, error) {
 	return x.inner.GenerateMaskedImageOfInstancesFromRequestHandlerCroppedToInstancesExtentError(instances, requestHandler, cropResult)
 }
 
+// @brief High res mask with the selected instances preserved while everything else is removed to transparent black. @param forInstances An NSIndexSet of selected instances where 0 is the background. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed.
+//
 // GenerateScaledMaskForImageForInstancesFromRequestHandlerError calls the underlying GenerateScaledMaskForImageForInstancesFromRequestHandlerError.
 func (x *InstanceMaskObservation) GenerateScaledMaskForImageForInstancesFromRequestHandlerError(instances *foundation.NSIndexSet, requestHandler *raw.VNImageRequestHandler) (unsafe.Pointer, error) {
 	return x.inner.GenerateScaledMaskForImageForInstancesFromRequestHandlerError(instances, requestHandler)
 }
 
+// @brief The resulting mask represents all instances in a mask image where 0 represents the background and all other values represent the indices of the instances identified. Note that a pixel can only correspond to one instance and not multiple instances.
+//
 // InstanceMask calls the underlying InstanceMask.
 func (x *InstanceMaskObservation) InstanceMask() unsafe.Pointer {
 	return x.inner.InstanceMask()
 }
 
+// @brief *The IndexSet that encompases all instances except the background
+//
 // AllInstances calls the underlying AllInstances.
 func (x *InstanceMaskObservation) AllInstances() *foundation.NSIndexSet {
 	return x.inner.AllInstances()

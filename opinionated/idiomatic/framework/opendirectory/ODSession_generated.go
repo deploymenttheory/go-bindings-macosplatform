@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// @class       ODSession @abstract    Class for working with OpenDirectory sessions. @discussion  Class for working with OpenDirectory sessions.
+//
 // Session wraps [raw.ODSession] with a fluent Go API.
 type Session struct {
 	inner *raw.ODSession
@@ -33,6 +35,8 @@ func SessionFromID(id objc.ID) *Session {
 	return &Session{inner: raw.ODSessionFromID(id)}
 }
 
+// @method     initWithOptions:error: @abstract   Creates an instance of ODSession directed over Proxy to another host @discussion Creates an instance of ODSession directed over Proxy to another host.  nil can be passed for no options. outError is optional parameter, nil can be passed if error details are not needed. Options include: If proxy is required then a dictionary with keys should be: Key                             Value ODSessionProxyAddress        NSString(hostname or IP) ODSessionProxyPort           NSNumber(IP port, should not be set as it will default) ODSessionProxyUsername       NSString(username) ODSessionProxyPassword       NSString(password)
+//
 // NewSessionWithOptionsError creates a new [Session].
 func NewSessionWithOptionsError(inOptions *foundation.NSDictionary[objc.ID, objc.ID]) (*Session, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ODSession")), objc.RegisterName("alloc"))
@@ -44,16 +48,22 @@ func NewSessionWithOptionsError(inOptions *foundation.NSDictionary[objc.ID, objc
 	return &Session{inner: raw.ODSessionFromID(_id)}, nil
 }
 
+// @method     nodeNamesAndReturnError: @abstract   Returns the node names that are registered on this ODSession @discussion Returns the node names that are registered on this ODSession.  outError can be nil if error details are not needed.
+//
 // NodeNamesAndReturnError calls the underlying NodeNamesAndReturnError.
 func (x *Session) NodeNamesAndReturnError() (*foundation.NSArray[objc.ID], error) {
 	return x.inner.NodeNamesAndReturnError()
 }
 
+// @method configurationAuthorizationAllowingUserInteraction: @abstract Returns an authorization appropriate for managing configurations. @discussion Returns an authorization appropriate for managing configurations.  If a proxy session is in use this method will return nil and no error.
+//
 // ConfigurationAuthorizationAllowingUserInteractionError calls the underlying ConfigurationAuthorizationAllowingUserInteractionError.
 func (x *Session) ConfigurationAuthorizationAllowingUserInteractionError(allowInteraction bool) (*securityfoundation.SFAuthorization, error) {
 	return x.inner.ConfigurationAuthorizationAllowingUserInteractionError(allowInteraction)
 }
 
+// @method configurationForNodename: @abstract Reads the configuration for a given nodename. @discussion Reads the configuration for a given nodename.
+//
 // ConfigurationForNodename calls the underlying ConfigurationForNodename.
 func (x *Session) ConfigurationForNodename(nodename string) *Configuration {
 	_r := x.inner.ConfigurationForNodename(foundation.NSStringStringWithUTF8String(nodename))
@@ -63,26 +73,36 @@ func (x *Session) ConfigurationForNodename(nodename string) *Configuration {
 	return &Configuration{inner: _r}
 }
 
+// @method addConfiguration:authorization:error: @abstract Adds a new configuration to the existing ODSession. @discussion Adds a new configuration to the existing ODSession.  An SFAuthorization can be provided if necessary.
+//
 // AddConfigurationAuthorizationError calls the underlying AddConfigurationAuthorizationError.
 func (x *Session) AddConfigurationAuthorizationError(configuration *raw.ODConfiguration, authorization *securityfoundation.SFAuthorization) (bool, error) {
 	return x.inner.AddConfigurationAuthorizationError(configuration, authorization)
 }
 
+// @method deleteConfiguration:authorization:error: @abstract Deletes an existing configuration from the ODSession. @discussion Deletes an existing configuration from the ODSession.  An authorization can be provided if necessary.
+//
 // DeleteConfigurationAuthorizationError calls the underlying DeleteConfigurationAuthorizationError.
 func (x *Session) DeleteConfigurationAuthorizationError(configuration *raw.ODConfiguration, authorization *securityfoundation.SFAuthorization) (bool, error) {
 	return x.inner.DeleteConfigurationAuthorizationError(configuration, authorization)
 }
 
+// @method deleteConfigurationWithNodename:authorization:error: @abstract Deletes an existing configuration from the ODSession. @discussion Deletes an existing configuration from the ODSession.  An authorization can be provided if necessary.
+//
 // DeleteConfigurationWithNodenameAuthorizationError calls the underlying DeleteConfigurationWithNodenameAuthorizationError.
 func (x *Session) DeleteConfigurationWithNodenameAuthorizationError(nodename string, authorization *securityfoundation.SFAuthorization) (bool, error) {
 	return x.inner.DeleteConfigurationWithNodenameAuthorizationError(foundation.NSStringStringWithUTF8String(nodename), authorization)
 }
 
+// @method configurationTemplateNames @abstract Returns a list of names as NSStrings for all available configuration templates. @discussion Returns a list of names as NSStrings for all available configuration templates.  Configuration templates have pre-configured modules and/or mappings.  Useful for re-using existing configurations that may change with operating system without changing the actual configuration.
+//
 // ConfigurationTemplateNames calls the underlying ConfigurationTemplateNames.
 func (x *Session) ConfigurationTemplateNames() *foundation.NSArray[objc.ID] {
 	return x.inner.ConfigurationTemplateNames()
 }
 
+// @method mappingTemplateNames @abstract Returns a list names as NSStrings for all available mapping templates. @discussion Returns a list names as NSStrings for all available mapping templates.  Mapping templates have pre-configured record/attribute mappings.  Useful if a configuration uses a common layout of mappings for a type of server.
+//
 // MappingTemplateNames calls the underlying MappingTemplateNames.
 func (x *Session) MappingTemplateNames() *foundation.NSArray[objc.ID] {
 	return x.inner.MappingTemplateNames()

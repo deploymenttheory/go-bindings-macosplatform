@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains an email address that the data detection system matches. The DataDetection framework returns an email match in a `DDMatchEmailAddress` object, which includes an email address, and optionally a label that categorizes the email address.
+//
 // MatchEmailAddress wraps [raw.DDMatchEmailAddress] with a fluent Go API.
 type MatchEmailAddress struct {
 	inner *raw.DDMatchEmailAddress
@@ -36,6 +38,8 @@ func NewMatchEmailAddress() *MatchEmailAddress {
 	return &MatchEmailAddress{inner: raw.DDMatchEmailAddressFromID(_id)}
 }
 
+// A string that represents an email address.
+//
 // EmailAddress calls the underlying EmailAddress.
 func (x *MatchEmailAddress) EmailAddress() string {
 	_r := x.inner.EmailAddress()
@@ -45,6 +49,8 @@ func (x *MatchEmailAddress) EmailAddress() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A string that categorizes an email address, such as Home or Work.
+//
 // Label calls the underlying Label.
 func (x *MatchEmailAddress) Label() string {
 	_r := x.inner.Label()

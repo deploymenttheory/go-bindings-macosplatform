@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// @class		DRSetupPanel @discussion	This class is the base class for setup panels in the DiscRecordingUI framework. It provides a base framework for handling device selection, media ejection and confirming or cancelling the panel.
+//
 // SetupPanel wraps [raw.DRSetupPanel] with a fluent Go API.
 type SetupPanel struct {
 	inner *raw.DRSetupPanel
@@ -33,6 +35,8 @@ func SetupPanelFromID(id objc.ID) *SetupPanel {
 	return &SetupPanel{inner: raw.DRSetupPanelFromID(id)}
 }
 
+// @method		initWithNibName: @abstract	Initializes the receiver to use the panel from the nibName nib file. @param		nibName		Nib filename. @result		The receiver.
+//
 // NewSetupPanelWithNibName creates a new [SetupPanel].
 func NewSetupPanelWithNibName(nibName string) *SetupPanel {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRSetupPanel")), objc.RegisterName("alloc"))
@@ -40,51 +44,71 @@ func NewSetupPanelWithNibName(nibName string) *SetupPanel {
 	return &SetupPanel{inner: raw.DRSetupPanelFromID(_id)}
 }
 
+// @method		runSetupPanel @abstract	Displays the receiver and begins its event loop. @discussion	Invokes NSApplication's @link //apple_ref/occ/instm/NSApplication/runModalForWindow: runModalForWindow: @/link method with self as the argument. @result		Returns @link //apple_ref/c/econst/NSOKButton NSOKButton @/link (if the user clicks the default button) or @link //apple_ref/c/econst/NSCancelButton NSCancelButton @/link (if the user clicks the Cancel button).
+//
 // RunSetupPanel calls the underlying RunSetupPanel.
 func (x *SetupPanel) RunSetupPanel() int {
 	return x.inner.RunSetupPanel()
 }
 
+// @method		beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: @abstract	Presents a setup panel as a sheet. @param		owner				The window the sheet will be attached to. If owner is not nil, the setup panel slides down as a sheet running as a document modal window. If owner is nil, this is an error. @param		modalDelegate		The modal delegate. The object that implements the didEndSelector. @param		didEndSelector		Selector to invoke when the sheet ends. This selector is optional. If implemented by the modal delegate, this method is invoked after the modal session has ended, but before dismissing the same panel. didEndSelector may dismiss the save panel itself; otherwise it will be dismissed on return from the method. didEndSelector should have the following signature: <pre>@textblock - (void)setupPanelDidEnd:(DRSetupPanel*)panel returnCode:(int)returnCode contextInfo:(void*)contextInfo; @/textblock</pre> @param		contextInfo			Context information to be passed when the selector named by didEndSelector is invoked.
+//
 // BeginSetupSheetForWindowModalDelegateDidEndSelectorContextInfo calls the underlying BeginSetupSheetForWindowModalDelegateDidEndSelectorContextInfo.
 func (x *SetupPanel) BeginSetupSheetForWindowModalDelegateDidEndSelectorContextInfo(owner *appkit.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.BeginSetupSheetForWindowModalDelegateDidEndSelectorContextInfo(owner, modalDelegate, didEndSelector, contextInfo)
 }
 
+// @method		ok: @abstract	Invoked when the user clicks the panel's default button. @param		sender		The object that invoked this method.
+//
 // Ok calls the underlying Ok.
 func (x *SetupPanel) Ok(sender objc.ID) {
 	x.inner.Ok(sender)
 }
 
+// @method		cancel: @abstract	Invoked when the user clicks the panel's cancel button. @param		sender		The object that invoked this method.
+//
 // Cancel calls the underlying Cancel.
 func (x *SetupPanel) Cancel(sender objc.ID) {
 	x.inner.Cancel(sender)
 }
 
+// @method		eject: @abstract	Invoked when the user clicks the panel's eject button. @param		sender		The object that invoked this method.
+//
 // Eject calls the underlying Eject.
 func (x *SetupPanel) Eject(sender objc.ID) {
 	x.inner.Eject(sender)
 }
 
+// @method		open: @abstract	Invoked when the user clicks the panel's open button. @param		sender		The object that invoked this method.
+//
 // Open calls the underlying Open.
 func (x *SetupPanel) Open(sender objc.ID) {
 	x.inner.Open(sender)
 }
 
+// @method		close: @abstract	Invoked when the user clicks the panel's close button. @param		sender		The object that invoked this method.
+//
 // Close calls the underlying Close.
 func (x *SetupPanel) Close(sender objc.ID) {
 	x.inner.Close(sender)
 }
 
+// @method		deviceSelectionChanged: @abstract	Invoked when the user changes the device selected in the device popup. @discussion	If the device currently selected is disconnected from the machine, the device popup will remove the device from itself and select a new device. This will act as if the user changed the device selected. Because of this, device may be nil if no eligible devices are currently connected to the machine. @param		device		The newly selected device, or nil.
+//
 // DeviceSelectionChanged calls the underlying DeviceSelectionChanged.
 func (x *SetupPanel) DeviceSelectionChanged(device *discrecording.DRDevice) {
 	x.inner.DeviceSelectionChanged(device)
 }
 
+// @method		mediaStateChanged: @abstract	Invoked when the media state of the currently selected device changes. This can include media being ejected, inserted, being used by another application, etc. @param		status		The new device status dictionary. @result		<i>YES</i> if the inserted media is valid for use, <i>NO</i> otherwise.
+//
 // MediaStateChanged calls the underlying MediaStateChanged.
 func (x *SetupPanel) MediaStateChanged(status *foundation.NSDictionary[objc.ID, objc.ID]) bool {
 	return x.inner.MediaStateChanged(status)
 }
 
+// @method		setupForDisplay @abstract	This method is called immediately before panel is displayed on the screen. Any setup to be done in preparation for display should be done here.
+//
 // SetupForDisplay calls the underlying SetupForDisplay.
 func (x *SetupPanel) SetupForDisplay() {
 	x.inner.SetupForDisplay()

@@ -51,36 +51,48 @@ func NewCollaborationMetadataWithCollaborationIdentifier(collaborationIdentifier
 	return &CollaborationMetadata{inner: raw.SWCollaborationMetadataFromID(_id)}
 }
 
+// @abstract Title of the content. @discussion Title of the collaboration if provided by the app which owns the collaboration item.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *CollaborationMetadata) WithTitle(title string) *CollaborationMetadata {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// @abstract The collaboration options that this content supports (updated).
+//
 // WithDefaultShareOptions sets the defaultShareOptions property and returns the receiver for chaining.
 func (x *CollaborationMetadata) WithDefaultShareOptions(defaultShareOptions *CollaborationShareOptions) *CollaborationMetadata {
 	x.inner.SetDefaultShareOptions(defaultShareOptions.Unwrap())
 	return x
 }
 
+// @abstract The collaboration options that the user selected when sending the invite (updated).
+//
 // WithUserSelectedShareOptions sets the userSelectedShareOptions property and returns the receiver for chaining.
 func (x *CollaborationMetadata) WithUserSelectedShareOptions(userSelectedShareOptions *CollaborationShareOptions) *CollaborationMetadata {
 	x.inner.SetUserSelectedShareOptions(userSelectedShareOptions.Unwrap())
 	return x
 }
 
+// @abstract The handle of the person initiating the collaboration, e.g. an email address or phone number. @discussion Set by the initiating application to allow the user to confirm the handle being used before beginning collaboration. Value will not be transmitted to recipients, and will be nil when not initiating collaboration.
+//
 // WithInitiatorHandle sets the initiatorHandle property and returns the receiver for chaining.
 func (x *CollaborationMetadata) WithInitiatorHandle(initiatorHandle string) *CollaborationMetadata {
 	x.inner.SetInitiatorHandle(foundation.NSStringStringWithUTF8String(initiatorHandle))
 	return x
 }
 
+// @abstract The name of the person initiating the collaboration. @discussion Set by the initiating application to allow the user to confirm the name being used before beginning collaboration. Value will not be transmitted to recipients, and will be nil when not initiating collaboration.
+//
 // WithInitiatorNameComponents sets the initiatorNameComponents property and returns the receiver for chaining.
 func (x *CollaborationMetadata) WithInitiatorNameComponents(initiatorNameComponents *foundation.NSPersonNameComponents) *CollaborationMetadata {
 	x.inner.SetInitiatorNameComponents(initiatorNameComponents)
 	return x
 }
 
+// @abstract Globally unique identifier for the item represented by this metadata. @discussion This identifier is unique across platforms and shares of the same item.
+//
 // CollaborationIdentifier calls the underlying CollaborationIdentifier.
 func (x *CollaborationMetadata) CollaborationIdentifier() string {
 	_r := x.inner.CollaborationIdentifier()
@@ -90,6 +102,8 @@ func (x *CollaborationMetadata) CollaborationIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Locally unique identifier for the item represented by this metadata. @discussion Use this identifier to uniquely identify this metadata before a collaborationIdentifier can be created
+//
 // LocalIdentifier calls the underlying LocalIdentifier.
 func (x *CollaborationMetadata) LocalIdentifier() string {
 	_r := x.inner.LocalIdentifier()
@@ -99,6 +113,8 @@ func (x *CollaborationMetadata) LocalIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Title of the content. @discussion Title of the collaboration if provided by the app which owns the collaboration item.
+//
 // Title calls the underlying Title.
 func (x *CollaborationMetadata) Title() string {
 	_r := x.inner.Title()
@@ -113,6 +129,8 @@ func (x *CollaborationMetadata) SetTitle(title string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// @abstract The collaboration options that this content supports (updated).
+//
 // DefaultShareOptions calls the underlying DefaultShareOptions.
 func (x *CollaborationMetadata) DefaultShareOptions() *CollaborationShareOptions {
 	_r := x.inner.DefaultShareOptions()
@@ -127,6 +145,8 @@ func (x *CollaborationMetadata) SetDefaultShareOptions(defaultShareOptions *raw.
 	x.inner.SetDefaultShareOptions(defaultShareOptions)
 }
 
+// @abstract The collaboration options that the user selected when sending the invite (updated).
+//
 // UserSelectedShareOptions calls the underlying UserSelectedShareOptions.
 func (x *CollaborationMetadata) UserSelectedShareOptions() *CollaborationShareOptions {
 	_r := x.inner.UserSelectedShareOptions()

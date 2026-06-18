@@ -29,6 +29,8 @@ func MIDIPitchBendEventFromID(id objc.ID) *MIDIPitchBendEvent {
 	return &MIDIPitchBendEvent{inner: raw.AVMIDIPitchBendEventFromID(id)}
 }
 
+// @method initWithChannel:value: @abstract Initialize the event with a channel and a pitch bend value. @param channel The MIDI channel for the message.  Range: 0-15. @param value The pitch bend value.  Range: 0-16383 (midpoint 8192).
+//
 // NewMIDIPitchBendEventWithChannelValue creates a new [MIDIPitchBendEvent].
 func NewMIDIPitchBendEventWithChannelValue(channel uint, value uint) *MIDIPitchBendEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDIPitchBendEvent")), objc.RegisterName("alloc"))
@@ -36,12 +38,16 @@ func NewMIDIPitchBendEventWithChannelValue(channel uint, value uint) *MIDIPitchB
 	return &MIDIPitchBendEvent{inner: raw.AVMIDIPitchBendEventFromID(_id)}
 }
 
+// @property value The value of the pitch bend event.  Range: 0-16383 (midpoint 8192).
+//
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *MIDIPitchBendEvent) WithValue(value uint) *MIDIPitchBendEvent {
 	x.inner.SetValue(value)
 	return x
 }
 
+// @property channel The MIDI channel for the event.  Range: 0-15.
+//
 // WithChannel sets the channel property and returns the receiver for chaining.
 func (x *MIDIPitchBendEvent) WithChannel(channel uint) *MIDIPitchBendEvent {
 	x.inner.AVMIDIChannelEvent.SetChannel(channel)

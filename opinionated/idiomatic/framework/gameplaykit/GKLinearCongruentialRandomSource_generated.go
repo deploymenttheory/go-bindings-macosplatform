@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A deterministic pseudo-random source that generates random numbers based on a linear congruential algorithm. This is a deterministic random source suitable for creating reliable gameplay mechanics. It is slightly faster than an Arc4 source, but less random. In particular the lower bits of the generated values are less random than the higher bits. While deterministic, this is not a cryptographic random source. It is also not suitable for obfuscation of gameplay data.
+//
 // LinearCongruentialRandomSource wraps [raw.GKLinearCongruentialRandomSource] with a fluent Go API.
 type LinearCongruentialRandomSource struct {
 	inner *raw.GKLinearCongruentialRandomSource
@@ -37,6 +39,8 @@ func NewLinearCongruentialRandomSource() *LinearCongruentialRandomSource {
 	return &LinearCongruentialRandomSource{inner: raw.GKLinearCongruentialRandomSourceFromID(_id)}
 }
 
+// Initializes a linear congruential random source with bits the given 64 bit seed.
+//
 // NewLinearCongruentialRandomSourceWithSeed creates a new [LinearCongruentialRandomSource].
 func NewLinearCongruentialRandomSourceWithSeed(seed uint64) *LinearCongruentialRandomSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKLinearCongruentialRandomSource")), objc.RegisterName("alloc"))
@@ -44,12 +48,16 @@ func NewLinearCongruentialRandomSourceWithSeed(seed uint64) *LinearCongruentialR
 	return &LinearCongruentialRandomSource{inner: raw.GKLinearCongruentialRandomSourceFromID(_id)}
 }
 
+// The seed used to stir the linear congruential random source. The seed changes each time a random value is generated from this source, as the seed is the state buffer. The seed is encoded through archiving.
+//
 // WithSeed sets the seed property and returns the receiver for chaining.
 func (x *LinearCongruentialRandomSource) WithSeed(seed uint64) *LinearCongruentialRandomSource {
 	x.inner.SetSeed(seed)
 	return x
 }
 
+// The seed used to stir the linear congruential random source. The seed changes each time a random value is generated from this source, as the seed is the state buffer. The seed is encoded through archiving.
+//
 // Seed calls the underlying Seed.
 func (x *LinearCongruentialRandomSource) Seed() uint64 {
 	return x.inner.Seed()

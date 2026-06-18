@@ -37,11 +37,15 @@ func NewUUID() *UUID {
 	return &UUID{inner: raw.CBUUIDFromID(_id)}
 }
 
+// @property data @discussion The UUID as NSData.
+//
 // Data calls the underlying Data.
 func (x *UUID) Data() *foundation.NSData {
 	return x.inner.Data()
 }
 
+// @property UUIDString @discussion The UUID as NSString.
+//
 // UUIDString calls the underlying UUIDString.
 func (x *UUID) UUIDString() string {
 	_r := x.inner.UUIDString()

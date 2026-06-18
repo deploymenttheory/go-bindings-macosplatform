@@ -39,6 +39,8 @@ func NewToolbarItemGroup() *ToolbarItemGroup {
 	return &ToolbarItemGroup{inner: raw.NSToolbarItemGroupFromID(_id)}
 }
 
+// Set or get the array of subitems for the toolbar item. By default, a `NSToolbarItemGroup` has an empty array of subitems. You should call this to set the subitems before returning the item to the toolbar. `NSToolbarItemGroups` may not contain other `NSToolbarItemGroups` as subitems.
+//
 // WithSubitems sets the collection, converting the Go slice to an NSArray.
 func (x *ToolbarItemGroup) WithSubitems(items ...ToolbarItemProvider) *ToolbarItemGroup {
 	if len(items) == 0 {
@@ -57,72 +59,96 @@ func (x *ToolbarItemGroup) WithSubitems(items ...ToolbarItemProvider) *ToolbarIt
 	return x
 }
 
+// The style in which this item will be represented to the user. Defaults to `NSToolbarItemGroupControlRepresentationAutomatic`.
+//
 // WithControlRepresentation sets the controlRepresentation property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithControlRepresentation(controlRepresentation NSToolbarItemGroupControlRepresentation) *ToolbarItemGroup {
 	x.inner.SetControlRepresentation(raw.NSToolbarItemGroupControlRepresentation(controlRepresentation))
 	return x
 }
 
+// Get and set how selection is handled by the control. Only applies when using one of the constructors to create the item with a system defined control representation.
+//
 // WithSelectionMode sets the selectionMode property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithSelectionMode(selectionMode NSToolbarItemGroupSelectionMode) *ToolbarItemGroup {
 	x.inner.SetSelectionMode(raw.NSToolbarItemGroupSelectionMode(selectionMode))
 	return x
 }
 
+// The most recently selected item of the group, or -1 if nothing is selected.
+//
 // WithSelectedIndex sets the selectedIndex property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithSelectedIndex(selectedIndex int) *ToolbarItemGroup {
 	x.inner.SetSelectedIndex(selectedIndex)
 	return x
 }
 
+// Use this to set the item's label that appears in the toolbar. The label may also be used for the default `menuFormRepresentation` of the item. Also, developers should make sure the length of the label is appropriate and not too long.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithLabel(label string) *ToolbarItemGroup {
 	x.inner.NSToolbarItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// Use this to set the item's label that appears when the item is in the customization palette. All Items must have a palette label, and for most things it is reasonable to set them to the same string as the label used in the toolbar.
+//
 // WithPaletteLabel sets the paletteLabel property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithPaletteLabel(paletteLabel string) *ToolbarItemGroup {
 	x.inner.NSToolbarItem.SetPaletteLabel(foundation.NSStringStringWithUTF8String(paletteLabel))
 	return x
 }
 
+// An array of all alternate labels this item may display. The item will use the size of the longest label to prevent resizing when the label is changed.
+//
 // WithPossibleLabels sets the possibleLabels property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *ToolbarItemGroup {
 	x.inner.NSToolbarItem.SetPossibleLabels(possibleLabels)
 	return x
 }
 
+// Use this to set a tooltip to be used when the item is displayed in the toolbar. (forwards to `-view` if it responds)
+//
 // WithToolTip sets the toolTip property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithToolTip(toolTip string) *ToolbarItemGroup {
 	x.inner.NSToolbarItem.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
 	return x
 }
 
+// The menu form of a toolbar item's purpose is twofold. First, when the window is too small to display an item, it will be clipped but remain accessible from a "clipped items" menu containing the menu item returned here. Second, in text only mode, the menu returned will be used to create the displayed items. Singleton menu items will be clickable, while submenu items will be represented as a pull down. For instance, say you want a button that allows you to switch between modes A, B, and C. You could represent this as a menu by: a menu item "mode" with three submenu items "A", "B", and "C". By default, this method returns a singleton menu item with item label as the title. For standard items, the target, action is set.
+//
 // WithMenuFormRepresentation sets the menuFormRepresentation property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *ToolbarItemGroup {
 	x.inner.NSToolbarItem.SetMenuFormRepresentation(menuFormRepresentation.Unwrap())
 	return x
 }
 
+// Tag for your own custom purpose. (forwards to `-view` if it responds)
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithTag(tag int) *ToolbarItemGroup {
 	x.inner.NSToolbarItem.SetTag(tag)
 	return x
 }
 
+// Set and get the action of an item. (forwards to `-view` if it responds)
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithTarget(target objc.ID) *ToolbarItemGroup {
 	x.inner.NSToolbarItem.SetTarget(target)
 	return x
 }
 
+// Set and get the action of an item. For custom views, this method will call `-setAction:` on the view if it responds. (forwards to `-view` if it responds)
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithAction(action objc.SEL) *ToolbarItemGroup {
 	x.inner.NSToolbarItem.SetAction(action)
 	return x
 }
 
+// Set and get the enabled flag of an item. For custom views, this method will call `-setEnabled:` on the view if it responds. (forwards to `-view` if it responds)
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithEnabled(enabled bool) *ToolbarItemGroup {
 	x.inner.NSToolbarItem.SetEnabled(enabled)
@@ -135,12 +161,16 @@ func (x *ToolbarItemGroup) WithImage(image *Image) *ToolbarItemGroup {
 	return x
 }
 
+// Set and get the title of an item. For custom views, this method will call `-setTitle:` on the view if it responds. (forwards to `-view` if it responds)
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithTitle(title string) *ToolbarItemGroup {
 	x.inner.NSToolbarItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// When set on an item without a custom view, the button produced will have a bordered style. Defaults to NO.
+//
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithBordered(bordered bool) *ToolbarItemGroup {
 	x.inner.NSToolbarItem.SetBordered(bordered)
@@ -153,30 +183,40 @@ func (x *ToolbarItemGroup) WithBackgroundTintColor(backgroundTintColor *Color) *
 	return x
 }
 
+// Defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items' background.
+//
 // WithStyle sets the style property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithStyle(style NSToolbarItemStyle) *ToolbarItemGroup {
 	x.inner.NSToolbarItem.SetStyle(raw.NSToolbarItemStyle(style))
 	return x
 }
 
+// Whether or not the item behaves as a navigation item (i.e. back/forward) in the toolbar. Navigation items may be specially positioned by the system outside the normal list of items of the toolbar in the order specified by `-toolbarDefaultItemIdentifiers:`. Defaults to NO.
+//
 // WithNavigational sets the navigational property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithNavigational(navigational bool) *ToolbarItemGroup {
 	x.inner.NSToolbarItem.SetNavigational(navigational)
 	return x
 }
 
+// Items with automatically generated views will return nil from this getter. Custom views may be provided but not all `NSToolbarItem` subclasses support custom views. Note that, by default, many of the set/get methods will be implemented by calls forwarded to the view you set, if it responds to it.
+//
 // WithView sets the view property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithView(view ViewProvider) *ToolbarItemGroup {
 	x.inner.NSToolbarItem.SetView(view.asView())
 	return x
 }
 
+// Determines whether an item is visible in the toolbar. The item will still be visible in the customization panel. Because hidden items may be visible during user customization, use the `visible` property to determine if an item is currently displayed. Note that even hidden toolbar items are sync'd to other toolbars with a shared identifier, but its `hidden` state can be unique to each instance. Use this property to show a toolbar item in one toolbar instance but not another.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithHidden(hidden bool) *ToolbarItemGroup {
 	x.inner.NSToolbarItem.SetHidden(hidden)
 	return x
 }
 
+// Unless you have already set your own custom view, you should not call these methods. The min size should be small enough to look nice in all display modes. If you do not set a min/max size, the view's size properties will be calculated using constraints. Apps linked before 10.14 will use the view's current size. In general, apps should rely on the automatic measurements and constraints to define min/max sizes rather than setting these properties since this will account for localizations.
+//
 // WithMinSize sets the minSize property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithMinSize(minSize corefoundation.CGSize) *ToolbarItemGroup {
 	x.inner.NSToolbarItem.SetMinSize(minSize)
@@ -189,24 +229,32 @@ func (x *ToolbarItemGroup) WithMaxSize(maxSize corefoundation.CGSize) *ToolbarIt
 	return x
 }
 
+// When a toolbar does not have enough space to fit all its items, it must push some into the overflow menu. Items with the highest `visibilityPriority` level are chosen last for the overflow menu. The default `visibilityPriority` value is `NSToolbarItemVisibilityPriorityStandard`. To suggest that an item always remain visible, give it a value greater than `NSToolbarItemVisibilityPriorityStandard`, but less than `NSToolbarItemVisibilityPriorityUser`. In 10.7, users can no longer modify the toolbar item visibility priority.
+//
 // WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithVisibilityPriority(visibilityPriority int) *ToolbarItemGroup {
 	x.inner.NSToolbarItem.SetVisibilityPriority(visibilityPriority)
 	return x
 }
 
+// A badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
+//
 // WithBadge sets the badge property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithBadge(badge *ItemBadge) *ToolbarItemGroup {
 	x.inner.NSToolbarItem.SetBadge(badge.Unwrap())
 	return x
 }
 
+// This property only affects automatic validation performed by NSToolbar. Explicit validation requests, such as the `-[NSToolbar validateVisibleItems]` method, will invoke the `-validate` method even if `autovalidates` is `NO`. Defaults to YES.
+//
 // WithAutovalidates sets the autovalidates property and returns the receiver for chaining.
 func (x *ToolbarItemGroup) WithAutovalidates(autovalidates bool) *ToolbarItemGroup {
 	x.inner.NSToolbarItem.SetAutovalidates(autovalidates)
 	return x
 }
 
+// Get and set selection of individual subitems of the group item.
+//
 // SetSelectedAtIndex calls the underlying SetSelectedAtIndex.
 func (x *ToolbarItemGroup) SetSelectedAtIndex(selected bool, index int) {
 	x.inner.SetSelectedAtIndex(selected, index)
@@ -217,6 +265,8 @@ func (x *ToolbarItemGroup) IsSelectedAtIndex(index int) bool {
 	return x.inner.IsSelectedAtIndex(index)
 }
 
+// Set or get the array of subitems for the toolbar item. By default, a `NSToolbarItemGroup` has an empty array of subitems. You should call this to set the subitems before returning the item to the toolbar. `NSToolbarItemGroups` may not contain other `NSToolbarItemGroups` as subitems.
+//
 // Subitems returns the collection as a Go slice.
 func (x *ToolbarItemGroup) Subitems() []*ToolbarItem {
 	arr := x.inner.Subitems()
@@ -229,10 +279,21 @@ func (x *ToolbarItemGroup) Subitems() []*ToolbarItem {
 }
 
 // SetSubitems calls the underlying SetSubitems.
-func (x *ToolbarItemGroup) SetSubitems(subitems *foundation.NSArray[*raw.NSToolbarItem]) {
-	x.inner.SetSubitems(subitems)
+func (x *ToolbarItemGroup) SetSubitems(subitems ...ToolbarItemProvider) {
+	_ptrs := make([]objc.ID, len(subitems))
+	for _i, _v := range subitems {
+		_ptrs[_i] = _v.asToolbarItem().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NSToolbarItem]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NSToolbarItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetSubitems(_arg0)
 }
 
+// The style in which this item will be represented to the user. Defaults to `NSToolbarItemGroupControlRepresentationAutomatic`.
+//
 // ControlRepresentation calls the underlying ControlRepresentation.
 func (x *ToolbarItemGroup) ControlRepresentation() NSToolbarItemGroupControlRepresentation {
 	return NSToolbarItemGroupControlRepresentation(x.inner.ControlRepresentation())
@@ -243,6 +304,8 @@ func (x *ToolbarItemGroup) SetControlRepresentation(controlRepresentation NSTool
 	x.inner.SetControlRepresentation(raw.NSToolbarItemGroupControlRepresentation(controlRepresentation))
 }
 
+// Get and set how selection is handled by the control. Only applies when using one of the constructors to create the item with a system defined control representation.
+//
 // SelectionMode calls the underlying SelectionMode.
 func (x *ToolbarItemGroup) SelectionMode() NSToolbarItemGroupSelectionMode {
 	return NSToolbarItemGroupSelectionMode(x.inner.SelectionMode())
@@ -253,6 +316,8 @@ func (x *ToolbarItemGroup) SetSelectionMode(selectionMode NSToolbarItemGroupSele
 	x.inner.SetSelectionMode(raw.NSToolbarItemGroupSelectionMode(selectionMode))
 }
 
+// The most recently selected item of the group, or -1 if nothing is selected.
+//
 // SelectedIndex calls the underlying SelectedIndex.
 func (x *ToolbarItemGroup) SelectedIndex() int {
 	return x.inner.SelectedIndex()
@@ -297,7 +362,7 @@ type ToolbarItemGroupable interface {
 	SetSelectedAtIndex(selected bool, index int)
 	IsSelectedAtIndex(index int) bool
 	Subitems() []*ToolbarItem
-	SetSubitems(subitems *foundation.NSArray[*raw.NSToolbarItem])
+	SetSubitems(subitems ...ToolbarItemProvider)
 	ControlRepresentation() NSToolbarItemGroupControlRepresentation
 	SetControlRepresentation(controlRepresentation NSToolbarItemGroupControlRepresentation)
 	SelectionMode() NSToolbarItemGroupSelectionMode

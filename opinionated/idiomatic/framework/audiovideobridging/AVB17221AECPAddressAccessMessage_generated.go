@@ -40,6 +40,8 @@ func NewAVB17221AECPAddressAccessMessage() *AVB17221AECPAddressAccessMessage {
 	return &AVB17221AECPAddressAccessMessage{inner: raw.AVB17221AECPAddressAccessMessageFromID(_id)}
 }
 
+// @property	tlvs @abstract	An array of AVB17221AECPAddressAccessTLV objects representing the tlv_data field of the AECP Address Access message.
+//
 // WithTlvs sets the collection, converting the Go slice to an NSArray.
 func (x *AVB17221AECPAddressAccessMessage) WithTlvs(items ...*raw.AVB17221AECPAddressAccessTLV) *AVB17221AECPAddressAccessMessage {
 	if len(items) == 0 {
@@ -58,42 +60,56 @@ func (x *AVB17221AECPAddressAccessMessage) WithTlvs(items ...*raw.AVB17221AECPAd
 	return x
 }
 
+// @property	messageType @abstract	The message_type field of the AECP message.
+//
 // WithMessageType sets the messageType property and returns the receiver for chaining.
 func (x *AVB17221AECPAddressAccessMessage) WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPAddressAccessMessage {
 	x.inner.AVB17221AECPMessage.SetMessageType(raw.AVB17221AECPMessageType(messageType))
 	return x
 }
 
+// @property	status @abstract	The status field of the AECP message.
+//
 // WithStatus sets the status property and returns the receiver for chaining.
 func (x *AVB17221AECPAddressAccessMessage) WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPAddressAccessMessage {
 	x.inner.AVB17221AECPMessage.SetStatus(raw.AVB17221AECPStatusCode(status))
 	return x
 }
 
+// @property	targetEntityID @abstract	The target_entity_id field of the AECP message.
+//
 // WithTargetEntityID sets the targetEntityID property and returns the receiver for chaining.
 func (x *AVB17221AECPAddressAccessMessage) WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAddressAccessMessage {
 	x.inner.AVB17221AECPMessage.SetTargetEntityID(targetEntityID)
 	return x
 }
 
+// @property	controllerEntityID @abstract	The controller_entity_id field of the AECP message.
+//
 // WithControllerEntityID sets the controllerEntityID property and returns the receiver for chaining.
 func (x *AVB17221AECPAddressAccessMessage) WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAddressAccessMessage {
 	x.inner.AVB17221AECPMessage.SetControllerEntityID(controllerEntityID)
 	return x
 }
 
+// @property	sequenceID @abstract	The sequence_id field of the AECP message.
+//
 // WithSequenceID sets the sequenceID property and returns the receiver for chaining.
 func (x *AVB17221AECPAddressAccessMessage) WithSequenceID(sequenceID uint16) *AVB17221AECPAddressAccessMessage {
 	x.inner.AVB17221AECPMessage.SetSequenceID(sequenceID)
 	return x
 }
 
+// @property	sourceMAC @abstract	The source_mac field of the AECP message.
+//
 // WithSourceMAC sets the sourceMAC property and returns the receiver for chaining.
 func (x *AVB17221AECPAddressAccessMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAddressAccessMessage {
 	x.inner.AVB17221AECPMessage.SetSourceMAC(sourceMAC.Unwrap())
 	return x
 }
 
+// @property	tlvs @abstract	An array of AVB17221AECPAddressAccessTLV objects representing the tlv_data field of the AECP Address Access message.
+//
 // Tlvs returns the collection as a Go slice.
 func (x *AVB17221AECPAddressAccessMessage) Tlvs() []*AVB17221AECPAddressAccessTLV {
 	arr := x.inner.Tlvs()

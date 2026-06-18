@@ -29,6 +29,8 @@ func DDDeviceEventFromID(id objc.ID) *DDDeviceEvent {
 	return &DDDeviceEvent{inner: raw.DDDeviceEventFromID(id)}
 }
 
+// Initializes a device event.
+//
 // NewDDDeviceEventWithEventTypeDevice creates a new [DDDeviceEvent].
 func NewDDDeviceEventWithEventTypeDevice(type_ DDEventType, device *raw.DDDevice) *DDDeviceEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DDDeviceEvent")), objc.RegisterName("alloc"))
@@ -36,6 +38,8 @@ func NewDDDeviceEventWithEventTypeDevice(type_ DDEventType, device *raw.DDDevice
 	return &DDDeviceEvent{inner: raw.DDDeviceEventFromID(_id)}
 }
 
+// Device found or lost.
+//
 // Device calls the underlying Device.
 func (x *DDDeviceEvent) Device() *DDDevice {
 	_r := x.inner.Device()
@@ -45,6 +49,8 @@ func (x *DDDeviceEvent) Device() *DDDevice {
 	return &DDDevice{inner: _r}
 }
 
+// Type of event.
+//
 // EventType calls the underlying EventType.
 func (x *DDDeviceEvent) EventType() DDEventType {
 	return DDEventType(x.inner.EventType())

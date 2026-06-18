@@ -32,6 +32,8 @@ func MappedMetaParameterDefinitionFromID(id objc.ID) *MappedMetaParameterDefinit
 	return &MappedMetaParameterDefinition{inner: raw.PHASEMappedMetaParameterDefinitionFromID(id)}
 }
 
+// @method initWithInputMetaParameterDefinition:identifier @abstract Create a new mapped range metaparameter definition @param inputMetaParameterDefinition The metaparameter that will provide an input for this mapped metaparameter @param envelope The envelope to use. @param identifier An optional custom identifier to give to this object @return The new PHASEMappedMetaParameterDefinition object
+//
 // NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelopeIdentifier creates a new [MappedMetaParameterDefinition].
 func NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelopeIdentifier(inputMetaParameterDefinition *raw.PHASENumberMetaParameterDefinition, envelope *raw.PHASEEnvelope, identifier string) *MappedMetaParameterDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEMappedMetaParameterDefinition")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelopeIde
 	return &MappedMetaParameterDefinition{inner: raw.PHASEMappedMetaParameterDefinitionFromID(_id)}
 }
 
+// @method initWithInputMetaParameterDefinition @abstract Create a new mapped range metaparameter definition @param inputMetaParameterDefinition The metaparameter that will provide an input for this mapped metaparameter @param envelope The envelope to use. @return The new PHASEMappedMetaParameterDefinition object
+//
 // NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelope creates a new [MappedMetaParameterDefinition].
 func NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelope(inputMetaParameterDefinition *raw.PHASENumberMetaParameterDefinition, envelope *raw.PHASEEnvelope) *MappedMetaParameterDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEMappedMetaParameterDefinition")), objc.RegisterName("alloc"))
@@ -46,6 +50,8 @@ func NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelope(in
 	return &MappedMetaParameterDefinition{inner: raw.PHASEMappedMetaParameterDefinitionFromID(_id)}
 }
 
+// @property envelope @abstract An Envelope to define segments of curves
+//
 // Envelope calls the underlying Envelope.
 func (x *MappedMetaParameterDefinition) Envelope() *Envelope {
 	_r := x.inner.Envelope()
@@ -55,6 +61,8 @@ func (x *MappedMetaParameterDefinition) Envelope() *Envelope {
 	return &Envelope{inner: _r}
 }
 
+// @property inputMetaParameterDefinition @abstract The readonly PHASENumberMetaParameterDefinition that this metaparameter definition was initialized with
+//
 // InputMetaParameterDefinition calls the underlying InputMetaParameterDefinition.
 func (x *MappedMetaParameterDefinition) InputMetaParameterDefinition() *NumberMetaParameterDefinition {
 	_r := x.inner.InputMetaParameterDefinition()

@@ -31,6 +31,8 @@ func DeviceFromID(id objc.ID) *Device {
 	return &Device{inner: raw.HKDeviceFromID(id)}
 }
 
+// @method        initWithName:manufacturer:model:hardwareVersion:firmwareVersion:softwareVersion:localIdentifier:UDIDeviceIdentifier: @abstract      Initialize a new HKDevice with the specified values. @discussion    This allows initialization of an HKDevice object based on the information provided.
+//
 // NewDeviceWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier creates a new [Device].
 func NewDeviceWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVersionLocalIdentifierUDIDeviceIdentifier(name string, manufacturer string, model string, hardwareVersion string, firmwareVersion string, softwareVersion string, localIdentifier string, uDIDeviceIdentifier string) *Device {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKDevice")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewDeviceWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVer
 	return &Device{inner: raw.HKDeviceFromID(_id)}
 }
 
+// @property      name @abstract      The name of the receiver. @discussion    The user-facing name, such as the one displayed in the Bluetooth Settings for a BLE device.
+//
 // Name calls the underlying Name.
 func (x *Device) Name() string {
 	_r := x.inner.Name()
@@ -47,6 +51,8 @@ func (x *Device) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      manufacturer @abstract      The manufacturer of the receiver.
+//
 // Manufacturer calls the underlying Manufacturer.
 func (x *Device) Manufacturer() string {
 	_r := x.inner.Manufacturer()
@@ -56,6 +62,8 @@ func (x *Device) Manufacturer() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      model @abstract      The model of the receiver.
+//
 // Model calls the underlying Model.
 func (x *Device) Model() string {
 	_r := x.inner.Model()
@@ -65,6 +73,8 @@ func (x *Device) Model() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      hardwareVersion @abstract      The hardware revision of the receiver.
+//
 // HardwareVersion calls the underlying HardwareVersion.
 func (x *Device) HardwareVersion() string {
 	_r := x.inner.HardwareVersion()
@@ -74,6 +84,8 @@ func (x *Device) HardwareVersion() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      firmwareVersion @abstract      The firmware revision of the receiver.
+//
 // FirmwareVersion calls the underlying FirmwareVersion.
 func (x *Device) FirmwareVersion() string {
 	_r := x.inner.FirmwareVersion()
@@ -83,6 +95,8 @@ func (x *Device) FirmwareVersion() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      softwareVersion @abstract      The software revision of the receiver.
+//
 // SoftwareVersion calls the underlying SoftwareVersion.
 func (x *Device) SoftwareVersion() string {
 	_r := x.inner.SoftwareVersion()
@@ -92,6 +106,8 @@ func (x *Device) SoftwareVersion() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      localIdentifier @abstract      A unique identifier for the receiver. @discussion    This property is available to clients for a local identifier. For example, Bluetooth peripherals managed by HealthKit use this for the CoreBluetooth UUID which is valid only on the local device and thus distinguish the same Bluetooth peripheral used between multiple devices.
+//
 // LocalIdentifier calls the underlying LocalIdentifier.
 func (x *Device) LocalIdentifier() string {
 	_r := x.inner.LocalIdentifier()
@@ -101,6 +117,8 @@ func (x *Device) LocalIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      UDIDeviceIdentifier @abstract      Represents the device identifier portion of a device's FDA UDI (Unique Device Identifier). @discussion    The device identifier can be used to reference the FDA's GUDID (Globally Unique Device Identifier Database). Note that for user privacy concerns this field should not be used to persist the production identifier portion of the device UDI. HealthKit clients should manage the production identifier independently, if needed. See http://www.fda.gov/MedicalDevices/DeviceRegulationandGuidance/UniqueDeviceIdentification/ for more information.
+//
 // UDIDeviceIdentifier calls the underlying UDIDeviceIdentifier.
 func (x *Device) UDIDeviceIdentifier() string {
 	_r := x.inner.UDIDeviceIdentifier()

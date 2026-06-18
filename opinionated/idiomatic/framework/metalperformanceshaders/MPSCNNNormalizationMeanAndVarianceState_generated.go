@@ -34,6 +34,8 @@ func CNNNormalizationMeanAndVarianceStateFromID(id objc.ID) *CNNNormalizationMea
 	return &CNNNormalizationMeanAndVarianceState{inner: raw.MPSCNNNormalizationMeanAndVarianceStateFromID(id)}
 }
 
+// @abstract   Initialize a MPSCNNNormalizationMeanAndVarianceState object using values contained in MTLBuffers. @param      mean        The MTLBuffer containing mean terms. @param      variance    The MTLBuffer containing variance terms.
+//
 // NewCNNNormalizationMeanAndVarianceStateWithMeanVariance creates a new [CNNNormalizationMeanAndVarianceState].
 func NewCNNNormalizationMeanAndVarianceStateWithMeanVariance(mean metal.MTLBuffer, variance metal.MTLBuffer) *CNNNormalizationMeanAndVarianceState {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNNormalizationMeanAndVarianceState")), objc.RegisterName("alloc"))
@@ -47,17 +49,23 @@ func (x *CNNNormalizationMeanAndVarianceState) WithReadCount(readCount uint) *CN
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNNormalizationMeanAndVarianceState) WithLabel(label string) *CNNNormalizationMeanAndVarianceState {
 	x.inner.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   mean @abstract   A MTLBuffer containing the mean terms.
+//
 // Mean calls the underlying Mean.
 func (x *CNNNormalizationMeanAndVarianceState) Mean() metal.MTLBuffer {
 	return x.inner.Mean()
 }
 
+// @property   variance @abstract   A MTLBuffer containing the variance terms.
+//
 // Variance calls the underlying Variance.
 func (x *CNNNormalizationMeanAndVarianceState) Variance() metal.MTLBuffer {
 	return x.inner.Variance()

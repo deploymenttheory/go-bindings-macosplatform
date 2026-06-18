@@ -33,6 +33,8 @@ func MTRBaseClusterLevelControlFromID(id objc.ID) *MTRBaseClusterLevelControl {
 	return &MTRBaseClusterLevelControl{inner: raw.MTRBaseClusterLevelControlFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterLevelControlWithDeviceEndpointIDQueue creates a new [MTRBaseClusterLevelControl].
 func NewMTRBaseClusterLevelControlWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterLevelControl {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterLevelControl")), objc.RegisterName("alloc"))
@@ -47,46 +49,64 @@ func NewMTRBaseClusterLevelControlWithDeviceEndpointQueue(device *raw.MTRBaseDev
 	return &MTRBaseClusterLevelControl{inner: raw.MTRBaseClusterLevelControlFromID(_id)}
 }
 
+// Command MoveToLevel This command will move the device to the specified level.
+//
 // MoveToLevelWithParamsCompletion calls the underlying MoveToLevelWithParamsCompletion.
 func (x *MTRBaseClusterLevelControl) MoveToLevelWithParamsCompletion(params *raw.MTRLevelControlClusterMoveToLevelParams, completion func(unsafe.Pointer)) {
 	x.inner.MoveToLevelWithParamsCompletion(params, completion)
 }
 
+// Command Move This command will move the device using the specified values.
+//
 // MoveWithParamsCompletion calls the underlying MoveWithParamsCompletion.
 func (x *MTRBaseClusterLevelControl) MoveWithParamsCompletion(params *raw.MTRLevelControlClusterMoveParams, completion func(unsafe.Pointer)) {
 	x.inner.MoveWithParamsCompletion(params, completion)
 }
 
+// Command Step This command will do a relative step change of the device using the specified values.
+//
 // StepWithParamsCompletion calls the underlying StepWithParamsCompletion.
 func (x *MTRBaseClusterLevelControl) StepWithParamsCompletion(params *raw.MTRLevelControlClusterStepParams, completion func(unsafe.Pointer)) {
 	x.inner.StepWithParamsCompletion(params, completion)
 }
 
+// Command Stop This command will stop the actions of various other commands that are still in progress.
+//
 // StopWithParamsCompletion calls the underlying StopWithParamsCompletion.
 func (x *MTRBaseClusterLevelControl) StopWithParamsCompletion(params *raw.MTRLevelControlClusterStopParams, completion func(unsafe.Pointer)) {
 	x.inner.StopWithParamsCompletion(params, completion)
 }
 
+// Command MoveToLevelWithOnOff Command description for MoveToLevelWithOnOff
+//
 // MoveToLevelWithOnOffWithParamsCompletion calls the underlying MoveToLevelWithOnOffWithParamsCompletion.
 func (x *MTRBaseClusterLevelControl) MoveToLevelWithOnOffWithParamsCompletion(params *raw.MTRLevelControlClusterMoveToLevelWithOnOffParams, completion func(unsafe.Pointer)) {
 	x.inner.MoveToLevelWithOnOffWithParamsCompletion(params, completion)
 }
 
+// Command MoveWithOnOff Command description for MoveWithOnOff
+//
 // MoveWithOnOffWithParamsCompletion calls the underlying MoveWithOnOffWithParamsCompletion.
 func (x *MTRBaseClusterLevelControl) MoveWithOnOffWithParamsCompletion(params *raw.MTRLevelControlClusterMoveWithOnOffParams, completion func(unsafe.Pointer)) {
 	x.inner.MoveWithOnOffWithParamsCompletion(params, completion)
 }
 
+// Command StepWithOnOff Command description for StepWithOnOff
+//
 // StepWithOnOffWithParamsCompletion calls the underlying StepWithOnOffWithParamsCompletion.
 func (x *MTRBaseClusterLevelControl) StepWithOnOffWithParamsCompletion(params *raw.MTRLevelControlClusterStepWithOnOffParams, completion func(unsafe.Pointer)) {
 	x.inner.StepWithOnOffWithParamsCompletion(params, completion)
 }
 
+// Command StopWithOnOff Command description for StopWithOnOff
+//
 // StopWithOnOffWithParamsCompletion calls the underlying StopWithOnOffWithParamsCompletion.
 func (x *MTRBaseClusterLevelControl) StopWithOnOffWithParamsCompletion(params *raw.MTRLevelControlClusterStopWithOnOffParams, completion func(unsafe.Pointer)) {
 	x.inner.StopWithOnOffWithParamsCompletion(params, completion)
 }
 
+// Command MoveToClosestFrequency This command will cause the device to change the current frequency to the requested value.
+//
 // MoveToClosestFrequencyWithParamsCompletion calls the underlying MoveToClosestFrequencyWithParamsCompletion.
 func (x *MTRBaseClusterLevelControl) MoveToClosestFrequencyWithParamsCompletion(params *raw.MTRLevelControlClusterMoveToClosestFrequencyParams, completion func(unsafe.Pointer)) {
 	x.inner.MoveToClosestFrequencyWithParamsCompletion(params, completion)

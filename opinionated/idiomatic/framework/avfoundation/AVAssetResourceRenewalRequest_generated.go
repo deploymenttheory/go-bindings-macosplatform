@@ -36,12 +36,16 @@ func NewAssetResourceRenewalRequest() *AssetResourceRenewalRequest {
 	return &AssetResourceRenewalRequest{inner: raw.AVAssetResourceRenewalRequestFromID(_id)}
 }
 
+// @property 		response @abstract		Set the value of this property to an instance of NSURLResponse indicating a response to the loading request. If no response is needed, leave the value of this property set to nil.
+//
 // WithResponse sets the response property and returns the receiver for chaining.
 func (x *AssetResourceRenewalRequest) WithResponse(response *foundation.NSURLResponse) *AssetResourceRenewalRequest {
 	x.inner.AVAssetResourceLoadingRequest.SetResponse(response)
 	return x
 }
 
+// @property 		redirect @abstract		Set the value of this property to an instance of NSURLRequest indicating a redirection of the loading request to another URL. If no redirection is needed, leave the value of this property set to nil. @discussion	AVAssetResourceLoader supports redirects to HTTP URLs only. Redirects to other URLs will result in a loading failure.
+//
 // WithRedirect sets the redirect property and returns the receiver for chaining.
 func (x *AssetResourceRenewalRequest) WithRedirect(redirect *foundation.NSURLRequest) *AssetResourceRenewalRequest {
 	x.inner.AVAssetResourceLoadingRequest.SetRedirect(redirect)

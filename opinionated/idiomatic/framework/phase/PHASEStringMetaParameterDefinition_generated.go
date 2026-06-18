@@ -32,6 +32,8 @@ func StringMetaParameterDefinitionFromID(id objc.ID) *StringMetaParameterDefinit
 	return &StringMetaParameterDefinition{inner: raw.PHASEStringMetaParameterDefinitionFromID(id)}
 }
 
+// @method initWithValue:identifier @abstract Create a new string metaparameter definition @param value The initial value of the metaparameter @param identifier An optional custom identifier to give to this object @return The new PHASEStringMetaParameterDefinition object
+//
 // NewStringMetaParameterDefinitionWithValueIdentifier creates a new [StringMetaParameterDefinition].
 func NewStringMetaParameterDefinitionWithValueIdentifier(value string, identifier string) *StringMetaParameterDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEStringMetaParameterDefinition")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewStringMetaParameterDefinitionWithValueIdentifier(value string, identifie
 	return &StringMetaParameterDefinition{inner: raw.PHASEStringMetaParameterDefinitionFromID(_id)}
 }
 
+// @method initWithValue @abstract Create a new string metaparameter definition @param value The initial value of the metaparameter @return The new PHASEStringMetaParameterDefinition object
+//
 // NewStringMetaParameterDefinitionWithValue creates a new [StringMetaParameterDefinition].
 func NewStringMetaParameterDefinitionWithValue(value string) *StringMetaParameterDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEStringMetaParameterDefinition")), objc.RegisterName("alloc"))

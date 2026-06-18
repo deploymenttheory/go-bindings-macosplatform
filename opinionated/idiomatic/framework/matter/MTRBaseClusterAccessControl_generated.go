@@ -33,6 +33,8 @@ func MTRBaseClusterAccessControlFromID(id objc.ID) *MTRBaseClusterAccessControl 
 	return &MTRBaseClusterAccessControl{inner: raw.MTRBaseClusterAccessControlFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterAccessControlWithDeviceEndpointIDQueue creates a new [MTRBaseClusterAccessControl].
 func NewMTRBaseClusterAccessControlWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterAccessControl {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterAccessControl")), objc.RegisterName("alloc"))
@@ -47,6 +49,8 @@ func NewMTRBaseClusterAccessControlWithDeviceEndpointQueue(device *raw.MTRBaseDe
 	return &MTRBaseClusterAccessControl{inner: raw.MTRBaseClusterAccessControlFromID(_id)}
 }
 
+// Command ReviewFabricRestrictions This command signals to the service associated with the device vendor that the fabric administrator would like a review of the current restrictions on the accessing fabric.
+//
 // ReviewFabricRestrictionsWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterAccessControl) ReviewFabricRestrictionsWithParamsCompletion(ctx context.Context, params *raw.MTRAccessControlClusterReviewFabricRestrictionsParams) (*MTRAccessControlClusterReviewFabricRestrictionsResponseParams, error) {
 	type _result struct {

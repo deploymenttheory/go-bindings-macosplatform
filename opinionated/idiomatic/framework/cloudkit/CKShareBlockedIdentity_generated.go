@@ -35,6 +35,8 @@ func NewShareBlockedIdentity() *ShareBlockedIdentity {
 	return &ShareBlockedIdentity{inner: raw.CKShareBlockedIdentityFromID(_id)}
 }
 
+// The identity of the user who has been blocked from requesting access to the share.
+//
 // UserIdentity calls the underlying UserIdentity.
 func (x *ShareBlockedIdentity) UserIdentity() *UserIdentity {
 	_r := x.inner.UserIdentity()
@@ -44,6 +46,8 @@ func (x *ShareBlockedIdentity) UserIdentity() *UserIdentity {
 	return &UserIdentity{inner: _r}
 }
 
+// A displayable CNContact representing the blocked user. If the blocked identity does not exist in the user's contacts or is not accessible, returns a newly created `CNContact`. This provides formatted blocked identity information suitable for display in the application's UI.
+//
 // Contact calls the underlying Contact.
 func (x *ShareBlockedIdentity) Contact() objc.ID {
 	return x.inner.Contact()

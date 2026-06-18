@@ -37,6 +37,8 @@ func NewTokenPasswordAuthOperation() *TokenPasswordAuthOperation {
 	return &TokenPasswordAuthOperation{inner: raw.TKTokenPasswordAuthOperationFromID(_id)}
 }
 
+// @discussion Password, which will be filled in by the system when 'finishWithError:' is called.
+//
 // WithPassword sets the password property and returns the receiver for chaining.
 func (x *TokenPasswordAuthOperation) WithPassword(password string) *TokenPasswordAuthOperation {
 	x.inner.SetPassword(foundation.NSStringStringWithUTF8String(password))

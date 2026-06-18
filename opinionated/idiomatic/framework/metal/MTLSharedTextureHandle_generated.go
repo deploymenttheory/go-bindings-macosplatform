@@ -36,11 +36,15 @@ func NewSharedTextureHandle() *SharedTextureHandle {
 	return &SharedTextureHandle{inner: raw.MTLSharedTextureHandleFromID(_id)}
 }
 
+// @property device @abstract The device this texture was created against. @discussion This shared texture handle can only be used with this device.
+//
 // Device calls the underlying Device.
 func (x *SharedTextureHandle) Device() raw.MTLDevice {
 	return x.inner.Device()
 }
 
+// @property label @abstract A copy of the original texture's label property, if any
+//
 // Label calls the underlying Label.
 func (x *SharedTextureHandle) Label() string {
 	_r := x.inner.Label()

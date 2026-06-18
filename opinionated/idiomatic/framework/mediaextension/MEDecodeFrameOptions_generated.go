@@ -35,18 +35,24 @@ func NewDecodeFrameOptions() *DecodeFrameOptions {
 	return &DecodeFrameOptions{inner: raw.MEDecodeFrameOptionsFromID(_id)}
 }
 
+// @property		doNotOutputFrame @abstract		A hint to the video decoder that a CVImageBuffer should not be emitted for this frame.  NULL will be returned instead.
+//
 // WithDoNotOutputFrame sets the doNotOutputFrame property and returns the receiver for chaining.
 func (x *DecodeFrameOptions) WithDoNotOutputFrame(doNotOutputFrame bool) *DecodeFrameOptions {
 	x.inner.SetDoNotOutputFrame(doNotOutputFrame)
 	return x
 }
 
+// @property		realTimePlayback @abstract		A hint to the video decoder that it would be OK to use a low-power mode that can not decode faster than 1x realtime. @discussion		Note that this hint only takes the current decode session into account.  For example, if multiple instances of a decoder are operating at once, it may not actually be OK to use such a low-power mode if real-time playback might not be sustained across all the streams. This hint will be set to false during all uses other than 1x forward real-time playback, including seeking, playback at other rates, and export.
+//
 // WithRealTimePlayback sets the realTimePlayback property and returns the receiver for chaining.
 func (x *DecodeFrameOptions) WithRealTimePlayback(realTimePlayback bool) *DecodeFrameOptions {
 	x.inner.SetRealTimePlayback(realTimePlayback)
 	return x
 }
 
+// @property		doNotOutputFrame @abstract		A hint to the video decoder that a CVImageBuffer should not be emitted for this frame.  NULL will be returned instead.
+//
 // DoNotOutputFrame calls the underlying DoNotOutputFrame.
 func (x *DecodeFrameOptions) DoNotOutputFrame() bool {
 	return x.inner.DoNotOutputFrame()
@@ -57,6 +63,8 @@ func (x *DecodeFrameOptions) SetDoNotOutputFrame(doNotOutputFrame bool) {
 	x.inner.SetDoNotOutputFrame(doNotOutputFrame)
 }
 
+// @property		realTimePlayback @abstract		A hint to the video decoder that it would be OK to use a low-power mode that can not decode faster than 1x realtime. @discussion		Note that this hint only takes the current decode session into account.  For example, if multiple instances of a decoder are operating at once, it may not actually be OK to use such a low-power mode if real-time playback might not be sustained across all the streams. This hint will be set to false during all uses other than 1x forward real-time playback, including seeking, playback at other rates, and export.
+//
 // RealTimePlayback calls the underlying RealTimePlayback.
 func (x *DecodeFrameOptions) RealTimePlayback() bool {
 	return x.inner.RealTimePlayback()

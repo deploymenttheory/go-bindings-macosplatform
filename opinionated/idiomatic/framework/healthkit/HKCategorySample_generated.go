@@ -44,6 +44,8 @@ func (x *CategorySample) CategoryType() *CategoryType {
 	return &CategoryType{inner: _r}
 }
 
+// @property   value @discussion The preferred enum for the value is determined by the receiver's category type.
+//
 // Value calls the underlying Value.
 func (x *CategorySample) Value() int {
 	return x.inner.Value()

@@ -38,6 +38,8 @@ func NewVerifiableClinicalRecord() *VerifiableClinicalRecord {
 	return &VerifiableClinicalRecord{inner: raw.HKVerifiableClinicalRecordFromID(_id)}
 }
 
+// @property      recordTypes @abstract      The types present in this record.
+//
 // RecordTypes returns the collection as a Go slice.
 func (x *VerifiableClinicalRecord) RecordTypes() []string {
 	arr := x.inner.RecordTypes()
@@ -49,6 +51,8 @@ func (x *VerifiableClinicalRecord) RecordTypes() []string {
 	})
 }
 
+// @property      issuerIdentifier @abstract      The identifier for the issuer of this record.
+//
 // IssuerIdentifier calls the underlying IssuerIdentifier.
 func (x *VerifiableClinicalRecord) IssuerIdentifier() string {
 	_r := x.inner.IssuerIdentifier()
@@ -58,6 +62,8 @@ func (x *VerifiableClinicalRecord) IssuerIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      subject @abstract      The subject of this record.
+//
 // Subject calls the underlying Subject.
 func (x *VerifiableClinicalRecord) Subject() *VerifiableClinicalRecordSubject {
 	_r := x.inner.Subject()
@@ -67,21 +73,29 @@ func (x *VerifiableClinicalRecord) Subject() *VerifiableClinicalRecordSubject {
 	return &VerifiableClinicalRecordSubject{inner: _r}
 }
 
+// @property      issuedDate @abstract      The date this record was issued.
+//
 // IssuedDate calls the underlying IssuedDate.
 func (x *VerifiableClinicalRecord) IssuedDate() *foundation.NSDate {
 	return x.inner.IssuedDate()
 }
 
+// @property      relevantDate @abstract      A date most relevant to this record, like when a vaccine was administered or a test was performed.
+//
 // RelevantDate calls the underlying RelevantDate.
 func (x *VerifiableClinicalRecord) RelevantDate() *foundation.NSDate {
 	return x.inner.RelevantDate()
 }
 
+// @property      expirationDate @abstract      The date this record expires.
+//
 // ExpirationDate calls the underlying ExpirationDate.
 func (x *VerifiableClinicalRecord) ExpirationDate() *foundation.NSDate {
 	return x.inner.ExpirationDate()
 }
 
+// @property      itemNames @abstract      A list of display names for each item contained in this record.
+//
 // ItemNames returns the collection as a Go slice.
 func (x *VerifiableClinicalRecord) ItemNames() []string {
 	arr := x.inner.ItemNames()
@@ -93,6 +107,8 @@ func (x *VerifiableClinicalRecord) ItemNames() []string {
 	})
 }
 
+// @property      sourceType @abstract      The type of the source leading to this verifiable record.
+//
 // SourceType calls the underlying SourceType.
 func (x *VerifiableClinicalRecord) SourceType() string {
 	_r := x.inner.SourceType()
@@ -102,11 +118,15 @@ func (x *VerifiableClinicalRecord) SourceType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      dataRepresentation @abstract      The record's data representation, determined by source type.
+//
 // DataRepresentation calls the underlying DataRepresentation.
 func (x *VerifiableClinicalRecord) DataRepresentation() *foundation.NSData {
 	return x.inner.DataRepresentation()
 }
 
+// @property      JWSRepresentation @abstract      The record's entirety as JSON Web Signature (JWS) data.
+//
 // JWSRepresentation calls the underlying JWSRepresentation.
 func (x *VerifiableClinicalRecord) JWSRepresentation() unsafe.Pointer {
 	return x.inner.JWSRepresentation()

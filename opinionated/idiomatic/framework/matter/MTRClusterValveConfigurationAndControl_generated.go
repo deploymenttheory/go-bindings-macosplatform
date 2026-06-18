@@ -33,6 +33,8 @@ func MTRClusterValveConfigurationAndControlFromID(id objc.ID) *MTRClusterValveCo
 	return &MTRClusterValveConfigurationAndControl{inner: raw.MTRClusterValveConfigurationAndControlFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterValveConfigurationAndControlWithDeviceEndpointIDQueue creates a new [MTRClusterValveConfigurationAndControl].
 func NewMTRClusterValveConfigurationAndControlWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterValveConfigurationAndControl {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterValveConfigurationAndControl")), objc.RegisterName("alloc"))

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a USB Extensible Host Controller Interface (XHCI) controller in a VM.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzxhcicontroller
 type VZXHCIController struct {
 	VZUSBController

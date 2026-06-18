@@ -30,6 +30,8 @@ func PredicateFromID(id objc.ID) *Predicate {
 	return &Predicate{inner: raw.MPSPredicateFromID(id)}
 }
 
+// @abstract   Initializes a MPSPredicate object with a buffer and given offset. @param      buffer      The buffer to use as a predicate. @param      offset      Byteoffset to the predicate buffer where the predicate is stored. @result     A pointer to the newly initialized MPSPredicate object.
+//
 // NewPredicateWithBufferOffset creates a new [Predicate].
 func NewPredicateWithBufferOffset(buffer metal.MTLBuffer, offset uint) *Predicate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSPredicate")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewPredicateWithBufferOffset(buffer metal.MTLBuffer, offset uint) *Predicat
 	return &Predicate{inner: raw.MPSPredicateFromID(_id)}
 }
 
+// @abstract   Initializes a MPSPredicate object for a given device. @discussion NOTE: The metal buffer used by the resulting MPSPredicate object may be shared among many MPSPredicate objects and therefore care must be used when writing to this buffer: writing to any other location in this buffer than the four bytes at the offset @ref predicateOffset results in undefined behavior. @param      device      The device the predicate is used with @result     A pointer to the newly initialized MPSPredicate object.
+//
 // NewPredicateWithDevice creates a new [Predicate].
 func NewPredicateWithDevice(device metal.MTLDevice) *Predicate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSPredicate")), objc.RegisterName("alloc"))
@@ -44,11 +48,15 @@ func NewPredicateWithDevice(device metal.MTLDevice) *Predicate {
 	return &Predicate{inner: raw.MPSPredicateFromID(_id)}
 }
 
+// @property predicateBuffer @abstract The buffer that is used as the predicate
+//
 // PredicateBuffer calls the underlying PredicateBuffer.
 func (x *Predicate) PredicateBuffer() metal.MTLBuffer {
 	return x.inner.PredicateBuffer()
 }
 
+// @property   predicateOffset @abstract   Location of the predicate in bytes, must be multiple of four. @discussion If the uint32_t value stored at this location in @ref predicateBuffer is other than zero, then the predicate is considered to be true and the code is executed on the GPU. With this property a single MPSPredicate object can be used with multiple different predication operations. Default = 0;
+//
 // PredicateOffset calls the underlying PredicateOffset.
 func (x *Predicate) PredicateOffset() uint {
 	return x.inner.PredicateOffset()

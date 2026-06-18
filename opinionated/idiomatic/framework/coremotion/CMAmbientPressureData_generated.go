@@ -36,11 +36,15 @@ func NewAmbientPressureData() *AmbientPressureData {
 	return &AmbientPressureData{inner: raw.CMAmbientPressureDataFromID(_id)}
 }
 
+// Discussion: The pressure as measured by the pressure sensor. Pressure is in kPa (kilopascals).
+//
 // Pressure calls the underlying Pressure.
 func (x *AmbientPressureData) Pressure() *foundation.NSMeasurement[*foundation.NSUnitPressure] {
 	return x.inner.Pressure()
 }
 
+// Discussion: The temperature as measured by the pressure sensor. Temperature is in C (degrees centrigrade).
+//
 // Temperature calls the underlying Temperature.
 func (x *AmbientPressureData) Temperature() *foundation.NSMeasurement[*foundation.NSUnitTemperature] {
 	return x.inner.Temperature()

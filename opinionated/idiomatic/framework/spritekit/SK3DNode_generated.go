@@ -33,6 +33,8 @@ func SK3DNodeFromID(id objc.ID) *SK3DNode {
 	return &SK3DNode{inner: raw.SK3DNodeFromID(id)}
 }
 
+// Designated initializer. Initialize a 3D Node with the viewport size the 3D content will be rendered with.
+//
 // NewSK3DNodeWithViewportSize creates a new [SK3DNode].
 func NewSK3DNodeWithViewportSize(viewportSize corefoundation.CGSize) *SK3DNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SK3DNode")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewSK3DNodeWithViewportSize(viewportSize corefoundation.CGSize) *SK3DNode {
 	return &SK3DNode{inner: raw.SK3DNodeFromID(_id)}
 }
 
+// Support coding and decoding via NSKeyedArchiver.
+//
 // NewSK3DNodeWithCoder creates a new [SK3DNode].
 func NewSK3DNodeWithCoder(aDecoder *foundation.NSCoder) *SK3DNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SK3DNode")), objc.RegisterName("alloc"))
@@ -47,132 +51,176 @@ func NewSK3DNodeWithCoder(aDecoder *foundation.NSCoder) *SK3DNode {
 	return &SK3DNode{inner: raw.SK3DNodeFromID(_id)}
 }
 
+// The viewport size that the 3D content will be rendered with
+//
 // WithViewportSize sets the viewportSize property and returns the receiver for chaining.
 func (x *SK3DNode) WithViewportSize(viewportSize corefoundation.CGSize) *SK3DNode {
 	x.inner.SetViewportSize(viewportSize)
 	return x
 }
 
+// A SceneKit scene
+//
 // WithScnScene sets the scnScene property and returns the receiver for chaining.
 func (x *SK3DNode) WithScnScene(scnScene *scenekit.SCNScene) *SK3DNode {
 	x.inner.SetScnScene(scnScene)
 	return x
 }
 
+// @property sceneTime @abstract Specifies the current time to display the scene.
+//
 // WithSceneTime sets the sceneTime property and returns the receiver for chaining.
 func (x *SK3DNode) WithSceneTime(sceneTime float64) *SK3DNode {
 	x.inner.SetSceneTime(sceneTime)
 	return x
 }
 
+// @property playing @abstract Returns YES if the scene is playing, NO otherwise.
+//
 // WithPlaying sets the playing property and returns the receiver for chaining.
 func (x *SK3DNode) WithPlaying(playing bool) *SK3DNode {
 	x.inner.SetPlaying(playing)
 	return x
 }
 
+// @property loops @abstract Indicates whether the receiver restarts playback when it reaches the end of its content. Default: YES. @discussion YES when the receiver restarts playback when it finishes, NO otherwise.
+//
 // WithLoops sets the loops property and returns the receiver for chaining.
 func (x *SK3DNode) WithLoops(loops bool) *SK3DNode {
 	x.inner.SetLoops(loops)
 	return x
 }
 
+// @property pointOfView @abstract Specifies the point of view used to render the scene. @discussion A point of view must have either a camera or a spot light attached.
+//
 // WithPointOfView sets the pointOfView property and returns the receiver for chaining.
 func (x *SK3DNode) WithPointOfView(pointOfView *scenekit.SCNNode) *SK3DNode {
 	x.inner.SetPointOfView(pointOfView)
 	return x
 }
 
+// @property autoenablesDefaultLighting @abstract Specifies whether the receiver should automatically light up scenes that have no light source. The default is NO. @discussion When enabled, a diffuse light is automatically added and placed while rendering scenes that have no light or only ambient lights.
+//
 // WithAutoenablesDefaultLighting sets the autoenablesDefaultLighting property and returns the receiver for chaining.
 func (x *SK3DNode) WithAutoenablesDefaultLighting(autoenablesDefaultLighting bool) *SK3DNode {
 	x.inner.SetAutoenablesDefaultLighting(autoenablesDefaultLighting)
 	return x
 }
 
+// The position of the node in the parent's coordinate system
+//
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *SK3DNode) WithPosition(position corefoundation.CGPoint) *SK3DNode {
 	x.inner.SKNode.SetPosition(position)
 	return x
 }
 
+// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+//
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *SK3DNode) WithZPosition(zPosition float64) *SK3DNode {
 	x.inner.SKNode.SetZPosition(zPosition)
 	return x
 }
 
+// The Euler rotation about the z axis (in radians)
+//
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *SK3DNode) WithZRotation(zRotation float64) *SK3DNode {
 	x.inner.SKNode.SetZRotation(zRotation)
 	return x
 }
 
+// The scaling in the X axis
+//
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *SK3DNode) WithXScale(xScale float64) *SK3DNode {
 	x.inner.SKNode.SetXScale(xScale)
 	return x
 }
 
+// The scaling in the Y axis
+//
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *SK3DNode) WithYScale(yScale float64) *SK3DNode {
 	x.inner.SKNode.SetYScale(yScale)
 	return x
 }
 
+// The speed multiplier applied to all actions run on this node. Inherited by its children.
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *SK3DNode) WithSpeed(speed float64) *SK3DNode {
 	x.inner.SKNode.SetSpeed(speed)
 	return x
 }
 
+// Alpha of this node (multiplied by the output color to give the final result)
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *SK3DNode) WithAlpha(alpha float64) *SK3DNode {
 	x.inner.SKNode.SetAlpha(alpha)
 	return x
 }
 
+// Controls whether or not the node's actions is updated or paused.
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *SK3DNode) WithPaused(paused bool) *SK3DNode {
 	x.inner.SKNode.SetPaused(paused)
 	return x
 }
 
+// Controls whether or not the node and its children are rendered.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *SK3DNode) WithHidden(hidden bool) *SK3DNode {
 	x.inner.SKNode.SetHidden(hidden)
 	return x
 }
 
+// Controls whether or not the node receives touch events
+//
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *SK3DNode) WithUserInteractionEnabled(userInteractionEnabled bool) *SK3DNode {
 	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
 	return x
 }
 
+// The client assignable name. In general, this should be unique among peers in the scene graph.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *SK3DNode) WithName(name string) *SK3DNode {
 	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// Physics body attached to the node, with synchronized scale, rotation, and position
+//
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *SK3DNode) WithPhysicsBody(physicsBody *PhysicsBody) *SK3DNode {
 	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
+// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+//
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *SK3DNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *SK3DNode {
 	x.inner.SKNode.SetUserData(userData)
 	return x
 }
 
+// Kinematic constraints, used in IK solving
+//
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *SK3DNode) WithReachConstraints(reachConstraints *ReachConstraints) *SK3DNode {
 	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
+// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+//
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *SK3DNode) WithConstraints(items ...*raw.SKConstraint) *SK3DNode {
 	if len(items) == 0 {
@@ -191,6 +239,8 @@ func (x *SK3DNode) WithConstraints(items ...*raw.SKConstraint) *SK3DNode {
 	return x
 }
 
+// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+//
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *SK3DNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *SK3DNode {
 	x.inner.SKNode.SetAttributeValues(attributeValues)
@@ -251,21 +301,29 @@ func (x *SK3DNode) WithAccessibilityEnabled(accessibilityEnabled bool) *SK3DNode
 	return x
 }
 
+// @method hitTest:options: @abstract Returns an array of SCNHitTestResult for each node that contains a specified point. @param point A point in the coordinate system of the receiver. @param options Optional parameters (see the "Hit test options" group for the available options).
+//
 // HitTestOptions calls the underlying HitTestOptions.
 func (x *SK3DNode) HitTestOptions(point corefoundation.CGPoint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*scenekit.SCNHitTestResult] {
 	return x.inner.HitTestOptions(point, options)
 }
 
+// @method projectPoint @abstract Projects a point in the world coordinate system using the receiver's current point of view and viewport. @param point The world position to be projected. @discussion A point projected from the near (resp. far) clip plane will have a z component of 0 (resp. 1).
+//
 // ProjectPoint calls the underlying ProjectPoint.
 func (x *SK3DNode) ProjectPoint(point unsafe.Pointer) unsafe.Pointer {
 	return x.inner.ProjectPoint(point)
 }
 
+// @method unprojectPoint @abstract Unprojects a screenspace 2D point with depth info using the receiver's current point of view and viewport. @param point The screenspace position to be unprojected. @discussion A point whose z component is 0 (resp. 1) is unprojected on the near (resp. far) clip plane.
+//
 // UnprojectPoint calls the underlying UnprojectPoint.
 func (x *SK3DNode) UnprojectPoint(point unsafe.Pointer) unsafe.Pointer {
 	return x.inner.UnprojectPoint(point)
 }
 
+// The viewport size that the 3D content will be rendered with
+//
 // ViewportSize calls the underlying ViewportSize.
 func (x *SK3DNode) ViewportSize() corefoundation.CGSize {
 	return x.inner.ViewportSize()
@@ -276,6 +334,8 @@ func (x *SK3DNode) SetViewportSize(viewportSize corefoundation.CGSize) {
 	x.inner.SetViewportSize(viewportSize)
 }
 
+// A SceneKit scene
+//
 // ScnScene calls the underlying ScnScene.
 func (x *SK3DNode) ScnScene() *scenekit.SCNScene {
 	return x.inner.ScnScene()
@@ -286,6 +346,8 @@ func (x *SK3DNode) SetScnScene(scnScene *scenekit.SCNScene) {
 	x.inner.SetScnScene(scnScene)
 }
 
+// @property sceneTime @abstract Specifies the current time to display the scene.
+//
 // SceneTime calls the underlying SceneTime.
 func (x *SK3DNode) SceneTime() float64 {
 	return x.inner.SceneTime()
@@ -296,6 +358,8 @@ func (x *SK3DNode) SetSceneTime(sceneTime float64) {
 	x.inner.SetSceneTime(sceneTime)
 }
 
+// @property playing @abstract Returns YES if the scene is playing, NO otherwise.
+//
 // IsPlaying calls the underlying IsPlaying.
 func (x *SK3DNode) IsPlaying() bool {
 	return x.inner.IsPlaying()
@@ -306,6 +370,8 @@ func (x *SK3DNode) SetPlaying(playing bool) {
 	x.inner.SetPlaying(playing)
 }
 
+// @property loops @abstract Indicates whether the receiver restarts playback when it reaches the end of its content. Default: YES. @discussion YES when the receiver restarts playback when it finishes, NO otherwise.
+//
 // Loops calls the underlying Loops.
 func (x *SK3DNode) Loops() bool {
 	return x.inner.Loops()
@@ -316,6 +382,8 @@ func (x *SK3DNode) SetLoops(loops bool) {
 	x.inner.SetLoops(loops)
 }
 
+// @property pointOfView @abstract Specifies the point of view used to render the scene. @discussion A point of view must have either a camera or a spot light attached.
+//
 // PointOfView calls the underlying PointOfView.
 func (x *SK3DNode) PointOfView() *scenekit.SCNNode {
 	return x.inner.PointOfView()
@@ -326,6 +394,8 @@ func (x *SK3DNode) SetPointOfView(pointOfView *scenekit.SCNNode) {
 	x.inner.SetPointOfView(pointOfView)
 }
 
+// @property autoenablesDefaultLighting @abstract Specifies whether the receiver should automatically light up scenes that have no light source. The default is NO. @discussion When enabled, a diffuse light is automatically added and placed while rendering scenes that have no light or only ambient lights.
+//
 // AutoenablesDefaultLighting calls the underlying AutoenablesDefaultLighting.
 func (x *SK3DNode) AutoenablesDefaultLighting() bool {
 	return x.inner.AutoenablesDefaultLighting()

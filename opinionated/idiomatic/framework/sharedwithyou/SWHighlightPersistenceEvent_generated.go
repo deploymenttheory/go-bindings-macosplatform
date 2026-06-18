@@ -29,6 +29,8 @@ func HighlightPersistenceEventFromID(id objc.ID) *HighlightPersistenceEvent {
 	return &HighlightPersistenceEvent{inner: raw.SWHighlightPersistenceEventFromID(id)}
 }
 
+// Initializes a highlight persistence event object when the highlight persistence is changed. @param highlight The object on which the event occurred. @param trigger The trigger persistence event for the highlight.
+//
 // NewHighlightPersistenceEventWithHighlightTrigger creates a new [HighlightPersistenceEvent].
 func NewHighlightPersistenceEventWithHighlightTrigger(highlight *raw.SWHighlight, trigger SWHighlightPersistenceEventTrigger) *HighlightPersistenceEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWHighlightPersistenceEvent")), objc.RegisterName("alloc"))

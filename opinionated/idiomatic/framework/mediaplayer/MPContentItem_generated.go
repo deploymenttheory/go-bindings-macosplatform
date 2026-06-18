@@ -31,6 +31,8 @@ func ContentItemFromID(id objc.ID) *ContentItem {
 	return &ContentItem{inner: raw.MPContentItemFromID(id)}
 }
 
+// Designated initializer. A unique identifier is required to identify the item for later use.
+//
 // NewContentItemWithIdentifier creates a new [ContentItem].
 func NewContentItemWithIdentifier(identifier string) *ContentItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPContentItem")), objc.RegisterName("alloc"))
@@ -38,54 +40,72 @@ func NewContentItemWithIdentifier(identifier string) *ContentItem {
 	return &ContentItem{inner: raw.MPContentItemFromID(_id)}
 }
 
+// A title for this item. Usually this would be the track name, if representing a song, the episode name of a podcast, etc.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *ContentItem) WithTitle(title string) *ContentItem {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// A subtitle for this item. If this were representing a song, this would usually be the artist or composer.
+//
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *ContentItem) WithSubtitle(subtitle string) *ContentItem {
 	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
 	return x
 }
 
+// Artwork for this item. Examples of artwork for a content item are the album cover for a song, or a movie poster for a movie.
+//
 // WithArtwork sets the artwork property and returns the receiver for chaining.
 func (x *ContentItem) WithArtwork(artwork *MediaItemArtwork) *ContentItem {
 	x.inner.SetArtwork(artwork.Unwrap())
 	return x
 }
 
+// Represents the current playback progress of the item. 0.0 = not watched/listened/viewed, 1.0 = fully watched/listened/viewed Default is -1.0 (no progress indicator shown)
+//
 // WithPlaybackProgress sets the playbackProgress property and returns the receiver for chaining.
 func (x *ContentItem) WithPlaybackProgress(playbackProgress float32) *ContentItem {
 	x.inner.SetPlaybackProgress(playbackProgress)
 	return x
 }
 
+// Represents whether this content item is streaming content, i.e. from the cloud where the content is not stored locally.
+//
 // WithStreamingContent sets the streamingContent property and returns the receiver for chaining.
 func (x *ContentItem) WithStreamingContent(streamingContent bool) *ContentItem {
 	x.inner.SetStreamingContent(streamingContent)
 	return x
 }
 
+// Represents whether this content item is explicit content
+//
 // WithExplicitContent sets the explicitContent property and returns the receiver for chaining.
 func (x *ContentItem) WithExplicitContent(explicitContent bool) *ContentItem {
 	x.inner.SetExplicitContent(explicitContent)
 	return x
 }
 
+// Represents whether the content item is a container that may contain other content items, e.g. an album or a playlist.
+//
 // WithContainer sets the container property and returns the receiver for chaining.
 func (x *ContentItem) WithContainer(container bool) *ContentItem {
 	x.inner.SetContainer(container)
 	return x
 }
 
+// Represents whether the content item is actionable from a playback perspective. Albums are playable, for example, because selecting an album for playback means the app should play each song in the album in order. An example of a content item that may not be playable is a genre, since an app experience typically doesn't involve selecting an entire genre for playback.
+//
 // WithPlayable sets the playable property and returns the receiver for chaining.
 func (x *ContentItem) WithPlayable(playable bool) *ContentItem {
 	x.inner.SetPlayable(playable)
 	return x
 }
 
+// A unique identifier for this content item. (Required)
+//
 // Identifier calls the underlying Identifier.
 func (x *ContentItem) Identifier() string {
 	_r := x.inner.Identifier()
@@ -95,6 +115,8 @@ func (x *ContentItem) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A title for this item. Usually this would be the track name, if representing a song, the episode name of a podcast, etc.
+//
 // Title calls the underlying Title.
 func (x *ContentItem) Title() string {
 	_r := x.inner.Title()
@@ -109,6 +131,8 @@ func (x *ContentItem) SetTitle(title string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// A subtitle for this item. If this were representing a song, this would usually be the artist or composer.
+//
 // Subtitle calls the underlying Subtitle.
 func (x *ContentItem) Subtitle() string {
 	_r := x.inner.Subtitle()
@@ -123,6 +147,8 @@ func (x *ContentItem) SetSubtitle(subtitle string) {
 	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
 }
 
+// Artwork for this item. Examples of artwork for a content item are the album cover for a song, or a movie poster for a movie.
+//
 // Artwork calls the underlying Artwork.
 func (x *ContentItem) Artwork() *MediaItemArtwork {
 	_r := x.inner.Artwork()
@@ -137,6 +163,8 @@ func (x *ContentItem) SetArtwork(artwork *raw.MPMediaItemArtwork) {
 	x.inner.SetArtwork(artwork)
 }
 
+// Represents the current playback progress of the item. 0.0 = not watched/listened/viewed, 1.0 = fully watched/listened/viewed Default is -1.0 (no progress indicator shown)
+//
 // PlaybackProgress calls the underlying PlaybackProgress.
 func (x *ContentItem) PlaybackProgress() float32 {
 	return x.inner.PlaybackProgress()
@@ -147,6 +175,8 @@ func (x *ContentItem) SetPlaybackProgress(playbackProgress float32) {
 	x.inner.SetPlaybackProgress(playbackProgress)
 }
 
+// Represents whether this content item is streaming content, i.e. from the cloud where the content is not stored locally.
+//
 // IsStreamingContent calls the underlying IsStreamingContent.
 func (x *ContentItem) IsStreamingContent() bool {
 	return x.inner.IsStreamingContent()
@@ -157,6 +187,8 @@ func (x *ContentItem) SetStreamingContent(streamingContent bool) {
 	x.inner.SetStreamingContent(streamingContent)
 }
 
+// Represents whether this content item is explicit content
+//
 // IsExplicitContent calls the underlying IsExplicitContent.
 func (x *ContentItem) IsExplicitContent() bool {
 	return x.inner.IsExplicitContent()
@@ -167,6 +199,8 @@ func (x *ContentItem) SetExplicitContent(explicitContent bool) {
 	x.inner.SetExplicitContent(explicitContent)
 }
 
+// Represents whether the content item is a container that may contain other content items, e.g. an album or a playlist.
+//
 // IsContainer calls the underlying IsContainer.
 func (x *ContentItem) IsContainer() bool {
 	return x.inner.IsContainer()
@@ -177,6 +211,8 @@ func (x *ContentItem) SetContainer(container bool) {
 	x.inner.SetContainer(container)
 }
 
+// Represents whether the content item is actionable from a playback perspective. Albums are playable, for example, because selecting an album for playback means the app should play each song in the album in order. An example of a content item that may not be playable is a genre, since an app experience typically doesn't involve selecting an entire genre for playback.
+//
 // IsPlayable calls the underlying IsPlayable.
 func (x *ContentItem) IsPlayable() bool {
 	return x.inner.IsPlayable()

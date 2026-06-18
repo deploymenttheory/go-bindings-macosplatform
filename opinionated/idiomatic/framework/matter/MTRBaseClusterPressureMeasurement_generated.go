@@ -35,6 +35,8 @@ func MTRBaseClusterPressureMeasurementFromID(id objc.ID) *MTRBaseClusterPressure
 	return &MTRBaseClusterPressureMeasurement{inner: raw.MTRBaseClusterPressureMeasurementFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterPressureMeasurementWithDeviceEndpointIDQueue creates a new [MTRBaseClusterPressureMeasurement].
 func NewMTRBaseClusterPressureMeasurementWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterPressureMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterPressureMeasurement")), objc.RegisterName("alloc"))

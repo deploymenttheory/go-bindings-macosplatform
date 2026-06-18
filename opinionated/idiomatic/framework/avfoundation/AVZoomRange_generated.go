@@ -35,16 +35,22 @@ func NewZoomRange() *ZoomRange {
 	return &ZoomRange{inner: raw.AVZoomRangeFromID(_id)}
 }
 
+// @method containsZoomFactor: @abstract Tests if a given zoom factor is within the zoom range. @param zoomFactor The zoom factor to test. @result Returns YES if the given zoom factor is within the zoom range, NO otherwise. @discussion Note that the zoom ranges are inclusive.
+//
 // ContainsZoomFactor calls the underlying ContainsZoomFactor.
 func (x *ZoomRange) ContainsZoomFactor(zoomFactor float64) bool {
 	return x.inner.ContainsZoomFactor(zoomFactor)
 }
 
+// @property minZoomFactor @abstract A CGFloat indicating the minimum zoom factor supported by this range.
+//
 // MinZoomFactor calls the underlying MinZoomFactor.
 func (x *ZoomRange) MinZoomFactor() float64 {
 	return x.inner.MinZoomFactor()
 }
 
+// @property maxZoomFactor @abstract A CGFloat indicating the maximum zoom factor supported by this range.
+//
 // MaxZoomFactor calls the underlying MaxZoomFactor.
 func (x *ZoomRange) MaxZoomFactor() float64 {
 	return x.inner.MaxZoomFactor()

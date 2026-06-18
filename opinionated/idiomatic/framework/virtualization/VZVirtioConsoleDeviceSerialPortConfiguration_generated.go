@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration object that requests the creation of a console device to communicate with the guest system.
+//
 // VirtioConsoleDeviceSerialPortConfiguration wraps [raw.VZVirtioConsoleDeviceSerialPortConfiguration] with a fluent Go API.
 type VirtioConsoleDeviceSerialPortConfiguration struct {
 	inner *raw.VZVirtioConsoleDeviceSerialPortConfiguration
@@ -37,6 +39,8 @@ func NewVirtioConsoleDeviceSerialPortConfiguration() *VirtioConsoleDeviceSerialP
 	return &VirtioConsoleDeviceSerialPortConfiguration{inner: raw.VZVirtioConsoleDeviceSerialPortConfigurationFromID(_id)}
 }
 
+// The object that defines how the configuration of the virtual machine’s serial port interfaces.
+//
 // WithAttachment sets the attachment property and returns the receiver for chaining.
 func (x *VirtioConsoleDeviceSerialPortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsoleDeviceSerialPortConfiguration {
 	x.inner.VZSerialPortConfiguration.SetAttachment(attachment.asSerialPortAttachment())

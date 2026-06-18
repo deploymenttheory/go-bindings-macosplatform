@@ -61,36 +61,48 @@ func NewChartDescriptorWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorA
 	return &ChartDescriptor{inner: raw.AXChartDescriptorFromID(_id)}
 }
 
+// The title of the chart.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *ChartDescriptor) WithTitle(title string) *ChartDescriptor {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// An attributed version of the title of the chart. When set, this will be used instead of `title`.
+//
 // WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
 func (x *ChartDescriptor) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *ChartDescriptor {
 	x.inner.SetAttributedTitle(attributedTitle)
 	return x
 }
 
+// A natural language summary of the key message or features of the chart. e.g. "The chart shows that fuel efficiency decreases as vehicle weight increases."
+//
 // WithSummary sets the summary property and returns the receiver for chaining.
 func (x *ChartDescriptor) WithSummary(summary string) *ChartDescriptor {
 	x.inner.SetSummary(foundation.NSStringStringWithUTF8String(summary))
 	return x
 }
 
+// The direction of the chart's X axis.
+//
 // WithContentDirection sets the contentDirection property and returns the receiver for chaining.
 func (x *ChartDescriptor) WithContentDirection(contentDirection AXChartDescriptorContentDirection) *ChartDescriptor {
 	x.inner.SetContentDirection(raw.AXChartDescriptorContentDirection(contentDirection))
 	return x
 }
 
+// The bounds of the view area for visually rendering data values if applicable, provided in superview coordinates.
+//
 // WithContentFrame sets the contentFrame property and returns the receiver for chaining.
 func (x *ChartDescriptor) WithContentFrame(contentFrame corefoundation.CGRect) *ChartDescriptor {
 	x.inner.SetContentFrame(contentFrame)
 	return x
 }
 
+// A set of data series descriptors describing each series in the chart.
+//
 // WithSeries sets the collection, converting the Go slice to an NSArray.
 func (x *ChartDescriptor) WithSeries(items ...*raw.AXDataSeriesDescriptor) *ChartDescriptor {
 	if len(items) == 0 {
@@ -109,18 +121,24 @@ func (x *ChartDescriptor) WithSeries(items ...*raw.AXDataSeriesDescriptor) *Char
 	return x
 }
 
+// The axis descriptor for the chart's X axis.
+//
 // WithXAxis sets the xAxis property and returns the receiver for chaining.
 func (x *ChartDescriptor) WithXAxis(xAxis raw.AXDataAxisDescriptor) *ChartDescriptor {
 	x.inner.SetXAxis(xAxis)
 	return x
 }
 
+// The axis descriptor for the chart's Y axis.
+//
 // WithYAxis sets the yAxis property and returns the receiver for chaining.
 func (x *ChartDescriptor) WithYAxis(yAxis *NumericDataAxisDescriptor) *ChartDescriptor {
 	x.inner.SetYAxis(yAxis.Unwrap())
 	return x
 }
 
+// The title of the chart.
+//
 // Title calls the underlying Title.
 func (x *ChartDescriptor) Title() string {
 	_r := x.inner.Title()
@@ -135,6 +153,8 @@ func (x *ChartDescriptor) SetTitle(title string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// An attributed version of the title of the chart. When set, this will be used instead of `title`.
+//
 // AttributedTitle calls the underlying AttributedTitle.
 func (x *ChartDescriptor) AttributedTitle() *foundation.NSAttributedString {
 	return x.inner.AttributedTitle()
@@ -145,6 +165,8 @@ func (x *ChartDescriptor) SetAttributedTitle(attributedTitle *foundation.NSAttri
 	x.inner.SetAttributedTitle(attributedTitle)
 }
 
+// A natural language summary of the key message or features of the chart. e.g. "The chart shows that fuel efficiency decreases as vehicle weight increases."
+//
 // Summary calls the underlying Summary.
 func (x *ChartDescriptor) Summary() string {
 	_r := x.inner.Summary()
@@ -159,6 +181,8 @@ func (x *ChartDescriptor) SetSummary(summary string) {
 	x.inner.SetSummary(foundation.NSStringStringWithUTF8String(summary))
 }
 
+// The direction of the chart's X axis.
+//
 // ContentDirection calls the underlying ContentDirection.
 func (x *ChartDescriptor) ContentDirection() AXChartDescriptorContentDirection {
 	return AXChartDescriptorContentDirection(x.inner.ContentDirection())
@@ -169,6 +193,8 @@ func (x *ChartDescriptor) SetContentDirection(contentDirection AXChartDescriptor
 	x.inner.SetContentDirection(raw.AXChartDescriptorContentDirection(contentDirection))
 }
 
+// The bounds of the view area for visually rendering data values if applicable, provided in superview coordinates.
+//
 // ContentFrame calls the underlying ContentFrame.
 func (x *ChartDescriptor) ContentFrame() corefoundation.CGRect {
 	return x.inner.ContentFrame()
@@ -179,6 +205,8 @@ func (x *ChartDescriptor) SetContentFrame(contentFrame corefoundation.CGRect) {
 	x.inner.SetContentFrame(contentFrame)
 }
 
+// A set of data series descriptors describing each series in the chart.
+//
 // Series returns the collection as a Go slice.
 func (x *ChartDescriptor) Series() []*DataSeriesDescriptor {
 	arr := x.inner.Series()
@@ -195,6 +223,8 @@ func (x *ChartDescriptor) SetSeries(series *foundation.NSArray[*raw.AXDataSeries
 	x.inner.SetSeries(series)
 }
 
+// The axis descriptor for the chart's X axis.
+//
 // XAxis calls the underlying XAxis.
 func (x *ChartDescriptor) XAxis() raw.AXDataAxisDescriptor {
 	return x.inner.XAxis()
@@ -205,6 +235,8 @@ func (x *ChartDescriptor) SetXAxis(xAxis raw.AXDataAxisDescriptor) {
 	x.inner.SetXAxis(xAxis)
 }
 
+// The axis descriptor for the chart's Y axis.
+//
 // YAxis calls the underlying YAxis.
 func (x *ChartDescriptor) YAxis() *NumericDataAxisDescriptor {
 	_r := x.inner.YAxis()
@@ -219,14 +251,25 @@ func (x *ChartDescriptor) SetYAxis(yAxis *raw.AXNumericDataAxisDescriptor) {
 	x.inner.SetYAxis(yAxis)
 }
 
+// Descriptors for additional categorical or numerical axes beyond x and y. For example, in a visual chart, these values might be represented by the size or color of data points.
+//
 // AdditionalAxes calls the underlying AdditionalAxes.
 func (x *ChartDescriptor) AdditionalAxes() *foundation.NSArray[raw.AXDataAxisDescriptor] {
 	return x.inner.AdditionalAxes()
 }
 
 // SetAdditionalAxes calls the underlying SetAdditionalAxes.
-func (x *ChartDescriptor) SetAdditionalAxes(additionalAxes *foundation.NSArray[raw.AXDataAxisDescriptor]) {
-	x.inner.SetAdditionalAxes(additionalAxes)
+func (x *ChartDescriptor) SetAdditionalAxes(additionalAxes ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(additionalAxes))
+	for _i, _v := range additionalAxes {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.AXDataAxisDescriptor]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.AXDataAxisDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetAdditionalAxes(_arg0)
 }
 
 // ChartDescriptorable is the interface implemented by [ChartDescriptor], for mocking and DI.
@@ -257,7 +300,7 @@ type ChartDescriptorable interface {
 	YAxis() *NumericDataAxisDescriptor
 	SetYAxis(yAxis *raw.AXNumericDataAxisDescriptor)
 	AdditionalAxes() *foundation.NSArray[raw.AXDataAxisDescriptor]
-	SetAdditionalAxes(additionalAxes *foundation.NSArray[raw.AXDataAxisDescriptor])
+	SetAdditionalAxes(additionalAxes ...purego.IDer)
 }
 
 var _ ChartDescriptorable = (*ChartDescriptor)(nil)

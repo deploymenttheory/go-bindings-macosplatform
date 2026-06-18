@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Produces 3D cylindrical noise with an infinite number of cylinders-within-cyliners of constantly-increasing radius.
+//
 // CylindersNoiseSource wraps [raw.GKCylindersNoiseSource] with a fluent Go API.
 type CylindersNoiseSource struct {
 	inner *raw.GKCylindersNoiseSource

@@ -37,6 +37,8 @@ func NewWebDataSource() *WebDataSource {
 	return &WebDataSource{inner: raw.WebDataSourceFromID(_id)}
 }
 
+// @method initWithRequest: @abstract The designated initializer for WebDataSource. @param request The request to use in creating a datasource. @result Returns an initialized WebDataSource.
+//
 // NewWebDataSourceWithRequest creates a new [WebDataSource].
 func NewWebDataSourceWithRequest(request *foundation.NSURLRequest) *WebDataSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WebDataSource")), objc.RegisterName("alloc"))
@@ -44,6 +46,8 @@ func NewWebDataSourceWithRequest(request *foundation.NSURLRequest) *WebDataSourc
 	return &WebDataSource{inner: raw.WebDataSourceFromID(_id)}
 }
 
+// method subresourceForURL: @abstract Returns a subresource for a given URL. @param URL The URL of the subresource. @description Returns non-nil if the data source has fully downloaded a subresource with the given URL.
+//
 // SubresourceForURL calls the underlying SubresourceForURL.
 func (x *WebDataSource) SubresourceForURL(uRL string) *WebResource {
 	_r := x.inner.SubresourceForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
@@ -53,21 +57,29 @@ func (x *WebDataSource) SubresourceForURL(uRL string) *WebResource {
 	return &WebResource{inner: _r}
 }
 
+// @method addSubresource: @abstract Adds a subresource to the data source. @param subresource The subresource to be added. @description addSubresource: adds a subresource to the data source's list of subresources. Later, if something causes the data source to load the URL of the subresource, the data source will load the data from the subresource instead of from the network. For example, if one wants to add an image that is already downloaded to a web page, addSubresource: can be called so that the data source uses the downloaded image rather than accessing the network. NOTE: If the data source already has a subresource with the same URL, addSubresource: will replace it.
+//
 // AddSubresource calls the underlying AddSubresource.
 func (x *WebDataSource) AddSubresource(subresource *raw.WebResource) {
 	x.inner.AddSubresource(subresource)
 }
 
+// @property data @abstract Returns the raw data associated with the datasource.  Returns nil if the datasource hasn't loaded any data. @discussion The data will be incomplete until the datasource has completely loaded.
+//
 // Data calls the underlying Data.
 func (x *WebDataSource) Data() *foundation.NSData {
 	return x.inner.Data()
 }
 
+// @property representation @abstract The representation associated with this datasource. Returns nil if the datasource hasn't created its representation. @discussion A representation holds a type specific representation of the datasource's data.  The representation class is determined by mapping a MIME type to a class.  The representation is created once the MIME type of the datasource content has been determined.
+//
 // Representation calls the underlying Representation.
 func (x *WebDataSource) Representation() raw.WebDocumentRepresentation {
 	return x.inner.Representation()
 }
 
+// @property webFrame @abstract The frame that represents this data source.
+//
 // WebFrame calls the underlying WebFrame.
 func (x *WebDataSource) WebFrame() *WebFrame {
 	_r := x.inner.WebFrame()
@@ -77,16 +89,22 @@ func (x *WebDataSource) WebFrame() *WebFrame {
 	return &WebFrame{inner: _r}
 }
 
+// @property request @abstract The request that was used to create this datasource.
+//
 // Request calls the underlying Request.
 func (x *WebDataSource) Request() *foundation.NSMutableURLRequest {
 	return x.inner.Request()
 }
 
+// @property response @abstract The NSURLResponse for the data source.
+//
 // Response calls the underlying Response.
 func (x *WebDataSource) Response() *foundation.NSURLResponse {
 	return x.inner.Response()
 }
 
+// @property textEncodingName @abstract Returns either the override encoding, as set on the WebView for this dataSource or the encoding from the response.
+//
 // TextEncodingName calls the underlying TextEncodingName.
 func (x *WebDataSource) TextEncodingName() string {
 	_r := x.inner.TextEncodingName()
@@ -96,11 +114,15 @@ func (x *WebDataSource) TextEncodingName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property isLoading @abstract Returns YES if there are any pending loads.
+//
 // IsLoading calls the underlying IsLoading.
 func (x *WebDataSource) IsLoading() bool {
 	return x.inner.IsLoading()
 }
 
+// @property pageTitle @abstract The page title or nil.
+//
 // PageTitle calls the underlying PageTitle.
 func (x *WebDataSource) PageTitle() string {
 	_r := x.inner.PageTitle()
@@ -110,11 +132,15 @@ func (x *WebDataSource) PageTitle() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property unreachableURL @abstract The unreachableURL for which this dataSource is showing alternate content, or nil. @discussion This will be non-nil only for dataSources created by calls to the WebFrame method loadAlternateHTMLString:baseURL:forUnreachableURL:.
+//
 // UnreachableURL calls the underlying UnreachableURL.
 func (x *WebDataSource) UnreachableURL() *foundation.NSURL {
 	return x.inner.UnreachableURL()
 }
 
+// @property webArchive @abstract A WebArchive representing the data source, its subresources and child frames. @description This method constructs a WebArchive using the original downloaded data. In the case of HTML, if the current state of the document is preferred, webArchive should be called on the DOM document instead.
+//
 // WebArchive calls the underlying WebArchive.
 func (x *WebDataSource) WebArchive() *WebArchive {
 	_r := x.inner.WebArchive()
@@ -124,6 +150,8 @@ func (x *WebDataSource) WebArchive() *WebArchive {
 	return &WebArchive{inner: _r}
 }
 
+// @property mainResource @abstract A WebResource representing the data source. @description This method constructs a WebResource using the original downloaded data. This method can be used to construct a WebArchive in case the archive returned by WebDataSource's webArchive isn't sufficient.
+//
 // MainResource calls the underlying MainResource.
 func (x *WebDataSource) MainResource() *WebResource {
 	_r := x.inner.MainResource()
@@ -133,6 +161,8 @@ func (x *WebDataSource) MainResource() *WebResource {
 	return &WebResource{inner: _r}
 }
 
+// @property subresources @abstract All the subresources associated with the data source. @description The returned array only contains subresources that have fully downloaded.
+//
 // Subresources calls the underlying Subresources.
 func (x *WebDataSource) Subresources() *foundation.NSArray[objc.ID] {
 	return x.inner.Subresources()

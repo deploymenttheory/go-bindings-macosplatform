@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The platform configuration for booting macOS on Apple silicon.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzmacplatformconfiguration
 type VZMacPlatformConfiguration struct {
 	VZPlatformConfiguration
@@ -35,6 +37,7 @@ func VZMacPlatformConfigurationFromID(id objc.ID) *VZMacPlatformConfiguration {
 	return o
 }
 
+// Creates a new Mac platform configuration.
 func (o *VZMacPlatformConfiguration) Init() *VZMacPlatformConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacPlatformConfigurationSelInit)
 	if _ret != 0 {

@@ -36,36 +36,48 @@ func NewParameterGroup() *ParameterGroup {
 	return &ParameterGroup{inner: raw.AUParameterGroupFromID(_id)}
 }
 
+// @brief		Called when a parameter changes value. @discussion This block, used only in an audio unit implementation, receives all externally-generated changes to parameter values. It should store the new value in its audio signal processing state (assuming that that state is separate from the AUParameter object).
+//
 // WithImplementorValueObserver sets the implementorValueObserver property and returns the receiver for chaining.
 func (x *ParameterGroup) WithImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32)) *ParameterGroup {
 	x.inner.AUParameterNode.SetImplementorValueObserver(implementorValueObserver)
 	return x
 }
 
+// @brief		Called when a value of a parameter in the tree is known to have a stale value needing to be refreshed. @discussion The audio unit should return the current value for this parameter; the AUParameterNode will store the value.
+//
 // WithImplementorValueProvider sets the implementorValueProvider property and returns the receiver for chaining.
 func (x *ParameterGroup) WithImplementorValueProvider(implementorValueProvider objc.Block) *ParameterGroup {
 	x.inner.AUParameterNode.SetImplementorValueProvider(implementorValueProvider)
 	return x
 }
 
+// Called to provide string representations of parameter values. If value is nil, the callback uses the current value of the parameter.
+//
 // WithImplementorStringFromValueCallback sets the implementorStringFromValueCallback property and returns the receiver for chaining.
 func (x *ParameterGroup) WithImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) *ParameterGroup {
 	x.inner.AUParameterNode.SetImplementorStringFromValueCallback(implementorStringFromValueCallback)
 	return x
 }
 
+// Called to convert string to numeric representations of parameter values.
+//
 // WithImplementorValueFromStringCallback sets the implementorValueFromStringCallback property and returns the receiver for chaining.
 func (x *ParameterGroup) WithImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) *ParameterGroup {
 	x.inner.AUParameterNode.SetImplementorValueFromStringCallback(implementorValueFromStringCallback)
 	return x
 }
 
+// Called to obtain an abbreviated version of a parameter or group name.
+//
 // WithImplementorDisplayNameWithLengthCallback sets the implementorDisplayNameWithLengthCallback property and returns the receiver for chaining.
 func (x *ParameterGroup) WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *ParameterGroup {
 	x.inner.AUParameterNode.SetImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback)
 	return x
 }
 
+// The group's child nodes (AUParameterGroupNode).
+//
 // Children returns the collection as a Go slice.
 func (x *ParameterGroup) Children() []*ParameterNode {
 	arr := x.inner.Children()
@@ -77,6 +89,8 @@ func (x *ParameterGroup) Children() []*ParameterNode {
 	})
 }
 
+// Returns a flat array of all parameters in the group, including those in child groups.
+//
 // AllParameters returns the collection as a Go slice.
 func (x *ParameterGroup) AllParameters() []*Parameter {
 	arr := x.inner.AllParameters()

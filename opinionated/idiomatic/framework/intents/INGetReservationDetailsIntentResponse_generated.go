@@ -82,8 +82,17 @@ func (x *GetReservationDetailsIntentResponse) Reservations() []*Reservation {
 }
 
 // SetReservations calls the underlying SetReservations.
-func (x *GetReservationDetailsIntentResponse) SetReservations(reservations *foundation.NSArray[*raw.INReservation]) {
-	x.inner.SetReservations(reservations)
+func (x *GetReservationDetailsIntentResponse) SetReservations(reservations ...ReservationProvider) {
+	_ptrs := make([]objc.ID, len(reservations))
+	for _i, _v := range reservations {
+		_ptrs[_i] = _v.asReservation().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.INReservation]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.INReservation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetReservations(_arg0)
 }
 
 func (x *GetReservationDetailsIntentResponse) asIntentResponse() *raw.INIntentResponse {
@@ -97,7 +106,7 @@ type GetReservationDetailsIntentResponseable interface {
 	WithUserActivity(userActivity *foundation.NSUserActivity) *GetReservationDetailsIntentResponse
 	Code() INGetReservationDetailsIntentResponseCode
 	Reservations() []*Reservation
-	SetReservations(reservations *foundation.NSArray[*raw.INReservation])
+	SetReservations(reservations ...ReservationProvider)
 }
 
 var _ GetReservationDetailsIntentResponseable = (*GetReservationDetailsIntentResponse)(nil)

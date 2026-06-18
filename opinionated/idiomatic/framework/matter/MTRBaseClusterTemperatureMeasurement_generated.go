@@ -35,6 +35,8 @@ func MTRBaseClusterTemperatureMeasurementFromID(id objc.ID) *MTRBaseClusterTempe
 	return &MTRBaseClusterTemperatureMeasurement{inner: raw.MTRBaseClusterTemperatureMeasurementFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterTemperatureMeasurementWithDeviceEndpointIDQueue creates a new [MTRBaseClusterTemperatureMeasurement].
 func NewMTRBaseClusterTemperatureMeasurementWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterTemperatureMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterTemperatureMeasurement")), objc.RegisterName("alloc"))

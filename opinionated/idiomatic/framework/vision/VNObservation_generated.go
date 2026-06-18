@@ -37,16 +37,22 @@ func NewObservation() *Observation {
 	return &Observation{inner: raw.VNObservationFromID(_id)}
 }
 
+// @brief The unique identifier assigned to an observation.
+//
 // Uuid calls the underlying Uuid.
 func (x *Observation) Uuid() *foundation.NSUUID {
 	return x.inner.Uuid()
 }
 
+// @brief The level of confidence normalized to [0, 1] where 1 is most confident. The only exception is results coming from VNCoreMLRequest, where confidence values are forwarded as is from relevant CoreML models @discussion Confidence can always be returned as 1.0 if confidence is not supported or has no meaning
+//
 // Confidence calls the underlying Confidence.
 func (x *Observation) Confidence() float32 {
 	return x.inner.Confidence()
 }
 
+// @brief The duration of the observation reporting when first detected and how long it is valid. @discussion The duration of the observation when used with a sequence of buffers. If a request does not support a timeRange or the timeRange is not known, the start time and duration will be set to 0.
+//
 // TimeRange calls the underlying TimeRange.
 func (x *Observation) TimeRange() coremedia.CMTimeRange {
 	return x.inner.TimeRange()

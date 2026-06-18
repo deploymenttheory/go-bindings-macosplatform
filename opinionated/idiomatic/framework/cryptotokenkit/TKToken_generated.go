@@ -30,6 +30,8 @@ func TokenFromID(id objc.ID) *Token {
 	return &Token{inner: raw.TKTokenFromID(id)}
 }
 
+// @discussion Initializes token instance @param tokenDriver Creating token driver. @param instanceID Unique, persistent identifier of this token.
+//
 // NewTokenWithTokenDriverInstanceID creates a new [Token].
 func NewTokenWithTokenDriverInstanceID(tokenDriver *raw.TKTokenDriver, instanceID *foundation.NSString) *Token {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKToken")), objc.RegisterName("alloc"))
@@ -62,6 +64,8 @@ func (x *Token) SetDelegate(delegate raw.TKTokenDelegate) {
 	x.inner.SetDelegate(delegate)
 }
 
+// Token configuration associated with this token instance.
+//
 // Configuration calls the underlying Configuration.
 func (x *Token) Configuration() *TokenConfiguration {
 	_r := x.inner.Configuration()
@@ -71,6 +75,8 @@ func (x *Token) Configuration() *TokenConfiguration {
 	return &TokenConfiguration{inner: _r}
 }
 
+// @discussion Keychain contents (certificate and key items) representing this token.
+//
 // KeychainContents calls the underlying KeychainContents.
 func (x *Token) KeychainContents() *TokenKeychainContents {
 	_r := x.inner.KeychainContents()

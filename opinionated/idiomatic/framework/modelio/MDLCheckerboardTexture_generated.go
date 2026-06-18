@@ -50,6 +50,8 @@ func (x *CheckerboardTexture) WithIsCube(isCube bool) *CheckerboardTexture {
 	return x
 }
 
+// hasAlphaValues @summary Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
+//
 // WithHasAlphaValues sets the hasAlphaValues property and returns the receiver for chaining.
 func (x *CheckerboardTexture) WithHasAlphaValues(hasAlphaValues bool) *CheckerboardTexture {
 	x.inner.MDLTexture.SetHasAlphaValues(hasAlphaValues)

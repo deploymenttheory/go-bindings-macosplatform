@@ -38,6 +38,8 @@ func NewExternalSyncDeviceDiscoverySession() *ExternalSyncDeviceDiscoverySession
 	return &ExternalSyncDeviceDiscoverySession{inner: raw.AVExternalSyncDeviceDiscoverySessionFromID(_id)}
 }
 
+// An array of external sync devices connected to this host. The list is updated when external sync devices are connected to the host and they remain in the list until they become unavailable. This property is key-value observable.
+//
 // Devices returns the collection as a Go slice.
 func (x *ExternalSyncDeviceDiscoverySession) Devices() []*ExternalSyncDevice {
 	arr := x.inner.Devices()

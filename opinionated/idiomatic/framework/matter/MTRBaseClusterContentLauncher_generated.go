@@ -33,6 +33,8 @@ func MTRBaseClusterContentLauncherFromID(id objc.ID) *MTRBaseClusterContentLaunc
 	return &MTRBaseClusterContentLauncher{inner: raw.MTRBaseClusterContentLauncherFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterContentLauncherWithDeviceEndpointIDQueue creates a new [MTRBaseClusterContentLauncher].
 func NewMTRBaseClusterContentLauncherWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterContentLauncher {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterContentLauncher")), objc.RegisterName("alloc"))
@@ -47,6 +49,8 @@ func NewMTRBaseClusterContentLauncherWithDeviceEndpointQueue(device *raw.MTRBase
 	return &MTRBaseClusterContentLauncher{inner: raw.MTRBaseClusterContentLauncherFromID(_id)}
 }
 
+// Command LaunchContent Upon receipt, this SHALL launch the specified content with optional search criteria.
+//
 // LaunchContentWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterContentLauncher) LaunchContentWithParamsCompletion(ctx context.Context, params *raw.MTRContentLauncherClusterLaunchContentParams) (*MTRContentLauncherClusterLauncherResponseParams, error) {
 	type _result struct {
@@ -73,6 +77,8 @@ func (x *MTRBaseClusterContentLauncher) LaunchContentWithParamsCompletion(ctx co
 	}
 }
 
+// Command LaunchURL Upon receipt, this SHALL launch content from the specified URL.
+//
 // LaunchURLWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterContentLauncher) LaunchURLWithParamsCompletion(ctx context.Context, params *raw.MTRContentLauncherClusterLaunchURLParams) (*MTRContentLauncherClusterLauncherResponseParams, error) {
 	type _result struct {

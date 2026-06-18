@@ -32,6 +32,8 @@ func MatrixRandomMTGP32FromID(id objc.ID) *MatrixRandomMTGP32 {
 	return &MatrixRandomMTGP32{inner: raw.MPSMatrixRandomMTGP32FromID(id)}
 }
 
+// @abstract   initialize a MPSMatrixRandomMTGP32 filter to generate 32-bit unsigned integer values with an initial seed of 0. @param      device          The device the filter will run on
+//
 // NewMatrixRandomMTGP32WithDevice creates a new [MatrixRandomMTGP32].
 func NewMatrixRandomMTGP32WithDevice(device metal.MTLDevice) *MatrixRandomMTGP32 {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixRandomMTGP32")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewMatrixRandomMTGP32WithDevice(device metal.MTLDevice) *MatrixRandomMTGP32
 	return &MatrixRandomMTGP32{inner: raw.MPSMatrixRandomMTGP32FromID(_id)}
 }
 
+// @abstract   initialize a MPSMatrixRandomMTGP32 filter @param      device                  The device the filter will run on @param      destinationDataType     The data type of the result. @param      seed                    The seed to initialize the random number generators with. @param      distributionDescriptor  A descriptor containing information about the distribution.
+//
 // NewMatrixRandomMTGP32WithDeviceDestinationDataTypeSeedDistributionDescriptor creates a new [MatrixRandomMTGP32].
 func NewMatrixRandomMTGP32WithDeviceDestinationDataTypeSeedDistributionDescriptor(device metal.MTLDevice, destinationDataType mpscore.MPSDataType, seed uint, distributionDescriptor *raw.MPSMatrixRandomDistributionDescriptor) *MatrixRandomMTGP32 {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixRandomMTGP32")), objc.RegisterName("alloc"))
@@ -46,6 +50,8 @@ func NewMatrixRandomMTGP32WithDeviceDestinationDataTypeSeedDistributionDescripto
 	return &MatrixRandomMTGP32{inner: raw.MPSMatrixRandomMTGP32FromID(_id)}
 }
 
+// @abstract   initialize a MPSMatrixRandomMTGP32 filter using a default distribution. @param      device                  The device the filter will run on @param      destinationDataType     The data type of the result. @param      seed                    The seed to initialize the random number generators with.
+//
 // NewMatrixRandomMTGP32WithDeviceDestinationDataTypeSeed creates a new [MatrixRandomMTGP32].
 func NewMatrixRandomMTGP32WithDeviceDestinationDataTypeSeed(device metal.MTLDevice, destinationDataType mpscore.MPSDataType, seed uint) *MatrixRandomMTGP32 {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixRandomMTGP32")), objc.RegisterName("alloc"))
@@ -60,18 +66,24 @@ func NewMatrixRandomMTGP32WithCoderDevice(aDecoder *foundation.NSCoder, device m
 	return &MatrixRandomMTGP32{inner: raw.MPSMatrixRandomMTGP32FromID(_id)}
 }
 
+// @property   batchStart @discussion The starting index in the destination batch.
+//
 // WithBatchStart sets the batchStart property and returns the receiver for chaining.
 func (x *MatrixRandomMTGP32) WithBatchStart(batchStart uint) *MatrixRandomMTGP32 {
 	x.inner.MPSMatrixRandom.SetBatchStart(batchStart)
 	return x
 }
 
+// @property   batchSize @discussion The size of the batch to process.
+//
 // WithBatchSize sets the batchSize property and returns the receiver for chaining.
 func (x *MatrixRandomMTGP32) WithBatchSize(batchSize uint) *MatrixRandomMTGP32 {
 	x.inner.MPSMatrixRandom.SetBatchSize(batchSize)
 	return x
 }
 
+// @abstract   Synchronize internal MTGP32 state between GPU and CPU. @param      commandBuffer       The command buffer on which to encode the synchronization.
+//
 // SynchronizeStateOnCommandBuffer calls the underlying SynchronizeStateOnCommandBuffer.
 func (x *MatrixRandomMTGP32) SynchronizeStateOnCommandBuffer(commandBuffer metal.MTLCommandBuffer) {
 	x.inner.SynchronizeStateOnCommandBuffer(commandBuffer)

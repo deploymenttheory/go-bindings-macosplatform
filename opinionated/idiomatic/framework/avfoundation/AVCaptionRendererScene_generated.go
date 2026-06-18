@@ -36,16 +36,22 @@ func NewCaptionRendererScene() *CaptionRendererScene {
 	return &CaptionRendererScene{inner: raw.AVCaptionRendererSceneFromID(_id)}
 }
 
+// @property timeRange @abstract The time range during which new captions will not be introduced into or existing captions will be retired from the caption scene
+//
 // TimeRange calls the underlying TimeRange.
 func (x *CaptionRendererScene) TimeRange() coremedia.CMTimeRange {
 	return x.inner.TimeRange()
 }
 
+// @property hasActiveCaptions @abstract The scene contains one or more active captions. @discussion Clients should not use this to restrict their drawing and should call renderInContext:atTime: to draw "emptiness". However, this information may be useful for purposes such as scrubbing to times where captions are present, skipping scenes in which no captions are present.
+//
 // HasActiveCaptions calls the underlying HasActiveCaptions.
 func (x *CaptionRendererScene) HasActiveCaptions() bool {
 	return x.inner.HasActiveCaptions()
 }
 
+// @property needsPeriodicRefresh @abstract The scene may have embedded animations or other state where periodic redrawing while playing through this scene is needed. @discussion This property indicates if refreshing should occur if the client is progressing through the content. If the client is not progressing (i.e., it is treating playback as though the rate is 0.0), a single render at the current render time suffices. This property does not prescribe a refresh rate. A client is free to choose a refresh rate corresponding to rates of associated video frames or other timing appropriate for the client.
+//
 // NeedsPeriodicRefresh calls the underlying NeedsPeriodicRefresh.
 func (x *CaptionRendererScene) NeedsPeriodicRefresh() bool {
 	return x.inner.NeedsPeriodicRefresh()

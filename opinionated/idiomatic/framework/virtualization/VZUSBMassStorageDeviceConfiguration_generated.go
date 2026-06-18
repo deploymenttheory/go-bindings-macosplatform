@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The configuration object that represents a USB Mass storage device.
+//
 // USBMassStorageDeviceConfiguration wraps [raw.VZUSBMassStorageDeviceConfiguration] with a fluent Go API.
 type USBMassStorageDeviceConfiguration struct {
 	inner *raw.VZUSBMassStorageDeviceConfiguration
@@ -31,6 +33,8 @@ func USBMassStorageDeviceConfigurationFromID(id objc.ID) *USBMassStorageDeviceCo
 	return &USBMassStorageDeviceConfiguration{inner: raw.VZUSBMassStorageDeviceConfigurationFromID(id)}
 }
 
+// Creates a new storage device configuration with the specified attachment.
+//
 // NewUSBMassStorageDeviceConfigurationWithAttachment creates a new [USBMassStorageDeviceConfiguration].
 func NewUSBMassStorageDeviceConfigurationWithAttachment(attachment *raw.VZStorageDeviceAttachment) *USBMassStorageDeviceConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZUSBMassStorageDeviceConfiguration")), objc.RegisterName("alloc"))

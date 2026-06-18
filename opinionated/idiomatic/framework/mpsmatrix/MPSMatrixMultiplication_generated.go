@@ -31,6 +31,8 @@ func MatrixMultiplicationFromID(id objc.ID) *MatrixMultiplication {
 	return &MatrixMultiplication{inner: raw.MPSMatrixMultiplicationFromID(id)}
 }
 
+// @abstract   Initialize an MPSMatrixMultiplication object on a device for a given size and desired transpose and scale values. @param      device          The device on which the kernel will execute. @param      transposeLeft   A boolean value which indicates if the left input matrix should be used in transposed form.  If 'YES' then op(A) = A**T, otherwise op(A) = A. @param      transposeRight  A boolean value which indicates if the right input matrix should be used in transposed form.  If 'YES' then op(B) = B**T, otherwise op(B) = B. @param      resultRows      The number of rows in the result matrix, M in BLAS GEMM description. @param      resultColumns   The number of columns in the result matrix, N in BLAS GEMM description. @param      interiorColumns The number of columns of the left input matrix after the appropriate transpose operation has been applied. K in BLAS GEMM description. @param      alpha           The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. @param      beta            The scale factor to apply to the initial values of C.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. @return     A valid MPSMatrixMultiplication object or nil, if failure.
+//
 // NewMatrixMultiplicationWithDeviceTransposeLeftTransposeRightResultRowsResultColumnsInteriorColumnsAlphaBeta creates a new [MatrixMultiplication].
 func NewMatrixMultiplicationWithDeviceTransposeLeftTransposeRightResultRowsResultColumnsInteriorColumnsAlphaBeta(device metal.MTLDevice, transposeLeft bool, transposeRight bool, resultRows uint, resultColumns uint, interiorColumns uint, alpha float64, beta float64) *MatrixMultiplication {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixMultiplication")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewMatrixMultiplicationWithDeviceTransposeLeftTransposeRightResultRowsResul
 	return &MatrixMultiplication{inner: raw.MPSMatrixMultiplicationFromID(_id)}
 }
 
+// @abstract   Convenience initialization for a matrix-matrix multiplication with no transpositions, unit scaling of the product, and no accumulation of the result.  The scaling factors alpha and beta are taken to be 1.0 and 0.0 respectively. @param      device          The device on which the kernel will execute. @param      resultRows      The number of rows in the result matrix, M in BLAS GEMM description. @param      resultColumns   The number of columns in the result matrix, N in BLAS GEMM description. @param      interiorColumns The number of columns of the left input matrix. K in BLAS GEMM description. @return     A valid MPSMatrixMultiplication object or nil, if failure.
+//
 // NewMatrixMultiplicationWithDeviceResultRowsResultColumnsInteriorColumns creates a new [MatrixMultiplication].
 func NewMatrixMultiplicationWithDeviceResultRowsResultColumnsInteriorColumns(device metal.MTLDevice, resultRows uint, resultColumns uint, interiorColumns uint) *MatrixMultiplication {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixMultiplication")), objc.RegisterName("alloc"))
@@ -45,41 +49,55 @@ func NewMatrixMultiplicationWithDeviceResultRowsResultColumnsInteriorColumns(dev
 	return &MatrixMultiplication{inner: raw.MPSMatrixMultiplicationFromID(_id)}
 }
 
+// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing (and reading if necessary) results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixMultiplication) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixMultiplication {
 	x.inner.SetResultMatrixOrigin(resultMatrixOrigin)
 	return x
 }
 
+// @property   leftMatrixOrigin @discussion The origin, relative to [0, 0] in the left input matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithLeftMatrixOrigin sets the leftMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixMultiplication) WithLeftMatrixOrigin(leftMatrixOrigin metal.MTLOrigin) *MatrixMultiplication {
 	x.inner.SetLeftMatrixOrigin(leftMatrixOrigin)
 	return x
 }
 
+// @property   rightMatrixOrigin @discussion The origin, relative to [0, 0] in the right input matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithRightMatrixOrigin sets the rightMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixMultiplication) WithRightMatrixOrigin(rightMatrixOrigin metal.MTLOrigin) *MatrixMultiplication {
 	x.inner.SetRightMatrixOrigin(rightMatrixOrigin)
 	return x
 }
 
+// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+//
 // WithBatchStart sets the batchStart property and returns the receiver for chaining.
 func (x *MatrixMultiplication) WithBatchStart(batchStart uint) *MatrixMultiplication {
 	x.inner.SetBatchStart(batchStart)
 	return x
 }
 
+// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.
+//
 // WithBatchSize sets the batchSize property and returns the receiver for chaining.
 func (x *MatrixMultiplication) WithBatchSize(batchSize uint) *MatrixMultiplication {
 	x.inner.SetBatchSize(batchSize)
 	return x
 }
 
+// @abstract   Encode a MPSMatrixMultiplication object to a command buffer. @param      commandBuffer   A valid MTLCommandBuffer to receive the encoded kernel. @param      leftMatrix      A valid MPSMatrix object which specifies the left input matrix. @param      rightMatrix     A valid MPSMatrix object which specifies the right input matrix. @param      resultMatrix    A valid MPSMatrix object which specifies the addend matrix which will also be overwritten by the result. @discussion Certain constraints apply to the sizes of the matrices depending on the transposition operations and sizes requested at initialization time as well as the origins at the time this routine is called: The left input matrix must be large enough to hold an array of size resultRows x interiorColumns elements beginning at leftMatrixOrigin. The right input matrix must be large enough to hold an array of size interiorColumns x resultColumns elements beginning at rightMatrixOrigin. The result matrix must be large enough to hold an array of size resultRows x resultColumns elements beginning at resultMatrixOrigin. Each matrix within the range specified by batchStart and batchSize, which also specifies a valid set of matrices within leftMatrix, rightMatrix, and resultMatrix, will be processed.
+//
 // EncodeToCommandBufferLeftMatrixRightMatrixResultMatrix calls the underlying EncodeToCommandBufferLeftMatrixRightMatrixResultMatrix.
 func (x *MatrixMultiplication) EncodeToCommandBufferLeftMatrixRightMatrixResultMatrix(commandBuffer metal.MTLCommandBuffer, leftMatrix *mpscore.MPSMatrix, rightMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix) {
 	x.inner.EncodeToCommandBufferLeftMatrixRightMatrixResultMatrix(commandBuffer, leftMatrix, rightMatrix, resultMatrix)
 }
 
+// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing (and reading if necessary) results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // ResultMatrixOrigin calls the underlying ResultMatrixOrigin.
 func (x *MatrixMultiplication) ResultMatrixOrigin() metal.MTLOrigin {
 	return x.inner.ResultMatrixOrigin()
@@ -90,6 +108,8 @@ func (x *MatrixMultiplication) SetResultMatrixOrigin(resultMatrixOrigin metal.MT
 	x.inner.SetResultMatrixOrigin(resultMatrixOrigin)
 }
 
+// @property   leftMatrixOrigin @discussion The origin, relative to [0, 0] in the left input matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // LeftMatrixOrigin calls the underlying LeftMatrixOrigin.
 func (x *MatrixMultiplication) LeftMatrixOrigin() metal.MTLOrigin {
 	return x.inner.LeftMatrixOrigin()
@@ -100,6 +120,8 @@ func (x *MatrixMultiplication) SetLeftMatrixOrigin(leftMatrixOrigin metal.MTLOri
 	x.inner.SetLeftMatrixOrigin(leftMatrixOrigin)
 }
 
+// @property   rightMatrixOrigin @discussion The origin, relative to [0, 0] in the right input matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // RightMatrixOrigin calls the underlying RightMatrixOrigin.
 func (x *MatrixMultiplication) RightMatrixOrigin() metal.MTLOrigin {
 	return x.inner.RightMatrixOrigin()
@@ -110,6 +132,8 @@ func (x *MatrixMultiplication) SetRightMatrixOrigin(rightMatrixOrigin metal.MTLO
 	x.inner.SetRightMatrixOrigin(rightMatrixOrigin)
 }
 
+// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+//
 // BatchStart calls the underlying BatchStart.
 func (x *MatrixMultiplication) BatchStart() uint {
 	return x.inner.BatchStart()
@@ -120,6 +144,8 @@ func (x *MatrixMultiplication) SetBatchStart(batchStart uint) {
 	x.inner.SetBatchStart(batchStart)
 }
 
+// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.
+//
 // BatchSize calls the underlying BatchSize.
 func (x *MatrixMultiplication) BatchSize() uint {
 	return x.inner.BatchSize()

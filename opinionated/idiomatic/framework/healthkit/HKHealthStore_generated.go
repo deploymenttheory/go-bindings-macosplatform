@@ -38,32 +38,44 @@ func NewHealthStore() *HealthStore {
 	return &HealthStore{inner: raw.HKHealthStoreFromID(_id)}
 }
 
+// @property      workoutSessionMirroringStartHandler @abstract      Called when a session has started mirroring. @discussion    This property should always be assigned a value promptly after your app is launched, to ensure it is always observing for incoming mirrored workout sessions. If your app is not active when a mirrored session starts, it will be launched in the background and given a one-time permission to start a Live Activity from the background. The assigned block will be executed on an arbitrary background queue.
+//
 // WithWorkoutSessionMirroringStartHandler sets the workoutSessionMirroringStartHandler property and returns the receiver for chaining.
 func (x *HealthStore) WithWorkoutSessionMirroringStartHandler(workoutSessionMirroringStartHandler func(*raw.HKWorkoutSession)) *HealthStore {
 	x.inner.SetWorkoutSessionMirroringStartHandler(workoutSessionMirroringStartHandler)
 	return x
 }
 
+// @method        supportsHealthRecords @abstract      Returns YES if the Health Records feature is available. @discussion    The Health Records feature is not available in all regions but may be present in unsupported regions if accounts have already been configured. This can change as accounts are modified during device restore or synchronization. Call supportsHealthRecords before attempting to request authorization for any clinical types.
+//
 // SupportsHealthRecords calls the underlying SupportsHealthRecords.
 func (x *HealthStore) SupportsHealthRecords() bool {
 	return x.inner.SupportsHealthRecords()
 }
 
+// @method        authorizationStatusForType: @abstract      Returns the application's authorization status for the given object type.
+//
 // AuthorizationStatusForType calls the underlying AuthorizationStatusForType.
 func (x *HealthStore) AuthorizationStatusForType(type_ *raw.HKObjectType) HKAuthorizationStatus {
 	return HKAuthorizationStatus(x.inner.AuthorizationStatusForType(type_))
 }
 
+// @method        requestAuthorizationToShareTypes:readTypes:completion: @abstract      Prompts the user to authorize the application for reading and saving objects of the given types. @discussion    Before attempting to execute queries or save objects, the application should first request authorization from the user to read and share every type of object for which the application may require access. The request is performed asynchronously and its completion will be executed on an arbitrary background queue after the user has responded.  If the user has already chosen whether to grant the application access to all of the types provided, then the completion will be called without prompting the user. The success parameter of the completion indicates whether prompting the user, if necessary, completed successfully and was not cancelled by the user.  It does NOT indicate whether the application was granted authorization. To customize the messages displayed on the authorization sheet, set the following keys in your app's Info.plist file. Set the NSHealthShareUsageDescription key to customize the message for reading data. Set the NSHealthUpdateUsageDescription key to customize the message for writing data.
+//
 // RequestAuthorizationToShareTypesReadTypesCompletion calls the underlying RequestAuthorizationToShareTypesReadTypesCompletion.
 func (x *HealthStore) RequestAuthorizationToShareTypesReadTypesCompletion(typesToShare *foundation.NSSet[*raw.HKSampleType], typesToRead *foundation.NSSet[*raw.HKObjectType], completion func(bool, unsafe.Pointer)) {
 	x.inner.RequestAuthorizationToShareTypesReadTypesCompletion(typesToShare, typesToRead, completion)
 }
 
+// @method        requestPerObjectReadAuthorizationForType:predicate:completion: @abstract      For types that support per object authorization (like vision prescriptions), prompts the user to select the objects for which they want to grant your app access. @discussion    Before attempting to execute queries, the application should first request authorization from the user to read objects for which the application may require access. The request is performed asynchronously, and its completion will be executed on an arbitrary background queue after the user has responded. The user will always be prompted to provide access to objects regardless of whether access had been previously provided. The user can choose to toggle each object's access with each prompt. The success parameter of the completion indicates whether prompting the user completed successfully and was not cancelled. It does NOT indicate whether the application was granted authorization.
+//
 // RequestPerObjectReadAuthorizationForTypePredicateCompletion calls the underlying RequestPerObjectReadAuthorizationForTypePredicateCompletion.
 func (x *HealthStore) RequestPerObjectReadAuthorizationForTypePredicateCompletion(objectType *raw.HKObjectType, predicate *foundation.NSPredicate, completion func(bool, unsafe.Pointer)) {
 	x.inner.RequestPerObjectReadAuthorizationForTypePredicateCompletion(objectType, predicate, completion)
 }
 
+// @method        getRequestStatusForAuthorizationToShareTypes:readTypes:completion: @abstract      Determines whether requesting authorization for the given types is necessary. @discussion    Applications may call this method to determine whether the user would be prompted for authorization if the same collections of types are passed to requestAuthorizationToShareTypes:readTypes:completion:. This determination is performed asynchronously and its completion will be executed on an arbitrary background queue.
+//
 // GetRequestStatusForAuthorizationToShareTypesReadTypesCompletion calls the underlying GetRequestStatusForAuthorizationToShareTypesReadTypesCompletion.
 func (x *HealthStore) GetRequestStatusForAuthorizationToShareTypesReadTypesCompletion(typesToShare *foundation.NSSet[*raw.HKSampleType], typesToRead *foundation.NSSet[*raw.HKObjectType], completion func(HKAuthorizationRequestStatus, unsafe.Pointer)) {
 	x.inner.GetRequestStatusForAuthorizationToShareTypesReadTypesCompletion(typesToShare, typesToRead, func(_a0 raw.HKAuthorizationRequestStatus, _a1 unsafe.Pointer) {
@@ -71,51 +83,71 @@ func (x *HealthStore) GetRequestStatusForAuthorizationToShareTypesReadTypesCompl
 	})
 }
 
+// @method        handleAuthorizationForExtensionWithCompletion: @abstract      Prompts the user to authorize the application for reading and saving objects. @discussion    When an app extension calls requestAuthorizationToShareTypes:readTypes:completion:, the parent application is responsible for calling this method to prompt the user to authorize the app and its extensions for the types that the extension requested access to. The request is performed asynchronously and its completion will be executed on an arbitrary background queue after the user has responded.  The success parameter of the completion indicates whether prompting the user, if necessary, completed successfully and was not cancelled by the user.  It does NOT indicate whether the application was granted authorization.
+//
 // HandleAuthorizationForExtensionWithCompletion calls the underlying HandleAuthorizationForExtensionWithCompletion.
 func (x *HealthStore) HandleAuthorizationForExtensionWithCompletion(completion func(bool, unsafe.Pointer)) {
 	x.inner.HandleAuthorizationForExtensionWithCompletion(completion)
 }
 
+// @method        earliestPermittedSampleDate @abstract      Samples prior to the earliestPermittedSampleDate cannot be saved or queried. @discussion    On some platforms, only samples with end dates newer than the value returned by earliestPermittedSampleDate may be saved or retrieved.
+//
 // EarliestPermittedSampleDate calls the underlying EarliestPermittedSampleDate.
 func (x *HealthStore) EarliestPermittedSampleDate() *foundation.NSDate {
 	return x.inner.EarliestPermittedSampleDate()
 }
 
+// @method        saveObject:withCompletion: @abstract      Saves an HKObject. @discussion    After an object is saved, on subsequent retrievals the sourceRevision property of the object will be set to the HKSourceRevision representing the version of the application that saved it. If the object has an HKObjectType property, then in order to save an object successfully the application must first request authorization to share objects with that type.  Saving an object with the same unique identifier as another object that has already been saved will fail.  When the application attempts to save multiple objects, if any single object cannot be saved then none of the objects will be saved. The operation will fail if the objects array contains samples with endDates that are older than the date returned by earliestPermittedSampleDate. This operation is performed asynchronously and the completion will be executed on an arbitrary background queue.
+//
 // SaveObjectWithCompletion calls the underlying SaveObjectWithCompletion.
 func (x *HealthStore) SaveObjectWithCompletion(object *raw.HKObject, completion func(bool, unsafe.Pointer)) {
 	x.inner.SaveObjectWithCompletion(object, completion)
 }
 
+// @method        saveObjects:withCompletion: @abstract      Saves an array of HKObjects. @discussion    See discussion of saveObject:withCompletion:.
+//
 // SaveObjectsWithCompletion calls the underlying SaveObjectsWithCompletion.
 func (x *HealthStore) SaveObjectsWithCompletion(objects *foundation.NSArray[*raw.HKObject], completion func(bool, unsafe.Pointer)) {
 	x.inner.SaveObjectsWithCompletion(objects, completion)
 }
 
+// @method        deleteObject:withCompletion: @abstract      Deletes a single HKObject from the HealthKit database. @discussion    See deleteObjects:withCompletion:.
+//
 // DeleteObjectWithCompletion calls the underlying DeleteObjectWithCompletion.
 func (x *HealthStore) DeleteObjectWithCompletion(object *raw.HKObject, completion func(bool, unsafe.Pointer)) {
 	x.inner.DeleteObjectWithCompletion(object, completion)
 }
 
+// @method        deleteObjects:withCompletion: @abstract      Deletes multiple HKObjects from the HealthKit database. @discussion    An application may only delete objects that it previously saved.  This operation is performed asynchronously and the completion will be executed on an arbitrary background queue.
+//
 // DeleteObjectsWithCompletion calls the underlying DeleteObjectsWithCompletion.
 func (x *HealthStore) DeleteObjectsWithCompletion(objects *foundation.NSArray[*raw.HKObject], completion func(bool, unsafe.Pointer)) {
 	x.inner.DeleteObjectsWithCompletion(objects, completion)
 }
 
+// @method        deleteObjectsOfType:predicate:withCompletion: @abstract      Deletes all objects matching the given predicate from the HealthKit database. @discussion    An application may only delete objects that it previously saved.  This operation is performed asynchronously and the completion will be executed on an arbitrary background queue.
+//
 // DeleteObjectsOfTypePredicateWithCompletion calls the underlying DeleteObjectsOfTypePredicateWithCompletion.
 func (x *HealthStore) DeleteObjectsOfTypePredicateWithCompletion(objectType *raw.HKObjectType, predicate *foundation.NSPredicate, completion func(bool, uint, unsafe.Pointer)) {
 	x.inner.DeleteObjectsOfTypePredicateWithCompletion(objectType, predicate, completion)
 }
 
+// @method        executeQuery: @abstract      Begins executing the given query. @discussion    After executing a query, the completion, update, and/or results handlers of that query will be invoked asynchronously on an arbitrary background queue as results become available.  Errors that prevent a query from executing will be delivered to one of the query's handlers.  Which handler the error will be delivered to is defined by the HKQuery subclass. Each HKQuery instance may only be executed once and calling this method with a currently executing query or one that was previously executed will result in an exception. If a query would retrieve objects with an HKObjectType property, then the application must request authorization to access objects of that type before executing the query.
+//
 // ExecuteQuery calls the underlying ExecuteQuery.
 func (x *HealthStore) ExecuteQuery(query *raw.HKQuery) {
 	x.inner.ExecuteQuery(query)
 }
 
+// @method        stopQuery: @abstract      Stops a query that is executing from continuing to run. @discussion    Calling this method will prevent the handlers of the query from being invoked in the future.  If the query is already stopped, this method does nothing.
+//
 // StopQuery calls the underlying StopQuery.
 func (x *HealthStore) StopQuery(query *raw.HKQuery) {
 	x.inner.StopQuery(query)
 }
 
+// @method        splitTotalEnergy:startDate:endDate:resultsHandler: @abstract      For the time period specified, this method calculates the resting and active energy parts of the total energy provided. @discussion    This method uses the user's metrics like age, biological sex, body mass and height to determine their basal metabolic rate. If the application does not have authorization to access these characteristics or if the user has not entered their data then this method uses builtin default values.
+//
 // SplitTotalEnergyStartDateEndDateResultsHandler calls the underlying SplitTotalEnergyStartDateEndDateResultsHandler.
 func (x *HealthStore) SplitTotalEnergyStartDateEndDateResultsHandler(totalEnergy *raw.HKQuantity, startDate *foundation.NSDate, endDate *foundation.NSDate, resultsHandler func(*raw.HKQuantity, *raw.HKQuantity, unsafe.Pointer)) {
 	x.inner.SplitTotalEnergyStartDateEndDateResultsHandler(totalEnergy, startDate, endDate, resultsHandler)
@@ -126,11 +158,15 @@ func (x *HealthStore) DateOfBirthWithError() (*foundation.NSDate, error) {
 	return x.inner.DateOfBirthWithError()
 }
 
+// @method        dateOfBirthComponentsWithError: @abstract      Returns the user's date of birth in the Gregorian calendar. @discussion    Before calling this method, the application should request authorization to access objects with the HKCharacteristicType identified by HKCharacteristicTypeIdentifierDateOfBirth.
+//
 // DateOfBirthComponentsWithError calls the underlying DateOfBirthComponentsWithError.
 func (x *HealthStore) DateOfBirthComponentsWithError() (*foundation.NSDateComponents, error) {
 	return x.inner.DateOfBirthComponentsWithError()
 }
 
+// @method        biologicalSexWithError: @abstract      Returns an object encapsulating the user's biological sex. @discussion    Before calling this method, the application should request authorization to access objects with the HKCharacteristicType identified by HKCharacteristicTypeIdentifierBiologicalSex.
+//
 // BiologicalSexWithError calls the underlying BiologicalSexWithError.
 func (x *HealthStore) BiologicalSexWithError() (*BiologicalSexObject, error) {
 	_r, _err := x.inner.BiologicalSexWithError()
@@ -143,6 +179,8 @@ func (x *HealthStore) BiologicalSexWithError() (*BiologicalSexObject, error) {
 	return &BiologicalSexObject{inner: _r}, nil
 }
 
+// @method        bloodTypeWithError: @abstract      Returns an object encapsulating the user's blood type. @discussion    Before calling this method, the application should request authorization to access objects with the HKCharacteristicType identified by HKCharacteristicTypeIdentifierBloodType.
+//
 // BloodTypeWithError calls the underlying BloodTypeWithError.
 func (x *HealthStore) BloodTypeWithError() (*BloodTypeObject, error) {
 	_r, _err := x.inner.BloodTypeWithError()
@@ -155,6 +193,8 @@ func (x *HealthStore) BloodTypeWithError() (*BloodTypeObject, error) {
 	return &BloodTypeObject{inner: _r}, nil
 }
 
+// @method        fitzpatrickSkinTypeWithError: @abstract      Returns an object encapsulating the user's Fitzpatrick skin type. @discussion    Before calling this method, the application should request authorization to access objects with the HKCharacteristicType identified by HKCharacteristicTypeIdentifierFitzpatrickSkinType.
+//
 // FitzpatrickSkinTypeWithError calls the underlying FitzpatrickSkinTypeWithError.
 func (x *HealthStore) FitzpatrickSkinTypeWithError() (*FitzpatrickSkinTypeObject, error) {
 	_r, _err := x.inner.FitzpatrickSkinTypeWithError()
@@ -167,6 +207,8 @@ func (x *HealthStore) FitzpatrickSkinTypeWithError() (*FitzpatrickSkinTypeObject
 	return &FitzpatrickSkinTypeObject{inner: _r}, nil
 }
 
+// @method        wheelchairUseWithError: @abstract      Returns an object encapsulating the user's wheelchair use. @discussion    Before calling this method, the application should request authorization to access objects with the HKCharacteristicType identified by HKCharacteristicTypeIdentifierWheelchairUse.
+//
 // WheelchairUseWithError calls the underlying WheelchairUseWithError.
 func (x *HealthStore) WheelchairUseWithError() (*WheelchairUseObject, error) {
 	_r, _err := x.inner.WheelchairUseWithError()
@@ -179,6 +221,8 @@ func (x *HealthStore) WheelchairUseWithError() (*WheelchairUseObject, error) {
 	return &WheelchairUseObject{inner: _r}, nil
 }
 
+// @method        activityMoveModeWithError: @abstract      Returns an object encapsulating the user's activity move mode @discussion    Before calling this method, the application should request authorization to access objects with the HKCharacteristicType identified by HKCharacteristicTypeIdentifierActivityMoveMode.
+//
 // ActivityMoveModeWithError calls the underlying ActivityMoveModeWithError.
 func (x *HealthStore) ActivityMoveModeWithError() (*ActivityMoveModeObject, error) {
 	_r, _err := x.inner.ActivityMoveModeWithError()
@@ -191,26 +235,36 @@ func (x *HealthStore) ActivityMoveModeWithError() (*ActivityMoveModeObject, erro
 	return &ActivityMoveModeObject{inner: _r}, nil
 }
 
+// @method        addSamples:toWorkout:completion: @abstract      Associates samples with a given workout. @discussion    This will associate the given samples with the given workout. These samples will then be returned by a query that contains this workout as a predicate. If a sample is added that is not saved yet, then it will be saved for you. Note that the sample will be saved without an HKDevice. The workout provided must be one that has already been saved to HealthKit.
+//
 // AddSamplesToWorkoutCompletion calls the underlying AddSamplesToWorkoutCompletion.
 func (x *HealthStore) AddSamplesToWorkoutCompletion(samples *foundation.NSArray[*raw.HKSample], workout *raw.HKWorkout, completion func(bool, unsafe.Pointer)) {
 	x.inner.AddSamplesToWorkoutCompletion(samples, workout, completion)
 }
 
+// @method        pauseWorkoutSession: @abstract      Pauses the given workout session. @discussion    This method will pause the given session if it is currently running. The state of the workout session will transition to HKWorkoutSessionStatePaused. An HKWorkoutEventTypePause will be generated and delivered to the workout session's delegate.
+//
 // PauseWorkoutSession calls the underlying PauseWorkoutSession.
 func (x *HealthStore) PauseWorkoutSession(workoutSession *raw.HKWorkoutSession) {
 	x.inner.PauseWorkoutSession(workoutSession)
 }
 
+// @method        resumeWorkoutSession: @abstract      Resumes the given workout session. @discussion    This method will resume the given session if it is currently paused. The state of the workout session will transition to HKWorkoutSessionStateRunning. An HKWorkoutEventTypeResume will be generated and delivered to the workout session's delegate.
+//
 // ResumeWorkoutSession calls the underlying ResumeWorkoutSession.
 func (x *HealthStore) ResumeWorkoutSession(workoutSession *raw.HKWorkoutSession) {
 	x.inner.ResumeWorkoutSession(workoutSession)
 }
 
+// @method        startWatchAppWithWorkoutConfiguration:completion: @abstract      Launches or wakes up the WatchKit app on the watch @discussion    This method will launch the WatchKit app corresponding to the calling iOS application on the currently active Apple Watch. After launching, the handleWorkoutConfiguration: method on the WKExtensionDelegate protocol will be called with the HKWorkoutConfiguration as a parameter. The receiving Watch app can use this configuration object to create an HKWorkoutSession and start it with -startWorkoutSession:.
+//
 // StartWatchAppWithWorkoutConfigurationCompletion calls the underlying StartWatchAppWithWorkoutConfigurationCompletion.
 func (x *HealthStore) StartWatchAppWithWorkoutConfigurationCompletion(workoutConfiguration *raw.HKWorkoutConfiguration, completion func(bool, unsafe.Pointer)) {
 	x.inner.StartWatchAppWithWorkoutConfigurationCompletion(workoutConfiguration, completion)
 }
 
+// @property      workoutSessionMirroringStartHandler @abstract      Called when a session has started mirroring. @discussion    This property should always be assigned a value promptly after your app is launched, to ensure it is always observing for incoming mirrored workout sessions. If your app is not active when a mirrored session starts, it will be launched in the background and given a one-time permission to start a Live Activity from the background. The assigned block will be executed on an arbitrary background queue.
+//
 // WorkoutSessionMirroringStartHandler calls the underlying WorkoutSessionMirroringStartHandler.
 func (x *HealthStore) WorkoutSessionMirroringStartHandler() objc.Block {
 	return x.inner.WorkoutSessionMirroringStartHandler()
@@ -239,6 +293,8 @@ func (x *HealthStore) SetWorkoutSessionMirroringStartHandler(ctx context.Context
 	}
 }
 
+// @method        enableBackgroundDeliveryForType:frequency:withCompletion: @abstract      This method enables activation of your app when data of the type is recorded at the cadence specified. @discussion    When an app has subscribed to a certain data type it will get activated at the cadence that is specified with the frequency parameter. The app is still responsible for creating an HKObserverQuery to know which data types have been updated and the corresponding fetch queries. Note that certain data types (such as HKQuantityTypeIdentifierStepCount) have a minimum frequency of HKUpdateFrequencyHourly. This is enforced transparently to the caller.
+//
 // EnableBackgroundDeliveryForTypeFrequencyWithCompletion calls the underlying EnableBackgroundDeliveryForTypeFrequencyWithCompletion.
 func (x *HealthStore) EnableBackgroundDeliveryForTypeFrequencyWithCompletion(type_ *raw.HKObjectType, frequency HKUpdateFrequency, completion func(bool, unsafe.Pointer)) {
 	x.inner.EnableBackgroundDeliveryForTypeFrequencyWithCompletion(type_, raw.HKUpdateFrequency(frequency), completion)
@@ -254,21 +310,29 @@ func (x *HealthStore) DisableAllBackgroundDeliveryWithCompletion(completion func
 	x.inner.DisableAllBackgroundDeliveryWithCompletion(completion)
 }
 
+// @method        preferredUnitsForQuantityTypes:completion: @abstract      Calls the completion with the preferred HKUnits for a given set of HKQuantityTypes. @discussion    A preferred unit is either the unit that the user has chosen in Health for displaying samples of the given quantity type or the default unit for that type in the current locale of the device. To access the user's preferences it is necessary to request read or share authorization for the set of HKQuantityTypes provided. If neither read nor share authorization has been granted to the app, then the default unit for the locale is provided. An error will be returned when preferred units are inaccessible because protected health data is unavailable or authorization status is not determined for one or more of the provided types. The returned dictionary will map HKQuantityType to HKUnit.
+//
 // PreferredUnitsForQuantityTypesCompletion calls the underlying PreferredUnitsForQuantityTypesCompletion.
 func (x *HealthStore) PreferredUnitsForQuantityTypesCompletion(quantityTypes *foundation.NSSet[*raw.HKQuantityType], completion func(*foundation.NSDictionary[*raw.HKQuantityType, *raw.HKUnit], unsafe.Pointer)) {
 	x.inner.PreferredUnitsForQuantityTypesCompletion(quantityTypes, completion)
 }
 
+// @method     recalibrateEstimatesForSampleType:atDate:completion: @abstract   Recalibrates the prediction algorithm used for this sample type. @discussion Check -[HKSampleType allowsRecalibrationForEstimates] to see if a given sample type is supported. Calling this method results in first-party estimation algorithms to recalibrate what data is used when generating values for HKSamples of this sampleType.
+//
 // RecalibrateEstimatesForSampleTypeAtDateCompletion calls the underlying RecalibrateEstimatesForSampleTypeAtDateCompletion.
 func (x *HealthStore) RecalibrateEstimatesForSampleTypeAtDateCompletion(sampleType *raw.HKSampleType, date *foundation.NSDate, completion func(bool, unsafe.Pointer)) {
 	x.inner.RecalibrateEstimatesForSampleTypeAtDateCompletion(sampleType, date, completion)
 }
 
+// @method        relateWorkoutEffortSample:withWorkout:activity:completion @abstract      Relates a workout effort sample with a workout @param         sample     The workout effort sample @param         workout    The HKWorkout to relate the sample to @param         activity   The HKWorkoutActivity on the HKWorkout @param         completion The block to be called when the sample has been related
+//
 // RelateWorkoutEffortSampleWithWorkoutActivityCompletion calls the underlying RelateWorkoutEffortSampleWithWorkoutActivityCompletion.
 func (x *HealthStore) RelateWorkoutEffortSampleWithWorkoutActivityCompletion(sample *raw.HKSample, workout *raw.HKWorkout, activity *raw.HKWorkoutActivity, completion func(bool, unsafe.Pointer)) {
 	x.inner.RelateWorkoutEffortSampleWithWorkoutActivityCompletion(sample, workout, activity, completion)
 }
 
+// @method        unrelateWorkoutEffortSample:fromWorkout:activity:completion @abstract      Unrelates a workout effort sample from a workout @param         sample     The workout effort sample @param         workout    The HKWorkout to unrelate the sample from @param         activity   The HKWorkoutActivity on the HKWorkout @param         completion The block to be called when the sample has been unrelated
+//
 // UnrelateWorkoutEffortSampleFromWorkoutActivityCompletion calls the underlying UnrelateWorkoutEffortSampleFromWorkoutActivityCompletion.
 func (x *HealthStore) UnrelateWorkoutEffortSampleFromWorkoutActivityCompletion(sample *raw.HKSample, workout *raw.HKWorkout, activity *raw.HKWorkoutActivity, completion func(bool, unsafe.Pointer)) {
 	x.inner.UnrelateWorkoutEffortSampleFromWorkoutActivityCompletion(sample, workout, activity, completion)

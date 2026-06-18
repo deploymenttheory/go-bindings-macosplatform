@@ -38,6 +38,8 @@ func NewMetricPlayerItemInitialLikelyToKeepUpEvent() *MetricPlayerItemInitialLik
 	return &MetricPlayerItemInitialLikelyToKeepUpEvent{inner: raw.AVMetricPlayerItemInitialLikelyToKeepUpEventFromID(_id)}
 }
 
+// Returns the playlist request events required to reach likely to keep up.
+//
 // PlaylistRequestEvents returns the collection as a Go slice.
 func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) PlaylistRequestEvents() []*MetricHLSPlaylistRequestEvent {
 	arr := x.inner.PlaylistRequestEvents()
@@ -49,6 +51,8 @@ func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) PlaylistRequestEvents() []*
 	})
 }
 
+// Returns the media segment request events required to reach likely to keep up.
+//
 // MediaSegmentRequestEvents returns the collection as a Go slice.
 func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) MediaSegmentRequestEvents() []*MetricHLSMediaSegmentRequestEvent {
 	arr := x.inner.MediaSegmentRequestEvents()
@@ -60,6 +64,8 @@ func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) MediaSegmentRequestEvents()
 	})
 }
 
+// Returns the content key request required to reach likely to keep up.
+//
 // ContentKeyRequestEvents returns the collection as a Go slice.
 func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) ContentKeyRequestEvents() []*MetricContentKeyRequestEvent {
 	arr := x.inner.ContentKeyRequestEvents()

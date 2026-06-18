@@ -37,6 +37,8 @@ func NewMedicationConcept() *MedicationConcept {
 	return &MedicationConcept{inner: raw.HKMedicationConceptFromID(_id)}
 }
 
+// The unique identifier for the specific medication concept. Each concept has one stable identifier that stays the same across devices. You can use this identifier to directly compare medications, for example, to check whether two objects represent the same medication.
+//
 // Identifier calls the underlying Identifier.
 func (x *MedicationConcept) Identifier() *HealthConceptIdentifier {
 	_r := x.inner.Identifier()
@@ -46,6 +48,8 @@ func (x *MedicationConcept) Identifier() *HealthConceptIdentifier {
 	return &HealthConceptIdentifier{inner: _r}
 }
 
+// The display name for this medication. The name of the medication a person enters or selects during medication onboarding.
+//
 // DisplayText calls the underlying DisplayText.
 func (x *MedicationConcept) DisplayText() string {
 	_r := x.inner.DisplayText()
@@ -55,6 +59,8 @@ func (x *MedicationConcept) DisplayText() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The general form the medication is manufactured in. A general manufactured dose form for the specific medication. This value tells you the manufactured form of the medication, such as tablet, capsule, cream, injection, or inhaler.
+//
 // GeneralForm calls the underlying GeneralForm.
 func (x *MedicationConcept) GeneralForm() string {
 	_r := x.inner.GeneralForm()
@@ -64,6 +70,8 @@ func (x *MedicationConcept) GeneralForm() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The set of related clinical codings for the medication. Each coding links the medication to an external medical terminology system, such as RxNorm.
+//
 // RelatedCodings calls the underlying RelatedCodings.
 func (x *MedicationConcept) RelatedCodings() *foundation.NSSet[*raw.HKClinicalCoding] {
 	return x.inner.RelatedCodings()

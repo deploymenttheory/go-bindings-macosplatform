@@ -37,16 +37,22 @@ func NewMetaData() *MetaData {
 	return &MetaData{inner: raw.MXMetaDataFromID(_id)}
 }
 
+// @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this metadata. @result        An NSData object containing the JSON representation
+//
 // JSONRepresentation calls the underlying JSONRepresentation.
 func (x *MetaData) JSONRepresentation() *foundation.NSData {
 	return x.inner.JSONRepresentation()
 }
 
+// @method        dictionaryRepresentation @abstract      Convenience method to return a NSDictionary representation of this metadata. @result        An NSDictionary object containing the dictionary representation
+//
 // DictionaryRepresentation calls the underlying DictionaryRepresentation.
 func (x *MetaData) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.DictionaryRepresentation()
 }
 
+// @property      regionFormat @abstract      An NSString designating the region format associated with the application.
+//
 // RegionFormat calls the underlying RegionFormat.
 func (x *MetaData) RegionFormat() string {
 	_r := x.inner.RegionFormat()
@@ -56,6 +62,8 @@ func (x *MetaData) RegionFormat() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      osVersion @abstract      An NSString designating the OS version associated with the device.
+//
 // OsVersion calls the underlying OsVersion.
 func (x *MetaData) OsVersion() string {
 	_r := x.inner.OsVersion()
@@ -65,6 +73,8 @@ func (x *MetaData) OsVersion() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      deviceType @abstract      An NSString designating the device type associated with this device.
+//
 // DeviceType calls the underlying DeviceType.
 func (x *MetaData) DeviceType() string {
 	_r := x.inner.DeviceType()
@@ -74,6 +84,8 @@ func (x *MetaData) DeviceType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      applicationBuildVersion @abstract      An NSString designating the app build version.
+//
 // ApplicationBuildVersion calls the underlying ApplicationBuildVersion.
 func (x *MetaData) ApplicationBuildVersion() string {
 	_r := x.inner.ApplicationBuildVersion()
@@ -83,6 +95,8 @@ func (x *MetaData) ApplicationBuildVersion() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      platformArchitecture @abstract      An NSString designating the current architecture.
+//
 // PlatformArchitecture calls the underlying PlatformArchitecture.
 func (x *MetaData) PlatformArchitecture() string {
 	_r := x.inner.PlatformArchitecture()

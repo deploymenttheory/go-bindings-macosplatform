@@ -36,11 +36,15 @@ func NewMovieTrack() *MovieTrack {
 	return &MovieTrack{inner: raw.AVMovieTrackFromID(_id)}
 }
 
+// @property       mediaPresentationTimeRange @abstract       A CMTimeRange indicating the range of presentation times for the track's media.
+//
 // MediaPresentationTimeRange calls the underlying MediaPresentationTimeRange.
 func (x *MovieTrack) MediaPresentationTimeRange() coremedia.CMTimeRange {
 	return x.inner.MediaPresentationTimeRange()
 }
 
+// @property       mediaDecodeTimeRange @abstract       A CMTimeRange indicating the range of decode times for the track's media.
+//
 // MediaDecodeTimeRange calls the underlying MediaDecodeTimeRange.
 func (x *MovieTrack) MediaDecodeTimeRange() coremedia.CMTimeRange {
 	return x.inner.MediaDecodeTimeRange()

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines the configuration for a USB pointing device that reports absolute coordinates.
+//
 // USBScreenCoordinatePointingDeviceConfiguration wraps [raw.VZUSBScreenCoordinatePointingDeviceConfiguration] with a fluent Go API.
 type USBScreenCoordinatePointingDeviceConfiguration struct {
 	inner *raw.VZUSBScreenCoordinatePointingDeviceConfiguration

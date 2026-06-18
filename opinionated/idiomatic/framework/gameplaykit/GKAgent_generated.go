@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An agent is a point mass whose local coordinate system is aligned to its velocity.  Agents have a variety of steering functions that can be used to simulate vehicles or entities with agency. The units of mass, velocity and radius are dimensionless but related. The visual representation of these values are specific to each game's own situation. @discussion Values close to 1.0 should be canonical and are expected to yield pleasing results. When applied to visuals these values should be scaled and biased into their target coordinate system and a simple filter on top ensures any noise generated from the steering logic doesn't affect the visual represtentation.
+//
 // Agent wraps [raw.GKAgent] with a fluent Go API.
 type Agent struct {
 	inner *raw.GKAgent
@@ -35,48 +37,64 @@ func NewAgent() *Agent {
 	return &Agent{inner: raw.GKAgentFromID(_id)}
 }
 
+// Object which has agentDidUpdate called on it during this agent's behavior updatekbeha
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Agent) WithDelegate(delegate raw.GKAgentDelegate) *Agent {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The behavior to apply when updateWithDeltaTime is called. All forces from the goals in the behavior are summed and then applied.
+//
 // WithBehavior sets the behavior property and returns the receiver for chaining.
 func (x *Agent) WithBehavior(behavior BehaviorProvider) *Agent {
 	x.inner.SetBehavior(behavior.asBehavior())
 	return x
 }
 
+// Agent's mass. Used for agent impulse application purposes. Defaults to 1.0
+//
 // WithMass sets the mass property and returns the receiver for chaining.
 func (x *Agent) WithMass(mass float32) *Agent {
 	x.inner.SetMass(mass)
 	return x
 }
 
+// Radius of the agent's bounding circle.  Used by the agent avoid steering functions. Defaults to 0.5 for a canonical diameter of 1.0
+//
 // WithRadius sets the radius property and returns the receiver for chaining.
 func (x *Agent) WithRadius(radius float32) *Agent {
 	x.inner.SetRadius(radius)
 	return x
 }
 
+// Current speed of the agent along its foward direction. Defaults to 0.0
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *Agent) WithSpeed(speed float32) *Agent {
 	x.inner.SetSpeed(speed)
 	return x
 }
 
+// Maximum amount of acceleration that can be applied to this agent.  All applied impulses are clipped to this amount. Defaults to 1.0
+//
 // WithMaxAcceleration sets the maxAcceleration property and returns the receiver for chaining.
 func (x *Agent) WithMaxAcceleration(maxAcceleration float32) *Agent {
 	x.inner.SetMaxAcceleration(maxAcceleration)
 	return x
 }
 
+// Maximum speed of this agent. Impulses cannot cause the agents speed to ever be greater than this value. Defaults to 1.0
+//
 // WithMaxSpeed sets the maxSpeed property and returns the receiver for chaining.
 func (x *Agent) WithMaxSpeed(maxSpeed float32) *Agent {
 	x.inner.SetMaxSpeed(maxSpeed)
 	return x
 }
 
+// Object which has agentDidUpdate called on it during this agent's behavior updatekbeha
+//
 // Delegate calls the underlying Delegate.
 func (x *Agent) Delegate() raw.GKAgentDelegate {
 	return x.inner.Delegate()
@@ -87,6 +105,8 @@ func (x *Agent) SetDelegate(delegate raw.GKAgentDelegate) {
 	x.inner.SetDelegate(delegate)
 }
 
+// The behavior to apply when updateWithDeltaTime is called. All forces from the goals in the behavior are summed and then applied.
+//
 // Behavior calls the underlying Behavior.
 func (x *Agent) Behavior() *Behavior {
 	_r := x.inner.Behavior()
@@ -101,6 +121,8 @@ func (x *Agent) SetBehavior(behavior *raw.GKBehavior) {
 	x.inner.SetBehavior(behavior)
 }
 
+// Agent's mass. Used for agent impulse application purposes. Defaults to 1.0
+//
 // Mass calls the underlying Mass.
 func (x *Agent) Mass() float32 {
 	return x.inner.Mass()
@@ -111,6 +133,8 @@ func (x *Agent) SetMass(mass float32) {
 	x.inner.SetMass(mass)
 }
 
+// Radius of the agent's bounding circle.  Used by the agent avoid steering functions. Defaults to 0.5 for a canonical diameter of 1.0
+//
 // Radius calls the underlying Radius.
 func (x *Agent) Radius() float32 {
 	return x.inner.Radius()
@@ -121,6 +145,8 @@ func (x *Agent) SetRadius(radius float32) {
 	x.inner.SetRadius(radius)
 }
 
+// Current speed of the agent along its foward direction. Defaults to 0.0
+//
 // Speed calls the underlying Speed.
 func (x *Agent) Speed() float32 {
 	return x.inner.Speed()
@@ -131,6 +157,8 @@ func (x *Agent) SetSpeed(speed float32) {
 	x.inner.SetSpeed(speed)
 }
 
+// Maximum amount of acceleration that can be applied to this agent.  All applied impulses are clipped to this amount. Defaults to 1.0
+//
 // MaxAcceleration calls the underlying MaxAcceleration.
 func (x *Agent) MaxAcceleration() float32 {
 	return x.inner.MaxAcceleration()
@@ -141,6 +169,8 @@ func (x *Agent) SetMaxAcceleration(maxAcceleration float32) {
 	x.inner.SetMaxAcceleration(maxAcceleration)
 }
 
+// Maximum speed of this agent. Impulses cannot cause the agents speed to ever be greater than this value. Defaults to 1.0
+//
 // MaxSpeed calls the underlying MaxSpeed.
 func (x *Agent) MaxSpeed() float32 {
 	return x.inner.MaxSpeed()

@@ -38,34 +38,46 @@ func NewMTL4MachineLearningPipelineDescriptor() *MTL4MachineLearningPipelineDesc
 	return &MTL4MachineLearningPipelineDescriptor{inner: raw.MTL4MachineLearningPipelineDescriptorFromID(_id)}
 }
 
+// Assigns the function that the machine learning pipeline you create from this descriptor executes.
+//
 // WithMachineLearningFunctionDescriptor sets the machineLearningFunctionDescriptor property and returns the receiver for chaining.
 func (x *MTL4MachineLearningPipelineDescriptor) WithMachineLearningFunctionDescriptor(machineLearningFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4MachineLearningPipelineDescriptor {
 	x.inner.SetMachineLearningFunctionDescriptor(machineLearningFunctionDescriptor.asMTL4FunctionDescriptor())
 	return x
 }
 
+// Assigns an optional string that uniquely identifies a pipeline descriptor. After you provide this label, you can use it to look up a pipeline state object by name in a binary archive.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MTL4MachineLearningPipelineDescriptor) WithLabel(label string) *MTL4MachineLearningPipelineDescriptor {
 	x.inner.MTL4PipelineDescriptor.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// Provides compile-time options when you build the pipeline.
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MTL4MachineLearningPipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4MachineLearningPipelineDescriptor {
 	x.inner.MTL4PipelineDescriptor.SetOptions(options.Unwrap())
 	return x
 }
 
+// Sets the dimension of an input tensor at a buffer index. - Parameters: - dimensions: the dimensions of the tensor. - bufferIndex: Index of the tensor to modify.
+//
 // SetInputDimensionsAtBufferIndex calls the underlying SetInputDimensionsAtBufferIndex.
 func (x *MTL4MachineLearningPipelineDescriptor) SetInputDimensionsAtBufferIndex(dimensions *raw.MTLTensorExtents, bufferIndex int) {
 	x.inner.SetInputDimensionsAtBufferIndex(dimensions, bufferIndex)
 }
 
+// Sets the dimensions of multiple input tensors on a range of buffer bindings. Use this method to specify the dimensions of multiple input tensors at a range of indices in a single call. You can indicate that any tensors in the range have unspecified dimensions by providing `NSNull` at the their corresponding index location in the array. - Important: The range's length property needs to match the number of dimensions you provide. Specifically, `range.length` needs to match `dimensions.count`. - Parameters: - dimensions: An array of tensor extents. - range: The range of inputs of the `dimensions` argument. The range's `length` needs to match the dimensions' `count` property.
+//
 // SetInputDimensionsWithRange calls the underlying SetInputDimensionsWithRange.
 func (x *MTL4MachineLearningPipelineDescriptor) SetInputDimensionsWithRange(dimensions *foundation.NSArray[*raw.MTLTensorExtents], range_ foundation.NSRange) {
 	x.inner.SetInputDimensionsWithRange(dimensions, range_)
 }
 
+// Obtains the dimensions of the input tensor at `bufferIndex` if set, `nil` otherwise.
+//
 // InputDimensionsAtBufferIndex calls the underlying InputDimensionsAtBufferIndex.
 func (x *MTL4MachineLearningPipelineDescriptor) InputDimensionsAtBufferIndex(bufferIndex int) *TensorExtents {
 	_r := x.inner.InputDimensionsAtBufferIndex(bufferIndex)
@@ -75,11 +87,15 @@ func (x *MTL4MachineLearningPipelineDescriptor) InputDimensionsAtBufferIndex(buf
 	return &TensorExtents{inner: _r}
 }
 
+// Resets the descriptor to its default values.
+//
 // Reset calls the underlying Reset.
 func (x *MTL4MachineLearningPipelineDescriptor) Reset() {
 	x.inner.Reset()
 }
 
+// Assigns the function that the machine learning pipeline you create from this descriptor executes.
+//
 // MachineLearningFunctionDescriptor calls the underlying MachineLearningFunctionDescriptor.
 func (x *MTL4MachineLearningPipelineDescriptor) MachineLearningFunctionDescriptor() *MTL4FunctionDescriptor {
 	_r := x.inner.MachineLearningFunctionDescriptor()

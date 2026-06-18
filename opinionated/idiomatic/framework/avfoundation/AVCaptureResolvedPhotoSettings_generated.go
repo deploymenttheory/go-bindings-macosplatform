@@ -36,21 +36,29 @@ func NewCaptureResolvedPhotoSettings() *CaptureResolvedPhotoSettings {
 	return &CaptureResolvedPhotoSettings{inner: raw.AVCaptureResolvedPhotoSettingsFromID(_id)}
 }
 
+// @property uniqueID @abstract uniqueID matches that of the AVCapturePhotoSettings instance you passed to -capturePhotoWithSettings:delegate:.
+//
 // UniqueID calls the underlying UniqueID.
 func (x *CaptureResolvedPhotoSettings) UniqueID() int64 {
 	return x.inner.UniqueID()
 }
 
+// @property photoDimensions @abstract The resolved dimensions of the photo buffer that will be delivered to the -captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error: callback. @discussion If you request a RAW capture with no processed companion image, photoDimensions resolve to { 0, 0 }.
+//
 // PhotoDimensions calls the underlying PhotoDimensions.
 func (x *CaptureResolvedPhotoSettings) PhotoDimensions() coremedia.CMVideoDimensions {
 	return x.inner.PhotoDimensions()
 }
 
+// @property expectedPhotoCount @abstract Indicates the number of times your -captureOutput:didFinishProcessingPhoto:error: callback will be called. For instance, if you've requested an auto exposure bracket of 3 with JPEG and RAW, the expectedPhotoCount is 6.
+//
 // ExpectedPhotoCount calls the underlying ExpectedPhotoCount.
 func (x *CaptureResolvedPhotoSettings) ExpectedPhotoCount() uint {
 	return x.inner.ExpectedPhotoCount()
 }
 
+// @property fastCapturePrioritizationEnabled @abstract Indicates whether fast capture prioritization will be employed when capturing the photo.
+//
 // IsFastCapturePrioritizationEnabled calls the underlying IsFastCapturePrioritizationEnabled.
 func (x *CaptureResolvedPhotoSettings) IsFastCapturePrioritizationEnabled() bool {
 	return x.inner.IsFastCapturePrioritizationEnabled()

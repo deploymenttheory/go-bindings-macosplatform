@@ -30,6 +30,8 @@ func SyncEngineSendChangesScopeFromID(id objc.ID) *SyncEngineSendChangesScope {
 	return &SyncEngineSendChangesScope{inner: raw.CKSyncEngineSendChangesScopeFromID(id)}
 }
 
+// Creates a scope that contains only the given zone IDs. If `zoneIDs` is `nil`, then this scope contains all zones.
+//
 // NewSyncEngineSendChangesScopeWithZoneIDs creates a new [SyncEngineSendChangesScope].
 func NewSyncEngineSendChangesScopeWithZoneIDs(zoneIDs *foundation.NSSet[*raw.CKRecordZoneID]) *SyncEngineSendChangesScope {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineSendChangesScope")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewSyncEngineSendChangesScopeWithZoneIDs(zoneIDs *foundation.NSSet[*raw.CKR
 	return &SyncEngineSendChangesScope{inner: raw.CKSyncEngineSendChangesScopeFromID(_id)}
 }
 
+// Creates a scope that contains all zones except for the given zone IDs.
+//
 // NewSyncEngineSendChangesScopeWithExcludedZoneIDs creates a new [SyncEngineSendChangesScope].
 func NewSyncEngineSendChangesScopeWithExcludedZoneIDs(excludedZoneIDs *foundation.NSSet[*raw.CKRecordZoneID]) *SyncEngineSendChangesScope {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineSendChangesScope")), objc.RegisterName("alloc"))
@@ -44,6 +48,8 @@ func NewSyncEngineSendChangesScopeWithExcludedZoneIDs(excludedZoneIDs *foundatio
 	return &SyncEngineSendChangesScope{inner: raw.CKSyncEngineSendChangesScopeFromID(_id)}
 }
 
+// Creates a scope that includes only the given record IDs. If `recordIDs` is nil, this scope contains all records.
+//
 // NewSyncEngineSendChangesScopeWithRecordIDs creates a new [SyncEngineSendChangesScope].
 func NewSyncEngineSendChangesScopeWithRecordIDs(recordIDs *foundation.NSSet[*raw.CKRecordID]) *SyncEngineSendChangesScope {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineSendChangesScope")), objc.RegisterName("alloc"))
@@ -51,26 +57,36 @@ func NewSyncEngineSendChangesScopeWithRecordIDs(recordIDs *foundation.NSSet[*raw
 	return &SyncEngineSendChangesScope{inner: raw.CKSyncEngineSendChangesScopeFromID(_id)}
 }
 
+// Returns true if this scope includes the given record ID.
+//
 // ContainsRecordID calls the underlying ContainsRecordID.
 func (x *SyncEngineSendChangesScope) ContainsRecordID(recordID *raw.CKRecordID) bool {
 	return x.inner.ContainsRecordID(recordID)
 }
 
+// Returns true if this scope includes the given pending change.
+//
 // ContainsPendingRecordZoneChange calls the underlying ContainsPendingRecordZoneChange.
 func (x *SyncEngineSendChangesScope) ContainsPendingRecordZoneChange(pendingRecordZoneChange *raw.CKSyncEnginePendingRecordZoneChange) bool {
 	return x.inner.ContainsPendingRecordZoneChange(pendingRecordZoneChange)
 }
 
+// The scope of zone IDs in which to send changes. If you only want to send changes for a particular set of zones, you can initialize your scope with those zone IDs. When creating the next batch of changes to send to the server, consult this, and only send changes within these zones. If this and “recordIDs“ are `nil`, then you should send all changes.
+//
 // ZoneIDs calls the underlying ZoneIDs.
 func (x *SyncEngineSendChangesScope) ZoneIDs() *foundation.NSSet[*raw.CKRecordZoneID] {
 	return x.inner.ZoneIDs()
 }
 
+// A specific set of zone IDs to exclude from this scope. If you know that you don't want to send changes for a particular set of zones, you can set those zones here. - Note: a scope with a non-nil “zoneIDs“ always has an empty `excludedZoneIDs`.
+//
 // ExcludedZoneIDs calls the underlying ExcludedZoneIDs.
 func (x *SyncEngineSendChangesScope) ExcludedZoneIDs() *foundation.NSSet[*raw.CKRecordZoneID] {
 	return x.inner.ExcludedZoneIDs()
 }
 
+// The scope of record IDs in which to send changes. If you only want to send changes for a particular set of records, you can initialize your scope with those records IDs. When creating the next batch of changes to send to the server, consult this property, and only send changes for these record IDs. If this and “zoneIDs“ are `nil`, then you should send all changes.
+//
 // RecordIDs calls the underlying RecordIDs.
 func (x *SyncEngineSendChangesScope) RecordIDs() *foundation.NSSet[*raw.CKRecordID] {
 	return x.inner.RecordIDs()

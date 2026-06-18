@@ -36,6 +36,8 @@ func NewLibMediaItemVideoInfo() *LibMediaItemVideoInfo {
 	return &LibMediaItemVideoInfo{inner: raw.ITLibMediaItemVideoInfoFromID(_id)}
 }
 
+// @abstract The name of TV series the video is associated with (implies track is a TV show).
+//
 // Series calls the underlying Series.
 func (x *LibMediaItemVideoInfo) Series() string {
 	_r := x.inner.Series()
@@ -45,6 +47,8 @@ func (x *LibMediaItemVideoInfo) Series() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The name of the TV series the video is associated with that should be used for when sorting (implies the track is a TV show).
+//
 // SortSeries calls the underlying SortSeries.
 func (x *LibMediaItemVideoInfo) SortSeries() string {
 	_r := x.inner.SortSeries()
@@ -54,11 +58,15 @@ func (x *LibMediaItemVideoInfo) SortSeries() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The name of TV season the video is associated with (implies the track is a TV show).
+//
 // Season calls the underlying Season.
 func (x *LibMediaItemVideoInfo) Season() uint {
 	return x.inner.Season()
 }
 
+// @abstract The TV episode the video is associated with (implies the track is a TV show).
+//
 // Episode calls the underlying Episode.
 func (x *LibMediaItemVideoInfo) Episode() string {
 	_r := x.inner.Episode()
@@ -68,21 +76,29 @@ func (x *LibMediaItemVideoInfo) Episode() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The TV episode order the video is associated with (implies the track is a TV show).
+//
 // EpisodeOrder calls the underlying EpisodeOrder.
 func (x *LibMediaItemVideoInfo) EpisodeOrder() int {
 	return x.inner.EpisodeOrder()
 }
 
+// @abstract Whether the video is high definition.
+//
 // IsHD calls the underlying IsHD.
 func (x *LibMediaItemVideoInfo) IsHD() bool {
 	return x.inner.IsHD()
 }
 
+// @abstract The width of the video.
+//
 // VideoWidth calls the underlying VideoWidth.
 func (x *LibMediaItemVideoInfo) VideoWidth() uint {
 	return x.inner.VideoWidth()
 }
 
+// @abstract The height of the video.
+//
 // VideoHeight calls the underlying VideoHeight.
 func (x *LibMediaItemVideoInfo) VideoHeight() uint {
 	return x.inner.VideoHeight()

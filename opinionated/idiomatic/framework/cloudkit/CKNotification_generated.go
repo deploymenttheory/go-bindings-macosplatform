@@ -38,11 +38,15 @@ func NewNotification() *Notification {
 	return &Notification{inner: raw.CKNotificationFromID(_id)}
 }
 
+// The type of event that generates the notification. Different notification types correspond to different subclasses of “CKNotification“, so you can use the value in this property to determine how to handle the notification data.
+//
 // NotificationType calls the underlying NotificationType.
 func (x *Notification) NotificationType() CKNotificationType {
 	return CKNotificationType(x.inner.NotificationType())
 }
 
+// The notification's ID. Use this property to differentiate notifications.
+//
 // NotificationID calls the underlying NotificationID.
 func (x *Notification) NotificationID() *NotificationID {
 	_r := x.inner.NotificationID()
@@ -52,6 +56,8 @@ func (x *Notification) NotificationID() *NotificationID {
 	return &NotificationID{inner: _r}
 }
 
+// The ID of the container with the content that triggers the notification. Use this property to determine the location of the changed content.
+//
 // ContainerIdentifier calls the underlying ContainerIdentifier.
 func (x *Notification) ContainerIdentifier() string {
 	_r := x.inner.ContainerIdentifier()
@@ -61,6 +67,8 @@ func (x *Notification) ContainerIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The ID of the user record that creates the subscription that generates the push notification. On a system that supports multiple users, such as tvOS, use this identifier to check whether the pending content is for the current user. If your app always fetches data from CloudKit on launch, you may improve efficiency by disregarding notifications for other users. For more information about supporting a multiuser environment, see <doc://com.apple.documentation/documentation/tvservices/personalizing-your-app-for-each-user-on-apple-tv>.
+//
 // SubscriptionOwnerUserRecordID calls the underlying SubscriptionOwnerUserRecordID.
 func (x *Notification) SubscriptionOwnerUserRecordID() *RecordID {
 	_r := x.inner.SubscriptionOwnerUserRecordID()
@@ -70,11 +78,15 @@ func (x *Notification) SubscriptionOwnerUserRecordID() *RecordID {
 	return &RecordID{inner: _r}
 }
 
+// A Boolean value that indicates whether the system removes some push notification content before delivery. The server may truncate the payload data of a push notification if the size of that data exceeds the allowed maximum. For notifications you create using a payload dictionary, the value of this property is <doc://com.apple.documentation/documentation/swift/true> if the payload data doesn't contain all information regarding the change. The value is <doc://com.apple.documentation/documentation/swift/false> if the payload data is complete. For notifications you fetch from the database using a `CKFetchNotificationChangesOperation` operation, this property's value is always <doc://com.apple.documentation/documentation/swift/true>. When CloudKit must remove payload data, it removes it in a specific order. This class's properties are among the last that CloudKit removes because they define information about how to deliver the push notification. The following list shows the properties that CloudKit removes, and the order for removing them: 1. “CKNotification/containerIdentifier“ 2. Keys that subclasses of `CKNotification` define. 3. “CKNotification/soundName“ 4. “CKNotification/alertLaunchImage“ 5. “CKNotification/alertActionLocalizationKey“ 6. “CKNotification/alertBody“ 7. “CKNotification/alertLocalizationArgs“ 8. “CKNotification/alertLocalizationKey“ 9. “CKNotification/badge“ 10. “CKNotification/notificationID“
+//
 // IsPruned calls the underlying IsPruned.
 func (x *Notification) IsPruned() bool {
 	return x.inner.IsPruned()
 }
 
+// The ID of the subscription that triggers the notification.
+//
 // SubscriptionID calls the underlying SubscriptionID.
 func (x *Notification) SubscriptionID() string {
 	_r := x.inner.SubscriptionID()
@@ -84,71 +96,99 @@ func (x *Notification) SubscriptionID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The notification's alert body. This property contains the nonlocalized text that the notification's alert displays.
+//
 // AlertBody calls the underlying AlertBody.
 func (x *Notification) AlertBody() unsafe.Pointer {
 	return x.inner.AlertBody()
 }
 
+// The key that identifies the localized text for the alert body. When the system delivers a push notification to your app, it gets the text for the alert body by looking up the specified key in your app's `Localizable.strings` file. CloudKit ignores the value in “CKNotification/alertBody“ if you set this property.
+//
 // AlertLocalizationKey calls the underlying AlertLocalizationKey.
 func (x *Notification) AlertLocalizationKey() unsafe.Pointer {
 	return x.inner.AlertLocalizationKey()
 }
 
+// The fields for building a notification's alert. This property is an array of field names that CloudKit uses to extract the corresponding values from the record that triggers the push notification. The values are strings, numbers, or dates. CloudKit may truncate strings with a length greater than 100 characters when it adds them to a notification's payload. If you use `%@` for your substitution variables, CloudKit replaces those variables by traversing the array in order. If you use variables of the form `%n$@`, where `n` is an integer, `n` represents the index (starting at 1) of the item in the array to use. So, the first item in the array replaces the variable `%1$@`, the second item replaces the variable `%2$@`, and so on. You can use indexed substitution variables to change the order of items in the resulting string, which might be necessary when you localize your app's content.
+//
 // AlertLocalizationArgs calls the underlying AlertLocalizationArgs.
 func (x *Notification) AlertLocalizationArgs() unsafe.Pointer {
 	return x.inner.AlertLocalizationArgs()
 }
 
+// The notification's title. The system ignores this property if “CKNotification/titleLocalizationKey“ has a value.
+//
 // Title calls the underlying Title.
 func (x *Notification) Title() unsafe.Pointer {
 	return x.inner.Title()
 }
 
+// The key that identifies the localized string for the notification's title. This property takes precedence over “CKNotification/title“.
+//
 // TitleLocalizationKey calls the underlying TitleLocalizationKey.
 func (x *Notification) TitleLocalizationKey() unsafe.Pointer {
 	return x.inner.TitleLocalizationKey()
 }
 
+// The fields for building a notification's title. This property is an array of field names that CloudKit uses to extract the corresponding values from the record that triggers the push notification. The values are strings, numbers, or dates. CloudKit may truncate strings with a length greater than 100 characters when it adds them to a notification's payload. If you use `%@` for your substitution variables, CloudKit replaces those variables by traversing the array in order. If you use variables of the form `%n$@`, where `n` is an integer, `n` represents the index (starting at 1) of the item in the array to use. So, the first item in the array replaces the variable `%1$@`, the second item replaces the variable `%2$@`, and so on. You can use indexed substitution variables to change the order of items in the resulting string, which might be necessary when you localize your app's content.
+//
 // TitleLocalizationArgs calls the underlying TitleLocalizationArgs.
 func (x *Notification) TitleLocalizationArgs() unsafe.Pointer {
 	return x.inner.TitleLocalizationArgs()
 }
 
+// The notification's subtitle. The system ignores this property if “CKNotification/subtitleLocalizationKey“ has a value.
+//
 // Subtitle calls the underlying Subtitle.
 func (x *Notification) Subtitle() unsafe.Pointer {
 	return x.inner.Subtitle()
 }
 
+// The key that identifies the localized string for the notification's subtitle. This property takes precedence over “CKNotification/subtitle“.
+//
 // SubtitleLocalizationKey calls the underlying SubtitleLocalizationKey.
 func (x *Notification) SubtitleLocalizationKey() unsafe.Pointer {
 	return x.inner.SubtitleLocalizationKey()
 }
 
+// The fields for building a notification's subtitle. This property is an array of field names that CloudKit uses to extract the corresponding values from the record that triggers the push notification. The values are strings, numbers, or dates. CloudKit may truncate strings with a length greater than 100 characters when it adds them to a notification's payload. If you use `%@` for your substitution variables, CloudKit replaces those variables by traversing the array in order. If you use variables of the form `%n$@`, where `n` is an integer, `n` represents the index (starting at 1) of the item in the array to use. So, the first item in the array replaces the variable `%1$@`, the second item replaces the variable `%2$@`, and so on. You can use indexed substitution variables to change the order of items in the resulting string, which might be necessary when you localize your app's content.
+//
 // SubtitleLocalizationArgs calls the underlying SubtitleLocalizationArgs.
 func (x *Notification) SubtitleLocalizationArgs() unsafe.Pointer {
 	return x.inner.SubtitleLocalizationArgs()
 }
 
+// The key that identifies the localized string for the notification's action. The system uses this property's value to find the matching string in your app's `Localizable.strings` file. It uses the string as the text of the button that opens your app, which the notification alert displays. If this property's value is `nil`, the system displays a single button to dismiss the alert.
+//
 // AlertActionLocalizationKey calls the underlying AlertActionLocalizationKey.
 func (x *Notification) AlertActionLocalizationKey() unsafe.Pointer {
 	return x.inner.AlertActionLocalizationKey()
 }
 
+// The filename of an image to use as a launch image. The system uses this property's value to locate an image in the app's bundle, and displays it as a launch image when the user launches the app after receiving a push notification.
+//
 // AlertLaunchImage calls the underlying AlertLaunchImage.
 func (x *Notification) AlertLaunchImage() unsafe.Pointer {
 	return x.inner.AlertLaunchImage()
 }
 
+// The value that the app icon's badge displays.
+//
 // Badge calls the underlying Badge.
 func (x *Notification) Badge() *foundation.NSNumber {
 	return x.inner.Badge()
 }
 
+// The name of the sound file to play when a notification arrives. The system uses this property's value to locate a sound file in the app's bundle. The sound plays when the system receives a push notification. If the system can't find the specified file, or if the property's value is the string `default`, the system plays the default sound.
+//
 // SoundName calls the underlying SoundName.
 func (x *Notification) SoundName() unsafe.Pointer {
 	return x.inner.SoundName()
 }
 
+// The name of the action group that corresponds to this notification. Categories allow you to present custom actions to the user on your push notifications. For more information, see <doc://com.apple.documentation/documentation/uikit/uimutableusernotificationcategory>.
+//
 // Category calls the underlying Category.
 func (x *Notification) Category() unsafe.Pointer {
 	return x.inner.Category()

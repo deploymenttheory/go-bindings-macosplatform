@@ -30,6 +30,8 @@ func EstimatedSampleLocationFromID(id objc.ID) *EstimatedSampleLocation {
 	return &EstimatedSampleLocation{inner: raw.MEEstimatedSampleLocationFromID(id)}
 }
 
+// @property		initWithByteSource @abstract		The initializer for the MEEstimatedSampleLocation class. @param			byteSource The MEByteSource to be used to read the data for the sample. @param			estimatedSampleLocation The estimated starting file offset and size in bytes of the sample. @param			refinementDataLocation The starting file offset and size in bytes of the the data necessary to provide an accurate sample location.
+//
 // NewEstimatedSampleLocationWithByteSourceEstimatedSampleLocationRefinementDataLocation creates a new [EstimatedSampleLocation].
 func NewEstimatedSampleLocationWithByteSourceEstimatedSampleLocationRefinementDataLocation(byteSource *raw.MEByteSource, estimatedSampleLocation avfoundation.AVSampleCursorStorageRange, refinementDataLocation avfoundation.AVSampleCursorStorageRange) *EstimatedSampleLocation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MEEstimatedSampleLocation")), objc.RegisterName("alloc"))
@@ -37,16 +39,22 @@ func NewEstimatedSampleLocationWithByteSourceEstimatedSampleLocationRefinementDa
 	return &EstimatedSampleLocation{inner: raw.MEEstimatedSampleLocationFromID(_id)}
 }
 
+// @property		estimatedSampleLocation @abstract		The estimated starting file offset and size in bytes of the sample.
+//
 // EstimatedSampleLocation calls the underlying EstimatedSampleLocation.
 func (x *EstimatedSampleLocation) EstimatedSampleLocation() avfoundation.AVSampleCursorStorageRange {
 	return x.inner.EstimatedSampleLocation()
 }
 
+// @property		refinementDataLocation @abstract		The starting file offset and size in bytes of the the data necessary to provide an accurate sample location. @discussion		The refinement data can be provided to the MESampleCursor method refineSampleLocation to determine the exact sample location.
+//
 // RefinementDataLocation calls the underlying RefinementDataLocation.
 func (x *EstimatedSampleLocation) RefinementDataLocation() avfoundation.AVSampleCursorStorageRange {
 	return x.inner.RefinementDataLocation()
 }
 
+// @property		byteSource @abstract		The MEByteSource to be used to read the data for the sample.
+//
 // ByteSource calls the underlying ByteSource.
 func (x *EstimatedSampleLocation) ByteSource() *ByteSource {
 	_r := x.inner.ByteSource()

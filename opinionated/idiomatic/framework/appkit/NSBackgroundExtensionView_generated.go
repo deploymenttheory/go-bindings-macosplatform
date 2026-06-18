@@ -40,12 +40,16 @@ func NewBackgroundExtensionView() *BackgroundExtensionView {
 	return &BackgroundExtensionView{inner: raw.NSBackgroundExtensionViewFromID(_id)}
 }
 
+// The content view to extend to fill the `NSBackgroundExtensionView`. The content view will be added as a subview of the extension view and placed within the safe area by default. See `automaticallyPlacesContentView` to customize the layout.
+//
 // WithContentView sets the contentView property and returns the receiver for chaining.
 func (x *BackgroundExtensionView) WithContentView(contentView ViewProvider) *BackgroundExtensionView {
 	x.inner.SetContentView(contentView.asView())
 	return x
 }
 
+// Controls the automatic safe area placement of the `contentView` within the container. When `NO`, the frame of the content view must be explicitly set or constraints added. The extension effect will be used to fill the container view around the content. Defaults to `YES`.
+//
 // WithAutomaticallyPlacesContentView sets the automaticallyPlacesContentView property and returns the receiver for chaining.
 func (x *BackgroundExtensionView) WithAutomaticallyPlacesContentView(automaticallyPlacesContentView bool) *BackgroundExtensionView {
 	x.inner.SetAutomaticallyPlacesContentView(automaticallyPlacesContentView)
@@ -316,6 +320,8 @@ func (x *BackgroundExtensionView) WithAdditionalSafeAreaInsets(additionalSafeAre
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *BackgroundExtensionView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *BackgroundExtensionView {
 	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
@@ -394,6 +400,8 @@ func (x *BackgroundExtensionView) WithTouchBar(touchBar *TouchBar) *BackgroundEx
 	return x
 }
 
+// The content view to extend to fill the `NSBackgroundExtensionView`. The content view will be added as a subview of the extension view and placed within the safe area by default. See `automaticallyPlacesContentView` to customize the layout.
+//
 // ContentView calls the underlying ContentView.
 func (x *BackgroundExtensionView) ContentView() *View {
 	_r := x.inner.ContentView()
@@ -403,16 +411,22 @@ func (x *BackgroundExtensionView) ContentView() *View {
 	return &View{inner: _r}
 }
 
+// The content view to extend to fill the `NSBackgroundExtensionView`. The content view will be added as a subview of the extension view and placed within the safe area by default. See `automaticallyPlacesContentView` to customize the layout.
+//
 // SetContentView calls the underlying SetContentView.
 func (x *BackgroundExtensionView) SetContentView(contentView *raw.NSView) {
 	x.inner.SetContentView(contentView)
 }
 
+// Controls the automatic safe area placement of the `contentView` within the container. When `NO`, the frame of the content view must be explicitly set or constraints added. The extension effect will be used to fill the container view around the content. Defaults to `YES`.
+//
 // AutomaticallyPlacesContentView calls the underlying AutomaticallyPlacesContentView.
 func (x *BackgroundExtensionView) AutomaticallyPlacesContentView() bool {
 	return x.inner.AutomaticallyPlacesContentView()
 }
 
+// Controls the automatic safe area placement of the `contentView` within the container. When `NO`, the frame of the content view must be explicitly set or constraints added. The extension effect will be used to fill the container view around the content. Defaults to `YES`.
+//
 // SetAutomaticallyPlacesContentView calls the underlying SetAutomaticallyPlacesContentView.
 func (x *BackgroundExtensionView) SetAutomaticallyPlacesContentView(automaticallyPlacesContentView bool) {
 	x.inner.SetAutomaticallyPlacesContentView(automaticallyPlacesContentView)

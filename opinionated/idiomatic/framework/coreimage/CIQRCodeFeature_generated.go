@@ -37,26 +37,36 @@ func NewQRCodeFeature() *QRCodeFeature {
 	return &QRCodeFeature{inner: raw.CIQRCodeFeatureFromID(_id)}
 }
 
+// The image coordinate of the upper-left corner of the detected QR code.
+//
 // TopLeft calls the underlying TopLeft.
 func (x *QRCodeFeature) TopLeft() corefoundation.CGPoint {
 	return x.inner.TopLeft()
 }
 
+// The image coordinate of the upper-right corner of the detected QR code.
+//
 // TopRight calls the underlying TopRight.
 func (x *QRCodeFeature) TopRight() corefoundation.CGPoint {
 	return x.inner.TopRight()
 }
 
+// The image coordinate of the lower-left corner of the detected QR code.
+//
 // BottomLeft calls the underlying BottomLeft.
 func (x *QRCodeFeature) BottomLeft() corefoundation.CGPoint {
 	return x.inner.BottomLeft()
 }
 
+// The image coordinate of the lower-right corner of the detected QR code.
+//
 // BottomRight calls the underlying BottomRight.
 func (x *QRCodeFeature) BottomRight() corefoundation.CGPoint {
 	return x.inner.BottomRight()
 }
 
+// The string decoded from the detected barcode.
+//
 // MessageString calls the underlying MessageString.
 func (x *QRCodeFeature) MessageString() string {
 	_r := x.inner.MessageString()
@@ -66,6 +76,8 @@ func (x *QRCodeFeature) MessageString() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// An abstract representation of a QR Code symbol. The property is a “CIQRCodeDescriptor“ instance that contains the payload, symbol version, mask pattern, and error correction level, so the QR Code can be reproduced.
+//
 // SymbolDescriptor calls the underlying SymbolDescriptor.
 func (x *QRCodeFeature) SymbolDescriptor() *QRCodeDescriptor {
 	_r := x.inner.SymbolDescriptor()

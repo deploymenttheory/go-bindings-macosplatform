@@ -37,11 +37,15 @@ func NewPlayerItemErrorLogEvent() *PlayerItemErrorLogEvent {
 	return &PlayerItemErrorLogEvent{inner: raw.AVPlayerItemErrorLogEventFromID(_id)}
 }
 
+// The date and time when the error occured. Can be nil. If nil is returned the date is unknown. Corresponds to "date". This property is not observable.
+//
 // Date calls the underlying Date.
 func (x *PlayerItemErrorLogEvent) Date() *foundation.NSDate {
 	return x.inner.Date()
 }
 
+// The URI of the playback item. Can be nil. If nil is returned the URI is unknown. Corresponds to "uri". This property is not observable.
+//
 // URI calls the underlying URI.
 func (x *PlayerItemErrorLogEvent) URI() string {
 	_r := x.inner.URI()
@@ -51,6 +55,8 @@ func (x *PlayerItemErrorLogEvent) URI() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The IP address of the server that was the source of the error. Can be nil. If nil is returned the address is unknown. Can be either an IPv4 or IPv6 address. Corresponds to "s-ip". This property is not observable.
+//
 // ServerAddress calls the underlying ServerAddress.
 func (x *PlayerItemErrorLogEvent) ServerAddress() string {
 	_r := x.inner.ServerAddress()
@@ -60,6 +66,8 @@ func (x *PlayerItemErrorLogEvent) ServerAddress() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A GUID that identifies the playback session. This value is used in HTTP requests. Can be nil. If nil is returned the GUID is unknown. Corresponds to "cs-guid". This property is not observable.
+//
 // PlaybackSessionID calls the underlying PlaybackSessionID.
 func (x *PlayerItemErrorLogEvent) PlaybackSessionID() string {
 	_r := x.inner.PlaybackSessionID()
@@ -69,11 +77,15 @@ func (x *PlayerItemErrorLogEvent) PlaybackSessionID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A unique error code identifier. Corresponds to "status". This property is not observable.
+//
 // ErrorStatusCode calls the underlying ErrorStatusCode.
 func (x *PlayerItemErrorLogEvent) ErrorStatusCode() int {
 	return x.inner.ErrorStatusCode()
 }
 
+// The domain of the error. Corresponds to "domain". This property is not observable.
+//
 // ErrorDomain calls the underlying ErrorDomain.
 func (x *PlayerItemErrorLogEvent) ErrorDomain() string {
 	_r := x.inner.ErrorDomain()
@@ -83,6 +95,8 @@ func (x *PlayerItemErrorLogEvent) ErrorDomain() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A description of the error encountered. Can be nil. If nil is returned further information is not available. Corresponds to "comment". This property is not observable.
+//
 // ErrorComment calls the underlying ErrorComment.
 func (x *PlayerItemErrorLogEvent) ErrorComment() string {
 	_r := x.inner.ErrorComment()
@@ -92,6 +106,8 @@ func (x *PlayerItemErrorLogEvent) ErrorComment() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The HTTP header fields returned by the server, if an HTTP response was received as part of this error. See -[NSHTTPURLResponse allHeaderFields] for more information.
+//
 // AllHTTPResponseHeaderFields calls the underlying AllHTTPResponseHeaderFields.
 func (x *PlayerItemErrorLogEvent) AllHTTPResponseHeaderFields() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
 	return x.inner.AllHTTPResponseHeaderFields()

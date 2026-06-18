@@ -35,6 +35,8 @@ func NewSymbolScaleEffect() *SymbolScaleEffect {
 	return &SymbolScaleEffect{inner: raw.NSSymbolScaleEffectFromID(_id)}
 }
 
+// Returns a copy of the effect that animates incrementally, by layer.
+//
 // EffectWithByLayer calls the underlying EffectWithByLayer.
 func (x *SymbolScaleEffect) EffectWithByLayer() *SymbolScaleEffect {
 	_r := x.inner.EffectWithByLayer()
@@ -44,6 +46,8 @@ func (x *SymbolScaleEffect) EffectWithByLayer() *SymbolScaleEffect {
 	return &SymbolScaleEffect{inner: _r}
 }
 
+// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+//
 // EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
 func (x *SymbolScaleEffect) EffectWithWholeSymbol() *SymbolScaleEffect {
 	_r := x.inner.EffectWithWholeSymbol()

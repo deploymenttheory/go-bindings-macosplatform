@@ -39,95 +39,127 @@ func NewScannerFunctionalUnitDocumentFeeder() *ScannerFunctionalUnitDocumentFeed
 	return &ScannerFunctionalUnitDocumentFeeder{inner: raw.ICScannerFunctionalUnitDocumentFeederFromID(_id)}
 }
 
+// @property documentType @abstract ￼Current document type. This will always be one of the supported document types.
+//
 // WithDocumentType sets the documentType property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitDocumentFeeder) WithDocumentType(documentType ICScannerDocumentType) *ScannerFunctionalUnitDocumentFeeder {
 	x.inner.SetDocumentType(raw.ICScannerDocumentType(documentType))
 	return x
 }
 
+// @property duplexScanningEnabled @abstract ￼Indicates whether duplex scanning is enabled.
+//
 // WithDuplexScanningEnabled sets the duplexScanningEnabled property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitDocumentFeeder) WithDuplexScanningEnabled(duplexScanningEnabled bool) *ScannerFunctionalUnitDocumentFeeder {
 	x.inner.SetDuplexScanningEnabled(duplexScanningEnabled)
 	return x
 }
 
+// @property oddPageOrientation @abstract ￼Desired orientation of the odd pages of the scanned document. @discussion This property is set to ICEXIFOrientation1 initially.
+//
 // WithOddPageOrientation sets the oddPageOrientation property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitDocumentFeeder) WithOddPageOrientation(oddPageOrientation ICEXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder {
 	x.inner.SetOddPageOrientation(raw.ICEXIFOrientationType(oddPageOrientation))
 	return x
 }
 
+// @property evenPageOrientation @abstract ￼Desired orientation of the even pages of the scanned document. @discussion This property is set to ICEXIFOrientation1 initially.
+//
 // WithEvenPageOrientation sets the evenPageOrientation property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitDocumentFeeder) WithEvenPageOrientation(evenPageOrientation ICEXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder {
 	x.inner.SetEvenPageOrientation(raw.ICEXIFOrientationType(evenPageOrientation))
 	return x
 }
 
+// @property pixelDataType @abstract ￼The pixel data type.
+//
 // WithPixelDataType sets the pixelDataType property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitDocumentFeeder) WithPixelDataType(pixelDataType ICScannerPixelDataType) *ScannerFunctionalUnitDocumentFeeder {
 	x.inner.ICScannerFunctionalUnit.SetPixelDataType(raw.ICScannerPixelDataType(pixelDataType))
 	return x
 }
 
+// @property bitDepth @abstract ￼The bit depth to use when performing the final scan. This will always be one of the supported bit depths.
+//
 // WithBitDepth sets the bitDepth property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitDocumentFeeder) WithBitDepth(bitDepth ICScannerBitDepth) *ScannerFunctionalUnitDocumentFeeder {
 	x.inner.ICScannerFunctionalUnit.SetBitDepth(raw.ICScannerBitDepth(bitDepth))
 	return x
 }
 
+// @property measurementUnit @abstract ￼Current measurement unit. This will always be one of the supported measurement units.
+//
 // WithMeasurementUnit sets the measurementUnit property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitDocumentFeeder) WithMeasurementUnit(measurementUnit ICScannerMeasurementUnit) *ScannerFunctionalUnitDocumentFeeder {
 	x.inner.ICScannerFunctionalUnit.SetMeasurementUnit(raw.ICScannerMeasurementUnit(measurementUnit))
 	return x
 }
 
+// @property resolution @abstract ￼Current scan resolution. This will always be one of the supported resolution values.
+//
 // WithResolution sets the resolution property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitDocumentFeeder) WithResolution(resolution uint) *ScannerFunctionalUnitDocumentFeeder {
 	x.inner.ICScannerFunctionalUnit.SetResolution(resolution)
 	return x
 }
 
+// @property scaleFactor @abstract ￼Current scale factor. This will always be one of the supported scale factor values.
+//
 // WithScaleFactor sets the scaleFactor property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitDocumentFeeder) WithScaleFactor(scaleFactor uint) *ScannerFunctionalUnitDocumentFeeder {
 	x.inner.ICScannerFunctionalUnit.SetScaleFactor(scaleFactor)
 	return x
 }
 
+// @property scanArea @abstract ￼This property along with scanAreaOrientation describes the area to be scanned.
+//
 // WithScanArea sets the scanArea property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitDocumentFeeder) WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnitDocumentFeeder {
 	x.inner.ICScannerFunctionalUnit.SetScanArea(scanArea)
 	return x
 }
 
+// @property scanAreaOrientation @abstract ￼Desired orientation of the scan area. This property along with scanArea describes the area to be scanned. @discussion This property is set to ICEXIFOrientation1 initially. This property is not used by the ICScannerFunctionalUnitDocumentFeeder subclass.
+//
 // WithScanAreaOrientation sets the scanAreaOrientation property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitDocumentFeeder) WithScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder {
 	x.inner.ICScannerFunctionalUnit.SetScanAreaOrientation(raw.ICEXIFOrientationType(scanAreaOrientation))
 	return x
 }
 
+// @property usesThresholdForBlackAndWhiteScanning @abstract ￼Indicates if this functional unit uses threshold value to be used when performing a scan in black & white.
+//
 // WithUsesThresholdForBlackAndWhiteScanning sets the usesThresholdForBlackAndWhiteScanning property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitDocumentFeeder) WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnitDocumentFeeder {
 	x.inner.ICScannerFunctionalUnit.SetUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning)
 	return x
 }
 
+// @property thresholdForBlackAndWhiteScanning @abstract ￼Threshold value to be used when performing a scan in black & white. This value should be from 0 to 255.
+//
 // WithThresholdForBlackAndWhiteScanning sets the thresholdForBlackAndWhiteScanning property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitDocumentFeeder) WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnitDocumentFeeder {
 	x.inner.ICScannerFunctionalUnit.SetThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning)
 	return x
 }
 
+// @property overviewResolution @abstract ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.
+//
 // WithOverviewResolution sets the overviewResolution property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitDocumentFeeder) WithOverviewResolution(overviewResolution uint) *ScannerFunctionalUnitDocumentFeeder {
 	x.inner.ICScannerFunctionalUnit.SetOverviewResolution(overviewResolution)
 	return x
 }
 
+// @property supportedDocumentTypes @abstract ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
+//
 // SupportedDocumentTypes calls the underlying SupportedDocumentTypes.
 func (x *ScannerFunctionalUnitDocumentFeeder) SupportedDocumentTypes() *foundation.NSIndexSet {
 	return x.inner.SupportedDocumentTypes()
 }
 
+// @property documentType @abstract ￼Current document type. This will always be one of the supported document types.
+//
 // DocumentType calls the underlying DocumentType.
 func (x *ScannerFunctionalUnitDocumentFeeder) DocumentType() ICScannerDocumentType {
 	return ICScannerDocumentType(x.inner.DocumentType())
@@ -138,16 +170,22 @@ func (x *ScannerFunctionalUnitDocumentFeeder) SetDocumentType(documentType ICSca
 	x.inner.SetDocumentType(raw.ICScannerDocumentType(documentType))
 }
 
+// @property documentSize @abstract ￼Document size of the current document type expressed in current measurement unit.
+//
 // DocumentSize calls the underlying DocumentSize.
 func (x *ScannerFunctionalUnitDocumentFeeder) DocumentSize() corefoundation.CGSize {
 	return x.inner.DocumentSize()
 }
 
+// @property supportsDuplexScanning @abstract ￼Indicates whether duplex scanning is supported.
+//
 // SupportsDuplexScanning calls the underlying SupportsDuplexScanning.
 func (x *ScannerFunctionalUnitDocumentFeeder) SupportsDuplexScanning() bool {
 	return x.inner.SupportsDuplexScanning()
 }
 
+// @property duplexScanningEnabled @abstract ￼Indicates whether duplex scanning is enabled.
+//
 // DuplexScanningEnabled calls the underlying DuplexScanningEnabled.
 func (x *ScannerFunctionalUnitDocumentFeeder) DuplexScanningEnabled() bool {
 	return x.inner.DuplexScanningEnabled()
@@ -158,11 +196,15 @@ func (x *ScannerFunctionalUnitDocumentFeeder) SetDuplexScanningEnabled(duplexSca
 	x.inner.SetDuplexScanningEnabled(duplexScanningEnabled)
 }
 
+// @property documentLoaded @abstract ￼Indicates whether the feeder has documents to scan. @discussion This value will change when the document is loaded or removed from the feeder, if the scanner module has the capability to detect this state.
+//
 // DocumentLoaded calls the underlying DocumentLoaded.
 func (x *ScannerFunctionalUnitDocumentFeeder) DocumentLoaded() bool {
 	return x.inner.DocumentLoaded()
 }
 
+// @property oddPageOrientation @abstract ￼Desired orientation of the odd pages of the scanned document. @discussion This property is set to ICEXIFOrientation1 initially.
+//
 // OddPageOrientation calls the underlying OddPageOrientation.
 func (x *ScannerFunctionalUnitDocumentFeeder) OddPageOrientation() ICEXIFOrientationType {
 	return ICEXIFOrientationType(x.inner.OddPageOrientation())
@@ -173,6 +215,8 @@ func (x *ScannerFunctionalUnitDocumentFeeder) SetOddPageOrientation(oddPageOrien
 	x.inner.SetOddPageOrientation(raw.ICEXIFOrientationType(oddPageOrientation))
 }
 
+// @property evenPageOrientation @abstract ￼Desired orientation of the even pages of the scanned document. @discussion This property is set to ICEXIFOrientation1 initially.
+//
 // EvenPageOrientation calls the underlying EvenPageOrientation.
 func (x *ScannerFunctionalUnitDocumentFeeder) EvenPageOrientation() ICEXIFOrientationType {
 	return ICEXIFOrientationType(x.inner.EvenPageOrientation())
@@ -183,6 +227,8 @@ func (x *ScannerFunctionalUnitDocumentFeeder) SetEvenPageOrientation(evenPageOri
 	x.inner.SetEvenPageOrientation(raw.ICEXIFOrientationType(evenPageOrientation))
 }
 
+// @property reverseFeederPageOrder @abstract ￼Indicates whether the document feeder reads pages from back to front.
+//
 // ReverseFeederPageOrder calls the underlying ReverseFeederPageOrder.
 func (x *ScannerFunctionalUnitDocumentFeeder) ReverseFeederPageOrder() bool {
 	return x.inner.ReverseFeederPageOrder()

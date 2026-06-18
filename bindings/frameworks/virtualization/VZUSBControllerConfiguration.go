@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for a USB controller configuration.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzusbcontrollerconfiguration
 type VZUSBControllerConfiguration struct {
 	foundation.NSObject

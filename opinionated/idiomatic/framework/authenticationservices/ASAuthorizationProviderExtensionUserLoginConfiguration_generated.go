@@ -40,32 +40,44 @@ func NewAuthorizationProviderExtensionUserLoginConfigurationWithLoginUserName(lo
 	return &AuthorizationProviderExtensionUserLoginConfiguration{inner: raw.ASAuthorizationProviderExtensionUserLoginConfigurationFromID(_id)}
 }
 
+// @abstract The user name to use when authenticating with the identity provider.
+//
 // WithLoginUserName sets the loginUserName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionUserLoginConfiguration) WithLoginUserName(loginUserName string) *AuthorizationProviderExtensionUserLoginConfiguration {
 	x.inner.SetLoginUserName(foundation.NSStringStringWithUTF8String(loginUserName))
 	return x
 }
 
+// @abstract Sets custom claims to be added to the embedded assertion request header. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+//
 // SetCustomAssertionRequestHeaderClaimsReturningError calls the underlying SetCustomAssertionRequestHeaderClaimsReturningError.
 func (x *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomAssertionRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.SetCustomAssertionRequestHeaderClaimsReturningError(claims)
 }
 
+// @abstract Sets custom claims to be added to the embedded assertion request body. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+//
 // SetCustomAssertionRequestBodyClaimsReturningError calls the underlying SetCustomAssertionRequestBodyClaimsReturningError.
 func (x *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomAssertionRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.SetCustomAssertionRequestBodyClaimsReturningError(claims)
 }
 
+// @abstract Sets custom claims to be added to the login request header. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+//
 // SetCustomLoginRequestHeaderClaimsReturningError calls the underlying SetCustomLoginRequestHeaderClaimsReturningError.
 func (x *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomLoginRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.SetCustomLoginRequestHeaderClaimsReturningError(claims)
 }
 
+// @abstract Sets custom claims to be added to the login request body. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+//
 // SetCustomLoginRequestBodyClaimsReturningError calls the underlying SetCustomLoginRequestBodyClaimsReturningError.
 func (x *AuthorizationProviderExtensionUserLoginConfiguration) SetCustomLoginRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.SetCustomLoginRequestBodyClaimsReturningError(claims)
 }
 
+// @abstract The user name to use when authenticating with the identity provider.
+//
 // LoginUserName calls the underlying LoginUserName.
 func (x *AuthorizationProviderExtensionUserLoginConfiguration) LoginUserName() string {
 	_r := x.inner.LoginUserName()

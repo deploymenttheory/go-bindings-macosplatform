@@ -36,21 +36,29 @@ func NewAppRunTimeMetric() *AppRunTimeMetric {
 	return &AppRunTimeMetric{inner: raw.MXAppRunTimeMetricFromID(_id)}
 }
 
+// @property      cumulativeForegroundTime @abstract      Cumulative application foreground time. @discussion    Time spent on screen and visible to the user. @discussion    Dimensioned as NSUnitDuration.
+//
 // CumulativeForegroundTime calls the underlying CumulativeForegroundTime.
 func (x *AppRunTimeMetric) CumulativeForegroundTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
 	return x.inner.CumulativeForegroundTime()
 }
 
+// @property      cumulativeBackgroundTime @abstract      Cumulative application background time. @discussion    Time spent off screen and in the background, invisible to the user. @discussion    Dimensioned as NSUnitDuration.
+//
 // CumulativeBackgroundTime calls the underlying CumulativeBackgroundTime.
 func (x *AppRunTimeMetric) CumulativeBackgroundTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
 	return x.inner.CumulativeBackgroundTime()
 }
 
+// @property      cumulativeBackgroundAudioTime @abstract      Cumulative time the application spent running in the background to play audio @discussion    Dimensioned as NSUnitDuration.
+//
 // CumulativeBackgroundAudioTime calls the underlying CumulativeBackgroundAudioTime.
 func (x *AppRunTimeMetric) CumulativeBackgroundAudioTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
 	return x.inner.CumulativeBackgroundAudioTime()
 }
 
+// @property      cumulativeBackgroundLocationTime @abstract      Cumulative time the application spent running in the background to acquire or process location. @discussion    Dimensioned as NSUnitDuration.
+//
 // CumulativeBackgroundLocationTime calls the underlying CumulativeBackgroundLocationTime.
 func (x *AppRunTimeMetric) CumulativeBackgroundLocationTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
 	return x.inner.CumulativeBackgroundLocationTime()

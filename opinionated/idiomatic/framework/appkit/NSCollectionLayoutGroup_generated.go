@@ -84,8 +84,17 @@ func (x *CollectionLayoutGroup) VisualDescription() string {
 }
 
 // SetSupplementaryItems calls the underlying SetSupplementaryItems.
-func (x *CollectionLayoutGroup) SetSupplementaryItems(supplementaryItems *foundation.NSArray[*raw.NSCollectionLayoutSupplementaryItem]) {
-	x.inner.SetSupplementaryItems(supplementaryItems)
+func (x *CollectionLayoutGroup) SetSupplementaryItems(supplementaryItems ...CollectionLayoutSupplementaryItemProvider) {
+	_ptrs := make([]objc.ID, len(supplementaryItems))
+	for _i, _v := range supplementaryItems {
+		_ptrs[_i] = _v.asCollectionLayoutSupplementaryItem().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NSCollectionLayoutSupplementaryItem]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NSCollectionLayoutSupplementaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetSupplementaryItems(_arg0)
 }
 
 // InterItemSpacing calls the underlying InterItemSpacing.
@@ -125,7 +134,7 @@ type CollectionLayoutGroupable interface {
 	WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutGroup
 	WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutGroup
 	VisualDescription() string
-	SetSupplementaryItems(supplementaryItems *foundation.NSArray[*raw.NSCollectionLayoutSupplementaryItem])
+	SetSupplementaryItems(supplementaryItems ...CollectionLayoutSupplementaryItemProvider)
 	InterItemSpacing() *CollectionLayoutSpacing
 	SetInterItemSpacing(interItemSpacing *raw.NSCollectionLayoutSpacing)
 	Subitems() []*CollectionLayoutItem

@@ -33,6 +33,8 @@ func MTRBaseClusterMediaInputFromID(id objc.ID) *MTRBaseClusterMediaInput {
 	return &MTRBaseClusterMediaInput{inner: raw.MTRBaseClusterMediaInputFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterMediaInputWithDeviceEndpointIDQueue creates a new [MTRBaseClusterMediaInput].
 func NewMTRBaseClusterMediaInputWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterMediaInput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterMediaInput")), objc.RegisterName("alloc"))
@@ -47,11 +49,15 @@ func NewMTRBaseClusterMediaInputWithDeviceEndpointQueue(device *raw.MTRBaseDevic
 	return &MTRBaseClusterMediaInput{inner: raw.MTRBaseClusterMediaInputFromID(_id)}
 }
 
+// Command SelectInput Upon receipt, this command SHALL change the media input on the device to the input at a specific index in the Input List.
+//
 // SelectInputWithParamsCompletion calls the underlying SelectInputWithParamsCompletion.
 func (x *MTRBaseClusterMediaInput) SelectInputWithParamsCompletion(params *raw.MTRMediaInputClusterSelectInputParams, completion func(unsafe.Pointer)) {
 	x.inner.SelectInputWithParamsCompletion(params, completion)
 }
 
+// Command ShowInputStatus Upon receipt, this command SHALL display the active status of the input list on screen.
+//
 // ShowInputStatusWithParamsCompletion calls the underlying ShowInputStatusWithParamsCompletion.
 func (x *MTRBaseClusterMediaInput) ShowInputStatusWithParamsCompletion(params *raw.MTRMediaInputClusterShowInputStatusParams, completion func(unsafe.Pointer)) {
 	x.inner.ShowInputStatusWithParamsCompletion(params, completion)
@@ -62,6 +68,8 @@ func (x *MTRBaseClusterMediaInput) ShowInputStatusWithCompletion(completion func
 	x.inner.ShowInputStatusWithCompletion(completion)
 }
 
+// Command HideInputStatus Upon receipt, this command SHALL hide the input list from the screen.
+//
 // HideInputStatusWithParamsCompletion calls the underlying HideInputStatusWithParamsCompletion.
 func (x *MTRBaseClusterMediaInput) HideInputStatusWithParamsCompletion(params *raw.MTRMediaInputClusterHideInputStatusParams, completion func(unsafe.Pointer)) {
 	x.inner.HideInputStatusWithParamsCompletion(params, completion)
@@ -72,6 +80,8 @@ func (x *MTRBaseClusterMediaInput) HideInputStatusWithCompletion(completion func
 	x.inner.HideInputStatusWithCompletion(completion)
 }
 
+// Command RenameInput Upon receipt, this command SHALL rename the input at a specific index in the Input List.
+//
 // RenameInputWithParamsCompletion calls the underlying RenameInputWithParamsCompletion.
 func (x *MTRBaseClusterMediaInput) RenameInputWithParamsCompletion(params *raw.MTRMediaInputClusterRenameInputParams, completion func(unsafe.Pointer)) {
 	x.inner.RenameInputWithParamsCompletion(params, completion)

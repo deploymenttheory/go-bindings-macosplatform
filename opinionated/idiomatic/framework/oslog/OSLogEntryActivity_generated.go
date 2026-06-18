@@ -35,6 +35,8 @@ func NewLogEntryActivity() *LogEntryActivity {
 	return &LogEntryActivity{inner: raw.OSLogEntryActivityFromID(_id)}
 }
 
+// @property parentActivityIdentifier @abstract This parent activity's activity ID.
+//
 // ParentActivityIdentifier calls the underlying ParentActivityIdentifier.
 func (x *LogEntryActivity) ParentActivityIdentifier() uint64 {
 	return x.inner.ParentActivityIdentifier()

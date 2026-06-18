@@ -32,6 +32,8 @@ func MTRClusterNitrogenDioxideConcentrationMeasurementFromID(id objc.ID) *MTRClu
 	return &MTRClusterNitrogenDioxideConcentrationMeasurement{inner: raw.MTRClusterNitrogenDioxideConcentrationMeasurementFromID(id)}
 }
 
+// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+//
 // NewMTRClusterNitrogenDioxideConcentrationMeasurementWithDeviceEndpointIDQueue creates a new [MTRClusterNitrogenDioxideConcentrationMeasurement].
 func NewMTRClusterNitrogenDioxideConcentrationMeasurementWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterNitrogenDioxideConcentrationMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterNitrogenDioxideConcentrationMeasurement")), objc.RegisterName("alloc"))

@@ -37,18 +37,24 @@ func NewMTL4CompilerDescriptor() *MTL4CompilerDescriptor {
 	return &MTL4CompilerDescriptor{inner: raw.MTL4CompilerDescriptorFromID(_id)}
 }
 
+// Assigns an optional descriptor label to the compiler for debugging purposes.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MTL4CompilerDescriptor) WithLabel(label string) *MTL4CompilerDescriptor {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// Assigns a pipeline data set serializer into which this compiler stores data for all pipelines it creates.
+//
 // WithPipelineDataSetSerializer sets the pipelineDataSetSerializer property and returns the receiver for chaining.
 func (x *MTL4CompilerDescriptor) WithPipelineDataSetSerializer(pipelineDataSetSerializer raw.MTL4PipelineDataSetSerializer) *MTL4CompilerDescriptor {
 	x.inner.SetPipelineDataSetSerializer(pipelineDataSetSerializer)
 	return x
 }
 
+// Assigns an optional descriptor label to the compiler for debugging purposes.
+//
 // Label calls the underlying Label.
 func (x *MTL4CompilerDescriptor) Label() string {
 	_r := x.inner.Label()
@@ -63,6 +69,8 @@ func (x *MTL4CompilerDescriptor) SetLabel(label string) {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 }
 
+// Assigns a pipeline data set serializer into which this compiler stores data for all pipelines it creates.
+//
 // PipelineDataSetSerializer calls the underlying PipelineDataSetSerializer.
 func (x *MTL4CompilerDescriptor) PipelineDataSetSerializer() raw.MTL4PipelineDataSetSerializer {
 	return x.inner.PipelineDataSetSerializer()

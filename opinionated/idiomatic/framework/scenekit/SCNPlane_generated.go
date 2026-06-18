@@ -37,48 +37,64 @@ func NewPlane() *Plane {
 	return &Plane{inner: raw.SCNPlaneFromID(_id)}
 }
 
+// @property width @abstract The plane extent along the X axis. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // WithWidth sets the width property and returns the receiver for chaining.
 func (x *Plane) WithWidth(width float64) *Plane {
 	x.inner.SetWidth(width)
 	return x
 }
 
+// @property height @abstract The plane extent along the Y axis. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // WithHeight sets the height property and returns the receiver for chaining.
 func (x *Plane) WithHeight(height float64) *Plane {
 	x.inner.SetHeight(height)
 	return x
 }
 
+// @property widthSegmentCount @abstract The number of subdivisions along the X axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // WithWidthSegmentCount sets the widthSegmentCount property and returns the receiver for chaining.
 func (x *Plane) WithWidthSegmentCount(widthSegmentCount int) *Plane {
 	x.inner.SetWidthSegmentCount(widthSegmentCount)
 	return x
 }
 
+// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. The default value is 1. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
 func (x *Plane) WithHeightSegmentCount(heightSegmentCount int) *Plane {
 	x.inner.SetHeightSegmentCount(heightSegmentCount)
 	return x
 }
 
+// @property cornerRadius @abstract The corner radius. Animatable. @discussion If the value is strictly less than 0, the geometry is empty. The default value is 0.
+//
 // WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
 func (x *Plane) WithCornerRadius(cornerRadius float64) *Plane {
 	x.inner.SetCornerRadius(cornerRadius)
 	return x
 }
 
+// @property cornerSegmentCount @abstract The number of subdivisions for the rounded corners. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 10.
+//
 // WithCornerSegmentCount sets the cornerSegmentCount property and returns the receiver for chaining.
 func (x *Plane) WithCornerSegmentCount(cornerSegmentCount int) *Plane {
 	x.inner.SetCornerSegmentCount(cornerSegmentCount)
 	return x
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Plane) WithName(name string) *Plane {
 	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+//
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Plane) WithMaterials(items ...*raw.SCNMaterial) *Plane {
 	if len(items) == 0 {
@@ -97,12 +113,16 @@ func (x *Plane) WithMaterials(items ...*raw.SCNMaterial) *Plane {
 	return x
 }
 
+// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+//
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Plane) WithFirstMaterial(firstMaterial *Material) *Plane {
 	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
+// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+//
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Plane) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Plane {
 	if len(items) == 0 {
@@ -127,30 +147,40 @@ func (x *Plane) WithTessellator(tessellator *GeometryTessellator) *Plane {
 	return x
 }
 
+// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+//
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Plane) WithSubdivisionLevel(subdivisionLevel uint) *Plane {
 	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
 	return x
 }
 
+// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+//
 // WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
 func (x *Plane) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Plane {
 	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
 	return x
 }
 
+// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+//
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Plane) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Plane {
 	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
+// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+//
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Plane) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Plane {
 	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
+// @property width @abstract The plane extent along the X axis. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // Width calls the underlying Width.
 func (x *Plane) Width() float64 {
 	return x.inner.Width()
@@ -161,6 +191,8 @@ func (x *Plane) SetWidth(width float64) {
 	x.inner.SetWidth(width)
 }
 
+// @property height @abstract The plane extent along the Y axis. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // Height calls the underlying Height.
 func (x *Plane) Height() float64 {
 	return x.inner.Height()
@@ -171,6 +203,8 @@ func (x *Plane) SetHeight(height float64) {
 	x.inner.SetHeight(height)
 }
 
+// @property widthSegmentCount @abstract The number of subdivisions along the X axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // WidthSegmentCount calls the underlying WidthSegmentCount.
 func (x *Plane) WidthSegmentCount() int {
 	return x.inner.WidthSegmentCount()
@@ -181,6 +215,8 @@ func (x *Plane) SetWidthSegmentCount(widthSegmentCount int) {
 	x.inner.SetWidthSegmentCount(widthSegmentCount)
 }
 
+// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. The default value is 1. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // HeightSegmentCount calls the underlying HeightSegmentCount.
 func (x *Plane) HeightSegmentCount() int {
 	return x.inner.HeightSegmentCount()
@@ -191,6 +227,8 @@ func (x *Plane) SetHeightSegmentCount(heightSegmentCount int) {
 	x.inner.SetHeightSegmentCount(heightSegmentCount)
 }
 
+// @property cornerRadius @abstract The corner radius. Animatable. @discussion If the value is strictly less than 0, the geometry is empty. The default value is 0.
+//
 // CornerRadius calls the underlying CornerRadius.
 func (x *Plane) CornerRadius() float64 {
 	return x.inner.CornerRadius()
@@ -201,6 +239,8 @@ func (x *Plane) SetCornerRadius(cornerRadius float64) {
 	x.inner.SetCornerRadius(cornerRadius)
 }
 
+// @property cornerSegmentCount @abstract The number of subdivisions for the rounded corners. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 10.
+//
 // CornerSegmentCount calls the underlying CornerSegmentCount.
 func (x *Plane) CornerSegmentCount() int {
 	return x.inner.CornerSegmentCount()

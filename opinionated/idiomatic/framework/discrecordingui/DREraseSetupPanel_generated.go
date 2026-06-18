@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @class			DREraseSetupPanel @abstract		Manages a panel that allows users to specify the parameters of an erase. @discussion		This class supports choosing the device to use and what sort of erase to perform. When the panel is closed by the user choosing to erase the media in the device, the device is exclusively held by the application for its own use to prevent possible bad or corrupt media from causing problem for the rest of the system. This means that if the erase object obtained from the panel is not used to do an erase, the device will remain unavailable to other applications until the exclusive access is released.
+//
 // EraseSetupPanel wraps [raw.DREraseSetupPanel] with a fluent Go API.
 type EraseSetupPanel struct {
 	inner *raw.DREraseSetupPanel
@@ -36,11 +38,15 @@ func NewEraseSetupPanel() *EraseSetupPanel {
 	return &EraseSetupPanel{inner: raw.DREraseSetupPanelFromID(_id)}
 }
 
+// @method 	eraseObject @abstract	Creates and returns a new DRErase object that's configured to erase the disc in the currently selected device. @discussion	The new DRErase object is configured based on the settings in the setup panel when the user clicks the OK button. Do not invoke this method within a modal session (@link //apple_ref/occ/instm/DRSetupPanel/runSetupPanel runSetupPanel @/link or @link //apple_ref/occ/instm/DRSetupPanel/beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: @/link) because the erase object information is only updated just before the modal session ends. @result  	A new DRErase object.
+//
 // EraseObject calls the underlying EraseObject.
 func (x *EraseSetupPanel) EraseObject() *discrecording.DRErase {
 	return x.inner.EraseObject()
 }
 
+// @method 			eraseType: @abstract 		Invoked when the user clicks one of the panel's erase type radio buttons. @param 			sender	The object that invoked this method.
+//
 // EraseType calls the underlying EraseType.
 func (x *EraseSetupPanel) EraseType(sender objc.ID) {
 	x.inner.EraseType(sender)

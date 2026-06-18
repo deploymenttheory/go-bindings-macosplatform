@@ -38,21 +38,29 @@ func NewNowPlayingInfoLanguageOptionWithTypeLanguageTagCharacteristicsDisplayNam
 	return &NowPlayingInfoLanguageOption{inner: raw.MPNowPlayingInfoLanguageOptionFromID(_id)}
 }
 
+// Represents a special case that is used to represent the best legible language option based on system preferences. See AVPlayerItem-selectMediaOptionAutomaticallyInMediaSelectionGroup
+//
 // IsAutomaticLegibleLanguageOption calls the underlying IsAutomaticLegibleLanguageOption.
 func (x *NowPlayingInfoLanguageOption) IsAutomaticLegibleLanguageOption() bool {
 	return x.inner.IsAutomaticLegibleLanguageOption()
 }
 
+// Represents a special case that is used to represent the best audible language option based on system preferences. See AVPlayerItem-selectMediaOptionAutomaticallyInMediaSelectionGroup
+//
 // IsAutomaticAudibleLanguageOption calls the underlying IsAutomaticAudibleLanguageOption.
 func (x *NowPlayingInfoLanguageOption) IsAutomaticAudibleLanguageOption() bool {
 	return x.inner.IsAutomaticAudibleLanguageOption()
 }
 
+// The type of language option.
+//
 // LanguageOptionType calls the underlying LanguageOptionType.
 func (x *NowPlayingInfoLanguageOption) LanguageOptionType() MPNowPlayingInfoLanguageOptionType {
 	return MPNowPlayingInfoLanguageOptionType(x.inner.LanguageOptionType())
 }
 
+// The IETF BCP 47 language tag. A nil languageTag reprsents that this option should be disabled. A languageTag with the value of MPLangaugeOptionAutoLangaugeTag represents that the best langauge based on the system preferences should be used.
+//
 // LanguageTag calls the underlying LanguageTag.
 func (x *NowPlayingInfoLanguageOption) LanguageTag() string {
 	_r := x.inner.LanguageTag()
@@ -62,6 +70,8 @@ func (x *NowPlayingInfoLanguageOption) LanguageTag() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Characteristics describing the content of the language options. See the LanguageOptionCharacteristics for the most commonly used values.
+//
 // LanguageOptionCharacteristics returns the collection as a Go slice.
 func (x *NowPlayingInfoLanguageOption) LanguageOptionCharacteristics() []string {
 	arr := x.inner.LanguageOptionCharacteristics()
@@ -73,6 +83,8 @@ func (x *NowPlayingInfoLanguageOption) LanguageOptionCharacteristics() []string 
 	})
 }
 
+// A user presentable display name for this option.
+//
 // DisplayName calls the underlying DisplayName.
 func (x *NowPlayingInfoLanguageOption) DisplayName() string {
 	_r := x.inner.DisplayName()
@@ -82,6 +94,8 @@ func (x *NowPlayingInfoLanguageOption) DisplayName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A unique identifier representing this option.
+//
 // Identifier calls the underlying Identifier.
 func (x *NowPlayingInfoLanguageOption) Identifier() string {
 	_r := x.inner.Identifier()

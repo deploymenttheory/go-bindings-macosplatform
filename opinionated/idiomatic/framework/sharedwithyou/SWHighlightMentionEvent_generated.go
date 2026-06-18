@@ -32,6 +32,8 @@ func HighlightMentionEventFromID(id objc.ID) *HighlightMentionEvent {
 	return &HighlightMentionEvent{inner: raw.SWHighlightMentionEventFromID(id)}
 }
 
+// Initializes a highlight mention event object when the sender mentions another participant. @param highlight The object on which the event occurred. @param handle The CloudKit handle of the person being mentioned by the sender.
+//
 // NewHighlightMentionEventWithHighlightMentionedPersonCloudKitShareHandle creates a new [HighlightMentionEvent].
 func NewHighlightMentionEventWithHighlightMentionedPersonCloudKitShareHandle(highlight *raw.SWHighlight, handle string) *HighlightMentionEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWHighlightMentionEvent")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewHighlightMentionEventWithHighlightMentionedPersonCloudKitShareHandle(hig
 	return &HighlightMentionEvent{inner: raw.SWHighlightMentionEventFromID(_id)}
 }
 
+// Initializes a highlight mention event object when the sender mentions another participant. @param highlight The object on which the event occurred. @param identity The identity of the person being mentioned by the sender.
+//
 // NewHighlightMentionEventWithHighlightMentionedPersonIdentity creates a new [HighlightMentionEvent].
 func NewHighlightMentionEventWithHighlightMentionedPersonIdentity(highlight *raw.SWHighlight, identity *sharedwithyoucore.SWPersonIdentity) *HighlightMentionEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWHighlightMentionEvent")), objc.RegisterName("alloc"))
@@ -46,6 +50,8 @@ func NewHighlightMentionEventWithHighlightMentionedPersonIdentity(highlight *raw
 	return &HighlightMentionEvent{inner: raw.SWHighlightMentionEventFromID(_id)}
 }
 
+// The person being mentioned by the sender.
+//
 // MentionedPersonHandle calls the underlying MentionedPersonHandle.
 func (x *HighlightMentionEvent) MentionedPersonHandle() string {
 	_r := x.inner.MentionedPersonHandle()

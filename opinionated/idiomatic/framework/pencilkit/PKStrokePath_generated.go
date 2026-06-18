@@ -31,6 +31,8 @@ func StrokePathFromID(id objc.ID) *StrokePath {
 	return &StrokePath{inner: raw.PKStrokePathFromID(id)}
 }
 
+// Create a stroke path value with the given cubic B-spline control points. @param controlPoints An array of control points for a cubic B-spline. @param creationDate The start time of this path.
+//
 // NewStrokePathWithControlPointsCreationDate creates a new [StrokePath].
 func NewStrokePathWithControlPointsCreationDate(controlPoints *foundation.NSArray[*raw.PKStrokePoint], creationDate *foundation.NSDate) *StrokePath {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKStrokePath")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewStrokePathWithControlPointsCreationDate(controlPoints *foundation.NSArra
 	return &StrokePath{inner: raw.PKStrokePathFromID(_id)}
 }
 
+// Returns B-spline control point at index `i`.
+//
 // PointAtIndex calls the underlying PointAtIndex.
 func (x *StrokePath) PointAtIndex(i uint) *StrokePoint {
 	_r := x.inner.PointAtIndex(i)
@@ -47,6 +51,8 @@ func (x *StrokePath) PointAtIndex(i uint) *StrokePoint {
 	return &StrokePoint{inner: _r}
 }
 
+// Returns B-spline control point at index `i`.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *StrokePath) ObjectAtIndexedSubscript(i uint) *StrokePoint {
 	_r := x.inner.ObjectAtIndexedSubscript(i)
@@ -56,11 +62,15 @@ func (x *StrokePath) ObjectAtIndexedSubscript(i uint) *StrokePoint {
 	return &StrokePoint{inner: _r}
 }
 
+// The on-curve location for the floating point [0, count-1] `parametricValue` parameter. This has better performance than `[self interpolatedPointAt: parametricValue].location` for when only the location is required.
+//
 // InterpolatedLocationAt calls the underlying InterpolatedLocationAt.
 func (x *StrokePath) InterpolatedLocationAt(parametricValue float64) corefoundation.CGPoint {
 	return x.inner.InterpolatedLocationAt(parametricValue)
 }
 
+// The on-curve point for the floating point [0, count-1] `parametricValue` parameter.
+//
 // InterpolatedPointAt calls the underlying InterpolatedPointAt.
 func (x *StrokePath) InterpolatedPointAt(parametricValue float64) *StrokePoint {
 	_r := x.inner.InterpolatedPointAt(parametricValue)
@@ -70,36 +80,50 @@ func (x *StrokePath) InterpolatedPointAt(parametricValue float64) *StrokePoint {
 	return &StrokePoint{inner: _r}
 }
 
+// Executes a given block using each point in a range with a distance step. @param range The parametric range to enumerate points in. @param distanceStep The distance to step between points. @param block The block to execute for each point. This block takes two parameters point The interpolated point on the spline. stop A reference to a Boolean value. Setting the value to YES within the block stops further enumeration of the array. If a block stops further enumeration, that block continues to run until it’s finished.
+//
 // EnumerateInterpolatedPointsInRangeStrideByDistanceUsing calls the underlying EnumerateInterpolatedPointsInRangeStrideByDistanceUsing.
 func (x *StrokePath) EnumerateInterpolatedPointsInRangeStrideByDistanceUsing(range_ *raw.PKFloatRange, distanceStep float64, block func(*raw.PKStrokePoint, *bool)) {
 	x.inner.EnumerateInterpolatedPointsInRangeStrideByDistanceUsing(range_, distanceStep, block)
 }
 
+// Executes a given block using each point in a range with a time step. @param range The parametric range to enumerate points in. @param timeStep The time interval to step between points. @param block The block to execute for each point. This block takes two parameters point The interpolated point on the spline. stop A reference to a Boolean value. Setting the value to YES within the block stops further enumeration of the array. If a block stops further enumeration, that block continues to run until it’s finished.
+//
 // EnumerateInterpolatedPointsInRangeStrideByTimeUsing calls the underlying EnumerateInterpolatedPointsInRangeStrideByTimeUsing.
 func (x *StrokePath) EnumerateInterpolatedPointsInRangeStrideByTimeUsing(range_ *raw.PKFloatRange, timeStep float64, block func(*raw.PKStrokePoint, *bool)) {
 	x.inner.EnumerateInterpolatedPointsInRangeStrideByTimeUsing(range_, timeStep, block)
 }
 
+// Executes a given block using each point in a range with a parametric step. @param range The parametric range to enumerate points in. @param parametricStep The parametric step between points. @param block The block to execute for each point. This block takes two parameters point The interpolated point on the spline. stop A reference to a Boolean value. Setting the value to YES within the block stops further enumeration of the array. If a block stops further enumeration, that block continues to run until it’s finished.
+//
 // EnumerateInterpolatedPointsInRangeStrideByParametricStepUsing calls the underlying EnumerateInterpolatedPointsInRangeStrideByParametricStepUsing.
 func (x *StrokePath) EnumerateInterpolatedPointsInRangeStrideByParametricStepUsing(range_ *raw.PKFloatRange, parametricStep float64, block func(*raw.PKStrokePoint, *bool)) {
 	x.inner.EnumerateInterpolatedPointsInRangeStrideByParametricStepUsing(range_, parametricStep, block)
 }
 
+// Returns a parametric value on the B-spline that is a specified distance from the given parametric value. @param parametricValue The floating point [0, count-1] parametric value. @param distanceStep The distance to offset `parametricValue`. `distanceStep` can be positive or negative. @return A parametric value offset by `distanceStep` from `parametricValue`.
+//
 // ParametricValueOffsetByDistance calls the underlying ParametricValueOffsetByDistance.
 func (x *StrokePath) ParametricValueOffsetByDistance(parametricValue float64, distanceStep float64) float64 {
 	return x.inner.ParametricValueOffsetByDistance(parametricValue, distanceStep)
 }
 
+// Returns a parametric value on the B-spline that is a specified time from the given parametric value. @param parametricValue The floating point [0, count-1] parametric value. @param timeStep The time to offset `parametricValue`. `timeStep` can be positive or negative. @return A parametric value offset by `timeStep` from `parametricValue`.
+//
 // ParametricValueOffsetByTime calls the underlying ParametricValueOffsetByTime.
 func (x *StrokePath) ParametricValueOffsetByTime(parametricValue float64, timeStep float64) float64 {
 	return x.inner.ParametricValueOffsetByTime(parametricValue, timeStep)
 }
 
+// The number of control points in this stroke path.
+//
 // Count calls the underlying Count.
 func (x *StrokePath) Count() uint {
 	return x.inner.Count()
 }
 
+// The time at which this stroke path was started. The `timeOffset` of contained PKStrokePoints is relative to this date.
+//
 // CreationDate calls the underlying CreationDate.
 func (x *StrokePath) CreationDate() *foundation.NSDate {
 	return x.inner.CreationDate()

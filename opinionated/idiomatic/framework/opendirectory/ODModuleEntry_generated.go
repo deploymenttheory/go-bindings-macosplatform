@@ -61,11 +61,15 @@ func (x *ModuleEntry) WithUuidString(uuidString string) *ModuleEntry {
 	return x
 }
 
+// @method setOption:value: @abstract Assigns a particular option for this module. @discussion Options are dictated by the module and can be queried via [module supportedOptions].
+//
 // SetOptionValue calls the underlying SetOptionValue.
 func (x *ModuleEntry) SetOptionValue(optionName string, value objc.ID) {
 	x.inner.SetOptionValue(foundation.NSStringStringWithUTF8String(optionName), value)
 }
 
+// @method option: @abstract Fetches the current setting for the requested option. @discussion Fetches the current setting for the requested option.
+//
 // Option calls the underlying Option.
 func (x *ModuleEntry) Option(optionName string) objc.ID {
 	return x.inner.Option(foundation.NSStringStringWithUTF8String(optionName))

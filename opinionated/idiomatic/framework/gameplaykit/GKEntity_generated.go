@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An entity is the general purpose object in an entity-component system. Entites have many components but components are associated with only a single entity. Note: GKEntity supports NSCopying and NSSecureCoding, but your custom GKComponent's must also support NSCopying and NSSecureCoding @see GKComponent @see GKComponentSystem
+//
 // Entity wraps [raw.GKEntity] with a fluent Go API.
 type Entity struct {
 	inner *raw.GKEntity
@@ -36,21 +38,29 @@ func NewEntity() *Entity {
 	return &Entity{inner: raw.GKEntityFromID(_id)}
 }
 
+// General update loop for this entity, which also updates all components in this entity that are not currently in a dedicated component system. Per-entity component updates is a simpler and less flexible option to using per-component updates, however both can not be allowed to occur at the same time for a component. Thus components that are added to dedicated component systems will not be updated here as they have opted for the more powerful feature of per-component systems. Update those components via their system instead. @see GKComponentSystem @param seconds elapsed time, in seconds, since last frame
+//
 // UpdateWithDeltaTime calls the underlying UpdateWithDeltaTime.
 func (x *Entity) UpdateWithDeltaTime(seconds float64) {
 	x.inner.UpdateWithDeltaTime(seconds)
 }
 
+// Adds a component to this entity.  If a component of the same class already exists it is overwritten with the new component. @param component the component to be added @see GKComponent
+//
 // AddComponent calls the underlying AddComponent.
 func (x *Entity) AddComponent(component *raw.GKComponent) {
 	x.inner.AddComponent(component)
 }
 
+// Removes the component of the indicates class from this entity @param componentClass the class of the component you want to remove
+//
 // RemoveComponentForClass calls the underlying RemoveComponentForClass.
 func (x *Entity) RemoveComponentForClass(componentClass objc.Class) {
 	x.inner.RemoveComponentForClass(componentClass)
 }
 
+// Gets the component of the indicated class.  Returns nil if entity does not have this component @param componentClass the class of the component you want to get
+//
 // ComponentForClass calls the underlying ComponentForClass.
 func (x *Entity) ComponentForClass(componentClass objc.Class) *Component {
 	_r := x.inner.ComponentForClass(componentClass)
@@ -60,6 +70,8 @@ func (x *Entity) ComponentForClass(componentClass objc.Class) *Component {
 	return &Component{inner: _r}
 }
 
+// Access the current set of components as an array. Note: this is not the internal array of components, but rather a newly created array of the current component mapping.
+//
 // Components returns the collection as a Go slice.
 func (x *Entity) Components() []*Component {
 	arr := x.inner.Components()

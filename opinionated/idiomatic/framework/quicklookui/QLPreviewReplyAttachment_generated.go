@@ -31,6 +31,8 @@ func PreviewReplyAttachmentFromID(id objc.ID) *PreviewReplyAttachment {
 	return &PreviewReplyAttachment{inner: raw.QLPreviewReplyAttachmentFromID(id)}
 }
 
+// @abstract Create an attachment for html previews by providing the data and mime type of the attachment. @param data The data content of an html preview @param contentType The UTType of the attachment for an html preview
+//
 // NewPreviewReplyAttachmentWithDataContentType creates a new [PreviewReplyAttachment].
 func NewPreviewReplyAttachmentWithDataContentType(data *foundation.NSData, contentType *uniformtypeidentifiers.UTType) *PreviewReplyAttachment {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QLPreviewReplyAttachment")), objc.RegisterName("alloc"))
@@ -38,11 +40,15 @@ func NewPreviewReplyAttachmentWithDataContentType(data *foundation.NSData, conte
 	return &PreviewReplyAttachment{inner: raw.QLPreviewReplyAttachmentFromID(_id)}
 }
 
+// The data content of an html preview
+//
 // Data calls the underlying Data.
 func (x *PreviewReplyAttachment) Data() *foundation.NSData {
 	return x.inner.Data()
 }
 
+// The content type of the attachment for an html preview
+//
 // ContentType calls the underlying ContentType.
 func (x *PreviewReplyAttachment) ContentType() *uniformtypeidentifiers.UTType {
 	return x.inner.ContentType()

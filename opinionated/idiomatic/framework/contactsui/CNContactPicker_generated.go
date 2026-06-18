@@ -40,6 +40,8 @@ func NewContactPicker() *ContactPicker {
 	return &ContactPicker{inner: raw.CNContactPickerFromID(_id)}
 }
 
+// @abstract The CNContact keys to display when a contact is expanded. @discussion If no keys are provided, the picker will select contacts instead of values.
+//
 // WithDisplayedKeys sets the collection, converting the Go slice to an NSArray.
 func (x *ContactPicker) WithDisplayedKeys(items ...*foundation.NSString) *ContactPicker {
 	if len(items) == 0 {
@@ -58,22 +60,30 @@ func (x *ContactPicker) WithDisplayedKeys(items ...*foundation.NSString) *Contac
 	return x
 }
 
+// @abstract The picker delegate to be notified when the user chooses a contact or value.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *ContactPicker) WithDelegate(delegate raw.CNContactPickerDelegate) *ContactPicker {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @abstract Shows the picker popover relative to a positioning rect for a view with a preferred edge. See NSPopover for more information.
+//
 // ShowRelativeToRectOfViewPreferredEdge calls the underlying ShowRelativeToRectOfViewPreferredEdge.
 func (x *ContactPicker) ShowRelativeToRectOfViewPreferredEdge(positioningRect corefoundation.CGRect, positioningView *appkit.NSView, preferredEdge foundation.NSRectEdge) {
 	x.inner.ShowRelativeToRectOfViewPreferredEdge(positioningRect, positioningView, preferredEdge)
 }
 
+// @abstract Closes the popover.
+//
 // Close calls the underlying Close.
 func (x *ContactPicker) Close() {
 	x.inner.Close()
 }
 
+// @abstract The CNContact keys to display when a contact is expanded. @discussion If no keys are provided, the picker will select contacts instead of values.
+//
 // DisplayedKeys returns the collection as a Go slice.
 func (x *ContactPicker) DisplayedKeys() []string {
 	arr := x.inner.DisplayedKeys()
@@ -90,6 +100,8 @@ func (x *ContactPicker) SetDisplayedKeys(displayedKeys *foundation.NSArray[*foun
 	x.inner.SetDisplayedKeys(displayedKeys)
 }
 
+// @abstract The picker delegate to be notified when the user chooses a contact or value.
+//
 // Delegate calls the underlying Delegate.
 func (x *ContactPicker) Delegate() raw.CNContactPickerDelegate {
 	return x.inner.Delegate()

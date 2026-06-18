@@ -45,6 +45,8 @@ func NewCIProfileWithDataName(data *foundation.NSData, inName string) *CIProfile
 	return &CIProfile{inner: raw.MIDICIProfileFromID(_id)}
 }
 
+// An NSString describing the profile.
+//
 // Name calls the underlying Name.
 func (x *CIProfile) Name() string {
 	_r := x.inner.Name()
@@ -54,6 +56,8 @@ func (x *CIProfile) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The unique 5-byte profile identifier representing the profile.
+//
 // ProfileID calls the underlying ProfileID.
 func (x *CIProfile) ProfileID() *foundation.NSData {
 	return x.inner.ProfileID()

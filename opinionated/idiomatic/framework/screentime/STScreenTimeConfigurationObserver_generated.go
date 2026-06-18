@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The object you use to observe changes to the current configuration. Use this class to start and stop observing the current configuration. For example, you can opt to disable private browsing in your web browser’s view controller when “STScreenTimeConfiguration/enforcesChildRestrictions“ is `true`.
+//
 // ScreenTimeConfigurationObserver wraps [raw.STScreenTimeConfigurationObserver] with a fluent Go API.
 type ScreenTimeConfigurationObserver struct {
 	inner *raw.STScreenTimeConfigurationObserver
@@ -32,6 +34,8 @@ func ScreenTimeConfigurationObserverFromID(id objc.ID) *ScreenTimeConfigurationO
 	return &ScreenTimeConfigurationObserver{inner: raw.STScreenTimeConfigurationObserverFromID(id)}
 }
 
+// Creates a configuration observer that reports updates on the queue you specify. - Parameters: - updateQueue: The queue on which to report updates.
+//
 // NewScreenTimeConfigurationObserverWithUpdateQueue creates a new [ScreenTimeConfigurationObserver].
 func NewScreenTimeConfigurationObserverWithUpdateQueue(updateQueue *foundation.NSObject) *ScreenTimeConfigurationObserver {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("STScreenTimeConfigurationObserver")), objc.RegisterName("alloc"))
@@ -39,16 +43,22 @@ func NewScreenTimeConfigurationObserverWithUpdateQueue(updateQueue *foundation.N
 	return &ScreenTimeConfigurationObserver{inner: raw.STScreenTimeConfigurationObserverFromID(_id)}
 }
 
+// Starts observing changes to the current configuration.
+//
 // StartObserving calls the underlying StartObserving.
 func (x *ScreenTimeConfigurationObserver) StartObserving() {
 	x.inner.StartObserving()
 }
 
+// Stops observing changes to the current configuration.
+//
 // StopObserving calls the underlying StopObserving.
 func (x *ScreenTimeConfigurationObserver) StopObserving() {
 	x.inner.StopObserving()
 }
 
+// The configuration being observed.
+//
 // Configuration calls the underlying Configuration.
 func (x *ScreenTimeConfigurationObserver) Configuration() *ScreenTimeConfiguration {
 	_r := x.inner.Configuration()

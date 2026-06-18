@@ -36,16 +36,22 @@ func NewShareableContentInfo() *ShareableContentInfo {
 	return &ShareableContentInfo{inner: raw.SCShareableContentInfoFromID(_id)}
 }
 
+// @abstract style of stream
+//
 // Style calls the underlying Style.
 func (x *ShareableContentInfo) Style() SCShareableContentStyle {
 	return SCShareableContentStyle(x.inner.Style())
 }
 
+// @abstract Pixel to points scaling factor
+//
 // PointPixelScale calls the underlying PointPixelScale.
 func (x *ShareableContentInfo) PointPixelScale() float32 {
 	return x.inner.PointPixelScale()
 }
 
+// @abstract Size and location of content in points
+//
 // ContentRect calls the underlying ContentRect.
 func (x *ShareableContentInfo) ContentRect() corefoundation.CGRect {
 	return x.inner.ContentRect()

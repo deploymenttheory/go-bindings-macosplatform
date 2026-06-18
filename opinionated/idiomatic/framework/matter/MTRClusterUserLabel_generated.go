@@ -30,6 +30,8 @@ func MTRClusterUserLabelFromID(id objc.ID) *MTRClusterUserLabel {
 	return &MTRClusterUserLabel{inner: raw.MTRClusterUserLabelFromID(id)}
 }
 
+// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+//
 // NewMTRClusterUserLabelWithDeviceEndpointIDQueue creates a new [MTRClusterUserLabel].
 func NewMTRClusterUserLabelWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterUserLabel {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterUserLabel")), objc.RegisterName("alloc"))

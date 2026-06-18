@@ -31,6 +31,8 @@ func MTROTAHeaderFromID(id objc.ID) *MTROTAHeader {
 	return &MTROTAHeader{inner: raw.MTROTAHeaderFromID(id)}
 }
 
+// Initialize the MTROTAHeader with the given Matter OTA software image data (as defined in the "Over-the-Air (OTA) Software Update File Format" section of the Matter specification).  The provided data is expected to point to a large enough initial chunk of an OTA software image that it includes the entire header (e.g. the entire image). If the passed-in data is too small and does not contain the entire OTA image header, initWithData will return nil and the caller should try creating a new MTROTAHeader object and initializing it with a larger chunk of the image.
+//
 // NewMTROTAHeaderWithData creates a new [MTROTAHeader].
 func NewMTROTAHeaderWithData(data *foundation.NSData) *MTROTAHeader {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROTAHeader")), objc.RegisterName("alloc"))
@@ -38,66 +40,88 @@ func NewMTROTAHeaderWithData(data *foundation.NSData) *MTROTAHeader {
 	return &MTROTAHeader{inner: raw.MTROTAHeaderFromID(_id)}
 }
 
+// The identifier of the vendor whose product this image is meant for. This field can be compared to the vendor id received in the Query Image command to determine whether an image matches. This field may be 0, in which case the image might apply to products from more than one vendor.  If it's nonzero, it must match the vendor id in Query Image for this image to be considered.
+//
 // WithVendorID sets the vendorID property and returns the receiver for chaining.
 func (x *MTROTAHeader) WithVendorID(vendorID *foundation.NSNumber) *MTROTAHeader {
 	x.inner.SetVendorID(vendorID)
 	return x
 }
 
+// The identifier of the specific product the image is meant for.  May be 0, if the image might apply to more than one product.  This is allowed, but not required, to be matched against the product id received in Query Image.
+//
 // WithProductID sets the productID property and returns the receiver for chaining.
 func (x *MTROTAHeader) WithProductID(productID *foundation.NSNumber) *MTROTAHeader {
 	x.inner.SetProductID(productID)
 	return x
 }
 
+// The size of the actual image payload, which follows the header in the OTA file.
+//
 // WithPayloadSize sets the payloadSize property and returns the receiver for chaining.
 func (x *MTROTAHeader) WithPayloadSize(payloadSize *foundation.NSNumber) *MTROTAHeader {
 	x.inner.SetPayloadSize(payloadSize)
 	return x
 }
 
+// The version of the software contained in this image.  This is the version the OTA requestor will be updated to if this image is installed.  This can be used to determine whether this image is newer than what the requestor is currently running, by comparing it to the SoftwareVersion in the Query Image command.
+//
 // WithSoftwareVersion sets the softwareVersion property and returns the receiver for chaining.
 func (x *MTROTAHeader) WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTROTAHeader {
 	x.inner.SetSoftwareVersion(softwareVersion)
 	return x
 }
 
+// Human-readable version of softwareVersion.  This must not be used for deciding which versions are newer or older; use softwareVersion for that.
+//
 // WithSoftwareVersionString sets the softwareVersionString property and returns the receiver for chaining.
 func (x *MTROTAHeader) WithSoftwareVersionString(softwareVersionString string) *MTROTAHeader {
 	x.inner.SetSoftwareVersionString(foundation.NSStringStringWithUTF8String(softwareVersionString))
 	return x
 }
 
+// If not nil a URL pointing to release notes for the software update represented by the image.
+//
 // WithReleaseNotesURL sets the releaseNotesURL property and returns the receiver for chaining.
 func (x *MTROTAHeader) WithReleaseNotesURL(releaseNotesURL string) *MTROTAHeader {
 	x.inner.SetReleaseNotesURL(foundation.NSStringStringWithUTF8String(releaseNotesURL))
 	return x
 }
 
+// A digest of the payload that follows the header.  Can be used to verify that the payload is not truncated or corrupted.
+//
 // WithImageDigest sets the imageDigest property and returns the receiver for chaining.
 func (x *MTROTAHeader) WithImageDigest(imageDigest *foundation.NSData) *MTROTAHeader {
 	x.inner.SetImageDigest(imageDigest)
 	return x
 }
 
+// The specific algorithm that was used to compute imageDigest.
+//
 // WithImageDigestType sets the imageDigestType property and returns the receiver for chaining.
 func (x *MTROTAHeader) WithImageDigestType(imageDigestType MTROTAImageDigestType) *MTROTAHeader {
 	x.inner.SetImageDigestType(raw.MTROTAImageDigestType(imageDigestType))
 	return x
 }
 
+// If not nil, specifies the smallest software version that this update can be applied on top of.  In that case, this value must be compared to the SoftwareVersion in the QueryImage command to check whether this image is valid for the OTA requestor.
+//
 // WithMinApplicableVersion sets the minApplicableVersion property and returns the receiver for chaining.
 func (x *MTROTAHeader) WithMinApplicableVersion(minApplicableVersion *foundation.NSNumber) *MTROTAHeader {
 	x.inner.SetMinApplicableVersion(minApplicableVersion)
 	return x
 }
 
+// If not nil, specifies the largest software version that this update can be applied on top of.  In that case, this value must be compared to the SoftwareVersion in the QueryImage command to check whether this image is valid for the OTA requestor.
+//
 // WithMaxApplicableVersion sets the maxApplicableVersion property and returns the receiver for chaining.
 func (x *MTROTAHeader) WithMaxApplicableVersion(maxApplicableVersion *foundation.NSNumber) *MTROTAHeader {
 	x.inner.SetMaxApplicableVersion(maxApplicableVersion)
 	return x
 }
 
+// The identifier of the vendor whose product this image is meant for. This field can be compared to the vendor id received in the Query Image command to determine whether an image matches. This field may be 0, in which case the image might apply to products from more than one vendor.  If it's nonzero, it must match the vendor id in Query Image for this image to be considered.
+//
 // VendorID calls the underlying VendorID.
 func (x *MTROTAHeader) VendorID() *foundation.NSNumber {
 	return x.inner.VendorID()
@@ -108,6 +132,8 @@ func (x *MTROTAHeader) SetVendorID(vendorID *foundation.NSNumber) {
 	x.inner.SetVendorID(vendorID)
 }
 
+// The identifier of the specific product the image is meant for.  May be 0, if the image might apply to more than one product.  This is allowed, but not required, to be matched against the product id received in Query Image.
+//
 // ProductID calls the underlying ProductID.
 func (x *MTROTAHeader) ProductID() *foundation.NSNumber {
 	return x.inner.ProductID()
@@ -118,6 +144,8 @@ func (x *MTROTAHeader) SetProductID(productID *foundation.NSNumber) {
 	x.inner.SetProductID(productID)
 }
 
+// The size of the actual image payload, which follows the header in the OTA file.
+//
 // PayloadSize calls the underlying PayloadSize.
 func (x *MTROTAHeader) PayloadSize() *foundation.NSNumber {
 	return x.inner.PayloadSize()
@@ -128,6 +156,8 @@ func (x *MTROTAHeader) SetPayloadSize(payloadSize *foundation.NSNumber) {
 	x.inner.SetPayloadSize(payloadSize)
 }
 
+// The version of the software contained in this image.  This is the version the OTA requestor will be updated to if this image is installed.  This can be used to determine whether this image is newer than what the requestor is currently running, by comparing it to the SoftwareVersion in the Query Image command.
+//
 // SoftwareVersion calls the underlying SoftwareVersion.
 func (x *MTROTAHeader) SoftwareVersion() *foundation.NSNumber {
 	return x.inner.SoftwareVersion()
@@ -138,6 +168,8 @@ func (x *MTROTAHeader) SetSoftwareVersion(softwareVersion *foundation.NSNumber) 
 	x.inner.SetSoftwareVersion(softwareVersion)
 }
 
+// Human-readable version of softwareVersion.  This must not be used for deciding which versions are newer or older; use softwareVersion for that.
+//
 // SoftwareVersionString calls the underlying SoftwareVersionString.
 func (x *MTROTAHeader) SoftwareVersionString() string {
 	_r := x.inner.SoftwareVersionString()
@@ -152,6 +184,8 @@ func (x *MTROTAHeader) SetSoftwareVersionString(softwareVersionString string) {
 	x.inner.SetSoftwareVersionString(foundation.NSStringStringWithUTF8String(softwareVersionString))
 }
 
+// If not nil a URL pointing to release notes for the software update represented by the image.
+//
 // ReleaseNotesURL calls the underlying ReleaseNotesURL.
 func (x *MTROTAHeader) ReleaseNotesURL() string {
 	_r := x.inner.ReleaseNotesURL()
@@ -166,6 +200,8 @@ func (x *MTROTAHeader) SetReleaseNotesURL(releaseNotesURL string) {
 	x.inner.SetReleaseNotesURL(foundation.NSStringStringWithUTF8String(releaseNotesURL))
 }
 
+// A digest of the payload that follows the header.  Can be used to verify that the payload is not truncated or corrupted.
+//
 // ImageDigest calls the underlying ImageDigest.
 func (x *MTROTAHeader) ImageDigest() *foundation.NSData {
 	return x.inner.ImageDigest()
@@ -176,6 +212,8 @@ func (x *MTROTAHeader) SetImageDigest(imageDigest *foundation.NSData) {
 	x.inner.SetImageDigest(imageDigest)
 }
 
+// The specific algorithm that was used to compute imageDigest.
+//
 // ImageDigestType calls the underlying ImageDigestType.
 func (x *MTROTAHeader) ImageDigestType() MTROTAImageDigestType {
 	return MTROTAImageDigestType(x.inner.ImageDigestType())
@@ -186,6 +224,8 @@ func (x *MTROTAHeader) SetImageDigestType(imageDigestType MTROTAImageDigestType)
 	x.inner.SetImageDigestType(raw.MTROTAImageDigestType(imageDigestType))
 }
 
+// If not nil, specifies the smallest software version that this update can be applied on top of.  In that case, this value must be compared to the SoftwareVersion in the QueryImage command to check whether this image is valid for the OTA requestor.
+//
 // MinApplicableVersion calls the underlying MinApplicableVersion.
 func (x *MTROTAHeader) MinApplicableVersion() *foundation.NSNumber {
 	return x.inner.MinApplicableVersion()
@@ -196,6 +236,8 @@ func (x *MTROTAHeader) SetMinApplicableVersion(minApplicableVersion *foundation.
 	x.inner.SetMinApplicableVersion(minApplicableVersion)
 }
 
+// If not nil, specifies the largest software version that this update can be applied on top of.  In that case, this value must be compared to the SoftwareVersion in the QueryImage command to check whether this image is valid for the OTA requestor.
+//
 // MaxApplicableVersion calls the underlying MaxApplicableVersion.
 func (x *MTROTAHeader) MaxApplicableVersion() *foundation.NSNumber {
 	return x.inner.MaxApplicableVersion()

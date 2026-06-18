@@ -41,6 +41,8 @@ func NewInstanceAccelerationStructure() *InstanceAccelerationStructure {
 	return &InstanceAccelerationStructure{inner: raw.MPSInstanceAccelerationStructureFromID(_id)}
 }
 
+// @brief Acceleration structures available for use in this instance acceleration structure. Each instance must provide an index into this array in the instance buffer as well as a transformation matrix in the transform buffer. All acceleration structures must share a single vertex buffer, optional index buffer, and optional mask buffer, though they may have different offsets within each buffer, and all acceleration structures must share the same acceleration structure group. If a polygon acceleration structure is rebuilt or refit, the instance acceleration structure must subsequently be rebuilt or refit.
+//
 // WithAccelerationStructures sets the collection, converting the Go slice to an NSArray.
 func (x *InstanceAccelerationStructure) WithAccelerationStructures(items ...PolygonAccelerationStructureProvider) *InstanceAccelerationStructure {
 	if len(items) == 0 {
@@ -59,60 +61,80 @@ func (x *InstanceAccelerationStructure) WithAccelerationStructures(items ...Poly
 	return x
 }
 
+// @brief Buffer containing the 32 bit unsigned integer index into the acceleration structure array for each instance
+//
 // WithInstanceBuffer sets the instanceBuffer property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructure) WithInstanceBuffer(instanceBuffer metal.MTLBuffer) *InstanceAccelerationStructure {
 	x.inner.SetInstanceBuffer(instanceBuffer)
 	return x
 }
 
+// @brief Offset, in bytes, into the instance buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
+//
 // WithInstanceBufferOffset sets the instanceBufferOffset property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructure) WithInstanceBufferOffset(instanceBufferOffset uint) *InstanceAccelerationStructure {
 	x.inner.SetInstanceBufferOffset(instanceBufferOffset)
 	return x
 }
 
+// @brief Buffer containing one column major matrix_float4x4 transformation matrix per instance
+//
 // WithTransformBuffer sets the transformBuffer property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructure) WithTransformBuffer(transformBuffer metal.MTLBuffer) *InstanceAccelerationStructure {
 	x.inner.SetTransformBuffer(transformBuffer)
 	return x
 }
 
+// @brief Offset, in bytes, into the transform buffer. Defaults to 0 bytes. Must be aligned to the stride of the transform type.
+//
 // WithTransformBufferOffset sets the transformBufferOffset property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructure) WithTransformBufferOffset(transformBufferOffset uint) *InstanceAccelerationStructure {
 	x.inner.SetTransformBufferOffset(transformBufferOffset)
 	return x
 }
 
+// @brief Instance transform type. Defaults to MPSTransformTypeFloat4x4. Changes to this property require rebuilding the acceleration structure.
+//
 // WithTransformType sets the transformType property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructure) WithTransformType(transformType MPSTransformType) *InstanceAccelerationStructure {
 	x.inner.SetTransformType(raw.MPSTransformType(transformType))
 	return x
 }
 
+// @brief Mask buffer containing one uint32_t mask per instance. May be nil.
+//
 // WithMaskBuffer sets the maskBuffer property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructure) WithMaskBuffer(maskBuffer metal.MTLBuffer) *InstanceAccelerationStructure {
 	x.inner.SetMaskBuffer(maskBuffer)
 	return x
 }
 
+// @brief Offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
+//
 // WithMaskBufferOffset sets the maskBufferOffset property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructure) WithMaskBufferOffset(maskBufferOffset uint) *InstanceAccelerationStructure {
 	x.inner.SetMaskBufferOffset(maskBufferOffset)
 	return x
 }
 
+// @brief Number of instances. Changes to this property require rebuilding the acceleration structure.
+//
 // WithInstanceCount sets the instanceCount property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructure) WithInstanceCount(instanceCount uint) *InstanceAccelerationStructure {
 	x.inner.SetInstanceCount(instanceCount)
 	return x
 }
 
+// @brief Acceleration structure usage options. Changes to this property require rebuilding the acceleration structure. Defaults to MPSAccelerationStructureUsageNone.
+//
 // WithUsage sets the usage property and returns the receiver for chaining.
 func (x *InstanceAccelerationStructure) WithUsage(usage MPSAccelerationStructureUsage) *InstanceAccelerationStructure {
 	x.inner.MPSAccelerationStructure.SetUsage(raw.MPSAccelerationStructureUsage(usage))
 	return x
 }
 
+// @brief Acceleration structures available for use in this instance acceleration structure. Each instance must provide an index into this array in the instance buffer as well as a transformation matrix in the transform buffer. All acceleration structures must share a single vertex buffer, optional index buffer, and optional mask buffer, though they may have different offsets within each buffer, and all acceleration structures must share the same acceleration structure group. If a polygon acceleration structure is rebuilt or refit, the instance acceleration structure must subsequently be rebuilt or refit.
+//
 // AccelerationStructures returns the collection as a Go slice.
 func (x *InstanceAccelerationStructure) AccelerationStructures() []*PolygonAccelerationStructure {
 	arr := x.inner.AccelerationStructures()
@@ -125,10 +147,21 @@ func (x *InstanceAccelerationStructure) AccelerationStructures() []*PolygonAccel
 }
 
 // SetAccelerationStructures calls the underlying SetAccelerationStructures.
-func (x *InstanceAccelerationStructure) SetAccelerationStructures(accelerationStructures *foundation.NSArray[*raw.MPSPolygonAccelerationStructure]) {
-	x.inner.SetAccelerationStructures(accelerationStructures)
+func (x *InstanceAccelerationStructure) SetAccelerationStructures(accelerationStructures ...PolygonAccelerationStructureProvider) {
+	_ptrs := make([]objc.ID, len(accelerationStructures))
+	for _i, _v := range accelerationStructures {
+		_ptrs[_i] = _v.asPolygonAccelerationStructure().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.MPSPolygonAccelerationStructure]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.MPSPolygonAccelerationStructure](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetAccelerationStructures(_arg0)
 }
 
+// @brief Buffer containing the 32 bit unsigned integer index into the acceleration structure array for each instance
+//
 // InstanceBuffer calls the underlying InstanceBuffer.
 func (x *InstanceAccelerationStructure) InstanceBuffer() metal.MTLBuffer {
 	return x.inner.InstanceBuffer()
@@ -139,6 +172,8 @@ func (x *InstanceAccelerationStructure) SetInstanceBuffer(instanceBuffer metal.M
 	x.inner.SetInstanceBuffer(instanceBuffer)
 }
 
+// @brief Offset, in bytes, into the instance buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
+//
 // InstanceBufferOffset calls the underlying InstanceBufferOffset.
 func (x *InstanceAccelerationStructure) InstanceBufferOffset() uint {
 	return x.inner.InstanceBufferOffset()
@@ -149,6 +184,8 @@ func (x *InstanceAccelerationStructure) SetInstanceBufferOffset(instanceBufferOf
 	x.inner.SetInstanceBufferOffset(instanceBufferOffset)
 }
 
+// @brief Buffer containing one column major matrix_float4x4 transformation matrix per instance
+//
 // TransformBuffer calls the underlying TransformBuffer.
 func (x *InstanceAccelerationStructure) TransformBuffer() metal.MTLBuffer {
 	return x.inner.TransformBuffer()
@@ -159,6 +196,8 @@ func (x *InstanceAccelerationStructure) SetTransformBuffer(transformBuffer metal
 	x.inner.SetTransformBuffer(transformBuffer)
 }
 
+// @brief Offset, in bytes, into the transform buffer. Defaults to 0 bytes. Must be aligned to the stride of the transform type.
+//
 // TransformBufferOffset calls the underlying TransformBufferOffset.
 func (x *InstanceAccelerationStructure) TransformBufferOffset() uint {
 	return x.inner.TransformBufferOffset()
@@ -169,6 +208,8 @@ func (x *InstanceAccelerationStructure) SetTransformBufferOffset(transformBuffer
 	x.inner.SetTransformBufferOffset(transformBufferOffset)
 }
 
+// @brief Instance transform type. Defaults to MPSTransformTypeFloat4x4. Changes to this property require rebuilding the acceleration structure.
+//
 // TransformType calls the underlying TransformType.
 func (x *InstanceAccelerationStructure) TransformType() MPSTransformType {
 	return MPSTransformType(x.inner.TransformType())
@@ -179,6 +220,8 @@ func (x *InstanceAccelerationStructure) SetTransformType(transformType MPSTransf
 	x.inner.SetTransformType(raw.MPSTransformType(transformType))
 }
 
+// @brief Mask buffer containing one uint32_t mask per instance. May be nil.
+//
 // MaskBuffer calls the underlying MaskBuffer.
 func (x *InstanceAccelerationStructure) MaskBuffer() metal.MTLBuffer {
 	return x.inner.MaskBuffer()
@@ -189,6 +232,8 @@ func (x *InstanceAccelerationStructure) SetMaskBuffer(maskBuffer metal.MTLBuffer
 	x.inner.SetMaskBuffer(maskBuffer)
 }
 
+// @brief Offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
+//
 // MaskBufferOffset calls the underlying MaskBufferOffset.
 func (x *InstanceAccelerationStructure) MaskBufferOffset() uint {
 	return x.inner.MaskBufferOffset()
@@ -199,6 +244,8 @@ func (x *InstanceAccelerationStructure) SetMaskBufferOffset(maskBufferOffset uin
 	x.inner.SetMaskBufferOffset(maskBufferOffset)
 }
 
+// @brief Number of instances. Changes to this property require rebuilding the acceleration structure.
+//
 // InstanceCount calls the underlying InstanceCount.
 func (x *InstanceAccelerationStructure) InstanceCount() uint {
 	return x.inner.InstanceCount()
@@ -227,7 +274,7 @@ type InstanceAccelerationStructureable interface {
 	WithInstanceCount(instanceCount uint) *InstanceAccelerationStructure
 	WithUsage(usage MPSAccelerationStructureUsage) *InstanceAccelerationStructure
 	AccelerationStructures() []*PolygonAccelerationStructure
-	SetAccelerationStructures(accelerationStructures *foundation.NSArray[*raw.MPSPolygonAccelerationStructure])
+	SetAccelerationStructures(accelerationStructures ...PolygonAccelerationStructureProvider)
 	InstanceBuffer() metal.MTLBuffer
 	SetInstanceBuffer(instanceBuffer metal.MTLBuffer)
 	InstanceBufferOffset() uint

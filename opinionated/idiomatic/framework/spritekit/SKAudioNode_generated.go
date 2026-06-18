@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A SpriteKit scene graph audio node that provides a way to link audio graphs to a SpriteKit scene. The currently presented scene is responsible for mixing the audio from nodes in the scene. Positional sounds will use their relative location and velocity to the scene's listener to apply distance attenuation, doppler shift and pan. @see AVAudio3DMixing @see SKScene.listener
+//
 // AudioNode wraps [raw.SKAudioNode] with a fluent Go API.
 type AudioNode struct {
 	inner *raw.SKAudioNode
@@ -33,6 +35,8 @@ func AudioNodeFromID(id objc.ID) *AudioNode {
 	return &AudioNode{inner: raw.SKAudioNodeFromID(id)}
 }
 
+// Creates a SpriteKit scene graph audio node from the given AVAudioNode. @see AVAudioNode
+//
 // NewAudioNodeWithAVAudioNode creates a new [AudioNode].
 func NewAudioNodeWithAVAudioNode(node *avfaudio.AVAudioNode) *AudioNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKAudioNode")), objc.RegisterName("alloc"))
@@ -47,6 +51,8 @@ func NewAudioNodeWithCoder(aDecoder *foundation.NSCoder) *AudioNode {
 	return &AudioNode{inner: raw.SKAudioNodeFromID(_id)}
 }
 
+// Convenience initializer that creates an AVAudioNode from the named audio asset in the main bundle. @see initWithAVAudioNode
+//
 // NewAudioNodeWithFileNamed creates a new [AudioNode].
 func NewAudioNodeWithFileNamed(name string) *AudioNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKAudioNode")), objc.RegisterName("alloc"))
@@ -54,6 +60,8 @@ func NewAudioNodeWithFileNamed(name string) *AudioNode {
 	return &AudioNode{inner: raw.SKAudioNodeFromID(_id)}
 }
 
+// Convenience initializer that creates an AVAudioNode from the URL that contain a audio asset. @see initWithAVAudioNode
+//
 // NewAudioNodeWithURL creates a new [AudioNode].
 func NewAudioNodeWithURL(url string) *AudioNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKAudioNode")), objc.RegisterName("alloc"))
@@ -61,108 +69,144 @@ func NewAudioNodeWithURL(url string) *AudioNode {
 	return &AudioNode{inner: raw.SKAudioNodeFromID(_id)}
 }
 
+// Sets or gets the current AVAudioNode used by this instance.
+//
 // WithAvAudioNode sets the avAudioNode property and returns the receiver for chaining.
 func (x *AudioNode) WithAvAudioNode(avAudioNode *avfaudio.AVAudioNode) *AudioNode {
 	x.inner.SetAvAudioNode(avAudioNode)
 	return x
 }
 
+// Specifies whether the node is to automatically play sound when added to a scene. If autoplaysLooped is NO, the node and its sound must be explicitly scheduled and played using the scene's engine. If YES, the node will automatically play sound when added to a scene. Defaults to YES. @see SKView.paused
+//
 // WithAutoplayLooped sets the autoplayLooped property and returns the receiver for chaining.
 func (x *AudioNode) WithAutoplayLooped(autoplayLooped bool) *AudioNode {
 	x.inner.SetAutoplayLooped(autoplayLooped)
 	return x
 }
 
+// Marks the audio source as positional so that the audio mix considers relative position and velocity with regards to the scene's current listener node. @see AVAudio3DMixing @see SKScene.listener
+//
 // WithPositional sets the positional property and returns the receiver for chaining.
 func (x *AudioNode) WithPositional(positional bool) *AudioNode {
 	x.inner.SetPositional(positional)
 	return x
 }
 
+// The position of the node in the parent's coordinate system
+//
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *AudioNode) WithPosition(position corefoundation.CGPoint) *AudioNode {
 	x.inner.SKNode.SetPosition(position)
 	return x
 }
 
+// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+//
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *AudioNode) WithZPosition(zPosition float64) *AudioNode {
 	x.inner.SKNode.SetZPosition(zPosition)
 	return x
 }
 
+// The Euler rotation about the z axis (in radians)
+//
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *AudioNode) WithZRotation(zRotation float64) *AudioNode {
 	x.inner.SKNode.SetZRotation(zRotation)
 	return x
 }
 
+// The scaling in the X axis
+//
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *AudioNode) WithXScale(xScale float64) *AudioNode {
 	x.inner.SKNode.SetXScale(xScale)
 	return x
 }
 
+// The scaling in the Y axis
+//
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *AudioNode) WithYScale(yScale float64) *AudioNode {
 	x.inner.SKNode.SetYScale(yScale)
 	return x
 }
 
+// The speed multiplier applied to all actions run on this node. Inherited by its children.
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *AudioNode) WithSpeed(speed float64) *AudioNode {
 	x.inner.SKNode.SetSpeed(speed)
 	return x
 }
 
+// Alpha of this node (multiplied by the output color to give the final result)
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *AudioNode) WithAlpha(alpha float64) *AudioNode {
 	x.inner.SKNode.SetAlpha(alpha)
 	return x
 }
 
+// Controls whether or not the node's actions is updated or paused.
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *AudioNode) WithPaused(paused bool) *AudioNode {
 	x.inner.SKNode.SetPaused(paused)
 	return x
 }
 
+// Controls whether or not the node and its children are rendered.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *AudioNode) WithHidden(hidden bool) *AudioNode {
 	x.inner.SKNode.SetHidden(hidden)
 	return x
 }
 
+// Controls whether or not the node receives touch events
+//
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *AudioNode) WithUserInteractionEnabled(userInteractionEnabled bool) *AudioNode {
 	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
 	return x
 }
 
+// The client assignable name. In general, this should be unique among peers in the scene graph.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *AudioNode) WithName(name string) *AudioNode {
 	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// Physics body attached to the node, with synchronized scale, rotation, and position
+//
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *AudioNode) WithPhysicsBody(physicsBody *PhysicsBody) *AudioNode {
 	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
+// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+//
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *AudioNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *AudioNode {
 	x.inner.SKNode.SetUserData(userData)
 	return x
 }
 
+// Kinematic constraints, used in IK solving
+//
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *AudioNode) WithReachConstraints(reachConstraints *ReachConstraints) *AudioNode {
 	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
+// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+//
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *AudioNode) WithConstraints(items ...*raw.SKConstraint) *AudioNode {
 	if len(items) == 0 {
@@ -181,6 +225,8 @@ func (x *AudioNode) WithConstraints(items ...*raw.SKConstraint) *AudioNode {
 	return x
 }
 
+// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+//
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *AudioNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *AudioNode {
 	x.inner.SKNode.SetAttributeValues(attributeValues)
@@ -241,6 +287,8 @@ func (x *AudioNode) WithAccessibilityEnabled(accessibilityEnabled bool) *AudioNo
 	return x
 }
 
+// Sets or gets the current AVAudioNode used by this instance.
+//
 // AvAudioNode calls the underlying AvAudioNode.
 func (x *AudioNode) AvAudioNode() *avfaudio.AVAudioNode {
 	return x.inner.AvAudioNode()
@@ -251,6 +299,8 @@ func (x *AudioNode) SetAvAudioNode(avAudioNode *avfaudio.AVAudioNode) {
 	x.inner.SetAvAudioNode(avAudioNode)
 }
 
+// Specifies whether the node is to automatically play sound when added to a scene. If autoplaysLooped is NO, the node and its sound must be explicitly scheduled and played using the scene's engine. If YES, the node will automatically play sound when added to a scene. Defaults to YES. @see SKView.paused
+//
 // AutoplayLooped calls the underlying AutoplayLooped.
 func (x *AudioNode) AutoplayLooped() bool {
 	return x.inner.AutoplayLooped()
@@ -261,6 +311,8 @@ func (x *AudioNode) SetAutoplayLooped(autoplayLooped bool) {
 	x.inner.SetAutoplayLooped(autoplayLooped)
 }
 
+// Marks the audio source as positional so that the audio mix considers relative position and velocity with regards to the scene's current listener node. @see AVAudio3DMixing @see SKScene.listener
+//
 // IsPositional calls the underlying IsPositional.
 func (x *AudioNode) IsPositional() bool {
 	return x.inner.IsPositional()

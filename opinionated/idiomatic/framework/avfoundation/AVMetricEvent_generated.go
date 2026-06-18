@@ -38,16 +38,22 @@ func NewMetricEvent() *MetricEvent {
 	return &MetricEvent{inner: raw.AVMetricEventFromID(_id)}
 }
 
+// Returns the date when the event occurred.
+//
 // Date calls the underlying Date.
 func (x *MetricEvent) Date() *foundation.NSDate {
 	return x.inner.Date()
 }
 
+// Returns the time in the media timeline when the event occured.
+//
 // MediaTime calls the underlying MediaTime.
 func (x *MetricEvent) MediaTime() coremedia.CMTime {
 	return x.inner.MediaTime()
 }
 
+// A GUID that identifies the media session. If not available, value is nil.
+//
 // SessionID calls the underlying SessionID.
 func (x *MetricEvent) SessionID() string {
 	_r := x.inner.SessionID()

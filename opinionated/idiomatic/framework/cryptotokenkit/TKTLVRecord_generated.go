@@ -36,16 +36,22 @@ func NewTLVRecord() *TLVRecord {
 	return &TLVRecord{inner: raw.TKTLVRecordFromID(_id)}
 }
 
+// Tag value of the record.
+//
 // Tag calls the underlying Tag.
 func (x *TLVRecord) Tag() uint64 {
 	return x.inner.Tag()
 }
 
+// Value field of the record.
+//
 // Value calls the underlying Value.
 func (x *TLVRecord) Value() *foundation.NSData {
 	return x.inner.Value()
 }
 
+// Data object containing whole encoded record, including tag, length and value.
+//
 // Data calls the underlying Data.
 func (x *TLVRecord) Data() *foundation.NSData {
 	return x.inner.Data()

@@ -32,6 +32,8 @@ func ArrayMultiaryBaseFromID(id objc.ID) *ArrayMultiaryBase {
 	return &ArrayMultiaryBase{inner: raw.MPSNDArrayMultiaryBaseFromID(id)}
 }
 
+// @abstract   Initialize a MPSNDArrayMultiaryKernel @param      device  The device on which the kernel will run @param      count   The maximum number of NDArrays read by the kernel @return     A valid MPSNDArrayMultiaryKernel, or nil if allocation failure.
+//
 // NewArrayMultiaryBaseWithDeviceSourceCount creates a new [ArrayMultiaryBase].
 func NewArrayMultiaryBaseWithDeviceSourceCount(device metal.MTLDevice, count uint) *ArrayMultiaryBase {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayMultiaryBase")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewArrayMultiaryBaseWithDeviceSourceCount(device metal.MTLDevice, count uin
 	return &ArrayMultiaryBase{inner: raw.MPSNDArrayMultiaryBaseFromID(_id)}
 }
 
+// @abstract   Initialize a MPSNDArrayMultiaryKernel from a NSCoder @param      coder   The NSCoder that contains the serialized object @param      device  The device on which the kernel will run @return     A valid MPSNDArrayMultiaryKernel, or nil if allocation failure.
+//
 // NewArrayMultiaryBaseWithCoderDevice creates a new [ArrayMultiaryBase].
 func NewArrayMultiaryBaseWithCoderDevice(coder *foundation.NSCoder, device metal.MTLDevice) *ArrayMultiaryBase {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayMultiaryBase")), objc.RegisterName("alloc"))
@@ -46,37 +50,51 @@ func NewArrayMultiaryBaseWithCoderDevice(coder *foundation.NSCoder, device metal
 	return &ArrayMultiaryBase{inner: raw.MPSNDArrayMultiaryBaseFromID(_id)}
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *ArrayMultiaryBase) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayMultiaryBase {
 	x.inner.SetDestinationArrayAllocator(destinationArrayAllocator)
 	return x
 }
 
+// @abstract   Read offsets to use when addressing a source NDArray @discussion The coordinate of the position read from this source array which is used to calculate the result value at [0,0,0,....] If the position read is actually a contiguous region (e.g. the area covered by a convolution kernel) then this is the center of that region, rounded down, for each dimension. @param      sourceIndex   The index of the source MPSNDArray to which the list of offsets is applied
+//
 // OffsetsAtSourceIndex calls the underlying OffsetsAtSourceIndex.
 func (x *ArrayMultiaryBase) OffsetsAtSourceIndex(sourceIndex uint) raw.MPSNDArrayOffsets {
 	return x.inner.OffsetsAtSourceIndex(sourceIndex)
 }
 
+// @abstract   The edge mode used for each source NDArray @param      sourceIndex   The index of the source image @return     The MPSImageEdgeMode for that image
+//
 // EdgeModeAtSourceIndex calls the underlying EdgeModeAtSourceIndex.
 func (x *ArrayMultiaryBase) EdgeModeAtSourceIndex(sourceIndex uint) mpscore.MPSImageEdgeMode {
 	return x.inner.EdgeModeAtSourceIndex(sourceIndex)
 }
 
+// @abstract   Get the diameters of the point spread function (PSF) in each dimension @param      sourceIndex     The MPSNDArrayMultiaryKernel source NDArray to which the kernel will be applied @return     A list of kernel diameters in each dimension
+//
 // KernelSizesForSourceIndex calls the underlying KernelSizesForSourceIndex.
 func (x *ArrayMultiaryBase) KernelSizesForSourceIndex(sourceIndex uint) raw.MPSNDArraySizes {
 	return x.inner.KernelSizesForSourceIndex(sourceIndex)
 }
 
+// @abstract   Return the downsampling ratio for the kernel in each dimension @discussion If the filter is a "backwards" filter such as a gradient filter or convolution transpose, then this is the upsampling ratio and zeros are inserted in the result. @param      sourceIndex The index of the source for which the strides apply @return     The strides from one destination sample to the next in each dimension of the corresponding source NDArray
+//
 // StridesForSourceIndex calls the underlying StridesForSourceIndex.
 func (x *ArrayMultiaryBase) StridesForSourceIndex(sourceIndex uint) raw.MPSNDArrayOffsets {
 	return x.inner.StridesForSourceIndex(sourceIndex)
 }
 
+// @abstract   Get the kernel dilation rate for each dimension @param      sourceIndex The index of the source image for which this applies @return     The kernel dilation rate for each dimension.
+//
 // DilationRatesForSourceIndex calls the underlying DilationRatesForSourceIndex.
 func (x *ArrayMultiaryBase) DilationRatesForSourceIndex(sourceIndex uint) raw.MPSNDArraySizes {
 	return x.inner.DilationRatesForSourceIndex(sourceIndex)
 }
 
+// @abstract   Initialize a MPSNDArrayMultiaryKernel from a NSCoder @param      coder   The NSCoder that contains the serialized object
+//
 // EncodeWithCoder calls the underlying EncodeWithCoder.
 func (x *ArrayMultiaryBase) EncodeWithCoder(coder *foundation.NSCoder) {
 	x.inner.EncodeWithCoder(coder)
@@ -87,11 +105,15 @@ func (x *ArrayMultiaryBase) ResultStateForSourceArraysSourceStatesDestinationArr
 	return x.inner.ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays, sourceStates, destinationArray)
 }
 
+// @abstract   Return a descriptor suitable for allocating a NSArray to receive the result @discussion The object properties (kernelSize, offsets, edgeMode, etc.) should be properly configured as if the -encode call was about to be made, before this method is called. Those properties may affect the results. @param      sources     The list of sources passed into the -encode call @param      state       The source state object, if any passed to the -encode call @return     a valid MPSNDArrayDescriptor that may be used to create a MPSNDArray to used to hold the results of this kernel.
+//
 // DestinationArrayDescriptorForSourceArraysSourceState calls the underlying DestinationArrayDescriptorForSourceArraysSourceState.
 func (x *ArrayMultiaryBase) DestinationArrayDescriptorForSourceArraysSourceState(sources *foundation.NSArray[*mpscore.MPSNDArray], state *mpscore.MPSState) *mpscore.MPSNDArrayDescriptor {
 	return x.inner.DestinationArrayDescriptorForSourceArraysSourceState(sources, state)
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // DestinationArrayAllocator calls the underlying DestinationArrayAllocator.
 func (x *ArrayMultiaryBase) DestinationArrayAllocator() mpscore.MPSNDArrayAllocator {
 	return x.inner.DestinationArrayAllocator()

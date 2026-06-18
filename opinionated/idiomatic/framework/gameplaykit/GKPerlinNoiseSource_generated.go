@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Perlin noise is useful for creating natural-looking textures and realistic-looking terrain.
+//
 // PerlinNoiseSource wraps [raw.GKPerlinNoiseSource] with a fluent Go API.
 type PerlinNoiseSource struct {
 	inner *raw.GKPerlinNoiseSource

@@ -73,6 +73,8 @@ func (x *ButtonTouchBarItem) WithEnabled(enabled bool) *ButtonTouchBarItem {
 	return x
 }
 
+// The localized string labeling this item during user customization. The default value is empty string.
+//
 // WithCustomizationLabel sets the customizationLabel property and returns the receiver for chaining.
 func (x *ButtonTouchBarItem) WithCustomizationLabel(customizationLabel string) *ButtonTouchBarItem {
 	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))

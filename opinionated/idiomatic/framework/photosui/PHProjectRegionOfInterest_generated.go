@@ -42,16 +42,22 @@ func (x *ProjectRegionOfInterest) Rect() corefoundation.CGRect {
 	return x.inner.Rect()
 }
 
+// Significance of the regionOfInterest in the overall project context is provided as a weight score. All regions of interest with the same identifier in the project have the same weight. For projects doing things like animation or transition between assets, focusing on the highest weighted regions of interest will ensure that the presentation represents something that is most meaningful to the user. Value range is a double between 0.0 and 1.0. Default is 0.5.
+//
 // Weight calls the underlying Weight.
 func (x *ProjectRegionOfInterest) Weight() float64 {
 	return x.inner.Weight()
 }
 
+// Quality of the represented region of interest in the asset. Different regions of interest with the same identifier may have different quality values. If the project wants to decide between multiple assets containing the same region of interest, the quality score can be used to pick the best representation of the region of interest. Value range is a double between 0.0 and 1.0.
+//
 // Quality calls the underlying Quality.
 func (x *ProjectRegionOfInterest) Quality() float64 {
 	return x.inner.Quality()
 }
 
+// Identifier of the region of interest. Regions representing the same person or object will have the same identifier across multiple assets.
+//
 // Identifier calls the underlying Identifier.
 func (x *ProjectRegionOfInterest) Identifier() string {
 	_r := x.inner.Identifier()

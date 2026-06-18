@@ -31,6 +31,8 @@ func SourceQueryFromID(id objc.ID) *SourceQuery {
 	return &SourceQuery{inner: raw.HKSourceQueryFromID(id)}
 }
 
+// @method        initWithSampleType:samplePredicate:completionHandler: @abstract      Returns a query that will retrieve HKSources that have saved samples of the given type matching the given predicate. @param         sampleType          The type of sample. @param         objectPredicate     The predicate which samples must match. @param         completionHandler   The block to be called when the query has finished executing.
+//
 // NewSourceQueryWithSampleTypeSamplePredicateCompletionHandler creates a new [SourceQuery].
 func NewSourceQueryWithSampleTypeSamplePredicateCompletionHandler(sampleType *raw.HKSampleType, objectPredicate *foundation.NSPredicate, completionHandler func(*raw.HKSourceQuery, *foundation.NSSet[*raw.HKSource], unsafe.Pointer)) *SourceQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKSourceQuery")), objc.RegisterName("alloc"))

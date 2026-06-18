@@ -36,6 +36,8 @@ func MTROperationalCredentialsClusterCertificateChainResponseParamsFromID(id obj
 	return &MTROperationalCredentialsClusterCertificateChainResponseParams{inner: raw.MTROperationalCredentialsClusterCertificateChainResponseParamsFromID(id)}
 }
 
+// Initialize an MTROperationalCredentialsClusterCertificateChainResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+//
 // NewMTROperationalCredentialsClusterCertificateChainResponseParamsWithResponseValueError creates a new [MTROperationalCredentialsClusterCertificateChainResponseParams].
 func NewMTROperationalCredentialsClusterCertificateChainResponseParamsWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTROperationalCredentialsClusterCertificateChainResponseParams, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROperationalCredentialsClusterCertificateChainResponseParams")), objc.RegisterName("alloc"))
@@ -53,6 +55,8 @@ func (x *MTROperationalCredentialsClusterCertificateChainResponseParams) WithCer
 	return x
 }
 
+// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+//
 // WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
 func (x *MTROperationalCredentialsClusterCertificateChainResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROperationalCredentialsClusterCertificateChainResponseParams {
 	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
@@ -69,6 +73,8 @@ func (x *MTROperationalCredentialsClusterCertificateChainResponseParams) SetCert
 	x.inner.SetCertificate(certificate)
 }
 
+// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+//
 // TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
 func (x *MTROperationalCredentialsClusterCertificateChainResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	return x.inner.TimedInvokeTimeoutMs()

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A transition style from one scene to another.
+//
 // Transition wraps [raw.SKTransition] with a fluent Go API.
 type Transition struct {
 	inner *raw.SKTransition
@@ -35,18 +37,24 @@ func NewTransition() *Transition {
 	return &Transition{inner: raw.SKTransitionFromID(_id)}
 }
 
+// Pause the incoming Scene during the transition, defaults to YES.
+//
 // WithPausesIncomingScene sets the pausesIncomingScene property and returns the receiver for chaining.
 func (x *Transition) WithPausesIncomingScene(pausesIncomingScene bool) *Transition {
 	x.inner.SetPausesIncomingScene(pausesIncomingScene)
 	return x
 }
 
+// Pause the outgoing Scene during the transition, defaults to YES.
+//
 // WithPausesOutgoingScene sets the pausesOutgoingScene property and returns the receiver for chaining.
 func (x *Transition) WithPausesOutgoingScene(pausesOutgoingScene bool) *Transition {
 	x.inner.SetPausesOutgoingScene(pausesOutgoingScene)
 	return x
 }
 
+// Pause the incoming Scene during the transition, defaults to YES.
+//
 // PausesIncomingScene calls the underlying PausesIncomingScene.
 func (x *Transition) PausesIncomingScene() bool {
 	return x.inner.PausesIncomingScene()
@@ -57,6 +65,8 @@ func (x *Transition) SetPausesIncomingScene(pausesIncomingScene bool) {
 	x.inner.SetPausesIncomingScene(pausesIncomingScene)
 }
 
+// Pause the outgoing Scene during the transition, defaults to YES.
+//
 // PausesOutgoingScene calls the underlying PausesOutgoingScene.
 func (x *Transition) PausesOutgoingScene() bool {
 	return x.inner.PausesOutgoingScene()

@@ -36,6 +36,8 @@ func NewStreamNode() *StreamNode {
 	return &StreamNode{inner: raw.PHASEStreamNodeFromID(_id)}
 }
 
+// @property gainMetaParameter @abstract If specified during construction, the metaparameter for controlling gain will be available here
+//
 // GainMetaParameter calls the underlying GainMetaParameter.
 func (x *StreamNode) GainMetaParameter() *NumberMetaParameter {
 	_r := x.inner.GainMetaParameter()
@@ -45,6 +47,8 @@ func (x *StreamNode) GainMetaParameter() *NumberMetaParameter {
 	return &NumberMetaParameter{inner: _r}
 }
 
+// @property rateMetaParameter @abstract If specified during construction, the metaparameter for controlling rate/pitch will be available here
+//
 // RateMetaParameter calls the underlying RateMetaParameter.
 func (x *StreamNode) RateMetaParameter() *NumberMetaParameter {
 	_r := x.inner.RateMetaParameter()
@@ -54,6 +58,8 @@ func (x *StreamNode) RateMetaParameter() *NumberMetaParameter {
 	return &NumberMetaParameter{inner: _r}
 }
 
+// @property mixer @abstract The readonly property that returns the PHASEMixer this stream was created with and assigned to.
+//
 // Mixer calls the underlying Mixer.
 func (x *StreamNode) Mixer() *Mixer {
 	_r := x.inner.Mixer()
@@ -63,6 +69,8 @@ func (x *StreamNode) Mixer() *Mixer {
 	return &Mixer{inner: _r}
 }
 
+// @property format @abstract The readonly property that returns the AVAudioFormat that this stream was initialized with.
+//
 // Format calls the underlying Format.
 func (x *StreamNode) Format() *avfaudio.AVAudioFormat {
 	return x.inner.Format()

@@ -33,6 +33,8 @@ func MTRClusterKeypadInputFromID(id objc.ID) *MTRClusterKeypadInput {
 	return &MTRClusterKeypadInput{inner: raw.MTRClusterKeypadInputFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterKeypadInputWithDeviceEndpointIDQueue creates a new [MTRClusterKeypadInput].
 func NewMTRClusterKeypadInputWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterKeypadInput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterKeypadInput")), objc.RegisterName("alloc"))

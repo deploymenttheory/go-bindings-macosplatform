@@ -33,6 +33,8 @@ func NDArrayAffineInt4DequantizeFromID(id objc.ID) *NDArrayAffineInt4Dequantize 
 	return &NDArrayAffineInt4Dequantize{inner: raw.MPSNDArrayAffineInt4DequantizeFromID(id)}
 }
 
+// @abstract   Initializes a kernel for 4-bit affine dequantization. @param      device    The Metal device to be used with this kernel. @param      quantizationDescriptor        Describes the quantization scheme. @result     A new vector LUT dequantization kernel.
+//
 // NewNDArrayAffineInt4DequantizeWithDeviceQuantizationDescriptor creates a new [NDArrayAffineInt4Dequantize].
 func NewNDArrayAffineInt4DequantizeWithDeviceQuantizationDescriptor(device metal.MTLDevice, quantizationDescriptor *mpsndarray.MPSNDArrayAffineQuantizationDescriptor) *NDArrayAffineInt4Dequantize {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayAffineInt4Dequantize")), objc.RegisterName("alloc"))
@@ -40,18 +42,24 @@ func NewNDArrayAffineInt4DequantizeWithDeviceQuantizationDescriptor(device metal
 	return &NDArrayAffineInt4Dequantize{inner: raw.MPSNDArrayAffineInt4DequantizeFromID(_id)}
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *NDArrayAffineInt4Dequantize) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayAffineInt4Dequantize {
 	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *NDArrayAffineInt4Dequantize) WithOptions(options mpscore.MPSKernelOptions) *NDArrayAffineInt4Dequantize {
 	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NDArrayAffineInt4Dequantize) WithLabel(label string) *NDArrayAffineInt4Dequantize {
 	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))

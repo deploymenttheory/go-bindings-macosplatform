@@ -36,16 +36,22 @@ func NewAverage() *Average {
 	return &Average{inner: raw.MXAverageFromID[objc.ID](_id)}
 }
 
+// @property      averageMeasurement @abstract      An NSMeasurement that contains the average measurement.
+//
 // AverageMeasurement calls the underlying AverageMeasurement.
 func (x *Average) AverageMeasurement() *foundation.NSMeasurement[objc.ID] {
 	return x.inner.AverageMeasurement()
 }
 
+// @property      sampleCount @abstract      An NSInteger representation of the number of samples in the distribution used to formulate the average. @discussion    This value is negative if an unknown number of samples was used to compute the average.
+//
 // SampleCount calls the underlying SampleCount.
 func (x *Average) SampleCount() int {
 	return x.inner.SampleCount()
 }
 
+// @property      standardDeviation @abstract      An double representation of the standard deviation of the distribution. @discussion    This value is negative an unknown number of samples was used to compute the standard deviation.
+//
 // StandardDeviation calls the underlying StandardDeviation.
 func (x *Average) StandardDeviation() float64 {
 	return x.inner.StandardDeviation()

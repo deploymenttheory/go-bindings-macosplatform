@@ -29,6 +29,8 @@ func CachedURLResponseFromID(id objc.ID) *CachedURLResponse {
 	return &CachedURLResponse{inner: raw.NSCachedURLResponseFromID(id)}
 }
 
+// @method initWithResponse:data @abstract Initializes an NSCachedURLResponse with the given response and data. @discussion A default NSURLCacheStoragePolicy is used for NSCachedURLResponse objects initialized with this method: NSURLCacheStorageAllowed. @param response a NSURLResponse object. @param data an NSData object representing the URL content corresponding to the given response. @result an initialized NSCachedURLResponse.
+//
 // NewCachedURLResponseWithResponseData creates a new [CachedURLResponse].
 func NewCachedURLResponseWithResponseData(response *raw.NSURLResponse, data *raw.NSData) *CachedURLResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCachedURLResponse")), objc.RegisterName("alloc"))
@@ -36,6 +38,8 @@ func NewCachedURLResponseWithResponseData(response *raw.NSURLResponse, data *raw
 	return &CachedURLResponse{inner: raw.NSCachedURLResponseFromID(_id)}
 }
 
+// @method initWithResponse:data:userInfo:storagePolicy: @abstract Initializes an NSCachedURLResponse with the given response, data, user-info dictionary, and storage policy. @param response a NSURLResponse object. @param data an NSData object representing the URL content corresponding to the given response. @param userInfo a dictionary user-specified information to be stored with the NSCachedURLResponse. @param storagePolicy an NSURLCacheStoragePolicy constant. @result an initialized NSCachedURLResponse.
+//
 // NewCachedURLResponseWithResponseDataUserInfoStoragePolicy creates a new [CachedURLResponse].
 func NewCachedURLResponseWithResponseDataUserInfoStoragePolicy(response *raw.NSURLResponse, data *raw.NSData, userInfo *raw.NSDictionary[objc.ID, objc.ID], storagePolicy NSURLCacheStoragePolicy) *CachedURLResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCachedURLResponse")), objc.RegisterName("alloc"))
@@ -49,6 +53,8 @@ func (x *CachedURLResponse) WithScriptingProperties(scriptingProperties *raw.NSD
 	return x
 }
 
+// @abstract Returns the response wrapped by this instance. @result The response wrapped by this instance.
+//
 // Response calls the underlying Response.
 func (x *CachedURLResponse) Response() *URLResponse {
 	_r := x.inner.Response()
@@ -58,6 +64,8 @@ func (x *CachedURLResponse) Response() *URLResponse {
 	return &URLResponse{inner: _r}
 }
 
+// @abstract Returns the data of the receiver. @result The data of the receiver.
+//
 // Data calls the underlying Data.
 func (x *CachedURLResponse) Data() *Data {
 	_r := x.inner.Data()
@@ -67,11 +75,15 @@ func (x *CachedURLResponse) Data() *Data {
 	return &Data{inner: _r}
 }
 
+// @abstract Returns the userInfo dictionary of the receiver. @result The userInfo dictionary of the receiver.
+//
 // UserInfo calls the underlying UserInfo.
 func (x *CachedURLResponse) UserInfo() *raw.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.UserInfo()
 }
 
+// @abstract Returns the NSURLCacheStoragePolicy constant of the receiver. @result The NSURLCacheStoragePolicy constant of the receiver.
+//
 // StoragePolicy calls the underlying StoragePolicy.
 func (x *CachedURLResponse) StoragePolicy() NSURLCacheStoragePolicy {
 	return NSURLCacheStoragePolicy(x.inner.StoragePolicy())

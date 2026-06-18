@@ -39,6 +39,8 @@ func NewImageBilinearScaleWithDevice(device metal.MTLDevice) *ImageBilinearScale
 	return &ImageBilinearScale{inner: raw.MPSImageBilinearScaleFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+//
 // NewImageBilinearScaleWithCoderDevice creates a new [ImageBilinearScale].
 func NewImageBilinearScaleWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageBilinearScale {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageBilinearScale")), objc.RegisterName("alloc"))
@@ -46,24 +48,32 @@ func NewImageBilinearScaleWithCoderDevice(aDecoder *foundation.NSCoder, device m
 	return &ImageBilinearScale{inner: raw.MPSImageBilinearScaleFromID(_id)}
 }
 
+// @property   scaleTransform @abstract   An optional transform that describes how to scale and translate the source image @discussion If the scaleTransform is NULL, then any image scaling factor such as MPSImageLanczosScale will rescale the image so that the source image fits exactly into the destination texture.  If the transform is not NULL, then the transform is used for determining how to map the source image to the destination. Default: NULL When the scaleTransform is set to non-NULL, the values pointed to by the new scaleTransform are copied to object storage, and the pointer is updated to point to internal storage. Do not attempt to free it.  You may free your copy of the MPSScaleTransform as soon as the property set operation is complete. When calculating a scaleTransform, use the limits of the bounding box for the intended source region of interest and the destination clipRect. Adjustments for pixel center coordinates are handled internally to the function.  For example, the scale transform to convert the entire source image to the entire destination image size (clipRect = MPSRectNoClip) would be: @code scaleTransform.scaleX = (double) dest.width / source.width; scaleTransform.scaleY = (double) dest.height / source.height; scaleTransform.translateX = scaleTransform.translateY = 0.0; @endcode The translation parameters allow you to adjust the region of the source image used to create the destination image. They are in destination coordinates. To place the top left corner of the destination clipRect to represent the position {x,y} in source coordinates, we solve for the translation based on the standard scale matrix operation for each axis: @code dest_position = source_position * scale + translation; translation = dest_position - source_position * scale; @endcode For the top left corner of the clipRect, the dest_position is considered to be {0,0}. This gives us a translation of: @code scaleTransform.translateX = -source_origin.x * scaleTransform.scaleX; scaleTransform.translateY = -source_origin.y * scaleTransform.scaleY; @endcode One would typically use non-zero translations to do tiling, or provide a resized view into a internal segment of an image. NOTE:  Changing the Lanczos scale factor may trigger recalculation of signficant state internal to the object when the filter is encoded to the command buffer. The scale factor is scaleTransform->scaleX,Y, or the ratio of source and destination image sizes if scaleTransform is NULL. Reuse a MPSImageLanczosScale object for frequently used scalings to avoid redundantly recreating expensive resampling state.
+//
 // WithScaleTransform sets the scaleTransform property and returns the receiver for chaining.
 func (x *ImageBilinearScale) WithScaleTransform(scaleTransform *mpscore.MPSScaleTransform) *ImageBilinearScale {
 	x.inner.MPSImageScale.SetScaleTransform(scaleTransform)
 	return x
 }
 
+// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *ImageBilinearScale) WithOffset(offset mpscore.MPSOffset) *ImageBilinearScale {
 	x.inner.MPSImageScale.MPSUnaryImageKernel.SetOffset(offset)
 	return x
 }
 
+// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+//
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImageBilinearScale) WithClipRect(clipRect metal.MTLRegion) *ImageBilinearScale {
 	x.inner.MPSImageScale.MPSUnaryImageKernel.SetClipRect(clipRect)
 	return x
 }
 
+// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
+//
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *ImageBilinearScale) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageBilinearScale {
 	x.inner.MPSImageScale.MPSUnaryImageKernel.SetEdgeMode(edgeMode)

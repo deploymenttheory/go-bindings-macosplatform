@@ -38,30 +38,40 @@ func NewNDArrayStridedSlice() *NDArrayStridedSlice {
 	return &NDArrayStridedSlice{inner: raw.MPSNDArrayStridedSliceFromID(_id)}
 }
 
+// @property  strides @abstract  The strides to use when slicing the input array.
+//
 // WithStrides sets the strides property and returns the receiver for chaining.
 func (x *NDArrayStridedSlice) WithStrides(strides mpsndarray.MPSNDArrayOffsets) *NDArrayStridedSlice {
 	x.inner.SetStrides(strides)
 	return x
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *NDArrayStridedSlice) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayStridedSlice {
 	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *NDArrayStridedSlice) WithOptions(options mpscore.MPSKernelOptions) *NDArrayStridedSlice {
 	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NDArrayStridedSlice) WithLabel(label string) *NDArrayStridedSlice {
 	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property  strides @abstract  The strides to use when slicing the input array.
+//
 // Strides calls the underlying Strides.
 func (x *NDArrayStridedSlice) Strides() mpsndarray.MPSNDArrayOffsets {
 	return x.inner.Strides()

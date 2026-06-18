@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A tile group rule defines how a certain type of tile should be placed on the map. These tiles are like puzzle pieces, and the rules define how they should be pieced together. This is accomplished by defining which neighboring spaces need to be filled with tiles that belong to the same group, and which tiles are required to be empty. The required pattern of neighboring tiles is defined using the SKTileAdjacencyMask.
+//
 // TileGroupRule wraps [raw.SKTileGroupRule] with a fluent Go API.
 type TileGroupRule struct {
 	inner *raw.SKTileGroupRule
@@ -32,6 +34,8 @@ func TileGroupRuleFromID(id objc.ID) *TileGroupRule {
 	return &TileGroupRule{inner: raw.SKTileGroupRuleFromID(id)}
 }
 
+// Initilize a tile group rule with the specified adjacency and tile definitions. @param adjacency the adjacency requirements for this rule; use the mask that covers the adjacent spaces that must be filled with tiles belonging to the same group; tiles not masked out must be empty @param tileDefinitions the tile definitions used for this rule
+//
 // NewTileGroupRuleWithAdjacencyTileDefinitions creates a new [TileGroupRule].
 func NewTileGroupRuleWithAdjacencyTileDefinitions(adjacency SKTileAdjacencyMask, tileDefinitions *foundation.NSArray[*raw.SKTileDefinition]) *TileGroupRule {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKTileGroupRule")), objc.RegisterName("alloc"))
@@ -39,12 +43,16 @@ func NewTileGroupRuleWithAdjacencyTileDefinitions(adjacency SKTileAdjacencyMask,
 	return &TileGroupRule{inner: raw.SKTileGroupRuleFromID(_id)}
 }
 
+// The adjacency mask used by this rule. Set this to the mask that covers the adjacent spaces that must be filled with tiles belonging to the same group for this rule met.
+//
 // WithAdjacency sets the adjacency property and returns the receiver for chaining.
 func (x *TileGroupRule) WithAdjacency(adjacency SKTileAdjacencyMask) *TileGroupRule {
 	x.inner.SetAdjacency(raw.SKTileAdjacencyMask(adjacency))
 	return x
 }
 
+// The tile definitions used by this rule. If the rule is evaluated and its conditions are met, one of the tile definitions within this array will be randomly selected for placement within the tile map. Each tile definitions' placement weight is taken into consideration to determine how likely each is to be selected; tile definitions with higher placement weights will be selected more frequently than those with lower placement weights.
+//
 // WithTileDefinitions sets the collection, converting the Go slice to an NSArray.
 func (x *TileGroupRule) WithTileDefinitions(items ...*raw.SKTileDefinition) *TileGroupRule {
 	if len(items) == 0 {
@@ -63,12 +71,16 @@ func (x *TileGroupRule) WithTileDefinitions(items ...*raw.SKTileDefinition) *Til
 	return x
 }
 
+// Client-assignable name for the tile group rule. Defaults to nil.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *TileGroupRule) WithName(name string) *TileGroupRule {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// The adjacency mask used by this rule. Set this to the mask that covers the adjacent spaces that must be filled with tiles belonging to the same group for this rule met.
+//
 // Adjacency calls the underlying Adjacency.
 func (x *TileGroupRule) Adjacency() SKTileAdjacencyMask {
 	return SKTileAdjacencyMask(x.inner.Adjacency())
@@ -79,6 +91,8 @@ func (x *TileGroupRule) SetAdjacency(adjacency SKTileAdjacencyMask) {
 	x.inner.SetAdjacency(raw.SKTileAdjacencyMask(adjacency))
 }
 
+// The tile definitions used by this rule. If the rule is evaluated and its conditions are met, one of the tile definitions within this array will be randomly selected for placement within the tile map. Each tile definitions' placement weight is taken into consideration to determine how likely each is to be selected; tile definitions with higher placement weights will be selected more frequently than those with lower placement weights.
+//
 // TileDefinitions returns the collection as a Go slice.
 func (x *TileGroupRule) TileDefinitions() []*TileDefinition {
 	arr := x.inner.TileDefinitions()
@@ -95,6 +109,8 @@ func (x *TileGroupRule) SetTileDefinitions(tileDefinitions *foundation.NSArray[*
 	x.inner.SetTileDefinitions(tileDefinitions)
 }
 
+// Client-assignable name for the tile group rule. Defaults to nil.
+//
 // Name calls the underlying Name.
 func (x *TileGroupRule) Name() string {
 	_r := x.inner.Name()

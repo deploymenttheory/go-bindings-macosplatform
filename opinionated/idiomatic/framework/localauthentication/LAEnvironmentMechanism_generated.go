@@ -36,11 +36,15 @@ func NewEnvironmentMechanism() *EnvironmentMechanism {
 	return &EnvironmentMechanism{inner: raw.LAEnvironmentMechanismFromID(_id)}
 }
 
+// @brief Whether the mechanism is available for use, i.e. whether the relevant preflight call of @c canEvaluatePolicy would succeed. @warning If @c isUsable reads @c NO, do not assume that it's because of some particular reason. You should check properties of the subclass to determine why mechanism can't be used.
+//
 // IsUsable calls the underlying IsUsable.
 func (x *EnvironmentMechanism) IsUsable() bool {
 	return x.inner.IsUsable()
 }
 
+// The localized name of the authentication mechanism, e.g. "Touch ID", "Face ID" etc.
+//
 // LocalizedName calls the underlying LocalizedName.
 func (x *EnvironmentMechanism) LocalizedName() string {
 	_r := x.inner.LocalizedName()
@@ -50,6 +54,8 @@ func (x *EnvironmentMechanism) LocalizedName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Name of the SF Symbol representing this authentication mechanism.
+//
 // IconSystemName calls the underlying IconSystemName.
 func (x *EnvironmentMechanism) IconSystemName() string {
 	_r := x.inner.IconSystemName()

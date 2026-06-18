@@ -29,6 +29,8 @@ func AudioConnectionPointFromID(id objc.ID) *AudioConnectionPoint {
 	return &AudioConnectionPoint{inner: raw.AVAudioConnectionPointFromID(id)}
 }
 
+// @method initWithNode:bus: @abstract Create a connection point object. @param node the source or destination node @param bus the output or input bus on the node @discussion If the node is nil, this method fails (returns nil).
+//
 // NewAudioConnectionPointWithNodeBus creates a new [AudioConnectionPoint].
 func NewAudioConnectionPointWithNodeBus(node *raw.AVAudioNode, bus uint) *AudioConnectionPoint {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioConnectionPoint")), objc.RegisterName("alloc"))
@@ -36,6 +38,8 @@ func NewAudioConnectionPointWithNodeBus(node *raw.AVAudioNode, bus uint) *AudioC
 	return &AudioConnectionPoint{inner: raw.AVAudioConnectionPointFromID(_id)}
 }
 
+// @property node @abstract Returns the node in the connection point.
+//
 // Node calls the underlying Node.
 func (x *AudioConnectionPoint) Node() *AudioNode {
 	_r := x.inner.Node()
@@ -45,6 +49,8 @@ func (x *AudioConnectionPoint) Node() *AudioNode {
 	return &AudioNode{inner: _r}
 }
 
+// @property bus @abstract Returns the bus on the node in the connection point.
+//
 // Bus calls the underlying Bus.
 func (x *AudioConnectionPoint) Bus() uint {
 	return x.inner.Bus()

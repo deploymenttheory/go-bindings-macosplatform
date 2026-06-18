@@ -35,6 +35,8 @@ func CNNLocalContrastNormalizationFromID(id objc.ID) *CNNLocalContrastNormalizat
 	return &CNNLocalContrastNormalization{inner: raw.MPSCNNLocalContrastNormalizationFromID(id)}
 }
 
+// @abstract  Initialize a local contrast normalization filter @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel @param      kernelHeight        The height of the kernel @return     A valid MPSCNNLocalContrastNormalization object or nil, if failure. NOTE:  For now, kernelWidth must be equal to kernelHeight
+//
 // NewCNNLocalContrastNormalizationWithDeviceKernelWidthKernelHeight creates a new [CNNLocalContrastNormalization].
 func NewCNNLocalContrastNormalizationWithDeviceKernelWidthKernelHeight(device metal.MTLDevice, kernelWidth uint, kernelHeight uint) *CNNLocalContrastNormalization {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNLocalContrastNormalization")), objc.RegisterName("alloc"))
@@ -42,6 +44,8 @@ func NewCNNLocalContrastNormalizationWithDeviceKernelWidthKernelHeight(device me
 	return &CNNLocalContrastNormalization{inner: raw.MPSCNNLocalContrastNormalizationFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+//
 // NewCNNLocalContrastNormalizationWithCoderDevice creates a new [CNNLocalContrastNormalization].
 func NewCNNLocalContrastNormalizationWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *CNNLocalContrastNormalization {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNLocalContrastNormalization")), objc.RegisterName("alloc"))
@@ -49,102 +53,136 @@ func NewCNNLocalContrastNormalizationWithCoderDevice(aDecoder *foundation.NSCode
 	return &CNNLocalContrastNormalization{inner: raw.MPSCNNLocalContrastNormalizationFromID(_id)}
 }
 
+// @property   alpha @abstract   The value of alpha.  Default is 0.0 @discussion The default value 0.0 is not recommended and is preserved for backwards compatibility. With alpha 0, it performs a local mean subtraction. The MPSCNNLocalContrastNormalizationNode used with the MPSNNGraph uses 1.0 as a default.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalization) WithAlpha(alpha float32) *CNNLocalContrastNormalization {
 	x.inner.SetAlpha(alpha)
 	return x
 }
 
+// @property   beta @abstract   The value of beta.  Default is 0.5
+//
 // WithBeta sets the beta property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalization) WithBeta(beta float32) *CNNLocalContrastNormalization {
 	x.inner.SetBeta(beta)
 	return x
 }
 
+// @property   delta @abstract   The value of delta.  Default is 1/1024
+//
 // WithDelta sets the delta property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalization) WithDelta(delta float32) *CNNLocalContrastNormalization {
 	x.inner.SetDelta(delta)
 	return x
 }
 
+// @property   p0 @abstract   The value of p0.  Default is 1.0
+//
 // WithP0 sets the p0 property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalization) WithP0(p0 float32) *CNNLocalContrastNormalization {
 	x.inner.SetP0(p0)
 	return x
 }
 
+// @property   pm @abstract   The value of pm.  Default is 0.0
+//
 // WithPm sets the pm property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalization) WithPm(pm float32) *CNNLocalContrastNormalization {
 	x.inner.SetPm(pm)
 	return x
 }
 
+// @property   ps @abstract   The value of ps.  Default is 1.0
+//
 // WithPs sets the ps property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalization) WithPs(ps float32) *CNNLocalContrastNormalization {
 	x.inner.SetPs(ps)
 	return x
 }
 
+// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalization) WithOffset(offset mpscore.MPSOffset) *CNNLocalContrastNormalization {
 	x.inner.MPSCNNKernel.SetOffset(offset)
 	return x
 }
 
+// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+//
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalization) WithClipRect(clipRect metal.MTLRegion) *CNNLocalContrastNormalization {
 	x.inner.MPSCNNKernel.SetClipRect(clipRect)
 	return x
 }
 
+// @property   destinationFeatureChannelOffset @abstract   The number of channels in the destination MPSImage to skip before writing output. @discussion This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+//
 // WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalization) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNLocalContrastNormalization {
 	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
 	return x
 }
 
+// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+//
 // WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalization) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNLocalContrastNormalization {
 	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
 	return x
 }
 
+// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+//
 // WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalization) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNLocalContrastNormalization {
 	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
 	return x
 }
 
+// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode Note: For @ref MPSCNNPoolingAverage specifying edge mode @ref MPSImageEdgeModeClamp is interpreted as a "shrink-to-edge" operation, which shrinks the effective filtering window to remain within the source image borders.
+//
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalization) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNLocalContrastNormalization {
 	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
 	return x
 }
 
+// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
+//
 // WithPadding sets the padding property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalization) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNLocalContrastNormalization {
 	x.inner.MPSCNNKernel.SetPadding(padding)
 	return x
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalization) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNLocalContrastNormalization {
 	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalization) WithOptions(options mpscore.MPSKernelOptions) *CNNLocalContrastNormalization {
 	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalization) WithLabel(label string) *CNNLocalContrastNormalization {
 	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   alpha @abstract   The value of alpha.  Default is 0.0 @discussion The default value 0.0 is not recommended and is preserved for backwards compatibility. With alpha 0, it performs a local mean subtraction. The MPSCNNLocalContrastNormalizationNode used with the MPSNNGraph uses 1.0 as a default.
+//
 // Alpha calls the underlying Alpha.
 func (x *CNNLocalContrastNormalization) Alpha() float32 {
 	return x.inner.Alpha()
@@ -155,6 +193,8 @@ func (x *CNNLocalContrastNormalization) SetAlpha(alpha float32) {
 	x.inner.SetAlpha(alpha)
 }
 
+// @property   beta @abstract   The value of beta.  Default is 0.5
+//
 // Beta calls the underlying Beta.
 func (x *CNNLocalContrastNormalization) Beta() float32 {
 	return x.inner.Beta()
@@ -165,6 +205,8 @@ func (x *CNNLocalContrastNormalization) SetBeta(beta float32) {
 	x.inner.SetBeta(beta)
 }
 
+// @property   delta @abstract   The value of delta.  Default is 1/1024
+//
 // Delta calls the underlying Delta.
 func (x *CNNLocalContrastNormalization) Delta() float32 {
 	return x.inner.Delta()
@@ -175,6 +217,8 @@ func (x *CNNLocalContrastNormalization) SetDelta(delta float32) {
 	x.inner.SetDelta(delta)
 }
 
+// @property   p0 @abstract   The value of p0.  Default is 1.0
+//
 // P0 calls the underlying P0.
 func (x *CNNLocalContrastNormalization) P0() float32 {
 	return x.inner.P0()
@@ -185,6 +229,8 @@ func (x *CNNLocalContrastNormalization) SetP0(p0 float32) {
 	x.inner.SetP0(p0)
 }
 
+// @property   pm @abstract   The value of pm.  Default is 0.0
+//
 // Pm calls the underlying Pm.
 func (x *CNNLocalContrastNormalization) Pm() float32 {
 	return x.inner.Pm()
@@ -195,6 +241,8 @@ func (x *CNNLocalContrastNormalization) SetPm(pm float32) {
 	x.inner.SetPm(pm)
 }
 
+// @property   ps @abstract   The value of ps.  Default is 1.0
+//
 // Ps calls the underlying Ps.
 func (x *CNNLocalContrastNormalization) Ps() float32 {
 	return x.inner.Ps()

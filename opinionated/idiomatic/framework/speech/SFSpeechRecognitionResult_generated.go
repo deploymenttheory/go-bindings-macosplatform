@@ -36,6 +36,8 @@ func NewSpeechRecognitionResult() *SpeechRecognitionResult {
 	return &SpeechRecognitionResult{inner: raw.SFSpeechRecognitionResultFromID(_id)}
 }
 
+// The transcription with the highest confidence level.
+//
 // BestTranscription calls the underlying BestTranscription.
 func (x *SpeechRecognitionResult) BestTranscription() *Transcription {
 	_r := x.inner.BestTranscription()
@@ -45,6 +47,8 @@ func (x *SpeechRecognitionResult) BestTranscription() *Transcription {
 	return &Transcription{inner: _r}
 }
 
+// An array of potential transcriptions, sorted in descending order of confidence. All transcriptions correspond to the same utterance, which can be a partial or final result of the overall request. The first transcription in the array has the highest confidence rating, followed by transcriptions with decreasing confidence ratings.
+//
 // Transcriptions returns the collection as a Go slice.
 func (x *SpeechRecognitionResult) Transcriptions() []*Transcription {
 	arr := x.inner.Transcriptions()
@@ -56,11 +60,15 @@ func (x *SpeechRecognitionResult) Transcriptions() []*Transcription {
 	})
 }
 
+// A Boolean value that indicates whether speech recognition is complete and whether the transcriptions are final. When a speech recognition request is final, its transcriptions don't change.
+//
 // IsFinal calls the underlying IsFinal.
 func (x *SpeechRecognitionResult) IsFinal() bool {
 	return x.inner.IsFinal()
 }
 
+// An object that contains the metadata results for a speech recognition request.
+//
 // SpeechRecognitionMetadata calls the underlying SpeechRecognitionMetadata.
 func (x *SpeechRecognitionResult) SpeechRecognitionMetadata() *SpeechRecognitionMetadata {
 	_r := x.inner.SpeechRecognitionMetadata()

@@ -30,6 +30,8 @@ func QuantityItemFromID(id objc.ID) *QuantityItem {
 	return &QuantityItem{inner: raw.CLSQuantityItemFromID(id)}
 }
 
+// @abstract      Create a quantity item with an identifier and title. @param         identifier      An identifier that is unique within activity. @param         title           Title of the quantity. Ex @em Hints
+//
 // NewQuantityItemWithIdentifierTitle creates a new [QuantityItem].
 func NewQuantityItemWithIdentifierTitle(identifier string, title string) *QuantityItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLSQuantityItem")), objc.RegisterName("alloc"))
@@ -37,18 +39,24 @@ func NewQuantityItemWithIdentifierTitle(identifier string, title string) *Quanti
 	return &QuantityItem{inner: raw.CLSQuantityItemFromID(_id)}
 }
 
+// @abstract      Quantity awarded.
+//
 // WithQuantity sets the quantity property and returns the receiver for chaining.
 func (x *QuantityItem) WithQuantity(quantity float64) *QuantityItem {
 	x.inner.SetQuantity(quantity)
 	return x
 }
 
+// @abstract      Title of what this ActivityItem represents. @discussion    This will be the title associated with the activity item in the generated progress report.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *QuantityItem) WithTitle(title string) *QuantityItem {
 	x.inner.CLSActivityItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// @abstract      Quantity awarded.
+//
 // Quantity calls the underlying Quantity.
 func (x *QuantityItem) Quantity() float64 {
 	return x.inner.Quantity()

@@ -33,6 +33,8 @@ func NDArrayLUTQuantizationDescriptorFromID(id objc.ID) *NDArrayLUTQuantizationD
 	return &NDArrayLUTQuantizationDescriptor{inner: raw.MPSNDArrayLUTQuantizationDescriptorFromID(id)}
 }
 
+// @abstract   Initializes a scalar lookup-table quantization descriptor. @param      quantizationDataType    Which quantized datatype is used. @result     A new quantization descriptor.
+//
 // NewNDArrayLUTQuantizationDescriptorWithDataType creates a new [NDArrayLUTQuantizationDescriptor].
 func NewNDArrayLUTQuantizationDescriptorWithDataType(quantizationDataType mpscore.MPSDataType) *NDArrayLUTQuantizationDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayLUTQuantizationDescriptor")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewNDArrayLUTQuantizationDescriptorWithDataType(quantizationDataType mpscor
 	return &NDArrayLUTQuantizationDescriptor{inner: raw.MPSNDArrayLUTQuantizationDescriptorFromID(_id)}
 }
 
+// @abstract   Initializes a vector lookup-table quantization descriptor. @param      quantizationDataType    Which quantized datatype is used. @param      vectorAxis        The quantization vector axis - this axis will receive the vector component in the destination. @result     A new quantization descriptor.
+//
 // NewNDArrayLUTQuantizationDescriptorWithDataTypeVectorAxis creates a new [NDArrayLUTQuantizationDescriptor].
 func NewNDArrayLUTQuantizationDescriptorWithDataTypeVectorAxis(quantizationDataType mpscore.MPSDataType, vectorAxis uint) *NDArrayLUTQuantizationDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayLUTQuantizationDescriptor")), objc.RegisterName("alloc"))

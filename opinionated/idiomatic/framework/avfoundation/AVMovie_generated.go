@@ -30,6 +30,8 @@ func MovieFromID(id objc.ID) *Movie {
 	return &Movie{inner: raw.AVMovieFromID(id)}
 }
 
+// @method			initWithURL:options: @abstract		Creates an AVMovie object from a movie header stored in a QuickTime movie file or ISO base media file. @param			URL An NSURL object that specifies a file containing a movie header. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the AVMovie object. @result			An AVMovie object @discussion     By default, the defaultMediaDataStorage property will be nil and each associated AVMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from a file and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
+//
 // NewMovieWithURLOptions creates a new [Movie].
 func NewMovieWithURLOptions(uRL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Movie {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMovie")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewMovieWithURLOptions(uRL string, options *foundation.NSDictionary[*founda
 	return &Movie{inner: raw.AVMovieFromID(_id)}
 }
 
+// @method			initWithData:options: @abstract		Creates an AVMovie object from a movie header stored in an NSData object. @param			data An NSData object containing a movie header. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the AVMovie object. @result			An AVMovie object @discussion     You can use this method to operate on movie headers that are not stored in files. In general you should avoid loading an entire movie file with its media data into an instance of NSData! By default, the defaultMediaDataStorage property will be nil and each associated AVMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
+//
 // NewMovieWithDataOptions creates a new [Movie].
 func NewMovieWithDataOptions(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Movie {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMovie")), objc.RegisterName("alloc"))
@@ -44,16 +48,22 @@ func NewMovieWithDataOptions(data *foundation.NSData, options *foundation.NSDict
 	return &Movie{inner: raw.AVMovieFromID(_id)}
 }
 
+// @property       URL @abstract       The URL with which the instance of AVMovie was initialized; may be nil.
+//
 // URL calls the underlying URL.
 func (x *Movie) URL() *foundation.NSURL {
 	return x.inner.URL()
 }
 
+// @property       data @abstract       The data block with which the instance of AVMovie was initialized; may be nil.
+//
 // Data calls the underlying Data.
 func (x *Movie) Data() *foundation.NSData {
 	return x.inner.Data()
 }
 
+// @property       defaultMediaDataStorage @abstract       The default storage container for media data added to a movie. @discussion     The value of this property is an AVMediaDataStorage object that indicates where sample data that is added to a movie should be written by default.
+//
 // DefaultMediaDataStorage calls the underlying DefaultMediaDataStorage.
 func (x *Movie) DefaultMediaDataStorage() *MediaDataStorage {
 	_r := x.inner.DefaultMediaDataStorage()
@@ -63,26 +73,36 @@ func (x *Movie) DefaultMediaDataStorage() *MediaDataStorage {
 	return &MediaDataStorage{inner: _r}
 }
 
+// @property       canContainMovieFragments @abstract       Indicates whether the movie file is capable of being extended by fragments. @discussion     The value of this property is YES if an 'mvex' box is present in the 'moov' box. The 'mvex' box is necessary in order to signal the possible presence of later 'moof' boxes.
+//
 // CanContainMovieFragments calls the underlying CanContainMovieFragments.
 func (x *Movie) CanContainMovieFragments() bool {
 	return x.inner.CanContainMovieFragments()
 }
 
+// @property       containsMovieFragments @abstract       Indicates whether the movie file is extended by at least one movie fragment. @discussion     The value of this property is YES if canContainMovieFragments is YES and at least one 'moof' box is present after the 'moov' box.
+//
 // ContainsMovieFragments calls the underlying ContainsMovieFragments.
 func (x *Movie) ContainsMovieFragments() bool {
 	return x.inner.ContainsMovieFragments()
 }
 
+// @method			movieHeaderWithFileType:error: @abstract		Creates an NSData object containing the movie header of the AVMovie object. @param			fileType A UTI indicating the specific file format of the movie header (e.g. AVFileTypeQuickTimeMovie for a QuickTime movie). @param			outError If an error occurs reading the movie header, describes the nature of the failure. @result			An NSData object. @discussion     The movie header will be a pure reference movie, with no base URL, suitable for use on the pasteboard.
+//
 // MovieHeaderWithFileTypeError calls the underlying MovieHeaderWithFileTypeError.
 func (x *Movie) MovieHeaderWithFileTypeError(fileType *foundation.NSString) (*foundation.NSData, error) {
 	return x.inner.MovieHeaderWithFileTypeError(fileType)
 }
 
+// @method			writeMovieHeaderToURL:fileType:options:error: @abstract		Writes the movie header to a destination URL. @param			URL An NSURL object indicating where to write the movie header. @param			fileType A UTI indicating the specific file format (e.g. AVFileTypeQuickTimeMovie for a QuickTime movie). @param			options An NSUInteger whose bits specify options for the writing of the movie header. See AVMovieWritingOptions above. @param			outError If an error occurs writing the movie header, describes the nature of the failure. @discussion		Note that modifications to instances of AVMutableMovie, to their constituent AVMutableMovieTracks, or to their collections of metadata are committed to storage when their movie headers are written.
+//
 // WriteMovieHeaderToURLFileTypeOptionsError calls the underlying WriteMovieHeaderToURLFileTypeOptionsError.
 func (x *Movie) WriteMovieHeaderToURLFileTypeOptionsError(uRL string, fileType *foundation.NSString, options AVMovieWritingOptions) (bool, error) {
 	return x.inner.WriteMovieHeaderToURLFileTypeOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), fileType, raw.AVMovieWritingOptions(options))
 }
 
+// @method			isCompatibleWithFileType: @abstract		Indicates whether a movie header for the AVMovie object can be created for the specified file type. @param			fileType A UTI indicating a movie file format (e.g. AVFileTypeQuickTimeMovie for a QuickTime movie). @discussion     This method returns a BOOL that indicates whether a movie header of the specified type can be created for the receiver. For example, this method returns NO if the movie contains tracks whose media types or media subtypes are not allowed by the specified file type.
+//
 // IsCompatibleWithFileType calls the underlying IsCompatibleWithFileType.
 func (x *Movie) IsCompatibleWithFileType(fileType *foundation.NSString) bool {
 	return x.inner.IsCompatibleWithFileType(fileType)

@@ -38,6 +38,8 @@ func NewMaterialWithNameScatteringFunction(name string, scatteringFunction *raw.
 	return &Material{inner: raw.MDLMaterialFromID(_id)}
 }
 
+// @see MDLNamed
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Material) WithName(name string) *Material {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
@@ -131,6 +133,8 @@ func (x *Material) ScatteringFunction() *ScatteringFunction {
 	return &ScatteringFunction{inner: _r}
 }
 
+// @see MDLNamed
+//
 // Name calls the underlying Name.
 func (x *Material) Name() string {
 	_r := x.inner.Name()

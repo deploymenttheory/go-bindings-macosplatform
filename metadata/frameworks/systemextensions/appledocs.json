@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "framework": "SystemExtensions",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "OSSystemExtensionInfo": {
+      "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensioninfo"
+    },
+    "OSSystemExtensionManager": {
+      "doc": "A type that facilitates activation and deactivation of system extensions.",
+      "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionmanager"
+    },
+    "OSSystemExtensionProperties": {
+      "doc": "Properties that identify a specific version of a system extension.",
+      "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionproperties"
+    },
+    "OSSystemExtensionRequest": {
+      "doc": "A request to activate or deactivate a system extension.",
+      "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionrequest"
+    },
+    "OSSystemExtensionsWorkspace": {
+      "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionsworkspace"
+    }
+  },
+  "protocols": {
+    "OSSystemExtensionRequestDelegate": {
+      "doc": "A type that receives updates about the progress of a request.",
+      "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionrequestdelegate"
+    },
+    "OSSystemExtensionsWorkspaceObserver": {
+      "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionsworkspaceobserver"
+    }
+  },
+  "enums": {
+    "OSSystemExtensionErrorCode": {
+      "doc": "Error codes for system extensions.",
+      "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionerrorcode"
+    },
+    "OSSystemExtensionReplacementAction": {
+      "doc": "Actions for describing how the extension manager should resolve a version conflict.",
+      "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionreplacementaction"
+    },
+    "OSSystemExtensionRequestResult": {
+      "doc": "The result of a completed request, possibly including additional information about the extension’s state.",
+      "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionrequestresult"
+    }
+  },
+  "methods": {
+    "OSSystemExtensionManager": {
+      "-submitRequest:": {
+        "doc": "Submits a system extension request to the manager.",
+        "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionmanager/submitrequest(_:)"
+      }
+    },
+    "OSSystemExtensionRequest": {
+      "+activationRequestForExtension:queue:": {
+        "doc": "Creates a request to activate a System Extension.",
+        "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionrequest/activationrequest(forextensionwithidentifier:queue:)"
+      },
+      "+deactivationRequestForExtension:queue:": {
+        "doc": "Creates a request to deactivate a System Extension.",
+        "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionrequest/deactivationrequest(forextensionwithidentifier:queue:)"
+      }
+    }
+  },
+  "properties": {
+    "OSSystemExtensionManager": {
+      "sharedManager": {
+        "doc": "The shared instance of the extension manager.",
+        "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionmanager/shared"
+      }
+    },
+    "OSSystemExtensionProperties": {
+      "URL": {
+        "doc": "The file URL of the extension bundle.",
+        "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionproperties/url"
+      },
+      "bundleIdentifier": {
+        "doc": "The bundle identifier of the extension.",
+        "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionproperties/bundleidentifier"
+      },
+      "bundleShortVersion": {
+        "doc": "The bundle short version string of the extension.",
+        "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionproperties/bundleshortversion"
+      },
+      "bundleVersion": {
+        "doc": "The bundle version of the extension.",
+        "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionproperties/bundleversion"
+      }
+    },
+    "OSSystemExtensionRequest": {
+      "delegate": {
+        "doc": "A delegate to receive updates about the progress of a request.",
+        "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionrequest/delegate"
+      },
+      "identifier": {
+        "doc": "The bundle identifier of the target extension.",
+        "url": "https://developer.apple.com/documentation/systemextensions/ossystemextensionrequest/identifier"
+      }
+    }
+  }
+}

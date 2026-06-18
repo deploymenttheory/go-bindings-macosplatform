@@ -30,6 +30,8 @@ func MTRClusterBinaryInputBasicFromID(id objc.ID) *MTRClusterBinaryInputBasic {
 	return &MTRClusterBinaryInputBasic{inner: raw.MTRClusterBinaryInputBasicFromID(id)}
 }
 
+// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+//
 // NewMTRClusterBinaryInputBasicWithDeviceEndpointIDQueue creates a new [MTRClusterBinaryInputBasic].
 func NewMTRClusterBinaryInputBasicWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterBinaryInputBasic {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterBinaryInputBasic")), objc.RegisterName("alloc"))

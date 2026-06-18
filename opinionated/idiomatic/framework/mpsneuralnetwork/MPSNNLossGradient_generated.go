@@ -33,6 +33,8 @@ func NNLossGradientFromID(id objc.ID) *NNLossGradient {
 	return &NNLossGradient{inner: raw.MPSNNLossGradientFromID(id)}
 }
 
+// @abstract   Initialize the loss gradient filter with a loss descriptor. @param      device                   The device the filter will run on. @param      lossDescriptor           The loss descriptor. @return     A valid MPSNNLossGradient object or nil, if failure.
+//
 // NewNNLossGradientWithDeviceLossDescriptor creates a new [NNLossGradient].
 func NewNNLossGradientWithDeviceLossDescriptor(device metal.MTLDevice, lossDescriptor *raw.MPSCNNLossDescriptor) *NNLossGradient {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNLossGradient")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewNNLossGradientWithDeviceLossDescriptor(device metal.MTLDevice, lossDescr
 	return &NNLossGradient{inner: raw.MPSNNLossGradientFromID(_id)}
 }
 
+// @abstract <NSSecureCoding> support
+//
 // NewNNLossGradientWithCoderDevice creates a new [NNLossGradient].
 func NewNNLossGradientWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *NNLossGradient {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNLossGradient")), objc.RegisterName("alloc"))
@@ -71,118 +75,158 @@ func (x *NNLossGradient) WithDelta(delta float32) *NNLossGradient {
 	return x
 }
 
+// @property   computeLabelGradients @abstract   The computeLabelGradients property is used to control whether the loss gradient filter computes gradients for the primary (predictions) or secondary (labels) source image from the forward pass. Default: NO.
+//
 // WithComputeLabelGradients sets the computeLabelGradients property and returns the receiver for chaining.
 func (x *NNLossGradient) WithComputeLabelGradients(computeLabelGradients bool) *NNLossGradient {
 	x.inner.SetComputeLabelGradients(computeLabelGradients)
 	return x
 }
 
+// @property   primaryOffset @abstract   The position of the destination clip rectangle origin relative to the primary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref subsubsection_mpsoffset
+//
 // WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
 func (x *NNLossGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNLossGradient {
 	x.inner.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
 	return x
 }
 
+// @property   secondaryOffset @abstract   The position of the destination clip rectangle origin relative to the secondary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref subsubsection_mpsoffset
+//
 // WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
 func (x *NNLossGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNLossGradient {
 	x.inner.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
 	return x
 }
 
+// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also: @ref subsubsection_clipRect
+//
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *NNLossGradient) WithClipRect(clipRect metal.MTLRegion) *NNLossGradient {
 	x.inner.MPSCNNBinaryKernel.SetClipRect(clipRect)
 	return x
 }
 
+// @property   destinationFeatureChannelOffset @abstract   The number of channels in the destination MPSImage to skip before writing output. @discussion This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+//
 // WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
 func (x *NNLossGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNLossGradient {
 	x.inner.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
 	return x
 }
 
+// @property   primarySourceFeatureChannelOffset @abstract   The number of channels in the primary source MPSImage to skip before reading the input. @discussion This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+//
 // WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
 func (x *NNLossGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNLossGradient {
 	x.inner.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
 	return x
 }
 
+// @property   secondarySourceFeatureChannelOffset @abstract   The number of channels in the secondary source MPSImage to skip before reading the input. @discussion This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+//
 // WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
 func (x *NNLossGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNLossGradient {
 	x.inner.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
 	return x
 }
 
+// @property   primarySourceFeatureChannelMaxCount @abstract   The maximum number of channels in the primary source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+//
 // WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
 func (x *NNLossGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNLossGradient {
 	x.inner.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
 	return x
 }
 
+// @property   secondarySourceFeatureChannelMaxCount @abstract   The maximum number of channels in the secondary source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+//
 // WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
 func (x *NNLossGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNLossGradient {
 	x.inner.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
 	return x
 }
 
+// @property   primaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref subsubsection_edgemode
+//
 // WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
 func (x *NNLossGradient) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNLossGradient {
 	x.inner.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
 	return x
 }
 
+// @property   secondaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref subsubsection_edgemode
+//
 // WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
 func (x *NNLossGradient) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNLossGradient {
 	x.inner.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
 	return x
 }
 
+// @property   primaryStrideInPixelsX @abstract   The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image @discussion If the filter does not do up or downsampling, 1 is returned.
+//
 // WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
 func (x *NNLossGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNLossGradient {
 	x.inner.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
 	return x
 }
 
+// @property   primaryStrideInPixelsY @abstract   The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image @discussion If the filter does not do up or downsampling, 1 is returned.
+//
 // WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
 func (x *NNLossGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNLossGradient {
 	x.inner.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
 	return x
 }
 
+// @property   secondaryStrideInPixelsX @abstract   The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image @discussion If the filter does not do up or downsampling, 1 is returned.
+//
 // WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
 func (x *NNLossGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNLossGradient {
 	x.inner.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
 	return x
 }
 
+// @property   secondaryStrideInPixelsY @abstract   The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image @discussion If the filter does not do up or downsampling, 1 is returned.
+//
 // WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
 func (x *NNLossGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNLossGradient {
 	x.inner.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
 	return x
 }
 
+// @property   padding @abstract   The padding method used by the filter @discussion This influences how strideInPixelsX/Y should be interpreted. Default:  MPSNNPaddingMethodAlignCentered | MPSNNPaddingMethodAddRemainderToTopLeft | MPSNNPaddingMethodSizeSame Some object types (e.g. MPSCNNFullyConnected) may override this default with something appropriate to its operation.
+//
 // WithPadding sets the padding property and returns the receiver for chaining.
 func (x *NNLossGradient) WithPadding(padding raw.MPSNNPadding) *NNLossGradient {
 	x.inner.MPSCNNBinaryKernel.SetPadding(padding)
 	return x
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
 func (x *NNLossGradient) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNLossGradient {
 	x.inner.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
 	return x
 }
 
+// @abstract   Encode the loss gradient filter and return a gradient @param      commandBuffer    The MTLCommandBuffer on which to encode @param      sourceGradients  The gradient images from the "next" filter in the graph @param      sourceImages     The images used as source image from the forward pass @param      labels           The source images that contains the labels (targets). @param      weights          The object containing weights for the labels. Optional. @param      sourceStates     Optional gradient state - carries dynamical property values from the forward pass (weight, labelSmoothing, epsilon, delta).
+//
 // EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStates calls the underlying EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStates.
 func (x *NNLossGradient) EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStates(commandBuffer metal.MTLCommandBuffer, sourceGradients unsafe.Pointer, sourceImages unsafe.Pointer, labels unsafe.Pointer, weights unsafe.Pointer, sourceStates unsafe.Pointer) unsafe.Pointer {
 	return x.inner.EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStates(commandBuffer, sourceGradients, sourceImages, labels, weights, sourceStates)
 }
 
+// @abstract   Encode the loss gradient filter and return a gradient @param      commandBuffer    The MTLCommandBuffer on which to encode @param      sourceGradients  The gradient images from the "next" filter in the graph @param      sourceImages     The image used as source images from the forward pass @param      labels           The source images that contains the labels (targets). @param      weights          The object containing weights for the labels. Optional. @param      sourceStates     Optional gradient state - carries dynamical property values from the forward pass (weight, labelSmoothing, epsilon, delta). @param      destinationGradients  The MPSImages into which to write the filter result
+//
 // EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStatesDestinationGradients calls the underlying EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStatesDestinationGradients.
 func (x *NNLossGradient) EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStatesDestinationGradients(commandBuffer metal.MTLCommandBuffer, sourceGradients unsafe.Pointer, sourceImages unsafe.Pointer, labels unsafe.Pointer, weights unsafe.Pointer, sourceStates unsafe.Pointer, destinationGradients unsafe.Pointer) {
 	x.inner.EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStatesDestinationGradients(commandBuffer, sourceGradients, sourceImages, labels, weights, sourceStates, destinationGradients)
 }
 
+// See MPSCNNLossDescriptor for information about the following properties.
+//
 // LossType calls the underlying LossType.
 func (x *NNLossGradient) LossType() MPSCNNLossType {
 	return MPSCNNLossType(x.inner.LossType())
@@ -243,6 +287,8 @@ func (x *NNLossGradient) SetDelta(delta float32) {
 	x.inner.SetDelta(delta)
 }
 
+// @property   computeLabelGradients @abstract   The computeLabelGradients property is used to control whether the loss gradient filter computes gradients for the primary (predictions) or secondary (labels) source image from the forward pass. Default: NO.
+//
 // ComputeLabelGradients calls the underlying ComputeLabelGradients.
 func (x *NNLossGradient) ComputeLabelGradients() bool {
 	return x.inner.ComputeLabelGradients()

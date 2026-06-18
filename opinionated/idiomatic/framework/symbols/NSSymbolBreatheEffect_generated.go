@@ -35,6 +35,8 @@ func NewSymbolBreatheEffect() *SymbolBreatheEffect {
 	return &SymbolBreatheEffect{inner: raw.NSSymbolBreatheEffectFromID(_id)}
 }
 
+// Returns a copy of the effect that animates incrementally, by layer.
+//
 // EffectWithByLayer calls the underlying EffectWithByLayer.
 func (x *SymbolBreatheEffect) EffectWithByLayer() *SymbolBreatheEffect {
 	_r := x.inner.EffectWithByLayer()
@@ -44,6 +46,8 @@ func (x *SymbolBreatheEffect) EffectWithByLayer() *SymbolBreatheEffect {
 	return &SymbolBreatheEffect{inner: _r}
 }
 
+// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+//
 // EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
 func (x *SymbolBreatheEffect) EffectWithWholeSymbol() *SymbolBreatheEffect {
 	_r := x.inner.EffectWithWholeSymbol()

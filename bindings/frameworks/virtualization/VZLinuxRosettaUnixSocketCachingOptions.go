@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents caching options for a UNIX domain socket.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzlinuxrosettaunixsocketcachingoptions
 type VZLinuxRosettaUnixSocketCachingOptions struct {
 	VZLinuxRosettaCachingOptions
@@ -35,7 +37,7 @@ func VZLinuxRosettaUnixSocketCachingOptionsFromID(id objc.ID) *VZLinuxRosettaUni
 	return o
 }
 
-// @abstract Initialize options to be set on a VZLinuxRosettaDirectoryShare. @param path The path of the Unix Domain Socket to be used to communicate with the Rosetta translation daemon. This cannot exceed maximumPathLength UTF-8 bytes long. @param error If not nil, assigned with the error if the initialization failed. @discussion Rosetta can be optionally configured to use cached translations from the Rosetta translation daemon communicating through a Unix Domain Socket. If path exceeds maximumPathLength UTF-8 bytes, nil is returned and the error is set. The guest operating system must have a directory at path created in order for translation caching to operate correctly.
+// Creates a new Rosetta caching options object for a UNIX domain socket with the path you specify.
 func (o *VZLinuxRosettaUnixSocketCachingOptions) InitWithPathError(path *foundation.NSString) (*VZLinuxRosettaUnixSocketCachingOptions, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZLinuxRosettaUnixSocketCachingOptionsSelInitWithPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
@@ -48,7 +50,7 @@ func (o *VZLinuxRosettaUnixSocketCachingOptions) InitWithPathError(path *foundat
 	return VZLinuxRosettaUnixSocketCachingOptionsFromID(_ret), nil
 }
 
-// @abstract Initialize default options to be set on a VZLinuxRosettaDirectoryShare. @discussion The default translation caching configuration uses a Unix Domain Socket at /run/rosettad/rosetta.sock.
+// Creates a new Rosetta caching options object for a UNIX domain socket.
 func (o *VZLinuxRosettaUnixSocketCachingOptions) Init() *VZLinuxRosettaUnixSocketCachingOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZLinuxRosettaUnixSocketCachingOptionsSelInit)
 	if _ret != 0 {

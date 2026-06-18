@@ -35,21 +35,29 @@ func NewActivationDescriptor() *ActivationDescriptor {
 	return &ActivationDescriptor{inner: raw.MLCActivationDescriptorFromID(_id)}
 }
 
+// @property   activationType @abstract   The type of activation function
+//
 // ActivationType calls the underlying ActivationType.
 func (x *ActivationDescriptor) ActivationType() MLCActivationType {
 	return MLCActivationType(x.inner.ActivationType())
 }
 
+// @property   a @abstract   Parameter to the activation function
+//
 // A calls the underlying A.
 func (x *ActivationDescriptor) A() float32 {
 	return x.inner.A()
 }
 
+// @property   b @abstract   Parameter to the activation function
+//
 // B calls the underlying B.
 func (x *ActivationDescriptor) B() float32 {
 	return x.inner.B()
 }
 
+// @property   c @abstract   Parameter to the activation function
+//
 // C calls the underlying C.
 func (x *ActivationDescriptor) C() float32 {
 	return x.inner.C()

@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// @class RPScreenRecorder @abstract Singleton class used to control app recording.
+//
 // ScreenRecorder wraps [raw.RPScreenRecorder] with a fluent Go API.
 type ScreenRecorder struct {
 	inner *raw.RPScreenRecorder
@@ -64,6 +66,8 @@ func (x *ScreenRecorder) WithCameraPosition(cameraPosition RPCameraPosition) *Sc
 	return x
 }
 
+// @abstract Starts app recording with a completion handler. Note that before recording actually starts, the user may be prompted with UI to confirm recording. @discussion handler Called after user interactions are complete. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue starting the recording.
+//
 // StartRecordingWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StartRecordingWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -82,6 +86,8 @@ func (x *ScreenRecorder) StartRecordingWithHandler(ctx context.Context) error {
 	}
 }
 
+// @abstract Stops app recording with a completion handler. @discussion handler Called when the movie is ready. Will return an instance of RPPreviewViewController on success which should be presented using [UIViewController presentViewController:animated:completion:]. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue stopping the recording.
+//
 // StopRecordingWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StopRecordingWithHandler(ctx context.Context) (*PreviewViewController, error) {
 	type _result struct {
@@ -108,6 +114,8 @@ func (x *ScreenRecorder) StopRecordingWithHandler(ctx context.Context) (*Preview
 	}
 }
 
+// @abstract Stops app recording with output URL and completion handler. @param url Output URL for app recording movie. @discussion handler Called when  movie is written to specified output URL. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue stopping the recording and writing the output URL.
+//
 // StopRecordingWithOutputURL blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StopRecordingWithOutputURL(ctx context.Context, url string) error {
 	_ch := make(chan error, 1)
@@ -126,6 +134,8 @@ func (x *ScreenRecorder) StopRecordingWithOutputURL(ctx context.Context, url str
 	}
 }
 
+// @abstract Discards the current recording. This can only be called after the handler block in stopRecordingWithHandler: is executed.
+//
 // DiscardRecordingWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) DiscardRecordingWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -140,6 +150,8 @@ func (x *ScreenRecorder) DiscardRecordingWithHandler(ctx context.Context) error 
 	}
 }
 
+// @abstract Starts screen and audio capture and continually calls the supplied handler with the current sampleBuffer and bufferType and passed it back to the application. Note that before recording actually starts, the user may be prompted with UI to confirm recording. @discussion handler Called continually with sampleBuffers and the bufferType. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue starting the capture.
+//
 // StartCaptureWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StartCaptureWithHandler(ctx context.Context, captureHandler func(unsafe.Pointer, RPSampleBufferType, unsafe.Pointer)) error {
 	_ch := make(chan error, 1)
@@ -160,6 +172,8 @@ func (x *ScreenRecorder) StartCaptureWithHandler(ctx context.Context, captureHan
 	}
 }
 
+// @abstract Stops screen capture with a completion handler @discussion handler Called after the screen capture has stopped. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue stopping the capture
+//
 // StopCaptureWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StopCaptureWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -178,6 +192,8 @@ func (x *ScreenRecorder) StopCaptureWithHandler(ctx context.Context) error {
 	}
 }
 
+// @abstract Start clip recording buffering with a completion handler. Note that before recording actually starts, the user may be prompted with UI to confirm recording. @discussion handler Called after clip recording is started. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue starting clip record buffering.
+//
 // StartClipBuffering blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StartClipBuffering(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -196,6 +212,8 @@ func (x *ScreenRecorder) StartClipBuffering(ctx context.Context) error {
 	}
 }
 
+// @abstract Stop clip recording buffering with a completion handler. @discussion handler Called after clip recording session is stopped. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue stopping clip record buffering.
+//
 // StopClipBuffering blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StopClipBuffering(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -214,6 +232,8 @@ func (x *ScreenRecorder) StopClipBuffering(ctx context.Context) error {
 	}
 }
 
+// @abstract Exports clip recording @param url URL containing absolute path for where to save the clip @param duration Length of time in seconds for clip recording, capped at either the elapsed time, or a maximum of 15 seconds, depending on which is the shorter amount of time @discussion Must be called after startClipBufferingWithCompletionHandler:, otherwise this will return an error. Exports clip recording from newest samples in buffer for duration. handler Will be called after asset is finished writing to output path. Will be passed an optional NSError in the RPRecordingErrorDomain domain if there was an issue generating the clip recording.
+//
 // ExportClipToURLDuration blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) ExportClipToURLDuration(ctx context.Context, url string, duration float64) error {
 	_ch := make(chan error, 1)

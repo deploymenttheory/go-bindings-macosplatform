@@ -36,6 +36,8 @@ func NewArrayGatherGradient() *ArrayGatherGradient {
 	return &ArrayGatherGradient{inner: raw.MPSNDArrayGatherGradientFromID(_id)}
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *ArrayGatherGradient) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayGatherGradient {
 	x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)

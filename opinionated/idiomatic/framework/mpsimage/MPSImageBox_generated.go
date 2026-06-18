@@ -39,6 +39,8 @@ func NewImageBoxWithDeviceKernelWidthKernelHeight(device metal.MTLDevice, kernel
 	return &ImageBox{inner: raw.MPSImageBoxFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+//
 // NewImageBoxWithCoderDevice creates a new [ImageBox].
 func NewImageBoxWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageBox {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageBox")), objc.RegisterName("alloc"))
@@ -46,29 +48,39 @@ func NewImageBoxWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDe
 	return &ImageBox{inner: raw.MPSImageBoxFromID(_id)}
 }
 
+// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *ImageBox) WithOffset(offset mpscore.MPSOffset) *ImageBox {
 	x.inner.MPSUnaryImageKernel.SetOffset(offset)
 	return x
 }
 
+// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+//
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImageBox) WithClipRect(clipRect metal.MTLRegion) *ImageBox {
 	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
 	return x
 }
 
+// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
+//
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *ImageBox) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageBox {
 	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
 	return x
 }
 
+// @property kernelHeight @abstract  The height of the filter window.
+//
 // KernelHeight calls the underlying KernelHeight.
 func (x *ImageBox) KernelHeight() uint {
 	return x.inner.KernelHeight()
 }
 
+// @property kernelWidth @abstract  The width of the filter window.
+//
 // KernelWidth calls the underlying KernelWidth.
 func (x *ImageBox) KernelWidth() uint {
 	return x.inner.KernelWidth()

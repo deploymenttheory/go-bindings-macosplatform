@@ -65,6 +65,8 @@ func (x *SplitView) WithDelegate(delegate raw.NSSplitViewDelegate) *SplitView {
 	return x
 }
 
+// Whether or not all subviews will be added as arranged views. When NO, a subview must be explicitly added as an arrangedSubview if the view should be arranged as a split pane. When YES, \c -arrangedSubviews always be identical to \c -subviews. Defaults to YES. Setting this from YES to NO will leave all existing subviews as \c -arrangedSubviews. Setting this from NO to YES will cause \c -arrangedSubviews to become the value of \c -subviews.
+//
 // WithArrangesAllSubviews sets the arrangesAllSubviews property and returns the receiver for chaining.
 func (x *SplitView) WithArrangesAllSubviews(arrangesAllSubviews bool) *SplitView {
 	x.inner.SetArrangesAllSubviews(arrangesAllSubviews)
@@ -335,6 +337,8 @@ func (x *SplitView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets founda
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *SplitView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SplitView {
 	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
@@ -511,31 +515,43 @@ func (x *SplitView) DividerThickness() float64 {
 	return x.inner.DividerThickness()
 }
 
+// Adds a view as arranged split pane. If the view is not a subview of the receiver, it will be added as one.
+//
 // AddArrangedSubview calls the underlying AddArrangedSubview.
 func (x *SplitView) AddArrangedSubview(view *raw.NSView) {
 	x.inner.AddArrangedSubview(view)
 }
 
+// Adds a view as an arranged split pane list at the specific index. If the view is already an arranged split view, it will move the view the specified index (but not move the subview index). If the view is not a subview of the receiver, it will be added as one (not necessarily at the same index).
+//
 // InsertArrangedSubviewAtIndex calls the underlying InsertArrangedSubviewAtIndex.
 func (x *SplitView) InsertArrangedSubviewAtIndex(view *raw.NSView, index int) {
 	x.inner.InsertArrangedSubviewAtIndex(view, index)
 }
 
+// Removes a view as arranged split pane. If \c -arrangesAllSubviews is set to NO, this does not remove the view as a subview. Removing the view as a subview (either by -[view removeFromSuperview] or setting the receiver's subviews) will automatically remove it as an arranged subview.
+//
 // RemoveArrangedSubview calls the underlying RemoveArrangedSubview.
 func (x *SplitView) RemoveArrangedSubview(view *raw.NSView) {
 	x.inner.RemoveArrangedSubview(view)
 }
 
+// Whether or not all subviews will be added as arranged views. When NO, a subview must be explicitly added as an arrangedSubview if the view should be arranged as a split pane. When YES, \c -arrangedSubviews always be identical to \c -subviews. Defaults to YES. Setting this from YES to NO will leave all existing subviews as \c -arrangedSubviews. Setting this from NO to YES will cause \c -arrangedSubviews to become the value of \c -subviews.
+//
 // ArrangesAllSubviews calls the underlying ArrangesAllSubviews.
 func (x *SplitView) ArrangesAllSubviews() bool {
 	return x.inner.ArrangesAllSubviews()
 }
 
+// Whether or not all subviews will be added as arranged views. When NO, a subview must be explicitly added as an arrangedSubview if the view should be arranged as a split pane. When YES, \c -arrangedSubviews always be identical to \c -subviews. Defaults to YES. Setting this from YES to NO will leave all existing subviews as \c -arrangedSubviews. Setting this from NO to YES will cause \c -arrangedSubviews to become the value of \c -subviews.
+//
 // SetArrangesAllSubviews calls the underlying SetArrangesAllSubviews.
 func (x *SplitView) SetArrangesAllSubviews(arrangesAllSubviews bool) {
 	x.inner.SetArrangesAllSubviews(arrangesAllSubviews)
 }
 
+// The list of views that are arranged as split panes in the receiver. They are a subset of \c -subviews, with potential difference in ordering. If \c -arrangesAllSubviews is YES, then \c -arrangedSubviews is identical to \c -subviews.
+//
 // ArrangedSubviews returns the collection as a Go slice.
 func (x *SplitView) ArrangedSubviews() []*View {
 	arr := x.inner.ArrangedSubviews()

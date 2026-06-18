@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The host audio input stream source that provides audio from the host system’s default input device.
+//
 // HostAudioInputStreamSource wraps [raw.VZHostAudioInputStreamSource] with a fluent Go API.
 type HostAudioInputStreamSource struct {
 	inner *raw.VZHostAudioInputStreamSource

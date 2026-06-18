@@ -37,31 +37,43 @@ func NewInstallerSection() *InstallerSection {
 	return &InstallerSection{inner: raw.InstallerSectionFromID(_id)}
 }
 
+// @method willLoadMainNib @discussion Each InstallerSection object can define a default nib to be loaded by the Installer at the optimal time.  Before this default nib is loaded willLoadMainNib will be called.  didLoadMainNib is called when the nib is successfully loaded.  The nib may be loaded way before the content is display on the screen, so awakeFromNib methods should not assume the content is displayed to the user.  WillEnter/DidEnter method should be used to determine when views are actually "in view." A default nib is specified for a section in the Info.plist for the section using the NSMainNibFile key. A subclass can override this method to do any necessary work before the main nib is loaded or to actually load a custom nib if no default nib is specified.
+//
 // WillLoadMainNib calls the underlying WillLoadMainNib.
 func (x *InstallerSection) WillLoadMainNib() {
 	x.inner.WillLoadMainNib()
 }
 
+// @method     didLoadMainNib @discussion Called immediatly after the default nib for the section is loaded. If no default nib is specified, didLoadMainNib is called immediately after willLoadMainNib is called. didLoadMainNib is called before the section's panes are in view.
+//
 // DidLoadMainNib calls the underlying DidLoadMainNib.
 func (x *InstallerSection) DidLoadMainNib() {
 	x.inner.DidLoadMainNib()
 }
 
+// @method		sharedDictionary @discussion A global Mutable Dictionary which is global to the Install session. Use this dictionary to pass information between sections. This dictionary should not be used to store state for your section or its panes.
+//
 // SharedDictionary calls the underlying SharedDictionary.
 func (x *InstallerSection) SharedDictionary() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
 	return x.inner.SharedDictionary()
 }
 
+// @method     gotoPane: @discussion This method causes the current pane to exit and "pane" to be made active.  This effectively replaces the current pane and does not place the current pane onto the pane stack. gotoPane does not invoke shouldExit method for the current pane. gotoPane is typically not overriden by a subclass.
+//
 // GotoPane calls the underlying GotoPane.
 func (x *InstallerSection) GotoPane(pane *raw.InstallerPane) bool {
 	return x.inner.GotoPane(pane)
 }
 
+// @method     bundle @discussion This method returns the NSBundle in which the InstallerSection is located.  Since InstallerSection is not typically overriden, the bundle returned may not necessarily be the same bundle as the InstallerSection class. Use this method to gain access to bundle resources.
+//
 // Bundle calls the underlying Bundle.
 func (x *InstallerSection) Bundle() *foundation.NSBundle {
 	return x.inner.Bundle()
 }
 
+// @method		title @discussion Returns the title for the section defined in the Info.plist file for the section's bundle.  The title retrieved using the "InstallerSectionTitle" key in the Info.plist for the section's bundle and that key must be present in the InfoPlist.strings file for title to be localized. Although subclasses can override this method and return a dynamic title at runtime, the title is only retrieved for display once (immediatly following the shouldLoad method, if shouldLoad returns YES).
+//
 // Title calls the underlying Title.
 func (x *InstallerSection) Title() string {
 	_r := x.inner.Title()
@@ -71,6 +83,8 @@ func (x *InstallerSection) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @method     firstPane @discussion Returns the first pane specified by the firstPane outlet.  This pane is the first pane entered when the section first becomes active.
+//
 // FirstPane calls the underlying FirstPane.
 func (x *InstallerSection) FirstPane() *InstallerPane {
 	_r := x.inner.FirstPane()
@@ -80,11 +94,15 @@ func (x *InstallerSection) FirstPane() *InstallerPane {
 	return &InstallerPane{inner: _r}
 }
 
+// @method     shouldLoad @discussion Called when a section is first about to be fully loaded.  By default this method returns YES.  A Subclass can override this method and determine at runtime if the section makes sense.  Return NO and the section will not be further loaded.  sections are never fully unloaded.
+//
 // ShouldLoad calls the underlying ShouldLoad.
 func (x *InstallerSection) ShouldLoad() bool {
 	return x.inner.ShouldLoad()
 }
 
+// @method     installerState @abstract   Returns the Installer State object for the current install session. @discussion Returns an object which describes the Installer choices and status at the given time.  Plugins cannot influence this state, it should only be used for informational purposes.  See InstallerState.h for more details.
+//
 // InstallerState calls the underlying InstallerState.
 func (x *InstallerSection) InstallerState() *InstallerState {
 	_r := x.inner.InstallerState()
@@ -94,6 +112,8 @@ func (x *InstallerSection) InstallerState() *InstallerState {
 	return &InstallerState{inner: _r}
 }
 
+// @method     activePane @abstract   Returns the current active page for this section. @discussion If the section is active, it will return the current active page.  If the section is not active, nil will be returned.
+//
 // ActivePane calls the underlying ActivePane.
 func (x *InstallerSection) ActivePane() *InstallerPane {
 	_r := x.inner.ActivePane()

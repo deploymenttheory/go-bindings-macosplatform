@@ -36,16 +36,22 @@ func NewSoundAsset() *SoundAsset {
 	return &SoundAsset{inner: raw.PHASESoundAssetFromID(_id)}
 }
 
+// @property url @abstract The URL of the sound asset, if applicable.
+//
 // Url calls the underlying Url.
 func (x *SoundAsset) Url() *foundation.NSURL {
 	return x.inner.Url()
 }
 
+// @property data @abstract The buffer for the sound asset, if applicable.
+//
 // Data calls the underlying Data.
 func (x *SoundAsset) Data() *foundation.NSData {
 	return x.inner.Data()
 }
 
+// @property type @abstract The sound asset type.
+//
 // Type calls the underlying Type.
 func (x *SoundAsset) Type() PHASEAssetType {
 	return PHASEAssetType(x.inner.Type())

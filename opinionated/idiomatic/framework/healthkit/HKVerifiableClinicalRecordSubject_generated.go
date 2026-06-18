@@ -39,6 +39,8 @@ func NewVerifiableClinicalRecordSubject() *VerifiableClinicalRecordSubject {
 	return &VerifiableClinicalRecordSubject{inner: raw.HKVerifiableClinicalRecordSubjectFromID(_id)}
 }
 
+// @property     fullName @abstract     The subject's full name.
+//
 // FullName calls the underlying FullName.
 func (x *VerifiableClinicalRecordSubject) FullName() string {
 	_r := x.inner.FullName()
@@ -48,6 +50,8 @@ func (x *VerifiableClinicalRecordSubject) FullName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property     dateOfBirthComponents @abstract     The subject's date of birth components.
+//
 // DateOfBirthComponents calls the underlying DateOfBirthComponents.
 func (x *VerifiableClinicalRecordSubject) DateOfBirthComponents() *foundation.NSDateComponents {
 	return x.inner.DateOfBirthComponents()

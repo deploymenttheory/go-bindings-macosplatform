@@ -46,6 +46,8 @@ func NewCategoricalDataAxisDescriptorWithAttributedTitleCategoryOrder(attributed
 	return &CategoricalDataAxisDescriptor{inner: raw.AXCategoricalDataAxisDescriptorFromID(_id)}
 }
 
+// The order of the category values for this axis. This list should contain every possible category value for this axis, in the order they are displayed visually in the graph or legend. For example, if your categorical axis represented 'blood type', and the legend contained 'AB, A, B, O' in that order, you would provide an array containing "AB", "A", "B" and "O" in the same order.
+//
 // WithCategoryOrder sets the collection, converting the Go slice to an NSArray.
 func (x *CategoricalDataAxisDescriptor) WithCategoryOrder(items ...*foundation.NSString) *CategoricalDataAxisDescriptor {
 	if len(items) == 0 {
@@ -64,6 +66,8 @@ func (x *CategoricalDataAxisDescriptor) WithCategoryOrder(items ...*foundation.N
 	return x
 }
 
+// The order of the category values for this axis. This list should contain every possible category value for this axis, in the order they are displayed visually in the graph or legend. For example, if your categorical axis represented 'blood type', and the legend contained 'AB, A, B, O' in that order, you would provide an array containing "AB", "A", "B" and "O" in the same order.
+//
 // CategoryOrder returns the collection as a Go slice.
 func (x *CategoricalDataAxisDescriptor) CategoryOrder() []string {
 	arr := x.inner.CategoryOrder()

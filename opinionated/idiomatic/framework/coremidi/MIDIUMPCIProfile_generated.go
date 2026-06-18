@@ -37,11 +37,15 @@ func NewUMPCIProfile() *UMPCIProfile {
 	return &UMPCIProfile{inner: raw.MIDIUMPCIProfileFromID(_id)}
 }
 
+// @method		setProfileState:enabledChannelCount:error: @brief		Issue a Set Profile On or Set Profile Off request on this profile using the MIDI server's MUID. @param		isEnabled			YES if setting the Profile to on. @param		enabledChannelCount	The requsted number of channels to be enabled when the Profile is enabled. This field is only used when isOn is set to YES and the profile can enable a variable number of channels. Otherwise, it is ignored. @param		error				The out-error used if an error occurred. @discussion	The result of this operation, if any, is received via the profile notification posted by the MIDICIDeviceManager. Returns YES if the request is valid and the request was dispatched.
+//
 // SetProfileStateEnabledChannelCountError calls the underlying SetProfileStateEnabledChannelCountError.
 func (x *UMPCIProfile) SetProfileStateEnabledChannelCountError(isEnabled bool, enabledChannelCount uint16) (bool, error) {
 	return x.inner.SetProfileStateEnabledChannelCountError(isEnabled, enabledChannelCount)
 }
 
+// @property 	name @brief		The name of the MIDI-CI proifle.
+//
 // Name calls the underlying Name.
 func (x *UMPCIProfile) Name() string {
 	_r := x.inner.Name()
@@ -51,36 +55,50 @@ func (x *UMPCIProfile) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property 	profileID @brief		C struct representation of MIDI-CI Profile ID.
+//
 // ProfileID calls the underlying ProfileID.
 func (x *UMPCIProfile) ProfileID() unsafe.Pointer {
 	return x.inner.ProfileID()
 }
 
+// @property	profileType @brief		The type of MIDI-CI Profile, i.e., single-channel, multichannel, Group, or Function Block.
+//
 // ProfileType calls the underlying ProfileType.
 func (x *UMPCIProfile) ProfileType() MIDICIProfileType {
 	return MIDICIProfileType(x.inner.ProfileType())
 }
 
+// @property	groupOffset @brief		For Group profiles defined on Function Blocks, the value to be added to the lowest Function Block UMP Group for messaging (e.g., a Group Profile defined on the second Group of a Function Block has a groupOffset of 1).
+//
 // GroupOffset calls the underlying GroupOffset.
 func (x *UMPCIProfile) GroupOffset() uint8 {
 	return x.inner.GroupOffset()
 }
 
+// @property	firstChannel @brief		The first channel number supported on the Profile.
+//
 // FirstChannel calls the underlying FirstChannel.
 func (x *UMPCIProfile) FirstChannel() uint8 {
 	return x.inner.FirstChannel()
 }
 
+// @property	enabledChannelCount @brief		The number of channels currently enabled on the Profile. When the profile is disabled, this value is set to 0.
+//
 // EnabledChannelCount calls the underlying EnabledChannelCount.
 func (x *UMPCIProfile) EnabledChannelCount() uint16 {
 	return x.inner.EnabledChannelCount()
 }
 
+// @property	totalChannelCount @brief		The total number of channels supported by the Profile.
+//
 // TotalChannelCount calls the underlying TotalChannelCount.
 func (x *UMPCIProfile) TotalChannelCount() uint16 {
 	return x.inner.TotalChannelCount()
 }
 
+// @property	isEnabled @brief		The enable state of the Profile.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *UMPCIProfile) IsEnabled() bool {
 	return x.inner.IsEnabled()

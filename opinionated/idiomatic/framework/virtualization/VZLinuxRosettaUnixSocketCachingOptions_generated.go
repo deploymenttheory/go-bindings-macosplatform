@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents caching options for a UNIX domain socket.
+//
 // LinuxRosettaUnixSocketCachingOptions wraps [raw.VZLinuxRosettaUnixSocketCachingOptions] with a fluent Go API.
 type LinuxRosettaUnixSocketCachingOptions struct {
 	inner *raw.VZLinuxRosettaUnixSocketCachingOptions
@@ -40,6 +42,8 @@ func NewLinuxRosettaUnixSocketCachingOptions() *LinuxRosettaUnixSocketCachingOpt
 	return &LinuxRosettaUnixSocketCachingOptions{inner: raw.VZLinuxRosettaUnixSocketCachingOptionsFromID(_id)}
 }
 
+// Creates a new Rosetta caching options object for a UNIX domain socket with the path you specify.
+//
 // NewLinuxRosettaUnixSocketCachingOptionsWithPathError creates a new [LinuxRosettaUnixSocketCachingOptions].
 func NewLinuxRosettaUnixSocketCachingOptionsWithPathError(path string) (*LinuxRosettaUnixSocketCachingOptions, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZLinuxRosettaUnixSocketCachingOptions")), objc.RegisterName("alloc"))
@@ -51,6 +55,8 @@ func NewLinuxRosettaUnixSocketCachingOptionsWithPathError(path string) (*LinuxRo
 	return &LinuxRosettaUnixSocketCachingOptions{inner: raw.VZLinuxRosettaUnixSocketCachingOptionsFromID(_id)}, nil
 }
 
+// @abstract Path set by initWithPath. @discussion This is the path of the Unix Domain Socket to be used by Rosetta.
+//
 // Path calls the underlying Path.
 func (x *LinuxRosettaUnixSocketCachingOptions) Path() string {
 	_r := x.inner.Path()

@@ -423,6 +423,8 @@ func (x *ParticleSystem) WithFresnelExponent(fresnelExponent float64) *ParticleS
 	return x
 }
 
+// @property writeToDepthBuffer @abstract Determines whether the receiver writes to the depth buffer when rendered. Defaults to NO.
+//
 // WithWritesToDepthBuffer sets the writesToDepthBuffer property and returns the receiver for chaining.
 func (x *ParticleSystem) WithWritesToDepthBuffer(writesToDepthBuffer bool) *ParticleSystem {
 	x.inner.SetWritesToDepthBuffer(writesToDepthBuffer)
@@ -978,8 +980,17 @@ func (x *ParticleSystem) ColliderNodes() []*Node {
 }
 
 // SetColliderNodes calls the underlying SetColliderNodes.
-func (x *ParticleSystem) SetColliderNodes(colliderNodes *foundation.NSArray[*raw.SCNNode]) {
-	x.inner.SetColliderNodes(colliderNodes)
+func (x *ParticleSystem) SetColliderNodes(colliderNodes ...NodeProvider) {
+	_ptrs := make([]objc.ID, len(colliderNodes))
+	for _i, _v := range colliderNodes {
+		_ptrs[_i] = _v.asNode().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.SCNNode]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.SCNNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetColliderNodes(_arg0)
 }
 
 // ParticleMass calls the underlying ParticleMass.
@@ -1102,6 +1113,8 @@ func (x *ParticleSystem) SetFresnelExponent(fresnelExponent float64) {
 	x.inner.SetFresnelExponent(fresnelExponent)
 }
 
+// @property writeToDepthBuffer @abstract Determines whether the receiver writes to the depth buffer when rendered. Defaults to NO.
+//
 // WritesToDepthBuffer calls the underlying WritesToDepthBuffer.
 func (x *ParticleSystem) WritesToDepthBuffer() bool {
 	return x.inner.WritesToDepthBuffer()
@@ -1293,7 +1306,7 @@ type ParticleSystemable interface {
 	ParticleDiesOnCollision() bool
 	SetParticleDiesOnCollision(particleDiesOnCollision bool)
 	ColliderNodes() []*Node
-	SetColliderNodes(colliderNodes *foundation.NSArray[*raw.SCNNode])
+	SetColliderNodes(colliderNodes ...NodeProvider)
 	ParticleMass() float64
 	SetParticleMass(particleMass float64)
 	ParticleMassVariation() float64

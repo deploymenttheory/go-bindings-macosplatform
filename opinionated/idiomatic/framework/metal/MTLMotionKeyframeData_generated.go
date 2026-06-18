@@ -35,18 +35,24 @@ func NewMotionKeyframeData() *MotionKeyframeData {
 	return &MotionKeyframeData{inner: raw.MTLMotionKeyframeDataFromID(_id)}
 }
 
+// @brief Buffer containing the data of a single keyframe. Multiple keyframes can be interleaved in one MTLBuffer.
+//
 // WithBuffer sets the buffer property and returns the receiver for chaining.
 func (x *MotionKeyframeData) WithBuffer(buffer raw.MTLBuffer) *MotionKeyframeData {
 	x.inner.SetBuffer(buffer)
 	return x
 }
 
+// @brief Buffer offset. Must be a multiple of 4 bytes.
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *MotionKeyframeData) WithOffset(offset uint) *MotionKeyframeData {
 	x.inner.SetOffset(offset)
 	return x
 }
 
+// @brief Buffer containing the data of a single keyframe. Multiple keyframes can be interleaved in one MTLBuffer.
+//
 // Buffer calls the underlying Buffer.
 func (x *MotionKeyframeData) Buffer() raw.MTLBuffer {
 	return x.inner.Buffer()
@@ -57,6 +63,8 @@ func (x *MotionKeyframeData) SetBuffer(buffer raw.MTLBuffer) {
 	x.inner.SetBuffer(buffer)
 }
 
+// @brief Buffer offset. Must be a multiple of 4 bytes.
+//
 // Offset calls the underlying Offset.
 func (x *MotionKeyframeData) Offset() uint {
 	return x.inner.Offset()

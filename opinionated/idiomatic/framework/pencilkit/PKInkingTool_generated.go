@@ -53,6 +53,8 @@ func NewInkingToolWithInkTypeColor(type_ *foundation.NSString, color *appkit.NSC
 	return &InkingTool{inner: raw.PKInkingToolFromID(_id)}
 }
 
+// Create a new inking tool for the provided ink. @param ink The ink to use. @param width The width of stroke to create.
+//
 // NewInkingToolWithInkWidth creates a new [InkingTool].
 func NewInkingToolWithInkWidth(ink *raw.PKInk, width float64) *InkingTool {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKInkingTool")), objc.RegisterName("alloc"))
@@ -60,6 +62,8 @@ func NewInkingToolWithInkWidth(ink *raw.PKInk, width float64) *InkingTool {
 	return &InkingTool{inner: raw.PKInkingToolFromID(_id)}
 }
 
+// The type of ink, eg. pen, pencil...
+//
 // InkType calls the underlying InkType.
 func (x *InkingTool) InkType() string {
 	_r := x.inner.InkType()
@@ -74,16 +78,22 @@ func (x *InkingTool) Color() *appkit.NSColor {
 	return x.inner.Color()
 }
 
+// The base width of the ink.
+//
 // Width calls the underlying Width.
 func (x *InkingTool) Width() float64 {
 	return x.inner.Width()
 }
 
+// The base angle of the ink.
+//
 // Azimuth calls the underlying Azimuth.
 func (x *InkingTool) Azimuth() float64 {
 	return x.inner.Azimuth()
 }
 
+// The ink that this tool will create strokes with.
+//
 // Ink calls the underlying Ink.
 func (x *InkingTool) Ink() *Ink {
 	_r := x.inner.Ink()
@@ -93,6 +103,8 @@ func (x *InkingTool) Ink() *Ink {
 	return &Ink{inner: _r}
 }
 
+// The PencilKit version required to use this inking tool.
+//
 // RequiredContentVersion calls the underlying RequiredContentVersion.
 func (x *InkingTool) RequiredContentVersion() PKContentVersion {
 	return PKContentVersion(x.inner.RequiredContentVersion())

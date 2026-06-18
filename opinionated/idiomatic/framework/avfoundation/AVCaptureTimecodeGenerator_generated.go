@@ -38,39 +38,53 @@ func NewCaptureTimecodeGenerator() *CaptureTimecodeGenerator {
 	return &CaptureTimecodeGenerator{inner: raw.AVCaptureTimecodeGeneratorFromID(_id)}
 }
 
+// The maximum time interval allowed for source synchronization attempts before timing out. This property specifies the duration, in seconds, that the “AVCaptureTimecodeGenerator“ will attempt to synchronize with a timecode source before timing out if synchronization cannot be achieved. If this threshold is exceeded, the synchronization status updates to reflect a timeout, and your “AVCaptureTimecodeGeneratorDelegate/timecodeGenerator:transitionedToSynchronizationStatus:forSource:“ delegate method fires, informing you of the event. The default value is 15 seconds.
+//
 // WithSynchronizationTimeout sets the synchronizationTimeout property and returns the receiver for chaining.
 func (x *CaptureTimecodeGenerator) WithSynchronizationTimeout(synchronizationTimeout float64) *CaptureTimecodeGenerator {
 	x.inner.SetSynchronizationTimeout(synchronizationTimeout)
 	return x
 }
 
+// The time offset, in seconds, applied to the generated timecode. This offset allows fine-tuning of time alignment for synchronization with external sources or to accommodate any intentional delay. The default value is 0 seconds.
+//
 // WithTimecodeAlignmentOffset sets the timecodeAlignmentOffset property and returns the receiver for chaining.
 func (x *CaptureTimecodeGenerator) WithTimecodeAlignmentOffset(timecodeAlignmentOffset float64) *CaptureTimecodeGenerator {
 	x.inner.SetTimecodeAlignmentOffset(timecodeAlignmentOffset)
 	return x
 }
 
+// The frame duration that the generator will use to generate timecodes.
+//
 // WithTimecodeFrameDuration sets the timecodeFrameDuration property and returns the receiver for chaining.
 func (x *CaptureTimecodeGenerator) WithTimecodeFrameDuration(timecodeFrameDuration coremedia.CMTime) *CaptureTimecodeGenerator {
 	x.inner.SetTimecodeFrameDuration(timecodeFrameDuration)
 	return x
 }
 
+// Assigns a delegate to receive real-time timecode updates and specifies a queue for callbacks. - Parameter delegate: An object conforming to the “AVCaptureTimecodeGeneratorDelegate“ protocol. - Parameter callbackQueue: The dispatch queue on which the delegate methods are invoked. The `callbackQueue` parameter may not be `nil`, except when setting the “AVCaptureTimecodeGeneratorDelegate“ to `nil`, otherwise “setDelegate:queue:“ throws an `NSInvalidArgumentException`. Use this method to configure a delegate that handles timecode updates. The specified `queue` ensures thread-safe invocation of delegate methods.
+//
 // SetDelegateQueue calls the underlying SetDelegateQueue.
 func (x *CaptureTimecodeGenerator) SetDelegateQueue(delegate raw.AVCaptureTimecodeGeneratorDelegate, callbackQueue *foundation.NSObject) {
 	x.inner.SetDelegateQueue(delegate, callbackQueue)
 }
 
+// Synchronizes the generator with the specified timecode source. - Parameter source: The timecode source for synchronization.
+//
 // StartSynchronizationWithTimecodeSource calls the underlying StartSynchronizationWithTimecodeSource.
 func (x *CaptureTimecodeGenerator) StartSynchronizationWithTimecodeSource(source *raw.AVCaptureTimecodeSource) {
 	x.inner.StartSynchronizationWithTimecodeSource(source)
 }
 
+// Generates an initial timecode intended to be the first in a sequence. - Returns: A populated “AVCaptureTimecode“ structure.
+//
 // GenerateInitialTimecode calls the underlying GenerateInitialTimecode.
 func (x *CaptureTimecodeGenerator) GenerateInitialTimecode() raw.AVCaptureTimecode {
 	return x.inner.GenerateInitialTimecode()
 }
 
+// An array of available timecode synchronization sources that can be used by the timecode generator. This property provides a list of “AVCaptureTimecodeSource“ objects representing the available timecode sources with which the generator can synchronize. The sources may include built-in options such as the frame counter and real-time clock, as well as dynamically detected sources such as connected MIDI or HID devices. This array is key-value observable, allowing you to monitor changes in real-time. For example, when a new MIDI device is connected, the array is updated to include the corresponding timecode source. - Returns: A read-only array of “AVCaptureTimecodeSource“ objects representing the available timecode synchronization sources.
+//
 // AvailableSources returns the collection as a Go slice.
 func (x *CaptureTimecodeGenerator) AvailableSources() []*CaptureTimecodeSource {
 	arr := x.inner.AvailableSources()
@@ -82,6 +96,8 @@ func (x *CaptureTimecodeGenerator) AvailableSources() []*CaptureTimecodeSource {
 	})
 }
 
+// The active timecode source used by “AVCaptureTimecodeGenerator“ to maintain clock synchronization for accurate timecode generation. Indicates the active timecode source, as defined in the “AVCaptureTimecodeSynchronizationSourceType“ enum. If an “AVCaptureTimecodeGenerator“ becomes disconnected from its source, it continues generating timecodes using historical data from its ring buffer. This approach allows the generator to maintain synchronization during brief disruptions, as is common in cinema workflows where timecode signals may experience discontinuities.
+//
 // CurrentSource calls the underlying CurrentSource.
 func (x *CaptureTimecodeGenerator) CurrentSource() *CaptureTimecodeSource {
 	_r := x.inner.CurrentSource()
@@ -91,16 +107,22 @@ func (x *CaptureTimecodeGenerator) CurrentSource() *CaptureTimecodeSource {
 	return &CaptureTimecodeSource{inner: _r}
 }
 
+// The delegate that receives timecode updates from the timecode generator. You can use your “delegate“ to receive real-time timecode updates. Implement the “timecodeGenerator:didReceiveUpdate:“ method in your delegate to handle updates.
+//
 // Delegate calls the underlying Delegate.
 func (x *CaptureTimecodeGenerator) Delegate() raw.AVCaptureTimecodeGeneratorDelegate {
 	return x.inner.Delegate()
 }
 
+// The dispatch queue on which delegate callbacks are invoked. Provides the queue set in “setDelegate:queue:“. If no delegate is assigned, this property is `nil`.
+//
 // DelegateCallbackQueue calls the underlying DelegateCallbackQueue.
 func (x *CaptureTimecodeGenerator) DelegateCallbackQueue() *foundation.NSObject {
 	return x.inner.DelegateCallbackQueue()
 }
 
+// The maximum time interval allowed for source synchronization attempts before timing out. This property specifies the duration, in seconds, that the “AVCaptureTimecodeGenerator“ will attempt to synchronize with a timecode source before timing out if synchronization cannot be achieved. If this threshold is exceeded, the synchronization status updates to reflect a timeout, and your “AVCaptureTimecodeGeneratorDelegate/timecodeGenerator:transitionedToSynchronizationStatus:forSource:“ delegate method fires, informing you of the event. The default value is 15 seconds.
+//
 // SynchronizationTimeout calls the underlying SynchronizationTimeout.
 func (x *CaptureTimecodeGenerator) SynchronizationTimeout() float64 {
 	return x.inner.SynchronizationTimeout()
@@ -111,6 +133,8 @@ func (x *CaptureTimecodeGenerator) SetSynchronizationTimeout(synchronizationTime
 	x.inner.SetSynchronizationTimeout(synchronizationTimeout)
 }
 
+// The time offset, in seconds, applied to the generated timecode. This offset allows fine-tuning of time alignment for synchronization with external sources or to accommodate any intentional delay. The default value is 0 seconds.
+//
 // TimecodeAlignmentOffset calls the underlying TimecodeAlignmentOffset.
 func (x *CaptureTimecodeGenerator) TimecodeAlignmentOffset() float64 {
 	return x.inner.TimecodeAlignmentOffset()
@@ -121,6 +145,8 @@ func (x *CaptureTimecodeGenerator) SetTimecodeAlignmentOffset(timecodeAlignmentO
 	x.inner.SetTimecodeAlignmentOffset(timecodeAlignmentOffset)
 }
 
+// The frame duration that the generator will use to generate timecodes.
+//
 // TimecodeFrameDuration calls the underlying TimecodeFrameDuration.
 func (x *CaptureTimecodeGenerator) TimecodeFrameDuration() coremedia.CMTime {
 	return x.inner.TimecodeFrameDuration()

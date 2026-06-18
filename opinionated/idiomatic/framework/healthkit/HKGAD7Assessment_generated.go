@@ -37,6 +37,8 @@ func NewGAD7Assessment() *GAD7Assessment {
 	return &GAD7Assessment{inner: raw.HKGAD7AssessmentFromID(_id)}
 }
 
+// Answers on the GAD-7 assessment. There are exactly 7 answers, one for each multiple choice question. Each answer is of type `HKGAD7AssessmentAnswer`.
+//
 // Answers returns the collection as a Go slice.
 func (x *GAD7Assessment) Answers() []*foundation.NSNumber {
 	arr := x.inner.Answers()
@@ -48,6 +50,8 @@ func (x *GAD7Assessment) Answers() []*foundation.NSNumber {
 	})
 }
 
+// @property   risk @discussion The risk determined by the score on a GAD-7 assessment.
+//
 // Risk calls the underlying Risk.
 func (x *GAD7Assessment) Risk() HKGAD7AssessmentRisk {
 	return HKGAD7AssessmentRisk(x.inner.Risk())

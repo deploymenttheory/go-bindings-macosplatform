@@ -60,6 +60,8 @@ func (x *FHIRVersion) FHIRRelease() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      stringRepresentation @abstract      A string representation in the format "{major}.{minor}.{patch}".
+//
 // StringRepresentation calls the underlying StringRepresentation.
 func (x *FHIRVersion) StringRepresentation() string {
 	_r := x.inner.StringRepresentation()

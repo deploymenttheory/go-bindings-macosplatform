@@ -36,59 +36,81 @@ func NewContentSharingPicker() *ContentSharingPicker {
 	return &ContentSharingPicker{inner: raw.SCContentSharingPickerFromID(_id)}
 }
 
+// @abstract defaultConfiguration for the content sharing picker. If a stream does not have a configuration, the default configuration will be used.
+//
 // WithDefaultConfiguration sets the defaultConfiguration property and returns the receiver for chaining.
 func (x *ContentSharingPicker) WithDefaultConfiguration(defaultConfiguration *raw.SCContentSharingPickerConfiguration[objc.ID]) *ContentSharingPicker {
 	x.inner.SetDefaultConfiguration(defaultConfiguration)
 	return x
 }
 
+// @abstract maximumStreamCount An integer value that, if set, limits when Control Center will show the UI to present a picker with no associated stream. If set to 0, Control Center will never ever show UI to present a picker without an associated stream.
+//
 // WithMaximumStreamCount sets the maximumStreamCount property and returns the receiver for chaining.
 func (x *ContentSharingPicker) WithMaximumStreamCount(maximumStreamCount *foundation.NSNumber) *ContentSharingPicker {
 	x.inner.SetMaximumStreamCount(maximumStreamCount)
 	return x
 }
 
+// @abstract active A picker needs to be marked as active for its UI to appear. If `startPickingContent` is called and the picker is not marked as active, the picker will not appear.
+//
 // WithActive sets the active property and returns the receiver for chaining.
 func (x *ContentSharingPicker) WithActive(active bool) *ContentSharingPicker {
 	x.inner.SetActive(active)
 	return x
 }
 
+// @abstract addObserver: @param observer the observer object that adheres to SCContentSharingPickerObserver protocol @discussion Adds an observer object that will receive the results of user interaction with a displayed picker
+//
 // AddObserver calls the underlying AddObserver.
 func (x *ContentSharingPicker) AddObserver(observer raw.SCContentSharingPickerObserver) {
 	x.inner.AddObserver(observer)
 }
 
+// @abstract removeObserver: @param observer the observer object that adheres to SCContentSharingPickerObserver protocol @discussion Removes an observer object that will receive the results of user interaction with a displayed picker
+//
 // RemoveObserver calls the underlying RemoveObserver.
 func (x *ContentSharingPicker) RemoveObserver(observer raw.SCContentSharingPickerObserver) {
 	x.inner.RemoveObserver(observer)
 }
 
+// @abstract setConfiguration:forStream: @param pickerConfig configuration for the picker @param stream stream for optional picking configuration @discussion Sets optional configuration for the picker for a specific stream. If this is not set, the stream will use the defaultConfiguration instead
+//
 // SetConfigurationForStream calls the underlying SetConfigurationForStream.
 func (x *ContentSharingPicker) SetConfigurationForStream(pickerConfig *raw.SCContentSharingPickerConfiguration[objc.ID], stream *raw.SCStream) {
 	x.inner.SetConfigurationForStream(pickerConfig, stream)
 }
 
+// @abstract present @discussion show content sharing picker to get content for updating a new stream
+//
 // Present calls the underlying Present.
 func (x *ContentSharingPicker) Present() {
 	x.inner.Present()
 }
 
+// @abstract presentPickerUsingContentStyle: @param contentStyle the mode in which picking should start @discussion Takes a person straight into picking particular windows or displays
+//
 // PresentPickerUsingContentStyle calls the underlying PresentPickerUsingContentStyle.
 func (x *ContentSharingPicker) PresentPickerUsingContentStyle(contentStyle SCShareableContentStyle) {
 	x.inner.PresentPickerUsingContentStyle(raw.SCShareableContentStyle(contentStyle))
 }
 
+// @abstract presentPickerForStream: @param stream the stream to update @discussion show content sharing picker with an existing stream
+//
 // PresentPickerForStream calls the underlying PresentPickerForStream.
 func (x *ContentSharingPicker) PresentPickerForStream(stream *raw.SCStream) {
 	x.inner.PresentPickerForStream(stream)
 }
 
+// @abstract presentPickerForStream:usingContentStyle: @param stream the stream that the picker will display @param contentStyle the mode in which picking should start @discussion Takes a person straight into picking particular windows or displays
+//
 // PresentPickerForStreamUsingContentStyle calls the underlying PresentPickerForStreamUsingContentStyle.
 func (x *ContentSharingPicker) PresentPickerForStreamUsingContentStyle(stream *raw.SCStream, contentStyle SCShareableContentStyle) {
 	x.inner.PresentPickerForStreamUsingContentStyle(stream, raw.SCShareableContentStyle(contentStyle))
 }
 
+// @abstract defaultConfiguration for the content sharing picker. If a stream does not have a configuration, the default configuration will be used.
+//
 // DefaultConfiguration calls the underlying DefaultConfiguration.
 func (x *ContentSharingPicker) DefaultConfiguration() *raw.SCContentSharingPickerConfiguration[objc.ID] {
 	return x.inner.DefaultConfiguration()
@@ -99,6 +121,8 @@ func (x *ContentSharingPicker) SetDefaultConfiguration(defaultConfiguration *raw
 	x.inner.SetDefaultConfiguration(defaultConfiguration)
 }
 
+// @abstract maximumStreamCount An integer value that, if set, limits when Control Center will show the UI to present a picker with no associated stream. If set to 0, Control Center will never ever show UI to present a picker without an associated stream.
+//
 // MaximumStreamCount calls the underlying MaximumStreamCount.
 func (x *ContentSharingPicker) MaximumStreamCount() *foundation.NSNumber {
 	return x.inner.MaximumStreamCount()
@@ -109,6 +133,8 @@ func (x *ContentSharingPicker) SetMaximumStreamCount(maximumStreamCount *foundat
 	x.inner.SetMaximumStreamCount(maximumStreamCount)
 }
 
+// @abstract active A picker needs to be marked as active for its UI to appear. If `startPickingContent` is called and the picker is not marked as active, the picker will not appear.
+//
 // IsActive calls the underlying IsActive.
 func (x *ContentSharingPicker) IsActive() bool {
 	return x.inner.IsActive()

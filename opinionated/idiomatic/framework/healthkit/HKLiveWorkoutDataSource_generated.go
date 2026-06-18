@@ -30,6 +30,8 @@ func LiveWorkoutDataSourceFromID(id objc.ID) *LiveWorkoutDataSource {
 	return &LiveWorkoutDataSource{inner: raw.HKLiveWorkoutDataSourceFromID(id)}
 }
 
+// @method        initWithHealthStore:workoutConfiguration: @abstract      The designated initializer of HKLiveWorkoutDataSource. @param         healthStore     The HKHealthStore. This should match the one used to create the corresponding HKWorkoutBuilder. @param         configuration   An optional workout configuration. typesToCollect will be populated with default types for the workout configuration
+//
 // NewLiveWorkoutDataSourceWithHealthStoreWorkoutConfiguration creates a new [LiveWorkoutDataSource].
 func NewLiveWorkoutDataSourceWithHealthStoreWorkoutConfiguration(healthStore *raw.HKHealthStore, configuration *raw.HKWorkoutConfiguration) *LiveWorkoutDataSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKLiveWorkoutDataSource")), objc.RegisterName("alloc"))
@@ -37,16 +39,22 @@ func NewLiveWorkoutDataSourceWithHealthStoreWorkoutConfiguration(healthStore *ra
 	return &LiveWorkoutDataSource{inner: raw.HKLiveWorkoutDataSourceFromID(_id)}
 }
 
+// @method        enableCollectionForType:predicate @abstract      Adds a new type of quantity sample to collect. @discussion    Calling this method for a type that is already being collected will override the predicate for that type. @param         quantityType    The type of sample to collect. @param         predicate       If non-nil, collected samples must match this predicate.
+//
 // EnableCollectionForTypePredicate calls the underlying EnableCollectionForTypePredicate.
 func (x *LiveWorkoutDataSource) EnableCollectionForTypePredicate(quantityType *raw.HKQuantityType, predicate *foundation.NSPredicate) {
 	x.inner.EnableCollectionForTypePredicate(quantityType, predicate)
 }
 
+// @method        disableCollectionForType: @abstract      Removes the specified quantity type from the types to collect. @param         quantityType    The type of sample to no longer collect.
+//
 // DisableCollectionForType calls the underlying DisableCollectionForType.
 func (x *LiveWorkoutDataSource) DisableCollectionForType(quantityType *raw.HKQuantityType) {
 	x.inner.DisableCollectionForType(quantityType)
 }
 
+// @property      typesToCollect @abstract      The quantity types the receiver is collecting.
+//
 // TypesToCollect calls the underlying TypesToCollect.
 func (x *LiveWorkoutDataSource) TypesToCollect() *foundation.NSSet[*raw.HKQuantityType] {
 	return x.inner.TypesToCollect()

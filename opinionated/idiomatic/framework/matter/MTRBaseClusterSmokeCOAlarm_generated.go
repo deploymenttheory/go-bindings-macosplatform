@@ -33,6 +33,8 @@ func MTRBaseClusterSmokeCOAlarmFromID(id objc.ID) *MTRBaseClusterSmokeCOAlarm {
 	return &MTRBaseClusterSmokeCOAlarm{inner: raw.MTRBaseClusterSmokeCOAlarmFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterSmokeCOAlarmWithDeviceEndpointIDQueue creates a new [MTRBaseClusterSmokeCOAlarm].
 func NewMTRBaseClusterSmokeCOAlarmWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterSmokeCOAlarm {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterSmokeCOAlarm")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewMTRBaseClusterSmokeCOAlarmWithDeviceEndpointIDQueue(device *raw.MTRBaseD
 	return &MTRBaseClusterSmokeCOAlarm{inner: raw.MTRBaseClusterSmokeCOAlarmFromID(_id)}
 }
 
+// Command SelfTestRequest This command SHALL initiate a device self-test.
+//
 // SelfTestRequestWithParamsCompletion calls the underlying SelfTestRequestWithParamsCompletion.
 func (x *MTRBaseClusterSmokeCOAlarm) SelfTestRequestWithParamsCompletion(params *raw.MTRSmokeCOAlarmClusterSelfTestRequestParams, completion func(unsafe.Pointer)) {
 	x.inner.SelfTestRequestWithParamsCompletion(params, completion)

@@ -38,12 +38,16 @@ func NewHapticEventParameterWithParameterIDValue(parameterID *foundation.NSStrin
 	return &HapticEventParameter{inner: raw.CHHapticEventParameterFromID(_id)}
 }
 
+// @property value The value of the event parameter.
+//
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *HapticEventParameter) WithValue(value float32) *HapticEventParameter {
 	x.inner.SetValue(value)
 	return x
 }
 
+// @property parameterID The ID of the event parameter to use.
+//
 // ParameterID calls the underlying ParameterID.
 func (x *HapticEventParameter) ParameterID() string {
 	_r := x.inner.ParameterID()
@@ -53,6 +57,8 @@ func (x *HapticEventParameter) ParameterID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property value The value of the event parameter.
+//
 // Value calls the underlying Value.
 func (x *HapticEventParameter) Value() float32 {
 	return x.inner.Value()

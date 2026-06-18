@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class for an audio device configuration.
+//
 // AudioDeviceConfiguration wraps [raw.VZAudioDeviceConfiguration] with a fluent Go API.
 type AudioDeviceConfiguration struct {
 	inner *raw.VZAudioDeviceConfiguration

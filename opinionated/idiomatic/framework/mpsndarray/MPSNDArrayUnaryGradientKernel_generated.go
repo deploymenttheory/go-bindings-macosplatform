@@ -38,6 +38,8 @@ func NewArrayUnaryGradientKernelWithDevice(device metal.MTLDevice) *ArrayUnaryGr
 	return &ArrayUnaryGradientKernel{inner: raw.MPSNDArrayUnaryGradientKernelFromID(_id)}
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *ArrayUnaryGradientKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayUnaryGradientKernel {
 	x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)

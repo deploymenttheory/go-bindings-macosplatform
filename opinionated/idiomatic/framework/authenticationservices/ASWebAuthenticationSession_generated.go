@@ -31,6 +31,8 @@ func WebAuthenticationSessionFromID(id objc.ID) *WebAuthenticationSession {
 	return &WebAuthenticationSession{inner: raw.ASWebAuthenticationSessionFromID(id)}
 }
 
+// @abstract Returns an ASWebAuthenticationSession object. @param URL the initial URL pointing to the authentication webpage. Only supports URLs with http:// or https:// schemes. @param callbackURLScheme the custom URL scheme that the app expects in the callback URL. @param completionHandler the completion handler which is called when the session is completed successfully or canceled by user.
+//
 // NewWebAuthenticationSessionWithURLCallbackURLSchemeCompletionHandler creates a new [WebAuthenticationSession].
 func NewWebAuthenticationSessionWithURLCallbackURLSchemeCompletionHandler(uRL string, callbackURLScheme string, completionHandler func(*foundation.NSURL, unsafe.Pointer)) *WebAuthenticationSession {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASWebAuthenticationSession")), objc.RegisterName("alloc"))
@@ -45,34 +47,46 @@ func NewWebAuthenticationSessionWithURLCallbackCompletionHandler(uRL string, cal
 	return &WebAuthenticationSession{inner: raw.ASWebAuthenticationSessionFromID(_id)}
 }
 
+// @abstract Provides context to target where in an application's UI the authorization view should be shown. A provider must be set prior to calling -start, otherwise the authorization view cannot be displayed. If deploying to iOS prior to 13.0, the desired window is inferred by the application's key window.
+//
 // WithPresentationContextProvider sets the presentationContextProvider property and returns the receiver for chaining.
 func (x *WebAuthenticationSession) WithPresentationContextProvider(presentationContextProvider raw.ASWebAuthenticationPresentationContextProviding) *WebAuthenticationSession {
 	x.inner.SetPresentationContextProvider(presentationContextProvider)
 	return x
 }
 
+// @abstract Indicates whether this session should ask the browser for an ephemeral session. @discussion Ephemeral web browser sessions do not not share cookies or other browsing data with a user's normal browser session. This value is NO by default. Setting this property after calling -[ASWebAuthenticationSession start] has no effect.
+//
 // WithPrefersEphemeralWebBrowserSession sets the prefersEphemeralWebBrowserSession property and returns the receiver for chaining.
 func (x *WebAuthenticationSession) WithPrefersEphemeralWebBrowserSession(prefersEphemeralWebBrowserSession bool) *WebAuthenticationSession {
 	x.inner.SetPrefersEphemeralWebBrowserSession(prefersEphemeralWebBrowserSession)
 	return x
 }
 
+// Any additional header fields to be set when loading the initial URL. All header field names must start with the "X-" prefix.
+//
 // WithAdditionalHeaderFields sets the additionalHeaderFields property and returns the receiver for chaining.
 func (x *WebAuthenticationSession) WithAdditionalHeaderFields(additionalHeaderFields *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *WebAuthenticationSession {
 	x.inner.SetAdditionalHeaderFields(additionalHeaderFields)
 	return x
 }
 
+// @abstract Starts the ASWebAuthenticationSession instance after it is instantiated. @discussion start can only be called once for an ASWebAuthenticationSession instance. This also means calling start on a canceled session will fail. @result Returns YES if the session starts successfully.
+//
 // Start calls the underlying Start.
 func (x *WebAuthenticationSession) Start() bool {
 	return x.inner.Start()
 }
 
+// @abstract Cancel an ASWebAuthenticationSession. If the view controller is already presented to load the webpage for authentication, it will be dismissed. Calling cancel on an already canceled session will have no effect.
+//
 // Cancel calls the underlying Cancel.
 func (x *WebAuthenticationSession) Cancel() {
 	x.inner.Cancel()
 }
 
+// @abstract Provides context to target where in an application's UI the authorization view should be shown. A provider must be set prior to calling -start, otherwise the authorization view cannot be displayed. If deploying to iOS prior to 13.0, the desired window is inferred by the application's key window.
+//
 // PresentationContextProvider calls the underlying PresentationContextProvider.
 func (x *WebAuthenticationSession) PresentationContextProvider() raw.ASWebAuthenticationPresentationContextProviding {
 	return x.inner.PresentationContextProvider()
@@ -83,6 +97,8 @@ func (x *WebAuthenticationSession) SetPresentationContextProvider(presentationCo
 	x.inner.SetPresentationContextProvider(presentationContextProvider)
 }
 
+// @abstract Indicates whether this session should ask the browser for an ephemeral session. @discussion Ephemeral web browser sessions do not not share cookies or other browsing data with a user's normal browser session. This value is NO by default. Setting this property after calling -[ASWebAuthenticationSession start] has no effect.
+//
 // PrefersEphemeralWebBrowserSession calls the underlying PrefersEphemeralWebBrowserSession.
 func (x *WebAuthenticationSession) PrefersEphemeralWebBrowserSession() bool {
 	return x.inner.PrefersEphemeralWebBrowserSession()
@@ -93,6 +109,8 @@ func (x *WebAuthenticationSession) SetPrefersEphemeralWebBrowserSession(prefersE
 	x.inner.SetPrefersEphemeralWebBrowserSession(prefersEphemeralWebBrowserSession)
 }
 
+// Any additional header fields to be set when loading the initial URL. All header field names must start with the "X-" prefix.
+//
 // AdditionalHeaderFields calls the underlying AdditionalHeaderFields.
 func (x *WebAuthenticationSession) AdditionalHeaderFields() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
 	return x.inner.AdditionalHeaderFields()
@@ -103,6 +121,8 @@ func (x *WebAuthenticationSession) SetAdditionalHeaderFields(additionalHeaderFie
 	x.inner.SetAdditionalHeaderFields(additionalHeaderFields)
 }
 
+// @abstract Returns whether the session can be successfully started. This property returns the same value as calling -start, but without the side effect of actually starting the session.
+//
 // CanStart calls the underlying CanStart.
 func (x *WebAuthenticationSession) CanStart() bool {
 	return x.inner.CanStart()

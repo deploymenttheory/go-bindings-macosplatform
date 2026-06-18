@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A Virtio graphics scanout that corresponds to a Virtio graphics scanout configuration.
+//
 // VirtioGraphicsScanout wraps [raw.VZVirtioGraphicsScanout] with a fluent Go API.
 type VirtioGraphicsScanout struct {
 	inner *raw.VZVirtioGraphicsScanout

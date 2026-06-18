@@ -36,6 +36,8 @@ func NewCorrelation() *Correlation {
 	return &Correlation{inner: raw.HKCorrelationFromID(_id)}
 }
 
+// @method    objectsForType: @abstract  Returns the set of correlated objects with the specified type.
+//
 // ObjectsForType calls the underlying ObjectsForType.
 func (x *Correlation) ObjectsForType(objectType *raw.HKObjectType) *foundation.NSSet[*raw.HKSample] {
 	return x.inner.ObjectsForType(objectType)
@@ -50,6 +52,8 @@ func (x *Correlation) CorrelationType() *CorrelationType {
 	return &CorrelationType{inner: _r}
 }
 
+// @property  objects @abstract  A set of HKSamples containing all of the objects that were saved with the receiver.
+//
 // Objects calls the underlying Objects.
 func (x *Correlation) Objects() *foundation.NSSet[*raw.HKSample] {
 	return x.inner.Objects()

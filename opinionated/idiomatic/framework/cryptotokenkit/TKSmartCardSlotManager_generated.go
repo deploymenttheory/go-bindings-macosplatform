@@ -38,6 +38,8 @@ func NewSmartCardSlotManager() *SmartCardSlotManager {
 	return &SmartCardSlotManager{inner: raw.TKSmartCardSlotManagerFromID(_id)}
 }
 
+// Instantiates smartcard reader slot of specified name.  If specified name is not registered, reports nil.
+//
 // GetSlotWithNameReply blocks until the operation completes or ctx is cancelled.
 func (x *SmartCardSlotManager) GetSlotWithNameReply(ctx context.Context, name string) (*SmartCardSlot, error) {
 	type _result struct {
@@ -61,6 +63,8 @@ func (x *SmartCardSlotManager) GetSlotWithNameReply(ctx context.Context, name st
 	}
 }
 
+// Gets SmartCard reader slot with specified name.  If reader slot with this name does not exist, returns nil.
+//
 // SlotNamed calls the underlying SlotNamed.
 func (x *SmartCardSlotManager) SlotNamed(name string) *SmartCardSlot {
 	_r := x.inner.SlotNamed(foundation.NSStringStringWithUTF8String(name))
@@ -70,6 +74,8 @@ func (x *SmartCardSlotManager) SlotNamed(name string) *SmartCardSlot {
 	return &SmartCardSlot{inner: _r}
 }
 
+// Array of currently known slots in the system.  Slots are identified by NSString name instances.  Use KVO to be notified about slots arrivals and removals.
+//
 // SlotNames returns the collection as a Go slice.
 func (x *SmartCardSlotManager) SlotNames() []string {
 	arr := x.inner.SlotNames()

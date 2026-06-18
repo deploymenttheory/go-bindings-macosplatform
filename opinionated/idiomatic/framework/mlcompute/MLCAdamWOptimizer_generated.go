@@ -35,38 +35,52 @@ func NewAdamWOptimizer() *AdamWOptimizer {
 	return &AdamWOptimizer{inner: raw.MLCAdamWOptimizerFromID(_id)}
 }
 
+// @property   learningRate @abstract   The learning rate.  This property is 'readwrite' so that callers can implement a 'decay' during training
+//
 // WithLearningRate sets the learningRate property and returns the receiver for chaining.
 func (x *AdamWOptimizer) WithLearningRate(learningRate float32) *AdamWOptimizer {
 	x.inner.MLCOptimizer.SetLearningRate(learningRate)
 	return x
 }
 
+// @property   appliesGradientClipping @abstract   Whether gradient clipping should be applied or not.
+//
 // WithAppliesGradientClipping sets the appliesGradientClipping property and returns the receiver for chaining.
 func (x *AdamWOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *AdamWOptimizer {
 	x.inner.MLCOptimizer.SetAppliesGradientClipping(appliesGradientClipping)
 	return x
 }
 
+// @property   beta1 @abstract   Coefficent used for computing running averages of gradient. @discussion The default is 0.9.
+//
 // Beta1 calls the underlying Beta1.
 func (x *AdamWOptimizer) Beta1() float32 {
 	return x.inner.Beta1()
 }
 
+// @property   beta2 @abstract   Coefficent used for computing running averages of square of gradient. @discussion The default is 0.999.
+//
 // Beta2 calls the underlying Beta2.
 func (x *AdamWOptimizer) Beta2() float32 {
 	return x.inner.Beta2()
 }
 
+// @property   epsilon @abstract   A term added to improve numerical stability. @discussion The default is 1e-8.
+//
 // Epsilon calls the underlying Epsilon.
 func (x *AdamWOptimizer) Epsilon() float32 {
 	return x.inner.Epsilon()
 }
 
+// @property   usesAMSGrad @abstract   Whether to use the AMSGrad variant of this algorithm @discussion The default is false
+//
 // UsesAMSGrad calls the underlying UsesAMSGrad.
 func (x *AdamWOptimizer) UsesAMSGrad() bool {
 	return x.inner.UsesAMSGrad()
 }
 
+// @property   timeStep @abstract   The current timestep used for the update. @discussion The default is 1.
+//
 // TimeStep calls the underlying TimeStep.
 func (x *AdamWOptimizer) TimeStep() uint {
 	return x.inner.TimeStep()

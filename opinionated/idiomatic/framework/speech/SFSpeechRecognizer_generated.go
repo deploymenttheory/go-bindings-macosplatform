@@ -37,6 +37,8 @@ func NewSpeechRecognizer() *SpeechRecognizer {
 	return &SpeechRecognizer{inner: raw.SFSpeechRecognizerFromID(_id)}
 }
 
+// Creates a speech recognizer associated with the specified locale. If you specify a language that is not supported by the speech recognizer, this method attempts to fall back to the language used by the keyboard for dictation. If that fails, this method returns `nil`. Even if this method returns a valid speech recognizer object, the speech recognition services may be temporarily unavailable. To determine whether speech recognition services are available, check the “isAvailable“ property. - Parameters: - locale: The locale object representing the language you want to use for speech recognition. For a list of languages supported by the speech recognizer, see “supportedLocales()“. - Returns: An initialized speech recognizer object, or `nil` if the specified language was not supported.
+//
 // NewSpeechRecognizerWithLocale creates a new [SpeechRecognizer].
 func NewSpeechRecognizerWithLocale(locale *foundation.NSLocale) *SpeechRecognizer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSpeechRecognizer")), objc.RegisterName("alloc"))
@@ -44,30 +46,40 @@ func NewSpeechRecognizerWithLocale(locale *foundation.NSLocale) *SpeechRecognize
 	return &SpeechRecognizer{inner: raw.SFSpeechRecognizerFromID(_id)}
 }
 
+// A Boolean value that indicates whether the speech recognizer can operate without network access. An “SFSpeechRecognitionRequest“ can only honor its “SFSpeechRecognitionRequest/requiresOnDeviceRecognition“ property if “supportsOnDeviceRecognition“ is `true`. If “supportsOnDeviceRecognition“ is `false`, the “SFSpeechRecognizer“ requires a network in order to recognize speech.
+//
 // WithSupportsOnDeviceRecognition sets the supportsOnDeviceRecognition property and returns the receiver for chaining.
 func (x *SpeechRecognizer) WithSupportsOnDeviceRecognition(supportsOnDeviceRecognition bool) *SpeechRecognizer {
 	x.inner.SetSupportsOnDeviceRecognition(supportsOnDeviceRecognition)
 	return x
 }
 
+// The delegate object that handles changes to the availability of speech recognition services. Provide a delegate object when you want to monitor changes to the availability of speech recognition services. Your delegate object must conform to the “SFSpeechRecognizerDelegate“ protocol.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SpeechRecognizer) WithDelegate(delegate raw.SFSpeechRecognizerDelegate) *SpeechRecognizer {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// A hint that indicates the type of speech recognition being requested. By default, the value of this property overrides the “SFSpeechRecognitionTaskHint/unspecified“ value for requests. For possible values, see “SFSpeechRecognitionTaskHint“.
+//
 // WithDefaultTaskHint sets the defaultTaskHint property and returns the receiver for chaining.
 func (x *SpeechRecognizer) WithDefaultTaskHint(defaultTaskHint SFSpeechRecognitionTaskHint) *SpeechRecognizer {
 	x.inner.SetDefaultTaskHint(raw.SFSpeechRecognitionTaskHint(defaultTaskHint))
 	return x
 }
 
+// The queue on which to execute recognition task handlers and delegate methods. The default value of this property is the app's main queue. Assign a different queue if you want delegate methods and handlers to be executed on a background queue. The handler you pass to the “requestAuthorization(_:)“ method does not use this queue.
+//
 // WithQueue sets the queue property and returns the receiver for chaining.
 func (x *SpeechRecognizer) WithQueue(queue *foundation.NSOperationQueue) *SpeechRecognizer {
 	x.inner.SetQueue(queue)
 	return x
 }
 
+// Executes the speech recognition request and delivers the results to the specified handler block. Use this method to initiate the speech recognition process on the audio contained in the request object. This method executes asynchronously and returns a “SFSpeechRecognitionTask“ object that you can use to cancel or finalize the recognition process later. As results become available, the method calls the block in the `resultHandler` parameter. - Parameters: - request: A request (in an “SFSpeechRecognitionRequest“ object) to recognize speech from an audio source. - resultHandler: The block to call when partial or final results are available, or when an error occurs. If the “SFSpeechRecognitionRequest/shouldReportPartialResults“ property is `true`, this block may be called multiple times to deliver the partial and final results. The block has no return value and takes the following parameters: - term result: A “SFSpeechRecognitionResult“ containing the partial or final transcriptions of the audio content. - term error: An error object if a problem occurred. This parameter is `nil` if speech recognition was successful. - Returns: The task object you can use to manage an in-progress recognition request.
+//
 // RecognitionTaskWithRequestResultHandler calls the underlying RecognitionTaskWithRequestResultHandler.
 func (x *SpeechRecognizer) RecognitionTaskWithRequestResultHandler(request *raw.SFSpeechRecognitionRequest, resultHandler func(*raw.SFSpeechRecognitionResult, unsafe.Pointer)) *SpeechRecognitionTask {
 	_r := x.inner.RecognitionTaskWithRequestResultHandler(request, resultHandler)
@@ -77,6 +89,8 @@ func (x *SpeechRecognizer) RecognitionTaskWithRequestResultHandler(request *raw.
 	return &SpeechRecognitionTask{inner: _r}
 }
 
+// Recognizes speech from the audio source associated with the specified request, using the specified delegate to manage the results. Use this method to initiate the speech recognition process on the audio contained in the request object. This method executes asynchronously and returns a “SFSpeechRecognitionTask“ object that you can use to cancel or finalize the recognition process later. As results become available, the method calls the methods of the provided `delegate` object. Note that the “SFSpeechRecognitionTask“ object returned by this method does not retain your delegate object. You must maintain a strong reference to your delegate while speech recognition is in progress. - Parameters: - request: A request (encapsulated in an “SFSpeechRecognitionRequest“ object) to recognize speech from an audio source. - delegate: An object that can handle results from the speech recognition task. This object must conform to the “SFSpeechRecognitionTaskDelegate“ protocol. - Returns: The task object you can use to manage an in-progress recognition request.
+//
 // RecognitionTaskWithRequestDelegate calls the underlying RecognitionTaskWithRequestDelegate.
 func (x *SpeechRecognizer) RecognitionTaskWithRequestDelegate(request *raw.SFSpeechRecognitionRequest, delegate raw.SFSpeechRecognitionTaskDelegate) *SpeechRecognitionTask {
 	_r := x.inner.RecognitionTaskWithRequestDelegate(request, delegate)
@@ -86,16 +100,22 @@ func (x *SpeechRecognizer) RecognitionTaskWithRequestDelegate(request *raw.SFSpe
 	return &SpeechRecognitionTask{inner: _r}
 }
 
+// A Boolean value that indicates whether the speech recognizer is currently available. When the value of this property is `true`, you may create new speech recognition tasks. When value of this property is `false`, speech recognition services are not available.
+//
 // IsAvailable calls the underlying IsAvailable.
 func (x *SpeechRecognizer) IsAvailable() bool {
 	return x.inner.IsAvailable()
 }
 
+// The locale of the speech recognizer. The locale of the speech recognizer is an `NSLocale` object. The default value of this property is the system locale (that is, `+[NSLocale systemLocale]`).
+//
 // Locale calls the underlying Locale.
 func (x *SpeechRecognizer) Locale() *foundation.NSLocale {
 	return x.inner.Locale()
 }
 
+// A Boolean value that indicates whether the speech recognizer can operate without network access. An “SFSpeechRecognitionRequest“ can only honor its “SFSpeechRecognitionRequest/requiresOnDeviceRecognition“ property if “supportsOnDeviceRecognition“ is `true`. If “supportsOnDeviceRecognition“ is `false`, the “SFSpeechRecognizer“ requires a network in order to recognize speech.
+//
 // SupportsOnDeviceRecognition calls the underlying SupportsOnDeviceRecognition.
 func (x *SpeechRecognizer) SupportsOnDeviceRecognition() bool {
 	return x.inner.SupportsOnDeviceRecognition()
@@ -106,6 +126,8 @@ func (x *SpeechRecognizer) SetSupportsOnDeviceRecognition(supportsOnDeviceRecogn
 	x.inner.SetSupportsOnDeviceRecognition(supportsOnDeviceRecognition)
 }
 
+// The delegate object that handles changes to the availability of speech recognition services. Provide a delegate object when you want to monitor changes to the availability of speech recognition services. Your delegate object must conform to the “SFSpeechRecognizerDelegate“ protocol.
+//
 // Delegate calls the underlying Delegate.
 func (x *SpeechRecognizer) Delegate() raw.SFSpeechRecognizerDelegate {
 	return x.inner.Delegate()
@@ -116,6 +138,8 @@ func (x *SpeechRecognizer) SetDelegate(delegate raw.SFSpeechRecognizerDelegate) 
 	x.inner.SetDelegate(delegate)
 }
 
+// A hint that indicates the type of speech recognition being requested. By default, the value of this property overrides the “SFSpeechRecognitionTaskHint/unspecified“ value for requests. For possible values, see “SFSpeechRecognitionTaskHint“.
+//
 // DefaultTaskHint calls the underlying DefaultTaskHint.
 func (x *SpeechRecognizer) DefaultTaskHint() SFSpeechRecognitionTaskHint {
 	return SFSpeechRecognitionTaskHint(x.inner.DefaultTaskHint())
@@ -126,6 +150,8 @@ func (x *SpeechRecognizer) SetDefaultTaskHint(defaultTaskHint SFSpeechRecognitio
 	x.inner.SetDefaultTaskHint(raw.SFSpeechRecognitionTaskHint(defaultTaskHint))
 }
 
+// The queue on which to execute recognition task handlers and delegate methods. The default value of this property is the app's main queue. Assign a different queue if you want delegate methods and handlers to be executed on a background queue. The handler you pass to the “requestAuthorization(_:)“ method does not use this queue.
+//
 // Queue calls the underlying Queue.
 func (x *SpeechRecognizer) Queue() *foundation.NSOperationQueue {
 	return x.inner.Queue()

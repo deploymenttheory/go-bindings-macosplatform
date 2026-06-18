@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A SpriteKit Node used to stroke or fill a shape. CGPaths are used to supply the path. See CGPath <a href="http://developer.apple.com/library/mac/#documentation/GraphicsImaging/Reference/CGPath/Reference/reference.html">reference pages</a> for details on how to construct a CGPath.
+//
 // ShapeNode wraps [raw.SKShapeNode] with a fluent Go API.
 type ShapeNode struct {
 	inner *raw.SKShapeNode
@@ -40,54 +42,72 @@ func NewShapeNode() *ShapeNode {
 	return &ShapeNode{inner: raw.SKShapeNodeFromID(_id)}
 }
 
+// The color to draw the path with. (for no stroke use [SKColor clearColor]). Defaults to [SKColor whiteColor].
+//
 // WithStrokeColor sets the strokeColor property and returns the receiver for chaining.
 func (x *ShapeNode) WithStrokeColor(strokeColor *appkit.NSColor) *ShapeNode {
 	x.inner.SetStrokeColor(strokeColor)
 	return x
 }
 
+// The color to fill the path with. Defaults to [SKColor clearColor] (no fill).
+//
 // WithFillColor sets the fillColor property and returns the receiver for chaining.
 func (x *ShapeNode) WithFillColor(fillColor *appkit.NSColor) *ShapeNode {
 	x.inner.SetFillColor(fillColor)
 	return x
 }
 
+// Sets the blend mode to use when composing the shape with the final framebuffer. @see SKNode.SKBlendMode
+//
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
 func (x *ShapeNode) WithBlendMode(blendMode SKBlendMode) *ShapeNode {
 	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
 	return x
 }
 
+// If set to YES, the path stroke edges and caps is smoothed (antialiased) when drawn.
+//
 // WithAntialiased sets the antialiased property and returns the receiver for chaining.
 func (x *ShapeNode) WithAntialiased(antialiased bool) *ShapeNode {
 	x.inner.SetAntialiased(antialiased)
 	return x
 }
 
+// The width used to stroke the path. Widths larger than 2.0 may result in artifacts. Defaults to 1.0.
+//
 // WithLineWidth sets the lineWidth property and returns the receiver for chaining.
 func (x *ShapeNode) WithLineWidth(lineWidth float64) *ShapeNode {
 	x.inner.SetLineWidth(lineWidth)
 	return x
 }
 
+// Add a glow to the path stroke of the specified width. Defaults to 0.0 (no glow)
+//
 // WithGlowWidth sets the glowWidth property and returns the receiver for chaining.
 func (x *ShapeNode) WithGlowWidth(glowWidth float64) *ShapeNode {
 	x.inner.SetGlowWidth(glowWidth)
 	return x
 }
 
+// The cap type that should be used when stroking a non-closed path
+//
 // WithLineCap sets the lineCap property and returns the receiver for chaining.
 func (x *ShapeNode) WithLineCap(lineCap coregraphics.CGLineCap) *ShapeNode {
 	x.inner.SetLineCap(lineCap)
 	return x
 }
 
+// The join type that should be used when stroking a path
+//
 // WithLineJoin sets the lineJoin property and returns the receiver for chaining.
 func (x *ShapeNode) WithLineJoin(lineJoin coregraphics.CGLineJoin) *ShapeNode {
 	x.inner.SetLineJoin(lineJoin)
 	return x
 }
 
+// When a miter join is used, the maximum ratio of miter length to line with to be used
+//
 // WithMiterLimit sets the miterLimit property and returns the receiver for chaining.
 func (x *ShapeNode) WithMiterLimit(miterLimit float64) *ShapeNode {
 	x.inner.SetMiterLimit(miterLimit)
@@ -118,90 +138,120 @@ func (x *ShapeNode) WithStrokeShader(strokeShader *Shader) *ShapeNode {
 	return x
 }
 
+// The position of the node in the parent's coordinate system
+//
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *ShapeNode) WithPosition(position corefoundation.CGPoint) *ShapeNode {
 	x.inner.SKNode.SetPosition(position)
 	return x
 }
 
+// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+//
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *ShapeNode) WithZPosition(zPosition float64) *ShapeNode {
 	x.inner.SKNode.SetZPosition(zPosition)
 	return x
 }
 
+// The Euler rotation about the z axis (in radians)
+//
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *ShapeNode) WithZRotation(zRotation float64) *ShapeNode {
 	x.inner.SKNode.SetZRotation(zRotation)
 	return x
 }
 
+// The scaling in the X axis
+//
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *ShapeNode) WithXScale(xScale float64) *ShapeNode {
 	x.inner.SKNode.SetXScale(xScale)
 	return x
 }
 
+// The scaling in the Y axis
+//
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *ShapeNode) WithYScale(yScale float64) *ShapeNode {
 	x.inner.SKNode.SetYScale(yScale)
 	return x
 }
 
+// The speed multiplier applied to all actions run on this node. Inherited by its children.
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *ShapeNode) WithSpeed(speed float64) *ShapeNode {
 	x.inner.SKNode.SetSpeed(speed)
 	return x
 }
 
+// Alpha of this node (multiplied by the output color to give the final result)
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *ShapeNode) WithAlpha(alpha float64) *ShapeNode {
 	x.inner.SKNode.SetAlpha(alpha)
 	return x
 }
 
+// Controls whether or not the node's actions is updated or paused.
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *ShapeNode) WithPaused(paused bool) *ShapeNode {
 	x.inner.SKNode.SetPaused(paused)
 	return x
 }
 
+// Controls whether or not the node and its children are rendered.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *ShapeNode) WithHidden(hidden bool) *ShapeNode {
 	x.inner.SKNode.SetHidden(hidden)
 	return x
 }
 
+// Controls whether or not the node receives touch events
+//
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *ShapeNode) WithUserInteractionEnabled(userInteractionEnabled bool) *ShapeNode {
 	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
 	return x
 }
 
+// The client assignable name. In general, this should be unique among peers in the scene graph.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *ShapeNode) WithName(name string) *ShapeNode {
 	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// Physics body attached to the node, with synchronized scale, rotation, and position
+//
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *ShapeNode) WithPhysicsBody(physicsBody *PhysicsBody) *ShapeNode {
 	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
+// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+//
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *ShapeNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *ShapeNode {
 	x.inner.SKNode.SetUserData(userData)
 	return x
 }
 
+// Kinematic constraints, used in IK solving
+//
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *ShapeNode) WithReachConstraints(reachConstraints *ReachConstraints) *ShapeNode {
 	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
+// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+//
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *ShapeNode) WithConstraints(items ...*raw.SKConstraint) *ShapeNode {
 	if len(items) == 0 {
@@ -220,6 +270,8 @@ func (x *ShapeNode) WithConstraints(items ...*raw.SKConstraint) *ShapeNode {
 	return x
 }
 
+// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+//
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *ShapeNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *ShapeNode {
 	x.inner.SKNode.SetAttributeValues(attributeValues)
@@ -280,6 +332,8 @@ func (x *ShapeNode) WithAccessibilityEnabled(accessibilityEnabled bool) *ShapeNo
 	return x
 }
 
+// The CGPath to be drawn (in the Node's coordinate space)
+//
 // Path calls the underlying Path.
 func (x *ShapeNode) Path() unsafe.Pointer {
 	return x.inner.Path()
@@ -290,6 +344,8 @@ func (x *ShapeNode) SetPath(path unsafe.Pointer) {
 	x.inner.SetPath(path)
 }
 
+// The color to draw the path with. (for no stroke use [SKColor clearColor]). Defaults to [SKColor whiteColor].
+//
 // StrokeColor calls the underlying StrokeColor.
 func (x *ShapeNode) StrokeColor() *appkit.NSColor {
 	return x.inner.StrokeColor()
@@ -300,6 +356,8 @@ func (x *ShapeNode) SetStrokeColor(strokeColor *appkit.NSColor) {
 	x.inner.SetStrokeColor(strokeColor)
 }
 
+// The color to fill the path with. Defaults to [SKColor clearColor] (no fill).
+//
 // FillColor calls the underlying FillColor.
 func (x *ShapeNode) FillColor() *appkit.NSColor {
 	return x.inner.FillColor()
@@ -310,6 +368,8 @@ func (x *ShapeNode) SetFillColor(fillColor *appkit.NSColor) {
 	x.inner.SetFillColor(fillColor)
 }
 
+// Sets the blend mode to use when composing the shape with the final framebuffer. @see SKNode.SKBlendMode
+//
 // BlendMode calls the underlying BlendMode.
 func (x *ShapeNode) BlendMode() SKBlendMode {
 	return SKBlendMode(x.inner.BlendMode())
@@ -320,6 +380,8 @@ func (x *ShapeNode) SetBlendMode(blendMode SKBlendMode) {
 	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
 }
 
+// If set to YES, the path stroke edges and caps is smoothed (antialiased) when drawn.
+//
 // IsAntialiased calls the underlying IsAntialiased.
 func (x *ShapeNode) IsAntialiased() bool {
 	return x.inner.IsAntialiased()
@@ -330,6 +392,8 @@ func (x *ShapeNode) SetAntialiased(antialiased bool) {
 	x.inner.SetAntialiased(antialiased)
 }
 
+// The width used to stroke the path. Widths larger than 2.0 may result in artifacts. Defaults to 1.0.
+//
 // LineWidth calls the underlying LineWidth.
 func (x *ShapeNode) LineWidth() float64 {
 	return x.inner.LineWidth()
@@ -340,6 +404,8 @@ func (x *ShapeNode) SetLineWidth(lineWidth float64) {
 	x.inner.SetLineWidth(lineWidth)
 }
 
+// Add a glow to the path stroke of the specified width. Defaults to 0.0 (no glow)
+//
 // GlowWidth calls the underlying GlowWidth.
 func (x *ShapeNode) GlowWidth() float64 {
 	return x.inner.GlowWidth()
@@ -350,6 +416,8 @@ func (x *ShapeNode) SetGlowWidth(glowWidth float64) {
 	x.inner.SetGlowWidth(glowWidth)
 }
 
+// The cap type that should be used when stroking a non-closed path
+//
 // LineCap calls the underlying LineCap.
 func (x *ShapeNode) LineCap() coregraphics.CGLineCap {
 	return x.inner.LineCap()
@@ -360,6 +428,8 @@ func (x *ShapeNode) SetLineCap(lineCap coregraphics.CGLineCap) {
 	x.inner.SetLineCap(lineCap)
 }
 
+// The join type that should be used when stroking a path
+//
 // LineJoin calls the underlying LineJoin.
 func (x *ShapeNode) LineJoin() coregraphics.CGLineJoin {
 	return x.inner.LineJoin()
@@ -370,6 +440,8 @@ func (x *ShapeNode) SetLineJoin(lineJoin coregraphics.CGLineJoin) {
 	x.inner.SetLineJoin(lineJoin)
 }
 
+// When a miter join is used, the maximum ratio of miter length to line with to be used
+//
 // MiterLimit calls the underlying MiterLimit.
 func (x *ShapeNode) MiterLimit() float64 {
 	return x.inner.MiterLimit()
@@ -380,6 +452,8 @@ func (x *ShapeNode) SetMiterLimit(miterLimit float64) {
 	x.inner.SetMiterLimit(miterLimit)
 }
 
+// The length of the node's path if it were to be stroked
+//
 // LineLength calls the underlying LineLength.
 func (x *ShapeNode) LineLength() float64 {
 	return x.inner.LineLength()

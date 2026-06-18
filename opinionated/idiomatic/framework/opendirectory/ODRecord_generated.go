@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @class       ODRecord @abstract    This class is used to read, update and modify records within the directory @discussion  This class is used to read, update and modify records within the directory.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // Record wraps [raw.ODRecord] with a fluent Go API.
 type Record struct {
 	inner *raw.ODRecord
@@ -37,154 +39,214 @@ func NewRecord() *Record {
 	return &Record{inner: raw.ODRecordFromID(_id)}
 }
 
+// @method     setNodeCredentials:password:error: @abstract   Similar to calling -[ODNode setCredentials:] except credentials are only set for this particular record's node @discussion Sets the credentials if necessary on the ODNode referenced by this ODRecord.  Very similar to calling -[ODNode setCredentials:] except other records referencing the underlying node will not get authenticated, therefore inadvertant changes cannot occur.  If all records referencing a particular node need to be updated, then use -[ODNode setCredentials:] on the original node instead.  If the node is already authenticated with the same name and password, it will be a NOOP call.  The original ODNode held by an ODRecord will be released when the credentials are changed for the connection associated with the record.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // SetNodeCredentialsPasswordError calls the underlying SetNodeCredentialsPasswordError.
 func (x *Record) SetNodeCredentialsPasswordError(inUsername string, inPassword string) (bool, error) {
 	return x.inner.SetNodeCredentialsPasswordError(foundation.NSStringStringWithUTF8String(inUsername), foundation.NSStringStringWithUTF8String(inPassword))
 }
 
+// @method     setNodeCredentialsWithRecordType:authenticationType:authenticationItems:continueItems:context:error: @abstract   Similar to calling -[ODNode setCredentialsWithRecordType:] except credentials are only set for this particular record's node @discussion Allows the caller to use other types of authentications that are available in OpenDirectory, that may require response-request loops, etc.  Not all OD plugins will support this call, look for kODErrorCredentialsMethodNotSupported in outError.  Same behavior as ODRecordSetNodeCredentials.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // SetNodeCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError calls the underlying SetNodeCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError.
 func (x *Record) SetNodeCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError(inRecordType *foundation.NSString, inType *foundation.NSString, inItems *foundation.NSArray[objc.ID], outItems *foundation.NSArray[objc.ID], outContext **foundation.ObjcObject) (bool, error) {
 	return x.inner.SetNodeCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError(inRecordType, inType, inItems, outItems, outContext)
 }
 
+// @method     setNodeCredentialsUsingKerberosCache:error: @abstract   Unsupported method. @discussion Unsupported method.
+//
 // SetNodeCredentialsUsingKerberosCacheError calls the underlying SetNodeCredentialsUsingKerberosCacheError.
 func (x *Record) SetNodeCredentialsUsingKerberosCacheError(inCacheName string) (bool, error) {
 	return x.inner.SetNodeCredentialsUsingKerberosCacheError(foundation.NSStringStringWithUTF8String(inCacheName))
 }
 
+// @method     passwordPolicyAndReturnError: @abstract   Returns a dictionary containing the password policy for the record if available. @discussion Returns a dictionary containing the password policy for the record if available.  If no policy for record nil will be returned.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // PasswordPolicyAndReturnError calls the underlying PasswordPolicyAndReturnError.
 func (x *Record) PasswordPolicyAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error) {
 	return x.inner.PasswordPolicyAndReturnError()
 }
 
+// @method     verifyPassword:error: @abstract   Verifies the password provided is valid for the record @discussion Verifies the password provided is valid for the record.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // VerifyPasswordError calls the underlying VerifyPasswordError.
 func (x *Record) VerifyPasswordError(inPassword string) (bool, error) {
 	return x.inner.VerifyPasswordError(foundation.NSStringStringWithUTF8String(inPassword))
 }
 
+// @method     verifyExtendedWithAuthenticationType:authenticationItems:continueItems:context:error: @abstract   Allows use of other OpenDirectory types of authentications @discussion Allows the caller to use other types of authentications that are available in OpenDirectory, that may require response-request loops, etc.  A bool with the result of the operation. If it fails, outError can be checked for more specific error.  Some ODNodes may not support the call so an error code of kODErrorCredentialsMethodNotSupported may be returned.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // VerifyExtendedWithAuthenticationTypeAuthenticationItemsContinueItemsContextError calls the underlying VerifyExtendedWithAuthenticationTypeAuthenticationItemsContinueItemsContextError.
 func (x *Record) VerifyExtendedWithAuthenticationTypeAuthenticationItemsContinueItemsContextError(inType *foundation.NSString, inItems *foundation.NSArray[objc.ID], outItems *foundation.NSArray[objc.ID], outContext **foundation.ObjcObject) (bool, error) {
 	return x.inner.VerifyExtendedWithAuthenticationTypeAuthenticationItemsContinueItemsContextError(inType, inItems, outItems, outContext)
 }
 
+// @method     changePassword:toPassword:error: @abstract   Changes the password for a record @discussion Changes the password for a record.  The oldPassword can be nil if password is being set assuming the appropriate privileges are in place.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // ChangePasswordToPasswordError calls the underlying ChangePasswordToPasswordError.
 func (x *Record) ChangePasswordToPasswordError(oldPassword string, newPassword string) (bool, error) {
 	return x.inner.ChangePasswordToPasswordError(foundation.NSStringStringWithUTF8String(oldPassword), foundation.NSStringStringWithUTF8String(newPassword))
 }
 
+// @method     synchronizeAndReturnError: @abstract   Synchronizes the record from the Directory in order to get current data and/or commit pending changes @discussion Synchronizes the record from the Directory in order to get current data.  Any previously fetched attributes will be re-fetch from the Directory.  This will not re-fetch the entire record, unless the entire record has been accessed.  Additionally, any changes made to the record will be committed to the directory, if the node does not do immediate commits.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // SynchronizeAndReturnError returns any validation error.
 func (x *Record) SynchronizeAndReturnError() error {
 	_, err := x.inner.SynchronizeAndReturnError()
 	return err
 }
 
+// @method     recordDetailsForAttributes:error: @abstract   Returns the attributes and values in the form of a key-value pair set. @discussion Returns the attributes and values in the form of a key-value pair set for this record.  The key is a NSString of the attribute name (e.g., kODAttributeTypeRecordName, etc.) and the value is an NSArray of either NSData or NSString depending on the type of data.  Binary data will be returned as NSData. If nil is passed, then all currently retrieved attributes will be returned.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // RecordDetailsForAttributesError calls the underlying RecordDetailsForAttributesError.
 func (x *Record) RecordDetailsForAttributesError(inAttributes *foundation.NSArray[objc.ID]) (*foundation.NSDictionary[objc.ID, objc.ID], error) {
 	return x.inner.RecordDetailsForAttributesError(inAttributes)
 }
 
+// @method     valuesForAttribute:error: @abstract   Returns an NSArray of NSString or NSData values of the attribute @discussion Returns an NSArray of NSString or NSData depending on the type of data.  Binary data will be returned as NSData.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // ValuesForAttributeError calls the underlying ValuesForAttributeError.
 func (x *Record) ValuesForAttributeError(inAttribute *foundation.NSString) (*foundation.NSArray[objc.ID], error) {
 	return x.inner.ValuesForAttributeError(inAttribute)
 }
 
+// @method     setValue:forAttribute:error: @abstract   Will take a mixture of NSData or NSString or an NSArray of either type when setting the values of an attribute @discussion Will take a mixture of NSData or NSString or an NSArray of either type when setting the values of an attribute. outError is optional parameter, nil can be passed if error details are not needed.
+//
 // SetValueForAttributeError calls the underlying SetValueForAttributeError.
 func (x *Record) SetValueForAttributeError(inValueOrValues objc.ID, inAttribute *foundation.NSString) (bool, error) {
 	return x.inner.SetValueForAttributeError(inValueOrValues, inAttribute)
 }
 
+// @method     removeValuesForAttribute:error: @abstract   Removes all the values for an attribute. @discussion Removes all the values for an attribute.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // RemoveValuesForAttributeError calls the underlying RemoveValuesForAttributeError.
 func (x *Record) RemoveValuesForAttributeError(inAttribute *foundation.NSString) (bool, error) {
 	return x.inner.RemoveValuesForAttributeError(inAttribute)
 }
 
+// @method     addValue:toAttribute:error: @abstract   Will add a value to an attribute @discussion Will add a value to an attribute.  Should be either NSData or NSString type.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // AddValueToAttributeError calls the underlying AddValueToAttributeError.
 func (x *Record) AddValueToAttributeError(inValue objc.ID, inAttribute *foundation.NSString) (bool, error) {
 	return x.inner.AddValueToAttributeError(inValue, inAttribute)
 }
 
+// @method     removeValue:fromAttribute:error: @abstract   Will remove a value from an attribute @discussion Will remove a value from an attribute.  Should be either NSData or NSString type.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // RemoveValueFromAttributeError calls the underlying RemoveValueFromAttributeError.
 func (x *Record) RemoveValueFromAttributeError(inValue objc.ID, inAttribute *foundation.NSString) (bool, error) {
 	return x.inner.RemoveValueFromAttributeError(inValue, inAttribute)
 }
 
+// @method     deleteRecordAndReturnError: @abstract   Deletes the record from the node and invalidates the record. @discussion Deletes the record from the node and invalidates the record.  The ODRecord should be released after deletion.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // DeleteRecordAndReturnError returns any validation error.
 func (x *Record) DeleteRecordAndReturnError() error {
 	_, err := x.inner.DeleteRecordAndReturnError()
 	return err
 }
 
+// @method     policiesAndReturnError: @abstract   This will copy any policies configured for the record. @discussion This will copy any policies configured for the record.
+//
 // PoliciesAndReturnError calls the underlying PoliciesAndReturnError.
 func (x *Record) PoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error) {
 	return x.inner.PoliciesAndReturnError()
 }
 
+// @method     effectivePoliciesAndReturnError: @abstract   This will copy any policies configured for the record. @discussion This will copy any policies configured for the record.
+//
 // EffectivePoliciesAndReturnError calls the underlying EffectivePoliciesAndReturnError.
 func (x *Record) EffectivePoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error) {
 	return x.inner.EffectivePoliciesAndReturnError()
 }
 
+// @function   supportedPoliciesAndReturnError: @abstract   This will return a dictionary of supported policies. @discussion This will return a dictionary of supported policies, if appropriate, the value will be the maximum value allowed for the policy in question.  For example, if password history is available, it will state how much history is supported.
+//
 // SupportedPoliciesAndReturnError calls the underlying SupportedPoliciesAndReturnError.
 func (x *Record) SupportedPoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error) {
 	return x.inner.SupportedPoliciesAndReturnError()
 }
 
+// @function   setPolicies:error: @abstract   This will set the policy for the record. @discussion This will set the policy for the record.  Policies are evaluated in combination with node-level policies.
+//
 // SetPoliciesError calls the underlying SetPoliciesError.
 func (x *Record) SetPoliciesError(policies *foundation.NSDictionary[objc.ID, objc.ID]) (bool, error) {
 	return x.inner.SetPoliciesError(policies)
 }
 
+// @function   setPolicy:value:error: @abstract   This will set a specific policy setting for the record. @discussion This will set a specific policy setting for the record.
+//
 // SetPolicyValueError calls the underlying SetPolicyValueError.
 func (x *Record) SetPolicyValueError(policy *foundation.NSString, value objc.ID) (bool, error) {
 	return x.inner.SetPolicyValueError(policy, value)
 }
 
+// @function   removePolicy:error: @abstract   This will remove a specific policy setting from the record. @discussion This will remove a specific policy setting from the record.
+//
 // RemovePolicyError calls the underlying RemovePolicyError.
 func (x *Record) RemovePolicyError(policy *foundation.NSString) (bool, error) {
 	return x.inner.RemovePolicyError(policy)
 }
 
+// @method     addAccountPolicy:toCategory:error: @abstract   This will add a specific policy to the specific category for the record. @discussion This will add a specific policy to the specific category for the record. The specified policy will be applied, in combination with any node policies, to the specified record when policies are evaluated. @param      policy a dictionary containing the specific policy to be added. The dictionary may contain the following keys: kODPolicyKeyIdentifier a required key identifying the policy. kODPolicyKeyParameters an optional key containing a dictionary of parameters that can be used for informational purposes or in the policy format string. kODPolicyKeyContent a required key specifying the policy, from which a predicate will be created for evaluating the policy. @param      category a valid ODPolicyCategoryType to which the policy will be added. @param      error an optional NSError reference for error details. @result     a BOOL which signifies if the policy addition succeeded, otherwise error is set.
+//
 // AddAccountPolicyToCategoryError calls the underlying AddAccountPolicyToCategoryError.
 func (x *Record) AddAccountPolicyToCategoryError(policy *foundation.NSDictionary[objc.ID, objc.ID], category *foundation.NSString) (bool, error) {
 	return x.inner.AddAccountPolicyToCategoryError(policy, category)
 }
 
+// @method     removeAccountPolicy:fromCategory:error: @abstract   This will remove a specific policy from the specific category for the record. @discussion This will remove a specific policy from the specific category for the record. @param      policy a dictionary containing the specific policy to be removed, with the same format as described in addAccountPolicy. @param      category a valid ODPolicyCategoryType from which the policy will be removed. @param      error an optional NSError reference for error details. @result     a BOOL which signifies if the policy removal succeeded, otherwise error is set.
+//
 // RemoveAccountPolicyFromCategoryError calls the underlying RemoveAccountPolicyFromCategoryError.
 func (x *Record) RemoveAccountPolicyFromCategoryError(policy *foundation.NSDictionary[objc.ID, objc.ID], category *foundation.NSString) (bool, error) {
 	return x.inner.RemoveAccountPolicyFromCategoryError(policy, category)
 }
 
+// @method     setAccountPolicies:error: @abstract   This will set the policies for the record. @discussion This will set the policies for the record, replacing any existing policies.  All of the policies in the set will be applied to the record when policies are evaluated. @param      policies a dictionary containing all of the policies to be set for the node.  The dictionary may contain the following keys: kODPolicyCategoryAuthentication an optional key with a value of an array of policy dictionaries that specify when authentications should be allowed. kODPolicyCategoryPasswordContent an optional key with a value of an array of policy dictionaries the specify the required content of passwords. kODPolicyCategoryPasswordChange an optional key with a value of an array of policy dictionaries that specify when passwords are required to be changed. @param      error an optional NSError reference for error details. @result     a BOOL which signifies if the policy set succeeded, otherwise error is set.
+//
 // SetAccountPoliciesError calls the underlying SetAccountPoliciesError.
 func (x *Record) SetAccountPoliciesError(policies *foundation.NSDictionary[objc.ID, objc.ID]) (bool, error) {
 	return x.inner.SetAccountPoliciesError(policies)
 }
 
+// @method     accountPoliciesAndReturnError: @abstract   Returns a dictionary containing any policies configured for the record. @discussion Returns a dictionary containing any policies configured for the record. Does not include any policies set for the node. @discussion Returns a dictionary containing any policies configured for the record. @param      error an optional NSError reference for error details. @result     a NSDictionary containing all currently set policies.  The format of the dictionary is the same as described in setAccountPolicies.
+//
 // AccountPoliciesAndReturnError calls the underlying AccountPoliciesAndReturnError.
 func (x *Record) AccountPoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error) {
 	return x.inner.AccountPoliciesAndReturnError()
 }
 
+// @function   authenticationAllowedAndReturnError: @abstract   Determines if policies allow the account to authenticate. @discussion Determines if policies allow the account to authenticate. Authentication and password change policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.  The failure of any single policy will deny the authentication. This check is only definitive at the time it was requested. The policy or the environment could change before the authentication is actually requested.  Errors from the authentication request should be consulted. It is not necessary to call this function when calling verifyPassword or verifyPasswordExtended since those methods perform the same policy evaluation. @param      error an optional NSError reference for error details. @result     a bool which signifies if the authentication is allowed, otherwise error is set.
+//
 // AuthenticationAllowedAndReturnError returns any validation error.
 func (x *Record) AuthenticationAllowedAndReturnError() error {
 	_, err := x.inner.AuthenticationAllowedAndReturnError()
 	return err
 }
 
+// @method     passwordChangeAllowed:error: @abstract   Determines if policies allow the password change. @discussion Determines if policies allow the password change.  Password content policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies.  The failure of any single policy will deny the password change. This check is only definitive at the time it was requested. The policy or the environment could change before the password change is actually requested.  Errors from the password change request should be consulted. @param      newPassword contains the password to be evaluated. @param      error an optional NSError reference for error details. @result     a BOOL which signifies if the password change is allowed, otherwise error is set.
+//
 // PasswordChangeAllowedError calls the underlying PasswordChangeAllowedError.
 func (x *Record) PasswordChangeAllowedError(newPassword string) (bool, error) {
 	return x.inner.PasswordChangeAllowedError(foundation.NSStringStringWithUTF8String(newPassword))
 }
 
+// @method     willPasswordExpire: @abstract   Determines if the password will expire within the specified time. @discussion Determines if the password will expire (i.e. need to be changed) between now and the specified number of seconds in the future. Password change policies are evaluated.  Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies. @param      willExpireIn the number of seconds from the current time to be used as the upper-bound for the password expiration period. @result     a BOOL which signifies if the password will expire within the specified time.
+//
 // WillPasswordExpire calls the underlying WillPasswordExpire.
 func (x *Record) WillPasswordExpire(willExpireIn uint64) bool {
 	return x.inner.WillPasswordExpire(willExpireIn)
 }
 
+// @method     willAuthenticationsExpire: @abstract   Determines if authentications will expire within the specified time. @discussion Determines if authentications will expire (i.e. session and/or account expires) between now and the specified number of seconds in the future.  Authentication policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies. @param      willExpireIn the number of seconds from the current time to be used as the upper-bound for the authentication expiration period. @result     a BOOL which signifies if authentications will expire within the specified time.
+//
 // WillAuthenticationsExpire calls the underlying WillAuthenticationsExpire.
 func (x *Record) WillAuthenticationsExpire(willExpireIn uint64) bool {
 	return x.inner.WillAuthenticationsExpire(willExpireIn)
 }
 
+// @property   recordType @abstract   Type of the record. @discussion The record type.
+//
 // RecordType calls the underlying RecordType.
 func (x *Record) RecordType() string {
 	_r := x.inner.RecordType()
@@ -194,6 +256,8 @@ func (x *Record) RecordType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property   recordName @abstract   Name of the record. @discussion This is the official record name.
+//
 // RecordName calls the underlying RecordName.
 func (x *Record) RecordName() string {
 	_r := x.inner.RecordName()
@@ -203,26 +267,36 @@ func (x *Record) RecordName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @method     secondsUntilPasswordExpires @abstract   Determines how many seconds until the password expires. @discussion Determines how many seconds until the password expires (i.e. needs changing).  Password change policies are evaluated. Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies. @result     the number of seconds until the password expires.  If multiple policies will cause the password to expire, the soonest expiration time is returned.  If already expired, kODExpirationTimeExpired is returned.  If there are no password change policies, kODExpirationTimeNeverExpires is returned.
+//
 // SecondsUntilPasswordExpires calls the underlying SecondsUntilPasswordExpires.
 func (x *Record) SecondsUntilPasswordExpires() int64 {
 	return x.inner.SecondsUntilPasswordExpires()
 }
 
+// @method     secondsUntilAuthenticationsExpire @abstract   Determines how many seconds until authentications expire. @discussion Determines how many seconds until authentications expire (i.e. session and/or account expires). Authentication policies are evaluated.   Record-level and node-level policies are evaluated in combination, with record-level taking precedence over node-level policies. @result     the number of seconds until authentications expire.  If multiple policies will cause authentications to expire, the soonest expiration time is returned. If already expired, kODExpirationTimeExpired is returned.  If there are no authentication policies controlling expiration, kODExpirationTimeNeverExpires is returned.
+//
 // SecondsUntilAuthenticationsExpire calls the underlying SecondsUntilAuthenticationsExpire.
 func (x *Record) SecondsUntilAuthenticationsExpire() int64 {
 	return x.inner.SecondsUntilAuthenticationsExpire()
 }
 
+// @method     addMemberRecord:error: @abstract   Will add the record as a member of the group record @discussion Will add the record as a member of the group record.  An error will be returned if the record is not a group record.  Additionally, if the member record is not an appropriate type allowed as part of a group an error will be returned.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // AddMemberRecordError calls the underlying AddMemberRecordError.
 func (x *Record) AddMemberRecordError(inRecord *raw.ODRecord) (bool, error) {
 	return x.inner.AddMemberRecordError(inRecord)
 }
 
+// @method     removeMemberRecord:error: @abstract   Will remove the record as a member from the group record @discussion Will remove the record as a member from the group record. An error will be returned if the record is not a group record.  Additionally, if the member record is not an appropriate type allowed as part of a group an error will be returned.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // RemoveMemberRecordError calls the underlying RemoveMemberRecordError.
 func (x *Record) RemoveMemberRecordError(inRecord *raw.ODRecord) (bool, error) {
 	return x.inner.RemoveMemberRecordError(inRecord)
 }
 
+// @method     isMemberRecord:error: @abstract   Will use membership APIs to determine if inRecord is a member of the group @discussion Will use membership APIs to determine if inRecord is a member of the group.  If the receiving object is not a group then NO will still be returned.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // IsMemberRecordError calls the underlying IsMemberRecordError.
 func (x *Record) IsMemberRecordError(inRecord *raw.ODRecord) (bool, error) {
 	return x.inner.IsMemberRecordError(inRecord)

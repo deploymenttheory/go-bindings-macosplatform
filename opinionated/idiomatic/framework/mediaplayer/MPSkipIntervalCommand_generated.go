@@ -38,6 +38,8 @@ func NewSkipIntervalCommand() *SkipIntervalCommand {
 	return &SkipIntervalCommand{inner: raw.MPSkipIntervalCommandFromID(_id)}
 }
 
+// An array of NSNumbers (NSTimeIntervals) that contain preferred skip intervals.
+//
 // WithPreferredIntervals sets the collection, converting the Go slice to an NSArray.
 func (x *SkipIntervalCommand) WithPreferredIntervals(items ...*foundation.NSNumber) *SkipIntervalCommand {
 	if len(items) == 0 {
@@ -56,6 +58,8 @@ func (x *SkipIntervalCommand) WithPreferredIntervals(items ...*foundation.NSNumb
 	return x
 }
 
+// Whether a button (for example) should be enabled and tappable for this particular command.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *SkipIntervalCommand) WithEnabled(enabled bool) *SkipIntervalCommand {
 	x.inner.MPRemoteCommand.SetEnabled(enabled)

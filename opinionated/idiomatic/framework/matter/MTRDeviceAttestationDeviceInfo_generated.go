@@ -36,21 +36,29 @@ func NewMTRDeviceAttestationDeviceInfo() *MTRDeviceAttestationDeviceInfo {
 	return &MTRDeviceAttestationDeviceInfo{inner: raw.MTRDeviceAttestationDeviceInfoFromID(_id)}
 }
 
+// The vendor ID from the Device Attestation Certificate. May be nil only if attestation verification failed.
+//
 // VendorID calls the underlying VendorID.
 func (x *MTRDeviceAttestationDeviceInfo) VendorID() *foundation.NSNumber {
 	return x.inner.VendorID()
 }
 
+// The product ID from the Device Attestation Certificate. May be nil only if attestation verification failed.
+//
 // ProductID calls the underlying ProductID.
 func (x *MTRDeviceAttestationDeviceInfo) ProductID() *foundation.NSNumber {
 	return x.inner.ProductID()
 }
 
+// The vendor ID value from the device's Basic Information cluster that was used for device attestation.  If attestation succeeds, this must match the vendor ID from the certification declaration.
+//
 // BasicInformationVendorID calls the underlying BasicInformationVendorID.
 func (x *MTRDeviceAttestationDeviceInfo) BasicInformationVendorID() *foundation.NSNumber {
 	return x.inner.BasicInformationVendorID()
 }
 
+// The product ID value from the device's Basic Information cluster that was used for device attestation.  If attestation succeeds, this must match one of the product IDs from the certification declaration.
+//
 // BasicInformationProductID calls the underlying BasicInformationProductID.
 func (x *MTRDeviceAttestationDeviceInfo) BasicInformationProductID() *foundation.NSNumber {
 	return x.inner.BasicInformationProductID()
@@ -71,26 +79,36 @@ func (x *MTRDeviceAttestationDeviceInfo) CertificateDeclaration() *foundation.NS
 	return x.inner.CertificateDeclaration()
 }
 
+// The attestation challenge from the secure session.
+//
 // AttestationChallenge calls the underlying AttestationChallenge.
 func (x *MTRDeviceAttestationDeviceInfo) AttestationChallenge() *foundation.NSData {
 	return x.inner.AttestationChallenge()
 }
 
+// The attestation nonce from the AttestationRequest command.
+//
 // AttestationNonce calls the underlying AttestationNonce.
 func (x *MTRDeviceAttestationDeviceInfo) AttestationNonce() *foundation.NSData {
 	return x.inner.AttestationNonce()
 }
 
+// The TLV-encoded attestation_elements_message that was used to find the certificationDeclaration (possibly unsuccessfully).
+//
 // ElementsTLV calls the underlying ElementsTLV.
 func (x *MTRDeviceAttestationDeviceInfo) ElementsTLV() *foundation.NSData {
 	return x.inner.ElementsTLV()
 }
 
+// The certification declaration of the device, if available.  This is a DER-encoded string representing a CMS-formatted certification declaration.  May be nil only if attestation verification failed.
+//
 // CertificationDeclaration calls the underlying CertificationDeclaration.
 func (x *MTRDeviceAttestationDeviceInfo) CertificationDeclaration() *foundation.NSData {
 	return x.inner.CertificationDeclaration()
 }
 
+// A signature, using the device attestation private key of the device that sent the attestation information, over the concatenation of elementsTLV and attestationChallenge.
+//
 // ElementsSignature calls the underlying ElementsSignature.
 func (x *MTRDeviceAttestationDeviceInfo) ElementsSignature() *foundation.NSData {
 	return x.inner.ElementsSignature()

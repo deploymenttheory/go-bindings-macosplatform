@@ -37,6 +37,8 @@ func NewXMLNode() *XMLNode {
 	return &XMLNode{inner: raw.NSXMLNodeFromID(_id)}
 }
 
+// @method initWithKind: @abstract Invokes @link initWithKind:options: @/link with options set to NSXMLNodeOptionsNone
+//
 // NewXMLNodeWithKind creates a new [XMLNode].
 func NewXMLNodeWithKind(kind NSXMLNodeKind) *XMLNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLNode")), objc.RegisterName("alloc"))
@@ -44,6 +46,8 @@ func NewXMLNodeWithKind(kind NSXMLNodeKind) *XMLNode {
 	return &XMLNode{inner: raw.NSXMLNodeFromID(_id)}
 }
 
+// @method initWithKind:options: @abstract Inits a node with fidelity options as description NSXMLNodeOptions.h
+//
 // NewXMLNodeWithKindOptions creates a new [XMLNode].
 func NewXMLNodeWithKindOptions(kind NSXMLNodeKind, options NSXMLNodeOptions) *XMLNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLNode")), objc.RegisterName("alloc"))
@@ -51,24 +55,32 @@ func NewXMLNodeWithKindOptions(kind NSXMLNodeKind, options NSXMLNodeOptions) *XM
 	return &XMLNode{inner: raw.NSXMLNodeFromID(_id)}
 }
 
+// @abstract Sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *XMLNode) WithName(name string) *XMLNode {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @abstract Sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *XMLNode) WithObjectValue(objectValue objc.ID) *XMLNode {
 	x.inner.SetObjectValue(objectValue)
 	return x
 }
 
+// @abstract Sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *XMLNode) WithStringValue(stringValue string) *XMLNode {
 	x.inner.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// @abstract Set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
+//
 // WithURI sets the uRI property and returns the receiver for chaining.
 func (x *XMLNode) WithURI(uRI string) *XMLNode {
 	x.inner.SetURI(foundation.NSStringStringWithUTF8String(uRI))
@@ -81,11 +93,15 @@ func (x *XMLNode) WithScriptingProperties(scriptingProperties *raw.NSDictionary[
 	return x
 }
 
+// @method setStringValue:resolvingEntities: @abstract Sets the content as with @link setStringValue: @/link, but when "resolve" is true, character references, predefined entities and user entities available in the document's dtd are resolved. Entities not available in the dtd remain in their entity form.
+//
 // SetStringValueResolvingEntities calls the underlying SetStringValueResolvingEntities.
 func (x *XMLNode) SetStringValueResolvingEntities(string_ string, resolve bool) {
 	x.inner.SetStringValueResolvingEntities(foundation.NSStringStringWithUTF8String(string_), resolve)
 }
 
+// @method childAtIndex: @abstract Returns the child node at a particular index.
+//
 // ChildAtIndex calls the underlying ChildAtIndex.
 func (x *XMLNode) ChildAtIndex(index uint) *XMLNode {
 	_r := x.inner.ChildAtIndex(index)
@@ -95,11 +111,15 @@ func (x *XMLNode) ChildAtIndex(index uint) *XMLNode {
 	return &XMLNode{inner: _r}
 }
 
+// @method detach: @abstract Detaches this node from its parent.
+//
 // Detach calls the underlying Detach.
 func (x *XMLNode) Detach() {
 	x.inner.Detach()
 }
 
+// @method XMLStringWithOptions: @abstract The representation of this node as it would appear in an XML document, with various output options available.
+//
 // XMLStringWithOptions calls the underlying XMLStringWithOptions.
 func (x *XMLNode) XMLStringWithOptions(options NSXMLNodeOptions) *String {
 	_r := x.inner.XMLStringWithOptions(raw.NSXMLNodeOptions(options))
@@ -109,6 +129,8 @@ func (x *XMLNode) XMLStringWithOptions(options NSXMLNodeOptions) *String {
 	return &String{inner: _r}
 }
 
+// @method canonicalXMLStringPreservingComments: @abstract W3 canonical form (http://www.w3.org/TR/xml-c14n). The input option NSXMLNodePreserveWhitespace should be set for true canonical form.
+//
 // CanonicalXMLStringPreservingComments calls the underlying CanonicalXMLStringPreservingComments.
 func (x *XMLNode) CanonicalXMLStringPreservingComments(comments bool) *String {
 	_r := x.inner.CanonicalXMLStringPreservingComments(comments)
@@ -118,11 +140,15 @@ func (x *XMLNode) CanonicalXMLStringPreservingComments(comments bool) *String {
 	return &String{inner: _r}
 }
 
+// @method nodesForXPath:error: @abstract Returns the nodes resulting from applying an XPath to this node using the node as the context item ("."). normalizeAdjacentTextNodesPreservingCDATA:NO should be called if there are adjacent text nodes since they are not allowed under the XPath/XQuery Data Model. @returns An array whose elements are a kind of NSXMLNode.
+//
 // NodesForXPathError calls the underlying NodesForXPathError.
 func (x *XMLNode) NodesForXPathError(xpath string) (*raw.NSArray[*raw.NSXMLNode], error) {
 	return x.inner.NodesForXPathError(foundation.NSStringStringWithUTF8String(xpath))
 }
 
+// @method objectsForXQuery:constants:error: @abstract Returns the objects resulting from applying an XQuery to this node using the node as the context item ("."). Constants are a name-value dictionary for constants declared "external" in the query. normalizeAdjacentTextNodesPreservingCDATA:NO should be called if there are adjacent text nodes since they are not allowed under the XPath/XQuery Data Model. @returns An array whose elements are kinds of NSArray, NSData, NSDate, NSNumber, NSString, NSURL, or NSXMLNode.
+//
 // ObjectsForXQueryConstantsError calls the underlying ObjectsForXQueryConstantsError.
 func (x *XMLNode) ObjectsForXQueryConstantsError(xquery string, constants *raw.NSDictionary[*raw.NSString, objc.ID]) (*raw.NSArray[objc.ID], error) {
 	return x.inner.ObjectsForXQueryConstantsError(foundation.NSStringStringWithUTF8String(xquery), constants)
@@ -133,11 +159,15 @@ func (x *XMLNode) ObjectsForXQueryError(xquery string) (*raw.NSArray[objc.ID], e
 	return x.inner.ObjectsForXQueryError(foundation.NSStringStringWithUTF8String(xquery))
 }
 
+// @abstract Returns an element, attribute, entity, or notation DTD node based on the full XML string.
+//
 // Kind calls the underlying Kind.
 func (x *XMLNode) Kind() NSXMLNodeKind {
 	return NSXMLNodeKind(x.inner.Kind())
 }
 
+// @abstract Sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
+//
 // Name calls the underlying Name.
 func (x *XMLNode) Name() *String {
 	_r := x.inner.Name()
@@ -152,6 +182,8 @@ func (x *XMLNode) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// @abstract Sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
+//
 // ObjectValue calls the underlying ObjectValue.
 func (x *XMLNode) ObjectValue() objc.ID {
 	return x.inner.ObjectValue()
@@ -162,6 +194,8 @@ func (x *XMLNode) SetObjectValue(objectValue objc.ID) {
 	x.inner.SetObjectValue(objectValue)
 }
 
+// @abstract Sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
+//
 // StringValue calls the underlying StringValue.
 func (x *XMLNode) StringValue() *String {
 	_r := x.inner.StringValue()
@@ -176,16 +210,22 @@ func (x *XMLNode) SetStringValue(stringValue string) {
 	x.inner.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 }
 
+// @abstract A node's index amongst its siblings.
+//
 // Index calls the underlying Index.
 func (x *XMLNode) Index() uint {
 	return x.inner.Index()
 }
 
+// @abstract The depth of the node within the tree. Documents and standalone nodes are level 0.
+//
 // Level calls the underlying Level.
 func (x *XMLNode) Level() uint {
 	return x.inner.Level()
 }
 
+// @abstract The encompassing document or nil.
+//
 // RootDocument calls the underlying RootDocument.
 func (x *XMLNode) RootDocument() *XMLDocument {
 	_r := x.inner.RootDocument()
@@ -195,6 +235,8 @@ func (x *XMLNode) RootDocument() *XMLDocument {
 	return &XMLDocument{inner: _r}
 }
 
+// @abstract The parent of this node. Documents and standalone Nodes have a nil parent; there is not a 1-to-1 relationship between parent and children, eg a namespace cannot be a child but has a parent element.
+//
 // Parent calls the underlying Parent.
 func (x *XMLNode) Parent() *XMLNode {
 	_r := x.inner.Parent()
@@ -204,11 +246,15 @@ func (x *XMLNode) Parent() *XMLNode {
 	return &XMLNode{inner: _r}
 }
 
+// @abstract The amount of children, relevant for documents, elements, and document type declarations. Use this instead of [[self children] count].
+//
 // ChildCount calls the underlying ChildCount.
 func (x *XMLNode) ChildCount() uint {
 	return x.inner.ChildCount()
 }
 
+// @abstract An immutable array of child nodes. Relevant for documents, elements, and document type declarations.
+//
 // Children returns the collection as a Go slice.
 func (x *XMLNode) Children() []*XMLNode {
 	arr := x.inner.Children()
@@ -220,6 +266,8 @@ func (x *XMLNode) Children() []*XMLNode {
 	})
 }
 
+// @abstract Returns the previous sibling, or nil if there isn't one.
+//
 // PreviousSibling calls the underlying PreviousSibling.
 func (x *XMLNode) PreviousSibling() *XMLNode {
 	_r := x.inner.PreviousSibling()
@@ -229,6 +277,8 @@ func (x *XMLNode) PreviousSibling() *XMLNode {
 	return &XMLNode{inner: _r}
 }
 
+// @abstract Returns the next sibling, or nil if there isn't one.
+//
 // NextSibling calls the underlying NextSibling.
 func (x *XMLNode) NextSibling() *XMLNode {
 	_r := x.inner.NextSibling()
@@ -238,6 +288,8 @@ func (x *XMLNode) NextSibling() *XMLNode {
 	return &XMLNode{inner: _r}
 }
 
+// @abstract Returns the previous node in document order. This can be used to walk the tree backwards.
+//
 // PreviousNode calls the underlying PreviousNode.
 func (x *XMLNode) PreviousNode() *XMLNode {
 	_r := x.inner.PreviousNode()
@@ -247,6 +299,8 @@ func (x *XMLNode) PreviousNode() *XMLNode {
 	return &XMLNode{inner: _r}
 }
 
+// @abstract Returns the next node in document order. This can be used to walk the tree forwards.
+//
 // NextNode calls the underlying NextNode.
 func (x *XMLNode) NextNode() *XMLNode {
 	_r := x.inner.NextNode()
@@ -256,6 +310,8 @@ func (x *XMLNode) NextNode() *XMLNode {
 	return &XMLNode{inner: _r}
 }
 
+// @abstract Returns the XPath to this node, for example foo/bar[2]/baz.
+//
 // XPath calls the underlying XPath.
 func (x *XMLNode) XPath() *String {
 	_r := x.inner.XPath()
@@ -265,6 +321,8 @@ func (x *XMLNode) XPath() *String {
 	return &String{inner: _r}
 }
 
+// @abstract Returns the local name bar if this attribute or element's name is foo:bar
+//
 // LocalName calls the underlying LocalName.
 func (x *XMLNode) LocalName() *String {
 	_r := x.inner.LocalName()
@@ -274,6 +332,8 @@ func (x *XMLNode) LocalName() *String {
 	return &String{inner: _r}
 }
 
+// @abstract Returns the prefix foo if this attribute or element's name if foo:bar
+//
 // Prefix calls the underlying Prefix.
 func (x *XMLNode) Prefix() *String {
 	_r := x.inner.Prefix()
@@ -283,6 +343,8 @@ func (x *XMLNode) Prefix() *String {
 	return &String{inner: _r}
 }
 
+// @abstract Set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
+//
 // URI calls the underlying URI.
 func (x *XMLNode) URI() *String {
 	_r := x.inner.URI()
@@ -297,6 +359,8 @@ func (x *XMLNode) SetURI(uRI string) {
 	x.inner.SetURI(foundation.NSStringStringWithUTF8String(uRI))
 }
 
+// @abstract The representation of this node as it would appear in an XML document.
+//
 // XMLString calls the underlying XMLString.
 func (x *XMLNode) XMLString() *String {
 	_r := x.inner.XMLString()

@@ -37,24 +37,32 @@ func NewComputePassSampleBufferAttachmentDescriptor() *ComputePassSampleBufferAt
 	return &ComputePassSampleBufferAttachmentDescriptor{inner: raw.MTLComputePassSampleBufferAttachmentDescriptorFromID(_id)}
 }
 
+// @property sampleBuffer @abstract The sample buffer to store samples for the compute-pass defined samples. If sampleBuffer is non-nil, the sample indices will be used to store samples into the sample buffer.  If no sample buffer is provided, no samples will be taken. If any of the sample indices are specified as MTLCounterDontSample, no sample will be taken for that action.
+//
 // WithSampleBuffer sets the sampleBuffer property and returns the receiver for chaining.
 func (x *ComputePassSampleBufferAttachmentDescriptor) WithSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer) *ComputePassSampleBufferAttachmentDescriptor {
 	x.inner.SetSampleBuffer(sampleBuffer)
 	return x
 }
 
+// @property startOfEncoderSampleIndex @abstract The sample index to use to store the sample taken at the start of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a compute pass will fail.
+//
 // WithStartOfEncoderSampleIndex sets the startOfEncoderSampleIndex property and returns the receiver for chaining.
 func (x *ComputePassSampleBufferAttachmentDescriptor) WithStartOfEncoderSampleIndex(startOfEncoderSampleIndex uint) *ComputePassSampleBufferAttachmentDescriptor {
 	x.inner.SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex)
 	return x
 }
 
+// @property endOfEncoderSampleIndex @abstract The sample index to use to store the sample taken at the end of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a compute pass will fail.
+//
 // WithEndOfEncoderSampleIndex sets the endOfEncoderSampleIndex property and returns the receiver for chaining.
 func (x *ComputePassSampleBufferAttachmentDescriptor) WithEndOfEncoderSampleIndex(endOfEncoderSampleIndex uint) *ComputePassSampleBufferAttachmentDescriptor {
 	x.inner.SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex)
 	return x
 }
 
+// @property sampleBuffer @abstract The sample buffer to store samples for the compute-pass defined samples. If sampleBuffer is non-nil, the sample indices will be used to store samples into the sample buffer.  If no sample buffer is provided, no samples will be taken. If any of the sample indices are specified as MTLCounterDontSample, no sample will be taken for that action.
+//
 // SampleBuffer calls the underlying SampleBuffer.
 func (x *ComputePassSampleBufferAttachmentDescriptor) SampleBuffer() raw.MTLCounterSampleBuffer {
 	return x.inner.SampleBuffer()
@@ -65,6 +73,8 @@ func (x *ComputePassSampleBufferAttachmentDescriptor) SetSampleBuffer(sampleBuff
 	x.inner.SetSampleBuffer(sampleBuffer)
 }
 
+// @property startOfEncoderSampleIndex @abstract The sample index to use to store the sample taken at the start of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a compute pass will fail.
+//
 // StartOfEncoderSampleIndex calls the underlying StartOfEncoderSampleIndex.
 func (x *ComputePassSampleBufferAttachmentDescriptor) StartOfEncoderSampleIndex() uint {
 	return x.inner.StartOfEncoderSampleIndex()
@@ -75,6 +85,8 @@ func (x *ComputePassSampleBufferAttachmentDescriptor) SetStartOfEncoderSampleInd
 	x.inner.SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex)
 }
 
+// @property endOfEncoderSampleIndex @abstract The sample index to use to store the sample taken at the end of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a compute pass will fail.
+//
 // EndOfEncoderSampleIndex calls the underlying EndOfEncoderSampleIndex.
 func (x *ComputePassSampleBufferAttachmentDescriptor) EndOfEncoderSampleIndex() uint {
 	return x.inner.EndOfEncoderSampleIndex()

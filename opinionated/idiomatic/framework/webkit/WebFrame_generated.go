@@ -33,6 +33,8 @@ func WebFrameFromID(id objc.ID) *WebFrame {
 	return &WebFrame{inner: raw.WebFrameFromID(id)}
 }
 
+// @method initWithName:webFrameView:webView: @abstract The designated initializer of WebFrame. @discussion WebFrames are normally created for you by the WebView.  You should not need to invoke this method directly. @param name The name of the frame. @param view The WebFrameView for the frame. @param webView The WebView that manages the frame. @result Returns an initialized WebFrame.
+//
 // NewWebFrameWithNameWebFrameViewWebView creates a new [WebFrame].
 func NewWebFrameWithNameWebFrameViewWebView(name string, view *raw.WebFrameView, webView *raw.WebView) *WebFrame {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WebFrame")), objc.RegisterName("alloc"))
@@ -40,46 +42,64 @@ func NewWebFrameWithNameWebFrameViewWebView(name string, view *raw.WebFrameView,
 	return &WebFrame{inner: raw.WebFrameFromID(_id)}
 }
 
+// @method loadRequest: @param request The web request to load.
+//
 // LoadRequest calls the underlying LoadRequest.
 func (x *WebFrame) LoadRequest(request *foundation.NSURLRequest) {
 	x.inner.LoadRequest(request)
 }
 
+// @method loadData:MIMEType:textEncodingName:baseURL: @param data The data to use for the main page of the document. @param MIMEType The MIME type of the data. @param encodingName The encoding of the data. @param URL The base URL to apply to relative URLs within the document.
+//
 // LoadDataMIMETypeTextEncodingNameBaseURL calls the underlying LoadDataMIMETypeTextEncodingNameBaseURL.
 func (x *WebFrame) LoadDataMIMETypeTextEncodingNameBaseURL(data *foundation.NSData, mIMEType string, encodingName string, uRL string) {
 	x.inner.LoadDataMIMETypeTextEncodingNameBaseURL(data, foundation.NSStringStringWithUTF8String(mIMEType), foundation.NSStringStringWithUTF8String(encodingName), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 }
 
+// @method loadHTMLString:baseURL: @param string The string to use for the main page of the document. @param URL The base URL to apply to relative URLs within the document.
+//
 // LoadHTMLStringBaseURL calls the underlying LoadHTMLStringBaseURL.
 func (x *WebFrame) LoadHTMLStringBaseURL(string_ string, uRL string) {
 	x.inner.LoadHTMLStringBaseURL(foundation.NSStringStringWithUTF8String(string_), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 }
 
+// @method loadAlternateHTMLString:baseURL:forUnreachableURL: @abstract Loads a page to display as a substitute for a URL that could not be reached. @discussion This allows clients to display page-loading errors in the webview itself. This is typically called while processing the WebFrameLoadDelegate method -webView:didFailProvisionalLoadWithError:forFrame: or one of the WebPolicyDelegate methods -webView:decidePolicyForMIMEType:request:frame:decisionListener: or -webView:unableToImplementPolicyWithError:frame:. If it is called from within one of those three delegate methods then the back/forward list will be maintained appropriately. @param string The string to use for the main page of the document. @param baseURL The baseURL to apply to relative URLs within the document. @param unreachableURL The URL for which this page will serve as alternate content.
+//
 // LoadAlternateHTMLStringBaseURLForUnreachableURL calls the underlying LoadAlternateHTMLStringBaseURLForUnreachableURL.
 func (x *WebFrame) LoadAlternateHTMLStringBaseURLForUnreachableURL(string_ string, baseURL string, unreachableURL string) {
 	x.inner.LoadAlternateHTMLStringBaseURLForUnreachableURL(foundation.NSStringStringWithUTF8String(string_), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(unreachableURL)))
 }
 
+// @method loadArchive: @abstract Causes WebFrame to load a WebArchive. @param archive The archive to be loaded.
+//
 // LoadArchive calls the underlying LoadArchive.
 func (x *WebFrame) LoadArchive(archive *raw.WebArchive) {
 	x.inner.LoadArchive(archive)
 }
 
+// @method stopLoading @discussion Stop any pending loads on the frame's data source, and its children.
+//
 // StopLoading calls the underlying StopLoading.
 func (x *WebFrame) StopLoading() {
 	x.inner.StopLoading()
 }
 
+// @method reload @discussion Performs HTTP/1.1 end-to-end revalidation using cache-validating conditionals if possible.
+//
 // Reload calls the underlying Reload.
 func (x *WebFrame) Reload() {
 	x.inner.Reload()
 }
 
+// @method reloadFromOrigin @discussion Performs HTTP/1.1 end-to-end reload.
+//
 // ReloadFromOrigin calls the underlying ReloadFromOrigin.
 func (x *WebFrame) ReloadFromOrigin() {
 	x.inner.ReloadFromOrigin()
 }
 
+// @method findFrameNamed: @discussion This method returns a frame with the given name. findFrameNamed returns self for _self and _current, the parent frame for _parent and the main frame for _top. findFrameNamed returns self for _parent and _top if the receiver is the mainFrame. findFrameNamed first searches from the current frame to all descending frames then the rest of the frames in the WebView. If still not found, findFrameNamed searches the frames of the other WebViews. @param name The name of the frame to find. @result The frame matching the provided name. nil if the frame is not found.
+//
 // FindFrameNamed calls the underlying FindFrameNamed.
 func (x *WebFrame) FindFrameNamed(name string) *WebFrame {
 	_r := x.inner.FindFrameNamed(foundation.NSStringStringWithUTF8String(name))
@@ -89,6 +109,8 @@ func (x *WebFrame) FindFrameNamed(name string) *WebFrame {
 	return &WebFrame{inner: _r}
 }
 
+// @property name @abstract The frame name.
+//
 // Name calls the underlying Name.
 func (x *WebFrame) Name() string {
 	_r := x.inner.Name()
@@ -98,6 +120,8 @@ func (x *WebFrame) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property webView @abstract The WebView for the document that includes this frame.
+//
 // WebView calls the underlying WebView.
 func (x *WebFrame) WebView() *WebView {
 	_r := x.inner.WebView()
@@ -107,6 +131,8 @@ func (x *WebFrame) WebView() *WebView {
 	return &WebView{inner: _r}
 }
 
+// @property frameView @abstract The WebFrameView for this frame.
+//
 // FrameView calls the underlying FrameView.
 func (x *WebFrame) FrameView() *WebFrameView {
 	_r := x.inner.FrameView()
@@ -116,6 +142,8 @@ func (x *WebFrame) FrameView() *WebFrameView {
 	return &WebFrameView{inner: _r}
 }
 
+// @property DOMDocument @abstract The DOM document of the frame. @description Returns nil if the frame does not contain a DOM document such as a standalone image.
+//
 // DOMDocument calls the underlying DOMDocument.
 func (x *WebFrame) DOMDocument() *DOMDocument {
 	_r := x.inner.DOMDocument()
@@ -125,6 +153,8 @@ func (x *WebFrame) DOMDocument() *DOMDocument {
 	return &DOMDocument{inner: _r}
 }
 
+// @property frameElement @abstract The frame element of the frame. @description The class of the result is either DOMHTMLFrameElement, DOMHTMLIFrameElement or DOMHTMLObjectElement. Returns nil if the frame is the main frame since there is no frame element for the frame in this case.
+//
 // FrameElement calls the underlying FrameElement.
 func (x *WebFrame) FrameElement() *DOMHTMLElement {
 	_r := x.inner.FrameElement()
@@ -134,6 +164,8 @@ func (x *WebFrame) FrameElement() *DOMHTMLElement {
 	return &DOMHTMLElement{inner: _r}
 }
 
+// @property dataSource @abstract The datasource for this frame. @discussion Returns the committed data source.  Will return nil if the provisional data source hasn't yet been loaded.
+//
 // DataSource calls the underlying DataSource.
 func (x *WebFrame) DataSource() *WebDataSource {
 	_r := x.inner.DataSource()
@@ -143,6 +175,8 @@ func (x *WebFrame) DataSource() *WebDataSource {
 	return &WebDataSource{inner: _r}
 }
 
+// @property provisionalDataSource @abstract The provisional datasource of this frame. @discussion Will return the provisional data source.  The provisional data source will be nil if no data source has been set on the frame, or the data source has successfully transitioned to the committed data source.
+//
 // ProvisionalDataSource calls the underlying ProvisionalDataSource.
 func (x *WebFrame) ProvisionalDataSource() *WebDataSource {
 	_r := x.inner.ProvisionalDataSource()
@@ -152,6 +186,8 @@ func (x *WebFrame) ProvisionalDataSource() *WebDataSource {
 	return &WebDataSource{inner: _r}
 }
 
+// @property parentFrame @abstract The frame containing this frame, or nil if this is a top level frame.
+//
 // ParentFrame calls the underlying ParentFrame.
 func (x *WebFrame) ParentFrame() *WebFrame {
 	_r := x.inner.ParentFrame()
@@ -161,11 +197,15 @@ func (x *WebFrame) ParentFrame() *WebFrame {
 	return &WebFrame{inner: _r}
 }
 
+// @property childFrames @abstract An array of WebFrame. @discussion The frames in the array are associated with a frame set or iframe.
+//
 // ChildFrames calls the underlying ChildFrames.
 func (x *WebFrame) ChildFrames() *foundation.NSArray[objc.ID] {
 	return x.inner.ChildFrames()
 }
 
+// @property windowObject @abstract The WebScriptObject representing the frame's JavaScript window object.
+//
 // WindowObject calls the underlying WindowObject.
 func (x *WebFrame) WindowObject() *WebScriptObject {
 	_r := x.inner.WindowObject()
@@ -175,11 +215,15 @@ func (x *WebFrame) WindowObject() *WebScriptObject {
 	return &WebScriptObject{inner: _r}
 }
 
+// @property globalContext @abstract The frame's global JavaScript execution context. @discussion Use this method to bridge between the WebKit and JavaScriptCore APIs.
+//
 // GlobalContext calls the underlying GlobalContext.
 func (x *WebFrame) GlobalContext() unsafe.Pointer {
 	return x.inner.GlobalContext()
 }
 
+// @property javaScriptContext @abstract The frame's global JavaScript execution context. @discussion Use this method to bridge between the WebKit and Objective-C JavaScriptCore API.
+//
 // JavaScriptContext calls the underlying JavaScriptContext.
 func (x *WebFrame) JavaScriptContext() *javascriptcore.JSContext {
 	return x.inner.JavaScriptContext()

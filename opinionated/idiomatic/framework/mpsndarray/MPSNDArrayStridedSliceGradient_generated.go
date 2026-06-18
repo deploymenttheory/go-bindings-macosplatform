@@ -36,6 +36,8 @@ func NewArrayStridedSliceGradient() *ArrayStridedSliceGradient {
 	return &ArrayStridedSliceGradient{inner: raw.MPSNDArrayStridedSliceGradientFromID(_id)}
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *ArrayStridedSliceGradient) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayStridedSliceGradient {
 	x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)

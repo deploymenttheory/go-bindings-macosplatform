@@ -53,18 +53,24 @@ func NewDataPointWithXYAdditionalValuesLabel(xValue *raw.AXDataPointValue, yValu
 	return &DataPoint{inner: raw.AXDataPointFromID(_id)}
 }
 
+// The x-axis value for this data point. Should be a Double for a numeric x-axis or a String for a categorical x-axis.
+//
 // WithXValue sets the xValue property and returns the receiver for chaining.
 func (x *DataPoint) WithXValue(xValue *DataPointValue) *DataPoint {
 	x.inner.SetXValue(xValue.Unwrap())
 	return x
 }
 
+// The y-axis value for this data point.
+//
 // WithYValue sets the yValue property and returns the receiver for chaining.
 func (x *DataPoint) WithYValue(yValue *DataPointValue) *DataPoint {
 	x.inner.SetYValue(yValue.Unwrap())
 	return x
 }
 
+// Any additional values for additional axes for this data point. These should be provided in the same order as their corresponding `AXDataAxisDescriptor` objects in `AXChartDescriptor.additionalAxes`.
+//
 // WithAdditionalValues sets the collection, converting the Go slice to an NSArray.
 func (x *DataPoint) WithAdditionalValues(items ...*raw.AXDataPointValue) *DataPoint {
 	if len(items) == 0 {
@@ -83,18 +89,24 @@ func (x *DataPoint) WithAdditionalValues(items ...*raw.AXDataPointValue) *DataPo
 	return x
 }
 
+// A name or label for this data point.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *DataPoint) WithLabel(label string) *DataPoint {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// An attributed version of the name or label for this data point.
+//
 // WithAttributedLabel sets the attributedLabel property and returns the receiver for chaining.
 func (x *DataPoint) WithAttributedLabel(attributedLabel *foundation.NSAttributedString) *DataPoint {
 	x.inner.SetAttributedLabel(attributedLabel)
 	return x
 }
 
+// The x-axis value for this data point. Should be a Double for a numeric x-axis or a String for a categorical x-axis.
+//
 // XValue calls the underlying XValue.
 func (x *DataPoint) XValue() *DataPointValue {
 	_r := x.inner.XValue()
@@ -109,6 +121,8 @@ func (x *DataPoint) SetXValue(xValue *raw.AXDataPointValue) {
 	x.inner.SetXValue(xValue)
 }
 
+// The y-axis value for this data point.
+//
 // YValue calls the underlying YValue.
 func (x *DataPoint) YValue() *DataPointValue {
 	_r := x.inner.YValue()
@@ -123,6 +137,8 @@ func (x *DataPoint) SetYValue(yValue *raw.AXDataPointValue) {
 	x.inner.SetYValue(yValue)
 }
 
+// Any additional values for additional axes for this data point. These should be provided in the same order as their corresponding `AXDataAxisDescriptor` objects in `AXChartDescriptor.additionalAxes`.
+//
 // AdditionalValues returns the collection as a Go slice.
 func (x *DataPoint) AdditionalValues() []*DataPointValue {
 	arr := x.inner.AdditionalValues()
@@ -139,6 +155,8 @@ func (x *DataPoint) SetAdditionalValues(additionalValues *foundation.NSArray[*ra
 	x.inner.SetAdditionalValues(additionalValues)
 }
 
+// A name or label for this data point.
+//
 // Label calls the underlying Label.
 func (x *DataPoint) Label() string {
 	_r := x.inner.Label()
@@ -153,6 +171,8 @@ func (x *DataPoint) SetLabel(label string) {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 }
 
+// An attributed version of the name or label for this data point.
+//
 // AttributedLabel calls the underlying AttributedLabel.
 func (x *DataPoint) AttributedLabel() *foundation.NSAttributedString {
 	return x.inner.AttributedLabel()

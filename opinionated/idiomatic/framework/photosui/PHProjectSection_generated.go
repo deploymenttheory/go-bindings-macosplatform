@@ -36,6 +36,8 @@ func NewProjectSection() *ProjectSection {
 	return &ProjectSection{inner: raw.PHProjectSectionFromID(_id)}
 }
 
+// Array containing one or more PHProjectSectionContent objects. Ordered by number of elements from least to most. Projects should only present one level of content to the user at a time as assets will be reused within individual content objects.
+//
 // SectionContents returns the collection as a Go slice.
 func (x *ProjectSection) SectionContents() []*ProjectSectionContent {
 	arr := x.inner.SectionContents()
@@ -47,11 +49,15 @@ func (x *ProjectSection) SectionContents() []*ProjectSectionContent {
 	})
 }
 
+// The intended usage of the section (e.g., cover, content, auxiliary)
+//
 // SectionType calls the underlying SectionType.
 func (x *ProjectSection) SectionType() PHProjectSectionType {
 	return PHProjectSectionType(x.inner.SectionType())
 }
 
+// Title for the section (e.g., a Moment name or a general geographical location), might be an empty string.
+//
 // Title calls the underlying Title.
 func (x *ProjectSection) Title() string {
 	_r := x.inner.Title()

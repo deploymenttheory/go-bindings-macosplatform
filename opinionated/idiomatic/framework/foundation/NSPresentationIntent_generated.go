@@ -42,6 +42,8 @@ func (x *PresentationIntent) WithScriptingProperties(scriptingProperties *raw.NS
 	return x
 }
 
+// Returns `YES` if this intent is equivalent to the other presentation intent. Equivalence is the same as equality except that identity is not taken into account.
+//
 // IsEquivalentToPresentationIntent calls the underlying IsEquivalentToPresentationIntent.
 func (x *PresentationIntent) IsEquivalentToPresentationIntent(other *raw.NSPresentationIntent) bool {
 	return x.inner.IsEquivalentToPresentationIntent(other)
@@ -61,16 +63,22 @@ func (x *PresentationIntent) ParentIntent() *PresentationIntent {
 	return &PresentationIntent{inner: _r}
 }
 
+// An integer value which uniquely identifies this intent in the document. Identity disambiguates attributes which apply to contiguous text -- for example, two headers in a row with the same level. It can also be used to track the location in an attributed string of a particular part of a document, even after mutation.
+//
 // Identity calls the underlying Identity.
 func (x *PresentationIntent) Identity() int {
 	return x.inner.Identity()
 }
 
+// If the intent is not a list, this value is 0.
+//
 // Ordinal calls the underlying Ordinal.
 func (x *PresentationIntent) Ordinal() int {
 	return x.inner.Ordinal()
 }
 
+// If the intent is not a table, this value is `nil`.
+//
 // ColumnAlignments returns the collection as a Go slice.
 func (x *PresentationIntent) ColumnAlignments() []*Number {
 	arr := x.inner.ColumnAlignments()
@@ -82,16 +90,22 @@ func (x *PresentationIntent) ColumnAlignments() []*Number {
 	})
 }
 
+// If the intent is not a table, this value is 0.
+//
 // ColumnCount calls the underlying ColumnCount.
 func (x *PresentationIntent) ColumnCount() int {
 	return x.inner.ColumnCount()
 }
 
+// If the intent is not a header, this value is 0.
+//
 // HeaderLevel calls the underlying HeaderLevel.
 func (x *PresentationIntent) HeaderLevel() int {
 	return x.inner.HeaderLevel()
 }
 
+// If the intent is not a code block, this value is `nil`.
+//
 // LanguageHint calls the underlying LanguageHint.
 func (x *PresentationIntent) LanguageHint() *String {
 	_r := x.inner.LanguageHint()
@@ -101,16 +115,22 @@ func (x *PresentationIntent) LanguageHint() *String {
 	return &String{inner: _r}
 }
 
+// The column to which this cell belongs (0-based). If the intent is not a cell, this value is 0.
+//
 // Column calls the underlying Column.
 func (x *PresentationIntent) Column() int {
 	return x.inner.Column()
 }
 
+// The row to which this cell belongs (0-based). If the intent is not a row, this value is 0. Header rows are always row 0. If the table has more rows, those start at row 1.
+//
 // Row calls the underlying Row.
 func (x *PresentationIntent) Row() int {
 	return x.inner.Row()
 }
 
+// The indentation level of this intent. Each nested list increases the indentation level by one; all elements within the same list (and not then nested into a child list intent) have the same indentation level. Text outside list intents has an indentation level of 0.
+//
 // IndentationLevel calls the underlying IndentationLevel.
 func (x *PresentationIntent) IndentationLevel() int {
 	return x.inner.IndentationLevel()

@@ -33,6 +33,8 @@ func MTRBaseClusterSwitchFromID(id objc.ID) *MTRBaseClusterSwitch {
 	return &MTRBaseClusterSwitch{inner: raw.MTRBaseClusterSwitchFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterSwitchWithDeviceEndpointIDQueue creates a new [MTRBaseClusterSwitch].
 func NewMTRBaseClusterSwitchWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterSwitch {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterSwitch")), objc.RegisterName("alloc"))

@@ -36,6 +36,8 @@ func MTROvenCavityOperationalStateClusterOperationalCommandResponseParamsFromID(
 	return &MTROvenCavityOperationalStateClusterOperationalCommandResponseParams{inner: raw.MTROvenCavityOperationalStateClusterOperationalCommandResponseParamsFromID(id)}
 }
 
+// Initialize an MTROvenCavityOperationalStateClusterOperationalCommandResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+//
 // NewMTROvenCavityOperationalStateClusterOperationalCommandResponseParamsWithResponseValueError creates a new [MTROvenCavityOperationalStateClusterOperationalCommandResponseParams].
 func NewMTROvenCavityOperationalStateClusterOperationalCommandResponseParamsWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROvenCavityOperationalStateClusterOperationalCommandResponseParams")), objc.RegisterName("alloc"))

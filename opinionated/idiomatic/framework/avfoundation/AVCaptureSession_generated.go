@@ -38,128 +38,178 @@ func NewCaptureSession() *CaptureSession {
 	return &CaptureSession{inner: raw.AVCaptureSessionFromID(_id)}
 }
 
+// @property sessionPreset @abstract Indicates the session preset currently in use by the receiver. @discussion The value of this property is an AVCaptureSessionPreset indicating the current session preset in use by the receiver. The sessionPreset property may be set while the receiver is running.
+//
 // WithSessionPreset sets the sessionPreset property and returns the receiver for chaining.
 func (x *CaptureSession) WithSessionPreset(sessionPreset *foundation.NSString) *CaptureSession {
 	x.inner.SetSessionPreset(sessionPreset)
 	return x
 }
 
+// A `BOOL` value that indicates whether deferred start runs automatically. Deferred Start is a feature that allows you to control, on a per-output basis, whether output objects start when or after the session is started. The session defers starting an output when its “AVCaptureOutput/deferredStartEnabled“ property is set to `true`, and starts it after the session is started. When this value is `true`, “AVCaptureSession“ automatically runs deferred start. If only “AVCaptureVideoPreviewLayer“ objects have “AVCaptureVideoPreviewLayer/deferredStartEnabled“ set to `false`, the session runs deferred start a short time after displaying the first frame. If there are “AVCaptureOutput“ objects that have “AVCaptureOutput/deferredStartEnabled“ set to `false`, then the session waits until each output that provides streaming data to your app sends its first frame. If you set this value to `false`, call “runDeferredStartWhenNeeded“ to indicate when to run deferred start. By default, for apps that are linked on or after iOS 26, this value is `true`. - Note: If “manualDeferredStartSupported“ is `false`, setting this property value to `false` results in the session throwing an `NSInvalidArgumentException`. - Note: Set this value before committing the configuration.
+//
 // WithAutomaticallyRunsDeferredStart sets the automaticallyRunsDeferredStart property and returns the receiver for chaining.
 func (x *CaptureSession) WithAutomaticallyRunsDeferredStart(automaticallyRunsDeferredStart bool) *CaptureSession {
 	x.inner.SetAutomaticallyRunsDeferredStart(automaticallyRunsDeferredStart)
 	return x
 }
 
+// @method canSetSessionPreset: @abstract Returns whether the receiver can be configured with the given preset. @param preset An AVCaptureSession preset. @result YES if the receiver can be set to the given preset, NO otherwise. @discussion An AVCaptureSession instance can be associated with a preset that configures its inputs and outputs to fulfill common use cases. This method can be used to determine if the receiver supports the desired preset given its current input and output configuration. The receiver's sessionPreset property may only be set to a certain preset if this method returns YES for that preset.
+//
 // CanSetSessionPreset calls the underlying CanSetSessionPreset.
 func (x *CaptureSession) CanSetSessionPreset(preset *foundation.NSString) bool {
 	return x.inner.CanSetSessionPreset(preset)
 }
 
+// @method canAddInput: @abstract Returns whether the proposed input can be added to the receiver. @param input An AVCaptureInput instance. @result YES if the proposed input can be added to the receiver, NO otherwise. @discussion An AVCaptureInput instance can only be added to a session using -addInput: if -canAddInput: returns YES, otherwise an NSInvalidArgumentException is thrown.
+//
 // CanAddInput calls the underlying CanAddInput.
 func (x *CaptureSession) CanAddInput(input *raw.AVCaptureInput) bool {
 	return x.inner.CanAddInput(input)
 }
 
+// @method addInput: @abstract Adds an AVCaptureInput to the session. @param input An AVCaptureInput instance. @discussion An AVCaptureInput instance can only be added to a session using -addInput: if -canAddInput: returns YES, otherwise an NSInvalidArgumentException is thrown. -addInput: may be called while the session is running.
+//
 // AddInput calls the underlying AddInput.
 func (x *CaptureSession) AddInput(input *raw.AVCaptureInput) {
 	x.inner.AddInput(input)
 }
 
+// @method removeInput: @abstract Removes an AVCaptureInput from the session. @param input An AVCaptureInput instance. @discussion -removeInput: may be called while the session is running.
+//
 // RemoveInput calls the underlying RemoveInput.
 func (x *CaptureSession) RemoveInput(input *raw.AVCaptureInput) {
 	x.inner.RemoveInput(input)
 }
 
+// @method canAddOutput: @abstract Returns whether the proposed output can be added to the receiver. @param output An AVCaptureOutput instance. @result YES if the proposed output can be added to the receiver, NO otherwise. @discussion An AVCaptureOutput instance can only be added to a session using -addOutput: if -canAddOutput: returns YES, otherwise an NSInvalidArgumentException is thrown. On iOS and Mac Catalyst, some limitations to adding combinations of different types of outputs apply: - A maximum of one output of each type may be added. For applications linked on or after iOS 16.0, this restriction no longer applies to AVCaptureVideoDataOutputs. When adding more than one AVCaptureVideoDataOutput, AVCaptureSession.hardwareCost must be taken into account. - A session cannot contain both an AVCaptureStillImageOutput and an AVCapturePhotoOutput at the same time. - Prior to iOS 16.0, an AVCaptureVideoDataOutput and an AVCaptureMovieFileOutput may be added to the same session, but only one may have its connection active. When both have their connections enabled, the AVCaptureMovieFileOutput "wins" and the AVCaptureVideoDataOutput's connection becomes inactive. For applications linked on or after iOS 16.0, this restriction has been lifted. When adding multiple AVCaptureVideoDataOutputs or a combination of AVCaptureVideoDataOutputs and an AVCaptureMovieFileOutput, AVCaptureSession.hardwareCost must be taken into account. - Similarly, prior to iOS 16.0, an AVCaptureAudioDataOutput and an AVCaptureMovieFileOutput may be added to the same session, but only one may have its connection active. When both have their connections enabled, the AVCaptureMovieFileOutput "wins" and the AVCaptureAudioDataOutput's connection becomes inactive. For applications linked on or after iOS 16.0, this restriction has been lifted.
+//
 // CanAddOutput calls the underlying CanAddOutput.
 func (x *CaptureSession) CanAddOutput(output *raw.AVCaptureOutput) bool {
 	return x.inner.CanAddOutput(output)
 }
 
+// @method addOutput: @abstract Adds an AVCaptureOutput to the session. @param output An AVCaptureOutput instance. @discussion An AVCaptureOutput instance can only be added to a session using -addOutput: if -canAddOutput: returns YES, otherwise an NSInvalidArgumentException is thrown. -addOutput: may be called while the session is running.
+//
 // AddOutput calls the underlying AddOutput.
 func (x *CaptureSession) AddOutput(output *raw.AVCaptureOutput) {
 	x.inner.AddOutput(output)
 }
 
+// @method removeOutput: @abstract Removes an AVCaptureOutput from the session. @param output An AVCaptureOutput instance. @discussion -removeOutput: may be called while the session is running.
+//
 // RemoveOutput calls the underlying RemoveOutput.
 func (x *CaptureSession) RemoveOutput(output *raw.AVCaptureOutput) {
 	x.inner.RemoveOutput(output)
 }
 
+// @method addInputWithNoConnections: @abstract Adds an AVCaptureInput to the session without forming any connections. @param input An AVCaptureInput instance. @discussion An AVCaptureInput instance can only be added to a session using -addInputWithNoConnections: if -canAddInput: returns YES, otherwise an NSInvalidArgumentException is thrown. -addInputWithNoConnections: may be called while the session is running. The -addInput: method is the preferred method for adding an input to an AVCaptureSession. -addInputWithNoConnections: may be called if you need fine-grained control over which inputs are connected to which outputs.
+//
 // AddInputWithNoConnections calls the underlying AddInputWithNoConnections.
 func (x *CaptureSession) AddInputWithNoConnections(input *raw.AVCaptureInput) {
 	x.inner.AddInputWithNoConnections(input)
 }
 
+// @method addOutputWithNoConnections: @abstract Adds an AVCaptureOutput to the session without forming any connections. @param output An AVCaptureOutput instance. @discussion An AVCaptureOutput instance can only be added to a session using -addOutputWithNoConnections: if -canAddOutput: returns YES, otherwise an NSInvalidArgumentException is thrown. -addOutputWithNoConnections: may be called while the session is running. The -addOutput: method is the preferred method for adding an output to an AVCaptureSession. -addOutputWithNoConnections: may be called if you need fine-grained control over which inputs are connected to which outputs.
+//
 // AddOutputWithNoConnections calls the underlying AddOutputWithNoConnections.
 func (x *CaptureSession) AddOutputWithNoConnections(output *raw.AVCaptureOutput) {
 	x.inner.AddOutputWithNoConnections(output)
 }
 
+// @method canAddConnection: @abstract Returns whether the proposed connection can be added to the receiver. @param connection An AVCaptureConnection instance. @discussion An AVCaptureConnection instance can only be added to a session using -addConnection: if -canAddConnection: returns YES, otherwise an NSInvalidArgumentException is thrown. When using -addInput: or -addOutput:, connections are formed automatically between all compatible inputs and outputs. Manually adding connections is only necessary when adding an input or output with no connections.
+//
 // CanAddConnection calls the underlying CanAddConnection.
 func (x *CaptureSession) CanAddConnection(connection *raw.AVCaptureConnection) bool {
 	return x.inner.CanAddConnection(connection)
 }
 
+// @method addConnection: @abstract Adds an AVCaptureConnection to the session. @param connection An AVCaptureConnection instance. @discussion An AVCaptureConnection instance can only be added to a session using -addConnection: if canAddConnection: returns YES, otherwise an NSInvalidArgumentException is thrown. When using -addInput: or -addOutput:, connections are formed automatically between all compatible inputs and outputs. Manually adding connections is only necessary when adding an input or output with no connections. -addConnection: may be called while the session is running.
+//
 // AddConnection calls the underlying AddConnection.
 func (x *CaptureSession) AddConnection(connection *raw.AVCaptureConnection) {
 	x.inner.AddConnection(connection)
 }
 
+// @method removeConnection: @abstract Removes an AVCaptureConnection from the session. @param connection An AVCaptureConnection instance. @discussion -removeConnection: may be called while the session is running.
+//
 // RemoveConnection calls the underlying RemoveConnection.
 func (x *CaptureSession) RemoveConnection(connection *raw.AVCaptureConnection) {
 	x.inner.RemoveConnection(connection)
 }
 
+// @method setControlsDelegate:queue: @abstract Sets the receiver's controls delegate that receives events about the session's controls and the dispatch queue on which the delegate is called. @param controlsDelegate An object conforming to the `AVCaptureSessionControlsDelegate` protocol that receives events about the session's controls. @param controlsDelegateCallbackQueue A dispatch queue on which all delegate methods are called. @discussion Users can interact with an `AVCaptureSession`'s controls by performing specific gestures to enable their visibility. A delegate may be specified to be informed when the controls can be interacted with and are dismissed. All delegate methods will be called on the specified dispatch queue. A serial dispatch queue must be used to guarantee that delegate callbacks will be delivered in order. The `controlsDelegateCallbackQueue` parameter may not be `NULL`, except when setting the `controlsDelegate` to `nil` otherwise `-setControlsDelegate:queue:` throws an `NSInvalidArgumentException`.
+//
 // SetControlsDelegateQueue calls the underlying SetControlsDelegateQueue.
 func (x *CaptureSession) SetControlsDelegateQueue(controlsDelegate raw.AVCaptureSessionControlsDelegate, controlsDelegateCallbackQueue *foundation.NSObject) {
 	x.inner.SetControlsDelegateQueue(controlsDelegate, controlsDelegateCallbackQueue)
 }
 
+// @method canAddControl: @abstract Returns whether the proposed control can be added to the session. @param control An `AVCaptureControl` instance. @result `YES` if the proposed control can be added to the session, `NO` otherwise. @discussion An `AVCaptureControl` instance can only be added to a session using `-addControl:` if `-canAddControl:` returns `YES`. For example, some platforms do not support controls. Instances of `AVCaptureSlider`, `AVCaptureToggle` and `AVCaptureIndexPicker` must have an action and an action queue set before being added to a session.
+//
 // CanAddControl calls the underlying CanAddControl.
 func (x *CaptureSession) CanAddControl(control *raw.AVCaptureControl) bool {
 	return x.inner.CanAddControl(control)
 }
 
+// @method addControl: @abstract Adds an `AVCaptureControl` instance to the session. @param control An `AVCaptureControl` instance. @discussion An `AVCaptureControl` instance can only be added to a session using `-addControl:` if `-canAddControl:` returns `YES`, otherwise an `NSInvalidArgumentException` is thrown. `-addControl:` may be called while the session is running. For an `AVCaptureControl` instance to become active, an `AVCaptureSessionControlsDelegate` must be set on the session.
+//
 // AddControl calls the underlying AddControl.
 func (x *CaptureSession) AddControl(control *raw.AVCaptureControl) {
 	x.inner.AddControl(control)
 }
 
+// @method removeControl: @abstract Removes an `AVCaptureControl` instance from the session. @param control An `AVCaptureControl` instance. @discussion `-removeControl:` may be called while the session is running.
+//
 // RemoveControl calls the underlying RemoveControl.
 func (x *CaptureSession) RemoveControl(control *raw.AVCaptureControl) {
 	x.inner.RemoveControl(control)
 }
 
+// @method beginConfiguration @abstract When paired with commitConfiguration, allows a client to batch multiple configuration operations on a running session into atomic updates. @discussion -beginConfiguration / -commitConfiguration are AVCaptureSession's mechanism for batching multiple configuration operations on a running session into atomic updates. After calling [session beginConfiguration], clients may add or remove outputs, alter the sessionPreset, or configure individual AVCaptureInput or Output properties. All changes will be pended until the client calls [session commitConfiguration], at which time they will be applied together. -beginConfiguration / -commitConfiguration pairs may be nested, and will only be applied when the outermost commit is invoked. If you've called -beginConfiguration, you must call -commitConfiguration before invoking -startRunning or -stopRunning, otherwise an NSGenericException is thrown.
+//
 // BeginConfiguration calls the underlying BeginConfiguration.
 func (x *CaptureSession) BeginConfiguration() {
 	x.inner.BeginConfiguration()
 }
 
+// @method commitConfiguration @abstract When preceded by beginConfiguration, allows a client to batch multiple configuration operations on a running session into atomic updates. @discussion -beginConfiguration / -commitConfiguration are AVCaptureSession's mechanism for batching multiple configuration operations on a running session into atomic updates. After calling [session beginConfiguration], clients may add or remove outputs, alter the sessionPreset, or configure individual AVCaptureInput or Output properties. All changes will be pended until the client calls [session commitConfiguration], at which time they will be applied together. -beginConfiguration / -commitConfiguration pairs may be nested, and will only be applied when the outermost commit is invoked. If you've called -beginConfiguration, you must call -commitConfiguration before invoking -startRunning or -stopRunning, otherwise an NSGenericException is thrown.
+//
 // CommitConfiguration calls the underlying CommitConfiguration.
 func (x *CaptureSession) CommitConfiguration() {
 	x.inner.CommitConfiguration()
 }
 
+// @method startRunning @abstract Starts an AVCaptureSession instance running. @discussion Clients invoke -startRunning to start the flow of data from inputs to outputs connected to the AVCaptureSession instance. This call blocks until the session object has completely started up or failed. A failure to start running is reported through the AVCaptureSessionRuntimeErrorNotification mechanism. If you've called -beginConfiguration, you must call -commitConfiguration before invoking -startRunning, otherwise an NSGenericException is thrown.
+//
 // StartRunning calls the underlying StartRunning.
 func (x *CaptureSession) StartRunning() {
 	x.inner.StartRunning()
 }
 
+// @method stopRunning @abstract Stops an AVCaptureSession instance that is currently running. @discussion Clients invoke -stopRunning to stop the flow of data from inputs to outputs connected to the AVCaptureSession instance. This call blocks until the session object has completely stopped. -stopRunning may not be called while the session is being configured. If you've called -beginConfiguration, you must call -commitConfiguration before invoking -stopRunning, otherwise an NSGenericException is thrown.
+//
 // StopRunning calls the underlying StopRunning.
 func (x *CaptureSession) StopRunning() {
 	x.inner.StopRunning()
 }
 
+// Tells the session to run deferred start when appropriate. For best perceived startup performance, call this after displaying the first frame, so that deferred start processing doesn't interfere with other initialization operations. For example, if using a <doc://com.apple.documentation/documentation/quartzcore/cametallayer> to draw camera frames, add a `presentHandler` (using <doc://com.apple.documentation/metal/mtldrawable/addpresentedhandler>) to the first drawable and call “runDeferredStartWhenNeeded“ from there. If one or more outputs need to start to perform a capture operation, and “runDeferredStartWhenNeeded“ has not run yet, the session runs the deferred start on your app's behalf. Only call this method once for each configuration commit - after the first call, subsequent calls to “runDeferredStartWhenNeeded“ have no effect. The deferred start runs asynchronously, so this method returns immediately. - Note: You can only call this when “automaticallyRunsDeferredStart“ is `false`. Otherwise, the session throws an `NSInvalidArgumentException`. - Important: To avoid blocking your app's UI, don't call this method from the application's main actor or queue.
+//
 // RunDeferredStartWhenNeeded calls the underlying RunDeferredStartWhenNeeded.
 func (x *CaptureSession) RunDeferredStartWhenNeeded() {
 	x.inner.RunDeferredStartWhenNeeded()
 }
 
+// Sets a delegate object for the session to call when performing deferred start. This delegate receives a call to the “AVCaptureSessionDeferredStartDelegate/sessionWillRunDeferredStart:“ method when deferred start is about to run. It is non-blocking, so by the time this method is called, the deferred start may already be underway. If you want your app to perform initialization (potentially) concurrently with deferred start (e.g. user-facing camera features that are not needed to display the first preview frame, but are available to the user as soon as possible) it may be done in the delegate's “AVCaptureSessionDeferredStartDelegate/sessionWillRunDeferredStart:“ method. To wait until deferred start is finished to perform some remaining initialization work, use the “AVCaptureSessionDeferredStartDelegate/sessionDidRunDeferredStart:“ method instead. The delegate receives a call to the “AVCaptureSessionDeferredStartDelegate/sessionDidRunDeferredStart:“ method when the deferred start finishes running. This allows you to run less-critical application initialization code. For example, if you've deferred an “AVCapturePhotoOutput“ by setting its “AVCaptureOutput/deferredStartEnabled“ property to `true`, and you'd like to do some app-specific initialization related to still capture, here might be a good place to put it. If the delegate is non-nil, the session still calls the “AVCaptureSessionDeferredStartDelegate/sessionWillRunDeferredStart:“ and “AVCaptureSessionDeferredStartDelegate/sessionDidRunDeferredStart:“ methods regardless of the value of the session's “automaticallyRunsDeferredStart“ property. To minimize the capture session's startup latency, defer all unnecessary work until after the session starts. This delegate provides callbacks for you to schedule deferred work without impacting session startup performance. To perform initialization prior to deferred start but after the user interface displays, set “automaticallyRunsDeferredStart“ to `false`, and then run the custom initialization prior to calling “runDeferredStartWhenNeeded“. If “deferredStartDelegate“ is not `NULL`, the session throws an exception if “deferredStartDelegateCallbackQueue“ is `nil`. - Parameter deferredStartDelegate: An object conforming to the “AVCaptureSessionDeferredStartDelegate“ protocol that receives events about deferred start. - Parameter deferredStartDelegateCallbackQueue: A dispatch queue on which deferredStart delegate methods are called.
+//
 // SetDeferredStartDelegateDeferredStartDelegateCallbackQueue calls the underlying SetDeferredStartDelegateDeferredStartDelegateCallbackQueue.
 func (x *CaptureSession) SetDeferredStartDelegateDeferredStartDelegateCallbackQueue(deferredStartDelegate raw.AVCaptureSessionDeferredStartDelegate, deferredStartDelegateCallbackQueue *foundation.NSObject) {
 	x.inner.SetDeferredStartDelegateDeferredStartDelegateCallbackQueue(deferredStartDelegate, deferredStartDelegateCallbackQueue)
 }
 
+// @property sessionPreset @abstract Indicates the session preset currently in use by the receiver. @discussion The value of this property is an AVCaptureSessionPreset indicating the current session preset in use by the receiver. The sessionPreset property may be set while the receiver is running.
+//
 // SessionPreset calls the underlying SessionPreset.
 func (x *CaptureSession) SessionPreset() string {
 	_r := x.inner.SessionPreset()
@@ -174,6 +224,8 @@ func (x *CaptureSession) SetSessionPreset(sessionPreset *foundation.NSString) {
 	x.inner.SetSessionPreset(sessionPreset)
 }
 
+// @property inputs @abstract An NSArray of AVCaptureInputs currently added to the receiver. @discussion The value of this property is an NSArray of AVCaptureInputs currently added to the receiver. Clients can add AVCaptureInputs to a session by calling -addInput:.
+//
 // Inputs returns the collection as a Go slice.
 func (x *CaptureSession) Inputs() []*CaptureInput {
 	arr := x.inner.Inputs()
@@ -185,6 +237,8 @@ func (x *CaptureSession) Inputs() []*CaptureInput {
 	})
 }
 
+// @property outputs @abstract An NSArray of AVCaptureOutputs currently added to the receiver. @discussion The value of this property is an NSArray of AVCaptureOutputs currently added to the receiver. Clients can add AVCaptureOutputs to a session by calling -addOutput:.
+//
 // Outputs returns the collection as a Go slice.
 func (x *CaptureSession) Outputs() []*CaptureOutput {
 	arr := x.inner.Outputs()
@@ -196,6 +250,8 @@ func (x *CaptureSession) Outputs() []*CaptureOutput {
 	})
 }
 
+// @property connections @abstract An NSArray of AVCaptureConnections currently added to the receiver. @discussion The value of this property is an NSArray of AVCaptureConnections currently added to the receiver. Connections are formed implicitly by the receiver when a client calls -addInput: or -addOutput:. Connections are formed explicitly when a client calls -addConnection:.
+//
 // Connections returns the collection as a Go slice.
 func (x *CaptureSession) Connections() []*CaptureConnection {
 	arr := x.inner.Connections()
@@ -207,26 +263,36 @@ func (x *CaptureSession) Connections() []*CaptureConnection {
 	})
 }
 
+// @property supportsControls @abstract Indicates whether session controls are supported on this platform. @discussion `AVCaptureControl`s are only supported on platforms with necessary hardware.
+//
 // SupportsControls calls the underlying SupportsControls.
 func (x *CaptureSession) SupportsControls() bool {
 	return x.inner.SupportsControls()
 }
 
+// @property maxControlsCount @abstract Specifies the maximum number of controls that can be added to a session.
+//
 // MaxControlsCount calls the underlying MaxControlsCount.
 func (x *CaptureSession) MaxControlsCount() int {
 	return x.inner.MaxControlsCount()
 }
 
+// @property controlsDelegate @abstract The receiver's controls delegate. @discussion The value of this property is an object conforming to the `AVCaptureSessionControlsDelegate` protocol that receives events about the session's controls. The delegate is set using the `-setControlsDelegate:queue:` method. A controls delegate must be specified for controls to become active.
+//
 // ControlsDelegate calls the underlying ControlsDelegate.
 func (x *CaptureSession) ControlsDelegate() raw.AVCaptureSessionControlsDelegate {
 	return x.inner.ControlsDelegate()
 }
 
+// @property controlsDelegateCallbackQueue @abstract The dispatch queue on which all controls delegate methods will be called. @discussion The value of this property is a `dispatch_queue_t`. The queue is set using the `-setControlsDelegate:queue:` method.
+//
 // ControlsDelegateCallbackQueue calls the underlying ControlsDelegateCallbackQueue.
 func (x *CaptureSession) ControlsDelegateCallbackQueue() *foundation.NSObject {
 	return x.inner.ControlsDelegateCallbackQueue()
 }
 
+// @property controls @abstract An `NSArray` of `AVCaptureControl`s currently added to the session. @discussion The value of this property is an `NSArray` of `AVCaptureControl`s currently added to the session. Clients can add `AVCaptureControl`s to a session by calling `-addControl:`.
+//
 // Controls returns the collection as a Go slice.
 func (x *CaptureSession) Controls() []*CaptureControl {
 	arr := x.inner.Controls()
@@ -238,26 +304,36 @@ func (x *CaptureSession) Controls() []*CaptureControl {
 	})
 }
 
+// @property running @abstract Indicates whether the session is currently running. @discussion The value of this property is a BOOL indicating whether the receiver is running. Clients can key value observe the value of this property to be notified when the session automatically starts or stops running.
+//
 // IsRunning calls the underlying IsRunning.
 func (x *CaptureSession) IsRunning() bool {
 	return x.inner.IsRunning()
 }
 
+// @property synchronizationClock @abstract Provides the clock being used for synchronization. @discussion synchronizationClock is readonly. Use synchronizationClock to synchronize AVCaptureOutput data with external data sources (e.g motion samples). All capture output sample buffer timestamps are on the synchronizationClock timebase. For example, if you want to reverse synchronize the output timestamps to the original timestamps, you can do the following: In captureOutput:didOutputSampleBuffer:fromConnection: AVCaptureInputPort *port = [[connection inputPorts] objectAtIndex:0]; CMClockRef originalClock = [port clock]; CMTime syncedPTS = CMSampleBufferGetPresentationTime( sampleBuffer ); CMTime originalPTS = CMSyncConvertTime( syncedPTS, [session synchronizationClock], originalClock ); This property is key-value observable.
+//
 // SynchronizationClock calls the underlying SynchronizationClock.
 func (x *CaptureSession) SynchronizationClock() unsafe.Pointer {
 	return x.inner.SynchronizationClock()
 }
 
+// @property masterClock @abstract Provides the clock being used for synchronization. @discussion Deprecated. Please use synchronizationClock instead.
+//
 // MasterClock calls the underlying MasterClock.
 func (x *CaptureSession) MasterClock() unsafe.Pointer {
 	return x.inner.MasterClock()
 }
 
+// A `BOOL` value that indicates whether the session supports manually running deferred start. Deferred Start is a feature that allows you to control, on a per-output basis, whether output objects start when or after the session is started. The session defers starting an output when its “deferredStartEnabled“ property is set to `true`, and starts it after the session is started. You can only set the “automaticallyRunsDeferredStart“ property value to `false` if the session supports manual deferred start.
+//
 // IsManualDeferredStartSupported calls the underlying IsManualDeferredStartSupported.
 func (x *CaptureSession) IsManualDeferredStartSupported() bool {
 	return x.inner.IsManualDeferredStartSupported()
 }
 
+// A `BOOL` value that indicates whether deferred start runs automatically. Deferred Start is a feature that allows you to control, on a per-output basis, whether output objects start when or after the session is started. The session defers starting an output when its “AVCaptureOutput/deferredStartEnabled“ property is set to `true`, and starts it after the session is started. When this value is `true`, “AVCaptureSession“ automatically runs deferred start. If only “AVCaptureVideoPreviewLayer“ objects have “AVCaptureVideoPreviewLayer/deferredStartEnabled“ set to `false`, the session runs deferred start a short time after displaying the first frame. If there are “AVCaptureOutput“ objects that have “AVCaptureOutput/deferredStartEnabled“ set to `false`, then the session waits until each output that provides streaming data to your app sends its first frame. If you set this value to `false`, call “runDeferredStartWhenNeeded“ to indicate when to run deferred start. By default, for apps that are linked on or after iOS 26, this value is `true`. - Note: If “manualDeferredStartSupported“ is `false`, setting this property value to `false` results in the session throwing an `NSInvalidArgumentException`. - Note: Set this value before committing the configuration.
+//
 // AutomaticallyRunsDeferredStart calls the underlying AutomaticallyRunsDeferredStart.
 func (x *CaptureSession) AutomaticallyRunsDeferredStart() bool {
 	return x.inner.AutomaticallyRunsDeferredStart()
@@ -268,11 +344,15 @@ func (x *CaptureSession) SetAutomaticallyRunsDeferredStart(automaticallyRunsDefe
 	x.inner.SetAutomaticallyRunsDeferredStart(automaticallyRunsDeferredStart)
 }
 
+// A delegate object that observes events about deferred start. Call the “setDeferredStartDelegate:deferredStartDelegateCallbackQueue:“ method to set the deferred start delegate for a session.
+//
 // DeferredStartDelegate calls the underlying DeferredStartDelegate.
 func (x *CaptureSession) DeferredStartDelegate() raw.AVCaptureSessionDeferredStartDelegate {
 	return x.inner.DeferredStartDelegate()
 }
 
+// The dispatch queue on which the session calls deferred start delegate methods. Call the “setDeferredStartDelegate:deferredStartDelegateCallbackQueue:“ method to specify the dispatch queue on which to call the deferred start delegate methods.
+//
 // DeferredStartDelegateCallbackQueue calls the underlying DeferredStartDelegateCallbackQueue.
 func (x *CaptureSession) DeferredStartDelegateCallbackQueue() *foundation.NSObject {
 	return x.inner.DeferredStartDelegateCallbackQueue()

@@ -69,16 +69,22 @@ func (x *IOBluetoothOBEXSession) GetDevice() *IOBluetoothDevice {
 	return &IOBluetoothDevice{inner: _r}
 }
 
+// @method		sendBufferTroughChannel @abstract	Sends the next block of data trough the rfcomm channel. @result @discussion	Since a send in the rfcomm channel is broken in multiple write calls (this actually is true only if the size is grater than the rfcomm MTU). Each write call is performed by sendBufferTroughChannel. This should never need to be overwritten.
+//
 // SendBufferTroughChannel calls the underlying SendBufferTroughChannel.
 func (x *IOBluetoothOBEXSession) SendBufferTroughChannel() int {
 	return x.inner.SendBufferTroughChannel()
 }
 
+// @method		restartTransmission @abstract	If the transmission was stopeed due to the lack of buffers this call restarts it. @result @discussion	If the transmission was stopeed due to the lack of buffers this call restarts it.
+//
 // RestartTransmission calls the underlying RestartTransmission.
 func (x *IOBluetoothOBEXSession) RestartTransmission() {
 	x.inner.RestartTransmission()
 }
 
+// @method		isSessionTargetAMac @abstract	Tells whether the target device is a Mac by checking its service record. @result		TRUE only if device service record has Mac entry, FALSE for all else. @discussion	Tells whether the target device is a Mac by checking its service record.
+//
 // IsSessionTargetAMac calls the underlying IsSessionTargetAMac.
 func (x *IOBluetoothOBEXSession) IsSessionTargetAMac() bool {
 	return x.inner.IsSessionTargetAMac()

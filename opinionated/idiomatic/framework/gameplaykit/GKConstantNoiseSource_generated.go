@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Produces a single, constant value at all positions in the space.
+//
 // ConstantNoiseSource wraps [raw.GKConstantNoiseSource] with a fluent Go API.
 type ConstantNoiseSource struct {
 	inner *raw.GKConstantNoiseSource

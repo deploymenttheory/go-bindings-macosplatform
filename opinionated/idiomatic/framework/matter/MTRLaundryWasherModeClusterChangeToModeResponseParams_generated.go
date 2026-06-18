@@ -34,6 +34,8 @@ func MTRLaundryWasherModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MT
 	return &MTRLaundryWasherModeClusterChangeToModeResponseParams{inner: raw.MTRLaundryWasherModeClusterChangeToModeResponseParamsFromID(id)}
 }
 
+// Initialize an MTRLaundryWasherModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+//
 // NewMTRLaundryWasherModeClusterChangeToModeResponseParamsWithResponseValueError creates a new [MTRLaundryWasherModeClusterChangeToModeResponseParams].
 func NewMTRLaundryWasherModeClusterChangeToModeResponseParamsWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRLaundryWasherModeClusterChangeToModeResponseParams, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRLaundryWasherModeClusterChangeToModeResponseParams")), objc.RegisterName("alloc"))

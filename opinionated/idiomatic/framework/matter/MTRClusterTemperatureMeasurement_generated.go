@@ -32,6 +32,8 @@ func MTRClusterTemperatureMeasurementFromID(id objc.ID) *MTRClusterTemperatureMe
 	return &MTRClusterTemperatureMeasurement{inner: raw.MTRClusterTemperatureMeasurementFromID(id)}
 }
 
+// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+//
 // NewMTRClusterTemperatureMeasurementWithDeviceEndpointIDQueue creates a new [MTRClusterTemperatureMeasurement].
 func NewMTRClusterTemperatureMeasurementWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterTemperatureMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterTemperatureMeasurement")), objc.RegisterName("alloc"))

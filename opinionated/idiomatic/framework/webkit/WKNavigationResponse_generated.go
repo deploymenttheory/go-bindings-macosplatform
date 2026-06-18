@@ -36,16 +36,22 @@ func NewWKNavigationResponse() *WKNavigationResponse {
 	return &WKNavigationResponse{inner: raw.WKNavigationResponseFromID(_id)}
 }
 
+// @abstract A Boolean value indicating whether the frame being navigated is the main frame.
+//
 // IsForMainFrame calls the underlying IsForMainFrame.
 func (x *WKNavigationResponse) IsForMainFrame() bool {
 	return x.inner.IsForMainFrame()
 }
 
+// @abstract The frame's response.
+//
 // Response calls the underlying Response.
 func (x *WKNavigationResponse) Response() *foundation.NSURLResponse {
 	return x.inner.Response()
 }
 
+// @abstract A Boolean value indicating whether WebKit can display the response's MIME type natively. @discussion Allowing a navigation response with a MIME type that can't be shown will cause the navigation to fail.
+//
 // CanShowMIMEType calls the underlying CanShowMIMEType.
 func (x *WKNavigationResponse) CanShowMIMEType() bool {
 	return x.inner.CanShowMIMEType()

@@ -38,6 +38,8 @@ func NewHumanBodyPose3DObservation() *HumanBodyPose3DObservation {
 	return &HumanBodyPose3DObservation{inner: raw.VNHumanBodyPose3DObservationFromID(_id)}
 }
 
+// @brief Obtains the collection of joints associated with a named human body joints group. @discussion The obtained collection is a dictionary that provides the mapping of human joint names to the recognized point. @param jointsGroupName The name of the human body joints group. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return a dictionary of recognized points in the group, or nil if an error was encountered.
+//
 // RecognizedPointsForJointsGroupNameError calls the underlying RecognizedPointsForJointsGroupNameError.
 func (x *HumanBodyPose3DObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNHumanBodyRecognizedPoint3D], error) {
 	return x.inner.RecognizedPointsForJointsGroupNameError(jointsGroupName)
@@ -55,6 +57,8 @@ func (x *HumanBodyPose3DObservation) RecognizedPointForJointNameError(jointName 
 	return &HumanBodyRecognizedPoint3D{inner: _r}, nil
 }
 
+// @brief Obtain 2D point relative to the input image for named human body joint @param jointName The name of the human body joint @return A projection of the determined 3D position onto the original 2D image in normalized, lower left origin coordinates
+//
 // PointInImageForJointNameError calls the underlying PointInImageForJointNameError.
 func (x *HumanBodyPose3DObservation) PointInImageForJointNameError(jointName *foundation.NSString) (*Point, error) {
 	_r, _err := x.inner.PointInImageForJointNameError(jointName)
@@ -67,6 +71,8 @@ func (x *HumanBodyPose3DObservation) PointInImageForJointNameError(jointName *fo
 	return &Point{inner: _r}, nil
 }
 
+// @brief Obtain the parent joint of a specified joint @param jointName The name of the human body joint @return The name of the parent joint
+//
 // ParentJointNameForJointName calls the underlying ParentJointNameForJointName.
 func (x *HumanBodyPose3DObservation) ParentJointNameForJointName(jointName *foundation.NSString) string {
 	_r := x.inner.ParentJointNameForJointName(jointName)
@@ -76,21 +82,29 @@ func (x *HumanBodyPose3DObservation) ParentJointNameForJointName(jointName *foun
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief Obtain position relative to camera for a named human body joint in meters @param modelPositionOut A reference to a simd_float4x4 that will be updated to contain position of a joint relative to the camera if successful @param jointName The name of the human body joint @return BOOL indicating success of determing position
+//
 // GetCameraRelativePositionForJointNameError calls the underlying GetCameraRelativePositionForJointNameError.
 func (x *HumanBodyPose3DObservation) GetCameraRelativePositionForJointNameError(modelPositionOut unsafe.Pointer, jointName *foundation.NSString) (bool, error) {
 	return x.inner.GetCameraRelativePositionForJointNameError(modelPositionOut, jointName)
 }
 
+// @brief Technique used to estimate body height.   `VNHumanBodyPose3DObservationHeightEstimationMeasured`   indicates`bodyHeight` returns measured height in meters more accurate to true world height. `VNHumanBodyPose3DObservationHeightEstimationReference` indicates `bodyHeight` returns reference height of 1.8 m
+//
 // HeightEstimation calls the underlying HeightEstimation.
 func (x *HumanBodyPose3DObservation) HeightEstimation() VNHumanBodyPose3DObservationHeightEstimation {
 	return VNHumanBodyPose3DObservationHeightEstimation(x.inner.HeightEstimation())
 }
 
+// @brief A transform from root (at hip) to Camera as projection center.
+//
 // CameraOriginMatrix calls the underlying CameraOriginMatrix.
 func (x *HumanBodyPose3DObservation) CameraOriginMatrix() unsafe.Pointer {
 	return x.inner.CameraOriginMatrix()
 }
 
+// @brief All of the joints group names available in the observation.
+//
 // AvailableJointsGroupNames returns the collection as a Go slice.
 func (x *HumanBodyPose3DObservation) AvailableJointsGroupNames() []*foundation.NSString {
 	arr := x.inner.AvailableJointsGroupNames()
@@ -102,6 +116,8 @@ func (x *HumanBodyPose3DObservation) AvailableJointsGroupNames() []*foundation.N
 	})
 }
 
+// @brief All of the joint names available in the observation.
+//
 // AvailableJointNames returns the collection as a Go slice.
 func (x *HumanBodyPose3DObservation) AvailableJointNames() []*foundation.NSString {
 	arr := x.inner.AvailableJointNames()
@@ -113,6 +129,8 @@ func (x *HumanBodyPose3DObservation) AvailableJointNames() []*foundation.NSStrin
 	})
 }
 
+// @brief Estimated human height, in meters. @note A measured height will be returned in meters if  `heightEstimation` is  `VNHumanBodyPose3DObservationHeightEstimationMeasured`, otherwise reference height of 1.8 meters is returned for `VNHumanBodyPose3DObservationHeightEstimationReference`
+//
 // BodyHeight calls the underlying BodyHeight.
 func (x *HumanBodyPose3DObservation) BodyHeight() float32 {
 	return x.inner.BodyHeight()

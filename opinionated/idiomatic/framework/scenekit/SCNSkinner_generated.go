@@ -38,24 +38,32 @@ func NewSkinner() *Skinner {
 	return &Skinner{inner: raw.SCNSkinnerFromID(_id)}
 }
 
+// @property skeleton @abstract Specifies the skeleton of the receiver. @discussion When setting a new skeleton, the new skeleton must have the same hierarchy of joints.
+//
 // WithSkeleton sets the skeleton property and returns the receiver for chaining.
 func (x *Skinner) WithSkeleton(skeleton NodeProvider) *Skinner {
 	x.inner.SetSkeleton(skeleton.asNode())
 	return x
 }
 
+// @property baseGeometry @abstract Specifies the base geometry of the receiver. @discussion Updating this will change the geometry of all the nodes sharing the skinner. Access the node's geometry if you want to update this specific skinner properties (materials for example). Access this property if you want a whole new geometry (which will necessarily be shared among the skinner instances), with different sources, for instance.
+//
 // WithBaseGeometry sets the baseGeometry property and returns the receiver for chaining.
 func (x *Skinner) WithBaseGeometry(baseGeometry GeometryProvider) *Skinner {
 	x.inner.SetBaseGeometry(baseGeometry.asGeometry())
 	return x
 }
 
+// @property baseGeometryBindTransform @abstract Specifies the transform of the baseGeometry at the time when the mesh was bound to a skeleton. This transforms the baseGeometry from object space to a space on which the skinning then applies.
+//
 // WithBaseGeometryBindTransform sets the baseGeometryBindTransform property and returns the receiver for chaining.
 func (x *Skinner) WithBaseGeometryBindTransform(baseGeometryBindTransform quartzcore.CATransform3D) *Skinner {
 	x.inner.SetBaseGeometryBindTransform(baseGeometryBindTransform)
 	return x
 }
 
+// @property skeleton @abstract Specifies the skeleton of the receiver. @discussion When setting a new skeleton, the new skeleton must have the same hierarchy of joints.
+//
 // Skeleton calls the underlying Skeleton.
 func (x *Skinner) Skeleton() *Node {
 	_r := x.inner.Skeleton()
@@ -70,6 +78,8 @@ func (x *Skinner) SetSkeleton(skeleton *raw.SCNNode) {
 	x.inner.SetSkeleton(skeleton)
 }
 
+// @property baseGeometry @abstract Specifies the base geometry of the receiver. @discussion Updating this will change the geometry of all the nodes sharing the skinner. Access the node's geometry if you want to update this specific skinner properties (materials for example). Access this property if you want a whole new geometry (which will necessarily be shared among the skinner instances), with different sources, for instance.
+//
 // BaseGeometry calls the underlying BaseGeometry.
 func (x *Skinner) BaseGeometry() *Geometry {
 	_r := x.inner.BaseGeometry()
@@ -84,6 +94,8 @@ func (x *Skinner) SetBaseGeometry(baseGeometry *raw.SCNGeometry) {
 	x.inner.SetBaseGeometry(baseGeometry)
 }
 
+// @property baseGeometryBindTransform @abstract Specifies the transform of the baseGeometry at the time when the mesh was bound to a skeleton. This transforms the baseGeometry from object space to a space on which the skinning then applies.
+//
 // BaseGeometryBindTransform calls the underlying BaseGeometryBindTransform.
 func (x *Skinner) BaseGeometryBindTransform() quartzcore.CATransform3D {
 	return x.inner.BaseGeometryBindTransform()
@@ -94,6 +106,8 @@ func (x *Skinner) SetBaseGeometryBindTransform(baseGeometryBindTransform quartzc
 	x.inner.SetBaseGeometryBindTransform(baseGeometryBindTransform)
 }
 
+// @property boneInverseBindTransforms @abstract The inverse of the bone’s bind-space transformation matrix at the time the bind shape was bound to this bone. @discussion boneInverseBindTransforms is an array of SCNMatrix4 wrapped into instances of NSValue.
+//
 // BoneInverseBindTransforms returns the collection as a Go slice.
 func (x *Skinner) BoneInverseBindTransforms() []*foundation.NSValue {
 	arr := x.inner.BoneInverseBindTransforms()
@@ -105,6 +119,8 @@ func (x *Skinner) BoneInverseBindTransforms() []*foundation.NSValue {
 	})
 }
 
+// @property bones @abstract The bones of the skinner.
+//
 // Bones returns the collection as a Go slice.
 func (x *Skinner) Bones() []*Node {
 	arr := x.inner.Bones()
@@ -116,6 +132,8 @@ func (x *Skinner) Bones() []*Node {
 	})
 }
 
+// @property boneWeights @abstract The bone weights of the receiver.
+//
 // BoneWeights calls the underlying BoneWeights.
 func (x *Skinner) BoneWeights() *GeometrySource {
 	_r := x.inner.BoneWeights()
@@ -125,6 +143,8 @@ func (x *Skinner) BoneWeights() *GeometrySource {
 	return &GeometrySource{inner: _r}
 }
 
+// @property boneIndices @abstract The bone indices of the receiver.
+//
 // BoneIndices calls the underlying BoneIndices.
 func (x *Skinner) BoneIndices() *GeometrySource {
 	_r := x.inner.BoneIndices()

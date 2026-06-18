@@ -31,6 +31,8 @@ func MTRClusterIdentifyFromID(id objc.ID) *MTRClusterIdentify {
 	return &MTRClusterIdentify{inner: raw.MTRClusterIdentifyFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterIdentifyWithDeviceEndpointIDQueue creates a new [MTRClusterIdentify].
 func NewMTRClusterIdentifyWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterIdentify {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterIdentify")), objc.RegisterName("alloc"))

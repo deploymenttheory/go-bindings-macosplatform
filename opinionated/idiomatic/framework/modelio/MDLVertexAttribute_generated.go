@@ -38,6 +38,8 @@ func NewVertexAttribute() *VertexAttribute {
 	return &VertexAttribute{inner: raw.MDLVertexAttributeFromID(_id)}
 }
 
+// @method initWithName:format:offset:bufferIndex @abstract Initialize attribute object with all properties
+//
 // NewVertexAttributeWithNameFormatOffsetBufferIndex creates a new [VertexAttribute].
 func NewVertexAttributeWithNameFormatOffsetBufferIndex(name string, format MDLVertexFormat, offset uint, bufferIndex uint) *VertexAttribute {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLVertexAttribute")), objc.RegisterName("alloc"))
@@ -45,36 +47,48 @@ func NewVertexAttributeWithNameFormatOffsetBufferIndex(name string, format MDLVe
 	return &VertexAttribute{inner: raw.MDLVertexAttributeFromID(_id)}
 }
 
+// @property name @abstract Identifying name of the attribute derived from model file, or one of the predefined MDLVertexAttribute strings
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *VertexAttribute) WithName(name string) *VertexAttribute {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property format @abstract Format (including number of components) of the attribute @discussion If the value is MDLVertexFormatInvalid.   Other values of this object will be ignored when setting the MDLVertexDescriptor object in a Mesh. The initial value is MDLVertexFormatInvalid.
+//
 // WithFormat sets the format property and returns the receiver for chaining.
 func (x *VertexAttribute) WithFormat(format MDLVertexFormat) *VertexAttribute {
 	x.inner.SetFormat(raw.MDLVertexFormat(format))
 	return x
 }
 
+// @property offset @abstract offset in bytes of the attrbute in each element of the vertex buffer
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *VertexAttribute) WithOffset(offset uint) *VertexAttribute {
 	x.inner.SetOffset(offset)
 	return x
 }
 
+// @property bufferIndex @abstract index of the buffer in mesh's vertexBuffer array in which this attribute resides
+//
 // WithBufferIndex sets the bufferIndex property and returns the receiver for chaining.
 func (x *VertexAttribute) WithBufferIndex(bufferIndex uint) *VertexAttribute {
 	x.inner.SetBufferIndex(bufferIndex)
 	return x
 }
 
+// @property time @abstract the time the attribute is intended for. @discussion morph targets would store their times here
+//
 // WithTime sets the time_ property and returns the receiver for chaining.
 func (x *VertexAttribute) WithTime(time_ float64) *VertexAttribute {
 	x.inner.SetTime(time_)
 	return x
 }
 
+// @property name @abstract Identifying name of the attribute derived from model file, or one of the predefined MDLVertexAttribute strings
+//
 // Name calls the underlying Name.
 func (x *VertexAttribute) Name() string {
 	_r := x.inner.Name()
@@ -89,6 +103,8 @@ func (x *VertexAttribute) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// @property format @abstract Format (including number of components) of the attribute @discussion If the value is MDLVertexFormatInvalid.   Other values of this object will be ignored when setting the MDLVertexDescriptor object in a Mesh. The initial value is MDLVertexFormatInvalid.
+//
 // Format calls the underlying Format.
 func (x *VertexAttribute) Format() MDLVertexFormat {
 	return MDLVertexFormat(x.inner.Format())
@@ -99,6 +115,8 @@ func (x *VertexAttribute) SetFormat(format MDLVertexFormat) {
 	x.inner.SetFormat(raw.MDLVertexFormat(format))
 }
 
+// @property offset @abstract offset in bytes of the attrbute in each element of the vertex buffer
+//
 // Offset calls the underlying Offset.
 func (x *VertexAttribute) Offset() uint {
 	return x.inner.Offset()
@@ -109,6 +127,8 @@ func (x *VertexAttribute) SetOffset(offset uint) {
 	x.inner.SetOffset(offset)
 }
 
+// @property bufferIndex @abstract index of the buffer in mesh's vertexBuffer array in which this attribute resides
+//
 // BufferIndex calls the underlying BufferIndex.
 func (x *VertexAttribute) BufferIndex() uint {
 	return x.inner.BufferIndex()
@@ -119,6 +139,8 @@ func (x *VertexAttribute) SetBufferIndex(bufferIndex uint) {
 	x.inner.SetBufferIndex(bufferIndex)
 }
 
+// @property time @abstract the time the attribute is intended for. @discussion morph targets would store their times here
+//
 // Time calls the underlying Time.
 func (x *VertexAttribute) Time() float64 {
 	return x.inner.Time()

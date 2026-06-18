@@ -35,18 +35,24 @@ func NewAudioUnitReverb() *AudioUnitReverb {
 	return &AudioUnitReverb{inner: raw.AVAudioUnitReverbFromID(_id)}
 }
 
+// @property wetDryMix @abstract Blend of the wet and dry signals Range:      0 (all dry) -> 100 (all wet) Unit:       Percent
+//
 // WithWetDryMix sets the wetDryMix property and returns the receiver for chaining.
 func (x *AudioUnitReverb) WithWetDryMix(wetDryMix float32) *AudioUnitReverb {
 	x.inner.SetWetDryMix(wetDryMix)
 	return x
 }
 
+// @property bypass @abstract Bypass state of the audio unit.
+//
 // WithBypass sets the bypass property and returns the receiver for chaining.
 func (x *AudioUnitReverb) WithBypass(bypass bool) *AudioUnitReverb {
 	x.inner.AVAudioUnitEffect.SetBypass(bypass)
 	return x
 }
 
+// @method loadFactoryPreset: @abstract load a reverb preset Default:    AVAudioUnitReverbPresetMediumHall
+//
 // LoadFactoryPreset calls the underlying LoadFactoryPreset.
 func (x *AudioUnitReverb) LoadFactoryPreset(preset AVAudioUnitReverbPreset) {
 	x.inner.LoadFactoryPreset(raw.AVAudioUnitReverbPreset(preset))

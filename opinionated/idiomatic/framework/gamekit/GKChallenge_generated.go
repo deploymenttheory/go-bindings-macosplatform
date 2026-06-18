@@ -37,11 +37,15 @@ func NewChallenge() *Challenge {
 	return &Challenge{inner: raw.GKChallengeFromID(_id)}
 }
 
+// Any GKChallenge object to be declined must be in a state of GKChallengeStatePending in order to be successfully cancelled
+//
 // Decline calls the underlying Decline.
 func (x *Challenge) Decline() {
 	x.inner.Decline()
 }
 
+// The GKPlayer who issued the challenge
+//
 // IssuingPlayer calls the underlying IssuingPlayer.
 func (x *Challenge) IssuingPlayer() *Player {
 	_r := x.inner.IssuingPlayer()
@@ -51,6 +55,8 @@ func (x *Challenge) IssuingPlayer() *Player {
 	return &Player{inner: _r}
 }
 
+// The GKPlayer who has received the challenge
+//
 // ReceivingPlayer calls the underlying ReceivingPlayer.
 func (x *Challenge) ReceivingPlayer() *Player {
 	_r := x.inner.ReceivingPlayer()
@@ -60,21 +66,29 @@ func (x *Challenge) ReceivingPlayer() *Player {
 	return &Player{inner: _r}
 }
 
+// Current state of the challenge
+//
 // State calls the underlying State.
 func (x *Challenge) State() GKChallengeState {
 	return GKChallengeState(x.inner.State())
 }
 
+// Date the challenge was issued
+//
 // IssueDate calls the underlying IssueDate.
 func (x *Challenge) IssueDate() *foundation.NSDate {
 	return x.inner.IssueDate()
 }
 
+// Date the challenge was completed or aborted
+//
 // CompletionDate calls the underlying CompletionDate.
 func (x *Challenge) CompletionDate() *foundation.NSDate {
 	return x.inner.CompletionDate()
 }
 
+// The message sent to receivers of this challenge
+//
 // Message calls the underlying Message.
 func (x *Challenge) Message() string {
 	_r := x.inner.Message()
@@ -84,6 +98,8 @@ func (x *Challenge) Message() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// * This property is obsolete. **
+//
 // IssuingPlayerID calls the underlying IssuingPlayerID.
 func (x *Challenge) IssuingPlayerID() string {
 	_r := x.inner.IssuingPlayerID()
@@ -93,6 +109,8 @@ func (x *Challenge) IssuingPlayerID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// * This property is obsolete. **
+//
 // ReceivingPlayerID calls the underlying ReceivingPlayerID.
 func (x *Challenge) ReceivingPlayerID() string {
 	_r := x.inner.ReceivingPlayerID()

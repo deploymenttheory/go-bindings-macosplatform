@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the Extensible Firmware Interface (EFI) variable store that contains NVRAM variables the EFI exposes.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzefivariablestore
 type VZEFIVariableStore struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func VZEFIVariableStoreFromID(id objc.ID) *VZEFIVariableStore {
 	return o
 }
 
-// @abstract Initialize the variable store from the URL of an existing file. @param URL The URL of the variable store on the local file system. @discussion To create a new variable store, use -[VZEFIVariableStore initCreatingVariableStoreAtURL:options:error].
+// Initialize the variable store from the URL of an existing file.
 func (o *VZEFIVariableStore) InitWithURL(uRL *foundation.NSURL) *VZEFIVariableStore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZEFIVariableStoreSelInitWithURL, uRL.Ptr())
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func (o *VZEFIVariableStore) InitWithURL(uRL *foundation.NSURL) *VZEFIVariableSt
 	return VZEFIVariableStoreFromID(_ret)
 }
 
-// @abstract Write an initialized VZEFIVariableStore to a URL on a file system. @param URL The URL to write the variable store to on the local file system. @param options Initialization options. @param error If not nil, used to report errors if creation fails. @return A newly initialized VZEFIVariableStore on success. If an error was encountered returns @c nil, and @c error contains the error.
+// Creates a new EFI variable store at specified the URL on the filesystem, initialization options, and error-return variable.
 func (o *VZEFIVariableStore) InitCreatingVariableStoreAtURLOptionsError(uRL *foundation.NSURL, options VZEFIVariableStoreInitializationOptions) (*VZEFIVariableStore, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZEFIVariableStoreSelInitCreatingVariableStoreAtURLOptionsError, uRL.Ptr(), options, unsafe.Pointer(&_nsErr))

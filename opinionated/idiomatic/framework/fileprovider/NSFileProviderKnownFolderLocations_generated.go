@@ -37,24 +37,32 @@ func NewFileProviderKnownFolderLocations() *FileProviderKnownFolderLocations {
 	return &FileProviderKnownFolderLocations{inner: raw.NSFileProviderKnownFolderLocationsFromID(_id)}
 }
 
+// Specify whether the system should create a binary compatibility symlink folders. If YES, the system creates a symlink from the logical location of the folder in the domain sync root to the known folder location. This symlink allows any app that would have hardcoded the previous location of the folder to still work after enabling the feature. Default value is YES.
+//
 // WithShouldCreateBinaryCompatibilitySymlink sets the shouldCreateBinaryCompatibilitySymlink property and returns the receiver for chaining.
 func (x *FileProviderKnownFolderLocations) WithShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink bool) *FileProviderKnownFolderLocations {
 	x.inner.SetShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink)
 	return x
 }
 
+// Candidate item for ~/Desktop For user experience reasons, it is strongly recommended to name the target folder "Desktop".
+//
 // WithDesktopLocation sets the desktopLocation property and returns the receiver for chaining.
 func (x *FileProviderKnownFolderLocations) WithDesktopLocation(desktopLocation *FileProviderKnownFolderLocation) *FileProviderKnownFolderLocations {
 	x.inner.SetDesktopLocation(desktopLocation.Unwrap())
 	return x
 }
 
+// Candidate item for ~/Documents For user experience reasons, it is strongly recommended to name the target folder "Documents".
+//
 // WithDocumentsLocation sets the documentsLocation property and returns the receiver for chaining.
 func (x *FileProviderKnownFolderLocations) WithDocumentsLocation(documentsLocation *FileProviderKnownFolderLocation) *FileProviderKnownFolderLocations {
 	x.inner.SetDocumentsLocation(documentsLocation.Unwrap())
 	return x
 }
 
+// Specify whether the system should create a binary compatibility symlink folders. If YES, the system creates a symlink from the logical location of the folder in the domain sync root to the known folder location. This symlink allows any app that would have hardcoded the previous location of the folder to still work after enabling the feature. Default value is YES.
+//
 // ShouldCreateBinaryCompatibilitySymlink calls the underlying ShouldCreateBinaryCompatibilitySymlink.
 func (x *FileProviderKnownFolderLocations) ShouldCreateBinaryCompatibilitySymlink() bool {
 	return x.inner.ShouldCreateBinaryCompatibilitySymlink()
@@ -65,6 +73,8 @@ func (x *FileProviderKnownFolderLocations) SetShouldCreateBinaryCompatibilitySym
 	x.inner.SetShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink)
 }
 
+// Candidate item for ~/Desktop For user experience reasons, it is strongly recommended to name the target folder "Desktop".
+//
 // DesktopLocation calls the underlying DesktopLocation.
 func (x *FileProviderKnownFolderLocations) DesktopLocation() *FileProviderKnownFolderLocation {
 	_r := x.inner.DesktopLocation()
@@ -79,6 +89,8 @@ func (x *FileProviderKnownFolderLocations) SetDesktopLocation(desktopLocation *r
 	x.inner.SetDesktopLocation(desktopLocation)
 }
 
+// Candidate item for ~/Documents For user experience reasons, it is strongly recommended to name the target folder "Documents".
+//
 // DocumentsLocation calls the underlying DocumentsLocation.
 func (x *FileProviderKnownFolderLocations) DocumentsLocation() *FileProviderKnownFolderLocation {
 	_r := x.inner.DocumentsLocation()

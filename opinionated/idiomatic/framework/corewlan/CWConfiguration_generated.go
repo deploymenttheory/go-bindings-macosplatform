@@ -36,6 +36,8 @@ func NewConfiguration() *Configuration {
 	return &Configuration{inner: raw.CWConfigurationFromID(_id)}
 }
 
+// @method @param configuration A CWConfiguration object. @result A CWConfiguration object. @abstract Initializes a CWConfiguration object with the properties of an existing CWConfiguration object.
+//
 // NewConfigurationWithConfiguration creates a new [Configuration].
 func NewConfigurationWithConfiguration(configuration *raw.CWConfiguration) *Configuration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CWConfiguration")), objc.RegisterName("alloc"))
@@ -43,31 +45,43 @@ func NewConfigurationWithConfiguration(configuration *raw.CWConfiguration) *Conf
 	return &Configuration{inner: raw.CWConfigurationFromID(_id)}
 }
 
+// @method @param configuration The CWConfiguration with which to compare the receiver. @result YES if the objects are equal, NO otherwise. @abstract Determine CWConfiguration equality. @discussion CWConfiguration objects are considered equal if all their corresponding properties are equal.
+//
 // IsEqualToConfiguration calls the underlying IsEqualToConfiguration.
 func (x *Configuration) IsEqualToConfiguration(configuration *raw.CWConfiguration) bool {
 	return x.inner.IsEqualToConfiguration(configuration)
 }
 
+// @property @result An NSOrderedSet of CWNetworkProfile objects. @abstract Returns the preferred networks list. @discussion The order of the ordered set corresponds to the order the preferred networks list.
+//
 // NetworkProfiles calls the underlying NetworkProfiles.
 func (x *Configuration) NetworkProfiles() *foundation.NSOrderedSet[*raw.CWNetworkProfile] {
 	return x.inner.NetworkProfiles()
 }
 
+// @property @result YES if the preference is enabled, NO otherwise. @abstract Returns the preference to require an administrator password to change networks. @discussion If YES, the user may be prompted to enter an administrator password upon attempting to join a Wi-Fi network. This preference is enforced at the API layer.
+//
 // RequireAdministratorForAssociation calls the underlying RequireAdministratorForAssociation.
 func (x *Configuration) RequireAdministratorForAssociation() bool {
 	return x.inner.RequireAdministratorForAssociation()
 }
 
+// @property @result YES if the preference is enabled, NO otherwise. @abstract Returns the preference to require an administrator password to change the interface power state. @discussion If YES, the user may be prompted to enter an administrator password upon attempting to turn Wi-Fi on or off. This preference is enforced at the API layer.
+//
 // RequireAdministratorForPower calls the underlying RequireAdministratorForPower.
 func (x *Configuration) RequireAdministratorForPower() bool {
 	return x.inner.RequireAdministratorForPower()
 }
 
+// @property @result YES if the preference is enabled, NO otherwise. @abstract Returns the preference to require an administrator password to create a computer-to-computer network. @discussion If YES, the user may be prompted to enter an administrator password upon attempting to create an IBSS network. This preference is enforced at the API layer.
+//
 // RequireAdministratorForIBSSMode calls the underlying RequireAdministratorForIBSSMode.
 func (x *Configuration) RequireAdministratorForIBSSMode() bool {
 	return x.inner.RequireAdministratorForIBSSMode()
 }
 
+// @property @result YES if the preference is enabled, NO otherwise. @abstract Returns the preference to remember all Wi-Fi networks joined unless otherwise specified by the user when joining a particular Wi-Fi network.
+//
 // RememberJoinedNetworks calls the underlying RememberJoinedNetworks.
 func (x *Configuration) RememberJoinedNetworks() bool {
 	return x.inner.RememberJoinedNetworks()

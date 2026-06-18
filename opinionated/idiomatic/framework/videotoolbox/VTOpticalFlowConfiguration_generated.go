@@ -31,6 +31,8 @@ func OpticalFlowConfigurationFromID(id objc.ID) *OpticalFlowConfiguration {
 	return &OpticalFlowConfiguration{inner: raw.VTOpticalFlowConfigurationFromID(id)}
 }
 
+// Creates a new optical flow configuration. Returns “nil“ if dimensions are out of range or revision is unsupported. - Parameters: - frameWidth: Width of source frame in pixels; the maximum value is 8192 for macOS, and 4096 for iOS. - frameHeight: Height of source frame in pixels; the maximum value is 4320 for macOS, and 2160 for iOS. - qualityPrioritization: A level you use to prioritize quality or performance; for more information about supported levels, see “VTOpticalFlowConfigurationQualityPrioritization“. - revision: The specific algorithm or configuration revision you use to perform the request.
+//
 // NewOpticalFlowConfigurationWithFrameWidthFrameHeightQualityPrioritizationRevision creates a new [OpticalFlowConfiguration].
 func NewOpticalFlowConfigurationWithFrameWidthFrameHeightQualityPrioritizationRevision(frameWidth int, frameHeight int, qualityPrioritization VTOpticalFlowConfigurationQualityPrioritization, revision VTOpticalFlowConfigurationRevision) *OpticalFlowConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTOpticalFlowConfiguration")), objc.RegisterName("alloc"))
@@ -38,26 +40,36 @@ func NewOpticalFlowConfigurationWithFrameWidthFrameHeightQualityPrioritizationRe
 	return &OpticalFlowConfiguration{inner: raw.VTOpticalFlowConfigurationFromID(_id)}
 }
 
+// Width of source frame in pixels.
+//
 // FrameWidth calls the underlying FrameWidth.
 func (x *OpticalFlowConfiguration) FrameWidth() int {
 	return x.inner.FrameWidth()
 }
 
+// Height of source frame in pixels.
+//
 // FrameHeight calls the underlying FrameHeight.
 func (x *OpticalFlowConfiguration) FrameHeight() int {
 	return x.inner.FrameHeight()
 }
 
+// A parameter you use to control quality and performance levels. For more information about supported levels, see “VTOpticalFlowConfigurationQualityPrioritization“.
+//
 // QualityPrioritization calls the underlying QualityPrioritization.
 func (x *OpticalFlowConfiguration) QualityPrioritization() VTOpticalFlowConfigurationQualityPrioritization {
 	return VTOpticalFlowConfigurationQualityPrioritization(x.inner.QualityPrioritization())
 }
 
+// The specific algorithm or configuration revision you use to perform the request.
+//
 // Revision calls the underlying Revision.
 func (x *OpticalFlowConfiguration) Revision() VTOpticalFlowConfigurationRevision {
 	return VTOpticalFlowConfigurationRevision(x.inner.Revision())
 }
 
+// Supported pixel formats for source frames for current configuration.
+//
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (x *OpticalFlowConfiguration) FrameSupportedPixelFormats() []*foundation.NSNumber {
 	arr := x.inner.FrameSupportedPixelFormats()
@@ -69,11 +81,15 @@ func (x *OpticalFlowConfiguration) FrameSupportedPixelFormats() []*foundation.NS
 	})
 }
 
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+//
 // SourcePixelBufferAttributes calls the underlying SourcePixelBufferAttributes.
 func (x *OpticalFlowConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.SourcePixelBufferAttributes()
 }
 
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+//
 // DestinationPixelBufferAttributes calls the underlying DestinationPixelBufferAttributes.
 func (x *OpticalFlowConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.DestinationPixelBufferAttributes()

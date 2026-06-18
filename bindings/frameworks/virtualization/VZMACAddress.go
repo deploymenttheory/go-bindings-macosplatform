@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The media access control (MAC) address for a network interface in your virtual machine.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzmacaddress
 type VZMACAddress struct {
 	foundation.NSObject
@@ -41,7 +43,7 @@ func VZMACAddressFromID(id objc.ID) *VZMACAddress {
 	return o
 }
 
-// @abstract Initialize the VZMACAddress from a 48-bit ethernet address. @param ethernetAddress A 48-bit ethernet address.
+// Creates a MAC address from the specified 48-bit Ethernet address.
 func (o *VZMACAddress) InitWithEthernetAddress(ethernetAddress unsafe.Pointer) *VZMACAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMACAddressSelInitWithEthernetAddress, ethernetAddress)
 	if _ret != 0 {
@@ -50,7 +52,7 @@ func (o *VZMACAddress) InitWithEthernetAddress(ethernetAddress unsafe.Pointer) *
 	return VZMACAddressFromID(_ret)
 }
 
-// @abstract Initialize the VZMACAddress from a string representation of a MAC address. @param string The string should be formatted representing the 6 bytes in hexadecimal separated by a colon character. e.g. "01:23:45:ab:cd:ef" The alphabetical characters can appear lowercase or uppercase. @return A VZMACAddress or nil if the string is not formatted correctly.
+// Creates a MAC address object from a specially formatted string.
 func (o *VZMACAddress) InitWithString(string_ *foundation.NSString) *VZMACAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMACAddressSelInitWithString, string_.Ptr())
 	if _ret != 0 {
@@ -59,7 +61,7 @@ func (o *VZMACAddress) InitWithString(string_ *foundation.NSString) *VZMACAddres
 	return VZMACAddressFromID(_ret)
 }
 
-// @abstract Create a valid, random, unicast, locally administered address. @discussion The generated address is not guaranteed to be unique.
+// Returns a valid, random, locally administered, unicast MAC address.
 func VZMACAddressRandomLocallyAdministeredAddress() *VZMACAddress {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVZMACAddress), _vZMACAddressSelRandomLocallyAdministeredAddress)
 	if _ret != 0 {

@@ -35,18 +35,24 @@ func NewLogStateDescriptor() *LogStateDescriptor {
 	return &LogStateDescriptor{inner: raw.MTLLogStateDescriptorFromID(_id)}
 }
 
+// @abstract level indicates the minimum level of the logs that will be printed. @discussion All the logs with level less than given level will be skipped on the GPU Side.
+//
 // WithLevel sets the level property and returns the receiver for chaining.
 func (x *LogStateDescriptor) WithLevel(level MTLLogLevel) *LogStateDescriptor {
 	x.inner.SetLevel(raw.MTLLogLevel(level))
 	return x
 }
 
+// @abstract bufferSize indicates the size of the buffer where GPU will store the logging content from shaders. Minimum value is 1KB
+//
 // WithBufferSize sets the bufferSize property and returns the receiver for chaining.
 func (x *LogStateDescriptor) WithBufferSize(bufferSize int) *LogStateDescriptor {
 	x.inner.SetBufferSize(bufferSize)
 	return x
 }
 
+// @abstract level indicates the minimum level of the logs that will be printed. @discussion All the logs with level less than given level will be skipped on the GPU Side.
+//
 // Level calls the underlying Level.
 func (x *LogStateDescriptor) Level() MTLLogLevel {
 	return MTLLogLevel(x.inner.Level())
@@ -57,6 +63,8 @@ func (x *LogStateDescriptor) SetLevel(level MTLLogLevel) {
 	x.inner.SetLevel(raw.MTLLogLevel(level))
 }
 
+// @abstract bufferSize indicates the size of the buffer where GPU will store the logging content from shaders. Minimum value is 1KB
+//
 // BufferSize calls the underlying BufferSize.
 func (x *LogStateDescriptor) BufferSize() int {
 	return x.inner.BufferSize()

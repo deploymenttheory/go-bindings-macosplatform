@@ -35,6 +35,8 @@ func NewAggregateAssetDownloadTask() *AggregateAssetDownloadTask {
 	return &AggregateAssetDownloadTask{inner: raw.AVAggregateAssetDownloadTaskFromID(_id)}
 }
 
+// The asset supplied to the download task upon initialization.
+//
 // URLAsset calls the underlying URLAsset.
 func (x *AggregateAssetDownloadTask) URLAsset() *URLAsset {
 	_r := x.inner.URLAsset()

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A class that represents a USB controller in a VM.
+//
 // USBController wraps [raw.VZUSBController] with a fluent Go API.
 type USBController struct {
 	inner *raw.VZUSBController
@@ -39,6 +41,8 @@ func NewUSBController() *USBController {
 	return &USBController{inner: raw.VZUSBControllerFromID(_id)}
 }
 
+// Attaches a USB device to the controller.
+//
 // AttachDevice blocks until the operation completes or ctx is cancelled.
 func (x *USBController) AttachDevice(ctx context.Context, device raw.VZUSBDevice) error {
 	_ch := make(chan error, 1)
@@ -57,6 +61,8 @@ func (x *USBController) AttachDevice(ctx context.Context, device raw.VZUSBDevice
 	}
 }
 
+// Detaches a USB device from the controller.
+//
 // DetachDevice blocks until the operation completes or ctx is cancelled.
 func (x *USBController) DetachDevice(ctx context.Context, device raw.VZUSBDevice) error {
 	_ch := make(chan error, 1)

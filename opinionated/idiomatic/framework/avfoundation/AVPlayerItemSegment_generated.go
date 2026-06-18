@@ -38,16 +38,22 @@ func NewPlayerItemSegment() *PlayerItemSegment {
 	return &PlayerItemSegment{inner: raw.AVPlayerItemSegmentFromID(_id)}
 }
 
+// @property		segmentType @abstract		The type of content this segment represents.
+//
 // SegmentType calls the underlying SegmentType.
 func (x *PlayerItemSegment) SegmentType() AVPlayerItemSegmentType {
 	return AVPlayerItemSegmentType(x.inner.SegmentType())
 }
 
+// @property		timeMapping @abstract		The timeMapping for this segment. @discussion The timeMapping source timeRange represents the start and duration in the segment source's timeline (ie: primary item timeline or interstitial event). The target timeRange represents the start point and duration in the integrated timeline. For interstitial events which occupy a single point, the target's duration will be kCMTimeZero.
+//
 // TimeMapping calls the underlying TimeMapping.
 func (x *PlayerItemSegment) TimeMapping() coremedia.CMTimeMapping {
 	return x.inner.TimeMapping()
 }
 
+// @property	loadedTimeRanges @abstract	This property provides a collection of time ranges for the segment if media data is readily available. The ranges provided might be discontinuous. @discussion Returns an NSArray of NSValues containing CMTimeRanges. Loaded time ranges will be within the timeMapping's target timeRange. Loaded time ranges will be empty for interstitial events that occupy a single point in time.
+//
 // LoadedTimeRanges returns the collection as a Go slice.
 func (x *PlayerItemSegment) LoadedTimeRanges() []*foundation.NSValue {
 	arr := x.inner.LoadedTimeRanges()
@@ -59,11 +65,15 @@ func (x *PlayerItemSegment) LoadedTimeRanges() []*foundation.NSValue {
 	})
 }
 
+// @property		startDate @abstract		The date this segment starts at. @discussion The date this segment starts at. This value will be nil if the primary item does not contain dates.
+//
 // StartDate calls the underlying StartDate.
 func (x *PlayerItemSegment) StartDate() *foundation.NSDate {
 	return x.inner.StartDate()
 }
 
+// @property		interstitialEvent @abstract		The associated interstitial event for this segment. @discussion The associated interstitial event for this segment. This value will be nil for segments representing playback of the primary itme.
+//
 // InterstitialEvent calls the underlying InterstitialEvent.
 func (x *PlayerItemSegment) InterstitialEvent() *PlayerInterstitialEvent {
 	_r := x.inner.InterstitialEvent()

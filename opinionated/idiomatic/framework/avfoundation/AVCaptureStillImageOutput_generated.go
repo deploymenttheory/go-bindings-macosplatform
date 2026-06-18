@@ -38,29 +38,39 @@ func NewCaptureStillImageOutput() *CaptureStillImageOutput {
 	return &CaptureStillImageOutput{inner: raw.AVCaptureStillImageOutputFromID(_id)}
 }
 
+// @property outputSettings @abstract Specifies the options the receiver uses to encode still images before they are delivered. @discussion See AVVideoSettings.h for more information on how to construct an output settings dictionary. On iOS, the only currently supported keys are AVVideoCodecKey and kCVPixelBufferPixelFormatTypeKey. Use -availableImageDataCVPixelFormatTypes and -availableImageDataCodecTypes to determine what codec keys and pixel formats are supported. AVVideoQualityKey is supported on iOS 6.0 and later and may only be used when AVVideoCodecKey is set to AVVideoCodecTypeJPEG.
+//
 // WithOutputSettings sets the outputSettings property and returns the receiver for chaining.
 func (x *CaptureStillImageOutput) WithOutputSettings(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptureStillImageOutput {
 	x.inner.SetOutputSettings(outputSettings)
 	return x
 }
 
+// @property highResolutionStillImageOutputEnabled @abstract Indicates whether the receiver should emit still images at the highest resolution supported by its source AVCaptureDevice's activeFormat. @discussion By default, AVCaptureStillImageOutput emits images with the same dimensions as its source AVCaptureDevice's activeFormat.formatDescription. However, if you set this property to YES, the receiver emits still images at its source AVCaptureDevice's activeFormat.highResolutionStillImageDimensions. Note that if you enable video stabilization (see AVCaptureConnection's preferredVideoStabilizationMode) for any output, the high resolution still images emitted by AVCaptureStillImageOutput may be smaller by 10 or more percent.
+//
 // WithHighResolutionStillImageOutputEnabled sets the highResolutionStillImageOutputEnabled property and returns the receiver for chaining.
 func (x *CaptureStillImageOutput) WithHighResolutionStillImageOutputEnabled(highResolutionStillImageOutputEnabled bool) *CaptureStillImageOutput {
 	x.inner.SetHighResolutionStillImageOutputEnabled(highResolutionStillImageOutputEnabled)
 	return x
 }
 
+// A `BOOL` value that indicates whether to defer starting this capture output. When this value is `true`, the session does not prepare the output's resources until some time after “AVCaptureSession/startRunning“ returns. You can start the visual parts of your user interface (e.g. preview) prior to other parts (e.g. photo/movie capture, metadata output, etc..) to improve startup performance. Set this value to `false` for outputs that your app needs for startup, and `true` for the ones it does not need to start immediately. For example, an “AVCaptureVideoDataOutput“ that you intend to use for displaying preview should set this value to `false`, so that the frames are available as soon as possible. By default, for apps that are linked on or after iOS 26, this property value is `true` for “AVCapturePhotoOutput“ and “AVCaptureFileOutput“ subclasses if supported, and `false` otherwise. When set to `true` for “AVCapturePhotoOutput“, if you want to support multiple capture requests before running deferred start, set “AVCapturePhotoOutput/responsiveCaptureEnabled“ to `true` on that output. If “deferredStartSupported“ is `false`, setting this property value to `true` results in the system throwing an `NSInvalidArgumentException`. - Note: Set this value before calling “AVCaptureSession/commitConfiguration“ as it requires a lengthy reconfiguration of the capture render pipeline.
+//
 // WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
 func (x *CaptureStillImageOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureStillImageOutput {
 	x.inner.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
 	return x
 }
 
+// @method captureStillImageAsynchronouslyFromConnection:completionHandler: @abstract Initiates an asynchronous still image capture, returning the result to a completion handler. @param connection The AVCaptureConnection object from which to capture the still image. @param handler A block that will be called when the still image capture is complete. The block will be passed a CMSampleBuffer object containing the image data or an NSError object if an image could not be captured. @discussion This method will return immediately after it is invoked, later calling the provided completion handler block when image data is ready. If the request could not be completed, the error parameter will contain an NSError object describing the failure. Attachments to the image data sample buffer may contain metadata appropriate to the image data format. For instance, a sample buffer containing JPEG data may carry a kCGImagePropertyExifDictionary as an attachment. See <ImageIO/CGImageProperties.h> for a list of keys and value types. Clients should not assume that the completion handler will be called on a specific thread. Calls to captureStillImageAsynchronouslyFromConnection:completionHandler: are not synchronized with AVCaptureDevice manual control completion handlers. Setting a device manual control, waiting for its completion, then calling captureStillImageAsynchronouslyFromConnection:completionHandler: DOES NOT ensure that the still image returned reflects your manual control change. It may be from an earlier time. You can compare your manual control completion handler sync time to the returned still image's presentation time. You can retrieve the sample buffer's pts using CMSampleBufferGetPresentationTimestamp(). If the still image has an earlier timestamp, your manual control command does not apply to it.
+//
 // CaptureStillImageAsynchronouslyFromConnectionCompletionHandler calls the underlying CaptureStillImageAsynchronouslyFromConnectionCompletionHandler.
 func (x *CaptureStillImageOutput) CaptureStillImageAsynchronouslyFromConnectionCompletionHandler(connection *raw.AVCaptureConnection, handler func(unsafe.Pointer, unsafe.Pointer)) {
 	x.inner.CaptureStillImageAsynchronouslyFromConnectionCompletionHandler(connection, handler)
 }
 
+// @property outputSettings @abstract Specifies the options the receiver uses to encode still images before they are delivered. @discussion See AVVideoSettings.h for more information on how to construct an output settings dictionary. On iOS, the only currently supported keys are AVVideoCodecKey and kCVPixelBufferPixelFormatTypeKey. Use -availableImageDataCVPixelFormatTypes and -availableImageDataCodecTypes to determine what codec keys and pixel formats are supported. AVVideoQualityKey is supported on iOS 6.0 and later and may only be used when AVVideoCodecKey is set to AVVideoCodecTypeJPEG.
+//
 // OutputSettings calls the underlying OutputSettings.
 func (x *CaptureStillImageOutput) OutputSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.OutputSettings()
@@ -71,6 +81,8 @@ func (x *CaptureStillImageOutput) SetOutputSettings(outputSettings *foundation.N
 	x.inner.SetOutputSettings(outputSettings)
 }
 
+// @property availableImageDataCVPixelFormatTypes @abstract Indicates the supported image pixel formats that can be specified in outputSettings. @discussion The value of this property is an NSArray of NSNumbers that can be used as values for the kCVPixelBufferPixelFormatTypeKey in the receiver's outputSettings property. The first format in the returned list is the most efficient output format.
+//
 // AvailableImageDataCVPixelFormatTypes returns the collection as a Go slice.
 func (x *CaptureStillImageOutput) AvailableImageDataCVPixelFormatTypes() []*foundation.NSNumber {
 	arr := x.inner.AvailableImageDataCVPixelFormatTypes()
@@ -82,6 +94,8 @@ func (x *CaptureStillImageOutput) AvailableImageDataCVPixelFormatTypes() []*foun
 	})
 }
 
+// @property availableImageDataCodecTypes @abstract Indicates the supported image codec formats that can be specified in outputSettings. @discussion The value of this property is an NSArray of AVVideoCodecTypes that can be used as values for the AVVideoCodecKey in the receiver's outputSettings property.
+//
 // AvailableImageDataCodecTypes returns the collection as a Go slice.
 func (x *CaptureStillImageOutput) AvailableImageDataCodecTypes() []*foundation.NSString {
 	arr := x.inner.AvailableImageDataCodecTypes()
@@ -93,6 +107,8 @@ func (x *CaptureStillImageOutput) AvailableImageDataCodecTypes() []*foundation.N
 	})
 }
 
+// @property highResolutionStillImageOutputEnabled @abstract Indicates whether the receiver should emit still images at the highest resolution supported by its source AVCaptureDevice's activeFormat. @discussion By default, AVCaptureStillImageOutput emits images with the same dimensions as its source AVCaptureDevice's activeFormat.formatDescription. However, if you set this property to YES, the receiver emits still images at its source AVCaptureDevice's activeFormat.highResolutionStillImageDimensions. Note that if you enable video stabilization (see AVCaptureConnection's preferredVideoStabilizationMode) for any output, the high resolution still images emitted by AVCaptureStillImageOutput may be smaller by 10 or more percent.
+//
 // IsHighResolutionStillImageOutputEnabled calls the underlying IsHighResolutionStillImageOutputEnabled.
 func (x *CaptureStillImageOutput) IsHighResolutionStillImageOutputEnabled() bool {
 	return x.inner.IsHighResolutionStillImageOutputEnabled()
@@ -103,6 +119,8 @@ func (x *CaptureStillImageOutput) SetHighResolutionStillImageOutputEnabled(highR
 	x.inner.SetHighResolutionStillImageOutputEnabled(highResolutionStillImageOutputEnabled)
 }
 
+// @property capturingStillImage @abstract A boolean value that becomes true when a still image is being captured. @discussion The value of this property is a BOOL that becomes true when a still image is being captured, and false when no still image capture is underway. This property is key-value observable.
+//
 // IsCapturingStillImage calls the underlying IsCapturingStillImage.
 func (x *CaptureStillImageOutput) IsCapturingStillImage() bool {
 	return x.inner.IsCapturingStillImage()

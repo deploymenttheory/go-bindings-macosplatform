@@ -37,6 +37,8 @@ func NewWKWebsiteDataRecord() *WKWebsiteDataRecord {
 	return &WKWebsiteDataRecord{inner: raw.WKWebsiteDataRecordFromID(_id)}
 }
 
+// @abstract The display name for the data record. This is usually the domain name.
+//
 // DisplayName calls the underlying DisplayName.
 func (x *WKWebsiteDataRecord) DisplayName() string {
 	_r := x.inner.DisplayName()
@@ -46,6 +48,8 @@ func (x *WKWebsiteDataRecord) DisplayName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The various types of website data that exist for this data record.
+//
 // DataTypes calls the underlying DataTypes.
 func (x *WKWebsiteDataRecord) DataTypes() *foundation.NSSet[*foundation.NSString] {
 	return x.inner.DataTypes()

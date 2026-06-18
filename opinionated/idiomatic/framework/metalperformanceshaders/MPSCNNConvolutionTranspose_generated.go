@@ -34,6 +34,8 @@ func CNNConvolutionTransposeFromID(id objc.ID) *CNNConvolutionTranspose {
 	return &CNNConvolutionTranspose{inner: raw.MPSCNNConvolutionTransposeFromID(id)}
 }
 
+// @abstract   Initializes a convolution transpose kernel @param      device                          The MTLDevice on which this MPSCNNConvolutionTranspose filter will be used @param      weights                         A pointer to a object that conforms to the MPSCNNConvolutionDataSource protocol. The MPSCNNConvolutionDataSource protocol declares the methods that an instance of MPSCNNConvolutionTranspose uses to obtain the weights and bias terms for the CNN convolutionTranspose filter. Currently we support only Float32 weights. @return     A valid MPSCNNConvolutionTranspose object.
+//
 // NewCNNConvolutionTransposeWithDeviceWeights creates a new [CNNConvolutionTranspose].
 func NewCNNConvolutionTransposeWithDeviceWeights(device metal.MTLDevice, weights mpsneuralnetwork.MPSCNNConvolutionDataSource) *CNNConvolutionTranspose {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNConvolutionTranspose")), objc.RegisterName("alloc"))
@@ -41,6 +43,8 @@ func NewCNNConvolutionTransposeWithDeviceWeights(device metal.MTLDevice, weights
 	return &CNNConvolutionTranspose{inner: raw.MPSCNNConvolutionTransposeFromID(_id)}
 }
 
+// @abstract <NSSecureCoding> support
+//
 // NewCNNConvolutionTransposeWithCoderDevice creates a new [CNNConvolutionTranspose].
 func NewCNNConvolutionTransposeWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *CNNConvolutionTranspose {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNConvolutionTranspose")), objc.RegisterName("alloc"))
@@ -48,84 +52,112 @@ func NewCNNConvolutionTransposeWithCoderDevice(aDecoder *foundation.NSCoder, dev
 	return &CNNConvolutionTranspose{inner: raw.MPSCNNConvolutionTransposeFromID(_id)}
 }
 
+// @property   kernelOffsetX @abstract   Offset in X from which the kernel starts sliding
+//
 // WithKernelOffsetX sets the kernelOffsetX property and returns the receiver for chaining.
 func (x *CNNConvolutionTranspose) WithKernelOffsetX(kernelOffsetX int) *CNNConvolutionTranspose {
 	x.inner.SetKernelOffsetX(kernelOffsetX)
 	return x
 }
 
+// @property   kernelOffsetY @abstract   Offset in Y from which the kernel starts sliding
+//
 // WithKernelOffsetY sets the kernelOffsetY property and returns the receiver for chaining.
 func (x *CNNConvolutionTranspose) WithKernelOffsetY(kernelOffsetY int) *CNNConvolutionTranspose {
 	x.inner.SetKernelOffsetY(kernelOffsetY)
 	return x
 }
 
+// @abstract    Precision of accumulator used in convolution. @discussion  See MPSNeuralNetworkTypes.h for discussion. Default is MPSNNConvolutionAccumulatorPrecisionOptionFloat.
+//
 // WithAccumulatorPrecisionOption sets the accumulatorPrecisionOption property and returns the receiver for chaining.
 func (x *CNNConvolutionTranspose) WithAccumulatorPrecisionOption(accumulatorPrecisionOption mpsneuralnetwork.MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionTranspose {
 	x.inner.SetAccumulatorPrecisionOption(accumulatorPrecisionOption)
 	return x
 }
 
+// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *CNNConvolutionTranspose) WithOffset(offset mpscore.MPSOffset) *CNNConvolutionTranspose {
 	x.inner.MPSCNNKernel.SetOffset(offset)
 	return x
 }
 
+// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+//
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *CNNConvolutionTranspose) WithClipRect(clipRect metal.MTLRegion) *CNNConvolutionTranspose {
 	x.inner.MPSCNNKernel.SetClipRect(clipRect)
 	return x
 }
 
+// @property   destinationFeatureChannelOffset @abstract   The number of channels in the destination MPSImage to skip before writing output. @discussion This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+//
 // WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
 func (x *CNNConvolutionTranspose) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNConvolutionTranspose {
 	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
 	return x
 }
 
+// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+//
 // WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
 func (x *CNNConvolutionTranspose) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNConvolutionTranspose {
 	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
 	return x
 }
 
+// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+//
 // WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
 func (x *CNNConvolutionTranspose) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNConvolutionTranspose {
 	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
 	return x
 }
 
+// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode Note: For @ref MPSCNNPoolingAverage specifying edge mode @ref MPSImageEdgeModeClamp is interpreted as a "shrink-to-edge" operation, which shrinks the effective filtering window to remain within the source image borders.
+//
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *CNNConvolutionTranspose) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNConvolutionTranspose {
 	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
 	return x
 }
 
+// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
+//
 // WithPadding sets the padding property and returns the receiver for chaining.
 func (x *CNNConvolutionTranspose) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNConvolutionTranspose {
 	x.inner.MPSCNNKernel.SetPadding(padding)
 	return x
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
 func (x *CNNConvolutionTranspose) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNConvolutionTranspose {
 	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNConvolutionTranspose) WithOptions(options mpscore.MPSKernelOptions) *CNNConvolutionTranspose {
 	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNConvolutionTranspose) WithLabel(label string) *CNNConvolutionTranspose {
 	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @abstract       Encode a MPSCNNKernel into a command Buffer. Create a texture to hold the result and return it. @discussion     In the first iteration on this method, encodeToCommandBuffer:sourceImage:destinationImage: some work was left for the developer to do in the form of correctly setting the offset property and sizing the result buffer. With the introduction of the padding policy (see padding property) the filter can do this work itself. If you would like to have some input into what sort of MPSImage (e.g. temporary vs. regular) or what size it is or where it is allocated, you may set the destinationImageAllocator to allocate the image yourself. This method uses the MPSNNPadding padding property to figure out how to size the result image and to set the offset property. See discussion in MPSNeuralNetworkTypes.h. Note: the regular encodeToCommandBuffer:sourceImage: method may be used when no state is needed, such as when the convolution transpose operation is not balanced by a matching convolution object upstream. These encode methods are for auto encoders where each convolution in inference pass is coupled with convolution transpose. In order for convolution transpose to correctly undo the convolution downsampling, MPSCNNConvolutionGradientState produced by convolution is needed by convolution transpose to correctly size destination image. These methods are only useful for inference only network. For training, use encode methods that take MPSCNNConvolutionTransposeGradientState below. @param          commandBuffer       The command buffer @param          sourceImage         A MPSImage to use as the source images for the filter. @param          convolutionGradientState    A valid MPSCNNConvolutionGradientState from the MPSCNNConvoluton counterpart to this MPSCNNConvolutionTranspose. If there is no forward convolution counterpart, pass NULL here. This state affects the sizing the result. @result         A MPSImage or MPSTemporaryImage allocated per the destinationImageAllocator containing the output of the graph. The offset property will be adjusted to reflect the offset used during the encode. The returned image will be automatically released when the command buffer completes. If you want to keep it around for longer, retain the image. (ARC will do this for you if you use it later.)
+//
 // EncodeToCommandBufferSourceImageConvolutionGradientState calls the underlying EncodeToCommandBufferSourceImageConvolutionGradientState.
 func (x *CNNConvolutionTranspose) EncodeToCommandBufferSourceImageConvolutionGradientState(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, convolutionGradientState *mpsneuralnetwork.MPSCNNConvolutionGradientState) *mpscore.MPSImage {
 	return x.inner.EncodeToCommandBufferSourceImageConvolutionGradientState(commandBuffer, sourceImage, convolutionGradientState)
@@ -146,6 +178,8 @@ func (x *CNNConvolutionTranspose) EncodeBatchToCommandBufferSourceImagesConvolut
 	x.inner.EncodeBatchToCommandBufferSourceImagesConvolutionGradientStatesDestinationImages(commandBuffer, sourceImage, convolutionGradientState, destinationImage)
 }
 
+// @abstract   Allocate a MPCNNConvolutionTransposeGradientState to hold the results from a -encodeBatchToCommandBuffer... operation @param      sourceImage         The MPSImage consumed by the associated -encode call. @param      sourceStates        The list of MPSCNNConvolutionGradientState consumed by the associated -encode call, for a batch size of 1. In auto encoders, this state is produced by corresponding MPSCNNConvolution. @return     The list of states produced by the -encode call for batch size of 1. -isResultStateReusedAcrossBatch returns YES for MPSCNNConvolutionTranspose so same state is used across entire batch. State object is not reusasable across batches.
+//
 // ResultStateForSourceImageSourceStatesDestinationImage calls the underlying ResultStateForSourceImageSourceStatesDestinationImage.
 func (x *CNNConvolutionTranspose) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpsneuralnetwork.MPSCNNConvolutionGradientState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNConvolutionTransposeGradientState {
 	return x.inner.ResultStateForSourceImageSourceStatesDestinationImage(sourceImage, sourceStates, destinationImage)
@@ -166,21 +200,29 @@ func (x *CNNConvolutionTranspose) TemporaryResultStateBatchForCommandBufferSourc
 	return x.inner.TemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer, sourceImage, sourceStates, destinationImage)
 }
 
+// @abstract   CPU side reload. Reload the updated weights and biases from data provider into internal weights and bias buffers. Weights and biases gradients needed for update are obtained from MPSCNNConvolutionTransposeGradientState object. Data provider passed in init call is used for this purpose.
+//
 // ReloadWeightsAndBiasesFromDataSource calls the underlying ReloadWeightsAndBiasesFromDataSource.
 func (x *CNNConvolutionTranspose) ReloadWeightsAndBiasesFromDataSource() {
 	x.inner.ReloadWeightsAndBiasesFromDataSource()
 }
 
+// @abstract   GPU side reload. Reload the updated weights and biases from update buffer produced by application enqueued metal kernel into internal weights and biases buffer. Weights and biases gradients needed for update are obtained from MPSCNNConvolutionTransposeGradientState object's gradientForWeights and gradientForBiases metal buffer. @param      commandBuffer      Metal command buffer on which application update kernel was enqueued consuming MPSCNNConvolutionGradientState's gradientForWeights and gradientForBiases buffers and producing updateBuffer metal buffer. @param      state              MPSCNNConvolutionWeightsAndBiasesState containing weights and biases buffers which have updated weights produced by application's update kernel. The state readcount will be decremented.
+//
 // ReloadWeightsAndBiasesWithCommandBufferState calls the underlying ReloadWeightsAndBiasesWithCommandBufferState.
 func (x *CNNConvolutionTranspose) ReloadWeightsAndBiasesWithCommandBufferState(commandBuffer metal.MTLCommandBuffer, state *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState) {
 	x.inner.ReloadWeightsAndBiasesWithCommandBufferState(commandBuffer, state)
 }
 
+// @abstract   GPU side export. Enqueue a kernel to export current weights and biases stored in MPSCNNConvoltionTranspose's internal buffers into weights and biases MTLBuffer returned in MPSCNNConvolutionWeightsAndBiasesState. @param      commandBuffer              Metal command buffer on which export kernel is enqueued. @param      resultStateCanBeTemporary  If FALSE, state returned will be non-temporary. If TRUE, returned state may or may not be temporary. @return     MPSCNNConvolutionWeightsAndBiasesState containing weights and biases buffer to which weights got exported. This state and be temporary or non-temporary depending on the flag resultStateCanBeTemporary
+//
 // ExportWeightsAndBiasesWithCommandBufferResultStateCanBeTemporary calls the underlying ExportWeightsAndBiasesWithCommandBufferResultStateCanBeTemporary.
 func (x *CNNConvolutionTranspose) ExportWeightsAndBiasesWithCommandBufferResultStateCanBeTemporary(commandBuffer metal.MTLCommandBuffer, resultStateCanBeTemporary bool) *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState {
 	return x.inner.ExportWeightsAndBiasesWithCommandBufferResultStateCanBeTemporary(commandBuffer, resultStateCanBeTemporary)
 }
 
+// @abstract        These low level encode functions should be used during training. The first two encode functions, which return destination image on left hand side, takes in MPSCNNConvolutionGradientState that was produced by corresponding MPSCNNConvolution when there is one e.g. auto encoders. This state is used to correctly size destination being returned. These encode methods return MPSCNNConvoltionTransposeGradientState object on auto release pool to be consumed by MPSCNNConvolutionTransposeGradient.
+//
 // EncodeToCommandBufferSourceImageConvolutionGradientStateDestinationStateDestinationStateIsTemporary calls the underlying EncodeToCommandBufferSourceImageConvolutionGradientStateDestinationStateDestinationStateIsTemporary.
 func (x *CNNConvolutionTranspose) EncodeToCommandBufferSourceImageConvolutionGradientStateDestinationStateDestinationStateIsTemporary(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, convolutionGradientState *mpsneuralnetwork.MPSCNNConvolutionGradientState, outState *mpsneuralnetwork.MPSCNNConvolutionTransposeGradientState, isTemporary bool) *mpscore.MPSImage {
 	return x.inner.EncodeToCommandBufferSourceImageConvolutionGradientStateDestinationStateDestinationStateIsTemporary(commandBuffer, sourceImage, convolutionGradientState, outState, isTemporary)
@@ -191,16 +233,22 @@ func (x *CNNConvolutionTranspose) EncodeBatchToCommandBufferSourceImagesConvolut
 	return x.inner.EncodeBatchToCommandBufferSourceImagesConvolutionGradientStatesDestinationStatesDestinationStateIsTemporary(commandBuffer, sourceImages, convolutionGradientStates, outStates, isTemporary)
 }
 
+// @property   inputFeatureChannels @abstract   The number of feature channels per pixel in the input image.
+//
 // InputFeatureChannels calls the underlying InputFeatureChannels.
 func (x *CNNConvolutionTranspose) InputFeatureChannels() uint {
 	return x.inner.InputFeatureChannels()
 }
 
+// @property   outputFeatureChannels @abstract   The number of feature channels per pixel in the output image.
+//
 // OutputFeatureChannels calls the underlying OutputFeatureChannels.
 func (x *CNNConvolutionTranspose) OutputFeatureChannels() uint {
 	return x.inner.OutputFeatureChannels()
 }
 
+// @property   kernelOffsetX @abstract   Offset in X from which the kernel starts sliding
+//
 // KernelOffsetX calls the underlying KernelOffsetX.
 func (x *CNNConvolutionTranspose) KernelOffsetX() int {
 	return x.inner.KernelOffsetX()
@@ -211,6 +259,8 @@ func (x *CNNConvolutionTranspose) SetKernelOffsetX(kernelOffsetX int) {
 	x.inner.SetKernelOffsetX(kernelOffsetX)
 }
 
+// @property   kernelOffsetY @abstract   Offset in Y from which the kernel starts sliding
+//
 // KernelOffsetY calls the underlying KernelOffsetY.
 func (x *CNNConvolutionTranspose) KernelOffsetY() int {
 	return x.inner.KernelOffsetY()
@@ -221,21 +271,29 @@ func (x *CNNConvolutionTranspose) SetKernelOffsetY(kernelOffsetY int) {
 	x.inner.SetKernelOffsetY(kernelOffsetY)
 }
 
+// @property   groups @abstract   Number of groups input and output channels are divided into.
+//
 // Groups calls the underlying Groups.
 func (x *CNNConvolutionTranspose) Groups() uint {
 	return x.inner.Groups()
 }
 
+// @abstract    Precision of accumulator used in convolution. @discussion  See MPSNeuralNetworkTypes.h for discussion. Default is MPSNNConvolutionAccumulatorPrecisionOptionFloat.
+//
 // AccumulatorPrecisionOption calls the underlying AccumulatorPrecisionOption.
 func (x *CNNConvolutionTranspose) AccumulatorPrecisionOption() mpsneuralnetwork.MPSNNConvolutionAccumulatorPrecisionOption {
 	return x.inner.AccumulatorPrecisionOption()
 }
 
+// @abstract    Precision of accumulator used in convolution. @discussion  See MPSNeuralNetworkTypes.h for discussion. Default is MPSNNConvolutionAccumulatorPrecisionOptionFloat.
+//
 // SetAccumulatorPrecisionOption calls the underlying SetAccumulatorPrecisionOption.
 func (x *CNNConvolutionTranspose) SetAccumulatorPrecisionOption(accumulatorPrecisionOption mpsneuralnetwork.MPSNNConvolutionAccumulatorPrecisionOption) {
 	x.inner.SetAccumulatorPrecisionOption(accumulatorPrecisionOption)
 }
 
+// @property   dataSource @abstract   dataSource with which convolution transpose object was created
+//
 // DataSource calls the underlying DataSource.
 func (x *CNNConvolutionTranspose) DataSource() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.DataSource()

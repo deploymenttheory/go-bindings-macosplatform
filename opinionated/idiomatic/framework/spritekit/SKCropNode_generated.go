@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A SpriteKit node that masks child nodes using another node's alpha component
+//
 // CropNode wraps [raw.SKCropNode] with a fluent Go API.
 type CropNode struct {
 	inner *raw.SKCropNode
@@ -38,96 +40,128 @@ func NewCropNode() *CropNode {
 	return &CropNode{inner: raw.SKCropNodeFromID(_id)}
 }
 
+// SKNode to be used as the mask. The SKNode supplied as the mask must not be a child of another node, but it may have children. Anywhere the mask's output alpha component is less than 0.05 masks out that area for the SKCropNode's children. If the mask is nil, nothing is masked out.
+//
 // WithMaskNode sets the maskNode property and returns the receiver for chaining.
 func (x *CropNode) WithMaskNode(maskNode NodeProvider) *CropNode {
 	x.inner.SetMaskNode(maskNode.asNode())
 	return x
 }
 
+// The position of the node in the parent's coordinate system
+//
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *CropNode) WithPosition(position corefoundation.CGPoint) *CropNode {
 	x.inner.SKNode.SetPosition(position)
 	return x
 }
 
+// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+//
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *CropNode) WithZPosition(zPosition float64) *CropNode {
 	x.inner.SKNode.SetZPosition(zPosition)
 	return x
 }
 
+// The Euler rotation about the z axis (in radians)
+//
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *CropNode) WithZRotation(zRotation float64) *CropNode {
 	x.inner.SKNode.SetZRotation(zRotation)
 	return x
 }
 
+// The scaling in the X axis
+//
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *CropNode) WithXScale(xScale float64) *CropNode {
 	x.inner.SKNode.SetXScale(xScale)
 	return x
 }
 
+// The scaling in the Y axis
+//
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *CropNode) WithYScale(yScale float64) *CropNode {
 	x.inner.SKNode.SetYScale(yScale)
 	return x
 }
 
+// The speed multiplier applied to all actions run on this node. Inherited by its children.
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *CropNode) WithSpeed(speed float64) *CropNode {
 	x.inner.SKNode.SetSpeed(speed)
 	return x
 }
 
+// Alpha of this node (multiplied by the output color to give the final result)
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *CropNode) WithAlpha(alpha float64) *CropNode {
 	x.inner.SKNode.SetAlpha(alpha)
 	return x
 }
 
+// Controls whether or not the node's actions is updated or paused.
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *CropNode) WithPaused(paused bool) *CropNode {
 	x.inner.SKNode.SetPaused(paused)
 	return x
 }
 
+// Controls whether or not the node and its children are rendered.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *CropNode) WithHidden(hidden bool) *CropNode {
 	x.inner.SKNode.SetHidden(hidden)
 	return x
 }
 
+// Controls whether or not the node receives touch events
+//
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *CropNode) WithUserInteractionEnabled(userInteractionEnabled bool) *CropNode {
 	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
 	return x
 }
 
+// The client assignable name. In general, this should be unique among peers in the scene graph.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *CropNode) WithName(name string) *CropNode {
 	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// Physics body attached to the node, with synchronized scale, rotation, and position
+//
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *CropNode) WithPhysicsBody(physicsBody *PhysicsBody) *CropNode {
 	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
+// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+//
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *CropNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *CropNode {
 	x.inner.SKNode.SetUserData(userData)
 	return x
 }
 
+// Kinematic constraints, used in IK solving
+//
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *CropNode) WithReachConstraints(reachConstraints *ReachConstraints) *CropNode {
 	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
+// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+//
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *CropNode) WithConstraints(items ...*raw.SKConstraint) *CropNode {
 	if len(items) == 0 {
@@ -146,6 +180,8 @@ func (x *CropNode) WithConstraints(items ...*raw.SKConstraint) *CropNode {
 	return x
 }
 
+// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+//
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *CropNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *CropNode {
 	x.inner.SKNode.SetAttributeValues(attributeValues)

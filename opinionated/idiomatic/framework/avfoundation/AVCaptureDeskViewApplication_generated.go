@@ -38,6 +38,8 @@ func NewCaptureDeskViewApplication() *CaptureDeskViewApplication {
 	return &CaptureDeskViewApplication{inner: raw.AVCaptureDeskViewApplicationFromID(_id)}
 }
 
+// @method presentWithCompletionHandler: @abstract Presents the Desk View application to the user with no launch configuration. @param completionHandler A block to be called once the Desk View application has been completely launched (or brought to the foreground). @discussion This method allows you to programmatically launch the Desk View application from your own application UI. If the Desk View application is already running, this method brings it to the front. If the Desk View application is minimized in the Dock, this method un-minimizes it and brings it to the front.
+//
 // Present blocks until the operation completes or ctx is cancelled.
 func (x *CaptureDeskViewApplication) Present(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -56,6 +58,8 @@ func (x *CaptureDeskViewApplication) Present(ctx context.Context) error {
 	}
 }
 
+// @method presentWithLaunchConfiguration:completionHandler: @abstract Presents the Desk View application to the user. @param launchConfiguration Launch configuration governing how the Desk View application will be presented. @param completionHandler A block to be called once the Desk View application has been completely launched (or brought to the foreground). Optionally, this completionHandler may fire later, once the user has completed set up mode (see AVCaptureDeskViewApplicationLaunchConfiguration.requiresSetUpModeCompletion). @discussion This method allows you to programmatically launch the Desk View application from your own application UI. If the Desk View application is already running, this method brings it to the front. If the Desk View application is minimized in the Dock, this method un-minimizes it and brings it to the front.
+//
 // PresentWithLaunchConfiguration blocks until the operation completes or ctx is cancelled.
 func (x *CaptureDeskViewApplication) PresentWithLaunchConfiguration(ctx context.Context, launchConfiguration *raw.AVCaptureDeskViewApplicationLaunchConfiguration) error {
 	_ch := make(chan error, 1)

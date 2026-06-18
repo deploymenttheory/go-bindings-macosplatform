@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An emitter of particle sprites.
+//
 // EmitterNode wraps [raw.SKEmitterNode] with a fluent Go API.
 type EmitterNode struct {
 	inner *raw.SKEmitterNode
@@ -39,24 +41,32 @@ func NewEmitterNode() *EmitterNode {
 	return &EmitterNode{inner: raw.SKEmitterNodeFromID(_id)}
 }
 
+// The texture to be used for the particles.
+//
 // WithParticleTexture sets the particleTexture property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleTexture(particleTexture TextureProvider) *EmitterNode {
 	x.inner.SetParticleTexture(particleTexture.asTexture())
 	return x
 }
 
+// The blend mode for each particle. Defaults to SKBlendModeAlpha.
+//
 // WithParticleBlendMode sets the particleBlendMode property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleBlendMode(particleBlendMode SKBlendMode) *EmitterNode {
 	x.inner.SetParticleBlendMode(raw.SKBlendMode(particleBlendMode))
 	return x
 }
 
+// The starting color for each particle. Defaults to clear.
+//
 // WithParticleColor sets the particleColor property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleColor(particleColor *appkit.NSColor) *EmitterNode {
 	x.inner.SetParticleColor(particleColor)
 	return x
 }
 
+// The random variance about each color component for each particle. Defaults to 0.0.
+//
 // WithParticleColorRedRange sets the particleColorRedRange property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleColorRedRange(particleColorRedRange float64) *EmitterNode {
 	x.inner.SetParticleColorRedRange(particleColorRedRange)
@@ -81,6 +91,8 @@ func (x *EmitterNode) WithParticleColorAlphaRange(particleColorAlphaRange float6
 	return x
 }
 
+// The rate at which to modify each color component for each particle (per second).
+//
 // WithParticleColorRedSpeed sets the particleColorRedSpeed property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleColorRedSpeed(particleColorRedSpeed float64) *EmitterNode {
 	x.inner.SetParticleColorRedSpeed(particleColorRedSpeed)
@@ -111,18 +123,24 @@ func (x *EmitterNode) WithParticleColorSequence(particleColorSequence *KeyframeS
 	return x
 }
 
+// The starting color blend for each particle. Behaves the same as SKSpriteNode. Defaults to 0.0.
+//
 // WithParticleColorBlendFactor sets the particleColorBlendFactor property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleColorBlendFactor(particleColorBlendFactor float64) *EmitterNode {
 	x.inner.SetParticleColorBlendFactor(particleColorBlendFactor)
 	return x
 }
 
+// The random variance about the starting color blend for each particle. Defaults to 0.0.
+//
 // WithParticleColorBlendFactorRange sets the particleColorBlendFactorRange property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleColorBlendFactorRange(particleColorBlendFactorRange float64) *EmitterNode {
 	x.inner.SetParticleColorBlendFactorRange(particleColorBlendFactorRange)
 	return x
 }
 
+// The rate at which to modify the color blend for each particle. Defaults to 0.0.
+//
 // WithParticleColorBlendFactorSpeed sets the particleColorBlendFactorSpeed property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleColorBlendFactorSpeed(particleColorBlendFactorSpeed float64) *EmitterNode {
 	x.inner.SetParticleColorBlendFactorSpeed(particleColorBlendFactorSpeed)
@@ -135,42 +153,56 @@ func (x *EmitterNode) WithParticleColorBlendFactorSequence(particleColorBlendFac
 	return x
 }
 
+// The starting position for each particle in the emitter's coordinate space. Defaults to (0.0, 0,0).
+//
 // WithParticlePosition sets the particlePosition property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticlePosition(particlePosition corefoundation.CGPoint) *EmitterNode {
 	x.inner.SetParticlePosition(particlePosition)
 	return x
 }
 
+// The random variance about the starting position for each particle in the emitter's coordinate space. Defaults to (0.0, 0,0).
+//
 // WithParticlePositionRange sets the particlePositionRange property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticlePositionRange(particlePositionRange corefoundation.CGVector) *EmitterNode {
 	x.inner.SetParticlePositionRange(particlePositionRange)
 	return x
 }
 
+// The starting speed for each particle along its emission vector. Defaults to 0.0.
+//
 // WithParticleSpeed sets the particleSpeed property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleSpeed(particleSpeed float64) *EmitterNode {
 	x.inner.SetParticleSpeed(particleSpeed)
 	return x
 }
 
+// The random variance about the starting speed for each particle along its emission vector. Defaults to 0.0.
+//
 // WithParticleSpeedRange sets the particleSpeedRange property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleSpeedRange(particleSpeedRange float64) *EmitterNode {
 	x.inner.SetParticleSpeedRange(particleSpeedRange)
 	return x
 }
 
+// The angle at which to emit each new particle, in radians. Defaults to 0.0.
+//
 // WithEmissionAngle sets the emissionAngle property and returns the receiver for chaining.
 func (x *EmitterNode) WithEmissionAngle(emissionAngle float64) *EmitterNode {
 	x.inner.SetEmissionAngle(emissionAngle)
 	return x
 }
 
+// The random variance about the angle at which to emit each new particle, in radians. Defaults to 0.0.
+//
 // WithEmissionAngleRange sets the emissionAngleRange property and returns the receiver for chaining.
 func (x *EmitterNode) WithEmissionAngleRange(emissionAngleRange float64) *EmitterNode {
 	x.inner.SetEmissionAngleRange(emissionAngleRange)
 	return x
 }
 
+// The acceleration to apply to each particles velocity. Useful for simulating effects such as wind or gravity. Defaults to 0.0.
+//
 // WithXAcceleration sets the xAcceleration property and returns the receiver for chaining.
 func (x *EmitterNode) WithXAcceleration(xAcceleration float64) *EmitterNode {
 	x.inner.SetXAcceleration(xAcceleration)
@@ -183,66 +215,88 @@ func (x *EmitterNode) WithYAcceleration(yAcceleration float64) *EmitterNode {
 	return x
 }
 
+// The rate at which new particles are generated, in particles per second. Defaults to 0.0.
+//
 // WithParticleBirthRate sets the particleBirthRate property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleBirthRate(particleBirthRate float64) *EmitterNode {
 	x.inner.SetParticleBirthRate(particleBirthRate)
 	return x
 }
 
+// The number of particles that will be emitted. If set to 0, there is no limit. Defaults to 0.
+//
 // WithNumParticlesToEmit sets the numParticlesToEmit property and returns the receiver for chaining.
 func (x *EmitterNode) WithNumParticlesToEmit(numParticlesToEmit uint) *EmitterNode {
 	x.inner.SetNumParticlesToEmit(numParticlesToEmit)
 	return x
 }
 
+// The lifetime of each particle, in seconds. Defaults to 0.0.
+//
 // WithParticleLifetime sets the particleLifetime property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleLifetime(particleLifetime float64) *EmitterNode {
 	x.inner.SetParticleLifetime(particleLifetime)
 	return x
 }
 
+// The random variance about the lifetime of each particle, in seconds. Defaults to 0.0.
+//
 // WithParticleLifetimeRange sets the particleLifetimeRange property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleLifetimeRange(particleLifetimeRange float64) *EmitterNode {
 	x.inner.SetParticleLifetimeRange(particleLifetimeRange)
 	return x
 }
 
+// The starting z-rotation for each particle. Defaults to 0.0.
+//
 // WithParticleRotation sets the particleRotation property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleRotation(particleRotation float64) *EmitterNode {
 	x.inner.SetParticleRotation(particleRotation)
 	return x
 }
 
+// The random variance about the starting z-rotation for each particle. Defaults to 0.0.
+//
 // WithParticleRotationRange sets the particleRotationRange property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleRotationRange(particleRotationRange float64) *EmitterNode {
 	x.inner.SetParticleRotationRange(particleRotationRange)
 	return x
 }
 
+// The rate at which to modify the z-rotation for each particle. Defaults to 0.0.
+//
 // WithParticleRotationSpeed sets the particleRotationSpeed property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleRotationSpeed(particleRotationSpeed float64) *EmitterNode {
 	x.inner.SetParticleRotationSpeed(particleRotationSpeed)
 	return x
 }
 
+// The starting size for each particle. If set to CGSizeZero (the default) the particles will start at the size of the texture assigned to particleTexture. Note that particleScale and particleScaleRange will also have an effect on the effective size of each new particle.
+//
 // WithParticleSize sets the particleSize property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleSize(particleSize corefoundation.CGSize) *EmitterNode {
 	x.inner.SetParticleSize(particleSize)
 	return x
 }
 
+// The starting scale for each particle. Defaults to 1.0.
+//
 // WithParticleScale sets the particleScale property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleScale(particleScale float64) *EmitterNode {
 	x.inner.SetParticleScale(particleScale)
 	return x
 }
 
+// The random variance about the starting scale for each particle. Defaults to 0.0.
+//
 // WithParticleScaleRange sets the particleScaleRange property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleScaleRange(particleScaleRange float64) *EmitterNode {
 	x.inner.SetParticleScaleRange(particleScaleRange)
 	return x
 }
 
+// The rate at which to modify the scale for each particle. Defaults to 0.0.
+//
 // WithParticleScaleSpeed sets the particleScaleSpeed property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleScaleSpeed(particleScaleSpeed float64) *EmitterNode {
 	x.inner.SetParticleScaleSpeed(particleScaleSpeed)
@@ -255,18 +309,24 @@ func (x *EmitterNode) WithParticleScaleSequence(particleScaleSequence *KeyframeS
 	return x
 }
 
+// The starting alpha for each particle. Defaults to 1.0.
+//
 // WithParticleAlpha sets the particleAlpha property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleAlpha(particleAlpha float64) *EmitterNode {
 	x.inner.SetParticleAlpha(particleAlpha)
 	return x
 }
 
+// The random variance about the starting alpha for each particle. Defaults to 1.0.
+//
 // WithParticleAlphaRange sets the particleAlphaRange property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleAlphaRange(particleAlphaRange float64) *EmitterNode {
 	x.inner.SetParticleAlphaRange(particleAlphaRange)
 	return x
 }
 
+// The rate at which to modify the alpha for each particle. Defaults to 1.0.
+//
 // WithParticleAlphaSpeed sets the particleAlphaSpeed property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleAlphaSpeed(particleAlphaSpeed float64) *EmitterNode {
 	x.inner.SetParticleAlphaSpeed(particleAlphaSpeed)
@@ -279,18 +339,24 @@ func (x *EmitterNode) WithParticleAlphaSequence(particleAlphaSequence *KeyframeS
 	return x
 }
 
+// Specifies an action executed by new particles.
+//
 // WithParticleAction sets the particleAction property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleAction(particleAction *Action) *EmitterNode {
 	x.inner.SetParticleAction(particleAction.Unwrap())
 	return x
 }
 
+// Defines what logical 'categories' of fields this particles emitted respond to. Defaults to all bits set (all categories). Can be forced off via affectedByGravity.
+//
 // WithFieldBitMask sets the fieldBitMask property and returns the receiver for chaining.
 func (x *EmitterNode) WithFieldBitMask(fieldBitMask uint32) *EmitterNode {
 	x.inner.SetFieldBitMask(fieldBitMask)
 	return x
 }
 
+// Normally the particles are rendered as if they were a child of the SKEmitterNode, they can also be rendered as if they were a child of any other node in the scene by setting the targetNode property. Defaults to nil (standard behavior).
+//
 // WithTargetNode sets the targetNode property and returns the receiver for chaining.
 func (x *EmitterNode) WithTargetNode(targetNode NodeProvider) *EmitterNode {
 	x.inner.SetTargetNode(targetNode.asNode())
@@ -303,114 +369,152 @@ func (x *EmitterNode) WithShader(shader *Shader) *EmitterNode {
 	return x
 }
 
+// The starting z-position for each particle. Defaults to 0.0.
+//
 // WithParticleZPosition sets the particleZPosition property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleZPosition(particleZPosition float64) *EmitterNode {
 	x.inner.SetParticleZPosition(particleZPosition)
 	return x
 }
 
+// The order in which particles will be rendered. Defaults to SKParticleRenderOrderOldestLast.
+//
 // WithParticleRenderOrder sets the particleRenderOrder property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleRenderOrder(particleRenderOrder SKParticleRenderOrder) *EmitterNode {
 	x.inner.SetParticleRenderOrder(raw.SKParticleRenderOrder(particleRenderOrder))
 	return x
 }
 
+// The random variance about the starting z-position for each particle. Defaults to 0.0.
+//
 // WithParticleZPositionRange sets the particleZPositionRange property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleZPositionRange(particleZPositionRange float64) *EmitterNode {
 	x.inner.SetParticleZPositionRange(particleZPositionRange)
 	return x
 }
 
+// The rate at which to modify the z-position for each particle. Defaults to 0.0.
+//
 // WithParticleZPositionSpeed sets the particleZPositionSpeed property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleZPositionSpeed(particleZPositionSpeed float64) *EmitterNode {
 	x.inner.SetParticleZPositionSpeed(particleZPositionSpeed)
 	return x
 }
 
+// The position of the node in the parent's coordinate system
+//
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *EmitterNode) WithPosition(position corefoundation.CGPoint) *EmitterNode {
 	x.inner.SKNode.SetPosition(position)
 	return x
 }
 
+// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+//
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *EmitterNode) WithZPosition(zPosition float64) *EmitterNode {
 	x.inner.SKNode.SetZPosition(zPosition)
 	return x
 }
 
+// The Euler rotation about the z axis (in radians)
+//
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *EmitterNode) WithZRotation(zRotation float64) *EmitterNode {
 	x.inner.SKNode.SetZRotation(zRotation)
 	return x
 }
 
+// The scaling in the X axis
+//
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *EmitterNode) WithXScale(xScale float64) *EmitterNode {
 	x.inner.SKNode.SetXScale(xScale)
 	return x
 }
 
+// The scaling in the Y axis
+//
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *EmitterNode) WithYScale(yScale float64) *EmitterNode {
 	x.inner.SKNode.SetYScale(yScale)
 	return x
 }
 
+// The speed multiplier applied to all actions run on this node. Inherited by its children.
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *EmitterNode) WithSpeed(speed float64) *EmitterNode {
 	x.inner.SKNode.SetSpeed(speed)
 	return x
 }
 
+// Alpha of this node (multiplied by the output color to give the final result)
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *EmitterNode) WithAlpha(alpha float64) *EmitterNode {
 	x.inner.SKNode.SetAlpha(alpha)
 	return x
 }
 
+// Controls whether or not the node's actions is updated or paused.
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *EmitterNode) WithPaused(paused bool) *EmitterNode {
 	x.inner.SKNode.SetPaused(paused)
 	return x
 }
 
+// Controls whether or not the node and its children are rendered.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *EmitterNode) WithHidden(hidden bool) *EmitterNode {
 	x.inner.SKNode.SetHidden(hidden)
 	return x
 }
 
+// Controls whether or not the node receives touch events
+//
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *EmitterNode) WithUserInteractionEnabled(userInteractionEnabled bool) *EmitterNode {
 	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
 	return x
 }
 
+// The client assignable name. In general, this should be unique among peers in the scene graph.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *EmitterNode) WithName(name string) *EmitterNode {
 	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// Physics body attached to the node, with synchronized scale, rotation, and position
+//
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *EmitterNode) WithPhysicsBody(physicsBody *PhysicsBody) *EmitterNode {
 	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
+// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+//
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *EmitterNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *EmitterNode {
 	x.inner.SKNode.SetUserData(userData)
 	return x
 }
 
+// Kinematic constraints, used in IK solving
+//
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *EmitterNode) WithReachConstraints(reachConstraints *ReachConstraints) *EmitterNode {
 	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
+// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+//
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *EmitterNode) WithConstraints(items ...*raw.SKConstraint) *EmitterNode {
 	if len(items) == 0 {
@@ -429,6 +533,8 @@ func (x *EmitterNode) WithConstraints(items ...*raw.SKConstraint) *EmitterNode {
 	return x
 }
 
+// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+//
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *EmitterNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *EmitterNode {
 	x.inner.SKNode.SetAttributeValues(attributeValues)
@@ -499,6 +605,8 @@ func (x *EmitterNode) ResetSimulation() {
 	x.inner.ResetSimulation()
 }
 
+// The texture to be used for the particles.
+//
 // ParticleTexture calls the underlying ParticleTexture.
 func (x *EmitterNode) ParticleTexture() *Texture {
 	_r := x.inner.ParticleTexture()
@@ -513,6 +621,8 @@ func (x *EmitterNode) SetParticleTexture(particleTexture *raw.SKTexture) {
 	x.inner.SetParticleTexture(particleTexture)
 }
 
+// The blend mode for each particle. Defaults to SKBlendModeAlpha.
+//
 // ParticleBlendMode calls the underlying ParticleBlendMode.
 func (x *EmitterNode) ParticleBlendMode() SKBlendMode {
 	return SKBlendMode(x.inner.ParticleBlendMode())
@@ -523,6 +633,8 @@ func (x *EmitterNode) SetParticleBlendMode(particleBlendMode SKBlendMode) {
 	x.inner.SetParticleBlendMode(raw.SKBlendMode(particleBlendMode))
 }
 
+// The starting color for each particle. Defaults to clear.
+//
 // ParticleColor calls the underlying ParticleColor.
 func (x *EmitterNode) ParticleColor() *appkit.NSColor {
 	return x.inner.ParticleColor()
@@ -533,6 +645,8 @@ func (x *EmitterNode) SetParticleColor(particleColor *appkit.NSColor) {
 	x.inner.SetParticleColor(particleColor)
 }
 
+// The random variance about each color component for each particle. Defaults to 0.0.
+//
 // ParticleColorRedRange calls the underlying ParticleColorRedRange.
 func (x *EmitterNode) ParticleColorRedRange() float64 {
 	return x.inner.ParticleColorRedRange()
@@ -573,6 +687,8 @@ func (x *EmitterNode) SetParticleColorAlphaRange(particleColorAlphaRange float64
 	x.inner.SetParticleColorAlphaRange(particleColorAlphaRange)
 }
 
+// The rate at which to modify each color component for each particle (per second).
+//
 // ParticleColorRedSpeed calls the underlying ParticleColorRedSpeed.
 func (x *EmitterNode) ParticleColorRedSpeed() float64 {
 	return x.inner.ParticleColorRedSpeed()
@@ -627,6 +743,8 @@ func (x *EmitterNode) SetParticleColorSequence(particleColorSequence *raw.SKKeyf
 	x.inner.SetParticleColorSequence(particleColorSequence)
 }
 
+// The starting color blend for each particle. Behaves the same as SKSpriteNode. Defaults to 0.0.
+//
 // ParticleColorBlendFactor calls the underlying ParticleColorBlendFactor.
 func (x *EmitterNode) ParticleColorBlendFactor() float64 {
 	return x.inner.ParticleColorBlendFactor()
@@ -637,6 +755,8 @@ func (x *EmitterNode) SetParticleColorBlendFactor(particleColorBlendFactor float
 	x.inner.SetParticleColorBlendFactor(particleColorBlendFactor)
 }
 
+// The random variance about the starting color blend for each particle. Defaults to 0.0.
+//
 // ParticleColorBlendFactorRange calls the underlying ParticleColorBlendFactorRange.
 func (x *EmitterNode) ParticleColorBlendFactorRange() float64 {
 	return x.inner.ParticleColorBlendFactorRange()
@@ -647,6 +767,8 @@ func (x *EmitterNode) SetParticleColorBlendFactorRange(particleColorBlendFactorR
 	x.inner.SetParticleColorBlendFactorRange(particleColorBlendFactorRange)
 }
 
+// The rate at which to modify the color blend for each particle. Defaults to 0.0.
+//
 // ParticleColorBlendFactorSpeed calls the underlying ParticleColorBlendFactorSpeed.
 func (x *EmitterNode) ParticleColorBlendFactorSpeed() float64 {
 	return x.inner.ParticleColorBlendFactorSpeed()
@@ -671,6 +793,8 @@ func (x *EmitterNode) SetParticleColorBlendFactorSequence(particleColorBlendFact
 	x.inner.SetParticleColorBlendFactorSequence(particleColorBlendFactorSequence)
 }
 
+// The starting position for each particle in the emitter's coordinate space. Defaults to (0.0, 0,0).
+//
 // ParticlePosition calls the underlying ParticlePosition.
 func (x *EmitterNode) ParticlePosition() corefoundation.CGPoint {
 	return x.inner.ParticlePosition()
@@ -681,6 +805,8 @@ func (x *EmitterNode) SetParticlePosition(particlePosition corefoundation.CGPoin
 	x.inner.SetParticlePosition(particlePosition)
 }
 
+// The random variance about the starting position for each particle in the emitter's coordinate space. Defaults to (0.0, 0,0).
+//
 // ParticlePositionRange calls the underlying ParticlePositionRange.
 func (x *EmitterNode) ParticlePositionRange() corefoundation.CGVector {
 	return x.inner.ParticlePositionRange()
@@ -691,6 +817,8 @@ func (x *EmitterNode) SetParticlePositionRange(particlePositionRange corefoundat
 	x.inner.SetParticlePositionRange(particlePositionRange)
 }
 
+// The starting speed for each particle along its emission vector. Defaults to 0.0.
+//
 // ParticleSpeed calls the underlying ParticleSpeed.
 func (x *EmitterNode) ParticleSpeed() float64 {
 	return x.inner.ParticleSpeed()
@@ -701,6 +829,8 @@ func (x *EmitterNode) SetParticleSpeed(particleSpeed float64) {
 	x.inner.SetParticleSpeed(particleSpeed)
 }
 
+// The random variance about the starting speed for each particle along its emission vector. Defaults to 0.0.
+//
 // ParticleSpeedRange calls the underlying ParticleSpeedRange.
 func (x *EmitterNode) ParticleSpeedRange() float64 {
 	return x.inner.ParticleSpeedRange()
@@ -711,6 +841,8 @@ func (x *EmitterNode) SetParticleSpeedRange(particleSpeedRange float64) {
 	x.inner.SetParticleSpeedRange(particleSpeedRange)
 }
 
+// The angle at which to emit each new particle, in radians. Defaults to 0.0.
+//
 // EmissionAngle calls the underlying EmissionAngle.
 func (x *EmitterNode) EmissionAngle() float64 {
 	return x.inner.EmissionAngle()
@@ -721,6 +853,8 @@ func (x *EmitterNode) SetEmissionAngle(emissionAngle float64) {
 	x.inner.SetEmissionAngle(emissionAngle)
 }
 
+// The random variance about the angle at which to emit each new particle, in radians. Defaults to 0.0.
+//
 // EmissionAngleRange calls the underlying EmissionAngleRange.
 func (x *EmitterNode) EmissionAngleRange() float64 {
 	return x.inner.EmissionAngleRange()
@@ -731,6 +865,8 @@ func (x *EmitterNode) SetEmissionAngleRange(emissionAngleRange float64) {
 	x.inner.SetEmissionAngleRange(emissionAngleRange)
 }
 
+// The acceleration to apply to each particles velocity. Useful for simulating effects such as wind or gravity. Defaults to 0.0.
+//
 // XAcceleration calls the underlying XAcceleration.
 func (x *EmitterNode) XAcceleration() float64 {
 	return x.inner.XAcceleration()
@@ -751,6 +887,8 @@ func (x *EmitterNode) SetYAcceleration(yAcceleration float64) {
 	x.inner.SetYAcceleration(yAcceleration)
 }
 
+// The rate at which new particles are generated, in particles per second. Defaults to 0.0.
+//
 // ParticleBirthRate calls the underlying ParticleBirthRate.
 func (x *EmitterNode) ParticleBirthRate() float64 {
 	return x.inner.ParticleBirthRate()
@@ -761,6 +899,8 @@ func (x *EmitterNode) SetParticleBirthRate(particleBirthRate float64) {
 	x.inner.SetParticleBirthRate(particleBirthRate)
 }
 
+// The number of particles that will be emitted. If set to 0, there is no limit. Defaults to 0.
+//
 // NumParticlesToEmit calls the underlying NumParticlesToEmit.
 func (x *EmitterNode) NumParticlesToEmit() uint {
 	return x.inner.NumParticlesToEmit()
@@ -771,6 +911,8 @@ func (x *EmitterNode) SetNumParticlesToEmit(numParticlesToEmit uint) {
 	x.inner.SetNumParticlesToEmit(numParticlesToEmit)
 }
 
+// The lifetime of each particle, in seconds. Defaults to 0.0.
+//
 // ParticleLifetime calls the underlying ParticleLifetime.
 func (x *EmitterNode) ParticleLifetime() float64 {
 	return x.inner.ParticleLifetime()
@@ -781,6 +923,8 @@ func (x *EmitterNode) SetParticleLifetime(particleLifetime float64) {
 	x.inner.SetParticleLifetime(particleLifetime)
 }
 
+// The random variance about the lifetime of each particle, in seconds. Defaults to 0.0.
+//
 // ParticleLifetimeRange calls the underlying ParticleLifetimeRange.
 func (x *EmitterNode) ParticleLifetimeRange() float64 {
 	return x.inner.ParticleLifetimeRange()
@@ -791,6 +935,8 @@ func (x *EmitterNode) SetParticleLifetimeRange(particleLifetimeRange float64) {
 	x.inner.SetParticleLifetimeRange(particleLifetimeRange)
 }
 
+// The starting z-rotation for each particle. Defaults to 0.0.
+//
 // ParticleRotation calls the underlying ParticleRotation.
 func (x *EmitterNode) ParticleRotation() float64 {
 	return x.inner.ParticleRotation()
@@ -801,6 +947,8 @@ func (x *EmitterNode) SetParticleRotation(particleRotation float64) {
 	x.inner.SetParticleRotation(particleRotation)
 }
 
+// The random variance about the starting z-rotation for each particle. Defaults to 0.0.
+//
 // ParticleRotationRange calls the underlying ParticleRotationRange.
 func (x *EmitterNode) ParticleRotationRange() float64 {
 	return x.inner.ParticleRotationRange()
@@ -811,6 +959,8 @@ func (x *EmitterNode) SetParticleRotationRange(particleRotationRange float64) {
 	x.inner.SetParticleRotationRange(particleRotationRange)
 }
 
+// The rate at which to modify the z-rotation for each particle. Defaults to 0.0.
+//
 // ParticleRotationSpeed calls the underlying ParticleRotationSpeed.
 func (x *EmitterNode) ParticleRotationSpeed() float64 {
 	return x.inner.ParticleRotationSpeed()
@@ -821,6 +971,8 @@ func (x *EmitterNode) SetParticleRotationSpeed(particleRotationSpeed float64) {
 	x.inner.SetParticleRotationSpeed(particleRotationSpeed)
 }
 
+// The starting size for each particle. If set to CGSizeZero (the default) the particles will start at the size of the texture assigned to particleTexture. Note that particleScale and particleScaleRange will also have an effect on the effective size of each new particle.
+//
 // ParticleSize calls the underlying ParticleSize.
 func (x *EmitterNode) ParticleSize() corefoundation.CGSize {
 	return x.inner.ParticleSize()
@@ -831,6 +983,8 @@ func (x *EmitterNode) SetParticleSize(particleSize corefoundation.CGSize) {
 	x.inner.SetParticleSize(particleSize)
 }
 
+// The starting scale for each particle. Defaults to 1.0.
+//
 // ParticleScale calls the underlying ParticleScale.
 func (x *EmitterNode) ParticleScale() float64 {
 	return x.inner.ParticleScale()
@@ -841,6 +995,8 @@ func (x *EmitterNode) SetParticleScale(particleScale float64) {
 	x.inner.SetParticleScale(particleScale)
 }
 
+// The random variance about the starting scale for each particle. Defaults to 0.0.
+//
 // ParticleScaleRange calls the underlying ParticleScaleRange.
 func (x *EmitterNode) ParticleScaleRange() float64 {
 	return x.inner.ParticleScaleRange()
@@ -851,6 +1007,8 @@ func (x *EmitterNode) SetParticleScaleRange(particleScaleRange float64) {
 	x.inner.SetParticleScaleRange(particleScaleRange)
 }
 
+// The rate at which to modify the scale for each particle. Defaults to 0.0.
+//
 // ParticleScaleSpeed calls the underlying ParticleScaleSpeed.
 func (x *EmitterNode) ParticleScaleSpeed() float64 {
 	return x.inner.ParticleScaleSpeed()
@@ -875,6 +1033,8 @@ func (x *EmitterNode) SetParticleScaleSequence(particleScaleSequence *raw.SKKeyf
 	x.inner.SetParticleScaleSequence(particleScaleSequence)
 }
 
+// The starting alpha for each particle. Defaults to 1.0.
+//
 // ParticleAlpha calls the underlying ParticleAlpha.
 func (x *EmitterNode) ParticleAlpha() float64 {
 	return x.inner.ParticleAlpha()
@@ -885,6 +1045,8 @@ func (x *EmitterNode) SetParticleAlpha(particleAlpha float64) {
 	x.inner.SetParticleAlpha(particleAlpha)
 }
 
+// The random variance about the starting alpha for each particle. Defaults to 1.0.
+//
 // ParticleAlphaRange calls the underlying ParticleAlphaRange.
 func (x *EmitterNode) ParticleAlphaRange() float64 {
 	return x.inner.ParticleAlphaRange()
@@ -895,6 +1057,8 @@ func (x *EmitterNode) SetParticleAlphaRange(particleAlphaRange float64) {
 	x.inner.SetParticleAlphaRange(particleAlphaRange)
 }
 
+// The rate at which to modify the alpha for each particle. Defaults to 1.0.
+//
 // ParticleAlphaSpeed calls the underlying ParticleAlphaSpeed.
 func (x *EmitterNode) ParticleAlphaSpeed() float64 {
 	return x.inner.ParticleAlphaSpeed()
@@ -919,6 +1083,8 @@ func (x *EmitterNode) SetParticleAlphaSequence(particleAlphaSequence *raw.SKKeyf
 	x.inner.SetParticleAlphaSequence(particleAlphaSequence)
 }
 
+// Specifies an action executed by new particles.
+//
 // ParticleAction calls the underlying ParticleAction.
 func (x *EmitterNode) ParticleAction() *Action {
 	_r := x.inner.ParticleAction()
@@ -933,6 +1099,8 @@ func (x *EmitterNode) SetParticleAction(particleAction *raw.SKAction) {
 	x.inner.SetParticleAction(particleAction)
 }
 
+// Defines what logical 'categories' of fields this particles emitted respond to. Defaults to all bits set (all categories). Can be forced off via affectedByGravity.
+//
 // FieldBitMask calls the underlying FieldBitMask.
 func (x *EmitterNode) FieldBitMask() uint32 {
 	return x.inner.FieldBitMask()
@@ -943,6 +1111,8 @@ func (x *EmitterNode) SetFieldBitMask(fieldBitMask uint32) {
 	x.inner.SetFieldBitMask(fieldBitMask)
 }
 
+// Normally the particles are rendered as if they were a child of the SKEmitterNode, they can also be rendered as if they were a child of any other node in the scene by setting the targetNode property. Defaults to nil (standard behavior).
+//
 // TargetNode calls the underlying TargetNode.
 func (x *EmitterNode) TargetNode() *Node {
 	_r := x.inner.TargetNode()
@@ -971,6 +1141,8 @@ func (x *EmitterNode) SetShader(shader *raw.SKShader) {
 	x.inner.SetShader(shader)
 }
 
+// The starting z-position for each particle. Defaults to 0.0.
+//
 // ParticleZPosition calls the underlying ParticleZPosition.
 func (x *EmitterNode) ParticleZPosition() float64 {
 	return x.inner.ParticleZPosition()
@@ -981,6 +1153,8 @@ func (x *EmitterNode) SetParticleZPosition(particleZPosition float64) {
 	x.inner.SetParticleZPosition(particleZPosition)
 }
 
+// The order in which particles will be rendered. Defaults to SKParticleRenderOrderOldestLast.
+//
 // ParticleRenderOrder calls the underlying ParticleRenderOrder.
 func (x *EmitterNode) ParticleRenderOrder() SKParticleRenderOrder {
 	return SKParticleRenderOrder(x.inner.ParticleRenderOrder())
@@ -991,6 +1165,8 @@ func (x *EmitterNode) SetParticleRenderOrder(particleRenderOrder SKParticleRende
 	x.inner.SetParticleRenderOrder(raw.SKParticleRenderOrder(particleRenderOrder))
 }
 
+// The random variance about the starting z-position for each particle. Defaults to 0.0.
+//
 // ParticleZPositionRange calls the underlying ParticleZPositionRange.
 func (x *EmitterNode) ParticleZPositionRange() float64 {
 	return x.inner.ParticleZPositionRange()
@@ -1001,6 +1177,8 @@ func (x *EmitterNode) SetParticleZPositionRange(particleZPositionRange float64) 
 	x.inner.SetParticleZPositionRange(particleZPositionRange)
 }
 
+// The rate at which to modify the z-position for each particle. Defaults to 0.0.
+//
 // ParticleZPositionSpeed calls the underlying ParticleZPositionSpeed.
 func (x *EmitterNode) ParticleZPositionSpeed() float64 {
 	return x.inner.ParticleZPositionSpeed()

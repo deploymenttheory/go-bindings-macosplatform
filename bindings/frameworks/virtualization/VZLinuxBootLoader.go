@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that loads and configures a Linux kernel as the guest system of your VM.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzlinuxbootloader
 type VZLinuxBootLoader struct {
 	VZBootLoader
@@ -36,7 +38,7 @@ func VZLinuxBootLoaderFromID(id objc.ID) *VZLinuxBootLoader {
 	return o
 }
 
-// @abstract Create a VZLinuxBootLoader with the Linux kernel passed as URL. @param kernelURL The URL of Linux kernel on the local file system.
+// Creates a boot loader that launches the Linux kernel at the specified URL.
 func (o *VZLinuxBootLoader) InitWithKernelURL(kernelURL *foundation.NSURL) *VZLinuxBootLoader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZLinuxBootLoaderSelInitWithKernelURL, kernelURL.Ptr())
 	if _ret != 0 {

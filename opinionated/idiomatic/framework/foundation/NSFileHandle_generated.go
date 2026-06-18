@@ -8,6 +8,7 @@ import (
 	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // FileHandle wraps [raw.NSFileHandle] with a fluent Go API.
@@ -140,8 +141,17 @@ func (x *FileHandle) AvailableData() *Data {
 }
 
 // ReadInBackgroundAndNotifyForModes calls the underlying ReadInBackgroundAndNotifyForModes.
-func (x *FileHandle) ReadInBackgroundAndNotifyForModes(modes *raw.NSArray[*raw.NSString]) {
-	x.inner.ReadInBackgroundAndNotifyForModes(modes)
+func (x *FileHandle) ReadInBackgroundAndNotifyForModes(modes ...StringProvider) {
+	_ptrs := make([]objc.ID, len(modes))
+	for _i, _v := range modes {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.ReadInBackgroundAndNotifyForModes(_arg0)
 }
 
 // ReadInBackgroundAndNotify calls the underlying ReadInBackgroundAndNotify.
@@ -150,8 +160,17 @@ func (x *FileHandle) ReadInBackgroundAndNotify() {
 }
 
 // ReadToEndOfFileInBackgroundAndNotifyForModes calls the underlying ReadToEndOfFileInBackgroundAndNotifyForModes.
-func (x *FileHandle) ReadToEndOfFileInBackgroundAndNotifyForModes(modes *raw.NSArray[*raw.NSString]) {
-	x.inner.ReadToEndOfFileInBackgroundAndNotifyForModes(modes)
+func (x *FileHandle) ReadToEndOfFileInBackgroundAndNotifyForModes(modes ...StringProvider) {
+	_ptrs := make([]objc.ID, len(modes))
+	for _i, _v := range modes {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.ReadToEndOfFileInBackgroundAndNotifyForModes(_arg0)
 }
 
 // ReadToEndOfFileInBackgroundAndNotify calls the underlying ReadToEndOfFileInBackgroundAndNotify.
@@ -160,8 +179,17 @@ func (x *FileHandle) ReadToEndOfFileInBackgroundAndNotify() {
 }
 
 // AcceptConnectionInBackgroundAndNotifyForModes calls the underlying AcceptConnectionInBackgroundAndNotifyForModes.
-func (x *FileHandle) AcceptConnectionInBackgroundAndNotifyForModes(modes *raw.NSArray[*raw.NSString]) {
-	x.inner.AcceptConnectionInBackgroundAndNotifyForModes(modes)
+func (x *FileHandle) AcceptConnectionInBackgroundAndNotifyForModes(modes ...StringProvider) {
+	_ptrs := make([]objc.ID, len(modes))
+	for _i, _v := range modes {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.AcceptConnectionInBackgroundAndNotifyForModes(_arg0)
 }
 
 // AcceptConnectionInBackgroundAndNotify calls the underlying AcceptConnectionInBackgroundAndNotify.
@@ -170,8 +198,17 @@ func (x *FileHandle) AcceptConnectionInBackgroundAndNotify() {
 }
 
 // WaitForDataInBackgroundAndNotifyForModes calls the underlying WaitForDataInBackgroundAndNotifyForModes.
-func (x *FileHandle) WaitForDataInBackgroundAndNotifyForModes(modes *raw.NSArray[*raw.NSString]) {
-	x.inner.WaitForDataInBackgroundAndNotifyForModes(modes)
+func (x *FileHandle) WaitForDataInBackgroundAndNotifyForModes(modes ...StringProvider) {
+	_ptrs := make([]objc.ID, len(modes))
+	for _i, _v := range modes {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.WaitForDataInBackgroundAndNotifyForModes(_arg0)
 }
 
 // WaitForDataInBackgroundAndNotify calls the underlying WaitForDataInBackgroundAndNotify.
@@ -311,13 +348,13 @@ type FileHandleable interface {
 	SynchronizeAndReturnError() error
 	CloseAndReturnError() error
 	AvailableData() *Data
-	ReadInBackgroundAndNotifyForModes(modes *raw.NSArray[*raw.NSString])
+	ReadInBackgroundAndNotifyForModes(modes ...StringProvider)
 	ReadInBackgroundAndNotify()
-	ReadToEndOfFileInBackgroundAndNotifyForModes(modes *raw.NSArray[*raw.NSString])
+	ReadToEndOfFileInBackgroundAndNotifyForModes(modes ...StringProvider)
 	ReadToEndOfFileInBackgroundAndNotify()
-	AcceptConnectionInBackgroundAndNotifyForModes(modes *raw.NSArray[*raw.NSString])
+	AcceptConnectionInBackgroundAndNotifyForModes(modes ...StringProvider)
 	AcceptConnectionInBackgroundAndNotify()
-	WaitForDataInBackgroundAndNotifyForModes(modes *raw.NSArray[*raw.NSString])
+	WaitForDataInBackgroundAndNotifyForModes(modes ...StringProvider)
 	WaitForDataInBackgroundAndNotify()
 	ReadabilityHandler() objc.Block
 	SetReadabilityHandler(ctx context.Context) (*FileHandle, error)

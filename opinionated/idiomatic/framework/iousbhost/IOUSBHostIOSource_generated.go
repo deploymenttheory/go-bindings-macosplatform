@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @class   IOUSBHostIOSource @brief   The abstract class IOUSBHostPipe and IOUSBHostStream derive from. @details Defines common methods that are shared between IOUSBHostPipe and IOUSBHostStream.
+//
 // HostIOSource wraps [raw.IOUSBHostIOSource] with a fluent Go API.
 type HostIOSource struct {
 	inner *raw.IOUSBHostIOSource
@@ -35,6 +37,8 @@ func NewHostIOSource() *HostIOSource {
 	return &HostIOSource{inner: raw.IOUSBHostIOSourceFromID(_id)}
 }
 
+// @brief   Retrieve the source's IOUSBHostInterface @return  IOUSBHostInterface pointer that the IOSource was created from.
+//
 // HostInterface calls the underlying HostInterface.
 func (x *HostIOSource) HostInterface() *HostInterface {
 	_r := x.inner.HostInterface()
@@ -44,11 +48,15 @@ func (x *HostIOSource) HostInterface() *HostInterface {
 	return &HostInterface{inner: _r}
 }
 
+// @brief   Retrieve the device's address @return  Current address of the device
+//
 // DeviceAddress calls the underlying DeviceAddress.
 func (x *HostIOSource) DeviceAddress() uint {
 	return x.inner.DeviceAddress()
 }
 
+// @brief   Retrieve the IOSource's endpoint address @return  Current address of the endpoint
+//
 // EndpointAddress calls the underlying EndpointAddress.
 func (x *HostIOSource) EndpointAddress() uint {
 	return x.inner.EndpointAddress()

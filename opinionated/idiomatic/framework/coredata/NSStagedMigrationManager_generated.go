@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // StagedMigrationManager wraps [raw.NSStagedMigrationManager] with a fluent Go API.
@@ -32,9 +33,18 @@ func StagedMigrationManagerFromID(id objc.ID) *StagedMigrationManager {
 }
 
 // NewStagedMigrationManagerWithMigrationStages creates a new [StagedMigrationManager].
-func NewStagedMigrationManagerWithMigrationStages(stages *foundation.NSArray[*raw.NSMigrationStage]) *StagedMigrationManager {
+func NewStagedMigrationManagerWithMigrationStages(stages ...MigrationStageProvider) *StagedMigrationManager {
+	_ptrs := make([]objc.ID, len(stages))
+	for _i, _v := range stages {
+		_ptrs[_i] = _v.asMigrationStage().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NSMigrationStage]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NSMigrationStage](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSStagedMigrationManager")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMigrationStages:"), stages.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMigrationStages:"), _arg0.Ptr())
 	return &StagedMigrationManager{inner: raw.NSStagedMigrationManagerFromID(_id)}
 }
 

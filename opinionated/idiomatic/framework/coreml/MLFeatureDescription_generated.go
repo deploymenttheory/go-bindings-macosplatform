@@ -36,11 +36,15 @@ func NewFeatureDescription() *FeatureDescription {
 	return &FeatureDescription{inner: raw.MLFeatureDescriptionFromID(_id)}
 }
 
+// Check if MLFeatureValue is valid based on this description
+//
 // IsAllowedValue calls the underlying IsAllowedValue.
 func (x *FeatureDescription) IsAllowedValue(value *raw.MLFeatureValue) bool {
 	return x.inner.IsAllowedValue(value)
 }
 
+// Name of feature
+//
 // Name calls the underlying Name.
 func (x *FeatureDescription) Name() string {
 	_r := x.inner.Name()
@@ -50,16 +54,22 @@ func (x *FeatureDescription) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Type of data
+//
 // Type calls the underlying Type.
 func (x *FeatureDescription) Type() MLFeatureType {
 	return MLFeatureType(x.inner.Type())
 }
 
+// Whether this feature can take an undefined value or not
+//
 // IsOptional calls the underlying IsOptional.
 func (x *FeatureDescription) IsOptional() bool {
 	return x.inner.IsOptional()
 }
 
+// Constraint when type == MLFeatureTypeMultiArray, nil otherwise
+//
 // MultiArrayConstraint calls the underlying MultiArrayConstraint.
 func (x *FeatureDescription) MultiArrayConstraint() *MultiArrayConstraint {
 	_r := x.inner.MultiArrayConstraint()
@@ -69,6 +79,8 @@ func (x *FeatureDescription) MultiArrayConstraint() *MultiArrayConstraint {
 	return &MultiArrayConstraint{inner: _r}
 }
 
+// Constraint when type == MLFeatureTypeImage, nil otherwise
+//
 // ImageConstraint calls the underlying ImageConstraint.
 func (x *FeatureDescription) ImageConstraint() *ImageConstraint {
 	_r := x.inner.ImageConstraint()
@@ -78,6 +90,8 @@ func (x *FeatureDescription) ImageConstraint() *ImageConstraint {
 	return &ImageConstraint{inner: _r}
 }
 
+// Constraint when type == MLFeatureTypeDictionary, nil otherwise
+//
 // DictionaryConstraint calls the underlying DictionaryConstraint.
 func (x *FeatureDescription) DictionaryConstraint() *DictionaryConstraint {
 	_r := x.inner.DictionaryConstraint()
@@ -87,6 +101,8 @@ func (x *FeatureDescription) DictionaryConstraint() *DictionaryConstraint {
 	return &DictionaryConstraint{inner: _r}
 }
 
+// Constraint when type == MLFeatureTypeSequence, nil otherwise
+//
 // SequenceConstraint calls the underlying SequenceConstraint.
 func (x *FeatureDescription) SequenceConstraint() *SequenceConstraint {
 	_r := x.inner.SequenceConstraint()
@@ -96,6 +112,8 @@ func (x *FeatureDescription) SequenceConstraint() *SequenceConstraint {
 	return &SequenceConstraint{inner: _r}
 }
 
+// The state feature value constraint. The property has a value when `.type == MLFeatureTypeState`.
+//
 // StateConstraint calls the underlying StateConstraint.
 func (x *FeatureDescription) StateConstraint() *StateConstraint {
 	_r := x.inner.StateConstraint()

@@ -30,6 +30,8 @@ func ChatButtonFromID(id objc.ID) *ChatButton {
 	return &ChatButton{inner: raw.BCChatButtonFromID(id)}
 }
 
+// Creates and returns a BCChatButton configured for a given style. @param style The visual style of the button. @return BCChatButton instance.
+//
 // NewChatButtonWithStyle creates a new [ChatButton].
 func NewChatButtonWithStyle(style BCChatButtonStyle) *ChatButton {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("BCChatButton")), objc.RegisterName("alloc"))

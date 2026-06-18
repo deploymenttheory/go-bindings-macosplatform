@@ -35,6 +35,8 @@ func NewScannerFeatureBoolean() *ScannerFeatureBoolean {
 	return &ScannerFeatureBoolean{inner: raw.ICScannerFeatureBooleanFromID(_id)}
 }
 
+// @property value @abstract ￼The value of this feature.
+//
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *ScannerFeatureBoolean) WithValue(value bool) *ScannerFeatureBoolean {
 	x.inner.SetValue(value)

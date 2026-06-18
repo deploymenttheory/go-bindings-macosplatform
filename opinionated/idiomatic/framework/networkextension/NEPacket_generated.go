@@ -30,6 +30,8 @@ func NEPacketFromID(id objc.ID) *NEPacket {
 	return &NEPacket{inner: raw.NEPacketFromID(id)}
 }
 
+// @method initWithData:protocolFamily: @discussion Initializes a new NEPacket object with data and protocol family. @param data The content of the packet. @param protocolFamily The protocol family of the packet (such as AF_INET or AF_INET6).
+//
 // NewNEPacketWithDataProtocolFamily creates a new [NEPacket].
 func NewNEPacketWithDataProtocolFamily(data *foundation.NSData, protocolFamily uint8) *NEPacket {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NEPacket")), objc.RegisterName("alloc"))
@@ -37,21 +39,29 @@ func NewNEPacketWithDataProtocolFamily(data *foundation.NSData, protocolFamily u
 	return &NEPacket{inner: raw.NEPacketFromID(_id)}
 }
 
+// @property data @discussion The data content of the packet.
+//
 // Data calls the underlying Data.
 func (x *NEPacket) Data() *foundation.NSData {
 	return x.inner.Data()
 }
 
+// @property protocolFamily @discussion The protocol family of the packet (such as AF_INET or AF_INET6).
+//
 // ProtocolFamily calls the underlying ProtocolFamily.
 func (x *NEPacket) ProtocolFamily() uint8 {
 	return x.inner.ProtocolFamily()
 }
 
+// @property direction @discussion The direction of the packet.
+//
 // Direction calls the underlying Direction.
 func (x *NEPacket) Direction() NETrafficDirection {
 	return NETrafficDirection(x.inner.Direction())
 }
 
+// @property metadata @discussion Metadata about the source application and flow for this packet. This property will only be non-nil when the routing method for the NEPacketTunnelProvider is NETunnelProviderRoutingMethodSourceApplication.
+//
 // Metadata calls the underlying Metadata.
 func (x *NEPacket) Metadata() *NEFlowMetaData {
 	_r := x.inner.Metadata()

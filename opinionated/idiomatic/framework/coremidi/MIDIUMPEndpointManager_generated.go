@@ -36,6 +36,8 @@ func NewUMPEndpointManager() *UMPEndpointManager {
 	return &UMPEndpointManager{inner: raw.MIDIUMPEndpointManagerFromID(_id)}
 }
 
+// @property	UMPEndpoints @brief		A  list of UMP endpoints discovered using UMP endpoint discovery.
+//
 // UMPEndpoints returns the collection as a Go slice.
 func (x *UMPEndpointManager) UMPEndpoints() []*UMPEndpoint {
 	arr := x.inner.UMPEndpoints()

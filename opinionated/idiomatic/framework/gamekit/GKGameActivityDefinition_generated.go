@@ -39,6 +39,8 @@ func NewGameActivityDefinition() *GameActivityDefinition {
 	return &GameActivityDefinition{inner: raw.GKGameActivityDefinitionFromID(_id)}
 }
 
+// Loads all associated achievements that have defined deep links to this game activity definition.
+//
 // LoadAchievementDescriptions blocks until the operation completes or ctx is cancelled.
 func (x *GameActivityDefinition) LoadAchievementDescriptions(ctx context.Context) (*foundation.NSArray[*raw.GKAchievementDescription], error) {
 	type _result struct {
@@ -63,6 +65,8 @@ func (x *GameActivityDefinition) LoadAchievementDescriptions(ctx context.Context
 	}
 }
 
+// Loads all associated leaderboards that have defined deep links to this game activity definition.
+//
 // LoadLeaderboards blocks until the operation completes or ctx is cancelled.
 func (x *GameActivityDefinition) LoadLeaderboards(ctx context.Context) (*foundation.NSArray[*raw.GKLeaderboard], error) {
 	type _result struct {
@@ -87,11 +91,15 @@ func (x *GameActivityDefinition) LoadLeaderboards(ctx context.Context) (*foundat
 	}
 }
 
+// Asynchronously load the image. Error will be nil on success.
+//
 // LoadImageWithCompletionHandler calls the underlying LoadImageWithCompletionHandler.
 func (x *GameActivityDefinition) LoadImageWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	x.inner.LoadImageWithCompletionHandler(completionHandler)
 }
 
+// The developer defined identifier for a given game activity.
+//
 // Identifier calls the underlying Identifier.
 func (x *GameActivityDefinition) Identifier() string {
 	_r := x.inner.Identifier()
@@ -101,6 +109,8 @@ func (x *GameActivityDefinition) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The group identifier for the activity, if one exists.
+//
 // GroupIdentifier calls the underlying GroupIdentifier.
 func (x *GameActivityDefinition) GroupIdentifier() string {
 	_r := x.inner.GroupIdentifier()
@@ -110,6 +120,8 @@ func (x *GameActivityDefinition) GroupIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A short title for the game activity.
+//
 // Title calls the underlying Title.
 func (x *GameActivityDefinition) Title() string {
 	_r := x.inner.Title()
@@ -119,6 +131,8 @@ func (x *GameActivityDefinition) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A more detailed description of the game activity.
+//
 // Details calls the underlying Details.
 func (x *GameActivityDefinition) Details() string {
 	_r := x.inner.Details()
@@ -128,41 +142,57 @@ func (x *GameActivityDefinition) Details() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Default properties defined by the developer for this type of game activity.
+//
 // DefaultProperties calls the underlying DefaultProperties.
 func (x *GameActivityDefinition) DefaultProperties() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
 	return x.inner.DefaultProperties()
 }
 
+// A fallback URL that can be used to construct a game-specific URL for players to share or join, if the joining device does not support the default URL.
+//
 // FallbackURL calls the underlying FallbackURL.
 func (x *GameActivityDefinition) FallbackURL() *foundation.NSURL {
 	return x.inner.FallbackURL()
 }
 
+// Whether the activity can be joined by others via a party code. - SeeAlso: “-[GKGameActivityListener player:wantsToPlayGameActivity:completionHandler:]“ where you can receive and handle game activities that players want to play in a party with friends.
+//
 // SupportsPartyCode calls the underlying SupportsPartyCode.
 func (x *GameActivityDefinition) SupportsPartyCode() bool {
 	return x.inner.SupportsPartyCode()
 }
 
+// The maximum number of participants that can join the activity. Returns nil when no maximum is set (unlimited players) or when player range is undefined. When not nil, the value is always greater than or equal to `minPlayers`.
+//
 // MaxPlayers calls the underlying MaxPlayers.
 func (x *GameActivityDefinition) MaxPlayers() *foundation.NSNumber {
 	return x.inner.MaxPlayers()
 }
 
+// The minimum number of participants that can join the activity.
+//
 // MinPlayers calls the underlying MinPlayers.
 func (x *GameActivityDefinition) MinPlayers() *foundation.NSNumber {
 	return x.inner.MinPlayers()
 }
 
+// True if the activity supports an unlimited number of players. False if maxPlayers is set to a defined limit or if no player range is provided.
+//
 // SupportsUnlimitedPlayers calls the underlying SupportsUnlimitedPlayers.
 func (x *GameActivityDefinition) SupportsUnlimitedPlayers() bool {
 	return x.inner.SupportsUnlimitedPlayers()
 }
 
+// The play style of the game activity.
+//
 // PlayStyle calls the underlying PlayStyle.
 func (x *GameActivityDefinition) PlayStyle() GKGameActivityPlayStyle {
 	return GKGameActivityPlayStyle(x.inner.PlayStyle())
 }
 
+// The release state of the game activity definition in App Store Connect.
+//
 // ReleaseState calls the underlying ReleaseState.
 func (x *GameActivityDefinition) ReleaseState() GKReleaseState {
 	return GKReleaseState(x.inner.ReleaseState())

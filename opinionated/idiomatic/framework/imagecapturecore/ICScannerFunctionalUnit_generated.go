@@ -39,71 +39,95 @@ func NewScannerFunctionalUnit() *ScannerFunctionalUnit {
 	return &ScannerFunctionalUnit{inner: raw.ICScannerFunctionalUnitFromID(_id)}
 }
 
+// @property pixelDataType @abstract ￼The pixel data type.
+//
 // WithPixelDataType sets the pixelDataType property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnit) WithPixelDataType(pixelDataType ICScannerPixelDataType) *ScannerFunctionalUnit {
 	x.inner.SetPixelDataType(raw.ICScannerPixelDataType(pixelDataType))
 	return x
 }
 
+// @property bitDepth @abstract ￼The bit depth to use when performing the final scan. This will always be one of the supported bit depths.
+//
 // WithBitDepth sets the bitDepth property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnit) WithBitDepth(bitDepth ICScannerBitDepth) *ScannerFunctionalUnit {
 	x.inner.SetBitDepth(raw.ICScannerBitDepth(bitDepth))
 	return x
 }
 
+// @property measurementUnit @abstract ￼Current measurement unit. This will always be one of the supported measurement units.
+//
 // WithMeasurementUnit sets the measurementUnit property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnit) WithMeasurementUnit(measurementUnit ICScannerMeasurementUnit) *ScannerFunctionalUnit {
 	x.inner.SetMeasurementUnit(raw.ICScannerMeasurementUnit(measurementUnit))
 	return x
 }
 
+// @property resolution @abstract ￼Current scan resolution. This will always be one of the supported resolution values.
+//
 // WithResolution sets the resolution property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnit) WithResolution(resolution uint) *ScannerFunctionalUnit {
 	x.inner.SetResolution(resolution)
 	return x
 }
 
+// @property scaleFactor @abstract ￼Current scale factor. This will always be one of the supported scale factor values.
+//
 // WithScaleFactor sets the scaleFactor property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnit) WithScaleFactor(scaleFactor uint) *ScannerFunctionalUnit {
 	x.inner.SetScaleFactor(scaleFactor)
 	return x
 }
 
+// @property scanArea @abstract ￼This property along with scanAreaOrientation describes the area to be scanned.
+//
 // WithScanArea sets the scanArea property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnit) WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnit {
 	x.inner.SetScanArea(scanArea)
 	return x
 }
 
+// @property scanAreaOrientation @abstract ￼Desired orientation of the scan area. This property along with scanArea describes the area to be scanned. @discussion This property is set to ICEXIFOrientation1 initially. This property is not used by the ICScannerFunctionalUnitDocumentFeeder subclass.
+//
 // WithScanAreaOrientation sets the scanAreaOrientation property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnit) WithScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType) *ScannerFunctionalUnit {
 	x.inner.SetScanAreaOrientation(raw.ICEXIFOrientationType(scanAreaOrientation))
 	return x
 }
 
+// @property usesThresholdForBlackAndWhiteScanning @abstract ￼Indicates if this functional unit uses threshold value to be used when performing a scan in black & white.
+//
 // WithUsesThresholdForBlackAndWhiteScanning sets the usesThresholdForBlackAndWhiteScanning property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnit) WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnit {
 	x.inner.SetUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning)
 	return x
 }
 
+// @property thresholdForBlackAndWhiteScanning @abstract ￼Threshold value to be used when performing a scan in black & white. This value should be from 0 to 255.
+//
 // WithThresholdForBlackAndWhiteScanning sets the thresholdForBlackAndWhiteScanning property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnit) WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnit {
 	x.inner.SetThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning)
 	return x
 }
 
+// @property overviewResolution @abstract ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.
+//
 // WithOverviewResolution sets the overviewResolution property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnit) WithOverviewResolution(overviewResolution uint) *ScannerFunctionalUnit {
 	x.inner.SetOverviewResolution(overviewResolution)
 	return x
 }
 
+// @property type @abstract ￼Functional unit type.
+//
 // Type calls the underlying Type.
 func (x *ScannerFunctionalUnit) Type() ICScannerFunctionalUnitType {
 	return ICScannerFunctionalUnitType(x.inner.Type())
 }
 
+// @property pixelDataType @abstract ￼The pixel data type.
+//
 // PixelDataType calls the underlying PixelDataType.
 func (x *ScannerFunctionalUnit) PixelDataType() ICScannerPixelDataType {
 	return ICScannerPixelDataType(x.inner.PixelDataType())
@@ -114,11 +138,15 @@ func (x *ScannerFunctionalUnit) SetPixelDataType(pixelDataType ICScannerPixelDat
 	x.inner.SetPixelDataType(raw.ICScannerPixelDataType(pixelDataType))
 }
 
+// @property supportedBitDepths @abstract ￼Supported bit depths. The values in this set are valid values defined by ICScannerBitDepth.
+//
 // SupportedBitDepths calls the underlying SupportedBitDepths.
 func (x *ScannerFunctionalUnit) SupportedBitDepths() *foundation.NSIndexSet {
 	return x.inner.SupportedBitDepths()
 }
 
+// @property bitDepth @abstract ￼The bit depth to use when performing the final scan. This will always be one of the supported bit depths.
+//
 // BitDepth calls the underlying BitDepth.
 func (x *ScannerFunctionalUnit) BitDepth() ICScannerBitDepth {
 	return ICScannerBitDepth(x.inner.BitDepth())
@@ -129,11 +157,15 @@ func (x *ScannerFunctionalUnit) SetBitDepth(bitDepth ICScannerBitDepth) {
 	x.inner.SetBitDepth(raw.ICScannerBitDepth(bitDepth))
 }
 
+// @property supportedMeasurementUnits @abstract ￼Supported measurement units. The values in this set are valid values defined by ICScannerMeasurementUnit.
+//
 // SupportedMeasurementUnits calls the underlying SupportedMeasurementUnits.
 func (x *ScannerFunctionalUnit) SupportedMeasurementUnits() *foundation.NSIndexSet {
 	return x.inner.SupportedMeasurementUnits()
 }
 
+// @property measurementUnit @abstract ￼Current measurement unit. This will always be one of the supported measurement units.
+//
 // MeasurementUnit calls the underlying MeasurementUnit.
 func (x *ScannerFunctionalUnit) MeasurementUnit() ICScannerMeasurementUnit {
 	return ICScannerMeasurementUnit(x.inner.MeasurementUnit())
@@ -144,16 +176,22 @@ func (x *ScannerFunctionalUnit) SetMeasurementUnit(measurementUnit ICScannerMeas
 	x.inner.SetMeasurementUnit(raw.ICScannerMeasurementUnit(measurementUnit))
 }
 
+// @property supportedResolutions @abstract ￼Supported scan resolutions in DPI.
+//
 // SupportedResolutions calls the underlying SupportedResolutions.
 func (x *ScannerFunctionalUnit) SupportedResolutions() *foundation.NSIndexSet {
 	return x.inner.SupportedResolutions()
 }
 
+// @property preferredResolutions @abstract ￼Preferred scan resolutions in DPI.
+//
 // PreferredResolutions calls the underlying PreferredResolutions.
 func (x *ScannerFunctionalUnit) PreferredResolutions() *foundation.NSIndexSet {
 	return x.inner.PreferredResolutions()
 }
 
+// @property resolution @abstract ￼Current scan resolution. This will always be one of the supported resolution values.
+//
 // Resolution calls the underlying Resolution.
 func (x *ScannerFunctionalUnit) Resolution() uint {
 	return x.inner.Resolution()
@@ -164,26 +202,36 @@ func (x *ScannerFunctionalUnit) SetResolution(resolution uint) {
 	x.inner.SetResolution(resolution)
 }
 
+// @property nativeXResolution @abstract ￼Optical resolution along the X axis.
+//
 // NativeXResolution calls the underlying NativeXResolution.
 func (x *ScannerFunctionalUnit) NativeXResolution() uint {
 	return x.inner.NativeXResolution()
 }
 
+// @property nativeYResolution @abstract ￼Optical resolution along the Y axis.
+//
 // NativeYResolution calls the underlying NativeYResolution.
 func (x *ScannerFunctionalUnit) NativeYResolution() uint {
 	return x.inner.NativeYResolution()
 }
 
+// @property supportedScaleFactors @abstract ￼Supported scale factors in percentage.
+//
 // SupportedScaleFactors calls the underlying SupportedScaleFactors.
 func (x *ScannerFunctionalUnit) SupportedScaleFactors() *foundation.NSIndexSet {
 	return x.inner.SupportedScaleFactors()
 }
 
+// @property preferredScaleFactors @abstract ￼Preferred scale factors in percentage.
+//
 // PreferredScaleFactors calls the underlying PreferredScaleFactors.
 func (x *ScannerFunctionalUnit) PreferredScaleFactors() *foundation.NSIndexSet {
 	return x.inner.PreferredScaleFactors()
 }
 
+// @property scaleFactor @abstract ￼Current scale factor. This will always be one of the supported scale factor values.
+//
 // ScaleFactor calls the underlying ScaleFactor.
 func (x *ScannerFunctionalUnit) ScaleFactor() uint {
 	return x.inner.ScaleFactor()
@@ -194,6 +242,8 @@ func (x *ScannerFunctionalUnit) SetScaleFactor(scaleFactor uint) {
 	x.inner.SetScaleFactor(scaleFactor)
 }
 
+// @property templates @abstract An array of objects of type ICScannerFeatureTemplate.
+//
 // Templates returns the collection as a Go slice.
 func (x *ScannerFunctionalUnit) Templates() []*ScannerFeatureTemplate {
 	arr := x.inner.Templates()
@@ -205,6 +255,8 @@ func (x *ScannerFunctionalUnit) Templates() []*ScannerFeatureTemplate {
 	})
 }
 
+// @property vendorFeatures @abstract An array of objects of type ICScannerFeature.
+//
 // VendorFeatures returns the collection as a Go slice.
 func (x *ScannerFunctionalUnit) VendorFeatures() []*ScannerFeature {
 	arr := x.inner.VendorFeatures()
@@ -216,11 +268,15 @@ func (x *ScannerFunctionalUnit) VendorFeatures() []*ScannerFeature {
 	})
 }
 
+// @property physicalSize @abstract ￼Physical size of the scan area in current measurement unit.
+//
 // PhysicalSize calls the underlying PhysicalSize.
 func (x *ScannerFunctionalUnit) PhysicalSize() corefoundation.CGSize {
 	return x.inner.PhysicalSize()
 }
 
+// @property scanArea @abstract ￼This property along with scanAreaOrientation describes the area to be scanned.
+//
 // ScanArea calls the underlying ScanArea.
 func (x *ScannerFunctionalUnit) ScanArea() corefoundation.CGRect {
 	return x.inner.ScanArea()
@@ -231,6 +287,8 @@ func (x *ScannerFunctionalUnit) SetScanArea(scanArea corefoundation.CGRect) {
 	x.inner.SetScanArea(scanArea)
 }
 
+// @property scanAreaOrientation @abstract ￼Desired orientation of the scan area. This property along with scanArea describes the area to be scanned. @discussion This property is set to ICEXIFOrientation1 initially. This property is not used by the ICScannerFunctionalUnitDocumentFeeder subclass.
+//
 // ScanAreaOrientation calls the underlying ScanAreaOrientation.
 func (x *ScannerFunctionalUnit) ScanAreaOrientation() ICEXIFOrientationType {
 	return ICEXIFOrientationType(x.inner.ScanAreaOrientation())
@@ -241,11 +299,15 @@ func (x *ScannerFunctionalUnit) SetScanAreaOrientation(scanAreaOrientation ICEXI
 	x.inner.SetScanAreaOrientation(raw.ICEXIFOrientationType(scanAreaOrientation))
 }
 
+// @property acceptsThresholdForBlackAndWhiteScanning @abstract ￼Indicates if this functional unit accepts threshold value to be used when performing a scan in black & white.
+//
 // AcceptsThresholdForBlackAndWhiteScanning calls the underlying AcceptsThresholdForBlackAndWhiteScanning.
 func (x *ScannerFunctionalUnit) AcceptsThresholdForBlackAndWhiteScanning() bool {
 	return x.inner.AcceptsThresholdForBlackAndWhiteScanning()
 }
 
+// @property usesThresholdForBlackAndWhiteScanning @abstract ￼Indicates if this functional unit uses threshold value to be used when performing a scan in black & white.
+//
 // UsesThresholdForBlackAndWhiteScanning calls the underlying UsesThresholdForBlackAndWhiteScanning.
 func (x *ScannerFunctionalUnit) UsesThresholdForBlackAndWhiteScanning() bool {
 	return x.inner.UsesThresholdForBlackAndWhiteScanning()
@@ -256,11 +318,15 @@ func (x *ScannerFunctionalUnit) SetUsesThresholdForBlackAndWhiteScanning(usesThr
 	x.inner.SetUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning)
 }
 
+// @property defaultThresholdForBlackAndWhiteScanning @abstract ￼Default threshold value used when performing a scan in black & white. This value is from 0 to 255.
+//
 // DefaultThresholdForBlackAndWhiteScanning calls the underlying DefaultThresholdForBlackAndWhiteScanning.
 func (x *ScannerFunctionalUnit) DefaultThresholdForBlackAndWhiteScanning() uint8 {
 	return x.inner.DefaultThresholdForBlackAndWhiteScanning()
 }
 
+// @property thresholdForBlackAndWhiteScanning @abstract ￼Threshold value to be used when performing a scan in black & white. This value should be from 0 to 255.
+//
 // ThresholdForBlackAndWhiteScanning calls the underlying ThresholdForBlackAndWhiteScanning.
 func (x *ScannerFunctionalUnit) ThresholdForBlackAndWhiteScanning() uint8 {
 	return x.inner.ThresholdForBlackAndWhiteScanning()
@@ -271,36 +337,50 @@ func (x *ScannerFunctionalUnit) SetThresholdForBlackAndWhiteScanning(thresholdFo
 	x.inner.SetThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning)
 }
 
+// @property state @abstract ￼Indicates the current state of the functional unit.
+//
 // State calls the underlying State.
 func (x *ScannerFunctionalUnit) State() ICScannerFunctionalUnitState {
 	return ICScannerFunctionalUnitState(x.inner.State())
 }
 
+// @property scanInProgress @abstract ￼Indicates if a scan is in progress.
+//
 // ScanInProgress calls the underlying ScanInProgress.
 func (x *ScannerFunctionalUnit) ScanInProgress() bool {
 	return x.inner.ScanInProgress()
 }
 
+// @property scanProgressPercentDone @abstract ￼Indicates percentage of scan completed.
+//
 // ScanProgressPercentDone calls the underlying ScanProgressPercentDone.
 func (x *ScannerFunctionalUnit) ScanProgressPercentDone() float64 {
 	return x.inner.ScanProgressPercentDone()
 }
 
+// @property canPerformOverviewScan @abstract ￼Indicates if this functional unit can perfrom an overview scan. Not all functional units can perform an overview scan. For example, a document feeder or a sheet feeder unit cannot perform an overview scan.
+//
 // CanPerformOverviewScan calls the underlying CanPerformOverviewScan.
 func (x *ScannerFunctionalUnit) CanPerformOverviewScan() bool {
 	return x.inner.CanPerformOverviewScan()
 }
 
+// @property overviewScanInProgress @abstract ￼Indicates if an overview scan is in progress.
+//
 // OverviewScanInProgress calls the underlying OverviewScanInProgress.
 func (x *ScannerFunctionalUnit) OverviewScanInProgress() bool {
 	return x.inner.OverviewScanInProgress()
 }
 
+// @property overviewImage @abstract ￼Overview scan image. This property will be NULL for functional units that do not support overview scans.
+//
 // OverviewImage calls the underlying OverviewImage.
 func (x *ScannerFunctionalUnit) OverviewImage() unsafe.Pointer {
 	return x.inner.OverviewImage()
 }
 
+// @property overviewResolution @abstract ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.
+//
 // OverviewResolution calls the underlying OverviewResolution.
 func (x *ScannerFunctionalUnit) OverviewResolution() uint {
 	return x.inner.OverviewResolution()

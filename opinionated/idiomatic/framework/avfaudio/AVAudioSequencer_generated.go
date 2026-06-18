@@ -37,6 +37,8 @@ func NewAudioSequencer() *AudioSequencer {
 	return &AudioSequencer{inner: raw.AVAudioSequencerFromID(_id)}
 }
 
+// @method initWithAudioEngine: @abstract Initialize a new sequencer, handing it the audio engine.
+//
 // NewAudioSequencerWithAudioEngine creates a new [AudioSequencer].
 func NewAudioSequencerWithAudioEngine(engine *raw.AVAudioEngine) *AudioSequencer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioSequencer")), objc.RegisterName("alloc"))
@@ -44,59 +46,81 @@ func NewAudioSequencerWithAudioEngine(engine *raw.AVAudioEngine) *AudioSequencer
 	return &AudioSequencer{inner: raw.AVAudioSequencerFromID(_id)}
 }
 
+// @property currentPositionInSeconds @abstract The current playback position in seconds @discussion Setting this positions the sequencer's player to the specified time.  This can be set while the player is playing, in which case playback will resume at the new position.
+//
 // WithCurrentPositionInSeconds sets the currentPositionInSeconds property and returns the receiver for chaining.
 func (x *AudioSequencer) WithCurrentPositionInSeconds(currentPositionInSeconds float64) *AudioSequencer {
 	x.inner.SetCurrentPositionInSeconds(currentPositionInSeconds)
 	return x
 }
 
+// @property currentPositionInBeats @abstract The current playback position in beats @discussion Setting this positions the sequencer's player to the specified beat.  This can be set while the player is playing, in which case playback will resume at the new position.
+//
 // WithCurrentPositionInBeats sets the currentPositionInBeats property and returns the receiver for chaining.
 func (x *AudioSequencer) WithCurrentPositionInBeats(currentPositionInBeats float64) *AudioSequencer {
 	x.inner.SetCurrentPositionInBeats(currentPositionInBeats)
 	return x
 }
 
+// @property rate @abstract The playback rate of the sequencer's player @discussion 1.0 is normal playback rate.  Rate must be > 0.0.
+//
 // WithRate sets the rate property and returns the receiver for chaining.
 func (x *AudioSequencer) WithRate(rate float32) *AudioSequencer {
 	x.inner.SetRate(rate)
 	return x
 }
 
+// @method loadFromURL:options:error: @abstract Load the file referenced by the URL and add the events to the sequence @param fileURL the URL to the file @param options determines how the file's contents are mapped to tracks inside the sequence @param outError on exit, if an error occurs, a description of the error
+//
 // LoadFromURLOptionsError calls the underlying LoadFromURLOptionsError.
 func (x *AudioSequencer) LoadFromURLOptionsError(fileURL string, options AVMusicSequenceLoadOptions) (bool, error) {
 	return x.inner.LoadFromURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), raw.AVMusicSequenceLoadOptions(options))
 }
 
+// @method loadFromData:options:error: @abstract Parse the data and add the its events to the sequence @param data the data to load from @param options determines how the contents are mapped to tracks inside the sequence @param outError on exit, if an error occurs, a description of the error
+//
 // LoadFromDataOptionsError calls the underlying LoadFromDataOptionsError.
 func (x *AudioSequencer) LoadFromDataOptionsError(data *foundation.NSData, options AVMusicSequenceLoadOptions) (bool, error) {
 	return x.inner.LoadFromDataOptionsError(data, raw.AVMusicSequenceLoadOptions(options))
 }
 
+// @method writeToURL:SMPTEResolution:replaceExisting:error: @abstract Create and write a MIDI file containing the events and complete state of the sequence @param fileURL the path for the file to be created @param resolution the relationship between "tick" and quarter note for saving to a Standard MIDI File - pass in zero to use default - this will be the value that is currently set on the tempo track @param replace if the file already exists, YES will cause it to be overwritten with the new data. Otherwise the call will fail with a permission error. @param outError on exit, if an error occurs, a description of the error @discussion A MIDI file saved via this method will contain not only the complete MIDI content of the sequence, but also the state of all tracks, including muting, loop points and enablement, etc.  It will also contain all non-MIDI AVMusicEvent types which had been added to the sequence's track. MIDI files are normally beat based, but can also have a SMPTE (or real-time rather than beat time) representation. The relationship between "tick" and quarter note for saving to Standard MIDI File - pass in zero to use default - this will be the value that is currently set on the tempo track
+//
 // WriteToURLSMPTEResolutionReplaceExistingError calls the underlying WriteToURLSMPTEResolutionReplaceExistingError.
 func (x *AudioSequencer) WriteToURLSMPTEResolutionReplaceExistingError(fileURL string, resolution int, replace bool) (bool, error) {
 	return x.inner.WriteToURLSMPTEResolutionReplaceExistingError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), resolution, replace)
 }
 
+// @method dataWithSMPTEResolution:error: @abstract Return a data object containing the events from the sequence @discussion All details regarding the SMPTE resolution apply here as well. The returned NSData lifetime is controlled by the client.
+//
 // DataWithSMPTEResolutionError calls the underlying DataWithSMPTEResolutionError.
 func (x *AudioSequencer) DataWithSMPTEResolutionError(sMPTEResolution int) (*foundation.NSData, error) {
 	return x.inner.DataWithSMPTEResolutionError(sMPTEResolution)
 }
 
+// @method secondsForBeats: @abstract Get the time in seconds for the given beat position (timestamp) in the AVMusicTrack
+//
 // SecondsForBeats calls the underlying SecondsForBeats.
 func (x *AudioSequencer) SecondsForBeats(beats float64) float64 {
 	return x.inner.SecondsForBeats(beats)
 }
 
+// @method beatsForSeconds: @abstract Get the beat position (timestamp) for the given time in the AVMusicTrack
+//
 // BeatsForSeconds calls the underlying BeatsForSeconds.
 func (x *AudioSequencer) BeatsForSeconds(seconds float64) float64 {
 	return x.inner.BeatsForSeconds(seconds)
 }
 
+// @method reverseEvents: @abstract Reverse the order of all events in all AVMusicTracks, including the tempo track
+//
 // ReverseEvents calls the underlying ReverseEvents.
 func (x *AudioSequencer) ReverseEvents() {
 	x.inner.ReverseEvents()
 }
 
+// @method createAndAppendTrack: @abstract Create a new AVMusicTrack and append it to the AVMusicSequencer's list
+//
 // CreateAndAppendTrack calls the underlying CreateAndAppendTrack.
 func (x *AudioSequencer) CreateAndAppendTrack() *MusicTrack {
 	_r := x.inner.CreateAndAppendTrack()
@@ -106,16 +130,22 @@ func (x *AudioSequencer) CreateAndAppendTrack() *MusicTrack {
 	return &MusicTrack{inner: _r}
 }
 
+// @method removeTrack: @abstract Remove the given AVMusicTrack from the AVMusicSequencer. @discussion This does not destroy the AVMusicTrack because it may be re-used.
+//
 // RemoveTrack calls the underlying RemoveTrack.
 func (x *AudioSequencer) RemoveTrack(track *raw.AVMusicTrack) bool {
 	return x.inner.RemoveTrack(track)
 }
 
+// @method setUserCallback: @abstract Add a block which will be called each time the AVAudioSequencer encounters an AVMusicUserEvent during playback. @discussion The same callback is called for events which occur on any track in the sequencer. Set the block to nil to disable it.
+//
 // SetUserCallback calls the underlying SetUserCallback.
 func (x *AudioSequencer) SetUserCallback(userCallback func(*raw.AVMusicTrack, *foundation.NSData, float64)) {
 	x.inner.SetUserCallback(userCallback)
 }
 
+// @property tracks @abstract An NSArray containing all the AVMusicTracks in the sequence @discussion This list will not include the tempo track.
+//
 // Tracks returns the collection as a Go slice.
 func (x *AudioSequencer) Tracks() []*MusicTrack {
 	arr := x.inner.Tracks()
@@ -127,6 +157,8 @@ func (x *AudioSequencer) Tracks() []*MusicTrack {
 	})
 }
 
+// @property tempoTrack @abstract The tempo track @discussion Each AVMusicSequence has a single tempo track. All tempo events read from external MIDI files are placed into this track (as well as other appropriate events (e.g., the time signature meta event from the file). The tempo track can be edited and iterated upon as any other track. Non-tempo-related events will generate exceptions if added.
+//
 // TempoTrack calls the underlying TempoTrack.
 func (x *AudioSequencer) TempoTrack() *MusicTrack {
 	_r := x.inner.TempoTrack()
@@ -136,37 +168,51 @@ func (x *AudioSequencer) TempoTrack() *MusicTrack {
 	return &MusicTrack{inner: _r}
 }
 
+// @property userInfo @abstract A dictionary containing meta-data derived from a sequence @discussion The dictionary can contain one or more of the values accessible via the AVAudioSequencerInfoDictionaryKeys.
+//
 // UserInfo calls the underlying UserInfo.
 func (x *AudioSequencer) UserInfo() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.UserInfo()
 }
 
+// @method hostTimeForBeats:error: @abstract Returns the host time that will be (or was) played at the specified beat. @discussion This call is only valid if the player is playing and will return 0 with an error if the player is not playing or if the starting position of the player (its "starting beat") was after the specified beat.  The method uses the sequence's tempo map to translate a beat time from the starting time and beat of the player.
+//
 // HostTimeForBeatsError calls the underlying HostTimeForBeatsError.
 func (x *AudioSequencer) HostTimeForBeatsError(inBeats float64) (uint64, error) {
 	return x.inner.HostTimeForBeatsError(inBeats)
 }
 
+// @method beatsForHostTime:error: @abstract Returns the beat that will be (or was) played at the specified host time. @discussion This call is only valid if the player is playing and will return 0 with an error if the player is not playing or if the starting time of the player was after the specified host time.  The method uses the sequence's tempo map to retrieve a beat time from the starting and specified host time.
+//
 // BeatsForHostTimeError calls the underlying BeatsForHostTimeError.
 func (x *AudioSequencer) BeatsForHostTimeError(inHostTime uint64) (float64, error) {
 	return x.inner.BeatsForHostTimeError(inHostTime)
 }
 
+// @method prepareToPlay @abstract Get ready to play the sequence by prerolling all events @discussion Happens automatically on play if it has not already been called, but may produce a delay in startup.
+//
 // PrepareToPlay calls the underlying PrepareToPlay.
 func (x *AudioSequencer) PrepareToPlay() {
 	x.inner.PrepareToPlay()
 }
 
+// @method	startAndReturnError: @abstract	Start the sequencer's player @discussion If the AVAudioSequencer has not been prerolled, it will pre-roll itself and then start. When the sequencer is associated with an audio engine, the sequencer's player will only play if the audio engine is running.
+//
 // StartAndReturnError returns any validation error.
 func (x *AudioSequencer) StartAndReturnError() error {
 	_, err := x.inner.StartAndReturnError()
 	return err
 }
 
+// @method	stop @abstract	Stop the sequencer's player @discussion Stopping the player leaves it in an un-prerolled state, but stores the playback position so that a subsequent call to startAndReturnError will resume where it left off. This action will not stop an associated audio engine.
+//
 // Stop calls the underlying Stop.
 func (x *AudioSequencer) Stop() {
 	x.inner.Stop()
 }
 
+// @property currentPositionInSeconds @abstract The current playback position in seconds @discussion Setting this positions the sequencer's player to the specified time.  This can be set while the player is playing, in which case playback will resume at the new position.
+//
 // CurrentPositionInSeconds calls the underlying CurrentPositionInSeconds.
 func (x *AudioSequencer) CurrentPositionInSeconds() float64 {
 	return x.inner.CurrentPositionInSeconds()
@@ -177,6 +223,8 @@ func (x *AudioSequencer) SetCurrentPositionInSeconds(currentPositionInSeconds fl
 	x.inner.SetCurrentPositionInSeconds(currentPositionInSeconds)
 }
 
+// @property currentPositionInBeats @abstract The current playback position in beats @discussion Setting this positions the sequencer's player to the specified beat.  This can be set while the player is playing, in which case playback will resume at the new position.
+//
 // CurrentPositionInBeats calls the underlying CurrentPositionInBeats.
 func (x *AudioSequencer) CurrentPositionInBeats() float64 {
 	return x.inner.CurrentPositionInBeats()
@@ -187,11 +235,15 @@ func (x *AudioSequencer) SetCurrentPositionInBeats(currentPositionInBeats float6
 	x.inner.SetCurrentPositionInBeats(currentPositionInBeats)
 }
 
+// @property playing @abstract Indicates whether or not the sequencer's player is playing @discussion Returns TRUE if the sequencer's player has been started and not stopped. It may have "played" past the end of the events in the sequence, but it is still considered to be playing (and its time value increasing) until it is explicitly stopped.
+//
 // IsPlaying calls the underlying IsPlaying.
 func (x *AudioSequencer) IsPlaying() bool {
 	return x.inner.IsPlaying()
 }
 
+// @property rate @abstract The playback rate of the sequencer's player @discussion 1.0 is normal playback rate.  Rate must be > 0.0.
+//
 // Rate calls the underlying Rate.
 func (x *AudioSequencer) Rate() float32 {
 	return x.inner.Rate()

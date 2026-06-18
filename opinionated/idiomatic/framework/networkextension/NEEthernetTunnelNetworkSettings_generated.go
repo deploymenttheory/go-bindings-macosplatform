@@ -33,6 +33,8 @@ func NEEthernetTunnelNetworkSettingsFromID(id objc.ID) *NEEthernetTunnelNetworkS
 	return &NEEthernetTunnelNetworkSettings{inner: raw.NEEthernetTunnelNetworkSettingsFromID(id)}
 }
 
+// @method initWithTunnelRemoteAddress: @discussion This function initializes a newly-allocated NEEthernetTunnelNetworkSettings object with a given tunnel remote address and MAC address. @param address The address of the remote endpoint that is providing the tunnel service. @param ethernetAddress The ethernet address to be assigned to the tunnel interface. This string should be in the format "xx:xx:xx:xx:xx:xx", where each xx is a hexidecimal number between 0 and ff. @param mtu The MTU (Maxium Transmission Unit) in bytes to be assigned to the tunnel interface.
+//
 // NewNEEthernetTunnelNetworkSettingsWithTunnelRemoteAddressEthernetAddressMtu creates a new [NEEthernetTunnelNetworkSettings].
 func NewNEEthernetTunnelNetworkSettingsWithTunnelRemoteAddressEthernetAddressMtu(address string, ethernetAddress string, mtu int) *NEEthernetTunnelNetworkSettings {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NEEthernetTunnelNetworkSettings")), objc.RegisterName("alloc"))
@@ -40,36 +42,48 @@ func NewNEEthernetTunnelNetworkSettingsWithTunnelRemoteAddressEthernetAddressMtu
 	return &NEEthernetTunnelNetworkSettings{inner: raw.NEEthernetTunnelNetworkSettingsFromID(_id)}
 }
 
+// @property IPv4Settings @discussion An NEIPv4Settings object that contains the desired tunnel IPv4 settings.
+//
 // WithIPv4Settings sets the iPv4Settings property and returns the receiver for chaining.
 func (x *NEEthernetTunnelNetworkSettings) WithIPv4Settings(iPv4Settings *NEIPv4Settings) *NEEthernetTunnelNetworkSettings {
 	x.inner.NEPacketTunnelNetworkSettings.SetIPv4Settings(iPv4Settings.Unwrap())
 	return x
 }
 
+// @property IPv6Settings @discussion An NEIPv6Settings object that contains the desired tunnel IPv6 settings.
+//
 // WithIPv6Settings sets the iPv6Settings property and returns the receiver for chaining.
 func (x *NEEthernetTunnelNetworkSettings) WithIPv6Settings(iPv6Settings *NEIPv6Settings) *NEEthernetTunnelNetworkSettings {
 	x.inner.NEPacketTunnelNetworkSettings.SetIPv6Settings(iPv6Settings.Unwrap())
 	return x
 }
 
+// @property tunnelOverheadBytes @discussion An NSNumber object containing the number of bytes of overhead appended to each outbound packet through the tunnel. The MTU for the TUN interface is computed by subtracting this value from the MTU of the primary physical interface.
+//
 // WithTunnelOverheadBytes sets the tunnelOverheadBytes property and returns the receiver for chaining.
 func (x *NEEthernetTunnelNetworkSettings) WithTunnelOverheadBytes(tunnelOverheadBytes *foundation.NSNumber) *NEEthernetTunnelNetworkSettings {
 	x.inner.NEPacketTunnelNetworkSettings.SetTunnelOverheadBytes(tunnelOverheadBytes)
 	return x
 }
 
+// @property MTU @discussion An NSNumber object containing the Maximum Transmission Unit (MTU) size in bytes to assign to the TUN interface. If this property is set, the tunnelOverheadBytes property is ignored.
+//
 // WithMTU sets the mTU property and returns the receiver for chaining.
 func (x *NEEthernetTunnelNetworkSettings) WithMTU(mTU *foundation.NSNumber) *NEEthernetTunnelNetworkSettings {
 	x.inner.NEPacketTunnelNetworkSettings.SetMTU(mTU)
 	return x
 }
 
+// @property DNSSettings @discussion An NEDNSSettings object that contains the desired tunnel DNS settings.
+//
 // WithDNSSettings sets the dNSSettings property and returns the receiver for chaining.
 func (x *NEEthernetTunnelNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NEEthernetTunnelNetworkSettings {
 	x.inner.NEPacketTunnelNetworkSettings.NETunnelNetworkSettings.SetDNSSettings(dNSSettings.asNEDNSSettings())
 	return x
 }
 
+// @property proxySettings @discussion An NEProxySettings object that contains the desired tunnel proxy settings.
+//
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
 func (x *NEEthernetTunnelNetworkSettings) WithProxySettings(proxySettings *NEProxySettings) *NEEthernetTunnelNetworkSettings {
 	x.inner.NEPacketTunnelNetworkSettings.NETunnelNetworkSettings.SetProxySettings(proxySettings.Unwrap())

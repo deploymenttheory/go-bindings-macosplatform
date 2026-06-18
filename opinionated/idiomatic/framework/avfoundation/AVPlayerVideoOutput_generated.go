@@ -31,6 +31,8 @@ func PlayerVideoOutputFromID(id objc.ID) *PlayerVideoOutput {
 	return &PlayerVideoOutput{inner: raw.AVPlayerVideoOutputFromID(id)}
 }
 
+// @method 	initWithSpecification: @abstract 	Creates an instance of AVPlayerVideoOutput, initialized with the specified video output specification. @param 		specification An instance of AVVideoOutputSpecification, used to recommend data channels to the AVPlayer associated with this AVPlayerVideoOutput. The tag collections owned by the AVVideoOutputSpecification will be given a priority based on their position in the array which they are held by AVVideoOutputSpecification, meaning position i takes priority over position i+1. This means that the player will first check if the tag collection at index 0 matches the shape of the current item's data channels. If the item's data channels would not be able satisfy the shape of the requested tag collection, it will fall back to the next collection and repeat this process. This continues until a tag collection or set of tag collection can be selected, otherwise if no collections match the shape of the item’s data channels then samples cannot be vended for that item. @result		An instance of AVPlayerVideoOutput. @discussion Output settings will be selected from the input AVVideoOutputSpecification based on the data channels selected for an item. If no output settings were set for the selected tag collection, then the default output settings from the AVVideoOutputSpecification will be used if those were set.
+//
 // NewPlayerVideoOutputWithSpecification creates a new [PlayerVideoOutput].
 func NewPlayerVideoOutputWithSpecification(specification *raw.AVVideoOutputSpecification) *PlayerVideoOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerVideoOutput")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewPlayerVideoOutputWithSpecification(specification *raw.AVVideoOutputSpeci
 	return &PlayerVideoOutput{inner: raw.AVPlayerVideoOutputFromID(_id)}
 }
 
+// @method 	copyTaggedBufferGroupForHostTime:presentationTimeStamp:activeConfiguration @abstract	Retrieves a tagged buffer group that is appropriate for display at the specified host time. @param		hostTime A CMTime that expresses a desired host time. @param		presentationTimeStamp On return points to a CMTime whose value is the presentation time in terms of the corresponding AVPlayerItem's timebase for the copied tagged buffer group, or kCMTimeInvalid if no sample is available for the provided hostTime. Note: This timestamp is in terms of the timebase of the AVPlayerItem for which this sample is associated. @param		activeConfiguration On return points to the active configuration associated with the copied tagged buffer group, or nil, if no sample is available for the provided hostTime. @result		A tagged buffer group for the specified host time if a sample is available, and NULL otherwise. @discussion The client is responsible for releasing the returned CMTaggedBufferGroup.
+//
 // CopyTaggedBufferGroupForHostTimePresentationTimeStampActiveConfiguration calls the underlying CopyTaggedBufferGroupForHostTimePresentationTimeStampActiveConfiguration.
 func (x *PlayerVideoOutput) CopyTaggedBufferGroupForHostTimePresentationTimeStampActiveConfiguration(hostTime coremedia.CMTime, presentationTimeStampOut *coremedia.CMTime, activeConfigurationOut *raw.AVPlayerVideoOutputConfiguration) unsafe.Pointer {
 	return x.inner.CopyTaggedBufferGroupForHostTimePresentationTimeStampActiveConfiguration(hostTime, presentationTimeStampOut, activeConfigurationOut)

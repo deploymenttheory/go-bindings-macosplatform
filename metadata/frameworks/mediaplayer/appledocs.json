@@ -1,0 +1,1733 @@
+{
+  "schema_version": 1,
+  "framework": "MediaPlayer",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "MPAdTimeRange": {
+      "doc": "An object that represents a time range where an ad break exists in the current player.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpadtimerange"
+    },
+    "MPChangeLanguageOptionCommandEvent": {
+      "doc": "An event requesting a change in the language option.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpchangelanguageoptioncommandevent"
+    },
+    "MPChangePlaybackPositionCommand": {
+      "doc": "An object that responds to requests to change the current playback position of the playing item.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpchangeplaybackpositioncommand"
+    },
+    "MPChangePlaybackPositionCommandEvent": {
+      "doc": "An event requesting a change in the playback position.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpchangeplaybackpositioncommandevent"
+    },
+    "MPChangePlaybackRateCommand": {
+      "doc": "An object that responds to requests to change the playback rate of the playing item.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpchangeplaybackratecommand"
+    },
+    "MPChangePlaybackRateCommandEvent": {
+      "doc": "An event requesting a change in the playback rate.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpchangeplaybackratecommandevent"
+    },
+    "MPChangeRepeatModeCommand": {
+      "doc": "An object that responds to requests to change the current repeat mode used during playback.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpchangerepeatmodecommand"
+    },
+    "MPChangeRepeatModeCommandEvent": {
+      "doc": "An event requesting a change in the repeat mode.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpchangerepeatmodecommandevent"
+    },
+    "MPChangeShuffleModeCommand": {
+      "doc": "An object that responds to requests to change the current shuffle mode used during playback.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpchangeshufflemodecommand"
+    },
+    "MPChangeShuffleModeCommandEvent": {
+      "doc": "An event requesting a change in the shuffle mode.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpchangeshufflemodecommandevent"
+    },
+    "MPContentItem": {
+      "doc": "An object that contains the information for a displayed media item.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpcontentitem"
+    },
+    "MPFeedbackCommand": {
+      "doc": "An object that reflects the feedback state for the playing item.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpfeedbackcommand"
+    },
+    "MPFeedbackCommandEvent": {
+      "doc": "An event requesting a change in the feedback setting.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpfeedbackcommandevent"
+    },
+    "MPMediaEntity": {
+      "doc": "The abstract superclass for media items, media item collections, and media playlist instances.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaentity"
+    },
+    "MPMediaItem": {
+      "doc": "A collection of properties that represents a single item in the media library.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem"
+    },
+    "MPMediaItemAnimatedArtwork": {
+      "doc": "An animated image, such as an animated music album cover art, for a media item.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitemanimatedartwork"
+    },
+    "MPMediaItemArtwork": {
+      "doc": "A graphical image, such as music album cover art, associated with a media item.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitemartwork"
+    },
+    "MPMediaItemCollection": {
+      "doc": "A sorted set of media items from the media library.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitemcollection"
+    },
+    "MPMediaLibrary": {
+      "doc": "An object that represents the state of synced media items on a device.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmedialibrary"
+    },
+    "MPMediaPlaylist": {
+      "doc": "A playable collection of related media items.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylist"
+    },
+    "MPMediaPlaylistCreationMetadata": {
+      "doc": "A set of attributes for describing a playlist when creating it.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylistcreationmetadata"
+    },
+    "MPMediaPredicate": {
+      "doc": "An abstract class that defines classes for filtering media in a media query.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmediapredicate"
+    },
+    "MPMediaPropertyPredicate": {
+      "doc": "A set of predicates for defining a filter in a media query.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmediapropertypredicate"
+    },
+    "MPMediaQuery": {
+      "doc": "A query that specifies a set of media items from the device’s media library using a filter and a grouping type.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquery"
+    },
+    "MPMediaQuerySection": {
+      "doc": "A range of media items or media item collections from within a media query.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquerysection"
+    },
+    "MPMusicPlayerApplicationController": {
+      "doc": "A media player object that you use to revise the queue that’s currently playing.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerapplicationcontroller"
+    },
+    "MPMusicPlayerController": {
+      "doc": "An object that plays audio media items from the device’s Music app library.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller"
+    },
+    "MPMusicPlayerControllerMutableQueue": {
+      "doc": "A mutable queue containing the media items to play.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontrollermutablequeue"
+    },
+    "MPMusicPlayerControllerQueue": {
+      "doc": "An immutable queue containing the media items to play.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontrollerqueue"
+    },
+    "MPMusicPlayerMediaItemQueueDescriptor": {
+      "doc": "A set of properties and methods for modifying audio media items in the player’s media queue.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayermediaitemqueuedescriptor"
+    },
+    "MPMusicPlayerPlayParameters": {
+      "doc": "The MusicKit parameters that describe items to play.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerplayparameters"
+    },
+    "MPMusicPlayerPlayParametersQueueDescriptor": {
+      "doc": "A set of properties and methods for modifying how to play items, based on play parameters the framework returns.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerplayparametersqueuedescriptor"
+    },
+    "MPMusicPlayerQueueDescriptor": {
+      "doc": "The abstract base class for audio media item and store queue descriptors.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerqueuedescriptor"
+    },
+    "MPNowPlayingInfoCenter": {
+      "doc": "An object for setting the Now Playing information for media that your app plays.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfocenter"
+    },
+    "MPNowPlayingInfoLanguageOption": {
+      "doc": "A set of interfaces for setting the language option for the Now Playing item.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfolanguageoption"
+    },
+    "MPNowPlayingInfoLanguageOptionGroup": {
+      "doc": "A grouped set of language options where only a single language option can be active at a time.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfolanguageoptiongroup"
+    },
+    "MPNowPlayingSession": {
+      "doc": "An object that manages Now Playing information and remote commands for multiple players.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayingsession"
+    },
+    "MPPlayableContentManager": {
+      "doc": "A shared content manager for controlling interactions between your media app and system-provided or external media player interfaces.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpplayablecontentmanager"
+    },
+    "MPPlayableContentManagerContext": {
+      "doc": "An object representing the current state of the playable endpoint.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpplayablecontentmanagercontext"
+    },
+    "MPRatingCommand": {
+      "doc": "An object that provides a detailed rating for the playing item.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpratingcommand"
+    },
+    "MPRatingCommandEvent": {
+      "doc": "An event requesting a change in the rating.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpratingcommandevent"
+    },
+    "MPRemoteCommand": {
+      "doc": "An object that responds to remote command events.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommand"
+    },
+    "MPRemoteCommandCenter": {
+      "doc": "An object that responds to remote control events sent by external accessories and system controls.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter"
+    },
+    "MPRemoteCommandEvent": {
+      "doc": "A description of a command sent by an external media player.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandevent"
+    },
+    "MPSeekCommandEvent": {
+      "doc": "An event requesting that the player seek to a new position.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpseekcommandevent"
+    },
+    "MPSkipIntervalCommand": {
+      "doc": "An object that defines the skip intervals for the player.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpskipintervalcommand"
+    },
+    "MPSkipIntervalCommandEvent": {
+      "doc": "An event requesting a change in the current skip interval.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpskipintervalcommandevent"
+    }
+  },
+  "protocols": {
+    "MPMediaPlayback": {
+      "doc": "A protocol that defines the interface for controlling audio media playback.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplayback"
+    },
+    "MPNowPlayingSessionDelegate": {
+      "doc": "A protocol that defines the delegate interface for a Now Playing session.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayingsessiondelegate"
+    },
+    "MPPlayableContentDataSource": {
+      "doc": "The data source providing media metadata to external media players so they can build user interfaces displaying your app’s content.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpplayablecontentdatasource"
+    },
+    "MPPlayableContentDelegate": {
+      "doc": "The protocol used to let external media players send playback commands to an app.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpplayablecontentdelegate"
+    },
+    "MPSystemMusicPlayerController": {
+      "doc": "A protocol for playing videos in the Music app.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpsystemmusicplayercontroller"
+    }
+  },
+  "enums": {
+    "MPChangeLanguageOptionSetting": {
+      "doc": "The states that determine when language option changes take effect.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpchangelanguageoptionsetting",
+      "members": {
+        "MPChangeLanguageOptionSettingNone": {
+          "doc": "No language option change is to be made.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpchangelanguageoptionsetting/none"
+        },
+        "MPChangeLanguageOptionSettingNowPlayingItemOnly": {
+          "doc": "The language option change is applied to the now playing item only.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpchangelanguageoptionsetting/nowplayingitemonly"
+        },
+        "MPChangeLanguageOptionSettingPermanent": {
+          "doc": "The language option change is applied to all future playback items.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpchangelanguageoptionsetting/permanent"
+        }
+      }
+    },
+    "MPErrorCode": {
+      "doc": "An enumeration that represents error codes for framework operations.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mperrorcode"
+    },
+    "MPMediaGrouping": {
+      "doc": "Keys used to configure a media query.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmediagrouping",
+      "members": {
+        "MPMediaGroupingAlbum": {
+          "doc": "Groups and sorts media item collections by album, and sorts songs within an album by track order.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediagrouping/album"
+        },
+        "MPMediaGroupingAlbumArtist": {
+          "doc": "Groups and sorts media item collections by album artist (the primary performing artist for an album as a whole).",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediagrouping/albumartist"
+        },
+        "MPMediaGroupingArtist": {
+          "doc": "Groups and sorts media item collections by performing artist.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediagrouping/artist"
+        },
+        "MPMediaGroupingComposer": {
+          "doc": "Groups and sorts media item collections by composer.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediagrouping/composer"
+        },
+        "MPMediaGroupingGenre": {
+          "doc": "Groups and sorts media item collections by musical or film genre.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediagrouping/genre"
+        },
+        "MPMediaGroupingPlaylist": {
+          "doc": "Groups and sorts media item collections by playlist.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediagrouping/playlist"
+        },
+        "MPMediaGroupingPodcastTitle": {
+          "doc": "Groups and sorts media item collections by podcast title.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediagrouping/podcasttitle"
+        },
+        "MPMediaGroupingTitle": {
+          "doc": "Groups and sorts media item collections by title. For songs, for example, the title is the song name. This is the default grouping key.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediagrouping/title"
+        }
+      }
+    },
+    "MPMediaLibraryAuthorizationStatus": {
+      "doc": "The list of possible states for authorization to access to the user’s media library.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmedialibraryauthorizationstatus",
+      "members": {
+        "MPMediaLibraryAuthorizationStatusAuthorized": {
+          "doc": "Your app may access items in the user’s media library.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmedialibraryauthorizationstatus/authorized"
+        },
+        "MPMediaLibraryAuthorizationStatusDenied": {
+          "doc": "The app may not access the items in the user’s media library.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmedialibraryauthorizationstatus/denied"
+        },
+        "MPMediaLibraryAuthorizationStatusNotDetermined": {
+          "doc": "The user hasn’t determined whether to authorize the use of their media library.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmedialibraryauthorizationstatus/notdetermined"
+        },
+        "MPMediaLibraryAuthorizationStatusRestricted": {
+          "doc": "The app may access some of the content in the user’s media library.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmedialibraryauthorizationstatus/restricted"
+        }
+      }
+    },
+    "MPMediaPlaylistAttribute": {
+      "doc": "Attributes define the type of playlist.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylistattribute",
+      "members": {
+        "MPMediaPlaylistAttributeGenius": {
+          "doc": "A Genius playlist includes items related to other items in your Music library.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylistattribute/genius"
+        },
+        "MPMediaPlaylistAttributeNone": {
+          "doc": "A playlist with no attributes.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylistattribute/mpmediaplaylistattributenone"
+        },
+        "MPMediaPlaylistAttributeOnTheGo": {
+          "doc": "A playlist created on a device rather than synced from the Music app.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylistattribute/onthego"
+        },
+        "MPMediaPlaylistAttributeSmart": {
+          "doc": "A smart playlist includes items that match one or more user-specified rules.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylistattribute/smart"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new instance with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylistattribute/init(rawvalue:)"
+        }
+      }
+    },
+    "MPMediaPredicateComparison": {
+      "doc": "Logical comparison types for media queries.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmediapredicatecomparison",
+      "members": {
+        "MPMediaPredicateComparisonContains": {
+          "doc": "Matches when a media item’s value for a given property is contained in the value of the media property predicate.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediapredicatecomparison/contains"
+        },
+        "MPMediaPredicateComparisonEqualTo": {
+          "doc": "Matches when a media item’s value for a given property is equal to the value in the media property predicate.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediapredicatecomparison/equalto"
+        }
+      }
+    },
+    "MPMediaType": {
+      "doc": "The properties for defining the type for a media item.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmediatype",
+      "members": {
+        "MPMediaTypeAny": {
+          "doc": "The media item contains an unspecified type of media content.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediatype/any"
+        },
+        "MPMediaTypeAnyAudio": {
+          "doc": "The media item contains an unspecified type of audio content.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediatype/anyaudio"
+        },
+        "MPMediaTypeAnyVideo": {
+          "doc": "The media item contains an unspecified type of video content.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediatype/anyvideo"
+        },
+        "MPMediaTypeAudioBook": {
+          "doc": "The media item contains an audio book.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediatype/audiobook"
+        },
+        "MPMediaTypeAudioITunesU": {
+          "doc": "The media item contains an iTunes U audio lesson.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediatype/audioitunesu"
+        },
+        "MPMediaTypeHomeVideo": {
+          "doc": "The media item contains a home video.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediatype/homevideo"
+        },
+        "MPMediaTypeMovie": {
+          "doc": "The media item contains a movie.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediatype/movie"
+        },
+        "MPMediaTypeMusic": {
+          "doc": "The media item contains music.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediatype/music"
+        },
+        "MPMediaTypeMusicVideo": {
+          "doc": "The media item contains a music video.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediatype/musicvideo"
+        },
+        "MPMediaTypePodcast": {
+          "doc": "The media item contains a podcast.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediatype/podcast"
+        },
+        "MPMediaTypeTVShow": {
+          "doc": "The media item contains a TV show.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediatype/tvshow"
+        },
+        "MPMediaTypeVideoITunesU": {
+          "doc": "The media item contains an iTunes U video.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediatype/videoitunesu"
+        },
+        "MPMediaTypeVideoPodcast": {
+          "doc": "The media item contains a video podcast.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediatype/videopodcast"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new instance with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmediatype/init(rawvalue:)"
+        }
+      }
+    },
+    "MPMusicPlaybackState": {
+      "doc": "The music player playback state modes.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplaybackstate",
+      "members": {
+        "MPMusicPlaybackStateInterrupted": {
+          "doc": "The music player has been interrupted, such as by an incoming phone call.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplaybackstate/interrupted"
+        },
+        "MPMusicPlaybackStatePaused": {
+          "doc": "The music player is paused.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplaybackstate/paused"
+        },
+        "MPMusicPlaybackStatePlaying": {
+          "doc": "The music player is playing.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplaybackstate/playing"
+        },
+        "MPMusicPlaybackStateSeekingBackward": {
+          "doc": "The music player is seeking backward.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplaybackstate/seekingbackward"
+        },
+        "MPMusicPlaybackStateSeekingForward": {
+          "doc": "The music player is seeking forward.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplaybackstate/seekingforward"
+        },
+        "MPMusicPlaybackStateStopped": {
+          "doc": "The music player is stopped.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplaybackstate/stopped"
+        }
+      }
+    },
+    "MPMusicRepeatMode": {
+      "doc": "The repeat modes for the media player.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicrepeatmode",
+      "members": {
+        "MPMusicRepeatModeAll": {
+          "doc": "The music player will repeat the current playlist.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicrepeatmode/all"
+        },
+        "MPMusicRepeatModeDefault": {
+          "doc": "The user’s preferred repeat mode.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicrepeatmode/default"
+        },
+        "MPMusicRepeatModeNone": {
+          "doc": "The music player will not repeat the current song or playlist.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicrepeatmode/none"
+        },
+        "MPMusicRepeatModeOne": {
+          "doc": "The music player will repeat the current song.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicrepeatmode/one"
+        }
+      }
+    },
+    "MPMusicShuffleMode": {
+      "doc": "The shuffle modes for the media player.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicshufflemode",
+      "members": {
+        "MPMusicShuffleModeAlbums": {
+          "doc": "The playlist is shuffled by album.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicshufflemode/albums"
+        },
+        "MPMusicShuffleModeDefault": {
+          "doc": "The user’s preferred shuffle mode.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicshufflemode/default"
+        },
+        "MPMusicShuffleModeOff": {
+          "doc": "The playlist is not shuffled.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicshufflemode/off"
+        },
+        "MPMusicShuffleModeSongs": {
+          "doc": "The playlist is shuffled by song.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicshufflemode/songs"
+        }
+      }
+    },
+    "MPNowPlayingInfoLanguageOptionType": {
+      "doc": "The language option type to use for the Now Playing item.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfolanguageoptiontype",
+      "members": {
+        "MPNowPlayingInfoLanguageOptionTypeAudible": {
+          "doc": "Indicates an audible language option is used.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfolanguageoptiontype/audible"
+        },
+        "MPNowPlayingInfoLanguageOptionTypeLegible": {
+          "doc": "Indicates a written language option is used.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfolanguageoptiontype/legible"
+        }
+      }
+    },
+    "MPNowPlayingInfoMediaType": {
+      "doc": "The type of media currently playing.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfomediatype",
+      "members": {
+        "MPNowPlayingInfoMediaTypeAudio": {
+          "doc": "The now playing media item is an audio item.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfomediatype/audio"
+        },
+        "MPNowPlayingInfoMediaTypeNone": {
+          "doc": "There is no now playing media item.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfomediatype/none"
+        },
+        "MPNowPlayingInfoMediaTypeVideo": {
+          "doc": "The now playing media item is a video item.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfomediatype/video"
+        }
+      }
+    },
+    "MPNowPlayingPlaybackState": {
+      "doc": "The playback state of the app.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayingplaybackstate",
+      "members": {
+        "MPNowPlayingPlaybackStateInterrupted": {
+          "doc": "The app has been interrupted during playback.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayingplaybackstate/interrupted"
+        },
+        "MPNowPlayingPlaybackStatePaused": {
+          "doc": "The app is currently paused.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayingplaybackstate/paused"
+        },
+        "MPNowPlayingPlaybackStatePlaying": {
+          "doc": "The app is currently playing a media item.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayingplaybackstate/playing"
+        },
+        "MPNowPlayingPlaybackStateStopped": {
+          "doc": "The app has stopped playing.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayingplaybackstate/stopped"
+        },
+        "MPNowPlayingPlaybackStateUnknown": {
+          "doc": "The current state of the app is unknown.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayingplaybackstate/unknown"
+        }
+      }
+    },
+    "MPRemoteCommandHandlerStatus": {
+      "doc": "Constants indicating the status of a command.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandhandlerstatus",
+      "members": {
+        "MPRemoteCommandHandlerStatusCommandFailed": {
+          "doc": "The requested command failed to execute.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandhandlerstatus/commandfailed"
+        },
+        "MPRemoteCommandHandlerStatusDeviceNotFound": {
+          "doc": "The requested command couldn’t execute because a required device isn’t available.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandhandlerstatus/devicenotfound"
+        },
+        "MPRemoteCommandHandlerStatusNoActionableNowPlayingItem": {
+          "doc": "The requested command couldn’t execute because no Now Playing item is available.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandhandlerstatus/noactionablenowplayingitem"
+        },
+        "MPRemoteCommandHandlerStatusNoSuchContent": {
+          "doc": "The requested command couldn’t execute because its required content isn’t available.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandhandlerstatus/nosuchcontent"
+        },
+        "MPRemoteCommandHandlerStatusSuccess": {
+          "doc": "The requested command executed successfully.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandhandlerstatus/success"
+        }
+      }
+    },
+    "MPRepeatType": {
+      "doc": "Indicates which items to play repeatedly.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mprepeattype",
+      "members": {
+        "MPRepeatTypeAll": {
+          "doc": "The current container or playlist is repeated indefinitely.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mprepeattype/all"
+        },
+        "MPRepeatTypeOff": {
+          "doc": "Nothing is repeated during playback.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mprepeattype/off"
+        },
+        "MPRepeatTypeOne": {
+          "doc": "A single item is repeated indefinitely.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mprepeattype/one"
+        }
+      }
+    },
+    "MPSeekCommandEventType": {
+      "doc": "Defines the beginning and ending of seek events.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpseekcommandeventtype",
+      "members": {
+        "MPSeekCommandEventTypeBeginSeeking": {
+          "doc": "Indicates the external media player began seeking.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpseekcommandeventtype/beginseeking"
+        },
+        "MPSeekCommandEventTypeEndSeeking": {
+          "doc": "Indicates the external media player stopped seeking.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpseekcommandeventtype/endseeking"
+        }
+      }
+    },
+    "MPShuffleType": {
+      "doc": "Indicates which item types to shuffle.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpshuffletype",
+      "members": {
+        "MPShuffleTypeCollections": {
+          "doc": "Collections of items are shuffled during playback.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpshuffletype/collections"
+        },
+        "MPShuffleTypeItems": {
+          "doc": "Individual items are shuffled during playback.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpshuffletype/items"
+        },
+        "MPShuffleTypeOff": {
+          "doc": "Nothing is shuffled during playback.",
+          "url": "https://developer.apple.com/documentation/mediaplayer/mpshuffletype/off"
+        }
+      }
+    }
+  },
+  "methods": {
+    "MPAdTimeRange": {
+      "-initWithTimeRange:": {
+        "doc": "Creates a Media Player time range that indicates where an ad break exists in the current player.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpadtimerange/init(_:)"
+      }
+    },
+    "MPContentItem": {
+      "-initWithIdentifier:": {
+        "doc": "Sets the identifier for a media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpcontentitem/init(identifier:)"
+      }
+    },
+    "MPMediaEntity": {
+      "+canFilterByProperty:": {
+        "doc": "Indicates whether you can use the media property key that you specify to construct a media property predicate.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaentity/canfilter(byproperty:)"
+      },
+      "-enumerateValuesForProperties:usingBlock:": {
+        "doc": "Executes a provided block with the fetched values for the given item properties.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaentity/enumeratevalues(forproperties:using:)"
+      },
+      "-objectForKeyedSubscript:": {
+        "doc": "Returns the object specified by the key.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaentity/subscript(_:)"
+      },
+      "-valueForProperty:": {
+        "doc": "Retrieves the value for a specified media property key.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaentity/value(forproperty:)"
+      }
+    },
+    "MPMediaItem": {
+      "+persistentIDPropertyForGroupingType:": {
+        "doc": "Obtains the persistent identifier key for a specified grouping type.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/persistentidproperty(forgroupingtype:)"
+      },
+      "+titlePropertyForGroupingType:": {
+        "doc": "Obtains the title key for a specified grouping type.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/titleproperty(forgroupingtype:)"
+      }
+    },
+    "MPMediaItemAnimatedArtwork": {
+      "-initWithArtworkID:previewImageRequestHandler:videoAssetFileURLRequestHandler:": {
+        "doc": "Creates an animated artwork.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitemanimatedartwork/init(artworkid:previewimagerequesthandler:videoassetfileurlrequesthandler:)-ieue"
+      }
+    },
+    "MPMediaItemArtwork": {
+      "-imageWithSize:": {
+        "doc": "Returns the artwork image for an item at the given size.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitemartwork/image(at:)"
+      },
+      "-initWithBoundsSize:requestHandler:": {
+        "doc": "Creates a new image from existing artwork with the specified bounds.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitemartwork/init(boundssize:requesthandler:)"
+      },
+      "-initWithImage:": {
+        "doc": "Initializes a media item artwork instance with a full-size image.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitemartwork/init(image:)"
+      }
+    },
+    "MPMediaItemCollection": {
+      "+collectionWithItems:": {
+        "doc": "Creates a media item collection by copying an array of media items.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitemcollection/collectionwithitems:"
+      },
+      "-initWithItems:": {
+        "doc": "Initializes a media item collection with an array of media items.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitemcollection/init(items:)"
+      }
+    },
+    "MPMediaLibrary": {
+      "+authorizationStatus": {
+        "doc": "Returns whether the app can access the user’s media library.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmedialibrary/authorizationstatus()"
+      },
+      "+defaultMediaLibrary": {
+        "doc": "Returns an instance of the default media library.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmedialibrary/default()"
+      },
+      "+requestAuthorization:": {
+        "doc": "Displays a user interface so that the user can authorize whether your app may view the media library’s contents.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmedialibrary/requestauthorization(_:)"
+      },
+      "-addItemWithProductID:completionHandler:": {
+        "doc": "Adds the designated item to the user’s music library.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmedialibrary/additem(withproductid:completionhandler:)"
+      },
+      "-beginGeneratingLibraryChangeNotifications": {
+        "doc": "Asks the media library to turn on notifications for whenever the library changes.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmedialibrary/begingeneratinglibrarychangenotifications()"
+      },
+      "-endGeneratingLibraryChangeNotifications": {
+        "doc": "Asks the media library to turn off notifications for whenever the library changes.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmedialibrary/endgeneratinglibrarychangenotifications()"
+      },
+      "-getPlaylistWithUUID:creationMetadata:completionHandler:": {
+        "doc": "Retrieves an app maintained existing playlist or creates a new playlist when no playlist exists.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmedialibrary/getplaylist(with:creationmetadata:completionhandler:)"
+      }
+    },
+    "MPMediaPlaylist": {
+      "-addItemWithProductID:completionHandler:": {
+        "doc": "Adds the item associated with the product identifier to the end of the playlist.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylist/additem(withproductid:completionhandler:)"
+      },
+      "-addMediaItems:completionHandler:": {
+        "doc": "Adds an array of media items to the end of the playlist.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylist/add(_:completionhandler:)"
+      }
+    },
+    "MPMediaPlaylistCreationMetadata": {
+      "-initWithName:": {
+        "doc": "Creates a new playlist metadata object with the designated name.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylistcreationmetadata/init(name:)"
+      }
+    },
+    "MPMediaPropertyPredicate": {
+      "+predicateWithValue:forProperty:": {
+        "doc": "Creates a media property predicate with the default comparison type.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediapropertypredicate/init(value:forproperty:)"
+      },
+      "+predicateWithValue:forProperty:comparisonType:": {
+        "doc": "Creates a media property predicate with a specified comparison type.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediapropertypredicate/init(value:forproperty:comparisontype:)"
+      }
+    },
+    "MPMediaQuery": {
+      "+albumsQuery": {
+        "doc": "Creates a media query that matches music items and that groups and sorts collections by album name.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquery/albums()"
+      },
+      "+artistsQuery": {
+        "doc": "Creates a media query that matches music items and that groups and sorts collections by artist name.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquery/artists()"
+      },
+      "+audiobooksQuery": {
+        "doc": "Creates a media query that matches audio book items and that groups and sorts collections by audio book name.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquery/audiobooks()"
+      },
+      "+compilationsQuery": {
+        "doc": "Creates a media query that matches compilation items and that groups and sorts collections by album name.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquery/compilations()"
+      },
+      "+composersQuery": {
+        "doc": "Creates a media query that matches all media items and that groups and sorts collections by composer name.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquery/composers()"
+      },
+      "+genresQuery": {
+        "doc": "Creates a media query that matches all media items and that groups and sorts collections by genre name.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquery/genres()"
+      },
+      "+playlistsQuery": {
+        "doc": "Creates a media query that matches the entire library and that groups and sorts collections by playlist name.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquery/playlists()"
+      },
+      "+podcastsQuery": {
+        "doc": "Creates a media query that matches podcast items and that groups and sorts collections by podcast name.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquery/podcasts()"
+      },
+      "+songsQuery": {
+        "doc": "Creates a media query that matches music items and that groups and sorts collections by song name.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquery/songs()"
+      },
+      "-addFilterPredicate:": {
+        "doc": "Adds a media property predicate to a query.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquery/addfilterpredicate(_:)"
+      },
+      "-initWithFilterPredicates:": {
+        "doc": "Initializes a media query with a set of media property predicates.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquery/init(filterpredicates:)"
+      },
+      "-removeFilterPredicate:": {
+        "doc": "Removes a filter predicate from a query.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquery/removefilterpredicate(_:)"
+      }
+    },
+    "MPMusicPlayerApplicationController": {
+      "-performQueueTransaction:completionHandler:": {
+        "doc": "Changes the contents of the media items in the queue.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerapplicationcontroller/perform(queuetransaction:completionhandler:)"
+      }
+    },
+    "MPMusicPlayerController": {
+      "-appendQueueDescriptor:": {
+        "doc": "Inserts the media items defined by the queue descriptor after the last media item in the current queue.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/append(_:)"
+      },
+      "-beginGeneratingPlaybackNotifications": {
+        "doc": "Starts the generation of playback notifications.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/begingeneratingplaybacknotifications()"
+      },
+      "-endGeneratingPlaybackNotifications": {
+        "doc": "Ends the generation of playback notifications.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/endgeneratingplaybacknotifications()"
+      },
+      "-prepareToPlayWithCompletionHandler:": {
+        "doc": "Prepares a music player for playback.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/preparetoplay(completionhandler:)"
+      },
+      "-prependQueueDescriptor:": {
+        "doc": "Inserts the media items defined by the queue descriptor into the current queue immediately after the currently playing media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/prepend(_:)"
+      },
+      "-setQueueWithDescriptor:": {
+        "doc": "Set the music player’s playback queue using media items that fit the queue descriptor properties.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/setqueue(with:)-1izmj"
+      },
+      "-setQueueWithItemCollection:": {
+        "doc": "Sets a music player’s playback queue using a media item collection.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/setqueue(with:)-xlwk"
+      },
+      "-setQueueWithQuery:": {
+        "doc": "Sets a music player’s playback queue based on a media query.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/setqueue(with:)-5rii3"
+      },
+      "-setQueueWithStoreIDs:": {
+        "doc": "Sets a music player’s playback queue using with media items identified by the store identifiers.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/setqueue(with:)-8x6xb"
+      },
+      "-skipToBeginning": {
+        "doc": "Restarts playback at the beginning of the currently playing media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/skiptobeginning()"
+      },
+      "-skipToNextItem": {
+        "doc": "Starts playback of the next media item in the playback queue, or if the music player isn’t playing, designates the next media item as the next item to play.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/skiptonextitem()"
+      },
+      "-skipToPreviousItem": {
+        "doc": "Starts playback of the previous media item in the playback queue, or if the music player isn’t playing, designates the previous media item as the next to play.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/skiptopreviousitem()"
+      }
+    },
+    "MPMusicPlayerControllerMutableQueue": {
+      "-insertQueueDescriptor:afterItem:": {
+        "doc": "Inserts a modified queue after the designated media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontrollermutablequeue/insert(_:after:)"
+      },
+      "-removeItem:": {
+        "doc": "Removes a media item from the music player’s queue.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontrollermutablequeue/remove(_:)"
+      }
+    },
+    "MPMusicPlayerMediaItemQueueDescriptor": {
+      "-initWithItemCollection:": {
+        "doc": "Creates a new queue descriptor using the designated collection.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayermediaitemqueuedescriptor/init(itemcollection:)"
+      },
+      "-initWithQuery:": {
+        "doc": "Creates a new queue descriptor using the designated query.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayermediaitemqueuedescriptor/init(query:)"
+      },
+      "-setEndTime:forItem:": {
+        "doc": "The time the designated media item is to stop playing.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayermediaitemqueuedescriptor/setendtime(_:for:)"
+      },
+      "-setStartTime:forItem:": {
+        "doc": "The time the designated media item is to start playing.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayermediaitemqueuedescriptor/setstarttime(_:for:)"
+      }
+    },
+    "MPMusicPlayerPlayParameters": {
+      "-initWithDictionary:": {
+        "doc": "Returns a new play parameters object using information from MusicKit.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerplayparameters/init(dictionary:)"
+      }
+    },
+    "MPMusicPlayerPlayParametersQueueDescriptor": {
+      "-initWithPlayParametersQueue:": {
+        "doc": "Creates a new queue descriptor using the designated queue of play parameters.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerplayparametersqueuedescriptor/init(playparametersqueue:)"
+      },
+      "-setEndTime:forItemWithPlayParameters:": {
+        "doc": "Sets the time the item with the associated play parameters is to stop playing.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerplayparametersqueuedescriptor/setendtime(_:foritemwith:)"
+      },
+      "-setStartTime:forItemWithPlayParameters:": {
+        "doc": "Sets the time the item with the associated play parameters is to start playing.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerplayparametersqueuedescriptor/setstarttime(_:foritemwith:)"
+      }
+    },
+    "MPNowPlayingInfoCenter": {
+      "+defaultCenter": {
+        "doc": "Returns the singleton Now Playing info center.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfocenter/default()"
+      }
+    },
+    "MPNowPlayingInfoLanguageOption": {
+      "-initWithType:languageTag:characteristics:displayName:identifier:": {
+        "doc": "Creates a single language option.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfolanguageoption/init(type:languagetag:characteristics:displayname:identifier:)"
+      },
+      "-isAutomaticAudibleLanguageOption": {
+        "doc": "Returns a Boolean value that determines whether to use the best audible language option based on the system preferences.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfolanguageoption/isautomaticaudiblelanguageoption()"
+      },
+      "-isAutomaticLegibleLanguageOption": {
+        "doc": "Returns a Boolean value that determines whether to use the best legible language option based on the system preferences.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfolanguageoption/isautomaticlegiblelanguageoption()"
+      }
+    },
+    "MPNowPlayingInfoLanguageOptionGroup": {
+      "-initWithLanguageOptions:defaultLanguageOption:allowEmptySelection:": {
+        "doc": "Creates a new language option group with the supplied language options.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfolanguageoptiongroup/init(languageoptions:defaultlanguageoption:allowemptyselection:)"
+      }
+    },
+    "MPNowPlayingSession": {
+      "-addPlayer:": {
+        "doc": "Adds a player to the session.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayingsession/addplayer(_:)"
+      },
+      "-becomeActiveIfPossibleWithCompletion:": {
+        "doc": "Tells the system to make the session the active Now Playing session if possible.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayingsession/becomeactiveifpossible(completion:)"
+      },
+      "-initWithPlayers:": {
+        "doc": "Creates a Now Playing session object.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayingsession/init(players:)"
+      },
+      "-removePlayer:": {
+        "doc": "Removes a player from the session.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayingsession/removeplayer(_:)"
+      }
+    },
+    "MPPlayableContentManager": {
+      "+sharedContentManager": {
+        "doc": "Returns the current content manager instance.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpplayablecontentmanager/shared()"
+      },
+      "-beginUpdates": {
+        "doc": "Updates several Media Player content items at once.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpplayablecontentmanager/beginupdates()"
+      },
+      "-endUpdates": {
+        "doc": "Ends a synchronized update.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpplayablecontentmanager/endupdates()"
+      },
+      "-reloadData": {
+        "doc": "Reloads the data from the data source.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpplayablecontentmanager/reloaddata()"
+      }
+    },
+    "MPRemoteCommand": {
+      "-addTarget:action:": {
+        "doc": "Adds a target object to be called when an event is received.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommand/addtarget(_:action:)"
+      },
+      "-addTargetWithHandler:": {
+        "doc": "Adds a block to be called when an event is received.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommand/addtarget(handler:)"
+      },
+      "-removeTarget:": {
+        "doc": "Removes a target from the remote command object.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommand/removetarget(_:)"
+      },
+      "-removeTarget:action:": {
+        "doc": "Removes a target and action from a remote command object.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommand/removetarget(_:action:)"
+      }
+    },
+    "MPRemoteCommandCenter": {
+      "+sharedCommandCenter": {
+        "doc": "Returns the shared object you use to access the system’s remote command objects.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/shared()"
+      }
+    }
+  },
+  "properties": {
+    "MPAdTimeRange": {
+      "timeRange": {
+        "doc": "A Media Player time range that indicates where an ad break exists in the current player.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpadtimerange/timerange"
+      }
+    },
+    "MPChangeLanguageOptionCommandEvent": {
+      "languageOption": {
+        "doc": "The requested language option to change.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpchangelanguageoptioncommandevent/languageoption"
+      },
+      "setting": {
+        "doc": "The extent of the language setting change.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpchangelanguageoptioncommandevent/setting"
+      }
+    },
+    "MPChangePlaybackPositionCommandEvent": {
+      "positionTime": {
+        "doc": "The playback position used when setting the current time of the player.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpchangeplaybackpositioncommandevent/positiontime"
+      }
+    },
+    "MPChangePlaybackRateCommand": {
+      "supportedPlaybackRates": {
+        "doc": "The supported playback rates for a media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpchangeplaybackratecommand/supportedplaybackrates"
+      }
+    },
+    "MPChangePlaybackRateCommandEvent": {
+      "playbackRate": {
+        "doc": "The chosen playback rate for the command event.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpchangeplaybackratecommandevent/playbackrate"
+      }
+    },
+    "MPChangeRepeatModeCommand": {
+      "currentRepeatType": {
+        "doc": "The current repeat option for a media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpchangerepeatmodecommand/currentrepeattype"
+      }
+    },
+    "MPChangeRepeatModeCommandEvent": {
+      "preservesRepeatMode": {
+        "doc": "A Boolean value that indicates whether the chosen repeat mode is preserved between playback sessions.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpchangerepeatmodecommandevent/preservesrepeatmode"
+      },
+      "repeatType": {
+        "doc": "The repeat type used when fulfilling the event request.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpchangerepeatmodecommandevent/repeattype"
+      }
+    },
+    "MPChangeShuffleModeCommand": {
+      "currentShuffleType": {
+        "doc": "The current shuffle mode for a media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpchangeshufflemodecommand/currentshuffletype"
+      }
+    },
+    "MPChangeShuffleModeCommandEvent": {
+      "preservesShuffleMode": {
+        "doc": "A Boolean value that indicates whether the shuffle mode is preserved between playback sessions.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpchangeshufflemodecommandevent/preservesshufflemode"
+      },
+      "shuffleType": {
+        "doc": "The shuffle type used when fulfilling the event request.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpchangeshufflemodecommandevent/shuffletype"
+      }
+    },
+    "MPContentItem": {
+      "artwork": {
+        "doc": "A single image that’s associated with the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpcontentitem/artwork"
+      },
+      "container": {
+        "doc": "A Boolean value that indicates whether a media item is container of other items.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpcontentitem/iscontainer"
+      },
+      "explicitContent": {
+        "doc": "A Boolean value that indicates whether the media item contains explicit content.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpcontentitem/isexplicitcontent"
+      },
+      "identifier": {
+        "doc": "The unique identifier for the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpcontentitem/identifier"
+      },
+      "playable": {
+        "doc": "A Boolean value that indicates whether a media item is able to be played.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpcontentitem/isplayable"
+      },
+      "playbackProgress": {
+        "doc": "The amount of content played for the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpcontentitem/playbackprogress"
+      },
+      "streamingContent": {
+        "doc": "A Boolean value that indicates whether the content item is streaming content.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpcontentitem/isstreamingcontent"
+      },
+      "subtitle": {
+        "doc": "A secondary designator for the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpcontentitem/subtitle"
+      },
+      "title": {
+        "doc": "The public name of the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpcontentitem/title"
+      }
+    },
+    "MPFeedbackCommand": {
+      "active": {
+        "doc": "A Boolean value that indicates whether the feedback’s action is on or off.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpfeedbackcommand/isactive"
+      },
+      "localizedShortTitle": {
+        "doc": "A shortened version of the string used to describe the context of a command.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpfeedbackcommand/localizedshorttitle"
+      },
+      "localizedTitle": {
+        "doc": "A localized string used to describe the context of a command.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpfeedbackcommand/localizedtitle"
+      }
+    },
+    "MPFeedbackCommandEvent": {
+      "negative": {
+        "doc": "A Boolean value that indicates whether an app should perform a negative command appropriate to the target.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpfeedbackcommandevent/isnegative"
+      }
+    },
+    "MPMediaEntity": {
+      "persistentID": {
+        "doc": "The persistent identifier for a media entity.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaentity/persistentid"
+      }
+    },
+    "MPMediaItem": {
+      "albumArtist": {
+        "doc": "The primary performing artist for an album.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/albumartist"
+      },
+      "albumArtistPersistentID": {
+        "doc": "The persistent identifier for the primary performing artist for an album.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/albumartistpersistentid"
+      },
+      "albumPersistentID": {
+        "doc": "The persistent identifier for an album.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/albumpersistentid"
+      },
+      "albumTitle": {
+        "doc": "The title of an album, such as Live on Mars, rather than the title of an individual song on the album, such as “Crater Dance.”",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/albumtitle"
+      },
+      "albumTrackCount": {
+        "doc": "The number of tracks for the album that contains the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/albumtrackcount"
+      },
+      "albumTrackNumber": {
+        "doc": "The track number of the media item, for a media item that’s part of an album.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/albumtracknumber"
+      },
+      "artist": {
+        "doc": "The performing artists for a media item, which may vary from the primary artist for the album that a media item belongs to.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/artist"
+      },
+      "artistPersistentID": {
+        "doc": "The persistent identifier for an artist.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/artistpersistentid"
+      },
+      "artwork": {
+        "doc": "The artwork image for the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/artwork"
+      },
+      "assetURL": {
+        "doc": "The URL that points to the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/asseturl"
+      },
+      "beatsPerMinute": {
+        "doc": "The number of musical beats per minute for the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/beatsperminute"
+      },
+      "bookmarkTime": {
+        "doc": "The time of the user’s most recent interaction with the bookmark in the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/bookmarktime"
+      },
+      "cloudItem": {
+        "doc": "A Boolean value that indicates whether the media item is an iCloud Music Library item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/isclouditem"
+      },
+      "comments": {
+        "doc": "Textual information about the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/comments"
+      },
+      "compilation": {
+        "doc": "A Boolean value that indicates whether the media item is part of a compilation.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/iscompilation"
+      },
+      "composer": {
+        "doc": "The musical composer for the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/composer"
+      },
+      "composerPersistentID": {
+        "doc": "The persistent identifier for a composer.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/composerpersistentid"
+      },
+      "dateAdded": {
+        "doc": "The date the user adds the media item to the library.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/dateadded"
+      },
+      "discCount": {
+        "doc": "The number of discs for the album that contains the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/disccount"
+      },
+      "discNumber": {
+        "doc": "The disc number of the media item, for a media item that’s part of a multidisc album.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/discnumber"
+      },
+      "explicitItem": {
+        "doc": "A Boolean value that indicates whether the media item has explicit (adult) lyrics or language.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/isexplicititem"
+      },
+      "genre": {
+        "doc": "The music or film genre of the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/genre"
+      },
+      "genrePersistentID": {
+        "doc": "The persistent identifier for a genre.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/genrepersistentid"
+      },
+      "lastPlayedDate": {
+        "doc": "The most recent play date of the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/lastplayeddate"
+      },
+      "lyrics": {
+        "doc": "The lyrics for the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/lyrics"
+      },
+      "mediaType": {
+        "doc": "The media type of the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/mediatype"
+      },
+      "persistentID": {
+        "doc": "The persistent identifier for the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/persistentid"
+      },
+      "playCount": {
+        "doc": "The number of times the user plays the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/playcount"
+      },
+      "playbackDuration": {
+        "doc": "The playback duration of the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/playbackduration"
+      },
+      "playbackStoreID": {
+        "doc": "The ID of a media item from the Apple Music catalog.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/playbackstoreid"
+      },
+      "podcastPersistentID": {
+        "doc": "The persistent identifier for an audio podcast.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/podcastpersistentid"
+      },
+      "podcastTitle": {
+        "doc": "The title of a podcast, such as This Martian Drudgery, rather than the title of an individual episode of a podcast, such as “Episode 12: Another Cold Day at the Pole.”",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/podcasttitle"
+      },
+      "preorder": {
+        "doc": "A Boolean value that indicates whether the media item is a preorder.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/ispreorder"
+      },
+      "protectedAsset": {
+        "doc": "A Boolean value that indicates whether the media item has a protected asset.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/hasprotectedasset"
+      },
+      "rating": {
+        "doc": "The user-specified rating of the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/rating"
+      },
+      "releaseDate": {
+        "doc": "The date of the media item’s first public release.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/releasedate"
+      },
+      "skipCount": {
+        "doc": "The number of times the user skips playing the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/skipcount"
+      },
+      "title": {
+        "doc": "The title or name of the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/title"
+      },
+      "userGrouping": {
+        "doc": "Grouping information for the media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitem/usergrouping"
+      }
+    },
+    "MPMediaItemAnimatedArtwork": {
+      "init(artworkID:previewImageRequestHandler:videoAssetFileURLRequestHandler:)": {
+        "doc": "Creates an animated artwork.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitemanimatedartwork/init(artworkid:previewimagerequesthandler:videoassetfileurlrequesthandler:)-7n23z"
+      }
+    },
+    "MPMediaItemArtwork": {
+      "bounds": {
+        "doc": "The maximum size, in points, of the image associated with the media item artwork.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitemartwork/bounds"
+      },
+      "imageCropRect": {
+        "doc": "The bounds, in points, of the content area for the full size image associated with the media item artwork.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitemartwork/imagecroprect"
+      }
+    },
+    "MPMediaItemCollection": {
+      "count": {
+        "doc": "The number of media items in a collection.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitemcollection/count"
+      },
+      "items": {
+        "doc": "The media items in a media item collection.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitemcollection/items"
+      },
+      "mediaTypes": {
+        "doc": "The types of the media items in a collection.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitemcollection/mediatypes"
+      },
+      "representativeItem": {
+        "doc": "A media item whose properties are representative of the other media items in a collection.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaitemcollection/representativeitem"
+      }
+    },
+    "MPMediaLibrary": {
+      "lastModifiedDate": {
+        "doc": "The calendar date on which the media library was last modified.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmedialibrary/lastmodifieddate"
+      }
+    },
+    "MPMediaPlaylist": {
+      "authorDisplayName": {
+        "doc": "The display name for the playlist defined in the app.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylist/authordisplayname"
+      },
+      "cloudGlobalID": {
+        "doc": "The cloud identifier for the playlist.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylist/cloudglobalid"
+      },
+      "descriptionText": {
+        "doc": "User supplied text that describes the playlist.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylist/descriptiontext"
+      },
+      "name": {
+        "doc": "The name of the playlist.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylist/name"
+      },
+      "persistentID": {
+        "doc": "The persistent identifier for the playlist.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylist/persistentid"
+      },
+      "playlistAttributes": {
+        "doc": "The attributes associated with the playlist.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylist/playlistattributes"
+      },
+      "seedItems": {
+        "doc": "The items seeded to generate the playlist; applies only to Genius playlists.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylist/seeditems"
+      }
+    },
+    "MPMediaPlaylistCreationMetadata": {
+      "authorDisplayName": {
+        "doc": "App defined display name for the playlist.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylistcreationmetadata/authordisplayname"
+      },
+      "descriptionText": {
+        "doc": "The descriptive text for the playlist.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylistcreationmetadata/descriptiontext"
+      },
+      "name": {
+        "doc": "The playlist’s displayed name.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaplaylistcreationmetadata/name"
+      }
+    },
+    "MPMediaPropertyPredicate": {
+      "comparisonType": {
+        "doc": "The type of matching comparison that the media property predicate performs when you invoke a query.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediapropertypredicate/comparisontype"
+      },
+      "property": {
+        "doc": "The property that the media property predicate uses when you invoke a query.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediapropertypredicate/property"
+      },
+      "value": {
+        "doc": "The value that the media property predicate matches against when you invoke a query.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediapropertypredicate/value"
+      }
+    },
+    "MPMediaQuery": {
+      "collectionSections": {
+        "doc": "An array representing the section grouping of the query’s specified media item collections.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquery/collectionsections"
+      },
+      "collections": {
+        "doc": "An array of media item collections whose contained items match the query’s media property predicate.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquery/collections"
+      },
+      "filterPredicates": {
+        "doc": "The media property predicates of the media query.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquery/filterpredicates"
+      },
+      "groupingType": {
+        "doc": "The grouping for collections retrieved with the media query.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquery/groupingtype"
+      },
+      "itemSections": {
+        "doc": "An array representing the section grouping of the query’s specified media items.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquery/itemsections"
+      },
+      "items": {
+        "doc": "An array of media items that match the media query’s predicate.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquery/items"
+      }
+    },
+    "MPMediaQuerySection": {
+      "range": {
+        "doc": "The range in the media query’s items or collections array that the media query section represents.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquerysection/range"
+      },
+      "title": {
+        "doc": "The localized title of the media query section.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmediaquerysection/title"
+      }
+    },
+    "MPMusicPlayerController": {
+      "applicationMusicPlayer": {
+        "doc": "Returns the application music player.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/applicationmusicplayer"
+      },
+      "applicationQueuePlayer": {
+        "doc": "Returns the application queue music player.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/applicationqueueplayer"
+      },
+      "iPodMusicPlayer": {
+        "doc": "Returns the iPod music player, which controls the iPod app’s state.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/ipodmusicplayer"
+      },
+      "indexOfNowPlayingItem": {
+        "doc": "The index of the now playing item in the current playback queue.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/indexofnowplayingitem"
+      },
+      "nowPlayingItem": {
+        "doc": "The currently-playing media item, or the media item in a queue that you designated to begin playback with.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/nowplayingitem"
+      },
+      "playbackState": {
+        "doc": "The current playback state of the music player.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/playbackstate"
+      },
+      "repeatMode": {
+        "doc": "The current repeat mode of the music player.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/repeatmode"
+      },
+      "shuffleMode": {
+        "doc": "The current shuffle mode of the music player.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/shufflemode"
+      },
+      "systemMusicPlayer": {
+        "doc": "Returns the system music player, which controls the Music app’s state.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/systemmusicplayer"
+      },
+      "volume": {
+        "doc": "The audio playback volume for the music player, in the range from 0.0 (silent) through 1.0 (maximum volume).",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/volume"
+      }
+    },
+    "MPMusicPlayerControllerQueue": {
+      "items": {
+        "doc": "The media items in the queue.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontrollerqueue/items"
+      }
+    },
+    "MPMusicPlayerMediaItemQueueDescriptor": {
+      "itemCollection": {
+        "doc": "Contains the media item collection used to create the queue descriptor.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayermediaitemqueuedescriptor/itemcollection"
+      },
+      "query": {
+        "doc": "Contains the media items found by the query used to create the queue descriptor.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayermediaitemqueuedescriptor/query"
+      },
+      "startItem": {
+        "doc": "Designates the media item to play first.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayermediaitemqueuedescriptor/startitem"
+      }
+    },
+    "MPMusicPlayerPlayParameters": {
+      "dictionary": {
+        "doc": "The information returned from a MusicKit query and stored in a play parameters object.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerplayparameters/dictionary"
+      }
+    },
+    "MPMusicPlayerPlayParametersQueueDescriptor": {
+      "playParametersQueue": {
+        "doc": "An array containing the play parameters returned from querying MusicKit.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerplayparametersqueuedescriptor/playparametersqueue"
+      },
+      "startItemPlayParameters": {
+        "doc": "The item identified by the play parameters to play first.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerplayparametersqueuedescriptor/startitemplayparameters"
+      }
+    },
+    "MPNowPlayingInfoCenter": {
+      "nowPlayingInfo": {
+        "doc": "The current Now Playing information for the default Now Playing info center.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfocenter/nowplayinginfo"
+      },
+      "playbackState": {
+        "doc": "The current playback state of the app.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfocenter/playbackstate"
+      },
+      "supportedAnimatedArtworkKeys": {
+        "doc": "Keys related to animated artwork that are supported by the current platform.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfocenter/supportedanimatedartworkkeys"
+      }
+    },
+    "MPNowPlayingInfoLanguageOption": {
+      "displayName": {
+        "doc": "The display name for a language option.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfolanguageoption/displayname"
+      },
+      "identifier": {
+        "doc": "The unique identifier for the language option.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfolanguageoption/identifier"
+      },
+      "languageOptionCharacteristics": {
+        "doc": "The characteristics that describe the content of the language option.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfolanguageoption/languageoptioncharacteristics"
+      },
+      "languageOptionType": {
+        "doc": "The type of language option.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfolanguageoption/languageoptiontype"
+      },
+      "languageTag": {
+        "doc": "The abbreviated language code for the language option.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfolanguageoption/languagetag"
+      }
+    },
+    "MPNowPlayingInfoLanguageOptionGroup": {
+      "allowEmptySelection": {
+        "doc": "A Boolean that indicates whether the system requires a selection for the language option group.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfolanguageoptiongroup/allowemptyselection"
+      },
+      "defaultLanguageOption": {
+        "doc": "The default language option for the group.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfolanguageoptiongroup/defaultlanguageoption"
+      },
+      "languageOptions": {
+        "doc": "The available language options for the group.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfolanguageoptiongroup/languageoptions"
+      }
+    },
+    "MPNowPlayingSession": {
+      "active": {
+        "doc": "A Boolean value that indicates whether the session is the app’s active Now Playing session.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayingsession/isactive"
+      },
+      "automaticallyPublishesNowPlayingInfo": {
+        "doc": "A Boolean that indicates whether Now Playing info automatically publishes.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayingsession/automaticallypublishesnowplayinginfo"
+      },
+      "canBecomeActive": {
+        "doc": "A Boolean value that indicates whether the session can become the app’s active Now Playing session.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayingsession/canbecomeactive"
+      },
+      "delegate": {
+        "doc": "The Now Playing session’s delegate object.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayingsession/delegate"
+      },
+      "nowPlayingInfoCenter": {
+        "doc": "The Now Playing information center associated with the session.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayingsession/nowplayinginfocenter"
+      },
+      "players": {
+        "doc": "The array of players associated with the session.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayingsession/players"
+      },
+      "remoteCommandCenter": {
+        "doc": "The remote command center associated with the session.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayingsession/remotecommandcenter"
+      }
+    },
+    "MPPlayableContentManager": {
+      "context": {
+        "doc": "The current state of the playable content endpoint.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpplayablecontentmanager/context"
+      },
+      "dataSource": {
+        "doc": "The data source provided by the app.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpplayablecontentmanager/datasource"
+      },
+      "delegate": {
+        "doc": "A delegate that lets the media player manage the app’s playback queue.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpplayablecontentmanager/delegate"
+      },
+      "nowPlayingIdentifiers": {
+        "doc": "The content items currently playing based on their identifiers.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpplayablecontentmanager/nowplayingidentifiers"
+      }
+    },
+    "MPPlayableContentManagerContext": {
+      "contentLimitsEnabled": {
+        "doc": "A Boolean value that indicates whether the content server enables content limits.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpplayablecontentmanagercontext/contentlimitsenabled"
+      },
+      "contentLimitsEnforced": {
+        "doc": "A Boolean value that indicates whether the content server enforces content limits.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpplayablecontentmanagercontext/contentlimitsenforced"
+      },
+      "endpointAvailable": {
+        "doc": "Returns a Boolean that indicates whether the content server is available.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpplayablecontentmanagercontext/endpointavailable"
+      },
+      "enforcedContentItemsCount": {
+        "doc": "Returns the number of content items to display during content limiting.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpplayablecontentmanagercontext/enforcedcontentitemscount"
+      },
+      "enforcedContentTreeDepth": {
+        "doc": "The maximum depth of the navigation hierarchy allowed by the content server.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpplayablecontentmanagercontext/enforcedcontenttreedepth"
+      }
+    },
+    "MPRatingCommand": {
+      "maximumRating": {
+        "doc": "The maximum rating for a command.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpratingcommand/maximumrating"
+      },
+      "minimumRating": {
+        "doc": "The minimum rating for a command.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpratingcommand/minimumrating"
+      }
+    },
+    "MPRatingCommandEvent": {
+      "rating": {
+        "doc": "The rating for the command event.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpratingcommandevent/rating"
+      }
+    },
+    "MPRemoteCommand": {
+      "enabled": {
+        "doc": "A Boolean value that indicates whether a user can interact with the displayed element.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommand/isenabled"
+      }
+    },
+    "MPRemoteCommandCenter": {
+      "bookmarkCommand": {
+        "doc": "The command object for indicating that a user wants to remember a media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/bookmarkcommand"
+      },
+      "changePlaybackPositionCommand": {
+        "doc": "The command object for changing the playback position in a media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/changeplaybackpositioncommand"
+      },
+      "changePlaybackRateCommand": {
+        "doc": "The command object for changing the playback rate of the current media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/changeplaybackratecommand"
+      },
+      "changeRepeatModeCommand": {
+        "doc": "The command object for changing the repeat mode.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/changerepeatmodecommand"
+      },
+      "changeShuffleModeCommand": {
+        "doc": "The command object for changing the shuffle mode.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/changeshufflemodecommand"
+      },
+      "disableLanguageOptionCommand": {
+        "doc": "The command object for disabling a language option",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/disablelanguageoptioncommand"
+      },
+      "dislikeCommand": {
+        "doc": "The command object for indicating that a user dislikes what is currently playing.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/dislikecommand"
+      },
+      "enableLanguageOptionCommand": {
+        "doc": "The command object for enabling a language option.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/enablelanguageoptioncommand"
+      },
+      "likeCommand": {
+        "doc": "The command object for indicating that a user likes what is currently playing.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/likecommand"
+      },
+      "nextTrackCommand": {
+        "doc": "The command object for selecting the next track.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/nexttrackcommand"
+      },
+      "pauseCommand": {
+        "doc": "The command object for pausing playback of the current item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/pausecommand"
+      },
+      "playCommand": {
+        "doc": "The command object for starting playback of the current item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/playcommand"
+      },
+      "previousTrackCommand": {
+        "doc": "The command object for selecting the previous track.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/previoustrackcommand"
+      },
+      "ratingCommand": {
+        "doc": "The command object for rating a media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/ratingcommand"
+      },
+      "seekBackwardCommand": {
+        "doc": "The command object for seeking backward through a single media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/seekbackwardcommand"
+      },
+      "seekForwardCommand": {
+        "doc": "The command object for seeking forward through a single media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/seekforwardcommand"
+      },
+      "skipBackwardCommand": {
+        "doc": "The command object for playing a previous point in a media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/skipbackwardcommand"
+      },
+      "skipForwardCommand": {
+        "doc": "The command object for playing a future point in a media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/skipforwardcommand"
+      },
+      "stopCommand": {
+        "doc": "The command object for stopping playback of the current item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/stopcommand"
+      },
+      "togglePlayPauseCommand": {
+        "doc": "The command object for toggling between playing and pausing the current item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/toggleplaypausecommand"
+      }
+    },
+    "MPRemoteCommandEvent": {
+      "command": {
+        "doc": "The command that sent the event.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandevent/command"
+      },
+      "timestamp": {
+        "doc": "The time the event occurred.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpremotecommandevent/timestamp"
+      }
+    },
+    "MPSeekCommandEvent": {
+      "type": {
+        "doc": "The type of seek command event.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpseekcommandevent/type"
+      }
+    },
+    "MPSkipIntervalCommand": {
+      "preferredIntervals": {
+        "doc": "The available skip intervals, in seconds, for a media item.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpskipintervalcommand/preferredintervals"
+      }
+    },
+    "MPSkipIntervalCommandEvent": {
+      "interval": {
+        "doc": "The chosen interval, in seconds, for the skip command event.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpskipintervalcommandevent/interval"
+      }
+    }
+  }
+}

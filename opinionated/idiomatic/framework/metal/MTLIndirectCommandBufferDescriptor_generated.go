@@ -37,120 +37,160 @@ func NewIndirectCommandBufferDescriptor() *IndirectCommandBufferDescriptor {
 	return &IndirectCommandBufferDescriptor{inner: raw.MTLIndirectCommandBufferDescriptorFromID(_id)}
 }
 
+// @abstract A bitfield of the command types that be encoded. @discussion MTLCommandTypeDispatch cannot be mixed with any other command type.
+//
 // WithCommandTypes sets the commandTypes property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithCommandTypes(commandTypes MTLIndirectCommandType) *IndirectCommandBufferDescriptor {
 	x.inner.SetCommandTypes(raw.MTLIndirectCommandType(commandTypes))
 	return x
 }
 
+// @abstract Whether the render or compute pipeline are inherited from the encoder
+//
 // WithInheritPipelineState sets the inheritPipelineState property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithInheritPipelineState(inheritPipelineState bool) *IndirectCommandBufferDescriptor {
 	x.inner.SetInheritPipelineState(inheritPipelineState)
 	return x
 }
 
+// @abstract Whether the render or compute pipeline can set arguments.
+//
 // WithInheritBuffers sets the inheritBuffers property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithInheritBuffers(inheritBuffers bool) *IndirectCommandBufferDescriptor {
 	x.inner.SetInheritBuffers(inheritBuffers)
 	return x
 }
 
+// Configures whether the indirect command buffer inherits the depth stencil state from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+//
 // WithInheritDepthStencilState sets the inheritDepthStencilState property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithInheritDepthStencilState(inheritDepthStencilState bool) *IndirectCommandBufferDescriptor {
 	x.inner.SetInheritDepthStencilState(inheritDepthStencilState)
 	return x
 }
 
+// Configures whether the indirect command buffer inherits the depth bias from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+//
 // WithInheritDepthBias sets the inheritDepthBias property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithInheritDepthBias(inheritDepthBias bool) *IndirectCommandBufferDescriptor {
 	x.inner.SetInheritDepthBias(inheritDepthBias)
 	return x
 }
 
+// Configures whether the indirect command buffer inherits the depth clip mode from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+//
 // WithInheritDepthClipMode sets the inheritDepthClipMode property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithInheritDepthClipMode(inheritDepthClipMode bool) *IndirectCommandBufferDescriptor {
 	x.inner.SetInheritDepthClipMode(inheritDepthClipMode)
 	return x
 }
 
+// Configures whether the indirect command buffer inherits the cull mode from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+//
 // WithInheritCullMode sets the inheritCullMode property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithInheritCullMode(inheritCullMode bool) *IndirectCommandBufferDescriptor {
 	x.inner.SetInheritCullMode(inheritCullMode)
 	return x
 }
 
+// Configures whether the indirect command buffer inherits the front facing winding from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+//
 // WithInheritFrontFacingWinding sets the inheritFrontFacingWinding property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithInheritFrontFacingWinding(inheritFrontFacingWinding bool) *IndirectCommandBufferDescriptor {
 	x.inner.SetInheritFrontFacingWinding(inheritFrontFacingWinding)
 	return x
 }
 
+// Configures whether the indirect command buffer inherits the triangle fill mode from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+//
 // WithInheritTriangleFillMode sets the inheritTriangleFillMode property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithInheritTriangleFillMode(inheritTriangleFillMode bool) *IndirectCommandBufferDescriptor {
 	x.inner.SetInheritTriangleFillMode(inheritTriangleFillMode)
 	return x
 }
 
+// @abstract The maximum bind index of vertex argument buffers that can be set per command.
+//
 // WithMaxVertexBufferBindCount sets the maxVertexBufferBindCount property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithMaxVertexBufferBindCount(maxVertexBufferBindCount uint) *IndirectCommandBufferDescriptor {
 	x.inner.SetMaxVertexBufferBindCount(maxVertexBufferBindCount)
 	return x
 }
 
+// @abstract The maximum bind index of fragment argument buffers that can be set per command.
+//
 // WithMaxFragmentBufferBindCount sets the maxFragmentBufferBindCount property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithMaxFragmentBufferBindCount(maxFragmentBufferBindCount uint) *IndirectCommandBufferDescriptor {
 	x.inner.SetMaxFragmentBufferBindCount(maxFragmentBufferBindCount)
 	return x
 }
 
+// @abstract The maximum bind index of kernel (or tile) argument buffers that can be set per command.
+//
 // WithMaxKernelBufferBindCount sets the maxKernelBufferBindCount property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithMaxKernelBufferBindCount(maxKernelBufferBindCount uint) *IndirectCommandBufferDescriptor {
 	x.inner.SetMaxKernelBufferBindCount(maxKernelBufferBindCount)
 	return x
 }
 
+// @abstract The maximum bind index of kernel (or tile) threadgroup memory that can be set per command. The default value is 31.
+//
 // WithMaxKernelThreadgroupMemoryBindCount sets the maxKernelThreadgroupMemoryBindCount property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithMaxKernelThreadgroupMemoryBindCount(maxKernelThreadgroupMemoryBindCount uint) *IndirectCommandBufferDescriptor {
 	x.inner.SetMaxKernelThreadgroupMemoryBindCount(maxKernelThreadgroupMemoryBindCount)
 	return x
 }
 
+// @abstract The maximum bind index of object stage buffers that can be set per render command.
+//
 // WithMaxObjectBufferBindCount sets the maxObjectBufferBindCount property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithMaxObjectBufferBindCount(maxObjectBufferBindCount uint) *IndirectCommandBufferDescriptor {
 	x.inner.SetMaxObjectBufferBindCount(maxObjectBufferBindCount)
 	return x
 }
 
+// @abstract The maximum bind index of mesh stage buffers that can be set per render command.
+//
 // WithMaxMeshBufferBindCount sets the maxMeshBufferBindCount property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithMaxMeshBufferBindCount(maxMeshBufferBindCount uint) *IndirectCommandBufferDescriptor {
 	x.inner.SetMaxMeshBufferBindCount(maxMeshBufferBindCount)
 	return x
 }
 
+// @abstract The maximum bind index of object threadgroup memory that can be set per render command. The default value is 0.
+//
 // WithMaxObjectThreadgroupMemoryBindCount sets the maxObjectThreadgroupMemoryBindCount property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithMaxObjectThreadgroupMemoryBindCount(maxObjectThreadgroupMemoryBindCount uint) *IndirectCommandBufferDescriptor {
 	x.inner.SetMaxObjectThreadgroupMemoryBindCount(maxObjectThreadgroupMemoryBindCount)
 	return x
 }
 
+// @abstract Whether the render or compute commands can use ray tracing. Default value is NO.
+//
 // WithSupportRayTracing sets the supportRayTracing property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithSupportRayTracing(supportRayTracing bool) *IndirectCommandBufferDescriptor {
 	x.inner.SetSupportRayTracing(supportRayTracing)
 	return x
 }
 
+// @brief allows binding pipelines that have at least one MTLBufferLayout with a stride of `MTLBufferLayoutStrideDynamic` will allow setting attributeStride in `setVertexBuffer` / `setKernelBuffer` calls
+//
 // WithSupportDynamicAttributeStride sets the supportDynamicAttributeStride property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithSupportDynamicAttributeStride(supportDynamicAttributeStride bool) *IndirectCommandBufferDescriptor {
 	x.inner.SetSupportDynamicAttributeStride(supportDynamicAttributeStride)
 	return x
 }
 
+// Specifies if the indirect command buffer should support color attachment mapping.
+//
 // WithSupportColorAttachmentMapping sets the supportColorAttachmentMapping property and returns the receiver for chaining.
 func (x *IndirectCommandBufferDescriptor) WithSupportColorAttachmentMapping(supportColorAttachmentMapping bool) *IndirectCommandBufferDescriptor {
 	x.inner.SetSupportColorAttachmentMapping(supportColorAttachmentMapping)
 	return x
 }
 
+// @abstract A bitfield of the command types that be encoded. @discussion MTLCommandTypeDispatch cannot be mixed with any other command type.
+//
 // CommandTypes calls the underlying CommandTypes.
 func (x *IndirectCommandBufferDescriptor) CommandTypes() MTLIndirectCommandType {
 	return MTLIndirectCommandType(x.inner.CommandTypes())
@@ -161,6 +201,8 @@ func (x *IndirectCommandBufferDescriptor) SetCommandTypes(commandTypes MTLIndire
 	x.inner.SetCommandTypes(raw.MTLIndirectCommandType(commandTypes))
 }
 
+// @abstract Whether the render or compute pipeline are inherited from the encoder
+//
 // InheritPipelineState calls the underlying InheritPipelineState.
 func (x *IndirectCommandBufferDescriptor) InheritPipelineState() bool {
 	return x.inner.InheritPipelineState()
@@ -171,6 +213,8 @@ func (x *IndirectCommandBufferDescriptor) SetInheritPipelineState(inheritPipelin
 	x.inner.SetInheritPipelineState(inheritPipelineState)
 }
 
+// @abstract Whether the render or compute pipeline can set arguments.
+//
 // InheritBuffers calls the underlying InheritBuffers.
 func (x *IndirectCommandBufferDescriptor) InheritBuffers() bool {
 	return x.inner.InheritBuffers()
@@ -181,6 +225,8 @@ func (x *IndirectCommandBufferDescriptor) SetInheritBuffers(inheritBuffers bool)
 	x.inner.SetInheritBuffers(inheritBuffers)
 }
 
+// Configures whether the indirect command buffer inherits the depth stencil state from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+//
 // InheritDepthStencilState calls the underlying InheritDepthStencilState.
 func (x *IndirectCommandBufferDescriptor) InheritDepthStencilState() bool {
 	return x.inner.InheritDepthStencilState()
@@ -191,6 +237,8 @@ func (x *IndirectCommandBufferDescriptor) SetInheritDepthStencilState(inheritDep
 	x.inner.SetInheritDepthStencilState(inheritDepthStencilState)
 }
 
+// Configures whether the indirect command buffer inherits the depth bias from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+//
 // InheritDepthBias calls the underlying InheritDepthBias.
 func (x *IndirectCommandBufferDescriptor) InheritDepthBias() bool {
 	return x.inner.InheritDepthBias()
@@ -201,6 +249,8 @@ func (x *IndirectCommandBufferDescriptor) SetInheritDepthBias(inheritDepthBias b
 	x.inner.SetInheritDepthBias(inheritDepthBias)
 }
 
+// Configures whether the indirect command buffer inherits the depth clip mode from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+//
 // InheritDepthClipMode calls the underlying InheritDepthClipMode.
 func (x *IndirectCommandBufferDescriptor) InheritDepthClipMode() bool {
 	return x.inner.InheritDepthClipMode()
@@ -211,6 +261,8 @@ func (x *IndirectCommandBufferDescriptor) SetInheritDepthClipMode(inheritDepthCl
 	x.inner.SetInheritDepthClipMode(inheritDepthClipMode)
 }
 
+// Configures whether the indirect command buffer inherits the cull mode from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+//
 // InheritCullMode calls the underlying InheritCullMode.
 func (x *IndirectCommandBufferDescriptor) InheritCullMode() bool {
 	return x.inner.InheritCullMode()
@@ -221,6 +273,8 @@ func (x *IndirectCommandBufferDescriptor) SetInheritCullMode(inheritCullMode boo
 	x.inner.SetInheritCullMode(inheritCullMode)
 }
 
+// Configures whether the indirect command buffer inherits the front facing winding from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+//
 // InheritFrontFacingWinding calls the underlying InheritFrontFacingWinding.
 func (x *IndirectCommandBufferDescriptor) InheritFrontFacingWinding() bool {
 	return x.inner.InheritFrontFacingWinding()
@@ -231,6 +285,8 @@ func (x *IndirectCommandBufferDescriptor) SetInheritFrontFacingWinding(inheritFr
 	x.inner.SetInheritFrontFacingWinding(inheritFrontFacingWinding)
 }
 
+// Configures whether the indirect command buffer inherits the triangle fill mode from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+//
 // InheritTriangleFillMode calls the underlying InheritTriangleFillMode.
 func (x *IndirectCommandBufferDescriptor) InheritTriangleFillMode() bool {
 	return x.inner.InheritTriangleFillMode()
@@ -241,6 +297,8 @@ func (x *IndirectCommandBufferDescriptor) SetInheritTriangleFillMode(inheritTria
 	x.inner.SetInheritTriangleFillMode(inheritTriangleFillMode)
 }
 
+// @abstract The maximum bind index of vertex argument buffers that can be set per command.
+//
 // MaxVertexBufferBindCount calls the underlying MaxVertexBufferBindCount.
 func (x *IndirectCommandBufferDescriptor) MaxVertexBufferBindCount() uint {
 	return x.inner.MaxVertexBufferBindCount()
@@ -251,6 +309,8 @@ func (x *IndirectCommandBufferDescriptor) SetMaxVertexBufferBindCount(maxVertexB
 	x.inner.SetMaxVertexBufferBindCount(maxVertexBufferBindCount)
 }
 
+// @abstract The maximum bind index of fragment argument buffers that can be set per command.
+//
 // MaxFragmentBufferBindCount calls the underlying MaxFragmentBufferBindCount.
 func (x *IndirectCommandBufferDescriptor) MaxFragmentBufferBindCount() uint {
 	return x.inner.MaxFragmentBufferBindCount()
@@ -261,6 +321,8 @@ func (x *IndirectCommandBufferDescriptor) SetMaxFragmentBufferBindCount(maxFragm
 	x.inner.SetMaxFragmentBufferBindCount(maxFragmentBufferBindCount)
 }
 
+// @abstract The maximum bind index of kernel (or tile) argument buffers that can be set per command.
+//
 // MaxKernelBufferBindCount calls the underlying MaxKernelBufferBindCount.
 func (x *IndirectCommandBufferDescriptor) MaxKernelBufferBindCount() uint {
 	return x.inner.MaxKernelBufferBindCount()
@@ -271,6 +333,8 @@ func (x *IndirectCommandBufferDescriptor) SetMaxKernelBufferBindCount(maxKernelB
 	x.inner.SetMaxKernelBufferBindCount(maxKernelBufferBindCount)
 }
 
+// @abstract The maximum bind index of kernel (or tile) threadgroup memory that can be set per command. The default value is 31.
+//
 // MaxKernelThreadgroupMemoryBindCount calls the underlying MaxKernelThreadgroupMemoryBindCount.
 func (x *IndirectCommandBufferDescriptor) MaxKernelThreadgroupMemoryBindCount() uint {
 	return x.inner.MaxKernelThreadgroupMemoryBindCount()
@@ -281,6 +345,8 @@ func (x *IndirectCommandBufferDescriptor) SetMaxKernelThreadgroupMemoryBindCount
 	x.inner.SetMaxKernelThreadgroupMemoryBindCount(maxKernelThreadgroupMemoryBindCount)
 }
 
+// @abstract The maximum bind index of object stage buffers that can be set per render command.
+//
 // MaxObjectBufferBindCount calls the underlying MaxObjectBufferBindCount.
 func (x *IndirectCommandBufferDescriptor) MaxObjectBufferBindCount() uint {
 	return x.inner.MaxObjectBufferBindCount()
@@ -291,6 +357,8 @@ func (x *IndirectCommandBufferDescriptor) SetMaxObjectBufferBindCount(maxObjectB
 	x.inner.SetMaxObjectBufferBindCount(maxObjectBufferBindCount)
 }
 
+// @abstract The maximum bind index of mesh stage buffers that can be set per render command.
+//
 // MaxMeshBufferBindCount calls the underlying MaxMeshBufferBindCount.
 func (x *IndirectCommandBufferDescriptor) MaxMeshBufferBindCount() uint {
 	return x.inner.MaxMeshBufferBindCount()
@@ -301,6 +369,8 @@ func (x *IndirectCommandBufferDescriptor) SetMaxMeshBufferBindCount(maxMeshBuffe
 	x.inner.SetMaxMeshBufferBindCount(maxMeshBufferBindCount)
 }
 
+// @abstract The maximum bind index of object threadgroup memory that can be set per render command. The default value is 0.
+//
 // MaxObjectThreadgroupMemoryBindCount calls the underlying MaxObjectThreadgroupMemoryBindCount.
 func (x *IndirectCommandBufferDescriptor) MaxObjectThreadgroupMemoryBindCount() uint {
 	return x.inner.MaxObjectThreadgroupMemoryBindCount()
@@ -311,6 +381,8 @@ func (x *IndirectCommandBufferDescriptor) SetMaxObjectThreadgroupMemoryBindCount
 	x.inner.SetMaxObjectThreadgroupMemoryBindCount(maxObjectThreadgroupMemoryBindCount)
 }
 
+// @abstract Whether the render or compute commands can use ray tracing. Default value is NO.
+//
 // SupportRayTracing calls the underlying SupportRayTracing.
 func (x *IndirectCommandBufferDescriptor) SupportRayTracing() bool {
 	return x.inner.SupportRayTracing()
@@ -321,6 +393,8 @@ func (x *IndirectCommandBufferDescriptor) SetSupportRayTracing(supportRayTracing
 	x.inner.SetSupportRayTracing(supportRayTracing)
 }
 
+// @brief allows binding pipelines that have at least one MTLBufferLayout with a stride of `MTLBufferLayoutStrideDynamic` will allow setting attributeStride in `setVertexBuffer` / `setKernelBuffer` calls
+//
 // SupportDynamicAttributeStride calls the underlying SupportDynamicAttributeStride.
 func (x *IndirectCommandBufferDescriptor) SupportDynamicAttributeStride() bool {
 	return x.inner.SupportDynamicAttributeStride()
@@ -331,6 +405,8 @@ func (x *IndirectCommandBufferDescriptor) SetSupportDynamicAttributeStride(suppo
 	x.inner.SetSupportDynamicAttributeStride(supportDynamicAttributeStride)
 }
 
+// Specifies if the indirect command buffer should support color attachment mapping.
+//
 // SupportColorAttachmentMapping calls the underlying SupportColorAttachmentMapping.
 func (x *IndirectCommandBufferDescriptor) SupportColorAttachmentMapping() bool {
 	return x.inner.SupportColorAttachmentMapping()

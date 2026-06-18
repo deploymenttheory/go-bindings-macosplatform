@@ -36,11 +36,15 @@ func NewVideoCompositionRenderHint() *VideoCompositionRenderHint {
 	return &VideoCompositionRenderHint{inner: raw.AVVideoCompositionRenderHintFromID(_id)}
 }
 
+// The start time of the upcoming composition requests.
+//
 // StartCompositionTime calls the underlying StartCompositionTime.
 func (x *VideoCompositionRenderHint) StartCompositionTime() coremedia.CMTime {
 	return x.inner.StartCompositionTime()
 }
 
+// The end time of the upcoming composition requests.
+//
 // EndCompositionTime calls the underlying EndCompositionTime.
 func (x *VideoCompositionRenderHint) EndCompositionTime() coremedia.CMTime {
 	return x.inner.EndCompositionTime()

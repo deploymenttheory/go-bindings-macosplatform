@@ -37,72 +37,96 @@ func NewPGDeviceDescriptor() *PGDeviceDescriptor {
 	return &PGDeviceDescriptor{inner: raw.PGDeviceDescriptorFromID(_id)}
 }
 
+// @property device @abstract The metal device to use to back the PGDevice
+//
 // WithDevice sets the device property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithDevice(device metal.MTLDevice) *PGDeviceDescriptor {
 	x.inner.SetDevice(device)
 	return x
 }
 
+// @property mmioLength @abstract The length, of the memory that backs the APPLEGPU_BAR_MMIO @discussion By default, the value of mmioLength will be the recommended default size for the MMIO memory.
+//
 // WithMmioLength sets the mmioLength property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithMmioLength(mmioLength uint) *PGDeviceDescriptor {
 	x.inner.SetMmioLength(mmioLength)
 	return x
 }
 
+// @property createTask @abstract The block to invoke to create a task.
+//
 // WithCreateTask sets the createTask property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithCreateTask(createTask func(uint64, unsafe.Pointer) unsafe.Pointer) *PGDeviceDescriptor {
 	x.inner.SetCreateTask(createTask)
 	return x
 }
 
+// @property destroyTask @abstract The block to invoke to destroy a task.
+//
 // WithDestroyTask sets the destroyTask property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithDestroyTask(destroyTask func(unsafe.Pointer)) *PGDeviceDescriptor {
 	x.inner.SetDestroyTask(destroyTask)
 	return x
 }
 
+// @property mapMemory @abstract The block to invoke to map guest memory into a task.
+//
 // WithMapMemory sets the mapMemory property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithMapMemory(mapMemory func(unsafe.Pointer, uint32, uint64, bool, *raw.PGPhysicalMemoryRange_s) bool) *PGDeviceDescriptor {
 	x.inner.SetMapMemory(mapMemory)
 	return x
 }
 
+// @property unmapMemory @abstract The block to invoke to unmap guest memory from a task.
+//
 // WithUnmapMemory sets the unmapMemory property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithUnmapMemory(unmapMemory func(unsafe.Pointer, uint64, uint64) bool) *PGDeviceDescriptor {
 	x.inner.SetUnmapMemory(unmapMemory)
 	return x
 }
 
+// @property readMemory @abstract The block to invoke to perform a read of guest memory
+//
 // WithReadMemory sets the readMemory property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithReadMemory(readMemory func(uint64, uint64, unsafe.Pointer) bool) *PGDeviceDescriptor {
 	x.inner.SetReadMemory(readMemory)
 	return x
 }
 
+// @property raiseInterrupt @abstract The block to invoke to raise an interrupt to the guest.  May be raised from a dispatch queue must be thread safe.
+//
 // WithRaiseInterrupt sets the raiseInterrupt property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithRaiseInterrupt(raiseInterrupt func(uint32)) *PGDeviceDescriptor {
 	x.inner.SetRaiseInterrupt(raiseInterrupt)
 	return x
 }
 
+// @property addTraceRange @abstract The block to invoke to add a trace range. @discussion If the client is unable to provide range tracing, it should not populate this property or removeTraceRange.
+//
 // WithAddTraceRange sets the addTraceRange property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithAddTraceRange(addTraceRange func(*raw.PGPhysicalMemoryRange_s, objc.Block) unsafe.Pointer) *PGDeviceDescriptor {
 	x.inner.SetAddTraceRange(addTraceRange)
 	return x
 }
 
+// @property removeTraceRange @abstract The block to invoke to remove a trace range. @discussion This property must be populated if addTraceRange is populated.
+//
 // WithRemoveTraceRange sets the removeTraceRange property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithRemoveTraceRange(removeTraceRange func(unsafe.Pointer)) *PGDeviceDescriptor {
 	x.inner.SetRemoveTraceRange(removeTraceRange)
 	return x
 }
 
+// @property displayPortCount @abstract The number of PGDisplay ports configured into the VM. @discussion By default, the value of displayPortCount will be 1.  Valid values range from 1 to the value returned by PGMaxDisplayPortCount().
+//
 // WithDisplayPortCount sets the displayPortCount property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithDisplayPortCount(displayPortCount uint32) *PGDeviceDescriptor {
 	x.inner.SetDisplayPortCount(displayPortCount)
 	return x
 }
 
+// @property device @abstract The metal device to use to back the PGDevice
+//
 // Device calls the underlying Device.
 func (x *PGDeviceDescriptor) Device() metal.MTLDevice {
 	return x.inner.Device()
@@ -113,6 +137,8 @@ func (x *PGDeviceDescriptor) SetDevice(device metal.MTLDevice) {
 	x.inner.SetDevice(device)
 }
 
+// @property mmioLength @abstract The length, of the memory that backs the APPLEGPU_BAR_MMIO @discussion By default, the value of mmioLength will be the recommended default size for the MMIO memory.
+//
 // MmioLength calls the underlying MmioLength.
 func (x *PGDeviceDescriptor) MmioLength() uint {
 	return x.inner.MmioLength()
@@ -123,6 +149,8 @@ func (x *PGDeviceDescriptor) SetMmioLength(mmioLength uint) {
 	x.inner.SetMmioLength(mmioLength)
 }
 
+// @property createTask @abstract The block to invoke to create a task.
+//
 // CreateTask calls the underlying CreateTask.
 func (x *PGDeviceDescriptor) CreateTask() objc.Block {
 	return x.inner.CreateTask()
@@ -133,6 +161,8 @@ func (x *PGDeviceDescriptor) SetCreateTask(createTask func(uint64, unsafe.Pointe
 	x.inner.SetCreateTask(createTask)
 }
 
+// @property destroyTask @abstract The block to invoke to destroy a task.
+//
 // DestroyTask calls the underlying DestroyTask.
 func (x *PGDeviceDescriptor) DestroyTask() objc.Block {
 	return x.inner.DestroyTask()
@@ -143,6 +173,8 @@ func (x *PGDeviceDescriptor) SetDestroyTask(destroyTask func(unsafe.Pointer)) {
 	x.inner.SetDestroyTask(destroyTask)
 }
 
+// @property mapMemory @abstract The block to invoke to map guest memory into a task.
+//
 // MapMemory calls the underlying MapMemory.
 func (x *PGDeviceDescriptor) MapMemory() objc.Block {
 	return x.inner.MapMemory()
@@ -153,6 +185,8 @@ func (x *PGDeviceDescriptor) SetMapMemory(mapMemory func(unsafe.Pointer, uint32,
 	x.inner.SetMapMemory(mapMemory)
 }
 
+// @property unmapMemory @abstract The block to invoke to unmap guest memory from a task.
+//
 // UnmapMemory calls the underlying UnmapMemory.
 func (x *PGDeviceDescriptor) UnmapMemory() objc.Block {
 	return x.inner.UnmapMemory()
@@ -163,6 +197,8 @@ func (x *PGDeviceDescriptor) SetUnmapMemory(unmapMemory func(unsafe.Pointer, uin
 	x.inner.SetUnmapMemory(unmapMemory)
 }
 
+// @property readMemory @abstract The block to invoke to perform a read of guest memory
+//
 // ReadMemory calls the underlying ReadMemory.
 func (x *PGDeviceDescriptor) ReadMemory() objc.Block {
 	return x.inner.ReadMemory()
@@ -173,6 +209,8 @@ func (x *PGDeviceDescriptor) SetReadMemory(readMemory func(uint64, uint64, unsaf
 	x.inner.SetReadMemory(readMemory)
 }
 
+// @property raiseInterrupt @abstract The block to invoke to raise an interrupt to the guest.  May be raised from a dispatch queue must be thread safe.
+//
 // RaiseInterrupt calls the underlying RaiseInterrupt.
 func (x *PGDeviceDescriptor) RaiseInterrupt() objc.Block {
 	return x.inner.RaiseInterrupt()
@@ -183,6 +221,8 @@ func (x *PGDeviceDescriptor) SetRaiseInterrupt(raiseInterrupt func(uint32)) {
 	x.inner.SetRaiseInterrupt(raiseInterrupt)
 }
 
+// @property addTraceRange @abstract The block to invoke to add a trace range. @discussion If the client is unable to provide range tracing, it should not populate this property or removeTraceRange.
+//
 // AddTraceRange calls the underlying AddTraceRange.
 func (x *PGDeviceDescriptor) AddTraceRange() objc.Block {
 	return x.inner.AddTraceRange()
@@ -193,6 +233,8 @@ func (x *PGDeviceDescriptor) SetAddTraceRange(addTraceRange func(*raw.PGPhysical
 	x.inner.SetAddTraceRange(addTraceRange)
 }
 
+// @property removeTraceRange @abstract The block to invoke to remove a trace range. @discussion This property must be populated if addTraceRange is populated.
+//
 // RemoveTraceRange calls the underlying RemoveTraceRange.
 func (x *PGDeviceDescriptor) RemoveTraceRange() objc.Block {
 	return x.inner.RemoveTraceRange()
@@ -203,6 +245,8 @@ func (x *PGDeviceDescriptor) SetRemoveTraceRange(removeTraceRange func(unsafe.Po
 	x.inner.SetRemoveTraceRange(removeTraceRange)
 }
 
+// @property displayPortCount @abstract The number of PGDisplay ports configured into the VM. @discussion By default, the value of displayPortCount will be 1.  Valid values range from 1 to the value returned by PGMaxDisplayPortCount().
+//
 // DisplayPortCount calls the underlying DisplayPortCount.
 func (x *PGDeviceDescriptor) DisplayPortCount() uint32 {
 	return x.inner.DisplayPortCount()

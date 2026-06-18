@@ -32,6 +32,8 @@ func ExtensionStreamFromID(id objc.ID) *ExtensionStream {
 	return &ExtensionStream{inner: raw.CMIOExtensionStreamFromID(id)}
 }
 
+// @method initWithLocalizedName:streamID:direction:clockType:source: @abstract Initialize a stream instance. @param localizedName The localized name of the stream. @param streamID The stream identifier. @param direction The stream direction. @param clockType The stream clock type. @param source The stream source. @result A CMIOExtensionStream instance that provides data. @discussion Note that the clockType parameter may not be CMIOExtensionStreamClockTypeCustom; that value is reserved for streams created with a custom clock configuration. For streams that have a custom clock, use streamWithLocalizedName:streamID:direction:customClockConfiguration:source:.
+//
 // NewExtensionStreamWithLocalizedNameStreamIDDirectionClockTypeSource creates a new [ExtensionStream].
 func NewExtensionStreamWithLocalizedNameStreamIDDirectionClockTypeSource(localizedName string, streamID *foundation.NSUUID, direction CMIOExtensionStreamDirection, clockType CMIOExtensionStreamClockType, source raw.CMIOExtensionStreamSource) *ExtensionStream {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionStream")), objc.RegisterName("alloc"))
@@ -46,16 +48,22 @@ func NewExtensionStreamWithLocalizedNameStreamIDDirectionCustomClockConfiguratio
 	return &ExtensionStream{inner: raw.CMIOExtensionStreamFromID(_id)}
 }
 
+// @method notifyPropertiesChanged: @abstract Notify client(s) of stream properties changes. @param propertyStates The dictionary of properties having changed.
+//
 // NotifyPropertiesChanged calls the underlying NotifyPropertiesChanged.
 func (x *ExtensionStream) NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.NotifyPropertiesChanged(propertyStates)
 }
 
+// @method sendSampleBuffer:discontinuity:hostTimeInNanoseconds: @abstract Send media sample to client(s). @param sampleBuffer The sample buffer containing media data. @param discontinuity The discontinuity flag indicating if the sample buffer represents a discontinuity boundary. @param hostTimeInNanoseconds The host time in nanoseconds when the buffer was captured. @discussion The sample will be deliver to clients whose media type authorization status is authorized. The sample buffer timestamps should be relative to the clock timebase specified with clockType. Attempting to send a sample buffer on a sink stream will throw an exception.
+//
 // SendSampleBufferDiscontinuityHostTimeInNanoseconds calls the underlying SendSampleBufferDiscontinuityHostTimeInNanoseconds.
 func (x *ExtensionStream) SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer unsafe.Pointer, discontinuity CMIOExtensionStreamDiscontinuityFlags, hostTimeInNanoseconds uint64) {
 	x.inner.SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer, raw.CMIOExtensionStreamDiscontinuityFlags(discontinuity), hostTimeInNanoseconds)
 }
 
+// @method consumeSampleBufferFromClient:completionHandler: @abstract Consume a sample buffer from a client. @param client The client. @param completionHandler A block that will be called when the operation is completed. If the capture request is successful, the "sampleBuffer" parameter contains a valid CMSampleBuffer, the "sampleBufferSequenceNumber" parameter is the sample buffer sequence number, the "discontinuity" parameter is the discontinuity flag, the "hasMoreSampleBuffers" parameter indicates whether or not more sample buffers are available, the "error" parameter is nil.
+//
 // ConsumeSampleBufferFromClientCompletionHandler calls the underlying ConsumeSampleBufferFromClientCompletionHandler.
 func (x *ExtensionStream) ConsumeSampleBufferFromClientCompletionHandler(client *raw.CMIOExtensionClient, completionHandler func(unsafe.Pointer, uint64, CMIOExtensionStreamDiscontinuityFlags, bool, unsafe.Pointer)) {
 	x.inner.ConsumeSampleBufferFromClientCompletionHandler(client, func(_a0 unsafe.Pointer, _a1 uint64, _a2 raw.CMIOExtensionStreamDiscontinuityFlags, _a3 bool, _a4 unsafe.Pointer) {
@@ -63,11 +71,15 @@ func (x *ExtensionStream) ConsumeSampleBufferFromClientCompletionHandler(client 
 	})
 }
 
+// @method notifyScheduledOutputChanged: @abstract Notify client(s) when a particular buffer was output. @param scheduledOutput The stream scheduled output.
+//
 // NotifyScheduledOutputChanged calls the underlying NotifyScheduledOutputChanged.
 func (x *ExtensionStream) NotifyScheduledOutputChanged(scheduledOutput *raw.CMIOExtensionScheduledOutput) {
 	x.inner.NotifyScheduledOutputChanged(scheduledOutput)
 }
 
+// @property localizedName @abstract The localized name of the stream.
+//
 // LocalizedName calls the underlying LocalizedName.
 func (x *ExtensionStream) LocalizedName() string {
 	_r := x.inner.LocalizedName()
@@ -77,21 +89,29 @@ func (x *ExtensionStream) LocalizedName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property streamID @abstract The stream identifier.
+//
 // StreamID calls the underlying StreamID.
 func (x *ExtensionStream) StreamID() *foundation.NSUUID {
 	return x.inner.StreamID()
 }
 
+// @property direction @abstract The stream direction.
+//
 // Direction calls the underlying Direction.
 func (x *ExtensionStream) Direction() CMIOExtensionStreamDirection {
 	return CMIOExtensionStreamDirection(x.inner.Direction())
 }
 
+// @property clockType @abstract The stream clock type. @discussion If the stream was specified with a custom clock configuration, the returned value will be CMIOExtensionStreamClockTypeCustom.
+//
 // ClockType calls the underlying ClockType.
 func (x *ExtensionStream) ClockType() CMIOExtensionStreamClockType {
 	return CMIOExtensionStreamClockType(x.inner.ClockType())
 }
 
+// @property customClockConfiguration @abstract Custom clock configuration. @discussion If the stream was specified using a clockType, the returned value will be nil.
+//
 // CustomClockConfiguration calls the underlying CustomClockConfiguration.
 func (x *ExtensionStream) CustomClockConfiguration() *ExtensionStreamCustomClockConfiguration {
 	_r := x.inner.CustomClockConfiguration()
@@ -101,11 +121,15 @@ func (x *ExtensionStream) CustomClockConfiguration() *ExtensionStreamCustomClock
 	return &ExtensionStreamCustomClockConfiguration{inner: _r}
 }
 
+// @property source @abstract The stream source.
+//
 // Source calls the underlying Source.
 func (x *ExtensionStream) Source() raw.CMIOExtensionStreamSource {
 	return x.inner.Source()
 }
 
+// @property streamingClients @abstract The array of streaming clients. @discussion This property is key-value observable.
+//
 // StreamingClients returns the collection as a Go slice.
 func (x *ExtensionStream) StreamingClients() []*ExtensionClient {
 	arr := x.inner.StreamingClients()

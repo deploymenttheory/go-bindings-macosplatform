@@ -37,18 +37,24 @@ func NewLSTMLayer() *LSTMLayer {
 	return &LSTMLayer{inner: raw.MLCLSTMLayerFromID(_id)}
 }
 
+// @property   label @abstract   A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *LSTMLayer) WithLabel(label string) *LSTMLayer {
 	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+//
 // WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
 func (x *LSTMLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *LSTMLayer {
 	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
 	return x
 }
 
+// @property   descriptor @abstract   The LSTM descriptor
+//
 // Descriptor calls the underlying Descriptor.
 func (x *LSTMLayer) Descriptor() *LSTMDescriptor {
 	_r := x.inner.Descriptor()
@@ -58,6 +64,8 @@ func (x *LSTMLayer) Descriptor() *LSTMDescriptor {
 	return &LSTMDescriptor{inner: _r}
 }
 
+// @property   gateActivations @abstract   The array of gate activations for input, hidden, cell and output gates @discussion The default gate activations are: sigmoid, sigmoid, tanh, sigmoid
+//
 // GateActivations returns the collection as a Go slice.
 func (x *LSTMLayer) GateActivations() []*ActivationDescriptor {
 	arr := x.inner.GateActivations()
@@ -69,6 +77,8 @@ func (x *LSTMLayer) GateActivations() []*ActivationDescriptor {
 	})
 }
 
+// @property   outputResultActivation @abstract   The output activation descriptor
+//
 // OutputResultActivation calls the underlying OutputResultActivation.
 func (x *LSTMLayer) OutputResultActivation() *ActivationDescriptor {
 	_r := x.inner.OutputResultActivation()
@@ -78,6 +88,8 @@ func (x *LSTMLayer) OutputResultActivation() *ActivationDescriptor {
 	return &ActivationDescriptor{inner: _r}
 }
 
+// @property   inputWeights @abstract   The array of tensors describing the input weights for the input, hidden, cell and output gates
+//
 // InputWeights returns the collection as a Go slice.
 func (x *LSTMLayer) InputWeights() []*Tensor {
 	arr := x.inner.InputWeights()
@@ -89,6 +101,8 @@ func (x *LSTMLayer) InputWeights() []*Tensor {
 	})
 }
 
+// @property   hiddenWeights @abstract   The array of tensors describing the hidden weights for the input, hidden, cell and output gates
+//
 // HiddenWeights returns the collection as a Go slice.
 func (x *LSTMLayer) HiddenWeights() []*Tensor {
 	arr := x.inner.HiddenWeights()
@@ -100,6 +114,8 @@ func (x *LSTMLayer) HiddenWeights() []*Tensor {
 	})
 }
 
+// @property   peepholeWeights @abstract   The array of tensors describing the peephole weights for the input, hidden, cell and output gates
+//
 // PeepholeWeights returns the collection as a Go slice.
 func (x *LSTMLayer) PeepholeWeights() []*Tensor {
 	arr := x.inner.PeepholeWeights()
@@ -111,6 +127,8 @@ func (x *LSTMLayer) PeepholeWeights() []*Tensor {
 	})
 }
 
+// @property   biases @abstract   The array of tensors describing the bias terms for the input, hidden, cell and output gates
+//
 // Biases returns the collection as a Go slice.
 func (x *LSTMLayer) Biases() []*Tensor {
 	arr := x.inner.Biases()
@@ -122,6 +140,8 @@ func (x *LSTMLayer) Biases() []*Tensor {
 	})
 }
 
+// @property   inputWeightsParameters @abstract   The input weights tensor parameters used for optimizer update
+//
 // InputWeightsParameters returns the collection as a Go slice.
 func (x *LSTMLayer) InputWeightsParameters() []*TensorParameter {
 	arr := x.inner.InputWeightsParameters()
@@ -133,6 +153,8 @@ func (x *LSTMLayer) InputWeightsParameters() []*TensorParameter {
 	})
 }
 
+// @property   hiddenWeightsParameters @abstract   The hidden weights tensor parameters used for optimizer update
+//
 // HiddenWeightsParameters returns the collection as a Go slice.
 func (x *LSTMLayer) HiddenWeightsParameters() []*TensorParameter {
 	arr := x.inner.HiddenWeightsParameters()
@@ -144,6 +166,8 @@ func (x *LSTMLayer) HiddenWeightsParameters() []*TensorParameter {
 	})
 }
 
+// @property   peepholeWeightsParameters @abstract   The peephole weights tensor parameters used for optimizer update
+//
 // PeepholeWeightsParameters returns the collection as a Go slice.
 func (x *LSTMLayer) PeepholeWeightsParameters() []*TensorParameter {
 	arr := x.inner.PeepholeWeightsParameters()
@@ -155,6 +179,8 @@ func (x *LSTMLayer) PeepholeWeightsParameters() []*TensorParameter {
 	})
 }
 
+// @property   biasesParameters @abstract   The bias tensor parameter used for optimizer update
+//
 // BiasesParameters returns the collection as a Go slice.
 func (x *LSTMLayer) BiasesParameters() []*TensorParameter {
 	arr := x.inner.BiasesParameters()

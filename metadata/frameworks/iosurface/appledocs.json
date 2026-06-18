@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "framework": "IOSurface",
+  "source": "developer.apple.com DocC render API",
+  "enums": {
+    "IOSurfaceComponentName": {
+      "url": "https://developer.apple.com/documentation/iosurface/iosurfacecomponentname"
+    },
+    "IOSurfaceComponentRange": {
+      "url": "https://developer.apple.com/documentation/iosurface/iosurfacecomponentrange"
+    },
+    "IOSurfaceComponentType": {
+      "url": "https://developer.apple.com/documentation/iosurface/iosurfacecomponenttype"
+    },
+    "IOSurfaceLockOptions": {
+      "url": "https://developer.apple.com/documentation/iosurface/iosurfacelockoptions"
+    },
+    "IOSurfaceMemoryLedgerFlags": {
+      "url": "https://developer.apple.com/documentation/iosurface/iosurfacememoryledgerflags"
+    },
+    "IOSurfaceMemoryLedgerTags": {
+      "url": "https://developer.apple.com/documentation/iosurface/iosurfacememoryledgertags"
+    },
+    "IOSurfacePurgeabilityState": {
+      "url": "https://developer.apple.com/documentation/iosurface/iosurfacepurgeabilitystate"
+    },
+    "IOSurfaceSubsampling": {
+      "url": "https://developer.apple.com/documentation/iosurface/iosurfacesubsampling"
+    }
+  }
+}

@@ -37,16 +37,22 @@ func NewContextualEmbeddingResult() *ContextualEmbeddingResult {
 	return &ContextualEmbeddingResult{inner: raw.NLContextualEmbeddingResultFromID(_id)}
 }
 
+// Iterates over the embedding vectors corresponding to the subword tokens within the specified range of the input string. - Parameters: - range: The range in the string to enumerate. - block: A block that contains each token's embedding vector and its corresponding character range in the string. Use this method to access the individual (subword) token embeddings. You can apply pooling or combination techniques to aggregate these subword vectors into a single representation for a word, phrase, or entire input. Common pooling techniques include: * Mean pooling to take the average of subword vectors. * Max pooling for finding the element-wise maximum across tokens. * Use the embeddings of the first or last subword tokens to represent the entire input.
+//
 // EnumerateTokenVectorsInRangeUsing calls the underlying EnumerateTokenVectorsInRangeUsing.
 func (x *ContextualEmbeddingResult) EnumerateTokenVectorsInRangeUsing(range_ foundation.NSRange, block objc.Block) {
 	x.inner.EnumerateTokenVectorsInRangeUsing(range_, block)
 }
 
+// Returns a token vector at the specified character index. - Parameters: - characterIndex: The index to get the token vector at. - tokenRange: The character range of the token in the input string.
+//
 // TokenVectorAtIndexTokenRange calls the underlying TokenVectorAtIndexTokenRange.
 func (x *ContextualEmbeddingResult) TokenVectorAtIndexTokenRange(characterIndex uint, tokenRange *foundation.NSRange) *foundation.NSArray[*foundation.NSNumber] {
 	return x.inner.TokenVectorAtIndexTokenRange(characterIndex, tokenRange)
 }
 
+// A copy of the input string used to generate the embedding vectors.
+//
 // String calls the underlying String.
 func (x *ContextualEmbeddingResult) String() string {
 	_r := x.inner.String()
@@ -56,6 +62,8 @@ func (x *ContextualEmbeddingResult) String() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The language that the framework identified or used when processing the input string.
+//
 // Language calls the underlying Language.
 func (x *ContextualEmbeddingResult) Language() string {
 	_r := x.inner.Language()
@@ -65,6 +73,8 @@ func (x *ContextualEmbeddingResult) Language() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The number of embedding vectors the request generates.
+//
 // SequenceLength calls the underlying SequenceLength.
 func (x *ContextualEmbeddingResult) SequenceLength() uint {
 	return x.inner.SequenceLength()

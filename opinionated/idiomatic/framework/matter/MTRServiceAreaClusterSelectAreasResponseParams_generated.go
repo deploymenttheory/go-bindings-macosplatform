@@ -34,6 +34,8 @@ func MTRServiceAreaClusterSelectAreasResponseParamsFromID(id objc.ID) *MTRServic
 	return &MTRServiceAreaClusterSelectAreasResponseParams{inner: raw.MTRServiceAreaClusterSelectAreasResponseParamsFromID(id)}
 }
 
+// Initialize an MTRServiceAreaClusterSelectAreasResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+//
 // NewMTRServiceAreaClusterSelectAreasResponseParamsWithResponseValueError creates a new [MTRServiceAreaClusterSelectAreasResponseParams].
 func NewMTRServiceAreaClusterSelectAreasResponseParamsWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRServiceAreaClusterSelectAreasResponseParams, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRServiceAreaClusterSelectAreasResponseParams")), objc.RegisterName("alloc"))

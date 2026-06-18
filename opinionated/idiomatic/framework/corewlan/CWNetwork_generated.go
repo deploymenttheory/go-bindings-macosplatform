@@ -37,21 +37,29 @@ func NewNetwork() *Network {
 	return &Network{inner: raw.CWNetworkFromID(_id)}
 }
 
+// @method @param network A CWNetwork object. @result YES if the objects are equal, NO otherwise. @abstract Determine CWNetwork equality. @discussion CWNetwork objects are considered equal if their corresponding <i>ssidData</i> and <i>bssid</i> properties are equal.
+//
 // IsEqualToNetwork calls the underlying IsEqualToNetwork.
 func (x *Network) IsEqualToNetwork(network *raw.CWNetwork) bool {
 	return x.inner.IsEqualToNetwork(network)
 }
 
+// @method @param security A CWSecurity type value. @result <i>YES</i> if the Wi-Fi device supports the specified security type, <i>NO</i> otherwise. @abstract Determine which security types a Wi-Fi device supports.
+//
 // SupportsSecurity calls the underlying SupportsSecurity.
 func (x *Network) SupportsSecurity(security CWSecurity) bool {
 	return x.inner.SupportsSecurity(raw.CWSecurity(security))
 }
 
+// @method @param phyMode A CWPHYMode type value. @result YES if the Wi-Fi device supports the specified PHY mode, NO otherwise. @abstract Determine which PHY modes a Wi-Fi device supports.
+//
 // SupportsPHYMode calls the underlying SupportsPHYMode.
 func (x *Network) SupportsPHYMode(phyMode CWPHYMode) bool {
 	return x.inner.SupportsPHYMode(raw.CWPHYMode(phyMode))
 }
 
+// @property @abstract Returns the service set identifier (SSID) for the Wi-Fi network device, encoded as a string. @discussion Returns nil if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string. @note SSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
+//
 // Ssid calls the underlying Ssid.
 func (x *Network) Ssid() string {
 	_r := x.inner.Ssid()
@@ -61,11 +69,15 @@ func (x *Network) Ssid() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property @abstract Returns the service set identifier (SSID) for the Wi-Fi network device, encapsulated in an NSData object. @discussion The SSID is defined as 1-32 octets. @note SSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
+//
 // SsidData calls the underlying SsidData.
 func (x *Network) SsidData() *foundation.NSData {
 	return x.inner.SsidData()
 }
 
+// @property @abstract Returns the basic service set identifier (BSSID) for the Wi-Fi network device, returned as UTF-8 string. @discussion Returns a UTF-8 string using hexadecimal characters formatted as XX:XX:XX:XX:XX:XX. @note BSSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
+//
 // Bssid calls the underlying Bssid.
 func (x *Network) Bssid() string {
 	_r := x.inner.Bssid()
@@ -75,6 +87,8 @@ func (x *Network) Bssid() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property @abstract The operating channel of the Wi-Fi device.
+//
 // WlanChannel calls the underlying WlanChannel.
 func (x *Network) WlanChannel() *Channel {
 	_r := x.inner.WlanChannel()
@@ -84,21 +98,29 @@ func (x *Network) WlanChannel() *Channel {
 	return &Channel{inner: _r}
 }
 
+// @property @abstract Returns the received signal strength indication (RSSI) measurement (dBm) for the Wi-Fi device.
+//
 // RssiValue calls the underlying RssiValue.
 func (x *Network) RssiValue() int {
 	return x.inner.RssiValue()
 }
 
+// @property @abstract Returns the noise measurement (dBm) for the Wi-Fi device.
+//
 // NoiseMeasurement calls the underlying NoiseMeasurement.
 func (x *Network) NoiseMeasurement() int {
 	return x.inner.NoiseMeasurement()
 }
 
+// @property @abstract Returns information element data included in beacon or probe response frames.
+//
 // InformationElementData calls the underlying InformationElementData.
 func (x *Network) InformationElementData() *foundation.NSData {
 	return x.inner.InformationElementData()
 }
 
+// @property @abstract Returns the advertised country code (ISO/IEC 3166-1:1997) for the Wi-Fi device. @note Country code information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
+//
 // CountryCode calls the underlying CountryCode.
 func (x *Network) CountryCode() string {
 	_r := x.inner.CountryCode()
@@ -108,11 +130,15 @@ func (x *Network) CountryCode() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property @abstract Returns the beacon interval (ms) for the Wi-Fi device.
+//
 // BeaconInterval calls the underlying BeaconInterval.
 func (x *Network) BeaconInterval() int {
 	return x.inner.BeaconInterval()
 }
 
+// @property @result YES if the Wi-Fi device is part of an IBSS network, NO otherwise. @abstract Indicates whether or not the Wi-Fi device is participating in an independent basic service set (IBSS), or ad-hoc Wi-Fi network.
+//
 // Ibss calls the underlying Ibss.
 func (x *Network) Ibss() bool {
 	return x.inner.Ibss()

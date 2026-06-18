@@ -36,54 +36,72 @@ func NewGeometryTessellator() *GeometryTessellator {
 	return &GeometryTessellator{inner: raw.SCNGeometryTessellatorFromID(_id)}
 }
 
+// @property tessellationFactorScale @abstract Specifies the scale factor applied to the per-patch tessellation factors. Defaults to 1.
+//
 // WithTessellationFactorScale sets the tessellationFactorScale property and returns the receiver for chaining.
 func (x *GeometryTessellator) WithTessellationFactorScale(tessellationFactorScale float64) *GeometryTessellator {
 	x.inner.SetTessellationFactorScale(tessellationFactorScale)
 	return x
 }
 
+// @property tessellationPartitionMode @abstract Specifies the tessellation partition mode. Defaults to MTLTessellationPartitionModeInteger.
+//
 // WithTessellationPartitionMode sets the tessellationPartitionMode property and returns the receiver for chaining.
 func (x *GeometryTessellator) WithTessellationPartitionMode(tessellationPartitionMode metal.MTLTessellationPartitionMode) *GeometryTessellator {
 	x.inner.SetTessellationPartitionMode(tessellationPartitionMode)
 	return x
 }
 
+// @property adaptive @abstract Specifies if the tessellation should be uniform or adaptive. Defaults to NO.
+//
 // WithAdaptive sets the adaptive property and returns the receiver for chaining.
 func (x *GeometryTessellator) WithAdaptive(adaptive bool) *GeometryTessellator {
 	x.inner.SetAdaptive(adaptive)
 	return x
 }
 
+// @property screenspace @abstract Specifies if the level of tessellation should be adapted in screenSpace. Defaults to NO.
+//
 // WithScreenSpace sets the screenSpace property and returns the receiver for chaining.
 func (x *GeometryTessellator) WithScreenSpace(screenSpace bool) *GeometryTessellator {
 	x.inner.SetScreenSpace(screenSpace)
 	return x
 }
 
+// @property edgeTessellationFactor @abstract Specifies the edge tessellation factor. Defaults to 1. @discussion This has no effect for adaptive subdivision
+//
 // WithEdgeTessellationFactor sets the edgeTessellationFactor property and returns the receiver for chaining.
 func (x *GeometryTessellator) WithEdgeTessellationFactor(edgeTessellationFactor float64) *GeometryTessellator {
 	x.inner.SetEdgeTessellationFactor(edgeTessellationFactor)
 	return x
 }
 
+// @property insideTessellationFactor @abstract Specifies the inside tessellation factor. Defaults to 1. @discussion This has no effect for adaptive subdivision
+//
 // WithInsideTessellationFactor sets the insideTessellationFactor property and returns the receiver for chaining.
 func (x *GeometryTessellator) WithInsideTessellationFactor(insideTessellationFactor float64) *GeometryTessellator {
 	x.inner.SetInsideTessellationFactor(insideTessellationFactor)
 	return x
 }
 
+// @property maximumEdgeLength @abstract Specifies the maximum edge length. Defaults to 1. @discussion This has no effect for non-adaptive subdivision
+//
 // WithMaximumEdgeLength sets the maximumEdgeLength property and returns the receiver for chaining.
 func (x *GeometryTessellator) WithMaximumEdgeLength(maximumEdgeLength float64) *GeometryTessellator {
 	x.inner.SetMaximumEdgeLength(maximumEdgeLength)
 	return x
 }
 
+// @property smoothingMode @abstract Defaults to SCNTessellationSmoothingModeNone.
+//
 // WithSmoothingMode sets the smoothingMode property and returns the receiver for chaining.
 func (x *GeometryTessellator) WithSmoothingMode(smoothingMode SCNTessellationSmoothingMode) *GeometryTessellator {
 	x.inner.SetSmoothingMode(raw.SCNTessellationSmoothingMode(smoothingMode))
 	return x
 }
 
+// @property tessellationFactorScale @abstract Specifies the scale factor applied to the per-patch tessellation factors. Defaults to 1.
+//
 // TessellationFactorScale calls the underlying TessellationFactorScale.
 func (x *GeometryTessellator) TessellationFactorScale() float64 {
 	return x.inner.TessellationFactorScale()
@@ -94,6 +112,8 @@ func (x *GeometryTessellator) SetTessellationFactorScale(tessellationFactorScale
 	x.inner.SetTessellationFactorScale(tessellationFactorScale)
 }
 
+// @property tessellationPartitionMode @abstract Specifies the tessellation partition mode. Defaults to MTLTessellationPartitionModeInteger.
+//
 // TessellationPartitionMode calls the underlying TessellationPartitionMode.
 func (x *GeometryTessellator) TessellationPartitionMode() metal.MTLTessellationPartitionMode {
 	return x.inner.TessellationPartitionMode()
@@ -104,6 +124,8 @@ func (x *GeometryTessellator) SetTessellationPartitionMode(tessellationPartition
 	x.inner.SetTessellationPartitionMode(tessellationPartitionMode)
 }
 
+// @property adaptive @abstract Specifies if the tessellation should be uniform or adaptive. Defaults to NO.
+//
 // IsAdaptive calls the underlying IsAdaptive.
 func (x *GeometryTessellator) IsAdaptive() bool {
 	return x.inner.IsAdaptive()
@@ -114,6 +136,8 @@ func (x *GeometryTessellator) SetAdaptive(adaptive bool) {
 	x.inner.SetAdaptive(adaptive)
 }
 
+// @property screenspace @abstract Specifies if the level of tessellation should be adapted in screenSpace. Defaults to NO.
+//
 // IsScreenSpace calls the underlying IsScreenSpace.
 func (x *GeometryTessellator) IsScreenSpace() bool {
 	return x.inner.IsScreenSpace()
@@ -124,6 +148,8 @@ func (x *GeometryTessellator) SetScreenSpace(screenSpace bool) {
 	x.inner.SetScreenSpace(screenSpace)
 }
 
+// @property edgeTessellationFactor @abstract Specifies the edge tessellation factor. Defaults to 1. @discussion This has no effect for adaptive subdivision
+//
 // EdgeTessellationFactor calls the underlying EdgeTessellationFactor.
 func (x *GeometryTessellator) EdgeTessellationFactor() float64 {
 	return x.inner.EdgeTessellationFactor()
@@ -134,6 +160,8 @@ func (x *GeometryTessellator) SetEdgeTessellationFactor(edgeTessellationFactor f
 	x.inner.SetEdgeTessellationFactor(edgeTessellationFactor)
 }
 
+// @property insideTessellationFactor @abstract Specifies the inside tessellation factor. Defaults to 1. @discussion This has no effect for adaptive subdivision
+//
 // InsideTessellationFactor calls the underlying InsideTessellationFactor.
 func (x *GeometryTessellator) InsideTessellationFactor() float64 {
 	return x.inner.InsideTessellationFactor()
@@ -144,6 +172,8 @@ func (x *GeometryTessellator) SetInsideTessellationFactor(insideTessellationFact
 	x.inner.SetInsideTessellationFactor(insideTessellationFactor)
 }
 
+// @property maximumEdgeLength @abstract Specifies the maximum edge length. Defaults to 1. @discussion This has no effect for non-adaptive subdivision
+//
 // MaximumEdgeLength calls the underlying MaximumEdgeLength.
 func (x *GeometryTessellator) MaximumEdgeLength() float64 {
 	return x.inner.MaximumEdgeLength()
@@ -154,6 +184,8 @@ func (x *GeometryTessellator) SetMaximumEdgeLength(maximumEdgeLength float64) {
 	x.inner.SetMaximumEdgeLength(maximumEdgeLength)
 }
 
+// @property smoothingMode @abstract Defaults to SCNTessellationSmoothingModeNone.
+//
 // SmoothingMode calls the underlying SmoothingMode.
 func (x *GeometryTessellator) SmoothingMode() SCNTessellationSmoothingMode {
 	return SCNTessellationSmoothingMode(x.inner.SmoothingMode())

@@ -30,6 +30,8 @@ func VectorFromID(id objc.ID) *Vector {
 	return &Vector{inner: raw.MPSVectorFromID(id)}
 }
 
+// @abstract   Initialize a MPSVector object with a MTLBuffer. @param      buffer          The MTLBuffer object which contains the data to use for the MPSVector. May not be NULL. @param      descriptor      The MPSVectorDescriptor. May not be NULL. @return     A valid MPSVector object or nil, if failure. @discussion This function returns a MPSVector object which uses the supplied MTLBuffer.  The length, number of vectors, and stride between vectors are specified by the MPSVectorDescriptor object. The provided MTLBuffer must have enough storage to hold (descriptor.vectors-1) * descriptor.vectorBytes + descriptor.length * (element size) bytes.
+//
 // NewVectorWithBufferDescriptor creates a new [Vector].
 func NewVectorWithBufferDescriptor(buffer metal.MTLBuffer, descriptor *raw.MPSVectorDescriptor) *Vector {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSVector")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewVectorWithBufferDescriptor(buffer metal.MTLBuffer, descriptor *raw.MPSVe
 	return &Vector{inner: raw.MPSVectorFromID(_id)}
 }
 
+// @abstract   Initialize a MPSVector object with a MTLBuffer and an offset. @param      buffer  The MTLBuffer containing the data. @param      offset  The offset, in bytes, into the buffer at which data begins. @param      descriptor  The MPSVectorDescriptor.
+//
 // NewVectorWithBufferOffsetDescriptor creates a new [Vector].
 func NewVectorWithBufferOffsetDescriptor(buffer metal.MTLBuffer, offset uint, descriptor *raw.MPSVectorDescriptor) *Vector {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSVector")), objc.RegisterName("alloc"))
@@ -44,6 +48,8 @@ func NewVectorWithBufferOffsetDescriptor(buffer metal.MTLBuffer, offset uint, de
 	return &Vector{inner: raw.MPSVectorFromID(_id)}
 }
 
+// @abstract   Initialize a lazily backed MPSVector object with a descriptor @param      device      The device with which it will be used @param      descriptor  The shape and style of the matrix @return     A valid MPSVector object or nil @discussion The vector object will be created, but the storage to hold the vector data will only be allocated when it is needed, typically when the data property is invoked.  In conjunction with -resourceSize, this will allow you to estimate storage needs without actually creating the backing store for the vector.
+//
 // NewVectorWithDeviceDescriptor creates a new [Vector].
 func NewVectorWithDeviceDescriptor(device metal.MTLDevice, descriptor *raw.MPSVectorDescriptor) *Vector {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSVector")), objc.RegisterName("alloc"))
@@ -51,46 +57,64 @@ func NewVectorWithDeviceDescriptor(device metal.MTLDevice, descriptor *raw.MPSVe
 	return &Vector{inner: raw.MPSVectorFromID(_id)}
 }
 
+// @abstract   Flush the underlying MTLBuffer from the device's caches, and invalidate any CPU caches if needed. @discussion This will call [id <MTLBlitEncoder> synchronizeResource: ] on the vector's MTLBuffer, if any. This is necessary for all MTLStorageModeManaged resources. For other resources, including temporary resources (these are all MTLStorageModePrivate), and buffers that have not yet been allocated, nothing is done. It is more efficient to use this method than to attempt to do this yourself with the data property. @param      commandBuffer       The commandbuffer on which to synchronize
+//
 // SynchronizeOnCommandBuffer calls the underlying SynchronizeOnCommandBuffer.
 func (x *Vector) SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer) {
 	x.inner.SynchronizeOnCommandBuffer(commandBuffer)
 }
 
+// @abstract       Get the number of bytes used to allocate underyling MTLResources @discussion     This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSVector instantiation and MTLBuffer is not included. It only measures the size of the allocation used to hold the vector data in the buffer. This value is subject to change between different devices and operating systems. Except when -initWithBuffer:descriptor: is used, most MPSVectors are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSMatrix to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSMatrix is created with -initWithBuffer:descriptor:. In such cases, 0 will be returned.
+//
 // ResourceSize calls the underlying ResourceSize.
 func (x *Vector) ResourceSize() uint {
 	return x.inner.ResourceSize()
 }
 
+// @property   device @discussion The device on which the MPSVector will be used.
+//
 // Device calls the underlying Device.
 func (x *Vector) Device() metal.MTLDevice {
 	return x.inner.Device()
 }
 
+// @property   length @discussion The number of elements in the vector.
+//
 // Length calls the underlying Length.
 func (x *Vector) Length() uint {
 	return x.inner.Length()
 }
 
+// @property   vectors @discussion The number of vectors in the MPSVector.
+//
 // Vectors calls the underlying Vectors.
 func (x *Vector) Vectors() uint {
 	return x.inner.Vectors()
 }
 
+// @property   dataType @discussion The type of the MPSVector data.
+//
 // DataType calls the underlying DataType.
 func (x *Vector) DataType() MPSDataType {
 	return MPSDataType(x.inner.DataType())
 }
 
+// @property   vectorBytes @discussion The stride, in bytes, between corresponding elements of consecutive vectors.
+//
 // VectorBytes calls the underlying VectorBytes.
 func (x *Vector) VectorBytes() uint {
 	return x.inner.VectorBytes()
 }
 
+// @property   offset @discussion Byte-offset to the buffer where the vector data begins - see @ref initWithBuffer: offset: descriptor: .
+//
 // Offset calls the underlying Offset.
 func (x *Vector) Offset() uint {
 	return x.inner.Offset()
 }
 
+// @property   data @discussion An MTLBuffer to store the data.
+//
 // Data calls the underlying Data.
 func (x *Vector) Data() metal.MTLBuffer {
 	return x.inner.Data()

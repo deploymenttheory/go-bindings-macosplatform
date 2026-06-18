@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Host audio output stream sink plays audio to the host system’s default output device.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzhostaudiooutputstreamsink
 type VZHostAudioOutputStreamSink struct {
 	VZAudioOutputStreamSink
@@ -29,6 +31,7 @@ func VZHostAudioOutputStreamSinkFromID(id objc.ID) *VZHostAudioOutputStreamSink 
 	return o
 }
 
+// Creates a new host audio output stream sink instance.
 func (o *VZHostAudioOutputStreamSink) Init() *VZHostAudioOutputStreamSink {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZHostAudioOutputStreamSinkSelInit)
 	if _ret != 0 {

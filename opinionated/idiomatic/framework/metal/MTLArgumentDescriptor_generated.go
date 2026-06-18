@@ -35,42 +35,56 @@ func NewArgumentDescriptor() *ArgumentDescriptor {
 	return &ArgumentDescriptor{inner: raw.MTLArgumentDescriptorFromID(_id)}
 }
 
+// @property dataType @abstract For constants, the data type. Otherwise, MTLDataTypeTexture, MTLDataTypeSampler, or MTLDataTypePointer.
+//
 // WithDataType sets the dataType property and returns the receiver for chaining.
 func (x *ArgumentDescriptor) WithDataType(dataType MTLDataType) *ArgumentDescriptor {
 	x.inner.SetDataType(raw.MTLDataType(dataType))
 	return x
 }
 
+// @property index @abstract The binding point index of the argument
+//
 // WithIndex sets the index property and returns the receiver for chaining.
 func (x *ArgumentDescriptor) WithIndex(index uint) *ArgumentDescriptor {
 	x.inner.SetIndex(index)
 	return x
 }
 
+// @property arrayLength @abstract The length of an array of constants, textures, or samplers, or 0 for non-array arguments
+//
 // WithArrayLength sets the arrayLength property and returns the receiver for chaining.
 func (x *ArgumentDescriptor) WithArrayLength(arrayLength uint) *ArgumentDescriptor {
 	x.inner.SetArrayLength(arrayLength)
 	return x
 }
 
+// @property access @abstract Access flags for the argument
+//
 // WithAccess sets the access property and returns the receiver for chaining.
 func (x *ArgumentDescriptor) WithAccess(access MTLBindingAccess) *ArgumentDescriptor {
 	x.inner.SetAccess(raw.MTLBindingAccess(access))
 	return x
 }
 
+// @property textureType @abstract For texture arguments, the texture type
+//
 // WithTextureType sets the textureType property and returns the receiver for chaining.
 func (x *ArgumentDescriptor) WithTextureType(textureType MTLTextureType) *ArgumentDescriptor {
 	x.inner.SetTextureType(raw.MTLTextureType(textureType))
 	return x
 }
 
+// @property constantBlockAlignment @abstract if set forces the constant block to be aligned to the given alignment @discussion Should only be set on the first constant of the block and is only valid if a corresponding explicit "alignas" is applied to the constant in the metal shader language.
+//
 // WithConstantBlockAlignment sets the constantBlockAlignment property and returns the receiver for chaining.
 func (x *ArgumentDescriptor) WithConstantBlockAlignment(constantBlockAlignment uint) *ArgumentDescriptor {
 	x.inner.SetConstantBlockAlignment(constantBlockAlignment)
 	return x
 }
 
+// @property dataType @abstract For constants, the data type. Otherwise, MTLDataTypeTexture, MTLDataTypeSampler, or MTLDataTypePointer.
+//
 // DataType calls the underlying DataType.
 func (x *ArgumentDescriptor) DataType() MTLDataType {
 	return MTLDataType(x.inner.DataType())
@@ -81,6 +95,8 @@ func (x *ArgumentDescriptor) SetDataType(dataType MTLDataType) {
 	x.inner.SetDataType(raw.MTLDataType(dataType))
 }
 
+// @property index @abstract The binding point index of the argument
+//
 // Index calls the underlying Index.
 func (x *ArgumentDescriptor) Index() uint {
 	return x.inner.Index()
@@ -91,6 +107,8 @@ func (x *ArgumentDescriptor) SetIndex(index uint) {
 	x.inner.SetIndex(index)
 }
 
+// @property arrayLength @abstract The length of an array of constants, textures, or samplers, or 0 for non-array arguments
+//
 // ArrayLength calls the underlying ArrayLength.
 func (x *ArgumentDescriptor) ArrayLength() uint {
 	return x.inner.ArrayLength()
@@ -101,6 +119,8 @@ func (x *ArgumentDescriptor) SetArrayLength(arrayLength uint) {
 	x.inner.SetArrayLength(arrayLength)
 }
 
+// @property access @abstract Access flags for the argument
+//
 // Access calls the underlying Access.
 func (x *ArgumentDescriptor) Access() MTLBindingAccess {
 	return MTLBindingAccess(x.inner.Access())
@@ -111,6 +131,8 @@ func (x *ArgumentDescriptor) SetAccess(access MTLBindingAccess) {
 	x.inner.SetAccess(raw.MTLBindingAccess(access))
 }
 
+// @property textureType @abstract For texture arguments, the texture type
+//
 // TextureType calls the underlying TextureType.
 func (x *ArgumentDescriptor) TextureType() MTLTextureType {
 	return MTLTextureType(x.inner.TextureType())
@@ -121,6 +143,8 @@ func (x *ArgumentDescriptor) SetTextureType(textureType MTLTextureType) {
 	x.inner.SetTextureType(raw.MTLTextureType(textureType))
 }
 
+// @property constantBlockAlignment @abstract if set forces the constant block to be aligned to the given alignment @discussion Should only be set on the first constant of the block and is only valid if a corresponding explicit "alignas" is applied to the constant in the metal shader language.
+//
 // ConstantBlockAlignment calls the underlying ConstantBlockAlignment.
 func (x *ArgumentDescriptor) ConstantBlockAlignment() uint {
 	return x.inner.ConstantBlockAlignment()

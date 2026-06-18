@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class for a graphics display configuration.
+//
 // GraphicsDisplayConfiguration wraps [raw.VZGraphicsDisplayConfiguration] with a fluent Go API.
 type GraphicsDisplayConfiguration struct {
 	inner *raw.VZGraphicsDisplayConfiguration

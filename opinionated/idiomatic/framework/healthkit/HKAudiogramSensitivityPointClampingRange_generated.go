@@ -37,6 +37,8 @@ func NewAudiogramSensitivityPointClampingRange() *AudiogramSensitivityPointClamp
 	return &AudiogramSensitivityPointClampingRange{inner: raw.HKAudiogramSensitivityPointClampingRangeFromID(_id)}
 }
 
+// @property lowerBound @abstract The lower bound of the clamping range, if any, in dBHL.
+//
 // LowerBound calls the underlying LowerBound.
 func (x *AudiogramSensitivityPointClampingRange) LowerBound() *Quantity {
 	_r := x.inner.LowerBound()
@@ -46,6 +48,8 @@ func (x *AudiogramSensitivityPointClampingRange) LowerBound() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property upperBound @abstract The upper bound of the clamping range, if any, in dBHL.
+//
 // UpperBound calls the underlying UpperBound.
 func (x *AudiogramSensitivityPointClampingRange) UpperBound() *Quantity {
 	_r := x.inner.UpperBound()

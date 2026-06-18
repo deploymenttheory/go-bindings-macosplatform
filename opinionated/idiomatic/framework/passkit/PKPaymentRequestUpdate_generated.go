@@ -33,9 +33,18 @@ func PaymentRequestUpdateFromID(id objc.ID) *PaymentRequestUpdate {
 }
 
 // NewPaymentRequestUpdateWithPaymentSummaryItems creates a new [PaymentRequestUpdate].
-func NewPaymentRequestUpdateWithPaymentSummaryItems(paymentSummaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem]) *PaymentRequestUpdate {
+func NewPaymentRequestUpdateWithPaymentSummaryItems(paymentSummaryItems ...PaymentSummaryItemProvider) *PaymentRequestUpdate {
+	_ptrs := make([]objc.ID, len(paymentSummaryItems))
+	for _i, _v := range paymentSummaryItems {
+		_ptrs[_i] = _v.asPaymentSummaryItem().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.PKPaymentSummaryItem]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentRequestUpdate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentSummaryItems:"), paymentSummaryItems.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentSummaryItems:"), _arg0.Ptr())
 	return &PaymentRequestUpdate{inner: raw.PKPaymentRequestUpdateFromID(_id)}
 }
 
@@ -139,8 +148,17 @@ func (x *PaymentRequestUpdate) PaymentSummaryItems() []*PaymentSummaryItem {
 }
 
 // SetPaymentSummaryItems calls the underlying SetPaymentSummaryItems.
-func (x *PaymentRequestUpdate) SetPaymentSummaryItems(paymentSummaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem]) {
-	x.inner.SetPaymentSummaryItems(paymentSummaryItems)
+func (x *PaymentRequestUpdate) SetPaymentSummaryItems(paymentSummaryItems ...PaymentSummaryItemProvider) {
+	_ptrs := make([]objc.ID, len(paymentSummaryItems))
+	for _i, _v := range paymentSummaryItems {
+		_ptrs[_i] = _v.asPaymentSummaryItem().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.PKPaymentSummaryItem]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetPaymentSummaryItems(_arg0)
 }
 
 // ShippingMethods returns the collection as a Go slice.
@@ -232,7 +250,7 @@ type PaymentRequestUpdateable interface {
 	Status() PKPaymentAuthorizationStatus
 	SetStatus(status PKPaymentAuthorizationStatus)
 	PaymentSummaryItems() []*PaymentSummaryItem
-	SetPaymentSummaryItems(paymentSummaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem])
+	SetPaymentSummaryItems(paymentSummaryItems ...PaymentSummaryItemProvider)
 	ShippingMethods() []*ShippingMethod
 	SetShippingMethods(shippingMethods *foundation.NSArray[*raw.PKShippingMethod])
 	MultiTokenContexts() []*PaymentTokenContext

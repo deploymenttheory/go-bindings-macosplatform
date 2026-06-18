@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class for a console device configuration.
+//
 // ConsoleDeviceConfiguration wraps [raw.VZConsoleDeviceConfiguration] with a fluent Go API.
 type ConsoleDeviceConfiguration struct {
 	inner *raw.VZConsoleDeviceConfiguration

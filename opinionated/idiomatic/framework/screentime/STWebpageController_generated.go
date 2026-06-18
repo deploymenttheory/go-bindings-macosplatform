@@ -37,41 +37,55 @@ func NewWebpageController() *WebpageController {
 	return &WebpageController{inner: raw.STWebpageControllerFromID(_id)}
 }
 
+// A Boolean that indicates whether the webpage controller is not recording web usage. Set to <doc://com.apple.documentation/documentation/objectivec/yes> to stop recording and reporting web-usage data.
+//
 // WithSuppressUsageRecording sets the suppressUsageRecording property and returns the receiver for chaining.
 func (x *WebpageController) WithSuppressUsageRecording(suppressUsageRecording bool) *WebpageController {
 	x.inner.SetSuppressUsageRecording(suppressUsageRecording)
 	return x
 }
 
+// The URL for the webpage. Set this value to the webpage’s URL when the user navigates to a new URL.
+//
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *WebpageController) WithURL(uRL string) *WebpageController {
 	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 	return x
 }
 
+// A Boolean that indicates whether there are one or more videos currently playing in the webpage. The default value is <doc://com.apple.documentation/documentation/objectivec/no>. Set this value when the webpage starts or stops playing video. - Important: Set this value to <doc://com.apple.documentation/documentation/objectivec/no> prior to changing “ScreenTime/STWebpageController/URL“ if the new webpage at that URL stops currently playing media and won’t immediately start playing new media.
+//
 // WithURLIsPlayingVideo sets the uRLIsPlayingVideo property and returns the receiver for chaining.
 func (x *WebpageController) WithURLIsPlayingVideo(uRLIsPlayingVideo bool) *WebpageController {
 	x.inner.SetURLIsPlayingVideo(uRLIsPlayingVideo)
 	return x
 }
 
+// A Boolean that indicates whether the webpage is currently displaying a floating picture in picture window. The default value is <doc://com.apple.documentation/documentation/objectivec/no>. Set this value when the webpage starts or stops displaying a Picture in Picture window. - Important: Set this value to <doc://com.apple.documentation/documentation/objectivec/no> prior to changing “ScreenTime/STWebpageController/URL“ if the new webpage at that URL ends all currently displayed Picture in Picture windows, and won’t immediately display a new one.
+//
 // WithURLIsPictureInPicture sets the uRLIsPictureInPicture property and returns the receiver for chaining.
 func (x *WebpageController) WithURLIsPictureInPicture(uRLIsPictureInPicture bool) *WebpageController {
 	x.inner.SetURLIsPictureInPicture(uRLIsPictureInPicture)
 	return x
 }
 
+// An optional identifier for the current browsing profile. The default value is `nil`. This identifier represents a profile and allows you to keep your browsing separate for topics like work, personal, or school. Using `nil` will report web history without a profile identifier. Web browsers with a "default" profile may want to use `nil` in order to match any web history reported prior to this API.
+//
 // WithProfileIdentifier sets the profileIdentifier property and returns the receiver for chaining.
 func (x *WebpageController) WithProfileIdentifier(profileIdentifier *foundation.NSString) *WebpageController {
 	x.inner.SetProfileIdentifier(profileIdentifier)
 	return x
 }
 
+// Changes the bundle identifier used to report web usage. This is only supported for web browsers that have been properly registered with Screen Time. - Parameters: - bundleIdentifier: The bundle identifier that can be changed to facilitate web usage reporting for a parent web browser from one of its helper processes or extensions. - error: Any error that occurred while changing the bundle identifier.
+//
 // SetBundleIdentifierError calls the underlying SetBundleIdentifierError.
 func (x *WebpageController) SetBundleIdentifierError(bundleIdentifier string) (bool, error) {
 	return x.inner.SetBundleIdentifierError(foundation.NSStringStringWithUTF8String(bundleIdentifier))
 }
 
+// A Boolean that indicates whether the webpage controller is not recording web usage. Set to <doc://com.apple.documentation/documentation/objectivec/yes> to stop recording and reporting web-usage data.
+//
 // SuppressUsageRecording calls the underlying SuppressUsageRecording.
 func (x *WebpageController) SuppressUsageRecording() bool {
 	return x.inner.SuppressUsageRecording()
@@ -82,6 +96,8 @@ func (x *WebpageController) SetSuppressUsageRecording(suppressUsageRecording boo
 	x.inner.SetSuppressUsageRecording(suppressUsageRecording)
 }
 
+// The URL for the webpage. Set this value to the webpage’s URL when the user navigates to a new URL.
+//
 // URL calls the underlying URL.
 func (x *WebpageController) URL() *foundation.NSURL {
 	return x.inner.URL()
@@ -92,6 +108,8 @@ func (x *WebpageController) SetURL(uRL string) {
 	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 }
 
+// A Boolean that indicates whether there are one or more videos currently playing in the webpage. The default value is <doc://com.apple.documentation/documentation/objectivec/no>. Set this value when the webpage starts or stops playing video. - Important: Set this value to <doc://com.apple.documentation/documentation/objectivec/no> prior to changing “ScreenTime/STWebpageController/URL“ if the new webpage at that URL stops currently playing media and won’t immediately start playing new media.
+//
 // URLIsPlayingVideo calls the underlying URLIsPlayingVideo.
 func (x *WebpageController) URLIsPlayingVideo() bool {
 	return x.inner.URLIsPlayingVideo()
@@ -102,6 +120,8 @@ func (x *WebpageController) SetURLIsPlayingVideo(uRLIsPlayingVideo bool) {
 	x.inner.SetURLIsPlayingVideo(uRLIsPlayingVideo)
 }
 
+// A Boolean that indicates whether the webpage is currently displaying a floating picture in picture window. The default value is <doc://com.apple.documentation/documentation/objectivec/no>. Set this value when the webpage starts or stops displaying a Picture in Picture window. - Important: Set this value to <doc://com.apple.documentation/documentation/objectivec/no> prior to changing “ScreenTime/STWebpageController/URL“ if the new webpage at that URL ends all currently displayed Picture in Picture windows, and won’t immediately display a new one.
+//
 // URLIsPictureInPicture calls the underlying URLIsPictureInPicture.
 func (x *WebpageController) URLIsPictureInPicture() bool {
 	return x.inner.URLIsPictureInPicture()
@@ -112,11 +132,15 @@ func (x *WebpageController) SetURLIsPictureInPicture(uRLIsPictureInPicture bool)
 	x.inner.SetURLIsPictureInPicture(uRLIsPictureInPicture)
 }
 
+// A Boolean that indicates whether a parent or guardian has blocked the URL. When a parent or guardian blocks the webpage’s URL, the webpage controller displays a blocking UI and then sets this property to <doc://com.apple.documentation/documentation/objectivec/yes>.
+//
 // URLIsBlocked calls the underlying URLIsBlocked.
 func (x *WebpageController) URLIsBlocked() bool {
 	return x.inner.URLIsBlocked()
 }
 
+// An optional identifier for the current browsing profile. The default value is `nil`. This identifier represents a profile and allows you to keep your browsing separate for topics like work, personal, or school. Using `nil` will report web history without a profile identifier. Web browsers with a "default" profile may want to use `nil` in order to match any web history reported prior to this API.
+//
 // ProfileIdentifier calls the underlying ProfileIdentifier.
 func (x *WebpageController) ProfileIdentifier() string {
 	_r := x.inner.ProfileIdentifier()

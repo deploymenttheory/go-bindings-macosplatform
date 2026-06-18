@@ -36,16 +36,22 @@ func NewQueryNotification() *QueryNotification {
 	return &QueryNotification{inner: raw.CKQueryNotificationFromID(_id)}
 }
 
+// The event that triggers the push notification. Subscription notifications result from the creation, deletion, or updating of a single record. The record in question must match the subscription's predicate for an event to trigger.
+//
 // QueryNotificationReason calls the underlying QueryNotificationReason.
 func (x *QueryNotification) QueryNotificationReason() CKQueryNotificationReason {
 	return CKQueryNotificationReason(x.inner.QueryNotificationReason())
 }
 
+// A dictionary of fields that have changes. For record updates and creations, this property contains the subscription's desired keys. When you configure the notification info of a subscription, you specify the names of one or more fields in the “CKSubscription/NotificationInfo/desiredKeys“ property. When a push notification triggers, CloudKit retrieves the values for each of those keys from the record and includes them in the notification's payload. For query notifications that you fetch from a container, all keys and values are present. For query notifications that you create from push notifications, one or more keys and values may be missing. Push notification payloads have a size limit, and CloudKit can exclude record fields when a payload exceeds that limit. For information about the order, see the overview of this class.
+//
 // RecordFields calls the underlying RecordFields.
 func (x *QueryNotification) RecordFields() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.RecordFields()
 }
 
+// The ID of the record that CloudKit creates, updates, or deletes. Use this value to fetch the record.
+//
 // RecordID calls the underlying RecordID.
 func (x *QueryNotification) RecordID() *RecordID {
 	_r := x.inner.RecordID()
@@ -55,6 +61,8 @@ func (x *QueryNotification) RecordID() *RecordID {
 	return &RecordID{inner: _r}
 }
 
+// The type of database for the record zone. This property's value is one of the constants that “CKDatabase/Scope“ defines.
+//
 // DatabaseScope calls the underlying DatabaseScope.
 func (x *QueryNotification) DatabaseScope() CKDatabaseScope {
 	return CKDatabaseScope(x.inner.DatabaseScope())

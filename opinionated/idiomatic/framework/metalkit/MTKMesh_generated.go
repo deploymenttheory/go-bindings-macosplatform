@@ -34,6 +34,8 @@ func MeshFromID(id objc.ID) *Mesh {
 	return &Mesh{inner: raw.MTKMeshFromID(id)}
 }
 
+// @method initWithMesh:device:error: @abstract Initialize the mesh and the mesh's submeshes. @param mesh Model I/O Mesh from which to create this MetalKit mesh @param device Metal device on which to create mesh resources @param error Pointer to an NSError object set if an error occurred @discussion The designated initializer for this class.  This does NOT initialize any meshes that are children of the Model I/O mesh, only submeshes that are part of the given mesh.  An exception is raised if vertexBuffer objects in the given mesh and the indexBuffer of any submesh in this mesh have not been created with a MTKMeshBufferAllocator object.  If a submesh using MDLGeometryTypeQuads or MDLGeometryTypeTopology is used, that submesh will be copied, and recreated to use MDLGeometryTypeTriangles, before this routine creates the MTKSubmesh.
+//
 // NewMeshWithMeshDeviceError creates a new [Mesh].
 func NewMeshWithMeshDeviceError(mesh *modelio.MDLMesh, device metal.MTLDevice) (*Mesh, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTKMesh")), objc.RegisterName("alloc"))
@@ -45,12 +47,16 @@ func NewMeshWithMeshDeviceError(mesh *modelio.MDLMesh, device metal.MTLDevice) (
 	return &Mesh{inner: raw.MTKMeshFromID(_id)}, nil
 }
 
+// @property name @abstract Name of the mesh copies from the originating Model I/O mesh. @discussion Can be used by the app to identify the mesh in its scene/world/renderer etc.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Mesh) WithName(name string) *Mesh {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property vertexBuffers @abstract Array of buffers in which mesh vertex data resides. @discussion This is filled with mesh buffer objects using the layout described by the vertexDescriptor property.  Elements in this array can be [NSNull null] if the vertexDescriptor does not specify elements for buffer for the given index
+//
 // VertexBuffers returns the collection as a Go slice.
 func (x *Mesh) VertexBuffers() []*MeshBuffer {
 	arr := x.inner.VertexBuffers()
@@ -62,11 +68,15 @@ func (x *Mesh) VertexBuffers() []*MeshBuffer {
 	})
 }
 
+// @property vertexDescriptor @abstract Model I/O vertex descriptor specifying the layout of data in vertexBuffers. @discussion This is not directly used by this object, but the application can use this information to determine rendering state or create a Metal vertex descriptor to build a RenderPipelineState object capable of interpreting data in 'vertexBuffers'.  Changing propties in the object will not result in the relayout data in vertex descriptor and thus will make the vertex descriptor no loger describe the layout of vertes data and verticies. (i.e. don't change properties in this vertexDescriptor)
+//
 // VertexDescriptor calls the underlying VertexDescriptor.
 func (x *Mesh) VertexDescriptor() *modelio.MDLVertexDescriptor {
 	return x.inner.VertexDescriptor()
 }
 
+// @property submeshes @abstract Submeshes containing index buffers to rendering mesh vertices.
+//
 // Submeshes returns the collection as a Go slice.
 func (x *Mesh) Submeshes() []*Submesh {
 	arr := x.inner.Submeshes()
@@ -78,11 +88,15 @@ func (x *Mesh) Submeshes() []*Submesh {
 	})
 }
 
+// @property vertexCount @abstract Number of vertices in the vertexBuffers.
+//
 // VertexCount calls the underlying VertexCount.
 func (x *Mesh) VertexCount() uint {
 	return x.inner.VertexCount()
 }
 
+// @property name @abstract Name of the mesh copies from the originating Model I/O mesh. @discussion Can be used by the app to identify the mesh in its scene/world/renderer etc.
+//
 // Name calls the underlying Name.
 func (x *Mesh) Name() string {
 	_r := x.inner.Name()

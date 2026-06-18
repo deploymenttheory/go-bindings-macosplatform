@@ -36,78 +36,104 @@ func NewMutableURLRequest() *MutableURLRequest {
 	return &MutableURLRequest{inner: raw.NSMutableURLRequestFromID(_id)}
 }
 
+// @abstract The URL of the receiver.
+//
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *MutableURLRequest) WithURL(uRL string) *MutableURLRequest {
 	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 	return x
 }
 
+// @abstract The cache policy of the receiver.
+//
 // WithCachePolicy sets the cachePolicy property and returns the receiver for chaining.
 func (x *MutableURLRequest) WithCachePolicy(cachePolicy NSURLRequestCachePolicy) *MutableURLRequest {
 	x.inner.SetCachePolicy(raw.NSURLRequestCachePolicy(cachePolicy))
 	return x
 }
 
+// @abstract Sets the timeout interval of the receiver. @discussion The timeout interval specifies the limit on the idle interval allotted to a request in the process of loading. The "idle interval" is defined as the period of time that has passed since the last instance of load activity occurred for a request that is in the process of loading. Hence, when an instance of load activity occurs (e.g. bytes are received from the network for a request), the idle interval for a request is reset to 0. If the idle interval ever becomes greater than or equal to the timeout interval, the request is considered to have timed out. This timeout interval is measured in seconds.
+//
 // WithTimeoutInterval sets the timeoutInterval property and returns the receiver for chaining.
 func (x *MutableURLRequest) WithTimeoutInterval(timeoutInterval float64) *MutableURLRequest {
 	x.inner.SetTimeoutInterval(timeoutInterval)
 	return x
 }
 
+// @abstract Sets the main document URL @discussion The caller should pass the URL for an appropriate main document, if known. For example, when loading a web page, the URL of the main html document for the top-level frame should be passed.  This main document is used to implement the cookie "only from same domain as main document" policy, attributing this request as a sub-resource of a user-specified URL, and possibly other things in the future.
+//
 // WithMainDocumentURL sets the mainDocumentURL property and returns the receiver for chaining.
 func (x *MutableURLRequest) WithMainDocumentURL(mainDocumentURL string) *MutableURLRequest {
 	x.inner.SetMainDocumentURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(mainDocumentURL)))
 	return x
 }
 
+// @abstract Sets the NSURLRequestNetworkServiceType to associate with this request @discussion This method is used to provide the network layers with a hint as to the purpose of the request.  Most clients should not need to use this method.
+//
 // WithNetworkServiceType sets the networkServiceType property and returns the receiver for chaining.
 func (x *MutableURLRequest) WithNetworkServiceType(networkServiceType NSURLRequestNetworkServiceType) *MutableURLRequest {
 	x.inner.SetNetworkServiceType(raw.NSURLRequestNetworkServiceType(networkServiceType))
 	return x
 }
 
+// @abstract sets whether a connection created with this request is allowed to use the built in cellular radios (if present). @discussion NO if the receiver should not be allowed to use the built in cellular radios to satisfy the request, YES otherwise.  The default is YES.
+//
 // WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
 func (x *MutableURLRequest) WithAllowsCellularAccess(allowsCellularAccess bool) *MutableURLRequest {
 	x.inner.SetAllowsCellularAccess(allowsCellularAccess)
 	return x
 }
 
+// @abstract sets whether a connection created with this request is allowed to use network interfaces which have been marked as expensive. @discussion NO if the receiver should not be allowed to use an interface marked as expensive to satisfy the request, YES otherwise.
+//
 // WithAllowsExpensiveNetworkAccess sets the allowsExpensiveNetworkAccess property and returns the receiver for chaining.
 func (x *MutableURLRequest) WithAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool) *MutableURLRequest {
 	x.inner.SetAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess)
 	return x
 }
 
+// @abstract sets whether a connection created with this request is allowed to use network interfaces which have been marked as constrained. @discussion NO if the receiver should not be allowed to use an interface marked as constrained to satisfy the request, YES otherwise.
+//
 // WithAllowsConstrainedNetworkAccess sets the allowsConstrainedNetworkAccess property and returns the receiver for chaining.
 func (x *MutableURLRequest) WithAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool) *MutableURLRequest {
 	x.inner.SetAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess)
 	return x
 }
 
+// @abstract sets whether a connection created with this request is allowed to use network interfaces which have been marked as ultra constrained. @discussion NO if the receiver should not be allowed to use an interface marked as ultra constrained to satisfy the request, YES otherwise.
+//
 // WithAllowsUltraConstrainedNetworkAccess sets the allowsUltraConstrainedNetworkAccess property and returns the receiver for chaining.
 func (x *MutableURLRequest) WithAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool) *MutableURLRequest {
 	x.inner.SetAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess)
 	return x
 }
 
+// @abstract returns whether we assume that server supports HTTP/3. Enables QUIC racing without HTTP/3 service discovery. @result YES if server endpoint is known to support HTTP/3. Defaults to NO. The default may be YES in a future OS update.
+//
 // WithAssumesHTTP3Capable sets the assumesHTTP3Capable property and returns the receiver for chaining.
 func (x *MutableURLRequest) WithAssumesHTTP3Capable(assumesHTTP3Capable bool) *MutableURLRequest {
 	x.inner.SetAssumesHTTP3Capable(assumesHTTP3Capable)
 	return x
 }
 
+// @abstract Sets the NSURLRequestAttribution to associate with this request. @discussion Set to NSURLRequestAttributionUser if the URL was specified by the user. Defaults to NSURLRequestAttributionDeveloper.
+//
 // WithAttribution sets the attribution property and returns the receiver for chaining.
 func (x *MutableURLRequest) WithAttribution(attribution NSURLRequestAttribution) *MutableURLRequest {
 	x.inner.SetAttribution(raw.NSURLRequestAttribution(attribution))
 	return x
 }
 
+// @abstract sets whether a request is required to do DNSSEC validation during DNS lookup. @discussion YES, if the DNS lookup for this request should require DNSSEC validation, No otherwise. Defaults to NO.
+//
 // WithRequiresDNSSECValidation sets the requiresDNSSECValidation property and returns the receiver for chaining.
 func (x *MutableURLRequest) WithRequiresDNSSECValidation(requiresDNSSECValidation bool) *MutableURLRequest {
 	x.inner.SetRequiresDNSSECValidation(requiresDNSSECValidation)
 	return x
 }
 
+// @abstract Allows storing and usage of DNS answers, potentially beyond TTL expiry, in a persistent per-process cache. This should only be set for hostnames whose resolutions are not expected to change across networks. @discussion YES, if the DNS lookup for this request is allowed to use a persistent per-process cache, NO otherwise. Defaults to NO.
+//
 // WithAllowsPersistentDNS sets the allowsPersistentDNS property and returns the receiver for chaining.
 func (x *MutableURLRequest) WithAllowsPersistentDNS(allowsPersistentDNS bool) *MutableURLRequest {
 	x.inner.SetAllowsPersistentDNS(allowsPersistentDNS)
@@ -120,36 +146,48 @@ func (x *MutableURLRequest) WithCookiePartitionIdentifier(cookiePartitionIdentif
 	return x
 }
 
+// @abstract Sets the HTTP request method of the receiver.
+//
 // WithHTTPMethod sets the hTTPMethod property and returns the receiver for chaining.
 func (x *MutableURLRequest) WithHTTPMethod(hTTPMethod string) *MutableURLRequest {
 	x.inner.SetHTTPMethod(foundation.NSStringStringWithUTF8String(hTTPMethod))
 	return x
 }
 
+// @abstract Sets the HTTP header fields of the receiver to the given dictionary. @discussion This method replaces all header fields that may have existed before this method call. <p>Since HTTP header fields must be string values, each object and key in the dictionary passed to this method must answer YES when sent an <tt>-isKindOfClass:[NSString class]</tt> message. If either the key or value for a key-value pair answers NO when sent this message, the key-value pair is skipped.
+//
 // WithAllHTTPHeaderFields sets the allHTTPHeaderFields property and returns the receiver for chaining.
 func (x *MutableURLRequest) WithAllHTTPHeaderFields(allHTTPHeaderFields *raw.NSDictionary[*raw.NSString, *raw.NSString]) *MutableURLRequest {
 	x.inner.SetAllHTTPHeaderFields(allHTTPHeaderFields)
 	return x
 }
 
+// @abstract Sets the request body data of the receiver. @discussion This data is sent as the message body of the request, as in done in an HTTP POST request.
+//
 // WithHTTPBody sets the hTTPBody property and returns the receiver for chaining.
 func (x *MutableURLRequest) WithHTTPBody(hTTPBody DataProvider) *MutableURLRequest {
 	x.inner.SetHTTPBody(hTTPBody.asData())
 	return x
 }
 
+// @abstract Sets the request body to be the contents of the given stream. @discussion The provided stream should be unopened; the request will take over the stream's delegate.  The entire stream's contents will be transmitted as the HTTP body of the request.  Note that the body stream and the body data (set by setHTTPBody:, above) are mutually exclusive - setting one will clear the other.
+//
 // WithHTTPBodyStream sets the hTTPBodyStream property and returns the receiver for chaining.
 func (x *MutableURLRequest) WithHTTPBodyStream(hTTPBodyStream *InputStream) *MutableURLRequest {
 	x.inner.SetHTTPBodyStream(hTTPBodyStream.Unwrap())
 	return x
 }
 
+// @abstract Decide whether default cookie handling will happen for this request (YES if cookies should be sent with and set for this request; otherwise NO). @discussion The default is YES - in other words, cookies are sent from and stored to the cookie manager by default. NOTE: In releases prior to 10.3, this value is ignored
+//
 // WithHTTPShouldHandleCookies sets the hTTPShouldHandleCookies property and returns the receiver for chaining.
 func (x *MutableURLRequest) WithHTTPShouldHandleCookies(hTTPShouldHandleCookies bool) *MutableURLRequest {
 	x.inner.SetHTTPShouldHandleCookies(hTTPShouldHandleCookies)
 	return x
 }
 
+// @abstract Sets whether the request should not wait for the previous response before transmitting (YES if the receiver should transmit before the previous response is received.  NO to wait for the previous response before transmitting) @discussion Calling this method with a YES value does not guarantee HTTP pipelining behavior.  This method may have no effect if an HTTP proxy is configured, or if the HTTP request uses an unsafe request method (e.g., POST requests will not pipeline).  Pipelining behavior also may not begin until the second request on a given TCP connection.  There may be other situations where pipelining does not occur even though YES was set. HTTP 1.1 allows the client to send multiple requests to the server without waiting for a response.  Though HTTP 1.1 requires support for pipelining, some servers report themselves as being HTTP 1.1 but do not support pipelining (disconnecting, sending resources misordered, omitting part of a resource, etc.).
+//
 // WithHTTPShouldUsePipelining sets the hTTPShouldUsePipelining property and returns the receiver for chaining.
 func (x *MutableURLRequest) WithHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) *MutableURLRequest {
 	x.inner.SetHTTPShouldUsePipelining(hTTPShouldUsePipelining)
@@ -232,11 +270,15 @@ func (x *MutableURLRequest) SetCookiePartitionIdentifier(cookiePartitionIdentifi
 	x.inner.SetCookiePartitionIdentifier(foundation.NSStringStringWithUTF8String(cookiePartitionIdentifier))
 }
 
+// @method setValue:forHTTPHeaderField: @abstract Sets the value of the given HTTP header field. @discussion If a value was previously set for the given header field, that value is replaced with the given value. Note that, in keeping with the HTTP RFC, HTTP header field names are case-insensitive. @param value the header field value. @param field the header field name (case-insensitive).
+//
 // SetValueForHTTPHeaderField calls the underlying SetValueForHTTPHeaderField.
 func (x *MutableURLRequest) SetValueForHTTPHeaderField(value string, field string) {
 	x.inner.SetValueForHTTPHeaderField(foundation.NSStringStringWithUTF8String(value), foundation.NSStringStringWithUTF8String(field))
 }
 
+// @method addValue:forHTTPHeaderField: @abstract Adds an HTTP header field in the current header dictionary. @discussion This method provides a way to add values to header fields incrementally. If a value was previously set for the given header field, the given value is appended to the previously-existing value. The appropriate field delimiter, a comma in the case of HTTP, is added by the implementation, and should not be added to the given value by the caller. Note that, in keeping with the HTTP RFC, HTTP header field names are case-insensitive. @param value the header field value. @param field the header field name (case-insensitive).
+//
 // AddValueForHTTPHeaderField calls the underlying AddValueForHTTPHeaderField.
 func (x *MutableURLRequest) AddValueForHTTPHeaderField(value string, field string) {
 	x.inner.AddValueForHTTPHeaderField(foundation.NSStringStringWithUTF8String(value), foundation.NSStringStringWithUTF8String(field))

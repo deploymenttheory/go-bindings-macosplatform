@@ -40,18 +40,24 @@ func NewSavePanel() *SavePanel {
 	return &SavePanel{inner: raw.NSSavePanelFromID(_id)}
 }
 
+// Sets and returns the identifier. The panel's current state such as the root directory and the current directory are saved and restored relative to the identifier. - Note: When the identifier is changed, the properties that depend on the identifier are updated from user defaults. Properties that have a null value in user defaults are not changed (and keep their existing value). - Note: Can only be set during the configuration phase.
+//
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *SavePanel) WithIdentifier(identifier *foundation.NSString) *SavePanel {
 	x.inner.SetIdentifier(identifier)
 	return x
 }
 
+// `NSSavePanel`/`NSOpenPanel`: Sets and returns the directory that is displayed. Set to `nil` to display the default directory. This method will not block to resolve the URL, and the directory will asynchronously be set, if required. - Note: Can only be set during the configuration phase.
+//
 // WithDirectoryURL sets the directoryURL property and returns the receiver for chaining.
 func (x *SavePanel) WithDirectoryURL(directoryURL string) *SavePanel {
 	x.inner.SetDirectoryURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(directoryURL)))
 	return x
 }
 
+// `NSSavePanel`: An array of UTTypes specifying the file types the user can save the file as. Set to `@[]` to specify that any file type can be used. If no extension is given by the user, the first preferred extension from the array will be used as the extension for the save panel. If the user specifies a type not in the array, and `allowsOtherFileTypes` is `YES`, they will be presented with another dialog when prompted to save. The default value is the empty array. `NSOpenPanel`: This property determines which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. `allowedContentTypes` can be changed while the panel is running (ie: from an accessory view). This is also known as the "enabled file types". Set to `@[]` to specify that all files should be enabled.
+//
 // WithAllowedContentTypes sets the collection, converting the Go slice to an NSArray.
 func (x *SavePanel) WithAllowedContentTypes(items ...*uniformtypeidentifiers.UTType) *SavePanel {
 	if len(items) == 0 {
@@ -70,84 +76,112 @@ func (x *SavePanel) WithAllowedContentTypes(items ...*uniformtypeidentifiers.UTT
 	return x
 }
 
+// `NSSavePanel`: Returns a BOOL value that indicates whether the panel allows the user to save files with an extension that is not in the list of `allowedFileTypes`. `NSOpenPanel`: Not used.
+//
 // WithAllowsOtherFileTypes sets the allowsOtherFileTypes property and returns the receiver for chaining.
 func (x *SavePanel) WithAllowsOtherFileTypes(allowsOtherFileTypes bool) *SavePanel {
 	x.inner.SetAllowsOtherFileTypes(allowsOtherFileTypes)
 	return x
 }
 
+// `NSSavePanel`:The current type. If set to `nil`, resets to the first allowed content type. Returns `nil` if `allowedContentTypes` is empty. `NSOpenPanel`: Not used. - Note: Asserts that `currentContentType` conforms to `UTTypeData` or `UTTypeDirectory`.
+//
 // WithCurrentContentType sets the currentContentType property and returns the receiver for chaining.
 func (x *SavePanel) WithCurrentContentType(currentContentType *uniformtypeidentifiers.UTType) *SavePanel {
 	x.inner.SetCurrentContentType(currentContentType)
 	return x
 }
 
+// Sets and returns the accessory view shown in the panel. For applications that link on 10.6 and later, the accessoryView's frame will be observed, and any changes the programmer makes to the frame will automatically be reflected in the panel (including animated changes to the frame height). For applications that link on 26.0 and later and use the Liquid Glass design, the accessoryView's control metrics will be the larger Liquid Glass metrics.
+//
 // WithAccessoryView sets the accessoryView property and returns the receiver for chaining.
 func (x *SavePanel) WithAccessoryView(accessoryView ViewProvider) *SavePanel {
 	x.inner.SetAccessoryView(accessoryView.asView())
 	return x
 }
 
+// `NSSavePanel`/`NSOpenPanel`: Set to `YES` to show the "New Folder" button. Default is `YES`.
+//
 // WithCanCreateDirectories sets the canCreateDirectories property and returns the receiver for chaining.
 func (x *SavePanel) WithCanCreateDirectories(canCreateDirectories bool) *SavePanel {
 	x.inner.SetCanCreateDirectories(canCreateDirectories)
 	return x
 }
 
+// `NSSavePanel`: Set to `YES` to show the "Hide Extension" menu item. `NSOpenPanel`: Not used.
+//
 // WithCanSelectHiddenExtension sets the canSelectHiddenExtension property and returns the receiver for chaining.
 func (x *SavePanel) WithCanSelectHiddenExtension(canSelectHiddenExtension bool) *SavePanel {
 	x.inner.SetCanSelectHiddenExtension(canSelectHiddenExtension)
 	return x
 }
 
+// `NSSavePanel`: Set to `YES` if the filename extension should be hidden. Otherwise, `NO` if the filename extension should be shown. Default is `YES`. - Note: Can only be set during the configuration phase. `NSOpenPanel`: Not used.
+//
 // WithExtensionHidden sets the extensionHidden property and returns the receiver for chaining.
 func (x *SavePanel) WithExtensionHidden(extensionHidden bool) *SavePanel {
 	x.inner.SetExtensionHidden(extensionHidden)
 	return x
 }
 
+// `NSSavePanel`/`NSOpenPanel`: If set to `YES`, the user can navigate into file packages as if they were directories. Default is `NO`.
+//
 // WithTreatsFilePackagesAsDirectories sets the treatsFilePackagesAsDirectories property and returns the receiver for chaining.
 func (x *SavePanel) WithTreatsFilePackagesAsDirectories(treatsFilePackagesAsDirectories bool) *SavePanel {
 	x.inner.SetTreatsFilePackagesAsDirectories(treatsFilePackagesAsDirectories)
 	return x
 }
 
+// `NSSavePanel`/`NSOpenPanel`: Sets the text shown on the Open or Save button. If set to an empty string, it will show a localized "Open" for the NSOpenPanel and "Save" for the NSSavePanel. The default value will be the correct localized prompt for the open or save panel, as appropriate.
+//
 // WithPrompt sets the prompt property and returns the receiver for chaining.
 func (x *SavePanel) WithPrompt(prompt string) *SavePanel {
 	x.inner.SetPrompt(foundation.NSStringStringWithUTF8String(prompt))
 	return x
 }
 
+// `NSSavePanel`: Sets and returns the text shown to the left of the "name field". Default value is a localized "Save As:" string. `NSOpenPanel`: Not used.
+//
 // WithNameFieldLabel sets the nameFieldLabel property and returns the receiver for chaining.
 func (x *SavePanel) WithNameFieldLabel(nameFieldLabel string) *SavePanel {
 	x.inner.SetNameFieldLabel(foundation.NSStringStringWithUTF8String(nameFieldLabel))
 	return x
 }
 
+// `NSSavePanel`: Sets and returns the user-editable file name shown in the name field. - Note: Calling the deprecated methods that take a "name:" parameter will overwrite any values set before the panel is shown. - Note: If `[panel isExtensionHidden]` is set to `YES`, the extension will be hidden. - Note: Can only be set during the configuration phase. `NSOpenPanel`: Not used.
+//
 // WithNameFieldStringValue sets the nameFieldStringValue property and returns the receiver for chaining.
 func (x *SavePanel) WithNameFieldStringValue(nameFieldStringValue string) *SavePanel {
 	x.inner.SetNameFieldStringValue(foundation.NSStringStringWithUTF8String(nameFieldStringValue))
 	return x
 }
 
+// `NSSavePanel`/`NSOpenPanel`: Sets and returns the message shown under title of the panel.
+//
 // WithMessage sets the message property and returns the receiver for chaining.
 func (x *SavePanel) WithMessage(message string) *SavePanel {
 	x.inner.SetMessage(foundation.NSStringStringWithUTF8String(message))
 	return x
 }
 
+// `NSSavePanel`/`NSOpenPanel`: If `showsHiddenFiles` is set to `YES`, files that are normally hidden from the user are displayed. This method was published in Mac OS 10.6, but has existed since Mac OS 10.4. This property is KVO compliant. The user may invoke the keyboard shortcut (cmd-shift-.) to show or hide hidden files. Any user interface shown in an an accessory view should be updated by using key value observing (KVO) to watch for changes of this property. Alternatively, the user interface can be directly bound to this property. The default value is `NO`.
+//
 // WithShowsHiddenFiles sets the showsHiddenFiles property and returns the receiver for chaining.
 func (x *SavePanel) WithShowsHiddenFiles(showsHiddenFiles bool) *SavePanel {
 	x.inner.SetShowsHiddenFiles(showsHiddenFiles)
 	return x
 }
 
+// `NSSavePanel`: Shows or hides the "Tags" field in the receiver. By passing `YES`, you become responsible for setting Tag names on the resulting file after saving is complete. Default is `YES`. `NSOpenPanel`: Not used.
+//
 // WithShowsTagField sets the showsTagField property and returns the receiver for chaining.
 func (x *SavePanel) WithShowsTagField(showsTagField bool) *SavePanel {
 	x.inner.SetShowsTagField(showsTagField)
 	return x
 }
 
+// `NSSavePanel`: When -showsTagField returns YES, set any initial Tag names to be displayed, if necessary, prior to displaying the receiver. Also, if the user clicks "Save", take the result of -tagNames, and set them on the resulting file after saving is complete. Tag names are NSStrings, arrays of which can be used directly with the NSURLTagNamesKey API for getting and setting tags on files. Passing `nil` or an empty array to -setTagNames: will result in no initial Tag names appearing in the receiver. When -showsTagField returns YES, -tagNames always returns a non-nil array, and when NO, -tagNames always returns `nil`. `NSOpenPanel`: Not used.
+//
 // WithTagNames sets the collection, converting the Go slice to an NSArray.
 func (x *SavePanel) WithTagNames(items ...*foundation.NSString) *SavePanel {
 	if len(items) == 0 {
@@ -166,12 +200,16 @@ func (x *SavePanel) WithTagNames(items ...*foundation.NSString) *SavePanel {
 	return x
 }
 
+// `NSSavePanel`: Whether or not to show a control for selecting the type of the saved file. The control shows the types in `allowedContentTypes`. Default is `NO`. `NSOpenPanel`: Not used. - Note: If `allowedContentTypes` is empty, the control is not displayed.
+//
 // WithShowsContentTypes sets the showsContentTypes property and returns the receiver for chaining.
 func (x *SavePanel) WithShowsContentTypes(showsContentTypes bool) *SavePanel {
 	x.inner.SetShowsContentTypes(showsContentTypes)
 	return x
 }
 
+// `NSSavePanel`: An array of NSStrings specifying the file types the user can save the file as. The file type can be a common file extension, or a UTI. A nil value indicates that any file type can be used. If the array is not nil and the array contains no items, an exception will be raised. If no extension is given by the user, the first item in the allowedFileTypes will be used as the extension for the save panel. If the user specifies a type not in the array, and 'allowsOtherFileTypes' is YES, they will be presented with another dialog when prompted to save. The default value is 'nil'. `NSOpenPanel`: On versions less than 10.6, this property is ignored. For applications that link against 10.6 and higher, this property will determine which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. The allowedFileTypes can be changed while the panel is running (ie: from an accessory view). The file type can be a common file extension, or a UTI. This is also known as the "enabled file types". A nil value indicates that all files should be enabled.
+//
 // WithAllowedFileTypes sets the collection, converting the Go slice to an NSArray.
 func (x *SavePanel) WithAllowedFileTypes(items ...*foundation.NSString) *SavePanel {
 	if len(items) == 0 {
@@ -214,24 +252,32 @@ func (x *SavePanel) WithTitle(title string) *SavePanel {
 	return x
 }
 
+// Secondary text that may be displayed adjacent to or below the primary title depending on the configuration of the window. A value of empty string will remove the subtitle from the window layout.
+//
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *SavePanel) WithSubtitle(subtitle string) *SavePanel {
 	x.inner.NSPanel.NSWindow.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
 	return x
 }
 
+// See the enum values for how this property works.
+//
 // WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
 func (x *SavePanel) WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *SavePanel {
 	x.inner.NSPanel.NSWindow.SetTitleVisibility(raw.NSWindowTitleVisibility(titleVisibility))
 	return x
 }
 
+// When \c YES, the titlebar doesn't draw its background, allowing all buttons to show through, and "click through" to happen. In general, this is only useful when \c NSFullSizeContentViewWindowMask is set.
+//
 // WithTitlebarAppearsTransparent sets the titlebarAppearsTransparent property and returns the receiver for chaining.
 func (x *SavePanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *SavePanel {
 	x.inner.NSPanel.NSWindow.SetTitlebarAppearsTransparent(titlebarAppearsTransparent)
 	return x
 }
 
+// Specifies how the titlebar area of the window should appear when the window displays an NSToolbar
+//
 // WithToolbarStyle sets the toolbarStyle property and returns the receiver for chaining.
 func (x *SavePanel) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *SavePanel {
 	x.inner.NSPanel.NSWindow.SetToolbarStyle(raw.NSWindowToolbarStyle(toolbarStyle))
@@ -256,6 +302,8 @@ func (x *SavePanel) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitleba
 	return x
 }
 
+// If url is not nil and its path is not empty, the window will show a document icon in the titlebar. If the url represents a filename or other resource with a known icon, that icon will be used as the document icon.  Otherwise the default document icon will be used.  The icon can be customized using `-[[NSWindow standardWindowButton:NSWindowDocumentIconButton] setImage:customImage]`.  If url is not nil and its path is not empty, the window will have a pop-up menu which can be shown via command-click on the area containing the document icon and title.  By default, this menu will display the path components of the url.  The presence and contents of this menu can be controlled by the delegate method `-[window:shouldPopUpDocumentPathMenu:]` If the url is nil or has an empty path, the window will not show a document icon and will not have a pop-up menu available via command-click.
+//
 // WithRepresentedURL sets the representedURL property and returns the receiver for chaining.
 func (x *SavePanel) WithRepresentedURL(representedURL string) *SavePanel {
 	x.inner.NSPanel.NSWindow.SetRepresentedURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(representedURL)))
@@ -286,6 +334,8 @@ func (x *SavePanel) WithDelegate(delegate raw.NSWindowDelegate) *SavePanel {
 	return x
 }
 
+// @note The styleMask can only be set on macOS 10.6 and later. Valid \c styleMask settings have the same restrictions as the \c styleMask passed to `-initWithContentRect:styleMask:backing:defer:`.  Some \c styleMask changes will cause the view hierarchy to be rebuilt, since there is a different subclass for the top level view of a borderless window than for the top level view of a titled window.
+//
 // WithStyleMask sets the styleMask property and returns the receiver for chaining.
 func (x *SavePanel) WithStyleMask(styleMask NSWindowStyleMask) *SavePanel {
 	x.inner.NSPanel.NSWindow.SetStyleMask(raw.NSWindowStyleMask(styleMask))
@@ -358,6 +408,8 @@ func (x *SavePanel) WithHidesOnDeactivate(hidesOnDeactivate bool) *SavePanel {
 	return x
 }
 
+// Indicates whether a window can be hidden during `-[NSApplication hide:]`.  Default is \c YES.
+//
 // WithCanHide sets the canHide property and returns the receiver for chaining.
 func (x *SavePanel) WithCanHide(canHide bool) *SavePanel {
 	x.inner.NSPanel.NSWindow.SetCanHide(canHide)
@@ -382,12 +434,16 @@ func (x *SavePanel) WithDocumentEdited(documentEdited bool) *SavePanel {
 	return x
 }
 
+// A Boolean value that indicates whether or not to prevent application termination when the receiving window is presented modally. The value of this property is `YES` if the window should prevent application termination when modal; otherwise, `NO`. The default value is `YES`. However, note that some window subclasses and some windows created indirectly (like those created by UI frameworks like AppKit and SwiftUI), may have different default values. For example, the Open panel and toolbar customization sheets should not prevent application termination, so those windows have `preventsApplicationTerminationWhenModal` set to `NO`. Some `NSAlert`s, like those that are simply informational, have windows that do not prevent application termination by default. Setting this property overrides the default behavior.
+//
 // WithPreventsApplicationTerminationWhenModal sets the preventsApplicationTerminationWhenModal property and returns the receiver for chaining.
 func (x *SavePanel) WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *SavePanel {
 	x.inner.NSPanel.NSWindow.SetPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal)
 	return x
 }
 
+// Default is \c NO. Set to \c YES to allow a window to display tooltips even when the application is in the background.  Note that, enabling tooltips in an inactive application will cause the app to do work any time the mouse passes over the window.  This can degrade system performance. Returns \c YES if this window displays tooltips even when the application is in the background.  To configure this setting you should call `-setAllowsToolTipsWhenApplicationIsInactive:` instead of overriding `-allowsToolTipsWhenApplicationIsInactive`.
+//
 // WithAllowsToolTipsWhenApplicationIsInactive sets the allowsToolTipsWhenApplicationIsInactive property and returns the receiver for chaining.
 func (x *SavePanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *SavePanel {
 	x.inner.NSPanel.NSWindow.SetAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive)
@@ -430,12 +486,16 @@ func (x *SavePanel) WithOpaque(opaque bool) *SavePanel {
 	return x
 }
 
+// `-setSharingType:` specifies whether the window content can be read from another process.  The default sharing type is \c NSWindowSharingReadOnly, which means other processes can read the window content (eg. for window capture) but cannot modify it.  If you set your window sharing type to \c NSWindowSharingNone, so that the content cannot be captured, your window will also not be able to participate in a number of system services, so this setting should be used with caution.
+//
 // WithSharingType sets the sharingType property and returns the receiver for chaining.
 func (x *SavePanel) WithSharingType(sharingType NSWindowSharingType) *SavePanel {
 	x.inner.NSPanel.NSWindow.SetSharingType(raw.NSWindowSharingType(sharingType))
 	return x
 }
 
+// Controls whether threading of view drawing should be enabled for this window.  Defaults to \c YES.  When this is set to \c YES, AppKit's view system is allowed to perform `-drawRect:` activity for the window's views on threads other than the main thread, for views that have `canDrawConcurrently == YES`.  When this is set to \c NO, the window's views will be drawn serially as on 10.5 and earlier, even though some of the views may have `canDrawConcurrently == YES`.
+//
 // WithAllowsConcurrentViewDrawing sets the allowsConcurrentViewDrawing property and returns the receiver for chaining.
 func (x *SavePanel) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *SavePanel {
 	x.inner.NSPanel.NSWindow.SetAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing)
@@ -448,6 +508,8 @@ func (x *SavePanel) WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfi
 	return x
 }
 
+// This API controls whether the receiver is permitted onscreen before the user has logged in.  This property is off by default.  Alert panels and windows presented by input managers are examples of windows which should have this property set.
+//
 // WithCanBecomeVisibleWithoutLogin sets the canBecomeVisibleWithoutLogin property and returns the receiver for chaining.
 func (x *SavePanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *SavePanel {
 	x.inner.NSPanel.NSWindow.SetCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin)
@@ -460,6 +522,8 @@ func (x *SavePanel) WithCollectionBehavior(collectionBehavior NSWindowCollection
 	return x
 }
 
+// Provides for per-window control over automatic orderFront/orderOut animation behaviors added in 10.7.  Can be set to \c NSWindowAnimationBehaviorNone to disable Appkit's automatic animations for a given window, or to one of the other non-Default \c NSWindowAnimationBehavior values to override AppKit's automatic inference of appropriate animation behavior based on the window's apparent type.
+//
 // WithAnimationBehavior sets the animationBehavior property and returns the receiver for chaining.
 func (x *SavePanel) WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *SavePanel {
 	x.inner.NSPanel.NSWindow.SetAnimationBehavior(raw.NSWindowAnimationBehavior(animationBehavior))
@@ -520,6 +584,8 @@ func (x *SavePanel) WithParentWindow(parentWindow WindowProvider) *SavePanel {
 	return x
 }
 
+// If set, the receiver will inherit the appearance of that object, as well as use KVO to observe its effectiveAppearance for changes. Typically this is used for child windows that are shown from a parent window or specific view. Defaults to NSApp.
+//
 // WithAppearanceSource sets the appearanceSource property and returns the receiver for chaining.
 func (x *SavePanel) WithAppearanceSource(appearanceSource *foundation.NSObject) *SavePanel {
 	x.inner.NSPanel.NSWindow.SetAppearanceSource(appearanceSource)
@@ -532,12 +598,16 @@ func (x *SavePanel) WithColorSpace(colorSpace *ColorSpace) *SavePanel {
 	return x
 }
 
+// Specifies the style of separator displayed between the window's titlebar and content. The default value is NSTitlebarSeparatorStyleAutomatic. Changing this value will override any preference made by `NSSplitViewItem`.
+//
 // WithTitlebarSeparatorStyle sets the titlebarSeparatorStyle property and returns the receiver for chaining.
 func (x *SavePanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *SavePanel {
 	x.inner.NSPanel.NSWindow.SetTitlebarSeparatorStyle(raw.NSTitlebarSeparatorStyle(titlebarSeparatorStyle))
 	return x
 }
 
+// The main content view controller for the window. This provides the contentView of the window. Assigning this value will remove the existing contentView and will make the contentViewController.view the main contentView for the window. The default value is nil. The contentViewController only controls the contentView, and not the title of the window. The window title can easily be bound to the contentViewController with the following: [window bind:NSTitleBinding toObject:contentViewController withKeyPath:@"title" options:nil]. Setting the contentViewController will cause the window to resize based on the current size of the contentViewController. Autolayout should be used to restrict the size of the window. The value of the contentViewController is encoded in the NIB. Directly assigning a contentView will clear out the contentViewController.
+//
 // WithContentViewController sets the contentViewController property and returns the receiver for chaining.
 func (x *SavePanel) WithContentViewController(contentViewController ViewControllerProvider) *SavePanel {
 	x.inner.NSPanel.NSWindow.SetContentViewController(contentViewController.asViewController())
@@ -574,12 +644,16 @@ func (x *SavePanel) WithShowsToolbarButton(showsToolbarButton bool) *SavePanel {
 	return x
 }
 
+// Get and set the tabbing mode for this window. This should be set before a window is shown. The default value is \c NSWindowTabbingModeAutomatic. When the value is \c NSWindowTabbingModeAutomatic, the system will look at the \c userTabbingPreference and automatically tab windows together based on the tabbingIdentifier, when it is appropriate to do so.
+//
 // WithTabbingMode sets the tabbingMode property and returns the receiver for chaining.
 func (x *SavePanel) WithTabbingMode(tabbingMode NSWindowTabbingMode) *SavePanel {
 	x.inner.NSPanel.NSWindow.SetTabbingMode(raw.NSWindowTabbingMode(tabbingMode))
 	return x
 }
 
+// Windows with the same \c tabbingIdentifier will have the ability to be tabbed together when a window is being shown. This allows aggregation of similar windows. By default, the \c tabbingIdentifier will be generated based on inherent window properties, such as the window class name, the delegate class name, the window controller class name, and some additional state. Windows can be explicitly made to group together by using the same \c tabbingIdentifier.
+//
 // WithTabbingIdentifier sets the tabbingIdentifier property and returns the receiver for chaining.
 func (x *SavePanel) WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *SavePanel {
 	x.inner.NSPanel.NSWindow.SetTabbingIdentifier(tabbingIdentifier)
@@ -658,6 +732,8 @@ func (x *SavePanel) WithTouchBar(touchBar *TouchBar) *SavePanel {
 	return x
 }
 
+// Refreshes the open or save panel's contents.
+//
 // ValidateVisibleColumns calls the underlying ValidateVisibleColumns.
 func (x *SavePanel) ValidateVisibleColumns() {
 	x.inner.ValidateVisibleColumns()
@@ -673,26 +749,36 @@ func (x *SavePanel) Cancel(sender objc.ID) {
 	x.inner.Cancel(sender)
 }
 
+// `NSSavePanel`/`NSOpenPanel`: Presents the panel as a sheet modal to `window` and returns immediately. Configure the panel before calling this method. The completion handler block will be called after the user has closed the panel, however, the open/save panel sheet may still be on screen. If you require the sheet to be offscreen (for example, to show an alert), first call `[savePanel orderOut:nil]` to close it. The `result` will be `NSModalResponseOK`, `NSModalResponseCancel`, or if the panel fails to display, `NSModalResponseAbort`.
+//
 // BeginSheetModalForWindowCompletionHandler calls the underlying BeginSheetModalForWindowCompletionHandler.
 func (x *SavePanel) BeginSheetModalForWindowCompletionHandler(window *raw.NSWindow, handler func(int)) {
 	x.inner.BeginSheetModalForWindowCompletionHandler(window, handler)
 }
 
+// `NSSavePanel`/`NSOpenPanel`: Presents the panel as a modeless window and returns immediately. Configure the panel before calling this method. The completion handler block will be called after the user has closed the panel. The `result` will be `NSModalResponseOK`, `NSModalResponseCancel`, or if the panel fails to display, `NSModalResponseAbort`.
+//
 // BeginWithCompletionHandler calls the underlying BeginWithCompletionHandler.
 func (x *SavePanel) BeginWithCompletionHandler(handler func(int)) {
 	x.inner.BeginWithCompletionHandler(handler)
 }
 
+// `NSSavePanel`/`NSOpenPanel`: Presents the panel as an application modal window. Returns after the user has closed the panel. - Returns: `NSModalResponseOK`, `NSModalResponseCancel` or if the panel fails to display, `NSModalResponseAbort`.
+//
 // RunModal calls the underlying RunModal.
 func (x *SavePanel) RunModal() int {
 	return x.inner.RunModal()
 }
 
+// `NSSavePanel`: Returns the URL to save the file at. A file may already exist at `url` if the user choose to overwrite it. `NSOpenPanel`: Returns the single filename selected by the user. Note: if -allowsMultipleSelection is set, you should use the -URLs on NSOpenPanel instead.
+//
 // URL calls the underlying URL.
 func (x *SavePanel) URL() *foundation.NSURL {
 	return x.inner.URL()
 }
 
+// Sets and returns the identifier. The panel's current state such as the root directory and the current directory are saved and restored relative to the identifier. - Note: When the identifier is changed, the properties that depend on the identifier are updated from user defaults. Properties that have a null value in user defaults are not changed (and keep their existing value). - Note: Can only be set during the configuration phase.
+//
 // Identifier calls the underlying Identifier.
 func (x *SavePanel) Identifier() string {
 	_r := x.inner.Identifier()
@@ -702,21 +788,29 @@ func (x *SavePanel) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Sets and returns the identifier. The panel's current state such as the root directory and the current directory are saved and restored relative to the identifier. - Note: When the identifier is changed, the properties that depend on the identifier are updated from user defaults. Properties that have a null value in user defaults are not changed (and keep their existing value). - Note: Can only be set during the configuration phase.
+//
 // SetIdentifier calls the underlying SetIdentifier.
 func (x *SavePanel) SetIdentifier(identifier *foundation.NSString) {
 	x.inner.SetIdentifier(identifier)
 }
 
+// `NSSavePanel`/`NSOpenPanel`: Sets and returns the directory that is displayed. Set to `nil` to display the default directory. This method will not block to resolve the URL, and the directory will asynchronously be set, if required. - Note: Can only be set during the configuration phase.
+//
 // DirectoryURL calls the underlying DirectoryURL.
 func (x *SavePanel) DirectoryURL() *foundation.NSURL {
 	return x.inner.DirectoryURL()
 }
 
+// `NSSavePanel`/`NSOpenPanel`: Sets and returns the directory that is displayed. Set to `nil` to display the default directory. This method will not block to resolve the URL, and the directory will asynchronously be set, if required. - Note: Can only be set during the configuration phase.
+//
 // SetDirectoryURL calls the underlying SetDirectoryURL.
 func (x *SavePanel) SetDirectoryURL(directoryURL string) {
 	x.inner.SetDirectoryURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(directoryURL)))
 }
 
+// `NSSavePanel`: An array of UTTypes specifying the file types the user can save the file as. Set to `@[]` to specify that any file type can be used. If no extension is given by the user, the first preferred extension from the array will be used as the extension for the save panel. If the user specifies a type not in the array, and `allowsOtherFileTypes` is `YES`, they will be presented with another dialog when prompted to save. The default value is the empty array. `NSOpenPanel`: This property determines which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. `allowedContentTypes` can be changed while the panel is running (ie: from an accessory view). This is also known as the "enabled file types". Set to `@[]` to specify that all files should be enabled.
+//
 // AllowedContentTypes returns the collection as a Go slice.
 func (x *SavePanel) AllowedContentTypes() []*uniformtypeidentifiers.UTType {
 	arr := x.inner.AllowedContentTypes()
@@ -728,31 +822,43 @@ func (x *SavePanel) AllowedContentTypes() []*uniformtypeidentifiers.UTType {
 	})
 }
 
+// `NSSavePanel`: An array of UTTypes specifying the file types the user can save the file as. Set to `@[]` to specify that any file type can be used. If no extension is given by the user, the first preferred extension from the array will be used as the extension for the save panel. If the user specifies a type not in the array, and `allowsOtherFileTypes` is `YES`, they will be presented with another dialog when prompted to save. The default value is the empty array. `NSOpenPanel`: This property determines which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. `allowedContentTypes` can be changed while the panel is running (ie: from an accessory view). This is also known as the "enabled file types". Set to `@[]` to specify that all files should be enabled.
+//
 // SetAllowedContentTypes calls the underlying SetAllowedContentTypes.
 func (x *SavePanel) SetAllowedContentTypes(allowedContentTypes *foundation.NSArray[*uniformtypeidentifiers.UTType]) {
 	x.inner.SetAllowedContentTypes(allowedContentTypes)
 }
 
+// `NSSavePanel`: Returns a BOOL value that indicates whether the panel allows the user to save files with an extension that is not in the list of `allowedFileTypes`. `NSOpenPanel`: Not used.
+//
 // AllowsOtherFileTypes calls the underlying AllowsOtherFileTypes.
 func (x *SavePanel) AllowsOtherFileTypes() bool {
 	return x.inner.AllowsOtherFileTypes()
 }
 
+// `NSSavePanel`: Returns a BOOL value that indicates whether the panel allows the user to save files with an extension that is not in the list of `allowedFileTypes`. `NSOpenPanel`: Not used.
+//
 // SetAllowsOtherFileTypes calls the underlying SetAllowsOtherFileTypes.
 func (x *SavePanel) SetAllowsOtherFileTypes(allowsOtherFileTypes bool) {
 	x.inner.SetAllowsOtherFileTypes(allowsOtherFileTypes)
 }
 
+// `NSSavePanel`:The current type. If set to `nil`, resets to the first allowed content type. Returns `nil` if `allowedContentTypes` is empty. `NSOpenPanel`: Not used. - Note: Asserts that `currentContentType` conforms to `UTTypeData` or `UTTypeDirectory`.
+//
 // CurrentContentType calls the underlying CurrentContentType.
 func (x *SavePanel) CurrentContentType() *uniformtypeidentifiers.UTType {
 	return x.inner.CurrentContentType()
 }
 
+// `NSSavePanel`:The current type. If set to `nil`, resets to the first allowed content type. Returns `nil` if `allowedContentTypes` is empty. `NSOpenPanel`: Not used. - Note: Asserts that `currentContentType` conforms to `UTTypeData` or `UTTypeDirectory`.
+//
 // SetCurrentContentType calls the underlying SetCurrentContentType.
 func (x *SavePanel) SetCurrentContentType(currentContentType *uniformtypeidentifiers.UTType) {
 	x.inner.SetCurrentContentType(currentContentType)
 }
 
+// Sets and returns the accessory view shown in the panel. For applications that link on 10.6 and later, the accessoryView's frame will be observed, and any changes the programmer makes to the frame will automatically be reflected in the panel (including animated changes to the frame height). For applications that link on 26.0 and later and use the Liquid Glass design, the accessoryView's control metrics will be the larger Liquid Glass metrics.
+//
 // AccessoryView calls the underlying AccessoryView.
 func (x *SavePanel) AccessoryView() *View {
 	_r := x.inner.AccessoryView()
@@ -762,56 +868,78 @@ func (x *SavePanel) AccessoryView() *View {
 	return &View{inner: _r}
 }
 
+// Sets and returns the accessory view shown in the panel. For applications that link on 10.6 and later, the accessoryView's frame will be observed, and any changes the programmer makes to the frame will automatically be reflected in the panel (including animated changes to the frame height). For applications that link on 26.0 and later and use the Liquid Glass design, the accessoryView's control metrics will be the larger Liquid Glass metrics.
+//
 // SetAccessoryView calls the underlying SetAccessoryView.
 func (x *SavePanel) SetAccessoryView(accessoryView *raw.NSView) {
 	x.inner.SetAccessoryView(accessoryView)
 }
 
+// `NSSavePanel`: Returns `YES` if the panel is expanded. Defaults to `NO`. Persists in the user defaults. `NSOpenPanel`: Not used.
+//
 // IsExpanded calls the underlying IsExpanded.
 func (x *SavePanel) IsExpanded() bool {
 	return x.inner.IsExpanded()
 }
 
+// `NSSavePanel`/`NSOpenPanel`: Set to `YES` to show the "New Folder" button. Default is `YES`.
+//
 // CanCreateDirectories calls the underlying CanCreateDirectories.
 func (x *SavePanel) CanCreateDirectories() bool {
 	return x.inner.CanCreateDirectories()
 }
 
+// `NSSavePanel`/`NSOpenPanel`: Set to `YES` to show the "New Folder" button. Default is `YES`.
+//
 // SetCanCreateDirectories calls the underlying SetCanCreateDirectories.
 func (x *SavePanel) SetCanCreateDirectories(canCreateDirectories bool) {
 	x.inner.SetCanCreateDirectories(canCreateDirectories)
 }
 
+// `NSSavePanel`: Set to `YES` to show the "Hide Extension" menu item. `NSOpenPanel`: Not used.
+//
 // CanSelectHiddenExtension calls the underlying CanSelectHiddenExtension.
 func (x *SavePanel) CanSelectHiddenExtension() bool {
 	return x.inner.CanSelectHiddenExtension()
 }
 
+// `NSSavePanel`: Set to `YES` to show the "Hide Extension" menu item. `NSOpenPanel`: Not used.
+//
 // SetCanSelectHiddenExtension calls the underlying SetCanSelectHiddenExtension.
 func (x *SavePanel) SetCanSelectHiddenExtension(canSelectHiddenExtension bool) {
 	x.inner.SetCanSelectHiddenExtension(canSelectHiddenExtension)
 }
 
+// `NSSavePanel`: Set to `YES` if the filename extension should be hidden. Otherwise, `NO` if the filename extension should be shown. Default is `YES`. - Note: Can only be set during the configuration phase. `NSOpenPanel`: Not used.
+//
 // IsExtensionHidden calls the underlying IsExtensionHidden.
 func (x *SavePanel) IsExtensionHidden() bool {
 	return x.inner.IsExtensionHidden()
 }
 
+// `NSSavePanel`: Set to `YES` if the filename extension should be hidden. Otherwise, `NO` if the filename extension should be shown. Default is `YES`. - Note: Can only be set during the configuration phase. `NSOpenPanel`: Not used.
+//
 // SetExtensionHidden calls the underlying SetExtensionHidden.
 func (x *SavePanel) SetExtensionHidden(extensionHidden bool) {
 	x.inner.SetExtensionHidden(extensionHidden)
 }
 
+// `NSSavePanel`/`NSOpenPanel`: If set to `YES`, the user can navigate into file packages as if they were directories. Default is `NO`.
+//
 // TreatsFilePackagesAsDirectories calls the underlying TreatsFilePackagesAsDirectories.
 func (x *SavePanel) TreatsFilePackagesAsDirectories() bool {
 	return x.inner.TreatsFilePackagesAsDirectories()
 }
 
+// `NSSavePanel`/`NSOpenPanel`: If set to `YES`, the user can navigate into file packages as if they were directories. Default is `NO`.
+//
 // SetTreatsFilePackagesAsDirectories calls the underlying SetTreatsFilePackagesAsDirectories.
 func (x *SavePanel) SetTreatsFilePackagesAsDirectories(treatsFilePackagesAsDirectories bool) {
 	x.inner.SetTreatsFilePackagesAsDirectories(treatsFilePackagesAsDirectories)
 }
 
+// `NSSavePanel`/`NSOpenPanel`: Sets the text shown on the Open or Save button. If set to an empty string, it will show a localized "Open" for the NSOpenPanel and "Save" for the NSSavePanel. The default value will be the correct localized prompt for the open or save panel, as appropriate.
+//
 // Prompt calls the underlying Prompt.
 func (x *SavePanel) Prompt() string {
 	_r := x.inner.Prompt()
@@ -821,11 +949,15 @@ func (x *SavePanel) Prompt() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// `NSSavePanel`/`NSOpenPanel`: Sets the text shown on the Open or Save button. If set to an empty string, it will show a localized "Open" for the NSOpenPanel and "Save" for the NSSavePanel. The default value will be the correct localized prompt for the open or save panel, as appropriate.
+//
 // SetPrompt calls the underlying SetPrompt.
 func (x *SavePanel) SetPrompt(prompt string) {
 	x.inner.SetPrompt(foundation.NSStringStringWithUTF8String(prompt))
 }
 
+// `NSSavePanel`: Sets and returns the text shown to the left of the "name field". Default value is a localized "Save As:" string. `NSOpenPanel`: Not used.
+//
 // NameFieldLabel calls the underlying NameFieldLabel.
 func (x *SavePanel) NameFieldLabel() string {
 	_r := x.inner.NameFieldLabel()
@@ -835,11 +967,15 @@ func (x *SavePanel) NameFieldLabel() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// `NSSavePanel`: Sets and returns the text shown to the left of the "name field". Default value is a localized "Save As:" string. `NSOpenPanel`: Not used.
+//
 // SetNameFieldLabel calls the underlying SetNameFieldLabel.
 func (x *SavePanel) SetNameFieldLabel(nameFieldLabel string) {
 	x.inner.SetNameFieldLabel(foundation.NSStringStringWithUTF8String(nameFieldLabel))
 }
 
+// `NSSavePanel`: Sets and returns the user-editable file name shown in the name field. - Note: Calling the deprecated methods that take a "name:" parameter will overwrite any values set before the panel is shown. - Note: If `[panel isExtensionHidden]` is set to `YES`, the extension will be hidden. - Note: Can only be set during the configuration phase. `NSOpenPanel`: Not used.
+//
 // NameFieldStringValue calls the underlying NameFieldStringValue.
 func (x *SavePanel) NameFieldStringValue() string {
 	_r := x.inner.NameFieldStringValue()
@@ -849,11 +985,15 @@ func (x *SavePanel) NameFieldStringValue() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// `NSSavePanel`: Sets and returns the user-editable file name shown in the name field. - Note: Calling the deprecated methods that take a "name:" parameter will overwrite any values set before the panel is shown. - Note: If `[panel isExtensionHidden]` is set to `YES`, the extension will be hidden. - Note: Can only be set during the configuration phase. `NSOpenPanel`: Not used.
+//
 // SetNameFieldStringValue calls the underlying SetNameFieldStringValue.
 func (x *SavePanel) SetNameFieldStringValue(nameFieldStringValue string) {
 	x.inner.SetNameFieldStringValue(foundation.NSStringStringWithUTF8String(nameFieldStringValue))
 }
 
+// `NSSavePanel`/`NSOpenPanel`: Sets and returns the message shown under title of the panel.
+//
 // Message calls the underlying Message.
 func (x *SavePanel) Message() string {
 	_r := x.inner.Message()
@@ -863,31 +1003,43 @@ func (x *SavePanel) Message() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// `NSSavePanel`/`NSOpenPanel`: Sets and returns the message shown under title of the panel.
+//
 // SetMessage calls the underlying SetMessage.
 func (x *SavePanel) SetMessage(message string) {
 	x.inner.SetMessage(foundation.NSStringStringWithUTF8String(message))
 }
 
+// `NSSavePanel`/`NSOpenPanel`: If `showsHiddenFiles` is set to `YES`, files that are normally hidden from the user are displayed. This method was published in Mac OS 10.6, but has existed since Mac OS 10.4. This property is KVO compliant. The user may invoke the keyboard shortcut (cmd-shift-.) to show or hide hidden files. Any user interface shown in an an accessory view should be updated by using key value observing (KVO) to watch for changes of this property. Alternatively, the user interface can be directly bound to this property. The default value is `NO`.
+//
 // ShowsHiddenFiles calls the underlying ShowsHiddenFiles.
 func (x *SavePanel) ShowsHiddenFiles() bool {
 	return x.inner.ShowsHiddenFiles()
 }
 
+// `NSSavePanel`/`NSOpenPanel`: If `showsHiddenFiles` is set to `YES`, files that are normally hidden from the user are displayed. This method was published in Mac OS 10.6, but has existed since Mac OS 10.4. This property is KVO compliant. The user may invoke the keyboard shortcut (cmd-shift-.) to show or hide hidden files. Any user interface shown in an an accessory view should be updated by using key value observing (KVO) to watch for changes of this property. Alternatively, the user interface can be directly bound to this property. The default value is `NO`.
+//
 // SetShowsHiddenFiles calls the underlying SetShowsHiddenFiles.
 func (x *SavePanel) SetShowsHiddenFiles(showsHiddenFiles bool) {
 	x.inner.SetShowsHiddenFiles(showsHiddenFiles)
 }
 
+// `NSSavePanel`: Shows or hides the "Tags" field in the receiver. By passing `YES`, you become responsible for setting Tag names on the resulting file after saving is complete. Default is `YES`. `NSOpenPanel`: Not used.
+//
 // ShowsTagField calls the underlying ShowsTagField.
 func (x *SavePanel) ShowsTagField() bool {
 	return x.inner.ShowsTagField()
 }
 
+// `NSSavePanel`: Shows or hides the "Tags" field in the receiver. By passing `YES`, you become responsible for setting Tag names on the resulting file after saving is complete. Default is `YES`. `NSOpenPanel`: Not used.
+//
 // SetShowsTagField calls the underlying SetShowsTagField.
 func (x *SavePanel) SetShowsTagField(showsTagField bool) {
 	x.inner.SetShowsTagField(showsTagField)
 }
 
+// `NSSavePanel`: When -showsTagField returns YES, set any initial Tag names to be displayed, if necessary, prior to displaying the receiver. Also, if the user clicks "Save", take the result of -tagNames, and set them on the resulting file after saving is complete. Tag names are NSStrings, arrays of which can be used directly with the NSURLTagNamesKey API for getting and setting tags on files. Passing `nil` or an empty array to -setTagNames: will result in no initial Tag names appearing in the receiver. When -showsTagField returns YES, -tagNames always returns a non-nil array, and when NO, -tagNames always returns `nil`. `NSOpenPanel`: Not used.
+//
 // TagNames returns the collection as a Go slice.
 func (x *SavePanel) TagNames() []string {
 	arr := x.inner.TagNames()
@@ -899,16 +1051,22 @@ func (x *SavePanel) TagNames() []string {
 	})
 }
 
+// `NSSavePanel`: When -showsTagField returns YES, set any initial Tag names to be displayed, if necessary, prior to displaying the receiver. Also, if the user clicks "Save", take the result of -tagNames, and set them on the resulting file after saving is complete. Tag names are NSStrings, arrays of which can be used directly with the NSURLTagNamesKey API for getting and setting tags on files. Passing `nil` or an empty array to -setTagNames: will result in no initial Tag names appearing in the receiver. When -showsTagField returns YES, -tagNames always returns a non-nil array, and when NO, -tagNames always returns `nil`. `NSOpenPanel`: Not used.
+//
 // SetTagNames calls the underlying SetTagNames.
 func (x *SavePanel) SetTagNames(tagNames *foundation.NSArray[*foundation.NSString]) {
 	x.inner.SetTagNames(tagNames)
 }
 
+// `NSSavePanel`: Whether or not to show a control for selecting the type of the saved file. The control shows the types in `allowedContentTypes`. Default is `NO`. `NSOpenPanel`: Not used. - Note: If `allowedContentTypes` is empty, the control is not displayed.
+//
 // ShowsContentTypes calls the underlying ShowsContentTypes.
 func (x *SavePanel) ShowsContentTypes() bool {
 	return x.inner.ShowsContentTypes()
 }
 
+// `NSSavePanel`: Whether or not to show a control for selecting the type of the saved file. The control shows the types in `allowedContentTypes`. Default is `NO`. `NSOpenPanel`: Not used. - Note: If `allowedContentTypes` is empty, the control is not displayed.
+//
 // SetShowsContentTypes calls the underlying SetShowsContentTypes.
 func (x *SavePanel) SetShowsContentTypes(showsContentTypes bool) {
 	x.inner.SetShowsContentTypes(showsContentTypes)
@@ -966,6 +1124,8 @@ func (x *SavePanel) SelectText(sender objc.ID) {
 	x.inner.SelectText(sender)
 }
 
+// `NSSavePanel`: An array of NSStrings specifying the file types the user can save the file as. The file type can be a common file extension, or a UTI. A nil value indicates that any file type can be used. If the array is not nil and the array contains no items, an exception will be raised. If no extension is given by the user, the first item in the allowedFileTypes will be used as the extension for the save panel. If the user specifies a type not in the array, and 'allowsOtherFileTypes' is YES, they will be presented with another dialog when prompted to save. The default value is 'nil'. `NSOpenPanel`: On versions less than 10.6, this property is ignored. For applications that link against 10.6 and higher, this property will determine which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. The allowedFileTypes can be changed while the panel is running (ie: from an accessory view). The file type can be a common file extension, or a UTI. This is also known as the "enabled file types". A nil value indicates that all files should be enabled.
+//
 // AllowedFileTypes returns the collection as a Go slice.
 func (x *SavePanel) AllowedFileTypes() []string {
 	arr := x.inner.AllowedFileTypes()
@@ -977,6 +1137,8 @@ func (x *SavePanel) AllowedFileTypes() []string {
 	})
 }
 
+// `NSSavePanel`: An array of NSStrings specifying the file types the user can save the file as. The file type can be a common file extension, or a UTI. A nil value indicates that any file type can be used. If the array is not nil and the array contains no items, an exception will be raised. If no extension is given by the user, the first item in the allowedFileTypes will be used as the extension for the save panel. If the user specifies a type not in the array, and 'allowsOtherFileTypes' is YES, they will be presented with another dialog when prompted to save. The default value is 'nil'. `NSOpenPanel`: On versions less than 10.6, this property is ignored. For applications that link against 10.6 and higher, this property will determine which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. The allowedFileTypes can be changed while the panel is running (ie: from an accessory view). The file type can be a common file extension, or a UTI. This is also known as the "enabled file types". A nil value indicates that all files should be enabled.
+//
 // SetAllowedFileTypes calls the underlying SetAllowedFileTypes.
 func (x *SavePanel) SetAllowedFileTypes(allowedFileTypes *foundation.NSArray[*foundation.NSString]) {
 	x.inner.SetAllowedFileTypes(allowedFileTypes)

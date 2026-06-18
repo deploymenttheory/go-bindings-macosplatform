@@ -36,83 +36,111 @@ func NewActivitySummary() *ActivitySummary {
 	return &ActivitySummary{inner: raw.HKActivitySummaryFromID(_id)}
 }
 
+// @property      activityMoveMode @abstract      The move mode of this activity summary @discussion    The move mode of an activity summary determines if activeEnergyBurned or appleMoveTime are used for the move ring.
+//
 // WithActivityMoveMode sets the activityMoveMode property and returns the receiver for chaining.
 func (x *ActivitySummary) WithActivityMoveMode(activityMoveMode HKActivityMoveMode) *ActivitySummary {
 	x.inner.SetActivityMoveMode(raw.HKActivityMoveMode(activityMoveMode))
 	return x
 }
 
+// @property paused @abstract The paused state of this activity summary @discussion The paused state of an activity summary indicates if the user is tracking their rings for the given day.
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *ActivitySummary) WithPaused(paused bool) *ActivitySummary {
 	x.inner.SetPaused(paused)
 	return x
 }
 
+// @property      activeEnergyBurned @abstract      The amount of active energy that the user burned. @discussion    This quantity is compatible with energy units.
+//
 // WithActiveEnergyBurned sets the activeEnergyBurned property and returns the receiver for chaining.
 func (x *ActivitySummary) WithActiveEnergyBurned(activeEnergyBurned *Quantity) *ActivitySummary {
 	x.inner.SetActiveEnergyBurned(activeEnergyBurned.Unwrap())
 	return x
 }
 
+// @property      appleMoveTime @abstract      The amount of move time that the user performed. @discussion    This quantity is compatible with time units. The measurement criteria of move time time is defined by Apple.
+//
 // WithAppleMoveTime sets the appleMoveTime property and returns the receiver for chaining.
 func (x *ActivitySummary) WithAppleMoveTime(appleMoveTime *Quantity) *ActivitySummary {
 	x.inner.SetAppleMoveTime(appleMoveTime.Unwrap())
 	return x
 }
 
+// @property      appleExerciseTime @abstract      The amount of exercise time that the user performed. @discussion    This quantity is compatible with time units. The measurement criteria of exercise time is defined by Apple.
+//
 // WithAppleExerciseTime sets the appleExerciseTime property and returns the receiver for chaining.
 func (x *ActivitySummary) WithAppleExerciseTime(appleExerciseTime *Quantity) *ActivitySummary {
 	x.inner.SetAppleExerciseTime(appleExerciseTime.Unwrap())
 	return x
 }
 
+// @property      appleStandHours @abstract      The number of stand hours that the user earned. @discussion     This quantity is compatible with the count unit. The measurement criteria of stand hours is defined by Apple.
+//
 // WithAppleStandHours sets the appleStandHours property and returns the receiver for chaining.
 func (x *ActivitySummary) WithAppleStandHours(appleStandHours *Quantity) *ActivitySummary {
 	x.inner.SetAppleStandHours(appleStandHours.Unwrap())
 	return x
 }
 
+// @property      activeEnergyBurnedGoal @abstract      The user's active energy goal for the day. @discussion    This quantity is compatible with energy units.
+//
 // WithActiveEnergyBurnedGoal sets the activeEnergyBurnedGoal property and returns the receiver for chaining.
 func (x *ActivitySummary) WithActiveEnergyBurnedGoal(activeEnergyBurnedGoal *Quantity) *ActivitySummary {
 	x.inner.SetActiveEnergyBurnedGoal(activeEnergyBurnedGoal.Unwrap())
 	return x
 }
 
+// @property      appleMoveTimeGoal @abstract      The user's move time goal for the day. @discussion    This quantity is compatible with time units.
+//
 // WithAppleMoveTimeGoal sets the appleMoveTimeGoal property and returns the receiver for chaining.
 func (x *ActivitySummary) WithAppleMoveTimeGoal(appleMoveTimeGoal *Quantity) *ActivitySummary {
 	x.inner.SetAppleMoveTimeGoal(appleMoveTimeGoal.Unwrap())
 	return x
 }
 
+// @property      appleExerciseTimeGoal @abstract      The user's exercise time goal for the day. @discussion    This quantity is compatible with time units.
+//
 // WithAppleExerciseTimeGoal sets the appleExerciseTimeGoal property and returns the receiver for chaining.
 func (x *ActivitySummary) WithAppleExerciseTimeGoal(appleExerciseTimeGoal *Quantity) *ActivitySummary {
 	x.inner.SetAppleExerciseTimeGoal(appleExerciseTimeGoal.Unwrap())
 	return x
 }
 
+// @property      exerciseTimeGoal @abstract      The user's exercise time goal for the day. @discussion    This quantity is compatible with time units.
+//
 // WithExerciseTimeGoal sets the exerciseTimeGoal property and returns the receiver for chaining.
 func (x *ActivitySummary) WithExerciseTimeGoal(exerciseTimeGoal *Quantity) *ActivitySummary {
 	x.inner.SetExerciseTimeGoal(exerciseTimeGoal.Unwrap())
 	return x
 }
 
+// @property      appleStandHoursGoal @abstract      The user's active stand hours goal for the day. @discussion    This quantity is compatible with the count unit.
+//
 // WithAppleStandHoursGoal sets the appleStandHoursGoal property and returns the receiver for chaining.
 func (x *ActivitySummary) WithAppleStandHoursGoal(appleStandHoursGoal *Quantity) *ActivitySummary {
 	x.inner.SetAppleStandHoursGoal(appleStandHoursGoal.Unwrap())
 	return x
 }
 
+// @property      standHoursGoal @abstract      The user's active stand hours goal for the day. @discussion    This quantity is compatible with the count unit.
+//
 // WithStandHoursGoal sets the standHoursGoal property and returns the receiver for chaining.
 func (x *ActivitySummary) WithStandHoursGoal(standHoursGoal *Quantity) *ActivitySummary {
 	x.inner.SetStandHoursGoal(standHoursGoal.Unwrap())
 	return x
 }
 
+// @method        dateComponentsForCalendar: @abstract      The date components representing the day for this particular HKActivitySummary. @discussion    These date components will contain era, year, month, and day components in the provided calendar.
+//
 // DateComponentsForCalendar calls the underlying DateComponentsForCalendar.
 func (x *ActivitySummary) DateComponentsForCalendar(calendar *foundation.NSCalendar) *foundation.NSDateComponents {
 	return x.inner.DateComponentsForCalendar(calendar)
 }
 
+// @property      activityMoveMode @abstract      The move mode of this activity summary @discussion    The move mode of an activity summary determines if activeEnergyBurned or appleMoveTime are used for the move ring.
+//
 // ActivityMoveMode calls the underlying ActivityMoveMode.
 func (x *ActivitySummary) ActivityMoveMode() HKActivityMoveMode {
 	return HKActivityMoveMode(x.inner.ActivityMoveMode())
@@ -123,6 +151,8 @@ func (x *ActivitySummary) SetActivityMoveMode(activityMoveMode HKActivityMoveMod
 	x.inner.SetActivityMoveMode(raw.HKActivityMoveMode(activityMoveMode))
 }
 
+// @property paused @abstract The paused state of this activity summary @discussion The paused state of an activity summary indicates if the user is tracking their rings for the given day.
+//
 // IsPaused calls the underlying IsPaused.
 func (x *ActivitySummary) IsPaused() bool {
 	return x.inner.IsPaused()
@@ -133,6 +163,8 @@ func (x *ActivitySummary) SetPaused(paused bool) {
 	x.inner.SetPaused(paused)
 }
 
+// @property      activeEnergyBurned @abstract      The amount of active energy that the user burned. @discussion    This quantity is compatible with energy units.
+//
 // ActiveEnergyBurned calls the underlying ActiveEnergyBurned.
 func (x *ActivitySummary) ActiveEnergyBurned() *Quantity {
 	_r := x.inner.ActiveEnergyBurned()
@@ -147,6 +179,8 @@ func (x *ActivitySummary) SetActiveEnergyBurned(activeEnergyBurned *raw.HKQuanti
 	x.inner.SetActiveEnergyBurned(activeEnergyBurned)
 }
 
+// @property      appleMoveTime @abstract      The amount of move time that the user performed. @discussion    This quantity is compatible with time units. The measurement criteria of move time time is defined by Apple.
+//
 // AppleMoveTime calls the underlying AppleMoveTime.
 func (x *ActivitySummary) AppleMoveTime() *Quantity {
 	_r := x.inner.AppleMoveTime()
@@ -161,6 +195,8 @@ func (x *ActivitySummary) SetAppleMoveTime(appleMoveTime *raw.HKQuantity) {
 	x.inner.SetAppleMoveTime(appleMoveTime)
 }
 
+// @property      appleExerciseTime @abstract      The amount of exercise time that the user performed. @discussion    This quantity is compatible with time units. The measurement criteria of exercise time is defined by Apple.
+//
 // AppleExerciseTime calls the underlying AppleExerciseTime.
 func (x *ActivitySummary) AppleExerciseTime() *Quantity {
 	_r := x.inner.AppleExerciseTime()
@@ -175,6 +211,8 @@ func (x *ActivitySummary) SetAppleExerciseTime(appleExerciseTime *raw.HKQuantity
 	x.inner.SetAppleExerciseTime(appleExerciseTime)
 }
 
+// @property      appleStandHours @abstract      The number of stand hours that the user earned. @discussion     This quantity is compatible with the count unit. The measurement criteria of stand hours is defined by Apple.
+//
 // AppleStandHours calls the underlying AppleStandHours.
 func (x *ActivitySummary) AppleStandHours() *Quantity {
 	_r := x.inner.AppleStandHours()
@@ -189,6 +227,8 @@ func (x *ActivitySummary) SetAppleStandHours(appleStandHours *raw.HKQuantity) {
 	x.inner.SetAppleStandHours(appleStandHours)
 }
 
+// @property      activeEnergyBurnedGoal @abstract      The user's active energy goal for the day. @discussion    This quantity is compatible with energy units.
+//
 // ActiveEnergyBurnedGoal calls the underlying ActiveEnergyBurnedGoal.
 func (x *ActivitySummary) ActiveEnergyBurnedGoal() *Quantity {
 	_r := x.inner.ActiveEnergyBurnedGoal()
@@ -203,6 +243,8 @@ func (x *ActivitySummary) SetActiveEnergyBurnedGoal(activeEnergyBurnedGoal *raw.
 	x.inner.SetActiveEnergyBurnedGoal(activeEnergyBurnedGoal)
 }
 
+// @property      appleMoveTimeGoal @abstract      The user's move time goal for the day. @discussion    This quantity is compatible with time units.
+//
 // AppleMoveTimeGoal calls the underlying AppleMoveTimeGoal.
 func (x *ActivitySummary) AppleMoveTimeGoal() *Quantity {
 	_r := x.inner.AppleMoveTimeGoal()
@@ -217,6 +259,8 @@ func (x *ActivitySummary) SetAppleMoveTimeGoal(appleMoveTimeGoal *raw.HKQuantity
 	x.inner.SetAppleMoveTimeGoal(appleMoveTimeGoal)
 }
 
+// @property      appleExerciseTimeGoal @abstract      The user's exercise time goal for the day. @discussion    This quantity is compatible with time units.
+//
 // AppleExerciseTimeGoal calls the underlying AppleExerciseTimeGoal.
 func (x *ActivitySummary) AppleExerciseTimeGoal() *Quantity {
 	_r := x.inner.AppleExerciseTimeGoal()
@@ -231,6 +275,8 @@ func (x *ActivitySummary) SetAppleExerciseTimeGoal(appleExerciseTimeGoal *raw.HK
 	x.inner.SetAppleExerciseTimeGoal(appleExerciseTimeGoal)
 }
 
+// @property      exerciseTimeGoal @abstract      The user's exercise time goal for the day. @discussion    This quantity is compatible with time units.
+//
 // ExerciseTimeGoal calls the underlying ExerciseTimeGoal.
 func (x *ActivitySummary) ExerciseTimeGoal() *Quantity {
 	_r := x.inner.ExerciseTimeGoal()
@@ -245,6 +291,8 @@ func (x *ActivitySummary) SetExerciseTimeGoal(exerciseTimeGoal *raw.HKQuantity) 
 	x.inner.SetExerciseTimeGoal(exerciseTimeGoal)
 }
 
+// @property      appleStandHoursGoal @abstract      The user's active stand hours goal for the day. @discussion    This quantity is compatible with the count unit.
+//
 // AppleStandHoursGoal calls the underlying AppleStandHoursGoal.
 func (x *ActivitySummary) AppleStandHoursGoal() *Quantity {
 	_r := x.inner.AppleStandHoursGoal()
@@ -259,6 +307,8 @@ func (x *ActivitySummary) SetAppleStandHoursGoal(appleStandHoursGoal *raw.HKQuan
 	x.inner.SetAppleStandHoursGoal(appleStandHoursGoal)
 }
 
+// @property      standHoursGoal @abstract      The user's active stand hours goal for the day. @discussion    This quantity is compatible with the count unit.
+//
 // StandHoursGoal calls the underlying StandHoursGoal.
 func (x *ActivitySummary) StandHoursGoal() *Quantity {
 	_r := x.inner.StandHoursGoal()

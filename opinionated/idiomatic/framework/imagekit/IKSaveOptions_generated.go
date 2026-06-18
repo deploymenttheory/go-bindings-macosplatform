@@ -32,6 +32,8 @@ func SaveOptionsFromID(id objc.ID) *SaveOptions {
 	return &SaveOptions{inner: raw.IKSaveOptionsFromID(id)}
 }
 
+// @method initWithImageProperties:imageUTType: @abstract Initializes IKSaveOptions with metadata and UTType.
+//
 // NewSaveOptionsWithImagePropertiesImageUTType creates a new [SaveOptions].
 func NewSaveOptionsWithImagePropertiesImageUTType(imageProperties *foundation.NSDictionary[objc.ID, objc.ID], imageUTType string) *SaveOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IKSaveOptions")), objc.RegisterName("alloc"))
@@ -39,28 +41,38 @@ func NewSaveOptionsWithImagePropertiesImageUTType(imageProperties *foundation.NS
 	return &SaveOptions{inner: raw.IKSaveOptionsFromID(_id)}
 }
 
+// @property delegate @abstract Delegate of the IKSaveOptions.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SaveOptions) WithDelegate(delegate objc.ID) *SaveOptions {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @property rememberLastSetting @abstract If set, the last used UI choices are preserved for the next time IKSaveOptions is used. [default is YES]
+//
 // WithRememberLastSetting sets the rememberLastSetting property and returns the receiver for chaining.
 func (x *SaveOptions) WithRememberLastSetting(rememberLastSetting bool) *SaveOptions {
 	x.inner.SetRememberLastSetting(rememberLastSetting)
 	return x
 }
 
+// @method addSaveOptionsAccessoryViewToSavePanel: @abstract Adds IKSaveOptions UI to a NSSavePanel.
+//
 // AddSaveOptionsAccessoryViewToSavePanel calls the underlying AddSaveOptionsAccessoryViewToSavePanel.
 func (x *SaveOptions) AddSaveOptionsAccessoryViewToSavePanel(savePanel *appkit.NSSavePanel) {
 	x.inner.AddSaveOptionsAccessoryViewToSavePanel(savePanel)
 }
 
+// @method addSaveOptionsToView: @abstract Adds IKSaveOptions UI to a NSView.
+//
 // AddSaveOptionsToView calls the underlying AddSaveOptionsToView.
 func (x *SaveOptions) AddSaveOptionsToView(view *appkit.NSView) {
 	x.inner.AddSaveOptionsToView(view)
 }
 
+// @property delegate @abstract Delegate of the IKSaveOptions.
+//
 // Delegate calls the underlying Delegate.
 func (x *SaveOptions) Delegate() objc.ID {
 	return x.inner.Delegate()
@@ -71,11 +83,15 @@ func (x *SaveOptions) SetDelegate(delegate objc.ID) {
 	x.inner.SetDelegate(delegate)
 }
 
+// @property imageProperties @abstract current imageProperties (respecting user UI selection).
+//
 // ImageProperties calls the underlying ImageProperties.
 func (x *SaveOptions) ImageProperties() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.ImageProperties()
 }
 
+// @property imageUTType @abstract current imageUTType (respecting user UI selection).
+//
 // ImageUTType calls the underlying ImageUTType.
 func (x *SaveOptions) ImageUTType() string {
 	_r := x.inner.ImageUTType()
@@ -85,11 +101,15 @@ func (x *SaveOptions) ImageUTType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property userSelection @abstract information about the UI settings.
+//
 // UserSelection calls the underlying UserSelection.
 func (x *SaveOptions) UserSelection() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.UserSelection()
 }
 
+// @property rememberLastSetting @abstract If set, the last used UI choices are preserved for the next time IKSaveOptions is used. [default is YES]
+//
 // RememberLastSetting calls the underlying RememberLastSetting.
 func (x *SaveOptions) RememberLastSetting() bool {
 	return x.inner.RememberLastSetting()

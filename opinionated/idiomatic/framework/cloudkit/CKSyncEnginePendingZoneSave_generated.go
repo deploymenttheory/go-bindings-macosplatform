@@ -29,6 +29,8 @@ func SyncEnginePendingZoneSaveFromID(id objc.ID) *SyncEnginePendingZoneSave {
 	return &SyncEnginePendingZoneSave{inner: raw.CKSyncEnginePendingZoneSaveFromID(id)}
 }
 
+// Creates a pending zone save for the specified record zone. - Parameters: - zone: The record zone to save. - Returns: An initialized pending zone save.
+//
 // NewSyncEnginePendingZoneSaveWithZone creates a new [SyncEnginePendingZoneSave].
 func NewSyncEnginePendingZoneSaveWithZone(zone *raw.CKRecordZone) *SyncEnginePendingZoneSave {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEnginePendingZoneSave")), objc.RegisterName("alloc"))

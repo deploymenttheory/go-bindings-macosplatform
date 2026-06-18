@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information about composition tracks added to an AVComposition for a cinematic asset.
+//
 // CompositionInfo wraps [raw.CNCompositionInfo] with a fluent Go API.
 type CompositionInfo struct {
 	inner *raw.CNCompositionInfo
@@ -36,6 +38,8 @@ func NewCompositionInfo() *CompositionInfo {
 	return &CompositionInfo{inner: raw.CNCompositionInfoFromID(_id)}
 }
 
+// Inserts a timeRange of a cinematic source asset into the corresponding tracks of a composition - Parameters: - timeRange: time range of the cinematic asset to be inserted - assetInfo: identifies the tracks of the cinematic asset to be inserted - atTime: the time at which the inserted tracks are to be presented by the composition; `kCMTimeInvalid` may be used to append at the end. - error: AVError if it fails, as with `-[AVMutableCompositionTrack insertTimeRange:ofTrack:atTime:error:]` - Returns: whether the insertion was successful
+//
 // InsertTimeRangeOfCinematicAssetInfoAtTimeError calls the underlying InsertTimeRangeOfCinematicAssetInfoAtTimeError.
 func (x *CompositionInfo) InsertTimeRangeOfCinematicAssetInfoAtTimeError(timeRange coremedia.CMTimeRange, assetInfo *raw.CNAssetInfo, startTime coremedia.CMTime) (bool, error) {
 	return x.inner.InsertTimeRangeOfCinematicAssetInfoAtTimeError(timeRange, assetInfo, startTime)

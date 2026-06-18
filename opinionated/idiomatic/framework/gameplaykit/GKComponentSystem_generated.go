@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A component system is a homogeneous collection of components that are intended to be called at the same time. The system is homogeneous, meaning it only allows members of the same class into the system.
+//
 // ComponentSystem wraps [raw.GKComponentSystem] with a fluent Go API.
 type ComponentSystem struct {
 	inner *raw.GKComponentSystem[objc.ID]
@@ -30,6 +32,8 @@ func ComponentSystemFromID(id objc.ID) *ComponentSystem {
 	return &ComponentSystem{inner: raw.GKComponentSystemFromID[objc.ID](id)}
 }
 
+// Initializes a system for the given component class. The receiver can now only accept components of the given class.
+//
 // NewComponentSystemWithComponentClass creates a new [ComponentSystem].
 func NewComponentSystemWithComponentClass(cls objc.Class) *ComponentSystem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKComponentSystem")), objc.RegisterName("alloc"))
@@ -37,46 +41,64 @@ func NewComponentSystemWithComponentClass(cls objc.Class) *ComponentSystem {
 	return &ComponentSystem{inner: raw.GKComponentSystemFromID[objc.ID](_id)}
 }
 
+// Supports getting components via a [] subscript.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *ComponentSystem) ObjectAtIndexedSubscript(idx uint) objc.ID {
 	return x.inner.ObjectAtIndexedSubscript(idx)
 }
 
+// Adds a component to the system. The component must be of the same class as the system's componentClass. The component is added to the tail of the collection and will be processed after components that were added before it. @throws NSInvalidArgumentException if the component added is not a kind of the system's componentClass.
+//
 // AddComponent calls the underlying AddComponent.
 func (x *ComponentSystem) AddComponent(component objc.ID) {
 	x.inner.AddComponent(component)
 }
 
+// Adds the supported component from the entity's component collection. This is conceptually the same as the pseudo-code: for (GKComponent *component in entity.components) if (component.class == system.componentClass) [system addComponent:component] @see GKEntity.components
+//
 // AddComponentWithEntity calls the underlying AddComponentWithEntity.
 func (x *ComponentSystem) AddComponentWithEntity(entity *raw.GKEntity) {
 	x.inner.AddComponentWithEntity(entity)
 }
 
+// Removes the supported component from the entity's component collection This is conceptually the same as the pseudo-code: for (GKComponent *component in entity.components) if (component.class == system.componentClass) [system removeComponent:component]
+//
 // RemoveComponentWithEntity calls the underlying RemoveComponentWithEntity.
 func (x *ComponentSystem) RemoveComponentWithEntity(entity *raw.GKEntity) {
 	x.inner.RemoveComponentWithEntity(entity)
 }
 
+// Removes a component from the system Does nothing if the component is not in this system
+//
 // RemoveComponent calls the underlying RemoveComponent.
 func (x *ComponentSystem) RemoveComponent(component objc.ID) {
 	x.inner.RemoveComponent(component)
 }
 
+// Updates each component with the given delta time since the last update. Each component thus performs its time based logic with a single message.
+//
 // UpdateWithDeltaTime calls the underlying UpdateWithDeltaTime.
 func (x *ComponentSystem) UpdateWithDeltaTime(seconds float64) {
 	x.inner.UpdateWithDeltaTime(seconds)
 }
 
+// Returns the class of the specified generic index
+//
 // ClassForGenericArgumentAtIndex calls the underlying ClassForGenericArgumentAtIndex.
 func (x *ComponentSystem) ClassForGenericArgumentAtIndex(index uint) objc.Class {
 	return x.inner.ClassForGenericArgumentAtIndex(index)
 }
 
+// The collection's component class. Any selector the component supports can be called on the system and it will be forwarded to each of the components in the collection.
+//
 // ComponentClass calls the underlying ComponentClass.
 func (x *ComponentSystem) ComponentClass() objc.Class {
 	return x.inner.ComponentClass()
 }
 
+// The array of components currently in the system.
+//
 // Components calls the underlying Components.
 func (x *ComponentSystem) Components() *foundation.NSArray[objc.ID] {
 	return x.inner.Components()

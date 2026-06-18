@@ -33,6 +33,8 @@ func MTRBaseClusterBarrierControlFromID(id objc.ID) *MTRBaseClusterBarrierContro
 	return &MTRBaseClusterBarrierControl{inner: raw.MTRBaseClusterBarrierControlFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterBarrierControlWithDeviceEndpointIDQueue creates a new [MTRBaseClusterBarrierControl].
 func NewMTRBaseClusterBarrierControlWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterBarrierControl {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterBarrierControl")), objc.RegisterName("alloc"))
@@ -47,11 +49,15 @@ func NewMTRBaseClusterBarrierControlWithDeviceEndpointQueue(device *raw.MTRBaseD
 	return &MTRBaseClusterBarrierControl{inner: raw.MTRBaseClusterBarrierControlFromID(_id)}
 }
 
+// Command BarrierControlGoToPercent Command to instruct a barrier to go to a percent open state.
+//
 // BarrierControlGoToPercentWithParamsCompletion calls the underlying BarrierControlGoToPercentWithParamsCompletion.
 func (x *MTRBaseClusterBarrierControl) BarrierControlGoToPercentWithParamsCompletion(params *raw.MTRBarrierControlClusterBarrierControlGoToPercentParams, completion func(unsafe.Pointer)) {
 	x.inner.BarrierControlGoToPercentWithParamsCompletion(params, completion)
 }
 
+// Command BarrierControlStop Command that instructs the barrier to stop moving.
+//
 // BarrierControlStopWithParamsCompletion calls the underlying BarrierControlStopWithParamsCompletion.
 func (x *MTRBaseClusterBarrierControl) BarrierControlStopWithParamsCompletion(params *raw.MTRBarrierControlClusterBarrierControlStopParams, completion func(unsafe.Pointer)) {
 	x.inner.BarrierControlStopWithParamsCompletion(params, completion)

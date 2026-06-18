@@ -37,6 +37,8 @@ func NewWorkout() *Workout {
 	return &Workout{inner: raw.HKWorkoutFromID(_id)}
 }
 
+// @method        statisticsForType: @discussion    Returns an HKStatistics object containing the statistics for all the samples of the given type that have been added to the workout. If there are no samples of the given type then nil is returned. @param         quantityType    The quantity type to gather statistics about.
+//
 // StatisticsForType calls the underlying StatisticsForType.
 func (x *Workout) StatisticsForType(quantityType *raw.HKQuantityType) *Statistics {
 	_r := x.inner.StatisticsForType(quantityType)
@@ -46,11 +48,15 @@ func (x *Workout) StatisticsForType(quantityType *raw.HKQuantityType) *Statistic
 	return &Statistics{inner: _r}
 }
 
+// @property      workoutActivityType @abstract      Represents the activity that the user was performing during a workout
+//
 // WorkoutActivityType calls the underlying WorkoutActivityType.
 func (x *Workout) WorkoutActivityType() HKWorkoutActivityType {
 	return HKWorkoutActivityType(x.inner.WorkoutActivityType())
 }
 
+// @property      workoutEvents @abstract      An array of HKWorkoutEvents that occurred during a workout. @discussion    These events will be ordered by date in ascending order. All events must take place between the start date and end date of the workout. The first workout event should never be a resume event because it is assumed that the workout begins in a running state.
+//
 // WorkoutEvents returns the collection as a Go slice.
 func (x *Workout) WorkoutEvents() []*WorkoutEvent {
 	arr := x.inner.WorkoutEvents()
@@ -62,6 +68,8 @@ func (x *Workout) WorkoutEvents() []*WorkoutEvent {
 	})
 }
 
+// @property      workoutActivities @abstract      An array of HKWorkoutActivities that were performed during a workout. @discussion    These activities will be ordered by date in ascending order. All activities must take place between the start date and end date of the workout.
+//
 // WorkoutActivities returns the collection as a Go slice.
 func (x *Workout) WorkoutActivities() []*WorkoutActivity {
 	arr := x.inner.WorkoutActivities()
@@ -73,11 +81,15 @@ func (x *Workout) WorkoutActivities() []*WorkoutActivity {
 	})
 }
 
+// @property      duration @abstract      The length of time that a workout was recording @discussion    The duration is derived from the start and end dates of the workout and takes into account periods that the workout was paused. Periods that the workout was paused are based off of the workoutEvents property.
+//
 // Duration calls the underlying Duration.
 func (x *Workout) Duration() float64 {
 	return x.inner.Duration()
 }
 
+// @property      totalEnergyBurned @abstract      The amount of energy that was burned during a workout @discussion    This metric should represent the total active energy burned during the course of the workout. It should be a quantity with a unit representing energy.
+//
 // TotalEnergyBurned calls the underlying TotalEnergyBurned.
 func (x *Workout) TotalEnergyBurned() *Quantity {
 	_r := x.inner.TotalEnergyBurned()
@@ -87,6 +99,8 @@ func (x *Workout) TotalEnergyBurned() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property      totalDistance @abstract      The total distance that was traveled during a workout @discussion    This metric should represent the total distance traveled during the course of the workout. It should be a quantity with a unit representing length.
+//
 // TotalDistance calls the underlying TotalDistance.
 func (x *Workout) TotalDistance() *Quantity {
 	_r := x.inner.TotalDistance()
@@ -96,6 +110,8 @@ func (x *Workout) TotalDistance() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property      totalSwimmingStrokeCount @abstract      The total count of swimming strokes that was accumulated during a workout @discussion    This metric should represent the total count of swimming strokes accumulated during the course of the workout. It should be a quantity with a unit representing count.
+//
 // TotalSwimmingStrokeCount calls the underlying TotalSwimmingStrokeCount.
 func (x *Workout) TotalSwimmingStrokeCount() *Quantity {
 	_r := x.inner.TotalSwimmingStrokeCount()
@@ -105,6 +121,8 @@ func (x *Workout) TotalSwimmingStrokeCount() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property      totalFlightsClimbed @abstract      The total count of flights climbed during a workout @discussion    This metric should represent the total count of flights accumulated during the course of the workout. It should be a quantity with a unit representing count.
+//
 // TotalFlightsClimbed calls the underlying TotalFlightsClimbed.
 func (x *Workout) TotalFlightsClimbed() *Quantity {
 	_r := x.inner.TotalFlightsClimbed()
@@ -114,6 +132,8 @@ func (x *Workout) TotalFlightsClimbed() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property      allStatistics @abstract      A dictionary of statistics per quantity type during the workout @discussion    This dictionary will contain HKStatistics objects containing the statistics by quantity sample type for all of the samples that have been added to the workout.
+//
 // AllStatistics calls the underlying AllStatistics.
 func (x *Workout) AllStatistics() *foundation.NSDictionary[*raw.HKQuantityType, *raw.HKStatistics] {
 	return x.inner.AllStatistics()

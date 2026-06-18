@@ -37,6 +37,8 @@ func NewState() *State {
 	return &State{inner: raw.MLStateFromID(_id)}
 }
 
+// Gets a mutable view into a state buffer. The underlying state buffer's address can differ for each call; one shall not access the state buffer outside of the closure. - Parameters: - handler: Block to access the state buffer through `MLMultiArray`.
+//
 // GetMultiArrayForStateNamedHandler blocks until the operation completes or ctx is cancelled.
 func (x *State) GetMultiArrayForStateNamedHandler(ctx context.Context, stateName string) (*MultiArray, error) {
 	type _result struct {

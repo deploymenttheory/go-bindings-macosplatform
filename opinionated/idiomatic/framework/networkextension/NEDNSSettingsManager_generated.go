@@ -39,18 +39,24 @@ func NewNEDNSSettingsManager() *NEDNSSettingsManager {
 	return &NEDNSSettingsManager{inner: raw.NEDNSSettingsManagerFromID(_id)}
 }
 
+// @property localizedDescription @discussion A string containing a description of the DNS settings.
+//
 // WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
 func (x *NEDNSSettingsManager) WithLocalizedDescription(localizedDescription string) *NEDNSSettingsManager {
 	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
 	return x
 }
 
+// @property dnsSettings @discussion An NEDNSSettings object containing the DNS resolver configuration to apply to the system.
+//
 // WithDnsSettings sets the dnsSettings property and returns the receiver for chaining.
 func (x *NEDNSSettingsManager) WithDnsSettings(dnsSettings NEDNSSettingsProvider) *NEDNSSettingsManager {
 	x.inner.SetDnsSettings(dnsSettings.asNEDNSSettings())
 	return x
 }
 
+// @property onDemandRules @discussion An array of NEOnDemandRule objects. If nil, the associated DNS settings will always apply. If non-nil, the array describes the networks on which the DNS configuration should take effect or not.
+//
 // WithOnDemandRules sets the collection, converting the Go slice to an NSArray.
 func (x *NEDNSSettingsManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEDNSSettingsManager {
 	if len(items) == 0 {
@@ -69,6 +75,8 @@ func (x *NEDNSSettingsManager) WithOnDemandRules(items ...NEOnDemandRuleProvider
 	return x
 }
 
+// @method loadFromPreferencesWithCompletionHandler: @discussion This function loads the current DNS settings configuration from the caller's DNS settings preferences. @param completionHandler A block that will be called when the load operation is completed. The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
+//
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSSettingsManager) LoadFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -87,6 +95,8 @@ func (x *NEDNSSettingsManager) LoadFromPreferences(ctx context.Context) error {
 	}
 }
 
+// @method removeFromPreferencesWithCompletionHandler: @discussion This function removes the DNS settings configuration from the caller's DNS settings preferences. If the DNS settings are enabled, the DNS settings becomes disabled. @param completionHandler A block that will be called when the remove operation is completed. The NSError passed to this block will be nil if the remove operation succeeded, non-nil otherwise.
+//
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSSettingsManager) RemoveFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -105,6 +115,8 @@ func (x *NEDNSSettingsManager) RemoveFromPreferences(ctx context.Context) error 
 	}
 }
 
+// @method saveToPreferencesWithCompletionHandler: @discussion This function saves the DNS settingsconfiguration in the caller's DNS settings preferences. If the DNS settings are enabled, they will become active. @param completionHandler A block that will be called when the save operation is completed. The NSError passed to this block will be nil if the save operation succeeded, non-nil otherwise.
+//
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSSettingsManager) SaveToPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -123,6 +135,8 @@ func (x *NEDNSSettingsManager) SaveToPreferences(ctx context.Context) error {
 	}
 }
 
+// @property localizedDescription @discussion A string containing a description of the DNS settings.
+//
 // LocalizedDescription calls the underlying LocalizedDescription.
 func (x *NEDNSSettingsManager) LocalizedDescription() string {
 	_r := x.inner.LocalizedDescription()
@@ -137,6 +151,8 @@ func (x *NEDNSSettingsManager) SetLocalizedDescription(localizedDescription stri
 	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
 }
 
+// @property dnsSettings @discussion An NEDNSSettings object containing the DNS resolver configuration to apply to the system.
+//
 // DnsSettings calls the underlying DnsSettings.
 func (x *NEDNSSettingsManager) DnsSettings() *NEDNSSettings {
 	_r := x.inner.DnsSettings()
@@ -151,6 +167,8 @@ func (x *NEDNSSettingsManager) SetDnsSettings(dnsSettings *raw.NEDNSSettings) {
 	x.inner.SetDnsSettings(dnsSettings)
 }
 
+// @property onDemandRules @discussion An array of NEOnDemandRule objects. If nil, the associated DNS settings will always apply. If non-nil, the array describes the networks on which the DNS configuration should take effect or not.
+//
 // OnDemandRules returns the collection as a Go slice.
 func (x *NEDNSSettingsManager) OnDemandRules() []*NEOnDemandRule {
 	arr := x.inner.OnDemandRules()
@@ -163,10 +181,21 @@ func (x *NEDNSSettingsManager) OnDemandRules() []*NEOnDemandRule {
 }
 
 // SetOnDemandRules calls the underlying SetOnDemandRules.
-func (x *NEDNSSettingsManager) SetOnDemandRules(onDemandRules *foundation.NSArray[*raw.NEOnDemandRule]) {
-	x.inner.SetOnDemandRules(onDemandRules)
+func (x *NEDNSSettingsManager) SetOnDemandRules(onDemandRules ...NEOnDemandRuleProvider) {
+	_ptrs := make([]objc.ID, len(onDemandRules))
+	for _i, _v := range onDemandRules {
+		_ptrs[_i] = _v.asNEOnDemandRule().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NEOnDemandRule]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NEOnDemandRule](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetOnDemandRules(_arg0)
 }
 
+// @property enabled @discussion Checks the enabled status of the DNS settings. DNS settings must be enabled by the user in Settings or System Preferences.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *NEDNSSettingsManager) IsEnabled() bool {
 	return x.inner.IsEnabled()
@@ -186,7 +215,7 @@ type NEDNSSettingsManagerable interface {
 	DnsSettings() *NEDNSSettings
 	SetDnsSettings(dnsSettings *raw.NEDNSSettings)
 	OnDemandRules() []*NEOnDemandRule
-	SetOnDemandRules(onDemandRules *foundation.NSArray[*raw.NEOnDemandRule])
+	SetOnDemandRules(onDemandRules ...NEOnDemandRuleProvider)
 	IsEnabled() bool
 }
 

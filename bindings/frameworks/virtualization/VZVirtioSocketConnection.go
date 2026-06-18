@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A port-based connection between the guest operating system and the host computer.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtiosocketconnection
 type VZVirtioSocketConnection struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func VZVirtioSocketConnectionFromID(id objc.ID) *VZVirtioSocketConnection {
 	return o
 }
 
-// @abstract Close the file descriptor that's associated with the socket.
+// Close the file descriptor associated with the socket.
 func (o *VZVirtioSocketConnection) Close() {
 	o.Ptr().Send(_vZVirtioSocketConnectionSelClose)
 }

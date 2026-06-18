@@ -40,6 +40,8 @@ func NewSpeechSynthesisProviderRequestWithSSMLRepresentationVoice(text string, v
 	return &SpeechSynthesisProviderRequest{inner: raw.AVSpeechSynthesisProviderRequestFromID(_id)}
 }
 
+// @abstract The SSML representation of the text to be synthesized with the corresponding speech synthesis attributes for customization of pitch, rate, intonation, and more. @see https://www.w3.org/TR/speech-synthesis11/
+//
 // SsmlRepresentation calls the underlying SsmlRepresentation.
 func (x *SpeechSynthesisProviderRequest) SsmlRepresentation() string {
 	_r := x.inner.SsmlRepresentation()
@@ -49,6 +51,8 @@ func (x *SpeechSynthesisProviderRequest) SsmlRepresentation() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The voice to be used in this speech request
+//
 // Voice calls the underlying Voice.
 func (x *SpeechSynthesisProviderRequest) Voice() *SpeechSynthesisProviderVoice {
 	_r := x.inner.Voice()

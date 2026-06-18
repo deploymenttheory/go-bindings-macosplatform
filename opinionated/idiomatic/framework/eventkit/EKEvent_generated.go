@@ -38,12 +38,16 @@ func NewEvent() *Event {
 	return &Event{inner: raw.EKEventFromID(_id)}
 }
 
+// @property   allDay @abstract   Indicates this event is an 'all day' event.
+//
 // WithAllDay sets the allDay property and returns the receiver for chaining.
 func (x *Event) WithAllDay(allDay bool) *Event {
 	x.inner.SetAllDay(allDay)
 	return x
 }
 
+// @property   startDate @abstract   The start date for the event. @discussion This property represents the start date for this event. Floating events (such as all-day events) are currently always returned in the default time zone. ([NSTimeZone defaultTimeZone]) This will be nil for new events until you set it.
+//
 // WithStartDate sets the startDate property and returns the receiver for chaining.
 func (x *Event) WithStartDate(startDate *foundation.NSDate) *Event {
 	x.inner.SetStartDate(startDate)
@@ -56,24 +60,32 @@ func (x *Event) WithEndDate(endDate *foundation.NSDate) *Event {
 	return x
 }
 
+// @property   structuredLocation @abstract   Allows you to set a structured location (a location with a potential geo-coordinate) on an event. The getter for EKEvent’s location property just returns the structured location’s title. The setter for EKEvent’s location property is equivalent to [event setStructuredLocation:[EKStructuredLocation locationWithTitle:…]].
+//
 // WithStructuredLocation sets the structuredLocation property and returns the receiver for chaining.
 func (x *Event) WithStructuredLocation(structuredLocation *StructuredLocation) *Event {
 	x.inner.SetStructuredLocation(structuredLocation.Unwrap())
 	return x
 }
 
+// @property   availability @abstract   The availability setting for this event. @discussion The availability setting is used by CalDAV and Exchange servers to indicate how the time should be treated for scheduling. If the calendar the event is currently in does not support event availability, EKEventAvailabilityNotSupported is returned.
+//
 // WithAvailability sets the availability property and returns the receiver for chaining.
 func (x *Event) WithAvailability(availability EKEventAvailability) *Event {
 	x.inner.SetAvailability(raw.EKEventAvailability(availability))
 	return x
 }
 
+// @property calendar @abstract The calendar that this calendar item belongs to. @discussion This will be nil for new calendar items until you set it.
+//
 // WithCalendar sets the calendar property and returns the receiver for chaining.
 func (x *Event) WithCalendar(calendar *Calendar) *Event {
 	x.inner.EKCalendarItem.SetCalendar(calendar.Unwrap())
 	return x
 }
 
+// @property title @abstract The title of this calendar item. @discussion This will be an empty string for new calendar items until you set it.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *Event) WithTitle(title string) *Event {
 	x.inner.EKCalendarItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
@@ -122,6 +134,8 @@ func (x *Event) WithAlarms(items ...*raw.EKAlarm) *Event {
 	return x
 }
 
+// @property   recurrenceRules @abstract   An array of EKRecurrenceRules, or nil if none.
+//
 // WithRecurrenceRules sets the collection, converting the Go slice to an NSArray.
 func (x *Event) WithRecurrenceRules(items ...*raw.EKRecurrenceRule) *Event {
 	if len(items) == 0 {
@@ -140,11 +154,15 @@ func (x *Event) WithRecurrenceRules(items ...*raw.EKRecurrenceRule) *Event {
 	return x
 }
 
+// @method     compareStartDateWithEvent @abstract   Comparison function you can pass to sort NSArrays of EKEvents by start date.
+//
 // CompareStartDateWithEvent calls the underlying CompareStartDateWithEvent.
 func (x *Event) CompareStartDateWithEvent(other *raw.EKEvent) foundation.NSComparisonResult {
 	return x.inner.CompareStartDateWithEvent(other)
 }
 
+// @property   eventIdentifier @abstract   A unique identifier for this event. @discussion This identifier can be used to look the event up using [EKEventStore eventWithIdentifier:]. You can use this not only to simply fetch the event, but also to validate the event has not been deleted out from under you when you get an external change notification via the EKEventStore database changed notification. If eventWithIdentifier: returns nil, the event was deleted. Please note that if you change the calendar of an event, this ID will likely change. It is currently also possible for the ID to change due to a sync operation. For example, if a user moved an event on a different client to another calendar, we'd see it as a completely new event here. This may be nil for events that have not been saved.
+//
 // EventIdentifier calls the underlying EventIdentifier.
 func (x *Event) EventIdentifier() string {
 	_r := x.inner.EventIdentifier()
@@ -154,6 +172,8 @@ func (x *Event) EventIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property   allDay @abstract   Indicates this event is an 'all day' event.
+//
 // IsAllDay calls the underlying IsAllDay.
 func (x *Event) IsAllDay() bool {
 	return x.inner.IsAllDay()
@@ -164,6 +184,8 @@ func (x *Event) SetAllDay(allDay bool) {
 	x.inner.SetAllDay(allDay)
 }
 
+// @property   startDate @abstract   The start date for the event. @discussion This property represents the start date for this event. Floating events (such as all-day events) are currently always returned in the default time zone. ([NSTimeZone defaultTimeZone]) This will be nil for new events until you set it.
+//
 // StartDate calls the underlying StartDate.
 func (x *Event) StartDate() *foundation.NSDate {
 	return x.inner.StartDate()
@@ -184,6 +206,8 @@ func (x *Event) SetEndDate(endDate *foundation.NSDate) {
 	x.inner.SetEndDate(endDate)
 }
 
+// @property   structuredLocation @abstract   Allows you to set a structured location (a location with a potential geo-coordinate) on an event. The getter for EKEvent’s location property just returns the structured location’s title. The setter for EKEvent’s location property is equivalent to [event setStructuredLocation:[EKStructuredLocation locationWithTitle:…]].
+//
 // StructuredLocation calls the underlying StructuredLocation.
 func (x *Event) StructuredLocation() *StructuredLocation {
 	_r := x.inner.StructuredLocation()
@@ -198,6 +222,8 @@ func (x *Event) SetStructuredLocation(structuredLocation *raw.EKStructuredLocati
 	x.inner.SetStructuredLocation(structuredLocation)
 }
 
+// @property   organizer @abstract   The organizer of this event, or nil.
+//
 // Organizer calls the underlying Organizer.
 func (x *Event) Organizer() *Participant {
 	_r := x.inner.Organizer()
@@ -207,6 +233,8 @@ func (x *Event) Organizer() *Participant {
 	return &Participant{inner: _r}
 }
 
+// @property   availability @abstract   The availability setting for this event. @discussion The availability setting is used by CalDAV and Exchange servers to indicate how the time should be treated for scheduling. If the calendar the event is currently in does not support event availability, EKEventAvailabilityNotSupported is returned.
+//
 // Availability calls the underlying Availability.
 func (x *Event) Availability() EKEventAvailability {
 	return EKEventAvailability(x.inner.Availability())
@@ -217,21 +245,29 @@ func (x *Event) SetAvailability(availability EKEventAvailability) {
 	x.inner.SetAvailability(raw.EKEventAvailability(availability))
 }
 
+// @property   status @abstract   The status of the event. @discussion While the status offers four different values in the EKEventStatus enumeration, in practice, the only actionable and reliable status is canceled. Any other status should be considered informational at best. You cannot set this property. If you wish to cancel an event, you should simply remove it using removeEvent:.
+//
 // Status calls the underlying Status.
 func (x *Event) Status() EKEventStatus {
 	return EKEventStatus(x.inner.Status())
 }
 
+// @property   isDetached @abstract   Represents whether this event is detached from a recurring series. @discussion If this EKEvent is an instance of a repeating event, and an attribute of this EKEvent has been changed from the default value generated by the repeating event, isDetached will return YES. If the EKEvent is unchanged from its default state, or is not a repeating event, isDetached returns NO.
+//
 // IsDetached calls the underlying IsDetached.
 func (x *Event) IsDetached() bool {
 	return x.inner.IsDetached()
 }
 
+// @property   occurrenceDate: @abstract   The occurrence date of an event if it is part of a recurring series. @discussion This is only set if the event is part of a recurring series. It returns the date on which this event was originally scheduled to occur. For occurrences that are unmodified from the recurring series, this is the same as the start date. This value will remain the same even if the event has been detached and its start date has changed. Floating events (such as all-day events) are currently returned in the default time zone. ([NSTimeZone defaultTimeZone]) This will be nil for new events until you set startDate.
+//
 // OccurrenceDate calls the underlying OccurrenceDate.
 func (x *Event) OccurrenceDate() *foundation.NSDate {
 	return x.inner.OccurrenceDate()
 }
 
+// @method     birthdayContactIdentifier @abstract   Specifies the contact identifier of the person this event was created for. @discussion This property is only valid for events in the built-in Birthdays calendar. It specifies the contact identifier (for use with the Contacts framework) of the person this event was created for. For any other type of event, this property returns nil.
+//
 // BirthdayContactIdentifier calls the underlying BirthdayContactIdentifier.
 func (x *Event) BirthdayContactIdentifier() string {
 	_r := x.inner.BirthdayContactIdentifier()
@@ -241,6 +277,8 @@ func (x *Event) BirthdayContactIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property   birthdayPersonUniqueID @abstract   Specifies the address book unique ID of the person this event was created for. @discussion This property is only valid for events in the built-in Birthdays calendar. It specifies the Address Book unique ID of the person this event was created for. For any other type of event, this property returns nil.
+//
 // BirthdayPersonUniqueID calls the underlying BirthdayPersonUniqueID.
 func (x *Event) BirthdayPersonUniqueID() string {
 	_r := x.inner.BirthdayPersonUniqueID()

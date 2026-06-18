@@ -33,6 +33,8 @@ func MTRBaseClusterServiceAreaFromID(id objc.ID) *MTRBaseClusterServiceArea {
 	return &MTRBaseClusterServiceArea{inner: raw.MTRBaseClusterServiceAreaFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterServiceAreaWithDeviceEndpointIDQueue creates a new [MTRBaseClusterServiceArea].
 func NewMTRBaseClusterServiceAreaWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterServiceArea {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterServiceArea")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewMTRBaseClusterServiceAreaWithDeviceEndpointIDQueue(device *raw.MTRBaseDe
 	return &MTRBaseClusterServiceArea{inner: raw.MTRBaseClusterServiceAreaFromID(_id)}
 }
 
+// Command SelectAreas This command is used to select a set of device areas, where the device is to operate.
+//
 // SelectAreasWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterServiceArea) SelectAreasWithParamsCompletion(ctx context.Context, params *raw.MTRServiceAreaClusterSelectAreasParams) (*MTRServiceAreaClusterSelectAreasResponseParams, error) {
 	type _result struct {
@@ -66,6 +70,8 @@ func (x *MTRBaseClusterServiceArea) SelectAreasWithParamsCompletion(ctx context.
 	}
 }
 
+// Command SkipArea This command is used to skip the given area, and to attempt operating at other areas on the SupportedAreas attribute list.
+//
 // SkipAreaWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterServiceArea) SkipAreaWithParamsCompletion(ctx context.Context, params *raw.MTRServiceAreaClusterSkipAreaParams) (*MTRServiceAreaClusterSkipAreaResponseParams, error) {
 	type _result struct {

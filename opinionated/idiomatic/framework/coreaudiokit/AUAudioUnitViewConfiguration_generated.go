@@ -29,6 +29,8 @@ func AUAudioUnitViewConfigurationFromID(id objc.ID) *AUAudioUnitViewConfiguratio
 	return &AUAudioUnitViewConfiguration{inner: raw.AUAudioUnitViewConfigurationFromID(id)}
 }
 
+// @method		initWithWidth @brief		Designated initializer. @param		width The width associated with this view configuration. @param		height The height associated with this view configuration. @param		hostHasController This property controls whether the host shows its own control surface in this view configuration. @return		Returns the newly created view configuration object.
+//
 // NewAUAudioUnitViewConfigurationWithWidthHeightHostHasController creates a new [AUAudioUnitViewConfiguration].
 func NewAUAudioUnitViewConfigurationWithWidthHeightHostHasController(width float64, height float64, hostHasController bool) *AUAudioUnitViewConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AUAudioUnitViewConfiguration")), objc.RegisterName("alloc"))
@@ -36,16 +38,22 @@ func NewAUAudioUnitViewConfigurationWithWidthHeightHostHasController(width float
 	return &AUAudioUnitViewConfiguration{inner: raw.AUAudioUnitViewConfigurationFromID(_id)}
 }
 
+// @property	width @brief		The width of the view, measured in points. @discussion Setting the width to 0 will match any width.
+//
 // Width calls the underlying Width.
 func (x *AUAudioUnitViewConfiguration) Width() float64 {
 	return x.inner.Width()
 }
 
+// @property	height @brief		The height of the view, measured in points. @discussion Setting the height to 0 will match any height.
+//
 // Height calls the underlying Height.
 func (x *AUAudioUnitViewConfiguration) Height() float64 {
 	return x.inner.Height()
 }
 
+// @property	hostHasController @brief		Boolean property specifying whether the host displays its own control surface when showing the view of the audio unit.
+//
 // HostHasController calls the underlying HostHasController.
 func (x *AUAudioUnitViewConfiguration) HostHasController() bool {
 	return x.inner.HostHasController()

@@ -29,6 +29,8 @@ func CircleFromID(id objc.ID) *Circle {
 	return &Circle{inner: raw.VNCircleFromID(id)}
 }
 
+// @brief Initializes VNCircle object with given circle center and circle radius.
+//
 // NewCircleWithCenterRadius creates a new [Circle].
 func NewCircleWithCenterRadius(center *raw.VNPoint, radius float64) *Circle {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNCircle")), objc.RegisterName("alloc"))
@@ -36,6 +38,8 @@ func NewCircleWithCenterRadius(center *raw.VNPoint, radius float64) *Circle {
 	return &Circle{inner: raw.VNCircleFromID(_id)}
 }
 
+// @brief Initializes VNCircle object with given circle center and circle diameter.
+//
 // NewCircleWithCenterDiameter creates a new [Circle].
 func NewCircleWithCenterDiameter(center *raw.VNPoint, diameter float64) *Circle {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNCircle")), objc.RegisterName("alloc"))
@@ -43,16 +47,22 @@ func NewCircleWithCenterDiameter(center *raw.VNPoint, diameter float64) *Circle 
 	return &Circle{inner: raw.VNCircleFromID(_id)}
 }
 
+// @brief Returns YES if the point is inside the circle, including the boundary.
+//
 // ContainsPoint calls the underlying ContainsPoint.
 func (x *Circle) ContainsPoint(point *raw.VNPoint) bool {
 	return x.inner.ContainsPoint(point)
 }
 
+// @brief Returns YES if the point is within the ring bound by two circles [radius - delta; radius + delta].
+//
 // ContainsPointInCircumferentialRingOfWidth calls the underlying ContainsPointInCircumferentialRingOfWidth.
 func (x *Circle) ContainsPointInCircumferentialRingOfWidth(point *raw.VNPoint, ringWidth float64) bool {
 	return x.inner.ContainsPointInCircumferentialRingOfWidth(point, ringWidth)
 }
 
+// @brief Returns circle center.
+//
 // Center calls the underlying Center.
 func (x *Circle) Center() *Point {
 	_r := x.inner.Center()
@@ -62,11 +72,15 @@ func (x *Circle) Center() *Point {
 	return &Point{inner: _r}
 }
 
+// @brief Returns circle radius.
+//
 // Radius calls the underlying Radius.
 func (x *Circle) Radius() float64 {
 	return x.inner.Radius()
 }
 
+// @brief Returns circle diameter.
+//
 // Diameter calls the underlying Diameter.
 func (x *Circle) Diameter() float64 {
 	return x.inner.Diameter()

@@ -39,6 +39,8 @@ func NewPlaybackCoordinator() *PlaybackCoordinator {
 	return &PlaybackCoordinator{inner: raw.AVPlaybackCoordinatorFromID(_id)}
 }
 
+// If the coordinator decides to delay playback to wait for others, it will wait out these reasons, but not others.
+//
 // WithSuspensionReasonsThatTriggerWaiting sets the collection, converting the Go slice to an NSArray.
 func (x *PlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(items ...*foundation.NSString) *PlaybackCoordinator {
 	if len(items) == 0 {
@@ -57,12 +59,16 @@ func (x *PlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(items ...*
 	return x
 }
 
+// Determines if participants should mirror the originator's stop time when pausing. If YES, all participants will seek to the originator's stop time after they pause. Use this if it is desirable to counteract any network delay incurred by communicating the originator's pause to the other participants. If NO, it's acceptable for participants to stop at slightly different offsets and a pause will not cause other participants' time to jump back.
+//
 // WithPauseSnapsToMediaTimeOfOriginator sets the pauseSnapsToMediaTimeOfOriginator property and returns the receiver for chaining.
 func (x *PlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *PlaybackCoordinator {
 	x.inner.SetPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator)
 	return x
 }
 
+// Informs the coordinator that its playback object is detached from the group for some reason and should not receive any playback commands from the coordinator. Use this to tell the coordinator that its player cannot, or should not, participate in coordinated playback temporarily. The coordinator will not respond to playback commands coming from the group and it will also not send any commands to the group. To resume in group playback, end a suspension by calling one of the suspension's end methods. - Parameter suspensionReason: Indicates the reason for the suspension that is shared with other participants. Can be a system-defined reason (see AVCoordinatedPlaybackSuspensionReason*) or a custom string. - NOTE: See the description of AVPlaybackCoordinator subclasses for suspensions automatically begun on behalf of their playback objects, if any.
+//
 // BeginSuspensionForReason calls the underlying BeginSuspensionForReason.
 func (x *PlaybackCoordinator) BeginSuspensionForReason(suspensionReason *foundation.NSString) *CoordinatedPlaybackSuspension {
 	_r := x.inner.BeginSuspensionForReason(suspensionReason)
@@ -72,11 +78,15 @@ func (x *PlaybackCoordinator) BeginSuspensionForReason(suspensionReason *foundat
 	return &CoordinatedPlaybackSuspension{inner: _r}
 }
 
+// Returns the item time (for the current item) that the coordinator expects to be playing at a given host clock time. This method is useful to decide if it is appropriate to end a suspension, e.g. a suspension with AVCoordinatedPlaybackSuspensionReasonStallRecovery, while other participants are continuing playback.
+//
 // ExpectedItemTimeAtHostTime calls the underlying ExpectedItemTimeAtHostTime.
 func (x *PlaybackCoordinator) ExpectedItemTimeAtHostTime(hostClockTime coremedia.CMTime) coremedia.CMTime {
 	return x.inner.ExpectedItemTimeAtHostTime(hostClockTime)
 }
 
+// The playback states of the other participants in the group. Use this property to create UI informing the local user about the state of other participants in the group. - NOTE: The coordinator posts AVPlaybackCoordinatorOtherParticipantsDidChangeNotification when the contents of the array changes.
+//
 // OtherParticipants returns the collection as a Go slice.
 func (x *PlaybackCoordinator) OtherParticipants() []*CoordinatedPlaybackParticipant {
 	arr := x.inner.OtherParticipants()
@@ -88,6 +98,8 @@ func (x *PlaybackCoordinator) OtherParticipants() []*CoordinatedPlaybackParticip
 	})
 }
 
+// Describes why the coordinator is currently not able to participate in group playback. If the list of reasons is non-empty, the coordinator will not react to any changes of group playback state.
+//
 // SuspensionReasons returns the collection as a Go slice.
 func (x *PlaybackCoordinator) SuspensionReasons() []*foundation.NSString {
 	arr := x.inner.SuspensionReasons()
@@ -99,16 +111,22 @@ func (x *PlaybackCoordinator) SuspensionReasons() []*foundation.NSString {
 	})
 }
 
+// Sets the amount of participants that can join a group before the coordinator stops waiting for this particular suspension reason. This allows additional configuration for suspension reasons in the suspensionReasonsThatTriggerWaiting array. When the coordinator decides whether one participant's suspensions should cause others to wait, it will also consider this limit of participants currently in the group.
+//
 // SetParticipantLimitForWaitingOutSuspensionsWithReason calls the underlying SetParticipantLimitForWaitingOutSuspensionsWithReason.
 func (x *PlaybackCoordinator) SetParticipantLimitForWaitingOutSuspensionsWithReason(participantLimit int, reason *foundation.NSString) {
 	x.inner.SetParticipantLimitForWaitingOutSuspensionsWithReason(participantLimit, reason)
 }
 
+// Returns the maximum number of participants that can be in a group before the coordinator stops waiting out this particular suspensions reason. Default value is NSIntegerMax.
+//
 // ParticipantLimitForWaitingOutSuspensionsWithReason calls the underlying ParticipantLimitForWaitingOutSuspensionsWithReason.
 func (x *PlaybackCoordinator) ParticipantLimitForWaitingOutSuspensionsWithReason(reason *foundation.NSString) int {
 	return x.inner.ParticipantLimitForWaitingOutSuspensionsWithReason(reason)
 }
 
+// If the coordinator decides to delay playback to wait for others, it will wait out these reasons, but not others.
+//
 // SuspensionReasonsThatTriggerWaiting returns the collection as a Go slice.
 func (x *PlaybackCoordinator) SuspensionReasonsThatTriggerWaiting() []*foundation.NSString {
 	arr := x.inner.SuspensionReasonsThatTriggerWaiting()
@@ -125,6 +143,8 @@ func (x *PlaybackCoordinator) SetSuspensionReasonsThatTriggerWaiting(suspensionR
 	x.inner.SetSuspensionReasonsThatTriggerWaiting(suspensionReasonsThatTriggerWaiting)
 }
 
+// Determines if participants should mirror the originator's stop time when pausing. If YES, all participants will seek to the originator's stop time after they pause. Use this if it is desirable to counteract any network delay incurred by communicating the originator's pause to the other participants. If NO, it's acceptable for participants to stop at slightly different offsets and a pause will not cause other participants' time to jump back.
+//
 // PauseSnapsToMediaTimeOfOriginator calls the underlying PauseSnapsToMediaTimeOfOriginator.
 func (x *PlaybackCoordinator) PauseSnapsToMediaTimeOfOriginator() bool {
 	return x.inner.PauseSnapsToMediaTimeOfOriginator()

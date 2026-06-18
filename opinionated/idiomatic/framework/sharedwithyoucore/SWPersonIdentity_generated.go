@@ -30,6 +30,8 @@ func PersonIdentityFromID(id objc.ID) *PersonIdentity {
 	return &PersonIdentity{inner: raw.SWPersonIdentityFromID(id)}
 }
 
+// @abstract An initializer @param rootHash The root hash of the tree that represents this individual's identity. @discussion The data contains a SHA256 hash of the user's combined public identities.
+//
 // NewPersonIdentityWithRootHash creates a new [PersonIdentity].
 func NewPersonIdentityWithRootHash(rootHash *foundation.NSData) *PersonIdentity {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWPersonIdentity")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewPersonIdentityWithRootHash(rootHash *foundation.NSData) *PersonIdentity 
 	return &PersonIdentity{inner: raw.SWPersonIdentityFromID(_id)}
 }
 
+// @abstract The root hash of the tree that represents this individual's identity. @discussion The data contains a SHA256 hash of the user's combined public identities.
+//
 // RootHash calls the underlying RootHash.
 func (x *PersonIdentity) RootHash() *foundation.NSData {
 	return x.inner.RootHash()

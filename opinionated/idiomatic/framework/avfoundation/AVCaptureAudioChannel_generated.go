@@ -35,28 +35,38 @@ func NewCaptureAudioChannel() *CaptureAudioChannel {
 	return &CaptureAudioChannel{inner: raw.AVCaptureAudioChannelFromID(_id)}
 }
 
+// @property volume @abstract A property indicating the current volume (gain) of the receiver. @discussion The volume property indicates the current volume or gain of the receiver as a floating point value between 0.0 -> 1.0. If you desire to boost the gain in software, you may specify a a value greater than 1.0.
+//
 // WithVolume sets the volume property and returns the receiver for chaining.
 func (x *CaptureAudioChannel) WithVolume(volume float32) *CaptureAudioChannel {
 	x.inner.SetVolume(volume)
 	return x
 }
 
+// @property enabled @abstract A property indicating whether the receiver is currently enabled for data capture. @discussion By default, all AVCaptureAudioChannel objects exposed by a connection are enabled. You may set enabled to NO to stop the flow of data for a particular AVCaptureAudioChannel.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *CaptureAudioChannel) WithEnabled(enabled bool) *CaptureAudioChannel {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// @property averagePowerLevel @abstract A measurement of the instantaneous average power level of the audio flowing through the receiver. @discussion A client may poll an AVCaptureAudioChannel object for its current averagePowerLevel to get its instantaneous average power level in decibels. This property is not key-value observable.
+//
 // AveragePowerLevel calls the underlying AveragePowerLevel.
 func (x *CaptureAudioChannel) AveragePowerLevel() float32 {
 	return x.inner.AveragePowerLevel()
 }
 
+// @property peakHoldLevel @abstract A measurement of the peak/hold level of the audio flowing through the receiver. @discussion A client may poll an AVCaptureAudioChannel object for its current peakHoldLevel to get its most recent peak hold level in decibels. This property is not key-value observable.
+//
 // PeakHoldLevel calls the underlying PeakHoldLevel.
 func (x *CaptureAudioChannel) PeakHoldLevel() float32 {
 	return x.inner.PeakHoldLevel()
 }
 
+// @property volume @abstract A property indicating the current volume (gain) of the receiver. @discussion The volume property indicates the current volume or gain of the receiver as a floating point value between 0.0 -> 1.0. If you desire to boost the gain in software, you may specify a a value greater than 1.0.
+//
 // Volume calls the underlying Volume.
 func (x *CaptureAudioChannel) Volume() float32 {
 	return x.inner.Volume()
@@ -67,6 +77,8 @@ func (x *CaptureAudioChannel) SetVolume(volume float32) {
 	x.inner.SetVolume(volume)
 }
 
+// @property enabled @abstract A property indicating whether the receiver is currently enabled for data capture. @discussion By default, all AVCaptureAudioChannel objects exposed by a connection are enabled. You may set enabled to NO to stop the flow of data for a particular AVCaptureAudioChannel.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *CaptureAudioChannel) IsEnabled() bool {
 	return x.inner.IsEnabled()

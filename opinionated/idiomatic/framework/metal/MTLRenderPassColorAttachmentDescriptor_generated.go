@@ -37,72 +37,96 @@ func NewRenderPassColorAttachmentDescriptor() *RenderPassColorAttachmentDescript
 	return &RenderPassColorAttachmentDescriptor{inner: raw.MTLRenderPassColorAttachmentDescriptorFromID(_id)}
 }
 
+// @property clearColor @abstract The clear color to be used if the loadAction property is MTLLoadActionClear
+//
 // WithClearColor sets the clearColor property and returns the receiver for chaining.
 func (x *RenderPassColorAttachmentDescriptor) WithClearColor(clearColor raw.MTLClearColor) *RenderPassColorAttachmentDescriptor {
 	x.inner.SetClearColor(clearColor)
 	return x
 }
 
+// @property texture @abstract The MTLTexture object for this attachment.
+//
 // WithTexture sets the texture property and returns the receiver for chaining.
 func (x *RenderPassColorAttachmentDescriptor) WithTexture(texture raw.MTLTexture) *RenderPassColorAttachmentDescriptor {
 	x.inner.MTLRenderPassAttachmentDescriptor.SetTexture(texture)
 	return x
 }
 
+// @property level @abstract The mipmap level of the texture to be used for rendering.  Default is zero.
+//
 // WithLevel sets the level property and returns the receiver for chaining.
 func (x *RenderPassColorAttachmentDescriptor) WithLevel(level uint) *RenderPassColorAttachmentDescriptor {
 	x.inner.MTLRenderPassAttachmentDescriptor.SetLevel(level)
 	return x
 }
 
+// @property slice @abstract The slice of the texture to be used for rendering.  Default is zero.
+//
 // WithSlice sets the slice property and returns the receiver for chaining.
 func (x *RenderPassColorAttachmentDescriptor) WithSlice(slice uint) *RenderPassColorAttachmentDescriptor {
 	x.inner.MTLRenderPassAttachmentDescriptor.SetSlice(slice)
 	return x
 }
 
+// @property depthPlane @abstract The depth plane of the texture to be used for rendering.  Default is zero.
+//
 // WithDepthPlane sets the depthPlane property and returns the receiver for chaining.
 func (x *RenderPassColorAttachmentDescriptor) WithDepthPlane(depthPlane uint) *RenderPassColorAttachmentDescriptor {
 	x.inner.MTLRenderPassAttachmentDescriptor.SetDepthPlane(depthPlane)
 	return x
 }
 
+// @property resolveTexture @abstract The texture used for multisample resolve operations.  Only used (and required) if the store action is set to MTLStoreActionMultisampleResolve.
+//
 // WithResolveTexture sets the resolveTexture property and returns the receiver for chaining.
 func (x *RenderPassColorAttachmentDescriptor) WithResolveTexture(resolveTexture raw.MTLTexture) *RenderPassColorAttachmentDescriptor {
 	x.inner.MTLRenderPassAttachmentDescriptor.SetResolveTexture(resolveTexture)
 	return x
 }
 
+// @property resolveLevel @abstract The mipmap level of the resolve texture to be used for multisample resolve.  Defaults to zero.
+//
 // WithResolveLevel sets the resolveLevel property and returns the receiver for chaining.
 func (x *RenderPassColorAttachmentDescriptor) WithResolveLevel(resolveLevel uint) *RenderPassColorAttachmentDescriptor {
 	x.inner.MTLRenderPassAttachmentDescriptor.SetResolveLevel(resolveLevel)
 	return x
 }
 
+// @property resolveLevel @abstract The texture slice of the resolve texture to be used for multisample resolve.  Defaults to zero.
+//
 // WithResolveSlice sets the resolveSlice property and returns the receiver for chaining.
 func (x *RenderPassColorAttachmentDescriptor) WithResolveSlice(resolveSlice uint) *RenderPassColorAttachmentDescriptor {
 	x.inner.MTLRenderPassAttachmentDescriptor.SetResolveSlice(resolveSlice)
 	return x
 }
 
+// @property resolveDepthPlane @abstract The texture depth plane of the resolve texture to be used for multisample resolve.  Defaults to zero.
+//
 // WithResolveDepthPlane sets the resolveDepthPlane property and returns the receiver for chaining.
 func (x *RenderPassColorAttachmentDescriptor) WithResolveDepthPlane(resolveDepthPlane uint) *RenderPassColorAttachmentDescriptor {
 	x.inner.MTLRenderPassAttachmentDescriptor.SetResolveDepthPlane(resolveDepthPlane)
 	return x
 }
 
+// @property loadAction @abstract The action to be performed with this attachment at the beginning of a render pass.  Default is MTLLoadActionDontCare unless specified by a creation or init method.
+//
 // WithLoadAction sets the loadAction property and returns the receiver for chaining.
 func (x *RenderPassColorAttachmentDescriptor) WithLoadAction(loadAction MTLLoadAction) *RenderPassColorAttachmentDescriptor {
 	x.inner.MTLRenderPassAttachmentDescriptor.SetLoadAction(raw.MTLLoadAction(loadAction))
 	return x
 }
 
+// @property storeAction @abstract The action to be performed with this attachment at the end of a render pass.  Default is MTLStoreActionDontCare unless specified by a creation or init method.
+//
 // WithStoreAction sets the storeAction property and returns the receiver for chaining.
 func (x *RenderPassColorAttachmentDescriptor) WithStoreAction(storeAction MTLStoreAction) *RenderPassColorAttachmentDescriptor {
 	x.inner.MTLRenderPassAttachmentDescriptor.SetStoreAction(raw.MTLStoreAction(storeAction))
 	return x
 }
 
+// @property storeActionOptions @abstract Optional configuration for the store action performed with this attachment at the end of a render pass.  Default is MTLStoreActionOptionNone.
+//
 // WithStoreActionOptions sets the storeActionOptions property and returns the receiver for chaining.
 func (x *RenderPassColorAttachmentDescriptor) WithStoreActionOptions(storeActionOptions MTLStoreActionOptions) *RenderPassColorAttachmentDescriptor {
 	x.inner.MTLRenderPassAttachmentDescriptor.SetStoreActionOptions(raw.MTLStoreActionOptions(storeActionOptions))

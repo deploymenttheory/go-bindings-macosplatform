@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The class that represents the configuration for a Mac trackpad.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzmactrackpadconfiguration
 type VZMacTrackpadConfiguration struct {
 	VZPointingDeviceConfiguration
@@ -29,6 +31,7 @@ func VZMacTrackpadConfigurationFromID(id objc.ID) *VZMacTrackpadConfiguration {
 	return o
 }
 
+// Creates a new Mac trackpad configuration.
 func (o *VZMacTrackpadConfiguration) Init() *VZMacTrackpadConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacTrackpadConfigurationSelInit)
 	if _ret != 0 {

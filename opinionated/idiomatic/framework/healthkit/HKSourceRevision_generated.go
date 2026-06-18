@@ -31,6 +31,8 @@ func SourceRevisionFromID(id objc.ID) *SourceRevision {
 	return &SourceRevision{inner: raw.HKSourceRevisionFromID(id)}
 }
 
+// @method        initWithSource:version:productType:operatingSystemVersion: @abstract      Initializes a new HKSourceRevision with the given source, version, product type, and operating system version.
+//
 // NewSourceRevisionWithSourceVersionProductTypeOperatingSystemVersion creates a new [SourceRevision].
 func NewSourceRevisionWithSourceVersionProductTypeOperatingSystemVersion(source *raw.HKSource, version string, productType string, operatingSystemVersion foundation.NSOperatingSystemVersion) *SourceRevision {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKSourceRevision")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewSourceRevisionWithSourceVersionProductTypeOperatingSystemVersion(source 
 	return &SourceRevision{inner: raw.HKSourceRevisionFromID(_id)}
 }
 
+// @method        initWithSource:version: @abstract      Initializes a new HKSourceRevision with the given source and version.
+//
 // NewSourceRevisionWithSourceVersion creates a new [SourceRevision].
 func NewSourceRevisionWithSourceVersion(source *raw.HKSource, version string) *SourceRevision {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKSourceRevision")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewSourceRevisionWithSourceVersion(source *raw.HKSource, version string) *S
 	return &SourceRevision{inner: raw.HKSourceRevisionFromID(_id)}
 }
 
+// @property      source @abstract      The HKSource of the receiver.
+//
 // Source calls the underlying Source.
 func (x *SourceRevision) Source() *Source {
 	_r := x.inner.Source()
@@ -54,6 +60,8 @@ func (x *SourceRevision) Source() *Source {
 	return &Source{inner: _r}
 }
 
+// @property      productType @abstract      Represents the product type of the device running HealthKit when the object was created. @discussion    This value may be nil for older data, which indicates an unknown product type.
+//
 // ProductType calls the underlying ProductType.
 func (x *SourceRevision) ProductType() string {
 	_r := x.inner.ProductType()
@@ -63,6 +71,8 @@ func (x *SourceRevision) ProductType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      operatingSystemVersion @abstract      Represents the operating system version of the device running HealthKit when the object was created. @discussion    iOS versions after 8.0 but prior to 8.2 are saved as 8.0, and iOS version after 8.2 but prior to 9.0 are saved as 8.2.
+//
 // OperatingSystemVersion calls the underlying OperatingSystemVersion.
 func (x *SourceRevision) OperatingSystemVersion() foundation.NSOperatingSystemVersion {
 	return x.inner.OperatingSystemVersion()

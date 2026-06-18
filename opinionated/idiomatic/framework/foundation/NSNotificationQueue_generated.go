@@ -7,6 +7,7 @@ package foundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // NotificationQueue wraps [raw.NSNotificationQueue] with a fluent Go API.
@@ -48,8 +49,17 @@ func (x *NotificationQueue) EnqueueNotificationPostingStyle(notification *raw.NS
 }
 
 // EnqueueNotificationPostingStyleCoalesceMaskForModes calls the underlying EnqueueNotificationPostingStyleCoalesceMaskForModes.
-func (x *NotificationQueue) EnqueueNotificationPostingStyleCoalesceMaskForModes(notification *raw.NSNotification, postingStyle NSPostingStyle, coalesceMask NSNotificationCoalescing, modes *raw.NSArray[*raw.NSString]) {
-	x.inner.EnqueueNotificationPostingStyleCoalesceMaskForModes(notification, raw.NSPostingStyle(postingStyle), raw.NSNotificationCoalescing(coalesceMask), modes)
+func (x *NotificationQueue) EnqueueNotificationPostingStyleCoalesceMaskForModes(notification *raw.NSNotification, postingStyle NSPostingStyle, coalesceMask NSNotificationCoalescing, modes ...StringProvider) {
+	_ptrs := make([]objc.ID, len(modes))
+	for _i, _v := range modes {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg3 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg3 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.EnqueueNotificationPostingStyleCoalesceMaskForModes(notification, raw.NSPostingStyle(postingStyle), raw.NSNotificationCoalescing(coalesceMask), _arg3)
 }
 
 // DequeueNotificationsMatchingCoalesceMask calls the underlying DequeueNotificationsMatchingCoalesceMask.
@@ -64,7 +74,7 @@ type NotificationQueueable interface {
 	Unwrap() *raw.NSNotificationQueue
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *NotificationQueue
 	EnqueueNotificationPostingStyle(notification *raw.NSNotification, postingStyle NSPostingStyle)
-	EnqueueNotificationPostingStyleCoalesceMaskForModes(notification *raw.NSNotification, postingStyle NSPostingStyle, coalesceMask NSNotificationCoalescing, modes *raw.NSArray[*raw.NSString])
+	EnqueueNotificationPostingStyleCoalesceMaskForModes(notification *raw.NSNotification, postingStyle NSPostingStyle, coalesceMask NSNotificationCoalescing, modes ...StringProvider)
 	DequeueNotificationsMatchingCoalesceMask(notification *raw.NSNotification, coalesceMask uint)
 }
 

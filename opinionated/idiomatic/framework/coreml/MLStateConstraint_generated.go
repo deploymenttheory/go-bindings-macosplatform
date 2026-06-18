@@ -37,6 +37,8 @@ func NewStateConstraint() *StateConstraint {
 	return &StateConstraint{inner: raw.MLStateConstraintFromID(_id)}
 }
 
+// The shape of the state buffer.
+//
 // BufferShape returns the collection as a Go slice.
 func (x *StateConstraint) BufferShape() []*foundation.NSNumber {
 	arr := x.inner.BufferShape()
@@ -48,6 +50,8 @@ func (x *StateConstraint) BufferShape() []*foundation.NSNumber {
 	})
 }
 
+// The data type of scalars in the state buffer.
+//
 // DataType calls the underlying DataType.
 func (x *StateConstraint) DataType() MLMultiArrayDataType {
 	return MLMultiArrayDataType(x.inner.DataType())

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a Virtio console port in a VM.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtioconsoleport
 type VZVirtioConsolePort struct {
 	foundation.NSObject

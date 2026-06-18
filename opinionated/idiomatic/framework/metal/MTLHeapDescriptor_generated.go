@@ -35,54 +35,72 @@ func NewHeapDescriptor() *HeapDescriptor {
 	return &HeapDescriptor{inner: raw.MTLHeapDescriptorFromID(_id)}
 }
 
+// @property size @abstract Requested size of the heap's backing memory. @discussion The size may be rounded up to GPU page granularity.
+//
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *HeapDescriptor) WithSize(size uint) *HeapDescriptor {
 	x.inner.SetSize(size)
 	return x
 }
 
+// @property storageMode @abstract Storage mode for the heap. Default is MTLStorageModePrivate. @discussion All resources created from this heap share the same storage mode. MTLStorageModeManaged and MTLStorageModeMemoryless are disallowed.
+//
 // WithStorageMode sets the storageMode property and returns the receiver for chaining.
 func (x *HeapDescriptor) WithStorageMode(storageMode MTLStorageMode) *HeapDescriptor {
 	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
 	return x
 }
 
+// @property cpuCacheMode @abstract CPU cache mode for the heap. Default is MTLCPUCacheModeDefaultCache. @discussion All resources created from this heap share the same cache mode. CPU cache mode is ignored for MTLStorageModePrivate.
+//
 // WithCpuCacheMode sets the cpuCacheMode property and returns the receiver for chaining.
 func (x *HeapDescriptor) WithCpuCacheMode(cpuCacheMode MTLCPUCacheMode) *HeapDescriptor {
 	x.inner.SetCpuCacheMode(raw.MTLCPUCacheMode(cpuCacheMode))
 	return x
 }
 
+// @property sparsePageSize @abstract The sparse page size to use for resources created from the heap.
+//
 // WithSparsePageSize sets the sparsePageSize property and returns the receiver for chaining.
 func (x *HeapDescriptor) WithSparsePageSize(sparsePageSize MTLSparsePageSize) *HeapDescriptor {
 	x.inner.SetSparsePageSize(raw.MTLSparsePageSize(sparsePageSize))
 	return x
 }
 
+// @property hazardTrackingMode @abstract Set hazard tracking mode for the heap. The default value is MTLHazardTrackingModeDefault. @discussion For heaps, MTLHazardTrackingModeDefault is treated as MTLHazardTrackingModeUntracked. Setting hazardTrackingMode to MTLHazardTrackingModeTracked causes hazard tracking to be enabled heap. When a resource on a hazard tracked heap is modified, reads and writes from all resources suballocated on that heap will be delayed until the modification is complete. Similarly, modifying heap resources will be delayed until all in-flight reads and writes from all resources suballocated on that heap have completed. For optimal performance, perform hazard tracking manually through MTLFence or MTLEvent instead. All resources created from this heap shared the same hazard tracking mode.
+//
 // WithHazardTrackingMode sets the hazardTrackingMode property and returns the receiver for chaining.
 func (x *HeapDescriptor) WithHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) *HeapDescriptor {
 	x.inner.SetHazardTrackingMode(raw.MTLHazardTrackingMode(hazardTrackingMode))
 	return x
 }
 
+// @property resourceOptions @abstract A packed tuple of the storageMode, cpuCacheMode and hazardTrackingMode properties. @discussion Modifications to this property are reflected in the other properties and vice versa.
+//
 // WithResourceOptions sets the resourceOptions property and returns the receiver for chaining.
 func (x *HeapDescriptor) WithResourceOptions(resourceOptions MTLResourceOptions) *HeapDescriptor {
 	x.inner.SetResourceOptions(raw.MTLResourceOptions(resourceOptions))
 	return x
 }
 
+// @property type @abstract The type of the heap. The default value is MTLHeapTypeAutomatic. @discussion This constrains the resource creation functions that are available.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *HeapDescriptor) WithType(type_ MTLHeapType) *HeapDescriptor {
 	x.inner.SetType(raw.MTLHeapType(type_))
 	return x
 }
 
+// Specifies the largest sparse page size that the Metal heap supports. This parameter only affects the heap if you set the “type“ property of this descriptor to “MTLHeapType/MTLHeapTypePlacement“. The value you assign to this property determines the compatibility of the Metal heap with with placement sparse resources, because placement sparse resources require that their sparse page size be less than or equal to the placement sparse page of the Metal heap that this property controls.
+//
 // WithMaxCompatiblePlacementSparsePageSize sets the maxCompatiblePlacementSparsePageSize property and returns the receiver for chaining.
 func (x *HeapDescriptor) WithMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize MTLSparsePageSize) *HeapDescriptor {
 	x.inner.SetMaxCompatiblePlacementSparsePageSize(raw.MTLSparsePageSize(maxCompatiblePlacementSparsePageSize))
 	return x
 }
 
+// @property size @abstract Requested size of the heap's backing memory. @discussion The size may be rounded up to GPU page granularity.
+//
 // Size calls the underlying Size.
 func (x *HeapDescriptor) Size() uint {
 	return x.inner.Size()
@@ -93,6 +111,8 @@ func (x *HeapDescriptor) SetSize(size uint) {
 	x.inner.SetSize(size)
 }
 
+// @property storageMode @abstract Storage mode for the heap. Default is MTLStorageModePrivate. @discussion All resources created from this heap share the same storage mode. MTLStorageModeManaged and MTLStorageModeMemoryless are disallowed.
+//
 // StorageMode calls the underlying StorageMode.
 func (x *HeapDescriptor) StorageMode() MTLStorageMode {
 	return MTLStorageMode(x.inner.StorageMode())
@@ -103,6 +123,8 @@ func (x *HeapDescriptor) SetStorageMode(storageMode MTLStorageMode) {
 	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
 }
 
+// @property cpuCacheMode @abstract CPU cache mode for the heap. Default is MTLCPUCacheModeDefaultCache. @discussion All resources created from this heap share the same cache mode. CPU cache mode is ignored for MTLStorageModePrivate.
+//
 // CpuCacheMode calls the underlying CpuCacheMode.
 func (x *HeapDescriptor) CpuCacheMode() MTLCPUCacheMode {
 	return MTLCPUCacheMode(x.inner.CpuCacheMode())
@@ -113,6 +135,8 @@ func (x *HeapDescriptor) SetCpuCacheMode(cpuCacheMode MTLCPUCacheMode) {
 	x.inner.SetCpuCacheMode(raw.MTLCPUCacheMode(cpuCacheMode))
 }
 
+// @property sparsePageSize @abstract The sparse page size to use for resources created from the heap.
+//
 // SparsePageSize calls the underlying SparsePageSize.
 func (x *HeapDescriptor) SparsePageSize() MTLSparsePageSize {
 	return MTLSparsePageSize(x.inner.SparsePageSize())
@@ -123,6 +147,8 @@ func (x *HeapDescriptor) SetSparsePageSize(sparsePageSize MTLSparsePageSize) {
 	x.inner.SetSparsePageSize(raw.MTLSparsePageSize(sparsePageSize))
 }
 
+// @property hazardTrackingMode @abstract Set hazard tracking mode for the heap. The default value is MTLHazardTrackingModeDefault. @discussion For heaps, MTLHazardTrackingModeDefault is treated as MTLHazardTrackingModeUntracked. Setting hazardTrackingMode to MTLHazardTrackingModeTracked causes hazard tracking to be enabled heap. When a resource on a hazard tracked heap is modified, reads and writes from all resources suballocated on that heap will be delayed until the modification is complete. Similarly, modifying heap resources will be delayed until all in-flight reads and writes from all resources suballocated on that heap have completed. For optimal performance, perform hazard tracking manually through MTLFence or MTLEvent instead. All resources created from this heap shared the same hazard tracking mode.
+//
 // HazardTrackingMode calls the underlying HazardTrackingMode.
 func (x *HeapDescriptor) HazardTrackingMode() MTLHazardTrackingMode {
 	return MTLHazardTrackingMode(x.inner.HazardTrackingMode())
@@ -133,6 +159,8 @@ func (x *HeapDescriptor) SetHazardTrackingMode(hazardTrackingMode MTLHazardTrack
 	x.inner.SetHazardTrackingMode(raw.MTLHazardTrackingMode(hazardTrackingMode))
 }
 
+// @property resourceOptions @abstract A packed tuple of the storageMode, cpuCacheMode and hazardTrackingMode properties. @discussion Modifications to this property are reflected in the other properties and vice versa.
+//
 // ResourceOptions calls the underlying ResourceOptions.
 func (x *HeapDescriptor) ResourceOptions() MTLResourceOptions {
 	return MTLResourceOptions(x.inner.ResourceOptions())
@@ -143,6 +171,8 @@ func (x *HeapDescriptor) SetResourceOptions(resourceOptions MTLResourceOptions) 
 	x.inner.SetResourceOptions(raw.MTLResourceOptions(resourceOptions))
 }
 
+// @property type @abstract The type of the heap. The default value is MTLHeapTypeAutomatic. @discussion This constrains the resource creation functions that are available.
+//
 // Type calls the underlying Type.
 func (x *HeapDescriptor) Type() MTLHeapType {
 	return MTLHeapType(x.inner.Type())
@@ -153,11 +183,15 @@ func (x *HeapDescriptor) SetType(type_ MTLHeapType) {
 	x.inner.SetType(raw.MTLHeapType(type_))
 }
 
+// Specifies the largest sparse page size that the Metal heap supports. This parameter only affects the heap if you set the “type“ property of this descriptor to “MTLHeapType/MTLHeapTypePlacement“. The value you assign to this property determines the compatibility of the Metal heap with with placement sparse resources, because placement sparse resources require that their sparse page size be less than or equal to the placement sparse page of the Metal heap that this property controls.
+//
 // MaxCompatiblePlacementSparsePageSize calls the underlying MaxCompatiblePlacementSparsePageSize.
 func (x *HeapDescriptor) MaxCompatiblePlacementSparsePageSize() MTLSparsePageSize {
 	return MTLSparsePageSize(x.inner.MaxCompatiblePlacementSparsePageSize())
 }
 
+// Specifies the largest sparse page size that the Metal heap supports. This parameter only affects the heap if you set the “type“ property of this descriptor to “MTLHeapType/MTLHeapTypePlacement“. The value you assign to this property determines the compatibility of the Metal heap with with placement sparse resources, because placement sparse resources require that their sparse page size be less than or equal to the placement sparse page of the Metal heap that this property controls.
+//
 // SetMaxCompatiblePlacementSparsePageSize calls the underlying SetMaxCompatiblePlacementSparsePageSize.
 func (x *HeapDescriptor) SetMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize MTLSparsePageSize) {
 	x.inner.SetMaxCompatiblePlacementSparsePageSize(raw.MTLSparsePageSize(maxCompatiblePlacementSparsePageSize))

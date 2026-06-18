@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines the configuration for a USB pointing device that reports absolute coordinates.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzusbscreencoordinatepointingdeviceconfiguration
 type VZUSBScreenCoordinatePointingDeviceConfiguration struct {
 	VZPointingDeviceConfiguration
@@ -29,6 +31,7 @@ func VZUSBScreenCoordinatePointingDeviceConfigurationFromID(id objc.ID) *VZUSBSc
 	return o
 }
 
+// Creates a new pointing device.
 func (o *VZUSBScreenCoordinatePointingDeviceConfiguration) Init() *VZUSBScreenCoordinatePointingDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZUSBScreenCoordinatePointingDeviceConfigurationSelInit)
 	if _ret != 0 {

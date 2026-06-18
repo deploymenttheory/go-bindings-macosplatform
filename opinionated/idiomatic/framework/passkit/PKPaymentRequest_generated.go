@@ -242,6 +242,8 @@ func (x *PaymentRequest) WithApplePayLaterAvailability(applePayLaterAvailability
 	return x
 }
 
+// A Boolean value that indicates whether this payment request is being made by a delegated entity on behalf of a merchant. Set this property to YES when your app is acting as an Apple Pay delegate and presenting the payment sheet on behalf of another merchant. The default value is NO. @note This property requires your app to be registered as an Apple Pay delegate and to have the com.apple.developer.in-app-payments-delegate entitlement.
+//
 // WithIsDelegatedRequest sets the isDelegatedRequest property and returns the receiver for chaining.
 func (x *PaymentRequest) WithIsDelegatedRequest(isDelegatedRequest bool) *PaymentRequest {
 	x.inner.SetIsDelegatedRequest(isDelegatedRequest)
@@ -362,8 +364,17 @@ func (x *PaymentRequest) PaymentSummaryItems() []*PaymentSummaryItem {
 }
 
 // SetPaymentSummaryItems calls the underlying SetPaymentSummaryItems.
-func (x *PaymentRequest) SetPaymentSummaryItems(paymentSummaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem]) {
-	x.inner.SetPaymentSummaryItems(paymentSummaryItems)
+func (x *PaymentRequest) SetPaymentSummaryItems(paymentSummaryItems ...PaymentSummaryItemProvider) {
+	_ptrs := make([]objc.ID, len(paymentSummaryItems))
+	for _i, _v := range paymentSummaryItems {
+		_ptrs[_i] = _v.asPaymentSummaryItem().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.PKPaymentSummaryItem]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetPaymentSummaryItems(_arg0)
 }
 
 // CurrencyCode calls the underlying CurrencyCode.
@@ -572,6 +583,8 @@ func (x *PaymentRequest) SetApplePayLaterAvailability(applePayLaterAvailability 
 	x.inner.SetApplePayLaterAvailability(raw.PKApplePayLaterAvailability(applePayLaterAvailability))
 }
 
+// A Boolean value that indicates whether this payment request is being made by a delegated entity on behalf of a merchant. Set this property to YES when your app is acting as an Apple Pay delegate and presenting the payment sheet on behalf of another merchant. The default value is NO. @note This property requires your app to be registered as an Apple Pay delegate and to have the com.apple.developer.in-app-payments-delegate entitlement.
+//
 // IsDelegatedRequest calls the underlying IsDelegatedRequest.
 func (x *PaymentRequest) IsDelegatedRequest() bool {
 	return x.inner.IsDelegatedRequest()
@@ -629,7 +642,7 @@ type PaymentRequestable interface {
 	MerchantCategoryCode() int16
 	SetMerchantCategoryCode(merchantCategoryCode int16)
 	PaymentSummaryItems() []*PaymentSummaryItem
-	SetPaymentSummaryItems(paymentSummaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem])
+	SetPaymentSummaryItems(paymentSummaryItems ...PaymentSummaryItemProvider)
 	CurrencyCode() string
 	SetCurrencyCode(currencyCode string)
 	RequiredBillingContactFields() *foundation.NSSet[*foundation.NSString]

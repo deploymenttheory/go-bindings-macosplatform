@@ -36,16 +36,22 @@ func NewComposeSession() *ComposeSession {
 	return &ComposeSession{inner: raw.MEComposeSessionFromID(_id)}
 }
 
+// @brief Requests Mail to refresh compose session with new information that the extension has. @discussion Extensions can use this call this method to regenerate @c MEAddressAnnotation instances to replace those that were previously generated for this session. This will result in invocations to @c -[MEComposeSessionHandler @c session:annotateAddressesWithCompletionHandler:].
+//
 // ReloadSession calls the underlying ReloadSession.
 func (x *ComposeSession) ReloadSession() {
 	x.inner.ReloadSession()
 }
 
+// @brief A unique identifier for the session.
+//
 // SessionID calls the underlying SessionID.
 func (x *ComposeSession) SessionID() *foundation.NSUUID {
 	return x.inner.SessionID()
 }
 
+// @brief An instance of @c MEMessage that represents properties of the mail message that author is composing in this @c MEComposeSession
+//
 // MailMessage calls the underlying MailMessage.
 func (x *ComposeSession) MailMessage() *Message {
 	_r := x.inner.MailMessage()
@@ -55,6 +61,8 @@ func (x *ComposeSession) MailMessage() *Message {
 	return &Message{inner: _r}
 }
 
+// @brief An instance of @c MEComposeContext that provides additional information about the compose session.
+//
 // ComposeContext calls the underlying ComposeContext.
 func (x *ComposeSession) ComposeContext() *ComposeContext {
 	_r := x.inner.ComposeContext()

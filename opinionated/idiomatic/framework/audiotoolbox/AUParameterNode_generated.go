@@ -37,36 +37,48 @@ func NewParameterNode() *ParameterNode {
 	return &ParameterNode{inner: raw.AUParameterNodeFromID(_id)}
 }
 
+// @brief		Called when a parameter changes value. @discussion This block, used only in an audio unit implementation, receives all externally-generated changes to parameter values. It should store the new value in its audio signal processing state (assuming that that state is separate from the AUParameter object).
+//
 // WithImplementorValueObserver sets the implementorValueObserver property and returns the receiver for chaining.
 func (x *ParameterNode) WithImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32)) *ParameterNode {
 	x.inner.SetImplementorValueObserver(implementorValueObserver)
 	return x
 }
 
+// @brief		Called when a value of a parameter in the tree is known to have a stale value needing to be refreshed. @discussion The audio unit should return the current value for this parameter; the AUParameterNode will store the value.
+//
 // WithImplementorValueProvider sets the implementorValueProvider property and returns the receiver for chaining.
 func (x *ParameterNode) WithImplementorValueProvider(implementorValueProvider objc.Block) *ParameterNode {
 	x.inner.SetImplementorValueProvider(implementorValueProvider)
 	return x
 }
 
+// Called to provide string representations of parameter values. If value is nil, the callback uses the current value of the parameter.
+//
 // WithImplementorStringFromValueCallback sets the implementorStringFromValueCallback property and returns the receiver for chaining.
 func (x *ParameterNode) WithImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) *ParameterNode {
 	x.inner.SetImplementorStringFromValueCallback(implementorStringFromValueCallback)
 	return x
 }
 
+// Called to convert string to numeric representations of parameter values.
+//
 // WithImplementorValueFromStringCallback sets the implementorValueFromStringCallback property and returns the receiver for chaining.
 func (x *ParameterNode) WithImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) *ParameterNode {
 	x.inner.SetImplementorValueFromStringCallback(implementorValueFromStringCallback)
 	return x
 }
 
+// Called to obtain an abbreviated version of a parameter or group name.
+//
 // WithImplementorDisplayNameWithLengthCallback sets the implementorDisplayNameWithLengthCallback property and returns the receiver for chaining.
 func (x *ParameterNode) WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *ParameterNode {
 	x.inner.SetImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback)
 	return x
 }
 
+// @method		displayNameWithLength: @brief		A version of displayName possibly abbreviated to the given desired length, in characters. @discussion The default implementation simply returns displayName.
+//
 // DisplayNameWithLength calls the underlying DisplayNameWithLength.
 func (x *ParameterNode) DisplayNameWithLength(maximumLength int) string {
 	_r := x.inner.DisplayNameWithLength(maximumLength)
@@ -76,26 +88,36 @@ func (x *ParameterNode) DisplayNameWithLength(maximumLength int) string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @method	tokenByAddingParameterObserver: @brief	Add an observer for a parameter or all parameters in a group/tree. @discussion An audio unit view can use an AUParameterObserver to be notified of changes to a single parameter, or to all parameters in a group/tree. These callbacks are throttled so as to limit the rate of redundant notifications in the case of frequent changes to a single parameter. This block is called in an arbitrary thread context. It is responsible for thread-safety. It must not make any calls to add or remove other observers, including itself; this will deadlock. An audio unit's implementation should interact with the parameter object via implementorValueObserver and implementorValueProvider. Parameter observers are bound to a specific parameter instance. If this parameter is destroyed, e.g. if the parameter tree is re-constructed, the previously set parameter observers will no longer be valid. Clients can observe changes to the parameter tree via KVO. See the discussion of -[AUAudioUnit parameterTree]. @param observer A block to call after the value of a parameter has changed. @return A token which can be passed to removeParameterObserver: or to -[AUParameter setValue:originator:]
+//
 // TokenByAddingParameterObserver calls the underlying TokenByAddingParameterObserver.
 func (x *ParameterNode) TokenByAddingParameterObserver(observer func(uint64, float32)) unsafe.Pointer {
 	return x.inner.TokenByAddingParameterObserver(observer)
 }
 
+// @method tokenByAddingParameterRecordingObserver: @brief	Add a recording observer for a parameter or all parameters in a group/tree. @discussion This is a variant of tokenByAddingParameterAutomationObserver where the callback receives AURecordedParameterEvents instead of AUParameterAutomationEvents. This will be deprecated in favor of tokenByAddingParameterAutomationObserver in a future release.
+//
 // TokenByAddingParameterRecordingObserver calls the underlying TokenByAddingParameterRecordingObserver.
 func (x *ParameterNode) TokenByAddingParameterRecordingObserver(observer func(int, *raw.AURecordedParameterEvent)) unsafe.Pointer {
 	return x.inner.TokenByAddingParameterRecordingObserver(observer)
 }
 
+// @method tokenByAddingParameterAutomationObserver: @brief	Add a recording observer for a parameter or all parameters in a group/tree. @discussion An audio unit host can use an AUParameterAutomationObserver or AUParameterRecordingObserver to capture a series of changes to a parameter value, including the timing of the events, as generated by a UI gesture in a view, for example. Unlike AUParameterObserver, these callbacks are not throttled. This block is called in an arbitrary thread context. It is responsible for thread-safety. It must not make any calls to add or remove other observers, including itself; this will deadlock. An audio unit's engine should interact with the parameter object via implementorValueObserver and implementorValueProvider. @param observer A block to call to record the changing of a parameter value. @return A token which can be passed to removeParameterObserver: or to -[AUParameter setValue:originator:]
+//
 // TokenByAddingParameterAutomationObserver calls the underlying TokenByAddingParameterAutomationObserver.
 func (x *ParameterNode) TokenByAddingParameterAutomationObserver(observer func(int, *raw.AUParameterAutomationEvent)) unsafe.Pointer {
 	return x.inner.TokenByAddingParameterAutomationObserver(observer)
 }
 
+// @method removeParameterObserver: @brief	Remove an observer created with tokenByAddingParameterObserver, tokenByAddingParameterRecordingObserver, or tokenByAddingParameterAutomationObserver. @discussion This call will remove the callback corresponding to the supplied token. Note that this will block until any callbacks currently in flight have completed.
+//
 // RemoveParameterObserver calls the underlying RemoveParameterObserver.
 func (x *ParameterNode) RemoveParameterObserver(token unsafe.Pointer) {
 	x.inner.RemoveParameterObserver(token)
 }
 
+// @property	identifier @brief		A non-localized, permanent name for a parameter or group. @discussion The identifier must be unique for all child nodes under any given parent. From release to release, an audio unit must not change its parameters' identifiers; this will invalidate any hosts' documents that refer to the parameters.
+//
 // Identifier calls the underlying Identifier.
 func (x *ParameterNode) Identifier() string {
 	_r := x.inner.Identifier()
@@ -105,6 +127,8 @@ func (x *ParameterNode) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property	keyPath @brief		Generated by concatenating the identifiers of a node's parents with its own. @discussion Unless an audio unit specifically documents that its parameter addresses are stable and persistent, hosts, when recording parameter values, should bind to the keyPath. The individual node identifiers in a key path are separated by periods. (".") Passing a node's keyPath to -[tree valueForKeyPath:] should return the same node.
+//
 // KeyPath calls the underlying KeyPath.
 func (x *ParameterNode) KeyPath() string {
 	_r := x.inner.KeyPath()
@@ -114,6 +138,8 @@ func (x *ParameterNode) KeyPath() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property	displayName @brief		A localized name to display for the parameter.
+//
 // DisplayName calls the underlying DisplayName.
 func (x *ParameterNode) DisplayName() string {
 	_r := x.inner.DisplayName()
@@ -123,6 +149,8 @@ func (x *ParameterNode) DisplayName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief		Called when a parameter changes value. @discussion This block, used only in an audio unit implementation, receives all externally-generated changes to parameter values. It should store the new value in its audio signal processing state (assuming that that state is separate from the AUParameter object).
+//
 // ImplementorValueObserver calls the underlying ImplementorValueObserver.
 func (x *ParameterNode) ImplementorValueObserver() objc.Block {
 	return x.inner.ImplementorValueObserver()
@@ -133,6 +161,8 @@ func (x *ParameterNode) SetImplementorValueObserver(implementorValueObserver fun
 	x.inner.SetImplementorValueObserver(implementorValueObserver)
 }
 
+// @brief		Called when a value of a parameter in the tree is known to have a stale value needing to be refreshed. @discussion The audio unit should return the current value for this parameter; the AUParameterNode will store the value.
+//
 // ImplementorValueProvider calls the underlying ImplementorValueProvider.
 func (x *ParameterNode) ImplementorValueProvider() objc.Block {
 	return x.inner.ImplementorValueProvider()
@@ -143,6 +173,8 @@ func (x *ParameterNode) SetImplementorValueProvider(implementorValueProvider obj
 	x.inner.SetImplementorValueProvider(implementorValueProvider)
 }
 
+// Called to provide string representations of parameter values. If value is nil, the callback uses the current value of the parameter.
+//
 // ImplementorStringFromValueCallback calls the underlying ImplementorStringFromValueCallback.
 func (x *ParameterNode) ImplementorStringFromValueCallback() objc.Block {
 	return x.inner.ImplementorStringFromValueCallback()
@@ -153,6 +185,8 @@ func (x *ParameterNode) SetImplementorStringFromValueCallback(implementorStringF
 	x.inner.SetImplementorStringFromValueCallback(implementorStringFromValueCallback)
 }
 
+// Called to convert string to numeric representations of parameter values.
+//
 // ImplementorValueFromStringCallback calls the underlying ImplementorValueFromStringCallback.
 func (x *ParameterNode) ImplementorValueFromStringCallback() objc.Block {
 	return x.inner.ImplementorValueFromStringCallback()
@@ -163,6 +197,8 @@ func (x *ParameterNode) SetImplementorValueFromStringCallback(implementorValueFr
 	x.inner.SetImplementorValueFromStringCallback(implementorValueFromStringCallback)
 }
 
+// Called to obtain an abbreviated version of a parameter or group name.
+//
 // ImplementorDisplayNameWithLengthCallback calls the underlying ImplementorDisplayNameWithLengthCallback.
 func (x *ParameterNode) ImplementorDisplayNameWithLengthCallback() objc.Block {
 	return x.inner.ImplementorDisplayNameWithLengthCallback()

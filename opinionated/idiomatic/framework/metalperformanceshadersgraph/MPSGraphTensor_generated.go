@@ -37,16 +37,22 @@ func NewGraphTensor() *GraphTensor {
 	return &GraphTensor{inner: raw.MPSGraphTensorFromID(_id)}
 }
 
+// The shape of the tensor. nil shape represents an unranked tensor. -1 value for a dimension represents that it will be resolved via shape inference at runtime and it can be anything.
+//
 // Shape calls the underlying Shape.
 func (x *GraphTensor) Shape() unsafe.Pointer {
 	return x.inner.Shape()
 }
 
+// The data type of the tensor.
+//
 // DataType calls the underlying DataType.
 func (x *GraphTensor) DataType() mpscore.MPSDataType {
 	return x.inner.DataType()
 }
 
+// The operation responsible for creating this tensor.
+//
 // Operation calls the underlying Operation.
 func (x *GraphTensor) Operation() *GraphOperation {
 	_r := x.inner.Operation()

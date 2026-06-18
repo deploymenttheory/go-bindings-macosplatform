@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The common behavior of socket devices.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzsocketdevice
 type VZSocketDevice struct {
 	foundation.NSObject

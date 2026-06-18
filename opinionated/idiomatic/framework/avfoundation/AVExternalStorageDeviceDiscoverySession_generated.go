@@ -38,6 +38,8 @@ func NewExternalStorageDeviceDiscoverySession() *ExternalStorageDeviceDiscoveryS
 	return &ExternalStorageDeviceDiscoverySession{inner: raw.AVExternalStorageDeviceDiscoverySessionFromID(_id)}
 }
 
+// @property externalStorageDevices @abstract An array of external storage devices connected to this device. Read only. Key-value observable. @discussion An array of AVExternalStorageDevice objects connected to this device. The list is updated when the external storage device detected status changes.
+//
 // ExternalStorageDevices returns the collection as a Go slice.
 func (x *ExternalStorageDeviceDiscoverySession) ExternalStorageDevices() []*ExternalStorageDevice {
 	arr := x.inner.ExternalStorageDevices()

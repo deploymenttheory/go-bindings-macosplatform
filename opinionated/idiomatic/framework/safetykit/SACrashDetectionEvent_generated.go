@@ -37,16 +37,22 @@ func NewCrashDetectionEvent() *CrashDetectionEvent {
 	return &CrashDetectionEvent{inner: raw.SACrashDetectionEventFromID(_id)}
 }
 
+// date @discussion The time a crash was detected
+//
 // Date calls the underlying Date.
 func (x *CrashDetectionEvent) Date() *foundation.NSDate {
 	return x.inner.Date()
 }
 
+// response @discussion enum value representing the emergency response to the Crash Detection event @sa SACrashDetectionEventResponse
+//
 // Response calls the underlying Response.
 func (x *CrashDetectionEvent) Response() SACrashDetectionEventResponse {
 	return SACrashDetectionEventResponse(x.inner.Response())
 }
 
+// location @discussion Location information describing the geographical location of where the Crash Detection occurred. @sa CLLocation
+//
 // Location calls the underlying Location.
 func (x *CrashDetectionEvent) Location() unsafe.Pointer {
 	return x.inner.Location()

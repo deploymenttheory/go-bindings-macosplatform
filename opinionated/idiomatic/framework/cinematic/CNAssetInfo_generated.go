@@ -14,6 +14,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information associated with an AVAsset for a cinematic video.
+//
 // AssetInfo wraps [raw.CNAssetInfo] with a fluent Go API.
 type AssetInfo struct {
 	inner *raw.CNAssetInfo
@@ -71,31 +73,43 @@ func (x *AssetInfo) CinematicMetadataTrack() *avfoundation.AVAssetTrack {
 	return x.inner.CinematicMetadataTrack()
 }
 
+// Time range over which all cinematic tracks are valid.
+//
 // TimeRange calls the underlying TimeRange.
 func (x *AssetInfo) TimeRange() coremedia.CMTimeRange {
 	return x.inner.TimeRange()
 }
 
+// Natural size at which cinematic video would be rendered
+//
 // NaturalSize calls the underlying NaturalSize.
 func (x *AssetInfo) NaturalSize() corefoundation.CGSize {
 	return x.inner.NaturalSize()
 }
 
+// Natural size at which cinematic video would be displayed. Same as naturalSize with preferredTransform applied.
+//
 // PreferredSize calls the underlying PreferredSize.
 func (x *AssetInfo) PreferredSize() corefoundation.CGSize {
 	return x.inner.PreferredSize()
 }
 
+// The preferred transform of the rendered image for display purposes. Always the identity transform or a multiple of a 90º rotation with no scaling.
+//
 // PreferredTransform calls the underlying PreferredTransform.
 func (x *AssetInfo) PreferredTransform() corefoundation.CGAffineTransform {
 	return x.inner.PreferredTransform()
 }
 
+// Track to be used for frame timing
+//
 // FrameTimingTrack calls the underlying FrameTimingTrack.
 func (x *AssetInfo) FrameTimingTrack() *avfoundation.AVAssetTrack {
 	return x.inner.FrameTimingTrack()
 }
 
+// Tracks required to construct AVAssetReaderVideoCompositionOutput.
+//
 // VideoCompositionTracks returns the collection as a Go slice.
 func (x *AssetInfo) VideoCompositionTracks() []*avfoundation.AVAssetTrack {
 	arr := x.inner.VideoCompositionTracks()
@@ -107,6 +121,8 @@ func (x *AssetInfo) VideoCompositionTracks() []*avfoundation.AVAssetTrack {
 	})
 }
 
+// Source video track IDs required to implement AVVideoCompositionInstruction protocol
+//
 // VideoCompositionTrackIDs returns the collection as a Go slice.
 func (x *AssetInfo) VideoCompositionTrackIDs() []*foundation.NSNumber {
 	arr := x.inner.VideoCompositionTrackIDs()
@@ -118,6 +134,8 @@ func (x *AssetInfo) VideoCompositionTrackIDs() []*foundation.NSNumber {
 	})
 }
 
+// Source metadata track IDs required to implement AVVideoCompositionInstruction protocol
+//
 // SampleDataTrackIDs returns the collection as a Go slice.
 func (x *AssetInfo) SampleDataTrackIDs() []*foundation.NSNumber {
 	arr := x.inner.SampleDataTrackIDs()

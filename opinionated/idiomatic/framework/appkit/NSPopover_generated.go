@@ -50,6 +50,8 @@ func (x *Popover) WithDelegate(delegate raw.NSPopoverDelegate) *Popover {
 	return x
 }
 
+// The appearance of the popover. The popover's contentView will inherit this appearance. The default effective appearance is the NSAppearanceNameVibrantLight appearance. If nil is set, nil will be returned, and the effective appearance will return to the default. To prevent conflicts with the previous appearance property, this is only available for apps that target 10.10 and higher.
+//
 // WithAppearance sets the appearance property and returns the receiver for chaining.
 func (x *Popover) WithAppearance(appearance *Appearance) *Popover {
 	x.inner.SetAppearance(appearance.Unwrap())
@@ -116,11 +118,15 @@ func (x *Popover) WithTouchBar(touchBar *TouchBar) *Popover {
 	return x
 }
 
+// Shows the popover anchored to the specified view. The popover will animate onscreen and eventually animate offscreen when it is closed (unless the property `animates` is set to `NO`). - Parameters: - positioningRect: The rectangle within `positioningView` relative to which the popover should be positioned. Normally set to the bounds of `positioningView`. May be an empty rectangle, which will default to the bounds of `positioningView`. - positioningView: The view relative to which the popover should be positioned. Causes the method to raise `NSInvalidArgumentException` if `nil`. - preferredEdge: The edge of `positioningView` the popover should prefer to be anchored to (respects to the `-isFlipped` state of `positioningView`). The current (but not guaranteed) behavior is that AppKit will place the anchor towards the `preferredEdge` of the `positioningRect` unless such a placement would cause the popover not to fit on the screen of `positioningView`. If the anchor cannot be placed towards the `preferredEdge`, AppKit will (in the current implementation) attempt to place the anchor on the opposite side of the `positioningRect`. If that cannot be done, AppKit will attempt to place the anchor on a remaining side of the popover, and failing that will center the popover on the screen, causing it to (at least temporarily) lose its anchor. - Note: This method will throw a `NSInvalidArgumentException` if view is `nil` or if `view` is not in a window, or if the popover’s behavior is `NSPopoverBehaviorSemitransient` and the popover’s `positioningView` is in a popover or child window. It will throw a `NSInternalInconsistencyException` if the popover’s  content view controller (or the view controller’s view) is `nil`. If the popover is already being shown, this method will update to be associated with the new `view` and `positioningRect` passed. - Note: If the positioning view isn’t visible (its window isn’t visible, or the positioning rect is outside of its visible rect), this method does nothing.
+//
 // ShowRelativeToRectOfViewPreferredEdge calls the underlying ShowRelativeToRectOfViewPreferredEdge.
 func (x *Popover) ShowRelativeToRectOfViewPreferredEdge(positioningRect corefoundation.CGRect, positioningView *raw.NSView, preferredEdge foundation.NSRectEdge) {
 	x.inner.ShowRelativeToRectOfViewPreferredEdge(positioningRect, positioningView, preferredEdge)
 }
 
+// Shows the popover positioned relative to \c toolbarItem . When the item is in the overflow menu, the popover will be presented from another appropriate affordance in the window. See the comments in \c -showRelativeToRect:ofView:preferredEdge: for the popover behavior. This method will throw an \c NSInvalidArgumentException if it cannot locate the toolbar item. This could happen because the item is not in a toolbar, or because the toolbar is not in a window.
+//
 // ShowRelativeToToolbarItem calls the underlying ShowRelativeToToolbarItem.
 func (x *Popover) ShowRelativeToToolbarItem(toolbarItem *raw.NSToolbarItem) {
 	x.inner.ShowRelativeToToolbarItem(toolbarItem)
@@ -146,6 +152,8 @@ func (x *Popover) SetDelegate(delegate raw.NSPopoverDelegate) {
 	x.inner.SetDelegate(delegate)
 }
 
+// The appearance of the popover. The popover's contentView will inherit this appearance. The default effective appearance is the NSAppearanceNameVibrantLight appearance. If nil is set, nil will be returned, and the effective appearance will return to the default. To prevent conflicts with the previous appearance property, this is only available for apps that target 10.10 and higher.
+//
 // Appearance calls the underlying Appearance.
 func (x *Popover) Appearance() *Appearance {
 	_r := x.inner.Appearance()
@@ -155,6 +163,8 @@ func (x *Popover) Appearance() *Appearance {
 	return &Appearance{inner: _r}
 }
 
+// The appearance of the popover. The popover's contentView will inherit this appearance. The default effective appearance is the NSAppearanceNameVibrantLight appearance. If nil is set, nil will be returned, and the effective appearance will return to the default. To prevent conflicts with the previous appearance property, this is only available for apps that target 10.10 and higher.
+//
 // SetAppearance calls the underlying SetAppearance.
 func (x *Popover) SetAppearance(appearance *raw.NSAppearance) {
 	x.inner.SetAppearance(appearance)
@@ -218,6 +228,8 @@ func (x *Popover) IsShown() bool {
 	return x.inner.IsShown()
 }
 
+// Returns \c YES if the window is detached to an implicitly created detached window, \c NO otherwise. This method does not apply when the popover is detached to a window returned with \c -detachableWindowForPopover:.
+//
 // IsDetached calls the underlying IsDetached.
 func (x *Popover) IsDetached() bool {
 	return x.inner.IsDetached()

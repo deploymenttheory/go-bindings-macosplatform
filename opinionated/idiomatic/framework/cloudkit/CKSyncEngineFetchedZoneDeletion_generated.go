@@ -35,6 +35,8 @@ func NewSyncEngineFetchedZoneDeletion() *SyncEngineFetchedZoneDeletion {
 	return &SyncEngineFetchedZoneDeletion{inner: raw.CKSyncEngineFetchedZoneDeletionFromID(_id)}
 }
 
+// The identifier of the deleted record zone.
+//
 // ZoneID calls the underlying ZoneID.
 func (x *SyncEngineFetchedZoneDeletion) ZoneID() *RecordZoneID {
 	_r := x.inner.ZoneID()
@@ -44,6 +46,8 @@ func (x *SyncEngineFetchedZoneDeletion) ZoneID() *RecordZoneID {
 	return &RecordZoneID{inner: _r}
 }
 
+// The reason for the deletion.
+//
 // Reason calls the underlying Reason.
 func (x *SyncEngineFetchedZoneDeletion) Reason() CKSyncEngineZoneDeletionReason {
 	return CKSyncEngineZoneDeletionReason(x.inner.Reason())

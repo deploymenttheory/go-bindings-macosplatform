@@ -37,16 +37,22 @@ func NewTensorDescriptor() *TensorDescriptor {
 	return &TensorDescriptor{inner: raw.MLCTensorDescriptorFromID(_id)}
 }
 
+// @property   dataType @abstract   The tensor data type.  The default is MLCDataTypeFloat32.
+//
 // DataType calls the underlying DataType.
 func (x *TensorDescriptor) DataType() MLCDataType {
 	return MLCDataType(x.inner.DataType())
 }
 
+// @property   dimensionCount @abstract   The number of dimensions in the tensor
+//
 // DimensionCount calls the underlying DimensionCount.
 func (x *TensorDescriptor) DimensionCount() uint {
 	return x.inner.DimensionCount()
 }
 
+// @property   shape @abstract   The size in each dimension
+//
 // Shape returns the collection as a Go slice.
 func (x *TensorDescriptor) Shape() []*foundation.NSNumber {
 	arr := x.inner.Shape()
@@ -58,6 +64,8 @@ func (x *TensorDescriptor) Shape() []*foundation.NSNumber {
 	})
 }
 
+// @property   stride @abstract   The stride in bytes in each dimension
+//
 // Stride returns the collection as a Go slice.
 func (x *TensorDescriptor) Stride() []*foundation.NSNumber {
 	arr := x.inner.Stride()
@@ -69,11 +77,15 @@ func (x *TensorDescriptor) Stride() []*foundation.NSNumber {
 	})
 }
 
+// @property   tensorAllocationSizeInBytes @abstract   The allocation size in bytes for a tensor.
+//
 // TensorAllocationSizeInBytes calls the underlying TensorAllocationSizeInBytes.
 func (x *TensorDescriptor) TensorAllocationSizeInBytes() uint {
 	return x.inner.TensorAllocationSizeInBytes()
 }
 
+// @property   sequenceLengths @abstract   TODO
+//
 // SequenceLengths returns the collection as a Go slice.
 func (x *TensorDescriptor) SequenceLengths() []*foundation.NSNumber {
 	arr := x.inner.SequenceLengths()
@@ -85,11 +97,15 @@ func (x *TensorDescriptor) SequenceLengths() []*foundation.NSNumber {
 	})
 }
 
+// @property   sortedSequences @abstract   Specifies whether the sequences are sorted or not.
+//
 // SortedSequences calls the underlying SortedSequences.
 func (x *TensorDescriptor) SortedSequences() bool {
 	return x.inner.SortedSequences()
 }
 
+// @property   batchSizePerSequenceStep @abstract   The batch size for each sequence @discussion We populate this only when sequenceLengths is valid. The length of this array should be the maximum sequence length in sequenceLengths (i.e sequenceLengths[0]).
+//
 // BatchSizePerSequenceStep returns the collection as a Go slice.
 func (x *TensorDescriptor) BatchSizePerSequenceStep() []*foundation.NSNumber {
 	arr := x.inner.BatchSizePerSequenceStep()

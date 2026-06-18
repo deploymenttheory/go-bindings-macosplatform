@@ -38,39 +38,53 @@ func NewCaptureView() *CaptureView {
 	return &CaptureView{inner: raw.AVCaptureViewFromID(_id)}
 }
 
+// @property	delegate @abstract	The capture view's delegate. @discussion	The start recording button will be disabled if the delegate is not set.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *CaptureView) WithDelegate(delegate raw.AVCaptureViewDelegate) *CaptureView {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @property	controlsStyle @abstract	The style of the capture controls pane associated with the view.
+//
 // WithControlsStyle sets the controlsStyle property and returns the receiver for chaining.
 func (x *CaptureView) WithControlsStyle(controlsStyle AVCaptureViewControlsStyle) *CaptureView {
 	x.inner.SetControlsStyle(raw.AVCaptureViewControlsStyle(controlsStyle))
 	return x
 }
 
+// @property	videoGravity @abstract	A string defining how the video is displayed within the views bounds rect. @discussion	Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default.
+//
 // WithVideoGravity sets the videoGravity property and returns the receiver for chaining.
 func (x *CaptureView) WithVideoGravity(videoGravity *foundation.NSString) *CaptureView {
 	x.inner.SetVideoGravity(videoGravity)
 	return x
 }
 
+// @method		setSession:allowVideoSourceSelection:allowAudioSourceSelection: @abstract	Sets the session represented by this view. @param		session The session to be represented. @param		showVideoPreview Whether or not video preview should be shown. If YES, capture inputs for video media data will be added, removed, or modified depending on device availability and user selection. @param		showAudioPreview Whether or not audio preview should be shown. If YES, capture inputs for audio media data will be added, removed, or modified depending on device availability and user selection. @discussion The view must either show audio preview or video preview or both. Furthermore, the view may modify the capture session, for example, to access media data for preview or when the user select a new capture source. Only the default session is started and stopped automatically. The provided session must be manually started and stopped.
+//
 // SetSessionShowVideoPreviewShowAudioPreview calls the underlying SetSessionShowVideoPreviewShowAudioPreview.
 func (x *CaptureView) SetSessionShowVideoPreviewShowAudioPreview(session *avfoundation.AVCaptureSession, showVideoPreview bool, showAudioPreview bool) {
 	x.inner.SetSessionShowVideoPreviewShowAudioPreview(session, showVideoPreview, showAudioPreview)
 }
 
+// @property	session @abstract	A capture session represented by this view. @discussion	Modifying the capture session will impact its visual representation in the view. The default value is a session configured for movie file recordings of audio and video media data. Use -setSession:showVideoPreview:showAudioPreview: to change the value of this property.
+//
 // Session calls the underlying Session.
 func (x *CaptureView) Session() *avfoundation.AVCaptureSession {
 	return x.inner.Session()
 }
 
+// @property	fileOutput @abstract	A capture file output used to record media data. @discussion	The value of this property is the first instance of AVCaptureFileOutput contained in the session's outputs array or nil if no such instance is found. In the latter case the capture view's start recording button will be disabled. However, the controls for choosing input sources may still be enabled.
+//
 // FileOutput calls the underlying FileOutput.
 func (x *CaptureView) FileOutput() *avfoundation.AVCaptureFileOutput {
 	return x.inner.FileOutput()
 }
 
+// @property	delegate @abstract	The capture view's delegate. @discussion	The start recording button will be disabled if the delegate is not set.
+//
 // Delegate calls the underlying Delegate.
 func (x *CaptureView) Delegate() raw.AVCaptureViewDelegate {
 	return x.inner.Delegate()
@@ -81,6 +95,8 @@ func (x *CaptureView) SetDelegate(delegate raw.AVCaptureViewDelegate) {
 	x.inner.SetDelegate(delegate)
 }
 
+// @property	controlsStyle @abstract	The style of the capture controls pane associated with the view.
+//
 // ControlsStyle calls the underlying ControlsStyle.
 func (x *CaptureView) ControlsStyle() AVCaptureViewControlsStyle {
 	return AVCaptureViewControlsStyle(x.inner.ControlsStyle())
@@ -91,6 +107,8 @@ func (x *CaptureView) SetControlsStyle(controlsStyle AVCaptureViewControlsStyle)
 	x.inner.SetControlsStyle(raw.AVCaptureViewControlsStyle(controlsStyle))
 }
 
+// @property	videoGravity @abstract	A string defining how the video is displayed within the views bounds rect. @discussion	Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default.
+//
 // VideoGravity calls the underlying VideoGravity.
 func (x *CaptureView) VideoGravity() string {
 	_r := x.inner.VideoGravity()

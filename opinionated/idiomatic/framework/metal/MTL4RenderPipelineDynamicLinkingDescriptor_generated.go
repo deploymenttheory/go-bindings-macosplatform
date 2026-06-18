@@ -37,6 +37,8 @@ func NewMTL4RenderPipelineDynamicLinkingDescriptor() *MTL4RenderPipelineDynamicL
 	return &MTL4RenderPipelineDynamicLinkingDescriptor{inner: raw.MTL4RenderPipelineDynamicLinkingDescriptorFromID(_id)}
 }
 
+// Controls properties for linking the vertex stage of the render pipeline.
+//
 // VertexLinkingDescriptor calls the underlying VertexLinkingDescriptor.
 func (x *MTL4RenderPipelineDynamicLinkingDescriptor) VertexLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
 	_r := x.inner.VertexLinkingDescriptor()
@@ -46,6 +48,8 @@ func (x *MTL4RenderPipelineDynamicLinkingDescriptor) VertexLinkingDescriptor() *
 	return &MTL4PipelineStageDynamicLinkingDescriptor{inner: _r}
 }
 
+// Controls properties for linking the fragment stage of the render pipeline.
+//
 // FragmentLinkingDescriptor calls the underlying FragmentLinkingDescriptor.
 func (x *MTL4RenderPipelineDynamicLinkingDescriptor) FragmentLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
 	_r := x.inner.FragmentLinkingDescriptor()
@@ -55,6 +59,8 @@ func (x *MTL4RenderPipelineDynamicLinkingDescriptor) FragmentLinkingDescriptor()
 	return &MTL4PipelineStageDynamicLinkingDescriptor{inner: _r}
 }
 
+// Controls properties for linking the tile stage of the render pipeline.
+//
 // TileLinkingDescriptor calls the underlying TileLinkingDescriptor.
 func (x *MTL4RenderPipelineDynamicLinkingDescriptor) TileLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
 	_r := x.inner.TileLinkingDescriptor()
@@ -64,6 +70,8 @@ func (x *MTL4RenderPipelineDynamicLinkingDescriptor) TileLinkingDescriptor() *MT
 	return &MTL4PipelineStageDynamicLinkingDescriptor{inner: _r}
 }
 
+// Controls properties for link the object stage of the render pipeline.
+//
 // ObjectLinkingDescriptor calls the underlying ObjectLinkingDescriptor.
 func (x *MTL4RenderPipelineDynamicLinkingDescriptor) ObjectLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
 	_r := x.inner.ObjectLinkingDescriptor()
@@ -73,6 +81,8 @@ func (x *MTL4RenderPipelineDynamicLinkingDescriptor) ObjectLinkingDescriptor() *
 	return &MTL4PipelineStageDynamicLinkingDescriptor{inner: _r}
 }
 
+// Controls properties for linking the mesh stage of the render pipeline.
+//
 // MeshLinkingDescriptor calls the underlying MeshLinkingDescriptor.
 func (x *MTL4RenderPipelineDynamicLinkingDescriptor) MeshLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
 	_r := x.inner.MeshLinkingDescriptor()

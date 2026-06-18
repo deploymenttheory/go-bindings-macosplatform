@@ -44,11 +44,15 @@ func NewDecodedMessageWithDataSecurityInformationContextBanner(rawData *foundati
 	return &DecodedMessage{inner: raw.MEDecodedMessageFromID(_id)}
 }
 
+// @brief The decoded MIME data for the message The decoded data should not be encrypted or contain any signatures that were decoded. The @c rawData here should only contain MIME parts that a standard email parser can decode without needing to decrypt. All information on the encryption and signature status should be defined in @c securityInformation. If the message is unable to be decrypted this should be left nil and an error message will be displayed to the user.
+//
 // RawData calls the underlying RawData.
 func (x *DecodedMessage) RawData() *foundation.NSData {
 	return x.inner.RawData()
 }
 
+// @brief The security information for whether or not the message was signed, encrypted, or had an errors in decoding.
+//
 // SecurityInformation calls the underlying SecurityInformation.
 func (x *DecodedMessage) SecurityInformation() *MessageSecurityInformation {
 	_r := x.inner.SecurityInformation()
@@ -58,11 +62,15 @@ func (x *DecodedMessage) SecurityInformation() *MessageSecurityInformation {
 	return &MessageSecurityInformation{inner: _r}
 }
 
+// @brief The context for the decoded message. This will be passed back to the extension when Mail loads the extension's custom view controller for the message.
+//
 // Context calls the underlying Context.
 func (x *DecodedMessage) Context() *foundation.NSData {
 	return x.inner.Context()
 }
 
+// @brief Suggestion information used to populate a suggestion banner at the top of the message view. Clicking on the action associated with the suggestion banner will present the extension's view controller for the provided message context.
+//
 // Banner calls the underlying Banner.
 func (x *DecodedMessage) Banner() *DecodedMessageBanner {
 	_r := x.inner.Banner()

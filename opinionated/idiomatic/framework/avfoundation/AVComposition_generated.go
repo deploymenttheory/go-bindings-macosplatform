@@ -36,6 +36,8 @@ func NewComposition() *Composition {
 	return &Composition{inner: raw.AVCompositionFromID(_id)}
 }
 
+// @property       URLAssetInitializationOptions @abstract       Specifies the initialization options for the creation of AVURLAssets by the receiver, e.g. AVURLAssetPreferPreciseDurationAndTimingKey. The default behavior for creation of AVURLAssets by an AVComposition is equivalent to the behavior of +[AVURLAsset URLAssetWithURL:options:] when specifying no initialization options. @discussion AVCompositions create AVURLAssets internally for URLs specified by AVCompositionTrackSegments of AVCompositionTracks, as needed, whenever AVCompositionTrackSegments were originally added to a track via -[AVMutableCompositionTrack setSegments:] rather than by inserting timeranges of already existing AVAssets or AVAssetTracks. The value of URLAssetInitializationOptions can be specified at the time an AVMutableComposition is created via +compositionWithURLAssetInitializationOptions:.
+//
 // URLAssetInitializationOptions calls the underlying URLAssetInitializationOptions.
 func (x *Composition) URLAssetInitializationOptions() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.URLAssetInitializationOptions()

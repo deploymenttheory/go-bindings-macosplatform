@@ -32,6 +32,8 @@ func MTRClusterOnOffSwitchConfigurationFromID(id objc.ID) *MTRClusterOnOffSwitch
 	return &MTRClusterOnOffSwitchConfiguration{inner: raw.MTRClusterOnOffSwitchConfigurationFromID(id)}
 }
 
+// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+//
 // NewMTRClusterOnOffSwitchConfigurationWithDeviceEndpointIDQueue creates a new [MTRClusterOnOffSwitchConfiguration].
 func NewMTRClusterOnOffSwitchConfigurationWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterOnOffSwitchConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterOnOffSwitchConfiguration")), objc.RegisterName("alloc"))

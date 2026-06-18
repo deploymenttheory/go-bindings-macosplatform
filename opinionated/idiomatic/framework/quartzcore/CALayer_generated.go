@@ -719,8 +719,17 @@ func (x *Layer) Sublayers() []*Layer {
 }
 
 // SetSublayers calls the underlying SetSublayers.
-func (x *Layer) SetSublayers(sublayers *foundation.NSArray[*raw.CALayer]) {
-	x.inner.SetSublayers(sublayers)
+func (x *Layer) SetSublayers(sublayers ...LayerProvider) {
+	_ptrs := make([]objc.ID, len(sublayers))
+	for _i, _v := range sublayers {
+		_ptrs[_i] = _v.asLayer().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.CALayer]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.CALayer](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetSublayers(_arg0)
 }
 
 // SublayerTransform calls the underlying SublayerTransform.
@@ -1363,7 +1372,7 @@ type Layerable interface {
 	SetGeometryFlipped(geometryFlipped bool)
 	Superlayer() *Layer
 	Sublayers() []*Layer
-	SetSublayers(sublayers *foundation.NSArray[*raw.CALayer])
+	SetSublayers(sublayers ...LayerProvider)
 	SublayerTransform() raw.CATransform3D
 	SetSublayerTransform(sublayerTransform raw.CATransform3D)
 	Mask() *Layer

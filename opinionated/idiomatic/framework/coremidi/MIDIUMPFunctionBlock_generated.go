@@ -36,6 +36,8 @@ func NewUMPFunctionBlock() *UMPFunctionBlock {
 	return &UMPFunctionBlock{inner: raw.MIDIUMPFunctionBlockFromID(_id)}
 }
 
+// @property 	name @brief		A string containing the Function Block's name.
+//
 // Name calls the underlying Name.
 func (x *UMPFunctionBlock) Name() string {
 	_r := x.inner.Name()
@@ -45,41 +47,57 @@ func (x *UMPFunctionBlock) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property 	functionBlockID @brief		The device-unique ID for this Function Block.
+//
 // FunctionBlockID calls the underlying FunctionBlockID.
 func (x *UMPFunctionBlock) FunctionBlockID() uint8 {
 	return x.inner.FunctionBlockID()
 }
 
+// @property	direction @brief		The direction of the Function Block: input, output, or bidirectional.
+//
 // Direction calls the underlying Direction.
 func (x *UMPFunctionBlock) Direction() MIDIUMPFunctionBlockDirection {
 	return MIDIUMPFunctionBlockDirection(x.inner.Direction())
 }
 
+// @property	firstGroup @brief		The first Group spanned by this Function Block.
+//
 // FirstGroup calls the underlying FirstGroup.
 func (x *UMPFunctionBlock) FirstGroup() uint8 {
 	return x.inner.FirstGroup()
 }
 
+// @property	totalGroupsSpanned @brief		The total number of groups spanned by this Function Block.
+//
 // TotalGroupsSpanned calls the underlying TotalGroupsSpanned.
 func (x *UMPFunctionBlock) TotalGroupsSpanned() uint8 {
 	return x.inner.TotalGroupsSpanned()
 }
 
+// @property	maxSysEx8Streams @brief		The maximum number of simultaneous Sysex8 streams.
+//
 // MaxSysEx8Streams calls the underlying MaxSysEx8Streams.
 func (x *UMPFunctionBlock) MaxSysEx8Streams() uint8 {
 	return x.inner.MaxSysEx8Streams()
 }
 
+// @property	MIDI1Info @brief		MIDI 1.0 speed information.
+//
 // MIDI1Info calls the underlying MIDI1Info.
 func (x *UMPFunctionBlock) MIDI1Info() MIDIUMPFunctionBlockMIDI1Info {
 	return MIDIUMPFunctionBlockMIDI1Info(x.inner.MIDI1Info())
 }
 
+// @property	UIHint @brief		A hint for UI about the primary usage of this Function Block.
+//
 // UIHint calls the underlying UIHint.
 func (x *UMPFunctionBlock) UIHint() MIDIUMPFunctionBlockUIHint {
 	return MIDIUMPFunctionBlockUIHint(x.inner.UIHint())
 }
 
+// @property 	UMPEndpoint @brief		The UMP Endpoint to which this Function Block is registered. @discussion If the function block does not belong to an endpoint this property will be nil.
+//
 // UMPEndpoint calls the underlying UMPEndpoint.
 func (x *UMPFunctionBlock) UMPEndpoint() *UMPEndpoint {
 	_r := x.inner.UMPEndpoint()
@@ -89,6 +107,8 @@ func (x *UMPFunctionBlock) UMPEndpoint() *UMPEndpoint {
 	return &UMPEndpoint{inner: _r}
 }
 
+// @property     MIDICIDevice @brief        Retrieve the MIDICIDevice class interface if the Function Block supports MIDI-CI. @discussion   If a Function Block was created as a MIDICIDevice object, this property will provide an in-place MIDICIDevice interface that may be used with MIDI-CI API. If the device was not created as a MIDICIDevice, this method returns nil.
+//
 // MidiCIDevice calls the underlying MidiCIDevice.
 func (x *UMPFunctionBlock) MidiCIDevice() *CIDevice {
 	_r := x.inner.MidiCIDevice()
@@ -98,6 +118,8 @@ func (x *UMPFunctionBlock) MidiCIDevice() *CIDevice {
 	return &CIDevice{inner: _r}
 }
 
+// @property	isEnabled @brief		The enable state of this Function Block.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *UMPFunctionBlock) IsEnabled() bool {
 	return x.inner.IsEnabled()

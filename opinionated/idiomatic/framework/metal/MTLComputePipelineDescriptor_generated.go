@@ -9,6 +9,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ComputePipelineDescriptor wraps [raw.MTLComputePipelineDescriptor] with a fluent Go API.
@@ -37,77 +38,103 @@ func NewComputePipelineDescriptor() *ComputePipelineDescriptor {
 	return &ComputePipelineDescriptor{inner: raw.MTLComputePipelineDescriptorFromID(_id)}
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithLabel(label string) *ComputePipelineDescriptor {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property computeFunction @abstract The function to use with the MTLComputePipelineState
+//
 // WithComputeFunction sets the computeFunction property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithComputeFunction(computeFunction raw.MTLFunction) *ComputePipelineDescriptor {
 	x.inner.SetComputeFunction(computeFunction)
 	return x
 }
 
+// @property threadGroupSizeIsMultipleOfThreadExecutionWidth @abstract An optimization flag, set if the thread group size will always be a multiple of thread execution width
+//
 // WithThreadGroupSizeIsMultipleOfThreadExecutionWidth sets the threadGroupSizeIsMultipleOfThreadExecutionWidth property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth bool) *ComputePipelineDescriptor {
 	x.inner.SetThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth)
 	return x
 }
 
+// @property maxTotalThreadsPerThreadgroup @abstract Optional property. Set the maxTotalThreadsPerThreadgroup. If it is not set, returns zero.
+//
 // WithMaxTotalThreadsPerThreadgroup sets the maxTotalThreadsPerThreadgroup property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) *ComputePipelineDescriptor {
 	x.inner.SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup)
 	return x
 }
 
+// @property computeDataDescriptor @abstract An MTLStageInputOutputDescriptor to fetch data from buffers
+//
 // WithStageInputDescriptor sets the stageInputDescriptor property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithStageInputDescriptor(stageInputDescriptor *StageInputOutputDescriptor) *ComputePipelineDescriptor {
 	x.inner.SetStageInputDescriptor(stageInputDescriptor.Unwrap())
 	return x
 }
 
+// @property supportIndirectCommandBuffers @abstract This flag makes this pipeline usable with indirect command buffers.
+//
 // WithSupportIndirectCommandBuffers sets the supportIndirectCommandBuffers property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) *ComputePipelineDescriptor {
 	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
 	return x
 }
 
+// @property linkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the compute function. @see MTLLinkedFunctions
+//
 // WithLinkedFunctions sets the linkedFunctions property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithLinkedFunctions(linkedFunctions *LinkedFunctions) *ComputePipelineDescriptor {
 	x.inner.SetLinkedFunctions(linkedFunctions.Unwrap())
 	return x
 }
 
+// @property supportAddingBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
+//
 // WithSupportAddingBinaryFunctions sets the supportAddingBinaryFunctions property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool) *ComputePipelineDescriptor {
 	x.inner.SetSupportAddingBinaryFunctions(supportAddingBinaryFunctions)
 	return x
 }
 
+// @property maxCallStackDepth @abstract The maximum depth of the call stack in stack frames from the kernel. Defaults to 1 additional stack frame.
+//
 // WithMaxCallStackDepth sets the maxCallStackDepth property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithMaxCallStackDepth(maxCallStackDepth uint) *ComputePipelineDescriptor {
 	x.inner.SetMaxCallStackDepth(maxCallStackDepth)
 	return x
 }
 
+// @property shaderValidation @abstract Toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. @discussion The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
+//
 // WithShaderValidation sets the shaderValidation property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithShaderValidation(shaderValidation MTLShaderValidation) *ComputePipelineDescriptor {
 	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
 	return x
 }
 
+// @property requiredThreadsPerThreadgroup @abstract Sets the required threads-per-threadgroup during dispatches. The `threadsPerThreadgroup` argument of any dispatch must match this value if it is set. Setting this to a size of 0 in every dimension disables this property
+//
 // WithRequiredThreadsPerThreadgroup sets the requiredThreadsPerThreadgroup property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) *ComputePipelineDescriptor {
 	x.inner.SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup)
 	return x
 }
 
+// @method reset @abstract Restore all compute pipeline descriptor properties to their default values.
+//
 // Reset calls the underlying Reset.
 func (x *ComputePipelineDescriptor) Reset() {
 	x.inner.Reset()
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // Label calls the underlying Label.
 func (x *ComputePipelineDescriptor) Label() string {
 	_r := x.inner.Label()
@@ -122,6 +149,8 @@ func (x *ComputePipelineDescriptor) SetLabel(label string) {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 }
 
+// @property computeFunction @abstract The function to use with the MTLComputePipelineState
+//
 // ComputeFunction calls the underlying ComputeFunction.
 func (x *ComputePipelineDescriptor) ComputeFunction() raw.MTLFunction {
 	return x.inner.ComputeFunction()
@@ -132,6 +161,8 @@ func (x *ComputePipelineDescriptor) SetComputeFunction(computeFunction raw.MTLFu
 	x.inner.SetComputeFunction(computeFunction)
 }
 
+// @property threadGroupSizeIsMultipleOfThreadExecutionWidth @abstract An optimization flag, set if the thread group size will always be a multiple of thread execution width
+//
 // ThreadGroupSizeIsMultipleOfThreadExecutionWidth calls the underlying ThreadGroupSizeIsMultipleOfThreadExecutionWidth.
 func (x *ComputePipelineDescriptor) ThreadGroupSizeIsMultipleOfThreadExecutionWidth() bool {
 	return x.inner.ThreadGroupSizeIsMultipleOfThreadExecutionWidth()
@@ -142,6 +173,8 @@ func (x *ComputePipelineDescriptor) SetThreadGroupSizeIsMultipleOfThreadExecutio
 	x.inner.SetThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth)
 }
 
+// @property maxTotalThreadsPerThreadgroup @abstract Optional property. Set the maxTotalThreadsPerThreadgroup. If it is not set, returns zero.
+//
 // MaxTotalThreadsPerThreadgroup calls the underlying MaxTotalThreadsPerThreadgroup.
 func (x *ComputePipelineDescriptor) MaxTotalThreadsPerThreadgroup() uint {
 	return x.inner.MaxTotalThreadsPerThreadgroup()
@@ -152,6 +185,8 @@ func (x *ComputePipelineDescriptor) SetMaxTotalThreadsPerThreadgroup(maxTotalThr
 	x.inner.SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup)
 }
 
+// @property computeDataDescriptor @abstract An MTLStageInputOutputDescriptor to fetch data from buffers
+//
 // StageInputDescriptor calls the underlying StageInputDescriptor.
 func (x *ComputePipelineDescriptor) StageInputDescriptor() *StageInputOutputDescriptor {
 	_r := x.inner.StageInputDescriptor()
@@ -166,6 +201,8 @@ func (x *ComputePipelineDescriptor) SetStageInputDescriptor(stageInputDescriptor
 	x.inner.SetStageInputDescriptor(stageInputDescriptor)
 }
 
+// @property buffers @abstract Optional properties for each buffer binding used by the compute function.
+//
 // Buffers calls the underlying Buffers.
 func (x *ComputePipelineDescriptor) Buffers() *PipelineBufferDescriptorArray {
 	_r := x.inner.Buffers()
@@ -175,6 +212,8 @@ func (x *ComputePipelineDescriptor) Buffers() *PipelineBufferDescriptorArray {
 	return &PipelineBufferDescriptorArray{inner: _r}
 }
 
+// @property supportIndirectCommandBuffers @abstract This flag makes this pipeline usable with indirect command buffers.
+//
 // SupportIndirectCommandBuffers calls the underlying SupportIndirectCommandBuffers.
 func (x *ComputePipelineDescriptor) SupportIndirectCommandBuffers() bool {
 	return x.inner.SupportIndirectCommandBuffers()
@@ -185,36 +224,71 @@ func (x *ComputePipelineDescriptor) SetSupportIndirectCommandBuffers(supportIndi
 	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
 }
 
+// @property insertLibraries @abstract The set of MTLDynamicLibrary to use to resolve external symbols before considering symbols from dependent MTLDynamicLibrary. @discussion Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use insertLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system. @see MTLDynamicLibrary
+//
 // InsertLibraries calls the underlying InsertLibraries.
 func (x *ComputePipelineDescriptor) InsertLibraries() *foundation.NSArray[raw.MTLDynamicLibrary] {
 	return x.inner.InsertLibraries()
 }
 
 // SetInsertLibraries calls the underlying SetInsertLibraries.
-func (x *ComputePipelineDescriptor) SetInsertLibraries(insertLibraries *foundation.NSArray[raw.MTLDynamicLibrary]) {
-	x.inner.SetInsertLibraries(insertLibraries)
+func (x *ComputePipelineDescriptor) SetInsertLibraries(insertLibraries ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(insertLibraries))
+	for _i, _v := range insertLibraries {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTLDynamicLibrary]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetInsertLibraries(_arg0)
 }
 
+// @property preloadedLibraries @abstract The set of MTLDynamicLibrary to use to resolve external symbols before considering symbols from dependent MTLDynamicLibrary. @discussion Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use preloadedLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system. @see MTLDynamicLibrary
+//
 // PreloadedLibraries calls the underlying PreloadedLibraries.
 func (x *ComputePipelineDescriptor) PreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary] {
 	return x.inner.PreloadedLibraries()
 }
 
 // SetPreloadedLibraries calls the underlying SetPreloadedLibraries.
-func (x *ComputePipelineDescriptor) SetPreloadedLibraries(preloadedLibraries *foundation.NSArray[raw.MTLDynamicLibrary]) {
-	x.inner.SetPreloadedLibraries(preloadedLibraries)
+func (x *ComputePipelineDescriptor) SetPreloadedLibraries(preloadedLibraries ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(preloadedLibraries))
+	for _i, _v := range preloadedLibraries {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTLDynamicLibrary]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetPreloadedLibraries(_arg0)
 }
 
+// @property binaryArchives @abstract The set of MTLBinaryArchive to search for compiled code when creating the pipeline state. @discussion Accelerate pipeline state creation by providing archives of compiled code such that no compilation needs to happen on the fast path. @see MTLBinaryArchive
+//
 // BinaryArchives calls the underlying BinaryArchives.
 func (x *ComputePipelineDescriptor) BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive] {
 	return x.inner.BinaryArchives()
 }
 
 // SetBinaryArchives calls the underlying SetBinaryArchives.
-func (x *ComputePipelineDescriptor) SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive]) {
-	x.inner.SetBinaryArchives(binaryArchives)
+func (x *ComputePipelineDescriptor) SetBinaryArchives(binaryArchives ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(binaryArchives))
+	for _i, _v := range binaryArchives {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTLBinaryArchive]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTLBinaryArchive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetBinaryArchives(_arg0)
 }
 
+// @property linkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the compute function. @see MTLLinkedFunctions
+//
 // LinkedFunctions calls the underlying LinkedFunctions.
 func (x *ComputePipelineDescriptor) LinkedFunctions() *LinkedFunctions {
 	_r := x.inner.LinkedFunctions()
@@ -224,31 +298,43 @@ func (x *ComputePipelineDescriptor) LinkedFunctions() *LinkedFunctions {
 	return &LinkedFunctions{inner: _r}
 }
 
+// @property linkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the compute function. @see MTLLinkedFunctions
+//
 // SetLinkedFunctions calls the underlying SetLinkedFunctions.
 func (x *ComputePipelineDescriptor) SetLinkedFunctions(linkedFunctions *raw.MTLLinkedFunctions) {
 	x.inner.SetLinkedFunctions(linkedFunctions)
 }
 
+// @property supportAddingBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
+//
 // SupportAddingBinaryFunctions calls the underlying SupportAddingBinaryFunctions.
 func (x *ComputePipelineDescriptor) SupportAddingBinaryFunctions() bool {
 	return x.inner.SupportAddingBinaryFunctions()
 }
 
+// @property supportAddingBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
+//
 // SetSupportAddingBinaryFunctions calls the underlying SetSupportAddingBinaryFunctions.
 func (x *ComputePipelineDescriptor) SetSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool) {
 	x.inner.SetSupportAddingBinaryFunctions(supportAddingBinaryFunctions)
 }
 
+// @property maxCallStackDepth @abstract The maximum depth of the call stack in stack frames from the kernel. Defaults to 1 additional stack frame.
+//
 // MaxCallStackDepth calls the underlying MaxCallStackDepth.
 func (x *ComputePipelineDescriptor) MaxCallStackDepth() uint {
 	return x.inner.MaxCallStackDepth()
 }
 
+// @property maxCallStackDepth @abstract The maximum depth of the call stack in stack frames from the kernel. Defaults to 1 additional stack frame.
+//
 // SetMaxCallStackDepth calls the underlying SetMaxCallStackDepth.
 func (x *ComputePipelineDescriptor) SetMaxCallStackDepth(maxCallStackDepth uint) {
 	x.inner.SetMaxCallStackDepth(maxCallStackDepth)
 }
 
+// @property shaderValidation @abstract Toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. @discussion The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
+//
 // ShaderValidation calls the underlying ShaderValidation.
 func (x *ComputePipelineDescriptor) ShaderValidation() MTLShaderValidation {
 	return MTLShaderValidation(x.inner.ShaderValidation())
@@ -259,6 +345,8 @@ func (x *ComputePipelineDescriptor) SetShaderValidation(shaderValidation MTLShad
 	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
 }
 
+// @property requiredThreadsPerThreadgroup @abstract Sets the required threads-per-threadgroup during dispatches. The `threadsPerThreadgroup` argument of any dispatch must match this value if it is set. Setting this to a size of 0 in every dimension disables this property
+//
 // RequiredThreadsPerThreadgroup calls the underlying RequiredThreadsPerThreadgroup.
 func (x *ComputePipelineDescriptor) RequiredThreadsPerThreadgroup() raw.MTLSize {
 	return x.inner.RequiredThreadsPerThreadgroup()
@@ -298,11 +386,11 @@ type ComputePipelineDescriptorable interface {
 	SupportIndirectCommandBuffers() bool
 	SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool)
 	InsertLibraries() *foundation.NSArray[raw.MTLDynamicLibrary]
-	SetInsertLibraries(insertLibraries *foundation.NSArray[raw.MTLDynamicLibrary])
+	SetInsertLibraries(insertLibraries ...purego.IDer)
 	PreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary]
-	SetPreloadedLibraries(preloadedLibraries *foundation.NSArray[raw.MTLDynamicLibrary])
+	SetPreloadedLibraries(preloadedLibraries ...purego.IDer)
 	BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive]
-	SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive])
+	SetBinaryArchives(binaryArchives ...purego.IDer)
 	LinkedFunctions() *LinkedFunctions
 	SetLinkedFunctions(linkedFunctions *raw.MTLLinkedFunctions)
 	SupportAddingBinaryFunctions() bool

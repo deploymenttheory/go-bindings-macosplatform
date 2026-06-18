@@ -36,6 +36,8 @@ func NewMetricContentKeyRequestEvent() *MetricContentKeyRequestEvent {
 	return &MetricContentKeyRequestEvent{inner: raw.AVMetricContentKeyRequestEventFromID(_id)}
 }
 
+// Returns the content key specifier for the request.
+//
 // ContentKeySpecifier calls the underlying ContentKeySpecifier.
 func (x *MetricContentKeyRequestEvent) ContentKeySpecifier() *ContentKeySpecifier {
 	_r := x.inner.ContentKeySpecifier()
@@ -45,6 +47,8 @@ func (x *MetricContentKeyRequestEvent) ContentKeySpecifier() *ContentKeySpecifie
 	return &ContentKeySpecifier{inner: _r}
 }
 
+// Returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
+//
 // MediaType calls the underlying MediaType.
 func (x *MetricContentKeyRequestEvent) MediaType() string {
 	_r := x.inner.MediaType()
@@ -54,11 +58,15 @@ func (x *MetricContentKeyRequestEvent) MediaType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns whether the content key resource request was initiated by the client.
+//
 // IsClientInitiated calls the underlying IsClientInitiated.
 func (x *MetricContentKeyRequestEvent) IsClientInitiated() bool {
 	return x.inner.IsClientInitiated()
 }
 
+// Returns the media resource request event which was used to satisfy the content key.
+//
 // MediaResourceRequestEvent calls the underlying MediaResourceRequestEvent.
 func (x *MetricContentKeyRequestEvent) MediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
 	_r := x.inner.MediaResourceRequestEvent()

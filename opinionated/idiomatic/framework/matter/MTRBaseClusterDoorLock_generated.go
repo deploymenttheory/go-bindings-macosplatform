@@ -33,6 +33,8 @@ func MTRBaseClusterDoorLockFromID(id objc.ID) *MTRBaseClusterDoorLock {
 	return &MTRBaseClusterDoorLock{inner: raw.MTRBaseClusterDoorLockFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterDoorLockWithDeviceEndpointIDQueue creates a new [MTRBaseClusterDoorLock].
 func NewMTRBaseClusterDoorLockWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterDoorLock {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterDoorLock")), objc.RegisterName("alloc"))
@@ -47,6 +49,8 @@ func NewMTRBaseClusterDoorLockWithDeviceEndpointQueue(device *raw.MTRBaseDevice,
 	return &MTRBaseClusterDoorLock{inner: raw.MTRBaseClusterDoorLockFromID(_id)}
 }
 
+// Command LockDoor This command causes the lock device to lock the door.
+//
 // LockDoorWithParamsCompletion calls the underlying LockDoorWithParamsCompletion.
 func (x *MTRBaseClusterDoorLock) LockDoorWithParamsCompletion(params *raw.MTRDoorLockClusterLockDoorParams, completion func(unsafe.Pointer)) {
 	x.inner.LockDoorWithParamsCompletion(params, completion)
@@ -57,6 +61,8 @@ func (x *MTRBaseClusterDoorLock) LockDoorWithCompletion(completion func(unsafe.P
 	x.inner.LockDoorWithCompletion(completion)
 }
 
+// Command UnlockDoor This command causes the lock device to unlock the door.
+//
 // UnlockDoorWithParamsCompletion calls the underlying UnlockDoorWithParamsCompletion.
 func (x *MTRBaseClusterDoorLock) UnlockDoorWithParamsCompletion(params *raw.MTRDoorLockClusterUnlockDoorParams, completion func(unsafe.Pointer)) {
 	x.inner.UnlockDoorWithParamsCompletion(params, completion)
@@ -67,16 +73,22 @@ func (x *MTRBaseClusterDoorLock) UnlockDoorWithCompletion(completion func(unsafe
 	x.inner.UnlockDoorWithCompletion(completion)
 }
 
+// Command UnlockWithTimeout This command causes the lock device to unlock the door with a timeout parameter.
+//
 // UnlockWithTimeoutWithParamsCompletion calls the underlying UnlockWithTimeoutWithParamsCompletion.
 func (x *MTRBaseClusterDoorLock) UnlockWithTimeoutWithParamsCompletion(params *raw.MTRDoorLockClusterUnlockWithTimeoutParams, completion func(unsafe.Pointer)) {
 	x.inner.UnlockWithTimeoutWithParamsCompletion(params, completion)
 }
 
+// Command SetWeekDaySchedule Set a weekly repeating schedule for a specified user.
+//
 // SetWeekDayScheduleWithParamsCompletion calls the underlying SetWeekDayScheduleWithParamsCompletion.
 func (x *MTRBaseClusterDoorLock) SetWeekDayScheduleWithParamsCompletion(params *raw.MTRDoorLockClusterSetWeekDayScheduleParams, completion func(unsafe.Pointer)) {
 	x.inner.SetWeekDayScheduleWithParamsCompletion(params, completion)
 }
 
+// Command GetWeekDaySchedule Retrieve the specific weekly schedule for the specific user.
+//
 // GetWeekDayScheduleWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterDoorLock) GetWeekDayScheduleWithParamsCompletion(ctx context.Context, params *raw.MTRDoorLockClusterGetWeekDayScheduleParams) (*MTRDoorLockClusterGetWeekDayScheduleResponseParams, error) {
 	type _result struct {
@@ -103,16 +115,22 @@ func (x *MTRBaseClusterDoorLock) GetWeekDayScheduleWithParamsCompletion(ctx cont
 	}
 }
 
+// Command ClearWeekDaySchedule Clear the specific weekly schedule or all weekly schedules for the specific user.
+//
 // ClearWeekDayScheduleWithParamsCompletion calls the underlying ClearWeekDayScheduleWithParamsCompletion.
 func (x *MTRBaseClusterDoorLock) ClearWeekDayScheduleWithParamsCompletion(params *raw.MTRDoorLockClusterClearWeekDayScheduleParams, completion func(unsafe.Pointer)) {
 	x.inner.ClearWeekDayScheduleWithParamsCompletion(params, completion)
 }
 
+// Command SetYearDaySchedule Set a time-specific schedule ID for a specified user.
+//
 // SetYearDayScheduleWithParamsCompletion calls the underlying SetYearDayScheduleWithParamsCompletion.
 func (x *MTRBaseClusterDoorLock) SetYearDayScheduleWithParamsCompletion(params *raw.MTRDoorLockClusterSetYearDayScheduleParams, completion func(unsafe.Pointer)) {
 	x.inner.SetYearDayScheduleWithParamsCompletion(params, completion)
 }
 
+// Command GetYearDaySchedule Returns the year day schedule data for the specified schedule and user indexes.
+//
 // GetYearDayScheduleWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterDoorLock) GetYearDayScheduleWithParamsCompletion(ctx context.Context, params *raw.MTRDoorLockClusterGetYearDayScheduleParams) (*MTRDoorLockClusterGetYearDayScheduleResponseParams, error) {
 	type _result struct {
@@ -139,16 +157,22 @@ func (x *MTRBaseClusterDoorLock) GetYearDayScheduleWithParamsCompletion(ctx cont
 	}
 }
 
+// Command ClearYearDaySchedule Clears the specific year day schedule or all year day schedules for the specific user.
+//
 // ClearYearDayScheduleWithParamsCompletion calls the underlying ClearYearDayScheduleWithParamsCompletion.
 func (x *MTRBaseClusterDoorLock) ClearYearDayScheduleWithParamsCompletion(params *raw.MTRDoorLockClusterClearYearDayScheduleParams, completion func(unsafe.Pointer)) {
 	x.inner.ClearYearDayScheduleWithParamsCompletion(params, completion)
 }
 
+// Command SetHolidaySchedule Set the holiday Schedule by specifying local start time and local end time with respect to any Lock Operating Mode.
+//
 // SetHolidayScheduleWithParamsCompletion calls the underlying SetHolidayScheduleWithParamsCompletion.
 func (x *MTRBaseClusterDoorLock) SetHolidayScheduleWithParamsCompletion(params *raw.MTRDoorLockClusterSetHolidayScheduleParams, completion func(unsafe.Pointer)) {
 	x.inner.SetHolidayScheduleWithParamsCompletion(params, completion)
 }
 
+// Command GetHolidaySchedule Get the holiday schedule for the specified index.
+//
 // GetHolidayScheduleWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterDoorLock) GetHolidayScheduleWithParamsCompletion(ctx context.Context, params *raw.MTRDoorLockClusterGetHolidayScheduleParams) (*MTRDoorLockClusterGetHolidayScheduleResponseParams, error) {
 	type _result struct {
@@ -175,16 +199,22 @@ func (x *MTRBaseClusterDoorLock) GetHolidayScheduleWithParamsCompletion(ctx cont
 	}
 }
 
+// Command ClearHolidaySchedule Clears the holiday schedule or all holiday schedules.
+//
 // ClearHolidayScheduleWithParamsCompletion calls the underlying ClearHolidayScheduleWithParamsCompletion.
 func (x *MTRBaseClusterDoorLock) ClearHolidayScheduleWithParamsCompletion(params *raw.MTRDoorLockClusterClearHolidayScheduleParams, completion func(unsafe.Pointer)) {
 	x.inner.ClearHolidayScheduleWithParamsCompletion(params, completion)
 }
 
+// Command SetUser Set User into the lock.
+//
 // SetUserWithParamsCompletion calls the underlying SetUserWithParamsCompletion.
 func (x *MTRBaseClusterDoorLock) SetUserWithParamsCompletion(params *raw.MTRDoorLockClusterSetUserParams, completion func(unsafe.Pointer)) {
 	x.inner.SetUserWithParamsCompletion(params, completion)
 }
 
+// Command GetUser Retrieve User.
+//
 // GetUserWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterDoorLock) GetUserWithParamsCompletion(ctx context.Context, params *raw.MTRDoorLockClusterGetUserParams) (*MTRDoorLockClusterGetUserResponseParams, error) {
 	type _result struct {
@@ -211,11 +241,15 @@ func (x *MTRBaseClusterDoorLock) GetUserWithParamsCompletion(ctx context.Context
 	}
 }
 
+// Command ClearUser Clears a User or all Users.
+//
 // ClearUserWithParamsCompletion calls the underlying ClearUserWithParamsCompletion.
 func (x *MTRBaseClusterDoorLock) ClearUserWithParamsCompletion(params *raw.MTRDoorLockClusterClearUserParams, completion func(unsafe.Pointer)) {
 	x.inner.ClearUserWithParamsCompletion(params, completion)
 }
 
+// Command SetCredential Set a credential (e.g. PIN, RFID, Fingerprint, etc.) into the lock for a new user, existing user, or ProgrammingUser.
+//
 // SetCredentialWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterDoorLock) SetCredentialWithParamsCompletion(ctx context.Context, params *raw.MTRDoorLockClusterSetCredentialParams) (*MTRDoorLockClusterSetCredentialResponseParams, error) {
 	type _result struct {
@@ -242,6 +276,8 @@ func (x *MTRBaseClusterDoorLock) SetCredentialWithParamsCompletion(ctx context.C
 	}
 }
 
+// Command GetCredentialStatus Retrieve the status of a particular credential (e.g. PIN, RFID, Fingerprint, etc.) by index.
+//
 // GetCredentialStatusWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterDoorLock) GetCredentialStatusWithParamsCompletion(ctx context.Context, params *raw.MTRDoorLockClusterGetCredentialStatusParams) (*MTRDoorLockClusterGetCredentialStatusResponseParams, error) {
 	type _result struct {
@@ -268,11 +304,15 @@ func (x *MTRBaseClusterDoorLock) GetCredentialStatusWithParamsCompletion(ctx con
 	}
 }
 
+// Command ClearCredential Clear one, one type, or all credentials except ProgrammingPIN credential.
+//
 // ClearCredentialWithParamsCompletion calls the underlying ClearCredentialWithParamsCompletion.
 func (x *MTRBaseClusterDoorLock) ClearCredentialWithParamsCompletion(params *raw.MTRDoorLockClusterClearCredentialParams, completion func(unsafe.Pointer)) {
 	x.inner.ClearCredentialWithParamsCompletion(params, completion)
 }
 
+// Command UnboltDoor This command causes the lock device to unlock the door without pulling the latch.
+//
 // UnboltDoorWithParamsCompletion calls the underlying UnboltDoorWithParamsCompletion.
 func (x *MTRBaseClusterDoorLock) UnboltDoorWithParamsCompletion(params *raw.MTRDoorLockClusterUnboltDoorParams, completion func(unsafe.Pointer)) {
 	x.inner.UnboltDoorWithParamsCompletion(params, completion)
@@ -283,11 +323,15 @@ func (x *MTRBaseClusterDoorLock) UnboltDoorWithCompletion(completion func(unsafe
 	x.inner.UnboltDoorWithCompletion(completion)
 }
 
+// Command SetAliroReaderConfig This command communicates an Aliro Reader configuration to the lock.
+//
 // SetAliroReaderConfigWithParamsCompletion calls the underlying SetAliroReaderConfigWithParamsCompletion.
 func (x *MTRBaseClusterDoorLock) SetAliroReaderConfigWithParamsCompletion(params *raw.MTRDoorLockClusterSetAliroReaderConfigParams, completion func(unsafe.Pointer)) {
 	x.inner.SetAliroReaderConfigWithParamsCompletion(params, completion)
 }
 
+// Command ClearAliroReaderConfig This command clears an existing Aliro Reader configuration for the lock.
+//
 // ClearAliroReaderConfigWithParamsCompletion calls the underlying ClearAliroReaderConfigWithParamsCompletion.
 func (x *MTRBaseClusterDoorLock) ClearAliroReaderConfigWithParamsCompletion(params *raw.MTRDoorLockClusterClearAliroReaderConfigParams, completion func(unsafe.Pointer)) {
 	x.inner.ClearAliroReaderConfigWithParamsCompletion(params, completion)

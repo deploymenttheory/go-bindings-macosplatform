@@ -33,6 +33,8 @@ func MTRBaseClusterMediaPlaybackFromID(id objc.ID) *MTRBaseClusterMediaPlayback 
 	return &MTRBaseClusterMediaPlayback{inner: raw.MTRBaseClusterMediaPlaybackFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterMediaPlaybackWithDeviceEndpointIDQueue creates a new [MTRBaseClusterMediaPlayback].
 func NewMTRBaseClusterMediaPlaybackWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterMediaPlayback {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterMediaPlayback")), objc.RegisterName("alloc"))
@@ -47,6 +49,8 @@ func NewMTRBaseClusterMediaPlaybackWithDeviceEndpointQueue(device *raw.MTRBaseDe
 	return &MTRBaseClusterMediaPlayback{inner: raw.MTRBaseClusterMediaPlaybackFromID(_id)}
 }
 
+// Command Play Upon receipt, this SHALL play media.
+//
 // PlayWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterMediaPlayback) PlayWithParamsCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterPlayParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
@@ -99,6 +103,8 @@ func (x *MTRBaseClusterMediaPlayback) PlayWithCompletion(ctx context.Context) (*
 	}
 }
 
+// Command Pause Upon receipt, this SHALL pause media.
+//
 // PauseWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterMediaPlayback) PauseWithParamsCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterPauseParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
@@ -151,6 +157,8 @@ func (x *MTRBaseClusterMediaPlayback) PauseWithCompletion(ctx context.Context) (
 	}
 }
 
+// Command Stop Upon receipt, this SHALL stop media. User experience is context-specific. This will often navigate the user back to the location where media was originally launched.
+//
 // StopWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterMediaPlayback) StopWithParamsCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterStopParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
@@ -203,6 +211,8 @@ func (x *MTRBaseClusterMediaPlayback) StopWithCompletion(ctx context.Context) (*
 	}
 }
 
+// Command StartOver Upon receipt, this SHALL Start Over with the current media playback item.
+//
 // StartOverWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterMediaPlayback) StartOverWithParamsCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterStartOverParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
@@ -255,6 +265,8 @@ func (x *MTRBaseClusterMediaPlayback) StartOverWithCompletion(ctx context.Contex
 	}
 }
 
+// Command Previous Upon receipt, this SHALL cause the handler to be invoked for "Previous". User experience is context-specific. This will often Go back to the previous media playback item.
+//
 // PreviousWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterMediaPlayback) PreviousWithParamsCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterPreviousParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
@@ -307,6 +319,8 @@ func (x *MTRBaseClusterMediaPlayback) PreviousWithCompletion(ctx context.Context
 	}
 }
 
+// Command Next Upon receipt, this SHALL cause the handler to be invoked for "Next". User experience is context-specific. This will often Go forward to the next media playback item.
+//
 // NextWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterMediaPlayback) NextWithParamsCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterNextParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
@@ -359,6 +373,8 @@ func (x *MTRBaseClusterMediaPlayback) NextWithCompletion(ctx context.Context) (*
 	}
 }
 
+// Command Rewind Upon receipt, this SHALL Rewind through media. Different Rewind speeds can be used on the TV based upon the number of sequential calls to this function. This is to avoid needing to define every speed now (multiple fast, slow motion, etc).
+//
 // RewindWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterMediaPlayback) RewindWithParamsCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterRewindParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
@@ -411,6 +427,8 @@ func (x *MTRBaseClusterMediaPlayback) RewindWithCompletion(ctx context.Context) 
 	}
 }
 
+// Command FastForward Upon receipt, this SHALL Advance through media. Different FF speeds can be used on the TV based upon the number of sequential calls to this function. This is to avoid needing to define every speed now (multiple fast, slow motion, etc).
+//
 // FastForwardWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterMediaPlayback) FastForwardWithParamsCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterFastForwardParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
@@ -463,6 +481,8 @@ func (x *MTRBaseClusterMediaPlayback) FastForwardWithCompletion(ctx context.Cont
 	}
 }
 
+// Command SkipForward Upon receipt, this SHALL Skip forward in the media by the given number of seconds, using the data as follows:
+//
 // SkipForwardWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterMediaPlayback) SkipForwardWithParamsCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterSkipForwardParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
@@ -489,6 +509,8 @@ func (x *MTRBaseClusterMediaPlayback) SkipForwardWithParamsCompletion(ctx contex
 	}
 }
 
+// Command SkipBackward Upon receipt, this SHALL Skip backward in the media by the given number of seconds, using the data as follows:
+//
 // SkipBackwardWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterMediaPlayback) SkipBackwardWithParamsCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterSkipBackwardParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
@@ -515,6 +537,8 @@ func (x *MTRBaseClusterMediaPlayback) SkipBackwardWithParamsCompletion(ctx conte
 	}
 }
 
+// Command Seek Upon receipt, this SHALL Skip backward in the media by the given number of seconds, using the data as follows:
+//
 // SeekWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterMediaPlayback) SeekWithParamsCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterSeekParams) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
@@ -541,16 +565,22 @@ func (x *MTRBaseClusterMediaPlayback) SeekWithParamsCompletion(ctx context.Conte
 	}
 }
 
+// Command ActivateAudioTrack Upon receipt, the server SHALL set the active Audio Track to the one identified by the TrackID in the Track catalog for the streaming media. If the TrackID does not exist in the Track catalog, OR does not correspond to the streaming media OR no media is being streamed at the time of receipt of this command, the server will return an error status of INVALID_ARGUMENT.
+//
 // ActivateAudioTrackWithParamsCompletion calls the underlying ActivateAudioTrackWithParamsCompletion.
 func (x *MTRBaseClusterMediaPlayback) ActivateAudioTrackWithParamsCompletion(params *raw.MTRMediaPlaybackClusterActivateAudioTrackParams, completion func(unsafe.Pointer)) {
 	x.inner.ActivateAudioTrackWithParamsCompletion(params, completion)
 }
 
+// Command ActivateTextTrack Upon receipt, the server SHALL set the active Text Track to the one identified by the TrackID in the Track catalog for the streaming media. If the TrackID does not exist in the Track catalog, OR does not correspond to the streaming media OR no media is being streamed at the time of receipt of this command, the server SHALL return an error status of INVALID_ARGUMENT.
+//
 // ActivateTextTrackWithParamsCompletion calls the underlying ActivateTextTrackWithParamsCompletion.
 func (x *MTRBaseClusterMediaPlayback) ActivateTextTrackWithParamsCompletion(params *raw.MTRMediaPlaybackClusterActivateTextTrackParams, completion func(unsafe.Pointer)) {
 	x.inner.ActivateTextTrackWithParamsCompletion(params, completion)
 }
 
+// Command DeactivateTextTrack If a Text Track is active (i.e. being displayed), upon receipt of this command, the server SHALL stop displaying it.
+//
 // DeactivateTextTrackWithParamsCompletion calls the underlying DeactivateTextTrackWithParamsCompletion.
 func (x *MTRBaseClusterMediaPlayback) DeactivateTextTrackWithParamsCompletion(params *raw.MTRMediaPlaybackClusterDeactivateTextTrackParams, completion func(unsafe.Pointer)) {
 	x.inner.DeactivateTextTrackWithParamsCompletion(params, completion)

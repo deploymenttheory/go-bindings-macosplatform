@@ -32,6 +32,8 @@ func MatrixCopyDescriptorFromID(id objc.ID) *MatrixCopyDescriptor {
 	return &MatrixCopyDescriptor{inner: raw.MPSMatrixCopyDescriptorFromID(id)}
 }
 
+// @abstract       initialize a MPSMatrixCopyDescriptor with default values. @discussion     Use -setCopyOperationAtIndex:sourceMatrix:destinationMatrix:copyOffsets to initialize. All indices must be initialized before use. @param          device    The device on which the copy will be performed @param          count     The number of copy operations the object will encode @return     A MPSMatrixCopyDescriptor. It still needs to be initialized with -setCopyOperationAtIndex:sourceMatrix:destinationMatrix:copyOffsets
+//
 // NewMatrixCopyDescriptorWithDeviceCount creates a new [MatrixCopyDescriptor].
 func NewMatrixCopyDescriptorWithDeviceCount(device metal.MTLDevice, count uint) *MatrixCopyDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixCopyDescriptor")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewMatrixCopyDescriptorWithDeviceCount(device metal.MTLDevice, count uint) 
 	return &MatrixCopyDescriptor{inner: raw.MPSMatrixCopyDescriptorFromID(_id)}
 }
 
+// @abstract       Initialize a MPSMatrixCopyDescriptor using offsets generated on the GPU @discussion     Use this method when the offsets needed are coming from GPU based computation. @param          sourceMatrices      A list of matrices from which the matrix data is read @param          destinationMatrices A list of matrices to which to write the data. The count must match the number of source matrices. @param          offsets         A MPSVector of type MPSDataTypeUInt32 containing the list of offsets, stored as a packed array of MPSMatrixCopyOffsets. @param          byteOffset      A byte offset into the offsets vector where the data starts in 'offsets'. This value must be a multiple of 16. @result         A valid MPSMatrixCopyDescriptor to represent the list of copy operations
+//
 // NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOffset creates a new [MatrixCopyDescriptor].
 func NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOffset(sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], offsets *mpscore.MPSVector, byteOffset uint) *MatrixCopyDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixCopyDescriptor")), objc.RegisterName("alloc"))
@@ -46,6 +50,8 @@ func NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOff
 	return &MatrixCopyDescriptor{inner: raw.MPSMatrixCopyDescriptorFromID(_id)}
 }
 
+// @abstract    Initialize a MPSMatrixCopyDescriptor using offsets generated on the CPU @discussion  This is for one at a time intialization of the copy operations @param  index               The index of the copy operation @param  sourceMatrix        The source matrix for this copy operation @param  destinationMatrix   The destination matrix for this copy operation @param  offsets             The offsets to use for the copy operation
+//
 // SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets calls the underlying SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets.
 func (x *MatrixCopyDescriptor) SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index uint, sourceMatrix *mpscore.MPSMatrix, destinationMatrix *mpscore.MPSMatrix, offsets raw.MPSMatrixCopyOffsets) {
 	x.inner.SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index, sourceMatrix, destinationMatrix, offsets)

@@ -32,6 +32,8 @@ func DDDeviceFromID(id objc.ID) *DDDevice {
 	return &DDDevice{inner: raw.DDDeviceFromID(id)}
 }
 
+// Initializes a DD device with display name, category, protocol type, and identifier.
+//
 // NewDDDeviceWithDisplayNameCategoryProtocolTypeIdentifier creates a new [DDDevice].
 func NewDDDeviceWithDisplayNameCategoryProtocolTypeIdentifier(displayName string, category DDDeviceCategory, protocolType *uniformtypeidentifiers.UTType, identifier string) *DDDevice {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DDDevice")), objc.RegisterName("alloc"))
@@ -39,142 +41,190 @@ func NewDDDeviceWithDisplayNameCategoryProtocolTypeIdentifier(displayName string
 	return &DDDevice{inner: raw.DDDeviceFromID(_id)}
 }
 
+// Device supported capabilities.
+//
 // WithDeviceSupports sets the deviceSupports property and returns the receiver for chaining.
 func (x *DDDevice) WithDeviceSupports(deviceSupports DDDeviceSupports) *DDDevice {
 	x.inner.SetDeviceSupports(raw.DDDeviceSupports(deviceSupports))
 	return x
 }
 
+// Identifier to communicate with the device via Bluetooth.
+//
 // WithBluetoothIdentifier sets the bluetoothIdentifier property and returns the receiver for chaining.
 func (x *DDDevice) WithBluetoothIdentifier(bluetoothIdentifier *foundation.NSUUID) *DDDevice {
 	x.inner.SetBluetoothIdentifier(bluetoothIdentifier)
 	return x
 }
 
+// Category of the device.
+//
 // WithCategory sets the category property and returns the receiver for chaining.
 func (x *DDDevice) WithCategory(category DDDeviceCategory) *DDDevice {
 	x.inner.SetCategory(raw.DDDeviceCategory(category))
 	return x
 }
 
+// Device's custom asset for product image name in the main App bundle.
+//
 // WithDisplayImageName sets the displayImageName property and returns the receiver for chaining.
 func (x *DDDevice) WithDisplayImageName(displayImageName string) *DDDevice {
 	x.inner.SetDisplayImageName(foundation.NSStringStringWithUTF8String(displayImageName))
 	return x
 }
 
+// Name of the device. Should be suitable for displaying to a user.
+//
 // WithDisplayName sets the displayName property and returns the receiver for chaining.
 func (x *DDDevice) WithDisplayName(displayName string) *DDDevice {
 	x.inner.SetDisplayName(foundation.NSStringStringWithUTF8String(displayName))
 	return x
 }
 
+// Identifier of the device.
+//
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *DDDevice) WithIdentifier(identifier string) *DDDevice {
 	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
 	return x
 }
 
+// Current state of media playback on this device.
+//
 // WithMediaPlaybackState sets the mediaPlaybackState property and returns the receiver for chaining.
 func (x *DDDevice) WithMediaPlaybackState(mediaPlaybackState DDDeviceMediaPlaybackState) *DDDevice {
 	x.inner.SetMediaPlaybackState(raw.DDDeviceMediaPlaybackState(mediaPlaybackState))
 	return x
 }
 
+// Title of the media content being played.
+//
 // WithMediaContentTitle sets the mediaContentTitle property and returns the receiver for chaining.
 func (x *DDDevice) WithMediaContentTitle(mediaContentTitle string) *DDDevice {
 	x.inner.SetMediaContentTitle(foundation.NSStringStringWithUTF8String(mediaContentTitle))
 	return x
 }
 
+// Subtitle of the media content being played. It can be used to display extra information about the content, such as the name of the artist.
+//
 // WithMediaContentSubtitle sets the mediaContentSubtitle property and returns the receiver for chaining.
 func (x *DDDevice) WithMediaContentSubtitle(mediaContentSubtitle string) *DDDevice {
 	x.inner.SetMediaContentSubtitle(foundation.NSStringStringWithUTF8String(mediaContentSubtitle))
 	return x
 }
 
+// Endpoint to communicate with the device via networking.
+//
 // WithNetworkEndpoint sets the networkEndpoint property and returns the receiver for chaining.
 func (x *DDDevice) WithNetworkEndpoint(networkEndpoint *foundation.NSObject) *DDDevice {
 	x.inner.SetNetworkEndpoint(networkEndpoint)
 	return x
 }
 
+// Protocol of the device.
+//
 // WithProtocol sets the protocol property and returns the receiver for chaining.
 func (x *DDDevice) WithProtocol(protocol DDDeviceProtocol) *DDDevice {
 	x.inner.SetProtocol(raw.DDDeviceProtocol(protocol))
 	return x
 }
 
+// Uniform Type for the protocol.
+//
 // WithProtocolType sets the protocolType property and returns the receiver for chaining.
 func (x *DDDevice) WithProtocolType(protocolType *uniformtypeidentifiers.UTType) *DDDevice {
 	x.inner.SetProtocolType(protocolType)
 	return x
 }
 
+// State of the device.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *DDDevice) WithState(state DDDeviceState) *DDDevice {
 	x.inner.SetState(raw.DDDeviceState(state))
 	return x
 }
 
+// Device's WiFi Hotspot SSID.
+//
 // WithSSID sets the sSID property and returns the receiver for chaining.
 func (x *DDDevice) WithSSID(sSID string) *DDDevice {
 	x.inner.SetSSID(foundation.NSStringStringWithUTF8String(sSID))
 	return x
 }
 
+// Whether the device supports grouping with other devices with the same protocol.
+//
 // WithSupportsGrouping sets the supportsGrouping property and returns the receiver for chaining.
 func (x *DDDevice) WithSupportsGrouping(supportsGrouping bool) *DDDevice {
 	x.inner.SetSupportsGrouping(supportsGrouping)
 	return x
 }
 
+// TXT record of the device.
+//
 // WithTxtRecordData sets the txtRecordData property and returns the receiver for chaining.
 func (x *DDDevice) WithTxtRecordData(txtRecordData *foundation.NSData) *DDDevice {
 	x.inner.SetTxtRecordData(txtRecordData)
 	return x
 }
 
+// URL used for SSDP connection. The URL must have a valid hostname, no query parameters, and a maximum size of 100 bytes.
+//
 // WithUrl sets the url property and returns the receiver for chaining.
 func (x *DDDevice) WithUrl(url string) *DDDevice {
 	x.inner.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 	return x
 }
 
+// Device's Wi-Fi Aware's service name.
+//
 // WithWifiAwareServiceName sets the wifiAwareServiceName property and returns the receiver for chaining.
 func (x *DDDevice) WithWifiAwareServiceName(wifiAwareServiceName string) *DDDevice {
 	x.inner.SetWifiAwareServiceName(foundation.NSStringStringWithUTF8String(wifiAwareServiceName))
 	return x
 }
 
+// Device's Wi-Fi Aware's service. Default is `DDDeviceWiFiAwareServiceRoleSubscriber`
+//
 // WithWifiAwareServiceRole sets the wifiAwareServiceRole property and returns the receiver for chaining.
 func (x *DDDevice) WithWifiAwareServiceRole(wifiAwareServiceRole DDDeviceWiFiAwareServiceRole) *DDDevice {
 	x.inner.SetWifiAwareServiceRole(raw.DDDeviceWiFiAwareServiceRole(wifiAwareServiceRole))
 	return x
 }
 
+// Device's Wi-Fi Aware model name.
+//
 // WithWifiAwareModelName sets the wifiAwareModelName property and returns the receiver for chaining.
 func (x *DDDevice) WithWifiAwareModelName(wifiAwareModelName string) *DDDevice {
 	x.inner.SetWifiAwareModelName(foundation.NSStringStringWithUTF8String(wifiAwareModelName))
 	return x
 }
 
+// Device's Wi-Fi Aware vendor name.
+//
 // WithWifiAwareVendorName sets the wifiAwareVendorName property and returns the receiver for chaining.
 func (x *DDDevice) WithWifiAwareVendorName(wifiAwareVendorName string) *DDDevice {
 	x.inner.SetWifiAwareVendorName(foundation.NSStringStringWithUTF8String(wifiAwareVendorName))
 	return x
 }
 
+// Device supported capabilities.
+//
 // DeviceSupports calls the underlying DeviceSupports.
 func (x *DDDevice) DeviceSupports() DDDeviceSupports {
 	return DDDeviceSupports(x.inner.DeviceSupports())
 }
 
+// Device supported capabilities.
+//
 // SetDeviceSupports calls the underlying SetDeviceSupports.
 func (x *DDDevice) SetDeviceSupports(deviceSupports DDDeviceSupports) {
 	x.inner.SetDeviceSupports(raw.DDDeviceSupports(deviceSupports))
 }
 
+// Identifier to communicate with the device via Bluetooth.
+//
 // BluetoothIdentifier calls the underlying BluetoothIdentifier.
 func (x *DDDevice) BluetoothIdentifier() *foundation.NSUUID {
 	return x.inner.BluetoothIdentifier()
@@ -185,6 +235,8 @@ func (x *DDDevice) SetBluetoothIdentifier(bluetoothIdentifier *foundation.NSUUID
 	x.inner.SetBluetoothIdentifier(bluetoothIdentifier)
 }
 
+// Category of the device.
+//
 // Category calls the underlying Category.
 func (x *DDDevice) Category() DDDeviceCategory {
 	return DDDeviceCategory(x.inner.Category())
@@ -195,6 +247,8 @@ func (x *DDDevice) SetCategory(category DDDeviceCategory) {
 	x.inner.SetCategory(raw.DDDeviceCategory(category))
 }
 
+// Device's custom asset for product image name in the main App bundle.
+//
 // DisplayImageName calls the underlying DisplayImageName.
 func (x *DDDevice) DisplayImageName() string {
 	_r := x.inner.DisplayImageName()
@@ -204,11 +258,15 @@ func (x *DDDevice) DisplayImageName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Device's custom asset for product image name in the main App bundle.
+//
 // SetDisplayImageName calls the underlying SetDisplayImageName.
 func (x *DDDevice) SetDisplayImageName(displayImageName string) {
 	x.inner.SetDisplayImageName(foundation.NSStringStringWithUTF8String(displayImageName))
 }
 
+// Name of the device. Should be suitable for displaying to a user.
+//
 // DisplayName calls the underlying DisplayName.
 func (x *DDDevice) DisplayName() string {
 	_r := x.inner.DisplayName()
@@ -223,6 +281,8 @@ func (x *DDDevice) SetDisplayName(displayName string) {
 	x.inner.SetDisplayName(foundation.NSStringStringWithUTF8String(displayName))
 }
 
+// Identifier of the device.
+//
 // Identifier calls the underlying Identifier.
 func (x *DDDevice) Identifier() string {
 	_r := x.inner.Identifier()
@@ -237,6 +297,8 @@ func (x *DDDevice) SetIdentifier(identifier string) {
 	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
 }
 
+// Current state of media playback on this device.
+//
 // MediaPlaybackState calls the underlying MediaPlaybackState.
 func (x *DDDevice) MediaPlaybackState() DDDeviceMediaPlaybackState {
 	return DDDeviceMediaPlaybackState(x.inner.MediaPlaybackState())
@@ -247,6 +309,8 @@ func (x *DDDevice) SetMediaPlaybackState(mediaPlaybackState DDDeviceMediaPlaybac
 	x.inner.SetMediaPlaybackState(raw.DDDeviceMediaPlaybackState(mediaPlaybackState))
 }
 
+// Title of the media content being played.
+//
 // MediaContentTitle calls the underlying MediaContentTitle.
 func (x *DDDevice) MediaContentTitle() string {
 	_r := x.inner.MediaContentTitle()
@@ -261,6 +325,8 @@ func (x *DDDevice) SetMediaContentTitle(mediaContentTitle string) {
 	x.inner.SetMediaContentTitle(foundation.NSStringStringWithUTF8String(mediaContentTitle))
 }
 
+// Subtitle of the media content being played. It can be used to display extra information about the content, such as the name of the artist.
+//
 // MediaContentSubtitle calls the underlying MediaContentSubtitle.
 func (x *DDDevice) MediaContentSubtitle() string {
 	_r := x.inner.MediaContentSubtitle()
@@ -275,6 +341,8 @@ func (x *DDDevice) SetMediaContentSubtitle(mediaContentSubtitle string) {
 	x.inner.SetMediaContentSubtitle(foundation.NSStringStringWithUTF8String(mediaContentSubtitle))
 }
 
+// Endpoint to communicate with the device via networking.
+//
 // NetworkEndpoint calls the underlying NetworkEndpoint.
 func (x *DDDevice) NetworkEndpoint() *foundation.NSObject {
 	return x.inner.NetworkEndpoint()
@@ -285,6 +353,8 @@ func (x *DDDevice) SetNetworkEndpoint(networkEndpoint *foundation.NSObject) {
 	x.inner.SetNetworkEndpoint(networkEndpoint)
 }
 
+// Protocol of the device.
+//
 // Protocol calls the underlying Protocol.
 func (x *DDDevice) Protocol() DDDeviceProtocol {
 	return DDDeviceProtocol(x.inner.Protocol())
@@ -295,6 +365,8 @@ func (x *DDDevice) SetProtocol(protocol DDDeviceProtocol) {
 	x.inner.SetProtocol(raw.DDDeviceProtocol(protocol))
 }
 
+// Uniform Type for the protocol.
+//
 // ProtocolType calls the underlying ProtocolType.
 func (x *DDDevice) ProtocolType() *uniformtypeidentifiers.UTType {
 	return x.inner.ProtocolType()
@@ -305,6 +377,8 @@ func (x *DDDevice) SetProtocolType(protocolType *uniformtypeidentifiers.UTType) 
 	x.inner.SetProtocolType(protocolType)
 }
 
+// State of the device.
+//
 // State calls the underlying State.
 func (x *DDDevice) State() DDDeviceState {
 	return DDDeviceState(x.inner.State())
@@ -315,6 +389,8 @@ func (x *DDDevice) SetState(state DDDeviceState) {
 	x.inner.SetState(raw.DDDeviceState(state))
 }
 
+// Device's WiFi Hotspot SSID.
+//
 // SSID calls the underlying SSID.
 func (x *DDDevice) SSID() string {
 	_r := x.inner.SSID()
@@ -324,21 +400,29 @@ func (x *DDDevice) SSID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Device's WiFi Hotspot SSID.
+//
 // SetSSID calls the underlying SetSSID.
 func (x *DDDevice) SetSSID(sSID string) {
 	x.inner.SetSSID(foundation.NSStringStringWithUTF8String(sSID))
 }
 
+// Whether the device supports grouping with other devices with the same protocol.
+//
 // SupportsGrouping calls the underlying SupportsGrouping.
 func (x *DDDevice) SupportsGrouping() bool {
 	return x.inner.SupportsGrouping()
 }
 
+// Whether the device supports grouping with other devices with the same protocol.
+//
 // SetSupportsGrouping calls the underlying SetSupportsGrouping.
 func (x *DDDevice) SetSupportsGrouping(supportsGrouping bool) {
 	x.inner.SetSupportsGrouping(supportsGrouping)
 }
 
+// TXT record of the device.
+//
 // TxtRecordData calls the underlying TxtRecordData.
 func (x *DDDevice) TxtRecordData() *foundation.NSData {
 	return x.inner.TxtRecordData()
@@ -349,6 +433,8 @@ func (x *DDDevice) SetTxtRecordData(txtRecordData *foundation.NSData) {
 	x.inner.SetTxtRecordData(txtRecordData)
 }
 
+// URL used for SSDP connection. The URL must have a valid hostname, no query parameters, and a maximum size of 100 bytes.
+//
 // Url calls the underlying Url.
 func (x *DDDevice) Url() *foundation.NSURL {
 	return x.inner.Url()
@@ -359,6 +445,8 @@ func (x *DDDevice) SetUrl(url string) {
 	x.inner.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 }
 
+// Device's Wi-Fi Aware's service name.
+//
 // WifiAwareServiceName calls the underlying WifiAwareServiceName.
 func (x *DDDevice) WifiAwareServiceName() string {
 	_r := x.inner.WifiAwareServiceName()
@@ -368,21 +456,29 @@ func (x *DDDevice) WifiAwareServiceName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Device's Wi-Fi Aware's service name.
+//
 // SetWifiAwareServiceName calls the underlying SetWifiAwareServiceName.
 func (x *DDDevice) SetWifiAwareServiceName(wifiAwareServiceName string) {
 	x.inner.SetWifiAwareServiceName(foundation.NSStringStringWithUTF8String(wifiAwareServiceName))
 }
 
+// Device's Wi-Fi Aware's service. Default is `DDDeviceWiFiAwareServiceRoleSubscriber`
+//
 // WifiAwareServiceRole calls the underlying WifiAwareServiceRole.
 func (x *DDDevice) WifiAwareServiceRole() DDDeviceWiFiAwareServiceRole {
 	return DDDeviceWiFiAwareServiceRole(x.inner.WifiAwareServiceRole())
 }
 
+// Device's Wi-Fi Aware's service. Default is `DDDeviceWiFiAwareServiceRoleSubscriber`
+//
 // SetWifiAwareServiceRole calls the underlying SetWifiAwareServiceRole.
 func (x *DDDevice) SetWifiAwareServiceRole(wifiAwareServiceRole DDDeviceWiFiAwareServiceRole) {
 	x.inner.SetWifiAwareServiceRole(raw.DDDeviceWiFiAwareServiceRole(wifiAwareServiceRole))
 }
 
+// Device's Wi-Fi Aware model name.
+//
 // WifiAwareModelName calls the underlying WifiAwareModelName.
 func (x *DDDevice) WifiAwareModelName() string {
 	_r := x.inner.WifiAwareModelName()
@@ -392,11 +488,15 @@ func (x *DDDevice) WifiAwareModelName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Device's Wi-Fi Aware model name.
+//
 // SetWifiAwareModelName calls the underlying SetWifiAwareModelName.
 func (x *DDDevice) SetWifiAwareModelName(wifiAwareModelName string) {
 	x.inner.SetWifiAwareModelName(foundation.NSStringStringWithUTF8String(wifiAwareModelName))
 }
 
+// Device's Wi-Fi Aware vendor name.
+//
 // WifiAwareVendorName calls the underlying WifiAwareVendorName.
 func (x *DDDevice) WifiAwareVendorName() string {
 	_r := x.inner.WifiAwareVendorName()
@@ -406,6 +506,8 @@ func (x *DDDevice) WifiAwareVendorName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Device's Wi-Fi Aware vendor name.
+//
 // SetWifiAwareVendorName calls the underlying SetWifiAwareVendorName.
 func (x *DDDevice) SetWifiAwareVendorName(wifiAwareVendorName string) {
 	x.inner.SetWifiAwareVendorName(foundation.NSStringStringWithUTF8String(wifiAwareVendorName))

@@ -88,6 +88,8 @@ func (x *TouchBarItem) ViewController() *ViewController {
 	return &ViewController{inner: _r}
 }
 
+// The user visible string identifying this item during customization. By default this method returns the empty string.
+//
 // CustomizationLabel calls the underlying CustomizationLabel.
 func (x *TouchBarItem) CustomizationLabel() string {
 	_r := x.inner.CustomizationLabel()

@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // FriendRequestComposeViewController wraps [raw.GKFriendRequestComposeViewController] with a fluent Go API.
@@ -44,14 +45,27 @@ func (x *FriendRequestComposeViewController) WithComposeViewDelegate(composeView
 	return x
 }
 
+// Specify the message sent to the invitee. A default message will be used if you don't specify one.
+//
 // SetMessage calls the underlying SetMessage.
 func (x *FriendRequestComposeViewController) SetMessage(message string) {
 	x.inner.SetMessage(foundation.NSStringStringWithUTF8String(message))
 }
 
+// Add recipients to the request. If you don't specify at least one recipient before presenting the view, the recipients field will be made firstResponder, to encourage the user to add some. If you add more than maxNumberOfRecipients recipients, these methods will throw an exception.
+//
 // AddRecipientPlayers calls the underlying AddRecipientPlayers.
-func (x *FriendRequestComposeViewController) AddRecipientPlayers(players *foundation.NSArray[*raw.GKPlayer]) {
-	x.inner.AddRecipientPlayers(players)
+func (x *FriendRequestComposeViewController) AddRecipientPlayers(players ...PlayerProvider) {
+	_ptrs := make([]objc.ID, len(players))
+	for _i, _v := range players {
+		_ptrs[_i] = _v.asPlayer().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.GKPlayer]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.GKPlayer](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.AddRecipientPlayers(_arg0)
 }
 
 // AddRecipientsWithPlayerIDs calls the underlying AddRecipientsWithPlayerIDs.
@@ -79,7 +93,7 @@ type FriendRequestComposeViewControllerable interface {
 	Unwrap() *raw.GKFriendRequestComposeViewController
 	WithComposeViewDelegate(composeViewDelegate raw.GKFriendRequestComposeViewControllerDelegate) *FriendRequestComposeViewController
 	SetMessage(message string)
-	AddRecipientPlayers(players *foundation.NSArray[*raw.GKPlayer])
+	AddRecipientPlayers(players ...PlayerProvider)
 	AddRecipientsWithPlayerIDs(playerIDs *foundation.NSArray[*foundation.NSString])
 	AddRecipientsWithEmailAddresses(emailAddresses *foundation.NSArray[*foundation.NSString])
 	ComposeViewDelegate() raw.GKFriendRequestComposeViewControllerDelegate

@@ -35,56 +35,78 @@ func NewPoolingDescriptor() *PoolingDescriptor {
 	return &PoolingDescriptor{inner: raw.MLCPoolingDescriptorFromID(_id)}
 }
 
+// @property   poolingType @abstract   The pooling operation
+//
 // PoolingType calls the underlying PoolingType.
 func (x *PoolingDescriptor) PoolingType() MLCPoolingType {
 	return MLCPoolingType(x.inner.PoolingType())
 }
 
+// @property   kernelWidth @abstract   The pooling kernel size in x.
+//
 // KernelWidth calls the underlying KernelWidth.
 func (x *PoolingDescriptor) KernelWidth() uint {
 	return x.inner.KernelWidth()
 }
 
+// @property   kernelHeight @abstract   The pooling kernel size in y.
+//
 // KernelHeight calls the underlying KernelHeight.
 func (x *PoolingDescriptor) KernelHeight() uint {
 	return x.inner.KernelHeight()
 }
 
+// @property   strideInX @abstract   The stride of the kernel in x.
+//
 // StrideInX calls the underlying StrideInX.
 func (x *PoolingDescriptor) StrideInX() uint {
 	return x.inner.StrideInX()
 }
 
+// @property   strideInY @abstract   The stride of the kernel in y.
+//
 // StrideInY calls the underlying StrideInY.
 func (x *PoolingDescriptor) StrideInY() uint {
 	return x.inner.StrideInY()
 }
 
+// @property   dilationRateInX @abstract   The dilation rate i.e. stride of elements in the kernel in x.
+//
 // DilationRateInX calls the underlying DilationRateInX.
 func (x *PoolingDescriptor) DilationRateInX() uint {
 	return x.inner.DilationRateInX()
 }
 
+// @property   dilationRateInY @abstract   The dilation rate i.e. stride of elements in the kernel in y.
+//
 // DilationRateInY calls the underlying DilationRateInY.
 func (x *PoolingDescriptor) DilationRateInY() uint {
 	return x.inner.DilationRateInY()
 }
 
+// @property   paddingPolicy @abstract   The padding policy to use.
+//
 // PaddingPolicy calls the underlying PaddingPolicy.
 func (x *PoolingDescriptor) PaddingPolicy() MLCPaddingPolicy {
 	return MLCPaddingPolicy(x.inner.PaddingPolicy())
 }
 
+// @property   paddingSizeInX @abstract   The padding size in x (left and right) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
+//
 // PaddingSizeInX calls the underlying PaddingSizeInX.
 func (x *PoolingDescriptor) PaddingSizeInX() uint {
 	return x.inner.PaddingSizeInX()
 }
 
+// @property   paddingSizeInY @abstract   The padding size in y (top and bottom) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
+//
 // PaddingSizeInY calls the underlying PaddingSizeInY.
 func (x *PoolingDescriptor) PaddingSizeInY() uint {
 	return x.inner.PaddingSizeInY()
 }
 
+// @property   countIncludesPadding @abstract   Include the zero-padding in the averaging calculation if true.  Used only with average pooling.
+//
 // CountIncludesPadding calls the underlying CountIncludesPadding.
 func (x *PoolingDescriptor) CountIncludesPadding() bool {
 	return x.inner.CountIncludesPadding()

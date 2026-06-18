@@ -30,6 +30,8 @@ func SVGFDefaultTextureAllocatorFromID(id objc.ID) *SVGFDefaultTextureAllocator 
 	return &SVGFDefaultTextureAllocator{inner: raw.MPSSVGFDefaultTextureAllocatorFromID(id)}
 }
 
+// @brief Initialize the MPSSVGFDefaultTextureAllocator with a Metal device
+//
 // NewSVGFDefaultTextureAllocatorWithDevice creates a new [SVGFDefaultTextureAllocator].
 func NewSVGFDefaultTextureAllocatorWithDevice(device metal.MTLDevice) *SVGFDefaultTextureAllocator {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSSVGFDefaultTextureAllocator")), objc.RegisterName("alloc"))
@@ -47,16 +49,22 @@ func (x *SVGFDefaultTextureAllocator) ReturnTexture(texture metal.MTLTexture) {
 	x.inner.ReturnTexture(texture)
 }
 
+// @brief Remove all textures from the cache
+//
 // Reset calls the underlying Reset.
 func (x *SVGFDefaultTextureAllocator) Reset() {
 	x.inner.Reset()
 }
 
+// @brief Metal device this object was allocated from
+//
 // Device calls the underlying Device.
 func (x *SVGFDefaultTextureAllocator) Device() metal.MTLDevice {
 	return x.inner.Device()
 }
 
+// @brief The number of textures which have been allocated from this allocator
+//
 // AllocatedTextureCount calls the underlying AllocatedTextureCount.
 func (x *SVGFDefaultTextureAllocator) AllocatedTextureCount() uint {
 	return x.inner.AllocatedTextureCount()

@@ -36,6 +36,8 @@ func NewSmartCardSlot() *SmartCardSlot {
 	return &SmartCardSlot{inner: raw.TKSmartCardSlotFromID(_id)}
 }
 
+// Creates new object representing currently inserted and valid card. @discussion It is possible to instantiate multiple objects for single card, exclusivity is handled by sessions on the level of created SmartCard objects. @return Newly created SmartCard object, or nil if slot does not contain valid card.
+//
 // MakeSmartCard calls the underlying MakeSmartCard.
 func (x *SmartCardSlot) MakeSmartCard() *SmartCard {
 	_r := x.inner.MakeSmartCard()
@@ -45,11 +47,15 @@ func (x *SmartCardSlot) MakeSmartCard() *SmartCard {
 	return &SmartCard{inner: _r}
 }
 
+// Current state of the slot.  Use KVO to be notified about state changes.
+//
 // State calls the underlying State.
 func (x *SmartCardSlot) State() TKSmartCardSlotState {
 	return TKSmartCardSlotState(x.inner.State())
 }
 
+// ATR of the inserted SmartCard, or nil if no or mute SmartCard is inserted.
+//
 // ATR calls the underlying ATR.
 func (x *SmartCardSlot) ATR() *SmartCardATR {
 	_r := x.inner.ATR()
@@ -59,6 +65,8 @@ func (x *SmartCardSlot) ATR() *SmartCardATR {
 	return &SmartCardATR{inner: _r}
 }
 
+// Name of the SmartCard reader slot.
+//
 // Name calls the underlying Name.
 func (x *SmartCardSlot) Name() string {
 	_r := x.inner.Name()
@@ -68,11 +76,15 @@ func (x *SmartCardSlot) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Maximal length of input APDU that the slot is able to transfer to the card.
+//
 // MaxInputLength calls the underlying MaxInputLength.
 func (x *SmartCardSlot) MaxInputLength() int {
 	return x.inner.MaxInputLength()
 }
 
+// Maximal length of output APDU that the slot is able to transfer from the card.
+//
 // MaxOutputLength calls the underlying MaxOutputLength.
 func (x *SmartCardSlot) MaxOutputLength() int {
 	return x.inner.MaxOutputLength()

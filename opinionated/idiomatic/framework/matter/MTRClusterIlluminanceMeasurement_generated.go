@@ -32,6 +32,8 @@ func MTRClusterIlluminanceMeasurementFromID(id objc.ID) *MTRClusterIlluminanceMe
 	return &MTRClusterIlluminanceMeasurement{inner: raw.MTRClusterIlluminanceMeasurementFromID(id)}
 }
 
+// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+//
 // NewMTRClusterIlluminanceMeasurementWithDeviceEndpointIDQueue creates a new [MTRClusterIlluminanceMeasurement].
 func NewMTRClusterIlluminanceMeasurementWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterIlluminanceMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterIlluminanceMeasurement")), objc.RegisterName("alloc"))

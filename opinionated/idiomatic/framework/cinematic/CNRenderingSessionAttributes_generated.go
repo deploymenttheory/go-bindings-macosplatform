@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Movie-wide information required by the rendering session.
+//
 // RenderingSessionAttributes wraps [raw.CNRenderingSessionAttributes] with a fluent Go API.
 type RenderingSessionAttributes struct {
 	inner *raw.CNRenderingSessionAttributes
@@ -35,6 +37,8 @@ func NewRenderingSessionAttributes() *RenderingSessionAttributes {
 	return &RenderingSessionAttributes{inner: raw.CNRenderingSessionAttributesFromID(_id)}
 }
 
+// Rendering version used to render the original.
+//
 // RenderingVersion calls the underlying RenderingVersion.
 func (x *RenderingSessionAttributes) RenderingVersion() int {
 	return x.inner.RenderingVersion()

@@ -38,60 +38,80 @@ func NewWKWebViewConfiguration() *WKWebViewConfiguration {
 	return &WKWebViewConfiguration{inner: raw.WKWebViewConfigurationFromID(_id)}
 }
 
+// @abstract The process pool from which to obtain the view's web content process. @discussion When a web view is initialized, a new web content process will be created for it from the specified pool, or an existing process in that pool will be used.
+//
 // WithProcessPool sets the processPool property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithProcessPool(processPool *WKProcessPool) *WKWebViewConfiguration {
 	x.inner.SetProcessPool(processPool.Unwrap())
 	return x
 }
 
+// @abstract The preference settings to be used by the web view.
+//
 // WithPreferences sets the preferences property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithPreferences(preferences *WKPreferences) *WKWebViewConfiguration {
 	x.inner.SetPreferences(preferences.Unwrap())
 	return x
 }
 
+// @abstract The user content controller to associate with the web view.
+//
 // WithUserContentController sets the userContentController property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithUserContentController(userContentController *WKUserContentController) *WKWebViewConfiguration {
 	x.inner.SetUserContentController(userContentController.Unwrap())
 	return x
 }
 
+// @abstract The web extension controller to associate with the web view.
+//
 // WithWebExtensionController sets the webExtensionController property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithWebExtensionController(webExtensionController *WKWebExtensionController) *WKWebViewConfiguration {
 	x.inner.SetWebExtensionController(webExtensionController.Unwrap())
 	return x
 }
 
+// @abstract The website data store to be used by the web view.
+//
 // WithWebsiteDataStore sets the websiteDataStore property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithWebsiteDataStore(websiteDataStore *WKWebsiteDataStore) *WKWebViewConfiguration {
 	x.inner.SetWebsiteDataStore(websiteDataStore.Unwrap())
 	return x
 }
 
+// @abstract A Boolean value indicating whether the web view suppresses content rendering until it is fully loaded into memory. @discussion The default value is NO.
+//
 // WithSuppressesIncrementalRendering sets the suppressesIncrementalRendering property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithSuppressesIncrementalRendering(suppressesIncrementalRendering bool) *WKWebViewConfiguration {
 	x.inner.SetSuppressesIncrementalRendering(suppressesIncrementalRendering)
 	return x
 }
 
+// @abstract The name of the application as used in the user agent string.
+//
 // WithApplicationNameForUserAgent sets the applicationNameForUserAgent property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithApplicationNameForUserAgent(applicationNameForUserAgent string) *WKWebViewConfiguration {
 	x.inner.SetApplicationNameForUserAgent(foundation.NSStringStringWithUTF8String(applicationNameForUserAgent))
 	return x
 }
 
+// @abstract A Boolean value indicating whether AirPlay is allowed. @discussion The default value is YES.
+//
 // WithAllowsAirPlayForMediaPlayback sets the allowsAirPlayForMediaPlayback property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) *WKWebViewConfiguration {
 	x.inner.SetAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback)
 	return x
 }
 
+// @abstract A Boolean value indicating whether the System Screen Time blocking view should be shown. @discussion The default value is YES.
+//
 // WithShowsSystemScreenTimeBlockingView sets the showsSystemScreenTimeBlockingView property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithShowsSystemScreenTimeBlockingView(showsSystemScreenTimeBlockingView bool) *WKWebViewConfiguration {
 	x.inner.SetShowsSystemScreenTimeBlockingView(showsSystemScreenTimeBlockingView)
 	return x
 }
 
+// @abstract A Boolean value indicating whether HTTP requests to servers known to support HTTPS should be automatically upgraded to HTTPS requests. @discussion The default value is YES.
+//
 // WithUpgradeKnownHostsToHTTPS sets the upgradeKnownHostsToHTTPS property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithUpgradeKnownHostsToHTTPS(upgradeKnownHostsToHTTPS bool) *WKWebViewConfiguration {
 	x.inner.SetUpgradeKnownHostsToHTTPS(upgradeKnownHostsToHTTPS)
@@ -104,6 +124,8 @@ func (x *WKWebViewConfiguration) WithMediaTypesRequiringUserActionForPlayback(me
 	return x
 }
 
+// @abstract The set of default webpage preferences to use when loading and rendering content. @discussion These default webpage preferences are additionally passed to the navigation delegate in -webView:decidePolicyForNavigationAction:preferences:decisionHandler:.
+//
 // WithDefaultWebpagePreferences sets the defaultWebpagePreferences property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithDefaultWebpagePreferences(defaultWebpagePreferences *WKWebpagePreferences) *WKWebViewConfiguration {
 	x.inner.SetDefaultWebpagePreferences(defaultWebpagePreferences.Unwrap())
@@ -116,24 +138,32 @@ func (x *WKWebViewConfiguration) WithLimitsNavigationsToAppBoundDomains(limitsNa
 	return x
 }
 
+// @abstract A Boolean value indicating whether inline predictions are allowed. @discussion The default value is `NO`. If false, inline predictions are disabled regardless of the system setting. If true, they are enabled based on the system setting.
+//
 // WithAllowsInlinePredictions sets the allowsInlinePredictions property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithAllowsInlinePredictions(allowsInlinePredictions bool) *WKWebViewConfiguration {
 	x.inner.SetAllowsInlinePredictions(allowsInlinePredictions)
 	return x
 }
 
+// @abstract The directionality of user interface elements. @discussion Possible values are described in WKUserInterfaceDirectionPolicy. The default value is WKUserInterfaceDirectionPolicyContent.
+//
 // WithUserInterfaceDirectionPolicy sets the userInterfaceDirectionPolicy property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy WKUserInterfaceDirectionPolicy) *WKWebViewConfiguration {
 	x.inner.SetUserInterfaceDirectionPolicy(raw.WKUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy))
 	return x
 }
 
+// @abstract A Boolean value indicating whether insertion of adaptive image glyphs is allowed. @discussion The default value is `NO`. If `NO`, adaptive image glyphs are inserted as regular images. If `YES`, they are inserted with the full adaptive sizing behavior.
+//
 // WithSupportsAdaptiveImageGlyph sets the supportsAdaptiveImageGlyph property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithSupportsAdaptiveImageGlyph(supportsAdaptiveImageGlyph bool) *WKWebViewConfiguration {
 	x.inner.SetSupportsAdaptiveImageGlyph(supportsAdaptiveImageGlyph)
 	return x
 }
 
+// @abstract The preferred behavior of Writing Tools. @discussion The default behavior is equivalent to `NSWritingToolsBehaviorLimited`.
+//
 // WithWritingToolsBehavior sets the writingToolsBehavior property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithWritingToolsBehavior(writingToolsBehavior appkit.NSWritingToolsBehavior) *WKWebViewConfiguration {
 	x.inner.SetWritingToolsBehavior(writingToolsBehavior)
@@ -150,6 +180,8 @@ func (x *WKWebViewConfiguration) UrlSchemeHandlerForURLScheme(urlScheme string) 
 	return x.inner.UrlSchemeHandlerForURLScheme(foundation.NSStringStringWithUTF8String(urlScheme))
 }
 
+// @abstract The process pool from which to obtain the view's web content process. @discussion When a web view is initialized, a new web content process will be created for it from the specified pool, or an existing process in that pool will be used.
+//
 // ProcessPool calls the underlying ProcessPool.
 func (x *WKWebViewConfiguration) ProcessPool() *WKProcessPool {
 	_r := x.inner.ProcessPool()
@@ -164,6 +196,8 @@ func (x *WKWebViewConfiguration) SetProcessPool(processPool *raw.WKProcessPool) 
 	x.inner.SetProcessPool(processPool)
 }
 
+// @abstract The preference settings to be used by the web view.
+//
 // Preferences calls the underlying Preferences.
 func (x *WKWebViewConfiguration) Preferences() *WKPreferences {
 	_r := x.inner.Preferences()
@@ -178,6 +212,8 @@ func (x *WKWebViewConfiguration) SetPreferences(preferences *raw.WKPreferences) 
 	x.inner.SetPreferences(preferences)
 }
 
+// @abstract The user content controller to associate with the web view.
+//
 // UserContentController calls the underlying UserContentController.
 func (x *WKWebViewConfiguration) UserContentController() *WKUserContentController {
 	_r := x.inner.UserContentController()
@@ -192,6 +228,8 @@ func (x *WKWebViewConfiguration) SetUserContentController(userContentController 
 	x.inner.SetUserContentController(userContentController)
 }
 
+// @abstract The web extension controller to associate with the web view.
+//
 // WebExtensionController calls the underlying WebExtensionController.
 func (x *WKWebViewConfiguration) WebExtensionController() *WKWebExtensionController {
 	_r := x.inner.WebExtensionController()
@@ -206,6 +244,8 @@ func (x *WKWebViewConfiguration) SetWebExtensionController(webExtensionControlle
 	x.inner.SetWebExtensionController(webExtensionController)
 }
 
+// @abstract The website data store to be used by the web view.
+//
 // WebsiteDataStore calls the underlying WebsiteDataStore.
 func (x *WKWebViewConfiguration) WebsiteDataStore() *WKWebsiteDataStore {
 	_r := x.inner.WebsiteDataStore()
@@ -220,6 +260,8 @@ func (x *WKWebViewConfiguration) SetWebsiteDataStore(websiteDataStore *raw.WKWeb
 	x.inner.SetWebsiteDataStore(websiteDataStore)
 }
 
+// @abstract A Boolean value indicating whether the web view suppresses content rendering until it is fully loaded into memory. @discussion The default value is NO.
+//
 // SuppressesIncrementalRendering calls the underlying SuppressesIncrementalRendering.
 func (x *WKWebViewConfiguration) SuppressesIncrementalRendering() bool {
 	return x.inner.SuppressesIncrementalRendering()
@@ -230,6 +272,8 @@ func (x *WKWebViewConfiguration) SetSuppressesIncrementalRendering(suppressesInc
 	x.inner.SetSuppressesIncrementalRendering(suppressesIncrementalRendering)
 }
 
+// @abstract The name of the application as used in the user agent string.
+//
 // ApplicationNameForUserAgent calls the underlying ApplicationNameForUserAgent.
 func (x *WKWebViewConfiguration) ApplicationNameForUserAgent() string {
 	_r := x.inner.ApplicationNameForUserAgent()
@@ -244,6 +288,8 @@ func (x *WKWebViewConfiguration) SetApplicationNameForUserAgent(applicationNameF
 	x.inner.SetApplicationNameForUserAgent(foundation.NSStringStringWithUTF8String(applicationNameForUserAgent))
 }
 
+// @abstract A Boolean value indicating whether AirPlay is allowed. @discussion The default value is YES.
+//
 // AllowsAirPlayForMediaPlayback calls the underlying AllowsAirPlayForMediaPlayback.
 func (x *WKWebViewConfiguration) AllowsAirPlayForMediaPlayback() bool {
 	return x.inner.AllowsAirPlayForMediaPlayback()
@@ -254,6 +300,8 @@ func (x *WKWebViewConfiguration) SetAllowsAirPlayForMediaPlayback(allowsAirPlayF
 	x.inner.SetAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback)
 }
 
+// @abstract A Boolean value indicating whether the System Screen Time blocking view should be shown. @discussion The default value is YES.
+//
 // ShowsSystemScreenTimeBlockingView calls the underlying ShowsSystemScreenTimeBlockingView.
 func (x *WKWebViewConfiguration) ShowsSystemScreenTimeBlockingView() bool {
 	return x.inner.ShowsSystemScreenTimeBlockingView()
@@ -264,6 +312,8 @@ func (x *WKWebViewConfiguration) SetShowsSystemScreenTimeBlockingView(showsSyste
 	x.inner.SetShowsSystemScreenTimeBlockingView(showsSystemScreenTimeBlockingView)
 }
 
+// @abstract A Boolean value indicating whether HTTP requests to servers known to support HTTPS should be automatically upgraded to HTTPS requests. @discussion The default value is YES.
+//
 // UpgradeKnownHostsToHTTPS calls the underlying UpgradeKnownHostsToHTTPS.
 func (x *WKWebViewConfiguration) UpgradeKnownHostsToHTTPS() bool {
 	return x.inner.UpgradeKnownHostsToHTTPS()
@@ -284,6 +334,8 @@ func (x *WKWebViewConfiguration) SetMediaTypesRequiringUserActionForPlayback(med
 	x.inner.SetMediaTypesRequiringUserActionForPlayback(raw.WKAudiovisualMediaTypes(mediaTypesRequiringUserActionForPlayback))
 }
 
+// @abstract The set of default webpage preferences to use when loading and rendering content. @discussion These default webpage preferences are additionally passed to the navigation delegate in -webView:decidePolicyForNavigationAction:preferences:decisionHandler:.
+//
 // DefaultWebpagePreferences calls the underlying DefaultWebpagePreferences.
 func (x *WKWebViewConfiguration) DefaultWebpagePreferences() *WKWebpagePreferences {
 	_r := x.inner.DefaultWebpagePreferences()
@@ -308,6 +360,8 @@ func (x *WKWebViewConfiguration) SetLimitsNavigationsToAppBoundDomains(limitsNav
 	x.inner.SetLimitsNavigationsToAppBoundDomains(limitsNavigationsToAppBoundDomains)
 }
 
+// @abstract A Boolean value indicating whether inline predictions are allowed. @discussion The default value is `NO`. If false, inline predictions are disabled regardless of the system setting. If true, they are enabled based on the system setting.
+//
 // AllowsInlinePredictions calls the underlying AllowsInlinePredictions.
 func (x *WKWebViewConfiguration) AllowsInlinePredictions() bool {
 	return x.inner.AllowsInlinePredictions()
@@ -318,6 +372,8 @@ func (x *WKWebViewConfiguration) SetAllowsInlinePredictions(allowsInlinePredicti
 	x.inner.SetAllowsInlinePredictions(allowsInlinePredictions)
 }
 
+// @abstract The directionality of user interface elements. @discussion Possible values are described in WKUserInterfaceDirectionPolicy. The default value is WKUserInterfaceDirectionPolicyContent.
+//
 // UserInterfaceDirectionPolicy calls the underlying UserInterfaceDirectionPolicy.
 func (x *WKWebViewConfiguration) UserInterfaceDirectionPolicy() WKUserInterfaceDirectionPolicy {
 	return WKUserInterfaceDirectionPolicy(x.inner.UserInterfaceDirectionPolicy())
@@ -328,6 +384,8 @@ func (x *WKWebViewConfiguration) SetUserInterfaceDirectionPolicy(userInterfaceDi
 	x.inner.SetUserInterfaceDirectionPolicy(raw.WKUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy))
 }
 
+// @abstract A Boolean value indicating whether insertion of adaptive image glyphs is allowed. @discussion The default value is `NO`. If `NO`, adaptive image glyphs are inserted as regular images. If `YES`, they are inserted with the full adaptive sizing behavior.
+//
 // SupportsAdaptiveImageGlyph calls the underlying SupportsAdaptiveImageGlyph.
 func (x *WKWebViewConfiguration) SupportsAdaptiveImageGlyph() bool {
 	return x.inner.SupportsAdaptiveImageGlyph()
@@ -338,6 +396,8 @@ func (x *WKWebViewConfiguration) SetSupportsAdaptiveImageGlyph(supportsAdaptiveI
 	x.inner.SetSupportsAdaptiveImageGlyph(supportsAdaptiveImageGlyph)
 }
 
+// @abstract The preferred behavior of Writing Tools. @discussion The default behavior is equivalent to `NSWritingToolsBehaviorLimited`.
+//
 // WritingToolsBehavior calls the underlying WritingToolsBehavior.
 func (x *WKWebViewConfiguration) WritingToolsBehavior() appkit.NSWritingToolsBehavior {
 	return x.inner.WritingToolsBehavior()

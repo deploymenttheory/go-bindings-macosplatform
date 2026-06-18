@@ -32,6 +32,8 @@ func MeshFromID(id objc.ID) *Mesh {
 	return &Mesh{inner: raw.GLKMeshFromID(id)}
 }
 
+// @method initWithMesh:error: @abstract Initialize the mesh and the mesh's submeshes @discussion This does NOT initialize any meshes that are children of the Model I/O mesh @error Pointer to an NSError object which will be set if an error occurred @param mesh Model I/O Mesh from which to create this GLKit mesh
+//
 // NewMeshWithMeshError creates a new [Mesh].
 func NewMeshWithMeshError(mesh *modelio.MDLMesh) (*Mesh, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GLKMesh")), objc.RegisterName("alloc"))
@@ -43,11 +45,15 @@ func NewMeshWithMeshError(mesh *modelio.MDLMesh) (*Mesh, error) {
 	return &Mesh{inner: raw.GLKMeshFromID(_id)}, nil
 }
 
+// @property vertexCount @abstract Number of verticies in the vertexBuffers
+//
 // VertexCount calls the underlying VertexCount.
 func (x *Mesh) VertexCount() uint {
 	return x.inner.VertexCount()
 }
 
+// @property vertexBuffers @abstract Array of buffers in which mesh vertex data resides
+//
 // VertexBuffers returns the collection as a Go slice.
 func (x *Mesh) VertexBuffers() []*MeshBuffer {
 	arr := x.inner.VertexBuffers()
@@ -59,11 +65,15 @@ func (x *Mesh) VertexBuffers() []*MeshBuffer {
 	})
 }
 
+// @property vertexDescriptor @abstract Model I/O vertex descriptor specifying the layout of data in vertexBuffers @discussion This is not directly used by this object, but the application can use this information to determine rendering state or setup a vertex attribute object.
+//
 // VertexDescriptor calls the underlying VertexDescriptor.
 func (x *Mesh) VertexDescriptor() *modelio.MDLVertexDescriptor {
 	return x.inner.VertexDescriptor()
 }
 
+// @property submeshes @abstract Submeshes containing index buffers to rendering mesh verticies. @discussion Submeshes may also contain texture materials to apply when rendering this object
+//
 // Submeshes returns the collection as a Go slice.
 func (x *Mesh) Submeshes() []*Submesh {
 	arr := x.inner.Submeshes()
@@ -75,6 +85,8 @@ func (x *Mesh) Submeshes() []*Submesh {
 	})
 }
 
+// @property name @abstract Name of the mesh copies from the originating Model I/O mesh @discussion Can be used by the app to identiry the mesh in it's scene/world/renderer etc.
+//
 // Name calls the underlying Name.
 func (x *Mesh) Name() string {
 	_r := x.inner.Name()

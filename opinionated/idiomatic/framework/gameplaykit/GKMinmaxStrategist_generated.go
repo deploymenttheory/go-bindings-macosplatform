@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The Minmax Strategist is a generic AI that selects a game model update for a given player that maximises potential gain, while minimising potential loss. It does this by examining all of the updates available to the player in question, extrapolating the potential moves opposing players may take, projecting out maxLookAheadDepth number of turns. The selected update will result in the greatest potential gain, balanced against the potential gain of other players.
+//
 // MinmaxStrategist wraps [raw.GKMinmaxStrategist] with a fluent Go API.
 type MinmaxStrategist struct {
 	inner *raw.GKMinmaxStrategist
@@ -35,22 +37,30 @@ func NewMinmaxStrategist() *MinmaxStrategist {
 	return &MinmaxStrategist{inner: raw.GKMinmaxStrategistFromID(_id)}
 }
 
+// The maximum number of future turns that will be processed when searching for a move.
+//
 // WithMaxLookAheadDepth sets the maxLookAheadDepth property and returns the receiver for chaining.
 func (x *MinmaxStrategist) WithMaxLookAheadDepth(maxLookAheadDepth int) *MinmaxStrategist {
 	x.inner.SetMaxLookAheadDepth(maxLookAheadDepth)
 	return x
 }
 
+// Selects the best move for the specified player. If randomSource is not nil, it will randomly select which move to use if there are one or more ties for the best. Returns nil if the player is invalid, the player is not a part of the game model, or the player has no valid moves available.
+//
 // BestMoveForPlayer calls the underlying BestMoveForPlayer.
 func (x *MinmaxStrategist) BestMoveForPlayer(player raw.GKGameModelPlayer) raw.GKGameModelUpdate {
 	return x.inner.BestMoveForPlayer(player)
 }
 
+// Selects one move from the set of N best moves for the specified player, where N is equal to numMovesToConsider. If randomSource is nil, it will not randomly select, but will behave like bestMoveForPlayer and return the first best move. Returns nil if the player is invalid, the player is not a part of the game model, or the player has no valid moves available.
+//
 // RandomMoveForPlayerFromNumberOfBestMoves calls the underlying RandomMoveForPlayerFromNumberOfBestMoves.
 func (x *MinmaxStrategist) RandomMoveForPlayerFromNumberOfBestMoves(player raw.GKGameModelPlayer, numMovesToConsider int) raw.GKGameModelUpdate {
 	return x.inner.RandomMoveForPlayerFromNumberOfBestMoves(player, numMovesToConsider)
 }
 
+// The maximum number of future turns that will be processed when searching for a move.
+//
 // MaxLookAheadDepth calls the underlying MaxLookAheadDepth.
 func (x *MinmaxStrategist) MaxLookAheadDepth() int {
 	return x.inner.MaxLookAheadDepth()

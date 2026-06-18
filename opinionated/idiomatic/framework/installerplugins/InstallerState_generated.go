@@ -37,16 +37,22 @@ func NewInstallerState() *InstallerState {
 	return &InstallerState{inner: raw.InstallerStateFromID(_id)}
 }
 
+// @method     choiceDictionaryForIdentifier: @abstract   Retrieves choice dictionaries by identifier. @discussion See choiceDictionaries for the values returned.
+//
 // ChoiceDictionaryForIdentifier calls the underlying ChoiceDictionaryForIdentifier.
 func (x *InstallerState) ChoiceDictionaryForIdentifier(choiceIdentifier string) *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.ChoiceDictionaryForIdentifier(foundation.NSStringStringWithUTF8String(choiceIdentifier))
 }
 
+// @method     licenseAgreed @abstract   Specifies the user agreed to the license, if there is no license, this will return NO.
+//
 // LicenseAgreed calls the underlying LicenseAgreed.
 func (x *InstallerState) LicenseAgreed() bool {
 	return x.inner.LicenseAgreed()
 }
 
+// @method     licenseAgreedLanguage @abstract   Specifies the language the language was last viewed or agreed with.
+//
 // LicenseAgreedLanguage calls the underlying LicenseAgreedLanguage.
 func (x *InstallerState) LicenseAgreedLanguage() string {
 	_r := x.inner.LicenseAgreedLanguage()
@@ -56,6 +62,8 @@ func (x *InstallerState) LicenseAgreedLanguage() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @method     targetVolumePath @abstract   Specifies the mount point of the selected target @discussion Only Available after target has been selected.
+//
 // TargetVolumePath calls the underlying TargetVolumePath.
 func (x *InstallerState) TargetVolumePath() string {
 	_r := x.inner.TargetVolumePath()
@@ -65,6 +73,8 @@ func (x *InstallerState) TargetVolumePath() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @method     targetPath @abstract   Full target path selected. @discussion Specifies the full path selected by the user.  This path contains the targetVolumePath.
+//
 // TargetPath calls the underlying TargetPath.
 func (x *InstallerState) TargetPath() string {
 	_r := x.inner.TargetPath()
@@ -74,16 +84,22 @@ func (x *InstallerState) TargetPath() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @method     choiceDictionaries @abstract   Returns an array of choice dictionaries. @discussion Each choice dictionary contains the keys InstallerState_Choice_Identifier,InstallerState_Choice_Installed, and optionally InstallerState_Choice_CustomLocation.  These keys specify a choice and whether they were installed or not.  This is only available after choice selections have been made.
+//
 // ChoiceDictionaries calls the underlying ChoiceDictionaries.
 func (x *InstallerState) ChoiceDictionaries() *foundation.NSArray[objc.ID] {
 	return x.inner.ChoiceDictionaries()
 }
 
+// @method     installStarted @abstract   Specifies if the install process has started or not. @discussion Will return YES after an install has been initiated.  If YES is returned, you can assume the install has taken place.
+//
 // InstallStarted calls the underlying InstallStarted.
 func (x *InstallerState) InstallStarted() bool {
 	return x.inner.InstallStarted()
 }
 
+// @method     installSucceeded @abstract   Specifies if the install was successfull or not. @discussion This value is only valid if installStarted returns True.
+//
 // InstallSucceeded calls the underlying InstallSucceeded.
 func (x *InstallerState) InstallSucceeded() bool {
 	return x.inner.InstallSucceeded()

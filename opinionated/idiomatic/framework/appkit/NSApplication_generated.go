@@ -50,6 +50,8 @@ func (x *Application) WithMainMenu(mainMenu *Menu) *Application {
 	return x
 }
 
+// Set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from `-helpMenu`).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.  @c NSApplication retains its Help menu and releases it when a different menu is set.
+//
 // WithHelpMenu sets the helpMenu property and returns the receiver for chaining.
 func (x *Application) WithHelpMenu(helpMenu *Menu) *Application {
 	x.inner.SetHelpMenu(helpMenu.Unwrap())
@@ -62,6 +64,8 @@ func (x *Application) WithApplicationIconImage(applicationIconImage *Image) *App
 	return x
 }
 
+// Gets or sets the @c presentationOptions that should be in effect for the system when this application is the active application.  Only certain combinations of @c NSApplicationPresentationOptions flags are allowed, as detailed in the AppKit Release Notes and the reference documentation for `-setPresentationOptions:`.  When given an invalid combination of option flags, `-setPresentationOptions:` raises an exception.
+//
 // WithPresentationOptions sets the presentationOptions property and returns the receiver for chaining.
 func (x *Application) WithPresentationOptions(presentationOptions NSApplicationPresentationOptions) *Application {
 	x.inner.SetPresentationOptions(raw.NSApplicationPresentationOptions(presentationOptions))
@@ -92,6 +96,8 @@ func (x *Application) WithServicesProvider(servicesProvider objc.ID) *Applicatio
 	return x
 }
 
+// Whether or not a menu item to customize the NSTouchBar can be automatically added to the main menu. It will only actually be added when Touch Bar hardware or simulator is present. Defaults to NO. Setting this property to YES is the recommended way to add the customization menu item. But if non-standard placement of the menu item is needed, creating a menu item with an action of `toggleTouchBarCustomizationPalette:` can be used instead.
+//
 // WithAutomaticCustomizeTouchBarMenuItemEnabled sets the automaticCustomizeTouchBarMenuItemEnabled property and returns the receiver for chaining.
 func (x *Application) WithAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled bool) *Application {
 	x.inner.SetAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled)
@@ -151,21 +157,29 @@ func (x *Application) Deactivate() {
 	x.inner.Deactivate()
 }
 
+// Makes the receiver the active app. - Parameter ignoreOtherApps: If `NO`, the app is activated only if no other app is currently active. If `YES`, the app activates regardless.
+//
 // ActivateIgnoringOtherApps calls the underlying ActivateIgnoringOtherApps.
 func (x *Application) ActivateIgnoringOtherApps(ignoreOtherApps bool) {
 	x.inner.ActivateIgnoringOtherApps(ignoreOtherApps)
 }
 
+// Makes the receiver the active app, if possible. You shouldn’t assume the app will be active immediately after sending this message. The framework also does not guarantee that the app will be activated at all. For cooperative activation, the other application should call `-yieldActivationToApplication:` or equivalent prior to the target application invoking `-activate`. Invoking `-activate` on an already-active application cancels any pending activation yields by the receiver.
+//
 // Activate calls the underlying Activate.
 func (x *Application) Activate() {
 	x.inner.Activate()
 }
 
+// Explicitly allows another application to make itself active. Calling this method will not deactivate the current app, nor will it activate the other app. For cooperative or coordinated activation, the other app should request to be activated at some point in the future by calling `activate` or equivalent.
+//
 // YieldActivationToApplication calls the underlying YieldActivationToApplication.
 func (x *Application) YieldActivationToApplication(application *raw.NSRunningApplication) {
 	x.inner.YieldActivationToApplication(application)
 }
 
+// Same as `-yieldActivationToApplication:`, but the provided bundle identifier does not have to correspond to a currently running application. This method should be used to yield activation to apps that may not be running at the time of invoking it. If it is known that the target application is currently running, use `-yieldActivationToApplication:` instead.
+//
 // YieldActivationToApplicationWithBundleIdentifier calls the underlying YieldActivationToApplicationWithBundleIdentifier.
 func (x *Application) YieldActivationToApplicationWithBundleIdentifier(bundleIdentifier string) {
 	x.inner.YieldActivationToApplicationWithBundleIdentifier(foundation.NSStringStringWithUTF8String(bundleIdentifier))
@@ -236,6 +250,8 @@ func (x *Application) Terminate(sender objc.ID) {
 	x.inner.Terminate(sender)
 }
 
+// Inform the user that this application needs attention - call this method only if your application is not already active.
+//
 // RequestUserAttention calls the underlying RequestUserAttention.
 func (x *Application) RequestUserAttention(requestType NSRequestUserAttentionType) int {
 	return x.inner.RequestUserAttention(raw.NSRequestUserAttentionType(requestType))
@@ -246,6 +262,8 @@ func (x *Application) CancelUserAttentionRequest(request int) {
 	x.inner.CancelUserAttentionRequest(request)
 }
 
+// Execute a block for each of the app's windows. Set `*stop = YES` if desired, to halt the enumeration early.
+//
 // EnumerateWindowsWithOptionsUsing calls the underlying EnumerateWindowsWithOptionsUsing.
 func (x *Application) EnumerateWindowsWithOptionsUsing(options NSWindowListOptions, block func(*raw.NSWindow, *bool)) {
 	x.inner.EnumerateWindowsWithOptionsUsing(raw.NSWindowListOptions(options), block)
@@ -266,11 +284,15 @@ func (x *Application) UpdateWindows() {
 	x.inner.UpdateWindows()
 }
 
+// @return The activation policy of the application.
+//
 // ActivationPolicy calls the underlying ActivationPolicy.
 func (x *Application) ActivationPolicy() NSApplicationActivationPolicy {
 	return NSApplicationActivationPolicy(x.inner.ActivationPolicy())
 }
 
+// Attempts to modify the application's activation policy.  In OS X 10.9, any policy may be set; prior to 10.9, the activation policy may be changed to @c NSApplicationActivationPolicyProhibited or @c NSApplicationActivationPolicyRegular, but may not be changed to @c NSApplicationActivationPolicyAccessory.  This returns @c YES if setting the activation policy is successful, and @c NO if not.
+//
 // SetActivationPolicy calls the underlying SetActivationPolicy.
 func (x *Application) SetActivationPolicy(activationPolicy NSApplicationActivationPolicy) bool {
 	return x.inner.SetActivationPolicy(raw.NSApplicationActivationPolicy(activationPolicy))
@@ -281,16 +303,22 @@ func (x *Application) ReportException(exception *foundation.NSException) {
 	x.inner.ReportException(exception)
 }
 
+// If an application delegate returns NSTerminateLater from -applicationShouldTerminate:, -replyToApplicationShouldTerminate: must be called with YES or NO once the application decides if it can terminate.
+//
 // ReplyToApplicationShouldTerminate calls the underlying ReplyToApplicationShouldTerminate.
 func (x *Application) ReplyToApplicationShouldTerminate(shouldTerminate bool) {
 	x.inner.ReplyToApplicationShouldTerminate(shouldTerminate)
 }
 
+// If an application delegate encounters an error while handling `-application:openFiles:` or` -application:printFiles:`, `-replyToOpenOrPrint:` should be called with @c NSApplicationDelegateReplyFailure.  If the user cancels the operation, @c NSApplicationDelegateReplyCancel should be used, and if the operation succeeds, @c NSApplicationDelegateReplySuccess should be used .
+//
 // ReplyToOpenOrPrint calls the underlying ReplyToOpenOrPrint.
 func (x *Application) ReplyToOpenOrPrint(reply NSApplicationDelegateReply) {
 	x.inner.ReplyToOpenOrPrint(raw.NSApplicationDelegateReply(reply))
 }
 
+// Opens the character palette.
+//
 // OrderFrontCharacterPalette calls the underlying OrderFrontCharacterPalette.
 func (x *Application) OrderFrontCharacterPalette(sender objc.ID) {
 	x.inner.OrderFrontCharacterPalette(sender)
@@ -339,6 +367,8 @@ func (x *Application) IsRunning() bool {
 	return x.inner.IsRunning()
 }
 
+// A boolean value indicating whether your application should suppress HDR content based on established policy. Built-in AppKit components such as NSImageView will automatically behave correctly with HDR content. You should use this value in conjunction with notifications (`NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification` and `NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification`) to suppress HDR content in your application when signaled to do so.
+//
 // ApplicationShouldSuppressHighDynamicRangeContent calls the underlying ApplicationShouldSuppressHighDynamicRangeContent.
 func (x *Application) ApplicationShouldSuppressHighDynamicRangeContent() bool {
 	return x.inner.ApplicationShouldSuppressHighDynamicRangeContent()
@@ -378,6 +408,8 @@ func (x *Application) SetMainMenu(mainMenu *raw.NSMenu) {
 	x.inner.SetMainMenu(mainMenu)
 }
 
+// Set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from `-helpMenu`).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.  @c NSApplication retains its Help menu and releases it when a different menu is set.
+//
 // HelpMenu calls the underlying HelpMenu.
 func (x *Application) HelpMenu() *Menu {
 	_r := x.inner.HelpMenu()
@@ -387,6 +419,8 @@ func (x *Application) HelpMenu() *Menu {
 	return &Menu{inner: _r}
 }
 
+// Set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from `-helpMenu`).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.  @c NSApplication retains its Help menu and releases it when a different menu is set.
+//
 // SetHelpMenu calls the underlying SetHelpMenu.
 func (x *Application) SetHelpMenu(helpMenu *raw.NSMenu) {
 	x.inner.SetHelpMenu(helpMenu)
@@ -415,16 +449,22 @@ func (x *Application) DockTile() *DockTile {
 	return &DockTile{inner: _r}
 }
 
+// Gets or sets the @c presentationOptions that should be in effect for the system when this application is the active application.  Only certain combinations of @c NSApplicationPresentationOptions flags are allowed, as detailed in the AppKit Release Notes and the reference documentation for `-setPresentationOptions:`.  When given an invalid combination of option flags, `-setPresentationOptions:` raises an exception.
+//
 // PresentationOptions calls the underlying PresentationOptions.
 func (x *Application) PresentationOptions() NSApplicationPresentationOptions {
 	return NSApplicationPresentationOptions(x.inner.PresentationOptions())
 }
 
+// Gets or sets the @c presentationOptions that should be in effect for the system when this application is the active application.  Only certain combinations of @c NSApplicationPresentationOptions flags are allowed, as detailed in the AppKit Release Notes and the reference documentation for `-setPresentationOptions:`.  When given an invalid combination of option flags, `-setPresentationOptions:` raises an exception.
+//
 // SetPresentationOptions calls the underlying SetPresentationOptions.
 func (x *Application) SetPresentationOptions(presentationOptions NSApplicationPresentationOptions) {
 	x.inner.SetPresentationOptions(raw.NSApplicationPresentationOptions(presentationOptions))
 }
 
+// @return The set of application presentation options that are currently in effect for the system. These are the presentation options that have been put into effect by the currently active application.
+//
 // CurrentSystemPresentationOptions calls the underlying CurrentSystemPresentationOptions.
 func (x *Application) CurrentSystemPresentationOptions() NSApplicationPresentationOptions {
 	return NSApplicationPresentationOptions(x.inner.CurrentSystemPresentationOptions())
@@ -555,6 +595,8 @@ func (x *Application) SetWindowsMenu(windowsMenu *raw.NSMenu) {
 	x.inner.SetWindowsMenu(windowsMenu)
 }
 
+// A Boolean value indicating whether keyboard navigation is enabled in System Settings > Keyboard. - Note: The value of this property is `YES` if keyboard navigation is enabled or `NO` if it’s not. You might use this value to implement your own key loop or to implement in-control tabbing behavior similar to `NSTableView`. Because of the nature of the preference storage, you won’t be notified of changes to this property if you attempt to observe it through key-value observing; however, accessing this property is fairly inexpensive, so you can access it directly rather than caching it. - Note: This property’s value isn’t necessarily reflective of the separate accessibility setting named “Full Keyboard Access” in System Settings > Accessibility > Keyboard.
+//
 // IsFullKeyboardAccessEnabled calls the underlying IsFullKeyboardAccessEnabled.
 func (x *Application) IsFullKeyboardAccessEnabled() bool {
 	return x.inner.IsFullKeyboardAccessEnabled()
@@ -604,6 +646,8 @@ func (x *Application) UserInterfaceLayoutDirection() NSUserInterfaceLayoutDirect
 	return NSUserInterfaceLayoutDirection(x.inner.UserInterfaceLayoutDirection())
 }
 
+// Disable or reenable relaunching this app on login, if the app was running at the time the user logged out.  These methods increment and decrement a counter respectively; if the counter is 0 at the time the user logs out, then the app may be relaunched when the user logs back in.  The counter is initially zero, so by default apps are relaunched. If your app should not be relaunched because it launches via some other mechanism (e.g. launchd), then the recommended usage is to call `-[NSApp disableRelaunchOnLogin]` once, and never pair it with an -enable call. If your app should not be relaunched because it triggers a restart (e.g. an installer), then the recommended usage is to call `-[NSApp disableRelaunchOnLogin]` immediately before you attempt to trigger a restart, and `-[NSApp enableRelaunchOnLogin]` immediately after.  This is because the user may cancel restarting; if the user later restarts for another reason, then your app should be brought back. These methods are thread safe.
+//
 // DisableRelaunchOnLogin calls the underlying DisableRelaunchOnLogin.
 func (x *Application) DisableRelaunchOnLogin() {
 	x.inner.DisableRelaunchOnLogin()
@@ -624,11 +668,15 @@ func (x *Application) UnregisterForRemoteNotifications() {
 	x.inner.UnregisterForRemoteNotifications()
 }
 
+// The following are soft deprecated. Please use the `-registerForRemoteNotifications` above and `-requestAuthorizationWithOptions:` from `UserNotifications.framework`.
+//
 // RegisterForRemoteNotificationTypes calls the underlying RegisterForRemoteNotificationTypes.
 func (x *Application) RegisterForRemoteNotificationTypes(types NSRemoteNotificationType) {
 	x.inner.RegisterForRemoteNotificationTypes(raw.NSRemoteNotificationType(types))
 }
 
+// @return @c YES if the application is currently registered for remote notifications, taking into account any systemwide settings; doesn't relate to connectivity.
+//
 // IsRegisteredForRemoteNotifications calls the underlying IsRegisteredForRemoteNotifications.
 func (x *Application) IsRegisteredForRemoteNotifications() bool {
 	return x.inner.IsRegisteredForRemoteNotifications()
@@ -639,21 +687,29 @@ func (x *Application) EnabledRemoteNotificationTypes() NSRemoteNotificationType 
 	return NSRemoteNotificationType(x.inner.EnabledRemoteNotificationTypes())
 }
 
+// `-runModalForWindow:relativeToWindow:` was deprecated in Mac OS X 10.0. Please use `-[NSWindow beginSheet:completionHandler:]` instead.
+//
 // RunModalForWindowRelativeToWindow calls the underlying RunModalForWindowRelativeToWindow.
 func (x *Application) RunModalForWindowRelativeToWindow(window *raw.NSWindow, docWindow *raw.NSWindow) int {
 	return x.inner.RunModalForWindowRelativeToWindow(window, docWindow)
 }
 
+// `-beginModalSessionForWindow:relativeToWindow:` was deprecated in Mac OS X 10.0. Please use `-[NSWindow beginSheet:completionHandler:]` instead.
+//
 // BeginModalSessionForWindowRelativeToWindow calls the underlying BeginModalSessionForWindowRelativeToWindow.
 func (x *Application) BeginModalSessionForWindowRelativeToWindow(window *raw.NSWindow, docWindow *raw.NSWindow) unsafe.Pointer {
 	return x.inner.BeginModalSessionForWindowRelativeToWindow(window, docWindow)
 }
 
+// `-application:printFiles:` was deprecated in Mac OS X 10.4. Implement `-application:printFiles:withSettings:showPrintPanels:` in your application delegate instead.
+//
 // ApplicationPrintFiles calls the underlying ApplicationPrintFiles.
 func (x *Application) ApplicationPrintFiles(sender *raw.NSApplication, filenames *foundation.NSArray[*foundation.NSString]) {
 	x.inner.ApplicationPrintFiles(sender, filenames)
 }
 
+// `NSWindow`'s `-beginSheet:completionHandler:` and `-endSheet:returnCode:` should be used instead.  `NSApplication`'s `-beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo:` will continue to work as it previously did, leaking contextInfo and failing when there is already an existing sheet.
+//
 // BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo calls the underlying BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo.
 func (x *Application) BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheet *raw.NSWindow, docWindow *raw.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheet, docWindow, modalDelegate, didEndSelector, contextInfo)
@@ -678,6 +734,8 @@ func (x *Application) MakeWindowsPerformInOrder(selector objc.SEL, inOrder bool)
 	return &Window{inner: _r}
 }
 
+// This method is deprecated as of macOS 10.12. Beginning in OS X 10.11 it would always return nil. Prior to this it would return an undefined graphics context that was not generally suitable for drawing.
+//
 // Context calls the underlying Context.
 func (x *Application) Context() *GraphicsContext {
 	_r := x.inner.Context()
@@ -697,11 +755,15 @@ func (x *Application) ShowHelp(sender objc.ID) {
 	x.inner.ShowHelp(sender)
 }
 
+// Show or dismiss the customization palette for the currently displayed NSTouchBars. NSApplication validates this selector against whether the current NSTouchBars are customizable and, if configured on a menu item, will standardize and localize the title. If the current system does not have Touch Bar support, the menu item will be automatically hidden.
+//
 // ToggleTouchBarCustomizationPalette calls the underlying ToggleTouchBarCustomizationPalette.
 func (x *Application) ToggleTouchBarCustomizationPalette(sender objc.ID) {
 	x.inner.ToggleTouchBarCustomizationPalette(sender)
 }
 
+// Whether or not a menu item to customize the NSTouchBar can be automatically added to the main menu. It will only actually be added when Touch Bar hardware or simulator is present. Defaults to NO. Setting this property to YES is the recommended way to add the customization menu item. But if non-standard placement of the menu item is needed, creating a menu item with an action of `toggleTouchBarCustomizationPalette:` can be used instead.
+//
 // IsAutomaticCustomizeTouchBarMenuItemEnabled calls the underlying IsAutomaticCustomizeTouchBarMenuItemEnabled.
 func (x *Application) IsAutomaticCustomizeTouchBarMenuItemEnabled() bool {
 	return x.inner.IsAutomaticCustomizeTouchBarMenuItemEnabled()

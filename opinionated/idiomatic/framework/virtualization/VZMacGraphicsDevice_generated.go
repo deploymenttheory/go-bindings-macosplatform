@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a Mac graphics device.
+//
 // MacGraphicsDevice wraps [raw.VZMacGraphicsDevice] with a fluent Go API.
 type MacGraphicsDevice struct {
 	inner *raw.VZMacGraphicsDevice

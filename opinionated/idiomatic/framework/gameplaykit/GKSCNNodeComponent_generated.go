@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A component that encapsulates a SceneKit node.
+//
 // SCNNodeComponent wraps [raw.GKSCNNodeComponent] with a fluent Go API.
 type SCNNodeComponent struct {
 	inner *raw.GKSCNNodeComponent
@@ -30,6 +32,8 @@ func SCNNodeComponentFromID(id objc.ID) *SCNNodeComponent {
 	return &SCNNodeComponent{inner: raw.GKSCNNodeComponentFromID(id)}
 }
 
+// Initializes component to encapsulate the given SceneKit node. When the component is added to an entity, the SCNNode's entity property will be set. @param node Node to associate with the component. @see SCNNode.entity
+//
 // NewSCNNodeComponentWithNode creates a new [SCNNodeComponent].
 func NewSCNNodeComponentWithNode(node *scenekit.SCNNode) *SCNNodeComponent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKSCNNodeComponent")), objc.RegisterName("alloc"))

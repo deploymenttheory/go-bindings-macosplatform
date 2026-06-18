@@ -29,6 +29,8 @@ func NEFilterRuleFromID(id objc.ID) *NEFilterRule {
 	return &NEFilterRule{inner: raw.NEFilterRuleFromID(id)}
 }
 
+// @method initWithNetworkRule:action: @discussion Initialize a newly-allocated NEFilterRule object @param networkRule A NENetworkRule object that defines the network traffic characteristics that this rule matches. @param action The action to take when this rule matches.
+//
 // NewNEFilterRuleWithNetworkRuleAction creates a new [NEFilterRule].
 func NewNEFilterRuleWithNetworkRuleAction(networkRule *raw.NENetworkRule, action NEFilterAction) *NEFilterRule {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NEFilterRule")), objc.RegisterName("alloc"))
@@ -36,6 +38,8 @@ func NewNEFilterRuleWithNetworkRuleAction(networkRule *raw.NENetworkRule, action
 	return &NEFilterRule{inner: raw.NEFilterRuleFromID(_id)}
 }
 
+// @property matchNetworkRule @discussion The NENetworkRule that defines the network traffic characteristics that this rule matches.
+//
 // NetworkRule calls the underlying NetworkRule.
 func (x *NEFilterRule) NetworkRule() *NENetworkRule {
 	_r := x.inner.NetworkRule()
@@ -45,6 +49,8 @@ func (x *NEFilterRule) NetworkRule() *NENetworkRule {
 	return &NENetworkRule{inner: _r}
 }
 
+// @property action @discussion The action to take when this rule matches network traffic.
+//
 // Action calls the underlying Action.
 func (x *NEFilterRule) Action() NEFilterAction {
 	return NEFilterAction(x.inner.Action())

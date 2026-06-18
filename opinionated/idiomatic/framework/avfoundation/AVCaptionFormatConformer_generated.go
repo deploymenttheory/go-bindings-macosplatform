@@ -30,6 +30,8 @@ func CaptionFormatConformerFromID(id objc.ID) *CaptionFormatConformer {
 	return &CaptionFormatConformer{inner: raw.AVCaptionFormatConformerFromID(id)}
 }
 
+// @method	initWithConversionSettings:conversionSettings: @abstract	Returns an instance of AVCaptionFormatConformer that can convert a canonical caption to conform to a specific format. @param		conversionSettings Describes the conversion operation for which the caption is to be conformed. @result	A new instance of AVCaptionFormatConformer configured to perform the specified conversion. @discussion This method throws an exception if the conversion setting's AVCaptionMediaTypeKey is not equal to AVMediaTypeClosedCaption, or if its AVCaptionMediaSubTypeKey is not equal to kCMClosedCaptionFormatType_CEA608.
+//
 // NewCaptionFormatConformerWithConversionSettings creates a new [CaptionFormatConformer].
 func NewCaptionFormatConformerWithConversionSettings(conversionSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptionFormatConformer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionFormatConformer")), objc.RegisterName("alloc"))
@@ -37,12 +39,16 @@ func NewCaptionFormatConformerWithConversionSettings(conversionSettings *foundat
 	return &CaptionFormatConformer{inner: raw.AVCaptionFormatConformerFromID(_id)}
 }
 
+// @property	conformsCaptionsToTimeRange @abstract	Specifies whether to conform the time range of a given canonical caption as well. @discussion When set to YES, conforms time range. When set to NO, the time range of the conformed caption will be same as a given canonical caption. In the case of conforming to CAE608 format, AVCaption is encoded so that each CAE608 control code (2 bytes) fits into 1 frame duration (1001/30000). When set to YES and if all the encoded data can not fit inside the canonical caption time range, the caption time range will be extended to fit all the data and will be returned in the conformed AVCaption. The default value is NO.
+//
 // WithConformsCaptionsToTimeRange sets the conformsCaptionsToTimeRange property and returns the receiver for chaining.
 func (x *CaptionFormatConformer) WithConformsCaptionsToTimeRange(conformsCaptionsToTimeRange bool) *CaptionFormatConformer {
 	x.inner.SetConformsCaptionsToTimeRange(conformsCaptionsToTimeRange)
 	return x
 }
 
+// @method	conformedCaptionForCaption:error: @abstract	Creates a format-compliant caption that conforms to a specific format by converting a given canonical caption. @param		caption Specifies a canonical caption to be converted. @param		outError A pointer where a NSError object may be returned. @result	A format-compliant caption that conforms to a specific format.
+//
 // ConformedCaptionForCaptionError calls the underlying ConformedCaptionForCaptionError.
 func (x *CaptionFormatConformer) ConformedCaptionForCaptionError(caption *raw.AVCaption) (*Caption, error) {
 	_r, _err := x.inner.ConformedCaptionForCaptionError(caption)
@@ -55,6 +61,8 @@ func (x *CaptionFormatConformer) ConformedCaptionForCaptionError(caption *raw.AV
 	return &Caption{inner: _r}, nil
 }
 
+// @property	conformsCaptionsToTimeRange @abstract	Specifies whether to conform the time range of a given canonical caption as well. @discussion When set to YES, conforms time range. When set to NO, the time range of the conformed caption will be same as a given canonical caption. In the case of conforming to CAE608 format, AVCaption is encoded so that each CAE608 control code (2 bytes) fits into 1 frame duration (1001/30000). When set to YES and if all the encoded data can not fit inside the canonical caption time range, the caption time range will be extended to fit all the data and will be returned in the conformed AVCaption. The default value is NO.
+//
 // ConformsCaptionsToTimeRange calls the underlying ConformsCaptionsToTimeRange.
 func (x *CaptionFormatConformer) ConformsCaptionsToTimeRange() bool {
 	return x.inner.ConformsCaptionsToTimeRange()

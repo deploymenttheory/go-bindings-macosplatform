@@ -31,6 +31,8 @@ func OrderedCollectionDifferenceFromID(id objc.ID) *OrderedCollectionDifference 
 	return &OrderedCollectionDifference{inner: raw.NSOrderedCollectionDifferenceFromID[objc.ID](id)}
 }
 
+// Creates a new difference representing the changes in the parameter. For clients interested in the difference between two collections, the collection's differenceFrom method should be used instead. To guarantee that instances are unambiguous and safe for compatible base states, this method requires that its parameter conform to the following requirements: 1) All insertion offsets are unique 2) All removal offsets are unique 3) All associated indexes match a change with the opposite parity.
+//
 // NewOrderedCollectionDifferenceWithChanges creates a new [OrderedCollectionDifference].
 func NewOrderedCollectionDifferenceWithChanges(changes *raw.NSArray[objc.ID]) *OrderedCollectionDifference {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedCollectionDifference")), objc.RegisterName("alloc"))

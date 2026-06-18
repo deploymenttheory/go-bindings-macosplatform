@@ -38,108 +38,144 @@ func NewAVB17221Entity() *AVB17221Entity {
 	return &AVB17221Entity{inner: raw.AVB17221EntityFromID(_id)}
 }
 
+// @property	localEntity @abstract	YES if the entity is published locally on the machine and NO if the entity has been discovered on the network.
+//
 // WithLocalEntity sets the localEntity property and returns the receiver for chaining.
 func (x *AVB17221Entity) WithLocalEntity(localEntity bool) *AVB17221Entity {
 	x.inner.SetLocalEntity(localEntity)
 	return x
 }
 
+// @property	timeToLive @abstract	The number of seconds left until the entity registration times out.
+//
 // WithTimeToLive sets the timeToLive property and returns the receiver for chaining.
 func (x *AVB17221Entity) WithTimeToLive(timeToLive uint8) *AVB17221Entity {
 	x.inner.SetTimeToLive(timeToLive)
 	return x
 }
 
+// @property	entityID @abstract	The Unique Identifier (entity_id) of the entity.
+//
 // WithEntityID sets the entityID property and returns the receiver for chaining.
 func (x *AVB17221Entity) WithEntityID(entityID uint64) *AVB17221Entity {
 	x.inner.SetEntityID(entityID)
 	return x
 }
 
+// @property	entityModelID @abstract	The Entity Model Unique Identifier (entity_model_id) of the entity.
+//
 // WithEntityModelID sets the entityModelID property and returns the receiver for chaining.
 func (x *AVB17221Entity) WithEntityModelID(entityModelID uint64) *AVB17221Entity {
 	x.inner.SetEntityModelID(entityModelID)
 	return x
 }
 
+// @property	entityCapabilities @abstract	The entity_capabilities of the entity.
+//
 // WithEntityCapabilities sets the entityCapabilities property and returns the receiver for chaining.
 func (x *AVB17221Entity) WithEntityCapabilities(entityCapabilities AVB17221ADPEntityCapabilities) *AVB17221Entity {
 	x.inner.SetEntityCapabilities(raw.AVB17221ADPEntityCapabilities(entityCapabilities))
 	return x
 }
 
+// @property	talkerStreamSources @abstract	The number of stream sources the entity has.
+//
 // WithTalkerStreamSources sets the talkerStreamSources property and returns the receiver for chaining.
 func (x *AVB17221Entity) WithTalkerStreamSources(talkerStreamSources uint16) *AVB17221Entity {
 	x.inner.SetTalkerStreamSources(talkerStreamSources)
 	return x
 }
 
+// @property	talkerCapabilities @abstract	The talker_capabilities of the entity.
+//
 // WithTalkerCapabilities sets the talkerCapabilities property and returns the receiver for chaining.
 func (x *AVB17221Entity) WithTalkerCapabilities(talkerCapabilities AVB17221ADPTalkerCapabilities) *AVB17221Entity {
 	x.inner.SetTalkerCapabilities(raw.AVB17221ADPTalkerCapabilities(talkerCapabilities))
 	return x
 }
 
+// @property	listenerStreamSinks @abstract	The number of stream sinks the entity has.
+//
 // WithListenerStreamSinks sets the listenerStreamSinks property and returns the receiver for chaining.
 func (x *AVB17221Entity) WithListenerStreamSinks(listenerStreamSinks uint16) *AVB17221Entity {
 	x.inner.SetListenerStreamSinks(listenerStreamSinks)
 	return x
 }
 
+// @property	listenerCapabilities @abstract	The listener_capabilities of the entity.
+//
 // WithListenerCapabilities sets the listenerCapabilities property and returns the receiver for chaining.
 func (x *AVB17221Entity) WithListenerCapabilities(listenerCapabilities AVB17221ADPListenerCapabilities) *AVB17221Entity {
 	x.inner.SetListenerCapabilities(raw.AVB17221ADPListenerCapabilities(listenerCapabilities))
 	return x
 }
 
+// @property	controllerCapabilities @abstract	The controller_capabilities of the entity.
+//
 // WithControllerCapabilities sets the controllerCapabilities property and returns the receiver for chaining.
 func (x *AVB17221Entity) WithControllerCapabilities(controllerCapabilities AVB17221ADPControllerCapabilities) *AVB17221Entity {
 	x.inner.SetControllerCapabilities(raw.AVB17221ADPControllerCapabilities(controllerCapabilities))
 	return x
 }
 
+// @property	availableIndex @abstract	The available_index of the entity.
+//
 // WithAvailableIndex sets the availableIndex property and returns the receiver for chaining.
 func (x *AVB17221Entity) WithAvailableIndex(availableIndex uint32) *AVB17221Entity {
 	x.inner.SetAvailableIndex(availableIndex)
 	return x
 }
 
+// @property	gPTPGrandmasterID @abstract	The clock identifier of the IEEE Std 802.1AS-2011 grandmaster of the entity.
+//
 // WithGPTPGrandmasterID sets the gPTPGrandmasterID property and returns the receiver for chaining.
 func (x *AVB17221Entity) WithGPTPGrandmasterID(gPTPGrandmasterID uint64) *AVB17221Entity {
 	x.inner.SetGPTPGrandmasterID(gPTPGrandmasterID)
 	return x
 }
 
+// @property	gPTPDomainNumber @abstract	The domain number of the IEEE Std 802.1AS-2011 grandmaster of the entity.
+//
 // WithGPTPDomainNumber sets the gPTPDomainNumber property and returns the receiver for chaining.
 func (x *AVB17221Entity) WithGPTPDomainNumber(gPTPDomainNumber uint8) *AVB17221Entity {
 	x.inner.SetGPTPDomainNumber(gPTPDomainNumber)
 	return x
 }
 
+// @property	identifyControlIndex @abstract	The descriptor_index of the CONTROL which implements the IDENTIFY for the entity if supported.
+//
 // WithIdentifyControlIndex sets the identifyControlIndex property and returns the receiver for chaining.
 func (x *AVB17221Entity) WithIdentifyControlIndex(identifyControlIndex uint16) *AVB17221Entity {
 	x.inner.SetIdentifyControlIndex(identifyControlIndex)
 	return x
 }
 
+// @property	interfaceIndex @abstract	The descriptor_index of the AVB_INTERFACE descriptor which is associated with this entity.
+//
 // WithInterfaceIndex sets the interfaceIndex property and returns the receiver for chaining.
 func (x *AVB17221Entity) WithInterfaceIndex(interfaceIndex uint16) *AVB17221Entity {
 	x.inner.SetInterfaceIndex(interfaceIndex)
 	return x
 }
 
+// @property	associationID @abstract	The association_id of the entity.
+//
 // WithAssociationID sets the associationID property and returns the receiver for chaining.
 func (x *AVB17221Entity) WithAssociationID(associationID uint64) *AVB17221Entity {
 	x.inner.SetAssociationID(associationID)
 	return x
 }
 
+// @property	currentConfigurationIndexIndex @abstract	The descriptor_index of the current CONFIGURATION. This is only valid if entityCapabilities includes AVB17221ADPEntityCapabilitiesAEMConfigurationIndexValid
+//
 // WithCurrentConfigurationIndex sets the currentConfigurationIndex property and returns the receiver for chaining.
 func (x *AVB17221Entity) WithCurrentConfigurationIndex(currentConfigurationIndex uint16) *AVB17221Entity {
 	x.inner.SetCurrentConfigurationIndex(currentConfigurationIndex)
 	return x
 }
 
+// @property	macAddresses @abstract	An array of AVBMACAddress objects containing the current MAC addresses of the entity.
+//
 // WithMacAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *AVB17221Entity) WithMacAddresses(items ...*raw.AVBMACAddress) *AVB17221Entity {
 	if len(items) == 0 {
@@ -158,12 +194,16 @@ func (x *AVB17221Entity) WithMacAddresses(items ...*raw.AVBMACAddress) *AVB17221
 	return x
 }
 
+// @property	entityDiscovery @abstract	The AVB17221EntityDiscovery object which discovered the entity.
+//
 // WithEntityDiscovery sets the entityDiscovery property and returns the receiver for chaining.
 func (x *AVB17221Entity) WithEntityDiscovery(entityDiscovery *AVB17221EntityDiscovery) *AVB17221Entity {
 	x.inner.SetEntityDiscovery(entityDiscovery.Unwrap())
 	return x
 }
 
+// @property	localEntity @abstract	YES if the entity is published locally on the machine and NO if the entity has been discovered on the network.
+//
 // IsLocalEntity calls the underlying IsLocalEntity.
 func (x *AVB17221Entity) IsLocalEntity() bool {
 	return x.inner.IsLocalEntity()
@@ -174,6 +214,8 @@ func (x *AVB17221Entity) SetLocalEntity(localEntity bool) {
 	x.inner.SetLocalEntity(localEntity)
 }
 
+// @property	timeToLive @abstract	The number of seconds left until the entity registration times out.
+//
 // TimeToLive calls the underlying TimeToLive.
 func (x *AVB17221Entity) TimeToLive() uint8 {
 	return x.inner.TimeToLive()
@@ -184,6 +226,8 @@ func (x *AVB17221Entity) SetTimeToLive(timeToLive uint8) {
 	x.inner.SetTimeToLive(timeToLive)
 }
 
+// @property	entityID @abstract	The Unique Identifier (entity_id) of the entity.
+//
 // EntityID calls the underlying EntityID.
 func (x *AVB17221Entity) EntityID() uint64 {
 	return x.inner.EntityID()
@@ -194,6 +238,8 @@ func (x *AVB17221Entity) SetEntityID(entityID uint64) {
 	x.inner.SetEntityID(entityID)
 }
 
+// @property	entityModelID @abstract	The Entity Model Unique Identifier (entity_model_id) of the entity.
+//
 // EntityModelID calls the underlying EntityModelID.
 func (x *AVB17221Entity) EntityModelID() uint64 {
 	return x.inner.EntityModelID()
@@ -204,6 +250,8 @@ func (x *AVB17221Entity) SetEntityModelID(entityModelID uint64) {
 	x.inner.SetEntityModelID(entityModelID)
 }
 
+// @property	entityCapabilities @abstract	The entity_capabilities of the entity.
+//
 // EntityCapabilities calls the underlying EntityCapabilities.
 func (x *AVB17221Entity) EntityCapabilities() AVB17221ADPEntityCapabilities {
 	return AVB17221ADPEntityCapabilities(x.inner.EntityCapabilities())
@@ -214,6 +262,8 @@ func (x *AVB17221Entity) SetEntityCapabilities(entityCapabilities AVB17221ADPEnt
 	x.inner.SetEntityCapabilities(raw.AVB17221ADPEntityCapabilities(entityCapabilities))
 }
 
+// @property	talkerStreamSources @abstract	The number of stream sources the entity has.
+//
 // TalkerStreamSources calls the underlying TalkerStreamSources.
 func (x *AVB17221Entity) TalkerStreamSources() uint16 {
 	return x.inner.TalkerStreamSources()
@@ -224,6 +274,8 @@ func (x *AVB17221Entity) SetTalkerStreamSources(talkerStreamSources uint16) {
 	x.inner.SetTalkerStreamSources(talkerStreamSources)
 }
 
+// @property	talkerCapabilities @abstract	The talker_capabilities of the entity.
+//
 // TalkerCapabilities calls the underlying TalkerCapabilities.
 func (x *AVB17221Entity) TalkerCapabilities() AVB17221ADPTalkerCapabilities {
 	return AVB17221ADPTalkerCapabilities(x.inner.TalkerCapabilities())
@@ -234,6 +286,8 @@ func (x *AVB17221Entity) SetTalkerCapabilities(talkerCapabilities AVB17221ADPTal
 	x.inner.SetTalkerCapabilities(raw.AVB17221ADPTalkerCapabilities(talkerCapabilities))
 }
 
+// @property	listenerStreamSinks @abstract	The number of stream sinks the entity has.
+//
 // ListenerStreamSinks calls the underlying ListenerStreamSinks.
 func (x *AVB17221Entity) ListenerStreamSinks() uint16 {
 	return x.inner.ListenerStreamSinks()
@@ -244,6 +298,8 @@ func (x *AVB17221Entity) SetListenerStreamSinks(listenerStreamSinks uint16) {
 	x.inner.SetListenerStreamSinks(listenerStreamSinks)
 }
 
+// @property	listenerCapabilities @abstract	The listener_capabilities of the entity.
+//
 // ListenerCapabilities calls the underlying ListenerCapabilities.
 func (x *AVB17221Entity) ListenerCapabilities() AVB17221ADPListenerCapabilities {
 	return AVB17221ADPListenerCapabilities(x.inner.ListenerCapabilities())
@@ -254,6 +310,8 @@ func (x *AVB17221Entity) SetListenerCapabilities(listenerCapabilities AVB17221AD
 	x.inner.SetListenerCapabilities(raw.AVB17221ADPListenerCapabilities(listenerCapabilities))
 }
 
+// @property	controllerCapabilities @abstract	The controller_capabilities of the entity.
+//
 // ControllerCapabilities calls the underlying ControllerCapabilities.
 func (x *AVB17221Entity) ControllerCapabilities() AVB17221ADPControllerCapabilities {
 	return AVB17221ADPControllerCapabilities(x.inner.ControllerCapabilities())
@@ -264,6 +322,8 @@ func (x *AVB17221Entity) SetControllerCapabilities(controllerCapabilities AVB172
 	x.inner.SetControllerCapabilities(raw.AVB17221ADPControllerCapabilities(controllerCapabilities))
 }
 
+// @property	availableIndex @abstract	The available_index of the entity.
+//
 // AvailableIndex calls the underlying AvailableIndex.
 func (x *AVB17221Entity) AvailableIndex() uint32 {
 	return x.inner.AvailableIndex()
@@ -274,6 +334,8 @@ func (x *AVB17221Entity) SetAvailableIndex(availableIndex uint32) {
 	x.inner.SetAvailableIndex(availableIndex)
 }
 
+// @property	gPTPGrandmasterID @abstract	The clock identifier of the IEEE Std 802.1AS-2011 grandmaster of the entity.
+//
 // GPTPGrandmasterID calls the underlying GPTPGrandmasterID.
 func (x *AVB17221Entity) GPTPGrandmasterID() uint64 {
 	return x.inner.GPTPGrandmasterID()
@@ -284,6 +346,8 @@ func (x *AVB17221Entity) SetGPTPGrandmasterID(gPTPGrandmasterID uint64) {
 	x.inner.SetGPTPGrandmasterID(gPTPGrandmasterID)
 }
 
+// @property	gPTPDomainNumber @abstract	The domain number of the IEEE Std 802.1AS-2011 grandmaster of the entity.
+//
 // GPTPDomainNumber calls the underlying GPTPDomainNumber.
 func (x *AVB17221Entity) GPTPDomainNumber() uint8 {
 	return x.inner.GPTPDomainNumber()
@@ -294,6 +358,8 @@ func (x *AVB17221Entity) SetGPTPDomainNumber(gPTPDomainNumber uint8) {
 	x.inner.SetGPTPDomainNumber(gPTPDomainNumber)
 }
 
+// @property	identifyControlIndex @abstract	The descriptor_index of the CONTROL which implements the IDENTIFY for the entity if supported.
+//
 // IdentifyControlIndex calls the underlying IdentifyControlIndex.
 func (x *AVB17221Entity) IdentifyControlIndex() uint16 {
 	return x.inner.IdentifyControlIndex()
@@ -304,6 +370,8 @@ func (x *AVB17221Entity) SetIdentifyControlIndex(identifyControlIndex uint16) {
 	x.inner.SetIdentifyControlIndex(identifyControlIndex)
 }
 
+// @property	interfaceIndex @abstract	The descriptor_index of the AVB_INTERFACE descriptor which is associated with this entity.
+//
 // InterfaceIndex calls the underlying InterfaceIndex.
 func (x *AVB17221Entity) InterfaceIndex() uint16 {
 	return x.inner.InterfaceIndex()
@@ -314,6 +382,8 @@ func (x *AVB17221Entity) SetInterfaceIndex(interfaceIndex uint16) {
 	x.inner.SetInterfaceIndex(interfaceIndex)
 }
 
+// @property	associationID @abstract	The association_id of the entity.
+//
 // AssociationID calls the underlying AssociationID.
 func (x *AVB17221Entity) AssociationID() uint64 {
 	return x.inner.AssociationID()
@@ -324,6 +394,8 @@ func (x *AVB17221Entity) SetAssociationID(associationID uint64) {
 	x.inner.SetAssociationID(associationID)
 }
 
+// @property	currentConfigurationIndexIndex @abstract	The descriptor_index of the current CONFIGURATION. This is only valid if entityCapabilities includes AVB17221ADPEntityCapabilitiesAEMConfigurationIndexValid
+//
 // CurrentConfigurationIndex calls the underlying CurrentConfigurationIndex.
 func (x *AVB17221Entity) CurrentConfigurationIndex() uint16 {
 	return x.inner.CurrentConfigurationIndex()
@@ -334,6 +406,8 @@ func (x *AVB17221Entity) SetCurrentConfigurationIndex(currentConfigurationIndex 
 	x.inner.SetCurrentConfigurationIndex(currentConfigurationIndex)
 }
 
+// @property	macAddresses @abstract	An array of AVBMACAddress objects containing the current MAC addresses of the entity.
+//
 // MacAddresses returns the collection as a Go slice.
 func (x *AVB17221Entity) MacAddresses() []*MACAddress {
 	arr := x.inner.MacAddresses()
@@ -350,6 +424,8 @@ func (x *AVB17221Entity) SetMacAddresses(macAddresses *foundation.NSArray[*raw.A
 	x.inner.SetMacAddresses(macAddresses)
 }
 
+// @property	entityDiscovery @abstract	The AVB17221EntityDiscovery object which discovered the entity.
+//
 // EntityDiscovery calls the underlying EntityDiscovery.
 func (x *AVB17221Entity) EntityDiscovery() *AVB17221EntityDiscovery {
 	_r := x.inner.EntityDiscovery()

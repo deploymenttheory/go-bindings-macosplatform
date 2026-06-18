@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// Frame-specific information required to render a frame in a rendering session.
+//
 // RenderingSessionFrameAttributes wraps [raw.CNRenderingSessionFrameAttributes] with a fluent Go API.
 type RenderingSessionFrameAttributes struct {
 	inner *raw.CNRenderingSessionFrameAttributes
@@ -33,6 +35,8 @@ func RenderingSessionFrameAttributesFromID(id objc.ID) *RenderingSessionFrameAtt
 	return &RenderingSessionFrameAttributes{inner: raw.CNRenderingSessionFrameAttributesFromID(id)}
 }
 
+// Initialize rendering frame attributes from a sample buffer read from a cinematic metadata track. - Parameters: - sampleBuffer: A sample buffer read from the timed cinematic metadata track of a cinematic asset. - sessionAttributes: Rendering session attributes loaded from a cinematic asset.
+//
 // NewRenderingSessionFrameAttributesWithSampleBufferSessionAttributes creates a new [RenderingSessionFrameAttributes].
 func NewRenderingSessionFrameAttributesWithSampleBufferSessionAttributes(sampleBuffer unsafe.Pointer, sessionAttributes *raw.CNRenderingSessionAttributes) *RenderingSessionFrameAttributes {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNRenderingSessionFrameAttributes")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewRenderingSessionFrameAttributesWithSampleBufferSessionAttributes(sampleB
 	return &RenderingSessionFrameAttributes{inner: raw.CNRenderingSessionFrameAttributesFromID(_id)}
 }
 
+// Initialize rendering frame attributes from a timed metadata group read from a cinematic metadata track. - Parameters: - metadataGroup: An AVTimedMetadataGroup read from the timed cinematic metadata track of a cinematic asset. - sessionAttributes: Rendering session attributes loaded from a cinematic asset.
+//
 // NewRenderingSessionFrameAttributesWithTimedMetadataGroupSessionAttributes creates a new [RenderingSessionFrameAttributes].
 func NewRenderingSessionFrameAttributesWithTimedMetadataGroupSessionAttributes(metadataGroup *avfoundation.AVTimedMetadataGroup, sessionAttributes *raw.CNRenderingSessionAttributes) *RenderingSessionFrameAttributes {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNRenderingSessionFrameAttributes")), objc.RegisterName("alloc"))
@@ -47,18 +53,24 @@ func NewRenderingSessionFrameAttributesWithTimedMetadataGroupSessionAttributes(m
 	return &RenderingSessionFrameAttributes{inner: raw.CNRenderingSessionFrameAttributesFromID(_id)}
 }
 
+// The disparity value which represents the focus plane at which the rendered image should be in focus. A larger disparity results in the focus plane being closer to the camera. The scale and offset of disparity is not defined. It is best practice to obtain disparity values from detections or by interpolation between known disparity values.
+//
 // WithFocusDisparity sets the focusDisparity property and returns the receiver for chaining.
 func (x *RenderingSessionFrameAttributes) WithFocusDisparity(focusDisparity float32) *RenderingSessionFrameAttributes {
 	x.inner.SetFocusDisparity(focusDisparity)
 	return x
 }
 
+// The f-stop value which inversely affects the aperture used to render the image. A smaller f/ number results in larger bokeh and a shallower depth of field in the rendered image.
+//
 // WithFNumber sets the fNumber property and returns the receiver for chaining.
 func (x *RenderingSessionFrameAttributes) WithFNumber(fNumber float32) *RenderingSessionFrameAttributes {
 	x.inner.SetFNumber(fNumber)
 	return x
 }
 
+// The disparity value which represents the focus plane at which the rendered image should be in focus. A larger disparity results in the focus plane being closer to the camera. The scale and offset of disparity is not defined. It is best practice to obtain disparity values from detections or by interpolation between known disparity values.
+//
 // FocusDisparity calls the underlying FocusDisparity.
 func (x *RenderingSessionFrameAttributes) FocusDisparity() float32 {
 	return x.inner.FocusDisparity()
@@ -69,6 +81,8 @@ func (x *RenderingSessionFrameAttributes) SetFocusDisparity(focusDisparity float
 	x.inner.SetFocusDisparity(focusDisparity)
 }
 
+// The f-stop value which inversely affects the aperture used to render the image. A smaller f/ number results in larger bokeh and a shallower depth of field in the rendered image.
+//
 // FNumber calls the underlying FNumber.
 func (x *RenderingSessionFrameAttributes) FNumber() float32 {
 	return x.inner.FNumber()

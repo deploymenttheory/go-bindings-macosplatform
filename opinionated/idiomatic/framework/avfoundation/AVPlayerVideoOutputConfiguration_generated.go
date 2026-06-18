@@ -40,6 +40,8 @@ func NewPlayerVideoOutputConfiguration() *PlayerVideoOutputConfiguration {
 	return &PlayerVideoOutputConfiguration{inner: raw.AVPlayerVideoOutputConfigurationFromID(_id)}
 }
 
+// @property 	sourcePlayerItem @abstract	The AVPlayerItem which is the source of this configuration. @discussion	This AVPlayerItem can be seen as the source of all samples this configuration vended alongside.
+//
 // SourcePlayerItem calls the underlying SourcePlayerItem.
 func (x *PlayerVideoOutputConfiguration) SourcePlayerItem() *PlayerItem {
 	_r := x.inner.SourcePlayerItem()
@@ -49,16 +51,22 @@ func (x *PlayerVideoOutputConfiguration) SourcePlayerItem() *PlayerItem {
 	return &PlayerItem{inner: _r}
 }
 
+// @property	dataChannelDescriptions @abstract	List of data channels, represented as CMTagCollections, selected for this configuration. @discussion Returns an Array of CMTagCollections
+//
 // DataChannelDescriptions calls the underlying DataChannelDescriptions.
 func (x *PlayerVideoOutputConfiguration) DataChannelDescriptions() *foundation.NSArray[objc.ID] {
 	return x.inner.DataChannelDescriptions()
 }
 
+// @property	preferredTransform @abstract	The preferred transformation of the visual media data vended with this configuration. This transformation is acquired from the AVAssetTrack that was used to source the media data accompanying this configuration. @discussion If no transform was specified by the source track a default value of CGAffineTransformIdentity is returned.
+//
 // PreferredTransform calls the underlying PreferredTransform.
 func (x *PlayerVideoOutputConfiguration) PreferredTransform() corefoundation.CGAffineTransform {
 	return x.inner.PreferredTransform()
 }
 
+// @property 	activationTime @abstract 	Host time when this configuration became active on the player the vending output is attached to.
+//
 // ActivationTime calls the underlying ActivationTime.
 func (x *PlayerVideoOutputConfiguration) ActivationTime() coremedia.CMTime {
 	return x.inner.ActivationTime()

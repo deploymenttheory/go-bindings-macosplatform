@@ -37,6 +37,8 @@ func NewLibPlaylist() *LibPlaylist {
 	return &LibPlaylist{inner: raw.ITLibPlaylistFromID(_id)}
 }
 
+// @abstract The name or title of this playlist.
+//
 // Name calls the underlying Name.
 func (x *LibPlaylist) Name() string {
 	_r := x.inner.Name()
@@ -46,26 +48,36 @@ func (x *LibPlaylist) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Whether this playlist is the primary playlist.
+//
 // IsPrimary calls the underlying IsPrimary.
 func (x *LibPlaylist) IsPrimary() bool {
 	return x.inner.IsPrimary()
 }
 
+// @abstract The unique identifier of this playlist' parent.
+//
 // ParentID calls the underlying ParentID.
 func (x *LibPlaylist) ParentID() *foundation.NSNumber {
 	return x.inner.ParentID()
 }
 
+// @abstract Whether this playlist is visible.
+//
 // IsVisible calls the underlying IsVisible.
 func (x *LibPlaylist) IsVisible() bool {
 	return x.inner.IsVisible()
 }
 
+// @abstract Whether or not every item in this playlist is exposed via this API.  Generally true but not that useful.
+//
 // IsAllItemsPlaylist calls the underlying IsAllItemsPlaylist.
 func (x *LibPlaylist) IsAllItemsPlaylist() bool {
 	return x.inner.IsAllItemsPlaylist()
 }
 
+// @abstract The media items contained within this playlist.
+//
 // Items returns the collection as a Go slice.
 func (x *LibPlaylist) Items() []*LibMediaItem {
 	arr := x.inner.Items()
@@ -77,16 +89,22 @@ func (x *LibPlaylist) Items() []*LibMediaItem {
 	})
 }
 
+// @abstract The distinguished kind of this playlist.
+//
 // DistinguishedKind calls the underlying DistinguishedKind.
 func (x *LibPlaylist) DistinguishedKind() ITLibDistinguishedPlaylistKind {
 	return ITLibDistinguishedPlaylistKind(x.inner.DistinguishedKind())
 }
 
+// @abstract The kind of this playlist.
+//
 // Kind calls the underlying Kind.
 func (x *LibPlaylist) Kind() ITLibPlaylistKind {
 	return ITLibPlaylistKind(x.inner.Kind())
 }
 
+// @abstract Whether this playlist is the primary playlist.
+//
 // IsMaster calls the underlying IsMaster.
 func (x *LibPlaylist) IsMaster() bool {
 	return x.inner.IsMaster()

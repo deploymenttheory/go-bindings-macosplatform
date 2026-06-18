@@ -31,6 +31,8 @@ func VirtualConferenceDescriptorFromID(id objc.ID) *VirtualConferenceDescriptor 
 	return &VirtualConferenceDescriptor{inner: raw.EKVirtualConferenceDescriptorFromID(id)}
 }
 
+// @method     initWithTitle:URLDescriptors:conferenceDetails: @abstract   Initializes an instance of EKVirtualConferenceDescriptor. @param      title               A user-readable title describing this virtual conference. This string may be displayed in the UI. This string is optional and may be left nil. @param      URLDescriptors      An array of EKVirtualConferenceURLDescriptors, representing the various ways to join your virtual conference. Do not pass an empty array. Your array should be ordered such that the most preferred method of joining the virtual conference comes first in the array, with subsequent methods of joining appearing in descending priority. @param      conferenceDetails   A user-readable string containing any other information you wish to communicate to the user about this virtual conference. This string will be displayed in the UI. This argument is optional and may be left nil.
+//
 // NewVirtualConferenceDescriptorWithTitleURLDescriptorsConferenceDetails creates a new [VirtualConferenceDescriptor].
 func NewVirtualConferenceDescriptorWithTitleURLDescriptorsConferenceDetails(title string, uRLDescriptors *foundation.NSArray[*raw.EKVirtualConferenceURLDescriptor], conferenceDetails string) *VirtualConferenceDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("EKVirtualConferenceDescriptor")), objc.RegisterName("alloc"))

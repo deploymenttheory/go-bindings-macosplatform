@@ -33,6 +33,8 @@ func MTRBaseClusterOperationalStateFromID(id objc.ID) *MTRBaseClusterOperational
 	return &MTRBaseClusterOperationalState{inner: raw.MTRBaseClusterOperationalStateFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterOperationalStateWithDeviceEndpointIDQueue creates a new [MTRBaseClusterOperationalState].
 func NewMTRBaseClusterOperationalStateWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterOperationalState {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterOperationalState")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewMTRBaseClusterOperationalStateWithDeviceEndpointIDQueue(device *raw.MTRB
 	return &MTRBaseClusterOperationalState{inner: raw.MTRBaseClusterOperationalStateFromID(_id)}
 }
 
+// Command Pause Upon receipt, the device SHALL pause its operation if it is possible based on the current function of the server.
+//
 // PauseWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterOperationalState) PauseWithParamsCompletion(ctx context.Context, params *raw.MTROperationalStateClusterPauseParams) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
 	type _result struct {
@@ -92,6 +96,8 @@ func (x *MTRBaseClusterOperationalState) PauseWithCompletion(ctx context.Context
 	}
 }
 
+// Command Stop Upon receipt, the device SHALL stop its operation if it is at a position where it is safe to do so and/or permitted.
+//
 // StopWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterOperationalState) StopWithParamsCompletion(ctx context.Context, params *raw.MTROperationalStateClusterStopParams) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
 	type _result struct {
@@ -144,6 +150,8 @@ func (x *MTRBaseClusterOperationalState) StopWithCompletion(ctx context.Context)
 	}
 }
 
+// Command Start Upon receipt, the device SHALL start its operation if it is safe to do so and the device is in an operational state from which it can be started.
+//
 // StartWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterOperationalState) StartWithParamsCompletion(ctx context.Context, params *raw.MTROperationalStateClusterStartParams) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
 	type _result struct {
@@ -196,6 +204,8 @@ func (x *MTRBaseClusterOperationalState) StartWithCompletion(ctx context.Context
 	}
 }
 
+// Command Resume Upon receipt, the device SHALL resume its operation from the point it was at when it received the Pause command, or from the point when it was paused by means outside of this cluster (for example by manual button press).
+//
 // ResumeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterOperationalState) ResumeWithParamsCompletion(ctx context.Context, params *raw.MTROperationalStateClusterResumeParams) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
 	type _result struct {

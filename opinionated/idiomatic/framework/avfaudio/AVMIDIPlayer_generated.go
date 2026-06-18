@@ -32,6 +32,8 @@ func MIDIPlayerFromID(id objc.ID) *MIDIPlayer {
 	return &MIDIPlayer{inner: raw.AVMIDIPlayerFromID(id)}
 }
 
+// @method initWithContentsOfURL:soundBankURL:error: @abstract Create a player with the contents of the file specified by the URL. @discussion 'bankURL' should contain the path to a SoundFont2 or DLS bank to be used by the MIDI synthesizer.  For OSX it can be set to nil for the default, but for iOS it must always refer to a valid bank file.
+//
 // NewMIDIPlayerWithContentsOfURLSoundBankURLError creates a new [MIDIPlayer].
 func NewMIDIPlayerWithContentsOfURLSoundBankURLError(inURL string, bankURL string) (*MIDIPlayer, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDIPlayer")), objc.RegisterName("alloc"))
@@ -43,6 +45,8 @@ func NewMIDIPlayerWithContentsOfURLSoundBankURLError(inURL string, bankURL strin
 	return &MIDIPlayer{inner: raw.AVMIDIPlayerFromID(_id)}, nil
 }
 
+// @method initWithData:soundBankURL:error: @abstract Create a player with the contents of the data object @discussion 'bankURL' should contain the path to a SoundFont2 or DLS bank to be used by the MIDI synthesizer.  For OSX it can be set to nil for the default, but for iOS it must always refer to a valid bank file.
+//
 // NewMIDIPlayerWithDataSoundBankURLError creates a new [MIDIPlayer].
 func NewMIDIPlayerWithDataSoundBankURLError(data *foundation.NSData, bankURL string) (*MIDIPlayer, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDIPlayer")), objc.RegisterName("alloc"))
@@ -54,43 +58,59 @@ func NewMIDIPlayerWithDataSoundBankURLError(data *foundation.NSData, bankURL str
 	return &MIDIPlayer{inner: raw.AVMIDIPlayerFromID(_id)}, nil
 }
 
+// @property rate @abstract The playback rate of the player @discussion 1.0 is normal playback rate.  Rate must be > 0.0.
+//
 // WithRate sets the rate property and returns the receiver for chaining.
 func (x *MIDIPlayer) WithRate(rate float32) *MIDIPlayer {
 	x.inner.SetRate(rate)
 	return x
 }
 
+// @property currentPosition @abstract The current playback position in seconds @discussion Setting this positions the player to the specified time.  No range checking on the time value is done. This can be set while the player is playing, in which case playback will resume at the new time.
+//
 // WithCurrentPosition sets the currentPosition property and returns the receiver for chaining.
 func (x *MIDIPlayer) WithCurrentPosition(currentPosition float64) *MIDIPlayer {
 	x.inner.SetCurrentPosition(currentPosition)
 	return x
 }
 
+// @method prepareToPlay @abstract Get ready to play the sequence by prerolling all events @discussion Happens automatically on play if it has not already been called, but may produce a delay in startup.
+//
 // PrepareToPlay calls the underlying PrepareToPlay.
 func (x *MIDIPlayer) PrepareToPlay() {
 	x.inner.PrepareToPlay()
 }
 
+// @method play: @abstract Play the sequence.
+//
 // Play calls the underlying Play.
 func (x *MIDIPlayer) Play(completionHandler func()) {
 	x.inner.Play(completionHandler)
 }
 
+// @method stop @abstract Stop playing the sequence.
+//
 // Stop calls the underlying Stop.
 func (x *MIDIPlayer) Stop() {
 	x.inner.Stop()
 }
 
+// @property duration @abstract The length of the currently loaded file in seconds.
+//
 // Duration calls the underlying Duration.
 func (x *MIDIPlayer) Duration() float64 {
 	return x.inner.Duration()
 }
 
+// @property playing @abstract Indicates whether or not the player is playing
+//
 // IsPlaying calls the underlying IsPlaying.
 func (x *MIDIPlayer) IsPlaying() bool {
 	return x.inner.IsPlaying()
 }
 
+// @property rate @abstract The playback rate of the player @discussion 1.0 is normal playback rate.  Rate must be > 0.0.
+//
 // Rate calls the underlying Rate.
 func (x *MIDIPlayer) Rate() float32 {
 	return x.inner.Rate()
@@ -101,6 +121,8 @@ func (x *MIDIPlayer) SetRate(rate float32) {
 	x.inner.SetRate(rate)
 }
 
+// @property currentPosition @abstract The current playback position in seconds @discussion Setting this positions the player to the specified time.  No range checking on the time value is done. This can be set while the player is playing, in which case playback will resume at the new time.
+//
 // CurrentPosition calls the underlying CurrentPosition.
 func (x *MIDIPlayer) CurrentPosition() float64 {
 	return x.inner.CurrentPosition()

@@ -34,6 +34,8 @@ func MTRTimeSynchronizationClusterSetTimeZoneResponseParamsFromID(id objc.ID) *M
 	return &MTRTimeSynchronizationClusterSetTimeZoneResponseParams{inner: raw.MTRTimeSynchronizationClusterSetTimeZoneResponseParamsFromID(id)}
 }
 
+// Initialize an MTRTimeSynchronizationClusterSetTimeZoneResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+//
 // NewMTRTimeSynchronizationClusterSetTimeZoneResponseParamsWithResponseValueError creates a new [MTRTimeSynchronizationClusterSetTimeZoneResponseParams].
 func NewMTRTimeSynchronizationClusterSetTimeZoneResponseParamsWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRTimeSynchronizationClusterSetTimeZoneResponseParams, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRTimeSynchronizationClusterSetTimeZoneResponseParams")), objc.RegisterName("alloc"))

@@ -39,6 +39,8 @@ func NewNEVPNManager() *NEVPNManager {
 	return &NEVPNManager{inner: raw.NEVPNManagerFromID(_id)}
 }
 
+// @property onDemandRules @discussion An array of NEOnDemandRule objects.
+//
 // WithOnDemandRules sets the collection, converting the Go slice to an NSArray.
 func (x *NEVPNManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEVPNManager {
 	if len(items) == 0 {
@@ -57,36 +59,48 @@ func (x *NEVPNManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEVPN
 	return x
 }
 
+// @property onDemandEnabled @discussion Toggles VPN On Demand.
+//
 // WithOnDemandEnabled sets the onDemandEnabled property and returns the receiver for chaining.
 func (x *NEVPNManager) WithOnDemandEnabled(onDemandEnabled bool) *NEVPNManager {
 	x.inner.SetOnDemandEnabled(onDemandEnabled)
 	return x
 }
 
+// @property localizedDescription @discussion A string containing a description of the VPN.
+//
 // WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
 func (x *NEVPNManager) WithLocalizedDescription(localizedDescription string) *NEVPNManager {
 	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
 	return x
 }
 
+// @property protocol @discussion An NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
+//
 // WithProtocol sets the protocol property and returns the receiver for chaining.
 func (x *NEVPNManager) WithProtocol(protocol NEVPNProtocolProvider) *NEVPNManager {
 	x.inner.SetProtocol(protocol.asNEVPNProtocol())
 	return x
 }
 
+// @property protocolConfiguration @discussion An NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
+//
 // WithProtocolConfiguration sets the protocolConfiguration property and returns the receiver for chaining.
 func (x *NEVPNManager) WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NEVPNManager {
 	x.inner.SetProtocolConfiguration(protocolConfiguration.asNEVPNProtocol())
 	return x
 }
 
+// @property enabled @discussion Toggles the enabled status of the VPN. Setting this property will disable VPN configurations of other apps. This property will be set to NO  when other VPN configurations are enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *NEVPNManager) WithEnabled(enabled bool) *NEVPNManager {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// @method loadFromPreferencesWithCompletionHandler: @discussion This function loads the current VPN configuration from the caller's VPN preferences. @param completionHandler A block that will be called on the main thread when the load operation is completed. The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
+//
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEVPNManager) LoadFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -105,6 +119,8 @@ func (x *NEVPNManager) LoadFromPreferences(ctx context.Context) error {
 	}
 }
 
+// @method removeFromPreferencesWithCompletionHandler: @discussion This function removes the VPN configuration from the caller's VPN preferences. If the VPN is enabled, has VPN On Demand enabled, and has VPN On Demand rules, the VPN is disabled and the VPN On Demand rules are de-activated. @param completionHandler A block that will be called on the main thread when the remove operation is completed. The NSError passed to this block will be nil if the remove operation succeeded, non-nil otherwise.
+//
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEVPNManager) RemoveFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -123,6 +139,8 @@ func (x *NEVPNManager) RemoveFromPreferences(ctx context.Context) error {
 	}
 }
 
+// @method saveToPreferencesWithCompletionHandler: @discussion This function saves the VPN configuration in the caller's VPN preferences. If the VPN is enabled, has VPN On Demand enabled, and has VPN On Demand rules, the VPN On Demand rules are activated. @param completionHandler A block that will be called on the main thread when the save operation is completed. The NSError passed to this block will be nil if the save operation succeeded, non-nil otherwise.
+//
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEVPNManager) SaveToPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -141,11 +159,15 @@ func (x *NEVPNManager) SaveToPreferences(ctx context.Context) error {
 	}
 }
 
+// @method setAuthorization: @discussion This function sets an authorization object that can be used to obtain the authorization rights necessary to modify the system VPN configuration. @param authorization The AuthorizationRef to use to obtain rights.
+//
 // SetAuthorization calls the underlying SetAuthorization.
 func (x *NEVPNManager) SetAuthorization(authorization unsafe.Pointer) {
 	x.inner.SetAuthorization(authorization)
 }
 
+// @property onDemandRules @discussion An array of NEOnDemandRule objects.
+//
 // OnDemandRules returns the collection as a Go slice.
 func (x *NEVPNManager) OnDemandRules() []*NEOnDemandRule {
 	arr := x.inner.OnDemandRules()
@@ -158,10 +180,21 @@ func (x *NEVPNManager) OnDemandRules() []*NEOnDemandRule {
 }
 
 // SetOnDemandRules calls the underlying SetOnDemandRules.
-func (x *NEVPNManager) SetOnDemandRules(onDemandRules *foundation.NSArray[*raw.NEOnDemandRule]) {
-	x.inner.SetOnDemandRules(onDemandRules)
+func (x *NEVPNManager) SetOnDemandRules(onDemandRules ...NEOnDemandRuleProvider) {
+	_ptrs := make([]objc.ID, len(onDemandRules))
+	for _i, _v := range onDemandRules {
+		_ptrs[_i] = _v.asNEOnDemandRule().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NEOnDemandRule]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NEOnDemandRule](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetOnDemandRules(_arg0)
 }
 
+// @property onDemandEnabled @discussion Toggles VPN On Demand.
+//
 // IsOnDemandEnabled calls the underlying IsOnDemandEnabled.
 func (x *NEVPNManager) IsOnDemandEnabled() bool {
 	return x.inner.IsOnDemandEnabled()
@@ -172,6 +205,8 @@ func (x *NEVPNManager) SetOnDemandEnabled(onDemandEnabled bool) {
 	x.inner.SetOnDemandEnabled(onDemandEnabled)
 }
 
+// @property localizedDescription @discussion A string containing a description of the VPN.
+//
 // LocalizedDescription calls the underlying LocalizedDescription.
 func (x *NEVPNManager) LocalizedDescription() string {
 	_r := x.inner.LocalizedDescription()
@@ -186,6 +221,8 @@ func (x *NEVPNManager) SetLocalizedDescription(localizedDescription string) {
 	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
 }
 
+// @property protocol @discussion An NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
+//
 // Protocol calls the underlying Protocol.
 func (x *NEVPNManager) Protocol() *NEVPNProtocol {
 	_r := x.inner.Protocol()
@@ -200,6 +237,8 @@ func (x *NEVPNManager) SetProtocol(protocol *raw.NEVPNProtocol) {
 	x.inner.SetProtocol(protocol)
 }
 
+// @property protocolConfiguration @discussion An NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
+//
 // ProtocolConfiguration calls the underlying ProtocolConfiguration.
 func (x *NEVPNManager) ProtocolConfiguration() *NEVPNProtocol {
 	_r := x.inner.ProtocolConfiguration()
@@ -214,6 +253,8 @@ func (x *NEVPNManager) SetProtocolConfiguration(protocolConfiguration *raw.NEVPN
 	x.inner.SetProtocolConfiguration(protocolConfiguration)
 }
 
+// @property connection @discussion The NEVPNConnection object used for controlling the VPN tunnel.
+//
 // Connection calls the underlying Connection.
 func (x *NEVPNManager) Connection() *NEVPNConnection {
 	_r := x.inner.Connection()
@@ -223,6 +264,8 @@ func (x *NEVPNManager) Connection() *NEVPNConnection {
 	return &NEVPNConnection{inner: _r}
 }
 
+// @property enabled @discussion Toggles the enabled status of the VPN. Setting this property will disable VPN configurations of other apps. This property will be set to NO  when other VPN configurations are enabled.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *NEVPNManager) IsEnabled() bool {
 	return x.inner.IsEnabled()
@@ -249,7 +292,7 @@ type NEVPNManagerable interface {
 	SaveToPreferences(ctx context.Context) error
 	SetAuthorization(authorization unsafe.Pointer)
 	OnDemandRules() []*NEOnDemandRule
-	SetOnDemandRules(onDemandRules *foundation.NSArray[*raw.NEOnDemandRule])
+	SetOnDemandRules(onDemandRules ...NEOnDemandRuleProvider)
 	IsOnDemandEnabled() bool
 	SetOnDemandEnabled(onDemandEnabled bool)
 	LocalizedDescription() string

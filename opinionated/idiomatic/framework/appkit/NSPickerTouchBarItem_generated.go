@@ -97,6 +97,8 @@ func (x *PickerTouchBarItem) WithEnabled(enabled bool) *PickerTouchBarItem {
 	return x
 }
 
+// The localized string labeling this item during user customization. The default value is empty string.
+//
 // WithCustomizationLabel sets the customizationLabel property and returns the receiver for chaining.
 func (x *PickerTouchBarItem) WithCustomizationLabel(customizationLabel string) *PickerTouchBarItem {
 	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))

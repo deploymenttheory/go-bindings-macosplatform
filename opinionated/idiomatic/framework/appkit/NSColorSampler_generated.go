@@ -36,6 +36,8 @@ func NewColorSampler() *ColorSampler {
 	return &ColorSampler{inner: raw.NSColorSamplerFromID(_id)}
 }
 
+// The primary method for NSColorSampler. Begins or attaches to an existing color sampling session which presents UI to the user for selecting a color from their screen. The handler will be called on the main thread when the user completes the session (either by selection, or cancelation). In the event of user-cancellation, `colorSelectionHandler` will be called with `nil`. The calling NSColorSampler instance is retained until the sampling session is completed.
+//
 // ShowSamplerWithSelectionHandler blocks until the operation completes or ctx is cancelled.
 func (x *ColorSampler) ShowSamplerWithSelectionHandler(ctx context.Context) (*Color, error) {
 	type _result struct {

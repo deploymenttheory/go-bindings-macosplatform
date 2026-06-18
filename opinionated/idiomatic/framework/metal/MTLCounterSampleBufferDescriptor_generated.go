@@ -39,30 +39,40 @@ func NewCounterSampleBufferDescriptor() *CounterSampleBufferDescriptor {
 	return &CounterSampleBufferDescriptor{inner: raw.MTLCounterSampleBufferDescriptorFromID(_id)}
 }
 
+// @property counterSet The counterset to be sampled for this counter sample buffer
+//
 // WithCounterSet sets the counterSet property and returns the receiver for chaining.
 func (x *CounterSampleBufferDescriptor) WithCounterSet(counterSet raw.MTLCounterSet) *CounterSampleBufferDescriptor {
 	x.inner.SetCounterSet(counterSet)
 	return x
 }
 
+// @property label A label to identify the sample buffer in debugging tools.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CounterSampleBufferDescriptor) WithLabel(label string) *CounterSampleBufferDescriptor {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property storageMode The storage mode for the sample buffer.  Only MTLStorageModeShared and MTLStorageModePrivate may be used.
+//
 // WithStorageMode sets the storageMode property and returns the receiver for chaining.
 func (x *CounterSampleBufferDescriptor) WithStorageMode(storageMode MTLStorageMode) *CounterSampleBufferDescriptor {
 	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
 	return x
 }
 
+// @property sampleCount The number of samples that may be stored in the counter sample buffer.
+//
 // WithSampleCount sets the sampleCount property and returns the receiver for chaining.
 func (x *CounterSampleBufferDescriptor) WithSampleCount(sampleCount uint) *CounterSampleBufferDescriptor {
 	x.inner.SetSampleCount(sampleCount)
 	return x
 }
 
+// @property counterSet The counterset to be sampled for this counter sample buffer
+//
 // CounterSet calls the underlying CounterSet.
 func (x *CounterSampleBufferDescriptor) CounterSet() raw.MTLCounterSet {
 	return x.inner.CounterSet()
@@ -73,6 +83,8 @@ func (x *CounterSampleBufferDescriptor) SetCounterSet(counterSet raw.MTLCounterS
 	x.inner.SetCounterSet(counterSet)
 }
 
+// @property label A label to identify the sample buffer in debugging tools.
+//
 // Label calls the underlying Label.
 func (x *CounterSampleBufferDescriptor) Label() string {
 	_r := x.inner.Label()
@@ -87,6 +99,8 @@ func (x *CounterSampleBufferDescriptor) SetLabel(label string) {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 }
 
+// @property storageMode The storage mode for the sample buffer.  Only MTLStorageModeShared and MTLStorageModePrivate may be used.
+//
 // StorageMode calls the underlying StorageMode.
 func (x *CounterSampleBufferDescriptor) StorageMode() MTLStorageMode {
 	return MTLStorageMode(x.inner.StorageMode())
@@ -97,6 +111,8 @@ func (x *CounterSampleBufferDescriptor) SetStorageMode(storageMode MTLStorageMod
 	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
 }
 
+// @property sampleCount The number of samples that may be stored in the counter sample buffer.
+//
 // SampleCount calls the underlying SampleCount.
 func (x *CounterSampleBufferDescriptor) SampleCount() uint {
 	return x.inner.SampleCount()

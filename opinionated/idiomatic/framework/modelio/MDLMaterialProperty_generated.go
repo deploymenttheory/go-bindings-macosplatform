@@ -114,6 +114,8 @@ func (x *MaterialProperty) WithType(type_ MDLMaterialPropertyType) *MaterialProp
 	return x
 }
 
+// @see MDLNamed
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *MaterialProperty) WithName(name string) *MaterialProperty {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
@@ -175,6 +177,8 @@ func (x *MaterialProperty) SetType(type_ MDLMaterialPropertyType) {
 	x.inner.SetType(raw.MDLMaterialPropertyType(type_))
 }
 
+// @see MDLNamed
+//
 // Name calls the underlying Name.
 func (x *MaterialProperty) Name() string {
 	_r := x.inner.Name()

@@ -35,6 +35,8 @@ func NewVSAccountManagerResult() *VSAccountManagerResult {
 	return &VSAccountManagerResult{inner: raw.VSAccountManagerResultFromID(_id)}
 }
 
+// Advise the account manager that the app no longer needs the requested work to be done.
+//
 // Cancel calls the underlying Cancel.
 func (x *VSAccountManagerResult) Cancel() {
 	x.inner.Cancel()

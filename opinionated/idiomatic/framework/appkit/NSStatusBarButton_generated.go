@@ -40,72 +40,96 @@ func NewStatusBarButton() *StatusBarButton {
 	return &StatusBarButton{inner: raw.NSStatusBarButtonFromID(_id)}
 }
 
+// Determines whether the status bar icon has a disabled/off appearance while still being functional, such as allowing selection and actions. The default value is `false`.
+//
 // WithAppearsDisabled sets the appearsDisabled property and returns the receiver for chaining.
 func (x *StatusBarButton) WithAppearsDisabled(appearsDisabled bool) *StatusBarButton {
 	x.inner.SetAppearsDisabled(appearsDisabled)
 	return x
 }
 
+// The title displayed on the button when it’s in an off state, or an empty string if the button does not display a title. By default, a button's title is "Button".
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *StatusBarButton) WithTitle(title string) *StatusBarButton {
 	x.inner.NSButton.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The button's title, expressed as an attributed string.
+//
 // WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
 func (x *StatusBarButton) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *StatusBarButton {
 	x.inner.NSButton.SetAttributedTitle(attributedTitle)
 	return x
 }
 
+// The title that the button displays when the button is in an on state, or an empty string if there is no such title. Note that some button types do not display an alternate title.
+//
 // WithAlternateTitle sets the alternateTitle property and returns the receiver for chaining.
 func (x *StatusBarButton) WithAlternateTitle(alternateTitle string) *StatusBarButton {
 	x.inner.NSButton.SetAlternateTitle(foundation.NSStringStringWithUTF8String(alternateTitle))
 	return x
 }
 
+// The alternate title, expressed as an attributed string.
+//
 // WithAttributedAlternateTitle sets the attributedAlternateTitle property and returns the receiver for chaining.
 func (x *StatusBarButton) WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *StatusBarButton {
 	x.inner.NSButton.SetAttributedAlternateTitle(attributedAlternateTitle)
 	return x
 }
 
+// Indicates whether the button's action has a destructive effect on user data.  AppKit may guard a destructive-actioned button against accidental presses, and may give the button a special appearance in certain contexts to caution against unintentional use.  Defaults to NO.
+//
 // WithHasDestructiveAction sets the hasDestructiveAction property and returns the receiver for chaining.
 func (x *StatusBarButton) WithHasDestructiveAction(hasDestructiveAction bool) *StatusBarButton {
 	x.inner.NSButton.SetHasDestructiveAction(hasDestructiveAction)
 	return x
 }
 
+// The sound that plays when the user clicks the button, or nil if the button should not play a sound. The default value is nil.
+//
 // WithSound sets the sound property and returns the receiver for chaining.
 func (x *StatusBarButton) WithSound(sound *Sound) *StatusBarButton {
 	x.inner.NSButton.SetSound(sound.Unwrap())
 	return x
 }
 
+// Sends action on deep-press or extended hover while dragging. Defaults to NO.
+//
 // WithSpringLoaded sets the springLoaded property and returns the receiver for chaining.
 func (x *StatusBarButton) WithSpringLoaded(springLoaded bool) *StatusBarButton {
 	x.inner.NSButton.SetSpringLoaded(springLoaded)
 	return x
 }
 
+// Configures the maximum allowed level for an NSMultiLevelAcceleratorButton, allowed values range from [1,5]. Defaults to 2.
+//
 // WithMaxAcceleratorLevel sets the maxAcceleratorLevel property and returns the receiver for chaining.
 func (x *StatusBarButton) WithMaxAcceleratorLevel(maxAcceleratorLevel int) *StatusBarButton {
 	x.inner.NSButton.SetMaxAcceleratorLevel(maxAcceleratorLevel)
 	return x
 }
 
+// The bezel style of the button, which provides a set of bezel artwork, layout metrics, and content styling from a set of system-provided styles. See the NSBezelStyle enumeration for a list of available styles. The bezel style is not used if the `bordered` property is set to `NO`.
+//
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
 func (x *StatusBarButton) WithBezelStyle(bezelStyle NSBezelStyle) *StatusBarButton {
 	x.inner.NSButton.SetBezelStyle(raw.NSBezelStyle(bezelStyle))
 	return x
 }
 
+// A Boolean value that determines whether the button draws a border.
+//
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *StatusBarButton) WithBordered(bordered bool) *StatusBarButton {
 	x.inner.NSButton.SetBordered(bordered)
 	return x
 }
 
+// A Boolean value that indicates whether the button is transparent. A transparent button never draws itself, but it receives mouse events, sends its action, and tracks the mouse properly.
+//
 // WithTransparent sets the transparent property and returns the receiver for chaining.
 func (x *StatusBarButton) WithTransparent(transparent bool) *StatusBarButton {
 	x.inner.NSButton.SetTransparent(transparent)
@@ -118,78 +142,104 @@ func (x *StatusBarButton) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhi
 	return x
 }
 
+// Applies a custom color to the button's bezel, in appearances that support it. A nil value indicates an unmodified button appearance. The default value is nil.
+//
 // WithBezelColor sets the bezelColor property and returns the receiver for chaining.
 func (x *StatusBarButton) WithBezelColor(bezelColor *Color) *StatusBarButton {
 	x.inner.NSButton.SetBezelColor(bezelColor.Unwrap())
 	return x
 }
 
+// Applies a tint color to template image and text content, in combination with other theme-appropriate effects. Only applicable to borderless buttons. A nil value indicates the standard set of effects without color modification. The default value is nil. Non-template images and attributed string values are not affected by the contentTintColor.
+//
 // WithContentTintColor sets the contentTintColor property and returns the receiver for chaining.
 func (x *StatusBarButton) WithContentTintColor(contentTintColor *Color) *StatusBarButton {
 	x.inner.NSButton.SetContentTintColor(contentTintColor.Unwrap())
 	return x
 }
 
+// The tint prominence of the button. Use tint prominence to gently suggest a hierarchy when multiple buttons perform similar actions. A button with primary tint prominence suggests the most preferred option, while secondary prominence indicates a reasonable alternative. See “NSTintProminence“ for a list of possible values.
+//
 // WithTintProminence sets the tintProminence property and returns the receiver for chaining.
 func (x *StatusBarButton) WithTintProminence(tintProminence NSTintProminence) *StatusBarButton {
 	x.inner.NSButton.SetTintProminence(raw.NSTintProminence(tintProminence))
 	return x
 }
 
+// The image that appears on the button when it’s in an off state, or nil if there is no such image.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *StatusBarButton) WithImage(image *Image) *StatusBarButton {
 	x.inner.NSButton.SetImage(image.Unwrap())
 	return x
 }
 
+// An alternate image that appears on the button when the button is in an on state, or nil if there is no such image. Note that some button types do not display an alternate image.
+//
 // WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
 func (x *StatusBarButton) WithAlternateImage(alternateImage *Image) *StatusBarButton {
 	x.inner.NSButton.SetAlternateImage(alternateImage.Unwrap())
 	return x
 }
 
+// The position of the button's image relative to its title. See the NSCellImagePosition enumeration for possible values.
+//
 // WithImagePosition sets the imagePosition property and returns the receiver for chaining.
 func (x *StatusBarButton) WithImagePosition(imagePosition NSCellImagePosition) *StatusBarButton {
 	x.inner.NSButton.SetImagePosition(raw.NSCellImagePosition(imagePosition))
 	return x
 }
 
+// The scaling mode applied to make the button's image fit within its bounds.
+//
 // WithImageScaling sets the imageScaling property and returns the receiver for chaining.
 func (x *StatusBarButton) WithImageScaling(imageScaling NSImageScaling) *StatusBarButton {
 	x.inner.NSButton.SetImageScaling(raw.NSImageScaling(imageScaling))
 	return x
 }
 
+// A Boolean value that determines how the button's image and title are positioned together within the button bezel. If false, the image is positioned according to the imagePosition property at the edge of the button bezel, and the title is positioned within the remaining space. If true, the button’s image is positioned directly adjacent to the title based on the imagePosition property, and the image and title are positioned within the button bezel as a single unit.
+//
 // WithImageHugsTitle sets the imageHugsTitle property and returns the receiver for chaining.
 func (x *StatusBarButton) WithImageHugsTitle(imageHugsTitle bool) *StatusBarButton {
 	x.inner.NSButton.SetImageHugsTitle(imageHugsTitle)
 	return x
 }
 
+// Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the symbol is matched to the button's `font` property. The default value is nil.
+//
 // WithSymbolConfiguration sets the symbolConfiguration property and returns the receiver for chaining.
 func (x *StatusBarButton) WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *StatusBarButton {
 	x.inner.NSButton.SetSymbolConfiguration(symbolConfiguration.Unwrap())
 	return x
 }
 
+// The button's state. Buttons support the off and on states, and an additional mixed state depending on the value of the `allowsMixedState` property.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *StatusBarButton) WithState(state int) *StatusBarButton {
 	x.inner.NSButton.SetState(state)
 	return x
 }
 
+// A Boolean value that indicates whether the button allows a mixed state. If NO, the button has two states (on and off), and if YES, the button has three states (on, off, and mixed). The mixed state is commonly used with checkboxes and radio buttons to indicate a value which is partially on.
+//
 // WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
 func (x *StatusBarButton) WithAllowsMixedState(allowsMixedState bool) *StatusBarButton {
 	x.inner.NSButton.SetAllowsMixedState(allowsMixedState)
 	return x
 }
 
+// This property contains the button's key equivalent, or the empty string if no equivalent has been defined. Buttons don’t have a default key equivalent. Setting the key equivalent to the Return character causes it to act as the default button for its window.
+//
 // WithKeyEquivalent sets the keyEquivalent property and returns the receiver for chaining.
 func (x *StatusBarButton) WithKeyEquivalent(keyEquivalent string) *StatusBarButton {
 	x.inner.NSButton.SetKeyEquivalent(foundation.NSStringStringWithUTF8String(keyEquivalent))
 	return x
 }
 
+// A bitmask specifying the modifier keys that are applied to the button's key equivalent. Mask bits are defined by the NSEventModifierFlags option set. The only mask bits relevant in button key-equivalent modifier masks are NSEventModifierFlagControl, NSEventModifierFlagOption, and NSEventModifierFlagCommand.
+//
 // WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
 func (x *StatusBarButton) WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *StatusBarButton {
 	x.inner.NSButton.SetKeyEquivalentModifierMask(raw.NSEventModifierFlags(keyEquivalentModifierMask))
@@ -610,6 +660,8 @@ func (x *StatusBarButton) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets 
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *StatusBarButton) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *StatusBarButton {
 	x.inner.NSButton.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
@@ -688,11 +740,15 @@ func (x *StatusBarButton) WithTouchBar(touchBar *TouchBar) *StatusBarButton {
 	return x
 }
 
+// Determines whether the status bar icon has a disabled/off appearance while still being functional, such as allowing selection and actions. The default value is `false`.
+//
 // AppearsDisabled calls the underlying AppearsDisabled.
 func (x *StatusBarButton) AppearsDisabled() bool {
 	return x.inner.AppearsDisabled()
 }
 
+// Determines whether the status bar icon has a disabled/off appearance while still being functional, such as allowing selection and actions. The default value is `false`.
+//
 // SetAppearsDisabled calls the underlying SetAppearsDisabled.
 func (x *StatusBarButton) SetAppearsDisabled(appearsDisabled bool) {
 	x.inner.SetAppearsDisabled(appearsDisabled)

@@ -31,6 +31,8 @@ func PasswordCredentialIdentityFromID(id objc.ID) *PasswordCredentialIdentity {
 	return &PasswordCredentialIdentity{inner: raw.ASPasswordCredentialIdentityFromID(id)}
 }
 
+// @abstract Initializes an instance of ASPasswordCredentialIdentity. @param serviceIdentifier the service identifier for which this credential identity is valid. @param user the user that can authenticate into the service indicated by the serviceIdentifier. @param recordIdentifier an optional string to uniquely identify this record in your local database.
+//
 // NewPasswordCredentialIdentityWithServiceIdentifierUserRecordIdentifier creates a new [PasswordCredentialIdentity].
 func NewPasswordCredentialIdentityWithServiceIdentifierUserRecordIdentifier(serviceIdentifier *raw.ASCredentialServiceIdentifier, user string, recordIdentifier string) *PasswordCredentialIdentity {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasswordCredentialIdentity")), objc.RegisterName("alloc"))
@@ -38,12 +40,16 @@ func NewPasswordCredentialIdentityWithServiceIdentifierUserRecordIdentifier(serv
 	return &PasswordCredentialIdentity{inner: raw.ASPasswordCredentialIdentityFromID(_id)}
 }
 
+// @abstract Get or set the rank of the credential identity object. @discussion The system may utilize the rank to decide which credential identity precedes the other if two identities have the same service identifier. A credential identity with a larger rank value precedes one with a smaller value if both credential identities have the same service identifier. The default value of this property is 0.
+//
 // WithRank sets the rank property and returns the receiver for chaining.
 func (x *PasswordCredentialIdentity) WithRank(rank int) *PasswordCredentialIdentity {
 	x.inner.SetRank(rank)
 	return x
 }
 
+// @abstract Get the service identifier. @result The service identifier for this credential identity.
+//
 // ServiceIdentifier calls the underlying ServiceIdentifier.
 func (x *PasswordCredentialIdentity) ServiceIdentifier() *CredentialServiceIdentifier {
 	_r := x.inner.ServiceIdentifier()
@@ -53,6 +59,8 @@ func (x *PasswordCredentialIdentity) ServiceIdentifier() *CredentialServiceIdent
 	return &CredentialServiceIdentifier{inner: _r}
 }
 
+// @abstract Get the user. @result The user string.
+//
 // User calls the underlying User.
 func (x *PasswordCredentialIdentity) User() string {
 	_r := x.inner.User()
@@ -62,6 +70,8 @@ func (x *PasswordCredentialIdentity) User() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Get the record identifier. @result The record identifier. @discussion You can utilize the record identifier to uniquely identify the credential identity in your local database.
+//
 // RecordIdentifier calls the underlying RecordIdentifier.
 func (x *PasswordCredentialIdentity) RecordIdentifier() string {
 	_r := x.inner.RecordIdentifier()
@@ -71,6 +81,8 @@ func (x *PasswordCredentialIdentity) RecordIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Get or set the rank of the credential identity object. @discussion The system may utilize the rank to decide which credential identity precedes the other if two identities have the same service identifier. A credential identity with a larger rank value precedes one with a smaller value if both credential identities have the same service identifier. The default value of this property is 0.
+//
 // Rank calls the underlying Rank.
 func (x *PasswordCredentialIdentity) Rank() int {
 	return x.inner.Rank()

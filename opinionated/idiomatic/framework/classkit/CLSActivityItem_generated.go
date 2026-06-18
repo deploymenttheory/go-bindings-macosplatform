@@ -37,12 +37,16 @@ func NewActivityItem() *ActivityItem {
 	return &ActivityItem{inner: raw.CLSActivityItemFromID(_id)}
 }
 
+// @abstract      Title of what this ActivityItem represents. @discussion    This will be the title associated with the activity item in the generated progress report.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *ActivityItem) WithTitle(title string) *ActivityItem {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// @abstract      Title of what this ActivityItem represents. @discussion    This will be the title associated with the activity item in the generated progress report.
+//
 // Title calls the underlying Title.
 func (x *ActivityItem) Title() string {
 	_r := x.inner.Title()
@@ -57,6 +61,8 @@ func (x *ActivityItem) SetTitle(title string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// @abstract      An identifier that is unique within its owning activity @discussion    The identifier can be used to look up existing activityItems in a given activity.
+//
 // Identifier calls the underlying Identifier.
 func (x *ActivityItem) Identifier() string {
 	_r := x.inner.Identifier()

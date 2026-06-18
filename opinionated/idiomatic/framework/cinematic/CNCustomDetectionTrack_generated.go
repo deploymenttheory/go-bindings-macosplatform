@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A discrete detection track composed of individual detections.
+//
 // CustomDetectionTrack wraps [raw.CNCustomDetectionTrack] with a fluent Go API.
 type CustomDetectionTrack struct {
 	inner *raw.CNCustomDetectionTrack
@@ -31,6 +33,8 @@ func CustomDetectionTrackFromID(id objc.ID) *CustomDetectionTrack {
 	return &CustomDetectionTrack{inner: raw.CNCustomDetectionTrackFromID(id)}
 }
 
+// Initialize a custom detection track with an array of detections, optionally applying smoothing. The smoothing algorithm used is the same one that is used for built-in detections during recording. It compensates for some amount of jitter in the disparity measure by smoothing out variability.
+//
 // NewCustomDetectionTrackWithDetectionsSmooth creates a new [CustomDetectionTrack].
 func NewCustomDetectionTrackWithDetectionsSmooth(detections *foundation.NSArray[*raw.CNDetection], applySmoothing bool) *CustomDetectionTrack {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNCustomDetectionTrack")), objc.RegisterName("alloc"))

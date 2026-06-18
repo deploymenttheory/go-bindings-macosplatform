@@ -31,6 +31,8 @@ func RasterizationRateLayerDescriptorFromID(id objc.ID) *RasterizationRateLayerD
 	return &RasterizationRateLayerDescriptor{inner: raw.MTLRasterizationRateLayerDescriptorFromID(id)}
 }
 
+// @method initWithSampleCount: @abstract Initialize a descriptor for a layer with the given number of quality samples on the horizontal and vertical axis. @param sampleCount The width and height components are the number of samples on the horizontal and vertical axis respectively. The depth component is ignored. @discussion All values are initialized to zero.
+//
 // NewRasterizationRateLayerDescriptorWithSampleCount creates a new [RasterizationRateLayerDescriptor].
 func NewRasterizationRateLayerDescriptorWithSampleCount(sampleCount raw.MTLSize) *RasterizationRateLayerDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLRasterizationRateLayerDescriptor")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewRasterizationRateLayerDescriptorWithSampleCount(sampleCount raw.MTLSize)
 	return &RasterizationRateLayerDescriptor{inner: raw.MTLRasterizationRateLayerDescriptorFromID(_id)}
 }
 
+// @method initWithSampleCount:horizontal:vertical: @abstract Initialize a descriptor for a layer with the given number of quality samples on the horizontal and vertical axis. @param sampleCount The width and height components are the number of samples on the horizontal and vertical axis respectively. The depth component is ignored. @param horizontal The initial sample values on the horizontal axis. Must point to an array of sampleCount.width elements, of which the values will be copied into the MTLRasterizationRateLayerDescriptor. @param vertical The initial sample values on the vertical axis. Must point to an array of sampleCount.height elements, of which the values will be copied into the MTLRasterizationRateLayerDescriptor. @discussion Use initWithSampleCount: to initialize with zeroes instead.
+//
 // NewRasterizationRateLayerDescriptorWithSampleCountHorizontalVertical creates a new [RasterizationRateLayerDescriptor].
 func NewRasterizationRateLayerDescriptorWithSampleCountHorizontalVertical(sampleCount raw.MTLSize, horizontal *float32, vertical *float32) *RasterizationRateLayerDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLRasterizationRateLayerDescriptor")), objc.RegisterName("alloc"))
@@ -45,32 +49,44 @@ func NewRasterizationRateLayerDescriptorWithSampleCountHorizontalVertical(sample
 	return &RasterizationRateLayerDescriptor{inner: raw.MTLRasterizationRateLayerDescriptorFromID(_id)}
 }
 
+// @property sampleCount @return The number of quality samples that this descriptor uses to describe its current function, for the horizontal and vertical axis. The depth component of the returned MTLSize is always 0.
+//
 // WithSampleCount sets the sampleCount property and returns the receiver for chaining.
 func (x *RasterizationRateLayerDescriptor) WithSampleCount(sampleCount raw.MTLSize) *RasterizationRateLayerDescriptor {
 	x.inner.SetSampleCount(sampleCount)
 	return x
 }
 
+// @property sampleCount @return The number of quality samples that this descriptor uses to describe its current function, for the horizontal and vertical axis. The depth component of the returned MTLSize is always 0.
+//
 // SampleCount calls the underlying SampleCount.
 func (x *RasterizationRateLayerDescriptor) SampleCount() raw.MTLSize {
 	return x.inner.SampleCount()
 }
 
+// @property maxSampleCount @return The maximum number of quality samples that this descriptor can use to describe its function, for the horizontal and vertical axis, this is the sampleCount that the descriptor was initialized with. The depth component of the returned MTLSize is always 0.
+//
 // MaxSampleCount calls the underlying MaxSampleCount.
 func (x *RasterizationRateLayerDescriptor) MaxSampleCount() raw.MTLSize {
 	return x.inner.MaxSampleCount()
 }
 
+// @property horizontalSampleStorage @abstract Provide direct access to the quality samples stored in the descriptor. @return Pointer to the (mutable) storage array for samples on the horizontal axis. @discussion The returned pointer points to the first element of an array of sampleCount.width elements.
+//
 // HorizontalSampleStorage calls the underlying HorizontalSampleStorage.
 func (x *RasterizationRateLayerDescriptor) HorizontalSampleStorage() *float32 {
 	return x.inner.HorizontalSampleStorage()
 }
 
+// @property verticalSampleStorage @abstract Provide direct access to the quality samples stored in the descriptor. @return Pointer to the (mutable) storage array for samples on the vertical axis. @discussion The returned pointer points to the first element of an array of sampleCount.height elements.
+//
 // VerticalSampleStorage calls the underlying VerticalSampleStorage.
 func (x *RasterizationRateLayerDescriptor) VerticalSampleStorage() *float32 {
 	return x.inner.VerticalSampleStorage()
 }
 
+// @property horizontal @abstract Provide convenient bounds-checked access to the quality samples stored in the descriptor. @return Returns a syntactic sugar helper to get or set sample values on the horizontal axis.
+//
 // Horizontal calls the underlying Horizontal.
 func (x *RasterizationRateLayerDescriptor) Horizontal() *RasterizationRateSampleArray {
 	_r := x.inner.Horizontal()
@@ -80,6 +96,8 @@ func (x *RasterizationRateLayerDescriptor) Horizontal() *RasterizationRateSample
 	return &RasterizationRateSampleArray{inner: _r}
 }
 
+// @property vertical @abstract Provide convenient bounds-checked access to the quality samples stored in the descriptor. @return Returns a syntactic sugar helper to get or set sample values on the vertical axis.
+//
 // Vertical calls the underlying Vertical.
 func (x *RasterizationRateLayerDescriptor) Vertical() *RasterizationRateSampleArray {
 	_r := x.inner.Vertical()

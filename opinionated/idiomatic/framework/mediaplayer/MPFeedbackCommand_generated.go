@@ -37,30 +37,40 @@ func NewFeedbackCommand() *FeedbackCommand {
 	return &FeedbackCommand{inner: raw.MPFeedbackCommandFromID(_id)}
 }
 
+// Whether the feedback command is in an "active" state. An example of when a feedback command would be active is if the user already "liked" a particular content item.
+//
 // WithActive sets the active property and returns the receiver for chaining.
 func (x *FeedbackCommand) WithActive(active bool) *FeedbackCommand {
 	x.inner.SetActive(active)
 	return x
 }
 
+// A localized string briefly describing the context of the command.
+//
 // WithLocalizedTitle sets the localizedTitle property and returns the receiver for chaining.
 func (x *FeedbackCommand) WithLocalizedTitle(localizedTitle string) *FeedbackCommand {
 	x.inner.SetLocalizedTitle(foundation.NSStringStringWithUTF8String(localizedTitle))
 	return x
 }
 
+// An optional shorter version of the localized title for this feedback command. MediaPlayer uses this property to display this command's title on remote control interfaces with little screen space.
+//
 // WithLocalizedShortTitle sets the localizedShortTitle property and returns the receiver for chaining.
 func (x *FeedbackCommand) WithLocalizedShortTitle(localizedShortTitle string) *FeedbackCommand {
 	x.inner.SetLocalizedShortTitle(foundation.NSStringStringWithUTF8String(localizedShortTitle))
 	return x
 }
 
+// Whether a button (for example) should be enabled and tappable for this particular command.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *FeedbackCommand) WithEnabled(enabled bool) *FeedbackCommand {
 	x.inner.MPRemoteCommand.SetEnabled(enabled)
 	return x
 }
 
+// Whether the feedback command is in an "active" state. An example of when a feedback command would be active is if the user already "liked" a particular content item.
+//
 // IsActive calls the underlying IsActive.
 func (x *FeedbackCommand) IsActive() bool {
 	return x.inner.IsActive()
@@ -71,6 +81,8 @@ func (x *FeedbackCommand) SetActive(active bool) {
 	x.inner.SetActive(active)
 }
 
+// A localized string briefly describing the context of the command.
+//
 // LocalizedTitle calls the underlying LocalizedTitle.
 func (x *FeedbackCommand) LocalizedTitle() string {
 	_r := x.inner.LocalizedTitle()
@@ -85,6 +97,8 @@ func (x *FeedbackCommand) SetLocalizedTitle(localizedTitle string) {
 	x.inner.SetLocalizedTitle(foundation.NSStringStringWithUTF8String(localizedTitle))
 }
 
+// An optional shorter version of the localized title for this feedback command. MediaPlayer uses this property to display this command's title on remote control interfaces with little screen space.
+//
 // LocalizedShortTitle calls the underlying LocalizedShortTitle.
 func (x *FeedbackCommand) LocalizedShortTitle() string {
 	_r := x.inner.LocalizedShortTitle()

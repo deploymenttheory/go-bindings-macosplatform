@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @brief NSAccessibilityCustomRotors allow assistive technologies, like VoiceOver, to search applications for content related to the given label.
+//
 // AccessibilityCustomRotor wraps [raw.NSAccessibilityCustomRotor] with a fluent Go API.
 type AccessibilityCustomRotor struct {
 	inner *raw.NSAccessibilityCustomRotor
@@ -31,6 +33,8 @@ func AccessibilityCustomRotorFromID(id objc.ID) *AccessibilityCustomRotor {
 	return &AccessibilityCustomRotor{inner: raw.NSAccessibilityCustomRotorFromID(id)}
 }
 
+// @brief Convenience initializer that uses NSAccessibilityCustomRotorTypeCustom as the default rotor type. Use this initializer for custom rotors that are not one of the common types.
+//
 // NewAccessibilityCustomRotorWithLabelItemSearchDelegate creates a new [AccessibilityCustomRotor].
 func NewAccessibilityCustomRotorWithLabelItemSearchDelegate(label string, itemSearchDelegate raw.NSAccessibilityCustomRotorItemSearchDelegate) *AccessibilityCustomRotor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAccessibilityCustomRotor")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewAccessibilityCustomRotorWithLabelItemSearchDelegate(label string, itemSe
 	return &AccessibilityCustomRotor{inner: raw.NSAccessibilityCustomRotorFromID(_id)}
 }
 
+// @brief Convenience initializer for custom rotors that use a common type such as links, headings, etc. A default label will be provided.
+//
 // NewAccessibilityCustomRotorWithRotorTypeItemSearchDelegate creates a new [AccessibilityCustomRotor].
 func NewAccessibilityCustomRotorWithRotorTypeItemSearchDelegate(rotorType NSAccessibilityCustomRotorType, itemSearchDelegate raw.NSAccessibilityCustomRotorItemSearchDelegate) *AccessibilityCustomRotor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAccessibilityCustomRotor")), objc.RegisterName("alloc"))
@@ -45,40 +51,54 @@ func NewAccessibilityCustomRotorWithRotorTypeItemSearchDelegate(rotorType NSAcce
 	return &AccessibilityCustomRotor{inner: raw.NSAccessibilityCustomRotorFromID(_id)}
 }
 
+// @brief The rotor type to provide results for. @remark The default type is NSAccessibilityCustomRotorTypeCustom, unless the rotor type was specified in the initializer.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *AccessibilityCustomRotor) WithType(type_ NSAccessibilityCustomRotorType) *AccessibilityCustomRotor {
 	x.inner.SetType(raw.NSAccessibilityCustomRotorType(type_))
 	return x
 }
 
+// @brief The localized label assistive technologies will use to describe the custom rotor. @remark The label is only used when the rotor type is NSAccessibilityCustomRotorTypeCustom since a default is provided for all other types.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *AccessibilityCustomRotor) WithLabel(label string) *AccessibilityCustomRotor {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @brief The itemSearchDelegate will be asked to find the next item result after performing a search with the given search parameters.
+//
 // WithItemSearchDelegate sets the itemSearchDelegate property and returns the receiver for chaining.
 func (x *AccessibilityCustomRotor) WithItemSearchDelegate(itemSearchDelegate raw.NSAccessibilityCustomRotorItemSearchDelegate) *AccessibilityCustomRotor {
 	x.inner.SetItemSearchDelegate(itemSearchDelegate)
 	return x
 }
 
+// @brief Provide an item load delegate if the rotor vends item results that do not have a backing UI element yet. The loader will be asked to load an element via the accessibilityElementWithToken protocol method when the item result is selected by an assistive client. Applications can use the item result's token to determine which item to return.
+//
 // WithItemLoadingDelegate sets the itemLoadingDelegate property and returns the receiver for chaining.
 func (x *AccessibilityCustomRotor) WithItemLoadingDelegate(itemLoadingDelegate raw.NSAccessibilityElementLoading) *AccessibilityCustomRotor {
 	x.inner.SetItemLoadingDelegate(itemLoadingDelegate)
 	return x
 }
 
+// @brief The rotor type to provide results for. @remark The default type is NSAccessibilityCustomRotorTypeCustom, unless the rotor type was specified in the initializer.
+//
 // Type calls the underlying Type.
 func (x *AccessibilityCustomRotor) Type() NSAccessibilityCustomRotorType {
 	return NSAccessibilityCustomRotorType(x.inner.Type())
 }
 
+// @brief The rotor type to provide results for. @remark The default type is NSAccessibilityCustomRotorTypeCustom, unless the rotor type was specified in the initializer.
+//
 // SetType calls the underlying SetType.
 func (x *AccessibilityCustomRotor) SetType(type_ NSAccessibilityCustomRotorType) {
 	x.inner.SetType(raw.NSAccessibilityCustomRotorType(type_))
 }
 
+// @brief The localized label assistive technologies will use to describe the custom rotor. @remark The label is only used when the rotor type is NSAccessibilityCustomRotorTypeCustom since a default is provided for all other types.
+//
 // Label calls the underlying Label.
 func (x *AccessibilityCustomRotor) Label() string {
 	_r := x.inner.Label()
@@ -88,26 +108,36 @@ func (x *AccessibilityCustomRotor) Label() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief The localized label assistive technologies will use to describe the custom rotor. @remark The label is only used when the rotor type is NSAccessibilityCustomRotorTypeCustom since a default is provided for all other types.
+//
 // SetLabel calls the underlying SetLabel.
 func (x *AccessibilityCustomRotor) SetLabel(label string) {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 }
 
+// @brief The itemSearchDelegate will be asked to find the next item result after performing a search with the given search parameters.
+//
 // ItemSearchDelegate calls the underlying ItemSearchDelegate.
 func (x *AccessibilityCustomRotor) ItemSearchDelegate() raw.NSAccessibilityCustomRotorItemSearchDelegate {
 	return x.inner.ItemSearchDelegate()
 }
 
+// @brief The itemSearchDelegate will be asked to find the next item result after performing a search with the given search parameters.
+//
 // SetItemSearchDelegate calls the underlying SetItemSearchDelegate.
 func (x *AccessibilityCustomRotor) SetItemSearchDelegate(itemSearchDelegate raw.NSAccessibilityCustomRotorItemSearchDelegate) {
 	x.inner.SetItemSearchDelegate(itemSearchDelegate)
 }
 
+// @brief Provide an item load delegate if the rotor vends item results that do not have a backing UI element yet. The loader will be asked to load an element via the accessibilityElementWithToken protocol method when the item result is selected by an assistive client. Applications can use the item result's token to determine which item to return.
+//
 // ItemLoadingDelegate calls the underlying ItemLoadingDelegate.
 func (x *AccessibilityCustomRotor) ItemLoadingDelegate() raw.NSAccessibilityElementLoading {
 	return x.inner.ItemLoadingDelegate()
 }
 
+// @brief Provide an item load delegate if the rotor vends item results that do not have a backing UI element yet. The loader will be asked to load an element via the accessibilityElementWithToken protocol method when the item result is selected by an assistive client. Applications can use the item result's token to determine which item to return.
+//
 // SetItemLoadingDelegate calls the underlying SetItemLoadingDelegate.
 func (x *AccessibilityCustomRotor) SetItemLoadingDelegate(itemLoadingDelegate raw.NSAccessibilityElementLoading) {
 	x.inner.SetItemLoadingDelegate(itemLoadingDelegate)

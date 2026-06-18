@@ -30,6 +30,8 @@ func AUPresetEventFromID(id objc.ID) *AUPresetEvent {
 	return &AUPresetEvent{inner: raw.AVAUPresetEventFromID(id)}
 }
 
+// @method initWithScope:element:dictionary @abstract Initialize the event with the scope, element, and dictionary for the preset. @param scope The audio unit scope for the parameter (see AudioUnitScope).  This should always be set to Global. @param element The element index within the scope (see AudioUnitElement).  This should usually be set to 0. @param presetDictionary An NSDictionary containing the preset.  The audio unit will expect this to be a dictionary structured as an appropriate audio unit preset. @discussion The dictionary passed to this initializer will be copied and is not editable once the event is created.
+//
 // NewAUPresetEventWithScopeElementDictionary creates a new [AUPresetEvent].
 func NewAUPresetEventWithScopeElementDictionary(scope uint, element uint, presetDictionary *foundation.NSDictionary[objc.ID, objc.ID]) *AUPresetEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAUPresetEvent")), objc.RegisterName("alloc"))
@@ -37,18 +39,24 @@ func NewAUPresetEventWithScopeElementDictionary(scope uint, element uint, preset
 	return &AUPresetEvent{inner: raw.AVAUPresetEventFromID(_id)}
 }
 
+// @property scope The audio unit scope for the parameter (see AudioUnitScope).  This should always be set to Global.
+//
 // WithScope sets the scope property and returns the receiver for chaining.
 func (x *AUPresetEvent) WithScope(scope uint) *AUPresetEvent {
 	x.inner.SetScope(scope)
 	return x
 }
 
+// @property element The element index within the scope (see AudioUnitElement).  This should usually be set to 0.
+//
 // WithElement sets the element property and returns the receiver for chaining.
 func (x *AUPresetEvent) WithElement(element uint) *AUPresetEvent {
 	x.inner.SetElement(element)
 	return x
 }
 
+// @property scope The audio unit scope for the parameter (see AudioUnitScope).  This should always be set to Global.
+//
 // Scope calls the underlying Scope.
 func (x *AUPresetEvent) Scope() uint {
 	return x.inner.Scope()
@@ -59,6 +67,8 @@ func (x *AUPresetEvent) SetScope(scope uint) {
 	x.inner.SetScope(scope)
 }
 
+// @property element The element index within the scope (see AudioUnitElement).  This should usually be set to 0.
+//
 // Element calls the underlying Element.
 func (x *AUPresetEvent) Element() uint {
 	return x.inner.Element()
@@ -69,6 +79,8 @@ func (x *AUPresetEvent) SetElement(element uint) {
 	x.inner.SetElement(element)
 }
 
+// @property presetDictionary An NSDictionary containing the preset.
+//
 // PresetDictionary calls the underlying PresetDictionary.
 func (x *AUPresetEvent) PresetDictionary() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.PresetDictionary()

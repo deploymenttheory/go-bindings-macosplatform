@@ -35,11 +35,15 @@ func NewSystemExtensionsWorkspace() *SystemExtensionsWorkspace {
 	return &SystemExtensionsWorkspace{inner: raw.OSSystemExtensionsWorkspaceFromID(_id)}
 }
 
+// @brief Start observing changes to System Extension(s) which are enabled or ready to be enabled.
+//
 // AddObserverError calls the underlying AddObserverError.
 func (x *SystemExtensionsWorkspace) AddObserverError(observer raw.OSSystemExtensionsWorkspaceObserver) (bool, error) {
 	return x.inner.AddObserverError(observer)
 }
 
+// @brief Stop observing changes to System Extension(s).
+//
 // RemoveObserver calls the underlying RemoveObserver.
 func (x *SystemExtensionsWorkspace) RemoveObserver(observer raw.OSSystemExtensionsWorkspaceObserver) {
 	x.inner.RemoveObserver(observer)

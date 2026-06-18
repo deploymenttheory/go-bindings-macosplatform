@@ -39,6 +39,8 @@ func NewAcceptSharesOperation() *AcceptSharesOperation {
 	return &AcceptSharesOperation{inner: raw.CKAcceptSharesOperationFromID(_id)}
 }
 
+// Creates an operation for accepting the specified shares. - Parameters: - shareMetadatas: The share metadatas to accept. If you specify `nil`, you must assign a value to the “CKAcceptSharesOperation/shareMetadatas“ property before you execute the operation. After initializing the operation, assign a handler to the “CKAcceptSharesOperation/acceptSharesCompletionBlock“ property to process the results.
+//
 // NewAcceptSharesOperationWithShareMetadatas creates a new [AcceptSharesOperation].
 func NewAcceptSharesOperationWithShareMetadatas(shareMetadatas *foundation.NSArray[*raw.CKShareMetadata]) *AcceptSharesOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKAcceptSharesOperation")), objc.RegisterName("alloc"))
@@ -46,6 +48,8 @@ func NewAcceptSharesOperationWithShareMetadatas(shareMetadatas *foundation.NSArr
 	return &AcceptSharesOperation{inner: raw.CKAcceptSharesOperationFromID(_id)}
 }
 
+// The share metadatas to process. Use this property to view or change the metadata of the shares you want to process. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue.
+//
 // WithShareMetadatas sets the collection, converting the Go slice to an NSArray.
 func (x *AcceptSharesOperation) WithShareMetadatas(items ...*raw.CKShareMetadata) *AcceptSharesOperation {
 	if len(items) == 0 {
@@ -64,66 +68,88 @@ func (x *AcceptSharesOperation) WithShareMetadatas(items ...*raw.CKShareMetadata
 	return x
 }
 
+// The block to execute as CloudKit processes individual shares. The closure returns no value and takes the following parameters: - The share metadata to process. - The share, or `nil` if CloudKit can't process the share metadata. - If CloudKit can't process the share metadata, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each element in the “CKAcceptSharesOperation/shareMetadatas“ property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // WithPerShareCompletionBlock sets the perShareCompletionBlock property and returns the receiver for chaining.
 func (x *AcceptSharesOperation) WithPerShareCompletionBlock(perShareCompletionBlock func(*raw.CKShareMetadata, *raw.CKShare, unsafe.Pointer)) *AcceptSharesOperation {
 	x.inner.SetPerShareCompletionBlock(perShareCompletionBlock)
 	return x
 }
 
+// The closure to execute when the operation finishes. The closure returns no value and takes the following parameter: - An error that contains information about a problem, or `nil` if CloudKit successfully processes the shares. The operation executes this closure only once. The closure executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The closure reports an error of type “CKError/Code/partialFailure“ when it can't process some of the shares. The `userInfo` dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are share URLs that CloudKit can't process, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
+//
 // WithAcceptSharesCompletionBlock sets the acceptSharesCompletionBlock property and returns the receiver for chaining.
 func (x *AcceptSharesOperation) WithAcceptSharesCompletionBlock(acceptSharesCompletionBlock func(unsafe.Pointer)) *AcceptSharesOperation {
 	x.inner.SetAcceptSharesCompletionBlock(acceptSharesCompletionBlock)
 	return x
 }
 
+// The operation's configuration.
+//
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *AcceptSharesOperation) WithConfiguration(configuration *OperationConfiguration) *AcceptSharesOperation {
 	x.inner.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
+// The operation's group.
+//
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *AcceptSharesOperation) WithGroup(group *OperationGroup) *AcceptSharesOperation {
 	x.inner.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
+// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *AcceptSharesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *AcceptSharesOperation {
 	x.inner.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
 	return x
 }
 
+// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
+//
 // WithContainer sets the container property and returns the receiver for chaining.
 func (x *AcceptSharesOperation) WithContainer(container *Container) *AcceptSharesOperation {
 	x.inner.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
+//
 // WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
 func (x *AcceptSharesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *AcceptSharesOperation {
 	x.inner.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
 	return x
 }
 
+// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *AcceptSharesOperation) WithLongLived(longLived bool) *AcceptSharesOperation {
 	x.inner.CKOperation.SetLongLived(longLived)
 	return x
 }
 
+// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
+//
 // WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
 func (x *AcceptSharesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *AcceptSharesOperation {
 	x.inner.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
 	return x
 }
 
+// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
+//
 // WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
 func (x *AcceptSharesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *AcceptSharesOperation {
 	x.inner.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
 	return x
 }
 
+// The share metadatas to process. Use this property to view or change the metadata of the shares you want to process. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue.
+//
 // ShareMetadatas returns the collection as a Go slice.
 func (x *AcceptSharesOperation) ShareMetadatas() []*ShareMetadata {
 	arr := x.inner.ShareMetadatas()
@@ -140,6 +166,8 @@ func (x *AcceptSharesOperation) SetShareMetadatas(shareMetadatas *foundation.NSA
 	x.inner.SetShareMetadatas(shareMetadatas)
 }
 
+// The block to execute as CloudKit processes individual shares. The closure returns no value and takes the following parameters: - The share metadata to process. - The share, or `nil` if CloudKit can't process the share metadata. - If CloudKit can't process the share metadata, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each element in the “CKAcceptSharesOperation/shareMetadatas“ property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // PerShareCompletionBlock calls the underlying PerShareCompletionBlock.
 func (x *AcceptSharesOperation) PerShareCompletionBlock() objc.Block {
 	return x.inner.PerShareCompletionBlock()
@@ -150,6 +178,8 @@ func (x *AcceptSharesOperation) SetPerShareCompletionBlock(perShareCompletionBlo
 	x.inner.SetPerShareCompletionBlock(perShareCompletionBlock)
 }
 
+// The closure to execute when the operation finishes. The closure returns no value and takes the following parameter: - An error that contains information about a problem, or `nil` if CloudKit successfully processes the shares. The operation executes this closure only once. The closure executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The closure reports an error of type “CKError/Code/partialFailure“ when it can't process some of the shares. The `userInfo` dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are share URLs that CloudKit can't process, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
+//
 // AcceptSharesCompletionBlock calls the underlying AcceptSharesCompletionBlock.
 func (x *AcceptSharesOperation) AcceptSharesCompletionBlock() objc.Block {
 	return x.inner.AcceptSharesCompletionBlock()

@@ -4,7 +4,8 @@
     pointer (skipped when a generated method claims the name); FromID adopts an
     existing pointer, mirroring the raw FromID (releasing finalizer, no retain).
 */}}
-{{define "class_header"}}// {{.GoTypeName}} wraps [{{.RawAlias}}.{{.ClassName}}] with a fluent Go API.
+{{define "class_header"}}{{if .DocComment}}{{.DocComment}}//
+{{end}}// {{.GoTypeName}} wraps [{{.RawAlias}}.{{.ClassName}}] with a fluent Go API.
 type {{.GoTypeName}} struct {
 inner *{{.RawType}}
 }

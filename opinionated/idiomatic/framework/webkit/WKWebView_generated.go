@@ -34,6 +34,8 @@ func WKWebViewFromID(id objc.ID) *WKWebView {
 	return &WKWebView{inner: raw.WKWebViewFromID(id)}
 }
 
+// @abstract Returns a web view initialized with a specified frame and configuration. @param frame The frame for the new web view. @param configuration The configuration for the new web view. @result An initialized web view, or nil if the object could not be initialized. @discussion This is a designated initializer. You can use @link -initWithFrame: @/link to initialize an instance with the default configuration. The initializer copies the specified configuration, so mutating the configuration after invoking the initializer has no effect on the web view.
+//
 // NewWKWebViewWithFrameConfiguration creates a new [WKWebView].
 func NewWKWebViewWithFrameConfiguration(frame corefoundation.CGRect, configuration *raw.WKWebViewConfiguration) *WKWebView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WKWebView")), objc.RegisterName("alloc"))
@@ -48,30 +50,40 @@ func NewWKWebViewWithCoder(coder *foundation.NSCoder) *WKWebView {
 	return &WKWebView{inner: raw.WKWebViewFromID(_id)}
 }
 
+// @abstract The web view's navigation delegate.
+//
 // WithNavigationDelegate sets the navigationDelegate property and returns the receiver for chaining.
 func (x *WKWebView) WithNavigationDelegate(navigationDelegate raw.WKNavigationDelegate) *WKWebView {
 	x.inner.SetNavigationDelegate(navigationDelegate)
 	return x
 }
 
+// @abstract The web view's user interface delegate.
+//
 // WithUIDelegate sets the uIDelegate property and returns the receiver for chaining.
 func (x *WKWebView) WithUIDelegate(uIDelegate raw.WKUIDelegate) *WKWebView {
 	x.inner.SetUIDelegate(uIDelegate)
 	return x
 }
 
+// @abstract A Boolean value indicating whether horizontal swipe gestures will trigger back-forward list navigations. @discussion The default value is NO.
+//
 // WithAllowsBackForwardNavigationGestures sets the allowsBackForwardNavigationGestures property and returns the receiver for chaining.
 func (x *WKWebView) WithAllowsBackForwardNavigationGestures(allowsBackForwardNavigationGestures bool) *WKWebView {
 	x.inner.SetAllowsBackForwardNavigationGestures(allowsBackForwardNavigationGestures)
 	return x
 }
 
+// @abstract The custom user agent string or nil if no custom user agent string has been set.
+//
 // WithCustomUserAgent sets the customUserAgent property and returns the receiver for chaining.
 func (x *WKWebView) WithCustomUserAgent(customUserAgent string) *WKWebView {
 	x.inner.SetCustomUserAgent(foundation.NSStringStringWithUTF8String(customUserAgent))
 	return x
 }
 
+// @abstract A Boolean value indicating whether link preview is allowed for any links inside this WKWebView. @discussion The default value is YES on Mac and iOS.
+//
 // WithAllowsLinkPreview sets the allowsLinkPreview property and returns the receiver for chaining.
 func (x *WKWebView) WithAllowsLinkPreview(allowsLinkPreview bool) *WKWebView {
 	x.inner.SetAllowsLinkPreview(allowsLinkPreview)
@@ -114,6 +126,8 @@ func (x *WKWebView) WithUnderPageBackgroundColor(underPageBackgroundColor *appki
 	return x
 }
 
+// @abstract Controls whether this @link WKWebView @/link is inspectable in Web Inspector. @discussion The default value is NO.
+//
 // WithInspectable sets the inspectable property and returns the receiver for chaining.
 func (x *WKWebView) WithInspectable(inspectable bool) *WKWebView {
 	x.inner.SetInspectable(inspectable)
@@ -126,6 +140,8 @@ func (x *WKWebView) WithObscuredContentInsets(obscuredContentInsets foundation.N
 	return x
 }
 
+// @abstract Navigates to a requested URL. @param request The request specifying the URL to which to navigate. @result A new navigation for the given request.
+//
 // LoadRequest calls the underlying LoadRequest.
 func (x *WKWebView) LoadRequest(request *foundation.NSURLRequest) *WKNavigation {
 	_r := x.inner.LoadRequest(request)
@@ -135,6 +151,8 @@ func (x *WKWebView) LoadRequest(request *foundation.NSURLRequest) *WKNavigation 
 	return &WKNavigation{inner: _r}
 }
 
+// @abstract Navigates to the requested file URL on the filesystem. @param URL The file URL to which to navigate. @param readAccessURL The URL to allow read access to. @discussion If readAccessURL references a single file, only that file may be loaded by WebKit. If readAccessURL references a directory, files inside that file may be loaded by WebKit. @result A new navigation for the given file URL.
+//
 // LoadFileURLAllowingReadAccessToURL calls the underlying LoadFileURLAllowingReadAccessToURL.
 func (x *WKWebView) LoadFileURLAllowingReadAccessToURL(uRL string, readAccessURL string) *WKNavigation {
 	_r := x.inner.LoadFileURLAllowingReadAccessToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(readAccessURL)))
@@ -144,6 +162,8 @@ func (x *WKWebView) LoadFileURLAllowingReadAccessToURL(uRL string, readAccessURL
 	return &WKNavigation{inner: _r}
 }
 
+// @abstract Sets the webpage contents and base URL. @param string The string to use as the contents of the webpage. @param baseURL A URL that is used to resolve relative URLs within the document. @result A new navigation.
+//
 // LoadHTMLStringBaseURL calls the underlying LoadHTMLStringBaseURL.
 func (x *WKWebView) LoadHTMLStringBaseURL(string_ string, baseURL string) *WKNavigation {
 	_r := x.inner.LoadHTMLStringBaseURL(foundation.NSStringStringWithUTF8String(string_), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)))
@@ -153,6 +173,8 @@ func (x *WKWebView) LoadHTMLStringBaseURL(string_ string, baseURL string) *WKNav
 	return &WKNavigation{inner: _r}
 }
 
+// @abstract Sets the webpage contents and base URL. @param data The data to use as the contents of the webpage. @param MIMEType The MIME type of the data. @param characterEncodingName The data's character encoding name. @param baseURL A URL that is used to resolve relative URLs within the document. @result A new navigation.
+//
 // LoadDataMIMETypeCharacterEncodingNameBaseURL calls the underlying LoadDataMIMETypeCharacterEncodingNameBaseURL.
 func (x *WKWebView) LoadDataMIMETypeCharacterEncodingNameBaseURL(data *foundation.NSData, mIMEType string, characterEncodingName string, baseURL string) *WKNavigation {
 	_r := x.inner.LoadDataMIMETypeCharacterEncodingNameBaseURL(data, foundation.NSStringStringWithUTF8String(mIMEType), foundation.NSStringStringWithUTF8String(characterEncodingName), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)))
@@ -162,6 +184,8 @@ func (x *WKWebView) LoadDataMIMETypeCharacterEncodingNameBaseURL(data *foundatio
 	return &WKNavigation{inner: _r}
 }
 
+// @abstract Navigates to an item from the back-forward list and sets it as the current item. @param item The item to which to navigate. Must be one of the items in the web view's back-forward list. @result A new navigation to the requested item, or nil if it is already the current item or is not part of the web view's back-forward list. @seealso backForwardList
+//
 // GoToBackForwardListItem calls the underlying GoToBackForwardListItem.
 func (x *WKWebView) GoToBackForwardListItem(item *raw.WKBackForwardListItem) *WKNavigation {
 	_r := x.inner.GoToBackForwardListItem(item)
@@ -171,6 +195,8 @@ func (x *WKWebView) GoToBackForwardListItem(item *raw.WKBackForwardListItem) *WK
 	return &WKNavigation{inner: _r}
 }
 
+// @abstract Navigates to the back item in the back-forward list. @result A new navigation to the requested item, or nil if there is no back item in the back-forward list.
+//
 // GoBack calls the underlying GoBack.
 func (x *WKWebView) GoBack() *WKNavigation {
 	_r := x.inner.GoBack()
@@ -180,6 +206,8 @@ func (x *WKWebView) GoBack() *WKNavigation {
 	return &WKNavigation{inner: _r}
 }
 
+// @abstract Navigates to the forward item in the back-forward list. @result A new navigation to the requested item, or nil if there is no forward item in the back-forward list.
+//
 // GoForward calls the underlying GoForward.
 func (x *WKWebView) GoForward() *WKNavigation {
 	_r := x.inner.GoForward()
@@ -189,6 +217,8 @@ func (x *WKWebView) GoForward() *WKNavigation {
 	return &WKNavigation{inner: _r}
 }
 
+// @abstract Reloads the current page. @result A new navigation representing the reload.
+//
 // Reload calls the underlying Reload.
 func (x *WKWebView) Reload() *WKNavigation {
 	_r := x.inner.Reload()
@@ -198,6 +228,8 @@ func (x *WKWebView) Reload() *WKNavigation {
 	return &WKNavigation{inner: _r}
 }
 
+// @abstract Reloads the current page, performing end-to-end revalidation using cache-validating conditionals if possible. @result A new navigation representing the reload.
+//
 // ReloadFromOrigin calls the underlying ReloadFromOrigin.
 func (x *WKWebView) ReloadFromOrigin() *WKNavigation {
 	_r := x.inner.ReloadFromOrigin()
@@ -207,6 +239,8 @@ func (x *WKWebView) ReloadFromOrigin() *WKNavigation {
 	return &WKNavigation{inner: _r}
 }
 
+// @abstract Stops loading all resources on the current page.
+//
 // StopLoading calls the underlying StopLoading.
 func (x *WKWebView) StopLoading() {
 	x.inner.StopLoading()
@@ -227,6 +261,8 @@ func (x *WKWebView) CallAsyncJavaScriptArgumentsInFrameInContentWorldCompletionH
 	x.inner.CallAsyncJavaScriptArgumentsInFrameInContentWorldCompletionHandler(foundation.NSStringStringWithUTF8String(functionBody), arguments, frame, contentWorld, completionHandler)
 }
 
+// @abstract Closes all out-of-window media presentations in a WKWebView. @discussion Includes picture-in-picture and fullscreen.
+//
 // CloseAllMediaPresentationsWithCompletionHandler calls the underlying CloseAllMediaPresentationsWithCompletionHandler.
 func (x *WKWebView) CloseAllMediaPresentationsWithCompletionHandler(completionHandler func()) {
 	x.inner.CloseAllMediaPresentationsWithCompletionHandler(completionHandler)
@@ -237,6 +273,8 @@ func (x *WKWebView) CloseAllMediaPresentations() {
 	x.inner.CloseAllMediaPresentations()
 }
 
+// @abstract Pauses media playback in WKWebView. @discussion Pauses media playback. Media in the page can be restarted by calling play() on a media element or resume() on an AudioContext in JavaScript. A user can also use media controls to play media content after it has been paused.
+//
 // PauseAllMediaPlaybackWithCompletionHandler calls the underlying PauseAllMediaPlaybackWithCompletionHandler.
 func (x *WKWebView) PauseAllMediaPlaybackWithCompletionHandler(completionHandler func()) {
 	x.inner.PauseAllMediaPlaybackWithCompletionHandler(completionHandler)
@@ -247,6 +285,8 @@ func (x *WKWebView) PauseAllMediaPlayback(completionHandler func()) {
 	x.inner.PauseAllMediaPlayback(completionHandler)
 }
 
+// @abstract Suspends or resumes all media playback in WKWebView. @param suspended Whether media playback should be suspended or resumed. @discussion If suspended is true, this pauses media playback and blocks all attempts by the page or the user to resume until setAllMediaPlaybackSuspended is called again with suspended set to false. Media playback should always be suspended and resumed in pairs.
+//
 // SetAllMediaPlaybackSuspendedCompletionHandler calls the underlying SetAllMediaPlaybackSuspendedCompletionHandler.
 func (x *WKWebView) SetAllMediaPlaybackSuspendedCompletionHandler(suspended bool, completionHandler func()) {
 	x.inner.SetAllMediaPlaybackSuspendedCompletionHandler(suspended, completionHandler)
@@ -262,6 +302,8 @@ func (x *WKWebView) SuspendAllMediaPlayback(completionHandler func()) {
 	x.inner.SuspendAllMediaPlayback(completionHandler)
 }
 
+// @abstract Get the current media playback state of a WKWebView. @param completionHandler A block to invoke with the return value of the function call. @discussion If media playback exists, WKMediaPlaybackState will be one of three values: WKMediaPlaybackPaused, WKMediaPlaybackSuspended, or WKMediaPlaybackPlaying. If no media playback exists in the current WKWebView, WKMediaPlaybackState will equal WKMediaPlaybackStateNone.
+//
 // RequestMediaPlaybackStateWithCompletionHandler calls the underlying RequestMediaPlaybackStateWithCompletionHandler.
 func (x *WKWebView) RequestMediaPlaybackStateWithCompletionHandler(completionHandler func(WKMediaPlaybackState)) {
 	x.inner.RequestMediaPlaybackStateWithCompletionHandler(func(_a0 raw.WKMediaPlaybackState) { completionHandler(WKMediaPlaybackState(_a0)) })
@@ -272,11 +314,15 @@ func (x *WKWebView) RequestMediaPlaybackState(completionHandler func(WKMediaPlay
 	x.inner.RequestMediaPlaybackState(func(_a0 raw.WKMediaPlaybackState) { completionHandler(WKMediaPlaybackState(_a0)) })
 }
 
+// @abstract Set camera capture state of a WKWebView. @param state State to apply for capture. @param completionHandler A block to invoke after the camera state has been changed. @discussion If value is WKMediaCaptureStateNone, this will stop any camera capture. If value is WKMediaCaptureStateMuted, any active camera capture will become muted. If value is WKMediaCaptureStateActive, any muted camera capture will become active.
+//
 // SetCameraCaptureStateCompletionHandler calls the underlying SetCameraCaptureStateCompletionHandler.
 func (x *WKWebView) SetCameraCaptureStateCompletionHandler(state WKMediaCaptureState, completionHandler func()) {
 	x.inner.SetCameraCaptureStateCompletionHandler(raw.WKMediaCaptureState(state), completionHandler)
 }
 
+// @abstract Set microphone capture state of a WKWebView. @param state state to apply for capture. @param completionHandler A block to invoke after the microphone state has been changed. @discussion If value is WKMediaCaptureStateNone, this will stop any microphone capture. If value is WKMediaCaptureStateMuted, any active microphone capture will become muted. If value is WKMediaCaptureStateActive, any muted microphone capture will become active.
+//
 // SetMicrophoneCaptureStateCompletionHandler calls the underlying SetMicrophoneCaptureStateCompletionHandler.
 func (x *WKWebView) SetMicrophoneCaptureStateCompletionHandler(state WKMediaCaptureState, completionHandler func()) {
 	x.inner.SetMicrophoneCaptureStateCompletionHandler(raw.WKMediaCaptureState(state), completionHandler)
@@ -287,6 +333,8 @@ func (x *WKWebView) TakeSnapshotWithConfigurationCompletionHandler(snapshotConfi
 	x.inner.TakeSnapshotWithConfigurationCompletionHandler(snapshotConfiguration, completionHandler)
 }
 
+// @abstract Create a PDF document representation from the web page currently displayed in the WKWebView @param pdfConfiguration An object that specifies how the PDF capture is configured. @param completionHandler A block to invoke when the pdf document data is ready. @discussion If the WKPDFConfiguration is nil, the method will create a PDF document representing the bounds of the currently displayed web page. The completionHandler is passed the resulting PDF document data or an error. The data can be used to create a PDFDocument object. If the data is written to a file the resulting file is a valid PDF document.
+//
 // CreatePDFWithConfigurationCompletionHandler calls the underlying CreatePDFWithConfigurationCompletionHandler.
 func (x *WKWebView) CreatePDFWithConfigurationCompletionHandler(pdfConfiguration *raw.WKPDFConfiguration, completionHandler func(*foundation.NSData, unsafe.Pointer)) {
 	x.inner.CreatePDFWithConfigurationCompletionHandler(pdfConfiguration, completionHandler)
@@ -317,6 +365,8 @@ func (x *WKWebView) ResumeDownloadFromResumeDataCompletionHandler(resumeData *fo
 	x.inner.ResumeDownloadFromResumeDataCompletionHandler(resumeData, completionHandler)
 }
 
+// @abstract Sets the webpage contents from the passed data as if it was the response to the supplied request. The request is never actually sent to the supplied URL, though loads of resources defined in the NSData object would be performed. @param request The request specifying the base URL and other loading details to be used while interpreting the supplied data object. @param response A response that is used to interpret the supplied data object. @param data The data to use as the contents of the webpage. @result A new navigation.
+//
 // LoadSimulatedRequestResponseResponseData calls the underlying LoadSimulatedRequestResponseResponseData.
 func (x *WKWebView) LoadSimulatedRequestResponseResponseData(request *foundation.NSURLRequest, response *foundation.NSURLResponse, data *foundation.NSData) *WKNavigation {
 	_r := x.inner.LoadSimulatedRequestResponseResponseData(request, response, data)
@@ -335,6 +385,8 @@ func (x *WKWebView) LoadSimulatedRequestWithResponseResponseData(request *founda
 	return &WKNavigation{inner: _r}
 }
 
+// @abstract Navigates to the requested file URL on the filesystem. @param request The request specifying the file URL to which to navigate. @param readAccessURL The URL to allow read access to. @discussion If readAccessURL references a single file, only that file may be loaded by WebKit. If readAccessURL references a directory, files inside that file may be loaded by WebKit. @result A new navigation for the given file URL.
+//
 // LoadFileRequestAllowingReadAccessToURL calls the underlying LoadFileRequestAllowingReadAccessToURL.
 func (x *WKWebView) LoadFileRequestAllowingReadAccessToURL(request *foundation.NSURLRequest, readAccessURL string) *WKNavigation {
 	_r := x.inner.LoadFileRequestAllowingReadAccessToURL(request, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(readAccessURL)))
@@ -344,6 +396,8 @@ func (x *WKWebView) LoadFileRequestAllowingReadAccessToURL(request *foundation.N
 	return &WKNavigation{inner: _r}
 }
 
+// @abstract Sets the webpage contents from the passed HTML string as if it was the response to the supplied request. The request is never actually sent to the supplied URL, though loads of resources defined in the HTML string would be performed. @param request The request specifying the base URL and other loading details to be used while interpreting the supplied data object. @param string The data to use as the contents of the webpage. @result A new navigation.
+//
 // LoadSimulatedRequestResponseHTMLString calls the underlying LoadSimulatedRequestResponseHTMLString.
 func (x *WKWebView) LoadSimulatedRequestResponseHTMLString(request *foundation.NSURLRequest, string_ string) *WKNavigation {
 	_r := x.inner.LoadSimulatedRequestResponseHTMLString(request, foundation.NSStringStringWithUTF8String(string_))
@@ -382,6 +436,8 @@ func (x *WKWebView) RestoreDataCompletionHandler(data *foundation.NSData, comple
 	x.inner.RestoreDataCompletionHandler(data, completionHandler)
 }
 
+// @abstract A copy of the configuration with which the web view was initialized.
+//
 // Configuration calls the underlying Configuration.
 func (x *WKWebView) Configuration() *WKWebViewConfiguration {
 	_r := x.inner.Configuration()
@@ -391,6 +447,8 @@ func (x *WKWebView) Configuration() *WKWebViewConfiguration {
 	return &WKWebViewConfiguration{inner: _r}
 }
 
+// @abstract The web view's navigation delegate.
+//
 // NavigationDelegate calls the underlying NavigationDelegate.
 func (x *WKWebView) NavigationDelegate() raw.WKNavigationDelegate {
 	return x.inner.NavigationDelegate()
@@ -401,6 +459,8 @@ func (x *WKWebView) SetNavigationDelegate(navigationDelegate raw.WKNavigationDel
 	x.inner.SetNavigationDelegate(navigationDelegate)
 }
 
+// @abstract The web view's user interface delegate.
+//
 // UIDelegate calls the underlying UIDelegate.
 func (x *WKWebView) UIDelegate() raw.WKUIDelegate {
 	return x.inner.UIDelegate()
@@ -411,6 +471,8 @@ func (x *WKWebView) SetUIDelegate(uIDelegate raw.WKUIDelegate) {
 	x.inner.SetUIDelegate(uIDelegate)
 }
 
+// @abstract The web view's back-forward list.
+//
 // BackForwardList calls the underlying BackForwardList.
 func (x *WKWebView) BackForwardList() *WKBackForwardList {
 	_r := x.inner.BackForwardList()
@@ -420,6 +482,8 @@ func (x *WKWebView) BackForwardList() *WKBackForwardList {
 	return &WKBackForwardList{inner: _r}
 }
 
+// @abstract The page title. @discussion @link WKWebView @/link is key-value observing (KVO) compliant for this property.
+//
 // Title calls the underlying Title.
 func (x *WKWebView) Title() string {
 	_r := x.inner.Title()
@@ -429,51 +493,71 @@ func (x *WKWebView) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The active URL. @discussion This is the URL that should be reflected in the user interface. @link WKWebView @/link is key-value observing (KVO) compliant for this property.
+//
 // URL calls the underlying URL.
 func (x *WKWebView) URL() *foundation.NSURL {
 	return x.inner.URL()
 }
 
+// @abstract A Boolean value indicating whether the view is currently loading content. @discussion @link WKWebView @/link is key-value observing (KVO) compliant for this property.
+//
 // IsLoading calls the underlying IsLoading.
 func (x *WKWebView) IsLoading() bool {
 	return x.inner.IsLoading()
 }
 
+// @abstract An estimate of what fraction of the current navigation has been completed. @discussion This value ranges from 0.0 to 1.0 based on the total number of bytes expected to be received, including the main document and all of its potential subresources. After a navigation completes, the value remains at 1.0 until a new navigation starts, at which point it is reset to 0.0. @link WKWebView @/link is key-value observing (KVO) compliant for this property.
+//
 // EstimatedProgress calls the underlying EstimatedProgress.
 func (x *WKWebView) EstimatedProgress() float64 {
 	return x.inner.EstimatedProgress()
 }
 
+// @abstract A Boolean value indicating whether all resources on the page have been loaded over securely encrypted connections. @discussion @link WKWebView @/link is key-value observing (KVO) compliant for this property.
+//
 // HasOnlySecureContent calls the underlying HasOnlySecureContent.
 func (x *WKWebView) HasOnlySecureContent() bool {
 	return x.inner.HasOnlySecureContent()
 }
 
+// @abstract A SecTrustRef for the currently committed navigation. @discussion @link WKWebView @/link is key-value observing (KVO) compliant for this property.
+//
 // ServerTrust calls the underlying ServerTrust.
 func (x *WKWebView) ServerTrust() unsafe.Pointer {
 	return x.inner.ServerTrust()
 }
 
+// @abstract A Boolean value indicating whether there is a back item in the back-forward list that can be navigated to. @discussion @link WKWebView @/link is key-value observing (KVO) compliant for this property. @seealso backForwardList.
+//
 // CanGoBack calls the underlying CanGoBack.
 func (x *WKWebView) CanGoBack() bool {
 	return x.inner.CanGoBack()
 }
 
+// @abstract A Boolean value indicating whether there is a forward item in the back-forward list that can be navigated to. @discussion @link WKWebView @/link is key-value observing (KVO) compliant for this property. @seealso backForwardList.
+//
 // CanGoForward calls the underlying CanGoForward.
 func (x *WKWebView) CanGoForward() bool {
 	return x.inner.CanGoForward()
 }
 
+// @abstract The state of camera capture on a web page. @discussion @link WKWebView @/link is key-value observing (KVO) compliant for this property.
+//
 // CameraCaptureState calls the underlying CameraCaptureState.
 func (x *WKWebView) CameraCaptureState() WKMediaCaptureState {
 	return WKMediaCaptureState(x.inner.CameraCaptureState())
 }
 
+// @abstract The state of microphone capture on a web page. @discussion @link WKWebView @/link is key-value observing (KVO) compliant for this property.
+//
 // MicrophoneCaptureState calls the underlying MicrophoneCaptureState.
 func (x *WKWebView) MicrophoneCaptureState() WKMediaCaptureState {
 	return WKMediaCaptureState(x.inner.MicrophoneCaptureState())
 }
 
+// @abstract A Boolean value indicating whether horizontal swipe gestures will trigger back-forward list navigations. @discussion The default value is NO.
+//
 // AllowsBackForwardNavigationGestures calls the underlying AllowsBackForwardNavigationGestures.
 func (x *WKWebView) AllowsBackForwardNavigationGestures() bool {
 	return x.inner.AllowsBackForwardNavigationGestures()
@@ -484,6 +568,8 @@ func (x *WKWebView) SetAllowsBackForwardNavigationGestures(allowsBackForwardNavi
 	x.inner.SetAllowsBackForwardNavigationGestures(allowsBackForwardNavigationGestures)
 }
 
+// @abstract The custom user agent string or nil if no custom user agent string has been set.
+//
 // CustomUserAgent calls the underlying CustomUserAgent.
 func (x *WKWebView) CustomUserAgent() string {
 	_r := x.inner.CustomUserAgent()
@@ -498,6 +584,8 @@ func (x *WKWebView) SetCustomUserAgent(customUserAgent string) {
 	x.inner.SetCustomUserAgent(foundation.NSStringStringWithUTF8String(customUserAgent))
 }
 
+// @abstract A Boolean value indicating whether link preview is allowed for any links inside this WKWebView. @discussion The default value is YES on Mac and iOS.
+//
 // AllowsLinkPreview calls the underlying AllowsLinkPreview.
 func (x *WKWebView) AllowsLinkPreview() bool {
 	return x.inner.AllowsLinkPreview()
@@ -562,6 +650,8 @@ func (x *WKWebView) SetInteractionState(interactionState objc.ID) {
 	x.inner.SetInteractionState(interactionState)
 }
 
+// @abstract A Boolean value indicating whether Screen Time blocking has occurred.
+//
 // IsBlockedByScreenTime calls the underlying IsBlockedByScreenTime.
 func (x *WKWebView) IsBlockedByScreenTime() bool {
 	return x.inner.IsBlockedByScreenTime()
@@ -582,6 +672,8 @@ func (x *WKWebView) SetUnderPageBackgroundColor(underPageBackgroundColor *appkit
 	x.inner.SetUnderPageBackgroundColor(underPageBackgroundColor)
 }
 
+// @abstract A WKWebView's fullscreen state. @discussion @link WKWebView @link is key-value observing (KVO) compliant for this property. When an element in the WKWebView enters fullscreen, WebKit will replace the WKWebView in the application view hierarchy with a "placeholder" view, and move the WKWebView into a fullscreen window. When the element exits fullscreen later, the WKWebView will be moved back into the application view hierarchy. An application may need to adjust/restore its native UI components when the fullscreen state changes. The application should observe the fullscreenState property of WKWebView in order to receive notifications regarding the fullscreen state change.
+//
 // FullscreenState calls the underlying FullscreenState.
 func (x *WKWebView) FullscreenState() WKFullscreenState {
 	return WKFullscreenState(x.inner.FullscreenState())
@@ -597,6 +689,8 @@ func (x *WKWebView) MaximumViewportInset() foundation.NSEdgeInsets {
 	return x.inner.MaximumViewportInset()
 }
 
+// @abstract Controls whether this @link WKWebView @/link is inspectable in Web Inspector. @discussion The default value is NO.
+//
 // IsInspectable calls the underlying IsInspectable.
 func (x *WKWebView) IsInspectable() bool {
 	return x.inner.IsInspectable()
@@ -607,6 +701,8 @@ func (x *WKWebView) SetInspectable(inspectable bool) {
 	x.inner.SetInspectable(inspectable)
 }
 
+// @abstract A Boolean value indicating whether Writing Tools is active for the view. @discussion @link WKWebView @/link is key-value observing (KVO) compliant for this property.
+//
 // IsWritingToolsActive calls the underlying IsWritingToolsActive.
 func (x *WKWebView) IsWritingToolsActive() bool {
 	return x.inner.IsWritingToolsActive()
@@ -622,26 +718,36 @@ func (x *WKWebView) SetObscuredContentInsets(obscuredContentInsets foundation.NS
 	x.inner.SetObscuredContentInsets(obscuredContentInsets)
 }
 
+// @abstract Action method that navigates to the back item in the back-forward list. @param sender The object that sent this message.
+//
 // GoBack2 calls the underlying GoBack2.
 func (x *WKWebView) GoBack2(sender objc.ID) {
 	x.inner.GoBack2(sender)
 }
 
+// @abstract Action method that navigates to the forward item in the back-forward list. @param sender The object that sent this message.
+//
 // GoForward2 calls the underlying GoForward2.
 func (x *WKWebView) GoForward2(sender objc.ID) {
 	x.inner.GoForward2(sender)
 }
 
+// @abstract Action method that reloads the current page. @param sender The object that sent this message.
+//
 // Reload2 calls the underlying Reload2.
 func (x *WKWebView) Reload2(sender objc.ID) {
 	x.inner.Reload2(sender)
 }
 
+// @abstract Action method that reloads the current page, performing end-to-end revalidation using cache-validating conditionals if possible. @param sender The object that sent this message.
+//
 // ReloadFromOrigin2 calls the underlying ReloadFromOrigin2.
 func (x *WKWebView) ReloadFromOrigin2(sender objc.ID) {
 	x.inner.ReloadFromOrigin2(sender)
 }
 
+// @abstract Action method that stops loading all resources on the current page. @param sender The object that sent this message.
+//
 // StopLoading2 calls the underlying StopLoading2.
 func (x *WKWebView) StopLoading2(sender objc.ID) {
 	x.inner.StopLoading2(sender)

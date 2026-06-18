@@ -35,54 +35,72 @@ func NewDatabaseOperation() *DatabaseOperation {
 	return &DatabaseOperation{inner: raw.CKDatabaseOperationFromID(_id)}
 }
 
+// The database that the operation uses. For operations that you execute in a custom queue, use this property to specify the target database. Setting the database also sets the corresponding container, which it inherits from “CKOperation“. If this property's value is `nil`, the operation targets the user's private database. The default value is `nil`.
+//
 // WithDatabase sets the database property and returns the receiver for chaining.
 func (x *DatabaseOperation) WithDatabase(database *Database) *DatabaseOperation {
 	x.inner.SetDatabase(database.Unwrap())
 	return x
 }
 
+// The operation's configuration.
+//
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *DatabaseOperation) WithConfiguration(configuration *OperationConfiguration) *DatabaseOperation {
 	x.inner.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
+// The operation's group.
+//
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *DatabaseOperation) WithGroup(group *OperationGroup) *DatabaseOperation {
 	x.inner.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
+// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *DatabaseOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DatabaseOperation {
 	x.inner.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
 	return x
 }
 
+// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
+//
 // WithContainer sets the container property and returns the receiver for chaining.
 func (x *DatabaseOperation) WithContainer(container *Container) *DatabaseOperation {
 	x.inner.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
+//
 // WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
 func (x *DatabaseOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *DatabaseOperation {
 	x.inner.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
 	return x
 }
 
+// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *DatabaseOperation) WithLongLived(longLived bool) *DatabaseOperation {
 	x.inner.CKOperation.SetLongLived(longLived)
 	return x
 }
 
+// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
+//
 // WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
 func (x *DatabaseOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DatabaseOperation {
 	x.inner.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
 	return x
 }
 
+// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
+//
 // WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
 func (x *DatabaseOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DatabaseOperation {
 	x.inner.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)

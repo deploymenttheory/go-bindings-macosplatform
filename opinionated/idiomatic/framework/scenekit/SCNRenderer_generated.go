@@ -39,42 +39,58 @@ func NewRenderer() *Renderer {
 	return &Renderer{inner: raw.SCNRendererFromID(_id)}
 }
 
+// @property scene @abstract Specifies the scene of the receiver
+//
 // WithScene sets the scene property and returns the receiver for chaining.
 func (x *Renderer) WithScene(scene *Scene) *Renderer {
 	x.inner.SetScene(scene.Unwrap())
 	return x
 }
 
+// @method renderAtTime:viewport:commandBuffer:passDescriptor: @abstract updates and renders the receiver's scene at the specified time (system time) viewport, Metal command buffer and pass descriptor. @discussion Use this method to render using Metal.
+//
 // RenderAtTimeViewportCommandBufferPassDescriptor calls the underlying RenderAtTimeViewportCommandBufferPassDescriptor.
 func (x *Renderer) RenderAtTimeViewportCommandBufferPassDescriptor(time_ float64, viewport corefoundation.CGRect, commandBuffer metal.MTLCommandBuffer, renderPassDescriptor *metal.MTLRenderPassDescriptor) {
 	x.inner.RenderAtTimeViewportCommandBufferPassDescriptor(time_, viewport, commandBuffer, renderPassDescriptor)
 }
 
+// @method renderAtTime: @abstract updates and renders the receiver's scene at the specified time (system time). @discussion This method only work if the receiver was allocated with an OpenGL context. Use renderAtTime:withEncoder:pass:commandQueue: to render with Metal.
+//
 // RenderAtTime calls the underlying RenderAtTime.
 func (x *Renderer) RenderAtTime(time_ float64) {
 	x.inner.RenderAtTime(time_)
 }
 
+// @method updateAtTime: @abstract updates the receiver's scene at the specified time (system time).
+//
 // UpdateAtTime calls the underlying UpdateAtTime.
 func (x *Renderer) UpdateAtTime(time_ float64) {
 	x.inner.UpdateAtTime(time_)
 }
 
+// @method renderWithViewport:viewport:commandBuffer:passDescriptor: @abstract renders the receiver's scene with the specified viewport, Metal command buffer and pass descriptor. @discussion Use this method to render using Metal. This method doesn't update the scene's animations, physics, particles etc... It's up to you to call "updateAtTime:" to update the scene.
+//
 // RenderWithViewportCommandBufferPassDescriptor calls the underlying RenderWithViewportCommandBufferPassDescriptor.
 func (x *Renderer) RenderWithViewportCommandBufferPassDescriptor(viewport corefoundation.CGRect, commandBuffer metal.MTLCommandBuffer, renderPassDescriptor *metal.MTLRenderPassDescriptor) {
 	x.inner.RenderWithViewportCommandBufferPassDescriptor(viewport, commandBuffer, renderPassDescriptor)
 }
 
+// @method snapshotAtTime:withSize:antialiasingMode: @abstract renders the receiver's scene at the specified time (system time) into an image.
+//
 // SnapshotAtTimeWithSizeAntialiasingMode calls the underlying SnapshotAtTimeWithSizeAntialiasingMode.
 func (x *Renderer) SnapshotAtTimeWithSizeAntialiasingMode(time_ float64, size corefoundation.CGSize, antialiasingMode SCNAntialiasingMode) *appkit.NSImage {
 	return x.inner.SnapshotAtTimeWithSizeAntialiasingMode(time_, size, raw.SCNAntialiasingMode(antialiasingMode))
 }
 
+// @method updateProbes:atTime: @abstract Update the specified probes by computing their incoming irradiance in the receiver's scene at the specified time. @param lightProbes An array of nodes that must have a light probe attached. @param time The time used to render the scene when computing the light probes irradiance. @discussion Light probes are only supported with Metal. This method is observable using NSProgress.
+//
 // UpdateProbesAtTime calls the underlying UpdateProbesAtTime.
 func (x *Renderer) UpdateProbesAtTime(lightProbes *foundation.NSArray[*raw.SCNNode], time_ float64) {
 	x.inner.UpdateProbesAtTime(lightProbes, time_)
 }
 
+// @property scene @abstract Specifies the scene of the receiver
+//
 // Scene calls the underlying Scene.
 func (x *Renderer) Scene() *Scene {
 	_r := x.inner.Scene()
@@ -89,11 +105,15 @@ func (x *Renderer) SetScene(scene *raw.SCNScene) {
 	x.inner.SetScene(scene)
 }
 
+// @property nextFrameTime @abstract Returns the time at which the next update should happen. If infinite no update needs to be scheduled yet. If the current frame time, a continuous animation is running and an update should be scheduled after a "natural" delay.
+//
 // NextFrameTime calls the underlying NextFrameTime.
 func (x *Renderer) NextFrameTime() float64 {
 	return x.inner.NextFrameTime()
 }
 
+// @method render @abstract renders the receiver's scene at the current system time. @discussion This method only work if the receiver was allocated with an OpenGL context and it is deprecated (use renderAtTime: instead). Use renderAtTime:withEncoder:pass:commandQueue: to render with Metal.
+//
 // Render calls the underlying Render.
 func (x *Renderer) Render() {
 	x.inner.Render()

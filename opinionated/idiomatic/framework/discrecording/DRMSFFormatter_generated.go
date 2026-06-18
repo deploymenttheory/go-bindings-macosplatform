@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @class		DRMSFFormatter @abstract	NSFormatter subclass @discussion Instances of DRMSFFormatter format the textual representation of cells that contain MSF objects and convert textual representations of msf values into MSF objects. DRMSFFormatters are typically instantiated in IB using the DiscRecording Interface builder palette.
+//
 // MSFFormatter wraps [raw.DRMSFFormatter] with a fluent Go API.
 type MSFFormatter struct {
 	inner *raw.DRMSFFormatter
@@ -31,6 +33,8 @@ func MSFFormatterFromID(id objc.ID) *MSFFormatter {
 	return &MSFFormatter{inner: raw.DRMSFFormatterFromID(id)}
 }
 
+// @method 	initWithFormat: @abstract	Initializes the formatter with the format string @param		format	An NString specifying the printf-style format string. @result		A DRMSFFormatter
+//
 // NewMSFFormatterWithFormat creates a new [MSFFormatter].
 func NewMSFFormatterWithFormat(format string) *MSFFormatter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRMSFFormatter")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewMSFFormatterWithFormat(format string) *MSFFormatter {
 	return &MSFFormatter{inner: raw.DRMSFFormatterFromID(_id)}
 }
 
+// @method 	format @abstract	Returns the format string to the caller
+//
 // Format calls the underlying Format.
 func (x *MSFFormatter) Format() string {
 	_r := x.inner.Format()
@@ -47,6 +53,8 @@ func (x *MSFFormatter) Format() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @method 	setFormat: @abstract	Sets the format string of the receiver @discussion	The format string is very similar to a printf-style format string with %-escaped formatting characters. <ul> <li>%%	A "%" character</li> <li>%m	Minutes as a decimal number</li> <li>%s	Seconds as a decimal number</li> <li>%f	Frames as a decimal number</li> </ul> In addition to these formatting characters an optional length specifier can come between then % and the formatting character. This length specifier will force the field in question to be at least that wide. for example a format specifier of "%02m:%02s" will cause a DRMSF object representing 3 minutes 9 seconds to be formatted as "03:09". A formatter is aware of and respects rounding. If a bit of the msf is not zero, but the format does not display that value, the next higher value will be increased by one to reflect that. Extending our example above, an DRMSF with a value of 3 minutes, 9 seconds, 15 frames using a format specfier of "%02m:%02s", will be formatted as "03:10" since the 15 frames rounds up the seconds to the next value @param		format	An NString specifying the printf-style format string.
+//
 // SetFormat calls the underlying SetFormat.
 func (x *MSFFormatter) SetFormat(format string) {
 	x.inner.SetFormat(foundation.NSStringStringWithUTF8String(format))

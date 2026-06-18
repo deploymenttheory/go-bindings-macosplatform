@@ -55,11 +55,15 @@ func (x *AttributeMap) WithValue(value string) *AttributeMap {
 	return x
 }
 
+// @method setStaticValue: @abstract Sets a static value that will always be returned for this mapping. @discussion Sets a static value that will always be returned for this mapping, i.e., "20".
+//
 // SetStaticValue calls the underlying SetStaticValue.
 func (x *AttributeMap) SetStaticValue(staticValue string) {
 	x.inner.SetStaticValue(foundation.NSStringStringWithUTF8String(staticValue))
 }
 
+// @method setVariableSubstitution: @abstract Sets a variable substitution-based value. @discussion Value should be using the syntax '$native$' for all substited values.  For example, to form a home directory using the "cn" of an LDAP record, substitution could be done with "/home/$cn$".
+//
 // SetVariableSubstitution calls the underlying SetVariableSubstitution.
 func (x *AttributeMap) SetVariableSubstitution(variableSubstitution string) {
 	x.inner.SetVariableSubstitution(foundation.NSStringStringWithUTF8String(variableSubstitution))

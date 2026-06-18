@@ -49,6 +49,8 @@ func (x *AchievementDescription) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The group identifier for the achievement, if one exists.
+//
 // GroupIdentifier calls the underlying GroupIdentifier.
 func (x *AchievementDescription) GroupIdentifier() string {
 	_r := x.inner.GroupIdentifier()
@@ -58,6 +60,8 @@ func (x *AchievementDescription) GroupIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The title of the achievement.
+//
 // Title calls the underlying Title.
 func (x *AchievementDescription) Title() string {
 	_r := x.inner.Title()
@@ -67,6 +71,8 @@ func (x *AchievementDescription) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The description for an unachieved achievement.
+//
 // AchievedDescription calls the underlying AchievedDescription.
 func (x *AchievementDescription) AchievedDescription() string {
 	_r := x.inner.AchievedDescription()
@@ -76,6 +82,8 @@ func (x *AchievementDescription) AchievedDescription() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The description for an achieved achievement.
+//
 // UnachievedDescription calls the underlying UnachievedDescription.
 func (x *AchievementDescription) UnachievedDescription() string {
 	_r := x.inner.UnachievedDescription()
@@ -85,31 +93,43 @@ func (x *AchievementDescription) UnachievedDescription() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Maximum points available for completing this achievement.
+//
 // MaximumPoints calls the underlying MaximumPoints.
 func (x *AchievementDescription) MaximumPoints() int {
 	return x.inner.MaximumPoints()
 }
 
+// Whether or not the achievement should be listed or displayed if not yet unhidden by the game.
+//
 // IsHidden calls the underlying IsHidden.
 func (x *AchievementDescription) IsHidden() bool {
 	return x.inner.IsHidden()
 }
 
+// Whether or not the achievement will be reported by the game when the user earns it again. This allows the achievement to be used for challenges when the recipient has previously earned it.
+//
 // IsReplayable calls the underlying IsReplayable.
 func (x *AchievementDescription) IsReplayable() bool {
 	return x.inner.IsReplayable()
 }
 
+// If present, the rarity of the achievement expressed as a percentage of players that earned it. Null if not enough data is available to compute it.
+//
 // RarityPercent calls the underlying RarityPercent.
 func (x *AchievementDescription) RarityPercent() *foundation.NSNumber {
 	return x.inner.RarityPercent()
 }
 
+// The release state of the achievement in App Store Connect.
+//
 // ReleaseState calls the underlying ReleaseState.
 func (x *AchievementDescription) ReleaseState() GKReleaseState {
 	return GKReleaseState(x.inner.ReleaseState())
 }
 
+// The identifier of the game activity associated with this achievement, as configured by the developer in App Store Connect.
+//
 // ActivityIdentifier calls the underlying ActivityIdentifier.
 func (x *AchievementDescription) ActivityIdentifier() string {
 	_r := x.inner.ActivityIdentifier()
@@ -119,6 +139,8 @@ func (x *AchievementDescription) ActivityIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The properties when associating this achievement with a game activity, as configured by the developer in App Store Connect.
+//
 // ActivityProperties calls the underlying ActivityProperties.
 func (x *AchievementDescription) ActivityProperties() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
 	return x.inner.ActivityProperties()

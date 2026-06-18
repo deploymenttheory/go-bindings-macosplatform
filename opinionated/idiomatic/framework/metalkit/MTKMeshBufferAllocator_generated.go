@@ -30,6 +30,8 @@ func MeshBufferAllocatorFromID(id objc.ID) *MeshBufferAllocator {
 	return &MeshBufferAllocator{inner: raw.MTKMeshBufferAllocatorFromID(id)}
 }
 
+// @method initWithDevice @abstract Initialize the allocator with a device to be used to create buffers. @discussion The designated initializer for this class.
+//
 // NewMeshBufferAllocatorWithDevice creates a new [MeshBufferAllocator].
 func NewMeshBufferAllocatorWithDevice(device metal.MTLDevice) *MeshBufferAllocator {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTKMeshBufferAllocator")), objc.RegisterName("alloc"))

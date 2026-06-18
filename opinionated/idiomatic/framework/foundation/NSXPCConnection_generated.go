@@ -133,6 +133,8 @@ func (x *XPCConnection) ScheduleSendBarrierBlock(ctx context.Context) error {
 	}
 }
 
+// Sets the code signing requirement for this connection. If the requirement is malformed, an exception is thrown. If new messages do not match the requirement, the connection is invalidated. It is recommended to set this before calling `resume`, as it is an XPC error to call it more than once. See https://developer.apple.com/library/archive/documentation/Security/Conceptual/CodeSigningGuide/RequirementLang/RequirementLang.html for more information on the format.
+//
 // SetCodeSigningRequirement calls the underlying SetCodeSigningRequirement.
 func (x *XPCConnection) SetCodeSigningRequirement(requirement string) {
 	x.inner.SetCodeSigningRequirement(foundation.NSStringStringWithUTF8String(requirement))

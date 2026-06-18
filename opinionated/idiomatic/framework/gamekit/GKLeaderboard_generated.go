@@ -47,10 +47,21 @@ func NewLeaderboardWithPlayerIDs(playerIDs *foundation.NSArray[*foundation.NSStr
 	return &Leaderboard{inner: raw.GKLeaderboardFromID(_id)}
 }
 
+// Specify an array of GKPlayers. For example, the players who are in a match together Defaults to AllTime score, if you want to change the timeScope, set the property before loading the scores. Range and playerScope are not applicable. players may not be nil.
+//
 // NewLeaderboardWithPlayers creates a new [Leaderboard].
-func NewLeaderboardWithPlayers(players *foundation.NSArray[*raw.GKPlayer]) *Leaderboard {
+func NewLeaderboardWithPlayers(players ...PlayerProvider) *Leaderboard {
+	_ptrs := make([]objc.ID, len(players))
+	for _i, _v := range players {
+		_ptrs[_i] = _v.asPlayer().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.GKPlayer]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.GKPlayer](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKLeaderboard")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayers:"), players.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayers:"), _arg0.Ptr())
 	return &Leaderboard{inner: raw.GKLeaderboardFromID(_id)}
 }
 
@@ -66,29 +77,39 @@ func (x *Leaderboard) WithTimeScope(timeScope GKLeaderboardTimeScope) *Leaderboa
 	return x
 }
 
+// Filter on friends. Does not apply to leaderboard initialized with players.
+//
 // WithPlayerScope sets the playerScope property and returns the receiver for chaining.
 func (x *Leaderboard) WithPlayerScope(playerScope GKLeaderboardPlayerScope) *Leaderboard {
 	x.inner.SetPlayerScope(raw.GKLeaderboardPlayerScope(playerScope))
 	return x
 }
 
+// leaderboardID. If nil, fetch the aggregate leaderboard.
+//
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *Leaderboard) WithIdentifier(identifier string) *Leaderboard {
 	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
 	return x
 }
 
+// Leaderboards start at index 1 and the length should be less than 100. Does not apply to leaderboards initialized with players.  Exception will be thrown if developer tries to set an invalid range.
+//
 // WithRange sets the range_ property and returns the receiver for chaining.
 func (x *Leaderboard) WithRange(range_ foundation.NSRange) *Leaderboard {
 	x.inner.SetRange(range_)
 	return x
 }
 
+// Loads the occurrence preceding this occurrence for a recurring leaderboard in which the local player submitted a score. If no previous occurrence is found that the player submitted a score to, then the most recent previous occurrence is returned.
+//
 // LoadPreviousOccurrenceWithCompletionHandler calls the underlying LoadPreviousOccurrenceWithCompletionHandler.
 func (x *Leaderboard) LoadPreviousOccurrenceWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	x.inner.LoadPreviousOccurrenceWithCompletionHandler(completionHandler)
 }
 
+// Instance method to submit a single score to the leaderboard associated with this instance score - earned by the player context - developer supplied metadata associated with the player's score player - the player for whom this score is being submitted
+//
 // SubmitScoreContextPlayer blocks until the operation completes or ctx is cancelled.
 func (x *Leaderboard) SubmitScoreContextPlayer(ctx context.Context, score int, context_ uint, player *raw.GKPlayer) error {
 	_ch := make(chan error, 1)
@@ -107,16 +128,22 @@ func (x *Leaderboard) SubmitScoreContextPlayer(ctx context.Context, score int, c
 	}
 }
 
+// Loads leaderboard entries based on the supplied parameters. playerScope - Friends or Global timeScope - Today, Week, All Time (Only applicable to classic leaderboards) range - Range of ranked entries to return (minimum start index 1, maximum length 100) Upon completion, will return: localPlayerEntry - entry for the local player entries - requested entries matching supplied parameters totalPlayerCount - total player count matching specified scope
+//
 // LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler calls the underlying LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler.
 func (x *Leaderboard) LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler(playerScope GKLeaderboardPlayerScope, timeScope GKLeaderboardTimeScope, range_ foundation.NSRange, completionHandler func(unsafe.Pointer, *foundation.NSArray[*raw.GKLeaderboardEntry], int, unsafe.Pointer)) {
 	x.inner.LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler(raw.GKLeaderboardPlayerScope(playerScope), raw.GKLeaderboardTimeScope(timeScope), range_, completionHandler)
 }
 
+// Loads leaderboard entries for specific players based on the supplied parameters. players - Array of players to load entries for timeScope - Today, Week, All Time (Only applicable to classic leaderboards) Upon completion, will return: localPlayerEntry - entry for the local player entries - requested entries matching supplied parameters
+//
 // LoadEntriesForPlayersTimeScopeCompletionHandler calls the underlying LoadEntriesForPlayersTimeScopeCompletionHandler.
 func (x *Leaderboard) LoadEntriesForPlayersTimeScopeCompletionHandler(players *foundation.NSArray[*raw.GKPlayer], timeScope GKLeaderboardTimeScope, completionHandler func(unsafe.Pointer, *foundation.NSArray[*raw.GKLeaderboardEntry], unsafe.Pointer)) {
 	x.inner.LoadEntriesForPlayersTimeScopeCompletionHandler(players, raw.GKLeaderboardTimeScope(timeScope), completionHandler)
 }
 
+// Localized title
+//
 // Title calls the underlying Title.
 func (x *Leaderboard) Title() string {
 	_r := x.inner.Title()
@@ -126,6 +153,8 @@ func (x *Leaderboard) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// set when leaderboards have been designated a game group; set when loadLeaderboardsWithCompletionHandler has been called for leaderboards that support game groups
+//
 // GroupIdentifier calls the underlying GroupIdentifier.
 func (x *Leaderboard) GroupIdentifier() string {
 	_r := x.inner.GroupIdentifier()
@@ -135,6 +164,8 @@ func (x *Leaderboard) GroupIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Leaderboard ID defined in App Store Connect that this instance is associated with
+//
 // BaseLeaderboardID calls the underlying BaseLeaderboardID.
 func (x *Leaderboard) BaseLeaderboardID() string {
 	_r := x.inner.BaseLeaderboardID()
@@ -144,26 +175,36 @@ func (x *Leaderboard) BaseLeaderboardID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Type of leaderboard
+//
 // Type calls the underlying Type.
 func (x *Leaderboard) Type() GKLeaderboardType {
 	return GKLeaderboardType(x.inner.Type())
 }
 
+// Date and time this instance started accepting score submissions (only applicable to recurring leaderboards)
+//
 // StartDate calls the underlying StartDate.
 func (x *Leaderboard) StartDate() *foundation.NSDate {
 	return x.inner.StartDate()
 }
 
+// Date and time the next instance will start accepting score submissions (only applicable to recurring leaderboards)
+//
 // NextStartDate calls the underlying NextStartDate.
 func (x *Leaderboard) NextStartDate() *foundation.NSDate {
 	return x.inner.NextStartDate()
 }
 
+// Duration from startDate during which this leaderboard instance accepts score submissions (only applicable to recurring leaderboards)
+//
 // Duration calls the underlying Duration.
 func (x *Leaderboard) Duration() float64 {
 	return x.inner.Duration()
 }
 
+// The description of this Leaderboard as configured by the developer in App Store Connect.
+//
 // LeaderboardDescription calls the underlying LeaderboardDescription.
 func (x *Leaderboard) LeaderboardDescription() string {
 	_r := x.inner.LeaderboardDescription()
@@ -173,11 +214,15 @@ func (x *Leaderboard) LeaderboardDescription() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The release state of the leaderboard in App Store Connect.
+//
 // ReleaseState calls the underlying ReleaseState.
 func (x *Leaderboard) ReleaseState() GKReleaseState {
 	return GKReleaseState(x.inner.ReleaseState())
 }
 
+// The identifier of the game activity associated with this leaderboard, as configured by the developer in App Store Connect.
+//
 // ActivityIdentifier calls the underlying ActivityIdentifier.
 func (x *Leaderboard) ActivityIdentifier() string {
 	_r := x.inner.ActivityIdentifier()
@@ -187,16 +232,22 @@ func (x *Leaderboard) ActivityIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The properties when associating this leaderboard with a game activity, as configured by the developer in App Store Connect.
+//
 // ActivityProperties calls the underlying ActivityProperties.
 func (x *Leaderboard) ActivityProperties() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
 	return x.inner.ActivityProperties()
 }
 
+// A Boolean value that indicates whether the current leaderboard isn't visible in Game Center views. You can still submit scores to a hidden leaderboard.
+//
 // IsHidden calls the underlying IsHidden.
 func (x *Leaderboard) IsHidden() bool {
 	return x.inner.IsHidden()
 }
 
+// Load the scores for this leader board asynchronously. Error will be nil on success. Possible reasons for error: 1. Communications problem 2. Unauthenticated player
+//
 // LoadScores blocks until the operation completes or ctx is cancelled.
 func (x *Leaderboard) LoadScores(ctx context.Context) (*foundation.NSArray[*raw.GKScore], error) {
 	type _result struct {
@@ -245,6 +296,8 @@ func (x *Leaderboard) SetTimeScope(timeScope GKLeaderboardTimeScope) {
 	x.inner.SetTimeScope(raw.GKLeaderboardTimeScope(timeScope))
 }
 
+// Filter on friends. Does not apply to leaderboard initialized with players.
+//
 // PlayerScope calls the underlying PlayerScope.
 func (x *Leaderboard) PlayerScope() GKLeaderboardPlayerScope {
 	return GKLeaderboardPlayerScope(x.inner.PlayerScope())
@@ -255,6 +308,8 @@ func (x *Leaderboard) SetPlayerScope(playerScope GKLeaderboardPlayerScope) {
 	x.inner.SetPlayerScope(raw.GKLeaderboardPlayerScope(playerScope))
 }
 
+// leaderboardID. If nil, fetch the aggregate leaderboard.
+//
 // Identifier calls the underlying Identifier.
 func (x *Leaderboard) Identifier() string {
 	_r := x.inner.Identifier()
@@ -269,6 +324,8 @@ func (x *Leaderboard) SetIdentifier(identifier string) {
 	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
 }
 
+// Leaderboards start at index 1 and the length should be less than 100. Does not apply to leaderboards initialized with players.  Exception will be thrown if developer tries to set an invalid range.
+//
 // Range calls the underlying Range.
 func (x *Leaderboard) Range() foundation.NSRange {
 	return x.inner.Range()
@@ -279,6 +336,8 @@ func (x *Leaderboard) SetRange(range_ foundation.NSRange) {
 	x.inner.SetRange(range_)
 }
 
+// Scores are not valid until loadScores: has completed.
+//
 // Scores returns the collection as a Go slice.
 func (x *Leaderboard) Scores() []*Score {
 	arr := x.inner.Scores()
@@ -290,11 +349,15 @@ func (x *Leaderboard) Scores() []*Score {
 	})
 }
 
+// The maxRange which represents the size of the leaderboard is not valid until loadScores: has completed.
+//
 // MaxRange calls the underlying MaxRange.
 func (x *Leaderboard) MaxRange() uint {
 	return x.inner.MaxRange()
 }
 
+// The local player's score
+//
 // LocalPlayerScore calls the underlying LocalPlayerScore.
 func (x *Leaderboard) LocalPlayerScore() *Score {
 	_r := x.inner.LocalPlayerScore()
@@ -304,11 +367,15 @@ func (x *Leaderboard) LocalPlayerScore() *Score {
 	return &Score{inner: _r}
 }
 
+// This property is true if the leaderboard is currently loading
+//
 // IsLoading calls the underlying IsLoading.
 func (x *Leaderboard) IsLoading() bool {
 	return x.inner.IsLoading()
 }
 
+// Asynchronously load the image. Error will be nil on success.
+//
 // LoadImage blocks until the operation completes or ctx is cancelled.
 func (x *Leaderboard) LoadImage(ctx context.Context) (*appkit.NSImage, error) {
 	type _result struct {

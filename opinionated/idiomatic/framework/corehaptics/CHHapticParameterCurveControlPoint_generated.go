@@ -31,6 +31,8 @@ func HapticParameterCurveControlPointFromID(id objc.ID) *HapticParameterCurveCon
 	return &HapticParameterCurveControlPoint{inner: raw.CHHapticParameterCurveControlPointFromID(id)}
 }
 
+// @method initWithRelativeTime:value @abstract Initialize a CHHapticParameterCurveControlPoint with a relative time and value. @param value The value of the associated parameter. @param time The time at which the associated parameter will reach this value, relative to the start time of the parameter curve.
+//
 // NewHapticParameterCurveControlPointWithRelativeTimeValue creates a new [HapticParameterCurveControlPoint].
 func NewHapticParameterCurveControlPointWithRelativeTimeValue(time_ float64, value float32) *HapticParameterCurveControlPoint {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CHHapticParameterCurveControlPoint")), objc.RegisterName("alloc"))

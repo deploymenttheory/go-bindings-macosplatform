@@ -37,6 +37,8 @@ func MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeFromID(id objc
 	return &MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode{inner: raw.MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeWithDeviceEndpointIDQueue creates a new [MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode].
 func NewMTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode")), objc.RegisterName("alloc"))
@@ -44,6 +46,8 @@ func NewMTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeWithDeviceE
 	return &MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode{inner: raw.MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeFromID(_id)}
 }
 
+// Command ChangeToMode This command is used to change device modes. On receipt of this command the device SHALL respond with a ChangeToModeResponse command.
+//
 // ChangeToModeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) ChangeToModeWithParamsCompletion(ctx context.Context, params *raw.MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) (*MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams, error) {
 	type _result struct {

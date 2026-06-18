@@ -45,6 +45,8 @@ func (x *ContactProperty) Contact() *Contact {
 	return &Contact{inner: _r}
 }
 
+// @abstract The key of the contact property, as defined in CNContact.h.
+//
 // Key calls the underlying Key.
 func (x *ContactProperty) Key() string {
 	_r := x.inner.Key()
@@ -54,11 +56,15 @@ func (x *ContactProperty) Key() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The value of the property.
+//
 // Value calls the underlying Value.
 func (x *ContactProperty) Value() objc.ID {
 	return x.inner.Value()
 }
 
+// @abstract The identifier of the labeled value if the property is an array of labeled values, otherwise is nil.
+//
 // Identifier calls the underlying Identifier.
 func (x *ContactProperty) Identifier() string {
 	_r := x.inner.Identifier()
@@ -68,6 +74,8 @@ func (x *ContactProperty) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The label of the labeled value if the property is an array of labeled values, otherwise is nil.
+//
 // Label calls the underlying Label.
 func (x *ContactProperty) Label() string {
 	_r := x.inner.Label()

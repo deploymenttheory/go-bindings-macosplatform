@@ -33,6 +33,8 @@ func MTRBaseClusterFixedLabelFromID(id objc.ID) *MTRBaseClusterFixedLabel {
 	return &MTRBaseClusterFixedLabel{inner: raw.MTRBaseClusterFixedLabelFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterFixedLabelWithDeviceEndpointIDQueue creates a new [MTRBaseClusterFixedLabel].
 func NewMTRBaseClusterFixedLabelWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterFixedLabel {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterFixedLabel")), objc.RegisterName("alloc"))

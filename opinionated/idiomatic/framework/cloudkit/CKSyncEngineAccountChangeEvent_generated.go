@@ -35,11 +35,15 @@ func NewSyncEngineAccountChangeEvent() *SyncEngineAccountChangeEvent {
 	return &SyncEngineAccountChangeEvent{inner: raw.CKSyncEngineAccountChangeEventFromID(_id)}
 }
 
+// The iCloud account's change type.
+//
 // ChangeType calls the underlying ChangeType.
 func (x *SyncEngineAccountChangeEvent) ChangeType() CKSyncEngineAccountChangeType {
 	return CKSyncEngineAccountChangeType(x.inner.ChangeType())
 }
 
+// The previous iCloud account's record identifier. If the user just signed in, this is `nil`. If the user signed out or switched accounts, this is the old account's user record ID.
+//
 // PreviousUser calls the underlying PreviousUser.
 func (x *SyncEngineAccountChangeEvent) PreviousUser() *RecordID {
 	_r := x.inner.PreviousUser()
@@ -49,6 +53,8 @@ func (x *SyncEngineAccountChangeEvent) PreviousUser() *RecordID {
 	return &RecordID{inner: _r}
 }
 
+// The current iCloud account's record identifier. If the user just signed in or switched accounts, this is the new user record ID. If the user signed out, this is `nil`.
+//
 // CurrentUser calls the underlying CurrentUser.
 func (x *SyncEngineAccountChangeEvent) CurrentUser() *RecordID {
 	_r := x.inner.CurrentUser()

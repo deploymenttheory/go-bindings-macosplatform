@@ -37,12 +37,16 @@ func NewThumbnailReply() *ThumbnailReply {
 	return &ThumbnailReply{inner: raw.QLThumbnailReplyFromID(_id)}
 }
 
+// The extensionBadge is a short string identifying the file type used as a badge when producing an icon.
+//
 // WithExtensionBadge sets the extensionBadge property and returns the receiver for chaining.
 func (x *ThumbnailReply) WithExtensionBadge(extensionBadge string) *ThumbnailReply {
 	x.inner.SetExtensionBadge(foundation.NSStringStringWithUTF8String(extensionBadge))
 	return x
 }
 
+// The extensionBadge is a short string identifying the file type used as a badge when producing an icon.
+//
 // ExtensionBadge calls the underlying ExtensionBadge.
 func (x *ThumbnailReply) ExtensionBadge() string {
 	_r := x.inner.ExtensionBadge()

@@ -35,6 +35,8 @@ func NewTokenAuthOperation() *TokenAuthOperation {
 	return &TokenAuthOperation{inner: raw.TKTokenAuthOperationFromID(_id)}
 }
 
+// @discussion Handler triggered by the system in order to let the token finalize the authentication operation. @param error Error details (see TKError.h). @return Finalization status.
+//
 // Finish returns any validation error.
 func (x *TokenAuthOperation) Finish() error {
 	_, err := x.inner.FinishWithError()

@@ -37,11 +37,15 @@ func NewDevice() *Device {
 	return &Device{inner: raw.MLCDeviceFromID(_id)}
 }
 
+// @property   type @abstract   The type specified when the device is created @discussion Recommend that developers use MLCDeviceTypeAny as the device type. This will ensure that MLCompute will select the best device to execute the neural network. If developers want to be able to control device selection, they can select CPU or GPU and for the GPU, they can also select a specific Metal device.
+//
 // Type calls the underlying Type.
 func (x *Device) Type() MLCDeviceType {
 	return MLCDeviceType(x.inner.Type())
 }
 
+// @property   actualDeviceType @abstract   The specific device selected. @discussion This can be CPU, GPU or ANE.  If type is MLCDeviceTypeAny, this property can be used to find out the specific device type that is selected.
+//
 // ActualDeviceType calls the underlying ActualDeviceType.
 func (x *Device) ActualDeviceType() MLCDeviceType {
 	return MLCDeviceType(x.inner.ActualDeviceType())

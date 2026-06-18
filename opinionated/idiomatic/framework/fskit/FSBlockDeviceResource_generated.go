@@ -38,63 +38,87 @@ func NewBlockDeviceResource() *BlockDeviceResource {
 	return &BlockDeviceResource{inner: raw.FSBlockDeviceResourceFromID(_id)}
 }
 
+// Reads data from the resource into a buffer and executes a block afterwards. For the read to succeed, requests must conform to any transfer requirements of the underlying resource. Disk drives typically require sector (`physicalBlockSize`) addressed operations of one or more sector-aligned offsets. - Parameters: - buffer: A buffer to receive the data. - offset: The offset into the resource from which to start reading. - length: A maximum number of bytes to read. The completion handler receives a parameter with the actual number of bytes read. - completionHandler: A block that executes after the read operation completes. If successful, the first parameter contains the number of bytes actually read. In the case of an error, the second parameter contains a non-`nil` error. This value is `EFAULT` if `buffer` is `NULL`, or `errno` if reading from the resource failed.
+//
 // ReadIntoStartingAtLengthCompletionHandler calls the underlying ReadIntoStartingAtLengthCompletionHandler.
 func (x *BlockDeviceResource) ReadIntoStartingAtLengthCompletionHandler(buffer unsafe.Pointer, offset int64, length uint, completionHandler func(uint, unsafe.Pointer)) {
 	x.inner.ReadIntoStartingAtLengthCompletionHandler(buffer, offset, length, completionHandler)
 }
 
+// Synchronously reads data from the resource into a buffer. This is a synchronous version of “readInto:startingAt:length:completionHandler:“. > Note: In some cases, this method performs a partial read. In this case, the return value is shorter than the requested length, and the `error` is set to `nil`. - Parameters: - buffer: A buffer to receive the data. - offset: The offset into the resource from which to start reading. - length: A maximum number of bytes to read. The method's return value contains the actual number of bytes read. - error: On return, any error encountered while reading data, or `nil` if no error occurred. - Returns: The actual number of bytes read.
+//
 // ReadIntoStartingAtLengthError calls the underlying ReadIntoStartingAtLengthError.
 func (x *BlockDeviceResource) ReadIntoStartingAtLengthError(buffer unsafe.Pointer, offset int64, length uint) (uint, error) {
 	return x.inner.ReadIntoStartingAtLengthError(buffer, offset, length)
 }
 
+// Writes data from from a buffer to the resource and executes a block afterwards. For the write to succeed, requests must conform to any transfer requirements of the underlying resource. Disk drives typically require sector (`physicalBlockSize`) addressed operations of one or more sector-aligned offsets. - Parameters: - buffer: A buffer to provide the data. - offset: The offset into the resource from which to start writing. - length: A maximum number of bytes to write. The completion handler receives a parameter with the actual number of bytes write. - completionHandler: A block that executes after the write operation completes. If successful, the first parameter contains the number of bytes actually written. In the case of an error, the second parameter contains a non-`nil` error. This value is `EFAULT` if `buffer` is `NULL`, or `errno` if writing to the resource failed.
+//
 // WriteFromStartingAtLengthCompletionHandler calls the underlying WriteFromStartingAtLengthCompletionHandler.
 func (x *BlockDeviceResource) WriteFromStartingAtLengthCompletionHandler(buffer unsafe.Pointer, offset int64, length uint, completionHandler func(uint, unsafe.Pointer)) {
 	x.inner.WriteFromStartingAtLengthCompletionHandler(buffer, offset, length, completionHandler)
 }
 
+// Synchronously writes data from from a buffer to the resource and executes a block afterwards. This is a synchronous version of “writeFrom:startingAt:length:completionHandler:“. > Note: In some cases, this method performs a partial write. In this case, the return value is shorter than the requested length, and the `error` is set to `nil`. - Parameters: - buffer: A buffer to provide the data. - offset: The offset into the resource from which to start writing. - length: A maximum number of bytes to write. The completion handler receives a parameter with the actual number of bytes write. - error: On return, any error encountered while writing data, or `nil` if no error occurred. - Returns: The actual number of bytes written.
+//
 // WriteFromStartingAtLengthError calls the underlying WriteFromStartingAtLengthError.
 func (x *BlockDeviceResource) WriteFromStartingAtLengthError(buffer unsafe.Pointer, offset int64, length uint) (uint, error) {
 	return x.inner.WriteFromStartingAtLengthError(buffer, offset, length)
 }
 
+// Synchronously reads file system metadata from the resource into a buffer. This method provides access to the Kernel Buffer Cache, which is the primary system cache for file system metadata. Unlike equivalent kernel APIs, this method doesn't hold any kernel-level claim to the underlying buffers. For the read to succeed, requests must conform to any transfer requirements of the underlying resource. Disk drives typically require sector (`physicalBlockSize`) addressed operations of one or more sector-aligned offsets. This method doesn't support partial reading of metadata. - Parameters: - buffer: A buffer to receive the data. - offset: The offset into the resource from which to start reading. - length: The number of bytes to read. - error: On return, any error encountered while reading data, or `nil` if no error occurred. - Returns: A Boolean value indicating whether the metadata read succeeded.
+//
 // MetadataReadIntoStartingAtLengthError calls the underlying MetadataReadIntoStartingAtLengthError.
 func (x *BlockDeviceResource) MetadataReadIntoStartingAtLengthError(buffer unsafe.Pointer, offset int64, length uint) (bool, error) {
 	return x.inner.MetadataReadIntoStartingAtLengthError(buffer, offset, length)
 }
 
+// Synchronously writes file system metadata from a buffer to the resource. This method provides access to the Kernel Buffer Cache, which is the primary system cache for file system metadata. Unlike equivalent kernel APIs, this method doesn't hold any kernel-level claim to the underlying buffers. For the write to succeed, requests must conform to any transfer requirements of the underlying resource. Disk drives typically require sector (`physicalBlockSize`) addressed operations of one or more sector-aligned offsets. This method doesn't support partial writing of metadata. - Parameters: - buffer: A buffer to provide the data. - offset: The offset into the resource from which to start writing. - length: The number of bytes to writing. - error: On return, any error encountered while writing data, or `nil` if no error occurred. - Returns: A Boolean value indicating whether the metadata write succeeded.
+//
 // MetadataWriteFromStartingAtLengthError calls the underlying MetadataWriteFromStartingAtLengthError.
 func (x *BlockDeviceResource) MetadataWriteFromStartingAtLengthError(buffer unsafe.Pointer, offset int64, length uint) (bool, error) {
 	return x.inner.MetadataWriteFromStartingAtLengthError(buffer, offset, length)
 }
 
+// Writes file system metadata from a buffer to a cache, prior to flushing it to the resource. This method provides access to the Kernel Buffer Cache, which is the primary system cache for file system metadata. Unlike equivalent kernel APIs, this method doesn't hold any kernel-level claim to the underlying buffers. This method is equivalent to “metadataWriteFrom:startingAt:length:error:“, except that it writes data to the resource's buffer cache instead of writing to disk immediately. To ensure writing data to disk, the client must flush the metadata by calling “metadataFlushWithError:“ or “asynchronousMetadataFlushWithError:“. Delayed writes offer two significant advantages: - Delayed writes are more performant, since the file system can avoid waiting for the actual write, reducing I/O latency. - When writing to a specific range repeatedly, delayed writes allow the file system to flush data to the disk only when necessary. This reduces disk usage by eliminating unnecessary writes. For the write to succeed, requests must conform to any transfer requirements of the underlying resource. Disk drives typically require sector (`physicalBlockSize`) addressed operations of one or more sector-aligned offsets. This method doesn't support partial writing of metadata. - Parameters: - buffer: A buffer to provide the data. - offset: The offset into the resource from which to start writing. - length: The number of bytes to writing. - error: On return, any error encountered while writing data, or `nil` if no error occurred. - Returns: A Boolean value indicating whether the metadata write succeeded.
+//
 // DelayedMetadataWriteFromStartingAtLengthError calls the underlying DelayedMetadataWriteFromStartingAtLengthError.
 func (x *BlockDeviceResource) DelayedMetadataWriteFromStartingAtLengthError(buffer unsafe.Pointer, offset int64, length uint) (bool, error) {
 	return x.inner.DelayedMetadataWriteFromStartingAtLengthError(buffer, offset, length)
 }
 
+// Synchronously flushes the resource's buffer cache. This method flushes data previously written with “delayedMetadataWriteFrom:startingAt:length:error:“ to the resource. - Parameter error: On return, any error encountered while writing data, or `nil` if no error occurred. - Returns: A Boolean value indicating whether the metadata flush succeeded.
+//
 // MetadataFlush returns any validation error.
 func (x *BlockDeviceResource) MetadataFlush() error {
 	_, err := x.inner.MetadataFlushWithError()
 	return err
 }
 
+// Asynchronously flushes the resource's buffer cache. This method schedules a flush of data previously written with “delayedMetadataWriteFrom:startingAt:length:error:“ to the resource and returns immediately without blocking. This method doesn't wait to check the flush's status. If an error prevents the flush from being scheduled, the error is indicated by the in-out `error` parameter. - Parameter error: On return, any error encountered while writing data, or `nil` if no error occurred. - Returns: A Boolean value indicating whether scheduling the metadata flush succeeded.
+//
 // AsynchronousMetadataFlush returns any validation error.
 func (x *BlockDeviceResource) AsynchronousMetadataFlush() error {
 	_, err := x.inner.AsynchronousMetadataFlushWithError()
 	return err
 }
 
+// Clears the given ranges within the buffer cache. This method clears the specified ranges in the resource’s buffer cache by writing zeroes into them. - Parameters: - rangesToClear: The metadata ranges to clear. - withDelayedWrites: A Boolean value that determines whether to perform the clear operation with delayed writes. The delay works in the same manner as “delayedMetadataWriteFrom:startingAt:length:error:“. When using delayed writes, the client can flush the metadata with “metadataFlushWithError:“ or “asynchronousMetadataFlushWithError:“. The system also flushes stale data in the buffer cache periodically. - error: On return, any error encountered while writing data, or `nil` if no error occurred. This value is `EINVAL` if `rangesToClear` is invalid. - Returns: A Boolean value indicating whether clearing the metadata succeeded.
+//
 // MetadataClearWithDelayedWritesError calls the underlying MetadataClearWithDelayedWritesError.
 func (x *BlockDeviceResource) MetadataClearWithDelayedWritesError(rangesToClear *foundation.NSArray[*raw.FSMetadataRange], withDelayedWrites bool) (bool, error) {
 	return x.inner.MetadataClearWithDelayedWritesError(rangesToClear, withDelayedWrites)
 }
 
+// Synchronously purges the given ranges from the buffer cache. This method removes the given ranges from the resource's buffer cache. This process drops any dirty data in the cache, preventing the data from reaching the device. - Parameters: - rangesToPurge: The metadata ranges to purge. - error: On return, any error encountered while writing data, or `nil` if no error occurred. This value is `EINVAL` if `rangesToPurge` is invalid. - Returns: A Boolean value indicating whether purging the metadata succeeded.
+//
 // MetadataPurgeError calls the underlying MetadataPurgeError.
 func (x *BlockDeviceResource) MetadataPurgeError(rangesToPurge *foundation.NSArray[*raw.FSMetadataRange]) (bool, error) {
 	return x.inner.MetadataPurgeError(rangesToPurge)
 }
 
+// The device name of the resource.
+//
 // BSDName calls the underlying BSDName.
 func (x *BlockDeviceResource) BSDName() string {
 	_r := x.inner.BSDName()
@@ -109,16 +133,22 @@ func (x *BlockDeviceResource) IsWritable() bool {
 	return x.inner.IsWritable()
 }
 
+// The logical block size, the size of data blocks used by the file system. This is equivalent to the `DKIOCGETBLOCKSIZE` device parameter.
+//
 // BlockSize calls the underlying BlockSize.
 func (x *BlockDeviceResource) BlockSize() uint64 {
 	return x.inner.BlockSize()
 }
 
+// The block count on this resource.
+//
 // BlockCount calls the underlying BlockCount.
 func (x *BlockDeviceResource) BlockCount() uint64 {
 	return x.inner.BlockCount()
 }
 
+// The sector size of the device. This is equivalent to the `DKIOCGETPHYSICALBLOCKSIZE` device parameter.
+//
 // PhysicalBlockSize calls the underlying PhysicalBlockSize.
 func (x *BlockDeviceResource) PhysicalBlockSize() uint64 {
 	return x.inner.PhysicalBlockSize()

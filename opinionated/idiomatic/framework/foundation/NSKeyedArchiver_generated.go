@@ -36,6 +36,8 @@ func NewKeyedArchiver() *KeyedArchiver {
 	return &KeyedArchiver{inner: raw.NSKeyedArchiverFromID(_id)}
 }
 
+// Initializes the receiver for encoding an archive, optionally disabling secure coding. If \c NSSecureCoding cannot be used, \c requiresSecureCoding may be turned off here; for improved security, however, \c requiresSecureCoding should be left enabled whenever possible. \c requiresSecureCoding ensures that all encoded objects conform to \c NSSecureCoding, preventing the possibility of encoding objects which cannot be decoded later. To produce archives whose structure matches those previously encoded using \c +archivedDataWithRootObject, encode the top-level object in your archive for the \c NSKeyedArchiveRootObjectKey.
+//
 // NewKeyedArchiverRequiringSecureCoding creates a new [KeyedArchiver].
 func NewKeyedArchiverRequiringSecureCoding(requiresSecureCoding bool) *KeyedArchiver {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSKeyedArchiver")), objc.RegisterName("alloc"))
@@ -113,6 +115,8 @@ func (x *KeyedArchiver) SetOutputFormat(outputFormat NSPropertyListFormat) {
 	x.inner.SetOutputFormat(raw.NSPropertyListFormat(outputFormat))
 }
 
+// If encoding has not yet finished, then invoking this property will call finishEncoding and return the data. If you initialized the keyed archiver with a specific mutable data instance, then it will be returned from this property after finishEncoding is called.
+//
 // EncodedData calls the underlying EncodedData.
 func (x *KeyedArchiver) EncodedData() *Data {
 	_r := x.inner.EncodedData()

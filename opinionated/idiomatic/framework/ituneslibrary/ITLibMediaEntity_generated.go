@@ -36,21 +36,29 @@ func NewLibMediaEntity() *LibMediaEntity {
 	return &LibMediaEntity{inner: raw.ITLibMediaEntityFromID(_id)}
 }
 
+// @abstract Gets the value for a specified media property key. @discusion The media property keys you can use with this property are listed in this document and in Media Item Property Keys and Playlist Property Keys. @param property The media property key that you want the corresponding value of. @return The value for the media property key.
+//
 // ValueForProperty calls the underlying ValueForProperty.
 func (x *LibMediaEntity) ValueForProperty(property string) objc.ID {
 	return x.inner.ValueForProperty(foundation.NSStringStringWithUTF8String(property))
 }
 
+// @abstract Executes a provided block with the fetched values for the given item properties. @discussion Use this method to get property values in a batch fashion. In some cases, enumerating over a set of property keys can be more efficient than fetching each individual property with valueForProperty:. The media property keys you can use with this property are listed in this document and in Media Item Property Keys and Playlist Property Keys. @param properties A set of keys for the properties that will be enumerated, or nil to enumerate all properties. @param block A block object that executes for each property in the properties set.
+//
 // EnumerateValuesForPropertiesUsing calls the underlying EnumerateValuesForPropertiesUsing.
 func (x *LibMediaEntity) EnumerateValuesForPropertiesUsing(properties *foundation.NSSet[*foundation.NSString], block func(*foundation.NSString, objc.ID, *bool)) {
 	x.inner.EnumerateValuesForPropertiesUsing(properties, block)
 }
 
+// @abstract Executes a provided block with the fetched values for all properties in the entity except for the provided set. @discussion Use this method to get property values in a batch fashion. In some cases, enumerating over a set of property keys can be more efficient than fetching each individual property with valueForProperty:. The media property keys you can use with this property are listed in this document and in Media Item Property Keys and Playlist Property Keys. @param properties A set of property keys that should NOT be enumerated, or nil to enumerate all properties. @param block A block object that executes for each property except for the ones in the properties set.
+//
 // EnumerateValuesExceptForPropertiesUsing calls the underlying EnumerateValuesExceptForPropertiesUsing.
 func (x *LibMediaEntity) EnumerateValuesExceptForPropertiesUsing(properties *foundation.NSSet[*foundation.NSString], block func(*foundation.NSString, objc.ID, *bool)) {
 	x.inner.EnumerateValuesExceptForPropertiesUsing(properties, block)
 }
 
+// @abstract The unique identifier of this media entity.
+//
 // PersistentID calls the underlying PersistentID.
 func (x *LibMediaEntity) PersistentID() *foundation.NSNumber {
 	return x.inner.PersistentID()

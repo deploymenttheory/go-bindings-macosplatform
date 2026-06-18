@@ -42,6 +42,8 @@ func (x *TemporaryImage) WithReadCount(readCount uint) *TemporaryImage {
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *TemporaryImage) WithLabel(label string) *TemporaryImage {
 	x.inner.MPSImage.SetLabel(foundation.NSStringStringWithUTF8String(label))

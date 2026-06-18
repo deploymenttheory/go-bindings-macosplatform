@@ -37,11 +37,15 @@ func NewExternalStorageDevice() *ExternalStorageDevice {
 	return &ExternalStorageDevice{inner: raw.AVExternalStorageDeviceFromID(_id)}
 }
 
+// @method nextAvailableURLsWithPathExtensions:error: @abstract Next available security-scoped, DCF compliant URL array with different path extensions. @param extensionArray An array of path extensions for the next available URL requested. @param outError An out parameter with error information indicating why the URL could not be provided. If this method is successful, error will be nil. @result An array of DCF compliant security-scoped URL with all the path extensions requested. @discussion Configures the folder structure (create a DCIM folder if there isn't one already) on the external storage device to provide the next available unique DCF compliant security-scoped URL array with different path extensions. Security-scoped URL requires the use of startAccessingSecurityScopedResource, and stopAccessingSecurityScopedResource for access. [nextAvailableURL startAccessingSecurityScopedResource]; . . . // your code to capture image / video . . . [nextAvailableURL stopAccessingSecurityScopedResource]; Use the +requestAccessWithCompletionHandler: method to request access to external storage device before getting the next available URL array else an error will be thrown.
+//
 // NextAvailableURLsWithPathExtensionsError calls the underlying NextAvailableURLsWithPathExtensionsError.
 func (x *ExternalStorageDevice) NextAvailableURLsWithPathExtensionsError(extensionArray *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*foundation.NSURL], error) {
 	return x.inner.NextAvailableURLsWithPathExtensionsError(extensionArray)
 }
 
+// @property displayName @abstract Display name of the external storage device. @discussion This property can be used for displaying the name of an external storage device in a user interface. Will return nil if we fail to extract information from external storage device.
+//
 // DisplayName calls the underlying DisplayName.
 func (x *ExternalStorageDevice) DisplayName() string {
 	_r := x.inner.DisplayName()
@@ -51,26 +55,36 @@ func (x *ExternalStorageDevice) DisplayName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property freeSize @abstract Current free size in bytes. @discussion This property represents the free size available on the external storage device. Will return -1 if we fail to extract information from external storage device.
+//
 // FreeSize calls the underlying FreeSize.
 func (x *ExternalStorageDevice) FreeSize() int {
 	return x.inner.FreeSize()
 }
 
+// @property totalSize @abstract Total storage size in bytes. @discussion This property represents the total storage size available on the external storage device. Will return -1 if we fail to extract information from external storage device.
+//
 // TotalSize calls the underlying TotalSize.
 func (x *ExternalStorageDevice) TotalSize() int {
 	return x.inner.TotalSize()
 }
 
+// @property connected @abstract Indicates whether the external storage device is connected and available to the system. @discussion The property gives the current connection status of the external storage device.
+//
 // IsConnected calls the underlying IsConnected.
 func (x *ExternalStorageDevice) IsConnected() bool {
 	return x.inner.IsConnected()
 }
 
+// @property uuid @abstract A unique identifier for external storage device. @discussion This property can be used to select a specific external storage device with ImageCapture framework APIs to read media assets. Will return nil if we fail to extract information from external storage device. For example the string value of this property will match the value from [ICDevice UUIDString].
+//
 // Uuid calls the underlying Uuid.
 func (x *ExternalStorageDevice) Uuid() *foundation.NSUUID {
 	return x.inner.Uuid()
 }
 
+// @property notRecommendedForCaptureUse @abstract Indicates whether the external storage device is not recommended for capture use. @discussion This property is used to let the client know if the external storage device is not suitable for camera capture.
+//
 // IsNotRecommendedForCaptureUse calls the underlying IsNotRecommendedForCaptureUse.
 func (x *ExternalStorageDevice) IsNotRecommendedForCaptureUse() bool {
 	return x.inner.IsNotRecommendedForCaptureUse()

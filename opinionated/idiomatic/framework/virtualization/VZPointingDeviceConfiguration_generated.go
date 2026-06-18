@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class for a pointing device configuration.
+//
 // PointingDeviceConfiguration wraps [raw.VZPointingDeviceConfiguration] with a fluent Go API.
 type PointingDeviceConfiguration struct {
 	inner *raw.VZPointingDeviceConfiguration

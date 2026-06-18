@@ -38,24 +38,32 @@ func NewObject() *Object {
 	return &Object{inner: raw.MDLObjectFromID(_id)}
 }
 
+// @property parent @abstract Parent object. Nil if no parent. @discussion Set to nil when you remove this from an object container inside the parent object.
+//
 // WithParent sets the parent property and returns the receiver for chaining.
 func (x *Object) WithParent(parent ObjectProvider) *Object {
 	x.inner.SetParent(parent.asObject())
 	return x
 }
 
+// @property instance @abstract Instance object @discussion nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
+//
 // WithInstance sets the instance property and returns the receiver for chaining.
 func (x *Object) WithInstance(instance ObjectProvider) *Object {
 	x.inner.SetInstance(instance.asObject())
 	return x
 }
 
+// @property transform @abstract Short hand property for the MDLTransformComponent. @discussion The default value is nil @see MDLTransformComponent
+//
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *Object) WithTransform(transform raw.MDLTransformComponent) *Object {
 	x.inner.SetTransform(transform)
 	return x
 }
 
+// @property children @abstract Short hand property for the MDLObjectContainerComponent. @discussion The default value is an empty MDLObjectContainer @see MDLObjectContainerComponent
+//
 // WithChildren sets the children property and returns the receiver for chaining.
 func (x *Object) WithChildren(children raw.MDLObjectContainerComponent) *Object {
 	x.inner.SetChildren(children)
@@ -68,26 +76,36 @@ func (x *Object) WithHidden(hidden bool) *Object {
 	return x
 }
 
+// @method setComponent:forProtocol: @abstract Extensible component support that allows user of ModelIO to customize MDLObjects to fit their format and workflow.
+//
 // SetComponentForProtocol calls the underlying SetComponentForProtocol.
 func (x *Object) SetComponentForProtocol(component raw.MDLComponent, protocol unsafe.Pointer) {
 	x.inner.SetComponentForProtocol(component, protocol)
 }
 
+// @method componentConformingToProtocol: @abstract Extensible component support that allows user of ModelIO to customize MDLObjects to fit their format and workflow.
+//
 // ComponentConformingToProtocol calls the underlying ComponentConformingToProtocol.
 func (x *Object) ComponentConformingToProtocol(protocol unsafe.Pointer) raw.MDLComponent {
 	return x.inner.ComponentConformingToProtocol(protocol)
 }
 
+// @method objectForKeyedSubscript: @abstract Allows shorthand [key] syntax for componentConformingToProtocol:. @param key The protocol that the component conforms to. @see componentConformingToProtocol:
+//
 // ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
 func (x *Object) ObjectForKeyedSubscript(key unsafe.Pointer) raw.MDLComponent {
 	return x.inner.ObjectForKeyedSubscript(key)
 }
 
+// @method setObject:forKeyedSubscript: @abstract Allows shorthand [key] syntax for setComponent:forProtocol:. @param key The protocol that the component conforms to. @see setComponent:forProtocol:
+//
 // SetObjectForKeyedSubscript calls the underlying SetObjectForKeyedSubscript.
 func (x *Object) SetObjectForKeyedSubscript(obj raw.MDLComponent, key unsafe.Pointer) {
 	x.inner.SetObjectForKeyedSubscript(obj, key)
 }
 
+// @abstract Return the object at the specified path, or nil if none exists there
+//
 // ObjectAtPath calls the underlying ObjectAtPath.
 func (x *Object) ObjectAtPath(path string) *Object {
 	_r := x.inner.ObjectAtPath(foundation.NSStringStringWithUTF8String(path))
@@ -102,21 +120,29 @@ func (x *Object) EnumerateChildObjectsOfClassRootUsingBlockStopPointer(objectCla
 	x.inner.EnumerateChildObjectsOfClassRootUsingBlockStopPointer(objectClass, root, block, stopPointer)
 }
 
+// @method addChild: @abstract Short hand for adding a child to the current container component and setting the parent to this object. @discussion  It will create a default container if none exists. If children are explicitly disallowed for an object, then add a container component that throws on addition. @see MDLObjectContainer
+//
 // AddChild calls the underlying AddChild.
 func (x *Object) AddChild(child *raw.MDLObject) {
 	x.inner.AddChild(child)
 }
 
+// @method boundingBoxAtTime: @abstract Bounds ob object at the specified time
+//
 // BoundingBoxAtTime calls the underlying BoundingBoxAtTime.
 func (x *Object) BoundingBoxAtTime(time_ float64) raw.MDLAxisAlignedBoundingBox {
 	return x.inner.BoundingBoxAtTime(time_)
 }
 
+// @property components @abstract Allows applications to introspect the components on the objects.
+//
 // Components calls the underlying Components.
 func (x *Object) Components() *foundation.NSArray[raw.MDLComponent] {
 	return x.inner.Components()
 }
 
+// @property parent @abstract Parent object. Nil if no parent. @discussion Set to nil when you remove this from an object container inside the parent object.
+//
 // Parent calls the underlying Parent.
 func (x *Object) Parent() *Object {
 	_r := x.inner.Parent()
@@ -131,6 +157,8 @@ func (x *Object) SetParent(parent *raw.MDLObject) {
 	x.inner.SetParent(parent)
 }
 
+// @property instance @abstract Instance object @discussion nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
+//
 // Instance calls the underlying Instance.
 func (x *Object) Instance() *Object {
 	_r := x.inner.Instance()
@@ -145,6 +173,8 @@ func (x *Object) SetInstance(instance *raw.MDLObject) {
 	x.inner.SetInstance(instance)
 }
 
+// @property path @abstract a string representing a path to the object @discussion a path is of the form /path/to/object where the path is formed by concatenating the names of the objects up the parent chain. Requesting a path will force any unnamed objects to became uniquely named. Any characters outside of [A-Z][a-z][0-9][:-_.] will be forced to underscore.
+//
 // Path calls the underlying Path.
 func (x *Object) Path() string {
 	_r := x.inner.Path()
@@ -154,6 +184,8 @@ func (x *Object) Path() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property transform @abstract Short hand property for the MDLTransformComponent. @discussion The default value is nil @see MDLTransformComponent
+//
 // Transform calls the underlying Transform.
 func (x *Object) Transform() raw.MDLTransformComponent {
 	return x.inner.Transform()
@@ -164,6 +196,8 @@ func (x *Object) SetTransform(transform raw.MDLTransformComponent) {
 	x.inner.SetTransform(transform)
 }
 
+// @property children @abstract Short hand property for the MDLObjectContainerComponent. @discussion The default value is an empty MDLObjectContainer @see MDLObjectContainerComponent
+//
 // Children calls the underlying Children.
 func (x *Object) Children() raw.MDLObjectContainerComponent {
 	return x.inner.Children()

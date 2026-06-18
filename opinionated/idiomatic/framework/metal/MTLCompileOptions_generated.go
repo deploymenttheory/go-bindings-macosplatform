@@ -9,6 +9,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CompileOptions wraps [raw.MTLCompileOptions] with a fluent Go API.
@@ -37,90 +38,120 @@ func NewCompileOptions() *CompileOptions {
 	return &CompileOptions{inner: raw.MTLCompileOptionsFromID(_id)}
 }
 
+// @property preprocessorNames @abstract List of preprocessor macros to consider to when compiling this program. Specified as key value pairs, using a NSDictionary. The keys must be NSString objects and values can be either NSString or NSNumber objects. @discussion The default value is nil.
+//
 // WithPreprocessorMacros sets the preprocessorMacros property and returns the receiver for chaining.
 func (x *CompileOptions) WithPreprocessorMacros(preprocessorMacros *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) *CompileOptions {
 	x.inner.SetPreprocessorMacros(preprocessorMacros)
 	return x
 }
 
+// @property fastMathEnabled @abstract If YES, enables the compiler to perform optimizations for floating-point arithmetic that may violate the IEEE 754 standard. It also enables the high precision variant of math functions for single precision floating-point scalar and vector types. fastMathEnabled defaults to YES.
+//
 // WithFastMathEnabled sets the fastMathEnabled property and returns the receiver for chaining.
 func (x *CompileOptions) WithFastMathEnabled(fastMathEnabled bool) *CompileOptions {
 	x.inner.SetFastMathEnabled(fastMathEnabled)
 	return x
 }
 
+// @property mathMode @abstract Sets the floating-point arithmetic optimizations. Default depends on the language standard version.
+//
 // WithMathMode sets the mathMode property and returns the receiver for chaining.
 func (x *CompileOptions) WithMathMode(mathMode MTLMathMode) *CompileOptions {
 	x.inner.SetMathMode(raw.MTLMathMode(mathMode))
 	return x
 }
 
+// @property mathFloatingPointFunctions @abstract Sets the default math functions for single precision floating-point. Default is `MTLMathFloatingPointFunctionsFast`.
+//
 // WithMathFloatingPointFunctions sets the mathFloatingPointFunctions property and returns the receiver for chaining.
 func (x *CompileOptions) WithMathFloatingPointFunctions(mathFloatingPointFunctions MTLMathFloatingPointFunctions) *CompileOptions {
 	x.inner.SetMathFloatingPointFunctions(raw.MTLMathFloatingPointFunctions(mathFloatingPointFunctions))
 	return x
 }
 
+// @property languageVersion @abstract set the metal language version used to interpret the source.
+//
 // WithLanguageVersion sets the languageVersion property and returns the receiver for chaining.
 func (x *CompileOptions) WithLanguageVersion(languageVersion MTLLanguageVersion) *CompileOptions {
 	x.inner.SetLanguageVersion(raw.MTLLanguageVersion(languageVersion))
 	return x
 }
 
+// @property type @abstract Which type the library should be compiled as. The default value is MTLLibraryTypeExecutable. @discussion MTLLibraryTypeExecutable is suitable to build a library of "kernel", "vertex" and "fragment" qualified functions. MTLLibraryType is suitable when the compilation result will instead be used to instantiate a MTLDynamicLibrary. MTLDynamicLibrary contains no qualified functions, but it's unqualified functions and variables can be used as an external dependency for compiling other libraries.
+//
 // WithLibraryType sets the libraryType property and returns the receiver for chaining.
 func (x *CompileOptions) WithLibraryType(libraryType MTLLibraryType) *CompileOptions {
 	x.inner.SetLibraryType(raw.MTLLibraryType(libraryType))
 	return x
 }
 
+// @property installName @abstract The install name of this dynamic library. @discussion The install name is used when a pipeline state is created that depends, directly or indirectly, on a dynamic library. The installName is embedded into any other MTLLibrary that links against the compilation result. This property should be set such that the dynamic library can be found in the file system at the time a pipeline state is created. Specify one of: - an absolute path to a file from which the dynamic library can be loaded, or - a path relative to \@executable_path, where \@executable_path is substituted with the directory name from which the MTLLibrary containing the MTLFunction entrypoint used to create the pipeline state is loaded, or - a path relative to \@loader_path, where \@loader_path is substituted with the directory name from which the MTLLibrary with the reference to this installName embedded is loaded. The first is appropriate for MTLDynamicLibrary written to the file-system using its serializeToURL:error: method on the current device. The others are appropriate when the MTLDynamicLibrary is installed as part of a bundle or app, where the absolute path is not known. This property is ignored when the type property is not set to MTLLibraryTypeDynamic. This propery should not be null if the property type is set to MTLLibraryTypeDynamic: the compilation will fail in that scenario.
+//
 // WithInstallName sets the installName property and returns the receiver for chaining.
 func (x *CompileOptions) WithInstallName(installName string) *CompileOptions {
 	x.inner.SetInstallName(foundation.NSStringStringWithUTF8String(installName))
 	return x
 }
 
+// @property preserveInvariance @abstract If YES,  set the compiler to compile shaders to preserve invariance.  The default is false.
+//
 // WithPreserveInvariance sets the preserveInvariance property and returns the receiver for chaining.
 func (x *CompileOptions) WithPreserveInvariance(preserveInvariance bool) *CompileOptions {
 	x.inner.SetPreserveInvariance(preserveInvariance)
 	return x
 }
 
+// @property optimizationLevel @abstract Sets the compiler optimization level.
+//
 // WithOptimizationLevel sets the optimizationLevel property and returns the receiver for chaining.
 func (x *CompileOptions) WithOptimizationLevel(optimizationLevel MTLLibraryOptimizationLevel) *CompileOptions {
 	x.inner.SetOptimizationLevel(raw.MTLLibraryOptimizationLevel(optimizationLevel))
 	return x
 }
 
+// @property @abstract Adds a compiler command to force the default visibility of symbols to be hidden
+//
 // WithCompileSymbolVisibility sets the compileSymbolVisibility property and returns the receiver for chaining.
 func (x *CompileOptions) WithCompileSymbolVisibility(compileSymbolVisibility MTLCompileSymbolVisibility) *CompileOptions {
 	x.inner.SetCompileSymbolVisibility(raw.MTLCompileSymbolVisibility(compileSymbolVisibility))
 	return x
 }
 
+// @property allowReferencingUndefinedSymbols @abstract Adds a compiler command to allow the reference of undefined symbols
+//
 // WithAllowReferencingUndefinedSymbols sets the allowReferencingUndefinedSymbols property and returns the receiver for chaining.
 func (x *CompileOptions) WithAllowReferencingUndefinedSymbols(allowReferencingUndefinedSymbols bool) *CompileOptions {
 	x.inner.SetAllowReferencingUndefinedSymbols(allowReferencingUndefinedSymbols)
 	return x
 }
 
+// @property maxTotalThreadsPerThreadgroup @abstract Adds a compiler command to specify the total threads per threadgroup
+//
 // WithMaxTotalThreadsPerThreadgroup sets the maxTotalThreadsPerThreadgroup property and returns the receiver for chaining.
 func (x *CompileOptions) WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) *CompileOptions {
 	x.inner.SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup)
 	return x
 }
 
+// @property requiredThreadsPerThreadgroup @abstract Sets the required threads-per-threadgroup during dispatches. The `threadsPerThreadgroup` argument of any dispatch must match this value if it is set. Setting this to a size of 0 in every dimension disables this property
+//
 // WithRequiredThreadsPerThreadgroup sets the requiredThreadsPerThreadgroup property and returns the receiver for chaining.
 func (x *CompileOptions) WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) *CompileOptions {
 	x.inner.SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup)
 	return x
 }
 
+// @property enableLogging @abstract If YES,  set the compiler to enable any logging in the shader. The default is false.
+//
 // WithEnableLogging sets the enableLogging property and returns the receiver for chaining.
 func (x *CompileOptions) WithEnableLogging(enableLogging bool) *CompileOptions {
 	x.inner.SetEnableLogging(enableLogging)
 	return x
 }
 
+// @property preprocessorNames @abstract List of preprocessor macros to consider to when compiling this program. Specified as key value pairs, using a NSDictionary. The keys must be NSString objects and values can be either NSString or NSNumber objects. @discussion The default value is nil.
+//
 // PreprocessorMacros calls the underlying PreprocessorMacros.
 func (x *CompileOptions) PreprocessorMacros() *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject] {
 	return x.inner.PreprocessorMacros()
@@ -131,6 +162,8 @@ func (x *CompileOptions) SetPreprocessorMacros(preprocessorMacros *foundation.NS
 	x.inner.SetPreprocessorMacros(preprocessorMacros)
 }
 
+// @property fastMathEnabled @abstract If YES, enables the compiler to perform optimizations for floating-point arithmetic that may violate the IEEE 754 standard. It also enables the high precision variant of math functions for single precision floating-point scalar and vector types. fastMathEnabled defaults to YES.
+//
 // FastMathEnabled calls the underlying FastMathEnabled.
 func (x *CompileOptions) FastMathEnabled() bool {
 	return x.inner.FastMathEnabled()
@@ -141,6 +174,8 @@ func (x *CompileOptions) SetFastMathEnabled(fastMathEnabled bool) {
 	x.inner.SetFastMathEnabled(fastMathEnabled)
 }
 
+// @property mathMode @abstract Sets the floating-point arithmetic optimizations. Default depends on the language standard version.
+//
 // MathMode calls the underlying MathMode.
 func (x *CompileOptions) MathMode() MTLMathMode {
 	return MTLMathMode(x.inner.MathMode())
@@ -151,6 +186,8 @@ func (x *CompileOptions) SetMathMode(mathMode MTLMathMode) {
 	x.inner.SetMathMode(raw.MTLMathMode(mathMode))
 }
 
+// @property mathFloatingPointFunctions @abstract Sets the default math functions for single precision floating-point. Default is `MTLMathFloatingPointFunctionsFast`.
+//
 // MathFloatingPointFunctions calls the underlying MathFloatingPointFunctions.
 func (x *CompileOptions) MathFloatingPointFunctions() MTLMathFloatingPointFunctions {
 	return MTLMathFloatingPointFunctions(x.inner.MathFloatingPointFunctions())
@@ -161,6 +198,8 @@ func (x *CompileOptions) SetMathFloatingPointFunctions(mathFloatingPointFunction
 	x.inner.SetMathFloatingPointFunctions(raw.MTLMathFloatingPointFunctions(mathFloatingPointFunctions))
 }
 
+// @property languageVersion @abstract set the metal language version used to interpret the source.
+//
 // LanguageVersion calls the underlying LanguageVersion.
 func (x *CompileOptions) LanguageVersion() MTLLanguageVersion {
 	return MTLLanguageVersion(x.inner.LanguageVersion())
@@ -171,6 +210,8 @@ func (x *CompileOptions) SetLanguageVersion(languageVersion MTLLanguageVersion) 
 	x.inner.SetLanguageVersion(raw.MTLLanguageVersion(languageVersion))
 }
 
+// @property type @abstract Which type the library should be compiled as. The default value is MTLLibraryTypeExecutable. @discussion MTLLibraryTypeExecutable is suitable to build a library of "kernel", "vertex" and "fragment" qualified functions. MTLLibraryType is suitable when the compilation result will instead be used to instantiate a MTLDynamicLibrary. MTLDynamicLibrary contains no qualified functions, but it's unqualified functions and variables can be used as an external dependency for compiling other libraries.
+//
 // LibraryType calls the underlying LibraryType.
 func (x *CompileOptions) LibraryType() MTLLibraryType {
 	return MTLLibraryType(x.inner.LibraryType())
@@ -181,6 +222,8 @@ func (x *CompileOptions) SetLibraryType(libraryType MTLLibraryType) {
 	x.inner.SetLibraryType(raw.MTLLibraryType(libraryType))
 }
 
+// @property installName @abstract The install name of this dynamic library. @discussion The install name is used when a pipeline state is created that depends, directly or indirectly, on a dynamic library. The installName is embedded into any other MTLLibrary that links against the compilation result. This property should be set such that the dynamic library can be found in the file system at the time a pipeline state is created. Specify one of: - an absolute path to a file from which the dynamic library can be loaded, or - a path relative to \@executable_path, where \@executable_path is substituted with the directory name from which the MTLLibrary containing the MTLFunction entrypoint used to create the pipeline state is loaded, or - a path relative to \@loader_path, where \@loader_path is substituted with the directory name from which the MTLLibrary with the reference to this installName embedded is loaded. The first is appropriate for MTLDynamicLibrary written to the file-system using its serializeToURL:error: method on the current device. The others are appropriate when the MTLDynamicLibrary is installed as part of a bundle or app, where the absolute path is not known. This property is ignored when the type property is not set to MTLLibraryTypeDynamic. This propery should not be null if the property type is set to MTLLibraryTypeDynamic: the compilation will fail in that scenario.
+//
 // InstallName calls the underlying InstallName.
 func (x *CompileOptions) InstallName() string {
 	_r := x.inner.InstallName()
@@ -195,16 +238,29 @@ func (x *CompileOptions) SetInstallName(installName string) {
 	x.inner.SetInstallName(foundation.NSStringStringWithUTF8String(installName))
 }
 
+// @property libraries @abstract A set of MTLDynamicLibrary instances to link against. The installName of the provided MTLDynamicLibrary is embedded into the compilation result. When a function from the resulting MTLLibrary is used (either as an MTLFunction, or as an to create a pipeline state, the embedded install names are used to automatically load the MTLDynamicLibrary instances. This property can be null if no libraries should be automatically loaded, either because the MTLLibrary has no external dependencies, or because you will use preloadedLibraries to specify the libraries to use at pipeline creation time.
+//
 // Libraries calls the underlying Libraries.
 func (x *CompileOptions) Libraries() *foundation.NSArray[raw.MTLDynamicLibrary] {
 	return x.inner.Libraries()
 }
 
 // SetLibraries calls the underlying SetLibraries.
-func (x *CompileOptions) SetLibraries(libraries *foundation.NSArray[raw.MTLDynamicLibrary]) {
-	x.inner.SetLibraries(libraries)
+func (x *CompileOptions) SetLibraries(libraries ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(libraries))
+	for _i, _v := range libraries {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTLDynamicLibrary]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetLibraries(_arg0)
 }
 
+// @property preserveInvariance @abstract If YES,  set the compiler to compile shaders to preserve invariance.  The default is false.
+//
 // PreserveInvariance calls the underlying PreserveInvariance.
 func (x *CompileOptions) PreserveInvariance() bool {
 	return x.inner.PreserveInvariance()
@@ -215,6 +271,8 @@ func (x *CompileOptions) SetPreserveInvariance(preserveInvariance bool) {
 	x.inner.SetPreserveInvariance(preserveInvariance)
 }
 
+// @property optimizationLevel @abstract Sets the compiler optimization level.
+//
 // OptimizationLevel calls the underlying OptimizationLevel.
 func (x *CompileOptions) OptimizationLevel() MTLLibraryOptimizationLevel {
 	return MTLLibraryOptimizationLevel(x.inner.OptimizationLevel())
@@ -225,6 +283,8 @@ func (x *CompileOptions) SetOptimizationLevel(optimizationLevel MTLLibraryOptimi
 	x.inner.SetOptimizationLevel(raw.MTLLibraryOptimizationLevel(optimizationLevel))
 }
 
+// @property @abstract Adds a compiler command to force the default visibility of symbols to be hidden
+//
 // CompileSymbolVisibility calls the underlying CompileSymbolVisibility.
 func (x *CompileOptions) CompileSymbolVisibility() MTLCompileSymbolVisibility {
 	return MTLCompileSymbolVisibility(x.inner.CompileSymbolVisibility())
@@ -235,6 +295,8 @@ func (x *CompileOptions) SetCompileSymbolVisibility(compileSymbolVisibility MTLC
 	x.inner.SetCompileSymbolVisibility(raw.MTLCompileSymbolVisibility(compileSymbolVisibility))
 }
 
+// @property allowReferencingUndefinedSymbols @abstract Adds a compiler command to allow the reference of undefined symbols
+//
 // AllowReferencingUndefinedSymbols calls the underlying AllowReferencingUndefinedSymbols.
 func (x *CompileOptions) AllowReferencingUndefinedSymbols() bool {
 	return x.inner.AllowReferencingUndefinedSymbols()
@@ -245,6 +307,8 @@ func (x *CompileOptions) SetAllowReferencingUndefinedSymbols(allowReferencingUnd
 	x.inner.SetAllowReferencingUndefinedSymbols(allowReferencingUndefinedSymbols)
 }
 
+// @property maxTotalThreadsPerThreadgroup @abstract Adds a compiler command to specify the total threads per threadgroup
+//
 // MaxTotalThreadsPerThreadgroup calls the underlying MaxTotalThreadsPerThreadgroup.
 func (x *CompileOptions) MaxTotalThreadsPerThreadgroup() uint {
 	return x.inner.MaxTotalThreadsPerThreadgroup()
@@ -255,6 +319,8 @@ func (x *CompileOptions) SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThre
 	x.inner.SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup)
 }
 
+// @property requiredThreadsPerThreadgroup @abstract Sets the required threads-per-threadgroup during dispatches. The `threadsPerThreadgroup` argument of any dispatch must match this value if it is set. Setting this to a size of 0 in every dimension disables this property
+//
 // RequiredThreadsPerThreadgroup calls the underlying RequiredThreadsPerThreadgroup.
 func (x *CompileOptions) RequiredThreadsPerThreadgroup() raw.MTLSize {
 	return x.inner.RequiredThreadsPerThreadgroup()
@@ -265,6 +331,8 @@ func (x *CompileOptions) SetRequiredThreadsPerThreadgroup(requiredThreadsPerThre
 	x.inner.SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup)
 }
 
+// @property enableLogging @abstract If YES,  set the compiler to enable any logging in the shader. The default is false.
+//
 // EnableLogging calls the underlying EnableLogging.
 func (x *CompileOptions) EnableLogging() bool {
 	return x.inner.EnableLogging()
@@ -307,7 +375,7 @@ type CompileOptionsable interface {
 	InstallName() string
 	SetInstallName(installName string)
 	Libraries() *foundation.NSArray[raw.MTLDynamicLibrary]
-	SetLibraries(libraries *foundation.NSArray[raw.MTLDynamicLibrary])
+	SetLibraries(libraries ...purego.IDer)
 	PreserveInvariance() bool
 	SetPreserveInvariance(preserveInvariance bool)
 	OptimizationLevel() MTLLibraryOptimizationLevel

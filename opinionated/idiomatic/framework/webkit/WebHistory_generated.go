@@ -36,38 +36,52 @@ func NewWebHistory() *WebHistory {
 	return &WebHistory{inner: raw.WebHistoryFromID(_id)}
 }
 
+// @property historyItemLimit @abstract The maximum number of items that will be stored by the WebHistory.
+//
 // WithHistoryItemLimit sets the historyItemLimit property and returns the receiver for chaining.
 func (x *WebHistory) WithHistoryItemLimit(historyItemLimit int) *WebHistory {
 	x.inner.SetHistoryItemLimit(historyItemLimit)
 	return x
 }
 
+// @property historyAgeInDaysLimit @abstract The maximum number of days to be read from stored history.
+//
 // WithHistoryAgeInDaysLimit sets the historyAgeInDaysLimit property and returns the receiver for chaining.
 func (x *WebHistory) WithHistoryAgeInDaysLimit(historyAgeInDaysLimit int) *WebHistory {
 	x.inner.SetHistoryAgeInDaysLimit(historyAgeInDaysLimit)
 	return x
 }
 
+// @method loadFromURL:error: @param URL The URL to use to initialize the WebHistory. @param error Set to nil or an NSError instance if an error occurred. @abstract The designated initializer for WebHistory. @result Returns YES if successful, NO otherwise.
+//
 // LoadFromURLError calls the underlying LoadFromURLError.
 func (x *WebHistory) LoadFromURLError(uRL string) (bool, error) {
 	return x.inner.LoadFromURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 }
 
+// @method saveToURL:error: @discussion Save history to URL. It is the client's responsibility to call this at appropriate times. @param URL The URL to use to save the WebHistory. @param error Set to nil or an NSError instance if an error occurred. @result Returns YES if successful, NO otherwise.
+//
 // SaveToURLError calls the underlying SaveToURLError.
 func (x *WebHistory) SaveToURLError(uRL string) (bool, error) {
 	return x.inner.SaveToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 }
 
+// @method addItems: @param newItems An array of WebHistoryItems to add to the WebHistory.
+//
 // AddItems calls the underlying AddItems.
 func (x *WebHistory) AddItems(newItems *foundation.NSArray[objc.ID]) {
 	x.inner.AddItems(newItems)
 }
 
+// @method removeItems: @param items An array of WebHistoryItems to remove from the WebHistory.
+//
 // RemoveItems calls the underlying RemoveItems.
 func (x *WebHistory) RemoveItems(items *foundation.NSArray[objc.ID]) {
 	x.inner.RemoveItems(items)
 }
 
+// @method removeAllItems
+//
 // RemoveAllItems calls the underlying RemoveAllItems.
 func (x *WebHistory) RemoveAllItems() {
 	x.inner.RemoveAllItems()
@@ -78,6 +92,8 @@ func (x *WebHistory) OrderedItemsLastVisitedOnDay(calendarDate *foundation.NSCal
 	return x.inner.OrderedItemsLastVisitedOnDay(calendarDate)
 }
 
+// @method itemForURL: @abstract Get an item for a specific URL @param URL The URL of the history item to search for @result Returns an item matching the URL
+//
 // ItemForURL calls the underlying ItemForURL.
 func (x *WebHistory) ItemForURL(uRL string) *WebHistoryItem {
 	_r := x.inner.ItemForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
@@ -87,11 +103,15 @@ func (x *WebHistory) ItemForURL(uRL string) *WebHistoryItem {
 	return &WebHistoryItem{inner: _r}
 }
 
+// @property orderedLastVisitedDays @abstract An array of NSCalendarDates for which history items exist in the WebHistory. @discussion An array of NSCalendarDates, each one representing a unique day that contains one or more history items, ordered from most recent to oldest.
+//
 // OrderedLastVisitedDays calls the underlying OrderedLastVisitedDays.
 func (x *WebHistory) OrderedLastVisitedDays() *foundation.NSArray[objc.ID] {
 	return x.inner.OrderedLastVisitedDays()
 }
 
+// @property historyItemLimit @abstract The maximum number of items that will be stored by the WebHistory.
+//
 // HistoryItemLimit calls the underlying HistoryItemLimit.
 func (x *WebHistory) HistoryItemLimit() int {
 	return x.inner.HistoryItemLimit()
@@ -102,6 +122,8 @@ func (x *WebHistory) SetHistoryItemLimit(historyItemLimit int) {
 	x.inner.SetHistoryItemLimit(historyItemLimit)
 }
 
+// @property historyAgeInDaysLimit @abstract The maximum number of days to be read from stored history.
+//
 // HistoryAgeInDaysLimit calls the underlying HistoryAgeInDaysLimit.
 func (x *WebHistory) HistoryAgeInDaysLimit() int {
 	return x.inner.HistoryAgeInDaysLimit()

@@ -37,6 +37,8 @@ func NewPersonIdentityProof() *PersonIdentityProof {
 	return &PersonIdentityProof{inner: raw.SWPersonIdentityProofFromID(_id)}
 }
 
+// @abstract Hashes of missing Merkle tree nodes that can provide proof of inclusion. @discussion The data contains an array of SHA256 hash of the user's combined public identities.
+//
 // InclusionHashes returns the collection as a Go slice.
 func (x *PersonIdentityProof) InclusionHashes() []*foundation.NSData {
 	arr := x.inner.InclusionHashes()
@@ -48,11 +50,15 @@ func (x *PersonIdentityProof) InclusionHashes() []*foundation.NSData {
 	})
 }
 
+// @abstract Public key of local device
+//
 // PublicKey calls the underlying PublicKey.
 func (x *PersonIdentityProof) PublicKey() *foundation.NSData {
 	return x.inner.PublicKey()
 }
 
+// @abstract Index of local public key in the Merkle tree @discussion This data can be used to determine if the node is the left or the right child
+//
 // PublicKeyIndex calls the underlying PublicKeyIndex.
 func (x *PersonIdentityProof) PublicKeyIndex() uint {
 	return x.inner.PublicKeyIndex()

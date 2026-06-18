@@ -34,6 +34,8 @@ func MTRICDManagementClusterStayActiveResponseParamsFromID(id objc.ID) *MTRICDMa
 	return &MTRICDManagementClusterStayActiveResponseParams{inner: raw.MTRICDManagementClusterStayActiveResponseParamsFromID(id)}
 }
 
+// Initialize an MTRICDManagementClusterStayActiveResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+//
 // NewMTRICDManagementClusterStayActiveResponseParamsWithResponseValueError creates a new [MTRICDManagementClusterStayActiveResponseParams].
 func NewMTRICDManagementClusterStayActiveResponseParamsWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRICDManagementClusterStayActiveResponseParams, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRICDManagementClusterStayActiveResponseParams")), objc.RegisterName("alloc"))

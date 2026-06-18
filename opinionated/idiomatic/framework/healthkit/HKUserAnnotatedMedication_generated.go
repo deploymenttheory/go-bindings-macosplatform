@@ -36,6 +36,8 @@ func NewUserAnnotatedMedication() *UserAnnotatedMedication {
 	return &UserAnnotatedMedication{inner: raw.HKUserAnnotatedMedicationFromID(_id)}
 }
 
+// The nickname that a person added to a medication during the entry experience. This can be edited at any point.
+//
 // Nickname calls the underlying Nickname.
 func (x *UserAnnotatedMedication) Nickname() string {
 	_r := x.inner.Nickname()
@@ -45,16 +47,22 @@ func (x *UserAnnotatedMedication) Nickname() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A Boolean value that indicates whether a medication is archived. The value is `true` if a person moves a medication to the archived section in the Health App. The value is `false` if a medication isn't in the archived section.
+//
 // IsArchived calls the underlying IsArchived.
 func (x *UserAnnotatedMedication) IsArchived() bool {
 	return x.inner.IsArchived()
 }
 
+// A Boolean value that indicates whether a medication has a schedule set up. The value is `true` for medications for which a person has set up reminders and `false` for medications that are only taken as needed. > Note: Scheduled medications can still be taken as needed.
+//
 // HasSchedule calls the underlying HasSchedule.
 func (x *UserAnnotatedMedication) HasSchedule() bool {
 	return x.inner.HasSchedule()
 }
 
+// A reference to the specific medication a person is tracking. This concept's identifier is directly associated with the logged dose events.
+//
 // Medication calls the underlying Medication.
 func (x *UserAnnotatedMedication) Medication() *MedicationConcept {
 	_r := x.inner.Medication()

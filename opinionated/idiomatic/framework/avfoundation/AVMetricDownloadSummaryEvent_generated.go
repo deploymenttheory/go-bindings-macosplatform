@@ -36,6 +36,8 @@ func NewMetricDownloadSummaryEvent() *MetricDownloadSummaryEvent {
 	return &MetricDownloadSummaryEvent{inner: raw.AVMetricDownloadSummaryEventFromID(_id)}
 }
 
+// Returns the error event if any. If no value is available, returns nil.
+//
 // ErrorEvent calls the underlying ErrorEvent.
 func (x *MetricDownloadSummaryEvent) ErrorEvent() *MetricErrorEvent {
 	_r := x.inner.ErrorEvent()
@@ -45,26 +47,36 @@ func (x *MetricDownloadSummaryEvent) ErrorEvent() *MetricErrorEvent {
 	return &MetricErrorEvent{inner: _r}
 }
 
+// Returns the total count of recoverable errors encountered during the download. If no errors were encountered, returns 0. Error counts may not be consistent across OS versions. Comparisons should be made within a given OS version, as error reporting is subject to change with OS updates.
+//
 // RecoverableErrorCount calls the underlying RecoverableErrorCount.
 func (x *MetricDownloadSummaryEvent) RecoverableErrorCount() int {
 	return x.inner.RecoverableErrorCount()
 }
 
+// Returns the total number of media requests performed by the download task. This includes playlist requests, media segment requests, and content key requests.
+//
 // MediaResourceRequestCount calls the underlying MediaResourceRequestCount.
 func (x *MetricDownloadSummaryEvent) MediaResourceRequestCount() int {
 	return x.inner.MediaResourceRequestCount()
 }
 
+// Returns the total number of bytes downloaded by the download task.
+//
 // BytesDownloadedCount calls the underlying BytesDownloadedCount.
 func (x *MetricDownloadSummaryEvent) BytesDownloadedCount() int {
 	return x.inner.BytesDownloadedCount()
 }
 
+// Returns the total duration of the download in seconds.
+//
 // DownloadDuration calls the underlying DownloadDuration.
 func (x *MetricDownloadSummaryEvent) DownloadDuration() float64 {
 	return x.inner.DownloadDuration()
 }
 
+// Returns the variants that were downloaded.
+//
 // Variants returns the collection as a Go slice.
 func (x *MetricDownloadSummaryEvent) Variants() []*AssetVariant {
 	arr := x.inner.Variants()

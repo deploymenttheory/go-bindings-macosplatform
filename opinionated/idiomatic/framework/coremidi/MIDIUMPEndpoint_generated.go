@@ -38,6 +38,8 @@ func NewUMPEndpoint() *UMPEndpoint {
 	return &UMPEndpoint{inner: raw.MIDIUMPEndpointFromID(_id)}
 }
 
+// @property	functionBlocks @brief		The Function Blocks associated with the UMP endpoint, if any.
+//
 // WithFunctionBlocks sets the collection, converting the Go slice to an NSArray.
 func (x *UMPEndpoint) WithFunctionBlocks(items ...UMPFunctionBlockProvider) *UMPEndpoint {
 	if len(items) == 0 {
@@ -56,6 +58,8 @@ func (x *UMPEndpoint) WithFunctionBlocks(items ...UMPFunctionBlockProvider) *UMP
 	return x
 }
 
+// @property	name @brief		The UTF-8 encoded name of the UMP endpoint. @discussion The name shall not be any longer than 98 bytes of UTF-8 Text.
+//
 // Name calls the underlying Name.
 func (x *UMPEndpoint) Name() string {
 	_r := x.inner.Name()
@@ -65,26 +69,36 @@ func (x *UMPEndpoint) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property	MIDIProtocol @brief		The MIDI protocol currently used by the UMP endpoint.
+//
 // MIDIProtocol calls the underlying MIDIProtocol.
 func (x *UMPEndpoint) MIDIProtocol() MIDIProtocolID {
 	return MIDIProtocolID(x.inner.MIDIProtocol())
 }
 
+// @property	supportedMIDIProtocols @brief		All protocols the UMP endpoint is capable of using for communication.
+//
 // SupportedMIDIProtocols calls the underlying SupportedMIDIProtocols.
 func (x *UMPEndpoint) SupportedMIDIProtocols() MIDIUMPProtocolOptions {
 	return MIDIUMPProtocolOptions(x.inner.SupportedMIDIProtocols())
 }
 
+// @property	MIDIDestination @brief		The MIDI destination for the UMP endpoint.
+//
 // MIDIDestination calls the underlying MIDIDestination.
 func (x *UMPEndpoint) MIDIDestination() uint {
 	return x.inner.MIDIDestination()
 }
 
+// @property	MIDISource @brief		The MIDI source for the UMP endpoint.
+//
 // MIDISource calls the underlying MIDISource.
 func (x *UMPEndpoint) MIDISource() uint {
 	return x.inner.MIDISource()
 }
 
+// @property	deviceInfo @brief		The MIDI 2.0 Device identity information associated with the device.
+//
 // DeviceInfo calls the underlying DeviceInfo.
 func (x *UMPEndpoint) DeviceInfo() *MIDI2DeviceInfo {
 	_r := x.inner.DeviceInfo()
@@ -94,6 +108,8 @@ func (x *UMPEndpoint) DeviceInfo() *MIDI2DeviceInfo {
 	return &MIDI2DeviceInfo{inner: _r}
 }
 
+// @property	productInstanceID @brief		Serial number (or similar value) uniquely identifying this manufacturer/family/model, up to 42 bytes of ASCII Text in the ordinal range 32-126.
+//
 // ProductInstanceID calls the underlying ProductInstanceID.
 func (x *UMPEndpoint) ProductInstanceID() string {
 	_r := x.inner.ProductInstanceID()
@@ -103,26 +119,36 @@ func (x *UMPEndpoint) ProductInstanceID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property	hasStaticFunctionBlocks @brief		Indicates if the Function Block state will never change once discovered.
+//
 // HasStaticFunctionBlocks calls the underlying HasStaticFunctionBlocks.
 func (x *UMPEndpoint) HasStaticFunctionBlocks() bool {
 	return x.inner.HasStaticFunctionBlocks()
 }
 
+// @property	hasJRTSReceiveCapability @brief		Jitter-reduction timestamp receive capability.
+//
 // HasJRTSReceiveCapability calls the underlying HasJRTSReceiveCapability.
 func (x *UMPEndpoint) HasJRTSReceiveCapability() bool {
 	return x.inner.HasJRTSReceiveCapability()
 }
 
+// @property	hasJRTSTransmitCapability @brief		Jitter-reduction timestamp transmit capability
+//
 // HasJRTSTransmitCapability calls the underlying HasJRTSTransmitCapability.
 func (x *UMPEndpoint) HasJRTSTransmitCapability() bool {
 	return x.inner.HasJRTSTransmitCapability()
 }
 
+// @property	endpointType @brief		Indicates the type of UMP Endpoint, if known.
+//
 // EndpointType calls the underlying EndpointType.
 func (x *UMPEndpoint) EndpointType() MIDIUMPCIObjectBackingType {
 	return MIDIUMPCIObjectBackingType(x.inner.EndpointType())
 }
 
+// @property	functionBlocks @brief		The Function Blocks associated with the UMP endpoint, if any.
+//
 // FunctionBlocks returns the collection as a Go slice.
 func (x *UMPEndpoint) FunctionBlocks() []*UMPFunctionBlock {
 	arr := x.inner.FunctionBlocks()
@@ -135,8 +161,17 @@ func (x *UMPEndpoint) FunctionBlocks() []*UMPFunctionBlock {
 }
 
 // SetFunctionBlocks calls the underlying SetFunctionBlocks.
-func (x *UMPEndpoint) SetFunctionBlocks(functionBlocks *foundation.NSArray[*raw.MIDIUMPFunctionBlock]) {
-	x.inner.SetFunctionBlocks(functionBlocks)
+func (x *UMPEndpoint) SetFunctionBlocks(functionBlocks ...UMPFunctionBlockProvider) {
+	_ptrs := make([]objc.ID, len(functionBlocks))
+	for _i, _v := range functionBlocks {
+		_ptrs[_i] = _v.asUMPFunctionBlock().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.MIDIUMPFunctionBlock]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.MIDIUMPFunctionBlock](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetFunctionBlocks(_arg0)
 }
 
 func (x *UMPEndpoint) asUMPEndpoint() *raw.MIDIUMPEndpoint { return x.inner }
@@ -157,7 +192,7 @@ type UMPEndpointable interface {
 	HasJRTSTransmitCapability() bool
 	EndpointType() MIDIUMPCIObjectBackingType
 	FunctionBlocks() []*UMPFunctionBlock
-	SetFunctionBlocks(functionBlocks *foundation.NSArray[*raw.MIDIUMPFunctionBlock])
+	SetFunctionBlocks(functionBlocks ...UMPFunctionBlockProvider)
 }
 
 var _ UMPEndpointable = (*UMPEndpoint)(nil)

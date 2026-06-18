@@ -37,16 +37,22 @@ func NewLibArtwork() *LibArtwork {
 	return &LibArtwork{inner: raw.ITLibArtworkFromID(_id)}
 }
 
+// @abstract The NSImage formed by calling [[NSImage alloc] initWithData:self.imageData].
+//
 // Image calls the underlying Image.
 func (x *LibArtwork) Image() *appkit.NSImage {
 	return x.inner.Image()
 }
 
+// @abstract The data (bytes) of this artwork image.
+//
 // ImageData calls the underlying ImageData.
 func (x *LibArtwork) ImageData() *foundation.NSData {
 	return x.inner.ImageData()
 }
 
+// @abstract The fortmat of the data returned by the imageData method.
+//
 // ImageDataFormat calls the underlying ImageDataFormat.
 func (x *LibArtwork) ImageDataFormat() ITLibArtworkFormat {
 	return ITLibArtworkFormat(x.inner.ImageDataFormat())

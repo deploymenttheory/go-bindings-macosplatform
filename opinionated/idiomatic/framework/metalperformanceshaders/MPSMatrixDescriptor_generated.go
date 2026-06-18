@@ -36,30 +36,40 @@ func NewMatrixDescriptor() *MatrixDescriptor {
 	return &MatrixDescriptor{inner: raw.MPSMatrixDescriptorFromID(_id)}
 }
 
+// @property   rows @discussion The number of rows in a matrix.
+//
 // WithRows sets the rows property and returns the receiver for chaining.
 func (x *MatrixDescriptor) WithRows(rows uint) *MatrixDescriptor {
 	x.inner.SetRows(rows)
 	return x
 }
 
+// @property   columns @discussion The number of columns in a matrix.
+//
 // WithColumns sets the columns property and returns the receiver for chaining.
 func (x *MatrixDescriptor) WithColumns(columns uint) *MatrixDescriptor {
 	x.inner.SetColumns(columns)
 	return x
 }
 
+// @property   dataType @discussion The type of the data which makes up the values of the matrix.
+//
 // WithDataType sets the dataType property and returns the receiver for chaining.
 func (x *MatrixDescriptor) WithDataType(dataType mpscore.MPSDataType) *MatrixDescriptor {
 	x.inner.SetDataType(dataType)
 	return x
 }
 
+// @property   rowBytes @discussion The stride, in bytes, between corresponding elements of consecutive rows.  Must be a multiple of the element size.
+//
 // WithRowBytes sets the rowBytes property and returns the receiver for chaining.
 func (x *MatrixDescriptor) WithRowBytes(rowBytes uint) *MatrixDescriptor {
 	x.inner.SetRowBytes(rowBytes)
 	return x
 }
 
+// @property   rows @discussion The number of rows in a matrix.
+//
 // Rows calls the underlying Rows.
 func (x *MatrixDescriptor) Rows() uint {
 	return x.inner.Rows()
@@ -70,6 +80,8 @@ func (x *MatrixDescriptor) SetRows(rows uint) {
 	x.inner.SetRows(rows)
 }
 
+// @property   columns @discussion The number of columns in a matrix.
+//
 // Columns calls the underlying Columns.
 func (x *MatrixDescriptor) Columns() uint {
 	return x.inner.Columns()
@@ -80,11 +92,15 @@ func (x *MatrixDescriptor) SetColumns(columns uint) {
 	x.inner.SetColumns(columns)
 }
 
+// @property   matrices @discussion The number of matrices.
+//
 // Matrices calls the underlying Matrices.
 func (x *MatrixDescriptor) Matrices() uint {
 	return x.inner.Matrices()
 }
 
+// @property   dataType @discussion The type of the data which makes up the values of the matrix.
+//
 // DataType calls the underlying DataType.
 func (x *MatrixDescriptor) DataType() mpscore.MPSDataType {
 	return x.inner.DataType()
@@ -95,6 +111,8 @@ func (x *MatrixDescriptor) SetDataType(dataType mpscore.MPSDataType) {
 	x.inner.SetDataType(dataType)
 }
 
+// @property   rowBytes @discussion The stride, in bytes, between corresponding elements of consecutive rows.  Must be a multiple of the element size.
+//
 // RowBytes calls the underlying RowBytes.
 func (x *MatrixDescriptor) RowBytes() uint {
 	return x.inner.RowBytes()
@@ -105,6 +123,8 @@ func (x *MatrixDescriptor) SetRowBytes(rowBytes uint) {
 	x.inner.SetRowBytes(rowBytes)
 }
 
+// @property   matrixBytes @discussion The stride, in bytes, between corresponding elements of consecutive matrices.  Must be a multiple of rowBytes.
+//
 // MatrixBytes calls the underlying MatrixBytes.
 func (x *MatrixDescriptor) MatrixBytes() uint {
 	return x.inner.MatrixBytes()

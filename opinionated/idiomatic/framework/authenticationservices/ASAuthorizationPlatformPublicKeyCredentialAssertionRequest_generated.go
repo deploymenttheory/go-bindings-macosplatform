@@ -40,6 +40,8 @@ func NewAuthorizationPlatformPublicKeyCredentialAssertionRequest() *Authorizatio
 	return &AuthorizationPlatformPublicKeyCredentialAssertionRequest{inner: raw.ASAuthorizationPlatformPublicKeyCredentialAssertionRequestFromID(_id)}
 }
 
+// @abstract A list of credentials to allow for this request. If this ilist is nonempty, only credentials matching the provided descriptors can be used to sign in.
+//
 // WithAllowedCredentials sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithAllowedCredentials(items ...*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
 	if len(items) == 0 {
@@ -70,6 +72,8 @@ func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithPrf(prf *
 	return x
 }
 
+// @abstract A list of credentials to allow for this request. If this ilist is nonempty, only credentials matching the provided descriptors can be used to sign in.
+//
 // AllowedCredentials returns the collection as a Go slice.
 func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) AllowedCredentials() []*AuthorizationPlatformPublicKeyCredentialDescriptor {
 	arr := x.inner.AllowedCredentials()

@@ -38,16 +38,22 @@ func NewDelegatingPlaybackCoordinatorPlayCommand() *DelegatingPlaybackCoordinato
 	return &DelegatingPlaybackCoordinatorPlayCommand{inner: raw.AVDelegatingPlaybackCoordinatorPlayCommandFromID(_id)}
 }
 
+// Playback rate. Will always be non-zero.
+//
 // Rate calls the underlying Rate.
 func (x *DelegatingPlaybackCoordinatorPlayCommand) Rate() float32 {
 	return x.inner.Rate()
 }
 
+// The itemTime that playback should begin at. The receiver of this command should verify that data is loaded for the requested time and potentially begin loading it before beginning playback. It is not important to load data for time exactly. If data "similar" to time is already loaded, it is acceptable to start playback with the loaded data. Playback should still start with the requested timing. Should the receiver be unable to start with the exact requested timing, playback will be out of sync with the group. If data for the requested time cannot be loaded, or playback stalls later, the command handler may want to indicate this to the coordinator by beginning a suspension with AVCoordinatedPlaybackSuspensionReasonStallRecovery.
+//
 // ItemTime calls the underlying ItemTime.
 func (x *DelegatingPlaybackCoordinatorPlayCommand) ItemTime() coremedia.CMTime {
 	return x.inner.ItemTime()
 }
 
+// This is the host clock time (see CMClockGetHostTimeClock()) defining when playback should start (or should have started) at the given itemTime.
+//
 // HostClockTime calls the underlying HostClockTime.
 func (x *DelegatingPlaybackCoordinatorPlayCommand) HostClockTime() coremedia.CMTime {
 	return x.inner.HostClockTime()

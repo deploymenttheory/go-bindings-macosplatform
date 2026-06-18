@@ -39,39 +39,53 @@ func NewPlayerLayer() *PlayerLayer {
 	return &PlayerLayer{inner: raw.AVPlayerLayerFromID(_id)}
 }
 
+// @property		player @abstract		Indicates the instance of AVPlayer for which the AVPlayerLayer displays visual output
+//
 // WithPlayer sets the player property and returns the receiver for chaining.
 func (x *PlayerLayer) WithPlayer(player PlayerProvider) *PlayerLayer {
 	x.inner.SetPlayer(player.asPlayer())
 	return x
 }
 
+// @property		videoGravity @abstract		A string defining how the video is displayed within an AVPlayerLayer bounds rect. @discusssion	Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default. See <AVFoundation/AVAnimation.h> for a description of these options.
+//
 // WithVideoGravity sets the videoGravity property and returns the receiver for chaining.
 func (x *PlayerLayer) WithVideoGravity(videoGravity *foundation.NSString) *PlayerLayer {
 	x.inner.SetVideoGravity(videoGravity)
 	return x
 }
 
+// @property		pixelBufferAttributes @abstract		The client requirements for the visual output displayed in AVPlayerLayer during playback. @discussion		Pixel buffer attribute keys are defined in <CoreVideo/CVPixelBuffer.h> This property is key-value observable.
+//
 // WithPixelBufferAttributes sets the pixelBufferAttributes property and returns the receiver for chaining.
 func (x *PlayerLayer) WithPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PlayerLayer {
 	x.inner.SetPixelBufferAttributes(pixelBufferAttributes)
 	return x
 }
 
+// @method			copyDisplayedPixelBuffer @abstract		Returns a retained reference to the pixel buffer currently displayed in this AVPlayerLayer. This will return NULL if the displayed pixel buffer is protected, no image is currently being displayed, if the current player's rate is non-zero or if the image is unavailable. @discussion		This will only return the current image while the media is paused, otherwise this will return nil. Clients must release the pixel buffer after use. Do not write to the returned CVPixelBuffer's attachments or pixel data.
+//
 // CopyDisplayedPixelBuffer calls the underlying CopyDisplayedPixelBuffer.
 func (x *PlayerLayer) CopyDisplayedPixelBuffer() unsafe.Pointer {
 	return x.inner.CopyDisplayedPixelBuffer()
 }
 
+// Starts displaying a caption preview with the specified accessibility profile. This method enables a preview mode that displays sample caption text using the visual appearance settings from the specified accessibility profile. The preview replaces any currently active subtitles and/or closed captions while active. The sample caption text position can be specified to avoid UI controls. - Parameters: - profileID: The identifier of the accessibility profile to use for caption appearance. Profile IDs can be obtained from `MACaptionAppearanceCopyProfileIDs()`. This determines font, color, background, and other visual characteristics. - position: A CGPoint that defines the position (in points) of the caption preview relative to the default positioning of content captions (centered near the bottom of the video). Position values can be negative. (0, 0) represents the default positioning. - text: Optional custom text to display in the preview. If `nil`, a standard localized preview message will be shown. - Note: You must call “stopShowingCaptionPreview“ to exit the preview.
+//
 // SetCaptionPreviewProfileIDPositionText calls the underlying SetCaptionPreviewProfileIDPositionText.
 func (x *PlayerLayer) SetCaptionPreviewProfileIDPositionText(profileID string, position corefoundation.CGPoint, text string) {
 	x.inner.SetCaptionPreviewProfileIDPositionText(foundation.NSStringStringWithUTF8String(profileID), position, foundation.NSStringStringWithUTF8String(text))
 }
 
+// Stops showing the caption preview. This method stops the caption preview and restores any currently active subtitles and/or closed captions.
+//
 // StopShowingCaptionPreview calls the underlying StopShowingCaptionPreview.
 func (x *PlayerLayer) StopShowingCaptionPreview() {
 	x.inner.StopShowingCaptionPreview()
 }
 
+// @property		player @abstract		Indicates the instance of AVPlayer for which the AVPlayerLayer displays visual output
+//
 // Player calls the underlying Player.
 func (x *PlayerLayer) Player() *Player {
 	_r := x.inner.Player()
@@ -86,6 +100,8 @@ func (x *PlayerLayer) SetPlayer(player *raw.AVPlayer) {
 	x.inner.SetPlayer(player)
 }
 
+// @property		videoGravity @abstract		A string defining how the video is displayed within an AVPlayerLayer bounds rect. @discusssion	Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default. See <AVFoundation/AVAnimation.h> for a description of these options.
+//
 // VideoGravity calls the underlying VideoGravity.
 func (x *PlayerLayer) VideoGravity() string {
 	_r := x.inner.VideoGravity()
@@ -100,16 +116,22 @@ func (x *PlayerLayer) SetVideoGravity(videoGravity *foundation.NSString) {
 	x.inner.SetVideoGravity(videoGravity)
 }
 
+// @property		readyForDisplay @abstract		Boolean indicating that the first video frame has been made ready for display for the current item of the associated AVPlayer. @discusssion	Use this property as an indicator of when best to show or animate-in an AVPlayerLayer into view. An AVPlayerLayer may be displayed, or made visible, while this property is NO, however the layer will not have any user-visible content until the value becomes YES. Note that if an animation is added to an AVPlayerLayer before it becomes readyForDisplay the video image displayed inside might not animate with the receiver. This property remains NO for an AVPlayer currentItem whose AVAsset contains no enabled video tracks. This property is key-value observable.
+//
 // IsReadyForDisplay calls the underlying IsReadyForDisplay.
 func (x *PlayerLayer) IsReadyForDisplay() bool {
 	return x.inner.IsReadyForDisplay()
 }
 
+// @property		videoRect @abstract		The current size and position of the video image as displayed within the receiver's bounds.
+//
 // VideoRect calls the underlying VideoRect.
 func (x *PlayerLayer) VideoRect() corefoundation.CGRect {
 	return x.inner.VideoRect()
 }
 
+// @property		pixelBufferAttributes @abstract		The client requirements for the visual output displayed in AVPlayerLayer during playback. @discussion		Pixel buffer attribute keys are defined in <CoreVideo/CVPixelBuffer.h> This property is key-value observable.
+//
 // PixelBufferAttributes calls the underlying PixelBufferAttributes.
 func (x *PlayerLayer) PixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.PixelBufferAttributes()

@@ -35,51 +35,71 @@ func NewOptimizerDescriptor() *OptimizerDescriptor {
 	return &OptimizerDescriptor{inner: raw.MLCOptimizerDescriptorFromID(_id)}
 }
 
+// @property   learningRate @abstract   The learning rate
+//
 // LearningRate calls the underlying LearningRate.
 func (x *OptimizerDescriptor) LearningRate() float32 {
 	return x.inner.LearningRate()
 }
 
+// @property   gradientRescale @abstract   The rescale value applied to gradients during optimizer update
+//
 // GradientRescale calls the underlying GradientRescale.
 func (x *OptimizerDescriptor) GradientRescale() float32 {
 	return x.inner.GradientRescale()
 }
 
+// @property   appliesGradientClipping @abstract   Whether gradient clipping should be applied or not. @discussion The default is false
+//
 // AppliesGradientClipping calls the underlying AppliesGradientClipping.
 func (x *OptimizerDescriptor) AppliesGradientClipping() bool {
 	return x.inner.AppliesGradientClipping()
 }
 
+// @property   gradientClipMax @abstract   The maximum gradient value if gradient clipping is enabled before gradient is rescaled.
+//
 // GradientClipMax calls the underlying GradientClipMax.
 func (x *OptimizerDescriptor) GradientClipMax() float32 {
 	return x.inner.GradientClipMax()
 }
 
+// @property   gradientClipMin @abstract   The minimum gradient value if gradient clipping is enabled before gradient is rescaled.
+//
 // GradientClipMin calls the underlying GradientClipMin.
 func (x *OptimizerDescriptor) GradientClipMin() float32 {
 	return x.inner.GradientClipMin()
 }
 
+// @property   regularizationScale @abstract   The regularization scale.
+//
 // RegularizationScale calls the underlying RegularizationScale.
 func (x *OptimizerDescriptor) RegularizationScale() float32 {
 	return x.inner.RegularizationScale()
 }
 
+// @property   regularizationType @abstract   The regularization type.
+//
 // RegularizationType calls the underlying RegularizationType.
 func (x *OptimizerDescriptor) RegularizationType() MLCRegularizationType {
 	return MLCRegularizationType(x.inner.RegularizationType())
 }
 
+// @property   gradientClippingType @abstract   The type of clipping applied to gradient
+//
 // GradientClippingType calls the underlying GradientClippingType.
 func (x *OptimizerDescriptor) GradientClippingType() MLCGradientClippingType {
 	return MLCGradientClippingType(x.inner.GradientClippingType())
 }
 
+// @property   maximumClippingNorm @abstract   The maximum clipping value
+//
 // MaximumClippingNorm calls the underlying MaximumClippingNorm.
 func (x *OptimizerDescriptor) MaximumClippingNorm() float32 {
 	return x.inner.MaximumClippingNorm()
 }
 
+// @property   customGlobalNorm @abstract   Used only with MLCGradientClippingTypeByGlobalNorm. If non zero, this norm will be used in place of global norm.
+//
 // CustomGlobalNorm calls the underlying CustomGlobalNorm.
 func (x *OptimizerDescriptor) CustomGlobalNorm() float32 {
 	return x.inner.CustomGlobalNorm()

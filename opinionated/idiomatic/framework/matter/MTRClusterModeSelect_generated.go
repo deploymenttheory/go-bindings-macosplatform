@@ -31,6 +31,8 @@ func MTRClusterModeSelectFromID(id objc.ID) *MTRClusterModeSelect {
 	return &MTRClusterModeSelect{inner: raw.MTRClusterModeSelectFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterModeSelectWithDeviceEndpointIDQueue creates a new [MTRClusterModeSelect].
 func NewMTRClusterModeSelectWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterModeSelect {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterModeSelect")), objc.RegisterName("alloc"))

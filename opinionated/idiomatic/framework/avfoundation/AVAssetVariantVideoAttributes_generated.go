@@ -38,6 +38,8 @@ func NewAssetVariantVideoAttributes() *AssetVariantVideoAttributes {
 	return &AssetVariantVideoAttributes{inner: raw.AVAssetVariantVideoAttributesFromID(_id)}
 }
 
+// Provides the video range of the variant. If it is not declared, it will be AVVideoRangeSDR.
+//
 // VideoRange calls the underlying VideoRange.
 func (x *AssetVariantVideoAttributes) VideoRange() string {
 	_r := x.inner.VideoRange()
@@ -47,6 +49,8 @@ func (x *AssetVariantVideoAttributes) VideoRange() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Provides an array of video sample codec types present in the variant's renditions if any are declared. Each value in the array is a NSNumber representation of CMVideoCodecType.
+//
 // CodecTypes returns the collection as a Go slice.
 func (x *AssetVariantVideoAttributes) CodecTypes() []*foundation.NSNumber {
 	arr := x.inner.CodecTypes()
@@ -58,16 +62,22 @@ func (x *AssetVariantVideoAttributes) CodecTypes() []*foundation.NSNumber {
 	})
 }
 
+// If it is not declared, it will be CGSizeZero.
+//
 // PresentationSize calls the underlying PresentationSize.
 func (x *AssetVariantVideoAttributes) PresentationSize() corefoundation.CGSize {
 	return x.inner.PresentationSize()
 }
 
+// If it is not declared, the value will be negative.
+//
 // NominalFrameRate calls the underlying NominalFrameRate.
 func (x *AssetVariantVideoAttributes) NominalFrameRate() float64 {
 	return x.inner.NominalFrameRate()
 }
 
+// Describes the video layout attributes. videoLayoutAttributes' count may be greater than one if this variant contains a collection of differing video layout media attributes over time.
+//
 // VideoLayoutAttributes returns the collection as a Go slice.
 func (x *AssetVariantVideoAttributes) VideoLayoutAttributes() []*AssetVariantVideoLayoutAttributes {
 	arr := x.inner.VideoLayoutAttributes()

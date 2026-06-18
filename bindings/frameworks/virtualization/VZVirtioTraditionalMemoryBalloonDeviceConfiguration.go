@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration object that provides a way to reclaim memory from the guest system.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtiotraditionalmemoryballoondeviceconfiguration
 type VZVirtioTraditionalMemoryBalloonDeviceConfiguration struct {
 	VZMemoryBalloonDeviceConfiguration
@@ -29,6 +31,7 @@ func VZVirtioTraditionalMemoryBalloonDeviceConfigurationFromID(id objc.ID) *VZVi
 	return o
 }
 
+// Creates a memory ballon device configuration object to include with your virtual machine’s configuration data.
 func (o *VZVirtioTraditionalMemoryBalloonDeviceConfiguration) Init() *VZVirtioTraditionalMemoryBalloonDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioTraditionalMemoryBalloonDeviceConfigurationSelInit)
 	if _ret != 0 {

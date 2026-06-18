@@ -144,11 +144,15 @@ func (x *VoiceChat) SetPlayerStateUpdateHandler(playerStateUpdateHandler func(*f
 	})
 }
 
+// * This method is obsolete. It will never be invoked and its implementation does nothing**
+//
 // SetMuteForPlayer calls the underlying SetMuteForPlayer.
 func (x *VoiceChat) SetMuteForPlayer(isMuted bool, playerID string) {
 	x.inner.SetMuteForPlayer(isMuted, foundation.NSStringStringWithUTF8String(playerID))
 }
 
+// * This property is obsolete. **
+//
 // PlayerIDs returns the collection as a Go slice.
 func (x *VoiceChat) PlayerIDs() []string {
 	arr := x.inner.PlayerIDs()

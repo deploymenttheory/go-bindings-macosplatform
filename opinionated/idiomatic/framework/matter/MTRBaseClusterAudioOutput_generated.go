@@ -33,6 +33,8 @@ func MTRBaseClusterAudioOutputFromID(id objc.ID) *MTRBaseClusterAudioOutput {
 	return &MTRBaseClusterAudioOutput{inner: raw.MTRBaseClusterAudioOutputFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterAudioOutputWithDeviceEndpointIDQueue creates a new [MTRBaseClusterAudioOutput].
 func NewMTRBaseClusterAudioOutputWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterAudioOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterAudioOutput")), objc.RegisterName("alloc"))
@@ -47,11 +49,15 @@ func NewMTRBaseClusterAudioOutputWithDeviceEndpointQueue(device *raw.MTRBaseDevi
 	return &MTRBaseClusterAudioOutput{inner: raw.MTRBaseClusterAudioOutputFromID(_id)}
 }
 
+// Command SelectOutput Upon receipt, this SHALL change the output on the device to the output at a specific index in the Output List.
+//
 // SelectOutputWithParamsCompletion calls the underlying SelectOutputWithParamsCompletion.
 func (x *MTRBaseClusterAudioOutput) SelectOutputWithParamsCompletion(params *raw.MTRAudioOutputClusterSelectOutputParams, completion func(unsafe.Pointer)) {
 	x.inner.SelectOutputWithParamsCompletion(params, completion)
 }
 
+// Command RenameOutput Upon receipt, this SHALL rename the output at a specific index in the Output List.
+//
 // RenameOutputWithParamsCompletion calls the underlying RenameOutputWithParamsCompletion.
 func (x *MTRBaseClusterAudioOutput) RenameOutputWithParamsCompletion(params *raw.MTRAudioOutputClusterRenameOutputParams, completion func(unsafe.Pointer)) {
 	x.inner.RenameOutputWithParamsCompletion(params, completion)

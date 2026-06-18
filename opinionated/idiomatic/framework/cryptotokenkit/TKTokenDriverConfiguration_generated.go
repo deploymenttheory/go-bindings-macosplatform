@@ -37,6 +37,8 @@ func NewTokenDriverConfiguration() *TokenDriverConfiguration {
 	return &TokenDriverConfiguration{inner: raw.TKTokenDriverConfigurationFromID(_id)}
 }
 
+// Creates new configuration object for token with specified instanceID and adds it into tokenConfigurations dictionary. If configuration with specified instanceID already exists, it is replaced with new empty configuration.
+//
 // AddTokenConfigurationForTokenInstanceID calls the underlying AddTokenConfigurationForTokenInstanceID.
 func (x *TokenDriverConfiguration) AddTokenConfigurationForTokenInstanceID(instanceID *foundation.NSString) *TokenConfiguration {
 	_r := x.inner.AddTokenConfigurationForTokenInstanceID(instanceID)
@@ -46,11 +48,15 @@ func (x *TokenDriverConfiguration) AddTokenConfigurationForTokenInstanceID(insta
 	return &TokenConfiguration{inner: _r}
 }
 
+// Removes configuration with specified tokenID. Does nothing if no such token configuration exists.
+//
 // RemoveTokenConfigurationForTokenInstanceID calls the underlying RemoveTokenConfigurationForTokenInstanceID.
 func (x *TokenDriverConfiguration) RemoveTokenConfigurationForTokenInstanceID(instanceID *foundation.NSString) {
 	x.inner.RemoveTokenConfigurationForTokenInstanceID(instanceID)
 }
 
+// ClassID of the token configuration. ClassID is taken from @p com.apple.ctk.class-id token extension attribute.
+//
 // ClassID calls the underlying ClassID.
 func (x *TokenDriverConfiguration) ClassID() string {
 	_r := x.inner.ClassID()
@@ -60,6 +66,8 @@ func (x *TokenDriverConfiguration) ClassID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Dictionary of all currently configured tokens for this token class, keyed by instanceID.
+//
 // TokenConfigurations calls the underlying TokenConfigurations.
 func (x *TokenDriverConfiguration) TokenConfigurations() *foundation.NSDictionary[*foundation.NSString, *raw.TKTokenConfiguration] {
 	return x.inner.TokenConfigurations()

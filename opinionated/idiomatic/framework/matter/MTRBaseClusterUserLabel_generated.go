@@ -33,6 +33,8 @@ func MTRBaseClusterUserLabelFromID(id objc.ID) *MTRBaseClusterUserLabel {
 	return &MTRBaseClusterUserLabel{inner: raw.MTRBaseClusterUserLabelFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterUserLabelWithDeviceEndpointIDQueue creates a new [MTRBaseClusterUserLabel].
 func NewMTRBaseClusterUserLabelWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterUserLabel {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterUserLabel")), objc.RegisterName("alloc"))

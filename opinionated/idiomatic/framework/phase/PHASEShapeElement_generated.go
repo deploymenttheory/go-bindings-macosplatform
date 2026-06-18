@@ -35,6 +35,8 @@ func NewShapeElement() *ShapeElement {
 	return &ShapeElement{inner: raw.PHASEShapeElementFromID(_id)}
 }
 
+// @property material @abstract The shape's material defines the acoustical properties of this element.
+//
 // WithMaterial sets the material property and returns the receiver for chaining.
 func (x *ShapeElement) WithMaterial(material *Material) *ShapeElement {
 	x.inner.SetMaterial(material.Unwrap())

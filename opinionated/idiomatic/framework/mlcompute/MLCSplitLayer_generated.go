@@ -37,28 +37,38 @@ func NewSplitLayer() *SplitLayer {
 	return &SplitLayer{inner: raw.MLCSplitLayerFromID(_id)}
 }
 
+// @property   label @abstract   A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *SplitLayer) WithLabel(label string) *SplitLayer {
 	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+//
 // WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
 func (x *SplitLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SplitLayer {
 	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
 	return x
 }
 
+// @property   dimension @abstract   The dimension (or axis) along which to split tensor
+//
 // Dimension calls the underlying Dimension.
 func (x *SplitLayer) Dimension() uint {
 	return x.inner.Dimension()
 }
 
+// @property   splitCount @abstract   The number of splits. @discussion The tensor will be split into equally sized chunks.  The last chunk may be smaller in size.
+//
 // SplitCount calls the underlying SplitCount.
 func (x *SplitLayer) SplitCount() uint {
 	return x.inner.SplitCount()
 }
 
+// @property   splitSectionLengths @abstract   Lengths of each split section. @discussion The tensor will be split into chunks along dimensions with sizes given in \p splitSectionLengths .
+//
 // SplitSectionLengths returns the collection as a Go slice.
 func (x *SplitLayer) SplitSectionLengths() []*foundation.NSNumber {
 	arr := x.inner.SplitSectionLengths()

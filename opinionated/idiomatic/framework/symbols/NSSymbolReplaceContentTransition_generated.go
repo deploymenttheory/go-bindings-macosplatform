@@ -37,6 +37,8 @@ func NewSymbolReplaceContentTransition() *SymbolReplaceContentTransition {
 	return &SymbolReplaceContentTransition{inner: raw.NSSymbolReplaceContentTransitionFromID(_id)}
 }
 
+// Returns a copy of the content transition that animates incrementally, by layer.
+//
 // TransitionWithByLayer calls the underlying TransitionWithByLayer.
 func (x *SymbolReplaceContentTransition) TransitionWithByLayer() *SymbolReplaceContentTransition {
 	_r := x.inner.TransitionWithByLayer()
@@ -46,6 +48,8 @@ func (x *SymbolReplaceContentTransition) TransitionWithByLayer() *SymbolReplaceC
 	return &SymbolReplaceContentTransition{inner: _r}
 }
 
+// Returns a copy of the content transition that animates all layers of the symbol simultaneously.
+//
 // TransitionWithWholeSymbol calls the underlying TransitionWithWholeSymbol.
 func (x *SymbolReplaceContentTransition) TransitionWithWholeSymbol() *SymbolReplaceContentTransition {
 	_r := x.inner.TransitionWithWholeSymbol()

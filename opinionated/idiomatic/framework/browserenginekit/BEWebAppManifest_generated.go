@@ -30,6 +30,8 @@ func WebAppManifestFromID(id objc.ID) *WebAppManifest {
 	return &WebAppManifest{inner: raw.BEWebAppManifestFromID(id)}
 }
 
+// Returns nil if manifestURL is invalid or jsonData cannot be parsed.
+//
 // NewWebAppManifestWithJSONDataManifestURL creates a new [WebAppManifest].
 func NewWebAppManifestWithJSONDataManifestURL(jsonData *foundation.NSData, manifestURL string) *WebAppManifest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("BEWebAppManifest")), objc.RegisterName("alloc"))

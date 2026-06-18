@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents a collection of Virtio console ports.
+//
 // VirtioConsolePortArray wraps [raw.VZVirtioConsolePortArray] with a fluent Go API.
 type VirtioConsolePortArray struct {
 	inner *raw.VZVirtioConsolePortArray
@@ -35,6 +37,8 @@ func NewVirtioConsolePortArray() *VirtioConsolePortArray {
 	return &VirtioConsolePortArray{inner: raw.VZVirtioConsolePortArrayFromID(_id)}
 }
 
+// Returns the Virtio console port at the specified index.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *VirtioConsolePortArray) ObjectAtIndexedSubscript(portIndex uint) *VirtioConsolePort {
 	_r := x.inner.ObjectAtIndexedSubscript(portIndex)

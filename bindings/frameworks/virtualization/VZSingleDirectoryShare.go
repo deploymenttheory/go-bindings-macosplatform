@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines the directory share for a single directory.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzsingledirectoryshare
 type VZSingleDirectoryShare struct {
 	VZDirectoryShare
@@ -30,7 +32,7 @@ func VZSingleDirectoryShareFromID(id objc.ID) *VZSingleDirectoryShare {
 	return o
 }
 
-// @abstract Initialize the directory share with a directory on the host. @param directory Directory to share.
+// Creates a directory share with a directory that you specify on the host.
 func (o *VZSingleDirectoryShare) InitWithDirectory(directory *VZSharedDirectory) *VZSingleDirectoryShare {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZSingleDirectoryShareSelInitWithDirectory, directory.Ptr())
 	if _ret != 0 {

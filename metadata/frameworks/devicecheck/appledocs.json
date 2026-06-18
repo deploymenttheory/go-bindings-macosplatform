@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "framework": "DeviceCheck",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "DCAppAttestService": {
+      "doc": "A service that you use to validate the instance of your app running on a device.",
+      "url": "https://developer.apple.com/documentation/devicecheck/dcappattestservice"
+    },
+    "DCDevice": {
+      "doc": "A representation of a device that provides a unique, authenticated token.",
+      "url": "https://developer.apple.com/documentation/devicecheck/dcdevice"
+    }
+  },
+  "methods": {
+    "DCAppAttestService": {
+      "-attestKey:clientDataHash:completionHandler:": {
+        "doc": "Asks Apple to attest to the validity of a generated cryptographic key.",
+        "url": "https://developer.apple.com/documentation/devicecheck/dcappattestservice/attestkey(_:clientdatahash:completionhandler:)"
+      },
+      "-generateAssertion:clientDataHash:completionHandler:": {
+        "doc": "Creates a block of data that demonstrates the legitimacy of an instance of your app running on a device.",
+        "url": "https://developer.apple.com/documentation/devicecheck/dcappattestservice/generateassertion(_:clientdatahash:completionhandler:)"
+      },
+      "-generateKeyWithCompletionHandler:": {
+        "doc": "Creates a new cryptographic key for use with the App Attest service.",
+        "url": "https://developer.apple.com/documentation/devicecheck/dcappattestservice/generatekey(completionhandler:)"
+      }
+    },
+    "DCDevice": {
+      "-generateTokenWithCompletionHandler:": {
+        "doc": "Generates a token that identifies the current device.",
+        "url": "https://developer.apple.com/documentation/devicecheck/dcdevice/generatetoken(completionhandler:)"
+      }
+    }
+  },
+  "properties": {
+    "DCAppAttestService": {
+      "sharedService": {
+        "doc": "The shared App Attest service that you use to validate your app.",
+        "url": "https://developer.apple.com/documentation/devicecheck/dcappattestservice/shared"
+      },
+      "supported": {
+        "doc": "A Boolean value that indicates whether a particular device provides the App Attest service.",
+        "url": "https://developer.apple.com/documentation/devicecheck/dcappattestservice/issupported"
+      }
+    },
+    "DCDevice": {
+      "currentDevice": {
+        "doc": "A representation of the device for which you want to query the two bits of data.",
+        "url": "https://developer.apple.com/documentation/devicecheck/dcdevice/current"
+      },
+      "supported": {
+        "doc": "A Boolean value that indicates whether the device supports the DeviceCheck API.",
+        "url": "https://developer.apple.com/documentation/devicecheck/dcdevice/issupported"
+      }
+    }
+  }
+}

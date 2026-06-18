@@ -36,6 +36,8 @@ func NewModelStructureProgramFunction() *ModelStructureProgramFunction {
 	return &ModelStructureProgramFunction{inner: raw.MLModelStructureProgramFunctionFromID(_id)}
 }
 
+// The named inputs to the function.
+//
 // Inputs returns the collection as a Go slice.
 func (x *ModelStructureProgramFunction) Inputs() []*ModelStructureProgramNamedValueType {
 	arr := x.inner.Inputs()
@@ -47,6 +49,8 @@ func (x *ModelStructureProgramFunction) Inputs() []*ModelStructureProgramNamedVa
 	})
 }
 
+// The active block in the function.
+//
 // Block calls the underlying Block.
 func (x *ModelStructureProgramFunction) Block() *ModelStructureProgramBlock {
 	_r := x.inner.Block()

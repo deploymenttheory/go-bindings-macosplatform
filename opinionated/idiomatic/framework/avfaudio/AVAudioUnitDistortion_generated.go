@@ -35,29 +35,39 @@ func NewAudioUnitDistortion() *AudioUnitDistortion {
 	return &AudioUnitDistortion{inner: raw.AVAudioUnitDistortionFromID(_id)}
 }
 
+// @property preGain @abstract Gain applied to the signal before being distorted Range:      -80 -> 20 Default:    -6 Unit:       dB
+//
 // WithPreGain sets the preGain property and returns the receiver for chaining.
 func (x *AudioUnitDistortion) WithPreGain(preGain float32) *AudioUnitDistortion {
 	x.inner.SetPreGain(preGain)
 	return x
 }
 
+// @property wetDryMix @abstract Blend of the distorted and dry signals Range:      0 (all dry) -> 100 (all distorted) Default:    50 Unit:       Percent
+//
 // WithWetDryMix sets the wetDryMix property and returns the receiver for chaining.
 func (x *AudioUnitDistortion) WithWetDryMix(wetDryMix float32) *AudioUnitDistortion {
 	x.inner.SetWetDryMix(wetDryMix)
 	return x
 }
 
+// @property bypass @abstract Bypass state of the audio unit.
+//
 // WithBypass sets the bypass property and returns the receiver for chaining.
 func (x *AudioUnitDistortion) WithBypass(bypass bool) *AudioUnitDistortion {
 	x.inner.AVAudioUnitEffect.SetBypass(bypass)
 	return x
 }
 
+// @method loadFactoryPreset: @abstract Load a distortion preset. Default:    AVAudioUnitDistortionPresetDrumsBitBrush
+//
 // LoadFactoryPreset calls the underlying LoadFactoryPreset.
 func (x *AudioUnitDistortion) LoadFactoryPreset(preset AVAudioUnitDistortionPreset) {
 	x.inner.LoadFactoryPreset(raw.AVAudioUnitDistortionPreset(preset))
 }
 
+// @property preGain @abstract Gain applied to the signal before being distorted Range:      -80 -> 20 Default:    -6 Unit:       dB
+//
 // PreGain calls the underlying PreGain.
 func (x *AudioUnitDistortion) PreGain() float32 {
 	return x.inner.PreGain()
@@ -68,6 +78,8 @@ func (x *AudioUnitDistortion) SetPreGain(preGain float32) {
 	x.inner.SetPreGain(preGain)
 }
 
+// @property wetDryMix @abstract Blend of the distorted and dry signals Range:      0 (all dry) -> 100 (all distorted) Default:    50 Unit:       Percent
+//
 // WetDryMix calls the underlying WetDryMix.
 func (x *AudioUnitDistortion) WetDryMix() float32 {
 	return x.inner.WetDryMix()

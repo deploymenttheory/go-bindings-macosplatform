@@ -32,6 +32,8 @@ func EditVoiceShortcutViewControllerFromID(id objc.ID) *EditVoiceShortcutViewCon
 	return &EditVoiceShortcutViewController{inner: raw.INUIEditVoiceShortcutViewControllerFromID(id)}
 }
 
+// @param voiceShortcut The voice shortcut to be edited.
+//
 // NewEditVoiceShortcutViewControllerWithVoiceShortcut creates a new [EditVoiceShortcutViewController].
 func NewEditVoiceShortcutViewControllerWithVoiceShortcut(voiceShortcut *intents.INVoiceShortcut) *EditVoiceShortcutViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INUIEditVoiceShortcutViewController")), objc.RegisterName("alloc"))

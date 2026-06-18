@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @class NSXMLDTDNode @abstract The nodes that are exclusive to a DTD @discussion Every DTD node has a name. Object value is defined as follows:<ul> <li><b>Entity declaration</b> - the string that that entity resolves to eg "&lt;"</li> <li><b>Attribute declaration</b> - the default value, if any</li> <li><b>Element declaration</b> - the validation string</li> <li><b>Notation declaration</b> - no objectValue</li></ul>
+//
 // XMLDTDNode wraps [raw.NSXMLDTDNode] with a fluent Go API.
 type XMLDTDNode struct {
 	inner *raw.NSXMLDTDNode
@@ -36,6 +38,8 @@ func NewXMLDTDNode() *XMLDTDNode {
 	return &XMLDTDNode{inner: raw.NSXMLDTDNodeFromID(_id)}
 }
 
+// @method initWithXMLString: @abstract Returns an element, attribute, entity, or notation DTD node based on the full XML string.
+//
 // NewXMLDTDNodeWithXMLString creates a new [XMLDTDNode].
 func NewXMLDTDNodeWithXMLString(string_ string) *XMLDTDNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLDTDNode")), objc.RegisterName("alloc"))
@@ -50,48 +54,64 @@ func NewXMLDTDNodeWithKindOptions(kind NSXMLNodeKind, options NSXMLNodeOptions) 
 	return &XMLDTDNode{inner: raw.NSXMLDTDNodeFromID(_id)}
 }
 
+// @abstract Sets the DTD sub kind.
+//
 // WithDTDKind sets the dTDKind property and returns the receiver for chaining.
 func (x *XMLDTDNode) WithDTDKind(dTDKind NSXMLDTDNodeKind) *XMLDTDNode {
 	x.inner.SetDTDKind(raw.NSXMLDTDNodeKind(dTDKind))
 	return x
 }
 
+// @abstract Sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set. Valid for entities and notations.
+//
 // WithPublicID sets the publicID property and returns the receiver for chaining.
 func (x *XMLDTDNode) WithPublicID(publicID string) *XMLDTDNode {
 	x.inner.SetPublicID(foundation.NSStringStringWithUTF8String(publicID))
 	return x
 }
 
+// @abstract Sets the system id. This should be a URL that points to a valid DTD. Valid for entities and notations.
+//
 // WithSystemID sets the systemID property and returns the receiver for chaining.
 func (x *XMLDTDNode) WithSystemID(systemID string) *XMLDTDNode {
 	x.inner.SetSystemID(foundation.NSStringStringWithUTF8String(systemID))
 	return x
 }
 
+// @abstract Set the notation name. Valid for entities only.
+//
 // WithNotationName sets the notationName property and returns the receiver for chaining.
 func (x *XMLDTDNode) WithNotationName(notationName string) *XMLDTDNode {
 	x.inner.SetNotationName(foundation.NSStringStringWithUTF8String(notationName))
 	return x
 }
 
+// @abstract Sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *XMLDTDNode) WithName(name string) *XMLDTDNode {
 	x.inner.NSXMLNode.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @abstract Sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *XMLDTDNode) WithObjectValue(objectValue objc.ID) *XMLDTDNode {
 	x.inner.NSXMLNode.SetObjectValue(objectValue)
 	return x
 }
 
+// @abstract Sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *XMLDTDNode) WithStringValue(stringValue string) *XMLDTDNode {
 	x.inner.NSXMLNode.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// @abstract Set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
+//
 // WithURI sets the uRI property and returns the receiver for chaining.
 func (x *XMLDTDNode) WithURI(uRI string) *XMLDTDNode {
 	x.inner.NSXMLNode.SetURI(foundation.NSStringStringWithUTF8String(uRI))
@@ -104,6 +124,8 @@ func (x *XMLDTDNode) WithScriptingProperties(scriptingProperties *raw.NSDictiona
 	return x
 }
 
+// @abstract Sets the DTD sub kind.
+//
 // DTDKind calls the underlying DTDKind.
 func (x *XMLDTDNode) DTDKind() NSXMLDTDNodeKind {
 	return NSXMLDTDNodeKind(x.inner.DTDKind())
@@ -114,11 +136,15 @@ func (x *XMLDTDNode) SetDTDKind(dTDKind NSXMLDTDNodeKind) {
 	x.inner.SetDTDKind(raw.NSXMLDTDNodeKind(dTDKind))
 }
 
+// @abstract True if the system id is set. Valid for entities and notations.
+//
 // IsExternal calls the underlying IsExternal.
 func (x *XMLDTDNode) IsExternal() bool {
 	return x.inner.IsExternal()
 }
 
+// @abstract Sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set. Valid for entities and notations.
+//
 // PublicID calls the underlying PublicID.
 func (x *XMLDTDNode) PublicID() *String {
 	_r := x.inner.PublicID()
@@ -133,6 +159,8 @@ func (x *XMLDTDNode) SetPublicID(publicID string) {
 	x.inner.SetPublicID(foundation.NSStringStringWithUTF8String(publicID))
 }
 
+// @abstract Sets the system id. This should be a URL that points to a valid DTD. Valid for entities and notations.
+//
 // SystemID calls the underlying SystemID.
 func (x *XMLDTDNode) SystemID() *String {
 	_r := x.inner.SystemID()
@@ -147,6 +175,8 @@ func (x *XMLDTDNode) SetSystemID(systemID string) {
 	x.inner.SetSystemID(foundation.NSStringStringWithUTF8String(systemID))
 }
 
+// @abstract Set the notation name. Valid for entities only.
+//
 // NotationName calls the underlying NotationName.
 func (x *XMLDTDNode) NotationName() *String {
 	_r := x.inner.NotationName()

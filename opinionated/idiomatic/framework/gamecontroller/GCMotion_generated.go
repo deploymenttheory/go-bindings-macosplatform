@@ -41,72 +41,98 @@ func (x *Motion) WithValueChangedHandler(valueChangedHandler func(*raw.GCMotion)
 	return x
 }
 
+// Set this property to YES when you wish to receive motion data from the controller. When you set this property to NO, the motion sensors will be disabled and the GCMotion profile will not be updated. @note It is highly recommended that you only enable sensor during the period of time you directly need motion data. Motion sensors can drain controller battery, device battery, and needlessly consume Bluetooth bandwidth. @see sensorsRequireManualActivation
+//
 // WithSensorsActive sets the sensorsActive property and returns the receiver for chaining.
 func (x *Motion) WithSensorsActive(sensorsActive bool) *Motion {
 	x.inner.SetSensorsActive(sensorsActive)
 	return x
 }
 
+// The gravity vector expressed in the controller's reference frame. Note that the total acceleration of the controller is equal to gravity plus userAcceleration. @see userAcceleration @see acceleration
+//
 // WithGravity sets the gravity property and returns the receiver for chaining.
 func (x *Motion) WithGravity(gravity raw.GCAcceleration) *Motion {
 	x.inner.SetGravity(gravity)
 	return x
 }
 
+// The acceleration that the user is giving to the controller. Note that the total acceleration of the controller is equal to gravity plus userAcceleration. @see gravity @see acceleration
+//
 // WithUserAcceleration sets the userAcceleration property and returns the receiver for chaining.
 func (x *Motion) WithUserAcceleration(userAcceleration raw.GCAcceleration) *Motion {
 	x.inner.SetUserAcceleration(userAcceleration)
 	return x
 }
 
+// The total acceleration of the controller. @see gravity @see userAcceleration
+//
 // WithAcceleration sets the acceleration property and returns the receiver for chaining.
 func (x *Motion) WithAcceleration(acceleration raw.GCAcceleration) *Motion {
 	x.inner.SetAcceleration(acceleration)
 	return x
 }
 
+// The current attitude of the controller. @note Remotes without accurate attitude and rotation rate can not determine a stable attitude so the values will be (0,0,0,1) at all times. @see hasAttitude @see GCMicroGamepad
+//
 // WithAttitude sets the attitude property and returns the receiver for chaining.
 func (x *Motion) WithAttitude(attitude raw.GCQuaternion) *Motion {
 	x.inner.SetAttitude(attitude)
 	return x
 }
 
+// The current rotation rate of the controller. @note Remotes without accurate attitude and rotation rate can not determine a stable rotation rate so the values will be (0,0,0) at all times. @see hasRotationRate @see GCMicroGamepad
+//
 // WithRotationRate sets the rotationRate property and returns the receiver for chaining.
 func (x *Motion) WithRotationRate(rotationRate raw.GCRotationRate) *Motion {
 	x.inner.SetRotationRate(rotationRate)
 	return x
 }
 
+// Sets the gravity vector expressed in the controller's reference frame. @note If the controller's snapshot flag is set to NO, this method has no effect. @see gravity
+//
 // SetGravity calls the underlying SetGravity.
 func (x *Motion) SetGravity(gravity raw.GCAcceleration) {
 	x.inner.SetGravity(gravity)
 }
 
+// Sets the acceleration that the user is giving to the controller. @note If the controller's snapshot flag is set to NO, this method has no effect. @see userAcceleration
+//
 // SetUserAcceleration calls the underlying SetUserAcceleration.
 func (x *Motion) SetUserAcceleration(userAcceleration raw.GCAcceleration) {
 	x.inner.SetUserAcceleration(userAcceleration)
 }
 
+// Sets the acceleration that the user is giving to the controller. @note If the controller's snapshot flag is set to NO, this method has no effect. @see userAcceleration
+//
 // SetAcceleration calls the underlying SetAcceleration.
 func (x *Motion) SetAcceleration(acceleration raw.GCAcceleration) {
 	x.inner.SetAcceleration(acceleration)
 }
 
+// Sets the current rotation rate of the controller. @note If the controller's snapshot flag is set to NO, this method has no effect. @see attitude
+//
 // SetAttitude calls the underlying SetAttitude.
 func (x *Motion) SetAttitude(attitude raw.GCQuaternion) {
 	x.inner.SetAttitude(attitude)
 }
 
+// Sets the current rotation rate of the controller. @note If the controller's snapshot flag is set to NO, this method has no effect. @see rotationRate
+//
 // SetRotationRate calls the underlying SetRotationRate.
 func (x *Motion) SetRotationRate(rotationRate raw.GCRotationRate) {
 	x.inner.SetRotationRate(rotationRate)
 }
 
+// Sets the state vector of the motion profile to a copy of the input motion profile's state vector. @note If the controller's snapshot flag is set to NO, this method has no effect. @see GCController.snapshot
+//
 // SetStateFromMotion calls the underlying SetStateFromMotion.
 func (x *Motion) SetStateFromMotion(motion *raw.GCMotion) {
 	x.inner.SetStateFromMotion(motion)
 }
 
+// A profile keeps a reference to the controller that it is mapping input from. @see GCController
+//
 // Controller calls the underlying Controller.
 func (x *Motion) Controller() *Controller {
 	_r := x.inner.Controller()
@@ -126,11 +152,15 @@ func (x *Motion) SetValueChangedHandler(valueChangedHandler func(*raw.GCMotion))
 	x.inner.SetValueChangedHandler(valueChangedHandler)
 }
 
+// If this property is returns YES, you are responsible for setting sensorsActive to YES when you need motion data from the controller. Some controllers, such as the Siri Remote, automatically activate and deactivate motion sensors. In such a case, this property will return NO. @see sensorsActive
+//
 // SensorsRequireManualActivation calls the underlying SensorsRequireManualActivation.
 func (x *Motion) SensorsRequireManualActivation() bool {
 	return x.inner.SensorsRequireManualActivation()
 }
 
+// Set this property to YES when you wish to receive motion data from the controller. When you set this property to NO, the motion sensors will be disabled and the GCMotion profile will not be updated. @note It is highly recommended that you only enable sensor during the period of time you directly need motion data. Motion sensors can drain controller battery, device battery, and needlessly consume Bluetooth bandwidth. @see sensorsRequireManualActivation
+//
 // SensorsActive calls the underlying SensorsActive.
 func (x *Motion) SensorsActive() bool {
 	return x.inner.SensorsActive()
@@ -141,46 +171,64 @@ func (x *Motion) SetSensorsActive(sensorsActive bool) {
 	x.inner.SetSensorsActive(sensorsActive)
 }
 
+// Returns YES if the controller is capable of reporting gravity and user acceleration separately. @note Some controllers do not separate gravity from user acceleration, and only report the total acceleration of the controller. Query whether the connected controller has the ability to separate gravity and user acceleration, and it doesn’t, use acceleration instead. @see acceleration
+//
 // HasGravityAndUserAcceleration calls the underlying HasGravityAndUserAcceleration.
 func (x *Motion) HasGravityAndUserAcceleration() bool {
 	return x.inner.HasGravityAndUserAcceleration()
 }
 
+// The gravity vector expressed in the controller's reference frame. Note that the total acceleration of the controller is equal to gravity plus userAcceleration. @see userAcceleration @see acceleration
+//
 // Gravity calls the underlying Gravity.
 func (x *Motion) Gravity() raw.GCAcceleration {
 	return x.inner.Gravity()
 }
 
+// The acceleration that the user is giving to the controller. Note that the total acceleration of the controller is equal to gravity plus userAcceleration. @see gravity @see acceleration
+//
 // UserAcceleration calls the underlying UserAcceleration.
 func (x *Motion) UserAcceleration() raw.GCAcceleration {
 	return x.inner.UserAcceleration()
 }
 
+// The total acceleration of the controller. @see gravity @see userAcceleration
+//
 // Acceleration calls the underlying Acceleration.
 func (x *Motion) Acceleration() raw.GCAcceleration {
 	return x.inner.Acceleration()
 }
 
+// The controller generating the motion data has sensors that can accurately determine the current attitude and rotation rate. If this is enabled the motion data for attitude and rotation rate are usable for inputs.
+//
 // HasAttitudeAndRotationRate calls the underlying HasAttitudeAndRotationRate.
 func (x *Motion) HasAttitudeAndRotationRate() bool {
 	return x.inner.HasAttitudeAndRotationRate()
 }
 
+// The controller generating the motion data has sensors that can accurately determine the current attitude. If this is enabled the motion data for attitude is usable for inputs.
+//
 // HasAttitude calls the underlying HasAttitude.
 func (x *Motion) HasAttitude() bool {
 	return x.inner.HasAttitude()
 }
 
+// The controller generating the motion data has sensors that can accurately determine the current rotation rate. If this is enabled the motion data for rotation rate is usable for inputs.
+//
 // HasRotationRate calls the underlying HasRotationRate.
 func (x *Motion) HasRotationRate() bool {
 	return x.inner.HasRotationRate()
 }
 
+// The current attitude of the controller. @note Remotes without accurate attitude and rotation rate can not determine a stable attitude so the values will be (0,0,0,1) at all times. @see hasAttitude @see GCMicroGamepad
+//
 // Attitude calls the underlying Attitude.
 func (x *Motion) Attitude() raw.GCQuaternion {
 	return x.inner.Attitude()
 }
 
+// The current rotation rate of the controller. @note Remotes without accurate attitude and rotation rate can not determine a stable rotation rate so the values will be (0,0,0) at all times. @see hasRotationRate @see GCMicroGamepad
+//
 // RotationRate calls the underlying RotationRate.
 func (x *Motion) RotationRate() raw.GCRotationRate {
 	return x.inner.RotationRate()

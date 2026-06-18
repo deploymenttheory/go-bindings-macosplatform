@@ -40,34 +40,46 @@ func NewGraphExecutableExecutionDescriptor() *GraphExecutableExecutionDescriptor
 	return &GraphExecutableExecutionDescriptor{inner: raw.MPSGraphExecutableExecutionDescriptorFromID(_id)}
 }
 
+// A notification that appears when graph-executable execution is scheduled. Default value is nil.
+//
 // WithScheduledHandler sets the scheduledHandler property and returns the receiver for chaining.
 func (x *GraphExecutableExecutionDescriptor) WithScheduledHandler(scheduledHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer)) *GraphExecutableExecutionDescriptor {
 	x.inner.SetScheduledHandler(scheduledHandler)
 	return x
 }
 
+// A notification that appears when graph-executable execution is finished. Default value is nil.
+//
 // WithCompletionHandler sets the completionHandler property and returns the receiver for chaining.
 func (x *GraphExecutableExecutionDescriptor) WithCompletionHandler(completionHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer)) *GraphExecutableExecutionDescriptor {
 	x.inner.SetCompletionHandler(completionHandler)
 	return x
 }
 
+// Flag for the graph executable to wait till the execution has completed. Default value is false.
+//
 // WithWaitUntilCompleted sets the waitUntilCompleted property and returns the receiver for chaining.
 func (x *GraphExecutableExecutionDescriptor) WithWaitUntilCompleted(waitUntilCompleted bool) *GraphExecutableExecutionDescriptor {
 	x.inner.SetWaitUntilCompleted(waitUntilCompleted)
 	return x
 }
 
+// Waits on these shared events before scheduling execution on the HW. This does not include encoding which can still continue. - Parameters: - event: Shared event to wait on. - value: Value for shared event to wait on.
+//
 // WaitForEventValue calls the underlying WaitForEventValue.
 func (x *GraphExecutableExecutionDescriptor) WaitForEventValue(event metal.MTLSharedEvent, value uint64) {
 	x.inner.WaitForEventValue(event, value)
 }
 
+// Signals these shared events at execution stage and immediately proceeds. - Parameters: - event: Shared event to signal. - executionStage: Execution stage to signal event at. - value: Value for shared event to wait on.
+//
 // SignalEventAtExecutionEventValue calls the underlying SignalEventAtExecutionEventValue.
 func (x *GraphExecutableExecutionDescriptor) SignalEventAtExecutionEventValue(event metal.MTLSharedEvent, executionStage MPSGraphExecutionStage, value uint64) {
 	x.inner.SignalEventAtExecutionEventValue(event, raw.MPSGraphExecutionStage(executionStage), value)
 }
 
+// A notification that appears when graph-executable execution is scheduled. Default value is nil.
+//
 // ScheduledHandler calls the underlying ScheduledHandler.
 func (x *GraphExecutableExecutionDescriptor) ScheduledHandler() objc.Block {
 	return x.inner.ScheduledHandler()
@@ -78,6 +90,8 @@ func (x *GraphExecutableExecutionDescriptor) SetScheduledHandler(scheduledHandle
 	x.inner.SetScheduledHandler(scheduledHandler)
 }
 
+// A notification that appears when graph-executable execution is finished. Default value is nil.
+//
 // CompletionHandler calls the underlying CompletionHandler.
 func (x *GraphExecutableExecutionDescriptor) CompletionHandler() objc.Block {
 	return x.inner.CompletionHandler()
@@ -88,6 +102,8 @@ func (x *GraphExecutableExecutionDescriptor) SetCompletionHandler(completionHand
 	x.inner.SetCompletionHandler(completionHandler)
 }
 
+// Flag for the graph executable to wait till the execution has completed. Default value is false.
+//
 // WaitUntilCompleted calls the underlying WaitUntilCompleted.
 func (x *GraphExecutableExecutionDescriptor) WaitUntilCompleted() bool {
 	return x.inner.WaitUntilCompleted()

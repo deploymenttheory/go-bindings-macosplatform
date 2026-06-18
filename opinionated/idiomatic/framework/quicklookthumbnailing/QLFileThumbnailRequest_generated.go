@@ -37,21 +37,29 @@ func NewFileThumbnailRequest() *FileThumbnailRequest {
 	return &FileThumbnailRequest{inner: raw.QLFileThumbnailRequestFromID(_id)}
 }
 
+// The maximum size of the generated thumbnail that will be accepted. This is also the preferred size, ideally either the width or the height will match the maximumSize's width or height respectively.
+//
 // MaximumSize calls the underlying MaximumSize.
 func (x *FileThumbnailRequest) MaximumSize() corefoundation.CGSize {
 	return x.inner.MaximumSize()
 }
 
+// The minimum size of the generated thumbnail that will be accepted.
+//
 // MinimumSize calls the underlying MinimumSize.
 func (x *FileThumbnailRequest) MinimumSize() corefoundation.CGSize {
 	return x.inner.MinimumSize()
 }
 
+// The scale of the requested thumbnail.
+//
 // Scale calls the underlying Scale.
 func (x *FileThumbnailRequest) Scale() float64 {
 	return x.inner.Scale()
 }
 
+// The url of the file for which a thumbnail is being requested.
+//
 // FileURL calls the underlying FileURL.
 func (x *FileThumbnailRequest) FileURL() *foundation.NSURL {
 	return x.inner.FileURL()

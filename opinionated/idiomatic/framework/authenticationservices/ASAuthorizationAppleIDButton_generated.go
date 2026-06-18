@@ -36,6 +36,8 @@ func NewAuthorizationAppleIDButtonWithAuthorizationButtonTypeAuthorizationButton
 	return &AuthorizationAppleIDButton{inner: raw.ASAuthorizationAppleIDButtonFromID(_id)}
 }
 
+// @abstract Set a custom corner radius to be used by this button.
+//
 // WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
 func (x *AuthorizationAppleIDButton) WithCornerRadius(cornerRadius float64) *AuthorizationAppleIDButton {
 	x.inner.SetCornerRadius(cornerRadius)

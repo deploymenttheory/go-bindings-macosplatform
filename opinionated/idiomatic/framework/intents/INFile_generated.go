@@ -37,23 +37,31 @@ func NewFile() *File {
 	return &File{inner: raw.INFileFromID(_id)}
 }
 
+// The human-readable name of the file, which will be displayed to the user.
+//
 // WithFilename sets the filename property and returns the receiver for chaining.
 func (x *File) WithFilename(filename string) *File {
 	x.inner.SetFilename(foundation.NSStringStringWithUTF8String(filename))
 	return x
 }
 
+// Indicates whether the file should be automatically deleted from disk when the Shortcut is done running. `false` by default.
+//
 // WithRemovedOnCompletion sets the removedOnCompletion property and returns the receiver for chaining.
 func (x *File) WithRemovedOnCompletion(removedOnCompletion bool) *File {
 	x.inner.SetRemovedOnCompletion(removedOnCompletion)
 	return x
 }
 
+// The contents of the file. If the file was created with a URL, accessing this property will memory map the file contents.
+//
 // Data calls the underlying Data.
 func (x *File) Data() *foundation.NSData {
 	return x.inner.Data()
 }
 
+// The human-readable name of the file, which will be displayed to the user.
+//
 // Filename calls the underlying Filename.
 func (x *File) Filename() string {
 	_r := x.inner.Filename()
@@ -68,6 +76,8 @@ func (x *File) SetFilename(filename string) {
 	x.inner.SetFilename(foundation.NSStringStringWithUTF8String(filename))
 }
 
+// The uniform type identifier of the file. (i.e. "public.json", "public.png", or any custom type) More information about uniform type identifiers can be found in <CoreServices/UTCoreTypes.h>
+//
 // TypeIdentifier calls the underlying TypeIdentifier.
 func (x *File) TypeIdentifier() string {
 	_r := x.inner.TypeIdentifier()
@@ -77,11 +87,15 @@ func (x *File) TypeIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// URL to the file on disk, if any. If the file isn't stored on disk, access the contents using the `data` property. If the file was created elsewhere on the system, make sure to surround access to file contents with `-[NSURL startAccessingSecurityScopedResource]` and `-[NSURL stopAccessingSecurityScopedResource]`.
+//
 // FileURL calls the underlying FileURL.
 func (x *File) FileURL() *foundation.NSURL {
 	return x.inner.FileURL()
 }
 
+// Indicates whether the file should be automatically deleted from disk when the Shortcut is done running. `false` by default.
+//
 // RemovedOnCompletion calls the underlying RemovedOnCompletion.
 func (x *File) RemovedOnCompletion() bool {
 	return x.inner.RemovedOnCompletion()

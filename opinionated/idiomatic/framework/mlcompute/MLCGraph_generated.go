@@ -37,6 +37,8 @@ func NewGraph() *Graph {
 	return &Graph{inner: raw.MLCGraphFromID(_id)}
 }
 
+// @abstract   Add a layer to the graph @param      layer        The layer @param      source      The source tensor @return     A result tensor
+//
 // NodeWithLayerSource calls the underlying NodeWithLayerSource.
 func (x *Graph) NodeWithLayerSource(layer *raw.MLCLayer, source *raw.MLCTensor) *Tensor {
 	_r := x.inner.NodeWithLayerSource(layer, source)
@@ -46,6 +48,8 @@ func (x *Graph) NodeWithLayerSource(layer *raw.MLCLayer, source *raw.MLCTensor) 
 	return &Tensor{inner: _r}
 }
 
+// @abstract   Add a layer to the graph @param      layer        The layer @param      sources    A list of source tensors @discussion For variable length sequences of LSTMs/RNNs layers, create an MLCTensor of sortedSequenceLengths and pass it as the last index (i.e. index 2 or 4) of sources. This tensor must of be type MLCDataTypeInt32. @return     A result tensor
+//
 // NodeWithLayerSources calls the underlying NodeWithLayerSources.
 func (x *Graph) NodeWithLayerSources(layer *raw.MLCLayer, sources *foundation.NSArray[*raw.MLCTensor]) *Tensor {
 	_r := x.inner.NodeWithLayerSources(layer, sources)
@@ -55,6 +59,8 @@ func (x *Graph) NodeWithLayerSources(layer *raw.MLCLayer, sources *foundation.NS
 	return &Tensor{inner: _r}
 }
 
+// @abstract   Add a layer to the graph @param      layer                       The layer @param      sources                   A list of source tensors @param      disableUpdate     A flag to indicate if optimizer update should be disabled for this layer @discussion For variable length sequences of LSTMs/RNNs layers, create an MLCTensor of sortedSequenceLengths and pass it as the last index (i.e. index 2 or 4) of sources. This tensor must of be type MLCDataTypeInt32. @return     A result tensor
+//
 // NodeWithLayerSourcesDisableUpdate calls the underlying NodeWithLayerSourcesDisableUpdate.
 func (x *Graph) NodeWithLayerSourcesDisableUpdate(layer *raw.MLCLayer, sources *foundation.NSArray[*raw.MLCTensor], disableUpdate bool) *Tensor {
 	_r := x.inner.NodeWithLayerSourcesDisableUpdate(layer, sources, disableUpdate)
@@ -64,6 +70,8 @@ func (x *Graph) NodeWithLayerSourcesDisableUpdate(layer *raw.MLCLayer, sources *
 	return &Tensor{inner: _r}
 }
 
+// @abstract   Add a loss layer to the graph @param      layer                      The loss layer @param      lossLabels           The loss labels tensor @discussion For variable length sequences of LSTMs/RNNs layers, create an MLCTensor of sortedSequenceLengths and pass it as the last index (i.e. index 2 or 4) of sources. This tensor must of be type MLCDataTypeInt32. @return     A result tensor
+//
 // NodeWithLayerSourcesLossLabels calls the underlying NodeWithLayerSourcesLossLabels.
 func (x *Graph) NodeWithLayerSourcesLossLabels(layer *raw.MLCLayer, sources *foundation.NSArray[*raw.MLCTensor], lossLabels *foundation.NSArray[*raw.MLCTensor]) *Tensor {
 	_r := x.inner.NodeWithLayerSourcesLossLabels(layer, sources, lossLabels)
@@ -73,16 +81,22 @@ func (x *Graph) NodeWithLayerSourcesLossLabels(layer *raw.MLCLayer, sources *fou
 	return &Tensor{inner: _r}
 }
 
+// @abstract   Add a split layer to the graph @param      source                         The source tensor @param      splitCount                The number of splits @param      dimension                  The dimension to split the source tensor @return     A result tensor
+//
 // SplitWithSourceSplitCountDimension calls the underlying SplitWithSourceSplitCountDimension.
 func (x *Graph) SplitWithSourceSplitCountDimension(source *raw.MLCTensor, splitCount uint, dimension uint) *foundation.NSArray[*raw.MLCTensor] {
 	return x.inner.SplitWithSourceSplitCountDimension(source, splitCount, dimension)
 }
 
+// @abstract   Add a split layer to the graph @param      source                                     The source tensor @param      splitSectionLengths        The lengths of each split section @param      dimension                              The dimension to split the source tensor @return     A result tensor
+//
 // SplitWithSourceSplitSectionLengthsDimension calls the underlying SplitWithSourceSplitSectionLengthsDimension.
 func (x *Graph) SplitWithSourceSplitSectionLengthsDimension(source *raw.MLCTensor, splitSectionLengths *foundation.NSArray[*foundation.NSNumber], dimension uint) *foundation.NSArray[*raw.MLCTensor] {
 	return x.inner.SplitWithSourceSplitSectionLengthsDimension(source, splitSectionLengths, dimension)
 }
 
+// @abstract   Add a concat layer to the graph @param      sources      The source tensors to concatenate @param      dimension  The concatenation dimension @return     A result tensor
+//
 // ConcatenateWithSourcesDimension calls the underlying ConcatenateWithSourcesDimension.
 func (x *Graph) ConcatenateWithSourcesDimension(sources *foundation.NSArray[*raw.MLCTensor], dimension uint) *Tensor {
 	_r := x.inner.ConcatenateWithSourcesDimension(sources, dimension)
@@ -92,6 +106,8 @@ func (x *Graph) ConcatenateWithSourcesDimension(sources *foundation.NSArray[*raw
 	return &Tensor{inner: _r}
 }
 
+// @abstract   Add a reshape layer to the graph @param      shape                     An array representing the shape of result tensor @param      source                   The source tensor @return     A result tensor
+//
 // ReshapeWithShapeSource calls the underlying ReshapeWithShapeSource.
 func (x *Graph) ReshapeWithShapeSource(shape *foundation.NSArray[*foundation.NSNumber], source *raw.MLCTensor) *Tensor {
 	_r := x.inner.ReshapeWithShapeSource(shape, source)
@@ -101,6 +117,8 @@ func (x *Graph) ReshapeWithShapeSource(shape *foundation.NSArray[*foundation.NSN
 	return &Tensor{inner: _r}
 }
 
+// @abstract   Add a transpose layer to the graph @param      dimensions NSArray<NSNumber *> representing the desired ordering of dimensions The dimensions array specifies the input axis source for each output axis, such that the K'th element in the dimensions array specifies the input axis source for the K'th axis in the output.  The batch dimension which is typically axis 0 cannot be transposed. @return     A result tensor
+//
 // TransposeWithDimensionsSource calls the underlying TransposeWithDimensionsSource.
 func (x *Graph) TransposeWithDimensionsSource(dimensions *foundation.NSArray[*foundation.NSNumber], source *raw.MLCTensor) *Tensor {
 	_r := x.inner.TransposeWithDimensionsSource(dimensions, source)
@@ -110,6 +128,8 @@ func (x *Graph) TransposeWithDimensionsSource(dimensions *foundation.NSArray[*fo
 	return &Tensor{inner: _r}
 }
 
+// @abstract   Add a select layer to the graph @param      sources            The source tensors @param      condition        The condition mask @return     A result tensor
+//
 // SelectWithSourcesCondition calls the underlying SelectWithSourcesCondition.
 func (x *Graph) SelectWithSourcesCondition(sources *foundation.NSArray[*raw.MLCTensor], condition *raw.MLCTensor) *Tensor {
 	_r := x.inner.SelectWithSourcesCondition(sources, condition)
@@ -119,6 +139,8 @@ func (x *Graph) SelectWithSourcesCondition(sources *foundation.NSArray[*raw.MLCT
 	return &Tensor{inner: _r}
 }
 
+// @abstract   Add a scatter layer to the graph @param      dimension             The dimension along which to index @param      source                    The updates to use with scattering with index positions specified in indices to result tensor @param      indices                  The index of elements to scatter @param      copyFrom                The source tensor whose data is  to be first copied to the result tensor @param      reductionType     The reduction type applied for all values in source tensor that are scattered to a specific location in the result tensor. Must be: MLCReductionTypeNone or MLCReductionTypeSum. @return     A result tensor
+//
 // ScatterWithDimensionSourceIndicesCopyFromReductionType calls the underlying ScatterWithDimensionSourceIndicesCopyFromReductionType.
 func (x *Graph) ScatterWithDimensionSourceIndicesCopyFromReductionType(dimension uint, source *raw.MLCTensor, indices *raw.MLCTensor, copyFrom *raw.MLCTensor, reductionType MLCReductionType) *Tensor {
 	_r := x.inner.ScatterWithDimensionSourceIndicesCopyFromReductionType(dimension, source, indices, copyFrom, raw.MLCReductionType(reductionType))
@@ -128,6 +150,8 @@ func (x *Graph) ScatterWithDimensionSourceIndicesCopyFromReductionType(dimension
 	return &Tensor{inner: _r}
 }
 
+// @abstract   Add a gather layer to the graph @param      dimension       The dimension along which to index @param      source              The source tensor @param      indices            The index of elements to gather @return     A result tensor
+//
 // GatherWithDimensionSourceIndices calls the underlying GatherWithDimensionSourceIndices.
 func (x *Graph) GatherWithDimensionSourceIndices(dimension uint, source *raw.MLCTensor, indices *raw.MLCTensor) *Tensor {
 	_r := x.inner.GatherWithDimensionSourceIndices(dimension, source, indices)
@@ -137,26 +161,36 @@ func (x *Graph) GatherWithDimensionSourceIndices(dimension uint, source *raw.MLC
 	return &Tensor{inner: _r}
 }
 
+// @abstract   Associates data with input tensors. If the device is GPU, also copies the data to the device memory. Returns true if the data is successfully associated with input tensors. @discussion This function should be used if you execute the forward, gradient and optimizer updates independently. Before the forward pass is executed, the inputs should be written to device memory.  Similarly, before the gradient pass is executed, the inputs (typically the initial gradient tensor) should be written to device memory.  The caller must guarantee the lifetime of the underlying memory of each value of \p inputsData for the entirety of each corresponding input tensor's lifetime. @param      inputsData        The input data to use to write to device memory @param      inputTensors    The list of tensors to perform writes on @param      device                 The device @param      batchSize          The batch size.  This should be set to the actual batch size that may be used when we execute the graph and can be a value less than or equal to the batch size specified in the tensor. If set to 0, we use batch size specified in the tensor. @param      synchronous     Whether to execute the copy to the device synchronously.  For performance, asynchronous execution is recommended. @return     A Boolean value indicating whether the data is successfully associated with the tensor.
+//
 // BindAndWriteDataForInputsToDeviceBatchSizeSynchronous calls the underlying BindAndWriteDataForInputsToDeviceBatchSizeSynchronous.
 func (x *Graph) BindAndWriteDataForInputsToDeviceBatchSizeSynchronous(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], inputTensors *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], device *raw.MLCDevice, batchSize uint, synchronous bool) bool {
 	return x.inner.BindAndWriteDataForInputsToDeviceBatchSizeSynchronous(inputsData, inputTensors, device, batchSize, synchronous)
 }
 
+// @abstract   Associates data with input tensors. If the device is GPU, also copies the data to the device memory. Returns true if the data is successfully associated with input tensors. @discussion This function should be used if you execute the forward, gradient and optimizer updates independently. Before the forward pass is executed, the inputs should be written to device memory.  Similarly, before the gradient pass is executed, the inputs (typically the initial gradient tensor) should be written to device memory.  The caller must guarantee the lifetime of the underlying memory of each value of \p inputsData for the entirety of each corresponding input tensor's lifetime. @param      inputsData        The input data to use to write to device memory @param      inputTensors    The list of tensors to perform writes on @param      device                 The device @param      synchronous     Whether to execute the copy to the device synchronously.  For performance, asynchronous execution is recommended. @return     A Boolean value indicating whether the data is successfully associated with the tensor.
+//
 // BindAndWriteDataForInputsToDeviceSynchronous calls the underlying BindAndWriteDataForInputsToDeviceSynchronous.
 func (x *Graph) BindAndWriteDataForInputsToDeviceSynchronous(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], inputTensors *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], device *raw.MLCDevice, synchronous bool) bool {
 	return x.inner.BindAndWriteDataForInputsToDeviceSynchronous(inputsData, inputTensors, device, synchronous)
 }
 
+// @abstract   Get the source tensors for a layer in the training graph @param      layer   A layer in the training graph @return     A list of tensors
+//
 // SourceTensorsForLayer calls the underlying SourceTensorsForLayer.
 func (x *Graph) SourceTensorsForLayer(layer *raw.MLCLayer) *foundation.NSArray[*raw.MLCTensor] {
 	return x.inner.SourceTensorsForLayer(layer)
 }
 
+// @abstract   Get the result tensors for a layer in the training graph @param      layer   A layer in the training graph @return     A list of tensors
+//
 // ResultTensorsForLayer calls the underlying ResultTensorsForLayer.
 func (x *Graph) ResultTensorsForLayer(layer *raw.MLCLayer) *foundation.NSArray[*raw.MLCTensor] {
 	return x.inner.ResultTensorsForLayer(layer)
 }
 
+// @abstract   The device to be used when compiling and executing a graph
+//
 // Device calls the underlying Device.
 func (x *Graph) Device() *Device {
 	_r := x.inner.Device()
@@ -166,6 +200,8 @@ func (x *Graph) Device() *Device {
 	return &Device{inner: _r}
 }
 
+// @abstract   Layers in the graph
+//
 // Layers returns the collection as a Go slice.
 func (x *Graph) Layers() []*Layer {
 	arr := x.inner.Layers()
@@ -177,6 +213,8 @@ func (x *Graph) Layers() []*Layer {
 	})
 }
 
+// @abstract A DOT representation of the graph. @discussion For more info on the DOT language, refer to https://en.wikipedia.org/wiki/DOT_(graph_description_language). Edges that have a dashed lines are those that have stop gradients, while those with solid lines don't.
+//
 // SummarizedDOTDescription calls the underlying SummarizedDOTDescription.
 func (x *Graph) SummarizedDOTDescription() string {
 	_r := x.inner.SummarizedDOTDescription()

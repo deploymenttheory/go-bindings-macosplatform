@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents a storage device in a VM.
+//
 // StorageDevice wraps [raw.VZStorageDevice] with a fluent Go API.
 type StorageDevice struct {
 	inner *raw.VZStorageDevice

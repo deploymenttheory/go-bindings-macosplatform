@@ -37,6 +37,8 @@ func NewMTL4RenderPipelineColorAttachmentDescriptorArray() *MTL4RenderPipelineCo
 	return &MTL4RenderPipelineColorAttachmentDescriptorArray{inner: raw.MTL4RenderPipelineColorAttachmentDescriptorArrayFromID(_id)}
 }
 
+// Accesses a color attachment at a specific index. - Parameter attachmentIndex: Index of the attachment to access.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *MTL4RenderPipelineColorAttachmentDescriptor {
 	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
@@ -46,11 +48,15 @@ func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscr
 	return &MTL4RenderPipelineColorAttachmentDescriptor{inner: _r}
 }
 
+// Sets an attachment at an index. This function offers 'copy' semantics. You can safely set the color attachment at any legal index to nil. This has the effect of resetting that attachment descriptor's state to its default values. - Parameters: - attachment: the descriptor of the attachment to set. - attachmentIndex: the index of the attachment within the array.
+//
 // SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
 func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTL4RenderPipelineColorAttachmentDescriptor, attachmentIndex uint) {
 	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)
 }
 
+// Resets the elements of the descriptor array
+//
 // Reset calls the underlying Reset.
 func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) Reset() {
 	x.inner.Reset()

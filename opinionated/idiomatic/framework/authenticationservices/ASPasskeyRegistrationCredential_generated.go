@@ -31,6 +31,8 @@ func PasskeyRegistrationCredentialFromID(id objc.ID) *PasskeyRegistrationCredent
 	return &PasskeyRegistrationCredential{inner: raw.ASPasskeyRegistrationCredentialFromID(id)}
 }
 
+// @abstract Initializes an ASPasskeyRegistrationCredential object. @param relyingParty The relying party identifier associated with this passkey. @param clientDataHash The JSON encoded client data for this registration result. @param credentialID The unique identifier for this passkey. @param attestationObject The attestation object for this passkey registration result.
+//
 // NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject creates a new [PasskeyRegistrationCredential].
 func NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject(relyingParty string, clientDataHash *foundation.NSData, credentialID *foundation.NSData, attestationObject *foundation.NSData) *PasskeyRegistrationCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasskeyRegistrationCredential")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDA
 	return &PasskeyRegistrationCredential{inner: raw.ASPasskeyRegistrationCredentialFromID(_id)}
 }
 
+// @abstract Initializes an ASPasskeyRegistrationCredential object. @param relyingParty The relying party identifier associated with this passkey. @param clientDataHash The JSON encoded client data for this registration result. @param credentialID The unique identifier for this passkey. @param attestationObject The attestation object for this passkey registration result. @param extensionOutput The output of WebAuthn extensions processed by the credential provider.
+//
 // NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObjectExtensionOutput creates a new [PasskeyRegistrationCredential].
 func NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObjectExtensionOutput(relyingParty string, clientDataHash *foundation.NSData, credentialID *foundation.NSData, attestationObject *foundation.NSData, extensionOutput *raw.ASPasskeyRegistrationCredentialExtensionOutput) *PasskeyRegistrationCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasskeyRegistrationCredential")), objc.RegisterName("alloc"))
@@ -45,12 +49,16 @@ func NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDA
 	return &PasskeyRegistrationCredential{inner: raw.ASPasskeyRegistrationCredentialFromID(_id)}
 }
 
+// @abstract The outputs for WebAuthn extensions processed by the credential provider.
+//
 // WithExtensionOutput sets the extensionOutput property and returns the receiver for chaining.
 func (x *PasskeyRegistrationCredential) WithExtensionOutput(extensionOutput *PasskeyRegistrationCredentialExtensionOutput) *PasskeyRegistrationCredential {
 	x.inner.SetExtensionOutput(extensionOutput.Unwrap())
 	return x
 }
 
+// @abstract The relying party identifier associated with this passkey.
+//
 // RelyingParty calls the underlying RelyingParty.
 func (x *PasskeyRegistrationCredential) RelyingParty() string {
 	_r := x.inner.RelyingParty()
@@ -60,21 +68,29 @@ func (x *PasskeyRegistrationCredential) RelyingParty() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The hash of the client data for this registration result.
+//
 // ClientDataHash calls the underlying ClientDataHash.
 func (x *PasskeyRegistrationCredential) ClientDataHash() *foundation.NSData {
 	return x.inner.ClientDataHash()
 }
 
+// @abstract The raw credential identifier of this passkey.
+//
 // CredentialID calls the underlying CredentialID.
 func (x *PasskeyRegistrationCredential) CredentialID() *foundation.NSData {
 	return x.inner.CredentialID()
 }
 
+// @abstract The attestation object for this passkey registration result.
+//
 // AttestationObject calls the underlying AttestationObject.
 func (x *PasskeyRegistrationCredential) AttestationObject() *foundation.NSData {
 	return x.inner.AttestationObject()
 }
 
+// @abstract The outputs for WebAuthn extensions processed by the credential provider.
+//
 // ExtensionOutput calls the underlying ExtensionOutput.
 func (x *PasskeyRegistrationCredential) ExtensionOutput() *PasskeyRegistrationCredentialExtensionOutput {
 	_r := x.inner.ExtensionOutput()

@@ -33,6 +33,8 @@ func MTRBaseClusterPowerTopologyFromID(id objc.ID) *MTRBaseClusterPowerTopology 
 	return &MTRBaseClusterPowerTopology{inner: raw.MTRBaseClusterPowerTopologyFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterPowerTopologyWithDeviceEndpointIDQueue creates a new [MTRBaseClusterPowerTopology].
 func NewMTRBaseClusterPowerTopologyWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterPowerTopology {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterPowerTopology")), objc.RegisterName("alloc"))

@@ -36,6 +36,8 @@ func NewIOBluetoothRFCOMMChannel() *IOBluetoothRFCOMMChannel {
 	return &IOBluetoothRFCOMMChannel{inner: raw.IOBluetoothRFCOMMChannelFromID(_id)}
 }
 
+// @method	getRFCOMMChannelRef @abstract	Returns an IOBluetoothRFCOMMChannelRef representation of the target IOBluetoothRFCOMMChannel object. @result		Returns an IOBluetoothRFCOMMChannelRef representation of the target IOBluetoothRFCOMMChannel object.
+//
 // GetRFCOMMChannelRef calls the underlying GetRFCOMMChannelRef.
 func (x *IOBluetoothRFCOMMChannel) GetRFCOMMChannelRef() unsafe.Pointer {
 	return x.inner.GetRFCOMMChannelRef()
@@ -96,6 +98,8 @@ func (x *IOBluetoothRFCOMMChannel) SetDelegate(delegate objc.ID) int {
 	return x.inner.SetDelegate(delegate)
 }
 
+// @method	delegate @abstract	Returns the object delegate @result	the current delegate, or nil
+//
 // Delegate calls the underlying Delegate.
 func (x *IOBluetoothRFCOMMChannel) Delegate() objc.ID {
 	return x.inner.Delegate()

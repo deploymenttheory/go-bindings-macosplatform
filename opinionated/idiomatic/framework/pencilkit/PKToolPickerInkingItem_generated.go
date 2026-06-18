@@ -31,6 +31,8 @@ func ToolPickerInkingItemFromID(id objc.ID) *ToolPickerInkingItem {
 	return &ToolPickerInkingItem{inner: raw.PKToolPickerInkingItemFromID(id)}
 }
 
+// Create a new tool picker item with a `PKInkType`. @param inkType The ink type for the tool.
+//
 // NewToolPickerInkingItemWithInkType creates a new [ToolPickerInkingItem].
 func NewToolPickerInkingItemWithInkType(inkType *foundation.NSString) *ToolPickerInkingItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKToolPickerInkingItem")), objc.RegisterName("alloc"))
@@ -45,6 +47,8 @@ func NewToolPickerInkingItemWithInkTypeColor(inkType *foundation.NSString, color
 	return &ToolPickerInkingItem{inner: raw.PKToolPickerInkingItemFromID(_id)}
 }
 
+// Create a new tool picker item with a `PKInkType`. @param inkType The ink type for the tool. @param width The width for the tool.
+//
 // NewToolPickerInkingItemWithInkTypeWidth creates a new [ToolPickerInkingItem].
 func NewToolPickerInkingItemWithInkTypeWidth(inkType *foundation.NSString, width float64) *ToolPickerInkingItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKToolPickerInkingItem")), objc.RegisterName("alloc"))
@@ -73,12 +77,16 @@ func NewToolPickerInkingItemWithInkTypeColorWidthAzimuthIdentifier(inkType *foun
 	return &ToolPickerInkingItem{inner: raw.PKToolPickerInkingItemFromID(_id)}
 }
 
+// Present color selection UI to the user. Default value is YES.
+//
 // WithAllowsColorSelection sets the allowsColorSelection property and returns the receiver for chaining.
 func (x *ToolPickerInkingItem) WithAllowsColorSelection(allowsColorSelection bool) *ToolPickerInkingItem {
 	x.inner.SetAllowsColorSelection(allowsColorSelection)
 	return x
 }
 
+// A tool for drawing on a `PKCanvasView`.
+//
 // InkingTool calls the underlying InkingTool.
 func (x *ToolPickerInkingItem) InkingTool() *InkingTool {
 	_r := x.inner.InkingTool()
@@ -88,6 +96,8 @@ func (x *ToolPickerInkingItem) InkingTool() *InkingTool {
 	return &InkingTool{inner: _r}
 }
 
+// Present color selection UI to the user. Default value is YES.
+//
 // AllowsColorSelection calls the underlying AllowsColorSelection.
 func (x *ToolPickerInkingItem) AllowsColorSelection() bool {
 	return x.inner.AllowsColorSelection()

@@ -40,78 +40,104 @@ func NewText() *Text {
 	return &Text{inner: raw.SCNTextFromID(_id)}
 }
 
+// @property extrusionDepth @abstract The extrusion depth. Animatable. @discussion If the value is 0, we get a mono-sided, 2D version of the text.
+//
 // WithExtrusionDepth sets the extrusionDepth property and returns the receiver for chaining.
 func (x *Text) WithExtrusionDepth(extrusionDepth float64) *Text {
 	x.inner.SetExtrusionDepth(extrusionDepth)
 	return x
 }
 
+// @property string @abstract The text to be represented. The text must be an instance of NSString or NSAttributedString. @discussion The default value is nil.
+//
 // WithString sets the string_ property and returns the receiver for chaining.
 func (x *Text) WithString(string_ objc.ID) *Text {
 	x.inner.SetString(string_)
 	return x
 }
 
+// @property font @abstract The font used to represent the text. @discussion The font property is only used when the string property is not an NSAttributedString. Defaults to the system font (12 point).
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *Text) WithFont(font *appkit.NSFont) *Text {
 	x.inner.SetFont(font)
 	return x
 }
 
+// @property wrapped @abstract Determines whether the text is wrapped to fit within the bounds. @discussion For the text to be wrapped you first need to set its bounds, otherwise the text is not wrapped. The default value is NO.
+//
 // WithWrapped sets the wrapped property and returns the receiver for chaining.
 func (x *Text) WithWrapped(wrapped bool) *Text {
 	x.inner.SetWrapped(wrapped)
 	return x
 }
 
+// @property containerFrame @abstract A container within which the text may be wrapped or truncated. @discussion The text will start at the top-left corner of the rect. You need to set this property for text truncation or alignment to work. Getting this property when it has never been set returns CGRectZero.
+//
 // WithContainerFrame sets the containerFrame property and returns the receiver for chaining.
 func (x *Text) WithContainerFrame(containerFrame corefoundation.CGRect) *Text {
 	x.inner.SetContainerFrame(containerFrame)
 	return x
 }
 
+// @property truncationMode @abstract Describes how the text is truncated to fit within the bounds. @discussion For the text to be truncated you first need to set its bounds, otherwise the text is not truncated. The default value is kCATruncationNone. See truncation modes in CATextLayer.h.
+//
 // WithTruncationMode sets the truncationMode property and returns the receiver for chaining.
 func (x *Text) WithTruncationMode(truncationMode string) *Text {
 	x.inner.SetTruncationMode(foundation.NSStringStringWithUTF8String(truncationMode))
 	return x
 }
 
+// @property alignmentMode @abstract Determines how individual lines of text are horizontally aligned within the bounds. @discussion For the text to be aligned you first need to set its bounds, otherwise the text is not aligned. The default value is kCAAlignmentNatural. See alignments in CATextLayer.h.
+//
 // WithAlignmentMode sets the alignmentMode property and returns the receiver for chaining.
 func (x *Text) WithAlignmentMode(alignmentMode string) *Text {
 	x.inner.SetAlignmentMode(foundation.NSStringStringWithUTF8String(alignmentMode))
 	return x
 }
 
+// @property chamferRadius @abstract The chamfer radius. Animatable. @discussion Values are clamped to the range [0, extrusionDepth / 2]. The actual chamfer radius might be different to the one here specified: large values are clipped to a per-glyph max value. The default value is 0.
+//
 // WithChamferRadius sets the chamferRadius property and returns the receiver for chaining.
 func (x *Text) WithChamferRadius(chamferRadius float64) *Text {
 	x.inner.SetChamferRadius(chamferRadius)
 	return x
 }
 
+// @property chamferSegmentCount @abstract The number of chamfer subdivisions. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 10.
+//
 // WithChamferSegmentCount sets the chamferSegmentCount property and returns the receiver for chaining.
 func (x *Text) WithChamferSegmentCount(chamferSegmentCount int) *Text {
 	x.inner.SetChamferSegmentCount(chamferSegmentCount)
 	return x
 }
 
+// @property chamferProfile @abstract Describes the profile used to when "chamferRadius" is not nil. When "chamferProfile" is nil we fallback on a path representing a quadrant. @discussion The profile should be a 2D curve beginning at (0,1) and ending at (1,0). The "flatness" property is also used to flatten this path. The default value is nil.
+//
 // WithChamferProfile sets the chamferProfile property and returns the receiver for chaining.
 func (x *Text) WithChamferProfile(chamferProfile *appkit.NSBezierPath) *Text {
 	x.inner.SetChamferProfile(chamferProfile)
 	return x
 }
 
+// @property flatness @abstract Specifies the accuracy (or smoothness) with which fonts are rendered. @discussion Smaller numbers give smoother curves at the expense of more computation and heavier geometries in terms of vertices. The default value is 0.6, which yields smooth curves.
+//
 // WithFlatness sets the flatness property and returns the receiver for chaining.
 func (x *Text) WithFlatness(flatness float64) *Text {
 	x.inner.SetFlatness(flatness)
 	return x
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Text) WithName(name string) *Text {
 	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+//
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Text) WithMaterials(items ...*raw.SCNMaterial) *Text {
 	if len(items) == 0 {
@@ -130,12 +156,16 @@ func (x *Text) WithMaterials(items ...*raw.SCNMaterial) *Text {
 	return x
 }
 
+// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+//
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Text) WithFirstMaterial(firstMaterial *Material) *Text {
 	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
+// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+//
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Text) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Text {
 	if len(items) == 0 {
@@ -160,30 +190,40 @@ func (x *Text) WithTessellator(tessellator *GeometryTessellator) *Text {
 	return x
 }
 
+// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+//
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Text) WithSubdivisionLevel(subdivisionLevel uint) *Text {
 	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
 	return x
 }
 
+// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+//
 // WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
 func (x *Text) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Text {
 	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
 	return x
 }
 
+// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+//
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Text) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Text {
 	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
+// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+//
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Text) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Text {
 	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
+// @property extrusionDepth @abstract The extrusion depth. Animatable. @discussion If the value is 0, we get a mono-sided, 2D version of the text.
+//
 // ExtrusionDepth calls the underlying ExtrusionDepth.
 func (x *Text) ExtrusionDepth() float64 {
 	return x.inner.ExtrusionDepth()
@@ -194,6 +234,8 @@ func (x *Text) SetExtrusionDepth(extrusionDepth float64) {
 	x.inner.SetExtrusionDepth(extrusionDepth)
 }
 
+// @property string @abstract The text to be represented. The text must be an instance of NSString or NSAttributedString. @discussion The default value is nil.
+//
 // String calls the underlying String.
 func (x *Text) String() objc.ID {
 	return x.inner.String()
@@ -204,6 +246,8 @@ func (x *Text) SetString(string_ objc.ID) {
 	x.inner.SetString(string_)
 }
 
+// @property font @abstract The font used to represent the text. @discussion The font property is only used when the string property is not an NSAttributedString. Defaults to the system font (12 point).
+//
 // Font calls the underlying Font.
 func (x *Text) Font() *appkit.NSFont {
 	return x.inner.Font()
@@ -214,6 +258,8 @@ func (x *Text) SetFont(font *appkit.NSFont) {
 	x.inner.SetFont(font)
 }
 
+// @property wrapped @abstract Determines whether the text is wrapped to fit within the bounds. @discussion For the text to be wrapped you first need to set its bounds, otherwise the text is not wrapped. The default value is NO.
+//
 // IsWrapped calls the underlying IsWrapped.
 func (x *Text) IsWrapped() bool {
 	return x.inner.IsWrapped()
@@ -224,6 +270,8 @@ func (x *Text) SetWrapped(wrapped bool) {
 	x.inner.SetWrapped(wrapped)
 }
 
+// @property containerFrame @abstract A container within which the text may be wrapped or truncated. @discussion The text will start at the top-left corner of the rect. You need to set this property for text truncation or alignment to work. Getting this property when it has never been set returns CGRectZero.
+//
 // ContainerFrame calls the underlying ContainerFrame.
 func (x *Text) ContainerFrame() corefoundation.CGRect {
 	return x.inner.ContainerFrame()
@@ -234,11 +282,15 @@ func (x *Text) SetContainerFrame(containerFrame corefoundation.CGRect) {
 	x.inner.SetContainerFrame(containerFrame)
 }
 
+// @property textSize @abstract Returns the bounding box size the receiver occupies.
+//
 // TextSize calls the underlying TextSize.
 func (x *Text) TextSize() corefoundation.CGSize {
 	return x.inner.TextSize()
 }
 
+// @property truncationMode @abstract Describes how the text is truncated to fit within the bounds. @discussion For the text to be truncated you first need to set its bounds, otherwise the text is not truncated. The default value is kCATruncationNone. See truncation modes in CATextLayer.h.
+//
 // TruncationMode calls the underlying TruncationMode.
 func (x *Text) TruncationMode() string {
 	_r := x.inner.TruncationMode()
@@ -253,6 +305,8 @@ func (x *Text) SetTruncationMode(truncationMode string) {
 	x.inner.SetTruncationMode(foundation.NSStringStringWithUTF8String(truncationMode))
 }
 
+// @property alignmentMode @abstract Determines how individual lines of text are horizontally aligned within the bounds. @discussion For the text to be aligned you first need to set its bounds, otherwise the text is not aligned. The default value is kCAAlignmentNatural. See alignments in CATextLayer.h.
+//
 // AlignmentMode calls the underlying AlignmentMode.
 func (x *Text) AlignmentMode() string {
 	_r := x.inner.AlignmentMode()
@@ -267,6 +321,8 @@ func (x *Text) SetAlignmentMode(alignmentMode string) {
 	x.inner.SetAlignmentMode(foundation.NSStringStringWithUTF8String(alignmentMode))
 }
 
+// @property chamferRadius @abstract The chamfer radius. Animatable. @discussion Values are clamped to the range [0, extrusionDepth / 2]. The actual chamfer radius might be different to the one here specified: large values are clipped to a per-glyph max value. The default value is 0.
+//
 // ChamferRadius calls the underlying ChamferRadius.
 func (x *Text) ChamferRadius() float64 {
 	return x.inner.ChamferRadius()
@@ -277,6 +333,8 @@ func (x *Text) SetChamferRadius(chamferRadius float64) {
 	x.inner.SetChamferRadius(chamferRadius)
 }
 
+// @property chamferSegmentCount @abstract The number of chamfer subdivisions. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 10.
+//
 // ChamferSegmentCount calls the underlying ChamferSegmentCount.
 func (x *Text) ChamferSegmentCount() int {
 	return x.inner.ChamferSegmentCount()
@@ -287,6 +345,8 @@ func (x *Text) SetChamferSegmentCount(chamferSegmentCount int) {
 	x.inner.SetChamferSegmentCount(chamferSegmentCount)
 }
 
+// @property chamferProfile @abstract Describes the profile used to when "chamferRadius" is not nil. When "chamferProfile" is nil we fallback on a path representing a quadrant. @discussion The profile should be a 2D curve beginning at (0,1) and ending at (1,0). The "flatness" property is also used to flatten this path. The default value is nil.
+//
 // ChamferProfile calls the underlying ChamferProfile.
 func (x *Text) ChamferProfile() *appkit.NSBezierPath {
 	return x.inner.ChamferProfile()
@@ -297,6 +357,8 @@ func (x *Text) SetChamferProfile(chamferProfile *appkit.NSBezierPath) {
 	x.inner.SetChamferProfile(chamferProfile)
 }
 
+// @property flatness @abstract Specifies the accuracy (or smoothness) with which fonts are rendered. @discussion Smaller numbers give smoother curves at the expense of more computation and heavier geometries in terms of vertices. The default value is 0.6, which yields smooth curves.
+//
 // Flatness calls the underlying Flatness.
 func (x *Text) Flatness() float64 {
 	return x.inner.Flatness()

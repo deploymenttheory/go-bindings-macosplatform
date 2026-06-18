@@ -37,16 +37,22 @@ func NewMetricPlayerItemRateChangeEvent() *MetricPlayerItemRateChangeEvent {
 	return &MetricPlayerItemRateChangeEvent{inner: raw.AVMetricPlayerItemRateChangeEventFromID(_id)}
 }
 
+// Returns the playback rate after the rate change event.
+//
 // Rate calls the underlying Rate.
 func (x *MetricPlayerItemRateChangeEvent) Rate() float64 {
 	return x.inner.Rate()
 }
 
+// Returns the playback rate before the rate change event.
+//
 // PreviousRate calls the underlying PreviousRate.
 func (x *MetricPlayerItemRateChangeEvent) PreviousRate() float64 {
 	return x.inner.PreviousRate()
 }
 
+// Returns the variant being played at the time of rate change. If no value is present, returns nil.
+//
 // Variant calls the underlying Variant.
 func (x *MetricPlayerItemRateChangeEvent) Variant() *AssetVariant {
 	_r := x.inner.Variant()

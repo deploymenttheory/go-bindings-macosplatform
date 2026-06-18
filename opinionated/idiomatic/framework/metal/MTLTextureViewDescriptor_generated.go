@@ -36,36 +36,48 @@ func NewTextureViewDescriptor() *TextureViewDescriptor {
 	return &TextureViewDescriptor{inner: raw.MTLTextureViewDescriptorFromID(_id)}
 }
 
+// @property pixelFormat @abstract A desired pixel format of a texture view.
+//
 // WithPixelFormat sets the pixelFormat property and returns the receiver for chaining.
 func (x *TextureViewDescriptor) WithPixelFormat(pixelFormat MTLPixelFormat) *TextureViewDescriptor {
 	x.inner.SetPixelFormat(raw.MTLPixelFormat(pixelFormat))
 	return x
 }
 
+// @property textureType @abstract A desired texture view of a texture view.
+//
 // WithTextureType sets the textureType property and returns the receiver for chaining.
 func (x *TextureViewDescriptor) WithTextureType(textureType MTLTextureType) *TextureViewDescriptor {
 	x.inner.SetTextureType(raw.MTLTextureType(textureType))
 	return x
 }
 
+// @property levelRange @abstract A desired range of mip levels of a texture view.
+//
 // WithLevelRange sets the levelRange property and returns the receiver for chaining.
 func (x *TextureViewDescriptor) WithLevelRange(levelRange foundation.NSRange) *TextureViewDescriptor {
 	x.inner.SetLevelRange(levelRange)
 	return x
 }
 
+// @property sliceRange @abstract A desired range of slices of a texture view.
+//
 // WithSliceRange sets the sliceRange property and returns the receiver for chaining.
 func (x *TextureViewDescriptor) WithSliceRange(sliceRange foundation.NSRange) *TextureViewDescriptor {
 	x.inner.SetSliceRange(sliceRange)
 	return x
 }
 
+// @property swizzle @abstract A desired swizzle format of a texture view.
+//
 // WithSwizzle sets the swizzle property and returns the receiver for chaining.
 func (x *TextureViewDescriptor) WithSwizzle(swizzle raw.MTLTextureSwizzleChannels) *TextureViewDescriptor {
 	x.inner.SetSwizzle(swizzle)
 	return x
 }
 
+// @property pixelFormat @abstract A desired pixel format of a texture view.
+//
 // PixelFormat calls the underlying PixelFormat.
 func (x *TextureViewDescriptor) PixelFormat() MTLPixelFormat {
 	return MTLPixelFormat(x.inner.PixelFormat())
@@ -76,6 +88,8 @@ func (x *TextureViewDescriptor) SetPixelFormat(pixelFormat MTLPixelFormat) {
 	x.inner.SetPixelFormat(raw.MTLPixelFormat(pixelFormat))
 }
 
+// @property textureType @abstract A desired texture view of a texture view.
+//
 // TextureType calls the underlying TextureType.
 func (x *TextureViewDescriptor) TextureType() MTLTextureType {
 	return MTLTextureType(x.inner.TextureType())
@@ -86,6 +100,8 @@ func (x *TextureViewDescriptor) SetTextureType(textureType MTLTextureType) {
 	x.inner.SetTextureType(raw.MTLTextureType(textureType))
 }
 
+// @property levelRange @abstract A desired range of mip levels of a texture view.
+//
 // LevelRange calls the underlying LevelRange.
 func (x *TextureViewDescriptor) LevelRange() foundation.NSRange {
 	return x.inner.LevelRange()
@@ -96,6 +112,8 @@ func (x *TextureViewDescriptor) SetLevelRange(levelRange foundation.NSRange) {
 	x.inner.SetLevelRange(levelRange)
 }
 
+// @property sliceRange @abstract A desired range of slices of a texture view.
+//
 // SliceRange calls the underlying SliceRange.
 func (x *TextureViewDescriptor) SliceRange() foundation.NSRange {
 	return x.inner.SliceRange()
@@ -106,6 +124,8 @@ func (x *TextureViewDescriptor) SetSliceRange(sliceRange foundation.NSRange) {
 	x.inner.SetSliceRange(sliceRange)
 }
 
+// @property swizzle @abstract A desired swizzle format of a texture view.
+//
 // Swizzle calls the underlying Swizzle.
 func (x *TextureViewDescriptor) Swizzle() raw.MTLTextureSwizzleChannels {
 	return x.inner.Swizzle()

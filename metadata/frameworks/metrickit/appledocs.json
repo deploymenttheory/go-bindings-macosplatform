@@ -1,0 +1,833 @@
+{
+  "schema_version": 1,
+  "framework": "MetricKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "MXAnimationMetric": {
+      "doc": "An object representing metrics about the responsiveness of animation in the app.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxanimationmetric"
+    },
+    "MXAppExitMetric": {
+      "doc": "An object representing metrics about the types of foreground and background app exits.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxappexitmetric"
+    },
+    "MXAppLaunchDiagnostic": {
+      "doc": "A diagnostic subclass that encapsulates app launch diagnostic reports.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxapplaunchdiagnostic"
+    },
+    "MXAppLaunchMetric": {
+      "doc": "An object representing metrics about app launch time.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxapplaunchmetric"
+    },
+    "MXAppResponsivenessMetric": {
+      "doc": "An object representing metrics about the responsiveness of the app to user interaction.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxappresponsivenessmetric"
+    },
+    "MXAppRunTimeMetric": {
+      "doc": "An object representing metrics about the amount of time the app is active.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxappruntimemetric"
+    },
+    "MXAverage": {
+      "doc": "A unit of measure for an average.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxaverage"
+    },
+    "MXBackgroundExitData": {
+      "doc": "An object representing counts for the different types of background app exits.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxbackgroundexitdata"
+    },
+    "MXCPUExceptionDiagnostic": {
+      "doc": "An object representing a diagnostic report for a fatal or nonfatal CPU exception.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxcpuexceptiondiagnostic"
+    },
+    "MXCPUMetric": {
+      "doc": "An object representing metrics about the use of the CPU.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxcpumetric"
+    },
+    "MXCallStackTree": {
+      "doc": "An object representing the call stack for an exception.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxcallstacktree"
+    },
+    "MXCellularConditionMetric": {
+      "doc": "An object representing metrics about the condition of the cellular network.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxcellularconditionmetric"
+    },
+    "MXCrashDiagnostic": {
+      "doc": "An object representing a diagnostic report for an app crash.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxcrashdiagnostic"
+    },
+    "MXCrashDiagnosticObjectiveCExceptionReason": {
+      "doc": "An object that represents the exception reason for an uncaught ObjC exception.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxcrashdiagnosticobjectivecexceptionreason"
+    },
+    "MXDiagnostic": {
+      "doc": "An abstract data class for a diagnostic.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxdiagnostic"
+    },
+    "MXDiagnosticPayload": {
+      "doc": "An object that encapsulates a diagnostic report.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxdiagnosticpayload"
+    },
+    "MXDiskIOMetric": {
+      "doc": "An object representing metrics about disk usage.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxdiskiometric"
+    },
+    "MXDiskSpaceUsageMetric": {
+      "doc": "An object representing metrics about your app’s disk space usage.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxdiskspaceusagemetric"
+    },
+    "MXDiskWriteExceptionDiagnostic": {
+      "doc": "An object representing a diagnostic report for a disk write exception.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxdiskwriteexceptiondiagnostic"
+    },
+    "MXDisplayMetric": {
+      "doc": "An object representing metrics about the power used to display the app on the screen.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxdisplaymetric"
+    },
+    "MXForegroundExitData": {
+      "doc": "An object representing counts for the different types of foreground app exits.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxforegroundexitdata"
+    },
+    "MXGPUMetric": {
+      "doc": "An object representing metrics about the use of the GPU.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxgpumetric"
+    },
+    "MXHangDiagnostic": {
+      "doc": "An object representing a diagnostic report for an app that is too busy to handle user input responsively.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxhangdiagnostic"
+    },
+    "MXHistogram": {
+      "doc": "An object representing a histogram of data values of the same type of unit.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxhistogram"
+    },
+    "MXHistogramBucket": {
+      "doc": "An object representing a bucket of data in a histogram.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxhistogrambucket"
+    },
+    "MXLocationActivityMetric": {
+      "doc": "An object representing metrics about the use of location-tracking features of a device.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxlocationactivitymetric"
+    },
+    "MXMemoryMetric": {
+      "doc": "An object representing metrics about the app’s memory use.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxmemorymetric"
+    },
+    "MXMetaData": {
+      "doc": "An object containing system-level information about the device.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxmetadata"
+    },
+    "MXMetric": {
+      "doc": "An abstract data class for a metric.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxmetric"
+    },
+    "MXMetricManager": {
+      "doc": "The shared object that registers you to receive metrics, creates logs for custom metrics, and gives access to past reports.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxmetricmanager"
+    },
+    "MXMetricPayload": {
+      "doc": "An object that encapsulates a daily metrics report.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload"
+    },
+    "MXNetworkTransferMetric": {
+      "doc": "An object representing metrics about network transfers.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxnetworktransfermetric"
+    },
+    "MXSignpostIntervalData": {
+      "doc": "A data object representing the captured data for a custom metric.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxsignpostintervaldata"
+    },
+    "MXSignpostMetric": {
+      "doc": "An object representing a custom metric.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxsignpostmetric"
+    },
+    "MXSignpostRecord": {
+      "doc": "An object representing the record for a signpost interval or event.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxsignpostrecord"
+    },
+    "MXUnitAveragePixelLuminance": {
+      "doc": "A unit of measure of pixel luminosity on an OLED display.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxunitaveragepixelluminance"
+    },
+    "MXUnitSignalBars": {
+      "doc": "A unit of measure for the number of bars of cellular network connectivity.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxunitsignalbars"
+    }
+  },
+  "protocols": {
+    "MXMetricManagerSubscriber": {
+      "doc": "A protocol defining a method for receiving a daily metrics report.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxmetricmanagersubscriber"
+    }
+  },
+  "enums": {
+    "MXErrorCode": {
+      "doc": "Error codes for error values from app metrics.",
+      "url": "https://developer.apple.com/documentation/metrickit/mxerrorcode"
+    }
+  },
+  "methods": {
+    "MXCallStackTree": {
+      "-JSONRepresentation": {
+        "doc": "Returns the contents of the stack tree in JSON format.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxcallstacktree/jsonrepresentation()"
+      }
+    },
+    "MXCrashDiagnosticObjectiveCExceptionReason": {
+      "-JSONRepresentation": {
+        "doc": "Returns the contents of the exception reason in JSON format.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxcrashdiagnosticobjectivecexceptionreason/jsonrepresentation()"
+      }
+    },
+    "MXDiagnostic": {
+      "-JSONRepresentation": {
+        "doc": "Returns the contents of the diagnostic in JSON format.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiagnostic/jsonrepresentation()"
+      },
+      "-dictionaryRepresentation": {
+        "doc": "Returns the contents of a diagnostic as a dictionary.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiagnostic/dictionaryrepresentation()"
+      }
+    },
+    "MXDiagnosticPayload": {
+      "-JSONRepresentation": {
+        "doc": "Returns the contents of the payload in JSON format.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiagnosticpayload/jsonrepresentation()"
+      },
+      "-dictionaryRepresentation": {
+        "doc": "Returns the results of the payload as a dictionary.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiagnosticpayload/dictionaryrepresentation()"
+      }
+    },
+    "MXMetaData": {
+      "-JSONRepresentation": {
+        "doc": "Returns the contents of the metadata in JSON format.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetadata/jsonrepresentation()"
+      },
+      "-dictionaryRepresentation": {
+        "doc": "Returns the contents of the metadata as a dictionary.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetadata/dictionaryrepresentation()"
+      }
+    },
+    "MXMetric": {
+      "-JSONRepresentation": {
+        "doc": "Returns the contents of the metric in JSON format.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetric/jsonrepresentation()"
+      },
+      "-dictionaryRepresentation": {
+        "doc": "Returns the contents of a metric as a dictionary.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetric/dictionaryrepresentation()"
+      }
+    },
+    "MXMetricManager": {
+      "+extendLaunchMeasurementForTaskID:error:": {
+        "doc": "Starts to measure an extended launch task with the given task identifier.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricmanager/extendlaunchmeasurement(fortaskid:)"
+      },
+      "+finishExtendedLaunchMeasurementForTaskID:error:": {
+        "doc": "Signals the end of an extended launch task.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricmanager/finishextendedlaunchmeasurement(fortaskid:)"
+      },
+      "+makeLogHandleWithCategory:": {
+        "doc": "Returns a log handle used for writing custom metric events.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricmanager/makeloghandle(category:)"
+      },
+      "-addSubscriber:": {
+        "doc": "Registers to receive a daily report of app metrics from the metrics manager.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricmanager/add(_:)"
+      },
+      "-removeSubscriber:": {
+        "doc": "Unsubscribes from daily reports of app metrics.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricmanager/remove(_:)"
+      }
+    },
+    "MXMetricPayload": {
+      "-JSONRepresentation": {
+        "doc": "Returns the contents of the payload in JSON format.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/jsonrepresentation()"
+      },
+      "-dictionaryRepresentation": {
+        "doc": "Returns the results of the payload as a dictionary.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/dictionaryrepresentation()"
+      }
+    }
+  },
+  "properties": {
+    "MXAnimationMetric": {
+      "hitchTimeRatio": {
+        "doc": "The ratio of time spent hitching during tracked animations.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxanimationmetric/hitchtimeratio"
+      },
+      "scrollHitchTimeRatio": {
+        "doc": "The ratio of the time spent hitching while scrolling.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxanimationmetric/scrollhitchtimeratio"
+      }
+    },
+    "MXAppExitMetric": {
+      "backgroundExitData": {
+        "doc": "The metrics for the background app exits.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxappexitmetric/backgroundexitdata"
+      },
+      "foregroundExitData": {
+        "doc": "The metrics for the foreground app exits.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxappexitmetric/foregroundexitdata"
+      }
+    },
+    "MXAppLaunchDiagnostic": {
+      "callStackTree": {
+        "doc": "The call stack tree associated with the app launch.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxapplaunchdiagnostic/callstacktree"
+      },
+      "launchDuration": {
+        "doc": "The total app launch duration.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxapplaunchdiagnostic/launchduration"
+      }
+    },
+    "MXAppLaunchMetric": {
+      "histogrammedApplicationResumeTime": {
+        "doc": "A histogram of the different amounts of time taken to resume the app from the background.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxapplaunchmetric/histogrammedapplicationresumetime"
+      },
+      "histogrammedExtendedLaunch": {
+        "doc": "A histogram of the different amounts of time taken to launch the app, including the extended launch tasks.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxapplaunchmetric/histogrammedextendedlaunch"
+      },
+      "histogrammedOptimizedTimeToFirstDraw": {
+        "doc": "A histogram of the different amounts of time associated with prewarmed app launches.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxapplaunchmetric/histogrammedoptimizedtimetofirstdraw"
+      },
+      "histogrammedTimeToFirstDraw": {
+        "doc": "A histogram of the different amounts of time taken to launch the app.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxapplaunchmetric/histogrammedtimetofirstdraw"
+      }
+    },
+    "MXAppResponsivenessMetric": {
+      "histogrammedApplicationHangTime": {
+        "doc": "A histogram of the different durations of time in which the app is too busy to handle user interaction responsively.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxappresponsivenessmetric/histogrammedapplicationhangtime"
+      }
+    },
+    "MXAppRunTimeMetric": {
+      "cumulativeBackgroundAudioTime": {
+        "doc": "The total time the app is in the background and playing audio.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxappruntimemetric/cumulativebackgroundaudiotime"
+      },
+      "cumulativeBackgroundLocationTime": {
+        "doc": "The total time the app is in the background and using location services.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxappruntimemetric/cumulativebackgroundlocationtime"
+      },
+      "cumulativeBackgroundTime": {
+        "doc": "The total time the app is active in the background.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxappruntimemetric/cumulativebackgroundtime"
+      },
+      "cumulativeForegroundTime": {
+        "doc": "The total time the app is in the foreground.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxappruntimemetric/cumulativeforegroundtime"
+      }
+    },
+    "MXAverage": {
+      "averageMeasurement": {
+        "doc": "The value of the average.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxaverage/averagemeasurement"
+      },
+      "sampleCount": {
+        "doc": "The number of samples used to calculate the average.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxaverage/samplecount"
+      },
+      "standardDeviation": {
+        "doc": "The standard deviation of the distribution of values used to calculate the average.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxaverage/standarddeviation"
+      }
+    },
+    "MXBackgroundExitData": {
+      "cumulativeAbnormalExitCount": {
+        "doc": "The number of times the app exited abnormally from the background.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxbackgroundexitdata/cumulativeabnormalexitcount"
+      },
+      "cumulativeAppWatchdogExitCount": {
+        "doc": "The number of times the system watchdog terminated the app from the background.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxbackgroundexitdata/cumulativeappwatchdogexitcount"
+      },
+      "cumulativeBackgroundTaskAssertionTimeoutExitCount": {
+        "doc": "The number of times the system terminated the app from the background for exceeding the allocated time for a background task.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxbackgroundexitdata/cumulativebackgroundtaskassertiontimeoutexitcount"
+      },
+      "cumulativeBadAccessExitCount": {
+        "doc": "The number of times the system terminated the app from the background for attempting an invalid memory access.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxbackgroundexitdata/cumulativebadaccessexitcount"
+      },
+      "cumulativeCPUResourceLimitExitCount": {
+        "doc": "The number of times the system terminated the app from the background for using too much CPU time.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxbackgroundexitdata/cumulativecpuresourcelimitexitcount"
+      },
+      "cumulativeIllegalInstructionExitCount": {
+        "doc": "The number of times the system terminated the app from the background for attempting to execute an illegal or undefined instruction.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxbackgroundexitdata/cumulativeillegalinstructionexitcount"
+      },
+      "cumulativeMemoryPressureExitCount": {
+        "doc": "The number of times the system terminated the app from the background to free up memory.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxbackgroundexitdata/cumulativememorypressureexitcount"
+      },
+      "cumulativeMemoryResourceLimitExitCount": {
+        "doc": "The number of times the system terminated the app from the background for using too much memory.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxbackgroundexitdata/cumulativememoryresourcelimitexitcount"
+      },
+      "cumulativeNormalAppExitCount": {
+        "doc": "The number of times the app exited normally from the background.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxbackgroundexitdata/cumulativenormalappexitcount"
+      },
+      "cumulativeSuspendedWithLockedFileExitCount": {
+        "doc": "The number of times the system terminated the app from the background while being suspended and having file locks.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxbackgroundexitdata/cumulativesuspendedwithlockedfileexitcount"
+      }
+    },
+    "MXCPUExceptionDiagnostic": {
+      "callStackTree": {
+        "doc": "The app call stack associated with the CPU exception.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxcpuexceptiondiagnostic/callstacktree"
+      },
+      "totalCPUTime": {
+        "doc": "The total CPU time used during the exception.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxcpuexceptiondiagnostic/totalcputime"
+      },
+      "totalSampledTime": {
+        "doc": "The total time the app was sampled during the exception.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxcpuexceptiondiagnostic/totalsampledtime"
+      }
+    },
+    "MXCPUMetric": {
+      "cumulativeCPUInstructions": {
+        "doc": "The total number of CPU instructions the app executed during the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxcpumetric/cumulativecpuinstructions"
+      },
+      "cumulativeCPUTime": {
+        "doc": "The total amount of CPU the app used.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxcpumetric/cumulativecputime"
+      }
+    },
+    "MXCellularConditionMetric": {
+      "histogrammedCellularConditionTime": {
+        "doc": "An object representing the distribution of the different levels of connectivity to the cellular network.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxcellularconditionmetric/histogrammedcellularconditiontime"
+      }
+    },
+    "MXCrashDiagnostic": {
+      "callStackTree": {
+        "doc": "The call stack for the crash.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxcrashdiagnostic/callstacktree"
+      },
+      "exceptionCode": {
+        "doc": "The encoded processor-specific information for the crash.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxcrashdiagnostic/exceptioncode"
+      },
+      "exceptionType": {
+        "doc": "The Mach exception type of the crash.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxcrashdiagnostic/exceptiontype"
+      },
+      "signal": {
+        "doc": "The signal associated with the crash.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxcrashdiagnostic/signal"
+      },
+      "terminationReason": {
+        "doc": "The reason the app was terminated as a human-readable string.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxcrashdiagnostic/terminationreason"
+      },
+      "virtualMemoryRegionInfo": {
+        "doc": "Information about the region of memory an app accessed incorrectly, resulting in a bad-access crash.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxcrashdiagnostic/virtualmemoryregioninfo"
+      }
+    },
+    "MXDiagnostic": {
+      "applicationVersion": {
+        "doc": "The value of the bundle version key, short form, in the app’s property list.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiagnostic/applicationversion"
+      },
+      "metaData": {
+        "doc": "A set of system-level information for the device.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiagnostic/metadata"
+      }
+    },
+    "MXDiagnosticPayload": {
+      "appLaunchDiagnostics": {
+        "doc": "The diagnostic reports for the app launch time.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiagnosticpayload/applaunchdiagnostics"
+      },
+      "cpuExceptionDiagnostics": {
+        "doc": "The diagnostic reports for fatal and nonfatal CPU exceptions for the app during the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiagnosticpayload/cpuexceptiondiagnostics"
+      },
+      "crashDiagnostics": {
+        "doc": "The diagnostic reports for app crashes during the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiagnosticpayload/crashdiagnostics"
+      },
+      "diskWriteExceptionDiagnostics": {
+        "doc": "The diagnostic reports for disk write exceptions for the app during the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiagnosticpayload/diskwriteexceptiondiagnostics"
+      },
+      "hangDiagnostics": {
+        "doc": "The diagnostic reports for times when the app was too busy to handle input responsively during the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiagnosticpayload/hangdiagnostics"
+      },
+      "timeStampBegin": {
+        "doc": "The starting time of the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiagnosticpayload/timestampbegin"
+      },
+      "timeStampEnd": {
+        "doc": "The ending time of the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiagnosticpayload/timestampend"
+      }
+    },
+    "MXDiskIOMetric": {
+      "cumulativeLogicalWrites": {
+        "doc": "The total amount of data written to disk or other long term storage.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiskiometric/cumulativelogicalwrites"
+      }
+    },
+    "MXDiskSpaceUsageMetric": {
+      "totalBinaryFileCount": {
+        "doc": "The total number of your app’s binary files.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiskspaceusagemetric/totalbinaryfilecount"
+      },
+      "totalBinaryFileSize": {
+        "doc": "The total size of disk space your app’s binary files occupy.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiskspaceusagemetric/totalbinaryfilesize"
+      },
+      "totalCacheFolderSize": {
+        "doc": "The total size of your application’s cache folder.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiskspaceusagemetric/totalcachefoldersize"
+      },
+      "totalCloneSize": {
+        "doc": "The total size of all clone files that are attributed to your app.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiskspaceusagemetric/totalclonesize"
+      },
+      "totalDataFileCount": {
+        "doc": "The total number of data files in your app’s container(s).",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiskspaceusagemetric/totaldatafilecount"
+      },
+      "totalDataFileSize": {
+        "doc": "The total size of disk space your app uses for storing data files.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiskspaceusagemetric/totaldatafilesize"
+      },
+      "totalDiskSpaceCapacity": {
+        "doc": "The total disk space capacity of the current device.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiskspaceusagemetric/totaldiskspacecapacity"
+      },
+      "totalDiskSpaceUsedSize": {
+        "doc": "The total amount of used disk storage on the current device.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiskspaceusagemetric/totaldiskspaceusedsize"
+      }
+    },
+    "MXDiskWriteExceptionDiagnostic": {
+      "callStackTree": {
+        "doc": "The call stack for the disk write exception.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiskwriteexceptiondiagnostic/callstacktree"
+      },
+      "totalWritesCaused": {
+        "doc": "The total amount of data written to disk or other long-term storage during the disk write exception.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdiskwriteexceptiondiagnostic/totalwritescaused"
+      }
+    },
+    "MXDisplayMetric": {
+      "averagePixelLuminance": {
+        "doc": "The average amount of luminosity of the pixels on an OLED display.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxdisplaymetric/averagepixelluminance"
+      }
+    },
+    "MXForegroundExitData": {
+      "cumulativeAbnormalExitCount": {
+        "doc": "The number of times the app exited abnormally from the foreground.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxforegroundexitdata/cumulativeabnormalexitcount"
+      },
+      "cumulativeAppWatchdogExitCount": {
+        "doc": "The number of times the system watchdog terminated the app from the foreground.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxforegroundexitdata/cumulativeappwatchdogexitcount"
+      },
+      "cumulativeBadAccessExitCount": {
+        "doc": "The number of times the system terminated the app from the foreground for attempting an invalid memory access.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxforegroundexitdata/cumulativebadaccessexitcount"
+      },
+      "cumulativeIllegalInstructionExitCount": {
+        "doc": "The number of times the system terminated the app from the foreground for attempting to execute an illegal or undefined instruction.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxforegroundexitdata/cumulativeillegalinstructionexitcount"
+      },
+      "cumulativeMemoryResourceLimitExitCount": {
+        "doc": "The number of times the system terminated the app from the foreground for using too much memory.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxforegroundexitdata/cumulativememoryresourcelimitexitcount"
+      },
+      "cumulativeNormalAppExitCount": {
+        "doc": "The number of times the app exited normally from the foreground.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxforegroundexitdata/cumulativenormalappexitcount"
+      }
+    },
+    "MXGPUMetric": {
+      "cumulativeGPUTime": {
+        "doc": "The total amount of GPU time used by the app.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxgpumetric/cumulativegputime"
+      }
+    },
+    "MXHangDiagnostic": {
+      "callStackTree": {
+        "doc": "The call stack for the app hang report.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxhangdiagnostic/callstacktree"
+      },
+      "hangDuration": {
+        "doc": "The amount of time the app is busy and unable to respond to user interaction.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxhangdiagnostic/hangduration"
+      }
+    },
+    "MXHistogram": {
+      "bucketEnumerator": {
+        "doc": "An enumerator for the buckets containing the data in the histogram.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxhistogram/bucketenumerator"
+      },
+      "totalBucketCount": {
+        "doc": "The total number of buckets in the histogram.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxhistogram/totalbucketcount"
+      }
+    },
+    "MXHistogramBucket": {
+      "bucketCount": {
+        "doc": "An integer representing the number of samples in the bucket.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxhistogrambucket/bucketcount"
+      },
+      "bucketEnd": {
+        "doc": "The value of the ending measurement for the bucket.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxhistogrambucket/bucketend"
+      },
+      "bucketStart": {
+        "doc": "The value of the starting measurement for the bucket.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxhistogrambucket/bucketstart"
+      }
+    },
+    "MXLocationActivityMetric": {
+      "cumulativeBestAccuracyForNavigationTime": {
+        "doc": "The total time spent tracking the current location at the best accuracy for navigation.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxlocationactivitymetric/cumulativebestaccuracyfornavigationtime"
+      },
+      "cumulativeBestAccuracyTime": {
+        "doc": "The total time spent tracking the current location at the best accuracy.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxlocationactivitymetric/cumulativebestaccuracytime"
+      },
+      "cumulativeHundredMetersAccuracyTime": {
+        "doc": "The total time spent tracking the current location to an accuracy of 100 meters.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxlocationactivitymetric/cumulativehundredmetersaccuracytime"
+      },
+      "cumulativeKilometerAccuracyTime": {
+        "doc": "The total time spent tracking the current location to an accuracy of 1 kilometer.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxlocationactivitymetric/cumulativekilometeraccuracytime"
+      },
+      "cumulativeNearestTenMetersAccuracyTime": {
+        "doc": "The total time spent tracking the current location to an accuracy of 10 meters.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxlocationactivitymetric/cumulativenearesttenmetersaccuracytime"
+      },
+      "cumulativeThreeKilometersAccuracyTime": {
+        "doc": "The total time spent tracking the current location to an accuracy of 3 kilometers.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxlocationactivitymetric/cumulativethreekilometersaccuracytime"
+      }
+    },
+    "MXMemoryMetric": {
+      "averageSuspendedMemory": {
+        "doc": "The average amount of memory in use by the app when it’s suspended.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmemorymetric/averagesuspendedmemory"
+      },
+      "peakMemoryUsage": {
+        "doc": "The largest amount of memory used by the app.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmemorymetric/peakmemoryusage"
+      }
+    },
+    "MXMetaData": {
+      "applicationBuildVersion": {
+        "doc": "The value of the bundle version key in the app’s property list.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetadata/applicationbuildversion"
+      },
+      "deviceType": {
+        "doc": "The hardware identifier for the device.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetadata/devicetype"
+      },
+      "isTestFlightApp": {
+        "doc": "Indicates whether the app is registered with TestFlight.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetadata/istestflightapp"
+      },
+      "lowPowerModeEnabled": {
+        "doc": "Indicates whether low power mode is enabled on the device.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetadata/lowpowermodeenabled"
+      },
+      "osVersion": {
+        "doc": "The version of the OS on the device including the type of OS, version number, and build number.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetadata/osversion"
+      },
+      "pid": {
+        "doc": "The process ID (PID) of the process.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetadata/pid"
+      },
+      "platformArchitecture": {
+        "doc": "The name of the processor architecture for the device.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetadata/platformarchitecture"
+      },
+      "regionFormat": {
+        "doc": "The short country code for the region format setting of the device.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetadata/regionformat"
+      }
+    },
+    "MXMetricManager": {
+      "pastDiagnosticPayloads": {
+        "doc": "The diagnostic reports since the last initialization of the shared manager instance.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricmanager/pastdiagnosticpayloads"
+      },
+      "pastPayloads": {
+        "doc": "Returns an array of the daily metrics reports generated since the last allocation of the shared manager instance.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricmanager/pastpayloads"
+      },
+      "sharedManager": {
+        "doc": "An object that returns the shared metrics manager instance.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricmanager/shared"
+      }
+    },
+    "MXMetricPayload": {
+      "animationMetrics": {
+        "doc": "The metrics for the responsiveness of app animations for the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/animationmetrics"
+      },
+      "applicationExitMetrics": {
+        "doc": "The app foreground and background exit metrics for the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/applicationexitmetrics"
+      },
+      "applicationLaunchMetrics": {
+        "doc": "The app launch and resume metrics for the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/applicationlaunchmetrics"
+      },
+      "applicationResponsivenessMetrics": {
+        "doc": "The metrics indicating an app’s responsiveness to user interaction for the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/applicationresponsivenessmetrics"
+      },
+      "applicationTimeMetrics": {
+        "doc": "The app foreground and background time metrics for the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/applicationtimemetrics"
+      },
+      "cellularConditionMetrics": {
+        "doc": "The cellular condition measurements for the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/cellularconditionmetrics"
+      },
+      "cpuMetrics": {
+        "doc": "The CPU metrics for the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/cpumetrics"
+      },
+      "diskIOMetrics": {
+        "doc": "The storage metrics for the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/diskiometrics"
+      },
+      "displayMetrics": {
+        "doc": "The display metrics for the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/displaymetrics"
+      },
+      "gpuMetrics": {
+        "doc": "The GPU metrics for the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/gpumetrics"
+      },
+      "includesMultipleApplicationVersions": {
+        "doc": "A Boolean indicating if the version of the app changed at least once during the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/includesmultipleapplicationversions"
+      },
+      "latestApplicationVersion": {
+        "doc": "The version of the app on the device at the end of the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/latestapplicationversion"
+      },
+      "locationActivityMetrics": {
+        "doc": "The location-tracking activity for the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/locationactivitymetrics"
+      },
+      "memoryMetrics": {
+        "doc": "The memory metrics for the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/memorymetrics"
+      },
+      "metaData": {
+        "doc": "A set of system-level information for the device.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/metadata"
+      },
+      "networkTransferMetrics": {
+        "doc": "The network-transfer activity for the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/networktransfermetrics"
+      },
+      "signpostMetrics": {
+        "doc": "An array of the custom metrics for the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/signpostmetrics"
+      },
+      "timeStampBegin": {
+        "doc": "The starting time of the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/timestampbegin"
+      },
+      "timeStampEnd": {
+        "doc": "The ending time of the reporting period.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxmetricpayload/timestampend"
+      }
+    },
+    "MXNetworkTransferMetric": {
+      "cumulativeCellularDownload": {
+        "doc": "The total amount of data downloaded over the cellular connection.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxnetworktransfermetric/cumulativecellulardownload"
+      },
+      "cumulativeCellularUpload": {
+        "doc": "The total amount of data uploaded over the cellular connection.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxnetworktransfermetric/cumulativecellularupload"
+      },
+      "cumulativeWifiDownload": {
+        "doc": "The total amount of data downloaded over the WiFi connection.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxnetworktransfermetric/cumulativewifidownload"
+      },
+      "cumulativeWifiUpload": {
+        "doc": "The total amount of data uploaded over the WiFi connection.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxnetworktransfermetric/cumulativewifiupload"
+      }
+    },
+    "MXSignpostIntervalData": {
+      "averageMemory": {
+        "doc": "The average memory used during the logged intervals.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxsignpostintervaldata/averagememory"
+      },
+      "cumulativeCPUTime": {
+        "doc": "The total amount of CPU time used during the logged intervals.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxsignpostintervaldata/cumulativecputime"
+      },
+      "cumulativeHitchTimeRatio": {
+        "doc": "The ratio of the total time spent hitching to the total time spent animating during the logged intervals.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxsignpostintervaldata/cumulativehitchtimeratio"
+      },
+      "cumulativeLogicalWrites": {
+        "doc": "The total amount of data written to disk or other long term storage during the logged intervals.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxsignpostintervaldata/cumulativelogicalwrites"
+      },
+      "histogrammedSignpostDuration": {
+        "doc": "A histogram of the different time intervals of a custom metric event.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxsignpostintervaldata/histogrammedsignpostduration"
+      }
+    },
+    "MXSignpostMetric": {
+      "signpostCategory": {
+        "doc": "The developer-specified category of the custom metric represented by the object.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxsignpostmetric/signpostcategory"
+      },
+      "signpostIntervalData": {
+        "doc": "The data captured for a custom metric.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxsignpostmetric/signpostintervaldata"
+      },
+      "signpostName": {
+        "doc": "The developer-specified name of the custom metric represented by the object.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxsignpostmetric/signpostname"
+      },
+      "totalCount": {
+        "doc": "The total number of occurrences of the captured custom metric.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxsignpostmetric/totalcount"
+      }
+    },
+    "MXUnitAveragePixelLuminance": {
+      "apl": {
+        "doc": "The average number of powered pixels on a OLED display.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxunitaveragepixelluminance/apl"
+      }
+    },
+    "MXUnitSignalBars": {
+      "bars": {
+        "doc": "The number of bars of connectivity to the cellular network.",
+        "url": "https://developer.apple.com/documentation/metrickit/mxunitsignalbars/bars"
+      }
+    }
+  }
+}

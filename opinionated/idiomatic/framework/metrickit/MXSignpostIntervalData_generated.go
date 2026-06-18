@@ -36,26 +36,36 @@ func NewSignpostIntervalData() *SignpostIntervalData {
 	return &SignpostIntervalData{inner: raw.MXSignpostIntervalDataFromID(_id)}
 }
 
+// @property      histogrammedSignpostDuration @abstract      A histogram of signpost intervals durations associated with the given signposts with signpostName and signpostCategory.
+//
 // HistogrammedSignpostDuration calls the underlying HistogrammedSignpostDuration.
 func (x *SignpostIntervalData) HistogrammedSignpostDuration() *raw.MXHistogram[*foundation.NSUnitDuration] {
 	return x.inner.HistogrammedSignpostDuration()
 }
 
+// @property      cumulativeCPUTime @abstract      Cumulative CPU time aggregated over the MXSignpost intervals. @discussion    This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
+//
 // CumulativeCPUTime calls the underlying CumulativeCPUTime.
 func (x *SignpostIntervalData) CumulativeCPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
 	return x.inner.CumulativeCPUTime()
 }
 
+// @property      averageMemory @abstract      Average value of memory snapshots taken at beginning and end of MXSignpost intervals @discussion    This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
+//
 // AverageMemory calls the underlying AverageMemory.
 func (x *SignpostIntervalData) AverageMemory() *raw.MXAverage[*foundation.NSUnitInformationStorage] {
 	return x.inner.AverageMemory()
 }
 
+// @property      cumulativeLogicalWrites @abstract      Cumulative logical writes aggregated over the MXSignpost intervals. @discussion    This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
+//
 // CumulativeLogicalWrites calls the underlying CumulativeLogicalWrites.
 func (x *SignpostIntervalData) CumulativeLogicalWrites() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
 	return x.inner.CumulativeLogicalWrites()
 }
 
+// @property      cumulativeHitchTimeRatio @abstract      Cumulative hitch time ratio aggregated over the MXSignpostAnimation intervals. @discussion    This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
+//
 // CumulativeHitchTimeRatio calls the underlying CumulativeHitchTimeRatio.
 func (x *SignpostIntervalData) CumulativeHitchTimeRatio() *foundation.NSMeasurement[*foundation.NSUnit] {
 	return x.inner.CumulativeHitchTimeRatio()

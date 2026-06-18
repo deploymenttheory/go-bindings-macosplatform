@@ -31,6 +31,8 @@ func MenuItemBadgeFromID(id objc.ID) *MenuItemBadge {
 	return &MenuItemBadge{inner: raw.NSMenuItemBadgeFromID(id)}
 }
 
+// Initializes the badge with a count and a pre-defined badge type.
+//
 // NewMenuItemBadgeWithCountType creates a new [MenuItemBadge].
 func NewMenuItemBadgeWithCountType(itemCount int, type_ NSMenuItemBadgeType) *MenuItemBadge {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMenuItemBadge")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewMenuItemBadgeWithCountType(itemCount int, type_ NSMenuItemBadgeType) *Me
 	return &MenuItemBadge{inner: raw.NSMenuItemBadgeFromID(_id)}
 }
 
+// Initializes the badge with an integer count and an empty string.
+//
 // NewMenuItemBadgeWithCount creates a new [MenuItemBadge].
 func NewMenuItemBadgeWithCount(itemCount int) *MenuItemBadge {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMenuItemBadge")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewMenuItemBadgeWithCount(itemCount int) *MenuItemBadge {
 	return &MenuItemBadge{inner: raw.NSMenuItemBadgeFromID(_id)}
 }
 
+// Initializes the badge with the provided custom string.
+//
 // NewMenuItemBadgeWithString creates a new [MenuItemBadge].
 func NewMenuItemBadgeWithString(string_ string) *MenuItemBadge {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMenuItemBadge")), objc.RegisterName("alloc"))
@@ -52,16 +58,22 @@ func NewMenuItemBadgeWithString(string_ string) *MenuItemBadge {
 	return &MenuItemBadge{inner: raw.NSMenuItemBadgeFromID(_id)}
 }
 
+// The count of items the badge displays. If a custom string was used to create a badge, the value is 0.
+//
 // ItemCount calls the underlying ItemCount.
 func (x *MenuItemBadge) ItemCount() int {
 	return x.inner.ItemCount()
 }
 
+// The type of items the badge displays. If a custom string was used to create a badge, this value is @c NSMenuItemBadgeTypeNone.
+//
 // Type calls the underlying Type.
 func (x *MenuItemBadge) Type() NSMenuItemBadgeType {
 	return NSMenuItemBadgeType(x.inner.Type())
 }
 
+// The string representation of the badge as it would appear when the badge is displayed.
+//
 // StringValue calls the underlying StringValue.
 func (x *MenuItemBadge) StringValue() string {
 	_r := x.inner.StringValue()

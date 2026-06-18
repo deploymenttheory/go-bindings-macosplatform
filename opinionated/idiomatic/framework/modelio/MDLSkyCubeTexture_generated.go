@@ -117,12 +117,16 @@ func (x *SkyCubeTexture) WithIsCube(isCube bool) *SkyCubeTexture {
 	return x
 }
 
+// hasAlphaValues @summary Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
+//
 // WithHasAlphaValues sets the hasAlphaValues property and returns the receiver for chaining.
 func (x *SkyCubeTexture) WithHasAlphaValues(hasAlphaValues bool) *SkyCubeTexture {
 	x.inner.MDLTexture.SetHasAlphaValues(hasAlphaValues)
 	return x
 }
 
+// Call updateTexture if parameters have been changed and a new sky is required.
+//
 // UpdateTexture calls the underlying UpdateTexture.
 func (x *SkyCubeTexture) UpdateTexture() {
 	x.inner.UpdateTexture()

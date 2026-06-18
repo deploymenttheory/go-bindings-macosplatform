@@ -35,22 +35,30 @@ func NewNumberMetaParameter() *NumberMetaParameter {
 	return &NumberMetaParameter{inner: raw.PHASENumberMetaParameterFromID(_id)}
 }
 
+// @property value @abstract The value of this metaparameter
+//
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *NumberMetaParameter) WithValue(value objc.ID) *NumberMetaParameter {
 	x.inner.PHASEMetaParameter.SetValue(value)
 	return x
 }
 
+// @method fadeToValue @abstract Fades to a new value over an interval of time @param value The new destination value to fade to @param duration The length of time it takes to arrive at the destination value
+//
 // FadeToValueDuration calls the underlying FadeToValueDuration.
 func (x *NumberMetaParameter) FadeToValueDuration(value float64, duration float64) {
 	x.inner.FadeToValueDuration(value, duration)
 }
 
+// @property minimum @abstract The minimum value this metaparameter can be set to
+//
 // Minimum calls the underlying Minimum.
 func (x *NumberMetaParameter) Minimum() float64 {
 	return x.inner.Minimum()
 }
 
+// @property maximum @abstract The maximum value this metaparameter can be set to
+//
 // Maximum calls the underlying Maximum.
 func (x *NumberMetaParameter) Maximum() float64 {
 	return x.inner.Maximum()

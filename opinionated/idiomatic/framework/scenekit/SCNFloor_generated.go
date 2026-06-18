@@ -37,54 +37,72 @@ func NewFloor() *Floor {
 	return &Floor{inner: raw.SCNFloorFromID(_id)}
 }
 
+// @property reflectivity @abstract Specifies the reflectivity of the floor. Animatable. @discussion If the value is greater than zero then the surface will reflect other objects in the scene. The default value is 0.25.
+//
 // WithReflectivity sets the reflectivity property and returns the receiver for chaining.
 func (x *Floor) WithReflectivity(reflectivity float64) *Floor {
 	x.inner.SetReflectivity(reflectivity)
 	return x
 }
 
+// @property reflectionFalloffStart @abstract Specifies the distance from the floor where the falloff begins. Animatable. @discussion The default value is 0.
+//
 // WithReflectionFalloffStart sets the reflectionFalloffStart property and returns the receiver for chaining.
 func (x *Floor) WithReflectionFalloffStart(reflectionFalloffStart float64) *Floor {
 	x.inner.SetReflectionFalloffStart(reflectionFalloffStart)
 	return x
 }
 
+// @property reflectionFalloffEnd @abstract Specifies the distance from the floor where the falloff finishes. Animatable. @discussion If the value is 0 then there is no falloff. The default value is 0.
+//
 // WithReflectionFalloffEnd sets the reflectionFalloffEnd property and returns the receiver for chaining.
 func (x *Floor) WithReflectionFalloffEnd(reflectionFalloffEnd float64) *Floor {
 	x.inner.SetReflectionFalloffEnd(reflectionFalloffEnd)
 	return x
 }
 
+// @property reflectionCategoryBitMask @abstract Determines the node categories to reflect. Defaults to all bits set.
+//
 // WithReflectionCategoryBitMask sets the reflectionCategoryBitMask property and returns the receiver for chaining.
 func (x *Floor) WithReflectionCategoryBitMask(reflectionCategoryBitMask uint) *Floor {
 	x.inner.SetReflectionCategoryBitMask(reflectionCategoryBitMask)
 	return x
 }
 
+// @property width @abstract The floor extent along the X axis. Animatable. @discussion If the value is equal to 0, the floor is infinite on the X axis. The default value is 0.
+//
 // WithWidth sets the width property and returns the receiver for chaining.
 func (x *Floor) WithWidth(width float64) *Floor {
 	x.inner.SetWidth(width)
 	return x
 }
 
+// @property length @abstract The floor extent along the Z axis. Animatable. @discussion If the value is equal to 0, the floor is infinite on the Z axis. The default value is 0.
+//
 // WithLength sets the length property and returns the receiver for chaining.
 func (x *Floor) WithLength(length float64) *Floor {
 	x.inner.SetLength(length)
 	return x
 }
 
+// @property reflectionResolutionScaleFactor @abstract Specifies the resolution scale factor of the buffer used to render the reflection. @discussion Defaults to 1.0.
+//
 // WithReflectionResolutionScaleFactor sets the reflectionResolutionScaleFactor property and returns the receiver for chaining.
 func (x *Floor) WithReflectionResolutionScaleFactor(reflectionResolutionScaleFactor float64) *Floor {
 	x.inner.SetReflectionResolutionScaleFactor(reflectionResolutionScaleFactor)
 	return x
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Floor) WithName(name string) *Floor {
 	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+//
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Floor) WithMaterials(items ...*raw.SCNMaterial) *Floor {
 	if len(items) == 0 {
@@ -103,12 +121,16 @@ func (x *Floor) WithMaterials(items ...*raw.SCNMaterial) *Floor {
 	return x
 }
 
+// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+//
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Floor) WithFirstMaterial(firstMaterial *Material) *Floor {
 	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
+// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+//
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Floor) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Floor {
 	if len(items) == 0 {
@@ -133,30 +155,40 @@ func (x *Floor) WithTessellator(tessellator *GeometryTessellator) *Floor {
 	return x
 }
 
+// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+//
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Floor) WithSubdivisionLevel(subdivisionLevel uint) *Floor {
 	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
 	return x
 }
 
+// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+//
 // WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
 func (x *Floor) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Floor {
 	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
 	return x
 }
 
+// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+//
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Floor) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Floor {
 	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
+// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+//
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Floor) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Floor {
 	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
+// @property reflectivity @abstract Specifies the reflectivity of the floor. Animatable. @discussion If the value is greater than zero then the surface will reflect other objects in the scene. The default value is 0.25.
+//
 // Reflectivity calls the underlying Reflectivity.
 func (x *Floor) Reflectivity() float64 {
 	return x.inner.Reflectivity()
@@ -167,6 +199,8 @@ func (x *Floor) SetReflectivity(reflectivity float64) {
 	x.inner.SetReflectivity(reflectivity)
 }
 
+// @property reflectionFalloffStart @abstract Specifies the distance from the floor where the falloff begins. Animatable. @discussion The default value is 0.
+//
 // ReflectionFalloffStart calls the underlying ReflectionFalloffStart.
 func (x *Floor) ReflectionFalloffStart() float64 {
 	return x.inner.ReflectionFalloffStart()
@@ -177,6 +211,8 @@ func (x *Floor) SetReflectionFalloffStart(reflectionFalloffStart float64) {
 	x.inner.SetReflectionFalloffStart(reflectionFalloffStart)
 }
 
+// @property reflectionFalloffEnd @abstract Specifies the distance from the floor where the falloff finishes. Animatable. @discussion If the value is 0 then there is no falloff. The default value is 0.
+//
 // ReflectionFalloffEnd calls the underlying ReflectionFalloffEnd.
 func (x *Floor) ReflectionFalloffEnd() float64 {
 	return x.inner.ReflectionFalloffEnd()
@@ -187,6 +223,8 @@ func (x *Floor) SetReflectionFalloffEnd(reflectionFalloffEnd float64) {
 	x.inner.SetReflectionFalloffEnd(reflectionFalloffEnd)
 }
 
+// @property reflectionCategoryBitMask @abstract Determines the node categories to reflect. Defaults to all bits set.
+//
 // ReflectionCategoryBitMask calls the underlying ReflectionCategoryBitMask.
 func (x *Floor) ReflectionCategoryBitMask() uint {
 	return x.inner.ReflectionCategoryBitMask()
@@ -197,6 +235,8 @@ func (x *Floor) SetReflectionCategoryBitMask(reflectionCategoryBitMask uint) {
 	x.inner.SetReflectionCategoryBitMask(reflectionCategoryBitMask)
 }
 
+// @property width @abstract The floor extent along the X axis. Animatable. @discussion If the value is equal to 0, the floor is infinite on the X axis. The default value is 0.
+//
 // Width calls the underlying Width.
 func (x *Floor) Width() float64 {
 	return x.inner.Width()
@@ -207,6 +247,8 @@ func (x *Floor) SetWidth(width float64) {
 	x.inner.SetWidth(width)
 }
 
+// @property length @abstract The floor extent along the Z axis. Animatable. @discussion If the value is equal to 0, the floor is infinite on the Z axis. The default value is 0.
+//
 // Length calls the underlying Length.
 func (x *Floor) Length() float64 {
 	return x.inner.Length()
@@ -217,6 +259,8 @@ func (x *Floor) SetLength(length float64) {
 	x.inner.SetLength(length)
 }
 
+// @property reflectionResolutionScaleFactor @abstract Specifies the resolution scale factor of the buffer used to render the reflection. @discussion Defaults to 1.0.
+//
 // ReflectionResolutionScaleFactor calls the underlying ReflectionResolutionScaleFactor.
 func (x *Floor) ReflectionResolutionScaleFactor() float64 {
 	return x.inner.ReflectionResolutionScaleFactor()

@@ -33,6 +33,8 @@ func MTRClusterContentLauncherFromID(id objc.ID) *MTRClusterContentLauncher {
 	return &MTRClusterContentLauncher{inner: raw.MTRClusterContentLauncherFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterContentLauncherWithDeviceEndpointIDQueue creates a new [MTRClusterContentLauncher].
 func NewMTRClusterContentLauncherWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterContentLauncher {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterContentLauncher")), objc.RegisterName("alloc"))

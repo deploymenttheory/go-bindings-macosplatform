@@ -36,11 +36,15 @@ func NewAssetSegmentReport() *AssetSegmentReport {
 	return &AssetSegmentReport{inner: raw.AVAssetSegmentReportFromID(_id)}
 }
 
+// @property	segmentType @abstract	A segment type of the segment data.
+//
 // SegmentType calls the underlying SegmentType.
 func (x *AssetSegmentReport) SegmentType() AVAssetSegmentType {
 	return AVAssetSegmentType(x.inner.SegmentType())
 }
 
+// @property	trackReports @abstract	Provides an array of AVAssetSegmentTrackReport in the segment data.
+//
 // TrackReports returns the collection as a Go slice.
 func (x *AssetSegmentReport) TrackReports() []*AssetSegmentTrackReport {
 	arr := x.inner.TrackReports()

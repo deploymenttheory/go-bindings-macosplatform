@@ -30,6 +30,8 @@ func ElectrocardiogramQueryFromID(id objc.ID) *ElectrocardiogramQuery {
 	return &ElectrocardiogramQuery{inner: raw.HKElectrocardiogramQueryFromID(id)}
 }
 
+// @method        initWithElectrocardiogram:dataHandler: @abstract      Returns a query that will enumerate over voltages recorded across leads in an electrocardiogram. @param         electrocardiogram    The sample for which the lead data will be returned. @param         dataHandler          The block to invoke with results from the query. It will be called once for each voltage measurement. Call [query stop] to stop enumeration, if desired.
+//
 // NewElectrocardiogramQueryWithElectrocardiogramDataHandler creates a new [ElectrocardiogramQuery].
 func NewElectrocardiogramQueryWithElectrocardiogramDataHandler(electrocardiogram *raw.HKElectrocardiogram, dataHandler func(*raw.HKElectrocardiogramQuery, *raw.HKElectrocardiogramVoltageMeasurement, bool, unsafe.Pointer)) *ElectrocardiogramQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKElectrocardiogramQuery")), objc.RegisterName("alloc"))

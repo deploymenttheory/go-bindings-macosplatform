@@ -37,6 +37,8 @@ func NewAcousticFeature() *AcousticFeature {
 	return &AcousticFeature{inner: raw.SFAcousticFeatureFromID(_id)}
 }
 
+// An array of feature values, one value per audio frame, corresponding to a transcript segment of recorded audio.
+//
 // AcousticFeatureValuePerFrame returns the collection as a Go slice.
 func (x *AcousticFeature) AcousticFeatureValuePerFrame() []*foundation.NSNumber {
 	arr := x.inner.AcousticFeatureValuePerFrame()
@@ -48,6 +50,8 @@ func (x *AcousticFeature) AcousticFeatureValuePerFrame() []*foundation.NSNumber 
 	})
 }
 
+// The duration of the audio frame.
+//
 // FrameDuration calls the underlying FrameDuration.
 func (x *AcousticFeature) FrameDuration() float64 {
 	return x.inner.FrameDuration()

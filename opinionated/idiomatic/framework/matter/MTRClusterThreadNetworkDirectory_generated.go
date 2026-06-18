@@ -35,6 +35,8 @@ func MTRClusterThreadNetworkDirectoryFromID(id objc.ID) *MTRClusterThreadNetwork
 	return &MTRClusterThreadNetworkDirectory{inner: raw.MTRClusterThreadNetworkDirectoryFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterThreadNetworkDirectoryWithDeviceEndpointIDQueue creates a new [MTRClusterThreadNetworkDirectory].
 func NewMTRClusterThreadNetworkDirectoryWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterThreadNetworkDirectory {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterThreadNetworkDirectory")), objc.RegisterName("alloc"))

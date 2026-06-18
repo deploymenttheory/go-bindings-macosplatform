@@ -30,6 +30,8 @@ func RecordZoneFromID(id objc.ID) *RecordZone {
 	return &RecordZone{inner: raw.CKRecordZoneFromID(id)}
 }
 
+// Creates a record zone object with the specified zone name. - Parameters: - zoneName: The name of the new zone. Zone names inside a user's private database are unique, consist of up to 255 ASCII characters, and don't start with an underscore. One way to satisfy the uniqueness of zone names is to create a string from a Universally Unique Identifier (UUID), but you can also use other techniques. If this parameter is `nil` or is an empty string, the method throws an exception. - Returns: The new custom zone. Use this method to create a new record zone. The new zone has the name you provide and the zone's owner is the current user. After creating the zone, save it to the server using a “CKModifyRecordZonesOperation“ object or the “CKDatabase/save(_:completionHandler:)-32ffr“ method of “CKDatabase“. You must save the zone to the server before you attempt to save any records to that zone. Don't use this method to create a `CKRecordZone` object that corresponds to a zone that already exists in the database. If the zone exists, fetch it using a “CKFetchRecordZonesOperation“ object or the “CKDatabase/fetch(withRecordZoneID:completionHandler:)“ method of “CKDatabase“.
+//
 // NewRecordZoneWithZoneName creates a new [RecordZone].
 func NewRecordZoneWithZoneName(zoneName string) *RecordZone {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKRecordZone")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewRecordZoneWithZoneName(zoneName string) *RecordZone {
 	return &RecordZone{inner: raw.CKRecordZoneFromID(_id)}
 }
 
+// Creates a record zone object with the specified zone ID. - Parameters: - zoneID: The ID for the new zone. This parameter must not be `nil`. - Returns: The custom record zone. Use this method when you want to create a new record zone from the information in a zone ID. After creating the zone, save it to the server using a “CKModifyRecordZonesOperation“ object or the “CKDatabase/save(_:completionHandler:)-32ffr“ method of “CKDatabase“. Don't use this method to create a “CKRecordZone“ object that corresponds to a zone that already exists in the database. If the zone exists, fetch it using a “CKFetchRecordZonesOperation“ object or the “CKDatabase/fetch(withRecordZoneID:completionHandler:)“ method of “CKDatabase“.
+//
 // NewRecordZoneWithZoneID creates a new [RecordZone].
 func NewRecordZoneWithZoneID(zoneID *raw.CKRecordZoneID) *RecordZone {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKRecordZone")), objc.RegisterName("alloc"))
@@ -44,12 +48,16 @@ func NewRecordZoneWithZoneID(zoneID *raw.CKRecordZoneID) *RecordZone {
 	return &RecordZone{inner: raw.CKRecordZoneFromID(_id)}
 }
 
+// The encryption scope determines the granularity at which CloudKit stores encryption keys within the zone. Zone encryption scope defaults to `CKRecordZoneEncryptionScopePerRecord` and can only be modified before zone creation. Attempting to change the encryption scope of an existing zone is invalid and results in an error. Zones using `CKRecordZoneEncryptionScopePerZone` can only use zone-wide sharing and are not compatible with older device OS versions. Refer to `CKRecordZoneEncryptionScope` for more info.
+//
 // WithEncryptionScope sets the encryptionScope property and returns the receiver for chaining.
 func (x *RecordZone) WithEncryptionScope(encryptionScope CKRecordZoneEncryptionScope) *RecordZone {
 	x.inner.SetEncryptionScope(raw.CKRecordZoneEncryptionScope(encryptionScope))
 	return x
 }
 
+// The unique ID of the zone. The zone ID contains the name of the zone and the name of the user who owns the zone. Use this property to access both of those values.
+//
 // ZoneID calls the underlying ZoneID.
 func (x *RecordZone) ZoneID() *RecordZoneID {
 	_r := x.inner.ZoneID()
@@ -59,11 +67,15 @@ func (x *RecordZone) ZoneID() *RecordZoneID {
 	return &RecordZoneID{inner: _r}
 }
 
+// The capabilities that the zone supports. The server determines the capabilities of the zone and sets the value of this property when you save the record zone. Always check this property before performing tasks that require a specific capability. Default zones don't support any special capabilities. Custom zones in a private database support the options that “CKRecordZone/Capabilities“ provides.
+//
 // Capabilities calls the underlying Capabilities.
 func (x *RecordZone) Capabilities() CKRecordZoneCapabilities {
 	return CKRecordZoneCapabilities(x.inner.Capabilities())
 }
 
+// A reference to the record zone's share record. CloudKit sets this property only for fetched record zones that contain a share record; otherwise, it's `nil`. To share a record zone, create a share record using the “CKShare/init(recordZoneID:)“ method and then save it to the server. Shared record zones must have the “CKRecordZone/Capabilities/zoneWideSharing“ capability, which CloudKit enables by default for new custom record zones in the user's private database. A record zone, and the records it contains, can take part in only a single share. CloudKit returns an error if you attempt to share an already-shared record zone, or if that record zone contains previously shared records. Record zone sharing errors include the following: - “CKError/Code/serverRecordChanged“, which CloudKit returns if you try to share an already-shared record zone. - “CKError/Code/serverRejectedRequest“, which CloudKit returns if you try to share a record hierarchy from an already-shared record zone. - “CKError/Code/invalidArguments“, which CloudKit returns if you try to share a record zone that contains one or more shared hierarchies.
+//
 // Share calls the underlying Share.
 func (x *RecordZone) Share() *Reference {
 	_r := x.inner.Share()
@@ -73,6 +85,8 @@ func (x *RecordZone) Share() *Reference {
 	return &Reference{inner: _r}
 }
 
+// The encryption scope determines the granularity at which CloudKit stores encryption keys within the zone. Zone encryption scope defaults to `CKRecordZoneEncryptionScopePerRecord` and can only be modified before zone creation. Attempting to change the encryption scope of an existing zone is invalid and results in an error. Zones using `CKRecordZoneEncryptionScopePerZone` can only use zone-wide sharing and are not compatible with older device OS versions. Refer to `CKRecordZoneEncryptionScope` for more info.
+//
 // EncryptionScope calls the underlying EncryptionScope.
 func (x *RecordZone) EncryptionScope() CKRecordZoneEncryptionScope {
 	return CKRecordZoneEncryptionScope(x.inner.EncryptionScope())

@@ -35,6 +35,8 @@ func NewScoredAssessment() *ScoredAssessment {
 	return &ScoredAssessment{inner: raw.HKScoredAssessmentFromID(_id)}
 }
 
+// The score determined by the answers on an assessment
+//
 // Score calls the underlying Score.
 func (x *ScoredAssessment) Score() int {
 	return x.inner.Score()

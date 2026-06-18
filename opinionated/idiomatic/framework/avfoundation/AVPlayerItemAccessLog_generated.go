@@ -37,16 +37,22 @@ func NewPlayerItemAccessLog() *PlayerItemAccessLog {
 	return &PlayerItemAccessLog{inner: raw.AVPlayerItemAccessLogFromID(_id)}
 }
 
+// Serializes an AVPlayerItemAccessLog in the Extended Log File Format. This method converts the webserver access log into a textual format that conforms to the W3C Extended Log File Format for web server log files. For more information see: http://www.w3.org/pub/WWW/TR/WD-logfile.html - Returns: An autoreleased NSData instance.
+//
 // ExtendedLogData calls the underlying ExtendedLogData.
 func (x *PlayerItemAccessLog) ExtendedLogData() *foundation.NSData {
 	return x.inner.ExtendedLogData()
 }
 
+// Returns the NSStringEncoding for extendedLogData, see above. A string suitable for console output is obtainable by: [[NSString alloc] initWithData:[myLog extendedLogData] encoding:[myLog extendedLogDataStringEncoding]]
+//
 // ExtendedLogDataStringEncoding calls the underlying ExtendedLogDataStringEncoding.
 func (x *PlayerItemAccessLog) ExtendedLogDataStringEncoding() uint {
 	return x.inner.ExtendedLogDataStringEncoding()
 }
 
+// An ordered collection of AVPlayerItemAccessLogEvent instances. An ordered collection of AVPlayerItemAccessLogEvent instances that represent the chronological sequence of events contained in the access log. This property is not observable.
+//
 // Events returns the collection as a Go slice.
 func (x *PlayerItemAccessLog) Events() []*PlayerItemAccessLogEvent {
 	arr := x.inner.Events()

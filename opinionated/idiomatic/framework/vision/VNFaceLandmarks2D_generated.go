@@ -35,6 +35,8 @@ func NewFaceLandmarks2D() *FaceLandmarks2D {
 	return &FaceLandmarks2D{inner: raw.VNFaceLandmarks2DFromID(_id)}
 }
 
+// @brief allPoints the region containing all face landmark points.
+//
 // AllPoints calls the underlying AllPoints.
 func (x *FaceLandmarks2D) AllPoints() *FaceLandmarkRegion2D {
 	_r := x.inner.AllPoints()
@@ -44,6 +46,8 @@ func (x *FaceLandmarks2D) AllPoints() *FaceLandmarkRegion2D {
 	return &FaceLandmarkRegion2D{inner: _r}
 }
 
+// @brief faceContour the region containing the points that describe the face contour from cheek over chin to cheek.
+//
 // FaceContour calls the underlying FaceContour.
 func (x *FaceLandmarks2D) FaceContour() *FaceLandmarkRegion2D {
 	_r := x.inner.FaceContour()
@@ -53,6 +57,8 @@ func (x *FaceLandmarks2D) FaceContour() *FaceLandmarkRegion2D {
 	return &FaceLandmarkRegion2D{inner: _r}
 }
 
+// @brief leftEye the region containing the points describing the outline of the left eye.
+//
 // LeftEye calls the underlying LeftEye.
 func (x *FaceLandmarks2D) LeftEye() *FaceLandmarkRegion2D {
 	_r := x.inner.LeftEye()
@@ -62,6 +68,8 @@ func (x *FaceLandmarks2D) LeftEye() *FaceLandmarkRegion2D {
 	return &FaceLandmarkRegion2D{inner: _r}
 }
 
+// @brief rightEye the region containing the points describing the outline of the right eye.
+//
 // RightEye calls the underlying RightEye.
 func (x *FaceLandmarks2D) RightEye() *FaceLandmarkRegion2D {
 	_r := x.inner.RightEye()
@@ -71,6 +79,8 @@ func (x *FaceLandmarks2D) RightEye() *FaceLandmarkRegion2D {
 	return &FaceLandmarkRegion2D{inner: _r}
 }
 
+// @brief leftEyebrow the region containing the points describing the trace of the left eyebrow.
+//
 // LeftEyebrow calls the underlying LeftEyebrow.
 func (x *FaceLandmarks2D) LeftEyebrow() *FaceLandmarkRegion2D {
 	_r := x.inner.LeftEyebrow()
@@ -80,6 +90,8 @@ func (x *FaceLandmarks2D) LeftEyebrow() *FaceLandmarkRegion2D {
 	return &FaceLandmarkRegion2D{inner: _r}
 }
 
+// @brief rightEyebrow the region containing the points describing the trace of the right eyebrow.
+//
 // RightEyebrow calls the underlying RightEyebrow.
 func (x *FaceLandmarks2D) RightEyebrow() *FaceLandmarkRegion2D {
 	_r := x.inner.RightEyebrow()
@@ -89,6 +101,8 @@ func (x *FaceLandmarks2D) RightEyebrow() *FaceLandmarkRegion2D {
 	return &FaceLandmarkRegion2D{inner: _r}
 }
 
+// @brief nose the region containing the points describing the outline of the nose.
+//
 // Nose calls the underlying Nose.
 func (x *FaceLandmarks2D) Nose() *FaceLandmarkRegion2D {
 	_r := x.inner.Nose()
@@ -98,6 +112,8 @@ func (x *FaceLandmarks2D) Nose() *FaceLandmarkRegion2D {
 	return &FaceLandmarkRegion2D{inner: _r}
 }
 
+// @brief noseCrest the region containing the points describing the trace of the center crest of the nose.
+//
 // NoseCrest calls the underlying NoseCrest.
 func (x *FaceLandmarks2D) NoseCrest() *FaceLandmarkRegion2D {
 	_r := x.inner.NoseCrest()
@@ -107,6 +123,8 @@ func (x *FaceLandmarks2D) NoseCrest() *FaceLandmarkRegion2D {
 	return &FaceLandmarkRegion2D{inner: _r}
 }
 
+// @brief medianLine the region containing the points describing the trace of the center line of the face.
+//
 // MedianLine calls the underlying MedianLine.
 func (x *FaceLandmarks2D) MedianLine() *FaceLandmarkRegion2D {
 	_r := x.inner.MedianLine()
@@ -116,6 +134,8 @@ func (x *FaceLandmarks2D) MedianLine() *FaceLandmarkRegion2D {
 	return &FaceLandmarkRegion2D{inner: _r}
 }
 
+// @brief outer lips the region containing the points describing the outline of the outside of the lips.
+//
 // OuterLips calls the underlying OuterLips.
 func (x *FaceLandmarks2D) OuterLips() *FaceLandmarkRegion2D {
 	_r := x.inner.OuterLips()
@@ -125,6 +145,8 @@ func (x *FaceLandmarks2D) OuterLips() *FaceLandmarkRegion2D {
 	return &FaceLandmarkRegion2D{inner: _r}
 }
 
+// @brief innerLips the region containing the points describing the outline of the space between the of the lips.
+//
 // InnerLips calls the underlying InnerLips.
 func (x *FaceLandmarks2D) InnerLips() *FaceLandmarkRegion2D {
 	_r := x.inner.InnerLips()
@@ -134,6 +156,8 @@ func (x *FaceLandmarks2D) InnerLips() *FaceLandmarkRegion2D {
 	return &FaceLandmarkRegion2D{inner: _r}
 }
 
+// @brief leftPupil the region containing the point where the left pupil is located.  This value may be inaccurate if the face isBlinking.
+//
 // LeftPupil calls the underlying LeftPupil.
 func (x *FaceLandmarks2D) LeftPupil() *FaceLandmarkRegion2D {
 	_r := x.inner.LeftPupil()
@@ -143,6 +167,8 @@ func (x *FaceLandmarks2D) LeftPupil() *FaceLandmarkRegion2D {
 	return &FaceLandmarkRegion2D{inner: _r}
 }
 
+// @brief rightPupil the region containing the point where the right pupil is located.  This value may be inaccurate if the face isBlinking.
+//
 // RightPupil calls the underlying RightPupil.
 func (x *FaceLandmarks2D) RightPupil() *FaceLandmarkRegion2D {
 	_r := x.inner.RightPupil()

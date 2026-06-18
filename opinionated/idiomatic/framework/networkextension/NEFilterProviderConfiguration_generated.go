@@ -37,72 +37,96 @@ func NewNEFilterProviderConfiguration() *NEFilterProviderConfiguration {
 	return &NEFilterProviderConfiguration{inner: raw.NEFilterProviderConfigurationFromID(_id)}
 }
 
+// @property filterBrowsers @discussion If YES, the filter plugin will be allowed to filter browser traffic. If NO, the filter plugin will not see any browser flows. Defaults to NO. At least one of filterBrowsers and filterSockets should be set to YES to make the filter take effect.
+//
 // WithFilterBrowsers sets the filterBrowsers property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithFilterBrowsers(filterBrowsers bool) *NEFilterProviderConfiguration {
 	x.inner.SetFilterBrowsers(filterBrowsers)
 	return x
 }
 
+// @property filterSockets @discussion If YES, the filter plugin will be allowed to filter socket traffic. If NO, the filter plugin will not see any socket flows. Defaults to NO. At least one of filterBrowsers and filterSockets should be set to YES to make the filter take effect.
+//
 // WithFilterSockets sets the filterSockets property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithFilterSockets(filterSockets bool) *NEFilterProviderConfiguration {
 	x.inner.SetFilterSockets(filterSockets)
 	return x
 }
 
+// @property filterPackets @discussion If YES, a NEFilterPacketProvider will be instantiated and will be allowed to filter packets.
+//
 // WithFilterPackets sets the filterPackets property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithFilterPackets(filterPackets bool) *NEFilterProviderConfiguration {
 	x.inner.SetFilterPackets(filterPackets)
 	return x
 }
 
+// @property vendorConfiguration @discussion An optional dictionary of plugin-specific keys to be passed to the plugin.
+//
 // WithVendorConfiguration sets the vendorConfiguration property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithVendorConfiguration(vendorConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NEFilterProviderConfiguration {
 	x.inner.SetVendorConfiguration(vendorConfiguration)
 	return x
 }
 
+// @property serverAddress @discussion The optional address of the server used to support the filter.
+//
 // WithServerAddress sets the serverAddress property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithServerAddress(serverAddress string) *NEFilterProviderConfiguration {
 	x.inner.SetServerAddress(foundation.NSStringStringWithUTF8String(serverAddress))
 	return x
 }
 
+// @property username @discussion The optional username associated with the filter.
+//
 // WithUsername sets the username property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithUsername(username string) *NEFilterProviderConfiguration {
 	x.inner.SetUsername(foundation.NSStringStringWithUTF8String(username))
 	return x
 }
 
+// @property organization @discussion The optional organization associated with the filter.
+//
 // WithOrganization sets the organization property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithOrganization(organization string) *NEFilterProviderConfiguration {
 	x.inner.SetOrganization(foundation.NSStringStringWithUTF8String(organization))
 	return x
 }
 
+// @property passwordReference @discussion The optional password keychain reference associated with the filter.
+//
 // WithPasswordReference sets the passwordReference property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithPasswordReference(passwordReference *foundation.NSData) *NEFilterProviderConfiguration {
 	x.inner.SetPasswordReference(passwordReference)
 	return x
 }
 
+// @property identityReference @discussion The optional certificate identity keychain reference associated with the filter.
+//
 // WithIdentityReference sets the identityReference property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithIdentityReference(identityReference *foundation.NSData) *NEFilterProviderConfiguration {
 	x.inner.SetIdentityReference(identityReference)
 	return x
 }
 
+// @property filterDataProviderBundleIdentifier @discussion A string containing the bundle identifier of the NEFilterDataProvider app extension or system extension. If this property is nil, then the bundle identifier of the NEFilterDataProvider extension in the calling app's bundle is used, and if the calling app's bundle contains more than one NEFilterDataProvider extension then which one will be used is undefined.
+//
 // WithFilterDataProviderBundleIdentifier sets the filterDataProviderBundleIdentifier property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithFilterDataProviderBundleIdentifier(filterDataProviderBundleIdentifier string) *NEFilterProviderConfiguration {
 	x.inner.SetFilterDataProviderBundleIdentifier(foundation.NSStringStringWithUTF8String(filterDataProviderBundleIdentifier))
 	return x
 }
 
+// @property filterPacketProviderBundleIdentifier @discussion A string containing the bundle identifier of the NEFilterPacketProvider app extension or system extension. If this property is nil, then the bundle identifier of the NEFilterPacketProvider extension in the calling app's bundle is used, and if the calling app's bundle contains more than one NEFilterPacketProvider extension then which one will be used is undefined.
+//
 // WithFilterPacketProviderBundleIdentifier sets the filterPacketProviderBundleIdentifier property and returns the receiver for chaining.
 func (x *NEFilterProviderConfiguration) WithFilterPacketProviderBundleIdentifier(filterPacketProviderBundleIdentifier string) *NEFilterProviderConfiguration {
 	x.inner.SetFilterPacketProviderBundleIdentifier(foundation.NSStringStringWithUTF8String(filterPacketProviderBundleIdentifier))
 	return x
 }
 
+// @property filterBrowsers @discussion If YES, the filter plugin will be allowed to filter browser traffic. If NO, the filter plugin will not see any browser flows. Defaults to NO. At least one of filterBrowsers and filterSockets should be set to YES to make the filter take effect.
+//
 // FilterBrowsers calls the underlying FilterBrowsers.
 func (x *NEFilterProviderConfiguration) FilterBrowsers() bool {
 	return x.inner.FilterBrowsers()
@@ -113,6 +137,8 @@ func (x *NEFilterProviderConfiguration) SetFilterBrowsers(filterBrowsers bool) {
 	x.inner.SetFilterBrowsers(filterBrowsers)
 }
 
+// @property filterSockets @discussion If YES, the filter plugin will be allowed to filter socket traffic. If NO, the filter plugin will not see any socket flows. Defaults to NO. At least one of filterBrowsers and filterSockets should be set to YES to make the filter take effect.
+//
 // FilterSockets calls the underlying FilterSockets.
 func (x *NEFilterProviderConfiguration) FilterSockets() bool {
 	return x.inner.FilterSockets()
@@ -123,6 +149,8 @@ func (x *NEFilterProviderConfiguration) SetFilterSockets(filterSockets bool) {
 	x.inner.SetFilterSockets(filterSockets)
 }
 
+// @property filterPackets @discussion If YES, a NEFilterPacketProvider will be instantiated and will be allowed to filter packets.
+//
 // FilterPackets calls the underlying FilterPackets.
 func (x *NEFilterProviderConfiguration) FilterPackets() bool {
 	return x.inner.FilterPackets()
@@ -133,6 +161,8 @@ func (x *NEFilterProviderConfiguration) SetFilterPackets(filterPackets bool) {
 	x.inner.SetFilterPackets(filterPackets)
 }
 
+// @property vendorConfiguration @discussion An optional dictionary of plugin-specific keys to be passed to the plugin.
+//
 // VendorConfiguration calls the underlying VendorConfiguration.
 func (x *NEFilterProviderConfiguration) VendorConfiguration() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.VendorConfiguration()
@@ -143,6 +173,8 @@ func (x *NEFilterProviderConfiguration) SetVendorConfiguration(vendorConfigurati
 	x.inner.SetVendorConfiguration(vendorConfiguration)
 }
 
+// @property serverAddress @discussion The optional address of the server used to support the filter.
+//
 // ServerAddress calls the underlying ServerAddress.
 func (x *NEFilterProviderConfiguration) ServerAddress() string {
 	_r := x.inner.ServerAddress()
@@ -157,6 +189,8 @@ func (x *NEFilterProviderConfiguration) SetServerAddress(serverAddress string) {
 	x.inner.SetServerAddress(foundation.NSStringStringWithUTF8String(serverAddress))
 }
 
+// @property username @discussion The optional username associated with the filter.
+//
 // Username calls the underlying Username.
 func (x *NEFilterProviderConfiguration) Username() string {
 	_r := x.inner.Username()
@@ -171,6 +205,8 @@ func (x *NEFilterProviderConfiguration) SetUsername(username string) {
 	x.inner.SetUsername(foundation.NSStringStringWithUTF8String(username))
 }
 
+// @property organization @discussion The optional organization associated with the filter.
+//
 // Organization calls the underlying Organization.
 func (x *NEFilterProviderConfiguration) Organization() string {
 	_r := x.inner.Organization()
@@ -185,6 +221,8 @@ func (x *NEFilterProviderConfiguration) SetOrganization(organization string) {
 	x.inner.SetOrganization(foundation.NSStringStringWithUTF8String(organization))
 }
 
+// @property passwordReference @discussion The optional password keychain reference associated with the filter.
+//
 // PasswordReference calls the underlying PasswordReference.
 func (x *NEFilterProviderConfiguration) PasswordReference() *foundation.NSData {
 	return x.inner.PasswordReference()
@@ -195,6 +233,8 @@ func (x *NEFilterProviderConfiguration) SetPasswordReference(passwordReference *
 	x.inner.SetPasswordReference(passwordReference)
 }
 
+// @property identityReference @discussion The optional certificate identity keychain reference associated with the filter.
+//
 // IdentityReference calls the underlying IdentityReference.
 func (x *NEFilterProviderConfiguration) IdentityReference() *foundation.NSData {
 	return x.inner.IdentityReference()
@@ -205,6 +245,8 @@ func (x *NEFilterProviderConfiguration) SetIdentityReference(identityReference *
 	x.inner.SetIdentityReference(identityReference)
 }
 
+// @property filterDataProviderBundleIdentifier @discussion A string containing the bundle identifier of the NEFilterDataProvider app extension or system extension. If this property is nil, then the bundle identifier of the NEFilterDataProvider extension in the calling app's bundle is used, and if the calling app's bundle contains more than one NEFilterDataProvider extension then which one will be used is undefined.
+//
 // FilterDataProviderBundleIdentifier calls the underlying FilterDataProviderBundleIdentifier.
 func (x *NEFilterProviderConfiguration) FilterDataProviderBundleIdentifier() string {
 	_r := x.inner.FilterDataProviderBundleIdentifier()
@@ -219,6 +261,8 @@ func (x *NEFilterProviderConfiguration) SetFilterDataProviderBundleIdentifier(fi
 	x.inner.SetFilterDataProviderBundleIdentifier(foundation.NSStringStringWithUTF8String(filterDataProviderBundleIdentifier))
 }
 
+// @property filterPacketProviderBundleIdentifier @discussion A string containing the bundle identifier of the NEFilterPacketProvider app extension or system extension. If this property is nil, then the bundle identifier of the NEFilterPacketProvider extension in the calling app's bundle is used, and if the calling app's bundle contains more than one NEFilterPacketProvider extension then which one will be used is undefined.
+//
 // FilterPacketProviderBundleIdentifier calls the underlying FilterPacketProviderBundleIdentifier.
 func (x *NEFilterProviderConfiguration) FilterPacketProviderBundleIdentifier() string {
 	_r := x.inner.FilterPacketProviderBundleIdentifier()

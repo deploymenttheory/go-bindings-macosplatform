@@ -48,102 +48,136 @@ func NewSVGFWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice
 	return &SVGF{inner: raw.MPSSVGFFromID(_id)}
 }
 
+// @brief Controls how samples' depths are compared during reprojection, variance estimation, and bilateral filtering. The final weight is given by exp(-abs(Z1 - Z2) / depthWeight). Must be greater than zero. Defaults to 1.0.
+//
 // WithDepthWeight sets the depthWeight property and returns the receiver for chaining.
 func (x *SVGF) WithDepthWeight(depthWeight float32) *SVGF {
 	x.inner.SetDepthWeight(depthWeight)
 	return x
 }
 
+// @brief Controls how samples' normals are compared during reprojection, variance estimation, and bilateral filtering. The final weight is given by pow(max(dot(N1, N2)), normalWeight). Must be greater than or equal to zero. Defaults to 128.
+//
 // WithNormalWeight sets the normalWeight property and returns the receiver for chaining.
 func (x *SVGF) WithNormalWeight(normalWeight float32) *SVGF {
 	x.inner.SetNormalWeight(normalWeight)
 	return x
 }
 
+// @brief Controls how samples' luminance values are compared during bilateral filtering. The final weight is given by exp(-abs(L1 - L2) / (luminanceWeight * luminanceVariance + EPSILON)). Must be greater than or equal to zero. Defaults to 4.
+//
 // WithLuminanceWeight sets the luminanceWeight property and returns the receiver for chaining.
 func (x *SVGF) WithLuminanceWeight(luminanceWeight float32) *SVGF {
 	x.inner.SetLuminanceWeight(luminanceWeight)
 	return x
 }
 
+// @brief How to weight samples during temporal reprojection. Defaults to MPSTemporalWeightingAverage.
+//
 // WithTemporalWeighting sets the temporalWeighting property and returns the receiver for chaining.
 func (x *SVGF) WithTemporalWeighting(temporalWeighting mpsrayintersector.MPSTemporalWeighting) *SVGF {
 	x.inner.SetTemporalWeighting(temporalWeighting)
 	return x
 }
 
+// @brief When using MPSTemporalWeightingExponentialMovingAverage, how much to blend the current frame with the previous frame during reprojection. The final value is given by current * temporalReprojectionBlendFactor + previous * (1 - temporalReprojectionBlendFactor). Must be between zero and one, inclusive. Defaults to 0.2.
+//
 // WithTemporalReprojectionBlendFactor sets the temporalReprojectionBlendFactor property and returns the receiver for chaining.
 func (x *SVGF) WithTemporalReprojectionBlendFactor(temporalReprojectionBlendFactor float32) *SVGF {
 	x.inner.SetTemporalReprojectionBlendFactor(temporalReprojectionBlendFactor)
 	return x
 }
 
+// @brief During reprojection, minimum combined depth and normal weight needed to consider a pixel from the previous frame consistent with a pixel from the current frame. Must be greater than or equal to zero. Defaults to 0.01.
+//
 // WithReprojectionThreshold sets the reprojectionThreshold property and returns the receiver for chaining.
 func (x *SVGF) WithReprojectionThreshold(reprojectionThreshold float32) *SVGF {
 	x.inner.SetReprojectionThreshold(reprojectionThreshold)
 	return x
 }
 
+// @brief The minimum number of frames which must be accumulated before variance can be computed directly from the accumulated luminance moments. If enough frames have not been accumulated, variance will be estimated with a spatial filter instead. Defaults to 4.
+//
 // WithMinimumFramesForVarianceEstimation sets the minimumFramesForVarianceEstimation property and returns the receiver for chaining.
 func (x *SVGF) WithMinimumFramesForVarianceEstimation(minimumFramesForVarianceEstimation uint) *SVGF {
 	x.inner.SetMinimumFramesForVarianceEstimation(minimumFramesForVarianceEstimation)
 	return x
 }
 
+// @brief The radius of the spatial filter used when not enough frames have been accumulated to compute variance from accumulated luminance moments. Defaults to 3 resulting in a 7x7 filter.
+//
 // WithVarianceEstimationRadius sets the varianceEstimationRadius property and returns the receiver for chaining.
 func (x *SVGF) WithVarianceEstimationRadius(varianceEstimationRadius uint) *SVGF {
 	x.inner.SetVarianceEstimationRadius(varianceEstimationRadius)
 	return x
 }
 
+// @brief The sigma value of the Gaussian function used by the spatial filter used when not enough frames have been accumulated to compute variance from accumulated luminance moments. Must be greater than zero. Defaults to 2.0.
+//
 // WithVarianceEstimationSigma sets the varianceEstimationSigma property and returns the receiver for chaining.
 func (x *SVGF) WithVarianceEstimationSigma(varianceEstimationSigma float32) *SVGF {
 	x.inner.SetVarianceEstimationSigma(varianceEstimationSigma)
 	return x
 }
 
+// @brief The sigma value of the Gaussian function used by the variance pre-filter of the bilateral filter. Must be greater than zero. Defaults to 1.33.
+//
 // WithVariancePrefilterSigma sets the variancePrefilterSigma property and returns the receiver for chaining.
 func (x *SVGF) WithVariancePrefilterSigma(variancePrefilterSigma float32) *SVGF {
 	x.inner.SetVariancePrefilterSigma(variancePrefilterSigma)
 	return x
 }
 
+// @brief The radius of the variance pre-filter of the bilateral filter. Defaults to 1 resulting in a 3x3 filter.
+//
 // WithVariancePrefilterRadius sets the variancePrefilterRadius property and returns the receiver for chaining.
 func (x *SVGF) WithVariancePrefilterRadius(variancePrefilterRadius uint) *SVGF {
 	x.inner.SetVariancePrefilterRadius(variancePrefilterRadius)
 	return x
 }
 
+// @brief The sigma value of the Gaussian function used by the bilateral filter. Must be greater than zero. Defaults to 1.2.
+//
 // WithBilateralFilterSigma sets the bilateralFilterSigma property and returns the receiver for chaining.
 func (x *SVGF) WithBilateralFilterSigma(bilateralFilterSigma float32) *SVGF {
 	x.inner.SetBilateralFilterSigma(bilateralFilterSigma)
 	return x
 }
 
+// @brief The radius of the bilateral filter. Defaults to 2 resulting in a 5x5 filter.
+//
 // WithBilateralFilterRadius sets the bilateralFilterRadius property and returns the receiver for chaining.
 func (x *SVGF) WithBilateralFilterRadius(bilateralFilterRadius uint) *SVGF {
 	x.inner.SetBilateralFilterRadius(bilateralFilterRadius)
 	return x
 }
 
+// @brief The number of channels to filter in the source image. Must be at least one and at most three. Defaults to 3.
+//
 // WithChannelCount sets the channelCount property and returns the receiver for chaining.
 func (x *SVGF) WithChannelCount(channelCount uint) *SVGF {
 	x.inner.SetChannelCount(channelCount)
 	return x
 }
 
+// @brief The number of channels to filter in the second source image. Must be at least one and at most three. Defaults to 3.
+//
 // WithChannelCount2 sets the channelCount2 property and returns the receiver for chaining.
 func (x *SVGF) WithChannelCount2(channelCount2 uint) *SVGF {
 	x.inner.SetChannelCount2(channelCount2)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *SVGF) WithOptions(options mpscore.MPSKernelOptions) *SVGF {
 	x.inner.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *SVGF) WithLabel(label string) *SVGF {
 	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
@@ -164,36 +198,50 @@ func (x *SVGF) EncodeWithCoder(coder *foundation.NSCoder) {
 	x.inner.EncodeWithCoder(coder)
 }
 
+// @brief Encode reprojection into a command buffer @discussion Normal and depth values from the previous frame will be compared with normal and depth values from the current frame to determine if they are similar enough to reproject into the current frame. These values are weighted by the depthWeight and normalWeight properties. If the combined weight exceeds the reprojectionThreshold property's value, the previous frame will be blended with the current frame according to the temporalWeighting and temporalReprojectionBlendFactor properties. The reprojection kernel can operate on two sets of source and destination textures simultaneously to share costs such as loading depth and normal values from memory, computing various weights, etc. The second set of textures may be nil. The two images are assumed to share the same depth and normal values. The number of channels in the source image(s), previous frame's image(s), and destination image(s) are given by the channelCount and channelCount2 properties. These images must have at least as many channels as given by these properties. Channels beyond the required number are ignored when reading from source images and set to zero when writing to the destination images, except the alpha channel which will be set to one if present. The previous frame's image will be ignored on the first frame. The source and destination luminance moments textures must be at least two-channel textures, which will be set to the accumulated first and second moments of luminance. Channels beyond the first two will be ignored when reading from the previous frame's texture and set to zero when writing to the destination texture. The previous frame's luminance moments will be ignored on the first frame. The frame count textures track the number of accumulated frames and must be at least R32Uint textures. The remaining channels will be ignored when reading from the source texture and set to zero when writing to the destination texture, if present. The previous frame count texture must be cleared to zero on the first frame or to reset the accumulated images to the current frame's image. The motion vector texture must be at least a two channel texture representing how many texels each texel in the source image(s) have moved since the previous frame. The remaining channels will be ignored if present. This texture may be nil, in which case the motion vector is assumed to be zero, which is suitable for static images. The depth/normal texture must contain the depth and normal values for directly visible geometry for the current frame for each pixel. These values are packed into a four channel texture to reduce the number of texture sampling instructions required to load them. The first channel must store the depth value from zero to infinity. The normals must be stored in the last three channels as the three signed X, Y, and z components each between negative one and one. The depth and normal values are not required if the motion vector texture is nil. The destination texture, destination luminance moments texture, and destination frame count texture are used by subsequent stages of the denoising filter. The destination frame count texture is also used as the source frame count texture the reprojection kernel in the next frame. @param commandBuffer                       Command buffer to encode into @param sourceTexture                       Current frame to denoise @param previousTexture                     Previous denoised frame to reproject into current frame @param destinationTexture                  Output blended image @param previousLuminanceMomentsTexture     Previous accumulated luminance moments image @param destinationLuminanceMomentsTexture  Output accumulated luminance moments image @param previousFrameCountTexture           The number of frames accumulated in the previous source image @param destinationFrameCountTexture        The number of frames accumulated in the destination texture(s) including the current frame @param motionVectorTexture                 Motion vector texture @param depthNormalTexture                  The depth and normal values for the current frame @param previousDepthNormalTexture          The depth and normal values for the previous frame
+//
 // EncodeReprojectionToCommandBufferSourceTexturePreviousTextureDestinationTexturePreviousLuminanceMomentsTextureDestinationLuminanceMomentsTexturePreviousFrameCountTextureDestinationFrameCountTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture calls the underlying EncodeReprojectionToCommandBufferSourceTexturePreviousTextureDestinationTexturePreviousLuminanceMomentsTextureDestinationLuminanceMomentsTexturePreviousFrameCountTextureDestinationFrameCountTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture.
 func (x *SVGF) EncodeReprojectionToCommandBufferSourceTexturePreviousTextureDestinationTexturePreviousLuminanceMomentsTextureDestinationLuminanceMomentsTexturePreviousFrameCountTextureDestinationFrameCountTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, previousTexture metal.MTLTexture, destinationTexture metal.MTLTexture, previousLuminanceMomentsTexture metal.MTLTexture, destinationLuminanceMomentsTexture metal.MTLTexture, previousFrameCountTexture metal.MTLTexture, destinationFrameCountTexture metal.MTLTexture, motionVectorTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture, previousDepthNormalTexture metal.MTLTexture) {
 	x.inner.EncodeReprojectionToCommandBufferSourceTexturePreviousTextureDestinationTexturePreviousLuminanceMomentsTextureDestinationLuminanceMomentsTexturePreviousFrameCountTextureDestinationFrameCountTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer, sourceTexture, previousTexture, destinationTexture, previousLuminanceMomentsTexture, destinationLuminanceMomentsTexture, previousFrameCountTexture, destinationFrameCountTexture, motionVectorTexture, depthNormalTexture, previousDepthNormalTexture)
 }
 
+// @brief Encode reprojection into a command buffer @discussion Normal and depth values from the previous frame will be compared with normal and depth values from the current frame to determine if they are similar enough to reproject into the current frame. These values are weighted by the depthWeight and normalWeight properties. If the combined weight exceeds the reprojectionThreshold property's value, the previous frame will be blended with the current frame according to the temporalWeighting and temporalReprojectionBlendFactor properties. The reprojection kernel can operate on two sets of source and destination textures simultaneously to share costs such as loading depth and normal values from memory, computing various weights, etc. The second set of textures may be nil. The two images are assumed to share the same depth and normal values. The number of channels in the source image(s), previous frame's image(s), and destination image(s) are given by the channelCount and channelCount2 properties. These images must have at least as many channels as given by these properties. Channels beyond the required number are ignored when reading from source images and set to zero when writing to the destination images, except the alpha channel which will be set to one if present. The previous frame's image will be ignored on the first frame. The source and destination luminance moments textures must be at least two-channel textures, which will be set to the accumulated first and second moments of luminance. Channels beyond the first two will be ignored when reading from the previous frame's texture and set to zero when writing to the destination texture. The previous frame's luminance moments will be ignored on the first frame. The frame count textures track the number of accumulated frames and must be at least R32Uint textures. The remaining channels will be ignored when reading from the source texture and set to zero when writing to the destination texture, if present. The previous frame count texture must be cleared to zero on the first frame or to reset the accumulated images to the current frame's image. The motion vector texture must be at least a two channel texture representing how many texels each texel in the source image(s) have moved since the previous frame. The remaining channels will be ignored if present. This texture may be nil, in which case the motion vector is assumed to be zero, which is suitable for static images. The depth/normal texture must contain the depth and normal values for directly visible geometry for the current frame for each pixel. These values are packed into a four channel texture to reduce the number of texture sampling instructions required to load them. The first channel must store the depth value from zero to infinity. The normals must be stored in the last three channels as the three signed X, Y, and z components each between negative one and one. The depth and normal values are not required if the motion vector texture is nil. The destination texture, destination luminance moments texture, and destination frame count texture are used by subsequent stages of the denoising filter. The destination frame count texture is also used as the source frame count texture the reprojection kernel in the next frame. @param commandBuffer                       Command buffer to encode into @param sourceTexture                       Current frame to denoise @param previousTexture                     Previous denoised frame to reproject into current frame @param destinationTexture                  Output blended image @param previousLuminanceMomentsTexture     Previous accumulated luminance moments image @param destinationLuminanceMomentsTexture  Output accumulated luminance moments image @param sourceTexture2                      Second source image @param previousTexture2                    Second previous image @param destinationTexture2                 Second destination image @param previousLuminanceMomentsTexture2    Second previous luminance moments texture @param destinationLuminanceMomentsTexture2 Second destination luminance moments texture @param previousFrameCountTexture           The number of frames accumulated in the previous source image @param destinationFrameCountTexture        The number of frames accumulated in the destination texture(s) including the current frame @param motionVectorTexture                 Motion vector texture @param depthNormalTexture                  The depth and normal values for the current frame @param previousDepthNormalTexture          The depth and normal values for the previous frame
+//
 // EncodeReprojectionToCommandBufferSourceTexturePreviousTextureDestinationTexturePreviousLuminanceMomentsTextureDestinationLuminanceMomentsTextureSourceTexture2PreviousTexture2DestinationTexture2PreviousLuminanceMomentsTexture2DestinationLuminanceMomentsTexture2PreviousFrameCountTextureDestinationFrameCountTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture calls the underlying EncodeReprojectionToCommandBufferSourceTexturePreviousTextureDestinationTexturePreviousLuminanceMomentsTextureDestinationLuminanceMomentsTextureSourceTexture2PreviousTexture2DestinationTexture2PreviousLuminanceMomentsTexture2DestinationLuminanceMomentsTexture2PreviousFrameCountTextureDestinationFrameCountTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture.
 func (x *SVGF) EncodeReprojectionToCommandBufferSourceTexturePreviousTextureDestinationTexturePreviousLuminanceMomentsTextureDestinationLuminanceMomentsTextureSourceTexture2PreviousTexture2DestinationTexture2PreviousLuminanceMomentsTexture2DestinationLuminanceMomentsTexture2PreviousFrameCountTextureDestinationFrameCountTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, previousTexture metal.MTLTexture, destinationTexture metal.MTLTexture, previousLuminanceMomentsTexture metal.MTLTexture, destinationLuminanceMomentsTexture metal.MTLTexture, sourceTexture2 metal.MTLTexture, previousTexture2 metal.MTLTexture, destinationTexture2 metal.MTLTexture, previousLuminanceMomentsTexture2 metal.MTLTexture, destinationLuminanceMomentsTexture2 metal.MTLTexture, previousFrameCountTexture metal.MTLTexture, destinationFrameCountTexture metal.MTLTexture, motionVectorTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture, previousDepthNormalTexture metal.MTLTexture) {
 	x.inner.EncodeReprojectionToCommandBufferSourceTexturePreviousTextureDestinationTexturePreviousLuminanceMomentsTextureDestinationLuminanceMomentsTextureSourceTexture2PreviousTexture2DestinationTexture2PreviousLuminanceMomentsTexture2DestinationLuminanceMomentsTexture2PreviousFrameCountTextureDestinationFrameCountTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer, sourceTexture, previousTexture, destinationTexture, previousLuminanceMomentsTexture, destinationLuminanceMomentsTexture, sourceTexture2, previousTexture2, destinationTexture2, previousLuminanceMomentsTexture2, destinationLuminanceMomentsTexture2, previousFrameCountTexture, destinationFrameCountTexture, motionVectorTexture, depthNormalTexture, previousDepthNormalTexture)
 }
 
+// @brief Encode variance estimation into a command buffer @discussion Variance is computed from the accumulated first and second luminance moments. If the number of accumulated frames is below the minimumFramesForVarianceEstimation property, the luminance variance will be computed using a spatial estimate instead. The spatial estimate is computed using a bilateral filter with radius given by the varianceEstimationRadius property. Neighboring samples will be weighted according to a gaussian function with sigma given by the varianceEstimationSigma property. Normal and depth values from neighboring pixels will be compared with depth and normal values of the center pixel to determine if they are similar enough to include in the spatial blur. These values are weighted by the depthWeight and normalWeight properties. The variance kernel can operate on two sets of source and destination textures simultaneously to share costs such as loading depth and normal values from memory, computing various weights, etc. The second set of textures may be nil. The two images are assumed to share the same depth and normal values. The reprojected source texture, luminance moments texture and frame count texture are computed by the reprojection kernel. The computed variance will be stored in the last channel of the destination image, while the source image will be copied into the previous channels, to reduce the number of texture sample instructured required by the bilateral filter in the final stage of the denoising kernel. The number of channels in the source image(s) are given by the channelCount and channelCount2 properties. Therefore, the destination image(s) must have at least channelCount + 1 and channelCount2 + 1 channels and the source image(s) must have at least channelCount and channelCount2 channels. Channels beyond the required number are ignored when reading from source textures and set to zero when writing to destination textures. The depth/normal texture must contain the depth and normal values for directly visible geometry for the current frame for each pixel. These values are packed into a four channel texture to reduce the number of texture sampling instructions required to load them. The first channel must store the depth value from zero to infinity. The normals must be stored in the last three channels as the three signed X, Y, and z components each between negative one and one. If the minimumFramesForVarianceEstimation property is less than or equal to one, variance will be estimated directly from the accumulated luminance moments so the depth/normal texture may be nil. @param commandBuffer            Command buffer to encode into @param sourceTexture            Current reprojected frame to denoise @param luminanceMomentsTexture  Luminance moments texture @param destinationTexture       Output packed color and variance image @param frameCountTexture        Number of frames accumulated into the source image @param depthNormalTexture       The depth and normal values for the current frame
+//
 // EncodeVarianceEstimationToCommandBufferSourceTextureLuminanceMomentsTextureDestinationTextureFrameCountTextureDepthNormalTexture calls the underlying EncodeVarianceEstimationToCommandBufferSourceTextureLuminanceMomentsTextureDestinationTextureFrameCountTextureDepthNormalTexture.
 func (x *SVGF) EncodeVarianceEstimationToCommandBufferSourceTextureLuminanceMomentsTextureDestinationTextureFrameCountTextureDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, luminanceMomentsTexture metal.MTLTexture, destinationTexture metal.MTLTexture, frameCountTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture) {
 	x.inner.EncodeVarianceEstimationToCommandBufferSourceTextureLuminanceMomentsTextureDestinationTextureFrameCountTextureDepthNormalTexture(commandBuffer, sourceTexture, luminanceMomentsTexture, destinationTexture, frameCountTexture, depthNormalTexture)
 }
 
+// @brief Encode variance estimation into a command buffer @discussion Variance is computed from the accumulated first and second luminance moments. If the number of accumulated frames is below the minimumFramesForVarianceEstimation property, the luminance variance will be computed using a spatial estimate instead. The spatial estimate is computed using a bilateral filter with radius given by the varianceEstimationRadius property. Neighboring samples will be weighted according to a gaussian function with sigma given by the varianceEstimationSigma property. Normal and depth values from neighboring pixels will be compared with depth and normal values of the center pixel to determine if they are similar enough to include in the spatial blur. These values are weighted by the depthWeight and normalWeight properties. The variance kernel can operate on two sets of source and destination textures simultaneously to share costs such as loading depth and normal values from memory, computing various weights, etc. The second set of textures may be nil. The two images are assumed to share the same depth and normal values. The reprojected source texture, luminance moments texture and frame count texture are computed by the reprojection kernel. The computed variance will be stored in the last channel of the destination image, while the source image will be copied into the previous channels, to reduce the number of texture sample instructured required by the bilateral filter in the final stage of the denoising kernel. The number of channels in the source image(s) are given by the channelCount and channelCount2 properties. Therefore, the destination image(s) must have at least channelCount + 1 and channelCount2 + 1 channels and the source image(s) must have at least channelCount and channelCount2 channels. Channels beyond the required number are ignored when reading from source textures and set to zero when writing to destination textures. The depth/normal texture must contain the depth and normal values for directly visible geometry for the current frame for each pixel. These values are packed into a four channel texture to reduce the number of texture sampling instructions required to load them. The first channel must store the depth value from zero to infinity. The normals must be stored in the last three channels as the three signed X, Y, and z components each between negative one and one. If the minimumFramesForVarianceEstimation property is less than or equal to one, variance will be estimated directly from the accumulated luminance moments so the depth/normal texture may be nil. @param commandBuffer            Command buffer to encode into @param sourceTexture            Current reprojected frame to denoise @param luminanceMomentsTexture  Luminance moments texture @param destinationTexture       Output packed color and variance image @param sourceTexture2           Second source image @param luminanceMomentsTexture2 Second luminance moments image @param destinationTexture2      Second destination image @param frameCountTexture        Number of frames accumulated into the source image @param depthNormalTexture       The depth and normal values for the current frame
+//
 // EncodeVarianceEstimationToCommandBufferSourceTextureLuminanceMomentsTextureDestinationTextureSourceTexture2LuminanceMomentsTexture2DestinationTexture2FrameCountTextureDepthNormalTexture calls the underlying EncodeVarianceEstimationToCommandBufferSourceTextureLuminanceMomentsTextureDestinationTextureSourceTexture2LuminanceMomentsTexture2DestinationTexture2FrameCountTextureDepthNormalTexture.
 func (x *SVGF) EncodeVarianceEstimationToCommandBufferSourceTextureLuminanceMomentsTextureDestinationTextureSourceTexture2LuminanceMomentsTexture2DestinationTexture2FrameCountTextureDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, luminanceMomentsTexture metal.MTLTexture, destinationTexture metal.MTLTexture, sourceTexture2 metal.MTLTexture, luminanceMomentsTexture2 metal.MTLTexture, destinationTexture2 metal.MTLTexture, frameCountTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture) {
 	x.inner.EncodeVarianceEstimationToCommandBufferSourceTextureLuminanceMomentsTextureDestinationTextureSourceTexture2LuminanceMomentsTexture2DestinationTexture2FrameCountTextureDepthNormalTexture(commandBuffer, sourceTexture, luminanceMomentsTexture, destinationTexture, sourceTexture2, luminanceMomentsTexture2, destinationTexture2, frameCountTexture, depthNormalTexture)
 }
 
+// @brief Encode bilateral filter into a command buffer @discussion Performs an edge avoiding blur with radius given by the bilateraFilterRadius property with sampling weighted by a Gaussian filter with sigma given by the bilteralFilterSigma property. Normal and depth values from neighboring pixels will be compared with depth and normal values of the center pixel to determine if they are similar enough to include in the blur. These values are weighted by the depthWeight, normalWeight, and luminanceWeight properties. Before the variance values are used for luminance weighting, the variance is prefiltered with a small Gaussian blur with radius given by the variancePrefilterRadius property and sigma given by the variancePrefilterSigma property. This kernel should be run multiple times with a step distance of pow(2, i), starting with i = 0. It is recommended that the output of the first iteration be used as the image to be reprojected in the next frame. Then several more iterations should be run to compute the denoised image for the current frame. 5 total iterations is reasonable. The bilateral filter can operate on two sets of source and destination textures simultaneously to share costs such as loading depth and normal values from memory, computing various weights, etc. The second set of textures may be nil. The two images are assumed to share the same normal and depth values. The number of channels to filter in the source image(s) are given by the channelCount and channelCount2 properties. Furthermore, the luminance variance is packed into the final channel of the source image(s) to reduce the number of texture sample instructions required. The filtered color and variance values are packed the same way in the destination image(s). Therefore, the source and destination images must have at least channelCount + 1 and channelCount2 + 1 channels. Channels beyond the required number are ignored when reading from source images and set to zero when writing to destination images. The source image should be produced by either the variance estimation kernel or a previous iteration of the bilateral filter. The depth/normal texture must contain the depth and normal values for directly visible geometry for the current frame for each pixel. These values are packed into a four channel texture to reduce the number of texture sampling instructions required to load them. The first channel must store the depth value from zero to infinity. The normals must be stored in the last three channels as the three signed X, Y, and z components each between negative one and one. @param commandBuffer       Command buffer to encode into @param stepDistance        Number of pixels to skip between samples @param sourceTexture       Source packed color and variance texture @param destinationTexture  Destination packed color and variance texture @param depthNormalTexture  The depth and normal values for the current frame
+//
 // EncodeBilateralFilterToCommandBufferStepDistanceSourceTextureDestinationTextureDepthNormalTexture calls the underlying EncodeBilateralFilterToCommandBufferStepDistanceSourceTextureDestinationTextureDepthNormalTexture.
 func (x *SVGF) EncodeBilateralFilterToCommandBufferStepDistanceSourceTextureDestinationTextureDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, stepDistance uint, sourceTexture metal.MTLTexture, destinationTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture) {
 	x.inner.EncodeBilateralFilterToCommandBufferStepDistanceSourceTextureDestinationTextureDepthNormalTexture(commandBuffer, stepDistance, sourceTexture, destinationTexture, depthNormalTexture)
 }
 
+// @brief Encode bilateral filter into a command buffer @discussion Performs an edge avoiding blur with radius given by the bilateraFilterRadius property with sampling weighted by a Gaussian filter with sigma given by the bilteralFilterSigma property. Normal and depth values from neighboring pixels will be compared with depth and normal values of the center pixel to determine if they are similar enough to include in the blur. These values are weighted by the depthWeight, normalWeight, and luminanceWeight properties. Before the variance values are used for luminance weighting, the variance is prefiltered with a small Gaussian blur with radius given by the variancePrefilterRadius property and sigma given by the variancePrefilterSigma property. This kernel should be run multiple times with a step distance of pow(2, i), starting with i = 0. It is recommended that the output of the first iteration be used as the image to be reprojected in the next frame. Then several more iterations should be run to compute the denoised image for the current frame. 5 total iterations is reasonable. The bilateral filter can operate on two sets of source and destination textures simultaneously to share costs such as loading depth and normal values from memory, computing various weights, etc. The second set of textures may be nil. The two images are assumed to share the same normal and depth values. The number of channels to filter in the source image(s) are given by the channelCount and channelCount2 properties. Furthermore, the luminance variance is packed into the final channel of the source image(s) to reduce the number of texture sample instructions required. The filtered color and variance values are packed the same way in the destination image(s). Therefore, the source and destination images must have at least channelCount + 1 and channelCount2 + 1 channels. Channels beyond the required number are ignored when reading from source images and set to zero when writing to destination images. The source image should be produced by either the variance estimation kernel or a previous iteration of the bilateral filter. The depth/normal texture must contain the depth and normal values for directly visible geometry for the current frame for each pixel. These values are packed into a four channel texture to reduce the number of texture sampling instructions required to load them. The first channel must store the depth value from zero to infinity. The normals must be stored in the last three channels as the three signed X, Y, and z components each between negative one and one. @param commandBuffer       Command buffer to encode into @param stepDistance        Number of pixels to skip between samples @param sourceTexture       Source packed color and variance texture @param destinationTexture  Destination packed color and variance texture @param sourceTexture2      Second source image @param destinationTexture2 Second destination image @param depthNormalTexture  The depth and normal values for the current frame
+//
 // EncodeBilateralFilterToCommandBufferStepDistanceSourceTextureDestinationTextureSourceTexture2DestinationTexture2DepthNormalTexture calls the underlying EncodeBilateralFilterToCommandBufferStepDistanceSourceTextureDestinationTextureSourceTexture2DestinationTexture2DepthNormalTexture.
 func (x *SVGF) EncodeBilateralFilterToCommandBufferStepDistanceSourceTextureDestinationTextureSourceTexture2DestinationTexture2DepthNormalTexture(commandBuffer metal.MTLCommandBuffer, stepDistance uint, sourceTexture metal.MTLTexture, destinationTexture metal.MTLTexture, sourceTexture2 metal.MTLTexture, destinationTexture2 metal.MTLTexture, depthNormalTexture metal.MTLTexture) {
 	x.inner.EncodeBilateralFilterToCommandBufferStepDistanceSourceTextureDestinationTextureSourceTexture2DestinationTexture2DepthNormalTexture(commandBuffer, stepDistance, sourceTexture, destinationTexture, sourceTexture2, destinationTexture2, depthNormalTexture)
 }
 
+// @brief Controls how samples' depths are compared during reprojection, variance estimation, and bilateral filtering. The final weight is given by exp(-abs(Z1 - Z2) / depthWeight). Must be greater than zero. Defaults to 1.0.
+//
 // DepthWeight calls the underlying DepthWeight.
 func (x *SVGF) DepthWeight() float32 {
 	return x.inner.DepthWeight()
@@ -204,6 +252,8 @@ func (x *SVGF) SetDepthWeight(depthWeight float32) {
 	x.inner.SetDepthWeight(depthWeight)
 }
 
+// @brief Controls how samples' normals are compared during reprojection, variance estimation, and bilateral filtering. The final weight is given by pow(max(dot(N1, N2)), normalWeight). Must be greater than or equal to zero. Defaults to 128.
+//
 // NormalWeight calls the underlying NormalWeight.
 func (x *SVGF) NormalWeight() float32 {
 	return x.inner.NormalWeight()
@@ -214,6 +264,8 @@ func (x *SVGF) SetNormalWeight(normalWeight float32) {
 	x.inner.SetNormalWeight(normalWeight)
 }
 
+// @brief Controls how samples' luminance values are compared during bilateral filtering. The final weight is given by exp(-abs(L1 - L2) / (luminanceWeight * luminanceVariance + EPSILON)). Must be greater than or equal to zero. Defaults to 4.
+//
 // LuminanceWeight calls the underlying LuminanceWeight.
 func (x *SVGF) LuminanceWeight() float32 {
 	return x.inner.LuminanceWeight()
@@ -224,6 +276,8 @@ func (x *SVGF) SetLuminanceWeight(luminanceWeight float32) {
 	x.inner.SetLuminanceWeight(luminanceWeight)
 }
 
+// @brief How to weight samples during temporal reprojection. Defaults to MPSTemporalWeightingAverage.
+//
 // TemporalWeighting calls the underlying TemporalWeighting.
 func (x *SVGF) TemporalWeighting() mpsrayintersector.MPSTemporalWeighting {
 	return x.inner.TemporalWeighting()
@@ -234,6 +288,8 @@ func (x *SVGF) SetTemporalWeighting(temporalWeighting mpsrayintersector.MPSTempo
 	x.inner.SetTemporalWeighting(temporalWeighting)
 }
 
+// @brief When using MPSTemporalWeightingExponentialMovingAverage, how much to blend the current frame with the previous frame during reprojection. The final value is given by current * temporalReprojectionBlendFactor + previous * (1 - temporalReprojectionBlendFactor). Must be between zero and one, inclusive. Defaults to 0.2.
+//
 // TemporalReprojectionBlendFactor calls the underlying TemporalReprojectionBlendFactor.
 func (x *SVGF) TemporalReprojectionBlendFactor() float32 {
 	return x.inner.TemporalReprojectionBlendFactor()
@@ -244,6 +300,8 @@ func (x *SVGF) SetTemporalReprojectionBlendFactor(temporalReprojectionBlendFacto
 	x.inner.SetTemporalReprojectionBlendFactor(temporalReprojectionBlendFactor)
 }
 
+// @brief During reprojection, minimum combined depth and normal weight needed to consider a pixel from the previous frame consistent with a pixel from the current frame. Must be greater than or equal to zero. Defaults to 0.01.
+//
 // ReprojectionThreshold calls the underlying ReprojectionThreshold.
 func (x *SVGF) ReprojectionThreshold() float32 {
 	return x.inner.ReprojectionThreshold()
@@ -254,6 +312,8 @@ func (x *SVGF) SetReprojectionThreshold(reprojectionThreshold float32) {
 	x.inner.SetReprojectionThreshold(reprojectionThreshold)
 }
 
+// @brief The minimum number of frames which must be accumulated before variance can be computed directly from the accumulated luminance moments. If enough frames have not been accumulated, variance will be estimated with a spatial filter instead. Defaults to 4.
+//
 // MinimumFramesForVarianceEstimation calls the underlying MinimumFramesForVarianceEstimation.
 func (x *SVGF) MinimumFramesForVarianceEstimation() uint {
 	return x.inner.MinimumFramesForVarianceEstimation()
@@ -264,6 +324,8 @@ func (x *SVGF) SetMinimumFramesForVarianceEstimation(minimumFramesForVarianceEst
 	x.inner.SetMinimumFramesForVarianceEstimation(minimumFramesForVarianceEstimation)
 }
 
+// @brief The radius of the spatial filter used when not enough frames have been accumulated to compute variance from accumulated luminance moments. Defaults to 3 resulting in a 7x7 filter.
+//
 // VarianceEstimationRadius calls the underlying VarianceEstimationRadius.
 func (x *SVGF) VarianceEstimationRadius() uint {
 	return x.inner.VarianceEstimationRadius()
@@ -274,6 +336,8 @@ func (x *SVGF) SetVarianceEstimationRadius(varianceEstimationRadius uint) {
 	x.inner.SetVarianceEstimationRadius(varianceEstimationRadius)
 }
 
+// @brief The sigma value of the Gaussian function used by the spatial filter used when not enough frames have been accumulated to compute variance from accumulated luminance moments. Must be greater than zero. Defaults to 2.0.
+//
 // VarianceEstimationSigma calls the underlying VarianceEstimationSigma.
 func (x *SVGF) VarianceEstimationSigma() float32 {
 	return x.inner.VarianceEstimationSigma()
@@ -284,6 +348,8 @@ func (x *SVGF) SetVarianceEstimationSigma(varianceEstimationSigma float32) {
 	x.inner.SetVarianceEstimationSigma(varianceEstimationSigma)
 }
 
+// @brief The sigma value of the Gaussian function used by the variance pre-filter of the bilateral filter. Must be greater than zero. Defaults to 1.33.
+//
 // VariancePrefilterSigma calls the underlying VariancePrefilterSigma.
 func (x *SVGF) VariancePrefilterSigma() float32 {
 	return x.inner.VariancePrefilterSigma()
@@ -294,6 +360,8 @@ func (x *SVGF) SetVariancePrefilterSigma(variancePrefilterSigma float32) {
 	x.inner.SetVariancePrefilterSigma(variancePrefilterSigma)
 }
 
+// @brief The radius of the variance pre-filter of the bilateral filter. Defaults to 1 resulting in a 3x3 filter.
+//
 // VariancePrefilterRadius calls the underlying VariancePrefilterRadius.
 func (x *SVGF) VariancePrefilterRadius() uint {
 	return x.inner.VariancePrefilterRadius()
@@ -304,6 +372,8 @@ func (x *SVGF) SetVariancePrefilterRadius(variancePrefilterRadius uint) {
 	x.inner.SetVariancePrefilterRadius(variancePrefilterRadius)
 }
 
+// @brief The sigma value of the Gaussian function used by the bilateral filter. Must be greater than zero. Defaults to 1.2.
+//
 // BilateralFilterSigma calls the underlying BilateralFilterSigma.
 func (x *SVGF) BilateralFilterSigma() float32 {
 	return x.inner.BilateralFilterSigma()
@@ -314,6 +384,8 @@ func (x *SVGF) SetBilateralFilterSigma(bilateralFilterSigma float32) {
 	x.inner.SetBilateralFilterSigma(bilateralFilterSigma)
 }
 
+// @brief The radius of the bilateral filter. Defaults to 2 resulting in a 5x5 filter.
+//
 // BilateralFilterRadius calls the underlying BilateralFilterRadius.
 func (x *SVGF) BilateralFilterRadius() uint {
 	return x.inner.BilateralFilterRadius()
@@ -324,6 +396,8 @@ func (x *SVGF) SetBilateralFilterRadius(bilateralFilterRadius uint) {
 	x.inner.SetBilateralFilterRadius(bilateralFilterRadius)
 }
 
+// @brief The number of channels to filter in the source image. Must be at least one and at most three. Defaults to 3.
+//
 // ChannelCount calls the underlying ChannelCount.
 func (x *SVGF) ChannelCount() uint {
 	return x.inner.ChannelCount()
@@ -334,6 +408,8 @@ func (x *SVGF) SetChannelCount(channelCount uint) {
 	x.inner.SetChannelCount(channelCount)
 }
 
+// @brief The number of channels to filter in the second source image. Must be at least one and at most three. Defaults to 3.
+//
 // ChannelCount2 calls the underlying ChannelCount2.
 func (x *SVGF) ChannelCount2() uint {
 	return x.inner.ChannelCount2()

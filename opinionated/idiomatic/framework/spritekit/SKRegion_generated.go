@@ -31,6 +31,8 @@ func RegionFromID(id objc.ID) *Region {
 	return &Region{inner: raw.SKRegionFromID(id)}
 }
 
+// Create a circular region with radius
+//
 // NewRegionWithRadius creates a new [Region].
 func NewRegionWithRadius(radius float32) *Region {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKRegion")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewRegionWithRadius(radius float32) *Region {
 	return &Region{inner: raw.SKRegionFromID(_id)}
 }
 
+// Create a rectangular region of size
+//
 // NewRegionWithSize creates a new [Region].
 func NewRegionWithSize(size corefoundation.CGSize) *Region {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKRegion")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewRegionWithSize(size corefoundation.CGSize) *Region {
 	return &Region{inner: raw.SKRegionFromID(_id)}
 }
 
+// Create a region bounded by a CGPath. Note that this option can be costly to evaluate.
+//
 // NewRegionWithPath creates a new [Region].
 func NewRegionWithPath(path unsafe.Pointer) *Region {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKRegion")), objc.RegisterName("alloc"))
@@ -52,6 +58,8 @@ func NewRegionWithPath(path unsafe.Pointer) *Region {
 	return &Region{inner: raw.SKRegionFromID(_id)}
 }
 
+// Create a new region that is the inverse of the current region. The inverse of the infiniteRegion is an empty region. Subclasses of SKRegion need to provide an implementation of inverseRegion.
+//
 // InverseRegion calls the underlying InverseRegion.
 func (x *Region) InverseRegion() *Region {
 	_r := x.inner.InverseRegion()
@@ -61,6 +69,8 @@ func (x *Region) InverseRegion() *Region {
 	return &Region{inner: _r}
 }
 
+// Create a new region that is the original region plus the supplied region
+//
 // RegionByUnionWithRegion calls the underlying RegionByUnionWithRegion.
 func (x *Region) RegionByUnionWithRegion(region *raw.SKRegion) *Region {
 	_r := x.inner.RegionByUnionWithRegion(region)
@@ -70,6 +80,8 @@ func (x *Region) RegionByUnionWithRegion(region *raw.SKRegion) *Region {
 	return &Region{inner: _r}
 }
 
+// Create a new region that is the original region minus the supplied region
+//
 // RegionByDifferenceFromRegion calls the underlying RegionByDifferenceFromRegion.
 func (x *Region) RegionByDifferenceFromRegion(region *raw.SKRegion) *Region {
 	_r := x.inner.RegionByDifferenceFromRegion(region)
@@ -79,6 +91,8 @@ func (x *Region) RegionByDifferenceFromRegion(region *raw.SKRegion) *Region {
 	return &Region{inner: _r}
 }
 
+// Create a new region that is the region covered by the original region and the supplied region
+//
 // RegionByIntersectionWithRegion calls the underlying RegionByIntersectionWithRegion.
 func (x *Region) RegionByIntersectionWithRegion(region *raw.SKRegion) *Region {
 	_r := x.inner.RegionByIntersectionWithRegion(region)
@@ -88,6 +102,8 @@ func (x *Region) RegionByIntersectionWithRegion(region *raw.SKRegion) *Region {
 	return &Region{inner: _r}
 }
 
+// Test for containment
+//
 // ContainsPoint calls the underlying ContainsPoint.
 func (x *Region) ContainsPoint(point corefoundation.CGPoint) bool {
 	return x.inner.ContainsPoint(point)

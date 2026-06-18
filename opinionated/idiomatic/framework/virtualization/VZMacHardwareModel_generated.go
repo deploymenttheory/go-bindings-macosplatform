@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specification for the hardware elements and configurations present in a particular Mac hardware model.
+//
 // MacHardwareModel wraps [raw.VZMacHardwareModel] with a fluent Go API.
 type MacHardwareModel struct {
 	inner *raw.VZMacHardwareModel
@@ -30,6 +32,8 @@ func MacHardwareModelFromID(id objc.ID) *MacHardwareModel {
 	return &MacHardwareModel{inner: raw.VZMacHardwareModelFromID(id)}
 }
 
+// Creates an instance of the hardware model described by the specified data representation.
+//
 // NewMacHardwareModelWithDataRepresentation creates a new [MacHardwareModel].
 func NewMacHardwareModelWithDataRepresentation(dataRepresentation *foundation.NSData) *MacHardwareModel {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacHardwareModel")), objc.RegisterName("alloc"))
@@ -37,11 +41,15 @@ func NewMacHardwareModelWithDataRepresentation(dataRepresentation *foundation.NS
 	return &MacHardwareModel{inner: raw.VZMacHardwareModelFromID(_id)}
 }
 
+// @abstract Opaque data representation of the hardware model. @discussion This can be used to recreate the same hardware model with -[VZMacHardwareModel initWithDataRepresentation:].
+//
 // DataRepresentation calls the underlying DataRepresentation.
 func (x *MacHardwareModel) DataRepresentation() *foundation.NSData {
 	return x.inner.DataRepresentation()
 }
 
+// @abstract Indicate whether this hardware model is supported by the host. @discussion If this hardware model is not supported by the host, no VZVirtualMachineConfiguration using it will validate. The validation error of the VZVirtualMachineConfiguration provides more information about why the hardware model is unsupported.
+//
 // IsSupported calls the underlying IsSupported.
 func (x *MacHardwareModel) IsSupported() bool {
 	return x.inner.IsSupported()

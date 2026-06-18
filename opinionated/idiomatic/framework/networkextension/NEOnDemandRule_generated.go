@@ -38,6 +38,8 @@ func NewNEOnDemandRule() *NEOnDemandRule {
 	return &NEOnDemandRule{inner: raw.NEOnDemandRuleFromID(_id)}
 }
 
+// @property DNSSearchDomainMatch @discussion An array of NSString objects. If the current default search domain is equal to one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the current default search domain does not factor into the rule match.
+//
 // WithDNSSearchDomainMatch sets the collection, converting the Go slice to an NSArray.
 func (x *NEOnDemandRule) WithDNSSearchDomainMatch(items ...*foundation.NSString) *NEOnDemandRule {
 	if len(items) == 0 {
@@ -56,6 +58,8 @@ func (x *NEOnDemandRule) WithDNSSearchDomainMatch(items ...*foundation.NSString)
 	return x
 }
 
+// @property DNSServerAddressMatch @discussion An array of DNS server IP addresses represented as NSString objects. If each of the current default DNS servers is equal to one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the default DNS servers do not factor into the rule match.
+//
 // WithDNSServerAddressMatch sets the collection, converting the Go slice to an NSArray.
 func (x *NEOnDemandRule) WithDNSServerAddressMatch(items ...*foundation.NSString) *NEOnDemandRule {
 	if len(items) == 0 {
@@ -74,12 +78,16 @@ func (x *NEOnDemandRule) WithDNSServerAddressMatch(items ...*foundation.NSString
 	return x
 }
 
+// @property interfaceTypeMatch @discussion The type of interface that this rule matches. If the current primary network interface is of this type and all of the other conditions in the rule match, then the rule matches. If this property is 0 (the default), then the current primary interface type does not factor into the rule match.
+//
 // WithInterfaceTypeMatch sets the interfaceTypeMatch property and returns the receiver for chaining.
 func (x *NEOnDemandRule) WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRule {
 	x.inner.SetInterfaceTypeMatch(raw.NEOnDemandRuleInterfaceType(interfaceTypeMatch))
 	return x
 }
 
+// @property SSIDMatch @discussion An array of NSString objects. If the Service Set Identifier (SSID) of the current primary connected network matches one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the current primary connected network SSID does not factor into the rule match.
+//
 // WithSSIDMatch sets the collection, converting the Go slice to an NSArray.
 func (x *NEOnDemandRule) WithSSIDMatch(items ...*foundation.NSString) *NEOnDemandRule {
 	if len(items) == 0 {
@@ -98,17 +106,23 @@ func (x *NEOnDemandRule) WithSSIDMatch(items ...*foundation.NSString) *NEOnDeman
 	return x
 }
 
+// @property probeURL @discussion An HTTP or HTTPS URL. If a request sent to this URL results in a HTTP 200 OK response and all of the other conditions in the rule match, then then rule matches. If this property is nil (the default), then an HTTP request does not factor into the rule match.
+//
 // WithProbeURL sets the probeURL property and returns the receiver for chaining.
 func (x *NEOnDemandRule) WithProbeURL(probeURL string) *NEOnDemandRule {
 	x.inner.SetProbeURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(probeURL)))
 	return x
 }
 
+// @property action @discussion The rule's action
+//
 // Action calls the underlying Action.
 func (x *NEOnDemandRule) Action() NEOnDemandRuleAction {
 	return NEOnDemandRuleAction(x.inner.Action())
 }
 
+// @property DNSSearchDomainMatch @discussion An array of NSString objects. If the current default search domain is equal to one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the current default search domain does not factor into the rule match.
+//
 // DNSSearchDomainMatch returns the collection as a Go slice.
 func (x *NEOnDemandRule) DNSSearchDomainMatch() []string {
 	arr := x.inner.DNSSearchDomainMatch()
@@ -125,6 +139,8 @@ func (x *NEOnDemandRule) SetDNSSearchDomainMatch(dNSSearchDomainMatch *foundatio
 	x.inner.SetDNSSearchDomainMatch(dNSSearchDomainMatch)
 }
 
+// @property DNSServerAddressMatch @discussion An array of DNS server IP addresses represented as NSString objects. If each of the current default DNS servers is equal to one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the default DNS servers do not factor into the rule match.
+//
 // DNSServerAddressMatch returns the collection as a Go slice.
 func (x *NEOnDemandRule) DNSServerAddressMatch() []string {
 	arr := x.inner.DNSServerAddressMatch()
@@ -141,6 +157,8 @@ func (x *NEOnDemandRule) SetDNSServerAddressMatch(dNSServerAddressMatch *foundat
 	x.inner.SetDNSServerAddressMatch(dNSServerAddressMatch)
 }
 
+// @property interfaceTypeMatch @discussion The type of interface that this rule matches. If the current primary network interface is of this type and all of the other conditions in the rule match, then the rule matches. If this property is 0 (the default), then the current primary interface type does not factor into the rule match.
+//
 // InterfaceTypeMatch calls the underlying InterfaceTypeMatch.
 func (x *NEOnDemandRule) InterfaceTypeMatch() NEOnDemandRuleInterfaceType {
 	return NEOnDemandRuleInterfaceType(x.inner.InterfaceTypeMatch())
@@ -151,6 +169,8 @@ func (x *NEOnDemandRule) SetInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRule
 	x.inner.SetInterfaceTypeMatch(raw.NEOnDemandRuleInterfaceType(interfaceTypeMatch))
 }
 
+// @property SSIDMatch @discussion An array of NSString objects. If the Service Set Identifier (SSID) of the current primary connected network matches one of the strings in this array and all of the other conditions in the rule match, then the rule matches. If this property is nil (the default), then the current primary connected network SSID does not factor into the rule match.
+//
 // SSIDMatch returns the collection as a Go slice.
 func (x *NEOnDemandRule) SSIDMatch() []string {
 	arr := x.inner.SSIDMatch()
@@ -167,6 +187,8 @@ func (x *NEOnDemandRule) SetSSIDMatch(sSIDMatch *foundation.NSArray[*foundation.
 	x.inner.SetSSIDMatch(sSIDMatch)
 }
 
+// @property probeURL @discussion An HTTP or HTTPS URL. If a request sent to this URL results in a HTTP 200 OK response and all of the other conditions in the rule match, then then rule matches. If this property is nil (the default), then an HTTP request does not factor into the rule match.
+//
 // ProbeURL calls the underlying ProbeURL.
 func (x *NEOnDemandRule) ProbeURL() *foundation.NSURL {
 	return x.inner.ProbeURL()

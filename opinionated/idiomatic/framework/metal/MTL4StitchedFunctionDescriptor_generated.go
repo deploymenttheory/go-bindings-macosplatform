@@ -38,12 +38,16 @@ func NewMTL4StitchedFunctionDescriptor() *MTL4StitchedFunctionDescriptor {
 	return &MTL4StitchedFunctionDescriptor{inner: raw.MTL4StitchedFunctionDescriptorFromID(_id)}
 }
 
+// Sets the graph representing how to stitch functions together.
+//
 // WithFunctionGraph sets the functionGraph property and returns the receiver for chaining.
 func (x *MTL4StitchedFunctionDescriptor) WithFunctionGraph(functionGraph *FunctionStitchingGraph) *MTL4StitchedFunctionDescriptor {
 	x.inner.SetFunctionGraph(functionGraph.Unwrap())
 	return x
 }
 
+// Configures an array of function descriptors with references to functions that contribute to the stitching process.
+//
 // WithFunctionDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *MTL4StitchedFunctionDescriptor) WithFunctionDescriptors(items ...MTL4FunctionDescriptorProvider) *MTL4StitchedFunctionDescriptor {
 	if len(items) == 0 {
@@ -62,6 +66,8 @@ func (x *MTL4StitchedFunctionDescriptor) WithFunctionDescriptors(items ...MTL4Fu
 	return x
 }
 
+// Sets the graph representing how to stitch functions together.
+//
 // FunctionGraph calls the underlying FunctionGraph.
 func (x *MTL4StitchedFunctionDescriptor) FunctionGraph() *FunctionStitchingGraph {
 	_r := x.inner.FunctionGraph()
@@ -76,6 +82,8 @@ func (x *MTL4StitchedFunctionDescriptor) SetFunctionGraph(functionGraph *raw.MTL
 	x.inner.SetFunctionGraph(functionGraph)
 }
 
+// Configures an array of function descriptors with references to functions that contribute to the stitching process.
+//
 // FunctionDescriptors returns the collection as a Go slice.
 func (x *MTL4StitchedFunctionDescriptor) FunctionDescriptors() []*MTL4FunctionDescriptor {
 	arr := x.inner.FunctionDescriptors()
@@ -88,8 +96,17 @@ func (x *MTL4StitchedFunctionDescriptor) FunctionDescriptors() []*MTL4FunctionDe
 }
 
 // SetFunctionDescriptors calls the underlying SetFunctionDescriptors.
-func (x *MTL4StitchedFunctionDescriptor) SetFunctionDescriptors(functionDescriptors *foundation.NSArray[*raw.MTL4FunctionDescriptor]) {
-	x.inner.SetFunctionDescriptors(functionDescriptors)
+func (x *MTL4StitchedFunctionDescriptor) SetFunctionDescriptors(functionDescriptors ...MTL4FunctionDescriptorProvider) {
+	_ptrs := make([]objc.ID, len(functionDescriptors))
+	for _i, _v := range functionDescriptors {
+		_ptrs[_i] = _v.asMTL4FunctionDescriptor().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.MTL4FunctionDescriptor]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetFunctionDescriptors(_arg0)
 }
 
 func (x *MTL4StitchedFunctionDescriptor) asMTL4FunctionDescriptor() *raw.MTL4FunctionDescriptor {
@@ -104,7 +121,7 @@ type MTL4StitchedFunctionDescriptorable interface {
 	FunctionGraph() *FunctionStitchingGraph
 	SetFunctionGraph(functionGraph *raw.MTLFunctionStitchingGraph)
 	FunctionDescriptors() []*MTL4FunctionDescriptor
-	SetFunctionDescriptors(functionDescriptors *foundation.NSArray[*raw.MTL4FunctionDescriptor])
+	SetFunctionDescriptors(functionDescriptors ...MTL4FunctionDescriptorProvider)
 }
 
 var _ MTL4StitchedFunctionDescriptorable = (*MTL4StitchedFunctionDescriptor)(nil)

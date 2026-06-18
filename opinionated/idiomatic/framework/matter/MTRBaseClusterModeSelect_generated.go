@@ -33,6 +33,8 @@ func MTRBaseClusterModeSelectFromID(id objc.ID) *MTRBaseClusterModeSelect {
 	return &MTRBaseClusterModeSelect{inner: raw.MTRBaseClusterModeSelectFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterModeSelectWithDeviceEndpointIDQueue creates a new [MTRBaseClusterModeSelect].
 func NewMTRBaseClusterModeSelectWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterModeSelect {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterModeSelect")), objc.RegisterName("alloc"))
@@ -47,6 +49,8 @@ func NewMTRBaseClusterModeSelectWithDeviceEndpointQueue(device *raw.MTRBaseDevic
 	return &MTRBaseClusterModeSelect{inner: raw.MTRBaseClusterModeSelectFromID(_id)}
 }
 
+// Command ChangeToMode On receipt of this command, if the NewMode field indicates a valid mode transition within the supported list, the server SHALL set the CurrentMode attribute to the NewMode value, otherwise, the server SHALL respond with an INVALID_COMMAND status response.
+//
 // ChangeToModeWithParamsCompletion calls the underlying ChangeToModeWithParamsCompletion.
 func (x *MTRBaseClusterModeSelect) ChangeToModeWithParamsCompletion(params *raw.MTRModeSelectClusterChangeToModeParams, completion func(unsafe.Pointer)) {
 	x.inner.ChangeToModeWithParamsCompletion(params, completion)

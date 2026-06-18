@@ -37,24 +37,32 @@ func NewMTL4BinaryFunctionDescriptor() *MTL4BinaryFunctionDescriptor {
 	return &MTL4BinaryFunctionDescriptor{inner: raw.MTL4BinaryFunctionDescriptorFromID(_id)}
 }
 
+// Associates a string that uniquely identifies a binary function. You can use this property to look up a corresponding binary function by name in a “MTL4Archive“ instance.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *MTL4BinaryFunctionDescriptor) WithName(name string) *MTL4BinaryFunctionDescriptor {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// Provides the function descriptor corresponding to the function to compile into a binary function.
+//
 // WithFunctionDescriptor sets the functionDescriptor property and returns the receiver for chaining.
 func (x *MTL4BinaryFunctionDescriptor) WithFunctionDescriptor(functionDescriptor MTL4FunctionDescriptorProvider) *MTL4BinaryFunctionDescriptor {
 	x.inner.SetFunctionDescriptor(functionDescriptor.asMTL4FunctionDescriptor())
 	return x
 }
 
+// Configure the options to use at binary function creation time.
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MTL4BinaryFunctionDescriptor) WithOptions(options MTL4BinaryFunctionOptions) *MTL4BinaryFunctionDescriptor {
 	x.inner.SetOptions(raw.MTL4BinaryFunctionOptions(options))
 	return x
 }
 
+// Associates a string that uniquely identifies a binary function. You can use this property to look up a corresponding binary function by name in a “MTL4Archive“ instance.
+//
 // Name calls the underlying Name.
 func (x *MTL4BinaryFunctionDescriptor) Name() string {
 	_r := x.inner.Name()
@@ -69,6 +77,8 @@ func (x *MTL4BinaryFunctionDescriptor) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// Provides the function descriptor corresponding to the function to compile into a binary function.
+//
 // FunctionDescriptor calls the underlying FunctionDescriptor.
 func (x *MTL4BinaryFunctionDescriptor) FunctionDescriptor() *MTL4FunctionDescriptor {
 	_r := x.inner.FunctionDescriptor()
@@ -83,6 +93,8 @@ func (x *MTL4BinaryFunctionDescriptor) SetFunctionDescriptor(functionDescriptor 
 	x.inner.SetFunctionDescriptor(functionDescriptor)
 }
 
+// Configure the options to use at binary function creation time.
+//
 // Options calls the underlying Options.
 func (x *MTL4BinaryFunctionDescriptor) Options() MTL4BinaryFunctionOptions {
 	return MTL4BinaryFunctionOptions(x.inner.Options())

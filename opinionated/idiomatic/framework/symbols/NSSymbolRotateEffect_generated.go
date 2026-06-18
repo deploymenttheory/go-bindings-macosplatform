@@ -35,6 +35,8 @@ func NewSymbolRotateEffect() *SymbolRotateEffect {
 	return &SymbolRotateEffect{inner: raw.NSSymbolRotateEffectFromID(_id)}
 }
 
+// Returns a copy of the effect that animates incrementally, by layer.
+//
 // EffectWithByLayer calls the underlying EffectWithByLayer.
 func (x *SymbolRotateEffect) EffectWithByLayer() *SymbolRotateEffect {
 	_r := x.inner.EffectWithByLayer()
@@ -44,6 +46,8 @@ func (x *SymbolRotateEffect) EffectWithByLayer() *SymbolRotateEffect {
 	return &SymbolRotateEffect{inner: _r}
 }
 
+// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+//
 // EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
 func (x *SymbolRotateEffect) EffectWithWholeSymbol() *SymbolRotateEffect {
 	_r := x.inner.EffectWithWholeSymbol()

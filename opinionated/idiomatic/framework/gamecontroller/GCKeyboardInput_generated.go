@@ -41,12 +41,16 @@ func (x *KeyboardInput) WithKeyChangedHandler(keyChangedHandler func(*raw.GCKeyb
 	return x
 }
 
+// Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called for each element that changed. @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons. @param element the element that has been modified.
+//
 // WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
 func (x *KeyboardInput) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *KeyboardInput {
 	x.inner.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
 	return x
 }
 
+// Alongside general subscript notation of GCPhysicalInputProfile keys can be accessed using this method. @example [keyboard buttonForKey:GCKeyCode.UpArrow] == keyboard[GCKeyUpArrow] @param code is a low level key code that can be used for accessing a keyboard button. @note Full list of supported key constants can be found in GCKeyCodes.h and GCKeyNames.h
+//
 // ButtonForKeyCode calls the underlying ButtonForKeyCode.
 func (x *KeyboardInput) ButtonForKeyCode(code int) *ControllerButtonInput {
 	_r := x.inner.ButtonForKeyCode(code)
@@ -66,6 +70,8 @@ func (x *KeyboardInput) SetKeyChangedHandler(keyChangedHandler func(*raw.GCKeybo
 	x.inner.SetKeyChangedHandler(keyChangedHandler)
 }
 
+// Before querying any key for a value it might be useful to check if any key is actually pressed
+//
 // IsAnyKeyPressed calls the underlying IsAnyKeyPressed.
 func (x *KeyboardInput) IsAnyKeyPressed() bool {
 	return x.inner.IsAnyKeyPressed()

@@ -37,12 +37,16 @@ func NewWiFiClient() *WiFiClient {
 	return &WiFiClient{inner: raw.CWWiFiClientFromID(_id)}
 }
 
+// @property @abstract Sets the delegate to the specified object, which may implement CWWiFiEventDelegate protocol for Wi-Fi event handling. @discussion Clients may register for specific Wi-Fi events using -[CWWiFiClient startMonitoringEventWithType:error:].
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *WiFiClient) WithDelegate(delegate objc.ID) *WiFiClient {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @method @abstract Returns the CWInterface object for the default Wi-Fi interface.
+//
 // Interface calls the underlying Interface.
 func (x *WiFiClient) Interface() *Interface {
 	_r := x.inner.Interface()
@@ -52,6 +56,8 @@ func (x *WiFiClient) Interface() *Interface {
 	return &Interface{inner: _r}
 }
 
+// @method @result An NSArray of NSString objects corresponding to Wi-Fi interface names. @abstract Returns the list of available Wi-Fi interface names (e.g. "en0"). @discussion If no Wi-Fi interfaces are available, this method will return an empty array. Returns nil if an error occurs.
+//
 // InterfaceNames returns the collection as a Go slice.
 func (x *WiFiClient) InterfaceNames() []string {
 	arr := x.inner.InterfaceNames()
@@ -63,6 +69,8 @@ func (x *WiFiClient) InterfaceNames() []string {
 	})
 }
 
+// @method @param interfaceName The name of an available Wi-Fi interface. @abstract Get the CWInterface object bound to the Wi-Fi interface with a specific interface name. @discussion Use +[CWWiFiClient interfaceNames] to get a list of available Wi-Fi interface names. Returns a CWInterface object for the default Wi-Fi interface if no interface name is specified.
+//
 // InterfaceWithName calls the underlying InterfaceWithName.
 func (x *WiFiClient) InterfaceWithName(interfaceName string) *Interface {
 	_r := x.inner.InterfaceWithName(foundation.NSStringStringWithUTF8String(interfaceName))
@@ -72,6 +80,8 @@ func (x *WiFiClient) InterfaceWithName(interfaceName string) *Interface {
 	return &Interface{inner: _r}
 }
 
+// @method @result An NSArray of CWInterface objects. @abstract Returns all available Wi-Fi interfaces. @discussion If no Wi-Fi interfaces are available, this method will return an empty array. Returns nil if an error occurs.
+//
 // Interfaces returns the collection as a Go slice.
 func (x *WiFiClient) Interfaces() []*Interface {
 	arr := x.inner.Interfaces()
@@ -83,22 +93,30 @@ func (x *WiFiClient) Interfaces() []*Interface {
 	})
 }
 
+// @method @param type A CWEventType value. @param error An NSError object passed by reference, which upon return will contain the error if an error occurs. This parameter is optional. @result Returns YES upon success, or NO if an error occurred. @abstract Register for specific Wi-Fi event notifications.
+//
 // StartMonitoringEventWithTypeError calls the underlying StartMonitoringEventWithTypeError.
 func (x *WiFiClient) StartMonitoringEventWithTypeError(type_ CWEventType) (bool, error) {
 	return x.inner.StartMonitoringEventWithTypeError(raw.CWEventType(type_))
 }
 
+// @method @param type A CWEventType value. @param error An NSError object passed by reference, which upon return will contain the error if an error occurs. This parameter is optional. @result Returns YES upon success, or NO if an error occurred. @abstract Unregister for specific Wi-Fi event notifications.
+//
 // StopMonitoringEventWithTypeError calls the underlying StopMonitoringEventWithTypeError.
 func (x *WiFiClient) StopMonitoringEventWithTypeError(type_ CWEventType) (bool, error) {
 	return x.inner.StopMonitoringEventWithTypeError(raw.CWEventType(type_))
 }
 
+// @method @param error An NSError object passed by reference, which upon return will contain the error if an error occurs. This parameter is optional. @result Returns YES upon success, or NO if an error occurred. @abstract Unregister for all Wi-Fi event notifications.
+//
 // StopMonitoringAllEventsAndReturnError returns any validation error.
 func (x *WiFiClient) StopMonitoringAllEventsAndReturnError() error {
 	_, err := x.inner.StopMonitoringAllEventsAndReturnError()
 	return err
 }
 
+// @property @abstract Sets the delegate to the specified object, which may implement CWWiFiEventDelegate protocol for Wi-Fi event handling. @discussion Clients may register for specific Wi-Fi events using -[CWWiFiClient startMonitoringEventWithType:error:].
+//
 // Delegate calls the underlying Delegate.
 func (x *WiFiClient) Delegate() objc.ID {
 	return x.inner.Delegate()

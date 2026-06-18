@@ -37,21 +37,29 @@ func NewModelDescription() *ModelDescription {
 	return &ModelDescription{inner: raw.MLModelDescriptionFromID(_id)}
 }
 
+// Description of the inputs to the model
+//
 // InputDescriptionsByName calls the underlying InputDescriptionsByName.
 func (x *ModelDescription) InputDescriptionsByName() *foundation.NSDictionary[*foundation.NSString, *raw.MLFeatureDescription] {
 	return x.inner.InputDescriptionsByName()
 }
 
+// Description of the outputs from the model
+//
 // OutputDescriptionsByName calls the underlying OutputDescriptionsByName.
 func (x *ModelDescription) OutputDescriptionsByName() *foundation.NSDictionary[*foundation.NSString, *raw.MLFeatureDescription] {
 	return x.inner.OutputDescriptionsByName()
 }
 
+// Description of the state features.
+//
 // StateDescriptionsByName calls the underlying StateDescriptionsByName.
 func (x *ModelDescription) StateDescriptionsByName() *foundation.NSDictionary[*foundation.NSString, *raw.MLFeatureDescription] {
 	return x.inner.StateDescriptionsByName()
 }
 
+// Name of the primary target / predicted output feature in the output descriptions
+//
 // PredictedFeatureName calls the underlying PredictedFeatureName.
 func (x *ModelDescription) PredictedFeatureName() string {
 	_r := x.inner.PredictedFeatureName()
@@ -61,6 +69,8 @@ func (x *ModelDescription) PredictedFeatureName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Key for all predicted probabilities stored as a MLFeatureTypeDictionary in the output descriptions
+//
 // PredictedProbabilitiesName calls the underlying PredictedProbabilitiesName.
 func (x *ModelDescription) PredictedProbabilitiesName() string {
 	_r := x.inner.PredictedProbabilitiesName()
@@ -70,11 +80,15 @@ func (x *ModelDescription) PredictedProbabilitiesName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Optional metadata describing the model
+//
 // Metadata calls the underlying Metadata.
 func (x *ModelDescription) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.Metadata()
 }
 
+// Array to map a class index to the corresponding label, which is either Number or String. The property is populated from the classLabels entry specified in the model's protobuf message. When the model is a pipeline, which contains one or more sub models, the property value is calculated as follows. 1. If the pipeline model's proto message specifies predictedFeatureName parameter, use classLabels property value of the sub model with the output feature with the name. 2. Otherwise, if the pipeline model has only one sub model with non-nil classLabels property, use the property value. 3. Otherwise, the property is nil.
+//
 // ClassLabels calls the underlying ClassLabels.
 func (x *ModelDescription) ClassLabels() *foundation.NSArray[objc.ID] {
 	return x.inner.ClassLabels()

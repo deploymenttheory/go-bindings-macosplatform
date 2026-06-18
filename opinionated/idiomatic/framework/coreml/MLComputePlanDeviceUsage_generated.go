@@ -36,11 +36,15 @@ func NewComputePlanDeviceUsage() *ComputePlanDeviceUsage {
 	return &ComputePlanDeviceUsage{inner: raw.MLComputePlanDeviceUsageFromID(_id)}
 }
 
+// The compute devices that can execute the layer/operation.
+//
 // SupportedComputeDevices calls the underlying SupportedComputeDevices.
 func (x *ComputePlanDeviceUsage) SupportedComputeDevices() *foundation.NSArray[raw.MLComputeDeviceProtocol] {
 	return x.inner.SupportedComputeDevices()
 }
 
+// The compute device that the framework prefers to execute the layer/operation.
+//
 // PreferredComputeDevice calls the underlying PreferredComputeDevice.
 func (x *ComputePlanDeviceUsage) PreferredComputeDevice() raw.MLComputeDeviceProtocol {
 	return x.inner.PreferredComputeDevice()

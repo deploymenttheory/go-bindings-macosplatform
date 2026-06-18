@@ -30,6 +30,8 @@ func SmartCardTokenFromID(id objc.ID) *SmartCardToken {
 	return &SmartCardToken{inner: raw.TKSmartCardTokenFromID(id)}
 }
 
+// @discussion Initializes token instance with specified attributes. @param smartCard TKSmartCard instance representing connection to SmartCard on which the intance should operate. @param AID ISO7816-4 application ID which is preselected on the card. @param instanceID Unique, persistent identifier of this token.  This is typically implemented by some kind of SmartCard serial number. @param tokenDriver associated driver which initiated creation of this token.
+//
 // NewSmartCardTokenWithSmartCardAIDInstanceIDTokenDriver creates a new [SmartCardToken].
 func NewSmartCardTokenWithSmartCardAIDInstanceIDTokenDriver(smartCard *raw.TKSmartCard, aID *foundation.NSData, instanceID string, tokenDriver *raw.TKSmartCardTokenDriver) *SmartCardToken {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKSmartCardToken")), objc.RegisterName("alloc"))
@@ -43,6 +45,8 @@ func (x *SmartCardToken) WithDelegate(delegate raw.TKTokenDelegate) *SmartCardTo
 	return x
 }
 
+// @discussion This is AID which is specified in extension's plist NSExtensionAttributes as @c com.apple.ctk.aid attribute. If the attribute specifies array of multiple AIDs, this parameter represents AID which was found on the card and is already preselected.  If @c com.apple.ctk.aid is not present, no application is automatically preselected and value of this property is nil.
+//
 // AID calls the underlying AID.
 func (x *SmartCardToken) AID() *foundation.NSData {
 	return x.inner.AID()

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A port-based connection between the guest operating system and the host computer.
+//
 // VirtioSocketConnection wraps [raw.VZVirtioSocketConnection] with a fluent Go API.
 type VirtioSocketConnection struct {
 	inner *raw.VZVirtioSocketConnection
@@ -35,21 +37,29 @@ func NewVirtioSocketConnection() *VirtioSocketConnection {
 	return &VirtioSocketConnection{inner: raw.VZVirtioSocketConnectionFromID(_id)}
 }
 
+// Close the file descriptor associated with the socket.
+//
 // Close calls the underlying Close.
 func (x *VirtioSocketConnection) Close() {
 	x.inner.Close()
 }
 
+// @abstract The destination port number of the connection.
+//
 // DestinationPort calls the underlying DestinationPort.
 func (x *VirtioSocketConnection) DestinationPort() uint32 {
 	return x.inner.DestinationPort()
 }
 
+// @abstract The source port number of the connection.
+//
 // SourcePort calls the underlying SourcePort.
 func (x *VirtioSocketConnection) SourcePort() uint32 {
 	return x.inner.SourcePort()
 }
 
+// @abstract The file descriptor associated with the socket. @discussion Data is sent by writing to the file descriptor. Data is received by reading from the file descriptor. A file descriptor of -1 indicates a closed connection. The file descriptor is owned by the VZVirtioSocketConnection. It is automatically closed when the object is destroyed.
+//
 // FileDescriptor calls the underlying FileDescriptor.
 func (x *VirtioSocketConnection) FileDescriptor() int {
 	return x.inner.FileDescriptor()

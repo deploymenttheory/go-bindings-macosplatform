@@ -37,6 +37,8 @@ func NewCaptureTimecodeSource() *CaptureTimecodeSource {
 	return &CaptureTimecodeSource{inner: raw.AVCaptureTimecodeSourceFromID(_id)}
 }
 
+// The name of the timecode source. This property provides a descriptive name of the timecode source, useful for display in user interfaces or logging.
+//
 // DisplayName calls the underlying DisplayName.
 func (x *CaptureTimecodeSource) DisplayName() string {
 	_r := x.inner.DisplayName()
@@ -46,11 +48,15 @@ func (x *CaptureTimecodeSource) DisplayName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The type of timecode source. Indicates the type of timecode source, represented as a value from the “AVCaptureTimecodeSynchronizationSourceType“ enum. This helps you identify the source for specific synchronization use cases, such as frame counter, real-time clock, MIDI, or HID.
+//
 // Type calls the underlying Type.
 func (x *CaptureTimecodeSource) Type() AVCaptureTimecodeSourceType {
 	return AVCaptureTimecodeSourceType(x.inner.Type())
 }
 
+// A unique identifier for the timecode source. The UUID uniquely identifies this timecode source. It is particularly useful when multiple sources of the same type are available, allowing your application to distinguish between them. - Note: This value does not persist across application sessions.
+//
 // Uuid calls the underlying Uuid.
 func (x *CaptureTimecodeSource) Uuid() *foundation.NSUUID {
 	return x.inner.Uuid()

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class that defines UNIX socket-based caching options for Rosetta.
+//
 // LinuxRosettaCachingOptions wraps [raw.VZLinuxRosettaCachingOptions] with a fluent Go API.
 type LinuxRosettaCachingOptions struct {
 	inner *raw.VZLinuxRosettaCachingOptions

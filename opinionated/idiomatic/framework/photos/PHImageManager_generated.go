@@ -42,6 +42,8 @@ func (x *ImageManager) RequestImageForAssetTargetSizeContentModeOptionsResultHan
 	return x.inner.RequestImageForAssetTargetSizeContentModeOptionsResultHandler(asset, targetSize, raw.PHImageContentMode(contentMode), options, resultHandler)
 }
 
+// @abstract Request largest represented image as data bytes and EXIF orientation for the specified asset. @param asset The asset whose image data is to be loaded. @param options Options specifying how Photos should handle the request, format the requested image, and notify your app of progress or errors. If PHImageRequestOptionsVersionCurrent is requested and the asset has adjustments then the largest rendered image data is returned. In all other cases then the original image data is returned. @param resultHandler A block that is called exactly once either synchronously on the current thread or asynchronously on the main thread depending on the synchronous option specified in the PHImageRequestOptions options parameter (deliveryMode is ignored). Orientation is an EXIF orientation as an CGImagePropertyOrientation. For iOS or tvOS, convert this to an UIImageOrientation.
+//
 // RequestImageDataAndOrientationForAssetOptionsResultHandler calls the underlying RequestImageDataAndOrientationForAssetOptionsResultHandler.
 func (x *ImageManager) RequestImageDataAndOrientationForAssetOptionsResultHandler(asset *raw.PHAsset, options *raw.PHImageRequestOptions, resultHandler objc.Block) int32 {
 	return x.inner.RequestImageDataAndOrientationForAssetOptionsResultHandler(asset, options, resultHandler)
@@ -52,6 +54,8 @@ func (x *ImageManager) CancelImageRequest(requestID int32) {
 	x.inner.CancelImageRequest(requestID)
 }
 
+// Requests a live photo representation of the asset. With PHImageRequestOptionsDeliveryModeOpportunistic (or if no options are specified), the resultHandler block may be called more than once (the first call may occur before the method returns). The PHImageResultIsDegradedKey key in the result handler's info parameter indicates when a temporary low-quality live photo is provided.
+//
 // RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler calls the underlying RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler.
 func (x *ImageManager) RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler(asset *raw.PHAsset, targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *raw.PHLivePhotoRequestOptions, resultHandler objc.Block) int32 {
 	return x.inner.RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler(asset, targetSize, raw.PHImageContentMode(contentMode), options, resultHandler)

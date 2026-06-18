@@ -37,6 +37,8 @@ func NewMTRDeviceControllerAbstractParameters() *MTRDeviceControllerAbstractPara
 	return &MTRDeviceControllerAbstractParameters{inner: raw.MTRDeviceControllerAbstractParametersFromID(_id)}
 }
 
+// Whether the controller should start out suspended. Defaults to NO.
+//
 // WithStartSuspended sets the startSuspended property and returns the receiver for chaining.
 func (x *MTRDeviceControllerAbstractParameters) WithStartSuspended(startSuspended bool) *MTRDeviceControllerAbstractParameters {
 	x.inner.SetStartSuspended(startSuspended)

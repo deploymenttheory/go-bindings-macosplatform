@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents a graphics device in a VM.
+//
 // GraphicsDevice wraps [raw.VZGraphicsDevice] with a fluent Go API.
 type GraphicsDevice struct {
 	inner *raw.VZGraphicsDevice

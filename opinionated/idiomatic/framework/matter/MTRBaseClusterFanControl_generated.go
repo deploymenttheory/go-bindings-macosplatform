@@ -33,6 +33,8 @@ func MTRBaseClusterFanControlFromID(id objc.ID) *MTRBaseClusterFanControl {
 	return &MTRBaseClusterFanControl{inner: raw.MTRBaseClusterFanControlFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterFanControlWithDeviceEndpointIDQueue creates a new [MTRBaseClusterFanControl].
 func NewMTRBaseClusterFanControlWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterFanControl {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterFanControl")), objc.RegisterName("alloc"))
@@ -47,6 +49,8 @@ func NewMTRBaseClusterFanControlWithDeviceEndpointQueue(device *raw.MTRBaseDevic
 	return &MTRBaseClusterFanControl{inner: raw.MTRBaseClusterFanControlFromID(_id)}
 }
 
+// Command Step This command speeds up or slows down the fan, in steps, without a client having to know the fan speed.
+//
 // StepWithParamsCompletion calls the underlying StepWithParamsCompletion.
 func (x *MTRBaseClusterFanControl) StepWithParamsCompletion(params *raw.MTRFanControlClusterStepParams, completion func(unsafe.Pointer)) {
 	x.inner.StepWithParamsCompletion(params, completion)

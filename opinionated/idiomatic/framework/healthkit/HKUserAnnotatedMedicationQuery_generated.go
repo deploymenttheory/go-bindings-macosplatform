@@ -31,6 +31,8 @@ func UserAnnotatedMedicationQueryFromID(id objc.ID) *UserAnnotatedMedicationQuer
 	return &UserAnnotatedMedicationQuery{inner: raw.HKUserAnnotatedMedicationQueryFromID(id)}
 }
 
+// @method        initWithPredicate:limit:resultsHandler: @abstract      Returns a query that will retrieve HKUserAnnotatedMedications matching the given predicate and limit. @param         predicate       The predicate which user annotated medications should match. @param         limit           The maximum number of  user annotated medications to return.  Pass HKObjectQueryNoLimit for no limit. @param         resultsHandler  The block to invoke with results to deliver to the client. The results handler will be called with done = YES when there are no more user annotated medications to enumerate.
+//
 // NewUserAnnotatedMedicationQueryWithPredicateLimitResultsHandler creates a new [UserAnnotatedMedicationQuery].
 func NewUserAnnotatedMedicationQueryWithPredicateLimitResultsHandler(predicate *foundation.NSPredicate, limit uint, resultsHandler func(*raw.HKUserAnnotatedMedicationQuery, *raw.HKUserAnnotatedMedication, bool, unsafe.Pointer)) *UserAnnotatedMedicationQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKUserAnnotatedMedicationQuery")), objc.RegisterName("alloc"))

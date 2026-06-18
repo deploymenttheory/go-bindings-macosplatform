@@ -32,6 +32,8 @@ func CaptureExternalDisplayConfiguratorFromID(id objc.ID) *CaptureExternalDispla
 	return &CaptureExternalDisplayConfigurator{inner: raw.AVCaptureExternalDisplayConfiguratorFromID(id)}
 }
 
+// An external display configurator instance that attempts to synchronize the preview layer configuration with the device capture configuration. - Parameter device: The device for which to monitor the configuration. - Parameter previewLayer: The layer that is being used on an external display for displaying the camera preview. - Parameter configuration: A configuration specifying which aspects of the camera's active format to monitor and configure on the external display. - Returns: an “AVCaptureExternalDisplayConfigurator“ instance. An “AVCaptureExternalDisplayConfigurator“ is only applicable to external displays. It determines which properties to configure on the external display based on your provided configuration (see “AVCaptureExternalDisplayConfiguration“). The configurator observes changes to your camera”s configuration, and when changes are observed, it modifies the external display's properties to match. If multiple configurators are linked to the same external display ,the last one created becomes the active configurator for the external display (see “active“). - Important: An `NSInvalidArgumentException` is thrown if any of the “AVCaptureExternalDisplayConfiguration“ options are not supported.
+//
 // NewCaptureExternalDisplayConfiguratorWithDevicePreviewLayerConfiguration creates a new [CaptureExternalDisplayConfigurator].
 func NewCaptureExternalDisplayConfiguratorWithDevicePreviewLayerConfiguration(device *raw.AVCaptureDevice, previewLayer *quartzcore.CALayer, configuration *raw.AVCaptureExternalDisplayConfiguration) *CaptureExternalDisplayConfigurator {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureExternalDisplayConfigurator")), objc.RegisterName("alloc"))
@@ -39,11 +41,15 @@ func NewCaptureExternalDisplayConfiguratorWithDevicePreviewLayerConfiguration(de
 	return &CaptureExternalDisplayConfigurator{inner: raw.AVCaptureExternalDisplayConfiguratorFromID(_id)}
 }
 
+// Forces the external display configurator to asynchronously stop configuring the external display. Call “stop“ to force the “AVCaptureExternalDisplayConfigurator“ to asynchronously stop configuring the external display. Once stopped, the “active“ property changes to `false` and the “activeExternalDisplayFrameRate“ becomes 0.
+//
 // Stop calls the underlying Stop.
 func (x *CaptureExternalDisplayConfigurator) Stop() {
 	x.inner.Stop()
 }
 
+// The device for which the coordinator configures the preview layer. The value of this property is the “AVCaptureDevice“ instance you provided when instantiating the configurator. “AVCaptureExternalDisplayConfigurator“ holds a weak reference to the device. If the device is released, this property returns `nil`.
+//
 // Device calls the underlying Device.
 func (x *CaptureExternalDisplayConfigurator) Device() *CaptureDevice {
 	_r := x.inner.Device()
@@ -53,16 +59,22 @@ func (x *CaptureExternalDisplayConfigurator) Device() *CaptureDevice {
 	return &CaptureDevice{inner: _r}
 }
 
+// The layer for which the configurator adjusts display properties to match the device's state. The value of this property is the “CALayer“ instance that you provided when instantiating the configurator. You may specify either an “AVCaptureVideoPreviewLayer“ or another “CALayer“ instance that displays a camera's video preview. “AVCaptureExternalDisplayConfigurator“holds a weak reference to the layer. If the layer is released, this property returns `nil`.
+//
 // PreviewLayer calls the underlying PreviewLayer.
 func (x *CaptureExternalDisplayConfigurator) PreviewLayer() *quartzcore.CALayer {
 	return x.inner.PreviewLayer()
 }
 
+// This property tells you whether the configurator is actively configuring the external display. When this property returns `true`, the external display is successfully configured to match the device. If it returns`false`, the configurator is not making any configuration changes to the external display. If another “AVCaptureExternalDisplayConfigurator“ instance takes over the configuration of the external display, this property returns `false`.
+//
 // IsActive calls the underlying IsActive.
 func (x *CaptureExternalDisplayConfigurator) IsActive() bool {
 	return x.inner.IsActive()
 }
 
+// The currently configured frame rate on the external display that's displaying the preview layer. Observe this property to determine if the configured frame rate matches the max frame rate (“AVCaptureDevice/activeVideoMinFrameDuration“) of the device. When the “active“ property becomes `false`, this property changes to 0.
+//
 // ActiveExternalDisplayFrameRate calls the underlying ActiveExternalDisplayFrameRate.
 func (x *CaptureExternalDisplayConfigurator) ActiveExternalDisplayFrameRate() float64 {
 	return x.inner.ActiveExternalDisplayFrameRate()

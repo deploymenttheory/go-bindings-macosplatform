@@ -36,21 +36,29 @@ func NewFeaturePrintObservation() *FeaturePrintObservation {
 	return &FeaturePrintObservation{inner: raw.VNFeaturePrintObservationFromID(_id)}
 }
 
+// @brief Computes the distance between two observations. @discussion The larger the distance the more dissimlar the feature prints are. In case of an error this method returns false with an error describing the error condition, for instance comparing two non-comparable feature prints.
+//
 // ComputeDistanceToFeaturePrintObservationError calls the underlying ComputeDistanceToFeaturePrintObservationError.
 func (x *FeaturePrintObservation) ComputeDistanceToFeaturePrintObservationError(outDistance *float32, featurePrint *raw.VNFeaturePrintObservation) (bool, error) {
 	return x.inner.ComputeDistanceToFeaturePrintObservationError(outDistance, featurePrint)
 }
 
+// @brief The type of each element in the data.
+//
 // ElementType calls the underlying ElementType.
 func (x *FeaturePrintObservation) ElementType() VNElementType {
 	return VNElementType(x.inner.ElementType())
 }
 
+// @brief The total number of elements in the data.
+//
 // ElementCount calls the underlying ElementCount.
 func (x *FeaturePrintObservation) ElementCount() uint {
 	return x.inner.ElementCount()
 }
 
+// @brief The feature print data.
+//
 // Data calls the underlying Data.
 func (x *FeaturePrintObservation) Data() *foundation.NSData {
 	return x.inner.Data()

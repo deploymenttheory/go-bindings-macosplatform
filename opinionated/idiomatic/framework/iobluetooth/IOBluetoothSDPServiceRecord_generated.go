@@ -96,16 +96,22 @@ func (x *IOBluetoothSDPServiceRecord) GetServiceRecordHandle(outServiceRecordHan
 	return x.inner.GetServiceRecordHandle(outServiceRecordHandle)
 }
 
+// @method		matchesUUID16: @abstract	Returns TRUE the UUID16 is found in the target service. NOTE: This method is only available in Mac OS X 10.7 or later. @param uuid16 A BluetoothSDPUUID16 to search for in the target service. @result Returns TRUE if the UUID16 is present in the service.
+//
 // MatchesUUID16 calls the underlying MatchesUUID16.
 func (x *IOBluetoothSDPServiceRecord) MatchesUUID16(uuid16 uint16) bool {
 	return x.inner.MatchesUUID16(uuid16)
 }
 
+// @method		matchesUUIDArray: @abstract	Returns TRUE if ALL of the UUIDs in the given array is found in the target service. @discussion The given array should contain IOBluetoothSDPUUID objects.  It only returns TRUE if all of the UUIDs are found.  This method is like hasServiceFromArray: except that it requires that all UUIDs match instead of any of them matching. NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later. @param array An NSArray of IOBluetoothSDPUUID objects to search for in the target service. @result Returns TRUE if all of the given UUIDs are present in the service.
+//
 // MatchesUUIDArray calls the underlying MatchesUUIDArray.
 func (x *IOBluetoothSDPServiceRecord) MatchesUUIDArray(uuidArray *foundation.NSArray[objc.ID]) bool {
 	return x.inner.MatchesUUIDArray(uuidArray)
 }
 
+// @method		matchesSearchArray: @abstract	Returns TRUE any of the UUID arrays in the search array match the target service. @discussion The given array should contain NSArray objects.  Each sub-NSArray should contain IOBluetoothSDPUUID objects.  In turn, each sub-NSArray gets passed to -matchesUUIDArray: If any of those returns TRUE, then the search stops and TRUE is returned. Essentially the master NSArray contains the OR operations and each sub-array contains the AND operations. NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later. @param		array An NSArray of NSArrays of IOBluetoothSDPUUID objects. @result		Returns TRUE if any of the UUID arrays match.
+//
 // MatchesSearchArray calls the underlying MatchesSearchArray.
 func (x *IOBluetoothSDPServiceRecord) MatchesSearchArray(searchArray *foundation.NSArray[objc.ID]) bool {
 	return x.inner.MatchesSearchArray(searchArray)
@@ -135,6 +141,8 @@ func (x *IOBluetoothSDPServiceRecord) SortedAttributes() *foundation.NSArray[obj
 	return x.inner.SortedAttributes()
 }
 
+// @method		handsFreeSupportedFeatures @abstract		Return the hands free supported features @discussion	Returns the hands free supported features bitmap stored in the SDP record. See “IOBluetoothHandsFreeDeviceFeatures and IOBluetoothHandsFreeAudioGatewayFeatures.” @result		The supported features bitmap.
+//
 // HandsFreeSupportedFeatures calls the underlying HandsFreeSupportedFeatures.
 func (x *IOBluetoothSDPServiceRecord) HandsFreeSupportedFeatures() uint16 {
 	return x.inner.HandsFreeSupportedFeatures()

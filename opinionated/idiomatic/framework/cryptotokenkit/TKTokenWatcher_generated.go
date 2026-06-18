@@ -38,6 +38,8 @@ func NewTokenWatcher() *TokenWatcher {
 	return &TokenWatcher{inner: raw.TKTokenWatcherFromID(_id)}
 }
 
+// Init watcher with insertion handler @disscussion init watcher with insertion handler which is called when a new token arrives @param insertionHandler called when a new token is inserted
+//
 // NewTokenWatcherWithInsertionHandler creates a new [TokenWatcher].
 func NewTokenWatcherWithInsertionHandler(insertionHandler func(*foundation.NSString)) *TokenWatcher {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenWatcher")), objc.RegisterName("alloc"))
@@ -45,6 +47,8 @@ func NewTokenWatcherWithInsertionHandler(insertionHandler func(*foundation.NSStr
 	return &TokenWatcher{inner: raw.TKTokenWatcherFromID(_id)}
 }
 
+// Set insertion handler @disscussion when an insertion handler is set the TokenWatcher will call this handler when new token appears in the system. TokenWatcher will call the handler also for tokens which was registered in the system before the handler was set. @param insertionHandler called when a new token is inserted
+//
 // SetInsertionHandler blocks until the operation completes or ctx is cancelled.
 func (x *TokenWatcher) SetInsertionHandler(ctx context.Context) (string, error) {
 	type _result struct {
@@ -68,11 +72,15 @@ func (x *TokenWatcher) SetInsertionHandler(ctx context.Context) (string, error) 
 	}
 }
 
+// Add removal watcher for specific tokenID @disscussion after removalHandler for a specific tokenID is called the reference to this handler is removed. For one tokenID just one handler can be added, so next call to addRemovalHandler will replace previous handler @param removalHandler called when a token is removed @param tokenID specified tokenID, if tokenID does not exist removal handler is called imediately
+//
 // AddRemovalHandlerForTokenID calls the underlying AddRemovalHandlerForTokenID.
 func (x *TokenWatcher) AddRemovalHandlerForTokenID(removalHandler func(*foundation.NSString), tokenID string) {
 	x.inner.AddRemovalHandlerForTokenID(removalHandler, foundation.NSStringStringWithUTF8String(tokenID))
 }
 
+// Return TokenInfo for specific tokenID @param tokenID specified tokenID @return A TokenInfo object, or nil if tokenID does not exist
+//
 // TokenInfoForTokenID calls the underlying TokenInfoForTokenID.
 func (x *TokenWatcher) TokenInfoForTokenID(tokenID string) *TokenWatcherTokenInfo {
 	_r := x.inner.TokenInfoForTokenID(foundation.NSStringStringWithUTF8String(tokenID))
@@ -82,6 +90,8 @@ func (x *TokenWatcher) TokenInfoForTokenID(tokenID string) *TokenWatcherTokenInf
 	return &TokenWatcherTokenInfo{inner: _r}
 }
 
+// Array of currently known TokenIDs in the system.  Tokens are identified by instance's names. It is possible to use KVO to be notified about token arrivals and removals.
+//
 // TokenIDs returns the collection as a Go slice.
 func (x *TokenWatcher) TokenIDs() []string {
 	arr := x.inner.TokenIDs()

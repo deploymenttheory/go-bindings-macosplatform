@@ -30,6 +30,8 @@ func WebArchiveFromID(id objc.ID) *WebArchive {
 	return &WebArchive{inner: raw.WebArchiveFromID(id)}
 }
 
+// @method initWithMainResource:subresources:subframeArchives: @abstract The initializer for WebArchive. @param mainResource The main resource of the archive. @param subresources The subresources of the archive (can be nil). @param subframeArchives The archives representing the subframes of the archive (can be nil). @result An initialized WebArchive.
+//
 // NewWebArchiveWithMainResourceSubresourcesSubframeArchives creates a new [WebArchive].
 func NewWebArchiveWithMainResourceSubresourcesSubframeArchives(mainResource *raw.WebResource, subresources *foundation.NSArray[objc.ID], subframeArchives *foundation.NSArray[objc.ID]) *WebArchive {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WebArchive")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewWebArchiveWithMainResourceSubresourcesSubframeArchives(mainResource *raw
 	return &WebArchive{inner: raw.WebArchiveFromID(_id)}
 }
 
+// @method initWithData: @abstract The initializer for creating a WebArchive from data. @param data The data representing the archive. This can be obtained using WebArchive's data method. @result An initialized WebArchive.
+//
 // NewWebArchiveWithData creates a new [WebArchive].
 func NewWebArchiveWithData(data *foundation.NSData) *WebArchive {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WebArchive")), objc.RegisterName("alloc"))
@@ -44,6 +48,8 @@ func NewWebArchiveWithData(data *foundation.NSData) *WebArchive {
 	return &WebArchive{inner: raw.WebArchiveFromID(_id)}
 }
 
+// @property mainResource @abstract The main resource of the archive.
+//
 // MainResource calls the underlying MainResource.
 func (x *WebArchive) MainResource() *WebResource {
 	_r := x.inner.MainResource()
@@ -53,16 +59,22 @@ func (x *WebArchive) MainResource() *WebResource {
 	return &WebResource{inner: _r}
 }
 
+// @property subresources @abstract The subresource of the archive (can be nil).
+//
 // Subresources calls the underlying Subresources.
 func (x *WebArchive) Subresources() *foundation.NSArray[objc.ID] {
 	return x.inner.Subresources()
 }
 
+// @property subframeArchives @abstract The archives representing the subframes of the archive (can be nil).
+//
 // SubframeArchives calls the underlying SubframeArchives.
 func (x *WebArchive) SubframeArchives() *foundation.NSArray[objc.ID] {
 	return x.inner.SubframeArchives()
 }
 
+// @property data @abstract The data representation of the archive. @discussion The data returned by this method can be used to save a web archive to a file or to place a web archive on the pasteboard using WebArchivePboardType. To create a WebArchive using the returned data, call initWithData:.
+//
 // Data calls the underlying Data.
 func (x *WebArchive) Data() *foundation.NSData {
 	return x.inner.Data()

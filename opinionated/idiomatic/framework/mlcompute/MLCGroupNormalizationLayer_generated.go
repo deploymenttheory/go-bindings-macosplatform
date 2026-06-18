@@ -36,28 +36,38 @@ func NewGroupNormalizationLayer() *GroupNormalizationLayer {
 	return &GroupNormalizationLayer{inner: raw.MLCGroupNormalizationLayerFromID(_id)}
 }
 
+// @property   label @abstract   A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *GroupNormalizationLayer) WithLabel(label string) *GroupNormalizationLayer {
 	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+//
 // WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
 func (x *GroupNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *GroupNormalizationLayer {
 	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
 	return x
 }
 
+// @property   featureChannelCount @abstract   The number of feature channels
+//
 // FeatureChannelCount calls the underlying FeatureChannelCount.
 func (x *GroupNormalizationLayer) FeatureChannelCount() uint {
 	return x.inner.FeatureChannelCount()
 }
 
+// @property   groupCount @abstract   The number of groups to separate the channels into
+//
 // GroupCount calls the underlying GroupCount.
 func (x *GroupNormalizationLayer) GroupCount() uint {
 	return x.inner.GroupCount()
 }
 
+// @property   beta @abstract   The beta tensor
+//
 // Beta calls the underlying Beta.
 func (x *GroupNormalizationLayer) Beta() *Tensor {
 	_r := x.inner.Beta()
@@ -67,6 +77,8 @@ func (x *GroupNormalizationLayer) Beta() *Tensor {
 	return &Tensor{inner: _r}
 }
 
+// @property   gamma @abstract   The gamma tensor
+//
 // Gamma calls the underlying Gamma.
 func (x *GroupNormalizationLayer) Gamma() *Tensor {
 	_r := x.inner.Gamma()
@@ -76,6 +88,8 @@ func (x *GroupNormalizationLayer) Gamma() *Tensor {
 	return &Tensor{inner: _r}
 }
 
+// @property   betaParameter @abstract   The beta tensor parameter used for optimizer update
+//
 // BetaParameter calls the underlying BetaParameter.
 func (x *GroupNormalizationLayer) BetaParameter() *TensorParameter {
 	_r := x.inner.BetaParameter()
@@ -85,6 +99,8 @@ func (x *GroupNormalizationLayer) BetaParameter() *TensorParameter {
 	return &TensorParameter{inner: _r}
 }
 
+// @property   gammaParameter @abstract   The gamma tensor parameter used for optimizer update
+//
 // GammaParameter calls the underlying GammaParameter.
 func (x *GroupNormalizationLayer) GammaParameter() *TensorParameter {
 	_r := x.inner.GammaParameter()
@@ -94,6 +110,8 @@ func (x *GroupNormalizationLayer) GammaParameter() *TensorParameter {
 	return &TensorParameter{inner: _r}
 }
 
+// @property   varianceEpsilon @abstract   A value used for numerical stability
+//
 // VarianceEpsilon calls the underlying VarianceEpsilon.
 func (x *GroupNormalizationLayer) VarianceEpsilon() float32 {
 	return x.inner.VarianceEpsilon()

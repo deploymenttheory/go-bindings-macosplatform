@@ -37,36 +37,48 @@ func NewCylinder() *Cylinder {
 	return &Cylinder{inner: raw.SCNCylinderFromID(_id)}
 }
 
+// @property radius @abstract The radius of the cylinder. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
+//
 // WithRadius sets the radius property and returns the receiver for chaining.
 func (x *Cylinder) WithRadius(radius float64) *Cylinder {
 	x.inner.SetRadius(radius)
 	return x
 }
 
+// @property height @abstract The height of the cylinder. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // WithHeight sets the height property and returns the receiver for chaining.
 func (x *Cylinder) WithHeight(height float64) *Cylinder {
 	x.inner.SetHeight(height)
 	return x
 }
 
+// @property radialSegmentCount @abstract The number of subdivisions along the radial coordinate. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
+//
 // WithRadialSegmentCount sets the radialSegmentCount property and returns the receiver for chaining.
 func (x *Cylinder) WithRadialSegmentCount(radialSegmentCount int) *Cylinder {
 	x.inner.SetRadialSegmentCount(radialSegmentCount)
 	return x
 }
 
+// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
 func (x *Cylinder) WithHeightSegmentCount(heightSegmentCount int) *Cylinder {
 	x.inner.SetHeightSegmentCount(heightSegmentCount)
 	return x
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Cylinder) WithName(name string) *Cylinder {
 	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+//
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Cylinder) WithMaterials(items ...*raw.SCNMaterial) *Cylinder {
 	if len(items) == 0 {
@@ -85,12 +97,16 @@ func (x *Cylinder) WithMaterials(items ...*raw.SCNMaterial) *Cylinder {
 	return x
 }
 
+// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+//
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Cylinder) WithFirstMaterial(firstMaterial *Material) *Cylinder {
 	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
+// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+//
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Cylinder) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Cylinder {
 	if len(items) == 0 {
@@ -115,30 +131,40 @@ func (x *Cylinder) WithTessellator(tessellator *GeometryTessellator) *Cylinder {
 	return x
 }
 
+// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+//
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Cylinder) WithSubdivisionLevel(subdivisionLevel uint) *Cylinder {
 	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
 	return x
 }
 
+// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+//
 // WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
 func (x *Cylinder) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Cylinder {
 	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
 	return x
 }
 
+// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+//
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Cylinder) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Cylinder {
 	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
+// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+//
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Cylinder) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Cylinder {
 	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
+// @property radius @abstract The radius of the cylinder. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
+//
 // Radius calls the underlying Radius.
 func (x *Cylinder) Radius() float64 {
 	return x.inner.Radius()
@@ -149,6 +175,8 @@ func (x *Cylinder) SetRadius(radius float64) {
 	x.inner.SetRadius(radius)
 }
 
+// @property height @abstract The height of the cylinder. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // Height calls the underlying Height.
 func (x *Cylinder) Height() float64 {
 	return x.inner.Height()
@@ -159,6 +187,8 @@ func (x *Cylinder) SetHeight(height float64) {
 	x.inner.SetHeight(height)
 }
 
+// @property radialSegmentCount @abstract The number of subdivisions along the radial coordinate. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
+//
 // RadialSegmentCount calls the underlying RadialSegmentCount.
 func (x *Cylinder) RadialSegmentCount() int {
 	return x.inner.RadialSegmentCount()
@@ -169,6 +199,8 @@ func (x *Cylinder) SetRadialSegmentCount(radialSegmentCount int) {
 	x.inner.SetRadialSegmentCount(radialSegmentCount)
 }
 
+// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // HeightSegmentCount calls the underlying HeightSegmentCount.
 func (x *Cylinder) HeightSegmentCount() int {
 	return x.inner.HeightSegmentCount()

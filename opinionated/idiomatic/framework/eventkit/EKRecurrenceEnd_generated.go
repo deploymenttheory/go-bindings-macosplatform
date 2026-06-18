@@ -36,11 +36,15 @@ func NewRecurrenceEnd() *RecurrenceEnd {
 	return &RecurrenceEnd{inner: raw.EKRecurrenceEndFromID(_id)}
 }
 
+// @property   endDate @abstract   The end date of this recurrence, or nil if it's count-based.
+//
 // EndDate calls the underlying EndDate.
 func (x *RecurrenceEnd) EndDate() *foundation.NSDate {
 	return x.inner.EndDate()
 }
 
+// @property   occurrenceCount @abstract   The maximum occurrence count, or 0 if it's date-based.
+//
 // OccurrenceCount calls the underlying OccurrenceCount.
 func (x *RecurrenceEnd) OccurrenceCount() uint {
 	return x.inner.OccurrenceCount()

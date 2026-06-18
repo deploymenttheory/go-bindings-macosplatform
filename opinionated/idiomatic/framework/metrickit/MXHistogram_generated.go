@@ -36,11 +36,15 @@ func NewHistogram() *Histogram {
 	return &Histogram{inner: raw.MXHistogramFromID[objc.ID](_id)}
 }
 
+// @property      totalBucketCount @abstract      The number of buckets contained within this histogram. @discussion    This value can never be negative.
+//
 // TotalBucketCount calls the underlying TotalBucketCount.
 func (x *Histogram) TotalBucketCount() uint {
 	return x.inner.TotalBucketCount()
 }
 
+// @property      bucketEnumerator @abstract      An NSEnumerator that can be used to enumerate the buckets of this histogram.
+//
 // BucketEnumerator calls the underlying BucketEnumerator.
 func (x *Histogram) BucketEnumerator() *foundation.NSEnumerator[objc.ID] {
 	return x.inner.BucketEnumerator()

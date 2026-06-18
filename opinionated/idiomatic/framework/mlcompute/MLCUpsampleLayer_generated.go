@@ -37,18 +37,24 @@ func NewUpsampleLayer() *UpsampleLayer {
 	return &UpsampleLayer{inner: raw.MLCUpsampleLayerFromID(_id)}
 }
 
+// @property   label @abstract   A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *UpsampleLayer) WithLabel(label string) *UpsampleLayer {
 	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+//
 // WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
 func (x *UpsampleLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *UpsampleLayer {
 	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
 	return x
 }
 
+// @property   shape @abstract   A NSArray<NSNumber *> representing just the width if number of entries in shape array is 1 or the height followed by width of result tensor if the number of entries in shape array is 2.
+//
 // Shape returns the collection as a Go slice.
 func (x *UpsampleLayer) Shape() []*foundation.NSNumber {
 	arr := x.inner.Shape()
@@ -60,11 +66,15 @@ func (x *UpsampleLayer) Shape() []*foundation.NSNumber {
 	})
 }
 
+// @property   sampleMode @abstract   The sampling mode to use when performing the upsample.
+//
 // SampleMode calls the underlying SampleMode.
 func (x *UpsampleLayer) SampleMode() MLCSampleMode {
 	return MLCSampleMode(x.inner.SampleMode())
 }
 
+// @property   alignsCorners @abstract   A boolean that specifies whether the corner pixels of the source and result tensors are aligned. @discussion If True, the corner pixels of the source and result tensors are aligned, and thus preserving the values at those pixels. This only has effect when mode is 'bilinear'. Default is NO.
+//
 // AlignsCorners calls the underlying AlignsCorners.
 func (x *UpsampleLayer) AlignsCorners() bool {
 	return x.inner.AlignsCorners()

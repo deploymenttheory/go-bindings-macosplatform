@@ -40,6 +40,8 @@ func NewNode() *Node {
 	return &Node{inner: raw.SKNodeFromID(_id)}
 }
 
+// Support coding and decoding via NSKeyedArchiver.
+//
 // NewNodeWithCoder creates a new [Node].
 func NewNodeWithCoder(aDecoder *foundation.NSCoder) *Node {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKNode")), objc.RegisterName("alloc"))
@@ -47,90 +49,120 @@ func NewNodeWithCoder(aDecoder *foundation.NSCoder) *Node {
 	return &Node{inner: raw.SKNodeFromID(_id)}
 }
 
+// The position of the node in the parent's coordinate system
+//
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *Node) WithPosition(position corefoundation.CGPoint) *Node {
 	x.inner.SetPosition(position)
 	return x
 }
 
+// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+//
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *Node) WithZPosition(zPosition float64) *Node {
 	x.inner.SetZPosition(zPosition)
 	return x
 }
 
+// The Euler rotation about the z axis (in radians)
+//
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *Node) WithZRotation(zRotation float64) *Node {
 	x.inner.SetZRotation(zRotation)
 	return x
 }
 
+// The scaling in the X axis
+//
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *Node) WithXScale(xScale float64) *Node {
 	x.inner.SetXScale(xScale)
 	return x
 }
 
+// The scaling in the Y axis
+//
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *Node) WithYScale(yScale float64) *Node {
 	x.inner.SetYScale(yScale)
 	return x
 }
 
+// The speed multiplier applied to all actions run on this node. Inherited by its children.
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *Node) WithSpeed(speed float64) *Node {
 	x.inner.SetSpeed(speed)
 	return x
 }
 
+// Alpha of this node (multiplied by the output color to give the final result)
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *Node) WithAlpha(alpha float64) *Node {
 	x.inner.SetAlpha(alpha)
 	return x
 }
 
+// Controls whether or not the node's actions is updated or paused.
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *Node) WithPaused(paused bool) *Node {
 	x.inner.SetPaused(paused)
 	return x
 }
 
+// Controls whether or not the node and its children are rendered.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *Node) WithHidden(hidden bool) *Node {
 	x.inner.SetHidden(hidden)
 	return x
 }
 
+// Controls whether or not the node receives touch events
+//
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *Node) WithUserInteractionEnabled(userInteractionEnabled bool) *Node {
 	x.inner.SetUserInteractionEnabled(userInteractionEnabled)
 	return x
 }
 
+// The client assignable name. In general, this should be unique among peers in the scene graph.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Node) WithName(name string) *Node {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// Physics body attached to the node, with synchronized scale, rotation, and position
+//
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *Node) WithPhysicsBody(physicsBody *PhysicsBody) *Node {
 	x.inner.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
+// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+//
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *Node) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *Node {
 	x.inner.SetUserData(userData)
 	return x
 }
 
+// Kinematic constraints, used in IK solving
+//
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *Node) WithReachConstraints(reachConstraints *ReachConstraints) *Node {
 	x.inner.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
+// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+//
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *Node) WithConstraints(items ...*raw.SKConstraint) *Node {
 	if len(items) == 0 {
@@ -149,6 +181,8 @@ func (x *Node) WithConstraints(items ...*raw.SKConstraint) *Node {
 	return x
 }
 
+// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+//
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *Node) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *Node {
 	x.inner.SetAttributeValues(attributeValues)
@@ -209,6 +243,8 @@ func (x *Node) WithAccessibilityEnabled(accessibilityEnabled bool) *Node {
 	return x
 }
 
+// Calculates the bounding box including all child nodes in parents coordinate system.
+//
 // CalculateAccumulatedFrame calls the underlying CalculateAccumulatedFrame.
 func (x *Node) CalculateAccumulatedFrame() corefoundation.CGRect {
 	return x.inner.CalculateAccumulatedFrame()
@@ -228,11 +264,15 @@ func (x *Node) SetValueForAttributeNamed(value *raw.SKAttributeValue, key string
 	x.inner.SetValueForAttributeNamed(value, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Sets both the x & y scale @param scale the uniform scale to set.
+//
 // SetScale calls the underlying SetScale.
 func (x *Node) SetScale(scale float64) {
 	x.inner.SetScale(scale)
 }
 
+// Adds a node as a child node of this node The added node must not have a parent. @param node the child node to add.
+//
 // AddChild calls the underlying AddChild.
 func (x *Node) AddChild(node *raw.SKNode) {
 	x.inner.AddChild(node)
@@ -244,8 +284,17 @@ func (x *Node) InsertChildAtIndex(node *raw.SKNode, index int) {
 }
 
 // RemoveChildrenInArray calls the underlying RemoveChildrenInArray.
-func (x *Node) RemoveChildrenInArray(nodes *foundation.NSArray[*raw.SKNode]) {
-	x.inner.RemoveChildrenInArray(nodes)
+func (x *Node) RemoveChildrenInArray(nodes ...NodeProvider) {
+	_ptrs := make([]objc.ID, len(nodes))
+	for _i, _v := range nodes {
+		_ptrs[_i] = _v.asNode().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.SKNode]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.SKNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.RemoveChildrenInArray(_arg0)
 }
 
 // RemoveAllChildren calls the underlying RemoveAllChildren.
@@ -277,6 +326,8 @@ func (x *Node) EnumerateChildNodesWithNameUsing(name string, block func(*raw.SKN
 	x.inner.EnumerateChildNodesWithNameUsing(foundation.NSStringStringWithUTF8String(name), block)
 }
 
+// Simplified shorthand for enumerateChildNodesWithName that returns an array of the matching nodes. This allows subscripting of the form: NSArray *childrenMatchingName = node[@"name"] or even complex like: NSArray *siblingsBeginningWithA = node[@"../a*"] @param name An Xpath style path that can include simple regular expressions for matching node names. @see enumerateChildNodesWithName:usingBlock:
+//
 // ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
 func (x *Node) ObjectForKeyedSubscript(name string) *foundation.NSArray[*raw.SKNode] {
 	return x.inner.ObjectForKeyedSubscript(foundation.NSStringStringWithUTF8String(name))
@@ -340,6 +391,8 @@ func (x *Node) ContainsPoint(p corefoundation.CGPoint) bool {
 	return x.inner.ContainsPoint(p)
 }
 
+// Returns the node itself or a child node at the point given. If the receiver is returned there is no child node at the given point. @return a child node or self at the given location.
+//
 // NodeAtPoint calls the underlying NodeAtPoint.
 func (x *Node) NodeAtPoint(p corefoundation.CGPoint) *Node {
 	_r := x.inner.NodeAtPoint(p)
@@ -379,6 +432,8 @@ func (x *Node) Frame() corefoundation.CGRect {
 	return x.inner.Frame()
 }
 
+// The position of the node in the parent's coordinate system
+//
 // Position calls the underlying Position.
 func (x *Node) Position() corefoundation.CGPoint {
 	return x.inner.Position()
@@ -389,6 +444,8 @@ func (x *Node) SetPosition(position corefoundation.CGPoint) {
 	x.inner.SetPosition(position)
 }
 
+// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+//
 // ZPosition calls the underlying ZPosition.
 func (x *Node) ZPosition() float64 {
 	return x.inner.ZPosition()
@@ -399,6 +456,8 @@ func (x *Node) SetZPosition(zPosition float64) {
 	x.inner.SetZPosition(zPosition)
 }
 
+// The Euler rotation about the z axis (in radians)
+//
 // ZRotation calls the underlying ZRotation.
 func (x *Node) ZRotation() float64 {
 	return x.inner.ZRotation()
@@ -409,6 +468,8 @@ func (x *Node) SetZRotation(zRotation float64) {
 	x.inner.SetZRotation(zRotation)
 }
 
+// The scaling in the X axis
+//
 // XScale calls the underlying XScale.
 func (x *Node) XScale() float64 {
 	return x.inner.XScale()
@@ -419,6 +480,8 @@ func (x *Node) SetXScale(xScale float64) {
 	x.inner.SetXScale(xScale)
 }
 
+// The scaling in the Y axis
+//
 // YScale calls the underlying YScale.
 func (x *Node) YScale() float64 {
 	return x.inner.YScale()
@@ -429,6 +492,8 @@ func (x *Node) SetYScale(yScale float64) {
 	x.inner.SetYScale(yScale)
 }
 
+// The speed multiplier applied to all actions run on this node. Inherited by its children.
+//
 // Speed calls the underlying Speed.
 func (x *Node) Speed() float64 {
 	return x.inner.Speed()
@@ -439,6 +504,8 @@ func (x *Node) SetSpeed(speed float64) {
 	x.inner.SetSpeed(speed)
 }
 
+// Alpha of this node (multiplied by the output color to give the final result)
+//
 // Alpha calls the underlying Alpha.
 func (x *Node) Alpha() float64 {
 	return x.inner.Alpha()
@@ -449,6 +516,8 @@ func (x *Node) SetAlpha(alpha float64) {
 	x.inner.SetAlpha(alpha)
 }
 
+// Controls whether or not the node's actions is updated or paused.
+//
 // IsPaused calls the underlying IsPaused.
 func (x *Node) IsPaused() bool {
 	return x.inner.IsPaused()
@@ -459,6 +528,8 @@ func (x *Node) SetPaused(paused bool) {
 	x.inner.SetPaused(paused)
 }
 
+// Controls whether or not the node and its children are rendered.
+//
 // IsHidden calls the underlying IsHidden.
 func (x *Node) IsHidden() bool {
 	return x.inner.IsHidden()
@@ -469,6 +540,8 @@ func (x *Node) SetHidden(hidden bool) {
 	x.inner.SetHidden(hidden)
 }
 
+// Controls whether or not the node receives touch events
+//
 // IsUserInteractionEnabled calls the underlying IsUserInteractionEnabled.
 func (x *Node) IsUserInteractionEnabled() bool {
 	return x.inner.IsUserInteractionEnabled()
@@ -479,6 +552,8 @@ func (x *Node) SetUserInteractionEnabled(userInteractionEnabled bool) {
 	x.inner.SetUserInteractionEnabled(userInteractionEnabled)
 }
 
+// The parent of the node. If this is nil the node has not been added to another group and is thus the root node of its own graph.
+//
 // Parent calls the underlying Parent.
 func (x *Node) Parent() *Node {
 	_r := x.inner.Parent()
@@ -488,6 +563,8 @@ func (x *Node) Parent() *Node {
 	return &Node{inner: _r}
 }
 
+// The children of this node.
+//
 // Children returns the collection as a Go slice.
 func (x *Node) Children() []*Node {
 	arr := x.inner.Children()
@@ -499,6 +576,8 @@ func (x *Node) Children() []*Node {
 	})
 }
 
+// The client assignable name. In general, this should be unique among peers in the scene graph.
+//
 // Name calls the underlying Name.
 func (x *Node) Name() string {
 	_r := x.inner.Name()
@@ -513,6 +592,8 @@ func (x *Node) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// The scene that the node is currently in.
+//
 // Scene calls the underlying Scene.
 func (x *Node) Scene() *Scene {
 	_r := x.inner.Scene()
@@ -522,6 +603,8 @@ func (x *Node) Scene() *Scene {
 	return &Scene{inner: _r}
 }
 
+// Physics body attached to the node, with synchronized scale, rotation, and position
+//
 // PhysicsBody calls the underlying PhysicsBody.
 func (x *Node) PhysicsBody() *PhysicsBody {
 	_r := x.inner.PhysicsBody()
@@ -536,6 +619,8 @@ func (x *Node) SetPhysicsBody(physicsBody *raw.SKPhysicsBody) {
 	x.inner.SetPhysicsBody(physicsBody)
 }
 
+// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+//
 // UserData calls the underlying UserData.
 func (x *Node) UserData() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
 	return x.inner.UserData()
@@ -546,6 +631,8 @@ func (x *Node) SetUserData(userData *foundation.NSMutableDictionary[objc.ID, obj
 	x.inner.SetUserData(userData)
 }
 
+// Kinematic constraints, used in IK solving
+//
 // ReachConstraints calls the underlying ReachConstraints.
 func (x *Node) ReachConstraints() *ReachConstraints {
 	_r := x.inner.ReachConstraints()
@@ -560,6 +647,8 @@ func (x *Node) SetReachConstraints(reachConstraints *raw.SKReachConstraints) {
 	x.inner.SetReachConstraints(reachConstraints)
 }
 
+// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+//
 // Constraints returns the collection as a Go slice.
 func (x *Node) Constraints() []*Constraint {
 	arr := x.inner.Constraints()
@@ -576,6 +665,8 @@ func (x *Node) SetConstraints(constraints *foundation.NSArray[*raw.SKConstraint]
 	x.inner.SetConstraints(constraints)
 }
 
+// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+//
 // AttributeValues calls the underlying AttributeValues.
 func (x *Node) AttributeValues() *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue] {
 	return x.inner.AttributeValues()
@@ -747,7 +838,7 @@ type Nodeable interface {
 	SetScale(scale float64)
 	AddChild(node *raw.SKNode)
 	InsertChildAtIndex(node *raw.SKNode, index int)
-	RemoveChildrenInArray(nodes *foundation.NSArray[*raw.SKNode])
+	RemoveChildrenInArray(nodes ...NodeProvider)
 	RemoveAllChildren()
 	RemoveFromParent()
 	MoveToParent(parent *raw.SKNode)

@@ -35,42 +35,56 @@ func NewDistanceConstraint() *DistanceConstraint {
 	return &DistanceConstraint{inner: raw.SCNDistanceConstraintFromID(_id)}
 }
 
+// @property target @abstract Defines the target node to keep distance with.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *DistanceConstraint) WithTarget(target NodeProvider) *DistanceConstraint {
 	x.inner.SetTarget(target.asNode())
 	return x
 }
 
+// @property minimumDistance @abstract The minimum distance. Defaults to 0. Animatable.
+//
 // WithMinimumDistance sets the minimumDistance property and returns the receiver for chaining.
 func (x *DistanceConstraint) WithMinimumDistance(minimumDistance float64) *DistanceConstraint {
 	x.inner.SetMinimumDistance(minimumDistance)
 	return x
 }
 
+// @property maximumDistance @abstract The minimum distance. Defaults to MAXFLOAT. Animatable.
+//
 // WithMaximumDistance sets the maximumDistance property and returns the receiver for chaining.
 func (x *DistanceConstraint) WithMaximumDistance(maximumDistance float64) *DistanceConstraint {
 	x.inner.SetMaximumDistance(maximumDistance)
 	return x
 }
 
+// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *DistanceConstraint) WithEnabled(enabled bool) *DistanceConstraint {
 	x.inner.SCNConstraint.SetEnabled(enabled)
 	return x
 }
 
+// @property influenceFactor @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+//
 // WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
 func (x *DistanceConstraint) WithInfluenceFactor(influenceFactor float64) *DistanceConstraint {
 	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
 	return x
 }
 
+// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+//
 // WithIncremental sets the incremental property and returns the receiver for chaining.
 func (x *DistanceConstraint) WithIncremental(incremental bool) *DistanceConstraint {
 	x.inner.SCNConstraint.SetIncremental(incremental)
 	return x
 }
 
+// @property target @abstract Defines the target node to keep distance with.
+//
 // Target calls the underlying Target.
 func (x *DistanceConstraint) Target() *Node {
 	_r := x.inner.Target()
@@ -85,6 +99,8 @@ func (x *DistanceConstraint) SetTarget(target *raw.SCNNode) {
 	x.inner.SetTarget(target)
 }
 
+// @property minimumDistance @abstract The minimum distance. Defaults to 0. Animatable.
+//
 // MinimumDistance calls the underlying MinimumDistance.
 func (x *DistanceConstraint) MinimumDistance() float64 {
 	return x.inner.MinimumDistance()
@@ -95,6 +111,8 @@ func (x *DistanceConstraint) SetMinimumDistance(minimumDistance float64) {
 	x.inner.SetMinimumDistance(minimumDistance)
 }
 
+// @property maximumDistance @abstract The minimum distance. Defaults to MAXFLOAT. Animatable.
+//
 // MaximumDistance calls the underlying MaximumDistance.
 func (x *DistanceConstraint) MaximumDistance() float64 {
 	return x.inner.MaximumDistance()

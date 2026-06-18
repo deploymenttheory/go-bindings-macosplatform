@@ -29,6 +29,8 @@ func NumericPairFromID(id objc.ID) *NumericPair {
 	return &NumericPair{inner: raw.PHASENumericPairFromID(id)}
 }
 
+// @method initWithFirstValue:secondValue @abstract Initialize a numeric pair with a first and second value. @param first The first value in the pair. @param second The second value in the pair. @return A new pair.
+//
 // NewNumericPairWithFirstValueSecondValue creates a new [NumericPair].
 func NewNumericPairWithFirstValueSecondValue(first float64, second float64) *NumericPair {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASENumericPair")), objc.RegisterName("alloc"))
@@ -36,18 +38,24 @@ func NewNumericPairWithFirstValueSecondValue(first float64, second float64) *Num
 	return &NumericPair{inner: raw.PHASENumericPairFromID(_id)}
 }
 
+// @property first @abstract The first value in the numeric pair. @discussion The default value is 0.0.
+//
 // WithFirst sets the first property and returns the receiver for chaining.
 func (x *NumericPair) WithFirst(first float64) *NumericPair {
 	x.inner.SetFirst(first)
 	return x
 }
 
+// @property second @abstract The second value in the numeric pair. @discussion The default value is 0.0.
+//
 // WithSecond sets the second property and returns the receiver for chaining.
 func (x *NumericPair) WithSecond(second float64) *NumericPair {
 	x.inner.SetSecond(second)
 	return x
 }
 
+// @property first @abstract The first value in the numeric pair. @discussion The default value is 0.0.
+//
 // First calls the underlying First.
 func (x *NumericPair) First() float64 {
 	return x.inner.First()
@@ -58,6 +66,8 @@ func (x *NumericPair) SetFirst(first float64) {
 	x.inner.SetFirst(first)
 }
 
+// @property second @abstract The second value in the numeric pair. @discussion The default value is 0.0.
+//
 // Second calls the underlying Second.
 func (x *NumericPair) Second() float64 {
 	return x.inner.Second()

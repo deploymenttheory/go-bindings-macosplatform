@@ -30,6 +30,8 @@ func PreviewViewFromID(id objc.ID) *PreviewView {
 	return &PreviewView{inner: raw.QLPreviewViewFromID(id)}
 }
 
+// Creates a preview view with the provided frame and style. This is the designated initializer for the `QLPreviewView` class. - Parameters: - frame: The frame rectangle for the initialized `QLPreviewView` object. - style: The desired style for the `QLPreviewView` object. For a list of possible styles, see “QuickLookUI/QLPreviewViewStyle“. - Returns: Returns a `QLPreviewView` object with the designated frame and style.
+//
 // NewPreviewViewWithFrameStyle creates a new [PreviewView].
 func NewPreviewViewWithFrameStyle(frame corefoundation.CGRect, style QLPreviewViewStyle) *PreviewView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QLPreviewView")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewPreviewViewWithFrameStyle(frame corefoundation.CGRect, style QLPreviewVi
 	return &PreviewView{inner: raw.QLPreviewViewFromID(_id)}
 }
 
+// Creates a preview view with the provided frame. Calling this method is equivalent to calling “QuickLookUI/QLPreviewView/initWithFrame:style:“ with the `style` parameter being “QuickLookUI/QLPreviewViewStyle/QLPreviewViewStyleNormal“. - Parameters: - frame: The frame rectangle for the initialized `QLPreviewView` object. - Returns: Returns a `QLPreviewView` object with the designated frame and the default style.
+//
 // NewPreviewViewWithFrame creates a new [PreviewView].
 func NewPreviewViewWithFrame(frame corefoundation.CGRect) *PreviewView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QLPreviewView")), objc.RegisterName("alloc"))
@@ -44,40 +48,54 @@ func NewPreviewViewWithFrame(frame corefoundation.CGRect) *PreviewView {
 	return &PreviewView{inner: raw.QLPreviewViewFromID(_id)}
 }
 
+// The item to preview. Quick Look requires Items you wish to conform to the <doc://com.apple.documentation/documentation/quicklook/qlpreviewitem> protocol. When you set this property, the “QuickLookUI/QLPreviewView“ loads the preview asynchronously. Due to this asynchronous behavior, don’t assume that the preview is ready immediately after assigning it to this property.
+//
 // WithPreviewItem sets the previewItem property and returns the receiver for chaining.
 func (x *PreviewView) WithPreviewItem(previewItem raw.QLPreviewItem) *PreviewView {
 	x.inner.SetPreviewItem(previewItem)
 	return x
 }
 
+// The current display state of the <doc://com.apple.documentation/documentation/quicklookui/qlpreviewview/1504747-previewitem>. This property is an opaque object that Quick Look uses to get and set the current display state of the preview. The display state could be, for example, the currently displayed page, the zoom factor on an image, or the position in a movie. You can use this property to get and save the current display state of the preview before switching to another. This saving allows you to restore a preview later on when the user switches back to it.
+//
 // WithDisplayState sets the displayState property and returns the receiver for chaining.
 func (x *PreviewView) WithDisplayState(displayState objc.ID) *PreviewView {
 	x.inner.SetDisplayState(displayState)
 	return x
 }
 
+// A Boolean value that determines whether the preview should close when its window closes. The default value of this property is <doc://com.apple.documentation/documentation/objectivec/yes>, which means that the preview automatically closes when its window closes. If you set this property to <doc://com.apple.documentation/documentation/objectivec/no>, close the preview by calling the “QuickLookUI/QLPreviewView/close“ method when finished with it. Once you close a “QuickLookUI/QLPreviewView“, it won’t accept any more preview items.
+//
 // WithShouldCloseWithWindow sets the shouldCloseWithWindow property and returns the receiver for chaining.
 func (x *PreviewView) WithShouldCloseWithWindow(shouldCloseWithWindow bool) *PreviewView {
 	x.inner.SetShouldCloseWithWindow(shouldCloseWithWindow)
 	return x
 }
 
+// A Boolean value that determines whether the preview starts automatically. Set this property to allow previews of movie files to start playback automatically when displayed.
+//
 // WithAutostarts sets the autostarts property and returns the receiver for chaining.
 func (x *PreviewView) WithAutostarts(autostarts bool) *PreviewView {
 	x.inner.SetAutostarts(autostarts)
 	return x
 }
 
+// Updates the preview to display the currently previewed item. When you modify the object that the “QuickLookUI/QLPreviewView/previewItem“ property points to, call this method to generate and display the new preview.
+//
 // RefreshPreviewItem calls the underlying RefreshPreviewItem.
 func (x *PreviewView) RefreshPreviewItem() {
 	x.inner.RefreshPreviewItem()
 }
 
+// Closes the view, releasing the current preview item. Once a “QuickLookUI/QLPreviewView“ is closed, it won’t accept any more preview items. You only need to call this method if “QuickLookUI/QLPreviewView/shouldCloseWithWindow“ is set to <doc://com.apple.documentation/documentation/objectivec/no>. If you don’t close a “QuickLookUI/QLPreviewView“ when you are done using it, your app will leak memory.
+//
 // Close calls the underlying Close.
 func (x *PreviewView) Close() {
 	x.inner.Close()
 }
 
+// The item to preview. Quick Look requires Items you wish to conform to the <doc://com.apple.documentation/documentation/quicklook/qlpreviewitem> protocol. When you set this property, the “QuickLookUI/QLPreviewView“ loads the preview asynchronously. Due to this asynchronous behavior, don’t assume that the preview is ready immediately after assigning it to this property.
+//
 // PreviewItem calls the underlying PreviewItem.
 func (x *PreviewView) PreviewItem() raw.QLPreviewItem {
 	return x.inner.PreviewItem()
@@ -88,6 +106,8 @@ func (x *PreviewView) SetPreviewItem(previewItem raw.QLPreviewItem) {
 	x.inner.SetPreviewItem(previewItem)
 }
 
+// The current display state of the <doc://com.apple.documentation/documentation/quicklookui/qlpreviewview/1504747-previewitem>. This property is an opaque object that Quick Look uses to get and set the current display state of the preview. The display state could be, for example, the currently displayed page, the zoom factor on an image, or the position in a movie. You can use this property to get and save the current display state of the preview before switching to another. This saving allows you to restore a preview later on when the user switches back to it.
+//
 // DisplayState calls the underlying DisplayState.
 func (x *PreviewView) DisplayState() objc.ID {
 	return x.inner.DisplayState()
@@ -98,6 +118,8 @@ func (x *PreviewView) SetDisplayState(displayState objc.ID) {
 	x.inner.SetDisplayState(displayState)
 }
 
+// A Boolean value that determines whether the preview should close when its window closes. The default value of this property is <doc://com.apple.documentation/documentation/objectivec/yes>, which means that the preview automatically closes when its window closes. If you set this property to <doc://com.apple.documentation/documentation/objectivec/no>, close the preview by calling the “QuickLookUI/QLPreviewView/close“ method when finished with it. Once you close a “QuickLookUI/QLPreviewView“, it won’t accept any more preview items.
+//
 // ShouldCloseWithWindow calls the underlying ShouldCloseWithWindow.
 func (x *PreviewView) ShouldCloseWithWindow() bool {
 	return x.inner.ShouldCloseWithWindow()
@@ -108,6 +130,8 @@ func (x *PreviewView) SetShouldCloseWithWindow(shouldCloseWithWindow bool) {
 	x.inner.SetShouldCloseWithWindow(shouldCloseWithWindow)
 }
 
+// A Boolean value that determines whether the preview starts automatically. Set this property to allow previews of movie files to start playback automatically when displayed.
+//
 // Autostarts calls the underlying Autostarts.
 func (x *PreviewView) Autostarts() bool {
 	return x.inner.Autostarts()

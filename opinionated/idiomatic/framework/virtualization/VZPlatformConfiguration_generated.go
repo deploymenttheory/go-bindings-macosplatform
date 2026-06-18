@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class for a platform configuration.
+//
 // PlatformConfiguration wraps [raw.VZPlatformConfiguration] with a fluent Go API.
 type PlatformConfiguration struct {
 	inner *raw.VZPlatformConfiguration

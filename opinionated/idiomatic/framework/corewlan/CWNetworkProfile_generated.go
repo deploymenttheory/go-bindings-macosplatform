@@ -37,6 +37,8 @@ func NewNetworkProfile() *NetworkProfile {
 	return &NetworkProfile{inner: raw.CWNetworkProfileFromID(_id)}
 }
 
+// @method @param networkProfile A CWNetworkProfile object. @result A CWNetworkProfile object. @abstract Initializes a CWNetworkProfile object with the properties of an existing CWNetworkProfile object.
+//
 // NewNetworkProfileWithNetworkProfile creates a new [NetworkProfile].
 func NewNetworkProfileWithNetworkProfile(networkProfile *raw.CWNetworkProfile) *NetworkProfile {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CWNetworkProfile")), objc.RegisterName("alloc"))
@@ -44,11 +46,15 @@ func NewNetworkProfileWithNetworkProfile(networkProfile *raw.CWNetworkProfile) *
 	return &NetworkProfile{inner: raw.CWNetworkProfileFromID(_id)}
 }
 
+// @method @param network A CWNetworkProfile object. @result YES if the objects are equal, NO otherwise. @abstract Determine CWNetworkProfile equality. @discussion CWNetworkProfile objects are considered equal if their corresponding <i>ssidData</i> and <i>security</i> properties are equal.
+//
 // IsEqualToNetworkProfile calls the underlying IsEqualToNetworkProfile.
 func (x *NetworkProfile) IsEqualToNetworkProfile(networkProfile *raw.CWNetworkProfile) bool {
 	return x.inner.IsEqualToNetworkProfile(networkProfile)
 }
 
+// @property @abstract Returns the service set identifier (SSID) for the Wi-Fi network profile, encoded as a string. @discussion Returns nil if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string.
+//
 // Ssid calls the underlying Ssid.
 func (x *NetworkProfile) Ssid() string {
 	_r := x.inner.Ssid()
@@ -58,11 +64,15 @@ func (x *NetworkProfile) Ssid() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property @abstract Returns the service set identifier (SSID) for the Wi-Fi network profile, encapsulated in an NSData object. @discussion The SSID is 1-32 octets.
+//
 // SsidData calls the underlying SsidData.
 func (x *NetworkProfile) SsidData() *foundation.NSData {
 	return x.inner.SsidData()
 }
 
+// @property @abstract Returns the security type of the Wi-Fi network profile.
+//
 // Security calls the underlying Security.
 func (x *NetworkProfile) Security() CWSecurity {
 	return CWSecurity(x.inner.Security())

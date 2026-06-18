@@ -36,6 +36,8 @@ func NewMTRSubscribeParams() *MTRSubscribeParams {
 	return &MTRSubscribeParams{inner: raw.MTRSubscribeParamsFromID(_id)}
 }
 
+// Initialize an MTRSubscribeParams.  Must provide a minInterval and maxInterval; there are no default values for those.
+//
 // NewMTRSubscribeParamsWithMinIntervalMaxInterval creates a new [MTRSubscribeParams].
 func NewMTRSubscribeParamsWithMinIntervalMaxInterval(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber) *MTRSubscribeParams {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRSubscribeParams")), objc.RegisterName("alloc"))
@@ -55,12 +57,16 @@ func (x *MTRSubscribeParams) WithResubscribeAutomatically(resubscribeAutomatical
 	return x
 }
 
+// The minimum time, in seconds, between consecutive reports a server will send for this subscription.  This can be used to rate-limit the subscription traffic.  Any non-negative value is allowed, including 0.
+//
 // WithMinInterval sets the minInterval property and returns the receiver for chaining.
 func (x *MTRSubscribeParams) WithMinInterval(minInterval *foundation.NSNumber) *MTRSubscribeParams {
 	x.inner.SetMinInterval(minInterval)
 	return x
 }
 
+// The suggested maximum time, in seconds, during which the server is allowed to send no reports at all for this subscription.  Must be at least as large as minInterval.  The server is allowed to use a larger time than this as the maxInterval it selects if it needs to (e.g. to meet its power budget).
+//
 // WithMaxInterval sets the maxInterval property and returns the receiver for chaining.
 func (x *MTRSubscribeParams) WithMaxInterval(maxInterval *foundation.NSNumber) *MTRSubscribeParams {
 	x.inner.SetMaxInterval(maxInterval)
@@ -91,12 +97,16 @@ func (x *MTRSubscribeParams) WithFilterByFabric(filterByFabric bool) *MTRSubscri
 	return x
 }
 
+// Sets a filter for which events will be reported in the read/subscribe interaction. If nil (the default value), all of the queued events will be reported from lowest to highest event number. If not nil, queued events with an event number smaller than minEventNumber will not be reported.
+//
 // WithMinEventNumber sets the minEventNumber property and returns the receiver for chaining.
 func (x *MTRSubscribeParams) WithMinEventNumber(minEventNumber *foundation.NSNumber) *MTRSubscribeParams {
 	x.inner.MTRReadParams.SetMinEventNumber(minEventNumber)
 	return x
 }
 
+// Controls whether attributes without known schema (e.g. vendor-specific attributes) should be assumed to be reportable normally via subscriptions. The default is YES. This setting is only relevant to some consumers of MTRReadParams.  One of those consumers is readAttributeWithEndpointID:clusterID:attributeID:params: on MTRDevice.
+//
 // WithAssumeUnknownAttributesReportable sets the assumeUnknownAttributesReportable property and returns the receiver for chaining.
 func (x *MTRSubscribeParams) WithAssumeUnknownAttributesReportable(assumeUnknownAttributesReportable bool) *MTRSubscribeParams {
 	x.inner.MTRReadParams.SetAssumeUnknownAttributesReportable(assumeUnknownAttributesReportable)
@@ -129,6 +139,8 @@ func (x *MTRSubscribeParams) SetResubscribeAutomatically(resubscribeAutomaticall
 	x.inner.SetResubscribeAutomatically(resubscribeAutomatically)
 }
 
+// The minimum time, in seconds, between consecutive reports a server will send for this subscription.  This can be used to rate-limit the subscription traffic.  Any non-negative value is allowed, including 0.
+//
 // MinInterval calls the underlying MinInterval.
 func (x *MTRSubscribeParams) MinInterval() *foundation.NSNumber {
 	return x.inner.MinInterval()
@@ -139,6 +151,8 @@ func (x *MTRSubscribeParams) SetMinInterval(minInterval *foundation.NSNumber) {
 	x.inner.SetMinInterval(minInterval)
 }
 
+// The suggested maximum time, in seconds, during which the server is allowed to send no reports at all for this subscription.  Must be at least as large as minInterval.  The server is allowed to use a larger time than this as the maxInterval it selects if it needs to (e.g. to meet its power budget).
+//
 // MaxInterval calls the underlying MaxInterval.
 func (x *MTRSubscribeParams) MaxInterval() *foundation.NSNumber {
 	return x.inner.MaxInterval()

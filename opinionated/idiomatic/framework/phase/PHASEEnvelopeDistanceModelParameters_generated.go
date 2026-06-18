@@ -31,6 +31,8 @@ func EnvelopeDistanceModelParametersFromID(id objc.ID) *EnvelopeDistanceModelPar
 	return &EnvelopeDistanceModelParameters{inner: raw.PHASEEnvelopeDistanceModelParametersFromID(id)}
 }
 
+// @method initWithEnvelope @abstract Initialize a PHASEEnvelopeDistanceModelParameters with a PHASEEnvelope @param envelope An envelope object where x values are interpreted as distance and the y values interpreted as gain. @return An instance, or nil if initialization failed.
+//
 // NewEnvelopeDistanceModelParametersWithEnvelope creates a new [EnvelopeDistanceModelParameters].
 func NewEnvelopeDistanceModelParametersWithEnvelope(envelope *raw.PHASEEnvelope) *EnvelopeDistanceModelParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEEnvelopeDistanceModelParameters")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewEnvelopeDistanceModelParametersWithEnvelope(envelope *raw.PHASEEnvelope)
 	return &EnvelopeDistanceModelParameters{inner: raw.PHASEEnvelopeDistanceModelParametersFromID(_id)}
 }
 
+// @property fadeOutParameters @abstract Fade out parameters (optional).
+//
 // WithFadeOutParameters sets the fadeOutParameters property and returns the receiver for chaining.
 func (x *EnvelopeDistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *EnvelopeDistanceModelParameters {
 	x.inner.PHASEDistanceModelParameters.SetFadeOutParameters(fadeOutParameters.Unwrap())

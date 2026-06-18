@@ -56,6 +56,8 @@ func (x *CaptureManager) SupportsDestination(destination MTLCaptureDestination) 
 	return x.inner.SupportsDestination(raw.MTLCaptureDestination(destination))
 }
 
+// Start capturing until stopCapture is called. @param descriptor MTLCaptureDescriptor specifies the parameters. @param error Optional error output to check why a capture could not be started. @return true if the capture was successfully started, otherwise false. @remarks Only MTLCommandBuffer​s created after starting and committed before stopping it are captured.
+//
 // StartCaptureWithDescriptorError calls the underlying StartCaptureWithDescriptorError.
 func (x *CaptureManager) StartCaptureWithDescriptorError(descriptor *raw.MTLCaptureDescriptor) (bool, error) {
 	return x.inner.StartCaptureWithDescriptorError(descriptor)

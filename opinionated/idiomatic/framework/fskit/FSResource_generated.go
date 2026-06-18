@@ -35,6 +35,8 @@ func NewResource() *Resource {
 	return &Resource{inner: raw.FSResourceFromID(_id)}
 }
 
+// Creates a proxy object of this resource. If you create a proxy from a proxy resource, this method returns a copy of the proxy.
+//
 // MakeProxy calls the underlying MakeProxy.
 func (x *Resource) MakeProxy() *Resource {
 	_r := x.inner.MakeProxy()
@@ -44,11 +46,15 @@ func (x *Resource) MakeProxy() *Resource {
 	return &Resource{inner: _r}
 }
 
+// Revokes the resource. This method works by stripping away any underlying privileges associated with the resource. This effectively disconnects this object from its underlying resource.
+//
 // Revoke calls the underlying Revoke.
 func (x *Resource) Revoke() {
 	x.inner.Revoke()
 }
 
+// A Boolean value that indicates whether the resource is revoked. If this is a proxy resource, the value of this property is always `true` (Swift) or `YES` (Objective-C).
+//
 // IsRevoked calls the underlying IsRevoked.
 func (x *Resource) IsRevoked() bool {
 	return x.inner.IsRevoked()

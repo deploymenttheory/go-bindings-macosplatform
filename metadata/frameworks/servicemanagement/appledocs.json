@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "framework": "ServiceManagement",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "SMAppService": {
+      "doc": "An object the framework uses to control helper executables that live inside an app’s main bundle.",
+      "url": "https://developer.apple.com/documentation/servicemanagement/smappservice"
+    }
+  },
+  "enums": {
+    "SMAppServiceStatus": {
+      "doc": "Constants that describe the registration or authorization status of a helper executable.",
+      "url": "https://developer.apple.com/documentation/servicemanagement/smappservicestatus"
+    }
+  },
+  "methods": {
+    "SMAppService": {
+      "+agentServiceWithPlistName:": {
+        "doc": "Initializes an app service object with a launch agent with the property list name you provide.",
+        "url": "https://developer.apple.com/documentation/servicemanagement/smappservice/agent(plistname:)"
+      },
+      "+daemonServiceWithPlistName:": {
+        "doc": "Initializes an app service object with a launch daemon with the property list name you provide.",
+        "url": "https://developer.apple.com/documentation/servicemanagement/smappservice/daemon(plistname:)"
+      },
+      "+loginItemServiceWithIdentifier:": {
+        "doc": "Initializes an app service object for a login item corresponding to the bundle with the identifier you provide.",
+        "url": "https://developer.apple.com/documentation/servicemanagement/smappservice/loginitem(identifier:)"
+      },
+      "+openSystemSettingsLoginItems": {
+        "doc": "Opens System Settings to the Login Items control panel.",
+        "url": "https://developer.apple.com/documentation/servicemanagement/smappservice/opensystemsettingsloginitems()"
+      },
+      "+statusForLegacyURL:": {
+        "doc": "Check the authorization status of an earlier OS version login item.",
+        "url": "https://developer.apple.com/documentation/servicemanagement/smappservice/statusforlegacyplist(at:)"
+      },
+      "-registerAndReturnError:": {
+        "doc": "Registers the service so it can begin launching subject to user approval.",
+        "url": "https://developer.apple.com/documentation/servicemanagement/smappservice/register()"
+      },
+      "-unregisterAndReturnError:": {
+        "doc": "Unregisters the service so the system no longer launches it.",
+        "url": "https://developer.apple.com/documentation/servicemanagement/smappservice/unregister()"
+      },
+      "-unregisterWithCompletionHandler:": {
+        "doc": "Unregisters the service so the system no longer launches it and calls a completion handler you provide with the resulting error value.",
+        "url": "https://developer.apple.com/documentation/servicemanagement/smappservice/unregister(completionhandler:)"
+      }
+    }
+  },
+  "properties": {
+    "SMAppService": {
+      "SMAppServiceStatus": {
+        "doc": "Constants that describe the registration or authorization status of a helper executable.",
+        "url": "https://developer.apple.com/documentation/servicemanagement/smappservice/status-swift.enum"
+      },
+      "mainAppService": {
+        "doc": "An app service object that corresponds to the main application as a login item.",
+        "url": "https://developer.apple.com/documentation/servicemanagement/smappservice/mainapp"
+      },
+      "status": {
+        "doc": "A property that describes registration or authorization state of the service.",
+        "url": "https://developer.apple.com/documentation/servicemanagement/smappservice/status-swift.property"
+      }
+    }
+  }
+}

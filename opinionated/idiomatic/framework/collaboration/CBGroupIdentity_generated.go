@@ -37,11 +37,15 @@ func NewGroupIdentity() *GroupIdentity {
 	return &GroupIdentity{inner: raw.CBGroupIdentityFromID(_id)}
 }
 
+// Returns the POSIX GID of the identity. The POSIX GID is an integer that can identify a group within an identity authority. GIDs are not guaranteed to be unique within an identity authority. - Returns: The POSIX GID of the group identity.
+//
 // PosixGID calls the underlying PosixGID.
 func (x *GroupIdentity) PosixGID() uint {
 	return x.inner.PosixGID()
 }
 
+// Returns the members of the group. This method only returns direct members of a group, it does not return members of members. Both user and group identities can be members of a group, but a group cannot be a member of itself. You also cannot have “circular” membership, i.e. a group be a member of another group that is a member of the first group. - Returns: An array of `CBIdentity` objects each representing a member of the group identity.
+//
 // Members calls the underlying Members.
 func (x *GroupIdentity) Members() *foundation.NSArray[objc.ID] {
 	return x.inner.Members()

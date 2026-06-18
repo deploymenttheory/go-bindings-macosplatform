@@ -34,6 +34,8 @@ func ScoreFromID(id objc.ID) *Score {
 	return &Score{inner: raw.GKScoreFromID(id)}
 }
 
+// Initialize the score with the local player and current date.
+//
 // NewScoreWithLeaderboardIdentifier creates a new [Score].
 func NewScoreWithLeaderboardIdentifier(identifier string) *Score {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKScore")), objc.RegisterName("alloc"))
@@ -41,6 +43,8 @@ func NewScoreWithLeaderboardIdentifier(identifier string) *Score {
 	return &Score{inner: raw.GKScoreFromID(_id)}
 }
 
+// Initialize the achievement for a specific player. Use to submit participant scores when ending a turn-based match.
+//
 // NewScoreWithLeaderboardIdentifierPlayer creates a new [Score].
 func NewScoreWithLeaderboardIdentifierPlayer(identifier string, player *raw.GKPlayer) *Score {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKScore")), objc.RegisterName("alloc"))
@@ -55,6 +59,8 @@ func NewScoreWithCategory(category string) *Score {
 	return &Score{inner: raw.GKScoreFromID(_id)}
 }
 
+// * This method is obsolete. Calling this initialiser does nothing and will return nil **
+//
 // NewScoreWithLeaderboardIdentifierForPlayer creates a new [Score].
 func NewScoreWithLeaderboardIdentifierForPlayer(identifier string, playerID string) *Score {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKScore")), objc.RegisterName("alloc"))
@@ -62,24 +68,32 @@ func NewScoreWithLeaderboardIdentifierForPlayer(identifier string, playerID stri
 	return &Score{inner: raw.GKScoreFromID(_id)}
 }
 
+// The score value as a 64bit integer.
+//
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *Score) WithValue(value int64) *Score {
 	x.inner.SetValue(value)
 	return x
 }
 
+// leaderboard identifier (required)
+//
 // WithLeaderboardIdentifier sets the leaderboardIdentifier property and returns the receiver for chaining.
 func (x *Score) WithLeaderboardIdentifier(leaderboardIdentifier string) *Score {
 	x.inner.SetLeaderboardIdentifier(foundation.NSStringStringWithUTF8String(leaderboardIdentifier))
 	return x
 }
 
+// optional additional context that allows a game to store and retrieve additional data associated with the store.  Default value of zero is returned if no value is set.
+//
 // WithContext sets the context_ property and returns the receiver for chaining.
 func (x *Score) WithContext(context_ uint64) *Score {
 	x.inner.SetContext(context_)
 	return x
 }
 
+// Convenience property to make the leaderboard associated with this GKScore, the default leaderboard for this player. Default value is false. If true, reporting that score will make the category this score belongs to, the default leaderboard for this user
+//
 // WithShouldSetDefaultLeaderboard sets the shouldSetDefaultLeaderboard property and returns the receiver for chaining.
 func (x *Score) WithShouldSetDefaultLeaderboard(shouldSetDefaultLeaderboard bool) *Score {
 	x.inner.SetShouldSetDefaultLeaderboard(shouldSetDefaultLeaderboard)
@@ -92,6 +106,8 @@ func (x *Score) WithCategory(category string) *Score {
 	return x
 }
 
+// The score value as a 64bit integer.
+//
 // Value calls the underlying Value.
 func (x *Score) Value() int64 {
 	return x.inner.Value()
@@ -102,6 +118,8 @@ func (x *Score) SetValue(value int64) {
 	x.inner.SetValue(value)
 }
 
+// The score formatted as a string, localized with a label
+//
 // FormattedValue calls the underlying FormattedValue.
 func (x *Score) FormattedValue() string {
 	_r := x.inner.FormattedValue()
@@ -111,6 +129,8 @@ func (x *Score) FormattedValue() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// leaderboard identifier (required)
+//
 // LeaderboardIdentifier calls the underlying LeaderboardIdentifier.
 func (x *Score) LeaderboardIdentifier() string {
 	_r := x.inner.LeaderboardIdentifier()
@@ -125,6 +145,8 @@ func (x *Score) SetLeaderboardIdentifier(leaderboardIdentifier string) {
 	x.inner.SetLeaderboardIdentifier(foundation.NSStringStringWithUTF8String(leaderboardIdentifier))
 }
 
+// optional additional context that allows a game to store and retrieve additional data associated with the store.  Default value of zero is returned if no value is set.
+//
 // Context calls the underlying Context.
 func (x *Score) Context() uint64 {
 	return x.inner.Context()
@@ -135,11 +157,15 @@ func (x *Score) SetContext(context_ uint64) {
 	x.inner.SetContext(context_)
 }
 
+// The date this score was recorded. A newly initialized, unsubmitted GKScore records the current date at init time.
+//
 // Date calls the underlying Date.
 func (x *Score) Date() *foundation.NSDate {
 	return x.inner.Date()
 }
 
+// The player that recorded the score.
+//
 // Player calls the underlying Player.
 func (x *Score) Player() *Player {
 	_r := x.inner.Player()
@@ -149,11 +175,15 @@ func (x *Score) Player() *Player {
 	return &Player{inner: _r}
 }
 
+// The rank of the player within the leaderboard, only valid when returned from GKLeaderboard
+//
 // Rank calls the underlying Rank.
 func (x *Score) Rank() int {
 	return x.inner.Rank()
 }
 
+// Convenience property to make the leaderboard associated with this GKScore, the default leaderboard for this player. Default value is false. If true, reporting that score will make the category this score belongs to, the default leaderboard for this user
+//
 // ShouldSetDefaultLeaderboard calls the underlying ShouldSetDefaultLeaderboard.
 func (x *Score) ShouldSetDefaultLeaderboard() bool {
 	return x.inner.ShouldSetDefaultLeaderboard()
@@ -205,6 +235,8 @@ func (x *Score) PlayerID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// * This method is obsolete. It will never be invoked and its implementation does nothing**
+//
 // IssueChallengeToPlayersMessage calls the underlying IssueChallengeToPlayersMessage.
 func (x *Score) IssueChallengeToPlayersMessage(playerIDs *foundation.NSArray[*foundation.NSString], message string) {
 	x.inner.IssueChallengeToPlayersMessage(playerIDs, foundation.NSStringStringWithUTF8String(message))

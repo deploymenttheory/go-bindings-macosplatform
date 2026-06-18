@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// @brief Groups a set of requirements that need to be satisfied in order to grant access to certain resource or operation
+//
 // Right wraps [raw.LARight] with a fluent Go API.
 type Right struct {
 	inner *raw.LARight
@@ -39,6 +41,8 @@ func NewRight() *Right {
 	return &Right{inner: raw.LARightFromID(_id)}
 }
 
+// @brief Constructs a right that will be granted only when the given @c LAAuthenticationRequirement is satisfied. @param requirement Requirement that needs to be satisfied to authorize the right @return @c LARight instance
+//
 // NewRightWithRequirement creates a new [Right].
 func NewRightWithRequirement(requirement *raw.LAAuthenticationRequirement) *Right {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("LARight")), objc.RegisterName("alloc"))
@@ -46,12 +50,16 @@ func NewRightWithRequirement(requirement *raw.LAAuthenticationRequirement) *Righ
 	return &Right{inner: raw.LARightFromID(_id)}
 }
 
+// @brief An application-supplied integer that can be used to identify right instances. The default value is @c 0.
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *Right) WithTag(tag int) *Right {
 	x.inner.SetTag(tag)
 	return x
 }
 
+// @brief Tries to authorize the right. @param localizedReason Localized explanation for the authorization. Appears in the UI presented to the user. @param handler Completion handler called after the authorization finishes. Returns an error when the authorization fails.
+//
 // AuthorizeWithLocalizedReasonCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Right) AuthorizeWithLocalizedReasonCompletion(ctx context.Context, localizedReason string) error {
 	_ch := make(chan error, 1)
@@ -70,6 +78,8 @@ func (x *Right) AuthorizeWithLocalizedReasonCompletion(ctx context.Context, loca
 	}
 }
 
+// @brief Checks whether the client can eventually be granted the right. @param handler Completion handler. Returns @c nil if the right can be authorized or an error otherwise.
+//
 // CheckCanAuthorizeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Right) CheckCanAuthorizeWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -88,6 +98,8 @@ func (x *Right) CheckCanAuthorizeWithCompletion(ctx context.Context) error {
 	}
 }
 
+// @brief Invalidates a previously authorized right. @param handler Completion handler called after the right is deauthorized.
+//
 // DeauthorizeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Right) DeauthorizeWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -102,11 +114,15 @@ func (x *Right) DeauthorizeWithCompletion(ctx context.Context) error {
 	}
 }
 
+// @brief Provides the current authorization state of the @c LARight instance
+//
 // State calls the underlying State.
 func (x *Right) State() LARightState {
 	return LARightState(x.inner.State())
 }
 
+// @brief An application-supplied integer that can be used to identify right instances. The default value is @c 0.
+//
 // Tag calls the underlying Tag.
 func (x *Right) Tag() int {
 	return x.inner.Tag()

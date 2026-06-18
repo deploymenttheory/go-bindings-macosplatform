@@ -39,11 +39,15 @@ func NewNDArrayQuantizationDescriptor() *NDArrayQuantizationDescriptor {
 	return &NDArrayQuantizationDescriptor{inner: raw.MPSNDArrayQuantizationDescriptorFromID(_id)}
 }
 
+// @property  quantizationDataType @abstract  The datatype to use with quantization - the default is MPSDataTypeUint8
+//
 // QuantizationDataType calls the underlying QuantizationDataType.
 func (x *NDArrayQuantizationDescriptor) QuantizationDataType() mpscore.MPSDataType {
 	return x.inner.QuantizationDataType()
 }
 
+// @property  quantizationScheme @abstract  The quantization scheme for this descriptor. The default is MPSNDArrayQuantizationTypeNone.
+//
 // QuantizationScheme calls the underlying QuantizationScheme.
 func (x *NDArrayQuantizationDescriptor) QuantizationScheme() mpsndarray.MPSNDArrayQuantizationScheme {
 	return x.inner.QuantizationScheme()

@@ -35,11 +35,15 @@ func NewGearShifterElement() *GearShifterElement {
 	return &GearShifterElement{inner: raw.GCGearShifterElementFromID(_id)}
 }
 
+// Get the input reporting the position of the pattern gear shifter.  If this property is \c nil, the gear shifter is not a pattern gear shifter. In the returned input, a position of \c -1 corresponds to the "reverse gear". A position of \c 0 corresponds to the neutral gear.
+//
 // PatternInput calls the underlying PatternInput.
 func (x *GearShifterElement) PatternInput() raw.GCSwitchPositionInput {
 	return x.inner.PatternInput()
 }
 
+// Get the input reporting changes to the sequential gear shifter.  If this property is \c nil, the gear shifter is not a sequential gear shifter.
+//
 // SequentialInput calls the underlying SequentialInput.
 func (x *GearShifterElement) SequentialInput() raw.GCRelativeInput {
 	return x.inner.SequentialInput()

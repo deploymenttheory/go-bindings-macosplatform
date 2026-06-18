@@ -37,6 +37,8 @@ func NewVisibleFunctionTableDescriptor() *VisibleFunctionTableDescriptor {
 	return &VisibleFunctionTableDescriptor{inner: raw.MTLVisibleFunctionTableDescriptorFromID(_id)}
 }
 
+// @property functionCount @abstract The number of functions in the table.
+//
 // WithFunctionCount sets the functionCount property and returns the receiver for chaining.
 func (x *VisibleFunctionTableDescriptor) WithFunctionCount(functionCount uint) *VisibleFunctionTableDescriptor {
 	x.inner.SetFunctionCount(functionCount)

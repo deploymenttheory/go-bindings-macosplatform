@@ -1,0 +1,712 @@
+{
+  "schema_version": 1,
+  "framework": "CoreMIDI",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "MIDI2DeviceInfo": {
+      "url": "https://developer.apple.com/documentation/coremidi/midi2deviceinfo"
+    },
+    "MIDICIDevice": {
+      "url": "https://developer.apple.com/documentation/coremidi/midicidevice"
+    },
+    "MIDICIDeviceInfo": {
+      "doc": "An object that provides basic information about a MIDI-CI device.",
+      "url": "https://developer.apple.com/documentation/coremidi/midicideviceinfo"
+    },
+    "MIDICIDeviceManager": {
+      "url": "https://developer.apple.com/documentation/coremidi/midicidevicemanager"
+    },
+    "MIDICIDiscoveredNode": {
+      "doc": "A discovered MIDI-CI node that represents a MIDI source and destination that respond to capability inquiries.",
+      "url": "https://developer.apple.com/documentation/coremidi/midicidiscoverednode"
+    },
+    "MIDICIDiscoveryManager": {
+      "doc": "A singleton object that performs systemwide MIDI-CI discovery.",
+      "url": "https://developer.apple.com/documentation/coremidi/midicidiscoverymanager"
+    },
+    "MIDICIProfile": {
+      "doc": "A mapping of MIDI messages to specific sounds and synthesis behaviors, such as General MIDI, a drawbar organ, and so on.",
+      "url": "https://developer.apple.com/documentation/coremidi/midiciprofile"
+    },
+    "MIDICIProfileState": {
+      "doc": "An object that provides the enabled and disabled profiles for a MIDI channel or port on a device.",
+      "url": "https://developer.apple.com/documentation/coremidi/midiciprofilestate"
+    },
+    "MIDICIResponder": {
+      "doc": "An object that responds to MIDI-CI inquiries from an initiator on behalf of a MIDI client, and handles profile and property exchange operations.",
+      "url": "https://developer.apple.com/documentation/coremidi/midiciresponder"
+    },
+    "MIDICISession": {
+      "doc": "An object that represents a MIDI-CI session.",
+      "url": "https://developer.apple.com/documentation/coremidi/midicisession"
+    },
+    "MIDINetworkConnection": {
+      "doc": "An object that connects a session to a host.",
+      "url": "https://developer.apple.com/documentation/coremidi/midinetworkconnection"
+    },
+    "MIDINetworkHost": {
+      "doc": "An object that represents the host’s network address.",
+      "url": "https://developer.apple.com/documentation/coremidi/midinetworkhost"
+    },
+    "MIDINetworkSession": {
+      "doc": "An object that represents a pairing of a source and destination.",
+      "url": "https://developer.apple.com/documentation/coremidi/midinetworksession"
+    },
+    "MIDIUMPCIProfile": {
+      "url": "https://developer.apple.com/documentation/coremidi/midiumpciprofile"
+    },
+    "MIDIUMPEndpoint": {
+      "url": "https://developer.apple.com/documentation/coremidi/midiumpendpoint"
+    },
+    "MIDIUMPEndpointManager": {
+      "url": "https://developer.apple.com/documentation/coremidi/midiumpendpointmanager"
+    },
+    "MIDIUMPFunctionBlock": {
+      "url": "https://developer.apple.com/documentation/coremidi/midiumpfunctionblock"
+    },
+    "MIDIUMPMutableEndpoint": {
+      "url": "https://developer.apple.com/documentation/coremidi/midiumpmutableendpoint"
+    },
+    "MIDIUMPMutableFunctionBlock": {
+      "url": "https://developer.apple.com/documentation/coremidi/midiumpmutablefunctionblock"
+    }
+  },
+  "protocols": {
+    "MIDICIProfileResponderDelegate": {
+      "doc": "A protocol that defines the methods to respond to MIDI-CI responder life-cycle events.",
+      "url": "https://developer.apple.com/documentation/coremidi/midiciprofileresponderdelegate"
+    }
+  },
+  "enums": {
+    "MIDICICategoryOptions": {
+      "url": "https://developer.apple.com/documentation/coremidi/midicicategoryoptions"
+    },
+    "MIDICIDeviceType": {
+      "url": "https://developer.apple.com/documentation/coremidi/midicidevicetype"
+    },
+    "MIDICIManagementMessageType": {
+      "url": "https://developer.apple.com/documentation/coremidi/midicimanagementmessagetype"
+    },
+    "MIDICIProcessInquiryMessageType": {
+      "url": "https://developer.apple.com/documentation/coremidi/midiciprocessinquirymessagetype"
+    },
+    "MIDICIProfileMessageType": {
+      "url": "https://developer.apple.com/documentation/coremidi/midiciprofilemessagetype"
+    },
+    "MIDICIProfileType": {
+      "url": "https://developer.apple.com/documentation/coremidi/midiciprofiletype"
+    },
+    "MIDICIPropertyExchangeMessageType": {
+      "url": "https://developer.apple.com/documentation/coremidi/midicipropertyexchangemessagetype"
+    },
+    "MIDICVStatus": {
+      "doc": "MIDI status types.",
+      "url": "https://developer.apple.com/documentation/coremidi/midicvstatus"
+    },
+    "MIDIMessageType": {
+      "doc": "Supported MIDI message types.",
+      "url": "https://developer.apple.com/documentation/coremidi/midimessagetype"
+    },
+    "MIDINetworkConnectionPolicy": {
+      "url": "https://developer.apple.com/documentation/coremidi/midinetworkconnectionpolicy"
+    },
+    "MIDINoteAttribute": {
+      "url": "https://developer.apple.com/documentation/coremidi/midinoteattribute"
+    },
+    "MIDINotificationMessageID": {
+      "doc": "The types of state changes the system supports.",
+      "url": "https://developer.apple.com/documentation/coremidi/midinotificationmessageid",
+      "members": {
+        "kMIDIMsgIOError": {
+          "doc": "A driver I/O error occurred.",
+          "url": "https://developer.apple.com/documentation/coremidi/midinotificationmessageid/msgioerror"
+        },
+        "kMIDIMsgObjectAdded": {
+          "doc": "The system added a device, entity, or endpoint.",
+          "url": "https://developer.apple.com/documentation/coremidi/midinotificationmessageid/msgobjectadded"
+        },
+        "kMIDIMsgObjectRemoved": {
+          "doc": "The system removed a device, entity, or endpoint.",
+          "url": "https://developer.apple.com/documentation/coremidi/midinotificationmessageid/msgobjectremoved"
+        },
+        "kMIDIMsgPropertyChanged": {
+          "doc": "An object’s property value changed.",
+          "url": "https://developer.apple.com/documentation/coremidi/midinotificationmessageid/msgpropertychanged"
+        },
+        "kMIDIMsgSerialPortOwnerChanged": {
+          "doc": "The system changed a serial port owner.",
+          "url": "https://developer.apple.com/documentation/coremidi/midinotificationmessageid/msgserialportownerchanged"
+        },
+        "kMIDIMsgSetupChanged": {
+          "doc": "Some aspect of the current MIDI setup changed.",
+          "url": "https://developer.apple.com/documentation/coremidi/midinotificationmessageid/msgsetupchanged"
+        },
+        "kMIDIMsgThruConnectionsChanged": {
+          "doc": "The system created or disposed of a persistent MIDI Thru connection.",
+          "url": "https://developer.apple.com/documentation/coremidi/midinotificationmessageid/msgthruconnectionschanged"
+        }
+      }
+    },
+    "MIDIObjectType": {
+      "doc": "The MIDI object types that the system supports.",
+      "url": "https://developer.apple.com/documentation/coremidi/midiobjecttype",
+      "members": {
+        "kMIDIObjectType_Destination": {
+          "doc": "A MIDI destination.",
+          "url": "https://developer.apple.com/documentation/coremidi/midiobjecttype/destination"
+        },
+        "kMIDIObjectType_Device": {
+          "doc": "A MIDI device.",
+          "url": "https://developer.apple.com/documentation/coremidi/midiobjecttype/device"
+        },
+        "kMIDIObjectType_Entity": {
+          "doc": "A MIDI entity.",
+          "url": "https://developer.apple.com/documentation/coremidi/midiobjecttype/entity"
+        },
+        "kMIDIObjectType_ExternalDestination": {
+          "doc": "An external destination.",
+          "url": "https://developer.apple.com/documentation/coremidi/midiobjecttype/externaldestination"
+        },
+        "kMIDIObjectType_ExternalDevice": {
+          "doc": "An external device.",
+          "url": "https://developer.apple.com/documentation/coremidi/midiobjecttype/externaldevice"
+        },
+        "kMIDIObjectType_ExternalEntity": {
+          "doc": "An external entity.",
+          "url": "https://developer.apple.com/documentation/coremidi/midiobjecttype/externalentity"
+        },
+        "kMIDIObjectType_ExternalSource": {
+          "doc": "An external source.",
+          "url": "https://developer.apple.com/documentation/coremidi/midiobjecttype/externalsource"
+        },
+        "kMIDIObjectType_Other": {
+          "doc": "A MIDI object with an undefined type.",
+          "url": "https://developer.apple.com/documentation/coremidi/midiobjecttype/other"
+        },
+        "kMIDIObjectType_Source": {
+          "doc": "A MIDI source.",
+          "url": "https://developer.apple.com/documentation/coremidi/midiobjecttype/source"
+        }
+      }
+    },
+    "MIDIPerNoteManagementOptions": {
+      "url": "https://developer.apple.com/documentation/coremidi/midipernotemanagementoptions"
+    },
+    "MIDIProgramChangeOptions": {
+      "url": "https://developer.apple.com/documentation/coremidi/midiprogramchangeoptions"
+    },
+    "MIDIProtocolID": {
+      "doc": "Specifies a MIDI protocol variant.",
+      "url": "https://developer.apple.com/documentation/coremidi/midiprotocolid"
+    },
+    "MIDISysExStatus": {
+      "doc": "MIDI System Exclusive (SysEx) types.",
+      "url": "https://developer.apple.com/documentation/coremidi/midisysexstatus"
+    },
+    "MIDISystemStatus": {
+      "doc": "MIDI System status types.",
+      "url": "https://developer.apple.com/documentation/coremidi/midisystemstatus"
+    },
+    "MIDITransformControlType": {
+      "doc": "A set of values that indicate how to interpret control numbers.",
+      "url": "https://developer.apple.com/documentation/coremidi/miditransformcontroltype",
+      "members": {
+        "kMIDIControlType_14Bit": {
+          "doc": "A 14-bit control type.",
+          "url": "https://developer.apple.com/documentation/coremidi/miditransformcontroltype/controltype_14bit"
+        },
+        "kMIDIControlType_14BitNRPN": {
+          "doc": "A 14-bit Nonregistered Parameter Number (RPN).",
+          "url": "https://developer.apple.com/documentation/coremidi/miditransformcontroltype/controltype_14bitnrpn"
+        },
+        "kMIDIControlType_14BitRPN": {
+          "doc": "A 14-bit Registered Parameter Number (RPN).",
+          "url": "https://developer.apple.com/documentation/coremidi/miditransformcontroltype/controltype_14bitrpn"
+        },
+        "kMIDIControlType_7Bit": {
+          "doc": "A 7-bit control type.",
+          "url": "https://developer.apple.com/documentation/coremidi/miditransformcontroltype/controltype_7bit"
+        },
+        "kMIDIControlType_7BitNRPN": {
+          "doc": "A 7-bit Nonregistered Parameter Number (RPN).",
+          "url": "https://developer.apple.com/documentation/coremidi/miditransformcontroltype/controltype_7bitnrpn"
+        },
+        "kMIDIControlType_7BitRPN": {
+          "doc": "A 7-bit Registered Parameter Number (RPN).",
+          "url": "https://developer.apple.com/documentation/coremidi/miditransformcontroltype/controltype_7bitrpn"
+        }
+      }
+    },
+    "MIDITransformType": {
+      "doc": "Values that specify the type of MIDI transformation.",
+      "url": "https://developer.apple.com/documentation/coremidi/miditransformtype",
+      "members": {
+        "kMIDITransform_Add": {
+          "doc": "A transform that adds a parameter value.",
+          "url": "https://developer.apple.com/documentation/coremidi/miditransformtype/add"
+        },
+        "kMIDITransform_FilterOut": {
+          "doc": "A transformation that filters out an event type.",
+          "url": "https://developer.apple.com/documentation/coremidi/miditransformtype/filterout"
+        },
+        "kMIDITransform_MapControl": {
+          "doc": "A transformation that changes a specified control number to a supplied parameter value.",
+          "url": "https://developer.apple.com/documentation/coremidi/miditransformtype/mapcontrol"
+        },
+        "kMIDITransform_MapValue": {
+          "doc": "A transform that maps one value to another.",
+          "url": "https://developer.apple.com/documentation/coremidi/miditransformtype/mapvalue"
+        },
+        "kMIDITransform_MaxValue": {
+          "doc": "A transform that sets the maximum value to the specified parameter value.",
+          "url": "https://developer.apple.com/documentation/coremidi/miditransformtype/maxvalue"
+        },
+        "kMIDITransform_MinValue": {
+          "doc": "A transform that sets the minimum value to the specified parameter value.",
+          "url": "https://developer.apple.com/documentation/coremidi/miditransformtype/minvalue"
+        },
+        "kMIDITransform_None": {
+          "doc": "No transformation.",
+          "url": "https://developer.apple.com/documentation/coremidi/miditransformtype/none"
+        },
+        "kMIDITransform_Scale": {
+          "doc": "A transform that multiplies by the specified parameter value.",
+          "url": "https://developer.apple.com/documentation/coremidi/miditransformtype/scale"
+        }
+      }
+    },
+    "MIDIUMPCIObjectBackingType": {
+      "url": "https://developer.apple.com/documentation/coremidi/midiumpciobjectbackingtype"
+    },
+    "MIDIUMPFunctionBlockDirection": {
+      "url": "https://developer.apple.com/documentation/coremidi/midiumpfunctionblockdirection"
+    },
+    "MIDIUMPFunctionBlockMIDI1Info": {
+      "url": "https://developer.apple.com/documentation/coremidi/midiumpfunctionblockmidi1info"
+    },
+    "MIDIUMPFunctionBlockUIHint": {
+      "url": "https://developer.apple.com/documentation/coremidi/midiumpfunctionblockuihint"
+    },
+    "MIDIUMPProtocolOptions": {
+      "url": "https://developer.apple.com/documentation/coremidi/midiumpprotocoloptions"
+    },
+    "MIDIUtilityStatus": {
+      "url": "https://developer.apple.com/documentation/coremidi/midiutilitystatus"
+    },
+    "UMPStreamMessageFormat": {
+      "url": "https://developer.apple.com/documentation/coremidi/umpstreammessageformat"
+    },
+    "UMPStreamMessageStatus": {
+      "url": "https://developer.apple.com/documentation/coremidi/umpstreammessagestatus"
+    }
+  },
+  "structs": {
+    "MIDI2DeviceManufacturer": {
+      "url": "https://developer.apple.com/documentation/coremidi/midi2devicemanufacturer"
+    },
+    "MIDI2DeviceRevisionLevel": {
+      "url": "https://developer.apple.com/documentation/coremidi/midi2devicerevisionlevel"
+    },
+    "MIDICIDeviceIdentification": {
+      "doc": "A structure that describes a MIDI-CI device.",
+      "url": "https://developer.apple.com/documentation/coremidi/midicideviceidentification"
+    },
+    "MIDICIProfileIDManufacturerSpecific": {
+      "url": "https://developer.apple.com/documentation/coremidi/midiciprofileidmanufacturerspecific"
+    },
+    "MIDICIProfileIDStandard": {
+      "url": "https://developer.apple.com/documentation/coremidi/midiciprofileidstandard"
+    },
+    "MIDIControlTransform": {
+      "doc": "A structure that describes the transformation of MIDI control change events.",
+      "url": "https://developer.apple.com/documentation/coremidi/midicontroltransform"
+    },
+    "MIDIDriverInterface": {
+      "doc": "The interface to a MIDI driver.",
+      "url": "https://developer.apple.com/documentation/coremidi/mididriverinterface"
+    },
+    "MIDIEventList": {
+      "doc": "A variable-length list of MIDI event packets.",
+      "url": "https://developer.apple.com/documentation/coremidi/midieventlist"
+    },
+    "MIDIEventPacket": {
+      "doc": "A series of simultaneous MIDI events in Universal MIDI Packets (UMP) format.",
+      "url": "https://developer.apple.com/documentation/coremidi/midieventpacket"
+    },
+    "MIDIIOErrorNotification": {
+      "doc": "A general I/O error notification.",
+      "url": "https://developer.apple.com/documentation/coremidi/midiioerrornotification"
+    },
+    "MIDIMessage_128": {
+      "doc": "A 128-bit MIDI message.",
+      "url": "https://developer.apple.com/documentation/coremidi/midimessage_128"
+    },
+    "MIDIMessage_64": {
+      "doc": "A 64-bit MIDI message.",
+      "url": "https://developer.apple.com/documentation/coremidi/midimessage_64"
+    },
+    "MIDIMessage_96": {
+      "doc": "A 96-bit MIDI message.",
+      "url": "https://developer.apple.com/documentation/coremidi/midimessage_96"
+    },
+    "MIDINotification": {
+      "doc": "A message that describes a system state change.",
+      "url": "https://developer.apple.com/documentation/coremidi/midinotification"
+    },
+    "MIDIObjectAddRemoveNotification": {
+      "doc": "A message that describes the addition or removal of an object.",
+      "url": "https://developer.apple.com/documentation/coremidi/midiobjectaddremovenotification"
+    },
+    "MIDIObjectPropertyChangeNotification": {
+      "doc": "A message that describes the change to an object property.",
+      "url": "https://developer.apple.com/documentation/coremidi/midiobjectpropertychangenotification"
+    },
+    "MIDIPacket": {
+      "doc": "A collection of simultaneous MIDI events.",
+      "url": "https://developer.apple.com/documentation/coremidi/midipacket"
+    },
+    "MIDIPacketList": {
+      "doc": "A list of MIDI events the system sends to or receives from an endpoint.",
+      "url": "https://developer.apple.com/documentation/coremidi/midipacketlist"
+    },
+    "MIDISysexSendRequest": {
+      "doc": "A request to asynchronously send a single system-exclusive (SysEx) event to a destination.",
+      "url": "https://developer.apple.com/documentation/coremidi/midisysexsendrequest"
+    },
+    "MIDISysexSendRequestUMP": {
+      "doc": "A request to asynchronously send a single universal MIDI packet (UMP) system-exclusive (SysEx) event to a destination.",
+      "url": "https://developer.apple.com/documentation/coremidi/midisysexsendrequestump"
+    },
+    "MIDIThruConnectionEndpoint": {
+      "doc": "A source or destination in a MIDI thru connection.",
+      "url": "https://developer.apple.com/documentation/coremidi/midithruconnectionendpoint"
+    },
+    "MIDIThruConnectionParams": {
+      "doc": "A set of MIDI routings and transformations.",
+      "url": "https://developer.apple.com/documentation/coremidi/midithruconnectionparams"
+    },
+    "MIDITransform": {
+      "doc": "The transformation of a single type of MIDI event.",
+      "url": "https://developer.apple.com/documentation/coremidi/miditransform"
+    },
+    "MIDIUniversalMessage": {
+      "url": "https://developer.apple.com/documentation/coremidi/midiuniversalmessage"
+    },
+    "MIDIValueMap": {
+      "doc": "A custom lookup table to transform MIDI 7-bit values, as contained in note numbers, velocities, control values, and so on.",
+      "url": "https://developer.apple.com/documentation/coremidi/midivaluemap"
+    }
+  },
+  "methods": {
+    "MIDICIDeviceInfo": {
+      "-initWithDestination:manufacturer:family:model:revision:": {
+        "doc": "Creates a new device information instance.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicideviceinfo/init(destination:manufacturer:family:model:revision:)"
+      }
+    },
+    "MIDICIDiscoveryManager": {
+      "+sharedInstance": {
+        "doc": "Returns the singleton discovery manager instance.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicidiscoverymanager/sharedinstance()"
+      },
+      "-discoverWithHandler:": {
+        "doc": "Discovers the available MIDI-CI nodes.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicidiscoverymanager/discover(handler:)"
+      }
+    },
+    "MIDICIProfile": {
+      "-initWithData:": {
+        "doc": "Creates a MIDI profile for the specified data.",
+        "url": "https://developer.apple.com/documentation/coremidi/midiciprofile/init(data:)"
+      },
+      "-initWithData:name:": {
+        "doc": "Creates a named MIDI profile for the specified data.",
+        "url": "https://developer.apple.com/documentation/coremidi/midiciprofile/init(data:name:)"
+      }
+    },
+    "MIDICIProfileState": {
+      "-initWithChannel:enabledProfiles:disabledProfiles:": {
+        "doc": "Creates a new profile state object for the specified MIDI channel and profiles.",
+        "url": "https://developer.apple.com/documentation/coremidi/midiciprofilestate/init(channel:enabledprofiles:disabledprofiles:)"
+      },
+      "-initWithEnabledProfiles:disabledProfiles:": {
+        "doc": "Creates a new profile state object for the specified profiles.",
+        "url": "https://developer.apple.com/documentation/coremidi/midiciprofilestate/init(enabledprofiles:disabledprofiles:)"
+      }
+    },
+    "MIDICIResponder": {
+      "-initWithDeviceInfo:profileDelegate:profileStates:supportProperties:": {
+        "doc": "Creates a new responder.",
+        "url": "https://developer.apple.com/documentation/coremidi/midiciresponder/init(deviceinfo:profiledelegate:profilestates:supportproperties:)"
+      },
+      "-notifyProfile:onChannel:isEnabled:": {
+        "doc": "Enables or disables a profile and notifies all connected initiators.",
+        "url": "https://developer.apple.com/documentation/coremidi/midiciresponder/notify(_:onchannel:isenabled:)"
+      },
+      "-sendProfile:onChannel:profileData:": {
+        "doc": "Sends profile-specific data to all connected initiators.",
+        "url": "https://developer.apple.com/documentation/coremidi/midiciresponder/send(_:onchannel:profiledata:)"
+      },
+      "-start": {
+        "doc": "Starts receiving initiator requests.",
+        "url": "https://developer.apple.com/documentation/coremidi/midiciresponder/start()"
+      },
+      "-stop": {
+        "doc": "Stops receiving initiator requests and disconnects all connected initiators.",
+        "url": "https://developer.apple.com/documentation/coremidi/midiciresponder/stop()"
+      }
+    },
+    "MIDICISession": {
+      "-disableProfile:onChannel:error:": {
+        "doc": "Performs an asynchronous request to disable a profile for a specific MIDI channel number.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicisession/disableprofile(_:onchannel:)"
+      },
+      "-enableProfile:onChannel:error:": {
+        "doc": "Performs an asynchronous request to enable a profile for a specific MIDI channel number.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicisession/enable(_:onchannel:)"
+      },
+      "-initWithDiscoveredNode:dataReadyHandler:disconnectHandler:": {
+        "doc": "Creates a MIDI-CI session.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicisession/init(discoverednode:datareadyhandler:disconnecthandler:)"
+      },
+      "-profileStateForChannel:": {
+        "doc": "Returns the profile state for the specified MIDI channel number.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicisession/profilestate(forchannel:)"
+      },
+      "-sendProfile:onChannel:profileData:": {
+        "doc": "Sends profile-specific data to the MIDI-CI session.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicisession/send(_:onchannel:profiledata:)"
+      }
+    },
+    "MIDINetworkConnection": {
+      "+connectionWithHost:": {
+        "doc": "Creates a connection to the specified host.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworkconnection/init(host:)"
+      }
+    },
+    "MIDINetworkHost": {
+      "+hostWithName:address:port:": {
+        "doc": "Creates a host with the specified name, adress, and port.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworkhost/init(name:address:port:)"
+      },
+      "+hostWithName:netService:": {
+        "doc": "Creates a host with the specified name and net service.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworkhost/init(name:netservice:)"
+      },
+      "+hostWithName:netServiceName:netServiceDomain:": {
+        "doc": "Creates a host with the specified name, net service name, and domain.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworkhost/init(name:netservicename:netservicedomain:)"
+      },
+      "-hasSameAddressAs:": {
+        "doc": "Compares this host instance with another to see if they share the same address value.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworkhost/hassameaddress(as:)"
+      }
+    },
+    "MIDINetworkSession": {
+      "+defaultSession": {
+        "doc": "Returns the default singleton session.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworksession/default()"
+      },
+      "-addConnection:": {
+        "doc": "Adds a new connection to this session.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworksession/addconnection(_:)"
+      },
+      "-addContact:": {
+        "doc": "Adds a host as a contact.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworksession/addcontact(_:)"
+      },
+      "-connections": {
+        "doc": "Returns the session’s set of MIDI network connections.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworksession/connections()"
+      },
+      "-contacts": {
+        "doc": "Returns the array of network hosts.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworksession/contacts()"
+      },
+      "-destinationEndpoint": {
+        "doc": "Returns the session’s destination endpoint.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworksession/destinationendpoint()"
+      },
+      "-removeConnection:": {
+        "doc": "Removes a connection from this session.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworksession/removeconnection(_:)"
+      },
+      "-removeContact:": {
+        "doc": "Removes a host as a contact.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworksession/removecontact(_:)"
+      },
+      "-sourceEndpoint": {
+        "doc": "Returns the session’s source endpoint.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworksession/sourceendpoint()"
+      }
+    }
+  },
+  "properties": {
+    "MIDICIDeviceInfo": {
+      "family": {
+        "doc": "The family to which the device belongs.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicideviceinfo/family"
+      },
+      "manufacturerID": {
+        "doc": "The MIDI System Exclusive (SysEx) ID of the device manufacturer.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicideviceinfo/manufacturerid"
+      },
+      "midiDestination": {
+        "doc": "The MIDI destination the device’s MIDI entity uses for capability inquiries.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicideviceinfo/mididestination"
+      },
+      "modelNumber": {
+        "doc": "The model number of the device.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicideviceinfo/modelnumber"
+      },
+      "revisionLevel": {
+        "doc": "The revision number of the device model number.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicideviceinfo/revisionlevel"
+      }
+    },
+    "MIDICIDiscoveredNode": {
+      "destination": {
+        "doc": "The node’s MIDI destination.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicidiscoverednode/destination"
+      },
+      "deviceInfo": {
+        "doc": "The available MIDI-CI device information.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicidiscoverednode/deviceinfo"
+      },
+      "maximumSysExSize": {
+        "doc": "The maximum size of a System Exclusive (SysEx) message this node supports.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicidiscoverednode/maximumsysexsize"
+      },
+      "supportsProfiles": {
+        "doc": "A Boolean value that indicates whether this node supports MIDI-CI profiles.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicidiscoverednode/supportsprofiles"
+      },
+      "supportsProperties": {
+        "doc": "A Boolean value that indicates whether this node supports MIDI-CI properties.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicidiscoverednode/supportsproperties"
+      }
+    },
+    "MIDICIProfile": {
+      "name": {
+        "doc": "A string that describes the profile.",
+        "url": "https://developer.apple.com/documentation/coremidi/midiciprofile/name"
+      },
+      "profileID": {
+        "doc": "The unique five-byte profile identifier that represents the profile.",
+        "url": "https://developer.apple.com/documentation/coremidi/midiciprofile/profileid"
+      }
+    },
+    "MIDICIProfileState": {
+      "disabledProfiles": {
+        "doc": "The object’s disabled profiles.",
+        "url": "https://developer.apple.com/documentation/coremidi/midiciprofilestate/disabledprofiles"
+      },
+      "enabledProfiles": {
+        "doc": "The object’s enabled profiles.",
+        "url": "https://developer.apple.com/documentation/coremidi/midiciprofilestate/enabledprofiles"
+      },
+      "midiChannel": {
+        "doc": "The MIDI channel to which this state applies.",
+        "url": "https://developer.apple.com/documentation/coremidi/midiciprofilestate/midichannel"
+      }
+    },
+    "MIDICIResponder": {
+      "deviceInfo": {
+        "doc": "The MIDI-CI device’s information.",
+        "url": "https://developer.apple.com/documentation/coremidi/midiciresponder/deviceinfo"
+      },
+      "initiators": {
+        "doc": "An array of initiators.",
+        "url": "https://developer.apple.com/documentation/coremidi/midiciresponder/initiators"
+      },
+      "profileDelegate": {
+        "doc": "The profile delegate.",
+        "url": "https://developer.apple.com/documentation/coremidi/midiciresponder/profiledelegate"
+      }
+    },
+    "MIDICISession": {
+      "deviceInfo": {
+        "doc": "Information about a MIDI-CI device.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicisession/deviceinfo"
+      },
+      "maxPropertyRequests": {
+        "doc": "The maximum number of simultaneous property exchange requests, if supported.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicisession/maxpropertyrequests"
+      },
+      "maxSysExSize": {
+        "doc": "The maximum size of System Exclusive (SysEx) messages.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicisession/maxsysexsize"
+      },
+      "midiDestination": {
+        "doc": "The MIDI destination with which the session is communicating.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicisession/mididestination"
+      },
+      "profileChangedCallback": {
+        "doc": "An optional block the system calls after it enables or disables a profile.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicisession/profilechangedcallback"
+      },
+      "profileSpecificDataHandler": {
+        "doc": "An optional block the system calls when a device sends profile-specific data to the session.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicisession/profilespecificdatahandler"
+      },
+      "supportsProfileCapability": {
+        "doc": "A Boolean value that indicates whether the entity supports the MIDI-CI profile’s capability.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicisession/supportsprofilecapability"
+      },
+      "supportsPropertyCapability": {
+        "doc": "A Boolean value that indicates whether the entity supports the MIDI-CI property exchange capability.",
+        "url": "https://developer.apple.com/documentation/coremidi/midicisession/supportspropertycapability"
+      }
+    },
+    "MIDINetworkConnection": {
+      "host": {
+        "doc": "The host connection.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworkconnection/host"
+      }
+    },
+    "MIDINetworkHost": {
+      "address": {
+        "doc": "The host address.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworkhost/address"
+      },
+      "name": {
+        "doc": "The host name.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworkhost/name"
+      },
+      "netServiceDomain": {
+        "doc": "The net service domain.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworkhost/netservicedomain"
+      },
+      "netServiceName": {
+        "doc": "The net service name.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworkhost/netservicename"
+      },
+      "port": {
+        "doc": "The host port.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworkhost/port"
+      }
+    },
+    "MIDINetworkSession": {
+      "connectionPolicy": {
+        "doc": "The policy that determines who can connect to this session.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworksession/connectionpolicy"
+      },
+      "enabled": {
+        "doc": "A Boolean value that determines whether the session is enabled.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworksession/isenabled"
+      },
+      "localName": {
+        "doc": "The name of this session’s entity.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworksession/localname"
+      },
+      "networkName": {
+        "doc": "The name with which this session advertises itself over Bonjour.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworksession/networkname"
+      },
+      "networkPort": {
+        "doc": "The session’s UDP port.",
+        "url": "https://developer.apple.com/documentation/coremidi/midinetworksession/networkport"
+      }
+    }
+  }
+}

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A device that routes network requests through the host computer and performs network address translation on the resulting packets.
+//
 // NATNetworkDeviceAttachment wraps [raw.VZNATNetworkDeviceAttachment] with a fluent Go API.
 type NATNetworkDeviceAttachment struct {
 	inner *raw.VZNATNetworkDeviceAttachment

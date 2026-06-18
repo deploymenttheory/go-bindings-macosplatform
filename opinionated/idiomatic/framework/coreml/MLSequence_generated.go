@@ -37,6 +37,8 @@ func NewSequence() *Sequence {
 	return &Sequence{inner: raw.MLSequenceFromID(_id)}
 }
 
+// Type of values held
+//
 // Type calls the underlying Type.
 func (x *Sequence) Type() MLFeatureType {
 	return MLFeatureType(x.inner.Type())

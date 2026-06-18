@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A storage device attachment that uses a disk to store data.
+//
 // DiskBlockDeviceStorageDeviceAttachment wraps [raw.VZDiskBlockDeviceStorageDeviceAttachment] with a fluent Go API.
 type DiskBlockDeviceStorageDeviceAttachment struct {
 	inner *raw.VZDiskBlockDeviceStorageDeviceAttachment
@@ -34,6 +36,8 @@ func DiskBlockDeviceStorageDeviceAttachmentFromID(id objc.ID) *DiskBlockDeviceSt
 	return &DiskBlockDeviceStorageDeviceAttachment{inner: raw.VZDiskBlockDeviceStorageDeviceAttachmentFromID(id)}
 }
 
+// Creates a new block storage device attachment from a file handle and with the specified access mode, synchronization mode, and error object that you provide.
+//
 // NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizationModeError creates a new [DiskBlockDeviceStorageDeviceAttachment].
 func NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizationModeError(fileHandle *foundation.NSFileHandle, readOnly bool, synchronizationMode VZDiskSynchronizationMode) (*DiskBlockDeviceStorageDeviceAttachment, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZDiskBlockDeviceStorageDeviceAttachment")), objc.RegisterName("alloc"))
@@ -45,16 +49,22 @@ func NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizat
 	return &DiskBlockDeviceStorageDeviceAttachment{inner: raw.VZDiskBlockDeviceStorageDeviceAttachmentFromID(_id)}, nil
 }
 
+// @abstract File handle to the underlying disk used for storage by the attachment.
+//
 // FileHandle calls the underlying FileHandle.
 func (x *DiskBlockDeviceStorageDeviceAttachment) FileHandle() *foundation.NSFileHandle {
 	return x.inner.FileHandle()
 }
 
+// @abstract Whether the underlying disk attachment is read-only.
+//
 // IsReadOnly calls the underlying IsReadOnly.
 func (x *DiskBlockDeviceStorageDeviceAttachment) IsReadOnly() bool {
 	return x.inner.IsReadOnly()
 }
 
+// @abstract The mode in which the disk image synchronizes data with the underlying storage device.
+//
 // SynchronizationMode calls the underlying SynchronizationMode.
 func (x *DiskBlockDeviceStorageDeviceAttachment) SynchronizationMode() VZDiskSynchronizationMode {
 	return VZDiskSynchronizationMode(x.inner.SynchronizationMode())

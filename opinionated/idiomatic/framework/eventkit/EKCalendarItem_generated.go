@@ -38,12 +38,16 @@ func NewCalendarItem() *CalendarItem {
 	return &CalendarItem{inner: raw.EKCalendarItemFromID(_id)}
 }
 
+// @property calendar @abstract The calendar that this calendar item belongs to. @discussion This will be nil for new calendar items until you set it.
+//
 // WithCalendar sets the calendar property and returns the receiver for chaining.
 func (x *CalendarItem) WithCalendar(calendar *Calendar) *CalendarItem {
 	x.inner.SetCalendar(calendar.Unwrap())
 	return x
 }
 
+// @property title @abstract The title of this calendar item. @discussion This will be an empty string for new calendar items until you set it.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *CalendarItem) WithTitle(title string) *CalendarItem {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
@@ -92,6 +96,8 @@ func (x *CalendarItem) WithAlarms(items ...*raw.EKAlarm) *CalendarItem {
 	return x
 }
 
+// @property   recurrenceRules @abstract   An array of EKRecurrenceRules, or nil if none.
+//
 // WithRecurrenceRules sets the collection, converting the Go slice to an NSArray.
 func (x *CalendarItem) WithRecurrenceRules(items ...*raw.EKRecurrenceRule) *CalendarItem {
 	if len(items) == 0 {
@@ -110,11 +116,15 @@ func (x *CalendarItem) WithRecurrenceRules(items ...*raw.EKRecurrenceRule) *Cale
 	return x
 }
 
+// @method     addAlarm: @abstract   Adds an alarm to this item. @discussion This method add an alarm to an item. Be warned that some calendars can only allow a certain maximum number of alarms. When this item is saved, it will truncate any extra alarms from the array.
+//
 // AddAlarm calls the underlying AddAlarm.
 func (x *CalendarItem) AddAlarm(alarm *raw.EKAlarm) {
 	x.inner.AddAlarm(alarm)
 }
 
+// @method     removeAlarm: @abstract   Removes an alarm from this item.
+//
 // RemoveAlarm calls the underlying RemoveAlarm.
 func (x *CalendarItem) RemoveAlarm(alarm *raw.EKAlarm) {
 	x.inner.RemoveAlarm(alarm)
@@ -130,6 +140,8 @@ func (x *CalendarItem) RemoveRecurrenceRule(rule *raw.EKRecurrenceRule) {
 	x.inner.RemoveRecurrenceRule(rule)
 }
 
+// @property calendar @abstract The calendar that this calendar item belongs to. @discussion This will be nil for new calendar items until you set it.
+//
 // Calendar calls the underlying Calendar.
 func (x *CalendarItem) Calendar() *Calendar {
 	_r := x.inner.Calendar()
@@ -144,6 +156,8 @@ func (x *CalendarItem) SetCalendar(calendar *raw.EKCalendar) {
 	x.inner.SetCalendar(calendar)
 }
 
+// @property   calendarItemIdentifier @abstract   A unique identifier for a calendar item. @discussion Item identifiers are not sync-proof in that a full sync will lose this identifier, so you should always have a back up plan for dealing with a reminder that is no longer fetchable by this property, e.g. by title, etc. Use [EKEventStore calendarItemWithIdentifier:] to look up the item by this value.
+//
 // CalendarItemIdentifier calls the underlying CalendarItemIdentifier.
 func (x *CalendarItem) CalendarItemIdentifier() string {
 	_r := x.inner.CalendarItemIdentifier()
@@ -153,6 +167,8 @@ func (x *CalendarItem) CalendarItemIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property   calendarItemExternalIdentifier @abstract   A server-provided identifier for this calendar item @discussion This identifier, provided by the server, allows you to reference the same event or reminder across multiple devices. For calendars stored locally on the device, including the birthday calendar, it simply passes through to calendarItemIdentifier. This identifier is unique as of creation for every calendar item.  However, there are some cases where duplicate copies of a calendar item can exist in the same database, including: - A calendar item was imported from an ICS file into multiple calendars - An event was created in a calendar shared with the user and the user was also invited to the event - The user is a delegate of a calendar that also has this event - A subscribed calendar was added to multiple accounts In such cases, you should choose between calendar items based on other factors, such as the calendar or source. This identifier is the same for all occurrences of a recurring event. If you wish to differentiate between occurrences, you may want to use the start date. This may be nil for new calendar items that do not yet belong to a calendar. In addition, there are two caveats for Exchange-based calendars: - This identifier will be different between EventKit on iOS versus OS X - This identifier will be different between devices for EKReminders
+//
 // CalendarItemExternalIdentifier calls the underlying CalendarItemExternalIdentifier.
 func (x *CalendarItem) CalendarItemExternalIdentifier() string {
 	_r := x.inner.CalendarItemExternalIdentifier()
@@ -162,6 +178,8 @@ func (x *CalendarItem) CalendarItemExternalIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property title @abstract The title of this calendar item. @discussion This will be an empty string for new calendar items until you set it.
+//
 // Title calls the underlying Title.
 func (x *CalendarItem) Title() string {
 	_r := x.inner.Title()
@@ -281,6 +299,8 @@ func (x *CalendarItem) SetAlarms(alarms *foundation.NSArray[*raw.EKAlarm]) {
 	x.inner.SetAlarms(alarms)
 }
 
+// @property   recurrenceRules @abstract   An array of EKRecurrenceRules, or nil if none.
+//
 // RecurrenceRules returns the collection as a Go slice.
 func (x *CalendarItem) RecurrenceRules() []*RecurrenceRule {
 	arr := x.inner.RecurrenceRules()

@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// @brief
+//
 // HumanBodyRecognizedPoint3D wraps [raw.VNHumanBodyRecognizedPoint3D] with a fluent Go API.
 type HumanBodyRecognizedPoint3D struct {
 	inner *raw.VNHumanBodyRecognizedPoint3D

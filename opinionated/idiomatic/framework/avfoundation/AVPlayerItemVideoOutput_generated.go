@@ -46,6 +46,8 @@ func NewPlayerItemVideoOutputWithOutputSettings(outputSettings *foundation.NSDic
 	return &PlayerItemVideoOutput{inner: raw.AVPlayerItemVideoOutputFromID(_id)}
 }
 
+// @property		suppressesPlayerRendering @abstract		Indicates whether the output, when added to an AVPlayerItem, will be used in addition to normal rendering of media data by the player or instead of normal rendering. @discussion The default value is NO, indicating that the output will be used in addition to normal rendering. If you want to render the media data provided by the output yourself instead of allowing it to be rendered as in normally would be by AVPlayer, set suppressesPlayerRendering to YES. Whenever any output is added to an AVPlayerItem that has suppressesPlayerRendering set to YES, the media data supplied to the output will not be rendered by AVPlayer. Other media data associated with the item but not provided to such an output is not affected. For example, if an output of class AVPlayerItemVideoOutput with a value of YES for suppressesPlayerRendering is added to an AVPlayerItem, video media for that item will not be rendered by the AVPlayer, while audio media, subtitle media, and other kinds of media, if present, will be rendered.
+//
 // WithSuppressesPlayerRendering sets the suppressesPlayerRendering property and returns the receiver for chaining.
 func (x *PlayerItemVideoOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemVideoOutput {
 	x.inner.AVPlayerItemOutput.SetSuppressesPlayerRendering(suppressesPlayerRendering)
@@ -72,6 +74,8 @@ func (x *PlayerItemVideoOutput) RequestNotificationOfMediaDataChangeWithAdvanceI
 	x.inner.RequestNotificationOfMediaDataChangeWithAdvanceInterval(interval)
 }
 
+// @property		delegate @abstract		The receiver's delegate.
+//
 // Delegate calls the underlying Delegate.
 func (x *PlayerItemVideoOutput) Delegate() raw.AVPlayerItemOutputPullDelegate {
 	return x.inner.Delegate()

@@ -37,6 +37,8 @@ func NewCharacteristic() *Characteristic {
 	return &Characteristic{inner: raw.CBCharacteristicFromID(_id)}
 }
 
+// @property service @discussion A back-pointer to the service this characteristic belongs to.
+//
 // Service calls the underlying Service.
 func (x *Characteristic) Service() *Service {
 	_r := x.inner.Service()
@@ -46,16 +48,22 @@ func (x *Characteristic) Service() *Service {
 	return &Service{inner: _r}
 }
 
+// @property properties @discussion The properties of the characteristic.
+//
 // Properties calls the underlying Properties.
 func (x *Characteristic) Properties() CBCharacteristicProperties {
 	return CBCharacteristicProperties(x.inner.Properties())
 }
 
+// @property value @discussion The value of the characteristic.
+//
 // Value calls the underlying Value.
 func (x *Characteristic) Value() *foundation.NSData {
 	return x.inner.Value()
 }
 
+// @property descriptors @discussion A list of the CBDescriptors that have so far been discovered in this characteristic.
+//
 // Descriptors returns the collection as a Go slice.
 func (x *Characteristic) Descriptors() []*Descriptor {
 	arr := x.inner.Descriptors()
@@ -67,11 +75,15 @@ func (x *Characteristic) Descriptors() []*Descriptor {
 	})
 }
 
+// @property isBroadcasted @discussion Whether the characteristic is currently broadcasted or not.
+//
 // IsBroadcasted calls the underlying IsBroadcasted.
 func (x *Characteristic) IsBroadcasted() bool {
 	return x.inner.IsBroadcasted()
 }
 
+// @property isNotifying @discussion Whether the characteristic is currently notifying or not.
+//
 // IsNotifying calls the underlying IsNotifying.
 func (x *Characteristic) IsNotifying() bool {
 	return x.inner.IsNotifying()

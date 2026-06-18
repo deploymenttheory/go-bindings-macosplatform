@@ -38,6 +38,8 @@ func NewProjectSectionContent() *ProjectSectionContent {
 	return &ProjectSectionContent{inner: raw.PHProjectSectionContentFromID(_id)}
 }
 
+// Array of asset, text, or journal entry elements contained in the content.
+//
 // Elements returns the collection as a Go slice.
 func (x *ProjectSectionContent) Elements() []*ProjectElement {
 	arr := x.inner.Elements()
@@ -49,16 +51,22 @@ func (x *ProjectSectionContent) Elements() []*ProjectElement {
 	})
 }
 
+// The suggested layout of the content is provided in resolution-independent "grid space" units where one grid space is the width of the defined project canvas divided by numberOfColumns. If a project represents a "fixed layout" (e.g., it was created from an existing Apple Book, Card, or Calendar) the specified numberOfColumns will always be 1.
+//
 // NumberOfColumns calls the underlying NumberOfColumns.
 func (x *ProjectSectionContent) NumberOfColumns() int {
 	return x.inner.NumberOfColumns()
 }
 
+// Overall aspect ratio of the full content layout (width/height) to enable faithful replication in the project's layout.
+//
 // AspectRatio calls the underlying AspectRatio.
 func (x *ProjectSectionContent) AspectRatio() float64 {
 	return x.inner.AspectRatio()
 }
 
+// Convenience for getting a single array of all cloud asset identifiers referenced in the content without needing to enumerate elements.
+//
 // CloudAssetIdentifiers returns the collection as a Go slice.
 func (x *ProjectSectionContent) CloudAssetIdentifiers() []*photos.PHCloudIdentifier {
 	arr := x.inner.CloudAssetIdentifiers()
@@ -70,6 +78,8 @@ func (x *ProjectSectionContent) CloudAssetIdentifiers() []*photos.PHCloudIdentif
 	})
 }
 
+// Background color of the section content. This property is only used when the user creates a new project from an existing Apple Print Product
+//
 // BackgroundColor calls the underlying BackgroundColor.
 func (x *ProjectSectionContent) BackgroundColor() *appkit.NSColor {
 	return x.inner.BackgroundColor()

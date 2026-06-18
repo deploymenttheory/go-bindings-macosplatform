@@ -37,21 +37,29 @@ func NewNetworkingProcess() *NetworkingProcess {
 	return &NetworkingProcess{inner: raw.BENetworkingProcessFromID(_id)}
 }
 
+// Stops the extension process. When you call this method, you tell the system your app no longer needs this extension process. The system will terminate the extension process.
+//
 // Invalidate calls the underlying Invalidate.
 func (x *NetworkingProcess) Invalidate() {
 	x.inner.Invalidate()
 }
 
+// Creates a new libXPC connection to the extension process. This method creates a connection to the extension process and returns it. If it is not possible to make an XPC connection, this method will return nil and populate the `error` out param. - Returns: The connection object representing the created libXPC connection or nil.
+//
 // MakeLibXPCConnectionError calls the underlying MakeLibXPCConnectionError.
 func (x *NetworkingProcess) MakeLibXPCConnectionError() (*foundation.NSObject, error) {
 	return x.inner.MakeLibXPCConnectionError()
 }
 
+// Grants the specified capability to the process. This method grants the specified capability to the process or returns nil and an error if it can not be granted. - Parameters: - capability: The capability to be granted - error: The error out param populated if the capability cannot be granted. - Returns: an invalidatable grant object that represents the granted capability.
+//
 // GrantCapabilityError calls the underlying GrantCapabilityError.
 func (x *NetworkingProcess) GrantCapabilityError(capability *raw.BEProcessCapability) (raw.BEProcessCapabilityGrant, error) {
 	return x.inner.GrantCapabilityError(capability)
 }
 
+// Grants the specified capability to the process with invalidation handler. This method grants the specified capability to the process or returns nil and an error if it can not be granted. - Parameters: - capability: The capability to be granted - error: The error out param populated if the capability cannot be granted. - invalidationHandler: The invalidation handler - Returns: an invalidatable grant object that represents the granted capability.
+//
 // GrantCapabilityErrorInvalidationHandler calls the underlying GrantCapabilityErrorInvalidationHandler.
 func (x *NetworkingProcess) GrantCapabilityErrorInvalidationHandler(capability *raw.BEProcessCapability, error_ unsafe.Pointer, invalidationHandler func()) raw.BEProcessCapabilityGrant {
 	return x.inner.GrantCapabilityErrorInvalidationHandler(capability, error_, invalidationHandler)

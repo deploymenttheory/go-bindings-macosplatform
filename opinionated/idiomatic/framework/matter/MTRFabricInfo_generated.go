@@ -37,26 +37,36 @@ func NewMTRFabricInfo() *MTRFabricInfo {
 	return &MTRFabricInfo{inner: raw.MTRFabricInfoFromID(_id)}
 }
 
+// Root public key for the fabric.
+//
 // RootPublicKey calls the underlying RootPublicKey.
 func (x *MTRFabricInfo) RootPublicKey() *foundation.NSData {
 	return x.inner.RootPublicKey()
 }
 
+// Vendor identifier for the fabric.
+//
 // VendorID calls the underlying VendorID.
 func (x *MTRFabricInfo) VendorID() *foundation.NSNumber {
 	return x.inner.VendorID()
 }
 
+// Fabric identifier (scoped to the root public key) for the fabric.
+//
 // FabricID calls the underlying FabricID.
 func (x *MTRFabricInfo) FabricID() *foundation.NSNumber {
 	return x.inner.FabricID()
 }
 
+// Node identifier for the given node on the fabric.
+//
 // NodeID calls the underlying NodeID.
 func (x *MTRFabricInfo) NodeID() *foundation.NSNumber {
 	return x.inner.NodeID()
 }
 
+// The string label for the fabric.  May be empty.
+//
 // Label calls the underlying Label.
 func (x *MTRFabricInfo) Label() string {
 	_r := x.inner.Label()
@@ -66,36 +76,50 @@ func (x *MTRFabricInfo) Label() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The root certificate for the fabric.  This might be nil if a root certificate is not available (e.g. if this is information about some remote node that we don't have root certificate information for).
+//
 // RootCertificate calls the underlying RootCertificate.
 func (x *MTRFabricInfo) RootCertificate() *foundation.NSData {
 	return x.inner.RootCertificate()
 }
 
+// The same root certificate as rootCertificate, in Matter TLV format.
+//
 // RootCertificateTLV calls the underlying RootCertificateTLV.
 func (x *MTRFabricInfo) RootCertificateTLV() *foundation.NSData {
 	return x.inner.RootCertificateTLV()
 }
 
+// The intermediate certificate for the node.  This might be nil if there is no intermediate certificate, or if the node is not on a fabric we have access to.
+//
 // IntermediateCertificate calls the underlying IntermediateCertificate.
 func (x *MTRFabricInfo) IntermediateCertificate() *foundation.NSData {
 	return x.inner.IntermediateCertificate()
 }
 
+// The same intermediate certificate as intermediateCertificate, in Matter TLV format.
+//
 // IntermediateCertificateTLV calls the underlying IntermediateCertificateTLV.
 func (x *MTRFabricInfo) IntermediateCertificateTLV() *foundation.NSData {
 	return x.inner.IntermediateCertificateTLV()
 }
 
+// The operational certificate for the node.  This might be nil if the node is not on a fabric we have access to.
+//
 // OperationalCertificate calls the underlying OperationalCertificate.
 func (x *MTRFabricInfo) OperationalCertificate() *foundation.NSData {
 	return x.inner.OperationalCertificate()
 }
 
+// The same operational certificate as operationalCertificate, in Matter TLV format.
+//
 // OperationalCertificateTLV calls the underlying OperationalCertificateTLV.
 func (x *MTRFabricInfo) OperationalCertificateTLV() *foundation.NSData {
 	return x.inner.OperationalCertificateTLV()
 }
 
+// The fabric index which identifies the fabric on the node.
+//
 // FabricIndex calls the underlying FabricIndex.
 func (x *MTRFabricInfo) FabricIndex() *foundation.NSNumber {
 	return x.inner.FabricIndex()

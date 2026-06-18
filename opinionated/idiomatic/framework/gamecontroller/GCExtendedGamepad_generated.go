@@ -41,12 +41,16 @@ func (x *ExtendedGamepad) WithValueChangedHandler(valueChangedHandler func(*raw.
 	return x
 }
 
+// Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called for each element that changed. @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons. @param element the element that has been modified.
+//
 // WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
 func (x *ExtendedGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *ExtendedGamepad {
 	x.inner.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
 	return x
 }
 
+// Polls the state vector of the controller and saves it to a snapshot. The snapshot is stored in a device independent format that can be serialized and used at a later date. This is useful for features such as quality assurance, save game or replay functionality among many. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken.
+//
 // SaveSnapshot calls the underlying SaveSnapshot.
 func (x *ExtendedGamepad) SaveSnapshot() *ExtendedGamepadSnapshot {
 	_r := x.inner.SaveSnapshot()
@@ -56,11 +60,15 @@ func (x *ExtendedGamepad) SaveSnapshot() *ExtendedGamepadSnapshot {
 	return &ExtendedGamepadSnapshot{inner: _r}
 }
 
+// Sets the state vector of the extended gamepad to a copy of the input extended gamepad's state vector. @note If the controller's snapshot flag is set to NO, this method has no effect. @see GCController.snapshot
+//
 // SetStateFromExtendedGamepad calls the underlying SetStateFromExtendedGamepad.
 func (x *ExtendedGamepad) SetStateFromExtendedGamepad(extendedGamepad *raw.GCExtendedGamepad) {
 	x.inner.SetStateFromExtendedGamepad(extendedGamepad)
 }
 
+// A profile keeps a reference to the controller that this profile is mapping input from.
+//
 // Controller calls the underlying Controller.
 func (x *ExtendedGamepad) Controller() *Controller {
 	_r := x.inner.Controller()
@@ -80,6 +88,8 @@ func (x *ExtendedGamepad) SetValueChangedHandler(valueChangedHandler func(*raw.G
 	x.inner.SetValueChangedHandler(valueChangedHandler)
 }
 
+// Required to be analog in the Extended profile. All the elements of this directional input are thus analog.
+//
 // Dpad calls the underlying Dpad.
 func (x *ExtendedGamepad) Dpad() *ControllerDirectionPad {
 	_r := x.inner.Dpad()
@@ -89,6 +99,8 @@ func (x *ExtendedGamepad) Dpad() *ControllerDirectionPad {
 	return &ControllerDirectionPad{inner: _r}
 }
 
+// All face buttons are required to be analog in the Extended profile. These must be arranged in the diamond pattern given below: Y / \ X   B \ / A
+//
 // ButtonA calls the underlying ButtonA.
 func (x *ExtendedGamepad) ButtonA() *ControllerButtonInput {
 	_r := x.inner.ButtonA()
@@ -125,6 +137,8 @@ func (x *ExtendedGamepad) ButtonY() *ControllerButtonInput {
 	return &ControllerButtonInput{inner: _r}
 }
 
+// Button menu is the primary menu button, and should be used to enter the main menu and pause the game.
+//
 // ButtonMenu calls the underlying ButtonMenu.
 func (x *ExtendedGamepad) ButtonMenu() *ControllerButtonInput {
 	_r := x.inner.ButtonMenu()
@@ -134,6 +148,8 @@ func (x *ExtendedGamepad) ButtonMenu() *ControllerButtonInput {
 	return &ControllerButtonInput{inner: _r}
 }
 
+// Button options is the secondary menu button. It should be used to enter a secondary menu, such as graphics and sound configuration, and pause the game.
+//
 // ButtonOptions calls the underlying ButtonOptions.
 func (x *ExtendedGamepad) ButtonOptions() *ControllerButtonInput {
 	_r := x.inner.ButtonOptions()
@@ -143,6 +159,8 @@ func (x *ExtendedGamepad) ButtonOptions() *ControllerButtonInput {
 	return &ControllerButtonInput{inner: _r}
 }
 
+// Button home is a special menu button. If the system does not consume button home events, they will be passed to your application and should be used to enter a secondary menu, and pause the game.
+//
 // ButtonHome calls the underlying ButtonHome.
 func (x *ExtendedGamepad) ButtonHome() *ControllerButtonInput {
 	_r := x.inner.ButtonHome()
@@ -152,6 +170,8 @@ func (x *ExtendedGamepad) ButtonHome() *ControllerButtonInput {
 	return &ControllerButtonInput{inner: _r}
 }
 
+// A thumbstick is a 2-axis control that is physically required to be analog. All the elements of this directional input are thus analog.
+//
 // LeftThumbstick calls the underlying LeftThumbstick.
 func (x *ExtendedGamepad) LeftThumbstick() *ControllerDirectionPad {
 	_r := x.inner.LeftThumbstick()
@@ -161,6 +181,8 @@ func (x *ExtendedGamepad) LeftThumbstick() *ControllerDirectionPad {
 	return &ControllerDirectionPad{inner: _r}
 }
 
+// A thumbstick is a 2-axis control that is physically required to be analog. All the elements of this directional input are thus analog.
+//
 // RightThumbstick calls the underlying RightThumbstick.
 func (x *ExtendedGamepad) RightThumbstick() *ControllerDirectionPad {
 	_r := x.inner.RightThumbstick()
@@ -170,6 +192,8 @@ func (x *ExtendedGamepad) RightThumbstick() *ControllerDirectionPad {
 	return &ControllerDirectionPad{inner: _r}
 }
 
+// Shoulder buttons are required to be analog inputs.
+//
 // LeftShoulder calls the underlying LeftShoulder.
 func (x *ExtendedGamepad) LeftShoulder() *ControllerButtonInput {
 	_r := x.inner.LeftShoulder()
@@ -179,6 +203,8 @@ func (x *ExtendedGamepad) LeftShoulder() *ControllerButtonInput {
 	return &ControllerButtonInput{inner: _r}
 }
 
+// Shoulder buttons are required to be analog inputs.
+//
 // RightShoulder calls the underlying RightShoulder.
 func (x *ExtendedGamepad) RightShoulder() *ControllerButtonInput {
 	_r := x.inner.RightShoulder()
@@ -188,6 +214,8 @@ func (x *ExtendedGamepad) RightShoulder() *ControllerButtonInput {
 	return &ControllerButtonInput{inner: _r}
 }
 
+// Triggers are required to be analog inputs. Common uses would be acceleration and decelleration in a driving game for example.
+//
 // LeftTrigger calls the underlying LeftTrigger.
 func (x *ExtendedGamepad) LeftTrigger() *ControllerButtonInput {
 	_r := x.inner.LeftTrigger()
@@ -206,6 +234,8 @@ func (x *ExtendedGamepad) RightTrigger() *ControllerButtonInput {
 	return &ControllerButtonInput{inner: _r}
 }
 
+// A thumbstick may also have a clickable component, which is treated as a non-analog button.
+//
 // LeftThumbstickButton calls the underlying LeftThumbstickButton.
 func (x *ExtendedGamepad) LeftThumbstickButton() *ControllerButtonInput {
 	_r := x.inner.LeftThumbstickButton()

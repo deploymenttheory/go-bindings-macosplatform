@@ -36,12 +36,16 @@ func NewSystemExtensionRequest() *SystemExtensionRequest {
 	return &SystemExtensionRequest{inner: raw.OSSystemExtensionRequestFromID(_id)}
 }
 
+// @brief A delegate to receive updates about the progress of a request
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SystemExtensionRequest) WithDelegate(delegate raw.OSSystemExtensionRequestDelegate) *SystemExtensionRequest {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @brief A delegate to receive updates about the progress of a request
+//
 // Delegate calls the underlying Delegate.
 func (x *SystemExtensionRequest) Delegate() raw.OSSystemExtensionRequestDelegate {
 	return x.inner.Delegate()
@@ -52,6 +56,8 @@ func (x *SystemExtensionRequest) SetDelegate(delegate raw.OSSystemExtensionReque
 	x.inner.SetDelegate(delegate)
 }
 
+// @brief The bundle identifier of the target extension
+//
 // Identifier calls the underlying Identifier.
 func (x *SystemExtensionRequest) Identifier() string {
 	_r := x.inner.Identifier()

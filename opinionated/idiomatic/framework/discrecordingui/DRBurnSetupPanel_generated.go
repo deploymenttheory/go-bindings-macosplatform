@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @class		DRBurnSetupPanel @abstract 	Manages a panel that allows users to specify the parameters of an burn. @discussion	This class supports choosing the the device to use, whether or not to verify the burned data and how to handle the burned disc when it completes.
+//
 // BurnSetupPanel wraps [raw.DRBurnSetupPanel] with a fluent Go API.
 type BurnSetupPanel struct {
 	inner *raw.DRBurnSetupPanel
@@ -37,51 +39,71 @@ func NewBurnSetupPanel() *BurnSetupPanel {
 	return &BurnSetupPanel{inner: raw.DRBurnSetupPanelFromID(_id)}
 }
 
+// @method		setDefaultButtonTitle: @abstract	Sets the title for the receiver's default button to title. @discussion	Normally, the default button is &ldquo;Burn&rdquo;.
+//
 // SetDefaultButtonTitle calls the underlying SetDefaultButtonTitle.
 func (x *BurnSetupPanel) SetDefaultButtonTitle(title string) {
 	x.inner.SetDefaultButtonTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// @method		setCanSelectTestBurn: @abstract	Specifies whether the user can choose to make a test burn. @discussion	This method controls whether a checkbox should be added to the receiver that allows the user to set the burn to be a test burn. By default, the test burn button is not displayed. This method must be called before the panel is displayed. @param		flag	<i>YES</i> to show the test burn checkbox, <i>NO</i> to hide it.
+//
 // SetCanSelectTestBurn calls the underlying SetCanSelectTestBurn.
 func (x *BurnSetupPanel) SetCanSelectTestBurn(flag bool) {
 	x.inner.SetCanSelectTestBurn(flag)
 }
 
+// @method		setCanSelectAppendableMedia: @abstract	Specifies whether the user can choose to leave the disc appendable. @discussion	This method controls whether the appendable checkbox is enabled. If the data being writen to disc does not lend itself to having more data appended on to it, you can disable the ability of the user to leave the disc open. This method must be called before the panel is displayed. @param		flag	<i>YES</i> to enable the appendable checkbox, <i>NO</i> to disable.
+//
 // SetCanSelectAppendableMedia calls the underlying SetCanSelectAppendableMedia.
 func (x *BurnSetupPanel) SetCanSelectAppendableMedia(flag bool) {
 	x.inner.SetCanSelectAppendableMedia(flag)
 }
 
+// @method		burnObject @abstract	Creates and returns a new DRBurn object that's configured to write data to the currently selected device. @discussion	The new DRBurn object is configured based on the settings in the setup panel when the user clicks the OK button. Do not invoke this method within a modal session ( @link //apple_ref/occ/instm/DRSetupPanel/runSetupPanel runSetupPanel @/link or @link //apple_ref/occ/instm/DRSetupPanel/beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: @/link ) because the burn object information is only updated just before the modal session ends. @result  	A new DRBurn object.
+//
 // BurnObject calls the underlying BurnObject.
 func (x *BurnSetupPanel) BurnObject() *discrecording.DRBurn {
 	return x.inner.BurnObject()
 }
 
+// @method		expand: @abstract	Invoked when the user clicks the panel's expand button.
+//
 // Expand calls the underlying Expand.
 func (x *BurnSetupPanel) Expand(sender objc.ID) {
 	x.inner.Expand(sender)
 }
 
+// @method		burnSpeed: @abstract	Invoked when the user clicks the panel's burn speed popup button.
+//
 // BurnSpeed calls the underlying BurnSpeed.
 func (x *BurnSetupPanel) BurnSpeed(sender objc.ID) {
 	x.inner.BurnSpeed(sender)
 }
 
+// @method		appendable: @abstract	Invoked when the user clicks the panel's appendable checkbox.
+//
 // Appendable calls the underlying Appendable.
 func (x *BurnSetupPanel) Appendable(sender objc.ID) {
 	x.inner.Appendable(sender)
 }
 
+// @method		completionAction: @abstract	Invoked when the user clicks one of the panel's completion action radio buttons.
+//
 // CompletionAction calls the underlying CompletionAction.
 func (x *BurnSetupPanel) CompletionAction(sender objc.ID) {
 	x.inner.CompletionAction(sender)
 }
 
+// @method		testBurn: @abstract	Invoked when the user clicks the panel's test burn checkbox.
+//
 // TestBurn calls the underlying TestBurn.
 func (x *BurnSetupPanel) TestBurn(sender objc.ID) {
 	x.inner.TestBurn(sender)
 }
 
+// @method		verifyBurn: @abstract	Invoked when the user clicks the panel's verify burn checkbox.
+//
 // VerifyBurn calls the underlying VerifyBurn.
 func (x *BurnSetupPanel) VerifyBurn(sender objc.ID) {
 	x.inner.VerifyBurn(sender)

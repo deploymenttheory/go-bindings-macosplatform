@@ -38,54 +38,72 @@ func NewNEProxySettings() *NEProxySettings {
 	return &NEProxySettings{inner: raw.NEProxySettingsFromID(_id)}
 }
 
+// @property autoProxyConfigurationEnabled @discussion A boolean indicating if proxy auto-configuration is enabled.
+//
 // WithAutoProxyConfigurationEnabled sets the autoProxyConfigurationEnabled property and returns the receiver for chaining.
 func (x *NEProxySettings) WithAutoProxyConfigurationEnabled(autoProxyConfigurationEnabled bool) *NEProxySettings {
 	x.inner.SetAutoProxyConfigurationEnabled(autoProxyConfigurationEnabled)
 	return x
 }
 
+// @property proxyAutoConfigurationURL @discussion A URL specifying where the PAC script is located.
+//
 // WithProxyAutoConfigurationURL sets the proxyAutoConfigurationURL property and returns the receiver for chaining.
 func (x *NEProxySettings) WithProxyAutoConfigurationURL(proxyAutoConfigurationURL string) *NEProxySettings {
 	x.inner.SetProxyAutoConfigurationURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(proxyAutoConfigurationURL)))
 	return x
 }
 
+// @property proxyAutoConfigurationJavaScript @discussion A string containing the PAC JavaScript source code.
+//
 // WithProxyAutoConfigurationJavaScript sets the proxyAutoConfigurationJavaScript property and returns the receiver for chaining.
 func (x *NEProxySettings) WithProxyAutoConfigurationJavaScript(proxyAutoConfigurationJavaScript string) *NEProxySettings {
 	x.inner.SetProxyAutoConfigurationJavaScript(foundation.NSStringStringWithUTF8String(proxyAutoConfigurationJavaScript))
 	return x
 }
 
+// @property HTTPEnabled @discussion A boolean indicating if the static HTTP proxy is enabled.
+//
 // WithHTTPEnabled sets the hTTPEnabled property and returns the receiver for chaining.
 func (x *NEProxySettings) WithHTTPEnabled(hTTPEnabled bool) *NEProxySettings {
 	x.inner.SetHTTPEnabled(hTTPEnabled)
 	return x
 }
 
+// @property HTTPServer @discussion A NEProxyServer object containing the HTTP proxy server settings.
+//
 // WithHTTPServer sets the hTTPServer property and returns the receiver for chaining.
 func (x *NEProxySettings) WithHTTPServer(hTTPServer *NEProxyServer) *NEProxySettings {
 	x.inner.SetHTTPServer(hTTPServer.Unwrap())
 	return x
 }
 
+// @property HTTPSEnabled @discussion A boolean indicating if the static HTTPS proxy is enabled.
+//
 // WithHTTPSEnabled sets the hTTPSEnabled property and returns the receiver for chaining.
 func (x *NEProxySettings) WithHTTPSEnabled(hTTPSEnabled bool) *NEProxySettings {
 	x.inner.SetHTTPSEnabled(hTTPSEnabled)
 	return x
 }
 
+// @property HTTPSServer @discussion A NEProxyServer object containing the HTTPS proxy server settings.
+//
 // WithHTTPSServer sets the hTTPSServer property and returns the receiver for chaining.
 func (x *NEProxySettings) WithHTTPSServer(hTTPSServer *NEProxyServer) *NEProxySettings {
 	x.inner.SetHTTPSServer(hTTPSServer.Unwrap())
 	return x
 }
 
+// @property excludeSimpleHostnames @discussion A flag indicating if the proxy settings should not be used for network destinations specified using single-label host names.
+//
 // WithExcludeSimpleHostnames sets the excludeSimpleHostnames property and returns the receiver for chaining.
 func (x *NEProxySettings) WithExcludeSimpleHostnames(excludeSimpleHostnames bool) *NEProxySettings {
 	x.inner.SetExcludeSimpleHostnames(excludeSimpleHostnames)
 	return x
 }
 
+// @property exceptionList @discussion An array of domain strings. If the destination host name of a connection shares a suffix with one of these strings then the proxy settings will not be used for the connection.
+//
 // WithExceptionList sets the collection, converting the Go slice to an NSArray.
 func (x *NEProxySettings) WithExceptionList(items ...*foundation.NSString) *NEProxySettings {
 	if len(items) == 0 {
@@ -104,6 +122,8 @@ func (x *NEProxySettings) WithExceptionList(items ...*foundation.NSString) *NEPr
 	return x
 }
 
+// @property matchDomains @discussion An array of domain strings. If the destination host name of a connection shares a suffix with one of these strings then the proxy settings will be used for the connection. Otherwise the proxy settings will not be used. If this property is nil then all connections to which the Network Extension applies will use the proxy settings.
+//
 // WithMatchDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEProxySettings) WithMatchDomains(items ...*foundation.NSString) *NEProxySettings {
 	if len(items) == 0 {
@@ -122,6 +142,8 @@ func (x *NEProxySettings) WithMatchDomains(items ...*foundation.NSString) *NEPro
 	return x
 }
 
+// @property autoProxyConfigurationEnabled @discussion A boolean indicating if proxy auto-configuration is enabled.
+//
 // AutoProxyConfigurationEnabled calls the underlying AutoProxyConfigurationEnabled.
 func (x *NEProxySettings) AutoProxyConfigurationEnabled() bool {
 	return x.inner.AutoProxyConfigurationEnabled()
@@ -132,6 +154,8 @@ func (x *NEProxySettings) SetAutoProxyConfigurationEnabled(autoProxyConfiguratio
 	x.inner.SetAutoProxyConfigurationEnabled(autoProxyConfigurationEnabled)
 }
 
+// @property proxyAutoConfigurationURL @discussion A URL specifying where the PAC script is located.
+//
 // ProxyAutoConfigurationURL calls the underlying ProxyAutoConfigurationURL.
 func (x *NEProxySettings) ProxyAutoConfigurationURL() *foundation.NSURL {
 	return x.inner.ProxyAutoConfigurationURL()
@@ -142,6 +166,8 @@ func (x *NEProxySettings) SetProxyAutoConfigurationURL(proxyAutoConfigurationURL
 	x.inner.SetProxyAutoConfigurationURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(proxyAutoConfigurationURL)))
 }
 
+// @property proxyAutoConfigurationJavaScript @discussion A string containing the PAC JavaScript source code.
+//
 // ProxyAutoConfigurationJavaScript calls the underlying ProxyAutoConfigurationJavaScript.
 func (x *NEProxySettings) ProxyAutoConfigurationJavaScript() string {
 	_r := x.inner.ProxyAutoConfigurationJavaScript()
@@ -156,6 +182,8 @@ func (x *NEProxySettings) SetProxyAutoConfigurationJavaScript(proxyAutoConfigura
 	x.inner.SetProxyAutoConfigurationJavaScript(foundation.NSStringStringWithUTF8String(proxyAutoConfigurationJavaScript))
 }
 
+// @property HTTPEnabled @discussion A boolean indicating if the static HTTP proxy is enabled.
+//
 // HTTPEnabled calls the underlying HTTPEnabled.
 func (x *NEProxySettings) HTTPEnabled() bool {
 	return x.inner.HTTPEnabled()
@@ -166,6 +194,8 @@ func (x *NEProxySettings) SetHTTPEnabled(hTTPEnabled bool) {
 	x.inner.SetHTTPEnabled(hTTPEnabled)
 }
 
+// @property HTTPServer @discussion A NEProxyServer object containing the HTTP proxy server settings.
+//
 // HTTPServer calls the underlying HTTPServer.
 func (x *NEProxySettings) HTTPServer() *NEProxyServer {
 	_r := x.inner.HTTPServer()
@@ -180,6 +210,8 @@ func (x *NEProxySettings) SetHTTPServer(hTTPServer *raw.NEProxyServer) {
 	x.inner.SetHTTPServer(hTTPServer)
 }
 
+// @property HTTPSEnabled @discussion A boolean indicating if the static HTTPS proxy is enabled.
+//
 // HTTPSEnabled calls the underlying HTTPSEnabled.
 func (x *NEProxySettings) HTTPSEnabled() bool {
 	return x.inner.HTTPSEnabled()
@@ -190,6 +222,8 @@ func (x *NEProxySettings) SetHTTPSEnabled(hTTPSEnabled bool) {
 	x.inner.SetHTTPSEnabled(hTTPSEnabled)
 }
 
+// @property HTTPSServer @discussion A NEProxyServer object containing the HTTPS proxy server settings.
+//
 // HTTPSServer calls the underlying HTTPSServer.
 func (x *NEProxySettings) HTTPSServer() *NEProxyServer {
 	_r := x.inner.HTTPSServer()
@@ -204,6 +238,8 @@ func (x *NEProxySettings) SetHTTPSServer(hTTPSServer *raw.NEProxyServer) {
 	x.inner.SetHTTPSServer(hTTPSServer)
 }
 
+// @property excludeSimpleHostnames @discussion A flag indicating if the proxy settings should not be used for network destinations specified using single-label host names.
+//
 // ExcludeSimpleHostnames calls the underlying ExcludeSimpleHostnames.
 func (x *NEProxySettings) ExcludeSimpleHostnames() bool {
 	return x.inner.ExcludeSimpleHostnames()
@@ -214,6 +250,8 @@ func (x *NEProxySettings) SetExcludeSimpleHostnames(excludeSimpleHostnames bool)
 	x.inner.SetExcludeSimpleHostnames(excludeSimpleHostnames)
 }
 
+// @property exceptionList @discussion An array of domain strings. If the destination host name of a connection shares a suffix with one of these strings then the proxy settings will not be used for the connection.
+//
 // ExceptionList returns the collection as a Go slice.
 func (x *NEProxySettings) ExceptionList() []string {
 	arr := x.inner.ExceptionList()
@@ -230,6 +268,8 @@ func (x *NEProxySettings) SetExceptionList(exceptionList *foundation.NSArray[*fo
 	x.inner.SetExceptionList(exceptionList)
 }
 
+// @property matchDomains @discussion An array of domain strings. If the destination host name of a connection shares a suffix with one of these strings then the proxy settings will be used for the connection. Otherwise the proxy settings will not be used. If this property is nil then all connections to which the Network Extension applies will use the proxy settings.
+//
 // MatchDomains returns the collection as a Go slice.
 func (x *NEProxySettings) MatchDomains() []string {
 	arr := x.inner.MatchDomains()

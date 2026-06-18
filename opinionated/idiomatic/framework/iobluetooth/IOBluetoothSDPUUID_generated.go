@@ -44,6 +44,8 @@ func NewIOBluetoothSDPUUIDWithUUID32(uuid32 uint32) *IOBluetoothSDPUUID {
 	return &IOBluetoothSDPUUID{inner: raw.IOBluetoothSDPUUIDFromID(_id)}
 }
 
+// @method	getSDPUUIDRef @abstract	Returns an IOBluetoothSDPUUIDRef representation of the target IOBluetoothSDPUUID object. @result		Returns an IOBluetoothSDPUUIDRef representation of the target IOBluetoothSDPUUID object.
+//
 // GetSDPUUIDRef calls the underlying GetSDPUUIDRef.
 func (x *IOBluetoothSDPUUID) GetSDPUUIDRef() unsafe.Pointer {
 	return x.inner.GetSDPUUIDRef()

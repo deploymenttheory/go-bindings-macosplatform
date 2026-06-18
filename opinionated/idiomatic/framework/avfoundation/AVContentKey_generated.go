@@ -35,11 +35,15 @@ func NewContentKey() *ContentKey {
 	return &ContentKey{inner: raw.AVContentKeyFromID(_id)}
 }
 
+// Revokes the decryption context of the content key, and removes it from its associated AVContentKeySession. Once revoked, the AVContentKey is no longer eligible to be used with any media. If the key is required again, or if the key is requested to be loaded by the application, a new AVContentKeyRequest will be dispatched to the delegate. If there is media playback occurring which is dependent on the content key it will fail and may result in an error being generated with the playback halting.
+//
 // Revoke calls the underlying Revoke.
 func (x *ContentKey) Revoke() {
 	x.inner.Revoke()
 }
 
+// Specifies the content key.
+//
 // ContentKeySpecifier calls the underlying ContentKeySpecifier.
 func (x *ContentKey) ContentKeySpecifier() *ContentKeySpecifier {
 	_r := x.inner.ContentKeySpecifier()
@@ -49,6 +53,8 @@ func (x *ContentKey) ContentKeySpecifier() *ContentKeySpecifier {
 	return &ContentKeySpecifier{inner: _r}
 }
 
+// The external protection status for the AVContentKey based on all attached displays. This property is not key-value observable, instead the contentKeySession:externalProtectionStatusDidChangeForContentKey: delegate method should be used.
+//
 // ExternalContentProtectionStatus calls the underlying ExternalContentProtectionStatus.
 func (x *ContentKey) ExternalContentProtectionStatus() AVExternalContentProtectionStatus {
 	return AVExternalContentProtectionStatus(x.inner.ExternalContentProtectionStatus())

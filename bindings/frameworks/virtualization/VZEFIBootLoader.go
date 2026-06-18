@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The boot loader configuration the system uses to boot guest-operating systems that expect an Extensible Firmware Interface (EFI) ROM.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzefibootloader
 type VZEFIBootLoader struct {
 	VZBootLoader
@@ -31,6 +33,7 @@ func VZEFIBootLoaderFromID(id objc.ID) *VZEFIBootLoader {
 	return o
 }
 
+// Creates a new EFI boot loader.
 func (o *VZEFIBootLoader) Init() *VZEFIBootLoader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZEFIBootLoaderSelInit)
 	if _ret != 0 {

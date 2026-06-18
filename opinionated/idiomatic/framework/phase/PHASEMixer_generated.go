@@ -36,6 +36,8 @@ func NewMixer() *Mixer {
 	return &Mixer{inner: raw.PHASEMixerFromID(_id)}
 }
 
+// @property identifier @abstract The identifier that uniquely represents this mixer.
+//
 // Identifier calls the underlying Identifier.
 func (x *Mixer) Identifier() string {
 	_r := x.inner.Identifier()
@@ -45,11 +47,15 @@ func (x *Mixer) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+//
 // Gain calls the underlying Gain.
 func (x *Mixer) Gain() float64 {
 	return x.inner.Gain()
 }
 
+// @property gainMetaParameter @abstract The metaparameter that can be used to adjust the gain during playback
+//
 // GainMetaParameter calls the underlying GainMetaParameter.
 func (x *Mixer) GainMetaParameter() *MetaParameter {
 	_r := x.inner.GainMetaParameter()

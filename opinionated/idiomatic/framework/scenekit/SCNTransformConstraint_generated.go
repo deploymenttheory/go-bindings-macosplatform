@@ -35,18 +35,24 @@ func NewTransformConstraint() *TransformConstraint {
 	return &TransformConstraint{inner: raw.SCNTransformConstraintFromID(_id)}
 }
 
+// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *TransformConstraint) WithEnabled(enabled bool) *TransformConstraint {
 	x.inner.SCNConstraint.SetEnabled(enabled)
 	return x
 }
 
+// @property influenceFactor @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+//
 // WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
 func (x *TransformConstraint) WithInfluenceFactor(influenceFactor float64) *TransformConstraint {
 	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
 	return x
 }
 
+// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+//
 // WithIncremental sets the incremental property and returns the receiver for chaining.
 func (x *TransformConstraint) WithIncremental(incremental bool) *TransformConstraint {
 	x.inner.SCNConstraint.SetIncremental(incremental)

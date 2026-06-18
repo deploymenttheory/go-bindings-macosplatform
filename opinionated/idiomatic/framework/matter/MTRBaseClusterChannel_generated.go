@@ -33,6 +33,8 @@ func MTRBaseClusterChannelFromID(id objc.ID) *MTRBaseClusterChannel {
 	return &MTRBaseClusterChannel{inner: raw.MTRBaseClusterChannelFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterChannelWithDeviceEndpointIDQueue creates a new [MTRBaseClusterChannel].
 func NewMTRBaseClusterChannelWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterChannel {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterChannel")), objc.RegisterName("alloc"))
@@ -47,6 +49,8 @@ func NewMTRBaseClusterChannelWithDeviceEndpointQueue(device *raw.MTRBaseDevice, 
 	return &MTRBaseClusterChannel{inner: raw.MTRBaseClusterChannelFromID(_id)}
 }
 
+// Command ChangeChannel Change the channel on the media player to the channel case-insensitive exact matching the value passed as an argument.
+//
 // ChangeChannelWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterChannel) ChangeChannelWithParamsCompletion(ctx context.Context, params *raw.MTRChannelClusterChangeChannelParams) (*MTRChannelClusterChangeChannelResponseParams, error) {
 	type _result struct {
@@ -73,16 +77,22 @@ func (x *MTRBaseClusterChannel) ChangeChannelWithParamsCompletion(ctx context.Co
 	}
 }
 
+// Command ChangeChannelByNumber Change the channel on the media plaeyer to the channel with the given Number in the ChannelList attribute.
+//
 // ChangeChannelByNumberWithParamsCompletion calls the underlying ChangeChannelByNumberWithParamsCompletion.
 func (x *MTRBaseClusterChannel) ChangeChannelByNumberWithParamsCompletion(params *raw.MTRChannelClusterChangeChannelByNumberParams, completion func(unsafe.Pointer)) {
 	x.inner.ChangeChannelByNumberWithParamsCompletion(params, completion)
 }
 
+// Command SkipChannel This command provides channel up and channel down functionality, but allows channel index jumps of size Count. When the value of the increase or decrease is larger than the number of channels remaining in the given direction, then the behavior SHALL be to return to the beginning (or end) of the channel list and continue. For example, if the current channel is at index 0 and count value of -1 is given, then the current channel should change to the last channel.
+//
 // SkipChannelWithParamsCompletion calls the underlying SkipChannelWithParamsCompletion.
 func (x *MTRBaseClusterChannel) SkipChannelWithParamsCompletion(params *raw.MTRChannelClusterSkipChannelParams, completion func(unsafe.Pointer)) {
 	x.inner.SkipChannelWithParamsCompletion(params, completion)
 }
 
+// Command GetProgramGuide This command retrieves the program guide. It accepts several filter parameters to return specific schedule and program information from a content app. The command shall receive in response a ProgramGuideResponse.
+//
 // GetProgramGuideWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterChannel) GetProgramGuideWithParamsCompletion(ctx context.Context, params *raw.MTRChannelClusterGetProgramGuideParams) (*MTRChannelClusterProgramGuideResponseParams, error) {
 	type _result struct {
@@ -135,11 +145,15 @@ func (x *MTRBaseClusterChannel) GetProgramGuideWithCompletion(ctx context.Contex
 	}
 }
 
+// Command RecordProgram Record a specific program or series when it goes live. This functionality enables DVR recording features.
+//
 // RecordProgramWithParamsCompletion calls the underlying RecordProgramWithParamsCompletion.
 func (x *MTRBaseClusterChannel) RecordProgramWithParamsCompletion(params *raw.MTRChannelClusterRecordProgramParams, completion func(unsafe.Pointer)) {
 	x.inner.RecordProgramWithParamsCompletion(params, completion)
 }
 
+// Command CancelRecordProgram Cancel recording for a specific program or series.
+//
 // CancelRecordProgramWithParamsCompletion calls the underlying CancelRecordProgramWithParamsCompletion.
 func (x *MTRBaseClusterChannel) CancelRecordProgramWithParamsCompletion(params *raw.MTRChannelClusterCancelRecordProgramParams, completion func(unsafe.Pointer)) {
 	x.inner.CancelRecordProgramWithParamsCompletion(params, completion)

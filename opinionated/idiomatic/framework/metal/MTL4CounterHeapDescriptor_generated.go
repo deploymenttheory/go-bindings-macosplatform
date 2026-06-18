@@ -35,18 +35,24 @@ func NewMTL4CounterHeapDescriptor() *MTL4CounterHeapDescriptor {
 	return &MTL4CounterHeapDescriptor{inner: raw.MTL4CounterHeapDescriptorFromID(_id)}
 }
 
+// Assigns the type of data that the heap contains.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *MTL4CounterHeapDescriptor) WithType(type_ MTL4CounterHeapType) *MTL4CounterHeapDescriptor {
 	x.inner.SetType(raw.MTL4CounterHeapType(type_))
 	return x
 }
 
+// Assigns the number of entries in the heap. Each entry represents one item in the heap. The size of the individual entries depends on the heap type.
+//
 // WithCount sets the count property and returns the receiver for chaining.
 func (x *MTL4CounterHeapDescriptor) WithCount(count uint) *MTL4CounterHeapDescriptor {
 	x.inner.SetCount(count)
 	return x
 }
 
+// Assigns the type of data that the heap contains.
+//
 // Type calls the underlying Type.
 func (x *MTL4CounterHeapDescriptor) Type() MTL4CounterHeapType {
 	return MTL4CounterHeapType(x.inner.Type())
@@ -57,6 +63,8 @@ func (x *MTL4CounterHeapDescriptor) SetType(type_ MTL4CounterHeapType) {
 	x.inner.SetType(raw.MTL4CounterHeapType(type_))
 }
 
+// Assigns the number of entries in the heap. Each entry represents one item in the heap. The size of the individual entries depends on the heap type.
+//
 // Count calls the underlying Count.
 func (x *MTL4CounterHeapDescriptor) Count() uint {
 	return x.inner.Count()

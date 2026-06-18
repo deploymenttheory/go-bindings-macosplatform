@@ -31,6 +31,8 @@ func RecordIDFromID(id objc.ID) *RecordID {
 	return &RecordID{inner: raw.CKRecordIDFromID(id)}
 }
 
+// Creates a new record ID with the specified name in the default zone. - Parameters: - recordName: The name that identifies the record. The string must contain only ASCII characters, must not exceed 255 characters, and must not start with an underscore. If you specify an empty string for this parameter, the method throws an exception. - Returns: An initialized record ID object. Use this method when you're creating or searching for records in the default zone.
+//
 // NewRecordIDWithRecordName creates a new [RecordID].
 func NewRecordIDWithRecordName(recordName string) *RecordID {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKRecordID")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewRecordIDWithRecordName(recordName string) *RecordID {
 	return &RecordID{inner: raw.CKRecordIDFromID(_id)}
 }
 
+// Creates a new record ID with the specified name and zone information. - Parameters: - recordName: The name that identifies the record. The string must contain only ASCII characters, must not exceed 255 characters, and must not start with an underscore. If you specify an empty string for this parameter, the method throws an exception. - zoneID: The ID of the zone where you want to store the record. This parameter must not be `nil`. - Returns: An initialized record ID object. Use this method when you create or search for records in a zone other than the default zone. The value in the `zoneID` parameter must represent a zone that already exists in the database. If the record zone doesn't exist, save the corresponding “CKRecordZone“ object to the database before attempting to save any “CKRecord“ objects in that zone.
+//
 // NewRecordIDWithRecordNameZoneID creates a new [RecordID].
 func NewRecordIDWithRecordNameZoneID(recordName string, zoneID *raw.CKRecordZoneID) *RecordID {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKRecordID")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewRecordIDWithRecordNameZoneID(recordName string, zoneID *raw.CKRecordZone
 	return &RecordID{inner: raw.CKRecordIDFromID(_id)}
 }
 
+// The unique name of the record. For share records that manage a shared record zone, this property's value is always “CKRecordNameZoneWideShare“.
+//
 // RecordName calls the underlying RecordName.
 func (x *RecordID) RecordName() string {
 	_r := x.inner.RecordName()
@@ -54,6 +60,8 @@ func (x *RecordID) RecordName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The ID of the zone that contains the record.
+//
 // ZoneID calls the underlying ZoneID.
 func (x *RecordID) ZoneID() *RecordZoneID {
 	_r := x.inner.ZoneID()

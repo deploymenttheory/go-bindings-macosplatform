@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @class IKSlideshow @abstract IKSlideshow handles a slideshow with images, PDFs & more.
+//
 // Slideshow wraps [raw.IKSlideshow] with a fluent Go API.
 type Slideshow struct {
 	inner *raw.IKSlideshow
@@ -36,37 +38,51 @@ func NewSlideshow() *Slideshow {
 	return &Slideshow{inner: raw.IKSlideshowFromID(_id)}
 }
 
+// @property autoPlayDelay @abstract Array of filters reflecting the current user adjustments in the adjust or effects tab.
+//
 // WithAutoPlayDelay sets the autoPlayDelay property and returns the receiver for chaining.
 func (x *Slideshow) WithAutoPlayDelay(autoPlayDelay float64) *Slideshow {
 	x.inner.SetAutoPlayDelay(autoPlayDelay)
 	return x
 }
 
+// @method runSlideshowWithDataSource:inMode:options: @abstract start the slideshow (slideshowOptions can be NULL).
+//
 // RunSlideshowWithDataSourceInModeOptions calls the underlying RunSlideshowWithDataSourceInModeOptions.
 func (x *Slideshow) RunSlideshowWithDataSourceInModeOptions(dataSource raw.IKSlideshowDataSource, slideshowMode string, slideshowOptions *foundation.NSDictionary[objc.ID, objc.ID]) {
 	x.inner.RunSlideshowWithDataSourceInModeOptions(dataSource, foundation.NSStringStringWithUTF8String(slideshowMode), slideshowOptions)
 }
 
+// @method stopSlideshow: @abstract stop the slideshow.
+//
 // StopSlideshow calls the underlying StopSlideshow.
 func (x *Slideshow) StopSlideshow(sender objc.ID) {
 	x.inner.StopSlideshow(sender)
 }
 
+// @method reloadData: @abstract reloadData.
+//
 // ReloadData calls the underlying ReloadData.
 func (x *Slideshow) ReloadData() {
 	x.inner.ReloadData()
 }
 
+// @method reloadSlideshowItemAtIndex: @abstract reloadSlideshowItemAtIndex.
+//
 // ReloadSlideshowItemAtIndex calls the underlying ReloadSlideshowItemAtIndex.
 func (x *Slideshow) ReloadSlideshowItemAtIndex(index uint) {
 	x.inner.ReloadSlideshowItemAtIndex(index)
 }
 
+// @method indexOfCurrentSlideshowItem: @abstract Returns index of current slideshow item.
+//
 // IndexOfCurrentSlideshowItem calls the underlying IndexOfCurrentSlideshowItem.
 func (x *Slideshow) IndexOfCurrentSlideshowItem() uint {
 	return x.inner.IndexOfCurrentSlideshowItem()
 }
 
+// @property autoPlayDelay @abstract Array of filters reflecting the current user adjustments in the adjust or effects tab.
+//
 // AutoPlayDelay calls the underlying AutoPlayDelay.
 func (x *Slideshow) AutoPlayDelay() float64 {
 	return x.inner.AutoPlayDelay()

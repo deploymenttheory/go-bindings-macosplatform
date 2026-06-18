@@ -36,41 +36,57 @@ func NewWKHTTPCookieStore() *WKHTTPCookieStore {
 	return &WKHTTPCookieStore{inner: raw.WKHTTPCookieStoreFromID(_id)}
 }
 
+// @abstract Fetches all stored cookies. @param completionHandler A block to invoke with the fetched cookies.
+//
 // GetAllCookies calls the underlying GetAllCookies.
 func (x *WKHTTPCookieStore) GetAllCookies(completionHandler objc.Block) {
 	x.inner.GetAllCookies(completionHandler)
 }
 
+// @abstract Set a cookie. @param cookie The cookie to set. @param completionHandler A block to invoke once the cookie has been stored.
+//
 // SetCookieCompletionHandler calls the underlying SetCookieCompletionHandler.
 func (x *WKHTTPCookieStore) SetCookieCompletionHandler(cookie *foundation.NSHTTPCookie, completionHandler func()) {
 	x.inner.SetCookieCompletionHandler(cookie, completionHandler)
 }
 
+// @abstract Set multiple cookies. @param cookies An array of cookies to set. @param completionHandler A block to invoke once the cookies have been stored.
+//
 // SetCookiesCompletionHandler calls the underlying SetCookiesCompletionHandler.
 func (x *WKHTTPCookieStore) SetCookiesCompletionHandler(cookies *foundation.NSArray[*foundation.NSHTTPCookie], completionHandler func()) {
 	x.inner.SetCookiesCompletionHandler(cookies, completionHandler)
 }
 
+// @abstract Delete the specified cookie. @param completionHandler A block to invoke once the cookie has been deleted.
+//
 // DeleteCookieCompletionHandler calls the underlying DeleteCookieCompletionHandler.
 func (x *WKHTTPCookieStore) DeleteCookieCompletionHandler(cookie *foundation.NSHTTPCookie, completionHandler func()) {
 	x.inner.DeleteCookieCompletionHandler(cookie, completionHandler)
 }
 
+// @abstract Adds a WKHTTPCookieStoreObserver object with the cookie store. @param observer The observer object to add. @discussion The observer is not retained by the receiver. It is your responsibility to unregister the observer before it becomes invalid.
+//
 // AddObserver calls the underlying AddObserver.
 func (x *WKHTTPCookieStore) AddObserver(observer raw.WKHTTPCookieStoreObserver) {
 	x.inner.AddObserver(observer)
 }
 
+// @abstract Removes a WKHTTPCookieStoreObserver object from the cookie store. @param observer The observer to remove.
+//
 // RemoveObserver calls the underlying RemoveObserver.
 func (x *WKHTTPCookieStore) RemoveObserver(observer raw.WKHTTPCookieStoreObserver) {
 	x.inner.RemoveObserver(observer)
 }
 
+// @abstract Set whether cookies are allowed. @param policy A value indicating whether cookies are allowed. The default value is WKCookiePolicyAllow. @param completionHandler A block to invoke once the cookie policy has been set.
+//
 // SetCookiePolicyCompletionHandler calls the underlying SetCookiePolicyCompletionHandler.
 func (x *WKHTTPCookieStore) SetCookiePolicyCompletionHandler(policy WKCookiePolicy, completionHandler func()) {
 	x.inner.SetCookiePolicyCompletionHandler(raw.WKCookiePolicy(policy), completionHandler)
 }
 
+// @abstract Get whether cookies are allowed. @param completionHandler A block to invoke with the value of whether cookies are allowed.
+//
 // GetCookiePolicy calls the underlying GetCookiePolicy.
 func (x *WKHTTPCookieStore) GetCookiePolicy(completionHandler func(WKCookiePolicy)) {
 	x.inner.GetCookiePolicy(func(_a0 raw.WKCookiePolicy) { completionHandler(WKCookiePolicy(_a0)) })

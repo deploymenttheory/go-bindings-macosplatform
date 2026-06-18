@@ -46,6 +46,8 @@ func (x *LocalPlayer) WithAuthenticateHandler(authenticateHandler func(*appkit.N
 	return x
 }
 
+// Asynchronously load the recent players list as an array of GKPlayer.  A recent player is someone that you have played a game with or is a legacy game center friend.  Calls completionHandler when finished. Error will be nil on success. Possible reasons for error: 1. Communications problem 2. Unauthenticated player
+//
 // LoadRecentPlayers blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) LoadRecentPlayers(ctx context.Context) (*foundation.NSArray[*raw.GKPlayer], error) {
 	type _result struct {
@@ -70,6 +72,8 @@ func (x *LocalPlayer) LoadRecentPlayers(ctx context.Context) (*foundation.NSArra
 	}
 }
 
+// Asynchronously load the challengable friends list as an array of GKPlayer.  A challengable player is a friend player with friend level FL1 and FL2.  Calls completionHandler when finished. Error will be nil on success. Possible reasons for error: 1. Communications problem 2. Unauthenticated player
+//
 // LoadChallengableFriends blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) LoadChallengableFriends(ctx context.Context) (*foundation.NSArray[*raw.GKPlayer], error) {
 	type _result struct {
@@ -94,31 +98,43 @@ func (x *LocalPlayer) LoadChallengableFriends(ctx context.Context) (*foundation.
 	}
 }
 
+// Generates a signature allowing 3rd party server to authenticate the GKLocalPlayer Possible reasons for error: 1. Communications problem 2. Unauthenticated player
+//
 // FetchItemsForIdentityVerificationSignature calls the underlying FetchItemsForIdentityVerificationSignature.
 func (x *LocalPlayer) FetchItemsForIdentityVerificationSignature(completionHandler func(*foundation.NSURL, *foundation.NSData, *foundation.NSData, uint64, unsafe.Pointer)) {
 	x.inner.FetchItemsForIdentityVerificationSignature(completionHandler)
 }
 
+// Authentication state
+//
 // IsAuthenticated calls the underlying IsAuthenticated.
 func (x *LocalPlayer) IsAuthenticated() bool {
 	return x.inner.IsAuthenticated()
 }
 
+// Indicates if a player is under age
+//
 // IsUnderage calls the underlying IsUnderage.
 func (x *LocalPlayer) IsUnderage() bool {
 	return x.inner.IsUnderage()
 }
 
+// A Boolean value that declares whether or not multiplayer gaming is restricted on this device.
+//
 // IsMultiplayerGamingRestricted calls the underlying IsMultiplayerGamingRestricted.
 func (x *LocalPlayer) IsMultiplayerGamingRestricted() bool {
 	return x.inner.IsMultiplayerGamingRestricted()
 }
 
+// A Boolean value that declares whether personalized communication is restricted on this device. If it is restricted, the player will not be able to read or write personalized messages on game invites, challenges, or enable voice communication in multiplayer games.  Note: this value will always be true when isUnderage is true.
+//
 // IsPersonalizedCommunicationRestricted calls the underlying IsPersonalizedCommunicationRestricted.
 func (x *LocalPlayer) IsPersonalizedCommunicationRestricted() bool {
 	return x.inner.IsPersonalizedCommunicationRestricted()
 }
 
+// A single listener may be registered once. Registering multiple times results in undefined behavior. The registered listener will receive callbacks for any selector it responds to.
+//
 // RegisterListener calls the underlying RegisterListener.
 func (x *LocalPlayer) RegisterListener(listener raw.GKLocalPlayerListener) {
 	x.inner.RegisterListener(listener)
@@ -220,11 +236,15 @@ func (x *LocalPlayer) LoadFriendPlayers(ctx context.Context) (*foundation.NSArra
 	}
 }
 
+// Generates a signature allowing 3rd party server to authenticate the GKLocalPlayer Possible reasons for error: 1. Communications problem 2. Unauthenticated player
+//
 // GenerateIdentityVerificationSignatureWithCompletionHandler calls the underlying GenerateIdentityVerificationSignatureWithCompletionHandler.
 func (x *LocalPlayer) GenerateIdentityVerificationSignatureWithCompletionHandler(completionHandler func(*foundation.NSURL, *foundation.NSData, *foundation.NSData, uint64, unsafe.Pointer)) {
 	x.inner.GenerateIdentityVerificationSignatureWithCompletionHandler(completionHandler)
 }
 
+// Load the default leaderboard identifier for the local player Possible reasons for error: 1. Communications problem 2. Unauthenticated player 3. Leaderboard not present
+//
 // LoadDefaultLeaderboardIdentifier blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) LoadDefaultLeaderboardIdentifier(ctx context.Context) (string, error) {
 	type _result struct {
@@ -251,6 +271,8 @@ func (x *LocalPlayer) LoadDefaultLeaderboardIdentifier(ctx context.Context) (str
 	}
 }
 
+// Set the default leaderboard for the current game Possible reasons for error: 1. Communications problem 2. Unauthenticated player 3. Leaderboard not present
+//
 // SetDefaultLeaderboardIdentifier blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) SetDefaultLeaderboardIdentifier(ctx context.Context, leaderboardIdentifier string) error {
 	_ch := make(chan error, 1)
@@ -269,6 +291,8 @@ func (x *LocalPlayer) SetDefaultLeaderboardIdentifier(ctx context.Context, leade
 	}
 }
 
+// This method is obsolete. It will never be invoked and its implementation does nothing**
+//
 // LoadFriendsWithCompletionHandler calls the underlying LoadFriendsWithCompletionHandler.
 func (x *LocalPlayer) LoadFriendsWithCompletionHandler(completionHandler objc.Block) {
 	x.inner.LoadFriendsWithCompletionHandler(completionHandler)
@@ -340,6 +364,8 @@ func (x *LocalPlayer) LoadFriendsWithIdentifiers(ctx context.Context, identifier
 	}
 }
 
+// presentFriendRequestCreatorFromWindow: Discussion: MacOS only. When invoked, if no error is encountered, the caller application is backgrounded and the 'Messages' application is launched/foregrounded, with a formatted friend request message. If an error occurs, controls are returned to the caller application, with an error describing the error. Possible reasons for error: - The local player user account is not allowed to add friends - The device is not allowing outgoing traffic at the time of the operation
+//
 // PresentFriendRequestCreatorFromWindowError calls the underlying PresentFriendRequestCreatorFromWindowError.
 func (x *LocalPlayer) PresentFriendRequestCreatorFromWindowError(window *appkit.NSWindow) (bool, error) {
 	return x.inner.PresentFriendRequestCreatorFromWindowError(window)
@@ -374,11 +400,15 @@ func (x *LocalPlayer) SetAuthenticateHandler(ctx context.Context) (*appkit.NSVie
 	}
 }
 
+// observable property that becomes true when the friend request view controller is displayed.  It becomes false when it is dismissed
+//
 // IsPresentingFriendRequestViewController calls the underlying IsPresentingFriendRequestViewController.
 func (x *LocalPlayer) IsPresentingFriendRequestViewController() bool {
 	return x.inner.IsPresentingFriendRequestViewController()
 }
 
+// Asynchronously fetch saved games. The handler is called with an array of GKSavedGame objects or an error. If there is more than one saved game with the same name then a conflict exists. The application should determine the correct data to use and call resolveConflictingSavedGames:withData:completionHandler:. This may require data merging or asking the user.
+//
 // FetchSavedGames blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) FetchSavedGames(ctx context.Context) (*foundation.NSArray[*raw.GKSavedGame], error) {
 	type _result struct {
@@ -403,6 +433,8 @@ func (x *LocalPlayer) FetchSavedGames(ctx context.Context) (*foundation.NSArray[
 	}
 }
 
+// Asynchronously save game data. If a saved game with that name already exists it is overwritten, otherwise a new one is created. The completion handler is called with the new / modified GKSavedGame or an error. If the saved game was in conflict then the overwritten version will be the one with the same deviceName if present, otherwise the most recent overall.
+//
 // SaveGameDataWithName blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) SaveGameDataWithName(ctx context.Context, data *foundation.NSData, name string) (*SavedGame, error) {
 	type _result struct {
@@ -429,6 +461,8 @@ func (x *LocalPlayer) SaveGameDataWithName(ctx context.Context, data *foundation
 	}
 }
 
+// Asynchronously delete saved games with the given name. The completion handler will indicate whether or not the deletion was successful.
+//
 // DeleteSavedGamesWithName blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) DeleteSavedGamesWithName(ctx context.Context, name string) error {
 	_ch := make(chan error, 1)
@@ -447,6 +481,8 @@ func (x *LocalPlayer) DeleteSavedGamesWithName(ctx context.Context, name string)
 	}
 }
 
+// Asynchronously resolve a saved game conflict. This deletes all versions included in conflictingSavedGames and creates a new version with the given data. The completion handler is called with the newly created save and all other remaining versions or an error.
+//
 // ResolveConflictingSavedGamesWithData blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) ResolveConflictingSavedGamesWithData(ctx context.Context, conflictingSavedGames *foundation.NSArray[*raw.GKSavedGame], data *foundation.NSData) (*foundation.NSArray[*raw.GKSavedGame], error) {
 	type _result struct {

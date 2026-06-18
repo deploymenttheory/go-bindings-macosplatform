@@ -55,6 +55,8 @@ func (x *Sample) EndDate() *foundation.NSDate {
 	return x.inner.EndDate()
 }
 
+// @property      hasUndeterminedDuration @abstract      Indicates whether a sample has an undetermined duration. @discussion    Computed based on the endDate of a sample.
+//
 // HasUndeterminedDuration calls the underlying HasUndeterminedDuration.
 func (x *Sample) HasUndeterminedDuration() bool {
 	return x.inner.HasUndeterminedDuration()

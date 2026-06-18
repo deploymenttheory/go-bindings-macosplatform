@@ -40,18 +40,24 @@ func NewSplitViewItemAccessoryViewController() *SplitViewItemAccessoryViewContro
 	return &SplitViewItemAccessoryViewController{inner: raw.NSSplitViewItemAccessoryViewControllerFromID(_id)}
 }
 
+// When set, this property will collapse the accessory view to 0 height (animatable) but not remove it from the window. Set through the animator object to animate it.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *SplitViewItemAccessoryViewController) WithHidden(hidden bool) *SplitViewItemAccessoryViewController {
 	x.inner.SetHidden(hidden)
 	return x
 }
 
+// Whether or not standard content insets should be applied to the view. Defaults to YES.
+//
 // WithAutomaticallyAppliesContentInsets sets the automaticallyAppliesContentInsets property and returns the receiver for chaining.
 func (x *SplitViewItemAccessoryViewController) WithAutomaticallyAppliesContentInsets(automaticallyAppliesContentInsets bool) *SplitViewItemAccessoryViewController {
 	x.inner.SetAutomaticallyAppliesContentInsets(automaticallyAppliesContentInsets)
 	return x
 }
 
+// The split view item accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the interior edge of a titlebar accessory: splitViewItemAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
+//
 // WithPreferredScrollEdgeEffectStyle sets the preferredScrollEdgeEffectStyle property and returns the receiver for chaining.
 func (x *SplitViewItemAccessoryViewController) WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *ScrollEdgeEffectStyle) *SplitViewItemAccessoryViewController {
 	x.inner.SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle.Unwrap())
@@ -136,26 +142,36 @@ func (x *SplitViewItemAccessoryViewController) WithTouchBar(touchBar *TouchBar) 
 	return x
 }
 
+// When set, this property will collapse the accessory view to 0 height (animatable) but not remove it from the window. Set through the animator object to animate it.
+//
 // IsHidden calls the underlying IsHidden.
 func (x *SplitViewItemAccessoryViewController) IsHidden() bool {
 	return x.inner.IsHidden()
 }
 
+// When set, this property will collapse the accessory view to 0 height (animatable) but not remove it from the window. Set through the animator object to animate it.
+//
 // SetHidden calls the underlying SetHidden.
 func (x *SplitViewItemAccessoryViewController) SetHidden(hidden bool) {
 	x.inner.SetHidden(hidden)
 }
 
+// Whether or not standard content insets should be applied to the view. Defaults to YES.
+//
 // AutomaticallyAppliesContentInsets calls the underlying AutomaticallyAppliesContentInsets.
 func (x *SplitViewItemAccessoryViewController) AutomaticallyAppliesContentInsets() bool {
 	return x.inner.AutomaticallyAppliesContentInsets()
 }
 
+// Whether or not standard content insets should be applied to the view. Defaults to YES.
+//
 // SetAutomaticallyAppliesContentInsets calls the underlying SetAutomaticallyAppliesContentInsets.
 func (x *SplitViewItemAccessoryViewController) SetAutomaticallyAppliesContentInsets(automaticallyAppliesContentInsets bool) {
 	x.inner.SetAutomaticallyAppliesContentInsets(automaticallyAppliesContentInsets)
 }
 
+// The split view item accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the interior edge of a titlebar accessory: splitViewItemAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
+//
 // PreferredScrollEdgeEffectStyle calls the underlying PreferredScrollEdgeEffectStyle.
 func (x *SplitViewItemAccessoryViewController) PreferredScrollEdgeEffectStyle() *ScrollEdgeEffectStyle {
 	_r := x.inner.PreferredScrollEdgeEffectStyle()
@@ -165,6 +181,8 @@ func (x *SplitViewItemAccessoryViewController) PreferredScrollEdgeEffectStyle() 
 	return &ScrollEdgeEffectStyle{inner: _r}
 }
 
+// The split view item accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the interior edge of a titlebar accessory: splitViewItemAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
+//
 // SetPreferredScrollEdgeEffectStyle calls the underlying SetPreferredScrollEdgeEffectStyle.
 func (x *SplitViewItemAccessoryViewController) SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *raw.NSScrollEdgeEffectStyle) {
 	x.inner.SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle)

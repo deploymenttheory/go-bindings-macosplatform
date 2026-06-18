@@ -40,6 +40,8 @@ func NewNETransparentProxyNetworkSettings() *NETransparentProxyNetworkSettings {
 	return &NETransparentProxyNetworkSettings{inner: raw.NETransparentProxyNetworkSettingsFromID(_id)}
 }
 
+// @property includedNetworkRules @discussion An array of NENetworkRule objects that collectively specify the traffic that will be routed through the transparent proxy. The following restrictions apply to each NENetworkRule in this list: Restrictions for rules with an address endpoint: If the port string of the endpoint is "0" or is the empty string, then the address of the endpoint must be a non-wildcard address (i.e. "0.0.0.0" or "::"). If the address is a wildcard address (i.e. "0.0.0.0" or "::"), then the port string of the endpoint must be non-empty and must not be "0". A port string of "53" is not allowed. Destination Domain-based rules must be used to match DNS traffic. The matchLocalNetwork property must be nil. The matchDirection property must be NETrafficDirectionOutbound.
+//
 // WithIncludedNetworkRules sets the collection, converting the Go slice to an NSArray.
 func (x *NETransparentProxyNetworkSettings) WithIncludedNetworkRules(items ...*raw.NENetworkRule) *NETransparentProxyNetworkSettings {
 	if len(items) == 0 {
@@ -58,6 +60,8 @@ func (x *NETransparentProxyNetworkSettings) WithIncludedNetworkRules(items ...*r
 	return x
 }
 
+// @property excludedNetworkRules @discussion An array of NENetworkRule objects that collectively specify the traffic that will not be routed through the transparent proxy. The following restrictions apply to each NENetworkRule in this list: Restrictions for rules with an address endpoint: If the port string of the endpoint is "0" or is the empty string, then the address of the endpoint must be a non-wildcard address (i.e. "0.0.0.0" or "::"). If the address is a wildcard address (i.e. "0.0.0.0" or "::"), then the port string of the endpoint must be non-empty and must not be "0". A port string of "53" is not allowed. Destination Domain-based rules must be used to match DNS traffic. The matchLocalNetwork property must be nil. The matchDirection property must be NETrafficDirectionOutbound.
+//
 // WithExcludedNetworkRules sets the collection, converting the Go slice to an NSArray.
 func (x *NETransparentProxyNetworkSettings) WithExcludedNetworkRules(items ...*raw.NENetworkRule) *NETransparentProxyNetworkSettings {
 	if len(items) == 0 {
@@ -76,18 +80,24 @@ func (x *NETransparentProxyNetworkSettings) WithExcludedNetworkRules(items ...*r
 	return x
 }
 
+// @property DNSSettings @discussion An NEDNSSettings object that contains the desired tunnel DNS settings.
+//
 // WithDNSSettings sets the dNSSettings property and returns the receiver for chaining.
 func (x *NETransparentProxyNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NETransparentProxyNetworkSettings {
 	x.inner.NETunnelNetworkSettings.SetDNSSettings(dNSSettings.asNEDNSSettings())
 	return x
 }
 
+// @property proxySettings @discussion An NEProxySettings object that contains the desired tunnel proxy settings.
+//
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
 func (x *NETransparentProxyNetworkSettings) WithProxySettings(proxySettings *NEProxySettings) *NETransparentProxyNetworkSettings {
 	x.inner.NETunnelNetworkSettings.SetProxySettings(proxySettings.Unwrap())
 	return x
 }
 
+// @property includedNetworkRules @discussion An array of NENetworkRule objects that collectively specify the traffic that will be routed through the transparent proxy. The following restrictions apply to each NENetworkRule in this list: Restrictions for rules with an address endpoint: If the port string of the endpoint is "0" or is the empty string, then the address of the endpoint must be a non-wildcard address (i.e. "0.0.0.0" or "::"). If the address is a wildcard address (i.e. "0.0.0.0" or "::"), then the port string of the endpoint must be non-empty and must not be "0". A port string of "53" is not allowed. Destination Domain-based rules must be used to match DNS traffic. The matchLocalNetwork property must be nil. The matchDirection property must be NETrafficDirectionOutbound.
+//
 // IncludedNetworkRules returns the collection as a Go slice.
 func (x *NETransparentProxyNetworkSettings) IncludedNetworkRules() []*NENetworkRule {
 	arr := x.inner.IncludedNetworkRules()
@@ -104,6 +114,8 @@ func (x *NETransparentProxyNetworkSettings) SetIncludedNetworkRules(includedNetw
 	x.inner.SetIncludedNetworkRules(includedNetworkRules)
 }
 
+// @property excludedNetworkRules @discussion An array of NENetworkRule objects that collectively specify the traffic that will not be routed through the transparent proxy. The following restrictions apply to each NENetworkRule in this list: Restrictions for rules with an address endpoint: If the port string of the endpoint is "0" or is the empty string, then the address of the endpoint must be a non-wildcard address (i.e. "0.0.0.0" or "::"). If the address is a wildcard address (i.e. "0.0.0.0" or "::"), then the port string of the endpoint must be non-empty and must not be "0". A port string of "53" is not allowed. Destination Domain-based rules must be used to match DNS traffic. The matchLocalNetwork property must be nil. The matchDirection property must be NETrafficDirectionOutbound.
+//
 // ExcludedNetworkRules returns the collection as a Go slice.
 func (x *NETransparentProxyNetworkSettings) ExcludedNetworkRules() []*NENetworkRule {
 	arr := x.inner.ExcludedNetworkRules()

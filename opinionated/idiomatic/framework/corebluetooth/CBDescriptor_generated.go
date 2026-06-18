@@ -35,6 +35,8 @@ func NewDescriptor() *Descriptor {
 	return &Descriptor{inner: raw.CBDescriptorFromID(_id)}
 }
 
+// @property characteristic @discussion A back-pointer to the characteristic this descriptor belongs to.
+//
 // Characteristic calls the underlying Characteristic.
 func (x *Descriptor) Characteristic() *Characteristic {
 	_r := x.inner.Characteristic()
@@ -44,6 +46,8 @@ func (x *Descriptor) Characteristic() *Characteristic {
 	return &Characteristic{inner: _r}
 }
 
+// @property value @discussion The value of the descriptor. The corresponding value types for the various descriptors are detailed in @link CBUUID.h @/link.
+//
 // Value calls the underlying Value.
 func (x *Descriptor) Value() objc.ID {
 	return x.inner.Value()

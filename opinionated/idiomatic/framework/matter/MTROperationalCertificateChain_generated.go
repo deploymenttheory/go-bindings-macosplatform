@@ -43,6 +43,8 @@ func (x *MTROperationalCertificateChain) WithOperationalCertificate(operationalC
 	return x
 }
 
+// A nil intermediateCertificate means there is no intermediate.
+//
 // WithIntermediateCertificate sets the intermediateCertificate property and returns the receiver for chaining.
 func (x *MTROperationalCertificateChain) WithIntermediateCertificate(intermediateCertificate *foundation.NSData) *MTROperationalCertificateChain {
 	x.inner.SetIntermediateCertificate(intermediateCertificate)
@@ -55,6 +57,8 @@ func (x *MTROperationalCertificateChain) WithRootCertificate(rootCertificate *fo
 	return x
 }
 
+// adminSubject is passed to the device as part of the AddNOC command.  A nil adminSubject means the node id of the relevant MTRDeviceController will be used.
+//
 // WithAdminSubject sets the adminSubject property and returns the receiver for chaining.
 func (x *MTROperationalCertificateChain) WithAdminSubject(adminSubject *foundation.NSNumber) *MTROperationalCertificateChain {
 	x.inner.SetAdminSubject(adminSubject)
@@ -71,6 +75,8 @@ func (x *MTROperationalCertificateChain) SetOperationalCertificate(operationalCe
 	x.inner.SetOperationalCertificate(operationalCertificate)
 }
 
+// A nil intermediateCertificate means there is no intermediate.
+//
 // IntermediateCertificate calls the underlying IntermediateCertificate.
 func (x *MTROperationalCertificateChain) IntermediateCertificate() *foundation.NSData {
 	return x.inner.IntermediateCertificate()
@@ -91,6 +97,8 @@ func (x *MTROperationalCertificateChain) SetRootCertificate(rootCertificate *fou
 	x.inner.SetRootCertificate(rootCertificate)
 }
 
+// adminSubject is passed to the device as part of the AddNOC command.  A nil adminSubject means the node id of the relevant MTRDeviceController will be used.
+//
 // AdminSubject calls the underlying AdminSubject.
 func (x *MTROperationalCertificateChain) AdminSubject() *foundation.NSNumber {
 	return x.inner.AdminSubject()

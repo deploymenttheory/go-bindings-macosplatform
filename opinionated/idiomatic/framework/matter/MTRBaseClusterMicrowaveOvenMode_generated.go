@@ -35,6 +35,8 @@ func MTRBaseClusterMicrowaveOvenModeFromID(id objc.ID) *MTRBaseClusterMicrowaveO
 	return &MTRBaseClusterMicrowaveOvenMode{inner: raw.MTRBaseClusterMicrowaveOvenModeFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterMicrowaveOvenModeWithDeviceEndpointIDQueue creates a new [MTRBaseClusterMicrowaveOvenMode].
 func NewMTRBaseClusterMicrowaveOvenModeWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterMicrowaveOvenMode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterMicrowaveOvenMode")), objc.RegisterName("alloc"))

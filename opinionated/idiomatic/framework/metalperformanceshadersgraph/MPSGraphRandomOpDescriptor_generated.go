@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that describes the random operation.
+//
 // GraphRandomOpDescriptor wraps [raw.MPSGraphRandomOpDescriptor] with a fluent Go API.
 type GraphRandomOpDescriptor struct {
 	inner *raw.MPSGraphRandomOpDescriptor
@@ -36,60 +38,80 @@ func NewGraphRandomOpDescriptor() *GraphRandomOpDescriptor {
 	return &GraphRandomOpDescriptor{inner: raw.MPSGraphRandomOpDescriptorFromID(_id)}
 }
 
+// The type of distribution to draw samples from. See MPSGraphRandomDistribution.
+//
 // WithDistribution sets the distribution property and returns the receiver for chaining.
 func (x *GraphRandomOpDescriptor) WithDistribution(distribution MPSGraphRandomDistribution) *GraphRandomOpDescriptor {
 	x.inner.SetDistribution(raw.MPSGraphRandomDistribution(distribution))
 	return x
 }
 
+// The data type of the generated result values. When sampling from the uniform distribution, valid types are MPSDataTypeFloat16, MPSDataTypeFloat32, and MPSDataTypeInt32. When sampling from the normal or truncated normal distribution, valid types are MPSDataTypeFloat16 and MPSDataTypeFloat32.
+//
 // WithDataType sets the dataType property and returns the receiver for chaining.
 func (x *GraphRandomOpDescriptor) WithDataType(dataType mpscore.MPSDataType) *GraphRandomOpDescriptor {
 	x.inner.SetDataType(dataType)
 	return x
 }
 
+// The lower range of the distribution. This value is used for Uniform distributions with float data types and Truncated Normal disributions. Defaults to 0 for uniform distributions and -2 for normal distributions.
+//
 // WithMin sets the min property and returns the receiver for chaining.
 func (x *GraphRandomOpDescriptor) WithMin(min float32) *GraphRandomOpDescriptor {
 	x.inner.SetMin(min)
 	return x
 }
 
+// The upper range of the distribution. This value is used for Uniform distributions with float data types and Truncated Normal disributions. Defaults to 1 for uniform distributions and 2 for normal distributions.
+//
 // WithMax sets the max property and returns the receiver for chaining.
 func (x *GraphRandomOpDescriptor) WithMax(max float32) *GraphRandomOpDescriptor {
 	x.inner.SetMax(max)
 	return x
 }
 
+// The lower range of the distribution. This value is used for Uniform with integer data types Defaults to 0.
+//
 // WithMinInteger sets the minInteger property and returns the receiver for chaining.
 func (x *GraphRandomOpDescriptor) WithMinInteger(minInteger int) *GraphRandomOpDescriptor {
 	x.inner.SetMinInteger(minInteger)
 	return x
 }
 
+// The upper range of the distribution. This value is used for Uniform with integer data types Defaults to INT32_MAX for uniform distributions and 0 for normal distributions.
+//
 // WithMaxInteger sets the maxInteger property and returns the receiver for chaining.
 func (x *GraphRandomOpDescriptor) WithMaxInteger(maxInteger int) *GraphRandomOpDescriptor {
 	x.inner.SetMaxInteger(maxInteger)
 	return x
 }
 
+// The mean of the distribution. This value is used for Normal and Truncated Normal disributions. Defaults to 0.
+//
 // WithMean sets the mean property and returns the receiver for chaining.
 func (x *GraphRandomOpDescriptor) WithMean(mean float32) *GraphRandomOpDescriptor {
 	x.inner.SetMean(mean)
 	return x
 }
 
+// The standard deviation of the distribution. This value is used for Normal and Truncated Normal disributions. For Truncated Normal distribution this defines the standard deviation parameter of the underlying Normal distribution, that is the width of the Gaussian, not the true standard deviation of the truncated distribution which typically differs from the standard deviation of the original Normal distribution. Defaults to 0 for uniform distributions and 1 for normal distributions.
+//
 // WithStandardDeviation sets the standardDeviation property and returns the receiver for chaining.
 func (x *GraphRandomOpDescriptor) WithStandardDeviation(standardDeviation float32) *GraphRandomOpDescriptor {
 	x.inner.SetStandardDeviation(standardDeviation)
 	return x
 }
 
+// The sampling method of the distribution. This value is used for Normal and Truncated Normal disributions. See MPSGraphRandomNormalSamplingMethod. Defaults to MPSGraphRandomNormalSamplingInvCDF.
+//
 // WithSamplingMethod sets the samplingMethod property and returns the receiver for chaining.
 func (x *GraphRandomOpDescriptor) WithSamplingMethod(samplingMethod MPSGraphRandomNormalSamplingMethod) *GraphRandomOpDescriptor {
 	x.inner.SetSamplingMethod(raw.MPSGraphRandomNormalSamplingMethod(samplingMethod))
 	return x
 }
 
+// The type of distribution to draw samples from. See MPSGraphRandomDistribution.
+//
 // Distribution calls the underlying Distribution.
 func (x *GraphRandomOpDescriptor) Distribution() MPSGraphRandomDistribution {
 	return MPSGraphRandomDistribution(x.inner.Distribution())
@@ -100,6 +122,8 @@ func (x *GraphRandomOpDescriptor) SetDistribution(distribution MPSGraphRandomDis
 	x.inner.SetDistribution(raw.MPSGraphRandomDistribution(distribution))
 }
 
+// The data type of the generated result values. When sampling from the uniform distribution, valid types are MPSDataTypeFloat16, MPSDataTypeFloat32, and MPSDataTypeInt32. When sampling from the normal or truncated normal distribution, valid types are MPSDataTypeFloat16 and MPSDataTypeFloat32.
+//
 // DataType calls the underlying DataType.
 func (x *GraphRandomOpDescriptor) DataType() mpscore.MPSDataType {
 	return x.inner.DataType()
@@ -110,6 +134,8 @@ func (x *GraphRandomOpDescriptor) SetDataType(dataType mpscore.MPSDataType) {
 	x.inner.SetDataType(dataType)
 }
 
+// The lower range of the distribution. This value is used for Uniform distributions with float data types and Truncated Normal disributions. Defaults to 0 for uniform distributions and -2 for normal distributions.
+//
 // Min calls the underlying Min.
 func (x *GraphRandomOpDescriptor) Min() float32 {
 	return x.inner.Min()
@@ -120,6 +146,8 @@ func (x *GraphRandomOpDescriptor) SetMin(min float32) {
 	x.inner.SetMin(min)
 }
 
+// The upper range of the distribution. This value is used for Uniform distributions with float data types and Truncated Normal disributions. Defaults to 1 for uniform distributions and 2 for normal distributions.
+//
 // Max calls the underlying Max.
 func (x *GraphRandomOpDescriptor) Max() float32 {
 	return x.inner.Max()
@@ -130,6 +158,8 @@ func (x *GraphRandomOpDescriptor) SetMax(max float32) {
 	x.inner.SetMax(max)
 }
 
+// The lower range of the distribution. This value is used for Uniform with integer data types Defaults to 0.
+//
 // MinInteger calls the underlying MinInteger.
 func (x *GraphRandomOpDescriptor) MinInteger() int {
 	return x.inner.MinInteger()
@@ -140,6 +170,8 @@ func (x *GraphRandomOpDescriptor) SetMinInteger(minInteger int) {
 	x.inner.SetMinInteger(minInteger)
 }
 
+// The upper range of the distribution. This value is used for Uniform with integer data types Defaults to INT32_MAX for uniform distributions and 0 for normal distributions.
+//
 // MaxInteger calls the underlying MaxInteger.
 func (x *GraphRandomOpDescriptor) MaxInteger() int {
 	return x.inner.MaxInteger()
@@ -150,6 +182,8 @@ func (x *GraphRandomOpDescriptor) SetMaxInteger(maxInteger int) {
 	x.inner.SetMaxInteger(maxInteger)
 }
 
+// The mean of the distribution. This value is used for Normal and Truncated Normal disributions. Defaults to 0.
+//
 // Mean calls the underlying Mean.
 func (x *GraphRandomOpDescriptor) Mean() float32 {
 	return x.inner.Mean()
@@ -160,6 +194,8 @@ func (x *GraphRandomOpDescriptor) SetMean(mean float32) {
 	x.inner.SetMean(mean)
 }
 
+// The standard deviation of the distribution. This value is used for Normal and Truncated Normal disributions. For Truncated Normal distribution this defines the standard deviation parameter of the underlying Normal distribution, that is the width of the Gaussian, not the true standard deviation of the truncated distribution which typically differs from the standard deviation of the original Normal distribution. Defaults to 0 for uniform distributions and 1 for normal distributions.
+//
 // StandardDeviation calls the underlying StandardDeviation.
 func (x *GraphRandomOpDescriptor) StandardDeviation() float32 {
 	return x.inner.StandardDeviation()
@@ -170,6 +206,8 @@ func (x *GraphRandomOpDescriptor) SetStandardDeviation(standardDeviation float32
 	x.inner.SetStandardDeviation(standardDeviation)
 }
 
+// The sampling method of the distribution. This value is used for Normal and Truncated Normal disributions. See MPSGraphRandomNormalSamplingMethod. Defaults to MPSGraphRandomNormalSamplingInvCDF.
+//
 // SamplingMethod calls the underlying SamplingMethod.
 func (x *GraphRandomOpDescriptor) SamplingMethod() MPSGraphRandomNormalSamplingMethod {
 	return MPSGraphRandomNormalSamplingMethod(x.inner.SamplingMethod())

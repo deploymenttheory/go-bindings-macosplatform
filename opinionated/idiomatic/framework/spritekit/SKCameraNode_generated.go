@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A Camera node is a full fledged SKNode that can have actions and physics applied to it. It also uses the standard SKNode transform system so modifying the camera node's position is how you translate the camera's viewport. Applying a scale to the node would zoom the viewport in or out etc. As an added benefit you can now rotate the viewport by applying a zRotation to the camera node, just as you would with any other SKNode. The camera viewport is centered on the camera's position. It uses the scene's frame and scale mode along with the node transforms to determine the size, origin and rotation of the viewport. There are some convenience functions included for testing if nodes are contained within the camera viewport. It can be used to determine if objects are no longer visible on the display. In order to use a camera; set it on the scene that contains the camera. @see SKScene.camera
+//
 // CameraNode wraps [raw.SKCameraNode] with a fluent Go API.
 type CameraNode struct {
 	inner *raw.SKCameraNode
@@ -38,90 +40,120 @@ func NewCameraNode() *CameraNode {
 	return &CameraNode{inner: raw.SKCameraNodeFromID(_id)}
 }
 
+// The position of the node in the parent's coordinate system
+//
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *CameraNode) WithPosition(position corefoundation.CGPoint) *CameraNode {
 	x.inner.SKNode.SetPosition(position)
 	return x
 }
 
+// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+//
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *CameraNode) WithZPosition(zPosition float64) *CameraNode {
 	x.inner.SKNode.SetZPosition(zPosition)
 	return x
 }
 
+// The Euler rotation about the z axis (in radians)
+//
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *CameraNode) WithZRotation(zRotation float64) *CameraNode {
 	x.inner.SKNode.SetZRotation(zRotation)
 	return x
 }
 
+// The scaling in the X axis
+//
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *CameraNode) WithXScale(xScale float64) *CameraNode {
 	x.inner.SKNode.SetXScale(xScale)
 	return x
 }
 
+// The scaling in the Y axis
+//
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *CameraNode) WithYScale(yScale float64) *CameraNode {
 	x.inner.SKNode.SetYScale(yScale)
 	return x
 }
 
+// The speed multiplier applied to all actions run on this node. Inherited by its children.
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *CameraNode) WithSpeed(speed float64) *CameraNode {
 	x.inner.SKNode.SetSpeed(speed)
 	return x
 }
 
+// Alpha of this node (multiplied by the output color to give the final result)
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *CameraNode) WithAlpha(alpha float64) *CameraNode {
 	x.inner.SKNode.SetAlpha(alpha)
 	return x
 }
 
+// Controls whether or not the node's actions is updated or paused.
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *CameraNode) WithPaused(paused bool) *CameraNode {
 	x.inner.SKNode.SetPaused(paused)
 	return x
 }
 
+// Controls whether or not the node and its children are rendered.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *CameraNode) WithHidden(hidden bool) *CameraNode {
 	x.inner.SKNode.SetHidden(hidden)
 	return x
 }
 
+// Controls whether or not the node receives touch events
+//
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *CameraNode) WithUserInteractionEnabled(userInteractionEnabled bool) *CameraNode {
 	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
 	return x
 }
 
+// The client assignable name. In general, this should be unique among peers in the scene graph.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *CameraNode) WithName(name string) *CameraNode {
 	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// Physics body attached to the node, with synchronized scale, rotation, and position
+//
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *CameraNode) WithPhysicsBody(physicsBody *PhysicsBody) *CameraNode {
 	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
+// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+//
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *CameraNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *CameraNode {
 	x.inner.SKNode.SetUserData(userData)
 	return x
 }
 
+// Kinematic constraints, used in IK solving
+//
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *CameraNode) WithReachConstraints(reachConstraints *ReachConstraints) *CameraNode {
 	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
+// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+//
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *CameraNode) WithConstraints(items ...*raw.SKConstraint) *CameraNode {
 	if len(items) == 0 {
@@ -140,6 +172,8 @@ func (x *CameraNode) WithConstraints(items ...*raw.SKConstraint) *CameraNode {
 	return x
 }
 
+// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+//
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *CameraNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *CameraNode {
 	x.inner.SKNode.SetAttributeValues(attributeValues)
@@ -200,11 +234,15 @@ func (x *CameraNode) WithAccessibilityEnabled(accessibilityEnabled bool) *Camera
 	return x
 }
 
+// Checks if the node is contained inside the viewport of the camera. The camera and node must both be in the same scene and presented on a view in order to determine if the node is inside the camera viewport rectangle. @return YES if the node is inside the viewport. NO if node is nil or the node is outside the viewport.
+//
 // ContainsNode calls the underlying ContainsNode.
 func (x *CameraNode) ContainsNode(node *raw.SKNode) bool {
 	return x.inner.ContainsNode(node)
 }
 
+// Returns the set of nodes in the same scene as the camera that are contained within its viewport. @return the set of nodes contained
+//
 // ContainedNodeSet calls the underlying ContainedNodeSet.
 func (x *CameraNode) ContainedNodeSet() *foundation.NSSet[*raw.SKNode] {
 	return x.inner.ContainedNodeSet()

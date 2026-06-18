@@ -35,6 +35,8 @@ func NewGlassesPrescription() *GlassesPrescription {
 	return &GlassesPrescription{inner: raw.HKGlassesPrescriptionFromID(_id)}
 }
 
+// @property      rightEye @abstract      The right eye lens specification
+//
 // RightEye calls the underlying RightEye.
 func (x *GlassesPrescription) RightEye() *GlassesLensSpecification {
 	_r := x.inner.RightEye()
@@ -44,6 +46,8 @@ func (x *GlassesPrescription) RightEye() *GlassesLensSpecification {
 	return &GlassesLensSpecification{inner: _r}
 }
 
+// @property      leftEye @abstract      The left eye lens specification
+//
 // LeftEye calls the underlying LeftEye.
 func (x *GlassesPrescription) LeftEye() *GlassesLensSpecification {
 	_r := x.inner.LeftEye()

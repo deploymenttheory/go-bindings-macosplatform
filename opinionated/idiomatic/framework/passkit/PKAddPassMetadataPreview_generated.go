@@ -32,6 +32,8 @@ func AddPassMetadataPreviewFromID(id objc.ID) *AddPassMetadataPreview {
 	return &AddPassMetadataPreview{inner: raw.PKAddPassMetadataPreviewFromID(id)}
 }
 
+// Initializer preview object to represent the pass being added to Wallet.which requires a CGImage of the pass's card art and a localized description. - Properties: - passThumbnail: CGImage representing the card artwork of the pass to be presented during provisioning. - localizedDescription: Localized description of the pass.
+//
 // NewAddPassMetadataPreviewWithPassThumbnailLocalizedDescription creates a new [AddPassMetadataPreview].
 func NewAddPassMetadataPreviewWithPassThumbnailLocalizedDescription(passThumbnail unsafe.Pointer, description string) *AddPassMetadataPreview {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKAddPassMetadataPreview")), objc.RegisterName("alloc"))
@@ -39,11 +41,15 @@ func NewAddPassMetadataPreviewWithPassThumbnailLocalizedDescription(passThumbnai
 	return &AddPassMetadataPreview{inner: raw.PKAddPassMetadataPreviewFromID(_id)}
 }
 
+// CGImage representing the pass in our provisioning UI.
+//
 // PassThumbnailImage calls the underlying PassThumbnailImage.
 func (x *AddPassMetadataPreview) PassThumbnailImage() unsafe.Pointer {
 	return x.inner.PassThumbnailImage()
 }
 
+// Localized description of the pass to be referenced during provisioning.
+//
 // LocalizedDescription calls the underlying LocalizedDescription.
 func (x *AddPassMetadataPreview) LocalizedDescription() string {
 	_r := x.inner.LocalizedDescription()

@@ -30,6 +30,8 @@ func FileProviderItemVersionFromID(id objc.ID) *FileProviderItemVersion {
 	return &FileProviderItemVersion{inner: raw.NSFileProviderItemVersionFromID(id)}
 }
 
+// Items versions have two distinct components, one for the file contents and one for metadata. Components are limited to 128 bytes in size.
+//
 // NewFileProviderItemVersionWithContentVersionMetadataVersion creates a new [FileProviderItemVersion].
 func NewFileProviderItemVersionWithContentVersionMetadataVersion(contentVersion *foundation.NSData, metadataVersion *foundation.NSData) *FileProviderItemVersion {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileProviderItemVersion")), objc.RegisterName("alloc"))
@@ -37,11 +39,15 @@ func NewFileProviderItemVersionWithContentVersionMetadataVersion(contentVersion 
 	return &FileProviderItemVersion{inner: raw.NSFileProviderItemVersionFromID(_id)}
 }
 
+// Version data for the content of the file. This property is used by the system for two purposes: if the contentVersion changes, - the system assumes that the contents have changed and will trigger a redownload if necessary. The exception to this is the case where the extension accepts a content sent by the system when replying to a createItemBasedOnTemplate or modifyItem call with shouldFetchContent set to NO. - the thumbnail cache is invalidated Note that the resource fork of the file is considered content, so this version data should change when either the data fork or the resource fork changes.
+//
 // ContentVersion calls the underlying ContentVersion.
 func (x *FileProviderItemVersion) ContentVersion() *foundation.NSData {
 	return x.inner.ContentVersion()
 }
 
+// Version data for the metadata of the item, i.e everything but the data fork and the resource fork. The system will store this version, but otherwise ignore it: - metadata changes on an item will be applied even if the metadataVersion remains unchanged - if the metadata version changes without any corresponding observable changes in the metadata returned to the system, the system will simply store the updated metadata version (to return it as the base version of a possible future change request).
+//
 // MetadataVersion calls the underlying MetadataVersion.
 func (x *FileProviderItemVersion) MetadataVersion() *foundation.NSData {
 	return x.inner.MetadataVersion()

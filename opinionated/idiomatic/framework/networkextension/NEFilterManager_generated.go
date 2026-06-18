@@ -39,36 +39,48 @@ func NewNEFilterManager() *NEFilterManager {
 	return &NEFilterManager{inner: raw.NEFilterManagerFromID(_id)}
 }
 
+// @property localizedDescription @discussion A string containing a description of the filter.
+//
 // WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
 func (x *NEFilterManager) WithLocalizedDescription(localizedDescription string) *NEFilterManager {
 	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
 	return x
 }
 
+// @property providerConfiguration @discussion An NEFilterProviderConfiguration object containing the provider-specific portion of the filter configuration.
+//
 // WithProviderConfiguration sets the providerConfiguration property and returns the receiver for chaining.
 func (x *NEFilterManager) WithProviderConfiguration(providerConfiguration *NEFilterProviderConfiguration) *NEFilterManager {
 	x.inner.SetProviderConfiguration(providerConfiguration.Unwrap())
 	return x
 }
 
+// @property enabled @discussion Toggles the enabled status of the filter. On iOS, setting this property will disable filter configurations of other apps, and this property will be set to NO when other filter configurations are enabled. On macOS, up to 4 filter configurations of the same grade can be enabled simultaneously.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *NEFilterManager) WithEnabled(enabled bool) *NEFilterManager {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// @property grade @discussion The grade of the filter. The default grade is NEFilterManagerGradeFirewall.
+//
 // WithGrade sets the grade property and returns the receiver for chaining.
 func (x *NEFilterManager) WithGrade(grade NEFilterManagerGrade) *NEFilterManager {
 	x.inner.SetGrade(raw.NEFilterManagerGrade(grade))
 	return x
 }
 
+// @property disableEncryptedDNSSettings @discussion Causes the content filter to disable any other installed encrypted DNS settings, including iCloud Private Relay system-wide DNS encryption. This should only be used if the content filter expects to intercept cleartext UDP DNS packets.
+//
 // WithDisableEncryptedDNSSettings sets the disableEncryptedDNSSettings property and returns the receiver for chaining.
 func (x *NEFilterManager) WithDisableEncryptedDNSSettings(disableEncryptedDNSSettings bool) *NEFilterManager {
 	x.inner.SetDisableEncryptedDNSSettings(disableEncryptedDNSSettings)
 	return x
 }
 
+// @method loadFromPreferencesWithCompletionHandler: @discussion This function loads the current filter configuration from the caller's filter preferences. @param completionHandler A block that will be called when the load operation is completed. The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
+//
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEFilterManager) LoadFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -87,6 +99,8 @@ func (x *NEFilterManager) LoadFromPreferences(ctx context.Context) error {
 	}
 }
 
+// @method removeFromPreferencesWithCompletionHandler: @discussion This function removes the filter configuration from the caller's filter preferences. If the filter is enabled, the filter becomes disabled. @param completionHandler A block that will be called when the remove operation is completed. The NSError passed to this block will be nil if the remove operation succeeded, non-nil otherwise.
+//
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEFilterManager) RemoveFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -105,6 +119,8 @@ func (x *NEFilterManager) RemoveFromPreferences(ctx context.Context) error {
 	}
 }
 
+// @method saveToPreferencesWithCompletionHandler: @discussion This function saves the filter configuration in the caller's filter preferences. If the filter is enabled, it will become active. @param completionHandler A block that will be called when the save operation is completed. The NSError passed to this block will be nil if the save operation succeeded, non-nil otherwise.
+//
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEFilterManager) SaveToPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -123,6 +139,8 @@ func (x *NEFilterManager) SaveToPreferences(ctx context.Context) error {
 	}
 }
 
+// @property localizedDescription @discussion A string containing a description of the filter.
+//
 // LocalizedDescription calls the underlying LocalizedDescription.
 func (x *NEFilterManager) LocalizedDescription() string {
 	_r := x.inner.LocalizedDescription()
@@ -137,6 +155,8 @@ func (x *NEFilterManager) SetLocalizedDescription(localizedDescription string) {
 	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
 }
 
+// @property providerConfiguration @discussion An NEFilterProviderConfiguration object containing the provider-specific portion of the filter configuration.
+//
 // ProviderConfiguration calls the underlying ProviderConfiguration.
 func (x *NEFilterManager) ProviderConfiguration() *NEFilterProviderConfiguration {
 	_r := x.inner.ProviderConfiguration()
@@ -151,6 +171,8 @@ func (x *NEFilterManager) SetProviderConfiguration(providerConfiguration *raw.NE
 	x.inner.SetProviderConfiguration(providerConfiguration)
 }
 
+// @property enabled @discussion Toggles the enabled status of the filter. On iOS, setting this property will disable filter configurations of other apps, and this property will be set to NO when other filter configurations are enabled. On macOS, up to 4 filter configurations of the same grade can be enabled simultaneously.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *NEFilterManager) IsEnabled() bool {
 	return x.inner.IsEnabled()
@@ -161,6 +183,8 @@ func (x *NEFilterManager) SetEnabled(enabled bool) {
 	x.inner.SetEnabled(enabled)
 }
 
+// @property grade @discussion The grade of the filter. The default grade is NEFilterManagerGradeFirewall.
+//
 // Grade calls the underlying Grade.
 func (x *NEFilterManager) Grade() NEFilterManagerGrade {
 	return NEFilterManagerGrade(x.inner.Grade())
@@ -171,6 +195,8 @@ func (x *NEFilterManager) SetGrade(grade NEFilterManagerGrade) {
 	x.inner.SetGrade(raw.NEFilterManagerGrade(grade))
 }
 
+// @property disableEncryptedDNSSettings @discussion Causes the content filter to disable any other installed encrypted DNS settings, including iCloud Private Relay system-wide DNS encryption. This should only be used if the content filter expects to intercept cleartext UDP DNS packets.
+//
 // DisableEncryptedDNSSettings calls the underlying DisableEncryptedDNSSettings.
 func (x *NEFilterManager) DisableEncryptedDNSSettings() bool {
 	return x.inner.DisableEncryptedDNSSettings()

@@ -37,31 +37,43 @@ func NewSafariToolbarItem() *SafariToolbarItem {
 	return &SafariToolbarItem{inner: raw.SFSafariToolbarItemFromID(_id)}
 }
 
+// Sets the enabled state and the badge text for the toolbar item. The badge text is visible even when the toolbar item is disabled.
+//
 // SetEnabledWithBadgeText calls the underlying SetEnabledWithBadgeText.
 func (x *SafariToolbarItem) SetEnabledWithBadgeText(enabled bool, badgeText string) {
 	x.inner.SetEnabledWithBadgeText(enabled, foundation.NSStringStringWithUTF8String(badgeText))
 }
 
+// Sets the enabled state for the toolbar item.
+//
 // SetEnabled calls the underlying SetEnabled.
 func (x *SafariToolbarItem) SetEnabled(enabled bool) {
 	x.inner.SetEnabled(enabled)
 }
 
+// Sets the badge text for the toolbar item. The badge text is visible even when the toolbar item is disabled. Setting the text to nil will clear the badge.
+//
 // SetBadgeText calls the underlying SetBadgeText.
 func (x *SafariToolbarItem) SetBadgeText(badgeText string) {
 	x.inner.SetBadgeText(foundation.NSStringStringWithUTF8String(badgeText))
 }
 
+// Sets the image for the toolbar item. Setting the image to nil will set the default image.
+//
 // SetImage calls the underlying SetImage.
 func (x *SafariToolbarItem) SetImage(image *appkit.NSImage) {
 	x.inner.SetImage(image)
 }
 
+// Sets the label for the toolbar button. Setting the label to nil will set the default label.
+//
 // SetLabel calls the underlying SetLabel.
 func (x *SafariToolbarItem) SetLabel(label string) {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 }
 
+// Shows the popover associated with this toolbar button.
+//
 // ShowPopover calls the underlying ShowPopover.
 func (x *SafariToolbarItem) ShowPopover() {
 	x.inner.ShowPopover()

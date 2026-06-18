@@ -36,12 +36,16 @@ func NewTemporaryMatrix() *TemporaryMatrix {
 	return &TemporaryMatrix{inner: raw.MPSTemporaryMatrixFromID(_id)}
 }
 
+// @abstract       The number of times a temporary matrix may be read by a MPSMatrix... kernel before its contents become undefined. @discussion     MPSTemporaryMatrices must release their underlying buffers for reuse immediately after last use. So as to facilitate *prompt* convenient memory recycling, each time a MPSTemporaryMatrix is read by a MPSMatrix... -encode... method, its readCount is automatically decremented. When the readCount reaches 0, the underlying buffer is automatically made available for reuse to MPS for its own needs and for other MPSTemporaryMatrices prior to return from the -encode.. function. The contents of the buffer become undefined at this time. By default, the readCount is initialized to 1, indicating a matrix that may be overwritten any number of times, but read only once. You may change the readCount as desired to allow MPSMatrixKernels to read the MPSTemporaryMatrix additional times. However, it is an error to change the readCount once it is zero. It is an error to read or write to a MPSTemporaryMatrix with a zero readCount. You may set the readCount to 0 yourself to cause the underlying buffer to be returned to MPS. Writing to a MPSTemporaryMatrix does not adjust the readCount. The Metal API Validation layer will assert if a MPSTemporaryMatrix is deallocated with non-zero readCount to help identify cases when resources are not returned promptly.
+//
 // WithReadCount sets the readCount property and returns the receiver for chaining.
 func (x *TemporaryMatrix) WithReadCount(readCount uint) *TemporaryMatrix {
 	x.inner.SetReadCount(readCount)
 	return x
 }
 
+// @abstract       The number of times a temporary matrix may be read by a MPSMatrix... kernel before its contents become undefined. @discussion     MPSTemporaryMatrices must release their underlying buffers for reuse immediately after last use. So as to facilitate *prompt* convenient memory recycling, each time a MPSTemporaryMatrix is read by a MPSMatrix... -encode... method, its readCount is automatically decremented. When the readCount reaches 0, the underlying buffer is automatically made available for reuse to MPS for its own needs and for other MPSTemporaryMatrices prior to return from the -encode.. function. The contents of the buffer become undefined at this time. By default, the readCount is initialized to 1, indicating a matrix that may be overwritten any number of times, but read only once. You may change the readCount as desired to allow MPSMatrixKernels to read the MPSTemporaryMatrix additional times. However, it is an error to change the readCount once it is zero. It is an error to read or write to a MPSTemporaryMatrix with a zero readCount. You may set the readCount to 0 yourself to cause the underlying buffer to be returned to MPS. Writing to a MPSTemporaryMatrix does not adjust the readCount. The Metal API Validation layer will assert if a MPSTemporaryMatrix is deallocated with non-zero readCount to help identify cases when resources are not returned promptly.
+//
 // ReadCount calls the underlying ReadCount.
 func (x *TemporaryMatrix) ReadCount() uint {
 	return x.inner.ReadCount()

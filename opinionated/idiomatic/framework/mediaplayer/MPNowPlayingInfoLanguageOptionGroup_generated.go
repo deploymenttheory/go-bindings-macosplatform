@@ -40,6 +40,8 @@ func NewNowPlayingInfoLanguageOptionGroupWithLanguageOptionsDefaultLanguageOptio
 	return &NowPlayingInfoLanguageOptionGroup{inner: raw.MPNowPlayingInfoLanguageOptionGroupFromID(_id)}
 }
 
+// The available language options within this group.
+//
 // LanguageOptions returns the collection as a Go slice.
 func (x *NowPlayingInfoLanguageOptionGroup) LanguageOptions() []*NowPlayingInfoLanguageOption {
 	arr := x.inner.LanguageOptions()
@@ -51,6 +53,8 @@ func (x *NowPlayingInfoLanguageOptionGroup) LanguageOptions() []*NowPlayingInfoL
 	})
 }
 
+// The default language option, if any, within this group.
+//
 // DefaultLanguageOption calls the underlying DefaultLanguageOption.
 func (x *NowPlayingInfoLanguageOptionGroup) DefaultLanguageOption() *NowPlayingInfoLanguageOption {
 	_r := x.inner.DefaultLanguageOption()
@@ -60,6 +64,8 @@ func (x *NowPlayingInfoLanguageOptionGroup) DefaultLanguageOption() *NowPlayingI
 	return &NowPlayingInfoLanguageOption{inner: _r}
 }
 
+// Indicates whether a selection in this group is required at all times.
+//
 // AllowEmptySelection calls the underlying AllowEmptySelection.
 func (x *NowPlayingInfoLanguageOptionGroup) AllowEmptySelection() bool {
 	return x.inner.AllowEmptySelection()

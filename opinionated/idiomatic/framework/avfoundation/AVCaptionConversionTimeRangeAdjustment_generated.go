@@ -38,11 +38,15 @@ func NewCaptionConversionTimeRangeAdjustment() *CaptionConversionTimeRangeAdjust
 	return &CaptionConversionTimeRangeAdjustment{inner: raw.AVCaptionConversionTimeRangeAdjustmentFromID(_id)}
 }
 
+// @property      startTimeOffset @abstract      Indicates the amount by which the timeRange.start of the captions must be adjusted in order to correct a problem. @discussion    The value may any numeric value, positive, negative, or zero.
+//
 // StartTimeOffset calls the underlying StartTimeOffset.
 func (x *CaptionConversionTimeRangeAdjustment) StartTimeOffset() coremedia.CMTime {
 	return x.inner.StartTimeOffset()
 }
 
+// @property      durationOffset @abstract      Indicates the amount by which the timeRange.duration of the captions must be adjusted in order to correct a problem. @discussion    The value may any numeric value, positive, negative, or zero.
+//
 // DurationOffset calls the underlying DurationOffset.
 func (x *CaptionConversionTimeRangeAdjustment) DurationOffset() coremedia.CMTime {
 	return x.inner.DurationOffset()

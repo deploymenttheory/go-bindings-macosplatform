@@ -39,16 +39,22 @@ func NewRenderingSessionWithCommandQueueSessionAttributesPreferredTransformQuali
 	return &RenderingSession{inner: raw.CNRenderingSessionFromID(_id)}
 }
 
+// Encode a command to render a shallow depth of field (SDoF) image to a pixel buffer. - Parameters: - commandBuffer: the metal command buffer on which to encode the command - frameAttributes: controls the focus distance and aperture of the rendering - sourceImage: a pixel buffer read from the cinematicVideoTrack - sourceDisparity: a pixel buffer read from the cinematicDisparityTrack - destinationImage: the pixel buffer to which the SDoF image is rendered - Returns: whether encoding the render command was successful
+//
 // EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationImage calls the underlying EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationImage.
 func (x *RenderingSession) EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationImage(commandBuffer metal.MTLCommandBuffer, frameAttributes *raw.CNRenderingSessionFrameAttributes, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer, destinationImage unsafe.Pointer) bool {
 	return x.inner.EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationImage(commandBuffer, frameAttributes, sourceImage, sourceDisparity, destinationImage)
 }
 
+// Encode a command to render a shallow depth of field (SDoF) image to a metal texture as RGBA. - Parameters: - commandBuffer: the metal command buffer on which to encode the command - frameAttributes: controls the focus distance and aperture of the rendering - sourceImage: a pixel buffer read from the cinematicVideoTrack - sourceDisparity: a pixel buffer read from the cinematicDisparityTrack - destinationRGBA: a metal texture to which the SDoF image is rendered in RGBA format - Returns: whether encoding the render command was successful
+//
 // EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationRGBA calls the underlying EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationRGBA.
 func (x *RenderingSession) EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationRGBA(commandBuffer metal.MTLCommandBuffer, frameAttributes *raw.CNRenderingSessionFrameAttributes, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer, destinationRGBA metal.MTLTexture) bool {
 	return x.inner.EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationRGBA(commandBuffer, frameAttributes, sourceImage, sourceDisparity, destinationRGBA)
 }
 
+// Encode a command to render a shallow depth of field (SDoF) image to two metal textures as luma and chroma. - Parameters: - commandBuffer: the metal command buffer on which to encode the command - frameAttributes: controls the focus distance and aperture of the rendering - sourceImage: a pixel buffer read from the cinematicVideoTrack - sourceDisparity: a pixel buffer read from the cinematicDisparityTrack - destinationLuma: a metal texture to which the luma of the SDoF image is rendered - destinationChroma: a metal texture to which the chroma of the SDoF image is rendered - Returns: whether encoding the render command was successful
+//
 // EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationLumaDestinationChroma calls the underlying EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationLumaDestinationChroma.
 func (x *RenderingSession) EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationLumaDestinationChroma(commandBuffer metal.MTLCommandBuffer, frameAttributes *raw.CNRenderingSessionFrameAttributes, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer, destinationLuma metal.MTLTexture, destinationChroma metal.MTLTexture) bool {
 	return x.inner.EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationLumaDestinationChroma(commandBuffer, frameAttributes, sourceImage, sourceDisparity, destinationLuma, destinationChroma)

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a console device in a VM.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzconsoledevice
 type VZConsoleDevice struct {
 	foundation.NSObject

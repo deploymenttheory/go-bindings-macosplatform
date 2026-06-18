@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The configuration object that represents an NVM Express Controller storage device.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vznvmexpresscontrollerdeviceconfiguration
 type VZNVMExpressControllerDeviceConfiguration struct {
 	VZStorageDeviceConfiguration
@@ -29,7 +31,7 @@ func VZNVMExpressControllerDeviceConfigurationFromID(id objc.ID) *VZNVMExpressCo
 	return o
 }
 
-// @abstract Initialize a VZNVMExpressControllerDeviceConfiguration with a device attachment. @param attachment The storage device attachment. This defines how the virtualized device operates on the host side. @see VZDiskImageStorageDeviceAttachment
+// Creates a new NVM Express controller configuration with the storage device attachment you provide.
 func (o *VZNVMExpressControllerDeviceConfiguration) InitWithAttachment(attachment *VZStorageDeviceAttachment) *VZNVMExpressControllerDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZNVMExpressControllerDeviceConfigurationSelInitWithAttachment, attachment.Ptr())
 	if _ret != 0 {

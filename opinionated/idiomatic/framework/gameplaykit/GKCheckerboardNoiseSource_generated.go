@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Produces noise in a checkerboard pattern.
+//
 // CheckerboardNoiseSource wraps [raw.GKCheckerboardNoiseSource] with a fluent Go API.
 type CheckerboardNoiseSource struct {
 	inner *raw.GKCheckerboardNoiseSource

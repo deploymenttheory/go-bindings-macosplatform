@@ -36,11 +36,15 @@ func NewProbeResult() *ProbeResult {
 	return &ProbeResult{inner: raw.FSProbeResultFromID(_id)}
 }
 
+// The match result, representing the recognition and usability of a probed resource.
+//
 // Result calls the underlying Result.
 func (x *ProbeResult) Result() FSMatchResult {
 	return FSMatchResult(x.inner.Result())
 }
 
+// The resource name, as found during the probe operation. This value is non-`nil` unless the “FSProbeResult/result“ is “FSMatchResult/notRecognized`. For formats that lack a name, this value may be an empty string. This value can also be an empty string if the format supports a name, but the value isn't set yet.
+//
 // Name calls the underlying Name.
 func (x *ProbeResult) Name() string {
 	_r := x.inner.Name()
@@ -50,6 +54,8 @@ func (x *ProbeResult) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The container identifier, as found during the probe operation. This value is non-`nil` unless the “FSProbeResult/result“ is “FSMatchResult/notRecognized“. For formats that lack a durable UUID on which to base a container identifier --- which is only legal for a “FSUnaryFileSystem“ --- this value may be a random UUID.
+//
 // ContainerID calls the underlying ContainerID.
 func (x *ProbeResult) ContainerID() *ContainerIdentifier {
 	_r := x.inner.ContainerID()

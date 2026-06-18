@@ -38,42 +38,56 @@ func NewNNImageNodeWithHandle(handle *foundation.NSObject) *NNImageNode {
 	return &NNImageNode{inner: raw.MPSNNImageNodeFromID(_id)}
 }
 
+// @abstract   MPS resource identifier @discussion See MPSHandle protocol description.  Default: nil
+//
 // WithHandle sets the handle property and returns the receiver for chaining.
 func (x *NNImageNode) WithHandle(handle raw.MPSHandle) *NNImageNode {
 	x.inner.SetHandle(handle)
 	return x
 }
 
+// @abstract   The preferred precision for the image @discussion Default: MPSImageFeatureChannelFormatNone, meaning MPS should pick a format Typically, this is 16-bit floating-point.
+//
 // WithFormat sets the format property and returns the receiver for chaining.
 func (x *NNImageNode) WithFormat(format mpscore.MPSImageFeatureChannelFormat) *NNImageNode {
 	x.inner.SetFormat(format)
 	return x
 }
 
+// @abstract   Configurability for image allocation @discussion Allows you to influence how the image is allocated Default: MPSTemporaryImage.defaultAllocator
+//
 // WithImageAllocator sets the imageAllocator property and returns the receiver for chaining.
 func (x *NNImageNode) WithImageAllocator(imageAllocator mpscore.MPSImageAllocator) *NNImageNode {
 	x.inner.SetImageAllocator(imageAllocator)
 	return x
 }
 
+// @abstract   Tag a image node for view later @discussion Most image nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... intermediateImages:... list. CAUTION: exporting an image from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the image. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
+//
 // WithExportFromGraph sets the exportFromGraph property and returns the receiver for chaining.
 func (x *NNImageNode) WithExportFromGraph(exportFromGraph bool) *NNImageNode {
 	x.inner.SetExportFromGraph(exportFromGraph)
 	return x
 }
 
+// @abstract   Set to true to cause the resource to be synchronized with the CPU @discussion It is not needed on iOS/tvOS devices, where it does nothing.
+//
 // WithSynchronizeResource sets the synchronizeResource property and returns the receiver for chaining.
 func (x *NNImageNode) WithSynchronizeResource(synchronizeResource bool) *NNImageNode {
 	x.inner.SetSynchronizeResource(synchronizeResource)
 	return x
 }
 
+// @abstract   Stop training graph automatic creation at this node. @discussion An inference graph of MPSNNFilterNodes, MPSNNStateNodes and MPSNNImageNodes can be automatically converted to a training graph using -[MPSNNFilterNode trainingGraphWithSourceGradient:nodeHandler:]. Sometimes, an inference graph may contain extra nodes at start to do operations like resampling or range adjustment that should not be part of the training graph. To prevent gradient operations for these extra nodes from being included in the training graph, set <undesired node>.resultImage.stopGradient = YES. This will prevent gradient propagation beyond this MPSNNImageNode. Default: NO
+//
 // WithStopGradient sets the stopGradient property and returns the receiver for chaining.
 func (x *NNImageNode) WithStopGradient(stopGradient bool) *NNImageNode {
 	x.inner.SetStopGradient(stopGradient)
 	return x
 }
 
+// @abstract   MPS resource identifier @discussion See MPSHandle protocol description.  Default: nil
+//
 // Handle calls the underlying Handle.
 func (x *NNImageNode) Handle() raw.MPSHandle {
 	return x.inner.Handle()
@@ -84,6 +98,8 @@ func (x *NNImageNode) SetHandle(handle raw.MPSHandle) {
 	x.inner.SetHandle(handle)
 }
 
+// @abstract   The preferred precision for the image @discussion Default: MPSImageFeatureChannelFormatNone, meaning MPS should pick a format Typically, this is 16-bit floating-point.
+//
 // Format calls the underlying Format.
 func (x *NNImageNode) Format() mpscore.MPSImageFeatureChannelFormat {
 	return x.inner.Format()
@@ -94,6 +110,8 @@ func (x *NNImageNode) SetFormat(format mpscore.MPSImageFeatureChannelFormat) {
 	x.inner.SetFormat(format)
 }
 
+// @abstract   Configurability for image allocation @discussion Allows you to influence how the image is allocated Default: MPSTemporaryImage.defaultAllocator
+//
 // ImageAllocator calls the underlying ImageAllocator.
 func (x *NNImageNode) ImageAllocator() mpscore.MPSImageAllocator {
 	return x.inner.ImageAllocator()
@@ -104,6 +122,8 @@ func (x *NNImageNode) SetImageAllocator(imageAllocator mpscore.MPSImageAllocator
 	x.inner.SetImageAllocator(imageAllocator)
 }
 
+// @abstract   Tag a image node for view later @discussion Most image nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... intermediateImages:... list. CAUTION: exporting an image from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the image. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
+//
 // ExportFromGraph calls the underlying ExportFromGraph.
 func (x *NNImageNode) ExportFromGraph() bool {
 	return x.inner.ExportFromGraph()
@@ -114,6 +134,8 @@ func (x *NNImageNode) SetExportFromGraph(exportFromGraph bool) {
 	x.inner.SetExportFromGraph(exportFromGraph)
 }
 
+// @abstract   Set to true to cause the resource to be synchronized with the CPU @discussion It is not needed on iOS/tvOS devices, where it does nothing.
+//
 // SynchronizeResource calls the underlying SynchronizeResource.
 func (x *NNImageNode) SynchronizeResource() bool {
 	return x.inner.SynchronizeResource()
@@ -124,6 +146,8 @@ func (x *NNImageNode) SetSynchronizeResource(synchronizeResource bool) {
 	x.inner.SetSynchronizeResource(synchronizeResource)
 }
 
+// @abstract   Stop training graph automatic creation at this node. @discussion An inference graph of MPSNNFilterNodes, MPSNNStateNodes and MPSNNImageNodes can be automatically converted to a training graph using -[MPSNNFilterNode trainingGraphWithSourceGradient:nodeHandler:]. Sometimes, an inference graph may contain extra nodes at start to do operations like resampling or range adjustment that should not be part of the training graph. To prevent gradient operations for these extra nodes from being included in the training graph, set <undesired node>.resultImage.stopGradient = YES. This will prevent gradient propagation beyond this MPSNNImageNode. Default: NO
+//
 // StopGradient calls the underlying StopGradient.
 func (x *NNImageNode) StopGradient() bool {
 	return x.inner.StopGradient()

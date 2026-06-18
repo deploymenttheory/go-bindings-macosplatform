@@ -3,7 +3,8 @@
     returning only error. Recv is "(x *Type) " for an instance method or "" for a
     package-level class function; Target is the receiver/raw-package expression.
 */}}
-{{define "boolnserror_method"}}// {{.GoName}} returns any validation error.
+{{define "boolnserror_method"}}{{if .DocComment}}{{.DocComment}}//
+{{end}}// {{.GoName}} returns any validation error.
 func {{.Recv}}{{.GoName}}() error {
 _, err := {{.Target}}.{{.RawGoName}}()
 return err

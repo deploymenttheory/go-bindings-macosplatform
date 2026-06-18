@@ -32,6 +32,8 @@ func AudioRecorderFromID(id objc.ID) *AudioRecorder {
 	return &AudioRecorder{inner: raw.AVAudioRecorderFromID(id)}
 }
 
+// @method initWithURL:settings:error: @abstract Init the AudioRecorder with a specified url and settings. @discussion The file type to create can be set through the corresponding settings key. If not set, it will be inferred from the file extension. Will overwrite a file at the specified url if a file exists.
+//
 // NewAudioRecorderWithURLSettingsError creates a new [AudioRecorder].
 func NewAudioRecorderWithURLSettingsError(url string, settings *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AudioRecorder, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioRecorder")), objc.RegisterName("alloc"))
@@ -43,6 +45,8 @@ func NewAudioRecorderWithURLSettingsError(url string, settings *foundation.NSDic
 	return &AudioRecorder{inner: raw.AVAudioRecorderFromID(_id)}, nil
 }
 
+// @method initWithURL:format:error: @abstract Init the AudioRecorder with a specified url and format. @discussion The file type to create can be set through the corresponding settings key. If not set, it will be inferred from the file extension. Will overwrite a file at the specified url if a file exists.
+//
 // NewAudioRecorderWithURLFormatError creates a new [AudioRecorder].
 func NewAudioRecorderWithURLFormatError(url string, format *raw.AVAudioFormat) (*AudioRecorder, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioRecorder")), objc.RegisterName("alloc"))
@@ -54,88 +58,122 @@ func NewAudioRecorderWithURLFormatError(url string, format *raw.AVAudioFormat) (
 	return &AudioRecorder{inner: raw.AVAudioRecorderFromID(_id)}, nil
 }
 
+// @property delegate @abstract A delegate object to the AudioRecorder that conforms to the AVAudioRecorderDelegate protocol.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *AudioRecorder) WithDelegate(delegate raw.AVAudioRecorderDelegate) *AudioRecorder {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @property meteringEnabled @abstract Turns level metering on or off. @discussion Default is off.
+//
 // WithMeteringEnabled sets the meteringEnabled property and returns the receiver for chaining.
 func (x *AudioRecorder) WithMeteringEnabled(meteringEnabled bool) *AudioRecorder {
 	x.inner.SetMeteringEnabled(meteringEnabled)
 	return x
 }
 
+// @method prepareToRecord @abstract Creates the output file and gets ready to record. @discussion This method is called automatically on record. Returns YES on success and NO on failure.
+//
 // PrepareToRecord calls the underlying PrepareToRecord.
 func (x *AudioRecorder) PrepareToRecord() bool {
 	return x.inner.PrepareToRecord()
 }
 
+// @method record @abstract Start or resume recording to file. @discussion Returns YES on success and NO on failure.
+//
 // Record calls the underlying Record.
 func (x *AudioRecorder) Record() bool {
 	return x.inner.Record()
 }
 
+// @method recordAtTime: @abstract Start recording at specified time in the future. @discussion Time is an absolute time based on and greater than deviceCurrentTime. Returns YES on success and NO on failure.
+//
 // RecordAtTime calls the underlying RecordAtTime.
 func (x *AudioRecorder) RecordAtTime(time_ float64) bool {
 	return x.inner.RecordAtTime(time_)
 }
 
+// @method recordForDuration: @abstract Record for a specified duration. @discussion The recorder will stop when it has recorded this length of audio. Returns YES on success and NO on failure.
+//
 // RecordForDuration calls the underlying RecordForDuration.
 func (x *AudioRecorder) RecordForDuration(duration float64) bool {
 	return x.inner.RecordForDuration(duration)
 }
 
+// @method recordAtTime:forDuration: @abstract Record for a specified duration at a specified time in the future. @discussion Time is an absolute time based on and greater than deviceCurrentTime. Returns YES on success and NO on failure.
+//
 // RecordAtTimeForDuration calls the underlying RecordAtTimeForDuration.
 func (x *AudioRecorder) RecordAtTimeForDuration(time_ float64, duration float64) bool {
 	return x.inner.RecordAtTimeForDuration(time_, duration)
 }
 
+// @method pause @abstract Pause recording.
+//
 // Pause calls the underlying Pause.
 func (x *AudioRecorder) Pause() {
 	x.inner.Pause()
 }
 
+// @method stop @abstract Stop recording. @discussion This method also closes the output file.
+//
 // Stop calls the underlying Stop.
 func (x *AudioRecorder) Stop() {
 	x.inner.Stop()
 }
 
+// @method deleteRecording @abstract Delete the recorded file. @discussion AudioRecorder must be stopped. Returns YES on success and NO on failure.
+//
 // DeleteRecording calls the underlying DeleteRecording.
 func (x *AudioRecorder) DeleteRecording() bool {
 	return x.inner.DeleteRecording()
 }
 
+// @method updateMeters @abstract Call this method to refresh meter values.
+//
 // UpdateMeters calls the underlying UpdateMeters.
 func (x *AudioRecorder) UpdateMeters() {
 	x.inner.UpdateMeters()
 }
 
+// @method peakPowerForChannel: @abstract Returns peak power in decibels for a given channel.
+//
 // PeakPowerForChannel calls the underlying PeakPowerForChannel.
 func (x *AudioRecorder) PeakPowerForChannel(channelNumber uint) float32 {
 	return x.inner.PeakPowerForChannel(channelNumber)
 }
 
+// @method averagePowerForChannel: @abstract Returns average power in decibels for a given channel.
+//
 // AveragePowerForChannel calls the underlying AveragePowerForChannel.
 func (x *AudioRecorder) AveragePowerForChannel(channelNumber uint) float32 {
 	return x.inner.AveragePowerForChannel(channelNumber)
 }
 
+// @property recording @abstract Returns YES if the AudioRecorder is currently recording.
+//
 // IsRecording calls the underlying IsRecording.
 func (x *AudioRecorder) IsRecording() bool {
 	return x.inner.IsRecording()
 }
 
+// @property url @abstract URL of the recorded file.
+//
 // Url calls the underlying Url.
 func (x *AudioRecorder) Url() *foundation.NSURL {
 	return x.inner.Url()
 }
 
+// @property settings @abstract A dictionary of settings for the AudioRecorder. @discussion These settings are fully valid only when prepareToRecord has been called. For supported key-value pairs, see https://developer.apple.com/documentation/avfaudio/avaudiorecorder/1388386-initwithurl?language=objc
+//
 // Settings calls the underlying Settings.
 func (x *AudioRecorder) Settings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.Settings()
 }
 
+// @property format @abstract The audio format of the AudioRecorder. @discussion This property is fully valid only when prepareToRecord has been called.
+//
 // Format calls the underlying Format.
 func (x *AudioRecorder) Format() *AudioFormat {
 	_r := x.inner.Format()
@@ -145,6 +183,8 @@ func (x *AudioRecorder) Format() *AudioFormat {
 	return &AudioFormat{inner: _r}
 }
 
+// @property delegate @abstract A delegate object to the AudioRecorder that conforms to the AVAudioRecorderDelegate protocol.
+//
 // Delegate calls the underlying Delegate.
 func (x *AudioRecorder) Delegate() raw.AVAudioRecorderDelegate {
 	return x.inner.Delegate()
@@ -155,16 +195,22 @@ func (x *AudioRecorder) SetDelegate(delegate raw.AVAudioRecorderDelegate) {
 	x.inner.SetDelegate(delegate)
 }
 
+// @property currentTime @abstract Get the current time of the recording. @discussion This method is only vaild while recording.
+//
 // CurrentTime calls the underlying CurrentTime.
 func (x *AudioRecorder) CurrentTime() float64 {
 	return x.inner.CurrentTime()
 }
 
+// @property deviceCurrentTime @abstract Get the device current time. @discussion This method is always valid.
+//
 // DeviceCurrentTime calls the underlying DeviceCurrentTime.
 func (x *AudioRecorder) DeviceCurrentTime() float64 {
 	return x.inner.DeviceCurrentTime()
 }
 
+// @property meteringEnabled @abstract Turns level metering on or off. @discussion Default is off.
+//
 // IsMeteringEnabled calls the underlying IsMeteringEnabled.
 func (x *AudioRecorder) IsMeteringEnabled() bool {
 	return x.inner.IsMeteringEnabled()

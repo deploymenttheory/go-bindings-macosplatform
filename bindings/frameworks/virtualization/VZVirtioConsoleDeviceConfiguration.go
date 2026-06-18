@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A console device that enables communication between the host and the guest using console ports through a Virtio interface.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtioconsoledeviceconfiguration
 type VZVirtioConsoleDeviceConfiguration struct {
 	VZConsoleDeviceConfiguration
@@ -30,6 +32,7 @@ func VZVirtioConsoleDeviceConfigurationFromID(id objc.ID) *VZVirtioConsoleDevice
 	return o
 }
 
+// Creates a console port configuration object.
 func (o *VZVirtioConsoleDeviceConfiguration) Init() *VZVirtioConsoleDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioConsoleDeviceConfigurationSelInit)
 	if _ret != 0 {

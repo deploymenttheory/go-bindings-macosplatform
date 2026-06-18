@@ -36,18 +36,24 @@ func NewMTRWriteParams() *MTRWriteParams {
 	return &MTRWriteParams{inner: raw.MTRWriteParamsFromID(_id)}
 }
 
+// Controls whether the write is a timed write. If nil (the default value), a regular write is done for attributes that do not require a timed write and a timed write with some default timed request timeout is done for attributes that require a timed write. If not nil, a timed write is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual write request) within the timeout window. This value is specified in milliseconds.
+//
 // WithTimedWriteTimeout sets the timedWriteTimeout property and returns the receiver for chaining.
 func (x *MTRWriteParams) WithTimedWriteTimeout(timedWriteTimeout *foundation.NSNumber) *MTRWriteParams {
 	x.inner.SetTimedWriteTimeout(timedWriteTimeout)
 	return x
 }
 
+// Sets the data version for the Write Request for the interaction. If not nil, the write will only succeed if the current data version of the cluster matches the provided data version.
+//
 // WithDataVersion sets the dataVersion property and returns the receiver for chaining.
 func (x *MTRWriteParams) WithDataVersion(dataVersion *foundation.NSNumber) *MTRWriteParams {
 	x.inner.SetDataVersion(dataVersion)
 	return x
 }
 
+// Controls whether the write is a timed write. If nil (the default value), a regular write is done for attributes that do not require a timed write and a timed write with some default timed request timeout is done for attributes that require a timed write. If not nil, a timed write is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual write request) within the timeout window. This value is specified in milliseconds.
+//
 // TimedWriteTimeout calls the underlying TimedWriteTimeout.
 func (x *MTRWriteParams) TimedWriteTimeout() *foundation.NSNumber {
 	return x.inner.TimedWriteTimeout()
@@ -58,6 +64,8 @@ func (x *MTRWriteParams) SetTimedWriteTimeout(timedWriteTimeout *foundation.NSNu
 	x.inner.SetTimedWriteTimeout(timedWriteTimeout)
 }
 
+// Sets the data version for the Write Request for the interaction. If not nil, the write will only succeed if the current data version of the cluster matches the provided data version.
+//
 // DataVersion calls the underlying DataVersion.
 func (x *MTRWriteParams) DataVersion() *foundation.NSNumber {
 	return x.inner.DataVersion()

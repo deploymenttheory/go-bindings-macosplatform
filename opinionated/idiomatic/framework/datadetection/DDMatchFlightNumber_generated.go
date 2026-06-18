@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains a flight number that the data detection system matches. The DataDetection framework returns a flight number match in a `DDMatchFlightNumber` object, which contains an airline name and flight number.
+//
 // MatchFlightNumber wraps [raw.DDMatchFlightNumber] with a fluent Go API.
 type MatchFlightNumber struct {
 	inner *raw.DDMatchFlightNumber
@@ -36,6 +38,8 @@ func NewMatchFlightNumber() *MatchFlightNumber {
 	return &MatchFlightNumber{inner: raw.DDMatchFlightNumberFromID(_id)}
 }
 
+// The name of an airline.
+//
 // Airline calls the underlying Airline.
 func (x *MatchFlightNumber) Airline() string {
 	_r := x.inner.Airline()
@@ -45,6 +49,8 @@ func (x *MatchFlightNumber) Airline() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A string that represents a flight number.
+//
 // FlightNumber calls the underlying FlightNumber.
 func (x *MatchFlightNumber) FlightNumber() string {
 	_r := x.inner.FlightNumber()

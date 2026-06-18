@@ -35,41 +35,57 @@ func NewMultiheadAttentionDescriptor() *MultiheadAttentionDescriptor {
 	return &MultiheadAttentionDescriptor{inner: raw.MLCMultiheadAttentionDescriptorFromID(_id)}
 }
 
+// @brief model or embedding dimension
+//
 // ModelDimension calls the underlying ModelDimension.
 func (x *MultiheadAttentionDescriptor) ModelDimension() uint {
 	return x.inner.ModelDimension()
 }
 
+// @brief total dimension of key space, Default = modelDimension
+//
 // KeyDimension calls the underlying KeyDimension.
 func (x *MultiheadAttentionDescriptor) KeyDimension() uint {
 	return x.inner.KeyDimension()
 }
 
+// @brief total dimension of value space, Default = modelDimension
+//
 // ValueDimension calls the underlying ValueDimension.
 func (x *MultiheadAttentionDescriptor) ValueDimension() uint {
 	return x.inner.ValueDimension()
 }
 
+// @brief number of parallel attention heads
+//
 // HeadCount calls the underlying HeadCount.
 func (x *MultiheadAttentionDescriptor) HeadCount() uint {
 	return x.inner.HeadCount()
 }
 
+// @brief a droupout layer applied to the output projection weights. Default = 0.0
+//
 // Dropout calls the underlying Dropout.
 func (x *MultiheadAttentionDescriptor) Dropout() float32 {
 	return x.inner.Dropout()
 }
 
+// @brief if true, bias is used for query/key/value/output projections. Default = true
+//
 // HasBiases calls the underlying HasBiases.
 func (x *MultiheadAttentionDescriptor) HasBiases() bool {
 	return x.inner.HasBiases()
 }
 
+// @brief if true, an array of biases is added to key and value respectively. Default = false
+//
 // HasAttentionBiases calls the underlying HasAttentionBiases.
 func (x *MultiheadAttentionDescriptor) HasAttentionBiases() bool {
 	return x.inner.HasAttentionBiases()
 }
 
+// @brief if true, a row of zeroes is added to projected key and value. Default = false
+//
 // AddsZeroAttention calls the underlying AddsZeroAttention.
 func (x *MultiheadAttentionDescriptor) AddsZeroAttention() bool {
 	return x.inner.AddsZeroAttention()

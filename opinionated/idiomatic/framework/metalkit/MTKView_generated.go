@@ -34,6 +34,8 @@ func ViewFromID(id objc.ID) *View {
 	return &View{inner: raw.MTKViewFromID(id)}
 }
 
+// @method initWithFrame:device @abstract Initalize the view with a frame and device @param frameRect The frame rectangle for the created view object. @param device The MTLDevice to be used by the view to create Metal objects
+//
 // NewViewWithFrameDevice creates a new [View].
 func NewViewWithFrameDevice(frameRect corefoundation.CGRect, device metal.MTLDevice) *View {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTKView")), objc.RegisterName("alloc"))
@@ -41,6 +43,8 @@ func NewViewWithFrameDevice(frameRect corefoundation.CGRect, device metal.MTLDev
 	return &View{inner: raw.MTKViewFromID(_id)}
 }
 
+// @method initWithCoder: @abstract Returns a view initalized from data in a given unarchiver @param coder An unarchiver object
+//
 // NewViewWithCoder creates a new [View].
 func NewViewWithCoder(coder *foundation.NSCoder) *View {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTKView")), objc.RegisterName("alloc"))
@@ -48,124 +52,166 @@ func NewViewWithCoder(coder *foundation.NSCoder) *View {
 	return &View{inner: raw.MTKViewFromID(_id)}
 }
 
+// @property delegate @abstract The delegate handling common view operations
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *View) WithDelegate(delegate raw.MTKViewDelegate) *View {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @property device @abstract The MTLDevice used to create Metal objects @discussion This must be explicitly set by the application unless it was passed into the initializer. Defaults to nil
+//
 // WithDevice sets the device property and returns the receiver for chaining.
 func (x *View) WithDevice(device metal.MTLDevice) *View {
 	x.inner.SetDevice(device)
 	return x
 }
 
+// @property framebufferOnly @abstract If the currentDrawable can be used for sampling or texture read operations @discussion This defaults to YES. This property controls whether or not the returned drawables' MTLTextures may only be used for framebuffer attachments (YES) or whether they may also be used for texture sampling and pixel read/write operations (NO). A value of YES allows the CAMetalLayer to allocate the MTLTexture objects in ways that are optimized for display purposes that makes them unsuitable for sampling. The recommended value for most applications is YES.
+//
 // WithFramebufferOnly sets the framebufferOnly property and returns the receiver for chaining.
 func (x *View) WithFramebufferOnly(framebufferOnly bool) *View {
 	x.inner.SetFramebufferOnly(framebufferOnly)
 	return x
 }
 
+// @property depthStencilAttachmentTextureUsage @abstract The usage flags set on the depth attachment. @discussion This property controls the texture usage flags set on the MTKView's depth-stencil attachment on creation.  This value defaults to MTLTextureUsageRenderTarget. The recommended value for most applications is MTLTextureUsageRenderTarget. Changing this value re-creates the depth attachment, but any data currently in the depth attachment will be lost.
+//
 // WithDepthStencilAttachmentTextureUsage sets the depthStencilAttachmentTextureUsage property and returns the receiver for chaining.
 func (x *View) WithDepthStencilAttachmentTextureUsage(depthStencilAttachmentTextureUsage metal.MTLTextureUsage) *View {
 	x.inner.SetDepthStencilAttachmentTextureUsage(depthStencilAttachmentTextureUsage)
 	return x
 }
 
+// @property multisampleColorAttachmentTextureUsage @abstract The texture usage flags for the multisample color attachment. @discussion This property controls the texture usage flags set on the the multisample color attachment attachment.  This value defaults to MTLTextureUsageRenderTarget. The recommended value for most applications is MTLTextureUsageRenderTarget. Changing this value re-creates the multisample color attachment, but any data currently in the multisample color attachment will be lost.
+//
 // WithMultisampleColorAttachmentTextureUsage sets the multisampleColorAttachmentTextureUsage property and returns the receiver for chaining.
 func (x *View) WithMultisampleColorAttachmentTextureUsage(multisampleColorAttachmentTextureUsage metal.MTLTextureUsage) *View {
 	x.inner.SetMultisampleColorAttachmentTextureUsage(multisampleColorAttachmentTextureUsage)
 	return x
 }
 
+// @property presentsWithTransaction @abstract If the layer should be presented synchronously @discussion Defaults to NO. When NO, changes to the layer's render buffer appear on-screen asynchronously to normal layer updates. When YES, changes to the MTL content are sent to the screen via the standard CATransaction mechanisms.
+//
 // WithPresentsWithTransaction sets the presentsWithTransaction property and returns the receiver for chaining.
 func (x *View) WithPresentsWithTransaction(presentsWithTransaction bool) *View {
 	x.inner.SetPresentsWithTransaction(presentsWithTransaction)
 	return x
 }
 
+// @property colorPixelFormat @abstract The pixelFormat for the drawable's texture.
+//
 // WithColorPixelFormat sets the colorPixelFormat property and returns the receiver for chaining.
 func (x *View) WithColorPixelFormat(colorPixelFormat metal.MTLPixelFormat) *View {
 	x.inner.SetColorPixelFormat(colorPixelFormat)
 	return x
 }
 
+// @property depthStencilPixelFormat @abstract The pixelFormat used to create depthStencilTexture
+//
 // WithDepthStencilPixelFormat sets the depthStencilPixelFormat property and returns the receiver for chaining.
 func (x *View) WithDepthStencilPixelFormat(depthStencilPixelFormat metal.MTLPixelFormat) *View {
 	x.inner.SetDepthStencilPixelFormat(depthStencilPixelFormat)
 	return x
 }
 
+// @property depthStencilStorageMode @abstract The storage mode for the depthStencilTexture. Defaults to MTLStorageModePrivate.
+//
 // WithDepthStencilStorageMode sets the depthStencilStorageMode property and returns the receiver for chaining.
 func (x *View) WithDepthStencilStorageMode(depthStencilStorageMode metal.MTLStorageMode) *View {
 	x.inner.SetDepthStencilStorageMode(depthStencilStorageMode)
 	return x
 }
 
+// @property sampleCount @abstract The sample count used to to create multisampleColorTexture @discussion This defaults to 1.  If sampleCount is greater than 1 a multisampled color texture will be created and the currentDrawable's texture will be set as the resolve texture in the currentRenderPassDescriptor and the store action will be set to MTLStoreActionMultisampleResolve
+//
 // WithSampleCount sets the sampleCount property and returns the receiver for chaining.
 func (x *View) WithSampleCount(sampleCount uint) *View {
 	x.inner.SetSampleCount(sampleCount)
 	return x
 }
 
+// @property clearColor @abstract The clear color value used to generate the currentRenderPassDescriptor @discussion This defaults to (0.0, 0.0, 0.0, 1.0)
+//
 // WithClearColor sets the clearColor property and returns the receiver for chaining.
 func (x *View) WithClearColor(clearColor metal.MTLClearColor) *View {
 	x.inner.SetClearColor(clearColor)
 	return x
 }
 
+// @property clearDepth @abstract The clear depth value used to generate the currentRenderPassDescriptor @discussion This defaults to 1.0
+//
 // WithClearDepth sets the clearDepth property and returns the receiver for chaining.
 func (x *View) WithClearDepth(clearDepth float64) *View {
 	x.inner.SetClearDepth(clearDepth)
 	return x
 }
 
+// @property clearStencil @abstract The clear stencil value used to generate currentRenderPassDescriptor @discussion This defaults to 0
+//
 // WithClearStencil sets the clearStencil property and returns the receiver for chaining.
 func (x *View) WithClearStencil(clearStencil uint32) *View {
 	x.inner.SetClearStencil(clearStencil)
 	return x
 }
 
+// @property preferredFramesPerSecond @abstract The rate you want the view to redraw its contents. @discussion When your application sets its preferred frame rate, the view chooses a frame rate as close to that as possible based on the capabilities of the screen the view is displayed on. The actual frame rate chosen is usually a factor of the maximum refresh rate of the screen to provide a consistent frame rate. For example, if the maximum refresh rate of the screen is 60 frames per second, that is also the highest frame rate the view sets as the actual frame rate. However, if you ask for a lower frame rate, it might choose 30, 20, 15 or some other factor to be the actual frame rate. Your application should choose a frame rate that it can consistently maintain. The default value is 60 frames per second.
+//
 // WithPreferredFramesPerSecond sets the preferredFramesPerSecond property and returns the receiver for chaining.
 func (x *View) WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View {
 	x.inner.SetPreferredFramesPerSecond(preferredFramesPerSecond)
 	return x
 }
 
+// @property enableSetNeedsDisplay @abstract Controls whether the view responds to setNeedsDisplay. @discussion If true, then the view behaves similarily to a UIView or NSView, responding to calls to setNeedsDisplay. When the view has been marked for display, the view is automatically redisplayed on each pass through the application’s event loop. Setting enableSetNeedsDisplay to true will also pause the MTKView's internal render loop and updates will instead be event driven. The default value is false.
+//
 // WithEnableSetNeedsDisplay sets the enableSetNeedsDisplay property and returns the receiver for chaining.
 func (x *View) WithEnableSetNeedsDisplay(enableSetNeedsDisplay bool) *View {
 	x.inner.SetEnableSetNeedsDisplay(enableSetNeedsDisplay)
 	return x
 }
 
+// @property autoResizeDrawable @abstract Controls whether to resize the drawable as the view changes size. @discussion If true, the size of the currentDrawable's texture, depthStencilTexture, and multisampleColorTexture will automatically resize as the view resizes.  If false, these textures will take on the size of drawableSize and drawableSize will not change. The default value is true.
+//
 // WithAutoResizeDrawable sets the autoResizeDrawable property and returns the receiver for chaining.
 func (x *View) WithAutoResizeDrawable(autoResizeDrawable bool) *View {
 	x.inner.SetAutoResizeDrawable(autoResizeDrawable)
 	return x
 }
 
+// @property drawableSize @abstract The current size of drawable textures @discussion The size currentDrawable's texture, depthStencilTexture, and multisampleColorTexture.  If autoResizeDrawable is true this value will be updated as the view's size changes. If autoResizeDrawable is false, this can be set to fix the size of the drawable textures.
+//
 // WithDrawableSize sets the drawableSize property and returns the receiver for chaining.
 func (x *View) WithDrawableSize(drawableSize corefoundation.CGSize) *View {
 	x.inner.SetDrawableSize(drawableSize)
 	return x
 }
 
+// @property paused @abstract Controls whether the draw methods should countinue at preferredFramesPerSecond @discussion If true, the delegate will receive drawInMTKView: messages or the subclass will receive drawRect: messages at a rate of preferredFramesPerSecond based on an internal timer. The default value is false.
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *View) WithPaused(paused bool) *View {
 	x.inner.SetPaused(paused)
 	return x
 }
 
+// @method releaseDrawables @abstract Release the depthStencilTexture and multisampleColorTexture @discussion Can be called by the app to release the textures in order to conserve memory when it goes into the background.   The view will recreate multisampleColorTexture or depthStencilTexture upon the next access of the respective properties.  Both multisampleColorTexture and depthStencilTexture will be recreated in the access to currentRenderPassDescriptor.
+//
 // ReleaseDrawables calls the underlying ReleaseDrawables.
 func (x *View) ReleaseDrawables() {
 	x.inner.ReleaseDrawables()
 }
 
+// @method draw @abstract Manually ask the view to draw new contents. This causes the view to call either the drawInMTKView (delegate) or drawRect (subclass) method. @discussion Manually ask the view to draw new contents. This causes the view to call either the drawInMTKView (delegate) or drawRect (subclass) method. This should be used when the view's paused proprety is set to true and enableSetNeedsDisplay is set to false.
+//
 // Draw calls the underlying Draw.
 func (x *View) Draw() {
 	x.inner.Draw()
 }
 
+// @property delegate @abstract The delegate handling common view operations
+//
 // Delegate calls the underlying Delegate.
 func (x *View) Delegate() raw.MTKViewDelegate {
 	return x.inner.Delegate()
@@ -176,6 +222,8 @@ func (x *View) SetDelegate(delegate raw.MTKViewDelegate) {
 	x.inner.SetDelegate(delegate)
 }
 
+// @property device @abstract The MTLDevice used to create Metal objects @discussion This must be explicitly set by the application unless it was passed into the initializer. Defaults to nil
+//
 // Device calls the underlying Device.
 func (x *View) Device() metal.MTLDevice {
 	return x.inner.Device()
@@ -186,11 +234,15 @@ func (x *View) SetDevice(device metal.MTLDevice) {
 	x.inner.SetDevice(device)
 }
 
+// @property currentDrawable @abstract The drawable to be used for the current frame. @discussion currentDrawable is updated at the end -draw (i.e. after the delegate's drawInMTKView method is called)
+//
 // CurrentDrawable calls the underlying CurrentDrawable.
 func (x *View) CurrentDrawable() quartzcore.CAMetalDrawable {
 	return x.inner.CurrentDrawable()
 }
 
+// @property framebufferOnly @abstract If the currentDrawable can be used for sampling or texture read operations @discussion This defaults to YES. This property controls whether or not the returned drawables' MTLTextures may only be used for framebuffer attachments (YES) or whether they may also be used for texture sampling and pixel read/write operations (NO). A value of YES allows the CAMetalLayer to allocate the MTLTexture objects in ways that are optimized for display purposes that makes them unsuitable for sampling. The recommended value for most applications is YES.
+//
 // FramebufferOnly calls the underlying FramebufferOnly.
 func (x *View) FramebufferOnly() bool {
 	return x.inner.FramebufferOnly()
@@ -201,6 +253,8 @@ func (x *View) SetFramebufferOnly(framebufferOnly bool) {
 	x.inner.SetFramebufferOnly(framebufferOnly)
 }
 
+// @property depthStencilAttachmentTextureUsage @abstract The usage flags set on the depth attachment. @discussion This property controls the texture usage flags set on the MTKView's depth-stencil attachment on creation.  This value defaults to MTLTextureUsageRenderTarget. The recommended value for most applications is MTLTextureUsageRenderTarget. Changing this value re-creates the depth attachment, but any data currently in the depth attachment will be lost.
+//
 // DepthStencilAttachmentTextureUsage calls the underlying DepthStencilAttachmentTextureUsage.
 func (x *View) DepthStencilAttachmentTextureUsage() metal.MTLTextureUsage {
 	return x.inner.DepthStencilAttachmentTextureUsage()
@@ -211,6 +265,8 @@ func (x *View) SetDepthStencilAttachmentTextureUsage(depthStencilAttachmentTextu
 	x.inner.SetDepthStencilAttachmentTextureUsage(depthStencilAttachmentTextureUsage)
 }
 
+// @property multisampleColorAttachmentTextureUsage @abstract The texture usage flags for the multisample color attachment. @discussion This property controls the texture usage flags set on the the multisample color attachment attachment.  This value defaults to MTLTextureUsageRenderTarget. The recommended value for most applications is MTLTextureUsageRenderTarget. Changing this value re-creates the multisample color attachment, but any data currently in the multisample color attachment will be lost.
+//
 // MultisampleColorAttachmentTextureUsage calls the underlying MultisampleColorAttachmentTextureUsage.
 func (x *View) MultisampleColorAttachmentTextureUsage() metal.MTLTextureUsage {
 	return x.inner.MultisampleColorAttachmentTextureUsage()
@@ -221,6 +277,8 @@ func (x *View) SetMultisampleColorAttachmentTextureUsage(multisampleColorAttachm
 	x.inner.SetMultisampleColorAttachmentTextureUsage(multisampleColorAttachmentTextureUsage)
 }
 
+// @property presentsWithTransaction @abstract If the layer should be presented synchronously @discussion Defaults to NO. When NO, changes to the layer's render buffer appear on-screen asynchronously to normal layer updates. When YES, changes to the MTL content are sent to the screen via the standard CATransaction mechanisms.
+//
 // PresentsWithTransaction calls the underlying PresentsWithTransaction.
 func (x *View) PresentsWithTransaction() bool {
 	return x.inner.PresentsWithTransaction()
@@ -231,6 +289,8 @@ func (x *View) SetPresentsWithTransaction(presentsWithTransaction bool) {
 	x.inner.SetPresentsWithTransaction(presentsWithTransaction)
 }
 
+// @property colorPixelFormat @abstract The pixelFormat for the drawable's texture.
+//
 // ColorPixelFormat calls the underlying ColorPixelFormat.
 func (x *View) ColorPixelFormat() metal.MTLPixelFormat {
 	return x.inner.ColorPixelFormat()
@@ -241,6 +301,8 @@ func (x *View) SetColorPixelFormat(colorPixelFormat metal.MTLPixelFormat) {
 	x.inner.SetColorPixelFormat(colorPixelFormat)
 }
 
+// @property depthStencilPixelFormat @abstract The pixelFormat used to create depthStencilTexture
+//
 // DepthStencilPixelFormat calls the underlying DepthStencilPixelFormat.
 func (x *View) DepthStencilPixelFormat() metal.MTLPixelFormat {
 	return x.inner.DepthStencilPixelFormat()
@@ -251,6 +313,8 @@ func (x *View) SetDepthStencilPixelFormat(depthStencilPixelFormat metal.MTLPixel
 	x.inner.SetDepthStencilPixelFormat(depthStencilPixelFormat)
 }
 
+// @property depthStencilStorageMode @abstract The storage mode for the depthStencilTexture. Defaults to MTLStorageModePrivate.
+//
 // DepthStencilStorageMode calls the underlying DepthStencilStorageMode.
 func (x *View) DepthStencilStorageMode() metal.MTLStorageMode {
 	return x.inner.DepthStencilStorageMode()
@@ -261,6 +325,8 @@ func (x *View) SetDepthStencilStorageMode(depthStencilStorageMode metal.MTLStora
 	x.inner.SetDepthStencilStorageMode(depthStencilStorageMode)
 }
 
+// @property sampleCount @abstract The sample count used to to create multisampleColorTexture @discussion This defaults to 1.  If sampleCount is greater than 1 a multisampled color texture will be created and the currentDrawable's texture will be set as the resolve texture in the currentRenderPassDescriptor and the store action will be set to MTLStoreActionMultisampleResolve
+//
 // SampleCount calls the underlying SampleCount.
 func (x *View) SampleCount() uint {
 	return x.inner.SampleCount()
@@ -271,6 +337,8 @@ func (x *View) SetSampleCount(sampleCount uint) {
 	x.inner.SetSampleCount(sampleCount)
 }
 
+// @property clearColor @abstract The clear color value used to generate the currentRenderPassDescriptor @discussion This defaults to (0.0, 0.0, 0.0, 1.0)
+//
 // ClearColor calls the underlying ClearColor.
 func (x *View) ClearColor() metal.MTLClearColor {
 	return x.inner.ClearColor()
@@ -281,6 +349,8 @@ func (x *View) SetClearColor(clearColor metal.MTLClearColor) {
 	x.inner.SetClearColor(clearColor)
 }
 
+// @property clearDepth @abstract The clear depth value used to generate the currentRenderPassDescriptor @discussion This defaults to 1.0
+//
 // ClearDepth calls the underlying ClearDepth.
 func (x *View) ClearDepth() float64 {
 	return x.inner.ClearDepth()
@@ -291,6 +361,8 @@ func (x *View) SetClearDepth(clearDepth float64) {
 	x.inner.SetClearDepth(clearDepth)
 }
 
+// @property clearStencil @abstract The clear stencil value used to generate currentRenderPassDescriptor @discussion This defaults to 0
+//
 // ClearStencil calls the underlying ClearStencil.
 func (x *View) ClearStencil() uint32 {
 	return x.inner.ClearStencil()
@@ -301,26 +373,36 @@ func (x *View) SetClearStencil(clearStencil uint32) {
 	x.inner.SetClearStencil(clearStencil)
 }
 
+// @property depthStencilTexture @abstract A packed depth and stencil texture to be attached to a MTLRenderPassDescriptor @discussion The view will generate the depth buffer using the specified depthPixelFormat.  This will be nil if depthStencilPixelFormat is MTLPixelFormatInvalid.
+//
 // DepthStencilTexture calls the underlying DepthStencilTexture.
 func (x *View) DepthStencilTexture() metal.MTLTexture {
 	return x.inner.DepthStencilTexture()
 }
 
+// @property multisampleColorTexture @abstract A multisample color texture that will be resolved into the currentDrawable's texture @discussion The view will generate the multisample color buffer using the specified colorPixelFormat.  This will be nil if sampleCount is less than or equal to 1.
+//
 // MultisampleColorTexture calls the underlying MultisampleColorTexture.
 func (x *View) MultisampleColorTexture() metal.MTLTexture {
 	return x.inner.MultisampleColorTexture()
 }
 
+// @property currentRenderPassDescriptor @abstract A render pass descriptor generated from the currentDrawable's texture and the view's depth, stencil, and sample buffers and clear values. @discussion This is a convience property.  The view does not use this descriptor and there is no requirement for an app to use this descriptor.
+//
 // CurrentRenderPassDescriptor calls the underlying CurrentRenderPassDescriptor.
 func (x *View) CurrentRenderPassDescriptor() *metal.MTLRenderPassDescriptor {
 	return x.inner.CurrentRenderPassDescriptor()
 }
 
+// @property currentMTL4RenderPassDescriptor @abstract A render pass descriptor generated from the currentDrawable's texture and the view's depth, stencil, and sample buffers and clear values. @discussion This is a convience property.  The view does not use this descriptor and there is no requirement for an app to use this descriptor.
+//
 // CurrentMTL4RenderPassDescriptor calls the underlying CurrentMTL4RenderPassDescriptor.
 func (x *View) CurrentMTL4RenderPassDescriptor() *metal.MTL4RenderPassDescriptor {
 	return x.inner.CurrentMTL4RenderPassDescriptor()
 }
 
+// @property preferredFramesPerSecond @abstract The rate you want the view to redraw its contents. @discussion When your application sets its preferred frame rate, the view chooses a frame rate as close to that as possible based on the capabilities of the screen the view is displayed on. The actual frame rate chosen is usually a factor of the maximum refresh rate of the screen to provide a consistent frame rate. For example, if the maximum refresh rate of the screen is 60 frames per second, that is also the highest frame rate the view sets as the actual frame rate. However, if you ask for a lower frame rate, it might choose 30, 20, 15 or some other factor to be the actual frame rate. Your application should choose a frame rate that it can consistently maintain. The default value is 60 frames per second.
+//
 // PreferredFramesPerSecond calls the underlying PreferredFramesPerSecond.
 func (x *View) PreferredFramesPerSecond() int {
 	return x.inner.PreferredFramesPerSecond()
@@ -331,6 +413,8 @@ func (x *View) SetPreferredFramesPerSecond(preferredFramesPerSecond int) {
 	x.inner.SetPreferredFramesPerSecond(preferredFramesPerSecond)
 }
 
+// @property enableSetNeedsDisplay @abstract Controls whether the view responds to setNeedsDisplay. @discussion If true, then the view behaves similarily to a UIView or NSView, responding to calls to setNeedsDisplay. When the view has been marked for display, the view is automatically redisplayed on each pass through the application’s event loop. Setting enableSetNeedsDisplay to true will also pause the MTKView's internal render loop and updates will instead be event driven. The default value is false.
+//
 // EnableSetNeedsDisplay calls the underlying EnableSetNeedsDisplay.
 func (x *View) EnableSetNeedsDisplay() bool {
 	return x.inner.EnableSetNeedsDisplay()
@@ -341,6 +425,8 @@ func (x *View) SetEnableSetNeedsDisplay(enableSetNeedsDisplay bool) {
 	x.inner.SetEnableSetNeedsDisplay(enableSetNeedsDisplay)
 }
 
+// @property autoResizeDrawable @abstract Controls whether to resize the drawable as the view changes size. @discussion If true, the size of the currentDrawable's texture, depthStencilTexture, and multisampleColorTexture will automatically resize as the view resizes.  If false, these textures will take on the size of drawableSize and drawableSize will not change. The default value is true.
+//
 // AutoResizeDrawable calls the underlying AutoResizeDrawable.
 func (x *View) AutoResizeDrawable() bool {
 	return x.inner.AutoResizeDrawable()
@@ -351,6 +437,8 @@ func (x *View) SetAutoResizeDrawable(autoResizeDrawable bool) {
 	x.inner.SetAutoResizeDrawable(autoResizeDrawable)
 }
 
+// @property drawableSize @abstract The current size of drawable textures @discussion The size currentDrawable's texture, depthStencilTexture, and multisampleColorTexture.  If autoResizeDrawable is true this value will be updated as the view's size changes. If autoResizeDrawable is false, this can be set to fix the size of the drawable textures.
+//
 // DrawableSize calls the underlying DrawableSize.
 func (x *View) DrawableSize() corefoundation.CGSize {
 	return x.inner.DrawableSize()
@@ -361,16 +449,22 @@ func (x *View) SetDrawableSize(drawableSize corefoundation.CGSize) {
 	x.inner.SetDrawableSize(drawableSize)
 }
 
+// @property preferredDrawableSize @abstract The preferred drawable size reported by the backing NSView to match a NSView's native resolution. @discussion this value can be observed via key-value observation to determine if the current native drawable size has changed.
+//
 // PreferredDrawableSize calls the underlying PreferredDrawableSize.
 func (x *View) PreferredDrawableSize() corefoundation.CGSize {
 	return x.inner.PreferredDrawableSize()
 }
 
+// @property preferredDevice @abstract The preferred device is updated per-frame by the system in order to identify the most efficient GPU for presentation (e.g. the one being used for compositing). @discussion This value is determined by the underlying CAMetalLayer and this property is a convenience accessor for it.
+//
 // PreferredDevice calls the underlying PreferredDevice.
 func (x *View) PreferredDevice() metal.MTLDevice {
 	return x.inner.PreferredDevice()
 }
 
+// @property paused @abstract Controls whether the draw methods should countinue at preferredFramesPerSecond @discussion If true, the delegate will receive drawInMTKView: messages or the subclass will receive drawRect: messages at a rate of preferredFramesPerSecond based on an internal timer. The default value is false.
+//
 // IsPaused calls the underlying IsPaused.
 func (x *View) IsPaused() bool {
 	return x.inner.IsPaused()
@@ -381,6 +475,8 @@ func (x *View) SetPaused(paused bool) {
 	x.inner.SetPaused(paused)
 }
 
+// @property colorspace @abstract The colorspace of the rendered frames. ' @discussion If nil, no colormatching occurs.  If non-nil, the rendered content will be colormatched to the colorspace of the context containing this layer (typically the display's colorspace).  This property aliases the olorspace property or the view's CAMetalLayer
+//
 // Colorspace calls the underlying Colorspace.
 func (x *View) Colorspace() unsafe.Pointer {
 	return x.inner.Colorspace()
@@ -391,6 +487,8 @@ func (x *View) SetColorspace(colorspace unsafe.Pointer) {
 	x.inner.SetColorspace(colorspace)
 }
 
+// @property residencySet @abstract Get the view's residency set. @discussion Get the view's residency set. The residency set contains all MTLTextures created by the view. Applications should use this residency set and the residency set of the view's underlying CAMetalLayer to ensure all required MTLTextures are resident before use.
+//
 // ResidencySet calls the underlying ResidencySet.
 func (x *View) ResidencySet() metal.MTLResidencySet {
 	return x.inner.ResidencySet()

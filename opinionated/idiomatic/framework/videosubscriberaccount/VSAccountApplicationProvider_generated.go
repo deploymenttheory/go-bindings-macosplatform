@@ -31,6 +31,8 @@ func VSAccountApplicationProviderFromID(id objc.ID) *VSAccountApplicationProvide
 	return &VSAccountApplicationProvider{inner: raw.VSAccountApplicationProviderFromID(id)}
 }
 
+// Returns an application provider using a given display name and identifier. Both the localizedDisplayName and identifier parameters must be non-empty strings.
+//
 // NewVSAccountApplicationProviderWithLocalizedDisplayNameIdentifier creates a new [VSAccountApplicationProvider].
 func NewVSAccountApplicationProviderWithLocalizedDisplayNameIdentifier(localizedDisplayName string, identifier string) *VSAccountApplicationProvider {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VSAccountApplicationProvider")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewVSAccountApplicationProviderWithLocalizedDisplayNameIdentifier(localized
 	return &VSAccountApplicationProvider{inner: raw.VSAccountApplicationProviderFromID(_id)}
 }
 
+// The display name of the provider as it will appear in the list of providers.
+//
 // LocalizedDisplayName calls the underlying LocalizedDisplayName.
 func (x *VSAccountApplicationProvider) LocalizedDisplayName() string {
 	_r := x.inner.LocalizedDisplayName()
@@ -47,6 +51,8 @@ func (x *VSAccountApplicationProvider) LocalizedDisplayName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The identifier of the provider. If selected, this value is returned to your application.
+//
 // Identifier calls the underlying Identifier.
 func (x *VSAccountApplicationProvider) Identifier() string {
 	_r := x.inner.Identifier()

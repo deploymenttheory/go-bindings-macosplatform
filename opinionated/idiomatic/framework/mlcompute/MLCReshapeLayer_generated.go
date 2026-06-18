@@ -37,18 +37,24 @@ func NewReshapeLayer() *ReshapeLayer {
 	return &ReshapeLayer{inner: raw.MLCReshapeLayerFromID(_id)}
 }
 
+// @property   label @abstract   A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ReshapeLayer) WithLabel(label string) *ReshapeLayer {
 	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+//
 // WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
 func (x *ReshapeLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ReshapeLayer {
 	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
 	return x
 }
 
+// @property   shape @abstract   The target shape.
+//
 // Shape returns the collection as a Go slice.
 func (x *ReshapeLayer) Shape() []*foundation.NSNumber {
 	arr := x.inner.Shape()

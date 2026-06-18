@@ -40,6 +40,8 @@ func NewCaptionRenderer() *CaptionRenderer {
 	return &CaptionRenderer{inner: raw.AVCaptionRendererFromID(_id)}
 }
 
+// @property captions @abstract A NSArray holding captions to consider for rendering. @discussion This is the array of AVCaptions to consider when drawing. The array can contain no captions.
+//
 // WithCaptions sets the collection, converting the Go slice to an NSArray.
 func (x *CaptionRenderer) WithCaptions(items ...CaptionProvider) *CaptionRenderer {
 	if len(items) == 0 {
@@ -58,22 +60,30 @@ func (x *CaptionRenderer) WithCaptions(items ...CaptionProvider) *CaptionRendere
 	return x
 }
 
+// @property bounds @abstract A CGRect holding bounds for the drawing of caption scene(s). @discussion This is a CGRect indicating where captions are drawn using renderInContext:atTime: Once established, this CGRect is used in each call to renderInContext:atTime: until it is changed to another value. This should be set up earlier than drawing.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *CaptionRenderer) WithBounds(bounds corefoundation.CGRect) *CaptionRenderer {
 	x.inner.SetBounds(bounds)
 	return x
 }
 
+// @method		captionSceneChangesInRange: @abstract		Determine render time ranges within an enclosing time range to account for visual changes among captions. @result		An NSArray of AVCaptionRendererScenes; perhaps empty if there are no captions intersecting with the consideredTimeRange @discussion This is an optional service useful for optimizing drawing. A client can perform drawing without it. As captions may become active and inactive throughout the timeline, this method will return a NSArray holding scene objects with time ranges on whose edges there's a visual change. The client can use the ranges of time between these edges with -renderInContext:atTime: to ensure all visual changes are rendered. The returned time ranges consider activation/deactivation of captions, temporal overlapping, and intra-caption timing requirements (e.g., character reveal animations). Time ranges may be returned where no captions are active as this is also a change in the caption "scene". The returned NSArray contains AVCaptionRendererScenes, each holding the CMTimeRange of that scene but potentially other information that may be useful to the client during renderering. The consideredTimeRange parameter is a CMTimeRange expressing the limits for consideration. The extent of this range does not need to correspond to the timing of captions. It might be the range from 0 to some duration. For efficiency, the range can be limited to a window of time. It is also possible to use the range anchored at a time and extending in the direction of playback.
+//
 // CaptionSceneChangesInRange calls the underlying CaptionSceneChangesInRange.
 func (x *CaptionRenderer) CaptionSceneChangesInRange(consideredTimeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.AVCaptionRendererScene] {
 	return x.inner.CaptionSceneChangesInRange(consideredTimeRange)
 }
 
+// @method		renderInContext:forTime: @abstract		Draw the captions corresponding to a time established by the AVCaptions to a CGContext. @discussion	Captions are drawn into the CGContextRef based upon their activation at the specified time. If there are no captions or no captions at the specified time, "emptiness" will still be drawn (e.g., flood filling with zero alpha or a color).
+//
 // RenderInContextForTime calls the underlying RenderInContextForTime.
 func (x *CaptionRenderer) RenderInContextForTime(ctx unsafe.Pointer, time_ coremedia.CMTime) {
 	x.inner.RenderInContextForTime(ctx, time_)
 }
 
+// @property captions @abstract A NSArray holding captions to consider for rendering. @discussion This is the array of AVCaptions to consider when drawing. The array can contain no captions.
+//
 // Captions returns the collection as a Go slice.
 func (x *CaptionRenderer) Captions() []*Caption {
 	arr := x.inner.Captions()
@@ -86,10 +96,21 @@ func (x *CaptionRenderer) Captions() []*Caption {
 }
 
 // SetCaptions calls the underlying SetCaptions.
-func (x *CaptionRenderer) SetCaptions(captions *foundation.NSArray[*raw.AVCaption]) {
-	x.inner.SetCaptions(captions)
+func (x *CaptionRenderer) SetCaptions(captions ...CaptionProvider) {
+	_ptrs := make([]objc.ID, len(captions))
+	for _i, _v := range captions {
+		_ptrs[_i] = _v.asCaption().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.AVCaption]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.AVCaption](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetCaptions(_arg0)
 }
 
+// @property bounds @abstract A CGRect holding bounds for the drawing of caption scene(s). @discussion This is a CGRect indicating where captions are drawn using renderInContext:atTime: Once established, this CGRect is used in each call to renderInContext:atTime: until it is changed to another value. This should be set up earlier than drawing.
+//
 // Bounds calls the underlying Bounds.
 func (x *CaptionRenderer) Bounds() corefoundation.CGRect {
 	return x.inner.Bounds()
@@ -108,7 +129,7 @@ type CaptionRendererable interface {
 	CaptionSceneChangesInRange(consideredTimeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.AVCaptionRendererScene]
 	RenderInContextForTime(ctx unsafe.Pointer, time_ coremedia.CMTime)
 	Captions() []*Caption
-	SetCaptions(captions *foundation.NSArray[*raw.AVCaption])
+	SetCaptions(captions ...CaptionProvider)
 	Bounds() corefoundation.CGRect
 	SetBounds(bounds corefoundation.CGRect)
 }

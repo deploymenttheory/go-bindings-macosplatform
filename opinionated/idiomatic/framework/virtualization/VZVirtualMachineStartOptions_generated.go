@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract class for VM start options.
+//
 // VirtualMachineStartOptions wraps [raw.VZVirtualMachineStartOptions] with a fluent Go API.
 type VirtualMachineStartOptions struct {
 	inner *raw.VZVirtualMachineStartOptions

@@ -36,76 +36,106 @@ func NewFaceFeature() *FaceFeature {
 	return &FaceFeature{inner: raw.CIFaceFeatureFromID(_id)}
 }
 
+// A Boolean value that indicates whether the detector found the face’s left eye.
+//
 // HasLeftEyePosition calls the underlying HasLeftEyePosition.
 func (x *FaceFeature) HasLeftEyePosition() bool {
 	return x.inner.HasLeftEyePosition()
 }
 
+// The image coordinate of the center of the left eye. > Note: The left eye is on the left side of the face from the observer's perspective. It is not the left eye from the subject's perspective.
+//
 // LeftEyePosition calls the underlying LeftEyePosition.
 func (x *FaceFeature) LeftEyePosition() corefoundation.CGPoint {
 	return x.inner.LeftEyePosition()
 }
 
+// A Boolean value that indicates whether the detector found the face’s right eye.
+//
 // HasRightEyePosition calls the underlying HasRightEyePosition.
 func (x *FaceFeature) HasRightEyePosition() bool {
 	return x.inner.HasRightEyePosition()
 }
 
+// The image coordinate of the center of the right eye. > Note: The right eye is on the right side of the face from the observer's perspective. It is not the right eye from the subject's perspective.
+//
 // RightEyePosition calls the underlying RightEyePosition.
 func (x *FaceFeature) RightEyePosition() corefoundation.CGPoint {
 	return x.inner.RightEyePosition()
 }
 
+// A Boolean value that indicates whether the detector found the face’s mouth.
+//
 // HasMouthPosition calls the underlying HasMouthPosition.
 func (x *FaceFeature) HasMouthPosition() bool {
 	return x.inner.HasMouthPosition()
 }
 
+// The image coordinate of the center of the mouth.
+//
 // MouthPosition calls the underlying MouthPosition.
 func (x *FaceFeature) MouthPosition() corefoundation.CGPoint {
 	return x.inner.MouthPosition()
 }
 
+// A Boolean value that indicates whether the face object has a tracking ID.
+//
 // HasTrackingID calls the underlying HasTrackingID.
 func (x *FaceFeature) HasTrackingID() bool {
 	return x.inner.HasTrackingID()
 }
 
+// The tracking identifier of the face object. Core Image provides a tracking identifier for faces it detects in a video stream, which you can use to identify when a CIFaceFeature objects detected in one video frame is the same face detected in a previous video frame. This identifier persists only as long as a face is in the frame and is not associated with a specific face. In other words, if a face moves out of the video frame and comes back into the frame later, another ID is assigned. (Core Image detects faces, but does not recognize specific faces.)
+//
 // TrackingID calls the underlying TrackingID.
 func (x *FaceFeature) TrackingID() int {
 	return x.inner.TrackingID()
 }
 
+// A Boolean value that indicates the face object has a tracking frame count.
+//
 // HasTrackingFrameCount calls the underlying HasTrackingFrameCount.
 func (x *FaceFeature) HasTrackingFrameCount() bool {
 	return x.inner.HasTrackingFrameCount()
 }
 
+// The tracking frame count of the face.
+//
 // TrackingFrameCount calls the underlying TrackingFrameCount.
 func (x *FaceFeature) TrackingFrameCount() int {
 	return x.inner.TrackingFrameCount()
 }
 
+// A Boolean value that indicates whether information about face rotation is available.
+//
 // HasFaceAngle calls the underlying HasFaceAngle.
 func (x *FaceFeature) HasFaceAngle() bool {
 	return x.inner.HasFaceAngle()
 }
 
+// The rotation of the face. Rotation is measured counterclockwise in degrees, with zero indicating that a line drawn between the eyes is horizontal relative to the image orientation.
+//
 // FaceAngle calls the underlying FaceAngle.
 func (x *FaceFeature) FaceAngle() float32 {
 	return x.inner.FaceAngle()
 }
 
+// A Boolean value that indicates whether a smile is detected in the face. To detect smiles, “/CIDetector/featuresInImage:options:“ needs to be called with the “CIDetectorSmile“ option set to true.
+//
 // HasSmile calls the underlying HasSmile.
 func (x *FaceFeature) HasSmile() bool {
 	return x.inner.HasSmile()
 }
 
+// A Boolean value that indicates whether a closed left eye is detected in the face. To detect closed eyes, “/CIDetector/featuresInImage:options:“ needs to be called with the “CIDetectorEyeBlink“ option set to true.
+//
 // LeftEyeClosed calls the underlying LeftEyeClosed.
 func (x *FaceFeature) LeftEyeClosed() bool {
 	return x.inner.LeftEyeClosed()
 }
 
+// A Boolean value that indicates whether a closed right eye is detected in the face. To detect closed eyes, “/CIDetector/featuresInImage:options:“ needs to be called with the “CIDetectorEyeBlink“ option set to true.
+//
 // RightEyeClosed calls the underlying RightEyeClosed.
 func (x *FaceFeature) RightEyeClosed() bool {
 	return x.inner.RightEyeClosed()

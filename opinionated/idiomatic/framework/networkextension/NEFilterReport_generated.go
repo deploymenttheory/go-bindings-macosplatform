@@ -35,6 +35,8 @@ func NewNEFilterReport() *NEFilterReport {
 	return &NEFilterReport{inner: raw.NEFilterReportFromID(_id)}
 }
 
+// @property flow @discussion The flow on which the described action was taken.
+//
 // Flow calls the underlying Flow.
 func (x *NEFilterReport) Flow() *NEFilterFlow {
 	_r := x.inner.Flow()
@@ -44,21 +46,29 @@ func (x *NEFilterReport) Flow() *NEFilterFlow {
 	return &NEFilterFlow{inner: _r}
 }
 
+// @property action @discussion The action taken upon the reported flow.
+//
 // Action calls the underlying Action.
 func (x *NEFilterReport) Action() NEFilterAction {
 	return NEFilterAction(x.inner.Action())
 }
 
+// @property event @discussion The type of event that the report is reporting.
+//
 // Event calls the underlying Event.
 func (x *NEFilterReport) Event() NEFilterReportEvent {
 	return NEFilterReportEvent(x.inner.Event())
 }
 
+// @property bytesInboundCount @discussion The number of inbound bytes received from the flow. This property is only non-zero when the report event is NEFilterReportEventFlowClosed or NEFilterReportEventFlowStatistics.
+//
 // BytesInboundCount calls the underlying BytesInboundCount.
 func (x *NEFilterReport) BytesInboundCount() uint {
 	return x.inner.BytesInboundCount()
 }
 
+// @property bytesOutboundCount @discussion The number of outbound bytes sent on the flow. This property is only non-zero when the report event is NEFilterReportEventFlowClosed or NEFilterReportEventFlowStatistics.
+//
 // BytesOutboundCount calls the underlying BytesOutboundCount.
 func (x *NEFilterReport) BytesOutboundCount() uint {
 	return x.inner.BytesOutboundCount()

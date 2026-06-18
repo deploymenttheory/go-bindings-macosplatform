@@ -44,6 +44,8 @@ func NewProviderConfigurationWithLocalizedName(localizedName string) *ProviderCo
 	return &ProviderConfiguration{inner: raw.CXProviderConfigurationFromID(_id)}
 }
 
+// Name of resource in app's bundle to play as ringtone for incoming call
+//
 // WithRingtoneSound sets the ringtoneSound property and returns the receiver for chaining.
 func (x *ProviderConfiguration) WithRingtoneSound(ringtoneSound string) *ProviderConfiguration {
 	x.inner.SetRingtoneSound(foundation.NSStringStringWithUTF8String(ringtoneSound))
@@ -68,6 +70,8 @@ func (x *ProviderConfiguration) WithMaximumCallsPerCallGroup(maximumCallsPerCall
 	return x
 }
 
+// Whether this provider's calls should be included in the system's Recents list at the end of each call. Default: YES
+//
 // WithIncludesCallsInRecents sets the includesCallsInRecents property and returns the receiver for chaining.
 func (x *ProviderConfiguration) WithIncludesCallsInRecents(includesCallsInRecents bool) *ProviderConfiguration {
 	x.inner.SetIncludesCallsInRecents(includesCallsInRecents)
@@ -92,6 +96,8 @@ func (x *ProviderConfiguration) WithSupportedHandleTypes(supportedHandleTypes *f
 	return x
 }
 
+// Localized name of the provider
+//
 // LocalizedName calls the underlying LocalizedName.
 func (x *ProviderConfiguration) LocalizedName() string {
 	_r := x.inner.LocalizedName()
@@ -101,6 +107,8 @@ func (x *ProviderConfiguration) LocalizedName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Name of resource in app's bundle to play as ringtone for incoming call
+//
 // RingtoneSound calls the underlying RingtoneSound.
 func (x *ProviderConfiguration) RingtoneSound() string {
 	_r := x.inner.RingtoneSound()
@@ -145,6 +153,8 @@ func (x *ProviderConfiguration) SetMaximumCallsPerCallGroup(maximumCallsPerCallG
 	x.inner.SetMaximumCallsPerCallGroup(maximumCallsPerCallGroup)
 }
 
+// Whether this provider's calls should be included in the system's Recents list at the end of each call. Default: YES
+//
 // IncludesCallsInRecents calls the underlying IncludesCallsInRecents.
 func (x *ProviderConfiguration) IncludesCallsInRecents() bool {
 	return x.inner.IncludesCallsInRecents()

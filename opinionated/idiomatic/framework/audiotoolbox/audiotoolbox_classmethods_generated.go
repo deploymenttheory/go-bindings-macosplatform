@@ -54,8 +54,17 @@ func CreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStrings
 }
 
 // CreateGroupWithIdentifierNameChildren calls the underlying AUParameterTreeCreateGroupWithIdentifierNameChildren.
-func CreateGroupWithIdentifierNameChildren(identifier string, name string, children *foundation.NSArray[*raw.AUParameterNode]) *ParameterGroup {
-	_r := raw.AUParameterTreeCreateGroupWithIdentifierNameChildren(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(name), children)
+func CreateGroupWithIdentifierNameChildren(identifier string, name string, children ...ParameterNodeProvider) *ParameterGroup {
+	_ptrs := make([]objc.ID, len(children))
+	for _i, _v := range children {
+		_ptrs[_i] = _v.asParameterNode().Ptr()
+	}
+	var _arg2 *foundation.NSArray[*raw.AUParameterNode]
+	if len(_ptrs) > 0 {
+		_arg2 = foundation.NSArrayFromID[*raw.AUParameterNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	_r := raw.AUParameterTreeCreateGroupWithIdentifierNameChildren(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(name), _arg2)
 	if _r == nil {
 		return nil
 	}
@@ -63,8 +72,17 @@ func CreateGroupWithIdentifierNameChildren(identifier string, name string, child
 }
 
 // CreateGroupTemplate calls the underlying AUParameterTreeCreateGroupTemplate.
-func CreateGroupTemplate(children *foundation.NSArray[*raw.AUParameterNode]) *ParameterGroup {
-	_r := raw.AUParameterTreeCreateGroupTemplate(children)
+func CreateGroupTemplate(children ...ParameterNodeProvider) *ParameterGroup {
+	_ptrs := make([]objc.ID, len(children))
+	for _i, _v := range children {
+		_ptrs[_i] = _v.asParameterNode().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.AUParameterNode]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.AUParameterNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	_r := raw.AUParameterTreeCreateGroupTemplate(_arg0)
 	if _r == nil {
 		return nil
 	}
@@ -81,8 +99,17 @@ func CreateGroupFromTemplateIdentifierNameAddressOffset(templateGroup *raw.AUPar
 }
 
 // CreateTreeWithChildren calls the underlying AUParameterTreeCreateTreeWithChildren.
-func CreateTreeWithChildren(children *foundation.NSArray[*raw.AUParameterNode]) *ParameterTree {
-	_r := raw.AUParameterTreeCreateTreeWithChildren(children)
+func CreateTreeWithChildren(children ...ParameterNodeProvider) *ParameterTree {
+	_ptrs := make([]objc.ID, len(children))
+	for _i, _v := range children {
+		_ptrs[_i] = _v.asParameterNode().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.AUParameterNode]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.AUParameterNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	_r := raw.AUParameterTreeCreateTreeWithChildren(_arg0)
 	if _r == nil {
 		return nil
 	}

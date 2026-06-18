@@ -32,6 +32,8 @@ func CaptureVideoPreviewLayerFromID(id objc.ID) *CaptureVideoPreviewLayer {
 	return &CaptureVideoPreviewLayer{inner: raw.AVCaptureVideoPreviewLayerFromID(id)}
 }
 
+// @method initWithSession: @abstract Creates an AVCaptureVideoPreviewLayer for previewing the visual output of the specified AVCaptureSession. @param session The AVCaptureSession instance to be previewed. @result A newly initialized AVCaptureVideoPreviewLayer instance.
+//
 // NewCaptureVideoPreviewLayerWithSession creates a new [CaptureVideoPreviewLayer].
 func NewCaptureVideoPreviewLayerWithSession(session *raw.AVCaptureSession) *CaptureVideoPreviewLayer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureVideoPreviewLayer")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewCaptureVideoPreviewLayerWithSession(session *raw.AVCaptureSession) *Capt
 	return &CaptureVideoPreviewLayer{inner: raw.AVCaptureVideoPreviewLayerFromID(_id)}
 }
 
+// @method initWithSessionWithNoConnection: @abstract Creates an AVCaptureVideoPreviewLayer for previewing the visual output of the specified AVCaptureSession, but creates no connections to any of the session's eligible video inputs. Only use this initializer if you intend to manually form a connection between a desired AVCaptureInputPort and the receiver using AVCaptureSession's -addConnection: method. @param session The AVCaptureSession instance to be previewed. @result A newly initialized AVCaptureVideoPreviewLayer instance.
+//
 // NewCaptureVideoPreviewLayerWithSessionWithNoConnection creates a new [CaptureVideoPreviewLayer].
 func NewCaptureVideoPreviewLayerWithSessionWithNoConnection(session *raw.AVCaptureSession) *CaptureVideoPreviewLayer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureVideoPreviewLayer")), objc.RegisterName("alloc"))
@@ -46,49 +50,67 @@ func NewCaptureVideoPreviewLayerWithSessionWithNoConnection(session *raw.AVCaptu
 	return &CaptureVideoPreviewLayer{inner: raw.AVCaptureVideoPreviewLayerFromID(_id)}
 }
 
+// @property session @abstract The AVCaptureSession instance being previewed by the receiver. @discussion The session is retained by the preview layer.
+//
 // WithSession sets the session property and returns the receiver for chaining.
 func (x *CaptureVideoPreviewLayer) WithSession(session *CaptureSession) *CaptureVideoPreviewLayer {
 	x.inner.SetSession(session.Unwrap())
 	return x
 }
 
+// @property videoGravity @abstract A string defining how the video is displayed within an AVCaptureVideoPreviewLayer bounds rect. @discussion Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default. See <AVFoundation/AVAnimation.h> for a description of these options.
+//
 // WithVideoGravity sets the videoGravity property and returns the receiver for chaining.
 func (x *CaptureVideoPreviewLayer) WithVideoGravity(videoGravity *foundation.NSString) *CaptureVideoPreviewLayer {
 	x.inner.SetVideoGravity(videoGravity)
 	return x
 }
 
+// A `BOOL` value that indicates whether to defer starting this preview layer. When this value is `true`, the session does not prepare the output's resources until some time after “AVCaptureSession/startRunning“ returns. You can start the visual parts of your user interface (e.g. preview) prior to other parts (e.g. photo/movie capture, metadata output, etc..) to improve startup performance. Set this value to `false` if your app needs video preview immediately for startup, and `true` if it does not. By default, this value is `false` for “AVCaptureVideoPreviewLayer“ objects, since this object is used to display preview. For best session start performance, set “deferredStartEnabled“ to `false` for preview layers. If your app contains multiple preview layers, you may want to display the main preview layer as soon as possible and allow the remaining layers to display subsequently. In this case, set “deferredStartEnabled“ to `true` for the remaining layers. - Note: Setting this property to the same value for all outputs, including “AVCaptureVideoPreviewLayer“ and “AVCaptureOutput“, is equivalent to not using deferred start. If “deferredStartSupported“ is `false`, setting this property value to `true` results in the session throwing an `NSInvalidArgumentException`. - Note: Set this value before calling “AVCaptureSession/commitConfiguration“ as it requires a lengthy reconfiguration of the capture render pipeline.
+//
 // WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
 func (x *CaptureVideoPreviewLayer) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureVideoPreviewLayer {
 	x.inner.SetDeferredStartEnabled(deferredStartEnabled)
 	return x
 }
 
+// method setSessionWithNoConnection: @abstract Attaches the receiver to a given session without implicitly forming a connection to the first eligible video AVCaptureInputPort. Only use this setter if you intend to manually form a connection between a desired AVCaptureInputPort and the receiver using AVCaptureSession's -addConnection: method. @discussion The session is retained by the preview layer.
+//
 // SetSessionWithNoConnection calls the underlying SetSessionWithNoConnection.
 func (x *CaptureVideoPreviewLayer) SetSessionWithNoConnection(session *raw.AVCaptureSession) {
 	x.inner.SetSessionWithNoConnection(session)
 }
 
+// @method captureDevicePointOfInterestForPoint: @abstract Converts a point in layer coordinates to a point of interest in the coordinate space of the capture device providing input to the layer. @param pointInLayer A CGPoint in layer coordinates. @result A CGPoint in the coordinate space of the capture device providing input to the layer. @discussion AVCaptureDevice pointOfInterest is expressed as a CGPoint where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. This convenience method converts a point in the coordinate space of the receiver to a point of interest in the coordinate space of the AVCaptureDevice providing input to the receiver. The conversion takes frameSize and videoGravity into consideration.
+//
 // CaptureDevicePointOfInterestForPoint calls the underlying CaptureDevicePointOfInterestForPoint.
 func (x *CaptureVideoPreviewLayer) CaptureDevicePointOfInterestForPoint(pointInLayer corefoundation.CGPoint) corefoundation.CGPoint {
 	return x.inner.CaptureDevicePointOfInterestForPoint(pointInLayer)
 }
 
+// @method pointForCaptureDevicePointOfInterest: @abstract Converts a point of interest in the coordinate space of the capture device providing input to the layer to a point in layer coordinates. @param captureDevicePointOfInterest A CGPoint in the coordinate space of the capture device providing input to the layer. @result A CGPoint in layer coordinates. @discussion AVCaptureDevice pointOfInterest is expressed as a CGPoint where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. This convenience method converts a point in the coordinate space of the AVCaptureDevice providing input to the coordinate space of the receiver. The conversion takes frame size and videoGravity into consideration.
+//
 // PointForCaptureDevicePointOfInterest calls the underlying PointForCaptureDevicePointOfInterest.
 func (x *CaptureVideoPreviewLayer) PointForCaptureDevicePointOfInterest(captureDevicePointOfInterest corefoundation.CGPoint) corefoundation.CGPoint {
 	return x.inner.PointForCaptureDevicePointOfInterest(captureDevicePointOfInterest)
 }
 
+// @method metadataOutputRectOfInterestForRect: @abstract Converts a rectangle in layer coordinates to a rectangle of interest in the coordinate space of an AVCaptureMetadataOutput whose capture device is providing input to the layer. @param rectInLayerCoordinates A CGRect in layer coordinates. @result A CGRect in the coordinate space of the metadata output whose capture device is providing input to the layer. @discussion AVCaptureMetadataOutput rectOfInterest is expressed as a CGRect where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. This convenience method converts a rectangle in the coordinate space of the receiver to a rectangle of interest in the coordinate space of an AVCaptureMetadataOutput whose AVCaptureDevice is providing input to the receiver. The conversion takes frame size and videoGravity into consideration.
+//
 // MetadataOutputRectOfInterestForRect calls the underlying MetadataOutputRectOfInterestForRect.
 func (x *CaptureVideoPreviewLayer) MetadataOutputRectOfInterestForRect(rectInLayerCoordinates corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.MetadataOutputRectOfInterestForRect(rectInLayerCoordinates)
 }
 
+// @method rectForMetadataOutputRectOfInterest: @abstract Converts a rectangle of interest in the coordinate space of an AVCaptureMetadataOutput whose capture device is providing input to the layer to a rectangle in layer coordinates. @param rectInMetadataOutputCoordinates A CGRect in the coordinate space of the metadata output whose capture device is providing input to the layer. @result A CGRect in layer coordinates. @discussion AVCaptureMetadataOutput rectOfInterest is expressed as a CGRect where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. This convenience method converts a rectangle in the coordinate space of an AVCaptureMetadataOutput whose AVCaptureDevice is providing input to the coordinate space of the receiver. The conversion takes frame size and videoGravity into consideration.
+//
 // RectForMetadataOutputRectOfInterest calls the underlying RectForMetadataOutputRectOfInterest.
 func (x *CaptureVideoPreviewLayer) RectForMetadataOutputRectOfInterest(rectInMetadataOutputCoordinates corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.RectForMetadataOutputRectOfInterest(rectInMetadataOutputCoordinates)
 }
 
+// @method transformedMetadataObjectForMetadataObject: @abstract Converts an AVMetadataObject's visual properties to layer coordinates. @param metadataObject An AVMetadataObject originating from the same AVCaptureInput as the preview layer. @result An AVMetadataObject whose properties are in layer coordinates. @discussion AVMetadataObject bounds may be expressed as a rect where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. Face metadata objects likewise express yaw and roll angles with respect to an unrotated picture. -transformedMetadataObjectForMetadataObject: converts the visual properties in the coordinate space of the supplied AVMetadataObject to the coordinate space of the receiver. The conversion takes orientation, mirroring, layer bounds and videoGravity into consideration. If the provided metadata object originates from an input source other than the preview layer's, nil will be returned.
+//
 // TransformedMetadataObjectForMetadataObject calls the underlying TransformedMetadataObjectForMetadataObject.
 func (x *CaptureVideoPreviewLayer) TransformedMetadataObjectForMetadataObject(metadataObject *raw.AVMetadataObject) *MetadataObject {
 	_r := x.inner.TransformedMetadataObjectForMetadataObject(metadataObject)
@@ -98,6 +120,8 @@ func (x *CaptureVideoPreviewLayer) TransformedMetadataObjectForMetadataObject(me
 	return &MetadataObject{inner: _r}
 }
 
+// @property session @abstract The AVCaptureSession instance being previewed by the receiver. @discussion The session is retained by the preview layer.
+//
 // Session calls the underlying Session.
 func (x *CaptureVideoPreviewLayer) Session() *CaptureSession {
 	_r := x.inner.Session()
@@ -112,6 +136,8 @@ func (x *CaptureVideoPreviewLayer) SetSession(session *raw.AVCaptureSession) {
 	x.inner.SetSession(session)
 }
 
+// @property connection @abstract The AVCaptureConnection instance describing the AVCaptureInputPort to which the receiver is connected. @discussion When calling initWithSession: or setSession: with a valid AVCaptureSession instance, a connection is formed to the first eligible video AVCaptureInput. If the receiver is detached from a session, the connection property becomes nil.
+//
 // Connection calls the underlying Connection.
 func (x *CaptureVideoPreviewLayer) Connection() *CaptureConnection {
 	_r := x.inner.Connection()
@@ -121,6 +147,8 @@ func (x *CaptureVideoPreviewLayer) Connection() *CaptureConnection {
 	return &CaptureConnection{inner: _r}
 }
 
+// @property videoGravity @abstract A string defining how the video is displayed within an AVCaptureVideoPreviewLayer bounds rect. @discussion Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default. See <AVFoundation/AVAnimation.h> for a description of these options.
+//
 // VideoGravity calls the underlying VideoGravity.
 func (x *CaptureVideoPreviewLayer) VideoGravity() string {
 	_r := x.inner.VideoGravity()
@@ -135,11 +163,15 @@ func (x *CaptureVideoPreviewLayer) SetVideoGravity(videoGravity *foundation.NSSt
 	x.inner.SetVideoGravity(videoGravity)
 }
 
+// A `BOOL` value that indicates whether the preview layer supports deferred start. You can only set the “deferredStartEnabled“ property to `true` if the preview layer supports deferred start.
+//
 // IsDeferredStartSupported calls the underlying IsDeferredStartSupported.
 func (x *CaptureVideoPreviewLayer) IsDeferredStartSupported() bool {
 	return x.inner.IsDeferredStartSupported()
 }
 
+// A `BOOL` value that indicates whether to defer starting this preview layer. When this value is `true`, the session does not prepare the output's resources until some time after “AVCaptureSession/startRunning“ returns. You can start the visual parts of your user interface (e.g. preview) prior to other parts (e.g. photo/movie capture, metadata output, etc..) to improve startup performance. Set this value to `false` if your app needs video preview immediately for startup, and `true` if it does not. By default, this value is `false` for “AVCaptureVideoPreviewLayer“ objects, since this object is used to display preview. For best session start performance, set “deferredStartEnabled“ to `false` for preview layers. If your app contains multiple preview layers, you may want to display the main preview layer as soon as possible and allow the remaining layers to display subsequently. In this case, set “deferredStartEnabled“ to `true` for the remaining layers. - Note: Setting this property to the same value for all outputs, including “AVCaptureVideoPreviewLayer“ and “AVCaptureOutput“, is equivalent to not using deferred start. If “deferredStartSupported“ is `false`, setting this property value to `true` results in the session throwing an `NSInvalidArgumentException`. - Note: Set this value before calling “AVCaptureSession/commitConfiguration“ as it requires a lengthy reconfiguration of the capture render pipeline.
+//
 // IsDeferredStartEnabled calls the underlying IsDeferredStartEnabled.
 func (x *CaptureVideoPreviewLayer) IsDeferredStartEnabled() bool {
 	return x.inner.IsDeferredStartEnabled()

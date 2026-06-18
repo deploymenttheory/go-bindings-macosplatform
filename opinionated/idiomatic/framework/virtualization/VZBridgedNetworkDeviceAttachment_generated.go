@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A network device that interacts directly with a physical network interface on the host computer.
+//
 // BridgedNetworkDeviceAttachment wraps [raw.VZBridgedNetworkDeviceAttachment] with a fluent Go API.
 type BridgedNetworkDeviceAttachment struct {
 	inner *raw.VZBridgedNetworkDeviceAttachment
@@ -31,6 +33,8 @@ func BridgedNetworkDeviceAttachmentFromID(id objc.ID) *BridgedNetworkDeviceAttac
 	return &BridgedNetworkDeviceAttachment{inner: raw.VZBridgedNetworkDeviceAttachmentFromID(id)}
 }
 
+// Creates the attachment from a bridged network interface object.
+//
 // NewBridgedNetworkDeviceAttachmentWithInterface creates a new [BridgedNetworkDeviceAttachment].
 func NewBridgedNetworkDeviceAttachmentWithInterface(interface_ *raw.VZBridgedNetworkInterface) *BridgedNetworkDeviceAttachment {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZBridgedNetworkDeviceAttachment")), objc.RegisterName("alloc"))

@@ -35,36 +35,48 @@ func NewIOCommandQueueDescriptor() *IOCommandQueueDescriptor {
 	return &IOCommandQueueDescriptor{inner: raw.MTLIOCommandQueueDescriptorFromID(_id)}
 }
 
+// @property maxCommandBufferCount @abstract The maximum number of commandBuffers that can be in flight at a given time for the queue.
+//
 // WithMaxCommandBufferCount sets the maxCommandBufferCount property and returns the receiver for chaining.
 func (x *IOCommandQueueDescriptor) WithMaxCommandBufferCount(maxCommandBufferCount uint) *IOCommandQueueDescriptor {
 	x.inner.SetMaxCommandBufferCount(maxCommandBufferCount)
 	return x
 }
 
+// @property priority @abstract The priority of the commands executed by this queue.
+//
 // WithPriority sets the priority property and returns the receiver for chaining.
 func (x *IOCommandQueueDescriptor) WithPriority(priority MTLIOPriority) *IOCommandQueueDescriptor {
 	x.inner.SetPriority(raw.MTLIOPriority(priority))
 	return x
 }
 
+// @property type @abstract The type (serial or concurrent) of the queue.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *IOCommandQueueDescriptor) WithType(type_ MTLIOCommandQueueType) *IOCommandQueueDescriptor {
 	x.inner.SetType(raw.MTLIOCommandQueueType(type_))
 	return x
 }
 
+// @property maxCommandsInFlight @abstract The maximum number of IO commands that can be in flight at a given time for the queue. @discussion A zero value defaults to the system dependent maximum value, a smaller number can be provided to bound the utilization of the storage device.
+//
 // WithMaxCommandsInFlight sets the maxCommandsInFlight property and returns the receiver for chaining.
 func (x *IOCommandQueueDescriptor) WithMaxCommandsInFlight(maxCommandsInFlight uint) *IOCommandQueueDescriptor {
 	x.inner.SetMaxCommandsInFlight(maxCommandsInFlight)
 	return x
 }
 
+// @property scratchBufferAllocator @abstract An optional property that allows setting a custom allocator for scratch buffers by the queue. @discussion An application can manage scratch buffers manually by implemeting a class  conforming to the MTLIOScratchBufferAllocator protocol and creating an instance that is passed in here.
+//
 // WithScratchBufferAllocator sets the scratchBufferAllocator property and returns the receiver for chaining.
 func (x *IOCommandQueueDescriptor) WithScratchBufferAllocator(scratchBufferAllocator raw.MTLIOScratchBufferAllocator) *IOCommandQueueDescriptor {
 	x.inner.SetScratchBufferAllocator(scratchBufferAllocator)
 	return x
 }
 
+// @property maxCommandBufferCount @abstract The maximum number of commandBuffers that can be in flight at a given time for the queue.
+//
 // MaxCommandBufferCount calls the underlying MaxCommandBufferCount.
 func (x *IOCommandQueueDescriptor) MaxCommandBufferCount() uint {
 	return x.inner.MaxCommandBufferCount()
@@ -75,6 +87,8 @@ func (x *IOCommandQueueDescriptor) SetMaxCommandBufferCount(maxCommandBufferCoun
 	x.inner.SetMaxCommandBufferCount(maxCommandBufferCount)
 }
 
+// @property priority @abstract The priority of the commands executed by this queue.
+//
 // Priority calls the underlying Priority.
 func (x *IOCommandQueueDescriptor) Priority() MTLIOPriority {
 	return MTLIOPriority(x.inner.Priority())
@@ -85,6 +99,8 @@ func (x *IOCommandQueueDescriptor) SetPriority(priority MTLIOPriority) {
 	x.inner.SetPriority(raw.MTLIOPriority(priority))
 }
 
+// @property type @abstract The type (serial or concurrent) of the queue.
+//
 // Type calls the underlying Type.
 func (x *IOCommandQueueDescriptor) Type() MTLIOCommandQueueType {
 	return MTLIOCommandQueueType(x.inner.Type())
@@ -95,6 +111,8 @@ func (x *IOCommandQueueDescriptor) SetType(type_ MTLIOCommandQueueType) {
 	x.inner.SetType(raw.MTLIOCommandQueueType(type_))
 }
 
+// @property maxCommandsInFlight @abstract The maximum number of IO commands that can be in flight at a given time for the queue. @discussion A zero value defaults to the system dependent maximum value, a smaller number can be provided to bound the utilization of the storage device.
+//
 // MaxCommandsInFlight calls the underlying MaxCommandsInFlight.
 func (x *IOCommandQueueDescriptor) MaxCommandsInFlight() uint {
 	return x.inner.MaxCommandsInFlight()
@@ -105,6 +123,8 @@ func (x *IOCommandQueueDescriptor) SetMaxCommandsInFlight(maxCommandsInFlight ui
 	x.inner.SetMaxCommandsInFlight(maxCommandsInFlight)
 }
 
+// @property scratchBufferAllocator @abstract An optional property that allows setting a custom allocator for scratch buffers by the queue. @discussion An application can manage scratch buffers manually by implemeting a class  conforming to the MTLIOScratchBufferAllocator protocol and creating an instance that is passed in here.
+//
 // ScratchBufferAllocator calls the underlying ScratchBufferAllocator.
 func (x *IOCommandQueueDescriptor) ScratchBufferAllocator() raw.MTLIOScratchBufferAllocator {
 	return x.inner.ScratchBufferAllocator()

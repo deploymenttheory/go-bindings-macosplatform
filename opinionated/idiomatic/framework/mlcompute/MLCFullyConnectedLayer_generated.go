@@ -36,18 +36,24 @@ func NewFullyConnectedLayer() *FullyConnectedLayer {
 	return &FullyConnectedLayer{inner: raw.MLCFullyConnectedLayerFromID(_id)}
 }
 
+// @property   label @abstract   A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *FullyConnectedLayer) WithLabel(label string) *FullyConnectedLayer {
 	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+//
 // WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
 func (x *FullyConnectedLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *FullyConnectedLayer {
 	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
 	return x
 }
 
+// @property   descriptor @abstract   The convolution descriptor
+//
 // Descriptor calls the underlying Descriptor.
 func (x *FullyConnectedLayer) Descriptor() *ConvolutionDescriptor {
 	_r := x.inner.Descriptor()
@@ -57,6 +63,8 @@ func (x *FullyConnectedLayer) Descriptor() *ConvolutionDescriptor {
 	return &ConvolutionDescriptor{inner: _r}
 }
 
+// @property   weights @abstract   The weights tensor used by the convolution layer
+//
 // Weights calls the underlying Weights.
 func (x *FullyConnectedLayer) Weights() *Tensor {
 	_r := x.inner.Weights()
@@ -66,6 +74,8 @@ func (x *FullyConnectedLayer) Weights() *Tensor {
 	return &Tensor{inner: _r}
 }
 
+// @property   biases @abstract   The bias tensor used by the convolution layer
+//
 // Biases calls the underlying Biases.
 func (x *FullyConnectedLayer) Biases() *Tensor {
 	_r := x.inner.Biases()
@@ -75,6 +85,8 @@ func (x *FullyConnectedLayer) Biases() *Tensor {
 	return &Tensor{inner: _r}
 }
 
+// @property   weightsParameter @abstract   The weights tensor parameter used for optimizer update
+//
 // WeightsParameter calls the underlying WeightsParameter.
 func (x *FullyConnectedLayer) WeightsParameter() *TensorParameter {
 	_r := x.inner.WeightsParameter()
@@ -84,6 +96,8 @@ func (x *FullyConnectedLayer) WeightsParameter() *TensorParameter {
 	return &TensorParameter{inner: _r}
 }
 
+// @property   biasesParameter @abstract   The bias tensor parameter used for optimizer update
+//
 // BiasesParameter calls the underlying BiasesParameter.
 func (x *FullyConnectedLayer) BiasesParameter() *TensorParameter {
 	_r := x.inner.BiasesParameter()

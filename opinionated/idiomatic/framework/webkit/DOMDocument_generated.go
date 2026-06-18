@@ -837,11 +837,15 @@ func (x *DOMDocument) GetComputedStyle(element *raw.DOMElement, pseudoElement st
 	return &DOMCSSStyleDeclaration{inner: _r}
 }
 
+// @method URLWithAttributeString: @abstract Constructs a URL given an attribute string. @discussion This method constructs a URL given an attribute string just as WebKit does. An attribute string is the value of an attribute of an element such as the href attribute on the DOMHTMLAnchorElement class. This method is only applicable to attributes that refer to URLs.
+//
 // URLWithAttributeString calls the underlying URLWithAttributeString.
 func (x *DOMDocument) URLWithAttributeString(string_ string) *foundation.NSURL {
 	return x.inner.URLWithAttributeString(foundation.NSStringStringWithUTF8String(string_))
 }
 
+// @property webFrame @abstract The frame of the DOM document.
+//
 // WebFrame calls the underlying WebFrame.
 func (x *DOMDocument) WebFrame() *WebFrame {
 	_r := x.inner.WebFrame()

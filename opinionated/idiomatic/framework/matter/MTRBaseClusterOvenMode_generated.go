@@ -33,6 +33,8 @@ func MTRBaseClusterOvenModeFromID(id objc.ID) *MTRBaseClusterOvenMode {
 	return &MTRBaseClusterOvenMode{inner: raw.MTRBaseClusterOvenModeFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterOvenModeWithDeviceEndpointIDQueue creates a new [MTRBaseClusterOvenMode].
 func NewMTRBaseClusterOvenModeWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterOvenMode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterOvenMode")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewMTRBaseClusterOvenModeWithDeviceEndpointIDQueue(device *raw.MTRBaseDevic
 	return &MTRBaseClusterOvenMode{inner: raw.MTRBaseClusterOvenModeFromID(_id)}
 }
 
+// Command ChangeToMode This command is used to change device modes.
+//
 // ChangeToModeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterOvenMode) ChangeToModeWithParamsCompletion(ctx context.Context, params *raw.MTROvenModeClusterChangeToModeParams) (*MTROvenModeClusterChangeToModeResponseParams, error) {
 	type _result struct {

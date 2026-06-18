@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A gaussian distribution is biased towards the mean value, the possible outcomes are spread out from the mean with decreasing probability. Values within 1 deviation of the mean make up 68.27% of the distribution, values within 2 deviations make up 95% and values within 3 deviations make up 99.7%. Note that a gaussian distribution's unbounded behavior beyond 3 deviations is undesired, thus this distribution deviates nominally by modifying the bounds to 3 deviations. Thus values within 3 deviations actually make up 100% of the distribution.
+//
 // GaussianDistribution wraps [raw.GKGaussianDistribution] with a fluent Go API.
 type GaussianDistribution struct {
 	inner *raw.GKGaussianDistribution
@@ -29,6 +31,8 @@ func GaussianDistributionFromID(id objc.ID) *GaussianDistribution {
 	return &GaussianDistribution{inner: raw.GKGaussianDistributionFromID(id)}
 }
 
+// Initializes a Gaussian random distribution within the range [lowest, highest] using a source to grab input values from. This sets the gaussian parameters to: mean = (highest + lowest) / 2 deviation = (highest - lowest) / 6 The mean and deviation will be floating point numbers even if the distribution is meant to produce integer values. @see mean @see deviation
+//
 // NewGaussianDistributionWithRandomSourceLowestValueHighestValue creates a new [GaussianDistribution].
 func NewGaussianDistributionWithRandomSourceLowestValueHighestValue(source raw.GKRandom, lowestInclusive int, highestInclusive int) *GaussianDistribution {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGaussianDistribution")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewGaussianDistributionWithRandomSourceLowestValueHighestValue(source raw.G
 	return &GaussianDistribution{inner: raw.GKGaussianDistributionFromID(_id)}
 }
 
+// Initializes a Gaussian random distribution within the range [mean - 3 * deviation, mean + 3 * deviation] using a source to grab input values from.
+//
 // NewGaussianDistributionWithRandomSourceMeanDeviation creates a new [GaussianDistribution].
 func NewGaussianDistributionWithRandomSourceMeanDeviation(source raw.GKRandom, mean float32, deviation float32) *GaussianDistribution {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGaussianDistribution")), objc.RegisterName("alloc"))
@@ -43,11 +49,15 @@ func NewGaussianDistributionWithRandomSourceMeanDeviation(source raw.GKRandom, m
 	return &GaussianDistribution{inner: raw.GKGaussianDistributionFromID(_id)}
 }
 
+// The mean, or expected, value of the distribution. Values are more probable the closer to the mean they are.
+//
 // Mean calls the underlying Mean.
 func (x *GaussianDistribution) Mean() float32 {
 	return x.inner.Mean()
 }
 
+// The deviation, often called 'sigma', is the deviation from the mean that would include roughly 68% of the distribution. The range of the distribution is [mean - 3 * deviation, mean + 3 * deviation]. Values beyond 3 deviations are considered so improbable that they are removed from the output set.
+//
 // Deviation calls the underlying Deviation.
 func (x *GaussianDistribution) Deviation() float32 {
 	return x.inner.Deviation()

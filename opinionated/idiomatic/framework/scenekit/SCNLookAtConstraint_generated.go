@@ -35,48 +35,64 @@ func NewLookAtConstraint() *LookAtConstraint {
 	return &LookAtConstraint{inner: raw.SCNLookAtConstraintFromID(_id)}
 }
 
+// @property target @abstract Defines the target node to look at.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *LookAtConstraint) WithTarget(target NodeProvider) *LookAtConstraint {
 	x.inner.SetTarget(target.asNode())
 	return x
 }
 
+// @property targetOffset @abstract Offset look at position in target space. Defaults to zero. Animatable
+//
 // WithTargetOffset sets the targetOffset property and returns the receiver for chaining.
 func (x *LookAtConstraint) WithTargetOffset(targetOffset raw.SCNVector3) *LookAtConstraint {
 	x.inner.SetTargetOffset(targetOffset)
 	return x
 }
 
+// @property targetOffset @abstract Front direction in the constraint owner local space. Defaults to -[SCNNode localFront]. Animatable
+//
 // WithLocalFront sets the localFront property and returns the receiver for chaining.
 func (x *LookAtConstraint) WithLocalFront(localFront raw.SCNVector3) *LookAtConstraint {
 	x.inner.SetLocalFront(localFront)
 	return x
 }
 
+// @property worldUp @abstract Up reference direction in world space. Defaults to -[SCNNode localUp]. Animatable
+//
 // WithWorldUp sets the worldUp property and returns the receiver for chaining.
 func (x *LookAtConstraint) WithWorldUp(worldUp raw.SCNVector3) *LookAtConstraint {
 	x.inner.SetWorldUp(worldUp)
 	return x
 }
 
+// @property gimbalLockEnabled @abstract Specifies whether the receiver enables the gimbal lock. Defaults to NO. @discussion Enabling the gimbal lock prevents the receiver from rotating the constrained node around to roll axis.
+//
 // WithGimbalLockEnabled sets the gimbalLockEnabled property and returns the receiver for chaining.
 func (x *LookAtConstraint) WithGimbalLockEnabled(gimbalLockEnabled bool) *LookAtConstraint {
 	x.inner.SetGimbalLockEnabled(gimbalLockEnabled)
 	return x
 }
 
+// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *LookAtConstraint) WithEnabled(enabled bool) *LookAtConstraint {
 	x.inner.SCNConstraint.SetEnabled(enabled)
 	return x
 }
 
+// @property influenceFactor @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+//
 // WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
 func (x *LookAtConstraint) WithInfluenceFactor(influenceFactor float64) *LookAtConstraint {
 	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
 	return x
 }
 
+// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+//
 // WithIncremental sets the incremental property and returns the receiver for chaining.
 func (x *LookAtConstraint) WithIncremental(incremental bool) *LookAtConstraint {
 	x.inner.SCNConstraint.SetIncremental(incremental)
@@ -97,6 +113,8 @@ func (x *LookAtConstraint) SetTarget(target *raw.SCNNode) {
 	x.inner.SetTarget(target)
 }
 
+// @property targetOffset @abstract Offset look at position in target space. Defaults to zero. Animatable
+//
 // TargetOffset calls the underlying TargetOffset.
 func (x *LookAtConstraint) TargetOffset() raw.SCNVector3 {
 	return x.inner.TargetOffset()
@@ -107,6 +125,8 @@ func (x *LookAtConstraint) SetTargetOffset(targetOffset raw.SCNVector3) {
 	x.inner.SetTargetOffset(targetOffset)
 }
 
+// @property targetOffset @abstract Front direction in the constraint owner local space. Defaults to -[SCNNode localFront]. Animatable
+//
 // LocalFront calls the underlying LocalFront.
 func (x *LookAtConstraint) LocalFront() raw.SCNVector3 {
 	return x.inner.LocalFront()
@@ -117,6 +137,8 @@ func (x *LookAtConstraint) SetLocalFront(localFront raw.SCNVector3) {
 	x.inner.SetLocalFront(localFront)
 }
 
+// @property worldUp @abstract Up reference direction in world space. Defaults to -[SCNNode localUp]. Animatable
+//
 // WorldUp calls the underlying WorldUp.
 func (x *LookAtConstraint) WorldUp() raw.SCNVector3 {
 	return x.inner.WorldUp()
@@ -127,6 +149,8 @@ func (x *LookAtConstraint) SetWorldUp(worldUp raw.SCNVector3) {
 	x.inner.SetWorldUp(worldUp)
 }
 
+// @property gimbalLockEnabled @abstract Specifies whether the receiver enables the gimbal lock. Defaults to NO. @discussion Enabling the gimbal lock prevents the receiver from rotating the constrained node around to roll axis.
+//
 // GimbalLockEnabled calls the underlying GimbalLockEnabled.
 func (x *LookAtConstraint) GimbalLockEnabled() bool {
 	return x.inner.GimbalLockEnabled()

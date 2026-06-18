@@ -37,18 +37,24 @@ func NewMTL4PipelineDescriptor() *MTL4PipelineDescriptor {
 	return &MTL4PipelineDescriptor{inner: raw.MTL4PipelineDescriptorFromID(_id)}
 }
 
+// Assigns an optional string that uniquely identifies a pipeline descriptor. After you provide this label, you can use it to look up a pipeline state object by name in a binary archive.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MTL4PipelineDescriptor) WithLabel(label string) *MTL4PipelineDescriptor {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// Provides compile-time options when you build the pipeline.
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MTL4PipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4PipelineDescriptor {
 	x.inner.SetOptions(options.Unwrap())
 	return x
 }
 
+// Assigns an optional string that uniquely identifies a pipeline descriptor. After you provide this label, you can use it to look up a pipeline state object by name in a binary archive.
+//
 // Label calls the underlying Label.
 func (x *MTL4PipelineDescriptor) Label() string {
 	_r := x.inner.Label()
@@ -63,6 +69,8 @@ func (x *MTL4PipelineDescriptor) SetLabel(label string) {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 }
 
+// Provides compile-time options when you build the pipeline.
+//
 // Options calls the underlying Options.
 func (x *MTL4PipelineDescriptor) Options() *MTL4PipelineOptions {
 	_r := x.inner.Options()

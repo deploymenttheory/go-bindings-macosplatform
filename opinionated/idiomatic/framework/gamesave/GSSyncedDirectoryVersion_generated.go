@@ -37,11 +37,15 @@ func NewSyncedDirectoryVersion() *SyncedDirectoryVersion {
 	return &SyncedDirectoryVersion{inner: raw.GSSyncedDirectoryVersionFromID(_id)}
 }
 
+// `YES` if the directory version is local; otherwise `NO`.
+//
 // IsLocal calls the underlying IsLocal.
 func (x *SyncedDirectoryVersion) IsLocal() bool {
 	return x.inner.IsLocal()
 }
 
+// The localized name of the device that saved this version.
+//
 // LocalizedNameOfSavingComputer calls the underlying LocalizedNameOfSavingComputer.
 func (x *SyncedDirectoryVersion) LocalizedNameOfSavingComputer() string {
 	_r := x.inner.LocalizedNameOfSavingComputer()
@@ -51,11 +55,15 @@ func (x *SyncedDirectoryVersion) LocalizedNameOfSavingComputer() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The date that this version was last modified.
+//
 // ModifiedDate calls the underlying ModifiedDate.
 func (x *SyncedDirectoryVersion) ModifiedDate() *foundation.NSDate {
 	return x.inner.ModifiedDate()
 }
 
+// The URL of a directory where you read and write game-save data. You define the format and structure of files you write in this directory.
+//
 // Url calls the underlying Url.
 func (x *SyncedDirectoryVersion) Url() *foundation.NSURL {
 	return x.inner.Url()

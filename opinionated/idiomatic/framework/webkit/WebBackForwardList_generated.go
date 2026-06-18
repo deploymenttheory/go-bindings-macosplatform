@@ -36,47 +36,65 @@ func NewWebBackForwardList() *WebBackForwardList {
 	return &WebBackForwardList{inner: raw.WebBackForwardListFromID(_id)}
 }
 
+// @property capacity @abstract The list's maximum size.
+//
 // WithCapacity sets the capacity property and returns the receiver for chaining.
 func (x *WebBackForwardList) WithCapacity(capacity int) *WebBackForwardList {
 	x.inner.SetCapacity(capacity)
 	return x
 }
 
+// @method addItem: @abstract Adds an entry to the list. @param item The entry to add. @discussion The added entry is inserted immediately after the current entry. If the current position in the list is not at the end of the list, elements in the forward list will be dropped at this point.  In addition, entries may be dropped to keep the size of the list within the maximum size.
+//
 // AddItem calls the underlying AddItem.
 func (x *WebBackForwardList) AddItem(item *raw.WebHistoryItem) {
 	x.inner.AddItem(item)
 }
 
+// @method goBack @abstract Move the current pointer back to the entry before the current entry.
+//
 // GoBack calls the underlying GoBack.
 func (x *WebBackForwardList) GoBack() {
 	x.inner.GoBack()
 }
 
+// @method goForward @abstract Move the current pointer ahead to the entry after the current entry.
+//
 // GoForward calls the underlying GoForward.
 func (x *WebBackForwardList) GoForward() {
 	x.inner.GoForward()
 }
 
+// @method goToItem: @abstract Move the current pointer to the given entry. @param item The history item to move the pointer to
+//
 // GoToItem calls the underlying GoToItem.
 func (x *WebBackForwardList) GoToItem(item *raw.WebHistoryItem) {
 	x.inner.GoToItem(item)
 }
 
+// @method backListWithLimit: @abstract Returns a portion of the list before the current entry. @param limit A cap on the size of the array returned. @result An array of items before the current entry, or nil if there are none.  The entries are in the order that they were originally visited.
+//
 // BackListWithLimit calls the underlying BackListWithLimit.
 func (x *WebBackForwardList) BackListWithLimit(limit int) *foundation.NSArray[objc.ID] {
 	return x.inner.BackListWithLimit(limit)
 }
 
+// @method forwardListWithLimit: @abstract Returns a portion of the list after the current entry. @param limit A cap on the size of the array returned. @result An array of items after the current entry, or nil if there are none.  The entries are in the order that they were originally visited.
+//
 // ForwardListWithLimit calls the underlying ForwardListWithLimit.
 func (x *WebBackForwardList) ForwardListWithLimit(limit int) *foundation.NSArray[objc.ID] {
 	return x.inner.ForwardListWithLimit(limit)
 }
 
+// @method containsItem: @param item The item that will be checked for presence in the WebBackForwardList. @result Returns YES if the item is in the list.
+//
 // ContainsItem calls the underlying ContainsItem.
 func (x *WebBackForwardList) ContainsItem(item *raw.WebHistoryItem) bool {
 	return x.inner.ContainsItem(item)
 }
 
+// @method itemAtIndex: @abstract Returns an entry the given distance from the current entry. @param index Index of the desired list item relative to the current item; 0 is current item, -1 is back item, 1 is forward item, etc. @result The entry the given distance from the current entry. If index exceeds the limits of the list, nil is returned.
+//
 // ItemAtIndex calls the underlying ItemAtIndex.
 func (x *WebBackForwardList) ItemAtIndex(index int) *WebHistoryItem {
 	_r := x.inner.ItemAtIndex(index)
@@ -86,6 +104,8 @@ func (x *WebBackForwardList) ItemAtIndex(index int) *WebHistoryItem {
 	return &WebHistoryItem{inner: _r}
 }
 
+// @property backItem @abstract The entry right before the current entry, or nil if there isn't one.
+//
 // BackItem calls the underlying BackItem.
 func (x *WebBackForwardList) BackItem() *WebHistoryItem {
 	_r := x.inner.BackItem()
@@ -95,6 +115,8 @@ func (x *WebBackForwardList) BackItem() *WebHistoryItem {
 	return &WebHistoryItem{inner: _r}
 }
 
+// @property currentItem @abstract Returns the current entry.
+//
 // CurrentItem calls the underlying CurrentItem.
 func (x *WebBackForwardList) CurrentItem() *WebHistoryItem {
 	_r := x.inner.CurrentItem()
@@ -104,6 +126,8 @@ func (x *WebBackForwardList) CurrentItem() *WebHistoryItem {
 	return &WebHistoryItem{inner: _r}
 }
 
+// @property forwardItem @abstract The entry right after the current entry, or nil if there isn't one.
+//
 // ForwardItem calls the underlying ForwardItem.
 func (x *WebBackForwardList) ForwardItem() *WebHistoryItem {
 	_r := x.inner.ForwardItem()
@@ -113,6 +137,8 @@ func (x *WebBackForwardList) ForwardItem() *WebHistoryItem {
 	return &WebHistoryItem{inner: _r}
 }
 
+// @property capacity @abstract The list's maximum size.
+//
 // Capacity calls the underlying Capacity.
 func (x *WebBackForwardList) Capacity() int {
 	return x.inner.Capacity()
@@ -123,21 +149,29 @@ func (x *WebBackForwardList) SetCapacity(capacity int) {
 	x.inner.SetCapacity(capacity)
 }
 
+// @property backListCount @abstract The number of items in the list.
+//
 // BackListCount calls the underlying BackListCount.
 func (x *WebBackForwardList) BackListCount() int {
 	return x.inner.BackListCount()
 }
 
+// @property forwardListCount @result The number of items in the list.
+//
 // ForwardListCount calls the underlying ForwardListCount.
 func (x *WebBackForwardList) ForwardListCount() int {
 	return x.inner.ForwardListCount()
 }
 
+// @method setPageCacheSize: @abstract The size passed to this method determines whether the WebView associated with this WebBackForwardList will use the shared page cache. @param size If size is 0, the WebView associated with this WebBackForwardList will not use the shared page cache. Otherwise, it will.
+//
 // SetPageCacheSize calls the underlying SetPageCacheSize.
 func (x *WebBackForwardList) SetPageCacheSize(size uint) {
 	x.inner.SetPageCacheSize(size)
 }
 
+// @method pageCacheSize @abstract Returns the size of the shared page cache, or 0. @result The size of the shared page cache (in pages), or 0 if the WebView associated with this WebBackForwardList will not use the shared page cache.
+//
 // PageCacheSize calls the underlying PageCacheSize.
 func (x *WebBackForwardList) PageCacheSize() uint {
 	return x.inner.PageCacheSize()

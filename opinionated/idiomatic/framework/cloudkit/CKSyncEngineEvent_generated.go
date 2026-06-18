@@ -35,11 +35,15 @@ func NewSyncEngineEvent() *SyncEngineEvent {
 	return &SyncEngineEvent{inner: raw.CKSyncEngineEventFromID(_id)}
 }
 
+// The type of event.
+//
 // Type calls the underlying Type.
 func (x *SyncEngineEvent) Type() CKSyncEngineEventType {
 	return CKSyncEngineEventType(x.inner.Type())
 }
 
+// The event downcast to the subclass that represents an update to the sync engine's state.
+//
 // StateUpdateEvent calls the underlying StateUpdateEvent.
 func (x *SyncEngineEvent) StateUpdateEvent() *SyncEngineStateUpdateEvent {
 	_r := x.inner.StateUpdateEvent()
@@ -49,6 +53,8 @@ func (x *SyncEngineEvent) StateUpdateEvent() *SyncEngineStateUpdateEvent {
 	return &SyncEngineStateUpdateEvent{inner: _r}
 }
 
+// The event downcast to the subclass that represents a change to the device's iCloud account.
+//
 // AccountChangeEvent calls the underlying AccountChangeEvent.
 func (x *SyncEngineEvent) AccountChangeEvent() *SyncEngineAccountChangeEvent {
 	_r := x.inner.AccountChangeEvent()
@@ -58,6 +64,8 @@ func (x *SyncEngineEvent) AccountChangeEvent() *SyncEngineAccountChangeEvent {
 	return &SyncEngineAccountChangeEvent{inner: _r}
 }
 
+// The event downcast to the subclass that represents an imminent database fetch.
+//
 // WillFetchChangesEvent calls the underlying WillFetchChangesEvent.
 func (x *SyncEngineEvent) WillFetchChangesEvent() *SyncEngineWillFetchChangesEvent {
 	_r := x.inner.WillFetchChangesEvent()
@@ -67,6 +75,8 @@ func (x *SyncEngineEvent) WillFetchChangesEvent() *SyncEngineWillFetchChangesEve
 	return &SyncEngineWillFetchChangesEvent{inner: _r}
 }
 
+// The event downcast to the subclass that represents a set of fetched database changes to process.
+//
 // FetchedDatabaseChangesEvent calls the underlying FetchedDatabaseChangesEvent.
 func (x *SyncEngineEvent) FetchedDatabaseChangesEvent() *SyncEngineFetchedDatabaseChangesEvent {
 	_r := x.inner.FetchedDatabaseChangesEvent()
@@ -76,6 +86,8 @@ func (x *SyncEngineEvent) FetchedDatabaseChangesEvent() *SyncEngineFetchedDataba
 	return &SyncEngineFetchedDatabaseChangesEvent{inner: _r}
 }
 
+// The event downcast to the subclass that represents a completed database fetch.
+//
 // DidFetchChangesEvent calls the underlying DidFetchChangesEvent.
 func (x *SyncEngineEvent) DidFetchChangesEvent() *SyncEngineDidFetchChangesEvent {
 	_r := x.inner.DidFetchChangesEvent()
@@ -85,6 +97,8 @@ func (x *SyncEngineEvent) DidFetchChangesEvent() *SyncEngineDidFetchChangesEvent
 	return &SyncEngineDidFetchChangesEvent{inner: _r}
 }
 
+// The event downcast to the subclass that represents an imminent fetch of record zone changes.
+//
 // WillFetchRecordZoneChangesEvent calls the underlying WillFetchRecordZoneChangesEvent.
 func (x *SyncEngineEvent) WillFetchRecordZoneChangesEvent() *SyncEngineWillFetchRecordZoneChangesEvent {
 	_r := x.inner.WillFetchRecordZoneChangesEvent()
@@ -94,6 +108,8 @@ func (x *SyncEngineEvent) WillFetchRecordZoneChangesEvent() *SyncEngineWillFetch
 	return &SyncEngineWillFetchRecordZoneChangesEvent{inner: _r}
 }
 
+// The event downcast to the subclass that represents a set of fetched record zone changes to process.
+//
 // FetchedRecordZoneChangesEvent calls the underlying FetchedRecordZoneChangesEvent.
 func (x *SyncEngineEvent) FetchedRecordZoneChangesEvent() *SyncEngineFetchedRecordZoneChangesEvent {
 	_r := x.inner.FetchedRecordZoneChangesEvent()
@@ -103,6 +119,8 @@ func (x *SyncEngineEvent) FetchedRecordZoneChangesEvent() *SyncEngineFetchedReco
 	return &SyncEngineFetchedRecordZoneChangesEvent{inner: _r}
 }
 
+// The event downcast to the subclass that represents a completed record zone fetch.
+//
 // DidFetchRecordZoneChangesEvent calls the underlying DidFetchRecordZoneChangesEvent.
 func (x *SyncEngineEvent) DidFetchRecordZoneChangesEvent() *SyncEngineDidFetchRecordZoneChangesEvent {
 	_r := x.inner.DidFetchRecordZoneChangesEvent()
@@ -112,6 +130,8 @@ func (x *SyncEngineEvent) DidFetchRecordZoneChangesEvent() *SyncEngineDidFetchRe
 	return &SyncEngineDidFetchRecordZoneChangesEvent{inner: _r}
 }
 
+// The event downcast to the subclass that represents an imminent send operation.
+//
 // WillSendChangesEvent calls the underlying WillSendChangesEvent.
 func (x *SyncEngineEvent) WillSendChangesEvent() *SyncEngineWillSendChangesEvent {
 	_r := x.inner.WillSendChangesEvent()
@@ -121,6 +141,8 @@ func (x *SyncEngineEvent) WillSendChangesEvent() *SyncEngineWillSendChangesEvent
 	return &SyncEngineWillSendChangesEvent{inner: _r}
 }
 
+// The event downcast to the subclass that represents a sent batch of database changes.
+//
 // SentDatabaseChangesEvent calls the underlying SentDatabaseChangesEvent.
 func (x *SyncEngineEvent) SentDatabaseChangesEvent() *SyncEngineSentDatabaseChangesEvent {
 	_r := x.inner.SentDatabaseChangesEvent()
@@ -130,6 +152,8 @@ func (x *SyncEngineEvent) SentDatabaseChangesEvent() *SyncEngineSentDatabaseChan
 	return &SyncEngineSentDatabaseChangesEvent{inner: _r}
 }
 
+// The event downcast to the subclass that represents a sent batch of record zone changes.
+//
 // SentRecordZoneChangesEvent calls the underlying SentRecordZoneChangesEvent.
 func (x *SyncEngineEvent) SentRecordZoneChangesEvent() *SyncEngineSentRecordZoneChangesEvent {
 	_r := x.inner.SentRecordZoneChangesEvent()
@@ -139,6 +163,8 @@ func (x *SyncEngineEvent) SentRecordZoneChangesEvent() *SyncEngineSentRecordZone
 	return &SyncEngineSentRecordZoneChangesEvent{inner: _r}
 }
 
+// The event downcast to the subclass that represents a completed send operation.
+//
 // DidSendChangesEvent calls the underlying DidSendChangesEvent.
 func (x *SyncEngineEvent) DidSendChangesEvent() *SyncEngineDidSendChangesEvent {
 	_r := x.inner.DidSendChangesEvent()

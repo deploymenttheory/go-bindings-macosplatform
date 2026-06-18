@@ -36,6 +36,8 @@ func NewDecisionNode() *DecisionNode {
 	return &DecisionNode{inner: raw.GKDecisionNodeFromID(_id)}
 }
 
+// Creates a numeric branch to a node containing the specified attribute @param value The value to create a branch with @param attribute The attribute of the created node @return The node lead to by the branch
+//
 // CreateBranchWithValueAttribute calls the underlying CreateBranchWithValueAttribute.
 func (x *DecisionNode) CreateBranchWithValueAttribute(value *foundation.NSNumber, attribute foundation.NSObjectProtocol) *DecisionNode {
 	_r := x.inner.CreateBranchWithValueAttribute(value, attribute)
@@ -45,6 +47,8 @@ func (x *DecisionNode) CreateBranchWithValueAttribute(value *foundation.NSNumber
 	return &DecisionNode{inner: _r}
 }
 
+// Creates a predicated branch to a node containing the specified attribute @param predicate The predicate to create a branch with @param attribute The attribute of the created node @return The node lead to by the branch
+//
 // CreateBranchWithPredicateAttribute calls the underlying CreateBranchWithPredicateAttribute.
 func (x *DecisionNode) CreateBranchWithPredicateAttribute(predicate *foundation.NSPredicate, attribute foundation.NSObjectProtocol) *DecisionNode {
 	_r := x.inner.CreateBranchWithPredicateAttribute(predicate, attribute)
@@ -54,6 +58,8 @@ func (x *DecisionNode) CreateBranchWithPredicateAttribute(predicate *foundation.
 	return &DecisionNode{inner: _r}
 }
 
+// Creates a random branch to a node containing the specified attribute @param weight The weight to create a branch with (weighted for random selection) @param attribute The attribute of the created node @return The node lead to by the branch @see GKDecisionTree
+//
 // CreateBranchWithWeightAttribute calls the underlying CreateBranchWithWeightAttribute.
 func (x *DecisionNode) CreateBranchWithWeightAttribute(weight int, attribute foundation.NSObjectProtocol) *DecisionNode {
 	_r := x.inner.CreateBranchWithWeightAttribute(weight, attribute)

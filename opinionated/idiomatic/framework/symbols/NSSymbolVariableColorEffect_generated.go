@@ -35,6 +35,8 @@ func NewSymbolVariableColorEffect() *SymbolVariableColorEffect {
 	return &SymbolVariableColorEffect{inner: raw.NSSymbolVariableColorEffectFromID(_id)}
 }
 
+// Returns a copy of the effect that activates one layer at a time. This cancels the cumulative variant.
+//
 // EffectWithIterative calls the underlying EffectWithIterative.
 func (x *SymbolVariableColorEffect) EffectWithIterative() *SymbolVariableColorEffect {
 	_r := x.inner.EffectWithIterative()
@@ -44,6 +46,8 @@ func (x *SymbolVariableColorEffect) EffectWithIterative() *SymbolVariableColorEf
 	return &SymbolVariableColorEffect{inner: _r}
 }
 
+// Returns a copy of the effect that activates each layer until all layers are active. This cancels the iterative variant.
+//
 // EffectWithCumulative calls the underlying EffectWithCumulative.
 func (x *SymbolVariableColorEffect) EffectWithCumulative() *SymbolVariableColorEffect {
 	_r := x.inner.EffectWithCumulative()
@@ -53,6 +57,8 @@ func (x *SymbolVariableColorEffect) EffectWithCumulative() *SymbolVariableColorE
 	return &SymbolVariableColorEffect{inner: _r}
 }
 
+// Returns a copy of the effect that animates in reverse after fully executing. This cancels the nonReversing variant.
+//
 // EffectWithReversing calls the underlying EffectWithReversing.
 func (x *SymbolVariableColorEffect) EffectWithReversing() *SymbolVariableColorEffect {
 	_r := x.inner.EffectWithReversing()
@@ -62,6 +68,8 @@ func (x *SymbolVariableColorEffect) EffectWithReversing() *SymbolVariableColorEf
 	return &SymbolVariableColorEffect{inner: _r}
 }
 
+// Returns a copy of the effect that only animates forwards before restarting. This cancels the reversing variant.
+//
 // EffectWithNonReversing calls the underlying EffectWithNonReversing.
 func (x *SymbolVariableColorEffect) EffectWithNonReversing() *SymbolVariableColorEffect {
 	_r := x.inner.EffectWithNonReversing()
@@ -71,6 +79,8 @@ func (x *SymbolVariableColorEffect) EffectWithNonReversing() *SymbolVariableColo
 	return &SymbolVariableColorEffect{inner: _r}
 }
 
+// Returns a copy of the effect that hides layers when they are inactive.
+//
 // EffectWithHideInactiveLayers calls the underlying EffectWithHideInactiveLayers.
 func (x *SymbolVariableColorEffect) EffectWithHideInactiveLayers() *SymbolVariableColorEffect {
 	_r := x.inner.EffectWithHideInactiveLayers()
@@ -80,6 +90,8 @@ func (x *SymbolVariableColorEffect) EffectWithHideInactiveLayers() *SymbolVariab
 	return &SymbolVariableColorEffect{inner: _r}
 }
 
+// Returns a copy of the effect that draws layers with reduced (but non-zero) opacity when they are inactive.
+//
 // EffectWithDimInactiveLayers calls the underlying EffectWithDimInactiveLayers.
 func (x *SymbolVariableColorEffect) EffectWithDimInactiveLayers() *SymbolVariableColorEffect {
 	_r := x.inner.EffectWithDimInactiveLayers()

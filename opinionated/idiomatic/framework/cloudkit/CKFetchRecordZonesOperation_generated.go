@@ -38,6 +38,8 @@ func NewFetchRecordZonesOperation() *FetchRecordZonesOperation {
 	return &FetchRecordZonesOperation{inner: raw.CKFetchRecordZonesOperationFromID(_id)}
 }
 
+// Creates an operation for fetching the specified record zones. - Parameters: - zoneIDs: An array of “CKRecordZone/ID“ objects that represents the zones you want to retrieve. If you provide an empty array, you must set the “CKFetchRecordZonesOperation/recordZoneIDs“ property before you execute the operation. After creating the operation, assign a value to the “CKFetchRecordZonesOperation/fetchRecordZonesCompletionBlock“ property so you can process the results.
+//
 // NewFetchRecordZonesOperationWithRecordZoneIDs creates a new [FetchRecordZonesOperation].
 func NewFetchRecordZonesOperationWithRecordZoneIDs(zoneIDs *foundation.NSArray[*raw.CKRecordZoneID]) *FetchRecordZonesOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKFetchRecordZonesOperation")), objc.RegisterName("alloc"))
@@ -45,6 +47,8 @@ func NewFetchRecordZonesOperationWithRecordZoneIDs(zoneIDs *foundation.NSArray[*
 	return &FetchRecordZonesOperation{inner: raw.CKFetchRecordZonesOperationFromID(_id)}
 }
 
+// The IDs of the record zones to retrieve. Use this property to view or change the IDs of the record zones you want to retrieve. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue. If you use the operation that “CKFetchRecordZonesOperation/fetchAllRecordZonesOperation()“ returns, CloudKit ignores the contents of this property and sets its value to `nil`.
+//
 // WithRecordZoneIDs sets the collection, converting the Go slice to an NSArray.
 func (x *FetchRecordZonesOperation) WithRecordZoneIDs(items ...*raw.CKRecordZoneID) *FetchRecordZonesOperation {
 	if len(items) == 0 {
@@ -63,72 +67,96 @@ func (x *FetchRecordZonesOperation) WithRecordZoneIDs(items ...*raw.CKRecordZone
 	return x
 }
 
+// The closure to execute as the operation fetches individual record zones. The closure returns no value and takes the following parameters: - The ID of the record zone. - The record zone, or `nil` if CloudKit can't fetch the record zone. - If CloudKit can't fetch the record zone, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each record zone ID in the “CKFetchRecordZonesOperation/recordZoneIDs“ property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // WithPerRecordZoneCompletionBlock sets the perRecordZoneCompletionBlock property and returns the receiver for chaining.
 func (x *FetchRecordZonesOperation) WithPerRecordZoneCompletionBlock(perRecordZoneCompletionBlock func(*raw.CKRecordZoneID, *raw.CKRecordZone, unsafe.Pointer)) *FetchRecordZonesOperation {
 	x.inner.SetPerRecordZoneCompletionBlock(perRecordZoneCompletionBlock)
 	return x
 }
 
+// The closure to execute after CloudKit retrieves all of the record zones. This property is a closure that returns no value and has the following parameters: - A dictionary that maps the zone IDs you request to the results. The keys in the dictionary are “CKRecordZone/ID“ objects, and the values are the corresponding “CKRecordZone“ objects that CloudKit returns. - If CloudKit can't retrieve any of the record zones, an error that provides information about the failure; otherwise, `nil`. The operation executes the closure only once, and it's your only chance to process the results. You must provide a closure capable of executing on a background thread, so any tasks that require access to the main thread must redirect accordingly. The closure reports an error of type “CKError/Code/partialFailure“ when it retrieves only some of the record zones successfully. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the IDs of the record zones that the operation can't retrieve, and the corresponding values are errors that contain information about the failures. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // WithFetchRecordZonesCompletionBlock sets the fetchRecordZonesCompletionBlock property and returns the receiver for chaining.
 func (x *FetchRecordZonesOperation) WithFetchRecordZonesCompletionBlock(fetchRecordZonesCompletionBlock func(*foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKRecordZone], unsafe.Pointer)) *FetchRecordZonesOperation {
 	x.inner.SetFetchRecordZonesCompletionBlock(fetchRecordZonesCompletionBlock)
 	return x
 }
 
+// The database that the operation uses. For operations that you execute in a custom queue, use this property to specify the target database. Setting the database also sets the corresponding container, which it inherits from “CKOperation“. If this property's value is `nil`, the operation targets the user's private database. The default value is `nil`.
+//
 // WithDatabase sets the database property and returns the receiver for chaining.
 func (x *FetchRecordZonesOperation) WithDatabase(database *Database) *FetchRecordZonesOperation {
 	x.inner.CKDatabaseOperation.SetDatabase(database.Unwrap())
 	return x
 }
 
+// The operation's configuration.
+//
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *FetchRecordZonesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchRecordZonesOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
+// The operation's group.
+//
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *FetchRecordZonesOperation) WithGroup(group *OperationGroup) *FetchRecordZonesOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
+// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *FetchRecordZonesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordZonesOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
 	return x
 }
 
+// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
+//
 // WithContainer sets the container property and returns the receiver for chaining.
 func (x *FetchRecordZonesOperation) WithContainer(container *Container) *FetchRecordZonesOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
+//
 // WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
 func (x *FetchRecordZonesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchRecordZonesOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
 	return x
 }
 
+// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *FetchRecordZonesOperation) WithLongLived(longLived bool) *FetchRecordZonesOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetLongLived(longLived)
 	return x
 }
 
+// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
+//
 // WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
 func (x *FetchRecordZonesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordZonesOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
 	return x
 }
 
+// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
+//
 // WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
 func (x *FetchRecordZonesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordZonesOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
 	return x
 }
 
+// The IDs of the record zones to retrieve. Use this property to view or change the IDs of the record zones you want to retrieve. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue. If you use the operation that “CKFetchRecordZonesOperation/fetchAllRecordZonesOperation()“ returns, CloudKit ignores the contents of this property and sets its value to `nil`.
+//
 // RecordZoneIDs returns the collection as a Go slice.
 func (x *FetchRecordZonesOperation) RecordZoneIDs() []*RecordZoneID {
 	arr := x.inner.RecordZoneIDs()
@@ -145,6 +173,8 @@ func (x *FetchRecordZonesOperation) SetRecordZoneIDs(recordZoneIDs *foundation.N
 	x.inner.SetRecordZoneIDs(recordZoneIDs)
 }
 
+// The closure to execute as the operation fetches individual record zones. The closure returns no value and takes the following parameters: - The ID of the record zone. - The record zone, or `nil` if CloudKit can't fetch the record zone. - If CloudKit can't fetch the record zone, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each record zone ID in the “CKFetchRecordZonesOperation/recordZoneIDs“ property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // PerRecordZoneCompletionBlock calls the underlying PerRecordZoneCompletionBlock.
 func (x *FetchRecordZonesOperation) PerRecordZoneCompletionBlock() objc.Block {
 	return x.inner.PerRecordZoneCompletionBlock()
@@ -155,6 +185,8 @@ func (x *FetchRecordZonesOperation) SetPerRecordZoneCompletionBlock(perRecordZon
 	x.inner.SetPerRecordZoneCompletionBlock(perRecordZoneCompletionBlock)
 }
 
+// The closure to execute after CloudKit retrieves all of the record zones. This property is a closure that returns no value and has the following parameters: - A dictionary that maps the zone IDs you request to the results. The keys in the dictionary are “CKRecordZone/ID“ objects, and the values are the corresponding “CKRecordZone“ objects that CloudKit returns. - If CloudKit can't retrieve any of the record zones, an error that provides information about the failure; otherwise, `nil`. The operation executes the closure only once, and it's your only chance to process the results. You must provide a closure capable of executing on a background thread, so any tasks that require access to the main thread must redirect accordingly. The closure reports an error of type “CKError/Code/partialFailure“ when it retrieves only some of the record zones successfully. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the IDs of the record zones that the operation can't retrieve, and the corresponding values are errors that contain information about the failures. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // FetchRecordZonesCompletionBlock calls the underlying FetchRecordZonesCompletionBlock.
 func (x *FetchRecordZonesOperation) FetchRecordZonesCompletionBlock() objc.Block {
 	return x.inner.FetchRecordZonesCompletionBlock()

@@ -37,11 +37,15 @@ func NewNEFlowMetaData() *NEFlowMetaData {
 	return &NEFlowMetaData{inner: raw.NEFlowMetaDataFromID(_id)}
 }
 
+// @property sourceAppUniqueIdentifier @discussion A byte string that uniquely identifies the binary for each build of the source application of the flow. The data object may be empty in cases where the flow originates from a system process.
+//
 // SourceAppUniqueIdentifier calls the underlying SourceAppUniqueIdentifier.
 func (x *NEFlowMetaData) SourceAppUniqueIdentifier() *foundation.NSData {
 	return x.inner.SourceAppUniqueIdentifier()
 }
 
+// @property sourceAppSigningIdentifier @discussion A string containing the signing identifier (almost always equivalent to the bundle identifier) of the source app of the flow. The string may be empty in cases where the flow originates from a system process.
+//
 // SourceAppSigningIdentifier calls the underlying SourceAppSigningIdentifier.
 func (x *NEFlowMetaData) SourceAppSigningIdentifier() string {
 	_r := x.inner.SourceAppSigningIdentifier()
@@ -51,11 +55,15 @@ func (x *NEFlowMetaData) SourceAppSigningIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property sourceAppAuditToken @discussion Audit token of the source application of the flow.
+//
 // SourceAppAuditToken calls the underlying SourceAppAuditToken.
 func (x *NEFlowMetaData) SourceAppAuditToken() *foundation.NSData {
 	return x.inner.SourceAppAuditToken()
 }
 
+// @property filterFlowIdentifier @discussion The identifier of the content filter flow corresponding to this flow.
+//
 // FilterFlowIdentifier calls the underlying FilterFlowIdentifier.
 func (x *NEFlowMetaData) FilterFlowIdentifier() *foundation.NSUUID {
 	return x.inner.FilterFlowIdentifier()

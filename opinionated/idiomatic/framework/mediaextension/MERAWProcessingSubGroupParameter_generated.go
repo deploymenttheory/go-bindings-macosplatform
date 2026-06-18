@@ -9,6 +9,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // RAWProcessingSubGroupParameter wraps [raw.MERAWProcessingSubGroupParameter] with a fluent Go API.
@@ -34,12 +35,23 @@ func RAWProcessingSubGroupParameterFromID(id objc.ID) *RAWProcessingSubGroupPara
 }
 
 // NewRAWProcessingSubGroupParameterWithNameDescriptionParameters creates a new [RAWProcessingSubGroupParameter].
-func NewRAWProcessingSubGroupParameterWithNameDescriptionParameters(name string, description string, parameters *foundation.NSArray[*raw.MERAWProcessingParameter]) *RAWProcessingSubGroupParameter {
+func NewRAWProcessingSubGroupParameterWithNameDescriptionParameters(name string, description string, parameters ...RAWProcessingParameterProvider) *RAWProcessingSubGroupParameter {
+	_ptrs := make([]objc.ID, len(parameters))
+	for _i, _v := range parameters {
+		_ptrs[_i] = _v.asRAWProcessingParameter().Ptr()
+	}
+	var _arg2 *foundation.NSArray[*raw.MERAWProcessingParameter]
+	if len(_ptrs) > 0 {
+		_arg2 = foundation.NSArrayFromID[*raw.MERAWProcessingParameter](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MERAWProcessingSubGroupParameter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:description:parameters:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(description).Ptr(), parameters.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:description:parameters:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(description).Ptr(), _arg2.Ptr())
 	return &RAWProcessingSubGroupParameter{inner: raw.MERAWProcessingSubGroupParameterFromID(_id)}
 }
 
+// @property		enabled @abstract		Indicates whether the parameter is enabled or disabled by the extension. @discussion	This parameter can only be modified by the extension.  From the application-facing interface, VTRAWProcessingSession, this is a read-only value which indicates whether the parameter should be greyed out and disabled in any UI being generated.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *RAWProcessingSubGroupParameter) WithEnabled(enabled bool) *RAWProcessingSubGroupParameter {
 	x.inner.MERAWProcessingParameter.SetEnabled(enabled)

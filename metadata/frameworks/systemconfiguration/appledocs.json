@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "framework": "SystemConfiguration",
+  "source": "developer.apple.com DocC render API",
+  "enums": {
+    "SCNetworkConnectionPPPStatus": {
+      "doc": "The PPP-specific status of the network connection.",
+      "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionpppstatus",
+      "members": {
+        "kSCNetworkConnectionPPPAuthenticating": {
+          "doc": "PPP is authenticating to the server (PAP, CHAP, MS-CHAP, or EAP protocols).",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionpppstatus/authenticating"
+        },
+        "kSCNetworkConnectionPPPConnected": {
+          "doc": "PPP is now fully connected for at least one networking layer. Additional networking protocol might still be negotiating.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionpppstatus/connected"
+        },
+        "kSCNetworkConnectionPPPConnectingLink": {
+          "doc": "PPP is connecting the lower connection layer (for example, the modem is dialing out).",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionpppstatus/connectinglink"
+        },
+        "kSCNetworkConnectionPPPDialOnTraffic": {
+          "doc": "PPP is waiting for networking traffic to automatically establish the connection.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionpppstatus/dialontraffic"
+        },
+        "kSCNetworkConnectionPPPDisconnected": {
+          "doc": "PPP is disconnected.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionpppstatus/disconnected"
+        },
+        "kSCNetworkConnectionPPPDisconnectingLink": {
+          "doc": "PPP is disconnecting the lower level (for example, the modem is hanging up).",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionpppstatus/disconnectinglink"
+        },
+        "kSCNetworkConnectionPPPHoldingLinkOff": {
+          "doc": "PPP is disconnected and maintaining the link temporarily off.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionpppstatus/holdinglinkoff"
+        },
+        "kSCNetworkConnectionPPPInitializing": {
+          "doc": "PPP is initializing.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionpppstatus/initializing"
+        },
+        "kSCNetworkConnectionPPPNegotiatingLink": {
+          "doc": "The PPP lower layer is connected and PPP is negotiating the link layer (LCP protocol).",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionpppstatus/negotiatinglink"
+        },
+        "kSCNetworkConnectionPPPNegotiatingNetwork": {
+          "doc": "PPP is now authenticated and negotiating the networking layer (IPCP or IPv6CP protocols).",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionpppstatus/negotiatingnetwork"
+        },
+        "kSCNetworkConnectionPPPSuspended": {
+          "doc": "PPP is suspended as a result of the suspend command (for example, when a V.92 Modem is On Hold).",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionpppstatus/suspended"
+        },
+        "kSCNetworkConnectionPPPTerminating": {
+          "doc": "PPP networking and link protocols are terminating.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionpppstatus/terminating"
+        },
+        "kSCNetworkConnectionPPPWaitingForCallBack": {
+          "doc": "PPP is waiting for the server to call back.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionpppstatus/waitingforcallback"
+        },
+        "kSCNetworkConnectionPPPWaitingForRedial": {
+          "doc": "PPP has found a busy server and is waiting for redial.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionpppstatus/waitingforredial"
+        }
+      }
+    },
+    "SCNetworkConnectionStatus": {
+      "doc": "The current status of the network connection.",
+      "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionstatus",
+      "members": {
+        "kSCNetworkConnectionConnected": {
+          "doc": "The network connection is connected.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionstatus/connected"
+        },
+        "kSCNetworkConnectionConnecting": {
+          "doc": "The network connection is connecting.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionstatus/connecting"
+        },
+        "kSCNetworkConnectionDisconnected": {
+          "doc": "The network connection is disconnected.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionstatus/disconnected"
+        },
+        "kSCNetworkConnectionDisconnecting": {
+          "doc": "The network connection is disconnecting.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionstatus/disconnecting"
+        },
+        "kSCNetworkConnectionInvalid": {
+          "doc": "The network connection refers to an invalid service.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectionstatus/invalid"
+        }
+      }
+    },
+    "SCNetworkReachabilityFlags": {
+      "doc": "Flags that indicate the reachability of a network node name or address, including whether a connection is required, and whether some user intervention might be required when establishing a connection.",
+      "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkreachabilityflags",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates a network reachability flags structure with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkreachabilityflags/init(rawvalue:)"
+        },
+        "kSCNetworkReachabilityFlagsConnectionAutomatic": {
+          "doc": "The specified node name or address can be reached using the current network configuration, but a connection must first be established. Any traffic directed to the specified name or address will initiate the connection. This flag is a synonym for kSCNetworkReachabilityFlagsConnectionOnTraffic.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkreachabilityflags/connectionautomatic"
+        },
+        "kSCNetworkReachabilityFlagsConnectionOnDemand": {
+          "doc": "The specified node name or address can be reached using the current network configuration, but a connection must first be established.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkreachabilityflags/connectionondemand"
+        },
+        "kSCNetworkReachabilityFlagsConnectionOnTraffic": {
+          "doc": "The specified node name or address can be reached using the current network configuration, but a connection must first be established. Any traffic directed to the specified name or address will initiate the connection.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkreachabilityflags/connectionontraffic"
+        },
+        "kSCNetworkReachabilityFlagsConnectionRequired": {
+          "doc": "The specified node name or address can be reached using the current network configuration, but a connection must first be established. If this flag is set, the kSCNetworkReachabilityFlagsConnectionOnTraffic flag, kSCNetworkReachabilityFlagsConnectionOnDemand flag, or kSCNetworkReachabilityFlagsIsWWAN flag is also typically set to indicate the type of connection required. If the user must manually make the connection, the kSCNetworkReachabilityFlagsInterventionRequired flag is also set.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkreachabilityflags/connectionrequired"
+        },
+        "kSCNetworkReachabilityFlagsInterventionRequired": {
+          "doc": "The specified node name or address can be reached using the current network configuration, but a connection must first be established.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkreachabilityflags/interventionrequired"
+        },
+        "kSCNetworkReachabilityFlagsIsDirect": {
+          "doc": "Network traffic to the specified node name or address will not go through a gateway, but is routed directly to one of the interfaces in the system.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkreachabilityflags/isdirect"
+        },
+        "kSCNetworkReachabilityFlagsIsLocalAddress": {
+          "doc": "The specified node name or address is one that is associated with a network interface on the current system.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkreachabilityflags/islocaladdress"
+        },
+        "kSCNetworkReachabilityFlagsIsWWAN": {
+          "doc": "The specified node name or address can be reached via a cellular connection, such as EDGE or GPRS.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkreachabilityflags/iswwan"
+        },
+        "kSCNetworkReachabilityFlagsReachable": {
+          "doc": "The specified node name or address can be reached using the current network configuration.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkreachabilityflags/reachable"
+        },
+        "kSCNetworkReachabilityFlagsTransientConnection": {
+          "doc": "The specified node name or address can be reached via a transient connection, such as PPP.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkreachabilityflags/transientconnection"
+        }
+      }
+    },
+    "SCPreferencesNotification": {
+      "doc": "The type of notification (used with the SCPreferencesCallBack callback).",
+      "url": "https://developer.apple.com/documentation/systemconfiguration/scpreferencesnotification",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates a preferences notification structure with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scpreferencesnotification/init(rawvalue:)"
+        },
+        "kSCPreferencesNotificationApply": {
+          "doc": "Indicates when a request has been made to apply the currently saved preferences to the active system configuration.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scpreferencesnotification/apply"
+        },
+        "kSCPreferencesNotificationCommit": {
+          "doc": "Indicates when new preferences have been saved.",
+          "url": "https://developer.apple.com/documentation/systemconfiguration/scpreferencesnotification/commit"
+        }
+      }
+    }
+  },
+  "structs": {
+    "SCDynamicStoreContext": {
+      "doc": "Structure containing user-specified data and callbacks for a dynamic store session.",
+      "url": "https://developer.apple.com/documentation/systemconfiguration/scdynamicstorecontext"
+    },
+    "SCNetworkConnectionContext": {
+      "doc": "A structure containing user-specified data and callbacks for a network connection.",
+      "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkconnectioncontext"
+    },
+    "SCNetworkReachabilityContext": {
+      "doc": "Structure containing user-specified data and callbacks used with SCNetworkReachabilitySetCallback.",
+      "url": "https://developer.apple.com/documentation/systemconfiguration/scnetworkreachabilitycontext"
+    },
+    "SCPreferencesContext": {
+      "doc": "A structure containing user-specified data and callbacks for accessing system configuration preferences.",
+      "url": "https://developer.apple.com/documentation/systemconfiguration/scpreferencescontext"
+    }
+  }
+}

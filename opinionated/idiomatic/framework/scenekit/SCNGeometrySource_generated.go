@@ -37,11 +37,15 @@ func NewGeometrySource() *GeometrySource {
 	return &GeometrySource{inner: raw.SCNGeometrySourceFromID(_id)}
 }
 
+// @property data @abstract The data for the geometry source
+//
 // Data calls the underlying Data.
 func (x *GeometrySource) Data() *foundation.NSData {
 	return x.inner.Data()
 }
 
+// @property semantic @abstract The semantic of the geometry source
+//
 // Semantic calls the underlying Semantic.
 func (x *GeometrySource) Semantic() string {
 	_r := x.inner.Semantic()
@@ -51,31 +55,43 @@ func (x *GeometrySource) Semantic() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property vectorCount @abstract The number of vectors in the data.
+//
 // VectorCount calls the underlying VectorCount.
 func (x *GeometrySource) VectorCount() int {
 	return x.inner.VectorCount()
 }
 
+// @property floatComponents @abstract A flag that indicates if vector components are floating point values.
+//
 // FloatComponents calls the underlying FloatComponents.
 func (x *GeometrySource) FloatComponents() bool {
 	return x.inner.FloatComponents()
 }
 
+// @property componentsPerVector @abstract The number of scalar components in each vector.
+//
 // ComponentsPerVector calls the underlying ComponentsPerVector.
 func (x *GeometrySource) ComponentsPerVector() int {
 	return x.inner.ComponentsPerVector()
 }
 
+// @property bytesPerComponent @abstract The size of a vector component in bytes.
+//
 // BytesPerComponent calls the underlying BytesPerComponent.
 func (x *GeometrySource) BytesPerComponent() int {
 	return x.inner.BytesPerComponent()
 }
 
+// @property dataOffset @abstract The offset from the beginning of the data. In bytes.
+//
 // DataOffset calls the underlying DataOffset.
 func (x *GeometrySource) DataOffset() int {
 	return x.inner.DataOffset()
 }
 
+// @property dataStride @abstract The number of bytes from a vector to the next one in the data.
+//
 // DataStride calls the underlying DataStride.
 func (x *GeometrySource) DataStride() int {
 	return x.inner.DataStride()

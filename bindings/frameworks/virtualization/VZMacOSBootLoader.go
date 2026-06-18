@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that loads and configures a boot loader for running macOS on Apple silicon as a guest system of your VM.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzmacosbootloader
 type VZMacOSBootLoader struct {
 	VZBootLoader
@@ -29,7 +31,7 @@ func VZMacOSBootLoaderFromID(id objc.ID) *VZMacOSBootLoader {
 	return o
 }
 
-// @abstract Create a VZMacOSBootLoader.
+// Creates a macOS boot loader.
 func (o *VZMacOSBootLoader) Init() *VZMacOSBootLoader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacOSBootLoaderSelInit)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a collection of Virtio console ports.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtioconsoleportarray
 type VZVirtioConsolePortArray struct {
 	foundation.NSObject
@@ -31,7 +33,7 @@ func VZVirtioConsolePortArrayFromID(id objc.ID) *VZVirtioConsolePortArray {
 	return o
 }
 
-// @abstract Get a port at the specified index.
+// Returns the Virtio console port at the specified index.
 func (o *VZVirtioConsolePortArray) ObjectAtIndexedSubscript(portIndex uint) *VZVirtioConsolePort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioConsolePortArraySelObjectAtIndexedSubscript, portIndex)
 	if _ret != 0 {

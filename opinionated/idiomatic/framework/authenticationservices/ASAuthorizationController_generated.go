@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AuthorizationController wraps [raw.ASAuthorizationController] with a fluent Go API.
@@ -31,40 +32,63 @@ func AuthorizationControllerFromID(id objc.ID) *AuthorizationController {
 	return &AuthorizationController{inner: raw.ASAuthorizationControllerFromID(id)}
 }
 
+// @abstract Initialize the controller with authorization requests. @param authorizationRequests At least one request should be provided. Requests of same type maybe honored in first in first out order
+//
 // NewAuthorizationControllerWithAuthorizationRequests creates a new [AuthorizationController].
-func NewAuthorizationControllerWithAuthorizationRequests(authorizationRequests *foundation.NSArray[*raw.ASAuthorizationRequest]) *AuthorizationController {
+func NewAuthorizationControllerWithAuthorizationRequests(authorizationRequests ...AuthorizationRequestProvider) *AuthorizationController {
+	_ptrs := make([]objc.ID, len(authorizationRequests))
+	for _i, _v := range authorizationRequests {
+		_ptrs[_i] = _v.asAuthorizationRequest().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.ASAuthorizationRequest]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.ASAuthorizationRequest](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAuthorizationRequests:"), authorizationRequests.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAuthorizationRequests:"), _arg0.Ptr())
 	return &AuthorizationController{inner: raw.ASAuthorizationControllerFromID(_id)}
 }
 
+// @abstract This delegate will be invoked upon completion of the authorization indicating success or failure. Delegate is required to receive the results of authorization.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *AuthorizationController) WithDelegate(delegate raw.ASAuthorizationControllerDelegate) *AuthorizationController {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @abstract This delegate will be invoked upon needing a presentation context to display authorization UI.
+//
 // WithPresentationContextProvider sets the presentationContextProvider property and returns the receiver for chaining.
 func (x *AuthorizationController) WithPresentationContextProvider(presentationContextProvider raw.ASAuthorizationControllerPresentationContextProviding) *AuthorizationController {
 	x.inner.SetPresentationContextProvider(presentationContextProvider)
 	return x
 }
 
+// @abstract Initiate the authorization flows. Upon completion, the delegate will be called with either success or failure. Certain authorization flows may require a presentation context. The @c presentationContextProvider will be called to provide it. The instance will remain retained until the flow is either completed or canceled, and the delegate callback is made.
+//
 // PerformRequests calls the underlying PerformRequests.
 func (x *AuthorizationController) PerformRequests() {
 	x.inner.PerformRequests()
 }
 
+// @abstract Initiate the authorization flows. Upon completion, the delegate will be called with either success or failure. Certain authorization flows may require a presentation context. The @c presentationContextProvider will be called to provide it. Calling this method with no options is the same as calling @c performRequests. The instance will remain retained until the flow is either completed or canceled, and the delegate callback is made.
+//
 // PerformRequestsWithOptions calls the underlying PerformRequestsWithOptions.
 func (x *AuthorizationController) PerformRequestsWithOptions(options ASAuthorizationControllerRequestOptions) {
 	x.inner.PerformRequestsWithOptions(raw.ASAuthorizationControllerRequestOptions(options))
 }
 
+// @abstract Cancel the running authorization flows, if there are any. If a flow is canceled, the delegate callback will be made indicating the cancel.
+//
 // Cancel calls the underlying Cancel.
 func (x *AuthorizationController) Cancel() {
 	x.inner.Cancel()
 }
 
+// @abstract Authorization requests that are being serviced by this controller
+//
 // AuthorizationRequests returns the collection as a Go slice.
 func (x *AuthorizationController) AuthorizationRequests() []*AuthorizationRequest {
 	arr := x.inner.AuthorizationRequests()
@@ -76,6 +100,8 @@ func (x *AuthorizationController) AuthorizationRequests() []*AuthorizationReques
 	})
 }
 
+// @abstract This delegate will be invoked upon completion of the authorization indicating success or failure. Delegate is required to receive the results of authorization.
+//
 // Delegate calls the underlying Delegate.
 func (x *AuthorizationController) Delegate() raw.ASAuthorizationControllerDelegate {
 	return x.inner.Delegate()
@@ -86,6 +112,8 @@ func (x *AuthorizationController) SetDelegate(delegate raw.ASAuthorizationContro
 	x.inner.SetDelegate(delegate)
 }
 
+// @abstract This delegate will be invoked upon needing a presentation context to display authorization UI.
+//
 // PresentationContextProvider calls the underlying PresentationContextProvider.
 func (x *AuthorizationController) PresentationContextProvider() raw.ASAuthorizationControllerPresentationContextProviding {
 	return x.inner.PresentationContextProvider()

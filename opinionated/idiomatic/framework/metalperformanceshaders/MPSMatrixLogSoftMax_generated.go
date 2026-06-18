@@ -39,48 +39,64 @@ func NewMatrixLogSoftMax() *MatrixLogSoftMax {
 	return &MatrixLogSoftMax{inner: raw.MPSMatrixLogSoftMaxFromID(_id)}
 }
 
+// @property   sourceRows @discussion The number of rows to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.x, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
+//
 // WithSourceRows sets the sourceRows property and returns the receiver for chaining.
 func (x *MatrixLogSoftMax) WithSourceRows(sourceRows uint) *MatrixLogSoftMax {
 	x.inner.MPSMatrixSoftMax.SetSourceRows(sourceRows)
 	return x
 }
 
+// @property   sourceColumns @discussion The number of columns to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.y, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
+//
 // WithSourceColumns sets the sourceColumns property and returns the receiver for chaining.
 func (x *MatrixLogSoftMax) WithSourceColumns(sourceColumns uint) *MatrixLogSoftMax {
 	x.inner.MPSMatrixSoftMax.SetSourceColumns(sourceColumns)
 	return x
 }
 
+// @property   sourceMatrixOrigin @discussion The origin, relative to [0, 0] in the source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithSourceMatrixOrigin sets the sourceMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixLogSoftMax) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMax {
 	x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel.SetSourceMatrixOrigin(sourceMatrixOrigin)
 	return x
 }
 
+// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixLogSoftMax) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMax {
 	x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
 	return x
 }
 
+// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+//
 // WithBatchStart sets the batchStart property and returns the receiver for chaining.
 func (x *MatrixLogSoftMax) WithBatchStart(batchStart uint) *MatrixLogSoftMax {
 	x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel.SetBatchStart(batchStart)
 	return x
 }
 
+// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+//
 // WithBatchSize sets the batchSize property and returns the receiver for chaining.
 func (x *MatrixLogSoftMax) WithBatchSize(batchSize uint) *MatrixLogSoftMax {
 	x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel.SetBatchSize(batchSize)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixLogSoftMax) WithOptions(options mpscore.MPSKernelOptions) *MatrixLogSoftMax {
 	x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixLogSoftMax) WithLabel(label string) *MatrixLogSoftMax {
 	x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))

@@ -32,6 +32,8 @@ func ExtensionPropertyAttributesFromID(id objc.ID) *ExtensionPropertyAttributes 
 	return &ExtensionPropertyAttributes{inner: raw.CMIOExtensionPropertyAttributesFromID[objc.ID](id)}
 }
 
+// @method propertyAttributesWithMinValue:maxValue:validValues:readonly: @abstract Initialize a property attributes instance. @param minValue The minimum value of the property. @param maxValue The maximum value of the property. @param validValues The array of valid values. @param readOnly A readOnly flag. @result A CMIOExtensionPropertyAttributes instance that describes the attributes of a property. @discussion Property attributes may contain a minValue in which case the property is bounded by a minimum value. Property attributes may contain a maxValue in which case the property is bounded by a maximum value. Property attributes may contain both minValue and maxValue in which case the property is bounded within a range. Property attributes may contain a validValues in which case the property is discrete and can only have a certain set of value. If a property does not have a minValue/maxValue/validValues attributes, the property can have any value.
+//
 // NewExtensionPropertyAttributesWithMinValueMaxValueValidValuesReadOnly creates a new [ExtensionPropertyAttributes].
 func NewExtensionPropertyAttributesWithMinValueMaxValueValidValuesReadOnly(minValue objc.ID, maxValue objc.ID, validValues *foundation.NSArray[objc.ID], readOnly bool) *ExtensionPropertyAttributes {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionPropertyAttributes")), objc.RegisterName("alloc"))
@@ -39,21 +41,29 @@ func NewExtensionPropertyAttributesWithMinValueMaxValueValidValuesReadOnly(minVa
 	return &ExtensionPropertyAttributes{inner: raw.CMIOExtensionPropertyAttributesFromID[objc.ID](_id)}
 }
 
+// @property minValue @abstract The minimum value of a property.
+//
 // MinValue calls the underlying MinValue.
 func (x *ExtensionPropertyAttributes) MinValue() objc.ID {
 	return x.inner.MinValue()
 }
 
+// @property maxValue @abstract The maximum value of a property.
+//
 // MaxValue calls the underlying MaxValue.
 func (x *ExtensionPropertyAttributes) MaxValue() objc.ID {
 	return x.inner.MaxValue()
 }
 
+// @property validValues @abstract An array of valid values.
+//
 // ValidValues calls the underlying ValidValues.
 func (x *ExtensionPropertyAttributes) ValidValues() *foundation.NSArray[objc.ID] {
 	return x.inner.ValidValues()
 }
 
+// @property readOnly @abstract The readOnly flag attribute.
+//
 // IsReadOnly calls the underlying IsReadOnly.
 func (x *ExtensionPropertyAttributes) IsReadOnly() bool {
 	return x.inner.IsReadOnly()

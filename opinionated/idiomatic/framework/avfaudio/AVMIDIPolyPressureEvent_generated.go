@@ -29,6 +29,8 @@ func MIDIPolyPressureEventFromID(id objc.ID) *MIDIPolyPressureEvent {
 	return &MIDIPolyPressureEvent{inner: raw.AVMIDIPolyPressureEventFromID(id)}
 }
 
+// @method initWithChannel:key:pressure @abstract Initialize the event with a channel, a MIDI key number, and a key pressure value. @param channel The MIDI channel for the message.  Range: 0-15. @param key The MIDI key number to which the pressure should be applied. @param pressure The poly pressure value.
+//
 // NewMIDIPolyPressureEventWithChannelKeyPressure creates a new [MIDIPolyPressureEvent].
 func NewMIDIPolyPressureEventWithChannelKeyPressure(channel uint, key uint, pressure uint) *MIDIPolyPressureEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDIPolyPressureEvent")), objc.RegisterName("alloc"))
@@ -36,24 +38,32 @@ func NewMIDIPolyPressureEventWithChannelKeyPressure(channel uint, key uint, pres
 	return &MIDIPolyPressureEvent{inner: raw.AVMIDIPolyPressureEventFromID(_id)}
 }
 
+// @property key The MIDI key number.
+//
 // WithKey sets the key property and returns the receiver for chaining.
 func (x *MIDIPolyPressureEvent) WithKey(key uint) *MIDIPolyPressureEvent {
 	x.inner.SetKey(key)
 	return x
 }
 
+// @property pressure The poly pressure value for the requested key.
+//
 // WithPressure sets the pressure property and returns the receiver for chaining.
 func (x *MIDIPolyPressureEvent) WithPressure(pressure uint) *MIDIPolyPressureEvent {
 	x.inner.SetPressure(pressure)
 	return x
 }
 
+// @property channel The MIDI channel for the event.  Range: 0-15.
+//
 // WithChannel sets the channel property and returns the receiver for chaining.
 func (x *MIDIPolyPressureEvent) WithChannel(channel uint) *MIDIPolyPressureEvent {
 	x.inner.AVMIDIChannelEvent.SetChannel(channel)
 	return x
 }
 
+// @property key The MIDI key number.
+//
 // Key calls the underlying Key.
 func (x *MIDIPolyPressureEvent) Key() uint {
 	return x.inner.Key()
@@ -64,6 +74,8 @@ func (x *MIDIPolyPressureEvent) SetKey(key uint) {
 	x.inner.SetKey(key)
 }
 
+// @property pressure The poly pressure value for the requested key.
+//
 // Pressure calls the underlying Pressure.
 func (x *MIDIPolyPressureEvent) Pressure() uint {
 	return x.inner.Pressure()

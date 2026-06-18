@@ -37,18 +37,24 @@ func NewLayerNormalizationLayer() *LayerNormalizationLayer {
 	return &LayerNormalizationLayer{inner: raw.MLCLayerNormalizationLayerFromID(_id)}
 }
 
+// @property   label @abstract   A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *LayerNormalizationLayer) WithLabel(label string) *LayerNormalizationLayer {
 	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+//
 // WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
 func (x *LayerNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *LayerNormalizationLayer {
 	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
 	return x
 }
 
+// @property   normalizedShape @abstract   The shape of the axes over which normalization occurs, (W), (H,W) or (C,H,W)
+//
 // NormalizedShape returns the collection as a Go slice.
 func (x *LayerNormalizationLayer) NormalizedShape() []*foundation.NSNumber {
 	arr := x.inner.NormalizedShape()
@@ -60,6 +66,8 @@ func (x *LayerNormalizationLayer) NormalizedShape() []*foundation.NSNumber {
 	})
 }
 
+// @property   beta @abstract   The beta tensor
+//
 // Beta calls the underlying Beta.
 func (x *LayerNormalizationLayer) Beta() *Tensor {
 	_r := x.inner.Beta()
@@ -69,6 +77,8 @@ func (x *LayerNormalizationLayer) Beta() *Tensor {
 	return &Tensor{inner: _r}
 }
 
+// @property   gamma @abstract   The gamma tensor
+//
 // Gamma calls the underlying Gamma.
 func (x *LayerNormalizationLayer) Gamma() *Tensor {
 	_r := x.inner.Gamma()
@@ -78,6 +88,8 @@ func (x *LayerNormalizationLayer) Gamma() *Tensor {
 	return &Tensor{inner: _r}
 }
 
+// @property   betaParameter @abstract   The beta tensor parameter used for optimizer update
+//
 // BetaParameter calls the underlying BetaParameter.
 func (x *LayerNormalizationLayer) BetaParameter() *TensorParameter {
 	_r := x.inner.BetaParameter()
@@ -87,6 +99,8 @@ func (x *LayerNormalizationLayer) BetaParameter() *TensorParameter {
 	return &TensorParameter{inner: _r}
 }
 
+// @property   gammaParameter @abstract   The gamma tensor parameter used for optimizer update
+//
 // GammaParameter calls the underlying GammaParameter.
 func (x *LayerNormalizationLayer) GammaParameter() *TensorParameter {
 	_r := x.inner.GammaParameter()
@@ -96,6 +110,8 @@ func (x *LayerNormalizationLayer) GammaParameter() *TensorParameter {
 	return &TensorParameter{inner: _r}
 }
 
+// @property   varianceEpsilon @abstract   A value used for numerical stability
+//
 // VarianceEpsilon calls the underlying VarianceEpsilon.
 func (x *LayerNormalizationLayer) VarianceEpsilon() float32 {
 	return x.inner.VarianceEpsilon()

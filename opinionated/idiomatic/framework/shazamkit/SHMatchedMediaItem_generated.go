@@ -35,21 +35,29 @@ func NewMatchedMediaItem() *MatchedMediaItem {
 	return &MatchedMediaItem{inner: raw.SHMatchedMediaItemFromID(_id)}
 }
 
+// A multiple for the difference in frequency between the matched audio and the query audio. A value of `0.0` indicates that the query and matched audio are at the same frequency. Other values indicate that the query audio is playing at a different frequency. For example, if the original recording plays at `100` Hz, a value of `0.05` indicates that the query recording plays at `105` Hz. No match returns if the frequency skew is too large.
+//
 // FrequencySkew calls the underlying FrequencySkew.
 func (x *MatchedMediaItem) FrequencySkew() float32 {
 	return x.inner.FrequencySkew()
 }
 
+// The timecode in the reference recording that matches the start of the query, in seconds. The value can be negative if the query signature contains unrecognizable data before the data that corresponds to the start of the matched reference item.
+//
 // MatchOffset calls the underlying MatchOffset.
 func (x *MatchedMediaItem) MatchOffset() float64 {
 	return x.inner.MatchOffset()
 }
 
+// The updated timecode in the reference recording that matches the current playback position of the query audio, in seconds.
+//
 // PredictedCurrentMatchOffset calls the underlying PredictedCurrentMatchOffset.
 func (x *MatchedMediaItem) PredictedCurrentMatchOffset() float64 {
 	return x.inner.PredictedCurrentMatchOffset()
 }
 
+// The level of confidence in the match result. The value ranges from 0.0 to 1.0, where 1.0 indicates the highest level of confidence.
+//
 // Confidence calls the underlying Confidence.
 func (x *MatchedMediaItem) Confidence() float32 {
 	return x.inner.Confidence()

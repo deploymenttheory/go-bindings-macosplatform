@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A device that defines the configuration for a Mac keyboard.
+//
 // MacKeyboardConfiguration wraps [raw.VZMacKeyboardConfiguration] with a fluent Go API.
 type MacKeyboardConfiguration struct {
 	inner *raw.VZMacKeyboardConfiguration

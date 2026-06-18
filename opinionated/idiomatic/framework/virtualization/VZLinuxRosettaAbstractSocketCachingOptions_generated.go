@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Caching options for an abstract socket.
+//
 // LinuxRosettaAbstractSocketCachingOptions wraps [raw.VZLinuxRosettaAbstractSocketCachingOptions] with a fluent Go API.
 type LinuxRosettaAbstractSocketCachingOptions struct {
 	inner *raw.VZLinuxRosettaAbstractSocketCachingOptions
@@ -34,6 +36,8 @@ func LinuxRosettaAbstractSocketCachingOptionsFromID(id objc.ID) *LinuxRosettaAbs
 	return &LinuxRosettaAbstractSocketCachingOptions{inner: raw.VZLinuxRosettaAbstractSocketCachingOptionsFromID(id)}
 }
 
+// Initialize options to set on a Rosetta directory share.
+//
 // NewLinuxRosettaAbstractSocketCachingOptionsWithNameError creates a new [LinuxRosettaAbstractSocketCachingOptions].
 func NewLinuxRosettaAbstractSocketCachingOptionsWithNameError(name string) (*LinuxRosettaAbstractSocketCachingOptions, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZLinuxRosettaAbstractSocketCachingOptions")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewLinuxRosettaAbstractSocketCachingOptionsWithNameError(name string) (*Lin
 	return &LinuxRosettaAbstractSocketCachingOptions{inner: raw.VZLinuxRosettaAbstractSocketCachingOptionsFromID(_id)}, nil
 }
 
+// @abstract Name set by initWithName. @discussion This is the name of the Abstract Socket to be used by Rosetta.
+//
 // Name calls the underlying Name.
 func (x *LinuxRosettaAbstractSocketCachingOptions) Name() string {
 	_r := x.inner.Name()

@@ -35,6 +35,8 @@ func NewChangePlaybackPositionCommand() *ChangePlaybackPositionCommand {
 	return &ChangePlaybackPositionCommand{inner: raw.MPChangePlaybackPositionCommandFromID(_id)}
 }
 
+// Whether a button (for example) should be enabled and tappable for this particular command.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *ChangePlaybackPositionCommand) WithEnabled(enabled bool) *ChangePlaybackPositionCommand {
 	x.inner.MPRemoteCommand.SetEnabled(enabled)

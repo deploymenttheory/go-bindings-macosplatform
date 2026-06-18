@@ -37,11 +37,15 @@ func NewExtensionClient() *ExtensionClient {
 	return &ExtensionClient{inner: raw.CMIOExtensionClientFromID(_id)}
 }
 
+// @property clientID @abstract The client unique identifier.
+//
 // ClientID calls the underlying ClientID.
 func (x *ExtensionClient) ClientID() *foundation.NSUUID {
 	return x.inner.ClientID()
 }
 
+// @property signingID @abstract The client's signing identifier.
+//
 // SigningID calls the underlying SigningID.
 func (x *ExtensionClient) SigningID() string {
 	_r := x.inner.SigningID()
@@ -51,6 +55,8 @@ func (x *ExtensionClient) SigningID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property pid @abstract The pid of the client application.
+//
 // Pid calls the underlying Pid.
 func (x *ExtensionClient) Pid() int {
 	return x.inner.Pid()

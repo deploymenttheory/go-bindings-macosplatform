@@ -42,26 +42,36 @@ func (x *URLCredentialStorage) WithScriptingProperties(scriptingProperties *raw.
 	return x
 }
 
+// @method credentialsForProtectionSpace: @abstract Get a dictionary mapping usernames to credentials for the specified protection space. @param space An NSURLProtectionSpace indicating the protection space for which to get credentials @result A dictionary where the keys are usernames and the values are the corresponding NSURLCredentials.
+//
 // CredentialsForProtectionSpace calls the underlying CredentialsForProtectionSpace.
 func (x *URLCredentialStorage) CredentialsForProtectionSpace(space *raw.NSURLProtectionSpace) *raw.NSDictionary[*raw.NSString, *raw.NSURLCredential] {
 	return x.inner.CredentialsForProtectionSpace(space)
 }
 
+// @method setCredential:forProtectionSpace: @abstract Add a new credential to the set for the specified protection space or replace an existing one. @param credential The credential to set. @param space The protection space for which to add it. @discussion Multiple credentials may be set for a given protection space, but each must have a distinct user. If a credential with the same user is already set for the protection space, the new one will replace it.
+//
 // SetCredentialForProtectionSpace calls the underlying SetCredentialForProtectionSpace.
 func (x *URLCredentialStorage) SetCredentialForProtectionSpace(credential *raw.NSURLCredential, space *raw.NSURLProtectionSpace) {
 	x.inner.SetCredentialForProtectionSpace(credential, space)
 }
 
+// @method removeCredential:forProtectionSpace: @abstract Remove the credential from the set for the specified protection space. @param credential The credential to remove. @param space The protection space for which a credential should be removed @discussion The credential is removed from both persistent and temporary storage. A credential that has a persistence policy of NSURLCredentialPersistenceSynchronizable will fail. See removeCredential:forProtectionSpace:options.
+//
 // RemoveCredentialForProtectionSpace calls the underlying RemoveCredentialForProtectionSpace.
 func (x *URLCredentialStorage) RemoveCredentialForProtectionSpace(credential *raw.NSURLCredential, space *raw.NSURLProtectionSpace) {
 	x.inner.RemoveCredentialForProtectionSpace(credential, space)
 }
 
+// @method removeCredential:forProtectionSpace:options @abstract Remove the credential from the set for the specified protection space based on options. @param credential The credential to remove. @param space The protection space for which a credential should be removed @param options A dictionary containing options to consider when removing the credential.  This should be used when trying to delete a credential that has the NSURLCredentialPersistenceSynchronizable policy. Please note that when NSURLCredential objects that have a NSURLCredentialPersistenceSynchronizable policy are removed, the credential will be removed on all devices that contain this credential. @discussion The credential is removed from both persistent and temporary storage.
+//
 // RemoveCredentialForProtectionSpaceOptions calls the underlying RemoveCredentialForProtectionSpaceOptions.
 func (x *URLCredentialStorage) RemoveCredentialForProtectionSpaceOptions(credential *raw.NSURLCredential, space *raw.NSURLProtectionSpace, options *raw.NSDictionary[*raw.NSString, objc.ID]) {
 	x.inner.RemoveCredentialForProtectionSpaceOptions(credential, space, options)
 }
 
+// @method defaultCredentialForProtectionSpace: @abstract Get the default credential for the specified protection space. @param space The protection space for which to get the default credential.
+//
 // DefaultCredentialForProtectionSpace calls the underlying DefaultCredentialForProtectionSpace.
 func (x *URLCredentialStorage) DefaultCredentialForProtectionSpace(space *raw.NSURLProtectionSpace) *URLCredential {
 	_r := x.inner.DefaultCredentialForProtectionSpace(space)
@@ -71,11 +81,15 @@ func (x *URLCredentialStorage) DefaultCredentialForProtectionSpace(space *raw.NS
 	return &URLCredential{inner: _r}
 }
 
+// @method setDefaultCredential:forProtectionSpace: @abstract Set the default credential for the specified protection space. @param credential The credential to set as default. @param space The protection space for which the credential should be set as default. @discussion If the credential is not yet in the set for the protection space, it will be added to it.
+//
 // SetDefaultCredentialForProtectionSpace calls the underlying SetDefaultCredentialForProtectionSpace.
 func (x *URLCredentialStorage) SetDefaultCredentialForProtectionSpace(credential *raw.NSURLCredential, space *raw.NSURLProtectionSpace) {
 	x.inner.SetDefaultCredentialForProtectionSpace(credential, space)
 }
 
+// @abstract Get a dictionary mapping NSURLProtectionSpaces to dictionaries which map usernames to NSURLCredentials @result an NSDictionary where the keys are NSURLProtectionSpaces and the values are dictionaries, in which the keys are usernames and the values are NSURLCredentials
+//
 // AllCredentials calls the underlying AllCredentials.
 func (x *URLCredentialStorage) AllCredentials() *raw.NSDictionary[*raw.NSURLProtectionSpace, objc.ID] {
 	return x.inner.AllCredentials()

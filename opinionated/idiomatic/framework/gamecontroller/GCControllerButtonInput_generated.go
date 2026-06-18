@@ -42,6 +42,8 @@ func (x *ControllerButtonInput) WithValueChangedHandler(valueChangedHandler func
 	return x
 }
 
+// Set this block if you want to be notified when only the pressed state on this button changes. This will get called less often than the valueChangedHandler with the additional feature of the pressed state being different to the last time it was called.
+//
 // WithPressedChangedHandler sets the pressedChangedHandler property and returns the receiver for chaining.
 func (x *ControllerButtonInput) WithPressedChangedHandler(pressedChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *ControllerButtonInput {
 	x.inner.SetPressedChangedHandler(pressedChangedHandler)
@@ -54,42 +56,56 @@ func (x *ControllerButtonInput) WithTouchedChangedHandler(touchedChangedHandler 
 	return x
 }
 
+// A normalized value for the input. Between 0 and 1 for button inputs. Values are saturated and thus never exceed the range of [0, 1]. @see valueChangedHandler @see pressed
+//
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *ControllerButtonInput) WithValue(value float32) *ControllerButtonInput {
 	x.inner.SetValue(value)
 	return x
 }
 
+// The preferred system gesture state for this element. Defaults to GCSystemGestureStateEnabled for most elements @note This is merely the preferred system gesture state - it is not guaranteed to be respected by the system. @note It is highly recommended to leave this set to the default value, however there may be situations (for example, game streaming apps) where it is preferrable to disable system gestures. @see boundToSystemGesture
+//
 // WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
 func (x *ControllerButtonInput) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerButtonInput {
 	x.inner.GCControllerElement.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
 	return x
 }
 
+// The element's SF Symbols name, taking input remapping into account. @note In almost all instances, you should use this over unmappedSfSymbolsName in your UI.
+//
 // WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
 func (x *ControllerButtonInput) WithSfSymbolsName(sfSymbolsName string) *ControllerButtonInput {
 	x.inner.GCControllerElement.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
 	return x
 }
 
+// The element's localized name, taking input remapping into account. @note In almost all instances, you should use this over unmappedLocalizedName in your UI.
+//
 // WithLocalizedName sets the localizedName property and returns the receiver for chaining.
 func (x *ControllerButtonInput) WithLocalizedName(localizedName string) *ControllerButtonInput {
 	x.inner.GCControllerElement.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
 	return x
 }
 
+// The element's SF Symbols name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (sfSymbolsName is nil).
+//
 // WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
 func (x *ControllerButtonInput) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerButtonInput {
 	x.inner.GCControllerElement.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
 	return x
 }
 
+// The element's localized name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (localizedName is nil).
+//
 // WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
 func (x *ControllerButtonInput) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerButtonInput {
 	x.inner.GCControllerElement.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
 	return x
 }
 
+// Sets the normalized value for the button input. Will update the pressed state of the button. @param value the value to set the input to. @note If the controller's snapshot flag is set to NO, this method has no effect. @see value
+//
 // SetValue calls the underlying SetValue.
 func (x *ControllerButtonInput) SetValue(value float32) {
 	x.inner.SetValue(value)
@@ -105,6 +121,8 @@ func (x *ControllerButtonInput) SetValueChangedHandler(valueChangedHandler func(
 	x.inner.SetValueChangedHandler(valueChangedHandler)
 }
 
+// Set this block if you want to be notified when only the pressed state on this button changes. This will get called less often than the valueChangedHandler with the additional feature of the pressed state being different to the last time it was called.
+//
 // PressedChangedHandler calls the underlying PressedChangedHandler.
 func (x *ControllerButtonInput) PressedChangedHandler() objc.Block {
 	return x.inner.PressedChangedHandler()
@@ -125,16 +143,22 @@ func (x *ControllerButtonInput) SetTouchedChangedHandler(touchedChangedHandler f
 	x.inner.SetTouchedChangedHandler(touchedChangedHandler)
 }
 
+// A normalized value for the input. Between 0 and 1 for button inputs. Values are saturated and thus never exceed the range of [0, 1]. @see valueChangedHandler @see pressed
+//
 // Value calls the underlying Value.
 func (x *ControllerButtonInput) Value() float32 {
 	return x.inner.Value()
 }
 
+// Buttons are mostly used in a digital sense, thus we have a recommended method for checking for pressed state instead of interpreting the value. As a general guideline a button is pressed if the value exceeds 0. However there may be hysterisis applied to counter noisy input values, thus incidental values around the threshold value may not trigger a change in pressed state. Others buttons may support two-stage actuation, where the button reports a value between 0 and 1 but is only considered pressed when its value is greater than some threshold other than 0. @see pressedChangedHandler @see value
+//
 // IsPressed calls the underlying IsPressed.
 func (x *ControllerButtonInput) IsPressed() bool {
 	return x.inner.IsPressed()
 }
 
+// Some buttons feature capacitive touch capabilities where the user can touch the button without pressing it. In such cases, a button will be touched before it is pressed. For buttons without capacitive sensing, the touched state is true if the value exceeds 0. @see touchChangedHandler @see pressed
+//
 // IsTouched calls the underlying IsTouched.
 func (x *ControllerButtonInput) IsTouched() bool {
 	return x.inner.IsTouched()

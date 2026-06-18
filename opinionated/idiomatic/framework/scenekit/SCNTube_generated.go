@@ -37,42 +37,56 @@ func NewTube() *Tube {
 	return &Tube{inner: raw.SCNTubeFromID(_id)}
 }
 
+// @property innerRadius @abstract The inner radius of the tube. Animatable. @discussion If the value is less than or equal to 0, or if it is greater than or equal to the outer radius, then the geometry is empty. The default value is 0.25.
+//
 // WithInnerRadius sets the innerRadius property and returns the receiver for chaining.
 func (x *Tube) WithInnerRadius(innerRadius float64) *Tube {
 	x.inner.SetInnerRadius(innerRadius)
 	return x
 }
 
+// @property outerRadius @abstract The outer radius of the tube. Animatable. @discussion If the value is less than or equal to 0, or if it is less than or equal to the inner radius, then the geometry is empty. The default value is 0.5.
+//
 // WithOuterRadius sets the outerRadius property and returns the receiver for chaining.
 func (x *Tube) WithOuterRadius(outerRadius float64) *Tube {
 	x.inner.SetOuterRadius(outerRadius)
 	return x
 }
 
+// @property height @abstract The height of the tube. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // WithHeight sets the height property and returns the receiver for chaining.
 func (x *Tube) WithHeight(height float64) *Tube {
 	x.inner.SetHeight(height)
 	return x
 }
 
+// @property radialSegmentCount @abstract The number of subdivisions along the radial coordinate. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
+//
 // WithRadialSegmentCount sets the radialSegmentCount property and returns the receiver for chaining.
 func (x *Tube) WithRadialSegmentCount(radialSegmentCount int) *Tube {
 	x.inner.SetRadialSegmentCount(radialSegmentCount)
 	return x
 }
 
+// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
 func (x *Tube) WithHeightSegmentCount(heightSegmentCount int) *Tube {
 	x.inner.SetHeightSegmentCount(heightSegmentCount)
 	return x
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Tube) WithName(name string) *Tube {
 	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+//
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Tube) WithMaterials(items ...*raw.SCNMaterial) *Tube {
 	if len(items) == 0 {
@@ -91,12 +105,16 @@ func (x *Tube) WithMaterials(items ...*raw.SCNMaterial) *Tube {
 	return x
 }
 
+// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+//
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Tube) WithFirstMaterial(firstMaterial *Material) *Tube {
 	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
+// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+//
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Tube) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Tube {
 	if len(items) == 0 {
@@ -121,30 +139,40 @@ func (x *Tube) WithTessellator(tessellator *GeometryTessellator) *Tube {
 	return x
 }
 
+// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+//
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Tube) WithSubdivisionLevel(subdivisionLevel uint) *Tube {
 	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
 	return x
 }
 
+// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+//
 // WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
 func (x *Tube) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Tube {
 	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
 	return x
 }
 
+// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+//
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Tube) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Tube {
 	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
+// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+//
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Tube) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Tube {
 	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
+// @property innerRadius @abstract The inner radius of the tube. Animatable. @discussion If the value is less than or equal to 0, or if it is greater than or equal to the outer radius, then the geometry is empty. The default value is 0.25.
+//
 // InnerRadius calls the underlying InnerRadius.
 func (x *Tube) InnerRadius() float64 {
 	return x.inner.InnerRadius()
@@ -155,6 +183,8 @@ func (x *Tube) SetInnerRadius(innerRadius float64) {
 	x.inner.SetInnerRadius(innerRadius)
 }
 
+// @property outerRadius @abstract The outer radius of the tube. Animatable. @discussion If the value is less than or equal to 0, or if it is less than or equal to the inner radius, then the geometry is empty. The default value is 0.5.
+//
 // OuterRadius calls the underlying OuterRadius.
 func (x *Tube) OuterRadius() float64 {
 	return x.inner.OuterRadius()
@@ -165,6 +195,8 @@ func (x *Tube) SetOuterRadius(outerRadius float64) {
 	x.inner.SetOuterRadius(outerRadius)
 }
 
+// @property height @abstract The height of the tube. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // Height calls the underlying Height.
 func (x *Tube) Height() float64 {
 	return x.inner.Height()
@@ -175,6 +207,8 @@ func (x *Tube) SetHeight(height float64) {
 	x.inner.SetHeight(height)
 }
 
+// @property radialSegmentCount @abstract The number of subdivisions along the radial coordinate. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
+//
 // RadialSegmentCount calls the underlying RadialSegmentCount.
 func (x *Tube) RadialSegmentCount() int {
 	return x.inner.RadialSegmentCount()
@@ -185,6 +219,8 @@ func (x *Tube) SetRadialSegmentCount(radialSegmentCount int) {
 	x.inner.SetRadialSegmentCount(radialSegmentCount)
 }
 
+// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // HeightSegmentCount calls the underlying HeightSegmentCount.
 func (x *Tube) HeightSegmentCount() int {
 	return x.inner.HeightSegmentCount()

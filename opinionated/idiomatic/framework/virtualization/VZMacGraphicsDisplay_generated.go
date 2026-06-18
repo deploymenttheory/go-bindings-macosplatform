@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the graphics display on a Mac.
+//
 // MacGraphicsDisplay wraps [raw.VZMacGraphicsDisplay] with a fluent Go API.
 type MacGraphicsDisplay struct {
 	inner *raw.VZMacGraphicsDisplay

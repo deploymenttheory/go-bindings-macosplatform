@@ -39,11 +39,15 @@ func NewMetadataMachineReadableCodeObject() *MetadataMachineReadableCodeObject {
 	return &MetadataMachineReadableCodeObject{inner: raw.AVMetadataMachineReadableCodeObjectFromID(_id)}
 }
 
+// @property corners @abstract The points defining the (X,Y) locations of the corners of the machine-readable code. @discussion The value of this property is an NSArray of NSDictionaries, each of which has been created from a CGPoint using CGPointCreateDictionaryRepresentation(), representing the coordinates of the corners of the object with respect to the image in which it resides. If the metadata originates from video, the points may be expressed as scalar values from 0. - 1. The points in the corners differ from the bounds rectangle in that bounds is axis-aligned to orientation of the captured image, and the values of the corners reside within the bounds rectangle. The points are arranged in counter-clockwise order (clockwise if the code or image is mirrored), starting with the top-left of the code in its canonical orientation.
+//
 // Corners calls the underlying Corners.
 func (x *MetadataMachineReadableCodeObject) Corners() *foundation.NSArray[objc.ID] {
 	return x.inner.Corners()
 }
 
+// @property stringValue @abstract Returns the receiver's errorCorrectedData decoded into a human-readable string. @discussion The value of this property is an NSString created by decoding the binary payload according to the format of the machine readable code. Returns nil if a string representation cannot be created from the payload.
+//
 // StringValue calls the underlying StringValue.
 func (x *MetadataMachineReadableCodeObject) StringValue() string {
 	_r := x.inner.StringValue()

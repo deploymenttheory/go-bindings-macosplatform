@@ -49,6 +49,8 @@ func (x *RecordMap) WithOdPredicate(odPredicate *foundation.NSDictionary[objc.ID
 	return x
 }
 
+// @method attributeMapForStandardAttribute: @abstract Returns an ODAttributeMap object for the given OD standard attribute. @discussion Returns an ODAttributeMap object for the given OD standard attribute.
+//
 // AttributeMapForStandardAttribute calls the underlying AttributeMapForStandardAttribute.
 func (x *RecordMap) AttributeMapForStandardAttribute(standardAttribute string) *AttributeMap {
 	_r := x.inner.AttributeMapForStandardAttribute(foundation.NSStringStringWithUTF8String(standardAttribute))
@@ -58,6 +60,8 @@ func (x *RecordMap) AttributeMapForStandardAttribute(standardAttribute string) *
 	return &AttributeMap{inner: _r}
 }
 
+// @method setAttributeMap:forStandardAttribute: @abstract Sets an ODAttributeMap object for a given OD standard attribute. @discussion Sets an ODAttributeMap object for a given OD standard attribute.
+//
 // SetAttributeMapForStandardAttribute calls the underlying SetAttributeMapForStandardAttribute.
 func (x *RecordMap) SetAttributeMapForStandardAttribute(attributeMap *raw.ODAttributeMap, standardAttribute string) {
 	x.inner.SetAttributeMapForStandardAttribute(attributeMap, foundation.NSStringStringWithUTF8String(standardAttribute))

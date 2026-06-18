@@ -36,6 +36,8 @@ func NewToolPickerItem() *ToolPickerItem {
 	return &ToolPickerItem{inner: raw.PKToolPickerItemFromID(_id)}
 }
 
+// A string that identifies the item in the picker. For example, com.example.myapp.toolpicker.pencil. If multiple items with the same identifier are used to create the picker, only the first instance is used.
+//
 // Identifier calls the underlying Identifier.
 func (x *ToolPickerItem) Identifier() string {
 	_r := x.inner.Identifier()
@@ -45,6 +47,8 @@ func (x *ToolPickerItem) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The `PKTool` this tool picker item represents.
+//
 // Tool calls the underlying Tool.
 func (x *ToolPickerItem) Tool() *Tool {
 	_r := x.inner.Tool()

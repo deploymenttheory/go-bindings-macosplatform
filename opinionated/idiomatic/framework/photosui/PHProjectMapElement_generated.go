@@ -38,6 +38,8 @@ func NewProjectMapElement() *ProjectMapElement {
 	return &ProjectMapElement{inner: raw.PHProjectMapElementFromID(_id)}
 }
 
+// The type of the map in the project.
+//
 // MapType calls the underlying MapType.
 func (x *ProjectMapElement) MapType() mapkit.MKMapType {
 	return x.inner.MapType()

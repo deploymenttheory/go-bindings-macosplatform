@@ -32,6 +32,8 @@ func MTRDeviceControllerFromID(id objc.ID) *MTRDeviceController {
 	return &MTRDeviceController{inner: raw.MTRDeviceControllerFromID(id)}
 }
 
+// Initialize a device controller with the provided parameters.  This will: 1) Auto-start the MTRDeviceControllerFactory in storage-per-controller mode if it has not already been started. 2) Return nil or a running controller. Once this returns non-nil, it's the caller's responsibility to call shutdown on the controller to avoid leaking it.
+//
 // NewMTRDeviceControllerWithParametersError creates a new [MTRDeviceController].
 func NewMTRDeviceControllerWithParametersError(parameters *raw.MTRDeviceControllerAbstractParameters) (*MTRDeviceController, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceController")), objc.RegisterName("alloc"))
@@ -43,31 +45,43 @@ func NewMTRDeviceControllerWithParametersError(parameters *raw.MTRDeviceControll
 	return &MTRDeviceController{inner: raw.MTRDeviceControllerFromID(_id)}, nil
 }
 
+// Set up a commissioning session for a device, using the provided setup payload to discover it and connect to it. @param payload a setup payload (probably created from a QR code or numeric code onboarding payload). @param newNodeID the planned node id for the node. @error error indication if discovery can't start at all (e.g. because the setup payload is invalid). The IP and port for the device will be discovered automatically based on the provided discriminator. Then a PASE session will be established with the device, unless an error occurs.  MTRDeviceControllerDelegate will be notified as follows: * Discovery fails: controller:statusUpdate: with MTRCommissioningStatusFailed. * Commissioning session setup fails: controller:commissioningSessionEstablishmentDone: with non-nil error. * Commissioning session setup succeeds: controller:commissioningSessionEstablishmentDone: with nil error. Once a commissioning session is set up, getDeviceBeingCommissioned can be used to get an MTRBaseDevice and discover what sort of network credentials the device might need, and commissionDevice can be used to commission the device.
+//
 // SetupCommissioningSessionWithPayloadNewNodeIDError calls the underlying SetupCommissioningSessionWithPayloadNewNodeIDError.
 func (x *MTRDeviceController) SetupCommissioningSessionWithPayloadNewNodeIDError(payload *raw.MTRSetupPayload, newNodeID *foundation.NSNumber) (bool, error) {
 	return x.inner.SetupCommissioningSessionWithPayloadNewNodeIDError(payload, newNodeID)
 }
 
+// Set up a commissioning session for a device, using the provided discovered result to connect to it. @param discoveredDevice a previously discovered device. @param payload a setup payload (probably created from a QR code or numeric code onboarding payload). @param newNodeID the planned node id for the node. @error error indication if the commissioning session establishment can't start at all. The connection information for the device will be retrieved from the discovered device. A device discovered over DNS-SD will use the discovered IPs/ports, while a device discovered over BLE will use the underlying CBPeripheral. Then a PASE session will be established with the device, unless an error occurs.  MTRDeviceControllerDelegate will be notified as follows: * Invalid connection information: controller:statusUpdate: with MTRCommissioningStatusFailed. * Commissioning session setup fails: controller:commissioningSessionEstablishmentDone: with non-nil error. * Commissioning session setup succeeds: controller:commissioningSessionEstablishmentDone: with nil error. Once a commissioning session is set up, getDeviceBeingCommissioned can be used to get an MTRBaseDevice and discover what sort of network credentials the device might need, and commissionDevice can be used to commission the device.
+//
 // SetupCommissioningSessionWithDiscoveredDevicePayloadNewNodeIDError calls the underlying SetupCommissioningSessionWithDiscoveredDevicePayloadNewNodeIDError.
 func (x *MTRDeviceController) SetupCommissioningSessionWithDiscoveredDevicePayloadNewNodeIDError(discoveredDevice *raw.MTRCommissionableBrowserResult, payload *raw.MTRSetupPayload, newNodeID *foundation.NSNumber) (bool, error) {
 	return x.inner.SetupCommissioningSessionWithDiscoveredDevicePayloadNewNodeIDError(discoveredDevice, payload, newNodeID)
 }
 
+// Commission the node with the given node ID.  The node ID must match the node ID that was used to set up the commissioning session. NOTE: The forceWiFiScan and forceThreadScan properties of MTRCommissioningParameters are ignored by this API.
+//
 // CommissionNodeWithIDCommissioningParamsError calls the underlying CommissionNodeWithIDCommissioningParamsError.
 func (x *MTRDeviceController) CommissionNodeWithIDCommissioningParamsError(nodeID *foundation.NSNumber, commissioningParams *raw.MTRCommissioningParameters) (bool, error) {
 	return x.inner.CommissionNodeWithIDCommissioningParamsError(nodeID, commissioningParams)
 }
 
+// Call this method after MTRDeviceAttestationDelegate deviceAttestationFailedForController:opaqueDeviceHandle:error: or deviceAttestationCompletedForController:opaqueDeviceHandle:attestationDeviceInfo:error: is called to continue commissioning the device.
+//
 // ContinueCommissioningDeviceIgnoreAttestationFailureError calls the underlying ContinueCommissioningDeviceIgnoreAttestationFailureError.
 func (x *MTRDeviceController) ContinueCommissioningDeviceIgnoreAttestationFailureError(opaqueDeviceHandle unsafe.Pointer, ignoreAttestationFailure bool) (bool, error) {
 	return x.inner.ContinueCommissioningDeviceIgnoreAttestationFailureError(opaqueDeviceHandle, ignoreAttestationFailure)
 }
 
+// Cancel commissioning for the given node id.  This will shut down any existing commissioning session for that node id.
+//
 // CancelCommissioningForNodeIDError calls the underlying CancelCommissioningForNodeIDError.
 func (x *MTRDeviceController) CancelCommissioningForNodeIDError(nodeID *foundation.NSNumber) (bool, error) {
 	return x.inner.CancelCommissioningForNodeIDError(nodeID)
 }
 
+// Get an MTRBaseDevice for a commissioning session that was set up for the given node ID.  Returns nil if no such commissioning session is available.
+//
 // DeviceBeingCommissionedWithNodeIDError calls the underlying DeviceBeingCommissionedWithNodeIDError.
 func (x *MTRDeviceController) DeviceBeingCommissionedWithNodeIDError(nodeID *foundation.NSNumber) (*MTRBaseDevice, error) {
 	_r, _err := x.inner.DeviceBeingCommissionedWithNodeIDError(nodeID)
@@ -85,81 +99,113 @@ func (x *MTRDeviceController) PreWarmCommissioningSession() {
 	x.inner.PreWarmCommissioningSession()
 }
 
+// Set the Delegate for the device controller as well as the Queue on which the Delegate callbacks will be triggered @param[in] delegate The delegate the commissioning process should use @param[in] queue The queue on which the callbacks will be delivered
+//
 // SetDeviceControllerDelegateQueue calls the underlying SetDeviceControllerDelegateQueue.
 func (x *MTRDeviceController) SetDeviceControllerDelegateQueue(delegate raw.MTRDeviceControllerDelegate, queue *foundation.NSObject) {
 	x.inner.SetDeviceControllerDelegateQueue(delegate, queue)
 }
 
+// Adds a Delegate to the device controller as well as the Queue on which the Delegate callbacks will be triggered Multiple delegates can be added to monitor MTRDeviceController state changes. Note that there should only be one delegate that responds to pairing related callbacks. If a delegate is added a second time, the call would be ignored. All delegates are held by weak references, and so if a delegate object goes away, it will be automatically removed. @param[in] delegate The delegate the commissioning process should use @param[in] queue The queue on which the callbacks will be delivered
+//
 // AddDeviceControllerDelegateQueue calls the underlying AddDeviceControllerDelegateQueue.
 func (x *MTRDeviceController) AddDeviceControllerDelegateQueue(delegate raw.MTRDeviceControllerDelegate, queue *foundation.NSObject) {
 	x.inner.AddDeviceControllerDelegateQueue(delegate, queue)
 }
 
+// Removes a Delegate from the device controller @param[in] delegate The delegate to be removed
+//
 // RemoveDeviceControllerDelegate calls the underlying RemoveDeviceControllerDelegate.
 func (x *MTRDeviceController) RemoveDeviceControllerDelegate(delegate raw.MTRDeviceControllerDelegate) {
 	x.inner.RemoveDeviceControllerDelegate(delegate)
 }
 
+// Start scanning for commissionable devices. This method will fail if the controller factory is not running or the browse has already been started.
+//
 // StartBrowseForCommissionablesQueue calls the underlying StartBrowseForCommissionablesQueue.
 func (x *MTRDeviceController) StartBrowseForCommissionablesQueue(delegate raw.MTRCommissionableBrowserDelegate, queue *foundation.NSObject) bool {
 	return x.inner.StartBrowseForCommissionablesQueue(delegate, queue)
 }
 
+// Stop scanning for commissionable devices. This method will fail if the controller factory is not running or the browse has not been started.
+//
 // StopBrowseForCommissionables calls the underlying StopBrowseForCommissionables.
 func (x *MTRDeviceController) StopBrowseForCommissionables() bool {
 	return x.inner.StopBrowseForCommissionables()
 }
 
+// Return the attestation challenge for the secure session of the device being commissioned. Attempts to retrieve the attestation challenge for a commissionee with the given Device ID. Returns nil if given Device ID does not match an active commissionee, or if a Secure Session is not availale.
+//
 // AttestationChallengeForDeviceID calls the underlying AttestationChallengeForDeviceID.
 func (x *MTRDeviceController) AttestationChallengeForDeviceID(deviceID *foundation.NSNumber) *foundation.NSData {
 	return x.inner.AttestationChallengeForDeviceID(deviceID)
 }
 
+// Add a server endpoint for this controller.  The endpoint starts off enabled. Will fail in the following cases: 1) There is already an endpoint defined with the given endpoint id. 2) There are too many endpoints defined already.
+//
 // AddServerEndpoint calls the underlying AddServerEndpoint.
 func (x *MTRDeviceController) AddServerEndpoint(endpoint *raw.MTRServerEndpoint) bool {
 	return x.inner.AddServerEndpoint(endpoint)
 }
 
+// Remove the given server endpoint from this controller.  If the endpoint is not attached to this controller, will just call the completion and do nothing else.
+//
 // RemoveServerEndpointQueueCompletion calls the underlying RemoveServerEndpointQueueCompletion.
 func (x *MTRDeviceController) RemoveServerEndpointQueueCompletion(endpoint *raw.MTRServerEndpoint, queue *foundation.NSObject, completion func()) {
 	x.inner.RemoveServerEndpointQueueCompletion(endpoint, queue, completion)
 }
 
+// Remove the given server endpoint without being notified when the removal completes.
+//
 // RemoveServerEndpoint calls the underlying RemoveServerEndpoint.
 func (x *MTRDeviceController) RemoveServerEndpoint(endpoint *raw.MTRServerEndpoint) {
 	x.inner.RemoveServerEndpoint(endpoint)
 }
 
+// Forget any information we have about the device with the given node ID.  That includes clearing any information we have stored about it.
+//
 // ForgetDeviceWithNodeID calls the underlying ForgetDeviceWithNodeID.
 func (x *MTRDeviceController) ForgetDeviceWithNodeID(nodeID *foundation.NSNumber) {
 	x.inner.ForgetDeviceWithNodeID(nodeID)
 }
 
+// Suspend the controller.  This will attempt to stop all network traffic associated with the controller.  The controller will remain suspended until it is resumed. Suspending an already-suspended controller has no effect.
+//
 // Suspend calls the underlying Suspend.
 func (x *MTRDeviceController) Suspend() {
 	x.inner.Suspend()
 }
 
+// Resume the controller.  This has no effect if the controller is not suspended. A resume following any number of suspend calls will resume the controller; there does not need to be a resume call to match every suspend call.
+//
 // Resume calls the underlying Resume.
 func (x *MTRDeviceController) Resume() {
 	x.inner.Resume()
 }
 
+// Shut down the controller. Calls to shutdown after the first one are NO-OPs. This must be called, either directly or via shutting down the MTRDeviceControllerFactory, to avoid leaking the controller.
+//
 // Shutdown calls the underlying Shutdown.
 func (x *MTRDeviceController) Shutdown() {
 	x.inner.Shutdown()
 }
 
+// If true, the controller has not been shut down yet.
+//
 // IsRunning calls the underlying IsRunning.
 func (x *MTRDeviceController) IsRunning() bool {
 	return x.inner.IsRunning()
 }
 
+// If true, the controller has been suspended via `suspend` and not resumed yet.
+//
 // IsSuspended calls the underlying IsSuspended.
 func (x *MTRDeviceController) IsSuspended() bool {
 	return x.inner.IsSuspended()
 }
 
+// The ID assigned to this controller at creation time.
+//
 // UniqueIdentifier calls the underlying UniqueIdentifier.
 func (x *MTRDeviceController) UniqueIdentifier() *foundation.NSUUID {
 	return x.inner.UniqueIdentifier()
@@ -170,6 +216,8 @@ func (x *MTRDeviceController) ControllerNodeID() *foundation.NSNumber {
 	return x.inner.ControllerNodeID()
 }
 
+// Returns the list of MTRDevice instances that this controller has loaded into memory. Returns an empty array if no devices are in memory.
+//
 // Devices returns the collection as a Go slice.
 func (x *MTRDeviceController) Devices() []*MTRDevice {
 	arr := x.inner.Devices()
@@ -181,6 +229,8 @@ func (x *MTRDeviceController) Devices() []*MTRDevice {
 	})
 }
 
+// Returns the list of node IDs for which this controller has stored information.  Returns empty list if the controller does not have any information stored.
+//
 // NodesWithStoredData returns the collection as a Go slice.
 func (x *MTRDeviceController) NodesWithStoredData() []*foundation.NSNumber {
 	arr := x.inner.NodesWithStoredData()

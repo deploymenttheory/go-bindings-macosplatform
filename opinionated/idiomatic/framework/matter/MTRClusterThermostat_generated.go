@@ -33,6 +33,8 @@ func MTRClusterThermostatFromID(id objc.ID) *MTRClusterThermostat {
 	return &MTRClusterThermostat{inner: raw.MTRClusterThermostatFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterThermostatWithDeviceEndpointIDQueue creates a new [MTRClusterThermostat].
 func NewMTRClusterThermostatWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterThermostat {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterThermostat")), objc.RegisterName("alloc"))

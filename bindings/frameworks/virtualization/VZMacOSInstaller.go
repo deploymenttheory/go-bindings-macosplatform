@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object you use to install macOS on the specified virtual machine.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzmacosinstaller
 type VZMacOSInstaller struct {
 	foundation.NSObject
@@ -36,7 +38,7 @@ func VZMacOSInstallerFromID(id objc.ID) *VZMacOSInstaller {
 	return o
 }
 
-// @abstract Initialize a VZMacOSInstaller object. @param virtualMachine The virtual machine that the operating system will be installed onto. @param restoreImageFileURL A file URL indicating the macOS restore image to install. @discussion The virtual machine platform must be macOS and the restore image URL must be a file URL referring to a file on disk or an exception will be raised. This method must be called on the virtual machine's queue.
+// Creates a macOS installer object.
 func (o *VZMacOSInstaller) InitWithVirtualMachineRestoreImageURL(virtualMachine *VZVirtualMachine, restoreImageFileURL *foundation.NSURL) *VZMacOSInstaller {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacOSInstallerSelInitWithVirtualMachineRestoreImageURL, virtualMachine.Ptr(), restoreImageFileURL.Ptr())
 	if _ret != 0 {
@@ -45,7 +47,7 @@ func (o *VZMacOSInstaller) InitWithVirtualMachineRestoreImageURL(virtualMachine 
 	return VZMacOSInstallerFromID(_ret)
 }
 
-// @abstract Start installing macOS. @param completionHandler Block called after installation has successfully completed or has failed. The error parameter passed to the block is nil if installation was successful. The block will be invoked on the virtual machine's queue. @discussion This method starts the installation process. The virtual machine must be in a stopped state. During the installation operation, pausing or stopping the virtual machine will result in undefined behavior. If installation is started on the same VZMacOSInstaller object more than once, an exception will be raised. This method must be called on the virtual machine's queue.
+// Start installing macOS.
 func (o *VZMacOSInstaller) InstallWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

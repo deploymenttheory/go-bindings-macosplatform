@@ -36,26 +36,36 @@ func NewMetricEventStream() *MetricEventStream {
 	return &MetricEventStream{inner: raw.AVMetricEventStreamFromID(_id)}
 }
 
+// The publisher should be an AVFoundation instance conforming to AVMetricEventStreamPublisher.
+//
 // AddPublisher calls the underlying AddPublisher.
 func (x *MetricEventStream) AddPublisher(publisher raw.AVMetricEventStreamPublisher) bool {
 	return x.inner.AddPublisher(publisher)
 }
 
+// Set a subscriber delegate. - Parameter subscriber: A subscriber delegate object conforming to AVMetricEventStreamSubscriber. - Parameter queue: Dispatch queue for the delegate callbacks.
+//
 // SetSubscriberQueue calls the underlying SetSubscriberQueue.
 func (x *MetricEventStream) SetSubscriberQueue(subscriber raw.AVMetricEventStreamSubscriber, queue *foundation.NSObject) bool {
 	return x.inner.SetSubscriberQueue(subscriber, queue)
 }
 
+// Subscribe to a specific metric event class. - Parameter metricEventClass: Type of metric event class to subscribe to.
+//
 // SubscribeToMetricEvent calls the underlying SubscribeToMetricEvent.
 func (x *MetricEventStream) SubscribeToMetricEvent(metricEventClass objc.Class) {
 	x.inner.SubscribeToMetricEvent(metricEventClass)
 }
 
+// Subscribe to set of metric event classes. - Parameter metricEventClasses: Set of metric event classes to subscribe to.
+//
 // SubscribeToMetricEvents calls the underlying SubscribeToMetricEvents.
 func (x *MetricEventStream) SubscribeToMetricEvents(metricEventClasses *foundation.NSArray[objc.Class]) {
 	x.inner.SubscribeToMetricEvents(metricEventClasses)
 }
 
+// Subscribe to all metric event classes.
+//
 // SubscribeToAllMetricEvents calls the underlying SubscribeToAllMetricEvents.
 func (x *MetricEventStream) SubscribeToAllMetricEvents() {
 	x.inner.SubscribeToAllMetricEvents()

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Caching options for an abstract socket.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzlinuxrosettaabstractsocketcachingoptions
 type VZLinuxRosettaAbstractSocketCachingOptions struct {
 	VZLinuxRosettaCachingOptions
@@ -34,7 +36,7 @@ func VZLinuxRosettaAbstractSocketCachingOptionsFromID(id objc.ID) *VZLinuxRosett
 	return o
 }
 
-// @abstract Initialize options to be set on a VZLinuxRosettaDirectoryShare. @param name The name of the Abstract Socket to be used to communicate with the Rosetta translation daemon. This cannot exceed maximumNameLength UTF-8 bytes long. @param error If not nil, assigned with the error if the initialization failed. @discussion Rosetta can be optionally configured to use cached translations from the Rosetta translation daemon communicating through an Abstract Socket. If name exceeds maximumNameLength UTF-8 bytes, nil is returned and the error is set.
+// Initialize options to set on a Rosetta directory share.
 func (o *VZLinuxRosettaAbstractSocketCachingOptions) InitWithNameError(name *foundation.NSString) (*VZLinuxRosettaAbstractSocketCachingOptions, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZLinuxRosettaAbstractSocketCachingOptionsSelInitWithNameError, name.Ptr(), unsafe.Pointer(&_nsErr))

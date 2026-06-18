@@ -37,90 +37,120 @@ func NewIndirectInstanceAccelerationStructureDescriptor() *IndirectInstanceAccel
 	return &IndirectInstanceAccelerationStructureDescriptor{inner: raw.MTLIndirectInstanceAccelerationStructureDescriptorFromID(_id)}
 }
 
+// @brief Buffer containing instance descriptors of the type specified by the instanceDescriptorType property
+//
 // WithInstanceDescriptorBuffer sets the instanceDescriptorBuffer property and returns the receiver for chaining.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithInstanceDescriptorBuffer(instanceDescriptorBuffer raw.MTLBuffer) *IndirectInstanceAccelerationStructureDescriptor {
 	x.inner.SetInstanceDescriptorBuffer(instanceDescriptorBuffer)
 	return x
 }
 
+// @brief Offset into the instance descriptor buffer. Must be a multiple of 64 bytes and must be aligned to the platform's buffer offset alignment.
+//
 // WithInstanceDescriptorBufferOffset sets the instanceDescriptorBufferOffset property and returns the receiver for chaining.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithInstanceDescriptorBufferOffset(instanceDescriptorBufferOffset uint) *IndirectInstanceAccelerationStructureDescriptor {
 	x.inner.SetInstanceDescriptorBufferOffset(instanceDescriptorBufferOffset)
 	return x
 }
 
+// @brief Stride, in bytes, between instance descriptors in the instance descriptor buffer. Must be at least the size of the instance descriptor type and must be a multiple of 4 bytes. Defaults to the size of the instance descriptor type.
+//
 // WithInstanceDescriptorStride sets the instanceDescriptorStride property and returns the receiver for chaining.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithInstanceDescriptorStride(instanceDescriptorStride uint) *IndirectInstanceAccelerationStructureDescriptor {
 	x.inner.SetInstanceDescriptorStride(instanceDescriptorStride)
 	return x
 }
 
+// @brief Maximum number of instance descriptors
+//
 // WithMaxInstanceCount sets the maxInstanceCount property and returns the receiver for chaining.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithMaxInstanceCount(maxInstanceCount uint) *IndirectInstanceAccelerationStructureDescriptor {
 	x.inner.SetMaxInstanceCount(maxInstanceCount)
 	return x
 }
 
+// @brief Buffer containing the instance count as a uint32_t value. Value at build time must be less than or equal to maxInstanceCount.
+//
 // WithInstanceCountBuffer sets the instanceCountBuffer property and returns the receiver for chaining.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithInstanceCountBuffer(instanceCountBuffer raw.MTLBuffer) *IndirectInstanceAccelerationStructureDescriptor {
 	x.inner.SetInstanceCountBuffer(instanceCountBuffer)
 	return x
 }
 
+// @brief Offset into the instance count buffer. Must be a multiple of 4 bytes and must be aligned to the platform's buffer offset alignment.
+//
 // WithInstanceCountBufferOffset sets the instanceCountBufferOffset property and returns the receiver for chaining.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithInstanceCountBufferOffset(instanceCountBufferOffset uint) *IndirectInstanceAccelerationStructureDescriptor {
 	x.inner.SetInstanceCountBufferOffset(instanceCountBufferOffset)
 	return x
 }
 
+// @brief Type of instance descriptor in the instance descriptor buffer. Defaults to MTLAccelerationStructureInstanceDescriptorTypeIndirect. Must be MTLAccelerationStructureInstanceDescriptorTypeIndirect or MTLAccelerationStructureInstanceDescriptorTypeIndirectMotion.
+//
 // WithInstanceDescriptorType sets the instanceDescriptorType property and returns the receiver for chaining.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithInstanceDescriptorType(instanceDescriptorType MTLAccelerationStructureInstanceDescriptorType) *IndirectInstanceAccelerationStructureDescriptor {
 	x.inner.SetInstanceDescriptorType(raw.MTLAccelerationStructureInstanceDescriptorType(instanceDescriptorType))
 	return x
 }
 
+// @brief Buffer containing transformation information for motion
+//
 // WithMotionTransformBuffer sets the motionTransformBuffer property and returns the receiver for chaining.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformBuffer(motionTransformBuffer raw.MTLBuffer) *IndirectInstanceAccelerationStructureDescriptor {
 	x.inner.SetMotionTransformBuffer(motionTransformBuffer)
 	return x
 }
 
+// @brief Offset into the instance motion descriptor buffer. Must be a multiple of 64 bytes and must be aligned to the platform's buffer offset alignment.
+//
 // WithMotionTransformBufferOffset sets the motionTransformBufferOffset property and returns the receiver for chaining.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformBufferOffset(motionTransformBufferOffset uint) *IndirectInstanceAccelerationStructureDescriptor {
 	x.inner.SetMotionTransformBufferOffset(motionTransformBufferOffset)
 	return x
 }
 
+// @brief Maximum number of motion transforms
+//
 // WithMaxMotionTransformCount sets the maxMotionTransformCount property and returns the receiver for chaining.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithMaxMotionTransformCount(maxMotionTransformCount uint) *IndirectInstanceAccelerationStructureDescriptor {
 	x.inner.SetMaxMotionTransformCount(maxMotionTransformCount)
 	return x
 }
 
+// @brief Buffer containing the motion transform count as a uint32_t value. Value at build time must be less than or equal to maxMotionTransformCount.
+//
 // WithMotionTransformCountBuffer sets the motionTransformCountBuffer property and returns the receiver for chaining.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformCountBuffer(motionTransformCountBuffer raw.MTLBuffer) *IndirectInstanceAccelerationStructureDescriptor {
 	x.inner.SetMotionTransformCountBuffer(motionTransformCountBuffer)
 	return x
 }
 
+// @brief Offset into the motion transform count buffer. Must be a multiple of 4 bytes and must be aligned to the platform's buffer offset alignment.
+//
 // WithMotionTransformCountBufferOffset sets the motionTransformCountBufferOffset property and returns the receiver for chaining.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformCountBufferOffset(motionTransformCountBufferOffset uint) *IndirectInstanceAccelerationStructureDescriptor {
 	x.inner.SetMotionTransformCountBufferOffset(motionTransformCountBufferOffset)
 	return x
 }
 
+// Matrix layout of the transformation matrices in the instance descriptors in the instance descriptor buffer and the transformation matrices in the transformation matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
+//
 // WithInstanceTransformationMatrixLayout sets the instanceTransformationMatrixLayout property and returns the receiver for chaining.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithInstanceTransformationMatrixLayout(instanceTransformationMatrixLayout MTLMatrixLayout) *IndirectInstanceAccelerationStructureDescriptor {
 	x.inner.SetInstanceTransformationMatrixLayout(raw.MTLMatrixLayout(instanceTransformationMatrixLayout))
 	return x
 }
 
+// @brief Type of motion transforms. Defaults to MTLTransformTypePackedFloat4x3.
+//
 // WithMotionTransformType sets the motionTransformType property and returns the receiver for chaining.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformType(motionTransformType MTLTransformType) *IndirectInstanceAccelerationStructureDescriptor {
 	x.inner.SetMotionTransformType(raw.MTLTransformType(motionTransformType))
 	return x
 }
 
+// @brief Motion transform stride. Defaults to 0, indicating that transforms are tightly packed according to the motion transform type.
+//
 // WithMotionTransformStride sets the motionTransformStride property and returns the receiver for chaining.
 func (x *IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformStride(motionTransformStride uint) *IndirectInstanceAccelerationStructureDescriptor {
 	x.inner.SetMotionTransformStride(motionTransformStride)
@@ -133,6 +163,8 @@ func (x *IndirectInstanceAccelerationStructureDescriptor) WithUsage(usage MTLAcc
 	return x
 }
 
+// @brief Buffer containing instance descriptors of the type specified by the instanceDescriptorType property
+//
 // InstanceDescriptorBuffer calls the underlying InstanceDescriptorBuffer.
 func (x *IndirectInstanceAccelerationStructureDescriptor) InstanceDescriptorBuffer() raw.MTLBuffer {
 	return x.inner.InstanceDescriptorBuffer()
@@ -143,6 +175,8 @@ func (x *IndirectInstanceAccelerationStructureDescriptor) SetInstanceDescriptorB
 	x.inner.SetInstanceDescriptorBuffer(instanceDescriptorBuffer)
 }
 
+// @brief Offset into the instance descriptor buffer. Must be a multiple of 64 bytes and must be aligned to the platform's buffer offset alignment.
+//
 // InstanceDescriptorBufferOffset calls the underlying InstanceDescriptorBufferOffset.
 func (x *IndirectInstanceAccelerationStructureDescriptor) InstanceDescriptorBufferOffset() uint {
 	return x.inner.InstanceDescriptorBufferOffset()
@@ -153,6 +187,8 @@ func (x *IndirectInstanceAccelerationStructureDescriptor) SetInstanceDescriptorB
 	x.inner.SetInstanceDescriptorBufferOffset(instanceDescriptorBufferOffset)
 }
 
+// @brief Stride, in bytes, between instance descriptors in the instance descriptor buffer. Must be at least the size of the instance descriptor type and must be a multiple of 4 bytes. Defaults to the size of the instance descriptor type.
+//
 // InstanceDescriptorStride calls the underlying InstanceDescriptorStride.
 func (x *IndirectInstanceAccelerationStructureDescriptor) InstanceDescriptorStride() uint {
 	return x.inner.InstanceDescriptorStride()
@@ -163,6 +199,8 @@ func (x *IndirectInstanceAccelerationStructureDescriptor) SetInstanceDescriptorS
 	x.inner.SetInstanceDescriptorStride(instanceDescriptorStride)
 }
 
+// @brief Maximum number of instance descriptors
+//
 // MaxInstanceCount calls the underlying MaxInstanceCount.
 func (x *IndirectInstanceAccelerationStructureDescriptor) MaxInstanceCount() uint {
 	return x.inner.MaxInstanceCount()
@@ -173,6 +211,8 @@ func (x *IndirectInstanceAccelerationStructureDescriptor) SetMaxInstanceCount(ma
 	x.inner.SetMaxInstanceCount(maxInstanceCount)
 }
 
+// @brief Buffer containing the instance count as a uint32_t value. Value at build time must be less than or equal to maxInstanceCount.
+//
 // InstanceCountBuffer calls the underlying InstanceCountBuffer.
 func (x *IndirectInstanceAccelerationStructureDescriptor) InstanceCountBuffer() raw.MTLBuffer {
 	return x.inner.InstanceCountBuffer()
@@ -183,6 +223,8 @@ func (x *IndirectInstanceAccelerationStructureDescriptor) SetInstanceCountBuffer
 	x.inner.SetInstanceCountBuffer(instanceCountBuffer)
 }
 
+// @brief Offset into the instance count buffer. Must be a multiple of 4 bytes and must be aligned to the platform's buffer offset alignment.
+//
 // InstanceCountBufferOffset calls the underlying InstanceCountBufferOffset.
 func (x *IndirectInstanceAccelerationStructureDescriptor) InstanceCountBufferOffset() uint {
 	return x.inner.InstanceCountBufferOffset()
@@ -193,6 +235,8 @@ func (x *IndirectInstanceAccelerationStructureDescriptor) SetInstanceCountBuffer
 	x.inner.SetInstanceCountBufferOffset(instanceCountBufferOffset)
 }
 
+// @brief Type of instance descriptor in the instance descriptor buffer. Defaults to MTLAccelerationStructureInstanceDescriptorTypeIndirect. Must be MTLAccelerationStructureInstanceDescriptorTypeIndirect or MTLAccelerationStructureInstanceDescriptorTypeIndirectMotion.
+//
 // InstanceDescriptorType calls the underlying InstanceDescriptorType.
 func (x *IndirectInstanceAccelerationStructureDescriptor) InstanceDescriptorType() MTLAccelerationStructureInstanceDescriptorType {
 	return MTLAccelerationStructureInstanceDescriptorType(x.inner.InstanceDescriptorType())
@@ -203,6 +247,8 @@ func (x *IndirectInstanceAccelerationStructureDescriptor) SetInstanceDescriptorT
 	x.inner.SetInstanceDescriptorType(raw.MTLAccelerationStructureInstanceDescriptorType(instanceDescriptorType))
 }
 
+// @brief Buffer containing transformation information for motion
+//
 // MotionTransformBuffer calls the underlying MotionTransformBuffer.
 func (x *IndirectInstanceAccelerationStructureDescriptor) MotionTransformBuffer() raw.MTLBuffer {
 	return x.inner.MotionTransformBuffer()
@@ -213,6 +259,8 @@ func (x *IndirectInstanceAccelerationStructureDescriptor) SetMotionTransformBuff
 	x.inner.SetMotionTransformBuffer(motionTransformBuffer)
 }
 
+// @brief Offset into the instance motion descriptor buffer. Must be a multiple of 64 bytes and must be aligned to the platform's buffer offset alignment.
+//
 // MotionTransformBufferOffset calls the underlying MotionTransformBufferOffset.
 func (x *IndirectInstanceAccelerationStructureDescriptor) MotionTransformBufferOffset() uint {
 	return x.inner.MotionTransformBufferOffset()
@@ -223,6 +271,8 @@ func (x *IndirectInstanceAccelerationStructureDescriptor) SetMotionTransformBuff
 	x.inner.SetMotionTransformBufferOffset(motionTransformBufferOffset)
 }
 
+// @brief Maximum number of motion transforms
+//
 // MaxMotionTransformCount calls the underlying MaxMotionTransformCount.
 func (x *IndirectInstanceAccelerationStructureDescriptor) MaxMotionTransformCount() uint {
 	return x.inner.MaxMotionTransformCount()
@@ -233,6 +283,8 @@ func (x *IndirectInstanceAccelerationStructureDescriptor) SetMaxMotionTransformC
 	x.inner.SetMaxMotionTransformCount(maxMotionTransformCount)
 }
 
+// @brief Buffer containing the motion transform count as a uint32_t value. Value at build time must be less than or equal to maxMotionTransformCount.
+//
 // MotionTransformCountBuffer calls the underlying MotionTransformCountBuffer.
 func (x *IndirectInstanceAccelerationStructureDescriptor) MotionTransformCountBuffer() raw.MTLBuffer {
 	return x.inner.MotionTransformCountBuffer()
@@ -243,6 +295,8 @@ func (x *IndirectInstanceAccelerationStructureDescriptor) SetMotionTransformCoun
 	x.inner.SetMotionTransformCountBuffer(motionTransformCountBuffer)
 }
 
+// @brief Offset into the motion transform count buffer. Must be a multiple of 4 bytes and must be aligned to the platform's buffer offset alignment.
+//
 // MotionTransformCountBufferOffset calls the underlying MotionTransformCountBufferOffset.
 func (x *IndirectInstanceAccelerationStructureDescriptor) MotionTransformCountBufferOffset() uint {
 	return x.inner.MotionTransformCountBufferOffset()
@@ -253,6 +307,8 @@ func (x *IndirectInstanceAccelerationStructureDescriptor) SetMotionTransformCoun
 	x.inner.SetMotionTransformCountBufferOffset(motionTransformCountBufferOffset)
 }
 
+// Matrix layout of the transformation matrices in the instance descriptors in the instance descriptor buffer and the transformation matrices in the transformation matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
+//
 // InstanceTransformationMatrixLayout calls the underlying InstanceTransformationMatrixLayout.
 func (x *IndirectInstanceAccelerationStructureDescriptor) InstanceTransformationMatrixLayout() MTLMatrixLayout {
 	return MTLMatrixLayout(x.inner.InstanceTransformationMatrixLayout())
@@ -263,6 +319,8 @@ func (x *IndirectInstanceAccelerationStructureDescriptor) SetInstanceTransformat
 	x.inner.SetInstanceTransformationMatrixLayout(raw.MTLMatrixLayout(instanceTransformationMatrixLayout))
 }
 
+// @brief Type of motion transforms. Defaults to MTLTransformTypePackedFloat4x3.
+//
 // MotionTransformType calls the underlying MotionTransformType.
 func (x *IndirectInstanceAccelerationStructureDescriptor) MotionTransformType() MTLTransformType {
 	return MTLTransformType(x.inner.MotionTransformType())
@@ -273,6 +331,8 @@ func (x *IndirectInstanceAccelerationStructureDescriptor) SetMotionTransformType
 	x.inner.SetMotionTransformType(raw.MTLTransformType(motionTransformType))
 }
 
+// @brief Motion transform stride. Defaults to 0, indicating that transforms are tightly packed according to the motion transform type.
+//
 // MotionTransformStride calls the underlying MotionTransformStride.
 func (x *IndirectInstanceAccelerationStructureDescriptor) MotionTransformStride() uint {
 	return x.inner.MotionTransformStride()

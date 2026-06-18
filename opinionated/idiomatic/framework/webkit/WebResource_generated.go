@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @class WebResource @discussion A WebResource represents a fully downloaded URL. It includes the data of the resource as well as the metadata associated with the resource.
+//
 // WebResource wraps [raw.WebResource] with a fluent Go API.
 type WebResource struct {
 	inner *raw.WebResource
@@ -31,6 +33,8 @@ func WebResourceFromID(id objc.ID) *WebResource {
 	return &WebResource{inner: raw.WebResourceFromID(id)}
 }
 
+// @method initWithData:URL:MIMEType:textEncodingName:frameName @abstract The initializer for WebResource. @param data The data of the resource. @param URL The URL of the resource. @param MIMEType The MIME type of the resource. @param textEncodingName The text encoding name of the resource (can be nil). @param frameName The frame name of the resource if the resource represents the contents of an entire HTML frame (can be nil). @result An initialized WebResource.
+//
 // NewWebResourceWithDataURLMIMETypeTextEncodingNameFrameName creates a new [WebResource].
 func NewWebResourceWithDataURLMIMETypeTextEncodingNameFrameName(data *foundation.NSData, uRL string, mIMEType string, textEncodingName string, frameName string) *WebResource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WebResource")), objc.RegisterName("alloc"))
@@ -38,16 +42,22 @@ func NewWebResourceWithDataURLMIMETypeTextEncodingNameFrameName(data *foundation
 	return &WebResource{inner: raw.WebResourceFromID(_id)}
 }
 
+// @property data @abstract The data of the resource.
+//
 // Data calls the underlying Data.
 func (x *WebResource) Data() *foundation.NSData {
 	return x.inner.Data()
 }
 
+// @property URL @abstract The URL of the resource.
+//
 // URL calls the underlying URL.
 func (x *WebResource) URL() *foundation.NSURL {
 	return x.inner.URL()
 }
 
+// @property MIMEType @abstract The MIME type of the resource.
+//
 // MIMEType calls the underlying MIMEType.
 func (x *WebResource) MIMEType() string {
 	_r := x.inner.MIMEType()
@@ -57,6 +67,8 @@ func (x *WebResource) MIMEType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property textEncodingName @abstract The text encoding name of the resource (can be nil).
+//
 // TextEncodingName calls the underlying TextEncodingName.
 func (x *WebResource) TextEncodingName() string {
 	_r := x.inner.TextEncodingName()
@@ -66,6 +78,8 @@ func (x *WebResource) TextEncodingName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property frameName @abstract The frame name of the resource if the resource represents the contents of an entire HTML frame (can be nil).
+//
 // FrameName calls the underlying FrameName.
 func (x *WebResource) FrameName() string {
 	_r := x.inner.FrameName()

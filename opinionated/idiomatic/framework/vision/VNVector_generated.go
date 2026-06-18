@@ -29,6 +29,8 @@ func VectorFromID(id objc.ID) *Vector {
 	return &Vector{inner: raw.VNVectorFromID(id)}
 }
 
+// @brief Initializes a vector in Cartesian Coordinate space, using its X and Y axis projections.
+//
 // NewVectorWithXComponentYComponent creates a new [Vector].
 func NewVectorWithXComponentYComponent(x float64, y float64) *Vector {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNVector")), objc.RegisterName("alloc"))
@@ -36,6 +38,8 @@ func NewVectorWithXComponentYComponent(x float64, y float64) *Vector {
 	return &Vector{inner: raw.VNVectorFromID(_id)}
 }
 
+// @brief Initializes a vector in polar coordinate space, using R and Theta (radians), where R is the length of the vector and Theta is the ange that the vector forms with the positive direction of X axis.
+//
 // NewVectorWithRTheta creates a new [Vector].
 func NewVectorWithRTheta(r float64, theta float64) *Vector {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNVector")), objc.RegisterName("alloc"))
@@ -43,6 +47,8 @@ func NewVectorWithRTheta(r float64, theta float64) *Vector {
 	return &Vector{inner: raw.VNVectorFromID(_id)}
 }
 
+// @brief Initializes a vector in Cartesian Coordinate space, using two VNPoints - the head and the tail of the vector.
+//
 // NewVectorWithVectorHeadTail creates a new [Vector].
 func NewVectorWithVectorHeadTail(head *raw.VNPoint, tail *raw.VNPoint) *Vector {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNVector")), objc.RegisterName("alloc"))
@@ -50,31 +56,43 @@ func NewVectorWithVectorHeadTail(head *raw.VNPoint, tail *raw.VNPoint) *Vector {
 	return &Vector{inner: raw.VNVectorFromID(_id)}
 }
 
+// @brief Signed projection on X-axis, or X component of the vector. Sign determines direction the vector is facing in X direction.
+//
 // X calls the underlying X.
 func (x *Vector) X() float64 {
 	return x.inner.X()
 }
 
+// @brief Signed projection on Y-axis, or Y component of the vector. Sign determines direction the vector is facing in Y direction.
+//
 // Y calls the underlying Y.
 func (x *Vector) Y() float64 {
 	return x.inner.Y()
 }
 
+// @brief Radius, or absolute value, or length of the vector.
+//
 // R calls the underlying R.
 func (x *Vector) R() float64 {
 	return x.inner.R()
 }
 
+// @brief Angle between the vector direction and positive direction of X axis.
+//
 // Theta calls the underlying Theta.
 func (x *Vector) Theta() float64 {
 	return x.inner.Theta()
 }
 
+// @brief Returns a length, or absolute value, of the vector.
+//
 // Length calls the underlying Length.
 func (x *Vector) Length() float64 {
 	return x.inner.Length()
 }
 
+// @brief Returns a length ^ 2 of a vector.
+//
 // SquaredLength calls the underlying SquaredLength.
 func (x *Vector) SquaredLength() float64 {
 	return x.inner.SquaredLength()

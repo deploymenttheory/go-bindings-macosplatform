@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Represents a single state in a state machine. By default, states allow transitions freely to and from the states in the machine. If a more restricted set of valid transitions are needed in the state machine, you may override isValidNextState: where applicable. @see GKStateMachine @see isValidNextState:
+//
 // State wraps [raw.GKState] with a fluent Go API.
 type State struct {
 	inner *raw.GKState
@@ -35,26 +37,36 @@ func NewState() *State {
 	return &State{inner: raw.GKStateFromID(_id)}
 }
 
+// Returns YES if the given class is a valid next state to enter. By default GKState will return YES for any class that is subclass of GKState. Override this in a subclass to enforce limited edge traversals in the state machine. @see GKStateMachine.canEnterState: @see GKStateMachine.enterState: @param stateClass the class to be checked @return YES if the class is kind of GKState and the state transition is valid, else NO.
+//
 // IsValidNextState calls the underlying IsValidNextState.
 func (x *State) IsValidNextState(stateClass objc.Class) bool {
 	return x.inner.IsValidNextState(stateClass)
 }
 
+// Called by GKStateMachine when this state is entered. @param previousState the state that was exited to enter this state.  This is nil if this is the state machine's first entered state. @see stateMachineWithStates:initialStateClass:
+//
 // DidEnterWithPreviousState calls the underlying DidEnterWithPreviousState.
 func (x *State) DidEnterWithPreviousState(previousState *raw.GKState) {
 	x.inner.DidEnterWithPreviousState(previousState)
 }
 
+// Called by GKStateMachine when it is updated @param seconds the time in seconds since the last update
+//
 // UpdateWithDeltaTime calls the underlying UpdateWithDeltaTime.
 func (x *State) UpdateWithDeltaTime(seconds float64) {
 	x.inner.UpdateWithDeltaTime(seconds)
 }
 
+// Called by GKStateMachine when this state is exited @param nextState the state that is being entered next
+//
 // WillExitWithNextState calls the underlying WillExitWithNextState.
 func (x *State) WillExitWithNextState(nextState *raw.GKState) {
 	x.inner.WillExitWithNextState(nextState)
 }
 
+// The state machine that this state is associated with. This is nil if this state hasn't been added to a state machine yet.
+//
 // StateMachine calls the underlying StateMachine.
 func (x *State) StateMachine() *StateMachine {
 	_r := x.inner.StateMachine()

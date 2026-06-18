@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The common behaviors for storage devices in the guest system.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzstoragedeviceattachment
 type VZStorageDeviceAttachment struct {
 	foundation.NSObject

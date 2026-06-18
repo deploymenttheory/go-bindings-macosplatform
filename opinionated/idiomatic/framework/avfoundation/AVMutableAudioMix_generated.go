@@ -37,6 +37,8 @@ func NewMutableAudioMix() *MutableAudioMix {
 	return &MutableAudioMix{inner: raw.AVMutableAudioMixFromID(_id)}
 }
 
+// @property		inputParameters @abstract		Indicates parameters for inputs to the mix; an NSArray of instances of AVAudioMixInputParameters. @discussion	Note that an instance of AVAudioMixInputParameters is not required for each audio track that contributes to the mix; audio for those without associated AVAudioMixInputParameters will be included in the mix, processed according to default behavior.
+//
 // WithInputParameters sets the collection, converting the Go slice to an NSArray.
 func (x *MutableAudioMix) WithInputParameters(items ...AudioMixInputParametersProvider) *MutableAudioMix {
 	if len(items) == 0 {
@@ -56,8 +58,17 @@ func (x *MutableAudioMix) WithInputParameters(items ...AudioMixInputParametersPr
 }
 
 // SetInputParameters calls the underlying SetInputParameters.
-func (x *MutableAudioMix) SetInputParameters(inputParameters *foundation.NSArray[*raw.AVAudioMixInputParameters]) {
-	x.inner.SetInputParameters(inputParameters)
+func (x *MutableAudioMix) SetInputParameters(inputParameters ...AudioMixInputParametersProvider) {
+	_ptrs := make([]objc.ID, len(inputParameters))
+	for _i, _v := range inputParameters {
+		_ptrs[_i] = _v.asAudioMixInputParameters().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.AVAudioMixInputParameters]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.AVAudioMixInputParameters](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetInputParameters(_arg0)
 }
 
 func (x *MutableAudioMix) asAudioMix() *raw.AVAudioMix { return &x.inner.AVAudioMix }
@@ -66,7 +77,7 @@ func (x *MutableAudioMix) asAudioMix() *raw.AVAudioMix { return &x.inner.AVAudio
 type MutableAudioMixable interface {
 	Unwrap() *raw.AVMutableAudioMix
 	WithInputParameters(items ...AudioMixInputParametersProvider) *MutableAudioMix
-	SetInputParameters(inputParameters *foundation.NSArray[*raw.AVAudioMixInputParameters])
+	SetInputParameters(inputParameters ...AudioMixInputParametersProvider)
 }
 
 var _ MutableAudioMixable = (*MutableAudioMix)(nil)

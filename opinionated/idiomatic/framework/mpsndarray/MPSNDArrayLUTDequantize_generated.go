@@ -38,6 +38,8 @@ func NewArrayLUTDequantizeWithDevice(device metal.MTLDevice) *ArrayLUTDequantize
 	return &ArrayLUTDequantize{inner: raw.MPSNDArrayLUTDequantizeFromID(_id)}
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *ArrayLUTDequantize) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayLUTDequantize {
 	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)

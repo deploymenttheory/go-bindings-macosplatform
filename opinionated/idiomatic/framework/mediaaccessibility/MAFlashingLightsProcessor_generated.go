@@ -37,11 +37,15 @@ func NewFlashingLightsProcessor() *FlashingLightsProcessor {
 	return &FlashingLightsProcessor{inner: raw.MAFlashingLightsProcessorFromID(_id)}
 }
 
+// @abstract Determines whether the flashing lights processor is able to process the content in the surface for flashing lights. This might be false on unsupported hardware or unsupported color spaces. @result A boolean result.
+//
 // CanProcessSurface calls the underlying CanProcessSurface.
 func (x *FlashingLightsProcessor) CanProcessSurface(surface unsafe.Pointer) bool {
 	return x.inner.CanProcessSurface(surface)
 }
 
+// @abstract Processes an inSurface by analyzing pixels for sequences of flashing lights and then darkens content to reduce the risk of discomfort from some users. The outSurface will contain the mitigated content. The timestamp indicates the time at which the surface will be shown in the video playback. FPS will be determined based on the values of the timestamps. Options dictionary for additional parameters. @result An object which indicates whether the surface was able to be processed, the amount of mitigation that was applied, and the intensitry level that was detected.
+//
 // ProcessSurfaceOutSurfaceTimestampOptions calls the underlying ProcessSurfaceOutSurfaceTimestampOptions.
 func (x *FlashingLightsProcessor) ProcessSurfaceOutSurfaceTimestampOptions(inSurface unsafe.Pointer, outSurface unsafe.Pointer, timestamp float64, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *FlashingLightsProcessorResult {
 	_r := x.inner.ProcessSurfaceOutSurfaceTimestampOptions(inSurface, outSurface, timestamp, options)

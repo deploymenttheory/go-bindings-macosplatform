@@ -36,6 +36,8 @@ func NewFileProviderDomainVersion() *FileProviderDomainVersion {
 	return &FileProviderDomainVersion{inner: raw.NSFileProviderDomainVersionFromID(_id)}
 }
 
+// Build a version that is strictly greater than the receiver.
+//
 // Next calls the underlying Next.
 func (x *FileProviderDomainVersion) Next() *FileProviderDomainVersion {
 	_r := x.inner.Next()
@@ -45,6 +47,8 @@ func (x *FileProviderDomainVersion) Next() *FileProviderDomainVersion {
 	return &FileProviderDomainVersion{inner: _r}
 }
 
+// Compare two domain versions. This returns the NSComparisonResult of the comparison of the receiver and the other version: - NSOrderedAscending if the receiver predates the otherVersion - NSOrderedDescending if the otherVersion predates the receiver - NSOrderedSame if both versions are equal In Swift, NSFileProviderDomainVersion is comparable.
+//
 // Compare calls the underlying Compare.
 func (x *FileProviderDomainVersion) Compare(otherVersion *raw.NSFileProviderDomainVersion) foundation.NSComparisonResult {
 	return x.inner.Compare(otherVersion)

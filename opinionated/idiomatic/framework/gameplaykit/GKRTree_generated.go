@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An R-tree is a data structure that partitions axis aligned bounding rectangles into groups spatially. When a group goes to large, it is split according to its split strategy into two new groups. Fast queries can be made on these partition bounding rectangles.
+//
 // RTree wraps [raw.GKRTree] with a fluent Go API.
 type RTree struct {
 	inner *raw.GKRTree[objc.ID]
@@ -38,27 +40,37 @@ func NewRTreeWithMaxNumberOfChildren(maxNumberOfChildren uint) *RTree {
 	return &RTree{inner: raw.GKRTreeFromID[objc.ID](_id)}
 }
 
+// Amount of array items to reserve before a query. This improves query performance at the cost of memory
+//
 // WithQueryReserve sets the queryReserve property and returns the receiver for chaining.
 func (x *RTree) WithQueryReserve(queryReserve uint) *RTree {
 	x.inner.SetQueryReserve(queryReserve)
 	return x
 }
 
+// Adds an element with the specified bounding rect to this RTree.  The supplied splitting strategy is used if the node this element would be added to needs to be split. @param element the element to be added @param boundingRectMin the min point (lower left) on the bounding rect of the element to be added @param boundingRectMax the min point (upper right) on the bounding rect of the element to be added @param splitStrategy the splitting strategy to be used if the node this element would be added to needs to be split
+//
 // AddElementBoundingRectMinBoundingRectMaxSplitStrategy calls the underlying AddElementBoundingRectMinBoundingRectMaxSplitStrategy.
 func (x *RTree) AddElementBoundingRectMinBoundingRectMaxSplitStrategy(element objc.ID, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer, splitStrategy GKRTreeSplitStrategy) {
 	x.inner.AddElementBoundingRectMinBoundingRectMaxSplitStrategy(element, boundingRectMin, boundingRectMax, raw.GKRTreeSplitStrategy(splitStrategy))
 }
 
+// Removes an element with the specified bounding rect from this RTree. @param element the element to be removed @param boundingRectMin the min point (lower left) on the bounding rect of the element to be removed @param boundingRectMax the min point (upper right) on the bounding rect of the element to be removed
+//
 // RemoveElementBoundingRectMinBoundingRectMax calls the underlying RemoveElementBoundingRectMinBoundingRectMax.
 func (x *RTree) RemoveElementBoundingRectMinBoundingRectMax(element objc.ID, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer) {
 	x.inner.RemoveElementBoundingRectMinBoundingRectMax(element, boundingRectMin, boundingRectMax)
 }
 
+// Queries all the elements that are in this RTree within the given bounding rect. @param rectMin the min point (lower left) of the rect to query @param rectMax the max point (upper right) of the rect to query @return an NSArray of all of the elements that fall within the query rect
+//
 // ElementsInBoundingRectMinRectMax calls the underlying ElementsInBoundingRectMinRectMax.
 func (x *RTree) ElementsInBoundingRectMinRectMax(rectMin unsafe.Pointer, rectMax unsafe.Pointer) *foundation.NSArray[objc.ID] {
 	return x.inner.ElementsInBoundingRectMinRectMax(rectMin, rectMax)
 }
 
+// Amount of array items to reserve before a query. This improves query performance at the cost of memory
+//
 // QueryReserve calls the underlying QueryReserve.
 func (x *RTree) QueryReserve() uint {
 	return x.inner.QueryReserve()

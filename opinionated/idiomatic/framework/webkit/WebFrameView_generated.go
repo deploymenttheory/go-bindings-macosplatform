@@ -36,22 +36,30 @@ func NewWebFrameView() *WebFrameView {
 	return &WebFrameView{inner: raw.WebFrameViewFromID(_id)}
 }
 
+// @property allowsScrolling @abstract Whether the WebFrameView allows its document to be scrolled
+//
 // WithAllowsScrolling sets the allowsScrolling property and returns the receiver for chaining.
 func (x *WebFrameView) WithAllowsScrolling(allowsScrolling bool) *WebFrameView {
 	x.inner.SetAllowsScrolling(allowsScrolling)
 	return x
 }
 
+// @method printOperationWithPrintInfo @abstract Creates a print operation set up to print this frame @result A newly created print operation object
+//
 // PrintOperationWithPrintInfo calls the underlying PrintOperationWithPrintInfo.
 func (x *WebFrameView) PrintOperationWithPrintInfo(printInfo *appkit.NSPrintInfo) *appkit.NSPrintOperation {
 	return x.inner.PrintOperationWithPrintInfo(printInfo)
 }
 
+// @method printDocumentView @abstract Called by the host application when the WebFrameView returns YES from -documentViewShouldHandlePrint.
+//
 // PrintDocumentView calls the underlying PrintDocumentView.
 func (x *WebFrameView) PrintDocumentView() {
 	x.inner.PrintDocumentView()
 }
 
+// @property webFrame @abstract The WebFrame associated with this WebFrameView
+//
 // WebFrame calls the underlying WebFrame.
 func (x *WebFrameView) WebFrame() *WebFrame {
 	_r := x.inner.WebFrame()
@@ -61,11 +69,15 @@ func (x *WebFrameView) WebFrame() *WebFrame {
 	return &WebFrame{inner: _r}
 }
 
+// @property documentView @abstract The WebFrameView's document subview @discussion The subview that renders the WebFrameView's contents
+//
 // DocumentView calls the underlying DocumentView.
 func (x *WebFrameView) DocumentView() *appkit.NSView {
 	return x.inner.DocumentView()
 }
 
+// @property allowsScrolling @abstract Whether the WebFrameView allows its document to be scrolled
+//
 // AllowsScrolling calls the underlying AllowsScrolling.
 func (x *WebFrameView) AllowsScrolling() bool {
 	return x.inner.AllowsScrolling()
@@ -76,11 +88,15 @@ func (x *WebFrameView) SetAllowsScrolling(allowsScrolling bool) {
 	x.inner.SetAllowsScrolling(allowsScrolling)
 }
 
+// @property canPrintHeadersAndFooters @abstract Whether this frame can print headers and footers
+//
 // CanPrintHeadersAndFooters calls the underlying CanPrintHeadersAndFooters.
 func (x *WebFrameView) CanPrintHeadersAndFooters() bool {
 	return x.inner.CanPrintHeadersAndFooters()
 }
 
+// @property documentViewShouldHandlePrint @abstract Called by the host application before it initializes and runs a print operation. @discussion If NO is returned, the host application will abort its print operation and call -printDocumentView on the WebFrameView.  The document view is then expected to run its own print operation.  If YES is returned, the host application's print operation will continue as normal.
+//
 // DocumentViewShouldHandlePrint calls the underlying DocumentViewShouldHandlePrint.
 func (x *WebFrameView) DocumentViewShouldHandlePrint() bool {
 	return x.inner.DocumentViewShouldHandlePrint()

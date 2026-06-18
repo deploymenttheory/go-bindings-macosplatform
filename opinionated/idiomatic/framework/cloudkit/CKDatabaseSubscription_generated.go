@@ -37,6 +37,8 @@ func NewDatabaseSubscription() *DatabaseSubscription {
 	return &DatabaseSubscription{inner: raw.CKDatabaseSubscriptionFromID(_id)}
 }
 
+// Creates a named subscription for all records in a database. - Parameters: - subscriptionID: The subscription's name. It must be unique in the container, and must not be `nil` or an empty string.
+//
 // NewDatabaseSubscriptionWithSubscriptionID creates a new [DatabaseSubscription].
 func NewDatabaseSubscriptionWithSubscriptionID(subscriptionID *foundation.NSString) *DatabaseSubscription {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKDatabaseSubscription")), objc.RegisterName("alloc"))
@@ -44,6 +46,8 @@ func NewDatabaseSubscriptionWithSubscriptionID(subscriptionID *foundation.NSStri
 	return &DatabaseSubscription{inner: raw.CKDatabaseSubscriptionFromID(_id)}
 }
 
+// Creates a database subscription from a serialized instance. - Parameters: - aDecoder: The object that decodes the serialized database subscription.
+//
 // NewDatabaseSubscriptionWithCoder creates a new [DatabaseSubscription].
 func NewDatabaseSubscriptionWithCoder(aDecoder *foundation.NSCoder) *DatabaseSubscription {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKDatabaseSubscription")), objc.RegisterName("alloc"))
@@ -51,12 +55,16 @@ func NewDatabaseSubscriptionWithCoder(aDecoder *foundation.NSCoder) *DatabaseSub
 	return &DatabaseSubscription{inner: raw.CKDatabaseSubscriptionFromID(_id)}
 }
 
+// The type of record that the subscription queries.
+//
 // WithRecordType sets the recordType property and returns the receiver for chaining.
 func (x *DatabaseSubscription) WithRecordType(recordType *foundation.NSString) *DatabaseSubscription {
 	x.inner.SetRecordType(recordType)
 	return x
 }
 
+// The configuration for a subscription's push notifications. If you want the system to display your subscription's push notifications, assign a value to this property. The server uses the configuration you provide to determine the delivery options for notifications. For example, you can specify the text to display to the user, and the sound to play. You can also specify which fields of the record to include in the notification's payload. If you don't assign a value to this property, CloudKit still sends push notifications, but the system doesn't display them to the user. The default value of this property is `nil`.
+//
 // WithNotificationInfo sets the notificationInfo property and returns the receiver for chaining.
 func (x *DatabaseSubscription) WithNotificationInfo(notificationInfo *NotificationInfo) *DatabaseSubscription {
 	x.inner.CKSubscription.SetNotificationInfo(notificationInfo.Unwrap())

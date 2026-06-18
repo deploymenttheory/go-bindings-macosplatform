@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for a directory share.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzdirectoryshare
 type VZDirectoryShare struct {
 	foundation.NSObject

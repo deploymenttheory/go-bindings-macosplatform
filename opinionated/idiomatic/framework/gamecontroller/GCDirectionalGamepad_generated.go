@@ -41,18 +41,24 @@ func (x *DirectionalGamepad) WithValueChangedHandler(valueChangedHandler func(*r
 	return x
 }
 
+// The Micro profile can use the raw position values of the touchpad on the remote as D-pad values, or it can create a virtual dpad centered around the first contact point with the surface. If NO; a smaller sliding window is created around the initial touch point and subsequent movement is relative to that center. Movement outside the window will slide the window with it to re-center it. This is great for surfaces where there is no clear sense of a middle and drift over time is an issue. If YES; the absolute values are used and any drift will have to managed manually either through user traning or by a developer using the dpad. The default value for this property is NO, meaning a sliding window is used for the dpad.
+//
 // WithReportsAbsoluteDpadValues sets the reportsAbsoluteDpadValues property and returns the receiver for chaining.
 func (x *DirectionalGamepad) WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *DirectionalGamepad {
 	x.inner.GCMicroGamepad.SetReportsAbsoluteDpadValues(reportsAbsoluteDpadValues)
 	return x
 }
 
+// Allows the Micro profile to monitor the orientation of the controller, if the controller is positioned in landscape orientation, D-pad input values will be transposed 90 degrees to match the new orientation. The default value for this property is NO.
+//
 // WithAllowsRotation sets the allowsRotation property and returns the receiver for chaining.
 func (x *DirectionalGamepad) WithAllowsRotation(allowsRotation bool) *DirectionalGamepad {
 	x.inner.GCMicroGamepad.SetAllowsRotation(allowsRotation)
 	return x
 }
 
+// Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called for each element that changed. @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons. @param element the element that has been modified.
+//
 // WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
 func (x *DirectionalGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *DirectionalGamepad {
 	x.inner.GCMicroGamepad.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)

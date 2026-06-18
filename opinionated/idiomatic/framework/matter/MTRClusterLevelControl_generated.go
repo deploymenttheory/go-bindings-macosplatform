@@ -31,6 +31,8 @@ func MTRClusterLevelControlFromID(id objc.ID) *MTRClusterLevelControl {
 	return &MTRClusterLevelControl{inner: raw.MTRClusterLevelControlFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterLevelControlWithDeviceEndpointIDQueue creates a new [MTRClusterLevelControl].
 func NewMTRClusterLevelControlWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterLevelControl {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterLevelControl")), objc.RegisterName("alloc"))

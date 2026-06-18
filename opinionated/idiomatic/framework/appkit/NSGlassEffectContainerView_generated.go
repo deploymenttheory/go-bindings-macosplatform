@@ -40,12 +40,16 @@ func NewGlassEffectContainerView() *GlassEffectContainerView {
 	return &GlassEffectContainerView{inner: raw.NSGlassEffectContainerViewFromID(_id)}
 }
 
+// The view that contains descendant views to merge together when in proximity to each other. The glass effect container view does the following: 1. Elevates the z-order of descendants of `contentView` to position them above the `contentView`. 2. Merges descendants together if the views are sufficiently similar and within the proximity specified in “spacing“. 3. Processes similar glass effect views as a batch to improve performance.
+//
 // WithContentView sets the contentView property and returns the receiver for chaining.
 func (x *GlassEffectContainerView) WithContentView(contentView ViewProvider) *GlassEffectContainerView {
 	x.inner.SetContentView(contentView.asView())
 	return x
 }
 
+// The proximity at which the glass effect container view begins merging eligible descendent glass effect views. The default value, zero, is sufficient for batch processing eligible glass effect views, while avoiding distortion and merging effects for other views in close proximity.
+//
 // WithSpacing sets the spacing property and returns the receiver for chaining.
 func (x *GlassEffectContainerView) WithSpacing(spacing float64) *GlassEffectContainerView {
 	x.inner.SetSpacing(spacing)
@@ -316,6 +320,8 @@ func (x *GlassEffectContainerView) WithAdditionalSafeAreaInsets(additionalSafeAr
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *GlassEffectContainerView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GlassEffectContainerView {
 	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
@@ -394,6 +400,8 @@ func (x *GlassEffectContainerView) WithTouchBar(touchBar *TouchBar) *GlassEffect
 	return x
 }
 
+// The view that contains descendant views to merge together when in proximity to each other. The glass effect container view does the following: 1. Elevates the z-order of descendants of `contentView` to position them above the `contentView`. 2. Merges descendants together if the views are sufficiently similar and within the proximity specified in “spacing“. 3. Processes similar glass effect views as a batch to improve performance.
+//
 // ContentView calls the underlying ContentView.
 func (x *GlassEffectContainerView) ContentView() *View {
 	_r := x.inner.ContentView()
@@ -403,16 +411,22 @@ func (x *GlassEffectContainerView) ContentView() *View {
 	return &View{inner: _r}
 }
 
+// The view that contains descendant views to merge together when in proximity to each other. The glass effect container view does the following: 1. Elevates the z-order of descendants of `contentView` to position them above the `contentView`. 2. Merges descendants together if the views are sufficiently similar and within the proximity specified in “spacing“. 3. Processes similar glass effect views as a batch to improve performance.
+//
 // SetContentView calls the underlying SetContentView.
 func (x *GlassEffectContainerView) SetContentView(contentView *raw.NSView) {
 	x.inner.SetContentView(contentView)
 }
 
+// The proximity at which the glass effect container view begins merging eligible descendent glass effect views. The default value, zero, is sufficient for batch processing eligible glass effect views, while avoiding distortion and merging effects for other views in close proximity.
+//
 // Spacing calls the underlying Spacing.
 func (x *GlassEffectContainerView) Spacing() float64 {
 	return x.inner.Spacing()
 }
 
+// The proximity at which the glass effect container view begins merging eligible descendent glass effect views. The default value, zero, is sufficient for batch processing eligible glass effect views, while avoiding distortion and merging effects for other views in close proximity.
+//
 // SetSpacing calls the underlying SetSpacing.
 func (x *GlassEffectContainerView) SetSpacing(spacing float64) {
 	x.inner.SetSpacing(spacing)

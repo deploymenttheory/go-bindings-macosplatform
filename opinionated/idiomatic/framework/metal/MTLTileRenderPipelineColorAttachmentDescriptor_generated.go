@@ -37,6 +37,8 @@ func NewTileRenderPipelineColorAttachmentDescriptor() *TileRenderPipelineColorAt
 	return &TileRenderPipelineColorAttachmentDescriptor{inner: raw.MTLTileRenderPipelineColorAttachmentDescriptorFromID(_id)}
 }
 
+// Pixel format.  Defaults to MTLPixelFormatInvalid
+//
 // WithPixelFormat sets the pixelFormat property and returns the receiver for chaining.
 func (x *TileRenderPipelineColorAttachmentDescriptor) WithPixelFormat(pixelFormat MTLPixelFormat) *TileRenderPipelineColorAttachmentDescriptor {
 	x.inner.SetPixelFormat(raw.MTLPixelFormat(pixelFormat))

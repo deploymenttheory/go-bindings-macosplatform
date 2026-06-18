@@ -38,36 +38,50 @@ func NewCameraCalibrationData() *CameraCalibrationData {
 	return &CameraCalibrationData{inner: raw.AVCameraCalibrationDataFromID(_id)}
 }
 
+// @property intrinsicMatrix @abstract A camera's intrinsic (K) matrix describes its geometric properties. @discussion The intrinsic matrix allows one to transform 3D coordinates to 2D coordinates on an image plane using the pinhole camera model. All values are expressed in pixels. The elements in the matrix are: /           \ | fx 0   ox | | 0  fy  oy | | 0  0   1  | \           / where fx and fy describe the focal length. For square pixels, their values are identical. ox and oy are the offset of the principal point. The origin is the upper left of the frame.
+//
 // IntrinsicMatrix calls the underlying IntrinsicMatrix.
 func (x *CameraCalibrationData) IntrinsicMatrix() unsafe.Pointer {
 	return x.inner.IntrinsicMatrix()
 }
 
+// @property intrinsicMatrixReferenceDimensions @abstract The reference frame dimensions used in calculating a camera's principal point. @discussion A camera's intrinsic matrix expresses values in pixels with respect to a frame of this width and height.
+//
 // IntrinsicMatrixReferenceDimensions calls the underlying IntrinsicMatrixReferenceDimensions.
 func (x *CameraCalibrationData) IntrinsicMatrixReferenceDimensions() corefoundation.CGSize {
 	return x.inner.IntrinsicMatrixReferenceDimensions()
 }
 
+// @property extrinsicMatrix @abstract A camera's extrinsic matrix describes its pose (position and direction) in world coordinates. @discussion The extrinsic matrix consists of a unitless 3x3 rotation matrix (R) on the left and a translation (t) 3x1 column vector on the right. The translation vector's units are millimeters. The camera's pose is expressed with respect to a reference camera (camera-to-world view). If the rotation matrix is an identity matrix, then this camera is the reference camera. Note that a matrix_float4x3 matrix is column major with 3 rows and 4 columns. /                       \ /   \   | r1,1  r1,2  r1,3 | t1 | |R|t| = | r2,1  r2,2  r2,3 | t2 | \   /   | r3,1  r3,2  r3,3 | t3 | \                       /
+//
 // ExtrinsicMatrix calls the underlying ExtrinsicMatrix.
 func (x *CameraCalibrationData) ExtrinsicMatrix() unsafe.Pointer {
 	return x.inner.ExtrinsicMatrix()
 }
 
+// @property pixelSize @abstract The size of one pixel at intrinsicMatrixReferenceDimensions in millimeters.
+//
 // PixelSize calls the underlying PixelSize.
 func (x *CameraCalibrationData) PixelSize() float32 {
 	return x.inner.PixelSize()
 }
 
+// @property lensDistortionLookupTable @abstract An NSData of floats describing the camera lens' radial distortions. @discussion Images captured by a camera are geometrically warped by radial distortions in the lens. In order to project from the 2D image plane back into the 3D world, the images must be distortion corrected, or made rectilinear. Lens distortion is modeled using a one-dimensional lookup table of 32-bit float values evenly distributed along a radius from the center of the distortion to the farthest corner, with each value representing an elongation or compression of the radius (0.0 for any given point indicates no elongation). This model assumes radially symmetric lens distortion. When dealing with AVDepthData, the disparity / depth map representations are geometrically distorted to align with images produced by the camera. For more information, see the reference implementation below. If the camera lacks the calibration data needed to accurately characterize lens distortions, this property's value is nil.
+//
 // LensDistortionLookupTable calls the underlying LensDistortionLookupTable.
 func (x *CameraCalibrationData) LensDistortionLookupTable() *foundation.NSData {
 	return x.inner.LensDistortionLookupTable()
 }
 
+// @property inverseLensDistortionLookupTable @abstract An NSData of floats describing the inverse lookup table required to reapply the camera lens' radial distortions to a rectified image. @discussion See lensDistortionLookupTable. If you've rectified an image by removing the distortions characterized by the lensDistortionLookupTable, and now wish to go back to geometrically distorted, you may use the inverseLensDistortionLookupTable. For more information, see the reference implementation below. If the camera lacks the calibration data needed to accurately characterize lens distortions, this property's value is nil.
+//
 // InverseLensDistortionLookupTable calls the underlying InverseLensDistortionLookupTable.
 func (x *CameraCalibrationData) InverseLensDistortionLookupTable() *foundation.NSData {
 	return x.inner.InverseLensDistortionLookupTable()
 }
 
+// @property lensDistortionCenter @abstract A CGPoint describing the offset of the lens’ distortion center from the top left in intrinsicMatrixReferenceDimensions. @discussion Due to geometric distortions in the image, the center of the distortion may not be equal to the optical center (principal point) of the lens. When making an image rectilinear, the distortion center should be used rather than the optical center of the image. For more information, see the reference implementation below. If the camera lacks the calibration data needed to accurately characterize lens distortions, this property's value is set to CGPointZero and should not be used.
+//
 // LensDistortionCenter calls the underlying LensDistortionCenter.
 func (x *CameraCalibrationData) LensDistortionCenter() corefoundation.CGPoint {
 	return x.inner.LensDistortionCenter()

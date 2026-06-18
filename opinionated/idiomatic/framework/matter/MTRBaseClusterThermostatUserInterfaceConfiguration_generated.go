@@ -35,6 +35,8 @@ func MTRBaseClusterThermostatUserInterfaceConfigurationFromID(id objc.ID) *MTRBa
 	return &MTRBaseClusterThermostatUserInterfaceConfiguration{inner: raw.MTRBaseClusterThermostatUserInterfaceConfigurationFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterThermostatUserInterfaceConfigurationWithDeviceEndpointIDQueue creates a new [MTRBaseClusterThermostatUserInterfaceConfiguration].
 func NewMTRBaseClusterThermostatUserInterfaceConfigurationWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterThermostatUserInterfaceConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterThermostatUserInterfaceConfiguration")), objc.RegisterName("alloc"))

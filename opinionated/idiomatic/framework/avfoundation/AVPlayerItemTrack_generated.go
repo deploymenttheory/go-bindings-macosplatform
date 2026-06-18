@@ -37,18 +37,24 @@ func NewPlayerItemTrack() *PlayerItemTrack {
 	return &PlayerItemTrack{inner: raw.AVPlayerItemTrackFromID(_id)}
 }
 
+// @property		enabled @abstract		Indicates whether the track is enabled for presentation during playback. @discussion	Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *PlayerItemTrack) WithEnabled(enabled bool) *PlayerItemTrack {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// @property		videoFieldMode @abstract		If the media type of the assetTrack is AVMediaTypeVideo, specifies the handling of video frames that contain multiple fields. @discussion	A value of nil indicates default processing of video frames. If you want video fields to be deinterlaced, set videoFieldMode to AVPlayerItemTrackVideoFieldModeDeinterlaceFields. You can test whether video being played has multiple fields by examining the underlying AVAssetTrack's format descriptions. See -[AVAssetTrack formatDescriptions] and, for video format descriptions, kCMFormatDescriptionExtension_FieldCount. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+//
 // WithVideoFieldMode sets the videoFieldMode property and returns the receiver for chaining.
 func (x *PlayerItemTrack) WithVideoFieldMode(videoFieldMode string) *PlayerItemTrack {
 	x.inner.SetVideoFieldMode(foundation.NSStringStringWithUTF8String(videoFieldMode))
 	return x
 }
 
+// @property		assetTrack @abstract		Indicates the AVAssetTrack for which the AVPlayerItemTrack represents presentation state. @discussion	This property is not observable. Clients must serialize their access to the resulting AVAssetTrack and related objects on the associated AVPlayer's notification queue.  By default, this queue is the main queue.
+//
 // AssetTrack calls the underlying AssetTrack.
 func (x *PlayerItemTrack) AssetTrack() *AssetTrack {
 	_r := x.inner.AssetTrack()
@@ -58,6 +64,8 @@ func (x *PlayerItemTrack) AssetTrack() *AssetTrack {
 	return &AssetTrack{inner: _r}
 }
 
+// @property		enabled @abstract		Indicates whether the track is enabled for presentation during playback. @discussion	Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *PlayerItemTrack) IsEnabled() bool {
 	return x.inner.IsEnabled()
@@ -68,11 +76,15 @@ func (x *PlayerItemTrack) SetEnabled(enabled bool) {
 	x.inner.SetEnabled(enabled)
 }
 
+// @property		currentVideoFrameRate @abstract		If the media type of the assetTrack is AVMediaTypeVideo, indicates the current frame rate of the track as it plays, in units of frames per second. If the item is not playing, or if the media type of the track is not video, the value of this property is 0. @discussion	This property is not observable. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+//
 // CurrentVideoFrameRate calls the underlying CurrentVideoFrameRate.
 func (x *PlayerItemTrack) CurrentVideoFrameRate() float32 {
 	return x.inner.CurrentVideoFrameRate()
 }
 
+// @property		videoFieldMode @abstract		If the media type of the assetTrack is AVMediaTypeVideo, specifies the handling of video frames that contain multiple fields. @discussion	A value of nil indicates default processing of video frames. If you want video fields to be deinterlaced, set videoFieldMode to AVPlayerItemTrackVideoFieldModeDeinterlaceFields. You can test whether video being played has multiple fields by examining the underlying AVAssetTrack's format descriptions. See -[AVAssetTrack formatDescriptions] and, for video format descriptions, kCMFormatDescriptionExtension_FieldCount. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+//
 // VideoFieldMode calls the underlying VideoFieldMode.
 func (x *PlayerItemTrack) VideoFieldMode() string {
 	_r := x.inner.VideoFieldMode()
@@ -82,6 +94,8 @@ func (x *PlayerItemTrack) VideoFieldMode() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property		videoFieldMode @abstract		If the media type of the assetTrack is AVMediaTypeVideo, specifies the handling of video frames that contain multiple fields. @discussion	A value of nil indicates default processing of video frames. If you want video fields to be deinterlaced, set videoFieldMode to AVPlayerItemTrackVideoFieldModeDeinterlaceFields. You can test whether video being played has multiple fields by examining the underlying AVAssetTrack's format descriptions. See -[AVAssetTrack formatDescriptions] and, for video format descriptions, kCMFormatDescriptionExtension_FieldCount. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+//
 // SetVideoFieldMode calls the underlying SetVideoFieldMode.
 func (x *PlayerItemTrack) SetVideoFieldMode(videoFieldMode string) {
 	x.inner.SetVideoFieldMode(foundation.NSStringStringWithUTF8String(videoFieldMode))

@@ -31,6 +31,8 @@ func PasskeyCredentialRequestFromID(id objc.ID) *PasskeyCredentialRequest {
 	return &PasskeyCredentialRequest{inner: raw.ASPasskeyCredentialRequestFromID(id)}
 }
 
+// @abstract Initializes an instance of ASPasskeyCredentialRequest. @param credentialIdentity credential identity to used for this request. @param clientDataHash the client data to be signed for this assertion request. @param userVerificationPreference user verification preference setting of this assertion request.
+//
 // NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms creates a new [PasskeyCredentialRequest].
 func NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms(credentialIdentity *raw.ASPasskeyCredentialIdentity, clientDataHash *foundation.NSData, userVerificationPreference *foundation.NSString, supportedAlgorithms *foundation.NSArray[*foundation.NSNumber]) *PasskeyCredentialRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasskeyCredentialRequest")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerifica
 	return &PasskeyCredentialRequest{inner: raw.ASPasskeyCredentialRequestFromID(_id)}
 }
 
+// Initializes an instance of ASPasskeyCredentialRequest. @param credentialIdentity credential identity to used for this request. @param clientDataHash the client data to be signed for this assertion request. @param userVerificationPreference user verification preference setting of this assertion request. @param supportedAlgorithms the set of support algorithms for the credential's key. @param assertionExtensionInput input for any requested passkey extensions.
+//
 // NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsAssertionExtensionInput creates a new [PasskeyCredentialRequest].
 func NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsAssertionExtensionInput(credentialIdentity *raw.ASPasskeyCredentialIdentity, clientDataHash *foundation.NSData, userVerificationPreference *foundation.NSString, supportedAlgorithms *foundation.NSArray[*foundation.NSNumber], assertionExtensionInput *raw.ASPasskeyAssertionCredentialExtensionInput) *PasskeyCredentialRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasskeyCredentialRequest")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerifica
 	return &PasskeyCredentialRequest{inner: raw.ASPasskeyCredentialRequestFromID(_id)}
 }
 
+// Initializes an instance of ASPasskeyCredentialRequest. @param credentialIdentity credential identity to used for this request. @param clientDataHash the client data to be signed for this assertion request. @param userVerificationPreference user verification preference setting of this assertion request. @param supportedAlgorithms the set of support algorithms for the credential's key. @param registrationExtensionInput input for any requested passkey extensions.
+//
 // NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsRegistrationExtensionInput creates a new [PasskeyCredentialRequest].
 func NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsRegistrationExtensionInput(credentialIdentity *raw.ASPasskeyCredentialIdentity, clientDataHash *foundation.NSData, userVerificationPreference *foundation.NSString, supportedAlgorithms *foundation.NSArray[*foundation.NSNumber], registrationExtensionInput *raw.ASPasskeyRegistrationCredentialExtensionInput) *PasskeyCredentialRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasskeyCredentialRequest")), objc.RegisterName("alloc"))
@@ -52,17 +58,23 @@ func NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerifica
 	return &PasskeyCredentialRequest{inner: raw.ASPasskeyCredentialRequestFromID(_id)}
 }
 
+// @abstract A preference for whether the authenticator should attempt to verify that it is being used by its owner, such as through a PIN or biometrics.
+//
 // WithUserVerificationPreference sets the userVerificationPreference property and returns the receiver for chaining.
 func (x *PasskeyCredentialRequest) WithUserVerificationPreference(userVerificationPreference *foundation.NSString) *PasskeyCredentialRequest {
 	x.inner.SetUserVerificationPreference(userVerificationPreference)
 	return x
 }
 
+// @abstract Hash of client data for credential provider to sign as part of the assertion/registration operation.
+//
 // ClientDataHash calls the underlying ClientDataHash.
 func (x *PasskeyCredentialRequest) ClientDataHash() *foundation.NSData {
 	return x.inner.ClientDataHash()
 }
 
+// @abstract A preference for whether the authenticator should attempt to verify that it is being used by its owner, such as through a PIN or biometrics.
+//
 // UserVerificationPreference calls the underlying UserVerificationPreference.
 func (x *PasskeyCredentialRequest) UserVerificationPreference() string {
 	_r := x.inner.UserVerificationPreference()
@@ -77,6 +89,8 @@ func (x *PasskeyCredentialRequest) SetUserVerificationPreference(userVerificatio
 	x.inner.SetUserVerificationPreference(userVerificationPreference)
 }
 
+// @abstract A list of signing algorithms supported by the relying party. Will be empty for assertion requests.
+//
 // SupportedAlgorithms returns the collection as a Go slice.
 func (x *PasskeyCredentialRequest) SupportedAlgorithms() []*foundation.NSNumber {
 	arr := x.inner.SupportedAlgorithms()
@@ -99,6 +113,8 @@ func (x *PasskeyCredentialRequest) ExcludedCredentials() []*AuthorizationPlatfor
 	})
 }
 
+// @abstract Inputs for WebAuthn extensions used for passkey assertion. Will be nil for registration requests.
+//
 // AssertionExtensionInput calls the underlying AssertionExtensionInput.
 func (x *PasskeyCredentialRequest) AssertionExtensionInput() *PasskeyAssertionCredentialExtensionInput {
 	_r := x.inner.AssertionExtensionInput()
@@ -108,6 +124,8 @@ func (x *PasskeyCredentialRequest) AssertionExtensionInput() *PasskeyAssertionCr
 	return &PasskeyAssertionCredentialExtensionInput{inner: _r}
 }
 
+// @abstract Inputs for WebAuthn extensions used for passkey registration. Will be nil for assertion requests.
+//
 // RegistrationExtensionInput calls the underlying RegistrationExtensionInput.
 func (x *PasskeyCredentialRequest) RegistrationExtensionInput() *PasskeyRegistrationCredentialExtensionInput {
 	_r := x.inner.RegistrationExtensionInput()

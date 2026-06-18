@@ -36,6 +36,8 @@ func NewShareMetadata() *ShareMetadata {
 	return &ShareMetadata{inner: raw.CKShareMetadataFromID(_id)}
 }
 
+// The ID of the share's container.
+//
 // ContainerIdentifier calls the underlying ContainerIdentifier.
 func (x *ShareMetadata) ContainerIdentifier() string {
 	_r := x.inner.ContainerIdentifier()
@@ -45,6 +47,8 @@ func (x *ShareMetadata) ContainerIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The share that owns the metadata.
+//
 // Share calls the underlying Share.
 func (x *ShareMetadata) Share() *Share {
 	_r := x.inner.Share()
@@ -54,6 +58,8 @@ func (x *ShareMetadata) Share() *Share {
 	return &Share{inner: _r}
 }
 
+// The record ID of the shared hierarchy's root record. CloudKit populates this property only for metadata that belongs to a shared record hierarchy. If the metadata is part of a shared record zone, the property is `nil`. This is because, unlike a shared record hierarchy, a shared record zone doesn't have a nominated root record.
+//
 // HierarchicalRootRecordID calls the underlying HierarchicalRootRecordID.
 func (x *ShareMetadata) HierarchicalRootRecordID() *RecordID {
 	_r := x.inner.HierarchicalRootRecordID()
@@ -63,21 +69,29 @@ func (x *ShareMetadata) HierarchicalRootRecordID() *RecordID {
 	return &RecordID{inner: _r}
 }
 
+// The share's participant role for the user who retrieves the metadata.
+//
 // ParticipantRole calls the underlying ParticipantRole.
 func (x *ShareMetadata) ParticipantRole() CKShareParticipantRole {
 	return CKShareParticipantRole(x.inner.ParticipantRole())
 }
 
+// The share's participation status for the user who retrieves the metadata.
+//
 // ParticipantStatus calls the underlying ParticipantStatus.
 func (x *ShareMetadata) ParticipantStatus() CKShareParticipantAcceptanceStatus {
 	return CKShareParticipantAcceptanceStatus(x.inner.ParticipantStatus())
 }
 
+// The share's permissions for the user who retrieves the metadata.
+//
 // ParticipantPermission calls the underlying ParticipantPermission.
 func (x *ShareMetadata) ParticipantPermission() CKShareParticipantPermission {
 	return CKShareParticipantPermission(x.inner.ParticipantPermission())
 }
 
+// The identity of the share's owner.
+//
 // OwnerIdentity calls the underlying OwnerIdentity.
 func (x *ShareMetadata) OwnerIdentity() *UserIdentity {
 	_r := x.inner.OwnerIdentity()
@@ -87,6 +101,8 @@ func (x *ShareMetadata) OwnerIdentity() *UserIdentity {
 	return &UserIdentity{inner: _r}
 }
 
+// The share's root record. This property contains the root record of the shared record hierarchy if you set the “CKFetchShareMetadataOperation/shouldFetchRootRecord“ property of the operation that fetches the metadata to <doc://com.apple.documentation/documentation/swift/true>. You can specify which fields CloudKit returns by setting the same operation's “CKFetchShareMetadataOperation/rootRecordDesiredKeys-3xrex“ property. The operation ignores the “CKFetchShareMetadataOperation/shouldFetchRootRecord“ and “CKFetchShareMetadataOperation/rootRecordDesiredKeys-3xrex“ properties when fetching a shared record zone's metadata because, unlike a shared record hierarchy, a record zone doesn't have a nominated root record.
+//
 // RootRecord calls the underlying RootRecord.
 func (x *ShareMetadata) RootRecord() *Record {
 	_r := x.inner.RootRecord()
@@ -96,6 +112,8 @@ func (x *ShareMetadata) RootRecord() *Record {
 	return &Record{inner: _r}
 }
 
+// The record ID of the share's root record. @DeprecationSummary { Use “CKShare/Metadata/hierarchicalRootRecordID“ instead. } CloudKit populates this property only for metadata that belongs to a shared record hierarchy. If the metadata is part of a shared record zone, the property returns `nil`. This is because, unlike a shared record hierarchy, a shared record zone doesn't have a nominated root record.
+//
 // RootRecordID calls the underlying RootRecordID.
 func (x *ShareMetadata) RootRecordID() *RecordID {
 	_r := x.inner.RootRecordID()

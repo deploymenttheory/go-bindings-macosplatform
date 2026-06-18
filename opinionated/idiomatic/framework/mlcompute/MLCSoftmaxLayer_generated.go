@@ -36,23 +36,31 @@ func NewSoftmaxLayer() *SoftmaxLayer {
 	return &SoftmaxLayer{inner: raw.MLCSoftmaxLayerFromID(_id)}
 }
 
+// @property   label @abstract   A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *SoftmaxLayer) WithLabel(label string) *SoftmaxLayer {
 	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+//
 // WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
 func (x *SoftmaxLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SoftmaxLayer {
 	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
 	return x
 }
 
+// @property   operation @abstract   The softmax operation.  Supported values are softmax and log softmax.
+//
 // Operation calls the underlying Operation.
 func (x *SoftmaxLayer) Operation() MLCSoftmaxOperation {
 	return MLCSoftmaxOperation(x.inner.Operation())
 }
 
+// @property   dimension @abstract   The  dimension over which softmax operation should be performed
+//
 // Dimension calls the underlying Dimension.
 func (x *SoftmaxLayer) Dimension() uint {
 	return x.inner.Dimension()

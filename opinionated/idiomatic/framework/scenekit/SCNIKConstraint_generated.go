@@ -29,6 +29,8 @@ func IKConstraintFromID(id objc.ID) *IKConstraint {
 	return &IKConstraint{inner: raw.SCNIKConstraintFromID(id)}
 }
 
+// @method initWithChainRootNode: @abstract Creates and returns a SCNIKConstraint object with the specified parameter. @param chainRootNode The root node of the kinematic chain. @discussion "chainRootNode" must be an ancestor of the node on which the constraint is applied.
+//
 // NewIKConstraintWithChainRootNode creates a new [IKConstraint].
 func NewIKConstraintWithChainRootNode(chainRootNode *raw.SCNNode) *IKConstraint {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNIKConstraint")), objc.RegisterName("alloc"))
@@ -36,30 +38,40 @@ func NewIKConstraintWithChainRootNode(chainRootNode *raw.SCNNode) *IKConstraint 
 	return &IKConstraint{inner: raw.SCNIKConstraintFromID(_id)}
 }
 
+// @property target @abstract Specifies the target position (in world space coordinates) of the end joint (i.e the node that owns the IK constraint). Defaults to (0,0,0). Animatable.
+//
 // WithTargetPosition sets the targetPosition property and returns the receiver for chaining.
 func (x *IKConstraint) WithTargetPosition(targetPosition raw.SCNVector3) *IKConstraint {
 	x.inner.SetTargetPosition(targetPosition)
 	return x
 }
 
+// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *IKConstraint) WithEnabled(enabled bool) *IKConstraint {
 	x.inner.SCNConstraint.SetEnabled(enabled)
 	return x
 }
 
+// @property influenceFactor @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+//
 // WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
 func (x *IKConstraint) WithInfluenceFactor(influenceFactor float64) *IKConstraint {
 	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
 	return x
 }
 
+// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+//
 // WithIncremental sets the incremental property and returns the receiver for chaining.
 func (x *IKConstraint) WithIncremental(incremental bool) *IKConstraint {
 	x.inner.SCNConstraint.SetIncremental(incremental)
 	return x
 }
 
+// @method setMaxAllowedRotationAngle:forJoint: @abstract Specifies the maximum rotation allowed (in degrees) for the specified joint from its initial orientation. Defaults to 180.
+//
 // SetMaxAllowedRotationAngleForJoint calls the underlying SetMaxAllowedRotationAngleForJoint.
 func (x *IKConstraint) SetMaxAllowedRotationAngleForJoint(angle float64, node *raw.SCNNode) {
 	x.inner.SetMaxAllowedRotationAngleForJoint(angle, node)
@@ -70,6 +82,8 @@ func (x *IKConstraint) MaxAllowedRotationAngleForJoint(node *raw.SCNNode) float6
 	return x.inner.MaxAllowedRotationAngleForJoint(node)
 }
 
+// @property chainRootNode @abstract Specifies the root node of the kinematic chain.
+//
 // ChainRootNode calls the underlying ChainRootNode.
 func (x *IKConstraint) ChainRootNode() *Node {
 	_r := x.inner.ChainRootNode()
@@ -79,6 +93,8 @@ func (x *IKConstraint) ChainRootNode() *Node {
 	return &Node{inner: _r}
 }
 
+// @property target @abstract Specifies the target position (in world space coordinates) of the end joint (i.e the node that owns the IK constraint). Defaults to (0,0,0). Animatable.
+//
 // TargetPosition calls the underlying TargetPosition.
 func (x *IKConstraint) TargetPosition() raw.SCNVector3 {
 	return x.inner.TargetPosition()

@@ -31,6 +31,8 @@ func ExtensionDeviceFromID(id objc.ID) *ExtensionDevice {
 	return &ExtensionDevice{inner: raw.CMIOExtensionDeviceFromID(id)}
 }
 
+// @method initWithLocalizedName:deviceID:legacyDeviceID:source: @abstract Initialize a device instance. @param localizedName The localized name of the device. @param deviceID The device id (as a UUID). @param legacyDeviceID The device identifier as a string (for backward compatibility with existing CMIO DAL clients, it may differ from deviceID.UUIDString). May be nil if your device has no compatibility requirements. @param source The device source, a client instantiated object for the device that conforms to the CMIOExtensionDeviceSource protocol. @result A CMIOExtensionDevice instance.
+//
 // NewExtensionDeviceWithLocalizedNameDeviceIDLegacyDeviceIDSource creates a new [ExtensionDevice].
 func NewExtensionDeviceWithLocalizedNameDeviceIDLegacyDeviceIDSource(localizedName string, deviceID *foundation.NSUUID, legacyDeviceID string, source raw.CMIOExtensionDeviceSource) *ExtensionDevice {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionDevice")), objc.RegisterName("alloc"))
@@ -38,21 +40,29 @@ func NewExtensionDeviceWithLocalizedNameDeviceIDLegacyDeviceIDSource(localizedNa
 	return &ExtensionDevice{inner: raw.CMIOExtensionDeviceFromID(_id)}
 }
 
+// @method addStream:error: @abstract Add a stream to the device streams array. @param stream The stream to be added to the device streams array. @param outError An error return on failure. @result Return YES on success, NO otherwise.
+//
 // AddStreamError calls the underlying AddStreamError.
 func (x *ExtensionDevice) AddStreamError(stream *raw.CMIOExtensionStream) (bool, error) {
 	return x.inner.AddStreamError(stream)
 }
 
+// @method removeStream:error: @abstract Remove a stream from the device streams array. @param stream The stream to be removed from the device streams array. @param outError An error return on failure. @result Return YES on success, NO otherwise.
+//
 // RemoveStreamError calls the underlying RemoveStreamError.
 func (x *ExtensionDevice) RemoveStreamError(stream *raw.CMIOExtensionStream) (bool, error) {
 	return x.inner.RemoveStreamError(stream)
 }
 
+// @method notifyPropertiesChanged: @abstract Notify client(s) of device properties changes. @param propertyStates The dictionary of properties having changed.
+//
 // NotifyPropertiesChanged calls the underlying NotifyPropertiesChanged.
 func (x *ExtensionDevice) NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.NotifyPropertiesChanged(propertyStates)
 }
 
+// @property localizedName @abstract The localized name of the device.
+//
 // LocalizedName calls the underlying LocalizedName.
 func (x *ExtensionDevice) LocalizedName() string {
 	_r := x.inner.LocalizedName()
@@ -62,11 +72,15 @@ func (x *ExtensionDevice) LocalizedName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property deviceID @abstract The device identifier as UUID.
+//
 // DeviceID calls the underlying DeviceID.
 func (x *ExtensionDevice) DeviceID() *foundation.NSUUID {
 	return x.inner.DeviceID()
 }
 
+// @property legacyDeviceID @abstract The device identifier as a string (for backward compatibility with AVCaptureDevice.uniqueIdentifier)
+//
 // LegacyDeviceID calls the underlying LegacyDeviceID.
 func (x *ExtensionDevice) LegacyDeviceID() string {
 	_r := x.inner.LegacyDeviceID()
@@ -76,11 +90,15 @@ func (x *ExtensionDevice) LegacyDeviceID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property source @abstract The device source.
+//
 // Source calls the underlying Source.
 func (x *ExtensionDevice) Source() raw.CMIOExtensionDeviceSource {
 	return x.inner.Source()
 }
 
+// @property streams @abstract The streams array of the device. @discussion This property is not key-value observable.
+//
 // Streams returns the collection as a Go slice.
 func (x *ExtensionDevice) Streams() []*ExtensionStream {
 	arr := x.inner.Streams()

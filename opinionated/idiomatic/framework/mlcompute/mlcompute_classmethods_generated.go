@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
@@ -642,8 +643,17 @@ func LayerWithFeatureChannelCountGroupCountBetaGammaVarianceEpsilon(featureChann
 }
 
 // GraphWithGraphObjects calls the underlying MLCInferenceGraphGraphWithGraphObjects.
-func GraphWithGraphObjects(graphObjects *foundation.NSArray[*raw.MLCGraph]) *InferenceGraph {
-	_r := raw.MLCInferenceGraphGraphWithGraphObjects(graphObjects)
+func GraphWithGraphObjects(graphObjects ...GraphProvider) *InferenceGraph {
+	_ptrs := make([]objc.ID, len(graphObjects))
+	for _i, _v := range graphObjects {
+		_ptrs[_i] = _v.asGraph().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.MLCGraph]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.MLCGraph](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	_r := raw.MLCInferenceGraphGraphWithGraphObjects(_arg0)
 	if _r == nil {
 		return nil
 	}

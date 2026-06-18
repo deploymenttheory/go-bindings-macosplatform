@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines a Virtio sound device output stream configuration.
+//
 // VirtioSoundDeviceOutputStreamConfiguration wraps [raw.VZVirtioSoundDeviceOutputStreamConfiguration] with a fluent Go API.
 type VirtioSoundDeviceOutputStreamConfiguration struct {
 	inner *raw.VZVirtioSoundDeviceOutputStreamConfiguration
@@ -37,6 +39,8 @@ func NewVirtioSoundDeviceOutputStreamConfiguration() *VirtioSoundDeviceOutputStr
 	return &VirtioSoundDeviceOutputStreamConfiguration{inner: raw.VZVirtioSoundDeviceOutputStreamConfigurationFromID(_id)}
 }
 
+// An audio stream sink that defines how the host handles audio data produced by the guest.
+//
 // WithSink sets the sink property and returns the receiver for chaining.
 func (x *VirtioSoundDeviceOutputStreamConfiguration) WithSink(sink AudioOutputStreamSinkProvider) *VirtioSoundDeviceOutputStreamConfiguration {
 	x.inner.SetSink(sink.asAudioOutputStreamSink())

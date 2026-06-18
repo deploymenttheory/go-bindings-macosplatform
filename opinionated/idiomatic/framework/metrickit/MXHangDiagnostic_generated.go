@@ -36,6 +36,8 @@ func NewHangDiagnostic() *HangDiagnostic {
 	return &HangDiagnostic{inner: raw.MXHangDiagnosticFromID(_id)}
 }
 
+// @property      callStackTree @abstract      The application call stack tree associated with the hang.
+//
 // CallStackTree calls the underlying CallStackTree.
 func (x *HangDiagnostic) CallStackTree() *CallStackTree {
 	_r := x.inner.CallStackTree()
@@ -45,6 +47,8 @@ func (x *HangDiagnostic) CallStackTree() *CallStackTree {
 	return &CallStackTree{inner: _r}
 }
 
+// @property      hangDuration @abstract      Total hang duration for this diagnostic. @discussion    Dimensioned as NSUnitDuration.
+//
 // HangDuration calls the underlying HangDuration.
 func (x *HangDiagnostic) HangDuration() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
 	return x.inner.HangDuration()

@@ -30,6 +30,8 @@ func SimpleTLVRecordFromID(id objc.ID) *SimpleTLVRecord {
 	return &SimpleTLVRecord{inner: raw.TKSimpleTLVRecordFromID(id)}
 }
 
+// Creates TLV record with specified tag and value. @param tag Tag value for the new record. @param value Value for the new record. @return Newly created TLV record.
+//
 // NewSimpleTLVRecordWithTagValue creates a new [SimpleTLVRecord].
 func NewSimpleTLVRecordWithTagValue(tag uint8, value *foundation.NSData) *SimpleTLVRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKSimpleTLVRecord")), objc.RegisterName("alloc"))

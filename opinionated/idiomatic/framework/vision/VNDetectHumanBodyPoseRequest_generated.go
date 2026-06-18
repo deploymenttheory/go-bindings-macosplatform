@@ -38,30 +38,40 @@ func NewDetectHumanBodyPoseRequest() *DetectHumanBodyPoseRequest {
 	return &DetectHumanBodyPoseRequest{inner: raw.VNDetectHumanBodyPoseRequestFromID(_id)}
 }
 
+// @brief The region of the image in which the request will be performed.  The rectangle is normalized to the dimensions of the image being processed and has its origin specified relative to the image's lower-left corner. @discussion The default value for this property is { { 0, 0 }, { 1, 1 } }.  Setting this property to a rectangle that is outside of the normalized coordinate space will be accepted but result in the request failing to be performed.
+//
 // WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
 func (x *DetectHumanBodyPoseRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHumanBodyPoseRequest {
 	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
 	return x
 }
 
+// @abstract A hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
+//
 // WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
 func (x *DetectHumanBodyPoseRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHumanBodyPoseRequest {
 	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
 	return x
 }
 
+// @abstract This property, if set to YES, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is NO, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
+//
 // WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
 func (x *DetectHumanBodyPoseRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectHumanBodyPoseRequest {
 	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
 	return x
 }
 
+// @abstract The specific algorithm or implementation revision that is to be used to perform the request.
+//
 // WithRevision sets the revision property and returns the receiver for chaining.
 func (x *DetectHumanBodyPoseRequest) WithRevision(revision uint) *DetectHumanBodyPoseRequest {
 	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
 	return x
 }
 
+// @brief Obtain the collection of human body joint names that are supported by a given request object configured with a specific revision. @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed. @return An array of VNHumanBodyPoseObservationJointName symbols that are supported by the request revision, or nil if a failure occurs.
+//
 // SupportedJointNames returns the collection as a Go slice.
 func (x *DetectHumanBodyPoseRequest) SupportedJointNames() ([]*foundation.NSString, error) {
 	arr, err := x.inner.SupportedJointNamesAndReturnError()
@@ -76,6 +86,8 @@ func (x *DetectHumanBodyPoseRequest) SupportedJointNames() ([]*foundation.NSStri
 	}), nil
 }
 
+// @brief Obtain the collection of human body joints group names that are supported by a given request object configured with a specific revision. @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed. @return An array of VNHumanBodyPoseObservationJointsGroupName symbols that are supported by the request revision, or nil if a failure occurs.
+//
 // SupportedJointsGroupNames returns the collection as a Go slice.
 func (x *DetectHumanBodyPoseRequest) SupportedJointsGroupNames() ([]*foundation.NSString, error) {
 	arr, err := x.inner.SupportedJointsGroupNamesAndReturnError()

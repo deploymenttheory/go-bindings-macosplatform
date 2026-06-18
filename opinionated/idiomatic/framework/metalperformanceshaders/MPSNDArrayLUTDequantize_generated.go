@@ -40,18 +40,24 @@ func NewNDArrayLUTDequantizeWithDevice(device metal.MTLDevice) *NDArrayLUTDequan
 	return &NDArrayLUTDequantize{inner: raw.MPSNDArrayLUTDequantizeFromID(_id)}
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *NDArrayLUTDequantize) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayLUTDequantize {
 	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *NDArrayLUTDequantize) WithOptions(options mpscore.MPSKernelOptions) *NDArrayLUTDequantize {
 	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NDArrayLUTDequantize) WithLabel(label string) *NDArrayLUTDequantize {
 	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))

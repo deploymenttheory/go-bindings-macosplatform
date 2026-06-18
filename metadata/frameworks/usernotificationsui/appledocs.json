@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "framework": "UserNotificationsUI",
+  "source": "developer.apple.com DocC render API",
+  "protocols": {
+    "UNNotificationContentExtension": {
+      "doc": "An object that presents a custom interface for a delivered local or remote notification.",
+      "url": "https://developer.apple.com/documentation/usernotificationsui/unnotificationcontentextension"
+    }
+  },
+  "enums": {
+    "UNNotificationContentExtensionMediaPlayPauseButtonType": {
+      "doc": "Constants indicating the type of media button to display.",
+      "url": "https://developer.apple.com/documentation/usernotificationsui/unnotificationcontentextensionmediaplaypausebuttontype",
+      "members": {
+        "UNNotificationContentExtensionMediaPlayPauseButtonTypeDefault": {
+          "doc": "A standard play/pause button.",
+          "url": "https://developer.apple.com/documentation/usernotificationsui/unnotificationcontentextensionmediaplaypausebuttontype/default"
+        },
+        "UNNotificationContentExtensionMediaPlayPauseButtonTypeNone": {
+          "doc": "No media button.",
+          "url": "https://developer.apple.com/documentation/usernotificationsui/unnotificationcontentextensionmediaplaypausebuttontype/none"
+        },
+        "UNNotificationContentExtensionMediaPlayPauseButtonTypeOverlay": {
+          "doc": "A partially transparent play/pause button that is layered on top of your media content.",
+          "url": "https://developer.apple.com/documentation/usernotificationsui/unnotificationcontentextensionmediaplaypausebuttontype/overlay"
+        }
+      }
+    },
+    "UNNotificationContentExtensionResponseOption": {
+      "doc": "Constants indicating the preferred response to a notification.",
+      "url": "https://developer.apple.com/documentation/usernotificationsui/unnotificationcontentextensionresponseoption",
+      "members": {
+        "UNNotificationContentExtensionResponseOptionDismiss": {
+          "doc": "Dismiss the notification interface.",
+          "url": "https://developer.apple.com/documentation/usernotificationsui/unnotificationcontentextensionresponseoption/dismiss"
+        },
+        "UNNotificationContentExtensionResponseOptionDismissAndForwardAction": {
+          "doc": "Dismiss the notification interface and forward the notification to the app.",
+          "url": "https://developer.apple.com/documentation/usernotificationsui/unnotificationcontentextensionresponseoption/dismissandforwardaction"
+        },
+        "UNNotificationContentExtensionResponseOptionDoNotDismiss": {
+          "doc": "Don’t dismiss the notification interface.",
+          "url": "https://developer.apple.com/documentation/usernotificationsui/unnotificationcontentextensionresponseoption/donotdismiss"
+        }
+      }
+    }
+  }
+}

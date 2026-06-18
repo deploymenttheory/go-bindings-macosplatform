@@ -657,6 +657,8 @@ func (x *Workspace) IsSwitchControlEnabled() bool {
 	return x.inner.IsSwitchControlEnabled()
 }
 
+// @return An array of `NSRunningApplication`s representing currently running applications. The order of the array is unspecified, but it is stable, meaning that the relative order of particular applications will not change across multiple calls to `runningApplications`. Similar to `NSRunningApplication`'s properties, this property will only change when the main run loop is run in a common mode.  Instead of polling, use key-value observing to be notified of changes to this array property. This property is thread safe, in that it may be called from background threads and the result is returned atomically.  This property is observable through KVO.
+//
 // RunningApplications returns the collection as a Go slice.
 func (x *Workspace) RunningApplications() []*RunningApplication {
 	arr := x.inner.RunningApplications()

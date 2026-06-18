@@ -31,6 +31,8 @@ func DataAssetFromID(id objc.ID) *DataAsset {
 	return &DataAsset{inner: raw.NSDataAssetFromID(id)}
 }
 
+// Equivalent to -initWithName:name bundle:[NSBundle mainBundle];
+//
 // NewDataAssetWithName creates a new [DataAsset].
 func NewDataAssetWithName(name *foundation.NSString) *DataAsset {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDataAsset")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewDataAssetWithName(name *foundation.NSString) *DataAsset {
 	return &DataAsset{inner: raw.NSDataAssetFromID(_id)}
 }
 
+// Create a data asset with the given name from the given bundle. Returns nil if the asset was not found.
+//
 // NewDataAssetWithNameBundle creates a new [DataAsset].
 func NewDataAssetWithNameBundle(name *foundation.NSString, bundle *foundation.NSBundle) *DataAsset {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDataAsset")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewDataAssetWithNameBundle(name *foundation.NSString, bundle *foundation.NS
 	return &DataAsset{inner: raw.NSDataAssetFromID(_id)}
 }
 
+// The name used to reference the data asset
+//
 // Name calls the underlying Name.
 func (x *DataAsset) Name() string {
 	_r := x.inner.Name()
@@ -54,11 +60,15 @@ func (x *DataAsset) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The data for this asset, as stored in the asset catalog
+//
 // Data calls the underlying Data.
 func (x *DataAsset) Data() *foundation.NSData {
 	return x.inner.Data()
 }
 
+// The Uniform Type Identifier for this data object.
+//
 // TypeIdentifier calls the underlying TypeIdentifier.
 func (x *DataAsset) TypeIdentifier() string {
 	_r := x.inner.TypeIdentifier()

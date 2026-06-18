@@ -35,6 +35,8 @@ func MTRBaseClusterCommissionerControlFromID(id objc.ID) *MTRBaseClusterCommissi
 	return &MTRBaseClusterCommissionerControl{inner: raw.MTRBaseClusterCommissionerControlFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterCommissionerControlWithDeviceEndpointIDQueue creates a new [MTRBaseClusterCommissionerControl].
 func NewMTRBaseClusterCommissionerControlWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterCommissionerControl {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterCommissionerControl")), objc.RegisterName("alloc"))
@@ -42,11 +44,15 @@ func NewMTRBaseClusterCommissionerControlWithDeviceEndpointIDQueue(device *raw.M
 	return &MTRBaseClusterCommissionerControl{inner: raw.MTRBaseClusterCommissionerControlFromID(_id)}
 }
 
+// Command RequestCommissioningApproval This command is sent by a client to request approval for a future CommissionNode call.
+//
 // RequestCommissioningApprovalWithParamsCompletion calls the underlying RequestCommissioningApprovalWithParamsCompletion.
 func (x *MTRBaseClusterCommissionerControl) RequestCommissioningApprovalWithParamsCompletion(params *raw.MTRCommissionerControlClusterRequestCommissioningApprovalParams, completion func(unsafe.Pointer)) {
 	x.inner.RequestCommissioningApprovalWithParamsCompletion(params, completion)
 }
 
+// Command CommissionNode This command is sent by a client to request that the server begins commissioning a previously approved request.
+//
 // CommissionNodeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterCommissionerControl) CommissionNodeWithParamsCompletion(ctx context.Context, params *raw.MTRCommissionerControlClusterCommissionNodeParams) (*MTRCommissionerControlClusterReverseOpenCommissioningWindowParams, error) {
 	type _result struct {

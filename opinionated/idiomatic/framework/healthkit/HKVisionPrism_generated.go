@@ -29,6 +29,8 @@ func VisionPrismFromID(id objc.ID) *VisionPrism {
 	return &VisionPrism{inner: raw.HKVisionPrismFromID(id)}
 }
 
+// @method        initWithAmount:angle:eye @param         amount    The compensation for amount eye misalignment @param         angle     The angle of the lens required to correct diplopia @param         eye       The eye associated with the prism values
+//
 // NewVisionPrismWithAmountAngleEye creates a new [VisionPrism].
 func NewVisionPrismWithAmountAngleEye(amount *raw.HKQuantity, angle *raw.HKQuantity, eye HKVisionEye) *VisionPrism {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKVisionPrism")), objc.RegisterName("alloc"))
@@ -36,6 +38,8 @@ func NewVisionPrismWithAmountAngleEye(amount *raw.HKQuantity, angle *raw.HKQuant
 	return &VisionPrism{inner: raw.HKVisionPrismFromID(_id)}
 }
 
+// @method        initWithVerticalAmount:verticalBase:horizontalAmount:horizontalBase:eye @param         verticalAmount      The vertical component of compensation in prism diopters @param         verticalBase        The direction of the prism base relative to the vertical axis of the lens; base up or base down. @param         horizontalAmount    The horizontal component of compensation in prism diopters @param         horizontalBase      The direction of the prism base relative to the horizontal axis of the lens; base in (toward the nose) or base out (away from the nose). @param         eye                 The eye associated with the prism values
+//
 // NewVisionPrismWithVerticalAmountVerticalBaseHorizontalAmountHorizontalBaseEye creates a new [VisionPrism].
 func NewVisionPrismWithVerticalAmountVerticalBaseHorizontalAmountHorizontalBaseEye(verticalAmount *raw.HKQuantity, verticalBase HKPrismBase, horizontalAmount *raw.HKQuantity, horizontalBase HKPrismBase, eye HKVisionEye) *VisionPrism {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKVisionPrism")), objc.RegisterName("alloc"))
@@ -43,6 +47,8 @@ func NewVisionPrismWithVerticalAmountVerticalBaseHorizontalAmountHorizontalBaseE
 	return &VisionPrism{inner: raw.HKVisionPrismFromID(_id)}
 }
 
+// @property      amount @abstract      The compensation in prism diopters to correct eye misalignment [polar coordinates]
+//
 // Amount calls the underlying Amount.
 func (x *VisionPrism) Amount() *Quantity {
 	_r := x.inner.Amount()
@@ -52,6 +58,8 @@ func (x *VisionPrism) Amount() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property      angle @abstract      The direction of the prism base [polar coordinates]
+//
 // Angle calls the underlying Angle.
 func (x *VisionPrism) Angle() *Quantity {
 	_r := x.inner.Angle()
@@ -61,6 +69,8 @@ func (x *VisionPrism) Angle() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property      verticalAmount @abstract      The vertical component of compensation in prism diopters [rectangular coordinates]
+//
 // VerticalAmount calls the underlying VerticalAmount.
 func (x *VisionPrism) VerticalAmount() *Quantity {
 	_r := x.inner.VerticalAmount()
@@ -70,6 +80,8 @@ func (x *VisionPrism) VerticalAmount() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property      horizontalAmount @abstract      The horizontal component of compensation in prism diopters [rectangular coordinates]
+//
 // HorizontalAmount calls the underlying HorizontalAmount.
 func (x *VisionPrism) HorizontalAmount() *Quantity {
 	_r := x.inner.HorizontalAmount()
@@ -79,16 +91,22 @@ func (x *VisionPrism) HorizontalAmount() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property      verticalBase @abstract      The direction of the prism base relative to the vertical axis of the lens; base up or base down. [rectangular coordinates]
+//
 // VerticalBase calls the underlying VerticalBase.
 func (x *VisionPrism) VerticalBase() HKPrismBase {
 	return HKPrismBase(x.inner.VerticalBase())
 }
 
+// @property      horizontalBase @abstract      The direction of the prism base relative to the horizontal axis of the lens; base in (toward the nose) or base out (away from the nose). [rectangular coordinates]
+//
 // HorizontalBase calls the underlying HorizontalBase.
 func (x *VisionPrism) HorizontalBase() HKPrismBase {
 	return HKPrismBase(x.inner.HorizontalBase())
 }
 
+// @property      eye @abstract      Which eye (left or right)
+//
 // Eye calls the underlying Eye.
 func (x *VisionPrism) Eye() HKVisionEye {
 	return HKVisionEye(x.inner.Eye())

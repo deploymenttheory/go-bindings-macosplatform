@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// GKNoiseMap represents an extracted portion of sampled points from continuous 3D noise.  Extracted values are useful for 2D and 3D games.  Noise values may be queried, set to explicit values or used as input for other uses, including textures and tile maps. @see GKNoiseSource @see GKNoise @see SKTexture @see SKTileMapNode
+//
 // NoiseMap wraps [raw.GKNoiseMap] with a fluent Go API.
 type NoiseMap struct {
 	inner *raw.GKNoiseMap
@@ -36,6 +38,8 @@ func NewNoiseMap() *NoiseMap {
 	return &NoiseMap{inner: raw.GKNoiseMapFromID(_id)}
 }
 
+// Initializes a noise map with specified noise. @param noise The 3D noise from which to sample a 2D plane.
+//
 // NewNoiseMapWithNoise creates a new [NoiseMap].
 func NewNoiseMapWithNoise(noise *raw.GKNoise) *NoiseMap {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKNoiseMap")), objc.RegisterName("alloc"))
@@ -43,6 +47,8 @@ func NewNoiseMapWithNoise(noise *raw.GKNoise) *NoiseMap {
 	return &NoiseMap{inner: raw.GKNoiseMapFromID(_id)}
 }
 
+// Initializes a noise map with specified noise and parameters. @param noise The 3D noise from which to sample a 2D plane. @param size The size of the 2D plane to extract from the 3D noise space, in noise space coordinates. @param origin The origin of the 2D plane to extract from the 3D noise space, in noise space coordinates. @param sampleCount The number of equally-spaced samples to make across the 2D plane. @param seamless Whether the values at the edges of the 2D plane are modified to allow seamless tiling of the extracted noise map.
+//
 // NewNoiseMapWithNoiseSizeOriginSampleCountSeamless creates a new [NoiseMap].
 func NewNoiseMapWithNoiseSizeOriginSampleCountSeamless(noise *raw.GKNoise, size unsafe.Pointer, origin unsafe.Pointer, sampleCount unsafe.Pointer, seamless bool) *NoiseMap {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKNoiseMap")), objc.RegisterName("alloc"))
@@ -50,36 +56,50 @@ func NewNoiseMapWithNoiseSizeOriginSampleCountSeamless(noise *raw.GKNoise, size 
 	return &NoiseMap{inner: raw.GKNoiseMapFromID(_id)}
 }
 
+// The noise map value at the specified sample index of the 2D plane. @param position Sample index of the extracted 2D plane at which to query the value.  Valid range is from 0 to sampleCount-1, inclusive. @return The noise map value at the specified sample index.
+//
 // ValueAtPosition calls the underlying ValueAtPosition.
 func (x *NoiseMap) ValueAtPosition(position unsafe.Pointer) float32 {
 	return x.inner.ValueAtPosition(position)
 }
 
+// The noise map value at the specified sample point of the 2D plane.  Returns an interpolated value for points not aligned on integer boundaries. @param position Sample point of the extracted 2D plane at which to query the value.  Valid range is from 0.0 to sampleCount-1.0, inclusive. @return The noise map value at the specified sample index. Returns an interpolated value for points not aligned on integer boundaries.
+//
 // InterpolatedValueAtPosition calls the underlying InterpolatedValueAtPosition.
 func (x *NoiseMap) InterpolatedValueAtPosition(position unsafe.Pointer) float32 {
 	return x.inner.InterpolatedValueAtPosition(position)
 }
 
+// Sets the specified value to the noise map at the specified sample index of the 2D plane. @param value The noise map value to assign to the specified position. @param position Sample index of the extracted 2D plane at which to set the value.  Valid range is from 0 to sampleCount-1, inclusive.
+//
 // SetValueAtPosition calls the underlying SetValueAtPosition.
 func (x *NoiseMap) SetValueAtPosition(value float32, position unsafe.Pointer) {
 	x.inner.SetValueAtPosition(value, position)
 }
 
+// The size of the 2D plane to extract from the 3D noise space, in noise space coordinates.  Used together with origin to determine the bounds of the extracted plane.  A smaller size captures a more "zoomed in" view of the noise, and vice versa. @see origin
+//
 // Size calls the underlying Size.
 func (x *NoiseMap) Size() unsafe.Pointer {
 	return x.inner.Size()
 }
 
+// The origin of the 2D plane to extract from the 3D noise space, in noise space coordinates.  Used together with size to determine the bounds of the extracted plane. @see size
+//
 // Origin calls the underlying Origin.
 func (x *NoiseMap) Origin() unsafe.Pointer {
 	return x.inner.Origin()
 }
 
+// The number of equally-spaced samples to make across the 2D plane.  A higher number of samples produces finer resolution at the expense of increased memory.
+//
 // SampleCount calls the underlying SampleCount.
 func (x *NoiseMap) SampleCount() unsafe.Pointer {
 	return x.inner.SampleCount()
 }
 
+// Whether the values at the edges of the 2D plane are modified to allow seamless tiling of the extracted noise map.
+//
 // IsSeamless calls the underlying IsSeamless.
 func (x *NoiseMap) IsSeamless() bool {
 	return x.inner.IsSeamless()

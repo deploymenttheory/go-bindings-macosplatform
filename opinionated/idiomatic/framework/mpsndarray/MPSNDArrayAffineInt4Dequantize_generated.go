@@ -31,6 +31,8 @@ func ArrayAffineInt4DequantizeFromID(id objc.ID) *ArrayAffineInt4Dequantize {
 	return &ArrayAffineInt4Dequantize{inner: raw.MPSNDArrayAffineInt4DequantizeFromID(id)}
 }
 
+// @abstract   Initializes a kernel for 4-bit affine dequantization. @param      device    The Metal device to be used with this kernel. @param      quantizationDescriptor        Describes the quantization scheme. @result     A new vector LUT dequantization kernel.
+//
 // NewArrayAffineInt4DequantizeWithDeviceQuantizationDescriptor creates a new [ArrayAffineInt4Dequantize].
 func NewArrayAffineInt4DequantizeWithDeviceQuantizationDescriptor(device metal.MTLDevice, quantizationDescriptor *raw.MPSNDArrayAffineQuantizationDescriptor) *ArrayAffineInt4Dequantize {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayAffineInt4Dequantize")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewArrayAffineInt4DequantizeWithDeviceQuantizationDescriptor(device metal.M
 	return &ArrayAffineInt4Dequantize{inner: raw.MPSNDArrayAffineInt4DequantizeFromID(_id)}
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *ArrayAffineInt4Dequantize) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayAffineInt4Dequantize {
 	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)

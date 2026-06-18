@@ -36,42 +36,56 @@ func NewAVB17221AECPAVCMessage() *AVB17221AECPAVCMessage {
 	return &AVB17221AECPAVCMessage{inner: raw.AVB17221AECPAVCMessageFromID(_id)}
 }
 
+// @property	commandResponse @abstract	The avc_command_response field of the AECP AEM message.
+//
 // WithCommandResponse sets the commandResponse property and returns the receiver for chaining.
 func (x *AVB17221AECPAVCMessage) WithCommandResponse(commandResponse *foundation.NSData) *AVB17221AECPAVCMessage {
 	x.inner.SetCommandResponse(commandResponse)
 	return x
 }
 
+// @property	messageType @abstract	The message_type field of the AECP message.
+//
 // WithMessageType sets the messageType property and returns the receiver for chaining.
 func (x *AVB17221AECPAVCMessage) WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPAVCMessage {
 	x.inner.AVB17221AECPMessage.SetMessageType(raw.AVB17221AECPMessageType(messageType))
 	return x
 }
 
+// @property	status @abstract	The status field of the AECP message.
+//
 // WithStatus sets the status property and returns the receiver for chaining.
 func (x *AVB17221AECPAVCMessage) WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPAVCMessage {
 	x.inner.AVB17221AECPMessage.SetStatus(raw.AVB17221AECPStatusCode(status))
 	return x
 }
 
+// @property	targetEntityID @abstract	The target_entity_id field of the AECP message.
+//
 // WithTargetEntityID sets the targetEntityID property and returns the receiver for chaining.
 func (x *AVB17221AECPAVCMessage) WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAVCMessage {
 	x.inner.AVB17221AECPMessage.SetTargetEntityID(targetEntityID)
 	return x
 }
 
+// @property	controllerEntityID @abstract	The controller_entity_id field of the AECP message.
+//
 // WithControllerEntityID sets the controllerEntityID property and returns the receiver for chaining.
 func (x *AVB17221AECPAVCMessage) WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAVCMessage {
 	x.inner.AVB17221AECPMessage.SetControllerEntityID(controllerEntityID)
 	return x
 }
 
+// @property	sequenceID @abstract	The sequence_id field of the AECP message.
+//
 // WithSequenceID sets the sequenceID property and returns the receiver for chaining.
 func (x *AVB17221AECPAVCMessage) WithSequenceID(sequenceID uint16) *AVB17221AECPAVCMessage {
 	x.inner.AVB17221AECPMessage.SetSequenceID(sequenceID)
 	return x
 }
 
+// @property	sourceMAC @abstract	The source_mac field of the AECP message.
+//
 // WithSourceMAC sets the sourceMAC property and returns the receiver for chaining.
 func (x *AVB17221AECPAVCMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAVCMessage {
 	x.inner.AVB17221AECPMessage.SetSourceMAC(sourceMAC.Unwrap())

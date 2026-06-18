@@ -38,11 +38,15 @@ func NewCompositionTrackFormatDescriptionReplacement() *CompositionTrackFormatDe
 	return &CompositionTrackFormatDescriptionReplacement{inner: raw.AVCompositionTrackFormatDescriptionReplacementFromID(_id)}
 }
 
+// @property       originalFormatDescription @abstract       The original format description.
+//
 // OriginalFormatDescription calls the underlying OriginalFormatDescription.
 func (x *CompositionTrackFormatDescriptionReplacement) OriginalFormatDescription() unsafe.Pointer {
 	return x.inner.OriginalFormatDescription()
 }
 
+// @property       replacementFormatDescription @abstract       The replacement format description.
+//
 // ReplacementFormatDescription calls the underlying ReplacementFormatDescription.
 func (x *CompositionTrackFormatDescriptionReplacement) ReplacementFormatDescription() unsafe.Pointer {
 	return x.inner.ReplacementFormatDescription()

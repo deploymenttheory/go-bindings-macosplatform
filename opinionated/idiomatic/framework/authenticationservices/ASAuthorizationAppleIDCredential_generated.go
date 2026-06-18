@@ -39,6 +39,8 @@ func NewAuthorizationAppleIDCredential() *AuthorizationAppleIDCredential {
 	return &AuthorizationAppleIDCredential{inner: raw.ASAuthorizationAppleIDCredentialFromID(_id)}
 }
 
+// @abstract An opaque user ID associated with the AppleID used for the sign in. This identifier will be stable across the 'developer team', it can later be used as an input to @see ASAuthorizationRequest to request user contact information. The identifier will remain stable as long as the user is connected with the requesting client.  The value may change upon user disconnecting from the identity provider.
+//
 // User calls the underlying User.
 func (x *AuthorizationAppleIDCredential) User() string {
 	_r := x.inner.User()
@@ -48,6 +50,8 @@ func (x *AuthorizationAppleIDCredential) User() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract A copy of the state value that was passed to ASAuthorizationRequest.
+//
 // State calls the underlying State.
 func (x *AuthorizationAppleIDCredential) State() string {
 	_r := x.inner.State()
@@ -57,6 +61,8 @@ func (x *AuthorizationAppleIDCredential) State() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract This value will contain a list of scopes for which the user provided authorization.  These may contain a subset of the requested scopes on @see ASAuthorizationAppleIDRequest.  The application should query this value to identify which scopes were returned as it maybe different from ones requested.
+//
 // AuthorizedScopes returns the collection as a Go slice.
 func (x *AuthorizationAppleIDCredential) AuthorizedScopes() []*foundation.NSString {
 	arr := x.inner.AuthorizedScopes()
@@ -68,16 +74,22 @@ func (x *AuthorizationAppleIDCredential) AuthorizedScopes() []*foundation.NSStri
 	})
 }
 
+// @abstract A short-lived, one-time valid token that provides proof of authorization to the server component of the app. The authorization code is bound to the specific transaction using the state attribute passed in the authorization request. The server component of the app can validate the code using Apple’s identity service endpoint provided for this purpose.
+//
 // AuthorizationCode calls the underlying AuthorizationCode.
 func (x *AuthorizationAppleIDCredential) AuthorizationCode() *foundation.NSData {
 	return x.inner.AuthorizationCode()
 }
 
+// @abstract A JSON Web Token (JWT) used to communicate information about the identity of the user in a secure way to the app. The ID token will contain the following information: Issuer Identifier, Subject Identifier, Audience, Expiry Time and Issuance Time signed by Apple's identity service.
+//
 // IdentityToken calls the underlying IdentityToken.
 func (x *AuthorizationAppleIDCredential) IdentityToken() *foundation.NSData {
 	return x.inner.IdentityToken()
 }
 
+// @abstract An optional email shared by the user.  This field is populated with a value that the user authorized.
+//
 // Email calls the underlying Email.
 func (x *AuthorizationAppleIDCredential) Email() string {
 	_r := x.inner.Email()
@@ -87,16 +99,22 @@ func (x *AuthorizationAppleIDCredential) Email() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract An optional full name shared by the user.  This field is populated with a value that the user authorized.
+//
 // FullName calls the underlying FullName.
 func (x *AuthorizationAppleIDCredential) FullName() *foundation.NSPersonNameComponents {
 	return x.inner.FullName()
 }
 
+// @abstract Check this property for a hint as to whether the current user is a "real user".  @see ASUserDetectionStatus for guidelines on handling each status
+//
 // RealUserStatus calls the underlying RealUserStatus.
 func (x *AuthorizationAppleIDCredential) RealUserStatus() ASUserDetectionStatus {
 	return ASUserDetectionStatus(x.inner.RealUserStatus())
 }
 
+// @abstract Check this property to determine whether the current user is a child.  @see ASUserAgeRange for guidelines on handling each status.
+//
 // UserAgeRange calls the underlying UserAgeRange.
 func (x *AuthorizationAppleIDCredential) UserAgeRange() ASUserAgeRange {
 	return ASUserAgeRange(x.inner.UserAgeRange())

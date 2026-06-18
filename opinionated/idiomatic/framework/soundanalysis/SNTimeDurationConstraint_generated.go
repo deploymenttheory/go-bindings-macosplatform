@@ -32,6 +32,8 @@ func TimeDurationConstraintFromID(id objc.ID) *TimeDurationConstraint {
 	return &TimeDurationConstraint{inner: raw.SNTimeDurationConstraintFromID(id)}
 }
 
+// Initializes an enumerated-type constraint. - Parameter enumeratedDurations: A discrete set of duration values (represented as CMTime values boxed in NSValue instances) permitted by this constraint. - Returns: An instance whose `type` is `SNTimeDurationConstraintTypeEnumerated`, and which constrains duration values to the provided set of discrete values.
+//
 // NewTimeDurationConstraintWithEnumeratedDurations creates a new [TimeDurationConstraint].
 func NewTimeDurationConstraintWithEnumeratedDurations(enumeratedDurations *foundation.NSArray[*foundation.NSValue]) *TimeDurationConstraint {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SNTimeDurationConstraint")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewTimeDurationConstraintWithEnumeratedDurations(enumeratedDurations *found
 	return &TimeDurationConstraint{inner: raw.SNTimeDurationConstraintFromID(_id)}
 }
 
+// Initializes a range-type constraint. - Parameter durationRange: A continuous range of duration values (represented as CMTime values) permitted by this constraint. - Returns: An instance whose `type` is `SNTimeDurationConstraintTypeRange`, and which constrains durations values to the provided range.
+//
 // NewTimeDurationConstraintWithDurationRange creates a new [TimeDurationConstraint].
 func NewTimeDurationConstraintWithDurationRange(durationRange coremedia.CMTimeRange) *TimeDurationConstraint {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SNTimeDurationConstraint")), objc.RegisterName("alloc"))
@@ -46,11 +50,15 @@ func NewTimeDurationConstraintWithDurationRange(durationRange coremedia.CMTimeRa
 	return &TimeDurationConstraint{inner: raw.SNTimeDurationConstraintFromID(_id)}
 }
 
+// The time constraint type. The value of this property dictates whether or not other properties associated with this class can be validly accessed. Please refer to the documentation of other individual properties to understand their relationship to this one. This property is always valid to access.
+//
 // Type calls the underlying Type.
 func (x *TimeDurationConstraint) Type() SNTimeDurationConstraintType {
 	return SNTimeDurationConstraintType(x.inner.Type())
 }
 
+// If the constraint type is enumerated, then the set of discrete allowable time durations. - Returns: If the constraint type is enumerated, an array of CMTime structures (boxed in NSValue instances) representing the set of allowable time durations. The durations will always be provided sorted in order of ascending time. If the constraint type is not enumerated, an empty array will be returned. The `type` property should be queried before this property is accessed. This property will only yield meaningful values if the constraint type is considered to be 'enumerated'. The constraint type is considered to be 'enumerated' if the `type` property is equal to `SNTimeDurationConstraintTypeEnumerated`.
+//
 // EnumeratedDurations returns the collection as a Go slice.
 func (x *TimeDurationConstraint) EnumeratedDurations() []*foundation.NSValue {
 	arr := x.inner.EnumeratedDurations()
@@ -62,6 +70,8 @@ func (x *TimeDurationConstraint) EnumeratedDurations() []*foundation.NSValue {
 	})
 }
 
+// If the constraint type is range, then the range of allowable window durations. - Returns: If the constraint type is range, a CMTimeRange representing the range of allowable window durations. If the constraint type is not range, `kCMTimeRangeInvalid`. The `type` property should be queried before this property is accessed. This property will only yield meaningful values if the constraint type is considered to be 'range'. The constraint type is considered to be 'range' if the `type` property is equal to `SNTimeDurationConstraintTypeRange`.
+//
 // DurationRange calls the underlying DurationRange.
 func (x *TimeDurationConstraint) DurationRange() coremedia.CMTimeRange {
 	return x.inner.DurationRange()

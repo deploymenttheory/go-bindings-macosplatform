@@ -33,6 +33,8 @@ func MTRClusterGroupKeyManagementFromID(id objc.ID) *MTRClusterGroupKeyManagemen
 	return &MTRClusterGroupKeyManagement{inner: raw.MTRClusterGroupKeyManagementFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterGroupKeyManagementWithDeviceEndpointIDQueue creates a new [MTRClusterGroupKeyManagement].
 func NewMTRClusterGroupKeyManagementWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterGroupKeyManagement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterGroupKeyManagement")), objc.RegisterName("alloc"))

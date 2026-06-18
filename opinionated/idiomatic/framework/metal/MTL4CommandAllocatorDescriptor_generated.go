@@ -37,6 +37,8 @@ func NewMTL4CommandAllocatorDescriptor() *MTL4CommandAllocatorDescriptor {
 	return &MTL4CommandAllocatorDescriptor{inner: raw.MTL4CommandAllocatorDescriptorFromID(_id)}
 }
 
+// An optional label you can assign to the command allocator to aid debugging.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MTL4CommandAllocatorDescriptor) WithLabel(label string) *MTL4CommandAllocatorDescriptor {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))

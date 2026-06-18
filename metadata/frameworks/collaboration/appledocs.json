@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "framework": "Collaboration",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "CBGroupIdentity": {
+      "doc": "An object of the CBGroupIdentity class represents a group identity and is used for viewing the attributes of group identities from an identity authority. The principal attributes of a CBGroupIdentity object are a POSIX group identifier (GID) and a list of members.",
+      "url": "https://developer.apple.com/documentation/collaboration/cbgroupidentity"
+    },
+    "CBIdentity": {
+      "doc": "A CBIdentity object is used for accessing the attributes of an identity stored in an identity authority. You can use an identity object for finding identities, and storing them in an access control list (ACL). If you need to edit these attributes, take advantage of the CSIdentity class in Core Services.",
+      "url": "https://developer.apple.com/documentation/collaboration/cbidentity"
+    },
+    "CBIdentityAuthority": {
+      "doc": "An identity authority is a database that stores information about identities. The CBIdentityAuthority class defines one or more identity authorities. You can search this database for identities in conjunction with the CBIdentity class factory methods.",
+      "url": "https://developer.apple.com/documentation/collaboration/cbidentityauthority"
+    },
+    "CBIdentityPicker": {
+      "doc": "A CBIdentityPicker object allows a user to select identities—for example, user or group objects—that it wants one or more services or shared resources to have access to. An identity picker can be displayed either as an application-modal dialog or as a sheet attached to a document window. An identity picker returns the selected records to be added to access control lists using Collaboration. If a selected record is not a user or group identity, then an identity picker prompts the user for additional information—such as a password—to promote that record to a sharing account.",
+      "url": "https://developer.apple.com/documentation/collaboration/cbidentitypicker"
+    },
+    "CBUserIdentity": {
+      "doc": "An object of the CBUserIdentity class represents a user identity and is used for accessing the attributes of a user identity from an identity authority. The principal attributes of CBUserIdentity are a POSIX user identifier (UID), password, and certificate.",
+      "url": "https://developer.apple.com/documentation/collaboration/cbuseridentity"
+    }
+  },
+  "methods": {
+    "CBGroupIdentity": {
+      "+groupIdentityWithPosixGID:authority:": {
+        "doc": "Returns the group identity with the given POSIX GID in the specified identity authority.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbgroupidentity/init(posixgid:authority:)"
+      }
+    },
+    "CBIdentity": {
+      "+identityWithCSIdentity:": {
+        "doc": "Returns an identity object created from the specified Core Services Identity opaque object.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentity/identitywithcsidentity:"
+      },
+      "+identityWithName:authority:": {
+        "doc": "Returns the identity object with the given name from the specified identity authority.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentity/init(name:authority:)"
+      },
+      "+identityWithPersistentReference:": {
+        "doc": "Returns the identity object matching the persistent reference data.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentity/init(persistentreference:)"
+      },
+      "+identityWithUUIDString:authority:": {
+        "doc": "Returns the identity object with the given UUID from the specified identity authority.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentity/init(uuidstring:authority:)-13vns"
+      },
+      "-isMemberOfGroup:": {
+        "doc": "Returns a Boolean value indicating whether the identity is a member of the specified group.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentity/ismember(ofgroup:)"
+      }
+    },
+    "CBIdentityAuthority": {
+      "+defaultIdentityAuthority": {
+        "doc": "Returns an identity authority that contains the identities in both the local and the network-bound authorities.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentityauthority/default()"
+      },
+      "+identityAuthorityWithCSIdentityAuthority:": {
+        "doc": "Returns an identity authority specified by a given Core Services Identity authority object.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentityauthority/identityauthoritywithcsidentityauthority:"
+      },
+      "+localIdentityAuthority": {
+        "doc": "Returns the identity authority on the local system.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentityauthority/local()"
+      },
+      "+managedIdentityAuthority": {
+        "doc": "Returns the identity authority that contains all the identities in bound network directory servers.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentityauthority/managed()"
+      }
+    },
+    "CBIdentityPicker": {
+      "-runModal": {
+        "doc": "Runs the receiver as an application-modal dialog.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentitypicker/runmodal()"
+      },
+      "-runModalForWindow:completionHandler:": {
+        "doc": "Runs the identity picker modally as a sheet attached to a specified window.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentitypicker/runmodal(for:completionhandler:)"
+      },
+      "-runModalForWindow:modalDelegate:didEndSelector:contextInfo:": {
+        "doc": "Runs the receiver modally as a sheet attached to a specified window.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentitypicker/runmodal(for:modaldelegate:didend:contextinfo:)"
+      }
+    },
+    "CBUserIdentity": {
+      "+userIdentityWithPosixUID:authority:": {
+        "doc": "Returns the user identity with the given POSIX UID in the specified identity authority.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbuseridentity/init(posixuid:authority:)"
+      },
+      "-authenticateWithPassword:": {
+        "doc": "Returns a Boolean value indicating whether the given password is correct for the identity.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbuseridentity/authenticate(withpassword:)"
+      }
+    }
+  },
+  "properties": {
+    "CBGroupIdentity": {
+      "members": {
+        "doc": "Returns the members of the group.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbgroupidentity/members"
+      },
+      "posixGID": {
+        "doc": "Returns the POSIX GID of the identity.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbgroupidentity/posixgid"
+      }
+    },
+    "CBIdentity": {
+      "CSIdentity": {
+        "doc": "Returns an opaque object for use with the Core Services Identity API.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentity/csidentity"
+      },
+      "UUIDString": {
+        "doc": "Returns the UUID of the identity as a string.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentity/uuidstring"
+      },
+      "aliases": {
+        "doc": "Returns an array of aliases (alternate names) for the identity.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentity/aliases"
+      },
+      "authority": {
+        "doc": "Returns the identity authority where the identity is stored.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentity/authority"
+      },
+      "emailAddress": {
+        "doc": "Returns the email address of an identity.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentity/emailaddress"
+      },
+      "fullName": {
+        "doc": "Returns the full name of the identity.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentity/fullname"
+      },
+      "hidden": {
+        "doc": "Returns a Boolean value indicating the state of the identity’s hidden property.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentity/ishidden"
+      },
+      "image": {
+        "doc": "Returns the image associated with an identity.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentity/image"
+      },
+      "persistentReference": {
+        "doc": "Returns a persistent reference to store a reference to an identity.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentity/persistentreference"
+      },
+      "posixName": {
+        "doc": "Returns the POSIX name of the identity.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentity/posixname"
+      }
+    },
+    "CBIdentityAuthority": {
+      "CSIdentityAuthority": {
+        "doc": "Returns an identity authority for use with the Core Services Identity API.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentityauthority/csidentityauthority"
+      },
+      "localizedName": {
+        "doc": "Returns the localized name of the identity authority.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentityauthority/localizedname"
+      }
+    },
+    "CBIdentityPicker": {
+      "allowsMultipleSelection": {
+        "doc": "A Boolean value indicating whether the user is allowed to select multiple identities.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentitypicker/allowsmultipleselection"
+      },
+      "identities": {
+        "doc": "The array of identities (represented by CBIdentity objects) selected using the identity picker.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentitypicker/identities"
+      },
+      "title": {
+        "doc": "The title of the identity picker.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbidentitypicker/title"
+      }
+    },
+    "CBUserIdentity": {
+      "certificate": {
+        "doc": "Returns the public authentication certificate associated with a user identity.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbuseridentity/certificate"
+      },
+      "enabled": {
+        "doc": "Returns a Boolean value indicating whether the identity is allowed to authenticate.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbuseridentity/isenabled"
+      },
+      "posixUID": {
+        "doc": "Returns the POSIX UID of the identity.",
+        "url": "https://developer.apple.com/documentation/collaboration/cbuseridentity/posixuid"
+      }
+    }
+  }
+}

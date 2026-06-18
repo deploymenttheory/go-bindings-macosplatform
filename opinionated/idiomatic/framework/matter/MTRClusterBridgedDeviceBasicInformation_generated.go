@@ -33,6 +33,8 @@ func MTRClusterBridgedDeviceBasicInformationFromID(id objc.ID) *MTRClusterBridge
 	return &MTRClusterBridgedDeviceBasicInformation{inner: raw.MTRClusterBridgedDeviceBasicInformationFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue creates a new [MTRClusterBridgedDeviceBasicInformation].
 func NewMTRClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterBridgedDeviceBasicInformation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterBridgedDeviceBasicInformation")), objc.RegisterName("alloc"))

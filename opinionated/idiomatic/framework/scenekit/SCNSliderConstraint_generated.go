@@ -35,42 +35,56 @@ func NewSliderConstraint() *SliderConstraint {
 	return &SliderConstraint{inner: raw.SCNSliderConstraintFromID(_id)}
 }
 
+// @property collisionCategoryBitMask @abstract Defines the category of node to collide against. Defaults to 0.
+//
 // WithCollisionCategoryBitMask sets the collisionCategoryBitMask property and returns the receiver for chaining.
 func (x *SliderConstraint) WithCollisionCategoryBitMask(collisionCategoryBitMask uint) *SliderConstraint {
 	x.inner.SetCollisionCategoryBitMask(collisionCategoryBitMask)
 	return x
 }
 
+// @property radius @abstract Defines the radius of the slider. Defaults to 1.
+//
 // WithRadius sets the radius property and returns the receiver for chaining.
 func (x *SliderConstraint) WithRadius(radius float64) *SliderConstraint {
 	x.inner.SetRadius(radius)
 	return x
 }
 
+// @property offset @abstract Defines the offset of the slider. Defaults to (0,0,0).
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *SliderConstraint) WithOffset(offset raw.SCNVector3) *SliderConstraint {
 	x.inner.SetOffset(offset)
 	return x
 }
 
+// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *SliderConstraint) WithEnabled(enabled bool) *SliderConstraint {
 	x.inner.SCNConstraint.SetEnabled(enabled)
 	return x
 }
 
+// @property influenceFactor @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+//
 // WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
 func (x *SliderConstraint) WithInfluenceFactor(influenceFactor float64) *SliderConstraint {
 	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
 	return x
 }
 
+// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+//
 // WithIncremental sets the incremental property and returns the receiver for chaining.
 func (x *SliderConstraint) WithIncremental(incremental bool) *SliderConstraint {
 	x.inner.SCNConstraint.SetIncremental(incremental)
 	return x
 }
 
+// @property collisionCategoryBitMask @abstract Defines the category of node to collide against. Defaults to 0.
+//
 // CollisionCategoryBitMask calls the underlying CollisionCategoryBitMask.
 func (x *SliderConstraint) CollisionCategoryBitMask() uint {
 	return x.inner.CollisionCategoryBitMask()
@@ -81,6 +95,8 @@ func (x *SliderConstraint) SetCollisionCategoryBitMask(collisionCategoryBitMask 
 	x.inner.SetCollisionCategoryBitMask(collisionCategoryBitMask)
 }
 
+// @property radius @abstract Defines the radius of the slider. Defaults to 1.
+//
 // Radius calls the underlying Radius.
 func (x *SliderConstraint) Radius() float64 {
 	return x.inner.Radius()
@@ -91,6 +107,8 @@ func (x *SliderConstraint) SetRadius(radius float64) {
 	x.inner.SetRadius(radius)
 }
 
+// @property offset @abstract Defines the offset of the slider. Defaults to (0,0,0).
+//
 // Offset calls the underlying Offset.
 func (x *SliderConstraint) Offset() raw.SCNVector3 {
 	return x.inner.Offset()

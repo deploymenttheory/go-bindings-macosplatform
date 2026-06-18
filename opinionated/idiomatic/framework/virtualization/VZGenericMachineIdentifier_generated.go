@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a unique identifier for a virtual machine.
+//
 // GenericMachineIdentifier wraps [raw.VZGenericMachineIdentifier] with a fluent Go API.
 type GenericMachineIdentifier struct {
 	inner *raw.VZGenericMachineIdentifier
@@ -36,6 +38,8 @@ func NewGenericMachineIdentifier() *GenericMachineIdentifier {
 	return &GenericMachineIdentifier{inner: raw.VZGenericMachineIdentifierFromID(_id)}
 }
 
+// Creates a new unique identifier for a VM with the provided data.
+//
 // NewGenericMachineIdentifierWithDataRepresentation creates a new [GenericMachineIdentifier].
 func NewGenericMachineIdentifierWithDataRepresentation(dataRepresentation *foundation.NSData) *GenericMachineIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZGenericMachineIdentifier")), objc.RegisterName("alloc"))

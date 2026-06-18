@@ -30,6 +30,8 @@ func MTRClusterFixedLabelFromID(id objc.ID) *MTRClusterFixedLabel {
 	return &MTRClusterFixedLabel{inner: raw.MTRClusterFixedLabelFromID(id)}
 }
 
+// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+//
 // NewMTRClusterFixedLabelWithDeviceEndpointIDQueue creates a new [MTRClusterFixedLabel].
 func NewMTRClusterFixedLabelWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterFixedLabel {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterFixedLabel")), objc.RegisterName("alloc"))

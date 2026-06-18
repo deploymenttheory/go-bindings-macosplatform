@@ -31,6 +31,8 @@ func SuperResolutionScalerParametersFromID(id objc.ID) *SuperResolutionScalerPar
 	return &SuperResolutionScalerParameters{inner: raw.VTSuperResolutionScalerParametersFromID(id)}
 }
 
+// Creates a new super-resolution scaler parameters instance. Returns `nil` if `sourceFrame` or `destinationFrame` is `nil`, or if `sourceFrame` and reference frames have different pixel formats. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - previousFrame: The previous source frame in presentation time order. For the first frame you can set this to `nil`. - previousOutputFrame: The previous output frame in presentation time order. For the first frame you can set this to `nil`. - opticalFlow: Optional `VTFrameProcessorOpticalFlow` object that contains forward and backward optical flow between the `sourceFrame` and `previousFrame`. You only need this if optical flow is pre-computed. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presentation sequence. For more information about supported modes see “VTSuperResolutionScalerParametersSubmissionMode“. - destinationFrame: User-allocated pixel buffer that receives the results.
+//
 // NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame creates a new [SuperResolutionScalerParameters].
 func NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame(sourceFrame *raw.VTFrameProcessorFrame, previousFrame *raw.VTFrameProcessorFrame, previousOutputFrame *raw.VTFrameProcessorFrame, opticalFlow *raw.VTFrameProcessorOpticalFlow, submissionMode VTSuperResolutionScalerParametersSubmissionMode, destinationFrame *raw.VTFrameProcessorFrame) *SuperResolutionScalerParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTSuperResolutionScalerParameters")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutpu
 	return &SuperResolutionScalerParameters{inner: raw.VTSuperResolutionScalerParametersFromID(_id)}
 }
 
+// Current source frame, which must be non `nil`.
+//
 // SourceFrame calls the underlying SourceFrame.
 func (x *SuperResolutionScalerParameters) SourceFrame() *FrameProcessorFrame {
 	_r := x.inner.SourceFrame()
@@ -47,6 +51,8 @@ func (x *SuperResolutionScalerParameters) SourceFrame() *FrameProcessorFrame {
 	return &FrameProcessorFrame{inner: _r}
 }
 
+// Previous source frame in presentation time order, which is `nil` for the first frame.
+//
 // PreviousFrame calls the underlying PreviousFrame.
 func (x *SuperResolutionScalerParameters) PreviousFrame() *FrameProcessorFrame {
 	_r := x.inner.PreviousFrame()
@@ -56,6 +62,8 @@ func (x *SuperResolutionScalerParameters) PreviousFrame() *FrameProcessorFrame {
 	return &FrameProcessorFrame{inner: _r}
 }
 
+// Previous output frame in presentation time order, which is `nil` for the first frame.
+//
 // PreviousOutputFrame calls the underlying PreviousOutputFrame.
 func (x *SuperResolutionScalerParameters) PreviousOutputFrame() *FrameProcessorFrame {
 	_r := x.inner.PreviousOutputFrame()
@@ -65,6 +73,8 @@ func (x *SuperResolutionScalerParameters) PreviousOutputFrame() *FrameProcessorF
 	return &FrameProcessorFrame{inner: _r}
 }
 
+// Optional object that contains forward and backward optical flow with the previous frame. You only need this if optical flow is pre-computed. For the first frame this is `nil`.
+//
 // OpticalFlow calls the underlying OpticalFlow.
 func (x *SuperResolutionScalerParameters) OpticalFlow() *FrameProcessorOpticalFlow {
 	_r := x.inner.OpticalFlow()
@@ -74,11 +84,15 @@ func (x *SuperResolutionScalerParameters) OpticalFlow() *FrameProcessorOpticalFl
 	return &FrameProcessorOpticalFlow{inner: _r}
 }
 
+// Ordering of the input frames in this submission relative to the previous submission.
+//
 // SubmissionMode calls the underlying SubmissionMode.
 func (x *SuperResolutionScalerParameters) SubmissionMode() VTSuperResolutionScalerParametersSubmissionMode {
 	return VTSuperResolutionScalerParametersSubmissionMode(x.inner.SubmissionMode())
 }
 
+// Destination frame that contains user-allocated pixel buffer that receives the results.
+//
 // DestinationFrame calls the underlying DestinationFrame.
 func (x *SuperResolutionScalerParameters) DestinationFrame() *FrameProcessorFrame {
 	_r := x.inner.DestinationFrame()

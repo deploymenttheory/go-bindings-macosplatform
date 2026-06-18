@@ -33,6 +33,8 @@ func MTRClusterContentAppObserverFromID(id objc.ID) *MTRClusterContentAppObserve
 	return &MTRClusterContentAppObserver{inner: raw.MTRClusterContentAppObserverFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterContentAppObserverWithDeviceEndpointIDQueue creates a new [MTRClusterContentAppObserver].
 func NewMTRClusterContentAppObserverWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterContentAppObserver {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterContentAppObserver")), objc.RegisterName("alloc"))

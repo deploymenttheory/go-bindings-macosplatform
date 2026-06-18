@@ -4,7 +4,8 @@
     feeding completion closure, is pre-built in Go; the template shapes the outer
     function and the ctx-vs-result select. Two shapes: error-only and (R, error).
 */}}
-{{define "async_method"}}// {{.GoName}} blocks until the operation completes or ctx is cancelled.
+{{define "async_method"}}{{if .DocComment}}{{.DocComment}}//
+{{end}}// {{.GoName}} blocks until the operation completes or ctx is cancelled.
 {{if .HasResult -}}
 func {{.Recv}}{{.GoName}}({{.ParamStr}}) ({{.ResultGoType}}, error) {
 type _result struct {

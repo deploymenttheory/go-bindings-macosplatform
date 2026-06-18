@@ -36,42 +36,56 @@ func NewStepperTouchBarItem() *StepperTouchBarItem {
 	return &StepperTouchBarItem{inner: raw.NSStepperTouchBarItemFromID(_id)}
 }
 
+// The stepper's maximum value. The default is `59.0`.
+//
 // WithMaxValue sets the maxValue property and returns the receiver for chaining.
 func (x *StepperTouchBarItem) WithMaxValue(maxValue float64) *StepperTouchBarItem {
 	x.inner.SetMaxValue(maxValue)
 	return x
 }
 
+// The stepper's minimum value. The default is `0.0`.
+//
 // WithMinValue sets the minValue property and returns the receiver for chaining.
 func (x *StepperTouchBarItem) WithMinValue(minValue float64) *StepperTouchBarItem {
 	x.inner.SetMinValue(minValue)
 	return x
 }
 
+// The stepper's increment value. The default value is `1.0`.
+//
 // WithIncrement sets the increment property and returns the receiver for chaining.
 func (x *StepperTouchBarItem) WithIncrement(increment float64) *StepperTouchBarItem {
 	x.inner.SetIncrement(increment)
 	return x
 }
 
+// The current value of the stepper.
+//
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *StepperTouchBarItem) WithValue(value float64) *StepperTouchBarItem {
 	x.inner.SetValue(value)
 	return x
 }
 
+// The target object that receives action messages from the stepper.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *StepperTouchBarItem) WithTarget(target objc.ID) *StepperTouchBarItem {
 	x.inner.SetTarget(target)
 	return x
 }
 
+// The action-message selector associated with the stepper.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *StepperTouchBarItem) WithAction(action objc.SEL) *StepperTouchBarItem {
 	x.inner.SetAction(action)
 	return x
 }
 
+// The localized string labeling this item during user customization. The default value is empty string.
+//
 // WithCustomizationLabel sets the customizationLabel property and returns the receiver for chaining.
 func (x *StepperTouchBarItem) WithCustomizationLabel(customizationLabel string) *StepperTouchBarItem {
 	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
@@ -84,6 +98,8 @@ func (x *StepperTouchBarItem) WithVisibilityPriority(visibilityPriority float32)
 	return x
 }
 
+// The stepper's maximum value. The default is `59.0`.
+//
 // MaxValue calls the underlying MaxValue.
 func (x *StepperTouchBarItem) MaxValue() float64 {
 	return x.inner.MaxValue()
@@ -94,6 +110,8 @@ func (x *StepperTouchBarItem) SetMaxValue(maxValue float64) {
 	x.inner.SetMaxValue(maxValue)
 }
 
+// The stepper's minimum value. The default is `0.0`.
+//
 // MinValue calls the underlying MinValue.
 func (x *StepperTouchBarItem) MinValue() float64 {
 	return x.inner.MinValue()
@@ -104,6 +122,8 @@ func (x *StepperTouchBarItem) SetMinValue(minValue float64) {
 	x.inner.SetMinValue(minValue)
 }
 
+// The stepper's increment value. The default value is `1.0`.
+//
 // Increment calls the underlying Increment.
 func (x *StepperTouchBarItem) Increment() float64 {
 	return x.inner.Increment()
@@ -114,6 +134,8 @@ func (x *StepperTouchBarItem) SetIncrement(increment float64) {
 	x.inner.SetIncrement(increment)
 }
 
+// The current value of the stepper.
+//
 // Value calls the underlying Value.
 func (x *StepperTouchBarItem) Value() float64 {
 	return x.inner.Value()
@@ -124,6 +146,8 @@ func (x *StepperTouchBarItem) SetValue(value float64) {
 	x.inner.SetValue(value)
 }
 
+// The target object that receives action messages from the stepper.
+//
 // Target calls the underlying Target.
 func (x *StepperTouchBarItem) Target() objc.ID {
 	return x.inner.Target()
@@ -134,6 +158,8 @@ func (x *StepperTouchBarItem) SetTarget(target objc.ID) {
 	x.inner.SetTarget(target)
 }
 
+// The action-message selector associated with the stepper.
+//
 // Action calls the underlying Action.
 func (x *StepperTouchBarItem) Action() objc.SEL {
 	return x.inner.Action()

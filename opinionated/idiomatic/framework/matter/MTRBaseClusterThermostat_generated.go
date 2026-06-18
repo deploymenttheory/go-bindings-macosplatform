@@ -33,6 +33,8 @@ func MTRBaseClusterThermostatFromID(id objc.ID) *MTRBaseClusterThermostat {
 	return &MTRBaseClusterThermostat{inner: raw.MTRBaseClusterThermostatFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterThermostatWithDeviceEndpointIDQueue creates a new [MTRBaseClusterThermostat].
 func NewMTRBaseClusterThermostatWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterThermostat {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterThermostat")), objc.RegisterName("alloc"))
@@ -47,16 +49,22 @@ func NewMTRBaseClusterThermostatWithDeviceEndpointQueue(device *raw.MTRBaseDevic
 	return &MTRBaseClusterThermostat{inner: raw.MTRBaseClusterThermostatFromID(_id)}
 }
 
+// Command SetpointRaiseLower Upon receipt, the attributes for the indicated setpoint(s) SHALL have the amount specified in the Amount field added to them.
+//
 // SetpointRaiseLowerWithParamsCompletion calls the underlying SetpointRaiseLowerWithParamsCompletion.
 func (x *MTRBaseClusterThermostat) SetpointRaiseLowerWithParamsCompletion(params *raw.MTRThermostatClusterSetpointRaiseLowerParams, completion func(unsafe.Pointer)) {
 	x.inner.SetpointRaiseLowerWithParamsCompletion(params, completion)
 }
 
+// Command SetWeeklySchedule This command is used to update the thermostat weekly setpoint schedule from a management system.
+//
 // SetWeeklyScheduleWithParamsCompletion calls the underlying SetWeeklyScheduleWithParamsCompletion.
 func (x *MTRBaseClusterThermostat) SetWeeklyScheduleWithParamsCompletion(params *raw.MTRThermostatClusterSetWeeklyScheduleParams, completion func(unsafe.Pointer)) {
 	x.inner.SetWeeklyScheduleWithParamsCompletion(params, completion)
 }
 
+// Command GetWeeklySchedule The Current Weekly Schedule Command is sent from the server in response to the Get Weekly Schedule Command.
+//
 // GetWeeklyScheduleWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterThermostat) GetWeeklyScheduleWithParamsCompletion(ctx context.Context, params *raw.MTRThermostatClusterGetWeeklyScheduleParams) (*MTRThermostatClusterGetWeeklyScheduleResponseParams, error) {
 	type _result struct {
@@ -83,6 +91,8 @@ func (x *MTRBaseClusterThermostat) GetWeeklyScheduleWithParamsCompletion(ctx con
 	}
 }
 
+// Command ClearWeeklySchedule This command is used to clear the weekly schedule.
+//
 // ClearWeeklyScheduleWithParamsCompletion calls the underlying ClearWeeklyScheduleWithParamsCompletion.
 func (x *MTRBaseClusterThermostat) ClearWeeklyScheduleWithParamsCompletion(params *raw.MTRThermostatClusterClearWeeklyScheduleParams, completion func(unsafe.Pointer)) {
 	x.inner.ClearWeeklyScheduleWithParamsCompletion(params, completion)
@@ -93,16 +103,22 @@ func (x *MTRBaseClusterThermostat) ClearWeeklyScheduleWithCompletion(completion 
 	x.inner.ClearWeeklyScheduleWithCompletion(completion)
 }
 
+// Command SetActiveScheduleRequest Upon receipt, if the Schedules attribute contains a ScheduleStruct whose ScheduleHandle field matches the value of the ScheduleHandle field, the server SHALL set the thermostat's ActiveScheduleHandle attribute to the value of the ScheduleHandle field.
+//
 // SetActiveScheduleRequestWithParamsCompletion calls the underlying SetActiveScheduleRequestWithParamsCompletion.
 func (x *MTRBaseClusterThermostat) SetActiveScheduleRequestWithParamsCompletion(params *raw.MTRThermostatClusterSetActiveScheduleRequestParams, completion func(unsafe.Pointer)) {
 	x.inner.SetActiveScheduleRequestWithParamsCompletion(params, completion)
 }
 
+// Command SetActivePresetRequest ID
+//
 // SetActivePresetRequestWithParamsCompletion calls the underlying SetActivePresetRequestWithParamsCompletion.
 func (x *MTRBaseClusterThermostat) SetActivePresetRequestWithParamsCompletion(params *raw.MTRThermostatClusterSetActivePresetRequestParams, completion func(unsafe.Pointer)) {
 	x.inner.SetActivePresetRequestWithParamsCompletion(params, completion)
 }
 
+// Command AtomicRequest Begins, Commits or Cancels an atomic write
+//
 // AtomicRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterThermostat) AtomicRequestWithParamsCompletion(ctx context.Context, params *raw.MTRThermostatClusterAtomicRequestParams) (*MTRThermostatClusterAtomicResponseParams, error) {
 	type _result struct {

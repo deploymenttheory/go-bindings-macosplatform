@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unique identifier for a VM.
+//
 // MacMachineIdentifier wraps [raw.VZMacMachineIdentifier] with a fluent Go API.
 type MacMachineIdentifier struct {
 	inner *raw.VZMacMachineIdentifier
@@ -36,6 +38,8 @@ func NewMacMachineIdentifier() *MacMachineIdentifier {
 	return &MacMachineIdentifier{inner: raw.VZMacMachineIdentifierFromID(_id)}
 }
 
+// Create a machine identifier described by the specified data representation.
+//
 // NewMacMachineIdentifierWithDataRepresentation creates a new [MacMachineIdentifier].
 func NewMacMachineIdentifierWithDataRepresentation(dataRepresentation *foundation.NSData) *MacMachineIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacMachineIdentifier")), objc.RegisterName("alloc"))

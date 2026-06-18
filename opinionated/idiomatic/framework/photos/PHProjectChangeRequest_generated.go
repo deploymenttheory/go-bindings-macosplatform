@@ -45,12 +45,16 @@ func (x *ProjectChangeRequest) WithTitle(title string) *ProjectChangeRequest {
 	return x
 }
 
+// The projectExtensionData property is intended for storage of compressed, project specific data only. Do not include things like rasterized images that can be locally cached in this data. The total size of stored data is limited to 5 MB. Attempting to store more data than allowed will result in an error.
+//
 // WithProjectExtensionData sets the projectExtensionData property and returns the receiver for chaining.
 func (x *ProjectChangeRequest) WithProjectExtensionData(projectExtensionData *foundation.NSData) *ProjectChangeRequest {
 	x.inner.SetProjectExtensionData(projectExtensionData)
 	return x
 }
 
+// Sets the key asset representing the project. Deprecated in macOS 10.14, please use -[PHProjectChangeRequest setProjectPreviewImage:] to provide a rendered preview instead.
+//
 // SetKeyAsset calls the underlying SetKeyAsset.
 func (x *ProjectChangeRequest) SetKeyAsset(keyAsset *raw.PHAsset) {
 	x.inner.SetKeyAsset(keyAsset)
@@ -61,6 +65,8 @@ func (x *ProjectChangeRequest) SetProjectPreviewImage(previewImage *appkit.NSIma
 	x.inner.SetProjectPreviewImage(previewImage)
 }
 
+// Removes the specified assets from the project. @param assets A collection of PHAsset objects to be removed from the project.
+//
 // RemoveAssets calls the underlying RemoveAssets.
 func (x *ProjectChangeRequest) RemoveAssets(assets foundation.NSFastEnumeration) {
 	x.inner.RemoveAssets(assets)
@@ -80,11 +86,15 @@ func (x *ProjectChangeRequest) SetTitle(title string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// The projectExtensionData property is intended for storage of compressed, project specific data only. Do not include things like rasterized images that can be locally cached in this data. The total size of stored data is limited to 5 MB. Attempting to store more data than allowed will result in an error.
+//
 // ProjectExtensionData calls the underlying ProjectExtensionData.
 func (x *ProjectChangeRequest) ProjectExtensionData() *foundation.NSData {
 	return x.inner.ProjectExtensionData()
 }
 
+// The projectExtensionData property is intended for storage of compressed, project specific data only. Do not include things like rasterized images that can be locally cached in this data. The total size of stored data is limited to 5 MB. Attempting to store more data than allowed will result in an error.
+//
 // SetProjectExtensionData calls the underlying SetProjectExtensionData.
 func (x *ProjectChangeRequest) SetProjectExtensionData(projectExtensionData *foundation.NSData) {
 	x.inner.SetProjectExtensionData(projectExtensionData)

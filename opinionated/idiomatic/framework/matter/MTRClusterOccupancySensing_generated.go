@@ -30,6 +30,8 @@ func MTRClusterOccupancySensingFromID(id objc.ID) *MTRClusterOccupancySensing {
 	return &MTRClusterOccupancySensing{inner: raw.MTRClusterOccupancySensingFromID(id)}
 }
 
+// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+//
 // NewMTRClusterOccupancySensingWithDeviceEndpointIDQueue creates a new [MTRClusterOccupancySensing].
 func NewMTRClusterOccupancySensingWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterOccupancySensing {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterOccupancySensing")), objc.RegisterName("alloc"))

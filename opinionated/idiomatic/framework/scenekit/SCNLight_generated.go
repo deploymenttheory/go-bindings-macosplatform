@@ -39,162 +39,216 @@ func NewLight() *Light {
 	return &Light{inner: raw.SCNLightFromID(_id)}
 }
 
+// @property type @abstract Specifies the receiver's type. @discussion Defaults to SCNLightTypeOmni on iOS 8 and later, and on macOS 10.10 and later (otherwise defaults to SCNLightTypeAmbient).
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *Light) WithType(type_ *foundation.NSString) *Light {
 	x.inner.SetType(type_)
 	return x
 }
 
+// @property color @abstract Specifies the receiver's color (NSColor or CGColorRef). Animatable. Defaults to white. @discussion The initial value is a NSColor. The renderer multiplies the light's color is by the color derived from the light's temperature.
+//
 // WithColor sets the color property and returns the receiver for chaining.
 func (x *Light) WithColor(color objc.ID) *Light {
 	x.inner.SetColor(color)
 	return x
 }
 
+// @property temperature @abstract Specifies the receiver's temperature. @discussion This specifies the temperature of the light in Kelvin. The renderer multiplies the light's color by the color derived from the light's temperature. Defaults to 6500 (pure white). Animatable.
+//
 // WithTemperature sets the temperature property and returns the receiver for chaining.
 func (x *Light) WithTemperature(temperature float64) *Light {
 	x.inner.SetTemperature(temperature)
 	return x
 }
 
+// @property intensity @abstract Specifies the receiver's intensity. @discussion This intensity is used to modulate the light color. When used with a physically-based material, this corresponds to the luminous flux of the light, expressed in lumens (lm). Defaults to 1000. Animatable.
+//
 // WithIntensity sets the intensity property and returns the receiver for chaining.
 func (x *Light) WithIntensity(intensity float64) *Light {
 	x.inner.SetIntensity(intensity)
 	return x
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Light) WithName(name string) *Light {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property castsShadow @abstract Determines whether the receiver casts a shadow. Defaults to NO. @discussion Shadows are only supported by spot and directional lights.
+//
 // WithCastsShadow sets the castsShadow property and returns the receiver for chaining.
 func (x *Light) WithCastsShadow(castsShadow bool) *Light {
 	x.inner.SetCastsShadow(castsShadow)
 	return x
 }
 
+// @property shadowColor @abstract Specifies the color (CGColorRef or NSColor) of the shadow casted by the receiver. Defaults to black. Animatable. @discussion On iOS 9 or earlier and macOS 10.11 or earlier, this defaults to black 50% transparent.
+//
 // WithShadowColor sets the shadowColor property and returns the receiver for chaining.
 func (x *Light) WithShadowColor(shadowColor objc.ID) *Light {
 	x.inner.SetShadowColor(shadowColor)
 	return x
 }
 
+// @property shadowRadius @abstract Specifies the sample radius used to render the receiver’s shadow. Default value is 3.0. Animatable.
+//
 // WithShadowRadius sets the shadowRadius property and returns the receiver for chaining.
 func (x *Light) WithShadowRadius(shadowRadius float64) *Light {
 	x.inner.SetShadowRadius(shadowRadius)
 	return x
 }
 
+// @property shadowMapSize @abstract Specifies the size of the shadow map. @discussion The larger the shadow map is the more precise the shadows are but the slower the computation is. If set to {0,0} the size of the shadow map is automatically chosen. Defaults to {0,0}.
+//
 // WithShadowMapSize sets the shadowMapSize property and returns the receiver for chaining.
 func (x *Light) WithShadowMapSize(shadowMapSize corefoundation.CGSize) *Light {
 	x.inner.SetShadowMapSize(shadowMapSize)
 	return x
 }
 
+// @property shadowSampleCount @abstract Specifies the number of sample per fragment to compute the shadow map. Defaults to 0. @discussion On macOS 10.11 or earlier, the shadowSampleCount defaults to 16. On iOS 9 or earlier it defaults to 1.0. On macOS 10.12, iOS 10 and greater, when the shadowSampleCount is set to 0, a default sample count is chosen depending on the platform.
+//
 // WithShadowSampleCount sets the shadowSampleCount property and returns the receiver for chaining.
 func (x *Light) WithShadowSampleCount(shadowSampleCount uint) *Light {
 	x.inner.SetShadowSampleCount(shadowSampleCount)
 	return x
 }
 
+// @property shadowMode @abstract Specified the mode to use to cast shadows. See above for the available modes and their description. Defaults to SCNShadowModeDefered on 10.9 and before, defaults to SCNShadowModeForward otherwise.
+//
 // WithShadowMode sets the shadowMode property and returns the receiver for chaining.
 func (x *Light) WithShadowMode(shadowMode SCNShadowMode) *Light {
 	x.inner.SetShadowMode(raw.SCNShadowMode(shadowMode))
 	return x
 }
 
+// @property shadowBias @abstract Specifies the correction to apply to the shadow map to correct acne artefacts. It is multiplied by an implementation-specific value to create a constant depth offset. Defaults to 1.0
+//
 // WithShadowBias sets the shadowBias property and returns the receiver for chaining.
 func (x *Light) WithShadowBias(shadowBias float64) *Light {
 	x.inner.SetShadowBias(shadowBias)
 	return x
 }
 
+// @property automaticallyAdjustsShadowProjection @abstract Specifies if the shadow map projection should be done automatically or manually by the user. Defaults to YES.
+//
 // WithAutomaticallyAdjustsShadowProjection sets the automaticallyAdjustsShadowProjection property and returns the receiver for chaining.
 func (x *Light) WithAutomaticallyAdjustsShadowProjection(automaticallyAdjustsShadowProjection bool) *Light {
 	x.inner.SetAutomaticallyAdjustsShadowProjection(automaticallyAdjustsShadowProjection)
 	return x
 }
 
+// @property maximumShadowDistance @abstract Specifies the maximum distance from the viewpoint from which the shadows for the receiver light won't be computed. Defaults to 100.0.
+//
 // WithMaximumShadowDistance sets the maximumShadowDistance property and returns the receiver for chaining.
 func (x *Light) WithMaximumShadowDistance(maximumShadowDistance float64) *Light {
 	x.inner.SetMaximumShadowDistance(maximumShadowDistance)
 	return x
 }
 
+// @property forcesBackFaceCasters @abstract Render only back faces of the shadow caster when enabled. Defaults to NO. This is a behavior change from previous releases.
+//
 // WithForcesBackFaceCasters sets the forcesBackFaceCasters property and returns the receiver for chaining.
 func (x *Light) WithForcesBackFaceCasters(forcesBackFaceCasters bool) *Light {
 	x.inner.SetForcesBackFaceCasters(forcesBackFaceCasters)
 	return x
 }
 
+// @property sampleDistributedShadowMaps @abstract Use the sample distribution of the main rendering to better fit the shadow frusta. Defaults to NO.
+//
 // WithSampleDistributedShadowMaps sets the sampleDistributedShadowMaps property and returns the receiver for chaining.
 func (x *Light) WithSampleDistributedShadowMaps(sampleDistributedShadowMaps bool) *Light {
 	x.inner.SetSampleDistributedShadowMaps(sampleDistributedShadowMaps)
 	return x
 }
 
+// @property shadowCascadeCount @abstract Specifies the number of distinct shadow maps that will be computed for the receiver light. Defaults to 1. Maximum is 4.
+//
 // WithShadowCascadeCount sets the shadowCascadeCount property and returns the receiver for chaining.
 func (x *Light) WithShadowCascadeCount(shadowCascadeCount uint) *Light {
 	x.inner.SetShadowCascadeCount(shadowCascadeCount)
 	return x
 }
 
+// @property shadowCascadeSplittingFactor @abstract Specifies a factor to interpolate between linear splitting (0) and logarithmic splitting (1). Defaults to 0.15.
+//
 // WithShadowCascadeSplittingFactor sets the shadowCascadeSplittingFactor property and returns the receiver for chaining.
 func (x *Light) WithShadowCascadeSplittingFactor(shadowCascadeSplittingFactor float64) *Light {
 	x.inner.SetShadowCascadeSplittingFactor(shadowCascadeSplittingFactor)
 	return x
 }
 
+// @property orthographicScale @abstract Specifies the orthographic scale used to render from the directional light into the shadow map. Defaults to 1. @discussion This is only applicable for directional lights.
+//
 // WithOrthographicScale sets the orthographicScale property and returns the receiver for chaining.
 func (x *Light) WithOrthographicScale(orthographicScale float64) *Light {
 	x.inner.SetOrthographicScale(orthographicScale)
 	return x
 }
 
+// @property zNear @abstract Specifies the minimal distance between the light and the surface to cast shadow on. If a surface is closer to the light than this minimal distance, then the surface won't be shadowed. The near value must be different than zero. Animatable. Defaults to 1.
+//
 // WithZNear sets the zNear property and returns the receiver for chaining.
 func (x *Light) WithZNear(zNear float64) *Light {
 	x.inner.SetZNear(zNear)
 	return x
 }
 
+// @property zFar @abstract Specifies the maximal distance between the light and a visible surface to cast shadow on. If a surface is further from the light than this maximal distance, then the surface won't be shadowed. Animatable. Defaults to 100.
+//
 // WithZFar sets the zFar property and returns the receiver for chaining.
 func (x *Light) WithZFar(zFar float64) *Light {
 	x.inner.SetZFar(zFar)
 	return x
 }
 
+// @property attenuationStartDistance @abstract The distance at which the attenuation starts (Omni or Spot light types only). Animatable. Defaults to 0.
+//
 // WithAttenuationStartDistance sets the attenuationStartDistance property and returns the receiver for chaining.
 func (x *Light) WithAttenuationStartDistance(attenuationStartDistance float64) *Light {
 	x.inner.SetAttenuationStartDistance(attenuationStartDistance)
 	return x
 }
 
+// @property attenuationEndDistance @abstract The distance at which the attenuation ends (Omni or Spot light types only). Animatable. Defaults to 0.
+//
 // WithAttenuationEndDistance sets the attenuationEndDistance property and returns the receiver for chaining.
 func (x *Light) WithAttenuationEndDistance(attenuationEndDistance float64) *Light {
 	x.inner.SetAttenuationEndDistance(attenuationEndDistance)
 	return x
 }
 
+// @property attenuationFalloffExponent @abstract Specifies the attenuation between the start and end attenuation distances. 0 means a constant attenuation, 1 a linear attenuation and 2 a quadratic attenuation, but any positive value will work (Omni or Spot light types only). Animatable. Defaults to 2.
+//
 // WithAttenuationFalloffExponent sets the attenuationFalloffExponent property and returns the receiver for chaining.
 func (x *Light) WithAttenuationFalloffExponent(attenuationFalloffExponent float64) *Light {
 	x.inner.SetAttenuationFalloffExponent(attenuationFalloffExponent)
 	return x
 }
 
+// @property spotInnerAngle @abstract The angle in degrees between the spot direction and the lit element below which the lighting is at full strength. Animatable. Defaults to 0.
+//
 // WithSpotInnerAngle sets the spotInnerAngle property and returns the receiver for chaining.
 func (x *Light) WithSpotInnerAngle(spotInnerAngle float64) *Light {
 	x.inner.SetSpotInnerAngle(spotInnerAngle)
 	return x
 }
 
+// @property spotOuterAngle @abstract The angle in degrees between the spot direction and the lit element after which the lighting is at zero strength. Animatable. Defaults to 45 degrees.
+//
 // WithSpotOuterAngle sets the spotOuterAngle property and returns the receiver for chaining.
 func (x *Light) WithSpotOuterAngle(spotOuterAngle float64) *Light {
 	x.inner.SetSpotOuterAngle(spotOuterAngle)
 	return x
 }
 
+// @property IESProfileURL @abstract Specifies the IES file from which the shape, direction, and intensity of illumination is determined. Defaults to nil.
+//
 // WithIESProfileURL sets the iESProfileURL property and returns the receiver for chaining.
 func (x *Light) WithIESProfileURL(iESProfileURL string) *Light {
 	x.inner.SetIESProfileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(iESProfileURL)))
@@ -219,12 +273,16 @@ func (x *Light) WithParallaxCorrectionEnabled(parallaxCorrectionEnabled bool) *L
 	return x
 }
 
+// @property areaType @abstract Determines the shape of a light of type SCNLightTypeArea. Defaults to SCNLightAreaTypeRectangle.
+//
 // WithAreaType sets the areaType property and returns the receiver for chaining.
 func (x *Light) WithAreaType(areaType SCNLightAreaType) *Light {
 	x.inner.SetAreaType(raw.SCNLightAreaType(areaType))
 	return x
 }
 
+// @property areaPolygonVertices @abstract Determines the shape of light of an area light of type SCNLightAreaTypePolygon. Defaults nil. @discussion An array of CGPoint values corresponding to the coordinates of the polygon's vertices in the XY plane.
+//
 // WithAreaPolygonVertices sets the collection, converting the Go slice to an NSArray.
 func (x *Light) WithAreaPolygonVertices(items ...*foundation.NSValue) *Light {
 	if len(items) == 0 {
@@ -243,24 +301,32 @@ func (x *Light) WithAreaPolygonVertices(items ...*foundation.NSValue) *Light {
 	return x
 }
 
+// @property drawsArea @abstract Determines whether the shape of a light of type SCNLightTypeArea is drawn in the scene. Defaults to YES.
+//
 // WithDrawsArea sets the drawsArea property and returns the receiver for chaining.
 func (x *Light) WithDrawsArea(drawsArea bool) *Light {
 	x.inner.SetDrawsArea(drawsArea)
 	return x
 }
 
+// @property doubleSided @abstract Determines whether a light of type SCNLightTypeArea is double-sided. Defaults NO. @discussion Area lights of type SCNLightAreaTypeRectangle or SCNLightAreaTypePolygon emit light along the -Z axis. When set to YES, they also emit light along the +Z axis.
+//
 // WithDoubleSided sets the doubleSided property and returns the receiver for chaining.
 func (x *Light) WithDoubleSided(doubleSided bool) *Light {
 	x.inner.SetDoubleSided(doubleSided)
 	return x
 }
 
+// @property categoryBitMask @abstract Determines the node categories that will be lit by the receiver. Defaults to all bit set.
+//
 // WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
 func (x *Light) WithCategoryBitMask(categoryBitMask uint) *Light {
 	x.inner.SetCategoryBitMask(categoryBitMask)
 	return x
 }
 
+// @property type @abstract Specifies the receiver's type. @discussion Defaults to SCNLightTypeOmni on iOS 8 and later, and on macOS 10.10 and later (otherwise defaults to SCNLightTypeAmbient).
+//
 // Type calls the underlying Type.
 func (x *Light) Type() string {
 	_r := x.inner.Type()
@@ -275,6 +341,8 @@ func (x *Light) SetType(type_ *foundation.NSString) {
 	x.inner.SetType(type_)
 }
 
+// @property color @abstract Specifies the receiver's color (NSColor or CGColorRef). Animatable. Defaults to white. @discussion The initial value is a NSColor. The renderer multiplies the light's color is by the color derived from the light's temperature.
+//
 // Color calls the underlying Color.
 func (x *Light) Color() objc.ID {
 	return x.inner.Color()
@@ -285,6 +353,8 @@ func (x *Light) SetColor(color objc.ID) {
 	x.inner.SetColor(color)
 }
 
+// @property temperature @abstract Specifies the receiver's temperature. @discussion This specifies the temperature of the light in Kelvin. The renderer multiplies the light's color by the color derived from the light's temperature. Defaults to 6500 (pure white). Animatable.
+//
 // Temperature calls the underlying Temperature.
 func (x *Light) Temperature() float64 {
 	return x.inner.Temperature()
@@ -295,6 +365,8 @@ func (x *Light) SetTemperature(temperature float64) {
 	x.inner.SetTemperature(temperature)
 }
 
+// @property intensity @abstract Specifies the receiver's intensity. @discussion This intensity is used to modulate the light color. When used with a physically-based material, this corresponds to the luminous flux of the light, expressed in lumens (lm). Defaults to 1000. Animatable.
+//
 // Intensity calls the underlying Intensity.
 func (x *Light) Intensity() float64 {
 	return x.inner.Intensity()
@@ -305,6 +377,8 @@ func (x *Light) SetIntensity(intensity float64) {
 	x.inner.SetIntensity(intensity)
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // Name calls the underlying Name.
 func (x *Light) Name() string {
 	_r := x.inner.Name()
@@ -319,6 +393,8 @@ func (x *Light) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// @property castsShadow @abstract Determines whether the receiver casts a shadow. Defaults to NO. @discussion Shadows are only supported by spot and directional lights.
+//
 // CastsShadow calls the underlying CastsShadow.
 func (x *Light) CastsShadow() bool {
 	return x.inner.CastsShadow()
@@ -329,6 +405,8 @@ func (x *Light) SetCastsShadow(castsShadow bool) {
 	x.inner.SetCastsShadow(castsShadow)
 }
 
+// @property shadowColor @abstract Specifies the color (CGColorRef or NSColor) of the shadow casted by the receiver. Defaults to black. Animatable. @discussion On iOS 9 or earlier and macOS 10.11 or earlier, this defaults to black 50% transparent.
+//
 // ShadowColor calls the underlying ShadowColor.
 func (x *Light) ShadowColor() objc.ID {
 	return x.inner.ShadowColor()
@@ -339,6 +417,8 @@ func (x *Light) SetShadowColor(shadowColor objc.ID) {
 	x.inner.SetShadowColor(shadowColor)
 }
 
+// @property shadowRadius @abstract Specifies the sample radius used to render the receiver’s shadow. Default value is 3.0. Animatable.
+//
 // ShadowRadius calls the underlying ShadowRadius.
 func (x *Light) ShadowRadius() float64 {
 	return x.inner.ShadowRadius()
@@ -349,6 +429,8 @@ func (x *Light) SetShadowRadius(shadowRadius float64) {
 	x.inner.SetShadowRadius(shadowRadius)
 }
 
+// @property shadowMapSize @abstract Specifies the size of the shadow map. @discussion The larger the shadow map is the more precise the shadows are but the slower the computation is. If set to {0,0} the size of the shadow map is automatically chosen. Defaults to {0,0}.
+//
 // ShadowMapSize calls the underlying ShadowMapSize.
 func (x *Light) ShadowMapSize() corefoundation.CGSize {
 	return x.inner.ShadowMapSize()
@@ -359,6 +441,8 @@ func (x *Light) SetShadowMapSize(shadowMapSize corefoundation.CGSize) {
 	x.inner.SetShadowMapSize(shadowMapSize)
 }
 
+// @property shadowSampleCount @abstract Specifies the number of sample per fragment to compute the shadow map. Defaults to 0. @discussion On macOS 10.11 or earlier, the shadowSampleCount defaults to 16. On iOS 9 or earlier it defaults to 1.0. On macOS 10.12, iOS 10 and greater, when the shadowSampleCount is set to 0, a default sample count is chosen depending on the platform.
+//
 // ShadowSampleCount calls the underlying ShadowSampleCount.
 func (x *Light) ShadowSampleCount() uint {
 	return x.inner.ShadowSampleCount()
@@ -369,6 +453,8 @@ func (x *Light) SetShadowSampleCount(shadowSampleCount uint) {
 	x.inner.SetShadowSampleCount(shadowSampleCount)
 }
 
+// @property shadowMode @abstract Specified the mode to use to cast shadows. See above for the available modes and their description. Defaults to SCNShadowModeDefered on 10.9 and before, defaults to SCNShadowModeForward otherwise.
+//
 // ShadowMode calls the underlying ShadowMode.
 func (x *Light) ShadowMode() SCNShadowMode {
 	return SCNShadowMode(x.inner.ShadowMode())
@@ -379,6 +465,8 @@ func (x *Light) SetShadowMode(shadowMode SCNShadowMode) {
 	x.inner.SetShadowMode(raw.SCNShadowMode(shadowMode))
 }
 
+// @property shadowBias @abstract Specifies the correction to apply to the shadow map to correct acne artefacts. It is multiplied by an implementation-specific value to create a constant depth offset. Defaults to 1.0
+//
 // ShadowBias calls the underlying ShadowBias.
 func (x *Light) ShadowBias() float64 {
 	return x.inner.ShadowBias()
@@ -389,6 +477,8 @@ func (x *Light) SetShadowBias(shadowBias float64) {
 	x.inner.SetShadowBias(shadowBias)
 }
 
+// @property automaticallyAdjustsShadowProjection @abstract Specifies if the shadow map projection should be done automatically or manually by the user. Defaults to YES.
+//
 // AutomaticallyAdjustsShadowProjection calls the underlying AutomaticallyAdjustsShadowProjection.
 func (x *Light) AutomaticallyAdjustsShadowProjection() bool {
 	return x.inner.AutomaticallyAdjustsShadowProjection()
@@ -399,6 +489,8 @@ func (x *Light) SetAutomaticallyAdjustsShadowProjection(automaticallyAdjustsShad
 	x.inner.SetAutomaticallyAdjustsShadowProjection(automaticallyAdjustsShadowProjection)
 }
 
+// @property maximumShadowDistance @abstract Specifies the maximum distance from the viewpoint from which the shadows for the receiver light won't be computed. Defaults to 100.0.
+//
 // MaximumShadowDistance calls the underlying MaximumShadowDistance.
 func (x *Light) MaximumShadowDistance() float64 {
 	return x.inner.MaximumShadowDistance()
@@ -409,6 +501,8 @@ func (x *Light) SetMaximumShadowDistance(maximumShadowDistance float64) {
 	x.inner.SetMaximumShadowDistance(maximumShadowDistance)
 }
 
+// @property forcesBackFaceCasters @abstract Render only back faces of the shadow caster when enabled. Defaults to NO. This is a behavior change from previous releases.
+//
 // ForcesBackFaceCasters calls the underlying ForcesBackFaceCasters.
 func (x *Light) ForcesBackFaceCasters() bool {
 	return x.inner.ForcesBackFaceCasters()
@@ -419,6 +513,8 @@ func (x *Light) SetForcesBackFaceCasters(forcesBackFaceCasters bool) {
 	x.inner.SetForcesBackFaceCasters(forcesBackFaceCasters)
 }
 
+// @property sampleDistributedShadowMaps @abstract Use the sample distribution of the main rendering to better fit the shadow frusta. Defaults to NO.
+//
 // SampleDistributedShadowMaps calls the underlying SampleDistributedShadowMaps.
 func (x *Light) SampleDistributedShadowMaps() bool {
 	return x.inner.SampleDistributedShadowMaps()
@@ -429,6 +525,8 @@ func (x *Light) SetSampleDistributedShadowMaps(sampleDistributedShadowMaps bool)
 	x.inner.SetSampleDistributedShadowMaps(sampleDistributedShadowMaps)
 }
 
+// @property shadowCascadeCount @abstract Specifies the number of distinct shadow maps that will be computed for the receiver light. Defaults to 1. Maximum is 4.
+//
 // ShadowCascadeCount calls the underlying ShadowCascadeCount.
 func (x *Light) ShadowCascadeCount() uint {
 	return x.inner.ShadowCascadeCount()
@@ -439,6 +537,8 @@ func (x *Light) SetShadowCascadeCount(shadowCascadeCount uint) {
 	x.inner.SetShadowCascadeCount(shadowCascadeCount)
 }
 
+// @property shadowCascadeSplittingFactor @abstract Specifies a factor to interpolate between linear splitting (0) and logarithmic splitting (1). Defaults to 0.15.
+//
 // ShadowCascadeSplittingFactor calls the underlying ShadowCascadeSplittingFactor.
 func (x *Light) ShadowCascadeSplittingFactor() float64 {
 	return x.inner.ShadowCascadeSplittingFactor()
@@ -449,6 +549,8 @@ func (x *Light) SetShadowCascadeSplittingFactor(shadowCascadeSplittingFactor flo
 	x.inner.SetShadowCascadeSplittingFactor(shadowCascadeSplittingFactor)
 }
 
+// @property orthographicScale @abstract Specifies the orthographic scale used to render from the directional light into the shadow map. Defaults to 1. @discussion This is only applicable for directional lights.
+//
 // OrthographicScale calls the underlying OrthographicScale.
 func (x *Light) OrthographicScale() float64 {
 	return x.inner.OrthographicScale()
@@ -459,6 +561,8 @@ func (x *Light) SetOrthographicScale(orthographicScale float64) {
 	x.inner.SetOrthographicScale(orthographicScale)
 }
 
+// @property zNear @abstract Specifies the minimal distance between the light and the surface to cast shadow on. If a surface is closer to the light than this minimal distance, then the surface won't be shadowed. The near value must be different than zero. Animatable. Defaults to 1.
+//
 // ZNear calls the underlying ZNear.
 func (x *Light) ZNear() float64 {
 	return x.inner.ZNear()
@@ -469,6 +573,8 @@ func (x *Light) SetZNear(zNear float64) {
 	x.inner.SetZNear(zNear)
 }
 
+// @property zFar @abstract Specifies the maximal distance between the light and a visible surface to cast shadow on. If a surface is further from the light than this maximal distance, then the surface won't be shadowed. Animatable. Defaults to 100.
+//
 // ZFar calls the underlying ZFar.
 func (x *Light) ZFar() float64 {
 	return x.inner.ZFar()
@@ -479,6 +585,8 @@ func (x *Light) SetZFar(zFar float64) {
 	x.inner.SetZFar(zFar)
 }
 
+// @property attenuationStartDistance @abstract The distance at which the attenuation starts (Omni or Spot light types only). Animatable. Defaults to 0.
+//
 // AttenuationStartDistance calls the underlying AttenuationStartDistance.
 func (x *Light) AttenuationStartDistance() float64 {
 	return x.inner.AttenuationStartDistance()
@@ -489,6 +597,8 @@ func (x *Light) SetAttenuationStartDistance(attenuationStartDistance float64) {
 	x.inner.SetAttenuationStartDistance(attenuationStartDistance)
 }
 
+// @property attenuationEndDistance @abstract The distance at which the attenuation ends (Omni or Spot light types only). Animatable. Defaults to 0.
+//
 // AttenuationEndDistance calls the underlying AttenuationEndDistance.
 func (x *Light) AttenuationEndDistance() float64 {
 	return x.inner.AttenuationEndDistance()
@@ -499,6 +609,8 @@ func (x *Light) SetAttenuationEndDistance(attenuationEndDistance float64) {
 	x.inner.SetAttenuationEndDistance(attenuationEndDistance)
 }
 
+// @property attenuationFalloffExponent @abstract Specifies the attenuation between the start and end attenuation distances. 0 means a constant attenuation, 1 a linear attenuation and 2 a quadratic attenuation, but any positive value will work (Omni or Spot light types only). Animatable. Defaults to 2.
+//
 // AttenuationFalloffExponent calls the underlying AttenuationFalloffExponent.
 func (x *Light) AttenuationFalloffExponent() float64 {
 	return x.inner.AttenuationFalloffExponent()
@@ -509,6 +621,8 @@ func (x *Light) SetAttenuationFalloffExponent(attenuationFalloffExponent float64
 	x.inner.SetAttenuationFalloffExponent(attenuationFalloffExponent)
 }
 
+// @property spotInnerAngle @abstract The angle in degrees between the spot direction and the lit element below which the lighting is at full strength. Animatable. Defaults to 0.
+//
 // SpotInnerAngle calls the underlying SpotInnerAngle.
 func (x *Light) SpotInnerAngle() float64 {
 	return x.inner.SpotInnerAngle()
@@ -519,6 +633,8 @@ func (x *Light) SetSpotInnerAngle(spotInnerAngle float64) {
 	x.inner.SetSpotInnerAngle(spotInnerAngle)
 }
 
+// @property spotOuterAngle @abstract The angle in degrees between the spot direction and the lit element after which the lighting is at zero strength. Animatable. Defaults to 45 degrees.
+//
 // SpotOuterAngle calls the underlying SpotOuterAngle.
 func (x *Light) SpotOuterAngle() float64 {
 	return x.inner.SpotOuterAngle()
@@ -529,6 +645,8 @@ func (x *Light) SetSpotOuterAngle(spotOuterAngle float64) {
 	x.inner.SetSpotOuterAngle(spotOuterAngle)
 }
 
+// @property IESProfileURL @abstract Specifies the IES file from which the shape, direction, and intensity of illumination is determined. Defaults to nil.
+//
 // IESProfileURL calls the underlying IESProfileURL.
 func (x *Light) IESProfileURL() *foundation.NSURL {
 	return x.inner.IESProfileURL()
@@ -539,6 +657,8 @@ func (x *Light) SetIESProfileURL(iESProfileURL string) {
 	x.inner.SetIESProfileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(iESProfileURL)))
 }
 
+// @property sphericalHarmonicsCoefficients @abstract The receiver's spherical harmonics coefficients. @discussion Currently spherical harmonics are only supported by light probes (SCNLightTypeProbe). The data is an array of 27 32-bit floating-point values, containing three non-interleaved data sets corresponding to the red, green, and blue sets of coefficients.
+//
 // SphericalHarmonicsCoefficients calls the underlying SphericalHarmonicsCoefficients.
 func (x *Light) SphericalHarmonicsCoefficients() *foundation.NSData {
 	return x.inner.SphericalHarmonicsCoefficients()
@@ -623,6 +743,8 @@ func (x *Light) ProbeEnvironment() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property areaType @abstract Determines the shape of a light of type SCNLightTypeArea. Defaults to SCNLightAreaTypeRectangle.
+//
 // AreaType calls the underlying AreaType.
 func (x *Light) AreaType() SCNLightAreaType {
 	return SCNLightAreaType(x.inner.AreaType())
@@ -633,6 +755,8 @@ func (x *Light) SetAreaType(areaType SCNLightAreaType) {
 	x.inner.SetAreaType(raw.SCNLightAreaType(areaType))
 }
 
+// @property areaExtents @abstract Determines the extents of a light of type SCNLightTypeArea. Defaults to (1.0, 1.0, 1.0). @discussion The extents are interpreted differently for each type of area light SCNLightAreaTypeLine      : areaExtents.x   = (width) SCNLightAreaTypeRectangle : areaExtents.xy  = (width, height) SCNLightAreaTypePolygon   : ignored (see `areaPolygonVertices`)
+//
 // AreaExtents calls the underlying AreaExtents.
 func (x *Light) AreaExtents() unsafe.Pointer {
 	return x.inner.AreaExtents()
@@ -643,6 +767,8 @@ func (x *Light) SetAreaExtents(areaExtents unsafe.Pointer) {
 	x.inner.SetAreaExtents(areaExtents)
 }
 
+// @property areaPolygonVertices @abstract Determines the shape of light of an area light of type SCNLightAreaTypePolygon. Defaults nil. @discussion An array of CGPoint values corresponding to the coordinates of the polygon's vertices in the XY plane.
+//
 // AreaPolygonVertices returns the collection as a Go slice.
 func (x *Light) AreaPolygonVertices() []*foundation.NSValue {
 	arr := x.inner.AreaPolygonVertices()
@@ -659,6 +785,8 @@ func (x *Light) SetAreaPolygonVertices(areaPolygonVertices *foundation.NSArray[*
 	x.inner.SetAreaPolygonVertices(areaPolygonVertices)
 }
 
+// @property drawsArea @abstract Determines whether the shape of a light of type SCNLightTypeArea is drawn in the scene. Defaults to YES.
+//
 // DrawsArea calls the underlying DrawsArea.
 func (x *Light) DrawsArea() bool {
 	return x.inner.DrawsArea()
@@ -669,6 +797,8 @@ func (x *Light) SetDrawsArea(drawsArea bool) {
 	x.inner.SetDrawsArea(drawsArea)
 }
 
+// @property doubleSided @abstract Determines whether a light of type SCNLightTypeArea is double-sided. Defaults NO. @discussion Area lights of type SCNLightAreaTypeRectangle or SCNLightAreaTypePolygon emit light along the -Z axis. When set to YES, they also emit light along the +Z axis.
+//
 // DoubleSided calls the underlying DoubleSided.
 func (x *Light) DoubleSided() bool {
 	return x.inner.DoubleSided()
@@ -679,6 +809,8 @@ func (x *Light) SetDoubleSided(doubleSided bool) {
 	x.inner.SetDoubleSided(doubleSided)
 }
 
+// @property gobo @abstract Specifies the gobo (or "cookie") of the light, used to control the shape of emitted light. @discussion Gobos are only supported by spot lights.
+//
 // Gobo calls the underlying Gobo.
 func (x *Light) Gobo() *MaterialProperty {
 	_r := x.inner.Gobo()
@@ -688,6 +820,8 @@ func (x *Light) Gobo() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property categoryBitMask @abstract Determines the node categories that will be lit by the receiver. Defaults to all bit set.
+//
 // CategoryBitMask calls the underlying CategoryBitMask.
 func (x *Light) CategoryBitMask() uint {
 	return x.inner.CategoryBitMask()
@@ -698,11 +832,15 @@ func (x *Light) SetCategoryBitMask(categoryBitMask uint) {
 	x.inner.SetCategoryBitMask(categoryBitMask)
 }
 
+// @method attributeForKey: @param key The key for which to return the corresponding attribute. @abstract Returns the attribute for the specified key. The valid keys are described in the "Light Attributes" constants.
+//
 // AttributeForKey calls the underlying AttributeForKey.
 func (x *Light) AttributeForKey(key string) objc.ID {
 	return x.inner.AttributeForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// @method setAttribute:forKey: @param attribute The attribute for the property identified by key. @param key The name of a property. @abstract Set the specified attribute for the specified key. The valid keys are described in the "Light Attributes" constants.
+//
 // SetAttributeForKey calls the underlying SetAttributeForKey.
 func (x *Light) SetAttributeForKey(attribute objc.ID, key string) {
 	x.inner.SetAttributeForKey(attribute, foundation.NSStringStringWithUTF8String(key))

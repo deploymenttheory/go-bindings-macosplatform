@@ -35,6 +35,8 @@ func MTRBaseClusterRVCOperationalStateFromID(id objc.ID) *MTRBaseClusterRVCOpera
 	return &MTRBaseClusterRVCOperationalState{inner: raw.MTRBaseClusterRVCOperationalStateFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterRVCOperationalStateWithDeviceEndpointIDQueue creates a new [MTRBaseClusterRVCOperationalState].
 func NewMTRBaseClusterRVCOperationalStateWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterRVCOperationalState {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterRVCOperationalState")), objc.RegisterName("alloc"))
@@ -42,6 +44,8 @@ func NewMTRBaseClusterRVCOperationalStateWithDeviceEndpointIDQueue(device *raw.M
 	return &MTRBaseClusterRVCOperationalState{inner: raw.MTRBaseClusterRVCOperationalStateFromID(_id)}
 }
 
+// Command Pause Upon receipt, the device SHALL pause its operation if it is possible based on the current function of the server.
+//
 // PauseWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterRVCOperationalState) PauseWithParamsCompletion(ctx context.Context, params *raw.MTRRVCOperationalStateClusterPauseParams) (*MTRRVCOperationalStateClusterOperationalCommandResponseParams, error) {
 	type _result struct {
@@ -94,6 +98,8 @@ func (x *MTRBaseClusterRVCOperationalState) PauseWithCompletion(ctx context.Cont
 	}
 }
 
+// Command Resume Upon receipt, the device SHALL resume its operation from the point it was at when it received the Pause command, or from the point when it was paused by means outside of this cluster (for example by manual button press).
+//
 // ResumeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterRVCOperationalState) ResumeWithParamsCompletion(ctx context.Context, params *raw.MTRRVCOperationalStateClusterResumeParams) (*MTRRVCOperationalStateClusterOperationalCommandResponseParams, error) {
 	type _result struct {
@@ -146,6 +152,8 @@ func (x *MTRBaseClusterRVCOperationalState) ResumeWithCompletion(ctx context.Con
 	}
 }
 
+// Command GoHome On receipt of this command, the device SHALL start seeking the charging dock, if possible in the current state of the device.
+//
 // GoHomeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterRVCOperationalState) GoHomeWithParamsCompletion(ctx context.Context, params *raw.MTRRVCOperationalStateClusterGoHomeParams) (*MTRRVCOperationalStateClusterOperationalCommandResponseParams, error) {
 	type _result struct {

@@ -34,6 +34,8 @@ func MatrixSoftMaxGradientFromID(id objc.ID) *MatrixSoftMaxGradient {
 	return &MatrixSoftMaxGradient{inner: raw.MPSMatrixSoftMaxGradientFromID(id)}
 }
 
+// @abstract   Initialize an MPSMatrixSoftMaxGradient object on a device. @param      device          The device on which the kernel will execute. @return     A valid MPSMatrixSoftMaxGradient object or nil, if failure.
+//
 // NewMatrixSoftMaxGradientWithDevice creates a new [MatrixSoftMaxGradient].
 func NewMatrixSoftMaxGradientWithDevice(device metal.MTLDevice) *MatrixSoftMaxGradient {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixSoftMaxGradient")), objc.RegisterName("alloc"))
@@ -41,6 +43,8 @@ func NewMatrixSoftMaxGradientWithDevice(device metal.MTLDevice) *MatrixSoftMaxGr
 	return &MatrixSoftMaxGradient{inner: raw.MPSMatrixSoftMaxGradientFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixSoftMaxGradient @param      device      The MTLDevice on which to make the MPSMatrixSoftMaxGradient @return     A new MPSMatrixSoftMaxGradient object, or nil if failure.
+//
 // NewMatrixSoftMaxGradientWithCoderDevice creates a new [MatrixSoftMaxGradient].
 func NewMatrixSoftMaxGradientWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MatrixSoftMaxGradient {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixSoftMaxGradient")), objc.RegisterName("alloc"))
@@ -48,60 +52,80 @@ func NewMatrixSoftMaxGradientWithCoderDevice(aDecoder *foundation.NSCoder, devic
 	return &MatrixSoftMaxGradient{inner: raw.MPSMatrixSoftMaxGradientFromID(_id)}
 }
 
+// @property   sourceRows @discussion The number of rows to consider from the sources in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrices available starting from [primary/secondary]SourceMatrixOrigin.x, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: primarySourceMatrixOrigin, secondarySourceMatrixOrigin and resultMatrixOrigin from MPSMatrixBinaryKernel can be used to control the starting points in the primary source, secondary source, and result matrices respectively.
+//
 // WithSourceRows sets the sourceRows property and returns the receiver for chaining.
 func (x *MatrixSoftMaxGradient) WithSourceRows(sourceRows uint) *MatrixSoftMaxGradient {
 	x.inner.SetSourceRows(sourceRows)
 	return x
 }
 
+// @property   sourceColumns @discussion The number of columns to consider from the sources in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrices available starting from [primary/secondary]SourceMatrixOrigin.y, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: primarySourceMatrixOrigin, secondarySourceMatrixOrigin and resultMatrixOrigin from MPSMatrixBinaryKernel can be used to control the starting points in the primary source, secondary source, and result matrices respectively.
+//
 // WithSourceColumns sets the sourceColumns property and returns the receiver for chaining.
 func (x *MatrixSoftMaxGradient) WithSourceColumns(sourceColumns uint) *MatrixSoftMaxGradient {
 	x.inner.SetSourceColumns(sourceColumns)
 	return x
 }
 
+// @property   primarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixSoftMaxGradient) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSoftMaxGradient {
 	x.inner.MPSMatrixBinaryKernel.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
 	return x
 }
 
+// @property   secondarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixSoftMaxGradient) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSoftMaxGradient {
 	x.inner.MPSMatrixBinaryKernel.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
 	return x
 }
 
+// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixSoftMaxGradient) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSoftMaxGradient {
 	x.inner.MPSMatrixBinaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
 	return x
 }
 
+// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+//
 // WithBatchStart sets the batchStart property and returns the receiver for chaining.
 func (x *MatrixSoftMaxGradient) WithBatchStart(batchStart uint) *MatrixSoftMaxGradient {
 	x.inner.MPSMatrixBinaryKernel.SetBatchStart(batchStart)
 	return x
 }
 
+// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+//
 // WithBatchSize sets the batchSize property and returns the receiver for chaining.
 func (x *MatrixSoftMaxGradient) WithBatchSize(batchSize uint) *MatrixSoftMaxGradient {
 	x.inner.MPSMatrixBinaryKernel.SetBatchSize(batchSize)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixSoftMaxGradient) WithOptions(options mpscore.MPSKernelOptions) *MatrixSoftMaxGradient {
 	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixSoftMaxGradient) WithLabel(label string) *MatrixSoftMaxGradient {
 	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @abstract   Encode a MPSMatrixSoftMaxGradient object to a command buffer. @param      commandBuffer       A valid MTLCommandBuffer to receive the encoded kernel. @param      gradientMatrix      A MPSMatrix object containing gradient values with respect to the forward operation's output.  dL_dY in the class description. @param      forwardOutputMatrix A MPSMatrix object containing the output values from the forward operation.  Y in the class description. @param      resultMatrix        The MPSMatrix object to hold the resulting gradient values with respect to the forward operation's input.  dL_dX in the class description.
+//
 // EncodeToCommandBufferGradientMatrixForwardOutputMatrixResultMatrix calls the underlying EncodeToCommandBufferGradientMatrixForwardOutputMatrixResultMatrix.
 func (x *MatrixSoftMaxGradient) EncodeToCommandBufferGradientMatrixForwardOutputMatrixResultMatrix(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, forwardOutputMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix) {
 	x.inner.EncodeToCommandBufferGradientMatrixForwardOutputMatrixResultMatrix(commandBuffer, gradientMatrix, forwardOutputMatrix, resultMatrix)
@@ -116,6 +140,8 @@ func (x *MatrixSoftMaxGradient) CopyWithZoneDevice(zone unsafe.Pointer, device m
 	return &MatrixSoftMaxGradient{inner: _r}
 }
 
+// @property   sourceRows @discussion The number of rows to consider from the sources in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrices available starting from [primary/secondary]SourceMatrixOrigin.x, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: primarySourceMatrixOrigin, secondarySourceMatrixOrigin and resultMatrixOrigin from MPSMatrixBinaryKernel can be used to control the starting points in the primary source, secondary source, and result matrices respectively.
+//
 // SourceRows calls the underlying SourceRows.
 func (x *MatrixSoftMaxGradient) SourceRows() uint {
 	return x.inner.SourceRows()
@@ -126,6 +152,8 @@ func (x *MatrixSoftMaxGradient) SetSourceRows(sourceRows uint) {
 	x.inner.SetSourceRows(sourceRows)
 }
 
+// @property   sourceColumns @discussion The number of columns to consider from the sources in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrices available starting from [primary/secondary]SourceMatrixOrigin.y, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: primarySourceMatrixOrigin, secondarySourceMatrixOrigin and resultMatrixOrigin from MPSMatrixBinaryKernel can be used to control the starting points in the primary source, secondary source, and result matrices respectively.
+//
 // SourceColumns calls the underlying SourceColumns.
 func (x *MatrixSoftMaxGradient) SourceColumns() uint {
 	return x.inner.SourceColumns()

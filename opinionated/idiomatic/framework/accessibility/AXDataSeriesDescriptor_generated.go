@@ -46,24 +46,32 @@ func NewDataSeriesDescriptorWithAttributedNameIsContinuousDataPoints(attributedN
 	return &DataSeriesDescriptor{inner: raw.AXDataSeriesDescriptorFromID(_id)}
 }
 
+// The name or title of this data series.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *DataSeriesDescriptor) WithName(name string) *DataSeriesDescriptor {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// An attributed version of the name of this data series. When set, this will be used instead of `name`.
+//
 // WithAttributedName sets the attributedName property and returns the receiver for chaining.
 func (x *DataSeriesDescriptor) WithAttributedName(attributedName *foundation.NSAttributedString) *DataSeriesDescriptor {
 	x.inner.SetAttributedName(attributedName)
 	return x
 }
 
+// Whether or not this data series should be treated as continuous.
+//
 // WithIsContinuous sets the isContinuous property and returns the receiver for chaining.
 func (x *DataSeriesDescriptor) WithIsContinuous(isContinuous bool) *DataSeriesDescriptor {
 	x.inner.SetIsContinuous(isContinuous)
 	return x
 }
 
+// The data points that make up the series.
+//
 // WithDataPoints sets the collection, converting the Go slice to an NSArray.
 func (x *DataSeriesDescriptor) WithDataPoints(items ...*raw.AXDataPoint) *DataSeriesDescriptor {
 	if len(items) == 0 {
@@ -82,6 +90,8 @@ func (x *DataSeriesDescriptor) WithDataPoints(items ...*raw.AXDataPoint) *DataSe
 	return x
 }
 
+// The name or title of this data series.
+//
 // Name calls the underlying Name.
 func (x *DataSeriesDescriptor) Name() string {
 	_r := x.inner.Name()
@@ -96,6 +106,8 @@ func (x *DataSeriesDescriptor) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// An attributed version of the name of this data series. When set, this will be used instead of `name`.
+//
 // AttributedName calls the underlying AttributedName.
 func (x *DataSeriesDescriptor) AttributedName() *foundation.NSAttributedString {
 	return x.inner.AttributedName()
@@ -106,6 +118,8 @@ func (x *DataSeriesDescriptor) SetAttributedName(attributedName *foundation.NSAt
 	x.inner.SetAttributedName(attributedName)
 }
 
+// Whether or not this data series should be treated as continuous.
+//
 // IsContinuous calls the underlying IsContinuous.
 func (x *DataSeriesDescriptor) IsContinuous() bool {
 	return x.inner.IsContinuous()
@@ -116,6 +130,8 @@ func (x *DataSeriesDescriptor) SetIsContinuous(isContinuous bool) {
 	x.inner.SetIsContinuous(isContinuous)
 }
 
+// The data points that make up the series.
+//
 // DataPoints returns the collection as a Go slice.
 func (x *DataSeriesDescriptor) DataPoints() []*DataPoint {
 	arr := x.inner.DataPoints()

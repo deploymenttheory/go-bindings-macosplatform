@@ -36,33 +36,45 @@ func NewPickerUpdateConfiguration() *PickerUpdateConfiguration {
 	return &PickerUpdateConfiguration{inner: raw.PHPickerUpdateConfigurationFromID(_id)}
 }
 
+// The maximum number of assets that can be selected.
+//
 // WithSelectionLimit sets the selectionLimit property and returns the receiver for chaining.
 func (x *PickerUpdateConfiguration) WithSelectionLimit(selectionLimit int) *PickerUpdateConfiguration {
 	x.inner.SetSelectionLimit(selectionLimit)
 	return x
 }
 
+// Edges of the picker that have no margin between the content and the edge (e.g. without bars in between).
+//
 // WithEdgesWithoutContentMargins sets the edgesWithoutContentMargins property and returns the receiver for chaining.
 func (x *PickerUpdateConfiguration) WithEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge) *PickerUpdateConfiguration {
 	x.inner.SetEdgesWithoutContentMargins(edgesWithoutContentMargins)
 	return x
 }
 
+// The maximum number of assets that can be selected.
+//
 // SelectionLimit calls the underlying SelectionLimit.
 func (x *PickerUpdateConfiguration) SelectionLimit() int {
 	return x.inner.SelectionLimit()
 }
 
+// The maximum number of assets that can be selected.
+//
 // SetSelectionLimit calls the underlying SetSelectionLimit.
 func (x *PickerUpdateConfiguration) SetSelectionLimit(selectionLimit int) {
 	x.inner.SetSelectionLimit(selectionLimit)
 }
 
+// Edges of the picker that have no margin between the content and the edge (e.g. without bars in between).
+//
 // EdgesWithoutContentMargins calls the underlying EdgesWithoutContentMargins.
 func (x *PickerUpdateConfiguration) EdgesWithoutContentMargins() appkit.NSDirectionalRectEdge {
 	return x.inner.EdgesWithoutContentMargins()
 }
 
+// Edges of the picker that have no margin between the content and the edge (e.g. without bars in between).
+//
 // SetEdgesWithoutContentMargins calls the underlying SetEdgesWithoutContentMargins.
 func (x *PickerUpdateConfiguration) SetEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge) {
 	x.inner.SetEdgesWithoutContentMargins(edgesWithoutContentMargins)

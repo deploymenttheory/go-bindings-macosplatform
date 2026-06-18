@@ -31,6 +31,8 @@ func ProgressReportingCapabilityFromID(id objc.ID) *ProgressReportingCapability 
 	return &ProgressReportingCapability{inner: raw.CLSProgressReportingCapabilityFromID(id)}
 }
 
+// @abstract       Initialize and configure the type of progress reporting capability @param         kind        The kind of progress reporting capability @param         details     An optional localized string describing the capability. For example: "Reports percentage of progress", "Reports overall score". Schoolwork will use an appropriate default string if one is not provided.
+//
 // NewProgressReportingCapabilityWithKindDetails creates a new [ProgressReportingCapability].
 func NewProgressReportingCapabilityWithKindDetails(kind CLSProgressReportingCapabilityKind, details string) *ProgressReportingCapability {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLSProgressReportingCapability")), objc.RegisterName("alloc"))
@@ -38,11 +40,15 @@ func NewProgressReportingCapabilityWithKindDetails(kind CLSProgressReportingCapa
 	return &ProgressReportingCapability{inner: raw.CLSProgressReportingCapabilityFromID(_id)}
 }
 
+// @abstract      Returns the kind of progress reporting capability
+//
 // Kind calls the underlying Kind.
 func (x *ProgressReportingCapability) Kind() CLSProgressReportingCapabilityKind {
 	return CLSProgressReportingCapabilityKind(x.inner.Kind())
 }
 
+// @abstract      Returns progress reporting details
+//
 // Details calls the underlying Details.
 func (x *ProgressReportingCapability) Details() string {
 	_r := x.inner.Details()

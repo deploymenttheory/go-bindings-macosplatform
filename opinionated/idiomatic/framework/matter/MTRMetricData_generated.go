@@ -36,16 +36,22 @@ func NewMTRMetricData() *MTRMetricData {
 	return &MTRMetricData{inner: raw.MTRMetricDataFromID(_id)}
 }
 
+// Value for the metric data. The value may be nil depending on the event emitted.
+//
 // Value calls the underlying Value.
 func (x *MTRMetricData) Value() *foundation.NSNumber {
 	return x.inner.Value()
 }
 
+// Error code for the metric data. This value, when not nil, holds the error code value of the operation associated with the event. Interpretation of the error code value dependents on the metric being emitted.
+//
 // ErrorCode calls the underlying ErrorCode.
 func (x *MTRMetricData) ErrorCode() *foundation.NSNumber {
 	return x.inner.ErrorCode()
 }
 
+// Duration of event associated with the metric. This value may be nil depending on the event emitted. When not nil, the value of duration is of type NSTimeInterval.
+//
 // Duration calls the underlying Duration.
 func (x *MTRMetricData) Duration() *foundation.NSNumber {
 	return x.inner.Duration()

@@ -37,24 +37,32 @@ func NewCardioidDirectivityModelSubbandParameters() *CardioidDirectivityModelSub
 	return &CardioidDirectivityModelSubbandParameters{inner: raw.PHASECardioidDirectivityModelSubbandParametersFromID(_id)}
 }
 
+// @property frequency @abstract The frequency of the subband, in hertz. @note Values are clamped to the range [20.0, 20000.0]. Default value is 1000.0.
+//
 // WithFrequency sets the frequency property and returns the receiver for chaining.
 func (x *CardioidDirectivityModelSubbandParameters) WithFrequency(frequency float64) *CardioidDirectivityModelSubbandParameters {
 	x.inner.SetFrequency(frequency)
 	return x
 }
 
+// @property pattern @abstract The directivity pattern. @note Values are clamped to the range [0.0, 1.0]. Default value is 0.0. 0.0 is omnidirectional. 0.5 is cardioid. 1.0 is dipole.
+//
 // WithPattern sets the pattern property and returns the receiver for chaining.
 func (x *CardioidDirectivityModelSubbandParameters) WithPattern(pattern float64) *CardioidDirectivityModelSubbandParameters {
 	x.inner.SetPattern(pattern)
 	return x
 }
 
+// @property sharpness @abstract The sharpness of the directivity pattern. @note Values are clamped to the range [1.0, DBL_MAX]. Default value is 1.0. Values > 1.0 increase sharpness.
+//
 // WithSharpness sets the sharpness property and returns the receiver for chaining.
 func (x *CardioidDirectivityModelSubbandParameters) WithSharpness(sharpness float64) *CardioidDirectivityModelSubbandParameters {
 	x.inner.SetSharpness(sharpness)
 	return x
 }
 
+// @property frequency @abstract The frequency of the subband, in hertz. @note Values are clamped to the range [20.0, 20000.0]. Default value is 1000.0.
+//
 // Frequency calls the underlying Frequency.
 func (x *CardioidDirectivityModelSubbandParameters) Frequency() float64 {
 	return x.inner.Frequency()
@@ -65,6 +73,8 @@ func (x *CardioidDirectivityModelSubbandParameters) SetFrequency(frequency float
 	x.inner.SetFrequency(frequency)
 }
 
+// @property pattern @abstract The directivity pattern. @note Values are clamped to the range [0.0, 1.0]. Default value is 0.0. 0.0 is omnidirectional. 0.5 is cardioid. 1.0 is dipole.
+//
 // Pattern calls the underlying Pattern.
 func (x *CardioidDirectivityModelSubbandParameters) Pattern() float64 {
 	return x.inner.Pattern()
@@ -75,6 +85,8 @@ func (x *CardioidDirectivityModelSubbandParameters) SetPattern(pattern float64) 
 	x.inner.SetPattern(pattern)
 }
 
+// @property sharpness @abstract The sharpness of the directivity pattern. @note Values are clamped to the range [1.0, DBL_MAX]. Default value is 1.0. Values > 1.0 increase sharpness.
+//
 // Sharpness calls the underlying Sharpness.
 func (x *CardioidDirectivityModelSubbandParameters) Sharpness() float64 {
 	return x.inner.Sharpness()

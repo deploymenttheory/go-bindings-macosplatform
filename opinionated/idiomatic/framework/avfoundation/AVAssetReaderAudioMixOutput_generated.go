@@ -31,6 +31,8 @@ func AssetReaderAudioMixOutputFromID(id objc.ID) *AssetReaderAudioMixOutput {
 	return &AssetReaderAudioMixOutput{inner: raw.AVAssetReaderAudioMixOutputFromID(id)}
 }
 
+// @method initWithAudioTracks:audioSettings: @abstract Creates an instance of AVAssetReaderAudioMixOutput for reading mixed audio from the specified audio tracks, with optional audio settings. @param tracks An NSArray of AVAssetTrack objects from which the created object should read sample buffers to be mixed. @param audioSettings An NSDictionary of audio settings to be used for audio output. @result An instance of AVAssetReaderAudioMixOutput. @discussion Each track must be one of the tracks owned by the target AVAssetReader's asset and must be of media type AVMediaTypeAudio. For non-nil values of audioSettings, the audio settings dictionary must contain values for keys in AVAudioSettings.h (linear PCM only). Initialization will fail if the audio settings cannot be used with the specified tracks. AVSampleRateConverterAudioQualityKey is not supported. A value of nil for audioSettings configures the output to return samples in a convenient uncompressed format, with sample rate and other properties determined according to the properties of the specified audio tracks as well as other considerations that may vary according to device capabilities, operating system version, and other factors. Therefore if you wish to perform any processing on the output, you must examine the CMAudioFormatDescription of the CMSampleBuffers that are provided in order to ensure that your processing is appropriately configured for the output format. This method throws an exception for any of the following reasons: - an audio track does not have media type AVMediaTypeAudio - an audio track belongs to a different AVAsset - the audio settings contains an AVSampleRateConverterAudioQualityKey - the output would be compressed
+//
 // NewAssetReaderAudioMixOutputWithAudioTracksAudioSettings creates a new [AssetReaderAudioMixOutput].
 func NewAssetReaderAudioMixOutputWithAudioTracksAudioSettings(audioTracks *foundation.NSArray[*raw.AVAssetTrack], audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AssetReaderAudioMixOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetReaderAudioMixOutput")), objc.RegisterName("alloc"))
@@ -38,30 +40,40 @@ func NewAssetReaderAudioMixOutputWithAudioTracksAudioSettings(audioTracks *found
 	return &AssetReaderAudioMixOutput{inner: raw.AVAssetReaderAudioMixOutputFromID(_id)}
 }
 
+// @property audioMix @abstract The audio mix used by the receiver. @discussion The value of this property is an AVAudioMix that can be used to specify how the volume of audio samples read from each source track will change over the timeline of the source asset. This property throws an exception for any of the following reasons: - an audio mix is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown) - setting an audio mix containing a track that was not used to create the receiver - an audio mix is set containing an invalid audio time pitch algorithm
+//
 // WithAudioMix sets the audioMix property and returns the receiver for chaining.
 func (x *AssetReaderAudioMixOutput) WithAudioMix(audioMix AudioMixProvider) *AssetReaderAudioMixOutput {
 	x.inner.SetAudioMix(audioMix.asAudioMix())
 	return x
 }
 
+// @property audioTimePitchAlgorithm @abstract Indicates the processing algorithm used to manage audio pitch for scaled audio edits. @discussion Constants for various time pitch algorithms, e.g. AVAudioTimePitchAlgorithmSpectral, are defined in AVAudioProcessingSettings.h.  An NSInvalidArgumentException will be raised if this property is set to a value other than the constants defined in that file. The default value is AVAudioTimePitchAlgorithmSpectral.
+//
 // WithAudioTimePitchAlgorithm sets the audioTimePitchAlgorithm property and returns the receiver for chaining.
 func (x *AssetReaderAudioMixOutput) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *AssetReaderAudioMixOutput {
 	x.inner.SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm)
 	return x
 }
 
+// @property alwaysCopiesSampleData @abstract Indicates whether or not the data in buffers gets copied before being vended to the client. @discussion When the value of this property is YES, the AVAssetReaderOutput will always vend a buffer with copied data to the client.  Data in such buffers can be freely modified by the client. When the value of this property is NO, the buffers vended to the client may not be copied.  Such buffers may still be referenced by other entities. The result of modifying a buffer whose data hasn't been copied is undefined.  Requesting buffers whose data hasn't been copied when possible can lead to performance improvements. The default value is YES. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown).
+//
 // WithAlwaysCopiesSampleData sets the alwaysCopiesSampleData property and returns the receiver for chaining.
 func (x *AssetReaderAudioMixOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderAudioMixOutput {
 	x.inner.AVAssetReaderOutput.SetAlwaysCopiesSampleData(alwaysCopiesSampleData)
 	return x
 }
 
+// @property supportsRandomAccess @abstract Indicates whether the asset reader output supports reconfiguration of the time ranges to read. @discussion When the value of this property is YES, the time ranges read by the asset reader output can be reconfigured during reading using the -resetForReadingTimeRanges: method.  This also prevents the attached AVAssetReader from progressing to AVAssetReaderStatusCompleted until -markConfigurationAsFinal has been invoked. The default value is NO, which means that the asset reader output may not be reconfigured once reading has begun.  When the value of this property is NO, AVAssetReader may be able to read media data more efficiently, particularly when multiple asset reader outputs are attached. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown) or after an AVAssetReaderOutput.Provider is attached.
+//
 // WithSupportsRandomAccess sets the supportsRandomAccess property and returns the receiver for chaining.
 func (x *AssetReaderAudioMixOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderAudioMixOutput {
 	x.inner.AVAssetReaderOutput.SetSupportsRandomAccess(supportsRandomAccess)
 	return x
 }
 
+// @property audioTracks @abstract The tracks from which the receiver reads mixed audio. @discussion The value of this property is an NSArray of AVAssetTracks owned by the target AVAssetReader's asset.
+//
 // AudioTracks returns the collection as a Go slice.
 func (x *AssetReaderAudioMixOutput) AudioTracks() []*AssetTrack {
 	arr := x.inner.AudioTracks()
@@ -73,11 +85,15 @@ func (x *AssetReaderAudioMixOutput) AudioTracks() []*AssetTrack {
 	})
 }
 
+// @property audioSettings @abstract The audio settings used by the receiver. @discussion The value of this property is an NSDictionary that contains values for keys from AVAudioSettings.h (linear PCM only).  A value of nil indicates that the receiver will return audio samples in a convenient uncompressed format, with sample rate and other properties determined according to the properties of the receiver's audio tracks.
+//
 // AudioSettings calls the underlying AudioSettings.
 func (x *AssetReaderAudioMixOutput) AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.AudioSettings()
 }
 
+// @property audioMix @abstract The audio mix used by the receiver. @discussion The value of this property is an AVAudioMix that can be used to specify how the volume of audio samples read from each source track will change over the timeline of the source asset. This property throws an exception for any of the following reasons: - an audio mix is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown) - setting an audio mix containing a track that was not used to create the receiver - an audio mix is set containing an invalid audio time pitch algorithm
+//
 // AudioMix calls the underlying AudioMix.
 func (x *AssetReaderAudioMixOutput) AudioMix() *AudioMix {
 	_r := x.inner.AudioMix()
@@ -92,6 +108,8 @@ func (x *AssetReaderAudioMixOutput) SetAudioMix(audioMix *raw.AVAudioMix) {
 	x.inner.SetAudioMix(audioMix)
 }
 
+// @property audioTimePitchAlgorithm @abstract Indicates the processing algorithm used to manage audio pitch for scaled audio edits. @discussion Constants for various time pitch algorithms, e.g. AVAudioTimePitchAlgorithmSpectral, are defined in AVAudioProcessingSettings.h.  An NSInvalidArgumentException will be raised if this property is set to a value other than the constants defined in that file. The default value is AVAudioTimePitchAlgorithmSpectral.
+//
 // AudioTimePitchAlgorithm calls the underlying AudioTimePitchAlgorithm.
 func (x *AssetReaderAudioMixOutput) AudioTimePitchAlgorithm() string {
 	_r := x.inner.AudioTimePitchAlgorithm()

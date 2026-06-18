@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A texture to be mapped onto SKSpriteNode instances.
+//
 // Texture wraps [raw.SKTexture] with a fluent Go API.
 type Texture struct {
 	inner *raw.SKTexture
@@ -39,18 +41,24 @@ func NewTexture() *Texture {
 	return &Texture{inner: raw.SKTextureFromID(_id)}
 }
 
+// The filtering mode the texture should use when not drawn at native size. Defaults to SKTextureFilteringLinear.
+//
 // WithFilteringMode sets the filteringMode property and returns the receiver for chaining.
 func (x *Texture) WithFilteringMode(filteringMode SKTextureFilteringMode) *Texture {
 	x.inner.SetFilteringMode(raw.SKTextureFilteringMode(filteringMode))
 	return x
 }
 
+// Request that the texture have mipmaps generated if possible. Only supported for power of 2 texture sizes.
+//
 // WithUsesMipmaps sets the usesMipmaps property and returns the receiver for chaining.
 func (x *Texture) WithUsesMipmaps(usesMipmaps bool) *Texture {
 	x.inner.SetUsesMipmaps(usesMipmaps)
 	return x
 }
 
+// Create new texture by applying a CIFilter to an existing one. Any CIFilter that requires only a single "inputImage" and produces an "outputImage" is allowed. @param filter the CI filter to apply in the copy.
+//
 // TextureByApplyingCIFilter calls the underlying TextureByApplyingCIFilter.
 func (x *Texture) TextureByApplyingCIFilter(filter *coreimage.CIFilter) *Texture {
 	_r := x.inner.TextureByApplyingCIFilter(filter)
@@ -60,6 +68,8 @@ func (x *Texture) TextureByApplyingCIFilter(filter *coreimage.CIFilter) *Texture
 	return &Texture{inner: _r}
 }
 
+// Create new texture by generating a normal map texture.
+//
 // TextureByGeneratingNormalMap calls the underlying TextureByGeneratingNormalMap.
 func (x *Texture) TextureByGeneratingNormalMap() *Texture {
 	_r := x.inner.TextureByGeneratingNormalMap()
@@ -69,6 +79,8 @@ func (x *Texture) TextureByGeneratingNormalMap() *Texture {
 	return &Texture{inner: _r}
 }
 
+// Create new texture by generating a normal map texture. @param smoothness the smooth level of the generated normal map. @param contrast  the scale applied to the generated normal map.
+//
 // TextureByGeneratingNormalMapWithSmoothnessContrast calls the underlying TextureByGeneratingNormalMapWithSmoothnessContrast.
 func (x *Texture) TextureByGeneratingNormalMapWithSmoothnessContrast(smoothness float64, contrast float64) *Texture {
 	_r := x.inner.TextureByGeneratingNormalMapWithSmoothnessContrast(smoothness, contrast)
@@ -78,21 +90,29 @@ func (x *Texture) TextureByGeneratingNormalMapWithSmoothnessContrast(smoothness 
 	return &Texture{inner: _r}
 }
 
+// Used to choose the area of the texture you want to display. The origin and size should both be in the range 0.0 - 1.0, values outside of this range produces unpredictable results. Defaults to the entire texture {(0,0) (1,1)}.
+//
 // TextureRect calls the underlying TextureRect.
 func (x *Texture) TextureRect() corefoundation.CGRect {
 	return x.inner.TextureRect()
 }
 
+// The size of the texture's bitmap data in points.
+//
 // Size calls the underlying Size.
 func (x *Texture) Size() corefoundation.CGSize {
 	return x.inner.Size()
 }
 
+// Convert the current SKTexture into a CGImageRef object
+//
 // CGImage calls the underlying CGImage.
 func (x *Texture) CGImage() unsafe.Pointer {
 	return x.inner.CGImage()
 }
 
+// Request that this texture be loaded into vram on the next render update, with a callback handler.
+//
 // Preload blocks until the operation completes or ctx is cancelled.
 func (x *Texture) Preload(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -107,6 +127,8 @@ func (x *Texture) Preload(ctx context.Context) error {
 	}
 }
 
+// The filtering mode the texture should use when not drawn at native size. Defaults to SKTextureFilteringLinear.
+//
 // FilteringMode calls the underlying FilteringMode.
 func (x *Texture) FilteringMode() SKTextureFilteringMode {
 	return SKTextureFilteringMode(x.inner.FilteringMode())
@@ -117,6 +139,8 @@ func (x *Texture) SetFilteringMode(filteringMode SKTextureFilteringMode) {
 	x.inner.SetFilteringMode(raw.SKTextureFilteringMode(filteringMode))
 }
 
+// Request that the texture have mipmaps generated if possible. Only supported for power of 2 texture sizes.
+//
 // UsesMipmaps calls the underlying UsesMipmaps.
 func (x *Texture) UsesMipmaps() bool {
 	return x.inner.UsesMipmaps()

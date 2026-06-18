@@ -39,16 +39,22 @@ func NewFaceLandmarkRegion2D() *FaceLandmarkRegion2D {
 	return &FaceLandmarkRegion2D{inner: raw.VNFaceLandmarkRegion2DFromID(_id)}
 }
 
+// @brief	Provides the array of landmark points in the coordinate space of a specific image size. @discussion	Provides the address of a buffer containing the array of CGPoints representing the landmark points in the coordinate space of a specific image size.  This buffer is owned by the target object and is guaranteed to exist as long as the VNFaceLandmarkRegion2D does. @param	imageSize			The pixel dimensions of the image in which the landmark points are being presented. @return the address of the array of pointCount points, or NULL if the conversion could not take place.
+//
 // PointsInImageOfSize calls the underlying PointsInImageOfSize.
 func (x *FaceLandmarkRegion2D) PointsInImageOfSize(imageSize corefoundation.CGSize) *corefoundation.CGPoint {
 	return x.inner.PointsInImageOfSize(imageSize)
 }
 
+// @brief	Obtains the array of normalized landmark points. @discussion	Provides the address of a buffer containing the array of CGPoints representing the landmark points.  This buffer is owned by the target object and is guaranteed to exist as long as the VNFaceLandmarkRegion2D does. @return the address of the array of pointCount points.
+//
 // NormalizedPoints calls the underlying NormalizedPoints.
 func (x *FaceLandmarkRegion2D) NormalizedPoints() unsafe.Pointer {
 	return x.inner.NormalizedPoints()
 }
 
+// @brief    Obtains the array of accuracy placement estimates per landmark point. @discussion    Provides the NSArray object containing landmarks accuracy placement estimates per landmark point. This property is only populated when VNDetectFaceLandmarksRequest object is configured with VNRequestFaceLandmarksConstellation76Points. It is set to nil for other constellations @return NSArray object of NSNumber(s) initialized to floating point values.
+//
 // PrecisionEstimatesPerPoint returns the collection as a Go slice.
 func (x *FaceLandmarkRegion2D) PrecisionEstimatesPerPoint() []*foundation.NSNumber {
 	arr := x.inner.PrecisionEstimatesPerPoint()
@@ -60,6 +66,8 @@ func (x *FaceLandmarkRegion2D) PrecisionEstimatesPerPoint() []*foundation.NSNumb
 	})
 }
 
+// @brief Describes how to interpret the points provided by the region.
+//
 // PointsClassification calls the underlying PointsClassification.
 func (x *FaceLandmarkRegion2D) PointsClassification() VNPointsClassification {
 	return VNPointsClassification(x.inner.PointsClassification())

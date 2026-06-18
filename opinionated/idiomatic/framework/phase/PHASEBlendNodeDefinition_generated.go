@@ -30,6 +30,8 @@ func BlendNodeDefinitionFromID(id objc.ID) *BlendNodeDefinition {
 	return &BlendNodeDefinition{inner: raw.PHASEBlendNodeDefinitionFromID(id)}
 }
 
+// @method initWithBlendMetaParameterDefinition:identifier @abstract Create a blend node definition @param blendMetaParameterDefinition A metaparameter definition that wil be used to control the parameter of the blend node at runtime. @param identifier An optional custom identifier to give to this object @return A new PHASEBlendNodeDefinition object
+//
 // NewBlendNodeDefinitionWithBlendMetaParameterDefinitionIdentifier creates a new [BlendNodeDefinition].
 func NewBlendNodeDefinitionWithBlendMetaParameterDefinitionIdentifier(blendMetaParameterDefinition *raw.PHASENumberMetaParameterDefinition, identifier string) *BlendNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEBlendNodeDefinition")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewBlendNodeDefinitionWithBlendMetaParameterDefinitionIdentifier(blendMetaP
 	return &BlendNodeDefinition{inner: raw.PHASEBlendNodeDefinitionFromID(_id)}
 }
 
+// @method initWithBlendMetaParameterDefinition @abstract Create a blend node definition @param blendMetaParameterDefinition A metaparameter definition that wil be used to control the parameter of the blend node at runtime. @return A new PHASEBlendNodeDefinition object
+//
 // NewBlendNodeDefinitionWithBlendMetaParameterDefinition creates a new [BlendNodeDefinition].
 func NewBlendNodeDefinitionWithBlendMetaParameterDefinition(blendMetaParameterDefinition *raw.PHASENumberMetaParameterDefinition) *BlendNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEBlendNodeDefinition")), objc.RegisterName("alloc"))
@@ -44,6 +48,8 @@ func NewBlendNodeDefinitionWithBlendMetaParameterDefinition(blendMetaParameterDe
 	return &BlendNodeDefinition{inner: raw.PHASEBlendNodeDefinitionFromID(_id)}
 }
 
+// @method initDistanceBlendWithSpatialMixerDefinition:identifier @abstract Create a blend node definition @param spatialMixerDefinition A PHASESpatialMixerDefinition that will bind the blend parameter to the distance between the source and listener. @param identifier An optional custom identifier to give to this object @return A new PHASEBlendNodeDefinition object
+//
 // NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinitionIdentifier creates a new [BlendNodeDefinition].
 func NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinitionIdentifier(spatialMixerDefinition *raw.PHASESpatialMixerDefinition, identifier string) *BlendNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEBlendNodeDefinition")), objc.RegisterName("alloc"))
@@ -51,6 +57,8 @@ func NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinitionIdentifier(spa
 	return &BlendNodeDefinition{inner: raw.PHASEBlendNodeDefinitionFromID(_id)}
 }
 
+// @method initDistanceBlendWithSpatialMixerDefinition @abstract Create a blend node definition @param spatialMixerDefinition A PHASESpatialMixerDefinition that will bind the blend parameter to the distance between the source and listener. @return A new PHASEBlendNodeDefinition object
+//
 // NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinition creates a new [BlendNodeDefinition].
 func NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinition(spatialMixerDefinition *raw.PHASESpatialMixerDefinition) *BlendNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEBlendNodeDefinition")), objc.RegisterName("alloc"))
@@ -58,21 +66,29 @@ func NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinition(spatialMixerD
 	return &BlendNodeDefinition{inner: raw.PHASEBlendNodeDefinitionFromID(_id)}
 }
 
+// @method addRangeForInputValuesBelow:fullGainAtValue:fadeCurveType:subtree @abstract Create a blend range that is active for all values below a given threshold. @param value The value for which the range will be active if the blend node's input value is below this threshold. @param fullGainAtValue This value defines a threshold for which a fade curve will be applied to the gain, when the input value is between "value" and "fullGainAtValue". @param fadeCurveType A curve type that defines which kind of fade curve to apply. @param subtree A PHASESoundEventNodeDefinition subtree that will be active for this range.
+//
 // AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree calls the underlying AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree.
 func (x *BlendNodeDefinition) AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition) {
 	x.inner.AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree(value, fullGainAtValue, raw.PHASECurveType(fadeCurveType), subtree)
 }
 
+// @method addRangeForInputValuesBetween:highValue:fullGainAtLowValue:fullGainAtHighValue:lowFadeCurveType:highFadeCurveType:subtree @abstract Create a blend range that is active for all input values between lowValue and highValue @param lowValue The lower bound for which this range is active. @param highValue The upper bound for which this range is active. @param fullGainAtLowValue The threshold for which a fade curve defined by lowFadeCurveType will be applied to the gain when the input value is between lowValue and fullGainAtLowValue @param fullGainAtHighValue The threshold for which a fade curve defined by highFadeCurveType will be applied to the gain when the input value is between highValue and fullGainAtHighValue @param lowFadeCurveType A curve type that defines which kind of fade curve to apply for the low fade range. @param highFadeCurveType A curve type that defines which kind of fade curve to apply for the high fade range.. @param subtree A PHASESoundEventNodeDefinition subtree that will be active for this range.
+//
 // AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree calls the underlying AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree.
 func (x *BlendNodeDefinition) AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree(lowValue float64, highValue float64, fullGainAtLowValue float64, fullGainAtHighValue float64, lowFadeCurveType PHASECurveType, highFadeCurveType PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition) {
 	x.inner.AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree(lowValue, highValue, fullGainAtLowValue, fullGainAtHighValue, raw.PHASECurveType(lowFadeCurveType), raw.PHASECurveType(highFadeCurveType), subtree)
 }
 
+// @method addRangeForInputValuesAbove:fullGainAtValue:fadeCurveType:subtree @abstract Create a blend range that is active for all values above a given threshold. @param value The value for which the range will be active if the blend node's input value is above this threshold. @param fullGainAtValue This value defines a threshold for which a fade curve will be applied to the gain, when the input value is between "value" and "fullGainAtValue". @param fadeCurveType A curve type that defines which kind of fade curve to apply. @param subtree A PHASESoundEventNodeDefinition subtree that will be active for this range.
+//
 // AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree calls the underlying AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree.
 func (x *BlendNodeDefinition) AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition) {
 	x.inner.AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree(value, fullGainAtValue, raw.PHASECurveType(fadeCurveType), subtree)
 }
 
+// @method addRangeWithEnvelope:subtree @abstract Create a blend range defined by a PHASEEnvelope object. @param envelope The PHASEEnvelope object that defines the output gain for a range. @param subtree A PHASESoundEventNodeDefinition subtree that will be active for this range.
+//
 // AddRangeWithEnvelopeSubtree calls the underlying AddRangeWithEnvelopeSubtree.
 func (x *BlendNodeDefinition) AddRangeWithEnvelopeSubtree(envelope *raw.PHASEEnvelope, subtree *raw.PHASESoundEventNodeDefinition) {
 	x.inner.AddRangeWithEnvelopeSubtree(envelope, subtree)

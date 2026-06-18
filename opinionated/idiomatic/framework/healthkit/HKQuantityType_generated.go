@@ -35,6 +35,8 @@ func NewQuantityType() *QuantityType {
 	return &QuantityType{inner: raw.HKQuantityTypeFromID(_id)}
 }
 
+// @method        isCompatibleWithUnit: @abstract      Returns YES if the type of HKQuantitySample represented by the receiver can be created with quantities of the given unit.
+//
 // IsCompatibleWithUnit calls the underlying IsCompatibleWithUnit.
 func (x *QuantityType) IsCompatibleWithUnit(unit *raw.HKUnit) bool {
 	return x.inner.IsCompatibleWithUnit(unit)

@@ -33,6 +33,8 @@ func MTRDeviceControllerExternalCertificateParametersFromID(id objc.ID) *MTRDevi
 	return &MTRDeviceControllerExternalCertificateParameters{inner: raw.MTRDeviceControllerExternalCertificateParametersFromID(id)}
 }
 
+// Prepare to initialize a controller that is not able to sign operational certificates itself, and therefore needs to be provided with a complete operational certificate chain. A controller created from MTRDeviceControllerStartupParams initialized with this method will not be able to commission devices unless operationalCertificateIssuer and operationalCertificateIssuerQueue are set. The fabric id and node id to use for the controller will be derived from the provided operationalCertificate. @param storageDelegate The storage to use for the controller.  This will be called into on storageDelegateQueue. @param storageDelegateQueue The queue for calls into storageDelegate.  See MTRDeviceControllerStorageDelegate documentation for the rules about what work is allowed to be done on this queue. @param uniqueIdentifier The unique id to assign to the controller. @param vendorID The vendor ID (allocated by the Connectivity Standards Alliance) for this controller. Must not be the "standard" vendor id (0). @param ipk The Identity Protection Key. Must be 16 bytes in length. @param intermediateCertificate Must be nil if operationalCertificate is directly signed by rootCertificate.  Otherwise must be the certificate that signed operationalCertificate.
+//
 // NewMTRDeviceControllerExternalCertificateParametersWithStorageDelegateStorageDelegateQueueUniqueIdentifierIpkVendorIDOperationalKeypairOperationalCertificateIntermediateCertificateRootCertificate creates a new [MTRDeviceControllerExternalCertificateParameters].
 func NewMTRDeviceControllerExternalCertificateParametersWithStorageDelegateStorageDelegateQueueUniqueIdentifierIpkVendorIDOperationalKeypairOperationalCertificateIntermediateCertificateRootCertificate(storageDelegate raw.MTRDeviceControllerStorageDelegate, storageDelegateQueue *foundation.NSObject, uniqueIdentifier *foundation.NSUUID, ipk *foundation.NSData, vendorID *foundation.NSNumber, operationalKeypair raw.MTRKeypair, operationalCertificate *foundation.NSData, intermediateCertificate *foundation.NSData, rootCertificate *foundation.NSData) *MTRDeviceControllerExternalCertificateParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceControllerExternalCertificateParameters")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewMTRDeviceControllerExternalCertificateParametersWithStorageDelegateStora
 	return &MTRDeviceControllerExternalCertificateParameters{inner: raw.MTRDeviceControllerExternalCertificateParametersFromID(_id)}
 }
 
+// The Product Attestation Authority certificates that are trusted to sign device attestation information (and in particular to sign Product Attestation Intermediate certificates, which then sign Device Attestation Certificates). Defaults to nil.
+//
 // WithProductAttestationAuthorityCertificates sets the collection, converting the Go slice to an NSArray.
 func (x *MTRDeviceControllerExternalCertificateParameters) WithProductAttestationAuthorityCertificates(items ...*foundation.NSData) *MTRDeviceControllerExternalCertificateParameters {
 	if len(items) == 0 {
@@ -58,6 +62,8 @@ func (x *MTRDeviceControllerExternalCertificateParameters) WithProductAttestatio
 	return x
 }
 
+// The Certification Declaration certificates whose public keys correspond to private keys that are trusted to sign certification declarations.  Defaults to nil. These certificates are used in addition to, not replacing, the default set of well-known certification declaration signing keys.
+//
 // WithCertificationDeclarationCertificates sets the collection, converting the Go slice to an NSArray.
 func (x *MTRDeviceControllerExternalCertificateParameters) WithCertificationDeclarationCertificates(items ...*foundation.NSData) *MTRDeviceControllerExternalCertificateParameters {
 	if len(items) == 0 {
@@ -76,24 +82,32 @@ func (x *MTRDeviceControllerExternalCertificateParameters) WithCertificationDecl
 	return x
 }
 
+// Whether the controller should advertise its operational identity.  Defaults to NO.
+//
 // WithShouldAdvertiseOperational sets the shouldAdvertiseOperational property and returns the receiver for chaining.
 func (x *MTRDeviceControllerExternalCertificateParameters) WithShouldAdvertiseOperational(shouldAdvertiseOperational bool) *MTRDeviceControllerExternalCertificateParameters {
 	x.inner.MTRDeviceControllerParameters.SetShouldAdvertiseOperational(shouldAdvertiseOperational)
 	return x
 }
 
+// Sets the maximum simultaneous subscription establishments that can be happening at one time for devices on Thread. This defaults to a large number. If this value is 0, the maximum subscription establishments allowed at a time will be set to 1.
+//
 // WithConcurrentSubscriptionEstablishmentsAllowedOnThread sets the concurrentSubscriptionEstablishmentsAllowedOnThread property and returns the receiver for chaining.
 func (x *MTRDeviceControllerExternalCertificateParameters) WithConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread uint) *MTRDeviceControllerExternalCertificateParameters {
 	x.inner.MTRDeviceControllerParameters.SetConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread)
 	return x
 }
 
+// Sets the storage behavior configuration - see MTRDeviceStorageBehaviorConfiguration.h for details If this value is nil, a default storage behavior configuration will be used.
+//
 // WithStorageBehaviorConfiguration sets the storageBehaviorConfiguration property and returns the receiver for chaining.
 func (x *MTRDeviceControllerExternalCertificateParameters) WithStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerExternalCertificateParameters {
 	x.inner.MTRDeviceControllerParameters.SetStorageBehaviorConfiguration(storageBehaviorConfiguration.Unwrap())
 	return x
 }
 
+// Whether the controller should start out suspended. Defaults to NO.
+//
 // WithStartSuspended sets the startSuspended property and returns the receiver for chaining.
 func (x *MTRDeviceControllerExternalCertificateParameters) WithStartSuspended(startSuspended bool) *MTRDeviceControllerExternalCertificateParameters {
 	x.inner.MTRDeviceControllerParameters.MTRDeviceControllerAbstractParameters.SetStartSuspended(startSuspended)

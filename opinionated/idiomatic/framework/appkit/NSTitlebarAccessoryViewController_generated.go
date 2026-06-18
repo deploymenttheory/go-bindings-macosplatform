@@ -64,6 +64,8 @@ func (x *TitlebarAccessoryViewController) WithAutomaticallyAdjustsSize(automatic
 	return x
 }
 
+// The titlebar accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the bottom edge of a titlebar accessory: titlebarAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
+//
 // WithPreferredScrollEdgeEffectStyle sets the preferredScrollEdgeEffectStyle property and returns the receiver for chaining.
 func (x *TitlebarAccessoryViewController) WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *ScrollEdgeEffectStyle) *TitlebarAccessoryViewController {
 	x.inner.SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle.Unwrap())
@@ -188,6 +190,8 @@ func (x *TitlebarAccessoryViewController) SetAutomaticallyAdjustsSize(automatica
 	x.inner.SetAutomaticallyAdjustsSize(automaticallyAdjustsSize)
 }
 
+// The titlebar accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the bottom edge of a titlebar accessory: titlebarAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
+//
 // PreferredScrollEdgeEffectStyle calls the underlying PreferredScrollEdgeEffectStyle.
 func (x *TitlebarAccessoryViewController) PreferredScrollEdgeEffectStyle() *ScrollEdgeEffectStyle {
 	_r := x.inner.PreferredScrollEdgeEffectStyle()
@@ -197,6 +201,8 @@ func (x *TitlebarAccessoryViewController) PreferredScrollEdgeEffectStyle() *Scro
 	return &ScrollEdgeEffectStyle{inner: _r}
 }
 
+// The titlebar accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the bottom edge of a titlebar accessory: titlebarAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
+//
 // SetPreferredScrollEdgeEffectStyle calls the underlying SetPreferredScrollEdgeEffectStyle.
 func (x *TitlebarAccessoryViewController) SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *raw.NSScrollEdgeEffectStyle) {
 	x.inner.SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle)

@@ -37,11 +37,15 @@ func NewPickerResult() *PickerResult {
 	return &PickerResult{inner: raw.PHPickerResultFromID(_id)}
 }
 
+// Representations of the selected asset.
+//
 // ItemProvider calls the underlying ItemProvider.
 func (x *PickerResult) ItemProvider() *foundation.NSItemProvider {
 	return x.inner.ItemProvider()
 }
 
+// The local identifier of the selected asset.
+//
 // AssetIdentifier calls the underlying AssetIdentifier.
 func (x *PickerResult) AssetIdentifier() string {
 	_r := x.inner.AssetIdentifier()
