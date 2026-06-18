@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.6.0...v0.7.0) (2026-06-18)
+
+
+### Features
+
+* Added SDK feature: idiomatic NSString extern constants ([#31](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/31)) ([6eaae6d](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/6eaae6d65c8f752df22e17352c80749d50469ef1))
+
 ## [0.6.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.5.0...v0.6.0) (2026-06-18)
 
 
