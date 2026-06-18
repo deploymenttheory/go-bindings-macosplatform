@@ -1,0 +1,36 @@
+{{/*
+    async_method.tmpl — an Objective-C completion-handler method surfaced as a
+    blocking (ctx)-aware call. The raw call (RawCall), including the channel-
+    feeding completion closure, is pre-built in Go; the template shapes the outer
+    function and the ctx-vs-result select. Two shapes: error-only and (R, error).
+*/}}
+{{define "async_method"}}// {{.GoName}} blocks until the operation completes or ctx is cancelled.
+{{if .HasResult -}}
+func {{.Recv}}{{.GoName}}({{.ParamStr}}) ({{.ResultGoType}}, error) {
+type _result struct {
+val {{.ResultGoType}}
+err error
+}
+_ch := make(chan _result, 1)
+{{.RawCall}}
+select {
+case _o := <-_ch:
+return _o.val, _o.err
+case <-ctx.Done():
+var _zero {{.ResultGoType}}
+return _zero, ctx.Err()
+}
+}
+{{else -}}
+func {{.Recv}}{{.GoName}}({{.ParamStr}}) error {
+_ch := make(chan error, 1)
+{{.RawCall}}
+select {
+case err := <-_ch:
+return err
+case <-ctx.Done():
+return ctx.Err()
+}
+}
+{{end}}
+{{end}}

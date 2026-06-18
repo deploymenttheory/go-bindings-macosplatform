@@ -1,0 +1,13 @@
+{{/*
+    dict_augment.tmpl — the hand-friendly Set(key, value) augmentation emitted
+    only on the NSMutableDictionary wrapper, for building keyed argument
+    dictionaries (e.g. Security keychain queries) without raw FFI.
+*/}}
+{{define "dict_augment"}}// Set inserts value for key (both object pointers, e.g. the CFStringRef
+// constant security.KSecClass()) and returns the receiver for chaining.
+func (x *{{.GoTypeName}}) Set(key, value objc.ID) *{{.GoTypeName}} {
+objc.Send[objc.ID](x.inner.Ptr(), objc.RegisterName("setObject:forKey:"), value, key)
+return x
+}
+
+{{end}}

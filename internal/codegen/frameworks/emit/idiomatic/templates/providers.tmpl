@@ -1,0 +1,11 @@
+{{/*
+    providers.tmpl — one provider interface per abstract base class: the
+    as<Base>() accessor a concrete wrapper exposes so it can be passed wherever
+    that base is accepted (the idiomatic stand-in for an abstract superclass).
+*/}}
+{{define "providers"}}{{range .Items}}// {{.IfaceName}} is implemented by {{.GoTypeName}} and any idiomatic type wrapping a {{.BaseName}} subclass.
+type {{.IfaceName}} interface {
+{{.MethName}}() {{.RawType}}
+}
+
+{{end}}{{end}}
